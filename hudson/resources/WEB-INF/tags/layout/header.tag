@@ -23,29 +23,30 @@
 </head>
 <body>
 <table id="header" cellpadding="0" cellspacing="0" width="100%" border="0">
-  <tr id="top-panel">
-    <td>
-      <a href="${rootURL}/">
-        <img class="logo" src="${rootURL}/images/hudson-logo.png"/>
-      </a>
-    </td>
-    <td align="right" valign="bottom" style="vertical-align: bottom;">
-      <%--form action="search">
-        <div id="searchform">
-          <img width="24" height="24" src="${rootURL}/images/24x24/find.gif"/>
-          <b>Search:</b>
-          <input name="search" size="12" value=""/>
-          <input type="submit" value="Go"/> &nbsp;
-        </div>
-      </form--%>
-      <c:if test="${app.useSecurity}">
-        <rq:isUserInRole role="admin" value="false">
-          <a href="${rootURL}/loginEntry"><b>login</b></a>
-        </rq:isUserInRole>
-        <rq:isUserInRole role="admin">
-          <a href="${rootURL}/logout"><b>logout</b></a>
-        </rq:isUserInRole>
-      </c:if>
+  <tr>
+    <td id="top-panel" colspan="2">
+      <table cellpadding="0" cellspacing="0" width="100%" border="0">
+        <tr><td style="font-weight:bold; font-size: 2em;">
+          <a href="${rootURL}/"><img src="${rootURL}/images/title.png" /></a>
+        </td><td>
+          <%--form action="search">
+            <div id="searchform">
+              <img width="24" height="24" src="${rootURL}/images/24x24/find.gif"/>
+              <b>Search:</b>
+              <input name="search" size="12" value=""/>
+              <input type="submit" value="Go"/> &nbsp;
+            </div>
+          </form--%>
+          <c:if test="${app.useSecurity}">
+            <rq:isUserInRole role="admin" value="false">
+              <a href="${rootURL}/loginEntry"><b>login</b></a>
+            </rq:isUserInRole>
+            <rq:isUserInRole role="admin">
+              <a href="${rootURL}/logout"><b>logout</b></a>
+            </rq:isUserInRole>
+          </c:if>
+        </td></tr>
+      </table>
     </td>
   </tr>
 

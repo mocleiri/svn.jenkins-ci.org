@@ -206,7 +206,7 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
                 return "grey";
 
             // a new build is in progress
-            return previousBuild.getIconColor()+"_anime";
+            return previousBuild.getIconColor()+"_anim";
         }
         if(result==Result.SUCCESS)
             return "blue";

@@ -324,8 +324,9 @@ public final class Hudson implements ModelObject {
 
     private static final Comparator<Run> runComparator = new Comparator<Run>() {
         public int compare(Run lhs, Run rhs) {
-            int r = lhs.getTimestamp().compareTo(rhs.getTimestamp());
-            if(r!=0)    return -r;
+            long r = lhs.getTimestamp().getTimeInMillis() - rhs.getTimestamp().getTimeInMillis();
+            if(r<0)     return +1;
+            if(r>0)     return -1;
             return lhs.getParent().getName().compareTo(rhs.getParent().getName());
         }
     };

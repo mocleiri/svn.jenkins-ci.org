@@ -1,5 +1,5 @@
 <table width="100%">
-  <tr><td id="footer" background="${rootURL}/images/footer_grad.gif">
+  <tr><td id="footer">
     <a href="http://hudson.dev.java.net/">
       Hudson ver. ${version}
     </a>
