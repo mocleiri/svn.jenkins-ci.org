@@ -7,9 +7,12 @@ import hudson.tasks.BuildStep;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.FileInputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -184,5 +187,50 @@ public class Project extends Job<Build> {
         }
 
         super.doConfigSubmit(req,rsp);
+    }
+
+    /**
+     * Serves the workspace files.
+     */
+    public synchronized void doWs( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        String path = req.getRestOfPath();
+
+        if(path.length()==0)
+            path = "/";
+
+        if(path.indexOf("..")!=-1 || path.length()<1) {
+            // don't serve anything other than files in the artifacts dir
+            rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
+        File f = new File(getWorkspace(),path.substring(1));
+        if(!f.exists()) {
+            rsp.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+
+        if(f.isDirectory()) {
+            if(!req.getRequestURL().toString().endsWith("/")) {
+                rsp.sendRedirect(req.getRequestURL().append('/').toString());
+                return;
+            }
+
+            req.setAttribute("it",this);
+            req.setAttribute("files",f.listFiles());
+            req.getView(this,"workspaceDir.jsp").forward(req,rsp);
+            return;
+        }
+
+        FileInputStream in = new FileInputStream(f);
+        // serve the file
+        rsp.setContentType(req.getServletContext().getMimeType(req.getServletPath()));
+        rsp.setContentLength((int)f.length());
+        byte[] buf = new byte[1024];
+        int len;
+        while((len=in.read(buf))>0)
+            rsp.getOutputStream().write(buf,0,len);
+        in.close();
+        return;
     }
 }
