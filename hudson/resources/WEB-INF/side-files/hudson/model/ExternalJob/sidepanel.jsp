@@ -10,11 +10,11 @@
 <l:header title="${it.name}" />
 <l:side-panel>
   <l:tasks>
-    <l:task icon="images/24x24/navigate_up.png" href="${rootURL}/" title="Back to Dashboard" />
-    <l:task icon="images/24x24/folders.png" href="." title="Status" />
+    <l:task icon="images/24x24/navigate_up.gif" href="${rootURL}/" title="Back to Dashboard" />
+    <l:task icon="images/24x24/folders.gif" href="." title="Status" />
     <l:isAdmin>
-      <l:task icon="images/24x24/garbage.png" href="delete" title="Delete Job" />
-      <l:task icon="images/24x24/wrench.png" href="configure" title="Configure" />
+      <l:task icon="images/24x24/garbage.gif" href="delete" title="Delete Job" />
+      <l:task icon="images/24x24/wrench.gif" href="configure" title="Configure" />
     </l:isAdmin>
   </l:tasks>
 

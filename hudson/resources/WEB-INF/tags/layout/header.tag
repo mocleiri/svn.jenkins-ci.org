@@ -32,7 +32,7 @@
     <td align="right" valign="bottom" style="vertical-align: bottom;">
       <%--form action="search">
         <div id="searchform">
-          <img width="24" height="24" src="${rootURL}/images/24x24/find.png"/>
+          <img width="24" height="24" src="${rootURL}/images/24x24/find.gif"/>
           <b>Search:</b>
           <input name="search" size="12" value=""/>
           <input type="submit" value="Go"/> &nbsp;

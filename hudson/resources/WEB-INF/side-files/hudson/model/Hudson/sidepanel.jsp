@@ -9,9 +9,9 @@
 <l:side-panel>
   <l:tasks>
     <l:isAdmin>
-      <l:task icon="images/24x24/box_new.png" href="newJob" title="New Job" />
-      <l:task icon="images/24x24/wrench.png" href="configure" title="Configure" />
-      <l:task icon="images/24x24/gear_connection.png" href="reload" title="Reload Config" />
+      <l:task icon="images/24x24/box_new.gif" href="newJob" title="New Job" />
+      <l:task icon="images/24x24/wrench.gif" href="configure" title="Configure" />
+      <l:task icon="images/24x24/gear_connection.gif" href="reload" title="Reload Config" />
     </l:isAdmin>
   </l:tasks>
   <t:queue />

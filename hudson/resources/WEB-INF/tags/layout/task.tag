@@ -8,7 +8,7 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="task">
   <a href="${href}">
-    <img width="24" height="24" src="${rootURL}/${icon}"
+    <img width="20" height="20" style="margin: 2px;" src="${rootURL}/${icon}"
   ></a>
   <a href="${href}">
     <c:choose>

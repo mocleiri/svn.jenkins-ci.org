@@ -10,13 +10,13 @@
 <l:header title="${it.name}" />
 <l:side-panel>
   <l:tasks>
-    <l:task icon="images/24x24/navigate_up.png" href="${rootURL}/" title="Back to Dashboard" />
-    <l:task icon="images/24x24/find.png" href="${rootURL}/${it.url}" title="Status" />
-    <l:task icon="images/24x24/folders.png" href="${rootURL}/${it.url}ws/" title="Workspace" />
+    <l:task icon="images/24x24/navigate_up.gif" href="${rootURL}/" title="Back to Dashboard" />
+    <l:task icon="images/24x24/find.gif" href="${rootURL}/${it.url}" title="Status" />
+    <l:task icon="images/24x24/folders.gif" href="${rootURL}/${it.url}ws/" title="Workspace" />
     <l:isAdmin>
-      <l:task icon="images/24x24/gears_run.png" href="${rootURL}/${it.url}build" title="Schedule a build" />
-      <l:task icon="images/24x24/garbage.png" href="${rootURL}/${it.url}delete" title="Delete Project" />
-      <l:task icon="images/24x24/wrench.png" href="${rootURL}/${it.url}configure" title="Configure" />
+      <l:task icon="images/24x24/gears_run.gif" href="${rootURL}/${it.url}build" title="Schedule a build" />
+      <l:task icon="images/24x24/garbage.gif" href="${rootURL}/${it.url}delete" title="Delete Project" />
+      <l:task icon="images/24x24/wrench.gif" href="${rootURL}/${it.url}configure" title="Configure" />
     </l:isAdmin>
   </l:tasks>
 
