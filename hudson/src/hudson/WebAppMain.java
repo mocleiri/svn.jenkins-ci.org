@@ -37,11 +37,11 @@ public class WebAppMain implements ServletContextListener {
         // set the version
         Properties props = new Properties();
         try {
-            InputStream is = getClass().getClassLoader().getResourceAsStream("/hudson-version.properties");
+            InputStream is = getClass().getResourceAsStream("hudson-version.properties");
             if(is!=null)
                 props.load(is);
         } catch (IOException e) {
-            ; // if the version properties is missing, that's OK.
+            e.printStackTrace(); // if the version properties is missing, that's OK.
         }
         Object ver = props.get("version");
         if(ver==null)   ver="?";
