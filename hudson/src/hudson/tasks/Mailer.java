@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.StringTokenizer;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.PrintWriter;
 
 /**
  * Sends the build result in e-mail.
@@ -83,6 +86,17 @@ public class Mailer implements BuildStep {
             while(tokens.hasMoreTokens())
                 rcp.add(new InternetAddress(tokens.nextToken()));
             msg.setRecipients(Message.RecipientType.TO, rcp.toArray(new InternetAddress[rcp.size()]));
+
+            try {
+                msg.setText(build.getLog());
+            } catch (IOException e) {
+                // somehow failed to read the contents of the log
+                StringBuilder w = new StringBuilder();
+                StringWriter sw = new StringWriter();
+                e.printStackTrace(new PrintWriter(sw));
+                w.append("Failed to access build log\n\n").append(sw);
+                msg.setText(w.toString());
+            }
 
             Transport.send(msg);
         } catch (MessagingException e) {
