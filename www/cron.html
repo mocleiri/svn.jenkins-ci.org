@@ -1,0 +1,53 @@
+<html>
+<head>
+	<style>
+		dt {
+			font-weight: bold;
+			margin-left: 1em;
+		}
+		pre {
+			background-color: lightgray;
+			padding: 0.5em;
+			margin-left: 2em;
+			margin-right: 2em;
+		}
+	</style>
+</head>
+<body><div class=app>
+<h1>Monitoring Cron Jobs in Hudson</h1>
+
+<p>
+	Hudson is useful for monitoring the non-interactive execution of processes, such as cron jobs, procmail, inetd-launched processes.
+
+<h3>Setting up a project</h3>
+<p>
+	Create a new job and choose "monitoring an external job".
+<p>
+	Often, the program you'd like to monitor runs in a different user account than the one that runs Hudson (which is typically root.) If this is the case, go to the hudson home directory and set the permission of this new job such that the user account that runs the program can write to this directory.
+
+<h3>Monitoring an execution</h3>
+<p>
+	Once you set up a project, you can monitor an execution by running a command like this:
+<pre>
+$ export HUDSON_HOME=<i>/hudson/home/directory</i>
+$ hudson "<i>job name</i>" <i>&lt;program arg1 arg2...></i>
+</pre>
+<p>
+	Executable <tt>hudson</tt> can be found in the distribution package of hudson. The HUDSON_HOME variable is used to locate the hudson home directory, so this must be set.
+<p>
+	stdout and stderr of the program will be recorded, and the non-0 exit code will be considered as a failure.
+
+
+
+<h3>Monitoring cron jobs</h3>
+<p>
+	To monitor a cron job, simply run the above set up from your cron script. To avoid receiving e-mails from cron daemon, you might want to write something like:
+<pre>
+HUDSON_HOME=<i>/hudson/home/directory</i>
+0 * * * *     export HUDSON_HOME=$HUDSON_HOME; hudson "backup" backup.sh 2>&1 > /dev/null
+</pre>
+
+
+
+</div></body>
+</html>
