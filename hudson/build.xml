@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<project name="hudson" default="war">
+	
+	<target name="compile">
+		<mkdir dir="build/classes"/>
+		<javac srcdir="src" destdir="build/classes" debug="on">
+			<classpath>
+				<fileset dir="resources/WEB-INF/lib" includes="**/*.jar"/>
+				<fileset dir="lib" includes="**/*.jar"/>
+			</classpath>
+		</javac>
+		
+		<!-- put the version file -->
+		<tstamp>
+			<format property="now" pattern="MM/dd/yyyy hh:mm" unit="hour"/>
+		</tstamp>
+		<property name="build.id" value="${now}(${user.name})" />
+		<property name="build.version" value="private-${build.id}" />
+		<echo message="The build id is: ${build.version}" />
+		<echo file="build/classes/hudson-version.properties"
+			>version=${build.version}
+		</echo>
+		
+		<!-- 1.5 > 1.4 -->
+		<java classname="com.rc.retroweaver.Weaver">
+			<arg value="-source"/>
+			<arg path="build/classes"/>
+			<classpath>
+				<fileset dir="lib/retroweaver">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+	
+	<target name="war" depends="compile">
+		<war destfile="build/hudson.war" webxml="resources/WEB-INF/web.xml">
+			<fileset dir="resources" includes="**/*" excludes="CVS"/>
+			<classes dir="build/classes" />
+			<lib dir="lib/retroweaver" includes="retroweaver.jar" />
+			<lib dir="lib" includes="stapler.jar" />
+		</war>
+	</target>
+	
+	<target name="clean">
+		<delete dir="build"/>
+	</target>
+</project>

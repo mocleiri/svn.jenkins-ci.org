@@ -1,0 +1,37 @@
+<%--
+  History of runs.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
+<%@ taglib prefix="i" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<l:pane width="2" title="Build history">
+  <c:forEach var="build" items="${it.builds}">
+    <c:set var="link" value="build/${build.id}" />
+    <tr class="build-row">
+      <td nowrap="nowrap">
+        <img width="16" height="16" src="${link}/buildStatus">&nbsp;
+        #${build.number}
+      </td>
+      <td nowrap="nowrap">
+        <span class="highlighted-build">
+          <a class="tip" href="${link}">
+            <i:formatDate value="${build.timestamp.time}" type="both" dateStyle="medium" timeStyle="medium"/>
+            <!--span><%-- TODO: log --%></span-->
+          </a>
+        </span>
+      </td>
+    </tr>
+  </c:forEach>
+  <tr class=build-row>
+    <td colspan=2 align=right>
+      <a href="rssAll"><img src="${rootURL}/images/atom.png" border=0> for all runs</a>
+    </td>
+  </tr>
+  <tr class=build-row>
+    <td colspan=2 align=right>
+      <a href="rssFailed"><img src="${rootURL}/images/atom.png" border=0> for failures</a>
+    </td>
+  </tr>
+</l:pane>

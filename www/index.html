@@ -1,45 +1,56 @@
 <html>
 <head>
-<title>Project Home Page</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<style>
+		dt {
+			font-weight: bold;
+			margin-left: 1em;
+		}
+	</style>
 </head>
+<body>
+<h1>What Is Hudson?</h1>
+<p>
+	Hudson monitors executions of repeated jobs, such as building a software project or jobs run by cron. Among those things, current Hudson focuses on the following two jobs:
+	<ol>
+		<li>
+			<b>Building software projects continuously, just like <a href="http://cruisecontrol.sourceforge.net/">CruiseControl</a> or <a href="http://damagecontrol.codehaus.org/">DamageControl</a>.</b>
+			In a nutshell, Hudson provides an easy-to-use build system, making it easier for developers to integrate changes to the project, and making it easier for users to obtain a fresh build. The automated, continoues build increases the productivity.
+		<li>
+			<b>Monitoring executions of externally-run jobs</b>, such as cron jobs and procmail jobs. For example, with cron, all you receive is regular e-mails that capture the output, and it is up to you to look at them and notice when it broke. Hudson keeps those outputs and lets you quickly notice when something went wrong.
+	</ol>
 
-<body bgcolor="#FFFFFF" text="#000000">
-<h1>Default project home page </h1>
-<p>Congratulations on your new java.net project! </p>
-<p>This page is the home page for your new project. This content is appearing 
-  because you have selected the option <b>Use project index.html</b>. To edit 
-  the information displayed on this page, just use CVS to check out your project's 
-  CVS repository and edit index.html in directory www. You can get more information 
-  on how to set-up your local CVS client, click on <b>Version Control</b> on the 
-  left nav bar. </p>
-<p>If you don't want to use CVS to manage your home page, click on the <b>Edit 
-  project</b> link on this page and unclick the option <b>Use project index.html</b>. 
-  Your project home page contents will be generated from the <b>Edit project</b> 
-  field <b>Description</b>. Edit the text on that field to change your home page 
-  contents. Click on <b>Submit changes</b> to save your edits. </p>
-<p>If you are looking for <a href="https://java-net.dev.java.net/ProjectPages.html#templates">sample 
-  home page templates</a>, check out the <a href="https://java-net.dev.java.net/ProjectPages.html">java.net 
-  Project Starter Kit</a>. Copy either of the templates into your project's html 
-  to get started on your project's home page. </p>
-<p>You can find lots of helpful information in the Starter Kit to get your project 
-  started. Some of the things you will find in there include:</p>
+<h1>Features</h1>
+<p>
+	Hudson offers the following features:
+	<dl>
+		<dt>Easy installation<dt>
+		<dd>
+			If you have a running servlet container (such as <a href="http://jakarta.apache.org/tomcat/">Tomcat</a>), installation is as easy as copying a war file into it.
+		</dd>
+		
+		<dt>Change set support</dt>
+		<dd>
+			Hudson can generate a list of changes made into the build from CVS.
+		</dd>
+		
+		<dt>Permanent links to "latest build"/"latest successful build"</dt>
+		<dd>
+			Hudson gives you a fixed URL for those, so that they can be easily linked from elsewhere.
+		</dd>
+	</dl>
+
+
+<h1>Installation</h1>
+<p>To run Hudson, you need to have:
 <ul>
-  <li>Hints on how to <a href="https://java-net.dev.java.net/ProjectPages.html#pages">set-up 
-    your project's</a> home page</li>
-  <li>Ideas on how to <a href="https://java-net.dev.java.net/ProjectPages.html#publicity">publicize 
-    your project</a> including RSS feeds</li>
-  <li>Hints on <a href="https://java-net.dev.java.net/pagedesign.html">project 
-    page HTML</a></li>
-  <li>Setting up project <a href="https://java-net.dev.java.net/ProjectPages.html#wiki">wiki 
-    pages</a></li>
-  <li>And places to go if <a href="https://java-net.dev.java.net/ProjectPages.html#feedback">you 
-    have questions</a>.</li>
+	<li>J2SE 1.4 or later
+	<li>Serlvet container that supports Servlet 2.4/JSP 2.0 or later, such as Tomcat 5.
 </ul>
-<p>Remember that you will attract more new members and your project team will 
-  work more effectively if you, as the project owner, supply sufficient information 
-  about your project for visitors to your project space. Good luck with your new 
-  project! </p>
+<p>
+	Deploy <tt>hudson.war</tt> as you would any WAR file. For Tomcat, that means copying the file into <tt>$TOMCAT_HOME/webapps</tt>, then access <tt>http://YOURHOST/hudson/</tt>
+
+<h1>Upgrade</h1>
+<p>
+	To upgrade from earlier versions of Hudson, simply redeploy the WAR file. In case of Tomcat, this means just overwriting your <tt>hudson.war</tt> and restarting Tomcat (or see Tomcat documentation for other ways to redeploy.)
 </body>
 </html>
-
