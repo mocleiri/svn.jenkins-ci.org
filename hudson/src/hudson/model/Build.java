@@ -1,5 +1,7 @@
 package hudson.model;
 
+import hudson.NullStream;
+import hudson.Proc;
 import hudson.scm.CVSChangeLog;
 import hudson.tasks.BuildStep;
 import org.xml.sax.SAXException;
@@ -9,6 +11,8 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Map;
+
+import static hudson.model.Hudson.isWindows;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -70,6 +74,16 @@ public final class Build extends Run<Project,Build> implements Runnable {
 
                 if(!build(listener,project.getBuilders()))
                     return Result.FAILURE;
+
+                if(isWindows()) {
+                    try {
+                        // ignore a failure.
+                        new Proc(new String[]{"ln","-s",getRootDir().getPath(),"../latest"},
+                            new String[0],new NullStream(),getProject().getBuildDir()).join();
+                    } catch (IOException e) {
+                        e.printStackTrace( listener.fatalError("command execution failed") );
+                    }
+                }
 
                 return Result.SUCCESS;
             }

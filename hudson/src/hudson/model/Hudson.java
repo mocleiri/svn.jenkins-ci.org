@@ -386,4 +386,10 @@ public final class Hudson implements ModelObject {
         load();
         rsp.sendRedirect(req.getContextPath());
     }
+
+
+
+    public static boolean isWindows() {
+        return File.pathSeparatorChar==';';
+    }
 }

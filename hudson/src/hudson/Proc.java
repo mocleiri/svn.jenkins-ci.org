@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -21,18 +20,21 @@ public final class Proc {
         this(cmd,mapToEnv(env),in,out);
     }
 
-    private static String[] mapToEnv(Map m) {
+    private static String[] mapToEnv(Map<?,?> m) {
         String[] r = new String[m.size()];
         int idx=0;
 
-        for (Iterator itr = m.entrySet().iterator(); itr.hasNext();) {
-            Map.Entry e = (Map.Entry) itr.next();
-            r[idx++] = e.getKey().toString()+'='+e.getValue().toString();
+        for (final Map.Entry e : m.entrySet()) {
+            r[idx++] = e.getKey().toString() + '=' + e.getValue().toString();
         }
         return r;
     }
 
     public Proc(String cmd,String[] env,OutputStream out, File workDir) throws IOException {
+        this( Runtime.getRuntime().exec(cmd,env,workDir), null, out );
+    }
+
+    public Proc(String[] cmd,String[] env,OutputStream out, File workDir) throws IOException {
         this( Runtime.getRuntime().exec(cmd,env,workDir), null, out );
     }
 

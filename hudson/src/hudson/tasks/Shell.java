@@ -11,6 +11,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+import static hudson.model.Hudson.isWindows;
+
 /**
  * Executes a series of commands by using a shell.
  *
@@ -119,8 +121,4 @@ public class Shell implements BuildStep {
             return true;
         }
     };
-
-    private static boolean isWindows() {
-        return File.pathSeparatorChar==';';
-    }
 }
