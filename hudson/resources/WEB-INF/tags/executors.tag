@@ -12,13 +12,12 @@
     <th class="pane">&nbsp;</th>
   </tr>
 
-  <c:forEach var="i" begin="0" end="${f:length(app.executors)-1}">
+  <c:forEach var="e" items="${app.executors}" varStatus="loop">
     <tr>
       <td class="pane">
-        ${i+1}
+        ${loop.index+1}
       </td>
       <td class="pane" width="70%">
-        <c:set var="e" value="${app.executors[i]}" />
         <c:choose>
           <c:when test="${e.currentBuild==null}">
             Idle
