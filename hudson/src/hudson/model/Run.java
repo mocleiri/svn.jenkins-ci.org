@@ -206,10 +206,10 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
                 return "grey";
 
             // a new build is in progress
-            return previousBuild.getIconColor()+"-pulse";
+            return previousBuild.getIconColor()+"_anime";
         }
         if(result==Result.SUCCESS)
-            return "green";
+            return "blue";
         else
             return "red";
     }
@@ -299,12 +299,12 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
     private void addArtifacts( File dir, String path, List r ) {
         String[] children = dir.list();
         if(children==null)  return;
-        for( int i=0; i<children.length; i++ ) {
-            File sub = new File(dir,children[i]);
-            if(sub.isDirectory()) {
-                addArtifacts(sub,path+children[i]+'/',r);
+        for (String child : children) {
+            File sub = new File(dir, child);
+            if (sub.isDirectory()) {
+                addArtifacts(sub, path + child + '/', r);
             } else {
-                r.add(path+children[i]);
+                r.add(path + child);
             }
         }
     }
@@ -462,7 +462,7 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
     }
 
     public void doBuildStatus( StaplerRequest req, StaplerResponse rsp ) throws IOException {
-        rsp.sendRedirect(req.getContextPath()+"/images/"+getIconColor()+"-32.gif");
+        rsp.sendRedirect(req.getContextPath()+"/images/"+getIconColor()+".gif");
     }
 
     public void doArtifact( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {

@@ -5,6 +5,8 @@ import hudson.model.Descriptor;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * Metadata of a {@link BuildStep} class.
+ *
  * @author Kohsuke Kawaguchi
  */
 public abstract class BuildStepDescriptor extends Descriptor {
