@@ -197,11 +197,11 @@ public final class Hudson implements ModelObject {
             }
         });
         jobs.clear();
-        for( int i=0; i<subdirs.length; i++ ) {
+        for (final File subdir : subdirs) {
             try {
-                Job p = Job.load(this,subdirs[i]);
-                jobs.put(p.getName(),p);
-            } catch( IOException e ) {
+                Job p = Job.load(this,subdir);
+                jobs.put(p.getName(), p);
+            } catch (IOException e) {
                 e.printStackTrace(); // TODO: logging
             }
         }
@@ -261,11 +261,14 @@ public final class Hudson implements ModelObject {
 
         numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
 
-        for( Executor e : executors )
-            e.interrupt();
+        synchronized(this) {
+            for( Executor e : executors )
+                if(e.getCurrentBuild()==null)
+                    e.interrupt();
 
-        while(executors.size()<numExecutors)
-            executors.add(new Executor(this));
+            while(executors.size()<numExecutors)
+                executors.add(new Executor(this));
+        }
 
         boolean result = true;
 
