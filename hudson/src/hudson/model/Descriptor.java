@@ -1,14 +1,13 @@
 package hudson.model;
 
 import hudson.XStreamEx;
+import org.kohsuke.stapler.Stapler;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.kohsuke.stapler.Stapler;
 
 /**
  * @author Kohsuke Kawaguchi

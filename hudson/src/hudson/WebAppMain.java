@@ -2,12 +2,12 @@ package hudson;
 
 import hudson.model.Hudson;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.naming.InitialContext;
-import javax.naming.Context;
-import javax.naming.NamingException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;

@@ -2,10 +2,6 @@ package hudson.tasks;
 
 import hudson.model.Build;
 import hudson.model.BuildListener;
-import hudson.scm.SCMDescriptor;
-
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  * One step of the whole build process.

@@ -1,7 +1,7 @@
 package hudson.scm;
 
-import hudson.model.BuildListener;
 import hudson.model.Build;
+import hudson.model.BuildListener;
 
 import java.io.File;
 import java.io.IOException;

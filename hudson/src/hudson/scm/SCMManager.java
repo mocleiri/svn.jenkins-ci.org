@@ -1,6 +1,6 @@
 package hudson.scm;
 
-import java.util.List;
+
 
 /**
  * @author Kohsuke Kawaguchi

@@ -3,10 +3,10 @@ package hudson.model;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.HashSet;
 
 /**
  * @author Kohsuke Kawaguchi

@@ -2,7 +2,12 @@ package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppReader;
+import hudson.Util;
+import hudson.tasks.LogRotator;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
+import javax.servlet.ServletException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,23 +16,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.Collection;
-import java.util.List;
 import java.util.ArrayList;
-
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletException;
-
-import hudson.Util;
-import hudson.scm.SCMManager;
-import hudson.tasks.LogRotator;
-import hudson.tasks.BuildStep;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.SortedMap;
 
 /**
  * A job is an runnable entity under the monitoring of Hudson.

@@ -1,6 +1,5 @@
 package hudson.tasks;
 
-import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Result;
@@ -12,11 +11,10 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import java.util.StringTokenizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.net.InetAddress;
+import java.util.StringTokenizer;
 
 /**
  * Sends the build result in e-mail.

@@ -1,14 +1,11 @@
 package hudson.scm;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.mxp1.MXParser;
 import org.apache.commons.digester.Digester;
 import org.xml.sax.SAXException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.FileInputStream;
-import java.io.IOException;
 
 /**
  * In-memory representation of CVS Changelog.
