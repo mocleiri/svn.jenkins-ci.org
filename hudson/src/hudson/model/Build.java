@@ -1,6 +1,5 @@
 package hudson.model;
 
-import hudson.NullStream;
 import hudson.Proc;
 import hudson.scm.CVSChangeLog;
 import hudson.tasks.BuildStep;
@@ -8,8 +7,8 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Map;
 
 import static hudson.model.Hudson.isWindows;
@@ -75,13 +74,17 @@ public final class Build extends Run<Project,Build> implements Runnable {
                 if(!build(listener,project.getBuilders()))
                     return Result.FAILURE;
 
-                if(isWindows()) {
+                if(!isWindows()) {
                     try {
                         // ignore a failure.
-                        new Proc(new String[]{"ln","-s",getRootDir().getPath(),"../latest"},
-                            new String[0],new NullStream(),getProject().getBuildDir()).join();
+                        int r = new Proc(new String[]{"ln","-s",getRootDir().getPath(),"../latest"},
+                            new String[0],listener.getLogger(),getProject().getBuildDir()).join();
+                        if(r!=0)
+                            listener.getLogger().println("ln failed: "+r);
                     } catch (IOException e) {
-                        e.printStackTrace( listener.fatalError("command execution failed") );
+                        PrintStream log = listener.getLogger();
+                        log.println("ln failed");
+                        e.printStackTrace( log );
                     }
                 }
 
@@ -94,15 +97,15 @@ public final class Build extends Run<Project,Build> implements Runnable {
         });
     }
 
-    private boolean build(BuildListener listener,Map steps) {
-        for( BuildStep bs : (Collection<? extends BuildStep>)steps.values() )
+    private boolean build(BuildListener listener,Map<?,BuildStep> steps) {
+        for( BuildStep bs : steps.values() )
             if(!bs.perform(this,listener))
                 return false;
         return true;
     }
 
-    private boolean preBuild(BuildListener listener,Map steps) {
-        for( BuildStep bs : (Collection<? extends BuildStep>)steps.values() )
+    private boolean preBuild(BuildListener listener,Map<?,BuildStep> steps) {
+        for( BuildStep bs : steps.values() )
             if(!bs.prebuild(this,listener))
                 return false;
         return true;
