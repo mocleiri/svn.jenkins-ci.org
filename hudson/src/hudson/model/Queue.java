@@ -13,11 +13,8 @@ import java.util.TreeSet;
  */
 public class Queue {
 
-    private final Comparator itemComparator = new Comparator() {
-        public int compare(Object o1, Object o2) {
-            Item lhs = (Item) o1;
-            Item rhs = (Item) o2;
-
+    private final Comparator<Item> itemComparator = new Comparator<Item>() {
+        public int compare(Item lhs, Item rhs) {
             int r = lhs.timestamp.getTime().compareTo(rhs.timestamp.getTime());
             if(r!=0)    return r;
 
@@ -28,13 +25,13 @@ public class Queue {
     /**
      * Items in the queue ordered by {@link Item#timestamp}.
      */
-    private final Set items = new TreeSet(itemComparator);
+    private final Set<Item> items = new TreeSet<Item>(itemComparator);
 
     /**
      * {@link Project}s that can be built immediately
      * but blocked because another build is in progress.
      */
-    private final Set blockedProjects = new HashSet();
+    private final Set<Project> blockedProjects = new HashSet<Project>();
 
     /**
      * Schedule a new build for this project.
@@ -44,9 +41,8 @@ public class Queue {
         // don't do anything
         if(blockedProjects.contains(p))
             return;
-        for (Iterator itr = items.iterator(); itr.hasNext();) {
-            Item item = (Item) itr.next();
-            if(item.project==p)
+        for (Item item : items) {
+            if (item.project == p)
                 return;
         }
 
@@ -73,7 +69,7 @@ public class Queue {
     }
 
     private synchronized Item peek() {
-        return (Item)items.iterator().next();
+        return items.iterator().next();
     }
 
     /**
@@ -84,9 +80,8 @@ public class Queue {
         items.toArray(r);
         int idx=items.size();
         Calendar now = new GregorianCalendar();
-        for (Iterator itr = blockedProjects.iterator(); itr.hasNext();) {
-            Project p = (Project) itr.next();
-            r[idx++] = new Item(now,p);
+        for (Project p : blockedProjects) {
+            r[idx++] = new Item(now, p);
         }
         return r;
     }
@@ -97,10 +92,9 @@ public class Queue {
     public synchronized Project pop() throws InterruptedException {
         outer:
         while(true) {
-            for (Iterator itr = blockedProjects.iterator(); itr.hasNext();) {
-                Project p = (Project) itr.next();
+            for (Project p : blockedProjects) {
                 Build lastBuild = p.getLastBuild();
-                if(lastBuild==null || !lastBuild.isBuilding()) {
+                if (lastBuild == null || !lastBuild.isBuilding()) {
                     // ready to be executed
                     blockedProjects.remove(p);
                     return p;
