@@ -4,4 +4,29 @@ if [ "$HUDSON_HOME" = "" ]; then
   exit 1
 fi
 
-exec java -jar lib/hudson.jar "$@"
+
+# search the installation directory
+
+PRG=$0
+progname=`basename $0`
+saveddir=`pwd`
+
+cd "`dirname $PRG`"
+
+while [ -h "$PRG" ] ; do
+    ls=`ls -ld "$PRG"`
+    link=`expr "$ls" : '.*-> \(.*\)$'`
+    if expr "$link" : '.*/.*' > /dev/null; then
+        PRG="$link"
+    else
+        PRG="`dirname $PRG`/$link"
+    fi
+done
+
+BINDIR=`dirname "$PRG"`/..
+
+# make it fully qualified
+cd "$saveddir"
+BINDIR="`cd "$BINDIR" && pwd`"
+
+exec java -jar "$BINDIR/lib/hudson.jar" "$@"
