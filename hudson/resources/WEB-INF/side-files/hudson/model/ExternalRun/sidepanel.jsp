@@ -9,7 +9,7 @@
 <l:side-panel>
   <l:tasks>
     <l:task icon="images/24x24/navigate_up.gif" href="${rootURL}/${it.parent.url}" title="Back to Job" />
-    <l:task icon="images/16x16/console.gif" href="." title="Console Output" />
+    <l:task icon="images/16x16/console_network.gif" href="." title="Console Output" />
     <c:if test="${it.hasArtifacts}">
       <l:task icon="images/24x24/folders.gif" href="artifacts-index" title="Artifacts" />
     </c:if>
