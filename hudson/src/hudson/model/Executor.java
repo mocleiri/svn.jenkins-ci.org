@@ -4,6 +4,8 @@ import java.io.IOException;
 
 
 /**
+ * Thread that executes builds.
+ *
  * @author Kohsuke Kawaguchi
  */
 public class Executor extends Thread {
