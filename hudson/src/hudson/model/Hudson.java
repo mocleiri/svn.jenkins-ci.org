@@ -183,11 +183,11 @@ public final class Hudson implements ModelObject {
     }
 
     private void load() throws IOException {
-        if(!getConfigFile().exists())
-            return; // nothing to load
-        Reader r = new InputStreamReader(new FileInputStream(getConfigFile()),"UTF-8");
-        createConfiguredStream().unmarshal(new XppReader(r),this);
-        r.close();
+        if(getConfigFile().exists()) {
+            Reader r = new InputStreamReader(new FileInputStream(getConfigFile()),"UTF-8");
+            createConfiguredStream().unmarshal(new XppReader(r),this);
+            r.close();
+        }
 
         File projectsDir = new File(root,"jobs");
         projectsDir.mkdirs();
@@ -196,6 +196,7 @@ public final class Hudson implements ModelObject {
                 return child.isDirectory();
             }
         });
+        jobs.clear();
         for( int i=0; i<subdirs.length; i++ ) {
             try {
                 Job p = Job.load(this,subdirs[i]);
@@ -234,6 +235,15 @@ public final class Hudson implements ModelObject {
             m.put(e.substring(0,idx),e.substring(idx+1));
         }
         masterEnvVars = Collections.unmodifiableMap(m);
+    }
+
+    /**
+     * Called to shut down the system.
+     */
+    public void cleanUp() {
+        shuttingDown = true;
+        for( Executor e : executors )
+            e.interrupt();
     }
 
 
@@ -370,11 +380,10 @@ public final class Hudson implements ModelObject {
     }
 
     /**
-     * Called to shut down the system.
+     * Reloads the configuration.
      */
-    public void cleanUp() {
-        shuttingDown = true;
-        for( Executor e : executors )
-            e.interrupt();
+    public synchronized void doReload( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        load();
+        rsp.sendRedirect(req.getContextPath());
     }
 }
