@@ -4,6 +4,7 @@ import hudson.scm.NullSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMManager;
 import hudson.tasks.BuildStep;
+import hudson.tasks.BuildStepDescriptor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -85,8 +86,8 @@ public class Project extends Job<Build> {
         this.scm = scm;
     }
 
-    public synchronized Map getBuilders() {
-        Map m = new HashMap();
+    public synchronized Map<BuildStepDescriptor,BuildStep> getBuilders() {
+        Map<BuildStepDescriptor,BuildStep> m = new HashMap<BuildStepDescriptor,BuildStep>();
         for( int i=builders.size()-1; i>=0; i-- ) {
             BuildStep b = builders.get(i);
             m.put(b.getDescriptor(),b);
@@ -94,8 +95,8 @@ public class Project extends Job<Build> {
         return m;
     }
 
-    public synchronized Map getPublishers() {
-        Map m = new HashMap();
+    public synchronized Map<BuildStepDescriptor,BuildStep> getPublishers() {
+        Map<BuildStepDescriptor,BuildStep> m = new HashMap<BuildStepDescriptor,BuildStep>();
         for( int i=publishers.size()-1; i>=0; i-- ) {
             BuildStep b = publishers.get(i);
             m.put(b.getDescriptor(),b);
