@@ -112,6 +112,8 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
             this.timestamp.setTime(ID_FORMATTER.parse(buildDir.getName()));
         } catch (ParseException e) {
             throw new IOException("Invalid directory name "+e.getMessage());
+        } catch (NumberFormatException e) {
+            throw new IOException("Invalid directory name "+e.getMessage());
         }
         this.building = true;
         load(buildDir);
