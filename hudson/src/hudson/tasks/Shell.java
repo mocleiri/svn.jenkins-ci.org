@@ -66,6 +66,7 @@ public class Shell implements BuildStep {
                 w.close();
             } catch (IOException e) {
                 e.printStackTrace( listener.fatalError("Unable to produce a script file") );
+                return false;
             }
 
             String cmd = DESCRIPTOR.getShell()+" -x -e "+script.getPath();
