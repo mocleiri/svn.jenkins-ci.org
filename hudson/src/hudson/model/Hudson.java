@@ -153,7 +153,7 @@ public final class Hudson implements ModelObject {
         if(!Job.class.isAssignableFrom(type))
             throw new IllegalArgumentException();
 
-        Job job = null;
+        Job job;
         try {
             job = (Job)type.getConstructor(Hudson.class,String.class).newInstance(this,name);
         } catch (Exception e) {

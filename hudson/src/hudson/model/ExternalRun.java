@@ -54,12 +54,12 @@ public class ExternalRun extends Run<ExternalJob,ExternalRun> {
             rhs.write(b);
         }
 
-        public void write(byte b[]) throws IOException {
+        public void write(byte[] b) throws IOException {
             lhs.write(b);
             rhs.write(b);
         }
 
-        public void write(byte b[], int off, int len) throws IOException {
+        public void write(byte[] b, int off, int len) throws IOException {
             lhs.write(b,off,len);
             rhs.write(b,off,len);
         }

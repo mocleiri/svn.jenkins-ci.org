@@ -17,12 +17,11 @@ public class Util {
      *      if the operation fails.
      */
     public static void deleteContentsRecursive(File file) throws IOException {
-        File[] children = file.listFiles();
-        for( int i=0; i<children.length; i++ ) {
-            if(children[i].isDirectory())
-                deleteContentsRecursive(children[i]);
-            if(!children[i].delete())
-                throw new IOException("Unable to delete "+children[i].getPath());
+        for (File child : file.listFiles()) {
+            if (child.isDirectory())
+                deleteContentsRecursive(child);
+            if (!child.delete())
+                throw new IOException("Unable to delete " + child.getPath());
         }
     }
 

@@ -150,7 +150,7 @@ public class CVSSCM implements SCM {
         return r==0;
     }
 
-    public boolean calcChangeLog( Build build, File changelogFile, final BuildListener listener ) {
+    public boolean calcChangeLog( Build build, File changelogFile, BuildListener listener ) {
         if(build.getPreviousBuild()==null) {
             // nothing to compare against
             try {
