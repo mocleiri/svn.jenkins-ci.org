@@ -52,7 +52,7 @@ public final class Hudson implements ModelObject {
     /**
      * False to enable anyone to do anything.
      */
-    private boolean useSecurity = true;
+    private boolean useSecurity = false;
 
     /**
      * Root directory of the system.
