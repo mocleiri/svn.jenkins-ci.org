@@ -1,5 +1,8 @@
 package hudson.model;
 
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+
 import java.io.IOException;
 
 
@@ -75,5 +78,13 @@ public class Executor extends Thread {
         int num = (int)((System.currentTimeMillis()-startTime)*100/duration);
         if(num>=100)    num=99;
         return num;
+    }
+
+    /**
+     * Returns the image that shows the current buildCommand status.
+     */
+    public void doStop( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        interrupt();
+        rsp.sendRedirect(req.getContextPath());
     }
 }
