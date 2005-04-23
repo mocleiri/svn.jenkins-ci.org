@@ -34,6 +34,8 @@ public class WebAppMain implements ServletContextListener {
             throw new Error(e);
         }
 
+        new PluginManager(event.getServletContext());
+
         // set the version
         Properties props = new Properties();
         try {
@@ -77,6 +79,8 @@ public class WebAppMain implements ServletContextListener {
     }
 
     public void contextDestroyed(ServletContextEvent event) {
-        Hudson.getInstance().cleanUp();
+        Hudson instance = Hudson.getInstance();
+        if(instance!=null)
+            instance.cleanUp();
     }
 }

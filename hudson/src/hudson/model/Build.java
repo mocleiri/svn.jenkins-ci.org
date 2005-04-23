@@ -78,7 +78,7 @@ public final class Build extends Run<Project,Build> implements Runnable {
                     try {
                         // ignore a failure.
                         new Proc(new String[]{"rm","../latest"},new String[0],listener.getLogger(),getProject().getBuildDir()).join();
-                        int r = new Proc(new String[]{"ln","-s",getRootDir().getPath(),"../latest"},
+                        int r = new Proc(new String[]{"ln","-s",getRootDir().getPath(),"../lastSuccessful"},
                             new String[0],listener.getLogger(),getProject().getBuildDir()).join();
                         if(r!=0)
                             listener.getLogger().println("ln failed: "+r);

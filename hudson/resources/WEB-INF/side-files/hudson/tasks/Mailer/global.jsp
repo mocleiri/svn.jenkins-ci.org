@@ -14,4 +14,9 @@
       this document</a> for possible values and effects.
     </small>
   </s:block>
+  <s:entry title="System Admin E-mail Address"
+    description="Notification e-mails will be sent with this address in the from header">
+    <input class="setting-input" name="mailer_admin_address"
+      type="text" value="${descriptor.adminAddress}">
+  </s:entry>
 </s:section>

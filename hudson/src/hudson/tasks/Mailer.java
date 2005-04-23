@@ -31,36 +31,19 @@ public class Mailer implements BuildStep {
      */
     private String recipients;
 
-    /**
-     * If true, the e-mail is sent only when a build fails.
-     */
-    private boolean failureOnly;
 
-    private String subject;
+    // TODO: left so that XStream won't get angry. figure out how to set the error handling behavior
+    // in XStream.
+    private transient String from;
+    private transient String subject;
+    private transient boolean failureOnly;
 
-    private String from;
-
-    public Mailer(String recipients, boolean failureOnly, String subject, String from) {
+    public Mailer(String recipients) {
         this.recipients = recipients;
-        this.failureOnly = failureOnly;
-        this.subject = subject;
-        this.from = from;
     }
 
     public String getRecipients() {
         return recipients;
-    }
-
-    public boolean isFailureOnly() {
-        return failureOnly;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public String getFrom() {
-        return from;
     }
 
     public boolean prebuild(Build build, BuildListener listener) {
@@ -68,37 +51,12 @@ public class Mailer implements BuildStep {
     }
 
     public boolean perform(Build build, BuildListener listener) {
-        if(build.getResult()!=Result.FAILURE && failureOnly)
-            return true;    // nothing to report
-
-        listener.getLogger().println("Sending e-mails to "+recipients);
-
         try {
-            MimeMessage msg = new MimeMessage(DESCRIPTOR.createSession());
-            // TODO: I'd like to put the URL to the page in here,
-            // but how do I obtain that?
-            msg.setContent("","text/plain");
-            msg.setSubject(expandSubjectMacro(subject,build));
-            msg.setFrom(new InternetAddress(from));
-
-            List<InternetAddress> rcp = new ArrayList<InternetAddress>();
-            StringTokenizer tokens = new StringTokenizer(recipients);
-            while(tokens.hasMoreTokens())
-                rcp.add(new InternetAddress(tokens.nextToken()));
-            msg.setRecipients(Message.RecipientType.TO, rcp.toArray(new InternetAddress[rcp.size()]));
-
-            try {
-                msg.setText(build.getLog());
-            } catch (IOException e) {
-                // somehow failed to read the contents of the log
-                StringBuilder w = new StringBuilder();
-                StringWriter sw = new StringWriter();
-                e.printStackTrace(new PrintWriter(sw));
-                w.append("Failed to access build log\n\n").append(sw);
-                msg.setText(w.toString());
+            MimeMessage mail = getMail(build);
+            if(mail!=null) {
+                listener.getLogger().println("Sending e-mails to "+recipients);
+                Transport.send(mail);
             }
-
-            Transport.send(msg);
         } catch (MessagingException e) {
             e.printStackTrace( listener.error(e.getMessage()) );
         }
@@ -106,23 +64,68 @@ public class Mailer implements BuildStep {
         return true;
     }
 
+    private MimeMessage getMail(Build build) throws MessagingException {
+        if(build.getResult()==Result.FAILURE) {
+            return createFailureMail(build);
+        }
+
+        if(build.getResult()==Result.SUCCESS) {
+            Build prev = build.getPreviousBuild();
+            if(prev!=null && prev.getResult()==Result.FAILURE)
+                return createBackToNormalMail(build);
+        }
+
+        return null;
+    }
+
+    private MimeMessage createBackToNormalMail(Build build) throws MessagingException {
+        MimeMessage msg = createEmptyMail();
+
+        msg.setSubject(getSubject(build));
+        msg.setSubject("Hudson build is back to normal: "+build.getProject().getName());
+        msg.setText("... as of #"+build.getNumber());
+
+        return msg;
+    }
+
+    private MimeMessage createFailureMail(Build build) throws MessagingException {
+        MimeMessage msg = createEmptyMail();
+
+        msg.setSubject(getSubject(build));
+        try {
+            msg.setText(build.getLog());
+        } catch (IOException e) {
+            // somehow failed to read the contents of the log
+            StringBuilder w = new StringBuilder();
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            w.append("Failed to access build log\n\n").append(sw);
+            msg.setText(w.toString());
+        }
+        return msg;
+    }
+
+    private MimeMessage createEmptyMail() throws MessagingException {
+        MimeMessage msg = new MimeMessage(DESCRIPTOR.createSession());
+        // TODO: I'd like to put the URL to the page in here,
+        // but how do I obtain that?
+        msg.setContent("","text/plain");
+        msg.setFrom(new InternetAddress(DESCRIPTOR.getAdminAddress()));
+
+        List<InternetAddress> rcp = new ArrayList<InternetAddress>();
+        StringTokenizer tokens = new StringTokenizer(recipients);
+        while(tokens.hasMoreTokens())
+            rcp.add(new InternetAddress(tokens.nextToken()));
+        msg.setRecipients(Message.RecipientType.TO, rcp.toArray(new InternetAddress[rcp.size()]));
+        return msg;
+    }
+
     public BuildStepDescriptor getDescriptor() {
         return DESCRIPTOR;
     }
 
-    private String expandSubjectMacro( String s, Build build ) {
-        StringBuffer buf = new StringBuffer(s);
-        replace(buf,"${buildId}",build.getId());
-        replace(buf,"${buildNumber}",Integer.toString(build.getNumber()));
-        replace(buf,"${result}",build.getResult().toString());
-        return buf.toString();
-    }
-
-    private void replace(StringBuffer buf, String src, String tgt) {
-        int idx;
-        while((idx=buf.indexOf(src))!=-1) {
-            buf.replace(idx,idx+src.length(),tgt);
-        }
+    private String getSubject(Build build) {
+        return "Build failed in Hudson: "+build.getProject().getName()+" #"+build.getNumber();
     }
 
 
@@ -149,6 +152,8 @@ public class Mailer implements BuildStep {
             String v = req.getParameter("mailer_smtpServer");
             if(v!=null && v.length()==0)    v=null;
             getProperties().put("mail.smtp.host",v);
+
+            getProperties().put("mail.admin.address",req.getParameter("mailer_admin_address"));
             save();
             return super.configure(req);
         }
@@ -157,12 +162,13 @@ public class Mailer implements BuildStep {
             return (String)getProperties().get("mail.smtp.host");
         }
 
+        public String getAdminAddress() {
+            return (String)getProperties().get("mail.admin.address");
+        }
+
         public BuildStep newInstance(HttpServletRequest req) {
             return new Mailer(
-                req.getParameter("mailer_recipients"),
-                req.getParameter("mailer_failureOnly")!=null,
-                req.getParameter("mailer_subject"),
-                req.getParameter("mailer_from")
+                req.getParameter("mailer_recipients")
             );
         }
     };
