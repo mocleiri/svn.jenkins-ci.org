@@ -163,7 +163,9 @@ public class Mailer implements BuildStep {
         }
 
         public String getAdminAddress() {
-            return (String)getProperties().get("mail.admin.address");
+            String v = (String)getProperties().get("mail.admin.address");
+            if(v==null)     v = "address not configured yet <nobody>";
+            return v;
         }
 
         public BuildStep newInstance(HttpServletRequest req) {
