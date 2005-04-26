@@ -275,6 +275,9 @@ public final class Hudson implements ModelObject {
         for( BuildStepDescriptor d : BuildStep.BUILDERS )
             result &= d.configure(req);
 
+        for( BuildStepDescriptor d : BuildStep.PUBLISHERS )
+            result &= d.configure(req);
+
         for( SCMDescriptor scmd : SCMManager.getSupportedSCMs() )
             result &= scmd.configure(req);
 
