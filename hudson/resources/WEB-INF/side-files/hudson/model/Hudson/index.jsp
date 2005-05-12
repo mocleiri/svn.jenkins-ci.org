@@ -13,6 +13,9 @@
         <th>Last Failure</th>
         <th>Last Duration</th>
         <th>&nbsp;</th>
+        <l:isAdmin><%-- build icon --%>
+          <th width=1>&nbsp;</th>
+        </l:isAdmin>
       </tr>
 
     <c:forEach var="job" items="${app.jobs}">
@@ -45,6 +48,11 @@
         <td>
           &nbsp;
         </td>
+        <l:isAdmin>
+          <td>
+            <a href="job/${job.name}/build"><img src="images/24x24/gears_run.gif" title="Schedule a build" border=0></a>
+          </td>
+        </l:isAdmin>
       </tr>
     </c:forEach>
   </table>

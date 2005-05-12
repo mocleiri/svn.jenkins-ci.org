@@ -156,13 +156,14 @@ public class Project extends Job<Build> {
 //
 //
     /**
-     * Schedules a new buildCommand.
+     * Schedules a new build command.
      */
     public void doBuild( StaplerRequest req, StaplerResponse rsp ) throws IOException {
         getParent().getQueue().add(this);
-        rsp.sendRedirect(".");
+        String referer = req.getHeader("Referer");
+        if(referer==null)   referer=".";
+        rsp.sendRedirect(referer);
     }
-
 
     /**
      * Accepts submission from the configuration page.

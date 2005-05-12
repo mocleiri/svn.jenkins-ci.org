@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.StringTokenizer;
+import java.util.Map;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.PrintWriter;
@@ -144,7 +145,11 @@ public class Mailer implements BuildStep {
         /** JavaMail session. */
         public Session createSession() {
             Properties props = new Properties(System.getProperties());
-            props.putAll(getProperties());
+            // can't use putAll
+            for (Map.Entry o : ((Map<?,?>)getProperties()).entrySet()) {
+                if(o.getValue()!=null)
+                    props.put(o.getKey(),o.getValue());
+            }
             return Session.getInstance(props);
         }
 
