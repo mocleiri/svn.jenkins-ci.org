@@ -57,6 +57,8 @@
     </c:forEach>
   </table>
   <div align=right style="margin:1em">
+      <a href="legend">Legend</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
       <a href="rssAll"><img src="${rootURL}/images/atom.png" border=0> for all</a>
       &nbsp;&nbsp;&nbsp;&nbsp;
       <a href="rssFailed"><img src="${rootURL}/images/atom.png" border=0> for failures</a>
