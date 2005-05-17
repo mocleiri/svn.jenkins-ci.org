@@ -4,10 +4,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <jsp:include page="sidepanel.jsp" />
 <l:main-panel>
-<h1>Changes</h1>
+<t:buildCaption>Changes</t:buildCaption>
 
 <c:set var="set" value="${it.changeSet}" />
 

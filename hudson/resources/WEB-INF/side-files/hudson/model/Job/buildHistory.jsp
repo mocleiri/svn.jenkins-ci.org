@@ -5,6 +5,7 @@
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
 <%@ taglib prefix="i" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <l:pane width="2" title="Build history">
   <c:forEach var="build" items="${it.builds}">
@@ -23,6 +24,14 @@
         </span>
       </td>
     </tr>
+    <c:if test="${build.building}">
+      <c:set var="pos" value="${build.executor.progress}" />
+      <c:if test="${pos>0}">
+        <tr><td></td><td>
+          <t:progressBar pos="${pos}"/>
+        </td></tr>
+      </c:if>
+    </c:if>
   </c:forEach>
   <tr class=build-row>
     <td colspan=2 align=right>

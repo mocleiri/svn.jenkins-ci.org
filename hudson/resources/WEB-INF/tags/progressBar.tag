@@ -6,7 +6,7 @@
 
 <table class="progress-bar">
   <tbody><tr>
-    <td class="progress-bar-done"><div style="width:${pos}px;"></div></td>
-    <td class="progress-bar-left"><div style="width:${100-pos}px"></div></td>
+    <td class="progress-bar-done" style="width:${pos}%;"></td>
+    <td class="progress-bar-left" style="width:${100-pos}%"></td>
   </tr>
 </tbody></table>

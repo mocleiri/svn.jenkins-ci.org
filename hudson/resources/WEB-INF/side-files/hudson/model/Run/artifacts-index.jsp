@@ -5,10 +5,13 @@
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <st:include page="sidepanel.jsp" />
 <l:main-panel>
-<h1>Build Artifacts</h1>
+<t:buildCaption>
+  Build Artifacts
+</t:buildCaption>
 <ul>
   <c:forEach var="f" items="${it.artifacts}">
     <li><a href="artifact/${f}">${f}</a></li>

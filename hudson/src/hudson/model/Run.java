@@ -132,6 +132,19 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
     }
 
     /**
+     * Gets the {@link Executor} building this job, if it's being built.
+     * Otherwise null.
+     */
+    public Executor getExecutor() {
+        for( Executor e : Hudson.getInstance().getExecutors() )
+            if(e.getCurrentBuild()==(Object)this)
+                return e;
+        return null;
+    }
+
+
+
+    /**
      * The project this build is for.
      */
     public JobT getParent() {

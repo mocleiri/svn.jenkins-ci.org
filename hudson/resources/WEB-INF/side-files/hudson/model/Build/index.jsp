@@ -7,11 +7,10 @@
 
 <jsp:include page="sidepanel.jsp" />
 <l:main-panel>
-<h1>
-  <img src="buildStatus" width="32" height="32" border="0">
+<t:buildCaption>
   Build #${it.number}
   (<i:formatDate value="${it.timestamp.time}" type="both" dateStyle="medium" timeStyle="medium"/>)
-</h1>
+</t:buildCaption>
 
 <c:if test="${it.result!=null}">
   <h2>Build Artifacts</h2>
