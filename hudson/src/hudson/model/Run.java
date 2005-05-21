@@ -475,7 +475,11 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
     }
 
     public void doBuildStatus( StaplerRequest req, StaplerResponse rsp ) throws IOException {
-        rsp.sendRedirect(req.getContextPath()+"/images/"+getIconColor()+".gif");
+        rsp.sendRedirect(req.getContextPath()+'/'+getBuildStatusUrl());
+    }
+
+    public String getBuildStatusUrl() {
+        return "images/"+getIconColor()+".gif";
     }
 
     public void doArtifact( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {

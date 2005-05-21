@@ -23,7 +23,7 @@
       <c:set var="lfBuild" value="${job.lastFailedBuild}" />
       <tr>
         <td>
-          <img width="32" height="32" src="job/${job.name}/buildStatus" />
+          <img width="32" height="32" src="${rootURL}/${job.buildStatusUrl}" />
         </td>
         <td>
           <a href="job/${job.name}">

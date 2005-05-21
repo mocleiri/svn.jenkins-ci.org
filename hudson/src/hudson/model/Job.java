@@ -272,7 +272,11 @@ public abstract class Job<RunT extends Run<? extends Job,RunT>> implements Model
      * Returns the image that shows the current buildCommand status.
      */
     public void doBuildStatus( StaplerRequest req, StaplerResponse rsp ) throws IOException {
-        rsp.sendRedirect(req.getContextPath()+"/images/"+getIconColor()+".gif");
+        rsp.sendRedirect(req.getContextPath()+'/'+getBuildStatusUrl());
+    }
+
+    public String getBuildStatusUrl() {
+        return "images/"+getIconColor()+".gif";
     }
 
     /**

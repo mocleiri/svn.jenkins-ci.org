@@ -12,7 +12,7 @@
     <c:set var="link" value="${rootURL}/${it.url}build/${build.id}" />
     <tr class="build-row">
       <td nowrap="nowrap">
-        <img width="16" height="16" src="${link}/buildStatus">&nbsp;
+        <img width="16" height="16" src="${rootURL}/${build.buildStatusUrl}">&nbsp;
         #${build.number}
       </td>
       <td nowrap="nowrap">
