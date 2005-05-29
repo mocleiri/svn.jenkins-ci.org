@@ -396,6 +396,9 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
 
         } catch( Exception e ) {
             if(listener!=null) {
+                if(e instanceof IOException)
+                    Util.displayIOException((IOException)e,listener);
+
                 Writer w = listener.fatalError(e.getMessage());
                 if(w!=null) {
                     try {

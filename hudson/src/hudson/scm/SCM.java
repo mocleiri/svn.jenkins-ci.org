@@ -20,7 +20,7 @@ public interface SCM {
      * @return
      *      false if the operation fails. The error should be reported to the listener.
      */
-    boolean calcChangeLog( Build build, File changelogFile, BuildListener listener );
+    boolean calcChangeLog( Build build, File changelogFile, BuildListener listener ) throws IOException;
 
     /**
      * Obtains a fresh workspace of the module(s) into the specified directory.

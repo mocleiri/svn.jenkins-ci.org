@@ -1,10 +1,8 @@
 package hudson.scm;
 
-import hudson.Proc;
 import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
-import hudson.model.Hudson;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
@@ -16,7 +14,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -25,12 +22,17 @@ import java.util.StringTokenizer;
  *
  * @author Kohsuke Kawaguchi
  */
-public class CVSSCM implements SCM {
+public class CVSSCM extends AbstractCVSFamilySCM {
     /**
      * CVSSCM connection string.
      */
     private String cvsroot;
 
+    /**
+     * Module names.
+     *
+     * This could be a whitespace-separate list of multiple modules.
+     */
     private String module;
 
     private String branch;
@@ -56,8 +58,13 @@ public class CVSSCM implements SCM {
         return cvsroot;
     }
 
+    /**
+     * If there are multiple modules, return the module directory of the first one.
+     */
     public String getModule() {
-        return module;
+        int idx = module.indexOf(' ');
+        if(idx>=0)  return module.substring(0,idx);
+        else        return module;
     }
 
     public String getBranch() {
@@ -84,14 +91,14 @@ public class CVSSCM implements SCM {
             branch!=null?"-r "+branch:""
         );
 
-        return cvs(cmd,listener,dir);
+        return run(cmd,listener,dir);
     }
 
     public boolean update(File dir, BuildListener listener) throws IOException {
         String cmd = "cvs -q -z9 update -PdC";
         StringTokenizer tokens = new StringTokenizer(module);
         while(tokens.hasMoreTokens()) {
-            if(!cvs(cmd,listener,new File(dir,tokens.nextToken())))
+            if(!run(cmd,listener,new File(dir,tokens.nextToken())))
                 return false;
         }
         return true;
@@ -137,19 +144,6 @@ public class CVSSCM implements SCM {
         }
     }
 
-    private boolean cvs(String cmd, BuildListener listener, File dir) throws IOException {
-        listener.getLogger().println("$ "+cmd);
-
-        Map env = new HashMap(Hudson.masterEnvVars);
-        buildEnvVars(env);
-
-        int r = new Proc(cmd,env,listener.getLogger(),dir).join();
-        if(r!=0)
-            listener.fatalError("cvs failed");
-
-        return r==0;
-    }
-
     public boolean calcChangeLog( Build build, File changelogFile, BuildListener listener ) {
         if(build.getPreviousBuild()==null) {
             // nothing to compare against
@@ -175,7 +169,7 @@ public class CVSSCM implements SCM {
         task.setProject(new Project());
         task.setDir(build.getProject().getWorkspace());
         if(DESCRIPTOR.getCvspassFile().length()!=0)
-        task.setPassfile(new File(DESCRIPTOR.getCvspassFile()));
+            task.setPassfile(new File(DESCRIPTOR.getCvspassFile()));
         task.setCvsRoot(cvsroot);
         task.setCvsRsh(cvsRsh);
         task.setPackage(module);
@@ -209,7 +203,7 @@ public class CVSSCM implements SCM {
 
     public static final class Descriptor extends SCMDescriptor {
         Descriptor() {
-            super((CVSSCM.class));
+            super(CVSSCM.class);
         }
 
         public String getDisplayName() {

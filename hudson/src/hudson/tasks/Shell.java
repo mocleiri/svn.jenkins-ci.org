@@ -1,6 +1,7 @@
 package hudson.tasks;
 
 import hudson.Proc;
+import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Project;
@@ -65,6 +66,7 @@ public class Shell implements BuildStep {
                 w.write(command);
                 w.close();
             } catch (IOException e) {
+                Util.displayIOException(e,listener);
                 e.printStackTrace( listener.fatalError("Unable to produce a script file") );
                 return false;
             }
@@ -77,6 +79,7 @@ public class Shell implements BuildStep {
             try {
                 r = new Proc(cmd,build.getEnvVars(),listener.getLogger(),proj.getWorkspace()).join();
             } catch (IOException e) {
+                Util.displayIOException(e,listener);
                 e.printStackTrace( listener.fatalError("command execution failed") );
             }
             return r==0;

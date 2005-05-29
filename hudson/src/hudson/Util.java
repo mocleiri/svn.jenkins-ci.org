@@ -1,9 +1,14 @@
 package hudson;
 
+import hudson.model.BuildListener;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ResourceBundle;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -29,6 +34,28 @@ public class Util {
         deleteContentsRecursive(dir);
         if(!dir.delete())
             throw new IOException("Unable to delete "+dir);
+    }
+
+    private static final Pattern errorCodeParser = Pattern.compile(".*error=([0-9]+).*");
+
+    /**
+     * On Windows, error messages for IOException aren't very helpful.
+     * This method generates additional user-friendly error message to the listener
+     */
+    public static void displayIOException( IOException e, BuildListener listener ) {
+        if(File.separatorChar!='\\')
+            return; // not Windows
+
+        Matcher m = errorCodeParser.matcher(e.getMessage());
+        if(!m.matches())
+            return; // failed to parse
+
+        try {
+            ResourceBundle rb = ResourceBundle.getBundle("/hudson/win32errors");
+            listener.getLogger().println(rb.getString("error"+m.group(1)));
+        } catch (Exception _) {
+            ; // silently recover from resource related failures
+        }
     }
 
     /**

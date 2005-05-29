@@ -7,6 +7,6 @@ package hudson.scm;
  */
 public final class SCMManager {
     public static SCMDescriptor[] getSupportedSCMs() {
-        return new SCMDescriptor[]{NullSCM.DESCRIPTOR,CVSSCM.DESCRIPTOR};
+        return new SCMDescriptor[]{NullSCM.DESCRIPTOR,CVSSCM.DESCRIPTOR,SubversionSCM.DESCRIPTOR};
     }
 }

@@ -1,6 +1,7 @@
 package hudson.tasks;
 
 import hudson.Proc;
+import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Project;
@@ -82,6 +83,7 @@ public class Ant implements BuildStep {
             int r = new Proc(cmd,env,listener.getLogger(),proj.getModuleRoot()).join();
             return r==0;
         } catch (IOException e) {
+            Util.displayIOException(e,listener);
             e.printStackTrace( listener.fatalError("command execution failed") );
             return false;
         }
