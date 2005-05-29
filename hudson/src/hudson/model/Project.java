@@ -67,13 +67,14 @@ public class Project extends Job<Build> {
 
         for( String build : builds ) {
             File d = new File(buildDir,build);
-            try {
-                Build b = new Build(this,d,getLastBuild());
-                this.builds.put( b.getId(), b );
-            } catch (IOException e) {
-                // TODO: perhaps we should check the existence of build.xml
-                // and ignore this directory?
-                e.printStackTrace();
+            if(new File(d,"build.xml").exists()) {
+                // if the build result file isn't in the directory, ignore it.
+                try {
+                    Build b = new Build(this,d,getLastBuild());
+                    this.builds.put( b.getId(), b );
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
