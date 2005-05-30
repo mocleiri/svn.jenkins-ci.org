@@ -12,13 +12,10 @@
   <c:set var="scms" value="<%= hudson.scm.SCMManager.getSupportedSCMs() %>" />
   <c:forEach var="idx" begin="0" end="${f:length(scms)-1}">
     <c:set var="scmd" value="${scms[idx]}" />
-    <s:block>
-      <input type="radio" name="scm" value="${idx}"
-        <c:out value="${it.scm.descriptor==scmd?'checked':''}" /> >
-      ${scmd.displayName}
-    </s:block>
-    <c:set var="scm" value="${it.scm.descriptor==scmd?it.scm:null}" scope="request" />
-    <jsp:include page="${scmd.configPage}"/>
+    <s:radioBlock name="scm" title="${scmd.displayName}" checked="${it.scm.descriptor==scmd}">
+      <c:set var="scm" value="${it.scm.descriptor==scmd?it.scm:null}" scope="request" />
+      <jsp:include page="${scmd.configPage}"/>
+    </s:radioBlock>
   </c:forEach>
 </s:section>
 
