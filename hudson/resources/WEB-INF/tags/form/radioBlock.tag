@@ -11,6 +11,7 @@
 <tr id="rb_s${rb_id}"><%-- this ID marks the beginning --%>
   <td colspan="2">
     <script>
+        <%-- this is way too clumsy. there must be a better way to do it. --%>
         function toggleRb${rb_id}() {
           var tbl = document.getElementById('rb_s${rb_id}').parentNode;
           var i = false;
