@@ -181,14 +181,14 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         try {
             task.execute();
             return true;
+        } catch( BuildException e ) {
+            e.printStackTrace(listener.error(e.getMessage()));
+            return false;
         } catch( RuntimeException e ) {
             // an user reported a NPE inside the changeLog task.
             // we don't want a bug in Ant to prevent a build.
             e.printStackTrace(listener.error(e.getMessage()));
             return true;    // so record the message but continue
-        } catch( BuildException e ) {
-            e.printStackTrace(listener.error(e.getMessage()));
-            return false;
         }
     }
 
