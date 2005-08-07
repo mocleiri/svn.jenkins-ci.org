@@ -4,7 +4,7 @@
 <s:section title="E-mail Notification">
   <s:entry title="SMTP server"
     description="Name of the mail server. Leave it empty to use the default server.">
-    <input class="setting-input" name="mailer_smtp"
+    <input class="setting-input" name="mailer_smtp_server"
       type="text" value="${descriptor.smtpServer}">
   </s:entry>
   <s:block>

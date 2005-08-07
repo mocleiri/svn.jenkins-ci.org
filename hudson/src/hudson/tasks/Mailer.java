@@ -154,7 +154,7 @@ public class Mailer implements BuildStep {
         }
 
         public boolean configure(HttpServletRequest req) {
-            String v = req.getParameter("mailer_smtpServer");
+            String v = req.getParameter("mailer_smtp_server");
             if(v!=null && v.length()==0)    v=null;
             getProperties().put("mail.smtp.host",v);
 
