@@ -48,6 +48,18 @@ public class CVSChangeLog {
         return msg;
     }
 
+    public String getMsgEscaped() {
+        StringBuffer buf = new StringBuffer();
+        for( int i=0; i<msg.length(); i++ ) {
+            char ch = msg.charAt(i);
+            if(ch=='\n')
+                buf.append("<br>");
+            else
+                buf.append(ch);
+        }
+        return buf.toString();
+    }
+
     public void setMsg(String msg) {
         this.msg = msg;
     }

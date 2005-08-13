@@ -25,7 +25,7 @@
         <a name="detail${cs.index}"></a>
         <div class="changeset-message">
           <b>${cs.author}:</b><br>
-          <c:out value="${cs.msg}" escapeXml="true" />
+          <c:out value="${cs.msgEscaped}" escapeXml="true" />
         </div>
       </td>
     </tr>
