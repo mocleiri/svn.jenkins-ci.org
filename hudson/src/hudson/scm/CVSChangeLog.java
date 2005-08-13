@@ -48,6 +48,9 @@ public class CVSChangeLog {
         return msg;
     }
 
+    /**
+     * Message escaped for HTML
+     */
     public String getMsgEscaped() {
         StringBuffer buf = new StringBuffer();
         for( int i=0; i<msg.length(); i++ ) {
