@@ -193,7 +193,7 @@ public class CVSChangeLog {
 
         digester.parse(f);
 
-        // merge duplicate entries
+        // merge duplicate entries. Ant task somehow seems to report duplicate entries.
         for(int i=r.size()-1; i>=0; i--) {
             CVSChangeLog log = (CVSChangeLog)r.get(i);
             boolean merged = false;
