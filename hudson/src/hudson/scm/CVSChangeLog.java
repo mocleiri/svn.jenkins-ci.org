@@ -20,6 +20,26 @@ public class CVSChangeLog {
     private int index;
     private final List files = new ArrayList();
 
+    /**
+     * Checks if two {@link CVSChangeLog} entries can be merged.
+     * This is to work around the duplicate entry problems.
+     */
+    public boolean canBeMergedWith(CVSChangeLog that) {
+        if(!this.date.equals(that.date))
+            return false;
+        if(!this.time.equals(that.time))    // TODO: perhaps check this loosely?
+            return false;
+        if(!this.author.equals(that.author))
+            return false;
+        if(!this.msg.equals(that.msg))
+            return false;
+        return true;
+    }
+
+    public void merge(CVSChangeLog that) {
+        this.files.addAll(that.files);
+    }
+
     public String getDate() {
         return date;
     }
@@ -172,6 +192,22 @@ public class CVSChangeLog {
         digester.addSetNext("*/entry/file","addFile");
 
         digester.parse(f);
+
+        // merge duplicate entries
+        for(int i=r.size()-1; i>=0; i--) {
+            CVSChangeLog log = (CVSChangeLog)r.get(i);
+            boolean merged = false;
+            for(int j=0;j<i;j++) {
+                CVSChangeLog c = (CVSChangeLog) r.get(j);
+                if(c.canBeMergedWith(log)) {
+                    c.merge(log);
+                    merged = true;
+                    break;
+                }
+            }
+            if(merged)
+                r.remove(log);
+        }
 
         CVSChangeLog[] ar = (CVSChangeLog[]) r.toArray(new CVSChangeLog[r.size()]);
         for( int i=0; i<ar.length; i++ )
