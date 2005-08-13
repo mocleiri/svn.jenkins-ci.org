@@ -30,7 +30,7 @@
   <c:otherwise>
     <ol>
       <c:forEach var="cs" items="${set}">
-        <li><c:out value="${cs.msg}" escapeXml="true" /> (<a href="changes#detail${cs.index}">detail</a>)
+        <li><c:out value="${cs.msgEscaped}" escapeXml="false" /> (<a href="changes#detail${cs.index}">detail</a>)
       </c:forEach>
     </ol>
   </c:otherwise>

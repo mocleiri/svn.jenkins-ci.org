@@ -55,6 +55,15 @@ public class CVSChangeLog {
             if(ch=='\n')
                 buf.append("<br>");
             else
+            if(ch=='<')
+                buf.append("&lt;");
+            else
+            if(ch=='&')
+                buf.append("&amp;");
+            else
+            if(ch==' ')
+                buf.append("&nbsp;");
+            else
                 buf.append(ch);
         }
         return buf.toString();
