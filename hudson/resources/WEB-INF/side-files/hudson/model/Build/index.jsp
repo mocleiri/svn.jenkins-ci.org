@@ -4,6 +4,7 @@
 <%@ taglib prefix="i" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
 
 <jsp:include page="sidepanel.jsp" />
 <l:main-panel>
@@ -11,6 +12,8 @@
   Build #${it.number}
   (<i:formatDate value="${it.timestamp.time}" type="both" dateStyle="medium" timeStyle="medium"/>)
 </t:buildCaption>
+
+<st:include page="logKeep.jsp" />
 
 <c:if test="${it.result!=null}">
   <h2>Build Artifacts</h2>

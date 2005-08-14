@@ -78,6 +78,11 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
      */
     protected long duration;
 
+    /**
+     * Keeps this log entries.
+     */
+    private boolean keepLog;
+
     protected static final SimpleDateFormat ID_FORMATTER = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 
     protected static final SimpleDateFormat XS_DATETIME_FORMATTER = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
@@ -141,6 +146,15 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
             if(e.getCurrentBuild()==(Object)this)
                 return e;
         return null;
+    }
+
+    /**
+     * Returns true if this log file should be kept forever.
+     *
+     * This is used as a signal to the {@link LogRotator}.
+     */
+    public boolean isKeepLog() {
+        return keepLog;
     }
 
 
@@ -307,7 +321,6 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
      */
     public boolean getHasArtifacts() {
         return getArtifactsDir().exists();
-
     }
 
     private void addArtifacts( File dir, String path, List r ) {
@@ -525,6 +538,12 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
         rsp.setStatus(HttpServletResponse.SC_OK);
         rsp.getWriter().print(number);
         return;
+    }
+
+    public void doToggleLogKeep( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        keepLog = !keepLog;
+        save();
+        rsp.forwardToPreviousPage(req);
     }
 
     /**

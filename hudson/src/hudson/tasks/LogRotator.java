@@ -38,8 +38,10 @@ public class LogRotator {
     public void perform(Job<?> job) throws IOException {
         if(numToKeep!=-1) {
             Run[] builds = job.getBuilds().toArray(new Run[0]);
-            for( int i=numToKeep; i<builds.length; i++ )
-                builds[i].delete();
+            for( int i=numToKeep; i<builds.length; i++ ) {
+                if(!builds[i].isKeepLog())
+                    builds[i].delete();
+            }
         }
 
         if(daysToKeep!=-1) {
@@ -47,7 +49,7 @@ public class LogRotator {
             cal.add(Calendar.DAY_OF_YEAR,-daysToKeep);
             // copy it to the array becaues we'll be deleting builds as we go.
             for( Run r : job.getBuilds().toArray(new Run[0]) ) {
-                if(r.getTimestamp().before(cal))
+                if(r.getTimestamp().before(cal) && !r.isKeepLog())
                     r.delete();
             }
         }
