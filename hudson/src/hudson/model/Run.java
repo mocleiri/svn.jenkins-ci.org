@@ -10,6 +10,7 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.File;
@@ -512,6 +513,17 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
         while((len=in.read(buf))>0)
             rsp.getOutputStream().write(buf,0,len);
         in.close();
+        return;
+    }
+
+    /**
+     * Returns the build number in the body.
+     */
+    public void doBuildNumber( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        rsp.setContentType("text/plain");
+        rsp.setCharacterEncoding("US-ASCII");
+        rsp.setStatus(HttpServletResponse.SC_OK);
+        rsp.getWriter().print(number);
         return;
     }
 

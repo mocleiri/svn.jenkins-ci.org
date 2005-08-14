@@ -35,5 +35,10 @@
     </ol>
   </c:otherwise>
 </c:choose>
+
+<h2>Permalinks</h2>
+<ul>
+  <li><a href="buildNumber">Build number</a>
+</ul>
 </l:main-panel>
 <l:footer/>
