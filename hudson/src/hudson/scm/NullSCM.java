@@ -18,7 +18,7 @@ public class NullSCM implements SCM {
         return true;
     }
 
-    public boolean checkout(File dir, BuildListener listener) throws IOException {
+    public boolean checkout(Build build, File dir, BuildListener listener) throws IOException {
         return true;
     }
 

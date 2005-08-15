@@ -25,13 +25,16 @@ public interface SCM {
     /**
      * Obtains a fresh workspace of the module(s) into the specified directory.
      *
+     * <p>
+     * This operation should also capture the information necessary to tag the workspace later.
+     *
      * @param dir
      *      a directory to check out the source code. May contain left-over
      *      fomr the previous build.
      * @return
      *      false if the operation fails. The error should be reported to the listener.
      */
-    boolean checkout( File dir, BuildListener listener ) throws IOException;
+    boolean checkout(Build build, File dir, BuildListener listener) throws IOException;
 
     /**
      * Gets the descriptor for this instance.

@@ -8,6 +8,7 @@ import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.Map;
 
@@ -60,7 +61,7 @@ public final class Build extends Run<Project,Build> implements Runnable {
     public void run() {
         run(new Runner() {
             public Result run(BuildListener listener) throws IOException {
-                if(!project.checkout(listener))
+                if(!project.checkout(Build.this,listener))
                     return Result.FAILURE;
 
                 if(!project.getScm().calcChangeLog(Build.this,new File(getRootDir(),"changelog.xml"),listener))

@@ -6,12 +6,14 @@ import hudson.model.BuildListener;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
+import org.apache.tools.zip.ZipEntry;
+import org.apache.tools.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Map;
@@ -79,19 +81,54 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         return canUseUpdate;
     }
 
-    public boolean checkout(File dir, BuildListener listener) throws IOException {
+    public boolean checkout(Build build, File dir, BuildListener listener) throws IOException {
+        boolean result;
+
         if(canUseUpdate && isUpdatable(dir))
-            return update(dir,listener);
+            result = update(dir,listener);
+        else {
+            Util.deleteContentsRecursive(dir);
 
-        Util.deleteContentsRecursive(dir);
+            String cmd = MessageFormat.format("cvs -Q -z9 -d {0} co {2} {1}",
+                cvsroot,
+                module,
+                branch!=null?"-r "+branch:""
+            );
 
-        String cmd = MessageFormat.format("cvs -Q -z9 -d {0} co {2} {1}",
-            cvsroot,
-            module,
-            branch!=null?"-r "+branch:""
-        );
+            result = run(cmd,listener,dir);
+        }
 
-        return run(cmd,listener,dir);
+        if(!result)
+           return false;
+
+
+        // archive the workspace to support later tagging
+        File archiveFile = new File(build.getRootDir(),"workspace.zip");
+        ZipOutputStream zos = new ZipOutputStream(archiveFile);
+        StringTokenizer tokens = new StringTokenizer(module);
+        while(tokens.hasMoreTokens()) {
+            String m = tokens.nextToken();
+            archive(new File(build.getProject().getWorkspace(),m),m,zos);
+        }
+        zos.close();
+
+        return true;
+    }
+
+    private void archive(File dir,String relPath,ZipOutputStream zos) throws IOException {
+        // TODO: look at CVS/Entires and archive CVS-controlled files only
+        for( File f : dir.listFiles() ) {
+            String name = relPath+'/'+f.getName();
+            if(f.isDirectory()) {
+                archive(f,name,zos);
+            } else {
+                zos.putNextEntry(new ZipEntry(name));
+                FileInputStream fis = new FileInputStream(f);
+                Util.copyStream(fis,zos);
+                fis.close();
+                zos.closeEntry();
+            }
+        }
     }
 
     public boolean update(File dir, BuildListener listener) throws IOException {
@@ -147,15 +184,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
     public boolean calcChangeLog( Build build, File changelogFile, BuildListener listener ) {
         if(build.getPreviousBuild()==null) {
             // nothing to compare against
-            try {
-                FileWriter w = new FileWriter(changelogFile);
-                w.write("<changelog/>");
-                w.close();
-                return true;
-            } catch (IOException e) {
-                e.printStackTrace(listener.error(e.getMessage()));
-                return false;
-            }
+            return createEmptyChangeLog(changelogFile,listener);
         }
 
         listener.getLogger().println("$ computing changelog");
@@ -241,5 +270,5 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             setCvspassFile(req.getParameter("cvs_cvspass"));
             return true;
         }
-    };
+    }
 }

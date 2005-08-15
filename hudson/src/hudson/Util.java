@@ -4,6 +4,8 @@ import hudson.model.BuildListener;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ResourceBundle;
@@ -67,5 +69,12 @@ public class Util {
         } catch (UnknownHostException e) {
             return "localhost";
         }
+    }
+
+    public static void copyStream(InputStream in,OutputStream out) throws IOException {
+        byte[] buf = new byte[256];
+        int len;
+        while((len=in.read(buf))>0)
+            out.write(buf,0,len);
     }
 }

@@ -1,5 +1,6 @@
 package hudson.scm;
 
+import hudson.Proc;
 import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
@@ -11,8 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -38,21 +51,119 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         return useUpdate;
     }
 
+    private Collection<String> getModuleDirNames() {
+        List<String> dirs = new ArrayList<String>();
+        StringTokenizer tokens = new StringTokenizer(modules);
+        while(tokens.hasMoreTokens()) {
+            dirs.add(getLastPathComponent(tokens.nextToken()));
+        }
+        return dirs;
+    }
+
     public boolean calcChangeLog(Build build, File changelogFile, BuildListener listener) throws IOException {
-        // BASE:HEAD isn't very accurate
-        // also the output format needs to be converted
-        // return run(DESCRIPTOR.getSvnExe()+" log --xml --non-interactive -r BASE:HEAD",listener,build.getProject().getWorkspace());
-        listener.getLogger().println("changelog is TBD");        
+        if(build.getPreviousBuild()==null) {
+            // nothing to compare against
+            return createEmptyChangeLog(changelogFile, listener);
+        }
+
+        PrintStream logger = listener.getLogger();
+
+        Map<String,String> previousRevisions = new HashMap<String,String>(); // module -> revision
+        {// read the revision file of the last build
+            File file = getRevisionFile(build.getPreviousBuild());
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+            while((line=br.readLine())!=null) {
+                int index = line.indexOf('/');
+                if(index<0) {
+                    logger.println("Unable to parse the line: "+line);
+                    continue;   // invalid line?
+                }
+                previousRevisions.put(line.substring(0,index), line.substring(index+1));
+            }
+        }
+
+        Map env = createEnvVarMap();
+
+        for( String module : getModuleDirNames() ) {
+            String prevRev = previousRevisions.get(module);
+            if(prevRev==null) {
+                logger.println("no revision recorded for "+module+" in the previous build");
+                continue;
+            }
+
+            String cmd = DESCRIPTOR.getSvnExe()+" log --xml --non-interactive -r "+prevRev+":BASE "+module;
+            logger.println("$ "+cmd);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            int r = new Proc(cmd,env,baos,build.getProject().getWorkspace()).join();
+            if(r!=0) {
+                listener.fatalError("revision check failed");
+                return false;
+            }
+
+            // TODO: changelog format conversion
+        }
+
         return true;
     }
 
-    public boolean checkout(File dir, BuildListener listener) throws IOException {
+    public boolean checkout(Build build, File dir, BuildListener listener) throws IOException {
+        boolean result;
+
         if(useUpdate && isUpdatable(dir))
-            return update(dir,listener);
+            result = update(dir,listener);
+        else {
+            Util.deleteContentsRecursive(dir);
+            result = run(DESCRIPTOR.getSvnExe()+" co -q  "+modules,listener,dir);
+        }
 
-        Util.deleteContentsRecursive(dir);
+        if(!result)
+            return false;
 
-        return run(DESCRIPTOR.getSvnExe()+" co -q  "+modules,listener,dir);
+        PrintStream logger = listener.getLogger();
+
+        {// record the current revision
+            PrintWriter w = new PrintWriter(new FileOutputStream(getRevisionFile(build)));
+
+            Map env = createEnvVarMap();
+
+            // invoke the "svn info"
+            for( String module : getModuleDirNames() ) {
+                String cmd = DESCRIPTOR.getSvnExe()+" info "+module;
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                logger.println("$ "+cmd);
+                int r = new Proc(cmd,env,baos,dir).join();
+                if(r!=0) {
+                    listener.fatalError("revision check failed");
+                    return false;
+                }
+
+                // look for the revision line
+                BufferedReader br = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(baos.toByteArray())));
+                String line;
+                while((line=br.readLine())!=null) {
+                    if(line.startsWith("Revision:"))
+                        break;
+                }
+                if(line==null) {
+                    listener.fatalError("no revision in the svn info output");
+                    return false;
+                }
+
+                w.println( module +'/'+ line.substring("Revision: ".length()) );
+                logger.println(line);
+            }
+
+            w.close();
+        }
+        return true;
+    }
+
+    /**
+     * Gets the file that stores the revision.
+     */
+    private File getRevisionFile(Build build) {
+        return new File(build.getRootDir(),"revision.txt");
     }
 
     public boolean update(File dir, BuildListener listener) throws IOException {
@@ -112,7 +223,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             this.url = url;
         }
 
-        public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+        public void startElement(String uri, String localName, String qName, Attributes attributes) {
             if(!qName.equals("entry"))
                 return;
 
@@ -195,5 +306,5 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             setSvnExe(req.getParameter("svn_exe"));
             return true;
         }
-    };
+    }
 }

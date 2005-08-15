@@ -290,7 +290,7 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
         return ID_FORMATTER.format(timestamp.getTime());
     }
 
-    protected File getRootDir() {
+    public File getRootDir() {
         File f = new File(project.getBuildDir(),getId());
         f.mkdirs();
         return f;

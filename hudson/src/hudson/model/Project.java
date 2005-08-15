@@ -122,13 +122,13 @@ public class Project extends Job<Build> {
         return lastBuild;
     }
 
-    public boolean checkout(BuildListener listener) throws IOException {
+    public boolean checkout(Build build, BuildListener listener) throws IOException {
         if(scm==null)
             return true;    // no SCM
 
         File workspace = getWorkspace();
         workspace.mkdirs();
-        return scm.checkout(workspace,listener);
+        return scm.checkout(build,workspace,listener);
     }
 
     /**

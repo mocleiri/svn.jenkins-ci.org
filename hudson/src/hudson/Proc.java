@@ -71,10 +71,7 @@ public final class Proc {
 
         public void run() {
             try {
-                byte[] buf = new byte[256];
-                int len;
-                while((len=in.read(buf))>0)
-                    out.write(buf,0,len);
+                Util.copyStream(in,out);
                 in.close();
             } catch (IOException e) {
                 ; // TODO: what to do?
