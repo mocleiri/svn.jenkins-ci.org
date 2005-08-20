@@ -26,7 +26,7 @@ import java.util.Vector;
 /**
  * @author Kohsuke Kawaguchi
  */
-public class Project extends Job<Build> {
+public class Project extends Job<Project,Build> {
 
     /**
      * All the builds keyed by their ID.

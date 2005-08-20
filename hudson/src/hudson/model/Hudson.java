@@ -339,7 +339,7 @@ public final class Hudson implements ModelObject {
      */
     public synchronized void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         SortedSet<Run> runs = new TreeSet<Run>(runComparator);
-        for( Job<?> j : getJobs() )
+        for( Job j : getJobs() )
             runs.addAll( j.getBuilds() );
 
         forwardToRss(req,rsp,runs);
@@ -350,7 +350,7 @@ public final class Hudson implements ModelObject {
      */
     public synchronized void doRssFailed( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         SortedSet<Run> runs = new TreeSet<Run>(runComparator);
-        for( Job<?> j : getJobs() )
+        for( Job j : getJobs() )
             runs.addAll( j.getBuilds() );
 
         for (Iterator<Run> i = runs.iterator(); i.hasNext();) {

@@ -35,7 +35,7 @@ public class LogRotator {
         this.numToKeep = numToKeep;
     }
 
-    public void perform(Job<?> job) throws IOException {
+    public void perform(Job<?,?> job) throws IOException {
         if(numToKeep!=-1) {
             Run[] builds = job.getBuilds().toArray(new Run[0]);
             for( int i=numToKeep; i<builds.length; i++ ) {

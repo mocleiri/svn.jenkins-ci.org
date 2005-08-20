@@ -3,13 +3,17 @@ package hudson.scm;
 import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Action;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -103,7 +107,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
 
         // archive the workspace to support later tagging
-        File archiveFile = new File(build.getRootDir(),"workspace.zip");
+        File archiveFile = getArchiveFile(build);
         ZipOutputStream zos = new ZipOutputStream(archiveFile);
         StringTokenizer tokens = new StringTokenizer(module);
         while(tokens.hasMoreTokens()) {
@@ -112,7 +116,17 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         }
         zos.close();
 
+        // contribute the tag action
+        build.getActions().add(new TagAction(build));
+
         return true;
+    }
+
+    /**
+     * Returns the file name used to archive the build.
+     */
+    private static File getArchiveFile(Build build) {
+        return new File(build.getRootDir(),"workspace.zip");
     }
 
     private void archive(File dir,String relPath,ZipOutputStream zos) throws IOException {
@@ -269,6 +283,31 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         public boolean configure( HttpServletRequest req ) {
             setCvspassFile(req.getParameter("cvs_cvspass"));
             return true;
+        }
+    }
+
+    /**
+     * Action for a build that performs the tagging.
+     */
+    public static final class TagAction implements Action {
+        private final Build build;
+
+        public TagAction(Build build) {
+            this.build = build;
+        }
+
+        public String getIconFileName() {
+            return "Save.gif";
+        }
+
+        public String getDisplayName() {
+            return "Tag this build";
+        }
+
+        public void doAction(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+            // getArchiveFile(subject);
+            req.setAttribute("build",build);
+            req.getView(build.getProject().getScm(),"tagForm.jsp").forward(req,rsp);
         }
     }
 }

@@ -10,7 +10,6 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.File;
@@ -39,7 +38,8 @@ import java.util.SimpleTimeZone;
  *
  * @author Kohsuke Kawaguchi
  */
-public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
+public class Run <JobT extends Job,RunT extends Run>
+        extends Actionable implements ModelObject {
 
     protected transient final JobT project;
 
@@ -156,8 +156,6 @@ public class Run <JobT extends Job,RunT extends Run> implements ModelObject {
     public boolean isKeepLog() {
         return keepLog;
     }
-
-
 
     /**
      * The project this build is for.

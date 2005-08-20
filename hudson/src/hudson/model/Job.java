@@ -30,7 +30,8 @@ import java.util.SortedMap;
  *
  * @author Kohsuke Kawaguchi
  */
-public abstract class Job<RunT extends Run<? extends Job,RunT>> implements ModelObject {
+public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
+        extends Actionable implements ModelObject {
     /**
      * Project name.
      */
@@ -134,7 +135,6 @@ public abstract class Job<RunT extends Run<? extends Job,RunT>> implements Model
     public synchronized RunT getBuild(String id) {
         return _getRuns().get(id);
     }
-
 
     /**
      * The file we save our configuration.

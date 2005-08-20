@@ -15,7 +15,7 @@ import java.util.TreeMap;
  *
  * @author Kohsuke Kawaguchi
  */
-public class ExternalJob extends Job<ExternalRun> {
+public class ExternalJob extends Job<ExternalJob,ExternalRun> {
 
     /**
      * We occasionally update the list of {@link Run}s from a file system.

@@ -1,5 +1,5 @@
 <%--
-  Side panel for the build view.
+  Side panel for the project view.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
@@ -18,6 +18,7 @@
       <l:task icon="images/24x24/garbage.gif" href="${rootURL}/${it.url}delete" title="Delete Project" />
       <l:task icon="images/24x24/wrench.gif" href="${rootURL}/${it.url}configure" title="Configure" />
     </l:isAdmin>
+    <st:include page="actions.jsp" />
   </l:tasks>
 
   <st:include page="buildHistory.jsp" />

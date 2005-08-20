@@ -16,6 +16,7 @@
       <l:task icon="images/24x24/garbage.gif" href="delete" title="Delete Job" />
       <l:task icon="images/24x24/wrench.gif" href="configure" title="Configure" />
     </l:isAdmin>
+    <st:include page="actions.jsp" />
   </l:tasks>
 
   <st:include page="buildHistory.jsp" />
