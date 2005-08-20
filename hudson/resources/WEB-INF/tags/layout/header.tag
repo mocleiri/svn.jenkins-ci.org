@@ -11,6 +11,7 @@
   <title>${title}</title>
   <link rel="stylesheet" href="${rootURL}/css/style.css" type="text/css">
   <link rel="stylesheet" href="${rootURL}/css/color.css" type="text/css">
+  <meta name="ROBOTS" content="INDEX,NOFOLLOW">
   <c:if test="${param.auto_refresh}">
     <meta http-equiv="Refresh" content="10">
   </c:if>
