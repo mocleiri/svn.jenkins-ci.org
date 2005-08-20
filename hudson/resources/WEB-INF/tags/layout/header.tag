@@ -5,12 +5,6 @@
 <%--
     defines the header
 --%>
-<%
-  String host = request.getRequestURL().toString();
-  int idx = host.indexOf("//")+2;
-  idx = host.indexOf('/',idx);
-  host = host.substring(0,idx);
-%>
 <c:set var="rootURL" value="${pageContext.request.contextPath}" scope="request" />
 <html>
 <head>
@@ -27,7 +21,7 @@
     <td id="top-panel" colspan="2">
       <table cellpadding="0" cellspacing="0" width="100%" border="0">
         <tr><td style="font-weight:bold; font-size: 2em;">
-          <a href="${rootURL}/"><img src="${rootURL}/images/title.png" /></a>
+          <a href="${rootURL}/"><img src="${rootURL}/images/title.png" alt="title" /></a>
         </td><td>
           <%--form action="search">
             <div id="searchform">
@@ -65,7 +59,7 @@
       <span class="smallfont">
         <c:choose>
           <c:when test="${param.auto_refresh}">
-            <a href="${pageContext.request.requestURL}">DISABLE AUTO REFRESH</a>
+            <a href="?auto_refresh=false">DISABLE AUTO REFRESH</a>
           </c:when>
           <c:otherwise>
             <a href="?auto_refresh=true">ENABLE AUTO REFRESH</a>
