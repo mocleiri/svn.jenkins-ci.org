@@ -38,6 +38,18 @@ public class Util {
             throw new IOException("Unable to delete "+dir);
     }
 
+    /**
+     * Creates a new temporary directory.
+     */
+    public static File createTempDir() throws IOException {
+        File tmp = File.createTempFile("hudson", "tmp");
+        if(!tmp.delete())
+            throw new IOException("Failed to delete "+tmp);
+        if(!tmp.mkdirs())
+            throw new IOException("Failed to create a new directory "+tmp);
+        return tmp;
+    }
+
     private static final Pattern errorCodeParser = Pattern.compile(".*error=([0-9]+).*");
 
     /**

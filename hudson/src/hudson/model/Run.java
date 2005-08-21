@@ -447,7 +447,7 @@ public class Run <JobT extends Job,RunT extends Run>
     /**
      * Save the settings to a file.
      */
-    public void save() throws IOException {
+    public synchronized void save() throws IOException {
         Writer w = new OutputStreamWriter(new FileOutputStream(new File(getRootDir(),"build.xml")),"UTF-8");
         w.write("<?xml version='1.0' encoding='UTF-8'?>\n");
         createConfiguredStream().toXML(this,w);

@@ -11,14 +11,16 @@
 
 <c:set var="it" scope="request" value="${build}" />
 
-<st:include it="${it}" page="sidepanel.jsp" />
+<l:header title="Tag the build" />
+<l:side-panel />
 <l:main-panel>
-  <t:buildCaption>Build #${it.number}</t:buildCaption>
-
-  <form action="${pageContext.request.requestURL}&post=true" method="get">
-    <p>Choose the CVS tag name for this build:</p>
-    <input type="text" value="hudson-${it.number}" />
-    <input type="submit" />
+  <h1>Build #${it.number}</h1>
+  <form action="submit" method="get">
+    <p>
+      Choose the CVS tag name for this build:
+      <input type="text" name="name" value="hudson-${it.number}" />
+      <input type="submit" />
+    </p>
   </form>
 </l:main-panel>
 <l:footer/>

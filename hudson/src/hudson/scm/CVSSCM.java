@@ -4,9 +4,12 @@ import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Action;
+import hudson.model.StreamBuildListener;
+import hudson.model.Result;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
+import org.apache.tools.ant.taskdefs.Expand;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
 import org.kohsuke.stapler.StaplerRequest;
@@ -19,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.text.MessageFormat;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -289,8 +293,19 @@ public class CVSSCM extends AbstractCVSFamilySCM {
     /**
      * Action for a build that performs the tagging.
      */
-    public static final class TagAction implements Action {
+    public final class TagAction implements Action {
         private final Build build;
+
+        /**
+         * If non-null, that means the build is already tagged.
+         */
+        private String tagName;
+
+        /**
+         * If non-null, that means the tagging is in progress
+         * (asynchronously.)
+         */
+        private transient TagWorkerThread workerThread;
 
         public TagAction(Build build) {
             this.build = build;
@@ -304,10 +319,127 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             return "Tag this build";
         }
 
+        public String getTagName() {
+            return tagName;
+        }
+
+        public TagWorkerThread getWorkerThread() {
+            return workerThread;
+        }
+
+        public Build getBuild() {
+            return build;
+        }
+
         public void doAction(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-            // getArchiveFile(subject);
             req.setAttribute("build",build);
-            req.getView(build.getProject().getScm(),"tagForm.jsp").forward(req,rsp);
+            req.getView(this,chooseAction()).forward(req,rsp);
+        }
+
+        private synchronized String chooseAction() {
+            if(tagName!=null)
+                return "alreadyTagged.jsp";
+            if(workerThread!=null)
+                return "inProgress.jsp";
+            return "tagForm.jsp";
+        }
+
+        /**
+         * Invoked to actually tag the workspace.
+         */
+        public synchronized void doSubmit(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+            String name = req.getParameter("name");
+            if(name==null || name.length()==0) {
+                // invalid tag name
+                doAction(req,rsp);
+                return;
+            }
+
+            if(workerThread==null) {
+                workerThread = new TagWorkerThread(name);
+                workerThread.start();
+            }
+
+            doAction(req,rsp);
+        }
+
+        /**
+         * Clears the error status.
+         */
+        public synchronized void doClearError(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+            if(workerThread!=null && !workerThread.isAlive())
+                workerThread = null;
+            doAction(req,rsp);
+        }
+
+        public final class TagWorkerThread extends Thread {
+            private final String tagName;
+            // StringWriter is synchronized
+            private final StringWriter log = new StringWriter();
+
+            public TagWorkerThread(String tagName) {
+                this.tagName = tagName;
+            }
+
+            public String getLog() {
+                // this method can be invoked from another thread.
+                return log.toString();
+            }
+
+            public String getTagName() {
+                return tagName;
+            }
+
+            public void run() {
+                BuildListener listener = new StreamBuildListener(log);
+
+                Result result = Result.FAILURE;
+                File destdir = null;
+                listener.started();
+                try {
+                    destdir = Util.createTempDir();
+
+                    // unzip the archive
+                    listener.getLogger().println("expanding the workspace archive into "+destdir);
+                    Expand e = new Expand();
+                    e.setProject(new Project());
+                    e.setDest(destdir);
+                    e.setSrc(getArchiveFile(build));
+                    e.setTaskType("unzip");
+                    e.execute();
+
+                    // run cvs tag command
+                    listener.getLogger().println("tagging the workspace");
+                    StringTokenizer tokens = new StringTokenizer(CVSSCM.this.module);
+                    while(tokens.hasMoreTokens()) {
+                        String m = tokens.nextToken();
+                        if(!CVSSCM.this.run("cvs tag -R \""+tagName+"\"",listener,new File(destdir,m))) {
+                            listener.getLogger().println("tagging failed");
+                            return;
+                        }
+                    }
+
+                    // completed successfully
+                    synchronized(TagAction.this) {
+                        TagAction.this.tagName = this.tagName;
+                        TagAction.this.workerThread = null;
+                    }
+                    build.save();
+                    
+                } catch (Throwable e) {
+                    e.printStackTrace(listener.fatalError(e.getMessage()));
+                } finally {
+                    try {
+                        if(destdir!=null) {
+                            listener.getLogger().println("cleaning up "+destdir);
+                            Util.deleteRecursive(destdir);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace(listener.fatalError(e.getMessage()));
+                    }
+                    listener.finished(result);
+                }
+            }
         }
     }
 }
