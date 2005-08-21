@@ -115,6 +115,14 @@ public final class Hudson implements ModelObject {
         return "Hudson";
     }
 
+    /**
+     * Dummy method that returns "".
+     * used from JSPs.
+     */
+    public String getUrl() {
+        return "";
+    }
+
     public File getRootDir() {
         return root;
     }
@@ -227,12 +235,11 @@ public final class Hudson implements ModelObject {
     public static final Map<String,String> masterEnvVars;
 
     static {
-        Vector envs = Execute.getProcEnvironment();
+        Vector<String> envs = Execute.getProcEnvironment();
         Map<String,String> m = new HashMap<String,String>();
-        for( int i=0; i<envs.size(); i++ ) {
-            String e = (String)envs.get(i);
-            int idx=e.indexOf('=');
-            m.put(e.substring(0,idx),e.substring(idx+1));
+        for (String e : envs) {
+            int idx = e.indexOf('=');
+            m.put(e.substring(0, idx), e.substring(idx + 1));
         }
         masterEnvVars = Collections.unmodifiableMap(m);
     }
@@ -342,7 +349,7 @@ public final class Hudson implements ModelObject {
         for( Job j : getJobs() )
             runs.addAll( j.getBuilds() );
 
-        forwardToRss(req,rsp,runs);
+        forwardToRss(this,"Hudson all builds",req,rsp,runs);
     }
 
     /**
@@ -358,13 +365,13 @@ public final class Hudson implements ModelObject {
                 i.remove();
         }
 
-        forwardToRss(req,rsp,runs);
+        forwardToRss(this,"Hudson all failures", req,rsp,runs);
     }
 
     /**
      * Sends the RSS feed to the client.
      */
-    static void forwardToRss( StaplerRequest req, HttpServletResponse rsp, Collection<Run> runs) throws IOException, ServletException {
+    static void forwardToRss( Object it, String title, StaplerRequest req, HttpServletResponse rsp, Collection<Run> runs) throws IOException, ServletException {
         GregorianCalendar threshold = new GregorianCalendar();
         threshold.add(Calendar.DAY_OF_YEAR,-7);
 
@@ -382,6 +389,8 @@ public final class Hudson implements ModelObject {
                 i.remove();
         }
 
+        req.setAttribute("it",it);
+        req.setAttribute("title",title);
         req.setAttribute("runs",runs);
         req.getServletContext().getRequestDispatcher("/WEB-INF/rss.jsp").forward(req,rsp);
     }

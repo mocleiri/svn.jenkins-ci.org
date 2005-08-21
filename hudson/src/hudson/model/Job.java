@@ -293,7 +293,7 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
      */
     public synchronized void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         List<Run> runs = new ArrayList<Run>(getBuilds());
-        Hudson.forwardToRss(req,rsp,runs);
+        Hudson.forwardToRss(this,getDisplayName()+" all builds",req,rsp,runs);
     }
 
     /**
@@ -303,6 +303,6 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
         List<Run> runs = new ArrayList<Run>();
         for( Run r=getLastFailedBuild(); r!=null; r=r.getPreviousFailedBuild() )
             runs.add(r);
-        Hudson.forwardToRss(req,rsp,runs);
+        Hudson.forwardToRss(this,getDisplayName()+" all failures",req,rsp,runs);
     }
 }
