@@ -116,28 +116,18 @@ public class Ant implements BuildStep {
         public boolean configure(HttpServletRequest req) {
             boolean r = true;
 
-            List lst = new ArrayList();
             int i;
-            for( i=0; req.getParameter("ant_name"+i)!=null; i++ ) {
-                String name = req.getParameter("ant_name"+i);
-                String home = req.getParameter("ant_home"+i);
-                if(name.length()==0)    continue;
+            String[] names = req.getParameterValues("ant_name");
+            String[] homes = req.getParameterValues("ant_home");
+            int len = Math.min(names.length,homes.length);
+            AntInstallation[] insts = new AntInstallation[len];
 
-                lst.add(new AntInstallation(name,home));
+            for( i=0; i<len; i++ ) {
+                if(names[i].length()==0)    continue;
+                insts[i] = new AntInstallation(names[i],homes[i]);
             }
 
-            if(req.getParameter("ant_delete")!=null) {
-                if(i==lst.size())
-                    lst.remove(i-1);
-                r = false;
-            }
-
-            if(req.getParameter("ant_add")!=null) {
-                r = false;
-                lst.add(new AntInstallation("",""));
-            }
-
-            getProperties().put("installations",lst.toArray(new AntInstallation[lst.size()]));
+            getProperties().put("installations",insts);
 
             save();
 
