@@ -25,6 +25,34 @@
         <c:if test="${it.useSecurity}">checked</c:if>>
     </s:entry>
 
+    <s:section title="JDKs">
+      <s:entry title="JDK installations"
+               description="List of JDK installations on this system">
+        <s:repeatable var="inst" items="${it.JDKs}">
+          <table width="100%">
+            <s:entry title="name">
+              <input class="setting-input" name="jdk_name"
+                type="text" value="${inst.name}">
+            </s:entry>
+
+            <c:set var="status" value="${null}" />
+            <c:if test="${inst!=null && !inst.exists && inst.name!=''}">
+              <c:set var="status" value="<span class=error>No such JDK exists</span>" />
+            </c:if>
+            <s:entry title="JAVA_HOME" description="${status}">
+              <input class="setting-input" name="jdk_home"
+                type="text" value="${inst.javaHome}">
+            </s:entry>
+            <s:entry title="">
+              <div align="right">
+                <s:repeatableDeleteButton />
+              </div>
+            </s:entry>
+          </table>
+        </s:repeatable>
+      </s:entry>
+    </s:section>
+
     <%-- build config pane --%>
     <c:set var="builds" value="<%= hudson.tasks.BuildStep.BUILDERS %>" />
     <c:forEach var="idx" begin="0" end="${f:length(builds)-1}">

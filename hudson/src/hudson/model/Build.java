@@ -114,8 +114,12 @@ public final class Build extends Run<Project,Build> implements Runnable {
     }
 
     @Override
-    public Map getEnvVars() {
-        Map env = super.getEnvVars();
+    public Map<String,String> getEnvVars() {
+        Map<String,String> env = super.getEnvVars();
+
+        JDK jdk = project.getJDK();
+        if(jdk !=null)
+            jdk.buildEnvVars(env);
         project.getScm().buildEnvVars(env);
         return env;
     }

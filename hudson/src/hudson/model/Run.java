@@ -549,8 +549,8 @@ public class Run <JobT extends Job,RunT extends Run>
      *
      * Used by {@link BuildStep}s that invoke external processes.
      */
-    public Map getEnvVars() {
-        Map env = new HashMap(Hudson.masterEnvVars);
+    public Map<String,String> getEnvVars() {
+        Map<String,String> env = new HashMap<String,String>(Hudson.masterEnvVars);
         env.put("BUILD_NUMBER",String.valueOf(number));
         env.put("BUILD_ID",getId());
         return env;

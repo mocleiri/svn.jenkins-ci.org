@@ -74,6 +74,8 @@ public final class Hudson implements ModelObject {
      */
     private boolean shuttingDown;
 
+    private List<JDK> jdks;
+
     public static Hudson getInstance() {
         return theInstance;
     }
@@ -113,6 +115,23 @@ public final class Hudson implements ModelObject {
 
     public String getDisplayName() {
         return "Hudson";
+    }
+
+    public List<JDK> getJDKs() {
+        if(jdks==null)
+            jdks = new ArrayList<JDK>();
+        return jdks;
+    }
+
+    /**
+     * Gets the JDK installation of the given name, or returns null.
+     */
+    public JDK getJDK(String name) {
+        for (JDK j : getJDKs()) {
+            if(j.getName().equals(name))
+                return j;
+        }
+        return null;
     }
 
     /**
@@ -268,14 +287,22 @@ public final class Hudson implements ModelObject {
 
         numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
 
-        synchronized(this) {
-            for( Executor e : executors )
-                if(e.getCurrentBuild()==null)
-                    e.interrupt();
-
-            while(executors.size()<numExecutors)
-                executors.add(new Executor(this));
+        {// update JDK installations
+            jdks.clear();
+            String[] names = req.getParameterValues("jdk_name");
+            String[] homes = req.getParameterValues("jdk_home");
+            int len = Math.min(names.length,homes.length);
+            for(int i=0;i<len;i++) {
+                jdks.add(new JDK(names[i],homes[i]));
+            }
         }
+
+        for( Executor e : executors )
+            if(e.getCurrentBuild()==null)
+                e.interrupt();
+
+        while(executors.size()<numExecutors)
+            executors.add(new Executor(this));
 
         boolean result = true;
 

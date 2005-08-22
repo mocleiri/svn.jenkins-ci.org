@@ -1,12 +1,23 @@
+<%--
+  Config page
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="i" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--
-  Config page
---%>
+
+<s:entry title="JDK"
+         description="JDK to be used for this project">
+  <select class="setting-input" name="jdk">
+    <option>(Default)</option>
+    <c:forEach var="inst" items="${it.parent.JDKs}">
+      <option <c:if test="${inst.name==it.JDK.name}">selected</c:if>>${inst.name}</option>
+    </c:forEach>
+  </select>
+</s:entry>
+
 <%-- SCM config pane --%>
 <s:section title="Source Code Management">
   <c:set var="scms" value="<%= hudson.scm.SCMManager.getSupportedSCMs() %>" />

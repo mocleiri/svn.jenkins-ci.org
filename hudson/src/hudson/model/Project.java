@@ -45,12 +45,29 @@ public class Project extends Job<Project,Build> {
     private List<BuildStep> publishers = new Vector<BuildStep>();
 
     /**
+     * Identifies {@link JDK} to be used.
+     * Null if no explicit configuration is required.
+     *
+     * <p>
+     * Can't store {@link JDK} directly because {@link Hudson} and {@link Project}
+     * are saved independently.
+     *
+     * @see Hudson#getJDK(String)
+     */
+    private String jdk;
+
+    /**
      * Creates a new project.
      */
     public Project(Hudson parent,String name) {
         super(parent,name);
         getBuildDir().mkdirs();
     }
+
+    public JDK getJDK() {
+        return getParent().getJDK(jdk);
+    }
+
 
     protected void onLoad(Hudson root, String name) throws IOException {
         super.onLoad(root, name);
@@ -171,6 +188,8 @@ public class Project extends Job<Project,Build> {
         int scmidx = Integer.parseInt(req.getParameter("scm"));
         scm = SCMManager.getSupportedSCMs()[scmidx].newInstance(req);
 
+        jdk = req.getParameter("jdk");
+
         builders.clear();
         for( int i=0; i<BuildStep.BUILDERS.length; i++ ) {
             if(req.getParameter("builder"+i)!=null) {
@@ -232,6 +251,5 @@ public class Project extends Job<Project,Build> {
         while((len=in.read(buf))>0)
             rsp.getOutputStream().write(buf,0,len);
         in.close();
-        return;
     }
 }
