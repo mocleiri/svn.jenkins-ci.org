@@ -119,7 +119,11 @@ public class Ant implements BuildStep {
             int i;
             String[] names = req.getParameterValues("ant_name");
             String[] homes = req.getParameterValues("ant_home");
-            int len = Math.min(names.length,homes.length);
+            int len;
+            if(names!=null && homes!=null)
+                len = Math.min(names.length,homes.length);
+            else
+                len = 0;
             AntInstallation[] insts = new AntInstallation[len];
 
             for( i=0; i<len; i++ ) {

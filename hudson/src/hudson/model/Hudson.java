@@ -291,9 +291,11 @@ public final class Hudson implements ModelObject {
             jdks.clear();
             String[] names = req.getParameterValues("jdk_name");
             String[] homes = req.getParameterValues("jdk_home");
-            int len = Math.min(names.length,homes.length);
-            for(int i=0;i<len;i++) {
-                jdks.add(new JDK(names[i],homes[i]));
+            if(names!=null && homes!=null) {
+                int len = Math.min(names.length,homes.length);
+                for(int i=0;i<len;i++) {
+                    jdks.add(new JDK(names[i],homes[i]));
+                }
             }
         }
 
