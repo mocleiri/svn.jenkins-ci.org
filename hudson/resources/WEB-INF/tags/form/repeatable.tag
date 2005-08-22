@@ -45,6 +45,9 @@
     <jsp:doBody />
   </div>
 </c:forEach>
+    <%
+      request.removeAttribute((String)var);
+    %>
 <script>
   <%-- master needs to be deleted from the form, or its entry will be sent. --%>
   var master${repeatBlockId} = document.getElementById("block${repeatBlockId}-master");
