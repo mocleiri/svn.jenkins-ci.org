@@ -7,6 +7,8 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -25,15 +27,41 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
 
     private transient SortedMap<String,ExternalRun> runs = null;
 
+    /**
+     * If the reloading of runs are in progress (in another thread,
+     * set to true.)
+     */
+    private transient boolean reloadingInProgress;
+
+    /**
+     * {@link ExternalJob}s that need to be reloaded.
+     */
+    private static final List<ExternalJob> reloadQueue = new LinkedList<ExternalJob>();
+    /*package*/ static final Thread reloadThread = new ReloadThread();
+    static {
+        reloadThread.start();
+    }
+
     public ExternalJob(Hudson parent,String name) {
         super(parent,name);
         getBuildDir().mkdirs();
     }
 
     protected synchronized SortedMap<String,ExternalRun> _getRuns() {
+        if(runs==null) {
+            reload();   // if none is loaded yet, do so immediately
+        }
         if(nextUpdate<System.currentTimeMillis()) {
-            nextUpdate = System.currentTimeMillis()+1000;
-            reload();
+            if(!reloadingInProgress) {
+                // schedule a new reloading operation.
+                // we don't want to block the current thread,
+                // so reloading is done asynchronously.
+                reloadingInProgress = true;
+                synchronized(reloadQueue) {
+                    reloadQueue.add(this);
+                    reloadQueue.notify();
+                }
+            }
         }
         return runs;
     }
@@ -44,7 +72,7 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
     }
 
     private void reload() {
-        runs = new TreeMap<String,ExternalRun>(reverseComparator);
+        TreeMap<String,ExternalRun> runs = new TreeMap<String,ExternalRun>(reverseComparator);
 
         File[] subdirs = getBuildDir().listFiles(new FileFilter() {
             public boolean accept(File subdir) {
@@ -71,6 +99,12 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
             }
         }
 
+        synchronized(this) {
+            // replace the list with new one atomically.
+            this.runs = runs;
+            reloadingInProgress = false;
+            nextUpdate = System.currentTimeMillis()+1000;
+        }
     }
 
 
@@ -88,4 +122,28 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
             return lhs.getName().compareTo(rhs.getName());
         }
     };
+
+
+    /**
+     * Thread that reloads the {@link Run}s.
+     */
+    private static final class ReloadThread extends Thread {
+        private ExternalJob getNext() throws InterruptedException {
+            synchronized(reloadQueue) {
+                while(reloadQueue.isEmpty())
+                    reloadQueue.wait();
+                return reloadQueue.remove(0);
+            }
+        }
+
+        public void run() {
+            try {
+                while(true) {
+                    getNext().reload();
+                }
+            } catch (InterruptedException e) {
+                // treat this as a death signal
+            }
+        }
+    }
 }

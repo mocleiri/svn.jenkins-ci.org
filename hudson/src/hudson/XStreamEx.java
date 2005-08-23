@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.io.BufferedWriter;
 
 /**
  * {@link XStream} with helper methods.
@@ -21,7 +22,7 @@ public class XStreamEx extends XStream {
     }
 
     public void toXML( Object o, File f ) throws IOException {
-        Writer w = new OutputStreamWriter(new FileOutputStream(f),"UTF-8");
+        Writer w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f),"UTF-8"));
         w.write("<?xml version='1.0' encoding='UTF-8'?>\n");
         toXML(o,w);
         w.close();

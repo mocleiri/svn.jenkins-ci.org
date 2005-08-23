@@ -1,6 +1,7 @@
 package hudson.model;
 
 import com.thoughtworks.xstream.io.xml.XppReader;
+import com.thoughtworks.xstream.io.StreamException;
 import hudson.XStreamEx;
 import hudson.scm.SCMDescriptor;
 import hudson.scm.SCMManager;
@@ -19,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -211,9 +213,14 @@ public final class Hudson implements ModelObject {
 
     private void load() throws IOException {
         if(getConfigFile().exists()) {
-            Reader r = new InputStreamReader(new FileInputStream(getConfigFile()),"UTF-8");
-            createConfiguredStream().unmarshal(new XppReader(r),this);
-            r.close();
+            Reader r = new BufferedReader(new InputStreamReader(new FileInputStream(getConfigFile()),"UTF-8"));
+            try {
+                createConfiguredStream().unmarshal(new XppReader(r),this);
+            } catch(StreamException e) {
+                throw new IOException(e.getMessage());
+            } finally {
+                r.close();
+            }
         }
 
         File projectsDir = new File(root,"jobs");
@@ -224,7 +231,7 @@ public final class Hudson implements ModelObject {
             }
         });
         jobs.clear();
-        for (final File subdir : subdirs) {
+        for (File subdir : subdirs) {
             try {
                 Job p = Job.load(this,subdir);
                 jobs.put(p.getName(), p);
@@ -268,8 +275,11 @@ public final class Hudson implements ModelObject {
      */
     public void cleanUp() {
         shuttingDown = true;
-        for( Executor e : executors )
-            e.interrupt();
+        if(executors!=null) {
+            for( Executor e : executors )
+                e.interrupt();
+        }
+        ExternalJob.reloadThread.interrupt();
     }
 
 

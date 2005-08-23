@@ -2,6 +2,7 @@ package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppReader;
+import com.thoughtworks.xstream.io.StreamException;
 import hudson.Util;
 import hudson.tasks.LogRotator;
 import org.kohsuke.stapler.StaplerRequest;
@@ -16,6 +17,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -214,7 +217,7 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
      * Save the settings to a file.
      */
     public synchronized void save() throws IOException {
-        Writer w = new OutputStreamWriter(new FileOutputStream(getConfigFile()),"UTF-8");
+        Writer w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(getConfigFile()),"UTF-8"));
         w.write("<?xml version='1.0' encoding='UTF-8'?>\n");
         createConfiguredStream().toXML(this,w);
         w.close();
@@ -230,9 +233,14 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
      * Loads a project from a config file.
      */
     static Job load(Hudson root, File dir) throws IOException {
-        Reader r = new InputStreamReader(new FileInputStream(new File(dir,"config.xml")),"UTF-8");
-        Job job = (Job)createConfiguredStream().unmarshal(new XppReader(r));
-        r.close();
+        Reader r = new BufferedReader(new InputStreamReader(new FileInputStream(new File(dir,"config.xml")),"UTF-8"));
+        try {
+            Job job = (Job)createConfiguredStream().unmarshal(new XppReader(r));
+        } catch(StreamException e) {
+            throw new IOException(e.getMessage());
+        } finally {
+            r.close();
+        }
 
         job.onLoad(root,dir.getName());
 
