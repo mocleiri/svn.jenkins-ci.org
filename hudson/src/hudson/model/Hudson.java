@@ -1,6 +1,6 @@
 package hudson.model;
 
-import hudson.XStreamEx;
+import hudson.XmlFile;
 import hudson.scm.SCMDescriptor;
 import hudson.scm.SCMManager;
 import hudson.tasks.BuildStep;
@@ -29,6 +29,8 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
+
+import com.thoughtworks.xstream.XStream;
 
 /**
  * Root object of the system.
@@ -191,8 +193,10 @@ public final class Hudson implements ModelObject {
     /**
      * The file we save our configuration.
      */
-    private File getConfigFile() {
-        return new File(root,"config.xml");
+    private XmlFile getConfigFile() {
+        XStream xs = new XStream();
+        xs.alias("hudson",Hudson.class);
+        return new XmlFile(xs, new File(root,"config.xml"));
     }
 
     /**
@@ -206,9 +210,9 @@ public final class Hudson implements ModelObject {
     }
 
     private void load() throws IOException {
-        if(getConfigFile().exists()) {
-            createConfiguredStream().unmarshal(getConfigFile(),this);
-        }
+        XmlFile cfg = getConfigFile();
+        if(cfg.exists())
+            cfg.unmarshal(this);
 
         File projectsDir = new File(root,"jobs");
         projectsDir.mkdirs();
@@ -232,13 +236,7 @@ public final class Hudson implements ModelObject {
      * Save the settings to a file.
      */
     public synchronized void save() throws IOException {
-        createConfiguredStream().toXML(this,getConfigFile());
-    }
-
-    private static XStreamEx createConfiguredStream() {
-        XStreamEx xs = new XStreamEx();
-        xs.alias("hudson",Hudson.class);
-        return xs;
+        getConfigFile().write(this);
     }
 
 

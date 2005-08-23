@@ -1,7 +1,7 @@
 package hudson.model;
 
 import hudson.Util;
-import hudson.XStreamEx;
+import hudson.XmlFile;
 import hudson.tasks.LogRotator;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -14,6 +14,8 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.SortedMap;
+
+import com.thoughtworks.xstream.XStream;
 
 /**
  * A job is an runnable entity under the monitoring of Hudson.
@@ -132,8 +134,10 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
     /**
      * The file we save our configuration.
      */
-    protected final File getConfigFile() {
-        return new File(root,"config.xml");
+    protected static XmlFile getConfigFile(File dir) {
+        XStream xs = new XStream();
+        xs.alias("project",Project.class);
+        return new XmlFile(xs,new File(dir,"config.xml"));
     }
 
     File getBuildDir() {
@@ -207,22 +211,15 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
      * Save the settings to a file.
      */
     public synchronized void save() throws IOException {
-        createConfiguredStream().toXML(this,getConfigFile());
-    }
-
-    protected static XStreamEx createConfiguredStream() {
-        XStreamEx xs = new XStreamEx();
-        xs.alias("project",Project.class);
-        return xs;
+        getConfigFile(root).write(this);
     }
 
     /**
      * Loads a project from a config file.
      */
     static Job load(Hudson root, File dir) throws IOException {
-        Job job = (Job)createConfiguredStream().fromXML(new File(dir,"config.xml"));
+        Job job = (Job)getConfigFile(dir).read();
         job.onLoad(root,dir.getName());
-
         return job;
     }
 

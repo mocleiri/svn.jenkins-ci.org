@@ -2,7 +2,7 @@ package hudson.model;
 
 import hudson.CloseProofOutputStream;
 import hudson.Util;
-import hudson.XStreamEx;
+import hudson.XmlFile;
 import hudson.tasks.BuildStep;
 import hudson.tasks.LogRotator;
 import org.kohsuke.stapler.StaplerRequest;
@@ -28,6 +28,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SimpleTimeZone;
+
+import com.thoughtworks.xstream.XStream;
 
 /**
  * A particular execution of {@link Job}.
@@ -118,7 +120,7 @@ public class Run <JobT extends Job,RunT extends Run>
             throw new IOException("Invalid directory name "+e.getMessage());
         }
         this.building = true;
-        load(buildDir);
+        getDataFile().unmarshal(this); // load the rest of the data
     }
 
 
@@ -444,18 +446,14 @@ public class Run <JobT extends Job,RunT extends Run>
      * Save the settings to a file.
      */
     public synchronized void save() throws IOException {
-        createConfiguredStream().toXML(this,new File(getRootDir(),"build.xml"));
+        getDataFile().write(this);
     }
 
-    private void load(File buildDir) throws IOException {
-        createConfiguredStream().unmarshal(new File(buildDir,"build.xml"),this);
-    }
-
-    private static XStreamEx createConfiguredStream() {
-        XStreamEx xs = new XStreamEx();
+    private XmlFile getDataFile() {
+        XStream xs = new XStream();
         xs.alias("build",Build.class);
         xs.registerConverter(Result.conv);
-        return xs;
+        return new XmlFile(xs,new File(getRootDir(),"build.xml"));
     }
 
     /**

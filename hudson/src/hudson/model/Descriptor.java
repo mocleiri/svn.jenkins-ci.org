@@ -1,6 +1,6 @@
 package hudson.model;
 
-import hudson.XStreamEx;
+import hudson.XmlFile;
 import org.kohsuke.stapler.Stapler;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,7 +60,7 @@ public abstract class Descriptor {
     protected synchronized void save() {
         if(properties!=null)
             try {
-                new XStreamEx().toXML(properties,getConfigFile());
+                getConfigFile().write(properties);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -68,18 +68,18 @@ public abstract class Descriptor {
 
     private Map load() {
         // load
-        File file = getConfigFile();
+        XmlFile file = getConfigFile();
         if(!file.exists())
             return new HashMap();
 
         try {
-            return (Map)new XStreamEx().fromXML(file);
+            return (Map)file.read();
         } catch (IOException e) {
             return new HashMap();
         }
     }
 
-    private File getConfigFile() {
-        return new File(Hudson.getInstance().getRootDir(),clazz.getName()+".xml");
+    private XmlFile getConfigFile() {
+        return new XmlFile(new File(Hudson.getInstance().getRootDir(),clazz.getName()+".xml"));
     }
 }
