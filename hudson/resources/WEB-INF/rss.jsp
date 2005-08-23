@@ -5,7 +5,7 @@
 <c:set var="rootURL" value="${pageContext.request.rootPath}" scope="request" />
 
 <feed version="0.3" xmlns="http://purl.org/atom/ns#">
-  <title>${it.displayName} history</title>
+  <title>${title}</title>
   <link rel="alternate" type="text/html" href="${rootURL}/${it.url}"/>
 
   <c:choose>
