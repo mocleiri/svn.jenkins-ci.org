@@ -1,6 +1,7 @@
 package hudson.model;
 
 import hudson.Proc;
+import static hudson.model.Hudson.isWindows;
 import hudson.scm.CVSChangeLog;
 import hudson.tasks.BuildStep;
 import org.xml.sax.SAXException;
@@ -8,11 +9,8 @@ import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.Map;
-
-import static hudson.model.Hudson.isWindows;
 
 /**
  * @author Kohsuke Kawaguchi

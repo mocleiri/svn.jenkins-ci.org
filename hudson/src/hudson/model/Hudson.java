@@ -1,7 +1,5 @@
 package hudson.model;
 
-import com.thoughtworks.xstream.io.xml.XppReader;
-import com.thoughtworks.xstream.io.StreamException;
 import hudson.XStreamEx;
 import hudson.scm.SCMDescriptor;
 import hudson.scm.SCMManager;
@@ -16,11 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -213,14 +207,7 @@ public final class Hudson implements ModelObject {
 
     private void load() throws IOException {
         if(getConfigFile().exists()) {
-            Reader r = new BufferedReader(new InputStreamReader(new FileInputStream(getConfigFile()),"UTF-8"));
-            try {
-                createConfiguredStream().unmarshal(new XppReader(r),this);
-            } catch(StreamException e) {
-                throw new IOException(e.getMessage());
-            } finally {
-                r.close();
-            }
+            createConfiguredStream().unmarshal(getConfigFile(),this);
         }
 
         File projectsDir = new File(root,"jobs");

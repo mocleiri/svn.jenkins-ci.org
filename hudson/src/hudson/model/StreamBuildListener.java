@@ -2,9 +2,9 @@ package hudson.model;
 
 import uk.ltd.getahead.dwr.util.WriterOutputStream;
 
-import java.io.Writer;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.Writer;
 
 /**
  * {@link BuildListener} that writes to a {@link Writer}.

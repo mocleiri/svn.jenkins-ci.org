@@ -1,24 +1,14 @@
 package hudson.model;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.XppReader;
-import com.thoughtworks.xstream.io.StreamException;
 import hudson.Util;
+import hudson.XStreamEx;
 import hudson.tasks.LogRotator;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -217,14 +207,11 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
      * Save the settings to a file.
      */
     public synchronized void save() throws IOException {
-        Writer w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(getConfigFile()),"UTF-8"));
-        w.write("<?xml version='1.0' encoding='UTF-8'?>\n");
-        createConfiguredStream().toXML(this,w);
-        w.close();
+        createConfiguredStream().toXML(this,getConfigFile());
     }
 
-    protected static XStream createConfiguredStream() {
-        XStream xs = new XStream();
+    protected static XStreamEx createConfiguredStream() {
+        XStreamEx xs = new XStreamEx();
         xs.alias("project",Project.class);
         return xs;
     }
@@ -233,15 +220,7 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
      * Loads a project from a config file.
      */
     static Job load(Hudson root, File dir) throws IOException {
-        Reader r = new BufferedReader(new InputStreamReader(new FileInputStream(new File(dir,"config.xml")),"UTF-8"));
-        try {
-            Job job = (Job)createConfiguredStream().unmarshal(new XppReader(r));
-        } catch(StreamException e) {
-            throw new IOException(e.getMessage());
-        } finally {
-            r.close();
-        }
-
+        Job job = (Job)createConfiguredStream().fromXML(new File(dir,"config.xml"));
         job.onLoad(root,dir.getName());
 
         return job;

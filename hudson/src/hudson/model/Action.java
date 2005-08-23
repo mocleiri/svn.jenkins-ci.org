@@ -4,8 +4,8 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
-import java.io.Serializable;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Contributes an item to the task list.

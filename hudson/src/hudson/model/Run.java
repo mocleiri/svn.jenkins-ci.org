@@ -1,10 +1,8 @@
 package hudson.model;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.XppReader;
-import com.thoughtworks.xstream.io.StreamException;
 import hudson.CloseProofOutputStream;
 import hudson.Util;
+import hudson.XStreamEx;
 import hudson.tasks.BuildStep;
 import hudson.tasks.LogRotator;
 import org.kohsuke.stapler.StaplerRequest;
@@ -18,13 +16,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.io.Reader;
 import java.io.Writer;
-import java.io.BufferedWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -450,25 +444,15 @@ public class Run <JobT extends Job,RunT extends Run>
      * Save the settings to a file.
      */
     public synchronized void save() throws IOException {
-        Writer w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(getRootDir(),"build.xml")),"UTF-8"));
-        w.write("<?xml version='1.0' encoding='UTF-8'?>\n");
-        createConfiguredStream().toXML(this,w);
-        w.close();
+        createConfiguredStream().toXML(this,new File(getRootDir(),"build.xml"));
     }
 
     private void load(File buildDir) throws IOException {
-        Reader r = new BufferedReader(new InputStreamReader(new FileInputStream(new File(buildDir,"build.xml")),"UTF-8"));
-        try {
-            createConfiguredStream().unmarshal(new XppReader(r),this);
-        } catch (StreamException e) {
-            throw new IOException(e.getMessage());
-        } finally {
-            r.close();
-        }
+        createConfiguredStream().unmarshal(new File(buildDir,"build.xml"),this);
     }
 
-    private static XStream createConfiguredStream() {
-        XStream xs = new XStream();
+    private static XStreamEx createConfiguredStream() {
+        XStreamEx xs = new XStreamEx();
         xs.alias("build",Build.class);
         xs.registerConverter(Result.conv);
         return xs;
