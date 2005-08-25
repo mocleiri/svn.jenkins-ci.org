@@ -413,7 +413,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
                     StringTokenizer tokens = new StringTokenizer(CVSSCM.this.module);
                     while(tokens.hasMoreTokens()) {
                         String m = tokens.nextToken();
-                        if(!CVSSCM.this.run("cvs tag -R \""+tagName+"\"",listener,new File(destdir,m))) {
+                        if(!CVSSCM.this.run("cvs tag -R "+tagName,listener,new File(destdir,m))) {
                             listener.getLogger().println("tagging failed");
                             return;
                         }
@@ -425,7 +425,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
                         TagAction.this.workerThread = null;
                     }
                     build.save();
-                    
+
                 } catch (Throwable e) {
                     e.printStackTrace(listener.fatalError(e.getMessage()));
                 } finally {
