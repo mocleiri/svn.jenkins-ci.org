@@ -542,6 +542,7 @@ public class Run <JobT extends Job,RunT extends Run>
         Map<String,String> env = new HashMap<String,String>(Hudson.masterEnvVars);
         env.put("BUILD_NUMBER",String.valueOf(number));
         env.put("BUILD_ID",getId());
+        env.put("JOB_NAME",getParent().getName());
         return env;
     }
 }
