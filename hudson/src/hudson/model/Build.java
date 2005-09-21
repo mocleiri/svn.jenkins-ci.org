@@ -76,7 +76,8 @@ public final class Build extends Run<Project,Build> implements Runnable {
                 if(!isWindows()) {
                     try {
                         // ignore a failure.
-                        new Proc(new String[]{"rm","../latest"},new String[0],listener.getLogger(),getProject().getBuildDir()).join();
+                        new Proc(new String[]{"rm","../lastSuccessful"},new String[0],listener.getLogger(),getProject().getBuildDir()).join();
+
                         int r = new Proc(new String[]{
                             "ln","-s","builds/"+getId()/*ugly*/,"../lastSuccessful"},
                             new String[0],listener.getLogger(),getProject().getBuildDir()).join();
