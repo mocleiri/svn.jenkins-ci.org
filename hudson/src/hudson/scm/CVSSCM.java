@@ -23,9 +23,12 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.io.InputStreamReader;
 import java.text.MessageFormat;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * CVS.
@@ -134,8 +137,20 @@ public class CVSSCM extends AbstractCVSFamilySCM {
     }
 
     private void archive(File dir,String relPath,ZipOutputStream zos) throws IOException {
-        // TODO: look at CVS/Entires and archive CVS-controlled files only
+        List<String> knownFiles = new ArrayList<String>();
+        // see http://www.monkey.org/openbsd/archive/misc/9607/msg00056.html for what Entries.Log is for
+        parseCVSEntries(new File(dir,"CVS/Entries"),knownFiles);
+        parseCVSEntries(new File(dir,"CVS/Entries.Log"),knownFiles);
+        parseCVSEntries(new File(dir,"CVS/Entries.Extra"),knownFiles);
+        boolean hasCVSdirs = !knownFiles.isEmpty();
+        knownFiles.add("CVS");
+
         for( File f : dir.listFiles() ) {
+            if(hasCVSdirs && !knownFiles.contains(f.getName())) {
+                // not controlled in CVS. Skip.
+                // but also make sure that we archive CVS/*, which doesn't have CVS/CVS
+                continue;
+            }
             String name = relPath+'/'+f.getName();
             if(f.isDirectory()) {
                 archive(f,name,zos);
@@ -147,6 +162,23 @@ public class CVSSCM extends AbstractCVSFamilySCM {
                 zos.closeEntry();
             }
         }
+    }
+
+    /**
+     * Parses the CVS/Entries file and adds file/directory names to the list.
+     */
+    private void parseCVSEntries(File entries, List<String> knownFiles) throws IOException {
+        if(!entries.exists())
+            return;
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(entries)));
+        String line;
+        while((line=in.readLine())!=null) {
+            String[] tokens = line.split("/+");
+            if(tokens==null || tokens.length<2)    continue;   // invalid format
+            knownFiles.add(tokens[1]);
+        }
+        in.close();
     }
 
     public boolean update(File dir, BuildListener listener) throws IOException {
