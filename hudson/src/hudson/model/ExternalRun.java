@@ -1,10 +1,15 @@
 package hudson.model;
 
 import hudson.Proc;
+import hudson.util.DualOutputStream;
+import hudson.util.DecodingStream;
+import org.xmlpull.mxp1.MXParser;
+import org.xmlpull.v1.XmlPullParser;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.Reader;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -41,37 +46,41 @@ public class ExternalRun extends Run<ExternalJob,ExternalRun> {
         });
     }
 
-    private static class DualOutputStream extends OutputStream {
-        private final OutputStream lhs,rhs;
+    /**
+     * Instead of performing a build, accept the log and the return code
+     * from a remote machine in an XML format of:
+     *
+     * <pre><xmp>
+     * <run>
+     *  <log>...console output...</log>
+     *  <result>exit code</result>
+     * </run>
+     * </xmp></pre>
+     */
+    public void acceptRemoteSubmission(final Reader in) {
+        run(new Runner() {
+            public Result run(BuildListener listener) throws Exception {
+                PrintStream logger = new PrintStream(new DecodingStream(listener.getLogger()));
 
-        public DualOutputStream(OutputStream lhs, OutputStream rhs) {
-            this.lhs = lhs;
-            this.rhs = rhs;
-        }
+                XmlPullParser xpp = new MXParser();
+                xpp.setInput(in);
+                xpp.nextTag();  // get to the <run>
+                xpp.nextTag();  // get to the <log>
+                while(xpp.nextToken()!=XmlPullParser.END_TAG) {
+                    int type = xpp.getEventType();
+                    if(type==XmlPullParser.TEXT
+                    || type==XmlPullParser.CDSECT)
+                        logger.print(xpp.getText());
+                }
+                xpp.nextTag(); // get to <result>
 
-        public void write(int b) throws IOException {
-            lhs.write(b);
-            rhs.write(b);
-        }
+                return Integer.parseInt(xpp.nextText())==0?Result.SUCCESS:Result.FAILURE;
+            }
 
-        public void write(byte[] b) throws IOException {
-            lhs.write(b);
-            rhs.write(b);
-        }
-
-        public void write(byte[] b, int off, int len) throws IOException {
-            lhs.write(b,off,len);
-            rhs.write(b,off,len);
-        }
-
-        public void flush() throws IOException {
-            lhs.flush();
-            rhs.flush();
-        }
-
-        public void close() throws IOException {
-            lhs.close();
-            rhs.close();
-        }
+            public void post(BuildListener listener) {
+                // do nothing
+            }
+        });
     }
+
 }

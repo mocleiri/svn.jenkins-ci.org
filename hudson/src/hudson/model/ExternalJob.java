@@ -12,6 +12,12 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * Job that runs outside Hudson.
  *
@@ -116,6 +122,16 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
         _getRuns().put(run.getId(),run);
         return run;
     }
+
+    /**
+     * Used to post the build result from a remote machine.
+     */
+    public void doPostBuildResult( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        ExternalRun run = newBuild();
+        run.acceptRemoteSubmission(req.getReader());
+        rsp.setStatus(HttpServletResponse.SC_OK);
+    }
+
 
     private static final Comparator<File> fileComparator = new Comparator<File>() {
         public int compare(File lhs, File rhs) {
