@@ -12,9 +12,9 @@ import java.io.File;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,8 +81,30 @@ public class Main {
     public static int remotePost(String[] args) throws Exception {
         String projectName = args[0];
 
+        String home = getHudsonHome();
+        if(!home.endsWith("/"))     home = home + '/';  // make sure it ends with '/'
+
+        {// check if the home is set correctly
+            HttpURLConnection con = (HttpURLConnection)new URL(home).openConnection();
+            con.connect();
+            if(con.getResponseCode()!=200
+            || con.getHeaderField("X-Hudson")==null) {
+                System.err.println(home+" is not Hudson");
+                return -1;
+            }
+        }
+
+        {// check if the job name is correct
+            HttpURLConnection con = (HttpURLConnection)new URL(home+"job/"+projectName+"/acceptBuildResult").openConnection();
+            con.connect();
+            if(con.getResponseCode()!=200) {
+                System.err.println(projectName+" is not a valid job name on "+home);
+                return -1;
+            }
+        }
+
         // start a remote connection
-        HttpURLConnection con = (HttpURLConnection) new URL(getHudsonHome()+"job/"+projectName+"/postBuildResult").openConnection();
+        HttpURLConnection con = (HttpURLConnection) new URL(home+"job/"+projectName+"/postBuildResult").openConnection();
         con.setDoOutput(true);
         con.connect();
         OutputStream os = con.getOutputStream();

@@ -124,6 +124,13 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
     }
 
     /**
+     * Used to check if this is an external job and ready to accept a build result.
+     */
+    public void doAcceptBuildResult( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        rsp.setStatus(HttpServletResponse.SC_OK);
+    }
+
+    /**
      * Used to post the build result from a remote machine.
      */
     public void doPostBuildResult( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
