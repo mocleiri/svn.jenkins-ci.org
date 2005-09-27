@@ -3,6 +3,7 @@ package hudson.model;
 import hudson.CloseProofOutputStream;
 import hudson.Util;
 import hudson.XmlFile;
+import hudson.EnvVars;
 import hudson.tasks.BuildStep;
 import hudson.tasks.LogRotator;
 import org.kohsuke.stapler.StaplerRequest;
@@ -539,7 +540,7 @@ public class Run <JobT extends Job,RunT extends Run>
      * Used by {@link BuildStep}s that invoke external processes.
      */
     public Map<String,String> getEnvVars() {
-        Map<String,String> env = new HashMap<String,String>(Hudson.masterEnvVars);
+        Map<String,String> env = new HashMap<String,String>(EnvVars.masterEnvVars);
         env.put("BUILD_NUMBER",String.valueOf(number));
         env.put("BUILD_ID",getId());
         env.put("JOB_NAME",getParent().getName());

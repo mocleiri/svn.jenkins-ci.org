@@ -65,7 +65,7 @@ public class WebAppMain implements ServletContextListener {
         }
 
         // look at the env var next
-        String env = Hudson.masterEnvVars.get("HUDSON_HOME");
+        String env = EnvVars.masterEnvVars.get("HUDSON_HOME");
         if(env!=null)
             return new File(env);
 

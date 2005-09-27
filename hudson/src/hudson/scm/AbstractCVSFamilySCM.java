@@ -3,6 +3,7 @@ package hudson.scm;
 import hudson.model.BuildListener;
 import hudson.model.Hudson;
 import hudson.Proc;
+import hudson.EnvVars;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +32,7 @@ abstract class AbstractCVSFamilySCM implements SCM {
     }
 
     protected final Map createEnvVarMap() {
-        Map env = new HashMap(Hudson.masterEnvVars);
+        Map env = new HashMap(EnvVars.masterEnvVars);
         buildEnvVars(env);
         return env;
     }

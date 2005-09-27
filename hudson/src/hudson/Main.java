@@ -15,6 +15,7 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class Main {
     }
 
     private static String getHudsonHome() {
-        return Hudson.masterEnvVars.get("HUDSON_HOME");
+        return EnvVars.masterEnvVars.get("HUDSON_HOME");
     }
 
     /**
@@ -89,22 +90,24 @@ public class Main {
             con.connect();
             if(con.getResponseCode()!=200
             || con.getHeaderField("X-Hudson")==null) {
-                System.err.println(home+" is not Hudson");
+                System.err.println(home+" is not Hudson ("+con.getResponseMessage()+")");
                 return -1;
             }
         }
 
+        String projectNameEnc = URLEncoder.encode(projectName,"UTF-8").replaceAll("\\+","%20");
+
         {// check if the job name is correct
-            HttpURLConnection con = (HttpURLConnection)new URL(home+"job/"+projectName+"/acceptBuildResult").openConnection();
+            HttpURLConnection con = (HttpURLConnection)new URL(home+"job/"+projectNameEnc+"/acceptBuildResult").openConnection();
             con.connect();
             if(con.getResponseCode()!=200) {
-                System.err.println(projectName+" is not a valid job name on "+home);
+                System.err.println(projectName+" is not a valid job name on "+home+" ("+con.getResponseMessage()+")");
                 return -1;
             }
         }
 
         // start a remote connection
-        HttpURLConnection con = (HttpURLConnection) new URL(home+"job/"+projectName+"/postBuildResult").openConnection();
+        HttpURLConnection con = (HttpURLConnection) new URL(home+"job/"+projectNameEnc+"/postBuildResult").openConnection();
         con.setDoOutput(true);
         con.connect();
         OutputStream os = con.getOutputStream();
