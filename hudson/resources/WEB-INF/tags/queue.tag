@@ -17,7 +17,12 @@
     <c:otherwise>
       <c:forEach var="item" items="${app.queue.items}">
         <tr>
-          <td class="pane">${item.project.name}</td>
+          <td class="pane" width="100%"><a href="${item.project.url}">
+            ${item.project.name}
+          </a></td>
+          <td class="pane" width=16 align=center valign=middle>
+            <a href="${item.project.url}cancelQueue"><img src="${rootURL}/images/16x16/x.gif" /></a>
+          </td>
         </tr>
       </c:forEach>
     </c:otherwise>

@@ -9,11 +9,13 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
+ * Build queue.
+ *
  * @author Kohsuke Kawaguchi
  */
 public class Queue {
 
-    private final Comparator<Item> itemComparator = new Comparator<Item>() {
+    private static final Comparator<Item> itemComparator = new Comparator<Item>() {
         public int compare(Item lhs, Item rhs) {
             int r = lhs.timestamp.getTime().compareTo(rhs.timestamp.getTime());
             if(r!=0)    return r;
@@ -62,6 +64,7 @@ public class Queue {
                 return;
             }
         }
+        blockedProjects.remove(p);
     }
 
     public synchronized boolean isEmpty() {
@@ -88,6 +91,8 @@ public class Queue {
 
     /**
      * Called by the executor to fetch something to build next.
+     *
+     * This method blocks until a next project becomes buildable.
      */
     public synchronized Project pop() throws InterruptedException {
         outer:

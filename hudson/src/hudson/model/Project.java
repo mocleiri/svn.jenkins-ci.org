@@ -182,6 +182,14 @@ public class Project extends Job<Project,Build> {
     }
 
     /**
+     * Cancels a scheduled build.
+     */
+    public void doCancelQueue( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        getParent().getQueue().cancel(this);
+        rsp.forwardToPreviousPage(req);
+    }
+
+    /**
      * Accepts submission from the configuration page.
      */
     public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException {
