@@ -39,7 +39,7 @@ public final class XmlFile {
         try {
             return xs.fromXML(r);
         } catch(StreamException e) {
-            throw new IOException2(e);
+            throw new IOException2("Unable to read "+file,e);
         } finally {
             r.close();
         }

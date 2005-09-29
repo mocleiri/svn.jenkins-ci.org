@@ -15,6 +15,11 @@ public class IOException2 extends IOException  {
         this.cause = cause;
     }
 
+    public IOException2(String s, Exception cause) {
+        super(s);
+        this.cause = cause;
+    }
+
     public Throwable getCause() {
         return cause;
     }

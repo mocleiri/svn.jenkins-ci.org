@@ -4,6 +4,7 @@ import hudson.CloseProofOutputStream;
 import hudson.Util;
 import hudson.XmlFile;
 import hudson.EnvVars;
+import hudson.util.IOException2;
 import hudson.tasks.BuildStep;
 import hudson.tasks.LogRotator;
 import org.kohsuke.stapler.StaplerRequest;
@@ -116,9 +117,9 @@ public class Run <JobT extends Job,RunT extends Run>
         try {
             this.timestamp.setTime(ID_FORMATTER.parse(buildDir.getName()));
         } catch (ParseException e) {
-            throw new IOException("Invalid directory name "+e.getMessage());
+            throw new IOException2("Invalid directory name "+buildDir,e);
         } catch (NumberFormatException e) {
-            throw new IOException("Invalid directory name "+e.getMessage());
+            throw new IOException2("Invalid directory name "+buildDir,e);
         }
         this.building = true;
         getDataFile().unmarshal(this); // load the rest of the data
