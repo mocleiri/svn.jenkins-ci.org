@@ -223,9 +223,9 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
         return job;
     }
 
-    protected static final Comparator reverseComparator = new Comparator() {
-        public int compare(Object o1, Object o2) {
-            return -((Comparable)o1).compareTo((Comparable)o2);
+    protected static final Comparator<Comparable> reverseComparator = new Comparator<Comparable>() {
+        public int compare(Comparable o1, Comparable o2) {
+            return -o1.compareTo(o2);
         }
     };
 
