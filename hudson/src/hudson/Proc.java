@@ -11,6 +11,7 @@ import java.util.Map;
  */
 public final class Proc {
     private final Process proc;
+    private final Thread t1,t2;
 
     public Proc(String cmd,Map env, OutputStream out, File workDir) throws IOException {
         this(cmd,mapToEnv(env),out,workDir);
@@ -44,8 +45,10 @@ public final class Proc {
 
     private Proc( Process proc, InputStream in, OutputStream out ) throws IOException {
         this.proc = proc;
-        new Copier(proc.getInputStream(),out).start();
-        new Copier(proc.getErrorStream(),out).start();
+        t1 = new Copier(proc.getInputStream(), out);
+        t1.start();
+        t2 = new Copier(proc.getErrorStream(), out);
+        t2.start();
         if(in!=null)
             new ByteCopier(in,proc.getOutputStream()).start();
         else
@@ -54,6 +57,8 @@ public final class Proc {
 
     public int join() {
         try {
+            t1.join();
+            t2.join();
             return proc.waitFor();
         } catch (InterruptedException e) {
             return -1;
