@@ -221,6 +221,8 @@ public final class Hudson implements ModelObject {
                 return child.isDirectory();
             }
         });
+        if(subdirs==null)
+            throw new IOException("Unable to create "+projectsDir+"\nPermission issue?");
         jobs.clear();
         for (File subdir : subdirs) {
             try {
