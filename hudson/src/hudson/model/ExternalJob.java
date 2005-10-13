@@ -78,36 +78,38 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
     }
 
     private void reload() {
-        TreeMap<String,ExternalRun> runs = new TreeMap<String,ExternalRun>(reverseComparator);
+        try {
+            TreeMap<String,ExternalRun> runs = new TreeMap<String,ExternalRun>(reverseComparator);
 
-        File[] subdirs = getBuildDir().listFiles(new FileFilter() {
-            public boolean accept(File subdir) {
-                return subdir.isDirectory();
-            }
-        });
+            File[] subdirs = getBuildDir().listFiles(new FileFilter() {
+                public boolean accept(File subdir) {
+                    return subdir.isDirectory();
+                }
+            });
 
-        Arrays.sort(subdirs,fileComparator);
-        ExternalRun lastBuild = null;
+            Arrays.sort(subdirs,fileComparator);
+            ExternalRun lastBuild = null;
 
-        for( File dir : subdirs ) {
-            try {
-                ExternalRun b = new ExternalRun(this,dir,lastBuild);
-                lastBuild = b;
-                runs.put( b.getId(), b );
-            } catch (IOException e) {
-                e.printStackTrace();
+            for( File dir : subdirs ) {
                 try {
-                    Util.deleteRecursive(dir);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                    // but ignore
+                    ExternalRun b = new ExternalRun(this,dir,lastBuild);
+                    lastBuild = b;
+                    runs.put( b.getId(), b );
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    try {
+                        Util.deleteRecursive(dir);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                        // but ignore
+                    }
                 }
             }
-        }
 
-        synchronized(this) {
             // replace the list with new one atomically.
             this.runs = runs;
+
+        } finally {
             reloadingInProgress = false;
             nextUpdate = System.currentTimeMillis()+1000;
         }
