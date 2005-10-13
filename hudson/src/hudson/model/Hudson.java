@@ -1,11 +1,11 @@
 package hudson.model;
 
+import com.thoughtworks.xstream.XStream;
 import hudson.XmlFile;
 import hudson.scm.SCMDescriptor;
 import hudson.scm.SCMManager;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
-import org.apache.tools.ant.taskdefs.Execute;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -18,19 +18,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.Vector;
-
-import com.thoughtworks.xstream.XStream;
 
 /**
  * Root object of the system.
@@ -215,14 +210,16 @@ public final class Hudson implements ModelObject {
             cfg.unmarshal(this);
 
         File projectsDir = new File(root,"jobs");
-        projectsDir.mkdirs();
+        if(!projectsDir.isDirectory() && !projectsDir.mkdirs()) {
+            if(projectsDir.exists())
+                throw new IOException(projectsDir+" is not a directory");
+            throw new IOException("Unable to create "+projectsDir+"\nPermission issue? Please create this directory manually.");
+        }
         File[] subdirs = projectsDir.listFiles(new FileFilter() {
             public boolean accept(File child) {
                 return child.isDirectory();
             }
         });
-        if(subdirs==null)
-            throw new IOException("Unable to create "+projectsDir+"\nPermission issue? Please create this directory manually.");
         jobs.clear();
         for (File subdir : subdirs) {
             try {
