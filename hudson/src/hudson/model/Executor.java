@@ -81,7 +81,7 @@ public class Executor extends Thread {
     }
 
     /**
-     * Returns the image that shows the current buildCommand status.
+     * Stops the current build.
      */
     public void doStop( StaplerRequest req, StaplerResponse rsp ) throws IOException {
         interrupt();
