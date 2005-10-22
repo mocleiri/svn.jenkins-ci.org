@@ -61,6 +61,8 @@ public final class Proc {
             t2.join();
             return proc.waitFor();
         } catch (InterruptedException e) {
+            // aborting. kill the process
+            proc.destroy();
             return -1;
         }
     }
@@ -79,7 +81,7 @@ public final class Proc {
                 Util.copyStream(in,out);
                 in.close();
             } catch (IOException e) {
-                ; // TODO: what to do?
+                // TODO: what to do?
             }
         }
     }
@@ -103,7 +105,7 @@ public final class Proc {
                 in.close();
                 out.close();
             } catch (IOException e) {
-                ; // TODO: what to do?
+                // TODO: what to do?
             }
         }
     }
