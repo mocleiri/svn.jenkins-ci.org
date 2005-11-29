@@ -162,15 +162,16 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
         }
 
         public void run() {
-            try {
-                while(true) {
+            while (true) {
+                try {
                     getNext().reload();
+                } catch (InterruptedException e) {
+                    // treat this as a death signal
+                    return;
+                } catch (Throwable t) {
+                    // otherwise ignore any error
+                    t.printStackTrace();
                 }
-            } catch (InterruptedException e) {
-                // treat this as a death signal
-            } catch (Throwable t) {
-                // otherwise ignore any error
-                t.printStackTrace();
             }
         }
     }
