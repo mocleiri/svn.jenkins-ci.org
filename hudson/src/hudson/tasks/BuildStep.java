@@ -38,7 +38,8 @@ public interface BuildStep {
      */
     public static final BuildStepDescriptor[] BUILDERS = new BuildStepDescriptor[]{
         Shell.DESCRIPTOR,
-        Ant.DESCRIPTOR
+        Ant.DESCRIPTOR,
+        Maven.DESCRIPTOR
     };
 
     public static final BuildStepDescriptor[] PUBLISHERS = new BuildStepDescriptor[]{

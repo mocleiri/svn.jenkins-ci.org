@@ -1,10 +1,10 @@
 package hudson.tasks;
 
-import hudson.Proc;
-import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Project;
+import hudson.Proc;
+import hudson.Util;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -12,20 +12,22 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
+ * Build by using Maven.
+ *
  * @author Kohsuke Kawaguchi
  */
-public class Ant implements BuildStep {
+public class Maven implements BuildStep {
 
     private final String targets;
 
     /**
-     * Identifies {@link AntInstallation} to be used.
+     * Identifies {@link MavenInstallation} to be used.
      */
-    private final String antName;
+    private final String mavenName;
 
-    public Ant(String targets,String antName) {
+    public Maven(String targets,String mavenName) {
         this.targets = targets;
-        this.antName = antName;
+        this.mavenName = mavenName;
     }
 
     public String getTargets() {
@@ -33,12 +35,12 @@ public class Ant implements BuildStep {
     }
 
     /**
-     * Gets the Ant to invoke,
+     * Gets the Maven to invoke,
      * or null to invoke the default one.
      */
-    public AntInstallation getAnt() {
-        for( AntInstallation i : DESCRIPTOR.getInstallations() ) {
-            if(antName!=null && i.getName().equals(antName))
+    public MavenInstallation getMaven() {
+        for( MavenInstallation i : DESCRIPTOR.getInstallations() ) {
+            if(mavenName !=null && i.getName().equals(mavenName))
                 return i;
         }
         return null;
@@ -55,16 +57,16 @@ public class Ant implements BuildStep {
 
         String execName;
         if(File.separatorChar=='\\')
-            execName = "ant.bat";
+            execName = "maven.bat";
         else
-            execName = "ant";
+            execName = "maven";
 
-        AntInstallation ai = getAnt();
+        MavenInstallation ai = getMaven();
         if(ai==null)
             cmd = execName+' '+targets;
         else {
             File exec = ai.getExecutable();
-            if(!ai.getExists()) {
+            if(!exec.exists()) {
                 listener.fatalError(exec+" doesn't exist");
                 return false;
             }
@@ -73,7 +75,7 @@ public class Ant implements BuildStep {
 
         Map<String,String> env = build.getEnvVars();
         if(ai!=null)
-            env.put("ANT_HOME",ai.getAntHome());
+            env.put("MAVEN_HOME",ai.getMavenHome());
 
         listener.getLogger().println("$ "+cmd);
 
@@ -95,18 +97,18 @@ public class Ant implements BuildStep {
 
     public static final class Descriptor extends BuildStepDescriptor {
         private Descriptor() {
-            super(Ant.class);
+            super(Maven.class);
         }
 
         public String getDisplayName() {
-            return "Invoke top-level Ant targets";
+            return "Invoke top-level Maven targets";
         }
 
-        public AntInstallation[] getInstallations() {
-            AntInstallation[] r = (AntInstallation[]) getProperties().get("installations");
+        public MavenInstallation[] getInstallations() {
+            MavenInstallation[] r = (MavenInstallation[]) getProperties().get("installations");
 
             if(r==null)
-                return new AntInstallation[0];
+                return new MavenInstallation[0];
 
             return r.clone();
         }
@@ -115,18 +117,18 @@ public class Ant implements BuildStep {
             boolean r = true;
 
             int i;
-            String[] names = req.getParameterValues("ant_name");
-            String[] homes = req.getParameterValues("ant_home");
+            String[] names = req.getParameterValues("maven_name");
+            String[] homes = req.getParameterValues("maven_home");
             int len;
             if(names!=null && homes!=null)
                 len = Math.min(names.length,homes.length);
             else
                 len = 0;
-            AntInstallation[] insts = new AntInstallation[len];
+            MavenInstallation[] insts = new MavenInstallation[len];
 
             for( i=0; i<len; i++ ) {
                 if(names[i].length()==0)    continue;
-                insts[i] = new AntInstallation(names[i],homes[i]);
+                insts[i] = new MavenInstallation(names[i],homes[i]);
             }
 
             getProperties().put("installations",insts);
@@ -137,24 +139,24 @@ public class Ant implements BuildStep {
         }
 
         public BuildStep newInstance(HttpServletRequest req) {
-            return new Ant(req.getParameter("ant_targets"),req.getParameter("ant_version"));
+            return new Maven(req.getParameter("maven_targets"),req.getParameter("maven_version"));
         }
     }
 
-    public static final class AntInstallation {
+    public static final class MavenInstallation {
         private final String name;
-        private final String antHome;
+        private final String mavenHome;
 
-        public AntInstallation(String name, String antHome) {
+        public MavenInstallation(String name, String mavenHome) {
             this.name = name;
-            this.antHome = antHome;
+            this.mavenHome = mavenHome;
         }
 
         /**
          * install directory.
          */
-        public String getAntHome() {
-            return antHome;
+        public String getMavenHome() {
+            return mavenHome;
         }
 
         /**
@@ -165,20 +167,26 @@ public class Ant implements BuildStep {
         }
 
         public File getExecutable() {
-            String execName;
-            if(File.separatorChar=='\\')
-                execName = "ant.bat";
-            else
-                execName = "ant";
+            File exe = getExeFile("maven");
+            if(exe.exists())
+                return exe;
+            exe = getExeFile("mvn");
+            if(exe.exists())
+                return exe;
+            return null;
+        }
 
-            return new File(getAntHome(),"bin/"+execName);
+        private File getExeFile(String execName) {
+            if(File.separatorChar=='\\')
+                execName += ".bat";
+            return new File(getMavenHome(), "bin/" + execName);
         }
 
         /**
          * Returns true if the executable exists.
          */
         public boolean getExists() {
-            return getExecutable().exists();
+            return getExecutable()!=null;
         }
     }
 }

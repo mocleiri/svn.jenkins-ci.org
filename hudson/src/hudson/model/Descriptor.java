@@ -13,7 +13,7 @@ import java.util.Map;
  * @author Kohsuke Kawaguchi
  */
 public abstract class Descriptor {
-    private Map properties;
+    private Map<String,Object> properties;
 
     /**
      * The class being described by this descriptor.
@@ -27,7 +27,7 @@ public abstract class Descriptor {
     /**
      * Returns the data store that can be used to store configuration info.
      */
-    protected synchronized Map getProperties() {
+    protected synchronized Map<String,Object> getProperties() {
         if(properties==null)
             properties = load();
         return properties;
@@ -66,16 +66,16 @@ public abstract class Descriptor {
             }
     }
 
-    private Map load() {
+    private Map<String,Object> load() {
         // load
         XmlFile file = getConfigFile();
         if(!file.exists())
-            return new HashMap();
+            return new HashMap<String,Object>();
 
         try {
-            return (Map)file.read();
+            return (Map<String,Object>)file.read();
         } catch (IOException e) {
-            return new HashMap();
+            return new HashMap<String,Object>();
         }
     }
 
