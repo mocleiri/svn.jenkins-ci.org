@@ -49,7 +49,7 @@
     <td id="left-top-nav">
       <c:forEach var="anc" items="${pageContext.request.ancestors}">
         <c:if test="${anc.prev!=null}">
-          &gt;
+          &#187;
         </c:if>
         <a href="${anc.url}">
           ${anc.object.displayName}
