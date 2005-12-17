@@ -71,6 +71,10 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         Map<String,String> previousRevisions = new HashMap<String,String>(); // module -> revision
         {// read the revision file of the last build
             File file = getRevisionFile(build.getPreviousBuild());
+            if(!file.exists())
+                // nothing to compare against
+                return createEmptyChangeLog(changelogFile,listener);
+
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
             while((line=br.readLine())!=null) {
