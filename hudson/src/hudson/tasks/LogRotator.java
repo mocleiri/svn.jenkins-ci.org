@@ -63,6 +63,16 @@ public class LogRotator {
         return numToKeep;
     }
 
+    public String getDaysToKeepStr() {
+        if(daysToKeep==-1)  return "";
+        else                return String.valueOf(daysToKeep);
+    }
+
+    public String getNumToKeepStr() {
+        if(numToKeep==-1)   return "";
+        else                return String.valueOf(numToKeep);
+    }
+
     public LRDescriptor getDescriptor() {
         return DESCRIPTOR;
     }
