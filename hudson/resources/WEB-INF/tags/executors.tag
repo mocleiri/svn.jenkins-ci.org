@@ -26,7 +26,7 @@
         </c:when>
         <c:otherwise>
           <td class="pane" width="70%">
-            <div nowrap>Building <a href="${e.currentBuild.url}">${e.currentBuild}</a></div>
+            <div nowrap>Building <a href="${rootURL}/${e.currentBuild.url}">${e.currentBuild}</a></div>
             <c:set var="pos" value="${e.progress}" />
             <c:if test="${pos>0}">
               <t:progressBar pos="${pos}"/>
