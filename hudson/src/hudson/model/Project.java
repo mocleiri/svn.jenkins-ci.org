@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.Vector;
+import java.util.Comparator;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -245,7 +246,9 @@ public class Project extends Job<Project,Build> {
             }
 
             req.setAttribute("it",this);
-            req.setAttribute("files",f.listFiles());
+            File[] files = f.listFiles();
+            Arrays.sort(files,FILE_SORTER);
+            req.setAttribute("files",files);
             req.getView(this,"workspaceDir.jsp").forward(req,rsp);
             return;
         }
@@ -260,4 +263,10 @@ public class Project extends Job<Project,Build> {
             rsp.getOutputStream().write(buf,0,len);
         in.close();
     }
+
+    private static final Comparator<File> FILE_SORTER = new Comparator<File>() {
+        public int compare(File lhs, File rhs) {
+            return lhs.getName().compareTo(rhs.getName());
+        }
+    };
 }
