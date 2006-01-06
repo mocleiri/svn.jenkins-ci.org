@@ -4,6 +4,7 @@ import hudson.Proc;
 import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import static hudson.model.Hudson.isWindows;
 import hudson.model.Project;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +12,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-
-import static hudson.model.Hudson.isWindows;
 
 /**
  * Executes a series of commands by using a shell.

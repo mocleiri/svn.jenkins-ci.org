@@ -11,14 +11,14 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.StringTokenizer;
-import java.util.Map;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.PrintWriter;
 
 /**
  * Sends the build result in e-mail.

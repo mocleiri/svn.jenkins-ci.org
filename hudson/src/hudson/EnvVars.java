@@ -2,10 +2,10 @@ package hudson;
 
 import org.apache.tools.ant.taskdefs.Execute;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
-import java.util.HashMap;
-import java.util.Collections;
 
 /**
  * @author Kohsuke Kawaguchi

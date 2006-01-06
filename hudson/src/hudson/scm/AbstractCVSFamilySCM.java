@@ -1,15 +1,14 @@
 package hudson.scm;
 
-import hudson.model.BuildListener;
-import hudson.model.Hudson;
-import hudson.Proc;
 import hudson.EnvVars;
+import hudson.Proc;
+import hudson.model.BuildListener;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.FileWriter;
-import java.util.Map;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Common implementation between {@link CVSSCM} and {@link SubversionSCM}.

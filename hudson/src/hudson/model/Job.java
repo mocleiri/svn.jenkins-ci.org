@@ -1,5 +1,6 @@
 package hudson.model;
 
+import com.thoughtworks.xstream.XStream;
 import hudson.Util;
 import hudson.XmlFile;
 import hudson.tasks.LogRotator;
@@ -14,8 +15,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.SortedMap;
-
-import com.thoughtworks.xstream.XStream;
 
 /**
  * A job is an runnable entity under the monitoring of Hudson.

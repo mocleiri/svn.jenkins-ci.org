@@ -6,13 +6,13 @@ import org.kohsuke.stapler.StaplerResponse;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.Iterator;
-import java.util.GregorianCalendar;
-import java.util.Calendar;
 
 /**
  * Collection of {@link Job}s.

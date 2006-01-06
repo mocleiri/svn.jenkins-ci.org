@@ -6,7 +6,8 @@ import org.kohsuke.stapler.StaplerResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Represents a collection of {@link Job}s.
@@ -20,7 +21,7 @@ public class View extends JobCollection {
     /**
      * List of job names. This is what gets serialized.
      */
-    /*package*/ final List<String> jobNames = new Vector<String>();
+    /*package*/ final Set<String> jobNames = new TreeSet<String>();
 
     /**
      * Name of this view.
@@ -41,8 +42,9 @@ public class View extends JobCollection {
      */
     public synchronized List<Job> getJobs() {
         Job[] jobs = new Job[jobNames.size()];
-        for( int i=jobNames.size()-1; i>=0; i-- )
-            jobs[i] = owner.getJob(jobNames.get(i));
+        int i=0;
+        for (String name : jobNames)
+            jobs[i++] = owner.getJob(name);
         return Arrays.asList(jobs);
     }
 

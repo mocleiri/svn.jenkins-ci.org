@@ -1,34 +1,34 @@
 package hudson.scm;
 
 import hudson.Util;
+import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
-import hudson.model.Action;
-import hudson.model.StreamBuildListener;
 import hudson.model.Result;
+import hudson.model.StreamBuildListener;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
-import org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
 import org.apache.tools.ant.taskdefs.Expand;
+import org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  * CVS.

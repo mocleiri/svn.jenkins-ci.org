@@ -1,12 +1,13 @@
 package hudson.model;
 
+import com.thoughtworks.xstream.XStream;
 import hudson.CloseProofOutputStream;
+import hudson.EnvVars;
 import hudson.Util;
 import hudson.XmlFile;
-import hudson.EnvVars;
-import hudson.util.IOException2;
 import hudson.tasks.BuildStep;
 import hudson.tasks.LogRotator;
+import hudson.util.IOException2;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -30,8 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SimpleTimeZone;
-
-import com.thoughtworks.xstream.XStream;
 
 /**
  * A particular execution of {@link Job}.

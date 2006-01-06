@@ -1,8 +1,8 @@
 package hudson.model;
 
 import hudson.Proc;
-import hudson.util.DualOutputStream;
 import hudson.util.DecodingStream;
+import hudson.util.DualOutputStream;
 import org.xmlpull.mxp1.MXParser;
 import org.xmlpull.v1.XmlPullParser;
 
