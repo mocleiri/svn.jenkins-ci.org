@@ -268,7 +268,7 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
      */
     public synchronized void doDoDelete( StaplerRequest req, StaplerResponse rsp ) throws IOException {
         Util.deleteRecursive(root);
-        getParent().jobs.remove(name);
+        getParent().deleteJob(this);
         rsp.sendRedirect(req.getContextPath());
     }
 

@@ -242,6 +242,19 @@ public final class Hudson extends JobCollection {
     }
 
     /**
+     * Called in response to {@link Job#doDoDelete(StaplerRequest, StaplerResponse)}
+     */
+    /*package*/ void deleteJob(Job job) throws IOException {
+        jobs.remove(job.getName());
+        if(views!=null) {
+            for (View v : views) {
+                v.jobNames.remove(job.getName());
+            }
+            save();
+        }
+    }
+
+    /**
      * The file we save our configuration.
      */
     private XmlFile getConfigFile() {

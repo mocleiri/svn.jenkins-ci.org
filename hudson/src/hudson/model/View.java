@@ -8,12 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
-import hudson.tasks.BuildStepDescriptor;
-import hudson.tasks.BuildStep;
-import hudson.scm.SCMDescriptor;
-import hudson.scm.SCMManager;
-import hudson.Util;
-
 /**
  * Represents a collection of {@link Job}s.
  *
@@ -26,7 +20,7 @@ public class View extends JobCollection {
     /**
      * List of job names. This is what gets serialized.
      */
-    private final List<String> jobNames = new Vector<String>();
+    /*package*/ final List<String> jobNames = new Vector<String>();
 
     /**
      * Name of this view.
