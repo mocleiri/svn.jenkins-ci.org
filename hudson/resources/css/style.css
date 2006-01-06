@@ -223,14 +223,15 @@ th.pane {
   font-weight: bold;
 }
 
-#projectstatus th {
-  font-weight: bold;
-  background-color: #f0f0f0;
+#projectstatus tr {
+  border: 1px solid #bbb;
   padding: 3px 4px 3px 4px;
 }
 
-#projectstatus tr {
-  border: 1px solid #bbb;
+#projectstatus th {
+  font-weight: bold;
+  border: none;
+  background-color: #f0f0f0;
   padding: 3px 4px 3px 4px;
 }
 
@@ -297,4 +298,51 @@ th.pane {
 .error {
   color: red;
   font-weight: bold;
+}
+
+
+/* ====================== project view tab bar ===================================== */
+#viewList {
+    border: none;
+    margin-bottom: 0px;
+    width: 100%;
+}
+#viewList td {
+    padding: 0.5em;
+    white-space: nowrap;
+}
+#viewList td.inactive {
+    border: solid 1px #ccc;
+    border-bottom-color: #bbb;
+}
+#viewList td.inactive:hover {
+    background-color: #777;
+}
+#viewList td.inactive a {
+    text-decoration: none;
+    color: #444
+}
+#viewList td.noleft {
+    border-left: none;
+}
+#viewList td.noright {
+    border-right: none;
+}
+#viewList td.active {
+    border: solid 1px #bbb;
+    border-bottom: none;
+    vertical-align:middle;
+    background-color: rgb(240,240,240);
+    font-weight: bold;
+}
+#viewList td.filler {
+    border: none;
+    border-bottom: solid 1px #bbb;
+    width: 100%;
+    text-align: right;
+}
+#projectstatus {
+  /* top border will be drawn by the #viewList */
+  margin-top:0px;
+  border-top: none;
 }

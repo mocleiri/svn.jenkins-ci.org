@@ -4,8 +4,9 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="i" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
 
-<jsp:include page="sidepanel.jsp" />
+<st:include page="sidepanel.jsp" />
 <l:main-panel>
   <div style="margin: 2em;">
     <%-- login form --%>

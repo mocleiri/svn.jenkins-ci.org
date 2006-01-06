@@ -5,10 +5,11 @@
 <%@ taglib prefix="i" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
 <%--
   Config page
 --%>
-<jsp:include page="sidepanel.jsp" />
+<st:include page="sidepanel.jsp" />
 
 <l:main-panel>
   <s:form method="post" action="configSubmit">

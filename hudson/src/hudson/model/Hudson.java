@@ -26,13 +26,15 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.Vector;
+import java.util.Arrays;
 
 /**
  * Root object of the system.
  *
  * @author Kohsuke Kawaguchi
  */
-public final class Hudson implements ModelObject {
+public final class Hudson extends JobCollection {
     private transient final Queue queue = new Queue();
 
     /**
@@ -69,6 +71,11 @@ public final class Hudson implements ModelObject {
 
     private List<JDK> jdks;
 
+    /**
+     * {@link View}s.
+     */
+    private List<View> views;   // can't initialize it eagerly for backward compatibility
+
     public static Hudson getInstance() {
         return theInstance;
     }
@@ -93,6 +100,55 @@ public final class Hudson implements ModelObject {
      */
     public synchronized Collection<Job> getJobs() {
         return new ArrayList<Job>(jobs.values());
+    }
+
+    /**
+     * Every job belongs to us.
+     *
+     * @deprecated
+     *      why are you calling a method that always return true?
+     */
+    public boolean containsJob(Job job) {
+        return true;
+    }
+
+    public synchronized JobCollection getView(String name) {
+        if(views!=null) {
+            for (View v : views) {
+                if(v.getViewName().equals(name))
+                    return v;
+            }
+        }
+        if(this.getViewName().equals(name))
+            return this;
+        else
+            return null;
+    }
+
+    /**
+     * Gets the read-only list of all {@link JobCollection}s.
+     */
+    public synchronized JobCollection[] getViews() {
+        if(views==null)
+            views = new ArrayList<View>();
+        JobCollection[] r = new JobCollection[views.size()+1];
+        views.toArray(r);
+        // sort Views and put "all" at the very beginning
+        r[r.length-1] = r[0];
+        Arrays.sort(r,1,r.length,JobCollection.SORTER);
+        r[0] = this;
+        return r;
+    }
+
+    public synchronized void deleteView(View view) throws IOException {
+        if(views!=null) {
+            views.remove(view);
+            save();
+        }
+    }
+
+    public String getViewName() {
+        return "All";
     }
 
     /**
@@ -303,24 +359,45 @@ public final class Hudson implements ModelObject {
             rsp.sendRedirect("configure"); // back to config
     }
 
-    public synchronized void doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+    public synchronized Job doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException {
         String name = req.getParameter("name");
         String className = req.getParameter("type");
 
         if(name==null || getJob(name)!=null || className==null) {
             rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return;
+            return null;
         }
 
         try {
             Class type = Class.forName(className);
 
             // redirect to the project config screen
-            rsp.sendRedirect(req.getContextPath()+'/'+createProject(type,name).getUrl()+"configure");
+            Job project = createProject(type, name);
+            rsp.sendRedirect(req.getContextPath()+'/'+project.getUrl()+"configure");
+            return project;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return null;
         }
+    }
+
+    public synchronized void doCreateView( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        String name = req.getParameter("name");
+
+        if(name==null) {
+            rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
+        View v = new View(this, name);
+        if(views==null)
+            views = new Vector<View>();
+        views.add(v);
+        save();
+
+        // redirect to the config screen
+        rsp.sendRedirect("./"+v.getUrl()+"configure");
     }
 
     /**
@@ -338,69 +415,6 @@ public final class Hudson implements ModelObject {
         if(session!=null)
             session.invalidate();
         rsp.sendRedirect(req.getContextPath());
-    }
-
-    private static final Comparator<Run> runComparator = new Comparator<Run>() {
-        public int compare(Run lhs, Run rhs) {
-            long r = lhs.getTimestamp().getTimeInMillis() - rhs.getTimestamp().getTimeInMillis();
-            if(r<0)     return +1;
-            if(r>0)     return -1;
-            return lhs.getParent().getName().compareTo(rhs.getParent().getName());
-        }
-    };
-
-    /**
-     * RSS feed for all runs.
-     */
-    public synchronized void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        SortedSet<Run> runs = new TreeSet<Run>(runComparator);
-        for( Job j : getJobs() )
-            runs.addAll( j.getBuilds() );
-
-        forwardToRss(this,"Hudson all builds",req,rsp,runs);
-    }
-
-    /**
-     * RSS feed for failed runs.
-     */
-    public synchronized void doRssFailed( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        SortedSet<Run> runs = new TreeSet<Run>(runComparator);
-        for( Job j : getJobs() )
-            runs.addAll( j.getBuilds() );
-
-        for (Iterator<Run> i = runs.iterator(); i.hasNext();) {
-            if(i.next().getResult()!=Result.FAILURE)
-                i.remove();
-        }
-
-        forwardToRss(this,"Hudson all failures", req,rsp,runs);
-    }
-
-    /**
-     * Sends the RSS feed to the client.
-     */
-    static void forwardToRss( Object it, String title, StaplerRequest req, HttpServletResponse rsp, Collection<Run> runs) throws IOException, ServletException {
-        GregorianCalendar threshold = new GregorianCalendar();
-        threshold.add(Calendar.DAY_OF_YEAR,-7);
-
-        int count=0;
-
-        for (Iterator<Run> i = runs.iterator(); i.hasNext();) {
-            // at least put 10 items
-            if(count<10) {
-                i.next();
-                count++;
-                continue;
-            }
-            // anything older than 7 days will be ignored
-            if(i.next().getTimestamp().before(threshold))
-                i.remove();
-        }
-
-        req.setAttribute("it",it);
-        req.setAttribute("title",title);
-        req.setAttribute("runs",runs);
-        req.getServletContext().getRequestDispatcher("/WEB-INF/rss.jsp").forward(req,rsp);
     }
 
     /**

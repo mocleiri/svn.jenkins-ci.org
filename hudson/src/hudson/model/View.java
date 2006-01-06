@@ -1,0 +1,100 @@
+package hudson.model;
+
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
+
+import hudson.tasks.BuildStepDescriptor;
+import hudson.tasks.BuildStep;
+import hudson.scm.SCMDescriptor;
+import hudson.scm.SCMManager;
+import hudson.Util;
+
+/**
+ * Represents a collection of {@link Job}s.
+ *
+ * @author Kohsuke Kawaguchi
+ */
+public class View extends JobCollection {
+
+    private final Hudson owner;
+
+    /**
+     * List of job names. This is what gets serialized.
+     */
+    private final List<String> jobNames = new Vector<String>();
+
+    /**
+     * Name of this view.
+     */
+    private String name;
+
+    public View(Hudson owner, String name) {
+        this.name = name;
+        this.owner = owner;
+    }
+
+    /**
+     * Returns a read-only view of all {@link Job}s in this view.
+     *
+     * <p>
+     * This method returns a separate copy each time to avoid
+     * concurrent modification issue.
+     */
+    public synchronized List<Job> getJobs() {
+        Job[] jobs = new Job[jobNames.size()];
+        for( int i=jobNames.size()-1; i>=0; i-- )
+            jobs[i] = owner.getJob(jobNames.get(i));
+        return Arrays.asList(jobs);
+    }
+
+    public boolean containsJob(Job job) {
+        return jobNames.contains(job.getName());
+    }
+
+    public String getViewName() {
+        return name;
+    }
+
+    public String getDisplayName() {
+        return name;
+    }
+
+    public Job doCreateJob(StaplerRequest req, StaplerResponse rsp) throws IOException {
+        Job job = owner.doCreateJob(req, rsp);
+        jobNames.add(job.getName());
+        owner.save();
+        return job;
+    }
+
+    public String getUrl() {
+        return "view/"+name+'/';
+    }
+
+    /**
+     * Accepts submission from the configuration page.
+     */
+    public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        jobNames.clear();
+        for (Job job : owner.getJobs()) {
+            if(req.getParameter(job.getName())!=null)
+                jobNames.add(job.getName());
+        }
+
+        owner.save();
+
+        rsp.sendRedirect(".");
+    }
+
+    /**
+     * Deletes this view.
+     */
+    public synchronized void doDoDelete( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        owner.deleteView(this);
+        rsp.sendRedirect(req.getContextPath());
+    }
+}
