@@ -4,41 +4,12 @@
 <div class="dashboard">
 
   <%-- view tab bar --%>
-  <table cellpadding=0 cellspacing=0 id="viewList">
-    <c:set var="views" value="${app.views}" />
-    <%-- dummy row to get spacing right --%>
-    <tr style="height:3px;">
-      <td style="height:3px; padding:0px"></td>
-      <c:forEach var="v" varStatus="vs" items="${app.views}">
-        <c:choose>
-          <c:when test="${v==it}">
-            <td class=active rowspan=2>${v.viewName}</td>
-            <c:set var="activeIndex" value="${vs.index}" />
-          </c:when>
-          <c:otherwise>
-            <td style="height:3px; padding:0px"></td>
-          </c:otherwise>
-        </c:choose>
-      </c:forEach>
-    </tr>
-    <tr>
-      <td style="border: none; border-bottom: 1px solid #bbb;">&nbsp;</td>
-      <c:forEach var="v" varStatus="vs" items="${app.views}">
-        <c:if test="${v!=it}">
-          <td class="inactive
-            <c:choose>
-              <c:when test="${vs.index<activeIndex}">noRight</c:when>
-              <c:when test="${vs.index>activeIndex}">noLeft</c:when>
-            </c:choose>
-            ">
-              <a href="${rootURL}/${v.url}">${v.viewName}</a>
-          </td>
-        </c:if>
-      </c:forEach>
-      <td class="inactive noLeft"><a href="${rootURL}/newView">+</a></td>
-      <td class="filler">&nbsp;</td>
-    </tr>
-  </table>
+  <l:tabBar>
+    <c:forEach var="v" items="${app.views}">
+      <l:tab name="${v.viewName}" active="${v==it}" href="${rootURL}/${v.url}" />
+    </c:forEach>
+    <l:tab name="+" href="${rootURL}/newView" active="false" />
+  </l:tabBar>
   <%-- project list --%>
   <table id="projectstatus" class="pane">
     <tr style="border-top: 0px;">
