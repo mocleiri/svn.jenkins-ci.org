@@ -17,7 +17,7 @@
     <c:otherwise>
       <c:forEach var="item" items="${app.queue.items}">
         <tr>
-          <td class="pane" width="100%"><a href="${rootURL}${item.project.url}">
+          <td class="pane" width="100%"><a href="${rootURL}/${item.project.url}">
             ${item.project.name}
           </a></td>
           <td class="pane" width=16 align=center valign=middle>
