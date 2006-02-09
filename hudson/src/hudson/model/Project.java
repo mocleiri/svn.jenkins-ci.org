@@ -157,6 +157,23 @@ public class Project extends Job<Project,Build> {
     }
 
     /**
+     * Gets the directory where the javadoc will be published.
+     */
+    public File getJavadocDir() {
+        return new File(root,"javadoc");
+    }
+
+    /**
+     * Returns true if this project has a published javadoc.
+     *
+     * <p>
+     * This ugly name is because of EL.
+     */
+    public boolean getHasJavadoc() {
+        return getJavadocDir().exists();
+    }
+
+    /**
      * Returns the root directory of the checked-out module.
      */
     public File getModuleRoot() {
@@ -222,6 +239,24 @@ public class Project extends Job<Project,Build> {
      * Serves the workspace files.
      */
     public synchronized void doWs( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        serveFile(req, rsp, getWorkspace(), true);
+    }
+
+    /**
+     * Serves the javadoc.
+     */
+    public synchronized void doJavadoc( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        serveFile(req, rsp, getJavadocDir(), false);
+    }
+
+    /**
+     * Serves a file from the file system (Maps the URL to a directory in a file system.)
+     *
+     * @param serveDirIndex
+     *      True to generate the directory index.
+     *      False to serve "index.html"
+     */
+    private void serveFile(StaplerRequest req, StaplerResponse rsp, File root, boolean serveDirIndex) throws IOException, ServletException {
         String path = req.getRestOfPath();
 
         if(path.length()==0)
@@ -233,7 +268,7 @@ public class Project extends Job<Project,Build> {
             return;
         }
 
-        File f = new File(getWorkspace(),path.substring(1));
+        File f = new File(root,path.substring(1));
         if(!f.exists()) {
             rsp.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
@@ -245,12 +280,16 @@ public class Project extends Job<Project,Build> {
                 return;
             }
 
-            req.setAttribute("it",this);
-            File[] files = f.listFiles();
-            Arrays.sort(files,FILE_SORTER);
-            req.setAttribute("files",files);
-            req.getView(this,"workspaceDir.jsp").forward(req,rsp);
-            return;
+            if(serveDirIndex) {
+                req.setAttribute("it",this);
+                File[] files = f.listFiles();
+                Arrays.sort(files,FILE_SORTER);
+                req.setAttribute("files",files);
+                req.getView(this,"workspaceDir.jsp").forward(req,rsp);
+                return;
+            } else {
+                f = new File(f,"index.html");
+            }
         }
 
         FileInputStream in = new FileInputStream(f);

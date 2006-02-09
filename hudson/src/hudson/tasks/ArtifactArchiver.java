@@ -17,7 +17,7 @@ import java.io.File;
  *
  * @author Kohsuke Kawaguchi
  */
-public class ArtifactArchiver implements BuildStep {
+public class ArtifactArchiver extends AntBasedBuildStep {
 
     /**
      * Comma-separated list of files/directories to be archived.
@@ -64,15 +64,6 @@ public class ArtifactArchiver implements BuildStep {
         execTask(copyTask, listener);
 
         return true;
-    }
-
-    private void execTask(Task copyTask, BuildListener listener) {
-        try {
-            copyTask.execute();
-        } catch( BuildException e ) {
-            // failing to archive isn't a fatal error
-            e.printStackTrace(listener.error(e.getMessage()));
-        }
     }
 
     public BuildStepDescriptor getDescriptor() {
