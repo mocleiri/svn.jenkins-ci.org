@@ -1,5 +1,6 @@
 <html>
 <head>
+	<title>Hudson: a continuous build system</title>
 	<style>
 		dt {
 			font-weight: bold;
@@ -66,6 +67,27 @@
 		</dd>
 	</dl>
 
+
+<h3>Benefits</h3>
+<dl>
+	<dt>No more "full rebuild" before a commit
+	<dd>
+		With Hudson, I stopped doing a rebuild before I commit. Nowadays I just commit, and let Hudson check if a build fails or not for me. Meanwhile, I move on to work on other things. If a build fails, Hudson can tell me so within a few minutes, so breaking a build for that short period of time is not really a problem. Thanks to this, I can spend my time more productively.
+	
+	<dt>No more running tests locally
+	<dd>
+		With Hudson, I stopped running unit tests locally. I just commit, and let Hudson run it for me. Meanwhile, I move on to work on other things. In this way, I save time and I can be more productive.
+	
+	<dt>No more sending bug fixes
+	<dd>
+		When someone needs an urgent bug fix for my project, I used to fix a bug, do a build, and send him the updated build via e-mail. With Hudson, I no longer have to do this. I just fix a bug and commit. He knows where my Hudson is, so he can pull the new bits by himself. This saves my time, and it makes me more productive.
+	
+	<dt>No more workspace tagging
+	<dd>
+		When someone needs a CVS tag for my project (for example, JAX-WS occasionally want a JAXB snapshot), he used to send me an e-mail, I then run <tt>cvs rtag</tt> manually, and reply him back when it's done. With Hudson, I no longer has to do any of this. Every version I deliver to him has a Hudson build Id baked in. So when he wants a tag for a particular version, he can just use Hudson to tag it. instead of sending me an e-mail. This saves my time, and it makes me more productive.
+</dl>
+<p>
+	I think by now you should have seen the pattern. It's all about making developers more productive.
 
 <h3>Installation</h3>
 <p>To run Hudson, you need to have:
