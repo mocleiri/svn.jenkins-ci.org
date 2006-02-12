@@ -76,6 +76,7 @@ public class Project extends Job<Project,Build> {
 
         // load builds
         File buildDir = getBuildDir();
+        buildDir.mkdirs();
         String[] builds = buildDir.list(new FilenameFilter() {
             public boolean accept(File dir, String name) {
                 return new File(dir,name).isDirectory();

@@ -10,6 +10,8 @@ import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import org.apache.tools.ant.taskdefs.Copy;
+import org.apache.tools.ant.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -270,7 +272,7 @@ public final class Hudson extends JobCollection {
         return numExecutors;
     }
 
-    private void load() throws IOException {
+    private synchronized void load() throws IOException {
         XmlFile cfg = getConfigFile();
         if(cfg.exists())
             cfg.unmarshal(this);
@@ -372,24 +374,54 @@ public final class Hudson extends JobCollection {
     public synchronized Job doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException {
         String name = req.getParameter("name");
         String className = req.getParameter("type");
+        String mode = req.getParameter("mode");
 
-        if(name==null || getJob(name)!=null || className==null) {
+        if(name==null || getJob(name)!=null || mode==null) {
             rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return null;
         }
 
-        try {
-            Class type = Class.forName(className);
+        Job result;
 
-            // redirect to the project config screen
-            Job project = createProject(type, name);
-            rsp.sendRedirect(req.getContextPath()+'/'+project.getUrl()+"configure");
-            return project;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return null;
+        if(mode.equals("newJob")) {
+            if(className==null) {
+                rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                return null;
+            }
+            try {
+                Class type = Class.forName(className);
+
+                // redirect to the project config screen
+                result = createProject(type, name);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                return null;
+            }
+        } else {
+            Job src = getJob(req.getParameter("from"));
+            if(src==null) {
+                rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                return null;
+            }
+
+            result = createProject(src.getClass(),name);
+
+            // copy config
+            Copy cp = new Copy();
+            cp.setProject(new org.apache.tools.ant.Project());
+            cp.setTofile(result.getConfigFile());
+            cp.setFile(src.getConfigFile());
+            cp.setOverwrite(true);
+            cp.execute();
+
+            // reload from the new config
+            result = Job.load(this,result.root);
+            jobs.put(name,result);
         }
+
+        rsp.sendRedirect(req.getContextPath()+'/'+result.getUrl()+"configure");
+        return result;
     }
 
     public synchronized void doCreateView( StaplerRequest req, StaplerResponse rsp ) throws IOException {

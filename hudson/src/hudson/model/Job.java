@@ -139,6 +139,10 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
         return new XmlFile(xs,new File(dir,"config.xml"));
     }
 
+    File getConfigFile() {
+        return new File(root,"config.xml");
+    }
+
     File getBuildDir() {
         return new File(root,"builds");
     }
