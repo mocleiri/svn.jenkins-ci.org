@@ -6,8 +6,10 @@ import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Result;
 import hudson.model.StreamBuildListener;
+import hudson.model.Hudson;
+import hudson.model.Job;
+import hudson.model.Project;
 import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Expand;
 import org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
 import org.apache.tools.zip.ZipEntry;
@@ -245,7 +247,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
                 setErrorStream(System.err);
             }
         };
-        task.setProject(new Project());
+        task.setProject(new org.apache.tools.ant.Project());
         task.setDir(build.getProject().getWorkspace());
         if(DESCRIPTOR.getCvspassFile().length()!=0)
             task.setPassfile(new File(DESCRIPTOR.getCvspassFile()));
@@ -434,7 +436,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
                     // unzip the archive
                     listener.getLogger().println("expanding the workspace archive into "+destdir);
                     Expand e = new Expand();
-                    e.setProject(new Project());
+                    e.setProject(new org.apache.tools.ant.Project());
                     e.setDest(destdir);
                     e.setSrc(getArchiveFile(build));
                     e.setTaskType("unzip");

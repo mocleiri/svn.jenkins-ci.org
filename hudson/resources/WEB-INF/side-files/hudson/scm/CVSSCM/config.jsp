@@ -2,8 +2,11 @@
 <%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
 
 <s:entry title="CVSROOT">
-  <input class="setting-input" name="cvs_root"
-    type="text" value="${scm.cvsRoot}">
+  <s:editableComboBox id="cvs_root" clazz="setting-input" name="cvs_root" value="${scm.cvsRoot}">
+    <c:forEach var="cr" items="${app.allCvsRoots}">
+      <s:editableComboBoxValue value="${cr}" />
+    </c:forEach>
+  </s:editableComboBox>
 </s:entry>
 <s:entry title="module">
   <input class="setting-input" name="cvs_module"

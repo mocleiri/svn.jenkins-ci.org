@@ -4,6 +4,8 @@ import com.thoughtworks.xstream.XStream;
 import hudson.XmlFile;
 import hudson.scm.SCMDescriptor;
 import hudson.scm.SCMManager;
+import hudson.scm.SCM;
+import hudson.scm.CVSSCM;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
 import org.kohsuke.stapler.StaplerRequest;
@@ -437,5 +439,30 @@ public final class Hudson extends JobCollection {
 
     public static boolean isWindows() {
         return File.pathSeparatorChar==';';
+    }
+
+
+    /**
+     * Returns all {@code CVSROOT} strings used in the current Hudson installation.
+     *
+     * <p>
+     * Ideally this shouldn't be defined in here
+     * but EL doesn't provide a convenient way of invoking a static function,
+     * so I'm putting it here for now.
+     */
+    public List<String> getAllCvsRoots() {
+        List<String> r = new ArrayList<String>();
+        for( Job j : getJobs() ) {
+            if (j instanceof Project) {
+                Project p = (Project) j;
+                SCM scm = p.getScm();
+                if (scm instanceof CVSSCM) {
+                    CVSSCM cvsscm = (CVSSCM) scm;
+                    r.add(cvsscm.getCvsRoot());
+                }
+            }
+        }
+
+        return r;
     }
 }
