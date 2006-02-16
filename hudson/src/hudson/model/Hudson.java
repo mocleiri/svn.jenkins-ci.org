@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Vector;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Root object of the system.
@@ -482,8 +484,8 @@ public final class Hudson extends JobCollection {
      * but EL doesn't provide a convenient way of invoking a static function,
      * so I'm putting it here for now.
      */
-    public List<String> getAllCvsRoots() {
-        List<String> r = new ArrayList<String>();
+    public Set<String> getAllCvsRoots() {
+        Set<String> r = new TreeSet<String>();
         for( Job j : getJobs() ) {
             if (j instanceof Project) {
                 Project p = (Project) j;
