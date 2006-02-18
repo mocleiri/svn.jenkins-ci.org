@@ -24,7 +24,7 @@
   <c:forEach var="idx" begin="0" end="${f:length(scms)-1}">
     <c:set var="scmd" value="${scms[idx]}" />
     <s:radioBlock name="scm" value="${idx}" title="${scmd.displayName}" checked="${it.scm.descriptor==scmd}">
-      <c:set var="scm" value="${it.scm.descriptor==scmd?it.scm:null}" scope="request" />
+      <c:set var="scm" value="${it.scm.descriptor==scmd?it.scm:(null)}" scope="request" />
       <jsp:include page="${scmd.configPage}"/>
     </s:radioBlock>
   </c:forEach>
