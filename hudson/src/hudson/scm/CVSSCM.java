@@ -346,7 +346,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         }
 
         public String getIconFileName() {
-            return "Save.gif";
+            return "save.png";
         }
 
         public String getDisplayName() {

@@ -226,17 +226,22 @@ public class Run <JobT extends Job,RunT extends Run>
      * Gets the icon color for display.
      */
     public String getIconColor() {
-        if(result==null) {
-            if(!building || previousBuild==null)
-                return "grey";
-
-            // a new build is in progress
-            return previousBuild.getIconColor()+"_anim";
+        if(result!=null) {
+            // already built
+            if(result==Result.SUCCESS)
+                return "blue";
+            else
+                return "red";
         }
-        if(result==Result.SUCCESS)
-            return "blue";
+
+        // a new build is in progress
+        String baseColor;
+        if(previousBuild==null)
+            baseColor = "grey";
         else
-            return "red";
+            baseColor = previousBuild.getIconColor();
+
+        return baseColor +"_anime";
     }
 
     /**
@@ -317,7 +322,7 @@ public class Run <JobT extends Job,RunT extends Run>
      * The strange method name is so that we can access it from EL.
      */
     public boolean getHasArtifacts() {
-        return getArtifactsDir().exists();
+        return !getArtifacts().isEmpty();
     }
 
     private void addArtifacts( File dir, String path, List r ) {
@@ -480,11 +485,11 @@ public class Run <JobT extends Job,RunT extends Run>
     }
 
     public void doBuildStatus( StaplerRequest req, StaplerResponse rsp ) throws IOException {
-        rsp.sendRedirect(req.getContextPath()+'/'+getBuildStatusUrl());
+        rsp.sendRedirect(req.getContextPath()+"/images/48x48/"+getBuildStatusUrl());
     }
 
     public String getBuildStatusUrl() {
-        return "images/"+getIconColor()+".gif";
+        return getIconColor()+".gif";
     }
 
     public void doArtifact( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {

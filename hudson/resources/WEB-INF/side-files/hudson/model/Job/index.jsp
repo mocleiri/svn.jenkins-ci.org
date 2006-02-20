@@ -12,6 +12,9 @@
     <c:out value="${it.description}" escapeXml="false" />
   </div>
 
+  <%-- inject main part here --%>
+  <st:include page="main.jsp" />
+
   <h2>Permalinks</h2>
   <ul>
     <c:if test="${it.lastBuild!=null}">

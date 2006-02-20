@@ -263,7 +263,7 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
     }
 
     public String getBuildStatusUrl() {
-        return "images/"+getIconColor()+".gif";
+        return getIconColor()+".gif";
     }
 
     /**
