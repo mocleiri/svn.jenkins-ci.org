@@ -12,6 +12,6 @@ do
   i=$((i+1))
 done
 
-convert -delay 50 ${fileList[@]} -loop 0 "${tmpbase}final.gif"
+convert -delay 10 ${fileList[@]} -loop 0 "${tmpbase}final.gif"
 cat ${tmpbase}final.gif
 rm ${fileList[@]} ${tmpbase}final.gif
