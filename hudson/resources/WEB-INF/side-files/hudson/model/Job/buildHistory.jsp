@@ -12,7 +12,7 @@
     <c:set var="link" value="${rootURL}/${it.url}build/${build.id}" />
     <tr class="build-row">
       <td nowrap="nowrap">
-        <img width="16" height="16" src="${rootURL}/${build.buildStatusUrl}">&nbsp;
+        <img width="16" height="16" src="${rootURL}/images/16x16/${build.buildStatusUrl}">&nbsp;
         #${build.number}
       </td>
       <td nowrap="nowrap">
@@ -36,10 +36,6 @@
   <tr class=build-row>
     <td colspan=2 align=right>
       <a href="rssAll"><img src="${rootURL}/images/atom.png" border=0> for all runs</a>
-    </td>
-  </tr>
-  <tr class=build-row>
-    <td colspan=2 align=right>
       <a href="rssFailed"><img src="${rootURL}/images/atom.png" border=0> for failures</a>
     </td>
   </tr>

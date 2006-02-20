@@ -33,7 +33,7 @@
             </c:if>
           </td>
           <td class="pane" width=16 align=center valign=middle>
-            <a href="${rootURL}/executors/${loop.index}/stop"><img src="${rootURL}/images/16x16/x.gif" /></a>
+            <a href="${rootURL}/executors/${loop.index}/stop"><img src="${rootURL}/images/16x16/edit-delete.png" alt="terminate this build" /></a>
           </td>
         </c:otherwise>
       </c:choose>

@@ -10,16 +10,16 @@
 <l:header title="${it.name}" />
 <l:side-panel>
   <l:tasks>
-    <l:task icon="images/24x24/navigate_up.gif" href="${rootURL}/" title="Back to Dashboard" />
-    <l:task icon="images/24x24/find.gif" href="${rootURL}/${it.url}" title="Status" />
-    <l:task icon="images/24x24/folders.gif" href="${rootURL}/${it.url}ws/" title="Workspace" />
+    <l:task icon="images/24x24/up.png" href="${rootURL}/" title="Back to Dashboard" />
+    <l:task icon="images/24x24/search.png" href="${rootURL}/${it.url}" title="Status" />
+    <l:task icon="images/24x24/folder.png" href="${rootURL}/${it.url}ws/" title="Workspace" />
     <c:if test="${it.hasJavadoc}">
-      <l:task icon="images/24x24/javadoc.gif" href="${rootURL}/${it.url}javadoc" title="Javadoc" /> 
+      <l:task icon="images/24x24/help.png" href="${rootURL}/${it.url}javadoc" title="Javadoc" />
     </c:if>
     <l:isAdmin>
-      <l:task icon="images/24x24/gears_run.gif" href="${rootURL}/${it.url}build" title="Schedule a build" />
-      <l:task icon="images/24x24/garbage.gif" href="${rootURL}/${it.url}delete" title="Delete Project" />
-      <l:task icon="images/24x24/wrench.gif" href="${rootURL}/${it.url}configure" title="Configure" />
+      <l:task icon="images/24x24/clock.png" href="${rootURL}/${it.url}build" title="Schedule a build" />
+      <l:task icon="images/24x24/edit-delete.png" href="${rootURL}/${it.url}delete" title="Delete Project" />
+      <l:task icon="images/24x24/setting.png" href="${rootURL}/${it.url}configure" title="Configure" />
     </l:isAdmin>
     <st:include page="actions.jsp" />
   </l:tasks>

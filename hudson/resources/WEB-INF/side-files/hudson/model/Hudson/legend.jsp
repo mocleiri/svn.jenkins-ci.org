@@ -10,20 +10,28 @@
 <l:main-panel>
   <table cellpadding=5>
     <tr><td>
-      <img src="images/blue.gif">
-      Last build was successful.
+      <img src="images/48x48/grey.gif">
+      The project has never been built before.
     </td></tr>
     <tr><td>
-      <img src="images/blue_anim.gif">
-      Last build was successful. A new build is in progress.
+      <img src="images/48x48/grey_anime.gif">
+      The first build of the project is in progress.
     </td></tr>
     <tr><td>
-      <img src="images/red.gif">
-      Last build failed.
+      <img src="images/48x48/blue.gif">
+      The last build was successful.
     </td></tr>
     <tr><td>
-      <img src="images/red_anim.gif">
-      Last build failed. A new build is in progress.
+      <img src="images/48x48/blue_anime.gif">
+      The last build was successful. A new build is in progress.
+    </td></tr>
+    <tr><td>
+      <img src="images/48x48/red.gif">
+      The last build failed.
+    </td></tr>
+    <tr><td>
+      <img src="images/48x48/red_anime.gif">
+      The last build failed. A new build is in progress.
     </td></tr>
   </table>
 

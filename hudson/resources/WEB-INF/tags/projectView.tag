@@ -29,7 +29,7 @@
     <c:set var="lfBuild" value="${job.lastFailedBuild}" />
     <tr>
       <td>
-        <img width="32" height="32" src="${rootURL}/${job.buildStatusUrl}" />
+        <img width="32" height="32" src="${rootURL}/images/32x32/${job.buildStatusUrl}" />
       </td>
       <td>
         <a href="${rootURL}/${job.url}">
@@ -56,14 +56,14 @@
       </td>
       <l:isAdmin>
         <td>
-          <a href="${rootURL}/${job.url}build"><img src="${rootURL}/images/24x24/gears_run.gif" title="Schedule a build" border=0></a>
+          <a href="${rootURL}/${job.url}build"><img src="${rootURL}/images/24x24/clock.png" title="Schedule a build" border=0></a>
         </td>
       </l:isAdmin>
     </tr>
   </c:forEach>
 </table>
 <div align=right style="margin:1em">
-    <a href="legend">Legend</a>
+    <a href="${rootURL}/legend">Legend</a>
     &nbsp;&nbsp;&nbsp;&nbsp;
     <a href="rssAll"><img src="${rootURL}/images/atom.png" border=0> for all</a>
     &nbsp;&nbsp;&nbsp;&nbsp;

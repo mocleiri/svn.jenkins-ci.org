@@ -20,6 +20,6 @@
     </c:if>
   </c:if>
   
-  <img src="buildStatus" width=32 height=32>
+  <img src="buildStatus" width=48 height=48>
   <jsp:doBody />
 </h1>
