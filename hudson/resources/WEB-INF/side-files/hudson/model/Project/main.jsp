@@ -17,7 +17,7 @@
       Latest Artifacts<br>
       <ul>
         <c:forEach var="f" items="${it.lastSuccessfulBuild.artifacts}">
-          <li><a href="lastSuccessfulBuild/artifact/${f}">${f}</a></li>
+          <li><a href="lastSuccessfulBuild/artifact/${f}">${f.fileName}</a></li>
         </c:forEach>
       </ul>
     </t:summary>

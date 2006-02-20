@@ -309,8 +309,8 @@ public class Run <JobT extends Job,RunT extends Run>
     /**
      * Gets all the artifacts (relative to {@link #getArtifactsDir()}.
      */
-    public List getArtifacts() {
-        List r = new ArrayList();
+    public List<Artifact> getArtifacts() {
+        List<Artifact> r = new ArrayList<Artifact>();
         addArtifacts(getArtifactsDir(),"",r);
         return r;
     }
@@ -325,7 +325,7 @@ public class Run <JobT extends Job,RunT extends Run>
         return !getArtifacts().isEmpty();
     }
 
-    private void addArtifacts( File dir, String path, List r ) {
+    private void addArtifacts( File dir, String path, List<Artifact> r ) {
         String[] children = dir.list();
         if(children==null)  return;
         for (String child : children) {
@@ -333,8 +333,40 @@ public class Run <JobT extends Job,RunT extends Run>
             if (sub.isDirectory()) {
                 addArtifacts(sub, path + child + '/', r);
             } else {
-                r.add(path + child);
+                r.add(new Artifact(path + child));
             }
+        }
+    }
+
+    /**
+     * A build artifact.
+     */
+    public class Artifact {
+        /**
+         * Relative path name from {@link Run#getArtifactsDir()} 
+         */
+        private final String relativePath;
+
+        private Artifact(String relativePath) {
+            this.relativePath = relativePath;
+        }
+
+        /**
+         * Gets the artifact file.
+         */
+        public File getFile() {
+            return new File(getArtifactsDir(),relativePath);
+        }
+
+        /**
+         * Returns just the file name portion, without the path.
+         */
+        public String getFileName() {
+            return getFile().getName();
+        }
+
+        public String toString() {
+            return relativePath;
         }
     }
 
@@ -519,7 +551,6 @@ public class Run <JobT extends Job,RunT extends Run>
         while((len=in.read(buf))>0)
             rsp.getOutputStream().write(buf,0,len);
         in.close();
-        return;
     }
 
     /**
@@ -530,7 +561,6 @@ public class Run <JobT extends Job,RunT extends Run>
         rsp.setCharacterEncoding("US-ASCII");
         rsp.setStatus(HttpServletResponse.SC_OK);
         rsp.getWriter().print(number);
-        return;
     }
 
     public void doToggleLogKeep( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
