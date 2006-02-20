@@ -35,7 +35,7 @@
   </c:forEach>
   <tr class=build-row>
     <td colspan=2 align=right>
-      <a href="rssAll"><img src="${rootURL}/images/atom.png" border=0> for all runs</a>
+      <a href="rssAll"><img src="${rootURL}/images/atom.png" border=0> for all</a>
       <a href="rssFailed"><img src="${rootURL}/images/atom.png" border=0> for failures</a>
     </td>
   </tr>
