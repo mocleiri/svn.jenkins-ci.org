@@ -205,21 +205,28 @@ public class Run <JobT extends Job,RunT extends Run>
     private static String getTimeSpanString(long duration) {
         duration /= 1000;
         if(duration<60)
-            return duration+" seconds";
+            return combine(duration,"second");
         duration /= 60;
         if(duration<60)
-            return duration+" minutes";
+            return combine(duration,"minute");
         duration /= 60;
         if(duration<24)
-            return duration+" hours";
+            return combine(duration,"hour");
         duration /= 24;
         if(duration<30)
-            return duration+" days";
+            return combine(duration,"day");
         duration /= 30;
         if(duration<12)
-            return duration+" months";
+            return combine(duration,"month");
         duration /= 12;
-        return duration+" years";
+        return combine(duration,"year");
+    }
+
+    private static String combine(long n, String suffix) {
+        String s = n+' '+suffix;
+        if(n!=1)
+            s += 's';
+        return s;
     }
 
     /**
