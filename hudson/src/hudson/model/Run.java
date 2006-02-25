@@ -223,7 +223,7 @@ public class Run <JobT extends Job,RunT extends Run>
     }
 
     private static String combine(long n, String suffix) {
-        String s = n+' '+suffix;
+        String s = n+" "+suffix;
         if(n!=1)
             s += 's';
         return s;
