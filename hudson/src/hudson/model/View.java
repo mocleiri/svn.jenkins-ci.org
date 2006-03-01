@@ -61,6 +61,9 @@ public class View extends JobCollection {
     }
 
     public Job doCreateJob(StaplerRequest req, StaplerResponse rsp) throws IOException {
+        if(!Hudson.adminCheck(req,rsp))
+            return null;
+
         Job job = owner.doCreateJob(req, rsp);
         if(job!=null) {
             jobNames.add(job.getName());
@@ -77,6 +80,9 @@ public class View extends JobCollection {
      * Accepts submission from the configuration page.
      */
     public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
         jobNames.clear();
         for (Job job : owner.getJobs()) {
             if(req.getParameter(job.getName())!=null)
@@ -92,6 +98,9 @@ public class View extends JobCollection {
      * Deletes this view.
      */
     public synchronized void doDoDelete( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
         owner.deleteView(this);
         rsp.sendRedirect(req.getContextPath());
     }

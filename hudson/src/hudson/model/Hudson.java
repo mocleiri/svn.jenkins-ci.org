@@ -2,16 +2,15 @@ package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
 import hudson.XmlFile;
+import hudson.scm.CVSSCM;
+import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
 import hudson.scm.SCMManager;
-import hudson.scm.SCM;
-import hudson.scm.CVSSCM;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
+import org.apache.tools.ant.taskdefs.Copy;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.apache.tools.ant.taskdefs.Copy;
-import org.apache.tools.ant.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,10 +22,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-import java.util.Vector;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.Vector;
 
 /**
  * Root object of the system.
@@ -332,6 +331,9 @@ public final class Hudson extends JobCollection {
      * Accepts submission from the configuration page.
      */
     public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
         useSecurity = req.getParameter("use_security")!=null;
 
         numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
@@ -374,6 +376,9 @@ public final class Hudson extends JobCollection {
     }
 
     public synchronized Job doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        if(!Hudson.adminCheck(req,rsp))
+            return null;
+
         String name = req.getParameter("name");
         String className = req.getParameter("type");
         String mode = req.getParameter("mode");
@@ -427,6 +432,9 @@ public final class Hudson extends JobCollection {
     }
 
     public synchronized void doCreateView( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
         String name = req.getParameter("name");
 
         if(name==null) {
@@ -465,6 +473,9 @@ public final class Hudson extends JobCollection {
      * Reloads the configuration.
      */
     public synchronized void doReload( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
         load();
         rsp.sendRedirect(req.getContextPath());
     }
@@ -498,5 +509,16 @@ public final class Hudson extends JobCollection {
         }
 
         return r;
+    }
+
+    public static boolean adminCheck(StaplerRequest req,StaplerResponse rsp) throws IOException {
+        if(!getInstance().isUseSecurity())
+            return true;
+
+        if(req.isUserInRole("admin"))
+            return true;
+
+        rsp.sendError(StaplerResponse.SC_FORBIDDEN);
+        return false;
     }
 }

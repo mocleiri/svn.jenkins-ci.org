@@ -571,6 +571,9 @@ public class Run <JobT extends Job,RunT extends Run>
     }
 
     public void doToggleLogKeep( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
         keepLog = !keepLog;
         save();
         rsp.forwardToPreviousPage(req);

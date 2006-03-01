@@ -84,6 +84,9 @@ public class Executor extends Thread {
      * Stops the current build.
      */
     public void doStop( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
         interrupt();
         rsp.sendRedirect(req.getContextPath());
     }

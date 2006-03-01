@@ -243,6 +243,9 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
      * Accepts submission from the configuration page.
      */
     public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
         nextBuildNumber = Integer.parseInt(req.getParameter("buildNumber"));
         description = req.getParameter("description");
 
@@ -270,6 +273,9 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
      * Deletes this project.
      */
     public synchronized void doDoDelete( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
         Util.deleteRecursive(root);
         getParent().deleteJob(this);
         rsp.sendRedirect(req.getContextPath());

@@ -204,6 +204,9 @@ public class Project extends Job<Project,Build> {
      * Cancels a scheduled build.
      */
     public void doCancelQueue( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
         getParent().getQueue().cancel(this);
         rsp.forwardToPreviousPage(req);
     }
@@ -212,6 +215,9 @@ public class Project extends Job<Project,Build> {
      * Accepts submission from the configuration page.
      */
     public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
         int scmidx = Integer.parseInt(req.getParameter("scm"));
         scm = SCMManager.getSupportedSCMs()[scmidx].newInstance(req);
 
