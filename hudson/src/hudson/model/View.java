@@ -62,8 +62,10 @@ public class View extends JobCollection {
 
     public Job doCreateJob(StaplerRequest req, StaplerResponse rsp) throws IOException {
         Job job = owner.doCreateJob(req, rsp);
-        jobNames.add(job.getName());
-        owner.save();
+        if(job!=null) {
+            jobNames.add(job.getName());
+            owner.save();
+        }
         return job;
     }
 
