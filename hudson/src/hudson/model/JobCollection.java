@@ -39,6 +39,9 @@ public abstract class JobCollection implements ModelObject {
 
     /**
      * Creates a job in this collection.
+     *
+     * @return
+     *      null if fails.
      */
     public abstract Job doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException;
 
