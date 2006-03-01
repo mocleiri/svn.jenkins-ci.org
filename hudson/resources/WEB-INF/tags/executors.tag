@@ -29,7 +29,7 @@
             <div nowrap>Building <a href="${rootURL}/${e.currentBuild.url}">${e.currentBuild}</a></div>
             <c:set var="pos" value="${e.progress}" />
             <c:if test="${pos>0}">
-              <t:progressBar pos="${pos}"/>
+              <t:progressBar pos="${pos}" href="${rootURL}/${e.currentBuild.url}console"/>
             </c:if>
           </td>
           <td class="pane" width=16 align=center valign=middle>
