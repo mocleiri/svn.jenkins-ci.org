@@ -51,7 +51,7 @@
         <c:if test="${anc.prev!=null}">
           &#187;
         </c:if>
-        <a href="${anc.url}">
+        <a href="${anc.url}/">
           ${anc.object.displayName}
         </a>
       </c:forEach>

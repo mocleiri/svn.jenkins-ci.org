@@ -61,13 +61,18 @@ public class WebAppMain implements ServletContextListener {
             if(value!=null && value.trim().length()>0)
                 return new File(value);
         } catch (NamingException e) {
-            ; // ignore
+            // ignore
         }
 
         // look at the env var next
         String env = EnvVars.masterEnvVars.get("HUDSON_HOME");
         if(env!=null)
             return new File(env);
+
+        // finally check the system property
+        String sysProp = System.getProperty("HUDSON_HOME");
+        if(sysProp!=null)
+            return new File(sysProp);
 
         // otherwise pick a place by ourselves
         String root = event.getServletContext().getRealPath("/WEB-INF/workspace");

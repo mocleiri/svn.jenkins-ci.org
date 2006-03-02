@@ -33,8 +33,8 @@
     <c:forEach var="f" items="${cs.files}">
       <tr>
         <td>
-          <img width="20" height="20"
-            src="${rootURL}/images/16x16/document_${f.editType.name}.gif"
+          <img width="16" height="16"
+            src="${rootURL}/images/16x16/document_${f.editType.name}.png"
             title="${f.editType.description}">
         </td>
         <td>${f.revision}</td>

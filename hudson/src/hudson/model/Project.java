@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -246,6 +248,13 @@ public class Project extends Job<Project,Build> {
      * Serves the workspace files.
      */
     public synchronized void doWs( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        if(req.getQueryString()!=null) {
+            String path = req.getParameter("path");
+            if(path!=null) {
+                rsp.sendRedirect(path);
+                return;
+            }
+        }
         serveFile(req, rsp, getWorkspace(), true);
     }
 
@@ -289,9 +298,8 @@ public class Project extends Job<Project,Build> {
 
             if(serveDirIndex) {
                 req.setAttribute("it",this);
-                File[] files = f.listFiles();
-                Arrays.sort(files,FILE_SORTER);
-                req.setAttribute("files",files);
+                req.setAttribute("parentPath",buildParentPath(path));
+                req.setAttribute("files",buildChildPathList(f));
                 req.getView(this,"workspaceDir.jsp").forward(req,rsp);
                 return;
             } else {
@@ -310,9 +318,118 @@ public class Project extends Job<Project,Build> {
         in.close();
     }
 
+    /**
+     * Builds a list of {@link Path} that represents ancestors
+     * from a string like "/foo/bar/zot".
+     */
+    private List<Path> buildParentPath(String pathList) {
+        List<Path> r = new ArrayList<Path>();
+        StringTokenizer tokens = new StringTokenizer(pathList, "/");
+        int total = tokens.countTokens();
+        int current=1;
+        while(tokens.hasMoreTokens()) {
+            String token = tokens.nextToken();
+            r.add(new Path(repeat("../",total-current),token,true));
+            current++;
+        }
+        return r;
+    }
+
+    /**
+     * Builds a list of list of {@link Path}. The inner
+     * list of {@link Path} represents one child item to be shown
+     * (this mechanism is used to skip empty intermediate directory.)
+     */
+    private List<List<Path>> buildChildPathList(File cur) {
+        List<List<Path>> r = new ArrayList<List<Path>>();
+
+        File[] files = cur.listFiles();
+        Arrays.sort(files,FILE_SORTER);
+
+        for( File f : files ) {
+            Path p = new Path(f.getName(),f.getName(),f.isDirectory());
+            if(!f.isDirectory()) {
+                r.add(Collections.singletonList(p));
+            } else {
+                // find all empty intermediate directory
+                List<Path> l = new ArrayList<Path>();
+                l.add(p);
+                String relPath = f.getName();
+                while(true) {
+                    // files that don't start with '.' qualify for 'meaningful files'
+                    File[] sub = f.listFiles(new FilenameFilter() {
+                        public boolean accept(File dir, String name) {
+                            return !name.startsWith(".");
+                        }
+                    });
+                    if(sub.length!=1 || !sub[0].isDirectory())
+                        break;
+                    f = sub[0];
+                    relPath += '/'+f.getName();
+                    l.add(new Path(relPath,f.getName(),true));
+                }
+                r.add(l);
+            }
+        }
+
+        return r;
+    }
+
+    private static String repeat(String s,int times) {
+        StringBuffer buf = new StringBuffer(s.length()*times);
+        for(int i=0; i<times; i++ )
+            buf.append(s);
+        return buf.toString();
+    }
+
+    /**
+     * Represents information about one file or folder.
+     */
+    public final class Path {
+        /**
+         * Relative URL to this path from the current page.
+         */
+        private final String href;
+        /**
+         * Name of this path. Just the file name portion.
+         */
+        private final String title;
+
+        private final boolean isFolder;
+
+        public Path(String href, String title, boolean isFolder) {
+            this.href = href;
+            this.title = title;
+            this.isFolder = isFolder;
+        }
+
+        public String getHref() {
+            return href;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getIconName() {
+            return isFolder?"folder.png":"text.png";
+        }
+    }
+
+
+
     private static final Comparator<File> FILE_SORTER = new Comparator<File>() {
         public int compare(File lhs, File rhs) {
+            // directories first, files next
+            int r = dirRank(lhs)-dirRank(rhs);
+            if(r!=0) return r;
+            // otherwise alphabetical
             return lhs.getName().compareTo(rhs.getName());
+        }
+
+        private int dirRank(File f) {
+            if(f.isDirectory())     return 0;
+            else                    return 1;
         }
     };
 }

@@ -15,6 +15,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * Job that runs outside Hudson.
@@ -94,6 +96,7 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
                     lastBuild = b;
                     runs.put( b.getId(), b );
                 } catch (IOException e) {
+                    logger.log(Level.WARNING,"Unable to load "+dir,e);
                     e.printStackTrace();
                     try {
                         Util.deleteRecursive(dir);
@@ -173,4 +176,6 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
             }
         }
     }
+
+    private static final Logger logger = Logger.getLogger(ExternalJob.class.getName());
 }
