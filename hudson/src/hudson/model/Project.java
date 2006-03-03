@@ -356,10 +356,10 @@ public class Project extends Job<Project,Build> {
                 l.add(p);
                 String relPath = f.getName();
                 while(true) {
-                    // files that don't start with '.' qualify for 'meaningful files'
+                    // files that don't start with '.' qualify for 'meaningful files', nor 'CVS'
                     File[] sub = f.listFiles(new FilenameFilter() {
                         public boolean accept(File dir, String name) {
-                            return !name.startsWith(".");
+                            return !name.startsWith(".") && !name.equals("CVS");
                         }
                     });
                     if(sub.length!=1 || !sub[0].isDirectory())
