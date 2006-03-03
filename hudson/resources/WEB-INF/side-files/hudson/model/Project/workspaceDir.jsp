@@ -11,13 +11,13 @@
   <%-- parent path --%>
     <div class=parentPath>
       <form action="." method="get">
-        <a href="${rootURL}/${it.url}ws/"><img src="${rootURL}/images/32x32/folder-open.png" class=rootIcon /></a>
+        <a href="${rootURL}/${it.url}ws/"><img src="${rootURL}/images/32x32/folder-open.gif" class=rootIcon /></a>
         <c:forEach var="p" items="${parentPath}">
           <a href="${p.href}">${p.title}</a>
           /
         </c:forEach>
         <input type="text" name="path">
-        <input type="image" src="${rootURL}/images/16x16/go-next.png" style="vertical-align:middle"/>
+        <input type="image" src="${rootURL}/images/16x16/go-next.gif" style="vertical-align:middle"/>
       </form>
     </div>
     <ul>

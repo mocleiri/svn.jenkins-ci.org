@@ -34,7 +34,7 @@
       <tr>
         <td>
           <img width="16" height="16"
-            src="${rootURL}/images/16x16/document_${f.editType.name}.png"
+            src="${rootURL}/images/16x16/document_${f.editType.name}.gif"
             title="${f.editType.description}">
         </td>
         <td>${f.revision}</td>

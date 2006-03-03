@@ -56,7 +56,7 @@
       </td>
       <l:isAdmin>
         <td>
-          <a href="${rootURL}/${job.url}build"><img src="${rootURL}/images/24x24/clock.png" title="Schedule a build" border=0></a>
+          <a href="${rootURL}/${job.url}build"><img src="${rootURL}/images/24x24/clock.gif" title="Schedule a build" border=0></a>
         </td>
       </l:isAdmin>
     </tr>
@@ -65,7 +65,7 @@
 <div align=right style="margin:1em">
     <a href="${rootURL}/legend">Legend</a>
     &nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="rssAll"><img src="${rootURL}/images/atom.png" border=0> for all</a>
+    <a href="rssAll"><img src="${rootURL}/images/atom.gif" border=0> for all</a>
     &nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="rssFailed"><img src="${rootURL}/images/atom.png" border=0> for failures</a>
+    <a href="rssFailed"><img src="${rootURL}/images/atom.gif" border=0> for failures</a>
 </div>

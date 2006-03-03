@@ -10,9 +10,9 @@
 <l:side-panel>
   <l:tasks>
     <l:isAdmin>
-      <l:task icon="images/24x24/new-package.png" href="newJob" title="New Job" />
-      <l:task icon="images/24x24/setting.png" href="${rootURL}/configure" title="Configure" />
-      <l:task icon="images/24x24/refresh.png" href="${rootURL}/reload" title="Reload Config" />
+      <l:task icon="images/24x24/new-package.gif" href="newJob" title="New Job" />
+      <l:task icon="images/24x24/setting.gif" href="${rootURL}/configure" title="Configure" />
+      <l:task icon="images/24x24/refresh.gif" href="${rootURL}/reload" title="Reload Config" />
       <st:include page="sidepanel2.jsp" />
     </l:isAdmin>
   </l:tasks>

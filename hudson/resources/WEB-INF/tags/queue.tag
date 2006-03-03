@@ -21,7 +21,7 @@
             ${item.project.name}
           </a></td>
           <td class="pane" width=16 align=center valign=middle>
-            <a href="${item.project.url}cancelQueue"><img src="${rootURL}/images/16x16/edit-delete.png" alt="cancel this build" /></a>
+            <a href="${item.project.url}cancelQueue"><img src="${rootURL}/images/16x16/edit-delete.gif" alt="cancel this build" /></a>
           </td>
         </tr>
       </c:forEach>

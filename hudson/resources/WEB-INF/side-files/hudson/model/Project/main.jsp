@@ -5,15 +5,15 @@
 <%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
 <table style="margin-top: 1em; margin-left:1em;">
   <c:if test="${it.hasJavadoc}">
-    <t:summary icon="help.png">
+    <t:summary icon="help.gif">
       <a href="javadoc">Javadoc</a>
     </t:summary>
   </c:if>
-  <t:summary icon="folder.png">
+  <t:summary icon="folder.gif">
     <a href="ws">Workspace</a>
   </t:summary>
   <c:if test="${it.lastSuccessfulBuild.hasArtifacts}">
-    <t:summary icon="package.png">
+    <t:summary icon="package.gif">
       Latest Artifacts<br>
       <ul>
         <c:forEach var="f" items="${it.lastSuccessfulBuild.artifacts}">
