@@ -412,7 +412,7 @@ public class Project extends Job<Project,Build> {
         }
 
         public String getIconName() {
-            return isFolder?"folder.png":"text.png";
+            return isFolder?"folder.gif":"text.gif";
         }
     }
 
