@@ -47,4 +47,10 @@ abstract class AbstractCVSFamilySCM implements SCM {
             return false;
         }
     }
+
+    protected final String nullify(String s) {
+        if(s==null)     return null;
+        if(s.trim().length()==0)    return null;
+        return s;
+    }
 }

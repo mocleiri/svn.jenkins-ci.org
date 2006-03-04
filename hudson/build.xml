@@ -44,7 +44,7 @@
 		</jar>
 		
 		<war destfile="build/hudson.war" webxml="resources/WEB-INF/web.xml">
-			<fileset dir="resources" includes="**/*" excludes="CVS"/>
+			<fileset dir="resources" includes="**/*" excludes="**/Thumbs.db, **/*.xcf"/>
 			<lib dir="lib/retroweaver" includes="retroweaver.jar" />
 			<lib dir="lib" includes="stapler.jar" />
 			<lib dir="build" includes="hudson.jar" />

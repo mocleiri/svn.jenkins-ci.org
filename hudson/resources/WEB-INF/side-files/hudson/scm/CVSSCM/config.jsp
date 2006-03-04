@@ -8,11 +8,11 @@
     </c:forEach>
   </s:editableComboBox>
 </s:entry>
-<s:entry title="module">
+<s:entry title="Module">
   <input class="setting-input" name="cvs_module"
     type="text" value="${scm.module}">
 </s:entry>
-<s:entry title="branch">
+<s:entry title="Branch">
   <input class="setting-input" name="cvs_branch"
     type="text" value="${scm.branch}">
 </s:entry>

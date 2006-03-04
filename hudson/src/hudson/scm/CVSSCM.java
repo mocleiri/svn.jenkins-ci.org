@@ -58,14 +58,10 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
 
     public CVSSCM(String cvsroot, String module,String branch,String cvsRsh,boolean canUseUpdate) {
-        if(branch==null || branch.trim().length()==0)
-            branch = null;
-        if(cvsRsh==null || cvsRsh.trim().length()==0)
-            cvsRsh = null;
         this.cvsroot = cvsroot;
         this.module = module;
-        this.branch = branch;
-        this.cvsRsh = cvsRsh;
+        this.branch = nullify(branch);
+        this.cvsRsh = nullify(cvsRsh);
         this.canUseUpdate = canUseUpdate;
     }
 

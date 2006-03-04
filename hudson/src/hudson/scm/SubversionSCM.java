@@ -37,10 +37,14 @@ import java.util.StringTokenizer;
 public class SubversionSCM extends AbstractCVSFamilySCM {
     private final String modules;
     private boolean useUpdate;
+    private String username;
+    private String otherOptions;
 
-    SubversionSCM( String modules, boolean useUpdate ) {
+    SubversionSCM( String modules, boolean useUpdate, String username, String otherOptions ) {
         this.modules = modules;
         this.useUpdate = useUpdate;
+        this.username = nullify(username);
+        this.otherOptions = nullify(otherOptions);
     }
 
     public String getModules() {
@@ -49,6 +53,14 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
 
     public boolean isUseUpdate() {
         return useUpdate;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getOtherOptions() {
+        return otherOptions;
     }
 
     private Collection<String> getModuleDirNames() {
@@ -118,7 +130,10 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             result = update(dir,listener);
         else {
             Util.deleteContentsRecursive(dir);
-            result = run(DESCRIPTOR.getSvnExe()+" co -q  "+modules,listener,dir);
+            result = run(DESCRIPTOR.getSvnExe()+" co -q --non-interactive "
+                +(username!=null?"--username "+username+' ':"")
+                +(otherOptions!=null?otherOptions+' ':"")
+                +modules,listener,dir);
         }
 
         if(!result)
@@ -172,6 +187,11 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
 
     public boolean update(File dir, BuildListener listener) throws IOException {
         String cmd = DESCRIPTOR.getSvnExe()+" update -q --non-interactive";
+        if(username!=null)
+            cmd+=" --username "+username;
+        if(otherOptions!=null)
+            cmd+=' '+otherOptions;
+
         StringTokenizer tokens = new StringTokenizer(modules);
         while(tokens.hasMoreTokens()) {
             if(!run(cmd,listener,new File(dir,getLastPathComponent(tokens.nextToken()))))
@@ -290,7 +310,9 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         public SCM newInstance(HttpServletRequest req) {
             return new SubversionSCM(
                 req.getParameter("svn_modules"),
-                req.getParameter("svn_use_update")!=null
+                req.getParameter("svn_use_update")!=null,
+                req.getParameter("svn_username"),
+                req.getParameter("svn_other_options")
             );
         }
 
