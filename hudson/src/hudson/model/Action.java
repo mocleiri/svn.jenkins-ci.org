@@ -20,6 +20,9 @@ public interface Action extends Serializable, ModelObject {
 
     /**
      * Gets the string to be displayed.
+     *
+     * The convention is to capitalize the first letter of each word,
+     * such as "Test Result". 
      */
     String getDisplayName();
 

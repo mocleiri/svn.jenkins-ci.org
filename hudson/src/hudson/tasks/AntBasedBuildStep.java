@@ -11,7 +11,7 @@ import hudson.model.BuildListener;
  *
  * @author Kohsuke Kawaguchi
  */
-abstract class AntBasedBuildStep implements BuildStep {
+public abstract class AntBasedBuildStep implements BuildStep {
     protected final void execTask(Task task, BuildListener listener) {
         try {
             task.execute();

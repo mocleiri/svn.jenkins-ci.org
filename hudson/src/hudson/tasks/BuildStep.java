@@ -2,6 +2,7 @@ package hudson.tasks;
 
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.tasks.junit.JUnitResultArchiver;
 
 /**
  * One step of the whole build process.
@@ -45,6 +46,7 @@ public interface BuildStep {
     public static final BuildStepDescriptor[] PUBLISHERS = new BuildStepDescriptor[]{
         ArtifactArchiver.DESCRIPTOR,
         JavadocArchiver.DESCRIPTOR,
+        JUnitResultArchiver.DESCRIPTOR,
         Mailer.DESCRIPTOR,
         BuildTrigger.DESCRIPTOR
     };
