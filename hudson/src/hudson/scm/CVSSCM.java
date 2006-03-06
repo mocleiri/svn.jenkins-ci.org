@@ -349,6 +349,10 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             return "Tag this build";
         }
 
+        public String getUrlName() {
+            return "tagBuild";
+        }
+
         public String getTagName() {
             return tagName;
         }
@@ -361,7 +365,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             return build;
         }
 
-        public void doAction(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+        public void doIndex(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
             req.setAttribute("build",build);
             req.getView(this,chooseAction()).forward(req,rsp);
         }
@@ -381,7 +385,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             String name = req.getParameter("name");
             if(name==null || name.length()==0) {
                 // invalid tag name
-                doAction(req,rsp);
+                doIndex(req,rsp);
                 return;
             }
 
@@ -390,7 +394,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
                 workerThread.start();
             }
 
-            doAction(req,rsp);
+            doIndex(req,rsp);
         }
 
         /**
@@ -399,7 +403,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         public synchronized void doClearError(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
             if(workerThread!=null && !workerThread.isAlive())
                 workerThread = null;
-            doAction(req,rsp);
+            doIndex(req,rsp);
         }
 
         public final class TagWorkerThread extends Thread {

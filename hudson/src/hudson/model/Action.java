@@ -24,7 +24,7 @@ public interface Action extends Serializable, ModelObject {
     String getDisplayName();
 
     /**
-     * Performs the action.
+     * Gets the URL path name.
      */
-    void doAction( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException;
+    String getUrlName();
 }
