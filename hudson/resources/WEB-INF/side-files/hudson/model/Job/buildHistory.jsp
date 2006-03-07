@@ -16,12 +16,10 @@
         #${build.number}
       </td>
       <td nowrap="nowrap">
-        <span class="highlighted-build">
-          <a class="tip" href="${link}">
-            <i:formatDate value="${build.timestamp.time}" type="both" dateStyle="medium" timeStyle="medium"/>
-            <!--span><%-- TODO: log --%></span-->
-          </a>
-        </span>
+        <a class="tip" href="${link}">
+          <i:formatDate value="${build.timestamp.time}" type="both" dateStyle="medium" timeStyle="medium"/>
+          <!--span><%-- TODO: log --%></span-->
+        </a>
       </td>
     </tr>
     <c:if test="${build.building}">
