@@ -77,6 +77,10 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         if(idx>=0)  return module.substring(0,idx);
         else        return module;
     }
+    
+    public String getAllModules() {
+        return module;
+    }
 
     public String getBranch() {
         return branch;

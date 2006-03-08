@@ -10,7 +10,7 @@
 </s:entry>
 <s:entry title="Module">
   <input class="setting-input" name="cvs_module"
-    type="text" value="${scm.module}">
+    type="text" value="${scm.allModules}">
 </s:entry>
 <s:entry title="Branch">
   <input class="setting-input" name="cvs_branch"
