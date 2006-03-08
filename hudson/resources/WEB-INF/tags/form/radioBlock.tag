@@ -10,7 +10,7 @@
 <c:set var="rb_id" value="${rb_id+1}" scope="request" />
 
 <tr id="rb_s${rb_id}"><%-- this ID marks the beginning --%>
-  <td colspan="2">
+  <td colspan="3">
     <script>
         <%-- this is way too clumsy. there must be a better way to do it. --%>
         function showRb${rb_id}(show) {

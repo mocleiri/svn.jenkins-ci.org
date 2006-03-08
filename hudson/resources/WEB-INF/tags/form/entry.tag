@@ -7,6 +7,7 @@
 <%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <tr>
+  <td class="setting-leftspace">&nbsp;</td>
   <td class="setting-name">
     ${title}
   </td>
@@ -16,6 +17,7 @@
 </tr>
 <c:if test="${description!=null && f:length(description)>0}">
   <tr>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td class="setting-description">
       ${description}

@@ -2,7 +2,7 @@
   Expandable section that shows "advanced..." button by default.
   Upon clicking it, a section unfolds.
 --%>
-<tr><td></td>
+<tr><td></td><td></td>
   <td>
     <div class=advancedLink>
       <input type="button" value="Advanced..." class="advancedButton" />

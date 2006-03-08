@@ -9,7 +9,7 @@
 <c:set var="oe_id" value="${oe_id+1}" scope="request" />
 
 <tr id="oe_s${oe_id}"><%-- this ID marks the beginning --%>
-  <td colspan="2">
+  <td colspan="3">
     <script>
         function toggle${oe_id}() {
           var tbl = document.getElementById('oe_s${oe_id}').parentNode;
