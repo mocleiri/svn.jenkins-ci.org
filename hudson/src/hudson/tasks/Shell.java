@@ -70,7 +70,7 @@ public class Shell implements BuildStep {
                 return false;
             }
 
-            String cmd = DESCRIPTOR.getShell()+" -x -e "+script.getPath();
+            String cmd = DESCRIPTOR.getShell()+" -xe "+script.getPath();
 
             listener.getLogger().println("$ "+cmd);
 
@@ -123,5 +123,5 @@ public class Shell implements BuildStep {
             setShell(req.getParameter("shell"));
             return true;
         }
-    };
+    }
 }
