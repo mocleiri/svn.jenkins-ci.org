@@ -70,6 +70,13 @@ public final class Hudson extends JobCollection {
     private List<JDK> jdks;
 
     /**
+     * Quiet period.
+     *
+     * This is {@link Integer} so that we can initialize it to '5' for upgrading users.
+     */
+    /*package*/ Integer quietPeriod;
+
+    /**
      * {@link View}s.
      */
     private List<View> views;   // can't initialize it eagerly for backward compatibility
@@ -179,6 +186,13 @@ public final class Hudson extends JobCollection {
                 return j;
         }
         return null;
+    }
+
+    /**
+     * Gets the system default quiet period.
+     */
+    public int getQuietPeriod() {
+        return quietPeriod!=null ? quietPeriod : 5;
     }
 
     /**
@@ -337,6 +351,7 @@ public final class Hudson extends JobCollection {
         useSecurity = req.getParameter("use_security")!=null;
 
         numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
+        quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
 
         {// update JDK installations
             jdks.clear();

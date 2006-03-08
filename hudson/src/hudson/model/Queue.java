@@ -50,7 +50,7 @@ public class Queue {
 
         // put the item in the queue
         Calendar due = new GregorianCalendar();
-        due.add(Calendar.SECOND,5);
+        due.add(Calendar.SECOND, p.getQuietPeriod());
         items.add(new Item(due,p));
 
         notify();   // let the thread know that a new item is in the queue.

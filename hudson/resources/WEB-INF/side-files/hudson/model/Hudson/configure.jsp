@@ -20,6 +20,14 @@
       <input type="text" name="numExecutors" class="setting-input"
         value="${it.numExecutors}"/>
     </s:entry>
+    <s:entry title="Quiet period"
+      description="
+        A newly scheduled build wait for this many seconds before actually built.
+        This is useful for collapsing multiple CVS change notification e-mails to one.
+      ">
+      <input class="setting-input" name="quiet_period"
+        type="text" value="${it.quietPeriod}">
+    </s:entry>
     <s:entry title="Enable security"
       description="If enabled, you have to log in before changing the configuration or running a new build.">
       <input type="checkbox" name="use_security"

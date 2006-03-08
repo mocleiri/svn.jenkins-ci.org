@@ -8,9 +8,9 @@
       <input type="button" value="Advanced..." class="advancedButton" />
     </div
     <%-- no space inbetween so that 'nextSibling' takes us to advancedBody --%>
-    ><div class=advancedBody>
-    <%-- this is the hidden portion that becomes visible once "advanced" is clicked --%>
+    ><table class=advancedBody><tbody>
+    <%-- this is the hidden portion that hosts the "advanced" part. Contents will be moved to the master table when "advanced..." is clicked --%>
       <jsp:doBody/>
-    </div>
+    </tbody></table>
   </td>
 </tr>

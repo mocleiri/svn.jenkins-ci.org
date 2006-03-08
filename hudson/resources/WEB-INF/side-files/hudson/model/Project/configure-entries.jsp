@@ -18,6 +18,23 @@
   </select>
 </s:entry>
 
+<s:section title="Advanced Project Options">
+  <s:advanced>
+    <%-- custom quiet period --%>
+    <s:optionalBlock name="hasCustomQuietPeriod" title="Quiet period" checked="${it.hasCustomQuietPeriod}">
+      <s:entry title="Quiet period"
+        description="
+          If set, a newly scheduled build wait for this many seconds before actually built.
+          This is useful for collapsing multiple CVS change notification e-mails to one.
+          If set, this value overrides the global setting.
+        ">
+        <input class="setting-input" name="quiet_period"
+          type="text" value="${it.quietPeriod}">
+      </s:entry>
+    </s:optionalBlock>
+  </s:advanced>
+</s:section>
+
 <%-- SCM config pane --%>
 <s:section title="Source Code Management">
   <c:set var="scms" value="<%= hudson.scm.SCMManager.getSupportedSCMs() %>" />

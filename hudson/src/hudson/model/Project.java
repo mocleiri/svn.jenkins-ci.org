@@ -60,6 +60,11 @@ public class Project extends Job<Project,Build> {
     private String jdk;
 
     /**
+     * The quiet period. Null to delegate to the system default.
+     */
+    private Integer quietPeriod = null;
+
+    /**
      * Creates a new project.
      */
     public Project(Hudson parent,String name) {
@@ -69,6 +74,15 @@ public class Project extends Job<Project,Build> {
 
     public JDK getJDK() {
         return getParent().getJDK(jdk);
+    }
+
+    public int getQuietPeriod() {
+        return quietPeriod!=null ? quietPeriod : getParent().getQuietPeriod();
+    }
+
+    // ugly name because of EL
+    public boolean getHasCustomQuietPeriod() {
+        return quietPeriod!=null;
     }
 
 
@@ -224,6 +238,11 @@ public class Project extends Job<Project,Build> {
         scm = SCMManager.getSupportedSCMs()[scmidx].newInstance(req);
 
         jdk = req.getParameter("jdk");
+        if(req.getParameter("hasCustomQuietPeriod")!=null) {
+            quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
+        } else {
+            quietPeriod = null;
+        }
 
         builders.clear();
         for( int i=0; i<BuildStep.BUILDERS.length; i++ ) {

@@ -17,22 +17,20 @@
     <c:if test="${scm.useUpdate}">checked</c:if>>
 </s:entry>
 <s:advanced>
-  <table>
-    <s:entry title="Username"
-      description="
-        If you need to specify a user name for accessing the repository.
-        To specify a password, <a href='svn-password'>see this</a>.
+  <s:entry title="Username"
+    description="
+      If you need to specify a user name for accessing the repository.
+      To specify a password, <a href='svn-password'>see this</a>.
 
-      ">
-      <input class="setting-input" name="svn_username"
-        type="text" value="${scm.username}">
-    </s:entry>
-    <s:entry title="Other options"
-      description="
-        If you need to specify any other SVN option during checkout/update, specify them here
-      ">
-      <input class="setting-input" name="svn_other_options"
-        type="text" value="${scm.otherOptions}">
-    </s:entry>
-  </table>
+    ">
+    <input class="setting-input" name="svn_username"
+      type="text" value="${scm.username}">
+  </s:entry>
+  <s:entry title="Other options"
+    description="
+      If you need to specify any other SVN option during checkout/update, specify them here
+    ">
+    <input class="setting-input" name="svn_other_options"
+      type="text" value="${scm.otherOptions}">
+  </s:entry>
 </s:advanced>

@@ -2,9 +2,18 @@ var hudsonRules = {
   ".advancedButton" : function(e) {
     e.onclick = function() {
       var link = this.parentNode;
-      var container = link.nextSibling;
-      container.style.display = "block";
-      link.style.display = "none";
+      link.style.display = "none"; // hide the button
+
+      var container = link.nextSibling.firstChild; // TABLE -> TBODY
+
+      var tr = link;
+      while(tr.tagName!="TR")
+        tr = tr.parentNode;
+
+      // move the contents of the advanced portion into the main table
+      while(container.lastChild!=null) {
+        tr.parentNode.insertBefore(container.lastChild,tr.nextSibling);
+      }
     }
   },
 
