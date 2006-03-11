@@ -10,16 +10,7 @@ import java.util.Collection;
  *
  * @author Kohsuke Kawaguchi
  */
-public abstract class TabulatedResult implements ModelObject {
-    public abstract Build getOwner();
-
-    /**
-     * Gets the counter part of this {@link TabulatedResult} in the previous run.
-     *
-     * @return null
-     *      if nosuch counter part exists.
-     */
-    public abstract TabulatedResult getPreviousResult();
+public abstract class TabulatedResult extends TestObject {
 
     /**
      * Gets the human readable title of this result object.

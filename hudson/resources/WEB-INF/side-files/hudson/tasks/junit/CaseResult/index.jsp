@@ -6,31 +6,25 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
 
-<st:include it="${it.ownerBuild}" page="sidepanel.jsp" />
+<st:include it="${it.owner}" page="sidepanel.jsp" />
 <l:main-panel>
-  <h1>
-    <c:choose>
-      <c:when test="${it.passed}">
-        <span style="color:#204A87">Passed</span>
-      </c:when>
-      <c:otherwise>
-        <span style="color:#A40000">Failed</span>
-      </c:otherwise>
-    </c:choose>
+  <c:set var="st" value="${it.status}" />
+  <h1 class="${st.cssClass}">
+    ${st.message}
   </h1>
   <p style="font-weight:bold">
     ${it.fullName}
   </p>
   <pre>${it.errorStackTrace}</pre>
 
-  <c:if test="${!empty(it.owner.stdout)}">
+  <c:if test="${!empty(it.parent.stdout)}">
     <h3>Standard Output</h3>
-    <pre>${it.owner.stdout}</pre>
+    <pre>${it.parent.stdout}</pre>
   </c:if>
 
-  <c:if test="${!empty(it.owner.stderr)}">
+  <c:if test="${!empty(it.parent.stderr)}">
     <h3>Standard Error</h3>
-    <pre>${it.owner.stderr}</pre>
+    <pre>${it.parent.stderr}</pre>
   </c:if>
 </l:main-panel>
 <l:footer/>

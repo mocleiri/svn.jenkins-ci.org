@@ -2,18 +2,17 @@ package hudson.tasks.junit;
 
 import org.dom4j.Element;
 import hudson.model.Build;
-import hudson.model.ModelObject;
 
 /**
  * One test result.
  *
  * @author Kohsuke Kawaguchi
  */
-public final class CaseResult implements ModelObject, Comparable<CaseResult> {
+public final class CaseResult extends TestObject implements Comparable<CaseResult> {
     private final String className;
     private final String testName;
     private final String errorStackTrace;
-    private transient SuiteResult owner;
+    private transient SuiteResult parent;
 
     CaseResult(Element testCase) {
         className = testCase.attributeValue("classname");
@@ -32,6 +31,9 @@ public final class CaseResult implements ModelObject, Comparable<CaseResult> {
         return testName;
     }
 
+    /**
+     * Gets the name of the test, which is returned from {@link TestCase#getName()}
+     */
     public String getName() {
         return testName;
     }
@@ -60,15 +62,15 @@ public final class CaseResult implements ModelObject, Comparable<CaseResult> {
         else            return className.substring(0,idx);
     }
 
-    /**
-     * Gets the name of the test, which is returned from {@link TestCase#getName()}
-     */
-    public String getTestName() {
-        return testName;
+    public String getFullName() {
+        return className+'.'+getName();
     }
 
-    public String getFullName() {
-        return className+'.'+getTestName();
+    @Override
+    public CaseResult getPreviousResult() {
+        SuiteResult pr = parent.getPreviousResult();
+        if(pr==null)    return null;
+        return pr.getCase(getName());
     }
 
     /**
@@ -82,19 +84,72 @@ public final class CaseResult implements ModelObject, Comparable<CaseResult> {
         return errorStackTrace==null;
     }
 
-    public SuiteResult getOwner() {
-        return owner;
+    public SuiteResult getParent() {
+        return parent;
     }
 
-    public Build getOwnerBuild() {
-        return owner.getOwner().getOwner();
+    public Build getOwner() {
+        return parent.getParent().getOwner();
     }
 
     public void freeze(SuiteResult owner) {
-        this.owner = owner;
+        this.parent = owner;
     }
 
     public int compareTo(CaseResult that) {
         return this.getFullName().compareTo(that.getFullName());
+    }
+
+    public Status getStatus() {
+        CaseResult pr = getPreviousResult();
+        if(pr==null) {
+            return isPassed() ? Status.PASSED : Status.FAILED;
+        }
+
+        if(pr.isPassed()) {
+            return isPassed() ? Status.PASSED : Status.REGRESSION;
+        } else {
+            return isPassed() ? Status.FIXED : Status.FAILED;
+        }
+    }
+
+    /**
+     * Constants that represent the status of this test.
+     */
+    public enum Status {
+        /**
+         * This test runs OK, just like its previous run.
+         */
+        PASSED("result-passed","Passed",true),
+        /**
+         * This test failed, just like its previous run.
+         */
+        FAILED("result-failed","Failed",false),
+        /**
+         * This test has been failing, but now it runs OK.
+         */
+        FIXED("result-fixed","Fixed",true),
+        /**
+         * This test has been running OK, but now it failed.
+         */
+        REGRESSION("result-regression","Regression",false);
+
+        private final String cssClass;
+        private final String message;
+        public final boolean isOK;
+
+        Status(String cssClass, String message, boolean OK) {
+           this.cssClass = cssClass;
+           this.message = message;
+           isOK = OK;
+       }
+
+        public String getCssClass() {
+            return cssClass;
+        }
+
+        public String getMessage() {
+            return message;
+        }
     }
 }

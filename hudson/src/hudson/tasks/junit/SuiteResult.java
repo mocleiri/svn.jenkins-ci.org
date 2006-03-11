@@ -8,8 +8,6 @@ import org.dom4j.io.SAXReader;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Result of one test suite.
@@ -17,6 +15,10 @@ import java.util.TreeMap;
  * <p>
  * The notion of "test suite" is rather arbitrary in JUnit ant task.
  * It's basically one invocation of junit.
+ *
+ * <p>
+ * This object is really only used as a part of the persisted
+ * object tree.
  *
  * @author Kohsuke Kawaguchi
  */
@@ -29,7 +31,7 @@ public final class SuiteResult {
      * All test cases.
      */
     private final List<CaseResult> cases = new ArrayList<CaseResult>();
-    private transient TestResult owner;
+    private transient TestResult parent;
 
     SuiteResult(File xmlReport) throws DocumentException {
         Document result = new SAXReader().read(xmlReport);
@@ -56,16 +58,22 @@ public final class SuiteResult {
         return stderr;
     }
 
-    public TestResult getOwner() {
-        return owner;
+    public TestResult getParent() {
+        return parent;
     }
 
     public List<CaseResult> getCases() {
         return cases;
     }
 
+    public SuiteResult getPreviousResult() {
+        TestResult pr = parent.getPreviousResult();
+        if(pr==null)    return null;
+        return pr.getSuite(name);
+    }
+
     /**
-     * Returns the {@link CaseResult} whose {@link CaseResult#getTestName()}
+     * Returns the {@link CaseResult} whose {@link CaseResult#getName()}
      * is the same as the given string.
      *
      * <p>
@@ -73,14 +81,14 @@ public final class SuiteResult {
      */
     public CaseResult getCase(String name) {
         for (CaseResult c : cases) {
-            if(c.getTestName().equals(name))
+            if(c.getName().equals(name))
                 return c;
         }
         return null;
     }
 
     public void freeze(TestResult owner) {
-        this.owner = owner;
+        this.parent = owner;
         for (CaseResult c : cases)
             c.freeze(this);
     }

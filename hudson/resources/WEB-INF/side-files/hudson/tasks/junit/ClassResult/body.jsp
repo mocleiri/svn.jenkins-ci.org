@@ -13,15 +13,10 @@
       <c:forEach var="p" items="${it.children}" varStatus="status">
         <tr>
           <td class=pane><a href="children/${status.index}/">${p.name}</td>
-          <td class=pane>
-            <c:choose>
-              <c:when test="${p.passed}">
-                Passed
-              </c:when>
-              <c:otherwise>
-                Failed
-              </c:otherwise>
-            </c:choose>
+          <td class=pane style="width:6em">
+            <span class="${p.status.cssClass}">
+              ${p.status.message}
+            </span>
           </td>
         </tr>
       </c:forEach>
