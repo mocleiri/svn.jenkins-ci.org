@@ -37,7 +37,7 @@ public class JUnitResultArchiver extends AntBasedBuildStep {
         fs.setDir(build.getProject().getWorkspace());
         fs.setIncludes(testResults);
 
-        build.getActions().add(new TestResult(build, fs.getDirectoryScanner(p), listener));
+        build.getActions().add(new TestResultAction(build, fs.getDirectoryScanner(p), listener));
 
         return true;
     }

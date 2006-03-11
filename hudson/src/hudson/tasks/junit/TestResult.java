@@ -1,6 +1,5 @@
 package hudson.tasks.junit;
 
-import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import org.apache.tools.ant.DirectoryScanner;
@@ -10,18 +9,22 @@ import org.kohsuke.stapler.StaplerResponse;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Collection;
 
 /**
  * Root of all the test results for one build.
  *
  * @author Kohsuke Kawaguchi
  */
-public final class TestResult extends MetaTabulatedResult implements Action {
+public final class TestResult extends MetaTabulatedResult {
+    /**
+     * List of all {@link SuiteResult}s in this test.
+     * This is the core data structure to be persisted in the disk.
+     */
     private final List<SuiteResult> suites = new ArrayList<SuiteResult>();
 
     /**
@@ -45,6 +48,14 @@ public final class TestResult extends MetaTabulatedResult implements Action {
      */
     private transient List<CaseResult> failedTests;
 
+    /**
+     * Creates an empty result.
+     */
+    TestResult(Build owner) {
+        this.owner = owner;
+        freeze();
+    }
+
     TestResult(Build owner, DirectoryScanner results, BuildListener listener) {
         this.owner = owner;
         String[] includedFiles = results.getIncludedFiles();
@@ -53,28 +64,21 @@ public final class TestResult extends MetaTabulatedResult implements Action {
         long buildTime = owner.getTimestamp().getTimeInMillis();
 
         for (String value : includedFiles) {
+            File reportFile = new File(baseDir, value);
             try {
-                File reportFile = new File(baseDir, value);
                 if(buildTime <= reportFile.lastModified())
                     // only count files that were actually updated during this build
                     suites.add(new SuiteResult(reportFile));
             } catch (DocumentException e) {
-                e.printStackTrace(listener.error(e.getMessage()));
+                e.printStackTrace(listener.error("Failed to read "+reportFile));
             }
         }
-        freeze();
-    }
 
-    public String getUrlName() {
-        return "testReport";
+        freeze();
     }
 
     public String getDisplayName() {
         return "Test Result";
-    }
-
-    public String getIconFileName() {
-        return "clipboard.gif";
     }
 
     public Build getOwner() {
