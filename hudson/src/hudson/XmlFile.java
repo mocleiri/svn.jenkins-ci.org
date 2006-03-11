@@ -1,6 +1,7 @@
 package hudson;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.io.StreamException;
 import com.thoughtworks.xstream.io.xml.XppReader;
 import hudson.util.AtomicFileWriter;
@@ -40,6 +41,8 @@ public final class XmlFile {
             return xs.fromXML(r);
         } catch(StreamException e) {
             throw new IOException2("Unable to read "+file,e);
+        } catch(ConversionException e) {
+            throw new IOException2("Unable to read "+file,e);
         } finally {
             r.close();
         }
@@ -54,6 +57,8 @@ public final class XmlFile {
             xs.unmarshal(new XppReader(r),o);
         } catch (StreamException e) {
             throw new IOException2(e);
+        } catch(ConversionException e) {
+            throw new IOException2("Unable to read "+file,e);
         } finally {
             r.close();
         }

@@ -25,7 +25,7 @@ import com.thoughtworks.xstream.XStream;
  * @author Kohsuke Kawaguchi
  */
 public class TestResultAction implements Action, StaplerProxy {
-    private final Build owner;
+    public final Build owner;
 
     private transient WeakReference<TestResult> result;
 
@@ -33,6 +33,7 @@ public class TestResultAction implements Action, StaplerProxy {
         this.owner = owner;
 
         TestResult r = new TestResult(owner,results,listener);
+        r.parent = this;
 
         // persist the data
         try {
@@ -52,7 +53,7 @@ public class TestResultAction implements Action, StaplerProxy {
         return new XmlFile(xs,new File(owner.getRootDir(), "junitResult.xml"));
     }
 
-    private synchronized TestResult getResult() {
+    public synchronized TestResult getResult() {
         if(result==null) {
             TestResult r = load();
             result = new WeakReference<TestResult>(r);
@@ -70,12 +71,15 @@ public class TestResultAction implements Action, StaplerProxy {
      * Loads a {@link TestResult} from disk.
      */
     private TestResult load() {
+        TestResult r;
         try {
-            return (TestResult)getDataFile().read();
+            r = (TestResult)getDataFile().read();
         } catch (IOException e) {
             logger.log(Level.WARNING, "Failed to load "+getDataFile(),e);
-            return new TestResult(owner);   // return a dummy
+            r = new TestResult();   // return a dummy
         }
+        r.parent = this;
+        return r;
     }
 
     public Object getTarget() {

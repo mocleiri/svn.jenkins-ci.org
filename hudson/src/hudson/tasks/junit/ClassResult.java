@@ -29,6 +29,12 @@ public final class ClassResult extends TabulatedResult implements Comparable<Cla
         return parent.getOwner();
     }
 
+    public ClassResult getPreviousResult() {
+        PackageResult pr = parent.getPreviousResult();
+        if(pr==null)    return null;
+        return pr.getDynamic(getName(),null,null);
+    }
+
     public String getTitle() {
         return "Test Result : "+getName();
     }

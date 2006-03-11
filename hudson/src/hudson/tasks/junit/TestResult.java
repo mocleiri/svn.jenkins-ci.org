@@ -2,6 +2,7 @@ package hudson.tasks.junit;
 
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Result;
 import org.apache.tools.ant.DirectoryScanner;
 import org.dom4j.DocumentException;
 import org.kohsuke.stapler.StaplerRequest;
@@ -37,7 +38,7 @@ public final class TestResult extends MetaTabulatedResult {
      */
     private transient Map<String,PackageResult> byPackages;
 
-    private final Build owner;
+    /*package*/ transient TestResultAction parent;
 
     /**
      * Number of all tests.
@@ -51,13 +52,11 @@ public final class TestResult extends MetaTabulatedResult {
     /**
      * Creates an empty result.
      */
-    TestResult(Build owner) {
-        this.owner = owner;
+    TestResult() {
         freeze();
     }
 
     TestResult(Build owner, DirectoryScanner results, BuildListener listener) {
-        this.owner = owner;
         String[] includedFiles = results.getIncludedFiles();
         File baseDir = results.getBasedir();
 
@@ -82,7 +81,20 @@ public final class TestResult extends MetaTabulatedResult {
     }
 
     public Build getOwner() {
-        return owner;
+        return parent.owner;
+    }
+
+    @Override
+    public TestResult getPreviousResult() {
+        Build b = getOwner();
+        while(true) {
+            b = b.getPreviousBuild();
+            if(b==null)
+                return null;
+            TestResultAction r = b.getAction(TestResultAction.class);
+            if(r!=null)
+                return r.getResult();
+        }
     }
 
     public String getTitle() {
@@ -112,6 +124,10 @@ public final class TestResult extends MetaTabulatedResult {
     }
 
     public PackageResult getDynamic(String packageName, StaplerRequest req, StaplerResponse rsp) {
+        return byPackage(packageName);
+    }
+
+    public PackageResult byPackage(String packageName) {
         return byPackages.get(packageName);
     }
 
@@ -144,7 +160,7 @@ public final class TestResult extends MetaTabulatedResult {
                     failedTests.add(cr);
 
                 String pkg = cr.getPackageName();
-                PackageResult pr = byPackages.get(pkg);
+                PackageResult pr = byPackage(pkg);
                 if(pr==null)
                     byPackages.put(pkg,pr=new PackageResult(this,pkg));
                 pr.add(cr);

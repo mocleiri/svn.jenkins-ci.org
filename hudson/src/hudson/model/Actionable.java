@@ -34,6 +34,15 @@ public abstract class Actionable implements ModelObject {
         return actions.get(index);
     }
 
+    public <T extends Action> T getAction(Class<T> type) {
+        if(actions==null)   return null;
+        for (Action a : actions) {
+            if(type.isInstance(a))
+                return type.cast(a);
+        }
+        return null;
+    }
+
     public Object getDynamic(String token, StaplerRequest req, StaplerResponse rsp) {
         if(actions!=null) {
             for (Action a : actions) {

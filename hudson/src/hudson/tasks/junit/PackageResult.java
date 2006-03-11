@@ -41,6 +41,12 @@ public final class PackageResult extends MetaTabulatedResult {
         return parent.getOwner();
     }
 
+    public PackageResult getPreviousResult() {
+        TestResult tr = parent.getPreviousResult();
+        if(tr==null)    return null;
+        return tr.byPackage(getName());
+    }
+
     public String getTitle() {
         return "Test Result : "+getName();
     }
