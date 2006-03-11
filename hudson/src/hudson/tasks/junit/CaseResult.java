@@ -9,7 +9,7 @@ import hudson.model.ModelObject;
  *
  * @author Kohsuke Kawaguchi
  */
-public final class CaseResult implements ModelObject {
+public final class CaseResult implements ModelObject, Comparable<CaseResult> {
     private final String className;
     private final String testName;
     private final String errorStackTrace;
@@ -32,11 +32,32 @@ public final class CaseResult implements ModelObject {
         return testName;
     }
 
+    public String getName() {
+        return testName;
+    }
+
     /**
      * Gets the class name of a test class.
      */
     public String getClassName() {
         return className;
+    }
+
+    /**
+     * Gets the simple (not qualified) class name.
+     */
+    public String getSimpleName() {
+        int idx = className.lastIndexOf('.');
+        return className.substring(idx+1);
+    }
+
+    /**
+     * Gets the package name of a test case
+     */
+    public String getPackageName() {
+        int idx = className.lastIndexOf('.');
+        if(idx<0)       return "(root)";
+        else            return className.substring(0,idx);
     }
 
     /**
@@ -71,5 +92,9 @@ public final class CaseResult implements ModelObject {
 
     public void freeze(SuiteResult owner) {
         this.owner = owner;
+    }
+
+    public int compareTo(CaseResult that) {
+        return this.getFullName().compareTo(that.getFullName());
     }
 }

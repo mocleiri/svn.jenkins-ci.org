@@ -47,7 +47,14 @@ public class Executor extends Thread {
                 continue;
             }
             startTime = System.currentTimeMillis();
-            build.run();
+            try {
+                build.run();
+            } catch (Throwable e) {
+                // for some reason the executor died. this is really
+                // a bug in the code, but we don't want the executor to die,
+                // so just leave some info and go on to build other things
+                e.printStackTrace();
+            }
             build = null;
         }
     }

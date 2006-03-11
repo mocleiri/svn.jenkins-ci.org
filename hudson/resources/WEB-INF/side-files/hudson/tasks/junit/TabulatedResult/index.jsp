@@ -8,37 +8,27 @@
 
 <st:include it="${it.owner}" page="sidepanel.jsp" />
 <l:main-panel>
-  <h1>Test Result</h1>
+  <h1>${it.title}</h1>
 
-  <c:set var="failCount" value="${f:length(it.failedTests)}" />
   <div>
     <c:choose>
-      <c:when test="${it.totalTests==0}">
+      <c:when test="${it.totalCount==0}">
         No tests
       </c:when>
       <c:otherwise>
         <div>
-          ${failCount} failures
+          ${it.failCount} failures
         </div>
         <div style="width:100%; height:1em; background-color: #729FCF">
-          <div style="width:${failCount*100/it.totalTests}%; height: 1em; background-color: #EF2929"></div>
+          <div style="width:${it.failCount*100/it.totalCount}%; height: 1em; background-color: #EF2929"></div>
         </div>
         <div align="right">
-          ${it.totalTests} tests
+          ${it.totalCount} tests
         </div>
       </c:otherwise>
     </c:choose>
   </div>
 
-  <c:if test="${failCount!=0}">
-    <h2>Failed Tests</h2>
-    <ol>
-      <c:forEach var="f" items="${it.failedTests}" varStatus="i">
-        <li>
-          <a href="failedTests/${i.index}/">${f.fullName}</a>
-        </li>
-      </c:forEach>
-    </ol>
-  </c:if>
+  <st:include page="body.jsp" />
 </l:main-panel>
 <l:footer/>

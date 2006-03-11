@@ -1,29 +1,38 @@
 package hudson.tasks.junit;
 
-import hudson.model.BuildListener;
 import hudson.model.Action;
 import hudson.model.Build;
+import hudson.model.BuildListener;
 import org.apache.tools.ant.DirectoryScanner;
 import org.dom4j.DocumentException;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.Collection;
 
 /**
  * Root of all the test results for one build.
  *
  * @author Kohsuke Kawaguchi
  */
-public final class TestResult implements Action {
+public final class TestResult extends MetaTabulatedResult implements Action {
     private final List<SuiteResult> suites = new ArrayList<SuiteResult>();
 
     /**
      * {@link #suites} keyed by their names for faster lookup.
      */
     private transient Map<String,SuiteResult> suitesByName;
+
+    /**
+     * Results tabulated by package.
+     */
+    private transient Map<String,PackageResult> byPackages;
 
     private final Build owner;
 
@@ -72,12 +81,34 @@ public final class TestResult implements Action {
         return owner;
     }
 
-    public int getTotalTests() {
-        return totalTests;
+    public String getTitle() {
+        return "Test Result";
+    }
+
+    public String getChildTitle() {
+        return "Package";
+    }
+
+    @Override
+    public int getPassCount() {
+        return totalTests-getFailCount();
+    }
+
+    @Override
+    public int getFailCount() {
+        return failedTests.size();
     }
 
     public List<CaseResult> getFailedTests() {
         return failedTests;
+    }
+
+    public Collection<PackageResult> getChildren() {
+        return byPackages.values();
+    }
+
+    public PackageResult getDynamic(String packageName, StaplerRequest req, StaplerResponse rsp) {
+        return byPackages.get(packageName);
     }
 
     public SuiteResult getSuite(String name) {
@@ -97,6 +128,7 @@ public final class TestResult implements Action {
         suitesByName = new HashMap<String,SuiteResult>();
         totalTests = 0;
         failedTests = new ArrayList<CaseResult>();
+        byPackages = new TreeMap<String,PackageResult>();
         for (SuiteResult s : suites) {
             s.freeze(this);
 
@@ -106,7 +138,16 @@ public final class TestResult implements Action {
             for(CaseResult cr : s.getCases()) {
                 if(!cr.isPassed())
                     failedTests.add(cr);
+
+                String pkg = cr.getPackageName();
+                PackageResult pr = byPackages.get(pkg);
+                if(pr==null)
+                    byPackages.put(pkg,pr=new PackageResult(this,pkg));
+                pr.add(cr);
             }
         }
+
+        for (PackageResult pr : byPackages.values())
+            pr.freeze();
     }
 }

@@ -1,14 +1,15 @@
 package hudson.tasks.junit;
 
-import org.dom4j.io.SAXReader;
 import org.dom4j.Document;
-import org.dom4j.Element;
 import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Result of one test suite.
@@ -25,7 +26,7 @@ public final class SuiteResult {
     private final String stderr;
 
     /**
-     * Test cases.
+     * All test cases.
      */
     private final List<CaseResult> cases = new ArrayList<CaseResult>();
     private transient TestResult owner;

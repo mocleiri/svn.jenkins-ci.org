@@ -10,9 +10,9 @@
 <l:side-panel>
   <l:tasks>
     <l:task icon="images/24x24/up.gif" href="${rootURL}/${it.parent.url}" title="Back to Project" />
-    <l:task icon="images/24x24/search.gif" href="." title="Status" />
-    <l:task icon="images/24x24/notepad.gif" href="changes" title="Changes" />
-    <l:task icon="images/24x24/terminal.gif" href="console" title="Console Output" />
+    <l:task icon="images/24x24/search.gif" href="${rootURL}/${it.url}" title="Status" />
+    <l:task icon="images/24x24/notepad.gif" href="${rootURL}/${it.url}changes" title="Changes" />
+    <l:task icon="images/24x24/terminal.gif" href="${rootURL}/${it.url}console" title="Console Output" />
     <st:include page="actions.jsp" />
     <c:if test="${it.previousBuild!=null}">
       <l:task icon="images/24x24/previous.gif" href="${rootURL}/${it.previousBuild.url}" title="Previous Build" />
