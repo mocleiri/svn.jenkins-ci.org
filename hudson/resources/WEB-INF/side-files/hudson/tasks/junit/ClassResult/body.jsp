@@ -14,8 +14,9 @@
         <tr>
           <td class=pane><a href="children/${status.index}/">${p.name}</td>
           <td class=pane style="width:6em">
-            <span class="${p.status.cssClass}">
-              ${p.status.message}
+            <c:set var="pst" value="${p.status}" />
+            <span class="${pst.cssClass}">
+              ${pst.message}
             </span>
           </td>
         </tr>
