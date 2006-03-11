@@ -151,5 +151,9 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
         public String getMessage() {
             return message;
         }
+
+        public boolean isRegression() {
+            return this==REGRESSION;
+        }
     }
 }

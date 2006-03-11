@@ -7,6 +7,10 @@
     <c:forEach var="f" items="${it.failedTests}" varStatus="i">
       <li>
         <a href="failedTests/${i.index}/">${f.fullName}</a>
+        <c:set var="fst" value="${f.status}" />
+        <c:if test="${fst.regression}">
+          <span class="result-regression">(regression)</span>
+        </c:if>
       </li>
     </c:forEach>
   </ol>
