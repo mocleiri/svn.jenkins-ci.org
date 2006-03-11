@@ -22,4 +22,22 @@
       </ul>
     </t:summary>
   </c:if>
+
+  <c:set var="tr" value="${it.lastSuccessfulBuild.testResult}" />
+  <c:if test="${tr!=null}">
+    <t:summary icon="clipboard.gif">
+      <a href="lastSuccessfulBuild/testReport/">Latest Test Result</a>
+      <c:choose>
+        <c:when test="${tr.failCount==0}">
+          (no failures)
+        </c:when>
+        <c:when test="${tr.failCount==1}">
+          (1 failure)
+        </c:when>
+        <c:otherwise>
+          (${tr.failCount} failures)
+        </c:otherwise>
+      </c:choose>
+    </t:summary>
+  </c:if>
 </table>

@@ -4,6 +4,8 @@ import hudson.Proc;
 import static hudson.model.Hudson.isWindows;
 import hudson.scm.CVSChangeLog;
 import hudson.tasks.BuildStep;
+import hudson.tasks.junit.TestResultAction;
+import hudson.tasks.junit.TestResult;
 import org.xml.sax.SAXException;
 
 import java.io.File;
@@ -51,6 +53,12 @@ public final class Build extends Run<Project,Build> implements Runnable {
 
     public Calendar due() {
         return timestamp;
+    }
+
+    public TestResult getTestResult() {
+        TestResultAction ta = getAction(TestResultAction.class);
+        if(ta==null)    return null;
+        return ta.getResult();
     }
 
     /**
