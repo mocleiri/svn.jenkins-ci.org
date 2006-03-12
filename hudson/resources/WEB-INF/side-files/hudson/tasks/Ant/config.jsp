@@ -9,7 +9,10 @@
     </c:forEach>
   </select>
 </s:entry>
-<s:entry title="Targets">
+<s:entry title="Targets" description="
+  Specify Ant target(s) to run. If necessary, you can also specify any ant command line options,
+  such as '-Dprop=value'.
+  ">
   <input class="setting-input" name="ant_targets"
     type="text" value="${builder.targets}">
 </s:entry>
