@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.Map;
 import java.util.Collection;
+import java.util.Collections;
 
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -79,6 +80,7 @@ public final class PackageResult extends MetaTabulatedResult {
                     r.add(cr);
             }
         }
+        Collections.sort(r,CaseResult.BY_AGE);
         return r;
     }
 

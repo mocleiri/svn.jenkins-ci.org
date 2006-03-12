@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="${rootURL}/css/color.css" type="text/css">
   <script src="${rootURL}/scripts/prototype.js" type="text/javascript"></script>
   <script src="${rootURL}/scripts/behavior.js" type="text/javascript"></script>
+  <script src="${rootURL}/scripts/sortable.js" type="text/javascript"></script>
   <script src="${rootURL}/scripts/hudson-behavior.js" type="text/javascript"></script>
   <meta name="ROBOTS" content="INDEX,NOFOLLOW">
   <c:if test="${param.auto_refresh}">

@@ -200,6 +200,15 @@ Object.extend(String.prototype, {
 
   inspect: function() {
     return "'" + this.replace('\\', '\\\\').replace("'", '\\\'') + "'";
+  },
+
+  trim : function() {
+    var temp = this;
+    var obj = /^(\s*)([\W\w]*)(\b\s*$)/;
+    if (obj.test(temp)) { temp = temp.replace(obj, '$2'); }
+    obj = /  /g;
+    while (temp.match(obj)) { temp = temp.replace(obj, " "); }
+    return temp;
   }
 });
 

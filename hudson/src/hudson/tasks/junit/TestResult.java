@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Root of all the test results for one build.
@@ -115,10 +117,12 @@ public final class TestResult extends MetaTabulatedResult {
         return failedTests.size();
     }
 
+    @Override
     public List<CaseResult> getFailedTests() {
         return failedTests;
     }
 
+    @Override
     public Collection<PackageResult> getChildren() {
         return byPackages.values();
     }
@@ -160,6 +164,8 @@ public final class TestResult extends MetaTabulatedResult {
                 pr.add(cr);
             }
         }
+
+        Collections.sort(failedTests,CaseResult.BY_AGE);
 
         for (PackageResult pr : byPackages.values())
             pr.freeze();

@@ -2,31 +2,34 @@
 <%@ taglib prefix="h" uri="http://hudson.dev.java.net/" %>
 
 <c:if test="${it.failCount!=0}">
-  <h2>Failed Tests</h2>
-  <ol>
+  <h2>All Failed Tests</h2>
+  <table class="pane sortable">
+    <tr>
+      <td class="pane-header">Test Name</td>
+      <td class="pane-header" style="width:4em">Age</td>
+    </tr>
     <c:forEach var="f" items="${it.failedTests}" varStatus="i">
-      <li>
-        <a href="failedTests/${i.index}/">${f.fullName}</a>
-        <c:set var="fst" value="${f.status}" />
-        <c:if test="${fst.regression}">
-          <span class="result-regression">(regression)</span>
-        </c:if>
-      </li>
+      <tr>
+        <td class=pane>
+          <a href="failedTests/${i.index}/">${f.fullName}</a>
+        </td>
+        <td class=pane style="text-align:right;">
+          ${f.age}
+        </td>
+      </tr>
     </c:forEach>
-  </ol>
+  </table>
 </c:if>
 
 <c:if test="${it.totalCount!=0}">
-  <table class=pane id=testresult>
+  <h2>All Tests</h2>
+  <table class="pane sortable" id=testresult>
     <tr>
-      <td class="pane-header" colspan="5">All Tests</td>
-    </tr>
-    <tr>
-      <th class=pane>${it.childTitle}</th>
-      <th class=pane style="width:5em">Fail</th>
-      <th class=pane style="width:1em; font-size:smaller; white-space:nowrap;">(diff)</th>
-      <th class=pane style="width:5em">Total</th>
-      <th class=pane style="width:1em; font-size:smaller; white-space:nowrap;">(diff)</th>
+      <td class=pane-header>${it.childTitle}</td>
+      <td class=pane-header style="width:5em">Fail</td>
+      <td class=pane-header style="width:1em; font-size:smaller; white-space:nowrap;">(diff)</td>
+      <td class=pane-header style="width:5em">Total</td>
+      <td class=pane-header style="width:1em; font-size:smaller; white-space:nowrap;">(diff)</td>
     </tr>
     <tbody>
       <c:forEach var="p" items="${it.children}">

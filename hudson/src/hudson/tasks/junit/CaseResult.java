@@ -3,6 +3,8 @@ package hudson.tasks.junit;
 import org.dom4j.Element;
 import hudson.model.Build;
 
+import java.util.Comparator;
+
 /**
  * One test result.
  *
@@ -83,9 +85,9 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
 
     /**
      * Gets the number of consecutive builds (including this)
-     * that this test case has been failing. 
+     * that this test case has been failing.
      */
-    public int getNumberOfConsecutiveFailure() {
+    public int getAge() {
         if(isPassed())
             return 0;
         else
@@ -189,4 +191,13 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
             return this==REGRESSION;
         }
     }
+
+    /**
+     * For sorting errors by age.
+     */
+    /*package*/ static final Comparator<CaseResult> BY_AGE = new Comparator<CaseResult>() {
+        public int compare(CaseResult lhs, CaseResult rhs) {
+            return lhs.getAge()-rhs.getAge();
+        }
+    };
 }

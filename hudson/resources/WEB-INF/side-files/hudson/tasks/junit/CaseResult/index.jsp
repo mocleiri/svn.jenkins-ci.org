@@ -19,7 +19,7 @@
   <c:if test="${!it.passed}">
     <div style="text-align:right;">
       Failing for the past
-      ${h:addSuffix(it.numberOfConsecutiveFailure,'build','builds')}
+      ${h:addSuffix(it.age,'build','builds')}
       (since #${it.failedSince})
     </div>
   </c:if>
