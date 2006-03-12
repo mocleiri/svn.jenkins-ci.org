@@ -2,7 +2,6 @@ package hudson.tasks.junit;
 
 import hudson.model.Build;
 import hudson.model.BuildListener;
-import hudson.model.Result;
 import org.apache.tools.ant.DirectoryScanner;
 import org.dom4j.DocumentException;
 import org.kohsuke.stapler.StaplerRequest;
@@ -56,11 +55,12 @@ public final class TestResult extends MetaTabulatedResult {
         freeze();
     }
 
-    TestResult(Build owner, DirectoryScanner results, BuildListener listener) {
+    TestResult(TestResultAction parent, DirectoryScanner results, BuildListener listener) {
+        this.parent = parent;
         String[] includedFiles = results.getIncludedFiles();
         File baseDir = results.getBasedir();
 
-        long buildTime = owner.getTimestamp().getTimeInMillis();
+        long buildTime = parent.owner.getTimestamp().getTimeInMillis();
 
         for (String value : includedFiles) {
             File reportFile = new File(baseDir, value);
@@ -133,12 +133,6 @@ public final class TestResult extends MetaTabulatedResult {
 
     public SuiteResult getSuite(String name) {
         return suitesByName.get(name);
-    }
-
-    private Object readResolve() {
-        // call freeze when we were restored from disk
-        freeze();
-        return this;
     }
 
     /**

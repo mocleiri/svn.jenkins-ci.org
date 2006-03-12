@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
+<%@ taglib prefix="h" uri="http://hudson.dev.java.net/" %>
 
 <st:include it="${it.owner}" page="sidepanel.jsp" />
 <l:main-panel>
@@ -15,6 +16,13 @@
   <p style="font-weight:bold">
     ${it.fullName}
   </p>
+  <c:if test="${!it.passed}">
+    <div style="text-align:right;">
+      Failing for the past
+      ${h:addSuffix(it.numberOfConsecutiveFailure,'build','builds')}
+      (since #${it.failedSince})
+    </div>
+  </c:if>
   <pre>${it.errorStackTrace}</pre>
 
   <c:if test="${!empty(it.parent.stdout)}">

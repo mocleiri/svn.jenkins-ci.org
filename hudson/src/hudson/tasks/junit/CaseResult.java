@@ -14,6 +14,13 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
     private final String errorStackTrace;
     private transient SuiteResult parent;
 
+    /**
+     * This test has been failing since this build number (not id.)
+     *
+     * If {@link #isPassed() passing}, this field is left unused to 0.
+     */
+    private /*final*/ int failedSince;
+
     CaseResult(Element testCase) {
         className = testCase.attributeValue("classname");
         testName = testCase.attributeValue("name");
@@ -66,6 +73,25 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
         return className+'.'+getName();
     }
 
+    /**
+     * If this test failed, then return the build number
+     * when this test started failing.
+     */
+    public int getFailedSince() {
+        return failedSince;
+    }
+
+    /**
+     * Gets the number of consecutive builds (including this)
+     * that this test case has been failing. 
+     */
+    public int getNumberOfConsecutiveFailure() {
+        if(isPassed())
+            return 0;
+        else
+            return getOwner().getNumber()-failedSince+1;
+    }
+
     @Override
     public CaseResult getPreviousResult() {
         SuiteResult pr = parent.getPreviousResult();
@@ -92,8 +118,15 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
         return parent.getParent().getOwner();
     }
 
-    public void freeze(SuiteResult owner) {
-        this.parent = owner;
+    public void freeze(SuiteResult parent) {
+        this.parent = parent;
+        if(!isPassed()) {
+            CaseResult prev = getPreviousResult();
+            if(prev!=null && !prev.isPassed())
+                this.failedSince = prev.failedSince;
+            else
+                this.failedSince = getOwner().getNumber();
+        }
     }
 
     public int compareTo(CaseResult that) {

@@ -30,4 +30,17 @@ public class Functions {
         if(i>0)     return "+"+s;
         else        return s;
     }
+
+    /**
+     * Adds the proper suffix.
+     */
+    public static String addSuffix(int n, String singular, String plural) {
+        StringBuffer buf = new StringBuffer();
+        buf.append(n).append(' ');
+        if(n==1)
+            buf.append(singular);
+        else
+            buf.append(plural);
+        return buf.toString();
+    }
 }

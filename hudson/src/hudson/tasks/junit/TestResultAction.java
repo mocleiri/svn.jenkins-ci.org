@@ -32,8 +32,7 @@ public class TestResultAction implements Action, StaplerProxy {
     TestResultAction(Build owner, DirectoryScanner results, BuildListener listener) {
         this.owner = owner;
 
-        TestResult r = new TestResult(owner,results,listener);
-        r.parent = this;
+        TestResult r = new TestResult(this,results,listener);
 
         // persist the data
         try {
@@ -79,6 +78,7 @@ public class TestResultAction implements Action, StaplerProxy {
             r = new TestResult();   // return a dummy
         }
         r.parent = this;
+        r.freeze();
         return r;
     }
 
