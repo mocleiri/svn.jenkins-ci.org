@@ -52,6 +52,9 @@ public class WebAppMain implements ServletContextListener {
 
     /**
      * Determines the home directory for Hudson.
+     *
+     * People makes configuration mistakes, so we are trying to be nice
+     * with those by doing {@link String#trim()}.
      */
     private File getHomeDir(ServletContextEvent event) {
         // check JNDI for the home directory first
@@ -59,7 +62,7 @@ public class WebAppMain implements ServletContextListener {
             Context env = (Context) new InitialContext().lookup("java:comp/env");
             String value = (String) env.lookup("HUDSON_HOME");
             if(value!=null && value.trim().length()>0)
-                return new File(value);
+                return new File(value.trim());
         } catch (NamingException e) {
             // ignore
         }
@@ -67,17 +70,17 @@ public class WebAppMain implements ServletContextListener {
         // look at the env var next
         String env = EnvVars.masterEnvVars.get("HUDSON_HOME");
         if(env!=null)
-            return new File(env);
+            return new File(env.trim());
 
         // finally check the system property
         String sysProp = System.getProperty("HUDSON_HOME");
         if(sysProp!=null)
-            return new File(sysProp);
+            return new File(sysProp.trim());
 
         // otherwise pick a place by ourselves
         String root = event.getServletContext().getRealPath("/WEB-INF/workspace");
         if(root!=null)
-            return new File(root);
+            return new File(root.trim());
 
         // if for some reason we can't put it within the webapp, use home directory.
         return new File(new File(System.getProperty("user.home")),".hudson");
