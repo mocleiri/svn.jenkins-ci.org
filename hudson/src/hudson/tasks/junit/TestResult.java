@@ -94,13 +94,16 @@ public final class TestResult extends MetaTabulatedResult {
             if(b==null)
                 return null;
             TestResultAction r = b.getAction(TestResultAction.class);
-            if(r!=null)
-                return r.getResult();
+            if(r!=null) {
+                TestResult result = r.getResult();
+                if(result!=null)
+                    return result;
+            }
         }
     }
 
     public String getTitle() {
-        return "Test Result";
+        return "Tesgt Result";
     }
 
     public String getChildTitle() {
