@@ -15,29 +15,56 @@
 
 <st:include page="logKeep.jsp" />
 
-<c:if test="${it.result!=null}">
-  <h2>Build Artifacts</h2>
-  <ul>
-    <c:forEach var="f" items="${it.artifacts}">
-      <li><a href="artifact/${f}">${f}</a></li>
-    </c:forEach>
-  </ul>
-</c:if>
+<table style="margin-top: 1em; margin-left:1em;">
+  <c:if test="${it.result!=null}">
+    <t:summary icon="package.gif">
+      Build Artifacts<br>
+      <ul>
+        <c:forEach var="f" items="${it.artifacts}">
+          <li><a href="artifact/${f}">${f.fileName}</a></li>
+        </c:forEach>
+      </ul>
+    </t:summary>
+  </c:if>
 
-<c:set var="set" value="${it.changeSet}" />
-<h2>Changes</h2>
-<c:choose>
-  <c:when test="${f:length(set)==0}">
-    No changes.
-  </c:when>
-  <c:otherwise>
-    <ol>
-      <c:forEach var="cs" items="${set}">
-        <li><c:out value="${cs.msgEscaped}" escapeXml="false" /> (<a href="changes#detail${cs.index}">detail</a>)
-      </c:forEach>
-    </ol>
-  </c:otherwise>
-</c:choose>
+  <c:set var="tr" value="${it.testResult}" />
+  <c:if test="${tr!=null}">
+    <t:summary icon="clipboard.gif">
+      <a href="testReport/">Latest Test Result</a>
+      <c:choose>
+        <c:when test="${tr.failCount==0}">
+          (no failures)
+        </c:when>
+        <c:when test="${tr.failCount==1}">
+          (1 failure)
+        </c:when>
+        <c:otherwise>
+          (${tr.failCount} failures)
+        </c:otherwise>
+      </c:choose>
+    </t:summary>
+  </c:if>
+
+
+  <c:set var="set" value="${it.changeSet}" />
+  <t:summary icon="notepad.gif">
+    <c:choose>
+      <c:when test="${f:length(set)==0}">
+        No changes.
+      </c:when>
+      <c:otherwise>
+        Changes
+        <ol>
+          <c:forEach var="cs" items="${set}">
+            <li><c:out value="${cs.msgEscaped}" escapeXml="false" /> (<a href="changes#detail${cs.index}">detail</a>)
+          </c:forEach>
+        </ol>
+      </c:otherwise>
+    </c:choose>
+  </t:summary>
+</table>
+
+
 
 <h2>Permalinks</h2>
 <ul>
