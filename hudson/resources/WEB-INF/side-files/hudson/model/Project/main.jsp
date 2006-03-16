@@ -12,7 +12,7 @@
   <t:summary icon="folder.gif">
     <a href="ws">Workspace</a>
   </t:summary>
-  <c:if test="${it.lastSuccessfulBuild.hasArtifacts}">
+  <c:if test="${it.lastSuccessfulBuild.hasArtifacts && !empty(it.lastSuccessfulBuild.artifacts)}">
     <t:summary icon="package.gif">
       Latest Artifacts<br>
       <ul>

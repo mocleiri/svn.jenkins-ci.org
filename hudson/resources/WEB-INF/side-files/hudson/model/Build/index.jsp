@@ -16,7 +16,7 @@
 <st:include page="logKeep.jsp" />
 
 <table style="margin-top: 1em; margin-left:1em;">
-  <c:if test="${it.result!=null}">
+  <c:if test="${it.result!=null && !empty(it.artifacts)}">
     <t:summary icon="package.gif">
       Build Artifacts<br>
       <ul>
