@@ -27,12 +27,12 @@
 
   <c:if test="${!empty(it.parent.stdout)}">
     <h3>Standard Output</h3>
-    <pre>${it.parent.stdout}</pre>
+    <pre><c:out value="${it.parent.stdout}" /></pre>
   </c:if>
 
   <c:if test="${!empty(it.parent.stderr)}">
     <h3>Standard Error</h3>
-    <pre>${it.parent.stderr}</pre>
+    <pre><c:out value="${it.parent.stderr}" /></pre>
   </c:if>
 </l:main-panel>
 <l:footer/>
