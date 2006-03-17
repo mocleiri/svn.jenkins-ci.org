@@ -288,6 +288,8 @@ public class Run <JobT extends Job,RunT extends Run>
         return nextBuild;
     }
 
+    // I really messed this up. I'm hoping to fix this some time
+    // it shouldn't have trailing '/', and instead it should have leading '/'
     public String getUrl() {
         return project.getUrl()+"build/"+getId()+'/';
     }

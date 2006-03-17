@@ -103,7 +103,7 @@ public final class TestResult extends MetaTabulatedResult {
     }
 
     public String getTitle() {
-        return "Tesgt Result";
+        return "Test Result";
     }
 
     public String getChildTitle() {
