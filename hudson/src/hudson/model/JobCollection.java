@@ -43,7 +43,7 @@ public abstract class JobCollection implements ModelObject {
      * @return
      *      null if fails.
      */
-    public abstract Job doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException;
+    public abstract Job doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException;
 
     /**
      * RSS feed for all runs.
@@ -97,6 +97,18 @@ public abstract class JobCollection implements ModelObject {
         req.setAttribute("title",title);
         req.setAttribute("runs",runs);
         req.getServletContext().getRequestDispatcher("/WEB-INF/rss.jsp").forward(req,rsp);
+    }
+
+    /**
+     * Displays the error in a page.
+     */
+    protected final void sendError(Exception e, StaplerRequest req, StaplerResponse rsp) throws ServletException, IOException {
+        sendError(e.getMessage(),req,rsp);
+    }
+
+    protected final void sendError(String message, StaplerRequest req, StaplerResponse rsp) throws ServletException, IOException {
+        req.setAttribute("message",message);
+        rsp.forward(this,"error",req);
     }
 
     public static final Comparator<JobCollection> SORTER = new Comparator<JobCollection>() {

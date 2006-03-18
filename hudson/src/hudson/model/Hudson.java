@@ -14,6 +14,7 @@ import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.ServletException;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -26,6 +27,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
+import java.text.ParseException;
 
 /**
  * Root object of the system.
@@ -390,7 +392,7 @@ public final class Hudson extends JobCollection {
             rsp.sendRedirect("configure"); // back to config
     }
 
-    public synchronized Job doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+    public synchronized Job doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         if(!Hudson.adminCheck(req,rsp))
             return null;
 
@@ -398,7 +400,19 @@ public final class Hudson extends JobCollection {
         String className = req.getParameter("type");
         String mode = req.getParameter("mode");
 
-        if(name==null || getJob(name)!=null || mode==null) {
+        try {
+            checkGoodName(name);
+        } catch (ParseException e) {
+            sendError(e,req,rsp);
+            return null;
+        }
+
+        if(getJob(name)!=null) {
+            sendError("A job already exists with the name '"+name+"'",req,rsp);
+            return null;
+        }
+
+        if(mode==null) {
             rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return null;
         }
@@ -407,6 +421,7 @@ public final class Hudson extends JobCollection {
 
         if(mode.equals("newJob")) {
             if(className==null) {
+                // request forged?
                 rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
                 return null;
             }
@@ -446,14 +461,16 @@ public final class Hudson extends JobCollection {
         return result;
     }
 
-    public synchronized void doCreateView( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+    public synchronized void doCreateView( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         if(!Hudson.adminCheck(req,rsp))
             return;
 
         String name = req.getParameter("name");
 
-        if(name==null) {
-            rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        try {
+            checkGoodName(name);
+        } catch (ParseException e) {
+            sendError(e, req, rsp);
             return;
         }
 
@@ -465,6 +482,28 @@ public final class Hudson extends JobCollection {
 
         // redirect to the config screen
         rsp.sendRedirect("./"+v.getUrl()+"configure");
+    }
+
+    /**
+     * Check if the given name is suitable as a name
+     * for job, view, etc.
+     *
+     * @throws ParseException
+     *      if the given name is not good
+     */
+    public static void checkGoodName(String name) throws ParseException {
+        if(name==null || name.length()==0)
+            throw new ParseException("No name is specified",0);
+
+        for( int i=0; i<name.length(); i++ ) {
+            char ch = name.charAt(i);
+            if(Character.isISOControl(ch))
+                throw new ParseException("No control code is allowed",i);
+            if("?*()/\\%!@#$^&|<>".indexOf(ch)!=-1)
+                throw new ParseException("'"+ch+"' is an unsafe character",i);
+        }
+
+        // looks good
     }
 
     /**
