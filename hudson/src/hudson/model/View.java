@@ -3,6 +3,7 @@ package hudson.model;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
+import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -60,7 +61,7 @@ public class View extends JobCollection {
         return name;
     }
 
-    public Job doCreateJob(StaplerRequest req, StaplerResponse rsp) throws IOException {
+    public Job doCreateJob(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
         if(!Hudson.adminCheck(req,rsp))
             return null;
 
