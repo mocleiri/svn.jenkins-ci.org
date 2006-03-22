@@ -3,6 +3,7 @@ package hudson.tasks;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.tasks.junit.JUnitResultArchiver;
+import hudson.Launcher;
 
 /**
  * One step of the whole build process.
@@ -27,7 +28,7 @@ public interface BuildStep {
      *      true if the build can continue, false if there was an error
      *      and the build needs to be aborted.
      */
-    boolean perform( Build build, BuildListener listener );
+    boolean perform(Build build, Launcher launcher, BuildListener listener);
 
     /**
      * Gets the descriptor for this instance.

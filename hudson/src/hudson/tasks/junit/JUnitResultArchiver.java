@@ -5,6 +5,7 @@ import hudson.model.BuildListener;
 import hudson.tasks.AntBasedBuildStep;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
+import hudson.Launcher;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.FileSet;
 
@@ -30,11 +31,11 @@ public class JUnitResultArchiver extends AntBasedBuildStep {
         return true; // noop
     }
 
-    public boolean perform(Build build, BuildListener listener) {
+    public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         FileSet fs = new FileSet();
         Project p = new Project();
         fs.setProject(p);
-        fs.setDir(build.getProject().getWorkspace());
+        fs.setDir(build.getProject().getWorkspace().getLocal());
         fs.setIncludes(testResults);
 
         build.getActions().add(new TestResultAction(build, fs.getDirectoryScanner(p), listener));

@@ -5,6 +5,8 @@ import hudson.scm.SCM;
 import hudson.scm.SCMManager;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
+import hudson.Launcher;
+import hudson.FilePath;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -65,6 +67,13 @@ public class Project extends Job<Project,Build> {
     private Integer quietPeriod = null;
 
     /**
+     * The name of the slave node on which the build should be done.
+     *
+     * Null if the job is to run on the current machine.
+     */
+    private String slave;
+
+    /**
      * Creates a new project.
      */
     public Project(Hudson parent,String name) {
@@ -122,6 +131,10 @@ public class Project extends Job<Project,Build> {
         this.scm = scm;
     }
 
+    public Slave getSlave() {
+        return getParent().getSlave(slave);
+    }
+
     public synchronized Map<BuildStepDescriptor,BuildStep> getBuilders() {
         Map<BuildStepDescriptor,BuildStep> m = new HashMap<BuildStepDescriptor,BuildStep>();
         for( int i=builders.size()-1; i>=0; i-- ) {
@@ -157,20 +170,25 @@ public class Project extends Job<Project,Build> {
         return lastBuild;
     }
 
-    public boolean checkout(Build build, BuildListener listener) throws IOException {
+    public boolean checkout(Build build, Launcher launcher, BuildListener listener) throws IOException {
         if(scm==null)
             return true;    // no SCM
 
-        File workspace = getWorkspace();
+        FilePath workspace = getWorkspace();
         workspace.mkdirs();
-        return scm.checkout(build,workspace,listener);
+
+        return scm.checkout(build, launcher, workspace, listener);
     }
 
     /**
      * Gets the directory where the module is checked out.
      */
-    public File getWorkspace() {
-        return new File(root,"workspace");
+    public FilePath getWorkspace() {
+        Slave s = getSlave();
+        if(s ==null)
+            return new FilePath(new File(root,"workspace"));
+        else
+            return s.getFilePath();
     }
 
     /**
@@ -192,13 +210,16 @@ public class Project extends Job<Project,Build> {
 
     /**
      * Returns the root directory of the checked-out module.
+     *
+     * @return
+     *      When running remotely, this returns a remote fs directory.
      */
-    public File getModuleRoot() {
+    public FilePath getModuleRoot() {
         String module = getScm().getModule();
         if(module.length()==0)
             return getWorkspace();
         else
-            return new File(getWorkspace(),module);
+            return new FilePath(getWorkspace(),module);
     }
 
 
@@ -244,6 +265,17 @@ public class Project extends Job<Project,Build> {
             quietPeriod = null;
         }
 
+        if(req.getParameter("enableSlave")!=null) {
+            slave = req.getParameter("slave");
+            if(slave!=null) {
+                if(Hudson.getInstance().getSlave(slave)==null) {
+                    slave = null;   // no such slave
+                }
+            }
+        } else {
+            slave = null;
+        }
+
         builders.clear();
         for( int i=0; i<BuildStep.BUILDERS.length; i++ ) {
             if(req.getParameter("builder"+i)!=null) {
@@ -274,7 +306,7 @@ public class Project extends Job<Project,Build> {
                 return;
             }
         }
-        serveFile(req, rsp, getWorkspace(), true);
+        serveFile(req, rsp, getWorkspace().getLocal(), true);
     }
 
     /**
@@ -328,7 +360,8 @@ public class Project extends Job<Project,Build> {
 
         FileInputStream in = new FileInputStream(f);
         // serve the file
-        rsp.setContentType(req.getServletContext().getMimeType(req.getServletPath()));
+        String contentType = req.getServletContext().getMimeType(f.getPath());
+        rsp.setContentType(contentType);
         rsp.setContentLength((int)f.length());
         byte[] buf = new byte[1024];
         int len;

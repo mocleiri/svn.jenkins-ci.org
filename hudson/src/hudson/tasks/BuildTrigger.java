@@ -5,6 +5,7 @@ import hudson.model.BuildListener;
 import hudson.model.Hudson;
 import hudson.model.Job;
 import hudson.model.Project;
+import hudson.Launcher;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.StringTokenizer;
@@ -33,7 +34,7 @@ public class BuildTrigger implements BuildStep {
         return true;
     }
 
-    public boolean perform(Build build, BuildListener listener) {
+    public boolean perform(Build build, Launcher launcher, BuildListener listener) {
 
         Hudson hudson = Hudson.getInstance();
 

@@ -2,6 +2,8 @@ package hudson.scm;
 
 import hudson.EnvVars;
 import hudson.Proc;
+import hudson.Launcher;
+import hudson.FilePath;
 import hudson.model.BuildListener;
 
 import java.io.File;
@@ -17,13 +19,16 @@ import java.util.Map;
 abstract class AbstractCVSFamilySCM implements SCM {
     /**
      * Invokes the command with the specified command line option and wait for its completion.
+     *
+     * @param dir
+     *      if launching locally this is a local path, otherwise a remote path.
      */
-    protected final boolean run(String cmd, BuildListener listener, File dir) throws IOException {
-        listener.getLogger().println("$ "+cmd);
+    protected final boolean run(Launcher launcher, String cmd, BuildListener listener, FilePath dir) throws IOException {
+        //listener.getLogger().println("$ "+cmd);
 
         Map env = createEnvVarMap();
 
-        int r = new Proc(cmd,env,listener.getLogger(),dir).join();
+        int r = launcher.launch(cmd,env,listener.getLogger(),dir).join();
         if(r!=0)
             listener.fatalError(getDescriptor().getDisplayName()+" failed");
 
@@ -31,7 +36,7 @@ abstract class AbstractCVSFamilySCM implements SCM {
     }
 
     protected final Map createEnvVarMap() {
-        Map env = new HashMap(EnvVars.masterEnvVars);
+        Map env = new HashMap();
         buildEnvVars(env);
         return env;
     }

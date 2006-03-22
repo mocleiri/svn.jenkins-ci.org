@@ -8,15 +8,36 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<s:entry title="JDK"
-         description="JDK to be used for this project">
-  <select class="setting-input" name="jdk">
-    <option>(Default)</option>
-    <c:forEach var="inst" items="${it.parent.JDKs}">
-      <option <c:if test="${inst.name==it.JDK.name}">selected</c:if>>${inst.name}</option>
-    </c:forEach>
-  </select>
-</s:entry>
+<c:set var="jdks" value="${it.parent.JDKs}" />
+<c:if test="${!empty(jdks)}">
+  <s:entry title="JDK"
+           description="JDK to be used for this project">
+    <select class="setting-input" name="jdk">
+      <option>(Default)</option>
+      <c:forEach var="inst" items="${jdks}">
+        <option <c:if test="${inst.name==it.JDK.name}">selected</c:if>>${inst.name}</option>
+      </c:forEach>
+    </select>
+  </s:entry>
+</c:if>
+
+<%-- master/slave --%>
+<c:set var="slaves" value="${it.parent.slaves}" />
+<c:if test="${!empty(slaves)}">
+  <s:optionalBlock name="enableSlave" title="Use slave node" checked="${it.slave!=null}">
+    <s:entry title="Use slave node"
+      description="
+        To build this project on another node, specify the node to run.
+      ">
+      <select class="setting-input" name="slave">
+        <option>(This machine)</option>
+        <c:forEach var="s" items="${slaves}">
+          <option <c:if test="${s==it.slave}">selected</c:if>>${s.name}</option>
+        </c:forEach>
+      </select>
+    </s:entry>
+  </s:optionalBlock>
+</c:if>
 
 <s:section title="Advanced Project Options">
   <s:advanced>

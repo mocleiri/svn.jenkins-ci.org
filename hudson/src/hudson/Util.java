@@ -9,6 +9,8 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ResourceBundle;
+import java.util.StringTokenizer;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -68,7 +70,7 @@ public class Util {
             ResourceBundle rb = ResourceBundle.getBundle("/hudson/win32errors");
             listener.getLogger().println(rb.getString("error"+m.group(1)));
         } catch (Exception _) {
-            ; // silently recover from resource related failures
+            // silently recover from resource related failures
         }
     }
 
@@ -88,5 +90,23 @@ public class Util {
         int len;
         while((len=in.read(buf))>0)
             out.write(buf,0,len);
+    }
+
+    public static String[] tokenize(String s) {
+        StringTokenizer st = new StringTokenizer(s);
+        String[] a = new String[st.countTokens()];
+        for (int i = 0; st.hasMoreTokens(); i++)
+            a[i] = st.nextToken();
+        return a;
+    }
+
+    public static String[] mapToEnv(Map<?,?> m) {
+        String[] r = new String[m.size()];
+        int idx=0;
+
+        for (final Map.Entry e : m.entrySet()) {
+            r[idx++] = e.getKey().toString() + '=' + e.getValue().toString();
+        }
+        return r;
     }
 }

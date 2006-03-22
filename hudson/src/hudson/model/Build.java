@@ -1,6 +1,7 @@
 package hudson.model;
 
 import hudson.Proc;
+import hudson.Launcher;
 import static hudson.model.Hudson.isWindows;
 import hudson.scm.CVSChangeLog;
 import hudson.tasks.BuildStep;
@@ -66,11 +67,28 @@ public final class Build extends Run<Project,Build> implements Runnable {
      */
     public void run() {
         run(new Runner() {
+
+            /**
+             * Since configuration can be changed while a build is in progress,
+             * stick to one launcher and use it.
+             */
+            private Launcher launcher;
+
             public Result run(BuildListener listener) throws IOException {
-                if(!project.checkout(Build.this,listener))
+
+                Slave slave = project.getSlave();
+                if(slave ==null)
+                    launcher = new Launcher(listener);
+                else {
+                    launcher = slave.createLauncher(listener);
+                    listener.getLogger().println("Building remotely on "+slave.getName());
+                }
+
+
+                if(!project.checkout(Build.this,launcher,listener))
                     return Result.FAILURE;
 
-                if(!project.getScm().calcChangeLog(Build.this,new File(getRootDir(),"changelog.xml"),listener))
+                if(!project.getScm().calcChangeLog(Build.this,new File(getRootDir(),"changelog.xml"), launcher, listener))
                     return Result.FAILURE;
 
                 if(!preBuild(listener,project.getBuilders()))
@@ -104,21 +122,21 @@ public final class Build extends Run<Project,Build> implements Runnable {
             public void post(BuildListener listener) {
                 build(listener,project.getPublishers());
             }
+
+            private boolean build(BuildListener listener, Map<?, BuildStep> steps) {
+                for( BuildStep bs : steps.values() )
+                    if(!bs.perform(Build.this, launcher, listener))
+                        return false;
+                return true;
+            }
+
+            private boolean preBuild(BuildListener listener,Map<?,BuildStep> steps) {
+                for( BuildStep bs : steps.values() )
+                    if(!bs.prebuild(Build.this,listener))
+                        return false;
+                return true;
+            }
         });
-    }
-
-    private boolean build(BuildListener listener,Map<?,BuildStep> steps) {
-        for( BuildStep bs : steps.values() )
-            if(!bs.perform(this,listener))
-                return false;
-        return true;
-    }
-
-    private boolean preBuild(BuildListener listener,Map<?,BuildStep> steps) {
-        for( BuildStep bs : steps.values() )
-            if(!bs.prebuild(this,listener))
-                return false;
-        return true;
     }
 
     @Override

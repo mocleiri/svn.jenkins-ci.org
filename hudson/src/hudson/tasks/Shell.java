@@ -1,6 +1,7 @@
 package hudson.tasks;
 
-import hudson.Proc;
+import hudson.FilePath;
+import hudson.Launcher;
 import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
@@ -8,7 +9,6 @@ import static hudson.model.Hudson.isWindows;
 import hudson.model.Project;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -55,13 +55,14 @@ public class Shell implements BuildStep {
         return true;
     }
 
-    public boolean perform(Build build, BuildListener listener) {
+    public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         Project proj = build.getProject();
-        File script=null;
+        FilePath ws = proj.getWorkspace();
+        FilePath script=null;
         try {
             try {
-                script = File.createTempFile("hudson","sh");
-                Writer w = new FileWriter(script);
+                script = ws.createTempFile("hudson","sh");
+                Writer w = new FileWriter(script.getLocal());
                 w.write(command);
                 w.close();
             } catch (IOException e) {
@@ -70,13 +71,13 @@ public class Shell implements BuildStep {
                 return false;
             }
 
-            String cmd = DESCRIPTOR.getShell()+" -xe "+script.getPath();
+            String cmd = DESCRIPTOR.getShell()+" -xe "+script.getRemote();
 
             listener.getLogger().println("$ "+cmd);
 
             int r = 0;
             try {
-                r = new Proc(cmd,build.getEnvVars(),listener.getLogger(),proj.getWorkspace()).join();
+                r = launcher.launch(cmd,build.getEnvVars(),listener.getLogger(),ws).join();
             } catch (IOException e) {
                 Util.displayIOException(e,listener);
                 e.printStackTrace( listener.fatalError("command execution failed") );

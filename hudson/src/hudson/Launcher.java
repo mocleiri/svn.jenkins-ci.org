@@ -1,0 +1,90 @@
+package hudson;
+
+import hudson.model.BuildListener;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Starts a process.
+ *
+ * <p>
+ * This hides the difference between running programs locally vs remotely.
+ *
+ *
+ * <h2>'env' parameter</h2>
+ * <p>
+ * To allow important environment variables to be copied over to the remote machine,
+ * the 'env' parameter shouldn't contain default inherited environment varialbles
+ * (which often contains machine-specific information, like PATH, TIMEZONE, etc.)
+ *
+ * <p>
+ * {@link Launcher} is responsible for inheriting environment variables.
+ *
+ *
+ * @author Kohsuke Kawaguchi
+ */
+public class Launcher {
+
+    protected final BuildListener listener;
+
+    public Launcher(BuildListener listener) {
+        this.listener = listener;
+    }
+
+    public final Proc launch(String cmd, Map env, OutputStream out, FilePath workDir) throws IOException {
+        return launch(cmd,Util.mapToEnv(env),out,workDir);
+    }
+
+    public final Proc launch(String[] cmd,Map env, InputStream in, OutputStream out) throws IOException {
+        return launch(cmd,Util.mapToEnv(env),in,out);
+    }
+
+    public final Proc launch(String cmd,String[] env,OutputStream out, FilePath workDir) throws IOException {
+        return launch(Util.tokenize(cmd),env,out,workDir);
+    }
+
+    public Proc launch(String[] cmd,String[] env,OutputStream out, FilePath workDir) throws IOException {
+        printCommandLine(cmd);
+        return new Proc(cmd,Util.mapToEnv(inherit(env)),out,new File(workDir.toString()));
+    }
+
+    public Proc launch(String[] cmd,String[] env,InputStream in,OutputStream out) throws IOException {
+        printCommandLine(cmd);
+        return new Proc(cmd,inherit(env),in,out);
+    }
+
+    /**
+     * Returns true if this {@link Launcher} is going to launch on Unix.
+     */
+    public boolean isUnix() {
+        return File.pathSeparatorChar==':';
+    }
+
+    /**
+     * Expands the list of environment variables by inheriting current env variables.
+     */
+    private Map<String,String> inherit(String[] env) {
+        Map<String,String> m = new HashMap<String,String>(EnvVars.masterEnvVars);
+        for( int i=0; i<env.length; i+=2 ) {
+            if(env[i+1]==null)
+                m.remove(env[i]);
+            else
+                m.put(env[i],env[i+1]);
+        }
+        return m;
+    }
+
+    private void printCommandLine(String[] cmd) {
+        StringBuffer buf = new StringBuffer();
+        buf.append('$');
+        for (String c : cmd) {
+            buf.append(' ').append(c);
+        }
+        listener.getLogger().println(buf.toString());
+    }
+}

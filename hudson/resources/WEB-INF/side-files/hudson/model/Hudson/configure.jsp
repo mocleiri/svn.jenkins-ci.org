@@ -34,6 +34,60 @@
         <c:if test="${it.useSecurity}">checked</c:if>>
     </s:entry>
 
+
+    <s:section title="Maser/Slave Support">
+      <s:entry title="Slaves"
+        description="
+          List of slave nodes register to this master Hudson. Jobs can be configured to
+          execute on slave nodes to handle a large number of jobs.
+        ">
+        <s:repeatable var="inst" items="${it.slaves}">
+          <table width="100%">
+            <s:entry title="name" description="
+                Name that uniquely identifies a slave
+              ">
+              <input class="setting-input" name="slave_name"
+                type="text" value="${inst.name}">
+            </s:entry>
+
+            <s:entry title="connect command" description="
+                Command used to execute a program on this slave, such as
+                'ssh slave1' or 'rsh slave2', but it can be a custom program as well.
+                Hudson will append the actual command and arguments.
+              ">
+              <input class="setting-input" name="slave_command"
+                type="text" value="${inst.command}">
+            </s:entry>
+
+            <s:entry title="local FS root" description="
+                Slave needs to have a directory dedicated for Hudson, and
+                it needs to be visible from this master Hudson. Specify
+                the path (from the viewpoint of the master Hudson) to this
+                work directory, such as '/net/slave1/hudson'
+              ">
+              <input class="setting-input" name="slave_localFS"
+                type="text" value="${inst.localFS}">
+            </s:entry>
+
+            <s:entry title="remote FS root" description="
+                Specify the same path you specified above in 'remote FS root',
+                but this time from the viewpoint of the slave node, such
+                as '/hudson'
+              ">
+              <input class="setting-input" name="slave_remoteFS"
+                type="text" value="${inst.remoteFS}">
+            </s:entry>
+
+            <s:entry title="">
+              <div align="right">
+                <s:repeatableDeleteButton />
+              </div>
+            </s:entry>
+          </table>
+        </s:repeatable>
+      </s:entry>
+    </s:section>
+
     <s:section title="JDKs">
       <s:entry title="JDK installations"
                description="List of JDK installations on this system">

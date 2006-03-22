@@ -2,6 +2,7 @@ package hudson.tasks;
 
 import hudson.Proc;
 import hudson.Util;
+import hudson.Launcher;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Project;
@@ -50,16 +51,16 @@ public class Maven implements BuildStep {
         return true;
     }
 
-    public boolean perform(Build build, BuildListener listener) {
+    public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         Project proj = build.getProject();
 
         String cmd;
 
         String execName;
-        if(File.separatorChar=='\\')
-            execName = "maven.bat";
-        else
+        if(launcher.isUnix())
             execName = "maven";
+        else
+            execName = "maven.bat";
 
         MavenInstallation ai = getMaven();
         if(ai==null)
@@ -80,7 +81,7 @@ public class Maven implements BuildStep {
         listener.getLogger().println("$ "+cmd);
 
         try {
-            int r = new Proc(cmd,env,listener.getLogger(),proj.getModuleRoot()).join();
+            int r = launcher.launch(cmd,env,listener.getLogger(),proj.getModuleRoot()).join();
             return r==0;
         } catch (IOException e) {
             Util.displayIOException(e,listener);

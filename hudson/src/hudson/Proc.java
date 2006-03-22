@@ -7,6 +7,11 @@ import java.io.OutputStream;
 import java.util.Map;
 
 /**
+ * External process wrapper.
+ *
+ * <p>
+ * Used for launching, monitoring, waiting for a process.
+ *
  * @author Kohsuke Kawaguchi
  */
 public final class Proc {
@@ -14,25 +19,15 @@ public final class Proc {
     private final Thread t1,t2;
 
     public Proc(String cmd,Map env, OutputStream out, File workDir) throws IOException {
-        this(cmd,mapToEnv(env),out,workDir);
+        this(cmd,Util.mapToEnv(env),out,workDir);
     }
 
     public Proc(String[] cmd,Map env,InputStream in, OutputStream out) throws IOException {
-        this(cmd,mapToEnv(env),in,out);
-    }
-
-    private static String[] mapToEnv(Map<?,?> m) {
-        String[] r = new String[m.size()];
-        int idx=0;
-
-        for (final Map.Entry e : m.entrySet()) {
-            r[idx++] = e.getKey().toString() + '=' + e.getValue().toString();
-        }
-        return r;
+        this(cmd,Util.mapToEnv(env),in,out);
     }
 
     public Proc(String cmd,String[] env,OutputStream out, File workDir) throws IOException {
-        this( Runtime.getRuntime().exec(cmd,env,workDir), null, out );
+        this( Util.tokenize(cmd), env, out, workDir );
     }
 
     public Proc(String[] cmd,String[] env,OutputStream out, File workDir) throws IOException {

@@ -3,8 +3,7 @@ package hudson.tasks;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Project;
-import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Task;
+import hudson.Launcher;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.taskdefs.Delete;
 import org.apache.tools.ant.types.FileSet;
@@ -48,7 +47,7 @@ public class ArtifactArchiver extends AntBasedBuildStep {
         return true;
     }
 
-    public boolean perform(Build build, BuildListener listener) {
+    public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         Project p = build.getProject();
 
         Copy copyTask = new Copy();
@@ -57,7 +56,7 @@ public class ArtifactArchiver extends AntBasedBuildStep {
         dir.mkdirs();
         copyTask.setTodir(dir);
         FileSet src = new FileSet();
-        src.setDir(p.getWorkspace());
+        src.setDir(p.getWorkspace().getLocal());
         src.setIncludes(artifacts);
         copyTask.addFileset(src);
 

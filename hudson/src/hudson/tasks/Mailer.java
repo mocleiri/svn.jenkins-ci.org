@@ -3,6 +3,7 @@ package hudson.tasks;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Result;
+import hudson.Launcher;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -51,7 +52,7 @@ public class Mailer implements BuildStep {
         return true;
     }
 
-    public boolean perform(Build build, BuildListener listener) {
+    public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         try {
             MimeMessage mail = getMail(build);
             if(mail!=null) {

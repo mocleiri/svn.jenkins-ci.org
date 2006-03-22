@@ -1,6 +1,6 @@
 package hudson.tasks;
 
-import hudson.Proc;
+import hudson.Launcher;
 import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
@@ -48,7 +48,7 @@ public class Ant implements BuildStep {
         return true;
     }
 
-    public boolean perform(Build build, BuildListener listener) {
+    public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         Project proj = build.getProject();
 
         String cmd;
@@ -78,7 +78,7 @@ public class Ant implements BuildStep {
         listener.getLogger().println("$ "+cmd);
 
         try {
-            int r = new Proc(cmd,env,listener.getLogger(),proj.getModuleRoot()).join();
+            int r = launcher.launch(cmd,env,listener.getLogger(),proj.getModuleRoot()).join();
             return r==0;
         } catch (IOException e) {
             Util.displayIOException(e,listener);

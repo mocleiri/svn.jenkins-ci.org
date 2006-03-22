@@ -72,6 +72,11 @@ public final class Hudson extends JobCollection {
     private List<JDK> jdks;
 
     /**
+     * Set of installed cluster nodes.
+     */
+    private List<Slave> slaves;
+
+    /**
      * Quiet period.
      *
      * This is {@link Integer} so that we can initialize it to '5' for upgrading users.
@@ -188,6 +193,23 @@ public final class Hudson extends JobCollection {
                 return j;
         }
         return null;
+    }
+
+    /**
+     * Gets the slave node of the give name, hooked under this Hudson.
+     */
+    public Slave getSlave(String name) {
+        for (Slave s : getSlaves()) {
+            if(s.getName().equals(name))
+                return s;
+        }
+        return null;
+    }
+
+    public List<Slave> getSlaves() {
+        if(slaves ==null)
+            slaves = new ArrayList<Slave>();
+        return slaves;
     }
 
     /**
@@ -354,6 +376,20 @@ public final class Hudson extends JobCollection {
 
         numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
         quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
+
+        {// update slave list
+            slaves.clear();
+            String [] names = req.getParameterValues("slave_name");
+            String [] cmds = req.getParameterValues("slave_command");
+            String [] rfs = req.getParameterValues("slave_remoteFS");
+            String [] lfs = req.getParameterValues("slave_localFS");
+            if(names!=null && cmds!=null && rfs!=null && lfs!=null) {
+                int len = Math.min( Math.min(names.length,cmds.length), Math.min(rfs.length, lfs.length) );
+                for(int i=0;i<len;i++) {
+                    slaves.add(new Slave(names[i],cmds[i],rfs[i],new File(lfs[i])));
+                }
+            }
+        }
 
         {// update JDK installations
             jdks.clear();

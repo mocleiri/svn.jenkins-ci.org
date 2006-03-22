@@ -3,6 +3,7 @@ package hudson.tasks;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Project;
+import hudson.Launcher;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
 
@@ -32,8 +33,9 @@ public class JavadocArchiver extends AntBasedBuildStep {
         return true;
     }
 
-    public boolean perform(Build build, BuildListener listener) {
-        File javadoc = new File(build.getParent().getWorkspace(), javadocDir);
+    public boolean perform(Build build, Launcher launcher, BuildListener listener) {
+        // TODO: run tar or something for better copy
+        File javadoc = new File(build.getParent().getWorkspace().getLocal(), javadocDir);
         if(!javadoc.exists()) {
             listener.error("The specified javadoc directory doesn't exist: "+javadoc);
             return false;

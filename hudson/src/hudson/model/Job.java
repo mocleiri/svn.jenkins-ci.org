@@ -62,7 +62,7 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
         this.root = new File(new File(parent.root,"jobs"),name);
     }
 
-    public Hudson getParent() {
+    public final Hudson getParent() {
         return parent;
     }
 

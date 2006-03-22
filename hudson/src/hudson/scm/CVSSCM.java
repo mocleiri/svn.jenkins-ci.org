@@ -1,14 +1,13 @@
 package hudson.scm;
 
 import hudson.Util;
+import hudson.Launcher;
+import hudson.FilePath;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Result;
 import hudson.model.StreamBuildListener;
-import hudson.model.Hudson;
-import hudson.model.Job;
-import hudson.model.Project;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.Expand;
 import org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
@@ -94,13 +93,13 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         return canUseUpdate;
     }
 
-    public boolean checkout(Build build, File dir, BuildListener listener) throws IOException {
+    public boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener) throws IOException {
         boolean result;
 
-        if(canUseUpdate && isUpdatable(dir))
-            result = update(dir,listener);
+        if(canUseUpdate && isUpdatable(dir.getLocal()))
+            result = update(launcher,dir,listener);
         else {
-            Util.deleteContentsRecursive(dir);
+            dir.deleteContents();
 
             String cmd = MessageFormat.format("cvs -Q -z9 -d {0} co {2} {1}",
                 cvsroot,
@@ -108,7 +107,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
                 branch!=null?"-r "+branch:""
             );
 
-            result = run(cmd,listener,dir);
+            result = run(launcher,cmd,listener,dir);
         }
 
         if(!result)
@@ -121,7 +120,8 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         StringTokenizer tokens = new StringTokenizer(module);
         while(tokens.hasMoreTokens()) {
             String m = tokens.nextToken();
-            archive(new File(build.getProject().getWorkspace(),m),m,zos);
+            // TODO: doing this partially remotely would be faster
+            archive(new File(build.getProject().getWorkspace().getLocal(),m),m,zos);
         }
         zos.close();
 
@@ -183,11 +183,11 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         in.close();
     }
 
-    public boolean update(File dir, BuildListener listener) throws IOException {
+    public boolean update(Launcher launcher, FilePath remoteDir, BuildListener listener) throws IOException {
         String cmd = "cvs -q -z9 update -PdC";
         StringTokenizer tokens = new StringTokenizer(module);
         while(tokens.hasMoreTokens()) {
-            if(!run(cmd,listener,new File(dir,tokens.nextToken())))
+            if(!run(launcher,cmd,listener,new FilePath(remoteDir,tokens.nextToken())))
                 return false;
         }
         return true;
@@ -233,7 +233,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         }
     }
 
-    public boolean calcChangeLog( Build build, File changelogFile, BuildListener listener ) {
+    public boolean calcChangeLog(Build build, File changelogFile, Launcher launcher, BuildListener listener) {
         if(build.getPreviousBuild()==null) {
             // nothing to compare against
             return createEmptyChangeLog(changelogFile,listener);
@@ -248,7 +248,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             }
         };
         task.setProject(new org.apache.tools.ant.Project());
-        task.setDir(build.getProject().getWorkspace());
+        task.setDir(build.getProject().getWorkspace().getLocal());
         if(DESCRIPTOR.getCvspassFile().length()!=0)
             task.setPassfile(new File(DESCRIPTOR.getCvspassFile()));
         task.setCvsRoot(cvsroot);
@@ -451,7 +451,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
                     StringTokenizer tokens = new StringTokenizer(CVSSCM.this.module);
                     while(tokens.hasMoreTokens()) {
                         String m = tokens.nextToken();
-                        if(!CVSSCM.this.run("cvs tag -R "+tagName,listener,new File(destdir,m))) {
+                        if(!CVSSCM.this.run(new Launcher(listener),"cvs tag -R "+tagName,listener,new FilePath(destdir,m))) {
                             listener.getLogger().println("tagging failed");
                             return;
                         }

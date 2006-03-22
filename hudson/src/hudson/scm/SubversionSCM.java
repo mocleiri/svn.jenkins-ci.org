@@ -1,7 +1,8 @@
 package hudson.scm;
 
+import hudson.FilePath;
+import hudson.Launcher;
 import hudson.Proc;
-import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import org.xml.sax.Attributes;
@@ -72,7 +73,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         return dirs;
     }
 
-    public boolean calcChangeLog(Build build, File changelogFile, BuildListener listener) throws IOException {
+    public boolean calcChangeLog(Build build, File changelogFile, Launcher launcher, BuildListener listener) throws IOException {
         if(build.getPreviousBuild()==null) {
             // nothing to compare against
             return createEmptyChangeLog(changelogFile, listener);
@@ -111,7 +112,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             String cmd = DESCRIPTOR.getSvnExe()+" log --xml --non-interactive -r "+prevRev+":BASE "+module;
             logger.println("$ "+cmd);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            int r = new Proc(cmd,env,baos,build.getProject().getWorkspace()).join();
+            int r = launcher.launch(cmd,env,baos,build.getProject().getWorkspace()).join();
             if(r!=0) {
                 listener.fatalError("revision check failed");
                 return false;
@@ -123,14 +124,14 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         return true;
     }
 
-    public boolean checkout(Build build, File dir, BuildListener listener) throws IOException {
+    public boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener) throws IOException {
         boolean result;
 
-        if(useUpdate && isUpdatable(dir))
-            result = update(dir,listener);
+        if(useUpdate && isUpdatable(dir.getLocal()))
+            result = update(launcher,dir,listener);
         else {
-            Util.deleteContentsRecursive(dir);
-            result = run(DESCRIPTOR.getSvnExe()+" co -q --non-interactive "
+            dir.deleteContents();
+            result = run(launcher,DESCRIPTOR.getSvnExe()+" co -q --non-interactive "
                 +(username!=null?"--username "+username+' ':"")
                 +(otherOptions!=null?otherOptions+' ':"")
                 +modules,listener,dir);
@@ -151,7 +152,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
                 String cmd = DESCRIPTOR.getSvnExe()+" info "+module;
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 logger.println("$ "+cmd);
-                int r = new Proc(cmd,env,baos,dir).join();
+                int r = new Proc(cmd,env,baos,dir.getLocal()).join();
                 if(r!=0) {
                     listener.fatalError("revision check failed");
                     return false;
@@ -185,7 +186,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         return new File(build.getRootDir(),"revision.txt");
     }
 
-    public boolean update(File dir, BuildListener listener) throws IOException {
+    public boolean update(Launcher launcher, FilePath remoteDir, BuildListener listener) throws IOException {
         String cmd = DESCRIPTOR.getSvnExe()+" update -q --non-interactive";
         if(username!=null)
             cmd+=" --username "+username;
@@ -194,7 +195,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
 
         StringTokenizer tokens = new StringTokenizer(modules);
         while(tokens.hasMoreTokens()) {
-            if(!run(cmd,listener,new File(dir,getLastPathComponent(tokens.nextToken()))))
+            if(!run(launcher,cmd,listener,new FilePath(remoteDir,getLastPathComponent(tokens.nextToken()))))
                 return false;
         }
         return true;

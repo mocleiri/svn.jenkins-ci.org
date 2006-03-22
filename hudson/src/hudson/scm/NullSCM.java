@@ -2,6 +2,8 @@ package hudson.scm;
 
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.Launcher;
+import hudson.FilePath;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -14,11 +16,11 @@ import java.util.Map;
  * @author Kohsuke Kawaguchi
  */
 public class NullSCM implements SCM {
-    public boolean calcChangeLog(Build build, File changelogFile, BuildListener listener) {
+    public boolean calcChangeLog(Build build, File changelogFile, Launcher launcher, BuildListener listener) {
         return true;
     }
 
-    public boolean checkout(Build build, File dir, BuildListener listener) throws IOException {
+    public boolean checkout(Build build, Launcher launcher, FilePath remoteDir, BuildListener listener) throws IOException {
         return true;
     }
 
