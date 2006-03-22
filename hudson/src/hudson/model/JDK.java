@@ -1,5 +1,7 @@
 package hudson.model;
 
+import hudson.EnvVars;
+
 import java.io.File;
 import java.util.Map;
 
@@ -62,6 +64,9 @@ public final class JDK {
      */
     public void buildEnvVars(Map<String,String> env) {
         String path = env.get("PATH");
+        if(path==null)
+            path = EnvVars.masterEnvVars.get("PATH");
+        
         if(path==null)
             path = getBinDir().getPath();
         else
