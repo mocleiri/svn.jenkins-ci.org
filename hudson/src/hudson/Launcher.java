@@ -40,6 +40,10 @@ public class Launcher {
         return launch(cmd,Util.mapToEnv(env),out,workDir);
     }
 
+    public final Proc launch(String[] cmd, Map env, OutputStream out, FilePath workDir) throws IOException {
+        return launch(cmd,Util.mapToEnv(env),out,workDir);
+    }
+
     public final Proc launch(String[] cmd,Map env, InputStream in, OutputStream out) throws IOException {
         return launch(cmd,Util.mapToEnv(env),in,out);
     }

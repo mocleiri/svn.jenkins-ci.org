@@ -71,16 +71,15 @@ public class Shell implements BuildStep {
                 return false;
             }
 
-            String cmd = DESCRIPTOR.getShell()+" -xe "+script.getRemote();
+            String[] cmd = new String[] { DESCRIPTOR.getShell(),"-xe",script.getRemote()};
 
-            listener.getLogger().println("$ "+cmd);
-
-            int r = 0;
+            int r;
             try {
                 r = launcher.launch(cmd,build.getEnvVars(),listener.getLogger(),ws).join();
             } catch (IOException e) {
                 Util.displayIOException(e,listener);
                 e.printStackTrace( listener.fatalError("command execution failed") );
+                r = -1;
             }
             return r==0;
         } finally {
