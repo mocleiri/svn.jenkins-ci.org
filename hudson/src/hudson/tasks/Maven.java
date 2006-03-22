@@ -1,8 +1,7 @@
 package hudson.tasks;
 
-import hudson.Proc;
-import hudson.Util;
 import hudson.Launcher;
+import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Project;
@@ -77,8 +76,6 @@ public class Maven implements BuildStep {
         Map<String,String> env = build.getEnvVars();
         if(ai!=null)
             env.put("MAVEN_HOME",ai.getMavenHome());
-
-        listener.getLogger().println("$ "+cmd);
 
         try {
             int r = launcher.launch(cmd,env,listener.getLogger(),proj.getModuleRoot()).join();

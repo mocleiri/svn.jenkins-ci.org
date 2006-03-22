@@ -75,8 +75,6 @@ public class Ant implements BuildStep {
         if(ai!=null)
             env.put("ANT_HOME",ai.getAntHome());
 
-        listener.getLogger().println("$ "+cmd);
-
         try {
             int r = launcher.launch(cmd,env,listener.getLogger(),proj.getModuleRoot()).join();
             return r==0;
