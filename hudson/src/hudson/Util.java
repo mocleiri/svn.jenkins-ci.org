@@ -26,7 +26,10 @@ public class Util {
      *      if the operation fails.
      */
     public static void deleteContentsRecursive(File file) throws IOException {
-        for (File child : file.listFiles()) {
+        File[] files = file.listFiles();
+        if(files==null)
+            return;     // the directory didn't exist in the first place
+        for (File child : files) {
             if (child.isDirectory())
                 deleteContentsRecursive(child);
             if (!child.delete())
@@ -108,5 +111,13 @@ public class Util {
             r[idx++] = e.getKey().toString() + '=' + e.getValue().toString();
         }
         return r;
+    }
+
+    public static int min(int x, int... values) {
+        for (int i : values) {
+            if(i<x)
+                x=i;
+        }
+        return x;
     }
 }

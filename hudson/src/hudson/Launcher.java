@@ -70,11 +70,14 @@ public class Launcher {
      */
     private Map<String,String> inherit(String[] env) {
         Map<String,String> m = new HashMap<String,String>(EnvVars.masterEnvVars);
-        for( int i=0; i<env.length; i+=2 ) {
-            if(env[i+1]==null)
-                m.remove(env[i]);
+        for (String e : env) {
+            int index = e.indexOf('=');
+            String key = e.substring(0,index);
+            String value = e.substring(index+1);
+            if(value.length()==0)
+                m.remove(key);
             else
-                m.put(env[i],env[i+1]);
+                m.put(key,value);
         }
         return m;
     }

@@ -64,8 +64,9 @@ public final class FilePath {
     /**
      * Creates this directory.
      */
-    public boolean mkdirs() {
-        return local.mkdirs();
+    public void mkdirs() throws IOException {
+        if(!local.mkdirs())
+            throw new IOException("Failed to mkdirs: "+local);
     }
 
     /**
@@ -74,6 +75,13 @@ public final class FilePath {
     public void deleteContents() throws IOException {
         // TODO: consider doing this remotely if possible
         Util.deleteContentsRecursive(getLocal());
+    }
+
+    /**
+     * The same as {@code new FilePath(this,rel)} but more OO.
+     */
+    public FilePath child(String rel) {
+        return new FilePath(this,rel);
     }
 
     /**

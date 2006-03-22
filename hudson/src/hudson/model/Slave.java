@@ -25,6 +25,11 @@ public final class Slave {
     private final String name;
 
     /**
+     * Description of this node.
+     */
+    private final String description;
+
+    /**
      * Commands to run to post a job on this machine.
      */
     private final String command;
@@ -41,8 +46,9 @@ public final class Slave {
      */
     private final File localFS;
 
-    public Slave(String name, String command, String remoteFS, File localFS) {
+    public Slave(String name, String description, String command, String remoteFS, File localFS) {
         this.name = name;
+        this.description = description;
         this.command = command;
         this.remoteFS = remoteFS;
         this.localFS = localFS;
@@ -66,6 +72,10 @@ public final class Slave {
 
     public File getLocalFS() {
         return localFS;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public FilePath getFilePath() {
@@ -98,7 +108,11 @@ public final class Slave {
                 r.addAll(Arrays.asList(getCommandTokens()));
                 r.add("~/bin/slave");
                 r.add(workDir.getRemote());
-                r.addAll(Arrays.asList(env));
+                for (String s : env) {
+                    int index =s.indexOf('=');
+                    r.add(s.substring(0,index));
+                    r.add(s.substring(index+1));
+                }
                 r.add("--");
                 r.addAll(Arrays.asList(cmd));
                 return r.toArray(new String[r.size()]);

@@ -32,7 +32,8 @@
       <select class="setting-input" name="slave">
         <option>(This machine)</option>
         <c:forEach var="s" items="${slaves}">
-          <option <c:if test="${s==it.slave}">selected</c:if>>${s.name}</option>
+          <option <c:if test="${s==it.slave}">selected</c:if> value="${s.name}"
+            >${s.name} <c:if test="${!empty(s.description)}">(${s.description})</c:if></option>
         </c:forEach>
       </select>
     </s:entry>

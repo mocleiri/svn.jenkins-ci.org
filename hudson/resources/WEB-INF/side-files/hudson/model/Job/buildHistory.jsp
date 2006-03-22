@@ -18,7 +18,6 @@
       <td nowrap="nowrap">
         <a class="tip" href="${link}">
           <i:formatDate value="${build.timestamp.time}" type="both" dateStyle="medium" timeStyle="medium"/>
-          <!--span><%-- TODO: log --%></span-->
         </a>
       </td>
     </tr>

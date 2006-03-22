@@ -50,6 +50,13 @@
                 type="text" value="${inst.name}">
             </s:entry>
 
+            <s:entry title="description" description="
+                Human-readable description of this slave. Can be empty if you don't care.
+              ">
+              <input class="setting-input" name="slave_description"
+                type="text" value="${inst.description}">
+            </s:entry>
+
             <s:entry title="connect command" description="
                 Command used to execute a program on this slave, such as
                 'ssh slave1' or 'rsh slave2', but it can be a custom program as well.

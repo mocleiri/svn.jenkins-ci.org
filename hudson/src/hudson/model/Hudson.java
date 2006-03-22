@@ -2,6 +2,7 @@ package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
 import hudson.XmlFile;
+import hudson.Util;
 import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
@@ -380,13 +381,14 @@ public final class Hudson extends JobCollection {
         {// update slave list
             slaves.clear();
             String [] names = req.getParameterValues("slave_name");
+            String [] descriptions = req.getParameterValues("slave_description");
             String [] cmds = req.getParameterValues("slave_command");
             String [] rfs = req.getParameterValues("slave_remoteFS");
             String [] lfs = req.getParameterValues("slave_localFS");
-            if(names!=null && cmds!=null && rfs!=null && lfs!=null) {
-                int len = Math.min( Math.min(names.length,cmds.length), Math.min(rfs.length, lfs.length) );
+            if(names!=null && descriptions!=null && cmds!=null && rfs!=null && lfs!=null) {
+                int len = Util.min(names.length,descriptions.length,cmds.length,rfs.length, lfs.length);
                 for(int i=0;i<len;i++) {
-                    slaves.add(new Slave(names[i],cmds[i],rfs[i],new File(lfs[i])));
+                    slaves.add(new Slave(names[i],descriptions[i],cmds[i],rfs[i],new File(lfs[i])));
                 }
             }
         }

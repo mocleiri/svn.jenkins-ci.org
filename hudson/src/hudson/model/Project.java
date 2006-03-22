@@ -188,7 +188,7 @@ public class Project extends Job<Project,Build> {
         if(s ==null)
             return new FilePath(new File(root,"workspace"));
         else
-            return s.getFilePath();
+            return s.getFilePath().child("workspace").child(getName());
     }
 
     /**
