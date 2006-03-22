@@ -65,7 +65,7 @@ public final class FilePath {
      * Creates this directory.
      */
     public void mkdirs() throws IOException {
-        if(!local.mkdirs())
+        if(!local.mkdirs() && !local.exists())
             throw new IOException("Failed to mkdirs: "+local);
     }
 
