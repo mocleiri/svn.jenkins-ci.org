@@ -13,7 +13,7 @@
   <pre><c:out value="${it.workerThread.log}" escapeXml="true" /></pre>
   <c:if test="${!it.workerThread.alive}">
     <form method="get" action="clearError">
-      <input type=submit value="Clear error" />
+      <input type=submit value="Clear error to retry" />
     </form>
   </c:if>
 </l:main-panel>
