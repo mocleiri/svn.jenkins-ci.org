@@ -12,9 +12,7 @@ public final class OneShotEvent {
      * Non-blocking method that signals this event.
      */
     public synchronized void signal() {
-        if(signaled)
-            throw new IllegalStateException();  // already signaled
-
+        if(signaled)        return;
         this.signaled = true;
         notify();
     }

@@ -313,11 +313,13 @@ public class Queue {
      * appropriately.
      */
     private synchronized void maintain() {
-        for (Project p : blockedProjects) {
+        Iterator<Project> itr = blockedProjects.iterator();
+        while(itr.hasNext()) {
+            Project p = itr.next();
             Build lastBuild = p.getLastBuild();
             if (lastBuild == null || !lastBuild.isBuilding()) {
                 // ready to be executed
-                blockedProjects.remove(p);
+                itr.remove();
                 buildables.add(p);
             }
         }
@@ -333,12 +335,12 @@ public class Queue {
                 // ready to be executed immediately
                 queue.remove(top);
                 buildables.add(top.project);
+            } else {
+                // this can't be built know because another build is in progress
+                // set this project aside.
+                queue.remove(top);
+                blockedProjects.add(top.project);
             }
-
-            // this can't be built know because another build is in progress
-            // set this project aside.
-            queue.remove(top);
-            blockedProjects.add(top.project);
         }
     }
 
