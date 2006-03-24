@@ -6,37 +6,50 @@
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <l:pane title="Build Executor Status" width="3">
-  <tr>
-    <th class="pane">No.</th>
-    <th class="pane">Status</th>
-    <th class="pane">&nbsp;</th>
-  </tr>
+  <c:forEach var="c" items="${app.computers}">
+    <c:choose>
+      <c:when test="${c.node==app}">
+        <tr>
+          <th class="pane">No.</th>
+          <th class="pane">Status</th>
+          <th class="pane">&nbsp;</th>
+        </tr>
+      </c:when>
+      <c:otherwise>
+        <tr>
+          <th class="pane" colspan="3">
+            ${c.node.nodeName}
+          </th>
+        </tr>
+      </c:otherwise>
+    </c:choose>
 
-  <c:forEach var="e" items="${app.executors}" varStatus="loop">
-    <tr>
-      <td class="pane">
-        ${loop.index+1}
-      </td>
-      <c:choose>
-        <c:when test="${e.currentBuild==null}">
-          <td class="pane" width="70%">
-            Idle
-          </td>
-          <td class="pane"></td>
-        </c:when>
-        <c:otherwise>
-          <td class="pane" width="70%">
-            <div nowrap>Building <a href="${rootURL}/${e.currentBuild.url}">${e.currentBuild}</a></div>
-            <c:set var="pos" value="${e.progress}" />
-            <c:if test="${pos>0}">
-              <t:progressBar pos="${pos}" href="${rootURL}/${e.currentBuild.url}console"/>
-            </c:if>
-          </td>
-          <td class="pane" width=16 align=center valign=middle>
-            <a href="${rootURL}/executors/${loop.index}/stop"><img src="${rootURL}/images/16x16/edit-delete.gif" alt="terminate this build" /></a>
-          </td>
-        </c:otherwise>
-      </c:choose>
-    </tr>
+    <c:forEach var="e" items="${c.executors}" varStatus="loop">
+      <tr>
+        <td class="pane">
+          ${loop.index+1}
+        </td>
+        <c:choose>
+          <c:when test="${e.currentBuild==null}">
+            <td class="pane" width="70%">
+              Idle
+            </td>
+            <td class="pane"></td>
+          </c:when>
+          <c:otherwise>
+            <td class="pane" width="70%">
+              <div nowrap>Building <a href="${rootURL}/${e.currentBuild.url}">${e.currentBuild}</a></div>
+              <c:set var="pos" value="${e.progress}" />
+              <c:if test="${pos>0}">
+                <t:progressBar pos="${pos}" href="${rootURL}/${e.currentBuild.url}console"/>
+              </c:if>
+            </td>
+            <td class="pane" width=16 align=center valign=middle>
+              <a href="${rootURL}/executors/${loop.index}/stop"><img src="${rootURL}/images/16x16/edit-delete.gif" alt="terminate this build" /></a>
+            </td>
+          </c:otherwise>
+        </c:choose>
+      </tr>
+    </c:forEach>
   </c:forEach>
 </l:pane>

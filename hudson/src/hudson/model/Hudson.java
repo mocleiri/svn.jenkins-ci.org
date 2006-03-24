@@ -3,6 +3,7 @@ package hudson.model;
 import com.thoughtworks.xstream.XStream;
 import hudson.XmlFile;
 import hudson.Util;
+import hudson.Launcher;
 import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
@@ -28,6 +29,11 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Comparator;
+import java.util.Map.Entry;
 import java.text.ParseException;
 
 /**
@@ -35,14 +41,17 @@ import java.text.ParseException;
  *
  * @author Kohsuke Kawaguchi
  */
-public final class Hudson extends JobCollection {
+public final class Hudson extends JobCollection implements Node {
     private transient final Queue queue = new Queue();
 
     /**
-     * {@link Executor}s in this system. Read-only.
+     * {@link Computer}s in this Hudson system. Read-only.
      */
-    private transient final List<Executor> executors;
+    private transient final Map<Node,Computer> computers = new HashMap<Node,Computer>();
 
+    /**
+     * Number of executors of the master node.
+     */
     private int numExecutors = 2;
 
     /**
@@ -102,10 +111,79 @@ public final class Hudson extends JobCollection {
 
         load();
 
-        this.executors = new ArrayList<Executor>(numExecutors);
-        for( int i=0; i<numExecutors; i++ )
-            executors.add(new Executor(this));
+        updateComputerList();
+    }
 
+    /**
+     * If you are calling it o Hudson something is wrong.
+     *
+     * @deprecated
+     */
+    public String getNodeName() {
+        return null;
+    }
+
+    public String getDescription() {
+        return "the master Hudson node";
+    }
+
+    public Launcher createLauncher(BuildListener listener) {
+        return new Launcher(listener);
+    }
+
+    /**
+     * Updates {@link #computers} by using {@link #getSlaves()}.
+     *
+     * <p>
+     * This method tries to reuse existing {@link Computer} objects
+     * so that we won't upset {@link Executor}s running in it.
+     */
+    private void updateComputerList() {
+        synchronized(computers) {
+            Map<String,Computer> byName = new HashMap<String,Computer>();
+            for (Computer c : computers.values())
+                byName.put(c.getNode().getNodeName(),c);
+
+            Set<Computer> old = new HashSet<Computer>(computers.values());
+            Set<Computer> used = new HashSet<Computer>();
+
+            updateComputer(this, byName, used);
+            for (Slave s : getSlaves())
+                updateComputer(s, byName, used);
+
+            // find out what computers are removed, and kill off all executors.
+            // when all executors exit, it will be removed from the computers map.
+            // so don't remove too quickly
+            old.removeAll(used);
+            for (Computer c : old) {
+                c.kill();
+            }
+        }
+    }
+
+    private void updateComputer(Node n, Map<String,Computer> byNameMap, Set<Computer> used) {
+        Computer c;
+        c = byNameMap.get(n.getNodeName());
+        if(c==null) {
+            if(n.getNumExecutors()>0)
+                computers.put(n,c=new Computer(n));
+        } else {
+            c.setNode(n);
+        }
+        used.add(c);
+    }
+
+    /*package*/ void removeComputer(Computer computer) {
+        synchronized(computers) {
+            Iterator<Entry<Node,Computer>> itr=computers.entrySet().iterator();
+            while(itr.hasNext()) {
+                if(itr.next().getValue()==computer) {
+                    itr.remove();
+                    return;
+                }
+            }
+        }
+        throw new IllegalStateException("Trying to remove unknown computer");
     }
 
     /**
@@ -165,10 +243,20 @@ public final class Hudson extends JobCollection {
     }
 
     /**
-     * Gets the list of all {@link Executor}s.
+     * Gets the read-only list of all {@link Computer}s.
      */
-    public List<Executor> getExecutors() {
-        return executors;
+    public Computer[] getComputers() {
+        synchronized(computers) {
+            Computer[] r = computers.values().toArray(new Computer[computers.size()]);
+            Arrays.sort(r,new Comparator<Computer>() {
+                public int compare(Computer lhs, Computer rhs) {
+                    if(lhs.getNode()==Hudson.this)  return -1;
+                    if(rhs.getNode()==Hudson.this)  return 1;
+                    return lhs.getNode().getNodeName().compareTo(rhs.getNode().getNodeName());
+                }
+            });
+            return r;
+        }
     }
 
     public Queue getQueue() {
@@ -201,7 +289,7 @@ public final class Hudson extends JobCollection {
      */
     public Slave getSlave(String name) {
         for (Slave s : getSlaves()) {
-            if(s.getName().equals(name))
+            if(s.getNodeName().equals(name))
                 return s;
         }
         return null;
@@ -302,12 +390,6 @@ public final class Hudson extends JobCollection {
         return new XmlFile(xs, new File(root,"config.xml"));
     }
 
-    /**
-     * Returns the number of {@link Executor}s.
-     *
-     * This may be different from <code>getExecutors().size()</code>
-     * because it takes time to adjust the number of executors.
-     */
     public int getNumExecutors() {
         return numExecutors;
     }
@@ -352,9 +434,9 @@ public final class Hudson extends JobCollection {
      */
     public void cleanUp() {
         shuttingDown = true;
-        if(executors!=null) {
-            for( Executor e : executors )
-                e.interrupt();
+        synchronized(computers) {
+            for( Computer c : computers.values() )
+                c.interrupt();
         }
         ExternalJob.reloadThread.interrupt();
     }
@@ -382,15 +464,24 @@ public final class Hudson extends JobCollection {
             slaves.clear();
             String [] names = req.getParameterValues("slave_name");
             String [] descriptions = req.getParameterValues("slave_description");
+            String [] executors = req.getParameterValues("slave_executors");
             String [] cmds = req.getParameterValues("slave_command");
             String [] rfs = req.getParameterValues("slave_remoteFS");
             String [] lfs = req.getParameterValues("slave_localFS");
-            if(names!=null && descriptions!=null && cmds!=null && rfs!=null && lfs!=null) {
-                int len = Util.min(names.length,descriptions.length,cmds.length,rfs.length, lfs.length);
+            if(names!=null && descriptions!=null && executors!=null && cmds!=null && rfs!=null && lfs!=null) {
+                int len = Util.min(names.length,descriptions.length,executors.length,cmds.length,rfs.length, lfs.length);
                 for(int i=0;i<len;i++) {
-                    slaves.add(new Slave(names[i],descriptions[i],cmds[i],rfs[i],new File(lfs[i])));
+                    int n = 2;
+                    try {
+                        n = Integer.parseInt(executors[i].trim());
+                    } catch(NumberFormatException e) {
+                        // ignore
+                    }
+                    slaves.add(new Slave(names[i],descriptions[i],cmds[i],rfs[i],new File(lfs[i]),n));
                 }
             }
+
+            updateComputerList();
         }
 
         {// update JDK installations
@@ -404,13 +495,6 @@ public final class Hudson extends JobCollection {
                 }
             }
         }
-
-        for( Executor e : executors )
-            if(e.getCurrentBuild()==null)
-                e.interrupt();
-
-        while(executors.size()<numExecutors)
-            executors.add(new Executor(this));
 
         boolean result = true;
 

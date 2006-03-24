@@ -18,7 +18,7 @@ import java.util.Arrays;
  *
  * @author Kohsuke Kawaguchi
  */
-public final class Slave {
+public final class Slave implements Node {
     /**
      * Name of this slave node.
      */
@@ -46,15 +46,21 @@ public final class Slave {
      */
     private final File localFS;
 
-    public Slave(String name, String description, String command, String remoteFS, File localFS) {
+    /**
+     * Number of executors of this node.
+     */
+    private int numExecutors = 2;
+
+    public Slave(String name, String description, String command, String remoteFS, File localFS, int numExecutors) {
         this.name = name;
         this.description = description;
         this.command = command;
         this.remoteFS = remoteFS;
         this.localFS = localFS;
+        this.numExecutors = numExecutors;
     }
 
-    public String getName() {
+    public String getNodeName() {
         return name;
     }
 
@@ -82,9 +88,10 @@ public final class Slave {
         return new FilePath(localFS,remoteFS);
     }
 
-    /**
-     * Returns a {@link Launcher} for executing programs remotely.
-     */
+    public int getNumExecutors() {
+        return numExecutors;
+    }
+
     public Launcher createLauncher(BuildListener listener) {
         return new Launcher(listener) {
             @Override
@@ -118,6 +125,20 @@ public final class Slave {
                 return r.toArray(new String[r.size()]);
             }
         };
+    }
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final Slave that = (Slave) o;
+
+        return name.equals(that.name);
+
+    }
+
+    public int hashCode() {
+        return name.hashCode();
     }
 
     private static final FilePath CURRENT_DIR = new FilePath(new File("."));

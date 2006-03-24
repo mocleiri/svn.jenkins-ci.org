@@ -24,16 +24,17 @@
 <%-- master/slave --%>
 <c:set var="slaves" value="${it.parent.slaves}" />
 <c:if test="${!empty(slaves)}">
-  <s:optionalBlock name="enableSlave" title="Use slave node" checked="${it.slave!=null}">
-    <s:entry title="Use slave node"
+  <s:optionalBlock name="hasSlaveAffinity" title="Tie this project to a node" checked="${it.assignedNode!=null}">
+    <s:entry title="Node"
       description="
-        To build this project on another node, specify the node to run.
+        If configured, this project will be built only on this node.
+        Otherwise Hudson will move your builds to available nodes.
       ">
       <select class="setting-input" name="slave">
         <option>(This machine)</option>
         <c:forEach var="s" items="${slaves}">
-          <option <c:if test="${s==it.slave}">selected</c:if> value="${s.name}"
-            >${s.name} <c:if test="${!empty(s.description)}">(${s.description})</c:if></option>
+          <option <c:if test="${s==it.assignedNode}">selected</c:if> value="${s.nodeName}"
+            >${s.nodeName} <c:if test="${!empty(s.description)}">(${s.description})</c:if></option>
         </c:forEach>
       </select>
     </s:entry>

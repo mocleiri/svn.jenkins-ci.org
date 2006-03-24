@@ -21,6 +21,12 @@ import java.util.Map;
 public final class Build extends Run<Project,Build> implements Runnable {
 
     /**
+     * Name of the slave this project was built on.
+     * Null if built by the master.
+     */
+    private String builtOn;
+
+    /**
      * Creates a new build.
      */
     Build(Project project) throws IOException {
@@ -56,6 +62,16 @@ public final class Build extends Run<Project,Build> implements Runnable {
         return timestamp;
     }
 
+    /**
+     * Returns a {@link Slave} on which this build was done.
+     */
+    public Node getBuiltOn() {
+        if(builtOn==null)
+            return Hudson.getInstance();
+        else
+            return Hudson.getInstance().getSlave(builtOn);
+    }
+
     public TestResult getTestResult() {
         TestResultAction ta = getAction(TestResultAction.class);
         if(ta==null)    return null;
@@ -75,14 +91,13 @@ public final class Build extends Run<Project,Build> implements Runnable {
             private Launcher launcher;
 
             public Result run(BuildListener listener) throws IOException {
+                Node node = Executor.currentExecutor().getOwner().getNode();
+                assert builtOn==null;
+                builtOn = node.getNodeName();
 
-                Slave slave = project.getSlave();
-                if(slave ==null)
-                    launcher = new Launcher(listener);
-                else {
-                    launcher = slave.createLauncher(listener);
-                    listener.getLogger().println("Building remotely on "+slave.getName());
-                }
+                launcher = node.createLauncher(listener);
+                if(node instanceof Slave)
+                    listener.getLogger().println("Building remotely on "+node.getNodeName());
 
 
                 if(!project.checkout(Build.this,launcher,listener))

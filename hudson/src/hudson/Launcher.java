@@ -54,7 +54,7 @@ public class Launcher {
 
     public Proc launch(String[] cmd,String[] env,OutputStream out, FilePath workDir) throws IOException {
         printCommandLine(cmd);
-        return new Proc(cmd,Util.mapToEnv(inherit(env)),out,new File(workDir.toString()));
+        return new Proc(cmd,Util.mapToEnv(inherit(env)),out,workDir.getLocal());
     }
 
     public Proc launch(String[] cmd,String[] env,InputStream in,OutputStream out) throws IOException {

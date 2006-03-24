@@ -12,31 +12,32 @@ import java.io.IOException;
  * @author Kohsuke Kawaguchi
  */
 public class Executor extends Thread {
-    private final Hudson owner;
+    private final Computer owner;
     private final Queue queue;
 
     private Build build;
 
     private long startTime;
 
-    public Executor(Hudson owner) {
+    public Executor(Computer owner) {
         this.owner = owner;
-        this.queue = owner.getQueue();
+        this.queue = Hudson.getInstance().getQueue();
         start();
     }
 
     public void run() {
         while(true) {
+            if(Hudson.getInstance().isShuttingDown())
+                return;
+
             synchronized(owner) {
-                if(owner.isShuttingDown())
-                    return;
                 if(owner.getNumExecutors()<owner.getExecutors().size()) {
                     // we've got too many executors.
-                    owner.getExecutors().remove(this);
+                    owner.removeExecutor(this);
                     return;
                 }
             }
-            
+
             try {
                 Project p = queue.pop();
                 build = p.newBuild();
@@ -70,6 +71,13 @@ public class Executor extends Thread {
     }
 
     /**
+     * Returns true if this {@link Executor} is ready for action.
+     */
+    public boolean isIdle() {
+        return build==null;
+    }
+
+    /**
      * Returns the progress of the current build in the number between 0-100.
      *
      * @return -1
@@ -96,5 +104,16 @@ public class Executor extends Thread {
 
         interrupt();
         rsp.sendRedirect(req.getContextPath());
+    }
+
+    public Computer getOwner() {
+        return owner;
+    }
+
+    /**
+     * Returns the executor of the current thread.
+     */
+    public static Executor currentExecutor() {
+        return (Executor)Thread.currentThread();
     }
 }

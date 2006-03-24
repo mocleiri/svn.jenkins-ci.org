@@ -2,7 +2,6 @@ package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
 import hudson.CloseProofOutputStream;
-import hudson.EnvVars;
 import hudson.Util;
 import hudson.XmlFile;
 import hudson.tasks.BuildStep;
@@ -141,9 +140,12 @@ public class Run <JobT extends Job,RunT extends Run>
      * Otherwise null.
      */
     public Executor getExecutor() {
-        for( Executor e : Hudson.getInstance().getExecutors() )
-            if(e.getCurrentBuild()==(Object)this)
-                return e;
+        for( Computer c : Hudson.getInstance().getComputers() ) {
+            for (Executor e : c.getExecutors()) {
+                if(e.getCurrentBuild()==(Object)this)
+                    return e;
+            }
+        }
         return null;
     }
 
@@ -311,8 +313,7 @@ public class Run <JobT extends Job,RunT extends Run>
      * Gets the directory where the artifacts are archived.
      */
     public File getArtifactsDir() {
-        File f = new File(getRootDir(),"archive");
-        return f;
+        return new File(getRootDir(),"archive");
     }
 
     /**
@@ -462,7 +463,7 @@ public class Run <JobT extends Job,RunT extends Run>
                         e.printStackTrace(new PrintWriter(w));
                         w.close();
                     } catch (IOException e1) {
-                        ;
+                        // ignore
                     }
                 }
             }

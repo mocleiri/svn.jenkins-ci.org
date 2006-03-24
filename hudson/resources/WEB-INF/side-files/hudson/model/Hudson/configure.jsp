@@ -41,20 +41,25 @@
           List of slave nodes register to this master Hudson. Jobs can be configured to
           execute on slave nodes to handle a large number of jobs.
         ">
-        <s:repeatable var="inst" items="${it.slaves}">
+        <s:repeatable var="s" items="${it.slaves}">
           <table width="100%">
             <s:entry title="name" description="
                 Name that uniquely identifies a slave
               ">
               <input class="setting-input" name="slave_name"
-                type="text" value="${inst.name}">
+                type="text" value="${s.nodeName}">
             </s:entry>
 
             <s:entry title="description" description="
                 Human-readable description of this slave. Can be empty if you don't care.
               ">
               <input class="setting-input" name="slave_description"
-                type="text" value="${inst.description}">
+                type="text" value="${s.description}">
+            </s:entry>
+
+            <s:entry title="# of executors">
+              <input class="setting-input" name="slave_executors"
+                type="text" value="${s.numExecutors}" />
             </s:entry>
 
             <s:entry title="connect command" description="
@@ -63,7 +68,7 @@
                 Hudson will append the actual command and arguments.
               ">
               <input class="setting-input" name="slave_command"
-                type="text" value="${inst.command}">
+                type="text" value="${s.command}">
             </s:entry>
 
             <s:entry title="local FS root" description="
@@ -73,7 +78,7 @@
                 work directory, such as '/net/slave1/hudson'
               ">
               <input class="setting-input" name="slave_localFS"
-                type="text" value="${inst.localFS}">
+                type="text" value="${s.localFS}">
             </s:entry>
 
             <s:entry title="remote FS root" description="
@@ -82,7 +87,7 @@
                 as '/hudson'
               ">
               <input class="setting-input" name="slave_remoteFS"
-                type="text" value="${inst.remoteFS}">
+                type="text" value="${s.remoteFS}">
             </s:entry>
 
             <s:entry title="">

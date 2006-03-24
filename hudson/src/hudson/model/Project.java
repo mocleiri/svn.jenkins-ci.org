@@ -67,11 +67,28 @@ public class Project extends Job<Project,Build> {
     private Integer quietPeriod = null;
 
     /**
-     * The name of the slave node on which the build should be done.
-     *
-     * Null if the job is to run on the current machine.
+     * @deprecated
      */
-    private String slave;
+    private transient String slave;
+
+    /**
+     * If this project is configured to be only built on a certain node,
+     * this value will be set to that node. Null to indicate the affinity
+     * with the master node.
+     *
+     * see #canRoam
+     */
+    private String assignedNode;
+
+    /**
+     * True if this project can be built on any node.
+     *
+     * <p>
+     * This somewhat ugly flag combination is so that we can migrate
+     * existing Hudson installations nicely.
+     */
+    private boolean canRoam;
+
 
     /**
      * Creates a new project.
@@ -79,6 +96,25 @@ public class Project extends Job<Project,Build> {
     public Project(Hudson parent,String name) {
         super(parent,name);
         getBuildDir().mkdirs();
+
+        if(!parent.getSlaves().isEmpty()) {
+            // if a new job is configured with Hudson that already has slave nodes
+            // make it roamable by default
+            canRoam = true;
+        }
+    }
+
+    /**
+     * If this project is configured to be always built on this node,
+     * return that {@link Node}. Otherwise null.
+     */
+    public Node getAssignedNode() {
+        if(canRoam)
+            return null;
+
+        if(assignedNode ==null)
+            return Hudson.getInstance();
+        return getParent().getSlave(assignedNode);
     }
 
     public JDK getJDK() {
@@ -131,10 +167,6 @@ public class Project extends Job<Project,Build> {
         this.scm = scm;
     }
 
-    public Slave getSlave() {
-        return getParent().getSlave(slave);
-    }
-
     public synchronized Map<BuildStepDescriptor,BuildStep> getBuilders() {
         Map<BuildStepDescriptor,BuildStep> m = new HashMap<BuildStepDescriptor,BuildStep>();
         for( int i=builders.size()-1; i>=0; i-- ) {
@@ -181,14 +213,34 @@ public class Project extends Job<Project,Build> {
     }
 
     /**
+     * Gets the {@link Node} where this project was last built on.
+     *
+     * @return
+     *      null if no information is available (for example,
+     *      if no build was done yet.)
+     */
+    public Node getLastBuiltOn() {
+        // where was it built on?
+        Build b = getLastBuild();
+        if(b==null)
+            return null;
+        else
+            return b.getBuiltOn();
+    }
+
+    /**
      * Gets the directory where the module is checked out.
      */
     public FilePath getWorkspace() {
-        Slave s = getSlave();
-        if(s ==null)
-            return new FilePath(new File(root,"workspace"));
+        Node node = getLastBuiltOn();
+
+        if(node==null)
+            node = getParent();
+
+        if(node instanceof Slave)
+            return ((Slave)node).getFilePath().child("workspace").child(getName());
         else
-            return s.getFilePath().child("workspace").child(getName());
+            return new FilePath(new File(root,"workspace"));
     }
 
     /**
@@ -265,15 +317,17 @@ public class Project extends Job<Project,Build> {
             quietPeriod = null;
         }
 
-        if(req.getParameter("enableSlave")!=null) {
-            slave = req.getParameter("slave");
-            if(slave!=null) {
-                if(Hudson.getInstance().getSlave(slave)==null) {
-                    slave = null;   // no such slave
+        if(req.getParameter("hasSlaveAffinity")!=null) {
+            canRoam = false;
+            assignedNode = req.getParameter("slave");
+            if(assignedNode !=null) {
+                if(Hudson.getInstance().getSlave(assignedNode)==null) {
+                    assignedNode = null;   // no such slave
                 }
             }
         } else {
-            slave = null;
+            canRoam = true;
+            assignedNode = null;
         }
 
         builders.clear();
@@ -433,6 +487,7 @@ public class Project extends Job<Project,Build> {
             buf.append(s);
         return buf.toString();
     }
+
 
     /**
      * Represents information about one file or folder.
