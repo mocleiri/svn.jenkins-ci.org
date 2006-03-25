@@ -12,16 +12,9 @@
   <t:summary icon="folder.gif">
     <a href="ws">Workspace</a>
   </t:summary>
-  <c:if test="${it.lastSuccessfulBuild.hasArtifacts && !empty(it.lastSuccessfulBuild.artifacts)}">
-    <t:summary icon="package.gif">
-      Latest Artifacts<br>
-      <ul>
-        <c:forEach var="f" items="${it.lastSuccessfulBuild.artifacts}">
-          <li><a href="lastSuccessfulBuild/artifact/${f}">${f.fileName}</a></li>
-        </c:forEach>
-      </ul>
-    </t:summary>
-  </c:if>
+
+  <t:artifactList caption="Latest Artifacts"
+      it="${it.lastSuccessfulBuild}" baseURL="lastSuccessfulBuild/" />
 
   <c:set var="tr" value="${it.lastSuccessfulBuild.testResult}" />
   <c:if test="${tr!=null}">

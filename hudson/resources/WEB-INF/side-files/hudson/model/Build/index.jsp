@@ -16,16 +16,7 @@
 <st:include page="logKeep.jsp" />
 
 <table style="margin-top: 1em; margin-left:1em;">
-  <c:if test="${it.result!=null && !empty(it.artifacts)}">
-    <t:summary icon="package.gif">
-      Build Artifacts<br>
-      <ul>
-        <c:forEach var="f" items="${it.artifacts}">
-          <li><a href="artifact/${f}">${f.fileName}</a></li>
-        </c:forEach>
-      </ul>
-    </t:summary>
-  </c:if>
+  <t:artifactList it="${it}" caption="Build Artifacts" />
 
   <c:set var="tr" value="${it.testResult}" />
   <c:if test="${tr!=null}">
