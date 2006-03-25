@@ -23,8 +23,12 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
      */
     private /*final*/ int failedSince;
 
-    CaseResult(Element testCase) {
-        className = testCase.attributeValue("classname");
+    CaseResult(SuiteResult parent, Element testCase) {
+        String cn = testCase.attributeValue("classname");
+        if(cn==null)
+            // Maven seems to skip classname, and that shows up in testSuite/@name
+            cn = parent.getName();
+        className = cn;
         testName = testCase.attributeValue("name");
         errorStackTrace = getError(testCase);
     }
@@ -41,7 +45,7 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
     }
 
     /**
-     * Gets the name of the test, which is returned from {@link TestCase#getName()}
+     * Gets the name of the test, which is returned from {@code TestCase.getName()}
      */
     public String getName() {
         return testName;

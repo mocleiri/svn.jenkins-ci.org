@@ -42,7 +42,7 @@ public final class SuiteResult {
         stderr = root.elementText("system-err");
 
         for (Element e : (List<Element>)root.elements("testcase")) {
-            cases.add(new CaseResult(e));
+            cases.add(new CaseResult(this,e));
         }
     }
 
