@@ -11,7 +11,7 @@
   <%-- parent path --%>
     <div class=parentPath>
       <form action="." method="get">
-        <a href="${rootURL}/${it.url}ws/"><img src="${rootURL}/images/32x32/folder-open.gif" class=rootIcon /></a>
+        <a href="${topPath}"><img src="${rootURL}/images/48x48/${icon}" class=rootIcon /></a>
         <c:forEach var="p" items="${parentPath}">
           <a href="${p.href}">${p.title}</a>
           /

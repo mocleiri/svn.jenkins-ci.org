@@ -25,7 +25,7 @@ import java.util.SortedMap;
  * @author Kohsuke Kawaguchi
  */
 public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
-        extends Actionable implements ModelObject {
+        extends DirectoryHolder implements ModelObject {
     /**
      * Project name.
      */

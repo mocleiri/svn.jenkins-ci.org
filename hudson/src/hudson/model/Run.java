@@ -14,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -37,7 +36,7 @@ import java.util.SimpleTimeZone;
  * @author Kohsuke Kawaguchi
  */
 public class Run <JobT extends Job,RunT extends Run>
-        extends Actionable implements ModelObject {
+        extends DirectoryHolder implements ModelObject {
 
     protected transient final JobT project;
 
@@ -317,7 +316,7 @@ public class Run <JobT extends Job,RunT extends Run>
     }
 
     /**
-     * Gets all the artifacts (relative to {@link #getArtifactsDir()}.
+     * Gets the first {@value #CUTOFF} artifacts (relative to {@link #getArtifactsDir()}.
      */
     public List<Artifact> getArtifacts() {
         List<Artifact> r = new ArrayList<Artifact>();
@@ -339,6 +338,8 @@ public class Run <JobT extends Job,RunT extends Run>
         String[] children = dir.list();
         if(children==null)  return;
         for (String child : children) {
+            if(r.size()>CUTOFF)
+                return;
             File sub = new File(dir, child);
             if (sub.isDirectory()) {
                 addArtifacts(sub, path + child + '/', r);
@@ -347,6 +348,8 @@ public class Run <JobT extends Job,RunT extends Run>
             }
         }
     }
+
+    private static final int CUTOFF = 17;   // 0, 1,... 16, and then "too many"
 
     /**
      * A build artifact.
@@ -534,33 +537,11 @@ public class Run <JobT extends Job,RunT extends Run>
         return getIconColor()+".gif";
     }
 
-    public void doArtifact( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        String path = req.getRestOfPath();
-        if(path.length()==0) {
-            req.getView(this,"artifacts.jsp").forward(req,rsp);
-            return;
-        }
-        if(path.indexOf("..")!=-1 || path.length()<1) {
-            // don't serve anything other than files in the artifacts dir
-            rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-
-        File f = new File(getArtifactsDir(),path.substring(1));
-        if(!f.exists()) {
-            rsp.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        }
-
-        FileInputStream in = new FileInputStream(f);
-        // serve the file
-        rsp.setContentType(req.getServletContext().getMimeType(req.getServletPath()));
-        rsp.setContentLength((int)f.length());
-        byte[] buf = new byte[1024];
-        int len;
-        while((len=in.read(buf))>0)
-            rsp.getOutputStream().write(buf,0,len);
-        in.close();
+    /**
+     * Serves the artifacts.
+     */
+    public synchronized void doArtifact( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        serveFile(req, rsp, getArtifactsDir(), "package.gif", true);
     }
 
     /**
