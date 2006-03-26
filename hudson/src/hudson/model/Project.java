@@ -1,32 +1,27 @@
 package hudson.model;
 
+import hudson.FilePath;
+import hudson.Launcher;
 import hudson.scm.NullSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMManager;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
-import hudson.Launcher;
-import hudson.FilePath;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -65,11 +60,6 @@ public class Project extends Job<Project,Build> {
      * The quiet period. Null to delegate to the system default.
      */
     private Integer quietPeriod = null;
-
-    /**
-     * @deprecated
-     */
-    private transient String slave;
 
     /**
      * If this project is configured to be only built on a certain node,
@@ -353,7 +343,7 @@ public class Project extends Job<Project,Build> {
      * Serves the workspace files.
      */
     public synchronized void doWs( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        serveFile(req, rsp, getWorkspace().getLocal(), "folder-open.gif", true);
+        serveFile(req, rsp, getWorkspace().getLocal(), "folder.gif", true);
     }
 
     /**
@@ -362,4 +352,10 @@ public class Project extends Job<Project,Build> {
     public synchronized void doJavadoc( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         serveFile(req, rsp, getJavadocDir(), "help.gif", false);
     }
+
+    /**
+     * @deprecated
+     *      left for legacy config file compatibility
+     */
+    private transient String slave;
 }
