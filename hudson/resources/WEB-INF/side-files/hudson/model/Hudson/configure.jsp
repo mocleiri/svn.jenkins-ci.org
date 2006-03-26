@@ -13,23 +13,18 @@
 
 <l:main-panel>
   <s:form method="post" action="configSubmit">
-    <s:entry title="Home directory">
+    <s:entry title="Home directory" help="/help/system-config/homeDirectory.html">
       ${it.rootDir}
     </s:entry>
-    <s:entry title="# of executors">
+    <s:entry title="# of executors" help="/help/system-config/numExecutors.html">
       <input type="text" name="numExecutors" class="setting-input"
         value="${it.numExecutors}"/>
     </s:entry>
-    <s:entry title="Quiet period"
-      description="
-        A newly scheduled build wait for this many seconds before actually built.
-        This is useful for collapsing multiple CVS change notification e-mails to one.
-      ">
+    <s:entry title="Quiet period" help="/help/system-config/numExecutors.html">
       <input class="setting-input" name="quiet_period"
         type="text" value="${it.quietPeriod}">
     </s:entry>
-    <s:entry title="Enable security"
-      description="If enabled, you have to log in before changing the configuration or running a new build.">
+    <s:entry title="Enable security" help="/help/system-config/enableSecurity.html">
       <input type="checkbox" name="use_security"
         <c:if test="${it.useSecurity}">checked</c:if>>
     </s:entry>
@@ -43,49 +38,32 @@
         ">
         <s:repeatable var="s" items="${it.slaves}">
           <table width="100%">
-            <s:entry title="name" description="
-                Name that uniquely identifies a slave
-              ">
+            <s:entry title="name" help="/help/system-config/master-slave/name.html">
               <input class="setting-input" name="slave_name"
                 type="text" value="${s.nodeName}">
             </s:entry>
 
-            <s:entry title="description" description="
-                Human-readable description of this slave. Can be empty if you don't care.
-              ">
+            <s:entry title="description" help="/help/system-config/master-slave/description.html">
               <input class="setting-input" name="slave_description"
                 type="text" value="${s.description}">
             </s:entry>
 
-            <s:entry title="# of executors">
+            <s:entry title="# of executors" help="/help/system-config/master-slave/numExecutors.html">
               <input class="setting-input" name="slave_executors"
                 type="text" value="${s.numExecutors}" />
             </s:entry>
 
-            <s:entry title="connect command" description="
-                Command used to execute a program on this slave, such as
-                'ssh slave1' or 'rsh slave2', but it can be a custom program as well.
-                Hudson will append the actual command and arguments.
-              ">
+            <s:entry title="connect command" help="/help/system-config/master-slave/command.html">
               <input class="setting-input" name="slave_command"
                 type="text" value="${s.command}">
             </s:entry>
 
-            <s:entry title="local FS root" description="
-                Slave needs to have a directory dedicated for Hudson, and
-                it needs to be visible from this master Hudson. Specify
-                the path (from the viewpoint of the master Hudson) to this
-                work directory, such as '/net/slave1/hudson'
-              ">
+            <s:entry title="local FS root" help="/help/system-config/master-slave/localFS.html">
               <input class="setting-input" name="slave_localFS"
                 type="text" value="${s.localFS}">
             </s:entry>
 
-            <s:entry title="remote FS root" description="
-                Specify the same path you specified above in 'remote FS root',
-                but this time from the viewpoint of the slave node, such
-                as '/hudson'
-              ">
+            <s:entry title="remote FS root" help="/help/system-config/master-slave/remoteFS.html">
               <input class="setting-input" name="slave_remoteFS"
                 type="text" value="${s.remoteFS}">
             </s:entry>

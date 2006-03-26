@@ -24,6 +24,38 @@ var hudsonRules = {
     e.onmouseout = function() {
       this.style.textDecoration="none";
     }
+  },
+
+  ".help" : function(e) {
+    e.onclick = function() {
+      // identify the parent TR
+      var tr = this;
+      while(tr.tagName!="TR")
+        tr = tr.parentNode;
+
+      // then next TR
+      do {
+        tr = tr.nextSibling;
+      } while(tr.tagName!="TR");
+
+      div = tr.firstChild.nextSibling.firstChild;
+
+      if(div.style.display!="block") {
+        div.style.display="block";
+        // make it visible
+        new Ajax.Request(
+            this.getAttribute("helpURL"),
+            {
+              method : 'get',
+              onComplete : function(x) {
+                div.innerHTML = x.responseText;
+              }
+            }
+        );
+      } else {
+        div.style.display = "none";
+      }
+    }
   }
 };
 
