@@ -147,7 +147,11 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         boolean hasCVSdirs = !knownFiles.isEmpty();
         knownFiles.add("CVS");
 
-        for( File f : dir.listFiles() ) {
+        File[] files = dir.listFiles();
+        if(files==null)
+            throw new IOException("No such directory exists: "+dir);
+
+        for( File f : files ) {
             if(hasCVSdirs && !knownFiles.contains(f.getName())) {
                 // not controlled in CVS. Skip.
                 // but also make sure that we archive CVS/*, which doesn't have CVS/CVS
