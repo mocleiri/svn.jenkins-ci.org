@@ -4,10 +4,13 @@
 <%@attribute name="name" required="true" %>
 <%@attribute name="title" required="true" %>
 <%@attribute name="checked" required="true" %>
+<%@attribute name="help" %><%-- if present, URL to the help screen --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="f" tagdir="/WEB-INF/tags/form" %>
 <c:set var="oe_id" value="${oe_id+1}" scope="request" />
-
+<c:if test="${empty(help)}">
+  <c:set var="help" value="${null}" />
+</c:if>
 <tr id="oe_s${oe_id}"><%-- this ID marks the beginning --%>
   <td colspan="3">
     <script>
@@ -29,8 +32,12 @@
                 n.style.display = "";
             }
 
-            if(n.id=="oe_s${oe_id}")
+            if(n.id=="oe_s${oe_id}") {
+              <c:if test="${help!=null}">
+                j++;
+              </c:if>
               i = true;
+            }
           }
         }
     </script>
@@ -38,7 +45,15 @@
       <c:if test="${checked=='true'}">checked</c:if>>
     ${title}
   </td>
+  <c:if test="${help!=null}">
+    <td>
+      <img src="${rootURL}/images/16x16/help.gif" alt="[?]" class="help-button" helpURL="${rootURL}${help}">
+    </td>
+  </c:if>
 </tr>
+<c:if test="${help!=null}">
+  <tr><td></td><td colspan="2"><div class="help">Loading...</div></td><td></td></tr>
+</c:if>
 <jsp:doBody />
 <%-- end marker --%>
 <tr id="oe_e${oe_id}" style="display:none">

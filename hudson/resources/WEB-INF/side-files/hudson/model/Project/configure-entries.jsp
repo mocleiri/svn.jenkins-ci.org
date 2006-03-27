@@ -24,12 +24,9 @@
 <%-- master/slave --%>
 <c:set var="slaves" value="${it.parent.slaves}" />
 <c:if test="${!empty(slaves)}">
-  <s:optionalBlock name="hasSlaveAffinity" title="Tie this project to a node" checked="${it.assignedNode!=null}">
-    <s:entry title="Node"
-      description="
-        If configured, this project will be built only on this node.
-        Otherwise Hudson will move your builds to available nodes.
-      ">
+  <s:optionalBlock name="hasSlaveAffinity" title="Tie this project to a node" checked="${it.assignedNode!=null}"
+      help="/help/project-config/slave.html">
+    <s:entry title="Node">
       <select class="setting-input" name="slave">
         <option>(This machine)</option>
         <c:forEach var="s" items="${slaves}">
@@ -92,7 +89,10 @@
   <c:set var="publishers" value="<%= hudson.tasks.BuildStep.PUBLISHERS %>" />
   <c:forEach var="idx" begin="0" end="${f:length(publishers)-1}">
     <c:set var="pd" value="${publishers[idx]}" />
-    <s:optionalBlock name="publisher${idx}" title="${pd.displayName}" checked="${it.publishers[pd]!=null}">
+    <s:optionalBlock name="publisher${idx}"
+                     title="${pd.displayName}"
+                     checked="${it.publishers[pd]!=null}"
+                     help="${pd.helpFile}">
       <c:set var="publisher" value="${it.publishers[pd]}" scope="request"  />
       <jsp:include page="${pd.configPage}"/>
     </s:optionalBlock>

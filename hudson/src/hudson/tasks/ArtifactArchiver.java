@@ -75,6 +75,10 @@ public class ArtifactArchiver extends AntBasedBuildStep {
             return "Archive the artifacts";
         }
 
+        public String getHelpFile() {
+            return "/help/project-config/archive-artifact.html";
+        }
+
         public BuildStep newInstance(HttpServletRequest req) {
             return new ArtifactArchiver(req.getParameter("artifacts"));
         }

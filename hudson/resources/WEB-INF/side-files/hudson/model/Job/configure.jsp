@@ -15,8 +15,7 @@
     <s:entry title="Project name">
       ${it.name}
     </s:entry>
-    <s:entry title="Description"
-      description="You can use any HTML tag.">
+    <s:entry title="Description" help="/help/project-config/description.html">
       <textarea class="setting-input" name="description"
         rows="5" style="width:100%">${it.description}</textarea>
     </s:entry>

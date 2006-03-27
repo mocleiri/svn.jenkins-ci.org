@@ -20,6 +20,13 @@ public abstract class BuildStepDescriptor extends Descriptor {
     }
 
     /**
+     * Returns the resource path to the help screen HTML, if any.
+     */
+    public String getHelpFile() {
+        return "";
+    }
+
+    /**
      * Human readable name of the SCM.
      */
     public abstract String getDisplayName();
