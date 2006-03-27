@@ -29,7 +29,7 @@
       <table cellpadding="0" cellspacing="0" width="100%" border="0">
         <tr><td style="font-weight:bold; font-size: 2em;">
           <a href="${rootURL}/"><img src="${rootURL}/images/title.png" alt="title" /></a>
-        </td><td>
+        </td><td style="vertical-align: middle; text-align: right; padding-right: 1em;">
           <%--form action="search">
             <div id="searchform">
               <img width="24" height="24" src="${rootURL}/images/24x24/find.gif"/>
@@ -40,10 +40,10 @@
           </form--%>
           <c:if test="${app.useSecurity}">
             <rq:isUserInRole role="admin" value="false">
-              <a href="${rootURL}/loginEntry"><b>login</b></a>
+              <a style="color:white" href="${rootURL}/loginEntry"><b>login</b></a>
             </rq:isUserInRole>
             <rq:isUserInRole role="admin">
-              <a href="${rootURL}/logout"><b>logout</b></a>
+              <a style="color:white" href="${rootURL}/logout"><b>logout</b></a>
             </rq:isUserInRole>
           </c:if>
         </td></tr>
