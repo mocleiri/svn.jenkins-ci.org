@@ -103,7 +103,7 @@ public class Executor extends Thread {
             return;
 
         interrupt();
-        rsp.sendRedirect(req.getContextPath());
+        rsp.sendRedirect(req.getContextPath()+"/");
     }
 
     public Computer getOwner() {
