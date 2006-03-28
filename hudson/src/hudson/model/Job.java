@@ -278,7 +278,7 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
 
         Util.deleteRecursive(root);
         getParent().deleteJob(this);
-        rsp.sendRedirect(req.getContextPath());
+        rsp.sendRedirect(req.getContextPath()+"/");
     }
 
     /**

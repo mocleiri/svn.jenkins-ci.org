@@ -632,7 +632,7 @@ public final class Hudson extends JobCollection implements Node {
      * Called once the user logs in. Just forward to the top page.
      */
     public synchronized void doLoginEntry( StaplerRequest req, StaplerResponse rsp ) throws IOException {
-        rsp.sendRedirect(req.getContextPath());
+        rsp.sendRedirect(req.getContextPath()+"/");
     }
 
     /**
@@ -642,7 +642,7 @@ public final class Hudson extends JobCollection implements Node {
         HttpSession session = req.getSession(false);
         if(session!=null)
             session.invalidate();
-        rsp.sendRedirect(req.getContextPath());
+        rsp.sendRedirect(req.getContextPath()+"/");
     }
 
     /**
@@ -653,7 +653,7 @@ public final class Hudson extends JobCollection implements Node {
             return;
 
         load();
-        rsp.sendRedirect(req.getContextPath());
+        rsp.sendRedirect(req.getContextPath()+"/");
     }
 
 

@@ -103,6 +103,6 @@ public class View extends JobCollection {
             return;
 
         owner.deleteView(this);
-        rsp.sendRedirect(req.getContextPath());
+        rsp.sendRedirect(req.getContextPath()+"/");
     }
 }
