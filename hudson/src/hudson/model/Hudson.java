@@ -77,7 +77,7 @@ public final class Hudson extends JobCollection implements Node {
     /**
      * Set to true if this instance is going to shut down.
      */
-    private boolean shuttingDown;
+    private transient boolean shuttingDown;
 
     private List<JDK> jdks;
 
