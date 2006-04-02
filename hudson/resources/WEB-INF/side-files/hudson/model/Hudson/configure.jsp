@@ -20,7 +20,7 @@
       <input type="text" name="numExecutors" class="setting-input"
         value="${it.numExecutors}"/>
     </s:entry>
-    <s:entry title="Quiet period" help="/help/system-config/numExecutors.html">
+    <s:entry title="Quiet period" help="/help/project-config/quietPeriod.html">
       <input class="setting-input" name="quiet_period"
         type="text" value="${it.quietPeriod}">
     </s:entry>

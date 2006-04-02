@@ -41,13 +41,10 @@
 <s:section title="Advanced Project Options">
   <s:advanced>
     <%-- custom quiet period --%>
-    <s:optionalBlock name="hasCustomQuietPeriod" title="Quiet period" checked="${it.hasCustomQuietPeriod}">
+    <s:optionalBlock name="hasCustomQuietPeriod" title="Quiet period" checked="${it.hasCustomQuietPeriod}"
+        help="/help/project-config/quietPeriod.html">
       <s:entry title="Quiet period"
-        description="
-          If set, a newly scheduled build wait for this many seconds before actually built.
-          This is useful for collapsing multiple CVS change notification e-mails to one.
-          If set, this value overrides the global setting.
-        ">
+        description="Number of seconds">
         <input class="setting-input" name="quiet_period"
           type="text" value="${it.quietPeriod}">
       </s:entry>
