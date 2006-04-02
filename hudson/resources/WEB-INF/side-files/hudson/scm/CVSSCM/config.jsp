@@ -8,7 +8,7 @@
     </c:forEach>
   </s:editableComboBox>
 </s:entry>
-<s:entry title="Module">
+<s:entry title="Module(s)" help="/help/_cvs/modules.html">
   <input class="setting-input" name="cvs_module"
     type="text" value="${scm.allModules}">
 </s:entry>
@@ -16,14 +16,11 @@
   <input class="setting-input" name="cvs_branch"
     type="text" value="${scm.branch}">
 </s:entry>
-<s:entry title="CVS_RSH">
+<s:entry title="CVS_RSH" help="/help/_cvs/cvs-rsh.html">
   <input class="setting-input" name="cvs_rsh"
     type="text" value="${scm.cvsRsh}">
 </s:entry>
-<s:entry title="Use update"
-  description="
-    If checked, Hudson will use 'cvs update' whenever possible, making the build faster.
-    But this causes the artifacts from the previous build to remain when a new build starts.">
+<s:entry title="Use update" help="/help/_cvs/update.html">
   <input name="cvs_use_update"
     type="checkbox"
     <c:if test="${scm.canUseUpdate}">checked</c:if>>
