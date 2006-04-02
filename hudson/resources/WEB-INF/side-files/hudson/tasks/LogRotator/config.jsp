@@ -2,12 +2,12 @@
 <%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
 
 <s:entry title="Days to keep records"
-  description="if not empty, log/artifacts etc are only kept up to this number of days">
+  help="/help/project-config/log-days.html">
   <input class="setting-input" name="logrotate_days"
     type="text" value="${it.logRotator.daysToKeepStr}">
 </s:entry>
 <s:entry title="Max # of records to keep"
-  description="if not empty, only up to this number of log/artifacts etc are kept">
+         help="/help/project-config/log-nums.html">
   <input class="setting-input" name="logrotate_nums"
     type="text" value="${it.logRotator.numToKeepStr}">
 </s:entry>
