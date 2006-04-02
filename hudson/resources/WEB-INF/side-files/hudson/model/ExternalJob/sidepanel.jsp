@@ -7,7 +7,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
 
-<l:header title="${it.name}" />
+<l:header title="${it.name}">
+  <st:include page="rssHeader.jsp" />
+</l:header>
 <l:side-panel>
   <l:tasks>
     <l:task icon="images/24x24/up.gif" href="${rootURL}/" title="Back to Dashboard" />

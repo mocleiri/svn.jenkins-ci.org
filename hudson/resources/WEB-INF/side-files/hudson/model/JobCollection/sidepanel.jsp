@@ -6,7 +6,10 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
 
-<l:header title="Hudson" />
+<l:header title="Hudson">
+  <link rel="alternate" title="Hudson:${it.viewName} (all builds)" href="rssAll" type="application/rss+xml" />
+  <link rel="alternate" title="Hudson:${it.viewName} (failed builds)" href="rssFailed" type="application/rss+xml" />
+</l:header>
 <l:side-panel>
   <l:tasks>
     <l:isAdmin>

@@ -21,6 +21,7 @@
   <c:if test="${param.auto_refresh}">
     <meta http-equiv="Refresh" content="10">
   </c:if>
+  <jsp:doBody />
 </head>
 <body>
 <table id="header" cellpadding="0" cellspacing="0" width="100%" border="0">
