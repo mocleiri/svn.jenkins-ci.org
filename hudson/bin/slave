@@ -5,9 +5,9 @@
 #  set.
 
 # if there's any environment entries read them
-if [ -f ~/.hudson_slave_profile ];
+if [ -f $HOME/.hudson_slave_profile ];
 then
-  source ~/.hudson_slave_profile
+  . $HOME/.hudson_slave_profile
 fi
 
 # set the current directory
