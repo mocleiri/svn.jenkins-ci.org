@@ -34,7 +34,7 @@ public class JavadocArchiver extends AntBasedBuildStep {
     }
 
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
-        // TODO: run tar or something for better copy
+        // TODO: run tar or something for better remote copy
         File javadoc = new File(build.getParent().getWorkspace().getLocal(), javadocDir);
         if(!javadoc.exists()) {
             listener.error("The specified javadoc directory doesn't exist: "+javadoc);
