@@ -27,7 +27,7 @@
     <c:forEach var="e" items="${c.executors}" varStatus="eloop">
       <tr>
         <td class="pane">
-          ${loop.index+1}
+          ${eloop.index+1}
         </td>
         <c:choose>
           <c:when test="${e.currentBuild==null}">
