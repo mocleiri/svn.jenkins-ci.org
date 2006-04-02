@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<c:set var="rootURL" value="${pageContext.request.rootPath}" scope="request" />
+<c:set var="rootURL"
+       value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}" scope="request" />
 
 <feed version="0.3" xmlns="http://purl.org/atom/ns#">
   <title>${title}</title>
