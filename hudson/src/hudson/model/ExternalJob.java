@@ -53,6 +53,10 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
         getBuildDir().mkdirs();
     }
 
+    public boolean isBuildable() {
+        return false;
+    }
+
     protected synchronized SortedMap<String,ExternalRun> _getRuns() {
         if(runs==null) {
             reload();   // if none is loaded yet, do so immediately

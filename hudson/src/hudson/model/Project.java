@@ -149,6 +149,10 @@ public class Project extends Job<Project,Build> {
         }
     }
 
+    public boolean isBuildable() {
+        return true;
+    }
+
     public SCM getScm() {
         return scm;
     }

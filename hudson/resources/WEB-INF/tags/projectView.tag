@@ -56,7 +56,9 @@
       </td>
       <l:isAdmin>
         <td>
-          <a href="${rootURL}/${job.url}build"><img src="${rootURL}/images/24x24/clock.gif" title="Schedule a build" border=0></a>
+          <c:if test="${job.buildable}">
+            <a href="${rootURL}/${job.url}build"><img src="${rootURL}/images/24x24/clock.gif" title="Schedule a build" border=0></a>
+          </c:if>
         </td>
       </l:isAdmin>
     </tr>

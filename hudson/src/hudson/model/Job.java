@@ -117,6 +117,11 @@ public abstract class Job<JobT extends Job, RunT extends Run<JobT,RunT>>
     }
 
     /**
+     * Returns true if we should display "build now" icon
+     */
+    public abstract boolean isBuildable();
+
+    /**
      * Gets all the builds.
      *
      * @return
