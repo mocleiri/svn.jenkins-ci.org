@@ -135,7 +135,9 @@ public final class Build extends Run<Project,Build> implements Runnable {
             }
 
             public void post(BuildListener listener) {
-                build(listener,project.getPublishers());
+                // run all of them even if one of them failed
+                for( BuildStep bs : project.getPublishers().values() )
+                    bs.perform(Build.this, launcher, listener);
             }
 
             private boolean build(BuildListener listener, Map<?, BuildStep> steps) {
