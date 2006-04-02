@@ -26,6 +26,7 @@
 
     <%-- log rotator --%>
     <s:optionalBlock name="logrotate"
+      help="/help/project-config/log-rotation.html"
       title="Log Rotation" checked="${it.logRotator!=null}">
       <jsp:include page="../../tasks/LogRotator/config.jsp"/>
     </s:optionalBlock>
