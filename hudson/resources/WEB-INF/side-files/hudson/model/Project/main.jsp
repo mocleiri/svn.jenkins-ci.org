@@ -14,7 +14,7 @@
   </t:summary>
 
   <t:artifactList caption="Latest Artifacts"
-      it="${it.lastSuccessfulBuild}" baseURL="lastSuccessfulBuild/" />
+      build="${it.lastSuccessfulBuild}" baseURL="lastSuccessfulBuild/" />
 
   <c:set var="tr" value="${it.lastSuccessfulBuild.testResult}" />
   <c:if test="${tr!=null}">

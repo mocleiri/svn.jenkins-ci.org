@@ -16,7 +16,7 @@
 <st:include page="logKeep.jsp" />
 
 <table style="margin-top: 1em; margin-left:1em;">
-  <t:artifactList it="${it}" caption="Build Artifacts" />
+  <t:artifactList build="${it}" caption="Build Artifacts" />
 
   <c:set var="tr" value="${it.testResult}" />
   <c:if test="${tr!=null}">
