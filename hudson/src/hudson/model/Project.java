@@ -24,6 +24,8 @@ import java.util.TreeMap;
 import java.util.Vector;
 
 /**
+ * Buildable software project.
+ * 
  * @author Kohsuke Kawaguchi
  */
 public class Project extends Job<Project,Build> {
