@@ -7,6 +7,7 @@ import hudson.scm.SCM;
 import hudson.scm.SCMManager;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
+import hudson.triggers.Trigger;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -25,7 +26,7 @@ import java.util.Vector;
 
 /**
  * Buildable software project.
- * 
+ *
  * @author Kohsuke Kawaguchi
  */
 public class Project extends Job<Project,Build> {
@@ -38,7 +39,9 @@ public class Project extends Job<Project,Build> {
 
     private SCM scm = new NullSCM();
 
-    // TODO: consolidate build commands into one build step.
+    // TODO
+    private transient List<Trigger> triggers = new Vector<Trigger>();
+
     /**
      * List of {@link BuildStep}s.
      */
@@ -263,11 +266,7 @@ public class Project extends Job<Project,Build> {
      *      When running remotely, this returns a remote fs directory.
      */
     public FilePath getModuleRoot() {
-        String module = getScm().getModule();
-        if(module.length()==0)
-            return getWorkspace();
-        else
-            return new FilePath(getWorkspace(),module);
+        return getScm().getModuleRoot(getWorkspace());
     }
 
 

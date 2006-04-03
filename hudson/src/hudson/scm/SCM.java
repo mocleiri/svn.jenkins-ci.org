@@ -52,7 +52,8 @@ public interface SCM {
     void buildEnvVars(Map env);
 
     /**
-     * Gets the name of the module, or the empty string.
+     * Gets the top directory of the checked out module.
+     * @param workspace
      */
-    String getModule();
+    FilePath getModuleRoot(FilePath workspace);
 }

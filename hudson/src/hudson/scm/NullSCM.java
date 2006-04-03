@@ -32,8 +32,8 @@ public class NullSCM implements SCM {
         // noop
     }
 
-    public String getModule() {
-        return "";
+    public FilePath getModuleRoot(FilePath workspace) {
+        return workspace;
     }
 
     static final SCMDescriptor DESCRIPTOR = new SCMDescriptor(NullSCM.class) {

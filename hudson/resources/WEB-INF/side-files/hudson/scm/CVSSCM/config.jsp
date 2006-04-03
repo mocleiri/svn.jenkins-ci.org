@@ -25,3 +25,9 @@
     type="checkbox"
     <c:if test="${scm.canUseUpdate}">checked</c:if>>
 </s:entry>
+<s:entry title="Legacy mode" help="/help/_cvs/legacy.html">
+  <input name="cvs_legacy"
+    type="checkbox"
+    <c:if test="${scm!=null && !scm.flatten}">checked</c:if>>
+  (run CVS in a way compatible with older versions of Hudson &lt;1.21)
+</s:entry>

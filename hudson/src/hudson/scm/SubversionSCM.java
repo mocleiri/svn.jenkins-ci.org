@@ -276,7 +276,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         // no environment variable
     }
 
-    public String getModule() {
+    public FilePath getModuleRoot(FilePath workspace) {
         String s;
 
         // if multiple URLs are specified, pick the first one
@@ -284,7 +284,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         if(idx>=0)  s = modules.substring(0,idx);
         else        s = modules;
 
-        return getLastPathComponent(s);
+        return workspace.child(getLastPathComponent(s));
     }
 
     private String getLastPathComponent(String s) {

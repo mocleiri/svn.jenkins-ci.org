@@ -55,13 +55,20 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
     private boolean canUseUpdate;
 
+    /**
+     * True to avoid creating a sub-directory inside the workspace.
+     * (Works only when there's just one module.)
+     */
+    private boolean flatten;
 
-    public CVSSCM(String cvsroot, String module,String branch,String cvsRsh,boolean canUseUpdate) {
+
+    public CVSSCM(String cvsroot, String module,String branch,String cvsRsh,boolean canUseUpdate, boolean flatten) {
         this.cvsroot = cvsroot;
-        this.module = module;
+        this.module = module.trim();
         this.branch = nullify(branch);
         this.cvsRsh = nullify(cvsRsh);
         this.canUseUpdate = canUseUpdate;
+        this.flatten = flatten && module.indexOf(' ')==-1;
     }
 
     public String getCvsRoot() {
@@ -70,11 +77,15 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
     /**
      * If there are multiple modules, return the module directory of the first one.
+     * @param workspace
      */
-    public String getModule() {
+    public FilePath getModuleRoot(FilePath workspace) {
+        if(flatten)
+            return workspace;
+
         int idx = module.indexOf(' ');
-        if(idx>=0)  return module.substring(0,idx);
-        else        return module;
+        if(idx>=0)  return workspace.child(module.substring(0,idx));
+        else        return workspace.child(module);
     }
     
     public String getAllModules() {
@@ -93,6 +104,10 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         return canUseUpdate;
     }
 
+    public boolean isFlatten() {
+        return flatten;
+    }
+
     public boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener) throws IOException {
         boolean result;
 
@@ -101,13 +116,15 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         else {
             dir.deleteContents();
 
-            String cmd = MessageFormat.format("cvs -Q -z9 -d {0} co {2} {1}",
+            String cmd = MessageFormat.format("cvs -Q -z9 -d {0} co {1} {2} {3}",
                 cvsroot,
-                module,
-                branch!=null?"-r "+branch:""
+                branch!=null?"-r "+branch:"",
+                flatten?"-d "+dir.getName():"",
+                module
             );
 
-            result = run(launcher,cmd,listener,dir);
+            result = run(launcher,cmd,listener,
+                flatten ? dir.getParent() : dir);
         }
 
         if(!result)
@@ -115,13 +132,17 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
 
         // archive the workspace to support later tagging
+        // TODO: doing this partially remotely would be faster
         File archiveFile = getArchiveFile(build);
         ZipOutputStream zos = new ZipOutputStream(archiveFile);
-        StringTokenizer tokens = new StringTokenizer(module);
-        while(tokens.hasMoreTokens()) {
-            String m = tokens.nextToken();
-            // TODO: doing this partially remotely would be faster
-            archive(new File(build.getProject().getWorkspace().getLocal(),m),m,zos);
+        if(flatten) {
+            archive(build.getProject().getWorkspace().getLocal(), module, zos);
+        } else {
+            StringTokenizer tokens = new StringTokenizer(module);
+            while(tokens.hasMoreTokens()) {
+                String m = tokens.nextToken();
+                archive(new File(build.getProject().getWorkspace().getLocal(),m),m,zos);
+            }
         }
         zos.close();
 
@@ -187,38 +208,53 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         in.close();
     }
 
-    public boolean update(Launcher launcher, FilePath remoteDir, BuildListener listener) throws IOException {
+    public boolean update(Launcher launcher, FilePath workspace, BuildListener listener) throws IOException {
         String cmd = "cvs -q -z9 update -PdC";
-        StringTokenizer tokens = new StringTokenizer(module);
-        while(tokens.hasMoreTokens()) {
-            if(!run(launcher,cmd,listener,new FilePath(remoteDir,tokens.nextToken())))
-                return false;
+        if(flatten) {
+            return run(launcher,cmd,listener,workspace);
+        } else {
+            StringTokenizer tokens = new StringTokenizer(module);
+            while(tokens.hasMoreTokens()) {
+                if(!run(launcher,cmd,listener,new FilePath(workspace,tokens.nextToken())))
+                    return false;
+            }
+            return true;
         }
-        return true;
     }
 
     /**
      * Returns true if we can use "cvs update" instead of "cvs checkout"
      */
     private boolean isUpdatable(File dir) {
-        StringTokenizer tokens = new StringTokenizer(module);
-        while(tokens.hasMoreTokens()) {
-            File module = new File(dir,tokens.nextToken());
-            File cvs = new File(module,"CVS");
-            if(!cvs.exists())
-                return false;
-
-            // check cvsroot
-            if(!checkContents(new File(cvs,"Root"),cvsroot))
-                return false;
-            if(branch!=null) {
-                if(!checkContents(new File(cvs,"Tag"),'T'+branch))
-                    return false;
-            } else {
-                if(new File(cvs,"Tag").exists())
+        if(flatten) {
+            return isUpdatableModule(dir);
+        } else {
+            StringTokenizer tokens = new StringTokenizer(module);
+            while(tokens.hasMoreTokens()) {
+                File module = new File(dir,tokens.nextToken());
+                if(!isUpdatableModule(module))
                     return false;
             }
+            return true;
         }
+    }
+
+    private boolean isUpdatableModule(File module) {
+        File cvs = new File(module,"CVS");
+        if(!cvs.exists())
+            return false;
+
+        // check cvsroot
+        if(!checkContents(new File(cvs,"Root"),cvsroot))
+            return false;
+        if(branch!=null) {
+            if(!checkContents(new File(cvs,"Tag"),'T'+branch))
+                return false;
+        } else {
+            if(new File(cvs,"Tag").exists())
+                return false;
+        }
+
         return true;
     }
 
@@ -257,7 +293,8 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             task.setPassfile(new File(DESCRIPTOR.getCvspassFile()));
         task.setCvsRoot(cvsroot);
         task.setCvsRsh(cvsRsh);
-        task.setPackage(module);
+        if(!flatten)
+            task.setPackage(module);
         task.setFailOnError(true);
         task.setDestfile(changelogFile);
         task.setStart(build.getPreviousBuild().getTimestamp().getTime());
@@ -306,7 +343,8 @@ public class CVSSCM extends AbstractCVSFamilySCM {
                 req.getParameter("cvs_module"),
                 req.getParameter("cvs_branch"),
                 req.getParameter("cvs_rsh"),
-                req.getParameter("cvs_use_update")!=null
+                req.getParameter("cvs_use_update")!=null,
+                req.getParameter("cvs_legacy")==null
             );
         }
 
