@@ -78,10 +78,34 @@ public final class FilePath {
     }
 
     /**
+     * Gets just the file name portion.
+     *
+     * This method assumes that the file name is the same between local and remote.
+     */
+    public String getName() {
+        return local.getName();
+    }
+
+    /**
      * The same as {@code new FilePath(this,rel)} but more OO.
      */
     public FilePath child(String rel) {
         return new FilePath(this,rel);
+    }
+
+    /**
+     * Gets the parent file.
+     */
+    public FilePath getParent() {
+        int len = remote.length()-1;
+        while(len>=0) {
+            char ch = remote.charAt(len);
+            if(ch=='\\' || ch=='/')
+                break;
+            len--;
+        }
+
+        return new FilePath( local.getParentFile(), remote.substring(0,len) );
     }
 
     /**
