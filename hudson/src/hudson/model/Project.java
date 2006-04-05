@@ -40,7 +40,7 @@ public class Project extends Job<Project,Build> {
     private SCM scm = new NullSCM();
 
     // TODO
-    private transient List<Trigger> triggers = new Vector<Trigger>();
+    // private transient List<Trigger> triggers = new Vector<Trigger>();
 
     /**
      * List of {@link BuildStep}s.
