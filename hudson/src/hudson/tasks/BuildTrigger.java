@@ -5,6 +5,7 @@ import hudson.model.BuildListener;
 import hudson.model.Hudson;
 import hudson.model.Job;
 import hudson.model.Project;
+import hudson.model.Result;
 import hudson.Launcher;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,21 +36,22 @@ public class BuildTrigger implements BuildStep {
     }
 
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
+        if(build.getResult()== Result.SUCCESS) {
+            Hudson hudson = Hudson.getInstance();
 
-        Hudson hudson = Hudson.getInstance();
+            StringTokenizer tokens = new StringTokenizer(childProjects,",");
+            while(tokens.hasMoreTokens()) {
+                String projectName = tokens.nextToken().trim();
+                listener.getLogger().println("Triggering a new build of "+projectName);
 
-        StringTokenizer tokens = new StringTokenizer(childProjects,",");
-        while(tokens.hasMoreTokens()) {
-            String projectName = tokens.nextToken().trim();
-            listener.getLogger().println("Triggering a new build of "+projectName);
-
-            Job job = hudson.getJob(projectName);
-            if(!(job instanceof Project)) {
-                listener.getLogger().println(projectName+" is not a project");
-                return false;
+                Job job = hudson.getJob(projectName);
+                if(!(job instanceof Project)) {
+                    listener.getLogger().println(projectName+" is not a project");
+                    return false;
+                }
+                Project p = (Project) job;
+                hudson.getQueue().add(p);
             }
-            Project p = (Project) job;
-            hudson.getQueue().add(p);
         }
 
         return true;
