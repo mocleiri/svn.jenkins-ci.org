@@ -2,6 +2,7 @@ package hudson.tasks.junit;
 
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Result;
 import hudson.tasks.AntBasedBuildStep;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
@@ -38,7 +39,11 @@ public class JUnitResultArchiver extends AntBasedBuildStep {
         fs.setDir(build.getProject().getWorkspace().getLocal());
         fs.setIncludes(testResults);
 
-        build.getActions().add(new TestResultAction(build, fs.getDirectoryScanner(p), listener));
+        TestResultAction action = new TestResultAction(build, fs.getDirectoryScanner(p), listener);
+        build.getActions().add(action);
+
+        if(action.getResult().getFailCount()>0)
+            build.setResult(Result.UNSTABLE);
 
         return true;
     }

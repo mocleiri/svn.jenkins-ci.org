@@ -23,6 +23,12 @@
           (#${it.lastBuild.number}), ${it.lastBuild.timestampString} ago</a>
       </li>
     </c:if>
+    <c:if test="${it.lastStableBuild!=null}">
+      <li>
+        <a href="lastStableBuild">Last stable build
+          (#${it.lastStableBuild.number}), ${it.lastStableBuild.timestampString} ago</a>
+      </li>
+    </c:if>
     <c:if test="${it.lastSuccessfulBuild!=null}">
       <li>
         <a href="lastSuccessfulBuild">Last successful build

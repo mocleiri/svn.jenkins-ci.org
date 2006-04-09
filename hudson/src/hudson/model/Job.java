@@ -188,7 +188,17 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      */
     public synchronized RunT getLastSuccessfulBuild() {
         RunT r = getLastBuild();
-        while(r!=null && r.getResult().isWorseThan(Result.UNSTABLE))
+        while(r!=null && r.getResult()!=null && r.getResult().isWorseThan(Result.UNSTABLE))
+            r=r.getPreviousBuild();
+        return r;
+    }
+
+    /**
+     * Returns the last stable build, if any. Otherwise null.
+     */
+    public synchronized RunT getLastStableBuild() {
+        RunT r = getLastBuild();
+        while(r!=null && r.getResult()!=null && r.getResult().isWorseThan(Result.SUCCESS))
             r=r.getPreviousBuild();
         return r;
     }

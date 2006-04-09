@@ -26,6 +26,14 @@
       The last build was successful. A new build is in progress.
     </td></tr>
     <tr><td>
+      <img src="images/48x48/yellow.gif">
+      The last build was successful but unstable.
+    </td></tr>
+    <tr><td>
+      <img src="images/48x48/yellow_anime.gif">
+      The last build was successful but unstable. A new build is in progress.
+    </td></tr>
+    <tr><td>
       <img src="images/48x48/red.gif">
       The last build failed.
     </td></tr>

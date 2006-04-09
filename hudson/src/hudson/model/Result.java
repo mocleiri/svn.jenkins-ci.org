@@ -12,24 +12,44 @@ public final class Result {
     /**
      * The build didn't have any fatal errors not errors.
      */
-    public static final Result SUCCESS = new Result("SUCCESS");
+    public static final Result SUCCESS = new Result("SUCCESS",0);
     /**
      * The build didn't have any fatal errors but some errors.
      */
-    public static final Result UNSTABLE = new Result("UNSTABLE");
+    public static final Result UNSTABLE = new Result("UNSTABLE",1);
     /**
      * The build had a fatal error.
      */
-    public static final Result FAILURE = new Result("FAILURE");
+    public static final Result FAILURE = new Result("FAILURE",2);
     /**
      * The build was manually aborted.
      */
-    public static final Result ABORTED = new Result("ABORTED");
+    public static final Result ABORTED = new Result("ABORTED",3);
 
     private final String name;
 
-    private Result(String name) {
+    /**
+     * Bigger numbers are worse.
+     */
+    private final int ordinal;
+
+    private Result(String name, int ordinal) {
         this.name = name;
+        this.ordinal = ordinal;
+    }
+
+    /**
+     * Combines two {@link Result}s and returns the worse one.
+     */
+    public Result combine(Result that) {
+        if(this.ordinal < that.ordinal)
+            return that;
+        else
+            return this;
+    }
+
+    public boolean isWorseThan(Result that) {
+        return this.ordinal > that.ordinal;
     }
 
     public String toString() {
@@ -44,9 +64,9 @@ public final class Result {
         }
 
         protected Object fromString(String s) {
-            for(int i=0;i<all.length;i++)
-                if(s.equals(all[i].name))
-                    return all[i];
+            for (Result r : all)
+                if (s.equals(r.name))
+                    return r;
             return FAILURE;
         }
     };

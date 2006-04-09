@@ -61,14 +61,20 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
 
     /**
      * The build result.
-     * null if a build is in progress.
+     * This value may change while the state is in {@link State#BUILDING}.
      */
     protected Result result;
 
     /**
-     * False if the build is scheduled but hasn't started yet.
+     * The current build state.
      */
-    protected transient boolean building;
+    protected transient State state;
+
+    private static enum State {
+        NOT_STARTED,
+        BUILDING,
+        COMPLETED
+    }
 
     /**
      * Number of milli-seconds it took to run this build.
@@ -102,6 +108,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
         this.project = job;
         this.previousBuild = prevBuild;
         this.timestamp = new GregorianCalendar();
+        state = State.NOT_STARTED;
     }
 
     /**
@@ -118,7 +125,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
         } catch (NumberFormatException e) {
             throw new IOException2("Invalid directory name "+buildDir,e);
         }
-        this.building = true;
+        this.state = State.COMPLETED;
         getDataFile().unmarshal(this); // load the rest of the data
     }
 
@@ -127,11 +134,21 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
         return result;
     }
 
+    public void setResult(Result r) {
+        // state can change only when we are building
+        assert state==State.BUILDING;
+        // result can only get worse
+        if(result==null)
+            result = r;
+        else
+            result = result.combine(r);
+    }
+
     /**
-     * Returns true if the build is still in progress.
+     * Returns true if the build is not completed yet.
      */
     public boolean isBuilding() {
-        return result==null;
+        return state!=State.COMPLETED;
     }
 
     /**
@@ -238,6 +255,8 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
             // already built
             if(result==Result.SUCCESS)
                 return "blue";
+            if(result== Result.UNSTABLE)
+                return "yellow";
             else
                 return "red";
         }
@@ -256,7 +275,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
      * Returns true if the build is still queued and hasn't started yet.
      */
     public boolean hasntStartedYet() {
-        return !building;
+        return state ==State.NOT_STARTED;
     }
 
     public String toString() {
@@ -418,7 +437,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
         if(result!=null)
             return;     // already built.
 
-        building = true;
+        state = State.BUILDING;
 
         long start = System.currentTimeMillis();
 
@@ -475,8 +494,10 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
 
         long end = System.currentTimeMillis();
         duration = end-start;
+        state = State.COMPLETED;
 
-        listener.finished(result);
+        if(listener!=null)
+            listener.finished(result);
 
         try {
             save();
