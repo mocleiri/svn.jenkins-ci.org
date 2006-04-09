@@ -84,8 +84,8 @@ public class Mailer implements BuildStep {
         MimeMessage msg = createEmptyMail();
 
         msg.setSubject(getSubject(build));
-        msg.setSubject("Hudson build is back to normal: "+build.getProject().getName());
-        msg.setText("... as of #"+build.getNumber());
+        msg.setSubject("Hudson build is back to normal: "+build.getProject().getName()+" #"+build.getNumber());
+        msg.setText("");
 
         return msg;
     }
