@@ -259,6 +259,16 @@ public final class Hudson extends JobCollection implements Node {
         }
     }
 
+    public Computer getComputer(String name) {
+        synchronized(computers) {
+            for (Computer c : computers.values()) {
+                if(c.getNode().getNodeName().equals(name))
+                    return c;
+            }
+        }
+        return null;
+    }
+
     public Queue getQueue() {
         return queue;
     }

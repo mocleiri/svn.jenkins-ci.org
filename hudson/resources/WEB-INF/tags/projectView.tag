@@ -1,17 +1,22 @@
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="jobs" required="true" type="java.util.Collection" %>
+<%@ attribute name="showViewTabs" required="true" type="java.lang.Boolean" %>
 <div class="dashboard">
 
   <%-- view tab bar --%>
-  <l:tabBar>
-    <c:forEach var="v" items="${app.views}">
-      <l:tab name="${v.viewName}" active="${v==it}" href="${rootURL}/${v.url}" />
-    </c:forEach>
-    <l:tab name="+" href="${rootURL}/newView" active="false" />
-  </l:tabBar>
+  <c:if test="${showViewTabs}">
+    <l:tabBar>
+      <c:forEach var="v" items="${app.views}">
+        <l:tab name="${v.viewName}" active="${v==it}" href="${rootURL}/${v.url}" />
+      </c:forEach>
+      <l:tab name="+" href="${rootURL}/newView" active="false" />
+    </l:tabBar>
+  </c:if>
   <%-- project list --%>
-  <table id="projectstatus" class="pane">
+  <table id="projectstatus" class="pane"
+    <c:if test="${showViewTabs}">style="margin-top:0px; border-top: none;"</c:if>
+  >
     <tr style="border-top: 0px;">
       <th>&nbsp;</th>
       <th>Job</th>

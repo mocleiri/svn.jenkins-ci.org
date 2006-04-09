@@ -1,7 +1,12 @@
 package hudson.model;
 
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+
+import javax.servlet.ServletException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.IOException;
 
 /**
  * Represents a set of {@link Executor}s on the same computer.
@@ -20,9 +25,13 @@ import java.util.List;
  * {@link Computer} to be removed, if some builds are already in progress on that
  * node.
  *
+ * <p>
+ * This object also serves UI (since {@link Node} is an interface and can't have
+ * related side pages.)
+ *
  * @author Kohsuke Kawaguchi
  */
-public class Computer {
+public class Computer implements ModelObject {
     private final List<Executor> executors = new ArrayList<Executor>();
 
     private int numExecutors;
@@ -51,6 +60,29 @@ public class Computer {
      */
     public Node getNode() {
         return node;
+    }
+
+    public String getDisplayName() {
+        return node.getNodeName();
+    }
+
+    public String getUrl() {
+        return "computer/"+getDisplayName()+"/";
+    }
+
+    /**
+     * Returns projects that are tied on this node.
+     */
+    public List<Project> getTiedJobs() {
+        List<Project> r = new ArrayList<Project>();
+        for( Job j : Hudson.getInstance().getJobs() ) {
+            if (j instanceof Project) {
+                Project p = (Project) j;
+                if(p.getAssignedNode()==node)
+                    r.add(p);
+            }
+        }
+        return r;
     }
 
     /*package*/ void setNode(Node node) {
@@ -112,5 +144,17 @@ public class Computer {
         for (Executor e : executors) {
             e.interrupt();
         }
+    }
+
+//
+//
+// UI
+//
+//
+    public synchronized void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        RSS.doRssAll(this, getTiedJobs(), req, rsp );
+    }
+    public synchronized void doRssFailed( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        RSS.doRssFailed(this, getTiedJobs(), req, rsp );
     }
 }

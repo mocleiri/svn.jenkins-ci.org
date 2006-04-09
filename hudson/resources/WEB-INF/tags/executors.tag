@@ -18,7 +18,7 @@
       <c:otherwise>
         <tr>
           <th class="pane" colspan="3">
-            ${c.node.nodeName}
+            <a href="${rootURL}/computer/${c.displayName}">${c.displayName}</a>
           </th>
         </tr>
       </c:otherwise>

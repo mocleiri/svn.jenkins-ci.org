@@ -9,6 +9,6 @@
 <jsp:include page="sidepanel.jsp" />
 
 <l:main-panel>
-  <t:projectView jobs="${it.jobs}" />
+  <t:projectView jobs="${it.jobs}" showViewTabs="true" />
 </l:main-panel>
 <l:footer/>
