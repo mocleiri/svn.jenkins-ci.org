@@ -71,39 +71,76 @@ public class Mailer implements BuildStep {
             return createFailureMail(build);
         }
 
+        if(build.getResult()==Result.UNSTABLE) {
+            Build prev = build.getPreviousBuild();
+            if(prev!=null) {
+                if(prev.getResult()==Result.SUCCESS)
+                    return createUnstableMail(build);
+            }
+        }
+
         if(build.getResult()==Result.SUCCESS) {
             Build prev = build.getPreviousBuild();
-            if(prev!=null && prev.getResult()==Result.FAILURE)
-                return createBackToNormalMail(build);
+            if(prev!=null) {
+                if(prev.getResult()==Result.FAILURE)
+                    return createBackToNormalMail(build, "normal");
+                if(prev.getResult()==Result.UNSTABLE)
+                    return createBackToNormalMail(build, "stable");
+            }
         }
 
         return null;
     }
 
-    private MimeMessage createBackToNormalMail(Build build) throws MessagingException {
+    private MimeMessage createBackToNormalMail(Build build, String subject) throws MessagingException {
         MimeMessage msg = createEmptyMail();
 
-        msg.setSubject(getSubject(build));
-        msg.setSubject("Hudson build is back to normal: "+build.getProject().getName()+" #"+build.getNumber());
-        msg.setText("");
+        msg.setSubject(getSubject(build,"Hudson build is back to "+subject +": "));
+        StringBuffer buf = new StringBuffer();
+        appendBuildUrl(build,buf);
+        msg.setText(buf.toString());
 
         return msg;
+    }
+
+    private MimeMessage createUnstableMail(Build build) throws MessagingException {
+        MimeMessage msg = createEmptyMail();
+
+        msg.setSubject(getSubject(build,"Hudson build became unstable: "));
+        StringBuffer buf = new StringBuffer();
+        appendBuildUrl(build,buf);
+        msg.setText(buf.toString());
+
+        return msg;
+    }
+
+    private void appendBuildUrl(Build build, StringBuffer buf) {
+        String baseUrl = DESCRIPTOR.getUrl();
+        if(baseUrl!=null)
+            buf.append("See ").append(baseUrl).append(build.getUrl()).append("\n\n");
     }
 
     private MimeMessage createFailureMail(Build build) throws MessagingException {
         MimeMessage msg = createEmptyMail();
 
-        msg.setSubject(getSubject(build));
+        msg.setSubject(getSubject(build, "Build failed in Hudson: "));
+
+        StringBuffer buf = new StringBuffer();
+        appendBuildUrl(build,buf);
+
+        buf.append("---------\n");
+
         try {
-            msg.setText(build.getLog());
+            buf.append(build.getLog());
         } catch (IOException e) {
             // somehow failed to read the contents of the log
-            StringBuilder w = new StringBuilder();
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
-            w.append("Failed to access build log\n\n").append(sw);
-            msg.setText(w.toString());
+            buf.append("Failed to access build log\n\n").append(sw);
         }
+
+        msg.setText(buf.toString());
+
         return msg;
     }
 
@@ -126,8 +163,8 @@ public class Mailer implements BuildStep {
         return DESCRIPTOR;
     }
 
-    private String getSubject(Build build) {
-        return "Build failed in Hudson: "+build.getProject().getName()+" #"+build.getNumber();
+    private String getSubject(Build build, String caption) {
+        return caption +build.getProject().getName()+" #"+build.getNumber();
     }
 
 
