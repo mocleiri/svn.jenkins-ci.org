@@ -131,6 +131,8 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
 
 
     public final Result getResult() {
+        if(state!=State.COMPLETED)
+            return null;
         return result;
     }
 
