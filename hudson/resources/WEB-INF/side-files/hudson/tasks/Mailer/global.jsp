@@ -3,20 +3,18 @@
 
 <s:section title="E-mail Notification">
   <s:entry title="SMTP server"
-    description="Name of the mail server. Leave it empty to use the default server.">
+           help="/help/tasks/mailer/smtp-server.html">
     <input class="setting-input" name="mailer_smtp_server"
       type="text" value="${descriptor.smtpServer}">
   </s:entry>
-  <s:block>
-    <small>
-      Additional settings can be given as system properties to the container.
-      See <a href="http://java.sun.com/products/javamail/javadocs/overview-summary.html#overview_description">
-      this document</a> for possible values and effects.
-    </small>
-  </s:block>
   <s:entry title="System Admin E-mail Address"
-    description="Notification e-mails will be sent with this address in the from header">
+           help="/help/tasks/mailer/admin-address.html">
     <input class="setting-input" name="mailer_admin_address"
       type="text" value="${descriptor.adminAddress}">
+  </s:entry>
+  <s:entry title="Hudson URL"
+           help="/help/tasks/mailer/url.html">
+    <input class="setting-input" name="mailer_hudson_url"
+      type="text" value="${descriptor.url}">
   </s:entry>
 </s:section>

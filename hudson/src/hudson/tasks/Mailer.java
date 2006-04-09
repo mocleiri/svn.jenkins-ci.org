@@ -155,13 +155,17 @@ public class Mailer implements BuildStep {
         }
 
         public boolean configure(HttpServletRequest req) {
-            String v = req.getParameter("mailer_smtp_server");
-            if(v!=null && v.length()==0)    v=null;
-            getProperties().put("mail.smtp.host",v);
-
+            getProperties().put("mail.smtp.host",nullify(req.getParameter("mailer_smtp_server")));
             getProperties().put("mail.admin.address",req.getParameter("mailer_admin_address"));
+            getProperties().put("mail.hudson.url",nullify(req.getParameter("mailer_hudson_url")));
+
             save();
             return super.configure(req);
+        }
+
+        private String nullify(String v) {
+            if(v!=null && v.length()==0)    v=null;
+            return v;
         }
 
         public String getSmtpServer() {
@@ -172,6 +176,10 @@ public class Mailer implements BuildStep {
             String v = (String)getProperties().get("mail.admin.address");
             if(v==null)     v = "address not configured yet <nobody>";
             return v;
+        }
+
+        public String getUrl() {
+            return (String)getProperties().get("mail.hudson.url");
         }
 
         public BuildStep newInstance(HttpServletRequest req) {
