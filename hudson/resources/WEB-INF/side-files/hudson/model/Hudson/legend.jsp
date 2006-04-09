@@ -28,6 +28,7 @@
     <tr><td>
       <img src="images/48x48/yellow.gif">
       The last build was successful but unstable.
+      This is primarily used to represent test failures.
     </td></tr>
     <tr><td>
       <img src="images/48x48/yellow_anime.gif">
@@ -35,11 +36,11 @@
     </td></tr>
     <tr><td>
       <img src="images/48x48/red.gif">
-      The last build failed.
+      The last build fatally failed.
     </td></tr>
     <tr><td>
       <img src="images/48x48/red_anime.gif">
-      The last build failed. A new build is in progress.
+      The last build fatally failed. A new build is in progress.
     </td></tr>
   </table>
 
