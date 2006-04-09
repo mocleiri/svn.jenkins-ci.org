@@ -35,7 +35,7 @@ import java.util.SimpleTimeZone;
  *
  * @author Kohsuke Kawaguchi
  */
-public class Run <JobT extends Job,RunT extends Run>
+public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
         extends DirectoryHolder implements ModelObject {
 
     protected transient final JobT project;
@@ -92,10 +92,10 @@ public class Run <JobT extends Job,RunT extends Run>
      * Creates a new {@link Run}.
      */
     protected Run(JobT job) throws IOException {
-        this(job,(RunT)job.getLastBuild());
+        this(job,job.getLastBuild());
         this.number = project.assignBuildNumber();
         if(previousBuild!=null)
-            previousBuild.nextBuild = this;
+            previousBuild.nextBuild = (RunT)this;
     }
 
     private Run(JobT job,RunT prevBuild) {
@@ -110,7 +110,7 @@ public class Run <JobT extends Job,RunT extends Run>
     Run(JobT project, File buildDir, RunT prevBuild ) throws IOException {
         this(project,prevBuild);
         if(prevBuild!=null)
-            prevBuild.nextBuild = this;
+            prevBuild.nextBuild = (RunT)this;
         try {
             this.timestamp.setTime(ID_FORMATTER.parse(buildDir.getName()));
         } catch (ParseException e) {
@@ -279,10 +279,10 @@ public class Run <JobT extends Job,RunT extends Run>
      * Returns the last failed build before this build.
      */
     public RunT getPreviousFailedBuild() {
-        Run r=previousBuild;
+        RunT r=previousBuild;
         while(  r!=null && r.getResult()!=Result.FAILURE )
             r=r.previousBuild;
-        return (RunT)r;
+        return r;
     }
 
     public RunT getNextBuild() {
