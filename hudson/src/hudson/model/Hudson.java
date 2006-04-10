@@ -528,7 +528,7 @@ public final class Hudson extends JobCollection implements Node {
         if(!Hudson.adminCheck(req,rsp))
             return null;
 
-        String name = req.getParameter("name");
+        String name = req.getParameter("name").trim();
         String className = req.getParameter("type");
         String mode = req.getParameter("mode");
 
