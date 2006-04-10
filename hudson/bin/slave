@@ -31,4 +31,11 @@ fi
 shift
 
 # execute. use eval so that variables can be expanded now
-eval exec "$@"
+eval "$@"
+ret=$?
+# these additional hooks seem to prevent "select: bad filer number" error
+# on some systems, so use this as a precaution. We can afford to waste
+# one second, can't we?
+sleep 1
+echo
+exit $ret
