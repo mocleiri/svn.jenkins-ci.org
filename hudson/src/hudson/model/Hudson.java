@@ -404,6 +404,10 @@ public final class Hudson extends JobCollection implements Node {
         return numExecutors;
     }
 
+    public Mode getMode() {
+        return Mode.NORMAL;
+    }
+
     private synchronized void load() throws IOException {
         XmlFile cfg = getConfigFile();
         if(cfg.exists())
@@ -472,14 +476,15 @@ public final class Hudson extends JobCollection implements Node {
 
         {// update slave list
             slaves.clear();
-            String [] names = req.getParameterValues("slave_name");
-            String [] descriptions = req.getParameterValues("slave_description");
-            String [] executors = req.getParameterValues("slave_executors");
-            String [] cmds = req.getParameterValues("slave_command");
-            String [] rfs = req.getParameterValues("slave_remoteFS");
-            String [] lfs = req.getParameterValues("slave_localFS");
-            if(names!=null && descriptions!=null && executors!=null && cmds!=null && rfs!=null && lfs!=null) {
-                int len = Util.min(names.length,descriptions.length,executors.length,cmds.length,rfs.length, lfs.length);
+            String[] names = req.getParameterValues("slave_name");
+            String[] descriptions = req.getParameterValues("slave_description");
+            String[] executors = req.getParameterValues("slave_executors");
+            String[] cmds = req.getParameterValues("slave_command");
+            String[] rfs = req.getParameterValues("slave_remoteFS");
+            String[] lfs = req.getParameterValues("slave_localFS");
+            String[] mode = req.getParameterValues("slave_mode");
+            if(names!=null && descriptions!=null && executors!=null && cmds!=null && rfs!=null && lfs!=null && mode!=null) {
+                int len = Util.min(names.length,descriptions.length,executors.length,cmds.length,rfs.length, lfs.length, mode.length);
                 for(int i=0;i<len;i++) {
                     int n = 2;
                     try {
@@ -487,7 +492,7 @@ public final class Hudson extends JobCollection implements Node {
                     } catch(NumberFormatException e) {
                         // ignore
                     }
-                    slaves.add(new Slave(names[i],descriptions[i],cmds[i],rfs[i],new File(lfs[i]),n));
+                    slaves.add(new Slave(names[i],descriptions[i],cmds[i],rfs[i],new File(lfs[i]),n,Node.Mode.valueOf(mode[i])));
                 }
             }
 

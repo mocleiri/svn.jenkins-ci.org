@@ -2,6 +2,7 @@ package hudson;
 
 import hudson.model.ModelObject;
 import hudson.model.Run;
+import hudson.model.Node;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -108,5 +109,9 @@ public class Functions {
                 return url+rest;
             }
         }
+    }
+
+    public static Node.Mode[] getNodeModes() {
+        return Node.Mode.values();
     }
 }

@@ -1,6 +1,7 @@
 package hudson.model;
 
 import hudson.util.OneShotEvent;
+import hudson.model.Node.Mode;
 
 import java.util.Calendar;
 import java.util.Comparator;
@@ -76,6 +77,10 @@ public class Queue {
 
         public Node getNode() {
             return executor.getOwner().getNode();
+        }
+
+        public boolean isNotExclusive() {
+            return getNode().getMode()== Mode.NORMAL;
         }
     }
 
@@ -259,9 +264,10 @@ public class Queue {
         }
 
         // otherwise let's see if the last node that this project was built is available
-        // it has up-to-date workspace, so that's usually preferable
+        // it has up-to-date workspace, so that's usually preferable.
+        // (but we can't use an exclusive node)
         n = p.getLastBuiltOn();
-        if(n!=null) {
+        if(n!=null && n.getMode()==Mode.NORMAL) {
             for (JobOffer offer : parked.values()) {
                 if(offer.project==null && offer.getNode()==n)
                     return offer;
@@ -275,14 +281,14 @@ public class Queue {
         if(succ!=null && succ.getDuration()>15*60*1000) {
             // consider a long job to be > 15 mins
             for (JobOffer offer : parked.values()) {
-                if(offer.project==null && offer.getNode() instanceof Slave)
+                if(offer.project==null && offer.getNode() instanceof Slave && offer.isNotExclusive())
                     return offer;
             }
         }
 
         // lastly, just look for any idle executor
         for (JobOffer offer : parked.values()) {
-            if(offer.project==null)
+            if(offer.project==null && offer.isNotExclusive())
                 return offer;
         }
 

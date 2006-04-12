@@ -6,6 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
+<%@ taglib prefix="h" uri="http://hudson.dev.java.net/" %>
 <%--
   Config page
 --%>
@@ -66,6 +67,16 @@
             <s:entry title="remote FS root" help="/help/system-config/master-slave/remoteFS.html">
               <input class="setting-input" name="slave_remoteFS"
                 type="text" value="${s.remoteFS}">
+            </s:entry>
+
+            <s:entry title="usage" help="/help/system-config/master-slave/usage.html">
+              <select class="setting-input" name="slave_mode">
+                <c:forEach var="m" items="${h:getModes()}">
+                  <option value="${m.name}"
+                    <c:if test="${m==s.mode}">selected</c:if>
+                    >${m.description}</option>
+                </c:forEach>
+              </select>
             </s:entry>
 
             <s:entry title="">

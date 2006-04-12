@@ -51,13 +51,19 @@ public final class Slave implements Node {
      */
     private int numExecutors = 2;
 
-    public Slave(String name, String description, String command, String remoteFS, File localFS, int numExecutors) {
+    /**
+     * Job allocation strategy.
+     */
+    private Mode mode;
+
+    public Slave(String name, String description, String command, String remoteFS, File localFS, int numExecutors, Mode mode) {
         this.name = name;
         this.description = description;
         this.command = command;
         this.remoteFS = remoteFS;
         this.localFS = localFS;
         this.numExecutors = numExecutors;
+        this.mode = mode;
     }
 
     public String getNodeName() {
@@ -90,6 +96,10 @@ public final class Slave implements Node {
 
     public int getNumExecutors() {
         return numExecutors;
+    }
+
+    public Mode getMode() {
+        return mode;
     }
 
     public Launcher createLauncher(BuildListener listener) {

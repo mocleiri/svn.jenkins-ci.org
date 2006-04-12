@@ -33,4 +33,30 @@ public interface Node {
      * because it takes time to adjust the number of executors.
      */
     int getNumExecutors();
+
+    /**
+     * Returns true if this node is only available
+     * for those jobs that exclusively specifies this node
+     * as the assigned node.
+     */
+    Mode getMode();
+
+    public enum Mode {
+        NORMAL("Utilize this slave as much as possible"),
+        EXCLUSIVE("Leave this machine for tied jobs only");
+
+        private final String description;
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getName() {
+            return name();
+        }
+
+        Mode(String description) {
+            this.description = description;
+        }
+    }
 }
