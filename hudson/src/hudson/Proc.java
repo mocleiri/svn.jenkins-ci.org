@@ -31,21 +31,21 @@ public final class Proc {
     }
 
     public Proc(String[] cmd,String[] env,OutputStream out, File workDir) throws IOException {
-        this( Runtime.getRuntime().exec(cmd,env,workDir), null, out );
+        this( calcName(cmd), Runtime.getRuntime().exec(cmd,env,workDir), null, out );
     }
 
     public Proc(String[] cmd,String[] env,InputStream in,OutputStream out) throws IOException {
-        this( Runtime.getRuntime().exec(cmd,env), in, out );
+        this( calcName(cmd), Runtime.getRuntime().exec(cmd,env), in, out );
     }
 
-    private Proc( Process proc, InputStream in, OutputStream out ) throws IOException {
+    private Proc( String name, Process proc, InputStream in, OutputStream out ) throws IOException {
         this.proc = proc;
-        t1 = new Copier(proc.getInputStream(), out);
+        t1 = new Copier(name+": stdout copier", proc.getInputStream(), out);
         t1.start();
-        t2 = new Copier(proc.getErrorStream(), out);
+        t2 = new Copier(name+": stderr copier", proc.getErrorStream(), out);
         t2.start();
         if(in!=null)
-            new ByteCopier(in,proc.getOutputStream()).start();
+            new ByteCopier(name+": stdin copier",in,proc.getOutputStream()).start();
         else
             proc.getOutputStream().close();
     }
@@ -66,7 +66,8 @@ public final class Proc {
         private final InputStream in;
         private final OutputStream out;
 
-        public Copier(InputStream in, OutputStream out) {
+        public Copier(String threadName, InputStream in, OutputStream out) {
+            super(threadName);
             this.in = in;
             this.out = out;
         }
@@ -85,7 +86,8 @@ public final class Proc {
         private final InputStream in;
         private final OutputStream out;
 
-        public ByteCopier(InputStream in, OutputStream out) {
+        public ByteCopier(String threadName, InputStream in, OutputStream out) {
+            super(threadName);
             this.in = in;
             this.out = out;
         }
@@ -103,5 +105,14 @@ public final class Proc {
                 // TODO: what to do?
             }
         }
+    }
+
+    private static String calcName(String[] cmd) {
+        StringBuffer buf = new StringBuffer();
+        for (String token : cmd) {
+            if(buf.length()>0)  buf.append(' ');
+            buf.append(token);
+        }
+        return buf.toString();
     }
 }
