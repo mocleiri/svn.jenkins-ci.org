@@ -2,6 +2,7 @@ package hudson.tasks.junit;
 
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Result;
 import org.apache.tools.ant.DirectoryScanner;
 import org.dom4j.DocumentException;
 import org.kohsuke.stapler.StaplerRequest;
@@ -10,12 +11,11 @@ import org.kohsuke.stapler.StaplerResponse;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * Root of all the test results for one build.
@@ -93,6 +93,8 @@ public final class TestResult extends MetaTabulatedResult {
             b = b.getPreviousBuild();
             if(b==null)
                 return null;
+            if(b.getResult()== Result.FAILURE)
+                continue;
             TestResultAction r = b.getAction(TestResultAction.class);
             if(r!=null) {
                 TestResult result = r.getResult();

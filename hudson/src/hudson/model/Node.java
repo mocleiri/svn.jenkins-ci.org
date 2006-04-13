@@ -12,7 +12,7 @@ public interface Node {
      * Name of this node.
      *
      * @return
-     *      null if this is master
+     *      "" if this is master
      */
     String getNodeName();
 

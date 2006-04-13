@@ -3,6 +3,8 @@ package hudson;
 import hudson.model.ModelObject;
 import hudson.model.Run;
 import hudson.model.Node;
+import hudson.tasks.junit.CaseResult;
+import hudson.tasks.junit.TestObject;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -113,5 +115,9 @@ public class Functions {
 
     public static Node.Mode[] getNodeModes() {
         return Node.Mode.values();
+    }
+
+    public static String getTestRelativePathFrom(TestObject it, CaseResult testCase) {
+        return testCase.getRelativePathFrom(it);
     }
 }

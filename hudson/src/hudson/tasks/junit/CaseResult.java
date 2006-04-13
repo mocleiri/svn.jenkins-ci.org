@@ -16,6 +16,8 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
     private final String errorStackTrace;
     private transient SuiteResult parent;
 
+    private transient ClassResult classResult;
+
     /**
      * This test has been failing since this build number (not id.)
      *
@@ -46,9 +48,25 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
 
     /**
      * Gets the name of the test, which is returned from {@code TestCase.getName()}
+     *
+     * <p>
+     * Note that this may contain any URL-unfriendly character.
      */
     public String getName() {
         return testName;
+    }
+
+    /**
+     * Gets the version of {@link #getName()} that's URL-safe.
+     */
+    public String getSafeName() {
+        StringBuffer buf = new StringBuffer(testName);
+        for( int i=0; i<buf.length(); i++ ) {
+            char ch = buf.charAt(i);
+            if(!Character.isJavaIdentifierPart(ch))
+                buf.setCharAt(i,'_');
+        }
+        return buf.toString();
     }
 
     /**
@@ -124,6 +142,30 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
         return parent.getParent().getOwner();
     }
 
+    /**
+     * Gets the relative path to this test case from the given object.
+     */
+    public String getRelativePathFrom(TestObject it) {
+        if(it==this)
+            return ".";
+        
+        // package, then class
+        StringBuffer buf = new StringBuffer();
+        buf.append(getSafeName());
+        if(it!=classResult) {
+            buf.insert(0,'/');
+            buf.insert(0,classResult.getName());
+
+            PackageResult pkg = classResult.getParent();
+            if(it!=pkg) {
+                buf.insert(0,'/');
+                buf.insert(0,pkg.getName());
+            }
+        }
+
+        return buf.toString();
+    }
+
     public void freeze(SuiteResult parent) {
         this.parent = parent;
         if(!isPassed()) {
@@ -150,6 +192,10 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
         } else {
             return isPassed() ? Status.FIXED : Status.FAILED;
         }
+    }
+
+    /*package*/ void setClass(ClassResult classResult) {
+        this.classResult = classResult;
     }
 
     /**

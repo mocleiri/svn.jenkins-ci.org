@@ -11,7 +11,7 @@
     <c:forEach var="f" items="${it.failedTests}" varStatus="i">
       <tr>
         <td class=pane>
-          <a href="failedTests/${i.index}/">${f.fullName}</a>
+          <a href="${h:getTestRelativePathFrom(it,f)}">${f.fullName}</a>
         </td>
         <td class=pane style="text-align:right;">
           ${f.age}

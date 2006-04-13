@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+
 /**
  * Cumulative test result of a test class.
  *
@@ -23,6 +26,10 @@ public final class ClassResult extends TabulatedResult implements Comparable<Cla
     ClassResult(PackageResult parent, String className) {
         this.parent = parent;
         this.className = className;
+    }
+
+    public PackageResult getParent() {
+        return parent;
     }
 
     public Build getOwner() {
@@ -45,6 +52,15 @@ public final class ClassResult extends TabulatedResult implements Comparable<Cla
         else            return className.substring(idx+1);
     }
 
+    public CaseResult getDynamic(String name, StaplerRequest req, StaplerResponse rsp) {
+        for (CaseResult c : cases) {
+            if(c.getSafeName().equals(name))
+                return c;
+        }
+        return null;
+    }
+
+
     public List<CaseResult> getChildren() {
         return cases;
     }
@@ -64,6 +80,7 @@ public final class ClassResult extends TabulatedResult implements Comparable<Cla
     void freeze() {
         passCount=failCount=0;
         for (CaseResult r : cases) {
+            r.setClass(this);
             if(r.isPassed())    passCount++;
             else                failCount++;
         }

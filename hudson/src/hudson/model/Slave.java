@@ -103,6 +103,10 @@ public final class Slave implements Node {
     }
 
     public Launcher createLauncher(BuildListener listener) {
+        if(command.length()==0) // local alias
+            return new Launcher(listener);
+
+
         return new Launcher(listener) {
             @Override
             public Proc launch(String[] cmd, String[] env, OutputStream out, FilePath workDir) throws IOException {

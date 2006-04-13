@@ -120,7 +120,7 @@ public final class Hudson extends JobCollection implements Node {
      * @deprecated
      */
     public String getNodeName() {
-        return null;
+        return "";
     }
 
     public String getDescription() {
