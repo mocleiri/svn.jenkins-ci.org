@@ -20,6 +20,7 @@ public class Executor extends Thread {
     private long startTime;
 
     public Executor(Computer owner) {
+        super("Executor #"+owner.getExecutors().size()+" for "+owner.getDisplayName());
         this.owner = owner;
         this.queue = Hudson.getInstance().getQueue();
         start();
