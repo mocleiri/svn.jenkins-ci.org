@@ -6,7 +6,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <c:set var="artifacts" value="${build.artifacts}" />
-<c:if test="${build.result!=null && !empty(artifacts)}">
+<c:if test="${!build.building && !empty(artifacts)}">
   <t:summary icon="package.gif">
     <c:choose>
       <c:when test="${f:length(artifacts)<17}">

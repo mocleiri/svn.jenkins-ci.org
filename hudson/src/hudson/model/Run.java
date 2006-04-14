@@ -129,10 +129,14 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
         getDataFile().unmarshal(this); // load the rest of the data
     }
 
-
+    /**
+     * Returns the build result.
+     *
+     * <p>
+     * When a build is {@link #isBuilding() in progress}, this method
+     * may return a temporary intermediate result.
+     */
     public final Result getResult() {
-        if(state!=State.COMPLETED)
-            return null;
         return result;
     }
 
@@ -301,7 +305,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
      */
     public RunT getPreviousFailedBuild() {
         RunT r=previousBuild;
-        while(  r!=null && r.getResult()!=Result.FAILURE )
+        while( r!=null && r.getResult()!=Result.FAILURE )
             r=r.previousBuild;
         return r;
     }
