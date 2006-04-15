@@ -60,6 +60,11 @@ public final class Hudson extends JobCollection implements Node {
     private boolean useSecurity = false;
 
     /**
+     * Message displayed in the top page.
+     */
+    private String systemMessage;
+
+    /**
      * Root directory of the system.
      */
     public transient final File root;
@@ -121,6 +126,13 @@ public final class Hudson extends JobCollection implements Node {
      */
     public String getNodeName() {
         return "";
+    }
+
+    /**
+     * Message displayed in the top page. Can be null. Includes HTML.
+     */
+    public String getSystemMessage() {
+        return systemMessage;
     }
 
     public String getDescription() {
@@ -474,6 +486,8 @@ public final class Hudson extends JobCollection implements Node {
         numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
         quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
 
+        systemMessage = nullify(req.getParameter("system_message"));
+
         {// update slave list
             slaves.clear();
             String[] names = req.getParameterValues("slave_name");
@@ -527,6 +541,11 @@ public final class Hudson extends JobCollection implements Node {
             rsp.sendRedirect(".");  // go to the top page
         else
             rsp.sendRedirect("configure"); // back to config
+    }
+
+    private String nullify(String v) {
+        if(v!=null && v.length()==0)    v=null;
+        return v;
     }
 
     public synchronized Job doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {

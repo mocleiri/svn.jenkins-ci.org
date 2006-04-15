@@ -17,6 +17,10 @@
     <s:entry title="Home directory" help="/help/system-config/homeDirectory.html">
       ${it.rootDir}
     </s:entry>
+    <s:entry title="System Message" help="/help/system-config/systemMessage.html">
+      <textarea class="setting-input" name="system_message"
+        rows="5" style="width:100%">${it.systemMessage}</textarea>
+    </s:entry>
     <s:entry title="# of executors" help="/help/system-config/numExecutors.html">
       <input type="text" name="numExecutors" class="setting-input"
         value="${it.numExecutors}"/>

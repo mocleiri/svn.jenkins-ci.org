@@ -9,6 +9,9 @@
 <jsp:include page="sidepanel.jsp" />
 
 <l:main-panel>
+  <div>
+    ${app.systemMessage}    
+  </div>
   <t:projectView jobs="${it.jobs}" showViewTabs="true" />
 </l:main-panel>
 <l:footer/>
