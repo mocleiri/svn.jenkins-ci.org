@@ -9,11 +9,13 @@
     <c:set var="pos" value="${it.executor.progress}" />
     <c:if test="${pos>0}">
       <div style="float:right">
-        <table><tr>
+        <table class="middle-align"><tr>
           <td>
             Progress:
           </td><td>
             <t:progressBar pos="${pos}"/>
+          </td><td>
+            <a href="executor/stop"><img src="${rootURL}/images/16x16/stop.gif" alt="[cancel]"></a>            
           </td>
         </tr></table>
       </div>

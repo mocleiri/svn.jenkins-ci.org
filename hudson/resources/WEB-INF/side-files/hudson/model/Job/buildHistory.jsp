@@ -24,8 +24,14 @@
     <c:if test="${build.building}">
       <c:set var="pos" value="${build.executor.progress}" />
       <c:if test="${pos>0}">
-        <tr><td></td><td>
-          <t:progressBar pos="${pos}"/>
+        <tr><td></td><td style="padding:0">
+          <table class="middle-align">
+            <tr><td>
+              <t:progressBar pos="${pos}"/>
+            </td><td style="padding:0">
+              <a href="${link}/executor/stop"><img src="${rootURL}/images/16x16/stop.gif" alt="[cancel]"></a>
+            </td></tr>
+          </table>
         </td></tr>
       </c:if>
     </c:if>
