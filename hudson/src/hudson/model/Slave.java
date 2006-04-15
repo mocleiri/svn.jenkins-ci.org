@@ -127,7 +127,7 @@ public final class Slave implements Node {
             private String[] prepend(String[] cmd, String[] env, FilePath workDir) {
                 List<String> r = new ArrayList<String>();
                 r.addAll(Arrays.asList(getCommandTokens()));
-                r.add("~/bin/slave");
+                r.add(getFilePath().child("bin").child("slave").getRemote());
                 r.add(workDir.getRemote());
                 for (String s : env) {
                     int index =s.indexOf('=');
