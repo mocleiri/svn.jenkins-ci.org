@@ -31,7 +31,7 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
      */
     private transient long nextUpdate = 0;
 
-    private transient SortedMap<String,ExternalRun> runs = null;
+    private transient SortedMap<Integer,ExternalRun> runs = null;
 
     /**
      * If the reloading of runs are in progress (in another thread,
@@ -57,7 +57,7 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
         return false;
     }
 
-    protected synchronized SortedMap<String,ExternalRun> _getRuns() {
+    protected synchronized SortedMap<Integer,ExternalRun> _getRuns() {
         if(runs==null) {
             reload();   // if none is loaded yet, do so immediately
         }
@@ -83,7 +83,7 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
 
     private void reload() {
         try {
-            TreeMap<String,ExternalRun> runs = new TreeMap<String,ExternalRun>(reverseComparator);
+            TreeMap<Integer,ExternalRun> runs = new TreeMap<Integer,ExternalRun>(reverseComparator);
 
             File[] subdirs = getBuildDir().listFiles(new FileFilter() {
                 public boolean accept(File subdir) {
@@ -98,7 +98,7 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
                 try {
                     ExternalRun b = new ExternalRun(this,dir,lastBuild);
                     lastBuild = b;
-                    runs.put( b.getId(), b );
+                    runs.put( b.getNumber(), b );
                 } catch (IOException e) {
                     logger.log(Level.WARNING,"Unable to load "+dir,e);
                     e.printStackTrace();
@@ -126,7 +126,7 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
      */
     public synchronized ExternalRun newBuild() throws IOException {
         ExternalRun run = new ExternalRun(this);
-        _getRuns().put(run.getId(),run);
+        _getRuns().put(run.getNumber(),run);
         return run;
     }
 

@@ -43,7 +43,9 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
     /**
      * Build number.
      *
-     * Note that there's no guarantee that this is unique nor continuous.
+     * <p>
+     * In earlier versions &lt; 1.24, this number is not unique nor continuous,
+     * but going forward, it will, and this really replaces the build id.
      */
     public /*final*/ int number;
 
@@ -317,7 +319,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
     // I really messed this up. I'm hoping to fix this some time
     // it shouldn't have trailing '/', and instead it should have leading '/'
     public String getUrl() {
-        return project.getUrl()+"build/"+getId()+'/';
+        return project.getUrl()+getNumber()+'/';
     }
 
     /**

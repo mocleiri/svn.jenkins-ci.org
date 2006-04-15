@@ -131,8 +131,21 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         return _getRuns().values();
     }
 
+    /**
+     * @deprecated
+     *      This is only used to support backward compatibility with
+     *      old URLs.
+     */
     public synchronized RunT getBuild(String id) {
-        return _getRuns().get(id);
+        for (RunT r : _getRuns().values()) {
+            if(r.getId().equals(id))
+                return r;
+        }
+        return null;
+    }
+
+    public synchronized RunT getDynamic(String buildNumber, StaplerRequest req, StaplerResponse rsp) {
+        return _getRuns().get(Integer.valueOf(buildNumber));
     }
 
     /**
@@ -163,7 +176,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     /**
      * Gets all the runs.
      */
-    protected abstract SortedMap<String,? extends RunT> _getRuns();
+    protected abstract SortedMap<Integer,? extends RunT> _getRuns();
 
     /**
      * Called from {@link Run} to remove it from this job.
@@ -177,7 +190,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      * Returns the last build.
      */
     public synchronized RunT getLastBuild() {
-        SortedMap<String,? extends RunT> runs = _getRuns();
+        SortedMap<Integer,? extends RunT> runs = _getRuns();
 
         if(runs.isEmpty())    return null;
         return runs.get(runs.firstKey());

@@ -31,10 +31,10 @@ import java.util.Vector;
 public class Project extends Job<Project,Build> {
 
     /**
-     * All the builds keyed by their ID.
+     * All the builds keyed by their build number.
      */
-    private transient SortedMap<String,Build> builds =
-        Collections.synchronizedSortedMap(new TreeMap<String,Build>(reverseComparator));
+    private transient SortedMap<Integer,Build> builds =
+        Collections.synchronizedSortedMap(new TreeMap<Integer,Build>(reverseComparator));
 
     private SCM scm = new NullSCM();
 
@@ -127,7 +127,7 @@ public class Project extends Job<Project,Build> {
 
     protected void onLoad(Hudson root, String name) throws IOException {
         super.onLoad(root, name);
-        builds = new TreeMap<String,Build>(reverseComparator);
+        builds = new TreeMap<Integer,Build>(reverseComparator);
 
         // load builds
         File buildDir = getBuildDir();
@@ -145,7 +145,7 @@ public class Project extends Job<Project,Build> {
                 // if the build result file isn't in the directory, ignore it.
                 try {
                     Build b = new Build(this,d,getLastBuild());
-                    this.builds.put( b.getId(), b );
+                    this.builds.put( b.getNumber(), b );
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -183,12 +183,12 @@ public class Project extends Job<Project,Build> {
         return m;
     }
 
-    public SortedMap<String, ? extends Build> _getRuns() {
+    public SortedMap<Integer, ? extends Build> _getRuns() {
         return builds;
     }
 
     public synchronized void removeRun(Run run) {
-        builds.remove(run.getId());
+        builds.remove(run.getNumber());
     }
 
     /**
@@ -196,7 +196,7 @@ public class Project extends Job<Project,Build> {
      */
     public synchronized Build newBuild() throws IOException {
         Build lastBuild = new Build(this);
-        builds.put(lastBuild.getId(),lastBuild);
+        builds.put(lastBuild.getNumber(),lastBuild);
         return lastBuild;
     }
 

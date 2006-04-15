@@ -9,7 +9,7 @@
 
 <l:pane width="2" title="Build history">
   <c:forEach var="build" items="${it.builds}">
-    <c:set var="link" value="${rootURL}/${it.url}build/${build.id}" />
+    <c:set var="link" value="${rootURL}/${it.url}${build.number}/" />
     <tr class="build-row">
       <td nowrap="nowrap">
         <img width="16" height="16" src="${rootURL}/images/16x16/${build.buildStatusUrl}">&nbsp;
