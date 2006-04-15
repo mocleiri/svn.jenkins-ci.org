@@ -19,10 +19,6 @@
       <textarea class="setting-input" name="description"
         rows="5" style="width:100%">${it.description}</textarea>
     </s:entry>
-    <s:entry title="Next builder number">
-      <input class="setting-input" name="buildNumber"
-        type="text"  value="${it.nextBuildNumber}" />
-    </s:entry>
 
     <%-- log rotator --%>
     <s:optionalBlock name="logrotate"

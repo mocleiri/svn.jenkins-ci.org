@@ -261,7 +261,6 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         if(!Hudson.adminCheck(req,rsp))
             return;
 
-        nextBuildNumber = Integer.parseInt(req.getParameter("buildNumber"));
         description = req.getParameter("description");
 
         if(req.getParameter("logrotate")!=null)
