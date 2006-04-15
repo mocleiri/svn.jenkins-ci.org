@@ -35,14 +35,14 @@ public final class Slave implements Node {
     private final String command;
 
     /**
-     * Path to the root of the remote workspace of this node,
-     * such as "/net/slave1/hudson"
+     * Path to the root of the workspace
+     * from within this node, such as "/hudson"
      */
     private final String remoteFS;
 
     /**
-     * Path to the root of the workspace
-     * from within this node, such as "/hudson"
+     * Path to the root of the remote workspace of this node,
+     * such as "/net/slave1/hudson"
      */
     private final File localFS;
 
