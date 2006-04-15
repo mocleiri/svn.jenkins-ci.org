@@ -257,7 +257,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
      * Gets the icon color for display.
      */
     public String getIconColor() {
-        if(result!=null) {
+        if(!isBuilding()) {
             // already built
             if(result==Result.SUCCESS)
                 return "blue";
