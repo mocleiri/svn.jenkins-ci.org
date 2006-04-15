@@ -120,4 +120,9 @@ public class Util {
         }
         return x;
     }
+
+    public static String nullify(String v) {
+        if(v!=null && v.length()==0)    v=null;
+        return v;
+    }
 }

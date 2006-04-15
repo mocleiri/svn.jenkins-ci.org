@@ -128,8 +128,12 @@ public final class Hudson extends JobCollection implements Node {
         return "";
     }
 
+    public String getViewMessage() {
+        return systemMessage;
+    }
+
     /**
-     * Message displayed in the top page. Can be null. Includes HTML.
+     * Synonym to {@link #getViewMessage()}.
      */
     public String getSystemMessage() {
         return systemMessage;
@@ -486,7 +490,7 @@ public final class Hudson extends JobCollection implements Node {
         numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
         quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
 
-        systemMessage = nullify(req.getParameter("system_message"));
+        systemMessage = Util.nullify(req.getParameter("system_message"));
 
         {// update slave list
             slaves.clear();
@@ -541,11 +545,6 @@ public final class Hudson extends JobCollection implements Node {
             rsp.sendRedirect(".");  // go to the top page
         else
             rsp.sendRedirect("configure"); // back to config
-    }
-
-    private String nullify(String v) {
-        if(v!=null && v.length()==0)    v=null;
-        return v;
     }
 
     public synchronized Job doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {

@@ -30,6 +30,11 @@ public abstract class JobCollection implements ModelObject {
      */
     public abstract String getViewName();
 
+    /**
+     * Message displayed in the top page. Can be null. Includes HTML.
+     */
+    public abstract String getViewMessage();
+
 
     /**
      * Creates a job in this collection.

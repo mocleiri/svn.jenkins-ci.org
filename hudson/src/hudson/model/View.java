@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import hudson.Util;
+
 /**
  * Represents a collection of {@link Job}s.
  *
@@ -28,6 +30,12 @@ public class View extends JobCollection {
      * Name of this view.
      */
     private String name;
+
+    /**
+     * Message displayed in the view page.
+     */
+    private String description;
+
 
     public View(Hudson owner, String name) {
         this.name = name;
@@ -55,6 +63,10 @@ public class View extends JobCollection {
 
     public String getViewName() {
         return name;
+    }
+
+    public String getViewMessage() {
+        return description;
     }
 
     public String getDisplayName() {
@@ -89,6 +101,8 @@ public class View extends JobCollection {
             if(req.getParameter(job.getName())!=null)
                 jobNames.add(job.getName());
         }
+
+        description = Util.nullify(req.getParameter("description"));
 
         owner.save();
 
