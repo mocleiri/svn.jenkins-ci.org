@@ -7,7 +7,10 @@
 
 <st:include page="sidepanel.jsp" />
 <l:main-panel>
-  <h1>Slave ${it.displayName}</h1>
+  <h1>
+    <img src="${rootURL}/images/48x48/computer.gif" width=48 height=48>
+    Slave ${it.displayName}
+  </h1>
 
   <h2>Projects tied on ${it.displayName}</h2>
   <c:set var="jobs" value="${it.tiedJobs}" />
