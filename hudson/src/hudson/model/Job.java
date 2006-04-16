@@ -289,7 +289,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      * Returns the image that shows the current buildCommand status.
      */
     public void doBuildStatus( StaplerRequest req, StaplerResponse rsp ) throws IOException {
-        rsp.sendRedirect(req.getContextPath()+'/'+getBuildStatusUrl());
+        rsp.sendRedirect(req.getContextPath()+"/nocacheImages/48x48/"+getBuildStatusUrl());
     }
 
     public String getBuildStatusUrl() {
