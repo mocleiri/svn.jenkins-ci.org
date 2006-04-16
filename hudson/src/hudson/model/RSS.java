@@ -6,6 +6,7 @@ import org.kohsuke.stapler.StaplerResponse;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Comparator;
@@ -20,6 +21,27 @@ import java.util.TreeSet;
  * @author Kohsuke Kawaguchi
  */
 final class RSS {
+
+    /**
+     * Parses trackback ping.
+     */
+    public static void doTrackback( Object it, StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        String title = req.getParameter("title");
+        String url = req.getParameter("url");
+        String excerpt = req.getParameter("excerpt");
+        String blog_name = req.getParameter("blog_name");
+
+        rsp.setStatus(HttpServletResponse.SC_OK);
+        rsp.setContentType("application/xml; charset=UTF-8");
+        PrintWriter pw = rsp.getWriter();
+        pw.println("<response>");
+        pw.println("<error>"+(url!=null?0:1)+"</error>");
+        if(url==null) {
+            pw.println("<message>url must be specified</message>");
+        }
+        pw.println("</response>");
+        pw.close();
+    }
     /**
      * RSS feed for all runs.
      */
