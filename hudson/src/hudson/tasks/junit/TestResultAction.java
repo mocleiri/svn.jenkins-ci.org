@@ -29,10 +29,18 @@ public class TestResultAction implements Action, StaplerProxy {
 
     private transient WeakReference<TestResult> result;
 
+    // Hudson < 1.25 didn't set these fields, so use Integer
+    // so that we can distinguish between 0 tests vs not-computed-yet.
+    private int failCount;
+    private Integer totalCount;
+
     TestResultAction(Build owner, DirectoryScanner results, BuildListener listener) {
         this.owner = owner;
 
         TestResult r = new TestResult(this,results,listener);
+
+        totalCount = r.getTotalCount();
+        failCount = r.getFailCount();
 
         // persist the data
         try {
@@ -59,7 +67,29 @@ public class TestResultAction implements Action, StaplerProxy {
             r = load();
             result = new WeakReference<TestResult>(r);
         }
+        if(totalCount==null) {
+            totalCount = r.getTotalCount();
+            failCount = r.getFailCount();
+        }
         return r;
+    }
+
+    /**
+     * Gets the number of failed tests.
+     */
+    public int getFailCount() {
+        if(totalCount==null)
+            getResult();    // this will compute the result
+        return failCount;
+    }
+
+    /**
+     * Gets the total number of tests.
+     */
+    public Integer getTotalCount() {
+        if(totalCount==null)
+            getResult();    // this will compute the result
+        return totalCount;
     }
 
     /**

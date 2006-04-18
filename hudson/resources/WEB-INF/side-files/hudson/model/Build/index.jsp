@@ -18,7 +18,7 @@
 <table style="margin-top: 1em; margin-left:1em;">
   <t:artifactList build="${it}" caption="Build Artifacts" />
 
-  <c:set var="tr" value="${it.testResult}" />
+  <c:set var="tr" value="${it.testResultAction}" />
   <c:if test="${tr!=null}">
     <t:summary icon="clipboard.gif">
       <a href="testReport/">Latest Test Result</a>

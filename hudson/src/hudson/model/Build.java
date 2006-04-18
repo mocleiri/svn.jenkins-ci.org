@@ -72,10 +72,23 @@ public final class Build extends Run<Project,Build> implements Runnable {
             return Hudson.getInstance().getSlave(builtOn);
     }
 
+    /**
+     * Gets {@link TestResult} associated with this build if any.
+     * This may take time on a large test result.
+     */
     public TestResult getTestResult() {
         TestResultAction ta = getAction(TestResultAction.class);
         if(ta==null)    return null;
         return ta.getResult();
+    }
+
+    /**
+     * Gets {@link TestResultAction} associated with this build if any.
+     * This works a lot faster than {@link #getTestResult()} on a large test,
+     * but it only has a limited amount of information available.
+     */
+    public TestResultAction getTestResultAction() {
+        return getAction(TestResultAction.class);
     }
 
     /**
