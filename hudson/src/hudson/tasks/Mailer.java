@@ -15,11 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.StringTokenizer;
+import java.net.URLEncoder;
 
 /**
  * Sends the build result in e-mail.
@@ -116,8 +118,15 @@ public class Mailer implements BuildStep {
 
     private void appendBuildUrl(Build build, StringBuffer buf) {
         String baseUrl = DESCRIPTOR.getUrl();
-        if(baseUrl!=null)
-            buf.append("See ").append(baseUrl).append(build.getUrl()).append("\n\n");
+        if(baseUrl!=null) {
+            String encodedUrl = null;
+            try {
+                encodedUrl = URLEncoder.encode(build.getUrl(), "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                throw new Error(e); // UTF-8 is supported everywhere
+            }
+            buf.append("See ").append(baseUrl).append(encodedUrl).append("\n\n");
+        }
     }
 
     private MimeMessage createFailureMail(Build build) throws MessagingException {
