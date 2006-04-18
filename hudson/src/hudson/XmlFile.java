@@ -24,7 +24,7 @@ public final class XmlFile {
     private final File file;
 
     public XmlFile(File file) {
-        this(new XStream(),file);
+        this(DEFAULT_XSTREAM,file);
     }
 
     public XmlFile(XStream xs, File file) {
@@ -80,4 +80,9 @@ public final class XmlFile {
     public boolean exists() {
         return file.exists();
     }
+
+    /**
+     * {@link XStream} instance is supposed to be thread-safe.
+     */
+    private static final XStream DEFAULT_XSTREAM = new XStream();
 }

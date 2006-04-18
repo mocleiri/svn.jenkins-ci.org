@@ -45,11 +45,7 @@ public class TestResultAction implements Action, StaplerProxy {
     }
 
     private XmlFile getDataFile() {
-        XStream xs = new XStream();
-        xs.alias("result",TestResult.class);
-        xs.alias("suite",SuiteResult.class);
-        xs.alias("case",CaseResult.class);
-        return new XmlFile(xs,new File(owner.getRootDir(), "junitResult.xml"));
+        return new XmlFile(XSTREAM,new File(owner.getRootDir(), "junitResult.xml"));
     }
 
     public synchronized TestResult getResult() {
@@ -99,4 +95,12 @@ public class TestResultAction implements Action, StaplerProxy {
     }
 
     private static final Logger logger = Logger.getLogger(TestResultAction.class.getName());
+
+    private static final XStream XSTREAM = new XStream();
+
+    static {
+        XSTREAM.alias("result",TestResult.class);
+        XSTREAM.alias("suite",SuiteResult.class);
+        XSTREAM.alias("case",CaseResult.class);
+    }
 }

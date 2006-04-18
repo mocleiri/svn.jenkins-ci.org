@@ -530,10 +530,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
     }
 
     private XmlFile getDataFile() {
-        XStream xs = new XStream();
-        xs.alias("build",Build.class);
-        xs.registerConverter(Result.conv);
-        return new XmlFile(xs,new File(getRootDir(),"build.xml"));
+        return new XmlFile(XSTREAM,new File(getRootDir(),"build.xml"));
     }
 
     /**
@@ -605,5 +602,11 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
         env.put("BUILD_TAG","hudson-"+getParent().getName()+"-"+number);
         env.put("JOB_NAME",getParent().getName());
         return env;
+    }
+
+    private static final XStream XSTREAM = new XStream();
+    static {
+        XSTREAM.alias("build",Build.class);
+        XSTREAM.registerConverter(Result.conv);
     }
 }

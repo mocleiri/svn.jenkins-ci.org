@@ -408,13 +408,24 @@ public final class Hudson extends JobCollection implements Node {
         }
     }
 
+    public Fingerprint getFingerprint( String hexEncodedData ) {
+        if(hexEncodedData.length()!=32)
+            throw new IllegalArgumentException();
+
+        byte[] data = new byte[16];
+        for( int i=0; i<hexEncodedData.length(); i+=2 ) {
+            data[i/2] = (byte)Integer.parseInt(hexEncodedData.substring(i,i+2),16);
+        }
+
+        // TODO: implement this method later
+        throw new UnsupportedOperationException();
+    }
+
     /**
      * The file we save our configuration.
      */
     private XmlFile getConfigFile() {
-        XStream xs = new XStream();
-        xs.alias("hudson",Hudson.class);
-        return new XmlFile(xs, new File(root,"config.xml"));
+        return new XmlFile(XSTREAM, new File(root,"config.xml"));
     }
 
     public int getNumExecutors() {
@@ -772,5 +783,14 @@ public final class Hudson extends JobCollection implements Node {
 
         rsp.sendError(StaplerResponse.SC_FORBIDDEN);
         return false;
+    }
+
+    /**
+     * Thread-safe reusable {@link XStream}.
+     */
+    private static final XStream XSTREAM = new XStream();
+
+    static {
+        XSTREAM.alias("hudson",Hudson.class);
     }
 }

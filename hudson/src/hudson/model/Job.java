@@ -144,6 +144,15 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         return null;
     }
 
+    /**
+     * @param n
+     *      The build number.
+     * @see Run#getNumber() 
+     */
+    public synchronized RunT getBuildByNumber(int n) {
+        return _getRuns().get(n);
+    }
+
     public synchronized RunT getDynamic(String buildNumber, StaplerRequest req, StaplerResponse rsp) {
         return _getRuns().get(Integer.valueOf(buildNumber));
     }
@@ -152,9 +161,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      * The file we save our configuration.
      */
     protected static XmlFile getConfigFile(File dir) {
-        XStream xs = new XStream();
-        xs.alias("project",Project.class);
-        return new XmlFile(xs,new File(dir,"config.xml"));
+        return new XmlFile(XSTREAM,new File(dir,"config.xml"));
     }
 
     File getConfigFile() {
@@ -324,5 +331,11 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         for( Run r=getLastFailedBuild(); r!=null; r=r.getPreviousFailedBuild() )
             runs.add(r);
         RSS.forwardToRss(this,getDisplayName()+" all failures",req,rsp,runs);
+    }
+
+    private static final XStream XSTREAM = new XStream();
+
+    static {
+        XSTREAM.alias("project",Project.class);
     }
 }
