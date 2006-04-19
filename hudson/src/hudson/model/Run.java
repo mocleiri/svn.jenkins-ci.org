@@ -204,7 +204,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
      */
     public String getTimestampString() {
         long duration = new GregorianCalendar().getTimeInMillis()-timestamp.getTimeInMillis();
-        return getTimeSpanString(duration);
+        return Util.getTimeSpanString(duration);
     }
 
     /**
@@ -218,7 +218,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
      * Gets the string that says how long the build took to run.
      */
     public String getDurationString() {
-        return getTimeSpanString(duration);
+        return Util.getTimeSpanString(duration);
     }
 
     /**
@@ -226,33 +226,6 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
      */
     public long getDuration() {
         return duration;
-    }
-
-    private static String getTimeSpanString(long duration) {
-        duration /= 1000;
-        if(duration<60)
-            return combine(duration,"second");
-        duration /= 60;
-        if(duration<60)
-            return combine(duration,"minute");
-        duration /= 60;
-        if(duration<24)
-            return combine(duration,"hour");
-        duration /= 24;
-        if(duration<30)
-            return combine(duration,"day");
-        duration /= 30;
-        if(duration<12)
-            return combine(duration,"month");
-        duration /= 12;
-        return combine(duration,"year");
-    }
-
-    private static String combine(long n, String suffix) {
-        String s = Long.toString(n)+' '+suffix;
-        if(n!=1)
-            s += 's';
-        return s;
     }
 
     /**

@@ -1,33 +1,37 @@
 package hudson.model;
 
-import hudson.XmlFile;
-import hudson.Util;
-import hudson.util.HexBinaryConverter;
-
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.io.IOException;
-import java.io.File;
-
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
-import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.converters.collections.CollectionConverter;
+import com.thoughtworks.xstream.io.HierarchicalStreamReader;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import hudson.Util;
+import hudson.XmlFile;
+import hudson.util.HexBinaryConverter;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.GregorianCalendar;
+import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
+ * A file being tracked by Hudson.
+ *
  * @author Kohsuke Kawaguchi
  */
-public class Fingerprint {
+public class Fingerprint implements ModelObject {
     /**
      * Pointer to a {@link Build}.
      */
-    private static class BuildPtr {
+    public static class BuildPtr {
         final String name;
         final int number;
 
@@ -226,6 +230,7 @@ public class Fingerprint {
         }
     }
 
+    private final Date timestamp;
 
     private final BuildPtr original;
 
@@ -242,6 +247,7 @@ public class Fingerprint {
         this.original = new BuildPtr(build);
         this.md5sum = md5sum;
         this.fileName = fileName;
+        this.timestamp = new Date();
         save();
     }
 
@@ -256,6 +262,10 @@ public class Fingerprint {
         return original;
     }
 
+    public String getDisplayName() {
+        return fileName;
+    }
+
     /**
      * The file name (like "foo.jar" without path).
      */
@@ -263,8 +273,30 @@ public class Fingerprint {
         return fileName;
     }
 
+    /**
+     * Gets the MD5 hash string.
+     */
     public String getHashString() {
         return Util.toHexString(md5sum);
+    }
+
+    /**
+     * Gets the timestamp when this record is created.
+     */
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    /**
+     * Gets the string that says how long since this build has scheduled.
+     *
+     * @return
+     *      string like "3 minutes" "1 day" etc.
+     */
+    public String getTimestampString() {
+        long duration = System.currentTimeMillis()-timestamp.getTime();
+        return Util.getTimeSpanString(duration);
+
     }
 
     /**
@@ -277,6 +309,20 @@ public class Fingerprint {
         RangeSet r = usages.get(jobName);
         if(r==null) r = new RangeSet();
         return r;
+    }
+
+    /**
+     * Gets the sorted list of job names where this jar is used.
+     */
+    public List<String> getJobs() {
+        List<String> r = new ArrayList<String>();
+        r.addAll(usages.keySet());
+        Collections.sort(r);
+        return r;
+    }
+
+    public Hashtable<String,RangeSet> getUsages() {
+        return usages;
     }
 
     public synchronized void add(Build b) throws IOException {

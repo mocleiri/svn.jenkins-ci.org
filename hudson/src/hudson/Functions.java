@@ -3,6 +3,8 @@ package hudson;
 import hudson.model.ModelObject;
 import hudson.model.Run;
 import hudson.model.Node;
+import hudson.model.Job;
+import hudson.model.Hudson;
 import hudson.tasks.junit.CaseResult;
 import hudson.tasks.junit.TestObject;
 import org.kohsuke.stapler.Ancestor;
@@ -16,6 +18,14 @@ import java.util.List;
 public class Functions {
     public static boolean containsJob(hudson.model.JobCollection jc,hudson.model.Job j) {
         return jc.containsJob(j);
+    }
+
+    public static Job getJob(String name) {
+        return Hudson.getInstance().getJob(name);
+    }
+
+    public static Run getRun(Job job, int number) {
+        return job.getBuildByNumber(number);
     }
 
     public static boolean isModel(Object o) {

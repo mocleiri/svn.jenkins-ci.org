@@ -139,4 +139,31 @@ public class Util {
     public static String toHexString(byte[] bytes) {
         return toHexString(bytes,0,bytes.length);
     }
+
+    public static String getTimeSpanString(long duration) {
+        duration /= 1000;
+        if(duration<60)
+            return combine(duration,"second");
+        duration /= 60;
+        if(duration<60)
+            return combine(duration,"minute");
+        duration /= 60;
+        if(duration<24)
+            return combine(duration,"hour");
+        duration /= 24;
+        if(duration<30)
+            return combine(duration,"day");
+        duration /= 30;
+        if(duration<12)
+            return combine(duration,"month");
+        duration /= 12;
+        return combine(duration,"year");
+    }
+
+    private static String combine(long n, String suffix) {
+        String s = Long.toString(n)+' '+suffix;
+        if(n!=1)
+            s += 's';
+        return s;
+    }
 }
