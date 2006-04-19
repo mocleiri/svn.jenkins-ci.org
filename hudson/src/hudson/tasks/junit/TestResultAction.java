@@ -1,6 +1,7 @@
 package hudson.tasks.junit;
 
 import hudson.XmlFile;
+import hudson.util.StringConverter2;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
@@ -132,5 +133,6 @@ public class TestResultAction implements Action, StaplerProxy {
         XSTREAM.alias("result",TestResult.class);
         XSTREAM.alias("suite",SuiteResult.class);
         XSTREAM.alias("case",CaseResult.class);
+        XSTREAM.registerConverter(new StringConverter2(),100);
     }
 }
