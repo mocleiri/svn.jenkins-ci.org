@@ -743,6 +743,12 @@ public final class Hudson extends JobCollection implements Node {
         in.close();
     }
 
+    public synchronized void doGc( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        System.gc();
+        rsp.setStatus(HttpServletResponse.SC_OK);
+        rsp.setContentType("text/plain");
+        rsp.getWriter().println("GCed");
+    }
 
 
     public static boolean isWindows() {
