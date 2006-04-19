@@ -135,4 +135,8 @@ public class Util {
         }
         return buf.toString();
     }
+
+    public static String toHexString(byte[] bytes) {
+        return toHexString(bytes,0,bytes.length);
+    }
 }

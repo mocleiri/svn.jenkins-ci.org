@@ -220,7 +220,7 @@ public class Fingerprint {
                 collectionConv.marshal( ((RangeSet)source).getRanges(), writer, context );
             }
 
-            public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+            public Object unmarshal(HierarchicalStreamReader reader, final UnmarshallingContext context) {
                 return new RangeSet((List<Range>)(collectionConv.unmarshal(reader,context)));
             }
         }
@@ -261,6 +261,10 @@ public class Fingerprint {
      */
     public String getFileName() {
         return fileName;
+    }
+
+    public String getHashString() {
+        return Util.toHexString(md5sum);
     }
 
     /**
@@ -335,7 +339,11 @@ public class Fingerprint {
         XSTREAM.alias("ranges",RangeSet.class);
         XSTREAM.registerConverter(new HexBinaryConverter(),10);
         XSTREAM.registerConverter(new RangeSet.ConverterImpl(
-            new CollectionConverter(XSTREAM.getClassMapper())
+            new CollectionConverter(XSTREAM.getClassMapper()) {
+                protected Object createCollection(Class type) {
+                    return new ArrayList();
+                }
+            }
         ),10);
     }
 

@@ -18,7 +18,7 @@ public class HexBinaryConverter implements Converter {
 
     public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
         byte[] data = (byte[]) source;
-        writer.setValue(Util.toHexString(data,0,data.length));
+        writer.setValue(Util.toHexString(data));
     }
 
     public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {

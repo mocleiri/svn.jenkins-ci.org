@@ -3,6 +3,7 @@ package hudson.model;
 import hudson.Util;
 
 import java.io.IOException;
+import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,8 +21,15 @@ import java.util.Map;
 public final class FingerprintMap {
     private final Map<String,WeakReference<Fingerprint>> core = new HashMap<String, WeakReference<Fingerprint>>();
 
+    /**
+     * Returns true if there's some data in the fingerprint database.
+     */
+    public boolean isReady() {
+        return new File( Hudson.getInstance().getRootDir(),"fingerprints").exists();
+    }
+
     public Fingerprint getOrCreate(Build build, String fileName, byte[] md5sum) throws IOException {
-        return getOrCreate(build,fileName, Util.toHexString(md5sum,0,16));
+        return getOrCreate(build,fileName, Util.toHexString(md5sum));
     }
 
     public Fingerprint getOrCreate(Build build, String fileName, String md5sum) throws IOException {
