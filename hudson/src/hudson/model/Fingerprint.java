@@ -1,14 +1,24 @@
 package hudson.model;
 
 import hudson.XmlFile;
+import hudson.Util;
+import hudson.util.HexBinaryConverter;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.io.IOException;
 import java.io.File;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.HierarchicalStreamReader;
+import com.thoughtworks.xstream.converters.Converter;
+import com.thoughtworks.xstream.converters.MarshallingContext;
+import com.thoughtworks.xstream.converters.UnmarshallingContext;
+import com.thoughtworks.xstream.converters.collections.CollectionConverter;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -121,7 +131,15 @@ public class Fingerprint {
      */
     public static final class RangeSet {
         // sorted
-        private final List<Range> ranges = new ArrayList<Range>();
+        private final List<Range> ranges;
+
+        public RangeSet() {
+            this(new ArrayList<Range>());
+        }
+
+        private RangeSet(List<Range> data) {
+            this.ranges = data;
+        }
 
         /**
          * Gets all the ranges.
@@ -186,20 +204,45 @@ public class Fingerprint {
             }
             return buf.toString();
         }
+
+        static final class ConverterImpl implements Converter {
+            private final Converter collectionConv; // used to convert ArrayList in it
+
+            public ConverterImpl(Converter collectionConv) {
+                this.collectionConv = collectionConv;
+            }
+
+            public boolean canConvert(Class type) {
+                return type==RangeSet.class;
+            }
+
+            public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+                collectionConv.marshal( ((RangeSet)source).getRanges(), writer, context );
+            }
+
+            public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+                return new RangeSet((List<Range>)(collectionConv.unmarshal(reader,context)));
+            }
+        }
     }
+
 
     private final BuildPtr original;
 
     private final byte[] md5sum;
 
+    private final String fileName;
+
     /**
      * Range of builds that use this file keyed by a job name.
      */
-    private final Hashtable<String,RangeSet> ranges = new Hashtable<String,RangeSet>();
+    private final Hashtable<String,RangeSet> usages = new Hashtable<String,RangeSet>();
 
-    public Fingerprint(Run build, byte[] md5sum) {
+    public Fingerprint(Run build, String fileName, byte[] md5sum) throws IOException {
         this.original = new BuildPtr(build);
         this.md5sum = md5sum;
+        this.fileName = fileName;
+        save();
     }
 
     /**
@@ -214,26 +257,37 @@ public class Fingerprint {
     }
 
     /**
+     * The file name (like "foo.jar" without path).
+     */
+    public String getFileName() {
+        return fileName;
+    }
+
+    /**
      * Gets the build range set for the given job name.
      *
      * <p>
      * These builds of this job has used this file.
      */
     public RangeSet getRangeSet(String jobName) {
-        RangeSet r = ranges.get(jobName);
+        RangeSet r = usages.get(jobName);
         if(r==null) r = new RangeSet();
         return r;
+    }
+
+    public synchronized void add(Build b) throws IOException {
+        add(b.getParent().getName(),b.getNumber());
     }
 
     /**
      * Records that a build of a job has used this file.
      */
     public synchronized void add(String jobName, int n) throws IOException {
-        synchronized(ranges) {
-            RangeSet r = ranges.get(jobName);
+        synchronized(usages) {
+            RangeSet r = usages.get(jobName);
             if(r==null) {
                 r = new RangeSet();
-                ranges.put(jobName,r);
+                usages.put(jobName,r);
             }
             r.add(n);
         }
@@ -244,28 +298,46 @@ public class Fingerprint {
      * Save the settings to a file.
      */
     public synchronized void save() throws IOException {
-        getConfigFile(md5sum).write(this);
+        XmlFile f = getConfigFile(md5sum);
+        f.mkdirs();
+        f.write(this);
     }
 
     /**
      * The file we save our configuration.
      */
-    public static XmlFile getConfigFile(byte[] md5sum) {
+    private static XmlFile getConfigFile(byte[] md5sum) {
         assert md5sum.length==16;
-        XStream xs = new XStream();
-        xs.alias("fingerprint",Fingerprint.class);
-        return new XmlFile(xs,
+        return new XmlFile(XSTREAM,
             new File( Hudson.getInstance().getRootDir(),
-                "fingerprints/"+toHexString(md5sum,0,2)+'/'+toHexString(md5sum,2,2)+'/'+toHexString(md5sum,4,md5sum.length-4)));
+                "fingerprints/"+ Util.toHexString(md5sum,0,1)+'/'+Util.toHexString(md5sum,1,1)+'/'+Util.toHexString(md5sum,2,md5sum.length-2)+".xml"));
     }
 
-    private static String toHexString(byte[] data, int start, int len) {
-        StringBuffer buf = new StringBuffer();
-        for( int i=0; i<len; i++ ) {
-            byte b = data[start+i];
-            if(b<16)    buf.append('0');
-            buf.append(Integer.toHexString(b));
+    /**
+     * Loads a {@link Fingerprint} from a file in the image.
+     */
+    /*package*/ static Fingerprint load(byte[] md5sum) throws IOException {
+        XmlFile configFile = getConfigFile(md5sum);
+        if(!configFile.exists())
+            return null;
+        try {
+            return (Fingerprint)configFile.read();
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "Failed to load "+configFile,e);
+            throw e;
         }
-        return buf.toString();
     }
+
+    private static final XStream XSTREAM = new XStream();
+    static {
+        XSTREAM.alias("fingerprint",Fingerprint.class);
+        XSTREAM.alias("range",Range.class);
+        XSTREAM.alias("ranges",RangeSet.class);
+        XSTREAM.registerConverter(new HexBinaryConverter(),10);
+        XSTREAM.registerConverter(new RangeSet.ConverterImpl(
+            new CollectionConverter(XSTREAM.getClassMapper())
+        ),10);
+    }
+
+    private static final Logger logger = Logger.getLogger(Fingerprint.class.getName());
 }

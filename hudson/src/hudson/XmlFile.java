@@ -81,6 +81,10 @@ public final class XmlFile {
         return file.exists();
     }
 
+    public void mkdirs() {
+        file.getParentFile().mkdirs();
+    }
+
     /**
      * {@link XStream} instance is supposed to be thread-safe.
      */

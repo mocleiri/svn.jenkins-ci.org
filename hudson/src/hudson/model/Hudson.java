@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Comparator;
+import java.util.WeakHashMap;
 import java.util.Map.Entry;
 import java.text.ParseException;
 
@@ -103,6 +104,8 @@ public final class Hudson extends JobCollection implements Node {
      * {@link View}s.
      */
     private List<View> views;   // can't initialize it eagerly for backward compatibility
+
+    private final FingerprintMap fingerprintMap = new FingerprintMap();
 
     public static Hudson getInstance() {
         return theInstance;
@@ -408,17 +411,16 @@ public final class Hudson extends JobCollection implements Node {
         }
     }
 
-    public Fingerprint getFingerprint( String hexEncodedData ) {
-        if(hexEncodedData.length()!=32)
-            throw new IllegalArgumentException();
+    public FingerprintMap getFingerprintMap() {
+        return fingerprintMap;
+    }
 
-        byte[] data = new byte[16];
-        for( int i=0; i<hexEncodedData.length(); i+=2 ) {
-            data[i/2] = (byte)Integer.parseInt(hexEncodedData.substring(i,i+2),16);
-        }
-
-        // TODO: implement this method later
-        throw new UnsupportedOperationException();
+    /**
+     * Gets a {@link Fingerprint} object if it exists.
+     * Otherwise null.
+     */
+    public Fingerprint getFingerprint( String md5sum ) throws IOException {
+        return fingerprintMap.get(md5sum);
     }
 
     /**

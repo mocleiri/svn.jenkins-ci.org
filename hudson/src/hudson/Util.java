@@ -125,4 +125,14 @@ public class Util {
         if(v!=null && v.length()==0)    v=null;
         return v;
     }
+
+    public static String toHexString(byte[] data, int start, int len) {
+        StringBuffer buf = new StringBuffer();
+        for( int i=0; i<len; i++ ) {
+            int b = data[start+i]&0xFF;
+            if(b<16)    buf.append('0');
+            buf.append(Integer.toHexString(b));
+        }
+        return buf.toString();
+    }
 }

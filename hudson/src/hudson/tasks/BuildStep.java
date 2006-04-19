@@ -46,6 +46,7 @@ public interface BuildStep {
 
     public static final BuildStepDescriptor[] PUBLISHERS = new BuildStepDescriptor[]{
         ArtifactArchiver.DESCRIPTOR,
+        Fingerprinter.DESCRIPTOR,
         JavadocArchiver.DESCRIPTOR,
         JUnitResultArchiver.DESCRIPTOR,
         Mailer.DESCRIPTOR,
