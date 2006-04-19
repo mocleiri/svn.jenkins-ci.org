@@ -1,6 +1,9 @@
 <html>
 <head>
 	<style>
+		DL {
+			margin-left: 1em;
+		}
 	</style>
 </head>
 <body><div class=app>
@@ -14,7 +17,7 @@
 	
 	You are working on the BOTTOM project. The TOP team reported that <tt>bottom.jar</tt> that they are using causes an NPE, which you thought you fixed in BOTTOM #32. Hudson can tell you which MIDDLE builds and TOP builds are using (or not using) your <tt>bottom.jar</tt> #32.
 
-<h2>How do I set it up?</h2>
+<h3>How do I set it up?</h3>
 <p>
 	To make this work, all the relevant projects need to be configured to record fingerprints of the jar files (in this case, <tt>bottom.jar</tt>.)
 <p>
@@ -27,14 +30,14 @@
 </ol>
 <p>
 
-<h2>How does it work?</h2>
+<h3>How does it work?</h3>
 <p>
 	Fingerprint of a file is simply a MD5 checksum of a file. Hudson maintains a database of md5sum, and for each md5sum, Hudson records which builds of which projects used. This database is updated every time a builds runs and files are fingerprinted.
 <p>
 	To avoid the excessive disk usage, Hudson does not store the actual file. Instead, it just stores md5sum and their usages. These files can be seen in <tt>$HUDSON_HOME/fingerprints</tt>.
 
 
-<h2>How can I use it?</h2>
+<h3>How can I use it?</h3>
 <p>
 	Here is a few typical scenarios that benefit from this feature:
 	<dl>
