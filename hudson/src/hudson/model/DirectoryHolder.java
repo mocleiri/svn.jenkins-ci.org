@@ -80,15 +80,23 @@ public abstract class DirectoryHolder extends Actionable {
         }
 
         FileInputStream in = new FileInputStream(f);
-        // serve the file
-        String contentType = req.getServletContext().getMimeType(f.getPath());
-        rsp.setContentType(contentType);
-        rsp.setContentLength((int)f.length());
-        byte[] buf = new byte[1024];
-        int len;
-        while((len=in.read(buf))>0)
-            rsp.getOutputStream().write(buf,0,len);
-        in.close();
+
+        try {
+            if(req.getQueryString()!=null && req.getQueryString().equals("fingerprint")) {
+                Hudson.getInstance().redirectToFingerprintOf(in,req,rsp);
+            } else {
+                // serve the file
+                String contentType = req.getServletContext().getMimeType(f.getPath());
+                rsp.setContentType(contentType);
+                rsp.setContentLength((int)f.length());
+                byte[] buf = new byte[1024];
+                int len;
+                while((len=in.read(buf))>0)
+                    rsp.getOutputStream().write(buf,0,len);
+            }
+        } finally {
+            in.close();
+        }
     }
 
     /**
@@ -102,7 +110,7 @@ public abstract class DirectoryHolder extends Actionable {
         int current=1;
         while(tokens.hasMoreTokens()) {
             String token = tokens.nextToken();
-            r.add(new Path(repeat("../",total-current),token,true));
+            r.add(new Path(repeat("../",total-current),token,true,0));
             current++;
         }
         return r;
@@ -120,7 +128,7 @@ public abstract class DirectoryHolder extends Actionable {
         Arrays.sort(files,FILE_SORTER);
 
         for( File f : files ) {
-            Path p = new Path(f.getName(),f.getName(),f.isDirectory());
+            Path p = new Path(f.getName(),f.getName(),f.isDirectory(),f.length());
             if(!f.isDirectory()) {
                 r.add(Collections.singletonList(p));
             } else {
@@ -139,7 +147,7 @@ public abstract class DirectoryHolder extends Actionable {
                         break;
                     f = sub[0];
                     relPath += '/'+f.getName();
-                    l.add(new Path(relPath,f.getName(),true));
+                    l.add(new Path(relPath,f.getName(),true,0));
                 }
                 r.add(l);
             }
@@ -170,10 +178,20 @@ public abstract class DirectoryHolder extends Actionable {
 
         private final boolean isFolder;
 
-        public Path(String href, String title, boolean isFolder) {
+        /**
+         * File size, or null if this is not a file.
+         */
+        private final long size;
+
+        public Path(String href, String title, boolean isFolder, long size) {
             this.href = href;
             this.title = title;
             this.isFolder = isFolder;
+            this.size = size;
+        }
+
+        public boolean isFolder() {
+            return isFolder;
         }
 
         public String getHref() {
@@ -186,6 +204,10 @@ public abstract class DirectoryHolder extends Actionable {
 
         public String getIconName() {
             return isFolder?"folder.gif":"text.gif";
+        }
+
+        public long getSize() {
+            return size;
         }
     }
 

@@ -1,50 +1,50 @@
 package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
-import hudson.XmlFile;
-import hudson.Util;
 import hudson.Launcher;
+import hudson.Util;
+import hudson.XmlFile;
 import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
 import hudson.scm.SCMManager;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
-import org.apache.tools.ant.taskdefs.Copy;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
+import org.apache.tools.ant.taskdefs.Copy;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.ServletException;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.IOException;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Comparator;
-import java.util.WeakHashMap;
-import java.util.Map.Entry;
-import java.text.ParseException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.DigestInputStream;
 
 /**
  * Root object of the system.
@@ -715,10 +715,7 @@ public final class Hudson extends JobCollection implements Node {
      * Do a finger-print check.
      */
     public synchronized void doDoFingerprintCheck( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-
         try {
-            MessageDigest md5 = MessageDigest.getInstance("MD5");
-
             // Create a factory for disk-based file items
             FileItemFactory factory = new DiskFileItemFactory();
 
@@ -728,7 +725,22 @@ public final class Hudson extends JobCollection implements Node {
             // Parse the request
             List<FileItem> items = upload.parseRequest(req);
 
-            DigestInputStream in =new DigestInputStream(items.get(0).getInputStream(),md5);
+            redirectToFingerprintOf(items.get(0).getInputStream(), req, rsp);
+
+            // if an error occur and we fail to do this, it will still be cleaned up
+            // when GC-ed.
+            for (FileItem item : items)
+                item.delete();
+        } catch (FileUploadException e) {
+            throw new ServletException(e);  // I'm not sure what the implication of this
+        }
+    }
+
+    public void redirectToFingerprintOf(InputStream source, StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+
+            DigestInputStream in =new DigestInputStream(source,md5);
             byte[] buf = new byte[8192];
             try {
                 while(in.read(buf)>0)
@@ -737,15 +749,9 @@ public final class Hudson extends JobCollection implements Node {
                 in.close();
             }
 
-            for (FileItem item : items) {
-                item.delete();
-            }
-
-            rsp.sendRedirect(req.getContextPath()+"/fingerprint/"+Util.toHexString(md5.digest())+'/');
+            rsp.sendRedirect(req.getContextPath()+"/fingerprint/"+ Util.toHexString(md5.digest())+'/');
         } catch (NoSuchAlgorithmException e) {
             throw new ServletException(e);    // impossible
-        } catch (FileUploadException e) {
-            throw new ServletException(e);  // I'm not sure what the implication of this
         }
     }
 

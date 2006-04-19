@@ -20,15 +20,30 @@
         <input type="image" src="${rootURL}/images/16x16/go-next.gif" style="vertical-align:middle"/>
       </form>
     </div>
-    <ul>
+    <table class=fileList>
       <c:forEach var="f" items="${files}">
-        <li><img src="${rootURL}/images/16x16/${f[0].iconName}"/>
-        <c:forEach var="t" items="${f}" varStatus="st"
-          ><a href="${t.href}">${t.title}</a
-          ><c:if test="${!st.last}">/</c:if
-        ></c:forEach>
+        <tr>
+          <td>
+            <img src="${rootURL}/images/16x16/${f[0].iconName}"/>
+          </td>
+          <td>
+            <c:forEach var="t" items="${f}" varStatus="st"
+              ><a href="${t.href}">${t.title}</a
+              ><c:if test="${!st.last}">/</c:if
+              ><c:set var="x" value="${t}"
+            /></c:forEach>
+          </td>
+          <c:if test="${!x.folder}">
+            <td class=fileSize>
+              ${x.size}
+              <a href="${x.href}?fingerprint"
+                ><img src="${rootURL}/images/16x16/fingerprint.gif" alt="fingerprint"
+              ></a>
+            </td>
+          </c:if>
+        </tr>
       </c:forEach>
-    </ul>
+    </table>
   </div>
 </l:main-panel>
 <l:footer/>
