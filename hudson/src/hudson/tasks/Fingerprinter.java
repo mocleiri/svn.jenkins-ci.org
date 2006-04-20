@@ -11,9 +11,13 @@ import hudson.Launcher;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.BufferedOutputStream;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Properties;
 
 import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.ant.DirectoryScanner;
@@ -64,6 +68,7 @@ public class Fingerprinter implements BuildStep {
             return true;
         }
 
+        Properties record = new Properties();
 
         byte[] buf = new byte[8192];
 
@@ -88,11 +93,29 @@ public class Fingerprinter implements BuildStep {
                     continue;
                 }
                 fp.add(build);
+                record.put(f,fp.getHashString());
             } catch (IOException e) {
                 e.printStackTrace(listener.error("Failed to compute digest for "+file));
             }
         }
 
+        {// save it to the file
+            File fingerprintFile = new File(build.getRootDir(), "fingerprint.properties");
+            OutputStream os = null;
+            try {
+                os = new BufferedOutputStream(new FileOutputStream(fingerprintFile));
+                record.store(os,"files that are fingerprinted in this build");
+            } catch(IOException e) {
+                e.printStackTrace(listener.error("Failed to save the fingerprint record to "+fingerprintFile));
+            } finally {
+                if(os!=null)
+                    try {
+                        os.close();
+                    } catch (IOException e) {
+                        // ignore
+                    }
+            }
+        }
         return true;
     }
 
