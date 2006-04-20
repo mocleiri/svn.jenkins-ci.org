@@ -423,11 +423,18 @@ public final class Hudson extends JobCollection implements Node {
         return fingerprintMap;
     }
 
+    // if no fingrer print matches, display "not found page".
+    public Object getFingerprint( String md5sum ) throws IOException {
+        Fingerprint r = fingerprintMap.get(md5sum);
+        if(r==null)     return new NoFingerprintMatch(md5sum);
+        else            return r;
+    }
+
     /**
      * Gets a {@link Fingerprint} object if it exists.
      * Otherwise null.
      */
-    public Fingerprint getFingerprint( String md5sum ) throws IOException {
+    public Fingerprint _getFingerprint( String md5sum ) throws IOException {
         return fingerprintMap.get(md5sum);
     }
 
