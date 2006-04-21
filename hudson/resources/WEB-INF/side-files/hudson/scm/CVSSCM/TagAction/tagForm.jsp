@@ -9,16 +9,13 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
 
-<c:set var="it" scope="request" value="${build}" />
-
-<l:header title="Tag the build" />
-<l:side-panel />
+<st:include it="${it.build}" page="sidepanel.jsp" />
 <l:main-panel>
-  <h1>Build #${it.number}</h1>
+  <h1>Build #${it.build.number}</h1>
   <form action="submit" method="get">
     <p>
       Choose the CVS tag name for this build:
-      <input type="text" name="name" value="hudson-${it.number}" />
+      <input type="text" name="name" value="hudson-${it.build.number}" />
       <input type="submit" />
     </p>
   </form>

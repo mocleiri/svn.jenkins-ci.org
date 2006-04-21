@@ -2,8 +2,7 @@
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
 <%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
 
-<l:header title="Tag the build" />
-<l:side-panel />
+<st:include it="${it.build}" page="sidepanel.jsp" />
 <l:main-panel>
   <h1>Build #${it.build.number}</h1>
   <p>
