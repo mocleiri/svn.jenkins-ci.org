@@ -14,11 +14,10 @@ import hudson.util.HexBinaryConverter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.GregorianCalendar;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -232,6 +231,10 @@ public class Fingerprint implements ModelObject {
 
     private final Date timestamp;
 
+    /**
+     * Null if this fingerprint is for a file that's
+     * apparently produced outside.
+     */
     private final BuildPtr original;
 
     private final byte[] md5sum;
@@ -244,7 +247,7 @@ public class Fingerprint implements ModelObject {
     private final Hashtable<String,RangeSet> usages = new Hashtable<String,RangeSet>();
 
     public Fingerprint(Run build, String fileName, byte[] md5sum) throws IOException {
-        this.original = new BuildPtr(build);
+        this.original = build==null ? null : new BuildPtr(build);
         this.md5sum = md5sum;
         this.fileName = fileName;
         this.timestamp = new Date();
@@ -252,7 +255,8 @@ public class Fingerprint implements ModelObject {
     }
 
     /**
-     * The first build in which this file showed up.
+     * The first build in which this file showed up,
+     * if the file looked like it's created there.
      * <p>
      * This is considered as the "source" of this file,
      * or the owner, in the sense that this project "owns"

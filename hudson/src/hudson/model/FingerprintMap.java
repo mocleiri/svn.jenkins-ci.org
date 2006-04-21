@@ -28,21 +28,33 @@ public final class FingerprintMap {
         return new File( Hudson.getInstance().getRootDir(),"fingerprints").exists();
     }
 
-    public Fingerprint getOrCreate(Build build, String fileName, byte[] md5sum) throws IOException {
+    /**
+     * @param build
+     *      set to non-null if {@link Fingerprint} to be created (if so)
+     *      will have this build as the owner. Otherwise null, to indicate
+     *      an owner-less build.
+     */
+    public synchronized Fingerprint getOrCreate(Build build, String fileName, byte[] md5sum) throws IOException {
         return getOrCreate(build,fileName, Util.toHexString(md5sum));
     }
 
-    public Fingerprint getOrCreate(Build build, String fileName, String md5sum) throws IOException {
+    public synchronized Fingerprint getOrCreate(Build build, String fileName, String md5sum) throws IOException {
         assert build!=null;
         assert fileName!=null;
-        return get0(build,fileName, md5sum);
+        Fingerprint fp = get(md5sum);
+        if(fp!=null)
+            return fp;  // found it.
+
+        // not found. need to create one.
+        // creates a new one
+        fp = new Fingerprint(build,fileName,toByteArray(md5sum));
+
+        core.put(md5sum,new WeakReference<Fingerprint>(fp));
+
+        return fp;
     }
 
-    public Fingerprint get(String md5sum) throws IOException {
-        return get0(null,null,md5sum);
-    }
-
-    private synchronized Fingerprint get0(Build build, String fileName, String md5sum) throws IOException {
+    public synchronized Fingerprint get(String md5sum) throws IOException {
         if(md5sum.length()!=32)
             return null;    // illegal input
         md5sum = md5sum.toLowerCase();
@@ -54,21 +66,14 @@ public final class FingerprintMap {
                 return fp;  // found it
         }
 
+        return Fingerprint.load(toByteArray(md5sum));
+    }
+
+    private byte[] toByteArray(String md5sum) {
         byte[] data = new byte[16];
         for( int i=0; i<md5sum.length(); i+=2 )
             data[i/2] = (byte)Integer.parseInt(md5sum.substring(i,i+2),16);
-
-        Fingerprint fp = Fingerprint.load(data);
-        if(fp==null) {
-            if(build==null)
-                return null;    // this is get with 1 arg. return "not found"
-
-            // creates a new one
-            fp = new Fingerprint(build,fileName,data);
-        }
-
-        core.put(md5sum,new WeakReference<Fingerprint>(fp));
-        return fp;
+        return data;
     }
 
 }

@@ -23,16 +23,13 @@
     MD5: ${it.hashString}
   </div>
   <div>
-    Introduced ${it.timestampString} ago by
+    Introduced ${it.timestampString} ago
     <c:choose>
-      <c:when test="${it.original.run!=null}">
-        <a href="${rootURL}/${it.original.run.url}">${it.original.name} ${it.original.run.displayName}</a>
-      </c:when>
-      <c:when test="${it.original.job!=null}">
-        <a href="${rootURL}/${it.original.job.url}">${it.original.job.displayName}</a> #<!-- -->${it.original.number}
+      <c:when test="${it.original==null}">
+        outside Hudson
       </c:when>
       <c:otherwise>
-        ${it.original.name} #<!-- -->${it.original.number}
+        <t:buildLink job="${it.original.job}" number="${it.original.number}" jobName="${it.original.name}" />
       </c:otherwise>
     </c:choose>
   </div>

@@ -1,28 +1,30 @@
 package hudson.tasks;
 
+import hudson.Launcher;
+import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
-import hudson.model.Project;
-import hudson.model.Hudson;
-import hudson.model.Result;
 import hudson.model.Fingerprint;
-import hudson.Launcher;
+import hudson.model.Hudson;
+import hudson.model.Project;
+import hudson.model.Result;
+import org.apache.tools.ant.DirectoryScanner;
+import org.apache.tools.ant.types.FileSet;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.BufferedOutputStream;
+import java.lang.ref.WeakReference;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Properties;
-
-import org.apache.tools.ant.types.FileSet;
-import org.apache.tools.ant.DirectoryScanner;
-
-import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Records fingerprints of the specified files.
@@ -68,13 +70,17 @@ public class Fingerprinter implements BuildStep {
             return true;
         }
 
-        Properties record = new Properties();
+        Map<String,String> record = new HashMap<String,String>();
 
         byte[] buf = new byte[8192];
 
         DirectoryScanner ds = src.getDirectoryScanner(new org.apache.tools.ant.Project());
         for( String f : ds.getIncludedFiles() ) {
             File file = new File(baseDir,f);
+
+            // consider the file to be produced by this build only if the timestamp
+            // is newer than when the build has started.
+            boolean produced = build.getTimestamp().getTimeInMillis() <= file.lastModified();
 
             try {
                 md5.reset();    // technically not necessary, but hey, just to be safe
@@ -87,7 +93,7 @@ public class Fingerprinter implements BuildStep {
                 }
 
                 Fingerprint fp = Hudson.getInstance().getFingerprintMap().getOrCreate(
-                    build, file.getName(), md5.digest());
+                    produced?build:null, file.getName(), md5.digest());
                 if(fp==null) {
                     listener.error("failed to record fingerprint for "+file);
                     continue;
@@ -99,23 +105,8 @@ public class Fingerprinter implements BuildStep {
             }
         }
 
-        {// save it to the file
-            File fingerprintFile = new File(build.getRootDir(), "fingerprint.properties");
-            OutputStream os = null;
-            try {
-                os = new BufferedOutputStream(new FileOutputStream(fingerprintFile));
-                record.store(os,"files that are fingerprinted in this build");
-            } catch(IOException e) {
-                e.printStackTrace(listener.error("Failed to save the fingerprint record to "+fingerprintFile));
-            } finally {
-                if(os!=null)
-                    try {
-                        os.close();
-                    } catch (IOException e) {
-                        // ignore
-                    }
-            }
-        }
+        build.getActions().add(new FingerprintAction(build,record));
+
         return true;
     }
 
@@ -137,4 +128,62 @@ public class Fingerprinter implements BuildStep {
             return new Fingerprinter(req.getParameter("fingerprint_targets"));
         }
     };
+
+
+    /**
+     * Action for displaying fingerprints.
+     */
+    public static final class FingerprintAction implements Action {
+        private final Build build;
+
+        private final Map<String,String> record;
+
+        private transient WeakReference<Map<String,Fingerprint>> ref;
+
+        public FingerprintAction(Build build, Map<String, String> record) {
+            this.build = build;
+            this.record = record;
+        }
+
+        public String getIconFileName() {
+            return "fingerprint.gif";
+        }
+
+        public String getDisplayName() {
+            return "See fingerprints";
+        }
+
+        public String getUrlName() {
+            return "fingerprints";
+        }
+
+        public Build getBuild() {
+            return build;
+        }
+
+        public synchronized Map<String,Fingerprint> getFingerprints() {
+            if(ref!=null) {
+                Map<String,Fingerprint> m = ref.get();
+                if(m!=null)
+                    return m;
+            }
+
+            Hudson h = Hudson.getInstance();
+
+            Map<String,Fingerprint> m = new HashMap<String,Fingerprint>();
+            for (Entry<String, String> r : record.entrySet()) {
+                try {
+                    m.put(r.getKey(), h._getFingerprint(r.getValue()) );
+                } catch (IOException e) {
+                    logger.log(Level.WARNING,e.getMessage(),e);
+                }
+            }
+
+            m = Collections.unmodifiableMap(m);
+            ref = new WeakReference<Map<String,Fingerprint>>(m);
+            return m;
+        }
+    }
+
+    private static final Logger logger = Logger.getLogger(Fingerprinter.class.getName());
 }

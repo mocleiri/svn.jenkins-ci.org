@@ -116,6 +116,8 @@ public class Main {
         w.flush();
 
         // run the command
+        long start = System.currentTimeMillis();
+
         List<String> cmd = new ArrayList<String>();
         for( int i=1; i<args.length; i++ )
             cmd.add(args[i]);
@@ -124,7 +126,7 @@ public class Main {
 
         int ret = proc.join();
 
-        w.write("</log><result>"+ret+"</result></run>");
+        w.write("</log><result>"+ret+"</result><duration>"+(System.currentTimeMillis()-start)+"</duration></run>");
         w.close();
 
         if(con.getResponseCode()!=200) {

@@ -58,6 +58,7 @@ public class ExternalRun extends Run<ExternalJob,ExternalRun> {
      * </xmp></pre>
      */
     public void acceptRemoteSubmission(final Reader in) {
+        final long[] duration = new long[1];
         run(new Runner() {
             public Result run(BuildListener listener) throws Exception {
                 PrintStream logger = new PrintStream(new DecodingStream(listener.getLogger()));
@@ -74,13 +75,24 @@ public class ExternalRun extends Run<ExternalJob,ExternalRun> {
                 }
                 xpp.nextTag(); // get to <result>
 
-                return Integer.parseInt(xpp.nextText())==0?Result.SUCCESS:Result.FAILURE;
+                Result r = Integer.parseInt(xpp.nextText())==0?Result.SUCCESS:Result.FAILURE;
+
+                xpp.nextTag();  // get to <duration> (optional)
+                if(xpp.getEventType()==XmlPullParser.START_TAG
+                && xpp.getName().equals("duration")) {
+                    duration[0] = Long.parseLong(xpp.nextText());
+                }
+
+                return r;
             }
 
             public void post(BuildListener listener) {
                 // do nothing
             }
         });
+
+        if(duration[0]!=0)
+            super.duration = duration[0];
     }
 
 }
