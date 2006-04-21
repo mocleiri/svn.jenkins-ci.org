@@ -38,12 +38,22 @@ public class Fingerprinter implements BuildStep {
      */
     private final String targets;
 
-    public Fingerprinter(String targets) {
+    /**
+     * Also record all the finger prints of the build artifacts.
+     */
+    private final boolean recordBuildArtifacts;
+
+    public Fingerprinter(String targets, boolean recordBuildArtifacts) {
         this.targets = targets;
+        this.recordBuildArtifacts = recordBuildArtifacts;
     }
 
     public String getTargets() {
         return targets;
+    }
+
+    public boolean getRecordBuildArtifacts() {
+        return recordBuildArtifacts;
     }
 
     public boolean prebuild(Build build, BuildListener listener) {
@@ -53,12 +63,7 @@ public class Fingerprinter implements BuildStep {
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         listener.getLogger().println("Recording fingerprints");
 
-        Project p = build.getProject();
-
-        FileSet src = new FileSet();
-        File baseDir = p.getWorkspace().getLocal();
-        src.setDir(baseDir);
-        src.setIncludes(targets);
+        Map<String,String> record = new HashMap<String,String>();
 
         MessageDigest md5;
         try {
@@ -70,7 +75,32 @@ public class Fingerprinter implements BuildStep {
             return true;
         }
 
-        Map<String,String> record = new HashMap<String,String>();
+        if(targets.length()!=0)
+            record(build, md5, listener, record, targets);
+
+        if(recordBuildArtifacts) {
+            ArtifactArchiver aa = (ArtifactArchiver) build.getProject().getPublishers().get(ArtifactArchiver.DESCRIPTOR);
+            if(aa==null) {
+                // configuration error
+                listener.error("Build artifacts are supposed to be fingerprinted, but build artifact archiving is not configured");
+                build.setResult(Result.FAILURE);
+                return true;
+            }
+            record(build, md5, listener, record, aa.getArtifacts() );
+        }
+
+        build.getActions().add(new FingerprintAction(build,record));
+
+        return true;
+    }
+
+    private void record(Build build, MessageDigest md5, BuildListener listener, Map<String,String> record, String targets) {
+        Project p = build.getProject();
+
+        FileSet src = new FileSet();
+        File baseDir = p.getWorkspace().getLocal();
+        src.setDir(baseDir);
+        src.setIncludes(targets);
 
         byte[] buf = new byte[8192];
 
@@ -104,10 +134,6 @@ public class Fingerprinter implements BuildStep {
                 e.printStackTrace(listener.error("Failed to compute digest for "+file));
             }
         }
-
-        build.getActions().add(new FingerprintAction(build,record));
-
-        return true;
     }
 
     public BuildStepDescriptor getDescriptor() {
@@ -125,7 +151,9 @@ public class Fingerprinter implements BuildStep {
         }
 
         public BuildStep newInstance(HttpServletRequest req) {
-            return new Fingerprinter(req.getParameter("fingerprint_targets"));
+            return new Fingerprinter(
+                req.getParameter("fingerprint_targets").trim(),
+                req.getParameter("fingerprint_artifacts")!=null);
         }
     };
 
