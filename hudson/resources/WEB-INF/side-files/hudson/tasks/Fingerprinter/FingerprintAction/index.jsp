@@ -20,22 +20,21 @@
       <th>File</th>
       <th>Original owner</th>
       <th>Age</th>
+      <th></th>
     </tr>
     <c:forEach var="e" items="${it.fingerprints}">
       <c:set var="f" value="${e.value}" />
       <tr>
         <td>
-          <a href="${rootURL}/fingerprint/${f.hashString}/">
-            <img src="${rootURL}/images/16x16/text.gif">${e.key}
-          </a>
+          ${e.key}
         </td>
         <td>
           <c:choose>
             <c:when test="${f.original==null}">
-              (outside Hudson)
+              outside Hudson
             </c:when>
             <c:when test="${f.original.run==it.build}">
-              (this build)
+              this build
             </c:when>
             <c:otherwise>
               <t:buildLink jobName="${f.original.name}" job="${f.original.job}" number="${f.original.number}" />
@@ -44,6 +43,11 @@
         </td>
         <td>
           ${f.timestampString} old
+        </td>
+        <td>
+          <a href="${rootURL}/fingerprint/${f.hashString}/">
+            <img src="${rootURL}/images/16x16/fingerprint.gif"> more details
+          </a>
         </td>
       </tr>
     </c:forEach>
