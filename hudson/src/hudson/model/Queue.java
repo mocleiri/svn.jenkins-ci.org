@@ -19,6 +19,9 @@ import java.util.Map.Entry;
 /**
  * Build queue.
  *
+ * <p>
+ * This class implements the core scheduling logic.
+ *
  * @author Kohsuke Kawaguchi
  */
 public class Queue {
