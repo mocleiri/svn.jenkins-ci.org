@@ -7,7 +7,7 @@
 <%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
 <%@ taglib prefix="h" uri="http://hudson.dev.java.net/" %>
 
-<l:header title="${it.parent.name} build #${it.number}" />
+<l:header title="${it.parent.name} build &#x23;${it.number}" />
 <l:side-panel>
   <l:tasks>
     <c:set var="buildUrl" value="${h:buildUrlDecompose(pageContext.request)}" />
