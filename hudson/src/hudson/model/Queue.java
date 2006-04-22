@@ -56,11 +56,19 @@ public class Queue {
      */
     private final List<Project> buildables = new LinkedList<Project>();
 
+    /**
+     * Data structure created for each idle {@link Executor}.
+     * This is an offer from the queue to an executor.
+     *
+     * <p>
+     * It eventually receives a {@link #project} to build.
+     */
     private static class JobOffer {
         final Executor executor;
 
         /**
-         * Used to wake up a thread.
+         * Used to wake up an executor, when it has an offered
+         * {@link Project} to build.
          */
         final OneShotEvent event = new OneShotEvent();
         /**
@@ -76,6 +84,10 @@ public class Queue {
         public void set(Project p) {
             this.project = p;
             event.signal();
+        }
+
+        public boolean isAvailable() {
+            return project==null && !executor.getOwner().isTemporarilyOffline();
         }
 
         public Node getNode() {
@@ -260,7 +272,7 @@ public class Queue {
         if(n!=null) {
             // if a project has assigned node, it can be only built on it
             for (JobOffer offer : parked.values()) {
-                if(offer.project==null && offer.getNode()==n)
+                if(offer.isAvailable() && offer.getNode()==n)
                     return offer;
             }
             return null;
@@ -272,7 +284,7 @@ public class Queue {
         n = p.getLastBuiltOn();
         if(n!=null && n.getMode()==Mode.NORMAL) {
             for (JobOffer offer : parked.values()) {
-                if(offer.project==null && offer.getNode()==n)
+                if(offer.isAvailable() && offer.getNode()==n)
                     return offer;
             }
         }
@@ -284,14 +296,14 @@ public class Queue {
         if(succ!=null && succ.getDuration()>15*60*1000) {
             // consider a long job to be > 15 mins
             for (JobOffer offer : parked.values()) {
-                if(offer.project==null && offer.getNode() instanceof Slave && offer.isNotExclusive())
+                if(offer.isAvailable() && offer.getNode() instanceof Slave && offer.isNotExclusive())
                     return offer;
             }
         }
 
         // lastly, just look for any idle executor
         for (JobOffer offer : parked.values()) {
-            if(offer.project==null && offer.isNotExclusive())
+            if(offer.isAvailable() && offer.isNotExclusive())
                 return offer;
         }
 
@@ -300,9 +312,14 @@ public class Queue {
     }
 
     /**
-     * Wakes up one {@link Executor} so that it will maintain a queue.
+     * Checks the queue and runs anything that can be run.
+     *
+     * <p>
+     * When conditions are changed, this method should be invoked.
+     *
+     * This wakes up one {@link Executor} so that it will maintain a queue.
      */
-    private synchronized void scheduleMaintenance() {
+    public synchronized void scheduleMaintenance() {
         // this code assumes that after this method is called
         // no more executors will be offered job except by
         // the pop() code.

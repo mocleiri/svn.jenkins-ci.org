@@ -36,6 +36,11 @@ public class Computer implements ModelObject {
 
     private int numExecutors;
 
+    /**
+     * True if Hudson shouldn't start new builds on this node.
+     */
+    private boolean temporarilyOffline;
+
     private Node node;
 
     public Computer(Node node) {
@@ -60,6 +65,22 @@ public class Computer implements ModelObject {
      */
     public Node getNode() {
         return node;
+    }
+
+    public boolean isTemporarilyOffline() {
+        return temporarilyOffline;
+    }
+
+    public void setTemporarilyOffline(boolean temporarilyOffline) {
+        this.temporarilyOffline = temporarilyOffline;
+        Hudson.getInstance().getQueue().scheduleMaintenance();
+    }
+
+    public String getIcon() {
+        if(temporarilyOffline)
+            return "computer-x.gif";
+        else
+            return "computer.gif";
     }
 
     public String getDisplayName() {
@@ -156,5 +177,12 @@ public class Computer implements ModelObject {
     }
     public synchronized void doRssFailed( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         RSS.doRssFailed(this, getTiedJobs(), req, rsp );
+    }
+    public void doToggleOffline( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
+        setTemporarilyOffline(!temporarilyOffline);
+        rsp.forwardToPreviousPage(req);
     }
 }

@@ -19,6 +19,7 @@
         <tr>
           <th class="pane" colspan="3">
             <a href="${rootURL}/computer/${c.displayName}">${c.displayName}</a>
+            <c:if test="${c.temporarilyOffline}">(offline)</c:if>
           </th>
         </tr>
       </c:otherwise>

@@ -187,6 +187,7 @@ public final class Hudson extends JobCollection implements Node {
                 c.kill();
             }
         }
+        getQueue().scheduleMaintenance();
     }
 
     private void updateComputer(Node n, Map<String,Computer> byNameMap, Set<Computer> used) {
@@ -768,7 +769,7 @@ public final class Hudson extends JobCollection implements Node {
      *
      * @see https://bugzilla.mozilla.org/show_bug.cgi?id=89419
      */
-    public void doNocacheImages( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+    public void doNocacheImages( StaplerRequest req, StaplerResponse rsp ) throws IOException {
         String path = req.getRestOfPath();
 
         if(path.length()==0)
