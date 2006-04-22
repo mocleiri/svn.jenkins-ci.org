@@ -35,6 +35,7 @@ public class Mailer implements BuildStep {
      */
     private String recipients;
 
+    private boolean dontNotifyEveryUnstableBuild;
 
     // TODO: left so that XStream won't get angry. figure out how to set the error handling behavior
     // in XStream.
@@ -42,12 +43,17 @@ public class Mailer implements BuildStep {
     private transient String subject;
     private transient boolean failureOnly;
 
-    public Mailer(String recipients) {
+    public Mailer(String recipients, boolean dontNotifyEveryUnstableBuild) {
         this.recipients = recipients;
+        this.dontNotifyEveryUnstableBuild = dontNotifyEveryUnstableBuild;
     }
 
     public String getRecipients() {
         return recipients;
+    }
+
+    public boolean isDontNotifyEveryUnstableBuild() {
+        return dontNotifyEveryUnstableBuild;
     }
 
     public boolean prebuild(Build build, BuildListener listener) {
@@ -75,6 +81,8 @@ public class Mailer implements BuildStep {
 
         if(build.getResult()==Result.UNSTABLE) {
             Build prev = build.getPreviousBuild();
+            if(!dontNotifyEveryUnstableBuild)
+                return createUnstableMail(build);
             if(prev!=null) {
                 if(prev.getResult()==Result.SUCCESS)
                     return createUnstableMail(build);
@@ -189,6 +197,10 @@ public class Mailer implements BuildStep {
             return "E-mail Notification";
         }
 
+        public String getHelpFile() {
+            return "/help/project-config/mailer.html";
+        }
+
         /** JavaMail session. */
         public Session createSession() {
             Properties props = new Properties(System.getProperties());
@@ -230,7 +242,8 @@ public class Mailer implements BuildStep {
 
         public BuildStep newInstance(HttpServletRequest req) {
             return new Mailer(
-                req.getParameter("mailer_recipients")
+                req.getParameter("mailer_recipients"),
+                req.getParameter("mailer_not_every_unstable")!=null
             );
         }
     };
