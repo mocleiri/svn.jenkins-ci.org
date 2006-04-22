@@ -11,8 +11,9 @@
   <input class="setting-input" name="fingerprint_targets"
     type="text" value="${publisher.targets}">
 </s:entry>
-<s:entry title="Also fingerprint all archived artifacts">
+<s:entry title="">
   <input name="fingerprint_artifacts"
     type="checkbox"
     <c:if test="${publisher.recordBuildArtifacts}">checked</c:if>>
+  Also fingerprint all archived artifacts
 </s:entry>
