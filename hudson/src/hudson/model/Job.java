@@ -10,11 +10,13 @@ import org.kohsuke.stapler.StaplerResponse;
 import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.SortedMap;
+import java.net.URLEncoder;
 
 /**
  * A job is an runnable entity under the monitoring of Hudson.
@@ -147,7 +149,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     /**
      * @param n
      *      The build number.
-     * @see Run#getNumber() 
+     * @see Run#getNumber()
      */
     public synchronized RunT getBuildByNumber(int n) {
         return _getRuns().get(n);
@@ -176,7 +178,11 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      * Returns the URL of this project.
      */
     public String getUrl() {
-        return "job/"+name+'/';
+        try {
+            return "job/"+ URLEncoder.encode(name,"UTF-8")+'/';
+        } catch (UnsupportedEncodingException e) {
+            throw new Error(e); // impossible
+        }
     }
 
 
