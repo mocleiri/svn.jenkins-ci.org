@@ -639,6 +639,7 @@ public final class Hudson extends JobCollection implements Node {
 
             // reload from the new config
             result = Job.load(this,result.root);
+            result.nextBuildNumber = 1;     // reset the next build number
             jobs.put(name,result);
         }
 
