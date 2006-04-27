@@ -10,13 +10,12 @@ import org.kohsuke.stapler.StaplerResponse;
 import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.SortedMap;
-import java.net.URLEncoder;
+import java.util.regex.Pattern;
 
 /**
  * A job is an runnable entity under the monitoring of Hudson.
@@ -178,12 +177,10 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      * Returns the URL of this project.
      */
     public String getUrl() {
-        try {
-            return "job/"+ URLEncoder.encode(name,"UTF-8")+'/';
-        } catch (UnsupportedEncodingException e) {
-            throw new Error(e); // impossible
-        }
+        return "job/"+WHITESPACE_REPLACER.matcher(name).replaceAll("%20")+'/';
     }
+
+    private static final Pattern WHITESPACE_REPLACER = Pattern.compile(" ", Pattern.LITERAL);
 
 
     /**
