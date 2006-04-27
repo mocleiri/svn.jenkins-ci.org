@@ -16,7 +16,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -166,7 +166,7 @@ public class Project extends Job<Project,Build> {
     }
 
     public synchronized Map<BuildStepDescriptor,BuildStep> getBuilders() {
-        Map<BuildStepDescriptor,BuildStep> m = new HashMap<BuildStepDescriptor,BuildStep>();
+        Map<BuildStepDescriptor,BuildStep> m = new LinkedHashMap<BuildStepDescriptor,BuildStep>();
         for( int i=builders.size()-1; i>=0; i-- ) {
             BuildStep b = builders.get(i);
             m.put(b.getDescriptor(),b);
@@ -175,7 +175,7 @@ public class Project extends Job<Project,Build> {
     }
 
     public synchronized Map<BuildStepDescriptor,BuildStep> getPublishers() {
-        Map<BuildStepDescriptor,BuildStep> m = new HashMap<BuildStepDescriptor,BuildStep>();
+        Map<BuildStepDescriptor,BuildStep> m = new LinkedHashMap<BuildStepDescriptor,BuildStep>();
         for( int i=publishers.size()-1; i>=0; i-- ) {
             BuildStep b = publishers.get(i);
             m.put(b.getDescriptor(),b);
