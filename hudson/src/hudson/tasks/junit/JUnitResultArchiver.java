@@ -42,7 +42,13 @@ public class JUnitResultArchiver extends AntBasedBuildStep {
         TestResultAction action = new TestResultAction(build, fs.getDirectoryScanner(p), listener);
         build.getActions().add(action);
 
-        if(action.getResult().getFailCount()>0)
+        TestResult r = action.getResult();
+
+        if(r.getPassCount()==0 && r.getFailCount()==0)
+            // no test result. Most likely a configuration error or fatal problem
+            build.setResult(Result.FAILURE);
+
+        if(r.getFailCount()>0)
             build.setResult(Result.UNSTABLE);
 
         return true;
