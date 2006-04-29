@@ -235,10 +235,11 @@ public class TestResultAction implements Action, StaplerProxy {
 
         // plot.setAxisOffset(new Spacer(Spacer.ABSOLUTE, 5.0, 5.0, 5.0, 5.0));
         plot.setBackgroundPaint(Color.WHITE);
+        plot.setOutlinePaint(null);
 //        plot.setDomainGridlinesVisible(true);
 //        plot.setDomainGridlinePaint(Color.white);
         plot.setRangeGridlinesVisible(true);
-        plot.setRangeGridlinePaint(Color.white);
+        plot.setRangeGridlinePaint(Color.gray);
 
         CategoryAxis domainAxis = new ShiftedCategoryAxis(null);
         plot.setDomainAxis(domainAxis);
