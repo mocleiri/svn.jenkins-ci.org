@@ -257,7 +257,7 @@ public class TestResultAction implements Action, StaplerProxy {
         ar.setSeriesPaint(1,new Color(0xEF,0x29,0x29));
 
         // crop extra space around the graph
-        plot.setInsets(new RectangleInsets(0,0,0,0));
+        plot.setInsets(new RectangleInsets(0,0,0,5.0));
 
         return chart;
     }
