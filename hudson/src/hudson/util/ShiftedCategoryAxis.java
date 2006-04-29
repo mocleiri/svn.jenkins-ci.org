@@ -14,6 +14,12 @@ public final class ShiftedCategoryAxis extends CategoryAxis {
         super(label);
     }
 
+    protected double calculateCategorySize(int categoryCount, Rectangle2D area, RectangleEdge edge) {
+        // we cut the left-half of the first item and the right-half of the last item,
+        // so we have more space
+        return super.calculateCategorySize(categoryCount-1, area, edge);
+    }
+
     public double getCategoryEnd(int category, int categoryCount, Rectangle2D area, RectangleEdge edge) {
         return super.getCategoryStart(category, categoryCount, area, edge)
            + calculateCategorySize(categoryCount, area, edge) / 2;
