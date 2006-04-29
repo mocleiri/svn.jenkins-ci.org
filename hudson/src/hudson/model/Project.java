@@ -167,8 +167,7 @@ public class Project extends Job<Project,Build> {
 
     public synchronized Map<BuildStepDescriptor,BuildStep> getBuilders() {
         Map<BuildStepDescriptor,BuildStep> m = new LinkedHashMap<BuildStepDescriptor,BuildStep>();
-        for( int i=builders.size()-1; i>=0; i-- ) {
-            BuildStep b = builders.get(i);
+        for (BuildStep b : builders) {
             m.put(b.getDescriptor(),b);
         }
         return m;
@@ -176,8 +175,7 @@ public class Project extends Job<Project,Build> {
 
     public synchronized Map<BuildStepDescriptor,BuildStep> getPublishers() {
         Map<BuildStepDescriptor,BuildStep> m = new LinkedHashMap<BuildStepDescriptor,BuildStep>();
-        for( int i=publishers.size()-1; i>=0; i-- ) {
-            BuildStep b = publishers.get(i);
+        for (BuildStep b : publishers) {
             m.put(b.getDescriptor(),b);
         }
         return m;
