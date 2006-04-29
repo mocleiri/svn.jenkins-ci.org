@@ -9,6 +9,7 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -88,20 +89,11 @@ public final class TestResult extends MetaTabulatedResult {
 
     @Override
     public TestResult getPreviousResult() {
-        Build b = getOwner();
-        while(true) {
-            b = b.getPreviousBuild();
-            if(b==null)
-                return null;
-            if(b.getResult()== Result.FAILURE)
-                continue;
-            TestResultAction r = b.getAction(TestResultAction.class);
-            if(r!=null) {
-                TestResult result = r.getResult();
-                if(result!=null)
-                    return result;
-            }
-        }
+        TestResultAction p = parent.getPreviousResult();
+        if(p!=null)
+            return p.getResult();
+        else
+            return null;
     }
 
     public String getTitle() {
@@ -175,4 +167,17 @@ public final class TestResult extends MetaTabulatedResult {
         for (PackageResult pr : byPackages.values())
             pr.freeze();
     }
+
+//
+//
+// action methods
+//
+//
+    public void doGraph( StaplerRequest req, StaplerResponse rsp) throws IOException {
+        // this isn't the ideal place to have this method, as it would require
+        // the test details to be loaded into memory. But I couldn't find any other
+        // reasonable place to hook this.
+        parent.doGraph(req,rsp);
+    }
+
 }
