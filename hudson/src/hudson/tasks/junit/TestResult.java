@@ -2,7 +2,6 @@ package hudson.tasks.junit;
 
 import hudson.model.Build;
 import hudson.model.BuildListener;
-import hudson.model.Result;
 import org.apache.tools.ant.DirectoryScanner;
 import org.dom4j.DocumentException;
 import org.kohsuke.stapler.StaplerRequest;
