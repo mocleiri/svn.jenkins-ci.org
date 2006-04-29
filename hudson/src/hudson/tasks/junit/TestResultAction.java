@@ -1,20 +1,41 @@
 package hudson.tasks.junit;
 
+import com.thoughtworks.xstream.XStream;
 import hudson.XmlFile;
-import hudson.util.StringConverter2;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Result;
+import hudson.util.DataSetBuilder;
+import hudson.util.StringConverter2;
+import hudson.util.ShiftedCategoryAxis;
 import org.apache.tools.ant.DirectoryScanner;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.AreaRendererEndType;
+import org.jfree.chart.renderer.category.AreaRenderer;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.ui.RectangleInsets;
+import org.jfree.ui.RectangleEdge;
 import org.kohsuke.stapler.StaplerProxy;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import java.awt.Color;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.thoughtworks.xstream.XStream;
 
 /**
  * {@link Action} that displays the JUnit test result.
@@ -124,6 +145,116 @@ public class TestResultAction implements Action, StaplerProxy {
     public String getIconFileName() {
         return "clipboard.gif";
     }
+
+    public TestResultAction getPreviousResult() {
+        Build b = owner;
+        while(true) {
+            b = b.getPreviousBuild();
+            if(b==null)
+                return null;
+            if(b.getResult()== Result.FAILURE)
+                continue;
+            TestResultAction r = b.getAction(TestResultAction.class);
+            if(r!=null)
+                return r;
+        }
+    }
+
+    /**
+     * Generates a PNG image for the test result trend.
+     */
+    public void doGraph( StaplerRequest req, StaplerResponse rsp) throws IOException {
+        class BuildLabel implements Comparable<BuildLabel> {
+            private final Build build;
+
+            public BuildLabel(Build build) {
+                this.build = build;
+            }
+
+            public int compareTo(BuildLabel that) {
+                return this.build.number-that.build.number;
+            }
+
+            public boolean equals(Object o) {
+                BuildLabel that = (BuildLabel) o;
+                return build==that.build;
+            }
+
+            public int hashCode() {
+                return build.hashCode();
+            }
+
+            public String toString() {
+                return build.getDisplayName();
+            }
+        }
+
+        DataSetBuilder<String,BuildLabel> dsb = new DataSetBuilder<String,BuildLabel>();
+
+        for( TestResultAction a=this; a!=null; a=a.getPreviousResult() ) {
+            dsb.add( a.getFailCount(), "failed", new BuildLabel(a.owner));
+            dsb.add( a.getTotalCount(), "all", new BuildLabel(a.owner));
+        }
+
+        BufferedImage image = createChart(dsb.build()).createBufferedImage(500/*width*/, 200/*height*/);
+        rsp.setContentType("image/png");
+        ServletOutputStream os = rsp.getOutputStream();
+        ImageIO.write(image, "PNG", os);
+        os.close();
+    }
+
+    private JFreeChart createChart(CategoryDataset dataset) {
+
+        final JFreeChart chart = ChartFactory.createAreaChart(
+            null,                   // chart title
+            null,                   // unused
+            "count",                  // range axis label
+            dataset,                  // data
+            PlotOrientation.VERTICAL, // orientation
+            false,                     // include legend
+            true,                     // tooltips
+            false                     // urls
+        );
+
+        // NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
+
+        // set the background color for the chart...
+
+//        final StandardLegend legend = (StandardLegend) chart.getLegend();
+//        legend.setAnchor(StandardLegend.SOUTH);
+
+        chart.setBackgroundPaint(Color.white);
+
+        final CategoryPlot plot = chart.getCategoryPlot();
+
+        // plot.setAxisOffset(new Spacer(Spacer.ABSOLUTE, 5.0, 5.0, 5.0, 5.0));
+        plot.setBackgroundPaint(Color.WHITE);
+//        plot.setDomainGridlinesVisible(true);
+//        plot.setDomainGridlinePaint(Color.white);
+        plot.setRangeGridlinesVisible(true);
+        plot.setRangeGridlinePaint(Color.white);
+
+        CategoryAxis domainAxis = new ShiftedCategoryAxis(null);
+        plot.setDomainAxis(domainAxis);
+        domainAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_90);
+        domainAxis.setLowerMargin(0.0);
+        domainAxis.setUpperMargin(0.0);
+        domainAxis.setCategoryMargin(0.0);
+
+        final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+
+        AreaRenderer ar = (AreaRenderer) plot.getRenderer();
+        ar.setEndType(AreaRendererEndType.TRUNCATE);
+        ar.setSeriesPaint(0,new Color(0x72,0x9F,0xCF));
+        ar.setSeriesPaint(1,new Color(0xEF,0x29,0x29));
+
+        // crop extra space around the graph
+        plot.setInsets(new RectangleInsets(0,0,0,0));
+
+        return chart;
+    }
+
 
     private static final Logger logger = Logger.getLogger(TestResultAction.class.getName());
 
