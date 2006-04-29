@@ -7,10 +7,12 @@ import hudson.scm.SCM;
 import hudson.scm.SCMManager;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
+import hudson.tasks.junit.TestResultAction;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -353,6 +355,23 @@ public class Project extends Job<Project,Build> {
      */
     public synchronized void doJavadoc( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         serveFile(req, rsp, getJavadocDir(), "help.gif", false);
+    }
+
+    /**
+     * Display the test result trend.
+     */
+    public void doTestResultTrend( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        Build b = getLastSuccessfulBuild();
+        if(b!=null) {
+            TestResultAction a = b.getTestResultAction();
+            if(a!=null) {
+                a.doGraph(req,rsp);
+                return;
+            }
+        }
+
+        // error
+        rsp.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
 
     /**

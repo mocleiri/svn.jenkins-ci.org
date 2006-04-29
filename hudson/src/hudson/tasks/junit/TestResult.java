@@ -166,17 +166,4 @@ public final class TestResult extends MetaTabulatedResult {
         for (PackageResult pr : byPackages.values())
             pr.freeze();
     }
-
-//
-//
-// action methods
-//
-//
-    public void doGraph( StaplerRequest req, StaplerResponse rsp) throws IOException {
-        // this isn't the ideal place to have this method, as it would require
-        // the test details to be loaded into memory. But I couldn't find any other
-        // reasonable place to hook this.
-        parent.doGraph(req,rsp);
-    }
-
 }
