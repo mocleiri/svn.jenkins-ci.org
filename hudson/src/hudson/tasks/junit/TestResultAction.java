@@ -162,6 +162,10 @@ public class TestResultAction implements Action, StaplerProxy {
      * Generates a PNG image for the test result trend.
      */
     public void doGraph( StaplerRequest req, StaplerResponse rsp) throws IOException {
+
+        if(req.checkIfModified(owner.getTimestamp(),rsp))
+            return;
+
         class BuildLabel implements Comparable<BuildLabel> {
             private final Build build;
 
