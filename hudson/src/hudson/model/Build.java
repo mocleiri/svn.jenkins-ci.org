@@ -1,13 +1,12 @@
 package hudson.model;
 
-import hudson.Proc;
 import hudson.Launcher;
+import hudson.Proc;
 import static hudson.model.Hudson.isWindows;
 import hudson.scm.CVSChangeLog;
 import hudson.tasks.BuildStep;
-import hudson.tasks.Fingerprinter.FingerprintAction;
-import hudson.tasks.junit.TestResultAction;
 import hudson.tasks.junit.TestResult;
+import hudson.tasks.junit.TestResultAction;
 import org.xml.sax.SAXException;
 
 import java.io.File;
@@ -180,12 +179,4 @@ public final class Build extends Run<Project,Build> implements Runnable {
         project.getScm().buildEnvVars(env);
         return env;
     }
-
-
-//
-//
-// actions
-//
-//
-
 }
