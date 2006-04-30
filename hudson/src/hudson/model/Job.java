@@ -3,6 +3,8 @@ package hudson.model;
 import com.thoughtworks.xstream.XStream;
 import hudson.Util;
 import hudson.XmlFile;
+import hudson.util.TextFile;
+import hudson.util.IOException2;
 import hudson.tasks.LogRotator;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -42,7 +44,13 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      */
     protected transient File root;
 
-    protected int nextBuildNumber = 1;
+    /**
+     * Next bulid number.
+     * Kept in a separate file because this is the only information
+     * that gets updated often. This allows the rest of the configuration
+     * to be in the VCS.
+     */
+    protected transient int nextBuildNumber = 1;
     private transient Hudson parent;
 
     private LogRotator logRotator;
@@ -55,12 +63,36 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     }
 
     /**
-     * Called when a {@link Job} is loaded from memory.
+     * Called when a {@link Job} is loaded from disk.
      */
     protected void onLoad(Hudson root, String name) throws IOException {
         this.parent = root;
         this.name = name;
         this.root = new File(new File(parent.root,"jobs"),name);
+
+        TextFile f = getNextBuildNumberFile();
+        if(f.exists()) {
+            // starting 1.28, we store nextBuildNumber in a separate file.
+            // but old Hudson didn't do it, so if the file doesn't exist,
+            // assume that nextBuildNumber was read from config.xml
+            try {
+                this.nextBuildNumber = Integer.parseInt(f.readTrim());
+            } catch (NumberFormatException e) {
+                throw new IOException2(f+" doesn't contain a number",e);
+            }
+        } else {
+            // this must be the old Hudson. create this file now.
+            saveNextBuildNumber();
+            save(); // and delete it from the config.xml
+        }
+    }
+
+    private TextFile getNextBuildNumberFile() {
+        return new TextFile(new File(this.root,"nextBuildNumber"));
+    }
+
+    private void saveNextBuildNumber() throws IOException {
+        getNextBuildNumberFile().write(String.valueOf(nextBuildNumber)+'\n');
     }
 
     public final Hudson getParent() {
@@ -72,7 +104,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      */
     public int assignBuildNumber() throws IOException {
         int r = nextBuildNumber++;
-        save();
+        saveNextBuildNumber();
         return r;
     }
 
