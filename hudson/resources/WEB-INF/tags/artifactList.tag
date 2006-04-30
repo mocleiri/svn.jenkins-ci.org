@@ -14,7 +14,10 @@
         ${caption}<br>
         <ul>
           <c:forEach var="f" items="${artifacts}">
-            <li><a href="${baseURL}artifact/${f}">${f.fileName}</a></li>
+            <li>
+              <a href="${baseURL}artifact/${f}">${f.fileName}</a>
+              <a href="${baseURL}artifact/${f}?fingerprint"><img src="${rootURL}/images/16x16/fingerprint.gif" alt="[fingerprint]"></a>
+            </li>
           </c:forEach>
         </ul>
       </c:when>

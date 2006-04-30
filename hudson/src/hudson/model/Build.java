@@ -5,6 +5,7 @@ import hudson.Launcher;
 import static hudson.model.Hudson.isWindows;
 import hudson.scm.CVSChangeLog;
 import hudson.tasks.BuildStep;
+import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.junit.TestResultAction;
 import hudson.tasks.junit.TestResult;
 import org.xml.sax.SAXException;
