@@ -734,7 +734,8 @@ public final class Hudson extends JobCollection implements Node {
             // Parse the request
             List<FileItem> items = upload.parseRequest(req);
 
-            redirectToFingerprintOf(items.get(0).getInputStream(), req, rsp);
+            rsp.sendRedirect(req.getContextPath()+"/fingerprint/"+
+                getDigestOf(items.get(0).getInputStream())+'/');
 
             // if an error occur and we fail to do this, it will still be cleaned up
             // when GC-ed.
@@ -745,7 +746,7 @@ public final class Hudson extends JobCollection implements Node {
         }
     }
 
-    public void redirectToFingerprintOf(InputStream source, StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+    public String getDigestOf(InputStream source) throws IOException, ServletException {
         try {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
 
@@ -757,8 +758,7 @@ public final class Hudson extends JobCollection implements Node {
             } finally {
                 in.close();
             }
-
-            rsp.sendRedirect(req.getContextPath()+"/fingerprint/"+ Util.toHexString(md5.digest())+'/');
+            return Util.toHexString(md5.digest());
         } catch (NoSuchAlgorithmException e) {
             throw new ServletException(e);    // impossible
         }

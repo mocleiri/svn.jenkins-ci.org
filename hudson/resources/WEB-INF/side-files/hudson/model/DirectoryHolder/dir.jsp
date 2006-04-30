@@ -36,7 +36,7 @@
           <c:if test="${!x.folder}">
             <td class=fileSize>
               ${x.size}
-              <a href="${x.href}?fingerprint"
+              <a href="${x.href}/*fingerprint*/"
                 ><img src="${rootURL}/images/16x16/fingerprint.gif" alt="fingerprint"
               ></a>
             </td>

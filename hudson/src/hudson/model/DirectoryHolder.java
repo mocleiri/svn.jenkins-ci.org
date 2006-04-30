@@ -53,6 +53,13 @@ public abstract class DirectoryHolder extends Actionable {
         }
 
         File f = new File(root,path.substring(1));
+
+        boolean isFingerprint=false;
+        if(f.getName().equals("*fingerprint*")) {
+            f = f.getParentFile();
+            isFingerprint = true;
+        }
+
         if(!f.exists()) {
             rsp.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
@@ -82,8 +89,9 @@ public abstract class DirectoryHolder extends Actionable {
         FileInputStream in = new FileInputStream(f);
 
         try {
-            if(req.getQueryString()!=null && req.getQueryString().equals("fingerprint")) {
-                Hudson.getInstance().redirectToFingerprintOf(in,req,rsp);
+            if(isFingerprint) {
+                Hudson hudson = Hudson.getInstance();
+                rsp.forward(hudson.getFingerprint(hudson.getDigestOf(in)),"/",req);
             } else {
                 // serve the file
                 String contentType = req.getServletContext().getMimeType(f.getPath());
