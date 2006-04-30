@@ -195,7 +195,7 @@ public class TestResultAction implements Action, StaplerProxy {
 
         for( TestResultAction a=this; a!=null; a=a.getPreviousResult() ) {
             dsb.add( a.getFailCount(), "failed", new BuildLabel(a.owner));
-            dsb.add( a.getTotalCount(), "all", new BuildLabel(a.owner));
+            dsb.add( a.getTotalCount()-a.getFailCount(),"total", new BuildLabel(a.owner));
         }
 
         String w = req.getParameter("width");
@@ -211,7 +211,7 @@ public class TestResultAction implements Action, StaplerProxy {
 
     private JFreeChart createChart(CategoryDataset dataset) {
 
-        final JFreeChart chart = ChartFactory.createAreaChart(
+        final JFreeChart chart = ChartFactory.createStackedAreaChart(
             null,                   // chart title
             null,                   // unused
             "count",                  // range axis label
@@ -254,8 +254,8 @@ public class TestResultAction implements Action, StaplerProxy {
 
         AreaRenderer ar = (AreaRenderer) plot.getRenderer();
         ar.setEndType(AreaRendererEndType.TRUNCATE);
-        ar.setSeriesPaint(0,new Color(0x72,0x9F,0xCF));
-        ar.setSeriesPaint(1,new Color(0xEF,0x29,0x29));
+        ar.setSeriesPaint(0,new Color(0xEF,0x29,0x29));
+        ar.setSeriesPaint(1,new Color(0x72,0x9F,0xCF));
 
         // crop extra space around the graph
         plot.setInsets(new RectangleInsets(0,0,0,5.0));
