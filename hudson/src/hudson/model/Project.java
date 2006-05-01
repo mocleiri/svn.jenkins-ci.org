@@ -268,6 +268,14 @@ public class Project extends Job<Project,Build> {
         return getScm().getModuleRoot(getWorkspace());
     }
 
+    /**
+     * Schedules a build of this project.
+     */
+    public void scheduleBuild() {
+        getParent().getQueue().add(this);
+    }
+
+
 
 
 //
@@ -279,7 +287,7 @@ public class Project extends Job<Project,Build> {
      * Schedules a new build command.
      */
     public void doBuild( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        getParent().getQueue().add(this);
+        scheduleBuild();
         rsp.forwardToPreviousPage(req);
     }
 
