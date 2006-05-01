@@ -2,6 +2,7 @@ package hudson.scm;
 
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Describable;
 import hudson.Launcher;
 import hudson.FilePath;
 
@@ -14,7 +15,7 @@ import java.util.Map;
  *
  * @author Kohsuke Kawaguchi
  */
-public interface SCM {
+public interface SCM extends Describable<SCM> {
 
     /**
      * Calculate changelog for the given build and write it to the specified file.

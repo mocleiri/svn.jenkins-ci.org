@@ -8,5 +8,5 @@
     such as 'myproject/target/test-reports/*.xml'.
   ">
   <input class="setting-input" name="junitreport_includes"
-    type="text" value="${publisher.testResults}">
+    type="text" value="${instance.testResults}">
 </s:entry>

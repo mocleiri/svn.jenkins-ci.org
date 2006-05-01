@@ -9,5 +9,5 @@
    the base directory is the workspace.
   ">
   <input class="setting-input" name="artifacts"
-    type="text" value="${publisher.artifacts}">
+    type="text" value="${instance.artifacts}">
 </s:entry>

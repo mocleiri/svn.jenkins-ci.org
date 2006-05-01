@@ -3,6 +3,7 @@ package hudson.tasks;
 import hudson.model.Descriptor;
 import hudson.model.Job;
 import hudson.model.Run;
+import hudson.model.Describable;
 import hudson.scm.SCM;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ import java.util.GregorianCalendar;
  *
  * @author Kohsuke Kawaguchi
  */
-public class LogRotator {
+public class LogRotator implements Describable<LogRotator> {
 
     /**
      * If not -1, history is only kept up to this days.
@@ -79,7 +80,7 @@ public class LogRotator {
 
     public static final LRDescriptor DESCRIPTOR = new LRDescriptor();
 
-    public static final class LRDescriptor extends Descriptor {
+    public static final class LRDescriptor extends Descriptor<LogRotator> {
         private LRDescriptor() {
             super(LogRotator.class);
         }

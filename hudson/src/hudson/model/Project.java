@@ -2,6 +2,8 @@ package hudson.model;
 
 import hudson.FilePath;
 import hudson.Launcher;
+import hudson.triggers.Trigger;
+import hudson.triggers.TriggerDescriptor;
 import hudson.scm.NullSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMManager;
@@ -40,8 +42,11 @@ public class Project extends Job<Project,Build> {
 
     private SCM scm = new NullSCM();
 
-    // TODO
-    // private transient List<Trigger> triggers = new Vector<Trigger>();
+    /**
+     * List of all {@link Trigger}s for this project.
+     */
+    // remove transient once the code looks good.
+    private transient List<Trigger> triggers = new Vector<Trigger>();
 
     /**
      * List of {@link BuildStep}s.
@@ -131,6 +136,10 @@ public class Project extends Job<Project,Build> {
         super.onLoad(root, name);
         builds = new TreeMap<Integer,Build>(reverseComparator);
 
+        if(triggers==null)
+            // it doesn't exist in < 1.28
+            triggers = new Vector<Trigger>();
+
         // load builds
         File buildDir = getBuildDir();
         buildDir.mkdirs();
@@ -165,6 +174,14 @@ public class Project extends Job<Project,Build> {
 
     public void setScm(SCM scm) {
         this.scm = scm;
+    }
+
+    public synchronized Map<TriggerDescriptor,Trigger> getTriggers() {
+        Map<TriggerDescriptor,Trigger> m = new LinkedHashMap<TriggerDescriptor,Trigger>();
+        for (Trigger t : triggers) {
+            m.put(t.getDescriptor(),t);
+        }
+        return m;
     }
 
     public synchronized Map<BuildStepDescriptor,BuildStep> getBuilders() {

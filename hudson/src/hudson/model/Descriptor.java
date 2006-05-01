@@ -1,6 +1,7 @@
 package hudson.model;
 
 import hudson.XmlFile;
+import hudson.tasks.BuildStep;
 import org.kohsuke.stapler.Stapler;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,18 +11,51 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Metadata about a configurable instance.
+ *
+ * <p>
+ * When using stapler, it's convenient to have one object for each kind of
+ * configurable object, so that instance-agnostic information (such as
+ * the config HTML page) can be served from it.
+ *
+ * {@link Descriptor} represents such metadata, and one instance exists
+ * for each kind of configurable object.
+ *
+ * <p>
+ * {@link Descriptor} and {@link Describable} works like {@link Class} and
+ * {@link Object}.
+ *
  * @author Kohsuke Kawaguchi
+ * @see Describable
  */
-public abstract class Descriptor {
+public abstract class Descriptor<T extends Describable<T>> {
     private Map<String,Object> properties;
 
     /**
      * The class being described by this descriptor.
      */
-    protected final Class clazz;
+    protected final Class<? extends T> clazz;
 
-    protected Descriptor(Class clazz) {
+    protected Descriptor(Class<? extends T> clazz) {
         this.clazz = clazz;
+    }
+
+    /**
+     * Human readable name of this kind of configurable object.
+     */
+    public abstract String getDisplayName();
+
+    /**
+     * Creates a configured instance from the submitted form.
+     */
+    public abstract T newInstance(HttpServletRequest req);
+
+
+    /**
+     * Checks if the given object is created from this {@link Descriptor}.
+     */
+    public final boolean isInstance( T instance ) {
+        return clazz.isInstance(instance);
     }
 
     /**

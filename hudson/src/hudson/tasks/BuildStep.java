@@ -2,6 +2,7 @@ package hudson.tasks;
 
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Describable;
 import hudson.tasks.junit.JUnitResultArchiver;
 import hudson.Launcher;
 
@@ -10,7 +11,7 @@ import hudson.Launcher;
  *
  * @author Kohsuke Kawaguchi
  */
-public interface BuildStep {
+public interface BuildStep extends Describable<BuildStep> {
 
     /**
      * Runs before the build begins.

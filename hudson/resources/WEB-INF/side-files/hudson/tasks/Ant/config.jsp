@@ -5,7 +5,7 @@
   <select class="setting-input" name="ant_version">
     <option>(Default)</option>
     <c:forEach var="inst" items="${descriptor.installations}">
-      <option <c:if test="${inst.name==builder.ant.name}">selected</c:if>>${inst.name}</option>
+      <option <c:if test="${inst.name==instance.ant.name}">selected</c:if>>${inst.name}</option>
     </c:forEach>
   </select>
 </s:entry>
@@ -14,5 +14,5 @@
   such as '-Dprop=value'.
   ">
   <input class="setting-input" name="ant_targets"
-    type="text" value="${builder.targets}">
+    type="text" value="${instance.targets}">
 </s:entry>

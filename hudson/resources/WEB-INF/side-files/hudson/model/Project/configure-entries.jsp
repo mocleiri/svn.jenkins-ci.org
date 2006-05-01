@@ -52,6 +52,7 @@
   </s:advanced>
 </s:section>
 
+
 <%-- SCM config pane --%>
 <s:section title="Source Code Management">
   <c:set var="scms" value="<%= hudson.scm.SCMManager.getSupportedSCMs() %>" />
@@ -65,33 +66,22 @@
 </s:section>
 
 
-<%-- build config pane --%>
-<s:section title="Build">
-  <c:set var="builds" value="<%= hudson.tasks.BuildStep.BUILDERS %>" />
-  <c:forEach var="idx" begin="0" end="${f:length(builds)-1}">
-    <c:set var="bd" value="${builds[idx]}" />
-    <s:optionalBlock name="builder${idx}"
-      title="${bd.displayName}" checked="${it.builders[bd]!=null}">
+<%-- build triggers config pane --%>
+<s:descriptorList title="Build Triggers"
+                  descriptors="<%= hudson.triggers.Trigger.TRIGGERS %>"
+                  instances="${it.triggers}"
+                  varName="trigger" />
 
-      <c:set var="descriptor" value="${bd}" scope="request"  />
-      <c:set var="builder" value="${it.builders[bd]}" scope="request"  />
-      <jsp:include page="${bd.configPage}"/>
-    </s:optionalBlock>
-  </c:forEach>
-</s:section>
+
+<%-- build config pane --%>
+<s:descriptorList title="Build"
+                  descriptors="<%= hudson.tasks.BuildStep.BUILDERS %>"
+                  instances="${it.builders}"
+                  varName="builder" />
 
 
 <%-- publisher config pane --%>
-<s:section title="Post-build Actions">
-  <c:set var="publishers" value="<%= hudson.tasks.BuildStep.PUBLISHERS %>" />
-  <c:forEach var="idx" begin="0" end="${f:length(publishers)-1}">
-    <c:set var="pd" value="${publishers[idx]}" />
-    <s:optionalBlock name="publisher${idx}"
-                     title="${pd.displayName}"
-                     checked="${it.publishers[pd]!=null}"
-                     help="${pd.helpFile}">
-      <c:set var="publisher" value="${it.publishers[pd]}" scope="request"  />
-      <jsp:include page="${pd.configPage}"/>
-    </s:optionalBlock>
-  </c:forEach>
-</s:section>
+<s:descriptorList title="Post-build Actions"
+                  descriptors="<%= hudson.tasks.BuildStep.PUBLISHERS %>"
+                  instances="${it.publishers}"
+                  varName="publisher" />

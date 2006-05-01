@@ -9,11 +9,11 @@
    the base directory is the workspace.
   ">
   <input class="setting-input" name="fingerprint_targets"
-    type="text" value="${publisher.targets}">
+    type="text" value="${instance.targets}">
 </s:entry>
 <s:entry title="">
   <input name="fingerprint_artifacts"
     type="checkbox"
-    <c:if test="${publisher.recordBuildArtifacts}">checked</c:if>>
+    <c:if test="${instance.recordBuildArtifacts}">checked</c:if>>
   Also fingerprint all archived artifacts
 </s:entry>
