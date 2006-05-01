@@ -1,9 +1,9 @@
 package hudson.triggers;
 
 import hudson.model.Build;
-import hudson.model.Project;
 import hudson.model.Describable;
 import hudson.model.Descriptor;
+import hudson.model.Project;
 
 /**
  * Triggers a {@link Build}.

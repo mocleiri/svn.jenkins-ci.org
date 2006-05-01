@@ -1,16 +1,15 @@
 package hudson.tasks.junit;
 
 import hudson.model.Build;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.TreeMap;
-import java.util.Map;
-import java.util.Collection;
-import java.util.Collections;
-
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Cumulative test result for a package.

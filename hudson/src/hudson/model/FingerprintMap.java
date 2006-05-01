@@ -2,8 +2,8 @@ package hudson.model;
 
 import hudson.Util;
 
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;

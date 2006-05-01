@@ -1,7 +1,6 @@
 package hudson.scheduler;
 
 import java.util.Date;
-import java.util.Iterator;
 
 /**
  * @author Kohsuke Kawaguchi

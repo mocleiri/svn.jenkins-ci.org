@@ -1,10 +1,10 @@
 package hudson.scm;
 
+import hudson.FilePath;
+import hudson.Launcher;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
-import hudson.Launcher;
-import hudson.FilePath;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;

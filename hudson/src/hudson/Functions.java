@@ -1,10 +1,10 @@
 package hudson;
 
-import hudson.model.ModelObject;
-import hudson.model.Run;
-import hudson.model.Node;
-import hudson.model.Job;
 import hudson.model.Hudson;
+import hudson.model.Job;
+import hudson.model.ModelObject;
+import hudson.model.Node;
+import hudson.model.Run;
 import hudson.tasks.junit.CaseResult;
 import hudson.tasks.junit.TestObject;
 import org.kohsuke.stapler.Ancestor;

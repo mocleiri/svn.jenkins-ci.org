@@ -1,10 +1,10 @@
 package hudson.tasks;
 
+import hudson.Launcher;
 import hudson.model.Build;
 import hudson.model.BuildListener;
-import hudson.model.Project;
 import hudson.model.Descriptor;
-import hudson.Launcher;
+import hudson.model.Project;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
 

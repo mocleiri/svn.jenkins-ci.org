@@ -1,17 +1,17 @@
 package hudson.model;
 
-import hudson.Util;
+import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Proc;
-import hudson.FilePath;
+import hudson.Util;
 
 import java.io.File;
-import java.io.OutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Information about a Hudson slave node.

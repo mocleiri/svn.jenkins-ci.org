@@ -1,20 +1,20 @@
 package hudson.model;
 
-import hudson.util.OneShotEvent;
 import hudson.model.Node.Mode;
+import hudson.util.OneShotEvent;
 
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 /**
  * Build queue.

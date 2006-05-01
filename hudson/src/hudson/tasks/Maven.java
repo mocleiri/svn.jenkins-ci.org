@@ -4,8 +4,8 @@ import hudson.Launcher;
 import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
-import hudson.model.Project;
 import hudson.model.Descriptor;
+import hudson.model.Project;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;

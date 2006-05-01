@@ -1,7 +1,7 @@
 package hudson.triggers;
 
-import hudson.model.Project;
 import hudson.model.Descriptor;
+import hudson.model.Project;
 import hudson.scheduler.Scheduler;
 import hudson.scheduler.Task;
 

@@ -3,9 +3,9 @@ package hudson.model;
 import com.thoughtworks.xstream.XStream;
 import hudson.Util;
 import hudson.XmlFile;
-import hudson.util.TextFile;
-import hudson.util.IOException2;
 import hudson.tasks.LogRotator;
+import hudson.util.IOException2;
+import hudson.util.TextFile;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 

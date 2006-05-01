@@ -1,11 +1,11 @@
 package hudson.tasks;
 
+import hudson.Launcher;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Describable;
 import hudson.model.Descriptor;
 import hudson.tasks.junit.JUnitResultArchiver;
-import hudson.Launcher;
 
 /**
  * One step of the whole build process.

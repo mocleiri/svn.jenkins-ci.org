@@ -1,5 +1,6 @@
 package hudson.model;
 
+import hudson.Util;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -9,8 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
-import hudson.Util;
 
 /**
  * Represents a collection of {@link Job}s.

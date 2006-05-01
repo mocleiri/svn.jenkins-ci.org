@@ -1,9 +1,7 @@
 package hudson.scm;
 
-import hudson.EnvVars;
-import hudson.Proc;
-import hudson.Launcher;
 import hudson.FilePath;
+import hudson.Launcher;
 import hudson.model.BuildListener;
 
 import java.io.File;

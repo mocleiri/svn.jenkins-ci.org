@@ -1,14 +1,14 @@
 package hudson.scm;
 
-import hudson.Util;
-import hudson.Launcher;
 import hudson.FilePath;
+import hudson.Launcher;
+import hudson.Util;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Descriptor;
 import hudson.model.Result;
 import hudson.model.StreamBuildListener;
-import hudson.model.Descriptor;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.Expand;
 import org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;

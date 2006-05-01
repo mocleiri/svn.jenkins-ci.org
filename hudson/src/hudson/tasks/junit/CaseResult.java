@@ -1,7 +1,7 @@
 package hudson.tasks.junit;
 
-import org.dom4j.Element;
 import hudson.model.Build;
+import org.dom4j.Element;
 
 import java.util.Comparator;
 

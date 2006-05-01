@@ -1,7 +1,7 @@
 package hudson.tasks.junit;
 
-import hudson.model.ModelObject;
 import hudson.model.Build;
+import hudson.model.ModelObject;
 
 /**
  * Base class for all test result objects.

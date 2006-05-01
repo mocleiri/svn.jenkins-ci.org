@@ -1,7 +1,6 @@
 package hudson.model;
 
 import hudson.XmlFile;
-import hudson.tasks.BuildStep;
 import org.kohsuke.stapler.Stapler;
 
 import javax.servlet.http.HttpServletRequest;

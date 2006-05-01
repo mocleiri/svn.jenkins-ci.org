@@ -1,7 +1,7 @@
 package hudson.tasks.junit;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * {@link TabulatedResult} whose immediate children

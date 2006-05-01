@@ -3,8 +3,8 @@ package hudson.tasks;
 import hudson.Launcher;
 import hudson.model.Build;
 import hudson.model.BuildListener;
-import hudson.model.Result;
 import hudson.model.Descriptor;
+import hudson.model.Result;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;

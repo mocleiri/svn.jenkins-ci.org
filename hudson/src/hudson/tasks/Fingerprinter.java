@@ -4,11 +4,11 @@ import hudson.Launcher;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Descriptor;
 import hudson.model.Fingerprint;
 import hudson.model.Hudson;
 import hudson.model.Project;
 import hudson.model.Result;
-import hudson.model.Descriptor;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.types.FileSet;
 

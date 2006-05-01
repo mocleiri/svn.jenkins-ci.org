@@ -3,8 +3,8 @@ package hudson.util;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 /**

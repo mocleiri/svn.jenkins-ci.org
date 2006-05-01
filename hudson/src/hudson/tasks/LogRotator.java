@@ -1,9 +1,9 @@
 package hudson.tasks;
 
+import hudson.model.Describable;
 import hudson.model.Descriptor;
 import hudson.model.Job;
 import hudson.model.Run;
-import hudson.model.Describable;
 import hudson.scm.SCM;
 
 import javax.servlet.http.HttpServletRequest;

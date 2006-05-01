@@ -1,8 +1,5 @@
 package hudson.tasks.junit;
 
-import hudson.model.Build;
-import hudson.model.ModelObject;
-
 import java.util.Collection;
 
 /**

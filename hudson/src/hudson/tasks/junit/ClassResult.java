@@ -1,13 +1,12 @@
 package hudson.tasks.junit;
 
 import hudson.model.Build;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Cumulative test result of a test class.

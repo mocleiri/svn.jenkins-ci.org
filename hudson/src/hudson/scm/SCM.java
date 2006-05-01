@@ -1,11 +1,10 @@
 package hudson.scm;
 
+import hudson.FilePath;
+import hudson.Launcher;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Describable;
-import hudson.model.Descriptor;
-import hudson.Launcher;
-import hudson.FilePath;
 
 import java.io.File;
 import java.io.IOException;
