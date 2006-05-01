@@ -116,4 +116,8 @@ public abstract class Descriptor<T extends Describable<T>> {
     private XmlFile getConfigFile() {
         return new XmlFile(new File(Hudson.getInstance().getRootDir(),clazz.getName()+".xml"));
     }
+
+    public static <T> T[] toArray( T... values ) {
+        return values;
+    }
 }

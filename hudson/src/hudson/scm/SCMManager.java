@@ -8,6 +8,6 @@ import hudson.model.Descriptor;
  */
 public final class SCMManager {
     public static Descriptor<SCM>[] getSupportedSCMs() {
-        return new Descriptor[]{NullSCM.DESCRIPTOR,CVSSCM.DESCRIPTOR,SubversionSCM.DESCRIPTOR};
+        return Descriptor.toArray(NullSCM.DESCRIPTOR,CVSSCM.DESCRIPTOR,SubversionSCM.DESCRIPTOR);
     }
 }
