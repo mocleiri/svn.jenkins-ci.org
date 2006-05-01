@@ -5,6 +5,7 @@ import hudson.Launcher;
 import hudson.Proc;
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Descriptor;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -268,7 +269,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
 
 
 
-    public SCMDescriptor getDescriptor() {
+    public DescriptorImpl getDescriptor() {
         return DESCRIPTOR;
     }
 
@@ -297,10 +298,10 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
      */
     static final SAXParserFactory spf = SAXParserFactory.newInstance();
 
-    static final Descriptor DESCRIPTOR = new Descriptor();
+    static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
-    public static final class Descriptor extends SCMDescriptor {
-        Descriptor() {
+    public static final class DescriptorImpl extends Descriptor<SCM> {
+        DescriptorImpl() {
             super(SubversionSCM.class);
         }
 

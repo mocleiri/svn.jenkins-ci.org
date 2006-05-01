@@ -3,6 +3,7 @@ package hudson.scm;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Describable;
+import hudson.model.Descriptor;
 import hudson.Launcher;
 import hudson.FilePath;
 
@@ -45,7 +46,7 @@ public interface SCM extends Describable<SCM> {
     /**
      * Gets the descriptor for this instance.
      */
-    SCMDescriptor getDescriptor();
+    Descriptor<SCM> getDescriptor();
 
     /**
      * Adds environmental variables for the builds to the given map.

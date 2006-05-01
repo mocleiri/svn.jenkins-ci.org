@@ -6,7 +6,6 @@ import hudson.Util;
 import hudson.XmlFile;
 import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
-import hudson.scm.SCMDescriptor;
 import hudson.scm.SCMManager;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
@@ -567,7 +566,7 @@ public final class Hudson extends JobCollection implements Node {
         for( BuildStepDescriptor d : BuildStep.PUBLISHERS )
             result &= d.configure(req);
 
-        for( SCMDescriptor scmd : SCMManager.getSupportedSCMs() )
+        for( Descriptor<SCM> scmd : SCMManager.getSupportedSCMs() )
             result &= scmd.configure(req);
 
         save();

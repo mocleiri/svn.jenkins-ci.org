@@ -2,6 +2,7 @@ package hudson.scm;
 
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Descriptor;
 import hudson.Launcher;
 import hudson.FilePath;
 
@@ -24,7 +25,7 @@ public class NullSCM implements SCM {
         return true;
     }
 
-    public SCMDescriptor getDescriptor() {
+    public Descriptor<SCM> getDescriptor() {
         return DESCRIPTOR;
     }
 
@@ -36,7 +37,7 @@ public class NullSCM implements SCM {
         return workspace;
     }
 
-    static final SCMDescriptor DESCRIPTOR = new SCMDescriptor(NullSCM.class) {
+    static final Descriptor<SCM> DESCRIPTOR = new Descriptor<SCM>(NullSCM.class) {
         public String getDisplayName() {
             return "None";
         }

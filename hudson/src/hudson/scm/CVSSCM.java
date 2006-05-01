@@ -8,6 +8,7 @@ import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Result;
 import hudson.model.StreamBuildListener;
+import hudson.model.Descriptor;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.Expand;
 import org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
@@ -314,7 +315,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         }
     }
 
-    public SCMDescriptor getDescriptor() {
+    public DescriptorImpl getDescriptor() {
         return DESCRIPTOR;
     }
 
@@ -326,10 +327,10 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             env.put("CVS_PASSFILE",cvspass);
     }
 
-    static final Descriptor DESCRIPTOR = new Descriptor();
+    static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
-    public static final class Descriptor extends SCMDescriptor {
-        Descriptor() {
+    public static final class DescriptorImpl extends Descriptor<SCM> {
+        DescriptorImpl() {
             super(CVSSCM.class);
         }
 
