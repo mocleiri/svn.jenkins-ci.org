@@ -1,9 +1,19 @@
 <?xml version="1.0" ?>
 <project name="hudson" default="war">
-	
-	<target name="compile">
+
+  <target name="antlr">
+    <mkdir dir="build/src/hudson/scheduler" />
+    <antlr target="etc/grammar/crontab.g"
+      outputdirectory="build/src/hudson/scheduler">
+      <classpath>
+        <pathelement path="resources/WEB-INF/lib/antlr.jar" />
+      </classpath>
+    </antlr>
+  </target>
+
+  <target name="compile" depends="antlr">
 		<mkdir dir="build/classes"/>
-		<javac srcdir="src" destdir="build/classes" debug="on">
+		<javac srcdir="src:build/src" destdir="build/classes" debug="on">
 			<classpath>
 				<fileset dir="resources/WEB-INF/lib" includes="**/*.jar"/>
 				<fileset dir="lib" includes="**/*.jar"/>
