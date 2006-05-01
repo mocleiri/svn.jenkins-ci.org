@@ -50,6 +50,12 @@ public abstract class Descriptor<T extends Describable<T>> {
      */
     public abstract T newInstance(HttpServletRequest req);
 
+    /**
+     * Returns the resource path to the help screen HTML, if any.
+     */
+    public String getHelpFile() {
+        return "";
+    }
 
     /**
      * Checks if the given object is created from this {@link Descriptor}.

@@ -3,12 +3,10 @@ package hudson.model;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.triggers.Trigger;
-import hudson.triggers.TriggerDescriptor;
 import hudson.scm.NullSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMManager;
 import hudson.tasks.BuildStep;
-import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.junit.TestResultAction;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -176,28 +174,25 @@ public class Project extends Job<Project,Build> {
         this.scm = scm;
     }
 
-    public synchronized Map<TriggerDescriptor,Trigger> getTriggers() {
-        Map<TriggerDescriptor,Trigger> m = new LinkedHashMap<TriggerDescriptor,Trigger>();
-        for (Trigger t : triggers) {
-            m.put(t.getDescriptor(),t);
+    private <T extends Describable<T>>
+    Map<Descriptor<T>,T> buildDescriptorMap(List<T> describables) {
+        Map<Descriptor<T>,T> m = new LinkedHashMap<Descriptor<T>,T>();
+        for (T d : describables) {
+            m.put(d.getDescriptor(),d);
         }
         return m;
     }
 
-    public synchronized Map<BuildStepDescriptor,BuildStep> getBuilders() {
-        Map<BuildStepDescriptor,BuildStep> m = new LinkedHashMap<BuildStepDescriptor,BuildStep>();
-        for (BuildStep b : builders) {
-            m.put(b.getDescriptor(),b);
-        }
-        return m;
+    public synchronized Map<Descriptor<Trigger>,Trigger> getTriggers() {
+        return buildDescriptorMap(triggers);
     }
 
-    public synchronized Map<BuildStepDescriptor,BuildStep> getPublishers() {
-        Map<BuildStepDescriptor,BuildStep> m = new LinkedHashMap<BuildStepDescriptor,BuildStep>();
-        for (BuildStep b : publishers) {
-            m.put(b.getDescriptor(),b);
-        }
-        return m;
+    public synchronized Map<Descriptor<BuildStep>,BuildStep> getBuilders() {
+        return buildDescriptorMap(builders);
+    }
+
+    public synchronized Map<Descriptor<BuildStep>,BuildStep> getPublishers() {
+        return buildDescriptorMap(publishers);
     }
 
     public SortedMap<Integer, ? extends Build> _getRuns() {

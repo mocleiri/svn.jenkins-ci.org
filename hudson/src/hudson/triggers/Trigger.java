@@ -3,10 +3,7 @@ package hudson.triggers;
 import hudson.model.Build;
 import hudson.model.Project;
 import hudson.model.Describable;
-import hudson.tasks.BuildStepDescriptor;
-import hudson.tasks.Shell;
-import hudson.tasks.Ant;
-import hudson.tasks.Maven;
+import hudson.model.Descriptor;
 
 /**
  * Triggers a {@link Build}.
@@ -24,12 +21,10 @@ public interface Trigger extends Describable<Trigger> {
      */
     void stop();
 
-    TriggerDescriptor getDescriptor();
-
     /**
-     * List of all installed {@link TriggerDescriptor}s.
+     * List of all installed {@link Trigger}s.
      */
-    public static final TriggerDescriptor[] TRIGGERS = new TriggerDescriptor[] {
+    public static final Descriptor<Trigger>[] TRIGGERS = Descriptor.toArray(
         TimerTrigger.DESCRIPTOR
-    };
+    );
 }

@@ -6,6 +6,7 @@ import hudson.model.Hudson;
 import hudson.model.Job;
 import hudson.model.Project;
 import hudson.model.Result;
+import hudson.model.Descriptor;
 import hudson.Launcher;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,12 +58,12 @@ public class BuildTrigger implements BuildStep {
         return true;
     }
 
-    public BuildStepDescriptor getDescriptor() {
+    public Descriptor<BuildStep> getDescriptor() {
         return DESCRIPTOR;
     }
 
 
-    public static final BuildStepDescriptor DESCRIPTOR = new BuildStepDescriptor(BuildTrigger.class) {
+    public static final Descriptor<BuildStep> DESCRIPTOR = new Descriptor<BuildStep>(BuildTrigger.class) {
         public String getDisplayName() {
             return "Build other projects";
         }

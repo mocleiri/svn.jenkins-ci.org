@@ -1,12 +1,12 @@
 package hudson.tasks.junit;
 
+import hudson.Launcher;
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Descriptor;
 import hudson.model.Result;
 import hudson.tasks.AntBasedBuildStep;
 import hudson.tasks.BuildStep;
-import hudson.tasks.BuildStepDescriptor;
-import hudson.Launcher;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.FileSet;
 
@@ -59,17 +59,11 @@ public class JUnitResultArchiver extends AntBasedBuildStep {
     }
 
 
-    public BuildStepDescriptor getDescriptor() {
+    public Descriptor<BuildStep> getDescriptor() {
         return DESCRIPTOR;
     }
 
-    public static final Descriptor DESCRIPTOR = new Descriptor();
-
-    public static final class Descriptor extends BuildStepDescriptor {
-        public Descriptor() {
-            super(JUnitResultArchiver.class);
-        }
-
+    public static final Descriptor<BuildStep> DESCRIPTOR = new Descriptor<BuildStep>(JUnitResultArchiver.class) {
         public String getDisplayName() {
             return "Publish JUnit test result report";
         }
@@ -77,4 +71,5 @@ public class JUnitResultArchiver extends AntBasedBuildStep {
         public BuildStep newInstance(HttpServletRequest req) {
             return new JUnitResultArchiver(req.getParameter("junitreport_includes"));
         }
-    }}
+    };
+}

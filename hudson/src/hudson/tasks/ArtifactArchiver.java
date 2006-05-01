@@ -3,6 +3,7 @@ package hudson.tasks;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Project;
+import hudson.model.Descriptor;
 import hudson.Launcher;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.taskdefs.Delete;
@@ -65,12 +66,12 @@ public class ArtifactArchiver extends AntBasedBuildStep {
         return true;
     }
 
-    public BuildStepDescriptor getDescriptor() {
+    public Descriptor<BuildStep> getDescriptor() {
         return DESCRIPTOR;
     }
 
 
-    public static final BuildStepDescriptor DESCRIPTOR = new BuildStepDescriptor(ArtifactArchiver.class) {
+    public static final Descriptor<BuildStep> DESCRIPTOR = new Descriptor<BuildStep>(ArtifactArchiver.class) {
         public String getDisplayName() {
             return "Archive the artifacts";
         }

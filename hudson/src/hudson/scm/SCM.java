@@ -44,11 +44,6 @@ public interface SCM extends Describable<SCM> {
     boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener) throws IOException;
 
     /**
-     * Gets the descriptor for this instance.
-     */
-    Descriptor<SCM> getDescriptor();
-
-    /**
      * Adds environmental variables for the builds to the given map.
      */
     void buildEnvVars(Map env);

@@ -4,6 +4,7 @@ import hudson.Launcher;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Result;
+import hudson.model.Descriptor;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -168,7 +169,7 @@ public class Mailer implements BuildStep {
         return msg;
     }
 
-    public BuildStepDescriptor getDescriptor() {
+    public hudson.model.Descriptor<BuildStep> getDescriptor() {
         return DESCRIPTOR;
     }
 
@@ -177,11 +178,11 @@ public class Mailer implements BuildStep {
     }
 
 
-    public static final Descriptor DESCRIPTOR = new Descriptor();
+    public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
-    public static final class Descriptor extends BuildStepDescriptor {
+    public static final class DescriptorImpl extends Descriptor<BuildStep> {
 
-        public Descriptor() {
+        public DescriptorImpl() {
             super(Mailer.class);
         }
 

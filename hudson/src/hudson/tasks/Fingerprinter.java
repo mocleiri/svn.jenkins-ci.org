@@ -8,6 +8,7 @@ import hudson.model.Fingerprint;
 import hudson.model.Hudson;
 import hudson.model.Project;
 import hudson.model.Result;
+import hudson.model.Descriptor;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.types.FileSet;
 
@@ -136,12 +137,12 @@ public class Fingerprinter implements BuildStep {
         }
     }
 
-    public BuildStepDescriptor getDescriptor() {
+    public Descriptor<BuildStep> getDescriptor() {
         return DESCRIPTOR;
     }
 
 
-    public static final BuildStepDescriptor DESCRIPTOR = new BuildStepDescriptor(Fingerprinter.class) {
+    public static final Descriptor<BuildStep> DESCRIPTOR = new Descriptor<BuildStep>(Fingerprinter.class) {
         public String getDisplayName() {
             return "Record fingerprints of files to track usage";
         }

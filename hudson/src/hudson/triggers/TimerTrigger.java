@@ -1,6 +1,7 @@
 package hudson.triggers;
 
 import hudson.model.Project;
+import hudson.model.Descriptor;
 import hudson.scheduler.Scheduler;
 import hudson.scheduler.Task;
 
@@ -32,11 +33,11 @@ public class TimerTrigger implements Trigger, Runnable {
         project.scheduleBuild();
     }
 
-    public TriggerDescriptor getDescriptor() {
+    public Descriptor<Trigger> getDescriptor() {
         return DESCRIPTOR;
     }
 
-    public static final TriggerDescriptor DESCRIPTOR = new TriggerDescriptor(TimerTrigger.class) {
+    public static final Descriptor<Trigger> DESCRIPTOR = new Descriptor<Trigger>(TimerTrigger.class) {
         public String getDisplayName() {
             return "Build periodically";
         }

@@ -8,7 +8,6 @@ import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMManager;
 import hudson.tasks.BuildStep;
-import hudson.tasks.BuildStepDescriptor;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
@@ -560,10 +559,10 @@ public final class Hudson extends JobCollection implements Node {
 
         boolean result = true;
 
-        for( BuildStepDescriptor d : BuildStep.BUILDERS )
+        for( Descriptor<BuildStep> d : BuildStep.BUILDERS )
             result &= d.configure(req);
 
-        for( BuildStepDescriptor d : BuildStep.PUBLISHERS )
+        for( Descriptor<BuildStep> d : BuildStep.PUBLISHERS )
             result &= d.configure(req);
 
         for( Descriptor<SCM> scmd : SCMManager.getSupportedSCMs() )

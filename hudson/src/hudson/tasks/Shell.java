@@ -7,6 +7,7 @@ import hudson.model.Build;
 import hudson.model.BuildListener;
 import static hudson.model.Hudson.isWindows;
 import hudson.model.Project;
+import hudson.model.Descriptor;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileWriter;
@@ -88,14 +89,14 @@ public class Shell implements BuildStep {
         }
     }
 
-    public BuildStepDescriptor getDescriptor() {
+    public Descriptor<BuildStep> getDescriptor() {
         return DESCRIPTOR;
     }
 
-    public static final Descriptor DESCRIPTOR = new Descriptor();
+    public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
-    public static final class Descriptor extends BuildStepDescriptor {
-        private Descriptor() {
+    public static final class DescriptorImpl extends Descriptor<BuildStep> {
+        private DescriptorImpl() {
             super(Shell.class);
         }
 

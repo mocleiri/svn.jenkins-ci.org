@@ -3,6 +3,7 @@ package hudson.tasks;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Project;
+import hudson.model.Descriptor;
 import hudson.Launcher;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
@@ -62,12 +63,12 @@ public class JavadocArchiver extends AntBasedBuildStep {
         return true;
     }
 
-    public BuildStepDescriptor getDescriptor() {
+    public Descriptor<BuildStep> getDescriptor() {
         return DESCRIPTOR;
     }
 
 
-    public static final BuildStepDescriptor DESCRIPTOR = new BuildStepDescriptor(JavadocArchiver.class) {
+    public static final Descriptor<BuildStep> DESCRIPTOR = new Descriptor<BuildStep>(JavadocArchiver.class) {
         public String getDisplayName() {
             return "Publish javadoc";
         }

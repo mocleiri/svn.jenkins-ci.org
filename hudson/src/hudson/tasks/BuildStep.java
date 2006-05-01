@@ -3,6 +3,7 @@ package hudson.tasks;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Describable;
+import hudson.model.Descriptor;
 import hudson.tasks.junit.JUnitResultArchiver;
 import hudson.Launcher;
 
@@ -32,25 +33,20 @@ public interface BuildStep extends Describable<BuildStep> {
     boolean perform(Build build, Launcher launcher, BuildListener listener);
 
     /**
-     * Gets the descriptor for this instance.
+     * List of all installed {@link BuildStep}s.
      */
-    BuildStepDescriptor getDescriptor();
-
-    /**
-     * List of all installed {@link BuildStepDescriptor}s.
-     */
-    public static final BuildStepDescriptor[] BUILDERS = new BuildStepDescriptor[]{
+    public static final Descriptor<BuildStep>[] BUILDERS = Descriptor.toArray(
         Shell.DESCRIPTOR,
         Ant.DESCRIPTOR,
         Maven.DESCRIPTOR
-    };
+    );
 
-    public static final BuildStepDescriptor[] PUBLISHERS = new BuildStepDescriptor[]{
+    public static final Descriptor<BuildStep>[] PUBLISHERS = Descriptor.toArray(
         ArtifactArchiver.DESCRIPTOR,
         Fingerprinter.DESCRIPTOR,
         JavadocArchiver.DESCRIPTOR,
         JUnitResultArchiver.DESCRIPTOR,
         Mailer.DESCRIPTOR,
         BuildTrigger.DESCRIPTOR
-    };
+    );
 }
