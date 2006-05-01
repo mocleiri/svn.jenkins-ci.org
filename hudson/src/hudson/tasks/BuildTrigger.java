@@ -50,7 +50,7 @@ public class BuildTrigger implements BuildStep {
                     return false;
                 }
                 Project p = (Project) job;
-                hudson.getQueue().add(p);
+                p.scheduleBuild();
             }
         }
 
