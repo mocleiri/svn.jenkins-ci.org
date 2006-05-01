@@ -1,12 +1,9 @@
 package hudson.scheduler;
 
 import antlr.ANTLRException;
-import antlr.RecognitionException;
 
 import java.io.StringReader;
-import java.text.ParseException;
 import java.util.Calendar;
-import java.util.StringTokenizer;
 
 /**
  * Table for driving scheduled tasks.
@@ -26,46 +23,35 @@ public final class CronTab {
 
     int dayOfWeek;
 
-    /**
-     * Job to be executed when the time comes.
-     */
-    private final Runnable task;
+    public CronTab(String format) throws ANTLRException {
+        this(format,1);
+    }
 
-    public CronTab(Runnable task, String format) throws ParseException {
-        this.task = task;
+    public CronTab(String format, int line) throws ANTLRException {
+        CrontabLexer lexer = new CrontabLexer(new StringReader(format));
+        lexer.setLine(line);
+        CrontabParser parser = new CrontabParser(lexer);
 
-        CrontabParser parser = new CrontabParser(new CrontabLexer(new StringReader(format)));
-        try {
-            parser.startRule(this);
-        } catch (RecognitionException e) {
-            ParseException pe = new ParseException(e.getMessage(), e.getColumn());
-            pe.initCause(e);
-            throw pe;
-        } catch (ANTLRException e) {
-            ParseException pe = new ParseException(e.getMessage(), -1);
-            pe.initCause(e);
-            throw pe;
-        }
+        parser.startRule(this);
     }
 
 
     /**
-     * Checks for the run and run it.
+     * Returns true if the given calendar matches
      */
-    public void check(Calendar cal) {
+    boolean check(Calendar cal) {
         if(!checkBits(bits[0],cal.get(Calendar.MINUTE)))
-            return;
+            return false;
         if(!checkBits(bits[1],cal.get(Calendar.HOUR)))
-            return;
+            return false;
         if(!checkBits(bits[2],cal.get(Calendar.DAY_OF_MONTH)))
-            return;
+            return false;
         if(!checkBits(bits[3],cal.get(Calendar.MONTH)+1))
-            return;
+            return false;
         if(!checkBits(dayOfWeek,cal.get(Calendar.DAY_OF_WEEK)-1))
-            return;
+            return false;
 
-        // execute
-        task.run();
+        return true;
     }
 
     /**

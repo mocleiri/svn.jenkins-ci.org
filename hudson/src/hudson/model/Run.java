@@ -36,7 +36,7 @@ import java.util.SimpleTimeZone;
  * @author Kohsuke Kawaguchi
  */
 public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
-        extends DirectoryHolder implements ModelObject {
+        extends DirectoryHolder {
 
     protected transient final JobT project;
 

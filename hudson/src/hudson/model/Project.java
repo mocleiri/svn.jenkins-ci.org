@@ -2,6 +2,7 @@ package hudson.model;
 
 import hudson.FilePath;
 import hudson.Launcher;
+import hudson.model.Descriptor.InstantiationException;
 import hudson.scm.NullSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMManager;
@@ -318,49 +319,54 @@ public class Project extends Job<Project,Build> {
      * Accepts submission from the configuration page.
      */
     public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException {
-        if(!Hudson.adminCheck(req,rsp))
-            return;
+        try {
+            if(!Hudson.adminCheck(req,rsp))
+                return;
 
-        int scmidx = Integer.parseInt(req.getParameter("scm"));
-        scm = SCMManager.getSupportedSCMs()[scmidx].newInstance(req);
+            int scmidx = Integer.parseInt(req.getParameter("scm"));
+            scm = SCMManager.getSupportedSCMs()[scmidx].newInstance(req);
 
-        jdk = req.getParameter("jdk");
-        if(req.getParameter("hasCustomQuietPeriod")!=null) {
-            quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
-        } else {
-            quietPeriod = null;
-        }
+            jdk = req.getParameter("jdk");
+            if(req.getParameter("hasCustomQuietPeriod")!=null) {
+                quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
+            } else {
+                quietPeriod = null;
+            }
 
-        if(req.getParameter("hasSlaveAffinity")!=null) {
-            canRoam = false;
-            assignedNode = req.getParameter("slave");
-            if(assignedNode !=null) {
-                if(Hudson.getInstance().getSlave(assignedNode)==null) {
-                    assignedNode = null;   // no such slave
+            if(req.getParameter("hasSlaveAffinity")!=null) {
+                canRoam = false;
+                assignedNode = req.getParameter("slave");
+                if(assignedNode !=null) {
+                    if(Hudson.getInstance().getSlave(assignedNode)==null) {
+                        assignedNode = null;   // no such slave
+                    }
                 }
+            } else {
+                canRoam = true;
+                assignedNode = null;
             }
-        } else {
-            canRoam = true;
-            assignedNode = null;
-        }
 
-        builders.clear();
-        for( int i=0; i<BuildStep.BUILDERS.length; i++ ) {
-            if(req.getParameter("builder"+i)!=null) {
-                BuildStep b = BuildStep.BUILDERS[i].newInstance(req);
-                builders.add(b);
+            buildDescribable(req, BuildStep.BUILDERS, builders, "builder");
+            buildDescribable(req, BuildStep.PUBLISHERS, publishers, "publisher");
+            buildDescribable(req, Trigger.TRIGGERS, triggers, "trigger");
+
+            super.doConfigSubmit(req,rsp);
+        } catch (InstantiationException e) {
+            // TODO
+            rsp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private <T extends Describable<T>> void buildDescribable(StaplerRequest req, Descriptor<T>[] descriptors, List<T> result, String prefix)
+        throws InstantiationException {
+
+        result.clear();
+        for( int i=0; i< descriptors.length; i++ ) {
+            if(req.getParameter(prefix +i)!=null) {
+                T instance = descriptors[i].newInstance(req);
+                result.add(instance);
             }
         }
-
-        publishers.clear();
-        for( int i=0; i<BuildStep.PUBLISHERS.length; i++ ) {
-            if(req.getParameter("publisher"+i)!=null) {
-                BuildStep b = BuildStep.PUBLISHERS[i].newInstance(req);
-                publishers.add(b);
-            }
-        }
-
-        super.doConfigSubmit(req,rsp);
     }
 
     /**

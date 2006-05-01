@@ -13,6 +13,9 @@ import hudson.model.Project;
 public interface Trigger extends Describable<Trigger> {
     /**
      * Called when a {@link Trigger} is loaded into memory and started.
+     *
+     * @param project
+     *      given so that the persisted form of this object won't have to have a back pointer.
      */
     void start(Project project);
 

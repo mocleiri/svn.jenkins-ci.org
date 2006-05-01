@@ -46,8 +46,11 @@ public abstract class Descriptor<T extends Describable<T>> {
 
     /**
      * Creates a configured instance from the submitted form.
+     *
+     * @throws InstantiationException
+     *      Signals a problem in the submitted form.
      */
-    public abstract T newInstance(HttpServletRequest req);
+    public abstract T newInstance(HttpServletRequest req) throws InstantiationException;
 
     /**
      * Returns the resource path to the help screen HTML, if any.
@@ -122,7 +125,34 @@ public abstract class Descriptor<T extends Describable<T>> {
         return new XmlFile(new File(Hudson.getInstance().getRootDir(),clazz.getName()+".xml"));
     }
 
+    // to work around warning when creating a generic array type
     public static <T> T[] toArray( T... values ) {
         return values;
+    }
+
+    public static final class InstantiationException extends Exception {
+        private final String formField;
+
+        public InstantiationException(String message, String formField) {
+            super(message);
+            this.formField = formField;
+        }
+
+        public InstantiationException(String message, Throwable cause, String formField) {
+            super(message, cause);
+            this.formField = formField;
+        }
+
+        public InstantiationException(Throwable cause, String formField) {
+            super(cause);
+            this.formField = formField;
+        }
+
+        /**
+         * Which form field contained an error?
+         */
+        public String getFormField() {
+            return formField;
+        }
     }
 }

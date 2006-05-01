@@ -1,18 +1,14 @@
 package hudson.scheduler;
 
-import java.text.ParseException;
+import antlr.ANTLRException;
 
 /**
  * @author Kohsuke Kawaguchi
  */
 public class CrontabTest {
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ANTLRException {
         for (String arg : args) {
-            CronTab ct = new CronTab(new Runnable() {
-                public void run() {
-
-                }
-            }, arg);
+            CronTab ct = new CronTab(arg);
             System.out.println(ct.toString());
         }
     }
