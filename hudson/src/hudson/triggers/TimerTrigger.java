@@ -99,7 +99,7 @@ public class TimerTrigger implements Trigger {
         private final Calendar cal = new GregorianCalendar();
 
         public void run() {
-            LOGGER.fine("cron checking "+cal.getTime().toGMTString());
+            LOGGER.fine("cron checking "+cal.getTime().toLocaleString());
 
             try {
                 Hudson inst = Hudson.getInstance();
