@@ -11,7 +11,7 @@
 
 <s:section title="${title}">
   <c:forEach var="d" items="${descriptors}"  varStatus="loop">
-    <s:optionalBlock name="${varName}${loop.index}"
+    <s:optionalBlock name="${varName}${loop.index}" help="${d.helpFile}"
       title="${d.displayName}" checked="${instances[d]!=null}">
 
       <c:set var="descriptor" value="${d}" scope="request"  />

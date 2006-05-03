@@ -11,7 +11,7 @@ import java.util.Vector;
  *
  * @author Kohsuke Kawaguchi
  */
-public abstract class Actionable implements ModelObject {
+public abstract class Actionable extends AbstractModelObject {
     /**
      * Actions contributed to this run.
      */

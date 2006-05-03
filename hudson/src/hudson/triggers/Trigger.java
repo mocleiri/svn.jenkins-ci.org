@@ -21,6 +21,8 @@ public interface Trigger extends Describable<Trigger> {
 
     /**
      * Called before a {@link Trigger} is removed.
+     * Under some circumstances, this may be invoked more than once for
+     * a given {@link Trigger}, so be prepared for that.
      */
     void stop();
 

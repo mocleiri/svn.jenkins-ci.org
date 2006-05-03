@@ -14,6 +14,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * {@link Trigger} that runs a job periodically.
@@ -21,14 +23,18 @@ import java.util.TimerTask;
  * @author Kohsuke Kawaguchi
  */
 public class TimerTrigger implements Trigger {
-    private final String cronTabSpec;
+    private final String spec;
     private transient CronTabList tabs;
 
     private transient Project project;
 
     public TimerTrigger(String cronTabSpec) throws ANTLRException {
-        this.cronTabSpec = cronTabSpec;
+        this.spec = cronTabSpec;
         this.tabs = CronTabList.create(cronTabSpec);
+    }
+
+    public String getSpec() {
+        return spec;
     }
 
     public void start(Project project) {
@@ -39,9 +45,12 @@ public class TimerTrigger implements Trigger {
         // timer triggered as long as this object is reachable from Project
     }
 
-    private void check(Calendar cal) {
-        if(tabs.check(cal))
+    private boolean check(Calendar cal) {
+        if(tabs.check(cal)) {
             project.scheduleBuild();
+            return true;
+        } else
+            return false;
     }
 
     public Descriptor<Trigger> getDescriptor() {
@@ -50,7 +59,7 @@ public class TimerTrigger implements Trigger {
 
     private Object readResolve() throws ObjectStreamException {
         try {
-            tabs = CronTabList.create(cronTabSpec);
+            tabs = CronTabList.create(spec);
         } catch (ANTLRException e) {
             InvalidObjectException x = new InvalidObjectException(e.getMessage());
             x.initCause(e);
@@ -62,6 +71,10 @@ public class TimerTrigger implements Trigger {
     public static final Descriptor<Trigger> DESCRIPTOR = new Descriptor<Trigger>(TimerTrigger.class) {
         public String getDisplayName() {
             return "Build periodically";
+        }
+
+        public String getHelpFile() {
+            return "/help/project-config/timer.html";
         }
 
         public Trigger newInstance(HttpServletRequest req) throws InstantiationException {
@@ -76,7 +89,7 @@ public class TimerTrigger implements Trigger {
 
     public static final Timer timer = new Timer();
     static {
-        timer.scheduleAtFixedRate(new Cron(),0,100*60/*every minute*/);
+        timer.scheduleAtFixedRate(new Cron(),0,1000*60/*every minute*/);
     }
 
     /**
@@ -87,17 +100,28 @@ public class TimerTrigger implements Trigger {
 
         public void run() {
             cal.add(Calendar.MINUTE,1);
+            LOGGER.fine("cron checking "+cal.getTime().toGMTString());
 
-            Hudson inst = Hudson.getInstance();
-            for (Job job : inst.getJobs()) {
-                if (job instanceof Project) {
-                    Project p = (Project) job;
-                    Trigger trigger = p.getTriggers().get(DESCRIPTOR);
-                    if(trigger!=null) {
-                        ((TimerTrigger)trigger).check(cal);
+            try {
+                Hudson inst = Hudson.getInstance();
+                for (Job job : inst.getJobs()) {
+                    if (job instanceof Project) {
+                        Project p = (Project) job;
+                        Trigger trigger = p.getTriggers().get(DESCRIPTOR);
+                        if(trigger!=null) {
+                            LOGGER.fine("cron checking "+p.getName());
+                            if(((TimerTrigger)trigger).check(cal))
+                                LOGGER.fine("cron triggered "+p.getName());
+                        }
                     }
                 }
+            } catch (RuntimeException e) {
+                LOGGER.log(Level.WARNING,"Cron thread throw an exception",e);
+                // bug in the code. Don't let the thread die.
+                e.printStackTrace();
             }
         }
     }
+
+    private static final Logger LOGGER = Logger.getLogger(TimerTrigger.class.getName());
 }

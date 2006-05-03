@@ -33,6 +33,8 @@ public final class CronTab {
         CrontabParser parser = new CrontabParser(lexer);
 
         parser.startRule(this);
+        if((dayOfWeek&(1<<7))!=0)
+            dayOfWeek |= 1; // copy bit 7 over to bit 0
     }
 
 
@@ -58,7 +60,7 @@ public final class CronTab {
      * Returns true if n-th bit is on.
      */
     private boolean checkBits(long bitMask, int n) {
-        return (bitMask|(1<<n))!=bitMask;
+        return (bitMask|(1L<<n))==bitMask;
     }
 
     public String toString() {

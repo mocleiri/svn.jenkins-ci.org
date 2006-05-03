@@ -44,8 +44,7 @@ public class Project extends Job<Project,Build> {
     /**
      * List of all {@link Trigger}s for this project.
      */
-    // remove transient once the code looks good.
-    private transient List<Trigger> triggers = new Vector<Trigger>();
+    private List<Trigger> triggers = new Vector<Trigger>();
 
     /**
      * List of {@link BuildStep}s.
@@ -161,6 +160,9 @@ public class Project extends Job<Project,Build> {
                 }
             }
         }
+
+        for (Trigger t : triggers)
+            t.start(this);
     }
 
     public boolean isBuildable() {
@@ -318,7 +320,7 @@ public class Project extends Job<Project,Build> {
     /**
      * Accepts submission from the configuration page.
      */
-    public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+    public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         try {
             if(!Hudson.adminCheck(req,rsp))
                 return;
@@ -348,12 +350,16 @@ public class Project extends Job<Project,Build> {
 
             buildDescribable(req, BuildStep.BUILDERS, builders, "builder");
             buildDescribable(req, BuildStep.PUBLISHERS, publishers, "publisher");
+
+            for (Trigger t : triggers)
+                t.stop();
             buildDescribable(req, Trigger.TRIGGERS, triggers, "trigger");
+            for (Trigger t : triggers)
+                t.start(this);
 
             super.doConfigSubmit(req,rsp);
         } catch (InstantiationException e) {
-            // TODO
-            rsp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            sendError(e,req,rsp);
         }
     }
 

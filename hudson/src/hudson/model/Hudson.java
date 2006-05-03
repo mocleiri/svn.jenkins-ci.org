@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.XStream;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.XmlFile;
+import hudson.triggers.TimerTrigger;
 import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMManager;
@@ -497,6 +498,7 @@ public final class Hudson extends JobCollection implements Node {
                 c.interrupt();
         }
         ExternalJob.reloadThread.interrupt();
+        TimerTrigger.timer.cancel();
     }
 
 

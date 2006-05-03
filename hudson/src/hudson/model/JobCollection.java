@@ -13,7 +13,7 @@ import java.util.Comparator;
  *
  * @author Kohsuke Kawaguchi
  */
-public abstract class JobCollection implements ModelObject {
+public abstract class JobCollection extends AbstractModelObject {
 
     /**
      * Gets all the jobs in this collection.
@@ -49,18 +49,6 @@ public abstract class JobCollection implements ModelObject {
     }
     public synchronized void doRssFailed( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         RSS.doRssFailed(this, getJobs(), req, rsp );
-    }
-
-    /**
-     * Displays the error in a page.
-     */
-    protected final void sendError(Exception e, StaplerRequest req, StaplerResponse rsp) throws ServletException, IOException {
-        sendError(e.getMessage(),req,rsp);
-    }
-
-    protected final void sendError(String message, StaplerRequest req, StaplerResponse rsp) throws ServletException, IOException {
-        req.setAttribute("message",message);
-        rsp.forward(this,"error",req);
     }
 
     public static final Comparator<JobCollection> SORTER = new Comparator<JobCollection>() {
