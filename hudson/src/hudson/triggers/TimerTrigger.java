@@ -25,7 +25,6 @@ import java.util.logging.Logger;
 public class TimerTrigger implements Trigger {
     private final String spec;
     private transient CronTabList tabs;
-
     private transient Project project;
 
     public TimerTrigger(String cronTabSpec) throws ANTLRException {
@@ -87,7 +86,7 @@ public class TimerTrigger implements Trigger {
     };
 
 
-    public static final Timer timer = new Timer();
+    public static final Timer timer = new Timer("Hudson cron thread");
     static {
         timer.scheduleAtFixedRate(new Cron(),0,1000*60/*every minute*/);
     }
