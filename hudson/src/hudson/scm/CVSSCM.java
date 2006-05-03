@@ -361,9 +361,47 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             save();
         }
 
+        /**
+         * Gets the URL that shows the diff.
+         */
+        public String getDiffURL(String cvsRoot, String pathName, String oldRev, String newRev) {
+            String url = getProperties().get("repository-browser.diff." + cvsRoot).toString();
+            if(url==null)   return null;
+            return url.replaceAll("%%P",pathName).replace("%%r",oldRev).replace("%%R",newRev);
+
+        }
+
         public boolean configure( HttpServletRequest req ) {
             setCvspassFile(req.getParameter("cvs_cvspass"));
+
+            Map<String,Object> properties = getProperties();
+
+            int i=0;
+            while(true) {
+                String root = req.getParameter("cvs_repobrowser_cvsroot" + i);
+                if(root==null)  break;
+
+                setBrowser(req.getParameter("cvs_repobrowser"+i), properties, root, "repository-browser.");
+                setBrowser(req.getParameter("cvs_repobrowser_diff"+i), properties, root, "repository-browser.diff.");
+                i++;
+            }
+
+            save();
+
             return true;
+        }
+
+        private void setBrowser(String key, Map<String, Object> properties, String root, String prefi) {
+            String value = Util.nullify(key);
+            if(value==null) {
+                properties.remove(prefi +root);
+            } else {
+                properties.put(prefi +root,value);
+            }
+        }
+
+        public Map<String,Object> getProperties() {
+            return super.getProperties();
         }
     }
 
