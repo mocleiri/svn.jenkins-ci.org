@@ -14,8 +14,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * {@link Trigger} that runs a job periodically.
@@ -99,7 +99,6 @@ public class TimerTrigger implements Trigger {
         private final Calendar cal = new GregorianCalendar();
 
         public void run() {
-            cal.add(Calendar.MINUTE,1);
             LOGGER.fine("cron checking "+cal.getTime().toGMTString());
 
             try {
@@ -120,6 +119,8 @@ public class TimerTrigger implements Trigger {
                 // bug in the code. Don't let the thread die.
                 e.printStackTrace();
             }
+
+            cal.add(Calendar.MINUTE,1);
         }
     }
 
