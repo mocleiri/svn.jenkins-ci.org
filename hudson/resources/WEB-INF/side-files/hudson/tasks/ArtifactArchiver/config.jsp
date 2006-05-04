@@ -1,6 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
-
 <s:entry title="Files to archive"
   description="
    Can use wildcards like 'module/dist/**/*.zip'.

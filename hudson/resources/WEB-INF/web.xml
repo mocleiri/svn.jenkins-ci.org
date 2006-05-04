@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/j2ee" version="2.4">
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
   <display-name>Hudson</display-name>
   <description>Build management system</description>
 
@@ -14,9 +17,9 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>dwr-invoker</servlet-name>
-    <display-name>DWR Servlet</display-name>
     <description>Direct Web Remoter Servlet</description>
+    <display-name>DWR Servlet</display-name>
+    <servlet-name>dwr-invoker</servlet-name>
     <servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
     <init-param>
        <param-name>debug</param-name>
@@ -61,7 +64,16 @@
   <!-- if specified, this value is used as the Hudson home directory -->
   <env-entry>
     <env-entry-name>HUDSON_HOME</env-entry-name>
-    <env-entry-value></env-entry-value>
     <env-entry-type>java.lang.String</env-entry-type>
+    <env-entry-value></env-entry-value>
   </env-entry>
+
+  <jsp-config>
+    <jsp-property-group>
+      <description>Property group for common configuration for all the JSP's</description>
+      <url-pattern>*.jsp</url-pattern>
+      <page-encoding>UTF-8</page-encoding>
+      <include-prelude>/WEB-INF/header.jspf</include-prelude>
+    </jsp-property-group>
+  </jsp-config>
 </web-app>

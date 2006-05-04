@@ -1,6 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
-
 <s:section title="Maven">
   <s:entry title="Maven installation"
     description="List of Maven installations on this system. Both maven 1 and 2 are supported.">

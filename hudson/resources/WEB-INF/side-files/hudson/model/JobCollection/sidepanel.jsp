@@ -1,11 +1,6 @@
 <%--
   Side panel for the build view.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
-<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
-
 <l:header title="Hudson">
   <link rel="alternate" title="Hudson:${it.viewName} (all builds)" href="rssAll" type="application/rss+xml" />
   <link rel="alternate" title="Hudson:${it.viewName} (failed builds)" href="rssFailed" type="application/rss+xml" />

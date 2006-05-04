@@ -1,7 +1,6 @@
 <%--
   Displays the toggle button to keep/unkeep the log file.
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:if test="${it.parent.logRotator!=null}">
   <div style="float:right">
     <form method="get" action="toggleLogKeep">

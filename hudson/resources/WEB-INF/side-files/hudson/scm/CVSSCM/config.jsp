@@ -1,6 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
-
 <s:entry title="CVSROOT">
   <s:editableComboBox id="cvs_root" clazz="setting-input" name="cvs_root" value="${scm.cvsRoot}">
     <c:forEach var="cr" items="${app.allCvsRoots}">

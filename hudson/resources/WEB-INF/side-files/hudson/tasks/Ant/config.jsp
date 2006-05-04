@@ -1,6 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
-
 <s:entry title="Ant Version">
   <select class="setting-input" name="ant_version">
     <option>(Default)</option>

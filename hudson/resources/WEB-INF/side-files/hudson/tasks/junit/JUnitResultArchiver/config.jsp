@@ -1,6 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
-
 <s:entry title="Test report XMLs"
   description="
     <a href='http://ant.apache.org/manual/CoreTypes/fileset.html'>Fileset 'includes'</a>

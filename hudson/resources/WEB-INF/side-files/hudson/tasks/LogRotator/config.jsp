@@ -1,6 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
-
 <s:entry title="Days to keep records"
   description="if not empty, log/artifacts etc are only kept up to this number of days">
   <input class="setting-input" name="logrotate_days"

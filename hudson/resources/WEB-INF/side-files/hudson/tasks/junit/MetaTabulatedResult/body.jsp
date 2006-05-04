@@ -1,6 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="h" uri="http://hudson.dev.java.net/" %>
-
 <c:if test="${it.failCount!=0}">
   <h2>All Failed Tests</h2>
   <table class="pane sortable">
