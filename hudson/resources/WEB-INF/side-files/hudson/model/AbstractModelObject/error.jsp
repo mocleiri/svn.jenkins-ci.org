@@ -2,8 +2,8 @@
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="sidepanel.jsp" />
-
+<l:header title="Hudson" />
+<l:side-panel />
 <l:main-panel>
   <h1>Error</h1>
   <p><c:out value="${message}" /></p>
