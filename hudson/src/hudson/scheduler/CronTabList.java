@@ -34,7 +34,11 @@ public final class CronTabList {
             line = line.trim();
             if(line.length()==0 || line.startsWith("#"))
                 continue;   // ignorable line
-            r.add(new CronTab(line,lineNumber));
+            try {
+                r.add(new CronTab(line,lineNumber));
+            } catch (ANTLRException e) {
+                throw new ANTLRException("Invalid input: \""+line+"\": "+e.toString(),e);
+            }
         }
         return new CronTabList(r);
     }
