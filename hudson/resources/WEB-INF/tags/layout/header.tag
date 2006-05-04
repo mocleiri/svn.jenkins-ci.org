@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="rq" uri="http://jakarta.apache.org/taglibs/request-1.0" %>
 <%@ taglib prefix="h" uri="http://hudson.dev.java.net/" %>
 <%@attribute name="title" required="true" %>
