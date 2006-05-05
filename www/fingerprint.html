@@ -33,7 +33,7 @@
 
 <h3>How does it work?</h3>
 <p>
-	Fingerprint of a file is simply a MD5 checksum of a file. Hudson maintains a database of md5sum, and for each md5sum, Hudson records which builds of which projects used. This database is updated every time a builds runs and files are fingerprinted.
+	The fingerprint of a file is simply a MD5 checksum. Hudson maintains a database of md5sum, and for each md5sum, Hudson records which builds of which projects used. This database is updated every time a build runs and files are fingerprinted.
 <p>
 	To avoid the excessive disk usage, Hudson does not store the actual file. Instead, it just stores md5sum and their usages. These files can be seen in <tt>$HUDSON_HOME/fingerprints</tt>.
 
@@ -55,7 +55,10 @@
 		<dt>
 			You develop the TOP project and you want to know which build of <tt>bottom.jar</tt> and <tt>middle.jar</tt> you are using in TOP #10.
 		<dd>
-			TODO
+		<ol>
+			<li>Go to TOP #10 build page.
+			<li>Click "see fingerprints"
+			<li>You'll see all the files fingerprinted in TOP #10, along with where they came from.
 		
 		<dt>
 			You have the TOP project that builds a jar. You also have the TOP-TEST project that runs after the TOP project and does extensive integration tests on the latest TOP bits. You want to know the test results of TOP #7.
