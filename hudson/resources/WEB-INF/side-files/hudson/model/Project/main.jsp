@@ -2,14 +2,29 @@
 <c:if test="${tr.previousResult!=null}">
   <%-- at least two data points are requierd for a trend report --%>
   <div style="float:right;">
+    <c:set var="mode" value="${cookie.TestResultAction_failureOnly.value}" />
+    <c:if test="${mode!=null}">
+      <c:set var="trendQueryString1" value="?failureOnly=${mode}" />
+      <c:set var="trendQueryString2" value="&failureOnly=${mode}" />
+    </c:if>
     <div class="test-trend-caption">
       Test Result Trend
     </div>
     <div>
-      <a href="testResultTrend?width=800&height=600"><img src="testResultTrend"></a>
+      <a href="testResultTrend?width=800&height=600${trendQueryString2}"><img src="testResultTrend${trendQueryString1}"></a>
     </div>
     <div style="text-align:right">
-      <a href="testResultTrend?width=800&height=600">enlarge</a>
+      <a href="flipTestResultTrend">
+        <c:choose>
+          <c:when test="${mode}">
+            (show test # and failure #)
+          </c:when>
+          <c:otherwise>
+            (just show failures)
+          </c:otherwise>
+        </c:choose>
+      </a> &nbsp;
+      <a href="testResultTrend?width=800&height=600${trendQueryString2}">enlarge</a>
     </div>
   </div>
 </c:if>

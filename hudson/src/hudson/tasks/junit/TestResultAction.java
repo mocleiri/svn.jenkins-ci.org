@@ -24,9 +24,11 @@ import org.jfree.ui.RectangleInsets;
 import org.kohsuke.stapler.StaplerProxy;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.Ancestor;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -34,6 +36,7 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.List;
 
 /**
  * {@link Action} that displays the JUnit test result.
@@ -191,7 +194,7 @@ public class TestResultAction implements Action, StaplerProxy {
             }
         }
 
-        boolean failureOnly = req.getParameter("failureOnly")!=null;
+        boolean failureOnly = Boolean.parseBoolean(req.getParameter("failureOnly"));
 
         DataSetBuilder<String,BuildLabel> dsb = new DataSetBuilder<String,BuildLabel>();
 

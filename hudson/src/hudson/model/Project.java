@@ -11,9 +11,11 @@ import hudson.tasks.junit.TestResultAction;
 import hudson.triggers.Trigger;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.Ancestor;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -407,8 +409,40 @@ public class Project extends Job<Project,Build> {
     }
 
     /**
+     * Changes the test result report display mode.
+     */
+    public void doFlipTestResultTrend( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        boolean failureOnly = false;
+
+        // check the current preference value
+        Cookie[] cookies = req.getCookies();
+        if(cookies!=null) {
+            for (Cookie cookie : cookies) {
+                if(cookie.getName().equals(FAILURE_ONLY_COOKIE))
+                    failureOnly = Boolean.parseBoolean(cookie.getValue());
+            }
+        }
+
+        // flip!
+        failureOnly = !failureOnly;
+
+        // set the updated value
+        Cookie cookie = new Cookie(FAILURE_ONLY_COOKIE,String.valueOf(failureOnly));
+        List anc = req.getAncestors();
+        Ancestor a = (Ancestor) anc.get(anc.size()-1); // last
+        cookie.setPath(a.getUrl()); // just for this chart
+        cookie.setMaxAge(Integer.MAX_VALUE);
+        rsp.addCookie(cookie);
+
+        // back to the project page
+        rsp.sendRedirect(".");
+    }
+
+    /**
      * @deprecated
      *      left for legacy config file compatibility
      */
     private transient String slave;
+
+    private static final String FAILURE_ONLY_COOKIE = "TestResultAction_failureOnly";
 }
