@@ -23,7 +23,7 @@
             <tr><td>
               <t:progressBar pos="${pos}"/>
             </td><td style="padding:0">
-              <a href="${link}/executor/stop"><img src="${rootURL}/images/16x16/stop.gif" alt="[cancel]"></a>
+              <a href="${link}executor/stop"><img src="${rootURL}/images/16x16/stop.gif" alt="[cancel]"></a>
             </td></tr>
           </table>
         </td></tr>
