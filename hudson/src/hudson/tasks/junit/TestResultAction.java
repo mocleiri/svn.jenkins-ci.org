@@ -191,11 +191,14 @@ public class TestResultAction implements Action, StaplerProxy {
             }
         }
 
+        boolean failureOnly = req.getParameter("failureOnly")!=null;
+
         DataSetBuilder<String,BuildLabel> dsb = new DataSetBuilder<String,BuildLabel>();
 
         for( TestResultAction a=this; a!=null; a=a.getPreviousResult() ) {
             dsb.add( a.getFailCount(), "failed", new BuildLabel(a.owner));
-            dsb.add( a.getTotalCount()-a.getFailCount(),"total", new BuildLabel(a.owner));
+            if(!failureOnly)
+                dsb.add( a.getTotalCount()-a.getFailCount(),"total", new BuildLabel(a.owner));
         }
 
         String w = req.getParameter("width");
