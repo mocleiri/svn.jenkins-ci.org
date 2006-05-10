@@ -18,7 +18,7 @@ public class CVSChangeLog {
     private String author;
     private String msg;
     private int index;
-    private final List files = new ArrayList();
+    private final List<File> files = new ArrayList<File>();
 
     /**
      * Checks if two {@link CVSChangeLog} entries can be merged.
@@ -175,7 +175,7 @@ public class CVSChangeLog {
             return new CVSChangeLog[0];
 
         Digester digester = new Digester();
-        ArrayList r = new ArrayList();
+        ArrayList<CVSChangeLog> r = new ArrayList<CVSChangeLog>();
         digester.push(r);
 
         digester.addObjectCreate("*/entry",CVSChangeLog.class);
@@ -195,10 +195,10 @@ public class CVSChangeLog {
 
         // merge duplicate entries. Ant task somehow seems to report duplicate entries.
         for(int i=r.size()-1; i>=0; i--) {
-            CVSChangeLog log = (CVSChangeLog)r.get(i);
+            CVSChangeLog log = r.get(i);
             boolean merged = false;
             for(int j=0;j<i;j++) {
-                CVSChangeLog c = (CVSChangeLog) r.get(j);
+                CVSChangeLog c = r.get(j);
                 if(c.canBeMergedWith(log)) {
                     c.merge(log);
                     merged = true;
@@ -209,7 +209,7 @@ public class CVSChangeLog {
                 r.remove(log);
         }
 
-        CVSChangeLog[] ar = (CVSChangeLog[]) r.toArray(new CVSChangeLog[r.size()]);
+        CVSChangeLog[] ar = r.toArray(new CVSChangeLog[r.size()]);
         for( int i=0; i<ar.length; i++ )
             ar[i].index = i;
         return ar;
