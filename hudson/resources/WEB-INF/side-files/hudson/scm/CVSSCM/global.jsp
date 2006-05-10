@@ -19,7 +19,8 @@
           <c:set var="key" value="repository-browser.${root}" />
           <input class="setting-input" name="cvs_repobrowser${loop.index}"
             type="text" value="${descriptor.properties[key]}">
-
+        </s:entry>
+        <s:entry title="Diff URL">
           <c:set var="key" value="repository-browser.diff.${root}" />
           <input class="setting-input" name="cvs_repobrowser_diff${loop.index}"
             type="text" value="${descriptor.properties[key]}">

@@ -41,7 +41,11 @@ public class Computer implements ModelObject {
      */
     private boolean temporarilyOffline;
 
-    private Node node;
+    /**
+     * {@link Node} object may be created and deleted independently
+     * from this object.
+     */
+    private String nodeName;
 
     public Computer(Node node) {
         assert node.getNumExecutors()!=0 : "Computer created with 0 executors";
@@ -64,7 +68,9 @@ public class Computer implements ModelObject {
      * Returns the {@link Node} that this computer represents.
      */
     public Node getNode() {
-        return node;
+        if(nodeName==null)
+            return Hudson.getInstance();
+        return Hudson.getInstance().getSlave(nodeName);
     }
 
     public boolean isTemporarilyOffline() {
@@ -84,7 +90,7 @@ public class Computer implements ModelObject {
     }
 
     public String getDisplayName() {
-        return node.getNodeName();
+        return getNode().getNodeName();
     }
 
     public String getUrl() {
@@ -99,7 +105,7 @@ public class Computer implements ModelObject {
         for( Job j : Hudson.getInstance().getJobs() ) {
             if (j instanceof Project) {
                 Project p = (Project) j;
-                if(p.getAssignedNode()==node)
+                if(p.getAssignedNode()==getNode())
                     r.add(p);
             }
         }
@@ -108,7 +114,10 @@ public class Computer implements ModelObject {
 
     /*package*/ void setNode(Node node) {
         assert node!=null;
-        this.node = node;
+        if(node instanceof Slave)
+            this.nodeName = node.getNodeName();
+        else
+            this.nodeName = null;
 
         setNumExecutors(node.getNumExecutors());
     }
