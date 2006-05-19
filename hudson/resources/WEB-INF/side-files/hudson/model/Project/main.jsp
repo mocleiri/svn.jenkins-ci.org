@@ -1,13 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
 <%@ taglib prefix="i" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
 
+<%-- floating box --%>
+<div style="float:right">
 <c:set var="tr" value="${it.lastSuccessfulBuild.testResultAction}" />
 <c:if test="${tr.previousResult!=null}">
   <%-- at least two data points are requierd for a trend report --%>
-  <div style="float:right;">
+  <div align="right">
     <c:set var="mode" value="${cookie.TestResultAction_failureOnly.value}" />
     <c:if test="${mode!=null}">
       <c:set var="trendQueryString1" value="?failureOnly=${mode}" />
@@ -34,6 +37,7 @@
     </div>
   </div>
 </c:if>
+</div>
 
 <table style="margin-top: 1em; margin-left:1em;">
 

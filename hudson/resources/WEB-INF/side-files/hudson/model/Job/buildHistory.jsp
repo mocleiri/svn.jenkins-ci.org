@@ -8,6 +8,20 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <l:pane width="2" title="Build history">
+  <%-- pending build --%>
+  <c:if test="${it.inQueue}">
+    <tr class=build-row>
+      <td nowrap=nowrap>
+        <img width="16" height="16" src="${rootURL}/images/16x16/grey.gif">&nbsp;
+        #${it.nextBuildNumber}
+      </td>
+      <td nowrap=nowrap>
+        (pending)
+      </td>
+    </tr>
+  </c:if>
+
+  <%-- build history --%>
   <c:forEach var="build" items="${it.builds}">
     <c:set var="link" value="${rootURL}/${it.url}${build.number}/" />
     <tr class="build-row">

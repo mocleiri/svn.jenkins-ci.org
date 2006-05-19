@@ -90,6 +90,10 @@ public class Project extends Job<Project,Build> {
      */
     private boolean canRoam;
 
+    /**
+     * True to suspend new builds.
+     */
+    private boolean disabled;
 
     /**
      * Creates a new project.
@@ -168,7 +172,11 @@ public class Project extends Job<Project,Build> {
     }
 
     public boolean isBuildable() {
-        return true;
+        return !isDisabled();
+    }
+
+    public boolean isDisabled() {
+        return disabled;
     }
 
     public SCM getScm() {
@@ -289,7 +297,15 @@ public class Project extends Job<Project,Build> {
      * Schedules a build of this project.
      */
     public void scheduleBuild() {
-        getParent().getQueue().add(this);
+        if(!disabled)
+            getParent().getQueue().add(this);
+    }
+
+    /**
+     * Returns true if the build is in the queue.
+     */
+    public boolean isInQueue() {
+        return getParent().getQueue().contains(this);
     }
 
 
@@ -329,6 +345,8 @@ public class Project extends Job<Project,Build> {
 
             int scmidx = Integer.parseInt(req.getParameter("scm"));
             scm = SCMManager.getSupportedSCMs()[scmidx].newInstance(req);
+
+            disabled = req.getParameter("disable")!=null;
 
             jdk = req.getParameter("jdk");
             if(req.getParameter("hasCustomQuietPeriod")!=null) {
