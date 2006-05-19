@@ -47,7 +47,7 @@ final class RSS {
      */
     public static void doRssAll( Object it, Collection<? extends Job> jobs, StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         SortedSet<Run> runs = new TreeSet<Run>(runComparator);
-        for( Job j : jobs )
+        for( Job<?,?> j : jobs )
             runs.addAll( j.getBuilds() );
 
         forwardToRss(it,"Hudson all builds",req,rsp,runs);
@@ -58,7 +58,7 @@ final class RSS {
      */
     public static void doRssFailed( Object it, Collection<? extends Job> jobs, StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         SortedSet<Run> runs = new TreeSet<Run>(runComparator);
-        for( Job j : jobs )
+        for( Job<?,?> j : jobs )
             runs.addAll( j.getBuilds() );
 
         for (Iterator<Run> i = runs.iterator(); i.hasNext();) {

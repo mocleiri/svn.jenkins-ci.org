@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
+
 <s:section title="E-mail Notification">
   <s:entry title="SMTP server"
            help="/help/tasks/mailer/smtp-server.html">

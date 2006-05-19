@@ -1,3 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="i" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
+
 <c:set var="tr" value="${it.lastSuccessfulBuild.testResultAction}" />
 <c:if test="${tr.previousResult!=null}">
   <%-- at least two data points are requierd for a trend report --%>

@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
+
 <s:entry title="Maven Version">
   <select class="setting-input" name="maven_version">
     <option>(Default)</option>

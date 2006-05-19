@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
+
 <s:entry title="Modules"
   description="
     URL of SVN module. Multiple URLs can be specified.

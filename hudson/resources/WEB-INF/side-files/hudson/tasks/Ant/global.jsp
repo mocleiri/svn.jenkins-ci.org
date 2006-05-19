@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
+
 <s:section title="Ant">
   <s:entry title="Ant installation"
     description="List of Ant installations on this system">

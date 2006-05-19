@@ -1,6 +1,12 @@
 <%--
   History of runs.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
+<%@ taglib prefix="i" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+
 <l:pane width="2" title="Build history">
   <c:forEach var="build" items="${it.builds}">
     <c:set var="link" value="${rootURL}/${it.url}${build.number}/" />

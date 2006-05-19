@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <c:if test="${it.totalCount!=0}">
   <h2>All Tests</h2>
   <table class="pane sortable" id=testresult>

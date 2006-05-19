@@ -1,6 +1,12 @@
 <%--
   Side panel for the build view.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
+<%@ taglib prefix="i" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="st" uri="http://stapler.dev.java.net/" %>
+
 <l:header title="${it.name}">
   <st:include page="rssHeader.jsp" />
 </l:header>

@@ -1,6 +1,13 @@
 <%--
   Config page
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="i" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <c:set var="jdks" value="${it.parent.JDKs}" />
 <c:if test="${!empty(jdks)}">
   <s:entry title="JDK"
