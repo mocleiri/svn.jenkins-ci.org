@@ -56,12 +56,15 @@ public class WriterOutputStream extends OutputStream {
     }
 
     public void close() throws IOException {
+        buf.flip();
         decoder.decode(buf,out,true);
+        buf.compact();
         flushOutput();
         writer.close();
     }
 
     private void decode() throws IOException {
+        buf.flip();
         while(true) {
             CoderResult r = decoder.decode(buf, out, false);
             if(r==CoderResult.OVERFLOW) {
@@ -72,7 +75,7 @@ public class WriterOutputStream extends OutputStream {
                 buf.compact();
                 return;
             }
-            // otherwise treat it as an erro
+            // otherwise treat it as an error
             r.throwException();
         }
     }
