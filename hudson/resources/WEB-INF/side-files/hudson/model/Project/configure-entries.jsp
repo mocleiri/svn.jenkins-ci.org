@@ -8,7 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<s:entry title="Disable" help="/help/project-config/disable.html">
+<s:entry title="Disable Build" help="/help/project-config/disable.html">
   <input type="checkbox" name="disable" <c:if test="${it.disabled}">checked</c:if>>
   (No new builds will be executed until the project is re-enabled.)
 </s:entry>
