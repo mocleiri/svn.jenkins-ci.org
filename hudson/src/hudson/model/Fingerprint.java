@@ -127,6 +127,23 @@ public class Fingerprint implements ModelObject {
         public String toString() {
             return "["+start+","+end+")";
         }
+
+        /**
+         * Returns true if two {@link Range}s can't be combined into a single range.
+         */
+        public boolean isIndependent(Range that) {
+            return this.end<that.start ||that.end<this.start;
+        }
+
+        /**
+         * Returns the {@link Range} that combines two ranges.
+         */
+        public Range combine(Range that) {
+            assert !isIndependent(that);
+            return new Range(
+                Math.min(this.start,that.start),
+                Math.max(this.end  ,that.end  ));
+        }
     }
 
     /**
@@ -197,6 +214,41 @@ public class Fingerprint implements ModelObject {
                     return true;
             }
             return false;
+        }
+
+        public synchronized void add(RangeSet that) {
+            int lhs=0,rhs=0;
+            while(lhs<this.ranges.size() && rhs<that.ranges.size()) {
+                Range lr = this.ranges.get(lhs);
+                Range rr = that.ranges.get(rhs);
+
+                // no overlap
+                if(lr.end<rr.start) {
+                    lhs++;
+                    continue;
+                }
+                if(rr.end<lr.start) {
+                    ranges.add(lhs,rr);
+                    lhs++;
+                    rhs++;
+                    continue;
+                }
+
+                // overlap. merge two
+                Range m = lr.combine(rr);
+                rhs++;
+
+                // since ranges[lhs] is explanded, it might overlap with others in this.ranges
+                while(lhs+1<this.ranges.size() && !m.isIndependent(this.ranges.get(lhs+1))) {
+                    m = m.combine(this.ranges.get(lhs+1));
+                    this.ranges.remove(lhs+1);
+                }
+
+                this.ranges.set(lhs,m);
+            }
+
+            // if anything is left in that.ranges, add them all
+            this.ranges.addAll(that.ranges.subList(rhs,that.ranges.size()));
         }
 
         public synchronized String toString() {

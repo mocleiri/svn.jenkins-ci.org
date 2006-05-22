@@ -38,4 +38,56 @@ public class FingerprintTest extends TestCase {
         rs.add(5);
         assertEquals("[3,7),[9,11)",rs.toString());
     }
+
+    public void testMerge() {
+        RangeSet x = new RangeSet();
+        x.add(1);
+        x.add(2);
+        x.add(3);
+        x.add(5);
+        x.add(6);
+        assertEquals("[1,4),[5,7)",x.toString());
+
+        RangeSet y = new RangeSet();
+        y.add(3);
+        y.add(4);
+        y.add(5);
+        assertEquals("[3,6)",y.toString());
+
+        x.add(y);
+        assertEquals("[1,7)",x.toString());
+    }
+
+    public void testMerge2() {
+        RangeSet x = new RangeSet();
+        x.add(1);
+        x.add(2);
+        x.add(5);
+        x.add(6);
+        assertEquals("[1,3),[5,7)",x.toString());
+
+        RangeSet y = new RangeSet();
+        y.add(3);
+        y.add(4);
+        assertEquals("[3,5)",y.toString());
+
+        x.add(y);
+        assertEquals("[1,7)",x.toString());
+    }
+
+    public void testMerge3() {
+        RangeSet x = new RangeSet();
+        x.add(1);
+        x.add(5);
+        assertEquals("[1,2),[5,6)",x.toString());
+
+        RangeSet y = new RangeSet();
+        y.add(3);
+        y.add(5);
+        y.add(7);
+        assertEquals("[3,4),[5,6),[7,8)",y.toString());
+
+        x.add(y);
+        assertEquals("[1,2),[3,4),[5,6),[7,8)",x.toString());
+    }
 }
