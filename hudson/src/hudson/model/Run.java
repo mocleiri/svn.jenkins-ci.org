@@ -6,8 +6,8 @@ import hudson.Util;
 import hudson.XmlFile;
 import hudson.tasks.BuildStep;
 import hudson.tasks.LogRotator;
-import hudson.util.IOException2;
 import hudson.util.CharSpool;
+import hudson.util.IOException2;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
