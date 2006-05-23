@@ -40,16 +40,12 @@
   <c:set var="set" value="${it.changeSet}" />
   <t:summary icon="notepad.gif">
     <c:choose>
-      <c:when test="${f:length(set)==0}">
+      <c:when test="${set.emptySet}">
         No changes.
       </c:when>
       <c:otherwise>
         Changes
-        <ol>
-          <c:forEach var="cs" items="${set}">
-            <li><c:out value="${cs.msgEscaped}" escapeXml="false" /> (<a href="changes#detail${cs.index}">detail</a>)
-          </c:forEach>
-        </ol>
+        <st:include it="${set}" page="digest.jsp" />
       </c:otherwise>
     </c:choose>
   </t:summary>

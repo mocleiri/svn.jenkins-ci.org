@@ -4,6 +4,8 @@ import hudson.Launcher;
 import hudson.Proc;
 import static hudson.model.Hudson.isWindows;
 import hudson.scm.CVSChangeLog;
+import hudson.scm.ChangeLogSet;
+import hudson.scm.CVSChangeLogSet;
 import hudson.tasks.BuildStep;
 import hudson.tasks.junit.TestResult;
 import hudson.tasks.junit.TestResultAction;
@@ -47,15 +49,15 @@ public final class Build extends Run<Project,Build> implements Runnable {
     /**
      * Gets the changes incorporated into this build.
      */
-    public CVSChangeLog[] getChangeSet() {
+    public ChangeLogSet getChangeSet() {
         try {
-            return CVSChangeLog.parse(new File(getRootDir(),"changelog.xml"));
+            return CVSChangeLogSet.parse(new File(getRootDir(),"changelog.xml"));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {
             e.printStackTrace();
         }
-        return new CVSChangeLog[0];
+        return CVSChangeLogSet.EMPTY;
     }
 
     public Calendar due() {

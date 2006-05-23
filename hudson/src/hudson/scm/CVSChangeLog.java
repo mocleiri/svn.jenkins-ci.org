@@ -5,6 +5,7 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -170,9 +171,9 @@ public class CVSChangeLog {
     }
 
 
-    public static CVSChangeLog[] parse( java.io.File f ) throws IOException, SAXException {
+    /*package*/ static List<CVSChangeLog> parse( java.io.File f ) throws IOException, SAXException {
         if(!f.exists())
-            return new CVSChangeLog[0];
+            return Collections.EMPTY_LIST;
 
         Digester digester = new Digester();
         ArrayList<CVSChangeLog> r = new ArrayList<CVSChangeLog>();
@@ -209,9 +210,8 @@ public class CVSChangeLog {
                 r.remove(log);
         }
 
-        CVSChangeLog[] ar = r.toArray(new CVSChangeLog[r.size()]);
-        for( int i=0; i<ar.length; i++ )
-            ar[i].index = i;
-        return ar;
+        for( int i=0; i<r.size(); i++ )
+            r.get(i).index = i;
+        return r;
     }
 }
