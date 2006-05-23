@@ -39,10 +39,10 @@ abstract class AbstractCVSFamilySCM implements SCM {
         return env;
     }
 
-    protected final boolean createEmptyChangeLog(File changelogFile, BuildListener listener) {
+    protected final boolean createEmptyChangeLog(File changelogFile, BuildListener listener, String rootTag) {
         try {
             FileWriter w = new FileWriter(changelogFile);
-            w.write("<changelog/>");
+            w.write("<"+rootTag +"/>");
             w.close();
             return true;
         } catch (IOException e) {

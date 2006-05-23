@@ -37,6 +37,10 @@ public class NullSCM implements SCM {
         return workspace;
     }
 
+    public ChangeLogParser createChangeLogParser() {
+        return new NullChangeLogParser();
+    }
+
     static final Descriptor<SCM> DESCRIPTOR = new Descriptor<SCM>(NullSCM.class) {
         public String getDisplayName() {
             return "None";

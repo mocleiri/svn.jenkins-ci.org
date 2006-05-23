@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.BufferedOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -77,7 +79,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
     public boolean calcChangeLog(Build build, File changelogFile, Launcher launcher, BuildListener listener) throws IOException {
         if(build.getPreviousBuild()==null) {
             // nothing to compare against
-            return createEmptyChangeLog(changelogFile, listener);
+            return createEmptyChangeLog(changelogFile, listener, "log");
         }
 
         PrintStream logger = listener.getLogger();
@@ -87,7 +89,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             File file = getRevisionFile(build.getPreviousBuild());
             if(!file.exists())
                 // nothing to compare against
-                return createEmptyChangeLog(changelogFile,listener);
+                return createEmptyChangeLog(changelogFile,listener, "log");
 
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
@@ -111,16 +113,16 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             }
 
             String cmd = DESCRIPTOR.getSvnExe()+" log -v --xml --non-interactive -r "+prevRev+":BASE "+module;
-            logger.println("$ "+cmd);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            int r = launcher.launch(cmd,env,baos,build.getProject().getWorkspace()).join();
-            if(r!=0) {
-                listener.fatalError("revision check failed");
-                return false;
+            OutputStream os = new BufferedOutputStream(new FileOutputStream(changelogFile));
+            try {
+                int r = launcher.launch(cmd,env,os,build.getProject().getWorkspace()).join();
+                if(r!=0) {
+                    listener.fatalError("revision check failed");
+                    return false;
+                }
+            } finally {
+                os.close();
             }
-
-            // TODO: changelog format conversion
-            // http://svn.collab.net/repos/svn/trunk/subversion/svn/schema/
         }
 
         return true;
@@ -271,7 +273,9 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         }
     }
 
-
+    public ChangeLogParser createChangeLogParser() {
+        return new SubversionChangeLogParser();
+    }
 
 
     public DescriptorImpl getDescriptor() {

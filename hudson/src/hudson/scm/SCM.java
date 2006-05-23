@@ -52,4 +52,9 @@ public interface SCM extends Describable<SCM> {
      * @param workspace
      */
     FilePath getModuleRoot(FilePath workspace);
+
+    /**
+     * The returned object will be used to parse <tt>changelog.xml</tt>.
+     */
+    ChangeLogParser createChangeLogParser();
 }

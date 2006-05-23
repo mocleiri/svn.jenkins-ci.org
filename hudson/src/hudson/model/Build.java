@@ -3,9 +3,10 @@ package hudson.model;
 import hudson.Launcher;
 import hudson.Proc;
 import static hudson.model.Hudson.isWindows;
-import hudson.scm.CVSChangeLog;
+import hudson.scm.CVSChangeLogParser;
+import hudson.scm.ChangeLogParser;
 import hudson.scm.ChangeLogSet;
-import hudson.scm.CVSChangeLogSet;
+import hudson.scm.SCM;
 import hudson.tasks.BuildStep;
 import hudson.tasks.junit.TestResult;
 import hudson.tasks.junit.TestResultAction;
@@ -29,6 +30,12 @@ public final class Build extends Run<Project,Build> implements Runnable {
     private String builtOn;
 
     /**
+     * SCM used for this build.
+     * Maybe null, for historical reason, in which case CVS is assumed.
+     */
+    private ChangeLogParser scm;
+
+    /**
      * Creates a new build.
      */
     Build(Project project) throws IOException {
@@ -50,14 +57,21 @@ public final class Build extends Run<Project,Build> implements Runnable {
      * Gets the changes incorporated into this build.
      */
     public ChangeLogSet getChangeSet() {
+        if(scm==null)
+            scm = new CVSChangeLogParser();
+
+        File changelogFile = new File(getRootDir(), "changelog.xml");
+        if(!changelogFile.exists())
+            return ChangeLogSet.EMPTY;
+
         try {
-            return CVSChangeLogSet.parse(new File(getRootDir(),"changelog.xml"));
+            return scm.parse(changelogFile);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {
             e.printStackTrace();
         }
-        return CVSChangeLogSet.EMPTY;
+        return ChangeLogSet.EMPTY;
     }
 
     public Calendar due() {
@@ -118,7 +132,11 @@ public final class Build extends Run<Project,Build> implements Runnable {
                 if(!project.checkout(Build.this,launcher,listener))
                     return Result.FAILURE;
 
-                if(!project.getScm().calcChangeLog(Build.this,new File(getRootDir(),"changelog.xml"), launcher, listener))
+                SCM scm = project.getScm();
+
+                Build.this.scm = scm.createChangeLogParser();
+
+                if(!scm.calcChangeLog(Build.this,new File(getRootDir(),"changelog.xml"), launcher, listener))
                     return Result.FAILURE;
 
                 if(!preBuild(listener,project.getBuilders()))

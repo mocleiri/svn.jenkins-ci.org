@@ -1,5 +1,5 @@
 <%--
-  Displays the CVS change log.
+  Displays the Subversion change log.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
@@ -15,20 +15,19 @@
 <table class=pane style="border:none">
   <c:forEach var="cs" items="${it.logs}" varStatus="loop">
     <tr class=pane>
-      <td colspan=3 class=changeset>
+      <td colspan=2 class=changeset>
         <a name="detail${loop.index}"></a>
         <div class="changeset-message">
-          <b>${cs.author}:</b><br>
+          <b>Revision ${cs.revision} by ${cs.author}:</b><br>
           <c:out value="${cs.msgEscaped}" escapeXml="false" />
         </div>
       </td>
     </tr>
 
-    <c:forEach var="f" items="${cs.files}">
+    <c:forEach var="p" items="${cs.paths}">
       <tr>
-        <td><t:editTypeIcon type="${f.editType}" /></td>
-        <td>${f.revision}</td>
-        <td>${f.name}</td>
+        <td><t:editTypeIcon type="${p.editType}" /></td>
+        <td>${p.value}</td>
       </tr>
     </c:forEach>
   </c:forEach>

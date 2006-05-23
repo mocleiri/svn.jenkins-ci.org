@@ -88,7 +88,11 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         if(idx>=0)  return workspace.child(module.substring(0,idx));
         else        return workspace.child(module);
     }
-    
+
+    public ChangeLogParser createChangeLogParser() {
+        return new CVSChangeLogParser();
+    }
+
     public String getAllModules() {
         return module;
     }
@@ -277,7 +281,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
     public boolean calcChangeLog(Build build, File changelogFile, Launcher launcher, BuildListener listener) {
         if(build.getPreviousBuild()==null) {
             // nothing to compare against
-            return createEmptyChangeLog(changelogFile,listener);
+            return createEmptyChangeLog(changelogFile,listener, "changelog");
         }
 
         listener.getLogger().println("$ computing changelog");
