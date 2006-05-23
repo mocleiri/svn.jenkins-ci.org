@@ -35,7 +35,7 @@
     </s:entry>
 
 
-    <s:section title="Maser/Slave Support">
+    <s:section title="Master/Slave Support">
       <s:entry title="Slaves"
         description="
           List of slave nodes register to this master Hudson. Jobs can be configured to
