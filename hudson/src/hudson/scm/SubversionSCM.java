@@ -128,18 +128,22 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
     public boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener) throws IOException {
         boolean result;
 
-        if(useUpdate && isUpdatable(dir.getLocal()))
+        if(useUpdate && isUpdatable(dir.getLocal())) {
             result = update(launcher,dir,listener);
-        else {
+            if(!result)
+                return false;
+        } else {
             dir.deleteContents();
-            result = run(launcher,DESCRIPTOR.getSvnExe()+" co -q --non-interactive "
-                +(username!=null?"--username "+username+' ':"")
-                +(otherOptions!=null?otherOptions+' ':"")
-                +modules,listener,dir);
+            StringTokenizer tokens = new StringTokenizer(modules);
+            while(tokens.hasMoreTokens()) {
+                result = run(launcher,DESCRIPTOR.getSvnExe()+" co -q --non-interactive "
+                    +(username!=null?"--username "+username+' ':"")
+                    +(otherOptions!=null?otherOptions+' ':"")
+                    +tokens.nextToken(),listener,dir);
+                if(!result)
+                    return false;
+            }
         }
-
-        if(!result)
-            return false;
 
         PrintStream logger = listener.getLogger();
 

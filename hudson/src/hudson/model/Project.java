@@ -3,10 +3,12 @@ package hudson.model;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.model.Descriptor.InstantiationException;
+import hudson.model.Fingerprint.RangeSet;
 import hudson.scm.NullSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMManager;
 import hudson.tasks.BuildStep;
+import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.junit.TestResultAction;
 import hudson.triggers.Trigger;
 import org.kohsuke.stapler.StaplerRequest;
@@ -27,6 +29,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.Vector;
+import java.util.Collection;
 
 /**
  * Buildable software project.
@@ -291,6 +294,45 @@ public class Project extends Job<Project,Build> {
      */
     public FilePath getModuleRoot() {
         return getScm().getModuleRoot(getWorkspace());
+    }
+
+    /**
+     * Gets the dependency relationship map between this project (as the source)
+     * and that project (as the sink.)
+     *
+     * @return
+     *      can be empty but not null. build number of this project to the build
+     *      numbers of that project.
+     */
+    public SortedMap<Integer,RangeSet> getRelationship(Project that) {
+        TreeMap<Integer,RangeSet> r = new TreeMap<Integer,RangeSet>();
+
+        checkAndRecord(that, r, this.getBuilds());
+        checkAndRecord(that, r, that.getBuilds());
+
+        return r;
+    }
+
+    // helper method for getRelationship
+    private void checkAndRecord(Project that, TreeMap<Integer, RangeSet> r, Collection<? extends Build> builds) {
+        for (Build build : builds) {
+            FingerprintAction f = build.getAction(FingerprintAction.class);
+            if(f==null)     continue;
+            // look for fingerprints that point to this project as the owner
+            for (Fingerprint e : f.getFingerprints().values()) {
+                if(e.getOriginal().getName().equals(this.name)) {
+                    Integer i = e.getOriginal().getNumber();
+                    RangeSet rs = e.getRangeSet(that);
+                    if(rs.isEmpty())
+                        continue;
+
+                    RangeSet value = r.get(i);
+                    if(value==null)
+                        r.put(i,value=new RangeSet());
+                    value.add(rs);
+                }
+            }
+        }
     }
 
     /**

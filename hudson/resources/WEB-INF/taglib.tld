@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<taglib version="2.0">
+<taglib
+    xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
   <tlib-version>1.0</tlib-version>
   <jsp-version>2.0</jsp-version>
   <short-name>h</short-name>
@@ -42,7 +46,7 @@
     <name>diff</name>
     <function-class>hudson.Functions</function-class>
     <function-signature>
-      String getDiffString(int);
+      java.lang.String getDiffString(int);
     </function-signature>
   </function>
 
@@ -74,7 +78,7 @@
     <name>getModes</name>
     <function-class>hudson.Functions</function-class>
     <function-signature>
-      hudson.model.Node.Mode getNodeModes();
+      hudson.model.Node.Mode[] getNodeModes();
     </function-signature>
   </function>
 
@@ -85,4 +89,13 @@
       java.lang.String getTestRelativePathFrom(hudson.tasks.junit.TestObject,hudson.tasks.junit.CaseResult);
     </function-signature>
   </function>
+
+  <function>
+    <name>getProjectRelationshipMap</name>
+    <function-class>hudson.Functions</function-class>
+    <function-signature>
+      java.util.SortedMap getProjectRelationshipMap(hudson.model.Project,hudson.model.Project);
+    </function-signature>
+  </function>
+
 </taglib>

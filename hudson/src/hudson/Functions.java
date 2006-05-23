@@ -1,9 +1,11 @@
 package hudson;
 
+import hudson.model.Fingerprint.RangeSet;
 import hudson.model.Hudson;
 import hudson.model.Job;
 import hudson.model.ModelObject;
 import hudson.model.Node;
+import hudson.model.Project;
 import hudson.model.Run;
 import hudson.tasks.junit.CaseResult;
 import hudson.tasks.junit.TestObject;
@@ -11,6 +13,7 @@ import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.StaplerRequest;
 
 import java.util.List;
+import java.util.SortedMap;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -129,5 +132,9 @@ public class Functions {
 
     public static String getTestRelativePathFrom(TestObject it, CaseResult testCase) {
         return testCase.getRelativePathFrom(it);
+    }
+
+    public static SortedMap<Integer,RangeSet> getProjectRelationshipMap(Project lhs, Project rhs) {
+        return lhs.getRelationship(rhs);
     }
 }

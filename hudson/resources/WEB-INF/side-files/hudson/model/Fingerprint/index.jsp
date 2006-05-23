@@ -53,20 +53,7 @@
           </c:choose>
         </td>
         <td>
-          <c:forEach var="r" items="${range.ranges}">
-            <c:choose>
-              <c:when test="${r.start==r.end-1}">
-                <t:buildLink job="${job}" number="${r.start}" />
-              </c:when>
-              <c:when test="${r.start==r.end-2}">
-                <t:buildLink job="${job}" number="${r.start}" />
-                <t:buildLink job="${job}" number="${r.end-1}" />
-              </c:when>
-              <c:otherwise>
-                <t:buildLink job="${job}" number="${r.start}" />-<t:buildLink job="${job}" number="${r.end-1}" />
-              </c:otherwise>
-            </c:choose>
-          </c:forEach>
+          <t:buildRangeLink job="${job}" range="${range}" />
         </td>
       </tr>
     </c:forEach>

@@ -260,6 +260,10 @@ public class Fingerprint implements ModelObject {
             return buf.toString();
         }
 
+        public boolean isEmpty() {
+            return ranges.isEmpty();
+        }
+
         static final class ConverterImpl implements Converter {
             private final Converter collectionConv; // used to convert ArrayList in it
 
@@ -365,6 +369,10 @@ public class Fingerprint implements ModelObject {
         RangeSet r = usages.get(jobName);
         if(r==null) r = new RangeSet();
         return r;
+    }
+
+    public RangeSet getRangeSet(Job job) {
+        return getRangeSet(job.getName());
     }
 
     /**
