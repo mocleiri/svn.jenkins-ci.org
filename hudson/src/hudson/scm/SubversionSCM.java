@@ -110,7 +110,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
                 continue;
             }
 
-            String cmd = DESCRIPTOR.getSvnExe()+" log --xml --non-interactive -r "+prevRev+":BASE "+module;
+            String cmd = DESCRIPTOR.getSvnExe()+" log -v --xml --non-interactive -r "+prevRev+":BASE "+module;
             logger.println("$ "+cmd);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             int r = launcher.launch(cmd,env,baos,build.getProject().getWorkspace()).join();
@@ -120,6 +120,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             }
 
             // TODO: changelog format conversion
+            // http://svn.collab.net/repos/svn/trunk/subversion/svn/schema/
         }
 
         return true;
