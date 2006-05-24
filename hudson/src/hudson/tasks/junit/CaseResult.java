@@ -30,8 +30,8 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
         if(cn==null)
             // Maven seems to skip classname, and that shows up in testSuite/@name
             cn = parent.getName();
-        className = cn;
-        testName = testCase.attributeValue("name");
+        className = cn.replace('/','_');    // avoid unsafe chars
+        testName = testCase.attributeValue("name").replace('/','_');
         errorStackTrace = getError(testCase);
     }
 
