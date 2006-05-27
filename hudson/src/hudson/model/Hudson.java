@@ -862,5 +862,8 @@ public final class Hudson extends JobCollection implements Node {
 
     static {
         XSTREAM.alias("hudson",Hudson.class);
+        XSTREAM.alias("slave",Slave.class);
+        XSTREAM.alias("view",View.class);
+        XSTREAM.alias("jdk",JDK.class);
     }
 }
