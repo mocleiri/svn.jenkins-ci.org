@@ -44,13 +44,13 @@
       <td>
           ${lsBuild!=null ? lsBuild.timestampString : "N/A"}
         <c:if test="${lsBuild!=null}">
-          (<a href="${rootURL}/${job.url}lastSuccessfulBuild">#${lsBuild.number}</a>)
+          (<a href="${rootURL}/${job.url}lastSuccessfulBuild/">#${lsBuild.number}</a>)
         </c:if>
       </td>
       <td>
           ${lfBuild!=null ? lfBuild.timestampString : "N/A"}
         <c:if test="${lfBuild!=null}">
-          (<a href="${rootURL}/${job.url}lastFailedBuild">#${lfBuild.number}</a>)
+          (<a href="${rootURL}/${job.url}lastFailedBuild/">#${lfBuild.number}</a>)
         </c:if>
       </td>
       <td>
