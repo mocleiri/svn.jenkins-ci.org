@@ -16,5 +16,5 @@ import org.xml.sax.SAXException;
  * @author Kohsuke Kawaguchi
  */
 public abstract class ChangeLogParser {
-    public abstract ChangeLogSet parse(File changelogFile) throws IOException, SAXException;
+    public abstract ChangeLogSet parse(Build build, File changelogFile) throws IOException, SAXException;
 }

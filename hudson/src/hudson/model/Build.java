@@ -65,7 +65,7 @@ public final class Build extends Run<Project,Build> implements Runnable {
             return ChangeLogSet.EMPTY;
 
         try {
-            return scm.parse(changelogFile);
+            return scm.parse(this,changelogFile);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {

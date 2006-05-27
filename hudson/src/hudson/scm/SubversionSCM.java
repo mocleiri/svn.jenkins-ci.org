@@ -84,24 +84,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
 
         PrintStream logger = listener.getLogger();
 
-        Map<String,String> previousRevisions = new HashMap<String,String>(); // module -> revision
-        {// read the revision file of the last build
-            File file = getRevisionFile(build.getPreviousBuild());
-            if(!file.exists())
-                // nothing to compare against
-                return createEmptyChangeLog(changelogFile,listener, "log");
-
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String line;
-            while((line=br.readLine())!=null) {
-                int index = line.indexOf('/');
-                if(index<0) {
-                    logger.println("Unable to parse the line: "+line);
-                    continue;   // invalid line?
-                }
-                previousRevisions.put(line.substring(0,index), line.substring(index+1));
-            }
-        }
+        Map<String,String> previousRevisions = parseRevisionFile(build.getPreviousBuild());
 
         Map env = createEnvVarMap();
 
@@ -126,6 +109,28 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         }
 
         return true;
+    }
+
+    /*package*/ static Map<String,String> parseRevisionFile(Build build) throws IOException {
+        Map<String,String> revisions = new HashMap<String,String>(); // module -> revision
+        {// read the revision file of the last build
+            File file = getRevisionFile(build);
+            if(!file.exists())
+                // nothing to compare against
+                return revisions;
+
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+            while((line=br.readLine())!=null) {
+                int index = line.indexOf('/');
+                if(index<0) {
+                    continue;   // invalid line?
+                }
+                revisions.put(line.substring(0,index), line.substring(index+1));
+            }
+        }
+
+        return revisions;
     }
 
     public boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener) throws IOException {
@@ -190,7 +195,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
     /**
      * Gets the file that stores the revision.
      */
-    private File getRevisionFile(Build build) {
+    private static File getRevisionFile(Build build) {
         return new File(build.getRootDir(),"revision.txt");
     }
 

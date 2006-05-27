@@ -1,8 +1,12 @@
 package hudson.scm;
 
+import hudson.model.Build;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
+import java.util.Map;
+import java.io.IOException;
 
 /**
  * {@link ChangeLogSet} for Subversion.
@@ -11,8 +15,15 @@ import java.util.Collections;
  */
 public final class SubversionChangeLogSet extends ChangeLogSet {
     private final List<LogEntry> logs;
+    private final Build build;
 
-    public SubversionChangeLogSet(List<LogEntry> logs) {
+    /**
+     * @GuardedBy this
+     */
+    private Map<String,String> revisionMap;
+
+    /*package*/ SubversionChangeLogSet(Build build, List<LogEntry> logs) {
+        this.build = build;
         this.logs = Collections.unmodifiableList(logs);
     }
 
@@ -22,6 +33,12 @@ public final class SubversionChangeLogSet extends ChangeLogSet {
 
     public List<LogEntry> getLogs() {
         return logs;
+    }
+
+    public synchronized Map<String,String> getRevisionMap() throws IOException {
+        if(revisionMap==null)
+            revisionMap = SubversionSCM.parseRevisionFile(build);
+        return revisionMap;
     }
 
     /**

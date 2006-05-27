@@ -39,15 +39,7 @@
 
   <c:set var="set" value="${it.changeSet}" />
   <t:summary icon="notepad.gif">
-    <c:choose>
-      <c:when test="${set.emptySet}">
-        No changes.
-      </c:when>
-      <c:otherwise>
-        Changes
-        <st:include it="${set}" page="digest.jsp" />
-      </c:otherwise>
-    </c:choose>
+    <st:include it="${set}" page="digest.jsp" />
   </t:summary>
 </table>
 
