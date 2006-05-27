@@ -54,7 +54,7 @@
 
   <tr id="top-nav">
     <td id="left-top-nav">
-      <c:forEach var="anc" items="${pageContext.request.ancestors}">
+      <c:forEach var="anc" items="${staplerRequest.ancestors}">
         <c:if test="${h:isModel(anc.object)}">
           <c:if test="${anc.prev!=null}">
             &#187;

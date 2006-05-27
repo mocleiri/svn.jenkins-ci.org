@@ -10,7 +10,7 @@
 <l:header title="${it.parent.name} build &#x23;${it.number}" />
 <l:side-panel>
   <l:tasks>
-    <c:set var="buildUrl" value="${h:buildUrlDecompose(pageContext.request)}" />
+    <c:set var="buildUrl" value="${h:buildUrlDecompose(staplerRequest)}" />
     <l:task icon="images/24x24/up.gif" href="${rootURL}/${it.parent.url}" title="Back to Project" />
     <l:task icon="images/24x24/search.gif" href="${buildUrl.baseUrl}/" title="Status" />
     <l:task icon="images/24x24/notepad.gif" href="${buildUrl.baseUrl}/changes" title="Changes" />
