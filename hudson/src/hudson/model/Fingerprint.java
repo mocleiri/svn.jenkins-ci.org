@@ -10,6 +10,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import hudson.Util;
 import hudson.XmlFile;
 import hudson.util.HexBinaryConverter;
+import hudson.util.XStream2;
 
 import java.io.File;
 import java.io.IOException;
@@ -442,7 +443,7 @@ public class Fingerprint implements ModelObject {
         }
     }
 
-    private static final XStream XSTREAM = new XStream();
+    private static final XStream XSTREAM = new XStream2();
     static {
         XSTREAM.alias("fingerprint",Fingerprint.class);
         XSTREAM.alias("range",Range.class);

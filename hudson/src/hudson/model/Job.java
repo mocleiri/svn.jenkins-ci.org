@@ -6,6 +6,7 @@ import hudson.XmlFile;
 import hudson.tasks.LogRotator;
 import hudson.util.IOException2;
 import hudson.util.TextFile;
+import hudson.util.XStream2;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -368,7 +369,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         RSS.forwardToRss(this,getDisplayName()+" all failures",req,rsp,runs);
     }
 
-    private static final XStream XSTREAM = new XStream();
+    private static final XStream XSTREAM = new XStream2();
 
     static {
         XSTREAM.alias("project",Project.class);

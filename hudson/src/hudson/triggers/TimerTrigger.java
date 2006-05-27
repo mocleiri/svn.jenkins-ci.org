@@ -86,7 +86,7 @@ public class TimerTrigger implements Trigger {
     };
 
 
-    public static final Timer timer = new Timer("Hudson cron thread");
+    public static final Timer timer = new Timer(); // "Hudson cron thread"); -- this is a new constructor since 1.5
     static {
         timer.scheduleAtFixedRate(new Cron(),0,1000*60/*every minute*/);
     }

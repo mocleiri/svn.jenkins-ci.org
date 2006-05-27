@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.XStream;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.XmlFile;
+import hudson.util.XStream2;
 import hudson.triggers.TimerTrigger;
 import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
@@ -857,7 +858,7 @@ public final class Hudson extends JobCollection implements Node {
     /**
      * Thread-safe reusable {@link XStream}.
      */
-    private static final XStream XSTREAM = new XStream();
+    private static final XStream XSTREAM = new XStream2();
 
     static {
         XSTREAM.alias("hudson",Hudson.class);

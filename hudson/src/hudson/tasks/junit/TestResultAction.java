@@ -9,6 +9,7 @@ import hudson.model.Result;
 import hudson.util.DataSetBuilder;
 import hudson.util.ShiftedCategoryAxis;
 import hudson.util.StringConverter2;
+import hudson.util.XStream2;
 import org.apache.tools.ant.DirectoryScanner;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -24,11 +25,9 @@ import org.jfree.ui.RectangleInsets;
 import org.kohsuke.stapler.StaplerProxy;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.Ancestor;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -36,7 +35,6 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.List;
 
 /**
  * {@link Action} that displays the JUnit test result.
@@ -272,7 +270,7 @@ public class TestResultAction implements Action, StaplerProxy {
 
     private static final Logger logger = Logger.getLogger(TestResultAction.class.getName());
 
-    private static final XStream XSTREAM = new XStream();
+    private static final XStream XSTREAM = new XStream2();
 
     static {
         XSTREAM.alias("result",TestResult.class);
