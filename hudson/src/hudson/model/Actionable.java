@@ -38,7 +38,7 @@ public abstract class Actionable extends AbstractModelObject {
         if(actions==null)   return null;
         for (Action a : actions) {
             if(type.isInstance(a))
-                return type.cast(a);
+                return (T)a;
         }
         return null;
     }

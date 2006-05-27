@@ -192,7 +192,7 @@ public class TestResultAction implements Action, StaplerProxy {
             }
         }
 
-        boolean failureOnly = Boolean.parseBoolean(req.getParameter("failureOnly"));
+        boolean failureOnly = Boolean.valueOf(req.getParameter("failureOnly"));
 
         DataSetBuilder<String,BuildLabel> dsb = new DataSetBuilder<String,BuildLabel>();
 
