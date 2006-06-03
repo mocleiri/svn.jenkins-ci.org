@@ -11,6 +11,8 @@ import hudson.model.Result;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.StringTokenizer;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Triggers builds of other projects.
@@ -28,8 +30,24 @@ public class BuildTrigger implements BuildStep {
         this.childProjects = artifacts;
     }
 
-    public String getChildProjects() {
+    public String getChildProjectsValue() {
         return childProjects;
+    }
+
+    public List<Project> getChildProjects() {
+        Hudson hudson = Hudson.getInstance();
+
+        List<Project> r = new ArrayList<Project>();
+        StringTokenizer tokens = new StringTokenizer(childProjects,",");
+        while(tokens.hasMoreTokens()) {
+            String projectName = tokens.nextToken().trim();
+            Job job = hudson.getJob(projectName);
+            if(!(job instanceof Project)) {
+                continue; // ignore this token
+            }
+            r.add((Project) job);
+        }
+        return r;
     }
 
     public boolean prebuild(Build build, BuildListener listener) {
@@ -40,17 +58,8 @@ public class BuildTrigger implements BuildStep {
         if(build.getResult()== Result.SUCCESS) {
             Hudson hudson = Hudson.getInstance();
 
-            StringTokenizer tokens = new StringTokenizer(childProjects,",");
-            while(tokens.hasMoreTokens()) {
-                String projectName = tokens.nextToken().trim();
-                listener.getLogger().println("Triggering a new build of "+projectName);
-
-                Job job = hudson.getJob(projectName);
-                if(!(job instanceof Project)) {
-                    listener.getLogger().println(projectName+" is not a project");
-                    return false;
-                }
-                Project p = (Project) job;
+            for (Project p : getChildProjects()) {
+                listener.getLogger().println("Triggering a new build of "+p.getName());
                 p.scheduleBuild();
             }
         }

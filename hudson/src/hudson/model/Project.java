@@ -8,6 +8,7 @@ import hudson.scm.NullSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMManager;
 import hudson.tasks.BuildStep;
+import hudson.tasks.BuildTrigger;
 import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.junit.TestResultAction;
 import hudson.triggers.Trigger;
@@ -30,6 +31,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.Vector;
 import java.util.Collection;
+import java.util.AbstractList;
 
 /**
  * Buildable software project.
@@ -311,6 +313,10 @@ public class Project extends Job<Project,Build> {
         checkAndRecord(that, r, that.getBuilds());
 
         return r;
+    }
+
+    public BuildTrigger getBuildTriggerPublisher() {
+        return (BuildTrigger)getPublishers().get(BuildTrigger.DESCRIPTOR);
     }
 
     // helper method for getRelationship

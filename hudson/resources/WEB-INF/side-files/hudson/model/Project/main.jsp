@@ -70,3 +70,14 @@
     </t:summary>
   </c:if>
 </table>
+
+<%-- downstream projects --%>
+<c:set var="downstream" value="${it.buildTriggerPublisher.childProjects}" />
+<c:if test="${downstream!=null}">
+  <h2>Downstream Projects</h2>
+  <ul>
+    <c:forEach var="item" items="${downstream}">
+      <li><a href="../${item.name}/">${item.name}</a></li>
+    </c:forEach>
+  </ul>
+</c:if>
