@@ -75,9 +75,12 @@
 <c:set var="downstream" value="${it.buildTriggerPublisher.childProjects}" />
 <c:if test="${downstream!=null}">
   <h2>Downstream Projects</h2>
-  <ul>
+  <ul style="list-style-type: none;">
     <c:forEach var="item" items="${downstream}">
-      <li><a href="../${item.name}/">${item.name}</a></li>
+      <li>
+        <img src="${rootURL}/images/16x16/${item.buildStatusUrl}">
+        <a href="../${item.name}/">${item.name}</a>
+      </li>
     </c:forEach>
   </ul>
 </c:if>
