@@ -45,6 +45,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
+import java.util.AbstractList;
 
 /**
  * Root object of the system.
@@ -218,8 +219,24 @@ public final class Hudson extends JobCollection implements Node {
     /**
      * Gets the snapshot of all the jobs.
      */
-    public synchronized Collection<Job> getJobs() {
+    public synchronized List<Job> getJobs() {
         return new ArrayList<Job>(jobs.values());
+    }
+
+    /**
+     * Gets the names of all the {@link Job}s.
+     */
+    public synchronized Collection<String> getJobNames() {
+        return new AbstractList<String>() {
+            private final List<Job> jobs = getJobs();
+            public String get(int index) {
+                return jobs.get(index).getName();
+            }
+
+            public int size() {
+                return jobs.size();
+            }
+        };
     }
 
     /**

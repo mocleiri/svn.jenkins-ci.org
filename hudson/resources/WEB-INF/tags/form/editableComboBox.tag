@@ -2,9 +2,11 @@
 <%@attribute name="clazz" required="false" %>
 <%@attribute name="name" required="false" %>
 <%@attribute name="value" required="false" %>
+<%@attribute name="items" type="java.lang.Object" description="Optional list of possible values" %>
 <%-- Tomcat doesn't like us using the attribute called 'class' --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
 
 <c:if test="${editableComboBox_source_loaded==null}">
   <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/utilities.js"></script>
@@ -22,6 +24,11 @@
   var ${id}_values = new Array();
 
   <%-- fill in values --%>
+  <c:if test="${items!=null}">
+    <c:forEach var="v" items="${items}">
+      <s:editableComboBoxValue value="${v}" />
+    </c:forEach>
+  </c:if>
   <jsp:doBody />
 
   function ${id}_Callback(value /*, comboBox*/) {

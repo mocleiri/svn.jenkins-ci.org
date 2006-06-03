@@ -14,12 +14,15 @@
   <form action="projectRelationship" method="get">
     <table width="100%">
       <tr>
+        <c:set var="names" value="${app.jobNames}" />
         <td style="text-align:right;">
-          upstream project: <input type="text" name="lhs" value="${param.lhs}" />
+          upstream project:
+          <s:editableComboBox id="lhs" name="lhs" value="${param.lhs}" items="${names}" />
         </td>
         <td style="width:32px; text-align:center;"><img src="${rootURL}/images/24x24/next.gif" alt="->"/></td>
         <td>
-          downstream project: <input type="text" name="rhs" value="${param.rhs}" />
+          downstream project:
+          <s:editableComboBox id="rhs" name="rhs" value="${param.rhs}" items="${names}" />
         </td>
       </tr>
       <tr>
