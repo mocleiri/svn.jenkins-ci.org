@@ -16,7 +16,10 @@
   <%-- do progressive console output --%>
   <c:when test="${it.building}">
     <pre id=out></pre>
-    <t:progressiveText href="progressiveLog" idref="out" />
+    <div id=spinner>
+      <img src="${rootURL}/images/spinner.gif" /> 
+    </div>
+    <t:progressiveText href="progressiveLog" idref="out" spinner="spinner" />
   </c:when>
   <%-- output is completed now. --%>
   <c:otherwise>

@@ -5,6 +5,7 @@
 --%>
 <%@attribute name="href" required="true" description="URL that returns text data" %>
 <%@attribute name="idref" required="true" description="ID of the HTML element in which the result is displayed" %>
+<%@attribute name="spinner" required="false" description="ID of the HTML element in which the spinner is displayed" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   script code
@@ -22,6 +23,10 @@
             e.fetchedBytes = rsp.getResponseHeader("X-Text-Size");
             if(rsp.getResponseHeader("X-More-Data")=="true")
               setTimeout(function(){fetchNext(e,href);},1000);
+          <c:if test="${spinner!=null}">
+            else
+              $("${spinner}").style.display = "none";
+          </c:if>
           }
       });
     }
