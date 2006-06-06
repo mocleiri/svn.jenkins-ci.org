@@ -100,6 +100,10 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         return parent;
     }
 
+    public boolean isInQueue() {
+        return false;
+    }
+
     /**
      * Allocates a new buildCommand number.
      */

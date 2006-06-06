@@ -352,6 +352,7 @@ public class Project extends Job<Project,Build> {
     /**
      * Returns true if the build is in the queue.
      */
+    @Override
     public boolean isInQueue() {
         return getParent().getQueue().contains(this);
     }
