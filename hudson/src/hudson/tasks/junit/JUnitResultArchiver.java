@@ -44,9 +44,11 @@ public class JUnitResultArchiver extends AntBasedBuildStep {
 
         TestResult r = action.getResult();
 
-        if(r.getPassCount()==0 && r.getFailCount()==0)
+        if(r.getPassCount()==0 && r.getFailCount()==0) {
+            listener.getLogger().println("No test report is found. Configuration error?");
             // no test result. Most likely a configuration error or fatal problem
             build.setResult(Result.FAILURE);
+        }
 
         if(r.getFailCount()>0)
             build.setResult(Result.UNSTABLE);
