@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>Hudson and i18n</title>
+	<style>
+		pre {
+			background-color: lightgray;
+			padding: 0.5em;
+			margin-left: 2em;
+			margin-right: 2em;
+		}
+	</style>
+</head>
+<body><div class=app>
+<h1>Hudson and i18n</h1>
+
+<p>
+	When you use non-ASCII characters in Hudson (such as project names, test names, etc), you might experience charset encoding related 404 errors. This is because of the bugs in the web container.
+</p>
+
+<h3>Tomcat</h3>
+<p>
+	Some versions of Tomcat (such as 5.0.28) uses iso-8859-1 to decode URLs, which is in a clear violation of the relevant RFCs. To fix this problem, add the following <tt>URIEncoding</tt> attribute to the connector.
+
+<pre>
+&lt;Connector port="8080" URIEncoding="UTF-8"/>
+</pre>
+
+
+<h3>Related Reads</h3>
+<ol>
+	<li><a href="http://confluence.atlassian.com/display/DOC/Configuring+Tomcat's+URI+encoding">Similar instruction for Confluence</a>
+	<li><a href="http://weblogs.java.net/blog/joconner/archive/2005/07/charset_traps.html">John O'Conner's blog entry about his experiment</a>. See Elliotte's comment in particular (<tt>elharo</tt>.)
+</ol>
+
+</div></body>
+</html>
