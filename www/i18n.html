@@ -19,7 +19,7 @@
 
 <h3>Tomcat</h3>
 <p>
-	Some versions of Tomcat (such as 5.0.28) uses iso-8859-1 to decode URLs, which is in a clear violation of the relevant RFCs. To fix this problem, add the following <tt>URIEncoding</tt> attribute to the connector.
+	Some versions of Tomcat (such as 5.0.28) uses iso-8859-1 to decode URLs, which is in a clear violation of the relevant RFCs. To fix this problem, add the following <tt>URIEncoding</tt> attribute to the connector definition in <tt>$TOMCAT_HOME/conf/server.xml</tt>.
 
 <pre>
 &lt;Connector port="8080" URIEncoding="UTF-8"/>
