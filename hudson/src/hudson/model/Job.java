@@ -214,11 +214,8 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      * Returns the URL of this project.
      */
     public String getUrl() {
-        return "job/"+WHITESPACE_REPLACER.matcher(name).replaceAll("%20")+'/';
+        return "job/"+name+'/';
     }
-
-    private static final Pattern WHITESPACE_REPLACER = Pattern.compile(" ", Pattern.LITERAL);
-
 
     /**
      * Gets all the runs.
@@ -336,7 +333,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      * Returns the image that shows the current buildCommand status.
      */
     public void doBuildStatus( StaplerRequest req, StaplerResponse rsp ) throws IOException {
-        rsp.sendRedirect(req.getContextPath()+"/nocacheImages/48x48/"+getBuildStatusUrl());
+        rsp.sendRedirect2(req.getContextPath()+"/nocacheImages/48x48/"+getBuildStatusUrl());
     }
 
     public String getBuildStatusUrl() {
@@ -352,7 +349,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
 
         Util.deleteRecursive(root);
         getParent().deleteJob(this);
-        rsp.sendRedirect(req.getContextPath()+"/");
+        rsp.sendRedirect2(req.getContextPath()+"/");
     }
 
     /**

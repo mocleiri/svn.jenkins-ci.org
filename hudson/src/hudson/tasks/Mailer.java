@@ -1,6 +1,7 @@
 package hudson.tasks;
 
 import hudson.Launcher;
+import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
@@ -126,7 +127,7 @@ public class Mailer implements BuildStep {
     private void appendBuildUrl(Build build, StringBuffer buf) {
         String baseUrl = DESCRIPTOR.getUrl();
         if(baseUrl!=null) {
-            buf.append("See ").append(baseUrl).append(build.getUrl()).append("\n\n");
+            buf.append("See ").append(baseUrl).append(Util.encode(build.getUrl())).append("\n\n");
         }
     }
 

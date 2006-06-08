@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Map;
@@ -165,5 +167,47 @@ public class Util {
         if(n!=1)
             s += 's';
         return s;
+    }
+
+    /**
+     * Escapes non-ASCII characters.
+     */
+    public static String encode(String s) {
+        try {
+            boolean escaped = false;
+
+            StringBuffer out = new StringBuffer(s.length());
+
+            ByteArrayOutputStream buf = new ByteArrayOutputStream();
+            OutputStreamWriter w = new OutputStreamWriter(buf,"UTF-8");
+
+            for (int i = 0; i < s.length(); i++) {
+                int c = (int) s.charAt(i);
+                if (c<128 && c!=' ') {
+                    out.append((char) c);
+                } else {
+                    // 1 char -> UTF8
+                    w.write(c);
+                    w.flush();
+                    for (byte b : buf.toByteArray()) {
+                        out.append('%');
+                        out.append(toDigit((b >> 4) & 0xF));
+                        out.append(toDigit(b & 0xF));
+                    }
+                    buf.reset();
+                    escaped = true;
+                }
+            }
+
+            return escaped ? out.toString() : s;
+        } catch (IOException e) {
+            throw new Error(e); // impossible
+        }
+    }
+
+    private static char toDigit(int n) {
+        char ch = Character.forDigit(n,16);
+        if(ch>='a')     ch = (char)(ch-'a'+'A');
+        return ch;
     }
 }

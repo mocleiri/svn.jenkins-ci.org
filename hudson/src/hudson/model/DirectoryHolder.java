@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.net.URLEncoder;
 
 /**
  * Has convenience methods to serve file system.
@@ -36,7 +37,7 @@ public abstract class DirectoryHolder extends Actionable {
         if(req.getQueryString()!=null) {
             String path = req.getParameter("path");
             if(path!=null) {
-                rsp.sendRedirect(path);
+                rsp.sendRedirect(URLEncoder.encode(path,"UTF-8"));
                 return;
             }
         }
@@ -67,7 +68,7 @@ public abstract class DirectoryHolder extends Actionable {
 
         if(f.isDirectory()) {
             if(!req.getRequestURL().toString().endsWith("/")) {
-                rsp.sendRedirect(req.getRequestURL().append('/').toString());
+                rsp.sendRedirect2(req.getRequestURL().append('/').toString());
                 return;
             }
 
