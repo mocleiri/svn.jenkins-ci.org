@@ -95,6 +95,8 @@ public class View extends JobCollection {
         if(!Hudson.adminCheck(req,rsp))
             return;
 
+        req.setCharacterEncoding("UTF-8");
+        
         jobNames.clear();
         for (Job job : owner.getJobs()) {
             if(req.getParameter(job.getName())!=null)

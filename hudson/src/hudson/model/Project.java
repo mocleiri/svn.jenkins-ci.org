@@ -392,6 +392,8 @@ public class Project extends Job<Project,Build> {
             if(!Hudson.adminCheck(req,rsp))
                 return;
 
+            req.setCharacterEncoding("UTF-8");
+
             int scmidx = Integer.parseInt(req.getParameter("scm"));
             scm = SCMManager.getSupportedSCMs()[scmidx].newInstance(req);
 

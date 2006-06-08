@@ -26,6 +26,8 @@ final class RSS {
      * Parses trackback ping.
      */
     public static void doTrackback( Object it, StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        req.setCharacterEncoding("UTF-8");
+
         String title = req.getParameter("title");
         String url = req.getParameter("url");
         String excerpt = req.getParameter("excerpt");

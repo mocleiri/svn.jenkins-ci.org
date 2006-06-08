@@ -35,6 +35,7 @@ public abstract class DirectoryHolder extends Actionable {
      */
     protected final void serveFile(StaplerRequest req, StaplerResponse rsp, File root, String icon, boolean serveDirIndex) throws IOException, ServletException {
         if(req.getQueryString()!=null) {
+            req.setCharacterEncoding("UTF-8");
             String path = req.getParameter("path");
             if(path!=null) {
                 rsp.sendRedirect(URLEncoder.encode(path,"UTF-8"));

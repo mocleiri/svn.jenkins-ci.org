@@ -533,6 +533,8 @@ public final class Hudson extends JobCollection implements Node {
         if(!Hudson.adminCheck(req,rsp))
             return;
 
+        req.setCharacterEncoding("UTF-8");
+
         useSecurity = req.getParameter("use_security")!=null;
 
         numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
@@ -599,6 +601,7 @@ public final class Hudson extends JobCollection implements Node {
         if(!Hudson.adminCheck(req,rsp))
             return null;
 
+        req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name").trim();
         String className = req.getParameter("type");
         String mode = req.getParameter("mode");
@@ -669,6 +672,8 @@ public final class Hudson extends JobCollection implements Node {
         if(!Hudson.adminCheck(req,rsp))
             return;
 
+        req.setCharacterEncoding("UTF-8");
+        
         String name = req.getParameter("name");
 
         try {
