@@ -74,13 +74,13 @@ final class RSS {
     /**
      * Sends the RSS feed to the client.
      */
-    static void forwardToRss( Object it, String title, StaplerRequest req, HttpServletResponse rsp, Collection<Run> runs) throws IOException, ServletException {
+    static void forwardToRss( Object it, String title, StaplerRequest req, HttpServletResponse rsp, Collection<? extends Run> runs) throws IOException, ServletException {
         GregorianCalendar threshold = new GregorianCalendar();
         threshold.add(Calendar.DAY_OF_YEAR,-7);
 
         int count=0;
 
-        for (Iterator<Run> i = runs.iterator(); i.hasNext();) {
+        for (Iterator<? extends Run> i = runs.iterator(); i.hasNext();) {
             // at least put 10 items
             if(count<10) {
                 i.next();

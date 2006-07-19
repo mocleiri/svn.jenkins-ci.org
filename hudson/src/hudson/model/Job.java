@@ -165,8 +165,8 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      * @return
      *      never null. The first entry is the latest buildCommand.
      */
-    public synchronized Collection<? extends RunT> getBuilds() {
-        return _getRuns().values();
+    public synchronized List<RunT> getBuilds() {
+        return new ArrayList<RunT>(_getRuns().values());
     }
 
     /**
@@ -358,7 +358,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      * RSS feed for all runs.
      */
     public synchronized void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        List<Run> runs = new ArrayList<Run>(getBuilds());
+        List<RunT> runs = getBuilds();
         RSS.forwardToRss(this,getDisplayName()+" all builds",req,rsp,runs);
     }
 
