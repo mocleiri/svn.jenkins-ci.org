@@ -9,9 +9,17 @@
 
 <st:include page="sidepanel.jsp" />
 <l:main-panel>
-<t:buildCaption>
-  Console Output
-</t:buildCaption>
+  <table width="100%" cellpadding="0" cellspacing="0"><tr valign="middle">
+    <td>
+      <t:buildCaption>
+        Console Output
+      </t:buildCaption>
+    </td><td align="right">
+      <a href="consoleText">
+        <img src="${rootURL}/images/24x24/document.gif" alt="">View as plain text
+      </a>
+    </td>
+  </tr></table>
 <c:choose>
   <%-- do progressive console output --%>
   <c:when test="${it.building}">
