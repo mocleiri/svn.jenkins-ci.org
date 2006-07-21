@@ -126,7 +126,8 @@ public class Maven implements BuildStep {
             MavenInstallation[] insts = new MavenInstallation[len];
 
             for( i=0; i<len; i++ ) {
-                if(names[i].length()==0)    continue;
+                if(Util.nullify(names[i])==null)    continue;
+                if(Util.nullify(homes[i])==null)    continue;
                 insts[i] = new MavenInstallation(names[i],homes[i]);
             }
 
