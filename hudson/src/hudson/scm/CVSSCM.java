@@ -26,6 +26,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.io.Reader;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -270,9 +271,14 @@ public class CVSSCM extends AbstractCVSFamilySCM {
      */
     private boolean checkContents(File file, String contents) {
         try {
-            String s = new BufferedReader(new FileReader(file)).readLine();
-            if(s==null)     return false;
-            return s.trim().equals(contents.trim());
+            Reader r = new FileReader(file);
+            try {
+                String s = new BufferedReader(r).readLine();
+                if (s == null) return false;
+                return s.trim().equals(contents.trim());
+            } finally {
+                r.close();
+            }
         } catch (IOException e) {
             return false;
         }
