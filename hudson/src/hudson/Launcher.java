@@ -53,12 +53,12 @@ public class Launcher {
     }
 
     public Proc launch(String[] cmd,String[] env,OutputStream out, FilePath workDir) throws IOException {
-        printCommandLine(cmd);
+        printCommandLine(cmd, workDir);
         return new Proc(cmd,Util.mapToEnv(inherit(env)),out,workDir.getLocal());
     }
 
     public Proc launch(String[] cmd,String[] env,InputStream in,OutputStream out) throws IOException {
-        printCommandLine(cmd);
+        printCommandLine(cmd, null);
         return new Proc(cmd,inherit(env),in,out);
     }
 
@@ -86,8 +86,13 @@ public class Launcher {
         return m;
     }
 
-    private void printCommandLine(String[] cmd) {
+    private void printCommandLine(String[] cmd, FilePath workDir) {
         StringBuffer buf = new StringBuffer();
+        if (workDir != null) {
+            buf.append('[');
+            buf.append(workDir.getRemote().replace("^.+[/\\]", ""));
+            buf.append("] ");
+        }
         buf.append('$');
         for (String c : cmd) {
             buf.append(' ').append(c);
