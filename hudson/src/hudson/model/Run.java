@@ -421,79 +421,84 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
             return;     // already built.
 
         state = State.BUILDING;
-
-        long start = System.currentTimeMillis();
-
-        BuildListener listener=null;
         try {
-            final PrintStream log = new PrintStream(new FileOutputStream(getLogFile()));
-            listener = new BuildListener() {
-                final PrintWriter pw = new PrintWriter(new CloseProofOutputStream(log),true);
+            BuildListener listener=null;
 
-                public void started() {}
+            // to set the state to COMPLETE in the end, even if the thread dies abnormally.
+            // otherwise the queue state becomes inconsistent
+            long start = System.currentTimeMillis();
 
-                public PrintStream getLogger() {
-                    return log;
-                }
+            try {
+                final PrintStream log = new PrintStream(new FileOutputStream(getLogFile()));
+                listener = new BuildListener() {
+                    final PrintWriter pw = new PrintWriter(new CloseProofOutputStream(log),true);
 
-                public PrintWriter error(String msg) {
-                    pw.println("ERROR: "+msg);
-                    return pw;
-                }
+                    public void started() {}
 
-                public PrintWriter fatalError(String msg) {
-                    return error(msg);
-                }
+                    public PrintStream getLogger() {
+                        return log;
+                    }
 
-                public void finished(Result result) {
-                    pw.close();
-                    log.close();
-                }
-            };
+                    public PrintWriter error(String msg) {
+                        pw.println("ERROR: "+msg);
+                        return pw;
+                    }
 
-            listener.started();
+                    public PrintWriter fatalError(String msg) {
+                        return error(msg);
+                    }
 
-            result = job.run(listener);
+                    public void finished(Result result) {
+                        pw.close();
+                        log.close();
+                    }
+                };
 
-            job.post(listener);
+                listener.started();
 
-        } catch( Exception e ) {
-            if(listener!=null) {
-                if(e instanceof IOException)
-                    Util.displayIOException((IOException)e,listener);
+                result = job.run(listener);
 
-                Writer w = listener.fatalError(e.getMessage());
-                if(w!=null) {
-                    try {
-                        e.printStackTrace(new PrintWriter(w));
-                        w.close();
-                    } catch (IOException e1) {
-                        // ignore
+                job.post(listener);
+
+            } catch( Exception e ) {
+                if(listener!=null) {
+                    if(e instanceof IOException)
+                        Util.displayIOException((IOException)e,listener);
+
+                    Writer w = listener.fatalError(e.getMessage());
+                    if(w!=null) {
+                        try {
+                            e.printStackTrace(new PrintWriter(w));
+                            w.close();
+                        } catch (IOException e1) {
+                            // ignore
+                        }
                     }
                 }
+                result = Result.FAILURE;
             }
-            result = Result.FAILURE;
-        }
 
-        long end = System.currentTimeMillis();
-        duration = end-start;
-        state = State.COMPLETED;
+            long end = System.currentTimeMillis();
+            duration = end-start;
 
-        if(listener!=null)
-            listener.finished(result);
+            if(listener!=null)
+                listener.finished(result);
 
-        try {
-            save();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            try {
+                save();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        try {
-            LogRotator lr = getParent().getLogRotator();
-            if(lr!=null)
-                lr.perform(getParent());
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                LogRotator lr = getParent().getLogRotator();
+                if(lr!=null)
+                    lr.perform(getParent());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } finally {
+            state = State.COMPLETED;
         }
     }
 
