@@ -76,7 +76,14 @@
 <s:descriptorList title="Build Triggers"
                   descriptors="<%= hudson.triggers.Trigger.TRIGGERS %>"
                   instances="${it.triggers}"
-                  varName="trigger" />
+                  varName="trigger">
+  <s:block>
+    <p>
+      To configure a trigger based on SCM commit/check-in, see
+      the "configure automatic build" section of <a href="https://hudson.dev.java.net/build.html">this document</a>.
+    </p>
+  </s:block>
+</s:descriptorList>
 
 
 <%-- build config pane --%>

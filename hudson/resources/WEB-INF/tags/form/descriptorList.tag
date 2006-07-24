@@ -19,4 +19,5 @@
       <jsp:include page="${d.configPage}"/>
     </s:optionalBlock>
   </c:forEach>
+  <jsp:doBody />
 </s:section>
