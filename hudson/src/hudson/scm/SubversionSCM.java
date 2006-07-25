@@ -76,7 +76,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         return dirs;
     }
 
-    public boolean calcChangeLog(Build build, File changelogFile, Launcher launcher, BuildListener listener) throws IOException {
+    private boolean calcChangeLog(Build build, File changelogFile, Launcher launcher, BuildListener listener) throws IOException {
         if(build.getPreviousBuild()==null) {
             // nothing to compare against
             return createEmptyChangeLog(changelogFile, listener, "log");
@@ -133,7 +133,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         return revisions;
     }
 
-    public boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener) throws IOException {
+    public boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener, File changelogFile) throws IOException {
         boolean result;
 
         if(useUpdate && isUpdatable(dir.getLocal())) {
@@ -189,7 +189,8 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
 
             w.close();
         }
-        return true;
+
+        return calcChangeLog(build, changelogFile, launcher, listener);
     }
 
     /**

@@ -17,17 +17,21 @@ import java.util.Map;
  */
 public interface SCM extends Describable<SCM> {
 
-    /**
-     * Calculate changelog for the given build and write it to the specified file.
-     *
-     * @return
-     *      false if the operation fails. The error should be reported to the listener.
-     */
-    boolean calcChangeLog(Build build, File changelogFile, Launcher launcher, BuildListener listener) throws IOException;
+    ///**
+    // * Calculate changelog for the given build and write it to the specified file.
+    // *
+    // * @return
+    // *      false if the operation fails. The error should be reported to the listener.
+    // */
+    //boolean calcChangeLog(Build build, File changelogFile, Launcher launcher, BuildListener listener) throws IOException;
 
     /**
      * Obtains a fresh workspace of the module(s) into the specified directory
      * of the specified machine.
+     *
+     * <p>
+     * The "update" operation can be performed instead of a fresh checkout if
+     * feasible.
      *
      * <p>
      * This operation should also capture the information necessary to tag the workspace later.
@@ -37,10 +41,13 @@ public interface SCM extends Describable<SCM> {
      * @param dir
      *      a directory to check out the source code. May contain left-over
      *      from the previous build.
+     * @param changelogFile
+     *      Upon a successful return, this file should capture the changelog.
      * @return
-     *      false if the operation fails. The error should be reported to the listener.
+     *      null if the operation fails. The error should be reported to the listener.
+     *      Otherwise return the changes included in this update (if this was an update.)
      */
-    boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener) throws IOException;
+    boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener, File changelogFile) throws IOException;
 
     /**
      * Adds environmental variables for the builds to the given map.

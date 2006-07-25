@@ -129,15 +129,12 @@ public final class Build extends Run<Project,Build> implements Runnable {
                     listener.getLogger().println("Building remotely on "+node.getNodeName());
 
 
-                if(!project.checkout(Build.this,launcher,listener))
+                if(!project.checkout(Build.this,launcher,listener,new File(getRootDir(),"changelog.xml")))
                     return Result.FAILURE;
 
                 SCM scm = project.getScm();
 
                 Build.this.scm = scm.createChangeLogParser();
-
-                if(!scm.calcChangeLog(Build.this,new File(getRootDir(),"changelog.xml"), launcher, listener))
-                    return Result.FAILURE;
 
                 if(!preBuild(listener,project.getBuilders()))
                     return Result.FAILURE;

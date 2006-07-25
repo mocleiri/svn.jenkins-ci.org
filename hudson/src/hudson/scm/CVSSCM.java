@@ -114,7 +114,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         return flatten;
     }
 
-    public boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener) throws IOException {
+    public boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener, File changelogFile) throws IOException {
         boolean result;
 
         if(canUseUpdate && isUpdatable(dir.getLocal()))
@@ -136,7 +136,6 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         if(!result)
            return false;
 
-
         // archive the workspace to support later tagging
         // TODO: doing this partially remotely would be faster
         File archiveFile = getArchiveFile(build);
@@ -155,7 +154,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         // contribute the tag action
         build.getActions().add(new TagAction(build));
 
-        return true;
+        return calcChangeLog(build, changelogFile, listener);
     }
 
     /**
@@ -284,7 +283,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         }
     }
 
-    public boolean calcChangeLog(Build build, File changelogFile, Launcher launcher, BuildListener listener) {
+    private boolean calcChangeLog(Build build, File changelogFile, BuildListener listener) {
         if(build.getPreviousBuild()==null) {
             // nothing to compare against
             return createEmptyChangeLog(changelogFile,listener, "changelog");

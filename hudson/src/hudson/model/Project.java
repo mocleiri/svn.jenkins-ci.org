@@ -230,14 +230,14 @@ public class Project extends Job<Project,Build> {
         return lastBuild;
     }
 
-    public boolean checkout(Build build, Launcher launcher, BuildListener listener) throws IOException {
+    public boolean checkout(Build build, Launcher launcher, BuildListener listener, File changelogFile) throws IOException {
         if(scm==null)
             return true;    // no SCM
 
         FilePath workspace = getWorkspace();
         workspace.mkdirs();
 
-        return scm.checkout(build, launcher, workspace, listener);
+        return scm.checkout(build, launcher, workspace, listener, changelogFile);
     }
 
     /**

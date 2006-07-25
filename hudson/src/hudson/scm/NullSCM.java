@@ -17,11 +17,7 @@ import java.util.Map;
  * @author Kohsuke Kawaguchi
  */
 public class NullSCM implements SCM {
-    public boolean calcChangeLog(Build build, File changelogFile, Launcher launcher, BuildListener listener) {
-        return true;
-    }
-
-    public boolean checkout(Build build, Launcher launcher, FilePath remoteDir, BuildListener listener) throws IOException {
+    public boolean checkout(Build build, Launcher launcher, FilePath remoteDir, BuildListener listener, File changeLogFile) throws IOException {
         return true;
     }
 
