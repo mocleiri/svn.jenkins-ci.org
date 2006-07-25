@@ -130,6 +130,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
             throw new IOException2("Invalid directory name "+buildDir,e);
         }
         this.state = State.COMPLETED;
+        this.result = Result.FAILURE;  // defensive measure. value should be overwritten by unmarshal, but just in case the saved data is inconsistent 
         getDataFile().unmarshal(this); // load the rest of the data
     }
 
@@ -138,7 +139,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
      *
      * <p>
      * When a build is {@link #isBuilding() in progress}, this method
-     * may return a temporary intermediate result.
+     * may return null or a temporary intermediate result.
      */
     public final Result getResult() {
         return result;
