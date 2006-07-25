@@ -7,6 +7,7 @@ import hudson.model.BuildListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,16 +21,23 @@ abstract class AbstractCVSFamilySCM implements SCM {
      *
      * @param dir
      *      if launching locally this is a local path, otherwise a remote path.
+     * @param out
+     *      Receives output from the executed program.
      */
-    protected final boolean run(Launcher launcher, String cmd, BuildListener listener, FilePath dir) throws IOException {
+    protected final boolean run(Launcher launcher, String cmd, BuildListener listener, FilePath dir, OutputStream out) throws IOException {
         Map env = createEnvVarMap();
 
-        int r = launcher.launch(cmd,env,listener.getLogger(),dir).join();
+        int r = launcher.launch(cmd,env,out,dir).join();
         if(r!=0)
             listener.fatalError(getDescriptor().getDisplayName()+" failed");
 
         return r==0;
     }
+
+    protected final boolean run(Launcher launcher, String cmd, BuildListener listener, FilePath dir) throws IOException {
+        return run(launcher,cmd,listener,dir,listener.getLogger());
+    }
+
 
     protected final Map createEnvVarMap() {
         Map env = new HashMap();

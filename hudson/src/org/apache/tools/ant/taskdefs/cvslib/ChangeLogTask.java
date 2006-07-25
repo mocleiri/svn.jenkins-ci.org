@@ -28,6 +28,9 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
+import java.util.List;
+import java.util.ArrayList;
+
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Project;
@@ -89,7 +92,7 @@ public class ChangeLogTask extends AbstractCvsTask {
      * performed. If empty then all files will in the working directory will
      * be checked.
      */
-    private final Vector m_filesets = new Vector();
+    private List<String> m_filesets = new ArrayList<String>();
 
 
     /**
@@ -166,12 +169,17 @@ public class ChangeLogTask extends AbstractCvsTask {
 
 
     /**
-     * Adds a set of files about which cvs logs will be generated.
+     * Adds a file about which cvs logs will be generated.
      *
-     * @param fileSet a set of files about which cvs logs will be generated.
+     * @param fileName
+     *      fileName relative to {@link #setDir(File)}.
      */
-    public void addFileset(final FileSet fileSet) {
-        m_filesets.addElement(fileSet);
+    public void addFile(String fileName) {
+        m_filesets.add(fileName);
+    }
+
+    public void setFile(List<String> files) {
+        m_filesets  = files;
     }
 
 
@@ -229,17 +237,8 @@ public class ChangeLogTask extends AbstractCvsTask {
 
             // Check if list of files to check has been specified
             if (!m_filesets.isEmpty()) {
-                final Enumeration e = m_filesets.elements();
-
-                while (e.hasMoreElements()) {
-                    final FileSet fileSet = (FileSet) e.nextElement();
-                    final DirectoryScanner scanner =
-                        fileSet.getDirectoryScanner(getProject());
-                    final String[] files = scanner.getIncludedFiles();
-
-                    for (int i = 0; i < files.length; i++) {
-                        addCommandArgument(files[i]);
-                    }
+                for (String file : m_filesets) {
+                    addCommandArgument(file);
                 }
             }
 

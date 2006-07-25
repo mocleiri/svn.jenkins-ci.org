@@ -3,6 +3,8 @@ package hudson.scm;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
+import hudson.util.WriterOutputStream;
+import hudson.util.ForkOutputStream;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
@@ -27,11 +29,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.io.Reader;
+import java.io.StringReader;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  * CVS.
@@ -115,11 +120,13 @@ public class CVSSCM extends AbstractCVSFamilySCM {
     }
 
     public boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener, File changelogFile) throws IOException {
-        boolean result;
+        List<String> changedFiles = null; // files that were affected by update. null this is a check out
 
-        if(canUseUpdate && isUpdatable(dir.getLocal()))
-            result = update(launcher,dir,listener);
-        else {
+        if(canUseUpdate && isUpdatable(dir.getLocal())) {
+            changedFiles = update(launcher,dir,listener);
+            if(changedFiles==null)
+                return false;   // failed
+        } else {
             dir.deleteContents();
 
             String cmd = MessageFormat.format("cvs -Q -z9 -d {0} co {1} {2} {3}",
@@ -129,12 +136,9 @@ public class CVSSCM extends AbstractCVSFamilySCM {
                 module
             );
 
-            result = run(launcher,cmd,listener,
-                flatten ? dir.getParent() : dir);
+            if(!run(launcher,cmd,listener, flatten ? dir.getParent() : dir))
+                return false;
         }
-
-        if(!result)
-           return false;
 
         // archive the workspace to support later tagging
         // TODO: doing this partially remotely would be faster
@@ -154,7 +158,11 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         // contribute the tag action
         build.getActions().add(new TagAction(build));
 
-        return calcChangeLog(build, changelogFile, listener);
+        if(changedFiles==null)
+            // nothing to compare against
+            return createEmptyChangeLog(changelogFile,listener, "changelog");
+        else
+            return calcChangeLog(build, changedFiles, changelogFile, listener);
     }
 
     /**
@@ -213,17 +221,78 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         in.close();
     }
 
-    public boolean update(Launcher launcher, FilePath workspace, BuildListener listener) throws IOException {
+    /**
+     * Updates the workspace as well as locate changes.
+     *
+     * @return
+     *      List of affected file names, relative to the workspace directory.
+     *      Null if the operation failed.
+     */
+    public List<String> update(Launcher launcher, FilePath workspace, BuildListener listener) throws IOException {
+
+        List<String> changedFileNames = new ArrayList<String>();    // file names relative to the workspace
+
         String cmd = "cvs -q -z9 update -PdC";
         if(flatten) {
-            return run(launcher,cmd,listener,workspace);
+            StringWriter output = new StringWriter();
+            WriterOutputStream wo = new WriterOutputStream(output);
+
+            if(!run(launcher,cmd,listener,workspace,
+                new ForkOutputStream(wo,listener.getLogger())))
+                return null;
+
+            wo.close();
+            parseUpdateOutput("",output, changedFileNames);
         } else {
             StringTokenizer tokens = new StringTokenizer(module);
             while(tokens.hasMoreTokens()) {
-                if(!run(launcher,cmd,listener,new FilePath(workspace,tokens.nextToken())))
-                    return false;
+                String moduleName = tokens.nextToken();
+
+                // capture the output during update
+                StringWriter output = new StringWriter();
+                WriterOutputStream wo = new WriterOutputStream(output);
+
+                if(!run(launcher,cmd,listener,
+                    new FilePath(workspace, moduleName),
+                    new ForkOutputStream(wo,listener.getLogger())))
+                    return null;
+
+                // we'll run one "cvs log" command with workspace as the base,
+                // so use path names that are relative to moduleName.
+                wo.close();
+                parseUpdateOutput(moduleName+'/',output, changedFileNames);
             }
-            return true;
+        }
+
+        return changedFileNames;
+    }
+
+    // see http://www.network-theory.co.uk/docs/cvsmanual/cvs_153.html for the output format.
+    // we don't care '?' because that's not in the repository
+    private static final Pattern UPDATE_LINE = Pattern.compile("[UPARMC] (.+)");
+
+    private static final Pattern REMOVAL_LINE = Pattern.compile("cvs (server|update): (.+) is no longer in the repository");
+
+    /**
+     * Parses the output from CVS update and list up files that might have been changed.
+     *
+     * @param result
+     *      list of file names whose changelog should be checked. This may include files
+     *      that are no longer present. The path names are relative to the workspace,
+     *      hence "String", not {@link File}.
+     */
+    private void parseUpdateOutput(String baseName, StringWriter output, List<String> result) throws IOException {
+        BufferedReader in = new BufferedReader(new StringReader(output.toString()));
+        String line;
+        while((line=in.readLine())!=null) {
+            Matcher matcher = UPDATE_LINE.matcher(line);
+            if(matcher.matches()) {
+                result.add(baseName+matcher.group(1));
+            } else {
+                matcher= REMOVAL_LINE.matcher(line);
+                if(matcher.matches())
+                    result.add(baseName+matcher.group(2));
+            }
         }
     }
 
@@ -283,9 +352,16 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         }
     }
 
-    private boolean calcChangeLog(Build build, File changelogFile, BuildListener listener) {
-        if(build.getPreviousBuild()==null) {
-            // nothing to compare against
+    /**
+     * Computes the changelog into an XML file.
+     *
+     * @param changedFiles
+     *      Files whose changelog should be checked for updates.
+     *      Never null.
+     */
+    private boolean calcChangeLog(Build build, List<String> changedFiles, File changelogFile, BuildListener listener) {
+        if(build.getPreviousBuild()==null || changedFiles.isEmpty()) {
+            // nothing to compare against, or no changes
             return createEmptyChangeLog(changelogFile,listener, "changelog");
         }
 
@@ -303,12 +379,11 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             task.setPassfile(new File(DESCRIPTOR.getCvspassFile()));
         task.setCvsRoot(cvsroot);
         task.setCvsRsh(cvsRsh);
-        if(!flatten)
-            task.setPackage(module);
         task.setFailOnError(true);
         task.setDestfile(changelogFile);
         task.setStart(build.getPreviousBuild().getTimestamp().getTime());
         task.setEnd(build.getTimestamp().getTime());
+        task.setFile(changedFiles);
 
         try {
             task.execute();
