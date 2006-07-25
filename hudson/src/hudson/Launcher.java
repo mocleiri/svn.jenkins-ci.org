@@ -90,7 +90,7 @@ public class Launcher {
         StringBuffer buf = new StringBuffer();
         if (workDir != null) {
             buf.append('[');
-            buf.append(workDir.getRemote().replace("^.+[/\\]", ""));
+            buf.append(workDir.getRemote().replaceFirst("^.+[/\\\\]", ""));
             buf.append("] ");
         }
         buf.append('$');
