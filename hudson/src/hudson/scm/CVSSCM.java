@@ -12,6 +12,7 @@ import hudson.model.StreamBuildListener;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.Expand;
 import org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
+import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
 import org.kohsuke.stapler.StaplerRequest;
@@ -29,9 +30,15 @@ import java.io.StringWriter;
 import java.io.Reader;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * CVS.
@@ -197,21 +204,27 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         }
     }
 
+    private static final Pattern CVS_ENTRIES = Pattern.compile("(?:A )?D?/([^/]+)/.*");
+
     /**
      * Parses the CVS/Entries file and adds file/directory names to the list.
      */
-    private void parseCVSEntries(File entries, List<String> knownFiles) throws IOException {
+    private static void parseCVSEntries(File entries, List<String> knownFiles) throws IOException {
         if(!entries.exists())
             return;
 
         BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(entries)));
-        String line;
-        while((line=in.readLine())!=null) {
-            String[] tokens = line.split("/+");
-            if(tokens==null || tokens.length<2)    continue;   // invalid format
-            knownFiles.add(tokens[1]);
+        try {
+            String line;
+            while((line=in.readLine())!=null) {
+                Matcher m = CVS_ENTRIES.matcher(line);
+                if (m.matches()) {
+                    knownFiles.add(m.group(1));
+                }
+            }
+        } finally {
+            in.close();
         }
-        in.close();
     }
 
     public boolean update(Launcher launcher, FilePath workspace, BuildListener listener) throws IOException {
@@ -290,8 +303,6 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             return createEmptyChangeLog(changelogFile,listener, "changelog");
         }
 
-        listener.getLogger().println("$ computing changelog");
-
         ChangeLogTask task = new ChangeLogTask() {
             {
                 setOutputStream(System.out);
@@ -299,17 +310,60 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             }
         };
         task.setProject(new org.apache.tools.ant.Project());
-        task.setDir(build.getProject().getWorkspace().getLocal());
+        File dir = build.getProject().getWorkspace().getLocal();
+        task.setDir(dir);
         if(DESCRIPTOR.getCvspassFile().length()!=0)
             task.setPassfile(new File(DESCRIPTOR.getCvspassFile()));
         task.setCvsRoot(cvsroot);
         task.setCvsRsh(cvsRsh);
-        if(!flatten)
-            task.setPackage(module);
         task.setFailOnError(true);
         task.setDestfile(changelogFile);
-        task.setStart(build.getPreviousBuild().getTimestamp().getTime());
+        Date start = build.getPreviousBuild().getTimestamp().getTime();
+        task.setStart(start);
         task.setEnd(build.getTimestamp().getTime());
+        List<String> args = new LinkedList<String>();
+        // Try to avoid querying whole repo. Just check files which have a mod time newer than prev build.
+        // Note: will not find deleted files. Listing *dirs* which are newer usually would, but this has
+        // three disadvantages:
+        // 1. Slower (must log untouched sister files).
+        // 2. Will log dirs in which no CVS-controlled files were touched,
+        //    e.g. top-level if build.xml does <mkdir dir="build"/>.
+        // 3. Does not work anyway if every file in the dir is deleted (since using cvs up -P).
+        // 4. ChangeLogTask.addFileset only looks for files, not dirs.
+        // Parsing output from cvs up would solve #1-#3 but not #4; for that, would need a custom changelog parser.
+        try {
+            listener.getLogger().println("# looking for files relevant to changelog, this could take a while...");
+            Set<String> newFiles = findNewerFiles(dir, start.getTime());
+            if (newFiles.isEmpty()) {
+                // Maybe nothing was changed, but might have been file deletions...
+                // Anyway this is suspicious, fall back to slow way.
+                listener.getLogger().println("# no CVS-controlled files apparently changed in " + dir + " since " + start + "; will run cvs log the slow way");
+            } else {
+                // Cannot just use task.addCommandArgument; filenames must be after -d DATE.
+                // This wastes some time (ChangeLogTask will recalculate the list) but oh well.
+                FileSet fs = new FileSet();
+                fs.setDir(dir);
+                for (String s : newFiles) {
+                    fs.createInclude().setName(s);
+                }
+                task.addFileset(fs);
+                args.addAll(newFiles);
+            }
+        } catch (IOException e) {
+            e.printStackTrace(listener.error(e.getMessage()));
+            // continue the slow way
+        }
+        if (args.isEmpty() && !flatten) {
+            task.setPackage(module);
+            args.add(module);
+        }
+
+        // Would prefer to log the actual command line but probably not possible to extract that via API.
+        listener.getLogger().print("[" + dir.getName() + "] $ cvs log <date-or-branch-args...>");
+        for (String s : args) {
+            listener.getLogger().print(" " + s);
+        }
+        listener.getLogger().println();
 
         try {
             task.execute();
@@ -322,6 +376,38 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             // we don't want a bug in Ant to prevent a build.
             e.printStackTrace(listener.error(e.getMessage()));
             return true;    // so record the message but continue
+        }
+    }
+
+    /**
+     * Find CVS-controlled files whose last-modified time is after the given date.
+     * Paths given as relative w/ native separator.
+     */
+    private Set<String> findNewerFiles(File dir, long date) throws IOException {
+        Set<String> files = new TreeSet<String>();
+        findNewerFiles0(dir, "", date, files);
+        return files;
+    }
+    private void findNewerFiles0(File dir, String prefix, long date, Set<String> files) throws IOException {
+        List<String> controlled = new LinkedList<String>();
+        File entries = new File(new File(dir, "CVS"), "Entries");
+        if (entries.isFile()) {
+            parseCVSEntries(entries, controlled);
+            parseCVSEntries(new File(new File(dir, "CVS"), "Entries.Log"), controlled);
+            parseCVSEntries(new File(new File(dir, "CVS"), "Entries.Extra"), controlled);
+        }
+        String[] kids = dir.list();
+        if (kids == null) {
+            throw new IOException("Could not list dir " + dir);
+        }
+        for (String sub : kids) {
+            File f = new File(dir, sub);
+            // Do not prune dirs unmentioned in CVS; can break logging for some kinds of checkouts.
+            if (f.isDirectory() && (controlled.contains(sub))) {
+                findNewerFiles0(f, prefix + sub + File.separatorChar, date, files);
+            } else if (f.isFile() && controlled.contains(sub) && f.lastModified() > date) {
+                files.add(prefix + sub);
+            }
         }
     }
 
