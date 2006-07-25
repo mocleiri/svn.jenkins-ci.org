@@ -22,8 +22,6 @@ abstract class AbstractCVSFamilySCM implements SCM {
      *      if launching locally this is a local path, otherwise a remote path.
      */
     protected final boolean run(Launcher launcher, String cmd, BuildListener listener, FilePath dir) throws IOException {
-        //listener.getLogger().println("$ "+cmd);
-
         Map env = createEnvVarMap();
 
         int r = launcher.launch(cmd,env,listener.getLogger(),dir).join();
