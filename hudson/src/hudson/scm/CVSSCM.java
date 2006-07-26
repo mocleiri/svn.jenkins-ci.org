@@ -166,11 +166,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         // contribute the tag action
         build.getActions().add(new TagAction(build));
 
-        if(changedFiles==null)
-            // nothing to compare against
-            return createEmptyChangeLog(changelogFile,listener, "changelog");
-        else
-            return calcChangeLog(build, changedFiles, changelogFile, listener);
+        return calcChangeLog(build, changedFiles, changelogFile, listener);
     }
 
     /**
@@ -365,11 +361,13 @@ public class CVSSCM extends AbstractCVSFamilySCM {
      *
      * @param changedFiles
      *      Files whose changelog should be checked for updates.
-     *      Never null.
+     *      This is provided if the previous operation is update, otherwise null,
+     *      which means we have to fall back to the default slow computation.
      */
     private boolean calcChangeLog(Build build, List<String> changedFiles, File changelogFile, BuildListener listener) {
-        if(build.getPreviousBuild()==null || changedFiles.isEmpty()) {
+        if(build.getPreviousBuild()==null || (changedFiles!=null && changedFiles.isEmpty())) {
             // nothing to compare against, or no changes
+            // (note that changedFiles==null means fallback, so we have to run cvs log.
             listener.getLogger().println("$ no changes detected");
             return createEmptyChangeLog(changelogFile,listener, "changelog");
         }
@@ -392,7 +390,13 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         task.setDestfile(changelogFile);
         task.setStart(build.getPreviousBuild().getTimestamp().getTime());
         task.setEnd(build.getTimestamp().getTime());
-        task.setFile(changedFiles);
+        if(changedFiles!=null)
+            task.setFile(changedFiles);
+        else {
+            // fallback
+            if(!flatten)
+                task.setPackage(module);
+        }
 
         try {
             task.execute();
