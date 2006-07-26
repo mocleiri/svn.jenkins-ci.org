@@ -359,6 +359,11 @@ public class CVSSCM extends AbstractCVSFamilySCM {
     /**
      * Computes the changelog into an XML file.
      *
+     * <p>
+     * When we update the workspace, we'll compute the changelog by using its output to
+     * make it faster. In general case, we'll fall back to the slower approach where
+     * we check all files in the workspace.
+     *
      * @param changedFiles
      *      Files whose changelog should be checked for updates.
      *      This is provided if the previous operation is update, otherwise null,
