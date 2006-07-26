@@ -11,6 +11,8 @@ import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Result;
 import hudson.model.StreamBuildListener;
+import hudson.model.Project;
+import hudson.model.TaskListener;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.Expand;
 import org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
@@ -119,11 +121,17 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         return flatten;
     }
 
+    public boolean pollChanges(Project project, Launcher launcher, FilePath dir, TaskListener listener) throws IOException {
+        List<String> changedFiles = update(false, launcher, dir, listener);
+
+        return changedFiles!=null && !changedFiles.isEmpty();
+    }
+
     public boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener, File changelogFile) throws IOException {
         List<String> changedFiles = null; // files that were affected by update. null this is a check out
 
         if(canUseUpdate && isUpdatable(dir.getLocal())) {
-            changedFiles = update(launcher,dir,listener);
+            changedFiles = update(false,launcher,dir,listener);
             if(changedFiles==null)
                 return false;   // failed
         } else {
@@ -228,11 +236,11 @@ public class CVSSCM extends AbstractCVSFamilySCM {
      *      List of affected file names, relative to the workspace directory.
      *      Null if the operation failed.
      */
-    public List<String> update(Launcher launcher, FilePath workspace, BuildListener listener) throws IOException {
+    public List<String> update(boolean dryRun, Launcher launcher, FilePath workspace, TaskListener listener) throws IOException {
 
         List<String> changedFileNames = new ArrayList<String>();    // file names relative to the workspace
 
-        String cmd = "cvs -q -z9 update -PdC";
+        String cmd = "cvs -q "+(dryRun?"-n":"")+" -z9 update -PdC";
         if(flatten) {
             StringWriter output = new StringWriter();
             WriterOutputStream wo = new WriterOutputStream(output);
@@ -362,6 +370,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
     private boolean calcChangeLog(Build build, List<String> changedFiles, File changelogFile, BuildListener listener) {
         if(build.getPreviousBuild()==null || changedFiles.isEmpty()) {
             // nothing to compare against, or no changes
+            listener.getLogger().println("$ no changes detected");
             return createEmptyChangeLog(changelogFile,listener, "changelog");
         }
 

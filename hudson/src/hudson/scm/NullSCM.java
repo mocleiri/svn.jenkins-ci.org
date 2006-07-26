@@ -5,6 +5,8 @@ import hudson.Launcher;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
+import hudson.model.Project;
+import hudson.model.TaskListener;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -17,6 +19,11 @@ import java.util.Map;
  * @author Kohsuke Kawaguchi
  */
 public class NullSCM implements SCM {
+    public boolean pollChanges(Project project, Launcher launcher, FilePath dir, TaskListener listener) throws IOException {
+        // no change
+        return false;
+    }
+
     public boolean checkout(Build build, Launcher launcher, FilePath remoteDir, BuildListener listener, File changeLogFile) throws IOException {
         return true;
     }

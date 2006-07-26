@@ -5,6 +5,8 @@ import hudson.Launcher;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Describable;
+import hudson.model.Project;
+import hudson.model.TaskListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +18,26 @@ import java.util.Map;
  * @author Kohsuke Kawaguchi
  */
 public interface SCM extends Describable<SCM> {
+
+    /**
+     * Checks if there has been any changes to this module in the repository.
+     *
+     * TODO: we need to figure out a better way to communicate an error back,
+     * so that we won't keep retrying the same node (for example a slave might be down.)
+     *
+     * @param project
+     *      The project to check for updates
+     * @param launcher
+     *      Abstraction of the machine where the polling will take place.
+     * @param workspace
+     *      The workspace directory that contains baseline files.
+     * @param listener
+     *      Logs during the polling should be sent here.
+     *
+     * @return true
+     *      if the change is detected.
+     */
+    boolean pollChanges(Project project, Launcher launcher, FilePath workspace, TaskListener listener) throws IOException;
 
     /**
      * Obtains a fresh workspace of the module(s) into the specified directory
@@ -30,7 +52,7 @@ public interface SCM extends Describable<SCM> {
      *
      * @param launcher
      *      Abstracts away the machine that the files will be checked out.
-     * @param dir
+     * @param workspace
      *      a directory to check out the source code. May contain left-over
      *      from the previous build.
      * @param changelogFile
@@ -39,7 +61,7 @@ public interface SCM extends Describable<SCM> {
      *      null if the operation fails. The error should be reported to the listener.
      *      Otherwise return the changes included in this update (if this was an update.)
      */
-    boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener, File changelogFile) throws IOException;
+    boolean checkout(Build build, Launcher launcher, FilePath workspace, BuildListener listener, File changelogFile) throws IOException;
 
     /**
      * Adds environmental variables for the builds to the given map.

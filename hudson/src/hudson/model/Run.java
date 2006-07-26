@@ -500,6 +500,9 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
             }
         } finally {
             state = State.COMPLETED;
+            if(result==null)
+                // shouldn't happen, but be defensive until we figure out why
+                result = Result.FAILURE;
         }
     }
 

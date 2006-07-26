@@ -6,6 +6,8 @@ import hudson.Proc;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
+import hudson.model.Project;
+import hudson.model.TaskListener;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -32,6 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.Map.Entry;
 
 /**
  * Subversion.
@@ -133,64 +136,119 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         return revisions;
     }
 
-    public boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener, File changelogFile) throws IOException {
+    public boolean checkout(Build build, Launcher launcher, FilePath workspace, BuildListener listener, File changelogFile) throws IOException {
         boolean result;
 
-        if(useUpdate && isUpdatable(dir.getLocal())) {
-            result = update(launcher,dir,listener);
+        if(useUpdate && isUpdatable(workspace.getLocal())) {
+            result = update(launcher,workspace,listener);
             if(!result)
                 return false;
         } else {
-            dir.deleteContents();
+            workspace.deleteContents();
             StringTokenizer tokens = new StringTokenizer(modules);
             while(tokens.hasMoreTokens()) {
                 result = run(launcher,DESCRIPTOR.getSvnExe()+" co -q --non-interactive "
                     +(username!=null?"--username "+username+' ':"")
                     +(otherOptions!=null?otherOptions+' ':"")
-                    +tokens.nextToken(),listener,dir);
+                    +tokens.nextToken(),listener,workspace);
                 if(!result)
                     return false;
             }
         }
 
-        PrintStream logger = listener.getLogger();
-
-        {// record the current revision
-            PrintWriter w = new PrintWriter(new FileOutputStream(getRevisionFile(build)));
-
-            Map env = createEnvVarMap();
-
-            // invoke the "svn info"
-            for( String module : getModuleDirNames() ) {
-                String cmd = DESCRIPTOR.getSvnExe()+" info "+module;
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                logger.println("$ "+cmd);
-                int r = new Proc(cmd,env,baos,dir.getLocal()).join();
-                if(r!=0) {
-                    listener.fatalError("revision check failed");
-                    return false;
-                }
-
-                // look for the revision line
-                BufferedReader br = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(baos.toByteArray())));
-                String line;
-                while((line=br.readLine())!=null) {
-                    if(line.startsWith("Revision:"))
-                        break;
-                }
-                if(line==null) {
-                    listener.fatalError("no revision in the svn info output");
-                    return false;
-                }
-
-                w.println( module +'/'+ line.substring("Revision: ".length()) );
-                logger.println(line);
+        // write out the revision file
+        PrintWriter w = new PrintWriter(new FileOutputStream(getRevisionFile(build)));
+        try {
+            Map<String,SvnInfo> revMap = buildRevisionMap(workspace,listener);
+            for (Entry<String,SvnInfo> e : revMap.entrySet()) {
+                w.println( e.getKey() +'/'+ e.getValue().revision );
             }
-
+        } finally {
             w.close();
         }
 
         return calcChangeLog(build, changelogFile, launcher, listener);
+    }
+
+    /**
+     * Output from "svn info" command.
+     */
+    private static class SvnInfo {
+        /** The remote URL of this directory */
+        String url;
+        /** Current workspace revision. */
+        int revision = -1;
+
+        private SvnInfo() {}
+
+        /**
+         * Returns true if this object is fully populated.
+         */
+        public boolean isComplete() {
+            return url!=null && revision!=-1;
+        }
+
+        /**
+         * Executes "svn info" command and returns the parsed output
+         *
+         * @param subject
+         *      The target to run "svn info". Either local path or remote URL.
+         */
+        public static SvnInfo parse(String subject, Map env, FilePath workspace, TaskListener listener) throws IOException {
+            String cmd = DESCRIPTOR.getSvnExe()+" info "+subject;
+            listener.getLogger().println("$ "+cmd);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+            int r = new Proc(cmd,env,baos,workspace.getLocal()).join();
+            if(r!=0)
+                throw new IOException("revision check failed");
+
+            SvnInfo info = new SvnInfo();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(baos.toByteArray())));
+            String line;
+            while((line=br.readLine())!=null) {
+                if(line.startsWith("Revision:")) {
+                    info.revision = Integer.parseInt(
+                        line.substring("Revision: ".length()).trim());
+                }
+                if(line.startsWith("URL:")) {
+                    info.url = line.substring("URL: ".length()).trim();
+                }
+            }
+
+            if(!info.isComplete())
+                throw new IOException("no revision in the svn info output");
+
+            return info;
+        }
+
+    }
+
+    /**
+     * Checks .svn files in the workspace and finds out revisions of the modules
+     * that the workspace has.
+     *
+     * @return
+     *      null if the parsing somehow fails. Otherwise a map from module names to revisions.
+     */
+    private Map<String,SvnInfo> buildRevisionMap(FilePath workspace, TaskListener listener) throws IOException {
+        PrintStream logger = listener.getLogger();
+
+        Map<String/*module name*/,SvnInfo> revisions = new HashMap<String,SvnInfo>();
+
+        Map env = createEnvVarMap();
+
+        // invoke the "svn info"
+        for( String module : getModuleDirNames() ) {
+            // parse the output
+            SvnInfo info = SvnInfo.parse(module,env,workspace,listener);
+            revisions.put(module,info);
+            logger.println("Revision:"+info.revision);
+        }
+
+        return revisions;
     }
 
     /**
@@ -216,7 +274,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
     }
 
     /**
-     * Returns true if we can use "cvs update" instead of "cvs checkout"
+     * Returns true if we can use "svn update" instead of "svn checkout"
      */
     private boolean isUpdatable(File dir) {
         StringTokenizer tokens = new StringTokenizer(modules);
@@ -248,6 +306,22 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             }
         }
         return true;
+    }
+
+    public boolean pollChanges(Project project, Launcher launcher, FilePath workspace, TaskListener listener) throws IOException {
+        // current workspace revision
+        Map<String,SvnInfo> wsRev = buildRevisionMap(workspace,listener);
+
+        Map env = createEnvVarMap();
+
+        // check the corresponding remote revision
+        for (SvnInfo localInfo : wsRev.values()) {
+            SvnInfo remoteInfo = SvnInfo.parse(localInfo.url,env,workspace,listener);
+            if(remoteInfo.revision > localInfo.revision)
+                return true;    // change found
+        }
+
+        return false; // no change
     }
 
     /**

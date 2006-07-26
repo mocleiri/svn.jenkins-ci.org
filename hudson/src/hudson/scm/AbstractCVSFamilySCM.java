@@ -3,6 +3,7 @@ package hudson.scm;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.model.BuildListener;
+import hudson.model.TaskListener;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -24,7 +25,7 @@ abstract class AbstractCVSFamilySCM implements SCM {
      * @param out
      *      Receives output from the executed program.
      */
-    protected final boolean run(Launcher launcher, String cmd, BuildListener listener, FilePath dir, OutputStream out) throws IOException {
+    protected final boolean run(Launcher launcher, String cmd, TaskListener listener, FilePath dir, OutputStream out) throws IOException {
         Map env = createEnvVarMap();
 
         int r = launcher.launch(cmd,env,out,dir).join();
@@ -34,7 +35,7 @@ abstract class AbstractCVSFamilySCM implements SCM {
         return r==0;
     }
 
-    protected final boolean run(Launcher launcher, String cmd, BuildListener listener, FilePath dir) throws IOException {
+    protected final boolean run(Launcher launcher, String cmd, TaskListener listener, FilePath dir) throws IOException {
         return run(launcher,cmd,listener,dir,listener.getLogger());
     }
 
