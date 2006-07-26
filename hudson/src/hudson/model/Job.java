@@ -253,7 +253,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     public synchronized RunT getLastSuccessfulBuild() {
         RunT r = getLastBuild();
         // temporary hack till we figure out what's causing this bug
-        while(r!=null && r.getResult()==null && (r.isBuilding() || r.getResult().isWorseThan(Result.UNSTABLE)))
+        while(r!=null && (r.isBuilding() || r.getResult()==null || r.getResult().isWorseThan(Result.UNSTABLE)))
             r=r.getPreviousBuild();
         return r;
     }
