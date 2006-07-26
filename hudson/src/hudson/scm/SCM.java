@@ -17,14 +17,6 @@ import java.util.Map;
  */
 public interface SCM extends Describable<SCM> {
 
-    ///**
-    // * Calculate changelog for the given build and write it to the specified file.
-    // *
-    // * @return
-    // *      false if the operation fails. The error should be reported to the listener.
-    // */
-    //boolean calcChangeLog(Build build, File changelogFile, Launcher launcher, BuildListener listener) throws IOException;
-
     /**
      * Obtains a fresh workspace of the module(s) into the specified directory
      * of the specified machine.
