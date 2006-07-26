@@ -5,6 +5,8 @@ import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Describable;
 import hudson.model.Descriptor;
+import hudson.model.Action;
+import hudson.model.Project;
 import hudson.tasks.junit.JUnitResultArchiver;
 
 /**
@@ -31,6 +33,12 @@ public interface BuildStep extends Describable<BuildStep> {
      *      and the build needs to be aborted.
      */
     boolean perform(Build build, Launcher launcher, BuildListener listener);
+
+    /**
+     * Returns an action object if this {@link BuildStep} has an action
+     * to contribute to a {@link Project}.
+     */
+    Action getProjectAction();
 
     /**
      * List of all installed {@link BuildStep}s.

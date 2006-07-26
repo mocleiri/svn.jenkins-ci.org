@@ -1,35 +1,127 @@
 package hudson.triggers;
 
+import antlr.ANTLRException;
+import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.Describable;
-import hudson.model.Descriptor;
+import hudson.model.Hudson;
+import hudson.model.Job;
 import hudson.model.Project;
+import hudson.scheduler.CronTabList;
+
+import java.io.InvalidObjectException;
+import java.io.ObjectStreamException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Triggers a {@link Build}.
  *
  * @author Kohsuke Kawaguchi
  */
-public interface Trigger extends Describable<Trigger> {
+public abstract class Trigger implements Describable<Trigger> {
+
     /**
      * Called when a {@link Trigger} is loaded into memory and started.
      *
      * @param project
      *      given so that the persisted form of this object won't have to have a back pointer.
      */
-    void start(Project project);
+    public void start(Project project) {
+        this.project = project;
+    }
+
+    /**
+     * Executes the triggered task.
+     *
+     * This method is invoked when the crontab matches the current time.
+     */
+    protected abstract void run();
 
     /**
      * Called before a {@link Trigger} is removed.
      * Under some circumstances, this may be invoked more than once for
      * a given {@link Trigger}, so be prepared for that.
      */
-    void stop();
+    public void stop() {}
 
     /**
-     * List of all installed {@link Trigger}s.
+     * Returns an action object if this {@link Trigger} has an action
+     * to contribute to a {@link Project}.
      */
-    public static final Descriptor<Trigger>[] TRIGGERS = Descriptor.toArray(
-        TimerTrigger.DESCRIPTOR
-    );
+    public Action getProjectAction() {
+        return null;
+    }
+
+
+
+    protected final String spec;
+    protected transient CronTabList tabs;
+    protected transient Project project;
+
+    protected Trigger(String cronTabSpec) throws ANTLRException {
+        this.spec = cronTabSpec;
+        this.tabs = CronTabList.create(cronTabSpec);
+    }
+
+    public String getSpec() {
+        return spec;
+    }
+
+    private Object readResolve() throws ObjectStreamException {
+        try {
+            tabs = CronTabList.create(spec);
+        } catch (ANTLRException e) {
+            InvalidObjectException x = new InvalidObjectException(e.getMessage());
+            x.initCause(e);
+            throw x;
+        }
+        return this;
+    }
+
+
+    /**
+     * Runs every minute to check {@link TimerTrigger} and schedules build.
+     */
+    private static class Cron extends TimerTask {
+        private final Calendar cal = new GregorianCalendar();
+
+        public void run() {
+            LOGGER.fine("cron checking "+cal.getTime().toLocaleString());
+
+            try {
+                Hudson inst = Hudson.getInstance();
+                for (Job job : inst.getJobs()) {
+                    if (job instanceof Project) {
+                        Project p = (Project) job;
+                        for (Trigger t : p.getTriggers().values()) {
+                            LOGGER.fine("cron checking "+p.getName());
+                            if(t.tabs.check(cal)) {
+                                LOGGER.fine("cron triggered "+p.getName());
+                                t.run();
+                            }
+                        }
+                    }
+                }
+            } catch (RuntimeException e) {
+                LOGGER.log(Level.WARNING,"Cron thread throw an exception",e);
+                // bug in the code. Don't let the thread die.
+                e.printStackTrace();
+            }
+
+            cal.add(Calendar.MINUTE,1);
+        }
+    }
+
+    private static final Logger LOGGER = Logger.getLogger(Trigger.class.getName());
+
+    public static final Timer timer = new Timer(); // "Hudson cron thread"); -- this is a new constructor since 1.5
+
+    static {
+        timer.scheduleAtFixedRate(new Cron(),0,1000*60/*every minute*/);
+    }
 }

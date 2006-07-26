@@ -95,6 +95,10 @@ public class Fingerprinter implements BuildStep {
         return true;
     }
 
+    public Action getProjectAction() {
+        return null;
+    }
+
     private void record(Build build, MessageDigest md5, BuildListener listener, Map<String,String> record, String targets) {
         Project p = build.getProject();
 

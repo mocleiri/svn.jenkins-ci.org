@@ -421,13 +421,13 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
         if(result!=null)
             return;     // already built.
 
-        state = State.BUILDING;
+        onStartBuilding();
         try {
-            BuildListener listener=null;
-
             // to set the state to COMPLETE in the end, even if the thread dies abnormally.
             // otherwise the queue state becomes inconsistent
+
             long start = System.currentTimeMillis();
+            BuildListener listener=null;
 
             try {
                 final PrintStream log = new PrintStream(new FileOutputStream(getLogFile()));
@@ -499,11 +499,25 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
                 e.printStackTrace();
             }
         } finally {
-            state = State.COMPLETED;
-            if(result==null)
-                // shouldn't happen, but be defensive until we figure out why
-                result = Result.FAILURE;
+            onEndBuilding();
         }
+    }
+
+    /**
+     * Called when a job started building.
+     */
+    protected void onStartBuilding() {
+        state = State.BUILDING;
+    }
+
+    /**
+     * Called when a job finished building normally or abnormally.
+     */
+    protected void onEndBuilding() {
+        state = State.COMPLETED;
+        if(result==null)
+            // shouldn't happen, but be defensive until we figure out why
+            result = Result.FAILURE;
     }
 
     /**
@@ -523,20 +537,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
      * I know, this isn't terribly efficient!
      */
     public String getLog() throws IOException {
-        File logfile = getLogFile();
-        if(!logfile.exists())
-            return "";
-
-        StringBuffer str = new StringBuffer((int)logfile.length());
-
-        BufferedReader r = new BufferedReader(new FileReader(logfile));
-        char[] buf = new char[1024];
-        int len;
-        while((len=r.read(buf,0,buf.length))>0)
-           str.append(buf,0,len);
-        r.close();
-
-        return str.toString();
+        return Util.loadFile(getLogFile());
     }
 
     public void doBuildStatus( StaplerRequest req, StaplerResponse rsp ) throws IOException {

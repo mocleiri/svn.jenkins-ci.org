@@ -2,9 +2,10 @@ package hudson.util;
 
 import hudson.model.TaskListener;
 
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.io.OutputStream;
+import java.io.Writer;
 
 /**
  * {@link TaskListener} that generates output into a single stream.
@@ -20,6 +21,10 @@ public final class StreamTaskListener implements TaskListener {
 
     public StreamTaskListener(OutputStream out) {
         this(new PrintStream(out));
+    }
+
+    public StreamTaskListener(Writer w) {
+        this(new WriterOutputStream(w));
     }
 
     public PrintStream getLogger() {

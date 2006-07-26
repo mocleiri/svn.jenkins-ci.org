@@ -1,6 +1,6 @@
 package hudson;
 
-import hudson.model.BuildListener;
+import hudson.model.TaskListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,9 +30,9 @@ import java.util.Map;
  */
 public class Launcher {
 
-    protected final BuildListener listener;
+    protected final TaskListener listener;
 
-    public Launcher(BuildListener listener) {
+    public Launcher(TaskListener listener) {
         this.listener = listener;
     }
 

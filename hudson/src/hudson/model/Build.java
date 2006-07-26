@@ -2,6 +2,8 @@ package hudson.model;
 
 import hudson.Launcher;
 import hudson.Proc;
+import hudson.triggers.SCMTrigger;
+import hudson.triggers.Trigger;
 import static hudson.model.Hudson.isWindows;
 import hudson.scm.CVSChangeLogParser;
 import hudson.scm.ChangeLogParser;
@@ -184,6 +186,37 @@ public final class Build extends Run<Project,Build> implements Runnable {
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onStartBuilding() {
+        SCMTrigger t = (SCMTrigger)project.getTriggers().get(SCMTrigger.DESCRIPTOR);
+        if(t==null) {
+            super.onStartBuilding();
+        } else {
+            synchronized(t) {
+                try {
+                    t.abort();
+                } catch (InterruptedException e) {
+                    // handle the interrupt later
+                    Thread.currentThread().interrupt();
+                }
+                super.onStartBuilding();
+            }
+        }
+    }
+
+    @Override
+    protected void onEndBuilding() {
+        SCMTrigger t = (SCMTrigger)project.getTriggers().get(SCMTrigger.DESCRIPTOR);
+        if(t==null) {
+            super.onEndBuilding();
+        } else {
+            synchronized(t) {
+                super.onEndBuilding();
+                t.startPolling();
+            }
+        }
     }
 
     @Override

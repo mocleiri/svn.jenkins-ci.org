@@ -5,6 +5,7 @@ import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Project;
+import hudson.model.Action;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
 
@@ -61,6 +62,11 @@ public class JavadocArchiver extends AntBasedBuildStep {
         execTask(copyTask, listener);
 
         return true;
+    }
+
+    public Action getProjectAction() {
+        // TODO: contribute javadoc action from here
+        return null;
     }
 
     public Descriptor<BuildStep> getDescriptor() {

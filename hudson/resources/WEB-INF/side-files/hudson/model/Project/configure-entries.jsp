@@ -74,7 +74,7 @@
 
 <%-- build triggers config pane --%>
 <s:descriptorList title="Build Triggers"
-                  descriptors="<%= hudson.triggers.Trigger.TRIGGERS %>"
+                  descriptors="<%= hudson.triggers.Triggers.TRIGGERS %>"
                   instances="${it.triggers}"
                   varName="trigger">
   <s:block>

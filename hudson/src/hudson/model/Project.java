@@ -12,17 +12,19 @@ import hudson.tasks.BuildTrigger;
 import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.junit.TestResultAction;
 import hudson.triggers.Trigger;
+import hudson.triggers.Triggers;
+import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.Ancestor;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -30,8 +32,6 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.Vector;
-import java.util.Collection;
-import java.util.AbstractList;
 
 /**
  * Buildable software project.
@@ -59,6 +59,15 @@ public class Project extends Job<Project,Build> {
     private List<BuildStep> builders = new Vector<BuildStep>();
 
     private List<BuildStep> publishers = new Vector<BuildStep>();
+
+    /**
+     * {@link Action}s contributed from {@link #triggers}, {@link #builders},
+     * and {@link #publishers}.
+     *
+     * We don't want to persist them separately, and these actions
+     * come and go as configuration change, so it's kept separate.
+     */
+    private transient /*final*/ List<Action> transientActions;
 
     /**
      * Identifies {@link JDK} to be used.
@@ -174,6 +183,8 @@ public class Project extends Job<Project,Build> {
 
         for (Trigger t : triggers)
             t.start(this);
+
+        updateTransientActions();
     }
 
     public boolean isBuildable() {
@@ -238,6 +249,28 @@ public class Project extends Job<Project,Build> {
         workspace.mkdirs();
 
         return scm.checkout(build, launcher, workspace, listener, changelogFile);
+    }
+
+    /**
+     * Checks if there's any update in SCM, and returns true if any is found.
+     *
+     * <p>
+     * The caller is responsible for coordinating the mutual exclusion between
+     * a build and polling, as both touches the workspace.
+     */
+    public boolean pollSCMChanges( TaskListener listener ) {
+        if(scm==null)   return false;   // no SCM
+
+        FilePath workspace = getWorkspace();
+        if(!workspace.exists()) return false;
+
+        try {
+            // TODO: do this by using the right slave
+            return scm.pollChanges(this, new Launcher(listener), workspace, listener );
+        } catch (IOException e) {
+            e.printStackTrace(listener.fatalError(e.getMessage()));
+            return false;
+        }
     }
 
     /**
@@ -357,6 +390,18 @@ public class Project extends Job<Project,Build> {
         return getParent().getQueue().contains(this);
     }
 
+    /**
+     * Schedules the SCM polling. If a polling is already in progress
+     * or a build is in progress, polling will take place after that.
+     * Otherwise the polling will be started immediately on a separate thread.
+     *
+     * <p>
+     * In any case this method returns immediately.
+     */
+    public void scheduleSCMPolling() {
+        // TODO
+    }
+
 
 
 
@@ -424,14 +469,46 @@ public class Project extends Job<Project,Build> {
 
             for (Trigger t : triggers)
                 t.stop();
-            buildDescribable(req, Trigger.TRIGGERS, triggers, "trigger");
+            buildDescribable(req, Triggers.TRIGGERS, triggers, "trigger");
             for (Trigger t : triggers)
                 t.start(this);
+
+            updateTransientActions();
 
             super.doConfigSubmit(req,rsp);
         } catch (InstantiationException e) {
             sendError(e,req,rsp);
         }
+    }
+
+    private void updateTransientActions() {
+        if(transientActions==null)
+            transientActions = new Vector<Action>();    // happens when loaded from disk
+        synchronized(transientActions) {
+            transientActions.clear();
+            for (BuildStep step : builders) {
+                Action a = step.getProjectAction();
+                if(a!=null)
+                    transientActions.add(a);
+            }
+            for (BuildStep step : publishers) {
+                Action a = step.getProjectAction();
+                if(a!=null)
+                    transientActions.add(a);
+            }
+            for (Trigger trigger : triggers) {
+                Action a = trigger.getProjectAction();
+                if(a!=null)
+                    transientActions.add(a);
+            }
+        }
+    }
+
+    public synchronized List<Action> getActions() {
+        // add all the transient actions, too
+        List<Action> actions = new Vector<Action>(super.getActions());
+        actions.addAll(transientActions);
+        return actions;
     }
 
     private <T extends Describable<T>> void buildDescribable(StaplerRequest req, Descriptor<T>[] descriptors, List<T> result, String prefix)

@@ -8,6 +8,7 @@ import hudson.model.Hudson;
 import hudson.model.Job;
 import hudson.model.Project;
 import hudson.model.Result;
+import hudson.model.Action;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.StringTokenizer;
@@ -65,6 +66,10 @@ public class BuildTrigger implements BuildStep {
         }
 
         return true;
+    }
+
+    public Action getProjectAction() {
+        return null;
     }
 
     public Descriptor<BuildStep> getDescriptor() {

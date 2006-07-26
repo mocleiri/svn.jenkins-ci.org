@@ -123,6 +123,10 @@ public final class FilePath {
        return local.delete();
     }
 
+    public boolean exists() {
+        return local.exists();
+    }
+
     /**
      * Always use {@link #getLocal()} or {@link #getRemote()}
      */

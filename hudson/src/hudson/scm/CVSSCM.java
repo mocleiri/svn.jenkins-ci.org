@@ -122,7 +122,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
     }
 
     public boolean pollChanges(Project project, Launcher launcher, FilePath dir, TaskListener listener) throws IOException {
-        List<String> changedFiles = update(false, launcher, dir, listener);
+        List<String> changedFiles = update(true, launcher, dir, listener);
 
         return changedFiles!=null && !changedFiles.isEmpty();
     }

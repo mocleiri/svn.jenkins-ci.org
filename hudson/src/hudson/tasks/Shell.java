@@ -8,6 +8,7 @@ import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import static hudson.model.Hudson.isWindows;
 import hudson.model.Project;
+import hudson.model.Action;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileWriter;
@@ -87,6 +88,10 @@ public class Shell implements BuildStep {
             if(script!=null)
                 script.delete();
         }
+    }
+
+    public Action getProjectAction() {
+        return null;
     }
 
     public Descriptor<BuildStep> getDescriptor() {

@@ -6,6 +6,7 @@ import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Project;
+import hudson.model.Action;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -86,6 +87,10 @@ public class Maven implements BuildStep {
             e.printStackTrace( listener.fatalError("command execution failed") );
             return false;
         }
+    }
+
+    public Action getProjectAction() {
+        return null;
     }
 
     public Descriptor<BuildStep> getDescriptor() {

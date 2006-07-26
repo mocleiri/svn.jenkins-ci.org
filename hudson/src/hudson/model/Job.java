@@ -14,11 +14,9 @@ import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.SortedMap;
-import java.util.regex.Pattern;
 
 /**
  * A job is an runnable entity under the monitoring of Hudson.
@@ -86,6 +84,10 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
             saveNextBuildNumber();
             save(); // and delete it from the config.xml
         }
+    }
+
+    public File getRootDir() {
+        return root;
     }
 
     private TextFile getNextBuildNumberFile() {
@@ -191,8 +193,13 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         return _getRuns().get(n);
     }
 
-    public synchronized RunT getDynamic(String buildNumber, StaplerRequest req, StaplerResponse rsp) {
-        return _getRuns().get(Integer.valueOf(buildNumber));
+    public synchronized Object getDynamic(String token, StaplerRequest req, StaplerResponse rsp) {
+        try {
+            // try to interpret the token as build number
+            return _getRuns().get(Integer.valueOf(token));
+        } catch (NumberFormatException e) {
+            return super.getDynamic(token,req,rsp);
+        }
     }
 
     /**
@@ -245,7 +252,8 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      */
     public synchronized RunT getLastSuccessfulBuild() {
         RunT r = getLastBuild();
-        while(r!=null && (r.isBuilding() || r.getResult().isWorseThan(Result.UNSTABLE)))
+        // temporary hack till we figure out what's causing this bug
+        while(r!=null && r.getResult()!=null && (r.isBuilding() || r.getResult().isWorseThan(Result.UNSTABLE)))
             r=r.getPreviousBuild();
         return r;
     }
@@ -319,7 +327,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
             return;
 
         req.setCharacterEncoding("UTF-8");
-        
+
         description = req.getParameter("description");
 
         if(req.getParameter("logrotate")!=null)

@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStreamWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Map;
@@ -20,6 +22,25 @@ import java.util.regex.Pattern;
  * @author Kohsuke Kawaguchi
  */
 public class Util {
+    /**
+     * Loads the contents of a file into a string.
+     */
+    public static String loadFile(File logfile) throws IOException {
+        if(!logfile.exists())
+            return "";
+
+        StringBuffer str = new StringBuffer((int)logfile.length());
+
+        BufferedReader r = new BufferedReader(new FileReader(logfile));
+        char[] buf = new char[1024];
+        int len;
+        while((len=r.read(buf,0,buf.length))>0)
+           str.append(buf,0,len);
+        r.close();
+
+        return str.toString();
+    }
+
     /**
      * Deletes the contents of the given directory (but not the directory itself)
      * recursively.

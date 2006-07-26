@@ -5,6 +5,7 @@ import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Result;
+import hudson.model.Action;
 import hudson.tasks.AntBasedBuildStep;
 import hudson.tasks.BuildStep;
 import org.apache.tools.ant.Project;
@@ -54,6 +55,10 @@ public class JUnitResultArchiver extends AntBasedBuildStep {
             build.setResult(Result.UNSTABLE);
 
         return true;
+    }
+
+    public Action getProjectAction() {
+        return null;
     }
 
     public String getTestResults() {

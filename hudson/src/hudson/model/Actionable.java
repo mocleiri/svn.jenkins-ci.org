@@ -35,8 +35,7 @@ public abstract class Actionable extends AbstractModelObject {
     }
 
     public <T extends Action> T getAction(Class<T> type) {
-        if(actions==null)   return null;
-        for (Action a : actions) {
+        for (Action a : getActions()) {
             if(type.isInstance(a))
                 return (T)a; // type.cast() not available in JDK 1.4
         }
@@ -44,11 +43,9 @@ public abstract class Actionable extends AbstractModelObject {
     }
 
     public Object getDynamic(String token, StaplerRequest req, StaplerResponse rsp) {
-        if(actions!=null) {
-            for (Action a : actions) {
-                if(a.getUrlName().equals(token))
-                    return a;
-            }
+        for (Action a : getActions()) {
+            if(a.getUrlName().equals(token))
+                return a;
         }
         return null;
     }
