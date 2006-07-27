@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" tagdir="/WEB-INF/tags/form" %>
 
-<s:entry title="CVSROOT">
+<s:entry title="CVSROOT" help="/help/_cvs/cvsroot.html">
   <s:editableComboBox id="cvs_root" clazz="setting-input" name="cvs_root" value="${scm.cvsRoot}"
       items="${app.allCvsRoots}" />
 </s:entry>
@@ -9,7 +9,7 @@
   <input class="setting-input" name="cvs_module"
     type="text" value="${scm.allModules}">
 </s:entry>
-<s:entry title="Branch">
+<s:entry title="Branch" help="/help/_cvs/branch.html">
   <input class="setting-input" name="cvs_branch"
     type="text" value="${scm.branch}">
 </s:entry>
