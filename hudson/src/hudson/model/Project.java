@@ -229,6 +229,7 @@ public class Project extends Job<Project,Build> {
     }
 
     public synchronized void removeRun(Run run) {
+        run.getNextBuild().previousBuild = null;
         builds.remove(run.getNumber());
     }
 
