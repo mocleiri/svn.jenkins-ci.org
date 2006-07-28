@@ -67,7 +67,7 @@ public class Project extends Job<Project,Build> {
      * We don't want to persist them separately, and these actions
      * come and go as configuration change, so it's kept separate.
      */
-    private transient /*final*/ List<Action> transientActions;
+    private transient /*final*/ List<Action> transientActions = new Vector<Action>();
 
     /**
      * Identifies {@link JDK} to be used.
