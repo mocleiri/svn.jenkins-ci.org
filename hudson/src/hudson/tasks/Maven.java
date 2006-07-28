@@ -78,6 +78,9 @@ public class Maven implements BuildStep {
         Map<String,String> env = build.getEnvVars();
         if(ai!=null)
             env.put("MAVEN_HOME",ai.getMavenHome());
+        // just as a precaution
+        // see http://maven.apache.org/continuum/faqs.html#how-does-continuum-detect-a-successful-build
+        env.put("MAVEN_TERMINATE_CMD","on");
 
         try {
             int r = launcher.launch(cmd,env,listener.getLogger(),proj.getModuleRoot()).join();
