@@ -60,9 +60,20 @@ public class WriterOutputStream extends OutputStream {
         flushOutput();
         writer.close();
 
-        buf.compact();
+        buf.rewind();
     }
 
+    /**
+     * Decodes the contents of {@link #buf} as much as possible to {@link #out}.
+     * If necessary {@link #out} is further sent to {@link #writer}.
+     *
+     * <p>
+     * When this method returns, the {@link #buf} is back to the 'accumulation'
+     * mode.
+     *
+     * @param last
+     *      if true, tell the decoder that all the input bytes are ready.
+     */
     private void decode(boolean last) throws IOException {
         buf.flip();
         while(true) {
