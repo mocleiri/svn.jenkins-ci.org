@@ -29,14 +29,14 @@ public class WriterOutputStream extends OutputStream {
 
     public void write(int b) throws IOException {
         if(buf.remaining()==0)
-            decode();
+            decode(false);
         buf.put((byte)b);
     }
 
     public void write(byte b[], int off, int len) throws IOException {
         while(len>0) {
             if(buf.remaining()==0)
-                decode();
+                decode(false);
             int sz = Math.min(buf.remaining(),len);
             buf.put(b,off,sz);
             off += sz;
@@ -45,7 +45,7 @@ public class WriterOutputStream extends OutputStream {
     }
 
     public void flush() throws IOException {
-        decode();
+        decode(false);
         flushOutput();
         writer.flush();
     }
@@ -56,17 +56,17 @@ public class WriterOutputStream extends OutputStream {
     }
 
     public void close() throws IOException {
-        buf.flip();
-        decoder.decode(buf,out,true);
-        buf.compact();
+        decode(true);
         flushOutput();
         writer.close();
+
+        buf.compact();
     }
 
-    private void decode() throws IOException {
+    private void decode(boolean last) throws IOException {
         buf.flip();
         while(true) {
-            CoderResult r = decoder.decode(buf, out, false);
+            CoderResult r = decoder.decode(buf, out, last);
             if(r==CoderResult.OVERFLOW) {
                 flushOutput();
                 continue;
