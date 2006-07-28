@@ -104,6 +104,10 @@ public class Maven implements BuildStep {
             super(Maven.class);
         }
 
+        public String getHelpFile() {
+            return "/help/project-config/maven.html";
+        }
+
         public String getDisplayName() {
             return "Invoke top-level Maven targets";
         }

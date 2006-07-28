@@ -102,6 +102,10 @@ public class Ant implements BuildStep {
             super(Ant.class);
         }
 
+        public String getHelpFile() {
+            return "/help/project-config/ant.html";
+        }
+
         public String getDisplayName() {
             return "Invoke top-level Ant targets";
         }
