@@ -54,7 +54,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
     /**
      * Previous build. Can be null.
      */
-    protected transient final RunT previousBuild;
+    protected transient RunT previousBuild;
 
     protected transient RunT nextBuild;
 

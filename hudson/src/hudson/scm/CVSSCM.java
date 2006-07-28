@@ -15,7 +15,7 @@ import hudson.model.Project;
 import hudson.model.TaskListener;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.Expand;
-import org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
+import hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
 import org.kohsuke.stapler.StaplerRequest;
@@ -379,7 +379,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
         listener.getLogger().println("$ computing changelog");
 
-        ChangeLogTask task = new ChangeLogTask() {
+        ChangeLogTask task = new hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask() {
             {
                 setOutputStream(System.out);
                 setErrorStream(System.err);
