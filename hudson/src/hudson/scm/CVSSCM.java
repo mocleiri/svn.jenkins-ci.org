@@ -3,19 +3,18 @@ package hudson.scm;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
-import hudson.util.WriterOutputStream;
-import hudson.util.ForkOutputStream;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
+import hudson.model.Project;
 import hudson.model.Result;
 import hudson.model.StreamBuildListener;
-import hudson.model.Project;
 import hudson.model.TaskListener;
+import hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
+import hudson.util.ForkOutputStream;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.Expand;
-import hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
 import org.kohsuke.stapler.StaplerRequest;
@@ -24,21 +23,22 @@ import org.kohsuke.stapler.StaplerResponse;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.StringWriter;
 import java.io.Reader;
-import java.io.StringReader;
+import java.io.StringWriter;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * CVS.
@@ -238,33 +238,29 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
         String cmd = "cvs -q "+(dryRun?"-n":"")+" -z9 update -PdC";
         if(flatten) {
-            StringWriter output = new StringWriter();
-            WriterOutputStream wo = new WriterOutputStream(output);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
             if(!run(launcher,cmd,listener,workspace,
-                new ForkOutputStream(wo,listener.getLogger())))
+                new ForkOutputStream(baos,listener.getLogger())))
                 return null;
 
-            wo.close();
-            parseUpdateOutput("",output, changedFileNames);
+            parseUpdateOutput("",baos, changedFileNames);
         } else {
             StringTokenizer tokens = new StringTokenizer(module);
             while(tokens.hasMoreTokens()) {
                 String moduleName = tokens.nextToken();
 
                 // capture the output during update
-                StringWriter output = new StringWriter();
-                WriterOutputStream wo = new WriterOutputStream(output);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
                 if(!run(launcher,cmd,listener,
                     new FilePath(workspace, moduleName),
-                    new ForkOutputStream(wo,listener.getLogger())))
+                    new ForkOutputStream(baos,listener.getLogger())))
                     return null;
 
                 // we'll run one "cvs log" command with workspace as the base,
                 // so use path names that are relative to moduleName.
-                wo.close();
-                parseUpdateOutput(moduleName+'/',output, changedFileNames);
+                parseUpdateOutput(moduleName+'/',baos, changedFileNames);
             }
         }
 
@@ -285,8 +281,9 @@ public class CVSSCM extends AbstractCVSFamilySCM {
      *      that are no longer present. The path names are relative to the workspace,
      *      hence "String", not {@link File}.
      */
-    private void parseUpdateOutput(String baseName, StringWriter output, List<String> result) throws IOException {
-        BufferedReader in = new BufferedReader(new StringReader(output.toString()));
+    private void parseUpdateOutput(String baseName, ByteArrayOutputStream output, List<String> result) throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(
+            new ByteArrayInputStream(output.toByteArray())));
         String line;
         while((line=in.readLine())!=null) {
             Matcher matcher = UPDATE_LINE.matcher(line);
