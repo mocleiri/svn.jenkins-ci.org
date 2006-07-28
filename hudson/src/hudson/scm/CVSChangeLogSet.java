@@ -47,6 +47,7 @@ public final class CVSChangeLogSet extends ChangeLogSet {
         digester.addBeanPropertySetter("*/entry/file/name");
         digester.addBeanPropertySetter("*/entry/file/revision");
         digester.addBeanPropertySetter("*/entry/file/prevrevision");
+        digester.addCallMethod("*/entry/file/dead","setDead");
         digester.addSetNext("*/entry/file","addFile");
 
         digester.parse(f);
@@ -147,6 +148,7 @@ public final class CVSChangeLogSet extends ChangeLogSet {
         private String name;
         private String revision;
         private String prevrevision;
+        private boolean dead;
 
         public String getName() {
             return name;
@@ -172,12 +174,20 @@ public final class CVSChangeLogSet extends ChangeLogSet {
             this.prevrevision = prevrevision;
         }
 
-        public EditType getEditType() {
-            if( prevrevision==null )
-                return EditType.ADD;
-            if( revision==null )
-                return EditType.DELETE;
+        public boolean isDead() {
+            return dead;
+        }
 
+        public void setDead() {
+            this.dead = true;
+        }
+
+        public EditType getEditType() {
+            // see issue #73. Can't do much better right now
+            if(revision.equals("1.1"))
+                return EditType.ADD;
+            if(dead)
+                return EditType.DELETE;
             return EditType.EDIT;
         }
     }
