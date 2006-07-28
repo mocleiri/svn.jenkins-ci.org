@@ -93,6 +93,9 @@ class ChangeLogWriter {
                     + "</prevrevision>");
             }
 
+            if(file.isDead())
+                output.println("\t\t\t<dead />");
+
             output.println("\t\t</file>");
         }
         output.println("\t\t<msg><![CDATA[" + entry.getComment() + "]]></msg>");

@@ -25,21 +25,24 @@ class RCSFile {
     private String m_name;
     private String m_revision;
     private String m_previousRevision;
+    private boolean m_dead;
 
 
     RCSFile(final String name, final String rev) {
-        this(name, rev, null);
+        this(name, rev, null, false);
     }
 
 
     RCSFile(final String name,
                   final String revision,
-                  final String previousRevision) {
+                  final String previousRevision,
+                  final boolean dead) {
         m_name = name;
         m_revision = revision;
         if (!revision.equals(previousRevision)) {
             m_previousRevision = previousRevision;
         }
+        m_dead = dead;
     }
 
 
@@ -55,6 +58,10 @@ class RCSFile {
 
     String getPreviousRevision() {
         return m_previousRevision;
+    }
+
+    boolean isDead() {
+        return m_dead;
     }
 }
 

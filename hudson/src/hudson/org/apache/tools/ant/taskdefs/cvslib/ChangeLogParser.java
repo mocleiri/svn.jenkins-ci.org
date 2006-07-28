@@ -53,6 +53,10 @@ class ChangeLogParser {
     private String m_comment;
     private String m_revision;
     private String m_previousRevision;
+    /**
+     * True if the log record indicates deletion;
+     */
+    private boolean m_dead;
 
     private int m_status = GET_FILE;
 
@@ -179,6 +183,8 @@ class ChangeLogParser {
 
             m_status = GET_COMMENT;
 
+            m_dead = lineData.indexOf("state: dead;")!=-1;
+
             //Reset comment to empty here as we can accumulate multiple lines
             //in the processComment method
             m_comment = "";
@@ -216,7 +222,7 @@ class ChangeLogParser {
             entry = (CVSEntry) m_entries.get(entryKey);
         }
 
-        entry.addFile(m_file, m_revision, m_previousRevision);
+        entry.addFile(m_file, m_revision, m_previousRevision, m_dead);
     }
 
     /**
@@ -245,6 +251,7 @@ class ChangeLogParser {
         m_comment = null;
         m_revision = null;
         m_previousRevision = null;
+        m_dead = false;
     }
 
 }

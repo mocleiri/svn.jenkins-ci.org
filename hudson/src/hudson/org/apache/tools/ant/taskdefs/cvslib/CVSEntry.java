@@ -40,8 +40,8 @@ class CVSEntry {
         m_files.addElement(new RCSFile(file, revision));
     }
 
-    public void addFile(String file, String revision, String previousRevision) {
-        m_files.addElement(new RCSFile(file, revision, previousRevision));
+    public void addFile(String file, String revision, String previousRevision, boolean dead) {
+        m_files.addElement(new RCSFile(file, revision, previousRevision, dead));
     }
 
     Date getDate() {
