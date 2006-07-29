@@ -252,7 +252,7 @@ public class ChangeLogTask extends AbstractCvsTask {
             } finally {
                 final String errors = handler.getErrors();
 
-                if (null != errors) {
+                if (null != errors && errors.length()!=0) {
                     log(errors, Project.MSG_ERR);
                 }
             }
