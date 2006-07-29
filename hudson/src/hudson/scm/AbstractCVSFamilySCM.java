@@ -2,6 +2,8 @@ package hudson.scm;
 
 import hudson.FilePath;
 import hudson.Launcher;
+import hudson.Proc;
+import hudson.EnvVars;
 import hudson.model.BuildListener;
 import hudson.model.TaskListener;
 
@@ -26,7 +28,7 @@ abstract class AbstractCVSFamilySCM implements SCM {
      *      Receives output from the executed program.
      */
     protected final boolean run(Launcher launcher, String cmd, TaskListener listener, FilePath dir, OutputStream out) throws IOException {
-        Map env = createEnvVarMap();
+        Map env = createEnvVarMap(true);
 
         int r = launcher.launch(cmd,env,out,dir).join();
         if(r!=0)
@@ -40,8 +42,18 @@ abstract class AbstractCVSFamilySCM implements SCM {
     }
 
 
-    protected final Map createEnvVarMap() {
+    /**
+     *
+     * @param overrideOnly
+     *      true to indicate that the returned map shall only contain
+     *      properties that need to be overridden. This is for use with {@link Launcher}.
+     *      false to indicate that the map should contain complete map.
+     *      This is to invoke {@link Proc} directly.
+     */
+    protected final Map createEnvVarMap(boolean overrideOnly) {
         Map env = new HashMap();
+        if(!overrideOnly)
+            env.putAll(EnvVars.masterEnvVars);
         buildEnvVars(env);
         return env;
     }

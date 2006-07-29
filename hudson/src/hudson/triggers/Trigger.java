@@ -121,7 +121,7 @@ public abstract class Trigger implements Describable<Trigger> {
 
     public static final Timer timer = new Timer(); // "Hudson cron thread"); -- this is a new constructor since 1.5
 
-    static {
+    public static void init() {
         timer.scheduleAtFixedRate(new Cron(),0,1000*60/*every minute*/);
     }
 }

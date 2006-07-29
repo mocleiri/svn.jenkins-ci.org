@@ -89,7 +89,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
 
         Map<String,Integer> previousRevisions = parseRevisionFile(build.getPreviousBuild());
 
-        Map env = createEnvVarMap();
+        Map env = createEnvVarMap(true);
 
         for( String module : getModuleDirNames() ) {
             Integer prevRev = previousRevisions.get(module);
@@ -205,8 +205,11 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
             int r = new Proc(cmd,env,baos,workspace.getLocal()).join();
-            if(r!=0)
+            if(r!=0) {
+                // failed. to allow user to diagnose the problem, send output to log
+                listener.getLogger().write(baos.toByteArray());
                 throw new IOException("revision check failed");
+            }
 
             SvnInfo info = new SvnInfo();
 
@@ -242,7 +245,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
 
         Map<String/*module name*/,SvnInfo> revisions = new HashMap<String,SvnInfo>();
 
-        Map env = createEnvVarMap();
+        Map env = createEnvVarMap(false);
 
         // invoke the "svn info"
         for( String module : getModuleDirNames() ) {
@@ -316,7 +319,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         // current workspace revision
         Map<String,SvnInfo> wsRev = buildRevisionMap(workspace,listener);
 
-        Map env = createEnvVarMap();
+        Map env = createEnvVarMap(false);
 
         // check the corresponding remote revision
         for (SvnInfo localInfo : wsRev.values()) {

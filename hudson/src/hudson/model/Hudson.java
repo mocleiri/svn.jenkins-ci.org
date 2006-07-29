@@ -129,7 +129,6 @@ public final class Hudson extends JobCollection implements Node {
         theInstance = this;
 
         load();
-
         updateComputerList();
     }
 

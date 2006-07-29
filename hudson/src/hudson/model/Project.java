@@ -260,10 +260,19 @@ public class Project extends Job<Project,Build> {
      * a build and polling, as both touches the workspace.
      */
     public boolean pollSCMChanges( TaskListener listener ) {
-        if(scm==null)   return false;   // no SCM
+        if(scm==null) {
+            listener.getLogger().println("No SCM");
+            return false;   // no SCM
+        }
+
 
         FilePath workspace = getWorkspace();
-        if(!workspace.exists()) return false;
+        if(!workspace.exists()) {
+            // no workspace. build now, or nothing will ever be built
+            listener.getLogger().println("No workspace is available, so can't check for updates.");
+            listener.getLogger().println("Scheduling a new build to get a workspace.");
+            return true;
+        }
 
         try {
             // TODO: do this by using the right slave

@@ -1,6 +1,7 @@
 package hudson;
 
 import hudson.model.Hudson;
+import hudson.triggers.Trigger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -48,6 +49,8 @@ public class WebAppMain implements ServletContextListener {
         Object ver = props.get("version");
         if(ver==null)   ver="?";
         event.getServletContext().setAttribute("version",ver);
+
+        Trigger.init(); // start running trigger
     }
 
     /**
