@@ -366,7 +366,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
      *      This is provided if the previous operation is update, otherwise null,
      *      which means we have to fall back to the default slow computation.
      */
-    private boolean calcChangeLog(Build build, List<String> changedFiles, File changelogFile, BuildListener listener) {
+    private boolean calcChangeLog(Build build, List<String> changedFiles, File changelogFile, final BuildListener listener) {
         if(build.getPreviousBuild()==null || (changedFiles!=null && changedFiles.isEmpty())) {
             // nothing to compare against, or no changes
             // (note that changedFiles==null means fallback, so we have to run cvs log.
@@ -376,10 +376,18 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
         listener.getLogger().println("$ computing changelog");
 
-        ChangeLogTask task = new hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask() {
+        ChangeLogTask task = new ChangeLogTask() {
             {
+                // is this making any effect?
                 setOutputStream(System.out);
-                setErrorStream(System.err);
+                setErrorStream(listener.getLogger());
+            }
+
+            public void log(String msg, int msgLevel) {
+                // send error to listener. This seems like the route in which the changelog task
+                // sends output
+                if(msgLevel==org.apache.tools.ant.Project.MSG_ERR)
+                    listener.error(msg);
             }
         };
         task.setProject(new org.apache.tools.ant.Project());
