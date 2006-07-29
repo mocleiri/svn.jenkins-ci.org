@@ -247,11 +247,14 @@ public class ChangeLogTask extends AbstractCvsTask {
 
             setDest(m_dir);
             setExecuteStreamHandler(handler);
-            super.execute();
-            final String errors = handler.getErrors();
+            try {
+                super.execute();
+            } finally {
+                final String errors = handler.getErrors();
 
-            if (null != errors) {
-                log(errors, Project.MSG_ERR);
+                if (null != errors) {
+                    log(errors, Project.MSG_ERR);
+                }
             }
 
             final CVSEntry[] entrySet = parser.getEntrySetAsArray();
