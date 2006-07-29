@@ -184,10 +184,10 @@ public final class CVSChangeLogSet extends ChangeLogSet {
 
         public EditType getEditType() {
             // see issue #73. Can't do much better right now
-            if(revision.equals("1.1"))
-                return EditType.ADD;
             if(dead)
                 return EditType.DELETE;
+            if(revision.equals("1.1"))
+                return EditType.ADD;
             return EditType.EDIT;
         }
     }
