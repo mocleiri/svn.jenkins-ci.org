@@ -87,18 +87,18 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
 
         PrintStream logger = listener.getLogger();
 
-        Map<String,String> previousRevisions = parseRevisionFile(build.getPreviousBuild());
+        Map<String,Integer> previousRevisions = parseRevisionFile(build.getPreviousBuild());
 
         Map env = createEnvVarMap();
 
         for( String module : getModuleDirNames() ) {
-            String prevRev = previousRevisions.get(module);
+            Integer prevRev = previousRevisions.get(module);
             if(prevRev==null) {
                 logger.println("no revision recorded for "+module+" in the previous build");
                 continue;
             }
 
-            String cmd = DESCRIPTOR.getSvnExe()+" log -v --xml --non-interactive -r "+prevRev+":BASE "+module;
+            String cmd = DESCRIPTOR.getSvnExe()+" log -v --xml --non-interactive -r "+(prevRev+1)+":BASE "+module;
             OutputStream os = new BufferedOutputStream(new FileOutputStream(changelogFile));
             try {
                 int r = launcher.launch(cmd,env,os,build.getProject().getWorkspace()).join();
@@ -114,8 +114,8 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         return true;
     }
 
-    /*package*/ static Map<String,String> parseRevisionFile(Build build) throws IOException {
-        Map<String,String> revisions = new HashMap<String,String>(); // module -> revision
+    /*package*/ static Map<String,Integer> parseRevisionFile(Build build) throws IOException {
+        Map<String,Integer> revisions = new HashMap<String,Integer>(); // module -> revision
         {// read the revision file of the last build
             File file = getRevisionFile(build);
             if(!file.exists())
@@ -129,7 +129,11 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
                 if(index<0) {
                     continue;   // invalid line?
                 }
-                revisions.put(line.substring(0,index), line.substring(index+1));
+                try {
+                    revisions.put(line.substring(0,index), Integer.parseInt(line.substring(index+1)));
+                } catch (NumberFormatException e) {
+                    // perhaps a corrupted line. ignore
+                }
             }
         }
 
