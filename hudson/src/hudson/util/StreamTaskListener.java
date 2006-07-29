@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.io.OutputStreamWriter;
 
 /**
  * {@link TaskListener} that generates output into a single stream.
@@ -33,7 +34,7 @@ public final class StreamTaskListener implements TaskListener {
 
     public PrintWriter error(String msg) {
         out.println(msg);
-        return new PrintWriter(out);
+        return new PrintWriter(new OutputStreamWriter(out),true);
     }
 
     public PrintWriter fatalError(String msg) {
