@@ -272,6 +272,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
     private static final Pattern UPDATE_LINE = Pattern.compile("[UPARMC] (.+)");
 
     private static final Pattern REMOVAL_LINE = Pattern.compile("cvs (server|update): (.+) is no longer in the repository");
+    private static final Pattern NEWDIRECTORY_LINE = Pattern.compile("cvs server: New directory `(.+)' -- ignored");
 
     /**
      * Parses the output from CVS update and list up files that might have been changed.
@@ -289,11 +290,22 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             Matcher matcher = UPDATE_LINE.matcher(line);
             if(matcher.matches()) {
                 result.add(baseName+matcher.group(1));
-            } else {
-                matcher= REMOVAL_LINE.matcher(line);
-                if(matcher.matches())
-                    result.add(baseName+matcher.group(2));
+                continue;
             }
+
+            matcher= REMOVAL_LINE.matcher(line);
+            if(matcher.matches()) {
+                result.add(baseName+matcher.group(2));
+                continue;
+            }
+
+            // this line is added in an attempt to capture newly created directories in the repository,
+            // but it turns out that this line always hit if the workspace is missing a directory
+            // that the server has, even if that directory contains nothing in it
+            //matcher= NEWDIRECTORY_LINE.matcher(line);
+            //if(matcher.matches()) {
+            //    result.add(baseName+matcher.group(1));
+            //}
         }
     }
 
@@ -377,12 +389,6 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         listener.getLogger().println("$ computing changelog");
 
         ChangeLogTask task = new ChangeLogTask() {
-            {
-                // is this making any effect?
-                setOutputStream(System.out);
-                setErrorStream(listener.getLogger());
-            }
-
             public void log(String msg, int msgLevel) {
                 // send error to listener. This seems like the route in which the changelog task
                 // sends output
