@@ -11,7 +11,7 @@
   <table cellpadding=5>
     <tr><td>
       <img src="images/48x48/grey.gif">
-      The project has never been built before.
+      The project has never been built before, or the project is disabled.
     </td></tr>
     <tr><td>
       <img src="images/48x48/grey_anime.gif">

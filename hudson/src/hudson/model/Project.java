@@ -203,6 +203,15 @@ public class Project extends Job<Project,Build> {
         this.scm = scm;
     }
 
+    @Override
+    public String getIconColor() {
+        if(isDisabled())
+            // use grey to indicate that the build is disabled
+            return "grey";
+        else
+            return super.getIconColor();
+    }
+
     private <T extends Describable<T>>
     Map<Descriptor<T>,T> buildDescriptorMap(List<T> describables) {
         Map<Descriptor<T>,T> m = new LinkedHashMap<Descriptor<T>,T>();
