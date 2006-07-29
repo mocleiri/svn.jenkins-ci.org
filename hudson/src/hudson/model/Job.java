@@ -278,6 +278,9 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         return r;
     }
 
+    /**
+     * Used as the color of the status ball for the project.
+     */
     public synchronized String getIconColor() {
         RunT lastBuild = getLastBuild();
         while(lastBuild!=null && lastBuild.hasntStartedYet())
