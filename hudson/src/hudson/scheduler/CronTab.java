@@ -44,7 +44,7 @@ public final class CronTab {
     boolean check(Calendar cal) {
         if(!checkBits(bits[0],cal.get(Calendar.MINUTE)))
             return false;
-        if(!checkBits(bits[1],cal.get(Calendar.HOUR)))
+        if(!checkBits(bits[1],cal.get(Calendar.HOUR_OF_DAY)))
             return false;
         if(!checkBits(bits[2],cal.get(Calendar.DAY_OF_MONTH)))
             return false;
