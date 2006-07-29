@@ -388,16 +388,21 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
         listener.getLogger().println("$ computing changelog");
 
+        final StringWriter errorOutput = new StringWriter();
+
         ChangeLogTask task = new ChangeLogTask() {
             public void log(String msg, int msgLevel) {
                 // send error to listener. This seems like the route in which the changelog task
                 // sends output
-                if(msgLevel==org.apache.tools.ant.Project.MSG_ERR)
-                    listener.error(msg);
+                if(msgLevel==org.apache.tools.ant.Project.MSG_ERR) {
+                    errorOutput.write(msg);
+                    errorOutput.write('\n');
+                }
             }
         };
         task.setProject(new org.apache.tools.ant.Project());
-        task.setDir(build.getProject().getWorkspace().getLocal());
+        File baseDir = build.getProject().getWorkspace().getLocal();
+        task.setDir(baseDir);
         if(DESCRIPTOR.getCvspassFile().length()!=0)
             task.setPassfile(new File(DESCRIPTOR.getCvspassFile()));
         task.setCvsRoot(cvsroot);
@@ -406,9 +411,14 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         task.setDestfile(changelogFile);
         task.setStart(build.getPreviousBuild().getTimestamp().getTime());
         task.setEnd(build.getTimestamp().getTime());
-        if(changedFiles!=null)
-            task.setFile(changedFiles);
-        else {
+        if(changedFiles!=null) {
+            // if the directory doesn't exist, cvs changelog will die, so filter them out.
+            // this means we'll lose the log of those changes
+            for (String filePath : changedFiles) {
+                if(new File(baseDir,filePath).getParentFile().exists())
+                    task.addFile(filePath);
+            }
+        } else {
             // fallback
             if(!flatten)
                 task.setPackage(module);
@@ -418,6 +428,9 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             task.execute();
             return true;
         } catch( BuildException e ) {
+            // capture output from the task for diagnosis
+            listener.getLogger().print(errorOutput);
+            // then report an error
             e.printStackTrace(listener.error(e.getMessage()));
             return false;
         } catch( RuntimeException e ) {
