@@ -8,6 +8,7 @@ import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Project;
 import hudson.model.TaskListener;
+import org.apache.commons.digester.Digester;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -23,18 +25,16 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.io.BufferedOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 import java.util.Map.Entry;
+import java.util.StringTokenizer;
 
 /**
  * Subversion.
@@ -177,7 +177,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
     /**
      * Output from "svn info" command.
      */
-    private static class SvnInfo {
+    public static class SvnInfo {
         /** The remote URL of this directory */
         String url;
         /** Current workspace revision. */
@@ -192,6 +192,14 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             return url!=null && revision!=-1;
         }
 
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public void setRevision(int revision) {
+            this.revision = revision;
+        }
+
         /**
          * Executes "svn info" command and returns the parsed output
          *
@@ -199,7 +207,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
          *      The target to run "svn info". Either local path or remote URL.
          */
         public static SvnInfo parse(String subject, Map env, FilePath workspace, TaskListener listener) throws IOException {
-            String cmd = DESCRIPTOR.getSvnExe()+" info "+subject;
+            String cmd = DESCRIPTOR.getSvnExe()+" info --xml "+subject;
             listener.getLogger().println("$ "+cmd);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -213,20 +221,23 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
 
             SvnInfo info = new SvnInfo();
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(baos.toByteArray())));
-            String line;
-            while((line=br.readLine())!=null) {
-                if(line.startsWith("Revision:")) {
-                    info.revision = Integer.parseInt(
-                        line.substring("Revision: ".length()).trim());
-                }
-                if(line.startsWith("URL:")) {
-                    info.url = line.substring("URL: ".length()).trim();
-                }
+            Digester digester = new Digester();
+            digester.push(info);
+
+            digester.addBeanPropertySetter("info/entry/url");
+            digester.addSetProperties("info/entry","revision","revision");  // set attributes. in particular @revision
+
+            try {
+                digester.parse(new ByteArrayInputStream(baos.toByteArray()));
+            } catch (SAXException e) {
+                // failed. to allow user to diagnose the problem, send output to log
+                listener.getLogger().write(baos.toByteArray());
+                e.printStackTrace(listener.fatalError("Failed to parse Subversion output"));
+                throw new IOException("Unabled to parse svn info output");
             }
 
             if(!info.isComplete())
-                throw new IOException("no revision in the svn info output");
+                throw new IOException("No revision in the svn info output");
 
             return info;
         }
