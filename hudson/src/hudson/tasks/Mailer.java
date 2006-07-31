@@ -7,6 +7,7 @@ import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Result;
 import hudson.model.Action;
+import hudson.model.Project;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -75,7 +76,7 @@ public class Mailer implements BuildStep {
         return true;
     }
 
-    public Action getProjectAction() {
+    public Action getProjectAction(Project project) {
         return null;
     }
 

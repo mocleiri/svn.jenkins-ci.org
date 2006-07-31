@@ -324,23 +324,6 @@ public class Project extends Job<Project,Build> {
     }
 
     /**
-     * Gets the directory where the javadoc will be published.
-     */
-    public File getJavadocDir() {
-        return new File(root,"javadoc");
-    }
-
-    /**
-     * Returns true if this project has a published javadoc.
-     *
-     * <p>
-     * This ugly name is because of EL.
-     */
-    public boolean getHasJavadoc() {
-        return getJavadocDir().exists();
-    }
-
-    /**
      * Returns the root directory of the checked-out module.
      *
      * @return
@@ -506,12 +489,12 @@ public class Project extends Job<Project,Build> {
         synchronized(transientActions) {
             transientActions.clear();
             for (BuildStep step : builders) {
-                Action a = step.getProjectAction();
+                Action a = step.getProjectAction(this);
                 if(a!=null)
                     transientActions.add(a);
             }
             for (BuildStep step : publishers) {
-                Action a = step.getProjectAction();
+                Action a = step.getProjectAction(this);
                 if(a!=null)
                     transientActions.add(a);
             }
@@ -528,6 +511,16 @@ public class Project extends Job<Project,Build> {
         List<Action> actions = new Vector<Action>(super.getActions());
         actions.addAll(transientActions);
         return actions;
+    }
+
+    public List<ProminentProjectAction> getProminentActions() {
+        List<Action> a = getActions();
+        List<ProminentProjectAction> pa = new Vector<ProminentProjectAction>();
+        for (Action action : a) {
+            if(action instanceof ProminentProjectAction)
+                pa.add((ProminentProjectAction) action);
+        }
+        return pa;
     }
 
     private <T extends Describable<T>> void buildDescribable(StaplerRequest req, Descriptor<T>[] descriptors, List<T> result, String prefix)
@@ -547,13 +540,6 @@ public class Project extends Job<Project,Build> {
      */
     public synchronized void doWs( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         serveFile(req, rsp, getWorkspace().getLocal(), "folder.gif", true);
-    }
-
-    /**
-     * Serves the javadoc.
-     */
-    public synchronized void doJavadoc( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        serveFile(req, rsp, getJavadocDir(), "help.gif", false);
     }
 
     /**

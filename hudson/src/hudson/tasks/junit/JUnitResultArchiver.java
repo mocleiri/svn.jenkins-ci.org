@@ -57,7 +57,7 @@ public class JUnitResultArchiver extends AntBasedBuildStep {
         return true;
     }
 
-    public Action getProjectAction() {
+    public Action getProjectAction(hudson.model.Project project) {
         return null;
     }
 

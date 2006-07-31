@@ -68,7 +68,7 @@ public class BuildTrigger implements BuildStep {
         return true;
     }
 
-    public Action getProjectAction() {
+    public Action getProjectAction(Project project) {
         return null;
     }
 

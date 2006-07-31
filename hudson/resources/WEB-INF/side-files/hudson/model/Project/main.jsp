@@ -41,11 +41,11 @@
 
 <table style="margin-top: 1em; margin-left:1em;">
 
-  <c:if test="${it.hasJavadoc}">
-    <t:summary icon="help.gif">
-      <a href="javadoc">Javadoc</a>
+  <c:forEach var="act" items="${it.prominentActions}">
+    <t:summary icon="${act.iconFileName}">
+      <a href="${act.urlName}">${act.displayName}</a>
     </t:summary>
-  </c:if>
+  </c:forEach>
   <t:summary icon="folder.gif">
     <a href="ws">Workspace</a>
   </t:summary>

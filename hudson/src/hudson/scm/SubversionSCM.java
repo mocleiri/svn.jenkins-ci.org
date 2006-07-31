@@ -90,6 +90,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         PrintStream logger = listener.getLogger();
 
         Map<String,Integer> previousRevisions = parseRevisionFile(build.getPreviousBuild());
+        Map<String,Integer> thisRevisions     = parseRevisionFile(build);
 
         Map env = createEnvVarMap(true);
 
@@ -97,6 +98,11 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             Integer prevRev = previousRevisions.get(module);
             if(prevRev==null) {
                 logger.println("no revision recorded for "+module+" in the previous build");
+                continue;
+            }
+            Integer thisRev = thisRevisions.get(module);
+            if(thisRev!=null && thisRev.equals(prevRev)) {
+                logger.println("no change for "+module+" since the previous build");
                 continue;
             }
 

@@ -37,8 +37,12 @@ public interface BuildStep extends Describable<BuildStep> {
     /**
      * Returns an action object if this {@link BuildStep} has an action
      * to contribute to a {@link Project}.
+     *
+     * @param project
+     *      {@link Project} that owns this build step,
+     *      since {@link BuildStep} object doesn't usually have this "parent" pointer.
      */
-    Action getProjectAction();
+    Action getProjectAction(Project project);
 
     /**
      * List of all installed {@link BuildStep}s.

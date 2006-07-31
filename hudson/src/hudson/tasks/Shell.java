@@ -90,7 +90,7 @@ public class Shell implements BuildStep {
         }
     }
 
-    public Action getProjectAction() {
+    public Action getProjectAction(Project project) {
         return null;
     }
 

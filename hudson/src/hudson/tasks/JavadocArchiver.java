@@ -1,25 +1,31 @@
 package hudson.tasks;
 
 import hudson.Launcher;
+import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
+import hudson.model.DirectoryHolder;
 import hudson.model.Project;
-import hudson.model.Action;
+import hudson.model.ProminentProjectAction;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.IOException;
 
 /**
- * Publishes javadoc to {@link Project#getJavadocDir()}.
+ * Saves javadoc for the project and publish them. 
  *
  * @author Kohsuke Kawaguchi
  */
 public class JavadocArchiver extends AntBasedBuildStep {
     /**
-     * Path to the javadoc directory.
+     * Path to the javadoc directory in the workspace.
      */
     private final String javadocDir;
 
@@ -29,6 +35,13 @@ public class JavadocArchiver extends AntBasedBuildStep {
 
     public String getJavadocDir() {
         return javadocDir;
+    }
+
+    /**
+     * Gets the directory where the javadoc is stored for the given project.
+     */
+    private static File getJavadocDir(Project project) {
+        return new File(project.getRootDir(),"javadoc");
     }
 
     public boolean prebuild(Build build, BuildListener listener) {
@@ -49,7 +62,7 @@ public class JavadocArchiver extends AntBasedBuildStep {
 
         listener.getLogger().println("Publishing javadoc");
 
-        File target = build.getParent().getJavadocDir();
+        File target = getJavadocDir(build.getParent());
         target.mkdirs();
 
         Copy copyTask = new Copy();
@@ -64,9 +77,8 @@ public class JavadocArchiver extends AntBasedBuildStep {
         return true;
     }
 
-    public Action getProjectAction() {
-        // TODO: contribute javadoc action from here
-        return null;
+    public Action getProjectAction(Project project) {
+        return new JavadocAction(project);
     }
 
     public Descriptor<BuildStep> getDescriptor() {
@@ -83,4 +95,28 @@ public class JavadocArchiver extends AntBasedBuildStep {
             return new JavadocArchiver(req.getParameter("javadoc_dir"));
         }
     };
+
+    public static final class JavadocAction extends DirectoryHolder implements ProminentProjectAction {
+        private final Project project;
+
+        public JavadocAction(Project project) {
+            this.project = project;
+        }
+
+        public String getUrlName() {
+            return "javadoc";
+        }
+
+        public String getDisplayName() {
+            return "Javadoc";
+        }
+
+        public String getIconFileName() {
+            return "help.gif";
+        }
+
+        public void doDynamic(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+            serveFile(req, rsp, getJavadocDir(project), "help.gif", false);
+        }
+    }
 }
