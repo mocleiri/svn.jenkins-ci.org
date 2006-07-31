@@ -32,6 +32,8 @@ import java.util.StringTokenizer;
  */
 public class Mailer implements BuildStep {
 
+    private static final int MAX_LOG_LINES = 250;
+
     /**
      * Whitespace-separated list of e-mail addresses.
      */
@@ -148,7 +150,19 @@ public class Mailer implements BuildStep {
         buf.append("---------\n");
 
         try {
-            buf.append(build.getLog());
+            String log = build.getLog();
+            String[] lines = log.split("\n");
+            if (lines.length <= MAX_LOG_LINES) {
+                buf.append(log);
+            } else {
+                // Avoid sending enormous logs over email.
+                // Interested users can always look at the log on the web server.
+                buf.append("[...truncated " + (lines.length - MAX_LOG_LINES) + " lines...]\n");
+                for (int i = lines.length - MAX_LOG_LINES; i < lines.length; i++) {
+                    buf.append(lines[i]);
+                    buf.append('\n');
+                }
+            }
         } catch (IOException e) {
             // somehow failed to read the contents of the log
             StringWriter sw = new StringWriter();
