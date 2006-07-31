@@ -22,7 +22,7 @@ public interface TaskListener {
      * An error in the build.
      *
      * @return
-     *      If return non-null, it will receive details of the error.
+     *      A writer to receive details of the error. Not null.
      */
     PrintWriter error(String msg);
 
@@ -30,7 +30,7 @@ public interface TaskListener {
      * A fatal error in the build.
      *
      * @return
-     *      If return non-null, it will receive details of the error.
+     *      A writer to receive details of the error. Not null.
      */
     PrintWriter fatalError(String msg);
 }
