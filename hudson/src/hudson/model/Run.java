@@ -461,7 +461,9 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
 
                 job.post(listener);
 
-            } catch( Exception e ) {
+            } catch (ThreadDeath t) {
+                throw t;
+            } catch( Throwable e ) {
                 if(listener!=null) {
                     if(e instanceof IOException)
                         Util.displayIOException((IOException)e,listener);
