@@ -3,6 +3,7 @@ package hudson.scm;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Proc;
+import hudson.Util;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -104,6 +106,13 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
                 int r = launcher.launch(cmd,env,os,build.getProject().getWorkspace()).join();
                 if(r!=0) {
                     listener.fatalError("revision check failed");
+                    // report the output
+                    FileInputStream log = new FileInputStream(changelogFile);
+                    try {
+                        Util.copyStream(log,listener.getLogger());
+                    } finally {
+                        log.close();
+                    }
                     return false;
                 }
             } finally {
