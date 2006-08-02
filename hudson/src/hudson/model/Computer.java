@@ -102,12 +102,9 @@ public class Computer implements ModelObject {
      */
     public List<Project> getTiedJobs() {
         List<Project> r = new ArrayList<Project>();
-        for( Job j : Hudson.getInstance().getJobs() ) {
-            if (j instanceof Project) {
-                Project p = (Project) j;
-                if(p.getAssignedNode()==getNode())
-                    r.add(p);
-            }
+        for( Project p : Hudson.getInstance().getProjects() ) {
+            if(p.getAssignedNode()==getNode())
+                r.add(p);
         }
         return r;
     }

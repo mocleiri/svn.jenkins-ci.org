@@ -12,6 +12,7 @@ import hudson.scheduler.CronTabList;
 import java.io.InvalidObjectException;
 import java.io.ObjectStreamException;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -68,6 +69,11 @@ public abstract class Trigger implements Describable<Trigger> {
         this.tabs = CronTabList.create(cronTabSpec);
     }
 
+    protected Trigger() {
+        this.spec = "";
+        this.tabs = new CronTabList(Collections.EMPTY_LIST);
+    }
+
     public String getSpec() {
         return spec;
     }
@@ -95,15 +101,12 @@ public abstract class Trigger implements Describable<Trigger> {
 
             try {
                 Hudson inst = Hudson.getInstance();
-                for (Job job : inst.getJobs()) {
-                    if (job instanceof Project) {
-                        Project p = (Project) job;
-                        for (Trigger t : p.getTriggers().values()) {
-                            LOGGER.fine("cron checking "+p.getName());
-                            if(t.tabs.check(cal)) {
-                                LOGGER.fine("cron triggered "+p.getName());
-                                t.run();
-                            }
+                for (Project p : inst.getProjects()) {
+                    for (Trigger t : p.getTriggers().values()) {
+                        LOGGER.fine("cron checking "+p.getName());
+                        if(t.tabs.check(cal)) {
+                            LOGGER.fine("cron triggered "+p.getName());
+                            t.run();
                         }
                     }
                 }

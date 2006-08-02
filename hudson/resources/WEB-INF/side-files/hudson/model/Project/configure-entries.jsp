@@ -7,6 +7,7 @@
 <%@ taglib prefix="i" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="h" uri="http://hudson.dev.java.net/" %>
 
 <s:entry title="Disable Build" help="/help/project-config/disable.html">
   <input type="checkbox" name="disable" <c:if test="${it.disabled}">checked</c:if>>
@@ -77,6 +78,18 @@
                   descriptors="<%= hudson.triggers.Triggers.TRIGGERS %>"
                   instances="${it.triggers}"
                   varName="trigger">
+  <%-- pseudo-trigger to list upstream projects. --%>
+  <c:set var="up" value="${it.upstreamProjects}" />
+  <s:optionalBlock name="pseudoUpstreamTrigger"
+                   help="/help/project-config/upstream.html"
+                   title="Build after other projects are built"
+                   checked="${!empty(up)}">
+    <s:entry title="Projects names"
+             description="Multiple projects can be specified like 'abc, def'">
+      <input class="setting-input" name="upstreamProjects"
+        type="text" value="${h:getProjectListString(up)}">
+    </s:entry>
+  </s:optionalBlock>
   <s:block>
     <p>
       To configure a trigger based on SCM commit/check-in, see

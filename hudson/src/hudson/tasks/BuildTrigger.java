@@ -27,8 +27,12 @@ public class BuildTrigger implements BuildStep {
      */
     private final String childProjects;
 
-    public BuildTrigger(String artifacts) {
-        this.childProjects = artifacts;
+    public BuildTrigger(String childProjects) {
+        this.childProjects = childProjects;
+    }
+
+    public BuildTrigger(List<Project> childProjects) {
+        this(Project.toNameList(childProjects));
     }
 
     public String getChildProjectsValue() {
@@ -36,19 +40,7 @@ public class BuildTrigger implements BuildStep {
     }
 
     public List<Project> getChildProjects() {
-        Hudson hudson = Hudson.getInstance();
-
-        List<Project> r = new ArrayList<Project>();
-        StringTokenizer tokens = new StringTokenizer(childProjects,",");
-        while(tokens.hasMoreTokens()) {
-            String projectName = tokens.nextToken().trim();
-            Job job = hudson.getJob(projectName);
-            if(!(job instanceof Project)) {
-                continue; // ignore this token
-            }
-            r.add((Project) job);
-        }
-        return r;
+        return Project.fromNameList(childProjects);
     }
 
     public boolean prebuild(Build build, BuildListener listener) {

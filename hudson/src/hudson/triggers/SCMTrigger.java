@@ -1,13 +1,13 @@
 package hudson.triggers;
 
 import antlr.ANTLRException;
+import hudson.Util;
+import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.Descriptor;
-import hudson.model.TaskListener;
-import hudson.model.Action;
 import hudson.model.Project;
+import hudson.model.TaskListener;
 import hudson.util.StreamTaskListener;
-import hudson.Util;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -15,9 +15,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Date;
 
 /**
  * {@link Trigger} that checks for SCM updates periodically.

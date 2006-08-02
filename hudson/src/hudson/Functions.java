@@ -137,4 +137,8 @@ public class Functions {
     public static SortedMap<Integer,RangeSet> getProjectRelationshipMap(Project lhs, Project rhs) {
         return lhs.getRelationship(rhs);
     }
+
+    public static String getProjectListString(List<Project> projects) {
+        return Project.toNameList(projects);
+    }
 }

@@ -6,7 +6,6 @@ import hudson.Util;
 import hudson.XmlFile;
 import hudson.model.Descriptor.FormException;
 import hudson.util.XStream2;
-import hudson.triggers.TimerTrigger;
 import hudson.triggers.Trigger;
 import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
@@ -222,6 +221,18 @@ public final class Hudson extends JobCollection implements Node {
      */
     public synchronized List<Job> getJobs() {
         return new ArrayList<Job>(jobs.values());
+    }
+
+    /**
+     * Gets the snapshot of all the projects.
+     */
+    public synchronized List<Project> getProjects() {
+        List<Project> r = new ArrayList<Project>();
+        for (Job job : jobs.values()) {
+            if(job instanceof Project)
+                r.add((Project)job);
+        }
+        return r;
     }
 
     /**
@@ -857,14 +868,11 @@ public final class Hudson extends JobCollection implements Node {
      */
     public Set<String> getAllCvsRoots() {
         Set<String> r = new TreeSet<String>();
-        for( Job j : getJobs() ) {
-            if (j instanceof Project) {
-                Project p = (Project) j;
-                SCM scm = p.getScm();
-                if (scm instanceof CVSSCM) {
-                    CVSSCM cvsscm = (CVSSCM) scm;
-                    r.add(cvsscm.getCvsRoot());
-                }
+        for( Project p : getProjects() ) {
+            SCM scm = p.getScm();
+            if (scm instanceof CVSSCM) {
+                CVSSCM cvsscm = (CVSSCM) scm;
+                r.add(cvsscm.getCvsRoot());
             }
         }
 

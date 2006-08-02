@@ -11,6 +11,7 @@ import hudson.tasks.BuildStep;
 import hudson.tasks.BuildTrigger;
 import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.junit.TestResultAction;
+import hudson.triggers.PseudoUpstreamTrigger;
 import hudson.triggers.Trigger;
 import hudson.triggers.Triggers;
 import org.kohsuke.stapler.Ancestor;
@@ -23,16 +24,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedMap;
+import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.Vector;
-import java.util.ArrayList;
 
 /**
  * Buildable software project.
@@ -223,7 +227,17 @@ public class Project extends Job<Project,Build> {
     }
 
     public synchronized Map<Descriptor<Trigger>,Trigger> getTriggers() {
-        return buildDescriptorMap(triggers);
+        List<Trigger> t = triggers;
+
+        // if there's an upstream project, add a pseudo trigger
+        // to let the user configure this
+        List<Project> upstream = getUpstreamProjects();
+        if(!upstream.isEmpty()) {
+            // needs to make a copy first
+            t = new ArrayList<Trigger>(triggers);
+            t.add(new PseudoUpstreamTrigger(upstream));
+        }
+        return buildDescriptorMap(t);
     }
 
     public synchronized Map<Descriptor<BuildStep>,BuildStep> getBuilders() {
@@ -232,6 +246,38 @@ public class Project extends Job<Project,Build> {
 
     public synchronized Map<Descriptor<BuildStep>,BuildStep> getPublishers() {
         return buildDescriptorMap(publishers);
+    }
+
+    /**
+     * Adds a new {@link BuildStep} to this {@link Project} and saves the configuration.
+     */
+    private synchronized void addPublisher(BuildStep buildStep) throws IOException {
+        for( int i=0; i<publishers.size(); i++ ) {
+            if(publishers.get(i).getDescriptor()==buildStep.getDescriptor()) {
+                // replace
+                publishers.set(i,buildStep);
+                save();
+                return;
+            }
+        }
+
+        // add
+        publishers.add(buildStep);
+        save();
+    }
+
+    /**
+     * Removes a publisher from this project, if it's active.
+     */
+    private void removePublisher(Descriptor<BuildStep> descriptor) throws IOException {
+        for( int i=0; i<publishers.size(); i++ ) {
+            if(publishers.get(i).getDescriptor()==descriptor) {
+                // found it
+                publishers.remove(i);
+                save();
+                return;
+            }
+        }
     }
 
     public SortedMap<Integer, ? extends Build> _getRuns() {
@@ -354,23 +400,20 @@ public class Project extends Job<Project,Build> {
     public List<Project> getDownstreamProjects() {
         BuildTrigger buildTrigger = (BuildTrigger) getPublishers().get(BuildTrigger.DESCRIPTOR);
         if(buildTrigger==null)
-            return Collections.EMPTY_LIST;  // for JDK 1.4 compatibility
+            return new ArrayList<Project>();
         else
             return buildTrigger.getChildProjects();
     }
 
     public List<Project> getUpstreamProjects() {
         List<Project> r = new ArrayList<Project>();
-        for( Job j : Hudson.getInstance().getJobs() ) {
-            if (j instanceof Project) {
-                Project p = (Project) j;
-                synchronized(p) {
-                    for (BuildStep step : p.publishers) {
-                        if (step instanceof BuildTrigger) {
-                            BuildTrigger trigger = (BuildTrigger) step;
-                            if(trigger.getChildProjects().contains(this))
-                                r.add(p);
-                        }
+        for( Project p : Hudson.getInstance().getProjects() ) {
+            synchronized(p) {
+                for (BuildStep step : p.publishers) {
+                    if (step instanceof BuildTrigger) {
+                        BuildTrigger trigger = (BuildTrigger) step;
+                        if(trigger.getChildProjects().contains(this))
+                            r.add(p);
                     }
                 }
             }
@@ -458,52 +501,82 @@ public class Project extends Job<Project,Build> {
     /**
      * Accepts submission from the configuration page.
      */
-    public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        try {
-            if(!Hudson.adminCheck(req,rsp))
-                return;
+    public void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
 
-            req.setCharacterEncoding("UTF-8");
+        Set<Project> upstream = Collections.EMPTY_SET;
 
-            int scmidx = Integer.parseInt(req.getParameter("scm"));
-            scm = SCMManager.getSupportedSCMs()[scmidx].newInstance(req);
+        synchronized(this) {
+            try {
+                if(!Hudson.adminCheck(req,rsp))
+                    return;
 
-            disabled = req.getParameter("disable")!=null;
+                req.setCharacterEncoding("UTF-8");
 
-            jdk = req.getParameter("jdk");
-            if(req.getParameter("hasCustomQuietPeriod")!=null) {
-                quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
-            } else {
-                quietPeriod = null;
-            }
+                int scmidx = Integer.parseInt(req.getParameter("scm"));
+                scm = SCMManager.getSupportedSCMs()[scmidx].newInstance(req);
 
-            if(req.getParameter("hasSlaveAffinity")!=null) {
-                canRoam = false;
-                assignedNode = req.getParameter("slave");
-                if(assignedNode !=null) {
-                    if(Hudson.getInstance().getSlave(assignedNode)==null) {
-                        assignedNode = null;   // no such slave
-                    }
+                disabled = req.getParameter("disable")!=null;
+
+                jdk = req.getParameter("jdk");
+                if(req.getParameter("hasCustomQuietPeriod")!=null) {
+                    quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
+                } else {
+                    quietPeriod = null;
                 }
-            } else {
-                canRoam = true;
-                assignedNode = null;
+
+                if(req.getParameter("hasSlaveAffinity")!=null) {
+                    canRoam = false;
+                    assignedNode = req.getParameter("slave");
+                    if(assignedNode !=null) {
+                        if(Hudson.getInstance().getSlave(assignedNode)==null) {
+                            assignedNode = null;   // no such slave
+                        }
+                    }
+                } else {
+                    canRoam = true;
+                    assignedNode = null;
+                }
+
+                buildDescribable(req, BuildStep.BUILDERS, builders, "builder");
+                buildDescribable(req, BuildStep.PUBLISHERS, publishers, "publisher");
+
+                for (Trigger t : triggers)
+                    t.stop();
+                buildDescribable(req, Triggers.TRIGGERS, triggers, "trigger");
+                for (Trigger t : triggers)
+                    t.start(this);
+
+                updateTransientActions();
+
+                super.doConfigSubmit(req,rsp);
+            } catch (FormException e) {
+                sendError(e,req,rsp);
             }
+        }
 
-            buildDescribable(req, BuildStep.BUILDERS, builders, "builder");
-            buildDescribable(req, BuildStep.PUBLISHERS, publishers, "publisher");
+        if(req.getParameter("pseudoUpstreamTrigger")!=null) {
+            upstream = new HashSet<Project>(Project.fromNameList(req.getParameter("upstreamProjects")));
+        }
 
-            for (Trigger t : triggers)
-                t.stop();
-            buildDescribable(req, Triggers.TRIGGERS, triggers, "trigger");
-            for (Trigger t : triggers)
-                t.start(this);
+        // this needs to be done after we release the lock on this,
+        // or otherwise we could dead-lock
+        for (Project p : Hudson.getInstance().getProjects()) {
+            boolean isUpstream = upstream.contains(p);
+            synchronized(p) {
+                List<Project> newChildProjects = p.getDownstreamProjects();
 
-            updateTransientActions();
+                if(isUpstream) {
+                    newChildProjects.add(this);
+                } else {
+                    newChildProjects.remove(this);
+                }
 
-            super.doConfigSubmit(req,rsp);
-        } catch (FormException e) {
-            sendError(e,req,rsp);
+                if(newChildProjects.isEmpty()) {
+                    p.removePublisher(BuildTrigger.DESCRIPTOR);
+                } else {
+                    p.addPublisher(new BuildTrigger(newChildProjects));
+                }
+            }
         }
     }
 
@@ -620,4 +693,36 @@ public class Project extends Job<Project,Build> {
     private transient String slave;
 
     private static final String FAILURE_ONLY_COOKIE = "TestResultAction_failureOnly";
+
+    /**
+     * Converts a list of projects into a camma-separated names.
+     */
+    public static String toNameList(Iterable<? extends Project> projects) {
+        StringBuilder buf = new StringBuilder();
+        for (Project project : projects) {
+            if(buf.length()>0)
+                buf.append(", ");
+            buf.append(project.getName());
+        }
+        return buf.toString();
+    }
+
+    /**
+     * Does the opposite of {@link #toNameList(Iterable)}.
+     */
+    public static List<Project> fromNameList(String list) {
+        Hudson hudson = Hudson.getInstance();
+
+        List<Project> r = new ArrayList<Project>();
+        StringTokenizer tokens = new StringTokenizer(list,",");
+        while(tokens.hasMoreTokens()) {
+            String projectName = tokens.nextToken().trim();
+            Job job = hudson.getJob(projectName);
+            if(!(job instanceof Project)) {
+                continue; // ignore this token
+            }
+            r.add((Project) job);
+        }
+        return r;
+    }
 }
