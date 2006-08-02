@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  * Buildable software project.
@@ -350,8 +351,31 @@ public class Project extends Job<Project,Build> {
         return r;
     }
 
-    public BuildTrigger getBuildTriggerPublisher() {
-        return (BuildTrigger)getPublishers().get(BuildTrigger.DESCRIPTOR);
+    public List<Project> getDownstreamProjects() {
+        BuildTrigger buildTrigger = (BuildTrigger) getPublishers().get(BuildTrigger.DESCRIPTOR);
+        if(buildTrigger==null)
+            return Collections.EMPTY_LIST;  // for JDK 1.4 compatibility
+        else
+            return buildTrigger.getChildProjects();
+    }
+
+    public List<Project> getUpstreamProjects() {
+        List<Project> r = new ArrayList<Project>();
+        for( Job j : Hudson.getInstance().getJobs() ) {
+            if (j instanceof Project) {
+                Project p = (Project) j;
+                synchronized(p) {
+                    for (BuildStep step : p.publishers) {
+                        if (step instanceof BuildTrigger) {
+                            BuildTrigger trigger = (BuildTrigger) step;
+                            if(trigger.getChildProjects().contains(this))
+                                r.add(p);
+                        }
+                    }
+                }
+            }
+        }
+        return r;
     }
 
     // helper method for getRelationship

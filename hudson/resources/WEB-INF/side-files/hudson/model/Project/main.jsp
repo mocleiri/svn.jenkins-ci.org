@@ -71,9 +71,21 @@
   </c:if>
 </table>
 
-<%-- downstream projects --%>
-<c:set var="downstream" value="${it.buildTriggerPublisher.childProjects}" />
-<c:if test="${downstream!=null}">
+<%-- upstream/downstream projects --%>
+<c:set var="upstream" value="${it.upstreamProjects}" />
+<c:if test="${!empty(upstream)}">
+  <h2>Upstream Projects</h2>
+  <ul style="list-style-type: none;">
+    <c:forEach var="item" items="${upstream}">
+      <li>
+        <img src="${rootURL}/images/16x16/${item.buildStatusUrl}">
+        <a href="../${item.name}/">${item.name}</a>
+      </li>
+    </c:forEach>
+  </ul>
+</c:if>
+<c:set var="downstream" value="${it.downstreamProjects}" />
+<c:if test="${!empty(downstream)}">
   <h2>Downstream Projects</h2>
   <ul style="list-style-type: none;">
     <c:forEach var="item" items="${downstream}">
