@@ -2,7 +2,7 @@ package hudson.model;
 
 import hudson.FilePath;
 import hudson.Launcher;
-import hudson.model.Descriptor.InstantiationException;
+import hudson.model.Descriptor.FormException;
 import hudson.model.Fingerprint.RangeSet;
 import hudson.scm.NullSCM;
 import hudson.scm.SCM;
@@ -478,7 +478,7 @@ public class Project extends Job<Project,Build> {
             updateTransientActions();
 
             super.doConfigSubmit(req,rsp);
-        } catch (InstantiationException e) {
+        } catch (FormException e) {
             sendError(e,req,rsp);
         }
     }
@@ -524,7 +524,7 @@ public class Project extends Job<Project,Build> {
     }
 
     private <T extends Describable<T>> void buildDescribable(StaplerRequest req, Descriptor<T>[] descriptors, List<T> result, String prefix)
-        throws InstantiationException {
+        throws FormException {
 
         result.clear();
         for( int i=0; i< descriptors.length; i++ ) {

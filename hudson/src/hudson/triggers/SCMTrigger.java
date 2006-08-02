@@ -10,7 +10,6 @@ import hudson.util.StreamTaskListener;
 import hudson.Util;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -159,11 +158,11 @@ public class SCMTrigger extends Trigger {
             return "/help/project-config/poll-scm.html";
         }
 
-        public Trigger newInstance(HttpServletRequest req) throws InstantiationException {
+        public Trigger newInstance(HttpServletRequest req) throws FormException {
             try {
                 return new SCMTrigger(req.getParameter("scmpoll_spec"));
             } catch (ANTLRException e) {
-                throw new InstantiationException(e.toString(),e,"scmpoll_spec");
+                throw new FormException(e.toString(),e,"scmpoll_spec");
             }
         }
     };

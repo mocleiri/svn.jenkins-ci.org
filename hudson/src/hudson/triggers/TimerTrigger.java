@@ -32,11 +32,11 @@ public class TimerTrigger extends Trigger {
             return "/help/project-config/timer.html";
         }
 
-        public Trigger newInstance(HttpServletRequest req) throws InstantiationException {
+        public Trigger newInstance(HttpServletRequest req) throws FormException {
             try {
                 return new TimerTrigger(req.getParameter("timer_spec"));
             } catch (ANTLRException e) {
-                throw new InstantiationException(e.toString(),e,"timer_spec");
+                throw new FormException(e.toString(),e,"timer_spec");
             }
         }
     };

@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.XStream;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.XmlFile;
+import hudson.model.Descriptor.FormException;
 import hudson.util.XStream2;
 import hudson.triggers.TimerTrigger;
 import hudson.triggers.Trigger;
@@ -529,72 +530,76 @@ public final class Hudson extends JobCollection implements Node {
     /**
      * Accepts submission from the configuration page.
      */
-    public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException {
-        if(!Hudson.adminCheck(req,rsp))
-            return;
+    public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        try {
+            if(!Hudson.adminCheck(req,rsp))
+                return;
 
-        req.setCharacterEncoding("UTF-8");
+            req.setCharacterEncoding("UTF-8");
 
-        useSecurity = req.getParameter("use_security")!=null;
+            useSecurity = req.getParameter("use_security")!=null;
 
-        numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
-        quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
+            numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
+            quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
 
-        systemMessage = Util.nullify(req.getParameter("system_message"));
+            systemMessage = Util.nullify(req.getParameter("system_message"));
 
-        {// update slave list
-            slaves.clear();
-            String[] names = req.getParameterValues("slave_name");
-            String[] descriptions = req.getParameterValues("slave_description");
-            String[] executors = req.getParameterValues("slave_executors");
-            String[] cmds = req.getParameterValues("slave_command");
-            String[] rfs = req.getParameterValues("slave_remoteFS");
-            String[] lfs = req.getParameterValues("slave_localFS");
-            String[] mode = req.getParameterValues("slave_mode");
-            if(names!=null && descriptions!=null && executors!=null && cmds!=null && rfs!=null && lfs!=null && mode!=null) {
-                int len = Util.min(names.length,descriptions.length,executors.length,cmds.length,rfs.length, lfs.length, mode.length);
-                for(int i=0;i<len;i++) {
-                    int n = 2;
-                    try {
-                        n = Integer.parseInt(executors[i].trim());
-                    } catch(NumberFormatException e) {
-                        // ignore
+            {// update slave list
+                slaves.clear();
+                String[] names = req.getParameterValues("slave_name");
+                String[] descriptions = req.getParameterValues("slave_description");
+                String[] executors = req.getParameterValues("slave_executors");
+                String[] cmds = req.getParameterValues("slave_command");
+                String[] rfs = req.getParameterValues("slave_remoteFS");
+                String[] lfs = req.getParameterValues("slave_localFS");
+                String[] mode = req.getParameterValues("slave_mode");
+                if(names!=null && descriptions!=null && executors!=null && cmds!=null && rfs!=null && lfs!=null && mode!=null) {
+                    int len = Util.min(names.length,descriptions.length,executors.length,cmds.length,rfs.length, lfs.length, mode.length);
+                    for(int i=0;i<len;i++) {
+                        int n = 2;
+                        try {
+                            n = Integer.parseInt(executors[i].trim());
+                        } catch(NumberFormatException e) {
+                            // ignore
+                        }
+                        slaves.add(new Slave(names[i],descriptions[i],cmds[i],rfs[i],new File(lfs[i]),n, Mode.valueOf(mode[i])));
                     }
-                    slaves.add(new Slave(names[i],descriptions[i],cmds[i],rfs[i],new File(lfs[i]),n,Node.Mode.valueOf(mode[i])));
+                }
+
+                updateComputerList();
+            }
+
+            {// update JDK installations
+                jdks.clear();
+                String[] names = req.getParameterValues("jdk_name");
+                String[] homes = req.getParameterValues("jdk_home");
+                if(names!=null && homes!=null) {
+                    int len = Math.min(names.length,homes.length);
+                    for(int i=0;i<len;i++) {
+                        jdks.add(new JDK(names[i],homes[i]));
+                    }
                 }
             }
 
-            updateComputerList();
+            boolean result = true;
+
+            for( Descriptor<BuildStep> d : BuildStep.BUILDERS )
+                result &= d.configure(req);
+
+            for( Descriptor<BuildStep> d : BuildStep.PUBLISHERS )
+                result &= d.configure(req);
+
+            for( Descriptor<SCM> scmd : SCMManager.getSupportedSCMs() )
+                result &= scmd.configure(req);
+
+            save();
+            if(result)
+                rsp.sendRedirect(".");  // go to the top page
+            else
+                rsp.sendRedirect("configure"); // back to config
+        } catch (FormException e) {
+            sendError(e,req,rsp);
         }
-
-        {// update JDK installations
-            jdks.clear();
-            String[] names = req.getParameterValues("jdk_name");
-            String[] homes = req.getParameterValues("jdk_home");
-            if(names!=null && homes!=null) {
-                int len = Math.min(names.length,homes.length);
-                for(int i=0;i<len;i++) {
-                    jdks.add(new JDK(names[i],homes[i]));
-                }
-            }
-        }
-
-        boolean result = true;
-
-        for( Descriptor<BuildStep> d : BuildStep.BUILDERS )
-            result &= d.configure(req);
-
-        for( Descriptor<BuildStep> d : BuildStep.PUBLISHERS )
-            result &= d.configure(req);
-
-        for( Descriptor<SCM> scmd : SCMManager.getSupportedSCMs() )
-            result &= scmd.configure(req);
-
-        save();
-        if(result)
-            rsp.sendRedirect(".");  // go to the top page
-        else
-            rsp.sendRedirect("configure"); // back to config
     }
 
     public synchronized Job doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {

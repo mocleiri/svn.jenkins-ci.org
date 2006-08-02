@@ -226,10 +226,13 @@ public class Mailer implements BuildStep {
             return Session.getInstance(props);
         }
 
-        public boolean configure(HttpServletRequest req) {
+        public boolean configure(HttpServletRequest req) throws FormException {
             getProperties().put("mail.smtp.host",nullify(req.getParameter("mailer_smtp_server")));
             getProperties().put("mail.admin.address",req.getParameter("mailer_admin_address"));
-            getProperties().put("mail.hudson.url",nullify(req.getParameter("mailer_hudson_url")));
+            String url = nullify(req.getParameter("mailer_hudson_url"));
+            if(url!=null && !url.endsWith("/"))
+                url += '/';
+            getProperties().put("mail.hudson.url",url);
 
             save();
             return super.configure(req);

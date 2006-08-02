@@ -47,10 +47,10 @@ public abstract class Descriptor<T extends Describable<T>> {
     /**
      * Creates a configured instance from the submitted form.
      *
-     * @throws InstantiationException
+     * @throws FormException
      *      Signals a problem in the submitted form.
      */
-    public abstract T newInstance(HttpServletRequest req) throws InstantiationException;
+    public abstract T newInstance(HttpServletRequest req) throws FormException;
 
     /**
      * Returns the resource path to the help screen HTML, if any.
@@ -83,7 +83,7 @@ public abstract class Descriptor<T extends Describable<T>> {
      * @return false
      *      to keep the client in the same config page.
      */
-    public boolean configure( HttpServletRequest req ) {
+    public boolean configure( HttpServletRequest req ) throws FormException {
         return true;
     }
 
@@ -130,20 +130,20 @@ public abstract class Descriptor<T extends Describable<T>> {
         return values;
     }
 
-    public static final class InstantiationException extends Exception {
+    public static final class FormException extends Exception {
         private final String formField;
 
-        public InstantiationException(String message, String formField) {
+        public FormException(String message, String formField) {
             super(message);
             this.formField = formField;
         }
 
-        public InstantiationException(String message, Throwable cause, String formField) {
+        public FormException(String message, Throwable cause, String formField) {
             super(message, cause);
             this.formField = formField;
         }
 
-        public InstantiationException(Throwable cause, String formField) {
+        public FormException(Throwable cause, String formField) {
             super(cause);
             this.formField = formField;
         }
