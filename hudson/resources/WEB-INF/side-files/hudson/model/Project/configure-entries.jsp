@@ -90,12 +90,6 @@
         type="text" value="${h:getProjectListString(up)}">
     </s:entry>
   </s:optionalBlock>
-  <s:block>
-    <p>
-      To configure a trigger based on SCM commit/check-in, see
-      the "configure automatic build" section of <a href="https://hudson.dev.java.net/build.html">this document</a>.
-    </p>
-  </s:block>
 </s:descriptorList>
 
 
