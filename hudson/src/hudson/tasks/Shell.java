@@ -117,6 +117,10 @@ public class Shell implements BuildStep {
             save();
         }
 
+        public String getHelpFile() {
+            return "/help/project-config/shell.html";
+        }
+
         public String getDisplayName() {
             return "Execute shell";
         }
