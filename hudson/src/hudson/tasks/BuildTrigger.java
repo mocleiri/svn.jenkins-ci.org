@@ -57,8 +57,6 @@ public class BuildTrigger implements BuildStep {
 
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         if(build.getResult()== Result.SUCCESS) {
-            Hudson hudson = Hudson.getInstance();
-
             for (Project p : getChildProjects()) {
                 listener.getLogger().println("Triggering a new build of "+p.getName());
                 p.scheduleBuild();
