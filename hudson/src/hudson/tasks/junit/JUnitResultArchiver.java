@@ -9,6 +9,7 @@ import hudson.model.Action;
 import hudson.tasks.AntBasedBuildStep;
 import hudson.tasks.BuildStep;
 import org.apache.tools.ant.Project;
+import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.types.FileSet;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,14 +40,21 @@ public class JUnitResultArchiver extends AntBasedBuildStep {
         fs.setProject(p);
         fs.setDir(build.getProject().getWorkspace().getLocal());
         fs.setIncludes(testResults);
+        DirectoryScanner ds = fs.getDirectoryScanner(p);
 
-        TestResultAction action = new TestResultAction(build, fs.getDirectoryScanner(p), listener);
+        if(ds.getIncludedFiles().length==0) {
+            listener.getLogger().println("No test report files wer efound. Configuration error?");
+            // no test result. Most likely a configuration error or fatal problem
+            build.setResult(Result.FAILURE);
+        }
+
+        TestResultAction action = new TestResultAction(build, ds, listener);
         build.getActions().add(action);
 
         TestResult r = action.getResult();
 
         if(r.getPassCount()==0 && r.getFailCount()==0) {
-            listener.getLogger().println("No test report is found. Configuration error?");
+            listener.getLogger().println("Test reports were found but none of them are new. Did tests run?");
             // no test result. Most likely a configuration error or fatal problem
             build.setResult(Result.FAILURE);
         }
