@@ -158,7 +158,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
     public boolean checkout(Build build, Launcher launcher, FilePath workspace, BuildListener listener, File changelogFile) throws IOException {
         boolean result;
 
-        if(useUpdate && isUpdatable(workspace.getLocal())) {
+        if(useUpdate && isUpdatable(workspace.getLocal(),listener)) {
             result = update(launcher,workspace,listener);
             if(!result)
                 return false;
@@ -309,14 +309,16 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
     /**
      * Returns true if we can use "svn update" instead of "svn checkout"
      */
-    private boolean isUpdatable(File dir) {
+    private boolean isUpdatable(File dir,BuildListener listener) {
         StringTokenizer tokens = new StringTokenizer(modules);
         while(tokens.hasMoreTokens()) {
             String url = tokens.nextToken();
             File module = new File(dir,getLastPathComponent(url));
             File svn = new File(module,".svn/entries");
-            if(!svn.exists())
+            if(!svn.exists()) {
+                listener.getLogger().println("Checking out a fresh workspace because "+svn+" doesn't exist.");
                 return false;
+            }
 
             // check wc-entries/entry/@url
             synchronized(spf) {
@@ -324,21 +326,30 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
                     SAXParser parser = spf.newSAXParser();
                     Checker checker = new Checker(url);
                     parser.parse(svn,checker);
-                    if(!checker.found())
+                    if(!checker.found()) {
+                        listener.getLogger().println("Checking out a fresh workspace because the workspace is not "+url);
                         return false;
+                    }
                 } catch (ParserConfigurationException e) {
                     // impossible
                     throw new Error(e);
                 } catch (SAXException e) {
                     // corrupt file? don't use update to be safe
+                    failedToParse(listener, svn, e);
                     return false;
                 } catch (IOException e) {
                     // corrupt file? don't use update to be safe
+                    failedToParse(listener, svn, e);
                     return false;
                 }
             }
         }
         return true;
+    }
+
+    private void failedToParse(BuildListener listener, File svn, Exception e) {
+        listener.getLogger().println("Checking out a fresh workspace because Hudson failed to parse "+svn);
+        e.printStackTrace(listener.error(e.getMessage()));
     }
 
     public boolean pollChanges(Project project, Launcher launcher, FilePath workspace, TaskListener listener) throws IOException {
