@@ -29,6 +29,7 @@ import org.kohsuke.stapler.StaplerResponse;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -163,54 +164,58 @@ public class TestResultAction implements Action, StaplerProxy {
      * Generates a PNG image for the test result trend.
      */
     public void doGraph( StaplerRequest req, StaplerResponse rsp) throws IOException {
+        try {
+            if(req.checkIfModified(owner.getTimestamp(),rsp))
+                return;
 
-        if(req.checkIfModified(owner.getTimestamp(),rsp))
-            return;
+            class BuildLabel implements Comparable<BuildLabel> {
+                private final Build build;
 
-        class BuildLabel implements Comparable<BuildLabel> {
-            private final Build build;
+                public BuildLabel(Build build) {
+                    this.build = build;
+                }
 
-            public BuildLabel(Build build) {
-                this.build = build;
+                public int compareTo(BuildLabel that) {
+                    return this.build.number-that.build.number;
+                }
+
+                public boolean equals(Object o) {
+                    BuildLabel that = (BuildLabel) o;
+                    return build==that.build;
+                }
+
+                public int hashCode() {
+                    return build.hashCode();
+                }
+
+                public String toString() {
+                    return build.getDisplayName();
+                }
             }
 
-            public int compareTo(BuildLabel that) {
-                return this.build.number-that.build.number;
+            boolean failureOnly = Boolean.valueOf(req.getParameter("failureOnly"));
+
+            DataSetBuilder<String,BuildLabel> dsb = new DataSetBuilder<String,BuildLabel>();
+
+            for( TestResultAction a=this; a!=null; a=a.getPreviousResult() ) {
+                dsb.add( a.getFailCount(), "failed", new BuildLabel(a.owner));
+                if(!failureOnly)
+                    dsb.add( a.getTotalCount()-a.getFailCount(),"total", new BuildLabel(a.owner));
             }
 
-            public boolean equals(Object o) {
-                BuildLabel that = (BuildLabel) o;
-                return build==that.build;
-            }
-
-            public int hashCode() {
-                return build.hashCode();
-            }
-
-            public String toString() {
-                return build.getDisplayName();
-            }
+            String w = req.getParameter("width");
+            if(w==null)     w="500";
+            String h = req.getParameter("height");
+            if(h==null)     h="200";
+            BufferedImage image = createChart(dsb.build()).createBufferedImage(Integer.parseInt(w),Integer.parseInt(h));
+            rsp.setContentType("image/png");
+            ServletOutputStream os = rsp.getOutputStream();
+            ImageIO.write(image, "PNG", os);
+            os.close();
+        } catch(HeadlessException e) {
+            // not available. send out error message
+            rsp.sendRedirect2(req.getContextPath()+"/images/headless.png");
         }
-
-        boolean failureOnly = Boolean.valueOf(req.getParameter("failureOnly"));
-
-        DataSetBuilder<String,BuildLabel> dsb = new DataSetBuilder<String,BuildLabel>();
-
-        for( TestResultAction a=this; a!=null; a=a.getPreviousResult() ) {
-            dsb.add( a.getFailCount(), "failed", new BuildLabel(a.owner));
-            if(!failureOnly)
-                dsb.add( a.getTotalCount()-a.getFailCount(),"total", new BuildLabel(a.owner));
-        }
-
-        String w = req.getParameter("width");
-        if(w==null)     w="500";
-        String h = req.getParameter("height");
-        if(h==null)     h="200";
-        BufferedImage image = createChart(dsb.build()).createBufferedImage(Integer.parseInt(w),Integer.parseInt(h));
-        rsp.setContentType("image/png");
-        ServletOutputStream os = rsp.getOutputStream();
-        ImageIO.write(image, "PNG", os);
-        os.close();
     }
 
     private JFreeChart createChart(CategoryDataset dataset) {
