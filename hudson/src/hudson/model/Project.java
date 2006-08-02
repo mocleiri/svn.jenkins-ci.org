@@ -11,7 +11,6 @@ import hudson.tasks.BuildStep;
 import hudson.tasks.BuildTrigger;
 import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.junit.TestResultAction;
-import hudson.triggers.PseudoUpstreamTrigger;
 import hudson.triggers.Trigger;
 import hudson.triggers.Triggers;
 import org.kohsuke.stapler.Ancestor;
@@ -227,17 +226,7 @@ public class Project extends Job<Project,Build> {
     }
 
     public synchronized Map<Descriptor<Trigger>,Trigger> getTriggers() {
-        List<Trigger> t = triggers;
-
-        // if there's an upstream project, add a pseudo trigger
-        // to let the user configure this
-        List<Project> upstream = getUpstreamProjects();
-        if(!upstream.isEmpty()) {
-            // needs to make a copy first
-            t = new ArrayList<Trigger>(triggers);
-            t.add(new PseudoUpstreamTrigger(upstream));
-        }
-        return buildDescriptorMap(t);
+        return buildDescriptorMap(triggers);
     }
 
     public synchronized Map<Descriptor<BuildStep>,BuildStep> getBuilders() {
