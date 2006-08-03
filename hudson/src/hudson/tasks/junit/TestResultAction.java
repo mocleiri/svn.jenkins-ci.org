@@ -30,6 +30,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -164,6 +165,12 @@ public class TestResultAction implements Action, StaplerProxy {
      * Generates a PNG image for the test result trend.
      */
     public void doGraph( StaplerRequest req, StaplerResponse rsp) throws IOException {
+        if(awtProblem) {
+            // not available. send out error message
+            rsp.sendRedirect2(req.getContextPath()+"/images/headless.png");
+            return;
+        }
+
         try {
             if(req.checkIfModified(owner.getTimestamp(),rsp))
                 return;
@@ -277,10 +284,21 @@ public class TestResultAction implements Action, StaplerProxy {
 
     private static final XStream XSTREAM = new XStream2();
 
+    /**
+     * See issue 93. Detect an error in X11 and handle it gracefully.
+     */
+    private static boolean awtProblem = false;
+
     static {
         XSTREAM.alias("result",TestResult.class);
         XSTREAM.alias("suite",SuiteResult.class);
         XSTREAM.alias("case",CaseResult.class);
         XSTREAM.registerConverter(new StringConverter2(),100);
+
+        try {
+            new Font("SansSerif",Font.BOLD,18).toString();
+        } catch (Throwable t) {
+            awtProblem = true;
+        }
     }
 }
