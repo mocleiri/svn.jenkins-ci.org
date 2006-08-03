@@ -686,7 +686,7 @@ public class Project extends Job<Project,Build> {
     /**
      * Converts a list of projects into a camma-separated names.
      */
-    public static String toNameList(Iterable<? extends Project> projects) {
+    public static String toNameList(Collection<? extends Project> projects) {
         StringBuilder buf = new StringBuilder();
         for (Project project : projects) {
             if(buf.length()>0)
@@ -697,7 +697,7 @@ public class Project extends Job<Project,Build> {
     }
 
     /**
-     * Does the opposite of {@link #toNameList(Iterable)}.
+     * Does the opposite of {@link #toNameList(Collection)}.
      */
     public static List<Project> fromNameList(String list) {
         Hudson hudson = Hudson.getInstance();
