@@ -115,7 +115,7 @@ public final class Hudson extends JobCollection implements Node {
      */
     private List<View> views;   // can't initialize it eagerly for backward compatibility
 
-    private final FingerprintMap fingerprintMap = new FingerprintMap();
+    private transient final FingerprintMap fingerprintMap = new FingerprintMap();
 
     public static Hudson getInstance() {
         return theInstance;
