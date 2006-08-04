@@ -31,7 +31,17 @@ fi
 shift
 
 # execute. use eval so that variables can be expanded now
-eval "$@"
+# this allows users to specify $HOME or $DISPLAY or anything else,
+# and it works as expected.
+#
+# but since eval mess up with whitespace ('eval ls "a b"' means the same as 'eval ls a b')
+# we need to re-escape arguments (we need to say 'eval ls \"a b\"' to achieve the desired effect)
+list=""
+for a in "$@"
+do
+  list="$list \"$a\""
+done
+eval "$list"
 ret=$?
 # these additional hooks seem to prevent "select: bad filer number" error
 # on some systems, so use this as a precaution. We can afford to waste

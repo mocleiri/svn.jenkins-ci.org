@@ -135,7 +135,20 @@ public final class Slave implements Node {
                     r.add(s.substring(index+1));
                 }
                 r.add("--");
-                r.addAll(Arrays.asList(cmd));
+                for (String c : cmd) {
+                    // ssh passes the command and parameters in one string.
+                    // see RFC 4254 section 6.5.
+                    // so the consequence that we need to give
+                    // {"ssh",...,"ls","\"a b\""} to list a file "a b".
+                    // If we just do
+                    // {"ssh",...,"ls","a b"} (which is correct if this goes directly to Runtime.exec),
+                    // then we end up executing "ls","a","b" on the other end.
+                    //
+                    // I looked at rsh source code, and that behave the same way.
+                    if(c.indexOf(' ')>=0)
+                        c = '"'+c+'"';
+                    r.add(c);
+                }
                 return r.toArray(new String[r.size()]);
             }
         };
