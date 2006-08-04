@@ -4,6 +4,7 @@ import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Proc;
 import hudson.EnvVars;
+import hudson.util.ArgumentListBuilder;
 import hudson.model.BuildListener;
 import hudson.model.TaskListener;
 
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 /**
  * Common implementation between {@link CVSSCM} and {@link SubversionSCM}.
@@ -27,17 +29,17 @@ abstract class AbstractCVSFamilySCM implements SCM {
      * @param out
      *      Receives output from the executed program.
      */
-    protected final boolean run(Launcher launcher, String cmd, TaskListener listener, FilePath dir, OutputStream out) throws IOException {
+    protected final boolean run(Launcher launcher, ArgumentListBuilder cmd, TaskListener listener, FilePath dir, OutputStream out) throws IOException {
         Map env = createEnvVarMap(true);
 
-        int r = launcher.launch(cmd,env,out,dir).join();
+        int r = launcher.launch(cmd.toCommandArray(),env,out,dir).join();
         if(r!=0)
             listener.fatalError(getDescriptor().getDisplayName()+" failed");
 
         return r==0;
     }
 
-    protected final boolean run(Launcher launcher, String cmd, TaskListener listener, FilePath dir) throws IOException {
+    protected final boolean run(Launcher launcher, ArgumentListBuilder cmd, TaskListener listener, FilePath dir) throws IOException {
         return run(launcher,cmd,listener,dir,listener.getLogger());
     }
 

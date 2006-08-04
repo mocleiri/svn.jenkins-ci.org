@@ -12,6 +12,7 @@ import hudson.model.Result;
 import hudson.model.StreamBuildListener;
 import hudson.model.TaskListener;
 import hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
+import hudson.util.ArgumentListBuilder;
 import hudson.util.ForkOutputStream;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.Expand;
@@ -32,7 +33,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -137,12 +137,13 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         } else {
             dir.deleteContents();
 
-            String cmd = MessageFormat.format("cvs -Q -z9 -d {0} co {1} {2} {3}",
-                cvsroot,
-                branch!=null?"-r "+branch:"",
-                flatten?"-d "+dir.getName():"",
-                module
-            );
+            ArgumentListBuilder cmd = new ArgumentListBuilder();
+            cmd.add("cvs","-Q","-z9","-d",cvsroot,"co");
+            if(branch!=null)
+                cmd.add("-r",branch);
+            if(flatten)
+                cmd.add("-d",dir.getName());
+            cmd.add(module);
 
             if(!run(launcher,cmd,listener, flatten ? dir.getParent() : dir))
                 return false;
@@ -236,7 +237,12 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
         List<String> changedFileNames = new ArrayList<String>();    // file names relative to the workspace
 
-        String cmd = "cvs -q "+(dryRun?"-n":"")+" -z9 update -PdC";
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
+        cmd.add("cvs","-q","-z9");
+        if(dryRun)
+            cmd.add("-n");
+        cmd.add("update","-PdC");
+
         if(flatten) {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
@@ -658,7 +664,9 @@ public class CVSSCM extends AbstractCVSFamilySCM {
                     StringTokenizer tokens = new StringTokenizer(CVSSCM.this.module);
                     while(tokens.hasMoreTokens()) {
                         String m = tokens.nextToken();
-                        if(!CVSSCM.this.run(new Launcher(listener),"cvs tag -R "+tagName,listener,new FilePath(destdir).child(m))) {
+                        ArgumentListBuilder cmd = new ArgumentListBuilder();
+                        cmd.add("cvs","tag","-R",tagName);
+                        if(!CVSSCM.this.run(new Launcher(listener),cmd,listener,new FilePath(destdir).child(m))) {
                             listener.getLogger().println("tagging failed");
                             return;
                         }

@@ -9,6 +9,7 @@ import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Project;
 import hudson.model.TaskListener;
+import hudson.util.ArgumentListBuilder;
 import org.apache.commons.digester.Digester;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -23,13 +24,13 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -166,10 +167,15 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             workspace.deleteContents();
             StringTokenizer tokens = new StringTokenizer(modules);
             while(tokens.hasMoreTokens()) {
-                result = run(launcher,DESCRIPTOR.getSvnExe()+" co -q --non-interactive "
-                    +(username!=null?"--username "+username+' ':"")
-                    +(otherOptions!=null?otherOptions+' ':"")
-                    +tokens.nextToken(),listener,workspace);
+                ArgumentListBuilder cmd = new ArgumentListBuilder();
+                cmd.add(DESCRIPTOR.getSvnExe(),"co","-q","--non-interactive");
+                if(username!=null)
+                    cmd.add("--username",username);
+                if(otherOptions!=null)
+                    cmd.add(Util.tokenize(otherOptions));
+                cmd.add(tokens.nextToken());
+                
+                result = run(launcher,cmd,listener,workspace);
                 if(!result)
                     return false;
             }
@@ -292,11 +298,13 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
     }
 
     public boolean update(Launcher launcher, FilePath remoteDir, BuildListener listener) throws IOException {
-        String cmd = DESCRIPTOR.getSvnExe()+" update -q --non-interactive";
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
+        cmd.add(DESCRIPTOR.getSvnExe(), "update", "-q", "--non-interactive");
+
         if(username!=null)
-            cmd+=" --username "+username;
+            cmd.add(" --username ",username);
         if(otherOptions!=null)
-            cmd+=' '+otherOptions;
+            cmd.add(Util.tokenize(otherOptions));
 
         StringTokenizer tokens = new StringTokenizer(modules);
         while(tokens.hasMoreTokens()) {
