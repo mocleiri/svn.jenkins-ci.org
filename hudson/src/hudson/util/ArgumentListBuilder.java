@@ -16,6 +16,18 @@ public class ArgumentListBuilder {
         return this;
     }
 
+    /**
+     * Adds an argument by quoting it.
+     * This is necessary only in a rare circumstance,
+     * such as when adding argument for ssh and rsh.
+     *
+     * Normal process invcations don't need it, because each
+     * argument is treated as its own string and never merged into one. 
+     */
+    public ArgumentListBuilder addQuoted(String a) {
+        return add('"'+a+'"');
+    }
+
     public ArgumentListBuilder add(String... args) {
         for (String arg : args) {
             add(arg);

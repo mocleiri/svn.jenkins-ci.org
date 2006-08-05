@@ -4,6 +4,7 @@ import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Proc;
 import hudson.Util;
+import hudson.util.ArgumentListBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -125,10 +126,10 @@ public final class Slave implements Node {
             }
 
             private String[] prepend(String[] cmd, String[] env, FilePath workDir) {
-                List<String> r = new ArrayList<String>();
-                r.addAll(Arrays.asList(getCommandTokens()));
+                ArgumentListBuilder r = new ArgumentListBuilder();
+                r.add(getCommandTokens());
                 r.add(getFilePath().child("bin").child("slave").getRemote());
-                r.add(workDir.getRemote());
+                r.addQuoted(workDir.getRemote());
                 for (String s : env) {
                     int index =s.indexOf('=');
                     r.add(s.substring(0,index));
@@ -146,10 +147,11 @@ public final class Slave implements Node {
                     //
                     // I looked at rsh source code, and that behave the same way.
                     if(c.indexOf(' ')>=0)
-                        c = '"'+c+'"';
-                    r.add(c);
+                        r.addQuoted(c);
+                    else
+                        r.add(c);
                 }
-                return r.toArray(new String[r.size()]);
+                return r.toCommandArray();
             }
         };
     }
