@@ -40,10 +40,7 @@
           <c:otherwise>
             <td class="pane" width="70%">
               <div nowrap>Building <a href="${rootURL}/${e.currentBuild.url}">${e.currentBuild}</a></div>
-              <c:set var="pos" value="${e.progress}" />
-              <c:if test="${pos>0}">
-                <t:progressBar pos="${pos}" href="${rootURL}/${e.currentBuild.url}console"/>
-              </c:if>
+              <t:progressBar pos="${e.progress}" href="${rootURL}/${e.currentBuild.url}console"/>
             </td>
             <td class="pane" width=16 align=center valign=middle>
               <a href="${rootURL}/computers/${cloop.index}/executors/${eloop.index}/stop"><img src="${rootURL}/images/16x16/stop.gif" alt="terminate this build" /></a>
