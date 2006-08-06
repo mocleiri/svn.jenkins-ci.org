@@ -1,0 +1,30 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <f:section title="Maven">
+    <f:entry title="Maven installation"
+      description="List of Maven installations on this system. Both maven 1 and 2 are supported.">
+      <f:repeatable var="inst" items="${descriptor.installations}">
+        <table width="100%">
+          <f:entry title="name">
+            <input class="setting-input" name="maven_name"
+              type="text" value="${inst.name}"/>
+          </f:entry>
+
+          <j:set var="status" value="${null}" />
+          <j:if test="${inst!=null and !inst.exists and inst.name!=''}">
+            <j:set var="status" value="&lt;span class=error>No such installation exists&lt;/span>" />
+          </j:if>
+          <f:entry title="MAVEN_HOME"
+            description="${status}">
+            <input class="setting-input" name="maven_home"
+              type="text" value="${inst.mavenHome}"/>
+          </f:entry>
+          <f:entry title="">
+            <div align="right">
+              <f:repeatableDeleteButton />
+            </div>
+          </f:entry>
+        </table>
+      </f:repeatable>
+    </f:entry>
+  </f:section>
+</j:jelly>

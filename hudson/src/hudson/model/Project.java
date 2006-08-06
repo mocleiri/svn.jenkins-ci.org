@@ -6,7 +6,7 @@ import hudson.model.Descriptor.FormException;
 import hudson.model.Fingerprint.RangeSet;
 import hudson.scm.NullSCM;
 import hudson.scm.SCM;
-import hudson.scm.SCMManager;
+import hudson.scm.SCMS;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildTrigger;
 import hudson.tasks.Fingerprinter.FingerprintAction;
@@ -502,7 +502,7 @@ public class Project extends Job<Project,Build> {
                 req.setCharacterEncoding("UTF-8");
 
                 int scmidx = Integer.parseInt(req.getParameter("scm"));
-                scm = SCMManager.getSupportedSCMs()[scmidx].newInstance(req);
+                scm = SCMS.SCMS[scmidx].newInstance(req);
 
                 disabled = req.getParameter("disable")!=null;
 

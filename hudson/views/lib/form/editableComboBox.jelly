@@ -1,0 +1,51 @@
+<!--
+	<%@attribute name="id" required="true" %>
+	<%@attribute name="clazz" required="false" %>
+	<%@attribute name="name" required="false" %>
+	<%@attribute name="value" required="false" %>
+	<%@attribute name="items" type="java.lang.Object" description="Optional list of possible values" %>
+-->
+<!-- Tomcat doesn't like us using the attribute called 'class' -->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+	<j:if test="${editableComboBox_source_loaded==null}">
+	  <script type="text/javascript" src="${request.contextPath}/scripts/utilities.js"></script>
+	  <script type="text/javascript" src="${request.contextPath}/scripts/combobox.js"></script>
+	  <j:set target="${requestScope}" property="editableComboBox_source_loaded" value="true" />
+	</j:if>
+
+	<input id="${id}" autocomplete="off" class="${clazz}" name="${name}" value="${value}" />
+	<j:set target="${requestScope}" property="editableComboBox" value="${id}" />
+	<script type="text/javascript">
+	  var ${id}_values = new Array();
+
+	  <!-- fill in values -->
+	  <j:if test="${items!=null}">
+	    <j:forEach var="v" items="${items}">
+	      <f:editableComboBoxValue value="${v}" />
+	    </j:forEach>
+	  </j:if>
+	  <d:invokeBody />
+
+		<![CDATA[
+	  function ${id}_Callback(value /*, comboBox*/) {
+	    var items = new Array();
+	    var candidates = ${id}_values;
+	    if (value.length > 0) { // if no value, we'll not provide anything
+	      value = value.toLowerCase();
+	      for (var i = 0; i < Math.min(candidates.length, 20); i++) {
+	        if (candidates[i].toLowerCase().indexOf(value) >= 0) {
+	          items.push(candidates[i]);
+	        }
+	      }
+	    }
+	    return items; // equiv to: comboBox.setItems(items);
+	  }
+	  ]]>
+
+	  <!-- IE doesn't like a combobox to be created before the page is fully loaded. -->
+	  var oldOnLoadFor${id} = window.onload;
+	  window.onload = function() { if(oldOnLoadFor${id}) oldOnLoadFor${id}();
+	    new ComboBox("${id}", ${id}_Callback);
+	  }
+	</script>
+</j:jelly>

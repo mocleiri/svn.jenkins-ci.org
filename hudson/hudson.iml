@@ -238,6 +238,44 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/resources/WEB-INF/lib/commons-jelly-tags-fmt-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/resources/WEB-INF/lib/commons-jelly-tags-xml-1.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/resources/WEB-INF/lib/jaxen-1.1-beta-4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/resources/WEB-INF/lib/commons-jelly-tags-define-1.0.1-SNAPSHOT.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib/commons-jelly-tags-define-1.0.1-SNAPSHOT-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
     <orderEntryProperties />
   </component>
   <component name="WebModuleBuildComponent">
@@ -250,6 +288,14 @@
     <setting name="RUN_JASPER_VALIDATION" value="false" />
   </component>
   <component name="WebModuleProperties">
+    <containerElement type="module" name="commons-jelly">
+      <attribute name="method" value="5" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-jelly.jar" />
+    </containerElement>
+    <containerElement type="module" name="commons-jexl">
+      <attribute name="method" value="5" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-jexl.jar" />
+    </containerElement>
     <containerElement type="module" name="stapler">
       <attribute name="method" value="5" />
       <attribute name="URI" value="/WEB-INF/lib/stapler.jar" />
@@ -301,6 +347,21 @@
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-jelly-tags-define-1.0.1-SNAPSHOT.jar" />
+      <url>jar://$MODULE_DIR$/resources/WEB-INF/lib/commons-jelly-tags-define-1.0.1-SNAPSHOT.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-jelly-tags-fmt-1.0.jar" />
+      <url>jar://$MODULE_DIR$/resources/WEB-INF/lib/commons-jelly-tags-fmt-1.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-jelly-tags-xml-1.1.jar" />
+      <url>jar://$MODULE_DIR$/resources/WEB-INF/lib/commons-jelly-tags-xml-1.1.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
       <attribute name="URI" value="/WEB-INF/lib/commons-logging.jar" />
       <url>jar://$MODULE_DIR$/resources/WEB-INF/lib/commons-logging.jar!/</url>
     </containerElement>
@@ -313,6 +374,11 @@
       <attribute name="method" value="1" />
       <attribute name="URI" value="/WEB-INF/lib/dwr.jar" />
       <url>jar://$MODULE_DIR$/resources/WEB-INF/lib/dwr.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/jaxen-1.1-beta-4.jar" />
+      <url>jar://$MODULE_DIR$/resources/WEB-INF/lib/jaxen-1.1-beta-4.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1" />
@@ -354,9 +420,15 @@
       <attribute name="URI" value="/WEB-INF/lib/xstream-1.1.3.jar" />
       <url>jar://$MODULE_DIR$/resources/WEB-INF/lib/xstream-1.1.3.jar!/</url>
     </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/dom4j-1.6.1.jar" />
+      <url>jar://$MODULE_DIR$/../../stapler/stapler/lib/dom4j-1.6.1.jar!/</url>
+    </containerElement>
     <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/resources/WEB-INF/web.xml" optional="false" version="2.4" />
     <webroots>
       <root url="file://$MODULE_DIR$/resources" relative="/" />
+      <root url="file://$MODULE_DIR$/views" relative="/WEB-INF/classes" />
     </webroots>
   </component>
   <component name="WeblogicWebModuleProperties">

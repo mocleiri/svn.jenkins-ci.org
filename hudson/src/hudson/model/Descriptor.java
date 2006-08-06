@@ -88,11 +88,11 @@ public abstract class Descriptor<T extends Describable<T>> {
     }
 
     public final String getConfigPage() {
-        return Stapler.getViewURL(clazz,"config.jsp");
+        return '/'+clazz.getName().replace('.','/')+"/config.jelly";
     }
 
     public final String getGlobalConfigPage() {
-        return Stapler.getViewURL(clazz,"global.jsp");
+        return '/'+clazz.getName().replace('.','/')+"/global.jelly";
     }
 
 

@@ -1,0 +1,17 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <f:entry title="Maven Version">
+    <select class="setting-input" name="maven_version">
+      <option>(Default)</option>
+      <j:forEach var="inst" items="${descriptor.installations}">
+        <j:if test="${inst.name==instance.maven.name}">
+          <j:set var="state" value="selected"/>
+        </j:if>
+        <option selected="${state}">${inst.name}</option>
+      </j:forEach>
+    </select>
+  </f:entry>
+  <f:entry title="Goals">
+    <input class="setting-input" name="maven_targets"
+      type="text" value="${instance.targets}"/>
+  </f:entry>
+</j:jelly>

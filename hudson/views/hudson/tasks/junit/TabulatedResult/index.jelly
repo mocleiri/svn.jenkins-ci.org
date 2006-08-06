@@ -1,0 +1,37 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <l:layout>
+    <st:include it="${it.owner}" page="sidepanel" />
+    <l:main-panel>
+      <h1>${it.title}</h1>
+
+      <j:set var="prev" value="${it.previousResult}" />
+
+      <div>
+        <j:choose>
+          <j:when test="${it.totalCount==0}">
+            No tests
+          </j:when>
+          <j:otherwise>
+            <div>
+              ${it.failCount} failures
+              <j:if test="${prev!=null}">
+                (${h.diff(it.failCount-prev.failCount)})
+              </j:if>
+            </div>
+            <div style="width:100%; height:1em; background-color: #729FCF">
+              <div style="width:${it.failCount*100/it.totalCount}%; height: 1em; background-color: #EF2929"></div>
+            </div>
+            <div align="right">
+              ${it.totalCount} tests
+              <j:if test="${prev!=null}">
+                (${h.diff(it.totalCount-prev.totalCount)})
+              </j:if>
+            </div>
+          </j:otherwise>
+        </j:choose>
+      </div>
+
+      <st:include page="body.jsp" />
+    </l:main-panel>
+  </l:layout>
+</j:jelly>

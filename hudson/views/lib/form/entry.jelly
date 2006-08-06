@@ -1,0 +1,35 @@
+<!--
+  One entry
+
+  <%@attribute name="title" required="true" %>
+  <%@attribute name="description" required="false" %>
+  <%@attribute name="help"  %> - if present, URL to the help screen
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <tr>
+    <td class="setting-leftspace"><st:nbsp/></td>
+    <td class="setting-name">
+      ${title}
+    </td>
+    <td>
+      <d:invokeBody />
+    </td>
+    <j:if test="${help!=null}">
+      <td>
+        <img src="${rootURL}/images/16x16/help.gif" alt="[?]" class="help-button" helpURL="${rootURL}${help}" />
+      </td>
+    </j:if>
+  </tr>
+  <j:if test="${help!=null}">
+    <tr><td></td><td colspan="2"><div class="help">Loading...</div></td><td></td></tr>
+  </j:if>
+  <j:if test="${!empty(attrs.description)}">
+    <tr>
+      <td><st:nbsp/></td>
+      <td><st:nbsp/></td>
+      <td class="setting-description">
+        ${attrs.description}
+      </td>
+    </tr>
+  </j:if>
+</j:jelly>

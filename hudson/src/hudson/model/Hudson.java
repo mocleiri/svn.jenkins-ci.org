@@ -9,7 +9,7 @@ import hudson.util.XStream2;
 import hudson.triggers.Trigger;
 import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
-import hudson.scm.SCMManager;
+import hudson.scm.SCMS;
 import hudson.tasks.BuildStep;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
@@ -600,7 +600,7 @@ public final class Hudson extends JobCollection implements Node {
             for( Descriptor<BuildStep> d : BuildStep.PUBLISHERS )
                 result &= d.configure(req);
 
-            for( Descriptor<SCM> scmd : SCMManager.getSupportedSCMs() )
+            for( Descriptor<SCM> scmd : SCMS.SCMS )
                 result &= scmd.configure(req);
 
             save();
