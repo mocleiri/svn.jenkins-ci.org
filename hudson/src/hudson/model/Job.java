@@ -4,6 +4,8 @@ import com.thoughtworks.xstream.XStream;
 import hudson.Util;
 import hudson.XmlFile;
 import hudson.tasks.LogRotator;
+import hudson.tasks.BuildTrigger;
+import hudson.tasks.BuildStep;
 import hudson.util.IOException2;
 import hudson.util.TextFile;
 import hudson.util.XStream2;
@@ -176,7 +178,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
                 // noop?
                 if(this.name.equals(newName))
                     return;
-                
+
 
                 String oldName = this.name;
                 File oldRoot = this.root;
@@ -234,6 +236,16 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
                 }
 
                 parent.onRenamed(this,oldName,newName);
+
+                // update BuildTrigger of other projects that point to this object.
+                // can't we generalize this?
+                for( Project p : parent.getProjects() ) {
+                    BuildTrigger t = (BuildTrigger) p.getPublishers().get(BuildTrigger.DESCRIPTOR);
+                    if(t!=null) {
+                        if(t.onJobRenamed(oldName,newName))
+                            p.save();
+                    }
+                }
             }
         }
     }

@@ -1,19 +1,16 @@
 package hudson.tasks;
 
 import hudson.Launcher;
+import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
-import hudson.model.Hudson;
 import hudson.model.Job;
 import hudson.model.Project;
 import hudson.model.Result;
-import hudson.model.Action;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.StringTokenizer;
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * Triggers builds of other projects.
@@ -25,7 +22,7 @@ public class BuildTrigger implements BuildStep {
     /**
      * Comma-separated list of other projects to be scheduled.
      */
-    private final String childProjects;
+    private String childProjects;
 
     public BuildTrigger(String childProjects) {
         this.childProjects = childProjects;
@@ -56,6 +53,40 @@ public class BuildTrigger implements BuildStep {
         }
 
         return true;
+    }
+
+    /**
+     * Called from {@link Job#renameTo(String)} when a job is renamed.
+     *
+     * @return true
+     *      if this {@link BuildTrigger} is changed and needs to be saved.
+     */
+    public boolean onJobRenamed(String oldName, String newName) {
+        // quick test
+        if(!childProjects.contains(oldName))
+            return false;
+
+        boolean changed = false;
+
+        // we need to do this per string, since old Project object is already gone.
+        String[] projects = childProjects.split(",");
+        for( int i=0; i<projects.length; i++ ) {
+            if(projects[i].trim().equals(oldName)) {
+                projects[i] = newName;
+                changed = true;
+            }
+        }
+
+        if(changed) {
+            StringBuilder b = new StringBuilder();
+            for (String p : projects) {
+                if(b.length()>0)    b.append(',');
+                b.append(p);
+            }
+            childProjects = b.toString();
+        }
+
+        return changed;
     }
 
     public Action getProjectAction(Project project) {
