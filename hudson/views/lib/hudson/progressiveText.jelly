@@ -26,13 +26,13 @@
 	              setTimeout(function(){fetchNext(e,href);},1000);
 	          <j:if test="${spinner!=null}">
 	            else
-	              $("${spinner}").style.display = "none";
+	              $$("${spinner}").style.display = "none";
 	          </j:if>
 	          }
 	      });
 	    }
 	  </j:if>
-	  $("${idref}").fetchedBytes = 0;
-	  fetchNext($("${idref}"),"${href}");
+	  $$("${idref}").fetchedBytes = 0;
+	  fetchNext($$("${idref}"),"${href}");
 	</script>
 </j:jelly>
