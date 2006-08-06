@@ -59,7 +59,8 @@
 			<lib dir="lib" includes="stapler.jar" />
 			<lib dir="build" includes="hudson.jar" />
 			<webinf dir="bin" includes="*" />
-		</war>
+      <zipfileset prefix="WEB-INF/classes" dir="views" />
+    </war>
 	</target>
 	
 	<target name="clean">
