@@ -15,7 +15,7 @@
             <div>
               ${it.failCount} failures
               <j:if test="${prev!=null}">
-                (${h.diff(it.failCount-prev.failCount)})
+                (${h.getDiffString(it.failCount-prev.failCount)})
               </j:if>
             </div>
             <div style="width:100%; height:1em; background-color: #729FCF">
@@ -24,7 +24,7 @@
             <div align="right">
               ${it.totalCount} tests
               <j:if test="${prev!=null}">
-                (${h.diff(it.totalCount-prev.totalCount)})
+                (${h.getDiffString(it.totalCount-prev.totalCount)})
               </j:if>
             </div>
           </j:otherwise>

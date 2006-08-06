@@ -28,8 +28,8 @@
           </tr>
 
           <j:if test="${!empty(param.lhs) and !empty(param.rhs)}">
-            <j:set var="jl" value="${h.getJob(request.getParameter('lhs'))}" />
-            <j:set var="jr" value="${h.getJob(request.getParameter('rhs'))}" />
+            <j:set var="jl" value="${app.getJob(request.getParameter('lhs'))}" />
+            <j:set var="jr" value="${app.getJob(request.getParameter('rhs'))}" />
 
             <j:choose>
               <j:when test="${jl==null}">
@@ -43,7 +43,7 @@
                 </td></tr>
               </j:when>
               <j:otherwise>
-                <j:forEach var="e" items="${h.getProjectRelationshipMap(jl,jr)}">
+                <j:forEach var="e" items="${jl.getRelationship(jr)}">
                   <tr>
                     <td style="text-align:right">
                       <t:buildLink job="${jl}" number="${e.key}"/>

@@ -1,36 +1,18 @@
 package hudson;
 
-import hudson.model.Fingerprint.RangeSet;
-import hudson.model.Hudson;
-import hudson.model.Job;
 import hudson.model.ModelObject;
 import hudson.model.Node;
 import hudson.model.Project;
 import hudson.model.Run;
-import hudson.tasks.junit.CaseResult;
-import hudson.tasks.junit.TestObject;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.StaplerRequest;
 
 import java.util.List;
-import java.util.SortedMap;
 
 /**
  * @author Kohsuke Kawaguchi
  */
 public class Functions {
-    public static boolean containsJob(hudson.model.JobCollection jc,hudson.model.Job j) {
-        return jc.containsJob(j);
-    }
-
-    public static Job getJob(String name) {
-        return Hudson.getInstance().getJob(name);
-    }
-
-    public static Run getRun(Job job, int number) {
-        return job.getBuildByNumber(number);
-    }
-
     public static boolean isModel(Object o) {
         return o instanceof ModelObject;
     }
@@ -128,14 +110,6 @@ public class Functions {
 
     public static Node.Mode[] getNodeModes() {
         return Node.Mode.values();
-    }
-
-    public static String getTestRelativePathFrom(TestObject it, CaseResult testCase) {
-        return testCase.getRelativePathFrom(it);
-    }
-
-    public static SortedMap<Integer,RangeSet> getProjectRelationshipMap(Project lhs, Project rhs) {
-        return lhs.getRelationship(rhs);
     }
 
     public static String getProjectListString(List<Project> projects) {

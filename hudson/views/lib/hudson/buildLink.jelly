@@ -11,7 +11,7 @@
 	    ${jobName} #<!-- -->${number}
 	  </j:when>
 	  <j:otherwise>
-	    <j:set var="r" value="${h.getRun(job,number)}" />
+	    <j:set var="r" value="${job.getBuildByNumber(number)}" />
 	    <j:choose>
 	      <j:when test="${r==null}">
 	        ${jobName} #<!-- -->${number}

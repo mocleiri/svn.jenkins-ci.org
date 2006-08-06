@@ -9,7 +9,7 @@
       <j:forEach var="f" items="${it.failedTests}" varStatus="i">
         <tr>
           <td class="pane">
-            <a href="${h.getTestRelativePathFrom(it,f)}">${f.fullName}</a>
+            <a href="${f.getTestRelativePathFrom(it)}">${f.fullName}</a>
           </td>
           <td class="pane" style="text-align:right;">
             ${f.age}
@@ -36,11 +36,11 @@
             <td class="pane"><a href="${p.name}/">${p.name}</a></td>
             <td class="pane" style="text-align:right">${p.failCount}</td>
             <td class="pane" style="text-align:right">
-              ${h.diff2(p.failCount-prev.failCount)}
+              ${h.getDiffString2(p.failCount-prev.failCount)}
             </td>
             <td class="pane" style="text-align:right">${p.totalCount}</td>
             <td class="pane" style="text-align:right">
-              ${h.diff2(p.totalCount-prev.totalCount)}
+              ${h.getDiffString2(p.totalCount-prev.totalCount)}
             </td>
           </tr>
         </j:forEach>
