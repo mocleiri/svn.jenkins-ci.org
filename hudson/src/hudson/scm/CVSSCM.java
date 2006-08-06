@@ -589,10 +589,10 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
         private synchronized String chooseAction() {
             if(tagName!=null)
-                return "alreadyTagged.jsp";
+                return "alreadyTagged.jelly";
             if(workerThread!=null)
-                return "inProgress.jsp";
-            return "tagForm.jsp";
+                return "inProgress.jelly";
+            return "tagForm.jelly";
         }
 
         /**

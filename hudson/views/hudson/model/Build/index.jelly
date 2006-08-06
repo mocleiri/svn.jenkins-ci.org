@@ -1,14 +1,14 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
   <l:layout>
     <st:contentType value="text/html;charset=UTF-8" />
-    <st:include page="sidepanel" />
+    <st:include page="sidepanel.jelly" />
     <l:main-panel>
       <t:buildCaption>
         Build #${it.number}
         (<i:formatDate value="${it.timestamp.time}" type="both" dateStyle="medium" timeStyle="medium"/>)
       </t:buildCaption>
 
-      <st:include page="logKeep" />
+      <st:include page="logKeep.jelly" />
 
       <table style="margin-top: 1em; margin-left:1em;">
         <t:artifactList build="${it}" caption="Build Artifacts" />
@@ -34,7 +34,7 @@
 
         <j:set var="set" value="${it.changeSet}" />
         <t:summary icon="notepad.gif">
-          <st:include it="${set}" page="digest" />
+          <st:include it="${set}" page="digest.jelly" />
         </t:summary>
       </table>
 

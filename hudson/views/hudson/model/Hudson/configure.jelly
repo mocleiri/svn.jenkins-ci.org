@@ -4,7 +4,7 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:s="/lib/form">
 <st:contentType value="text/html;charset=UTF-8" />
 <l:layout>
-  <st:include page="sidepanel" />
+  <st:include page="sidepanel.jelly" />
 
   <l:main-panel>
     <s:form method="post" action="configSubmit">
@@ -116,21 +116,21 @@
       <j:getStatic var="builds" className="hudson.tasks.BuildStep" field="BUILDERS" />
       <j:forEach var="idx" begin="0" end="${size(builds)-1}">
         <j:set var="descriptor" value="${builds[idx]}" />
-        <st:include page="${descriptor.globalConfigPage}"/>
+        <st:include page="${descriptor.globalConfigPage}.jelly"/>
       </j:forEach>
 
       <!-- SCM config pane -->
       <j:getStatic var="scms" className="hudson.scm.SCMS" field="SCMS" />
       <j:forEach var="idx" begin="0" end="${size(scms)-1}">
         <j:set var="descriptor" value="${scms[idx]}" />
-        <st:include page="${descriptor.globalConfigPage}"/>
+        <st:include page="${descriptor.globalConfigPage}.jelly"/>
       </j:forEach>
 
       <!-- build config pane -->
       <j:getStatic var="pubs" className="hudson.tasks.BuildStep" field="PUBLISHERS" />
       <j:forEach var="idx" begin="0" end="${size(pubs)-1}">
         <j:set var="descriptor" value="${pubs[idx]}" />
-        <st:include page="${descriptor.globalConfigPage}"/>
+        <st:include page="${descriptor.globalConfigPage}.jelly"/>
       </j:forEach>
 
       <s:block>

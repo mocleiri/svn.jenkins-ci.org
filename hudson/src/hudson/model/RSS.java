@@ -92,10 +92,9 @@ final class RSS {
                 i.remove();
         }
 
-        req.setAttribute("it",it);
         req.setAttribute("title",title);
         req.setAttribute("runs",runs);
-        req.getServletContext().getRequestDispatcher("/WEB-INF/rss.jsp").forward(req,rsp);
+        req.getView(it,"/hudson/rss.jelly").forward(req,rsp);
     }
 
     private static final Comparator<Run> runComparator = new Comparator<Run>() {

@@ -2,7 +2,7 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
   <l:layout>
     <st:contentType value="text/html;charset=UTF-8" />
-    <st:include page="sidepanel" />
+    <st:include page="sidepanel.jelly" />
     <l:main-panel>
       <div class="dirTree">
       <!-- parent path -->
@@ -27,12 +27,12 @@
                 <j:forEach var="t" items="${f}" varStatus="st">
                   <a href="${t.href}">${t.title}</a>
                   <j:if test="${!st.last}">/</j:if>
-                  <j:set var="x" value="${t}"/>
                 </j:forEach>
               </td>
+              <j:set var="x" value="${f.get(f.size()-1)}"/>
               <j:if test="${!x.folder}">
                 <td class="fileSize">
-                  ${x.size}
+                  ${x.getSize()}
                   <a href="${x.href}/*fingerprint*/">
                     <img src="${rootURL}/images/16x16/fingerprint.gif" alt="fingerprint" />
                   </a>
