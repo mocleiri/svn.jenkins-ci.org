@@ -114,21 +114,21 @@
       <j:getStatic var="builds" className="hudson.tasks.BuildStep" field="BUILDERS" />
       <j:forEach var="idx" begin="0" end="${size(builds)-1}">
         <j:set var="descriptor" value="${builds[idx]}" />
-        <st:include page="${descriptor.globalConfigPage}.jelly"/>
+        <st:include page="${descriptor.globalConfigPage}"/>
       </j:forEach>
 
       <!-- SCM config pane -->
       <j:getStatic var="scms" className="hudson.scm.SCMS" field="SCMS" />
       <j:forEach var="idx" begin="0" end="${size(scms)-1}">
         <j:set var="descriptor" value="${scms[idx]}" />
-        <st:include page="${descriptor.globalConfigPage}.jelly"/>
+        <st:include page="${descriptor.globalConfigPage}"/>
       </j:forEach>
 
       <!-- build config pane -->
       <j:getStatic var="pubs" className="hudson.tasks.BuildStep" field="PUBLISHERS" />
       <j:forEach var="idx" begin="0" end="${size(pubs)-1}">
         <j:set var="descriptor" value="${pubs[idx]}" />
-        <st:include page="${descriptor.globalConfigPage}.jelly"/>
+        <st:include page="${descriptor.globalConfigPage}"/>
       </j:forEach>
 
       <s:block>
