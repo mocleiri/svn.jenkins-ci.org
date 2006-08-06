@@ -449,6 +449,25 @@ public final class Hudson extends JobCollection implements Node {
         }
     }
 
+    /**
+     * Called by {@link Job#renameTo(String)} to update relevant data structure.
+     * assumed to be synchronized on Hudson by the caller.
+     */
+    /*package*/ void onRenamed(Job job, String oldName, String newName) throws IOException {
+        jobs.remove(oldName);
+        jobs.put(newName,job);
+
+        if(views!=null) {
+            for (View v : views) {
+                synchronized(v) {
+                    v.jobNames.remove(oldName);
+                    v.jobNames.add(newName);
+                }
+            }
+            save();
+        }
+    }
+
     public FingerprintMap getFingerprintMap() {
         return fingerprintMap;
     }
@@ -675,7 +694,7 @@ public final class Hudson extends JobCollection implements Node {
             cp.execute();
 
             // reload from the new config
-            result = Job.load(this,result.root);
+            result = Job.load(this,result.getRootDir());
             result.nextBuildNumber = 1;     // reset the next build number
             jobs.put(name,result);
         }

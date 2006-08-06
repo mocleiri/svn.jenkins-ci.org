@@ -9,6 +9,8 @@ import hudson.util.TextFile;
 import hudson.util.XStream2;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import org.apache.tools.ant.taskdefs.Copy;
+import org.apache.tools.ant.types.FileSet;
 
 import javax.servlet.ServletException;
 import java.io.File;
@@ -31,7 +33,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     /**
      * Project name.
      */
-    protected transient String name;
+    protected /*final*/ transient String name;
 
     /**
      * Project description. Can be HTML.
@@ -56,8 +58,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
 
     protected Job(Hudson parent,String name) {
         this.parent = parent;
-        this.name = name;
-        this.root = new File(new File(parent.root,"jobs"),name);
+        doSetName(name);
         this.root.mkdirs();
     }
 
@@ -66,8 +67,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      */
     protected void onLoad(Hudson root, String name) throws IOException {
         this.parent = root;
-        this.name = name;
-        this.root = new File(new File(parent.root,"jobs"),name);
+        doSetName(name);
 
         TextFile f = getNextBuildNumberFile();
         if(f.exists()) {
@@ -84,6 +84,14 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
             saveNextBuildNumber();
             save(); // and delete it from the config.xml
         }
+    }
+
+    /**
+     * Just update {@link #name} and {@link #root}, since they are linked.
+     */
+    private void doSetName(String name) {
+        this.name = name;
+        this.root = new File(new File(parent.root,"jobs"),name);
     }
 
     public File getRootDir() {
@@ -152,8 +160,82 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         return getName();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * Renames a job.
+     */
+    public void renameTo(String newName) throws IOException {
+        // always synchronize from bigger objects first
+        synchronized(parent) {
+            synchronized(this) {
+                // sanity check
+                if(newName==null)
+                    throw new IllegalArgumentException("New name is not given");
+                if(parent.getJob(newName)!=null)
+                    throw new IllegalArgumentException("Job "+newName+" already exists");
+
+                // noop?
+                if(this.name.equals(newName))
+                    return;
+                
+
+                String oldName = this.name;
+                File oldRoot = this.root;
+
+                doSetName(newName);
+                File newRoot = this.root;
+
+                {// rename data files
+                    boolean interrupted=false;
+                    boolean renamed = false;
+
+                    // try to rename the job directory.
+                    // this may fail on Windows due to some other processes accessing a file.
+                    // so retry few times before we fall back to copy.
+                    for( int retry=0; retry<5; retry++ ) {
+                        if(oldRoot.renameTo(newRoot)) {
+                            renamed = true;
+                            break; // succeeded
+                        }
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            // process the interruption later
+                            interrupted = true;
+                        }
+                    }
+
+                    if(interrupted)
+                        Thread.currentThread().interrupt();
+
+                    if(!renamed) {
+                        // failed to rename. it must be that some lengthy process is going on
+                        // to prevent a rename operation. So do a copy. Ideally we'd like to
+                        // later delete the old copy, but we can't reliably do so, as before the VM
+                        // shuts down there might be a new job created under the old name.
+                        Copy cp = new Copy();
+                        cp.setProject(new org.apache.tools.ant.Project());
+                        cp.setTodir(newRoot);
+                        FileSet src = new FileSet();
+                        src.setDir(getRootDir());
+                        cp.addFileset(src);
+                        cp.setOverwrite(true);
+                        cp.setPreserveLastModified(true);
+                        cp.setFailOnError(false);   // keep going even if there's an error
+                        cp.execute();
+
+                        // try to delete as much as possible
+                        try {
+                            Util.deleteRecursive(oldRoot);
+                        } catch (IOException e) {
+                            // but ignore the error, since we expect that
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                parent.onRenamed(this,oldName,newName);
+            }
+        }
     }
 
     /**
@@ -339,7 +421,13 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
             logRotator = null;
 
         save();
-        rsp.sendRedirect(".");
+
+        String newName = req.getParameter("name");
+        if(newName!=null && !newName.equals(name)) {
+            rsp.sendRedirect("rename?newName="+newName);
+        } else {
+            rsp.sendRedirect(".");
+        }
     }
 
     /**
@@ -354,7 +442,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     }
 
     /**
-     * Deletes this project.
+     * Deletes this job.
      */
     public synchronized void doDoDelete( StaplerRequest req, StaplerResponse rsp ) throws IOException {
         if(!Hudson.adminCheck(req,rsp))
@@ -363,6 +451,19 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         Util.deleteRecursive(root);
         getParent().deleteJob(this);
         rsp.sendRedirect2(req.getContextPath()+"/");
+    }
+
+    /**
+     * Renames this job.
+     */
+    public /*not synchronized. see renameTo()*/ void doDoRename( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
+        String newName = req.getParameter("newName");
+
+        renameTo(newName);
+        rsp.sendRedirect2(req.getContextPath()+'/'+getUrl()); // send to the new job page
     }
 
     /**

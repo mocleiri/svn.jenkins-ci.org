@@ -4,16 +4,13 @@
 	      items="${app.allCvsRoots}" />
 	</f:entry>
 	<f:entry title="Module(s)" help="/help/_cvs/modules.html">
-	  <input class="setting-input" name="cvs_module"
-	    type="text" value="${scm.allModules}"/>
+	  <f:textbox name="cvs_module" value="${scm.allModules}"/>
 	</f:entry>
 	<f:entry title="Branch" help="/help/_cvs/branch.html">
-	  <input class="setting-input" name="cvs_branch"
-	    type="text" value="${scm.branch}"/>
+	  <f:textbox name="cvs_branch" value="${scm.branch}"/>
 	</f:entry>
 	<f:entry title="CVS_RSH" help="/help/_cvs/cvs-rsh.html">
-	  <input class="setting-input" name="cvs_rsh"
-	    type="text" value="${scm.cvsRsh}"/>
+	  <f:textbox name="cvs_rsh" value="${scm.cvsRsh}"/>
 	</f:entry>
 	<f:entry title="Use update" help="/help/_cvs/update.html">
 	  <f:checkbox name="cvs_use_update" checked="${scm.canUseUpdate}"/>
