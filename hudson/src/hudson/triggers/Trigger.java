@@ -7,6 +7,7 @@ import hudson.model.Describable;
 import hudson.model.Hudson;
 import hudson.model.Job;
 import hudson.model.Project;
+import hudson.model.FingerprintCleanupThread;
 import hudson.scheduler.CronTabList;
 
 import java.io.InvalidObjectException;
@@ -125,6 +126,10 @@ public abstract class Trigger implements Describable<Trigger> {
     public static final Timer timer = new Timer(); // "Hudson cron thread"); -- this is a new constructor since 1.5
 
     public static void init() {
-        timer.scheduleAtFixedRate(new Cron(),0,1000*60/*every minute*/);
+        timer.scheduleAtFixedRate(new Cron(), 1000*60, 1000*60/*every minute*/);
+
+        // clean up fingerprint once a day
+        long DAY = 1000*60*60*24;
+        timer.scheduleAtFixedRate(FingerprintCleanupThread.TIMER,DAY,DAY);
     }
 }

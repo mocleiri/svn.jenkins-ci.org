@@ -2,8 +2,6 @@ package hudson.model;
 
 import hudson.Launcher;
 import hudson.Proc;
-import hudson.triggers.SCMTrigger;
-import hudson.triggers.Trigger;
 import static hudson.model.Hudson.isWindows;
 import hudson.scm.CVSChangeLogParser;
 import hudson.scm.ChangeLogParser;
@@ -12,6 +10,7 @@ import hudson.scm.SCM;
 import hudson.tasks.BuildStep;
 import hudson.tasks.junit.TestResult;
 import hudson.tasks.junit.TestResultAction;
+import hudson.triggers.SCMTrigger;
 import org.xml.sax.SAXException;
 
 import java.io.File;

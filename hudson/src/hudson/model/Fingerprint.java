@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -82,6 +83,10 @@ public class Fingerprint implements ModelObject {
             if(j==null)     return null;
             return j.getBuildByNumber(number);
         }
+
+        private boolean isAlive() {
+            return getRun()!=null;
+        }
     }
 
     /**
@@ -103,6 +108,10 @@ public class Fingerprint implements ModelObject {
 
         public int getEnd() {
             return end;
+        }
+
+        public boolean isSmallerThan(int i) {
+            return end<=i;
         }
 
         public boolean isBiggerThan(int i) {
@@ -261,8 +270,21 @@ public class Fingerprint implements ModelObject {
             return buf.toString();
         }
 
-        public boolean isEmpty() {
+        public synchronized boolean isEmpty() {
             return ranges.isEmpty();
+        }
+
+        /**
+         * Returns true if all the integers logically in this {@link RangeSet}
+         * is smaller than the given integer. For example, {[1,3)} is smaller than 3,
+         * but {[1,3),[100,105)} is not smaller than anything less than 105.
+         *
+         * Note that {} is smaller than any n.
+         */
+        public synchronized boolean isSmallerThan(int n) {
+            if(ranges.isEmpty())    return true;
+
+            return ranges.get(ranges.size() - 1).isSmallerThan(n);
         }
 
         static final class ConverterImpl implements Converter {
@@ -410,10 +432,34 @@ public class Fingerprint implements ModelObject {
     }
 
     /**
+     * Returns true if any of the builds recorded in this fingerprint
+     * is still retained.
+     *
+     * <p>
+     * This is used to find out old fingerprint records that can be removed
+     * without losing too much information.
+     */
+    public synchronized boolean isAlive() {
+        if(original.isAlive())
+            return true;
+
+        for (Entry<String,RangeSet> e : usages.entrySet()) {
+            Job j = Hudson.getInstance().getJob(e.getKey());
+            if(j==null)
+                continue;
+
+            int oldest = j.getFirstBuild().getNumber();
+            if(!e.getValue().isSmallerThan(oldest))
+                return true;
+        }
+        return false;
+    }
+
+    /**
      * Save the settings to a file.
      */
     public synchronized void save() throws IOException {
-        XmlFile f = getConfigFile(md5sum);
+        XmlFile f = getConfigFile(getFingerprintFile(md5sum));
         f.mkdirs();
         f.write(this);
     }
@@ -421,18 +467,27 @@ public class Fingerprint implements ModelObject {
     /**
      * The file we save our configuration.
      */
-    private static XmlFile getConfigFile(byte[] md5sum) {
+    private static XmlFile getConfigFile(File file) {
+        return new XmlFile(XSTREAM,file);
+    }
+
+    /**
+     * Determines the file name from md5sum.
+     */
+    private static File getFingerprintFile(byte[] md5sum) {
         assert md5sum.length==16;
-        return new XmlFile(XSTREAM,
-            new File( Hudson.getInstance().getRootDir(),
-                "fingerprints/"+ Util.toHexString(md5sum,0,1)+'/'+Util.toHexString(md5sum,1,1)+'/'+Util.toHexString(md5sum,2,md5sum.length-2)+".xml"));
+        return new File( Hudson.getInstance().getRootDir(),
+            "fingerprints/"+ Util.toHexString(md5sum,0,1)+'/'+Util.toHexString(md5sum,1,1)+'/'+Util.toHexString(md5sum,2,md5sum.length-2)+".xml");
     }
 
     /**
      * Loads a {@link Fingerprint} from a file in the image.
      */
     /*package*/ static Fingerprint load(byte[] md5sum) throws IOException {
-        XmlFile configFile = getConfigFile(md5sum);
+        return load(getFingerprintFile(md5sum));
+    }
+    /*package*/ static Fingerprint load(File file) throws IOException {
+        XmlFile configFile = getConfigFile(file);
         if(!configFile.exists())
             return null;
         try {

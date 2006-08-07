@@ -5,12 +5,12 @@ import hudson.Launcher;
 import hudson.Util;
 import hudson.XmlFile;
 import hudson.model.Descriptor.FormException;
-import hudson.util.XStream2;
-import hudson.triggers.Trigger;
 import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMS;
 import hudson.tasks.BuildStep;
+import hudson.triggers.Trigger;
+import hudson.util.XStream2;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
@@ -32,6 +32,7 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -46,7 +47,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
-import java.util.AbstractList;
 
 /**
  * Root object of the system.
@@ -869,6 +869,13 @@ public final class Hudson extends JobCollection implements Node {
         rsp.setStatus(HttpServletResponse.SC_OK);
         rsp.setContentType("text/plain");
         rsp.getWriter().println("GCed");
+    }
+
+    public synchronized void doFingerprintCleanup( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        FingerprintCleanupThread.invoke();
+        rsp.setStatus(HttpServletResponse.SC_OK);
+        rsp.setContentType("text/plain");
+        rsp.getWriter().println("Invoked");
     }
 
 

@@ -3,16 +3,15 @@ package hudson.model;
 import com.thoughtworks.xstream.XStream;
 import hudson.Util;
 import hudson.XmlFile;
-import hudson.tasks.LogRotator;
 import hudson.tasks.BuildTrigger;
-import hudson.tasks.BuildStep;
+import hudson.tasks.LogRotator;
 import hudson.util.IOException2;
 import hudson.util.TextFile;
 import hudson.util.XStream2;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
 import java.io.File;
@@ -339,6 +338,16 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
 
         if(runs.isEmpty())    return null;
         return runs.get(runs.firstKey());
+    }
+
+    /**
+     * Returns the oldest build in the record.
+     */
+    public synchronized RunT getFirstBuild() {
+        SortedMap<Integer,? extends RunT> runs = _getRuns();
+
+        if(runs.isEmpty())    return null;
+        return runs.get(runs.lastKey());
     }
 
     /**

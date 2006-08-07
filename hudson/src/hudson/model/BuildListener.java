@@ -1,8 +1,5 @@
 package hudson.model;
 
-import java.io.PrintStream;
-import java.io.PrintWriter;
-
 /**
  * Receives events that happen during a build.
  *
