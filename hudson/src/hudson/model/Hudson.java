@@ -460,8 +460,8 @@ public final class Hudson extends JobCollection implements Node {
         if(views!=null) {
             for (View v : views) {
                 synchronized(v) {
-                    v.jobNames.remove(oldName);
-                    v.jobNames.add(newName);
+                    if(v.jobNames.remove(oldName))
+                        v.jobNames.add(newName);
                 }
             }
             save();
