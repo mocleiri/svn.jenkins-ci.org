@@ -115,4 +115,8 @@ public class Functions {
     public static String getProjectListString(List<Project> projects) {
         return Project.toNameList(projects);
     }
+    
+    public static Object ifThenElse(boolean cond, Object thenValue, Object elseValue) {
+        return cond ? thenValue : elseValue;
+    }
 }
