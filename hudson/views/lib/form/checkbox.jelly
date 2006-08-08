@@ -1,13 +1,5 @@
 <!--
 	<input type="checkbox"> tag that takes true/false for @checked
 -->
-<j:jelly xmlns:j="jelly:core" xmlns:d="jelly:define">
-	<j:choose>
-		<j:when test="${checked}">
-			<input type="checkbox" name="${attrs.name}" onclick="${attrs.onclick}" checked="true"/>
-		</j:when>
-		<j:otherwise>
-			<input type="checkbox" name="${attrs.name}" onclick="${attrs.onclick}"/>
-		</j:otherwise>
-	</j:choose>
-</j:jelly>
+<input type="checkbox" name="${attrs.name}" onclick="${attrs.onclick}"
+        checked="${h.ifThenElse(attrs.checked,'true',null)}"/>

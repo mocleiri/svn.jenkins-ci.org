@@ -2,12 +2,7 @@
 	<option> tag that takes true/false for selected
 -->
 <j:jelly xmlns:j="jelly:core" xmlns:d="jelly:define">
-	<j:choose>
-		<j:when test="${attrs.selected}">
-			<option value="${attrs.value}" selected="true"><d:invokeBody/></option>
-		</j:when>
-		<j:otherwise>
-			<option value="${attrs.value}"><d:invokeBody/></option>
-		</j:otherwise>
-	</j:choose>
+  <option value="${attrs.value}" selected="${h.ifThenElse(attrs.selected,'true',null)}">
+    <d:invokeBody/>
+  </option>
 </j:jelly>
