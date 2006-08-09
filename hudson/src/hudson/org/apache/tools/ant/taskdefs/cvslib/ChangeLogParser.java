@@ -251,7 +251,7 @@ class ChangeLogParser {
             w.write(date);
             w.write('\n');
             e.printStackTrace(new PrintWriter(w));
-            owner.log(w.toString(), Project.MSG_WARN);
+            owner.log(w.toString(), Project.MSG_ERR);
             //final String message = REZ.getString( "changelog.bat-date.error", date );
             //getContext().error( message );
             return null;
