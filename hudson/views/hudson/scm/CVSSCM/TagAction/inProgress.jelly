@@ -6,7 +6,7 @@
       <p>
         Tagging "<tt>${it.workerThread.tagName}</tt>" is in progress.
       </p>
-      <pre>${it.workerThread.log}</pre>
+      <pre><j:out value="${it.workerThread.log}"/></pre>
       <j:if test="${!it.workerThread.alive}">
         <form method="get" action="clearError">
           <input type="submit" value="Clear error to retry" />

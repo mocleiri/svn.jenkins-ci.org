@@ -20,12 +20,12 @@
 
       <j:if test="${!empty(it.parent.stdout)}">
         <h3>Standard Output</h3>
-        <pre>${it.parent.stdout}</pre>
+        <pre><j:out value="${it.parent.stdout}" /></pre>
       </j:if>
 
       <j:if test="${!empty(it.parent.stderr)}">
         <h3>Standard Error</h3>
-        <pre>${it.parent.stderr}</pre>
+        <pre><j:out value="${it.parent.stderr}" /></pre>
       </j:if>
     </l:main-panel>
   </l:layout>
