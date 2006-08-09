@@ -239,7 +239,7 @@ public class ChangeLogTask extends AbstractCvsTask {
                 }
             }
 
-            final ChangeLogParser parser = new hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogParser();
+            final ChangeLogParser parser = new ChangeLogParser(this);
             final RedirectingStreamHandler handler =
                 new RedirectingStreamHandler(parser);
 
@@ -328,6 +328,10 @@ public class ChangeLogTask extends AbstractCvsTask {
         for (int i = 0; i < entrySet.length; i++) {
             final CVSEntry cvsEntry = entrySet[i];
             final Date date = cvsEntry.getDate();
+            
+            if(date==null)
+                // skip dates that didn't parse.
+                continue;
 
             if (null != m_start && m_start.after(date)) {
                 //Skip dates that are too early

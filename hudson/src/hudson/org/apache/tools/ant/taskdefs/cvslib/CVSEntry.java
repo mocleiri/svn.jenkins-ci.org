@@ -44,6 +44,7 @@ class CVSEntry {
         m_files.addElement(new RCSFile(file, revision, previousRevision, dead));
     }
 
+    // maybe null, in case of error
     Date getDate() {
         return m_date;
     }

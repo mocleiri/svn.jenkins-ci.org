@@ -17,6 +17,11 @@
 package hudson.org.apache.tools.ant.taskdefs.cvslib;
 // patched to work around http://issues.apache.org/bugzilla/show_bug.cgi?id=38583
 
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.Task;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -62,6 +67,12 @@ class ChangeLogParser {
 
     /** rcs entries */
     private final Hashtable m_entries = new Hashtable();
+
+    private final Task owner;
+
+    public ChangeLogParser(Task owner) {
+        this.owner = owner;
+    }
 
     /**
      * Get a list of rcs entries as an array.
@@ -235,6 +246,12 @@ class ChangeLogParser {
         try {
             return c_inputDate.parse(date);
         } catch (ParseException e) {
+            StringWriter w = new StringWriter();
+            w.write("Failed to parse ");
+            w.write(date);
+            w.write('\n');
+            e.printStackTrace(new PrintWriter(w));
+            owner.log(w.toString(), Project.MSG_WARN);
             //final String message = REZ.getString( "changelog.bat-date.error", date );
             //getContext().error( message );
             return null;
@@ -253,5 +270,4 @@ class ChangeLogParser {
         m_previousRevision = null;
         m_dead = false;
     }
-
 }
