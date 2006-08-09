@@ -1,12 +1,12 @@
 package hudson.scm;
 
+import hudson.EnvVars;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Proc;
-import hudson.EnvVars;
-import hudson.util.ArgumentListBuilder;
 import hudson.model.BuildListener;
 import hudson.model.TaskListener;
+import hudson.util.ArgumentListBuilder;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,10 +14,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
 
 /**
  * Common implementation between {@link CVSSCM} and {@link SubversionSCM}.
+ *
  * @author Kohsuke Kawaguchi
  */
 abstract class AbstractCVSFamilySCM implements SCM {
