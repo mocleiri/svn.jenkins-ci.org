@@ -2,6 +2,7 @@ package hudson;
 
 import hudson.model.Hudson;
 import hudson.triggers.Trigger;
+import hudson.util.IncompatibleVMDetected;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -13,6 +14,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+
+import com.thoughtworks.xstream.core.JVM;
+import com.thoughtworks.xstream.converters.reflection.PureJavaReflectionProvider;
 
 /**
  * Entry point when Hudson is used as a webapp.
@@ -28,6 +32,14 @@ public class WebAppMain implements ServletContextListener {
         File home = getHomeDir(event);
         home.mkdirs();
         System.out.println("hudson home directory: "+home);
+
+        // make sure that we are using XStream in the "enhenced" (JVM-specific) mode
+        if(new JVM().bestReflectionProvider().getClass()==PureJavaReflectionProvider.class) {
+            // nope
+            event.getServletContext().setAttribute("app",new IncompatibleVMDetected());
+            return;
+        }
+
 
         try {
             event.getServletContext().setAttribute("app",new Hudson(home));
