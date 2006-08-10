@@ -15,7 +15,7 @@
   </j:if>
   <tr id="oe_s${oe_id}"><!-- this ID marks the beginning -->
     <td colspan="3">
-      <script><![CDATA[
+      <script>
           function toggle${oe_id}() {
             var tbl = document.getElementById('oe_s${oe_id}').parentNode;
             var i = false;
@@ -27,7 +27,7 @@
               if(n.id=="oe_e${oe_id}")
                 o = true;
 
-              if( i && !o ) {
+              if( i &amp;&amp; !o ) {
                 if( n.style.display!="none" )
                   n.style.display = "none";
                 else
@@ -42,7 +42,7 @@
               }
             }
           }
-      ]]></script>
+      </script>
       <f:checkbox name="${name}" onclick="javascript:toggle${oe_id}()" checked="${checked}" />
       ${title}
     </td>
