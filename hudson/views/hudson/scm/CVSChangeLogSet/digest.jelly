@@ -10,8 +10,7 @@
       Changes
       <ol>
         <j:forEach var="cs" items="${it.logs}" varStatus="loop">
-          <li>
-            <j:out value="${cs.msgEscaped}" escapeText="false" /> (<a href="changes#detail${loop.index}">detail</a>)
+          <li>${cs.msgEscaped} (<a href="changes#detail${loop.index}">detail</a>)
           </li>
         </j:forEach>
       </ol>
