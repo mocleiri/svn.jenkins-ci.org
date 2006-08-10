@@ -10,8 +10,9 @@ do
     then
       mkdir ${sz}x${sz} > /dev/null 2>&1 || true
       svg2png -w $sz -h $sz < $src > t.png
-      convert t.png \( +clone -fill white -draw 'color 0,0 reset' \) \
-         -compose Dst_Over $dst
+      #convert t.png \( +clone -fill white -draw 'color 0,0 reset' \) \
+      #   -compose Dst_Over $dst
+      composite -compose Dst_Over -tile xc:white t.png $dst
       rm t.png
     fi
   done
