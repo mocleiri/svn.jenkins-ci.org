@@ -42,6 +42,9 @@ import java.util.StringTokenizer;
 /**
  * Subversion.
  *
+ * Check http://svn.collab.net/repos/svn/trunk/subversion/svn/schema/ for
+ * various output formats.
+ *
  * @author Kohsuke Kawaguchi
  */
 public class SubversionSCM extends AbstractCVSFamilySCM {
@@ -246,7 +249,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             digester.push(info);
 
             digester.addBeanPropertySetter("info/entry/url");
-            digester.addSetProperties("info/entry","revision","revision");  // set attributes. in particular @revision
+            digester.addSetProperties("info/entry/commit","revision","revision");  // set attributes. in particular @revision
 
             try {
                 digester.parse(new ByteArrayInputStream(baos.toByteArray()));
