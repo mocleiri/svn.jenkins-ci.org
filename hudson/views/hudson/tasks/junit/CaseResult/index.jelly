@@ -16,7 +16,7 @@
           (since #${it.failedSince})
         </div>
       </j:if>
-      <pre>${it.errorStackTrace}</pre>
+      <pre><st:out value="${it.errorStackTrace}"/></pre>
 
       <j:if test="${!empty(it.parent.stdout)}">
         <h3>Standard Output</h3>
