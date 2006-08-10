@@ -395,12 +395,14 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         listener.getLogger().println("$ computing changelog");
 
         final StringWriter errorOutput = new StringWriter();
+        final boolean[] hadError = new boolean[1];
 
         ChangeLogTask task = new ChangeLogTask() {
             public void log(String msg, int msgLevel) {
                 // send error to listener. This seems like the route in which the changelog task
                 // sends output
                 if(msgLevel==org.apache.tools.ant.Project.MSG_ERR) {
+                    hadError[0] = true;
                     errorOutput.write(msg);
                     errorOutput.write('\n');
                 }
@@ -432,6 +434,10 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
         try {
             task.execute();
+            if(hadError[0]) {
+                // non-fatal error must have occurred, such as cvs changelog parsing error.s
+                listener.getLogger().print(errorOutput);
+            }
             return true;
         } catch( BuildException e ) {
             // capture output from the task for diagnosis
