@@ -20,7 +20,7 @@ import java.io.Writer;
  *
  * @author Kohsuke Kawaguchi
  */
-public class Shell implements BuildStep {
+public class Shell implements Builder {
     private final String command;
 
     public Shell(String command) {

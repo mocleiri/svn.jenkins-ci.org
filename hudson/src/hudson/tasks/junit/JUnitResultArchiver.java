@@ -8,6 +8,7 @@ import hudson.model.Descriptor;
 import hudson.model.Result;
 import hudson.tasks.AntBasedBuildStep;
 import hudson.tasks.BuildStep;
+import hudson.tasks.Publisher;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.FileSet;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Kohsuke Kawaguchi
  */
-public class JUnitResultArchiver extends AntBasedBuildStep {
+public class JUnitResultArchiver extends AntBasedBuildStep implements Publisher {
 
     /**
      * {@link FileSet} "includes" string, like "foo/bar/*.xml"

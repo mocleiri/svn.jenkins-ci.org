@@ -30,7 +30,7 @@ import java.util.StringTokenizer;
  *
  * @author Kohsuke Kawaguchi
  */
-public class Mailer implements BuildStep {
+public class Mailer implements Publisher {
 
     private static final int MAX_LOG_LINES = 250;
 

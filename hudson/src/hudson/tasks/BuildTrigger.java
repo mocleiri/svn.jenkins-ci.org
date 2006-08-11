@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Kohsuke Kawaguchi
  */
-public class BuildTrigger implements BuildStep {
+public class BuildTrigger implements Publisher {
 
     /**
      * Comma-separated list of other projects to be scheduled.

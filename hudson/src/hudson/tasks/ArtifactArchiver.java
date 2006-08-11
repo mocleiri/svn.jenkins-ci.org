@@ -18,7 +18,7 @@ import java.io.File;
  *
  * @author Kohsuke Kawaguchi
  */
-public class ArtifactArchiver extends AntBasedBuildStep {
+public class ArtifactArchiver extends AntBasedBuildStep implements Publisher {
 
     /**
      * Comma-separated list of files/directories to be archived.

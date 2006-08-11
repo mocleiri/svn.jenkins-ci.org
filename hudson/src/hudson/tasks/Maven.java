@@ -18,7 +18,7 @@ import java.util.Map;
  *
  * @author Kohsuke Kawaguchi
  */
-public class Maven implements BuildStep {
+public class Maven implements Builder {
 
     private final String targets;
 

@@ -23,7 +23,7 @@ import java.io.IOException;
  *
  * @author Kohsuke Kawaguchi
  */
-public class JavadocArchiver extends AntBasedBuildStep {
+public class JavadocArchiver extends AntBasedBuildStep implements Publisher {
     /**
      * Path to the javadoc directory in the workspace.
      */

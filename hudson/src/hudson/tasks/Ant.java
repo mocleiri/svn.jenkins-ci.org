@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * @author Kohsuke Kawaguchi
  */
-public class Ant implements BuildStep {
+public class Ant implements Builder {
 
     private final String targets;
 
