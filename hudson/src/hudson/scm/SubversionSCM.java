@@ -388,6 +388,9 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         private boolean matched = false;
 
         public Checker(String url) {
+            if(url.endsWith("/"))
+                // the normalized name is always without the trailing '/'
+                url = url.substring(0,url.length()-1);
             this.url = url;
         }
 
