@@ -8,6 +8,8 @@ import hudson.scm.ChangeLogParser;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.SCM;
 import hudson.tasks.BuildStep;
+import hudson.tasks.Builder;
+import hudson.tasks.Publisher;
 import hudson.tasks.junit.TestResult;
 import hudson.tasks.junit.TestResultAction;
 import hudson.triggers.SCMTrigger;
@@ -167,18 +169,18 @@ public final class Build extends Run<Project,Build> implements Runnable {
 
             public void post(BuildListener listener) {
                 // run all of them even if one of them failed
-                for( BuildStep bs : project.getPublishers().values() )
+                for( Publisher bs : project.getPublishers().values() )
                     bs.perform(Build.this, launcher, listener);
             }
 
-            private boolean build(BuildListener listener, Map<?, BuildStep> steps) {
-                for( BuildStep bs : steps.values() )
+            private boolean build(BuildListener listener, Map<?, Builder> steps) {
+                for( Builder bs : steps.values() )
                     if(!bs.perform(Build.this, launcher, listener))
                         return false;
                 return true;
             }
 
-            private boolean preBuild(BuildListener listener,Map<?,BuildStep> steps) {
+            private boolean preBuild(BuildListener listener,Map<?,? extends BuildStep> steps) {
                 for( BuildStep bs : steps.values() )
                     if(!bs.prebuild(Build.this,listener))
                         return false;

@@ -10,6 +10,8 @@ import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMS;
 import hudson.tasks.BuildStep;
+import hudson.tasks.Publisher;
+import hudson.tasks.Builder;
 import hudson.triggers.Trigger;
 import hudson.util.XStream2;
 import org.apache.commons.fileupload.FileItem;
@@ -558,6 +560,9 @@ public final class Hudson extends JobCollection implements Node {
         }
         ExternalJob.reloadThread.interrupt();
         Trigger.timer.cancel();
+
+        if(pluginManager!=null) // be defensive. there could be some ugly timing related issues
+            pluginManager.stop();
     }
 
 
@@ -623,10 +628,10 @@ public final class Hudson extends JobCollection implements Node {
 
             boolean result = true;
 
-            for( Descriptor<BuildStep> d : BuildStep.BUILDERS )
+            for( Descriptor<Builder> d : BuildStep.BUILDERS )
                 result &= d.configure(req);
 
-            for( Descriptor<BuildStep> d : BuildStep.PUBLISHERS )
+            for( Descriptor<Publisher> d : BuildStep.PUBLISHERS )
                 result &= d.configure(req);
 
             for( Descriptor<SCM> scmd : SCMS.SCMS )

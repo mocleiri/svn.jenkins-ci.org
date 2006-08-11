@@ -6,6 +6,7 @@ import com.thoughtworks.xstream.io.StreamException;
 import com.thoughtworks.xstream.io.xml.XppReader;
 import hudson.util.AtomicFileWriter;
 import hudson.util.IOException2;
+import hudson.util.XStream2;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -88,5 +89,5 @@ public final class XmlFile {
     /**
      * {@link XStream} instance is supposed to be thread-safe.
      */
-    private static final XStream DEFAULT_XSTREAM = new XStream();
+    private static final XStream DEFAULT_XSTREAM = new XStream2();
 }

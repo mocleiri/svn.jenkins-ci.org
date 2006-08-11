@@ -71,12 +71,12 @@ public class ArtifactArchiver extends AntBasedBuildStep implements Publisher {
         return null;
     }
 
-    public Descriptor<BuildStep> getDescriptor() {
+    public Descriptor<Publisher> getDescriptor() {
         return DESCRIPTOR;
     }
 
 
-    public static final Descriptor<BuildStep> DESCRIPTOR = new Descriptor<BuildStep>(ArtifactArchiver.class) {
+    public static final Descriptor<Publisher> DESCRIPTOR = new Descriptor<Publisher>(ArtifactArchiver.class) {
         public String getDisplayName() {
             return "Archive the artifacts";
         }
@@ -85,7 +85,7 @@ public class ArtifactArchiver extends AntBasedBuildStep implements Publisher {
             return "/help/project-config/archive-artifact.html";
         }
 
-        public BuildStep newInstance(HttpServletRequest req) {
+        public Publisher newInstance(HttpServletRequest req) {
             return new ArtifactArchiver(req.getParameter("artifacts"));
         }
     };

@@ -2,6 +2,7 @@ package hudson.util;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.HierarchicalStreamDriver;
+import hudson.model.Hudson;
 
 /**
  * {@link XStream} enhanced for retroweaver support.
@@ -18,7 +19,12 @@ public class XStream2 extends XStream {
     }
 
     private void init() {
-        // incompatible change. ouch
-        // registerConverter(new EmulatedEnumConverter());
+        registerConverter(new RobustCollectionConverter(getClassMapper()),10);
+
+        // defensive because some use of XStream happens before plugins are initialized.
+        Hudson h = Hudson.getInstance();
+        if(h!=null && h.pluginManager!=null && h.pluginManager.uberClassLoader!=null) {
+            setClassLoader(h.pluginManager.uberClassLoader);
+        }
     }
 }

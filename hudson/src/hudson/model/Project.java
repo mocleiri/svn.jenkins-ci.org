@@ -9,6 +9,8 @@ import hudson.scm.SCM;
 import hudson.scm.SCMS;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildTrigger;
+import hudson.tasks.Builder;
+import hudson.tasks.Publisher;
 import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.junit.TestResultAction;
 import hudson.triggers.Trigger;
@@ -58,11 +60,14 @@ public class Project extends Job<Project,Build> {
     private List<Trigger> triggers = new Vector<Trigger>();
 
     /**
-     * List of {@link BuildStep}s.
+     * List of active {@link Builder}s configured for this project.
      */
-    private List<BuildStep> builders = new Vector<BuildStep>();
+    private List<Builder> builders = new Vector<Builder>();
 
-    private List<BuildStep> publishers = new Vector<BuildStep>();
+    /**
+     * List of active {@link Publisher}s configured for this project.
+     */
+    private List<Publisher> publishers = new Vector<Publisher>();
 
     /**
      * {@link Action}s contributed from {@link #triggers}, {@link #builders},
@@ -229,18 +234,18 @@ public class Project extends Job<Project,Build> {
         return buildDescriptorMap(triggers);
     }
 
-    public synchronized Map<Descriptor<BuildStep>,BuildStep> getBuilders() {
+    public synchronized Map<Descriptor<Builder>,Builder> getBuilders() {
         return buildDescriptorMap(builders);
     }
 
-    public synchronized Map<Descriptor<BuildStep>,BuildStep> getPublishers() {
+    public synchronized Map<Descriptor<Publisher>,Publisher> getPublishers() {
         return buildDescriptorMap(publishers);
     }
 
     /**
      * Adds a new {@link BuildStep} to this {@link Project} and saves the configuration.
      */
-    private synchronized void addPublisher(BuildStep buildStep) throws IOException {
+    private synchronized void addPublisher(Publisher buildStep) throws IOException {
         for( int i=0; i<publishers.size(); i++ ) {
             if(publishers.get(i).getDescriptor()==buildStep.getDescriptor()) {
                 // replace
@@ -258,7 +263,7 @@ public class Project extends Job<Project,Build> {
     /**
      * Removes a publisher from this project, if it's active.
      */
-    private void removePublisher(Descriptor<BuildStep> descriptor) throws IOException {
+    private void removePublisher(Descriptor<Publisher> descriptor) throws IOException {
         for( int i=0; i<publishers.size(); i++ ) {
             if(publishers.get(i).getDescriptor()==descriptor) {
                 // found it

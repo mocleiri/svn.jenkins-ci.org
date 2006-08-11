@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Kohsuke Kawaguchi
  */
-public interface BuildStep extends Describable<BuildStep> {
+public interface BuildStep {
 
     /**
      * Runs before the build begins.
@@ -51,7 +51,7 @@ public interface BuildStep extends Describable<BuildStep> {
      *
      * Builders are invoked to perform the build itself.
      */
-    public static final List<Descriptor<BuildStep>> BUILDERS = Descriptor.toList(
+    public static final List<Descriptor<Builder>> BUILDERS = Descriptor.toList(
         Shell.DESCRIPTOR,
         Ant.DESCRIPTOR,
         Maven.DESCRIPTOR
@@ -64,7 +64,7 @@ public interface BuildStep extends Describable<BuildStep> {
      * some post-actions on build results, such as sending notifications, collecting
      * results, etc.
      */
-    public static final List<Descriptor<BuildStep>> PUBLISHERS = Descriptor.toList(
+    public static final List<Descriptor<Publisher>> PUBLISHERS = Descriptor.toList(
         ArtifactArchiver.DESCRIPTOR,
         Fingerprinter.DESCRIPTOR,
         JavadocArchiver.DESCRIPTOR,

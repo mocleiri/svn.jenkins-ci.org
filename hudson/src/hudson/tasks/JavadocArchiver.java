@@ -81,17 +81,17 @@ public class JavadocArchiver extends AntBasedBuildStep implements Publisher {
         return new JavadocAction(project);
     }
 
-    public Descriptor<BuildStep> getDescriptor() {
+    public Descriptor<Publisher> getDescriptor() {
         return DESCRIPTOR;
     }
 
 
-    public static final Descriptor<BuildStep> DESCRIPTOR = new Descriptor<BuildStep>(JavadocArchiver.class) {
+    public static final Descriptor<Publisher> DESCRIPTOR = new Descriptor<Publisher>(JavadocArchiver.class) {
         public String getDisplayName() {
             return "Publish javadoc";
         }
 
-        public BuildStep newInstance(HttpServletRequest req) {
+        public Publisher newInstance(HttpServletRequest req) {
             return new JavadocArchiver(req.getParameter("javadoc_dir"));
         }
     };

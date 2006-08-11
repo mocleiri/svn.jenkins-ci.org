@@ -1,5 +1,7 @@
 package hudson;
 
+import com.thoughtworks.xstream.converters.reflection.PureJavaReflectionProvider;
+import com.thoughtworks.xstream.core.JVM;
 import hudson.model.Hudson;
 import hudson.triggers.Trigger;
 import hudson.util.IncompatibleVMDetected;
@@ -14,9 +16,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
-import com.thoughtworks.xstream.core.JVM;
-import com.thoughtworks.xstream.converters.reflection.PureJavaReflectionProvider;
 
 /**
  * Entry point when Hudson is used as a webapp.
@@ -33,21 +32,21 @@ public class WebAppMain implements ServletContextListener {
         home.mkdirs();
         System.out.println("hudson home directory: "+home);
 
+        ServletContext context = event.getServletContext();
+
         // make sure that we are using XStream in the "enhenced" (JVM-specific) mode
         if(new JVM().bestReflectionProvider().getClass()==PureJavaReflectionProvider.class) {
             // nope
-            event.getServletContext().setAttribute("app",new IncompatibleVMDetected());
+            context.setAttribute("app",new IncompatibleVMDetected());
             return;
         }
 
 
         try {
-            event.getServletContext().setAttribute("app",new Hudson(home));
+            context.setAttribute("app",new Hudson(home,context));
         } catch( IOException e ) {
             throw new Error(e);
         }
-
-        new PluginManager(event.getServletContext());
 
         // set the version
         Properties props = new Properties();
@@ -60,7 +59,7 @@ public class WebAppMain implements ServletContextListener {
         }
         Object ver = props.get("version");
         if(ver==null)   ver="?";
-        event.getServletContext().setAttribute("version",ver);
+        context.setAttribute("version",ver);
 
         Trigger.init(); // start running trigger
     }

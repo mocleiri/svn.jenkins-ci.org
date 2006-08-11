@@ -96,13 +96,13 @@ public class Maven implements Builder {
         return null;
     }
 
-    public Descriptor<BuildStep> getDescriptor() {
+    public Descriptor<Builder> getDescriptor() {
         return DESCRIPTOR;
     }
 
     public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
-    public static final class DescriptorImpl extends Descriptor<BuildStep> {
+    public static final class DescriptorImpl extends Descriptor<Builder> {
         private DescriptorImpl() {
             super(Maven.class);
         }
@@ -150,7 +150,7 @@ public class Maven implements Builder {
             return r;
         }
 
-        public BuildStep newInstance(HttpServletRequest req) {
+        public Builder newInstance(HttpServletRequest req) {
             return new Maven(req.getParameter("maven_targets"),req.getParameter("maven_version"));
         }
     }

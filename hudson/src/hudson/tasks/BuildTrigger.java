@@ -93,17 +93,17 @@ public class BuildTrigger implements Publisher {
         return null;
     }
 
-    public Descriptor<BuildStep> getDescriptor() {
+    public Descriptor<Publisher> getDescriptor() {
         return DESCRIPTOR;
     }
 
 
-    public static final Descriptor<BuildStep> DESCRIPTOR = new Descriptor<BuildStep>(BuildTrigger.class) {
+    public static final Descriptor<Publisher> DESCRIPTOR = new Descriptor<Publisher>(BuildTrigger.class) {
         public String getDisplayName() {
             return "Build other projects";
         }
 
-        public BuildStep newInstance(HttpServletRequest req) {
+        public Publisher newInstance(HttpServletRequest req) {
             return new BuildTrigger(req.getParameter("childProjects"));
         }
     };

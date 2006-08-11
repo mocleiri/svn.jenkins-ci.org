@@ -94,13 +94,13 @@ public class Shell implements Builder {
         return null;
     }
 
-    public Descriptor<BuildStep> getDescriptor() {
+    public Descriptor<Builder> getDescriptor() {
         return DESCRIPTOR;
     }
 
     public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
-    public static final class DescriptorImpl extends Descriptor<BuildStep> {
+    public static final class DescriptorImpl extends Descriptor<Builder> {
         private DescriptorImpl() {
             super(Shell.class);
         }
@@ -125,7 +125,7 @@ public class Shell implements Builder {
             return "Execute shell";
         }
 
-        public BuildStep newInstance(HttpServletRequest req) {
+        public Builder newInstance(HttpServletRequest req) {
             return new Shell(req.getParameter("shell"));
         }
 

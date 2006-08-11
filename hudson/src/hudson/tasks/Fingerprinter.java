@@ -141,12 +141,12 @@ public class Fingerprinter implements Publisher {
         }
     }
 
-    public Descriptor<BuildStep> getDescriptor() {
+    public Descriptor<Publisher> getDescriptor() {
         return DESCRIPTOR;
     }
 
 
-    public static final Descriptor<BuildStep> DESCRIPTOR = new Descriptor<BuildStep>(Fingerprinter.class) {
+    public static final Descriptor<Publisher> DESCRIPTOR = new Descriptor<Publisher>(Fingerprinter.class) {
         public String getDisplayName() {
             return "Record fingerprints of files to track usage";
         }
@@ -155,7 +155,7 @@ public class Fingerprinter implements Publisher {
             return "/help/project-config/fingerprint.html";
         }
 
-        public BuildStep newInstance(HttpServletRequest req) {
+        public Publisher newInstance(HttpServletRequest req) {
             return new Fingerprinter(
                 req.getParameter("fingerprint_targets").trim(),
                 req.getParameter("fingerprint_artifacts")!=null);

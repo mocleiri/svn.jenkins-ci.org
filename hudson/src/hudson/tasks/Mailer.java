@@ -190,7 +190,7 @@ public class Mailer implements Publisher {
         return msg;
     }
 
-    public hudson.model.Descriptor<BuildStep> getDescriptor() {
+    public hudson.model.Descriptor<Publisher> getDescriptor() {
         return DESCRIPTOR;
     }
 
@@ -201,7 +201,7 @@ public class Mailer implements Publisher {
 
     public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
-    public static final class DescriptorImpl extends Descriptor<BuildStep> {
+    public static final class DescriptorImpl extends Descriptor<Publisher> {
 
         public DescriptorImpl() {
             super(Mailer.class);
@@ -257,7 +257,7 @@ public class Mailer implements Publisher {
             return (String)getProperties().get("mail.hudson.url");
         }
 
-        public BuildStep newInstance(HttpServletRequest req) {
+        public Publisher newInstance(HttpServletRequest req) {
             return new Mailer(
                 req.getParameter("mailer_recipients"),
                 req.getParameter("mailer_not_every_unstable")!=null

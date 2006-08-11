@@ -75,16 +75,16 @@ public class JUnitResultArchiver extends AntBasedBuildStep implements Publisher 
     }
 
 
-    public Descriptor<BuildStep> getDescriptor() {
+    public Descriptor<Publisher> getDescriptor() {
         return DESCRIPTOR;
     }
 
-    public static final Descriptor<BuildStep> DESCRIPTOR = new Descriptor<BuildStep>(JUnitResultArchiver.class) {
+    public static final Descriptor<Publisher> DESCRIPTOR = new Descriptor<Publisher>(JUnitResultArchiver.class) {
         public String getDisplayName() {
             return "Publish JUnit test result report";
         }
 
-        public BuildStep newInstance(HttpServletRequest req) {
+        public Publisher newInstance(HttpServletRequest req) {
             return new JUnitResultArchiver(req.getParameter("junitreport_includes"));
         }
     };

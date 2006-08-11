@@ -1,9 +1,11 @@
 package hudson;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URLClassLoader;
+import java.io.OutputStream;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.logging.Logger;
@@ -29,8 +31,23 @@ public final class PluginWrapper {
 
     /**
      * Loaded plugin instance.
+     * Null if disabled.
      */
-    private final Plugin plugin;
+    public final Plugin plugin;
+
+    /**
+     * {@link ClassLoader} for loading classes from this plugin.
+     * Null if disabled.
+     */
+    public final ClassLoader classLoader;
+
+    /**
+     * Used to control enable/disable setting of the plugin.
+     * If this file exists, plugin will be disabled.
+     */
+    private final File disableFile;
+
+    private final File archive;
 
     /**
      * @param archive
@@ -43,6 +60,8 @@ public final class PluginWrapper {
     public PluginWrapper(PluginManager owner, File archive) throws IOException {
         LOGGER.info("Loading plugin: "+archive);
 
+        this.archive = archive;
+
         JarFile jarFile = new JarFile(archive);
         manifest = jarFile.getManifest();
         if(manifest==null) {
@@ -50,10 +69,11 @@ public final class PluginWrapper {
         }
         jarFile.close();
 
-        File controlFile = new File(archive.getPath()+".disabled");
-        if(controlFile.exists()) {
+        disableFile = new File(archive.getPath()+".disabled");
+        if(disableFile.exists()) {
             LOGGER.info("Plugin is disabled");
             this.plugin = null;
+            classLoader = null;
             return;
         }
 
@@ -89,14 +109,56 @@ public final class PluginWrapper {
         // initialize plugin
         try {
             plugin.setServletContext(owner.context);
-            plugin.init();
+            plugin.start();
         } catch(Throwable t) {
             // gracefully handle any error in plugin.
             IOException ioe = new IOException("Failed to initialize");
             ioe.initCause(t);
             throw ioe;
         }
+
+        // create public classloader
+        // TODO: define a mechanism to hide classes
+        // String export = manifest.getMainAttributes().getValue("Export");
+        this.classLoader = classLoader;
+    }
+
+    /**
+     * Terminates the plugin.
+     */
+    void stop() {
+        LOGGER.info("Stopping "+archive);
+        try {
+            plugin.stop();
+        } catch(Throwable t) {
+            System.err.println("Failed to shut down "+archive);
+            System.err.println(t);
+        }
+    }
+
+    /**
+     * Enables this plugin next time Hudson runs.
+     */
+    public void enable() {
+        disableFile.delete();
+    }
+
+    /**
+     * Disables this plugin next time Hudson runs.
+     */
+    public void disable() throws IOException {
+        // creates an empty file
+        OutputStream os = new FileOutputStream(disableFile);
+        os.close();
+    }
+
+    /**
+     * Returns true if this plugin is activated for this session.
+     */
+    public boolean isActive() {
+        return plugin!=null;
     }
 
     private static final Logger LOGGER = Logger.getLogger(PluginWrapper.class.getName());
+
 }
