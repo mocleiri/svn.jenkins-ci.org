@@ -54,7 +54,18 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
     private String otherOptions;
 
     SubversionSCM( String modules, boolean useUpdate, String username, String otherOptions ) {
-        this.modules = modules;
+        StringBuilder normalizedModules = new StringBuilder();
+        StringTokenizer tokens = new StringTokenizer(modules);
+        while(tokens.hasMoreTokens()) {
+            if(normalizedModules.length()>0)    normalizedModules.append(' ');
+            String m = tokens.nextToken();
+            if(m.endsWith("/"))
+                // the normalized name is always without the trailing '/'
+                m = m.substring(0,m.length()-1);
+            normalizedModules.append(m);
+       }
+
+        this.modules = normalizedModules.toString();
         this.useUpdate = useUpdate;
         this.username = nullify(username);
         this.otherOptions = nullify(otherOptions);
@@ -388,9 +399,6 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         private boolean matched = false;
 
         public Checker(String url) {
-            if(url.endsWith("/"))
-                // the normalized name is always without the trailing '/'
-                url = url.substring(0,url.length()-1);
             this.url = url;
         }
 
