@@ -2,12 +2,12 @@ package hudson.tasks;
 
 import hudson.Launcher;
 import hudson.Util;
+import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
-import hudson.model.Result;
-import hudson.model.Action;
 import hudson.model.Project;
+import hudson.model.Result;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;

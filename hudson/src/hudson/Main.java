@@ -55,7 +55,7 @@ public class Main {
      * Run command and place the result directly into the local installation of Hudson.
      */
     public static int localPost(String[] args) throws Exception {
-        Hudson app = new Hudson(new File(getHudsonHome()));
+        Hudson app = new Hudson(new File(getHudsonHome()),null);
 
         Job job = app.getJob(args[0]);
         if(!(job instanceof ExternalJob)) {

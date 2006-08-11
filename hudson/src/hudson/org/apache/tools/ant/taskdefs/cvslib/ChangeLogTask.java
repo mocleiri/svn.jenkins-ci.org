@@ -16,6 +16,11 @@
  */
 package hudson.org.apache.tools.ant.taskdefs.cvslib;
 
+import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.taskdefs.AbstractCvsTask;
+import org.apache.tools.ant.taskdefs.cvslib.CvsVersion;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -24,17 +29,12 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Properties;
 import java.util.Vector;
-import java.util.List;
-import java.util.ArrayList;
-
-import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Project;
-import org.apache.tools.ant.taskdefs.AbstractCvsTask;
-import org.apache.tools.ant.taskdefs.cvslib.CvsVersion;
 
 /**
  * Examines the output of cvs log and group related changes together.

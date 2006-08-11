@@ -1,15 +1,15 @@
 package hudson.tasks.junit;
 
 import hudson.Launcher;
+import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Result;
-import hudson.model.Action;
 import hudson.tasks.AntBasedBuildStep;
 import hudson.tasks.BuildStep;
-import org.apache.tools.ant.Project;
 import org.apache.tools.ant.DirectoryScanner;
+import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.FileSet;
 
 import javax.servlet.http.HttpServletRequest;

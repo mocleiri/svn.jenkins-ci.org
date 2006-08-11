@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Metadata about a configurable instance.
@@ -127,6 +129,13 @@ public abstract class Descriptor<T extends Describable<T>> {
     // to work around warning when creating a generic array type
     public static <T> T[] toArray( T... values ) {
         return values;
+    }
+
+    public static <T> List<T> toList( T... values ) {
+        final ArrayList<T> r = new ArrayList<T>();
+        for (T v : values)
+            r.add(v);
+        return r;
     }
 
     public static final class FormException extends Exception {

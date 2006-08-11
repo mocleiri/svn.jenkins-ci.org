@@ -1,7 +1,7 @@
 package hudson.util;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Used to build up arguments for a process invocation.

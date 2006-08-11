@@ -1,12 +1,12 @@
 package hudson.scm;
 
-import org.xml.sax.SAXException;
 import org.apache.commons.digester.Digester;
+import org.xml.sax.SAXException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * {@link ChangeLogSet} for CVS.

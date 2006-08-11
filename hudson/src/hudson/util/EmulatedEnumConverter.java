@@ -1,11 +1,11 @@
 package hudson.util;
 
+import com.rc.retroweaver.runtime.Enum_;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
-import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
-import com.rc.retroweaver.runtime.Enum_;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 /**
  * Converts retroweaver's enum class.

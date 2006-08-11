@@ -16,10 +16,11 @@
  */
 package hudson.org.apache.tools.ant.taskdefs.cvslib;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.PumpStreamHandler;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 /**
  * A dummy stream handler that just passes stuff to the parser.

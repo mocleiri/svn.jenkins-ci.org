@@ -3,12 +3,11 @@ package hudson.scheduler;
 import antlr.ANTLRException;
 import antlr.LLkParser;
 import antlr.ParserSharedInputState;
-import antlr.TokenBuffer;
-import antlr.TokenStream;
 import antlr.SemanticException;
 import antlr.Token;
+import antlr.TokenBuffer;
+import antlr.TokenStream;
 import antlr.TokenStreamException;
-import antlr.RecognitionException;
 
 /**
  * @author Kohsuke Kawaguchi

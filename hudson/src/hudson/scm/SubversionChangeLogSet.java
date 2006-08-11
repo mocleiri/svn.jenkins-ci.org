@@ -2,11 +2,11 @@ package hudson.scm;
 
 import hudson.model.Build;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Collections;
-import java.util.Map;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * {@link ChangeLogSet} for Subversion.

@@ -1,8 +1,8 @@
 package hudson.util;
 
 import java.io.FilterOutputStream;
-import java.io.OutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * {@link FilterOutputStream} that counts the number of bytes that were written.

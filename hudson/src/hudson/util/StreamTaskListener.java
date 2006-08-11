@@ -3,10 +3,10 @@ package hudson.util;
 import hudson.model.TaskListener;
 
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.io.OutputStreamWriter;
 
 /**
  * {@link TaskListener} that generates output into a single stream.

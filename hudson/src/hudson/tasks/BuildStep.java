@@ -1,13 +1,15 @@
 package hudson.tasks;
 
 import hudson.Launcher;
+import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Describable;
 import hudson.model.Descriptor;
-import hudson.model.Action;
 import hudson.model.Project;
 import hudson.tasks.junit.JUnitResultArchiver;
+
+import java.util.List;
 
 /**
  * One step of the whole build process.
@@ -45,15 +47,24 @@ public interface BuildStep extends Describable<BuildStep> {
     Action getProjectAction(Project project);
 
     /**
-     * List of all installed {@link BuildStep}s.
+     * List of all installed builders.
+     *
+     * Builders are invoked to perform the build itself.
      */
-    public static final Descriptor<BuildStep>[] BUILDERS = Descriptor.toArray(
+    public static final List<Descriptor<BuildStep>> BUILDERS = Descriptor.toList(
         Shell.DESCRIPTOR,
         Ant.DESCRIPTOR,
         Maven.DESCRIPTOR
     );
 
-    public static final Descriptor<BuildStep>[] PUBLISHERS = Descriptor.toArray(
+    /**
+     * List of all installed publishers.
+     *
+     * Publishers are invoked after the build is completed, normally to perform
+     * some post-actions on build results, such as sending notifications, collecting
+     * results, etc.
+     */
+    public static final List<Descriptor<BuildStep>> PUBLISHERS = Descriptor.toList(
         ArtifactArchiver.DESCRIPTOR,
         Fingerprinter.DESCRIPTOR,
         JavadocArchiver.DESCRIPTOR,

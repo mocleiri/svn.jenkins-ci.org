@@ -4,10 +4,9 @@ import antlr.ANTLRException;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.Describable;
-import hudson.model.Hudson;
-import hudson.model.Job;
-import hudson.model.Project;
 import hudson.model.FingerprintCleanupThread;
+import hudson.model.Hudson;
+import hudson.model.Project;
 import hudson.scheduler.CronTabList;
 
 import java.io.InvalidObjectException;

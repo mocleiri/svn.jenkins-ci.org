@@ -1,9 +1,9 @@
 package hudson.util;
 
-import java.io.Writer;
 import java.io.IOException;
-import java.util.List;
+import java.io.Writer;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * {@link Writer} that spools the output and writes to another {@link Writer} later.

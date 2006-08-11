@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Manages {@link Plugin}s.
+ * Manages {@link PluginWrapper}s.
  *
  * @author Kohsuke Kawaguchi
  */
 public final class PluginManager {
-    private final List<Plugin> plugins = new ArrayList<Plugin>();
+    private final List<PluginWrapper> plugins = new ArrayList<PluginWrapper>();
 
     /**
      * Plug-in root directory.
@@ -37,12 +37,10 @@ public final class PluginManager {
                 });
 
         for( File arc : archives ) {
-            Plugin p = new Plugin(this,arc);
             try {
-                p.deploy();
-                plugins.add(p);
+                plugins.add(new PluginWrapper(this,arc));
             } catch (IOException e) {
-                System.err.println("Failed to install a plug-in "+arc);
+                System.err.println("Failed to load a plug-in "+arc);
                 e.printStackTrace();
             }
         }

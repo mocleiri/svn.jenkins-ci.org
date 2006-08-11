@@ -3,12 +3,12 @@ package hudson.tasks;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
+import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import static hudson.model.Hudson.isWindows;
 import hudson.model.Project;
-import hudson.model.Action;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileWriter;

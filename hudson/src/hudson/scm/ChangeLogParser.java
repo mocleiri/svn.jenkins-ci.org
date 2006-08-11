@@ -1,11 +1,10 @@
 package hudson.scm;
 
 import hudson.model.Build;
+import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
-
-import org.xml.sax.SAXException;
 
 /**
  * Encapsulates the file format of the changelog.

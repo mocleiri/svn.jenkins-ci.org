@@ -609,13 +609,13 @@ public class Project extends Job<Project,Build> {
         return pa;
     }
 
-    private <T extends Describable<T>> void buildDescribable(StaplerRequest req, Descriptor<T>[] descriptors, List<T> result, String prefix)
+    private <T extends Describable<T>> void buildDescribable(StaplerRequest req, List<Descriptor<T>> descriptors, List<T> result, String prefix)
         throws FormException {
 
         result.clear();
-        for( int i=0; i< descriptors.length; i++ ) {
+        for( int i=0; i< descriptors.size(); i++ ) {
             if(req.getParameter(prefix +i)!=null) {
-                T instance = descriptors[i].newInstance(req);
+                T instance = descriptors.get(i).newInstance(req);
                 result.add(instance);
             }
         }

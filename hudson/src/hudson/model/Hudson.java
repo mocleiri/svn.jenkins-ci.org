@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.XStream;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.XmlFile;
+import hudson.PluginManager;
 import hudson.model.Descriptor.FormException;
 import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
@@ -21,6 +22,7 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -117,12 +119,17 @@ public final class Hudson extends JobCollection implements Node {
 
     private transient final FingerprintMap fingerprintMap = new FingerprintMap();
 
+    /**
+     * Loaded plugins.
+     */
+    public final PluginManager pluginManager;
+
     public static Hudson getInstance() {
         return theInstance;
     }
 
 
-    public Hudson(File root) throws IOException {
+    public Hudson(File root, ServletContext context) throws IOException {
         this.root = root;
         if(theInstance!=null)
             throw new IllegalStateException("second instance");
@@ -130,6 +137,9 @@ public final class Hudson extends JobCollection implements Node {
 
         load();
         updateComputerList();
+
+        // load plugins.
+        pluginManager = new PluginManager(context);
     }
 
     /**

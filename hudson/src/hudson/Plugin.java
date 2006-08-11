@@ -1,136 +1,52 @@
 package hudson;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.Enumeration;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
+import hudson.model.Hudson;
+import hudson.tasks.BuildStep;
+
+import javax.servlet.ServletContext;
 
 /**
- * Represents a Hudson plug-in.
+ * Base class of Hudson plugin.
  *
  * <p>
- * A plug-in is packaged into a jar file whose extension is ".hudson-plugin".
- * The file is structured much like a war file.
- *
- * <p>
- * At run-time, the code portion of it is extracted into a directory named
- * after its file name (except the extension), and the rest of the resources
- * including the side files, tag files, and so on will be extracted into the
- * same directory as the Hudson itself.
- *
- * <p>
- * When a plug-in file is expanded, Hudson also remembers what files came from
- * where, in a file called "index". This allows a plug-in to be uninstalled.
- *
- *
- * <p>
- * I couldn't attain the complete isolation between plugins because J2EE doesn't
- * allow JSP loading mechanism to be customized.
+ * A plugin needs to derive from this class.
  *
  * @author Kohsuke Kawaguchi
+ * @since 1.42
  */
-public final class Plugin {
-    /**
-     * {@link ClassLoader} for loading plug-in code.
-     */
-    private ClassLoader classLoader;
-
-    private final File archive;
-
-    private final File explodeDir;
-
-    private final PluginManager owner;
+public abstract class Plugin {
 
     /**
-     * @param arc
-     *      A .hudson-plugin archive file.
+     * Called when a plugin is loaded to make the {@link ServletContext} object available to a plugin.
+     * This object allows plugins to talk to the surrounding environment.
+     *
+     * <p>
+     * The default implementation is no-op.
+     *
+     * @param context
+     *      Always non-null.
+     *
+     * @since 1.42
      */
-    public Plugin(PluginManager owner, File arc) {
-        this.owner = owner;
-        this.archive = arc;
-        String p = archive.getPath();
-        explodeDir = new File(p.substring(0,p.length()-14));
+    public void setServletContext(ServletContext context) {
     }
 
     /**
-     * Makes the plug-in ready for use.
+     * Called to allow plugins to initialize themselves.
+     *
+     * <p>
+     * This method is called after {@link #setServletContext(ServletContext)} is invoked.
+     * You can also use {@link Hudson#getInstance()} to access the singleton hudson instance.
+     *
+     * <p>
+     * A typical plugin would install {@link BuildStep}s to {@link BuildStep#PUBLISHERS} or
+     * {@link BuildStep#BUILDERS}.
+     *
+     * @throws Exception
+     *      any exception thrown by the plugin during the initialization will disable plugin.
+     *
+     * @since 1.42
      */
-    public void deploy() throws IOException {
-        if(explodeDir.exists() && explodeDir.lastModified()<=archive.lastModified())
-            deleteExploded();
-        if(!explodeDir.exists())
-            explode();
-    }
-
-    /**
-     * Extracts the contents of the plug-in archive into the file system.
-     */
-    private void explode() throws IOException {
-        // extract a new one
-        PrintWriter index = new PrintWriter(getIndexFile());
-
-        final byte[] buf = new byte[8192];
-
-        ZipFile zip = new ZipFile(archive);
-        Enumeration<? extends ZipEntry> entires = zip.entries();
-        while(entires.hasMoreElements()) {
-            ZipEntry entry = entires.nextElement();
-            File f;
-            if(isPluginLocal(entry))
-                f = new File(explodeDir,entry.getName());
-            else
-                f = new File(owner.context.getRealPath("/"),entry.getName());
-            if(f.isDirectory()) {
-                f.mkdirs();
-                continue;
-            }
-            f.getParentFile().mkdirs();
-
-            index.println(f.getPath());
-            InputStream in = zip.getInputStream(entry);
-            OutputStream out = new FileOutputStream(f);
-            int size;
-            while((size=in.read(buf))>0) {
-                out.write(buf,0,size);
-            }
-            in.close();
-            out.close();
-            f.setLastModified(entry.getTime());
-        }
-
-        index.close();
-    }
-
-    private File getIndexFile() {
-        return new File(explodeDir.getPath()+".index");
-    }
-
-    /**
-     * Deletes the exploded copies.
-     */
-    private void deleteExploded() throws IOException {
-        try {
-            Util.deleteRecursive(explodeDir);
-        } catch (IOException e) {
-            System.err.println("Unable to delete "+explodeDir);
-            e.printStackTrace();
-        }
-        BufferedReader r = new BufferedReader(new FileReader(getIndexFile()));
-        String fileName;
-        while((fileName=r.readLine())!=null)
-            new File(fileName).delete();
-        r.close();
-    }
-
-    private boolean isPluginLocal(ZipEntry entry) {
-        String name = entry.getName();
-        return name.startsWith("WEB-INF/lib/") || name.startsWith("WEB-INF/classes/");
+    public void init() throws Exception {
     }
 }
