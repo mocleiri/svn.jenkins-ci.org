@@ -93,9 +93,16 @@ public class WebAppMain implements ServletContextListener {
             return new File(sysProp.trim());
 
         // otherwise pick a place by ourselves
+
         String root = event.getServletContext().getRealPath("/WEB-INF/workspace");
-        if(root!=null)
-            return new File(root.trim());
+        if(root!=null) {
+            File ws = new File(root.trim());
+            if(ws.exists())
+                // Hudson <1.42 used to prefer this betfore ~/.hudson, so
+                // check the existence and if it's there, use it.
+                // otherwise if this is a new installation, prefer ~/.hudson
+                return ws;
+        }
 
         // if for some reason we can't put it within the webapp, use home directory.
         return new File(new File(System.getProperty("user.home")),".hudson");
