@@ -53,10 +53,11 @@ public final class PluginManager {
             rootDir.mkdirs();
 
         File[] archives = rootDir.listFiles(new FilenameFilter() {
-                    public boolean accept(File dir, String name) {
-                        return name.endsWith(".hudson-plugin");
-                    }
-                });
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".hpi")        // plugin jar file
+                    || name.endsWith(".hpl");       // linked plugin. for debugging.
+            }
+        });
 
         for( File arc : archives ) {
             try {
