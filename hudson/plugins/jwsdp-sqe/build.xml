@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<project name="jaxb-sqe" default="jar">
+
+  <target name="compile" >
+		<mkdir dir="build/classes"/>
+		<javac srcdir="src" destdir="build/classes" debug="on">
+			<classpath>
+				<fileset dir="../../resources/WEB-INF/lib" includes="**/*.jar"/>
+				<pathelement path="../../build/classes" />
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar destfile="build/sun-sqe.hpi">
+			<fileset dir="build/classes" />
+      <fileset dir="views"/>
+			<manifest>
+				<attribute name="Build-Id" value="${build.version}"/>
+				<attribute name="Plugin-Class" value="hudson.plugins.jwsdp_sqe.PluginImpl" />
+			</manifest>
+    </jar>
+  </target>
+
+	<target name="clean">
+		<delete dir="build"/>
+	</target>
+
+  <target name="deploy" depends="jar">
+    <copy todir="../../../work/plugins" file="build/sun-sqe.hpi" />
+  </target>
+</project>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<project name="plugins" default="jar">
+  
+  <target name="clean">
+    <antcall target="-exec-target">
+      <param name="target" value="clean"/>
+    </antcall>
+  </target>
+  
+  <target name="jar">
+    <antcall target="-exec-target">
+      <param name="target" value="jar"/>
+    </antcall>
+  </target>
+  
+  <target name="-exec-target">
+    <subant target="${target}">
+      <fileset dir="." includes="*/build.xml" />
+    </subant>
+  </target>
+</project>
