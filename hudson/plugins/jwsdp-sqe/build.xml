@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<project name="jaxb-sqe" default="jar">
+<project name="jwsdp-sqe" default="jar">
 
   <target name="compile" >
 		<mkdir dir="build/classes"/>
@@ -12,9 +12,9 @@
 	</target>
 
 	<target name="jar" depends="compile">
-		<jar destfile="build/sun-sqe.hpi">
-			<fileset dir="build/classes" />
-      <fileset dir="views"/>
+		<jar destfile="build/jwsdp-sqe.hpi">
+			<zipfileset dir="build/classes" prefix="WEB-INF/classes"/>
+      <zipfileset dir="views" prefix="WEB-INF/classes"/>
 			<manifest>
 				<attribute name="Build-Id" value="${build.version}"/>
 				<attribute name="Plugin-Class" value="hudson.plugins.jwsdp_sqe.PluginImpl" />
@@ -28,6 +28,6 @@
 	</target>
 
   <target name="deploy" depends="jar">
-    <copy todir="../../../work/plugins" file="build/sun-sqe.hpi" />
+    <copy todir="../../../work/plugins" file="build/jwsdp-sqe.hpi" />
   </target>
 </project>

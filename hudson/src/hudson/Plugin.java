@@ -5,8 +5,14 @@ import hudson.scm.SCM;
 import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
 import hudson.triggers.Trigger;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * Base class of Hudson plugin.
@@ -18,6 +24,11 @@ import javax.servlet.ServletContext;
  * @since 1.42
  */
 public abstract class Plugin {
+
+    /**
+     * Set by the {@link PluginManager}.
+     */
+    /*package*/ PluginWrapper wrapper;
 
     /**
      * Called when a plugin is loaded to make the {@link ServletContext} object available to a plugin.
@@ -70,5 +81,23 @@ public abstract class Plugin {
      * @since 1.42
      */
     public void stop() throws Exception {
+    }
+
+    /**
+     * This method serves static resources in the plugin under <tt>hudson/plugin/SHORTNAME</tt>.
+     */
+    public void doDynamic(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+        String path = req.getRestOfPath();
+
+        if(path.length()==0)
+            path = "/";
+
+        if(path.indexOf("..")!=-1 || path.length()<1) {
+            // don't serve anything other than files in the sub directory.
+            rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
+        rsp.serveFile(req, new URL(wrapper.baseResourceURL,'.'+path));
     }
 }

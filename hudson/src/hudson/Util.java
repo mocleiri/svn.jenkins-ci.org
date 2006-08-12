@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Map;
@@ -230,5 +232,12 @@ public class Util {
         char ch = Character.forDigit(n,16);
         if(ch>='a')     ch = (char)(ch-'a'+'A');
         return ch;
+    }
+
+    /**
+     * Creates an empty file.
+     */
+    public static void touch(File file) throws IOException {
+        new FileOutputStream(file).close();
     }
 }

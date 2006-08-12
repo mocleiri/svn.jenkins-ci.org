@@ -88,24 +88,17 @@ public abstract class DirectoryHolder extends Actionable {
             }
         }
 
-        FileInputStream in = new FileInputStream(f);
 
-        try {
-            if(isFingerprint) {
+        if(isFingerprint) {
+            FileInputStream in = new FileInputStream(f);
+            try {
                 Hudson hudson = Hudson.getInstance();
                 rsp.forward(hudson.getFingerprint(hudson.getDigestOf(in)),"/",req);
-            } else {
-                // serve the file
-                String contentType = req.getServletContext().getMimeType(f.getPath());
-                rsp.setContentType(contentType);
-                rsp.setContentLength((int)f.length());
-                byte[] buf = new byte[1024];
-                int len;
-                while((len=in.read(buf))>0)
-                    rsp.getOutputStream().write(buf,0,len);
+            } finally {
+                in.close();
             }
-        } finally {
-            in.close();
+        } else {
+            rsp.serveFile(req,f.toURL());
         }
     }
 

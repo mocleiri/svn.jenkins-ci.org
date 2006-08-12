@@ -1,18 +1,21 @@
 package hudson;
 
+import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.taskdefs.Expand;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.logging.Logger;
 
@@ -58,6 +61,13 @@ public final class PluginWrapper {
     public final ClassLoader classLoader;
 
     /**
+     * Base URL for loading static resources from this plugin.
+     * Null if disabled. The static resources are mapped under
+     * <tt>hudson/plugin/SHORTNAME/</tt>.
+     */
+    public final URL baseResourceURL;
+
+    /**
      * Used to control enable/disable setting of the plugin.
      * If this file exists, plugin will be disabled.
      */
@@ -83,6 +93,8 @@ public final class PluginWrapper {
 
         boolean isLinked = archive.getName().endsWith(".hpl");
 
+        File expandDir = null;  // if .hpi, this is the directory where war is expanded
+
         if(isLinked) {
             FileInputStream in = new FileInputStream(archive);
             try {
@@ -91,31 +103,50 @@ public final class PluginWrapper {
                 in.close();
             }
         } else {
-            JarFile jarFile = new JarFile(archive);
-            manifest = jarFile.getManifest();
-            if(manifest==null) {
-                throw new IOException("Plugin installation failed. No manifest in "+archive);
+            expandDir = new File(archive.getParentFile(), shortName);
+            explode(archive,expandDir);
+
+            File manifestFile = new File(expandDir,"META-INF/MANIFEST.MF");
+            if(!manifestFile.exists()) {
+                throw new IOException("Plugin installation failed. No manifest at "+manifestFile);
             }
-            jarFile.close();
+            FileInputStream fin = new FileInputStream(manifestFile);
+            try {
+                manifest = new Manifest(fin);
+            } finally {
+                fin.close();
+            }
         }
 
         // TODO: define a mechanism to hide classes
         // String export = manifest.getMainAttributes().getValue("Export");
 
+        List<URL> paths = new ArrayList<URL>();
         if(isLinked) {
             String classPath = manifest.getMainAttributes().getValue("Class-Path");
-            List<URL> paths = new ArrayList<URL>();
             for (String s : classPath.split(" +")) {
                 File file = new File(archive.getParentFile(), s);
                 if(!file.exists())
                     throw new IOException("No such file: "+file);
                 paths.add(file.toURL());
             }
-            this.classLoader = new URLClassLoader(paths.toArray(new URL[0]), getClass().getClassLoader());
-        } else {
-            this.classLoader = new URLClassLoader(new URL[]{archive.toURL()}, getClass().getClassLoader());
-        }
 
+            this.baseResourceURL = new File(archive.getParentFile(),
+                manifest.getMainAttributes().getValue("Resource-Path")).toURL();
+        } else {
+            File classes = new File(expandDir,"WEB-INF/classes");
+            if(classes.exists())
+                paths.add(classes.toURL());
+            File lib = new File(expandDir,"WEB-INF/lib");
+            File[] libs = lib.listFiles(JAR_FILTER);
+            if(libs!=null) {
+                for (File jar : libs)
+                    paths.add(jar.toURL());
+            }
+
+            this.baseResourceURL = expandDir.toURL();
+        }
+        this.classLoader = new URLClassLoader(paths.toArray(new URL[0]), getClass().getClassLoader());
 
         disableFile = new File(archive.getPath()+".disabled");
         if(disableFile.exists()) {
@@ -136,6 +167,7 @@ public final class PluginWrapper {
                 throw new IOException(className+" doesn't extend from hudson.Plugin");
             }
             this.plugin = (Plugin)plugin;
+            this.plugin.wrapper = this;
         } catch (ClassNotFoundException e) {
             IOException ioe = new IOException("Unable to load " + className + " from " + archive);
             ioe.initCause(e);
@@ -241,6 +273,36 @@ public final class PluginWrapper {
         return !disableFile.exists();
     }
 
+    /**
+     * Explodes the plugin into a directory, if necessary.
+     */
+    private void explode(File archive, File destDir) throws IOException {
+        if(!destDir.exists())
+            destDir.mkdirs();
+
+        // timestamp check
+        File explodeTime = new File(destDir,".timestamp");
+        if(explodeTime.exists() && explodeTime.lastModified()>archive.lastModified())
+            return; // no need to expand
+
+        LOGGER.info("Extracting "+archive);
+
+        try {
+            Expand e = new Expand();
+            e.setProject(new Project());
+            e.setTaskType("unzip");
+            e.setSrc(archive);
+            e.setDest(destDir);
+            e.execute();
+        } catch (BuildException x) {
+            IOException ioe = new IOException("Failed to expand " + archive);
+            ioe.initCause(x);
+            throw ioe;
+        }
+
+        Util.touch(explodeTime);
+    }
+
 
 //
 //
@@ -256,6 +318,15 @@ public final class PluginWrapper {
         rsp.setStatus(200);
     }
 
+
     private static final Logger LOGGER = Logger.getLogger(PluginWrapper.class.getName());
 
+    /**
+     * Filter for jar files.
+     */
+    private static final FilenameFilter JAR_FILTER = new FilenameFilter() {
+        public boolean accept(File dir,String name) {
+            return name.endsWith(".jar");
+        }
+    };
 }
