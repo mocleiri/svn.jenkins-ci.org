@@ -82,7 +82,7 @@ public class SQETestResultPublisher implements Publisher {
         }
 
         public String getHelpFile() {
-            return "/plugin/jwsdp-sqe/help";
+            return "/plugin/jwsdp-sqe/help.html";
         }
 
         public Publisher newInstance(HttpServletRequest req) {
