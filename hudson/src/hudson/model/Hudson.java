@@ -5,6 +5,8 @@ import hudson.Launcher;
 import hudson.Util;
 import hudson.XmlFile;
 import hudson.PluginManager;
+import hudson.Plugin;
+import hudson.PluginWrapper;
 import hudson.model.Descriptor.FormException;
 import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
@@ -159,6 +161,19 @@ public final class Hudson extends JobCollection implements Node {
 
     public PluginManager getPluginManager() {
         return pluginManager;
+    }
+
+    /**
+     * Gets the plugin object from its short name.
+     *
+     * <p>
+     * This allows URL <tt>hudson/plugin/ID</tt> to be served by the views
+     * of the plugin class.
+     */
+    public Plugin getPlugin(String shortName) {
+        PluginWrapper p = pluginManager.getPlugin(shortName);
+        if(p==null)     return null;
+        return p.plugin;
     }
 
     /**
