@@ -1,5 +1,8 @@
 package hudson;
 
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,10 +21,20 @@ import java.util.logging.Logger;
  * for Hudson to control {@link Plugin}.
  *
  * <p>
- * A plug-in is packaged into a jar file whose extension is ".hudson-plugin".
+ * A plug-in is packaged into a jar file whose extension is <tt>".hpi"</tt>,
+ * A plugin needs to have a special manifest entry to identify what it is.
  *
  * <p>
- * A plugin needs to have a special manifest entry to identify what it is.
+ * At the runtime, a plugin has two distinct state axis.
+ * <ol>
+ *  <li>Enabled/Disabled. If enabled, Hudson is going to use it
+ *      next time Hudson runs. Otherwise the next run will ignore it.
+ *  <li>Activated/Deactivated. If activated, that means Hudson is using
+ *      the plugin in this session. Otherwise it's not.
+ * </ol>
+ * <p>
+ * For example, an activated but disabled plugin is still running but the next
+ * time it won't.
  *
  * @author Kohsuke Kawaguchi
  */
@@ -86,15 +99,6 @@ public final class PluginWrapper {
             jarFile.close();
         }
 
-        disableFile = new File(archive.getPath()+".disabled");
-        if(disableFile.exists()) {
-            LOGGER.info("Plugin is disabled");
-            this.plugin = null;
-            classLoader = null;
-            return;
-        }
-
-
         // TODO: define a mechanism to hide classes
         // String export = manifest.getMainAttributes().getValue("Export");
 
@@ -110,6 +114,14 @@ public final class PluginWrapper {
             this.classLoader = new URLClassLoader(paths.toArray(new URL[0]), getClass().getClassLoader());
         } else {
             this.classLoader = new URLClassLoader(new URL[]{archive.toURL()}, getClass().getClassLoader());
+        }
+
+
+        disableFile = new File(archive.getPath()+".disabled");
+        if(disableFile.exists()) {
+            LOGGER.info("Plugin is disabled");
+            this.plugin = null;
+            return;
         }
 
         String className = manifest.getMainAttributes().getValue("Plugin-Class");
@@ -151,6 +163,29 @@ public final class PluginWrapper {
     }
 
     /**
+     * Returns the URL of the index page jelly script.
+     */
+    public URL getIndexPage() {
+        return classLoader.getResource("index.jelly");
+    }
+
+    /**
+     * Returns the short name suitable for URL.
+     */
+    public String getShortName() {
+        return shortName;
+    }
+
+    /**
+     * Returns a one-line descriptive name of this plugin.
+     */
+    public String getLongName() {
+        String name = manifest.getMainAttributes().getValue("Long-Name");
+        if(name!=null)      return name;
+        return shortName;
+    }
+
+    /**
      * Gets the "abc" portion from "abc.ext".
      */
     private static String getShortName(File archive) {
@@ -177,8 +212,9 @@ public final class PluginWrapper {
     /**
      * Enables this plugin next time Hudson runs.
      */
-    public void enable() {
-        disableFile.delete();
+    public void enable() throws IOException {
+        if(!disableFile.delete())
+            throw new IOException("Failed to delete "+disableFile);
     }
 
     /**
@@ -191,10 +227,33 @@ public final class PluginWrapper {
     }
 
     /**
-     * Returns true if this plugin is activated for this session.
+     * Returns true if this plugin is enabled for this session.
      */
     public boolean isActive() {
         return plugin!=null;
+    }
+
+    /**
+     * If true, the plugin is going to be activated next time
+     * Hudson runs.
+     */
+    public boolean isEnabled() {
+        return !disableFile.exists();
+    }
+
+
+//
+//
+// Action methods
+//
+//
+    public void doMakeEnabled(StaplerRequest req, StaplerResponse rsp) throws IOException {
+        enable();
+        rsp.setStatus(200);
+    }
+    public void doMakeDisabled(StaplerRequest req, StaplerResponse rsp) throws IOException {
+        disable();
+        rsp.setStatus(200);
     }
 
     private static final Logger LOGGER = Logger.getLogger(PluginWrapper.class.getName());

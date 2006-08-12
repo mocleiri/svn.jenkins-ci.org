@@ -157,6 +157,10 @@ public final class Hudson extends JobCollection implements Node {
         return systemMessage;
     }
 
+    public PluginManager getPluginManager() {
+        return pluginManager;
+    }
+
     /**
      * Synonym to {@link #getViewMessage()}.
      */

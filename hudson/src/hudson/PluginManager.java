@@ -72,6 +72,18 @@ public final class PluginManager {
         }
     }
 
+    public List<PluginWrapper> getPlugins() {
+        return plugins;
+    }
+
+    public PluginWrapper getPlugin(String shortName) {
+        for (PluginWrapper p : plugins) {
+            if(p.getShortName().equals(shortName))
+                return p;
+        }
+        return null;
+    }
+
     /**
      * Discover all the service provider implementations of the given class,
      * via <tt>META-INF/services</tt>.
