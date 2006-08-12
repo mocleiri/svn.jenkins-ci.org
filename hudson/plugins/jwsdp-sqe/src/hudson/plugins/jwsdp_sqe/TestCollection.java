@@ -44,6 +44,11 @@ public abstract class TestCollection<
     }
 
     /**
+     * Returns the caption of the children. Used in the view.
+     */
+    public abstract String getChildTitle();
+
+    /**
      * Gets a {@link Test} by its id.
      */
     public C get(String id) {

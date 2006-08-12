@@ -2,10 +2,13 @@
   <l:layout>
     <st:include it="${it.owner}" page="sidepanel.jelly" />
     <l:main-panel>
-      <h1>SQE Test Result</h1>
+      <h1>${it.displayName}</h1>
+
+      <div style="margin-top: 1em; margin-bottom: 1em;">
+        ${it.description}
+      </div>
 
       <j:set var="prev" value="${it.previousResult}" />
-
       <test:bar />
 
       <j:if test="${it.totalCount!=0}">

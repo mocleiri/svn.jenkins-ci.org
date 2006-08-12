@@ -12,4 +12,7 @@ import java.util.TreeMap;
  * @author Kohsuke Kawaguchi
  */
 public class Test extends TestCollection<Test,TestCase> {
+    public String getChildTitle() {
+        return "Test Case";
+    }
 }

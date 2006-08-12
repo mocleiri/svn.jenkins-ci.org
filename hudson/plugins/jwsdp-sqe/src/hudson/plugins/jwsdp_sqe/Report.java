@@ -65,4 +65,8 @@ public final class Report extends TestCollection<Report,Suite> {
 
         digester.parse(reportXml);
     }
+
+    public String getChildTitle() {
+        return "Test Suite";
+    }
 }
