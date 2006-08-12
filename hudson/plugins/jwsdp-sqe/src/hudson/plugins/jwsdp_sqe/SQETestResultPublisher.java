@@ -81,6 +81,10 @@ public class SQETestResultPublisher implements Publisher {
             return "Publish SQE test result report";
         }
 
+        public String getHelpFile() {
+            return "/plugin/jwsdp-sqe/help";
+        }
+
         public Publisher newInstance(HttpServletRequest req) {
             return new SQETestResultPublisher(req.getParameter("sqetest_includes"));
         }
