@@ -1,11 +1,14 @@
 package hudson;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.logging.Logger;
@@ -47,8 +50,6 @@ public final class PluginWrapper {
      */
     private final File disableFile;
 
-    private final File archive;
-
     /**
      * Short name of the plugin. The "abc" portion of "abc.hpl".
      */
@@ -56,7 +57,7 @@ public final class PluginWrapper {
 
     /**
      * @param archive
-     *      A .hudson-plugin archive file.
+     *      A .hpi archive file jar file, or a .hpl linked plugin.
      *
      * @throws IOException
      *      if an installation of this plugin failed. The caller should
@@ -65,15 +66,25 @@ public final class PluginWrapper {
     public PluginWrapper(PluginManager owner, File archive) throws IOException {
         LOGGER.info("Loading plugin: "+archive);
 
-        this.archive = archive;
         this.shortName = getShortName(archive);
 
-        JarFile jarFile = new JarFile(archive);
-        manifest = jarFile.getManifest();
-        if(manifest==null) {
-            throw new IOException("Plugin installation failed. No manifest in "+archive);
+        boolean isLinked = archive.getName().endsWith(".hpl");
+
+        if(isLinked) {
+            FileInputStream in = new FileInputStream(archive);
+            try {
+                manifest = new Manifest(in);
+            } finally {
+                in.close();
+            }
+        } else {
+            JarFile jarFile = new JarFile(archive);
+            manifest = jarFile.getManifest();
+            if(manifest==null) {
+                throw new IOException("Plugin installation failed. No manifest in "+archive);
+            }
+            jarFile.close();
         }
-        jarFile.close();
 
         disableFile = new File(archive.getPath()+".disabled");
         if(disableFile.exists()) {
@@ -84,7 +95,22 @@ public final class PluginWrapper {
         }
 
 
-        ClassLoader classLoader = new URLClassLoader(new URL[]{archive.toURL()}, getClass().getClassLoader());
+        // TODO: define a mechanism to hide classes
+        // String export = manifest.getMainAttributes().getValue("Export");
+
+        if(isLinked) {
+            String classPath = manifest.getMainAttributes().getValue("Class-Path");
+            List<URL> paths = new ArrayList<URL>();
+            for (String s : classPath.split(" +")) {
+                File file = new File(archive.getParentFile(), s);
+                if(!file.exists())
+                    throw new IOException("No such file: "+file);
+                paths.add(file.toURL());
+            }
+            this.classLoader = new URLClassLoader(paths.toArray(new URL[0]), getClass().getClassLoader());
+        } else {
+            this.classLoader = new URLClassLoader(new URL[]{archive.toURL()}, getClass().getClassLoader());
+        }
 
         String className = manifest.getMainAttributes().getValue("Plugin-Class");
         if(className ==null) {
@@ -122,13 +148,11 @@ public final class PluginWrapper {
             ioe.initCause(t);
             throw ioe;
         }
-
-        // create public classloader
-        // TODO: define a mechanism to hide classes
-        // String export = manifest.getMainAttributes().getValue("Export");
-        this.classLoader = classLoader;
     }
 
+    /**
+     * Gets the "abc" portion from "abc.ext".
+     */
     private static String getShortName(File archive) {
         String n = archive.getName();
         int idx = n.lastIndexOf('.');
@@ -141,11 +165,11 @@ public final class PluginWrapper {
      * Terminates the plugin.
      */
     void stop() {
-        LOGGER.info("Stopping "+archive);
+        LOGGER.info("Stopping "+shortName);
         try {
             plugin.stop();
         } catch(Throwable t) {
-            System.err.println("Failed to shut down "+archive);
+            System.err.println("Failed to shut down "+shortName);
             System.err.println(t);
         }
     }

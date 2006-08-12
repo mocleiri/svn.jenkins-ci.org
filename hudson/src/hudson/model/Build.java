@@ -10,8 +10,7 @@ import hudson.scm.SCM;
 import hudson.tasks.BuildStep;
 import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
-import hudson.tasks.junit.TestResult;
-import hudson.tasks.junit.TestResultAction;
+import hudson.tasks.test.AbstractTestResultAction;
 import hudson.triggers.SCMTrigger;
 import org.xml.sax.SAXException;
 
@@ -92,22 +91,10 @@ public final class Build extends Run<Project,Build> implements Runnable {
     }
 
     /**
-     * Gets {@link TestResult} associated with this build if any.
-     * This may take time on a large test result.
+     * Gets {@link AbstractTestResultAction} associated with this build if any.
      */
-    public TestResult getTestResult() {
-        TestResultAction ta = getAction(TestResultAction.class);
-        if(ta==null)    return null;
-        return ta.getResult();
-    }
-
-    /**
-     * Gets {@link TestResultAction} associated with this build if any.
-     * This works a lot faster than {@link #getTestResult()} on a large test,
-     * but it only has a limited amount of information available.
-     */
-    public TestResultAction getTestResultAction() {
-        return getAction(TestResultAction.class);
+    public AbstractTestResultAction getTestResultAction() {
+        return getAction(AbstractTestResultAction.class);
     }
 
     /**

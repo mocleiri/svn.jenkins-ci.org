@@ -137,11 +137,11 @@ public final class Hudson extends JobCollection implements Node {
             throw new IllegalStateException("second instance");
         theInstance = this;
 
-        load();
-        updateComputerList();
-
         // load plugins.
         pluginManager = new PluginManager(context);
+
+        load();
+        updateComputerList();
     }
 
     /**

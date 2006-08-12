@@ -11,6 +11,7 @@ import hudson.tasks.BuildStep;
 import hudson.tasks.BuildTrigger;
 import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
+import hudson.tasks.test.AbstractTestResultAction;
 import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.junit.TestResultAction;
 import hudson.triggers.Trigger;
@@ -639,7 +640,7 @@ public class Project extends Job<Project,Build> {
     public void doTestResultTrend( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         Build b = getLastSuccessfulBuild();
         if(b!=null) {
-            TestResultAction a = b.getTestResultAction();
+            AbstractTestResultAction a = b.getTestResultAction();
             if(a!=null) {
                 a.doGraph(req,rsp);
                 return;
