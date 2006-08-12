@@ -50,6 +50,11 @@ public final class PluginWrapper {
     private final File archive;
 
     /**
+     * Short name of the plugin. The "abc" portion of "abc.hpl".
+     */
+    private final String shortName;
+
+    /**
      * @param archive
      *      A .hudson-plugin archive file.
      *
@@ -61,6 +66,7 @@ public final class PluginWrapper {
         LOGGER.info("Loading plugin: "+archive);
 
         this.archive = archive;
+        this.shortName = getShortName(archive);
 
         JarFile jarFile = new JarFile(archive);
         manifest = jarFile.getManifest();
@@ -121,6 +127,14 @@ public final class PluginWrapper {
         // TODO: define a mechanism to hide classes
         // String export = manifest.getMainAttributes().getValue("Export");
         this.classLoader = classLoader;
+    }
+
+    private static String getShortName(File archive) {
+        String n = archive.getName();
+        int idx = n.lastIndexOf('.');
+        if(idx>=0)
+            n = n.substring(0,idx);
+        return n;
     }
 
     /**

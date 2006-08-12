@@ -1,0 +1,44 @@
+<!--
+  Config page
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:s="/lib/form">
+<l:layout>
+  <st:include page="sidepanel.jelly" />
+  <l:main-panel>
+    <s:form method="post" action="configSubmit">
+      <s:block>
+        <h1>Installed Plugins</h1>
+        <table id="pluginList">
+          <j:forEach begin="0" end="10" var="i">
+            <tr class="hoverback">
+              <td class="plugin-description">
+                <h4>Title Of The Plugin</h4>
+                <div stlyle="padding-left: 1em">
+                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores.
+                </div>
+              </td>
+              <td>
+                <input type="button" value="Enable" onclick="flip(event)"/>
+              </td>
+            </tr>
+          </j:forEach>
+        </table>
+      </s:block>
+      <s:block>
+        <div align="right">
+          <input type="submit" name="Submit" value="OK" />
+        </div>
+      </s:block>
+    </s:form>
+    <script>
+      function flip(o) {
+        btn = Event.element(o);
+        if(btn.value=="Enable")
+          btn.value = "Disable";
+        else
+          btn.value = "Enable";
+      }
+    </script>
+  </l:main-panel>
+</l:layout>
+</j:jelly>
