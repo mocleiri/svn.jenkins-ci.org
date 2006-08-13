@@ -20,8 +20,6 @@ package hudson.org.apache.tools.ant.taskdefs.cvslib;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -42,13 +40,23 @@ class ChangeLogParser {
     private static final int GET_REVISION = 4;
     private static final int GET_PREVIOUS_REV = 5;
 
-    /** input format for dates read in from cvs log */
-    private static final SimpleDateFormat c_inputDate
-        = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    /**
+     * input format for dates read in from cvs log.
+     *
+     * Some users reported that they see different formats,
+     * so this is extended from original Ant version to cover different formats.
+     */
+    private static final SimpleDateFormat[] c_inputDate
+        = new SimpleDateFormat[]{
+            new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"),
+            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"),
+        };
 
     static {
         TimeZone utc = TimeZone.getTimeZone("UTC");
-        c_inputDate.setTimeZone(utc);
+        for (SimpleDateFormat df : c_inputDate) {
+            df.setTimeZone(utc);
+        }
     }
 
     //The following is data used while processing stdout of CVS command
@@ -242,20 +250,20 @@ class ChangeLogParser {
      * @param date the string holding dat
      * @return the date object or null if unknown date format
      */
-    private Date parseDate(final String date) {
-        try {
-            return c_inputDate.parse(date);
-        } catch (ParseException e) {
-            StringWriter w = new StringWriter();
-            w.write("Failed to parse ");
-            w.write(date);
-            w.write('\n');
-            e.printStackTrace(new PrintWriter(w));
-            owner.log(w.toString(), Project.MSG_ERR);
-            //final String message = REZ.getString( "changelog.bat-date.error", date );
-            //getContext().error( message );
-            return null;
+    private Date parseDate(String date) {
+        for (SimpleDateFormat df : c_inputDate) {
+            try {
+                return df.parse(date);
+            } catch (ParseException e) {
+                // try next if one fails
+            }
         }
+
+        // nothing worked
+        owner.log("Failed to parse "+date+"\n", Project.MSG_ERR);
+        //final String message = REZ.getString( "changelog.bat-date.error", date );
+        //getContext().error( message );
+        return null;
     }
 
     /**
