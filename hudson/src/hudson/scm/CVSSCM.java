@@ -143,7 +143,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
                 cmd.add("-r",branch);
             if(flatten)
                 cmd.add("-d",dir.getName());
-            cmd.add(module);
+            cmd.addTokenized(module);
 
             if(!run(launcher,cmd,listener, flatten ? dir.getParent() : dir))
                 return false;
