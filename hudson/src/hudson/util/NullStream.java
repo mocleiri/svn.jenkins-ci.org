@@ -1,4 +1,4 @@
-package hudson;
+package hudson.util;
 
 import java.io.OutputStream;
 
