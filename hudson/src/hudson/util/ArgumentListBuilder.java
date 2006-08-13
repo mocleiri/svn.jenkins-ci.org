@@ -2,6 +2,7 @@ package hudson.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Used to build up arguments for a process invocation.
@@ -32,6 +33,16 @@ public class ArgumentListBuilder {
         for (String arg : args) {
             add(arg);
         }
+        return this;
+    }
+
+    /**
+     * Decomposes the given token into multiple arguments by splitting via whitespace.
+     */
+    public ArgumentListBuilder addTokenized(String s) {
+        StringTokenizer tokens = new StringTokenizer(s);
+        while(tokens.hasMoreTokens())
+            add(tokens.nextToken());
         return this;
     }
 
