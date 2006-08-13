@@ -54,7 +54,7 @@ foo.hpi
     <tt>.hpi</tt> file (just like a WAR file, again.)
 </ul>
 
-<h2>Manifest</h2>
+<h3>Manifest</h3>
 <p>
   <tt>META-INF/MANIFEST.MF</tt> can have all the normal entries, but
   it needs to contain two more entries for Hudson in its main section.
@@ -90,7 +90,7 @@ foo.hpi
     point, and have other plugins provide implemenations.
 </dl>
 
-<h2>Static Resources</h2>
+<h3>Static Resources</h3>
 <p>
   Static resources inside an <tt>.hpi</tt> file will be made
   accessible at <tt>${HUDSON_CONTEXT_PATH}/plugin/SHORTNAME/</tt>. For
@@ -99,7 +99,7 @@ foo.hpi
   the URL <tt>http://localhost/hudson/plugin/foo/abc/def.png</tt>
   would display the PNG file.
 
-<h2>Index.jelly for Your <tt>Plugin</tt>-derived Class</h2>
+<h3>Index.jelly for Your <tt>Plugin</tt>-derived Class</h3>
 <p>
   Your <tt>Plugin</tt> class (that you named in <tt>Plugin-Class</tt>
   manifest entry) should have <tt>index.jelly</tt> view file, which
@@ -109,7 +109,7 @@ foo.hpi
   so that the user can learn more about a plugin.
 
 
-<h2>Debug Plugin Layout: .hpl</h2>
+<h3>Debug Plugin Layout: .hpl</h3>
 <p>
   The <tt>.hpi</tt> format is primarily meant to be a distribution
   format. Just like no one debugs the web application by creating a
