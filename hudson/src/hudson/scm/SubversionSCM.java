@@ -14,6 +14,7 @@ import org.apache.commons.digester.Digester;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import org.kohsuke.stapler.StaplerRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.ParserConfigurationException;
@@ -464,7 +465,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             return "Subversion";
         }
 
-        public SCM newInstance(HttpServletRequest req) {
+        public SCM newInstance(StaplerRequest req) {
             return new SubversionSCM(
                 req.getParameter("svn_modules"),
                 req.getParameter("svn_use_update")!=null,

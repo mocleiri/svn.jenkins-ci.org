@@ -15,6 +15,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+import org.kohsuke.stapler.StaplerRequest;
+
 /**
  * Executes a series of commands by using a shell.
  *
@@ -125,7 +127,7 @@ public class Shell implements Builder {
             return "Execute shell";
         }
 
-        public Builder newInstance(HttpServletRequest req) {
+        public Builder newInstance(StaplerRequest req) {
             return new Shell(req.getParameter("shell"));
         }
 

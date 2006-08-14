@@ -3,8 +3,6 @@
 # publish Hudson javadoc and deploy that into the java.net CVS repository
 # 
 
-ant javadoc
-
 cd ../www/javadoc
 cvs update -Pd
 

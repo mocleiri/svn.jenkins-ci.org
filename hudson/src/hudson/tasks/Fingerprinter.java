@@ -11,8 +11,8 @@ import hudson.model.Project;
 import hudson.model.Result;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.types.FileSet;
+import org.kohsuke.stapler.StaplerRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -155,7 +155,7 @@ public class Fingerprinter implements Publisher {
             return "/help/project-config/fingerprint.html";
         }
 
-        public Publisher newInstance(HttpServletRequest req) {
+        public Publisher newInstance(StaplerRequest req) {
             return new Fingerprinter(
                 req.getParameter("fingerprint_targets").trim(),
                 req.getParameter("fingerprint_artifacts")!=null);

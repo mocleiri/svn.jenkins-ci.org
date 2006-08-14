@@ -9,8 +9,8 @@ import hudson.model.Project;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.taskdefs.Delete;
 import org.apache.tools.ant.types.FileSet;
+import org.kohsuke.stapler.StaplerRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 
 /**
@@ -85,7 +85,7 @@ public class ArtifactArchiver extends AntBasedBuildStep implements Publisher {
             return "/help/project-config/archive-artifact.html";
         }
 
-        public Publisher newInstance(HttpServletRequest req) {
+        public Publisher newInstance(StaplerRequest req) {
             return new ArtifactArchiver(req.getParameter("artifacts"));
         }
     };

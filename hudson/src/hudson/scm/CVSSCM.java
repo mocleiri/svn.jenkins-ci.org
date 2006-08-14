@@ -476,7 +476,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             return "CVS";
         }
 
-        public SCM newInstance(HttpServletRequest req) {
+        public SCM newInstance(StaplerRequest req) {
             return new CVSSCM(
                 req.getParameter("cvs_root"),
                 req.getParameter("cvs_module"),

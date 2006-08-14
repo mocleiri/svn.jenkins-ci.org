@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import org.kohsuke.stapler.StaplerRequest;
+
 /**
  * Deletes old log files.
  *
@@ -92,7 +94,7 @@ public class LogRotator implements Describable<LogRotator> {
             return "Log Rotation";
         }
 
-        public LogRotator newInstance(HttpServletRequest req) {
+        public LogRotator newInstance(StaplerRequest req) {
             return new LogRotator(
                     parse(req,"logrotate_days"),
                     parse(req,"logrotate_nums") );

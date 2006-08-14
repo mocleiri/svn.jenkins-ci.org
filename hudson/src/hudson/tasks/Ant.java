@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+import org.kohsuke.stapler.StaplerRequest;
+
 /**
  * @author Kohsuke Kawaguchi
  */
@@ -144,7 +146,7 @@ public class Ant implements Builder {
             return r;
         }
 
-        public Builder newInstance(HttpServletRequest req) {
+        public Builder newInstance(StaplerRequest req) {
             return new Ant(req.getParameter("ant_targets"),req.getParameter("ant_version"));
         }
     }

@@ -2,6 +2,7 @@ package hudson;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
+import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.ant.taskdefs.Expand;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -126,9 +127,20 @@ public final class PluginWrapper {
             String classPath = manifest.getMainAttributes().getValue("Class-Path");
             for (String s : classPath.split(" +")) {
                 File file = new File(archive.getParentFile(), s);
-                if(!file.exists())
-                    throw new IOException("No such file: "+file);
-                paths.add(file.toURL());
+                if(file.getName().contains("*")) {
+                    // handle wildcard
+                    FileSet fs = new FileSet();
+                    File dir = file.getParentFile();
+                    fs.setDir(dir);
+                    fs.setIncludes(file.getName());
+                    for( String included : fs.getDirectoryScanner(new Project()).getIncludedFiles() ) {
+                        paths.add(new File(dir,included).toURL());
+                    }
+                } else {
+                    if(!file.exists())
+                        throw new IOException("No such file: "+file);
+                    paths.add(file.toURL());
+                }
             }
 
             this.baseResourceURL = new File(archive.getParentFile(),

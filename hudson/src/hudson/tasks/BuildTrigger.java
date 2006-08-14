@@ -9,8 +9,9 @@ import hudson.model.Job;
 import hudson.model.Project;
 import hudson.model.Result;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+
+import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * Triggers builds of other projects.
@@ -103,7 +104,7 @@ public class BuildTrigger implements Publisher {
             return "Build other projects";
         }
 
-        public Publisher newInstance(HttpServletRequest req) {
+        public Publisher newInstance(StaplerRequest req) {
             return new BuildTrigger(req.getParameter("childProjects"));
         }
     };

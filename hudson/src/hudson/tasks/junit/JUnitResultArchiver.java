@@ -7,13 +7,11 @@ import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Result;
 import hudson.tasks.AntBasedBuildStep;
-import hudson.tasks.BuildStep;
 import hudson.tasks.Publisher;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.FileSet;
-
-import javax.servlet.http.HttpServletRequest;
+import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * Generates HTML report from JUnit test result XML files.
@@ -84,7 +82,7 @@ public class JUnitResultArchiver extends AntBasedBuildStep implements Publisher 
             return "Publish JUnit test result report";
         }
 
-        public Publisher newInstance(HttpServletRequest req) {
+        public Publisher newInstance(StaplerRequest req) {
             return new JUnitResultArchiver(req.getParameter("junitreport_includes"));
         }
     };

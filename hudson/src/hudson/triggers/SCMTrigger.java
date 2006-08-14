@@ -9,7 +9,6 @@ import hudson.model.Project;
 import hudson.model.TaskListener;
 import hudson.util.StreamTaskListener;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,6 +17,8 @@ import java.io.PrintStream;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * {@link Trigger} that checks for SCM updates periodically.
@@ -158,7 +159,7 @@ public class SCMTrigger extends Trigger {
             return "/help/project-config/poll-scm.html";
         }
 
-        public Trigger newInstance(HttpServletRequest req) throws FormException {
+        public Trigger newInstance(StaplerRequest req) throws FormException {
             try {
                 return new SCMTrigger(req.getParameter("scmpoll_spec"));
             } catch (ANTLRException e) {

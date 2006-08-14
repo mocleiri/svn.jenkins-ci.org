@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
+import org.kohsuke.stapler.StaplerRequest;
+
 /**
  * Sends the build result in e-mail.
  *
@@ -257,7 +259,7 @@ public class Mailer implements Publisher {
             return (String)getProperties().get("mail.hudson.url");
         }
 
-        public Publisher newInstance(HttpServletRequest req) {
+        public Publisher newInstance(StaplerRequest req) {
             return new Mailer(
                 req.getParameter("mailer_recipients"),
                 req.getParameter("mailer_not_every_unstable")!=null

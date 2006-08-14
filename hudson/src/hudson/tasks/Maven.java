@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+import org.kohsuke.stapler.StaplerRequest;
+
 /**
  * Build by using Maven.
  *
@@ -150,7 +152,7 @@ public class Maven implements Builder {
             return r;
         }
 
-        public Builder newInstance(HttpServletRequest req) {
+        public Builder newInstance(StaplerRequest req) {
             return new Maven(req.getParameter("maven_targets"),req.getParameter("maven_version"));
         }
     }

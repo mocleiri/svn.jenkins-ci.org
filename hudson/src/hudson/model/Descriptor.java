@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.kohsuke.stapler.StaplerRequest;
+
 /**
  * Metadata about a configurable instance.
  *
@@ -51,7 +53,7 @@ public abstract class Descriptor<T extends Describable<T>> {
      * @throws FormException
      *      Signals a problem in the submitted form.
      */
-    public abstract T newInstance(HttpServletRequest req) throws FormException;
+    public abstract T newInstance(StaplerRequest req) throws FormException;
 
     /**
      * Returns the resource path to the help screen HTML, if any.

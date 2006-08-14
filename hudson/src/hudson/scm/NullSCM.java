@@ -8,10 +8,11 @@ import hudson.model.Descriptor;
 import hudson.model.Project;
 import hudson.model.TaskListener;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+
+import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * No {@link SCM}.
@@ -49,7 +50,7 @@ public class NullSCM implements SCM {
             return "None";
         }
 
-        public SCM newInstance(HttpServletRequest req) {
+        public SCM newInstance(StaplerRequest req) {
             return new NullSCM();
         }
     };

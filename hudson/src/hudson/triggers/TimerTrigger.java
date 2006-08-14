@@ -3,7 +3,7 @@ package hudson.triggers;
 import antlr.ANTLRException;
 import hudson.model.Descriptor;
 
-import javax.servlet.http.HttpServletRequest;
+import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * {@link Trigger} that runs a job periodically.
@@ -32,7 +32,7 @@ public class TimerTrigger extends Trigger {
             return "/help/project-config/timer.html";
         }
 
-        public Trigger newInstance(HttpServletRequest req) throws FormException {
+        public Trigger newInstance(StaplerRequest req) throws FormException {
             try {
                 return new TimerTrigger(req.getParameter("timer_spec"));
             } catch (ANTLRException e) {

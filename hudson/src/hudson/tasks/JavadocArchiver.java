@@ -14,7 +14,6 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 
@@ -91,7 +90,7 @@ public class JavadocArchiver extends AntBasedBuildStep implements Publisher {
             return "Publish javadoc";
         }
 
-        public Publisher newInstance(HttpServletRequest req) {
+        public Publisher newInstance(StaplerRequest req) {
             return new JavadocArchiver(req.getParameter("javadoc_dir"));
         }
     };
