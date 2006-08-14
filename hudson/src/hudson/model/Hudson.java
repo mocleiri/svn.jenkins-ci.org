@@ -126,7 +126,7 @@ public final class Hudson extends JobCollection implements Node {
     /**
      * Loaded plugins.
      */
-    public final PluginManager pluginManager;
+    public transient final PluginManager pluginManager;
 
     public static Hudson getInstance() {
         return theInstance;
