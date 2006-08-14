@@ -10,10 +10,9 @@ import hudson.scm.SCMS;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildTrigger;
 import hudson.tasks.Builder;
+import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.Publisher;
 import hudson.tasks.test.AbstractTestResultAction;
-import hudson.tasks.Fingerprinter.FingerprintAction;
-import hudson.tasks.junit.TestResultAction;
 import hudson.triggers.Trigger;
 import hudson.triggers.Triggers;
 import org.kohsuke.stapler.Ancestor;
@@ -561,7 +560,8 @@ public class Project extends Job<Project,Build> {
                 List<Project> newChildProjects = p.getDownstreamProjects();
 
                 if(isUpstream) {
-                    newChildProjects.add(this);
+                    if(!newChildProjects.contains(this))
+                        newChildProjects.add(this);
                 } else {
                     newChildProjects.remove(this);
                 }
