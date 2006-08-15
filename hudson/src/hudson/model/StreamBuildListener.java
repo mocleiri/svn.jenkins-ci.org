@@ -1,6 +1,6 @@
 package hudson.model;
 
-import uk.ltd.getahead.dwr.util.WriterOutputStream;
+import hudson.util.WriterOutputStream;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
