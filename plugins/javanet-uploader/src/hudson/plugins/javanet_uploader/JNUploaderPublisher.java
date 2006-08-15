@@ -56,6 +56,11 @@ public class JNUploaderPublisher implements Publisher {
         try {
             JavaNet jn = JavaNet.connect();
             JNProject project = jn.getProject(this.project);
+            if(!project.exists()) {
+                listener.error("No such project exists: "+project);
+                build.setResult(Result.FAILURE);
+                return true;
+            }
 
             for (Entry e : entries) {
                 String folderPath = e.getFilePath();
