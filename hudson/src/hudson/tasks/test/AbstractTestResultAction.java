@@ -2,31 +2,31 @@ package hudson.tasks.test;
 
 import hudson.model.Action;
 import hudson.model.Build;
-import hudson.model.Result;
 import hudson.model.Project;
+import hudson.model.Result;
 import hudson.util.DataSetBuilder;
 import hudson.util.ShiftedCategoryAxis;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.jfree.chart.JFreeChart;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.renderer.category.AreaRenderer;
-import org.jfree.chart.renderer.AreaRendererEndType;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.AreaRendererEndType;
+import org.jfree.chart.renderer.category.AreaRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.ui.RectangleInsets;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
-import javax.servlet.ServletOutputStream;
 import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.awt.image.BufferedImage;
-import java.awt.HeadlessException;
+import javax.servlet.ServletOutputStream;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * Common base class for recording test result.
@@ -67,6 +67,10 @@ public abstract class AbstractTestResultAction<T extends AbstractTestResultActio
     }
 
     public T getPreviousResult() {
+        return (T)getPreviousResult(getClass());
+    }
+
+    private <U extends AbstractTestResultAction> U getPreviousResult(Class<U> type) {
         Build b = owner;
         while(true) {
             b = b.getPreviousBuild();
@@ -74,7 +78,7 @@ public abstract class AbstractTestResultAction<T extends AbstractTestResultActio
                 return null;
             if(b.getResult()== Result.FAILURE)
                 continue;
-            T r = (T)b.getAction(getClass());
+            U r = b.getAction(type);
             if(r!=null)
                 return r;
         }
@@ -123,7 +127,7 @@ public abstract class AbstractTestResultAction<T extends AbstractTestResultActio
 
             DataSetBuilder<String,BuildLabel> dsb = new DataSetBuilder<String,BuildLabel>();
 
-            for( AbstractTestResultAction a=this; a!=null; a=a.getPreviousResult() ) {
+            for( AbstractTestResultAction<?> a=this; a!=null; a=a.getPreviousResult(AbstractTestResultAction.class) ) {
                 dsb.add( a.getFailCount(), "failed", new BuildLabel(a.owner));
                 if(!failureOnly)
                     dsb.add( a.getTotalCount()-a.getFailCount(),"total", new BuildLabel(a.owner));
