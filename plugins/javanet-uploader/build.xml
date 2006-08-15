@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<project name="javanet-uploader" default="jar">
+
+  <target name="compile" >
+    <mkdir dir="build/classes"/>
+    <javac srcdir="src" destdir="build/classes" debug="on">
+      <classpath>
+        <fileset dir="../../resources/WEB-INF/lib" includes="**/*.jar"/>
+        <pathelement path="../../build/classes" />
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="jar" depends="compile">
+    <jar destfile="build/javanet-uploader.hpi">
+      <zipfileset dir="build/classes" prefix="WEB-INF/classes"/>
+      <zipfileset dir="views" prefix="WEB-INF/classes"/>
+      <zipfileset dir="resources" />
+      <zipfileset dir="lib" prefix="WEB-INF/lib" />
+      <manifest>
+        <attribute name="Build-Id" value="${build.version}"/>
+        <attribute name="Plugin-Class" value="hudson.plugins.javanet_uploader.PluginImpl" />
+        <attribute name="Long-Name" value="Java.net file uploader plug-in" />
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="clean">
+    <delete dir="build"/>
+  </target>
+
+  <target name="deploy" depends="jar">
+    <copy todir="../../../work/plugins" file="build/javanet-uploader.hpi" />
+  </target>
+</project>
