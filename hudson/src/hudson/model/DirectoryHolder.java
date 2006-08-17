@@ -140,10 +140,10 @@ public abstract class DirectoryHolder extends Actionable {
                 l.add(p);
                 String relPath = f.getName();
                 while(true) {
-                    // files that don't start with '.' qualify for 'meaningful files', nor 'CVS'
+                    // files that don't start with '.' qualify for 'meaningful files', nor SCM related files
                     File[] sub = f.listFiles(new FilenameFilter() {
                         public boolean accept(File dir, String name) {
-                            return !name.startsWith(".") && !name.equals("CVS");
+                            return !name.startsWith(".") && !name.equals("CVS") && !name.equals(".svn");
                         }
                     });
                     if(sub.length!=1 || !sub[0].isDirectory())
