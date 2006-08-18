@@ -26,7 +26,7 @@ var hudsonRules = {
     }
   },
 
-  ".help" : function(e) {
+  ".help-button" : function(e) {
     e.onclick = function() {
       // identify the parent TR
       var tr = this;
@@ -55,6 +55,8 @@ var hudsonRules = {
       } else {
         div.style.display = "none";
       }
+
+      return false;
     }
   }
 };
