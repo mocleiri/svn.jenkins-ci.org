@@ -5,8 +5,10 @@
     <mkdir dir="build/classes"/>
     <javac srcdir="src" destdir="build/classes" debug="on">
       <classpath>
-        <fileset dir="../../resources/WEB-INF/lib" includes="**/*.jar"/>
-        <pathelement path="../../build/classes" />
+        <fileset dir="../../hudson/resources/WEB-INF/lib" includes="**/*.jar"/>
+        <fileset dir="../../hudson/lib" includes="**/*.jar"/>
+        <fileset dir="lib" includes="**/*.jar"/>
+        <pathelement path="../../hudson/build/classes" />
       </classpath>
     </javac>
   </target>
