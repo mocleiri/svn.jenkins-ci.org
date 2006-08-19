@@ -4,9 +4,9 @@ import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.Project;
 import hudson.model.Result;
+import hudson.util.ChartUtil;
 import hudson.util.DataSetBuilder;
 import hudson.util.ShiftedCategoryAxis;
-import hudson.util.ChartUtil;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
@@ -21,11 +21,7 @@ import org.jfree.ui.RectangleInsets;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
 import java.awt.Color;
-import java.awt.HeadlessException;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
