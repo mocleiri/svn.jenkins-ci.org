@@ -6,6 +6,7 @@ import hudson.model.Project;
 import hudson.model.Result;
 import hudson.util.DataSetBuilder;
 import hudson.util.ShiftedCategoryAxis;
+import hudson.util.ChartUtil;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
@@ -23,7 +24,6 @@ import org.kohsuke.stapler.StaplerResponse;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -88,64 +88,51 @@ public abstract class AbstractTestResultAction<T extends AbstractTestResultActio
      * Generates a PNG image for the test result trend.
      */
     public void doGraph( StaplerRequest req, StaplerResponse rsp) throws IOException {
-        if(awtProblem) {
+        if(ChartUtil.awtProblem) {
             // not available. send out error message
             rsp.sendRedirect2(req.getContextPath()+"/images/headless.png");
             return;
         }
 
-        try {
-            if(req.checkIfModified(owner.getTimestamp(),rsp))
-                return;
+        if(req.checkIfModified(owner.getTimestamp(),rsp))
+            return;
 
-            class BuildLabel implements Comparable<BuildLabel> {
-                private final Build build;
+        class BuildLabel implements Comparable<BuildLabel> {
+            private final Build build;
 
-                public BuildLabel(Build build) {
-                    this.build = build;
-                }
-
-                public int compareTo(BuildLabel that) {
-                    return this.build.number-that.build.number;
-                }
-
-                public boolean equals(Object o) {
-                    BuildLabel that = (BuildLabel) o;
-                    return build==that.build;
-                }
-
-                public int hashCode() {
-                    return build.hashCode();
-                }
-
-                public String toString() {
-                    return build.getDisplayName();
-                }
+            public BuildLabel(Build build) {
+                this.build = build;
             }
 
-            boolean failureOnly = Boolean.valueOf(req.getParameter("failureOnly"));
-
-            DataSetBuilder<String,BuildLabel> dsb = new DataSetBuilder<String,BuildLabel>();
-
-            for( AbstractTestResultAction<?> a=this; a!=null; a=a.getPreviousResult(AbstractTestResultAction.class) ) {
-                dsb.add( a.getFailCount(), "failed", new BuildLabel(a.owner));
-                if(!failureOnly)
-                    dsb.add( a.getTotalCount()-a.getFailCount(),"total", new BuildLabel(a.owner));
+            public int compareTo(BuildLabel that) {
+                return this.build.number-that.build.number;
             }
 
-            String w = req.getParameter("width");
-            if(w==null)     w="500";
-            String h = req.getParameter("height");
-            if(h==null)     h="200";
-            BufferedImage image = createChart(dsb.build()).createBufferedImage(Integer.parseInt(w),Integer.parseInt(h));
-            rsp.setContentType("image/png");
-            ServletOutputStream os = rsp.getOutputStream();
-            ImageIO.write(image, "PNG", os);
-            os.close();
-        } catch(HeadlessException e) {
-            // not available. send out error message
-            rsp.sendRedirect2(req.getContextPath()+"/images/headless.png");
+            public boolean equals(Object o) {
+                BuildLabel that = (BuildLabel) o;
+                return build==that.build;
+            }
+
+            public int hashCode() {
+                return build.hashCode();
+            }
+
+            public String toString() {
+                return build.getDisplayName();
+            }
         }
+
+        boolean failureOnly = Boolean.valueOf(req.getParameter("failureOnly"));
+
+        DataSetBuilder<String,BuildLabel> dsb = new DataSetBuilder<String,BuildLabel>();
+
+        for( AbstractTestResultAction<?> a=this; a!=null; a=a.getPreviousResult(AbstractTestResultAction.class) ) {
+            dsb.add( a.getFailCount(), "failed", new BuildLabel(a.owner));
+            if(!failureOnly)
+                dsb.add( a.getTotalCount()-a.getFailCount(),"total", new BuildLabel(a.owner));
+        }
+
+        ChartUtil.generateGraph(req,rsp,createChart(dsb.build()),500,200);
     }
 
     private JFreeChart createChart(CategoryDataset dataset) {
@@ -200,18 +187,5 @@ public abstract class AbstractTestResultAction<T extends AbstractTestResultActio
         plot.setInsets(new RectangleInsets(0,0,0,5.0));
 
         return chart;
-    }
-
-    /**
-     * See issue 93. Detect an error in X11 and handle it gracefully.
-     */
-    private static boolean awtProblem = false;
-
-    static {
-        try {
-            new Font("SansSerif",Font.BOLD,18).toString();
-        } catch (Throwable t) {
-            awtProblem = true;
-        }
     }
 }

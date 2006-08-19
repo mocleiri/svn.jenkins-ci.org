@@ -14,4 +14,4 @@ cp -R ../../hudson/build/javadoc/* .
 find . -name CVS -prune -o -exec bash in-cvs.sh {} \; -o \( -print -a -exec cvs add {} \+ \)
 
 # sometimes the first commit fails
-# cvs commit -m "commit 1 " || cvs commit -m "commit 2"
+cvs commit -m "commit 1 " || cvs commit -m "commit 2"
