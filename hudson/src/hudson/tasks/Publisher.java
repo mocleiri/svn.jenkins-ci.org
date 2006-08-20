@@ -7,5 +7,5 @@ import hudson.model.Describable;
  *
  * @author Kohsuke Kawaguchi
  */
-public interface Publisher extends BuildStep, Describable<Publisher> {
+public abstract class Publisher implements BuildStep, Describable<Publisher> {
 }

@@ -18,7 +18,7 @@ import org.kohsuke.stapler.StaplerRequest;
 /**
  * @author Kohsuke Kawaguchi
  */
-public class Ant implements Builder {
+public class Ant extends Builder {
 
     private final String targets;
 

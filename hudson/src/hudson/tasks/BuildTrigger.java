@@ -18,7 +18,7 @@ import org.kohsuke.stapler.StaplerRequest;
  *
  * @author Kohsuke Kawaguchi
  */
-public class BuildTrigger implements Publisher {
+public class BuildTrigger extends Publisher {
 
     /**
      * Comma-separated list of other projects to be scheduled.

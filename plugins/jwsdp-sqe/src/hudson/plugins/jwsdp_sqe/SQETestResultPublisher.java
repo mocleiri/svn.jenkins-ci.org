@@ -17,7 +17,7 @@ import org.kohsuke.stapler.StaplerRequest;
  *
  * @author Kohsuke Kawaguchi
  */
-public class SQETestResultPublisher implements Publisher {
+public class SQETestResultPublisher extends Publisher {
 
     private final String includes;
 

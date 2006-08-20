@@ -20,7 +20,7 @@ import org.kohsuke.stapler.StaplerRequest;
  *
  * @author Kohsuke Kawaguchi
  */
-public class Maven implements Builder {
+public class Maven extends Builder {
 
     private final String targets;
 

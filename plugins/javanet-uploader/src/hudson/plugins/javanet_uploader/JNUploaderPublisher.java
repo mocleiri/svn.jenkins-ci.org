@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author Kohsuke Kawaguchi
  */
-public class JNUploaderPublisher implements Publisher {
+public class JNUploaderPublisher extends Publisher {
 
     /**
      * Name of the java.net project to post a file to.

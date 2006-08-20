@@ -11,7 +11,7 @@ import org.apache.tools.ant.Task;
  *
  * @author Kohsuke Kawaguchi
  */
-public abstract class AntBasedBuildStep implements BuildStep {
+public abstract class AntBasedPublisher extends Publisher {
     protected final void execTask(Task task, BuildListener listener) {
         try {
             task.execute();

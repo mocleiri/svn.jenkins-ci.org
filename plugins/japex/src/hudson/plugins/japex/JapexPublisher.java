@@ -17,7 +17,7 @@ import java.io.File;
  *
  * @author Kohsuke Kawaguchi
  */
-public class JapexPublisher implements Publisher {
+public class JapexPublisher extends Publisher {
     /**
      * Relative path to the Japex XML report file.
      */

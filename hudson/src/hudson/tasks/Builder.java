@@ -7,5 +7,5 @@ import hudson.model.Describable;
  *
  * @author Kohsuke Kawaguchi
  */
-public interface Builder extends BuildStep, Describable<Builder> {
+public abstract class Builder implements BuildStep, Describable<Builder> {
 }

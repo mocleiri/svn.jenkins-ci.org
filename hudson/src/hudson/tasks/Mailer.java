@@ -32,7 +32,7 @@ import org.kohsuke.stapler.StaplerRequest;
  *
  * @author Kohsuke Kawaguchi
  */
-public class Mailer implements Publisher {
+public class Mailer extends Publisher {
 
     private static final int MAX_LOG_LINES = 250;
 

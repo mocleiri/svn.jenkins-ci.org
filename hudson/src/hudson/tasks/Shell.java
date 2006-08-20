@@ -22,7 +22,7 @@ import org.kohsuke.stapler.StaplerRequest;
  *
  * @author Kohsuke Kawaguchi
  */
-public class Shell implements Builder {
+public class Shell extends Builder {
     private final String command;
 
     public Shell(String command) {

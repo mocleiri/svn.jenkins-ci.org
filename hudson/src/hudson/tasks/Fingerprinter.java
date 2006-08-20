@@ -32,7 +32,7 @@ import java.util.logging.Logger;
  *
  * @author Kohsuke Kawaguchi
  */
-public class Fingerprinter implements Publisher {
+public class Fingerprinter extends Publisher {
 
     /**
      * Comma-separated list of files/directories to be fingerprinted.
