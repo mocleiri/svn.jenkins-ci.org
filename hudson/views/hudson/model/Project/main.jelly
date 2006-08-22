@@ -36,12 +36,12 @@
   <table style="margin-top: 1em; margin-left:1em;">
 
     <j:forEach var="act" items="${it.prominentActions}">
-      <t:summary icon="${act.iconFileName}">
-        <a href="${act.urlName}">${act.displayName}</a>
+      <t:summary icon="${act.iconFileName}" href="${act.urlName}">
+        ${act.displayName}
       </t:summary>
     </j:forEach>
-    <t:summary icon="folder.gif">
-      <a href="ws">Workspace</a>
+    <t:summary icon="folder.gif" href="ws/">
+      Workspace
     </t:summary>
 
     <t:artifactList caption="Latest Artifacts"

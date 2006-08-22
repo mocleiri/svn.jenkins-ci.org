@@ -2,18 +2,20 @@
   <l:layout>
     <st:include it="${it.project}" page="sidepanel.jelly" />
     <l:main-panel>
-      <h1><img src="${rootURL}/images/32x32/graph.gif"/>Japex Report</h1>
+      <h1>Japex Report</h1>
 
       <j:choose>
         <j:when test="${it.hasReports()}">
           <p>
             This project contains multiple reports
           </p>
-          <ol>
+          <table>
             <j:forEach var="rpt" items="${it.reports}">
-              <li><a href="${rpt.displayName}/">${rpt.displayName}</a></li>
+              <t:summary icon="graph.gif" href="${rpt.displayName}/">
+                ${rpt.displayName}
+              </t:summary>
             </j:forEach>
-          </ol>
+          </table>
         </j:when>
         <j:otherwise>
           <p>
