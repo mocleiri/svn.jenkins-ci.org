@@ -7,10 +7,15 @@ import org.kohsuke.stapler.StaplerResponse;
 import java.io.IOException;
 
 /**
+ * Model object that represents the generated trend chart for one test case.
+ *
  * @author Kohsuke Kawaguchi
  */
 public class TestCaseGraph {
     private final TrendReport owner;
+    /**
+     * Test case name.
+     */
     private final String name;
 
     public TestCaseGraph(TrendReport owner, String name) {

@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * Generates trend charts.
+ *
  * @author Kohsuke Kawaguchi
  */
 final class HudsonChartGenerator extends ChartGenerator {

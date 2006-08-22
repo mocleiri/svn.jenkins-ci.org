@@ -11,7 +11,8 @@ import java.io.IOException;
 import java.util.Collection;
 
 /**
- * Represents per-configuration trend report.
+ * Represents a trend report.
+ *
  * @author Kohsuke Kawaguchi
  */
 public class TrendReport implements ModelObject {
