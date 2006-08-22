@@ -1,12 +1,10 @@
 package hudson.plugins.japex;
 
-import com.sun.japex.report.ChartGenerator;
 import com.sun.japex.report.TestSuiteReport;
-import com.sun.japex.report.MeanMode;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.Project;
-import hudson.util.ChartUtil;
+import org.kohsuke.stapler.StaplerProxy;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.xml.sax.SAXException;
@@ -15,15 +13,18 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Collection;
+import java.util.Map.Entry;
 
 /**
  * Project action to display trend reports.
  *
  * @author Kohsuke Kawaguchi
  */
-public class JapexReportAction implements Action {
+public class JapexReportAction implements Action, StaplerProxy {
     private final Project project;
 
     public JapexReportAction(Project project) {
@@ -47,90 +48,108 @@ public class JapexReportAction implements Action {
     }
 
     /**
-     * Cached {@link ChartGenerator}.
+     * Cached {@link TrendReport}s, keyed by their configuration name.
      */
-    private WeakReference<HudsonChartGenerator> chartGen = null;
+    private WeakReference<Parsed> cache;
+
+    private final class Parsed {
+        final Map<String,TrendReport> reports = new HashMap<String,TrendReport>();
+        final int buildNumber;
+        final TrendReport singleton;
+
+        public Parsed(Build build, Map<String,List<TestSuiteReport>> reports) {
+            this.buildNumber = build.getNumber();
+            for (Entry<String,List<TestSuiteReport>> e : reports.entrySet()) {
+                this.reports.put(e.getKey(),
+                    new TrendReport(project, e.getKey(), new HudsonChartGenerator(e.getValue(),build)));
+            }
+            if(reports.size()==1)
+                singleton = this.reports.values().iterator().next();
+            else
+                singleton = null;
+        }
+    }
+
+    public TrendReport getReport(String configName) throws IOException {
+        return parseReports().reports.get(configName);
+    }
+
+    public TrendReport getDynamic(String token, StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        return getReport(token);
+    }
+
+    public Collection<TrendReport> getReports() throws IOException {
+        return parseReports().reports.values();
+    }
+
+    /**
+     * If there's only one {@link TrendReport}, simply display that report
+     * on this view.
+     */
+    public Object getTarget() {
+        try {
+            Parsed parsed = parseReports();
+            if(parsed.singleton!=null) {
+                // forward to that single test report
+                return parsed.singleton;
+            } else {
+                return this;
+            }
+        } catch (IOException e) {
+            // this should cause index view to be displayed on this object,
+            // which should report the parse failure
+            return this;
+        }
+    }
 
     /**
      * Creates the {@link HudsonChartGenerator} (or reuse the last one.)
      */
-    /*package*/ synchronized HudsonChartGenerator createGenerator() throws IOException {
+    /*package*/ synchronized Parsed parseReports() throws IOException {
         Build lb = project.getLastBuild();
 
-        if(chartGen!=null) {
-            HudsonChartGenerator gen = chartGen.get();
-            if(gen!=null && lb!=null && gen.buildNumber==lb.getNumber())
-                return gen; // reuse the cached instance
+        if(cache!=null) {
+            Parsed parsed = cache.get();
+            if(parsed!=null && lb!=null && parsed.buildNumber==lb.getNumber())
+                return parsed; // reuse the cached instance
         }
 
-        List<TestSuiteReport> reports = new ArrayList<TestSuiteReport>();
+        // parse reports
+        Map<String,List<TestSuiteReport>> reports = new HashMap<String,List<TestSuiteReport>>();
         for (Build build : project.getBuilds()) {
-            File f = JapexPublisher.getJapexReport(build);
-            if(f.exists())
-                try {
-                    reports.add(new TestSuiteReport(f));
-                } catch (SAXException e) {
-                    IOException x = new IOException("Failed to parse " + f);
-                    x.initCause(e);
-                    throw x;
-                } catch (RuntimeException e) {
-                    // Japex sometimes intentionally send RuntimeException
-                    IOException x = new IOException("Failed to parse " + f);
-                    x.initCause(e);
-                    throw x;
+            File dir = JapexPublisher.getJapexReport(build);
+            File[] files = dir.listFiles();
+            if(files!=null) {
+                for (File f : files) {
+                    try {
+                        TestSuiteReport rpt = new TestSuiteReport(f);
+                        String configName = rpt.getParameters().get("configFile").replace('/','.');
+
+                        List<TestSuiteReport> reportList = reports.get(configName);
+                        if(reportList==null) {
+                            reportList = new ArrayList<TestSuiteReport>();
+                            reports.put(configName,reportList);
+                        }
+
+                        reportList.add(rpt);
+                    } catch (SAXException e) {
+                        IOException x = new IOException("Failed to parse " + f);
+                        x.initCause(e);
+                        throw x;
+                    } catch (RuntimeException e) {
+                        // Japex sometimes intentionally send RuntimeException
+                        IOException x = new IOException("Failed to parse " + f);
+                        x.initCause(e);
+                        throw x;
+                    }
                 }
+            }
         }
 
-        HudsonChartGenerator gen = new HudsonChartGenerator(reports,lb);
-        chartGen = new WeakReference<HudsonChartGenerator>(gen);
+        Parsed parsed = new Parsed(lb,reports);
 
-        return gen;
-    }
+        cache = new WeakReference<Parsed>(parsed);
 
-    /**
-     * Gets all the test case names.
-     */
-    public Collection<String> getTestCaseNames() throws IOException {
-        return createGenerator().getTestNames();
-    }
-
-//
-//
-// Web methods
-//
-//
-
-    /**
-     * Gets to the object that represents individual test caase result.
-     */
-    public TestCaseGraph getTestCaseGraph(String name) {
-        return new TestCaseGraph(this,name);
-    }
-
-    public void doArithmeticMeanGraph(StaplerRequest req, StaplerResponse rsp) throws IOException {
-        doMeanGraph(req,rsp, MeanMode.ARITHMETIC);
-    }
-
-    public void doGeometricMeanGraph(StaplerRequest req, StaplerResponse rsp) throws IOException {
-        doMeanGraph(req,rsp, MeanMode.GEOMETRIC);
-    }
-
-    public void doHarmonicMeanGraph(StaplerRequest req, StaplerResponse rsp) throws IOException {
-        doMeanGraph(req,rsp, MeanMode.HARMONIC);
-    }
-
-    private void doMeanGraph(StaplerRequest req, StaplerResponse rsp, MeanMode mean) throws IOException {
-        if(ChartUtil.awtProblem) {
-            // not available. send out error message
-            rsp.sendRedirect2(req.getContextPath()+"/images/headless.png");
-            return;
-        }
-
-        HudsonChartGenerator gen = createGenerator();
-
-        if(gen.timestamp!=null && req.checkIfModified(gen.timestamp,rsp))
-            return; // up to date
-
-        ChartUtil.generateGraph(req,rsp,gen.createTrendChart(mean),400,200);
+        return parsed;
     }
 }

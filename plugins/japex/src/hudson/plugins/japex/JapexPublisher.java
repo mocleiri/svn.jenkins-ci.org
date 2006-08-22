@@ -1,13 +1,17 @@
 package hudson.plugins.japex;
 
+import com.sun.japex.report.TestSuiteReport;
 import hudson.Launcher;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Project;
+import hudson.model.Result;
 import hudson.tasks.Publisher;
+import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.taskdefs.Copy;
+import org.apache.tools.ant.types.FileSet;
 import org.kohsuke.stapler.StaplerRequest;
 
 import java.io.File;
@@ -19,7 +23,7 @@ import java.io.File;
  */
 public class JapexPublisher extends Publisher {
     /**
-     * Relative path to the Japex XML report file.
+     * Relative path to the Japex XML report files.
      */
     private String includes;
 
@@ -36,23 +40,65 @@ public class JapexPublisher extends Publisher {
     }
 
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
-        File file = new File(build.getProject().getWorkspace().getLocal(), includes);
-        listener.getLogger().println("Recording japex report "+file);
+        listener.getLogger().println("Recording japex reports "+includes);
 
-        Copy copy = new Copy();
-        copy.setProject(new org.apache.tools.ant.Project());
-        copy.setFile(file);
-        copy.setTofile(getJapexReport(build));
-        copy.execute();
+        org.apache.tools.ant.Project antProject = new org.apache.tools.ant.Project();
+
+        FileSet fs = new FileSet();
+        fs.setDir(build.getProject().getWorkspace().getLocal());
+        fs.setIncludes(includes);
+
+        DirectoryScanner ds = fs.getDirectoryScanner(antProject);
+        String[] includedFiles = ds.getIncludedFiles();
+
+        if(includedFiles.length==0) {
+            listener.error("No matching file found. Configuration error?");
+            build.setResult(Result.FAILURE);
+            return true;
+        }
+
+        File outDir = getJapexReport(build);
+        outDir.mkdir();
+
+        for (String f : includedFiles) {
+            File file = new File(ds.getBasedir(),f);
+
+            if(file.lastModified()<build.getTimestamp().getTimeInMillis()) {
+                listener.getLogger().println("Ignoring old file: "+file);
+                continue;
+            }
+
+            listener.getLogger().println(file);
+
+            String configName;
+
+            try {
+                TestSuiteReport rpt = new TestSuiteReport(file);
+                configName = rpt.getParameters().get("configFile").replace('/','.');
+            } catch (Exception e) {
+                // TestSuiteReport ctor does throw RuntimeException
+                e.printStackTrace(listener.error(e.getMessage()));
+                continue;
+            }
+
+            // copy
+            File dst = new File(outDir,configName);
+
+            Copy copy = new Copy();
+            copy.setProject(antProject);
+            copy.setFile(file);
+            copy.setTofile(dst);
+            copy.execute();
+        }
 
         return true;
     }
 
     /**
-     * Gets the location of the report file for the given build.
+     * Gets the directory to store report files
      */
     static File getJapexReport(Build build) {
-        return new File(build.getRootDir(),"japex.xml");
+        return new File(build.getRootDir(),"japex");
     }
 
     public Action getProjectAction(Project project) {

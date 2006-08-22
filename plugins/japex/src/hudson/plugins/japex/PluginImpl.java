@@ -1,7 +1,7 @@
 package hudson.plugins.japex;
 
-import hudson.tasks.BuildStep;
 import hudson.Plugin;
+import hudson.tasks.BuildStep;
 
 /**
  * @author Kohsuke Kawaguchi

@@ -1,21 +1,19 @@
 package hudson.plugins.japex;
 
+import hudson.util.ChartUtil;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import com.sun.japex.report.MeanMode;
 
 import java.io.IOException;
-
-import hudson.util.ChartUtil;
 
 /**
  * @author Kohsuke Kawaguchi
  */
 public class TestCaseGraph {
-    private final JapexReportAction owner;
+    private final TrendReport owner;
     private final String name;
 
-    public TestCaseGraph(JapexReportAction owner, String name) {
+    public TestCaseGraph(TrendReport owner, String name) {
         this.owner = owner;
         this.name = name;
     }
@@ -27,7 +25,7 @@ public class TestCaseGraph {
             return;
         }
 
-        HudsonChartGenerator gen = owner.createGenerator();
+        HudsonChartGenerator gen = owner.chartGen;
 
         if(gen.timestamp!=null && req.checkIfModified(gen.timestamp,rsp))
             return; // up to date
