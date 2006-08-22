@@ -4,14 +4,23 @@
     <l:main-panel>
       <h1><img src="${rootURL}/images/32x32/graph.gif"/>Japex Report</h1>
 
-      <p>
-        This project contains multiple reports
-      </p>
-      <ol>
-        <j:forEach var="rpt" items="${it.reports}">
-          <li><a href="${rpt.displayName}/">${rpt.displayName}</a></li>
-        </j:forEach>
-      </ol>
+      <j:choose>
+        <j:when test="${it.hasReports()}">
+          <p>
+            This project contains multiple reports
+          </p>
+          <ol>
+            <j:forEach var="rpt" items="${it.reports}">
+              <li><a href="${rpt.displayName}/">${rpt.displayName}</a></li>
+            </j:forEach>
+          </ol>
+        </j:when>
+        <j:otherwise>
+          <p>
+            This project has no report yet.
+          </p>
+        </j:otherwise>
+      </j:choose>
     </l:main-panel>
   </l:layout>
 </j:jelly>

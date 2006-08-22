@@ -78,6 +78,10 @@ public class JapexReportAction implements Action, StaplerProxy {
         return getReport(token);
     }
 
+    public boolean hasReports() throws IOException {
+        return !parseReports().reports.isEmpty();
+    }
+
     public Collection<TrendReport> getReports() throws IOException {
         return parseReports().reports.values();
     }
