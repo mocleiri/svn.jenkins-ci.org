@@ -110,7 +110,7 @@ public abstract class Trigger implements Describable<Trigger> {
                         }
                     }
                 }
-            } catch (RuntimeException e) {
+            } catch (Throwable e) {
                 LOGGER.log(Level.WARNING,"Cron thread throw an exception",e);
                 // bug in the code. Don't let the thread die.
                 e.printStackTrace();
