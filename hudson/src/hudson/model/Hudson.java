@@ -97,10 +97,8 @@ public final class Hudson extends JobCollection implements Node {
      */
     private static Hudson theInstance;
 
-    /**
-     * Set to true if this instance is going to shut down.
-     */
-    private transient boolean shuttingDown;
+    private transient boolean isQuietingDown;
+    private transient boolean terminating;
 
     private List<JDK> jdks;
 
@@ -427,8 +425,22 @@ public final class Hudson extends JobCollection implements Node {
         this.useSecurity = useSecurity;
     }
 
-    public boolean isShuttingDown() {
-        return shuttingDown;
+    /**
+     * Returns true if Hudson is quieting down.
+     * <p>
+     * No further jobs will be executed unless it
+     * can be finished while other current pending builds
+     * are still in progress.
+     */
+    public boolean isQuietingDown() {
+        return isQuietingDown;
+    }
+
+    /**
+     * Returns true if the container initiated the termination of the web application.
+     */
+    public boolean isTerminating() {
+        return terminating;
     }
 
     /**
@@ -572,7 +584,7 @@ public final class Hudson extends JobCollection implements Node {
      * Called to shut down the system.
      */
     public void cleanUp() {
-        shuttingDown = true;
+        terminating = true;
         synchronized(computers) {
             for( Computer c : computers.values() )
                 c.interrupt();
@@ -664,6 +676,12 @@ public final class Hudson extends JobCollection implements Node {
         } catch (FormException e) {
             sendError(e,req,rsp);
         }
+    }
+
+    public synchronized void doQuietDown( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+        isQuietingDown = true;
     }
 
     public synchronized Job doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {

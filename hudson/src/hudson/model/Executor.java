@@ -29,7 +29,7 @@ public class Executor extends Thread {
 
     public void run() {
         while(true) {
-            if(Hudson.getInstance().isShuttingDown())
+            if(Hudson.getInstance().isTerminating())
                 return;
 
             synchronized(owner) {

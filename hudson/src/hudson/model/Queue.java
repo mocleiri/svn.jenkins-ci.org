@@ -268,6 +268,12 @@ public class Queue {
      *      null if no {@link Executor} can run it.
      */
     private JobOffer choose(Project p) {
+        if(Hudson.getInstance().isQuietingDown()) {
+            // if we are quieting down, don't run anything so that
+            // all executors will be free.
+            return null;
+        }
+
         Node n = p.getAssignedNode();
         if(n!=null) {
             // if a project has assigned node, it can be only built on it
