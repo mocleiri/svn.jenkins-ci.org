@@ -25,7 +25,11 @@ public final class FingerprintCleanupThread extends Thread {
      */
     public static final TimerTask TIMER = new TimerTask() {
         public void run() {
-            invoke();
+            try {
+                invoke();
+            } catch (Throwable t) {
+                LOGGER.log(Level.SEVERE, "Error in the fingerprint clean-up", t);
+            }
         }
     };
 
