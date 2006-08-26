@@ -1,0 +1,31 @@
+<!--
+  Entrance to the configuration page
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:s="/lib/form">
+<l:layout title="Hudson - configuration">
+  <st:include page="sidepanel.jelly" />
+  <l:main-panel>
+    <h1>Manage Hudson</h1>
+    <table style="padding-left: 2em;">
+      <t:summary icon="setting.gif"          href="configure"    >System Configuration</t:summary>
+      <t:summary icon="refresh.gif"          href="reload"       >Reload Configuration from Disk</t:summary>
+      <j:if test="${!empty(it.pluginManager.plugins)}">
+        <t:summary icon="gear2.gif"          href="managePlugins">Manage Plugins</t:summary>
+      </j:if>
+      <t:summary icon="system-log-out.gif"   href="${h.ifThenElse(!it.quietingDown,'quietDown','cancelQuietDown')}" iconOnly="true">
+        <j:choose>
+          <j:when test="${it.quietingDown}">
+            <a href="cancelQuietDown">Cancel Shutdown</a>
+          </j:when>
+          <j:otherwise>
+            <div><a href="quietDown">Prepare for Shutdown</a></div>
+            <div style="color:gray; text-decoration:none;">
+              Stops executing new builds, so that the system can be eventually shut down safely.
+            </div>
+          </j:otherwise>
+        </j:choose>
+      </t:summary>
+    </table>
+  </l:main-panel>
+</l:layout>
+</j:jelly>
