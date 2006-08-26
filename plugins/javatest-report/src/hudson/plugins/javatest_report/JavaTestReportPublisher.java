@@ -25,8 +25,11 @@ import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Project;
+import hudson.model.Result;
 import hudson.tasks.Publisher;
 import org.kohsuke.stapler.StaplerRequest;
+import org.apache.tools.ant.types.FileSet;
+import org.apache.tools.ant.DirectoryScanner;
 
 /**
  * @author Rama Pulavarthi
@@ -50,8 +53,35 @@ public class JavaTestReportPublisher extends Publisher {
     }
 
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+        FileSet fs = new FileSet();
+        org.apache.tools.ant.Project p = new org.apache.tools.ant.Project();
+        fs.setProject(p);
+        fs.setDir(build.getProject().getWorkspace().getLocal());
+        fs.setIncludes(includes);
+        DirectoryScanner ds = fs.getDirectoryScanner(p);
+
+        if(ds.getIncludedFiles().length==0) {
+            listener.getLogger().println("No Java test report files were found. Configuration error?");
+            // no test result. Most likely a configuration error or fatal problem
+            build.setResult(Result.FAILURE);
+        }
+
+        JavaTestAction action = new JavaTestAction(build, ds, listener);
+        build.getActions().add(action);
+
+        Report r = action.getResult();
+
+        if(r.getTotalCount()==0) {
+            listener.getLogger().println("Test reports were found but none of them are new. Did tests run?");
+            // no test result. Most likely a configuration error or fatal problem
+            build.setResult(Result.FAILURE);
+        }
+
+        if(r.getFailCount()>0)
+            build.setResult(Result.UNSTABLE);
+
+        return true;
+     }
 
     public Action getProjectAction(Project project) {
         return null;

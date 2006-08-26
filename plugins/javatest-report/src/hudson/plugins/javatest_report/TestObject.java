@@ -78,7 +78,7 @@ public abstract class TestObject<S extends TestObject<S>>
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = id.replace(':','.');
     }
 
     public String getName() {
