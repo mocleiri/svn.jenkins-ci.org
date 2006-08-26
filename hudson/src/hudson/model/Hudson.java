@@ -682,6 +682,15 @@ public final class Hudson extends JobCollection implements Node {
         if(!Hudson.adminCheck(req,rsp))
             return;
         isQuietingDown = true;
+        rsp.sendRedirect2(".");
+    }
+
+    public synchronized void doCancelQuietDown( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+        isQuietingDown = false;
+        getQueue().scheduleMaintenance();
+        rsp.sendRedirect2(".");
     }
 
     public synchronized Job doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
