@@ -10,11 +10,7 @@
     <l:tasks>
       <l:isAdmin>
         <l:task icon="images/24x24/new-package.gif" href="newJob" title="New Job" />
-        <l:task icon="images/24x24/setting.gif" href="${rootURL}/configure" title="Configure" />
-        <j:if test="${!empty(it.pluginManager.plugins)}">
-          <l:task icon="images/24x24/gear2.gif" href="${rootURL}/managePlugins" title="Manage Plugins" />
-        </j:if>
-        <l:task icon="images/24x24/refresh.gif" href="${rootURL}/reload" title="Reload Config" />
+        <l:task icon="images/24x24/setting.gif" href="${rootURL}/manage" title="Manage Hudson" />
         <st:include page="sidepanel2.jelly" />
       </l:isAdmin>
     </l:tasks>
