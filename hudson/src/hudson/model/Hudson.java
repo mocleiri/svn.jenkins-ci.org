@@ -185,7 +185,7 @@ public final class Hudson extends JobCollection implements Node {
         return "the master Hudson node";
     }
 
-    public Launcher createLauncher(BuildListener listener) {
+    public Launcher createLauncher(TaskListener listener) {
         return new Launcher(listener);
     }
 
@@ -392,10 +392,10 @@ public final class Hudson extends JobCollection implements Node {
         return null;
     }
 
-    public List<Slave> getSlaves() {
+    public synchronized List<Slave> getSlaves() {
         if(slaves ==null)
             slaves = new ArrayList<Slave>();
-        return slaves;
+        return new ArrayList<Slave>(slaves);
     }
 
     /**
@@ -934,6 +934,13 @@ public final class Hudson extends JobCollection implements Node {
 
     public synchronized void doFingerprintCleanup( StaplerRequest req, StaplerResponse rsp ) throws IOException {
         FingerprintCleanupThread.invoke();
+        rsp.setStatus(HttpServletResponse.SC_OK);
+        rsp.setContentType("text/plain");
+        rsp.getWriter().println("Invoked");
+    }
+
+    public synchronized void doWorkspaceCleanup( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        WorkspaceCleanupThread.invoke();
         rsp.setStatus(HttpServletResponse.SC_OK);
         rsp.setContentType("text/plain");
         rsp.getWriter().println("Invoked");

@@ -100,7 +100,7 @@ public final class Slave implements Node {
         return mode;
     }
 
-    public Launcher createLauncher(BuildListener listener) {
+    public Launcher createLauncher(TaskListener listener) {
         if(command.length()==0) // local alias
             return new Launcher(listener);
 
@@ -151,6 +151,10 @@ public final class Slave implements Node {
                 return r.toCommandArray();
             }
         };
+    }
+
+    public FilePath getWorkspaceRoot() {
+        return getFilePath().child("workspace");
     }
 
     public boolean equals(Object o) {

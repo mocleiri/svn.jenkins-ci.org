@@ -24,7 +24,7 @@ public interface Node {
     /**
      * Returns a {@link Launcher} for executing programs on this node.
      */
-    Launcher createLauncher(BuildListener listener);
+    Launcher createLauncher(TaskListener listener);
 
     /**
      * Returns the number of {@link Executor}s.

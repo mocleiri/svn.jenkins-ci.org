@@ -359,7 +359,7 @@ public class Project extends Job<Project,Build> {
             node = getParent();
 
         if(node instanceof Slave)
-            return ((Slave)node).getFilePath().child("workspace").child(getName());
+            return ((Slave)node).getWorkspaceRoot().child(getName());
         else
             return new FilePath(new File(getRootDir(),"workspace"));
     }

@@ -3,9 +3,7 @@ package hudson.model;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
-import java.util.TimerTask;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
@@ -18,41 +16,20 @@ import java.util.regex.Pattern;
  *
  * @author Kohsuke Kawaguchi
  */
-public final class FingerprintCleanupThread extends Thread {
-    private static FingerprintCleanupThread thread;
-    /**
-     * Used to run the fingerprint periodically.
-     */
-    public static final TimerTask TIMER = new TimerTask() {
-        public void run() {
-            try {
-                invoke();
-            } catch (Throwable t) {
-                LOGGER.log(Level.SEVERE, "Error in the fingerprint clean-up", t);
-            }
-        }
-    };
+public final class FingerprintCleanupThread extends PeriodicWork {
 
-    /**
-     * Triggers the clean up thread now.
-     */
-    public static void invoke() {
-        if(thread!=null && thread.isAlive()) {
-            LOGGER.log(Level.INFO, "Fingerprint thread is still running. Execution aborted.");
-            return;
-        }
-        thread = new FingerprintCleanupThread();
-        thread.run();
-    }
+    private static FingerprintCleanupThread theInstance;
 
     public FingerprintCleanupThread() {
-        super("Fingerprint clean up thread");
+        super("Fingerprint cleanup");
+        theInstance = this;
     }
 
-    public void run() {
-        LOGGER.log(Level.INFO, "Started fingerprint record cleanup");
-        long startTime = System.currentTimeMillis();
+    public static void invoke() {
+        theInstance.run();
+    }
 
+    protected void execute() {
         int numFiles = 0;
 
         File root = new File(Hudson.getInstance().getRootDir(),"fingerprints");
@@ -72,8 +49,7 @@ public final class FingerprintCleanupThread extends Thread {
             }
         }
 
-        LOGGER.log(Level.INFO, "Finished fingerprint record cleanup. "+
-            numFiles+" files deleted and took "+(System.currentTimeMillis()-startTime)+" ms");
+        logger.log(Level.INFO, "Cleaned up "+numFiles+" records");
     }
 
     /**
@@ -97,7 +73,7 @@ public final class FingerprintCleanupThread extends Thread {
                 return true;
             }
         } catch (IOException e) {
-            LOGGER.log(Level.WARNING, "Failed to process "+fingerprintFile, e);
+            logger.log(Level.WARNING, "Failed to process "+fingerprintFile, e);
         }
         return false;
     }
@@ -115,6 +91,4 @@ public final class FingerprintCleanupThread extends Thread {
             return f.isFile() && PATTERN.matcher(f.getName()).matches();
         }
     };
-
-    private static final Logger LOGGER = Logger.getLogger(FingerprintCleanupThread.class.getName());
 }
