@@ -53,7 +53,13 @@ public class JNUploaderPublisher extends Publisher {
     }
 
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
+        if(build.getResult()== Result.FAILURE) {
+            // build failed. don't post
+            return true;
+        }
+
         try {
+            listener.getLogger().println("Connecting to java.net");
             JavaNet jn = JavaNet.connect();
             JNProject project = jn.getProject(this.project);
             if(!project.exists()) {
