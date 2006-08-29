@@ -7,10 +7,10 @@ import hudson.Util;
 import hudson.util.ArgumentListBuilder;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.FileOutputStream;
 import java.util.Date;
 
 /**
@@ -106,10 +106,11 @@ public final class Slave implements Node {
      * Estimates the clock difference with this slave.
      *
      * @return
+     *      difference in milli-seconds.
      *      a large positive value indicates that the master is ahead of the slave,
      *      and negative value indicates otherwise.
      */
-    public long getClockSkew() throws IOException {
+    public long getClockDifference() throws IOException {
         File testFile = new File(localFS,"clock.skew");
         FileOutputStream os = new FileOutputStream(testFile);
         long now = new Date().getTime();
@@ -120,6 +121,32 @@ public final class Slave implements Node {
         testFile.delete();
 
         return r;
+    }
+
+    /**
+     * Gets the clock difference in HTML string.
+     */
+    public String getClockDifferenceString() {
+        try {
+            long diff = getClockDifference();
+            if(-1000<diff && diff <1000)
+                return "In sync";  // clock is in sync
+
+            long abs = Math.abs(diff);
+
+            String s = Util.getTimeSpanString(abs);
+            if(diff<0)
+                s += " ahead";
+            else
+                s += " behind";
+
+            if(diff>100*60) // more than a minute difference
+                s = "<span class='error'>"+s+"</span>";
+
+            return s;
+        } catch (IOException e) {
+            return "<span class='error'>Unable to check</span>";
+        }
     }
 
     public Launcher createLauncher(TaskListener listener) {
