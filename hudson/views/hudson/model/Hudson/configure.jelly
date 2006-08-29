@@ -72,6 +72,12 @@
                 </select>
               </s:entry>
 
+              <j:if test="${s!=null}">
+                <s:entry title="clock" help="/help/system-config/master-slave/clock.html">
+                  ${s.clockDifferenceString}
+                </s:entry>
+              </j:if>
+
               <s:entry title="">
                 <div align="right">
                   <s:repeatableDeleteButton />
