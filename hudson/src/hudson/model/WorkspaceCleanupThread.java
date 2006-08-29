@@ -3,7 +3,6 @@ package hudson.model;
 import hudson.Util;
 import hudson.util.StreamTaskListener;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileOutputStream;
