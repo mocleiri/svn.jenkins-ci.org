@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.FileOutputStream;
+import java.util.Date;
 
 /**
  * Information about a Hudson slave node.
@@ -98,6 +100,26 @@ public final class Slave implements Node {
 
     public Mode getMode() {
         return mode;
+    }
+
+    /**
+     * Estimates the clock difference with this slave.
+     *
+     * @return
+     *      a large positive value indicates that the master is ahead of the slave,
+     *      and negative value indicates otherwise.
+     */
+    public long getClockSkew() throws IOException {
+        File testFile = new File(localFS,"clock.skew");
+        FileOutputStream os = new FileOutputStream(testFile);
+        long now = new Date().getTime();
+        os.close();
+
+        long r = now - testFile.lastModified();
+
+        testFile.delete();
+
+        return r;
     }
 
     public Launcher createLauncher(TaskListener listener) {
