@@ -34,8 +34,9 @@ public class WorkspaceCleanupThread extends PeriodicWork {
     protected void execute() {
         Hudson h = Hudson.getInstance();
         try {
-            OutputStream os = new BufferedOutputStream(new FileOutputStream(
-                new File(h.getRootDir(),"workspace-cleanup.log")));
+            // don't buffer this, so that the log shows what the worker thread is up to in real time
+            OutputStream os = new FileOutputStream(
+                new File(h.getRootDir(),"workspace-cleanup.log"));
             try {
                 listener = new StreamTaskListener(os);
 
