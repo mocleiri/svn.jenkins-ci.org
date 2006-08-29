@@ -140,7 +140,7 @@ public final class Slave implements Node {
             else
                 s += " behind";
 
-            if(diff>100*60) // more than a minute difference
+            if(abs>100*60) // more than a minute difference
                 s = "<span class='error'>"+s+"</span>";
 
             return s;
