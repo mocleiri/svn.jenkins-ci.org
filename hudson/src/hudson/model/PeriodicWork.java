@@ -43,7 +43,7 @@ abstract class PeriodicWork extends TimerTask {
                         (System.currentTimeMillis()-startTime)+" ms");
                 }
             },name+" thread");
-            thread.run();
+            thread.start();
         } catch (Throwable t) {
             logger.log(Level.SEVERE, name+" thread failed with error", t);
         }
