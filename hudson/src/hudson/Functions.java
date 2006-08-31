@@ -8,6 +8,7 @@ import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.StaplerRequest;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -115,8 +116,16 @@ public class Functions {
     public static String getProjectListString(List<Project> projects) {
         return Project.toNameList(projects);
     }
-    
+
     public static Object ifThenElse(boolean cond, Object thenValue, Object elseValue) {
         return cond ? thenValue : elseValue;
+    }
+
+    public static Map getSystemProperties() {
+        return System.getProperties();
+    }
+
+    public static Map getEnvVars() {
+        return EnvVars.masterEnvVars;
     }
 }

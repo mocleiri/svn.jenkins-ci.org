@@ -2,6 +2,7 @@ package hudson.model;
 
 import hudson.Launcher;
 import hudson.Proc;
+import hudson.Util;
 import static hudson.model.Hudson.isWindows;
 import hudson.scm.CVSChangeLogParser;
 import hudson.scm.ChangeLogParser;
@@ -147,6 +148,7 @@ public final class Build extends Run<Project,Build> implements Runnable {
                     } catch (IOException e) {
                         PrintStream log = listener.getLogger();
                         log.println("ln failed");
+                        Util.displayIOException(e,listener);
                         e.printStackTrace( log );
                     }
                 }
