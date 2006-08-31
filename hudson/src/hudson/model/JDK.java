@@ -73,5 +73,7 @@ public final class JDK {
             path = getBinDir().getPath()+File.pathSeparator+path;
         env.put("PATH",path);
         env.put("JAVA_HOME",javaHome);
+        if(!env.containsKey("HUDSON_HOME"))
+            env.put("HUDSON_HOME", Hudson.getInstance().getRootDir().getPath() );
     }
 }
