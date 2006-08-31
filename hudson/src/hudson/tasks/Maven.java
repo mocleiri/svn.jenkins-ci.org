@@ -70,6 +70,10 @@ public class Maven extends Builder {
             cmd = execName+' '+targets;
         else {
             File exec = ai.getExecutable();
+            if(exec==null) {
+                listener.fatalError("Couldn't find any executable in "+ai.getMavenHome());
+                return false;
+            }
             if(!exec.exists()) {
                 listener.fatalError(exec+" doesn't exist");
                 return false;
