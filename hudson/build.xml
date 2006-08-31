@@ -55,6 +55,7 @@
   <target name="war" depends="compile">
     <jar destfile="build/hudson.jar">
       <fileset dir="build/classes" />
+      <fileset dir="src" includes="**/*.properties" />
       <manifest>
         <attribute name="Build-Id" value="${build.version}"/>
         <attribute name="Main-Class" value="hudson.Main" />
