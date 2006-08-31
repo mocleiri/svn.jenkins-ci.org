@@ -58,7 +58,7 @@ public class Ant extends Builder {
         String cmd;
 
         String execName;
-        if(File.separatorChar=='\\')
+        if(onWindows)
             execName = "ant.bat";
         else
             execName = "ant";
@@ -78,6 +78,14 @@ public class Ant extends Builder {
         Map<String,String> env = build.getEnvVars();
         if(ai!=null)
             env.put("ANT_HOME",ai.getAntHome());
+
+        if(onWindows) {
+            // on Windows, executing batch file can't return the correct error code,
+            // so we need to wrap it into cmd.exe.
+            // double %% is needed because we want ERRORLEVEL to be expanded after
+            // batch file executed, not before. This alone shows how broken Windows is...
+            cmd = "cmd.exe /C "+cmd+" && exit %%ERRORLEVEL%%";
+        }
 
         try {
             int r = launcher.launch(cmd,env,listener.getLogger(),proj.getModuleRoot()).join();
@@ -191,4 +199,6 @@ public class Ant extends Builder {
             return getExecutable().exists();
         }
     }
+
+    private static final boolean onWindows = File.separatorChar == '\\';
 }
