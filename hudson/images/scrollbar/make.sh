@@ -15,7 +15,7 @@ make() {
 
 set -A list
 
-for ((  i=0 ; i<$U; i+=4 ))
+for ((  i=0 ; i<$U; i+=1 ))
 do
   make $i
   list[$((${#list}+1))]=screen.$i.gif
