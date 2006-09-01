@@ -27,7 +27,7 @@
             </td>
           </tr>
 
-          <j:if test="${!empty(param.lhs) and !empty(param.rhs)}">
+          <j:if test="${!empty(request.getParameter('lhs')) and !empty(request.getParameter('rhs'))}">
             <j:set var="jl" value="${app.getJob(request.getParameter('lhs'))}" />
             <j:set var="jr" value="${app.getJob(request.getParameter('rhs'))}" />
 
@@ -43,7 +43,13 @@
                 </td></tr>
               </j:when>
               <j:otherwise>
-                <j:forEach var="e" items="${jl.getRelationship(jr)}">
+                <j:set var="relation" value="${jl.getRelationship(jr)}"/>
+                <j:if test="${empty(relation)}">
+                  <tr><td colspan="3" class="error">
+                    There are no fingerprint records that connect these two projects.
+                  </td></tr>
+                </j:if>
+                <j:forEach var="e" items="${relation}">
                   <tr>
                     <td style="text-align:right">
                       <t:buildLink job="${jl}" number="${e.key}"/>
