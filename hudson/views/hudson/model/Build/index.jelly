@@ -38,6 +38,39 @@
       </table>
 
 
+      <!-- upstream/downstream builds -->
+      <j:set var="upstream" value="${it.upstreamBuilds}" />
+      <j:if test="${!empty(upstream)}">
+        <h2>Upstream Builds</h2>
+        <ul style="list-style-type: none;">
+          <j:forEach var="item" items="${upstream}">
+            <li>
+              <a href="${rootURL}/${item.key.url}">${item.key.name}</a>
+              <t:buildLink job="${item.key}" number="${item.value}" />
+            </li>
+          </j:forEach>
+        </ul>
+      </j:if>
+      <j:set var="downstream" value="${it.downstreamBuilds}" />
+      <j:if test="${!empty(downstream)}">
+        <h2>Downstream Builds</h2>
+        <ul style="list-style-type: none;">
+          <j:forEach var="item" items="${downstream}">
+            <li>
+              <a href="${rootURL}/${item.key.url}">${item.key.name}</a>
+              <j:choose>
+                <j:when test="${item.value.isEmpty()}">
+                  (none)
+                </j:when>
+                <j:otherwise>
+                  <t:buildRangeLink job="${item.key}" range="${item.value}"/>
+                </j:otherwise>
+              </j:choose>
+            </li>
+          </j:forEach>
+        </ul>
+      </j:if>
+
 
       <h2>Permalinks</h2>
       <ul>

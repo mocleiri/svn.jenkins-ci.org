@@ -87,6 +87,20 @@ public class Fingerprint implements ModelObject {
         private boolean isAlive() {
             return getRun()!=null;
         }
+
+        /**
+         * Returns true if {@link BuildPtr} points to the given run.
+         */
+        public boolean is(Run r) {
+            return r.getNumber()==number && r.getParent().getName().equals(name);
+        }
+
+        /**
+         * Returns true if {@link BuildPtr} points to the given job.
+         */
+        public boolean is(Job job) {
+            return job.getName().equals(name);
+        }
     }
 
     /**

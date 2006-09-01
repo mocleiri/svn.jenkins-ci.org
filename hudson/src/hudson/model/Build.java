@@ -4,6 +4,8 @@ import hudson.Launcher;
 import hudson.Proc;
 import hudson.Util;
 import static hudson.model.Hudson.isWindows;
+import hudson.model.Fingerprint.RangeSet;
+import hudson.model.Fingerprint.BuildPtr;
 import hudson.scm.CVSChangeLogParser;
 import hudson.scm.ChangeLogParser;
 import hudson.scm.ChangeLogSet;
@@ -11,6 +13,7 @@ import hudson.scm.SCM;
 import hudson.tasks.BuildStep;
 import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
+import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.triggers.SCMTrigger;
 import org.xml.sax.SAXException;
@@ -20,6 +23,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Calendar;
 import java.util.Map;
+import java.util.HashMap;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -96,6 +100,76 @@ public final class Build extends Run<Project,Build> implements Runnable {
      */
     public AbstractTestResultAction getTestResultAction() {
         return getAction(AbstractTestResultAction.class);
+    }
+
+    /**
+     * Gets the dependency relationship from this build (as the source)
+     * and that project (as the sink.)
+     *
+     * @return
+     *      range of build numbers that represent which downstream builds are using this build.
+     *      The range will be empty if no build of that project matches this.
+     */
+    public RangeSet getDownstreamRelationship(Project that) {
+        RangeSet rs = new RangeSet();
+
+        FingerprintAction f = getAction(FingerprintAction.class);
+        if(f==null)     return rs;
+
+        // look for fingerprints that point to this build as the source, and merge them all
+        for (Fingerprint e : f.getFingerprints().values())
+            if(e.getOriginal().is(this))
+                rs.add(e.getRangeSet(that));
+
+        return rs;
+    }
+
+    /**
+     * Gets the downstream builds of this build, which are the builds of the
+     * downstream project sthat use artifacts of this build.
+     */
+    public Map<Project,RangeSet> getDownstreamBuilds() {
+        Map<Project,RangeSet> r = new HashMap<Project,RangeSet>();
+        for (Project p : getParent().getDownstreamProjects()) {
+            r.put(p,getDownstreamRelationship(p));
+        }
+        return r;
+    }
+
+    /**
+     * Gets the dependency relationship from this build (as the sink)
+     * and that project (as the source.)
+     *
+     * @return
+     *      Build number of the upstream build that feed into this build,
+     *      or -1 if no record is avilable.
+     */
+    public int getUpstreamRelationship(Project that) {
+        FingerprintAction f = getAction(FingerprintAction.class);
+        if(f==null)     return -1;
+
+        // look for fingerprints that point to the given project as the source, and merge them all
+        for (Fingerprint e : f.getFingerprints().values()) {
+            BuildPtr o = e.getOriginal();
+            if(o.is(that))
+                return o.getNumber();
+        }
+
+        return -1;
+    }
+
+    /**
+     * Gets the upstream builds of this build, which are the builds of the
+     * upstream projects whose artifacts feed into this build.
+     */
+    public Map<Project,Integer> getUpstreamBuilds() {
+        Map<Project,Integer> r = new HashMap<Project,Integer>();
+        for (Project p : getParent().getUpstreamProjects()) {
+            int n = getUpstreamRelationship(p);
+            if(n>=0)
+                r.put(p,n);
+        }
+        return r;
     }
 
     /**

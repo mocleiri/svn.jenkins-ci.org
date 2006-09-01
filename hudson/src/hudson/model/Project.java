@@ -10,7 +10,6 @@ import hudson.scm.SCMS;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildTrigger;
 import hudson.tasks.Builder;
-import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.Publisher;
 import hudson.tasks.Fingerprinter;
 import hudson.tasks.test.AbstractTestResultAction;
@@ -417,25 +416,20 @@ public class Project extends Job<Project,Build> {
         return r;
     }
 
-    // helper method for getRelationship
+    // helper method for getDownstreamRelationship
     private void checkAndRecord(Project that, TreeMap<Integer, RangeSet> r, Collection<? extends Build> builds) {
         for (Build build : builds) {
-            FingerprintAction f = build.getAction(FingerprintAction.class);
-            if(f==null)     continue;
-            // look for fingerprints that point to this project as the owner
-            for (Fingerprint e : f.getFingerprints().values()) {
-                if(e.getOriginal().getName().equals(this.name)) {
-                    Integer i = e.getOriginal().getNumber();
-                    RangeSet rs = e.getRangeSet(that);
-                    if(rs.isEmpty())
-                        continue;
+            RangeSet rs = build.getDownstreamRelationship(that);
+            if(rs==null || rs.isEmpty())
+                continue;
 
-                    RangeSet value = r.get(i);
-                    if(value==null)
-                        r.put(i,value=new RangeSet());
-                    value.add(rs);
-                }
-            }
+            int n = build.getNumber();
+
+            RangeSet value = r.get(n);
+            if(value==null)
+                r.put(n,rs);
+            else
+                value.add(rs);
         }
     }
 
