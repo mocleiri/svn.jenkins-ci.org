@@ -127,11 +127,16 @@ public final class Build extends Run<Project,Build> implements Runnable {
     /**
      * Gets the downstream builds of this build, which are the builds of the
      * downstream project sthat use artifacts of this build.
+     *
+     * @return
+     *      For each project with fingerprinting enabled, returns the range
+     *      of builds (which can be empty if no build uses the artifact from this build.)
      */
     public Map<Project,RangeSet> getDownstreamBuilds() {
         Map<Project,RangeSet> r = new HashMap<Project,RangeSet>();
         for (Project p : getParent().getDownstreamProjects()) {
-            r.put(p,getDownstreamRelationship(p));
+            if(p.isFingerprintConfigured())
+                r.put(p,getDownstreamRelationship(p));
         }
         return r;
     }
