@@ -34,7 +34,7 @@
           <option value="#geometric">Geometric Means</option>
           <option value="#harmonic">Harmonic Means</option>
           <j:forEach var="test" items="${it.testCaseNames}">
-            <option value="#${test}">${test}</option>
+            <option value="#${test.key}">${test.value}</option>
           </j:forEach>
         </select>
       </div>
@@ -44,7 +44,7 @@
       <c:meanChart mode="harmonic" />
 
       <j:forEach var="test" items="${it.testCaseNames}">
-        <c:individualChart name="${test}" />
+        <c:individualChart name="${test.key}" />
       </j:forEach>
     </l:main-panel>
   </l:layout>
