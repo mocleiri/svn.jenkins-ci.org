@@ -32,9 +32,11 @@
 	    var candidates = ${id}_values;
 	    if (value.length > 0) { // if no value, we'll not provide anything
 	      value = value.toLowerCase();
-	      for (var i = 0; i < Math.min(candidates.length, 20); i++) {
+	      for (var i = 0; i < candidates.length; i++) {
 	        if (candidates[i].toLowerCase().indexOf(value) >= 0) {
 	          items.push(candidates[i]);
+	          if(items.length>20)
+	            break; // 20 items in the list should be enough
 	        }
 	      }
 	    }
