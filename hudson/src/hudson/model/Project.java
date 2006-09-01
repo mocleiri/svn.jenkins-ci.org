@@ -39,6 +39,7 @@ import java.util.SortedMap;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.Vector;
+import java.util.Comparator;
 
 /**
  * Buildable software project.
@@ -384,7 +385,7 @@ public class Project extends Job<Project,Build> {
      *      numbers of that project.
      */
     public SortedMap<Integer,RangeSet> getRelationship(Project that) {
-        TreeMap<Integer,RangeSet> r = new TreeMap<Integer,RangeSet>();
+        TreeMap<Integer,RangeSet> r = new TreeMap<Integer,RangeSet>(REVERSE_INTEGER_COMPARATOR);
 
         checkAndRecord(that, r, this.getBuilds());
         checkAndRecord(that, r, that.getBuilds());
@@ -739,4 +740,10 @@ public class Project extends Job<Project,Build> {
         }
         return r;
     }
+
+    private static final Comparator<Integer> REVERSE_INTEGER_COMPARATOR = new Comparator<Integer>() {
+        public int compare(Integer o1, Integer o2) {
+            return o2-o1;
+        }
+    };
 }
