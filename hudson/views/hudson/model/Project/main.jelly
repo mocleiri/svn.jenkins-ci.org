@@ -1,4 +1,16 @@
-<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt" xmlns:local="local">
+
+  <d:taglib uri="local">
+    <d:tag name="relationship">
+      <j:if test="${lhs.fingerprintConfigured and rhs.fingerprintConfigured}">
+        <st:nbsp/>
+        <a href="${rootURL}/projectRelationship?lhs=${lhs.name}&amp;rhs=${rhs.name}">
+          <img src="${rootURL}/images/16x16/fingerprint.gif" alt="check relationship"/>
+        </a>
+      </j:if>
+    </d:tag>
+  </d:taglib>
+
   <!-- floating box -->
   <div style="float:right">
   <j:set var="tr" value="${it.lastSuccessfulBuild.testResultAction}" />
@@ -74,6 +86,7 @@
         <li>
           <img src="${rootURL}/images/16x16/${item.buildStatusUrl}"/>
           <a href="../${item.name}/">${item.name}</a>
+          <local:relationship lhs="${item}" rhs="${it}"/>
         </li>
       </j:forEach>
     </ul>
@@ -86,6 +99,7 @@
         <li>
           <img src="${rootURL}/images/16x16/${item.buildStatusUrl}"/>
           <a href="../${item.name}/">${item.name}</a>
+          <local:relationship lhs="${it}" rhs="${item}"/>
         </li>
       </j:forEach>
     </ul>

@@ -12,6 +12,7 @@ import hudson.tasks.BuildTrigger;
 import hudson.tasks.Builder;
 import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.Publisher;
+import hudson.tasks.Fingerprinter;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.triggers.Trigger;
 import hudson.triggers.Triggers;
@@ -465,6 +466,18 @@ public class Project extends Job<Project,Build> {
         // TODO
     }
 
+    /**
+     * Returns true if the fingerprint record is configured in this project.
+     */
+    public boolean isFingerprintConfigured() {
+        synchronized(publishers) {
+            for (Publisher p : publishers) {
+                if(p instanceof Fingerprinter)
+                    return true;
+            }
+        }
+        return false;
+    }
 
 
 
