@@ -117,9 +117,11 @@ public final class Build extends Run<Project,Build> implements Runnable {
         if(f==null)     return rs;
 
         // look for fingerprints that point to this build as the source, and merge them all
-        for (Fingerprint e : f.getFingerprints().values())
-            if(e.getOriginal().is(this))
+        for (Fingerprint e : f.getFingerprints().values()) {
+            BuildPtr o = e.getOriginal();
+            if(o!=null && o.is(this))
                 rs.add(e.getRangeSet(that));
+        }
 
         return rs;
     }
@@ -156,7 +158,7 @@ public final class Build extends Run<Project,Build> implements Runnable {
         // look for fingerprints that point to the given project as the source, and merge them all
         for (Fingerprint e : f.getFingerprints().values()) {
             BuildPtr o = e.getOriginal();
-            if(o.is(that))
+            if(o!=null && o.is(that))
                 return o.getNumber();
         }
 
