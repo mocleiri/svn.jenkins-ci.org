@@ -354,6 +354,9 @@ public class Fingerprint implements ModelObject {
      * This is considered as the "source" of this file,
      * or the owner, in the sense that this project "owns"
      * this file.
+     *
+     * @return null
+     *      if the file is apparently created outside Hudson.
      */
     public BuildPtr getOriginal() {
         return original;
