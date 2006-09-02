@@ -11,6 +11,7 @@ import hudson.model.Project;
 import hudson.model.Result;
 import hudson.model.StreamBuildListener;
 import hudson.model.TaskListener;
+import hudson.model.Hudson;
 import hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.ForkOutputStream;
@@ -23,6 +24,7 @@ import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -33,6 +35,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -540,6 +543,35 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
         public Map<String,Object> getProperties() {
             return super.getProperties();
+        }
+
+    //
+    // web methods
+        //
+
+        public void doCvsPassCheck(StaplerRequest req, StaplerResponse rsp) throws IOException {
+            // this method can be used to check if a file exists anywhere in the file system,
+            // so it should be protected.
+            if(!Hudson.adminCheck(req,rsp))
+                return;
+
+            rsp.setStatus(HttpServletResponse.SC_OK);
+            rsp.setContentType("text/html");
+            PrintWriter w = rsp.getWriter();
+
+            String v = req.getParameter("value");
+            if(v==null || v.equals("")) {
+                // default.
+                w.print("<div/>");
+            } else {
+                File cvsPassFile = new File(v);
+
+                if(cvsPassFile.exists()) {
+                    w.println("<div/>");
+                } else {
+                    w.println("<div class=error>No such file exists</div>");
+                }
+            }
         }
     }
 
