@@ -162,6 +162,17 @@ public final class Hudson extends JobCollection implements Node {
     }
 
     /**
+     * Gets the SCM descriptor by name. Primarily used for making them web-visible.
+     */
+    public Descriptor<SCM> getScm(String displayName) {
+        for (Descriptor<SCM> d : SCMS.SCMS) {
+            if(d.getDisplayName().equals(displayName))
+                return d;
+        }
+        return null;
+    }
+
+    /**
      * Gets the plugin object from its short name.
      *
      * <p>

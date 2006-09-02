@@ -135,4 +135,9 @@ public final class FilePath {
         // to make writing JSPs easily, return local
         return local.toString();
     }
+
+    /**
+     * {@link FilePath} constant that can be used if the directory is not importatn.
+     */
+    public static final FilePath RANDOM = new FilePath(new File("."));
 }

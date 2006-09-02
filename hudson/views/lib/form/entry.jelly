@@ -20,16 +20,14 @@
       </td>
     </j:if>
   </tr>
-  <j:if test="${help!=null}">
-    <tr><td></td><td colspan="2"><div class="help">Loading...</div></td><td></td></tr>
-  </j:if>
+  <!-- used to display the form validation error -->
+  <tr class="validation-error-area"><td colspan="2" /><td /></tr>
   <j:if test="${!empty(attrs.description)}">
-    <tr>
-      <td><st:nbsp/></td>
-      <td><st:nbsp/></td>
-      <td class="setting-description">
-        ${attrs.description}
-      </td>
-    </tr>
+    <f:description>
+      ${attrs.description}
+    </f:description>
+  </j:if>
+  <j:if test="${help!=null}">
+    <tr class="help-area"><td></td><td colspan="2"><div class="help">Loading...</div></td><td></td></tr>
   </j:if>
 </j:jelly>

@@ -1,3 +1,55 @@
+// Form check code
+//========================================================
+var Form = {
+  // pending requests
+  queue : [],
+
+  inProgress : false,
+
+  delayedCheck : function(checkUrl,targetElement) {
+    this.queue.push({url:checkUrl,target:targetElement});
+    this.schedule();
+  },
+
+  schedule : function() {
+    if(this.inProgress)  return;
+    if(this.queue.length==0) return;
+
+    next = this.queue.shift();
+    this.inProgress = true;
+
+    new Ajax.Request(next.url, {
+        method : 'get',
+        onComplete : function(x) {
+          next.target.innerHTML = x.responseText;
+          inProgress = false;
+          schedule();
+        }
+      }
+    );
+  }
+}
+
+function findFollowingTR(input,className) {
+  // identify the parent TR
+  var tr = input;
+  while(tr.tagName!="TR")
+    tr = tr.parentNode;
+
+  // then next TR that matches the CSS
+  do {
+    tr = tr.nextSibling;
+  } while(tr.tagName!="TR" || tr.className!=className);
+
+  return tr;
+}
+
+
+
+
+// Behavior rules
+//========================================================
+
 var hudsonRules = {
   ".advancedButton" : function(e) {
     e.onclick = function() {
@@ -26,18 +78,26 @@ var hudsonRules = {
     }
   },
 
+  // form fields that are validated via AJAX call to the server
+  // elements with this class should have two attributes 'checkUrl' that evaluates to the server URL.
+  ".validated" : function(e) {
+    e.targetElement = findFollowingTR(e,"validation-error-area").firstChild.nextSibling;
+    e.targetUrl = function() {return eval(this.getAttribute("checkUrl"));};
+
+    Form.delayedCheck(e.targetUrl(),e.targetElement);
+
+    e.onchange = function() {
+      new Ajax.Request(this.targetUrl(), {
+          method : 'get',
+          onComplete : function(x) {e.targetElement.innerHTML = x.responseText;}
+        }
+      );
+    }
+  },
+
   ".help-button" : function(e) {
     e.onclick = function() {
-      // identify the parent TR
-      var tr = this;
-      while(tr.tagName!="TR")
-        tr = tr.parentNode;
-
-      // then next TR
-      do {
-        tr = tr.nextSibling;
-      } while(tr.tagName!="TR");
-
+      tr = findFollowingTR(this,"help-area");
       div = tr.firstChild.nextSibling.firstChild;
 
       if(div.style.display!="block") {
@@ -63,3 +123,5 @@ var hudsonRules = {
 
 Behaviour.start();
 Behaviour.register(hudsonRules);
+
+

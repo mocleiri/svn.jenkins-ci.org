@@ -515,7 +515,7 @@ public class Project extends Job<Project,Build> {
                 req.setCharacterEncoding("UTF-8");
 
                 int scmidx = Integer.parseInt(req.getParameter("scm"));
-                scm = SCMS.SCMS[scmidx].newInstance(req);
+                scm = SCMS.SCMS.get(scmidx).newInstance(req);
 
                 disabled = req.getParameter("disable")!=null;
 

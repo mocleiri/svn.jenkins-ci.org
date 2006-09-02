@@ -1,5 +1,8 @@
 package hudson.model;
 
+import hudson.util.StreamTaskListener;
+import hudson.util.NullStream;
+
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
@@ -33,4 +36,9 @@ public interface TaskListener {
      *      A writer to receive details of the error. Not null.
      */
     PrintWriter fatalError(String msg);
+
+    /**
+     * {@link TaskListener} that discards the output.
+     */
+    public static final TaskListener NULL = new StreamTaskListener(new NullStream());
 }

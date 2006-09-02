@@ -18,7 +18,11 @@
 <ul>
   <li>Fixed a bug that occasionally prevents fingerprints from being displayed,
       when files are created outside Hudson.
-  <li>
+  <li>Added a mechanism to perform form field validation remotely.
+      The first one to use this is the subversion executable location field in the system configuration.
+      The form now validates if the executable actually exists, then it also checks the version to
+      see if it satisfies the minimum requirement.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=110">issue 110</a>)
 </ul>
 -->
 <h3>What's new in 1.49</h3>

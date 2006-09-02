@@ -9,14 +9,17 @@ import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Project;
 import hudson.model.TaskListener;
+import hudson.model.Hudson;
 import hudson.util.ArgumentListBuilder;
 import org.apache.commons.digester.Digester;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import org.kohsuke.stapler.StaplerRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -29,6 +32,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -39,6 +43,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Subversion.
@@ -189,7 +197,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
                 if(otherOptions!=null)
                     cmd.add(Util.tokenize(otherOptions));
                 cmd.add(tokens.nextToken());
-                
+
                 result = run(launcher,cmd,listener,workspace);
                 if(!result)
                     return false;
@@ -490,5 +498,98 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             setSvnExe(req.getParameter("svn_exe"));
             return true;
         }
+
+        /**
+         * Returns the Subversion version information.
+         *
+         * @return
+         *      null if failed to obtain.
+         */
+        public Version version(Launcher l, String svnExe) {
+            try {
+                if(svnExe==null || svnExe.equals(""))    svnExe="svn";
+
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                l.launch(new String[]{svnExe,"--version"},new String[0],out,FilePath.RANDOM).join();
+
+                // parse the first line for version
+                BufferedReader r = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(out.toByteArray())));
+                String line;
+                while((line = r.readLine())!=null) {
+                    Matcher m = SVN_VERSION.matcher(line);
+                    if(m.matches())
+                        return new Version(Integer.parseInt(m.group(2)), m.group(1));
+                }
+
+                // ancient version of subversions didn't have the fixed version number line.
+                // or maybe something else is going wrong.
+                LOGGER.log(Level.WARNING, "Failed to parse the first line from svn output: "+line);
+                return new Version(0,"(unknown)");
+            } catch (IOException e) {
+                LOGGER.log(Level.WARNING, "Failed to check svn version", e);
+                return null; // failed to obtain
+            }
+        }
+
+        // web methods
+
+        public void doVersionCheck(StaplerRequest req, StaplerResponse rsp) throws IOException {
+            // this method runs a new process, so it needs to be protected
+            if(!Hudson.adminCheck(req,rsp))
+                return;
+
+            rsp.setStatus(HttpServletResponse.SC_OK);
+            rsp.setContentType("text/html");
+            PrintWriter w = rsp.getWriter();
+
+            String svnExe = req.getParameter("exe");
+
+            Version v = version(new Launcher(TaskListener.NULL),svnExe);
+            if(v==null) {
+                w.println("<div class=error>Failed to check subversion version info. Is this a valid path?</div>");
+                return;
+            }
+            if(v.isOK()) {
+                // no need to report anything
+                w.println("<div></div>");
+            } else {
+                w.println("<div class=error>Version "+v.versionId+" found, but 1.3.0 is required</div>");
+            }
+        }
     }
+
+    public static final class Version {
+        private final int revision;
+        private String versionId;
+
+        public Version(int revision, String versionId) {
+            this.revision = revision;
+            this.versionId = versionId;
+        }
+
+        /**
+         * Repository revision ID of this build.
+         */
+        public int getRevision() {
+            return revision;
+        }
+
+        /**
+         * Human-readable version string.
+         */
+        public String getVersionId() {
+            return versionId;
+        }
+
+        /**
+         * We use "svn info --xml", which is new in 1.3.0
+         */
+        public boolean isOK() {
+            return revision>=17949;
+        }
+    }
+
+    private static final Pattern SVN_VERSION = Pattern.compile("svn, .+ ([0-9.]+) \\(r([0-9]+)\\)");
+
+    private static final Logger LOGGER = Logger.getLogger(SubversionSCM.class.getName());
 }
