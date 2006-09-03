@@ -3,6 +3,7 @@ package hudson.scm;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
+import hudson.Proc;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
@@ -572,6 +573,13 @@ public class CVSSCM extends AbstractCVSFamilySCM {
                     w.println("<div class=error>No such file exists</div>");
                 }
             }
+        }
+
+        public void doVersion(StaplerRequest req, StaplerResponse rsp) throws IOException {
+            rsp.setContentType("text/plain");
+            Proc proc = Hudson.getInstance().createLauncher(TaskListener.NULL).launch(
+                new String[]{"cvs", "--version"}, new String[0], rsp.getOutputStream(), FilePath.RANDOM);
+            proc.join();
         }
     }
 
