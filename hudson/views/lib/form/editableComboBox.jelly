@@ -13,7 +13,9 @@
 	  <j:set target="${requestScope}" property="editableComboBox_source_loaded" value="true" />
 	</j:if>
 
-	<input id="${attrs.id}" autocomplete="off" class="${attrs.clazz}" name="${attrs.name}" value="${attrs.value}" />
+	<input id="${attrs.id}" autocomplete="off" class="${attrs.clazz}"
+         name="${attrs.name}" value="${attrs.value}"
+         checkUrl="${attrs.checkUrl}" />
 	<j:set target="${requestScope}" property="editableComboBox" value="${attrs.id}" />
 	<script type="text/javascript">
 	  var ${id}_values = new Array();

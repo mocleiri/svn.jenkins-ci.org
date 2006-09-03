@@ -1,5 +1,6 @@
 package hudson.scm;
 
+import static hudson.Util.fixEmpty;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
@@ -13,6 +14,7 @@ import hudson.model.Result;
 import hudson.model.StreamBuildListener;
 import hudson.model.TaskListener;
 import hudson.model.Hudson;
+import hudson.model.ModelObject;
 import hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.ForkOutputStream;
@@ -471,7 +473,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
     static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
-    public static final class DescriptorImpl extends Descriptor<SCM> {
+    public static final class DescriptorImpl extends Descriptor<SCM> implements ModelObject {
         DescriptorImpl() {
             super(CVSSCM.class);
         }
@@ -560,8 +562,8 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             rsp.setContentType("text/html");
             PrintWriter w = rsp.getWriter();
 
-            String v = req.getParameter("value");
-            if(v==null || v.equals("")) {
+            String v = fixEmpty(req.getParameter("value"));
+            if(v==null) {
                 // default.
                 w.print("<div/>");
             } else {
@@ -575,10 +577,116 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             }
         }
 
+        /**
+         * Displays "cvs --version" for trouble shooting.
+         */
         public void doVersion(StaplerRequest req, StaplerResponse rsp) throws IOException {
             rsp.setContentType("text/plain");
             Proc proc = Hudson.getInstance().createLauncher(TaskListener.NULL).launch(
                 new String[]{"cvs", "--version"}, new String[0], rsp.getOutputStream(), FilePath.RANDOM);
+            proc.join();
+        }
+
+        /**
+         * Checks the entry to the CVSROOT field.
+         * <p>
+         * Also checks if .cvspass file contains the entry for this.
+         */
+        public void doCvsrootCheck(StaplerRequest req, StaplerResponse rsp) throws IOException {
+            rsp.setStatus(HttpServletResponse.SC_OK);
+            rsp.setContentType("text/html");
+            PrintWriter w = rsp.getWriter();
+
+            String v = fixEmpty(req.getParameter("value"));
+            if(v==null) {
+                w.print("<div class=error>CVSROOT is mandatory</div>");
+                return;
+            }
+
+            // CVSROOT format isn't really that well defined. So it's hard to check this rigorously.
+            if(v.startsWith(":pserver") || v.startsWith(":ext")) {
+                if(!CVSROOT_PSERVER_PATTERN.matcher(v).matches()) {
+                    w.print("<div class=error>Invalid CVSROOT string</div>");
+                    return;
+                }
+                // I can't really test if the machine name exists, either.
+                // some cvs, such as SOCKS-enabled cvs can resolve host names that Hudson might not
+                // be able to. If :ext is used, all bets are off anyway.
+            }
+
+            // check .cvspass file to see if it has entry.
+            // CVS handles authentication only if it's pserver.
+            if(v.startsWith(":pserver")) {
+                String cvspass = getCvspassFile();
+                File passfile;
+                if(cvspass.equals("")) {
+                    passfile = new File(new File(System.getProperty("user.home")),".cvspass");
+                } else {
+                    passfile = new File(cvspass);
+                }
+
+                if(passfile.exists()) {
+                    // It's possible that we failed to locate the correct .cvspass file location,
+                    // so don't report an error if we couldn't locate this file.
+                    //
+                    // if this is explicitly specified, then our system config page should have
+                    // reported an error.
+                    if(!scanCvsPassFile(passfile, v)) {
+                        w.print("<div class=error>It doesn't look like this CVSROOT has its password set." +
+                            " Would you like to set it now?</div>");
+                        return;
+                    }
+                }
+            }
+
+            // all tests passed so far
+            w.print("<div/>");
+        }
+
+        /**
+         * Checks if the given pserver CVSROOT value exists in the pass file.
+         */
+        private boolean scanCvsPassFile(File passfile, String cvsroot) throws IOException {
+            cvsroot += ' ';
+            BufferedReader in = new BufferedReader(new FileReader(passfile));
+            try {
+                String line;
+                while((line=in.readLine())!=null) {
+                    if(line.startsWith(cvsroot))
+                        return true;
+                }
+                return false;
+            } finally {
+                in.close();
+            }
+        }
+
+        private static final Pattern CVSROOT_PSERVER_PATTERN =
+            Pattern.compile(":(ext|pserver):[^@:]+@[^:]+:(\\d+:)?.+");
+
+        /**
+         * Runs cvs login command.
+         *
+         * TODO: this apparently doesn't work. Probably related to the fact that
+         * cvs does some tty magic to disable ecoback or whatever.
+         */
+        public void doPostPassword(StaplerRequest req, StaplerResponse rsp) throws IOException {
+            if(!Hudson.adminCheck(req,rsp))
+                return;
+
+            String cvsroot = req.getParameter("cvsroot");
+            String password = req.getParameter("password");
+
+            if(cvsroot==null || password==null) {
+                rsp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                return;
+            }
+
+            rsp.setContentType("text/plain");
+            Proc proc = Hudson.getInstance().createLauncher(TaskListener.NULL).launch(
+                new String[]{"cvs", "-d",cvsroot,"login"}, new String[0],
+                new ByteArrayInputStream((password+"\n").getBytes()),
+                rsp.getOutputStream());
             proc.join();
         }
     }

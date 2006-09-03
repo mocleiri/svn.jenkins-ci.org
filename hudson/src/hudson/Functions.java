@@ -9,6 +9,7 @@ import org.kohsuke.stapler.StaplerRequest;
 
 import java.util.List;
 import java.util.Map;
+import java.io.File;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -127,5 +128,9 @@ public class Functions {
 
     public static Map getEnvVars() {
         return EnvVars.masterEnvVars;
+    }
+
+    public static boolean isWindows() {
+        return File.pathSeparatorChar==';';
     }
 }

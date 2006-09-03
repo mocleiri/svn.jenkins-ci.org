@@ -239,4 +239,20 @@ public class Util {
     public static void touch(File file) throws IOException {
         new FileOutputStream(file).close();
     }
+
+    /**
+     * Convert null to "".
+     */
+    public static String fixNull(String s) {
+        if(s==null)     return "";
+        else            return s;
+    }
+
+    /**
+     * Convert empty string to null.
+     */
+    public static String fixEmpty(String s) {
+        if(s==null || s.length()==0)    return null;
+        return s;
+    }
 }
