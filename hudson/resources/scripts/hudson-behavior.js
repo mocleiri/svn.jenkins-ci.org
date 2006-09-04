@@ -133,7 +133,6 @@ var hudsonRules = {
   }
 };
 
-Behaviour.start();
 Behaviour.register(hudsonRules);
 
 
