@@ -22,8 +22,8 @@ var Form = {
         method : 'get',
         onComplete : function(x) {
           next.target.innerHTML = x.responseText;
-          inProgress = false;
-          schedule();
+          Form.inProgress = false;
+          Form.schedule();
         }
       }
     );
@@ -92,6 +92,18 @@ var hudsonRules = {
           onComplete : function(x) {e.targetElement.innerHTML = x.responseText;}
         }
       );
+    }
+  },
+
+  // validate form values to be a number
+  "input.number" : function(e) {
+    e.targetElement = findFollowingTR(e,"validation-error-area").firstChild.nextSibling;
+    e.onchange = function() {
+      if(this.value.match(/^\d+$/)) {
+        this.targetElement.innerHTML="";
+      } else {
+        this.targetElement.innerHTML="<div class=error>Not a number</div>";
+      }
     }
   },
 
