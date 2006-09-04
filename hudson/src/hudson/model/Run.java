@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SimpleTimeZone;
+import java.util.logging.Logger;
 
 /**
  * A particular execution of {@link Job}.
@@ -146,11 +147,29 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
     public void setResult(Result r) {
         // state can change only when we are building
         assert state==State.BUILDING;
+
+        StackTraceElement caller = findCaller(Thread.currentThread().getStackTrace(),"setResult");
+
+
         // result can only get worse
-        if(result==null)
+        if(result==null) {
             result = r;
-        else
-            result = result.combine(r);
+            LOGGER.info(toString()+" : result is set to "+r+" by "+caller);
+        } else {
+            if(r.isWorseThan(result)) {
+                LOGGER.info(toString()+" : result is set to "+r+" by "+caller);
+                result = r;
+            }
+        }
+    }
+
+    private StackTraceElement findCaller(StackTraceElement[] stackTrace, String callee) {
+        for(int i=0; i<stackTrace.length-1; i++) {
+            StackTraceElement e = stackTrace[i];
+            if(e.getMethodName().equals(callee))
+                return stackTrace[i+1];
+        }
+        return null; // not found
     }
 
     /**
@@ -457,6 +476,8 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
 
                 result = job.run(listener);
 
+                LOGGER.info(toString()+" main build action completed: "+result);
+
                 job.post(listener);
 
             } catch (ThreadDeath t) {
@@ -515,9 +536,11 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
      */
     protected void onEndBuilding() {
         state = State.COMPLETED;
-        if(result==null)
+        if(result==null) {
             // shouldn't happen, but be defensive until we figure out why
             result = Result.FAILURE;
+            LOGGER.warning(toString()+": No build result is set, so marking as failure. This shouldn't happen");
+        }
     }
 
     /**
@@ -619,4 +642,6 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
         XSTREAM.alias("build",Build.class);
         XSTREAM.registerConverter(Result.conv);
     }
+
+    private static final Logger LOGGER = Logger.getLogger(Run.class.getName());
 }
