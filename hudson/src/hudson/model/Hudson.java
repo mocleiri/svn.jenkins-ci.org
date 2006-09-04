@@ -53,6 +53,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
+import java.util.Collections;
+import java.util.logging.LogRecord;
 
 /**
  * Root object of the system.
@@ -780,7 +782,7 @@ public final class Hudson extends JobCollection implements Node {
             return;
 
         req.setCharacterEncoding("UTF-8");
-        
+
         String name = req.getParameter("name");
 
         try {
@@ -994,6 +996,11 @@ public final class Hudson extends JobCollection implements Node {
         rsp.sendError(StaplerResponse.SC_FORBIDDEN);
         return false;
     }
+
+    /**
+     * Live view of recent {@link LogRecord}s produced by Hudson.
+     */
+    public static List<LogRecord> logRecords = Collections.EMPTY_LIST; // initialized to dummy value to avoid NPE
 
     /**
      * Thread-safe reusable {@link XStream}.

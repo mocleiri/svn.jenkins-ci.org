@@ -12,7 +12,8 @@
       <j:if test="${!empty(it.pluginManager.plugins)}">
         <t:summary icon="gear2.gif"          href="managePlugins">Manage Plugins</t:summary>
       </j:if>
-      <t:summary icon="computer.gif"          href="systemInfo"  >System Information for Trouble-shooting</t:summary>
+      <t:summary icon="computer.gif"         href="systemInfo"  >System Information for Trouble-shooting</t:summary>
+      <t:summary icon="clipboard.gif"        href="log"         >System Log</t:summary>
       <t:summary icon="system-log-out.gif"   href="${h.ifThenElse(!it.quietingDown,'quietDown','cancelQuietDown')}" iconOnly="true">
         <j:choose>
           <j:when test="${it.quietingDown}">

@@ -5,6 +5,7 @@ import com.thoughtworks.xstream.core.JVM;
 import hudson.model.Hudson;
 import hudson.triggers.Trigger;
 import hudson.util.IncompatibleVMDetected;
+import hudson.util.RingBufferLogHandler;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -16,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 /**
  * Entry point when Hudson is used as a webapp.
@@ -28,6 +30,8 @@ public class WebAppMain implements ServletContextListener {
      * Creates the sole instance of {@link Hudson} and register it to the {@link ServletContext}.
      */
     public void contextInitialized(ServletContextEvent event) {
+        installLogger();
+
         File home = getHomeDir(event);
         home.mkdirs();
         System.out.println("hudson home directory: "+home);
@@ -62,6 +66,15 @@ public class WebAppMain implements ServletContextListener {
         context.setAttribute("version",ver);
 
         Trigger.init(); // start running trigger
+    }
+
+    /**
+     * Installs log handler to monitor all Hudson logs.
+     */
+    private void installLogger() {
+        RingBufferLogHandler handler = new RingBufferLogHandler();
+        Hudson.logRecords = handler.getView();
+        Logger.getLogger("hudson").addHandler(handler);
     }
 
     /**

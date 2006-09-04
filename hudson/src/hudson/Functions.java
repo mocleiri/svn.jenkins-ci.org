@@ -4,11 +4,14 @@ import hudson.model.ModelObject;
 import hudson.model.Node;
 import hudson.model.Project;
 import hudson.model.Run;
+import hudson.model.Hudson;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.StaplerRequest;
 
 import java.util.List;
 import java.util.Map;
+import java.util.logging.LogRecord;
+import java.util.logging.SimpleFormatter;
 import java.io.File;
 
 /**
@@ -133,4 +136,14 @@ public class Functions {
     public static boolean isWindows() {
         return File.pathSeparatorChar==';';
     }
+
+    public static List<LogRecord> getLogRecords() {
+        return Hudson.logRecords;
+    }
+
+    public static String printLogRecord(LogRecord r) {
+        return formatter.format(r);
+    }
+
+    private static final SimpleFormatter formatter = new SimpleFormatter();
 }
