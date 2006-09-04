@@ -34,6 +34,7 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -957,6 +958,28 @@ public final class Hudson extends JobCollection implements Node {
         rsp.setStatus(HttpServletResponse.SC_OK);
         rsp.setContentType("text/plain");
         rsp.getWriter().println("Invoked");
+    }
+
+    /**
+     * Checks if the path is a valid path.
+     */
+    public void doCheckLocalFSRoot( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        // this can be used to check the existence of a file on the server, so needs to be protected
+        if(!adminCheck(req,rsp))
+            return;
+
+        File f = new File(Util.fixNull(req.getParameter("value")));
+        rsp.setContentType("text/html");
+        PrintWriter w = rsp.getWriter();
+        if(f.isDirectory()) {// OK
+            w.print("<div/>");
+        } else {// nope
+            if(f.exists()) {
+                w.print("<div class=error>"+f+" is not a directory</div>");
+            } else {
+                w.print("<div class=error>No such directory: "+f+"</div>");
+            }
+        }
     }
 
 

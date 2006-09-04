@@ -14,11 +14,11 @@
           rows="5" style="width:100%">${it.systemMessage}</textarea>
       </s:entry>
       <s:entry title="# of executors" help="/help/system-config/numExecutors.html">
-        <input type="text" name="numExecutors" class="setting-input"
+        <input type="text" name="numExecutors" class="setting-input number"
           value="${it.numExecutors}"/>
       </s:entry>
       <s:entry title="Quiet period" help="/help/project-config/quietPeriod.html">
-        <input class="setting-input" name="quiet_period"
+        <input class="setting-input number" name="quiet_period"
           type="text" value="${it.quietPeriod}"/>
       </s:entry>
       <s:entry title="Enable security" help="/help/system-config/enableSecurity.html">
@@ -45,7 +45,7 @@
               </s:entry>
 
               <s:entry title="# of executors" help="/help/system-config/master-slave/numExecutors.html">
-                <input class="setting-input" name="slave_executors"
+                <input class="setting-input number" name="slave_executors"
                   type="text" value="${s.numExecutors}" />
               </s:entry>
 
@@ -55,7 +55,8 @@
               </s:entry>
 
               <s:entry title="local FS root" help="/help/system-config/master-slave/localFS.html">
-                <input class="setting-input" name="slave_localFS"
+                <input class="setting-input validated" name="slave_localFS"
+                  checkUrl="'checkLocalFSRoot?value='+this.value"
                   type="text" value="${s.localFS}" />
               </s:entry>
 
