@@ -28,7 +28,13 @@
 	          ${eloop.index+1}
 	        </td>
 	        <j:choose>
-	          <j:when test="${e.currentBuild==null}">
+            <j:when test="${!e.alive}">
+              <td class="pane" width="70%">
+                <span class="error">Dead (!)</span>
+              </td>
+              <td class="pane"></td>
+            </j:when>
+            <j:when test="${e.currentBuild==null}">
 	            <td class="pane" width="70%">
 	              Idle
 	            </td>
