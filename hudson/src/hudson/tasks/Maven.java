@@ -2,6 +2,7 @@ package hudson.tasks;
 
 import hudson.Launcher;
 import hudson.Util;
+import hudson.util.FormFieldValidator;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
@@ -9,11 +10,13 @@ import hudson.model.Descriptor;
 import hudson.model.Project;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
 import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
 /**
  * Build by using Maven.
@@ -158,6 +161,31 @@ public class Maven extends Builder {
 
         public Builder newInstance(StaplerRequest req) {
             return new Maven(req.getParameter("maven_targets"),req.getParameter("maven_version"));
+        }
+
+
+    //
+    // web methods
+    //
+        /**
+         * Checks if the MAVEN_HOME is valid.
+         */
+        public void doCheckMavenHome( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+            // this can be used to check the existence of a file on the server, so needs to be protected
+            new FormFieldValidator(req,rsp,true) {
+                public void check() throws IOException, ServletException {
+                    File f = getFileParameter("value");
+                    if(!f.isDirectory()) {
+                        error(f+" is not a directory");
+                        return;
+                    }
+
+                    // I couldn't come up with a simple logic to test for a maven installation
+                    // there seems to be just too much difference between m1 and m2.
+
+                    ok();
+                }
+            }.process();
         }
     }
 

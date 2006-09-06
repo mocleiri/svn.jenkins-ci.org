@@ -1,23 +1,24 @@
 package hudson.scm;
 
-import static hudson.Util.fixEmpty;
 import hudson.FilePath;
 import hudson.Launcher;
-import hudson.Util;
 import hudson.Proc;
+import hudson.Util;
+import static hudson.Util.fixEmpty;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
+import hudson.model.Hudson;
+import hudson.model.ModelObject;
 import hudson.model.Project;
 import hudson.model.Result;
 import hudson.model.StreamBuildListener;
 import hudson.model.TaskListener;
-import hudson.model.Hudson;
-import hudson.model.ModelObject;
 import hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.ForkOutputStream;
+import hudson.util.FormFieldValidator;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.Expand;
 import org.apache.tools.zip.ZipEntry;
@@ -38,7 +39,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -552,29 +552,26 @@ public class CVSSCM extends AbstractCVSFamilySCM {
     // web methods
         //
 
-        public void doCvsPassCheck(StaplerRequest req, StaplerResponse rsp) throws IOException {
+        public void doCvsPassCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
             // this method can be used to check if a file exists anywhere in the file system,
             // so it should be protected.
-            if(!Hudson.adminCheck(req,rsp))
-                return;
+            new FormFieldValidator(req,rsp,true) {
+                protected void check() throws IOException, ServletException {
+                    String v = fixEmpty(request.getParameter("value"));
+                    if(v==null) {
+                        // default.
+                        ok();
+                    } else {
+                        File cvsPassFile = new File(v);
 
-            rsp.setStatus(HttpServletResponse.SC_OK);
-            rsp.setContentType("text/html");
-            PrintWriter w = rsp.getWriter();
-
-            String v = fixEmpty(req.getParameter("value"));
-            if(v==null) {
-                // default.
-                w.print("<div/>");
-            } else {
-                File cvsPassFile = new File(v);
-
-                if(cvsPassFile.exists()) {
-                    w.println("<div/>");
-                } else {
-                    w.println("<div class=error>No such file exists</div>");
+                        if(cvsPassFile.exists()) {
+                            ok();
+                        } else {
+                            error("No such file exists");
+                        }
+                    }
                 }
-            }
+            }.process();
         }
 
         /**
@@ -592,55 +589,55 @@ public class CVSSCM extends AbstractCVSFamilySCM {
          * <p>
          * Also checks if .cvspass file contains the entry for this.
          */
-        public void doCvsrootCheck(StaplerRequest req, StaplerResponse rsp) throws IOException {
-            rsp.setStatus(HttpServletResponse.SC_OK);
-            rsp.setContentType("text/html");
-            PrintWriter w = rsp.getWriter();
-
-            String v = fixEmpty(req.getParameter("value"));
-            if(v==null) {
-                w.print("<div class=error>CVSROOT is mandatory</div>");
-                return;
-            }
-
-            // CVSROOT format isn't really that well defined. So it's hard to check this rigorously.
-            if(v.startsWith(":pserver") || v.startsWith(":ext")) {
-                if(!CVSROOT_PSERVER_PATTERN.matcher(v).matches()) {
-                    w.print("<div class=error>Invalid CVSROOT string</div>");
-                    return;
-                }
-                // I can't really test if the machine name exists, either.
-                // some cvs, such as SOCKS-enabled cvs can resolve host names that Hudson might not
-                // be able to. If :ext is used, all bets are off anyway.
-            }
-
-            // check .cvspass file to see if it has entry.
-            // CVS handles authentication only if it's pserver.
-            if(v.startsWith(":pserver")) {
-                String cvspass = getCvspassFile();
-                File passfile;
-                if(cvspass.equals("")) {
-                    passfile = new File(new File(System.getProperty("user.home")),".cvspass");
-                } else {
-                    passfile = new File(cvspass);
-                }
-
-                if(passfile.exists()) {
-                    // It's possible that we failed to locate the correct .cvspass file location,
-                    // so don't report an error if we couldn't locate this file.
-                    //
-                    // if this is explicitly specified, then our system config page should have
-                    // reported an error.
-                    if(!scanCvsPassFile(passfile, v)) {
-                        w.print("<div class=error>It doesn't look like this CVSROOT has its password set." +
-                            " Would you like to set it now?</div>");
+        public void doCvsrootCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+            new FormFieldValidator(req,rsp,false) {
+                protected void check() throws IOException, ServletException {
+                    String v = fixEmpty(request.getParameter("value"));
+                    if(v==null) {
+                        error("CVSROOT is mandatory");
                         return;
                     }
-                }
-            }
 
-            // all tests passed so far
-            w.print("<div/>");
+                    // CVSROOT format isn't really that well defined. So it's hard to check this rigorously.
+                    if(v.startsWith(":pserver") || v.startsWith(":ext")) {
+                        if(!CVSROOT_PSERVER_PATTERN.matcher(v).matches()) {
+                            error("Invalid CVSROOT string");
+                            return;
+                        }
+                        // I can't really test if the machine name exists, either.
+                        // some cvs, such as SOCKS-enabled cvs can resolve host names that Hudson might not
+                        // be able to. If :ext is used, all bets are off anyway.
+                    }
+
+                    // check .cvspass file to see if it has entry.
+                    // CVS handles authentication only if it's pserver.
+                    if(v.startsWith(":pserver")) {
+                        String cvspass = getCvspassFile();
+                        File passfile;
+                        if(cvspass.equals("")) {
+                            passfile = new File(new File(System.getProperty("user.home")),".cvspass");
+                        } else {
+                            passfile = new File(cvspass);
+                        }
+
+                        if(passfile.exists()) {
+                            // It's possible that we failed to locate the correct .cvspass file location,
+                            // so don't report an error if we couldn't locate this file.
+                            //
+                            // if this is explicitly specified, then our system config page should have
+                            // reported an error.
+                            if(!scanCvsPassFile(passfile, v)) {
+                                error("It doesn't look like this CVSROOT has its password set." +
+                                    " Would you like to set it now?");
+                                return;
+                            }
+                        }
+                    }
+
+                    // all tests passed so far
+                    ok();
+                }
+            }.process();
         }
 
         /**

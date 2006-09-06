@@ -36,7 +36,7 @@ public abstract class Descriptor<T extends Describable<T>> {
     /**
      * The class being described by this descriptor.
      */
-    protected final Class<? extends T> clazz;
+    public final Class<? extends T> clazz;
 
     protected Descriptor(Class<? extends T> clazz) {
         this.clazz = clazz;

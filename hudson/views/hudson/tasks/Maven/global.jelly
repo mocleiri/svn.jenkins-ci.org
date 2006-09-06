@@ -9,14 +9,10 @@
               type="text" value="${inst.name}"/>
           </f:entry>
 
-          <j:set var="status" value="${null}" />
-          <j:if test="${inst!=null and !inst.exists and inst.name!=''}">
-            <j:set var="status" value="&lt;span class=error>No such installation exists&lt;/span>" />
-          </j:if>
-          <f:entry title="MAVEN_HOME"
-            description="${status}">
-            <input class="setting-input" name="maven_home"
-              type="text" value="${inst.mavenHome}"/>
+          <f:entry title="MAVEN_HOME">
+            <input class="setting-input validated" name="maven_home"
+              type="text" value="${inst.mavenHome}"
+              checkUrl="'builder/Maven/checkMavenHome?value='+this.value"/>
           </f:entry>
           <f:entry title="">
             <div align="right">

@@ -2,19 +2,20 @@ package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
 import hudson.Launcher;
+import hudson.Plugin;
+import hudson.PluginManager;
+import hudson.PluginWrapper;
 import hudson.Util;
 import hudson.XmlFile;
-import hudson.PluginManager;
-import hudson.Plugin;
-import hudson.PluginWrapper;
 import hudson.model.Descriptor.FormException;
 import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMS;
 import hudson.tasks.BuildStep;
-import hudson.tasks.Publisher;
 import hudson.tasks.Builder;
+import hudson.tasks.Publisher;
 import hudson.triggers.Trigger;
+import hudson.util.FormFieldValidator;
 import hudson.util.XStream2;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
@@ -25,8 +26,8 @@ import org.apache.tools.ant.taskdefs.Copy;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
-import javax.servlet.ServletException;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -34,7 +35,6 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -43,6 +43,7 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -54,7 +55,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
-import java.util.Collections;
 import java.util.logging.LogRecord;
 
 /**
@@ -167,9 +167,32 @@ public final class Hudson extends JobCollection implements Node {
     /**
      * Gets the SCM descriptor by name. Primarily used for making them web-visible.
      */
-    public Descriptor<SCM> getScm(String displayName) {
-        for (Descriptor<SCM> d : SCMS.SCMS) {
-            if(d.getDisplayName().equals(displayName))
+    public Descriptor<SCM> getScm(String shortClassName) {
+        return findDescriptor(shortClassName,SCMS.SCMS);
+    }
+
+    /**
+     * Gets the builder descriptor by name. Primarily used for making them web-visible.
+     */
+    public Descriptor<Builder> getBuilder(String shortClassName) {
+        return findDescriptor(shortClassName, BuildStep.BUILDERS);
+    }
+
+    /**
+     * Gets the publisher descriptor by name. Primarily used for making them web-visible.
+     */
+    public Descriptor<Publisher> getPublisher(String shortClassName) {
+        return findDescriptor(shortClassName, BuildStep.PUBLISHERS);
+    }
+
+    /**
+     * Finds a descriptor that has the specified name.
+     */
+    private <T extends Describable<T>>
+    Descriptor<T> findDescriptor(String shortClassName, Collection<Descriptor<T>> descriptors) {
+        String name = '.'+shortClassName;
+        for (Descriptor<T> d : descriptors) {
+            if(d.clazz.getName().endsWith(name))
                 return d;
         }
         return null;
@@ -963,23 +986,46 @@ public final class Hudson extends JobCollection implements Node {
     /**
      * Checks if the path is a valid path.
      */
-    public void doCheckLocalFSRoot( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+    public void doCheckLocalFSRoot( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         // this can be used to check the existence of a file on the server, so needs to be protected
-        if(!adminCheck(req,rsp))
-            return;
-
-        File f = new File(Util.fixNull(req.getParameter("value")));
-        rsp.setContentType("text/html");
-        PrintWriter w = rsp.getWriter();
-        if(f.isDirectory()) {// OK
-            w.print("<div/>");
-        } else {// nope
-            if(f.exists()) {
-                w.print("<div class=error>"+f+" is not a directory</div>");
-            } else {
-                w.print("<div class=error>No such directory: "+f+"</div>");
+        new FormFieldValidator(req,rsp,true) {
+            public void check() throws IOException, ServletException {
+                File f = getFileParameter("value");
+                if(f.isDirectory()) {// OK
+                    ok();
+                } else {// nope
+                    if(f.exists()) {
+                        error(f+" is not a directory");
+                    } else {
+                        error("No such directory: "+f);
+                    }
+                }
             }
-        }
+        }.process();
+    }
+
+    /**
+     * Checks if the JAVA_HOME is a valid JAVA_HOME path.
+     */
+    public void doJavaHomeCheck( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        // this can be used to check the existence of a file on the server, so needs to be protected
+        new FormFieldValidator(req,rsp,true) {
+            public void check() throws IOException, ServletException {
+                File f = getFileParameter("value");
+                if(!f.isDirectory()) {
+                    error(f+" is not a directory");
+                    return;
+                }
+
+                File toolsJar = new File(f,"lib/tools.jar");
+                if(!toolsJar.exists()) {
+                    error(f+" doesn't look like a JDK directory");
+                    return;
+                }
+
+                ok();
+            }
+        }.process();
     }
 
 

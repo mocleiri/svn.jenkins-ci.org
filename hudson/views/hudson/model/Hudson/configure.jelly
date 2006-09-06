@@ -104,8 +104,9 @@
                 <j:set var="status" value="&lt;span class=error>No such JDK exists&lt;/span>" />
               </j:if>
               <s:entry title="JAVA_HOME" description="${status}">
-                <input class="setting-input" name="jdk_home"
-                  type="text" value="${inst.javaHome}" />
+                <input class="setting-input validated" name="jdk_home"
+                  type="text" value="${inst.javaHome}"
+                  checkUrl="'javaHomeCheck?value='+this.value"/>
               </s:entry>
               <s:entry title="">
                 <div align="right">

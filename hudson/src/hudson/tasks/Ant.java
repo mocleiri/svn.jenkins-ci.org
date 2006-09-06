@@ -2,6 +2,7 @@ package hudson.tasks;
 
 import hudson.Launcher;
 import hudson.Util;
+import hudson.util.FormFieldValidator;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
@@ -9,11 +10,13 @@ import hudson.model.Descriptor;
 import hudson.model.Project;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
 import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -156,6 +159,33 @@ public class Ant extends Builder {
 
         public Builder newInstance(StaplerRequest req) {
             return new Ant(req.getParameter("ant_targets"),req.getParameter("ant_version"));
+        }
+
+    //
+    // web methods
+    //
+        /**
+         * Checks if the ANT_HOME is valid.
+         */
+        public void doCheckAntHome( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+            // this can be used to check the existence of a file on the server, so needs to be protected
+            new FormFieldValidator(req,rsp,true) {
+                public void check() throws IOException, ServletException {
+                    File f = getFileParameter("value");
+                    if(!f.isDirectory()) {
+                        error(f+" is not a directory");
+                        return;
+                    }
+
+                    File antJar = new File(f,"lib/ant.jar");
+                    if(!antJar.exists()) {
+                        error(f+" doesn't look like an Ant directory");
+                        return;
+                    }
+
+                    ok();
+                }
+            }.process();
         }
     }
 

@@ -9,8 +9,8 @@ import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Project;
 import hudson.model.TaskListener;
-import hudson.model.Hudson;
 import hudson.util.ArgumentListBuilder;
+import hudson.util.FormFieldValidator;
 import org.apache.commons.digester.Digester;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -18,8 +18,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -533,28 +533,24 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
 
         // web methods
 
-        public void doVersionCheck(StaplerRequest req, StaplerResponse rsp) throws IOException {
+        public void doVersionCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
             // this method runs a new process, so it needs to be protected
-            if(!Hudson.adminCheck(req,rsp))
-                return;
+            new FormFieldValidator(req,rsp,true) {
+                protected void check() throws IOException, ServletException {
+                    String svnExe = request.getParameter("exe");
 
-            rsp.setStatus(HttpServletResponse.SC_OK);
-            rsp.setContentType("text/html");
-            PrintWriter w = rsp.getWriter();
-
-            String svnExe = req.getParameter("exe");
-
-            Version v = version(new Launcher(TaskListener.NULL),svnExe);
-            if(v==null) {
-                w.println("<div class=error>Failed to check subversion version info. Is this a valid path?</div>");
-                return;
-            }
-            if(v.isOK()) {
-                // no need to report anything
-                w.println("<div></div>");
-            } else {
-                w.println("<div class=error>Version "+v.versionId+" found, but 1.3.0 is required</div>");
-            }
+                    Version v = version(new Launcher(TaskListener.NULL),svnExe);
+                    if(v==null) {
+                        error("Failed to check subversion version info. Is this a valid path?");
+                        return;
+                    }
+                    if(v.isOK()) {
+                        ok();
+                    } else {
+                        error("Version "+v.versionId+" found, but 1.3.0 is required");
+                    }
+                }
+            }.process();
         }
     }
 
