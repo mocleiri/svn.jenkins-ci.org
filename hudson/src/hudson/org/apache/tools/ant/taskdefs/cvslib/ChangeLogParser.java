@@ -26,6 +26,11 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.TimeZone;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  * A class used to parse the output of the CVS log command.
@@ -39,6 +44,7 @@ class ChangeLogParser {
     private static final int GET_COMMENT = 3;
     private static final int GET_REVISION = 4;
     private static final int GET_PREVIOUS_REV = 5;
+    private static final int GET_SYMBOLIC_NAMES = 6;
 
     /**
      * input format for dates read in from cvs log.
@@ -67,6 +73,12 @@ class ChangeLogParser {
     private String m_revision;
     private String m_previousRevision;
     /**
+     * All branches available on the current file.
+     * Keyed by branch revision prefix (like "1.2.3" if files in the branch have revision numbers like
+     * "1.2.3.4") and the value is the branch name.
+     */
+    private final Map<String,String> branches = new HashMap<String,String>();
+    /**
      * True if the log record indicates deletion;
      */
     private boolean m_dead;
@@ -74,7 +86,7 @@ class ChangeLogParser {
     private int m_status = GET_FILE;
 
     /** rcs entries */
-    private final Hashtable m_entries = new Hashtable();
+    private final Hashtable<String,CVSEntry> m_entries = new Hashtable<String,CVSEntry>();
 
     private final Task owner;
 
@@ -114,6 +126,10 @@ class ChangeLogParser {
                     reset();
                     processFile(line);
                     break;
+                case GET_SYMBOLIC_NAMES:
+                    processSymbolicName(line);
+                    break;
+
                 case GET_REVISION:
                     processRevision(line);
                     break;
@@ -169,9 +185,35 @@ class ChangeLogParser {
     private void processFile(final String line) {
         if (line.startsWith("Working file:")) {
             m_file = line.substring(14, line.length());
+            m_status = GET_SYMBOLIC_NAMES;
+        }
+    }
+
+    /**
+     * Obtains the revision name list
+     */
+    private void processSymbolicName(String line) {
+        if (line.startsWith("\t")) {
+            line = line.trim();
+            int idx = line.lastIndexOf(':');
+            if(idx<0) {
+                // ???
+                return;
+            }
+
+            String symbol = line.substring(0,idx);
+            Matcher m = DOT_PATTERN.matcher(line.substring(idx + 2));
+            if(!m.matches())
+                return; // not a branch name
+
+            branches.put(m.group(1)+m.group(3)+'.',symbol);
+        } else
+        if (line.startsWith("keyword substitution:")) {
             m_status = GET_REVISION;
         }
     }
+
+    private static final Pattern DOT_PATTERN = Pattern.compile("(([0-9]+\\.)+)0\\.([0-9]+)");
 
     /**
      * Process a line while in "REVISION" state.
@@ -238,10 +280,22 @@ class ChangeLogParser {
             entry = new CVSEntry(parseDate(m_date), m_author, m_comment);
             m_entries.put(entryKey, entry);
         } else {
-            entry = (CVSEntry) m_entries.get(entryKey);
+            entry = m_entries.get(entryKey);
         }
 
-        entry.addFile(m_file, m_revision, m_previousRevision, m_dead);
+        entry.addFile(m_file, m_revision, m_previousRevision, findBranch(m_revision), m_dead);
+    }
+
+    /**
+     * Finds the branch name that matches the revision, or null if not found.
+     */
+    private String findBranch(String revision) {
+        if(revision==null)  return null; // defensive check
+        for (Entry<String,String> e : branches.entrySet()) {
+            if(revision.startsWith(e.getKey()))
+                return e.getValue();
+        }
+        return null;
     }
 
     /**
@@ -277,5 +331,6 @@ class ChangeLogParser {
         m_revision = null;
         m_previousRevision = null;
         m_dead = false;
+        branches.clear();
     }
 }

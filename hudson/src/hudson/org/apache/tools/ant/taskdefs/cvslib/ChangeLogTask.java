@@ -85,6 +85,12 @@ public class ChangeLogTask extends AbstractCvsTask {
     private Date m_stop;
 
     /**
+     * To filter out change logs for a certain branch, this variable will be the branch name.
+     * Otherwise null.
+     */
+    private String branch;
+
+    /**
      * Filesets containing list of files against which the cvs log will be
      * performed. If empty then all files will in the working directory will
      * be checked.
@@ -139,6 +145,10 @@ public class ChangeLogTask extends AbstractCvsTask {
      */
     public void setStart(final Date start) {
         m_start = start;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 
 
@@ -341,6 +351,9 @@ public class ChangeLogTask extends AbstractCvsTask {
                 //Skip dates that are too late
                 continue;
             }
+            if (!cvsEntry.containsBranch(branch))
+                // didn't match the branch
+                continue;
             results.addElement(cvsEntry);
         }
 

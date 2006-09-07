@@ -26,22 +26,20 @@ class RCSFile {
     private String m_revision;
     private String m_previousRevision;
     private boolean m_dead;
-
-
-    RCSFile(final String name, final String rev) {
-        this(name, rev, null, false);
-    }
+    private String m_branch;
 
 
     RCSFile(final String name,
                   final String revision,
                   final String previousRevision,
+                  final String branch,
                   final boolean dead) {
         m_name = name;
         m_revision = revision;
         if (!revision.equals(previousRevision)) {
             m_previousRevision = previousRevision;
         }
+        m_branch = branch;
         m_dead = dead;
     }
 
@@ -55,13 +53,19 @@ class RCSFile {
         return m_revision;
     }
 
-
     String getPreviousRevision() {
         return m_previousRevision;
     }
 
     boolean isDead() {
         return m_dead;
+    }
+
+    /**
+     * Gets the name of this branch, if available.
+     */
+    String getBranch() {
+        return m_branch;
     }
 }
 

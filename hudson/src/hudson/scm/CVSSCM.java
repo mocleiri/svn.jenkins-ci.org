@@ -64,6 +64,9 @@ public class CVSSCM extends AbstractCVSFamilySCM {
      */
     private String module;
 
+    /**
+     * Branch to build. Null to indicate the trunk.
+     */
     private String branch;
 
     private String cvsRsh;
@@ -423,6 +426,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         task.setCvsRsh(cvsRsh);
         task.setFailOnError(true);
         task.setDestfile(changelogFile);
+        task.setBranch(branch);
         task.setStart(build.getPreviousBuild().getTimestamp().getTime());
         task.setEnd(build.getTimestamp().getTime());
         if(changedFiles!=null) {

@@ -28,7 +28,7 @@ class CVSEntry {
     private Date m_date;
     private String m_author;
     private final String m_comment;
-    private final Vector m_files = new Vector();
+    private final Vector<RCSFile> m_files = new Vector<RCSFile>();
 
     public CVSEntry(Date date, String author, String comment) {
         m_date = date;
@@ -36,12 +36,8 @@ class CVSEntry {
         m_comment = comment;
     }
 
-    public void addFile(String file, String revision) {
-        m_files.addElement(new RCSFile(file, revision));
-    }
-
-    public void addFile(String file, String revision, String previousRevision, boolean dead) {
-        m_files.addElement(new RCSFile(file, revision, previousRevision, dead));
+    public void addFile(String file, String revision, String previousRevision, String branch, boolean dead) {
+        m_files.addElement(new RCSFile(file, revision, previousRevision, branch, dead));
     }
 
     // maybe null, in case of error
@@ -63,6 +59,25 @@ class CVSEntry {
 
     Vector getFiles() {
         return m_files;
+    }
+
+    /**
+     * Checks if any of the entries include a change to a branch.
+     *
+     * @param branch
+     *      can be null to indicate the trunk.
+     */
+    public boolean containsBranch(String branch) {
+        for (RCSFile file : m_files) {
+            String b = file.getBranch();
+            if(b==null && branch==null)
+                return true;
+            if(b==null || branch==null)
+                continue;
+            if(b.equals(branch))
+                return true;
+        }
+        return false;
     }
 
     public String toString() {
