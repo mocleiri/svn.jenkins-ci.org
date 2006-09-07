@@ -3,10 +3,7 @@
     <select class="setting-input" name="maven_version">
       <option>(Default)</option>
       <j:forEach var="inst" items="${descriptor.installations}">
-        <j:if test="${inst.name==instance.maven.name}">
-          <j:set var="state" value="selected"/>
-        </j:if>
-        <option selected="${state}">${inst.name}</option>
+        <f:option selected="${inst.name==instance.maven.name}">${inst.name}</f:option>
       </j:forEach>
     </select>
   </f:entry>
