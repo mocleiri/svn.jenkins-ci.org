@@ -649,11 +649,19 @@ public class CVSSCM extends AbstractCVSFamilySCM {
          */
         private boolean scanCvsPassFile(File passfile, String cvsroot) throws IOException {
             cvsroot += ' ';
+            String cvsroot2 = "/1 "+cvsroot; // see http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5006835
             BufferedReader in = new BufferedReader(new FileReader(passfile));
             try {
                 String line;
                 while((line=in.readLine())!=null) {
-                    if(line.startsWith(cvsroot))
+                    // "/1 " version always have the port number in it, so examine a much with
+                    // default port 2401 left out
+                    int portIndex = line.indexOf(":2401/");
+                    String line2 = "";
+                    if(portIndex>=0)
+                        line2 = line.substring(0,portIndex+1)+line.substring(portIndex+5); // leave '/'
+
+                    if(line.startsWith(cvsroot) || line.startsWith(cvsroot2) || line2.startsWith(cvsroot2))
                         return true;
                 }
                 return false;
