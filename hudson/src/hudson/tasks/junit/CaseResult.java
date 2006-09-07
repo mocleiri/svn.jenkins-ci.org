@@ -168,7 +168,8 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
 
     public void freeze(SuiteResult parent) {
         this.parent = parent;
-        if(!isPassed()) {
+        // some old test data doesn't have failedSince value set, so for those compute them.
+        if(!isPassed() && failedSince==0) {
             CaseResult prev = getPreviousResult();
             if(prev!=null && !prev.isPassed())
                 this.failedSince = prev.failedSince;
