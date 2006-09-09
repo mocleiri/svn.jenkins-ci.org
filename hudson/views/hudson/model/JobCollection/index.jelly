@@ -1,6 +1,6 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
 	<st:header name="X-Hudson" value="${servletContext.attribute['version']}" />
-	<l:layout title="Dashboard">
+	<l:layout title="${h.ifThenElse(it==app,'Dashboard',it.viewName)}">
 		<st:include page="sidepanel.jelly" />
 		<l:main-panel>
 		  <div id="view-message">

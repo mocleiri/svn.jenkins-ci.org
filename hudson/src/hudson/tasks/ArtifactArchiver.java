@@ -1,6 +1,7 @@
 package hudson.tasks;
 
 import hudson.Launcher;
+import hudson.Util;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
@@ -12,6 +13,7 @@ import org.apache.tools.ant.types.FileSet;
 import org.kohsuke.stapler.StaplerRequest;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Copies the artifacts into an archive directory.
@@ -25,12 +27,22 @@ public class ArtifactArchiver extends AntBasedPublisher {
      */
     private final String artifacts;
 
-    public ArtifactArchiver(String artifacts) {
+    /**
+     * Just keep the last successful artifact set, no more.
+     */
+    private final boolean latestOnly;
+
+    public ArtifactArchiver(String artifacts, boolean latestOnly) {
         this.artifacts = artifacts;
+        this.latestOnly = latestOnly;
     }
 
     public String getArtifacts() {
         return artifacts;
+    }
+
+    public boolean isLatestOnly() {
+        return latestOnly;
     }
 
     public boolean prebuild(Build build, BuildListener listener) {
@@ -64,6 +76,27 @@ public class ArtifactArchiver extends AntBasedPublisher {
 
         execTask(copyTask, listener);
 
+        if(latestOnly) {
+            Build b = p.getLastSuccessfulBuild();
+            if(b!=null) {
+                while(true) {
+                    b = b.getPreviousBuild();
+                    if(b==null)     break;
+
+                    // remove old artifacts
+                    File ad = b.getArtifactsDir();
+                    if(ad.exists()) {
+                        listener.getLogger().println("Deleting old artifacts from "+b.getDisplayName());
+                        try {
+                            Util.deleteRecursive(ad);
+                        } catch (IOException e) {
+                            e.printStackTrace(listener.error(e.getMessage()));
+                        }
+                    }
+                }
+            }
+        }
+
         return true;
     }
 
@@ -86,7 +119,9 @@ public class ArtifactArchiver extends AntBasedPublisher {
         }
 
         public Publisher newInstance(StaplerRequest req) {
-            return new ArtifactArchiver(req.getParameter("artifacts"));
+            return new ArtifactArchiver(
+                req.getParameter("artifacts").trim(),
+                req.getParameter("artifacts_latest_only")!=null);
         }
     };
 }
