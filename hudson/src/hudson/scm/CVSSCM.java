@@ -554,7 +554,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
     //
     // web methods
-        //
+    //
 
         public void doCvsPassCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
             // this method can be used to check if a file exists anywhere in the file system,
