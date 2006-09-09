@@ -197,7 +197,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
 
         File[] files = dir.listFiles();
         if(files==null)
-            throw new IOException("No such directory exists: "+dir);
+            throw new IOException("No such directory exists. Did you specify the correct branch?: "+dir);
 
         for( File f : files ) {
             if(hasCVSdirs && !knownFiles.contains(f.getName())) {
