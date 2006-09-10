@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * Manages {@link PluginWrapper}s.
@@ -59,6 +60,10 @@ public final class PluginManager {
             }
         });
 
+        if(archives==null) {
+            LOGGER.severe("Hudson is unable to create "+rootDir+"\nPerhaps its security privilege is insufficient");
+            return;
+        }
         for( File arc : archives ) {
             try {
                 PluginWrapper p = new PluginWrapper(this, arc);
@@ -135,4 +140,7 @@ public final class PluginManager {
             return null;
         }
     }
+
+    private static final Logger LOGGER = Logger.getLogger(PluginManager.class.getName());
+
 }
