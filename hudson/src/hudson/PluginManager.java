@@ -2,6 +2,7 @@ package hudson;
 
 import hudson.model.Hudson;
 import hudson.util.Service;
+import java.util.logging.Level;
 
 import javax.servlet.ServletContext;
 import java.io.File;
@@ -71,8 +72,7 @@ public final class PluginManager {
                 if(p.isActive())
                     activePlugins.add(p);
             } catch (IOException e) {
-                System.err.println("Failed to load a plug-in "+arc);
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "Failed to load a plug-in " + arc, e);
             }
         }
     }
