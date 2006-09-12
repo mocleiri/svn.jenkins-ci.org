@@ -526,7 +526,8 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
                 LOGGER.log(Level.WARNING, "Failed to parse the first line from svn output: "+line);
                 return new Version(0,"(unknown)");
             } catch (IOException e) {
-                LOGGER.log(Level.WARNING, "Failed to check svn version", e);
+                // Stack trace likely to be overkill for a problem that isn't necessarily a problem at all:
+                LOGGER.log(Level.WARNING, "Failed to check svn version: {0}", e.toString());
                 return null; // failed to obtain
             }
         }
