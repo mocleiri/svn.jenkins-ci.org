@@ -81,6 +81,7 @@ public abstract class DirectoryHolder extends Actionable {
                     parentPaths.isEmpty() ? "." : repeat("../",parentPaths.size()));
                 req.setAttribute("files",buildChildPathList(f));
                 req.setAttribute("icon",icon);
+                req.setAttribute("path",path);
                 req.getView(this,"dir.jelly").forward(req,rsp);
                 return;
             } else {

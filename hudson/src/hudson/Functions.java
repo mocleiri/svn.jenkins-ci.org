@@ -124,6 +124,10 @@ public class Functions {
     public static Object ifThenElse(boolean cond, Object thenValue, Object elseValue) {
         return cond ? thenValue : elseValue;
     }
+    
+    public static String appendIfNotNull(String text, String suffix, String nullText) {
+        return text == null ? nullText : text + suffix;
+    }
 
     public static Map getSystemProperties() {
         return System.getProperties();
