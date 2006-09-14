@@ -107,8 +107,13 @@ public final class Hudson extends JobCollection implements Node {
 
     /**
      * Set of installed cluster nodes.
+     *
+     * We use this field with copy-on-write semantics.
+     * This field has mutable list (to keep the serialization look clean),
+     * but it shall never be modified. Only new completely populated slave
+     * list can be set here.
      */
-    private List<Slave> slaves;
+    private volatile List<Slave> slaves;
 
     /**
      * Quiet period.
@@ -145,6 +150,7 @@ public final class Hudson extends JobCollection implements Node {
 
         load();
         updateComputerList();
+        if(slaves==null)    slaves = new ArrayList<Slave>();
     }
 
     /**
@@ -429,10 +435,8 @@ public final class Hudson extends JobCollection implements Node {
         return null;
     }
 
-    public synchronized List<Slave> getSlaves() {
-        if(slaves ==null)
-            slaves = new ArrayList<Slave>();
-        return new ArrayList<Slave>(slaves);
+    public List<Slave> getSlaves() {
+        return Collections.unmodifiableList(slaves);
     }
 
     /**
@@ -658,7 +662,7 @@ public final class Hudson extends JobCollection implements Node {
             systemMessage = Util.nullify(req.getParameter("system_message"));
 
             {// update slave list
-                slaves.clear();
+                List<Slave> newSlaves = new ArrayList<Slave>();
                 String[] names = req.getParameterValues("slave_name");
                 String[] descriptions = req.getParameterValues("slave_description");
                 String[] executors = req.getParameterValues("slave_executors");
@@ -675,10 +679,10 @@ public final class Hudson extends JobCollection implements Node {
                         } catch(NumberFormatException e) {
                             // ignore
                         }
-                        slaves.add(new Slave(names[i],descriptions[i],cmds[i],rfs[i],new File(lfs[i]),n, Mode.valueOf(mode[i])));
+                        newSlaves.add(new Slave(names[i],descriptions[i],cmds[i],rfs[i],new File(lfs[i]),n, Mode.valueOf(mode[i])));
                     }
                 }
-
+                this.slaves = newSlaves;
                 updateComputerList();
             }
 
