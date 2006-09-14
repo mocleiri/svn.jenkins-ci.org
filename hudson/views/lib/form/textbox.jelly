@@ -2,5 +2,6 @@
 	<input type="textbox">
 -->
 <j:jelly xmlns:j="jelly:core" xmlns:d="jelly:define">
-  <input class="setting-input" name="${attrs.name}" type="text" value="${attrs.value}"/>
+  <input class="setting-input ${h.ifThenElse(attrs.checkUrl!=null,'validated','')}" name="${attrs.name}"
+         type="text" value="${attrs.value}" checkUrl="${attrs.checkUrl}"/>
 </j:jelly>
