@@ -260,7 +260,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      * @return
      *      never null. The first entry is the latest buildCommand.
      */
-    public synchronized List<RunT> getBuilds() {
+    public List<RunT> getBuilds() {
         return new ArrayList<RunT>(_getRuns().values());
     }
 
@@ -269,7 +269,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      *      This is only used to support backward compatibility with
      *      old URLs.
      */
-    public synchronized RunT getBuild(String id) {
+    public RunT getBuild(String id) {
         for (RunT r : _getRuns().values()) {
             if(r.getId().equals(id))
                 return r;
@@ -282,11 +282,11 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      *      The build number.
      * @see Run#getNumber()
      */
-    public synchronized RunT getBuildByNumber(int n) {
+    public RunT getBuildByNumber(int n) {
         return _getRuns().get(n);
     }
 
-    public synchronized Object getDynamic(String token, StaplerRequest req, StaplerResponse rsp) {
+    public Object getDynamic(String token, StaplerRequest req, StaplerResponse rsp) {
         try {
             // try to interpret the token as build number
             return _getRuns().get(Integer.valueOf(token));
@@ -319,6 +319,8 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
 
     /**
      * Gets all the runs.
+     *
+     * The resulting map must be immutable (by employing copy-on-write semantics.)
      */
     protected abstract SortedMap<Integer,? extends RunT> _getRuns();
 
@@ -333,7 +335,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     /**
      * Returns the last build.
      */
-    public synchronized RunT getLastBuild() {
+    public RunT getLastBuild() {
         SortedMap<Integer,? extends RunT> runs = _getRuns();
 
         if(runs.isEmpty())    return null;
@@ -343,7 +345,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     /**
      * Returns the oldest build in the record.
      */
-    public synchronized RunT getFirstBuild() {
+    public RunT getFirstBuild() {
         SortedMap<Integer,? extends RunT> runs = _getRuns();
 
         if(runs.isEmpty())    return null;
@@ -353,7 +355,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     /**
      * Returns the last successful build, if any. Otherwise null.
      */
-    public synchronized RunT getLastSuccessfulBuild() {
+    public RunT getLastSuccessfulBuild() {
         RunT r = getLastBuild();
         // temporary hack till we figure out what's causing this bug
         while(r!=null && (r.isBuilding() || r.getResult()==null || r.getResult().isWorseThan(Result.UNSTABLE)))
@@ -364,7 +366,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     /**
      * Returns the last stable build, if any. Otherwise null.
      */
-    public synchronized RunT getLastStableBuild() {
+    public RunT getLastStableBuild() {
         RunT r = getLastBuild();
         while(r!=null && (r.isBuilding() || r.getResult().isWorseThan(Result.SUCCESS)))
             r=r.getPreviousBuild();
@@ -374,7 +376,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     /**
      * Returns the last failed build, if any. Otherwise null.
      */
-    public synchronized RunT getLastFailedBuild() {
+    public RunT getLastFailedBuild() {
         RunT r = getLastBuild();
         while(r!=null && (r.isBuilding() || r.getResult()!=Result.FAILURE))
             r=r.getPreviousBuild();
@@ -384,7 +386,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     /**
      * Used as the color of the status ball for the project.
      */
-    public synchronized String getIconColor() {
+    public String getIconColor() {
         RunT lastBuild = getLastBuild();
         while(lastBuild!=null && lastBuild.hasntStartedYet())
             lastBuild = lastBuild.getPreviousBuild();

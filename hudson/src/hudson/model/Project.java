@@ -49,9 +49,11 @@ public class Project extends Job<Project,Build> {
 
     /**
      * All the builds keyed by their build number.
+     *
+     * This is read-only map, and use copy-on-write for updates.
      */
-    private transient SortedMap<Integer,Build> builds =
-        Collections.synchronizedSortedMap(new TreeMap<Integer,Build>(reverseComparator));
+    private transient volatile SortedMap<Integer,Build> builds =
+        new TreeMap<Integer,Build>(reverseComparator);
 
     private SCM scm = new NullSCM();
 
@@ -162,34 +164,37 @@ public class Project extends Job<Project,Build> {
 
     protected void onLoad(Hudson root, String name) throws IOException {
         super.onLoad(root, name);
-        builds = new TreeMap<Integer,Build>(reverseComparator);
+        TreeMap<Integer,Build> builds = new TreeMap<Integer,Build>(reverseComparator);
 
         if(triggers==null)
-            // it doesn't exist in < 1.28
+            // it didn't exist in < 1.28
             triggers = new Vector<Trigger>();
 
         // load builds
         File buildDir = getBuildDir();
         buildDir.mkdirs();
-        String[] builds = buildDir.list(new FilenameFilter() {
+        String[] buildDirs = buildDir.list(new FilenameFilter() {
             public boolean accept(File dir, String name) {
                 return new File(dir,name).isDirectory();
             }
         });
-        Arrays.sort(builds);
+        Arrays.sort(buildDirs);
 
-        for( String build : builds ) {
+        for( String build : buildDirs ) {
             File d = new File(buildDir,build);
             if(new File(d,"build.xml").exists()) {
                 // if the build result file isn't in the directory, ignore it.
                 try {
-                    Build b = new Build(this,d,getLastBuild());
-                    this.builds.put( b.getNumber(), b );
+                    Build lb = builds.isEmpty() ? null : builds.get(builds.firstKey());
+                    Build b = new Build(this,d,lb);
+                    builds.put( b.getNumber(), b );
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
+
+        this.builds = Collections.unmodifiableSortedMap(builds);
 
         for (Trigger t : triggers)
             t.start(this);
@@ -279,17 +284,28 @@ public class Project extends Job<Project,Build> {
         return builds;
     }
 
+    // needs to be synchronized so that two removeRun serializes each other
     public synchronized void removeRun(Run run) {
         run.getNextBuild().previousBuild = null;
+
+        // copy-on-write update
+        SortedMap<Integer,Build> builds = new TreeMap<Integer,Build>(this.builds);
         builds.remove(run.getNumber());
+        this.builds = Collections.unmodifiableSortedMap(builds);
     }
 
     /**
      * Creates a new build of this project for immediate execution.
+     * Needs to be synchronized to serialize two {@link #newBuild()} invocations.
      */
     public synchronized Build newBuild() throws IOException {
         Build lastBuild = new Build(this);
+
+        // copy-on-write update
+        SortedMap<Integer,Build> builds = new TreeMap<Integer,Build>(this.builds);
         builds.put(lastBuild.getNumber(),lastBuild);
+        this.builds = Collections.unmodifiableSortedMap(builds);
+
         return lastBuild;
     }
 

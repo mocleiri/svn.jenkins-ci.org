@@ -11,10 +11,10 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,18 +31,24 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
      */
     private transient long nextUpdate = 0;
 
-    private transient SortedMap<Integer,ExternalRun> runs = null;
+    /**
+     * Read-only map of all {@link ExternalRun}s. Copy-on-write semantics.
+     */
+    private transient volatile SortedMap<Integer,ExternalRun> runs = null;
 
     /**
      * If the reloading of runs are in progress (in another thread,
      * set to true.)
      */
-    private transient boolean reloadingInProgress;
+    private transient volatile boolean reloadingInProgress;
 
     /**
      * {@link ExternalJob}s that need to be reloaded.
+     *
+     * This is a set, so no {@link ExternalJob}s are scheduled twice, yet
+     * it's order is predictable, avoiding starvation.
      */
-    private static final List<ExternalJob> reloadQueue = new LinkedList<ExternalJob>();
+    private static final LinkedHashSet<ExternalJob> reloadQueue = new LinkedHashSet<ExternalJob>();
     /*package*/ static final Thread reloadThread = new ReloadThread();
     static {
         reloadThread.start();
@@ -57,9 +63,13 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
         return false;
     }
 
-    protected synchronized SortedMap<Integer,ExternalRun> _getRuns() {
+    protected SortedMap<Integer,ExternalRun> _getRuns() {
         if(runs==null) {
-            reload();   // if none is loaded yet, do so immediately
+            synchronized(this) {
+                if(runs==null) {
+                    reload();   // if none is loaded yet, do so immediately
+                }
+            }
         }
         if(nextUpdate<System.currentTimeMillis()) {
             if(!reloadingInProgress) {
@@ -112,7 +122,7 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
             }
 
             // replace the list with new one atomically.
-            this.runs = runs;
+            this.runs = Collections.unmodifiableSortedMap(runs);
 
         } finally {
             reloadingInProgress = false;
@@ -123,10 +133,14 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
 
     /**
      * Creates a new build of this project for immediate execution.
+     *
+     * Needs to be synchronized so that two {@link #newBuild()} invocations serialize each other.
      */
     public synchronized ExternalRun newBuild() throws IOException {
         ExternalRun run = new ExternalRun(this);
-        _getRuns().put(run.getNumber(),run);
+        SortedMap<Integer,ExternalRun> runs = new TreeMap<Integer,ExternalRun>(_getRuns());
+        runs.put(run.getNumber(),run);
+        this.runs = Collections.unmodifiableSortedMap(runs); // atomically replace the map with new one
         return run;
     }
 
@@ -162,7 +176,9 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
             synchronized(reloadQueue) {
                 while(reloadQueue.isEmpty())
                     reloadQueue.wait();
-                return reloadQueue.remove(0);
+                ExternalJob job = reloadQueue.iterator().next();
+                reloadQueue.remove(job);
+                return job;
             }
         }
 

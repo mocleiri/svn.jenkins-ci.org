@@ -53,9 +53,9 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
     /**
      * Previous build. Can be null.
      */
-    protected transient RunT previousBuild;
+    protected volatile transient RunT previousBuild;
 
-    protected transient RunT nextBuild;
+    protected volatile transient RunT nextBuild;
 
     /**
      * When the build is scheduled.
@@ -66,12 +66,12 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
      * The build result.
      * This value may change while the state is in {@link State#BUILDING}.
      */
-    protected Result result;
+    protected volatile Result result;
 
     /**
      * The current build state.
      */
-    protected transient State state;
+    protected volatile transient State state;
 
     private static enum State {
         NOT_STARTED,
