@@ -149,8 +149,8 @@ public final class Hudson extends JobCollection implements Node {
         pluginManager = new PluginManager(context);
 
         load();
-        updateComputerList();
         if(slaves==null)    slaves = new ArrayList<Slave>();
+        updateComputerList();
     }
 
     /**
