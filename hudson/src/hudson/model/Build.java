@@ -17,7 +17,10 @@ import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.triggers.SCMTrigger;
 import org.xml.sax.SAXException;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
+import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -299,5 +302,25 @@ public final class Build extends Run<Project,Build> implements Runnable {
             jdk.buildEnvVars(env);
         project.getScm().buildEnvVars(env);
         return env;
+    }
+
+//
+//
+// actions
+//
+//
+    /**
+     * Stops this build if it's still going.
+     *
+     * If we use this/executor/stop URL, it causes 404 if the build is already killed,
+     * as {@link #getExecutor()} returns null.
+     */
+    public synchronized void doStop( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        Executor e = getExecutor();
+        if(e!=null)
+            e.doStop(req,rsp);
+        else
+            // nothing is building
+            rsp.forwardToPreviousPage(req);
     }
 }
