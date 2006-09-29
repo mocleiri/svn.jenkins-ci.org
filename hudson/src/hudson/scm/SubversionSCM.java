@@ -20,8 +20,6 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -182,7 +180,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
     public boolean checkout(Build build, Launcher launcher, FilePath workspace, BuildListener listener, File changelogFile) throws IOException {
         boolean result;
 
-        if(useUpdate && isUpdatable(workspace.getLocal(),listener)) {
+        if(useUpdate && isUpdatable(workspace,listener)) {
             result = update(launcher,workspace,listener);
             if(!result)
                 return false;
@@ -340,47 +338,25 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
     /**
      * Returns true if we can use "svn update" instead of "svn checkout"
      */
-    private boolean isUpdatable(File dir,BuildListener listener) {
+    private boolean isUpdatable(FilePath workspace,BuildListener listener) {
         StringTokenizer tokens = new StringTokenizer(modules);
         while(tokens.hasMoreTokens()) {
             String url = tokens.nextToken();
-            File module = new File(dir,getLastPathComponent(url));
-            File svn = new File(module,".svn/entries");
-            if(!svn.exists()) {
-                listener.getLogger().println("Checking out a fresh workspace because "+svn+" doesn't exist.");
-                return false;
-            }
+            String moduleName = getLastPathComponent(url);
+            File module = workspace.child(url).getLocal();
 
-            // check wc-entries/entry/@url
-            synchronized(spf) {
-                try {
-                    SAXParser parser = spf.newSAXParser();
-                    Checker checker = new Checker(url);
-                    parser.parse(svn,checker);
-                    if(!checker.found()) {
-                        listener.getLogger().println("Checking out a fresh workspace because the workspace is not "+url);
-                        return false;
-                    }
-                } catch (ParserConfigurationException e) {
-                    // impossible
-                    throw new Error(e);
-                } catch (SAXException e) {
-                    // corrupt file? don't use update to be safe
-                    failedToParse(listener, svn, e);
-                    return false;
-                } catch (IOException e) {
-                    // corrupt file? don't use update to be safe
-                    failedToParse(listener, svn, e);
+            try {
+                SvnInfo svnInfo = SvnInfo.parse(moduleName, createEnvVarMap(false), workspace, listener);
+                if(!svnInfo.url.equals(url)) {
+                    listener.getLogger().println("Checking out a fresh workspace because the workspace is not "+url);
                     return false;
                 }
+            } catch (IOException e) {
+                listener.getLogger().println("Checking out a fresh workspace because Hudson failed to detect the current workspace "+module);
+                e.printStackTrace(listener.error(e.getMessage()));
             }
         }
         return true;
-    }
-
-    private void failedToParse(BuildListener listener, File svn, Exception e) {
-        listener.getLogger().println("Checking out a fresh workspace because Hudson failed to parse "+svn);
-        e.printStackTrace(listener.error(e.getMessage()));
     }
 
     public boolean pollChanges(Project project, Launcher launcher, FilePath workspace, TaskListener listener) throws IOException {
@@ -397,35 +373,6 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         }
 
         return false; // no change
-    }
-
-    /**
-     * Looks for /wc-entries/entry/@url and see if it matches the expected URL.
-     */
-    private static final class Checker extends DefaultHandler {
-        private final String url;
-
-        private boolean matched = false;
-
-        public Checker(String url) {
-            this.url = url;
-        }
-
-        public void startElement(String uri, String localName, String qName, Attributes attributes) {
-            if(!qName.equals("entry"))
-                return;
-
-            String n = attributes.getValue("name");
-            if(n==null || n.length()>0)     return;
-
-            String url = attributes.getValue("url");
-            if(url!=null && url.equals(this.url))
-                matched = true;
-        }
-
-        public boolean found() {
-            return matched;
-        }
     }
 
     public ChangeLogParser createChangeLogParser() {
