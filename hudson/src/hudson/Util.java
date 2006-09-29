@@ -16,8 +16,13 @@ import java.net.UnknownHostException;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.tools.ant.taskdefs.Chmod;
+import org.apache.tools.ant.BuildException;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -60,12 +65,25 @@ public class Util {
         }
     }
 
-    private static void deleteFile(File child) throws IOException {
-        if (!child.delete()) {
-            if(!child.exists())
+    private static void deleteFile(File f) throws IOException {
+        if (!f.delete()) {
+            if(!f.exists())
                 // we are trying to delete a file that no longer exists, so this is not an error
                 return;
-            throw new IOException("Unable to delete " + child.getPath());
+
+            // perhaps this file is read-only?
+            // try chmod. this becomes no-op if this is not Unix.
+            try {
+                Chmod chmod = new Chmod();
+                chmod.setProject(new org.apache.tools.ant.Project());
+                chmod.setFile(f);
+                chmod.setPerm("u+w");
+                chmod.execute();
+            } catch (BuildException e) {
+                LOGGER.log(Level.INFO,"Failed to chmod "+f,e);
+            }
+
+            throw new IOException("Unable to delete " + f.getPath());
 
         }
     }
@@ -263,4 +281,6 @@ public class Util {
         if(s==null || s.length()==0)    return null;
         return s;
     }
+
+    private static final Logger LOGGER = Logger.getLogger(Util.class.getName());
 }
