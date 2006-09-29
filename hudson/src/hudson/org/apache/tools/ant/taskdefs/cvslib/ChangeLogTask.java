@@ -234,8 +234,24 @@ public class ChangeLogTask extends AbstractCvsTask {
                 final SimpleDateFormat outputDate =
                     new SimpleDateFormat("yyyy-MM-dd");
 
+                // Kohsuke patch:
+                // probably due to timezone difference between server/client and
+                // the lack of precise specification in the protocol or something,
+                // sometimes the java.net CVS server (and probably others) don't
+                // always report all the changes that have happened in the given day.
+                // so let's take the date range bit wider, to make sure that
+                // the server sends us all the logs that we care.
+                //
+                // the only downside of this change is that it will increase the traffic
+                // unnecessarily, but given that in Hudson we already narrow down the scope
+                // by specifying files, this should be acceptable increase.
+
+                Date safeStart = new Date(m_start.getTime()-1000L*60*60*24);
+
+                // Kohsuke patch until here
+
                 // We want something of the form: -d ">=YYYY-MM-dd"
-                final String dateRange = ">=" + outputDate.format(m_start);
+                final String dateRange = ">=" + outputDate.format(safeStart);
 
         // Supply '-d' as a separate argument - Bug# 14397
                 addCommandArgument("-d");
