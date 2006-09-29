@@ -18,7 +18,6 @@ import org.xml.sax.SAXException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.parsers.SAXParserFactory;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -402,11 +401,6 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         String[] tokens = s.split("/");
         return tokens[tokens.length-1]; // return the last token
     }
-
-    /**
-     * Shared instance. Note that it is not namespace aware.
-     */
-    static final SAXParserFactory spf = SAXParserFactory.newInstance();
 
     static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
