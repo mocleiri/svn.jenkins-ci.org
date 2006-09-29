@@ -403,7 +403,7 @@ public class Project extends Job<Project,Build> {
         TreeMap<Integer,RangeSet> r = new TreeMap<Integer,RangeSet>(REVERSE_INTEGER_COMPARATOR);
 
         checkAndRecord(that, r, this.getBuilds());
-        checkAndRecord(that, r, that.getBuilds());
+        // checkAndRecord(that, r, that.getBuilds());
 
         return r;
     }
@@ -432,7 +432,11 @@ public class Project extends Job<Project,Build> {
         return r;
     }
 
-    // helper method for getDownstreamRelationship
+    /**
+     * Helper method for getDownstreamRelationship.
+     *
+     * For each given build, find the build number range of the given project and put that into the map.
+     */
     private void checkAndRecord(Project that, TreeMap<Integer, RangeSet> r, Collection<? extends Build> builds) {
         for (Build build : builds) {
             RangeSet rs = build.getDownstreamRelationship(that);
