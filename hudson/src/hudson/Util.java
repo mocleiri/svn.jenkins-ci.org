@@ -56,15 +56,23 @@ public class Util {
         for (File child : files) {
             if (child.isDirectory())
                 deleteContentsRecursive(child);
-            if (!child.delete())
-                throw new IOException("Unable to delete " + child.getPath());
+            deleteFile(child);
+        }
+    }
+
+    private static void deleteFile(File child) throws IOException {
+        if (!child.delete()) {
+            if(!child.exists())
+                // we are trying to delete a file that no longer exists, so this is not an error
+                return;
+            throw new IOException("Unable to delete " + child.getPath());
+
         }
     }
 
     public static void deleteRecursive(File dir) throws IOException {
         deleteContentsRecursive(dir);
-        if(!dir.delete())
-            throw new IOException("Unable to delete "+dir);
+        deleteFile(dir);
     }
 
     /**
