@@ -14,9 +14,7 @@ import hudson.util.FormFieldValidator;
 import org.apache.commons.digester.Digester;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -258,7 +256,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             if(r!=0) {
                 // failed. to allow user to diagnose the problem, send output to log
                 listener.getLogger().write(baos.toByteArray());
-                throw new IOException("revision check failed");
+                throw new IOException("svn info failed");
             }
 
             SvnInfo info = new SvnInfo();
@@ -343,7 +341,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         while(tokens.hasMoreTokens()) {
             String url = tokens.nextToken();
             String moduleName = getLastPathComponent(url);
-            File module = workspace.child(url).getLocal();
+            File module = workspace.child(moduleName).getLocal();
 
             try {
                 SvnInfo svnInfo = SvnInfo.parse(moduleName, createEnvVarMap(false), workspace, listener);
@@ -354,6 +352,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             } catch (IOException e) {
                 listener.getLogger().println("Checking out a fresh workspace because Hudson failed to detect the current workspace "+module);
                 e.printStackTrace(listener.error(e.getMessage()));
+                return false;
             }
         }
         return true;
