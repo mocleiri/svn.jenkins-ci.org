@@ -43,6 +43,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -187,7 +189,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
     }
 
     private void archive(File dir,String relPath,ZipOutputStream zos) throws IOException {
-        List<String> knownFiles = new ArrayList<String>();
+        Set<String> knownFiles = new HashSet<String>();
         // see http://www.monkey.org/openbsd/archive/misc/9607/msg00056.html for what Entries.Log is for
         parseCVSEntries(new File(dir,"CVS/Entries"),knownFiles);
         parseCVSEntries(new File(dir,"CVS/Entries.Log"),knownFiles);
@@ -200,15 +202,18 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             throw new IOException("No such directory exists. Did you specify the correct branch?: "+dir);
 
         for( File f : files ) {
-            if(hasCVSdirs && !knownFiles.contains(f.getName())) {
-                // not controlled in CVS. Skip.
-                // but also make sure that we archive CVS/*, which doesn't have CVS/CVS
-                continue;
-            }
             String name = relPath+'/'+f.getName();
             if(f.isDirectory()) {
+                if(hasCVSdirs && !knownFiles.contains(f.getName())) {
+                    // not controlled in CVS. Skip.
+                    // but also make sure that we archive CVS/*, which doesn't have CVS/CVS
+                    continue;
+                }
                 archive(f,name,zos);
             } else {
+                if(!dir.getName().equals("CVS"))
+                    // we only need to archive CVS control files, not the actual workspace files
+                    continue;
                 zos.putNextEntry(new ZipEntry(name));
                 FileInputStream fis = new FileInputStream(f);
                 Util.copyStream(fis,zos);
@@ -221,7 +226,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
     /**
      * Parses the CVS/Entries file and adds file/directory names to the list.
      */
-    private void parseCVSEntries(File entries, List<String> knownFiles) throws IOException {
+    private void parseCVSEntries(File entries, Set<String> knownFiles) throws IOException {
         if(!entries.exists())
             return;
 
