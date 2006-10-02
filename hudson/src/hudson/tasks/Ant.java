@@ -146,7 +146,7 @@ public class Ant extends Builder {
             AntInstallation[] insts = new AntInstallation[len];
 
             for( i=0; i<len; i++ ) {
-                if(names[i].length()==0)    continue;
+                if(names[i].length()==0 || homes[i].length()==0)    continue;
                 insts[i] = new AntInstallation(names[i],homes[i]);
             }
 
