@@ -198,4 +198,20 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
     }
 
     private static final Logger logger = Logger.getLogger(ExternalJob.class.getName());
+
+    public Descriptor<Job<ExternalJob,ExternalRun>> getDescriptor() {
+        return DESCRIPTOR;
+    }
+
+    public static final Descriptor<Job<ExternalJob,ExternalRun>> DESCRIPTOR = new Descriptor<Job<ExternalJob,ExternalRun>>(ExternalJob.class) {
+        public String getDisplayName() {
+            return "Monitoring an external job";
+        }
+
+        public Job<ExternalJob,ExternalRun> newInstance(StaplerRequest req) throws FormException {
+            // TODO
+            // return new ExternalJob(Hudson.getInstance(),req.getParameter("name").trim());
+            throw new UnsupportedOperationException();
+        }
+    };
 }

@@ -760,4 +760,20 @@ public class Project extends Job<Project,Build> {
             return o2-o1;
         }
     };
+
+    public Descriptor<Job<Project,Build>> getDescriptor() {
+        return DESCRIPTOR;
+    }
+
+    public static final Descriptor<Job<Project,Build>> DESCRIPTOR = new Descriptor<Job<Project,Build>>(Project.class) {
+        public String getDisplayName() {
+            return "Building a software project";
+        }
+
+        public Job<Project,Build> newInstance(StaplerRequest req) throws FormException {
+            // TODO
+            // return new Project(Hudson.getInstance(),req.getParameter("name").trim());
+            throw new UnsupportedOperationException();
+        }
+    };
 }

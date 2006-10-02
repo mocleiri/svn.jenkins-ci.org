@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.SortedMap;
@@ -30,7 +31,7 @@ import java.util.SortedMap;
  * @author Kohsuke Kawaguchi
  */
 public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,RunT>>
-        extends DirectoryHolder {
+        extends DirectoryHolder implements Describable<Job<JobT,RunT>> {
     /**
      * Project name.
      */
@@ -507,7 +508,13 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         RSS.forwardToRss(this,getDisplayName()+" all failures",req,rsp,runs);
     }
 
-    private static final XStream XSTREAM = new XStream2();
+    /**
+     * Used to load/save job configuration.
+     *
+     * When you extend {@link Job} in a plugin, try to put the alias so
+     * that it produces a reasonable XML.
+     */
+    protected static final XStream XSTREAM = new XStream2();
 
     static {
         XSTREAM.alias("project",Project.class);
