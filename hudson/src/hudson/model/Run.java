@@ -117,6 +117,8 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
     protected Run(JobT job,RunT prevBuild, Calendar timestamp) {
         this.project = job;
         this.previousBuild = prevBuild;
+        if(prevBuild!=null)
+            prevBuild.nextBuild = (RunT)this;
         this.timestamp = timestamp;
         this.state = State.NOT_STARTED;
     }
