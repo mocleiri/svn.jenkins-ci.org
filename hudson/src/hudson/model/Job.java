@@ -51,6 +51,9 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      * Kept in a separate file because this is the only information
      * that gets updated often. This allows the rest of the configuration
      * to be in the VCS.
+     * <p>
+     * In 1.28 and earlier, this field was stored in the project configuration file,
+     * so even though this is marked as transient, don't move it around.
      */
     protected transient int nextBuildNumber = 1;
     private transient Hudson parent;
