@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<project name="jprt" default="jar">
+
+  <target name="compile" >
+    <mkdir dir="build/classes"/>
+    <javac srcdir="src" destdir="build/classes" debug="on">
+      <classpath>
+        <fileset dir="../../hudson/resources/WEB-INF/lib" includes="**/*.jar"/>
+        <fileset dir="../../hudson/lib" includes="**/*.jar"/>
+        <pathelement path="../../hudson/build/classes" />
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="jar" depends="compile">
+    <jar destfile="build/jprt.hpi">
+      <zipfileset dir="build/classes" prefix="WEB-INF/classes"/>
+      <zipfileset dir="views" prefix="WEB-INF/classes"/>
+      <zipfileset dir="resources" />
+      <manifest>
+        <attribute name="Build-Id" value="${build.version}"/>
+        <attribute name="Plugin-Class" value="hudson.plugins.jprt.PluginImpl" />
+        <attribute name="Long-Name" value="JPRT Plugin" />
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="clean">
+    <delete dir="build"/>
+  </target>
+
+  <target name="deploy" depends="jar">
+    <copy todir="../../../work/plugins" file="build/jprt.hpi" />
+  </target>
+</project>
