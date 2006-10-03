@@ -1,20 +1,20 @@
 package hudson.plugins.jprt;
 
-import hudson.model.Descriptor;
 import hudson.model.Hudson;
 import hudson.model.Job;
+import hudson.model.JobDescriptor;
 import hudson.model.ViewJob;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
 import java.io.File;
-import java.io.IOException;
 import java.io.FileFilter;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.text.ParseException;
 
 /**
  * {@link Job} that monitors a remote JPRT system.
@@ -30,6 +30,10 @@ public class JPRTJob extends ViewJob<JPRTJob,JPRTRun> {
 
     public JPRTJob(Hudson parent, String name) {
         super(parent, name);
+    }
+
+    public File getArchiveRoot() {
+        return archiveRoot;
     }
 
     protected TreeMap<Integer,JPRTRun> reload() {
@@ -65,7 +69,7 @@ public class JPRTJob extends ViewJob<JPRTJob,JPRTRun> {
         if(!Hudson.adminCheck(req,rsp))
             return;
 
-        archiveRoot = new File(req.getParameter("archiveRoot"));
+        archiveRoot = new File(req.getParameter("jprt.archiveRoot"));
         if(!archiveRoot.isDirectory()) {
             sendError(archiveRoot+" is not a directory",req,rsp);
             return;
@@ -75,18 +79,17 @@ public class JPRTJob extends ViewJob<JPRTJob,JPRTRun> {
     }
 
 
-    public Descriptor<Job<JPRTJob,JPRTRun>> getDescriptor() {
+    public JobDescriptor<JPRTJob,JPRTRun> getDescriptor() {
         return DESCRIPTOR;
     }
 
-    static final Descriptor<Job<JPRTJob,JPRTRun>> DESCRIPTOR = new Descriptor<Job<JPRTJob,JPRTRun>>(JPRTJob.class) {
+    static final JobDescriptor<JPRTJob,JPRTRun> DESCRIPTOR = new JobDescriptor<JPRTJob,JPRTRun>(JPRTJob.class) {
         public String getDisplayName() {
-            return "Monitor a JPRT system";
+            return "Monitoring a JPRT system";
         }
 
-        public Job<JPRTJob,JPRTRun> newInstance(StaplerRequest req) throws FormException {
-            // TODO
-            throw new UnsupportedOperationException();
+        public JPRTJob newInstance(String name) {
+            return new JPRTJob(Hudson.getInstance(),name);
         }
     };
 
