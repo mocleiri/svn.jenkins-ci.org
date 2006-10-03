@@ -27,7 +27,6 @@ import java.util.logging.Logger;
 public class ExternalJob extends ViewJob<ExternalJob,ExternalRun> {
     public ExternalJob(Hudson parent,String name) {
         super(parent,name);
-        getBuildDir().mkdirs();
     }
 
     @Override
@@ -102,19 +101,17 @@ public class ExternalJob extends ViewJob<ExternalJob,ExternalRun> {
 
     private static final Logger logger = Logger.getLogger(ExternalJob.class.getName());
 
-    public Descriptor<Job<ExternalJob,ExternalRun>> getDescriptor() {
+    public JobDescriptor<ExternalJob,ExternalRun> getDescriptor() {
         return DESCRIPTOR;
     }
 
-    public static final Descriptor<Job<ExternalJob,ExternalRun>> DESCRIPTOR = new Descriptor<Job<ExternalJob,ExternalRun>>(ExternalJob.class) {
+    public static final JobDescriptor<ExternalJob,ExternalRun> DESCRIPTOR = new JobDescriptor<ExternalJob,ExternalRun>(ExternalJob.class) {
         public String getDisplayName() {
             return "Monitoring an external job";
         }
 
-        public Job<ExternalJob,ExternalRun> newInstance(StaplerRequest req) throws FormException {
-            // TODO
-            // return new ExternalJob(Hudson.getInstance(),req.getParameter("name").trim());
-            throw new UnsupportedOperationException();
+        public ExternalJob newInstance(String name) {
+            return new ExternalJob(Hudson.getInstance(),name);
         }
     };
 }

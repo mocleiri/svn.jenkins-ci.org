@@ -498,15 +498,13 @@ public final class Hudson extends JobCollection implements Node {
      * @throws IllegalArgumentException
      *      if the project of the given name already exists.
      */
-    public synchronized Job createProject( Class type, String name ) throws IOException {
+    public synchronized Job createProject( JobDescriptor type, String name ) throws IOException {
         if(jobs.containsKey(name))
-            throw new IllegalArgumentException();
-        if(!Job.class.isAssignableFrom(type))
             throw new IllegalArgumentException();
 
         Job job;
         try {
-            job = (Job)type.getConstructor(Hudson.class,String.class).newInstance(this,name);
+            job = type.newInstance(name);
         } catch (Exception e) {
             throw new IllegalArgumentException(e);
         }
@@ -738,7 +736,7 @@ public final class Hudson extends JobCollection implements Node {
 
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name").trim();
-        String className = req.getParameter("type");
+        String jobType = req.getParameter("type");
         String mode = req.getParameter("mode");
 
         try {
@@ -761,21 +759,13 @@ public final class Hudson extends JobCollection implements Node {
         Job result;
 
         if(mode.equals("newJob")) {
-            if(className==null) {
+            if(jobType ==null) {
                 // request forged?
                 rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
                 return null;
             }
-            try {
-                Class type = Class.forName(className);
-
-                // redirect to the project config screen
-                result = createProject(type, name);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-                rsp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                return null;
-            }
+            // redirect to the project config screen
+            result = createProject(Jobs.getDescriptor(jobType), name);
         } else {
             Job src = getJob(req.getParameter("from"));
             if(src==null) {
@@ -783,7 +773,7 @@ public final class Hudson extends JobCollection implements Node {
                 return null;
             }
 
-            result = createProject(src.getClass(),name);
+            result = createProject((JobDescriptor)src.getDescriptor(),name);
 
             // copy config
             Util.copyFile(src.getConfigFile(),result.getConfigFile());

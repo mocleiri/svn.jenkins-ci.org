@@ -9,11 +9,13 @@
 		    <s:entry title="Job name">
 		      <input type="text" name="name" class="setting-input" />
 		    </s:entry>
-		    <s:radioBlock name="mode" value="newJob" title="Create new job" checked="true">
+		    <s:radioBlock name="mode" value="newJob" title="Create new job" checked="${true}">
 		      <s:entry title="Job type">
 		        <select name="type">
-		          <option value="hudson.model.Project">Building a software project</option>
-		          <option value="hudson.model.ExternalJob">Monitoring an external job</option>
+              <j:getStatic var="jobs" className="hudson.model.Jobs" field="JOBS" />
+              <j:forEach var="d" items="${jobs}">
+                <option value="${d.displayName}">${d.displayName}</option>
+              </j:forEach>
 		        </select>
 		      </s:entry>
 		    </s:radioBlock>

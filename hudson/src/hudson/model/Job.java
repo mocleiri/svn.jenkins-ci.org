@@ -63,7 +63,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     protected Job(Hudson parent,String name) {
         this.parent = parent;
         doSetName(name);
-        this.root.mkdirs();
+        getBuildDir().mkdirs();
     }
 
     /**

@@ -126,7 +126,6 @@ public class Project extends Job<Project,Build> {
      */
     public Project(Hudson parent,String name) {
         super(parent,name);
-        getBuildDir().mkdirs();
 
         if(!parent.getSlaves().isEmpty()) {
             // if a new job is configured with Hudson that already has slave nodes
@@ -761,19 +760,17 @@ public class Project extends Job<Project,Build> {
         }
     };
 
-    public Descriptor<Job<Project,Build>> getDescriptor() {
+    public JobDescriptor<Project,Build> getDescriptor() {
         return DESCRIPTOR;
     }
 
-    public static final Descriptor<Job<Project,Build>> DESCRIPTOR = new Descriptor<Job<Project,Build>>(Project.class) {
+    public static final JobDescriptor<Project,Build> DESCRIPTOR = new JobDescriptor<Project,Build>(Project.class) {
         public String getDisplayName() {
             return "Building a software project";
         }
 
-        public Job<Project,Build> newInstance(StaplerRequest req) throws FormException {
-            // TODO
-            // return new Project(Hudson.getInstance(),req.getParameter("name").trim());
-            throw new UnsupportedOperationException();
+        public Project newInstance(String name) {
+            return new Project(Hudson.getInstance(),name);
         }
     };
 }
