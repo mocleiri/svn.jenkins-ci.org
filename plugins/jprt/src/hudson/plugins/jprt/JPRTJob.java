@@ -1,5 +1,6 @@
 package hudson.plugins.jprt;
 
+import JPRT.shared.GlobalProperties;
 import hudson.model.Hudson;
 import hudson.model.Job;
 import hudson.model.JobDescriptor;
@@ -12,6 +13,8 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +31,11 @@ public class JPRTJob extends ViewJob<JPRTJob,JPRTRun> {
      */
     private volatile File archiveRoot;
 
+    /**
+     * URL to the JRPT archive root.
+     */
+    private volatile String archiveUrl;
+
     public JPRTJob(Hudson parent, String name) {
         super(parent, name);
     }
@@ -36,10 +44,33 @@ public class JPRTJob extends ViewJob<JPRTJob,JPRTRun> {
         return archiveRoot;
     }
 
+    public String getArchiveUrl() {
+        return archiveUrl;
+    }
+
+    @Override
+    public Object getDynamic(String token, StaplerRequest req, StaplerResponse rsp) {
+        // JPRT ID is used as the primary means to identify a job in the URL.
+        for (JPRTRun r : _getRuns().values()) {
+            if(r.getId().equals(token))
+                return r;
+        }
+        return super.getDynamic(token, req, rsp);
+    }
+
+    /**
+     * Set up properties to talk to JPRT
+     */
+    /*package*/ void prepareToTalkToJPRT() {
+        GlobalProperties.setProperty("JPRT.archive.root.directory",archiveRoot.toString());
+        GlobalProperties.setProperty("JPRT.archive.url",archiveUrl);
+    }
+
     protected TreeMap<Integer,JPRTRun> reload() {
+        prepareToTalkToJPRT();
         // TODO: what about the queue and on-going builds?
 
-        TreeMap<Integer,JPRTRun> runs = new TreeMap<Integer,JPRTRun>();
+        TreeMap<Integer,JPRTRun> runs = new TreeMap<Integer,JPRTRun>(REVERSE_INT_COMPARATOR);
 
         File[] dirs = archiveRoot.listFiles(new FileFilter() {
             public boolean accept(File f) {
@@ -47,6 +78,12 @@ public class JPRTJob extends ViewJob<JPRTJob,JPRTRun> {
             }
         });
         if(dirs==null)     return runs;
+
+        Arrays.sort(dirs,new Comparator<File>() {
+            public int compare(File lhs, File rhs) {
+                return lhs.getName().compareTo(rhs.getName());
+            }
+        });
 
         JPRTRun last = null;
         for (File dir : dirs) {
@@ -74,6 +111,7 @@ public class JPRTJob extends ViewJob<JPRTJob,JPRTRun> {
             sendError(archiveRoot+" is not a directory",req,rsp);
             return;
         }
+        archiveUrl = req.getParameter("jprt.archiveUrl");
 
         super.doConfigSubmit(req,rsp);
     }
@@ -98,4 +136,11 @@ public class JPRTJob extends ViewJob<JPRTJob,JPRTRun> {
     }
 
     private static final Logger logger = Logger.getLogger(JPRTJob.class.getName());
+
+    private static final Comparator<Integer> REVERSE_INT_COMPARATOR = new Comparator<Integer>() {
+        public int compare(Integer lhs, Integer rhs) {
+            return rhs-lhs;
+        }
+    };
+
 }
