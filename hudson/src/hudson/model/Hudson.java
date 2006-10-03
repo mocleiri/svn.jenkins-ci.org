@@ -18,11 +18,9 @@ import hudson.triggers.Trigger;
 import hudson.util.FormFieldValidator;
 import hudson.util.XStream2;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.tools.ant.taskdefs.Copy;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -788,12 +786,7 @@ public final class Hudson extends JobCollection implements Node {
             result = createProject(src.getClass(),name);
 
             // copy config
-            Copy cp = new Copy();
-            cp.setProject(new org.apache.tools.ant.Project());
-            cp.setTofile(result.getConfigFile());
-            cp.setFile(src.getConfigFile());
-            cp.setOverwrite(true);
-            cp.execute();
+            Util.copyFile(src.getConfigFile(),result.getConfigFile());
 
             // reload from the new config
             result = Job.load(this,result.getRootDir());
@@ -881,15 +874,40 @@ public final class Hudson extends JobCollection implements Node {
     }
 
     /**
+     * Uploads a plugin.
+     */
+    public void doUploadPlugin( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        try {
+            if(!Hudson.adminCheck(req,rsp))
+                return;
+
+            ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
+
+            // Parse the request
+            FileItem fileItem = (FileItem) upload.parseRequest(req).get(0);
+            String fileName = Util.getFileName(fileItem.getName());
+            if(!fileName.endsWith(".hpi")) {
+                sendError(fileName+" is not a Hudson plugin",req,rsp);
+                return;
+            }
+            fileItem.write(new File(getPluginManager().rootDir, fileName));
+
+            fileItem.delete();
+
+            rsp.sendRedirect2("managePlugins");
+        } catch (IOException e) {
+            throw e;
+        } catch (Exception e) {// grrr. fileItem.write throws this
+            throw new ServletException(e);
+        }
+    }
+
+    /**
      * Do a finger-print check.
      */
-    public synchronized void doDoFingerprintCheck( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+    public void doDoFingerprintCheck( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         try {
-            // Create a factory for disk-based file items
-            FileItemFactory factory = new DiskFileItemFactory();
-
-            // Create a new file upload handler
-            ServletFileUpload upload = new ServletFileUpload(factory);
+            ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
 
             // Parse the request
             List<FileItem> items = upload.parseRequest(req);
