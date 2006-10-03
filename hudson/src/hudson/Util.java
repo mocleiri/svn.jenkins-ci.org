@@ -22,6 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.tools.ant.taskdefs.Chmod;
+import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.BuildException;
 
 /**
@@ -267,6 +268,18 @@ public class Util {
     }
 
     /**
+     * Copies a single file by using Ant.
+     */
+    public static void copyFile(File src, File dst) throws BuildException {
+        Copy cp = new Copy();
+        cp.setProject(new org.apache.tools.ant.Project());
+        cp.setTofile(dst);
+        cp.setFile(src);
+        cp.setOverwrite(true);
+        cp.execute();
+    }
+
+    /**
      * Convert null to "".
      */
     public static String fixNull(String s) {
@@ -282,5 +295,20 @@ public class Util {
         return s;
     }
 
+    /**
+     * Cuts all the leading path portion and get just the file name.
+     */
+    public static String getFileName(String filePath) {
+        int idx = filePath.lastIndexOf('\\');
+        if(idx>=0)
+            return getFileName(filePath.substring(idx+1));
+        idx = filePath.lastIndexOf('/');
+        if(idx>=0)
+            return getFileName(filePath.substring(idx+1));
+        return filePath;
+    }
+
+
     private static final Logger LOGGER = Logger.getLogger(Util.class.getName());
+
 }
