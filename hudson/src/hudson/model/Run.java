@@ -108,16 +108,23 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
     }
 
     private Run(JobT job,RunT prevBuild) {
+        this(job,prevBuild,new GregorianCalendar());
+    }
+
+    /**
+     * Constructor for creating a {@link Run} that represents the external state.
+     */
+    protected Run(JobT job,RunT prevBuild, Calendar timestamp) {
         this.project = job;
         this.previousBuild = prevBuild;
-        this.timestamp = new GregorianCalendar();
-        state = State.NOT_STARTED;
+        this.timestamp = timestamp;
+        this.state = State.NOT_STARTED;
     }
 
     /**
      * Loads a run from a log file.
      */
-    Run(JobT project, File buildDir, RunT prevBuild ) throws IOException {
+    protected Run(JobT project, File buildDir, RunT prevBuild ) throws IOException {
         this(project,prevBuild);
         if(prevBuild!=null)
             prevBuild.nextBuild = (RunT)this;
@@ -129,7 +136,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
             throw new IOException2("Invalid directory name "+buildDir,e);
         }
         this.state = State.COMPLETED;
-        this.result = Result.FAILURE;  // defensive measure. value should be overwritten by unmarshal, but just in case the saved data is inconsistent 
+        this.result = Result.FAILURE;  // defensive measure. value should be overwritten by unmarshal, but just in case the saved data is inconsistent
         getDataFile().unmarshal(this); // load the rest of the data
     }
 
@@ -376,7 +383,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
      */
     public class Artifact {
         /**
-         * Relative path name from {@link Run#getArtifactsDir()} 
+         * Relative path name from {@link Run#getArtifactsDir()}
          */
         private final String relativePath;
 

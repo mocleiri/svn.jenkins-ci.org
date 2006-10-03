@@ -1,9 +1,14 @@
 package hudson.model;
 
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+
+import javax.servlet.ServletException;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.io.IOException;
 
 /**
  * {@link Job} that monitors activities that happen outside Hudson,
@@ -96,6 +101,12 @@ public abstract class ViewJob<JobT extends ViewJob<JobT,RunT>, RunT extends Run<
      * Reloads the list of {@link Run}s. This operation can take a long time.
      */
     protected abstract TreeMap<Integer,RunT> reload();
+
+    public void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        super.doConfigSubmit(req,rsp);
+        // make sure to reload to reflect this config change.
+        nextUpdate = 0;
+    }
 
 
     /**
