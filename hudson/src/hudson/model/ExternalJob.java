@@ -10,124 +10,57 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedHashSet;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Job that runs outside Hudson.
+ * Job that runs outside Hudson whose result is submitted to Hudson
+ * (either via web interface, or simply by placing files on the file system,
+ * for compatibility.)
  *
  * @author Kohsuke Kawaguchi
  */
-public class ExternalJob extends Job<ExternalJob,ExternalRun> {
-
-    /**
-     * We occasionally update the list of {@link Run}s from a file system.
-     * The next scheduled update time.
-     */
-    private transient long nextUpdate = 0;
-
-    /**
-     * Read-only map of all {@link ExternalRun}s. Copy-on-write semantics.
-     */
-    private transient volatile SortedMap<Integer,ExternalRun> runs = null;
-
-    /**
-     * If the reloading of runs are in progress (in another thread,
-     * set to true.)
-     */
-    private transient volatile boolean reloadingInProgress;
-
-    /**
-     * {@link ExternalJob}s that need to be reloaded.
-     *
-     * This is a set, so no {@link ExternalJob}s are scheduled twice, yet
-     * it's order is predictable, avoiding starvation.
-     */
-    private static final LinkedHashSet<ExternalJob> reloadQueue = new LinkedHashSet<ExternalJob>();
-    /*package*/ static final Thread reloadThread = new ReloadThread();
-    static {
-        reloadThread.start();
-    }
-
+public class ExternalJob extends ViewJob<ExternalJob,ExternalRun> {
     public ExternalJob(Hudson parent,String name) {
         super(parent,name);
         getBuildDir().mkdirs();
     }
 
-    public boolean isBuildable() {
-        return false;
-    }
+    @Override
+    protected TreeMap<Integer,ExternalRun> reload() {
+        TreeMap<Integer,ExternalRun> runs = new TreeMap<Integer,ExternalRun>(reverseComparator);
 
-    protected SortedMap<Integer,ExternalRun> _getRuns() {
-        if(runs==null) {
-            synchronized(this) {
-                if(runs==null) {
-                    reload();   // if none is loaded yet, do so immediately
-                }
+        File[] subdirs = getBuildDir().listFiles(new FileFilter() {
+            public boolean accept(File subdir) {
+                return subdir.isDirectory();
             }
-        }
-        if(nextUpdate<System.currentTimeMillis()) {
-            if(!reloadingInProgress) {
-                // schedule a new reloading operation.
-                // we don't want to block the current thread,
-                // so reloading is done asynchronously.
-                reloadingInProgress = true;
-                synchronized(reloadQueue) {
-                    reloadQueue.add(this);
-                    reloadQueue.notify();
-                }
-            }
-        }
-        return runs;
-    }
+        });
 
-    public void removeRun(Run run) {
-        // reload the info next time
-        nextUpdate = 0;
-    }
+        Arrays.sort(subdirs,fileComparator);
+        ExternalRun lastBuild = null;
 
-    private void reload() {
-        try {
-            TreeMap<Integer,ExternalRun> runs = new TreeMap<Integer,ExternalRun>(reverseComparator);
-
-            File[] subdirs = getBuildDir().listFiles(new FileFilter() {
-                public boolean accept(File subdir) {
-                    return subdir.isDirectory();
-                }
-            });
-
-            Arrays.sort(subdirs,fileComparator);
-            ExternalRun lastBuild = null;
-
-            for( File dir : subdirs ) {
+        for( File dir : subdirs ) {
+            try {
+                ExternalRun b = new ExternalRun(this,dir,lastBuild);
+                lastBuild = b;
+                runs.put( b.getNumber(), b );
+            } catch (IOException e) {
+                logger.log(Level.WARNING,"Unable to load "+dir,e);
+                e.printStackTrace();
                 try {
-                    ExternalRun b = new ExternalRun(this,dir,lastBuild);
-                    lastBuild = b;
-                    runs.put( b.getNumber(), b );
-                } catch (IOException e) {
-                    logger.log(Level.WARNING,"Unable to load "+dir,e);
-                    e.printStackTrace();
-                    try {
-                        Util.deleteRecursive(dir);
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                        // but ignore
-                    }
+                    Util.deleteRecursive(dir);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                    // but ignore
                 }
             }
-
-            // replace the list with new one atomically.
-            this.runs = Collections.unmodifiableSortedMap(runs);
-
-        } finally {
-            reloadingInProgress = false;
-            nextUpdate = System.currentTimeMillis()+1000;
         }
+
+        return runs;
     }
 
 
@@ -166,36 +99,6 @@ public class ExternalJob extends Job<ExternalJob,ExternalRun> {
             return lhs.getName().compareTo(rhs.getName());
         }
     };
-
-
-    /**
-     * Thread that reloads the {@link Run}s.
-     */
-    private static final class ReloadThread extends Thread {
-        private ExternalJob getNext() throws InterruptedException {
-            synchronized(reloadQueue) {
-                while(reloadQueue.isEmpty())
-                    reloadQueue.wait();
-                ExternalJob job = reloadQueue.iterator().next();
-                reloadQueue.remove(job);
-                return job;
-            }
-        }
-
-        public void run() {
-            while (true) {
-                try {
-                    getNext().reload();
-                } catch (InterruptedException e) {
-                    // treat this as a death signal
-                    return;
-                } catch (Throwable t) {
-                    // otherwise ignore any error
-                    t.printStackTrace();
-                }
-            }
-        }
-    }
 
     private static final Logger logger = Logger.getLogger(ExternalJob.class.getName());
 

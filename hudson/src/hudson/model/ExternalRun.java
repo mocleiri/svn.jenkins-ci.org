@@ -12,6 +12,8 @@ import java.io.PrintStream;
 import java.io.Reader;
 
 /**
+ * {@link Run} for {@link ExternalJob}.
+ * 
  * @author Kohsuke Kawaguchi
  */
 public class ExternalRun extends Run<ExternalJob,ExternalRun> {
