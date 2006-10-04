@@ -158,14 +158,16 @@ public final class Build extends Run<Project,Build> implements Runnable {
         FingerprintAction f = getAction(FingerprintAction.class);
         if(f==null)     return -1;
 
+        int n = -1;
+
         // look for fingerprints that point to the given project as the source, and merge them all
         for (Fingerprint e : f.getFingerprints().values()) {
             BuildPtr o = e.getOriginal();
             if(o!=null && o.is(that))
-                return o.getNumber();
+                n = Math.max(n,o.getNumber());
         }
 
-        return -1;
+        return n;
     }
 
     /**
