@@ -607,7 +607,14 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
         rsp.setStatus(HttpServletResponse.SC_OK);
 
         boolean completed = !isBuilding();
-        LargeText text = new LargeText(getLogFile(),completed);
+        File logFile = getLogFile();
+        if(!logFile.exists()) {
+            // file doesn't exist yet
+            rsp.addHeader("X-Text-Size","0");
+            rsp.addHeader("X-More-Data","true");
+            return;
+        }
+        LargeText text = new LargeText(logFile,completed);
         long start = 0;
         String s = req.getParameter("start");
         if(s!=null)
