@@ -305,6 +305,16 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
     }
 
     /**
+     * Returns the last build that didn't fail before this build.
+     */
+    public RunT getPreviousNotFailedBuild() {
+        RunT r=previousBuild;
+        while( r!=null && r.getResult()==Result.FAILURE )
+            r=r.previousBuild;
+        return r;
+    }
+
+    /**
      * Returns the last failed build before this build.
      */
     public RunT getPreviousFailedBuild() {
