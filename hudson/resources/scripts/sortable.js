@@ -28,8 +28,6 @@ OR OTHER DEALINGS IN THE SOFTWARE.
 */
 addEvent(window, "load", sortables_init);
 
-var SORT_COLUMN_INDEX;
-
 function sortables_init() {
   document.getElementsByClassName("sortable")._each(ts_makeSortable)
 }
@@ -69,6 +67,14 @@ function ts_getInnerText(el) {
 	return str;
 }
 
+// extract data for sorting from a cell
+function extractData(x) {
+  var data = x.getAttribute("data");
+  if(data!=null)
+    return data;
+  return ts_getInnerText(x);
+}
+
 function ts_resortTable(lnk) {
     // get the span
     var span;
@@ -76,25 +82,29 @@ function ts_resortTable(lnk) {
         if (lnk.childNodes[ci].tagName && lnk.childNodes[ci].tagName.toLowerCase() == 'span') span = lnk.childNodes[ci];
     }
     var spantext = ts_getInnerText(span);
-    var td = lnk.parentNode;
-    var column = td.cellIndex;
-    var table = getParent(td,'TABLE');
+    var th = lnk.parentNode;
+    var column = th.cellIndex;
+    var table = getParent(th,'TABLE');
 
     // Work out a type for the column
     if (table.rows.length <= 1) return;
-    var itm = ts_getInnerText(table.rows[1].cells[column]).trim();
+    var itm = extractData(table.rows[1].cells[column]).trim();
     sortfn = ts_sort_caseinsensitive;
     if (itm.match(/^\d\d[\/-]\d\d[\/-]\d\d\d\d$/)) sortfn = ts_sort_date;
     if (itm.match(/^\d\d[\/-]\d\d[\/-]\d\d$/)) sortfn = ts_sort_date;
     if (itm.match(/^[£$]/)) sortfn = ts_sort_currency;
     if (itm.match(/^[\d\.]+$/)) sortfn = ts_sort_numeric;
-    SORT_COLUMN_INDEX = column;
+    var SORT_COLUMN_INDEX = column;
     var firstRow = new Array();
     var newRows = new Array();
     for (i=0;i<table.rows[0].length;i++) { firstRow[i] = table.rows[0][i]; }
     for (j=1;j<table.rows.length;j++) { newRows[j-1] = table.rows[j]; }
 
-    newRows.sort(sortfn);
+    newRows.sort(function(a,b) {
+      return sortfn(
+              extractData(a.cells[SORT_COLUMN_INDEX]),
+              extractData(b.cells[SORT_COLUMN_INDEX]));
+    });
 
     if (span.getAttribute("sortdir") == 'down') {
         ARROW = '&nbsp;&nbsp;&uarr;';
@@ -132,55 +142,50 @@ function getParent(el, pTagName) {
 		return getParent(el.parentNode, pTagName);
 }
 function ts_sort_date(a,b) {
+  function toDt(x) {
     // y2k notes: two digit years less than 50 are treated as 20XX, greater than 50 are treated as 19XX
-    aa = ts_getInnerText(a.cells[SORT_COLUMN_INDEX]);
-    bb = ts_getInnerText(b.cells[SORT_COLUMN_INDEX]);
-    if (aa.length == 10) {
-        dt1 = aa.substr(6,4)+aa.substr(3,2)+aa.substr(0,2);
+    if (x.length == 10) {
+        return x.substr(6,4)+x.substr(3,2)+x.substr(0,2);
     } else {
-        yr = aa.substr(6,2);
+        yr = x.substr(6,2);
         if (parseInt(yr) < 50) { yr = '20'+yr; } else { yr = '19'+yr; }
-        dt1 = yr+aa.substr(3,2)+aa.substr(0,2);
+        return yr+x.substr(3,2)+x.substr(0,2);
     }
-    if (bb.length == 10) {
-        dt2 = bb.substr(6,4)+bb.substr(3,2)+bb.substr(0,2);
-    } else {
-        yr = bb.substr(6,2);
-        if (parseInt(yr) < 50) { yr = '20'+yr; } else { yr = '19'+yr; }
-        dt2 = yr+bb.substr(3,2)+bb.substr(0,2);
-    }
-    if (dt1==dt2) return 0;
-    if (dt1<dt2) return -1;
-    return 1;
+  }
+
+  var dt1 = toDt(a);
+  var dt2 = toDt(b);
+
+  if (dt1==dt2) return 0;
+  if (dt1<dt2) return -1;
+  return 1;
 }
 
 function ts_sort_currency(a,b) {
-    aa = ts_getInnerText(a.cells[SORT_COLUMN_INDEX]).replace(/[^0-9.]/g,'');
-    bb = ts_getInnerText(b.cells[SORT_COLUMN_INDEX]).replace(/[^0-9.]/g,'');
-    return parseFloat(aa) - parseFloat(bb);
+    a = a.replace(/[^0-9.]/g,'');
+    b = b.replace(/[^0-9.]/g,'');
+    return parseFloat(a) - parseFloat(b);
 }
 
 function ts_sort_numeric(a,b) {
-    aa = parseFloat(ts_getInnerText(a.cells[SORT_COLUMN_INDEX]));
-    if (isNaN(aa)) aa = 0;
-    bb = parseFloat(ts_getInnerText(b.cells[SORT_COLUMN_INDEX]));
-    if (isNaN(bb)) bb = 0;
-    return aa-bb;
+    a = parseFloat(a);
+    if (isNaN(a)) a = 0;
+    b = parseFloat(b);
+    if (isNaN(b)) b = 0;
+    return a-b;
 }
 
 function ts_sort_caseinsensitive(a,b) {
-    aa = ts_getInnerText(a.cells[SORT_COLUMN_INDEX]).toLowerCase();
-    bb = ts_getInnerText(b.cells[SORT_COLUMN_INDEX]).toLowerCase();
-    if (aa==bb) return 0;
-    if (aa<bb) return -1;
+    a = a.toLowerCase();
+    b = b.toLowerCase();
+    if (a==b) return 0;
+    if (a<b) return -1;
     return 1;
 }
 
 function ts_sort_default(a,b) {
-    aa = ts_getInnerText(a.cells[SORT_COLUMN_INDEX]);
-    bb = ts_getInnerText(b.cells[SORT_COLUMN_INDEX]);
-    if (aa==bb) return 0;
-    if (aa<bb) return -1;
+    if (a==b) return 0;
+    if (a<b) return -1;
     return 1;
 }
 
