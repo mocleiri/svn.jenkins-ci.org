@@ -10,13 +10,26 @@ import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Project;
 import hudson.model.Result;
+import hudson.tasks.Mailer;
 import hudson.tasks.Publisher;
+import hudson.util.FormFieldValidator;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.types.FileSet;
 import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletException;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 
 /**
  * Records the japex test report for builds.
@@ -29,18 +42,40 @@ public class JapexPublisher extends Publisher {
      */
     private String includes;
 
-    /**
-     * If this field is non-null and the regression is bigger than this threshold,
-     * mark the build as unstable.
-     */
-    private Integer threshold;
-
-    public JapexPublisher(String japexReport) {
-        this.includes = japexReport;
-    }
+    private boolean trackRegressions;
+    private double regressionThreshold;
+    private String regressionAddress;
 
     public String getIncludes() {
         return includes;
+    }
+
+    public void setIncludes(String includes) {
+        this.includes = includes;
+    }
+
+    public boolean isTrackRegressions() {
+        return trackRegressions;
+    }
+
+    public void setTrackRegressions(boolean trackRegressions) {
+        this.trackRegressions = trackRegressions;
+    }
+
+    public double getRegressionThreshold() {
+        return regressionThreshold;
+    }
+
+    public void setRegressionThreshold(double regressionThreshold) {
+        this.regressionThreshold = regressionThreshold;
+    }
+
+    public String getRegressionAddress() {
+        return regressionAddress;
+    }
+
+    public void setRegressionAddress(String regressionAddress) {
+        this.regressionAddress = Util.fixEmpty(Util.fixNull(regressionAddress).trim());
     }
 
     public boolean prebuild(Build build, BuildListener listener) {
@@ -99,11 +134,25 @@ public class JapexPublisher extends Publisher {
             File previousConfig = new File(prevDir,configName);
             if(previousConfig.exists()) {
                 try {
+                    File regressionFile = new File(outDir, configName + ".regression");
+
                     RegressionDetector regd = new RegressionDetector();
                     regd.setOldReport(previousConfig);
                     regd.setNewReport(file);
-                    regd.generateXmlReport(new File(outDir,configName+".regression"));
+                    regd.setThreshold(regressionThreshold);
+                    regd.generateXmlReport(regressionFile);
                     hasRegressionReport = true;
+
+                    if(trackRegressions && regd.checkThreshold(new StreamSource(regressionFile))) {
+                        // regression detected
+                        listener.getLogger().println("Regression detected to "+configName);
+                        listener.getLogger().println("Notifying "+regressionAddress);
+                        build.setResult(Result.UNSTABLE);
+
+                        StringWriter html = new StringWriter();
+                        regd.generateHtmlReport(new StreamSource(regressionFile),new StreamResult(html));
+                        sendNotification(build,listener,html.toString());
+                    }
                 } catch (IOException e) {
                     e.printStackTrace(listener.error("Failed to compute japex regression report for "+configName));
                 }
@@ -114,6 +163,21 @@ public class JapexPublisher extends Publisher {
             build.getActions().add(new JapexReportBuildAction(build));
 
         return true;
+    }
+
+    private void sendNotification(Build build, BuildListener listener, String payload) {
+        try {
+            Message msg = new MimeMessage(Mailer.DESCRIPTOR.createSession());
+            msg.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(getRegressionAddress(), false));
+            msg.setSubject("Japex performance regression in "+build.getProject().getName()+' '+build.getDisplayName());
+            msg.setText(payload);
+            msg.setHeader("Content-Type", "text/html");
+
+            Transport.send(msg);
+        } catch (MessagingException e) {
+            e.printStackTrace(listener.error("Failed to send out Japex notification e-mail"));
+        }
     }
 
     /**
@@ -140,7 +204,13 @@ public class JapexPublisher extends Publisher {
         return DESCRIPTOR;
     }
 
-    public static final Descriptor<Publisher> DESCRIPTOR = new Descriptor<Publisher>(JapexPublisher.class) {
+    public static final Descriptor<Publisher> DESCRIPTOR = new DescriptorImpl();
+
+    public static class DescriptorImpl extends Descriptor<Publisher> {
+        public DescriptorImpl() {
+            super(JapexPublisher.class);
+        }
+
         public String getDisplayName() {
             return "Record Japex test report";
         }
@@ -149,8 +219,40 @@ public class JapexPublisher extends Publisher {
             return "/plugin/japex/help.html";
         }
 
-        public Publisher newInstance(StaplerRequest req) {
-            return new JapexPublisher(req.getParameter("japex.includes"));
+        public Publisher newInstance(StaplerRequest req) throws FormException {
+            JapexPublisher pub = new JapexPublisher();
+            req.bindParameters(pub,"japex.");
+            if(pub.isTrackRegressions()) {
+                // make sure both the threshold and address are given
+                if(pub.getRegressionAddress()==null)
+                    throw new FormException("No e-mail address is set","japex.trackRegressions");
+                try {
+                    InternetAddress.parse(pub.getRegressionAddress(), false);
+                } catch (AddressException e) {
+                    throw new FormException("Invalid e-mail format",e,"japex.trackRegressions");
+                }
+            }
+            return pub;
         }
-    };
+
+        //
+        // web methods
+        //
+
+        /**
+         * Checks if the e-mail address is valid
+         */
+        public void doCheckAddress( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+            new FormFieldValidator(req,rsp,false) {
+                public void check() throws IOException, ServletException {
+                    try {
+                        InternetAddress.parse(request.getParameter("value"),true);
+                        ok();
+                    } catch (AddressException e) {
+                        error("Not a valid e-mail address(es)");
+                    }
+                }
+            }.process();
+        }
+    }
 }
