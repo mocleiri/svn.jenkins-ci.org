@@ -11,12 +11,15 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.FileFilter;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Collection;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import java.util.Map.Entry;
 
 /**
@@ -100,6 +103,7 @@ public class JapexReportAction implements Action, StaplerProxy {
                 return this;
             }
         } catch (IOException e) {
+            LOGGER.log(Level.WARNING,"Failed to parse Japex reports",e);
             // this should cause index view to be displayed on this object,
             // which should report the parse failure
             return this;
@@ -122,7 +126,7 @@ public class JapexReportAction implements Action, StaplerProxy {
         Map<String,List<TestSuiteReport>> reports = new HashMap<String,List<TestSuiteReport>>();
         for (Build build : project.getBuilds()) {
             File dir = JapexPublisher.getJapexReport(build);
-            File[] files = dir.listFiles();
+            File[] files = dir.listFiles(REPORT_FILTER);
             if(files!=null) {
                 for (File f : files) {
                     try {
@@ -156,4 +160,12 @@ public class JapexReportAction implements Action, StaplerProxy {
 
         return parsed;
     }
+
+    private static final FileFilter REPORT_FILTER = new FileFilter() {
+        public boolean accept(File f) {
+            return f.getName().endsWith(".xml");
+        }
+    };
+
+    private static final Logger LOGGER = Logger.getLogger(JapexReportAction.class.getName());
 }

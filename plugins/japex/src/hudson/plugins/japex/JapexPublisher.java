@@ -1,7 +1,9 @@
 package hudson.plugins.japex;
 
+import com.sun.japex.RegressionDetector;
 import com.sun.japex.report.TestSuiteReport;
 import hudson.Launcher;
+import hudson.Util;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
@@ -10,11 +12,11 @@ import hudson.model.Project;
 import hudson.model.Result;
 import hudson.tasks.Publisher;
 import org.apache.tools.ant.DirectoryScanner;
-import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
 import org.kohsuke.stapler.StaplerRequest;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Records the japex test report for builds.
@@ -26,6 +28,12 @@ public class JapexPublisher extends Publisher {
      * Relative path to the Japex XML report files.
      */
     private String includes;
+
+    /**
+     * If this field is non-null and the regression is bigger than this threshold,
+     * mark the build as unstable.
+     */
+    private Integer threshold;
 
     public JapexPublisher(String japexReport) {
         this.includes = japexReport;
@@ -60,6 +68,9 @@ public class JapexPublisher extends Publisher {
         File outDir = getJapexReport(build);
         outDir.mkdir();
 
+        File prevDir = getPreviousJapexReport(build);
+        boolean hasRegressionReport = false;
+
         for (String f : includedFiles) {
             File file = new File(ds.getBasedir(),f);
 
@@ -81,17 +92,37 @@ public class JapexPublisher extends Publisher {
                 continue;
             }
 
-            // copy
-            File dst = new File(outDir,configName);
+            // archive the report file
+            Util.copyFile(file,new File(outDir,configName));
 
-            Copy copy = new Copy();
-            copy.setProject(antProject);
-            copy.setFile(file);
-            copy.setTofile(dst);
-            copy.execute();
+            // compute the regression
+            File previousConfig = new File(prevDir,configName);
+            if(previousConfig.exists()) {
+                try {
+                    RegressionDetector regd = new RegressionDetector();
+                    regd.setOldReport(previousConfig);
+                    regd.setNewReport(file);
+                    regd.generateXmlReport(new File(outDir,configName+".regression"));
+                    hasRegressionReport = true;
+                } catch (IOException e) {
+                    e.printStackTrace(listener.error("Failed to compute japex regression report for "+configName));
+                }
+            }
         }
 
+        if(hasRegressionReport)
+            build.getActions().add(new JapexReportBuildAction(build));
+
         return true;
+    }
+
+    /**
+     * Computes the archive of the last Japex run.
+     */
+    private File getPreviousJapexReport(Build build) {
+        build = build.getPreviousNotFailedBuild();
+        if(build==null)     return null;
+        else    return getJapexReport(build);
     }
 
     /**
