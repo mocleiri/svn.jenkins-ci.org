@@ -8,10 +8,24 @@ import hudson.tasks.LogRotator;
 import hudson.util.IOException2;
 import hudson.util.TextFile;
 import hudson.util.XStream2;
+import hudson.util.DataSetBuilder;
+import hudson.util.ChartUtil;
+import hudson.util.ShiftedCategoryAxis;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.renderer.category.AreaRenderer;
+import org.jfree.chart.renderer.AreaRendererEndType;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.ui.RectangleInsets;
 
 import javax.servlet.ServletException;
 import java.io.File;
@@ -20,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.SortedMap;
+import java.awt.Color;
 
 /**
  * A job is an runnable entity under the monitoring of Hudson.
@@ -465,6 +480,93 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
 
     public String getBuildStatusUrl() {
         return getIconColor()+".gif";
+    }
+
+    /**
+     * Returns the graph that shows how long each build took.
+     */
+    public void doBuildTimeGraph( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+        class Label implements Comparable<Label> {
+            private final Run run;
+
+            public Label(Run r) {
+                this.run = r;
+            }
+
+            public int compareTo(Label that) {
+                return this.run.number-that.run.number;
+            }
+
+            public boolean equals(Object o) {
+                Label that = (Label) o;
+                return run ==that.run;
+            }
+
+            public int hashCode() {
+                return run.hashCode();
+            }
+
+            public String toString() {
+                String l = run.getDisplayName();
+                if(run instanceof Build) {
+                    String s = ((Build)run).getBuiltOnStr();
+                    if(s!=null)
+                        l += ' '+s;
+                }
+                return l;
+            }
+        }
+
+        DataSetBuilder<String,Label> data = new DataSetBuilder<String, Label>();
+        for( Run r : getBuilds() )
+            data.add( ((double)r.getDuration())/(1000*60), "mins", new Label(r));
+        ChartUtil.generateGraph(req,rsp,createChart(data.build()),500,200);
+    }
+
+    private JFreeChart createChart(CategoryDataset dataset) {
+
+        final JFreeChart chart = ChartFactory.createStackedAreaChart(
+            null,                   // chart title
+            null,                   // unused
+            "min",                  // range axis label
+            dataset,                  // data
+            PlotOrientation.VERTICAL, // orientation
+            false,                     // include legend
+            true,                     // tooltips
+            false                     // urls
+        );
+
+        chart.setBackgroundPaint(Color.white);
+
+        final CategoryPlot plot = chart.getCategoryPlot();
+
+        // plot.setAxisOffset(new Spacer(Spacer.ABSOLUTE, 5.0, 5.0, 5.0, 5.0));
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setOutlinePaint(null);
+        plot.setForegroundAlpha(0.8f);
+//        plot.setDomainGridlinesVisible(true);
+//        plot.setDomainGridlinePaint(Color.white);
+        plot.setRangeGridlinesVisible(true);
+        plot.setRangeGridlinePaint(Color.black);
+
+        CategoryAxis domainAxis = new ShiftedCategoryAxis(null);
+        plot.setDomainAxis(domainAxis);
+        domainAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_90);
+        domainAxis.setLowerMargin(0.0);
+        domainAxis.setUpperMargin(0.0);
+        domainAxis.setCategoryMargin(0.0);
+
+        final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+
+        AreaRenderer ar = (AreaRenderer) plot.getRenderer();
+        ar.setEndType(AreaRendererEndType.TRUNCATE);
+        ar.setSeriesPaint(0,new Color(0x72,0x9F,0xCF));
+
+        // crop extra space around the graph
+        plot.setInsets(new RectangleInsets(0,0,0,5.0));
+
+        return chart;
     }
 
     /**

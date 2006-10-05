@@ -99,6 +99,13 @@ public final class Build extends Run<Project,Build> implements Runnable {
     }
 
     /**
+     * Returns the name of the slave it was built on, or null if it was the master.
+     */
+    public String getBuiltOnStr() {
+        return builtOn;
+    }
+
+    /**
      * Gets {@link AbstractTestResultAction} associated with this build if any.
      */
     public AbstractTestResultAction getTestResultAction() {
