@@ -15,5 +15,18 @@
       <input class="setting-input" name="mailer_hudson_url"
         type="text" value="${descriptor.url}"/>
     </f:entry>
+    <!--f:advanced-->
+      <f:optionalBlock name="mailer.useSMTPAuth" title="Use SMTP Authentication" checked="${descriptor.smtpAuthUserName!=null}"
+          help="/help/tasks/mailer/smtpAuth.html">
+        <f:entry title="User Name">
+          <input class="setting-input" name="mailer.SMTPAuth.userName"
+                 type="text" value="${descriptor.smtpAuthUserName}"/>
+        </f:entry>
+        <f:entry title="Password">
+          <input class="setting-input" name="mailer.SMTPAuth.password"
+                 type="password" value="${descriptor.smtpAuthPassword}"/>
+        </f:entry>
+      </f:optionalBlock>
+    <!--/f:advanced-->
   </f:section>
 </j:jelly>

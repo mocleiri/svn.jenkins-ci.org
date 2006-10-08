@@ -25,6 +25,8 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -268,7 +270,18 @@ public class Mailer extends Publisher {
                 if(o.getValue()!=null)
                     props.put(o.getKey(),o.getValue());
             }
-            return Session.getInstance(props);
+
+            return Session.getInstance(props,getAuthenticator());
+        }
+
+        private Authenticator getAuthenticator() {
+            final String un = getSmtpAuthUserName();
+            if(un==null)    return null;
+            return new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(getSmtpAuthUserName(),getSmtpAuthPassword());
+                }
+            };
         }
 
         public boolean configure(HttpServletRequest req) throws FormException {
@@ -278,6 +291,9 @@ public class Mailer extends Publisher {
             if(url!=null && !url.endsWith("/"))
                 url += '/';
             getProperties().put("mail.hudson.url",url);
+
+            getProperties().put("mail.hudson.smtpauth.username",nullify(req.getParameter("mailer.SMTPAuth.userName")));
+            getProperties().put("mail.hudson.smtpauth.password",nullify(req.getParameter("mailer.SMTPAuth.password")));
 
             save();
             return super.configure(req);
@@ -300,6 +316,14 @@ public class Mailer extends Publisher {
 
         public String getUrl() {
             return (String)getProperties().get("mail.hudson.url");
+        }
+
+        public String getSmtpAuthUserName() {
+            return (String)getProperties().get("mail.hudson.smtpauth.username");
+        }
+
+        public String getSmtpAuthPassword() {
+            return (String)getProperties().get("mail.hudson.smtpauth.password");
         }
 
         /** Check whether a path (/-separated) will be archived. */
