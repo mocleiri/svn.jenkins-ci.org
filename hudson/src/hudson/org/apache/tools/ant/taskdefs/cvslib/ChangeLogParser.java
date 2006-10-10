@@ -74,7 +74,7 @@ class ChangeLogParser {
     private String m_previousRevision;
     /**
      * All branches available on the current file.
-     * Keyed by branch revision prefix (like "1.2.3" if files in the branch have revision numbers like
+     * Keyed by branch revision prefix (like "1.2.3." if files in the branch have revision numbers like
      * "1.2.3.4") and the value is the branch name.
      */
     private final Map<String,String> branches = new HashMap<String,String>();
@@ -292,7 +292,7 @@ class ChangeLogParser {
     private String findBranch(String revision) {
         if(revision==null)  return null; // defensive check
         for (Entry<String,String> e : branches.entrySet()) {
-            if(revision.startsWith(e.getKey()))
+            if(revision.startsWith(e.getKey()) && revision.substring(e.getKey().length()).indexOf('.')==-1)
                 return e.getValue();
         }
         return null;
