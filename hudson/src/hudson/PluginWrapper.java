@@ -126,7 +126,7 @@ public final class PluginWrapper {
         if(isLinked) {
             String classPath = manifest.getMainAttributes().getValue("Class-Path");
             for (String s : classPath.split(" +")) {
-                File file = new File(archive.getParentFile(), s);
+                File file = resolve(archive.getParentFile(), s);
                 if(file.getName().contains("*")) {
                     // handle wildcard
                     FileSet fs = new FileSet();
@@ -143,7 +143,7 @@ public final class PluginWrapper {
                 }
             }
 
-            this.baseResourceURL = new File(archive.getParentFile(),
+            this.baseResourceURL = resolve(archive.getParentFile(),
                 manifest.getMainAttributes().getValue("Resource-Path")).toURL();
         } else {
             File classes = new File(expandDir,"WEB-INF/classes");
@@ -204,6 +204,14 @@ public final class PluginWrapper {
             ioe.initCause(t);
             throw ioe;
         }
+    }
+
+    private static File resolve(File base, String relative) {
+        File rel = new File(relative);
+        if(rel.isAbsolute())
+            return rel;
+        else
+            return new File(base,relative);
     }
 
     /**
