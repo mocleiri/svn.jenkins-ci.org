@@ -13,6 +13,8 @@ import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -97,6 +99,9 @@ public final class PluginWrapper {
         File expandDir = null;  // if .hpi, this is the directory where war is expanded
 
         if(isLinked) {
+            // resolve the .hpl file to the location of the manifest file
+            archive = resolve(archive,new BufferedReader(new FileReader(archive)).readLine());
+            // then parse manifest
             FileInputStream in = new FileInputStream(archive);
             try {
                 manifest = new Manifest(in);
@@ -126,7 +131,7 @@ public final class PluginWrapper {
         if(isLinked) {
             String classPath = manifest.getMainAttributes().getValue("Class-Path");
             for (String s : classPath.split(" +")) {
-                File file = resolve(archive.getParentFile(), s);
+                File file = resolve(archive, s);
                 if(file.getName().contains("*")) {
                     // handle wildcard
                     FileSet fs = new FileSet();
@@ -143,7 +148,7 @@ public final class PluginWrapper {
                 }
             }
 
-            this.baseResourceURL = resolve(archive.getParentFile(),
+            this.baseResourceURL = resolve(archive,
                 manifest.getMainAttributes().getValue("Resource-Path")).toURL();
         } else {
             File classes = new File(expandDir,"WEB-INF/classes");
@@ -211,7 +216,7 @@ public final class PluginWrapper {
         if(rel.isAbsolute())
             return rel;
         else
-            return new File(base,relative);
+            return new File(base.getParentFile(),relative);
     }
 
     /**
