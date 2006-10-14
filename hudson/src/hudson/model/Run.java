@@ -69,6 +69,11 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
     protected volatile Result result;
 
     /**
+     * Human-readable description. Can be null.
+     */
+    protected volatile String description;
+
+    /**
      * The current build state.
      */
     protected volatile transient State state;
@@ -223,6 +228,10 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
      */
     public Calendar getTimestamp() {
         return timestamp;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     /**
@@ -647,6 +656,19 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
         keepLog = !keepLog;
         save();
         rsp.forwardToPreviousPage(req);
+    }
+
+    /**
+     * Accepts the new description.
+     */
+    public synchronized void doSubmitDescription( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
+        req.setCharacterEncoding("UTF-8");
+        description = req.getParameter("description");
+        save();
+        rsp.sendRedirect(".");  // go to the top page
     }
 
     /**

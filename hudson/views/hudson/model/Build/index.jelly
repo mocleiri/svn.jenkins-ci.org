@@ -2,18 +2,22 @@
   <l:layout title="${it.project.name} #${it.number}">
     <st:include page="sidepanel.jelly" />
     <l:main-panel>
-      <t:buildCaption>
-        Build #${it.number}
-        (<i:formatDate value="${it.timestamp.time}" type="both" dateStyle="medium" timeStyle="medium"/>)
-      </t:buildCaption>
-
-      <div style="float:right; background-color:white; z-index: 1; position:relative;">
+      <div style="float:right; background-color:white; z-index: 1; position:relative; margin-left: 1em">
         <st:include page="logKeep.jelly" />
         <div style="margin-top:1em">
           Started ${it.timestampString} ago
         </div><div>
           Took <a href="${rootURL}/${it.parent.url}buildTimeTrend">${it.durationString}</a>
         </div>
+      </div>
+
+      <t:buildCaption>
+        Build #${it.number}
+        (<i:formatDate value="${it.timestamp.time}" type="both" dateStyle="medium" timeStyle="medium"/>)
+      </t:buildCaption>
+
+      <div>
+        <t:editableDescription adminOnly="true" />
       </div>
 
       <table style="margin-top: 1em; margin-left:1em;">
