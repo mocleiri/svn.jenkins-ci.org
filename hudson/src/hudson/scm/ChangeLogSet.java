@@ -1,5 +1,7 @@
 package hudson.scm;
 
+import hudson.model.User;
+
 import java.util.Collections;
 
 /**
@@ -24,6 +26,14 @@ public abstract class ChangeLogSet {
     public static abstract class Entry {
 
         public abstract String getMsg();
+
+        /**
+         * The user who made this change.
+         *
+         * @return
+         *      never null.
+         */
+        public abstract User getAuthor();
 
         /**
          * Message escaped for HTML

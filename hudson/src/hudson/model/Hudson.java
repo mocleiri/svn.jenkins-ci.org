@@ -493,6 +493,16 @@ public final class Hudson extends JobCollection implements Node {
     }
 
     /**
+     * Gets the user of the given name.
+     *
+     * @return
+     *      This method returns a non-null object for any user name, without validation.
+     */
+    public User getUser(String name) {
+        return User.get(name);
+    }
+
+    /**
      * Creates a new job.
      *
      * @throws IllegalArgumentException

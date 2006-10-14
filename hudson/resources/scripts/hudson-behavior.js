@@ -136,3 +136,18 @@ var hudsonRules = {
 Behaviour.register(hudsonRules);
 
 
+// used by editableDescription.jelly to replace the description field with a form
+function replaceDescription() {
+    var d = document.getElementById("description");
+    d.firstChild.nextSibling.innerHTML = "<div class='spinner-right'>loading...</div>";
+    new Ajax.Request(
+        "./descriptionForm",
+        {
+          method : 'get',
+          onComplete : function(x) {
+            d.innerHTML = x.responseText;
+          }
+        }
+    );
+    return false;
+}

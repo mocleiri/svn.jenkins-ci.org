@@ -1,6 +1,7 @@
 package hudson.scm;
 
 import hudson.model.Build;
+import hudson.model.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public final class SubversionChangeLogSet extends ChangeLogSet {
      */
     public static class LogEntry extends Entry {
         private int revision;
-        private String author;
+        private User author;
         private String date;
         private String msg;
         private List<Path> paths = new ArrayList<Path>();
@@ -59,12 +60,12 @@ public final class SubversionChangeLogSet extends ChangeLogSet {
             this.revision = revision;
         }
 
-        public String getAuthor() {
+        public User getAuthor() {
             return author;
         }
 
         public void setAuthor(String author) {
-            this.author = author;
+            this.author = User.get(author);
         }
 
         public String getDate() {

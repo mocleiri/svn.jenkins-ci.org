@@ -1,0 +1,13 @@
+<!--
+  Renders ${it.description} and then allow it to be editable.
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <div id="description">
+    <div>
+      ${it.description}
+    </div>
+    <div align="right"><a href="editDescription" onclick="return replaceDescription();">
+      <img src="${rootURL}/images/16x16/notepad.gif" /> edit description
+    </a></div>
+  </div>
+</j:jelly>

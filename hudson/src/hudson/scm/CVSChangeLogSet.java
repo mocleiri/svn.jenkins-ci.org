@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import hudson.model.User;
+
 /**
  * {@link ChangeLogSet} for CVS.
  * @author Kohsuke Kawaguchi
@@ -73,13 +75,11 @@ public final class CVSChangeLogSet extends ChangeLogSet {
 
     /**
      * In-memory representation of CVS Changelog.
-     *
-     * @author Kohsuke Kawaguchi
      */
     public static class CVSChangeLog extends Entry {
         private String date;
         private String time;
-        private String author;
+        private User author;
         private String msg;
         private final List<File> files = new ArrayList<File>();
 
@@ -119,12 +119,12 @@ public final class CVSChangeLogSet extends ChangeLogSet {
             this.time = time;
         }
 
-        public String getAuthor() {
+        public User getAuthor() {
             return author;
         }
 
         public void setAuthor(String author) {
-            this.author = author;
+            this.author = User.get(author);
         }
 
         public String getMsg() {

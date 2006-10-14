@@ -46,6 +46,11 @@ public final class Build extends Run<Project,Build> implements Runnable {
     private ChangeLogParser scm;
 
     /**
+     * Changes in this build.
+     */
+    private volatile transient ChangeLogSet changeSet;
+
+    /**
      * Creates a new build.
      */
     Build(Project project) throws IOException {
@@ -70,6 +75,12 @@ public final class Build extends Run<Project,Build> implements Runnable {
         if(scm==null)
             scm = new CVSChangeLogParser();
 
+        if(changeSet==null) // cached value
+            changeSet = calcChangeSet();
+        return changeSet;
+    }
+
+    private ChangeLogSet calcChangeSet() {
         File changelogFile = new File(getRootDir(), "changelog.xml");
         if(!changelogFile.exists())
             return ChangeLogSet.EMPTY;
@@ -219,6 +230,7 @@ public final class Build extends Run<Project,Build> implements Runnable {
                 SCM scm = project.getScm();
 
                 Build.this.scm = scm.createChangeLogParser();
+                Build.this.changeSet = Build.this.calcChangeSet();
 
                 if(!preBuild(listener,project.getBuilders()))
                     return Result.FAILURE;
