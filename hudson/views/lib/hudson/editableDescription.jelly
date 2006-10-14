@@ -1,13 +1,29 @@
 <!--
   Renders ${it.description} and then allow it to be editable.
+
+  adminOnly="true" can be specified to limit the edit feature just to admins
 -->
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
   <div id="description">
     <div>
       ${it.description}
     </div>
-    <div align="right"><a href="editDescription" onclick="return replaceDescription();">
-      <img src="${rootURL}/images/16x16/notepad.gif" /> edit description
-    </a></div>
+
+    <j:set var="verb" value="${h.ifThenElse(empty(it.description),'add','edit')}"/>
+
+    <j:choose>
+      <j:when test="${attrs.adminOnly}">
+        <l:isAdmin>
+          <div align="right"><a href="editDescription" onclick="return replaceDescription();">
+            <img src="${rootURL}/images/16x16/notepad.gif" /> ${verb} description
+          </a></div>
+        </l:isAdmin>
+      </j:when>
+      <j:otherwise>
+        <div align="right"><a href="editDescription" onclick="return replaceDescription();">
+          <img src="${rootURL}/images/16x16/notepad.gif" /> ${verb} description
+        </a></div>
+      </j:otherwise>
+    </j:choose>
   </div>
 </j:jelly>

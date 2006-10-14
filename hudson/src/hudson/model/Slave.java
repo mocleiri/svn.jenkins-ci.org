@@ -86,7 +86,7 @@ public final class Slave implements Node {
         return localFS;
     }
 
-    public String getDescription() {
+    public String getNodeDescription() {
         return description;
     }
 

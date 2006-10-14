@@ -160,7 +160,11 @@ public final class Hudson extends JobCollection implements Node {
         return "";
     }
 
-    public String getViewMessage() {
+    public String getNodeDescription() {
+        return "the master Hudson node";
+    }
+
+    public String getDescription() {
         return systemMessage;
     }
 
@@ -216,14 +220,10 @@ public final class Hudson extends JobCollection implements Node {
     }
 
     /**
-     * Synonym to {@link #getViewMessage()}.
+     * Synonym to {@link #getNodeDescription()}.
      */
     public String getSystemMessage() {
         return systemMessage;
-    }
-
-    public String getDescription() {
-        return "the master Hudson node";
     }
 
     public Launcher createLauncher(TaskListener listener) {
@@ -723,6 +723,19 @@ public final class Hudson extends JobCollection implements Node {
         } catch (FormException e) {
             sendError(e,req,rsp);
         }
+    }
+
+    /**
+     * Accepts the new description.
+     */
+    public synchronized void doSubmitDescription( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
+        req.setCharacterEncoding("UTF-8");
+        systemMessage = req.getParameter("description");
+        save();
+        rsp.sendRedirect(".");
     }
 
     public synchronized void doQuietDown( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {

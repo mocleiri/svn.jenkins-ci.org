@@ -34,7 +34,7 @@ public class User extends AbstractModelObject {
     }
 
     /**
-     * Accepts submission from the configuration page.
+     * Accepts the new description.
      */
     public synchronized void doSubmitDescription( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         req.setCharacterEncoding("UTF-8");

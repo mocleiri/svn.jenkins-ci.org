@@ -31,7 +31,7 @@
           <option>(This machine)</option>
           <j:forEach var="s" items="${slaves}">
             <f:option selected="${s==it.assignedNode}" value="${s.nodeName}"
-              >${s.nodeName} <j:if test="${!empty(s.description)}">(${s.description})</j:if></f:option>
+              >${s.nodeName} <j:if test="${!empty(s.nodeDescription)}">(${s.nodeDescription})</j:if></f:option>
           </j:forEach>
         </select>
       </f:entry>

@@ -472,6 +472,19 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     }
 
     /**
+     * Accepts the new description.
+     */
+    public synchronized void doSubmitDescription( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
+        req.setCharacterEncoding("UTF-8");
+        description = req.getParameter("description");
+        save();
+        rsp.sendRedirect(".");  // go to the top page
+    }
+
+    /**
      * Returns the image that shows the current buildCommand status.
      */
     public void doBuildStatus( StaplerRequest req, StaplerResponse rsp ) throws IOException {

@@ -19,7 +19,7 @@ public interface Node {
     /**
      * Human-readable description of this node.
      */
-    String getDescription();
+    String getNodeDescription();
 
     /**
      * Returns a {@link Launcher} for executing programs on this node.

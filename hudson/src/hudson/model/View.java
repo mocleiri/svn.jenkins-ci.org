@@ -64,7 +64,7 @@ public class View extends JobCollection {
         return name;
     }
 
-    public String getViewMessage() {
+    public String getDescription() {
         return description;
     }
 
@@ -108,6 +108,19 @@ public class View extends JobCollection {
         owner.save();
 
         rsp.sendRedirect(".");
+    }
+
+    /**
+     * Accepts the new description.
+     */
+    public synchronized void doSubmitDescription( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
+        req.setCharacterEncoding("UTF-8");
+        description = req.getParameter("description");
+        owner.save();
+        rsp.sendRedirect(".");  // go to the top page
     }
 
     /**

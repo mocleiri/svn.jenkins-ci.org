@@ -33,7 +33,7 @@ public abstract class JobCollection extends AbstractModelObject {
     /**
      * Message displayed in the top page. Can be null. Includes HTML.
      */
-    public abstract String getViewMessage();
+    public abstract String getDescription();
 
 
     /**
