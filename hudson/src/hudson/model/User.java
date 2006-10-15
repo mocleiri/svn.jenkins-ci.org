@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import hudson.scm.ChangeLogSet;
 
@@ -72,11 +73,15 @@ public class User extends AbstractModelObject {
     }
 
     /**
-     * Gets the list of {@link Build}s that include changes by this user.
+     * Gets the list of {@link Build}s that include changes by this user,
+     * by the timestamp order.
      *
+     * <p>
+     * The name is somewhat unintuitive to use "builds" for the view name.
      * TODO: do we need some index for this?
+     *
      */
-    public List<Build> getBuilds() {
+    public List<Build> getParticipatingBuilds() {
         List<Build> r = new ArrayList<Build>();
         for (Project p : Hudson.getInstance().getProjects()) {
             for (Build b : p.getBuilds()) {
@@ -88,6 +93,7 @@ public class User extends AbstractModelObject {
                 }
             }
         }
+        Collections.sort(r,Run.ORDER_BY_DATE);
         return r;
     }
 
