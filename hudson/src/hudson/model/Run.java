@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SimpleTimeZone;
+import java.util.Comparator;
 import java.util.logging.Logger;
 
 /**
@@ -692,4 +693,13 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
     }
 
     private static final Logger LOGGER = Logger.getLogger(Run.class.getName());
+
+    /**
+     * Sort by date. Newer ones first. 
+     */
+    public static final Comparator<Run> ORDER_BY_DATE = new Comparator<Run>() {
+        public int compare(Run lhs, Run rhs) {
+            return -lhs.getTimestamp().compareTo(rhs.getTimestamp());
+        }
+    };
 }
