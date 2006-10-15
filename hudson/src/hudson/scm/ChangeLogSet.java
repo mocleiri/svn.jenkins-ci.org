@@ -1,7 +1,6 @@
 package hudson.scm;
 
 import hudson.model.User;
-import hudson.scm.ChangeLogSet.Entry;
 
 import java.util.Collections;
 
@@ -22,7 +21,7 @@ public abstract class ChangeLogSet<T extends ChangeLogSet.Entry> implements Iter
     /**
      * Constant instance that represents no changes.
      */
-    public static final ChangeLogSet EMPTY = new CVSChangeLogSet(Collections.EMPTY_LIST);
+    public static final ChangeLogSet<? extends Entry> EMPTY = new CVSChangeLogSet(Collections.EMPTY_LIST);
 
     public static abstract class Entry {
 

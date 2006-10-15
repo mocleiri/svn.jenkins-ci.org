@@ -10,6 +10,7 @@ import hudson.scm.CVSChangeLogParser;
 import hudson.scm.ChangeLogParser;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.SCM;
+import hudson.scm.ChangeLogSet.Entry;
 import hudson.tasks.BuildStep;
 import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
@@ -48,7 +49,7 @@ public final class Build extends Run<Project,Build> implements Runnable {
     /**
      * Changes in this build.
      */
-    private volatile transient ChangeLogSet changeSet;
+    private volatile transient ChangeLogSet<? extends Entry> changeSet;
 
     /**
      * Creates a new build.
@@ -73,7 +74,7 @@ public final class Build extends Run<Project,Build> implements Runnable {
      *
      * @return never null.
      */
-    public ChangeLogSet<?> getChangeSet() {
+    public ChangeLogSet<? extends Entry> getChangeSet() {
         if(scm==null)
             scm = new CVSChangeLogParser();
 
@@ -82,7 +83,7 @@ public final class Build extends Run<Project,Build> implements Runnable {
         return changeSet;
     }
 
-    private ChangeLogSet calcChangeSet() {
+    private ChangeLogSet<? extends Entry> calcChangeSet() {
         File changelogFile = new File(getRootDir(), "changelog.xml");
         if(!changelogFile.exists())
             return ChangeLogSet.EMPTY;
