@@ -1,6 +1,7 @@
 package hudson.scm;
 
 import hudson.model.User;
+import hudson.scm.ChangeLogSet.Entry;
 
 import java.util.Collections;
 
@@ -12,7 +13,7 @@ import java.util.Collections;
  *
  * @author Kohsuke Kawaguchi
  */
-public abstract class ChangeLogSet {
+public abstract class ChangeLogSet<T extends ChangeLogSet.Entry> implements Iterable<T> {
     /**
      * Returns true if there's no change.
      */

@@ -70,8 +70,10 @@ public final class Build extends Run<Project,Build> implements Runnable {
 
     /**
      * Gets the changes incorporated into this build.
+     *
+     * @return never null.
      */
-    public ChangeLogSet getChangeSet() {
+    public ChangeLogSet<?> getChangeSet() {
         if(scm==null)
             scm = new CVSChangeLogParser();
 

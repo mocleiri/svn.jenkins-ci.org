@@ -7,6 +7,10 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
+
+import hudson.scm.ChangeLogSet;
 
 /**
  * Represents a user.
@@ -65,6 +69,26 @@ public class User extends AbstractModelObject {
      */
     public String getDisplayName() {
         return name;
+    }
+
+    /**
+     * Gets the list of {@link Build}s that include changes by this user.
+     *
+     * TODO: do we need some index for this?
+     */
+    public List<Build> getBuilds() {
+        List<Build> r = new ArrayList<Build>();
+        for (Project p : Hudson.getInstance().getProjects()) {
+            for (Build b : p.getBuilds()) {
+                for (ChangeLogSet.Entry e : b.getChangeSet()) {
+                    if(e.getAuthor()==this) {
+                        r.add(b);
+                        break;
+                    }
+                }
+            }
+        }
+        return r;
     }
 
 

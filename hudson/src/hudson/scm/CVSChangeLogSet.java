@@ -7,14 +7,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Iterator;
 
 import hudson.model.User;
+import hudson.scm.CVSChangeLogSet.CVSChangeLog;
 
 /**
  * {@link ChangeLogSet} for CVS.
  * @author Kohsuke Kawaguchi
  */
-public final class CVSChangeLogSet extends ChangeLogSet {
+public final class CVSChangeLogSet extends ChangeLogSet<CVSChangeLog> {
     private List<CVSChangeLog> logs;
 
     public CVSChangeLogSet(List<CVSChangeLog> logs) {
@@ -33,6 +35,11 @@ public final class CVSChangeLogSet extends ChangeLogSet {
         return logs.isEmpty();
     }
 
+
+    public Iterator<CVSChangeLog> iterator() {
+        return logs.iterator();
+    }
+
     public static CVSChangeLogSet parse( java.io.File f ) throws IOException, SAXException {
         Digester digester = new Digester();
         ArrayList<CVSChangeLog> r = new ArrayList<CVSChangeLog>();
@@ -41,7 +48,7 @@ public final class CVSChangeLogSet extends ChangeLogSet {
         digester.addObjectCreate("*/entry",CVSChangeLog.class);
         digester.addBeanPropertySetter("*/entry/date");
         digester.addBeanPropertySetter("*/entry/time");
-        digester.addBeanPropertySetter("*/entry/author");
+        digester.addBeanPropertySetter("*/entry/author","user");
         digester.addBeanPropertySetter("*/entry/msg");
         digester.addSetNext("*/entry","add");
 
@@ -76,7 +83,7 @@ public final class CVSChangeLogSet extends ChangeLogSet {
     /**
      * In-memory representation of CVS Changelog.
      */
-    public static class CVSChangeLog extends Entry {
+    public static class CVSChangeLog extends ChangeLogSet.Entry {
         private String date;
         private String time;
         private User author;
@@ -92,7 +99,7 @@ public final class CVSChangeLogSet extends ChangeLogSet {
                 return false;
             if(!this.time.equals(that.time))    // TODO: perhaps check this loosely?
                 return false;
-            if(!this.author.equals(that.author))
+            if(this.author==null || that.author==null || !this.author.equals(that.author))
                 return false;
             if(!this.msg.equals(that.msg))
                 return false;
@@ -123,8 +130,12 @@ public final class CVSChangeLogSet extends ChangeLogSet {
             return author;
         }
 
-        public void setAuthor(String author) {
+        public void setUser(String author) {
             this.author = User.get(author);
+        }
+
+        public String getUser() {// digester wants read/write property, even though it never reads. Duh.
+            return author.getDisplayName();
         }
 
         public String getMsg() {

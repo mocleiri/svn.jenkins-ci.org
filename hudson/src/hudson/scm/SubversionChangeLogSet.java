@@ -2,19 +2,21 @@ package hudson.scm;
 
 import hudson.model.Build;
 import hudson.model.User;
+import hudson.scm.SubversionChangeLogSet.LogEntry;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Iterator;
 
 /**
  * {@link ChangeLogSet} for Subversion.
  *
  * @author Kohsuke Kawaguchi
  */
-public final class SubversionChangeLogSet extends ChangeLogSet {
+public final class SubversionChangeLogSet extends ChangeLogSet<LogEntry> {
     private final List<LogEntry> logs;
     private final Build build;
 
@@ -36,6 +38,11 @@ public final class SubversionChangeLogSet extends ChangeLogSet {
         return logs;
     }
 
+
+    public Iterator<LogEntry> iterator() {
+        return logs.iterator();
+    }
+
     public synchronized Map<String,Integer> getRevisionMap() throws IOException {
         if(revisionMap==null)
             revisionMap = SubversionSCM.parseRevisionFile(build);
@@ -45,7 +52,7 @@ public final class SubversionChangeLogSet extends ChangeLogSet {
     /**
      * One commit.
      */
-    public static class LogEntry extends Entry {
+    public static class LogEntry extends ChangeLogSet.Entry {
         private int revision;
         private User author;
         private String date;
@@ -64,8 +71,12 @@ public final class SubversionChangeLogSet extends ChangeLogSet {
             return author;
         }
 
-        public void setAuthor(String author) {
+        public void setUser(String author) {
             this.author = User.get(author);
+        }
+
+        public String getUser() {// digester wants read/write property, even though it never reads. Duh.
+            return author.getDisplayName();
         }
 
         public String getDate() {
