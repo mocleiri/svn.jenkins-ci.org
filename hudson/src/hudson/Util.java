@@ -211,7 +211,10 @@ public class Util {
         return combine(duration,"year");
     }
 
-    private static String combine(long n, String suffix) {
+    /**
+     * Combines numer and unit, with a plural suffix if needed.
+     */
+    public static String combine(long n, String suffix) {
         String s = Long.toString(n)+' '+suffix;
         if(n!=1)
             s += 's';

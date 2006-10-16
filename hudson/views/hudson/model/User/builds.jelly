@@ -7,12 +7,12 @@
         Builds for ${it}
       </h1>
 
-
       <table class="pane sortable" id="projectStatus">
         <tr>
           <th><st:nbsp/></th>
-          <th>Job</th>
+          <th>Build</th>
           <th>Date</th>
+          <th>Status</th>
           <th><st:nbsp/></th>
         </tr>
         <j:forEach var="b" items="${it.participatingBuilds}">
@@ -29,6 +29,9 @@
             </td>
             <td data="${b.timestampString2}">
               ${b.timestampString}
+            </td>
+            <td>
+              <t:buildStatusSummary build="${b}" />
             </td>
             <td>
               <a href="${rootURL}/${b.url}console">
