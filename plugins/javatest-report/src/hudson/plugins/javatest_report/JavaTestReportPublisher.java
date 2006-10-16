@@ -30,6 +30,9 @@ import hudson.tasks.Publisher;
 import org.kohsuke.stapler.StaplerRequest;
 import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.ant.DirectoryScanner;
+import org.apache.tools.ant.taskdefs.Copy;
+
+import java.io.File;
 
 /**
  * @author Rama Pulavarthi
@@ -37,9 +40,11 @@ import org.apache.tools.ant.DirectoryScanner;
 
 public class JavaTestReportPublisher extends Publisher {
     private final String includes;
+    private final String jtwork;
 
-    public JavaTestReportPublisher(String includes) {
+    public JavaTestReportPublisher(String includes,String jtwork) {
         this.includes = includes;
+        this.jtwork = jtwork;
     }
 
     /**
@@ -48,11 +53,19 @@ public class JavaTestReportPublisher extends Publisher {
     public String getIncludes() {
         return includes;
     }
+
+    /**
+     * TCK work directory so that JTR files can be accessed.
+     */
+    public String getJtwork() {
+        return jtwork;
+    }
     public boolean prebuild(Build build, BuildListener listener) {
         return true;
     }
 
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
+        archiveJTWork(build,listener);
         FileSet fs = new FileSet();
         org.apache.tools.ant.Project p = new org.apache.tools.ant.Project();
         fs.setProject(p);
@@ -83,6 +96,23 @@ public class JavaTestReportPublisher extends Publisher {
         return true;
      }
 
+    private void archiveJTWork(Build owner, BuildListener listener) {
+        if (jtwork == null || jtwork.equals("")) {
+            listener.getLogger().println("Set Java Test Work directory for better reporting");
+        } else {
+            hudson.model.Project p = owner.getProject();
+            Copy copyTask = new Copy();
+            copyTask.setProject(new org.apache.tools.ant.Project());
+            File dir = new File(owner.getArtifactsDir(), "java-test-work");
+            dir.mkdirs();
+            copyTask.setTodir(dir);
+            FileSet src = new FileSet();
+            src.setDir(new File(p.getWorkspace().getLocal(), jtwork));
+            copyTask.addFileset(src);
+            copyTask.execute();
+        }
+    }
+
     public Action getProjectAction(Project project) {
         return null;
     }
@@ -101,7 +131,7 @@ public class JavaTestReportPublisher extends Publisher {
         }
 
         public Publisher newInstance(StaplerRequest req) {
-            return new JavaTestReportPublisher(req.getParameter("javatest_includes"));
+            return new JavaTestReportPublisher(req.getParameter("javatest_includes"), req.getParameter("javatest_jtwork"));
         }
     };
 }
