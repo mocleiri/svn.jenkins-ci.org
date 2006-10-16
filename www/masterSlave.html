@@ -9,9 +9,6 @@
 <p>
 Hudson supports the "master/slave" mode, where the workload of building projects are delegated to multiple "slave" nodes, allowing single Hudson installation to host a large number of projects. This document describes this mode and how to use it.
 
-<p>
-Although the goal of Hudson is being easy to use, I admit that this part is not easy to use at all. Any feedback about making this easier is greatly appreciated.
-
 <h3>How does this work?</h3>
 <p>
 	A "master" is an installation of Hudson. When you weren't using the master/slave support, a master was all you had. Even in the master/slave mode, the role of a master remains the same. It will serve all HTTP requests, and it can still build projects on its own.
@@ -29,16 +26,10 @@ Although the goal of Hudson is being easy to use, I admit that this part is not 
 		<li>
 			Master needs to be able to modify those slave file systems with the same permissions that the slave has. Sometimes a master deletes files that were created by a slave, or vice versa. On Unix, the simplest way to achieve this is to use NIS, or use the same UID/GID for Hudson user account on all the computers.
 		<li>
-			Master needs to be able to execute processes remotely on slaves. On Unix, this can be done by SSH, RSH, or other similar means. On Windows, this could be done by the same protocols through <a href="http://www.cygwin.com/">cygwin</a>. <small>Does Windows have native remote process invocation mechanism? Help wanted!</small>
+			Master needs to be able to execute processes remotely on slaves. On Unix, this can be done by SSH, RSH, or other similar means. On Windows, this could be done by the same protocols through <a href="http://www.cygwin.com/">cygwin</a>. <small><i>(Does Windows have native remote process invocation mechanism? Help wanted!)</i></small>
 	</ol>
 <p>
-	Furthermore, it's not required, but desirable for slaves to meet the following conditions.
-	<ol>
-		<li>
-			For builds to be successful on a slave, it needs the same set of tools that a build uses. For example, if you configure Hudson with an Ant installation at <tt>/user/local/ant</tt>, then slaves also need to have Ant in the same location. This applies to all other tools, such as JDK and Maven (if you use them.) The only exception to this is the "default" installation of those tools (which really just means launching them without specifying full path.)
-		<li>
-			For the above reasons, in practice, it's diffucult for a Windows master to have Unix slaves, or vice versa.
-	</ol>
+	Also note that the slaves are a kind of a cluster, and operating a cluster (especially a large one or heterogeneous one) is always a non-trivial task. For example, you need to make sure that all slaves have JDKs, Ant, CVS, and/or any other tools you need for builds. You need to make sure that slaves are up and running, etc. Hudson is not a clustering middleware, and therefore it doesn't make this any easier.
 
 
 <h3>Example: Configuration on Unix</h3>
@@ -49,9 +40,11 @@ Although the goal of Hudson is being easy to use, I admit that this part is not 
 	<li>
 		Each computer has an user called <tt>hudson</tt> and a group called <tt>hudson</tt>. All computers use the same UID and GID. (If you have access to NIS, this can be done more easily.)
 	<li>
-		On each computer, <tt>/var/hudson</tt> directory is set as the home directory of user <tt>hudson</tt>. This directory is not NFS-mounted, and it's on each computer's local file system.
+		On each computer, <tt>/var/hudson</tt> directory is set as the home directory of user <tt>hudson</tt>.
 	<li>
 		All machines run NFSD and SSHD, and exports <tt>/var/hudson</tt>.
+	<li>
+		All machines have ntp client installed, and synchronize clock regularly with the same NTP server.
 	<li>
 		Master's <tt>/var/hudson</tt> have all the build tools beneath it --- a few versions of Ant, Maven, and JDKs. JDKs are native programs, so I have JDK copys for all the architectures I need. The directory structure looks like this:
 <pre>
@@ -78,7 +71,7 @@ Although the goal of Hudson is being easy to use, I admit that this part is not 
 	<li>
 		Master's <tt>/var/hudson/.ssh</tt> has private/public key and <tt>authorized_keys</tt> so that a master can execute programs on slaves through ssh, by using <a href="http://www.google.com/search?q=ssh+keygen">public key authentication</a>.
 	<li>
-		On master, I have a little shell script that uses rsync to synchronize master's <tt>/var/hudson</tt> to slaves (except <tt>/var/hudson/workspace</tt>)
+		On master, I have a little shell script that uses rsync to synchronize master's <tt>/var/hudson</tt> to slaves (except <tt>/var/hudson/workspace</tt>) I use this to replicate tools on all slaves.
 	<li>
 		<tt>/var/hudson/bin/slave</tt> is a shell script that Hudson uses to execute jobs remotely. This file is included in <tt>hudson.war</tt> (<tt>WEB-INF/slave</tt>)  This shell script has some hooks in it to allow you to absorb some difference between machines. For example, you can set <tt>PATH</tt> that the submitted remote process uses.
 	<li>
