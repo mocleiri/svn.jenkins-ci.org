@@ -11,7 +11,7 @@ jelly {
 
   switch(build.result) {
   case Result.SUCCESS:
-    if(prev.result==Result.SUCCESS) {
+    if(prev==null || prev.result==Result.SUCCESS) {
       output.write("stable");
     } else {
       output.write("back to normal");
