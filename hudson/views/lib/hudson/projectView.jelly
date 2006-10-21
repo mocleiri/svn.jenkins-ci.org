@@ -17,13 +17,13 @@
       <!-- project list -->
       <x:element name="table">
         <x:attribute name="id">projectstatus</x:attribute>
-        <x:attribute name="class">pane</x:attribute>
+        <x:attribute name="class">sortable pane</x:attribute>
         <j:if test="${showViewTabs}">
           <x:attribute name="style">margin-top:0px; border-top: none;</x:attribute>
         </j:if>
         <tr style="border-top: 0px;">
           <th><st:nbsp/></th>
-          <th>Job</th>
+          <th initialSortDir="down">Job</th>
           <th>Last Success</th>
           <th>Last Failure</th>
           <th>Last Duration</th>
@@ -37,7 +37,7 @@
           <j:set var="lsBuild" value="${job.lastSuccessfulBuild}" />
           <j:set var="lfBuild" value="${job.lastFailedBuild}" />
           <tr>
-            <td>
+            <td data="${job.iconColor}">
               <img width="32" height="32" src="${rootURL}/images/32x32/${job.buildStatusUrl}" />
             </td>
             <td>
@@ -45,7 +45,7 @@
                   ${job.name}
               </a>
             </td>
-            <td>
+            <td data="${h.ifThenElse(lsBuild==null,'-',lsBuild.timestampString2)}">
               <j:choose>
                 <j:when test="${lsBuild!=null}">
                   ${lsBuild.timestampString}
@@ -56,7 +56,7 @@
                 </j:otherwise>
               </j:choose>
             </td>
-            <td>
+            <td data="${h.ifThenElse(lfBuild==null,'-',lfBuild.timestampString2)}">
               <j:choose>
                 <j:when test="${lfBuild!=null}">
                   ${lfBuild.timestampString}
@@ -67,7 +67,7 @@
                 </j:otherwise>
               </j:choose>
             </td>
-            <td>
+            <td data="${h.ifThenElse(lsBuild==null,'0',lsBuild.duration)}">
               <j:choose>
                 <j:when test="${lsBuild!=null}">
                   ${lsBuild.durationString}
