@@ -23,6 +23,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -203,7 +204,7 @@ public class Fingerprinter extends Publisher {
 
             Hudson h = Hudson.getInstance();
 
-            Map<String,Fingerprint> m = new HashMap<String,Fingerprint>();
+            Map<String,Fingerprint> m = new TreeMap<String,Fingerprint>();
             for (Entry<String, String> r : record.entrySet()) {
                 try {
                     m.put(r.getKey(), h._getFingerprint(r.getValue()) );
