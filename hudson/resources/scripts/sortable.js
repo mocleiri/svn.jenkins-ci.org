@@ -33,8 +33,9 @@ function sortables_init() {
 }
 
 function ts_makeSortable(table) {
+    var firstRow;
     if (table.rows && table.rows.length > 0) {
-        var firstRow = table.rows[0];
+        firstRow = table.rows[0];
     }
     if (!firstRow) return;
 
@@ -42,7 +43,11 @@ function ts_makeSortable(table) {
     for (var i=0;i<firstRow.cells.length;i++) {
         var cell = firstRow.cells[i];
         var txt = ts_getInnerText(cell);
-        cell.innerHTML = '<a href="#" class="sortheader" onclick="ts_resortTable(this);return false;">'+txt+'<span class="sortarrow">&nbsp;&nbsp;&nbsp;</span></a>';
+
+        var initialSortDir = arrowTable[cell.getAttribute("initialSortDir")];
+        if(initialSortDir==null)    initialSortDir=arrowTable.none;
+        cell.innerHTML = '<a href="#" class="sortheader" onclick="ts_resortTable(this);return false;">'+txt+
+                         '<span class="sortarrow">'+initialSortDir.text+'</span></a>';
     }
 }
 
@@ -75,12 +80,26 @@ function extractData(x) {
   return ts_getInnerText(x);
 }
 
+var arrowTable = {
+    up: {
+        text: "&nbsp;&nbsp;&uarr;",
+        reorder: function(rows) { rows.reverse(); }
+    },
+    down: {
+        text: "&nbsp;&nbsp;&darr;",
+        reorder: function() {}
+    },
+    none: {
+        text: "&nbsp;&nbsp;&nbsp;"
+    }
+}
+
+arrowTable.up.next = arrowTable.down;
+arrowTable.down.next = arrowTable.up;
+
 function ts_resortTable(lnk) {
     // get the span
-    var span;
-    for (var ci=0;ci<lnk.childNodes.length;ci++) {
-        if (lnk.childNodes[ci].tagName && lnk.childNodes[ci].tagName.toLowerCase() == 'span') span = lnk.childNodes[ci];
-    }
+    var span = lnk.lastChild;
     var spantext = ts_getInnerText(span);
     var th = lnk.parentNode;
     var column = th.cellIndex;
@@ -89,12 +108,11 @@ function ts_resortTable(lnk) {
     // Work out a type for the column
     if (table.rows.length <= 1) return;
     var itm = extractData(table.rows[1].cells[column]).trim();
-    sortfn = ts_sort_caseinsensitive;
+    var sortfn = ts_sort_caseinsensitive;
     if (itm.match(/^\d\d[\/-]\d\d[\/-]\d\d\d\d$/)) sortfn = ts_sort_date;
     if (itm.match(/^\d\d[\/-]\d\d[\/-]\d\d$/)) sortfn = ts_sort_date;
     if (itm.match(/^[£$]/)) sortfn = ts_sort_currency;
     if (itm.match(/^[\d\.]+$/)) sortfn = ts_sort_numeric;
-    var SORT_COLUMN_INDEX = column;
     var firstRow = new Array();
     var newRows = new Array();
     for (i=0;i<table.rows[0].length;i++) { firstRow[i] = table.rows[0][i]; }
@@ -102,36 +120,37 @@ function ts_resortTable(lnk) {
 
     newRows.sort(function(a,b) {
       return sortfn(
-              extractData(a.cells[SORT_COLUMN_INDEX]),
-              extractData(b.cells[SORT_COLUMN_INDEX]));
+              extractData(a.cells[column]),
+              extractData(b.cells[column]));
     });
 
-    if (span.getAttribute("sortdir") == 'down') {
-        ARROW = '&nbsp;&nbsp;&uarr;';
-        newRows.reverse();
-        span.setAttribute('sortdir','up');
-    } else {
-        ARROW = '&nbsp;&nbsp;&darr;';
-        span.setAttribute('sortdir','down');
-    }
+    var dir = span.sortdir;
+    if(dir==null)   dir=arrowTable.up;
+    dir = dir.next; // new sort direction
+    dir.reorder(newRows);
+    span.sortdir = dir;
 
     // We appendChild rows that already exist to the tbody, so it moves them rather than creating new ones
     // don't do sortbottom rows
-    for (i=0;i<newRows.length;i++) { if (!newRows[i].className || (newRows[i].className && (newRows[i].className.indexOf('sortbottom') == -1))) table.tBodies[0].appendChild(newRows[i]);}
+    for (var i=0;i<newRows.length;i++) {
+        if (!newRows[i].className || (newRows[i].className && (newRows[i].className.indexOf('sortbottom') == -1)))
+            table.tBodies[0].appendChild(newRows[i]);
+    }
     // do sortbottom rows only
-    for (i=0;i<newRows.length;i++) { if (newRows[i].className && (newRows[i].className.indexOf('sortbottom') != -1)) table.tBodies[0].appendChild(newRows[i]);}
+    for (var i=0;i<newRows.length;i++) {
+        if (newRows[i].className && (newRows[i].className.indexOf('sortbottom') != -1))
+            table.tBodies[0].appendChild(newRows[i]);
+    }
 
     // Delete any other arrows there may be showing
-    var allspans = document.getElementsByTagName("span");
+    var allspans = table.getElementsByTagName("span");
     for (var ci=0;ci<allspans.length;ci++) {
         if (allspans[ci].className == 'sortarrow') {
-            if (getParent(allspans[ci],"table") == getParent(lnk,"table")) { // in the same table as us?
-                allspans[ci].innerHTML = '&nbsp;&nbsp;&nbsp;';
-            }
+            allspans[ci].innerHTML = arrowTable.none.text;
         }
     }
 
-    span.innerHTML = ARROW;
+    span.innerHTML = dir.text;
 }
 
 function getParent(el, pTagName) {
