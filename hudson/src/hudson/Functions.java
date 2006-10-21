@@ -8,6 +8,8 @@ import hudson.model.Hudson;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.StaplerRequest;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.LogRecord;
@@ -147,6 +149,18 @@ public class Functions {
 
     public static String printLogRecord(LogRecord r) {
         return formatter.format(r);
+    }
+
+    public static Cookie getCookie(HttpServletRequest req,String name) {
+        Cookie[] cookies = req.getCookies();
+        if(cookies!=null) {
+            for (Cookie cookie : cookies) {
+                if(cookie.getName().equals(name)) {
+                    return cookie;
+                }
+            }
+        }
+        return null;
     }
 
     private static final SimpleFormatter formatter = new SimpleFormatter();

@@ -17,7 +17,7 @@
   <j:if test="${tr.previousResult!=null}">
     <!-- at least two data points are requierd for a trend report -->
     <div align="right">
-      <j:set var="mode" value="${cookie.TestResultAction_failureOnly.value}" />
+      <j:set var="mode" value="${h.getCookie(request,'TestResultAction_failureOnly').value}" />
       <j:if test="${mode!=null}">
         <j:set var="trendQueryString1" value="?failureOnly=${mode}" />
         <j:set var="trendQueryString2" value="&amp;failureOnly=${mode}" />
