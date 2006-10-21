@@ -1,0 +1,23 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson">
+  <st:contentType value="text/xml;charset=UTF-8" />
+  <j:set var="rootURL"
+         value="${request.scheme}://${request.serverName}:${request.serverPort}${request.contextPath}" />
+
+  <rss version="2.0">
+    <channel>
+    <title>${title}</title>
+    <link>${rootURL}/${it.url}</link>
+    <description>${title}</description>
+
+    <j:forEach var="build" items="${runs}" >
+      <item>
+        <title>${build.parent.name} #${build.number} (${build.result})</title>
+        <link>${rootURL}/${build.url}</link>
+        <guid isPermaLink="false">tag:${build.parent.name}:${build.id}</guid>
+        <pubDate>${build.timestampString2}</pubDate>
+        <author>Hudson</author>
+      </item>
+    </j:forEach>
+    </channel>
+  </rss>
+</j:jelly>
