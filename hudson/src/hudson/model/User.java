@@ -5,13 +5,19 @@ import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import hudson.scm.ChangeLogSet;
+import hudson.XmlFile;
+import hudson.util.XStream2;
+import com.thoughtworks.xstream.XStream;
 
 /**
  * Represents a user.
@@ -20,13 +26,22 @@ import hudson.scm.ChangeLogSet;
  */
 public class User extends AbstractModelObject {
 
-    private final String name;
+    private transient final String name;
 
-    private String description ="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer velit quam, elementum in, elementum euismod, sodales eget, quam. Nullam turpis lectus, dapibus eu, consectetuer non, pellentesque id, arcu. Pellentesque viverra erat. Morbi tempus convallis dolor. Cras elementum aliquet turpis. Nulla facilisi. Fusce in ante. Vivamus vulputate metus non turpis. Proin vestibulum magna id est. Integer vulputate, purus in mattis interdum, neque elit rutrum ante, ut viverra enim ligula ut ipsum. Donec vitae lorem. Aliquam a metus in pede laoreet dictum. Etiam at mauris. Proin arcu metus, fringilla quis, pretium aliquam, accumsan quis, risus.";
+    private String description;
 
 
     private User(String name) {
         this.name = name;
+
+        // load the other data from disk if it's available
+        XmlFile config = getConfigFile();
+        try {
+            if(config.exists())
+            config.unmarshal(this);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Failed to load "+config,e);
+        }
     }
 
     public String getUrl() {
@@ -45,7 +60,7 @@ public class User extends AbstractModelObject {
         req.setCharacterEncoding("UTF-8");
 
         description = req.getParameter("description");
-        // save();
+        save();
         
         rsp.sendRedirect(".");  // go to the top page
     }
@@ -103,7 +118,34 @@ public class User extends AbstractModelObject {
     }
 
     /**
+     * The file we save our configuration.
+     */
+    protected final XmlFile getConfigFile() {
+        return new XmlFile(XSTREAM,new File(Hudson.getInstance().getRootDir(),"users/"+name+"/config.xml"));
+    }
+
+    /**
+     * Save the settings to a file.
+     */
+    public synchronized void save() throws IOException {
+        XmlFile config = getConfigFile();
+        config.mkdirs();
+        config.write(this);
+    }
+
+    /**
      * Keyed by {@link User#name}.
      */
     private static final Map<String,User> byName = new HashMap<String,User>();
+
+    /**
+     * Used to load/save user configuration.
+     */
+    private static final XStream XSTREAM = new XStream2();
+
+    private static final Logger LOGGER = Logger.getLogger(User.class.getName());
+
+    static {
+        XSTREAM.alias("user",User.class);
+    }
 }
