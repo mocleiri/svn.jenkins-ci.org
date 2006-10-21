@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;
 import java.io.File;
@@ -132,11 +133,11 @@ public class Functions {
     }
 
     public static Map getSystemProperties() {
-        return System.getProperties();
+        return new TreeMap(System.getProperties());
     }
 
     public static Map getEnvVars() {
-        return EnvVars.masterEnvVars;
+        return new TreeMap(EnvVars.masterEnvVars);
     }
 
     public static boolean isWindows() {
