@@ -64,6 +64,9 @@ function ts_makeSortable(table) {
         if(initialSortDir==null)    initialSortDir=arrowTable.none;
         cell.innerHTML = '<a href="#" class="sortheader" onclick="ts_resortTable(this);return false;">'+txt+
                          '<span class="sortarrow">'+initialSortDir.text+'</span></a>';
+
+        if(initialSortDir!=arrowTable.none)
+            cell.firstChild.lastChild.sortdir = initialSortDir;
     }
 }
 
