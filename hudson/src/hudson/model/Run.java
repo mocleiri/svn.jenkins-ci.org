@@ -97,12 +97,6 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
 
     protected static final SimpleDateFormat ID_FORMATTER = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 
-    protected static final SimpleDateFormat XS_DATETIME_FORMATTER = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-
-    static {
-        XS_DATETIME_FORMATTER.setTimeZone(new SimpleTimeZone(0,"GMT"));
-    }
-
     /**
      * Creates a new {@link Run}.
      */
@@ -250,7 +244,7 @@ public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
      * Returns the timestamp formatted in xs:dateTime.
      */
     public String getTimestampString2() {
-        return XS_DATETIME_FORMATTER.format(timestamp.getTime());
+        return Util.XS_DATETIME_FORMATTER.format(timestamp.getTime());
     }
 
     /**

@@ -16,10 +16,12 @@ import java.net.UnknownHostException;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
+import java.util.SimpleTimeZone;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.text.SimpleDateFormat;
 
 import org.apache.tools.ant.taskdefs.Chmod;
 import org.apache.tools.ant.taskdefs.Copy;
@@ -310,6 +312,13 @@ public class Util {
             return getFileName(filePath.substring(idx+1));
         return filePath;
     }
+
+    public static final SimpleDateFormat XS_DATETIME_FORMATTER = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+
+    static {
+        XS_DATETIME_FORMATTER.setTimeZone(new SimpleTimeZone(0,"GMT"));
+    }
+
 
 
     private static final Logger LOGGER = Logger.getLogger(Util.class.getName());

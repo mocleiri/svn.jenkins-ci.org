@@ -3,6 +3,7 @@ package hudson;
 import com.thoughtworks.xstream.converters.reflection.PureJavaReflectionProvider;
 import com.thoughtworks.xstream.core.JVM;
 import hudson.model.Hudson;
+import hudson.model.User;
 import hudson.triggers.Trigger;
 import hudson.util.IncompatibleVMDetected;
 import hudson.util.RingBufferLogHandler;
@@ -17,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.TimerTask;
 import java.util.logging.Logger;
 
 /**
@@ -66,6 +68,16 @@ public class WebAppMain implements ServletContextListener {
         context.setAttribute("version",ver);
 
         Trigger.init(); // start running trigger
+
+        // trigger the loading of changelogs in the background,
+        // but give the system 10 seconds so that the first page
+        // can be served quickly
+        Trigger.timer.schedule(new TimerTask() {
+            public void run() {
+                User.get("nobody").getParticipatingBuilds();
+            }
+        }, 1000*10);
+
     }
 
     /**

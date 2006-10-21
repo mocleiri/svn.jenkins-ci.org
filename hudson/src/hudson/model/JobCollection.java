@@ -7,6 +7,16 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.GregorianCalendar;
+
+import hudson.scm.ChangeLogSet.Entry;
+import hudson.Util;
 
 /**
  * Collection of {@link Job}s.
@@ -35,6 +45,75 @@ public abstract class JobCollection extends AbstractModelObject {
      */
     public abstract String getDescription();
 
+    public static final class UserInfo implements Comparable<UserInfo> {
+        private final User user;
+        private Calendar lastChange;
+        private Project project;
+
+        UserInfo(User user, Project p, Calendar lastChange) {
+            this.user = user;
+            this.project = p;
+            this.lastChange = lastChange;
+        }
+
+        public User getUser() {
+            return user;
+        }
+
+        public Calendar getLastChange() {
+            return lastChange;
+        }
+
+        public Project getProject() {
+            return project;
+        }
+
+        /**
+         * Returns a human-readable string representation of when this user was last active.
+         */
+        public String getLastChangeTimeString() {
+            long duration = new GregorianCalendar().getTimeInMillis()-lastChange.getTimeInMillis();
+            return Util.getTimeSpanString(duration);
+        }
+
+        public String getTimeSortKey() {
+            return Util.XS_DATETIME_FORMATTER.format(lastChange.getTime());
+        }
+
+        public int compareTo(UserInfo that) {
+            return that.lastChange.compareTo(this.lastChange);
+        }
+    }
+    /**
+     * Gets the users that show up in the changelog of this job collection.
+     */
+    public final List<UserInfo> getPeople() {
+        Map<User,UserInfo> users = new HashMap<User,UserInfo>();
+        for (Job job : getJobs()) {
+            if (job instanceof Project) {
+                Project p = (Project) job;
+                for (Build build : p.getBuilds()) {
+                    for (Entry entry : build.getChangeSet()) {
+                        User user = entry.getAuthor();
+
+                        UserInfo info = users.get(user);
+                        if(info==null)
+                            users.put(user,new UserInfo(user,p,build.getTimestamp()));
+                        else
+                        if(info.getLastChange().before(build.getTimestamp())) {
+                            info.project = p;
+                            info.lastChange = build.getTimestamp(); 
+                        }
+                    }
+                }
+            }
+        }
+
+        List<UserInfo> r = new ArrayList<UserInfo>(users.values());
+        Collections.sort(r);
+
+        return r;
+    }
 
     /**
      * Creates a job in this collection.
