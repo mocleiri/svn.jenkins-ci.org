@@ -94,7 +94,7 @@ final class RSS {
 
         req.setAttribute("title",title);
         req.setAttribute("runs",runs);
-        req.getView(it,"/hudson/rss.jelly").forward(req,rsp);
+        req.getView(it,"/hudson/atom.jelly").forward(req,rsp);
     }
 
     private static final Comparator<Run> runComparator = new Comparator<Run>() {
