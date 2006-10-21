@@ -22,5 +22,17 @@
     <dd>String of "hudson-<i>${JOBNAME}</i>-<i>${BUILD_NUMBER}</i>". Convenient to put into
         a resource file, a jar file, etc for easier identification.</dd>
 </dl>
+
+
+<p>
+To understand how environmental variables provided by Hudson can be utilized by
+Ant, study the following target:
+
+<pre><xmp
+><target name="printinfo">
+  <property environment="env" />
+  <echo message="${env.BUILD_TAG}"/>
+</target></xmp></pre>
+
 </body>
 </html>
