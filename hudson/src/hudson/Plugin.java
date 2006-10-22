@@ -55,12 +55,14 @@ public abstract class Plugin {
      * <p>
      * Plugins should override this method and register custom
      * {@link Publisher}, {@link Builder}, {@link SCM}, and {@link Trigger}s to the corresponding list.
+     * See {@link ExtensionPoint} for the complete list of extension points in Hudson.
      *
      *
      * @throws Exception
      *      any exception thrown by the plugin during the initialization will disable plugin.
      *
      * @since 1.42
+     * @see ExtensionPoint
      */
     public void start() throws Exception {
     }

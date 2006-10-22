@@ -9,6 +9,8 @@ import hudson.model.Hudson;
 import hudson.model.Project;
 import hudson.model.WorkspaceCleanupThread;
 import hudson.scheduler.CronTabList;
+import hudson.ExtensionPoint;
+import hudson.tasks.BuildStep;
 
 import java.io.InvalidObjectException;
 import java.io.ObjectStreamException;
@@ -23,9 +25,13 @@ import java.util.logging.Logger;
 /**
  * Triggers a {@link Build}.
  *
+ * <p>
+ * To register a custom {@link Trigger} from a plugin,
+ * add it to {@link Triggers#TRIGGERS}.
+ *
  * @author Kohsuke Kawaguchi
  */
-public abstract class Trigger implements Describable<Trigger> {
+public abstract class Trigger implements Describable<Trigger>, ExtensionPoint {
 
     /**
      * Called when a {@link Trigger} is loaded into memory and started.

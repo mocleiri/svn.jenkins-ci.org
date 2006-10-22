@@ -2,6 +2,7 @@ package hudson.scm;
 
 import hudson.FilePath;
 import hudson.Launcher;
+import hudson.ExtensionPoint;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Describable;
@@ -15,9 +16,13 @@ import java.util.Map;
 /**
  * Captures the configuration information in it.
  *
+ * <p>
+ * To register a custom {@link SCM} implementation from a plugin,
+ * add it to {@link SCMS#SCMS}.
+ *
  * @author Kohsuke Kawaguchi
  */
-public interface SCM extends Describable<SCM> {
+public interface SCM extends Describable<SCM>, ExtensionPoint {
 
     /**
      * Checks if there has been any changes to this module in the repository.

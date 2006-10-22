@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.XStream;
 import hudson.CloseProofOutputStream;
 import hudson.Util;
 import hudson.XmlFile;
+import hudson.ExtensionPoint;
 import hudson.tasks.BuildStep;
 import hudson.tasks.LogRotator;
 import hudson.util.CharSpool;
@@ -35,10 +36,15 @@ import java.util.logging.Logger;
 /**
  * A particular execution of {@link Job}.
  *
+ * <p>
+ * Custom {@link Run} type is always used in conjunction with
+ * a custom {@link Job} type, so there's no separate registration
+ * mechanism for custom {@link Run} types.
+ *
  * @author Kohsuke Kawaguchi
  */
-public class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
-        extends DirectoryHolder {
+public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
+        extends DirectoryHolder implements ExtensionPoint {
 
     protected transient final JobT project;
 

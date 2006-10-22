@@ -3,6 +3,7 @@ package hudson.model;
 import com.thoughtworks.xstream.XStream;
 import hudson.Util;
 import hudson.XmlFile;
+import hudson.ExtensionPoint;
 import hudson.tasks.BuildTrigger;
 import hudson.tasks.LogRotator;
 import hudson.util.IOException2;
@@ -42,10 +43,14 @@ import java.awt.Color;
  * <p>
  * Every time it "runs", it will be recorded as a {@link Run} object.
  *
+ * <p>
+ * To register a custom {@link Job} class from a plugin, add it to
+ * {@link Jobs#JOBS}. Also see {@link Job#XSTREAM}.
+ *
  * @author Kohsuke Kawaguchi
  */
 public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,RunT>>
-        extends DirectoryHolder implements Describable<Job<JobT,RunT>> {
+        extends DirectoryHolder implements Describable<Job<JobT,RunT>>, ExtensionPoint {
     /**
      * Project name.
      */
