@@ -1,6 +1,7 @@
 package hudson.model;
 
 import hudson.XmlFile;
+import hudson.scm.CVSSCM;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -16,16 +17,30 @@ import org.kohsuke.stapler.StaplerRequest;
  * Metadata about a configurable instance.
  *
  * <p>
- * When using stapler, it's convenient to have one object for each kind of
- * configurable object, so that instance-agnostic information (such as
- * the config HTML page) can be served from it.
- *
- * {@link Descriptor} represents such metadata, and one instance exists
- * for each kind of configurable object.
+ * {@link Descriptor} is an object that has metadata about a {@link Describable}
+ * object, and also serves as a factory. A {@link Descriptor}/{@link Describable}
+ * combination is used throghout in Hudson to implement a
+ * configuration/extensibility mechanism.
  *
  * <p>
- * {@link Descriptor} and {@link Describable} works like {@link Class} and
- * {@link Object}.
+ * For example, Take the CVS support as an example, which is implemented
+ * in {@link CVSSCM} class. Whenever a job is configured with CVS, a new
+ * {@link CVSSCM} instance is created with the per-job configuration
+ * information. This instance gets serialized to XML, and this instance
+ * will be called to perform CVS operations for that job. This is the job
+ * of {@link Describable} &mdash; each instance represents a specific
+ * configuration of the CVS support (branch, CVSROOT, etc.)
+ *
+ * <p>
+ * For Hudson to create such configured {@link CVSSCM} instance, Hudson
+ * needs another object that captures the metadata of {@link CVSSCM},
+ * and that is what a {@link Descriptor} is for. {@link CVSSCM} class
+ * has a singleton descriptor, and this descriptor helps render
+ * the configuration form, remember system-wide configuration (such as
+ * where <tt>cvs.exe</tt> is), and works as a factory.
+ *
+ * <p>
+ * {@link Descriptor} also usually have its associated views.
  *
  * @author Kohsuke Kawaguchi
  * @see Describable
