@@ -78,10 +78,6 @@ public class JapexPublisher extends Publisher {
         this.regressionAddress = Util.fixEmpty(Util.fixNull(regressionAddress).trim());
     }
 
-    public boolean prebuild(Build build, BuildListener listener) {
-        return true;
-    }
-
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         listener.getLogger().println("Recording japex reports "+includes);
 

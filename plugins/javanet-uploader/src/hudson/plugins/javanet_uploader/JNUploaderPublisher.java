@@ -48,10 +48,6 @@ public class JNUploaderPublisher extends Publisher {
         return entries;
     }
 
-    public boolean prebuild(Build build, BuildListener listener) {
-        return true;
-    }
-
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         if(build.getResult()== Result.FAILURE) {
             // build failed. don't post
@@ -101,10 +97,6 @@ public class JNUploaderPublisher extends Publisher {
         }
 
         return true;
-    }
-
-    public Action getProjectAction(Project project) {
-        return null;
     }
 
     public Descriptor<Publisher> getDescriptor() {

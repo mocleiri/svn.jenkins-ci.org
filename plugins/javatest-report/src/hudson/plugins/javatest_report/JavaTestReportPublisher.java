@@ -60,9 +60,6 @@ public class JavaTestReportPublisher extends Publisher {
     public String getJtwork() {
         return jtwork;
     }
-    public boolean prebuild(Build build, BuildListener listener) {
-        return true;
-    }
 
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         archiveJTWork(build,listener);
@@ -111,10 +108,6 @@ public class JavaTestReportPublisher extends Publisher {
             copyTask.addFileset(src);
             copyTask.execute();
         }
-    }
-
-    public Action getProjectAction(Project project) {
-        return null;
     }
 
     public Descriptor<Publisher> getDescriptor() {

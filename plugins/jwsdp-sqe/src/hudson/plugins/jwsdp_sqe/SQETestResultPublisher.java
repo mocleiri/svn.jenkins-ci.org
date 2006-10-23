@@ -32,10 +32,6 @@ public class SQETestResultPublisher extends Publisher {
         return includes;
     }
 
-    public boolean prebuild(Build build, BuildListener listener) {
-        return true;
-    }
-
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         FileSet fs = new FileSet();
         org.apache.tools.ant.Project p = new org.apache.tools.ant.Project();
@@ -65,10 +61,6 @@ public class SQETestResultPublisher extends Publisher {
             build.setResult(Result.UNSTABLE);
 
         return true;
-    }
-
-    public Action getProjectAction(Project project) {
-        return null;
     }
 
     public Descriptor<Publisher> getDescriptor() {
