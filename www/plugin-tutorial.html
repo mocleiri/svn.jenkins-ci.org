@@ -8,16 +8,109 @@
   </style>
 </head>
 <body><div class=app>
-<h1>Plugin Tutorial</tt></h1>
+<h1>Plugin Tutorial</h1>
 
 <p>
-  TODO. Meanwhile, please take a look at <a
-  href="https://hudson.dev.java.net/source/browse/hudson/plugins/">the
-  source code of a plugin</a>. This is a relatively simple publisher, that reads the test result format that JWSDP's QA team uses.
+This document, together with the <a href="https://hudson.dev.java.net/source/browse/hudson/plugins/hello-world/">hello-world plugin</a>, shows you how to get started with the plugin development.
+
+<h3>What Can Plugins Do?</h3>
+<p>
+Hudson defines extensibility points, which are interfaces or abstract classes that model an aspect of a build system. Those interfaces define contracts of what need to be implemented, and Hudson allows plugins to contribute those implementations. See <a href="extensible-points.html">this document</a> for more about extension points.
+<p>
+In this document, we'll be implementing a <a href="/nonav/javadoc/?hudson/tasks/Builder.html"><tt>Builder</tt></a> that says hello. (built-in builders include Ant, Maven, and shell script. Builders build a project.)
+
+
+<h3>Setting Up Environment</h3>
+<p>
+First, check out the Hudson workspace by running <tt>cvs -d:pserver:guest@cvs.dev.java.net:/cvs co hudson</tt>. THe reason we also check out the whole Hudson workspace is so that when we compile a plugin, it can refer to core Hudson classes. When you develop your own plugin, you can choose to use binary <tt>hudson.jar</tt>, but using the source tends to be easier in terms of debugging.
 
 <p>
-  Also, please send us a note at <tt>users@hudson.dev.java.net</tt>
-  and tell us that you care about the tutorial!
+Next, make sure that you can build Hudson:
+
+<pre>
+$ cd hudson/hudson
+$ ant
+</pre>
+
+<p>
+Then the plugin
+
+<pre>
+$ cd ../plugins/hello-world
+$ ant
+</pre>
+
+<p>
+Now you are all set. Try to load the plugin inside an IDE so that you can do the later steps more productively.
+
+<h3>Plugin Workspace Layout</h3>
+<p>
+<a href="https://hudson.dev.java.net/source/browse/hudson/plugins/hello-world/">The plugin workspace</a> consists of the following major pieces:
+
+<dl>
+	<dt>build.xml
+	<dd>Used for building the plugin and creating a distribution image.
+	
+	<dt>manifest-debug.mf
+	<dd>Used during the debugging. See <a href="plugin-structure.html">this document</a> for more about this.
+	
+	<dt>src
+	<dd>Java source files of the plugin
+	
+	<dt>views
+	<dd>Jelly/Groovy views of the plugin. See <a href="architecture.html">this document</a> for more about it.
+	
+	<dt>resources
+	<dd>Static resources of the plugin, such as images and HTML files.
+</dl>
+
+
+<h3>Source Code</h3>
+<p>
+	Let's take a look at the source code. A plugin's main entry point is a <a href="/source/browse/hudson/plugins/hello-world/src/hudson/plugins/hello_world/PluginImpl.java?view=markup"><tt>PluginImpl</tt></a> class that extends from <a href="/nonav/javadoc/?hudson/Plugin.html"><tt>Plugin</tt></a>. Once Hudson detects your plugin, it will find this class via the manifest, create an instance, and invokes methods.
+<p>
+	Most of the time, a plugin class just registers extension points. See the source code for more about how a <tt>Builder</tt> is implemented and what it does.
+
+
+<h3>Setting Up Test Environment.</h3>
+<p>
+	First, you should set up an web application development environment where you can easily start/stop/restart Hudson, because whenever you make changes to the plugin source code, you'll need to restart Hudson. This highly depends on your IDE and your web container. You'll also want to be able to attach your debugger and watch output from the web container, as this is where errors and so on are reported.
+<p>
+	The other thing you'll need is to set the <tt>stapler.jelly.noCache</tt> system property to true in the web container. This causes Hudson to always reload views, so that you can make changes to views and static resources without reloading Hudson.
+<p>
+	For example, with Tomcat, this whole thing can be done by launching Tomcat as follows:
+<pre>
+$ export CATALINA_OPTS="-Dstapler.jelly.noCache=true"
+$ catalina.sh jpda run
+</pre>
+<p>
+	You can <a href="http://tomcat.apache.org/tomcat-5.5-doc/manager-howto.html#Reload%20An%20Existing%20Application">do the redeployment very easy with the manager app</a>, provided that you installed it. Otherwise, try to run your web container from IDE and most IDEs will do the right thing.
+<p>
+	Some IDEs (such as IntelliJ IDEA) can also take advantage of <a href="http://www.google.com/search?q=JVM+class+reload">JVM class reloading</a>, allowing you to make a minor change to the code without redeploying Hudson. Check your IDE if this can be done.
+
+<p>
+	Next, place an <tt>hello-world.hpl</tt> file in your <tt>$HUDSON_HOME/plugins</tt> directory. It should contain a single line that lists the file name of <tt>hello-world/manifest-debug.mf</tt>, either in absolute or relative form. This setting causes Hudson to load classes, views, libraries, and resources from the workspace image, allowing you to be more productive.
+
+<p>
+	Finally, start Hudson and make sure that hello-world plugin is deployed successfully. You can check that from <tt>http://localhost:8080/hudson/managePlugins</tt>. Or just by looking at the output from the container. With that you are all set for a productive edit/build/test cycle.
+
+<h3>Testing Your Plugin</h3>
+<p>
+	To change the source code and test it, do the following cycle:
+<ol>
+	<li>Edit the source code
+	<li>Build
+	<li>Redeploy Hudson web application
+	<li>Reload browser
+</ol>
+<p>
+	To change static resources and views, do the following cycle:
+<ol>
+	<li>Edit files
+	<li>Reload browser
+</ol>
+<p>
+	Try making random changes and see if they are effective.
 
 </div></body>
 </html>
