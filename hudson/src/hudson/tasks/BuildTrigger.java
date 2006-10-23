@@ -41,10 +41,6 @@ public class BuildTrigger extends Publisher {
         return Project.fromNameList(childProjects);
     }
 
-    public boolean prebuild(Build build, BuildListener listener) {
-        return true;
-    }
-
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         if(build.getResult()== Result.SUCCESS) {
             for (Project p : getChildProjects()) {
@@ -88,10 +84,6 @@ public class BuildTrigger extends Publisher {
         }
 
         return changed;
-    }
-
-    public Action getProjectAction(Project project) {
-        return null;
     }
 
     public Descriptor<Publisher> getDescriptor() {

@@ -1,6 +1,10 @@
 package hudson.tasks;
 
 import hudson.model.Describable;
+import hudson.model.Action;
+import hudson.model.Project;
+import hudson.model.Build;
+import hudson.model.BuildListener;
 import hudson.ExtensionPoint;
 
 /**
@@ -13,4 +17,17 @@ import hudson.ExtensionPoint;
  * @author Kohsuke Kawaguchi
  */
 public abstract class Builder implements BuildStep, Describable<Builder>, ExtensionPoint {
+    /**
+     * Default implementation that does nothing.
+     */
+    public boolean prebuild(Build build, BuildListener listener) {
+        return true;
+    }
+
+    /**
+     * Default implementation that does nothing.
+     */
+    public Action getProjectAction(Project project) {
+        return null;
+    }
 }

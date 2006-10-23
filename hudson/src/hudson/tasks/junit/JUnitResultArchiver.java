@@ -29,10 +29,6 @@ public class JUnitResultArchiver extends AntBasedPublisher {
         this.testResults = testResults;
     }
 
-    public boolean prebuild(Build build, BuildListener listener) {
-        return true; // noop
-    }
-
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         FileSet fs = new FileSet();
         Project p = new Project();
@@ -62,10 +58,6 @@ public class JUnitResultArchiver extends AntBasedPublisher {
             build.setResult(Result.UNSTABLE);
 
         return true;
-    }
-
-    public Action getProjectAction(hudson.model.Project project) {
-        return null;
     }
 
     public String getTestResults() {

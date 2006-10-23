@@ -43,10 +43,6 @@ public class JavadocArchiver extends AntBasedPublisher {
         return new File(project.getRootDir(),"javadoc");
     }
 
-    public boolean prebuild(Build build, BuildListener listener) {
-        return true;
-    }
-
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         // TODO: run tar or something for better remote copy
         File javadoc = new File(build.getParent().getWorkspace().getLocal(), javadocDir);

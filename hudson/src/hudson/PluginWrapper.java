@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.jar.Manifest;
 import java.util.logging.Logger;
 
+import hudson.util.IOException2;
+
 /**
  * Represents a Hudson plug-in and associated control information
  * for Hudson to control {@link Plugin}.
@@ -105,6 +107,8 @@ public final class PluginWrapper {
             FileInputStream in = new FileInputStream(archive);
             try {
                 manifest = new Manifest(in);
+            } catch(IOException e) {
+                throw new IOException2("Failed to load "+archive,e);
             } finally {
                 in.close();
             }

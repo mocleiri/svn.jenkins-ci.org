@@ -58,10 +58,6 @@ public class Fingerprinter extends Publisher {
         return recordBuildArtifacts;
     }
 
-    public boolean prebuild(Build build, BuildListener listener) {
-        return true;
-    }
-
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         listener.getLogger().println("Recording fingerprints");
 
@@ -94,10 +90,6 @@ public class Fingerprinter extends Publisher {
         build.getActions().add(new FingerprintAction(build,record));
 
         return true;
-    }
-
-    public Action getProjectAction(Project project) {
-        return null;
     }
 
     private void record(Build build, MessageDigest md5, BuildListener listener, Map<String,String> record, String targets) {

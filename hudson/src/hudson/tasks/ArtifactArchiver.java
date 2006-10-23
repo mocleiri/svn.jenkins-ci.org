@@ -100,10 +100,6 @@ public class ArtifactArchiver extends AntBasedPublisher {
         return true;
     }
 
-    public Action getProjectAction(Project project) {
-        return null;
-    }
-
     public Descriptor<Publisher> getDescriptor() {
         return DESCRIPTOR;
     }

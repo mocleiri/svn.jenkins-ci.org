@@ -65,6 +65,13 @@ public abstract class Descriptor<T extends Describable<T>> {
     /**
      * Creates a configured instance from the submitted form.
      *
+     * <p>
+     * Hudson only invokes this method when the user wants an instance of <tt>T</tt>.
+     * So there's no need to check that in the implementation.
+     *
+     * @param req
+     *      Always non-null. This object includes all the submitted form values. 
+     *
      * @throws FormException
      *      Signals a problem in the submitted form.
      */
@@ -86,6 +93,12 @@ public abstract class Descriptor<T extends Describable<T>> {
 
     /**
      * Returns the data store that can be used to store configuration info.
+     *
+     * <p>
+     * The data store is local to each {@link Descriptor}.
+     *
+     * @return
+     *      never return null.
      */
     protected synchronized Map<String,Object> getProperties() {
         if(properties==null)

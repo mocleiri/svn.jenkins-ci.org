@@ -51,10 +51,6 @@ public class Ant extends Builder {
         return null;
     }
 
-    public boolean prebuild(Build build, BuildListener listener) {
-        return true;
-    }
-
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         Project proj = build.getProject();
 
@@ -98,10 +94,6 @@ public class Ant extends Builder {
             e.printStackTrace( listener.fatalError("command execution failed") );
             return false;
         }
-    }
-
-    public Action getProjectAction(Project project) {
-        return null;
     }
 
     public Descriptor<Builder> getDescriptor() {

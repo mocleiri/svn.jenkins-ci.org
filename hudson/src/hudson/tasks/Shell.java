@@ -55,10 +55,6 @@ public class Shell extends Builder {
         return command;
     }
 
-    public boolean prebuild(Build build, BuildListener listener) {
-        return true;
-    }
-
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         Project proj = build.getProject();
         FilePath ws = proj.getWorkspace();
@@ -90,10 +86,6 @@ public class Shell extends Builder {
             if(script!=null)
                 script.delete();
         }
-    }
-
-    public Action getProjectAction(Project project) {
-        return null;
     }
 
     public Descriptor<Builder> getDescriptor() {

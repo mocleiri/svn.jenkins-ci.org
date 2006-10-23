@@ -70,10 +70,6 @@ public class Mailer extends Publisher {
         return dontNotifyEveryUnstableBuild;
     }
 
-    public boolean prebuild(Build build, BuildListener listener) {
-        return true;
-    }
-
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         try {
             MimeMessage mail = getMail(build);
@@ -86,10 +82,6 @@ public class Mailer extends Publisher {
         }
 
         return true;
-    }
-
-    public Action getProjectAction(Project project) {
-        return null;
     }
 
     private MimeMessage getMail(Build build) throws MessagingException {
