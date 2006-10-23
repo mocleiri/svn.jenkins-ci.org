@@ -118,7 +118,14 @@ foo.hpi
   plugin developers to improve productivity.
 
 <p>
-  The hpl format is really just a manifest file. It has the same
+  The hpl file can be placed in <tt>$HUDSON_HOME/plugins</tt> just like
+  hpi files. But hpl file just contains a single line of text that points
+  to a manifest file, like this:
+
+<pre>../path/to/your/plugin/workspace/manifest-debug.mf</pre>
+
+<p>
+  The file pointed by this is a manifest file. It has the same
   custom attributes as defined above for
   <tt>META-INF/MANIFEST.MF</tt>, but it defines a few more custom
   attributes that allow a plugin developer to specify various pieces
@@ -126,25 +133,24 @@ foo.hpi
 
 <pre>
 Plugin-Class: hudson.plugins.jwsdp_sqe.PluginImpl
-Class-Path: ../../hudson/plugins/jwsdp-sqe/build/classes ../../hudson/plugins/jwsdp-sqe/views ../../hudson/plugins/jwsdp-sqe/lib/reporte.jar
+Class-Path: ./build/classes ./views ./lib/reporter.jar
 Long-Name: JWSDP SQE Test Result Plugin
-Resource-Path: ../../hudson/plugins/jwsdp-sqe/resources
+Resource-Path" ./resources
 </pre>
 
 <p>
-  For example, the above sample <tt>jwsdp-sqe.hpl</tt> states that the
+  For example, the above sample <tt>manifest-debug.mf</tt> states that the
   static resources of a plugin shall be loaded from the
-  <tt>.../jwsdp-sqe/resources</tt>, and class files from
-  <tt>.../build/classes</tt>, Jelly view files in <tt>.../views</tt>,
+  <tt>./resources</tt>, and class files from
+  <tt>./build/classes</tt>, Jelly view files in <tt>./views</tt>,
   and a library jar file <tt>reporter.jar</tt> shall be made available
   to the plugin classloader. Absolute path names can be also used.
 
 <p>
-  This file can be installed into Hudson just like a <tt>.hpi</tt>
-  plugin, but this allows a plugin developer to avoid assembly
+  This mechanism allows a plugin developer to avoid assembly
   steps. Also, changes to static resources and Jelly views will be
   reflected instanteneously (provided that you set the system property
-  <tt>stapler.jelly.noCache</tt> to true in the container.
+  <tt>stapler.jelly.noCache</tt> to true when you start the web container.
 
 </div></body>
 </html>
