@@ -69,6 +69,25 @@ public final class Build extends Run<Project,Build> implements Runnable {
         super(project,buildDir,prevBuild);
     }
 
+    @Override
+    public boolean isKeepLog() {
+        // if any of the downstream project is configured with 'keep dependency component',
+        // we need to keep this log
+        for (Map.Entry<Project,RangeSet> e : getDownstreamBuilds().entrySet()) {
+            Project p = e.getKey();
+            if(!p.isKeepDependencies())     continue;
+
+            // is there any active build that depends on us?
+            for (Build build : p.getBuilds()) {
+                if(e.getValue().includes(build.getNumber()))
+                    return true; // yep. an active build depends on us. can't recycle.
+            }
+        }
+        // TODO: report why the log is kept in UI
+        
+        return super.isKeepLog();
+    }
+
     /**
      * Gets the changes incorporated into this build.
      *

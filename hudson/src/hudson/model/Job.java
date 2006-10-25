@@ -80,6 +80,8 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
 
     private LogRotator logRotator;
 
+    private boolean keepDependencies;
+
     protected Job(Hudson parent,String name) {
         this.parent = parent;
         doSetName(name);
@@ -136,6 +138,13 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
 
     public boolean isInQueue() {
         return false;
+    }
+
+    /**
+     * If true, it will keep all the build logs of dependency components.
+     */
+    public boolean isKeepDependencies() {
+        return keepDependencies;
     }
 
     /**
@@ -465,6 +474,8 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
             logRotator = LogRotator.DESCRIPTOR.newInstance(req);
         else
             logRotator = null;
+
+        keepDependencies = req.getParameter("keepDependencies")!=null;
 
         save();
 

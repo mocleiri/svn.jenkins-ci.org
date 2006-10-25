@@ -2,9 +2,9 @@ package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
 import hudson.CloseProofOutputStream;
+import hudson.ExtensionPoint;
 import hudson.Util;
 import hudson.XmlFile;
-import hudson.ExtensionPoint;
 import hudson.tasks.BuildStep;
 import hudson.tasks.LogRotator;
 import hudson.util.CharSpool;
@@ -25,12 +25,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.SimpleTimeZone;
-import java.util.Comparator;
 import java.util.logging.Logger;
 
 /**
@@ -209,7 +208,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     }
 
     /**
-     * Returns true if this log file should be kept forever.
+     * Returns true if this log file should be kept and not deleted.
      *
      * This is used as a signal to the {@link LogRotator}.
      */
