@@ -4,7 +4,6 @@ import hudson.Launcher;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
-import hudson.model.Describable;
 import hudson.model.Descriptor;
 import hudson.model.Project;
 import hudson.tasks.junit.JUnitResultArchiver;
@@ -53,6 +52,7 @@ public interface BuildStep {
      */
     public static final List<Descriptor<Builder>> BUILDERS = Descriptor.toList(
         Shell.DESCRIPTOR,
+        BatchFile.DESCRIPTOR,
         Ant.DESCRIPTOR,
         Maven.DESCRIPTOR
     );
