@@ -39,6 +39,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -458,7 +459,9 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             // capture output from the task for diagnosis
             listener.getLogger().print(errorOutput);
             // then report an error
-            e.printStackTrace(listener.error(e.getMessage()));
+            PrintWriter w = listener.error(e.getMessage());
+            w.println("Working directory is "+baseDir);
+            e.printStackTrace(w);
             return false;
         } catch( RuntimeException e ) {
             // an user reported a NPE inside the changeLog task.
