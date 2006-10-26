@@ -3,19 +3,17 @@ package hudson.tasks;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
-import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import static hudson.model.Hudson.isWindows;
 import hudson.model.Project;
+import org.kohsuke.stapler.StaplerRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-
-import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * Executes a series of commands by using a shell.
