@@ -35,7 +35,7 @@ public class BatchFile extends Builder {
         FilePath script=null;
         try {
             try {
-                script = ws.createTempFile("hudson","bat");
+                script = ws.createTempFile("hudson",".bat");
                 Writer w = new FileWriter(script.getLocal());
                 w.write(command);
                 w.write("\r\nexit %ERRORLEVEL%");
