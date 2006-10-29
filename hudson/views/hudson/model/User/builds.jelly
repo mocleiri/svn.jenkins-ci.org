@@ -15,7 +15,7 @@
           <th>Status</th>
           <th><st:nbsp/></th>
         </tr>
-        <j:forEach var="b" items="${it.participatingBuilds}">
+        <j:forEach var="b" items="${it.builds}">
           <tr>
             <td data="${b.iconColor}">
               <a href="${rootURL}/${b.url}">
@@ -41,6 +41,7 @@
           </tr>
         </j:forEach>
       </table>
+      <t:rssBar />
     </l:main-panel>
   </l:layout>
 </j:jelly>

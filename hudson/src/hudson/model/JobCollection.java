@@ -132,6 +132,7 @@ public abstract class JobCollection extends AbstractModelObject {
     public void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         rss(req, rsp, " all builds", new RunList(getJobs()));
     }
+
     public void doRssFailed( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         rss(req, rsp, " failed builds", new RunList(getJobs()).failureOnly());
     }

@@ -74,7 +74,7 @@ public class WebAppMain implements ServletContextListener {
         // can be served quickly
         Trigger.timer.schedule(new TimerTask() {
             public void run() {
-                User.get("nobody").getParticipatingBuilds();
+                User.get("nobody").getBuilds();
             }
         }, 1000*10);
 

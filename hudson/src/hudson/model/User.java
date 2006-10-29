@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import hudson.scm.ChangeLogSet;
 import hudson.XmlFile;
 import hudson.util.XStream2;
+import hudson.util.RunList;
 import com.thoughtworks.xstream.XStream;
 
 /**
@@ -90,13 +91,10 @@ public class User extends AbstractModelObject {
     /**
      * Gets the list of {@link Build}s that include changes by this user,
      * by the timestamp order.
-     *
-     * <p>
-     * The name is somewhat unintuitive to use "builds" for the view name.
+     * 
      * TODO: do we need some index for this?
-     *
      */
-    public List<Build> getParticipatingBuilds() {
+    public List<Build> getBuilds() {
         List<Build> r = new ArrayList<Build>();
         for (Project p : Hudson.getInstance().getProjects()) {
             for (Build b : p.getBuilds()) {
@@ -111,7 +109,6 @@ public class User extends AbstractModelObject {
         Collections.sort(r,Run.ORDER_BY_DATE);
         return r;
     }
-
 
     public String toString() {
         return name;
@@ -132,6 +129,20 @@ public class User extends AbstractModelObject {
         config.mkdirs();
         config.write(this);
     }
+
+    public void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        rss(req, rsp, " all builds", RunList.fromRuns(getBuilds()));
+    }
+
+    public void doRssFailed( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        rss(req, rsp, " failed builds", RunList.fromRuns(getBuilds()).failureOnly());
+    }
+
+    private void rss(StaplerRequest req, StaplerResponse rsp, String suffix, RunList runs) throws IOException, ServletException {
+        RSS.forwardToRss(getDisplayName()+ suffix, getUrl(),
+            runs.newBuilds(), Run.FEED_ADAPTER, req, rsp );
+    }
+
 
     /**
      * Keyed by {@link User#name}.
