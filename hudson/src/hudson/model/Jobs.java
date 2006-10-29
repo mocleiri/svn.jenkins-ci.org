@@ -3,6 +3,8 @@ package hudson.model;
 import java.util.List;
 
 /**
+ * List of all installed {@link Job} types.
+ * 
  * @author Kohsuke Kawaguchi
  */
 public class Jobs {
