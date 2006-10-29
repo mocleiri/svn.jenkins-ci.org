@@ -11,19 +11,10 @@
 
     <j:set var="verb" value="${h.ifThenElse(empty(it.description),'add','edit')}"/>
 
-    <j:choose>
-      <j:when test="${attrs.adminOnly}">
-        <l:isAdmin>
-          <div align="right"><a href="editDescription" onclick="return replaceDescription();">
-            <img src="${rootURL}/images/16x16/notepad.gif" /> ${verb} description
-          </a></div>
-        </l:isAdmin>
-      </j:when>
-      <j:otherwise>
-        <div align="right"><a href="editDescription" onclick="return replaceDescription();">
-          <img src="${rootURL}/images/16x16/notepad.gif" /> ${verb} description
-        </a></div>
-      </j:otherwise>
-    </j:choose>
+    <l:isAdmin>
+      <div align="right"><a href="editDescription" onclick="return replaceDescription();">
+        <img src="${rootURL}/images/16x16/notepad.gif" /> ${verb} description
+      </a></div>
+    </l:isAdmin>
   </div>
 </j:jelly>
