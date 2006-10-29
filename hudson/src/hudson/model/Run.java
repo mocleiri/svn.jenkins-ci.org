@@ -478,56 +478,51 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
             BuildListener listener=null;
 
             try {
-                final PrintStream log = new PrintStream(new FileOutputStream(getLogFile()));
-                listener = new BuildListener() {
-                    final PrintWriter pw = new PrintWriter(new CloseProofOutputStream(log),true);
+                try {
+                    final PrintStream log = new PrintStream(new FileOutputStream(getLogFile()));
+                    listener = new BuildListener() {
+                        final PrintWriter pw = new PrintWriter(new CloseProofOutputStream(log),true);
 
-                    public void started() {}
+                        public void started() {}
 
-                    public PrintStream getLogger() {
-                        return log;
-                    }
+                        public PrintStream getLogger() {
+                            return log;
+                        }
 
-                    public PrintWriter error(String msg) {
-                        pw.println("ERROR: "+msg);
-                        return pw;
-                    }
+                        public PrintWriter error(String msg) {
+                            pw.println("ERROR: "+msg);
+                            return pw;
+                        }
 
-                    public PrintWriter fatalError(String msg) {
-                        return error(msg);
-                    }
+                        public PrintWriter fatalError(String msg) {
+                            return error(msg);
+                        }
 
-                    public void finished(Result result) {
-                        pw.close();
-                        log.close();
-                    }
-                };
+                        public void finished(Result result) {
+                            pw.close();
+                            log.close();
+                        }
+                    };
 
-                listener.started();
+                    listener.started();
 
-                result = job.run(listener);
+                    result = job.run(listener);
 
-                LOGGER.info(toString()+" main build action completed: "+result);
+                    LOGGER.info(toString()+" main build action completed: "+result);
+                } catch (ThreadDeath t) {
+                    throw t;
+                } catch( Throwable e ) {
+                    handleFatalBuildProblem(listener,e);
+                    result = Result.FAILURE;
+                }
 
+                // even if the main buidl fails fatally, try to run post build processing
                 job.post(listener);
 
             } catch (ThreadDeath t) {
                 throw t;
             } catch( Throwable e ) {
-                if(listener!=null) {
-                    if(e instanceof IOException)
-                        Util.displayIOException((IOException)e,listener);
-
-                    Writer w = listener.fatalError(e.getMessage());
-                    if(w!=null) {
-                        try {
-                            e.printStackTrace(new PrintWriter(w));
-                            w.close();
-                        } catch (IOException e1) {
-                            // ignore
-                        }
-                    }
-                }
+                handleFatalBuildProblem(listener,e);
                 result = Result.FAILURE;
             }
 
@@ -552,6 +547,26 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
             }
         } finally {
             onEndBuilding();
+        }
+    }
+
+    /**
+     * Handles a fatal build problem (exception) that occured during the build.
+     */
+    private void handleFatalBuildProblem(BuildListener listener, Throwable e) {
+        if(listener!=null) {
+            if(e instanceof IOException)
+                Util.displayIOException((IOException)e,listener);
+
+            Writer w = listener.fatalError(e.getMessage());
+            if(w!=null) {
+                try {
+                    e.printStackTrace(new PrintWriter(w));
+                    w.close();
+                } catch (IOException e1) {
+                    // ignore
+                }
+            }
         }
     }
 
