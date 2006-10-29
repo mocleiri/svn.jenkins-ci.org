@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -119,11 +120,11 @@ public abstract class Descriptor<T extends Describable<T>> {
     }
 
     public final String getConfigPage() {
-        return '/'+clazz.getName().replace('.','/')+"/config.jelly";
+        return '/'+clazz.getName().replace('.','/').replace('$','/')+"/config.jelly";
     }
 
     public final String getGlobalConfigPage() {
-        return '/'+clazz.getName().replace('.','/')+"/global.jelly";
+        return '/'+clazz.getName().replace('.','/').replace('$','/')+"/global.jelly";
     }
 
 
@@ -166,6 +167,15 @@ public abstract class Descriptor<T extends Describable<T>> {
         for (T v : values)
             r.add(v);
         return r;
+    }
+
+    public static <T extends Describable<T>>
+    Map<Descriptor<T>,T> toMap(List<T> describables) {
+        Map<Descriptor<T>,T> m = new LinkedHashMap<Descriptor<T>,T>();
+        for (T d : describables) {
+            m.put(d.getDescriptor(),d);
+        }
+        return m;
     }
 
     public static final class FormException extends Exception {

@@ -3,6 +3,7 @@ package hudson.model;
 import com.thoughtworks.xstream.XStream;
 import hudson.FeedAdapter;
 import hudson.XmlFile;
+import hudson.model.Descriptor.FormException;
 import hudson.scm.ChangeLogSet;
 import hudson.util.RunList;
 import hudson.util.XStream2;
@@ -28,16 +29,28 @@ import java.util.logging.Logger;
  */
 public class User extends AbstractModelObject {
 
-    private transient final String name;
+    private transient final String id;
 
-    private String fullName;
+    private volatile String fullName;
 
-    private String description;
+    private volatile String description;
+
+    /**
+     * List of {@link UserProperty}s configured for this project.
+     * Copy-on-write semantics.
+     */
+    private volatile List<UserProperty> properties = new ArrayList<UserProperty>();
 
 
-    private User(String name) {
-        this.name = name;
-        this.fullName = name;   // fullName defaults to name
+    private User(String id) {
+        this.id = id;
+        this.fullName = id;   // fullName defaults to name
+
+        for (UserPropertyDescriptor d : UserProperties.LIST) {
+            UserProperty up = d.newInstance(this);
+            if(up!=null)
+                properties.add(up);
+        }
 
         // load the other data from disk if it's available
         XmlFile config = getConfigFile();
@@ -47,10 +60,17 @@ public class User extends AbstractModelObject {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Failed to load "+config,e);
         }
+
+        for (UserProperty p : properties)
+            p.setUser(this);
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getUrl() {
-        return "user/"+name;
+        return "user/"+ id;
     }
 
     /**
@@ -66,6 +86,24 @@ public class User extends AbstractModelObject {
 
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Gets the user properties configured for this user.
+     */
+    public Map<Descriptor<UserProperty>,UserProperty> getProperties() {
+        return Descriptor.toMap(properties);
+    }
+
+    /**
+     * Gets the specific property, or null.
+     */
+    public <T extends UserProperty> T getProperty(Class<T> clazz) {
+        for (UserProperty p : properties) {
+            if(clazz.isInstance(p))
+                return (T)p;    // can't use Class.cast as that's 5.0 feature
+        }
+        return null;
     }
 
     /**
@@ -125,14 +163,14 @@ public class User extends AbstractModelObject {
     }
 
     public String toString() {
-        return name;
+        return fullName;
     }
 
     /**
      * The file we save our configuration.
      */
     protected final XmlFile getConfigFile() {
-        return new XmlFile(XSTREAM,new File(Hudson.getInstance().getRootDir(),"users/"+name+"/config.xml"));
+        return new XmlFile(XSTREAM,new File(Hudson.getInstance().getRootDir(),"users/"+ id +"/config.xml"));
     }
 
     /**
@@ -147,18 +185,27 @@ public class User extends AbstractModelObject {
     /**
      * Accepts submission from the configuration page.
      */
-    public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+    public void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         if(!Hudson.adminCheck(req,rsp))
             return;
 
         req.setCharacterEncoding("UTF-8");
 
-        fullName = req.getParameter("fullName");
-        description = req.getParameter("description");
+        try {
+            fullName = req.getParameter("fullName");
+            description = req.getParameter("description");
 
-        save();
+            List<UserProperty> props = new ArrayList<UserProperty>();
+            for (Descriptor<UserProperty> d : UserProperties.LIST)
+                props.add(d.newInstance(req));
+            this.properties = props;
 
-        rsp.sendRedirect(".");
+            save();
+
+            rsp.sendRedirect(".");
+        } catch (FormException e) {
+            sendError(e,req,rsp);
+        }
     }
 
     public void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
@@ -176,7 +223,7 @@ public class User extends AbstractModelObject {
 
 
     /**
-     * Keyed by {@link User#name}.
+     * Keyed by {@link User#id}.
      */
     private static final Map<String,User> byName = new HashMap<String,User>();
 

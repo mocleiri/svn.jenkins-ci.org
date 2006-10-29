@@ -10,8 +10,8 @@ import hudson.scm.SCMS;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildTrigger;
 import hudson.tasks.Builder;
-import hudson.tasks.Publisher;
 import hudson.tasks.Fingerprinter;
+import hudson.tasks.Publisher;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.triggers.Trigger;
 import hudson.triggers.Triggers;
@@ -29,8 +29,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -38,7 +38,6 @@ import java.util.SortedMap;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.Vector;
-import java.util.Comparator;
 
 /**
  * Buildable software project.
@@ -226,25 +225,16 @@ public class Project extends Job<Project,Build> {
             return super.getIconColor();
     }
 
-    private <T extends Describable<T>>
-    Map<Descriptor<T>,T> buildDescriptorMap(List<T> describables) {
-        Map<Descriptor<T>,T> m = new LinkedHashMap<Descriptor<T>,T>();
-        for (T d : describables) {
-            m.put(d.getDescriptor(),d);
-        }
-        return m;
-    }
-
     public synchronized Map<Descriptor<Trigger>,Trigger> getTriggers() {
-        return buildDescriptorMap(triggers);
+        return Descriptor.toMap(triggers);
     }
 
     public synchronized Map<Descriptor<Builder>,Builder> getBuilders() {
-        return buildDescriptorMap(builders);
+        return Descriptor.toMap(builders);
     }
 
     public synchronized Map<Descriptor<Publisher>,Publisher> getPublishers() {
-        return buildDescriptorMap(publishers);
+        return Descriptor.toMap(publishers);
     }
 
     /**

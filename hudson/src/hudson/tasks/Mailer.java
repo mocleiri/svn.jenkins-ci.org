@@ -6,6 +6,8 @@ import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Result;
+import hudson.model.User;
+import hudson.model.UserPropertyDescriptor;
 import org.apache.tools.ant.types.selectors.SelectorUtils;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -253,6 +255,10 @@ public class Mailer extends Publisher {
             return "/help/project-config/mailer.html";
         }
 
+        public String getDefaultSuffix() {
+            return (String)getProperties().get("mail.default.suffix");
+        }
+
         /** JavaMail session. */
         public Session createSession() {
             Properties props = new Properties(System.getProperties());
@@ -276,8 +282,10 @@ public class Mailer extends Publisher {
         }
 
         public boolean configure(HttpServletRequest req) throws FormException {
+            // this code is brain dead
             getProperties().put("mail.smtp.host",nullify(req.getParameter("mailer_smtp_server")));
             getProperties().put("mail.admin.address",req.getParameter("mailer_admin_address"));
+            getProperties().put("mail.default.suffix",nullify(req.getParameter("mailer_default_suffix")));
             String url = nullify(req.getParameter("mailer_hudson_url"));
             if(url!=null && !url.endsWith("/"))
                 url += '/';
@@ -344,6 +352,56 @@ public class Mailer extends Publisher {
                 req.getParameter("mailer_recipients"),
                 req.getParameter("mailer_not_every_unstable")!=null
             );
+        }
+    }
+
+    /**
+     * Per user property that is e-mail address.
+     */
+    public static class UserProperty extends hudson.model.UserProperty {
+        public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
+
+        /**
+         * The user's e-mail address.
+         * Null to leave it to default.
+         */
+        private final String emailAddress;
+
+        public UserProperty(String emailAddress) {
+            this.emailAddress = emailAddress;
+        }
+
+        public String getAddress() {
+            if(emailAddress!=null)
+                return emailAddress;
+
+            String ds = Mailer.DESCRIPTOR.getDefaultSuffix();
+            if(ds!=null)
+                return user.getId()+ds;
+            else
+                return null;
+        }
+
+        public DescriptorImpl getDescriptor() {
+            return DESCRIPTOR;
+        }
+
+        public static final class DescriptorImpl extends UserPropertyDescriptor {
+            public DescriptorImpl() {
+                super(UserProperty.class);
+            }
+
+            public String getDisplayName() {
+                return "E-mail";
+            }
+
+            public UserProperty newInstance(User user) {
+                return new UserProperty(null);
+            }
+
+            public UserProperty newInstance(StaplerRequest req) throws FormException {
+                return new UserProperty(req.getParameter("email.address"));
+            }
         }
     }
 }
