@@ -2,12 +2,22 @@ package hudson.tasks;
 
 import hudson.Launcher;
 import hudson.Util;
-import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
-import hudson.model.Project;
 import hudson.model.Result;
+import org.apache.tools.ant.types.selectors.SelectorUtils;
+import org.kohsuke.stapler.StaplerRequest;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,17 +31,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.Authenticator;
-import javax.mail.PasswordAuthentication;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.tools.ant.types.selectors.SelectorUtils;
-import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * Sends the build result in e-mail.
@@ -346,5 +345,5 @@ public class Mailer extends Publisher {
                 req.getParameter("mailer_not_every_unstable")!=null
             );
         }
-    };
+    }
 }
