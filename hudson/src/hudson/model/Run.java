@@ -1,5 +1,6 @@
 package hudson.model;
 
+import static hudson.Util.combine;
 import com.thoughtworks.xstream.XStream;
 import hudson.CloseProofOutputStream;
 import hudson.ExtensionPoint;
@@ -8,6 +9,7 @@ import hudson.XmlFile;
 import hudson.FeedAdapter;
 import hudson.tasks.BuildStep;
 import hudson.tasks.LogRotator;
+import hudson.tasks.test.AbstractTestResultAction;
 import hudson.util.CharSpool;
 import hudson.util.IOException2;
 import hudson.util.XStream2;
@@ -599,6 +601,70 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
 
     public String getBuildStatusUrl() {
         return getIconColor()+".gif";
+    }
+
+    public static class Summary {
+        /**
+         * Is this build worse or better, compared to the previous build?
+         */
+        public boolean worse;
+        public String message;
+
+        public Summary(boolean worse, String message) {
+            this.worse = worse;
+            this.message = message;
+        }
+    }
+
+    /**
+     * Gets an object that computes the single line summary of this build.
+     */
+    public Summary getBuildStatusSummary() {
+        Run prev = getPreviousBuild();
+
+        if(getResult()==Result.SUCCESS) {
+            if(prev==null || prev.getResult()== Result.SUCCESS)
+                return new Summary(false,"stable");
+            else
+                return new Summary(false,"back to normal");
+        }
+
+        if(getResult()==Result.FAILURE) {
+            RunT since = getPreviousNotFailedBuild();
+            if(since==null)
+                return new Summary(false,"broken for a long time");
+            if(since==prev)
+                return new Summary(true,"broken since this build");
+            return new Summary(false,"broekn since "+since.getDisplayName());
+        }
+
+        if(getResult()==Result.ABORTED)
+            return new Summary(false,"aborted");
+
+        if(getResult()==Result.UNSTABLE) {
+            if(((Run)this) instanceof Build) {
+                AbstractTestResultAction trN = ((Build)(Run)this).getTestResultAction();
+                AbstractTestResultAction trP = prev==null ? null : ((Build) prev).getTestResultAction();
+                if(trP==null) {
+                    if(trN!=null && trN.getFailCount()>0)
+                        return new Summary(false,combine(trN.getFailCount(),"test faliure"));
+                    else // ???
+                        return new Summary(false,"unstable");
+                }
+                if(trP.getFailCount()==0)
+                    return new Summary(true,combine(trP.getFailCount(),"test")+" started to fail");
+                if(trP.getFailCount() < trN.getFailCount())
+                    return new Summary(true,combine(trN.getFailCount()-trP.getFailCount(),"more test")
+                        +" are failing ("+trN.getFailCount()+" total)");
+                if(trP.getFailCount() > trN.getFailCount())
+                    return new Summary(false,combine(trP.getFailCount()-trN.getFailCount(),"less test")
+                        +" are failing ("+trN.getFailCount()+" total)");
+
+                return new Summary(false,combine(trN.getFailCount(),"test")+" are still failing");
+            }
+        }
+
+        return new Summary(false,"?");
     }
 
     /**
