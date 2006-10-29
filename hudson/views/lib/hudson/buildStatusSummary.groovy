@@ -5,7 +5,7 @@
 
 jelly {
   def s = build.getBuildStatusSummary();
-  if(s.worse) {
+  if(s.isWorse) {
     output.write("<font color=red>${s.message}</font>");
   } else {
     output.write(s.message);

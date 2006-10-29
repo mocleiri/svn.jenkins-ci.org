@@ -11,11 +11,13 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Calendar;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import hudson.scm.ChangeLogSet;
 import hudson.XmlFile;
+import hudson.FeedAdapter;
 import hudson.util.XStream2;
 import hudson.util.RunList;
 import com.thoughtworks.xstream.XStream;
@@ -135,12 +137,12 @@ public class User extends AbstractModelObject {
     }
 
     public void doRssFailed( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        rss(req, rsp, " failed builds", RunList.fromRuns(getBuilds()).failureOnly());
+        rss(req, rsp, " regression builds", RunList.fromRuns(getBuilds()).regressionOnly());
     }
 
     private void rss(StaplerRequest req, StaplerResponse rsp, String suffix, RunList runs) throws IOException, ServletException {
         RSS.forwardToRss(getDisplayName()+ suffix, getUrl(),
-            runs.newBuilds(), Run.FEED_ADAPTER, req, rsp );
+            runs.newBuilds(), FEED_ADAPTER, req, rsp );
     }
 
 
@@ -159,4 +161,25 @@ public class User extends AbstractModelObject {
     static {
         XSTREAM.alias("user",User.class);
     }
+
+    /**
+     * {@link FeedAdapter} to produce build status summary in the feed.
+     */
+    public static final FeedAdapter<Run> FEED_ADAPTER = new FeedAdapter<Run>() {
+        public String getEntryTitle(Run entry) {
+            return entry+" : "+entry.getBuildStatusSummary().message;
+        }
+
+        public String getEntryUrl(Run entry) {
+            return entry.getUrl();
+        }
+
+        public String getEntryID(Run entry) {
+            return "tag:"+entry.getParent().getName()+':'+entry.getId();
+        }
+
+        public Calendar getEntryTimestamp(Run entry) {
+            return entry.getTimestamp();
+        }
+    };
 }

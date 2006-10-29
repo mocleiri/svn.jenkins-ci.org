@@ -607,11 +607,11 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         /**
          * Is this build worse or better, compared to the previous build?
          */
-        public boolean worse;
+        public boolean isWorse;
         public String message;
 
         public Summary(boolean worse, String message) {
-            this.worse = worse;
+            this.isWorse = worse;
             this.message = message;
         }
     }

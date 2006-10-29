@@ -51,6 +51,18 @@ public class RunList extends ArrayList<Run> {
     }
 
     /**
+     * Filter the list to regression builds only.
+     */
+    public RunList regressionOnly() {
+        for (Iterator<Run> itr = iterator(); itr.hasNext();) {
+            Run r = itr.next();
+            if(!r.getBuildStatusSummary().isWorse)
+                itr.remove();
+        }
+        return this;
+    }
+
+    /**
      * Reduce the size of the list by only leaving relatively new ones.
      */
     public RunList newBuilds() {
