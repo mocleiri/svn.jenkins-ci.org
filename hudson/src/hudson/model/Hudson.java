@@ -149,6 +149,8 @@ public final class Hudson extends JobCollection implements Node {
         load();
         if(slaves==null)    slaves = new ArrayList<Slave>();
         updateComputerList();
+
+        getQueue().load();
     }
 
     /**
@@ -637,6 +639,8 @@ public final class Hudson extends JobCollection implements Node {
 
         if(pluginManager!=null) // be defensive. there could be some ugly timing related issues
             pluginManager.stop();
+
+        getQueue().save();
     }
 
 

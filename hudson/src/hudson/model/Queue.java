@@ -15,6 +15,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.io.PrintWriter;
+import java.io.FileOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 
 /**
  * Build queue.
@@ -100,6 +109,51 @@ public class Queue {
     }
 
     private final Map<Executor,JobOffer> parked = new HashMap<Executor,JobOffer>();
+
+    /**
+     * Loads the queue contents that was {@link #save() saved}.
+     */
+    public synchronized void load() {
+        // write out the contents of the queue
+        try {
+            File queueFile = getQueueFile();
+            if(!queueFile.exists())
+                return;
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(queueFile)));
+            String line;
+            while((line=in.readLine())!=null) {
+                Job j = Hudson.getInstance().getJob(line);
+                if(j instanceof Project)
+                    ((Project)j).scheduleBuild();
+            }
+            in.close();
+            // discard the queue file now that we are done
+            queueFile.delete();
+        } catch(IOException e) {
+            LOGGER.log(Level.WARNING, "Failed to load the queue file "+getQueueFile(),e);
+        }
+    }
+
+    /**
+     * Persists the queue contents to the disk.
+     */
+    public synchronized void save() {
+        // write out the contents of the queue
+        try {
+            PrintWriter w = new PrintWriter(new FileOutputStream(
+                getQueueFile()));
+            for (Item i : getItems())
+                w.println(i.getProject().getName());
+            w.close();
+        } catch(IOException e) {
+            LOGGER.log(Level.WARNING, "Failed to write out the queue file "+getQueueFile(),e);
+        }
+    }
+
+    private File getQueueFile() {
+        return new File(Hudson.getInstance().getRootDir(),"queue.txt");
+    }
 
     /**
      * Schedule a new build for this project.
@@ -421,4 +475,6 @@ public class Queue {
      * Unique number generator
      */
     private int iota=0;
+
+    private static final Logger LOGGER = Logger.getLogger(Queue.class.getName());
 }
