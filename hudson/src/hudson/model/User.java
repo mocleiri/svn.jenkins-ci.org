@@ -1,26 +1,25 @@
 package hudson.model;
 
+import com.thoughtworks.xstream.XStream;
+import hudson.FeedAdapter;
+import hudson.XmlFile;
+import hudson.scm.ChangeLogSet;
+import hudson.util.RunList;
+import hudson.util.XStream2;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
-import java.io.IOException;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Calendar;
-import java.util.logging.Logger;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
-
-import hudson.scm.ChangeLogSet;
-import hudson.XmlFile;
-import hudson.FeedAdapter;
-import hudson.util.XStream2;
-import hudson.util.RunList;
-import com.thoughtworks.xstream.XStream;
+import java.util.logging.Logger;
 
 /**
  * Represents a user.
@@ -31,17 +30,20 @@ public class User extends AbstractModelObject {
 
     private transient final String name;
 
+    private String fullName;
+
     private String description;
 
 
     private User(String name) {
         this.name = name;
+        this.fullName = name;   // fullName defaults to name
 
         // load the other data from disk if it's available
         XmlFile config = getConfigFile();
         try {
             if(config.exists())
-            config.unmarshal(this);
+                config.unmarshal(this);
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Failed to load "+config,e);
         }
@@ -51,6 +53,16 @@ public class User extends AbstractModelObject {
         return "user/"+name;
     }
 
+    /**
+     * Gets the human readable name of this user.
+     * This is configurable by the user.
+     *
+     * @return
+     *      never null.
+     */
+    public String getFullName() {
+        return fullName;
+    }
 
     public String getDescription() {
         return description;
@@ -87,7 +99,7 @@ public class User extends AbstractModelObject {
      * Returns the user name.
      */
     public String getDisplayName() {
-        return name;
+        return getFullName();
     }
 
     /**
@@ -130,6 +142,23 @@ public class User extends AbstractModelObject {
         XmlFile config = getConfigFile();
         config.mkdirs();
         config.write(this);
+    }
+
+    /**
+     * Accepts submission from the configuration page.
+     */
+    public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        if(!Hudson.adminCheck(req,rsp))
+            return;
+
+        req.setCharacterEncoding("UTF-8");
+
+        fullName = req.getParameter("fullName");
+        description = req.getParameter("description");
+
+        save();
+
+        rsp.sendRedirect(".");
     }
 
     public void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
