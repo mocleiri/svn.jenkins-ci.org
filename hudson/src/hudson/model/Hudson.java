@@ -444,10 +444,6 @@ public final class Hudson extends JobCollection implements Node {
         return quietPeriod!=null ? quietPeriod : 5;
     }
 
-    /**
-     * Dummy method that returns "".
-     * used from JSPs.
-     */
     public String getUrl() {
         return "";
     }

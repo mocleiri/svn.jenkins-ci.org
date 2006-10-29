@@ -17,6 +17,7 @@ import java.util.GregorianCalendar;
 
 import hudson.scm.ChangeLogSet.Entry;
 import hudson.Util;
+import hudson.util.RunList;
 
 /**
  * Collection of {@link Job}s.
@@ -44,6 +45,11 @@ public abstract class JobCollection extends AbstractModelObject {
      * Message displayed in the top page. Can be null. Includes HTML.
      */
     public abstract String getDescription();
+
+    /**
+     * Returns the path relative to the context root.
+     */
+    public abstract String getUrl();
 
     public static final class UserInfo implements Comparable<UserInfo> {
         private final User user;
@@ -123,11 +129,16 @@ public abstract class JobCollection extends AbstractModelObject {
      */
     public abstract Job doCreateJob( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException;
 
-    public synchronized void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        RSS.doRssAll(this, getJobs(), req, rsp );
+    public void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        rss(req, rsp, " all builds", new RunList(getJobs()));
     }
-    public synchronized void doRssFailed( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        RSS.doRssFailed(this, getJobs(), req, rsp );
+    public void doRssFailed( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        rss(req, rsp, " failed builds", new RunList(getJobs()).failureOnly());
+    }
+
+    private void rss(StaplerRequest req, StaplerResponse rsp, String suffix, RunList runs) throws IOException, ServletException {
+        RSS.forwardToRss(getDisplayName()+ suffix, getUrl(),
+            runs.newBuilds(), Run.FEED_ADAPTER, req, rsp );
     }
 
     public static final Comparator<JobCollection> SORTER = new Comparator<JobCollection>() {
@@ -135,5 +146,4 @@ public abstract class JobCollection extends AbstractModelObject {
             return lhs.getViewName().compareTo(rhs.getViewName());
         }
     };
-
 }

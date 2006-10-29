@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Calendar;
 import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;
 import java.io.File;
@@ -23,6 +24,10 @@ import java.io.File;
 public class Functions {
     public static boolean isModel(Object o) {
         return o instanceof ModelObject;
+    }
+
+    public static String xsDate(Calendar cal) {
+        return Util.XS_DATETIME_FORMATTER.format(cal.getTime());
     }
 
     public static String getDiffString(int i) {

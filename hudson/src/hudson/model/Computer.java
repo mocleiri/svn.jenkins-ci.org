@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import hudson.util.RunList;
+
 /**
  * Represents a set of {@link Executor}s on the same computer.
  *
@@ -178,12 +180,17 @@ public class Computer implements ModelObject {
 // UI
 //
 //
-    public synchronized void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        RSS.doRssAll(this, getTiedJobs(), req, rsp );
+    public void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        rss(req, rsp, " all builds", new RunList(getTiedJobs()));
     }
-    public synchronized void doRssFailed( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        RSS.doRssFailed(this, getTiedJobs(), req, rsp );
+    public void doRssFailed( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        rss(req, rsp, " failed builds", new RunList(getTiedJobs()).failureOnly());
     }
+    private void rss(StaplerRequest req, StaplerResponse rsp, String suffix, RunList runs) throws IOException, ServletException {
+        RSS.forwardToRss(getDisplayName()+ suffix, getUrl(),
+            runs.newBuilds(), Run.FEED_ADAPTER, req, rsp );
+    }        
+
     public void doToggleOffline( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         if(!Hudson.adminCheck(req,rsp))
             return;

@@ -1,41 +1,42 @@
 package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
+import hudson.ExtensionPoint;
 import hudson.Util;
 import hudson.XmlFile;
-import hudson.ExtensionPoint;
 import hudson.tasks.BuildTrigger;
 import hudson.tasks.LogRotator;
+import hudson.util.ChartUtil;
+import hudson.util.DataSetBuilder;
 import hudson.util.IOException2;
+import hudson.util.RunList;
+import hudson.util.ShiftedCategoryAxis;
 import hudson.util.TextFile;
 import hudson.util.XStream2;
-import hudson.util.DataSetBuilder;
-import hudson.util.ChartUtil;
-import hudson.util.ShiftedCategoryAxis;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.jfree.chart.JFreeChart;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.renderer.category.AreaRenderer;
-import org.jfree.chart.renderer.AreaRendererEndType;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.AreaRendererEndType;
+import org.jfree.chart.renderer.category.AreaRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.ui.RectangleInsets;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.SortedMap;
-import java.awt.Color;
 
 /**
  * A job is an runnable entity under the monitoring of Hudson.
@@ -623,22 +624,16 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         rsp.sendRedirect2(req.getContextPath()+'/'+getUrl()); // send to the new job page
     }
 
-    /**
-     * RSS feed for all runs.
-     */
-    public synchronized void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        List<RunT> runs = getBuilds();
-        RSS.forwardToRss(this,getDisplayName()+" all builds",req,rsp,runs);
+    public void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        rss(req, rsp, " all builds", new RunList(this));
+    }
+    public void doRssFailed( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        rss(req, rsp, " failed builds", new RunList(this).failureOnly());
     }
 
-    /**
-     * RSS feed for failed runs.
-     */
-    public synchronized void doRssFailed( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        List<Run> runs = new ArrayList<Run>();
-        for( Run r=getLastFailedBuild(); r!=null; r=r.getPreviousFailedBuild() )
-            runs.add(r);
-        RSS.forwardToRss(this,getDisplayName()+" all failures",req,rsp,runs);
+    private void rss(StaplerRequest req, StaplerResponse rsp, String suffix, RunList runs) throws IOException, ServletException {
+        RSS.forwardToRss(getDisplayName()+ suffix, getUrl(),
+            runs.newBuilds(), Run.FEED_ADAPTER, req, rsp );
     }
 
     /**

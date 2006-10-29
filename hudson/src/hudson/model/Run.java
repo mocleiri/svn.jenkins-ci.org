@@ -5,6 +5,7 @@ import hudson.CloseProofOutputStream;
 import hudson.ExtensionPoint;
 import hudson.Util;
 import hudson.XmlFile;
+import hudson.FeedAdapter;
 import hudson.tasks.BuildStep;
 import hudson.tasks.LogRotator;
 import hudson.util.CharSpool;
@@ -699,6 +700,27 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     public static final Comparator<Run> ORDER_BY_DATE = new Comparator<Run>() {
         public int compare(Run lhs, Run rhs) {
             return -lhs.getTimestamp().compareTo(rhs.getTimestamp());
+        }
+    };
+
+    /**
+     * {@link FeedAdapter} to produce feed from the summary of this build.
+     */
+    public static final FeedAdapter<Run> FEED_ADAPTER = new FeedAdapter<Run>() {
+        public String getEntryTitle(Run entry) {
+            return entry+" ("+entry.getResult()+")";
+        }
+
+        public String getEntryUrl(Run entry) {
+            return entry.getUrl();
+        }
+
+        public String getEntryID(Run entry) {
+            return "tag:"+entry.getParent().getName()+':'+entry.getId();
+        }
+
+        public Calendar getEntryTimestamp(Run entry) {
+            return entry.getTimestamp();
         }
     };
 }
