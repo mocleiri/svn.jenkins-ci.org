@@ -8,6 +8,7 @@ import hudson.model.Descriptor;
 import hudson.model.Result;
 import hudson.model.User;
 import hudson.model.UserPropertyDescriptor;
+import hudson.scm.ChangeLogSet.Entry;
 import org.apache.tools.ant.types.selectors.SelectorUtils;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -17,6 +18,7 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.Address;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +27,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,11 +50,19 @@ public class Mailer extends Publisher {
     private static final int MAX_LOG_LINES = 250;
 
     /**
-     * Whitespace-separated list of e-mail addresses.
+     * Whitespace-separated list of e-mail addresses that represent recipients.
      */
-    private String recipients;
+    public String recipients;
 
-    private boolean dontNotifyEveryUnstableBuild;
+    /**
+     * If true, only the first unstable build will be reported.
+     */
+    public boolean dontNotifyEveryUnstableBuild;
+
+    /**
+     * If true, individuals will receive e-mails regarding who broke the build.
+     */
+    public boolean sendToIndividuals;
 
     // TODO: left so that XStream won't get angry. figure out how to set the error handling behavior
     // in XStream.
@@ -58,24 +70,14 @@ public class Mailer extends Publisher {
     private transient String subject;
     private transient boolean failureOnly;
 
-    public Mailer(String recipients, boolean dontNotifyEveryUnstableBuild) {
-        this.recipients = recipients;
-        this.dontNotifyEveryUnstableBuild = dontNotifyEveryUnstableBuild;
-    }
-
-    public String getRecipients() {
-        return recipients;
-    }
-
-    public boolean isDontNotifyEveryUnstableBuild() {
-        return dontNotifyEveryUnstableBuild;
-    }
-
     public boolean perform(Build build, Launcher launcher, BuildListener listener) {
         try {
             MimeMessage mail = getMail(build);
             if(mail!=null) {
-                listener.getLogger().println("Sending e-mails to "+recipients);
+                StringBuffer buf = new StringBuffer("Sending e-mails to ");
+                for (Address a : mail.getAllRecipients())
+                    buf.append(' ').append(a);
+                listener.getLogger().println(buf);
                 Transport.send(mail);
             }
         } catch (MessagingException e) {
@@ -114,7 +116,7 @@ public class Mailer extends Publisher {
     }
 
     private MimeMessage createBackToNormalMail(Build build, String subject) throws MessagingException {
-        MimeMessage msg = createEmptyMail();
+        MimeMessage msg = createEmptyMail(build);
 
         msg.setSubject(getSubject(build,"Hudson build is back to "+subject +": "));
         StringBuffer buf = new StringBuffer();
@@ -125,7 +127,7 @@ public class Mailer extends Publisher {
     }
 
     private MimeMessage createUnstableMail(Build build) throws MessagingException {
-        MimeMessage msg = createEmptyMail();
+        MimeMessage msg = createEmptyMail(build);
 
         msg.setSubject(getSubject(build,"Hudson build became unstable: "));
         StringBuffer buf = new StringBuffer();
@@ -143,7 +145,7 @@ public class Mailer extends Publisher {
     }
 
     private MimeMessage createFailureMail(Build build) throws MessagingException {
-        MimeMessage msg = createEmptyMail();
+        MimeMessage msg = createEmptyMail(build);
 
         msg.setSubject(getSubject(build, "Build failed in Hudson: "));
 
@@ -215,7 +217,7 @@ public class Mailer extends Publisher {
         return msg;
     }
 
-    private MimeMessage createEmptyMail() throws MessagingException {
+    private MimeMessage createEmptyMail(Build build) throws MessagingException {
         MimeMessage msg = new MimeMessage(DESCRIPTOR.createSession());
         // TODO: I'd like to put the URL to the page in here,
         // but how do I obtain that?
@@ -226,6 +228,14 @@ public class Mailer extends Publisher {
         StringTokenizer tokens = new StringTokenizer(recipients);
         while(tokens.hasMoreTokens())
             rcp.add(new InternetAddress(tokens.nextToken()));
+        if(sendToIndividuals) {
+            Set<User> users = new HashSet<User>();
+            for (Entry change : build.getChangeSet()) {
+                User a = change.getAuthor();
+                if(users.add(a))
+                    rcp.add(new InternetAddress(a.getProperty(UserProperty.class).getAddress()));
+            }
+        }
         msg.setRecipients(Message.RecipientType.TO, rcp.toArray(new InternetAddress[rcp.size()]));
         return msg;
     }
@@ -348,10 +358,9 @@ public class Mailer extends Publisher {
         }
 
         public Publisher newInstance(StaplerRequest req) {
-            return new Mailer(
-                req.getParameter("mailer_recipients"),
-                req.getParameter("mailer_not_every_unstable")!=null
-            );
+            Mailer m = new Mailer();
+            req.bindParameters(m,"mailer_");
+            return m;
         }
     }
 
