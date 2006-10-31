@@ -21,7 +21,9 @@ public class StreamBuildListener implements BuildListener {
 
     public StreamBuildListener(PrintWriter w) {
         this.w = w;
-        this.ps = new PrintStream(new WriterOutputStream(w));
+        // unless we auto-flash, PrintStream will use BufferedOutputStream internally,
+        // and break ordering
+        this.ps = new PrintStream(new WriterOutputStream(w),true);
     }
 
     public void started() {
