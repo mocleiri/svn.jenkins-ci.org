@@ -268,7 +268,7 @@ public class Project extends Job<Project,Build> {
         return builds.getView();
     }
 
-    public void removeRun(Run run) {
+    public void removeRun(Build run) {
         this.builds.remove(run);
     }
 

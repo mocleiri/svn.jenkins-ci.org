@@ -85,7 +85,7 @@ public abstract class ViewJob<JobT extends ViewJob<JobT,RunT>, RunT extends Run<
         return runs;
     }
 
-    public void removeRun(Run run) {
+    public void removeRun(RunT run) {
         // reload the info next time
         nextUpdate = 0;
     }

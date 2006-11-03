@@ -448,7 +448,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
 
         Util.deleteRecursive(tmp);
 
-        getParent().removeRun(this);
+        getParent().removeRun((RunT)this);
     }
 
     protected static interface Runner {

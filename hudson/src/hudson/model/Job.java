@@ -363,7 +363,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      * The files are deleted already. So all the callee needs to do
      * is to remove a reference from this {@link Job}.
      */
-    protected abstract void removeRun(Run run);
+    protected abstract void removeRun(RunT run);
 
     /**
      * Returns the last build.
