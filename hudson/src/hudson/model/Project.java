@@ -26,7 +26,6 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -48,11 +47,8 @@ public class Project extends Job<Project,Build> {
 
     /**
      * All the builds keyed by their build number.
-     *
-     * This is read-only map, and use copy-on-write for updates.
      */
-    private transient volatile SortedMap<Integer,Build> builds =
-        new TreeMap<Integer,Build>(reverseComparator);
+    private transient final RunMap<Build> builds = new RunMap<Build>();
 
     private SCM scm = new NullSCM();
 
@@ -162,7 +158,7 @@ public class Project extends Job<Project,Build> {
 
     protected void onLoad(Hudson root, String name) throws IOException {
         super.onLoad(root, name);
-        TreeMap<Integer,Build> builds = new TreeMap<Integer,Build>(reverseComparator);
+        TreeMap<Integer,Build> builds = new TreeMap<Integer,Build>(RunMap.COMPARATOR);
 
         if(triggers==null)
             // it didn't exist in < 1.28
@@ -176,7 +172,6 @@ public class Project extends Job<Project,Build> {
                 return new File(dir,name).isDirectory();
             }
         });
-        Arrays.sort(buildDirs);
 
         for( String build : buildDirs ) {
             File d = new File(buildDir,build);
@@ -192,7 +187,7 @@ public class Project extends Job<Project,Build> {
             }
         }
 
-        this.builds = Collections.unmodifiableSortedMap(builds);
+        this.builds.reset(builds);
 
         for (Trigger t : triggers)
             t.start(this);
@@ -270,31 +265,19 @@ public class Project extends Job<Project,Build> {
     }
 
     public SortedMap<Integer, ? extends Build> _getRuns() {
-        return builds;
+        return builds.getView();
     }
 
-    // needs to be synchronized so that two removeRun serializes each other
-    public synchronized void removeRun(Run run) {
-        run.getNextBuild().previousBuild = null;
-
-        // copy-on-write update
-        SortedMap<Integer,Build> builds = new TreeMap<Integer,Build>(this.builds);
-        builds.remove(run.getNumber());
-        this.builds = Collections.unmodifiableSortedMap(builds);
+    public void removeRun(Run run) {
+        this.builds.remove(run);
     }
 
     /**
      * Creates a new build of this project for immediate execution.
-     * Needs to be synchronized to serialize two {@link #newBuild()} invocations.
      */
-    public synchronized Build newBuild() throws IOException {
+    public Build newBuild() throws IOException {
         Build lastBuild = new Build(this);
-
-        // copy-on-write update
-        SortedMap<Integer,Build> builds = new TreeMap<Integer,Build>(this.builds);
-        builds.put(lastBuild.getNumber(),lastBuild);
-        this.builds = Collections.unmodifiableSortedMap(builds);
-
+        builds.put(lastBuild);
         return lastBuild;
     }
 

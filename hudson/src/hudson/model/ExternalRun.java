@@ -20,8 +20,8 @@ public class ExternalRun extends Run<ExternalJob,ExternalRun> {
     /**
      * Loads a run from a log file.
      */
-    ExternalRun(ExternalJob owner, File runDir, ExternalRun prevRun ) throws IOException {
-        super(owner,runDir,prevRun);
+    ExternalRun(ExternalJob owner, File runDir) throws IOException {
+        super(owner,runDir);
     }
 
     /**

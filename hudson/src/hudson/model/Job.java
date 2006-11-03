@@ -151,7 +151,7 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     /**
      * Allocates a new buildCommand number.
      */
-    public int assignBuildNumber() throws IOException {
+    public synchronized int assignBuildNumber() throws IOException {
         int r = nextBuildNumber++;
         saveNextBuildNumber();
         return r;
@@ -446,12 +446,6 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         job.onLoad(root,dir.getName());
         return job;
     }
-
-    protected static final Comparator<Comparable> reverseComparator = new Comparator<Comparable>() {
-        public int compare(Comparable o1, Comparable o2) {
-            return -o1.compareTo(o2);
-        }
-    };
 
 
 

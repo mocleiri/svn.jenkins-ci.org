@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.net.URL;
-import java.net.MalformedURLException;
 
 import JPRT.shared.transported.status.JobStatus;
 import JPRT.shared.transported.status.BuildTargetStatus;
@@ -35,7 +34,7 @@ public class JPRTRun extends Run<JPRTJob,JPRTRun> {
     private final JobID jprtId;
 
     public JPRTRun(JPRTJob job, JPRTRun prevBuild, File archiveDir) throws ParseException {
-        super(job, prevBuild, getTimestamp(archiveDir));
+        super(job, getTimestamp(archiveDir));
         // TODO: think about a way to give a consistent build number
         this.number = prevBuild!=null ? prevBuild.number+1 : 1;
         this.archiveDir = archiveDir;

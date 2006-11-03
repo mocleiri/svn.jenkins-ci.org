@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +28,7 @@ public class ExternalJob extends ViewJob<ExternalJob,ExternalRun> {
 
     @Override
     protected TreeMap<Integer,ExternalRun> reload() {
-        TreeMap<Integer,ExternalRun> runs = new TreeMap<Integer,ExternalRun>(reverseComparator);
+        TreeMap<Integer,ExternalRun> runs = new TreeMap<Integer,ExternalRun>();
 
         File[] subdirs = getBuildDir().listFiles(new FileFilter() {
             public boolean accept(File subdir) {
@@ -39,13 +36,9 @@ public class ExternalJob extends ViewJob<ExternalJob,ExternalRun> {
             }
         });
 
-        Arrays.sort(subdirs,fileComparator);
-        ExternalRun lastBuild = null;
-
         for( File dir : subdirs ) {
             try {
-                ExternalRun b = new ExternalRun(this,dir,lastBuild);
-                lastBuild = b;
+                ExternalRun b = new ExternalRun(this,dir);
                 runs.put( b.getNumber(), b );
             } catch (IOException e) {
                 logger.log(Level.WARNING,"Unable to load "+dir,e);
@@ -68,11 +61,9 @@ public class ExternalJob extends ViewJob<ExternalJob,ExternalRun> {
      *
      * Needs to be synchronized so that two {@link #newBuild()} invocations serialize each other.
      */
-    public synchronized ExternalRun newBuild() throws IOException {
+    public ExternalRun newBuild() throws IOException {
         ExternalRun run = new ExternalRun(this);
-        SortedMap<Integer,ExternalRun> runs = new TreeMap<Integer,ExternalRun>(_getRuns());
-        runs.put(run.getNumber(),run);
-        this.runs = Collections.unmodifiableSortedMap(runs); // atomically replace the map with new one
+        runs.put(run);
         return run;
     }
 
@@ -92,12 +83,6 @@ public class ExternalJob extends ViewJob<ExternalJob,ExternalRun> {
         rsp.setStatus(HttpServletResponse.SC_OK);
     }
 
-
-    private static final Comparator<File> fileComparator = new Comparator<File>() {
-        public int compare(File lhs, File rhs) {
-            return lhs.getName().compareTo(rhs.getName());
-        }
-    };
 
     private static final Logger logger = Logger.getLogger(ExternalJob.class.getName());
 

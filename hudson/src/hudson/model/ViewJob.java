@@ -4,11 +4,10 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
-import java.util.Collections;
+import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.io.IOException;
 
 /**
  * {@link Job} that monitors activities that happen outside Hudson,
@@ -29,9 +28,11 @@ public abstract class ViewJob<JobT extends ViewJob<JobT,RunT>, RunT extends Run<
     private transient long nextUpdate = 0;
 
     /**
-     * Read-only map of all {@link Run}s. Copy-on-write semantics.
+     * All {@link Run}s. Copy-on-write semantics.
      */
-    protected transient volatile SortedMap<Integer,RunT> runs = null;
+    protected transient final RunMap<RunT> runs = new RunMap<RunT>();
+
+    private transient boolean notLoaded = true;
 
     /**
      * If the reloading of runs are in progress (in another thread,
@@ -60,10 +61,12 @@ public abstract class ViewJob<JobT extends ViewJob<JobT,RunT>, RunT extends Run<
     }
 
     protected SortedMap<Integer,RunT> _getRuns() {
-        if(runs==null) {
+        if(notLoaded) {
+            // if none is loaded yet, do so immediately.
             synchronized(this) {
-                if(runs==null) {
-                    _reload();   // if none is loaded yet, do so immediately
+                if(notLoaded) {
+                    notLoaded = false;
+                    _reload();   
                 }
             }
         }
@@ -89,8 +92,7 @@ public abstract class ViewJob<JobT extends ViewJob<JobT,RunT>, RunT extends Run<
 
     private void _reload() {
         try {
-            // replace the list with new one atomically.
-            this.runs = Collections.unmodifiableSortedMap(reload());
+            this.runs.reset(reload());
         } finally {
             reloadingInProgress = false;
             nextUpdate = System.currentTimeMillis()+1000;

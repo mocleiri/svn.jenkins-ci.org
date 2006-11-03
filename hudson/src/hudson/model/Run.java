@@ -61,9 +61,12 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
 
     /**
      * Previous build. Can be null.
+     * These two fields are maintained and updated by {@link RunMap}.
      */
     protected volatile transient RunT previousBuild;
-
+    /**
+     * Next build. Can be null.
+     */
     protected volatile transient RunT nextBuild;
 
     /**
@@ -109,24 +112,15 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      * Creates a new {@link Run}.
      */
     protected Run(JobT job) throws IOException {
-        this(job,job.getLastBuild());
+        this(job, new GregorianCalendar());
         this.number = project.assignBuildNumber();
-        if(previousBuild!=null)
-            previousBuild.nextBuild = (RunT)this;
-    }
-
-    private Run(JobT job,RunT prevBuild) {
-        this(job,prevBuild,new GregorianCalendar());
     }
 
     /**
      * Constructor for creating a {@link Run} that represents the external state.
      */
-    protected Run(JobT job,RunT prevBuild, Calendar timestamp) {
+    protected Run(JobT job, Calendar timestamp) {
         this.project = job;
-        this.previousBuild = prevBuild;
-        if(prevBuild!=null)
-            prevBuild.nextBuild = (RunT)this;
         this.timestamp = timestamp;
         this.state = State.NOT_STARTED;
     }
@@ -134,10 +128,8 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     /**
      * Loads a run from a log file.
      */
-    protected Run(JobT project, File buildDir, RunT prevBuild ) throws IOException {
-        this(project,prevBuild);
-        if(prevBuild!=null)
-            prevBuild.nextBuild = (RunT)this;
+    protected Run(JobT project, File buildDir) throws IOException {
+        this(project, new GregorianCalendar());
         try {
             this.timestamp.setTime(ID_FORMATTER.parse(buildDir.getName()));
         } catch (ParseException e) {
