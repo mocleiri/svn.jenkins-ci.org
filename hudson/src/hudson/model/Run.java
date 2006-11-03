@@ -678,7 +678,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     /**
      * Serves the artifacts.
      */
-    public synchronized void doArtifact( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+    public void doArtifact( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         serveFile(req, rsp, getArtifactsDir(), "package.gif", true);
     }
 
