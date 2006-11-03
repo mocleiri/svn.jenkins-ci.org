@@ -2,22 +2,23 @@ package hudson.plugins.promoted_builds;
 
 import hudson.model.Run;
 
-import java.io.IOException;
 import java.io.File;
-import java.util.Calendar;
+import java.io.IOException;
 
 /**
  * @author Kohsuke Kawaguchi
  */
 public class PromotedBuild extends Run<PromotedJob, PromotedBuild> {
+    /**
+     * Creates a new promoted build and assigns an unique number.
+     */
     protected PromotedBuild(PromotedJob job) throws IOException {
         super(job);
     }
 
-    protected PromotedBuild(PromotedJob job, Calendar timestamp) {
-        super(job, timestamp);
-    }
-
+    /**
+     * Loads a job from the file.
+     */
     protected PromotedBuild(PromotedJob project, File buildDir) throws IOException {
         super(project, buildDir);
     }
