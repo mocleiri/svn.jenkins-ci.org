@@ -5,7 +5,10 @@ import hudson.model.Hudson;
 import hudson.model.Job;
 import hudson.model.JobDescriptor;
 import hudson.model.RunMap;
+import hudson.model.RunMap.Constructor;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.SortedMap;
 import java.util.logging.Logger;
 
@@ -21,6 +24,15 @@ public class PromotedJob extends Job<PromotedJob, PromotedBuild> {
 
     public PromotedJob(Hudson parent, String name) {
         super(parent, name);
+    }
+
+
+    protected void onLoad(Hudson root, String name) throws IOException {
+        this.builds.load(getBuildDir(),new Constructor<PromotedBuild>() {
+            public PromotedBuild create(File dir) throws IOException {
+                return new PromotedBuild(PromotedJob.this,dir);
+            }
+        });
     }
 
     public boolean isBuildable() {

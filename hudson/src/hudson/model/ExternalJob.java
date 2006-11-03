@@ -1,17 +1,13 @@
 package hudson.model;
 
-import hudson.Util;
+import hudson.model.RunMap.Constructor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.TreeMap;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -27,32 +23,12 @@ public class ExternalJob extends ViewJob<ExternalJob,ExternalRun> {
     }
 
     @Override
-    protected TreeMap<Integer,ExternalRun> reload() {
-        TreeMap<Integer,ExternalRun> runs = new TreeMap<Integer,ExternalRun>();
-
-        File[] subdirs = getBuildDir().listFiles(new FileFilter() {
-            public boolean accept(File subdir) {
-                return subdir.isDirectory();
+    protected void reload() {
+        this.runs.load(getBuildDir(),new Constructor<ExternalRun>() {
+            public ExternalRun create(File dir) throws IOException {
+                return new ExternalRun(ExternalJob.this,dir);
             }
         });
-
-        for( File dir : subdirs ) {
-            try {
-                ExternalRun b = new ExternalRun(this,dir);
-                runs.put( b.getNumber(), b );
-            } catch (IOException e) {
-                logger.log(Level.WARNING,"Unable to load "+dir,e);
-                e.printStackTrace();
-                try {
-                    Util.deleteRecursive(dir);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                    // but ignore
-                }
-            }
-        }
-
-        return runs;
     }
 
 

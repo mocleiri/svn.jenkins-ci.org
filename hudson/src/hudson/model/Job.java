@@ -339,7 +339,16 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         return new File(root,"config.xml");
     }
 
-    File getBuildDir() {
+    /**
+     * Directory for storing {@link Run} records.
+     * <p>
+     * Some {@link Job}s may not have backing data store for {@link Run}s,
+     * but those {@link Job}s that use file system for storing data
+     * should use this directory for consistency.
+     *
+     * @see RunMap
+     */
+    protected File getBuildDir() {
         return new File(root,"builds");
     }
 

@@ -7,6 +7,9 @@ import java.util.TreeMap;
 import java.util.Comparator;
 import java.util.Collections;
 import java.util.Map;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
 
 /**
  * {@link Map} from build number to {@link Run}.
@@ -136,4 +139,39 @@ public final class RunMap<R extends Run<?,R>> extends AbstractMap<Integer,R> imp
             return -o1.compareTo(o2);
         }
     };
+
+    /**
+     * {@link Run} factory.
+     */
+    public interface Constructor<R extends Run<?,R>> {
+        R create(File dir) throws IOException;
+    }
+
+    /**
+     * Fills in {@link RunMap} by loading build records from the file system.
+     */
+    public synchronized void load(File buildDir, Constructor<R> cons) {
+        TreeMap<Integer,R> builds = new TreeMap<Integer,R>(RunMap.COMPARATOR);
+        buildDir.mkdirs();
+        String[] buildDirs = buildDir.list(new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return new File(dir,name).isDirectory();
+            }
+        });
+
+        for( String build : buildDirs ) {
+            File d = new File(buildDir,build);
+            if(new File(d,"build.xml").exists()) {
+                // if the build result file isn't in the directory, ignore it.
+                try {
+                    R b = cons.create(d);
+                    builds.put( b.getNumber(), b );
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        reset(builds);
+    }
 }

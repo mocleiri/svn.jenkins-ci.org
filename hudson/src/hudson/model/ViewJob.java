@@ -92,7 +92,7 @@ public abstract class ViewJob<JobT extends ViewJob<JobT,RunT>, RunT extends Run<
 
     private void _reload() {
         try {
-            this.runs.reset(reload());
+            reload();
         } finally {
             reloadingInProgress = false;
             nextUpdate = System.currentTimeMillis()+1000;
@@ -101,8 +101,11 @@ public abstract class ViewJob<JobT extends ViewJob<JobT,RunT>, RunT extends Run<
 
     /**
      * Reloads the list of {@link Run}s. This operation can take a long time.
+     *
+     * <p>
+     * The loaded {@link Run}s should be set to {@link #runs}.
      */
-    protected abstract TreeMap<Integer,RunT> reload();
+    protected abstract void reload();
 
     public void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         super.doConfigSubmit(req,rsp);

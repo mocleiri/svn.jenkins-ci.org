@@ -1,6 +1,5 @@
 package hudson.plugins.promoted_builds;
 
-import hudson.tasks.BuildStep;
 import hudson.model.Jobs;
 
 /**

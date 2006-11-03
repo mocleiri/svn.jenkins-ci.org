@@ -66,7 +66,7 @@ public class JPRTJob extends ViewJob<JPRTJob,JPRTRun> {
         GlobalProperties.setProperty("JPRT.archive.url",archiveUrl);
     }
 
-    protected TreeMap<Integer,JPRTRun> reload() {
+    protected void reload() {
         prepareToTalkToJPRT();
         // TODO: what about the queue and on-going builds?
 
@@ -77,25 +77,25 @@ public class JPRTJob extends ViewJob<JPRTJob,JPRTRun> {
                 return f.isDirectory() && f.getName().length()>18;
             }
         });
-        if(dirs==null)     return runs;
+        if(dirs!=null) {
+            Arrays.sort(dirs,new Comparator<File>() {
+                public int compare(File lhs, File rhs) {
+                    return lhs.getName().compareTo(rhs.getName());
+                }
+            });
 
-        Arrays.sort(dirs,new Comparator<File>() {
-            public int compare(File lhs, File rhs) {
-                return lhs.getName().compareTo(rhs.getName());
-            }
-        });
-
-        JPRTRun last = null;
-        for (File dir : dirs) {
-            try {
-                last = new JPRTRun(this,last,dir);
-                runs.put( last.getNumber(), last );
-            } catch (ParseException e) {
-                logger.log(Level.WARNING,"Unable to load "+dir,e);
+            JPRTRun last = null;
+            for (File dir : dirs) {
+                try {
+                    last = new JPRTRun(this,last,dir);
+                    runs.put( last.getNumber(), last );
+                } catch (ParseException e) {
+                    logger.log(Level.WARNING,"Unable to load "+dir,e);
+                }
             }
         }
 
-        return runs;
+        this.runs.reset(runs);
     }
 
     /**

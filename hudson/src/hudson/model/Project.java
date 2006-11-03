@@ -4,6 +4,7 @@ import hudson.FilePath;
 import hudson.Launcher;
 import hudson.model.Descriptor.FormException;
 import hudson.model.Fingerprint.RangeSet;
+import hudson.model.RunMap.Constructor;
 import hudson.scm.NullSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMS;
@@ -23,7 +24,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -163,30 +163,11 @@ public class Project extends Job<Project,Build> {
             // it didn't exist in < 1.28
             triggers = new Vector<Trigger>();
 
-        // load builds
-        TreeMap<Integer,Build> builds = new TreeMap<Integer,Build>(RunMap.COMPARATOR);
-        File buildDir = getBuildDir();
-        buildDir.mkdirs();
-        String[] buildDirs = buildDir.list(new FilenameFilter() {
-            public boolean accept(File dir, String name) {
-                return new File(dir,name).isDirectory();
+        this.builds.load(getBuildDir(),new Constructor<Build>() {
+            public Build create(File dir) throws IOException {
+                return new Build(Project.this,dir);
             }
         });
-
-        for( String build : buildDirs ) {
-            File d = new File(buildDir,build);
-            if(new File(d,"build.xml").exists()) {
-                // if the build result file isn't in the directory, ignore it.
-                try {
-                    Build b = new Build(this,d);
-                    builds.put( b.getNumber(), b );
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        this.builds.reset(builds);
 
         for (Trigger t : triggers)
             t.start(this);
