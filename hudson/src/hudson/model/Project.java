@@ -48,7 +48,7 @@ public class Project extends Job<Project,Build> {
     /**
      * All the builds keyed by their build number.
      */
-    private transient final RunMap<Build> builds = new RunMap<Build>();
+    private transient /*almost final*/ RunMap<Build> builds = new RunMap<Build>();
 
     private SCM scm = new NullSCM();
 
@@ -163,6 +163,7 @@ public class Project extends Job<Project,Build> {
             // it didn't exist in < 1.28
             triggers = new Vector<Trigger>();
 
+        this.builds = new RunMap<Build>();
         this.builds.load(this,new Constructor<Build>() {
             public Build create(File dir) throws IOException {
                 return new Build(Project.this,dir);

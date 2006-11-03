@@ -22,7 +22,7 @@ public class PromotedJob extends Job<PromotedJob, PromotedBuild> {
     /**
      * All the promoted builds keyed by their build number.
      */
-    private transient final RunMap<PromotedBuild> builds = new RunMap<PromotedBuild>();
+    private transient /*almost final*/ RunMap<PromotedBuild> builds = new RunMap<PromotedBuild>();
 
     public PromotedJob(Hudson parent, String name) {
         super(parent, name);
@@ -30,6 +30,7 @@ public class PromotedJob extends Job<PromotedJob, PromotedBuild> {
 
 
     protected void onLoad(Hudson root, String name) throws IOException {
+        this.builds = new RunMap<PromotedBuild>();
         this.builds.load(this,new Constructor<PromotedBuild>() {
             public PromotedBuild create(File dir) throws IOException {
                 return new PromotedBuild(PromotedJob.this,dir);

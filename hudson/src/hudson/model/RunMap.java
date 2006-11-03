@@ -65,17 +65,17 @@ public final class RunMap<R extends Run<?,R>> extends AbstractMap<Integer,R> imp
         SortedMap<Integer,R> head = m.headMap(key);
         if(!head.isEmpty()) {
             R prev = m.get(head.lastKey());
-            r.nextBuild = prev.nextBuild;
-            r.previousBuild = prev;
-            if(r.nextBuild!=null)
-                r.nextBuild.previousBuild = r;
-            prev.nextBuild=r;
+            value.nextBuild = prev.nextBuild;
+            value.previousBuild = prev;
+            if(value.nextBuild!=null)
+                value.nextBuild.previousBuild = value;
+            prev.nextBuild=value;
         } else {
             if(!m.isEmpty()) {
                 R first = m.get(m.firstKey());
-                r.nextBuild = first;
-                r.previousBuild = null;
-                first.previousBuild = r;
+                value.nextBuild = first;
+                value.previousBuild = null;
+                first.previousBuild = value;
             }
         }
         return r;
