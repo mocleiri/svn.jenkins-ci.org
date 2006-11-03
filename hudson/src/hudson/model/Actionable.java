@@ -13,7 +13,7 @@ import java.util.Vector;
  */
 public abstract class Actionable extends AbstractModelObject {
     /**
-     * Actions contributed to this run.
+     * Actions contributed to this model object.
      */
     private List<Action> actions;
 
