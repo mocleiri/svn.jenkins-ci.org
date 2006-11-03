@@ -117,7 +117,8 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     }
 
     /**
-     * Constructor for creating a {@link Run} that represents the external state.
+     * Constructor for creating a {@link Run} object in
+     * an arbitrary state.
      */
     protected Run(JobT job, Calendar timestamp) {
         this.project = job;

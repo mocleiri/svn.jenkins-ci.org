@@ -65,7 +65,7 @@ public final class Build extends Run<Project,Build> implements Runnable {
     /**
      * Loads a build from a log file.
      */
-    Build(Project project, File buildDir, Build prevBuild ) throws IOException {
+    Build(Project project, File buildDir) throws IOException {
         super(project,buildDir);
     }
 

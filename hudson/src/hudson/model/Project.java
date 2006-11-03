@@ -158,13 +158,13 @@ public class Project extends Job<Project,Build> {
 
     protected void onLoad(Hudson root, String name) throws IOException {
         super.onLoad(root, name);
-        TreeMap<Integer,Build> builds = new TreeMap<Integer,Build>(RunMap.COMPARATOR);
 
         if(triggers==null)
             // it didn't exist in < 1.28
             triggers = new Vector<Trigger>();
 
         // load builds
+        TreeMap<Integer,Build> builds = new TreeMap<Integer,Build>(RunMap.COMPARATOR);
         File buildDir = getBuildDir();
         buildDir.mkdirs();
         String[] buildDirs = buildDir.list(new FilenameFilter() {
@@ -178,8 +178,7 @@ public class Project extends Job<Project,Build> {
             if(new File(d,"build.xml").exists()) {
                 // if the build result file isn't in the directory, ignore it.
                 try {
-                    Build lb = builds.isEmpty() ? null : builds.get(builds.firstKey());
-                    Build b = new Build(this,d,lb);
+                    Build b = new Build(this,d);
                     builds.put( b.getNumber(), b );
                 } catch (IOException e) {
                     e.printStackTrace();
