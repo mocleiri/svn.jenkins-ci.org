@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.SortedMap;
-import java.util.TreeMap;
 
 /**
  * {@link Job} that monitors activities that happen outside Hudson,
@@ -30,7 +29,7 @@ public abstract class ViewJob<JobT extends ViewJob<JobT,RunT>, RunT extends Run<
     /**
      * All {@link Run}s. Copy-on-write semantics.
      */
-    protected transient final RunMap<RunT> runs = new RunMap<RunT>();
+    protected transient /*almost final*/ RunMap<RunT> runs = new RunMap<RunT>();
 
     private transient boolean notLoaded = true;
 
@@ -61,9 +60,11 @@ public abstract class ViewJob<JobT extends ViewJob<JobT,RunT>, RunT extends Run<
     }
 
     protected SortedMap<Integer,RunT> _getRuns() {
-        if(notLoaded) {
+        if(notLoaded || runs==null) {
             // if none is loaded yet, do so immediately.
             synchronized(this) {
+                if(runs==null)
+                    runs = new RunMap<RunT>();
                 if(notLoaded) {
                     notLoaded = false;
                     _reload();   
