@@ -149,9 +149,15 @@ public final class RunMap<R extends Run<?,R>> extends AbstractMap<Integer,R> imp
 
     /**
      * Fills in {@link RunMap} by loading build records from the file system.
+     *
+     * @param job
+     *      Job that owns this map.
+     * @param cons
+     *      Used to create new instance of {@link Run}.
      */
-    public synchronized void load(File buildDir, Constructor<R> cons) {
+    public synchronized void load(Job job, Constructor<R> cons) {
         TreeMap<Integer,R> builds = new TreeMap<Integer,R>(RunMap.COMPARATOR);
+        File buildDir = job.getBuildDir();
         buildDir.mkdirs();
         String[] buildDirs = buildDir.list(new FilenameFilter() {
             public boolean accept(File dir, String name) {

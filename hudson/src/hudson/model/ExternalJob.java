@@ -24,7 +24,7 @@ public class ExternalJob extends ViewJob<ExternalJob,ExternalRun> {
 
     @Override
     protected void reload() {
-        this.runs.load(getBuildDir(),new Constructor<ExternalRun>() {
+        this.runs.load(this,new Constructor<ExternalRun>() {
             public ExternalRun create(File dir) throws IOException {
                 return new ExternalRun(ExternalJob.this,dir);
             }

@@ -13,7 +13,9 @@ import java.util.SortedMap;
 import java.util.logging.Logger;
 
 /**
- * @author Kohsuke Kawaguchi
+ * {@link Job} used for remembering key builds of another {@link Job}
+ * (AKA promoted builds.)
+ *
  */
 public class PromotedJob extends Job<PromotedJob, PromotedBuild> {
 
@@ -28,7 +30,7 @@ public class PromotedJob extends Job<PromotedJob, PromotedBuild> {
 
 
     protected void onLoad(Hudson root, String name) throws IOException {
-        this.builds.load(getBuildDir(),new Constructor<PromotedBuild>() {
+        this.builds.load(this,new Constructor<PromotedBuild>() {
             public PromotedBuild create(File dir) throws IOException {
                 return new PromotedBuild(PromotedJob.this,dir);
             }

@@ -6,9 +6,10 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * @author Kohsuke Kawaguchi
+ * {@link Run} for {@link PromotedJob}.
+ *
  */
-public class PromotedBuild extends Run<PromotedJob, PromotedBuild> {
+public class PromotedBuild extends Run<PromotedJob,PromotedBuild> {
     /**
      * Creates a new promoted build and assigns an unique number.
      */

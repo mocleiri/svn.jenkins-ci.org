@@ -163,7 +163,7 @@ public class Project extends Job<Project,Build> {
             // it didn't exist in < 1.28
             triggers = new Vector<Trigger>();
 
-        this.builds.load(getBuildDir(),new Constructor<Build>() {
+        this.builds.load(this,new Constructor<Build>() {
             public Build create(File dir) throws IOException {
                 return new Build(Project.this,dir);
             }
