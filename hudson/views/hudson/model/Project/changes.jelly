@@ -1,0 +1,34 @@
+<!--
+  Displays the console output
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+  <l:layout title="${it.name} Changes">
+    <st:include page="sidepanel.jelly" />
+    <l:main-panel>
+      <t:buildCaption>Recent Changes</t:buildCaption>
+      <j:forEach var="b" items="${it.builds}">
+        <h2><a href="${b.number}/changes">
+          ${b.displayName} :
+          <i:formatDate value="${b.timestamp.time}" type="both" dateStyle="medium" timeStyle="medium"/>
+        </a></h2>
+
+        <j:choose>
+          <j:when test="${!b.changeSet.iterator().hasNext()}">
+            <div>(no changes)</div>
+          </j:when>
+          <j:otherwise>
+            <ol>
+              <j:forEach var="c" items="${b.changeSet.iterator()}">
+                <li>
+                  <st:out value="${c.msg}" />
+                  by
+                  <a href="${rootURL}/${c.author.url}/">${c.author}</a>
+                </li>
+              </j:forEach>
+            </ol>
+          </j:otherwise>
+        </j:choose>
+      </j:forEach>
+    </l:main-panel>
+  </l:layout>
+</j:jelly>
