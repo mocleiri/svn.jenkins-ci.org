@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.SortedMap;
+import java.util.Collections;
 
 /**
  * A job is an runnable entity under the monitoring of Hudson.
@@ -295,6 +296,13 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      */
     public List<RunT> getBuilds() {
         return new ArrayList<RunT>(_getRuns().values());
+    }
+
+    /**
+     * Gets all the builds in a map.
+     */
+    public SortedMap<Integer,RunT> getBuildsAsMap() {
+        return Collections.unmodifiableSortedMap(_getRuns());
     }
 
     /**

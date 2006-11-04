@@ -9,6 +9,7 @@ import hudson.model.Fingerprint;
 import hudson.model.Hudson;
 import hudson.model.Project;
 import hudson.model.Result;
+import hudson.model.Fingerprint.BuildPtr;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.types.FileSet;
 import org.kohsuke.stapler.StaplerRequest;
@@ -24,6 +25,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Set;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -187,6 +189,9 @@ public class Fingerprinter extends Publisher {
             return build;
         }
 
+        /**
+         * Map from file names of the fingeprinted file to its fingerprint record.
+         */
         public synchronized Map<String,Fingerprint> getFingerprints() {
             if(ref!=null) {
                 Map<String,Fingerprint> m = ref.get();
@@ -208,6 +213,27 @@ public class Fingerprinter extends Publisher {
             m = Collections.unmodifiableMap(m);
             ref = new WeakReference<Map<String,Fingerprint>>(m);
             return m;
+        }
+
+        /**
+         * Gets the dependency to other builds in a map.
+         * Returns build numbers instead of {@link Build}, since log records may be gone.
+         */
+        public Map<Project,Integer> getDependencies() {
+            Map<Project,Integer> r = new HashMap<Project,Integer>();
+
+            for (Fingerprint fp : getFingerprints().values()) {
+                BuildPtr bp = fp.getOriginal();
+                if(bp==null)    continue;       // outside Hudson
+                if(bp.is(build))    continue;   // we are the owner
+
+                Integer existing = r.get(bp.getJob());
+                if(existing!=null && existing>bp.getNumber())
+                    continue;   // the record in the map is already up to date
+                r.put((Project)bp.getJob(),bp.getNumber());
+            }
+            
+            return r;
         }
     }
 

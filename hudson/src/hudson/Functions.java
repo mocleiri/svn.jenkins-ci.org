@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Calendar;
+import java.util.SortedMap;
 import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;
 import java.io.File;
@@ -167,6 +168,19 @@ public class Functions {
             }
         }
         return null;
+    }
+
+    /**
+     * Creates a sub map by using the given range (both ends inclusive).
+     */
+    public static <V> SortedMap<Integer,V> filter(SortedMap<Integer,V> map, String from, String to) {
+        if(from==null && to==null)      return map;
+        if(to==null)
+            return map.headMap(Integer.parseInt(from)-1);
+        if(from==null)
+            return map.tailMap(Integer.parseInt(to));
+
+        return map.subMap(Integer.parseInt(to),Integer.parseInt(from)-1);
     }
 
     private static final SimpleFormatter formatter = new SimpleFormatter();

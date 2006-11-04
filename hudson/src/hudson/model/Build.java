@@ -28,6 +28,7 @@ import java.io.PrintStream;
 import java.util.Calendar;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Collections;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -222,6 +223,64 @@ public final class Build extends Run<Project,Build> implements Runnable {
                 r.put(p,n);
         }
         return r;
+    }
+
+    /**
+     * Gets the changes in the dependency between the given build and this build.
+     */
+    public Map<Project,DependencyChange> getDependencyChanges(Build from) {
+        if(from==null)             return Collections.EMPTY_MAP; // make it easy to call this from views
+        FingerprintAction n = this.getAction(FingerprintAction.class);
+        FingerprintAction o = from.getAction(FingerprintAction.class);
+        if(n==null || o==null)     return Collections.EMPTY_MAP;
+
+        Map<Project,Integer> ndep = n.getDependencies();
+        Map<Project,Integer> odep = o.getDependencies();
+
+        Map<Project,DependencyChange> r = new HashMap<Project,DependencyChange>();
+
+        for (Map.Entry<Project,Integer> entry : odep.entrySet()) {
+            Project p = entry.getKey();
+            Integer oldNumber = entry.getValue();
+            Integer newNumber = ndep.get(p);
+            if(newNumber!=null && oldNumber.compareTo(newNumber)<0) {
+                r.put(p,new DependencyChange(p,oldNumber,newNumber));
+            }
+        }
+
+        return r;
+    }
+
+    /**
+     * Represents a change in the dependency.
+     */
+    public static final class DependencyChange {
+        /**
+         * The dependency project.
+         */
+        public final Project project;
+        /**
+         * Version of the dependency project used in the previous build.
+         */
+        public final int fromId;
+        /**
+         * {@link Build} object for {@link #fromId}. Can be null if the log is gone.
+         */
+        public final Build from;
+        /**
+         * Version of the dependency project used in this build.
+         */
+        public final int toId;
+
+        public final Build to;
+
+        public DependencyChange(Project project, int fromId, int toId) {
+            this.project = project;
+            this.fromId = fromId;
+            this.toId = toId;
+            this.from = project.getBuildByNumber(fromId);
+            this.to = project.getBuildByNumber(toId);
+        }
     }
 
     /**
