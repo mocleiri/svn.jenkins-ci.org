@@ -52,6 +52,10 @@ import java.util.regex.Pattern;
 /**
  * CVS.
  *
+ * <p>
+ * I couldn't call this class "CVS" because that would cause the view folder name
+ * to collide with CVS control files.
+ *
  * @author Kohsuke Kawaguchi
  */
 public class CVSSCM extends AbstractCVSFamilySCM {
