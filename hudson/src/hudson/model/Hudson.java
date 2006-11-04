@@ -23,6 +23,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import org.codehaus.groovy.control.CompilationFailedException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -1026,9 +1027,13 @@ public final class Hudson extends JobCollection implements Node {
             StringWriter out = new StringWriter();
             PrintWriter pw = new PrintWriter(out);
             shell.setVariable("out", pw);
-            Object output = shell.evaluate(text);
-            if(output!=null)
+            try {
+                Object output = shell.evaluate(text);
+                if(output!=null)
                 pw.println("Result: "+output);
+            } catch (Throwable t) {
+                t.printStackTrace(pw);
+            }
             req.setAttribute("output",out);
         }
 
