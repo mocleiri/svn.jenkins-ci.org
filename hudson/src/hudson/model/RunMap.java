@@ -61,21 +61,23 @@ public final class RunMap<R extends Run<?,R>> extends AbstractMap<Integer,R> imp
     }
 
     private R update(TreeMap<Integer, R> m, Integer key, R value) {
+        // things are bit tricky because this map is order so that the newest one comes first,
+        // yet 'nextBuild' refers to the newer build.
         R first = m.isEmpty() ? null : m.get(m.firstKey());
         R r = m.put(key, value);
         SortedMap<Integer,R> head = m.headMap(key);
         if(!head.isEmpty()) {
             R prev = m.get(head.lastKey());
-            value.nextBuild = prev.nextBuild;
-            value.previousBuild = prev;
-            if(value.nextBuild!=null)
-                value.nextBuild.previousBuild = value;
-            prev.nextBuild=value;
+            value.previousBuild = prev.previousBuild;
+            value.nextBuild = prev;
+            if(value.previousBuild!=null)
+                value.previousBuild.nextBuild = value;
+            prev.previousBuild=value;
         } else {
-            value.nextBuild = first;
-            value.previousBuild = null;
+            value.previousBuild = first;
+            value.nextBuild = null;
             if(first!=null)
-                first.previousBuild = value;
+                first.nextBuild = value;
         }
         return r;
     }
