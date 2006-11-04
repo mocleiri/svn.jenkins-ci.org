@@ -33,6 +33,8 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -54,6 +56,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
 import java.util.logging.LogRecord;
+
+import groovy.lang.GroovyShell;
 
 /**
  * Root object of the system.
@@ -997,21 +1001,48 @@ public final class Hudson extends JobCollection implements Node {
         in.close();
     }
 
-    public synchronized void doGc( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+    /**
+     * For debugging. Expose URL to perfrom GC.
+     */
+    public void doGc( StaplerRequest req, StaplerResponse rsp ) throws IOException {
         System.gc();
         rsp.setStatus(HttpServletResponse.SC_OK);
         rsp.setContentType("text/plain");
         rsp.getWriter().println("GCed");
     }
 
-    public synchronized void doFingerprintCleanup( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+    /**
+     * For system diagnostics.
+     * Run arbitraary Groovy script.
+     */
+    public void doScript( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        if(!adminCheck(req,rsp))
+            return; // ability to run arbitrary script is dangerous
+
+        String text = req.getParameter("script");
+        if(text!=null) {
+            GroovyShell shell = new GroovyShell();
+
+            StringWriter out = new StringWriter();
+            PrintWriter pw = new PrintWriter(out);
+            shell.setVariable("out", pw);
+            Object output = shell.evaluate(text);
+            if(output!=null)
+                pw.println("Result: "+output);
+            req.setAttribute("output",out);
+        }
+
+        req.getView(this,"_script.jelly").forward(req,rsp);
+    }
+
+    public void doFingerprintCleanup( StaplerRequest req, StaplerResponse rsp ) throws IOException {
         FingerprintCleanupThread.invoke();
         rsp.setStatus(HttpServletResponse.SC_OK);
         rsp.setContentType("text/plain");
         rsp.getWriter().println("Invoked");
     }
 
-    public synchronized void doWorkspaceCleanup( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+    public void doWorkspaceCleanup( StaplerRequest req, StaplerResponse rsp ) throws IOException {
         WorkspaceCleanupThread.invoke();
         rsp.setStatus(HttpServletResponse.SC_OK);
         rsp.setContentType("text/plain");
