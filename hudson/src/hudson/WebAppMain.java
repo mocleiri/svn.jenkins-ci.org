@@ -14,12 +14,15 @@ import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.TimerTask;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * Entry point when Hudson is used as a webapp.
@@ -45,6 +48,25 @@ public class WebAppMain implements ServletContextListener {
             // nope
             context.setAttribute("app",new IncompatibleVMDetected());
             return;
+        }
+
+        // Tomcat breaks XSLT with JDK 5.0 and onward. Check if that's the case, and if so,
+        // try to correct it
+        try {
+            TransformerFactory.newInstance();
+            // if this works we are all happy
+        } catch (TransformerFactoryConfigurationError x) {
+            // no it didn't.
+            Logger logger = Logger.getLogger(WebAppMain.class.getName());
+
+            logger.log(Level.WARNING, "XSLT not configured correctly. Hudson will try to fix this. See http://www.robsanheim.com/2005/07/24/dwr-tomcat-55-and-xalan-classpath-error/ for more details",x);
+            System.setProperty(TransformerFactory.class.getName(),"com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl");
+            try {
+                TransformerFactory.newInstance();
+                logger.info("XSLT is set to the JAXP RI in JRE");
+            } catch(TransformerFactoryConfigurationError y) {
+                logger.log(Level.SEVERE, "Failed to correct the problem.");
+            }
         }
 
 
