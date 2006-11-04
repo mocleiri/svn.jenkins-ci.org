@@ -1,6 +1,7 @@
 package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
+import groovy.lang.GroovyShell;
 import hudson.Launcher;
 import hudson.Plugin;
 import hudson.PluginManager;
@@ -23,7 +24,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.codehaus.groovy.control.CompilationFailedException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -57,8 +57,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
 import java.util.logging.LogRecord;
-
-import groovy.lang.GroovyShell;
 
 /**
  * Root object of the system.
