@@ -59,7 +59,7 @@ public class WebAppMain implements ServletContextListener {
             // no it didn't.
             Logger logger = Logger.getLogger(WebAppMain.class.getName());
 
-            logger.log(Level.WARNING, "XSLT not configured correctly. Hudson will try to fix this. See http://www.robsanheim.com/2005/07/24/dwr-tomcat-55-and-xalan-classpath-error/ for more details",x);
+            logger.log(Level.WARNING, "XSLT not configured correctly. Hudson will try to fix this. See http://issues.apache.org/bugzilla/show_bug.cgi?id=40895 for more details",x);
             System.setProperty(TransformerFactory.class.getName(),"com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl");
             try {
                 TransformerFactory.newInstance();
