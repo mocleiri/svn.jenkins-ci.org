@@ -163,6 +163,7 @@ public class HpiMojo extends AbstractHpiMojo {
         File manifestFile = new File(getWebappDirectory(), "META-INF/MANIFEST.MF");
         generateManifest(manifestFile);
 
+        jarArchiver.setManifest(manifestFile);
         jarArchiver.addDirectory(getWebappDirectory(), getIncludes(), getExcludes());
 
         // create archive
