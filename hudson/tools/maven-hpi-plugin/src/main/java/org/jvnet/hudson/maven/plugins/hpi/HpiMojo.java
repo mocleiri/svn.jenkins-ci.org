@@ -198,19 +198,11 @@ public class HpiMojo extends AbstractHpiMojo {
         MavenArchiver ma = new MavenArchiver();
         ma.setOutputFile(manifestFile);
 
-        JavaClass javaClass = findPluginClass();
-        if(javaClass==null)
-            throw new MojoExecutionException("Unable to find a plugin class");
-
-
-
         PrintWriter printWriter = null;
         try {
             Manifest mf = ma.getManifest(project, archive.getManifest());
             Section mainSection = mf.getMainSection();
-            mainSection.addAttributeAndCheck(new Attribute("Plugin-Class",
-                javaClass.getPackage()+"."+javaClass.getName()));
-            mainSection.addAttributeAndCheck(new Attribute("Long-Name",pluginName));
+            setAttributes(mainSection);
 
             printWriter = new PrintWriter(new FileWriter(manifestFile));
             mf.write(printWriter);
@@ -223,22 +215,5 @@ public class HpiMojo extends AbstractHpiMojo {
         } finally {
             IOUtil.close(printWriter);
         }
-    }
-
-    /**
-     * Find a class that has "@plugin" marker.
-     */
-    private JavaClass findPluginClass() {
-        JavaDocBuilder builder = new JavaDocBuilder();
-        for (Object o : project.getCompileSourceRoots())
-            builder.addSourceTree(new File((String) o));
-
-        // look for a class that extends Plugin
-        for( JavaSource js : builder.getSources() ) {
-            JavaClass jc = js.getClasses()[0];
-            if(jc.getTagByName("plugin")!=null)
-                return jc;
-        }
-        return null;
     }
 }
