@@ -18,6 +18,7 @@
             <td class="pane-header">${it.childTitle}</td>
             <td class="pane-header" style="width:5em">Fail</td>
             <td class="pane-header" style="width:1em; font-size:smaller; white-space:nowrap;">(diff)</td>
+            <td class="pane-header" style="width:5em">Age</td>
             <td class="pane-header" style="width:5em">Total</td>
             <td class="pane-header" style="width:1em; font-size:smaller; white-space:nowrap;">(diff)</td>
           </tr>
@@ -36,6 +37,9 @@
                 <td class="pane" style="text-align:right">${p.failCount}</td>
                 <td class="pane" style="text-align:right">
                   ${h.getDiffString2(p.failCount-prev.failCount)}
+                </td>
+                <td class="pane" style="text-align:right;">
+                    ${p.age}
                 </td>
                 <td class="pane" style="text-align:right">${p.totalCount}</td>
                 <td class="pane" style="text-align:right">
