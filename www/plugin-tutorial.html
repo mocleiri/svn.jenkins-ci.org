@@ -5,13 +5,17 @@
       font-weight: bold;
       margin-left: 1em;
     }
+    pre {
+      border: 1px dashed black;
+      padding: 0.5em;
+    }
   </style>
 </head>
 <body><div class=app>
 <h1>Plugin Tutorial</h1>
 
 <p>
-This document, together with the <a href="https://hudson.dev.java.net/source/browse/hudson/plugins/hello-world/">hello-world plugin</a>, shows you how to get started with the plugin development.
+This document, together with the <a href="https://hudson.dev.java.net/source/browse/hudson/hudson/plugins/hello-world/">hello-world plugin</a>, shows you how to get started with the plugin development.
 
 <h3>What Can Plugins Do?</h3>
 <p>
@@ -22,95 +26,126 @@ In this document, we'll be implementing a <a href="/nonav/javadoc/?hudson/tasks/
 
 <h3>Setting Up Environment</h3>
 <p>
-First, check out the Hudson workspace by running <tt>cvs -d:pserver:guest@cvs.dev.java.net:/cvs co hudson</tt>. THe reason we also check out the whole Hudson workspace is so that when we compile a plugin, it can refer to core Hudson classes. When you develop your own plugin, you can choose to use binary <tt>hudson.jar</tt>, but using the source tends to be easier in terms of debugging.
+	To develop a plugin, you need <a href="http://maven.apache.org/">Maven 2</a> and JDK 5.0 or later. If this is the first time you use Maven, <a href="http://maven.apache.org/guides/mini/guide-proxies.html">make sure Maven can download stuff over the internet.</a>
 
 <p>
-Next, make sure that you can build Hudson:
+	Then you need to add the <a href="https://maven2-repository.dev.java.net/">maven2 repository at java.net</a> to your remote repository list. Add the following line to your <tt>~/.m2/settings.xml</tt>. See <a href="http://maven.apache.org/guides/mini/guide-multiple-repositories.html">this document</a> for exactly how to do this.
 
 <pre>
-$ cd hudson/hudson
-$ ant
+&lt;repository>
+  &lt;id>maven2-repository.dev.java.net&lt;/id>
+  &lt;name>Java.net Repository for Maven&lt;/name>
+  &lt;url>https://maven2-repository.dev.java.net/svn/maven2-repository/trunk/www/repository/&lt;/url>
+  &lt;layout>default&lt;/layout>
+&lt;/repository>
 </pre>
 
 <p>
-Then the plugin
+	Finally, add the following to your <tt>~/.m2/settings.xml</tt>:
 
 <pre>
-$ cd ../plugins/hello-world
-$ ant
+&lt;settings>
+  ...
+  &lt;pluginGroups>
+    ...
+    &lt;pluginGroup>org.jvnet.hudson.tools&lt;/pluginGroup>
+  &lt;/pluginGroups>
+</pre>
+
+
+
+
+<h3>Creating a New Plugin</h3>
+<p>
+	To start a new plugin, run the following maven command:
+
+<pre>$ mvn hpi:create</pre>
+
+<p>
+	This will ask you a few question, like the groupId (the maven jargon for the package name) and the artifactId (the maven jargon for your project name), then create a skeleton plugin from which you can start with. Make sure you can build this:
+
+<pre>
+$ cd <i>newly-created-directory</i>
+$ mvn package
 </pre>
 
 <p>
-Now you are all set. Try to load the plugin inside an IDE so that you can do the later steps more productively.
+	You should then generate IDE project files, so that you can develop a plugin productively.
+
+<pre>
+// if you are using IntelliJ
+$ mvn -DdownloadSources=true idea:idea
+// if you are using Eclipse
+$ mvn -DdownloadSources=true eclipse:eclipse
+</pre>
+<p>
+	NetBeans users should consider using <a href="http://mevenide.codehaus.org/m2-site/">this NetBeans module</a>.
+	
+	Due to <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=163807">a bug in Eclipse</a>, Eclipse users will need to remove <tt>src/main/resources</tt> from the source folder list after projects are imported to the workspace. See <a href="https://hudson.dev.java.net/servlets/ReadMsg?list=users&msgNo=337">this e-mail thread</a> for more details.
+
+<p>
+	At this point, from your IDE, you should be able to see all files and all the needed libraries complete with their source code.
 
 <h3>Plugin Workspace Layout</h3>
 <p>
-<a href="https://hudson.dev.java.net/source/browse/hudson/plugins/hello-world/">The plugin workspace</a> consists of the following major pieces:
+<a href="https://hudson.dev.java.net/source/browse/hudson/hudson/plugins/hello-world/">The plugin workspace</a> consists of the following major pieces:
 
 <dl>
-	<dt>build.xml
-	<dd>Used for building the plugin and creating a distribution image.
+	<dt>pom.xml
+	<dd>Maven uses it for building your plugin
 	
-	<dt>manifest-debug.mf
-	<dd>Used during the debugging. See <a href="plugin-structure.html">this document</a> for more about this.
-	
-	<dt>src
+	<dt>src/main/java
 	<dd>Java source files of the plugin
 	
-	<dt>views
+	<dt>src/main/resources
 	<dd>Jelly/Groovy views of the plugin. See <a href="architecture.html">this document</a> for more about it.
 	
-	<dt>resources
+	<dt>src/main/webapp
 	<dd>Static resources of the plugin, such as images and HTML files.
 </dl>
 
 
 <h3>Source Code</h3>
 <p>
-	Let's take a look at the source code. A plugin's main entry point is a <a href="/source/browse/hudson/plugins/hello-world/src/hudson/plugins/hello_world/PluginImpl.java?view=markup"><tt>PluginImpl</tt></a> class that extends from <a href="/nonav/javadoc/?hudson/Plugin.html"><tt>Plugin</tt></a>. Once Hudson detects your plugin, it will find this class via the manifest, create an instance, and invokes methods.
+	Let's take a look at the source code. A plugin's main entry point is a <a href="/source/browse/hudson/hudson/plugins/hello-world/src/hudson/plugins/hello_world/PluginImpl.java?view=markup"><tt>PluginImpl</tt></a> class that extends from <a href="/nonav/javadoc/?hudson/Plugin.html"><tt>Plugin</tt></a>. Once Hudson detects your plugin (via its <tt>@plugin</tt> javadoc annotation &mdash; this gets copied into manifest during the build), it will create an instance, and invokes methods.
 <p>
 	Most of the time, a plugin class just registers extension points. See the source code for more about how a <tt>Builder</tt> is implemented and what it does.
 
 
-<h3>Setting Up Test Environment.</h3>
+<h3>Developing a Plugin</h3>
 <p>
-	First, you should set up an web application development environment where you can easily start/stop/restart Hudson, because whenever you make changes to the plugin source code, you'll need to restart Hudson. This highly depends on your IDE and your web container. You'll also want to be able to attach your debugger and watch output from the web container, as this is where errors and so on are reported.
-<p>
-	The other thing you'll need is to set the <tt>stapler.jelly.noCache</tt> system property to true in the web container. This causes Hudson to always reload views, so that you can make changes to views and static resources without reloading Hudson.
-<p>
-	For example, with Tomcat, this whole thing can be done by launching Tomcat as follows:
+	Run the following command to launch Hudson with your plugin:
 <pre>
-$ export CATALINA_OPTS="-Dstapler.jelly.noCache=true"
-$ catalina.sh jpda run
+$ export MAVEN_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8000"
+$ mvn hpi:run
 </pre>
 <p>
-	You can <a href="http://tomcat.apache.org/tomcat-5.5-doc/manager-howto.html#Reload%20An%20Existing%20Application">do the redeployment very easy with the manager app</a>, provided that you installed it. Otherwise, try to run your web container from IDE and most IDEs will do the right thing.
+	If you open <tt>http://localhost:8080/</tt> in your browser, you should see the Hudson page running in Jetty. The <tt>MAVEN_OPTS</tt> portion launches this whole thing with the debugger port 8000, so you should be able to start a debug session to this port from your IDE.
 <p>
-	Some IDEs (such as IntelliJ IDEA) can also take advantage of <a href="http://www.google.com/search?q=JVM+class+reload">JVM class reloading</a>, allowing you to make a minor change to the code without redeploying Hudson. Check your IDE if this can be done.
+	Once this starts running, keep it running. Jetty will pick up all the changes automatically.
 
-<p>
-	Next, place an <tt>hello-world.hpl</tt> file in your <tt>$HUDSON_HOME/plugins</tt> directory. It should contain a single line that lists the file name of <tt>hello-world/manifest-debug.mf</tt>, either in absolute or relative form. This setting causes Hudson to load classes, views, libraries, and resources from the workspace image, allowing you to be more productive.
-
-<p>
-	Finally, start Hudson and make sure that hello-world plugin is deployed successfully. You can check that from <tt>http://localhost:8080/hudson/managePlugins</tt>. Or just by looking at the output from the container. With that you are all set for a productive edit/build/test cycle.
-
-<h3>Testing Your Plugin</h3>
-<p>
-	To change the source code and test it, do the following cycle:
 <ol>
-	<li>Edit the source code
-	<li>Build
-	<li>Redeploy Hudson web application
-	<li>Reload browser
+	<li>When you make changes to view files in <tt>src/main/resources</tt> or resource files in <tt>src/main/webapp</tt>, just hit F5 in your browser to see the changes.
+	<li>When you change Java source files. Compile them in your IDE and Jetty should automatically redeploy Hudson to pick up those changes There is no need to run <tt>mvn</tt> at all.
 </ol>
+
+
+<h3>Distributing a Plugin</h3>
 <p>
-	To change static resources and views, do the following cycle:
+	To create a distribution image of your plugin, run the following Maven goal:
+<pre>
+$ mvn package
+</pre>
+<p>
+	This should create <tt>target/*.hpi</tt> file. Other users can use Hudson's web UI to upload this plugin to Hudson (or place it in <tt>$HUDSON_HOME/plugins</tt>.)
+
+
+<h3>Other Tips</h3>
+
 <ol>
-	<li>Edit files
-	<li>Reload browser
+	<li>Consider running Maven like <tt>mvn -o ...</tt> to avoid hitting repositories every time. This will make various operations considerably faster.
+	<li>Subscribe to <tt>users@hudson.dev.java.net</tt> from <a href="https://hudson.dev.java.net/servlets/ProjectMailingListList">here</a> so that we can get in touch with you.
 </ol>
-<p>
-	Try making random changes and see if they are effective.
 
 </div></body>
 </html>
