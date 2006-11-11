@@ -29,19 +29,10 @@ In this document, we'll be implementing a <a href="/nonav/javadoc/?hudson/tasks/
 	To develop a plugin, you need <a href="http://maven.apache.org/">Maven 2</a> and JDK 5.0 or later. If this is the first time you use Maven, <a href="http://maven.apache.org/guides/mini/guide-proxies.html">make sure Maven can download stuff over the internet.</a>
 
 <p>
-	Then you need to add the <a href="https://maven2-repository.dev.java.net/">maven2 repository at java.net</a> to your remote repository list. Add the following line to your <tt>~/.m2/settings.xml</tt>. See <a href="http://maven.apache.org/guides/mini/guide-multiple-repositories.html">this document</a> for exactly how to do this.
-
-<pre>
-&lt;repository>
-  &lt;id>maven2-repository.dev.java.net&lt;/id>
-  &lt;name>Java.net Repository for Maven&lt;/name>
-  &lt;url>https://maven2-repository.dev.java.net/svn/maven2-repository/trunk/www/repository/&lt;/url>
-  &lt;layout>default&lt;/layout>
-&lt;/repository>
-</pre>
+	Next, you'll have to have Maven download the necessary tools for you. Create an empty directory, download this <a href="https://hudson.dev.java.net/source/browse/*checkout*/hudson/hudson/tools/bootstrap/pom.xml">pom.xml</a> in there, and run "mvn package". This should download a bunch of tools.
 
 <p>
-	Finally, add the following to your <tt>~/.m2/settings.xml</tt>:
+	Finally, add the following to your <tt>~/.m2/settings.xml</tt> (Windows users will find them in <tt>c:\Documents and Settings\<i>yourname</i>\.m2\settings.xml</tt>):
 
 <pre>
 &lt;settings>
