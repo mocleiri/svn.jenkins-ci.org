@@ -94,7 +94,13 @@ public class RunMojo extends AbstractJetty6Mojo {
         sp.setName("HUDSON_HOME");
         sp.setValue(hudsonHome.getAbsolutePath());
         sp.setIfNotSetAlready();
-        new File(hudsonHome,"plugins").mkdirs();        
+        new File(hudsonHome,"plugins").mkdirs();
+
+        // enable view auto refreshing via stapler
+        sp = new SystemProperty();
+        sp.setName("stapler.jelly.noCache");
+        sp.setValue("true");
+        sp.setIfNotSetAlready();
 
         generateHpl();
 
