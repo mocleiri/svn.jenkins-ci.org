@@ -22,7 +22,7 @@ $ mvn install
 
 <h3>Configure work environment</h3>
 <p>
-  If you plan to work on the Hudson code, you should generate your IDE project files:
+  To work on the Hudson code productively, you should generate your IDE project files:
 <pre>
 // if you are using IntelliJ
 $ mvn -DdownloadSources=true idea:idea
@@ -31,7 +31,8 @@ $ mvn -DdownloadSources=true eclipse:eclipse
 </pre>
 <p>
   NetBeans users should consider using <a href="http://mevenide.codehaus.org/m2-site/">this NetBeans module</a> for working with Hudson.
-
+<p>
+	Due to <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=163807">a bug in Eclipse</a>, Eclipse users will need to remove <tt>src/main/resources</tt> from the source folder list after projects are imported to the workspace. See <a href="https://hudson.dev.java.net/servlets/ReadMsg?list=users&msgNo=337">this e-mail thread</a> for more details.
 
 <h3>Debugging Hudson</h3>
 <p>
@@ -39,7 +40,7 @@ $ mvn -DdownloadSources=true eclipse:eclipse
 <pre>
 $ cd main/war
 $ export MAVEN_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8000"
-$ mvn jetty:run
+$ mvn -o jetty:run
 </pre>
 <p>
   This will launch maven with the debugger port for 8000. You can connect to this port from your IDE by using the remote debug feature. Once this starts running, keep it running. Jetty will pick up all the changes automatically.
@@ -51,7 +52,7 @@ $ mvn jetty:run
 
 <h3>Other Tips</h3>
 <ol>
-	<li>Consider running Maven like <tt>mvn -o ...</tt> to avoid hitting repositories every time. It's just slow.
+	<li>Consider running Maven like <tt>mvn -o ...</tt> to avoid hitting repositories every time. This will make various operations considerably faster.
 </ol>
 
 </div></body>
