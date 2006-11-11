@@ -94,7 +94,7 @@ public class RunMojo extends AbstractJetty6Mojo {
         sp.setName("HUDSON_HOME");
         sp.setValue(hudsonHome.getAbsolutePath());
         sp.setIfNotSetAlready();
-        hudsonHome.mkdirs();
+        new File(hudsonHome,"plugins").mkdirs();        
 
         generateHpl();
 
