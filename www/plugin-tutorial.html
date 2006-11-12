@@ -31,6 +31,13 @@ In this document, we'll be implementing a <a href="/nonav/javadoc/?hudson/tasks/
 <p>
 	Next, you'll have to have Maven download the necessary tools for you. Create an empty directory, download this <a href="https://hudson.dev.java.net/source/browse/*checkout*/hudson/hudson/tools/bootstrap/pom.xml">pom.xml</a> in there, and run "mvn package". This should download a bunch of tools.
 
+<pre>
+$ cd /tmp
+$ wget https://hudson.dev.java.net/source/browse/*checkout*/hudson/hudson/tools/bootstrap/pom.xml
+$ mvn package
+$ rm pom.xml
+</pre>
+
 <p>
 	Finally, add the following to your <tt>~/.m2/settings.xml</tt> (Windows users will find them in <tt>c:\Documents and Settings\<i>yourname</i>\.m2\settings.xml</tt>):
 
@@ -139,6 +146,7 @@ $ mvn package
 <ol>
 	<li>Consider running Maven like <tt>mvn -o ...</tt> to avoid hitting repositories every time. This will make various operations considerably faster.
 	<li>Subscribe to <tt>users@hudson.dev.java.net</tt> from <a href="https://hudson.dev.java.net/servlets/ProjectMailingListList">here</a> so that we can get in touch with you.
+	<li>When you bump up the version of Hudson you depend on, make sure to run <tt>mvn clean</tt> once, in particular to delte <tt>target/work</tt> that Jetty uses. Otherwise your Jetty may continue to pick up old left-over jar files.
 </ol>
 
 </div></body>
