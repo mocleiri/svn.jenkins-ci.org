@@ -13,10 +13,14 @@
 <ul>
   <li>
 </ul>
--->
-<!--
 <h3>What's new in 1.64</h3>
 <ul>
+  <li>[BUILD-TIMEOUT] Implemented a new plugin that lets you automatically
+      abort builds if a build has not finished after the specified amount of time.
+  <li>[XVNC] Implemented a new plugin to run Xvnc server during the build,
+      for jobs that need GUIs.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=158">issue 158</a>)
+  <li>Added one more extension point in the architecture to support new plugins.
   <li>If a project using both CVS "legacy mode" (multiple top-level modules) and update mode checks out
       additional modules as part of its build, changes in these extra modules will be reported in
       the changelog for subsequent builds.
