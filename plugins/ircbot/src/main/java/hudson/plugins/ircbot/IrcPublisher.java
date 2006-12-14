@@ -1,7 +1,5 @@
 /**
  * Created on Dec 6, 2006 9:25:19 AM
- * 
- * Copyright FullSIX
  */
 package hudson.plugins.ircbot;
 
