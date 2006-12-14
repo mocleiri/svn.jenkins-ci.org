@@ -18,6 +18,10 @@
   <li>The build history panel now shows build descriptions, if any
       (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=148">issue 148</a>)
   <li>System configuration can be now saved even if some slaves are down.
+  <li>Fixed a race condition which could cause changes made to large CVS projects to not be reported
+      in the build changelog. Now all CVS checkouts and updates use timestamps.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=192">issue 192</a>)
+  <li>Improved detection of deleted files when using CVS.
 </ul>
 -->
 <h3>What's new in 1.66</h3>
