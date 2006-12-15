@@ -47,5 +47,26 @@ HUDSON_HOME=<i>/hudson/home/directory</i>
 
 
 
+<h3>Submit a run programatically</h3>
+<p>
+	The above command submits the execution and its result by sending XML to HTTP. This means you can submit an execution record from any program, as long as you follow the same XML format.
+
+<p>
+	The format is explained below:
+
+<pre><xmp>
+<run>
+  <log encoding='hexBinary'>...hex binary encoded console output...</log>
+  <result>... integer indicating the error code. 0 is success and everything else is failure</result>
+  <duration>... milliseconds it took to execute this run ...</duration>
+</run>
+</xmp></pre>
+
+<p>
+	The <tt>duration</tt> element is optional. Console output is hexBinary encoded so that you can pass in any control characters that are otherwise disallowed in XML.
+</p><p>
+	The above XML needs to be sent to <tt>http://myhost/hudson/job/<i>jobName</i>/postBuildResult</tt>.
+</p>
+
 </div></body>
 </html>
