@@ -39,8 +39,8 @@ public final class PropertyUtils {
      * Reads a property file, resolving all internal variables.
      *
      * @param propfile       The property file to load
-     * @param fail           wheter to throw an exception when the file cannot be loaded or to return null
-     * @param useSystemProps wheter to incorporate System.getProperties settings into the returned Properties object.
+     * @param fail           whether to throw an exception when the file cannot be loaded or to return null
+     * @param useSystemProps whether to incorporate System.getProperties settings into the returned Properties object.
      * @return the loaded and fully resolved Properties object
      */
     public static Properties loadPropertyFile(File propfile, boolean fail, boolean useSystemProps)
