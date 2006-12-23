@@ -3,6 +3,13 @@ package hudson.model;
 import hudson.model.Node.Mode;
 import hudson.util.OneShotEvent;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
@@ -17,13 +24,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.io.PrintWriter;
-import java.io.FileOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 
 /**
  * Build queue.

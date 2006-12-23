@@ -10,7 +10,6 @@ import static hudson.model.Hudson.isWindows;
 import hudson.model.Project;
 import org.kohsuke.stapler.StaplerRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;

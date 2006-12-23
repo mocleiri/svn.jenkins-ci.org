@@ -2,7 +2,6 @@ package hudson.tasks;
 
 import hudson.Launcher;
 import hudson.Util;
-import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;

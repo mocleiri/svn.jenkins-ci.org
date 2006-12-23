@@ -1,6 +1,7 @@
 package hudson.model;
 
 import hudson.remoting.VirtualChannel;
+import hudson.util.DaemonThreadFactory;
 import hudson.util.RunList;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -9,6 +10,9 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 
 /**
  * Represents a set of {@link Executor}s on the same computer.
@@ -33,7 +37,7 @@ import java.util.List;
  *
  * @author Kohsuke Kawaguchi
  */
-public final class Computer implements ModelObject {
+public abstract class Computer implements ModelObject {
     private final List<Executor> executors = new ArrayList<Executor>();
 
     private int numExecutors;
@@ -47,18 +51,20 @@ public final class Computer implements ModelObject {
      * {@link Node} object may be created and deleted independently
      * from this object.
      */
-    private String nodeName;
-
-    /**
-     * Represents the communication endpoint to this computer.
-     * Never null.
-     */
-    private VirtualChannel channel;
+    protected String nodeName;
 
     public Computer(Node node) {
         assert node.getNumExecutors()!=0 : "Computer created with 0 executors";
         setNode(node);
     }
+
+    /**
+     * Gets the channel that can be used to run a program on this computer.
+     *
+     * @return
+     *      null if the slave is not configured for it.
+     */
+    public abstract VirtualChannel getChannel();
 
     /**
      * Number of {@link Executor}s that are configured for this computer.
@@ -98,7 +104,7 @@ public final class Computer implements ModelObject {
     }
 
     public String getDisplayName() {
-        return getNode().getNodeName();
+        return nodeName;
     }
 
     public String getUrl() {
@@ -134,7 +140,7 @@ public final class Computer implements ModelObject {
     /**
      * Called to notify {@link Computer} that it will be discarded.
      */
-    /*package*/ void kill() {
+    protected void kill() {
         setNumExecutors(0);
     }
 
@@ -188,6 +194,16 @@ public final class Computer implements ModelObject {
         }
     }
 
+    /**
+     * Gets the {@link Node} class type from which this kind of {@link Computer}
+     * is created. There's one-to-one mapping between {@link Computer} class
+     * and {@link Node} class.
+     */
+    protected abstract Class<? extends Node> getNodeClass();
+
+    protected static final ExecutorService threadPoolForRemoting = Executors.newCachedThreadPool(new DaemonThreadFactory());
+
+    private static final Logger logger = Logger.getLogger(Computer.class.getName());
 //
 //
 // UI

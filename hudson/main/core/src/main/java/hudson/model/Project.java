@@ -2,7 +2,7 @@ package hudson.model;
 
 import hudson.FilePath;
 import hudson.Launcher;
-import hudson.util.EditDistance;
+import hudson.Launcher.LocalLauncher;
 import hudson.model.Descriptor.FormException;
 import hudson.model.Fingerprint.RangeSet;
 import hudson.model.RunMap.Constructor;
@@ -11,14 +11,15 @@ import hudson.scm.SCM;
 import hudson.scm.SCMS;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildTrigger;
+import hudson.tasks.BuildWrapper;
+import hudson.tasks.BuildWrappers;
 import hudson.tasks.Builder;
 import hudson.tasks.Fingerprinter;
 import hudson.tasks.Publisher;
-import hudson.tasks.BuildWrapper;
-import hudson.tasks.BuildWrappers;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.triggers.Trigger;
 import hudson.triggers.Triggers;
+import hudson.util.EditDistance;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -326,7 +327,12 @@ public class Project extends Job<Project,Build> {
         FilePath workspace = getWorkspace();
         workspace.mkdirs();
 
-        return scm.checkout(build, launcher, workspace, listener, changelogFile);
+        try {
+            return scm.checkout(build, launcher, workspace, listener, changelogFile);
+        } catch (InterruptedException e) {
+            e.printStackTrace(listener.fatalError("SCM check out aborted"));
+            return false;
+        }
     }
 
     /**
@@ -353,7 +359,7 @@ public class Project extends Job<Project,Build> {
 
         try {
             // TODO: do this by using the right slave
-            return scm.pollChanges(this, new Launcher(listener), workspace, listener );
+            return scm.pollChanges(this, new LocalLauncher(listener), workspace, listener );
         } catch (IOException e) {
             e.printStackTrace(listener.fatalError(e.getMessage()));
             return false;

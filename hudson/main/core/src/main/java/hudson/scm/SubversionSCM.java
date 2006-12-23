@@ -261,7 +261,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-            int r = new Proc(cmd,env,baos,workspace.getLocal()).join();
+            int r = new Proc.LocalProc(cmd,env,baos,workspace.getLocal()).join();
             if(r!=0) {
                 // failed. to allow user to diagnose the problem, send output to log
                 listener.getLogger().write(baos.toByteArray());
@@ -501,7 +501,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
                 protected void check() throws IOException, ServletException {
                     String svnExe = request.getParameter("exe");
 
-                    Version v = version(new Launcher(TaskListener.NULL),svnExe);
+                    Version v = version(new Launcher.LocalLauncher(TaskListener.NULL),svnExe);
                     if(v==null) {
                         error("Failed to check subversion version info. Is this a valid path?");
                         return;

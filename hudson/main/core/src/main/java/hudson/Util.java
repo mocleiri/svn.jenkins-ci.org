@@ -1,6 +1,9 @@
 package hudson;
 
-import hudson.model.BuildListener;
+import hudson.model.TaskListener;
+import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.taskdefs.Chmod;
+import org.apache.tools.ant.taskdefs.Copy;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -13,20 +16,16 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.StringTokenizer;
 import java.util.SimpleTimeZone;
-import java.util.logging.Logger;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.text.SimpleDateFormat;
-
-import org.apache.tools.ant.taskdefs.Chmod;
-import org.apache.tools.ant.taskdefs.Copy;
-import org.apache.tools.ant.BuildException;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -145,19 +144,32 @@ public class Util {
      * On Windows, error messages for IOException aren't very helpful.
      * This method generates additional user-friendly error message to the listener
      */
-    public static void displayIOException( IOException e, BuildListener listener ) {
+    public static void displayIOException( IOException e, TaskListener listener ) {
+        String msg = getWin32ErrorMessage(e);
+        if(msg!=null)
+            listener.getLogger().println(msg);
+    }
+
+    /**
+     * Extracts the Win32 error message from {@link IOException} if possible.
+     *
+     * @return
+     *      null if there seems to be no error code or if the platform is not Win32.
+     */
+    public static String getWin32ErrorMessage(IOException e) {
         if(File.separatorChar!='\\')
-            return; // not Windows
+            return null; // not Windows
 
         Matcher m = errorCodeParser.matcher(e.getMessage());
         if(!m.matches())
-            return; // failed to parse
+            return null; // failed to parse
 
         try {
             ResourceBundle rb = ResourceBundle.getBundle("/hudson/win32errors");
-            listener.getLogger().println(rb.getString("error"+m.group(1)));
+            return rb.getString("error"+m.group(1));
         } catch (Exception _) {
             // silently recover from resource related failures
+            return null;
         }
     }
 

@@ -4,6 +4,7 @@ import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Proc;
 import hudson.Util;
+import hudson.FilePath.DeleteDirTask;
 import static hudson.Util.fixEmpty;
 import hudson.model.Action;
 import hudson.model.Build;
@@ -19,13 +20,13 @@ import hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.ForkOutputStream;
 import hudson.util.FormFieldValidator;
-import java.util.Collections;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.Expand;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
@@ -36,21 +37,22 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.StringWriter;
-import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.HashSet;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.TimeZone;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -155,7 +157,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
         cmd.add("-D", df.format(date));
     }
 
-    public boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener, File changelogFile) throws IOException {
+    public boolean checkout(Build build, Launcher launcher, FilePath dir, BuildListener listener, File changelogFile) throws IOException, InterruptedException {
         List<String> changedFiles = null; // files that were affected by update. null this is a check out
 
         if(canUseUpdate && isUpdatable(dir.getLocal())) {
@@ -163,7 +165,12 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             if(changedFiles==null)
                 return false;   // failed
         } else {
-            dir.deleteContents();
+            // TODO: this logic should be moved inside dir.deleteContents()
+            if(launcher.getChannel()==null) {
+                dir.deleteContents();
+            } else {
+                launcher.getChannel().call(new DeleteDirTask(dir));
+            }
 
             ArgumentListBuilder cmd = new ArgumentListBuilder();
             cmd.add("cvs","-Q","-z9","-d",cvsroot,"co");
@@ -947,7 +954,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
                             path = path.getParent();
                         }
 
-                        if(!CVSSCM.this.run(new Launcher(listener),cmd,listener, path)) {
+                        if(!CVSSCM.this.run(new Launcher.LocalLauncher(listener),cmd,listener, path)) {
                             listener.getLogger().println("tagging failed");
                             return;
                         }

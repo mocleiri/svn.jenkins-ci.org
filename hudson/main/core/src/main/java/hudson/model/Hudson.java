@@ -9,8 +9,11 @@ import hudson.PluginManager;
 import hudson.PluginWrapper;
 import hudson.Util;
 import hudson.XmlFile;
+import hudson.Launcher.LocalLauncher;
 import hudson.model.Descriptor.FormException;
 import hudson.model.listeners.JobListener;
+import hudson.remoting.LocalChannel;
+import hudson.remoting.VirtualChannel;
 import hudson.scm.CVSSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMS;
@@ -273,7 +276,7 @@ public final class Hudson extends JobCollection implements Node {
     }
 
     public Launcher createLauncher(TaskListener listener) {
-        return new Launcher(listener);
+        return new LocalLauncher(listener);
     }
 
     /**
@@ -283,7 +286,7 @@ public final class Hudson extends JobCollection implements Node {
      * This method tries to reuse existing {@link Computer} objects
      * so that we won't upset {@link Executor}s running in it.
      */
-    private void updateComputerList() {
+    private void updateComputerList() throws IOException {
         synchronized(computers) {
             Map<String,Computer> byName = new HashMap<String,Computer>();
             for (Computer c : computers.values()) {
@@ -313,11 +316,11 @@ public final class Hudson extends JobCollection implements Node {
     private void updateComputer(Node n, Map<String,Computer> byNameMap, Set<Computer> used) {
         Computer c;
         c = byNameMap.get(n.getNodeName());
-        if(c==null) {
-            if(n.getNumExecutors()>0)
-                computers.put(n,c=new Computer(n));
+        if (c!=null && c.getNodeClass()==n.getClass()) {
+            c.setNode(n); // reuse
         } else {
-            c.setNode(n);
+            if(n.getNumExecutors()>0)
+                computers.put(n,c=n.createComputer());
         }
         used.add(c);
     }
@@ -673,6 +676,10 @@ public final class Hudson extends JobCollection implements Node {
         return Mode.NORMAL;
     }
 
+    public Computer createComputer() {
+        return new MasterComputer();
+    }
+
     private synchronized void load() throws IOException {
         XmlFile cfg = getConfigFile();
         if(cfg.exists())
@@ -714,8 +721,10 @@ public final class Hudson extends JobCollection implements Node {
     public void cleanUp() {
         terminating = true;
         synchronized(computers) {
-            for( Computer c : computers.values() )
+            for( Computer c : computers.values() ) {
                 c.interrupt();
+                c.kill();
+            }
         }
         ExternalJob.reloadThread.interrupt();
         Trigger.timer.cancel();
@@ -768,7 +777,7 @@ public final class Hudson extends JobCollection implements Node {
                         } catch(NumberFormatException e) {
                             // ignore
                         }
-                        newSlaves.add(new Slave(names[i],descriptions[i],cmds[i],rfs[i],new File(lfs[i]),n, Mode.valueOf(mode[i])));
+                        newSlaves.add(new LegacySlave(names[i],descriptions[i],cmds[i],rfs[i],new File(lfs[i]),n, Mode.valueOf(mode[i])));
                     }
                 }
                 this.slaves = newSlaves;
@@ -1266,6 +1275,26 @@ public final class Hudson extends JobCollection implements Node {
         return r;
     }
 
+    public static final class MasterComputer extends Computer {
+        private MasterComputer() {
+            super(Hudson.getInstance());
+        }
+
+        @Override
+        public VirtualChannel getChannel() {
+            return localChannel;
+        }
+
+        protected Class<Hudson> getNodeClass() {
+            return Hudson.class;
+        }
+
+        /**
+         * {@link LocalChannel} instance that can be used to execute programs locally.
+         */
+        public static final LocalChannel localChannel = new LocalChannel(threadPoolForRemoting);
+    }
+
     public static boolean adminCheck(StaplerRequest req,StaplerResponse rsp) throws IOException {
         if(!getInstance().isUseSecurity())
             return true;
@@ -1289,7 +1318,8 @@ public final class Hudson extends JobCollection implements Node {
 
     static {
         XSTREAM.alias("hudson",Hudson.class);
-        XSTREAM.alias("slave",Slave.class);
+        XSTREAM.alias("slave",LegacySlave.class);   // for compatibility with Hudson < 1.69
+        XSTREAM.alias("legacySlave",LegacySlave.class);
         XSTREAM.alias("view",View.class);
         XSTREAM.alias("jdk",JDK.class);
     }

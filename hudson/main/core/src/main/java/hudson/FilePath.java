@@ -1,6 +1,8 @@
 package hudson;
 
 import hudson.util.IOException2;
+import hudson.remoting.Callable;
+import hudson.remoting.Callable.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -150,4 +152,27 @@ public final class FilePath {
      * {@link FilePath} constant that can be used if the directory is not important.
      */
     public static final FilePath RANDOM = new FilePath(new File("."));
+
+
+    /**
+     * {@link Callable} that deletes a directory and its contents recursively.
+     *
+     * @author Kohsuke Kawaguchi
+     */
+    public static final class DeleteDirTask implements Callable<hudson.remoting.Callable.Void, IOException> {
+        /**
+         * Directory to delete.
+         * Typed as string because for example local could be Windows and remote could be Unix.
+         */
+        private final String dir;
+
+        public DeleteDirTask(FilePath path) {
+            this.dir = path.getRemote();
+        }
+
+        public Void call() throws IOException {
+            Util.deleteRecursive(new File(dir));
+            return null;
+        }
+    }
 }

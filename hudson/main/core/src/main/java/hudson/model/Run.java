@@ -1,12 +1,12 @@
 package hudson.model;
 
-import static hudson.Util.combine;
 import com.thoughtworks.xstream.XStream;
 import hudson.CloseProofOutputStream;
 import hudson.ExtensionPoint;
-import hudson.Util;
-import hudson.XmlFile;
 import hudson.FeedAdapter;
+import hudson.Util;
+import static hudson.Util.combine;
+import hudson.XmlFile;
 import hudson.tasks.LogRotator;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.util.CharSpool;

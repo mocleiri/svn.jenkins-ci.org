@@ -41,6 +41,8 @@ public interface Node {
      */
     Mode getMode();
 
+    Computer createComputer();
+
     public enum Mode {
         NORMAL("Utilize this slave as much as possible"),
         EXCLUSIVE("Leave this machine for tied jobs only");
