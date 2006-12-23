@@ -40,6 +40,9 @@ public interface VirtualChannel {
 
     /**
      * Performs an orderly shut down of this channel (and the remote peer.)
+     *
+     * @throws IOException
+     *      if the orderly shut-down failed.
      */
     void close() throws IOException;
 }
