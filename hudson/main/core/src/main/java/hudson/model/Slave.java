@@ -1,18 +1,34 @@
 package hudson.model;
 
 import hudson.FilePath;
+import hudson.Launcher;
+import hudson.Proc;
+import hudson.Proc.RemoteProc;
 import hudson.Util;
-import hudson.ExtensionPoint;
 import hudson.model.Descriptor.FormException;
+import hudson.remoting.Callable;
+import hudson.remoting.Channel;
+import hudson.remoting.RemoteInputStream;
+import hudson.remoting.RemoteOutputStream;
+import hudson.remoting.VirtualChannel;
+import hudson.util.StreamCopyThread;
+import hudson.util.StreamTaskListener;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Information about a Hudson slave node.
  *
  * @author Kohsuke Kawaguchi
  */
-public abstract class Slave implements Node, ExtensionPoint, Describable<Slave> {
+public final class Slave implements Node, Serializable {
     /**
      * Name of this slave node.
      */
@@ -29,7 +45,6 @@ public abstract class Slave implements Node, ExtensionPoint, Describable<Slave> 
      */
     protected final String remoteFS;
 
-
     /**
      * Number of executors of this node.
      */
@@ -40,11 +55,21 @@ public abstract class Slave implements Node, ExtensionPoint, Describable<Slave> 
      */
     private Mode mode;
 
-    public Slave(String name, String description, String remoteFS, int numExecutors, Mode mode) throws FormException {
+    /**
+     * Command line to launch the agent, like
+     * "ssh myslave java -jar /path/to/hudson-remoting.jar"
+     */
+    private String agentCommand;
+
+    /**
+     * @stapler-constructor
+     */
+    public Slave(String name, String description, String command, String remoteFS, int numExecutors, Mode mode) throws FormException {
         this.name = name;
         this.description = description;
         this.numExecutors = numExecutors;
         this.mode = mode;
+        this.agentCommand = command;
         this.remoteFS = remoteFS;
 
         if (name.equals(""))
@@ -59,19 +84,27 @@ public abstract class Slave implements Node, ExtensionPoint, Describable<Slave> 
             throw new FormException("Invalid slave configuration for " + name + ". No remote directory given", null);
     }
 
-    public final String getNodeName() {
+    public String getCommand() {
+        return agentCommand;
+    }
+
+    public String getRemoteFS() {
+        return remoteFS;
+    }
+
+    public String getNodeName() {
         return name;
     }
 
-    public final String getNodeDescription() {
+    public String getNodeDescription() {
         return description;
     }
 
-    public final int getNumExecutors() {
+    public int getNumExecutors() {
         return numExecutors;
     }
 
-    public final Mode getMode() {
+    public Mode getMode() {
         return mode;
     }
 
@@ -83,15 +116,30 @@ public abstract class Slave implements Node, ExtensionPoint, Describable<Slave> 
      *      a positive value indicates that the master is ahead of the slave,
      *      and negative value indicates otherwise.
      */
-    public abstract long getClockDifference() throws IOException;
+    public long getClockDifference() throws IOException {
+        VirtualChannel channel = getComputer().getChannel();
+        if(channel==null)   return 0;   // can't check
 
+        try {
+            long startTime = System.currentTimeMillis();
+            long slaveTime = channel.call(new Callable<Long,RuntimeException>() {
+                public Long call() {
+                    return System.currentTimeMillis();
+                }
+            });
+            long endTime = System.currentTimeMillis();
 
-    public abstract SlaveDescriptor getDescriptor();
+            return (startTime+endTime)/2 - slaveTime;
+        } catch (InterruptedException e) {
+            return 0;   // couldn't check
+        }
+    }
+
 
     /**
      * Gets the clock difference in HTML string.
      */
-    public final String getClockDifferenceString() {
+    public String getClockDifferenceString() {
         try {
             long diff = getClockDifference();
             if(-1000<diff && diff <1000)
@@ -114,20 +162,114 @@ public abstract class Slave implements Node, ExtensionPoint, Describable<Slave> 
         }
     }
 
+    public Computer createComputer() {
+        return new ComputerImpl(this);
+    }
+
     /**
      * @deprecated
-     *      To be removed. Don't use.
+     *      FilePath should become a way to point a remote file system.
      */
-    public abstract FilePath getWorkspaceRoot();
+    public FilePath getWorkspaceRoot() {
+        // TODO: implement this method later
+        throw new UnsupportedOperationException();
+    }
+
+    public static final class ComputerImpl extends Computer {
+        private Channel channel;
+
+        private ComputerImpl(final Slave slave) {
+            super(slave);
+
+            // launch the slave agent asynchronously
+            threadPoolForRemoting.execute(new Runnable() {
+                // TODO: do this only for nodes that are so configured.
+                // TODO: support passive connection via JNLP
+                public void run() {
+                    ByteArrayOutputStream log = new ByteArrayOutputStream();
+                    StreamTaskListener listener = new StreamTaskListener(log);
+                    try {
+                        Process proc = Runtime.getRuntime().exec(slave.agentCommand);
+
+                        // capture error information from stderr. this will terminate itself
+                        // when the process is killed.
+                        new StreamCopyThread("stderr copier for remote agent on "+slave.getNodeName(),
+                            proc.getErrorStream(), log).start();
+
+                        channel = new Channel(nodeName,threadPoolForRemoting,
+                            proc.getInputStream(),proc.getOutputStream(), log);
+
+                        logger.info("slave agent launched for "+slave.getNodeName());
+                    } catch (IOException e) {
+                        Util.displayIOException(e,listener);
+
+                        String msg = Util.getWin32ErrorMessage(e);
+                        if(msg==null)   msg="";
+                        else            msg=" : "+msg;
+                        logger.log(Level.SEVERE, "Unable to launch the slave agent for "+slave.getNodeName()+msg,e);
+                    }
+                }
+            });
+        }
+
+        @Override
+        public VirtualChannel getChannel() {
+            return channel;
+        }
+
+        @Override
+        protected void kill() {
+            super.kill();
+
+            Channel c = channel;
+            channel = null;
+            if(c!=null)
+                try {
+                    c.close();
+                } catch (IOException e) {
+                    logger.log(Level.SEVERE, "Failed to terminate channel to "+getDisplayName(),e);
+                }
+        }
+
+        private static final Logger logger = Logger.getLogger(ComputerImpl.class.getName());
+    }
+
+    public Launcher createLauncher(TaskListener listener) {
+        return new Launcher(listener, getComputer().getChannel()) {
+
+            public Proc launch(final String[] cmd, final String[] env, InputStream _in, OutputStream _out, FilePath _workDir) throws IOException {
+                printCommandLine(cmd,_workDir);
+
+                final OutputStream out = new RemoteOutputStream(_out);
+                final InputStream  in  = new RemoteInputStream(_in);
+                final String workDir = _workDir.getRemote();
+
+                return new RemoteProc(getChannel().callAsync(new Callable<Integer, IOException>() {
+                    public Integer call() throws IOException {
+                        Proc p = new LocalLauncher(TaskListener.NULL).launch(cmd, env, in, out,
+                            new FilePath(new File(workDir)));
+                        return p.join();
+                    }
+                }));
+            }
+
+            @Override
+            public boolean isUnix() {
+                // Windows can handle '/' as a path separator but Unix can't,
+                // so err on Unix side
+                return remoteFS.indexOf("\\")==-1;
+            }
+        };
+    }
 
     /**
      * Gets th ecorresponding computer object.
      */
-    public final Computer getComputer() {
+    public Computer getComputer() {
         return Hudson.getInstance().getComputer(getNodeName());
     }
 
-    public final boolean equals(Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -136,7 +278,38 @@ public abstract class Slave implements Node, ExtensionPoint, Describable<Slave> 
         return name.equals(that.name);
     }
 
-    public final int hashCode() {
+    public int hashCode() {
         return name.hashCode();
     }
+
+    /**
+     * Invoked by XStream when this object is read into memory.
+     */
+    private Object readResolve() {
+        // convert the old format to the new one
+        if(command!=null && agentCommand==null) {
+            if(command.length()>0)  command += ' ';
+            agentCommand = command+"java -jar ~/bin/slave-agent";
+        }
+        return this;
+    }
+
+//
+// backwrad compatibility
+//
+    /**
+     * In Hudson < 1.69 this was used to store the local file path
+     * to the remote workspace. No longer in use.
+     *
+     * @deprecated
+     */
+    private transient File localFS;
+
+    /**
+     * In Hudson < 1.69 this was used to store the command
+     * to connect to the remote machine, like "ssh myslave".
+     *
+     * @deprecated
+     */
+    private transient String command;
 }

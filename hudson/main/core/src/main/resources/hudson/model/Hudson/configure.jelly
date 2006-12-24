@@ -38,6 +38,10 @@
                 <s:textbox name="slave.name" value="${s.nodeName}" />
               </s:entry>
 
+              <s:entry title="launch command" help="/help/system-config/master-slave/command.html">
+                <s:textbox name="slave.command" value="${s.command}"/>
+              </s:entry>
+
               <s:entry title="description" help="/help/system-config/master-slave/description.html">
                 <s:textbox name="slave.description" value="${s.nodeDescription}" />
               </s:entry>
@@ -64,19 +68,6 @@
                   ${s.clockDifferenceString}
                 </s:entry>
               </j:if>
-
-              <!-- config that depends on the slave type -->
-              <s:entry>
-                <j:getStatic var="slaveTypes" className="hudson.model.Slaves" field="LIST" />
-                <j:forEach var="idx" begin="0" end="${size(slaveTypes)-1}">
-                  <j:set var="d" value="${slaveTypes[idx]}" />
-                  <!-- ${s.descriptor}:${d}:${s.descriptor==d} -->
-                  <j:set var="slave" value="${h.ifThenElse(s.descriptor==d,s,null)}" />
-                  <s:radioBlock name="slaveType${idx}" value="${idx}" title="${d.displayName}" checked="${slave!=null}">
-                    <st:include from="${d}" page="${d.configPage}"/>
-                  </s:radioBlock>
-                </j:forEach>
-              </s:entry>
 
               <s:entry title="">
                 <div align="right">

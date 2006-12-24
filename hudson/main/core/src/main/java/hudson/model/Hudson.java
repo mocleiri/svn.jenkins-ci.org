@@ -316,7 +316,7 @@ public final class Hudson extends JobCollection implements Node {
     private void updateComputer(Node n, Map<String,Computer> byNameMap, Set<Computer> used) {
         Computer c;
         c = byNameMap.get(n.getNodeName());
-        if (c!=null && c.getNodeClass()==n.getClass()) {
+        if (c!=null) {
             c.setNode(n); // reuse
         } else {
             if(n.getNumExecutors()>0)
@@ -761,23 +761,10 @@ public final class Hudson extends JobCollection implements Node {
 
             {// update slave list
                 List<Slave> newSlaves = new ArrayList<Slave>();
-                String[] names = req.getParameterValues("slave_name");
-                String[] descriptions = req.getParameterValues("slave_description");
-                String[] executors = req.getParameterValues("slave_executors");
-                String[] cmds = req.getParameterValues("slave_command");
-                String[] rfs = req.getParameterValues("slave_remoteFS");
-                String[] lfs = req.getParameterValues("slave_localFS");
-                String[] mode = req.getParameterValues("slave_mode");
-                if(names!=null && descriptions!=null && executors!=null && cmds!=null && rfs!=null && lfs!=null && mode!=null) {
-                    int len = Util.min(names.length,descriptions.length,executors.length,cmds.length,rfs.length, lfs.length, mode.length);
-                    for(int i=0;i<len;i++) {
-                        int n = 2;
-                        try {
-                            n = Integer.parseInt(executors[i].trim());
-                        } catch(NumberFormatException e) {
-                            // ignore
-                        }
-                        newSlaves.add(new LegacySlave(names[i],descriptions[i],cmds[i],rfs[i],new File(lfs[i]),n, Mode.valueOf(mode[i])));
+                String[] names = req.getParameterValues("slave.name");
+                if(names!=null) {
+                    for(int i=0;i< names.length;i++) {
+                        newSlaves.add(req.bindParameters(Slave.class,"slave.",i));
                     }
                 }
                 this.slaves = newSlaves;
@@ -1285,10 +1272,6 @@ public final class Hudson extends JobCollection implements Node {
             return localChannel;
         }
 
-        protected Class<Hudson> getNodeClass() {
-            return Hudson.class;
-        }
-
         /**
          * {@link LocalChannel} instance that can be used to execute programs locally.
          */
@@ -1318,8 +1301,7 @@ public final class Hudson extends JobCollection implements Node {
 
     static {
         XSTREAM.alias("hudson",Hudson.class);
-        XSTREAM.alias("slave",LegacySlave.class);   // for compatibility with Hudson < 1.69
-        XSTREAM.alias("legacySlave",LegacySlave.class);
+        XSTREAM.alias("slave",Slave.class);
         XSTREAM.alias("view",View.class);
         XSTREAM.alias("jdk",JDK.class);
     }

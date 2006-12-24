@@ -1,6 +1,8 @@
 package hudson.model;
 
 import hudson.Launcher;
+import hudson.util.EnumConverter;
+import org.apache.commons.beanutils.ConvertUtils;
 
 /**
  * Commonality between {@link Slave} and master {@link Hudson}.
@@ -59,6 +61,10 @@ public interface Node {
 
         Mode(String description) {
             this.description = description;
+        }
+
+        static {
+            ConvertUtils.register(new EnumConverter(),Mode.class);
         }
     }
 }

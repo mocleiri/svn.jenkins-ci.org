@@ -194,13 +194,6 @@ public abstract class Computer implements ModelObject {
         }
     }
 
-    /**
-     * Gets the {@link Node} class type from which this kind of {@link Computer}
-     * is created. There's one-to-one mapping between {@link Computer} class
-     * and {@link Node} class.
-     */
-    protected abstract Class<? extends Node> getNodeClass();
-
     protected static final ExecutorService threadPoolForRemoting = Executors.newCachedThreadPool(new DaemonThreadFactory());
 
     private static final Logger logger = Logger.getLogger(Computer.class.getName());
