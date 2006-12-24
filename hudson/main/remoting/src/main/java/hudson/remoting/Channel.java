@@ -173,6 +173,9 @@ public class Channel implements VirtualChannel {
      * Exports an object for remoting to the other {@link Channel}
      * by creating a remotable proxy.
      *
+     * <p>
+     * All the parameters and return values must be serializable.
+     *
      * @param type
      *      Interface to be remoted.
      * @return
