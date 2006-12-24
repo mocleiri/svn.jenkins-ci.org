@@ -34,23 +34,23 @@ final class UserRequest<RSP extends Serializable,EXC extends Throwable> extends 
         try {
             ClassLoader cl = channel.importedClassLoaders.get(classLoaderProxy);
 
-            Object o;
+            RSP r = null;
             Channel oldc = Channel.setCurrent(channel);
             try {
-                o = new ObjectInputStreamEx(new ByteArrayInputStream(request), cl).readObject();
+                Object o = new ObjectInputStreamEx(new ByteArrayInputStream(request), cl).readObject();
+                
+                Callable<RSP,EXC> callable = (Callable<RSP,EXC>)o;
+
+                ClassLoader old = Thread.currentThread().getContextClassLoader();
+                Thread.currentThread().setContextClassLoader(cl);
+                // execute the service
+                try {
+                    r = callable.call();
+                } finally {
+                    Thread.currentThread().setContextClassLoader(old);
+                }
             } finally {
                 Channel.setCurrent(oldc);
-            }
-            Callable<RSP,EXC> callable = (Callable<RSP,EXC>)o;
-
-            ClassLoader old = Thread.currentThread().getContextClassLoader();
-            Thread.currentThread().setContextClassLoader(cl);
-            // execute the service
-            RSP r = null;
-            try {
-                r = callable.call();
-            } finally {
-                Thread.currentThread().setContextClassLoader(old);
             }
 
             return new UserResponse<RSP>(serialize(r,channel));

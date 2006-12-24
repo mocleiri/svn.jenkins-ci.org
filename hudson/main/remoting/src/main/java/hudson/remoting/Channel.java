@@ -338,7 +338,8 @@ public class Channel implements VirtualChannel {
 
     /**
      * This method can be invoked during the serialization/deserialization of
-     * objects, when they are transferred to the remote {@link Channel}.
+     * objects when they are transferred to the remote {@link Channel},
+     * as well as during {@link Callable#call()} is invoked. 
      *
      * @return null
      *      if the calling thread is not performing serialization.
