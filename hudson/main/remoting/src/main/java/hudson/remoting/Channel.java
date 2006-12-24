@@ -170,16 +170,17 @@ public class Channel implements VirtualChannel {
     }
 
     /**
-     * Exports an object for remoting to the other {@link Channel}.
+     * Exports an object for remoting to the other {@link Channel}
+     * by creating a remotable proxy.
      *
      * @param type
      *      Interface to be remoted.
      * @return
      *      the proxy object that implements <tt>T</tt>. This object can be transfered
-     *      to the other {@link Channel}, and calling methods on it will invoke the
-     *      same method on the given <tt>instance</tt> object.
+     *      to the other {@link Channel}, and calling methods on it from the remote side
+     *      will invoke the same method on the given local <tt>instance</tt> object.
      */
-    /*package*/ synchronized <T> T export(Class<T> type, T instance) {
+    public <T> T export(Class<T> type, T instance) {
         if(instance==null)
             return null;
         // TODO: unexport
