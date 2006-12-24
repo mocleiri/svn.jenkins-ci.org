@@ -2,6 +2,7 @@ package hudson.model;
 
 import hudson.FilePath;
 import hudson.Util;
+import hudson.ExtensionPoint;
 import hudson.model.Descriptor.FormException;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.IOException;
  *
  * @author Kohsuke Kawaguchi
  */
-public abstract class Slave implements Node {
+public abstract class Slave implements Node, ExtensionPoint, Describable<Slave> {
     /**
      * Name of this slave node.
      */
@@ -83,6 +84,9 @@ public abstract class Slave implements Node {
      *      and negative value indicates otherwise.
      */
     public abstract long getClockDifference() throws IOException;
+
+
+    public abstract SlaveDescriptor getDescriptor();
 
     /**
      * Gets the clock difference in HTML string.

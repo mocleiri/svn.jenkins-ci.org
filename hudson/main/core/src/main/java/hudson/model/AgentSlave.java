@@ -22,6 +22,8 @@ import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.kohsuke.stapler.StaplerRequest;
+
 /**
  * {@link Slave} controlled via the remoting agent.
  *
@@ -31,11 +33,18 @@ public class AgentSlave extends Slave {
     /**
      * Launch command.
      */
-    private String command;
+    private final String command;
 
+    /**
+     * @stapler-constructor
+     */
     public AgentSlave(String name, String description, String remoteFS, int numExecutors, Mode mode, String command) throws FormException {
         super(name, description, remoteFS, numExecutors, mode);
         this.command = command;
+    }
+
+    public String getCommand() {
+        return command;
     }
 
     @Override
@@ -94,6 +103,20 @@ public class AgentSlave extends Slave {
             }
         };
     }
+
+    public SlaveDescriptor getDescriptor() {
+        return DESCRIPTOR;
+    }
+
+    public static final SlaveDescriptor DESCRIPTOR = new SlaveDescriptor(AgentSlave.class) {
+        public String getDisplayName() {
+            return "Maintained by agent";
+        }
+
+        public AgentSlave newInstance(StaplerRequest req, int index) {
+            return req.bindParameters(AgentSlave.class, "slave.", index);
+        }
+    };
 
     public static final class ComputerImpl extends Computer {
         private Channel channel;

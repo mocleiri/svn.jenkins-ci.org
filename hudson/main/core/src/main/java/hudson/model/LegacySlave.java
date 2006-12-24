@@ -15,6 +15,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 
+import org.kohsuke.stapler.StaplerRequest;
+
 /**
  * {@link Slave} that doesn't have the remoting infrastructure.
  * For compatibility with Hudson &lt; 1.68.
@@ -132,6 +134,20 @@ public class LegacySlave extends Slave {
     public FilePath getWorkspaceRoot() {
         return getFilePath().child("workspace");
     }
+
+    public SlaveDescriptor getDescriptor() {
+        return DESCRIPTOR;
+    }
+
+    public static final SlaveDescriptor DESCRIPTOR = new SlaveDescriptor(LegacySlave.class) {
+        public String getDisplayName() {
+            return "legacy";
+        }
+
+        public LegacySlave newInstance(StaplerRequest req, int index) {
+            return req.bindParameters(LegacySlave.class, "slave.", index);
+        }
+    };
 
     public static final class ComputerImpl extends Computer {
         private ComputerImpl(LegacySlave slave) {
