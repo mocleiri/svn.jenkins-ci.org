@@ -183,8 +183,8 @@ public class Channel implements VirtualChannel {
     public <T> T export(Class<T> type, T instance) {
         if(instance==null)
             return null;
-        // TODO: unexport
 
+        // proxy will unexport this instance when it's GC-ed on the remote machine.
         final int id = export(instance);
         return type.cast(Proxy.newProxyInstance( type.getClassLoader(), new Class[]{type},
             new RemoteInvocationHandler(id)));
