@@ -21,6 +21,11 @@ final class RemoteInvocationHandler implements InvocationHandler, Serializable {
 
     /**
      * Represents the connection to the remote {@link Channel}.
+     *
+     * <p>
+     * This field is null when a {@link RemoteInvocationHandler} is just
+     * created and not working as a remote proxy. Once tranferred to the
+     * remote system, this field is set to non-null. 
      */
     private transient Channel channel;
 
@@ -68,6 +73,14 @@ final class RemoteInvocationHandler implements InvocationHandler, Serializable {
 
     public int hashCode() {
         return oid;
+    }
+
+
+    protected void finalize() throws Throwable {
+        // unexport the remote object
+        if(channel!=null)
+            channel.send(new UnexportCommand(oid));
+        super.finalize();
     }
 
     private static final long serialVersionUID = 1L;
