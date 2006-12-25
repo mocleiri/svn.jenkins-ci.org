@@ -103,7 +103,24 @@ public abstract class DirectoryHolder extends Actionable {
                 in.close();
             }
         } else {
-            rsp.serveFile(req,f.toURL());
+            class ContentInfo implements Serializable {
+                int contentLength;
+                long lastModified;
+                private static final long serialVersionUID = 1L;
+            }
+
+            ContentInfo ci = f.act(new FileCallable<ContentInfo>() {
+                public ContentInfo invoke(File f) throws IOException {
+                    ContentInfo ci = new ContentInfo();
+                    ci.contentLength = (int) f.length();
+                    ci.lastModified = f.lastModified();
+                    return ci;
+                }
+            });
+
+            InputStream in = f.read();
+            rsp.serveFile(req, in, ci.lastModified, ci.contentLength, f.getName() );
+            in.close();
         }
     }
 

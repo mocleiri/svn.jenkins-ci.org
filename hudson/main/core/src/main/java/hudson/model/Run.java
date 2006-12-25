@@ -7,7 +7,9 @@ import hudson.FeedAdapter;
 import hudson.Util;
 import static hudson.Util.combine;
 import hudson.XmlFile;
+import hudson.FilePath;
 import hudson.tasks.LogRotator;
+import hudson.tasks.BuildStep;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.util.CharSpool;
 import hudson.util.IOException2;
@@ -716,8 +718,8 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     /**
      * Serves the artifacts.
      */
-    public void doArtifact( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        serveFile(req, rsp, getArtifactsDir(), "package.gif", true);
+    public void doArtifact( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException, InterruptedException {
+        serveFile(req, rsp, new FilePath(getArtifactsDir()), "package.gif", true);
     }
 
     /**

@@ -324,10 +324,10 @@ public class Project extends Job<Project,Build> {
         if(scm==null)
             return true;    // no SCM
 
-        FilePath workspace = getWorkspace();
-        workspace.mkdirs();
-
         try {
+            FilePath workspace = getWorkspace();
+            workspace.mkdirs();
+
             return scm.checkout(build, launcher, workspace, listener, changelogFile);
         } catch (InterruptedException e) {
             e.printStackTrace(listener.fatalError("SCM check out aborted"));
@@ -348,20 +348,22 @@ public class Project extends Job<Project,Build> {
             return false;   // no SCM
         }
 
-
-        FilePath workspace = getWorkspace();
-        if(!workspace.exists()) {
-            // no workspace. build now, or nothing will ever be built
-            listener.getLogger().println("No workspace is available, so can't check for updates.");
-            listener.getLogger().println("Scheduling a new build to get a workspace.");
-            return true;
-        }
-
         try {
+            FilePath workspace = getWorkspace();
+            if(!workspace.exists()) {
+                // no workspace. build now, or nothing will ever be built
+                listener.getLogger().println("No workspace is available, so can't check for updates.");
+                listener.getLogger().println("Scheduling a new build to get a workspace.");
+                return true;
+            }
+
             // TODO: do this by using the right slave
             return scm.pollChanges(this, new LocalLauncher(listener), workspace, listener );
         } catch (IOException e) {
             e.printStackTrace(listener.fatalError(e.getMessage()));
+            return false;
+        } catch (InterruptedException e) {
+            e.printStackTrace(listener.fatalError("SCM polling aborted"));
             return false;
         }
     }
@@ -696,7 +698,7 @@ public class Project extends Job<Project,Build> {
     /**
      * Serves the workspace files.
      */
-    public void doWs( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+    public void doWs( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException, InterruptedException {
         FilePath ws = getWorkspace();
         if(!ws.exists()) {
             // if there's no workspace, report a nice error message

@@ -312,7 +312,7 @@ public final class Build extends Run<Project,Build> implements Runnable {
              */
             private Launcher launcher;
 
-            public Result run(BuildListener listener) throws IOException {
+            public Result run(BuildListener listener) throws Exception {
                 Node node = Executor.currentExecutor().getOwner().getNode();
                 assert builtOn==null;
                 builtOn = node.getNodeName();
@@ -377,11 +377,17 @@ public final class Build extends Run<Project,Build> implements Runnable {
 
             public void post(BuildListener listener) {
                 // run all of them even if one of them failed
-                for( Publisher bs : project.getPublishers().values() )
-                    bs.perform(Build.this, launcher, listener);
+                try {
+                    for( Publisher bs : project.getPublishers().values() )
+                        bs.perform(Build.this, launcher, listener);
+                } catch (InterruptedException e) {
+                    e.printStackTrace(listener.fatalError("aborted"));
+                } catch (IOException e) {
+                    e.printStackTrace(listener.fatalError("failed"));
+                }
             }
 
-            private boolean build(BuildListener listener, Map<?, Builder> steps) {
+            private boolean build(BuildListener listener, Map<?, Builder> steps) throws IOException, InterruptedException {
                 for( Builder bs : steps.values() )
                     if(!bs.perform(Build.this, launcher, listener))
                         return false;
