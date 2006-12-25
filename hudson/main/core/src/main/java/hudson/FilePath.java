@@ -400,17 +400,29 @@ public final class FilePath implements Serializable {
 
     /**
      * Copies the files that match the given file mask to the specified target node.
+     *
+     * @return
+     *      the number of files copied.
      */
-    public void copyRecursiveTo(final String fileMask, final FilePath target) throws IOException, InterruptedException {
+    public int copyRecursiveTo(final String fileMask, final FilePath target) throws IOException, InterruptedException {
         if(this.channel==target.channel) {
             // local to local copy.
-            act(new FileCallable<Void>() {
-                public Void invoke(File base) throws IOException {
+            return act(new FileCallable<Integer>() {
+                public Integer invoke(File base) throws IOException {
                     assert target.channel==null;
 
                     try {
-                        Copy copyTask = new Copy();
-                        copyTask.setProject(new org.apache.tools.ant.Project());
+                        class CopyImpl extends Copy {
+                            public CopyImpl() {
+                                setProject(new org.apache.tools.ant.Project());
+                            }
+
+                            public int getNumCopied() {
+                                return super.fileCopyMap.size();
+                            }
+                        }
+
+                        CopyImpl copyTask = new CopyImpl();
                         copyTask.setTodir(new File(target.remote));
                         FileSet src = new FileSet();
                         src.setDir(base);
@@ -418,7 +430,7 @@ public final class FilePath implements Serializable {
                         copyTask.addFileset(src);
 
                         copyTask.execute();
-                        return null;
+                        return copyTask.getNumCopied();
                     } catch (BuildException e) {
                         throw new IOException2("Failed to copy "+base+"/"+fileMask+" to "+target,e);
                     }
@@ -428,9 +440,9 @@ public final class FilePath implements Serializable {
             // remote copy
             final FilePath src = this;
 
-            target.act(new FileCallable<Void>() {
+            return target.act(new FileCallable<Integer>() {
                 // this code is executed on the node that receives files.
-                public Void invoke(final File dest) throws IOException {
+                public Integer invoke(final File dest) throws IOException {
                     final RemoteCopier copier = Channel.current().export(
                         RemoteCopier.class,
                         new RemoteCopier() {
@@ -452,8 +464,8 @@ public final class FilePath implements Serializable {
                         });
 
                     try {
-                        src.act(new FileCallable<Void>() {
-                            public Void invoke(File base) throws IOException {
+                        return src.act(new FileCallable<Integer>() {
+                            public Integer invoke(File base) throws IOException {
                                 // copy to a remote node
                                 FileSet fs = new FileSet();
                                 fs.setDir(base);
@@ -462,7 +474,8 @@ public final class FilePath implements Serializable {
                                 byte[] buf = new byte[8192];
 
                                 DirectoryScanner ds = fs.getDirectoryScanner(new org.apache.tools.ant.Project());
-                                for( String f : ds.getIncludedFiles() ) {
+                                String[] files = ds.getIncludedFiles();
+                                for( String f : files) {
                                     File file = new File(base, f);
 
                                     copier.open(f);
@@ -474,13 +487,12 @@ public final class FilePath implements Serializable {
 
                                     copier.close();
                                 }
-                                return null;
+                                return files.length;
                             }
                         });
                     } catch (InterruptedException e) {
                         throw new IOException2("Copy operation interrupted",e);
                     }
-                    return null;
                 }
             });
         }
