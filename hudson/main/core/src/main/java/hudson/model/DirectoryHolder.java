@@ -6,10 +6,10 @@ import org.kohsuke.stapler.StaplerResponse;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import hudson.FilePath;
+import hudson.FilePath.FileCallable;
 
 /**
  * Has convenience methods to serve file system.
@@ -128,39 +129,43 @@ public abstract class DirectoryHolder extends Actionable {
      * list of {@link Path} represents one child item to be shown
      * (this mechanism is used to skip empty intermediate directory.)
      */
-    private List<List<Path>> buildChildPathList(FilePath cur) {
-        List<List<Path>> r = new ArrayList<List<Path>>();
+    private List<List<Path>> buildChildPathList(FilePath cur) throws InterruptedException, IOException {
+        return cur.act(new FileCallable<List<List<Path>>>() {
+            public List<List<Path>> invoke(File cur) throws IOException {
+                List<List<Path>> r = new ArrayList<List<Path>>();
 
-        File[] files = cur.listFiles();
-        Arrays.sort(files,FILE_SORTER);
+                File[] files = cur.listFiles();
+                Arrays.sort(files,new FileComparator());
 
-        for( File f : files ) {
-            Path p = new Path(f.getName(),f.getName(),f.isDirectory(),f.length());
-            if(!f.isDirectory()) {
-                r.add(Collections.singletonList(p));
-            } else {
-                // find all empty intermediate directory
-                List<Path> l = new ArrayList<Path>();
-                l.add(p);
-                String relPath = f.getName();
-                while(true) {
-                    // files that don't start with '.' qualify for 'meaningful files', nor SCM related files
-                    File[] sub = f.listFiles(new FilenameFilter() {
-                        public boolean accept(File dir, String name) {
-                            return !name.startsWith(".") && !name.equals("CVS") && !name.equals(".svn");
+                for( File f : files ) {
+                    Path p = new Path(f.getName(),f.getName(),f.isDirectory(),f.length());
+                    if(!f.isDirectory()) {
+                        r.add(Collections.singletonList(p));
+                    } else {
+                        // find all empty intermediate directory
+                        List<Path> l = new ArrayList<Path>();
+                        l.add(p);
+                        String relPath = f.getName();
+                        while(true) {
+                            // files that don't start with '.' qualify for 'meaningful files', nor SCM related files
+                            File[] sub = f.listFiles(new FilenameFilter() {
+                                public boolean accept(File dir, String name) {
+                                    return !name.startsWith(".") && !name.equals("CVS") && !name.equals(".svn");
+                                }
+                            });
+                            if(sub.length!=1 || !sub[0].isDirectory())
+                                break;
+                            f = sub[0];
+                            relPath += '/'+f.getName();
+                            l.add(new Path(relPath,f.getName(),true,0));
                         }
-                    });
-                    if(sub.length!=1 || !sub[0].isDirectory())
-                        break;
-                    f = sub[0];
-                    relPath += '/'+f.getName();
-                    l.add(new Path(relPath,f.getName(),true,0));
+                        r.add(l);
+                    }
                 }
-                r.add(l);
-            }
-        }
 
-        return r;
+                return r;
+            }
+        });
     }
 
     private static String repeat(String s,int times) {
@@ -173,7 +178,7 @@ public abstract class DirectoryHolder extends Actionable {
     /**
      * Represents information about one file or folder.
      */
-    public final class Path {
+    public final class Path implements Serializable {
         /**
          * Relative URL to this path from the current page.
          */
@@ -216,11 +221,13 @@ public abstract class DirectoryHolder extends Actionable {
         public long getSize() {
             return size;
         }
+
+        private static final long serialVersionUID = 1L;
     }
 
 
 
-    private static final Comparator<File> FILE_SORTER = new Comparator<File>() {
+    private static final class FileComparator implements Comparator<File> {
         public int compare(File lhs, File rhs) {
             // directories first, files next
             int r = dirRank(lhs)-dirRank(rhs);
@@ -233,5 +240,5 @@ public abstract class DirectoryHolder extends Actionable {
             if(f.isDirectory())     return 0;
             else                    return 1;
         }
-    };
+    }
 }

@@ -1,7 +1,6 @@
 package hudson;
 
 import hudson.remoting.Callable;
-import hudson.remoting.Callable.Void;
 import hudson.remoting.Channel;
 import hudson.remoting.Pipe;
 import hudson.remoting.RemoteOutputStream;
@@ -18,6 +17,8 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.FileFilter;
+import java.io.Writer;
+import java.io.FileWriter;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -105,31 +106,31 @@ public final class FilePath implements Serializable {
      * Code that gets executed on the machine where the {@link FilePath} is local.
      * Used to act on {@link FilePath}.
      */
-    public abstract class FileCallable<T> implements Callable<T,IOException> {
-        public final T call() throws IOException {
-            return invoke(new File(remote));
-        }
-
+    public static interface FileCallable<T> {
         /**
          * Performs the task
          *
          * @param f
          *      {@link File} that represents the local file that {@link FilePath} represents.
          */
-        protected abstract T invoke(File f) throws IOException;
+        T invoke(File f) throws IOException;
     }
 
     /**
      * Executes some program on the machine that this {@link FilePath} exists,
      * so that one can perform local file operations.
      */
-    public <T extends Serializable> T act(FileCallable<T> callable) throws IOException, InterruptedException {
+    public <T> T act(final FileCallable<T> callable) throws IOException, InterruptedException {
         if(channel!=null) {
             // run this on a remote system
-            return channel.call(callable);
+            return channel.call(new Callable<T,IOException>() {
+                public T call() throws IOException {
+                    return callable.invoke(new File(remote));
+                }
+            });
         } else {
             // the file is on the local machine
-            return callable.call();
+            return callable.invoke(new File(remote));
         }
     }
 
@@ -138,7 +139,7 @@ public final class FilePath implements Serializable {
      */
     public void mkdirs() throws IOException, InterruptedException {
         if(act(new FileCallable<Boolean>() {
-            protected Boolean invoke(File f) throws IOException {
+            public Boolean invoke(File f) throws IOException {
                 return !f.mkdirs() && !f.exists();
             }
         }))
@@ -150,7 +151,7 @@ public final class FilePath implements Serializable {
      */
     public void deleteRecursive() throws IOException, InterruptedException {
         act(new FileCallable<Void>() {
-            protected Void invoke(File f) throws IOException {
+            public Void invoke(File f) throws IOException {
                 Util.deleteRecursive(f);
                 return null;
             }
@@ -162,7 +163,7 @@ public final class FilePath implements Serializable {
      */
     public void deleteContents() throws IOException, InterruptedException {
         act(new FileCallable<Void>() {
-            protected Void invoke(File f) throws IOException {
+            public Void invoke(File f) throws IOException {
                 Util.deleteContentsRecursive(f);
                 return null;
             }
@@ -225,11 +226,33 @@ public final class FilePath implements Serializable {
     }
 
     /**
+     * Creates a temporary file and set the contents by the
+     * given text (encoded in the platform default encoding)
+     */
+    public FilePath createTextTempFile(final String prefix, final String suffix, final String contents) throws IOException, InterruptedException {
+        try {
+            return new FilePath(this,channel.call(new Callable<String,IOException>() {
+                public String call() throws IOException {
+                    File f = File.createTempFile(prefix, suffix, new File(remote));
+
+                    Writer w = new FileWriter(f);
+                    w.write(contents);
+                    w.close();
+
+                    return f.getName();
+                }
+            }));
+        } catch (IOException e) {
+            throw new IOException2("Failed to create a temp file on "+remote,e);
+        }
+    }
+
+    /**
      * Deletes this file.
      */
     public boolean delete() throws IOException, InterruptedException {
         return act(new FileCallable<Boolean>() {
-            protected Boolean invoke(File f) throws IOException {
+            public Boolean invoke(File f) throws IOException {
                 return f.delete();
             }
         });
@@ -240,7 +263,7 @@ public final class FilePath implements Serializable {
      */
     public boolean exists() throws IOException, InterruptedException {
         return act(new FileCallable<Boolean>() {
-            protected Boolean invoke(File f) throws IOException {
+            public Boolean invoke(File f) throws IOException {
                 return f.exists();
             }
         });
@@ -254,7 +277,7 @@ public final class FilePath implements Serializable {
      */
     public long lastModified() throws IOException, InterruptedException {
         return act(new FileCallable<Long>() {
-            protected Long invoke(File f) throws IOException {
+            public Long invoke(File f) throws IOException {
                 return f.lastModified();
             }
         });
@@ -265,7 +288,7 @@ public final class FilePath implements Serializable {
      */
     public boolean isDirectory() throws IOException, InterruptedException {
         return act(new FileCallable<Boolean>() {
-            protected Boolean invoke(File f) throws IOException {
+            public Boolean invoke(File f) throws IOException {
                 return f.isDirectory();
             }
         });
@@ -281,8 +304,8 @@ public final class FilePath implements Serializable {
      *      the filter object will be executed on the remote machine.
      */
     public List<FilePath> list(final FileFilter filter) throws IOException, InterruptedException {
-        return act(new FileCallable<ArrayList<FilePath>>() {
-            protected ArrayList<FilePath> invoke(File f) throws IOException {
+        return act(new FileCallable<List<FilePath>>() {
+            public List<FilePath> invoke(File f) throws IOException {
                 File[] children = f.listFiles(filter);
                 if(children ==null)     return null;
 
@@ -368,7 +391,7 @@ public final class FilePath implements Serializable {
         if(this.channel==target.channel) {
             // local to local copy.
             act(new FileCallable<Void>() {
-                protected Void invoke(File base) throws IOException {
+                public Void invoke(File base) throws IOException {
                     assert target.channel==null;
 
                     try {
@@ -393,7 +416,7 @@ public final class FilePath implements Serializable {
 
             target.act(new FileCallable<Void>() {
                 // this code is executed on the node that receives files.
-                protected Void invoke(final File dest) throws IOException {
+                public Void invoke(final File dest) throws IOException {
                     final RemoteCopier copier = Channel.current().export(
                         RemoteCopier.class,
                         new RemoteCopier() {
@@ -416,7 +439,7 @@ public final class FilePath implements Serializable {
 
                     try {
                         src.act(new FileCallable<Void>() {
-                            protected Void invoke(File base) throws IOException {
+                            public Void invoke(File base) throws IOException {
                                 // copy to a remote node
                                 FileSet fs = new FileSet();
                                 fs.setDir(base);

@@ -12,7 +12,6 @@ import hudson.model.DirectoryHolder;
 import hudson.model.Project;
 import hudson.model.ProminentProjectAction;
 import hudson.remoting.Callable;
-import hudson.remoting.Callable.Void;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
