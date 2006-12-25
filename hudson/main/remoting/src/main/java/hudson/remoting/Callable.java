@@ -14,11 +14,4 @@ public interface Callable<V,T extends Throwable> extends Serializable {
      * or throws some exception.
      */
     V call() throws T;
-
-    /**
-     * Serializable <tt>Void</tt> definition.
-     */
-    public static final class Void implements Serializable {
-        private static final long serialVersionUID = 1L;
-    }
 }

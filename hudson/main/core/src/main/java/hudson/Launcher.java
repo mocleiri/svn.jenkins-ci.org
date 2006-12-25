@@ -78,6 +78,12 @@ public abstract class Launcher {
         return launch(cmd,env,in,out,null);
     }
 
+    /**
+     * @param in
+     *      null if there's no input.
+     * @param workDir
+     *      null if the working directory could be anything.
+     */
     public abstract Proc launch(String[] cmd,String[] env,InputStream in,OutputStream out, FilePath workDir) throws IOException;
 
     /**

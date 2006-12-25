@@ -135,6 +135,20 @@ public final class FilePath implements Serializable {
     }
 
     /**
+     * Executes some program on the machine that this {@link FilePath} exists,
+     * so that one can perform local file operations.
+     */
+    public <V,E extends Throwable> V act(Callable<V,E> callable) throws IOException, InterruptedException, E {
+        if(channel!=null) {
+            // run this on a remote system
+            return channel.call(callable);
+        } else {
+            // the file is on the local machine
+            return callable.call();
+        }
+    }
+
+    /**
      * Creates this directory.
      */
     public void mkdirs() throws IOException, InterruptedException {

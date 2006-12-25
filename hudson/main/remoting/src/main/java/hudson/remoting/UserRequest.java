@@ -18,7 +18,7 @@ import java.io.Serializable;
  *
  * @author Kohsuke Kawaguchi
  */
-final class UserRequest<RSP extends Serializable,EXC extends Throwable> extends Request<UserResponse<RSP>,EXC> {
+final class UserRequest<RSP,EXC extends Throwable> extends Request<UserResponse<RSP>,EXC> {
 
     private final byte[] request;
     private final IClassLoader classLoaderProxy;
@@ -79,7 +79,7 @@ final class UserRequest<RSP extends Serializable,EXC extends Throwable> extends 
     }
 }
 
-final class UserResponse<RSP extends Serializable> implements Serializable {
+final class UserResponse<RSP> implements Serializable {
     private final byte[] response;
 
     public UserResponse(byte[] response) {

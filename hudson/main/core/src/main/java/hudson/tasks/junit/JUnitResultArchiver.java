@@ -1,6 +1,7 @@
 package hudson.tasks.junit;
 
 import hudson.Launcher;
+import hudson.FilePath.FileCallable;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
@@ -11,6 +12,9 @@ import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.FileSet;
 import org.kohsuke.stapler.StaplerRequest;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Generates HTML report from JUnit test result XML files.
@@ -28,21 +32,37 @@ public class JUnitResultArchiver extends AntBasedPublisher {
         this.testResults = testResults;
     }
 
-    public boolean perform(Build build, Launcher launcher, BuildListener listener) {
-        FileSet fs = new FileSet();
-        Project p = new Project();
-        fs.setProject(p);
-        fs.setDir(build.getProject().getWorkspace().getLocal());
-        fs.setIncludes(testResults);
-        DirectoryScanner ds = fs.getDirectoryScanner(p);
+    public boolean perform(Build build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
+        TestResult result;
 
-        if(ds.getIncludedFiles().length==0) {
-            listener.getLogger().println("No test report files were found. Configuration error?");
-            // no test result. Most likely a configuration error or fatal problem
+        try {
+            final long buildTime = build.getTimestamp().getTimeInMillis();
+
+            result = build.getProject().getWorkspace().act(new FileCallable<TestResult>() {
+                public TestResult invoke(File ws) throws IOException {
+                    FileSet fs = new FileSet();
+                    Project p = new Project();
+                    fs.setProject(p);
+                    fs.setDir(ws);
+                    fs.setIncludes(testResults);
+                    DirectoryScanner ds = fs.getDirectoryScanner(p);
+
+                    if(ds.getIncludedFiles().length==0) {
+                        // no test result. Most likely a configuration error or fatal problem
+                        throw new AbortException("No test report files were found. Configuration error?");
+                    }
+
+                    return new TestResult(buildTime,ds);
+                }
+            });
+        } catch (AbortException e) {
+            listener.getLogger().println(e.getMessage());
             build.setResult(Result.FAILURE);
+            return true;
         }
 
-        TestResultAction action = new TestResultAction(build, ds, listener);
+
+        TestResultAction action = new TestResultAction(build, result, listener);
         build.getActions().add(action);
 
         TestResult r = action.getResult();

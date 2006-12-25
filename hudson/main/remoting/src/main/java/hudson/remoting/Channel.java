@@ -1,12 +1,11 @@
 package hudson.remoting;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.Serializable;
-import java.io.EOFException;
 import java.lang.reflect.Proxy;
 import java.util.Hashtable;
 import java.util.Map;
@@ -208,7 +207,7 @@ public class Channel implements VirtualChannel {
     /**
      * {@inheritDoc}
      */
-    public <V extends Serializable,T extends Throwable>
+    public <V,T extends Throwable>
     V call(Callable<V,T> callable) throws IOException, T, InterruptedException {
         UserResponse<V> r = new UserRequest<V,T>(this, callable).call(this);
         try {
@@ -224,9 +223,9 @@ public class Channel implements VirtualChannel {
     /**
      * {@inheritDoc}
      */
-    public <V extends Serializable,T extends Throwable>
+    public <V,T extends Throwable>
     Future<V> callAsync(final Callable<V,T> callable) throws IOException {
-        final Future<UserResponse<V>> f = new UserRequest<V, T>(this, callable).callAsync(this);
+        final Future<UserResponse<V>> f = new UserRequest<V,T>(this, callable).callAsync(this);
         return new FutureAdapter<V,UserResponse<V>>(f) {
             protected V adapt(UserResponse<V> r) throws ExecutionException {
                 try {

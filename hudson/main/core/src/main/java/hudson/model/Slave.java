@@ -243,13 +243,13 @@ public final class Slave implements Node, Serializable {
                 printCommandLine(cmd,_workDir);
 
                 final OutputStream out = new RemoteOutputStream(_out);
-                final InputStream  in  = new RemoteInputStream(_in);
-                final String workDir = _workDir.getRemote();
+                final InputStream  in  = _in==null ? null : new RemoteInputStream(_in);
+                final String workDir = _workDir==null ? null : _workDir.getRemote();
 
                 return new RemoteProc(getChannel().callAsync(new Callable<Integer, IOException>() {
                     public Integer call() throws IOException {
                         Proc p = new LocalLauncher(TaskListener.NULL).launch(cmd, env, in, out,
-                            new FilePath(new File(workDir)));
+                            workDir==null ? null : new FilePath(new File(workDir)));
                         return p.join();
                     }
                 }));

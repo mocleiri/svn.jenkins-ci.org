@@ -20,7 +20,7 @@ public interface VirtualChannel {
      * @throws IOException
      *      If there's any error in the communication between {@link Channel}s.
      */
-    <V extends Serializable,T extends Throwable>
+    <V,T extends Throwable>
     V call(Callable<V,T> callable) throws IOException, T, InterruptedException;
 
     /**
@@ -35,7 +35,7 @@ public interface VirtualChannel {
      * @throws IOException
      *      If there's an error during the communication.
      */
-    <V extends Serializable,T extends Throwable>
+    <V,T extends Throwable>
     Future<V> callAsync(final Callable<V,T> callable) throws IOException;
 
     /**

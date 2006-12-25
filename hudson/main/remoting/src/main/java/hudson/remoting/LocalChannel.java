@@ -16,11 +16,11 @@ public class LocalChannel implements VirtualChannel {
         this.executor = executor;
     }
 
-    public <V extends Serializable, T extends Throwable> V call(Callable<V, T> callable) throws T {
+    public <V, T extends Throwable> V call(Callable<V,T> callable) throws T {
         return callable.call();
     }
 
-    public <V extends Serializable, T extends Throwable> Future<V> callAsync(final Callable<V,T> callable) throws IOException {
+    public <V, T extends Throwable> Future<V> callAsync(final Callable<V,T> callable) throws IOException {
         final java.util.concurrent.Future<V> f = executor.submit(new java.util.concurrent.Callable<V>() {
             public V call() throws Exception {
                 try {

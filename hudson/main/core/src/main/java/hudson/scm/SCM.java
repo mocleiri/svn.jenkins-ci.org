@@ -41,8 +41,12 @@ public interface SCM extends Describable<SCM>, ExtensionPoint {
      *
      * @return true
      *      if the change is detected.
+     *
+     * @throws InterruptedException
+     *      interruption is usually caused by the user aborting the computation.
+     *      this exception should be simply propagated all the way up.
      */
-    boolean pollChanges(Project project, Launcher launcher, FilePath workspace, TaskListener listener) throws IOException;
+    boolean pollChanges(Project project, Launcher launcher, FilePath workspace, TaskListener listener) throws IOException, InterruptedException;
 
     /**
      * Obtains a fresh workspace of the module(s) into the specified directory
