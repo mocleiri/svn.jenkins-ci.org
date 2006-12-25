@@ -197,7 +197,7 @@ public class Mailer extends Publisher {
                 // URL which has already been corrected in a subsequent build. To fix, archive.
                 workspaceUrl = baseUrl + Util.encode(build.getProject().getUrl()) + "ws/";
                 artifactUrl = baseUrl + Util.encode(build.getUrl()) + "artifact/";
-                File workspaceDir = build.getProject().getWorkspace().getLocal();
+                String workspaceDir = build.getProject().getWorkspace().getRemote();
                 // Match either file or URL patterns, i.e. either
                 // c:\hudson\workdir\jobs\foo\workspace\src\Foo.java
                 // file:/c:/hudson/workdir/jobs/foo/workspace/src/Foo.java
@@ -208,7 +208,7 @@ public class Mailer extends Publisher {
                 // workspaceDir will not normally end with one;
                 // workspaceDir.toURI() will end with '/' if and only if workspaceDir.exists() at time of call
                 wsPattern = Pattern.compile("(" +
-                    quoteRegexp(workspaceDir.getPath()) + "|" + quoteRegexp(workspaceDir.toURI().toString()) + ")[/\\\\]?([^:#\\s]*)");
+                    quoteRegexp(workspaceDir) + "|" + quoteRegexp("file://"+workspaceDir) + ")[/\\\\]?([^:#\\s]*)");
             }
             for (int i = start; i < lines.length; i++) {
                 String line = lines[i];

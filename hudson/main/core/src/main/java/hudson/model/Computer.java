@@ -62,7 +62,7 @@ public abstract class Computer implements ModelObject {
      * Gets the channel that can be used to run a program on this computer.
      *
      * @return
-     *      null if the slave is not configured for it.
+     *      never null.
      */
     public abstract VirtualChannel getChannel();
 

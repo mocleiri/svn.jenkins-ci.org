@@ -32,8 +32,12 @@ public interface BuildStep {
      * @return
      *      true if the build can continue, false if there was an error
      *      and the build needs to be aborted.
+     * @throws InterruptedException
+     *      If the build is interrupted by the user (in an attempt to abort the build.)
+     *      Normally the {@link BuildStep} implementations may simply forward the exception
+     *      it got from its lower-level functions.
      */
-    boolean perform(Build build, Launcher launcher, BuildListener listener);
+    boolean perform(Build build, Launcher launcher, BuildListener listener) throws InterruptedException;
 
     /**
      * Returns an action object if this {@link BuildStep} has an action

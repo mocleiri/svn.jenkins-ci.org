@@ -350,7 +350,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         while(tokens.hasMoreTokens()) {
             String url = tokens.nextToken();
             String moduleName = getLastPathComponent(url);
-            File module = workspace.child(moduleName).getLocal();
+            FilePath module = workspace.child(moduleName);
 
             try {
                 SvnInfo svnInfo = SvnInfo.parse(moduleName, createEnvVarMap(false), workspace, listener);

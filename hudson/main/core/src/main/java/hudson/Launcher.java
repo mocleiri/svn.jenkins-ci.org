@@ -115,7 +115,7 @@ public abstract class Launcher {
 
         public Proc launch(String[] cmd,String[] env,InputStream in,OutputStream out, FilePath workDir) throws IOException {
             printCommandLine(cmd, workDir);
-            return new LocalProc(cmd,Util.mapToEnv(inherit(env)),in,out, workDir==null ? null : workDir.getLocal());
+            return new LocalProc(cmd,Util.mapToEnv(inherit(env)),in,out, workDir==null ? null : new File(workDir.getRemote()));
         }
 
         /**

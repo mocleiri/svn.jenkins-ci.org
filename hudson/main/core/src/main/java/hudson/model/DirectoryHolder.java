@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import hudson.FilePath;
 
 /**
  * Has convenience methods to serve file system.
@@ -33,7 +36,7 @@ public abstract class DirectoryHolder extends Actionable {
      *      True to generate the directory index.
      *      False to serve "index.html"
      */
-    protected final void serveFile(StaplerRequest req, StaplerResponse rsp, File root, String icon, boolean serveDirIndex) throws IOException, ServletException {
+    protected final void serveFile(StaplerRequest req, StaplerResponse rsp, FilePath root, String icon, boolean serveDirIndex) throws IOException, ServletException, InterruptedException {
         if(req.getQueryString()!=null) {
             req.setCharacterEncoding("UTF-8");
             String path = req.getParameter("path");
@@ -54,11 +57,11 @@ public abstract class DirectoryHolder extends Actionable {
             return;
         }
 
-        File f = new File(root,path.substring(1));
+        FilePath f = new FilePath(root,path.substring(1));
 
         boolean isFingerprint=false;
         if(f.getName().equals("*fingerprint*")) {
-            f = f.getParentFile();
+            f = f.getParent();
             isFingerprint = true;
         }
 
@@ -85,13 +88,13 @@ public abstract class DirectoryHolder extends Actionable {
                 req.getView(this,"dir.jelly").forward(req,rsp);
                 return;
             } else {
-                f = new File(f,"index.html");
+                f = f.child("index.html");
             }
         }
 
 
         if(isFingerprint) {
-            FileInputStream in = new FileInputStream(f);
+            InputStream in = f.read();
             try {
                 Hudson hudson = Hudson.getInstance();
                 rsp.forward(hudson.getFingerprint(hudson.getDigestOf(in)),"/",req);
@@ -125,7 +128,7 @@ public abstract class DirectoryHolder extends Actionable {
      * list of {@link Path} represents one child item to be shown
      * (this mechanism is used to skip empty intermediate directory.)
      */
-    private List<List<Path>> buildChildPathList(File cur) {
+    private List<List<Path>> buildChildPathList(FilePath cur) {
         List<List<Path>> r = new ArrayList<List<Path>>();
 
         File[] files = cur.listFiles();

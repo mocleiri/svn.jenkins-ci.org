@@ -4,7 +4,6 @@ import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Proc;
 import hudson.Util;
-import hudson.FilePath.DeleteDirTask;
 import static hudson.Util.fixEmpty;
 import hudson.model.Action;
 import hudson.model.Build;
@@ -165,12 +164,7 @@ public class CVSSCM extends AbstractCVSFamilySCM {
             if(changedFiles==null)
                 return false;   // failed
         } else {
-            // TODO: this logic should be moved inside dir.deleteContents()
-            if(launcher.getChannel()==null) {
-                dir.deleteContents();
-            } else {
-                launcher.getChannel().call(new DeleteDirTask(dir));
-            }
+            dir.deleteContents();
 
             ArgumentListBuilder cmd = new ArgumentListBuilder();
             cmd.add("cvs","-Q","-z9","-d",cvsroot,"co");

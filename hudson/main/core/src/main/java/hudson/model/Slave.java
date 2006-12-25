@@ -100,6 +100,10 @@ public final class Slave implements Node, Serializable {
         return description;
     }
 
+    public FilePath getFilePath() {
+        return new FilePath(getComputer().getChannel(),remoteFS);
+    }
+
     public int getNumExecutors() {
         return numExecutors;
     }
@@ -167,12 +171,10 @@ public final class Slave implements Node, Serializable {
     }
 
     /**
-     * @deprecated
-     *      FilePath should become a way to point a remote file system.
+     * Root directory on this slave where all the job workspaces are laid out.
      */
     public FilePath getWorkspaceRoot() {
-        // TODO: implement this method later
-        throw new UnsupportedOperationException();
+        return getFilePath().child("workspace");
     }
 
     public static final class ComputerImpl extends Computer {
@@ -302,8 +304,9 @@ public final class Slave implements Node, Serializable {
      * to the remote workspace. No longer in use.
      *
      * @deprecated
+     *      ... but still in use during the transition.
      */
-    private transient File localFS;
+    private File localFS;
 
     /**
      * In Hudson < 1.69 this was used to store the command

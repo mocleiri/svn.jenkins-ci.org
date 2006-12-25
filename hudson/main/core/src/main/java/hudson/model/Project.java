@@ -697,12 +697,12 @@ public class Project extends Job<Project,Build> {
      * Serves the workspace files.
      */
     public void doWs( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        File dir = getWorkspace().getLocal();
-        if(!dir.exists()) {
+        FilePath ws = getWorkspace();
+        if(!ws.exists()) {
             // if there's no workspace, report a nice error message
             rsp.forward(this,"noWorkspace",req);
         } else {
-            serveFile(req, rsp, dir, "folder.gif", true);
+            serveFile(req, rsp, ws, "folder.gif", true);
         }
     }
 

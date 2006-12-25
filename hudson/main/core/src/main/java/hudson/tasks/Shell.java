@@ -10,8 +10,8 @@ import static hudson.model.Hudson.isWindows;
 import hudson.model.Project;
 import org.kohsuke.stapler.StaplerRequest;
 
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Map;
 
@@ -53,14 +53,14 @@ public class Shell extends Builder {
         return command;
     }
 
-    public boolean perform(Build build, Launcher launcher, BuildListener listener) {
+    public boolean perform(Build build, Launcher launcher, BuildListener listener) throws InterruptedException {
         Project proj = build.getProject();
         FilePath ws = proj.getWorkspace();
         FilePath script=null;
         try {
             try {
                 script = ws.createTempFile("hudson","sh");
-                Writer w = new FileWriter(script.getLocal());
+                Writer w = new OutputStreamWriter(script.write());
                 w.write(command);
                 w.close();
             } catch (IOException e) {
@@ -81,8 +81,13 @@ public class Shell extends Builder {
             }
             return r==0;
         } finally {
-            if(script!=null)
+            try {
+                if(script!=null)
                 script.delete();
+            } catch (IOException e) {
+                Util.displayIOException(e,listener);
+                e.printStackTrace( listener.fatalError("Unable to delete script file "+script) );
+            }
         }
     }
 
