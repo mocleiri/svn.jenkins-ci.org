@@ -1,8 +1,10 @@
 package hudson.remoting;
 
-import java.util.concurrent.*;
-import java.io.Serializable;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * {@link VirtualChannel} that performs computation on the local JVM.
@@ -60,5 +62,9 @@ public class LocalChannel implements VirtualChannel {
 
     public void close() {
         // noop
+    }
+
+    public <T> T export(Class<T> intf, T instance) {
+        return instance;
     }
 }

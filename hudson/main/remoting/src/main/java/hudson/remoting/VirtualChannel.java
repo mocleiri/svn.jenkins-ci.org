@@ -1,6 +1,5 @@
 package hudson.remoting;
 
-import java.io.Serializable;
 import java.io.IOException;
 
 /**
@@ -45,4 +44,20 @@ public interface VirtualChannel {
      *      if the orderly shut-down failed.
      */
     void close() throws IOException;
+
+    /**
+     * Exports an object for remoting to the other {@link Channel}
+     * by creating a remotable proxy.
+     *
+     * <p>
+     * All the parameters and return values must be serializable.
+     *
+     * @param type
+     *      Interface to be remoted.
+     * @return
+     *      the proxy object that implements <tt>T</tt>. This object can be transfered
+     *      to the other {@link Channel}, and calling methods on it from the remote side
+     *      will invoke the same method on the given local <tt>instance</tt> object.
+     */
+    <T> T export( Class<T> type, T instance);
 }

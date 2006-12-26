@@ -169,18 +169,7 @@ public class Channel implements VirtualChannel {
     }
 
     /**
-     * Exports an object for remoting to the other {@link Channel}
-     * by creating a remotable proxy.
-     *
-     * <p>
-     * All the parameters and return values must be serializable.
-     *
-     * @param type
-     *      Interface to be remoted.
-     * @return
-     *      the proxy object that implements <tt>T</tt>. This object can be transfered
-     *      to the other {@link Channel}, and calling methods on it from the remote side
-     *      will invoke the same method on the given local <tt>instance</tt> object.
+     * {@inheritDoc}
      */
     public <T> T export(Class<T> type, T instance) {
         if(instance==null)
