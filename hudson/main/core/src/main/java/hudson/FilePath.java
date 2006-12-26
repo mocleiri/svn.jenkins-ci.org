@@ -531,6 +531,7 @@ public final class FilePath implements Serializable {
         if(channel!=null && channel!=target)
             throw new IllegalStateException("Can't send a remote FilePath to a different remote channel");
 
+        oos.defaultWriteObject();
         oos.writeBoolean(channel==null);
     }
 
@@ -538,6 +539,7 @@ public final class FilePath implements Serializable {
         Channel channel = Channel.current();
         assert channel!=null;
 
+        ois.defaultReadObject();
         if(ois.readBoolean()) {
             this.channel = channel;
         } else {
