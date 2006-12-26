@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 /**
  * Sits behind a proxy object and implements the proxy logic.
@@ -62,6 +63,9 @@ final class RemoteInvocationHandler implements InvocationHandler, Serializable {
      * Two proxies are the same iff they represent the same remote object. 
      */
     public boolean equals(Object o) {
+        if(Proxy.isProxyClass(o.getClass()))
+            o = Proxy.getInvocationHandler(o);
+
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
