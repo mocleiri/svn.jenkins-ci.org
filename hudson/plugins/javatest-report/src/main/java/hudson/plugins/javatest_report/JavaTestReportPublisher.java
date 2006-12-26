@@ -71,10 +71,6 @@ public class JavaTestReportPublisher extends Publisher {
         }
     }
 
-    private interface Reporter {
-        void log(String msg);
-    }
-
     public boolean perform(Build build, Launcher launcher, final BuildListener listener) throws IOException, InterruptedException {
         final long buildTime = build.getTimestamp().getTimeInMillis();
 
@@ -86,13 +82,6 @@ public class JavaTestReportPublisher extends Publisher {
         File dataDir = JavaTestAction.getDataDir(build);
         dataDir.mkdirs();
         final FilePath target = new FilePath(dataDir);
-
-        // TODO: we need to remote BuildListener
-        final Reporter reporter = launcher.getChannel().export(Reporter.class,new Reporter() {
-            public void log(String msg) {
-                listener.getLogger().println(msg);
-            }
-        });
 
         try {
             build.getProject().getWorkspace().act(new FileCallable<Void>() {
@@ -116,7 +105,7 @@ public class JavaTestReportPublisher extends Publisher {
                         File src = new File(ws, file);
 
                         if(src.lastModified()<buildTime) {
-                            reporter.log("Skipping "+src+" because it's not up to date");
+                            listener.getLogger().println("Skipping "+src+" because it's not up to date");
                             continue;       // not up to date.
                         }
 
