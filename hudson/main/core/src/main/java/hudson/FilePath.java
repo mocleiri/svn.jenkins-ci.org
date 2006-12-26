@@ -6,26 +6,25 @@ import hudson.remoting.Pipe;
 import hudson.remoting.RemoteOutputStream;
 import hudson.remoting.VirtualChannel;
 import hudson.util.IOException2;
+import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.DirectoryScanner;
+import org.apache.tools.ant.taskdefs.Copy;
+import org.apache.tools.ant.types.FileSet;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.io.FileFilter;
 import java.io.Writer;
-import java.io.FileWriter;
-import java.util.List;
 import java.util.ArrayList;
-
-import org.apache.tools.ant.taskdefs.Copy;
-import org.apache.tools.ant.types.FileSet;
-import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.DirectoryScanner;
+import java.util.List;
 
 /**
  * {@link File} like path-manipulation object with remoting capability.
@@ -336,8 +335,10 @@ public final class FilePath implements Serializable {
      * Reads this file.
      */
     public InputStream read() throws IOException {
-        final Pipe p = Pipe.createRemoteToLocal();
+        if(channel==null)
+            return new FileInputStream(new File(remote));
 
+        final Pipe p = Pipe.createRemoteToLocal();
         channel.callAsync(new Callable<Void,IOException>() {
             public Void call() throws IOException {
                 FileInputStream fis = new FileInputStream(new File(remote));
@@ -353,10 +354,13 @@ public final class FilePath implements Serializable {
 
     /**
      * Writes to this file.
+     * If this file already exists, it will be overwritten.
      */
     public OutputStream write() throws IOException {
-        final Pipe p = Pipe.createLocalToRemote();
+        if(channel==null)
+            return new FileOutputStream(new File(remote));
 
+        final Pipe p = Pipe.createLocalToRemote();
         channel.callAsync(new Callable<Void,IOException>() {
             public Void call() throws IOException {
                 FileOutputStream fos = new FileOutputStream(new File(remote));
@@ -368,6 +372,18 @@ public final class FilePath implements Serializable {
         });
 
         return p.getOut();
+    }
+
+    /**
+     * Copies this file to the specified target.
+     */
+    public void copyTo(FilePath target) throws IOException, InterruptedException {
+        OutputStream out = target.write();
+        try {
+            copyTo(out);
+        } finally {
+            out.close();
+        }
     }
 
     /**
