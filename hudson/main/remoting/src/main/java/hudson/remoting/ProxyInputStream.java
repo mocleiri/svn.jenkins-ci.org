@@ -62,7 +62,11 @@ final class ProxyInputStream extends InputStream {
 
     @Override
     public synchronized void close() throws IOException {
-        channel.send(new EOF(oid));
+        if(channel!=null) {
+            channel.send(new EOF(oid));
+            channel = null;
+            oid = -1;
+        }
     }
 
     private static final class Buffer implements Serializable {

@@ -89,10 +89,12 @@ final class ProxyOutputStream extends OutputStream {
     }
 
     public synchronized void close() throws IOException {
-        if(channel==null)
-            closed = true;
-        else
+        closed = true;
+        if(channel!=null) {
             channel.send(new EOF(oid));
+            channel = null;
+            oid = -1;
+        }
     }
 
     /**
