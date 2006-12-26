@@ -22,6 +22,7 @@ package hudson.plugins.javatest_report;
 import hudson.FilePath;
 import hudson.FilePath.FileCallable;
 import hudson.Launcher;
+import hudson.remoting.VirtualChannel;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
@@ -29,7 +30,6 @@ import hudson.model.Project;
 import hudson.model.Result;
 import hudson.tasks.Publisher;
 import hudson.util.IOException2;
-import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.types.FileSet;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -85,7 +85,7 @@ public class JavaTestReportPublisher extends Publisher {
 
         try {
             build.getProject().getWorkspace().act(new FileCallable<Void>() {
-                public Void invoke(File ws) throws IOException {
+                public Void invoke(File ws, VirtualChannel channel) throws IOException {
                     FileSet fs = new FileSet();
                     org.apache.tools.ant.Project p = new org.apache.tools.ant.Project();
                     fs.setProject(p);

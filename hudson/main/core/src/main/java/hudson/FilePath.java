@@ -6,6 +6,7 @@ import hudson.remoting.Pipe;
 import hudson.remoting.RemoteOutputStream;
 import hudson.remoting.VirtualChannel;
 import hudson.util.IOException2;
+import hudson.model.Hudson;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.taskdefs.Copy;
@@ -111,8 +112,9 @@ public final class FilePath implements Serializable {
          *
          * @param f
          *      {@link File} that represents the local file that {@link FilePath} represents.
+         * @param channel
          */
-        T invoke(File f) throws IOException;
+        T invoke(File f, VirtualChannel channel) throws IOException;
     }
 
     /**
@@ -125,7 +127,7 @@ public final class FilePath implements Serializable {
             try {
                 return channel.call(new Callable<T,IOException>() {
                     public T call() throws IOException {
-                        return callable.invoke(new File(remote));
+                        return callable.invoke(new File(remote), Channel.current());
                     }
                 });
             } catch (IOException e) {
@@ -133,8 +135,8 @@ public final class FilePath implements Serializable {
                 throw new IOException2("remote file operation failed",e);
             }
         } else {
-            // the file is on the local machine
-            return callable.invoke(new File(remote));
+            // the file is on the local machine.
+            return callable.invoke(new File(remote), Hudson.MasterComputer.localChannel);
         }
     }
 
@@ -157,7 +159,7 @@ public final class FilePath implements Serializable {
      */
     public void mkdirs() throws IOException, InterruptedException {
         if(act(new FileCallable<Boolean>() {
-            public Boolean invoke(File f) throws IOException {
+            public Boolean invoke(File f, VirtualChannel channel) throws IOException {
                 return !f.mkdirs() && !f.exists();
             }
         }))
@@ -169,7 +171,7 @@ public final class FilePath implements Serializable {
      */
     public void deleteRecursive() throws IOException, InterruptedException {
         act(new FileCallable<Void>() {
-            public Void invoke(File f) throws IOException {
+            public Void invoke(File f, VirtualChannel channel) throws IOException {
                 Util.deleteRecursive(f);
                 return null;
             }
@@ -181,7 +183,7 @@ public final class FilePath implements Serializable {
      */
     public void deleteContents() throws IOException, InterruptedException {
         act(new FileCallable<Void>() {
-            public Void invoke(File f) throws IOException {
+            public Void invoke(File f, VirtualChannel channel) throws IOException {
                 Util.deleteContentsRecursive(f);
                 return null;
             }
@@ -270,7 +272,7 @@ public final class FilePath implements Serializable {
      */
     public boolean delete() throws IOException, InterruptedException {
         return act(new FileCallable<Boolean>() {
-            public Boolean invoke(File f) throws IOException {
+            public Boolean invoke(File f, VirtualChannel channel) throws IOException {
                 return f.delete();
             }
         });
@@ -281,7 +283,7 @@ public final class FilePath implements Serializable {
      */
     public boolean exists() throws IOException, InterruptedException {
         return act(new FileCallable<Boolean>() {
-            public Boolean invoke(File f) throws IOException {
+            public Boolean invoke(File f, VirtualChannel channel) throws IOException {
                 return f.exists();
             }
         });
@@ -295,7 +297,7 @@ public final class FilePath implements Serializable {
      */
     public long lastModified() throws IOException, InterruptedException {
         return act(new FileCallable<Long>() {
-            public Long invoke(File f) throws IOException {
+            public Long invoke(File f, VirtualChannel channel) throws IOException {
                 return f.lastModified();
             }
         });
@@ -306,7 +308,7 @@ public final class FilePath implements Serializable {
      */
     public boolean isDirectory() throws IOException, InterruptedException {
         return act(new FileCallable<Boolean>() {
-            public Boolean invoke(File f) throws IOException {
+            public Boolean invoke(File f, VirtualChannel channel) throws IOException {
                 return f.isDirectory();
             }
         });
@@ -323,7 +325,7 @@ public final class FilePath implements Serializable {
      */
     public List<FilePath> list(final FileFilter filter) throws IOException, InterruptedException {
         return act(new FileCallable<List<FilePath>>() {
-            public List<FilePath> invoke(File f) throws IOException {
+            public List<FilePath> invoke(File f, VirtualChannel channel) throws IOException {
                 File[] children = f.listFiles(filter);
                 if(children ==null)     return null;
 
@@ -429,7 +431,7 @@ public final class FilePath implements Serializable {
         if(this.channel==target.channel) {
             // local to local copy.
             return act(new FileCallable<Integer>() {
-                public Integer invoke(File base) throws IOException {
+                public Integer invoke(File base, VirtualChannel channel) throws IOException {
                     assert target.channel==null;
 
                     try {
@@ -463,8 +465,8 @@ public final class FilePath implements Serializable {
 
             return target.act(new FileCallable<Integer>() {
                 // this code is executed on the node that receives files.
-                public Integer invoke(final File dest) throws IOException {
-                    final RemoteCopier copier = Channel.current().export(
+                public Integer invoke(final File dest, VirtualChannel channel) throws IOException {
+                    final RemoteCopier copier = src.getChannel().export(
                         RemoteCopier.class,
                         new RemoteCopier() {
                             private OutputStream os;
@@ -486,7 +488,7 @@ public final class FilePath implements Serializable {
 
                     try {
                         return src.act(new FileCallable<Integer>() {
-                            public Integer invoke(File base) throws IOException {
+                            public Integer invoke(File base, VirtualChannel channel) throws IOException {
                                 // copy to a remote node
                                 FileSet fs = new FileSet();
                                 fs.setDir(base);
@@ -523,6 +525,11 @@ public final class FilePath implements Serializable {
     public String toString() {
         // to make writing JSPs easily, return local
         return remote;
+    }
+
+    public VirtualChannel getChannel() {
+        if(channel!=null)   return channel;
+        else                return Hudson.MasterComputer.localChannel;
     }
 
     private void writeObject(ObjectOutputStream oos) throws IOException {

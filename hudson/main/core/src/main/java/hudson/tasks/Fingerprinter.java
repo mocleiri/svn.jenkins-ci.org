@@ -1,6 +1,7 @@
 package hudson.tasks;
 
 import hudson.Launcher;
+import hudson.remoting.VirtualChannel;
 import hudson.util.IOException2;
 import hudson.FilePath.FileCallable;
 import hudson.model.Action;
@@ -123,7 +124,7 @@ public class Fingerprinter extends Publisher {
         final long buildTimestamp = build.getTimestamp().getTimeInMillis();
 
         List<Record> records = p.getWorkspace().act(new FileCallable<List<Record>>() {
-            public List<Record> invoke(File baseDir) throws IOException {
+            public List<Record> invoke(File baseDir, VirtualChannel channel) throws IOException {
                 List<Record> results = new ArrayList<Record>();
 
                 FileSet src = new FileSet();

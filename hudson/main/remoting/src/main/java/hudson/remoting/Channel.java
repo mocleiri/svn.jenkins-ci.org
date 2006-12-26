@@ -198,8 +198,8 @@ public class Channel implements VirtualChannel {
      */
     public <V,T extends Throwable>
     V call(Callable<V,T> callable) throws IOException, T, InterruptedException {
-        UserResponse<V> r = new UserRequest<V,T>(this, callable).call(this);
         try {
+            UserResponse<V> r = new UserRequest<V,T>(this, callable).call(this);
             return r.retrieve(this, callable.getClass().getClassLoader());
         } catch (ClassNotFoundException e) {
             // this is unlikely to happen, so this is a lame implementation

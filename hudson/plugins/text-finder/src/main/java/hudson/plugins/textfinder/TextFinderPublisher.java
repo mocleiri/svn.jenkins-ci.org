@@ -3,6 +3,7 @@ package hudson.plugins.textfinder;
 
 import hudson.Launcher;
 import hudson.remoting.RemoteOutputStream;
+import hudson.remoting.VirtualChannel;
 import hudson.FilePath.FileCallable;
 import hudson.model.Build;
 import hudson.model.BuildListener;
@@ -75,7 +76,7 @@ public class TextFinderPublisher extends Publisher {
 
         try {
             Boolean foundText = build.getProject().getWorkspace().act(new FileCallable<Boolean>() {
-                public Boolean invoke(File ws) throws IOException {
+                public Boolean invoke(File ws, VirtualChannel channel) throws IOException {
                     PrintStream logger = new PrintStream(ros);
 
                     // Collect list of files for searching

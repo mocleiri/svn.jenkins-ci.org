@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import hudson.FilePath;
+import hudson.remoting.VirtualChannel;
 import hudson.FilePath.FileCallable;
 
 /**
@@ -110,7 +111,7 @@ public abstract class DirectoryHolder extends Actionable {
             }
 
             ContentInfo ci = f.act(new FileCallable<ContentInfo>() {
-                public ContentInfo invoke(File f) throws IOException {
+                public ContentInfo invoke(File f, VirtualChannel channel) throws IOException {
                     ContentInfo ci = new ContentInfo();
                     ci.contentLength = (int) f.length();
                     ci.lastModified = f.lastModified();
@@ -148,7 +149,7 @@ public abstract class DirectoryHolder extends Actionable {
      */
     private List<List<Path>> buildChildPathList(FilePath cur) throws InterruptedException, IOException {
         return cur.act(new FileCallable<List<List<Path>>>() {
-            public List<List<Path>> invoke(File cur) throws IOException {
+            public List<List<Path>> invoke(File cur, VirtualChannel channel) throws IOException {
                 List<List<Path>> r = new ArrayList<List<Path>>();
 
                 File[] files = cur.listFiles();

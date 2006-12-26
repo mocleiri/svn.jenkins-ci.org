@@ -3,6 +3,7 @@ package hudson.plugins.jwsdp_sqe;
 import hudson.FilePath;
 import hudson.FilePath.FileCallable;
 import hudson.Launcher;
+import hudson.remoting.VirtualChannel;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
@@ -65,7 +66,7 @@ public class SQETestResultPublisher extends Publisher {
 
         try {
             build.getProject().getWorkspace().act(new FileCallable<Void>() {
-                public Void invoke(File ws) throws IOException {
+                public Void invoke(File ws, VirtualChannel channel) throws IOException {
                     FileSet fs = new FileSet();
                     org.apache.tools.ant.Project p = new org.apache.tools.ant.Project();
                     fs.setProject(p);

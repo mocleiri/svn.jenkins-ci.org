@@ -1,6 +1,7 @@
 package hudson.tasks.junit;
 
 import hudson.Launcher;
+import hudson.remoting.VirtualChannel;
 import hudson.FilePath.FileCallable;
 import hudson.model.Build;
 import hudson.model.BuildListener;
@@ -39,7 +40,7 @@ public class JUnitResultArchiver extends AntBasedPublisher {
             final long buildTime = build.getTimestamp().getTimeInMillis();
 
             result = build.getProject().getWorkspace().act(new FileCallable<TestResult>() {
-                public TestResult invoke(File ws) throws IOException {
+                public TestResult invoke(File ws, VirtualChannel channel) throws IOException {
                     FileSet fs = new FileSet();
                     Project p = new Project();
                     fs.setProject(p);

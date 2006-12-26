@@ -18,6 +18,7 @@ import hudson.model.TaskListener;
 import hudson.model.Result;
 import hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
 import hudson.remoting.RemoteOutputStream;
+import hudson.remoting.VirtualChannel;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.ForkOutputStream;
 import hudson.util.FormFieldValidator;
@@ -194,7 +195,7 @@ public class CVSSCM extends AbstractCVSFamilySCM implements Serializable {
         final OutputStream os = new RemoteOutputStream(new FileOutputStream(archiveFile));
         
         build.getProject().getWorkspace().act(new FileCallable<Void>() {
-            public Void invoke(File ws) throws IOException {
+            public Void invoke(File ws, VirtualChannel channel) throws IOException {
                 ZipOutputStream zos = new ZipOutputStream(new BufferedOutputStream(os));
 
                 if(flatten) {
@@ -325,7 +326,7 @@ public class CVSSCM extends AbstractCVSFamilySCM implements Serializable {
 
             // Add in any existing CVS dirs, in case project checked out its own.
             moduleNames.addAll(workspace.act(new FileCallable<Set<String>>() {
-                public Set<String> invoke(File ws) throws IOException {
+                public Set<String> invoke(File ws, VirtualChannel channel) throws IOException {
                     File[] subdirs = ws.listFiles();
                     if (subdirs != null) {
                         SUBDIR: for (File s : subdirs) {
@@ -425,7 +426,7 @@ public class CVSSCM extends AbstractCVSFamilySCM implements Serializable {
      */
     private boolean isUpdatable(FilePath dir) throws IOException, InterruptedException {
         return dir.act(new FileCallable<Boolean>() {
-            public Boolean invoke(File dir) throws IOException {
+            public Boolean invoke(File dir, VirtualChannel channel) throws IOException {
                 if(flatten) {
                     return isUpdatableModule(dir);
                 } else {
@@ -558,7 +559,7 @@ public class CVSSCM extends AbstractCVSFamilySCM implements Serializable {
             final OutputStream out = new RemoteOutputStream(new FileOutputStream(changelogFile));
 
             ChangeLogResult result = baseDir.act(new FileCallable<ChangeLogResult>() {
-                public ChangeLogResult invoke(File ws) throws IOException {
+                public ChangeLogResult invoke(File ws, VirtualChannel channel) throws IOException {
                     final StringWriter errorOutput = new StringWriter();
                     final boolean[] hadError = new boolean[1];
 
