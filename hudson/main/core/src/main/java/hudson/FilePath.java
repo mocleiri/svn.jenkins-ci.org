@@ -113,6 +113,8 @@ public final class FilePath implements Serializable {
          * @param f
          *      {@link File} that represents the local file that {@link FilePath} represents.
          * @param channel
+         *      The "back pointer" of the {@link Channel} that represents the communication
+         *      with the node from where the code was sent.
          */
         T invoke(File f, VirtualChannel channel) throws IOException;
     }
