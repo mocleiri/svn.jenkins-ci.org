@@ -5,6 +5,7 @@ import hudson.Launcher;
 import hudson.Proc;
 import hudson.Proc.RemoteProc;
 import hudson.Util;
+import hudson.Launcher.LocalLauncher;
 import hudson.model.Descriptor.FormException;
 import hudson.remoting.Callable;
 import hudson.remoting.Channel;
@@ -238,7 +239,6 @@ public final class Slave implements Node, Serializable {
 
     public Launcher createLauncher(TaskListener listener) {
         return new Launcher(listener, getComputer().getChannel()) {
-
             public Proc launch(final String[] cmd, final String[] env, InputStream _in, OutputStream _out, FilePath _workDir) throws IOException {
                 printCommandLine(cmd,_workDir);
 
@@ -246,13 +246,7 @@ public final class Slave implements Node, Serializable {
                 final InputStream  in  = _in==null ? null : new RemoteInputStream(_in);
                 final String workDir = _workDir==null ? null : _workDir.getRemote();
 
-                return new RemoteProc(getChannel().callAsync(new Callable<Integer, IOException>() {
-                    public Integer call() throws IOException {
-                        Proc p = new LocalLauncher(TaskListener.NULL).launch(cmd, env, in, out,
-                            workDir==null ? null : new FilePath(new File(workDir)));
-                        return p.join();
-                    }
-                }));
+                return new RemoteProc(getChannel().callAsync(new RemoteLaunchCallable(cmd, env, in, out, workDir)));
             }
 
             @Override
@@ -315,4 +309,28 @@ public final class Slave implements Node, Serializable {
      * @deprecated
      */
     private transient String command;
+
+    private static class RemoteLaunchCallable implements Callable<Integer,IOException> {
+        private final String[] cmd;
+        private final String[] env;
+        private final InputStream in;
+        private final OutputStream out;
+        private final String workDir;
+
+        public RemoteLaunchCallable(String[] cmd, String[] env, InputStream in, OutputStream out, String workDir) {
+            this.cmd = cmd;
+            this.env = env;
+            this.in = in;
+            this.out = out;
+            this.workDir = workDir;
+        }
+
+        public Integer call() throws IOException {
+            Proc p = new LocalLauncher(TaskListener.NULL).launch(cmd, env, in, out,
+                workDir ==null ? null : new FilePath(new File(workDir)));
+            return p.join();
+        }
+
+        private static final long serialVersionUID = 1L;
+    }
 }
