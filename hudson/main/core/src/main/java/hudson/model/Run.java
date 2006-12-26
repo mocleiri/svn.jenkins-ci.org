@@ -509,33 +509,12 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
 
             long start = System.currentTimeMillis();
             BuildListener listener=null;
+            PrintStream log = null;
 
             try {
                 try {
-                    final PrintStream log = new PrintStream(new FileOutputStream(getLogFile()));
-                    listener = new BuildListener() {
-                        final PrintWriter pw = new PrintWriter(new CloseProofOutputStream(log),true);
-
-                        public void started() {}
-
-                        public PrintStream getLogger() {
-                            return log;
-                        }
-
-                        public PrintWriter error(String msg) {
-                            pw.println("ERROR: "+msg);
-                            return pw;
-                        }
-
-                        public PrintWriter fatalError(String msg) {
-                            return error(msg);
-                        }
-
-                        public void finished(Result result) {
-                            pw.close();
-                            log.close();
-                        }
-                    };
+                    log = new PrintStream(new FileOutputStream(getLogFile()));
+                    listener = new StreamBuildListener(new CloseProofOutputStream(log));
 
                     listener.started();
 
@@ -564,6 +543,8 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
 
             if(listener!=null)
                 listener.finished(result);
+            if(log!=null)
+                log.close();
 
             try {
                 save();

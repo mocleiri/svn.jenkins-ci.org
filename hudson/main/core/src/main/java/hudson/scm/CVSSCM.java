@@ -972,7 +972,7 @@ public class CVSSCM extends AbstractCVSFamilySCM implements Serializable {
         public final class TagWorkerThread extends Thread {
             private final String tagName;
             // StringWriter is synchronized
-            private final StringWriter log = new StringWriter();
+            private final ByteArrayOutputStream log = new ByteArrayOutputStream();
 
             public TagWorkerThread(String tagName) {
                 this.tagName = tagName;

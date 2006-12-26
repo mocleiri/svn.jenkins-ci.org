@@ -1,18 +1,18 @@
 package hudson.model;
 
-import hudson.remoting.RemoteWriter;
-import hudson.util.WriterOutputStream;
+import hudson.remoting.RemoteOutputStream;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.Writer;
 
 /**
- * {@link BuildListener} that writes to a {@link Writer}.
+ * {@link BuildListener} that writes to an {@link OutputStream}.
  *
  * This class is remotable.
  * 
@@ -23,15 +23,15 @@ public class StreamBuildListener implements BuildListener, Serializable {
 
     private PrintStream ps;
 
-    public StreamBuildListener(Writer w) {
-        this(new PrintWriter(w));
+    public StreamBuildListener(OutputStream w) {
+        this(new PrintStream(w));
     }
 
-    public StreamBuildListener(PrintWriter w) {
-        this.w = w;
+    public StreamBuildListener(PrintStream w) {
+        this.ps = w;
         // unless we auto-flash, PrintStream will use BufferedOutputStream internally,
         // and break ordering
-        this.ps = new PrintStream(new WriterOutputStream(w),true);
+        this.w = new PrintWriter(w,true);
     }
 
     public void started() {
@@ -58,12 +58,12 @@ public class StreamBuildListener implements BuildListener, Serializable {
 
 
     private void writeObject(ObjectOutputStream out) throws IOException {
-        out.writeObject(new RemoteWriter(w));
+        out.writeObject(new RemoteOutputStream(ps));
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        w = new PrintWriter((Writer)in.readObject(),true);
-        ps = new PrintStream(new WriterOutputStream(w),true);
+        ps = new PrintStream((OutputStream)in.readObject(),true);
+        w = new PrintWriter(ps,true);
     }
 
     private static final long serialVersionUID = 1L;
