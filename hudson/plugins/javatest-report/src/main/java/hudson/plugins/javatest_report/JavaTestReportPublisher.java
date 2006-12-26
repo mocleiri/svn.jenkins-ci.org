@@ -88,11 +88,12 @@ public class JavaTestReportPublisher extends Publisher {
                 public Void invoke(File ws) throws IOException {
                     FileSet fs = new FileSet();
                     org.apache.tools.ant.Project p = new org.apache.tools.ant.Project();
+                    fs.setProject(p);
                     fs.setDir(ws);
                     fs.setIncludes(includes);
-                    DirectoryScanner ds = fs.getDirectoryScanner(p);
+                    String[] includedFiles = fs.getDirectoryScanner(p).getIncludedFiles();
 
-                    if(ds.getIncludedFiles().length==0)
+                    if(includedFiles.length==0)
                         // no test result. Most likely a configuration error or fatal problem
                         throw new AbortException("No Java test report files were found. Configuration error?");
 
@@ -101,7 +102,7 @@ public class JavaTestReportPublisher extends Publisher {
                     // archive report files.
                     // this is not the most efficient way to do this,
                     // but there usually aren't too many report files, so this works OK in practice.
-                    for (String file : ds.getIncludedFiles()) {
+                    for (String file : includedFiles) {
                         File src = new File(ws, file);
 
                         if(src.lastModified()<buildTime) {
@@ -115,7 +116,6 @@ public class JavaTestReportPublisher extends Publisher {
                             throw new IOException2("aborted while copying "+src,e);
                         }
                     }
-
                     return null;
                 }
             });
