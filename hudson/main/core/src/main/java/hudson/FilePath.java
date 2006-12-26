@@ -105,7 +105,7 @@ public final class FilePath implements Serializable {
      * Code that gets executed on the machine where the {@link FilePath} is local.
      * Used to act on {@link FilePath}.
      */
-    public static interface FileCallable<T> {
+    public static interface FileCallable<T> extends Serializable {
         /**
          * Performs the task
          *
@@ -122,11 +122,16 @@ public final class FilePath implements Serializable {
     public <T> T act(final FileCallable<T> callable) throws IOException, InterruptedException {
         if(channel!=null) {
             // run this on a remote system
-            return channel.call(new Callable<T,IOException>() {
-                public T call() throws IOException {
-                    return callable.invoke(new File(remote));
-                }
-            });
+            try {
+                return channel.call(new Callable<T,IOException>() {
+                    public T call() throws IOException {
+                        return callable.invoke(new File(remote));
+                    }
+                });
+            } catch (IOException e) {
+                // wrap it into a new IOException so that we get the caller's stack trace as well.
+                throw new IOException2("remote file operation failed",e);
+            }
         } else {
             // the file is on the local machine
             return callable.invoke(new File(remote));
