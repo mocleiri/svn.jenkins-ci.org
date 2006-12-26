@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.io.NotSerializableException;
 
 /**
  * {@link Request} that can take {@link Callable} whose actual implementation
@@ -69,6 +70,10 @@ final class UserRequest<RSP,EXC extends Throwable> extends Request<UserResponse<
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             new ObjectOutputStream(baos).writeObject(o);
             return baos.toByteArray();
+        } catch( NotSerializableException e ) {
+            IOException x = new IOException("Unable to serialize " + o);
+            x.initCause(e);
+            throw x;
         } finally {
             Channel.setCurrent(old);
         }
