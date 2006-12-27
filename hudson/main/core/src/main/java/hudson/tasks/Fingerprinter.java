@@ -41,7 +41,7 @@ import java.util.logging.Logger;
  *
  * @author Kohsuke Kawaguchi
  */
-public class Fingerprinter extends Publisher {
+public class Fingerprinter extends Publisher implements Serializable {
 
     /**
      * Comma-separated list of files/directories to be fingerprinted.
@@ -111,7 +111,7 @@ public class Fingerprinter extends Publisher {
                 this.fileName = fileName;
                 this.md5sum = md5sum;
             }
-            
+
             Fingerprint addRecord(Build build) throws IOException {
                 FingerprintMap map = Hudson.getInstance().getFingerprintMap();
                 return map.getOrCreate(produced?build:null, fileName, md5sum);
@@ -284,4 +284,6 @@ public class Fingerprinter extends Publisher {
     }
 
     private static final Logger logger = Logger.getLogger(Fingerprinter.class.getName());
+
+    private static final long serialVersionUID = 1L;
 }
