@@ -77,7 +77,7 @@ public final class FilePath implements Serializable {
      */
     public FilePath(File localPath) {
         this.channel = null;
-        this.remote = localPath.toString();
+        this.remote = localPath.getPath();
     }
 
     public FilePath(FilePath base, String rel) {
