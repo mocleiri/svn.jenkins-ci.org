@@ -4,12 +4,12 @@ import com.thoughtworks.xstream.XStream;
 import groovy.lang.GroovyShell;
 import hudson.FeedAdapter;
 import hudson.Launcher;
+import hudson.Launcher.LocalLauncher;
 import hudson.Plugin;
 import hudson.PluginManager;
 import hudson.PluginWrapper;
 import hudson.Util;
 import hudson.XmlFile;
-import hudson.Launcher.LocalLauncher;
 import hudson.model.Descriptor.FormException;
 import hudson.model.listeners.JobListener;
 import hudson.remoting.LocalChannel;
@@ -44,12 +44,8 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.security.DigestInputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -1056,7 +1052,7 @@ public final class Hudson extends JobCollection implements Node {
             List<FileItem> items = upload.parseRequest(req);
 
             rsp.sendRedirect2(req.getContextPath()+"/fingerprint/"+
-                getDigestOf(items.get(0).getInputStream())+'/');
+                Util.getDigestOf(items.get(0).getInputStream())+'/');
 
             // if an error occur and we fail to do this, it will still be cleaned up
             // when GC-ed.
@@ -1064,24 +1060,6 @@ public final class Hudson extends JobCollection implements Node {
                 item.delete();
         } catch (FileUploadException e) {
             throw new ServletException(e);  // I'm not sure what the implication of this
-        }
-    }
-
-    public String getDigestOf(InputStream source) throws IOException, ServletException {
-        try {
-            MessageDigest md5 = MessageDigest.getInstance("MD5");
-
-            DigestInputStream in =new DigestInputStream(source,md5);
-            byte[] buf = new byte[8192];
-            try {
-                while(in.read(buf)>0)
-                    ; // simply discard the input
-            } finally {
-                in.close();
-            }
-            return Util.toHexString(md5.digest());
-        } catch (NoSuchAlgorithmException e) {
-            throw new ServletException(e);    // impossible
         }
     }
 

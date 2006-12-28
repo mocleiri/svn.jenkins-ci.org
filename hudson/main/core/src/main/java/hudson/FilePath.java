@@ -384,6 +384,17 @@ public final class FilePath implements Serializable {
     }
 
     /**
+     * Computes the MD5 digest of the file in hex string.
+     */
+    public String digest() throws IOException, InterruptedException {
+        return act(new FileCallable<String>() {
+            public String invoke(File f, VirtualChannel channel) throws IOException {
+                return Util.getDigestOf(new FileInputStream(f));
+            }
+        });
+    }
+
+    /**
      * Copies this file to the specified target.
      */
     public void copyTo(FilePath target) throws IOException, InterruptedException {

@@ -1,10 +1,12 @@
 package hudson;
 
 import hudson.model.TaskListener;
+import hudson.util.IOException2;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.Chmod;
 import org.apache.tools.ant.taskdefs.Copy;
 
+import javax.servlet.ServletException;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -26,6 +28,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.security.MessageDigest;
+import java.security.DigestInputStream;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -220,6 +225,34 @@ public class Util {
     public static String nullify(String v) {
         if(v!=null && v.length()==0)    v=null;
         return v;
+    }
+
+    /**
+     * Write-only buffer.
+     */
+    private static final byte[] garbage = new byte[8192];
+
+    /**
+     * Computes MD5 digest of the given input stream.
+     *
+     * @param source
+     *      The stream will be closed by this method at the end of this method.
+     */
+    public static String getDigestOf(InputStream source) throws IOException {
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+
+            DigestInputStream in =new DigestInputStream(source,md5);
+            try {
+                while(in.read(garbage)>0)
+                    ; // simply discard the input
+            } finally {
+                in.close();
+            }
+            return toHexString(md5.digest());
+        } catch (NoSuchAlgorithmException e) {
+            throw new IOException2("MD5 not installed",e);    // impossible
+        }
     }
 
     public static String toHexString(byte[] data, int start, int len) {

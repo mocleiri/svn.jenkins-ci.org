@@ -1,5 +1,8 @@
 package hudson.model;
 
+import hudson.FilePath;
+import hudson.FilePath.FileCallable;
+import hudson.remoting.VirtualChannel;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -17,10 +20,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.StringTokenizer;
-
-import hudson.FilePath;
-import hudson.remoting.VirtualChannel;
-import hudson.FilePath.FileCallable;
 
 /**
  * Has convenience methods to serve file system.
@@ -96,13 +95,7 @@ public abstract class DirectoryHolder extends Actionable {
 
 
         if(isFingerprint) {
-            InputStream in = f.read();
-            try {
-                Hudson hudson = Hudson.getInstance();
-                rsp.forward(hudson.getFingerprint(hudson.getDigestOf(in)),"/",req);
-            } finally {
-                in.close();
-            }
+            rsp.forward(f.digest(),"/",req);
         } else {
             ContentInfo ci = f.act(new ContentInfo());
 
@@ -112,7 +105,7 @@ public abstract class DirectoryHolder extends Actionable {
         }
     }
 
-    private static final class ContentInfo implements Serializable, FileCallable<ContentInfo> {
+    private static final class ContentInfo implements FileCallable<ContentInfo> {
         int contentLength;
         long lastModified;
 
