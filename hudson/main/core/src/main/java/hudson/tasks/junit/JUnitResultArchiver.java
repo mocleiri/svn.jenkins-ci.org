@@ -36,6 +36,8 @@ public class JUnitResultArchiver extends AntBasedPublisher {
     public boolean perform(Build build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
         TestResult result;
 
+        listener.getLogger().println("Recording test results");
+
         try {
             final long buildTime = build.getTimestamp().getTimeInMillis();
 
