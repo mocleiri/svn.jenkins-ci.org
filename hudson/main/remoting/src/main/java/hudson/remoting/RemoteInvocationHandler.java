@@ -123,7 +123,9 @@ final class RemoteInvocationHandler implements InvocationHandler, Serializable {
             if(o==null)
                 throw new IllegalStateException("Unable to call "+methodName+". Invalid object ID "+oid);
             try {
-                return (Serializable)choose(o).invoke(o,arguments);
+                Method m = choose(o);
+                m.setAccessible(true);  // in case the class is not public
+                return (Serializable) m.invoke(o,arguments);
             } catch (InvocationTargetException e) {
                 throw e.getTargetException();
             }
