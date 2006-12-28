@@ -5,12 +5,11 @@ import hudson.model.Build;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.util.List;
-import java.util.Collections;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.net.URL;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * {@link Action} contributed to a {@link Build} to display
