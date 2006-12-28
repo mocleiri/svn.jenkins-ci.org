@@ -286,7 +286,7 @@ public final class Slave implements Node, Serializable {
         // convert the old format to the new one
         if(command!=null && agentCommand==null) {
             if(command.length()>0)  command += ' ';
-            agentCommand = command+"java -jar ~/bin/slave-agent";
+            agentCommand = command+"java -jar ~/bin/slave-agent.jar";
         }
         return this;
     }
