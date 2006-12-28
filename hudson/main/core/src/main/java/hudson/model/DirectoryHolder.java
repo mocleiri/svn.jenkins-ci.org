@@ -84,7 +84,7 @@ public abstract class DirectoryHolder extends Actionable {
                 req.setAttribute("parentPath",parentPaths);
                 req.setAttribute("topPath",
                     parentPaths.isEmpty() ? "." : repeat("../",parentPaths.size()));
-                req.setAttribute("files",buildChildPathList(f));
+                req.setAttribute("files", f.act(new ChildPathBuilder()));
                 req.setAttribute("icon",icon);
                 req.setAttribute("path",path);
                 req.getView(this,"dir.jelly").forward(req,rsp);
@@ -104,25 +104,25 @@ public abstract class DirectoryHolder extends Actionable {
                 in.close();
             }
         } else {
-            class ContentInfo implements Serializable {
-                int contentLength;
-                long lastModified;
-                private static final long serialVersionUID = 1L;
-            }
-
-            ContentInfo ci = f.act(new FileCallable<ContentInfo>() {
-                public ContentInfo invoke(File f, VirtualChannel channel) throws IOException {
-                    ContentInfo ci = new ContentInfo();
-                    ci.contentLength = (int) f.length();
-                    ci.lastModified = f.lastModified();
-                    return ci;
-                }
-            });
+            ContentInfo ci = f.act(new ContentInfo());
 
             InputStream in = f.read();
             rsp.serveFile(req, in, ci.lastModified, ci.contentLength, f.getName() );
             in.close();
         }
+    }
+
+    private static final class ContentInfo implements Serializable, FileCallable<ContentInfo> {
+        int contentLength;
+        long lastModified;
+
+        public ContentInfo invoke(File f, VirtualChannel channel) throws IOException {
+            contentLength = (int) f.length();
+            lastModified = f.lastModified();
+            return this;
+        }
+
+        private static final long serialVersionUID = 1L;
     }
 
     /**
@@ -142,50 +142,6 @@ public abstract class DirectoryHolder extends Actionable {
         return r;
     }
 
-    /**
-     * Builds a list of list of {@link Path}. The inner
-     * list of {@link Path} represents one child item to be shown
-     * (this mechanism is used to skip empty intermediate directory.)
-     */
-    private List<List<Path>> buildChildPathList(FilePath cur) throws InterruptedException, IOException {
-        return cur.act(new FileCallable<List<List<Path>>>() {
-            public List<List<Path>> invoke(File cur, VirtualChannel channel) throws IOException {
-                List<List<Path>> r = new ArrayList<List<Path>>();
-
-                File[] files = cur.listFiles();
-                Arrays.sort(files,new FileComparator());
-
-                for( File f : files ) {
-                    Path p = new Path(f.getName(),f.getName(),f.isDirectory(),f.length());
-                    if(!f.isDirectory()) {
-                        r.add(Collections.singletonList(p));
-                    } else {
-                        // find all empty intermediate directory
-                        List<Path> l = new ArrayList<Path>();
-                        l.add(p);
-                        String relPath = f.getName();
-                        while(true) {
-                            // files that don't start with '.' qualify for 'meaningful files', nor SCM related files
-                            File[] sub = f.listFiles(new FilenameFilter() {
-                                public boolean accept(File dir, String name) {
-                                    return !name.startsWith(".") && !name.equals("CVS") && !name.equals(".svn");
-                                }
-                            });
-                            if(sub.length!=1 || !sub[0].isDirectory())
-                                break;
-                            f = sub[0];
-                            relPath += '/'+f.getName();
-                            l.add(new Path(relPath,f.getName(),true,0));
-                        }
-                        r.add(l);
-                    }
-                }
-
-                return r;
-            }
-        });
-    }
-
     private static String repeat(String s,int times) {
         StringBuffer buf = new StringBuffer(s.length()*times);
         for(int i=0; i<times; i++ )
@@ -196,7 +152,7 @@ public abstract class DirectoryHolder extends Actionable {
     /**
      * Represents information about one file or folder.
      */
-    public final class Path implements Serializable {
+    public static final class Path implements Serializable {
         /**
          * Relative URL to this path from the current page.
          */
@@ -258,5 +214,49 @@ public abstract class DirectoryHolder extends Actionable {
             if(f.isDirectory())     return 0;
             else                    return 1;
         }
+    }
+
+    /**
+     * Builds a list of list of {@link Path}. The inner
+     * list of {@link Path} represents one child item to be shown
+     * (this mechanism is used to skip empty intermediate directory.)
+     */
+    private static final class ChildPathBuilder implements FileCallable<List<List<Path>>> {
+        public List<List<Path>> invoke(File cur, VirtualChannel channel) throws IOException {
+            List<List<Path>> r = new ArrayList<List<Path>>();
+
+            File[] files = cur.listFiles();
+            Arrays.sort(files,new FileComparator());
+
+            for( File f : files ) {
+                Path p = new Path(f.getName(),f.getName(),f.isDirectory(),f.length());
+                if(!f.isDirectory()) {
+                    r.add(Collections.singletonList(p));
+                } else {
+                    // find all empty intermediate directory
+                    List<Path> l = new ArrayList<Path>();
+                    l.add(p);
+                    String relPath = f.getName();
+                    while(true) {
+                        // files that don't start with '.' qualify for 'meaningful files', nor SCM related files
+                        File[] sub = f.listFiles(new FilenameFilter() {
+                            public boolean accept(File dir, String name) {
+                                return !name.startsWith(".") && !name.equals("CVS") && !name.equals(".svn");
+                            }
+                        });
+                        if(sub.length!=1 || !sub[0].isDirectory())
+                            break;
+                        f = sub[0];
+                        relPath += '/'+f.getName();
+                        l.add(new Path(relPath,f.getName(),true,0));
+                    }
+                    r.add(l);
+                }
+            }
+
+            return r;
+        }
+
+        private static final long serialVersionUID = 1L;
     }
 }
