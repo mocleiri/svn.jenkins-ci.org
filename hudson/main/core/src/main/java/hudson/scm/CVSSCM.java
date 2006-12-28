@@ -178,6 +178,7 @@ public class CVSSCM extends AbstractCVSFamilySCM implements Serializable {
             dir.deleteContents();
 
             ArgumentListBuilder cmd = new ArgumentListBuilder();
+            // TODO: debug option to make it verbose
             cmd.add("cvs","-Q","-z9","-d",cvsroot,"co");
             if(branch!=null)
                 cmd.add("-r",branch);
@@ -551,6 +552,7 @@ public class CVSSCM extends AbstractCVSFamilySCM implements Serializable {
         listener.getLogger().println("$ computing changelog");
 
         FilePath baseDir = build.getProject().getWorkspace();
+       final String cvspassFile = getDescriptor().getCvspassFile();
 
         try {
             // range of time for detecting changes
@@ -580,8 +582,8 @@ public class CVSSCM extends AbstractCVSFamilySCM implements Serializable {
                     };
                     task.setProject(new org.apache.tools.ant.Project());
                     task.setDir(ws);
-                    if(DESCRIPTOR.getCvspassFile().length()!=0)
-                        task.setPassfile(new File(DESCRIPTOR.getCvspassFile()));
+                    if(cvspassFile.length()!=0)
+                        task.setPassfile(new File(cvspassFile));
                     task.setCvsRoot(cvsroot);
                     task.setCvsRsh(cvsRsh);
                     task.setFailOnError(true);
@@ -638,20 +640,20 @@ public class CVSSCM extends AbstractCVSFamilySCM implements Serializable {
     }
 
     public DescriptorImpl getDescriptor() {
-        return DESCRIPTOR;
+        return DescriptorImpl.DESCRIPTOR;
     }
 
     public void buildEnvVars(Map<String,String> env) {
         if(cvsRsh!=null)
             env.put("CVS_RSH",cvsRsh);
-        String cvspass = DESCRIPTOR.getCvspassFile();
+        String cvspass = getDescriptor().getCvspassFile();
         if(cvspass.length()!=0)
             env.put("CVS_PASSFILE",cvspass);
     }
 
-    static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
-
     public static final class DescriptorImpl extends Descriptor<SCM> implements ModelObject {
+        static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
+
         /**
          * Path to <tt>.cvspass</tt>. Null to default.
          */
