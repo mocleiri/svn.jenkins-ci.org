@@ -66,8 +66,6 @@ public final class FilePath implements Serializable {
     private final String remote;
 
     public FilePath(VirtualChannel channel, String remote) {
-        if(channel==null)
-            throw new IllegalArgumentException();
         this.channel = channel;
         this.remote = remote;
     }
