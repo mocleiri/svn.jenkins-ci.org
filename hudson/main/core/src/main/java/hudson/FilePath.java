@@ -28,18 +28,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@link File} like path-manipulation object with remoting capability.
+ * {@link File} like object with remoting support.
  *
  * <p>
  * Unlike {@link File}, which always implies a file path on the current computer,
  * {@link FilePath} represents a file path on a specific slave or the master.
  *
+ * Despite that, {@link FilePath} can be used much like {@link File}. It exposes
+ * a bunch of operations (and we should add more operations as long as they are
+ * generally useful), and when invoked against a file on a remote node, {@link FilePath}
+ * executes the necessary code remotely, thereby providing semi-transparent file
+ * operations.
+ *
+ * <h2>Using {@link FilePath} smartly</h2>
  * <p>
- * When file operations are invoked against a file on a remote node, {@link FilePath}
- * executes the code remotely, thereby providing semi-transparent file operations.
+ * The transparency makes it easy to write plugins without worrying too much about
+ * remoting, by making it works like NFS, where remoting happens at the file-system
+ * later.
  *
  * <p>
- * {@link FilePath} can be sent over to a remote node as a part of {@link Callable}
+ * But one should note that such use of remoting may not be optional. Sometimes,
+ * it makes more sense to move some computation closer to the data, as opposed to
+ * move the data to the computation. For example, if you are just computing a MD5
+ * digest of a file, then it would make sense to do the digest on the host where
+ * the file is located, as opposed to send the whole data to the master and do MD5
+ * digesting there.
+ *
+ * <p>
+ * {@link FilePath} supports this "code migration" by in the
+ * {@link #act(FileCallable)} method. One can pass in a custom implementation
+ * of {@link FileCallable}, to be executed on the node where the data is located.
+ * The following code shows the example:
+ *
+ * <pre>
+ * FilePath file = ...;
+ *
+ * // make 'file' a fresh empty directory.
+ * file.act(new FileCallable&lt;Void>() {
+ *   // if 'file' is on a different node, this FileCallable will
+ *   // be transfered to that node and executed there.
+ *   public Void invoke(File f,VirtualChannel channel) {
+ *     // f and file represents the same thing
+ *     f.deleteContents();
+ *     f.mkdirs();
+ *   }
+ * });
+ * </pre>
+ *
+ * <p>
+ * When {@link FileCallable} is transfered to a remote node, it will be done so
+ * by using the same Java serializaiton scheme that the remoting module uses.
+ * See {@link Callable} for more about this. 
+ *
+ * <p>
+ * {@link FilePath} itself can be sent over to a remote node as a part of {@link Callable}
  * serialization. For example, sending a {@link FilePath} of a remote node to that
  * node causes {@link FilePath} to become "local". Similarly, sending a
  * {@link FilePath} that represents the local computer causes it to become "remote."
@@ -103,13 +145,15 @@ public final class FilePath implements Serializable {
     /**
      * Code that gets executed on the machine where the {@link FilePath} is local.
      * Used to act on {@link FilePath}.
+     *
+     * @see FilePath#act(FileCallable)
      */
     public static interface FileCallable<T> extends Serializable {
         /**
-         * Performs the task
+         * Performs the computational task on the node where the data is located.
          *
          * @param f
-         *      {@link File} that represents the local file that {@link FilePath} represents.
+         *      {@link File} that represents the local file that {@link FilePath} has represented.
          * @param channel
          *      The "back pointer" of the {@link Channel} that represents the communication
          *      with the node from where the code was sent.
