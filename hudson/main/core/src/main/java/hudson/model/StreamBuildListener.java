@@ -1,5 +1,6 @@
 package hudson.model;
 
+import hudson.CloseProofOutputStream;
 import hudson.remoting.RemoteOutputStream;
 
 import java.io.IOException;
@@ -9,7 +10,6 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
-import java.io.Writer;
 
 /**
  * {@link BuildListener} that writes to an {@link OutputStream}.
@@ -58,7 +58,7 @@ public class StreamBuildListener implements BuildListener, Serializable {
 
 
     private void writeObject(ObjectOutputStream out) throws IOException {
-        out.writeObject(new RemoteOutputStream(ps));
+        out.writeObject(new RemoteOutputStream(new CloseProofOutputStream(ps)));
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
