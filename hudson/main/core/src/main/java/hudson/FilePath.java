@@ -449,12 +449,19 @@ public final class FilePath implements Serializable {
 
                     try {
                         class CopyImpl extends Copy {
+                            private int copySize;
+
                             public CopyImpl() {
                                 setProject(new org.apache.tools.ant.Project());
                             }
 
+                            protected void doFileOperations() {
+                                copySize = super.fileCopyMap.size();
+                                super.doFileOperations();
+                            }
+
                             public int getNumCopied() {
-                                return super.fileCopyMap.size();
+                                return copySize;
                             }
                         }
 
