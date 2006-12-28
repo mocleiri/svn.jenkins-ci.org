@@ -26,6 +26,7 @@ import java.io.Serializable;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.net.URI;
 
 /**
  * {@link File} like object with remoting support.
@@ -196,6 +197,18 @@ public final class FilePath implements Serializable {
             // the file is on the local machine
             return callable.call();
         }
+    }
+
+    /**
+     * Converts this file to the URI, relative to the machine
+     * on which this file is available.
+     */
+    public URI toURI() throws IOException, InterruptedException {
+        return act(new FileCallable<URI>() {
+            public URI invoke(File f, VirtualChannel channel) throws IOException {
+                return f.toURI();
+            }
+        });
     }
 
     /**
