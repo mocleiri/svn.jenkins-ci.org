@@ -7,7 +7,6 @@ import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Result;
-import hudson.tasks.AntBasedPublisher;
 import hudson.tasks.Publisher;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Project;
