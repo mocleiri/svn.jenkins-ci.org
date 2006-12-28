@@ -83,6 +83,9 @@ public abstract class Launcher {
      *      null if there's no input.
      * @param workDir
      *      null if the working directory could be anything.
+     * @param out
+     *      stdout and stderr of the process will be sent to this stream.
+     *      the stream won't be closed.
      */
     public abstract Proc launch(String[] cmd,String[] env,InputStream in,OutputStream out, FilePath workDir) throws IOException;
 
