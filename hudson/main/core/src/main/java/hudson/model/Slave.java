@@ -5,6 +5,7 @@ import hudson.Launcher;
 import hudson.Proc;
 import hudson.Proc.RemoteProc;
 import hudson.Util;
+import hudson.CloseProofOutputStream;
 import hudson.Launcher.LocalLauncher;
 import hudson.model.Descriptor.FormException;
 import hudson.remoting.Callable;
@@ -242,7 +243,7 @@ public final class Slave implements Node, Serializable {
             public Proc launch(final String[] cmd, final String[] env, InputStream _in, OutputStream _out, FilePath _workDir) throws IOException {
                 printCommandLine(cmd,_workDir);
 
-                final OutputStream out = new RemoteOutputStream(_out);
+                final OutputStream out = new RemoteOutputStream(new CloseProofOutputStream(_out));
                 final InputStream  in  = _in==null ? null : new RemoteInputStream(_in);
                 final String workDir = _workDir==null ? null : _workDir.getRemote();
 
