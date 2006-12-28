@@ -16,13 +16,14 @@ import org.kohsuke.stapler.StaplerRequest;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Generates HTML report from JUnit test result XML files.
  *
  * @author Kohsuke Kawaguchi
  */
-public class JUnitResultArchiver extends AntBasedPublisher {
+public class JUnitResultArchiver extends Publisher implements Serializable {
 
     /**
      * {@link FileSet} "includes" string, like "foo/bar/*.xml"
@@ -88,10 +89,18 @@ public class JUnitResultArchiver extends AntBasedPublisher {
 
 
     public Descriptor<Publisher> getDescriptor() {
-        return DESCRIPTOR;
+        return DescriptorImpl.DESCRIPTOR;
     }
 
-    public static final Descriptor<Publisher> DESCRIPTOR = new Descriptor<Publisher>(JUnitResultArchiver.class) {
+    private static final long serialVersionUID = 1L;
+
+    private static class DescriptorImpl extends Descriptor<Publisher> {
+        public static final Descriptor<Publisher> DESCRIPTOR = new DescriptorImpl();
+
+        public DescriptorImpl() {
+            super(JUnitResultArchiver.class);
+        }
+
         public String getDisplayName() {
             return "Publish JUnit test result report";
         }
@@ -99,5 +108,5 @@ public class JUnitResultArchiver extends AntBasedPublisher {
         public Publisher newInstance(StaplerRequest req) {
             return new JUnitResultArchiver(req.getParameter("junitreport_includes"));
         }
-    };
+    }
 }
