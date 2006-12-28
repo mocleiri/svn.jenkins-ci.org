@@ -78,7 +78,7 @@ import java.util.List;
  * <p>
  * When {@link FileCallable} is transfered to a remote node, it will be done so
  * by using the same Java serializaiton scheme that the remoting module uses.
- * See {@link Callable} for more about this. 
+ * See {@link Channel} for more about this. 
  *
  * <p>
  * {@link FilePath} itself can be sent over to a remote node as a part of {@link Callable}
