@@ -201,9 +201,14 @@ public class Channel implements VirtualChannel {
         try {
             UserResponse<V> r = new UserRequest<V,T>(this, callable).call(this);
             return r.retrieve(this, callable.getClass().getClassLoader());
+
+        // re-wrap the exception so that we can capture the stack trace of the caller.
         } catch (ClassNotFoundException e) {
-            // this is unlikely to happen, so this is a lame implementation
-            IOException x = new IOException();
+            IOException x = new IOException("Remote call failed");
+            x.initCause(e);
+            throw x;
+        } catch (Error e) {
+            IOException x = new IOException("Remote call failed");
             x.initCause(e);
             throw x;
         }
