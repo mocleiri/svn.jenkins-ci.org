@@ -14,7 +14,7 @@ import java.io.IOException;
  * 
  * @author Kohsuke Kawaguchi
  */
-abstract class CommandInterpreter extends Builder {
+public abstract class CommandInterpreter extends Builder {
     /**
      * Command to execute. The format depends on the actual {@link CommandInterpreter} implementation.
      */
