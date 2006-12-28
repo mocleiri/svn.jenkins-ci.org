@@ -236,9 +236,9 @@ public final class FilePath implements Serializable {
      */
     public FilePath createTempFile(final String prefix, final String suffix) throws IOException, InterruptedException {
         try {
-            return new FilePath(this,channel.call(new Callable<String,IOException>() {
-                public String call() throws IOException {
-                    File f = File.createTempFile(prefix, suffix, new File(remote));
+            return new FilePath(this,act(new FileCallable<String>() {
+                public String invoke(File dir, VirtualChannel channel) throws IOException {
+                    File f = File.createTempFile(prefix, suffix, dir);
                     return f.getName();
                 }
             }));
@@ -248,14 +248,14 @@ public final class FilePath implements Serializable {
     }
 
     /**
-     * Creates a temporary file and set the contents by the
+     * Creates a temporary file in this directory and set the contents by the
      * given text (encoded in the platform default encoding)
      */
     public FilePath createTextTempFile(final String prefix, final String suffix, final String contents) throws IOException, InterruptedException {
         try {
-            return new FilePath(this,channel.call(new Callable<String,IOException>() {
-                public String call() throws IOException {
-                    File f = File.createTempFile(prefix, suffix, new File(remote));
+            return new FilePath(this,act(new FileCallable<String>() {
+                public String invoke(File dir, VirtualChannel channel) throws IOException {
+                    File f = File.createTempFile(prefix, suffix, dir);
 
                     Writer w = new FileWriter(f);
                     w.write(contents);
@@ -412,9 +412,9 @@ public final class FilePath implements Serializable {
     public void copyTo(OutputStream os) throws IOException, InterruptedException {
         final OutputStream out = new RemoteOutputStream(os);
 
-        channel.call(new Callable<Void,IOException>() {
-            public Void call() throws IOException {
-                FileInputStream fis = new FileInputStream(new File(remote));
+        act(new FileCallable<Void>() {
+            public Void invoke(File f, VirtualChannel channel) throws IOException {
+                FileInputStream fis = new FileInputStream(f);
                 Util.copyStream(fis,out);
                 fis.close();
                 out.close();
