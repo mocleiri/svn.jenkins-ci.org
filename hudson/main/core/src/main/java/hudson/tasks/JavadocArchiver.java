@@ -3,7 +3,6 @@ package hudson.tasks;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
-import hudson.util.IOException2;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
@@ -11,7 +10,7 @@ import hudson.model.Descriptor;
 import hudson.model.DirectoryHolder;
 import hudson.model.Project;
 import hudson.model.ProminentProjectAction;
-import hudson.remoting.Callable;
+import hudson.model.Result;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -48,29 +47,15 @@ public class JavadocArchiver extends Publisher {
     public boolean perform(Build build, Launcher launcher, BuildListener listener) throws InterruptedException {
         listener.getLogger().println("Publishing javadoc");
 
-        final FilePath javadoc = build.getParent().getWorkspace().child(javadocDir);
-
-        final FilePath target = new FilePath(getJavadocDir(build.getParent()));
+        FilePath javadoc = build.getParent().getWorkspace().child(javadocDir);
+        FilePath target = new FilePath(getJavadocDir(build.getParent()));
 
         try {
-            launcher.getChannel().call(new Callable<Void,IOException>() {
-                public Void call() throws IOException {
-                    try {
-                        if(!javadoc.exists())
-                        throw new IOException("The specified javadoc directory doesn't exist: "+javadoc);
-                        if(!javadoc.isDirectory())
-                        throw new IOException("The specified javadoc directory isn't a directory: "+javadoc);
-
-                        javadoc.copyRecursiveTo("**/*",target);
-                        return null;
-                    } catch (InterruptedException e) {
-                        throw new IOException2("processing aborted",e);
-                    }
-                }
-            });
+            javadoc.copyRecursiveTo("**/*",target);
         } catch (IOException e) {
             Util.displayIOException(e,listener);
             e.printStackTrace(listener.fatalError("Unable to copy javadocs from "+javadoc+" to "+target));
+            build.setResult(Result.FAILURE);
         }
 
         return true;
