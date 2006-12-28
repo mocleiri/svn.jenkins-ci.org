@@ -8,6 +8,9 @@ import java.io.FileFilter;
 import java.util.List;
 import java.util.Collections;
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.net.URL;
+import java.net.MalformedURLException;
 
 /**
  * {@link Action} contributed to a {@link Build} to display
@@ -42,13 +45,18 @@ public class JapexReportBuildAction implements Action {
      * Gets the list of all regression reports.
      * @return can be empty but never null. 
      */
-    public List<File> getRegressionReports() {
+    public List<URL> getRegressionReports() throws MalformedURLException {
         File dir = JapexPublisher.getJapexReport(owner);
         File[] reports = dir.listFiles(REGRESSION_FILTER);
         if(reports==null)
             return Collections.EMPTY_LIST;
-        else
-            return Arrays.asList(reports);
+
+        List<URL> urls = new ArrayList<URL>();
+        for (File f : reports) {
+            urls.add(f.toURL());
+        }
+        
+        return urls;
     }
 
     private static final FileFilter REGRESSION_FILTER = new FileFilter() {
