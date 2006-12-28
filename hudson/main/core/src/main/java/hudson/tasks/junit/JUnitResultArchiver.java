@@ -93,7 +93,7 @@ public class JUnitResultArchiver extends Publisher implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static class DescriptorImpl extends Descriptor<Publisher> {
+    public static class DescriptorImpl extends Descriptor<Publisher> {
         public static final Descriptor<Publisher> DESCRIPTOR = new DescriptorImpl();
 
         public DescriptorImpl() {

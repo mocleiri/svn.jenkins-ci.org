@@ -81,7 +81,7 @@ public interface BuildStep {
         ArtifactArchiver.DESCRIPTOR,
         Fingerprinter.DESCRIPTOR,
         JavadocArchiver.DESCRIPTOR,
-        JUnitResultArchiver.DESCRIPTOR,
+        JUnitResultArchiver.DescriptorImpl.DESCRIPTOR,
         BuildTrigger.DESCRIPTOR,
         Mailer.DESCRIPTOR
     );
