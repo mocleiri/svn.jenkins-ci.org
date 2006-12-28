@@ -2,6 +2,7 @@ package hudson.util;
 
 import hudson.model.TaskListener;
 import hudson.remoting.RemoteOutputStream;
+import hudson.CloseProofOutputStream;
 
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -50,7 +51,7 @@ public final class StreamTaskListener implements TaskListener, Serializable {
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {
-        out.writeObject(new RemoteOutputStream(out));
+        out.writeObject(new RemoteOutputStream(new CloseProofOutputStream(this.out)));
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
