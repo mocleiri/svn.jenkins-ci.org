@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.lang.reflect.Proxy;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.logging.Level;
@@ -88,6 +89,11 @@ public class Channel implements VirtualChannel {
      */
     private final ExportTable<Object> exportedObjects = new ExportTable<Object>();
 
+    /**
+     * Registered listeners. 
+     */
+    private final Vector<Listener> listeners = new Vector<Listener>();
+
     public Channel(String name, Executor exec, InputStream is, OutputStream os) throws IOException {
         this(name,exec,is,os,null);
     }
@@ -144,6 +150,13 @@ public class Channel implements VirtualChannel {
 
         this.ois = new ObjectInputStream(is);
         new ReaderThread(name).start();
+    }
+
+    /**
+     * Callback "interface" for changes in the state of {@link Channel}.
+     */
+    public static abstract class Listener {
+        public void onClosed(Channel channel) {}
     }
 
     /**
@@ -237,7 +250,6 @@ public class Channel implements VirtualChannel {
      * Aborts the connection in response to an error.
      */
     private synchronized void terminate(IOException e) {
-        // abort
         closed = true;
         synchronized(pendingCalls) {
             for (Request<?,?> req : pendingCalls.values())
@@ -245,6 +257,28 @@ public class Channel implements VirtualChannel {
             pendingCalls.clear();
         }
         notify();
+
+        for (Listener l : listeners.toArray(new Listener[listeners.size()]))
+            l.onClosed(this);
+    }
+
+    /**
+     * Registers a new {@link Listener}.
+     *
+     * @see #removeListener(Listener)
+     */
+    public void addListener(Listener l) {
+        listeners.add(l);
+    }
+
+    /**
+     * Removes a listener.
+     *
+     * @return
+     *      false if the given listener has not been registered to begin with.
+     */
+    public boolean removeListener(Listener l) {
+        return listeners.remove(l);
     }
 
     /**
