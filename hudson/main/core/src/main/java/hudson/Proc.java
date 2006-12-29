@@ -2,6 +2,7 @@ package hudson;
 
 import hudson.remoting.Channel;
 import hudson.util.StreamCopyThread;
+import hudson.util.IOException2;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,8 +27,12 @@ public abstract class Proc {
 
     /**
      * Terminates the process.
+     *
+     * @throws IOException
+     *      if there's an error killing a process
+     *      and a stack trace could help the trouble-shooting.
      */
-    public abstract void kill();
+    public abstract void kill() throws IOException;
 
     /**
      * Waits for the completion of the process.
@@ -36,8 +41,12 @@ public abstract class Proc {
      * If the thread is interrupted while waiting for the completion
      * of the process, this method terminates the process and
      * exits with a non-zero exit code.
+     *
+     * @throws IOException
+     *      if there's an error launching/joining a process
+     *      and a stack trace could help the trouble-shooting.
      */
-    public abstract int join();
+    public abstract int join() throws IOException;
 
     /**
      * Locally launched process.
@@ -151,13 +160,13 @@ public abstract class Proc {
         }
 
         @Override
-        public void kill() {
+        public void kill() throws IOException {
             process.cancel(true);
             join();
         }
 
         @Override
-        public int join() {
+        public int join() throws IOException {
             try {
                 return process.get();
             } catch (InterruptedException e) {
@@ -165,11 +174,10 @@ public abstract class Proc {
                 process.cancel(true);
                 return -1;
             } catch (ExecutionException e) {
-                logger.log(Level.SEVERE, "Failed to join the process",e);
-                return -1;
+                if(e.getCause() instanceof IOException)
+                    throw (IOException)e.getCause();
+                throw new IOException2("Failed to join the process",e);
             }
         }
     }
-
-    private static final Logger logger = Logger.getLogger(Proc.class.getName());
 }
