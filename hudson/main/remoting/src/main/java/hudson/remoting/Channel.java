@@ -233,6 +233,9 @@ public class Channel implements VirtualChannel {
         };
     }
 
+    /**
+     * Aborts the connection in response to an error.
+     */
     private synchronized void terminate(IOException e) {
         // abort
         closed = true;
