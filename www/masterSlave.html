@@ -19,15 +19,11 @@ Hudson supports the "master/slave" mode, where the workload of building projects
 
 <h3>Requirement for master/slave support</h3>
 <p>
-	To use the master/slave support, participating computers need to satisfy the following requirements:
-	<ol>
-		<li>
-			Master needs to be able to see file systems of slaves (more precisely, the portion of the file system that Hudson uses on a slave. On Unix, this is usually done via NFS. On Windows this could be done by using <a href="http://support.microsoft.com/default.aspx?scid=kb;en-us;304040">file sharing</a>, <a href="http://www.microsoft.com/windowsserver2003/technologies/storage/dfs/default.mspx">DFS</a>, or any other similar means.
-		<li>
-			Master needs to be able to modify those slave file systems with the same permissions that the slave has. Sometimes a master deletes files that were created by a slave, or vice versa. On Unix, the simplest way to achieve this is to use NIS, or use the same UID/GID for Hudson user account on all the computers.
-		<li>
-			Master needs to be able to execute processes remotely on slaves. On Unix, this can be done by SSH, RSH, or other similar means. On Windows, this could be done by the same protocols through <a href="http://www.cygwin.com/">cygwin</a>. <small><i>(Does Windows have native remote process invocation mechanism? Help wanted!)</i></small>
-	</ol>
+	To use the master/slave support, a master needs to be able to launch a "slave agent" program on the slave. On Unix, this can be done by SSH, RSH, or other similar means. On Windows, this could be done by the same protocols through <a href="http://www.cygwin.com/">cygwin</a> or tools like <a href="http://www.microsoft.com/technet/sysinternals/utilities/psexec.mspx">psexec</a>.
+
+<p>
+	The slave agent program is a simple Java program that can be launched like <tt>java -jar slave.jar</tt>. A copy of <tt>slave.jar</tt> can be found inside <tt>hudson.war</tt> under <tt>WEB-INF</tt>. Therefore, a typical slave agent launch command would look something like <tt>ssh <i>myslave</i> java -jar ~/bin/slave.jar</tt>.
+
 <p>
 	Also note that the slaves are a kind of a cluster, and operating a cluster (especially a large one or heterogeneous one) is always a non-trivial task. For example, you need to make sure that all slaves have JDKs, Ant, CVS, and/or any other tools you need for builds. You need to make sure that slaves are up and running, etc. Hudson is not a clustering middleware, and therefore it doesn't make this any easier.
 
@@ -38,11 +34,11 @@ Hudson supports the "master/slave" mode, where the workload of building projects
 	My master Hudson node is running on a SPARC Solaris box, and I have a few SPARC Solaris slaves and Opteron Linux slaves.
 <ul>
 	<li>
-		Each computer has an user called <tt>hudson</tt> and a group called <tt>hudson</tt>. All computers use the same UID and GID. (If you have access to NIS, this can be done more easily.)
+		Each computer has an user called <tt>hudson</tt> and a group called <tt>hudson</tt>. All computers use the same UID and GID. (If you have access to NIS, this can be done more easily.) This is not a Hudson requirement, but it makes the slave management easier.
 	<li>
-		On each computer, <tt>/var/hudson</tt> directory is set as the home directory of user <tt>hudson</tt>.
+		On each computer, <tt>/var/hudson</tt> directory is set as the home directory of user <tt>hudson</tt>. Again, this is not a hard requirement, but having the same directory layout makes things easier to maintain.
 	<li>
-		All machines run NFSD and SSHD, and exports <tt>/var/hudson</tt>.
+		All machines run SSHD.
 	<li>
 		All machines have ntp client installed, and synchronize clock regularly with the same NTP server.
 	<li>
@@ -73,7 +69,7 @@ Hudson supports the "master/slave" mode, where the workload of building projects
 	<li>
 		On master, I have a little shell script that uses rsync to synchronize master's <tt>/var/hudson</tt> to slaves (except <tt>/var/hudson/workspace</tt>) I use this to replicate tools on all slaves.
 	<li>
-		<tt>/var/hudson/bin/slave</tt> is a shell script that Hudson uses to execute jobs remotely. This file is included in <tt>hudson.war</tt> (<tt>WEB-INF/slave</tt>)  This shell script has some hooks in it to allow you to absorb some difference between machines. For example, you can set <tt>PATH</tt> that the submitted remote process uses.
+		<tt>/var/hudson/bin/launch-slave</tt> is a shell script that Hudson uses to execute jobs remotely. This shell script sets up <tt>PATH</tt> and a few other things before launching <tt>slave.jar</tt>
 	<li>
 		Finally all computers have other standard build tools like <tt>svn</tt> and <tt>cvs</tt> installed and available in PATH.
 </ul>
@@ -94,7 +90,7 @@ Hudson supports the "master/slave" mode, where the workload of building projects
 
 <h3>Transition from master-only to master/slave</h3>
 <p>
-	Typically, you start with a master-only installation and then much later you add slaves. When you enable the master/slave mode, Hudson automatically configures all your existing projects to stick to the master node. This is a precaution to avoid disturbing existing projects, since most likely you won't be able to configure slaves correctly without trial and error. After you configure slaves successfully, you need to individually configure projects to let them roam freely. This is tedious, but it allows you to work on one project at a time.
+	Typically, you start with a master-only installation and then much later you add slaves as your projcets grow. When you enable the master/slave mode, Hudson automatically configures all your existing projects to stick to the master node. This is a precaution to avoid disturbing existing projects, since most likely you won't be able to configure slaves correctly without trial and error. After you configure slaves successfully, you need to individually configure projects to let them roam freely. This is tedious, but it allows you to work on one project at a time.
 <p>
 	Projects that are newly created on master/slave-enabled Hudson will be by default configured to roam freely.
 
@@ -106,6 +102,8 @@ Hudson supports the "master/slave" mode, where the workload of building projects
 		Every time Hudson launchs a program locally/remotely, it prints out the command line to the log file. So when a remote execution fails, login to the computer that runs the master by using the same user account, and try to run the command from your shell. You tend to solve problems quickly in this way.
 	<li>
 		When remote programs fail to execute (like command not found), sometimes SSH reports <tt>"select : bad file number"</tt> as the error message. Try the above tip.
+	<li>
+		Each slave has a log page showing the communication between the master and the slave agent. This log often shows error reports.
 	<li>
 		Feel free to send your trouble to <tt>users@hudson.dev.java.net</tt>
 </ol>
