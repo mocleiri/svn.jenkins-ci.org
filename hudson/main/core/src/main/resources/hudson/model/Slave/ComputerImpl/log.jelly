@@ -2,7 +2,11 @@
   <l:layout title="${it.displayName} log">
     <st:include page="sidepanel.jelly" />
     <l:main-panel>
-      <pre><st:out value="${it.log}"/></pre>
+      <pre id="out"></pre>
+      <div id="spinner">
+        <img src="${rootURL}/images/spinner.gif" />
+      </div>
+      <t:progressiveText href="progressiveLog" idref="out" spinner="spinner" />
     </l:main-panel>
   </l:layout>
 </j:jelly>

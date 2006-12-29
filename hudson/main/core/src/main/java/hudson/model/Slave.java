@@ -282,6 +282,13 @@ public final class Slave implements Node, Serializable {
             return Util.loadFile(getLogFile());
         }
 
+        /**
+         * Handles incremental log.
+         */
+        public void doProgressiveLog( StaplerRequest req, StaplerResponse rsp) throws IOException {
+            new LargeText(getLogFile(),false).doProgressText(req,rsp);
+        }
+
         @Override
         protected void kill() {
             super.kill();
