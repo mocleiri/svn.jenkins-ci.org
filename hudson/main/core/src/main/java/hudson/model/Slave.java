@@ -180,17 +180,25 @@ public final class Slave implements Node, Serializable {
     }
 
     public static final class ComputerImpl extends Computer {
-        private Channel channel;
+        private volatile Channel channel;
 
         /**
          * This is where the log from the remote agent goes.
-         * TODO: use ring buffer so that it won't overflow 
+         * TODO: use ring buffer so that it won't overflow
          */
-        private ByteArrayOutputStream launchLog = new ByteArrayOutputStream();
+        private ByteArrayOutputStream launchLog;
 
-        private ComputerImpl(final Slave slave) {
+        private ComputerImpl(Slave slave) {
             super(slave);
+        }
 
+        /**
+         * Launches a remote agent.
+         */
+        private void launch(final Slave slave) {
+            closeChannel();
+
+            launchLog = new ByteArrayOutputStream();
             // launch the slave agent asynchronously
             threadPoolForRemoting.execute(new Runnable() {
                 // TODO: do this only for nodes that are so configured.
@@ -240,7 +248,10 @@ public final class Slave implements Node, Serializable {
         @Override
         protected void kill() {
             super.kill();
+            closeChannel();
+        }
 
+        private void closeChannel() {
             Channel c = channel;
             channel = null;
             if(c!=null)
@@ -249,6 +260,14 @@ public final class Slave implements Node, Serializable {
                 } catch (IOException e) {
                     logger.log(Level.SEVERE, "Failed to terminate channel to "+getDisplayName(),e);
                 }
+        }
+
+        @Override
+        protected void setNode(Node node) {
+            super.setNode(node);
+            if(channel==null)
+                // maybe the configuration was changed to relaunch the slave, so try it now.
+                launch((Slave)node);
         }
 
         private static final Logger logger = Logger.getLogger(ComputerImpl.class.getName());
