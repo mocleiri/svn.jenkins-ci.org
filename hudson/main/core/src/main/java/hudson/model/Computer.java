@@ -88,7 +88,7 @@ public abstract class Computer implements ModelObject {
     }
 
     public boolean isTemporarilyOffline() {
-        return temporarilyOffline;
+        return temporarilyOffline || getChannel()==null;
     }
 
     public void setTemporarilyOffline(boolean temporarilyOffline) {
