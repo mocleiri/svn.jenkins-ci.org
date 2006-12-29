@@ -205,7 +205,7 @@ public final class FilePath implements Serializable {
      */
     public URI toURI() throws IOException, InterruptedException {
         return act(new FileCallable<URI>() {
-            public URI invoke(File f, VirtualChannel channel) throws IOException {
+            public URI invoke(File f, VirtualChannel channel) {
                 return f.toURI();
             }
         });
