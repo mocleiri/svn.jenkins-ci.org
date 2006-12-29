@@ -97,7 +97,7 @@ public abstract class Computer implements ModelObject {
     }
 
     public String getIcon() {
-        if(temporarilyOffline)
+        if(isTemporarilyOffline())
             return "computer-x.gif";
         else
             return "computer.gif";
@@ -196,7 +196,6 @@ public abstract class Computer implements ModelObject {
 
     protected static final ExecutorService threadPoolForRemoting = Executors.newCachedThreadPool(new DaemonThreadFactory());
 
-    private static final Logger logger = Logger.getLogger(Computer.class.getName());
 //
 //
 // UI
