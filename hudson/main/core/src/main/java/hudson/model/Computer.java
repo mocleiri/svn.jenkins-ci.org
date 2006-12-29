@@ -1,8 +1,10 @@
 package hudson.model;
 
 import hudson.remoting.VirtualChannel;
+import hudson.remoting.Callable;
 import hudson.util.DaemonThreadFactory;
 import hudson.util.RunList;
+import hudson.EnvVars;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -10,6 +12,8 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -209,6 +213,37 @@ public abstract class Computer implements ModelObject {
             e.interrupt();
         }
     }
+
+    /**
+     * Gets the system properties of the JVM on this computer.
+     * If this is the master, it returns the system property of the master computer.
+     */
+    public Map<Object,Object> getSystemProperties() throws IOException, InterruptedException {
+        return getChannel().call(new GetSystemProperties());
+    }
+
+    private static final class GetSystemProperties implements Callable<Map<Object,Object>,RuntimeException> {
+        public Map<Object,Object> call() {
+            return new TreeMap<Object,Object>(System.getProperties());
+        }
+        private static final long serialVersionUID = 1L;
+    }
+
+    /**
+     * Gets the environment variables of the JVM on this computer.
+     * If this is the master, it returns the system property of the master computer.
+     */
+    public Map<String,String> getEnvVars() throws IOException, InterruptedException {
+        return getChannel().call(new GetEnvVars());
+    }
+
+    private static final class GetEnvVars implements Callable<Map<String,String>,RuntimeException> {
+        public Map<String,String> call() {
+            return new TreeMap<String,String>(EnvVars.masterEnvVars);
+        }
+        private static final long serialVersionUID = 1L;
+    }
+
 
     protected static final ExecutorService threadPoolForRemoting = Executors.newCachedThreadPool(new DaemonThreadFactory());
 
