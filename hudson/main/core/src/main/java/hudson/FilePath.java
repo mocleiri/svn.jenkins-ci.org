@@ -5,6 +5,7 @@ import hudson.remoting.Channel;
 import hudson.remoting.Pipe;
 import hudson.remoting.RemoteOutputStream;
 import hudson.remoting.VirtualChannel;
+import hudson.remoting.DelegatingCallable;
 import hudson.util.IOException2;
 import hudson.model.Hudson;
 import org.apache.tools.ant.BuildException;
@@ -170,9 +171,13 @@ public final class FilePath implements Serializable {
         if(channel!=null) {
             // run this on a remote system
             try {
-                return channel.call(new Callable<T,IOException>() {
+                return channel.call(new DelegatingCallable<T,IOException>() {
                     public T call() throws IOException {
                         return callable.invoke(new File(remote), Channel.current());
+                    }
+
+                    public ClassLoader getClassLoader() {
+                        return callable.getClass().getClassLoader();
                     }
                 });
             } catch (IOException e) {
