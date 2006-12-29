@@ -582,6 +582,7 @@ public final class FilePath implements Serializable {
                                     int len;
                                     while((len=in.read(buf))>=0)
                                         copier.write(buf,len);
+                                    in.close();
 
                                     copier.close();
                                 }
