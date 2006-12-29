@@ -1250,6 +1250,12 @@ public final class Hudson extends JobCollection implements Node {
             return localChannel;
         }
 
+        public void doLaunchSlaveAgent(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+            // this computer never returns null from channel, so
+            // this method shall never be invoked.
+            rsp.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+
         /**
          * {@link LocalChannel} instance that can be used to execute programs locally.
          */

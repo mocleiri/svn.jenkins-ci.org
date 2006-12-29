@@ -26,6 +26,12 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * Information about a Hudson slave node.
  *
@@ -243,6 +249,19 @@ public final class Slave implements Node, Serializable {
         @Override
         public VirtualChannel getChannel() {
             return channel;
+        }
+
+        public void doLaunchSlaveAgent(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+            if(channel!=null) {
+                rsp.sendError(HttpServletResponse.SC_NOT_FOUND);
+                return;
+            }
+
+            launch((Slave) getNode());
+
+            // TODO: would be nice to redirect the user to "launching..." wait page,
+            // then spend a few seconds there and poll for the completion periodically.
+            rsp.sendRedirect("log");
         }
 
         /**

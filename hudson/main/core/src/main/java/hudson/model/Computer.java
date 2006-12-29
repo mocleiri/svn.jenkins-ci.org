@@ -65,9 +65,14 @@ public abstract class Computer implements ModelObject {
      * Gets the channel that can be used to run a program on this computer.
      *
      * @return
-     *      never null.
+     *      never null when {@link #isOffline()}==false.
      */
     public abstract VirtualChannel getChannel();
+
+    /**
+     * If {@link #getChannel()}==null, attempts to relaunch the slave agent.
+     */
+    public abstract void doLaunchSlaveAgent( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException;
 
     /**
      * Number of {@link Executor}s that are configured for this computer.
