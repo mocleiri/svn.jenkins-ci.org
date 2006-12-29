@@ -259,7 +259,11 @@ public class Functions {
         if (param != null) {
             return Boolean.parseBoolean(param);
         }
-        for (Cookie c : request.getCookies()) {
+        Cookie[] cookies = request.getCookies();
+        if(cookies==null)
+            return false; // when API design messes it up, we all suffer
+
+        for (Cookie c : cookies) {
             if (c.getName().equals("hudson_auto_refresh")) {
                 return Boolean.parseBoolean(c.getValue());
             }
