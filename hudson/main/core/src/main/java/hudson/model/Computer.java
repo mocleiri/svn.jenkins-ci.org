@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Logger;
 
 /**
  * Represents a set of {@link Executor}s on the same computer.
@@ -87,8 +86,25 @@ public abstract class Computer implements ModelObject {
         return Hudson.getInstance().getSlave(nodeName);
     }
 
-    public boolean isTemporarilyOffline() {
+    public boolean isOffline() {
         return temporarilyOffline || getChannel()==null;
+    }
+
+    /**
+     * Returns true if this node is marked temporarily offline by the user.
+     *
+     * <p>
+     * In contrast, {@link #isOffline()} represents the actual online/offline
+     * state. For example, this method may return false while {@link #isOffline()}
+     * returns true if the slave agent failed to launch.
+     *
+     * @deprecated
+     *      You should almost always want {@link #isOffline()}.
+     *      This method is marked as deprecated to warn people when they
+     *      accidentally call this method.
+     */
+    public boolean isTemporarilyOffline() {
+        return temporarilyOffline;
     }
 
     public void setTemporarilyOffline(boolean temporarilyOffline) {
@@ -97,7 +113,7 @@ public abstract class Computer implements ModelObject {
     }
 
     public String getIcon() {
-        if(isTemporarilyOffline())
+        if(isOffline())
             return "computer-x.gif";
         else
             return "computer.gif";

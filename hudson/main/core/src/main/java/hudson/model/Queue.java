@@ -96,7 +96,7 @@ public class Queue {
         }
 
         public boolean isAvailable() {
-            return project==null && !executor.getOwner().isTemporarilyOffline();
+            return project==null && !executor.getOwner().isOffline();
         }
 
         public Node getNode() {
