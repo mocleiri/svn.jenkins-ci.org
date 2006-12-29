@@ -717,32 +717,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      * Handles incremental log output.
      */
     public void doProgressiveLog( StaplerRequest req, StaplerResponse rsp) throws IOException {
-        rsp.setContentType("text/plain");
-        rsp.setCharacterEncoding("UTF-8");
-        rsp.setStatus(HttpServletResponse.SC_OK);
-
-        boolean completed = !isBuilding();
-        File logFile = getLogFile();
-        if(!logFile.exists()) {
-            // file doesn't exist yet
-            rsp.addHeader("X-Text-Size","0");
-            rsp.addHeader("X-More-Data","true");
-            return;
-        }
-        LargeText text = new LargeText(logFile,completed);
-        long start = 0;
-        String s = req.getParameter("start");
-        if(s!=null)
-            start = Long.parseLong(s);
-
-        CharSpool spool = new CharSpool();
-        long r = text.writeLogTo(start,spool);
-
-        rsp.addHeader("X-Text-Size",String.valueOf(r));
-        if(!completed)
-            rsp.addHeader("X-More-Data","true");
-
-        spool.writeTo(rsp.getWriter());
+        new LargeText(getLogFile(),!isBuilding()).doProgressText(req,rsp);
     }
 
     public void doToggleLogKeep( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
