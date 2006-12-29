@@ -120,7 +120,11 @@
                 <retrotranslator destdir="target/classes14"><!-- verify="true" detects false-positive errors against some references to remoting-->
                   <src path="target/classes" />
                 </retrotranslator>
-                <jar basedir="target/classes14" destfile="target/${artifactId}-${version}-jdk14.jar" />
+                <jar basedir="target/classes14" destfile="target/${artifactId}-${version}-jdk14.jar">
+                  <manifest>
+                    <attribute name="Main-Class" value="hudson.remoting.Launcher"/>
+                  </manifest>
+                </jar>
               </tasks>
             </configuration>
             <goals>
