@@ -34,6 +34,22 @@ final class RemoteInvocationHandler implements InvocationHandler, Serializable {
         this.oid = id;
     }
 
+    /**
+     * Creates a proxy that wraps an existing OID on the remote.
+     */
+    RemoteInvocationHandler(Channel channel, int id) {
+        this.channel = channel;
+        this.oid = id;
+    }
+
+    /**
+     * Wraps an OID to the typed wrapper.
+     */
+    public static <T> T wrap(Channel channel, int id, Class<T> type) {
+        return type.cast(Proxy.newProxyInstance( type.getClassLoader(), new Class[]{type},
+            new RemoteInvocationHandler(channel,id)));
+    }
+
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if(channel==null)
             throw new IllegalStateException("proxy is not connected to a channel");

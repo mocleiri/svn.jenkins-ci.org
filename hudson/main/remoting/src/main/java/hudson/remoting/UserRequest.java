@@ -28,7 +28,10 @@ final class UserRequest<RSP,EXC extends Throwable> extends Request<UserResponse<
     public UserRequest(Channel local, Callable<?,EXC> c) throws IOException {
         request = serialize(c,local);
         this.toString = c.toString();
-        classLoaderProxy = RemoteClassLoader.export( c.getClass().getClassLoader(), local );
+        ClassLoader cl = c.getClass().getClassLoader();
+        if(c instanceof DelegatingCallable)
+            cl = ((DelegatingCallable)c).getClassLoader();
+        classLoaderProxy = RemoteClassLoader.export(cl,local);
     }
 
     protected UserResponse<RSP> perform(Channel channel) throws EXC {

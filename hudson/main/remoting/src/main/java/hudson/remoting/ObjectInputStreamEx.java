@@ -6,6 +6,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectStreamClass;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * {@link ObjectInputStream} that uses a specific class loader.
