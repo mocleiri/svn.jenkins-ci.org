@@ -182,6 +182,12 @@ public final class Slave implements Node, Serializable {
     public static final class ComputerImpl extends Computer {
         private Channel channel;
 
+        /**
+         * This is where the log from the remote agent goes.
+         * TODO: use ring buffer so that it won't overflow 
+         */
+        private ByteArrayOutputStream launchLog = new ByteArrayOutputStream();
+
         private ComputerImpl(final Slave slave) {
             super(slave);
 
@@ -190,18 +196,19 @@ public final class Slave implements Node, Serializable {
                 // TODO: do this only for nodes that are so configured.
                 // TODO: support passive connection via JNLP
                 public void run() {
-                    ByteArrayOutputStream log = new ByteArrayOutputStream();
-                    StreamTaskListener listener = new StreamTaskListener(log);
+                    StreamTaskListener listener = new StreamTaskListener(launchLog);
                     try {
+                        listener.getLogger().println("Launching slave agent");
+                        listener.getLogger().println("$ "+slave.agentCommand);
                         Process proc = Runtime.getRuntime().exec(slave.agentCommand);
 
                         // capture error information from stderr. this will terminate itself
                         // when the process is killed.
                         new StreamCopyThread("stderr copier for remote agent on "+slave.getNodeName(),
-                            proc.getErrorStream(), log).start();
+                            proc.getErrorStream(), launchLog).start();
 
                         channel = new Channel(nodeName,threadPoolForRemoting,
-                            proc.getInputStream(),proc.getOutputStream(), log);
+                            proc.getInputStream(),proc.getOutputStream(), launchLog);
 
                         logger.info("slave agent launched for "+slave.getNodeName());
                     } catch (IOException e) {
@@ -210,7 +217,9 @@ public final class Slave implements Node, Serializable {
                         String msg = Util.getWin32ErrorMessage(e);
                         if(msg==null)   msg="";
                         else            msg=" : "+msg;
-                        logger.log(Level.SEVERE, "Unable to launch the slave agent for "+slave.getNodeName()+msg,e);
+                        msg = "Unable to launch the slave agent for " + slave.getNodeName() + msg;
+                        logger.log(Level.SEVERE,msg,e);
+                        e.printStackTrace(listener.error(msg));
                     }
                 }
             });
@@ -219,6 +228,13 @@ public final class Slave implements Node, Serializable {
         @Override
         public VirtualChannel getChannel() {
             return channel;
+        }
+
+        /**
+         * Gets the string representation of the slave log.
+         */
+        public String getLog() {
+            return launchLog.toString();
         }
 
         @Override
