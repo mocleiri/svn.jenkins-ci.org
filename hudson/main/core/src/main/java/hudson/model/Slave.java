@@ -16,13 +16,15 @@ import hudson.remoting.VirtualChannel;
 import hudson.remoting.Channel.Listener;
 import hudson.util.StreamCopyThread;
 import hudson.util.StreamTaskListener;
+import hudson.util.NullStream;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -191,9 +193,10 @@ public final class Slave implements Node, Serializable {
 
         /**
          * This is where the log from the remote agent goes.
-         * TODO: use ring buffer so that it won't overflow
          */
-        private ByteArrayOutputStream launchLog;
+        private File getLogFile() {
+            return new File(Hudson.getInstance().getRootDir(),"slave-"+nodeName+".log");
+        }
 
         private ComputerImpl(Slave slave) {
             super(slave);
@@ -205,7 +208,15 @@ public final class Slave implements Node, Serializable {
         private void launch(final Slave slave) {
             closeChannel();
 
-            launchLog = new ByteArrayOutputStream();
+            OutputStream os;
+            try {
+                os = new FileOutputStream(getLogFile());
+            } catch (FileNotFoundException e) {
+                logger.log(Level.SEVERE, "Failed to create log file "+getLogFile(),e);
+                os = new NullStream();
+            }
+            final OutputStream launchLog = os;
+
             // launch the slave agent asynchronously
             threadPoolForRemoting.execute(new Runnable() {
                 // TODO: do this only for nodes that are so configured.
@@ -267,8 +278,8 @@ public final class Slave implements Node, Serializable {
         /**
          * Gets the string representation of the slave log.
          */
-        public String getLog() {
-            return launchLog.toString();
+        public String getLog() throws IOException {
+            return Util.loadFile(getLogFile());
         }
 
         @Override
