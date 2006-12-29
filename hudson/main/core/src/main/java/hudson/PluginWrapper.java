@@ -340,6 +340,9 @@ public final class PluginWrapper {
 
         LOGGER.info("Extracting "+archive);
 
+        // delete the contents so that old files won't interfere with new files
+        Util.deleteContentsRecursive(destDir);
+
         try {
             Expand e = new Expand();
             e.setProject(new Project());
