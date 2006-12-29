@@ -156,7 +156,14 @@ public class Channel implements VirtualChannel {
      * Callback "interface" for changes in the state of {@link Channel}.
      */
     public static abstract class Listener {
-        public void onClosed(Channel channel) {}
+        /**
+         * When the channel was closed normally or abnormally due to an error.
+         *
+         * @param cause
+         *      if the channel is closed abnormally, this parameter
+         *      represents an exception that has triggered it.
+         */
+        public void onClosed(Channel channel, IOException cause) {}
     }
 
     /**
@@ -259,7 +266,7 @@ public class Channel implements VirtualChannel {
         notify();
 
         for (Listener l : listeners.toArray(new Listener[listeners.size()]))
-            l.onClosed(this);
+            l.onClosed(this,e);
     }
 
     /**

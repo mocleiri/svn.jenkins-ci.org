@@ -13,6 +13,7 @@ import hudson.remoting.Channel;
 import hudson.remoting.RemoteInputStream;
 import hudson.remoting.RemoteOutputStream;
 import hudson.remoting.VirtualChannel;
+import hudson.remoting.Channel.Listener;
 import hudson.util.StreamCopyThread;
 import hudson.util.StreamTaskListener;
 
@@ -204,7 +205,7 @@ public final class Slave implements Node, Serializable {
                 // TODO: do this only for nodes that are so configured.
                 // TODO: support passive connection via JNLP
                 public void run() {
-                    StreamTaskListener listener = new StreamTaskListener(launchLog);
+                    final StreamTaskListener listener = new StreamTaskListener(launchLog);
                     try {
                         listener.getLogger().println("Launching slave agent");
                         listener.getLogger().println("$ "+slave.agentCommand);
@@ -217,6 +218,12 @@ public final class Slave implements Node, Serializable {
 
                         channel = new Channel(nodeName,threadPoolForRemoting,
                             proc.getInputStream(),proc.getOutputStream(), launchLog);
+                        channel.addListener(new Listener() {
+                            public void onClosed(Channel c,IOException cause) {
+                                cause.printStackTrace(listener.error("slave agent was terminated"));
+                                channel = null;
+                            }
+                        });
 
                         logger.info("slave agent launched for "+slave.getNodeName());
                     } catch (IOException e) {
