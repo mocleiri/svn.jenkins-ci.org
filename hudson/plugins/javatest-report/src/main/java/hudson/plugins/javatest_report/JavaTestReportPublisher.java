@@ -155,10 +155,16 @@ public class JavaTestReportPublisher extends Publisher {
     }
 
     public Descriptor<Publisher> getDescriptor() {
-        return DESCRIPTOR;
+        return DescriptorImpl.DESCRIPTOR;
     }
 
-     public static final Descriptor<Publisher> DESCRIPTOR = new Descriptor<Publisher>(JavaTestReportPublisher.class) {
+    /*package*/ static class DescriptorImpl extends Descriptor<Publisher> {
+        public static final Descriptor<Publisher> DESCRIPTOR = new DescriptorImpl();
+
+        public DescriptorImpl() {
+            super(JavaTestReportPublisher.class);
+        }
+
         public String getDisplayName() {
             return "Publish JavaTest result report";
         }
@@ -170,5 +176,5 @@ public class JavaTestReportPublisher extends Publisher {
         public Publisher newInstance(StaplerRequest req) {
             return new JavaTestReportPublisher(req.getParameter("javatest_includes"), req.getParameter("javatest_jtwork"));
         }
-    };
+    }
 }

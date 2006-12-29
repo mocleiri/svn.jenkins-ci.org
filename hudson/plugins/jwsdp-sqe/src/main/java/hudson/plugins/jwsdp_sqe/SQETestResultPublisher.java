@@ -15,13 +15,14 @@ import org.kohsuke.stapler.StaplerRequest;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Collects SQE test reports and convert them into JUnit format.
  *
  * @author Kohsuke Kawaguchi
  */
-public class SQETestResultPublisher extends Publisher {
+public class SQETestResultPublisher extends Publisher implements Serializable {
 
     private final String includes;
     /**
@@ -122,11 +123,19 @@ public class SQETestResultPublisher extends Publisher {
         return true;
     }
 
+    private static final long serialVersionUID = 1L;
+
     public Descriptor<Publisher> getDescriptor() {
-        return DESCRIPTOR;
+        return DescriptorImpl.DESCRIPTOR;
     }
 
-    public static final Descriptor<Publisher> DESCRIPTOR = new Descriptor<Publisher>(SQETestResultPublisher.class) {
+    /*package*/ static class DescriptorImpl extends Descriptor<Publisher> {
+        public static final Descriptor<Publisher> DESCRIPTOR = new DescriptorImpl();
+
+        public DescriptorImpl() {
+            super(SQETestResultPublisher.class);
+        }
+
         public String getDisplayName() {
             return "Publish SQE test result report";
         }
@@ -138,5 +147,5 @@ public class SQETestResultPublisher extends Publisher {
         public Publisher newInstance(StaplerRequest req) {
             return new SQETestResultPublisher(req.getParameter("sqetest_includes"),(req.getParameter("sqetest_testobject")!=null));
         }
-    };
+    }
 }
