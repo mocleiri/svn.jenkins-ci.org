@@ -143,7 +143,7 @@ public abstract class Computer implements ModelObject {
      * Called to notify {@link Computer} that its corresponding {@link Node}
      * configuration is updated.
      */
-    /*package*/ void setNode(Node node) {
+    protected void setNode(Node node) {
         assert node!=null;
         if(node instanceof Slave)
             this.nodeName = node.getNodeName();
