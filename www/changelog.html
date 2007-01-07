@@ -18,6 +18,11 @@
   <li>Modified to create a shell script file in the system-specific temporary directory
       on each node, instead of the workspace.
       (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=183">issue 183</a>)
+  <li>Fixed a serious bug where saving the job configuration is done <b>before</b>
+      reflecting the submitted configuration, instead of after. This could very likely
+      cause a data loss issue when Hudson is restarted. If you are using 1.69/1.70,
+      you can work around this problem by making changes, submitting it, then reopen
+      the config page and submit that one more time.
 </ul>
 -->
 <h3>What's new in 1.70</h3>
