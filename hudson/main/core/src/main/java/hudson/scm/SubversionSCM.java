@@ -54,7 +54,7 @@ import java.util.logging.Logger;
  *
  * @author Kohsuke Kawaguchi
  */
-public class SubversionSCM extends AbstractCVSFamilySCM {
+public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable {
     private final String modules;
     private boolean useUpdate;
     private String username;
@@ -416,7 +416,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
 
 
     public DescriptorImpl getDescriptor() {
-        return DESCRIPTOR;
+        return DescriptorImpl.DESCRIPTOR;
     }
 
     public void buildEnvVars(Map<String,String> env) {
@@ -439,8 +439,6 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         return tokens[tokens.length-1]; // return the last token
     }
 
-    static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
-
     public static final class DescriptorImpl extends Descriptor<SCM> {
         /**
          * Path to <tt>svn.exe</tt>. Null to default.
@@ -450,7 +448,9 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
          */
         private volatile String svnExe;
 
-        DescriptorImpl() {
+        public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
+
+        private DescriptorImpl() {
             super(SubversionSCM.class);
             load();
         }
@@ -470,6 +470,8 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
     }
 
     private static final Logger LOGGER = Logger.getLogger(SubversionSCM.class.getName());
+
+    private static final long serialVersionUID = 1L;
 
     static {
         DAVRepositoryFactory.setup();   // http, https
