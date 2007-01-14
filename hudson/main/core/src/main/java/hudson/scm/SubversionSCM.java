@@ -58,9 +58,14 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
     private final String modules;
     private boolean useUpdate;
     private String username;
-    private String otherOptions;
 
-    SubversionSCM( String modules, boolean useUpdate, String username, String otherOptions ) {
+    /**
+     * @deprecated
+     *      No longer in use but left for serialization compatibility.
+     */
+    private transient String otherOptions;
+
+    SubversionSCM(String modules, boolean useUpdate, String username) {
         StringBuilder normalizedModules = new StringBuilder();
         StringTokenizer tokens = new StringTokenizer(modules);
         while(tokens.hasMoreTokens()) {
@@ -75,7 +80,6 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
         this.modules = normalizedModules.toString();
         this.useUpdate = useUpdate;
         this.username = nullify(username);
-        this.otherOptions = nullify(otherOptions);
     }
 
     /**
@@ -92,10 +96,6 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
 
     public String getUsername() {
         return username;
-    }
-
-    public String getOtherOptions() {
-        return otherOptions;
     }
 
     private Collection<String> getModuleDirNames() {
@@ -308,8 +308,6 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
     private Map<String,SvnInfo> buildRevisionMap(FilePath workspace, final TaskListener listener) throws IOException, InterruptedException {
         return workspace.act(new FileCallable<Map<String,SvnInfo>>() {
             public Map<String,SvnInfo> invoke(File ws, VirtualChannel channel) throws IOException {
-                PrintStream logger = listener.getLogger();
-
                 Map<String/*module name*/,SvnInfo> revisions = new HashMap<String,SvnInfo>();
 
                 SVNWCClient svnWc = createSvnClientManager().getWCClient();
@@ -463,8 +461,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
             return new SubversionSCM(
                 req.getParameter("svn_modules"),
                 req.getParameter("svn_use_update")!=null,
-                req.getParameter("svn_username"),
-                req.getParameter("svn_other_options")
+                req.getParameter("svn_username")
             );
         }
     }
