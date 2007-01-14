@@ -1,6 +1,7 @@
 package hudson.scm;
 
 import hudson.FilePath;
+import hudson.FilePath.FileCallable;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.model.AbstractBuild;
@@ -8,27 +9,34 @@ import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.TaskListener;
-import hudson.util.ArgumentListBuilder;
-import hudson.util.FormFieldValidator;
-import org.apache.commons.digester.Digester;
+import hudson.remoting.VirtualChannel;
 import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.xml.sax.SAXException;
+import org.tmatesoft.svn.core.SVNException;
+import org.tmatesoft.svn.core.SVNURL;
+import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
+import org.tmatesoft.svn.core.internal.io.fs.FSRepositoryFactory;
+import org.tmatesoft.svn.core.internal.io.svn.SVNRepositoryFactoryImpl;
+import org.tmatesoft.svn.core.wc.SVNClientManager;
+import org.tmatesoft.svn.core.wc.SVNInfo;
+import org.tmatesoft.svn.core.wc.SVNLogClient;
+import org.tmatesoft.svn.core.wc.SVNRevision;
+import org.tmatesoft.svn.core.wc.SVNUpdateClient;
+import org.tmatesoft.svn.core.wc.SVNWCClient;
+import org.tmatesoft.svn.core.wc.SVNWCUtil;
+import org.tmatesoft.svn.core.wc.xml.SVNXMLLogHandler;
 
-import javax.servlet.ServletException;
-import java.io.BufferedOutputStream;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.sax.TransformerHandler;
+import javax.xml.transform.stream.StreamResult;
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -36,10 +44,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Subversion.
@@ -102,7 +107,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         return dirs;
     }
 
-    private boolean calcChangeLog(AbstractBuild<?,?> build, File changelogFile, Launcher launcher, BuildListener listener) throws IOException {
+    private boolean calcChangeLog(AbstractBuild<?, ?> build, File changelogFile, BuildListener listener) throws IOException {
         if(build.getPreviousBuild()==null) {
             // nothing to compare against
             return createEmptyChangeLog(changelogFile, listener, "log");
@@ -110,46 +115,46 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
 
         PrintStream logger = listener.getLogger();
 
-        Map<String,Integer> previousRevisions = parseRevisionFile(build.getPreviousBuild());
-        Map<String,Integer> thisRevisions     = parseRevisionFile(build);
-
-        Map<String,String> env = createEnvVarMap(true);
+        Map<String,Long> previousRevisions = parseRevisionFile(build.getPreviousBuild());
+        Map<String,Long> thisRevisions     = parseRevisionFile(build);
 
         boolean changelogFileCreated = false;
 
-        for( String module : getModuleDirNames() ) {
-            Integer prevRev = previousRevisions.get(module);
+        SVNLogClient svnlc = createSvnClientManager().getLogClient();
+
+        TransformerHandler th = createTransformerHandler();
+        th.setResult(new StreamResult(changelogFile));
+        SVNXMLLogHandler logHandler = new SVNXMLLogHandler(th);
+        logHandler.startDocument();
+
+
+        StringTokenizer tokens = new StringTokenizer(modules);
+        while(tokens.hasMoreTokens()) {
+            String url = tokens.nextToken();
+            Long prevRev = previousRevisions.get(url);
             if(prevRev==null) {
-                logger.println("no revision recorded for "+module+" in the previous build");
+                logger.println("no revision recorded for "+url+" in the previous build");
                 continue;
             }
-            Integer thisRev = thisRevisions.get(module);
-            if(thisRev!=null && thisRev.equals(prevRev)) {
-                logger.println("no change for "+module+" since the previous build");
+            Long thisRev = thisRevisions.get(url);
+            if(thisRev.equals(prevRev)) {
+                logger.println("no change for "+url+" since the previous build");
                 continue;
             }
 
-            // TODO: this seems to clobber previously recorded changes when there are multiple modules
-            String cmd = DESCRIPTOR.getSvnExe()+" log -v --xml --non-interactive -r "+(prevRev+1)+":BASE "+module;
-            OutputStream os = new BufferedOutputStream(new FileOutputStream(changelogFile));
-            changelogFileCreated = true;
             try {
-                int r = launcher.launch(cmd,env,os,build.getProject().getWorkspace()).join();
-                pause(listener);
-                if(r!=0) {
-                    listener.fatalError("revision check failed");
-                    // report the output
-                    FileInputStream log = new FileInputStream(changelogFile);
-                    try {
-                        Util.copyStream(log,listener.getLogger());
-                    } finally {
-                        log.close();
-                    }
-                    return false;
-                }
-            } finally {
-                os.close();
+                svnlc.doLog(SVNURL.parseURIEncoded(url),null,
+                SVNRevision.create(prevRev), SVNRevision.create(prevRev+1),
+                    SVNRevision.create(thisRev),
+                    false, true, Long.MAX_VALUE, logHandler);
+            } catch (SVNException e) {
+                e.printStackTrace(listener.error("revision check failed on "+url));
             }
+            changelogFileCreated = true;
+        }
+
+        if(changelogFileCreated) {
+            logHandler.endDocument();
         }
 
         if(!changelogFileCreated)
@@ -158,8 +163,19 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         return true;
     }
 
-    /*package*/ static Map<String,Integer> parseRevisionFile(AbstractBuild build) throws IOException {
-        Map<String,Integer> revisions = new HashMap<String,Integer>(); // module -> revision
+    /**
+     * Creates an identity transformer.
+     */
+    private static TransformerHandler createTransformerHandler() {
+        try {
+            return ((SAXTransformerFactory) SAXTransformerFactory.newInstance()).newTransformerHandler();
+        } catch (TransformerConfigurationException e) {
+            throw new Error(e); // impossible
+        }
+    }
+
+    /*package*/ static Map<String,Long> parseRevisionFile(AbstractBuild build) throws IOException {
+        Map<String,Long> revisions = new HashMap<String,Long>(); // module -> revision
         {// read the revision file of the last build
             File file = getRevisionFile(build);
             if(!file.exists())
@@ -174,7 +190,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
                     continue;   // invalid line?
                 }
                 try {
-                    revisions.put(line.substring(0,index), Integer.parseInt(line.substring(index+1)));
+                    revisions.put(line.substring(0,index), Long.parseLong(line.substring(index+1)));
                 } catch (NumberFormatException e) {
                     // perhaps a corrupted line. ignore
                 }
@@ -184,36 +200,42 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         return revisions;
     }
 
-    public boolean checkout(AbstractBuild build, Launcher launcher, FilePath workspace, BuildListener listener, File changelogFile) throws IOException, InterruptedException {
+    public boolean checkout(AbstractBuild build, Launcher launcher, FilePath workspace, final BuildListener listener, File changelogFile) throws IOException, InterruptedException {
         boolean result;
 
-        if(useUpdate && isUpdatable(workspace,launcher,listener)) {
+        if(useUpdate && isUpdatable(workspace, listener)) {
             result = update(launcher,workspace,listener);
             if(!result)
                 return false;
         } else {
-            workspace.deleteContents();
-            StringTokenizer tokens = new StringTokenizer(modules);
-            while(tokens.hasMoreTokens()) {
-                ArgumentListBuilder cmd = new ArgumentListBuilder();
-                cmd.add(DESCRIPTOR.getSvnExe(),"co",/*"-q",*/"--non-interactive");
-                if(username!=null)
-                    cmd.add("--username",username);
-                if(otherOptions!=null)
-                    cmd.add(Util.tokenize(otherOptions));
-                cmd.add(tokens.nextToken());
+            result = workspace.act(new FileCallable<Boolean>() {
+                public Boolean invoke(File ws, VirtualChannel channel) throws IOException {
+                    Util.deleteContentsRecursive(ws);
+                    SVNUpdateClient svnuc = createSvnClientManager().getUpdateClient();
+                    StringTokenizer tokens = new StringTokenizer(modules);
+                    while(tokens.hasMoreTokens()) {
+                        try {
+                            SVNURL url = SVNURL.parseURIEncoded(tokens.nextToken());
 
-                result = run(launcher,cmd,listener,workspace);
-                pause(listener);
-                if(!result)
-                    return false;
-            }
+                            svnuc.setEventHandler(new SubversionUpdateEventHandler(listener));
+                            svnuc.doCheckout(url, new File(ws, getLastPathComponent(url.getPath())), SVNRevision.HEAD, SVNRevision.HEAD, true );
+                        } catch (SVNException e) {
+                            e.printStackTrace(listener.error("Error in subversion"));
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }
+            });
+            if(!result)
+                return false;
         }
 
         // write out the revision file
         PrintWriter w = new PrintWriter(new FileOutputStream(getRevisionFile(build)));
         try {
-            Map<String,SvnInfo> revMap = buildRevisionMap(workspace,launcher,listener);
+            Map<String,SvnInfo> revMap = buildRevisionMap(workspace, listener);
             for (Entry<String,SvnInfo> e : revMap.entrySet()) {
                 w.println( e.getKey() +'/'+ e.getValue().revision );
             }
@@ -221,82 +243,57 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             w.close();
         }
 
-        return calcChangeLog(build, changelogFile, launcher, listener);
+        return calcChangeLog(build, changelogFile, listener);
     }
 
-    /**
-     * Output from "svn info" command.
-     */
-    public static class SvnInfo {
-        /** The remote URL of this directory */
-        String url;
-        /** Current workspace revision. */
-        int revision = -1;
+    private SVNClientManager createSvnClientManager() {
+        // TODO: figure out the authentication story
+        return SVNClientManager.newInstance(SVNWCUtil.createDefaultOptions(true));
+    }
 
-        private SvnInfo() {}
-
+    public static final class SvnInfo implements Serializable {
         /**
-         * Returns true if this object is fully populated.
+         * Decoded repository URL.
          */
-        public boolean isComplete() {
-            return url!=null && revision!=-1;
-        }
+        final String url;
+        final long revision;
 
-        public void setUrl(String url) {
+        public SvnInfo(String url, long revision) {
             this.url = url;
-        }
-
-        public void setRevision(int revision) {
             this.revision = revision;
         }
 
-        /**
-         * Executes "svn info" command and returns the parsed output
-         *
-         * @param subject
-         *      The target to run "svn info". Either local path or remote URL.
-         */
-        public static SvnInfo parse(String subject, Map<String,String> env, FilePath workspace, Launcher launcher, TaskListener listener) throws IOException {
-            String cmd = DESCRIPTOR.getSvnExe()+" info --xml "+subject;
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-            int r = launcher.launch(cmd,env,baos,workspace).join();
-            pause(listener);
-            if(r!=0) {
-                // failed. to allow user to diagnose the problem, send output to log
-                listener.getLogger().write(baos.toByteArray());
-                throw new IOException("svn info failed");
-            }
-
-            if(dumpSvnInfo) {
-                // dump the output for debugging
-                listener.getLogger().write(baos.toByteArray());
-            }
-
-            SvnInfo info = new SvnInfo();
-
-            Digester digester = new Digester();
-            digester.push(info);
-
-            digester.addBeanPropertySetter("info/entry/url");
-            digester.addSetProperties("info/entry/commit","revision","revision");  // set attributes. in particular @revision
-
-            try {
-                digester.parse(new ByteArrayInputStream(baos.toByteArray()));
-            } catch (SAXException e) {
-                // failed. to allow user to diagnose the problem, send output to log
-                listener.getLogger().write(baos.toByteArray());
-                e.printStackTrace(listener.fatalError("Failed to parse Subversion output"));
-                throw new IOException("Unable to parse svn info output");
-            }
-
-            if(!info.isComplete())
-                throw new IOException("No revision in the svn info output");
-
-            return info;
+        public SvnInfo(SVNInfo info) {
+            this( info.getURL().toDecodedString(), info.getRevision().getNumber() );
         }
 
+        public SVNURL getSVNURL() throws SVNException {
+            return SVNURL.parseURIDecoded(url);
+        }
+
+        private static final long serialVersionUID = 1L;
+    }
+
+    /**
+     * Gets the SVN metadata for the given local workspace.
+     *
+     * @param workspace
+     *      The target to run "svn info".
+     */
+    private SVNInfo parseSvnInfo(File workspace) throws SVNException {
+        SVNWCClient svnWc = createSvnClientManager().getWCClient();
+        return svnWc.doInfo(workspace,SVNRevision.WORKING);
+    }
+
+    /**
+     * Gets the SVN metadata for the remote repository.
+     *
+     * @param remoteUrl
+     *      The target to run "svn info".
+     */
+    private SVNInfo parseSvnInfo(SVNURL remoteUrl) throws SVNException {
+        SVNWCClient svnWc = createSvnClientManager().getWCClient();
+        return svnWc.doInfo(remoteUrl, SVNRevision.HEAD, SVNRevision.HEAD);
     }
 
     /**
@@ -304,24 +301,30 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
      * that the workspace has.
      *
      * @return
-     *      null if the parsing somehow fails. Otherwise a map from module names to revisions.
+     *      null if the parsing somehow fails. Otherwise a map from the repository URL to revisions.
      */
-    private Map<String,SvnInfo> buildRevisionMap(FilePath workspace, Launcher launcher, TaskListener listener) throws IOException {
-        PrintStream logger = listener.getLogger();
+    private Map<String,SvnInfo> buildRevisionMap(FilePath workspace, final TaskListener listener) throws IOException, InterruptedException {
+        return workspace.act(new FileCallable<Map<String,SvnInfo>>() {
+            public Map<String,SvnInfo> invoke(File ws, VirtualChannel channel) throws IOException {
+                PrintStream logger = listener.getLogger();
 
-        Map<String/*module name*/,SvnInfo> revisions = new HashMap<String,SvnInfo>();
+                Map<String/*module name*/,SvnInfo> revisions = new HashMap<String,SvnInfo>();
 
-        Map<String,String> env = createEnvVarMap(false);
+                SVNWCClient svnWc = createSvnClientManager().getWCClient();
+                // invoke the "svn info"
+                for( String module : getModuleDirNames() ) {
+                    try {
+                        SvnInfo info = new SvnInfo(svnWc.doInfo(new File(ws,module),SVNRevision.WORKING));
+                        revisions.put(info.url,info);
+                        logger.println("Revision:"+info.revision);
+                    } catch (SVNException e) {
+                        e.printStackTrace(listener.error("Failed to parse svn info for "+module));
+                    }
+                }
 
-        // invoke the "svn info"
-        for( String module : getModuleDirNames() ) {
-            // parse the output
-            SvnInfo info = SvnInfo.parse(module,env,workspace,launcher,listener);
-            revisions.put(module,info);
-            logger.println("Revision:"+info.revision);
-        }
-
-        return revisions;
+                return revisions;
+            }
+        });
     }
 
     /**
@@ -331,72 +334,69 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         return new File(build.getRootDir(),"revision.txt");
     }
 
-    public boolean update(Launcher launcher, FilePath remoteDir, BuildListener listener) throws IOException {
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-        cmd.add(DESCRIPTOR.getSvnExe(), "update", /*"-q",*/ "--non-interactive");
+    public boolean update(Launcher launcher, FilePath workspace, final BuildListener listener) throws IOException, InterruptedException {
+        return workspace.act(new FileCallable<Boolean>() {
+            public Boolean invoke(File ws, VirtualChannel channel) throws IOException {
+                SVNUpdateClient svnuc = createSvnClientManager().getUpdateClient();
+                svnuc.setEventHandler(new SubversionUpdateEventHandler(listener));
 
-        if(username!=null)
-            cmd.add(" --username ",username);
-        if(otherOptions!=null)
-            cmd.add(Util.tokenize(otherOptions));
-
-        StringTokenizer tokens = new StringTokenizer(modules);
-        while(tokens.hasMoreTokens()) {
-            boolean result = run(launcher, cmd, listener, new FilePath(remoteDir, getLastPathComponent(tokens.nextToken())));
-            pause(listener);
-            if(!result)
-                return false;
-        }
-        return true;
-    }
-
-    private static void pause(TaskListener listener) {
-        try {
-            if(pauseBetweenInvocation<=0)   return; // do nothing
-            listener.getLogger().println("Pausing "+pauseBetweenInvocation+"ms");
-            Thread.sleep(pauseBetweenInvocation);
-        } catch (InterruptedException e) {
-            listener.getLogger().println("aborted");
-        }
+                StringTokenizer tokens = new StringTokenizer(modules);
+                while(tokens.hasMoreTokens()) {
+                    try {
+                        svnuc.doUpdate(new File(ws, getLastPathComponent(tokens.nextToken())), SVNRevision.HEAD, true );
+                    } catch (SVNException e) {
+                        e.printStackTrace(listener.error("Error in subversion"));
+                        return false;
+                    }
+                }
+                return true;
+            }
+        });
     }
 
     /**
      * Returns true if we can use "svn update" instead of "svn checkout"
      */
-    private boolean isUpdatable(FilePath workspace,Launcher launcher,BuildListener listener) {
-        StringTokenizer tokens = new StringTokenizer(modules);
-        while(tokens.hasMoreTokens()) {
-            String url = tokens.nextToken();
-            String moduleName = getLastPathComponent(url);
-            FilePath module = workspace.child(moduleName);
+    private boolean isUpdatable(FilePath workspace, final BuildListener listener) throws IOException, InterruptedException {
+        return workspace.act(new FileCallable<Boolean>() {
+            public Boolean invoke(File ws, VirtualChannel channel) throws IOException {
+                StringTokenizer tokens = new StringTokenizer(modules);
+                while(tokens.hasMoreTokens()) {
+                    String url = tokens.nextToken();
+                    String moduleName = getLastPathComponent(url);
+                    File module = new File(ws,moduleName);
 
-            try {
-                SvnInfo svnInfo = SvnInfo.parse(moduleName, createEnvVarMap(false), workspace, launcher, listener);
-                if(!svnInfo.url.equals(url)) {
-                    listener.getLogger().println("Checking out a fresh workspace because the workspace is not "+url);
-                    return false;
+                    try {
+                        SvnInfo svnInfo = new SvnInfo(parseSvnInfo(module));
+                        if(!svnInfo.url.equals(url)) {
+                            listener.getLogger().println("Checking out a fresh workspace because the workspace is not "+url);
+                            return false;
+                        }
+                    } catch (SVNException e) {
+                        listener.getLogger().println("Checking out a fresh workspace because Hudson failed to detect the current workspace "+module);
+                        e.printStackTrace(listener.error(e.getMessage()));
+                        return false;
+                    }
                 }
-            } catch (IOException e) {
-                listener.getLogger().println("Checking out a fresh workspace because Hudson failed to detect the current workspace "+module);
-                e.printStackTrace(listener.error(e.getMessage()));
-                return false;
+                return true;
             }
-        }
-        return true;
+        });
     }
 
-    public boolean pollChanges(AbstractProject project, Launcher launcher, FilePath workspace, TaskListener listener) throws IOException {
+    public boolean pollChanges(AbstractProject project, Launcher launcher, FilePath workspace, TaskListener listener) throws IOException, InterruptedException {
         // current workspace revision
-        Map<String,SvnInfo> wsRev = buildRevisionMap(workspace,launcher,listener);
-
-        Map<String,String> env = createEnvVarMap(false);
+        Map<String,SvnInfo> wsRev = buildRevisionMap(workspace, listener);
 
         // check the corresponding remote revision
         for (SvnInfo localInfo : wsRev.values()) {
-            SvnInfo remoteInfo = SvnInfo.parse(localInfo.url,env,workspace,launcher,listener);
-            listener.getLogger().println("Revision:"+remoteInfo.revision);
-            if(remoteInfo.revision > localInfo.revision)
-                return true;    // change found
+            try {
+                SvnInfo remoteInfo = new SvnInfo(parseSvnInfo(localInfo.getSVNURL()));
+                listener.getLogger().println("Revision:"+remoteInfo.revision);
+                if(remoteInfo.revision > localInfo.revision)
+                    return true;    // change found
+            } catch (SVNException e) {
+                e.printStackTrace(listener.error("Failed to check repository revision for "+localInfo.url));
+            }
         }
 
         return false; // no change
@@ -426,7 +426,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
         return workspace.child(getLastPathComponent(s));
     }
 
-    private String getLastPathComponent(String s) {
+    private static String getLastPathComponent(String s) {
         String[] tokens = s.split("/");
         return tokens[tokens.length-1]; // return the last token
     }
@@ -436,16 +436,15 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
     public static final class DescriptorImpl extends Descriptor<SCM> {
         /**
          * Path to <tt>svn.exe</tt>. Null to default.
+         *
+         * @deprecated
+         *      No longer in use.
          */
-        private String svnExe;
+        private volatile String svnExe;
 
         DescriptorImpl() {
             super(SubversionSCM.class);
             load();
-        }
-
-        protected void convert(Map<String, Object> oldPropertyBag) {
-            svnExe = (String)oldPropertyBag.get("svn_exe");
         }
 
         public String getDisplayName() {
@@ -460,124 +459,13 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
                 req.getParameter("svn_other_options")
             );
         }
-
-        public String getSvnExe() {
-            String value = svnExe;
-            if(value==null)
-                value = "svn";
-            return value;
-        }
-
-        public void setSvnExe(String value) {
-            svnExe = value;
-            save();
-        }
-
-        public boolean configure( StaplerRequest req ) {
-            svnExe = req.getParameter("svn_exe");
-            save();
-            return true;
-        }
-
-        /**
-         * Returns the Subversion version information.
-         *
-         * @return
-         *      null if failed to obtain.
-         */
-        public Version version(Launcher l, String svnExe) {
-            try {
-                if(svnExe==null || svnExe.equals(""))    svnExe="svn";
-
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                l.launch(new String[]{svnExe,"--version"},new String[0],out,null).join();
-
-                // parse the first line for version
-                BufferedReader r = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(out.toByteArray())));
-                String line;
-                while((line = r.readLine())!=null) {
-                    Matcher m = SVN_VERSION.matcher(line);
-                    if(m.matches())
-                        return new Version(Integer.parseInt(m.group(2)), m.group(1));
-                }
-
-                // ancient version of subversions didn't have the fixed version number line.
-                // or maybe something else is going wrong.
-                LOGGER.log(Level.WARNING, "Failed to parse the first line from svn output: "+line);
-                return new Version(0,"(unknown)");
-            } catch (IOException e) {
-                // Stack trace likely to be overkill for a problem that isn't necessarily a problem at all:
-                LOGGER.log(Level.WARNING, "Failed to check svn version: {0}", e.toString());
-                return null; // failed to obtain
-            }
-        }
-
-        // web methods
-
-        public void doVersionCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-            // this method runs a new process, so it needs to be protected
-            new FormFieldValidator(req,rsp,true) {
-                protected void check() throws IOException, ServletException {
-                    String svnExe = request.getParameter("exe");
-
-                    Version v = version(new Launcher.LocalLauncher(TaskListener.NULL),svnExe);
-                    if(v==null) {
-                        error("Failed to check subversion version info. Is this a valid path?");
-                        return;
-                    }
-                    if(v.isOK()) {
-                        ok();
-                    } else {
-                        error("Version "+v.versionId+" found, but 1.3.0 is required");
-                    }
-                }
-            }.process();
-        }
     }
-
-    public static final class Version {
-        private final int revision;
-        private String versionId;
-
-        public Version(int revision, String versionId) {
-            this.revision = revision;
-            this.versionId = versionId;
-        }
-
-        /**
-         * Repository revision ID of this build.
-         */
-        public int getRevision() {
-            return revision;
-        }
-
-        /**
-         * Human-readable version string.
-         */
-        public String getVersionId() {
-            return versionId;
-        }
-
-        /**
-         * We use "svn info --xml", which is new in 1.3.0
-         */
-        public boolean isOK() {
-            return revision>=17949;
-        }
-    }
-
-    private static final Pattern SVN_VERSION = Pattern.compile("svn, .+ ([0-9.]+) \\(r([0-9]+)\\)");
 
     private static final Logger LOGGER = Logger.getLogger(SubversionSCM.class.getName());
 
-    /**
-     * Debug switch to dump "svn info" output, to troubleshoot issue #167.
-     */
-    public static boolean dumpSvnInfo = false;
-
-    /**
-     * Debug switch that causes Hudson to wait between svn invocation.
-     * This is a temporary change to trouble-shoot issue #167.
-     */
-    public static int pauseBetweenInvocation = 0;
+    static {
+        DAVRepositoryFactory.setup();   // http, https
+        SVNRepositoryFactoryImpl.setup();   // svn, svn+xxx
+        FSRepositoryFactory.setup();    // file
+    }
 }
