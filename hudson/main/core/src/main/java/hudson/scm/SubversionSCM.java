@@ -185,7 +185,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
             while((line=br.readLine())!=null) {
-                int index = line.indexOf('/');
+                int index = line.lastIndexOf('/');
                 if(index<0) {
                     continue;   // invalid line?
                 }
@@ -212,12 +212,14 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
                 public Boolean invoke(File ws, VirtualChannel channel) throws IOException {
                     Util.deleteContentsRecursive(ws);
                     SVNUpdateClient svnuc = createSvnClientManager().getUpdateClient();
+                    svnuc.setEventHandler(new SubversionUpdateEventHandler(listener));
+
                     StringTokenizer tokens = new StringTokenizer(modules);
                     while(tokens.hasMoreTokens()) {
                         try {
                             SVNURL url = SVNURL.parseURIEncoded(tokens.nextToken());
+                            listener.getLogger().println("Checking out "+url);
 
-                            svnuc.setEventHandler(new SubversionUpdateEventHandler(listener));
                             svnuc.doCheckout(url, new File(ws, getLastPathComponent(url.getPath())), SVNRevision.HEAD, SVNRevision.HEAD, true );
                         } catch (SVNException e) {
                             e.printStackTrace(listener.error("Error in subversion"));
@@ -316,7 +318,6 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
                     try {
                         SvnInfo info = new SvnInfo(svnWc.doInfo(new File(ws,module),SVNRevision.WORKING));
                         revisions.put(info.url,info);
-                        logger.println("Revision:"+info.revision);
                     } catch (SVNException e) {
                         e.printStackTrace(listener.error("Failed to parse svn info for "+module));
                     }
@@ -343,7 +344,9 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
                 StringTokenizer tokens = new StringTokenizer(modules);
                 while(tokens.hasMoreTokens()) {
                     try {
-                        svnuc.doUpdate(new File(ws, getLastPathComponent(tokens.nextToken())), SVNRevision.HEAD, true );
+                        String url = tokens.nextToken();
+                        listener.getLogger().println("Updating "+url);
+                        svnuc.doUpdate(new File(ws, getLastPathComponent(url)), SVNRevision.HEAD, true );
                     } catch (SVNException e) {
                         e.printStackTrace(listener.error("Error in subversion"));
                         return false;
@@ -365,6 +368,11 @@ public class SubversionSCM extends AbstractCVSFamilySCM {
                     String url = tokens.nextToken();
                     String moduleName = getLastPathComponent(url);
                     File module = new File(ws,moduleName);
+
+                    if(!module.exists()) {
+                        listener.getLogger().println("Checking out a fresh workspace because "+module+" doesn't exist");
+                        return false;
+                    }
 
                     try {
                         SvnInfo svnInfo = new SvnInfo(parseSvnInfo(module));
