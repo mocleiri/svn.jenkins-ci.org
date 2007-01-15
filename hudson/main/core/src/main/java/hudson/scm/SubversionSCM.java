@@ -4,18 +4,32 @@ import hudson.FilePath;
 import hudson.FilePath.FileCallable;
 import hudson.Launcher;
 import hudson.Util;
+import static hudson.Util.fixEmpty;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.TaskListener;
+import hudson.remoting.Channel;
 import hudson.remoting.VirtualChannel;
+import hudson.util.FormFieldValidator;
+import hudson.util.Scrambler;
 import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+import org.tmatesoft.svn.core.SVNErrorCode;
+import org.tmatesoft.svn.core.SVNErrorMessage;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNURL;
+import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
+import org.tmatesoft.svn.core.auth.ISVNAuthenticationProvider;
+import org.tmatesoft.svn.core.auth.SVNAuthentication;
+import org.tmatesoft.svn.core.auth.SVNPasswordAuthentication;
 import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.fs.FSRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.svn.SVNRepositoryFactoryImpl;
+import org.tmatesoft.svn.core.internal.wc.DefaultSVNAuthenticationManager;
+import org.tmatesoft.svn.core.io.SVNRepository;
+import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.tmatesoft.svn.core.wc.SVNInfo;
 import org.tmatesoft.svn.core.wc.SVNLogClient;
@@ -25,6 +39,7 @@ import org.tmatesoft.svn.core.wc.SVNWCClient;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
 import org.tmatesoft.svn.core.wc.xml.SVNXMLLogHandler;
 
+import javax.servlet.ServletException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.sax.TransformerHandler;
@@ -40,11 +55,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.StringTokenizer;
-import java.util.logging.Logger;
 
 /**
  * Subversion.
@@ -120,7 +135,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
 
         boolean changelogFileCreated = false;
 
-        SVNLogClient svnlc = createSvnClientManager().getLogClient();
+        SVNLogClient svnlc = createSvnClientManager(getDescriptor().createAuthenticationProvider()).getLogClient();
 
         TransformerHandler th = createTransformerHandler();
         th.setResult(new StreamResult(changelogFile));
@@ -208,10 +223,11 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
             if(!result)
                 return false;
         } else {
+            final ISVNAuthenticationProvider authProvider = getDescriptor().createAuthenticationProvider();
             result = workspace.act(new FileCallable<Boolean>() {
                 public Boolean invoke(File ws, VirtualChannel channel) throws IOException {
                     Util.deleteContentsRecursive(ws);
-                    SVNUpdateClient svnuc = createSvnClientManager().getUpdateClient();
+                    SVNUpdateClient svnuc = createSvnClientManager(authProvider).getUpdateClient();
                     svnuc.setEventHandler(new SubversionUpdateEventHandler(listener));
 
                     StringTokenizer tokens = new StringTokenizer(modules);
@@ -248,9 +264,21 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
         return calcChangeLog(build, changelogFile, listener);
     }
 
-    private SVNClientManager createSvnClientManager() {
-        // TODO: figure out the authentication story
-        return SVNClientManager.newInstance(SVNWCUtil.createDefaultOptions(true));
+    /**
+     * Creates {@link SVNClientManager}.
+     *
+     * <p>
+     * This method must be executed on the slave where svn operations are performed.
+     *
+     * @param authProvider
+     *      The value obtained from {@link DescriptorImpl#createAuthenticationProvider()}.
+     *      If the operation runs on slaves,
+     *      (and properly remoted, if the svn operations run on slaves.)
+     */
+    private SVNClientManager createSvnClientManager(ISVNAuthenticationProvider authProvider) {
+        ISVNAuthenticationManager sam = SVNWCUtil.createDefaultAuthenticationManager();
+        sam.setAuthenticationProvider(authProvider);
+        return SVNClientManager.newInstance(SVNWCUtil.createDefaultOptions(true),sam);
     }
 
     public static final class SvnInfo implements Serializable {
@@ -282,8 +310,8 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
      * @param workspace
      *      The target to run "svn info".
      */
-    private SVNInfo parseSvnInfo(File workspace) throws SVNException {
-        SVNWCClient svnWc = createSvnClientManager().getWCClient();
+    private SVNInfo parseSvnInfo(File workspace, ISVNAuthenticationProvider authProvider) throws SVNException {
+        SVNWCClient svnWc = createSvnClientManager(authProvider).getWCClient();
         return svnWc.doInfo(workspace,SVNRevision.WORKING);
     }
 
@@ -293,8 +321,8 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
      * @param remoteUrl
      *      The target to run "svn info".
      */
-    private SVNInfo parseSvnInfo(SVNURL remoteUrl) throws SVNException {
-        SVNWCClient svnWc = createSvnClientManager().getWCClient();
+    private SVNInfo parseSvnInfo(SVNURL remoteUrl, ISVNAuthenticationProvider authProvider) throws SVNException {
+        SVNWCClient svnWc = createSvnClientManager(authProvider).getWCClient();
         return svnWc.doInfo(remoteUrl, SVNRevision.HEAD, SVNRevision.HEAD);
     }
 
@@ -306,11 +334,12 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
      *      null if the parsing somehow fails. Otherwise a map from the repository URL to revisions.
      */
     private Map<String,SvnInfo> buildRevisionMap(FilePath workspace, final TaskListener listener) throws IOException, InterruptedException {
+        final ISVNAuthenticationProvider authProvider = getDescriptor().createAuthenticationProvider();
         return workspace.act(new FileCallable<Map<String,SvnInfo>>() {
             public Map<String,SvnInfo> invoke(File ws, VirtualChannel channel) throws IOException {
                 Map<String/*module name*/,SvnInfo> revisions = new HashMap<String,SvnInfo>();
 
-                SVNWCClient svnWc = createSvnClientManager().getWCClient();
+                SVNWCClient svnWc = createSvnClientManager(authProvider).getWCClient();
                 // invoke the "svn info"
                 for( String module : getModuleDirNames() ) {
                     try {
@@ -334,9 +363,10 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
     }
 
     public boolean update(Launcher launcher, FilePath workspace, final BuildListener listener) throws IOException, InterruptedException {
+        final ISVNAuthenticationProvider authProvider = getDescriptor().createAuthenticationProvider();
         return workspace.act(new FileCallable<Boolean>() {
             public Boolean invoke(File ws, VirtualChannel channel) throws IOException {
-                SVNUpdateClient svnuc = createSvnClientManager().getUpdateClient();
+                SVNUpdateClient svnuc = createSvnClientManager(authProvider).getUpdateClient();
                 svnuc.setEventHandler(new SubversionUpdateEventHandler(listener));
 
                 StringTokenizer tokens = new StringTokenizer(modules);
@@ -359,6 +389,8 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
      * Returns true if we can use "svn update" instead of "svn checkout"
      */
     private boolean isUpdatable(FilePath workspace, final BuildListener listener) throws IOException, InterruptedException {
+        final ISVNAuthenticationProvider authProvider = getDescriptor().createAuthenticationProvider();
+
         return workspace.act(new FileCallable<Boolean>() {
             public Boolean invoke(File ws, VirtualChannel channel) throws IOException {
                 StringTokenizer tokens = new StringTokenizer(modules);
@@ -373,7 +405,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
                     }
 
                     try {
-                        SvnInfo svnInfo = new SvnInfo(parseSvnInfo(module));
+                        SvnInfo svnInfo = new SvnInfo(parseSvnInfo(module,authProvider));
                         if(!svnInfo.url.equals(url)) {
                             listener.getLogger().println("Checking out a fresh workspace because the workspace is not "+url);
                             return false;
@@ -393,10 +425,12 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
         // current workspace revision
         Map<String,SvnInfo> wsRev = buildRevisionMap(workspace, listener);
 
+        ISVNAuthenticationProvider authProvider = getDescriptor().createAuthenticationProvider();
+
         // check the corresponding remote revision
         for (SvnInfo localInfo : wsRev.values()) {
             try {
-                SvnInfo remoteInfo = new SvnInfo(parseSvnInfo(localInfo.getSVNURL()));
+                SvnInfo remoteInfo = new SvnInfo(parseSvnInfo(localInfo.getSVNURL(),authProvider));
                 listener.getLogger().println("Revision:"+remoteInfo.revision);
                 if(remoteInfo.revision > localInfo.revision)
                     return true;    // change found
@@ -438,6 +472,8 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
     }
 
     public static final class DescriptorImpl extends Descriptor<SCM> {
+        public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
+
         /**
          * Path to <tt>svn.exe</tt>. Null to default.
          *
@@ -446,7 +482,54 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
          */
         private volatile String svnExe;
 
-        public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
+        /**
+         * SVN authentication realm to its associated credentials.
+         */
+        private final Map<String,Credential> credentials = new Hashtable<String,Credential>();
+
+        /**
+         * Stores {@link SVNAuthentication} for a single realm.
+         */
+        private static abstract class Credential {
+            abstract SVNAuthentication createSVNAuthentication();
+        }
+
+        private static final class PasswordCredential extends Credential {
+            private final String userName;
+            private final String password; // scrambled by base64
+
+            public PasswordCredential(String userName, String password) {
+                this.userName = userName;
+                this.password = Scrambler.scramble(password);
+            }
+
+            @Override
+            SVNPasswordAuthentication createSVNAuthentication() {
+                return new SVNPasswordAuthentication(userName,Scrambler.descramble(password),false);
+            }
+        }
+
+        /**
+         * See {@link DescriptorImpl#createAuthenticationProvider()}.
+         */
+        private class SVNAuthenticationProviderImpl implements ISVNAuthenticationProvider, Serializable {
+            public SVNAuthentication requestClientAuthentication(String kind, SVNURL url, String realm, SVNErrorMessage errorMessage, SVNAuthentication previousAuth, boolean authMayBeStored) {
+                Credential cred = credentials.get(realm);
+                if(cred==null)  return null;
+                return cred.createSVNAuthentication();
+            }
+
+            public int acceptServerAuthentication(SVNURL url, String realm, Object certificate, boolean resultMayBeStored) {
+                return ACCEPTED_TEMPORARY;
+            }
+
+            /**
+             * When sent to the remote node, send a proxy.
+             */
+            private Object writeReplace() {
+                return Channel.current().export(ISVNAuthenticationProvider.class, this);
+            }
+        }
 
         private DescriptorImpl() {
             super(SubversionSCM.class);
@@ -464,9 +547,75 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
                 req.getParameter("svn_username")
             );
         }
-    }
 
-    private static final Logger LOGGER = Logger.getLogger(SubversionSCM.class.getName());
+        /**
+         * Creates {@link ISVNAuthenticationProvider} backed by {@link #credentials}.
+         * This method must be invoked on the master, but the returned object is remotable.
+         */
+        public ISVNAuthenticationProvider createAuthenticationProvider() {
+            return new SVNAuthenticationProviderImpl();
+        }
+
+        /**
+         * Used in the job configuration page to check if authentication for the SVN URLs
+         * are available.
+         */
+        public void doAuthenticationCheck(final StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+            new FormFieldValidator(req,rsp,true) {
+                protected void check() throws IOException, ServletException {
+                    StringTokenizer tokens = new StringTokenizer(fixEmpty(request.getParameter("value")));
+                    String message="";
+
+                    while(tokens.hasMoreTokens()) {
+                        String url = tokens.nextToken();
+
+                        try {
+                            SVNRepository repository = SVNRepositoryFactory.create(SVNURL.parseURIDecoded(url));
+                            repository.testConnection();
+                        } catch (SVNException e) {
+                            message += "Unable to access "+url+" : "+e.getErrorMessage();
+                            if(e.getErrorMessage().getErrorCode().equals(SVNErrorCode.RA_NOT_AUTHORIZED))
+                                message += "(<a href='"+req.getContextPath()+"/scm/SubversionSCM/enterCredential?"+url+"'>enter credential</a>)";
+                            message += "<br>";
+                        }
+                    }
+
+                    if(message.length()==0)
+                        ok();
+                    else
+                        error(message);
+                }
+            }.process();
+        }
+
+        /**
+         * Submits the authentication info.
+         */
+        public void doPostCredential(final StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+            class Info {
+                public String url;
+                public String username;
+                public String password;
+            }
+            final Info info = new Info();
+            req.bindParameters(info);
+
+            try {
+                SVNRepository repository = SVNRepositoryFactory.create(SVNURL.parseURIDecoded(info.url));
+                repository.setAuthenticationManager(new DefaultSVNAuthenticationManager(SVNWCUtil.getDefaultConfigurationDirectory(),true,info.username,info.password) {
+                    public void acknowledgeAuthentication(boolean accepted, String kind, String realm, SVNErrorMessage errorMessage, SVNAuthentication authentication) throws SVNException {
+                        if(accepted)
+                            credentials.put(realm,new PasswordCredential(info.username,info.password));
+                        super.acknowledgeAuthentication(accepted, kind, realm, errorMessage, authentication);
+                    }
+                });
+                repository.testConnection();
+            } catch (SVNException e) {
+                // TODO: report it right
+                throw new ServletException(e);
+            }
+        }
+    }
 
     private static final long serialVersionUID = 1L;
 
