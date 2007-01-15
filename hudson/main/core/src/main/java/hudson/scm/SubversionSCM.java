@@ -276,7 +276,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
      *      If the operation runs on slaves,
      *      (and properly remoted, if the svn operations run on slaves.)
      */
-    private SVNClientManager createSvnClientManager(ISVNAuthenticationProvider authProvider) {
+    private static SVNClientManager createSvnClientManager(ISVNAuthenticationProvider authProvider) {
         ISVNAuthenticationManager sam = SVNWCUtil.createDefaultAuthenticationManager();
         sam.setAuthenticationProvider(authProvider);
         return SVNClientManager.newInstance(SVNWCUtil.createDefaultOptions(true),sam);
@@ -491,7 +491,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
         /**
          * Stores {@link SVNAuthentication} for a single realm.
          */
-        private static abstract class Credential {
+        private static abstract class Credential implements Serializable {
             abstract SVNAuthentication createSVNAuthentication();
         }
 
@@ -511,11 +511,38 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
         }
 
         /**
+         * Remoting interface that allows remote {@link ISVNAuthenticationProvider}
+         * to read from local {@link DescriptorImpl#credentials}.
+         */
+        private interface RemotableSVNAuthenticationProvider {
+            Credential getCredential(String realm);
+        }
+
+        private final class RemotableSVNAuthenticationProviderImpl implements RemotableSVNAuthenticationProvider, Serializable {
+            public Credential getCredential(String realm) {
+                return credentials.get(realm);
+            }
+
+            /**
+             * When sent to the remote node, send a proxy.
+             */
+            private Object writeReplace() {
+                return Channel.current().export(RemotableSVNAuthenticationProvider.class, this);
+            }
+        }
+
+        /**
          * See {@link DescriptorImpl#createAuthenticationProvider()}.
          */
-        private class SVNAuthenticationProviderImpl implements ISVNAuthenticationProvider, Serializable {
+        private static final class SVNAuthenticationProviderImpl implements ISVNAuthenticationProvider, Serializable {
+            private final RemotableSVNAuthenticationProvider source;
+
+            public SVNAuthenticationProviderImpl(RemotableSVNAuthenticationProvider source) {
+                this.source = source;
+            }
+
             public SVNAuthentication requestClientAuthentication(String kind, SVNURL url, String realm, SVNErrorMessage errorMessage, SVNAuthentication previousAuth, boolean authMayBeStored) {
-                Credential cred = credentials.get(realm);
+                Credential cred = source.getCredential(realm);
                 if(cred==null)  return null;
                 return cred.createSVNAuthentication();
             }
@@ -524,12 +551,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
                 return ACCEPTED_TEMPORARY;
             }
 
-            /**
-             * When sent to the remote node, send a proxy.
-             */
-            private Object writeReplace() {
-                return Channel.current().export(ISVNAuthenticationProvider.class, this);
-            }
+            private static final long serialVersionUID = 1L;
         }
 
         private DescriptorImpl() {
@@ -554,7 +576,7 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
          * This method must be invoked on the master, but the returned object is remotable.
          */
         public ISVNAuthenticationProvider createAuthenticationProvider() {
-            return new SVNAuthenticationProviderImpl();
+            return new SVNAuthenticationProviderImpl(new RemotableSVNAuthenticationProviderImpl());
         }
 
         /**
@@ -572,6 +594,11 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
 
                         try {
                             SVNRepository repository = SVNRepositoryFactory.create(SVNURL.parseURIDecoded(url));
+
+                            ISVNAuthenticationManager sam = SVNWCUtil.createDefaultAuthenticationManager();
+                            sam.setAuthenticationProvider(createAuthenticationProvider());
+                            repository.setAuthenticationManager(sam);
+                            
                             repository.testConnection();
                         } catch (SVNException e) {
                             message += "Unable to access "+url+" : "+e.getErrorMessage();
