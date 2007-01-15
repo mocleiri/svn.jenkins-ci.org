@@ -146,6 +146,11 @@ final class SubversionUpdateEventHandler implements ISVNEventHandler {
             lockLabel = "B";
         }
 
+        if(pathChangeType.equals(" ") && propertiesChangeType.equals(" ") && lockLabel.equals(" ") && event.getPath().equals(""))
+            // nothing to display here.
+            // SVNKit always seems to send one such line. 
+            return;
+
         out.println(pathChangeType
                 + propertiesChangeType
                 + lockLabel
