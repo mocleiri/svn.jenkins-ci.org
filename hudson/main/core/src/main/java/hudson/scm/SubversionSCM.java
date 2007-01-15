@@ -9,6 +9,7 @@ import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
+import hudson.model.Hudson;
 import hudson.model.TaskListener;
 import hudson.remoting.Channel;
 import hudson.remoting.VirtualChannel;
@@ -592,27 +593,32 @@ public class SubversionSCM extends AbstractCVSFamilySCM implements Serializable 
          * Submits the authentication info.
          */
         public void doPostCredential(final StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-            class Info {
-                public String url;
-                public String username;
-                public String password;
-            }
-            final Info info = new Info();
-            req.bindParameters(info);
+            final String url = req.getParameter("url");
+            final String username = req.getParameter("username");
+            final String password = req.getParameter("password");
 
             try {
-                SVNRepository repository = SVNRepositoryFactory.create(SVNURL.parseURIDecoded(info.url));
-                repository.setAuthenticationManager(new DefaultSVNAuthenticationManager(SVNWCUtil.getDefaultConfigurationDirectory(),true,info.username,info.password) {
+                // the way it works with SVNKit is that
+                // 1) svnkit calls AuthenticationManager asking for a credential.
+                //    this is when we can see the 'realm', which identifies the user domain.
+                // 2) DefaultSVNAuthenticationManager returns the username and password we set below
+                // 3) if the authentication is successful, svnkit calls back acknowledgeAuthentication
+                //    (so we store the password info here)
+                SVNRepository repository = SVNRepositoryFactory.create(SVNURL.parseURIDecoded(url));
+                repository.setAuthenticationManager(new DefaultSVNAuthenticationManager(SVNWCUtil.getDefaultConfigurationDirectory(),true,username,password) {
                     public void acknowledgeAuthentication(boolean accepted, String kind, String realm, SVNErrorMessage errorMessage, SVNAuthentication authentication) throws SVNException {
-                        if(accepted)
-                            credentials.put(realm,new PasswordCredential(info.username,info.password));
+                        if(accepted) {
+                            credentials.put(realm,new PasswordCredential(username,password));
+                            save();
+                        }
                         super.acknowledgeAuthentication(accepted, kind, realm, errorMessage, authentication);
                     }
                 });
                 repository.testConnection();
+                rsp.sendRedirect("credentialOK");
             } catch (SVNException e) {
-                // TODO: report it right
-                throw new ServletException(e);
+                req.setAttribute("message",e.getErrorMessage());
+                rsp.forward(Hudson.getInstance(),"error",req);
             }
         }
     }
