@@ -7,6 +7,12 @@
 			font-weight: bold;
 			margin-left: 1em;
 		}
+		
+		.testimonial {
+		  font-style: italic;
+		  margin-top: 1em;
+		  margin-bottom: 1em;
+		}
 	</style>
 </head>
 <body>
@@ -138,13 +144,26 @@
 	I think by now you should have seen the pattern. It's all about making developers more productive.
 
 <h3>Installation</h3>
+<div style="float:right; margin: 1em; border: dashed black 1px; background-color: rgb(237,237,231);">
+  <div>
+    <b>Testimonials:</b>
+  </div>
+  <div class=testimonial>
+  Hudson is terrific. It's just so...so...simple. Elegant, even. &mdash; <a href="http://jroller.com/page/ljn?entry=hudson_is_fantastic">Laird Nelson</a>
+  </div>
+  <div class=testimonial>
+  It has totally blown me away &mdash; <a href="http://blogs.bytecode.com.au/glen/2007/01/22/1169458555645.html">Glen Smith</a>
+  </div>
+</div>
 <p>To run Hudson, you need to have:
 <ul>
 	<li>J2SE 1.4 or later
-	<li>Serlvet container that supports Servlet 2.4/JSP 2.0 or later, such as Tomcat 5.
+	<li>Serlvet container that supports Servlet 2.4/JSP 2.0 or later, such as Glassfish, Tomcat 5, Jetty 6, etc.
 </ul>
 <p>
-	Deploy <a href="https://hudson.dev.java.net/servlets/ProjectDocumentList?folderID=2761"><tt>hudson.war</tt></a> as you would any WAR file. For Tomcat, that means copying the file into <tt>$TOMCAT_HOME/webapps</tt>, then access <tt>http://YOURHOST/hudson/</tt>
+	Deploy <a href="https://hudson.dev.java.net/servlets/ProjectDocumentList?folderID=2761"><tt>hudson.war</tt></a> as you would any WAR file. 
+	
+	For Glassfish,  this means copying the file into <tt>$GLASSFISH/domains/domain1/autodeploy</tt>. For Tomcat, that means copying the file into <tt>$TOMCAT_HOME/webapps</tt>. Then access <tt>http://YOURHOST/hudson/</tt>
 <p>
 	Once the war file is exploded, run <tt>chmod 755 hudson</tt> in the exploded <tt>hudson/WEB-INF</tt> directory so that you can execute this shell script.
 <p>
@@ -157,7 +176,11 @@
 
 <h3>Upgrade</h3>
 <p>
-	To upgrade from earlier versions of Hudson, simply redeploy the WAR file. In case of Tomcat, this means just overwriting your <tt>hudson.war</tt> and restarting Tomcat (or see Tomcat documentation for other ways to redeploy.)
+	To upgrade from earlier versions of Hudson, simply redeploy the WAR file.
+	
+	In case of Glassfish, this means either just overwriting your <tt>$GLASSFISH/domains/domain1/autodeploy/hudson.war</tt>, or perform another deployment through the admin GUI (<tt>http://localhost:4848/</tt> on mosy systems.)
+	
+	In case of Tomcat, this means just overwriting your <tt>$TOMCAT/webapps/hudson.war</tt> and restarting Tomcat (or see Tomcat documentation for other ways to redeploy.)
 
 <h3>Using Hudson</h3>
 <ul>
