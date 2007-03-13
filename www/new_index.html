@@ -1,0 +1,100 @@
+<html>
+<head>
+	<title>Hudson: a continuous build system</title>
+	<link rel="alternate" title="Hudson announcements" href="https://hudson.dev.java.net/servlets/ProjectNewsRSS" type="application/rss+xml">
+	<style>
+		dt {
+			font-weight: bold;
+			margin-left: 1em;
+		}
+		
+		#apphead {
+		  display:none;
+		}
+		TABLE.axial {
+		  display:none;
+		}
+		
+		.directory A {
+			text-decoration: none;
+		}
+		.directory A:hover {
+			text-decoration: underline;
+			color: black;
+		}
+		.directory .title {
+			color: black;
+			font-weight: bold;
+			font-size: 1.5em;
+		}
+		.directory .description {
+			color: gray;
+		}
+		.directory .logo {
+			border: 0px;
+			width: 96px;
+			height: 96px;
+			margin-right: 1em;
+		}
+		#downloadBox A {
+			text-decoration: none;
+			color: black;
+		}
+		#downloadBox A:hover {
+			text-decoration: underline;
+		}
+	</style>
+</head>
+<body>
+<script>
+// kill "description" h3 bar
+ld = document.getElementById("longdescription");
+for( n=ld.firstChild; n!=null; n=n.nextSibling ) {
+  if(n.nodeType==1 && n.innerHTML=="Description" ) {
+    n.parentNode.removeChild(n);
+    break;
+  }
+}
+</script>
+<div style="padding-right: 1em; float: right; font-size: 1.5em;" id="downloadBox">
+  <a href="/servlets/ProjectDocumentList">
+  <img src="images/download.gif" style="vertical-align: middle;" border="0">Download
+  </a>
+  <center>
+	  <a href="changelog.html" style="font-size:0.5em; color:black">(changelog)</a>
+	</center>
+</div>
+<div align=center>
+	<div style="font-size:3em; font-weight:bold">Hudson</div>
+	<div style="margin:1em">
+		Extensible continuous integration engine
+	</div>
+</div>
+
+<div align=center>
+	<table valign=middle class=directory>
+		<tr>
+			<td><a href="visitor.html"><img src="images/visitor.gif" class=logo></a></td>
+			<td><a href="visitor.html">
+			<div class=title>Knowing Hudson</div>
+			<div class=description>Find out what is Hudson and get started.</div>
+			</a></td>
+		</tr>
+		<tr>
+			<td><a href="user.html"><img src="images/user.gif" class=logo></a></td>
+			<td><a href="user.html">
+			<div class=title>Using Hudson</div>
+			<div class=description>See how to get more out of your Hudson.</div>
+			</a></td>
+		</tr>
+		<tr>
+			<td><a href="developer.html"><img src="images/developer.gif" class=logo></a></td>
+			<td><a href="developer.html">
+			<div class=title>Hacking Hudson</div>
+			<div class=description>Learn how to build Hudson or extend Hudson by writing plugins.</div>
+			</a></td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>
