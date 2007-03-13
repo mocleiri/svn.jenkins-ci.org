@@ -1,10 +1,19 @@
 </dd><dd id="eraser"></dd>
 <script>
-  // hide all default navigation bars
-  
   // get to the block
   var eraser = document.getElementById("eraser");
-  var dd = eraser.previousSibling;
+
+  // delete the "get involved" block
+  for( n=eraser.parentNode.previousSibling; n!=null; n=n.previousSibling ) {
+    if(n.nodeType==1) { // if element
+      if(n.tagName=="DL") {
+        n.style.display = "none";
+      }
+    }
+  }
+
+  // hide all default navigation bars
+  var dd = eraser;
   for( n=dd; n!=null; n=n.previousSibling ) {
     if(n.nodeType==1) { // if element
       if(n.tagName=="DD") { // kill all the link items
@@ -12,15 +21,6 @@
       }
       if(n.tagName=="DT") { // change the title
         n.innerHTML = "Hudson project";
-      }
-    }
-  }
-  
-  // delete the "get involved" block
-  for( n=eraser.parentNode.previousSibling; n!=null; n=n.previousSibling ) {
-    if(n.nodeType==1) { // if element
-      if(n.tagName=="DL") {
-        n.style.display = "none";
       }
     }
   }
