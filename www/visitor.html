@@ -173,13 +173,11 @@
 	I think by now you should have seen the pattern. It's all about making developers more productive.
 
 <h3>Installation</h3>
-<p>To run Hudson, you need to have:
-<ul>
-	<li>J2SE 1.4 or later
-	<li>Serlvet container that supports Servlet 2.4/JSP 2.0 or later, such as Glassfish, Tomcat 5, Jetty 6, etc.
-</ul>
 <p>
-	Deploy <a href="https://hudson.dev.java.net/servlets/ProjectDocumentList?folderID=2761"><tt>hudson.war</tt></a> as you would any WAR file. 
+	To run Hudson, minimally you need to have J2SE 1.4 or later. After you download <a href="https://hudson.dev.java.net/servlets/ProjectDocumentList?folderID=2761"><tt>hudson.war</tt></a>, you can launch it by <a href="http://weblogs.java.net/blog/kohsuke/archive/2007/02/hudson_became_s.html">executing <tt>java -jar hudson.war</tt></a>:
+
+<p>
+	Alternatively, if you have a serlvet container that supports Servlet 2.4/JSP 2.0 or later, such as Glassfish, Tomcat 5, Jetty 6, etc., then you can deploy <tt>hudson.war</tt></a> as you would any WAR file.
 	
 	For Glassfish,  this means copying the file into <tt>$GLASSFISH/domains/domain1/autodeploy</tt>. For Tomcat, that means copying the file into <tt>$TOMCAT_HOME/webapps</tt>. Then access <tt>http://YOURHOST/hudson/</tt>
 <p>
