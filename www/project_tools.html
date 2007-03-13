@@ -3,7 +3,8 @@
   // hide all default navigation bars
   
   // get to the block
-  var dd = document.getElementById("eraser").previousSibling;
+  var eraser = document.getElementById("eraser");
+  var dd = eraser.previousSibling;
   for( n=dd; n!=null; n=n.previousSibling ) {
     if(n.nodeType==1) { // if element
       if(n.tagName=="DD") { // kill all the link items
@@ -16,7 +17,7 @@
   }
   
   // delete the "get involved" block
-  for( n=dd.parentNode.previousSibling; n!=null; n=n.previousSibling ) {
+  for( n=eraser.parentNode.previousSibling; n!=null; n=n.previousSibling ) {
     if(n.nodeType==1) { // if element
       if(n.tagName=="DL") {
         n.style.display = "none";
