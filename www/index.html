@@ -64,6 +64,21 @@
 		#footer {
 			display: none;
 		}
+		
+		
+		#feeds {
+			margin: 0px;
+			padding: 0px;
+		}
+		#feeds li{
+			list-style-type: none;
+			margin: 0.3em 0 0 0;
+			padding-left: 16px;
+			background-image: url(feed-icon.png);
+			background-position: left middle;
+			background-repeat: no-repeat;
+		}
+
 	</style>
 </head>
 <body>
@@ -94,7 +109,7 @@ for( n=ld.firstChild; n!=null; n=n.nextSibling ) {
 	</div>
 	
 	<div style="margin-top: 3em;">
-		<ul style="list-style-image: url('feed-icon.png')">
+		<ul id="feeds">
 			<li><a href="http://feeds.feedburner.com/KohsukesHudsonBlogs">Blog</a>
 			<li><a href="https://hudson.dev.java.net/servlets/ProjectRSS?type=news">Releases</a>
 		</ul>
