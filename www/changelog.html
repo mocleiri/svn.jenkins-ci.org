@@ -17,6 +17,17 @@
 <h3>What's new in 1.97</h3>
 <ul>
   <li><b>Hudson now requires Java 1.5</b>
+  <li>Native m2 support can now work with Maven 2.0.6.
+  <li>Improved file transfer performance between slaves and master
+      especially when latency is big.
+  <li>Build history is now asynchronously updated to reflect status changes
+      in the server.
+  <li>Fixed several problems that caused Hudson to remain in memory
+      when the hudson webapp is re-deployed (lesson:
+      <a href="http://www.szegedi.org/articles/memleak.html">beware of commons-logging</a>)
+  <li>Supported <tt>svn+ssh</tt> authentication
+  <li>Performance improvement in the native m2 build. This should be especially effective
+      in the master/slave environment.      
 </ul>
 =END=-->
 <h3>What's new in 1.96</h3>
