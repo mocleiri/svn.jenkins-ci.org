@@ -2,11 +2,50 @@
 <head>
   <title>Changelog</title>
   <link rel="alternate" title="Hudson announcements" href="/servlets/ProjectNewsRSS" type="application/rss+xml">
-
+  <style>
+    UL.image {
+      list-style: none;
+      padding-left: 1em;
+    }
+    UL.image LI {
+      padding-left: 22px;
+      background-repeat: no-repeat;
+      background-position: left center;
+      margin-bottom: 0.5em;
+    }
+    UL.image LI.rfe {
+      background-image: url(images/rfe.gif);
+    }
+    UL.image LI.rfe.major {
+      background-image: url(images/rfe2.gif);
+    }
+    UL.image LI.bug {
+      background-image: url(images/bug.gif);
+    }
+    UL.image LI.bug.major {
+      background-image: url(images/bug2.gif);
+    }
+    
+    UL.legend {
+    	display: inline;
+    }
+    UL.legend LI {
+    	display: inline;
+    }
+  </style>
 </head>
 <body><div class=app>
-<div align=right>
-  <a href="/servlets/ProjectNewsRSS"><img src=atom.gif border=0> Subscribe to RSS feed</a>
+	<div align="right">
+		Legend:
+		<ul class="image legend">
+			<li class="major rfe">major RFE
+			<li class="rfe"      >RFE
+			<li class="major bug">major bug fix
+			<li class="bug"      >bug fix
+		</ul>
+		<span style="visibility:hidden">xxxxx</span>
+	  <a href="/servlets/ProjectNewsRSS"><img src=atom.gif border=0> Subscribe to RSS feed</a>
+	</div>
 </div>
 <!--
 <h3>What's new in 1.@@</h3>
@@ -20,25 +59,25 @@
 </ul>
 =END=-->
 <h3>What's new in 1.98</h3>
-<ul>
-  <li class="minor rfe">
-    Upgraded to <a href="http://svn.svnkit.com/repos/svnkit/tags/1.1.2/changelog.txt">SVNKit 1.1.2.</a>
+<ul class=image>
+  <li class="major bug">
+    Fixed a <b>critical bug</b> that crippled many of the Hudson UI.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=438">issue 438</a>)
   <li class="minor bug">
     Fixed a bug in the file mask form validation when dealing with ','-separated values.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=435">issue 435</a>)
-  <li class="minor rfe">
-    Added form validation to the system admin e-mail address.
-    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=428">issue 428</a>)
   <li class="minor bug">
     Fixed a problem where test reports and such aren't displayed in the m2 projects when
     a build fails.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=339">issue 339</a>)
+  <li class="minor rfe">
+    Upgraded to <a href="http://svn.svnkit.com/repos/svnkit/tags/1.1.2/changelog.txt">SVNKit 1.1.2.</a>
+  <li class="minor rfe">
+    Added form validation to the system admin e-mail address.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=428">issue 428</a>)
   <li class="rfe">
     Native m2 builds now record Maven plugins that were used during the build.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=297">issue 297</a>)
-  <li class="major bug">
-    Fixed a <b>critical bug</b> that crippled many of the Hudson UI.
-    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=438">issue 438</a>)
 </ul>
 <h3>What's new in 1.97</h3>
 <ul>
