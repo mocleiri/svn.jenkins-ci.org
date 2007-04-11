@@ -21,10 +21,12 @@
 	<li>
 		Set "HUDSON_HOME" environment variable to the new home directory before launching the servlet container.
 	<li>
-		Set JNDI environment variable "HUDSON_HOME" to the new directory. (For example, in Tomcat, do <a href="screenshots/JNDI.png">this</a>, or write server.xml like <a href="tomcat-server-xml.html">this</a>)
+		Set "HUDSON_HOME" system property to the servlet container.
+	<li>
+		Set JNDI environment variable "HUDSON_HOME" to the new directory.
 </ul>
 <p>
-	In either case, if you'd like to carry the current setting/archive, you need to move the contents of the old HUDSON_HOME directory to the new place. Make sure to shutdown before you move files around.
+	<a href="https://hudson.dev.java.net/containers/">See the container specific documentation collection</a> for more about how to do this for your container. In either case, if you'd like to carry the current setting/archive, you need to move the contents of the old HUDSON_HOME directory to the new place. Make sure to shutdown before you move files around.
 <p>
 	HUDSON_HOME has a fairly obvious directory structure that looks like the following:
 <div style="margin-left: 5em; margin-right: 5em; padding: 0.3em; border: gray 1px solid;"><pre>
