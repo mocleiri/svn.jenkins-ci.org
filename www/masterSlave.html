@@ -13,17 +13,43 @@ Hudson supports the "master/slave" mode, where the workload of building projects
 <p>
 	A "master" is an installation of Hudson. When you weren't using the master/slave support, a master was all you had. Even in the master/slave mode, the role of a master remains the same. It will serve all HTTP requests, and it can still build projects on its own.
 <p>
-	Slaves are computers that are set up to build projects for a master. They don't need to run Hudson, but they do need to be configured.
+	Slaves are computers that are set up to build projects for a master. Hudson runs a separate program called "slave agent" on slaves.
 <p>
 	When slaves are registered to a master, a master starts distributing loads to slaves. The exact delegation behavior depends on configuration of each project. Some projects may choose to "stick" to a particular machine for a build, while others may choose to roam freely between slaves. For people accessing Hudson website, things works mostly transparently. You can still browse javadoc, see test results, download build results from a master, without ever noticing that builds were done by slaves.
 
 <h3>Requirement for master/slave support</h3>
 <p>
-	To use the master/slave support, a master needs to be able to launch a "slave agent" program on the slave. On Unix, this can be done by SSH, RSH, or other similar means. On Windows, this could be done by the same protocols through <a href="http://www.cygwin.com/">cygwin</a> or tools like <a href="http://www.microsoft.com/technet/sysinternals/utilities/psexec.mspx">psexec</a>.
+	To use the master/slave support, a master needs to be able to run a "slave agent" program on the slave. There are two ways to do this:
+
+<h4>Have master launch slave agent</h4>
+<p>
+	One way of doing this is to configure a master to launch a slave agent on the target machine.
+	On Unix, this can be done by SSH, RSH, or other similar means. On Windows, this could be done by the same protocols through <a href="http://www.cygwin.com/">cygwin</a> or tools like <a href="http://www.microsoft.com/technet/sysinternals/utilities/psexec.mspx">psexec</a>.
 
 <p>
 	The slave agent program is a simple Java program that can be launched like <tt>java -jar slave.jar</tt>. A copy of <tt>slave.jar</tt> can be found inside <tt>hudson.war</tt> under <tt>WEB-INF</tt>. Therefore, a typical slave agent launch command would look something like <tt>ssh <i>myslave</i> java -jar ~/bin/slave.jar</tt>.
 
+<p>
+	This requires an additional initial set up on slaves (especially on Windows, where remote login mechanism is not available out of box), but the benefits of this approach is that when the connection goes bad, you can use Hudson's webui to re-establish the connection.
+
+
+<h4>Launch slave agent via Java Web Start</h4>
+<p>
+	Another way of doing this is to start a slave agent through Java Web Start (JNLP). In this approach, you'll interactively logon to the slave node, open a browser, and open the slave page. You'll be then presented with the JNLP launch icon. Upon clicking it, Java Web Start will kick in, and it launchs a slave agent on the computer where the browser was running.
+
+<div align=center>
+	<img src="images/jnlp-launch.png">
+</div>
+
+<p>
+	This mode is convenient when the master cannot initiate a connection to slaves, such as when it runs outside a firewall while the rest of the slaves are in the firewall. OTOH, if the machine with a slave agent goes down, the master has no way of re-launching it on its own.
+
+<p>
+	Java Web Start provides some means of automatically running the slave agent. For example, instead of manually clicking the icon, you can run the following command from CLI:
+
+<pre>$ javaws http://<i>hudson.acme.org</i>/computer/<i>slave-name</i>/slave-agent.jnlp</pre>
+
+<h4>Other Requirements</h4>
 <p>
 	Also note that the slaves are a kind of a cluster, and operating a cluster (especially a large one or heterogeneous one) is always a non-trivial task. For example, you need to make sure that all slaves have JDKs, Ant, CVS, and/or any other tools you need for builds. You need to make sure that slaves are up and running, etc. Hudson is not a clustering middleware, and therefore it doesn't make this any easier.
 
@@ -31,14 +57,14 @@ Hudson supports the "master/slave" mode, where the workload of building projects
 <h3>Example: Configuration on Unix</h3>
 <p>
 	This section describes my current set up of Hudson slaves that I use inside Sun for my day job.
-	My master Hudson node is running on a SPARC Solaris box, and I have a few SPARC Solaris slaves and Opteron Linux slaves.
+	My master Hudson node is running on a SPARC Solaris box, and I have many SPARC Solaris slaves, Opteron Linux slaves, and a few Windows slaves.
 <ul>
 	<li>
 		Each computer has an user called <tt>hudson</tt> and a group called <tt>hudson</tt>. All computers use the same UID and GID. (If you have access to NIS, this can be done more easily.) This is not a Hudson requirement, but it makes the slave management easier.
 	<li>
 		On each computer, <tt>/var/hudson</tt> directory is set as the home directory of user <tt>hudson</tt>. Again, this is not a hard requirement, but having the same directory layout makes things easier to maintain.
 	<li>
-		All machines run SSHD.
+		All machines run SSHD. Windows slaves run cygwin sshd.
 	<li>
 		All machines have ntp client installed, and synchronize clock regularly with the same NTP server.
 	<li>
@@ -100,8 +126,6 @@ Hudson supports the "master/slave" mode, where the workload of building projects
 <ol>
 	<li>
 		Every time Hudson launchs a program locally/remotely, it prints out the command line to the log file. So when a remote execution fails, login to the computer that runs the master by using the same user account, and try to run the command from your shell. You tend to solve problems quickly in this way.
-	<li>
-		When remote programs fail to execute (like command not found), sometimes SSH reports <tt>"select : bad file number"</tt> as the error message. Try the above tip.
 	<li>
 		Each slave has a log page showing the communication between the master and the slave agent. This log often shows error reports.
 	<li>
