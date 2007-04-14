@@ -21,6 +21,9 @@
 =BEGIN=
 <a name=v102><h3>What's new in 1.102</h3></a>
 <ul class=image>
+  <li class="major bug">
+    Improved the fix for <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=389">#389</a>
+    to only do this on Windows.
   <li class="rfe">
     The native m2 support can now work with 2.0.6.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=444">issue 444</a>)
@@ -29,8 +32,6 @@
   <li class="rfe">
     User object is exposed to the remote API.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=468">issue 468</a>)
-  <li>Improved the fix for <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=389">#389</a>
-      to only do this on Windows.
 </ul>
 =END=-->
 <a name=v101><h3>What's new in 1.101</h3></a>
@@ -141,6 +142,9 @@
   <li>Fixed a bug where the javadoc link in the job top page becomes broken
       when the javadoc archiving is configured but no javadoc has built yet.
       (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=433">issue 433</a>)
+  <li><strike>Improved the fix for <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=389">#389</a>
+      to only do this on Windows.</strike> The fix was broken and fixed properly in
+      <a href="v102">1.102</a>.
   <li>Fixed a security problem. The configuration page was accessible to non-authorized users,
       even though the submission fails.
       (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=413">issue 413</a>)
