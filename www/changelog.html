@@ -28,12 +28,18 @@
     Fixed a bug that caused <tt>ANT_OPTS</tt> configuration to be reset every time
     a job configuration is submitted.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=482">issue 482</a>)
+  <li class="bug">
+    Fixed a bug in the native m2 support where Hudson fails to determine the
+    dependency correctly when child Maven modules specify different modules as the parent.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=485">issue 485</a>)
   <li class="rfe">
     When you log in, you are now taken back to where you were, instead of the top page.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=483">issue 483</a>)
   <li class="rfe">
     Added <a href="http://en.wikipedia.org/wiki/Favicon">favicon</a>
     (<a href="http://www.nabble.com/please-add-favicon-to-hudson--%29-tf3603358.html">report</a>)
+  <li class="rfe">
+    Internal refactoring to make room for more generality in the queue.
 </ul>
 =END=-->
 <a name=v103><h3>What's new in 1.103</h3></a>
