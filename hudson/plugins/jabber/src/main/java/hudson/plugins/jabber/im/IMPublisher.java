@@ -3,7 +3,6 @@ package hudson.plugins.jabber.im;
 import hudson.Launcher;
 import hudson.model.Build;
 import hudson.model.BuildListener;
-import hudson.model.Hudson;
 import hudson.plugins.jabber.NotificationStrategy;
 import hudson.plugins.jabber.tools.Assert;
 import hudson.tasks.Publisher;
@@ -76,7 +75,7 @@ public abstract class IMPublisher extends Publisher
         if (getNotificationStrategy().notificationWanted(build))
         {
             final String msg = "Project " + build.getProject().getName() + " build (#" + build.getNumber() + "): "
-                    + build.getResult() + "\n (" + Hudson.getInstance().getRootUrl() + build.getUrl() + ")";
+                    + build.getResult(); // TODO add URL here.
 
             for (final IMMessageTarget target : getNotificationTargets())
             {
