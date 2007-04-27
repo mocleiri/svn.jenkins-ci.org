@@ -108,7 +108,7 @@ $ mvn -DdownloadSources=true eclipse:eclipse
 
 <h3>Source Code</h3>
 <p>
-	Let's take a look at the source code. A plugin's main entry point is a <a href="/source/browse/hudson/hudson/plugins/hello-world/src/hudson/plugins/hello_world/PluginImpl.java?view=markup"><tt>PluginImpl</tt></a> class that extends from <a href="/nonav/javadoc/?hudson/Plugin.html"><tt>Plugin</tt></a>. Once Hudson detects your plugin (via its <tt>@plugin</tt> javadoc annotation &mdash; this gets copied into manifest during the build), it will create an instance, and invokes methods.
+	Let's take a look at the source code. A plugin's main entry point is a <a href="/source/browse/hudson/hudson/plugins/hello-world/src/main/java/hudson/plugins/hello_world/PluginImpl.java?view=markup"><tt>PluginImpl</tt></a> class that extends from <a href="/nonav/javadoc/?hudson/Plugin.html"><tt>Plugin</tt></a>. Once Hudson detects your plugin (via its <tt>@plugin</tt> javadoc annotation &mdash; this gets copied into manifest during the build), it will create an instance, and invokes methods.
 <p>
 	Most of the time, a plugin class just registers extension points. See the source code for more about how a <tt>Builder</tt> is implemented and what it does.
 
