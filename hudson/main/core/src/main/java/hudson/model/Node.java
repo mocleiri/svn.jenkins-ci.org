@@ -103,7 +103,7 @@ public interface Node {
         BYPASS("Launch only from Computer detail. Login never required. (!See WARNING in help --> !)", false, false, false),
         PUBLIC("Launch from front page. Login never required.", false, true, false),
         DYNAMIC("Dynamic secure slave (experimental)", true, true, true),
-        DYNAMIC("Dynamic public slave (experimental)", false, true, true);
+        DYNAMIC_PUBLIC("Dynamic public slave (experimental)", false, true, true);
 
         private final String description;
         private final boolean enforceSecurity;
