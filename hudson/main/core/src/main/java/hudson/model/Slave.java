@@ -4,8 +4,7 @@ import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Launcher.RemoteLauncher;
 import hudson.Util;
-import hudson.tasks.DynamicLabeler;
-import hudson.tasks.LabelFinder;
+import hudson.tasks.BuildStep;
 import hudson.maven.agent.Main;
 import hudson.maven.agent.PluginManagerInterceptor;
 import hudson.model.Descriptor.FormException;
@@ -95,9 +94,6 @@ public final class Slave implements Node, Serializable {
      */
     private transient volatile Set<Label> labels;
 
-    private transient volatile Set<Label> dynamicLabels;
-    private transient volatile int dynamicLabelsInstanceHash;
-
     /**
      * @stapler-constructor
      */
@@ -165,8 +161,7 @@ public final class Slave implements Node, Serializable {
     }
 
     public Set<Label> getAssignedLabels() {
-        // todo refactor to make dynamic labels a bit less hacky
-        if(labels==null || isChangedDynamicLabels()) {
+        if(labels==null) {
             Set<Label> r = new HashSet<Label>();
             String ls = getLabelString();
             if(ls.length()>0) {
@@ -175,57 +170,17 @@ public final class Slave implements Node, Serializable {
                 }
             }
             r.add(getSelfLabel());
-            r.addAll(getDynamicLabels());
             this.labels = Collections.unmodifiableSet(r);
         }
         return labels;
     }
 
-    /**
-     * Check if we should rebuild the list of dynamic labels.
-     * @todo make less hacky
-     * @return
-     */
-    private boolean isChangedDynamicLabels() {
-        Computer comp = getComputer();
-        if (comp == null) {
-            return dynamicLabelsInstanceHash != 0;
-        } else {
-            if (dynamicLabelsInstanceHash == comp.hashCode()) {
-                return false;
-            }
-            dynamicLabels = null; // force a re-calc
-            return true;
-        }
+    public Set<AutomaticConfiguration> getConfigurations() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    /**
-     * Returns the possibly empty set of labels that it has been determined as supported by this node.
-     *
-     * @todo make less hacky
-     * @see hudson.tasks.LabelFinder
-     */
-    public Set<Label> getDynamicLabels() {
-        if (dynamicLabels == null) {
-            synchronized (this) {
-                if (dynamicLabels == null) {
-                    dynamicLabels = new HashSet<Label>();
-                    Computer computer = getComputer();
-                    VirtualChannel channel;
-                    if (computer != null && (channel = computer.getChannel()) != null) {
-                        dynamicLabelsInstanceHash = computer.hashCode();
-                        for (DynamicLabeler labeler : LabelFinder.LABELERS) {
-                            for (String label : labeler.findLabels(channel)) {
-                                dynamicLabels.add(Hudson.getInstance().getLabel(label));
-                            }
-                        }
-                    } else {
-                        dynamicLabelsInstanceHash = 0;
-                    }
-                }
-            }
-        }
-        return dynamicLabels;
+    public Set<AutomaticConfiguration> getConfigurations(Class<? extends BuildStep> buildStep) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public Label getSelfLabel() {

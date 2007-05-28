@@ -28,6 +28,7 @@ import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
 import hudson.scm.SCMS;
 import hudson.tasks.*;
+import hudson.tasks.autoconf.JDKPathMatcher;
 import hudson.triggers.Trigger;
 import hudson.triggers.TriggerDescriptor;
 import hudson.triggers.Triggers;
@@ -85,6 +86,7 @@ import java.util.logging.LogRecord;
  */
 public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node {
     private transient final Queue queue = new Queue();
+    private transient Set<AutomaticConfiguration> autoConf;
 
     /**
      * {@link Computer}s in this Hudson system. Read-only.
@@ -866,38 +868,28 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node 
     public Set<Label> getAssignedLabels() {
         if (labelSet == null) {
             Set<Label> r = new HashSet<Label>();
-            r.addAll(getDynamicLabels());
             r.add(getSelfLabel());
             this.labelSet = Collections.unmodifiableSet(r);
         }
         return labelSet;
     }
 
-    /**
-     * Returns the possibly empty set of labels that it has been determined as supported by this node.
-     *
-     * @see hudson.tasks.LabelFinder
-     */
-    public Set<Label> getDynamicLabels() {
-        if (dynamicLabels == null) {
-            synchronized (this) {
-                Computer comp = getComputer("");
-                if (dynamicLabels == null) {
-                    dynamicLabels = new HashSet<Label>();
-                    if (comp != null) {
-                        VirtualChannel channel = comp.getChannel();
-                        if (channel != null) {
-                            for (DynamicLabeler labeler : LabelFinder.LABELERS) {
-                                for (String label : labeler.findLabels(channel)) {
-                                    dynamicLabels.add(getLabel(label));
-                                }
-                            }
-                        }
+    public Set<AutomaticConfiguration> getConfigurations() {
+        if (autoConf == null) {
+            synchronized(this) {
+                if (autoConf == null) {
+                    autoConf = new HashSet<AutomaticConfiguration>();
+                    for (ConfigurationProvider provider: ConfigurationProvider.PROVIDERS) {
+                        autoConf.addAll(provider.getAvailableConfigurations(MasterComputer.localChannel));
                     }
                 }
             }
         }
-        return dynamicLabels;
+        return autoConf;
+    }
+
+    public Set<AutomaticConfiguration> getConfigurations(Class<? extends BuildStep> buildStep) {
+        return Collections.EMPTY_SET;
     }
 
     public Label getSelfLabel() {
@@ -941,6 +933,16 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node 
         if (null != slaves) { // only if we have slaves
             for (Slave slave : slaves)
                 slave.getAssignedLabels();
+        }
+
+        // temporary hack 
+        if (jdks.size() == 0) {
+            for (AutomaticConfiguration config: getConfigurations()) {
+                if (config instanceof JDKPathMatcher.JDKSystemConfiguration) {
+                    final JDKPathMatcher.JDKSystemConfiguration jdk = (JDKPathMatcher.JDKSystemConfiguration) config;
+                    jdks.add(new JDK("JDK " + jdk.getVersion(), jdk.getHome()));
+                }
+            }
         }
     }
 

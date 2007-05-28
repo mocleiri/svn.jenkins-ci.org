@@ -2,6 +2,7 @@ package hudson.model;
 
 import hudson.Launcher;
 import hudson.FilePath;
+import hudson.tasks.BuildStep;
 import hudson.util.EnumConverter;
 import org.apache.commons.beanutils.ConvertUtils;
 
@@ -54,11 +55,9 @@ public interface Node {
      */
     Set<Label> getAssignedLabels();
 
-    /**
-     * Returns the possibly empty set of labels that it has been determined as supported by this node.
-     * @see hudson.tasks.LabelFinder
-     */
-    Set<Label> getDynamicLabels();
+    Set<AutomaticConfiguration> getConfigurations();
+
+    Set<AutomaticConfiguration> getConfigurations(Class<? extends BuildStep> buildStep);
 
     /**
      * Gets the special label that represents this node itself.
