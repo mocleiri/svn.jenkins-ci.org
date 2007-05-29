@@ -33,7 +33,7 @@ import java.util.logging.Logger;
  * <p>
  * This class implements the core scheduling logic. {@link Task} represents the executable
  * task that are placed in the queue. While in the queue, it's wrapped into {@link Item}
- * so that we can keep track of additional data used for deciding what to exeucte when. 
+ * so that we can keep track of additional data used for deciding what to exeucte when.
  *
  * @author Kohsuke Kawaguchi
  */
@@ -95,7 +95,7 @@ public class Queue {
         }
 
         public Node getNode() {
-            return executor.getOwner().getNode();
+            return executor.getCurrentNode();
         }
 
         public boolean isNotExclusive() {
@@ -229,7 +229,7 @@ public class Queue {
         if(blockedProjects.contains(p))
             return new Item(new GregorianCalendar(),p,true,false);
         if(buildables.contains(p))
-            return new Item(new GregorianCalendar(),p,false,true); 
+            return new Item(new GregorianCalendar(),p,false,true);
         for (Item item : queue) {
             if (item.task == p)
                 return item;
@@ -284,7 +284,7 @@ public class Queue {
                             blockedProjects.add(p);
                             continue;
                         }
-                        
+
                         JobOffer runner = choose(p);
                         if(runner==null)
                             // if we couldn't find the executor that fits,

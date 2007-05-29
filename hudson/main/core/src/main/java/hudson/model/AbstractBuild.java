@@ -108,11 +108,11 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
          * Returns the current {@link Node} on which we are buildling.
          */
         protected final Node getCurrentNode() {
-            return Executor.currentExecutor().getOwner().getNode();
+            return Executor.currentExecutor().getCurrentNode();
         }
 
         public Result run(BuildListener listener) throws Exception {
-            Node node = Executor.currentExecutor().getOwner().getNode();
+            Node node = Executor.currentExecutor().getCurrentNode();
             assert builtOn==null;
             builtOn = node.getNodeName();
             hudsonVersion = Hudson.VERSION;
@@ -335,7 +335,7 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
         }
         return r;
     }
-    
+
     /**
      * Gets the upstream builds of this build, which are the builds of the
      * upstream projects whose artifacts feed into this build.
@@ -411,7 +411,7 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
          * Gets the {@link AbstractBuild} objects (fromId,toId].
          * <p>
          * This method returns all such available builds in the ascending order
-         * of IDs, but due to log rotations, some builds may be already unavailable. 
+         * of IDs, but due to log rotations, some builds may be already unavailable.
          */
         public List<AbstractBuild> getBuilds() {
             List<AbstractBuild> r = new ArrayList<AbstractBuild>();
@@ -428,7 +428,7 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
             return r;
         }
     }
-    
+
 
 //
 //

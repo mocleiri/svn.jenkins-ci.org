@@ -139,6 +139,10 @@ public class Executor extends Thread {
         return owner;
     }
 
+    public Node getCurrentNode() {
+        return getOwner().getNode();
+    }
+
     /**
      * Returns the executor of the current thread.
      */
