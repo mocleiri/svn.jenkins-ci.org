@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+<html>
+  <head>
+    <title>Maven Hudson Plugin - 
+    maven-hpi-plugin - hpi:hpl</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      </head>
+  <body class="composite">
+    <div id="banner">
+                    <span id="bannerLeft">
+    
+            Maven Hudson Plugin
+    
+            </span>
+                    <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+            <div class="xleft">
+        Last Published: 08/04/2007
+                      </div>
+            <div class="xright">      <a href="">Maven Hudson Plugin</a>
+          
+  
+
+  
+    
+  
+  
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+                   <ul>
+          </ul>
+          <h5>Project Documentation</h5>
+        <ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+              <a href="project-info.html">Project Information</a>
+              </li>
+              
+                
+              
+      
+              
+        <li class="collapsed">
+              <a href="project-reports.html">Project Reports</a>
+              </li>
+          </ul>
+                                       <a href="http://maven.apache.org/" title="Built by Maven" id="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+        </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        
+  
+  
+    <a name="hpi:hpl"></a><div class="section"><h2>hpi:hpl</h2>
+      <p>Generate .hpl file.</p>
+      <p><b>Mojo Attributes</b>:<ul>
+          <li>Requires a Maven 2.0 project to execute.</li>
+          <li>Requires dependency resolution of artifacts in scope: <code>runtime</code></li>
+          </ul>
+        
+      <a name="Required Parameters"></a><div class="section"><h3>Required Parameters</h3>
+        <table class="bodyTable">
+          <tr class="a">
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            </tr>
+          <tr class="b">
+            <td><b><a href="#outputDirectory">outputDirectory</a></b></td>
+            <td><code>String</code></td>
+            <td>The directory for the generated WAR.</td>
+            </tr>
+          <tr class="a">
+            <td><b><a href="#warSourceDirectory">warSourceDirectory</a></b></td>
+            <td><code>File</code></td>
+            <td>Single directory for extra files to include in the WAR.</td>
+            </tr>
+          <tr class="b">
+            <td><b><a href="#webappDirectory">webappDirectory</a></b></td>
+            <td><code>File</code></td>
+            <td>The directory where the webapp is built.</td>
+            </tr>
+          <tr class="a">
+            <td><b><a href="#workDirectory">workDirectory</a></b></td>
+            <td><code>File</code></td>
+            <td>Directory to unpack dependent WARs into if needed</td>
+            </tr>
+          </table>
+        </div>
+      <a name="Optional Parameters"></a><div class="section"><h3>Optional Parameters</h3>
+        <table class="bodyTable">
+          <tr class="b">
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            </tr>
+          <tr class="a">
+            <td><b><a href="#containerConfigXML">containerConfigXML</a></b></td>
+            <td><code>File</code></td>
+            <td>The path to the context.xml file to use.</td>
+            </tr>
+          <tr class="b">
+            <td><b><a href="#dependentWarExcludes">dependentWarExcludes</a></b></td>
+            <td><code>String</code></td>
+            <td>The comma separated list of tokens to exclude when doing
+a way overlay.</td>
+            </tr>
+          <tr class="a">
+            <td><b><a href="#dependentWarIncludes">dependentWarIncludes</a></b></td>
+            <td><code>String</code></td>
+            <td>The comma separated list of tokens to include when doing
+a war overlay.
+Default is '**'</td>
+            </tr>
+          <tr class="b">
+            <td><b><a href="#filters">filters</a></b></td>
+            <td><code>List</code></td>
+            <td>No description.</td>
+            </tr>
+          <tr class="a">
+            <td><b><a href="#hudsonHome">hudsonHome</a></b></td>
+            <td><code>File</code></td>
+            <td>Path to <tt>$HUDSON_HOME</tt>. A .hpl file will be generated to this location.</td>
+            </tr>
+          <tr class="b">
+            <td><b><a href="#warSourceExcludes">warSourceExcludes</a></b></td>
+            <td><code>String</code></td>
+            <td>The comma separated list of tokens to exclude from the WAR.</td>
+            </tr>
+          <tr class="a">
+            <td><b><a href="#warSourceIncludes">warSourceIncludes</a></b></td>
+            <td><code>String</code></td>
+            <td>The comma separated list of tokens to include in the WAR.
+Default is '**'.</td>
+            </tr>
+          <tr class="b">
+            <td><b><a href="#webResources">webResources</a></b></td>
+            <td><code>Resource[]</code></td>
+            <td>The list of webResources we want to transfer.</td>
+            </tr>
+          </table>
+        </div>
+      <a name="Parameter Details"></a><div class="section"><h3>Parameter Details</h3>
+        <b><a name="containerConfigXML">containerConfigXML</a></b>
+        <p>The path to the context.xml file to use.</p>
+        <ul>
+          <li><b>Type</b>: <code>java.io.File</code></li>
+          <li><b>Required</b>: <code>No</code></li>
+          <li><b>Expression</b>: <code>${maven.war.containerConfigXML}</code></li>
+          </ul><hr></hr><b><a name="dependentWarExcludes">dependentWarExcludes</a></b>
+        The comma separated list of tokens to exclude when doing
+a way overlay.
+        <ul>
+          <li><b>Type</b>: <code>java.lang.String</code></li>
+          <li><b>Required</b>: <code>No</code></li>
+          </ul><hr></hr><b><a name="dependentWarIncludes">dependentWarIncludes</a></b>
+        The comma separated list of tokens to include when doing
+a war overlay.
+Default is '**'
+        <ul>
+          <li><b>Type</b>: <code>java.lang.String</code></li>
+          <li><b>Required</b>: <code>No</code></li>
+          </ul><hr></hr><b><a name="filters">filters</a></b>
+        No Description.
+        <ul>
+          <li><b>Type</b>: <code>java.util.List</code></li>
+          <li><b>Required</b>: <code>No</code></li>
+          <li><b>Expression</b>: <code>${project.build.filters}</code></li>
+          </ul><hr></hr><b><a name="hudsonHome">hudsonHome</a></b>
+        Path to <tt>$HUDSON_HOME</tt>. A .hpl file will be generated to this location.
+        <ul>
+          <li><b>Type</b>: <code>java.io.File</code></li>
+          <li><b>Required</b>: <code>No</code></li>
+          <li><b>Expression</b>: <code>${hudsonHome}</code></li>
+          </ul><hr></hr><b><a name="outputDirectory">outputDirectory</a></b>
+        The directory for the generated WAR.
+        <ul>
+          <li><b>Type</b>: <code>java.lang.String</code></li>
+          <li><b>Required</b>: <code>Yes</code></li>
+          <li><b>Expression</b>: <code>${project.build.directory}</code></li>
+          </ul><hr></hr><b><a name="warSourceDirectory">warSourceDirectory</a></b>
+        Single directory for extra files to include in the WAR.
+        <ul>
+          <li><b>Type</b>: <code>java.io.File</code></li>
+          <li><b>Required</b>: <code>Yes</code></li>
+          <li><b>Expression</b>: <code>${basedir}/src/main/webapp</code></li>
+          </ul><hr></hr><b><a name="warSourceExcludes">warSourceExcludes</a></b>
+        The comma separated list of tokens to exclude from the WAR.
+        <ul>
+          <li><b>Type</b>: <code>java.lang.String</code></li>
+          <li><b>Required</b>: <code>No</code></li>
+          </ul><hr></hr><b><a name="warSourceIncludes">warSourceIncludes</a></b>
+        The comma separated list of tokens to include in the WAR.
+Default is '**'.
+        <ul>
+          <li><b>Type</b>: <code>java.lang.String</code></li>
+          <li><b>Required</b>: <code>No</code></li>
+          </ul><hr></hr><b><a name="webResources">webResources</a></b>
+        The list of webResources we want to transfer.
+        <ul>
+          <li><b>Type</b>: <code>org.apache.maven.model.Resource[]</code></li>
+          <li><b>Required</b>: <code>No</code></li>
+          </ul><hr></hr><b><a name="webappDirectory">webappDirectory</a></b>
+        The directory where the webapp is built.
+        <ul>
+          <li><b>Type</b>: <code>java.io.File</code></li>
+          <li><b>Required</b>: <code>Yes</code></li>
+          <li><b>Expression</b>: <code>${project.build.directory}/${project.build.finalName}</code></li>
+          </ul><hr></hr><b><a name="workDirectory">workDirectory</a></b>
+        Directory to unpack dependent WARs into if needed
+        <ul>
+          <li><b>Type</b>: <code>java.io.File</code></li>
+          <li><b>Required</b>: <code>Yes</code></li>
+          <li><b>Expression</b>: <code>${project.build.directory}/war/work</code></li>
+          </ul>
+        </div>
+      </div>
+    
+  
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          2007
+    
+          
+  
+
+  
+    
+  
+  
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>
