@@ -60,7 +60,8 @@ public class RunMojo extends AbstractJetty6Mojo {
      * <p>
      * Normally this should be left empty, in which case the plugin loads it from the repository.
      * But this parameter allows that to be overwritten.
-     *
+     * </p>
+     * 
      * @parameter
      */
     private File webApp;
