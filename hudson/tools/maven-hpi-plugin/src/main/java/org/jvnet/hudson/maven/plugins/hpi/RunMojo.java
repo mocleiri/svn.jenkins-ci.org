@@ -40,7 +40,7 @@ import java.util.Set;
  *
  * <p>
  * This only needs the source files to be compiled, so run in the compile phase.
- * 
+ * </p>
  * @goal run
  * @requiresDependencyResolution test
  * @execute phase=compile
