@@ -16,6 +16,9 @@
 <div style="display:none;"><!--=BEGIN=-->
 <a name=v1.146><h3>What's new in 1.146</h3></a>
 <ul class=image>
+  <li class=rfe>
+    Builder, Publisher and BuildWrapper can now implement ResourceActivity if they want to contribute 
+    to the resource usage for the project (this is for plugin developers only.)
   <li class=>
 </ul>
 </div><!--=END=-->
@@ -69,7 +72,7 @@
     <tt>CLASSPATH</tt> environment variable is no longer inherited to processes spawned from Hudson.
     (<a href="http://www.nabble.com/Run-Job-with-JDK-1.4.2-tf4468601.html">report</a>)
   <li class=rfe>
-    Macro expansion rule now supports ${ABC} syntax as well as $ABC. 
+    Macro expansion rule now supports ${ABC} syntax as well as $ABC.
   <li class=rfe>
     Maven invocation in free-style projects now does macro expansion.
     (<a href="http://www.nabble.com/Supplying-Hudson-variables-to-Maven2-builds--tf4484367.html">report</a>)
