@@ -95,7 +95,7 @@ public final class MojoInfo {
             // the implementation seems to expect the type of the bean for which the configuration is done
             // in this parameter, but we have no such type. So passing in a dummy
             Object.class,
-            mojoExecution.getMojoDescriptor().getPluginDescriptor().getClassRealm().getClassLoader(),
+            mojoExecution.getMojoDescriptor().getPluginDescriptor().getClassRealm().getParent(),
             expressionEvaluator));
     }
 }

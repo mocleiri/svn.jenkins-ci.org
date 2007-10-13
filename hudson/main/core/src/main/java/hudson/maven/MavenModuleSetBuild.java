@@ -2,26 +2,18 @@ package hudson.maven;
 
 import hudson.AbortException;
 import hudson.Launcher;
-import hudson.maven.MavenBuild.ProxyImpl2;
 import hudson.FilePath.FileCallable;
+import hudson.maven.MavenBuild.ProxyImpl2;
 import hudson.model.AbstractBuild;
+import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Hudson;
 import hudson.model.Result;
-import hudson.model.AbstractProject;
 import hudson.remoting.VirtualChannel;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.IOException2;
-import org.apache.maven.BuildFailureException;
-import org.apache.maven.embedder.MavenEmbedderException;
-import org.apache.maven.execution.MavenSession;
-import org.apache.maven.execution.ReactorManager;
-import org.apache.maven.lifecycle.LifecycleExecutionException;
-import org.apache.maven.monitor.event.EventDispatcher;
-import org.apache.maven.project.MavenProject;
-import org.apache.maven.project.ProjectBuildingException;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,10 +25,20 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.apache.maven.BuildFailureException;
+import org.apache.maven.embedder.MavenEmbedder;
+import org.apache.maven.embedder.MavenEmbedderException;
+import org.apache.maven.execution.MavenSession;
+import org.apache.maven.execution.ReactorManager;
+import org.apache.maven.lifecycle.LifecycleExecutionException;
+import org.apache.maven.monitor.event.EventDispatcher;
+import org.apache.maven.project.MavenProject;
+import org.apache.maven.project.ProjectBuildingException;
 
 /**
  * {@link Build} for {@link MavenModuleSet}.

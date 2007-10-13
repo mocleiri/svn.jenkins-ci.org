@@ -1,28 +1,36 @@
 package hudson.maven.reporters;
 
 import hudson.FilePath;
-import hudson.maven.*;
+import hudson.maven.MavenBuild;
+import hudson.maven.MavenBuildProxy;
+import hudson.maven.MavenModule;
+import hudson.maven.MavenReporter;
+import hudson.maven.MavenReporterDescriptor;
+import hudson.maven.MavenUtil;
+import hudson.maven.MojoInfo;
 import hudson.maven.MavenBuildProxy.BuildCallable;
 import hudson.model.BuildListener;
 import hudson.model.FingerprintMap;
 import hudson.model.Hudson;
 import hudson.model.Result;
 import hudson.util.IOException2;
-import org.apache.maven.artifact.Artifact;
-import org.apache.maven.artifact.factory.ArtifactFactory;
-import org.apache.maven.artifact.installer.ArtifactInstallationException;
-import org.apache.maven.artifact.installer.ArtifactInstaller;
-import org.apache.maven.embedder.MavenEmbedderException;
-import org.apache.maven.project.MavenProject;
-import org.apache.maven.project.artifact.ProjectArtifactMetadata;
-import org.codehaus.plexus.component.configurator.expression.ExpressionEvaluationException;
-import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.factory.ArtifactFactory;
+import org.apache.maven.artifact.installer.ArtifactInstallationException;
+import org.apache.maven.artifact.installer.ArtifactInstaller;
+import org.apache.maven.embedder.MavenEmbedder;
+import org.apache.maven.embedder.MavenEmbedderException;
+import org.apache.maven.project.MavenProject;
+import org.apache.maven.project.artifact.ProjectArtifactMetadata;
+import org.codehaus.plexus.component.configurator.expression.ExpressionEvaluationException;
+import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 
 /**
  * Archives artifacts of the build.
@@ -89,8 +97,8 @@ public class MavenArtifactArchiver extends MavenReporter {
                         if(installed && builtOnSlave) {
                             try {
                                 MavenEmbedder embedder = MavenUtil.createEmbedder(listener);
-                                ArtifactInstaller installer = (ArtifactInstaller) embedder.getContainer().lookup(ArtifactInstaller.class.getName());
-                                ArtifactFactory factory = (ArtifactFactory) embedder.getContainer().lookup(ArtifactFactory.class.getName());
+                                ArtifactInstaller installer = (ArtifactInstaller) embedder.getPlexusContainer().lookup(ArtifactInstaller.class.getName());
+                                ArtifactFactory factory = (ArtifactFactory) embedder.getPlexusContainer().lookup(ArtifactFactory.class.getName());
                                 for (ArtifactInfo a : archivedFiles) {
                                     Artifact artifact = a.toArtifact(factory);
                                     if(a.isPrimary)

@@ -1,11 +1,8 @@
 package hudson.maven;
 
-import hudson.model.TaskListener;
-import hudson.model.BuildListener;
 import hudson.AbortException;
-import org.apache.maven.embedder.MavenEmbedderException;
-import org.apache.maven.project.MavenProject;
-import org.apache.maven.project.ProjectBuildingException;
+import hudson.model.BuildListener;
+import hudson.model.TaskListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +11,14 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.maven.embedder.Configuration;
+import org.apache.maven.embedder.ConfigurationValidationResult;
+import org.apache.maven.embedder.DefaultConfiguration;
+import org.apache.maven.embedder.MavenEmbedder;
+import org.apache.maven.embedder.MavenEmbedderException;
+import org.apache.maven.project.MavenProject;
+import org.apache.maven.project.ProjectBuildingException;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -26,12 +31,15 @@ public class MavenUtil {
      *      This is where the log messages from Maven will be recorded.
      */
     public static MavenEmbedder createEmbedder(TaskListener listener) throws MavenEmbedderException, IOException {
-        MavenEmbedder maven = new MavenEmbedder();
+        Configuration configuration = new DefaultConfiguration();
+        configuration.setClassLoader(new MaskingClassLoader(MavenUtil.class.getClassLoader()));
+        configuration.setMavenEmbedderLogger(new EmbedderLoggerImpl(listener));
+        // validate the configuration, should be OK as we're not doing anything special
+        ConfigurationValidationResult validationResult = MavenEmbedder.validateConfiguration(configuration);
+        assert(validationResult.isValid());
 
-        ClassLoader cl = MavenUtil.class.getClassLoader();
-        maven.setClassLoader(new MaskingClassLoader(cl));
-        maven.setLogger( new EmbedderLoggerImpl(listener) );
-
+        MavenEmbedder maven = new MavenEmbedder(configuration);
+        
         // make sure ~/.m2 exists to avoid http://www.nabble.com/BUG-Report-tf3401736.html
         File m2Home = new File(MavenEmbedder.userHome, ".m2");
         m2Home.mkdirs();
@@ -41,7 +49,7 @@ public class MavenUtil {
             throw new AbortException();
         }
 
-        maven.start();
+//        maven.start();
 
         return maven;
     }

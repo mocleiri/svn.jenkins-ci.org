@@ -1,19 +1,20 @@
 package hudson.maven.agent;
 
-import org.codehaus.classworlds.ClassRealm;
-import org.codehaus.classworlds.ClassWorld;
-import org.codehaus.classworlds.DefaultClassRealm;
-import org.codehaus.classworlds.Launcher;
-import org.codehaus.classworlds.NoSuchRealmException;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Iterator;
+import java.util.Set;
+
+import org.codehaus.classworlds.ClassRealm;
+import org.codehaus.classworlds.ClassWorld;
+import org.codehaus.classworlds.DefaultClassRealm;
+import org.codehaus.classworlds.Launcher;
+import org.codehaus.classworlds.NoSuchRealmException;
+
 
 /**
  * Entry point for launching Maven and Hudson remoting in the same VM,
@@ -56,7 +57,7 @@ public class Main {
         ClassRealm remoting = new DefaultClassRealm(launcher.getWorld(),"hudson-remoting", launcher.getSystemClassLoader());
         remoting.setParent(launcher.getWorld().getRealm("plexus.core.maven"));
         remoting.addConstituent(remotingJar.toURL());
-
+        
         // we'll use stdin/out to talk to the host,
         // so make sure Maven won't touch them later
         OutputStream os = System.out;
