@@ -16,7 +16,9 @@
 <div style="display:none;"><!--=BEGIN=-->
 <a name=v1.156><h3>What's new in 1.156</h3></a>
 <ul class=image>
-  <li class=>
+  <li class=bug>
+    Added "Expires" header to prevent unwanted page-caching in Opera.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=869">issue 869</a>)
 </ul>
 </div><!--=END=-->
 <a name=v1.155><h3>What's new in 1.155</h3></a>
@@ -27,6 +29,9 @@
   <li class='major bug'>
     Fixed NPE in external job result submission.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1006">issue 1006</a>)
+  <li class=bug>
+    Fix to avoid loading entire build log into memory.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=638">issue 638</a>)  
   <li class="rfe">
     Report the empty <tt>MAVEN_HOME</tt> value more gracefully.
     (<a href="http://www.nabble.com/NPE-in-new-Hudson-tf4798032.html">report</a>)
