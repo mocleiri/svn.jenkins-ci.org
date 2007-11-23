@@ -1,5 +1,5 @@
-import javax.servlet.ServletContextListener;
 import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 
 /**
  * @author Kohsuke Kawaguchi

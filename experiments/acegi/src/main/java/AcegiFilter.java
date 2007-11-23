@@ -1,9 +1,9 @@
+import org.acegisecurity.GrantedAuthorityImpl;
 import org.acegisecurity.providers.anonymous.AnonymousProcessingFilter;
 import org.acegisecurity.ui.ExceptionTranslationFilter;
 import org.acegisecurity.ui.basicauth.BasicProcessingFilter;
 import org.acegisecurity.ui.basicauth.BasicProcessingFilterEntryPoint;
 import org.acegisecurity.userdetails.memory.UserAttribute;
-import org.acegisecurity.GrantedAuthorityImpl;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
