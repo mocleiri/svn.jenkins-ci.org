@@ -47,6 +47,7 @@ public class Main {
         UserMap userMap = new UserMap();
         userMap.addUser(new User("alice","alice",true,true,true,true,EMPTY_ARRAY));
         userMap.addUser(new User("bob","bob",true,true,true,true,EMPTY_ARRAY));
+        userMap.addUser(new User("charlie","charlie",true,true,true,true,EMPTY_ARRAY));
         dao.setUserMap(userMap);
         dao.afterPropertiesSet();
 
