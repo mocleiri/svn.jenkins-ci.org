@@ -1,6 +1,7 @@
 import org.acegisecurity.GrantedAuthorityImpl;
 import org.acegisecurity.providers.anonymous.AnonymousProcessingFilter;
 import org.acegisecurity.ui.ExceptionTranslationFilter;
+import org.acegisecurity.ui.AccessDeniedHandlerImpl;
 import org.acegisecurity.ui.basicauth.BasicProcessingFilter;
 import org.acegisecurity.ui.basicauth.BasicProcessingFilterEntryPoint;
 import org.acegisecurity.userdetails.memory.UserAttribute;
@@ -36,6 +37,7 @@ public class AcegiFilter implements Filter {
             // this filter initiates the security protocol if the authentication is required
             ExceptionTranslationFilter etf = new ExceptionTranslationFilter();
             etf.setAuthenticationEntryPoint(bpfep);
+            etf.setAccessDeniedHandler(new AccessDeniedHandlerImpl());
 
             // anonymous if no authentication information is provided
             AnonymousProcessingFilter apf = new AnonymousProcessingFilter();
