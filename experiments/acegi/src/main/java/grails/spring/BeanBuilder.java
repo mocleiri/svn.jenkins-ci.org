@@ -354,6 +354,10 @@ public class BeanBuilder extends GroovyObjectSupport {
         return ref(refName,false);
     }
 
+    public RuntimeBeanReference parentRef(String refName) {
+        return ref(refName,true);
+    }
+
     public RuntimeBeanReference ref(String refName, boolean parentRef) {
         return new RuntimeBeanReference(refName, parentRef);
     }

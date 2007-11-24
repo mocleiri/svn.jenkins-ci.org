@@ -25,6 +25,7 @@ public class Main {
 
     // seucrity configuration
     public ProviderManager authenticationManager;
+    public WebApplicationContext context;
 
     public Main() throws Exception {
         // mock data set up
@@ -32,8 +33,8 @@ public class Main {
 
         BeanBuilder builder = new BeanBuilder();
         builder.parse(getClass().getResourceAsStream("authentication.groovy"));
-        WebApplicationContext ac = builder.createApplicationContext();
-        authenticationManager = (ProviderManager) ac.getBean("authenticationManager");
+        context = builder.createApplicationContext();
+        authenticationManager = (ProviderManager) context.getBean("authenticationManager");
     }
 
     private void mockDataSetup() {
