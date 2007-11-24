@@ -1,3 +1,5 @@
+import groovy.lang.Binding;
+import groovy.lang.GroovyShell;
 import org.acegisecurity.AccessDeniedException;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.GrantedAuthority;
@@ -13,11 +15,14 @@ import org.acegisecurity.userdetails.memory.UserMap;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import grails.spring.BeanBuilder;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -30,42 +35,51 @@ public class Main {
     public static final Permission CREATE_JOB = new Permission("Create a new job");
 
     // seucrity configuration
-    public final ProviderManager authenticationManager;
-    public final DaoAuthenticationProvider daoProvider;
-    public final InMemoryDaoImpl dao;
+    public ProviderManager authenticationManager;
+    private DaoAuthenticationProvider daoProvider;
+    private InMemoryDaoImpl dao;
     private static final GrantedAuthority[] EMPTY_ARRAY = new GrantedAuthority[0];
 
     public Main() throws Exception {
         // mock data set up
         mockDataSetup();
 
-        // just using this to satisfy MessageSource
-        GenericApplicationContext gac = new GenericApplicationContext();
+        Binding binding = new Binding();
+        BeanBuilder builder = new BeanBuilder();
+        binding.setVariable("builder", builder);
+        GroovyShell shell = new GroovyShell(binding);
 
-        // emulate the bean wiring of Spring
-        dao = new InMemoryDaoImpl();
-        UserMap userMap = new UserMap();
-        userMap.addUser(new User("alice","alice",true,true,true,true,EMPTY_ARRAY));
-        userMap.addUser(new User("bob","bob",true,true,true,true,EMPTY_ARRAY));
-        userMap.addUser(new User("charlie","charlie",true,true,true,true,EMPTY_ARRAY));
-        dao.setUserMap(userMap);
-        dao.afterPropertiesSet();
+        shell.evaluate(getClass().getResourceAsStream("authentication.groovy"));
+        WebApplicationContext ac = builder.createApplicationContext();
+        authenticationManager = (ProviderManager) ac.getBean("authenticationManager");
 
-        daoProvider = new DaoAuthenticationProvider();
-        daoProvider.setUserDetailsService(dao);
-        daoProvider.setMessageSource(gac);
-        daoProvider.afterPropertiesSet();
-
-        AnonymousAuthenticationProvider aap = new AnonymousAuthenticationProvider();
-        aap.setKey("anonymous");
-        aap.setMessageSource(gac);
-        aap.afterPropertiesSet();
-
-        authenticationManager = new ProviderManager();
-        authenticationManager.setProviders(Arrays.asList(daoProvider,aap));
-        authenticationManager.afterPropertiesSet();
-
-        gac.refresh();
+//        // just using this to satisfy MessageSource
+//        GenericApplicationContext gac = new GenericApplicationContext();
+//
+//        // emulate the bean wiring of Spring
+//        dao = new InMemoryDaoImpl();
+//        UserMap userMap = new UserMap();
+//        userMap.addUser(new User("alice","alice",true,true,true,true,EMPTY_ARRAY));
+//        userMap.addUser(new User("bob","bob",true,true,true,true,EMPTY_ARRAY));
+//        userMap.addUser(new User("charlie","charlie",true,true,true,true,EMPTY_ARRAY));
+//        dao.setUserMap(userMap);
+//        dao.afterPropertiesSet();
+//
+//        daoProvider = new DaoAuthenticationProvider();
+//        daoProvider.setUserDetailsService(dao);
+//        daoProvider.setMessageSource(gac);
+//        daoProvider.afterPropertiesSet();
+//
+//        AnonymousAuthenticationProvider aap = new AnonymousAuthenticationProvider();
+//        aap.setKey("anonymous");
+//        aap.setMessageSource(gac);
+//        aap.afterPropertiesSet();
+//
+//        authenticationManager = new ProviderManager();
+//        authenticationManager.setProviders(Arrays.asList(daoProvider,aap));
+//        authenticationManager.afterPropertiesSet();
+//
+//        gac.refresh();
     }
 
     private void mockDataSetup() {
