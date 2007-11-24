@@ -48,7 +48,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * <p>Runtime bean configuration wrapper. Like a Groovy builder, but more of a DSL for
@@ -573,15 +575,19 @@ public class BeanBuilder extends GroovyObjectSupport {
 	 * @return A ManagedMap or a normal map
 	 */
 	private Object manageMapIfNecessary(Object value) {
-		Map map = (Map)value;
+		Map<Object,Object> map = (Map)value;
 		boolean containsRuntimeRefs = false;
-		for (Iterator i = map.values().iterator(); i.hasNext();) {
-			Object e = i.next();
-			if(e instanceof RuntimeBeanReference) {
-				containsRuntimeRefs = true;
-				break;
-			}
-		}
+        for (Entry<Object,Object> e : map.entrySet()) {
+            Object v = e.getValue();
+            if (v instanceof RuntimeBeanReference) {
+                containsRuntimeRefs = true;
+            }
+            if (v instanceof BeanConfiguration) {
+                BeanConfiguration c = (BeanConfiguration) v;
+                e.setValue(c.getBeanDefinition());
+                containsRuntimeRefs = true;
+            }
+        }
 		if(containsRuntimeRefs) {
 //			return new ManagedMap(map);
             ManagedMap m = new ManagedMap();
@@ -601,13 +607,17 @@ public class BeanBuilder extends GroovyObjectSupport {
 	private Object manageListIfNecessary(Object value) {
 		List list = (List)value;
 		boolean containsRuntimeRefs = false;
-		for (Iterator i = list.iterator(); i.hasNext();) {
+		for (ListIterator i = list.listIterator(); i.hasNext();) {
 			Object e = i.next();
 			if(e instanceof RuntimeBeanReference) {
 				containsRuntimeRefs = true;
-				break;
 			}
-		}
+            if (e instanceof BeanConfiguration) {
+                BeanConfiguration c = (BeanConfiguration) e;
+                i.set(c.getBeanDefinition());
+                containsRuntimeRefs = true;
+            }
+        }
 		if(containsRuntimeRefs) {
 			List tmp = new ManagedList();
 			tmp.addAll((List)value);
