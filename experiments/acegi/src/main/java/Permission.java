@@ -36,12 +36,12 @@ public class Permission {
         this.impliedBy = impliedBy;
 
         synchronized (PERMISSIONS) {
-            List<Permission> set = PERMISSIONS.get(owner);
-            if(set==null) {
-                set = new ArrayList<Permission>();
-                PERMISSIONS.put(owner,set);
+            List<Permission> ps = PERMISSIONS.get(owner);
+            if(ps==null) {
+                ps = new ArrayList<Permission>();
+                PERMISSIONS.put(owner,ps);
             }
-            set.add(this);
+            ps.add(this);
         }
     }
 
@@ -52,5 +52,5 @@ public class Permission {
     /**
      * All the permissions in the system, keyed by their owners.
      */
-    private static Map<Class, List<Permission>> PERMISSIONS = new HashMap<Class,List<Permission>>();
+    private static final Map<Class, List<Permission>> PERMISSIONS = new HashMap<Class,List<Permission>>();
 }
