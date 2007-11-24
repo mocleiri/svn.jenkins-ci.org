@@ -46,6 +46,10 @@ public class Main {
         // alice can build everything but bob can only build b
         Job.CLASS_ACL.add(new PrincipalSid("alice"),Job.BUILD,true);
         b.getACL().add(new PrincipalSid("bob"),Job.BUILD,true);
+
+        // need to be authenticated to browse
+        Job.CLASS_ACL.add(ACL.EVERYONE,Job.BROWSE,true);
+        Job.CLASS_ACL.add(ACL.ANONYMOUS,Job.BROWSE,false);
     }
 
     public void doSecured(StaplerRequest req, StaplerResponse rsp) throws IOException {

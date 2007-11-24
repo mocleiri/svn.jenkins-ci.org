@@ -69,6 +69,10 @@ public class ACL {
             if(b!=null) return b;
         }
 
+        // finally everyone
+        b = hasPermission(EVERYONE,permission);
+        if(b!=null) return b;
+
         if(parent!=null)
             return parent.hasPermission(a,permission);
         
@@ -85,4 +89,11 @@ public class ACL {
         }
         return null;
     }
+
+    /**
+     * {@link Sid} that represents everyone, including anonymous users.
+     */
+    public static final Sid EVERYONE = new Sid() {};
+
+    public static final Sid ANONYMOUS = new PrincipalSid("anonymous");
 }

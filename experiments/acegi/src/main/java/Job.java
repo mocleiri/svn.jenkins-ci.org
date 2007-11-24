@@ -1,5 +1,6 @@
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.StaplerProxy;
 import org.acegisecurity.context.SecurityContextHolder;
 
 import java.io.IOException;
@@ -7,7 +8,7 @@ import java.io.IOException;
 /**
  * @author Kohsuke Kawaguchi
  */
-public class Job implements AccessControlledObject {
+public class Job implements AccessControlledObject, StaplerProxy {
     public final String name;
     private final ACL acl = new ACL(CLASS_ACL);
 
@@ -17,6 +18,11 @@ public class Job implements AccessControlledObject {
 
     public ACL getACL() {
         return acl;
+    }
+
+    public Object getTarget() {
+        acl.checkPermission(BROWSE);
+        return this;
     }
 
     public void doBuild(StaplerRequest req, StaplerResponse rsp) throws IOException {
