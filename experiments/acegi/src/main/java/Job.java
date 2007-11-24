@@ -30,8 +30,8 @@ public class Job implements AccessControlledObject, StaplerProxy {
         rsp.getWriter().println("Build started. You are "+ SecurityContextHolder.getContext().getAuthentication());
     }
 
-    public static final Permission BROWSE = new Permission("Browse");
-    public static final Permission BUILD = new Permission("Perform build");
+    public static final Permission BROWSE = new Permission(Job.class,"Browse");
+    public static final Permission BUILD = new Permission(Job.class,"Perform build");
 
     // TODO: we want to hide this somewhat
     // perhaps we can create it behind the scene per every class?

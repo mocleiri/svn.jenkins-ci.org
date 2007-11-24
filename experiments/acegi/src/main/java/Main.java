@@ -20,8 +20,8 @@ public class Main {
     // mock domain objects
     public Map<String,Job> jobs = new HashMap<String,Job>();
 
-    public static final Permission BROWSE = new Permission("Browse");
-    public static final Permission CREATE_JOB = new Permission("Create a new job");
+    public static final Permission BROWSE = new Permission(Main.class,"Browse");
+    public static final Permission CREATE_JOB = new Permission(Main.class,"Create a new job");
 
     // seucrity configuration
     public ProviderManager authenticationManager;
