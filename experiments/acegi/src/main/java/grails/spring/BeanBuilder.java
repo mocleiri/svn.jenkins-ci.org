@@ -90,10 +90,6 @@ import java.util.Map.Entry;
  */
 public class BeanBuilder extends GroovyObjectSupport {
 	private static final Log LOG = LogFactory.getLog(BeanBuilder.class);
-	private static final String CREATE_APPCTX = "createApplicationContext";
-    private static final String REGISTER_BEANS = "registerBeans";
-    private static final String BEANS = "beans";
-    private static final String REF = "ref";
     private static final String ANONYMOUS_BEAN = "bean";
     private RuntimeSpringConfiguration springConfig = new DefaultRuntimeSpringConfiguration();
     private BeanConfiguration currentBeanConfig;
@@ -321,64 +317,40 @@ public class BeanBuilder extends GroovyObjectSupport {
 	public void loadBeans(Resource[] resources) throws IOException {
 		Closure beans = new Closure(this){
 			public Object call(Object[] args) {
-				invokeBeanDefiningClosure(args[0]);
-				return null;
+				return beans((Closure)args[0]);
 			}
 		};
 		Binding b = new Binding();
 		b.setVariable("beans", beans);
 
 		GroovyShell shell = classLoader != null ? new GroovyShell(classLoader,b) : new GroovyShell(b);
-		for (int i = 0; i < resources.length; i++) {
-			Resource resource = resources[i];
-			shell.evaluate(resource.getInputStream());
-		}
+        for (Resource resource : resources) {
+            shell.evaluate(resource.getInputStream());
+        }
 	}
 
+    public void registerBeans(StaticApplicationContext ctx) {
+        finalizeDeferredProperties();
+        springConfig.registerBeansWithContext(ctx);
+    }
 
-	/**
-	 * This method overrides method invocation to create beans for each method name that
-	 * takes a class argument
+    public RuntimeBeanReference ref(String refName) {
+        return ref(refName,false);
+    }
+
+    public RuntimeBeanReference ref(String refName, boolean parentRef) {
+        return new RuntimeBeanReference(refName, parentRef);
+    }
+
+    /**
+	 * This method is invoked by Groovy when a method that's not defined in Java is invoked.
+     * We use that as a syntax for bean definition. 
 	 */
-	public Object invokeMethod(String name, Object arg) {
+	public Object methodMissing(String name, Object arg) {
         Object[] args = (Object[])arg;
 
-        if(CREATE_APPCTX.equals(name)) {
-            return createApplicationContext();
-		}
-        else if(REGISTER_BEANS.equals(name) && args.length == 1 && args[0] instanceof StaticApplicationContext) {
-            finalizeDeferredProperties();
-
-            StaticApplicationContext ctx = (StaticApplicationContext)args[0];
-            springConfig.registerBeansWithContext(ctx);
-            return null;
-        }
-        else if(BEANS.equals(name) && args.length == 1 && args[0] instanceof Closure) {
-            return invokeBeanDefiningClosure(args[0]);
-        }
         if(args.length == 0)
-			throw new MissingMethodException(name, getClass(),args);
-
-		if(REF.equals(name)) {
-			String refName;
-			if(args[0] == null)
-				throw new IllegalArgumentException("Argument to ref() is not a valid bean or was not found");
-
-			if(args[0] instanceof RuntimeBeanReference) {
-				refName = ((RuntimeBeanReference)args[0]).getBeanName();
-			}
-			else {
-				refName = args[0].toString();
-			}
-
-			boolean parentRef = false;
-			if(args.length > 1) {
-				if(args[1] instanceof Boolean) {
-					parentRef = ((Boolean)args[1]).booleanValue();
-				}
-			}
-			return new RuntimeBeanReference(refName, parentRef);
-		}
+			throw new MissingMethodException(name,getClass(),args);
 
 		if(args[0] instanceof Closure) {
             // abstract bean definition
@@ -520,10 +492,9 @@ public class BeanBuilder extends GroovyObjectSupport {
     /**
 	 * When an methods argument is only a closure it is a set of bean definitions
 	 *
-	 * @param arg The closure argument
+	 * @param callable The closure argument
 	 */
-	private BeanBuilder invokeBeanDefiningClosure(Object arg) {
-		Closure callable = (Closure)arg;
+	public BeanBuilder beans(Closure callable) {
 		callable.setDelegate(this);
   //      callable.setResolveStrategy(Closure.DELEGATE_FIRST);
         callable.call();
