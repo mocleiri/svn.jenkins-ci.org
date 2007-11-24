@@ -3,13 +3,10 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import org.acegisecurity.AccessDeniedException;
 import org.acegisecurity.Authentication;
-import org.acegisecurity.GrantedAuthority;
 import org.acegisecurity.acls.sid.PrincipalSid;
 import org.acegisecurity.context.SecurityContextHolder;
 import org.acegisecurity.providers.ProviderManager;
 import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
-import org.acegisecurity.providers.dao.DaoAuthenticationProvider;
-import org.acegisecurity.userdetails.memory.InMemoryDaoImpl;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -31,9 +28,6 @@ public class Main {
 
     // seucrity configuration
     public ProviderManager authenticationManager;
-    private DaoAuthenticationProvider daoProvider;
-    private InMemoryDaoImpl dao;
-    private static final GrantedAuthority[] EMPTY_ARRAY = new GrantedAuthority[0];
 
     public Main() throws Exception {
         // mock data set up
@@ -51,34 +45,6 @@ public class Main {
         s.run();
         WebApplicationContext ac = builder.createApplicationContext();
         authenticationManager = (ProviderManager) ac.getBean("authenticationManager");
-
-//        // just using this to satisfy MessageSource
-//        GenericApplicationContext gac = new GenericApplicationContext();
-//
-//        // emulate the bean wiring of Spring
-//        dao = new InMemoryDaoImpl();
-//        UserMap userMap = new UserMap();
-//        userMap.addUser(new User("alice","alice",true,true,true,true,EMPTY_ARRAY));
-//        userMap.addUser(new User("bob","bob",true,true,true,true,EMPTY_ARRAY));
-//        userMap.addUser(new User("charlie","charlie",true,true,true,true,EMPTY_ARRAY));
-//        dao.setUserMap(userMap);
-//        dao.afterPropertiesSet();
-//
-//        daoProvider = new DaoAuthenticationProvider();
-//        daoProvider.setUserDetailsService(dao);
-//        daoProvider.setMessageSource(gac);
-//        daoProvider.afterPropertiesSet();
-//
-//        AnonymousAuthenticationProvider aap = new AnonymousAuthenticationProvider();
-//        aap.setKey("anonymous");
-//        aap.setMessageSource(gac);
-//        aap.afterPropertiesSet();
-//
-//        authenticationManager = new ProviderManager();
-//        authenticationManager.setProviders(Arrays.asList(daoProvider,aap));
-//        authenticationManager.afterPropertiesSet();
-//
-//        gac.refresh();
     }
 
     private void mockDataSetup() {
