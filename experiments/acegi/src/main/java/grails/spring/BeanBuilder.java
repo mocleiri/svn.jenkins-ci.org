@@ -503,7 +503,7 @@ public class BeanBuilder extends GroovyObjectSupport {
         return this;
     }
 
-	/**
+    /**
 	 * This method overrides property setting in the scope of the BeanBuilder to set
 	 * properties on the current BeanConfiguration
 	 */

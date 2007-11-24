@@ -1,3 +1,4 @@
+import grails.spring.BeanBuilder;
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import org.acegisecurity.AccessDeniedException;
@@ -6,23 +7,17 @@ import org.acegisecurity.GrantedAuthority;
 import org.acegisecurity.acls.sid.PrincipalSid;
 import org.acegisecurity.context.SecurityContextHolder;
 import org.acegisecurity.providers.ProviderManager;
-import org.acegisecurity.providers.anonymous.AnonymousAuthenticationProvider;
 import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
 import org.acegisecurity.providers.dao.DaoAuthenticationProvider;
-import org.acegisecurity.userdetails.User;
 import org.acegisecurity.userdetails.memory.InMemoryDaoImpl;
-import org.acegisecurity.userdetails.memory.UserMap;
+import org.codehaus.groovy.control.CompilerConfiguration;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
-import grails.spring.BeanBuilder;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -47,9 +42,13 @@ public class Main {
         Binding binding = new Binding();
         BeanBuilder builder = new BeanBuilder();
         binding.setVariable("builder", builder);
-        GroovyShell shell = new GroovyShell(binding);
+        CompilerConfiguration cc = new CompilerConfiguration();
+        cc.setScriptBaseClass(ClosureScript.class.getName());
+        GroovyShell shell = new GroovyShell(binding,cc);
 
-        shell.evaluate(getClass().getResourceAsStream("authentication.groovy"));
+        ClosureScript s = (ClosureScript)shell.parse(getClass().getResourceAsStream("authentication.groovy"));
+        s.setDelegate(builder);
+        s.run();
         WebApplicationContext ac = builder.createApplicationContext();
         authenticationManager = (ProviderManager) ac.getBean("authenticationManager");
 
