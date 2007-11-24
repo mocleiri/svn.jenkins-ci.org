@@ -1,3 +1,5 @@
+package grails.spring;
+
 import groovy.lang.Binding;
 import groovy.lang.Closure;
 import groovy.lang.GroovyObject;

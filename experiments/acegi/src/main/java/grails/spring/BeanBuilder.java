@@ -26,6 +26,7 @@ import groovy.lang.MissingMethodException;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.codehaus.groovy.control.CompilerConfiguration;
 import org.codehaus.groovy.grails.commons.spring.BeanConfiguration;
 import org.codehaus.groovy.grails.commons.spring.DefaultBeanConfiguration;
 import org.codehaus.groovy.grails.commons.spring.DefaultRuntimeSpringConfiguration;
@@ -43,6 +44,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -125,7 +127,21 @@ public class BeanBuilder extends GroovyObjectSupport {
 		return LOG;
 	}
 
-	/**
+    /**
+     * Parses the bean definition groovy script.
+     */
+    public void parse(InputStream script) {
+        Binding binding = new Binding();
+        CompilerConfiguration cc = new CompilerConfiguration();
+        cc.setScriptBaseClass(ClosureScript.class.getName());
+        GroovyShell shell = new GroovyShell(binding,cc);
+
+        ClosureScript s = (ClosureScript)shell.parse(script);
+        s.setDelegate(this);
+        s.run();
+    }
+
+    /**
 	 * Retrieves the parent ApplicationContext
 	 * @return The parent ApplicationContext
 	 */

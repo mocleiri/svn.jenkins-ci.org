@@ -1,13 +1,10 @@
 import grails.spring.BeanBuilder;
-import groovy.lang.Binding;
-import groovy.lang.GroovyShell;
 import org.acegisecurity.AccessDeniedException;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.acls.sid.PrincipalSid;
 import org.acegisecurity.context.SecurityContextHolder;
 import org.acegisecurity.providers.ProviderManager;
 import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
-import org.codehaus.groovy.control.CompilerConfiguration;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.springframework.web.context.WebApplicationContext;
@@ -33,16 +30,8 @@ public class Main {
         // mock data set up
         mockDataSetup();
 
-        Binding binding = new Binding();
         BeanBuilder builder = new BeanBuilder();
-        binding.setVariable("builder", builder);
-        CompilerConfiguration cc = new CompilerConfiguration();
-        cc.setScriptBaseClass(ClosureScript.class.getName());
-        GroovyShell shell = new GroovyShell(binding,cc);
-
-        ClosureScript s = (ClosureScript)shell.parse(getClass().getResourceAsStream("authentication.groovy"));
-        s.setDelegate(builder);
-        s.run();
+        builder.parse(getClass().getResourceAsStream("authentication.groovy"));
         WebApplicationContext ac = builder.createApplicationContext();
         authenticationManager = (ProviderManager) ac.getBean("authenticationManager");
     }
