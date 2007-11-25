@@ -1,9 +1,9 @@
 import grails.spring.BeanBuilder;
 import org.acegisecurity.AccessDeniedException;
 import org.acegisecurity.Authentication;
+import org.acegisecurity.AuthenticationManager;
 import org.acegisecurity.acls.sid.PrincipalSid;
 import org.acegisecurity.context.SecurityContextHolder;
-import org.acegisecurity.providers.ProviderManager;
 import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -25,7 +25,6 @@ public class Main {
     public static final Permission CREATE_JOB = new Permission(Main.class,"Create a new job");
 
     // seucrity configuration
-    public ProviderManager authenticationManager;
     public WebApplicationContext context;
 
     public Main() throws Exception {
@@ -35,7 +34,8 @@ public class Main {
         BeanBuilder builder = new BeanBuilder();
         builder.parse(getClass().getResourceAsStream("authentication.groovy"));
         context = builder.createApplicationContext();
-        authenticationManager = (ProviderManager) context.getBean("authenticationManager");
+        WebAppMain.AUTHENTICATION_MANAGER.setManager(
+            (AuthenticationManager) context.getBean("authenticationManager"));
     }
 
     private void mockDataSetup() {

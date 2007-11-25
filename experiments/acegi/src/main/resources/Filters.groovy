@@ -17,7 +17,7 @@ filter(ChainedServletFilter) {
     // like a Java class ("FilterDef.groovy")
     filters = [
         bean(BasicProcessingFilter) {
-            authenticationManager = parentRef("authenticationManager")
+            authenticationManager = WebAppMain.AUTHENTICATION_MANAGER
             authenticationEntryPoint = entryPoint
         },
         bean(AnonymousProcessingFilter) {

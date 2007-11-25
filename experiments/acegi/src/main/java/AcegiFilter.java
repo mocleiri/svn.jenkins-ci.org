@@ -20,7 +20,7 @@ public class AcegiFilter implements Filter {
         try {
             servletContext = filterConfig.getServletContext();
 
-            BeanBuilder builder = new BeanBuilder(WebAppMain.MAIN.context);
+            BeanBuilder builder = new BeanBuilder();
             builder.parse(getClass().getResourceAsStream("Filters.groovy"));
             filter = (ChainedServletFilter) builder.createApplicationContext().getBean("filter");
         } catch (Exception e) {
