@@ -74,4 +74,10 @@ public class Main {
         SecurityContextHolder.clearContext();
         rsp.getWriter().println("Done");
     }
+
+    public String getWho() {
+        Authentication a = SecurityContextHolder.getContext().getAuthentication();
+        if(a==null) return "null";
+        return a.getName();
+    }
 }
