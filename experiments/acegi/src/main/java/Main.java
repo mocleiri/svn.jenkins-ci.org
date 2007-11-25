@@ -11,6 +11,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -50,6 +51,10 @@ public class Main {
         // need to be authenticated to browse
         Job.CLASS_ACL.add(ACL.EVERYONE,Job.BROWSE,true);
         Job.CLASS_ACL.add(ACL.ANONYMOUS,Job.BROWSE,false);
+    }
+
+    public List<Permission> getAllPermissions() {
+        return Permission.getAll();
     }
 
     public void doSecured(StaplerRequest req, StaplerResponse rsp) throws IOException {

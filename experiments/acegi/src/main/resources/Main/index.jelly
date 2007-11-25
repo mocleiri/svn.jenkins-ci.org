@@ -1,5 +1,12 @@
-<html>
+<html xmlns:j="jelly:core">
   <body>
     Yay!
+
+    <h2>Permissions</h2>
+    <ul>
+      <j:forEach var="p" items="${it.allPermissions}">
+        <li>${p}</li>
+      </j:forEach>
+    </ul>
   </body>
 </html>

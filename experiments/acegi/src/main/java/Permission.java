@@ -43,14 +43,28 @@ public class Permission {
             }
             ps.add(this);
         }
+        ALL.add(this);
     }
 
     public Permission(Class owner, String name) {
         this(owner,name,null);
     }
 
+    public String toString() {
+        return "Permission["+owner+','+name+']';
+    }
+
+    public static List<Permission> getAll() {
+        return ALL;
+    }
+
     /**
      * All the permissions in the system, keyed by their owners.
      */
     private static final Map<Class, List<Permission>> PERMISSIONS = new HashMap<Class,List<Permission>>();
+
+    /**
+     * The same as {@link #PERMISSIONS} but in a single list.
+     */
+    private static final List<Permission> ALL = new ArrayList<Permission>();
 }
