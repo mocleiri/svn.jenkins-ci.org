@@ -69,4 +69,9 @@ public class Main {
             rsp.getWriter().println("Secret information");
         }
     }
+
+    public void doLogout(StaplerRequest req, StaplerResponse rsp) throws IOException {
+        SecurityContextHolder.clearContext();
+        rsp.getWriter().println("Done");
+    }
 }
