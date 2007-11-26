@@ -54,7 +54,7 @@ class DefaultBeanConfiguration extends GroovyObjectSupport implements BeanConfig
     private String parentName;
 
     public Object getProperty(String property) {
-		AbstractBeanDefinition bd = getBeanDefinition();
+		getBeanDefinition();
 		if(wrapper.isReadableProperty(property)) {
 			return wrapper.getPropertyValue(property);
 		}
