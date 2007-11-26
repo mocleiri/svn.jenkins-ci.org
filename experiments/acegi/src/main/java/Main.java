@@ -5,6 +5,8 @@ import org.acegisecurity.AuthenticationManager;
 import org.acegisecurity.acls.sid.PrincipalSid;
 import org.acegisecurity.context.SecurityContextHolder;
 import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
+import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.StaplerProxy;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.springframework.web.context.WebApplicationContext;
@@ -17,7 +19,7 @@ import java.util.Map;
 /**
  * @author Kohsuke Kawaguchi
  */
-public class Main {
+public class Main implements StaplerProxy {
     // mock domain objects
     public Map<String,Job> jobs = new HashMap<String,Job>();
 
@@ -49,12 +51,19 @@ public class Main {
         b.getACL().add(new PrincipalSid("bob"),Job.BUILD,true);
 
         // need to be authenticated to browse
-        Job.CLASS_ACL.add(ACL.EVERYONE,Job.BROWSE,true);
-        Job.CLASS_ACL.add(ACL.ANONYMOUS,Job.BROWSE,false);
+        Job.CLASS_ACL.add(ACL.EVERYONE,Main.BROWSE,true);
+        Job.CLASS_ACL.add(ACL.ANONYMOUS,Main.BROWSE,false);
     }
 
     public List<Permission> getAllPermissions() {
         return Permission.getAll();
+    }
+
+    public Object getTarget() {
+        if(Stapler.getCurrentRequest().getRestOfPath().equals("/login"))
+            return this;    // anonymous access allowed for login
+        Job.CLASS_ACL.checkPermission(BROWSE);
+        return this;
     }
 
     public void doSecured(StaplerRequest req, StaplerResponse rsp) throws IOException {
