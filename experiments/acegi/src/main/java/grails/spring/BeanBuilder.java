@@ -27,10 +27,6 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.groovy.control.CompilerConfiguration;
-import grails.spring.BeanConfiguration;
-import grails.spring.DefaultBeanConfiguration;
-import grails.spring.DefaultRuntimeSpringConfiguration;
-import grails.spring.RuntimeSpringConfiguration;
 import org.codehaus.groovy.runtime.DefaultGroovyMethods;
 import org.codehaus.groovy.runtime.InvokerHelper;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -48,7 +44,6 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -95,7 +90,7 @@ public class BeanBuilder extends GroovyObjectSupport {
     private static final String ANONYMOUS_BEAN = "bean";
     private RuntimeSpringConfiguration springConfig = new DefaultRuntimeSpringConfiguration();
     private BeanConfiguration currentBeanConfig;
-    private Map deferredProperties = new HashMap();
+    private Map<String,DeferredProperty> deferredProperties = new HashMap<String,DeferredProperty>();
     private ApplicationContext parentCtx;
     private Map binding = Collections.EMPTY_MAP;
     private ClassLoader classLoader = null;
@@ -173,16 +168,15 @@ public class BeanBuilder extends GroovyObjectSupport {
      *
      * @return A map of BeanDefinition instances with the bean id as the key
      */
-    public Map getBeanDefinitions() {
+    public Map<String,BeanDefinition> getBeanDefinitions() {
 
-        Map beanDefinitions = new HashMap();
-        final List beanNames = getSpringConfig().getBeanNames();
-        for (Iterator i = beanNames.iterator(); i.hasNext();) {
-            String beanName = (String) i.next();
+        Map<String,BeanDefinition> beanDefinitions = new HashMap<String,BeanDefinition>();
+        final List<String> beanNames = getSpringConfig().getBeanNames();
+        for (String beanName : beanNames) {
             BeanDefinition bd = getSpringConfig()
-                                    .getBeanConfig(beanName)
-                                    .getBeanDefinition();
-            beanDefinitions.put(beanName,bd);
+                    .getBeanConfig(beanName)
+                    .getBeanDefinition();
+            beanDefinitions.put(beanName, bd);
         }
         return beanDefinitions;
     }
@@ -396,17 +390,14 @@ public class BeanBuilder extends GroovyObjectSupport {
     }
 
     private void finalizeDeferredProperties() {
-		for (Iterator i = deferredProperties.values().iterator(); i.hasNext();) {
-			DeferredProperty dp = (DeferredProperty) i.next();
-
-			if(dp.value instanceof List) {
-				dp.value = manageListIfNecessary(dp.value);
-			}
-			else if(dp.value instanceof Map) {
-				dp.value = manageMapIfNecessary(dp.value);
-			}
-			dp.setInBeanConfig();
-		}
+        for (DeferredProperty dp : deferredProperties.values()) {
+            if (dp.value instanceof List) {
+                dp.value = manageListIfNecessary(dp.value);
+            } else if (dp.value instanceof Map) {
+                dp.value = manageMapIfNecessary(dp.value);
+            }
+            dp.setInBeanConfig();
+        }
 		deferredProperties.clear();
 	}
 
@@ -643,7 +634,7 @@ public class BeanBuilder extends GroovyObjectSupport {
 				if(currentBeanConfig.hasProperty(name))
 					return currentBeanConfig.getPropertyValue(name);
 				else {
-					DeferredProperty dp = (DeferredProperty)deferredProperties.get(currentBeanConfig.getName()+name);
+					DeferredProperty dp = deferredProperties.get(currentBeanConfig.getName()+name);
 					if(dp!=null) {
 						return dp.value;
 					}

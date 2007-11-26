@@ -38,7 +38,7 @@ import java.util.*;
  * @since 0.3
  *
  */
-public class DefaultBeanConfiguration extends GroovyObjectSupport implements BeanConfiguration {
+class DefaultBeanConfiguration extends GroovyObjectSupport implements BeanConfiguration {
 
 	private static final String AUTOWIRE = "autowire";
 	private static final String CONSTRUCTOR_ARGS = "constructorArgs";
@@ -50,17 +50,7 @@ public class DefaultBeanConfiguration extends GroovyObjectSupport implements Bea
     private static final String PARENT = "parent";
     private static final String BY_TYPE = "byType";
     private static final String BY_CONSTRUCTOR = "constructor";
-    private static final List DYNAMIC_PROPS = new ArrayList(){ {
-		add(AUTOWIRE);
-		add(CONSTRUCTOR_ARGS);
-		add(DESTROY_METHOD);
-		add(FACTORY_BEAN);
-		add(FACTORY_METHOD);
-		add(INIT_METHOD);
-		add(BY_NAME);
-		add(BY_TYPE);
-		add(BY_CONSTRUCTOR);
-	} };
+    private static final List DYNAMIC_PROPS = Arrays.asList(AUTOWIRE, CONSTRUCTOR_ARGS, DESTROY_METHOD, FACTORY_BEAN, FACTORY_METHOD, INIT_METHOD, BY_NAME, BY_TYPE, BY_CONSTRUCTOR);
     private String parentName;
 
     public Object getProperty(String property) {
@@ -98,8 +88,7 @@ public class DefaultBeanConfiguration extends GroovyObjectSupport implements Bea
             else if(CONSTRUCTOR_ARGS.equals(property) && newValue instanceof List) {
                 ConstructorArgumentValues cav = new ConstructorArgumentValues();
                 List args = (List)newValue;
-                for (Iterator i = args.iterator(); i.hasNext();) {
-                    Object e = i.next();
+                for (Object e : args) {
                     cav.addGenericArgumentValue(e);
                 }
                 bd.setConstructorArgumentValues(cav);
@@ -194,9 +183,9 @@ public class DefaultBeanConfiguration extends GroovyObjectSupport implements Bea
 		AbstractBeanDefinition bd;
 		if(constructorArgs.size() > 0) {
 			ConstructorArgumentValues cav = new ConstructorArgumentValues();
-			for (Iterator i = constructorArgs.iterator(); i.hasNext();) {
-				cav.addGenericArgumentValue(i.next());
-			}
+            for (Object constructorArg : constructorArgs) {
+                cav.addGenericArgumentValue(constructorArg);
+            }
             if(StringUtils.isBlank(parentName)) {
                 bd = new RootBeanDefinition(clazz,cav,null);
             }

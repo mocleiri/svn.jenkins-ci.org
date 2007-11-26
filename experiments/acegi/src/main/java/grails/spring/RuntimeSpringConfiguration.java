@@ -37,7 +37,7 @@ import java.util.List;
  * @since 0.3
  *
  */
-public interface RuntimeSpringConfiguration extends ServletContextAware {
+interface RuntimeSpringConfiguration extends ServletContextAware {
 
     /**
      * Adds a singleton bean definition

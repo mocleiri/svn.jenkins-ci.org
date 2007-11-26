@@ -44,8 +44,7 @@ import java.util.Map;
  * @since 0.3
  *
  */
-public class DefaultRuntimeSpringConfiguration implements
-        RuntimeSpringConfiguration {
+class DefaultRuntimeSpringConfiguration implements RuntimeSpringConfiguration {
 
     private static final Log LOG = LogFactory.getLog(DefaultRuntimeSpringConfiguration.class);
     private StaticWebApplicationContext context;
