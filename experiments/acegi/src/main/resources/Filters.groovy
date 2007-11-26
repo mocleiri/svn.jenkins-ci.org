@@ -38,7 +38,7 @@ filter(ChainedServletFilter) {
             authenticationManager = WebAppMain.AUTHENTICATION_MANAGER
             authenticationFailureUrl = "/login?failed"
             defaultTargetUrl = "/"
-            filterProcessesUrl = "/j_security_check"
+            filterProcessesUrl = "/j_acegi_security_check"
         },
         bean(AnonymousProcessingFilter) {
             key = "anonymous" // must match with the AnonymousProvider
