@@ -25,7 +25,6 @@ import groovy.lang.MetaClass;
 import groovy.lang.MissingMethodException;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import org.codehaus.groovy.runtime.DefaultGroovyMethods;
 import org.codehaus.groovy.runtime.InvokerHelper;
@@ -48,6 +47,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Logger;
 
 /**
  * <p>Runtime bean configuration wrapper. Like a Groovy builder, but more of a DSL for
@@ -86,7 +86,6 @@ import java.util.Map.Entry;
  *
  */
 public class BeanBuilder extends GroovyObjectSupport {
-	private static final Log LOG = LogFactory.getLog(BeanBuilder.class);
     private static final String ANONYMOUS_BEAN = "bean";
     private RuntimeSpringConfiguration springConfig = new DefaultRuntimeSpringConfiguration();
     private BeanConfiguration currentBeanConfig;
@@ -116,10 +115,6 @@ public class BeanBuilder extends GroovyObjectSupport {
 		this.parentCtx = parent;
 		this.springConfig = new DefaultRuntimeSpringConfiguration(parent);
 		this.classLoader = classLoader;
-	}
-
-	public Log getLog() {
-		return LOG;
 	}
 
     /**
@@ -171,8 +166,7 @@ public class BeanBuilder extends GroovyObjectSupport {
     public Map<String,BeanDefinition> getBeanDefinitions() {
 
         Map<String,BeanDefinition> beanDefinitions = new HashMap<String,BeanDefinition>();
-        final List<String> beanNames = getSpringConfig().getBeanNames();
-        for (String beanName : beanNames) {
+        for (String beanName : getSpringConfig().getBeanNames()) {
             BeanDefinition bd = getSpringConfig()
                     .getBeanConfig(beanName)
                     .getBeanDefinition();

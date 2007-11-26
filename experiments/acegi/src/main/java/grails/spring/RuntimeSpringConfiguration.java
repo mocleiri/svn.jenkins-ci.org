@@ -185,7 +185,7 @@ interface RuntimeSpringConfiguration extends ServletContextAware {
      */
     public void registerPostProcessor(BeanFactoryPostProcessor processor);
 
-    List getBeanNames();
+    List<String> getBeanNames();
 
     /**
      * Registers the beans held within this RuntimeSpringConfiguration instance with the given ApplicationContext

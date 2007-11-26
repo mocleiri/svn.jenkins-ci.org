@@ -15,8 +15,6 @@
  */
 package grails.spring;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -30,9 +28,11 @@ import javax.servlet.ServletContext;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * A programmable runtime Spring configuration that allows a spring ApplicationContext
  * to be constructed at runtime
@@ -45,12 +45,11 @@ import java.util.Map;
  *
  */
 class DefaultRuntimeSpringConfiguration implements RuntimeSpringConfiguration {
-
-    private static final Log LOG = LogFactory.getLog(DefaultRuntimeSpringConfiguration.class);
+    private static final Logger LOGGER = Logger.getLogger(DefaultRuntimeSpringConfiguration.class.getName());
     private StaticWebApplicationContext context;
-    private Map beanConfigs = new HashMap();
-    private Map beanDefinitions = new HashMap();
-    private List beanNames = new ArrayList();
+    private Map<String,BeanConfiguration> beanConfigs = new HashMap<String,BeanConfiguration>();
+    private Map<String,BeanDefinition> beanDefinitions = new HashMap<String,BeanDefinition>();
+    private List<String> beanNames = new ArrayList<String>();
 
     public DefaultRuntimeSpringConfiguration() {
         super();
@@ -158,7 +157,7 @@ class DefaultRuntimeSpringConfiguration implements RuntimeSpringConfiguration {
     }
 
     public BeanConfiguration getBeanConfig(String name) {
-        return (BeanConfiguration)beanConfigs.get(name);
+        return beanConfigs.get(name);
     }
 
     public AbstractBeanDefinition createBeanDefinition(String name) {
@@ -166,7 +165,7 @@ class DefaultRuntimeSpringConfiguration implements RuntimeSpringConfiguration {
             if(beanDefinitions.containsKey(name))
                 return (AbstractBeanDefinition)beanDefinitions.get(name);
             else if(beanConfigs.containsKey(name))
-                return ((BeanConfiguration)beanConfigs.get(name)).getBeanDefinition();
+                return beanConfigs.get(name).getBeanDefinition();
         }
         return null;
     }
@@ -177,52 +176,46 @@ class DefaultRuntimeSpringConfiguration implements RuntimeSpringConfiguration {
 
 
 
-    public List getBeanNames() {
+    public List<String> getBeanNames() {
         return beanNames;
     }
 
     public void registerBeansWithContext(StaticApplicationContext applicationContext) {
-        for (Iterator i = beanConfigs.values().iterator(); i.hasNext();) {
-            BeanConfiguration bc = (BeanConfiguration) i.next();
-            if(LOG.isDebugEnabled()) {
-                LOG.debug("[RuntimeConfiguration] Registering bean [" + bc.getName() + "]");
-                if(LOG.isTraceEnabled()) {
+        for (BeanConfiguration bc : beanConfigs.values()) {
+            if (LOGGER.isLoggable(Level.FINER)) {
+                LOGGER.finer("[RuntimeConfiguration] Registering bean [" + bc.getName() + "]");
+                if (LOGGER.isLoggable(Level.FINEST)) {
                     PropertyValue[] pvs = bc.getBeanDefinition()
-                                            .getPropertyValues()
-                                            .getPropertyValues();
-                    for (int j = 0; j < pvs.length; j++) {
-                        PropertyValue pv = pvs[j];
-                        LOG.trace("[RuntimeConfiguration] With property [" + pv.getName() + "] set to ["+pv.getValue()+"]");
+                            .getPropertyValues()
+                            .getPropertyValues();
+                    for (PropertyValue pv : pvs) {
+                        LOGGER.finest("[RuntimeConfiguration] With property [" + pv.getName() + "] set to [" + pv.getValue() + "]");
                     }
                 }
             }
 
 
-            if(applicationContext.containsBeanDefinition(bc.getName()))
+            if (applicationContext.containsBeanDefinition(bc.getName()))
                 applicationContext.removeBeanDefinition(bc.getName());
 
             applicationContext.registerBeanDefinition(bc.getName(),
-                                                bc.getBeanDefinition()	);
+                    bc.getBeanDefinition());
         }
-        for (Iterator i = beanDefinitions.keySet().iterator(); i.hasNext();) {
-            Object key = i.next();
-            BeanDefinition bd = (BeanDefinition)beanDefinitions.get(key) ;
-            if(LOG.isDebugEnabled()) {
-                LOG.debug("[RuntimeConfiguration] Registering bean [" + key + "]");
-                if(LOG.isTraceEnabled()) {
-                    PropertyValue[] pvs = bd.getPropertyValues().getPropertyValues();
-                    for (int j = 0; j < pvs.length; j++) {
-                        PropertyValue pv = pvs[j];
-                        LOG.trace("[RuntimeConfiguration] With property [" + pv.getName() + "] set to ["+pv.getValue()+"]");
+        for (String key : beanDefinitions.keySet()) {
+            BeanDefinition bd = beanDefinitions.get(key);
+            if (LOGGER.isLoggable(Level.FINER)) {
+                LOGGER.finer("[RuntimeConfiguration] Registering bean [" + key + "]");
+                if (LOGGER.isLoggable(Level.FINEST)) {
+                    for (PropertyValue pv : bd.getPropertyValues().getPropertyValues()) {
+                        LOGGER.finest("[RuntimeConfiguration] With property [" + pv.getName() + "] set to [" + pv.getValue() + "]");
                     }
                 }
             }
-            final String beanName = key.toString();
-            if(applicationContext.containsBean(beanName)) {
-                applicationContext.removeBeanDefinition(beanName);
+            if (applicationContext.containsBean(key)) {
+                applicationContext.removeBeanDefinition(key);
             }
 
-            applicationContext.registerBeanDefinition(beanName, bd);
+            applicationContext.registerBeanDefinition(key, bd);
 
         }
     }
