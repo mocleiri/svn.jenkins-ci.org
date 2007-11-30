@@ -24,6 +24,7 @@ import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildWrappers;
 import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
+import hudson.util.Iterators;
 import org.apache.commons.jexl.parser.ASTSizeFunction;
 import org.apache.commons.jexl.util.Introspector;
 import org.kohsuke.stapler.Ancestor;
@@ -44,9 +45,12 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.MonitorInfo;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
@@ -54,10 +58,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
+import java.util.Stack;
 import java.util.TreeMap;
+import java.util.logging.Level;
 import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.regex.Pattern;
+
+import net.sf.json.JSONObject;
+import net.sf.json.JSONArray;
 
 /**
  * Utility functions used in views.
@@ -711,6 +721,107 @@ public class Functions {
         }
         return "Unknown";
     }
+
+    /**
+     * Gets all the descendants {@link Logger} of the given name.
+     */
+    public static List<Logger> getAllLoggers(String root) throws Exception {
+        List<Logger> result = new ArrayList<Logger>();
+
+        Field kids_field = Logger.class.getDeclaredField("kids");
+        kids_field.setAccessible(true);
+
+        Stack<Logger> q = new Stack<Logger>();
+        q.push(Logger.getLogger(root));
+
+        while(!q.isEmpty()) {
+            Logger logger = q.pop();
+            result.add(logger);
+            List<WeakReference<Logger>> kids = (List<WeakReference<Logger>>)kids_field.get(logger);
+            if(kids==null)
+                continue;   // no children
+            for (WeakReference<Logger> kid : Iterators.reverse(kids)) {
+                Logger child = kid.get();
+                if(child!=null)
+                    q.push(child);
+            }
+        }
+
+        return result;
+    }
+
+    public static JSONObject getLoggerTree(String root) throws Exception {
+        Map<Logger,JSONObject> map = new HashMap<Logger,JSONObject>();
+
+        Field kids_field = Logger.class.getDeclaredField("kids");
+        kids_field.setAccessible(true);
+
+        Stack<Logger> q = new Stack<Logger>();
+        Logger rootLogger = Logger.getLogger(root);
+        JSONObject result = createLoggerObject(rootLogger);
+        q.push(rootLogger);
+        map.put(rootLogger,result);
+
+        while(!q.isEmpty()) {
+            Logger logger = q.pop();
+            List<WeakReference<Logger>> kids = (List<WeakReference<Logger>>)kids_field.get(logger);
+            if(kids==null)
+                continue;   // no children
+
+            for (WeakReference<Logger> kid : Iterators.reverse(new ArrayList<WeakReference<Logger>>(kids))) {
+                Logger childLogger = kid.get();
+                if(childLogger!=null)
+                    fillIntermediateLoggers(childLogger);
+            }
+
+            // start visiting after filling intermediate nodes
+            kids = (List<WeakReference<Logger>>)kids_field.get(logger);
+            for (WeakReference<Logger> kid : Iterators.reverse(kids)) {
+                Logger childLogger = kid.get();
+                if(childLogger!=null) {
+                    q.push(childLogger);
+                    JSONObject child = createLoggerObject(childLogger);
+                    map.put(childLogger,child);
+                    map.get(logger).getJSONArray("children").add(child);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private static void fillIntermediateLoggers(Logger logger) {
+        while(true) {
+            String n = logger.getName();
+            if(n==null)     return;
+            int idx = n.lastIndexOf('.');
+            if(idx==-1)     return;
+            n = n.substring(0,idx);
+            logger = Logger.getLogger(n);
+        }
+    }
+
+    private static JSONObject createLoggerObject(Logger logger) {
+        JSONObject o = new JSONObject();
+
+        String name = logger.getName();
+        Logger p = logger.getParent();
+        if(p!=null)
+            name = name.substring(p.getName().length()); // make it the short name
+        if(name.startsWith("."))
+            name = name.substring(1);
+        o.put("name", name);
+        Level lv = logger.getLevel();
+        if(lv!=null)
+            o.put("level", lv.getName());
+        o.put("children",new JSONArray());
+        return o;
+    }
+
+    public static List<Level> allLogLevels = Arrays.asList(
+            Level.OFF, Level.SEVERE, Level.WARNING, Level.INFO, Level.CONFIG,
+            Level.FINE, Level.FINER, Level.FINEST, Level.ALL );
+
 
     private static final Pattern LINE_END = Pattern.compile("\r?\n");
 }
