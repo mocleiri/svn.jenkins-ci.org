@@ -243,21 +243,22 @@ public final class MavenModuleSetBuild extends AbstractBuild<MavenModuleSet,Mave
                 } else {
                     // do builds here
                     SplittableBuildListener slistener = new SplittableBuildListener(listener);
-                    proxies = new HashMap<ModuleName, ProxyImpl2>();
-                    for (MavenModule m : project.sortedActiveModules)
-                        proxies.put(m.getModuleName(),m.newBuild().new ProxyImpl2(MavenModuleSetBuild.this,slistener));
-
-                    // run the complete build here
-                    Map<String,String> envVars = getEnvVars();
-
-                    ProcessCache.MavenProcess process = MavenBuild.mavenProcessCache.get(launcher.getChannel(), slistener,
-                        new MavenProcessFactory(project,launcher,envVars));
-
                     ArgumentListBuilder margs = new ArgumentListBuilder();
                     margs.add("-B").add("-f",project.getModuleRoot().child(project.getRootPOM()).getRemote());
                     margs.addTokenized(project.getGoals());
 
-                    Builder builder = new Builder(slistener, proxies, project.sortedActiveModules, margs.toList(), envVars);
+                    Map<String,String> envVars = getEnvVars();
+
+                    Builder builder = new Builder(slistener, proxies, margs.toList(), envVars);
+
+                    proxies = new HashMap<ModuleName, ProxyImpl2>();
+                    for (MavenModule m : project.sortedActiveModules)
+                        proxies.put(m.getModuleName(),m.newBuild().new ProxyImpl2(MavenModuleSetBuild.this,slistener));
+
+                    ProcessCache.MavenProcess process = MavenBuild.mavenProcessCache.get(launcher.getChannel(), slistener,
+                        new MavenProcessFactory(project,launcher,envVars));
+
+                    builder.createModuleReporters(project.sortedActiveModules);
                     try {
                         return process.channel.call(builder);
                     } finally {
@@ -376,13 +377,16 @@ public final class MavenModuleSetBuild extends AbstractBuild<MavenModuleSet,Mave
 
         private MavenBuildProxy2 lastProxy;
 
-        public Builder(BuildListener listener,Map<ModuleName,? extends MavenBuildProxy2> proxies, Collection<MavenModule> modules, List<String> goals, Map<String,String> systemProps) {
+        public Builder(BuildListener listener,Map<ModuleName,? extends MavenBuildProxy2> proxies, List<String> goals, Map<String,String> systemProps) {
             super(listener,goals,systemProps);
             this.proxies = proxies;
+        }
 
+        public void createModuleReporters(Collection<MavenModule> modules) {
             for (MavenModule m : modules)
                 reporters.put(m.getModuleName(),m.createReporters());
         }
+
 
         /**
          * Invoked after the maven has finished running, and in the master, not in the maven process.
