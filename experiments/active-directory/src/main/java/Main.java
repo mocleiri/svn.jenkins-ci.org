@@ -1,4 +1,5 @@
 import com4j.COM4J;
+import com4j.Variant;
 import com4j.typelibs.activeDirectory.IADs;
 import com4j.typelibs.ado20.ClassFactory;
 import com4j.typelibs.ado20._Command;
@@ -25,8 +26,8 @@ public class Main {
         String context = (String)rootDSE.get("defaultNamingContext");
         System.out.println("Context is "+context);
 
-        cmd.commandText("<LDAP://"+context+">;(giveName=Kohsuke);name,description;subTree");
-        _Recordset rs = cmd.execute(null, null, -1/*default*/);
+        cmd.commandText("<LDAP://"+context+">;(givenName=Kohsuke);name,description;subTree");
+        _Recordset rs = cmd.execute(null, Variant.MISSING, -1/*default*/);
 
 
         while(!rs.eof()) {
