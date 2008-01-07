@@ -1,6 +1,7 @@
 import com4j.COM4J;
 import com4j.Variant;
 import com4j.typelibs.activeDirectory.IADs;
+import com4j.typelibs.activeDirectory.IADsOpenDSObject;
 import com4j.typelibs.ado20.ClassFactory;
 import com4j.typelibs.ado20._Command;
 import com4j.typelibs.ado20._Connection;
@@ -26,15 +27,23 @@ public class Main {
         String context = (String)rootDSE.get("defaultNamingContext");
         System.out.println("Context is "+context);
 
-        cmd.commandText("<LDAP://"+context+">;(givenName=Kohsuke);name,description;subTree");
+        cmd.commandText("<LDAP://"+context+">;(sAMAccountName="+args[0]+");name,description,distinguishedName;subTree");
         _Recordset rs = cmd.execute(null, Variant.MISSING, -1/*default*/);
 
+        String dn=null;
 
         while(!rs.eof()) {
             System.out.println(rs.fields().item("Name").value());
             System.out.println(rs.fields().item("Description").value());
+            dn = rs.fields().item("distinguishedName").value().toString();
+            System.out.println(dn);
             rs.moveNext();
         }
+
+        // now we got the DN of the user
+        // turns out we don't need DN for authentication
+        IADsOpenDSObject dso = COM4J.getObject(IADsOpenDSObject.class,"LDAP:",null);
+        dso.openDSObject("LDAP://"+context,args[0],args[1],1);
     }
 }
 
