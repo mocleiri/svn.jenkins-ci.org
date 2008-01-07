@@ -1,5 +1,4 @@
 import com4j.COM4J;
-import com4j.Com4jObject;
 import com4j.typelibs.activeDirectory.IADs;
 import com4j.typelibs.ado20.ClassFactory;
 import com4j.typelibs.ado20._Command;
@@ -16,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         _Connection con = ClassFactory.createConnection();
         con.provider("ADsDSOObject");
-        con.open("Active Directory Provider",null,null,0);
+        con.open("Active Directory Provider",""/*default*/,""/*default*/,-1/*default*/);
 
         _Command cmd = ClassFactory.createCommand();
         cmd.activeConnection(con);
@@ -27,7 +26,7 @@ public class Main {
         System.out.println("Context is "+context);
 
         cmd.commandText("<LDAP://"+context+">;(giveName=Kohsuke);name,description;subTree");
-        _Recordset rs = cmd.execute(null, null, 0);
+        _Recordset rs = cmd.execute(null, null, -1/*default*/);
 
 
         while(!rs.eof()) {
