@@ -41,9 +41,14 @@ public class Main {
         }
 
         // now we got the DN of the user
-        // turns out we don't need DN for authentication
         IADsOpenDSObject dso = COM4J.getObject(IADsOpenDSObject.class,"LDAP:",null);
-        dso.openDSObject("LDAP://"+context,args[0],args[1],1);
+
+        // turns out we don't need DN for authentication
+        // we can bind with the user name
+        // dso.openDSObject("LDAP://"+context,args[0],args[1],1);
+
+        // to do bind with DN as the user name, the flag must be 0
+        dso.openDSObject("LDAP://"+context,dn,args[1],0);
     }
 }
 
