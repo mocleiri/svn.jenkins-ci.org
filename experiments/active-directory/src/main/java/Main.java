@@ -1,7 +1,10 @@
 import com4j.COM4J;
 import com4j.Variant;
+import com4j.Com4jObject;
 import com4j.typelibs.activeDirectory.IADs;
 import com4j.typelibs.activeDirectory.IADsOpenDSObject;
+import com4j.typelibs.activeDirectory.IADsUser;
+import com4j.typelibs.activeDirectory.IADsGroup;
 import com4j.typelibs.ado20.ClassFactory;
 import com4j.typelibs.ado20._Command;
 import com4j.typelibs.ado20._Connection;
@@ -48,7 +51,12 @@ public class Main {
         // dso.openDSObject("LDAP://"+context,args[0],args[1],1);
 
         // to do bind with DN as the user name, the flag must be 0
-        dso.openDSObject("LDAP://"+context,dn,args[1],0);
+        IADsUser usr = dso.openDSObject("LDAP://" + dn, dn, args[1], 0).queryInterface(IADsUser.class);
+        System.out.println("Logged in as "+usr.fullName());
+        for( Com4jObject g : usr.groups() ) {
+            IADsGroup grp = g.queryInterface(IADsGroup.class);
+            System.out.println("Member of: "+grp.name());
+        }
     }
 }
 
