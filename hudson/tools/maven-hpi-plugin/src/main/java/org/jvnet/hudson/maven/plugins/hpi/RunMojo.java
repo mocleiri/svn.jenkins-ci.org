@@ -69,7 +69,7 @@ public class RunMojo extends AbstractJetty6Mojo {
     /**
      * Path to <tt>$HUDSON_HOME</tt>. The launched hudson will use this directory as the workspace.
      *
-     * @parameter expression="${hudsonHome}" default-value="./work"
+     * @parameter expression="${HUDSON_HOME}"
      */
     private File hudsonHome;
 
@@ -98,6 +98,15 @@ public class RunMojo extends AbstractJetty6Mojo {
     protected ArtifactRepository localRepository;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
+        // compute hudsonHome
+        if(hudsonHome==null) {
+            String h = System.getenv("HUDSON_HOME");
+            if(h!=null)
+                hudsonHome = new File(h);
+            else
+                hudsonHome = new File("./work");
+        }
+
         // look for hudson.war
         for( Artifact a : (Set<Artifact>)getProject().getArtifacts() ) {
             if(a.getArtifactId().equals("hudson-war") && a.getType().equals("war")) {
