@@ -1,34 +1,32 @@
 package hudson.plugins.perforce;
 
-import static hudson.Util.fixNull;
+import com.tek42.perforce.Depot;
+import com.tek42.perforce.PerforceException;
+import com.tek42.perforce.model.Changelist;
+import com.tek42.perforce.model.Workspace;
 import hudson.FilePath;
 import hudson.Launcher;
+import static hudson.Util.fixNull;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.model.Run;
 import hudson.model.TaskListener;
+import hudson.remoting.VirtualChannel;
 import hudson.scm.ChangeLogParser;
 import hudson.scm.RepositoryBrowsers;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
 import hudson.util.FormFieldValidator;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URLDecoder;
-import java.util.List;
-
-import javax.servlet.ServletException;
-
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
-import com.tek42.perforce.Depot;
-import com.tek42.perforce.PerforceException;
-import com.tek42.perforce.model.Changelist;
-import com.tek42.perforce.model.Workspace;
+import javax.servlet.ServletException;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
+import java.net.URLDecoder;
+import java.util.List;
 
 /**
  * Extends {@link SCM} to provide integration with Perforce SCM repositories.
@@ -128,7 +126,7 @@ public class PerforceSCM extends SCM {
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	private String getLocalPathName(FilePath path) throws IOException, InterruptedException {
+	private String getLocalPathName(File path) throws IOException, InterruptedException {
 		String uriString = path.toURI().toString();
 		// Get rid of URI prefix
 		// NOTE: this won't handle remote files, is that a problem?
@@ -152,118 +150,147 @@ public class PerforceSCM extends SCM {
 		
 		return uriString;
 	}
-	
-	/* (non-Javadoc)
+
+    private static final class CheckoutResult implements Serializable {
+        public final boolean result;
+        /**
+         * -1 to indicate that there's no need to create an action.
+         */
+        public final int lastChange;
+
+        private CheckoutResult(boolean result, int lastChange) {
+            this.result = result;
+            this.lastChange = lastChange;
+        }
+
+        private static final long serialVersionUID = 1L;
+    }
+
+    /* (non-Javadoc)
 	 * @see hudson.scm.SCM#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)
 	 */
-	@Override
-	public boolean checkout(AbstractBuild build, Launcher launcher, FilePath workspace, BuildListener listener, File changelogFile) throws IOException, InterruptedException {
-		
-		try {
-			listener.getLogger().println("Performing sync with Perforce for: " + projectPath);
-			
-			// Check to make sure our client is mapped to the local hudson directory...
-		    // The problem is that perforce assumes a local directory on your computer maps
-		    // directly to the remote depot.  Unfortunately, this doesn't work with they way
-		    // Hudson sets up workspaces.  Not to worry!  What we do here is manipulate the
-		    // perforce client spec before we do a checkout.
-		    // An alternative would be to setup a single client for each build project.  While,
-		    // that is possible, I think its wasteful makes setup time for the user longer as
-		    // they have to go and create a workspace in perforce for each new project.
-		    
-		    // 1. Retrieve the client specified, throw an exception if we are configured wrong and the
-		    // client spec doesn't exist.
-			Workspace p4workspace = getDepot().getWorkspaces().getWorkspace(p4Client);
-			assert p4workspace != null;
-			boolean creatingNewWorkspace = p4workspace.getAccess() == null 
-				|| p4workspace.getAccess().length() == 0;
+    @Override
+    public boolean checkout(AbstractBuild build, Launcher launcher, FilePath workspace, final BuildListener listener, File changelog) throws IOException, InterruptedException {
 
-			// 2. Before we sync, we need to update the client spec (we do this on every build).
-			// Here we are getting the local file path to the workspace.  We will use this as the "Root"
-			// config property of the client spec. This tells perforce where to store the files on our local disk
-			String localPath = getLocalPathName(workspace);
-			listener.getLogger().println("Changing P4 Client Root to: " + localPath);
-			p4workspace.setRoot(localPath);
-							
-			// 3. Optionally regenerate the workspace view.
-			// We tell perforce to map the project contents directly (this drops off the project 
-			// name from the workspace. So instead of: 
-			//	[Hudson]/[job]/workspace/[Project]/contents
-			// we get:
-			//	[Hudson]/[job]/workspace/contents
-			if(updateView || creatingNewWorkspace) {
-				String view = projectPath + " //" + p4workspace.getName() + "/...";
-				listener.getLogger().println("Changing P4 Client View to: " + view);
-				p4workspace.clearViews();
-				p4workspace.addView(view);
-			}
-			
-			// 3b. There is a slight chance of failure with sync'ing to head.  I've experienced 
-			// a problem where a sync does not happen and there is no error message.  It is when 
-			// the host value of the workspace does not match up with the host hudson is working on.  
-			// Perforce reports an error like: "Client 'hudson' can only be used from host 'workstation'." 
-			// but this does not show up in P4Java as an error.  Until P4Java is fixed, the workaround is 
-			// to clear the host value.
-			p4workspace.setHost("");
-			
-			// 3c. Validate the workspace. Currently this only involves making sure project path is set to //...
-			// if more than one workspace view exists (mostly because we don't know when you'd want to use any
-			// project path other than that with multiple views, so haven't designed support for it. 
-			if (!updateView && p4workspace.getViews().size() > 1 && !projectPath.equals("//...")) { 
-				throw new PerforceException("the only project path currently supported when you have " +
-						"multiple workspace views is '//...'. Please revise your project path or P4 workspace " +
-						"accordingly.");
-			}
-			
-			// 4. Go and save the client for use when sync'ing in a few...
-			depot.getWorkspaces().saveWorkspace(p4workspace);
-			
-			// 5. Get the list of changes since the last time we looked...
-			int lastChange = getLastChange((Run)build.getPreviousBuild());
-			listener.getLogger().println("Last sync'd change: " + lastChange);
-			List<Changelist> changes = depot.getChanges().getChangelistsFromNumbers(depot.getChanges()
-					.getChangeNumbersTo(getChangesPaths(p4workspace), lastChange + 1));
-			if(changes.size() > 0) {
-				// save the last change we sync'd to for use when polling...
-				lastChange = changes.get(0).getChangeNumber();
-				PerforceChangeLogSet.saveToChangeLog(new FileOutputStream(changelogFile), changes);
-			} else if(!forceSync) {
-				listener.getLogger().println("No changes since last build.");
-				return createEmptyChangeLog(changelogFile, listener, "changelog");
-			}
-						
-			// 7. Now we can actually do the sync process...
-			long startTime = System.currentTimeMillis();
-			listener.getLogger().println("Sync'ing workspace to depot.");
-			
-			if(forceSync)
-				listener.getLogger().println("ForceSync flag is set, forcing: p4 sync " + projectPath);
-			depot.getWorkspaces().syncToHead(projectPath, forceSync);
-			
-			// reset one time use variables...
-			forceSync = false;
-			firstChange = -1;
-			
-			listener.getLogger().println("Sync complete, took " + (System.currentTimeMillis() - startTime) + " MS");
-			
-			// Add tagging action...
-			build.addAction(new PerforceTagAction(build, depot, lastChange, projectPath));
-			
-			// And I'm spent...
-			build.getParent().save();  // The pertinent things we want to save are the one time use variables...
-			
-			return true;
-			
-		} catch(PerforceException e) {
-			listener.getLogger().print("Caught Exception communicating with perforce. " + e.getMessage());
-			e.printStackTrace();
-			throw new IOException("Unable to communicate with perforce. " + e.getMessage());
-		} finally {
-			//Utils.cleanUp();
-		}
-	}
+        listener.getLogger().println("Performing sync with Perforce for: " + projectPath);
 
-	/** compute the path(s) that we search on to detect whether the project
+        final int previousChange = getLastChange(build.getPreviousBuild());
+        final FilePath changelogFile = new FilePath(changelog);
+
+        CheckoutResult result = workspace.act(new FilePath.FileCallable<CheckoutResult>() {
+            private int lastChange = previousChange;
+
+            public CheckoutResult invoke(File f, VirtualChannel channel) throws IOException {
+                try {
+                    // Check to make sure our client is mapped to the local hudson directory...
+                    // The problem is that perforce assumes a local directory on your computer maps
+                    // directly to the remote depot.  Unfortunately, this doesn't work with they way
+                    // Hudson sets up workspaces.  Not to worry!  What we do here is manipulate the
+                    // perforce client spec before we do a checkout.
+                    // An alternative would be to setup a single client for each build project.  While,
+                    // that is possible, I think its wasteful makes setup time for the user longer as
+                    // they have to go and create a workspace in perforce for each new project.
+
+                    // 1. Retrieve the client specified, throw an exception if we are configured wrong and the
+                    // client spec doesn't exist.
+                    Workspace p4workspace = getDepot().getWorkspaces().getWorkspace(p4Client);
+                    assert p4workspace != null;
+                    boolean creatingNewWorkspace = p4workspace.getAccess() == null
+                            || p4workspace.getAccess().length() == 0;
+
+                    // 2. Before we sync, we need to update the client spec (we do this on every build).
+                    // Here we are getting the local file path to the workspace.  We will use this as the "Root"
+                    // config property of the client spec. This tells perforce where to store the files on our local disk
+                    String localPath = getLocalPathName(f);
+                    listener.getLogger().println("Changing P4 Client Root to: " + localPath);
+                    p4workspace.setRoot(localPath);
+
+                    // 3. Optionally regenerate the workspace view.
+                    // We tell perforce to map the project contents directly (this drops off the project
+                    // name from the workspace. So instead of:
+                    //	[Hudson]/[job]/workspace/[Project]/contents
+                    // we get:
+                    //	[Hudson]/[job]/workspace/contents
+                    if (updateView || creatingNewWorkspace) {
+                        String view = projectPath + " //" + p4workspace.getName() + "/...";
+                        listener.getLogger().println("Changing P4 Client View to: " + view);
+                        p4workspace.clearViews();
+                        p4workspace.addView(view);
+                    }
+
+                    // 3b. There is a slight chance of failure with sync'ing to head.  I've experienced
+                    // a problem where a sync does not happen and there is no error message.  It is when
+                    // the host value of the workspace does not match up with the host hudson is working on.
+                    // Perforce reports an error like: "Client 'hudson' can only be used from host 'workstation'."
+                    // but this does not show up in P4Java as an error.  Until P4Java is fixed, the workaround is
+                    // to clear the host value.
+                    p4workspace.setHost("");
+
+                    // 3c. Validate the workspace. Currently this only involves making sure project path is set to //...
+                    // if more than one workspace view exists (mostly because we don't know when you'd want to use any
+                    // project path other than that with multiple views, so haven't designed support for it.
+                    if (!updateView && p4workspace.getViews().size() > 1 && !projectPath.equals("//...")) {
+                        throw new PerforceException("the only project path currently supported when you have " +
+                                "multiple workspace views is '//...'. Please revise your project path or P4 workspace " +
+                                "accordingly.");
+                    }
+
+                    // 4. Go and save the client for use when sync'ing in a few...
+                    depot.getWorkspaces().saveWorkspace(p4workspace);
+
+                    // 5. Get the list of changes since the last time we looked...
+                    listener.getLogger().println("Last sync'd change: " + lastChange);
+                    List<Changelist> changes = depot.getChanges().getChangelistsFromNumbers(depot.getChanges()
+                            .getChangeNumbersTo(getChangesPaths(p4workspace), lastChange + 1));
+                    if (changes.size() > 0) {
+                        // save the last change we sync'd to for use when polling...
+                        lastChange = changes.get(0).getChangeNumber();
+                        PerforceChangeLogSet.saveToChangeLog(changelogFile.write(), changes);
+                    } else if (!forceSync) {
+                        listener.getLogger().println("No changes since last build.");
+                        return new CheckoutResult(changelogFile.act(new FilePath.FileCallable<Boolean>() {
+                            public Boolean invoke(File f, VirtualChannel channel) throws IOException {
+                                return createEmptyChangeLog(f, listener, "changelog");
+                            }
+                        }), -1);
+                    }
+
+                    // 7. Now we can actually do the sync process...
+                    long startTime = System.currentTimeMillis();
+                    listener.getLogger().println("Sync'ing workspace to depot.");
+
+                    if (forceSync)
+                        listener.getLogger().println("ForceSync flag is set, forcing: p4 sync " + projectPath);
+                    depot.getWorkspaces().syncToHead(projectPath, forceSync);
+
+                    // reset one time use variables...
+                    forceSync = false;
+                    firstChange = -1;
+
+                    listener.getLogger().println("Sync complete, took " + (System.currentTimeMillis() - startTime) + " MS");
+
+                    return new CheckoutResult(true, lastChange);
+                } catch (PerforceException e) {
+                    listener.getLogger().print("Caught Exception communicating with perforce. " + e.getMessage());
+                    e.printStackTrace();
+                    throw new IOException("Unable to communicate with perforce. " + e.getMessage());
+                } catch (InterruptedException e) {
+                    listener.getLogger().println("Aborted");
+                    return null;
+                }
+            }
+        });
+
+        // Add tagging action...
+        if (result.lastChange > 0) {
+            build.addAction(new PerforceTagAction(build, depot, result.lastChange, projectPath));
+            // And I'm spent...
+            build.getParent().save();  // The pertinent things we want to save are the one time use variables...
+        }
+        return result.result;
+    }
+
+    /** compute the path(s) that we search on to detect whether the project
 	 *  has any unsynched changes
 	 * @param p4workspace the workspace
 	 * @return a string of path(s), e.g. //mymodule1/... //mymodule2/... 
