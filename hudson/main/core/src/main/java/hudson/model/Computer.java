@@ -21,6 +21,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.LogRecord;
+import org.kohsuke.stapler.export.Exported;
+import org.kohsuke.stapler.export.ExportedBean;
 
 /**
  * Represents a set of {@link Executor}s on the same computer.
@@ -45,6 +47,7 @@ import java.util.logging.LogRecord;
  *
  * @author Kohsuke Kawaguchi
  */
+@ExportedBean(defaultVisibility=2)
 public abstract class Computer extends AbstractModelObject {
     private final CopyOnWriteArrayList<Executor> executors = new CopyOnWriteArrayList<Executor>();
 
@@ -113,6 +116,7 @@ public abstract class Computer extends AbstractModelObject {
         return Hudson.getInstance().getSlave(nodeName);
     }
 
+    @Exported
     public boolean isOffline() {
         return temporarilyOffline || getChannel()==null;
     }
@@ -146,6 +150,7 @@ public abstract class Computer extends AbstractModelObject {
         Hudson.getInstance().getQueue().scheduleMaintenance();
     }
 
+    @Exported
     public String getIcon() {
         if(isOffline())
             return "computer-x.gif";
@@ -153,6 +158,7 @@ public abstract class Computer extends AbstractModelObject {
             return "computer.gif";
     }
 
+    @Exported
     public String getDisplayName() {
         return nodeName;
     }

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.io.IOException;
+import org.kohsuke.stapler.export.ExportedBean;
+import org.kohsuke.stapler.export.Exported;
 
 /**
  * Serves as the top of {@link Computer}s in the URL hierarchy.
@@ -17,6 +19,7 @@ import java.io.IOException;
  * 
  * @author Kohsuke Kawaguchi
  */
+@ExportedBean
 public final class ComputerSet implements ModelObject {
     private static volatile List<NodeMonitor> monitors = Collections.emptyList();
 
@@ -34,14 +37,17 @@ public final class ComputerSet implements ModelObject {
         }
     }
 
+    @Exported
     public String getDisplayName() {
         return "nodes";
     }
 
+    @Exported(name="monitor")
     public static List<NodeMonitor> get_monitors() {
         return monitors;
     }
 
+    @Exported(name="computer")
     public Computer[] get_all() {
         return Hudson.getInstance().getComputers();
     }
@@ -57,5 +63,9 @@ public final class ComputerSet implements ModelObject {
             c.launch();
         }
         rsp.sendRedirect(".");
+    }
+    
+    public Api getApi(final StaplerRequest req) {
+        return new Api(this);
     }
 }
