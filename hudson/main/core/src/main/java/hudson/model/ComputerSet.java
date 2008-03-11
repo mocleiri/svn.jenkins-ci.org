@@ -65,7 +65,7 @@ public final class ComputerSet implements ModelObject {
         rsp.sendRedirect(".");
     }
     
-    public Api getApi(final StaplerRequest req) {
+    public Api getApi() {
         return new Api(this);
     }
 }
