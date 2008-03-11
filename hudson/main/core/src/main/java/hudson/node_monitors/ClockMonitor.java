@@ -6,7 +6,6 @@ import hudson.util.ClockDifference;
 import org.kohsuke.stapler.StaplerRequest;
 
 import java.io.IOException;
-import org.kohsuke.stapler.export.Exported;
 
 /**
  * {@link NodeMonitor} that checks clock of {@link Node} to
