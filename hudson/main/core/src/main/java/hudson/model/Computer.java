@@ -47,7 +47,7 @@ import org.kohsuke.stapler.export.ExportedBean;
  *
  * @author Kohsuke Kawaguchi
  */
-@ExportedBean(defaultVisibility=2)
+@ExportedBean
 public abstract class Computer extends AbstractModelObject {
     private final CopyOnWriteArrayList<Executor> executors = new CopyOnWriteArrayList<Executor>();
 
@@ -124,6 +124,7 @@ public abstract class Computer extends AbstractModelObject {
     /**
      * Returns true if this computer is supposed to be launched via JNLP.
      */
+    @Exported
     public boolean isJnlpAgent() {
         return false;
     }
@@ -141,6 +142,7 @@ public abstract class Computer extends AbstractModelObject {
      *      This method is marked as deprecated to warn people when they
      *      accidentally call this method.
      */
+    @Exported
     public boolean isTemporarilyOffline() {
         return temporarilyOffline;
     }

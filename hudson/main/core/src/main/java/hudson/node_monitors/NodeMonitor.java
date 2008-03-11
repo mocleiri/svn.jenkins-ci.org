@@ -29,7 +29,7 @@ import org.kohsuke.stapler.export.ExportedBean;
  * @author Kohsuke Kawaguchi
  * @since 1.123
  */
-@ExportedBean(defaultVisibility=2)
+@ExportedBean
 public abstract class NodeMonitor implements ExtensionPoint, Describable<NodeMonitor> {
     /**
      * Returns the name of the column to be added to {@link ComputerSet} index.jelly.

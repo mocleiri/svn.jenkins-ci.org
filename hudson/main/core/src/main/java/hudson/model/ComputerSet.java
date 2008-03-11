@@ -42,12 +42,12 @@ public final class ComputerSet implements ModelObject {
         return "nodes";
     }
 
-    @Exported(name="monitor")
+    @Exported(name="monitor",inline=true)
     public static List<NodeMonitor> get_monitors() {
         return monitors;
     }
 
-    @Exported(name="computer")
+    @Exported(name="computer",inline=true)
     public Computer[] get_all() {
         return Hudson.getInstance().getComputers();
     }
