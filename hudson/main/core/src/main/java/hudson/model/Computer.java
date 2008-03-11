@@ -318,6 +318,10 @@ public abstract class Computer extends AbstractModelObject {
         rsp.forwardToPreviousPage(req);
     }
 
+    public Api getApi() {
+        return new Api(this);
+    }
+
     /**
      * Dumps the contents of the export table.
      */
