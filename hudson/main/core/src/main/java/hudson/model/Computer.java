@@ -1,6 +1,7 @@
 package hudson.model;
 
 import hudson.EnvVars;
+import hudson.node_monitors.NodeMonitor;
 import hudson.remoting.Channel;
 import hudson.remoting.VirtualChannel;
 import hudson.tasks.BuildWrapper;
@@ -17,6 +18,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -253,6 +255,17 @@ public abstract class Computer extends AbstractModelObject {
 
     public String getSearchUrl() {
         return "computer/"+nodeName;
+    }
+
+    /**
+     * Expose monitoring data for the remote API.
+     */
+    @Exported(inline=true)
+    public Map<String/*monitor name*/,Object> getMonitorData() {
+        Map<String,Object> r = new HashMap<String, Object>();
+        for (NodeMonitor monitor : NodeMonitor.getAll())
+            r.put(monitor.getClass().getName(),monitor.data(this));
+        return r;
     }
 
     /**
