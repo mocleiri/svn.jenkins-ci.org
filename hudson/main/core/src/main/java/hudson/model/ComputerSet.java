@@ -42,7 +42,6 @@ public final class ComputerSet implements ModelObject {
         return "nodes";
     }
 
-    @Exported(name="monitor",inline=true)
     public static List<NodeMonitor> get_monitors() {
         return monitors;
     }
