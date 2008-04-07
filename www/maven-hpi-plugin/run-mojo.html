@@ -9,10 +9,10 @@
 
 
 
-<html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Maven Hudson Plugin - 
-    maven-hpi-plugin - hpi:run</title>
+    <title>Maven Hudson Plugin - maven-hpi-plugin - hpi:run</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -40,17 +40,19 @@
     
   
   
+    
             <div class="xleft">
-        Last Published: 11/22/2007
+        Last Published: 2008-04-07
                       </div>
-            <div class="xright">      <a href="">Maven Hudson Plugin</a>
-          
+            <div class="xright">            <a href="">Maven Hudson Plugin</a>
+            
   
 
   
     
   
   
+    
   </div>
       <div class="clear">
         <hr/>
@@ -65,10 +67,9 @@
     
   
   
-                   <ul>
-          </ul>
-          <h5>Project Documentation</h5>
-        <ul>
+    
+                             <h5>Project Documentation</h5>
+            <ul>
               
                 
               
@@ -89,18 +90,18 @@
       
               
         <li class="collapsed">
-              <a href="project-info.html">Project Information</a>
-              </li>
+                    <a href="project-info.html">Project Information</a>
+                </li>
               
                 
               
       
               
         <li class="collapsed">
-              <a href="project-reports.html">Project Reports</a>
-              </li>
+                    <a href="project-reports.html">Project Reports</a>
+                </li>
           </ul>
-                                       <a href="http://maven.apache.org/" title="Built by Maven" id="poweredBy">
+                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
             <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
           </a>
                        
@@ -110,236 +111,257 @@
     
   
   
+    
         </div>
     </div>
     <div id="bodyColumn">
       <div id="contentBox">
-        
-  
-  
-    <a name="hpi:run"></a><div class="section"><h2>hpi:run</h2>
-      <p>Runs Hudson with the current plugin project.
+        <div class="section"><h2><a name="hpi:run"></a>
+hpi:run</h2>
+<p><strong>Full name</strong>:</p>
+<p>org.jvnet.hudson.tools:maven-hpi-plugin:1.20-SNAPSHOT:run</p>
+<p><strong>Description</strong>:</p>
+<p>Runs Hudson with the current plugin project. 
 
-<p>
-This only needs the source files to be compiled, so run in the compile phase.
+<p>This only needs the source files to be compiled, so run in the
+compile phase.</p>
+<p>To specify the HTTP port, use
+<tt>-Djetty.port=<i>PORT</i>
+</tt>
 </p>
+</p>
+<p><strong>Attributes</strong>:</p>
+<ul><li>Requires a Maven 2.0 project to be executed.</li>
+<li>Requires dependency resolution of artifacts in scope: <code>test</code>.</li>
+<li>Invokes the execution of the lifecycle phase <code>compile</code> prior to executing itself.</li>
+</ul>
+<div class="section"><h3><a name="Required_Parameters"></a>
+Required Parameters</h3>
+<table class="bodyTable"><tr class="a"><th>Name</th>
+<th>Type</th>
+<th>Since</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td><strong><a href="#contextPath">contextPath</a>
+</strong></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The context path for the webapp. Defaults to &quot;/&quot; </td>
+</tr>
+<tr class="a"><td><strong><a href="#localRepository">localRepository</a>
+</strong></td>
+<td><code>ArtifactRepository</code></td>
+<td><code>-</code></td>
+<td>(no description) </td>
+</tr>
+<tr class="b"><td><strong><a href="#scanIntervalSeconds">scanIntervalSeconds</a>
+</strong></td>
+<td><code>int</code></td>
+<td><code>-</code></td>
+<td>The interval in seconds to scan the webapp for changes and restart
+the context if necessary. Disabled by default. </td>
+</tr>
+<tr class="a"><td><strong><a href="#tmpDirectory">tmpDirectory</a>
+</strong></td>
+<td><code>File</code></td>
+<td><code>-</code></td>
+<td>The temporary directory to use for the webapp. Defaults to
+target/jetty-tmp </td>
+</tr>
+<tr class="b"><td><strong><a href="#warSourceDirectory">warSourceDirectory</a>
+</strong></td>
+<td><code>File</code></td>
+<td><code>-</code></td>
+<td>Single directory for extra files to include in the WAR. </td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="Optional_Parameters"></a>
+Optional Parameters</h3>
+<table class="bodyTable"><tr class="a"><th>Name</th>
+<th>Type</th>
+<th>Since</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td><strong><a href="#connectors">connectors</a>
+</strong></td>
+<td><code>Connector[]</code></td>
+<td><code>-</code></td>
+<td>List of connectors to use. If none are configured then we use a
+single SelectChannelConnector at port 8080 </td>
+</tr>
+<tr class="a"><td><strong><a href="#hudsonHome">hudsonHome</a>
+</strong></td>
+<td><code>File</code></td>
+<td><code>-</code></td>
+<td>Path to <tt>$HUDSON_HOME</tt>
+. The launched hudson will use this
+directory as the workspace. </td>
+</tr>
+<tr class="b"><td><strong><a href="#jettyConfig">jettyConfig</a>
+</strong></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>Location of a jetty xml configuration file whose contents will be
+applied before any plugin configuration. Optional. </td>
+</tr>
+<tr class="a"><td><strong><a href="#requestLog">requestLog</a>
+</strong></td>
+<td><code>RequestLog</code></td>
+<td><code>-</code></td>
+<td>A RequestLog implementation to use for the webapp at runtime.
+Optional. </td>
+</tr>
+<tr class="b"><td><strong><a href="#systemProperties">systemProperties</a>
+</strong></td>
+<td><code>SystemProperty[]</code></td>
+<td><code>-</code></td>
+<td>System properties to set before execution. Note that these
+properties will NOT override System properties that have been set
+on the command line or by the JVM. Optional. </td>
+</tr>
+<tr class="a"><td><strong><a href="#userRealms">userRealms</a>
+</strong></td>
+<td><code>UserRealm[]</code></td>
+<td><code>-</code></td>
+<td>List of security realms to set up. Optional. </td>
+</tr>
+<tr class="b"><td><strong><a href="#webApp">webApp</a>
+</strong></td>
+<td><code>File</code></td>
+<td><code>-</code></td>
+<td>The location of the war file. 
 
-<p>
-To specify the HTTP port, use <tt>-Djetty.port=<i>PORT</i></tt>
-</p></p>
-      <p><b>Mojo Attributes</b>:<ul>
-          <li>Requires a Maven 2.0 project to execute.</li>
-          <li>Requires dependency resolution of artifacts in scope: <code>test</code></li>
-          <li>Invokes the execution of the lifecycle phase <code>compile</code> prior to executing itself.</li>
-          </ul>
-        
-      <a name="Required Parameters"></a><div class="section"><h3>Required Parameters</h3>
-        <table class="bodyTable">
-          <tr class="a">
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            </tr>
-          <tr class="b">
-            <td><b><a href="#contextPath">contextPath</a></b></td>
-            <td><code>String</code></td>
-            <td>The context path for the webapp. Defaults to &quot;/&quot;</td>
-            </tr>
-          <tr class="a">
-            <td><b><a href="#localRepository">localRepository</a></b></td>
-            <td><code>ArtifactRepository</code></td>
-            <td>No description.</td>
-            </tr>
-          <tr class="b">
-            <td><b><a href="#scanIntervalSeconds">scanIntervalSeconds</a></b></td>
-            <td><code>int</code></td>
-            <td>The interval in seconds to scan the webapp for changes
-and restart the context if necessary. Disabled by default.</td>
-            </tr>
-          <tr class="a">
-            <td><b><a href="#tmpDirectory">tmpDirectory</a></b></td>
-            <td><code>File</code></td>
-            <td>The temporary directory to use for the webapp.
-Defaults to target/jetty-tmp</td>
-            </tr>
-          <tr class="b">
-            <td><b><a href="#warSourceDirectory">warSourceDirectory</a></b></td>
-            <td><code>File</code></td>
-            <td>Single directory for extra files to include in the WAR.</td>
-            </tr>
-          </table>
-        </div>
-      <a name="Optional Parameters"></a><div class="section"><h3>Optional Parameters</h3>
-        <table class="bodyTable">
-          <tr class="a">
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            </tr>
-          <tr class="b">
-            <td><b><a href="#artifactFactory">artifactFactory</a></b></td>
-            <td><code>ArtifactFactory</code></td>
-            <td>No description.</td>
-            </tr>
-          <tr class="a">
-            <td><b><a href="#artifactResolver">artifactResolver</a></b></td>
-            <td><code>ArtifactResolver</code></td>
-            <td>No description.</td>
-            </tr>
-          <tr class="b">
-            <td><b><a href="#connectors">connectors</a></b></td>
-            <td><code>Connector[]</code></td>
-            <td>List of connectors to use. If none are configured
-then we use a single SelectChannelConnector at port 8080</td>
-            </tr>
-          <tr class="a">
-            <td><b><a href="#hudsonHome">hudsonHome</a></b></td>
-            <td><code>File</code></td>
-            <td>Path to <tt>$HUDSON_HOME</tt>. The launched hudson will use this directory as the workspace. Default value is <code>./work</code>.</td>
-            </tr>
-          <tr class="b">
-            <td><b><a href="#jettyConfig">jettyConfig</a></b></td>
-            <td><code>String</code></td>
-            <td>Location of a jetty xml configuration file whose contents
-will be applied before any plugin configuration. Optional.</td>
-            </tr>
-          <tr class="a">
-            <td><b><a href="#requestLog">requestLog</a></b></td>
-            <td><code>RequestLog</code></td>
-            <td>A RequestLog implementation to use for the webapp at runtime.
-Optional.</td>
-            </tr>
-          <tr class="b">
-            <td><b><a href="#systemProperties">systemProperties</a></b></td>
-            <td><code>SystemProperty[]</code></td>
-            <td>System properties to set before execution.
-Note that these properties will NOT override System properties
-that have been set on the command line or by the JVM. Optional.</td>
-            </tr>
-          <tr class="a">
-            <td><b><a href="#userRealms">userRealms</a></b></td>
-            <td><code>UserRealm[]</code></td>
-            <td>List of security realms to set up. Optional.</td>
-            </tr>
-          <tr class="b">
-            <td><b><a href="#webApp">webApp</a></b></td>
-            <td><code>File</code></td>
-            <td>The location of the war file.
-
-
-Normally this should be left empty, in which case the plugin loads it from the repository.
-But this parameter allows that to be overwritten.
+<p>Normally this should be left empty, in which case the plugin
+loads it from the repository. But this parameter allows that to be
+overwritten.</p>
 </td>
-            </tr>
-          <tr class="a">
-            <td><b><a href="#webDefaultXml">webDefaultXml</a></b></td>
-            <td><code>File</code></td>
-            <td>A webdefault.xml file to use instead
-of the default for the webapp. Optional.</td>
-            </tr>
-          </table>
-        </div>
-      <a name="Parameter Details"></a><div class="section"><h3>Parameter Details</h3>
-        <b><a name="artifactFactory">artifactFactory</a></b>
-        <p>No Description.</p>
-        <ul>
-          <li><b>Type</b>: <code>org.apache.maven.artifact.factory.ArtifactFactory</code></li>
-          <li><b>Required</b>: <code>No</code></li>
-          </ul><hr></hr><b><a name="artifactResolver">artifactResolver</a></b>
-        No Description.
-        <ul>
-          <li><b>Type</b>: <code>org.apache.maven.artifact.resolver.ArtifactResolver</code></li>
-          <li><b>Required</b>: <code>No</code></li>
-          </ul><hr></hr><b><a name="connectors">connectors</a></b>
-        List of connectors to use. If none are configured
-then we use a single SelectChannelConnector at port 8080
-        <ul>
-          <li><b>Type</b>: <code>org.mortbay.jetty.Connector[]</code></li>
-          <li><b>Required</b>: <code>No</code></li>
-          </ul><hr></hr><b><a name="contextPath">contextPath</a></b>
-        The context path for the webapp. Defaults to &quot;/&quot;
-        <ul>
-          <li><b>Type</b>: <code>java.lang.String</code></li>
-          <li><b>Required</b>: <code>Yes</code></li>
-          <li><b>Expression</b>: <code>/</code></li>
-          </ul><hr></hr><b><a name="hudsonHome">hudsonHome</a></b>
-        Path to <tt>$HUDSON_HOME</tt>. The launched hudson will use this directory as the workspace.
-        <ul>
-          <li><b>Type</b>: <code>java.io.File</code></li>
-          <li><b>Required</b>: <code>No</code></li>
-          <li><b>Expression</b>: <code>${hudsonHome}</code></li>
-          <li><b>Default</b>: <code>./work</code></li>
-          </ul><hr></hr><b><a name="jettyConfig">jettyConfig</a></b>
-        Location of a jetty xml configuration file whose contents
-will be applied before any plugin configuration. Optional.
-        <ul>
-          <li><b>Type</b>: <code>java.lang.String</code></li>
-          <li><b>Required</b>: <code>No</code></li>
-          </ul><hr></hr><b><a name="localRepository">localRepository</a></b>
-        No Description.
-        <ul>
-          <li><b>Type</b>: <code>org.apache.maven.artifact.repository.ArtifactRepository</code></li>
-          <li><b>Required</b>: <code>Yes</code></li>
-          <li><b>Expression</b>: <code>${localRepository}</code></li>
-          </ul><hr></hr><b><a name="requestLog">requestLog</a></b>
-        A RequestLog implementation to use for the webapp at runtime.
-Optional.
-        <ul>
-          <li><b>Type</b>: <code>org.mortbay.jetty.RequestLog</code></li>
-          <li><b>Required</b>: <code>No</code></li>
-          </ul><hr></hr><b><a name="scanIntervalSeconds">scanIntervalSeconds</a></b>
-        The interval in seconds to scan the webapp for changes
-and restart the context if necessary. Disabled by default.
-        <ul>
-          <li><b>Type</b>: <code>int</code></li>
-          <li><b>Required</b>: <code>Yes</code></li>
-          <li><b>Expression</b>: <code>1</code></li>
-          </ul><hr></hr><b><a name="systemProperties">systemProperties</a></b>
-        System properties to set before execution.
-Note that these properties will NOT override System properties
-that have been set on the command line or by the JVM. Optional.
-        <ul>
-          <li><b>Type</b>: <code>org.mortbay.jetty.plugin.util.SystemProperty[]</code></li>
-          <li><b>Required</b>: <code>No</code></li>
-          </ul><hr></hr><b><a name="tmpDirectory">tmpDirectory</a></b>
-        The temporary directory to use for the webapp.
-Defaults to target/jetty-tmp
-        <ul>
-          <li><b>Type</b>: <code>java.io.File</code></li>
-          <li><b>Required</b>: <code>Yes</code></li>
-          <li><b>Expression</b>: <code>${project.build.directory}/work</code></li>
-          </ul><hr></hr><b><a name="userRealms">userRealms</a></b>
-        List of security realms to set up. Optional.
-        <ul>
-          <li><b>Type</b>: <code>org.mortbay.jetty.security.UserRealm[]</code></li>
-          <li><b>Required</b>: <code>No</code></li>
-          </ul><hr></hr><b><a name="warSourceDirectory">warSourceDirectory</a></b>
-        Single directory for extra files to include in the WAR.
-        <ul>
-          <li><b>Type</b>: <code>java.io.File</code></li>
-          <li><b>Required</b>: <code>Yes</code></li>
-          <li><b>Expression</b>: <code>${basedir}/src/main/webapp</code></li>
-          </ul><hr></hr><b><a name="webApp">webApp</a></b>
-        The location of the war file.
+</tr>
+<tr class="a"><td><strong><a href="#webDefaultXml">webDefaultXml</a>
+</strong></td>
+<td><code>File</code></td>
+<td><code>-</code></td>
+<td>A webdefault.xml file to use instead of the default for the webapp.
+Optional. </td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="Parameter_Details"></a>
+Parameter Details</h3>
+<p><strong><a name="connectors">connectors</a>
+:</strong></p>
+<p>List of connectors to use. If none are configured then we use a
+single SelectChannelConnector at port 8080</p>
+<ul><li><strong>Type</strong>: <code>org.mortbay.jetty.Connector[]</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+</ul>
+<hr />
+<p><strong><a name="contextPath">contextPath</a>
+:</strong></p>
+<p>The context path for the webapp. Defaults to &quot;/&quot;</p>
+<ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>Expression</strong>: <code>/</code></li>
+</ul>
+<hr />
+<p><strong><a name="hudsonHome">hudsonHome</a>
+:</strong></p>
+<p>Path to <tt>$HUDSON_HOME</tt>
+. The launched hudson will use this
+directory as the workspace.</p>
+<ul><li><strong>Type</strong>: <code>java.io.File</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>Expression</strong>: <code>${HUDSON_HOME}</code></li>
+</ul>
+<hr />
+<p><strong><a name="jettyConfig">jettyConfig</a>
+:</strong></p>
+<p>Location of a jetty xml configuration file whose contents will be
+applied before any plugin configuration. Optional.</p>
+<ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+</ul>
+<hr />
+<p><strong><a name="localRepository">localRepository</a>
+:</strong></p>
+<p>(no description)</p>
+<ul><li><strong>Type</strong>: <code>org.apache.maven.artifact.repository.ArtifactRepository</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>Expression</strong>: <code>${localRepository}</code></li>
+</ul>
+<hr />
+<p><strong><a name="requestLog">requestLog</a>
+:</strong></p>
+<p>A RequestLog implementation to use for the webapp at runtime.
+Optional.</p>
+<ul><li><strong>Type</strong>: <code>org.mortbay.jetty.RequestLog</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+</ul>
+<hr />
+<p><strong><a name="scanIntervalSeconds">scanIntervalSeconds</a>
+:</strong></p>
+<p>The interval in seconds to scan the webapp for changes and restart
+the context if necessary. Disabled by default.</p>
+<ul><li><strong>Type</strong>: <code>int</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>Expression</strong>: <code>1</code></li>
+</ul>
+<hr />
+<p><strong><a name="systemProperties">systemProperties</a>
+:</strong></p>
+<p>System properties to set before execution. Note that these
+properties will NOT override System properties that have been set
+on the command line or by the JVM. Optional.</p>
+<ul><li><strong>Type</strong>: <code>org.mortbay.jetty.plugin.util.SystemProperty[]</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+</ul>
+<hr />
+<p><strong><a name="tmpDirectory">tmpDirectory</a>
+:</strong></p>
+<p>The temporary directory to use for the webapp. Defaults to
+target/jetty-tmp</p>
+<ul><li><strong>Type</strong>: <code>java.io.File</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>Expression</strong>: <code>${project.build.directory}/work</code></li>
+</ul>
+<hr />
+<p><strong><a name="userRealms">userRealms</a>
+:</strong></p>
+<p>List of security realms to set up. Optional.</p>
+<ul><li><strong>Type</strong>: <code>org.mortbay.jetty.security.UserRealm[]</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+</ul>
+<hr />
+<p><strong><a name="warSourceDirectory">warSourceDirectory</a>
+:</strong></p>
+<p>Single directory for extra files to include in the WAR.</p>
+<ul><li><strong>Type</strong>: <code>java.io.File</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>Expression</strong>: <code>${basedir}/src/main/webapp</code></li>
+</ul>
+<hr />
+<p><strong><a name="webApp">webApp</a>
+:</strong></p>
+<p>The location of the war file. 
 
+<p>Normally this should be left empty, in which case the plugin
+loads it from the repository. But this parameter allows that to be
+overwritten.</p>
+</p>
+<ul><li><strong>Type</strong>: <code>java.io.File</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+</ul>
+<hr />
+<p><strong><a name="webDefaultXml">webDefaultXml</a>
+:</strong></p>
+<p>A webdefault.xml file to use instead of the default for the webapp.
+Optional.</p>
+<ul><li><strong>Type</strong>: <code>java.io.File</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+</ul>
+</div>
+</div>
 
-Normally this should be left empty, in which case the plugin loads it from the repository.
-But this parameter allows that to be overwritten.
-
-        <ul>
-          <li><b>Type</b>: <code>java.io.File</code></li>
-          <li><b>Required</b>: <code>No</code></li>
-          </ul><hr></hr><b><a name="webDefaultXml">webDefaultXml</a></b>
-        A webdefault.xml file to use instead
-of the default for the webapp. Optional.
-        <ul>
-          <li><b>Type</b>: <code>java.io.File</code></li>
-          <li><b>Required</b>: <code>No</code></li>
-          </ul>
-        </div>
-      </div>
-    
-  
       </div>
     </div>
     <div class="clear">
@@ -347,7 +369,7 @@ of the default for the webapp. Optional.
     </div>
     <div id="footer">
       <div class="xright">&#169;  
-          2007
+          2008
     
           
   
@@ -356,6 +378,7 @@ of the default for the webapp. Optional.
     
   
   
+    
   </div>
       <div class="clear">
         <hr/>
