@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.204 API)
+Functions (Hudson core 1.205 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-05">
+<META NAME="date" CONTENT="2008-04-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.204 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.204 API)";
+        parent.document.title="Functions (Hudson core 1.205 API)";
     }
 }
 </SCRIPT>
@@ -424,7 +424,18 @@ Utility functions used in views.
 <TD><CODE><B><A HREF="../hudson/Functions.html#getDiffString2(int)">getDiffString2</A></B>(int&nbsp;i)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/Functions.html#getDiffString2(int)"><CODE>getDiffString2(int)</CODE></A> that doesn't show anything for +/-0</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/Functions.html#getDiffString(int)"><CODE>getDiffString(int)</CODE></A> that doesn't show anything for +/-0</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getDiffString2(java.lang.String, int, java.lang.String)">getDiffString2</A></B>(java.lang.String&nbsp;prefix,
+               int&nbsp;i,
+               java.lang.String&nbsp;suffix)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/Functions.html#getDiffString2(int)"><CODE>getDiffString2(int)</CODE></A> that puts the result into prefix and suffix
+ if there's something to print</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -855,7 +866,23 @@ getDiffString2</H3>
 <PRE>
 public static java.lang.String <B>getDiffString2</B>(int&nbsp;i)</PRE>
 <DL>
-<DD><A HREF="../hudson/Functions.html#getDiffString2(int)"><CODE>getDiffString2(int)</CODE></A> that doesn't show anything for +/-0
+<DD><A HREF="../hudson/Functions.html#getDiffString(int)"><CODE>getDiffString(int)</CODE></A> that doesn't show anything for +/-0
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDiffString2(java.lang.String, int, java.lang.String)"><!-- --></A><H3>
+getDiffString2</H3>
+<PRE>
+public static java.lang.String <B>getDiffString2</B>(java.lang.String&nbsp;prefix,
+                                              int&nbsp;i,
+                                              java.lang.String&nbsp;suffix)</PRE>
+<DL>
+<DD><A HREF="../hudson/Functions.html#getDiffString2(int)"><CODE>getDiffString2(int)</CODE></A> that puts the result into prefix and suffix
+ if there's something to print
 <P>
 <DD><DL>
 </DL>

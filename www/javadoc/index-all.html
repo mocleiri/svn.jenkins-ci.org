@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.204 API)
+Index (Hudson core 1.205 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-05">
+<META NAME="date" CONTENT="2008-04-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.204 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.204 API)";
+        parent.document.title="Index (Hudson core 1.205 API)";
     }
 }
 </SCRIPT>
@@ -433,7 +433,11 @@ Static method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="
 Static variable in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/maven/AggregatableAction.html" title="interface in hudson.maven"><B>AggregatableAction</B></A> - Interface in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>Indicates that this <A HREF="./hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> for <A HREF="./hudson/maven/MavenBuild.html" title="class in hudson.maven"><CODE>MavenBuild</CODE></A> contributes
- an "aggregated" action to <A HREF="./hudson/maven/MavenBuild.html#getModuleSetBuild()"><CODE>its governing MavenModuleSetBuild</CODE></A>.<DT><A HREF="./hudson/tasks/test/AggregatedTestResultAction.html" title="class in hudson.tasks.test"><B>AggregatedTestResultAction</B></A> - Class in <A HREF="./hudson/tasks/test/package-summary.html">hudson.tasks.test</A><DD><A HREF="./hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test"><CODE>AbstractTestResultAction</CODE></A> that aggregates all the test results
+ an "aggregated" action to <A HREF="./hudson/maven/MavenBuild.html#getModuleSetBuild()"><CODE>its governing MavenModuleSetBuild</CODE></A>.<DT><A HREF="./hudson/maven/reporters/MavenFingerprinter.html#aggregate(hudson.maven.MavenModuleSetBuild)"><B>aggregate(MavenModuleSetBuild)</B></A> - 
+Static method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenFingerprinter.html" title="class in hudson.maven.reporters">MavenFingerprinter</A>
+<DD>Creates <A HREF="./hudson/tasks/Fingerprinter.FingerprintAction.html" title="class in hudson.tasks"><CODE>Fingerprinter.FingerprintAction</CODE></A> for <A HREF="./hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven"><CODE>MavenModuleSetBuild</CODE></A>
+ by aggregating all fingerprints from module builds.
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultAction.html" title="class in hudson.tasks.test"><B>AggregatedTestResultAction</B></A> - Class in <A HREF="./hudson/tasks/test/package-summary.html">hudson.tasks.test</A><DD><A HREF="./hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test"><CODE>AbstractTestResultAction</CODE></A> that aggregates all the test results
  from the corresponding <A HREF="./hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A>s.<DT><A HREF="./hudson/tasks/test/AggregatedTestResultAction.html#AggregatedTestResultAction(hudson.model.AbstractBuild)"><B>AggregatedTestResultAction(AbstractBuild)</B></A> - 
 Constructor for class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultAction</A>
 <DD>&nbsp;
@@ -443,6 +447,23 @@ Constructor for class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedT
 <DT><A HREF="./hudson/tasks/test/AggregatedTestResultAction.ChildReport.html" title="class in hudson.tasks.test"><B>AggregatedTestResultAction.ChildReport</B></A> - Class in <A HREF="./hudson/tasks/test/package-summary.html">hudson.tasks.test</A><DD>Data-binding bean for the remote API.<DT><A HREF="./hudson/tasks/test/AggregatedTestResultAction.ChildReport.html#AggregatedTestResultAction.ChildReport(hudson.model.AbstractBuild, hudson.tasks.test.AbstractTestResultAction)"><B>AggregatedTestResultAction.ChildReport(AbstractBuild&lt;?, ?&gt;, AbstractTestResultAction)</B></A> - 
 Constructor for class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultAction.ChildReport.html" title="class in hudson.tasks.test">AggregatedTestResultAction.ChildReport</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.html" title="class in hudson.tasks.test"><B>AggregatedTestResultPublisher</B></A> - Class in <A HREF="./hudson/tasks/test/package-summary.html">hudson.tasks.test</A><DD>Aggregates downstream test reports into a single consolidated report,
+ so that people can see the overall test results in one page
+ when tests are scattered across many different jobs.<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.html#AggregatedTestResultPublisher(java.lang.String)"><B>AggregatedTestResultPublisher(String)</B></A> - 
+Constructor for class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html" title="class in hudson.tasks.test"><B>AggregatedTestResultPublisher.DescriptorImpl</B></A> - Class in <A HREF="./hudson/tasks/test/package-summary.html">hudson.tasks.test</A><DD>&nbsp;<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html#AggregatedTestResultPublisher.DescriptorImpl()"><B>AggregatedTestResultPublisher.DescriptorImpl()</B></A> - 
+Constructor for class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.DescriptorImpl</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html" title="class in hudson.tasks.test"><B>AggregatedTestResultPublisher.TestResultAction</B></A> - Class in <A HREF="./hudson/tasks/test/package-summary.html">hudson.tasks.test</A><DD>Action that serves the aggregated record.<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#AggregatedTestResultPublisher.TestResultAction(java.lang.String, hudson.model.AbstractBuild)"><B>AggregatedTestResultPublisher.TestResultAction(String, AbstractBuild&lt;?, ?&gt;)</B></A> - 
+Constructor for class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.TestResultAction</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/Messages.html#AggregatedTestResultPublisher_DisplayName()"><B>AggregatedTestResultPublisher_DisplayName()</B></A> - 
+Static method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/Messages.html" title="class in hudson.tasks.test">Messages</A>
+<DD>Aggregate downstream test results
+<DT><A HREF="./hudson/tasks/test/Messages.html#AggregatedTestResultPublisher_Title()"><B>AggregatedTestResultPublisher_Title()</B></A> - 
+Static method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/Messages.html" title="class in hudson.tasks.test">Messages</A>
+<DD>Aggregated Test Result
 <DT><A HREF="./hudson/scm/EditType.html#ALL"><B>ALL</B></A> - 
 Static variable in class hudson.scm.<A HREF="./hudson/scm/EditType.html" title="class in hudson.scm">EditType</A>
 <DD>&nbsp;
@@ -2255,6 +2276,9 @@ Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/JUnitResultArch
 <DT><A HREF="./hudson/tasks/Shell.DescriptorImpl.html#doCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doCheck(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Shell.DescriptorImpl.html" title="class in hudson.tasks">Shell.DescriptorImpl</A>
 <DD>Check the existence of sh in the given location.
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html#doCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><B>doCheck(StaplerRequest, StaplerResponse, String)</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/triggers/TimerTrigger.DescriptorImpl.html#doCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doCheck(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.triggers.<A HREF="./hudson/triggers/TimerTrigger.DescriptorImpl.html" title="class in hudson.triggers">TimerTrigger.DescriptorImpl</A>
 <DD>Performs syntax check.
@@ -4321,6 +4345,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/Maven.html" title="class in
 <DT><A HREF="./hudson/tasks/Shell.html#getDescriptor()"><B>getDescriptor()</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Shell.html" title="class in hudson.tasks">Shell</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.html#getDescriptor()"><B>getDescriptor()</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/triggers/SCMTrigger.html#getDescriptor()"><B>getDescriptor()</B></A> - 
 Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.html" title="class in hudson.triggers">SCMTrigger</A>
 <DD>&nbsp;
@@ -4336,6 +4363,10 @@ Method in class hudson.org.apache.tools.ant.taskdefs.<A HREF="./hudson/org/apach
 <DT><A HREF="./hudson/security/ContainerAuthentication.html#getDetails()"><B>getDetails()</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/ContainerAuthentication.html" title="class in hudson.security">ContainerAuthentication</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#getDidntRun()"><B>getDidntRun()</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.TestResultAction</A>
+<DD>Gets the downstream projects that haven't run yet, but
+ expected to produce test results.
 <DT><A HREF="./hudson/node_monitors/ClockMonitor.html#getDifferenceFor(hudson.model.Computer)"><B>getDifferenceFor(Computer)</B></A> - 
 Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/ClockMonitor.html" title="class in hudson.node_monitors">ClockMonitor</A>
 <DD>&nbsp;
@@ -4375,7 +4406,11 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
  like "-5", "+/-0", "+3".
 <DT><A HREF="./hudson/Functions.html#getDiffString2(int)"><B>getDiffString2(int)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
-<DD><A HREF="./hudson/Functions.html#getDiffString2(int)"><CODE>Functions.getDiffString2(int)</CODE></A> that doesn't show anything for +/-0
+<DD><A HREF="./hudson/Functions.html#getDiffString(int)"><CODE>Functions.getDiffString(int)</CODE></A> that doesn't show anything for +/-0
+<DT><A HREF="./hudson/Functions.html#getDiffString2(java.lang.String, int, java.lang.String)"><B>getDiffString2(String, int, String)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
+<DD><A HREF="./hudson/Functions.html#getDiffString2(int)"><CODE>Functions.getDiffString2(int)</CODE></A> that puts the result into prefix and suffix
+ if there's something to print
 <DT><A HREF="./hudson/Util.html#getDigestOf(java.io.InputStream)"><B>getDigestOf(InputStream)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
 <DD>Computes MD5 digest of the given input stream.
@@ -4610,6 +4645,12 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/Shell.DescriptorImpl.html" 
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/test/AbstractTestResultAction.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test">AbstractTestResultAction</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html#getDisplayName()"><B>getDisplayName()</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.DescriptorImpl</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#getDisplayName()"><B>getDisplayName()</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.TestResultAction</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/test/TestResultProjectAction.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/TestResultProjectAction.html" title="class in hudson.tasks.test">TestResultProjectAction</A>
@@ -4859,6 +4900,9 @@ Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AbstractTestResul
 <DT><A HREF="./hudson/tasks/test/AggregatedTestResultAction.html#getFailCount()"><B>getFailCount()</B></A> - 
 Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultAction</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#getFailCount()"><B>getFailCount()</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.TestResultAction</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/PluginManager.html#getFailedPlugins()"><B>getFailedPlugins()</B></A> - 
 Method in class hudson.<A HREF="./hudson/PluginManager.html" title="class in hudson">PluginManager</A>
 <DD>&nbsp;
@@ -5084,6 +5128,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/Maven.DescriptorImpl.html" 
 <DT><A HREF="./hudson/tasks/Shell.DescriptorImpl.html#getHelpFile()"><B>getHelpFile()</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Shell.DescriptorImpl.html" title="class in hudson.tasks">Shell.DescriptorImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html#getHelpFile()"><B>getHelpFile()</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html#getHelpFile()"><B>getHelpFile()</B></A> - 
 Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A>
 <DD>&nbsp;
@@ -5209,6 +5256,9 @@ Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenAg
 <DT><A HREF="./hudson/maven/reporters/SurefireAggregatedReport.html#getIndividualActionType()"><B>getIndividualActionType()</B></A> - 
 Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/SurefireAggregatedReport.html" title="class in hudson.maven.reporters">SurefireAggregatedReport</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#getIndividuals()"><B>getIndividuals()</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.TestResultAction</A>
+<DD>Returns the individual test results that are aggregated.
 <DT><A HREF="./hudson/util/StreamResource.html#getInputStream()"><B>getInputStream()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/StreamResource.html" title="class in hudson.util">StreamResource</A>
 <DD>&nbsp;
@@ -5349,6 +5399,9 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
 <DT><A HREF="./hudson/model/Fingerprint.html#getJobs()"><B>getJobs()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.html" title="class in hudson.model">Fingerprint</A>
 <DD>Gets the sorted list of job names where this jar is used.
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#getJobs()"><B>getJobs()</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.TestResultAction</A>
+<DD>Gets the jobs to be monitored.
 <DT><A HREF="./hudson/widgets/HistoryWidget.Adapter.html#getKey(T)"><B>getKey(T)</B></A> - 
 Method in interface hudson.widgets.<A HREF="./hudson/widgets/HistoryWidget.Adapter.html" title="interface in hudson.widgets">HistoryWidget.Adapter</A>
 <DD>&nbsp;
@@ -5860,6 +5913,9 @@ Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/ClassResult.htm
 <DT><A HREF="./hudson/tasks/junit/SuiteResult.html#getParent()"><B>getParent()</B></A> - 
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/SuiteResult.html" title="class in hudson.tasks.junit">SuiteResult</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/matrix/MatrixRun.html#getParentBuild()"><B>getParentBuild()</B></A> - 
+Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixRun.html" title="class in hudson.matrix">MatrixRun</A>
+<DD>Gets the <A HREF="./hudson/matrix/MatrixBuild.html" title="class in hudson.matrix"><CODE>MatrixBuild</CODE></A> that has the same build number.
 <DT><A HREF="./hudson/maven/MavenBuild.html#getParentBuild()"><B>getParentBuild()</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>
 <DD>Gets the <A HREF="./hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven"><CODE>MavenModuleSetBuild</CODE></A> that has the same build number.
@@ -6192,6 +6248,9 @@ Method in class hudson.maven.<A HREF="./hudson/maven/ExecutedMojo.html" title="c
 <DT><A HREF="./hudson/tasks/Fingerprinter.html#getRecordBuildArtifacts()"><B>getRecordBuildArtifacts()</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Fingerprinter.html" title="class in hudson.tasks">Fingerprinter</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/Fingerprinter.FingerprintAction.html#getRecords()"><B>getRecords()</B></A> - 
+Method in class hudson.tasks.<A HREF="./hudson/tasks/Fingerprinter.FingerprintAction.html" title="class in hudson.tasks">Fingerprinter.FingerprintAction</A>
+<DD>Obtains the raw data.
 <DT><A HREF="./hudson/model/AbstractProject.html#getRelationship(hudson.model.AbstractProject)"><B>getRelationship(AbstractProject)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Gets the dependency relationship map between this project (as the source)
@@ -6271,6 +6330,9 @@ Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AbstractTestResul
 <DD>Returns the object that represents the actual test result.
 <DT><A HREF="./hudson/tasks/test/AggregatedTestResultAction.html#getResult()"><B>getResult()</B></A> - 
 Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultAction</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#getResult()"><B>getResult()</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.TestResultAction</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/scm/CVSChangeLogSet.File.html#getRevision()"><B>getRevision()</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/CVSChangeLogSet.File.html" title="class in hudson.scm">CVSChangeLogSet.File</A>
@@ -6715,6 +6777,9 @@ Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AbstractTestResul
 <DT><A HREF="./hudson/tasks/test/AggregatedTestResultAction.html#getTotalCount()"><B>getTotalCount()</B></A> - 
 Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultAction</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#getTotalCount()"><B>getTotalCount()</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.TestResultAction</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/DependencyGraph.html#getTransitiveDownstream(hudson.model.AbstractProject)"><B>getTransitiveDownstream(AbstractProject)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/DependencyGraph.html" title="class in hudson.model">DependencyGraph</A>
 <DD>Gets all the direct and indirect downstream dependencies of the given project.
@@ -6859,6 +6924,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/MailMessageIdAction.html" t
 <DT><A HREF="./hudson/tasks/test/AbstractTestResultAction.html#getUrlName()"><B>getUrlName()</B></A> - 
 Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test">AbstractTestResultAction</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#getUrlName()"><B>getUrlName()</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.TestResultAction</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tasks/test/TestResultProjectAction.html#getUrlName()"><B>getUrlName()</B></A> - 
 Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/TestResultProjectAction.html" title="class in hudson.tasks.test">TestResultProjectAction</A>
 <DD>&nbsp;
@@ -6966,6 +7034,12 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
 <DD>When <A HREF="./hudson/model/Queue.Task.html#isBuildBlocked()"><CODE>Queue.Task.isBuildBlocked()</CODE></A> is true, this method returns
  human readable description of why the build is blocked.
+<DT><A HREF="./hudson/matrix/MatrixRun.html#getWhyKeepLog()"><B>getWhyKeepLog()</B></A> - 
+Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixRun.html" title="class in hudson.matrix">MatrixRun</A>
+<DD>If the parent <A HREF="./hudson/matrix/MatrixRun.html" title="class in hudson.matrix"><CODE>MatrixRun</CODE></A> is kept, keep this record, too.
+<DT><A HREF="./hudson/maven/MavenBuild.html#getWhyKeepLog()"><B>getWhyKeepLog()</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>
+<DD>If the parent <A HREF="./hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven"><CODE>MavenModuleSetBuild</CODE></A> is kept, keep this record, too.
 <DT><A HREF="./hudson/model/AbstractBuild.html#getWhyKeepLog()"><B>getWhyKeepLog()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>
 <DD>&nbsp;
@@ -7384,6 +7458,9 @@ Static variable in class hudson.security.<A HREF="./hudson/security/HudsonPrivat
 <DT><A HREF="./hudson/tasks/labelers/OSLabeler.html#INSTANCE"><B>INSTANCE</B></A> - 
 Static variable in class hudson.tasks.labelers.<A HREF="./hudson/tasks/labelers/OSLabeler.html" title="class in hudson.tasks.labelers">OSLabeler</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html#INSTANCE"><B>INSTANCE</B></A> - 
+Static variable in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/CaseInsensitiveComparator.html#INSTANCE"><B>INSTANCE</B></A> - 
 Static variable in class hudson.util.<A HREF="./hudson/util/CaseInsensitiveComparator.html" title="class in hudson.util">CaseInsensitiveComparator</A>
 <DD>&nbsp;
@@ -7496,6 +7573,9 @@ Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/JUnitResultArch
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/Mailer.DescriptorImpl.html#isApplicable(java.lang.Class)"><B>isApplicable(Class&lt;? extends AbstractProject&gt;)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Mailer.DescriptorImpl.html" title="class in hudson.tasks">Mailer.DescriptorImpl</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html#isApplicable(java.lang.Class)"><B>isApplicable(Class&lt;? extends AbstractProject&gt;)</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.DescriptorImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html#isApplicable(hudson.model.Item)"><B>isApplicable(Item)</B></A> - 
 Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A>
@@ -7962,6 +8042,9 @@ Constructor for class hudson.model.<A HREF="./hudson/model/JobPropertyDescriptor
 <DT><A HREF="./hudson/model/Jobs.html" title="class in hudson.model"><B>Jobs</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>List of all installed <A HREF="./hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A> types.<DT><A HREF="./hudson/model/Jobs.html#Jobs()"><B>Jobs()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Jobs.html" title="class in hudson.model">Jobs</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.html#jobs"><B>jobs</B></A> - 
+Variable in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher</A>
+<DD>Jobs to aggregate.
 <DT><A HREF="./hudson/Proc.html#join()"><B>join()</B></A> - 
 Method in class hudson.<A HREF="./hudson/Proc.html" title="class in hudson">Proc</A>
 <DD>Waits for the completion of the process.
@@ -8003,6 +8086,9 @@ Static method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/Messages
 <DT><A HREF="./hudson/model/Run.html#keepLog()"><B>keepLog()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>Marks this build to keep the log.
+<DT><A HREF="./hudson/model/Run.html#keepLog(boolean)"><B>keepLog(boolean)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/ItemGroupMixIn.html#KEYED_BY_NAME"><B>KEYED_BY_NAME</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/ItemGroupMixIn.html" title="class in hudson.model">ItemGroupMixIn</A>
 <DD><A HREF="./hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> -> name function.
@@ -8276,7 +8362,7 @@ Static variable in class hudson.model.listeners.<A HREF="./hudson/model/listener
 <DD>List of registered listeners.
 <DT><A HREF="./hudson/model/Fingerprint.RangeSet.html#listNumbers()"><B>listNumbers()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A>
-<DD>List all numbers in this range set.
+<DD>List all numbers in this range set, in the ascending order.
 <DT><A HREF="./hudson/model/Fingerprint.RangeSet.html#listNumbersReverse()"><B>listNumbersReverse()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A>
 <DD>List all numbers in this range set in the descending order.
@@ -8676,6 +8762,9 @@ Constructor for class hudson.maven.<A HREF="./hudson/maven/MavenBuild.html" titl
 <DT><A HREF="./hudson/maven/Messages.html#MavenBuild_FailedEarlier()"><B>MavenBuild_FailedEarlier()</B></A> - 
 Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
 <DD>Build failed before it gets to this module
+<DT><A HREF="./hudson/maven/Messages.html#MavenBuild_KeptBecauseOfParent(java.lang.Object)"><B>MavenBuild_KeptBecauseOfParent(Object)</B></A> - 
+Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
+<DD>Kept because {0} is kept
 <DT><A HREF="./hudson/maven/Messages.html#MavenBuild_Triggering(java.lang.Object)"><B>MavenBuild_Triggering(Object)</B></A> - 
 Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
 <DD>Triggering a new build of {0}
@@ -8736,7 +8825,7 @@ Constructor for class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" 
 <DD>&nbsp;
 <DT><A HREF="./hudson/maven/MavenModuleSet.DescriptorImpl.html" title="class in hudson.maven"><B>MavenModuleSet.DescriptorImpl</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>&nbsp;<DT><A HREF="./hudson/maven/Messages.html#MavenModuleSet_DiplayName()"><B>MavenModuleSet_DiplayName()</B></A> - 
 Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
-<DD>Build a maven2 project (beta)
+<DD>Build a maven2 project
 <DT><A HREF="./hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven"><B>MavenModuleSetBuild</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD><A HREF="./hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A> for <A HREF="./hudson/maven/MavenModuleSet.html" title="class in hudson.maven"><CODE>MavenModuleSet</CODE></A>.<DT><A HREF="./hudson/maven/MavenModuleSetBuild.html#MavenModuleSetBuild(hudson.maven.MavenModuleSet)"><B>MavenModuleSetBuild(MavenModuleSet)</B></A> - 
 Constructor for class hudson.maven.<A HREF="./hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven">MavenModuleSetBuild</A>
 <DD>&nbsp;
@@ -9132,6 +9221,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/Maven.DescriptorImpl.html" 
 <DT><A HREF="./hudson/tasks/Shell.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><B>newInstance(StaplerRequest, JSONObject)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Shell.DescriptorImpl.html" title="class in hudson.tasks">Shell.DescriptorImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><B>newInstance(StaplerRequest, JSONObject)</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest)"><B>newInstance(StaplerRequest)</B></A> - 
 Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A>
 <DD>&nbsp;
@@ -9522,6 +9614,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/Mailer.html" title="class i
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/Maven.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><B>perform(AbstractBuild&lt;?, ?&gt;, Launcher, BuildListener)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Maven.html" title="class in hudson.tasks">Maven</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><B>perform(AbstractBuild&lt;?, ?&gt;, Launcher, BuildListener)</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildStep(hudson.model.BuildListener, java.util.Map, boolean)"><B>performAllBuildStep(BuildListener, Map&lt;?, ? extends BuildStep&gt;, boolean)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractBuild.AbstractRunner.html" title="class in hudson.model">AbstractBuild.AbstractRunner</A>
@@ -12105,6 +12200,12 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/tasks/test/Messages.html#_AbstractTestResultAction_getDisplayName()"><B>_AbstractTestResultAction_getDisplayName()</B></A> - 
 Static method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/Messages.html" title="class in hudson.tasks.test">Messages</A>
 <DD>Test Result
+<DT><A HREF="./hudson/tasks/test/Messages.html#_AggregatedTestResultPublisher_DisplayName()"><B>_AggregatedTestResultPublisher_DisplayName()</B></A> - 
+Static method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/Messages.html" title="class in hudson.tasks.test">Messages</A>
+<DD>Aggregate downstream test results
+<DT><A HREF="./hudson/tasks/test/Messages.html#_AggregatedTestResultPublisher_Title()"><B>_AggregatedTestResultPublisher_Title()</B></A> - 
+Static method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/Messages.html" title="class in hudson.tasks.test">Messages</A>
+<DD>Aggregated Test Result
 <DT><A HREF="./hudson/tasks/Messages.html#_Ant_DisplayName()"><B>_Ant_DisplayName()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>Invoke Ant
@@ -12456,6 +12557,9 @@ Static method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/
 <DT><A HREF="./hudson/maven/Messages.html#_MavenBuild_FailedEarlier()"><B>_MavenBuild_FailedEarlier()</B></A> - 
 Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
 <DD>Build failed before it gets to this module
+<DT><A HREF="./hudson/maven/Messages.html#_MavenBuild_KeptBecauseOfParent(java.lang.Object)"><B>_MavenBuild_KeptBecauseOfParent(Object)</B></A> - 
+Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
+<DD>Kept because {0} is kept
 <DT><A HREF="./hudson/maven/Messages.html#_MavenBuild_Triggering(java.lang.Object)"><B>_MavenBuild_Triggering(Object)</B></A> - 
 Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
 <DD>Triggering a new build of {0}
@@ -12491,7 +12595,7 @@ Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title
 <DD>Module
 <DT><A HREF="./hudson/maven/Messages.html#_MavenModuleSet_DiplayName()"><B>_MavenModuleSet_DiplayName()</B></A> - 
 Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
-<DD>Build a maven2 project (beta)
+<DD>Build a maven2 project
 <DT><A HREF="./hudson/maven/Messages.html#_MavenModuleSetBuild_DiscoveredModule(java.lang.Object, java.lang.Object)"><B>_MavenModuleSetBuild_DiscoveredModule(Object, Object)</B></A> - 
 Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
 <DD>Discovered a new module {0} {1}

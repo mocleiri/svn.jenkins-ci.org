@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Run (Hudson core 1.204 API)
+Run (Hudson core 1.205 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-05">
+<META NAME="date" CONTENT="2008-04-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson core 1.204 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson core 1.204 API)";
+        parent.document.title="Run (Hudson core 1.205 API)";
     }
 }
 </SCRIPT>
@@ -779,6 +779,14 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks this build to keep the log.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#keepLog(boolean)">keepLog</A></B>(boolean&nbsp;newValue)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2038,11 +2046,28 @@ public void <B>doToggleLogKeep</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <A NAME="keepLog()"><!-- --></A><H3>
 keepLog</H3>
 <PRE>
-public void <B>keepLog</B>()
-             throws java.io.IOException</PRE>
+public final void <B>keepLog</B>()
+                   throws java.io.IOException</PRE>
 <DL>
 <DD>Marks this build to keep the log.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="keepLog(boolean)"><!-- --></A><H3>
+keepLog</H3>
+<PRE>
+public void <B>keepLog</B>(boolean&nbsp;newValue)
+             throws java.io.IOException</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

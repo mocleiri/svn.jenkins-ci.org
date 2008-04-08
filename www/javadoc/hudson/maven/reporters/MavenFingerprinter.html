@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MavenFingerprinter (Hudson core 1.204 API)
+MavenFingerprinter (Hudson core 1.205 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-05">
+<META NAME="date" CONTENT="2008-04-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenFingerprinter (Hudson core 1.204 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenFingerprinter (Hudson core 1.204 API)";
+        parent.document.title="MavenFingerprinter (Hudson core 1.205 API)";
     }
 }
 </SCRIPT>
@@ -158,6 +158,15 @@ Records fingerprints of the builds to keep track of dependencies.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenFingerprinter.html#aggregate(hudson.maven.MavenModuleSetBuild)">aggregate</A></B>(<A HREF="../../../hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven">MavenModuleSetBuild</A>&nbsp;mmsb)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates <A HREF="../../../hudson/tasks/Fingerprinter.FingerprintAction.html" title="class in hudson.tasks"><CODE>Fingerprinter.FingerprintAction</CODE></A> for <A HREF="../../../hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven"><CODE>MavenModuleSetBuild</CODE></A>
+ by aggregating all fingerprints from module builds.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -351,6 +360,23 @@ public <A HREF="../../../hudson/maven/reporters/MavenFingerprinter.DescriptorImp
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="aggregate(hudson.maven.MavenModuleSetBuild)"><!-- --></A><H3>
+aggregate</H3>
+<PRE>
+public static void <B>aggregate</B>(<A HREF="../../../hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven">MavenModuleSetBuild</A>&nbsp;mmsb)
+                      throws java.io.IOException</PRE>
+<DL>
+<DD>Creates <A HREF="../../../hudson/tasks/Fingerprinter.FingerprintAction.html" title="class in hudson.tasks"><CODE>Fingerprinter.FingerprintAction</CODE></A> for <A HREF="../../../hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven"><CODE>MavenModuleSetBuild</CODE></A>
+ by aggregating all fingerprints from module builds.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
