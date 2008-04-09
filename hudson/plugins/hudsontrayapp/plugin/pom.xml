@@ -21,4 +21,181 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+                            <overWriteReleases>true</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <stripVersion>true</stripVersion>
+                            <includeGroupIds>org.jvnet.hudson.plugins.hudsontrayapp</includeGroupIds>
+                            <includeAtrifactIds>client</includeAtrifactIds>
+                            <includeScope>provided</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <move file="${project.build.directory}/${project.build.finalName}/client.jar"
+                                      tofile="${project.build.directory}/${project.build.finalName}/HudsonTrayApp.jar" 
+                                      overwrite="true" />
+                                <mkdir dir="${project.build.directory}/${project.build.finalName}/win" />
+                                <mkdir dir="${project.build.directory}/${project.build.finalName}/win/x86" />
+                                <mkdir dir="${project.build.directory}/${project.build.finalName}/lin" />
+                                <mkdir dir="${project.build.directory}/${project.build.finalName}/lin/x86" />
+                                <mkdir dir="${project.build.directory}/${project.build.finalName}/sun" />
+                                <mkdir dir="${project.build.directory}/${project.build.finalName}/sun/x86" />
+                                <mkdir dir="${project.build.directory}/${project.build.finalName}/sun/sparc" />
+                                <jar destfile="${project.build.directory}/${project.build.finalName}/win/x86/jdic-native.jar" basedir="${project.basedir}/../jdic-0.9.1-bin-cross-platform/windows/x86"/>
+                                <jar destfile="${project.build.directory}/${project.build.finalName}/lin/x86/jdic-native.jar" basedir="${project.basedir}/../jdic-0.9.1-bin-cross-platform/linux/x86"/>
+                                <jar destfile="${project.build.directory}/${project.build.finalName}/sun/x86/jdic-native.jar" basedir="${project.basedir}/../jdic-0.9.1-bin-cross-platform/sunos/x86"/>
+                                <jar destfile="${project.build.directory}/${project.build.finalName}/sun/sparc/jdic-native.jar" basedir="${project.basedir}/../jdic-0.9.1-bin-cross-platform/sunos/sparc"/>
+                                <copy file="${project.basedir}/../jdic-0.9.1-bin-cross-platform/jdic.jar" todir="${project.build.directory}/${project.build.finalName}" />
+                                <copy file="${project.basedir}/../jdic-0.9.1-bin-cross-platform/windows/jdic_stub.jar" todir="${project.build.directory}/${project.build.finalName}/win" />
+                                <copy file="${project.basedir}/../jdic-0.9.1-bin-cross-platform/linux/jdic_stub.jar" todir="${project.build.directory}/${project.build.finalName}/lin" />
+                                <copy file="${project.basedir}/../jdic-0.9.1-bin-cross-platform/sunos/jdic_stub.jar" todir="${project.build.directory}/${project.build.finalName}/sun" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sign-jar1</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <keystore>${project.basedir}/../client/.trayappkeystore</keystore>
+                            <keypass>hudsontrayappkeypass</keypass>
+                            <storepass>hudsontrayappstorepass</storepass>
+                            <alias>HudsonTrayApp</alias>
+                            <jarPath>${project.build.directory}/${project.build.finalName}/jdic.jar</jarPath>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>sign-jar2</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <keystore>${project.basedir}/../client/.trayappkeystore</keystore>
+                            <keypass>hudsontrayappkeypass</keypass>
+                            <storepass>hudsontrayappstorepass</storepass>
+                            <alias>HudsonTrayApp</alias>
+                            <jarPath>${project.build.directory}/${project.build.finalName}/win/jdic_stub.jar</jarPath>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>sign-jar3</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <keystore>${project.basedir}/../client/.trayappkeystore</keystore>
+                            <keypass>hudsontrayappkeypass</keypass>
+                            <storepass>hudsontrayappstorepass</storepass>
+                            <alias>HudsonTrayApp</alias>
+                            <jarPath>${project.build.directory}/${project.build.finalName}/lin/jdic_stub.jar</jarPath>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>sign-jar4</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <keystore>${project.basedir}/../client/.trayappkeystore</keystore>
+                            <keypass>hudsontrayappkeypass</keypass>
+                            <storepass>hudsontrayappstorepass</storepass>
+                            <alias>HudsonTrayApp</alias>
+                            <jarPath>${project.build.directory}/${project.build.finalName}/sun/jdic_stub.jar</jarPath>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>sign-jar5</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <keystore>${project.basedir}/../client/.trayappkeystore</keystore>
+                            <keypass>hudsontrayappkeypass</keypass>
+                            <storepass>hudsontrayappstorepass</storepass>
+                            <alias>HudsonTrayApp</alias>
+                            <jarPath>${project.build.directory}/${project.build.finalName}/win/x86/jdic-native.jar</jarPath>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>sign-jar6</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <keystore>${project.basedir}/../client/.trayappkeystore</keystore>
+                            <keypass>hudsontrayappkeypass</keypass>
+                            <storepass>hudsontrayappstorepass</storepass>
+                            <alias>HudsonTrayApp</alias>
+                            <jarPath>${project.build.directory}/${project.build.finalName}/lin/x86/jdic-native.jar</jarPath>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>sign-jar7</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <keystore>${project.basedir}/../client/.trayappkeystore</keystore>
+                            <keypass>hudsontrayappkeypass</keypass>
+                            <storepass>hudsontrayappstorepass</storepass>
+                            <alias>HudsonTrayApp</alias>
+                            <jarPath>${project.build.directory}/${project.build.finalName}/sun/x86/jdic-native.jar</jarPath>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>sign-jar8</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <keystore>${project.basedir}/../client/.trayappkeystore</keystore>
+                            <keypass>hudsontrayappkeypass</keypass>
+                            <storepass>hudsontrayappstorepass</storepass>
+                            <alias>HudsonTrayApp</alias>
+                            <jarPath>${project.build.directory}/${project.build.finalName}/sun/sparc/jdic-native.jar</jarPath>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
