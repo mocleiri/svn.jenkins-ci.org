@@ -34,7 +34,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+                            <outputDirectory>${project.basedir}/src/main/webapp/</outputDirectory>
                             <overWriteReleases>true</overWriteReleases>
                             <overWriteSnapshots>true</overWriteSnapshots>
                             <stripVersion>true</stripVersion>
@@ -56,24 +56,40 @@
                         </goals>
                         <configuration>
                             <tasks>
-                                <move file="${project.build.directory}/${project.build.finalName}/client.jar"
-                                      tofile="${project.build.directory}/${project.build.finalName}/HudsonTrayApp.jar" 
+                                <move file="${project.basedir}/src/main/webapp/client.jar"
+                                      tofile="${project.basedir}/src/main/webapp/HudsonTrayApp.jar"
                                       overwrite="true" />
-                                <mkdir dir="${project.build.directory}/${project.build.finalName}/win" />
-                                <mkdir dir="${project.build.directory}/${project.build.finalName}/win/x86" />
-                                <mkdir dir="${project.build.directory}/${project.build.finalName}/lin" />
-                                <mkdir dir="${project.build.directory}/${project.build.finalName}/lin/x86" />
-                                <mkdir dir="${project.build.directory}/${project.build.finalName}/sun" />
-                                <mkdir dir="${project.build.directory}/${project.build.finalName}/sun/x86" />
-                                <mkdir dir="${project.build.directory}/${project.build.finalName}/sun/sparc" />
-                                <jar destfile="${project.build.directory}/${project.build.finalName}/win/x86/jdic-native.jar" basedir="${project.basedir}/../jdic-0.9.1-bin-cross-platform/windows/x86"/>
-                                <jar destfile="${project.build.directory}/${project.build.finalName}/lin/x86/jdic-native.jar" basedir="${project.basedir}/../jdic-0.9.1-bin-cross-platform/linux/x86"/>
-                                <jar destfile="${project.build.directory}/${project.build.finalName}/sun/x86/jdic-native.jar" basedir="${project.basedir}/../jdic-0.9.1-bin-cross-platform/sunos/x86"/>
-                                <jar destfile="${project.build.directory}/${project.build.finalName}/sun/sparc/jdic-native.jar" basedir="${project.basedir}/../jdic-0.9.1-bin-cross-platform/sunos/sparc"/>
-                                <copy file="${project.basedir}/../jdic-0.9.1-bin-cross-platform/jdic.jar" todir="${project.build.directory}/${project.build.finalName}" />
-                                <copy file="${project.basedir}/../jdic-0.9.1-bin-cross-platform/windows/jdic_stub.jar" todir="${project.build.directory}/${project.build.finalName}/win" />
-                                <copy file="${project.basedir}/../jdic-0.9.1-bin-cross-platform/linux/jdic_stub.jar" todir="${project.build.directory}/${project.build.finalName}/lin" />
-                                <copy file="${project.basedir}/../jdic-0.9.1-bin-cross-platform/sunos/jdic_stub.jar" todir="${project.build.directory}/${project.build.finalName}/sun" />
+                                <mkdir dir="${project.basedir}/src/main/webapp/win" />
+                                <mkdir dir="${project.basedir}/src/main/webapp/win/x86" />
+                                <mkdir dir="${project.basedir}/src/main/webapp/lin" />
+                                <mkdir dir="${project.basedir}/src/main/webapp/lin/x86" />
+                                <mkdir dir="${project.basedir}/src/main/webapp/sun" />
+                                <mkdir dir="${project.basedir}/src/main/webapp/sun/x86" />
+                                <mkdir dir="${project.basedir}/src/main/webapp/sun/sparc" />
+                                <jar destfile="${project.basedir}/src/main/webapp/win/x86/jdic-native.jar" basedir="${project.basedir}/../jdic-0.9.1-bin-cross-platform/windows/x86"/>
+                                <jar destfile="${project.basedir}/src/main/webapp/lin/x86/jdic-native.jar" basedir="${project.basedir}/../jdic-0.9.1-bin-cross-platform/linux/x86"/>
+                                <jar destfile="${project.basedir}/src/main/webapp/sun/x86/jdic-native.jar" basedir="${project.basedir}/../jdic-0.9.1-bin-cross-platform/sunos/x86"/>
+                                <jar destfile="${project.basedir}/src/main/webapp/sun/sparc/jdic-native.jar" basedir="${project.basedir}/../jdic-0.9.1-bin-cross-platform/sunos/sparc"/>
+                                <copy file="${project.basedir}/../jdic-0.9.1-bin-cross-platform/jdic.jar" todir="${project.basedir}/src/main/webapp/" />
+                                <copy file="${project.basedir}/../jdic-0.9.1-bin-cross-platform/windows/jdic_stub.jar" todir="${project.basedir}/src/main/webapp/win" />
+                                <copy file="${project.basedir}/../jdic-0.9.1-bin-cross-platform/linux/jdic_stub.jar" todir="${project.basedir}/src/main/webapp/lin" />
+                                <copy file="${project.basedir}/../jdic-0.9.1-bin-cross-platform/sunos/jdic_stub.jar" todir="${project.basedir}/src/main/webapp/sun" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <delete file="${project.basedir}/src/main/webapp/HudsonTrayApp.jar" failonerror="false"/>
+                                <delete file="${project.basedir}/src/main/webapp/jdic.jar" failonerror="false"/>
+                                <delete dir="${project.basedir}/src/main/webapp/win" failonerror="false"/>
+                                <delete dir="${project.basedir}/src/main/webapp/lin" failonerror="false"/>
+                                <delete dir="${project.basedir}/src/main/webapp/sun" failonerror="false"/>
                             </tasks>
                         </configuration>
                     </execution>
@@ -93,7 +109,7 @@
                             <keypass>hudsontrayappkeypass</keypass>
                             <storepass>hudsontrayappstorepass</storepass>
                             <alias>HudsonTrayApp</alias>
-                            <jarPath>${project.build.directory}/${project.build.finalName}/jdic.jar</jarPath>
+                            <jarPath>${project.basedir}/src/main/webapp/jdic.jar</jarPath>
                         </configuration>
                     </execution>
                     <execution>
@@ -107,7 +123,7 @@
                             <keypass>hudsontrayappkeypass</keypass>
                             <storepass>hudsontrayappstorepass</storepass>
                             <alias>HudsonTrayApp</alias>
-                            <jarPath>${project.build.directory}/${project.build.finalName}/win/jdic_stub.jar</jarPath>
+                            <jarPath>${project.basedir}/src/main/webapp/win/jdic_stub.jar</jarPath>
                         </configuration>
                     </execution>
                     <execution>
@@ -121,7 +137,7 @@
                             <keypass>hudsontrayappkeypass</keypass>
                             <storepass>hudsontrayappstorepass</storepass>
                             <alias>HudsonTrayApp</alias>
-                            <jarPath>${project.build.directory}/${project.build.finalName}/lin/jdic_stub.jar</jarPath>
+                            <jarPath>${project.basedir}/src/main/webapp/lin/jdic_stub.jar</jarPath>
                         </configuration>
                     </execution>
                     <execution>
@@ -135,7 +151,7 @@
                             <keypass>hudsontrayappkeypass</keypass>
                             <storepass>hudsontrayappstorepass</storepass>
                             <alias>HudsonTrayApp</alias>
-                            <jarPath>${project.build.directory}/${project.build.finalName}/sun/jdic_stub.jar</jarPath>
+                            <jarPath>${project.basedir}/src/main/webapp/sun/jdic_stub.jar</jarPath>
                         </configuration>
                     </execution>
                     <execution>
@@ -149,7 +165,7 @@
                             <keypass>hudsontrayappkeypass</keypass>
                             <storepass>hudsontrayappstorepass</storepass>
                             <alias>HudsonTrayApp</alias>
-                            <jarPath>${project.build.directory}/${project.build.finalName}/win/x86/jdic-native.jar</jarPath>
+                            <jarPath>${project.basedir}/src/main/webapp/win/x86/jdic-native.jar</jarPath>
                         </configuration>
                     </execution>
                     <execution>
@@ -163,7 +179,7 @@
                             <keypass>hudsontrayappkeypass</keypass>
                             <storepass>hudsontrayappstorepass</storepass>
                             <alias>HudsonTrayApp</alias>
-                            <jarPath>${project.build.directory}/${project.build.finalName}/lin/x86/jdic-native.jar</jarPath>
+                            <jarPath>${project.basedir}/src/main/webapp/lin/x86/jdic-native.jar</jarPath>
                         </configuration>
                     </execution>
                     <execution>
@@ -177,7 +193,7 @@
                             <keypass>hudsontrayappkeypass</keypass>
                             <storepass>hudsontrayappstorepass</storepass>
                             <alias>HudsonTrayApp</alias>
-                            <jarPath>${project.build.directory}/${project.build.finalName}/sun/x86/jdic-native.jar</jarPath>
+                            <jarPath>${project.basedir}/src/main/webapp/sun/x86/jdic-native.jar</jarPath>
                         </configuration>
                     </execution>
                     <execution>
@@ -191,7 +207,7 @@
                             <keypass>hudsontrayappkeypass</keypass>
                             <storepass>hudsontrayappstorepass</storepass>
                             <alias>HudsonTrayApp</alias>
-                            <jarPath>${project.build.directory}/${project.build.finalName}/sun/sparc/jdic-native.jar</jarPath>
+                            <jarPath>${project.basedir}/src/main/webapp/sun/sparc/jdic-native.jar</jarPath>
                         </configuration>
                     </execution>
                 </executions>
