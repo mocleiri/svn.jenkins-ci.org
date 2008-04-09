@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Descriptor (Hudson core 1.205 API)
+Descriptor (Hudson core 1.206 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-08">
+<META NAME="date" CONTENT="2008-04-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Descriptor (Hudson core 1.205 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Descriptor (Hudson core 1.205 API)";
+        parent.document.title="Descriptor (Hudson core 1.206 API)";
     }
 }
 </SCRIPT>
@@ -510,6 +510,14 @@ public <A HREF="../../hudson/model/Descriptor.html" title="type parameter in Des
  <p>
  Hudson only invokes this method when the user wants an instance of <tt>T</tt>.
  So there's no need to check that in the implementation.
+
+ <p>
+ Starting 1.206, the default implementation of this method does the following:
+ <pre>
+ req.bindJSON(clazz,formData);
+ </pre>
+ <p>
+ ... which performs the databinding on the constructor of <A HREF="../../hudson/model/Descriptor.html#clazz"><CODE>clazz</CODE></A>.
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>req</CODE> - Always non-null. This object includes represents the entire submisison.<DD><CODE>formData</CODE> - The JSON object that captures the configuration data for this <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.

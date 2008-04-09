@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Maven.DescriptorImpl (Hudson core 1.205 API)
+Maven.DescriptorImpl (Hudson core 1.206 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-08">
+<META NAME="date" CONTENT="2008-04-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Maven.DescriptorImpl (Hudson core 1.205 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Maven.DescriptorImpl (Hudson core 1.205 API)";
+        parent.document.title="Maven.DescriptorImpl (Hudson core 1.206 API)";
     }
 }
 </SCRIPT>
@@ -352,6 +352,14 @@ public <A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">B
  <p>
  Hudson only invokes this method when the user wants an instance of <tt>T</tt>.
  So there's no need to check that in the implementation.
+
+ <p>
+ Starting 1.206, the default implementation of this method does the following:
+ <pre>
+ req.bindJSON(clazz,formData);
+ </pre>
+ <p>
+ ... which performs the databinding on the constructor of <A HREF="../../hudson/model/Descriptor.html#clazz"><CODE>Descriptor.clazz</CODE></A>.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></CODE> in class <CODE><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;</CODE></DL>
