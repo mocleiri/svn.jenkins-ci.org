@@ -8,20 +8,14 @@ import hudson.plugins.findbugs.util.model.JavaPackage;
 import hudson.plugins.findbugs.util.model.LineRange;
 import hudson.plugins.findbugs.util.model.MavenModule;
 import hudson.plugins.findbugs.util.model.Priority;
-import hudson.remoting.Which;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.apache.commons.lang.StringUtils;
 import org.dom4j.DocumentException;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.xml.sax.SAXException;
-
-import edu.umd.cs.findbugs.DetectorFactoryCollection;
 
 /**
  *  Tests the extraction of FindBugs analysis results.
@@ -34,19 +28,6 @@ public class NativeFindBugsParserTest extends AbstractEnglishLocaleTest {
     private static final int NUMBER_OF_WARNINGS = 2;
     /** Error message. */
     private static final String ERROR_MESSAGE = "Wrong number of bugs parsed.";
-
-    /**
-     * Initializes the FindBugs contrib library with the path to fbcontrib.
-     *
-     * @throws IOException
-     *             in case of an error
-     */
-    @BeforeClass
-    public static void initializeFindBugsLibrary() throws IOException {
-        File jarFile = Which.jarFile(DetectorFactoryCollection.class);
-        String corePlugin = jarFile.toString();
-        System.setProperty("hudson.plugins.findbugs.pluginpath", "file:/" + corePlugin + ";file:" + StringUtils.substringBefore(corePlugin, "net\\sourceforge\\findbugs\\findbugs") + "com\\mebigfatguy\\fbcontrib\\3.4.2-hudson-1\\fbcontrib-3.4.2-hudson-1.jar");
-    }
 
     /**
      * Parses the specified file.
@@ -67,16 +48,9 @@ public class NativeFindBugsParserTest extends AbstractEnglishLocaleTest {
      */
     @Test
     public void scanFileWithMultipleLinesAndRanges() throws Exception {
-        try {
-            scanNativeFile(FINDBUGS_NATIVE_XML, FINDBUGS_NATIVE_XML,
-                    Priority.NORMAL, "org/apache/hadoop/dfs/BlockCrcUpgrade.java", "org.apache.hadoop.dfs", 1309, 1309,
-                    5, "org/apache/hadoop/streaming/StreamJob.java", "org.apache.hadoop.streaming", 935, 980, 1);
-        }
-        catch (NoSuchMethodError exception) { // seems to be a class loading problem with two different jaxen versions
-            scanNativeFile(FINDBUGS_NATIVE_XML, FINDBUGS_NATIVE_XML,
-                    Priority.NORMAL, "org/apache/hadoop/dfs/BlockCrcUpgrade.java", "org.apache.hadoop.dfs", 1309, 1309,
-                    5, "org/apache/hadoop/streaming/StreamJob.java", "org.apache.hadoop.streaming", 935, 980, 1);
-        }
+        scanNativeFile(FINDBUGS_NATIVE_XML, FINDBUGS_NATIVE_XML,
+                Priority.NORMAL, "org/apache/hadoop/dfs/BlockCrcUpgrade.java", "org.apache.hadoop.dfs", 1309, 1309,
+                5, "org/apache/hadoop/streaming/StreamJob.java", "org.apache.hadoop.streaming", 935, 980, 1);
     }
 
     /**

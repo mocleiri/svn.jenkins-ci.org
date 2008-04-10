@@ -60,6 +60,8 @@ public class BuildTrigger extends Publisher implements DependecyDeclarer, Matrix
     }
 
     public BuildTrigger(String childProjects, Result threshold) {
+        if(childProjects==null)
+            throw new IllegalArgumentException();
         this.childProjects = childProjects;
         this.threshold = threshold;
     }
@@ -173,6 +175,15 @@ public class BuildTrigger extends Publisher implements DependecyDeclarer, Matrix
         }
 
         return changed;
+    }
+
+    /**
+     * Correct broken data gracefully (#1537)
+     */
+    private Object readResolve() {
+        if(childProjects==null)
+            return childProjects="";
+        return this;
     }
 
     public Descriptor<Publisher> getDescriptor() {
