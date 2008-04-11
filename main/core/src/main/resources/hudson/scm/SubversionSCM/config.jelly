@@ -25,6 +25,11 @@
       But this causes the artifacts from the previous build to remain when a new build starts.">
     <f:checkbox name="svn_use_update" checked="${h.defaultToTrue(scm.useUpdate)}"/>
   </f:entry>
+   <f:entry title="Delete if locked"
+     description="
+       Hudson will check if the workspace is locked, and do a clean checkout if it is.">
+     <f:checkbox name="svn_delete_if_locked" checked="${h.defaultToTrue(scm.isDeleteIfLocked())}"/>
+   </f:entry>
 
   <t:listScmBrowsers name="svn.browser" />  
 </j:jelly>
