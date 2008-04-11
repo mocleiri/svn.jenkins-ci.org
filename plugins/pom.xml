@@ -190,5 +190,15 @@
     <properties>
         <!-- if your java.net user name is different from local user name, specify it here -->
         <java.net.id>${user.name}</java.net.id>
+        <hudson.version>1.206</hudson.version>
     </properties>
+
+    <profiles>
+      <profile>
+        <id>dev</id>
+        <properties>
+            <hudson.version>1.207-SNAPSHOT</hudson.version>
+        </properties>
+      </profile>
+    </profiles>
 </project>
