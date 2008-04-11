@@ -1,13 +1,10 @@
 package hudson.scm;
 
-import com.thoughtworks.xstream.XStream;
-import com.trilead.ssh2.DebugLogger;
-import com.trilead.ssh2.SCPClient;
 import hudson.FilePath;
-import hudson.FilePath.FileCallable;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.XmlFile;
+import hudson.FilePath.FileCallable;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
@@ -24,6 +21,38 @@ import hudson.util.MultipartFormDataParser;
 import hudson.util.Scrambler;
 import hudson.util.StreamCopyThread;
 import hudson.util.XStream2;
+
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.Serializable;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.StringTokenizer;
+import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
+
+import javax.servlet.ServletException;
+import javax.xml.transform.stream.StreamResult;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.io.FileUtils;
 import org.apache.tools.ant.Project;
@@ -56,39 +85,14 @@ import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.tmatesoft.svn.core.wc.SVNInfo;
 import org.tmatesoft.svn.core.wc.SVNRevision;
+import org.tmatesoft.svn.core.wc.SVNStatus;
 import org.tmatesoft.svn.core.wc.SVNUpdateClient;
 import org.tmatesoft.svn.core.wc.SVNWCClient;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
-import javax.servlet.ServletException;
-import javax.xml.transform.stream.StreamResult;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.Serializable;
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Pattern;
+import com.thoughtworks.xstream.XStream;
+import com.trilead.ssh2.DebugLogger;
+import com.trilead.ssh2.SCPClient;
 
 /**
  * Subversion SCM.
@@ -114,6 +118,7 @@ public class SubversionSCM extends SCM implements Serializable {
     private ModuleLocation[] locations = new ModuleLocation[0];
 
     private boolean useUpdate;
+    private boolean deleteIfLocked;
     private final SubversionRepositoryBrowser browser;
 
     // No longer in use but left for serialization compatibility.
@@ -121,7 +126,7 @@ public class SubversionSCM extends SCM implements Serializable {
     private String modules;
 
     public SubversionSCM(String[] remoteLocations, String[] localLocations,
-                         boolean useUpdate, SubversionRepositoryBrowser browser) {
+                         boolean useUpdate, boolean deleteIfLocked, SubversionRepositoryBrowser browser) {
 
         List<ModuleLocation> modules = new ArrayList<ModuleLocation>();
         if (remoteLocations != null && localLocations != null) {
@@ -139,6 +144,7 @@ public class SubversionSCM extends SCM implements Serializable {
         }
         locations = modules.toArray(new ModuleLocation[modules.size()]);
 
+        this.deleteIfLocked = deleteIfLocked;
         this.useUpdate = useUpdate;
         this.browser = browser;
     }
@@ -179,6 +185,11 @@ public class SubversionSCM extends SCM implements Serializable {
     public boolean isUseUpdate() {
         return useUpdate;
     }
+    
+    public boolean isDeleteIfLocked() {
+		return deleteIfLocked;
+	}
+    	     
 
     @Override
     public SubversionRepositoryBrowser getBrowser() {
@@ -681,8 +692,13 @@ public class SubversionSCM extends SCM implements Serializable {
                     listener.getLogger().println("Checking out a fresh workspace because "+module+" doesn't exist");
                     return false;
                 }
-
+	             
                 try {
+		             if (isWorkingCopyLocked(ws)) {
+		             	listener.getLogger().println("Checking out a fresh workspace because the workspace is locked");
+		             	return false;
+		             }
+
                     SVNInfo svnkitInfo = parseSvnInfo(module, authProvider);
                     SvnInfo svnInfo = new SvnInfo(svnkitInfo);
 
@@ -1009,6 +1025,7 @@ public class SubversionSCM extends SCM implements Serializable {
                 req.getParameterValues("svn.location_remote"),
                 req.getParameterValues("svn.location_local"),
                 req.getParameter("svn_use_update") != null,
+                req.getParameter("svn_delete_if_locked") != null,
                     RepositoryBrowsers.createInstance(SubversionRepositoryBrowser.class, req, "svn.browser"));
         }
 
@@ -1363,5 +1380,19 @@ public class SubversionSCM extends SCM implements Serializable {
 	@Override
 	public boolean requiresWorkspaceForPolling() {
 		return false;
+	}
+
+     private static boolean isWorkingCopyLocked(File workspace)
+		throws SVNException {
+	final SVNClientManager manager = SVNClientManager.newInstance(SVNWCUtil
+			.createDefaultOptions(true));
+	try {
+		SVNStatus status = manager.getStatusClient().doStatus(workspace,
+				false);
+		return status.isLocked();
+	} finally {
+		manager.dispose();
+	}
+
 	}
 }
