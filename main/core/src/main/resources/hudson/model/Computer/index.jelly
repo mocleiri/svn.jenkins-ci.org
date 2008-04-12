@@ -30,7 +30,9 @@
               </div>
             </j:when>
             <j:when test="${it.offline and !it.temporarilyOffline}">
+<!-- TODO: a permission to launch slaves 
               <l:isAdmin>
+-->              
                 <p>
                   <a href="slave-agent.jnlp">
                     <img src="${imagesURL}/webstart.gif" alt="launch agent" />
@@ -45,7 +47,9 @@
                   (Click the above link from this slave computer to launch the slave agent via JNLP,
                   or from command-line run <nowrap><tt>javaws ${h.inferHudsonURL(request)}${it.url}slave-agent.jnlp</tt></nowrap>)
                 </p>
+<!--                
               </l:isAdmin>
+-->              
             </j:when>
             <j:otherwise>
               <p>

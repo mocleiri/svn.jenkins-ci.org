@@ -15,6 +15,7 @@ import hudson.scm.NullSCM;
 import hudson.scm.SCM;
 import hudson.scm.SCMS;
 import hudson.search.SearchIndexBuilder;
+import hudson.security.ACL;
 import hudson.security.Permission;
 import hudson.tasks.BuildTrigger;
 import hudson.triggers.SCMTrigger;
@@ -166,7 +167,12 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
         updateTransientActions();
     }
 
-    /**
+    @Override
+	public ACL getACL() {
+		return Hudson.getInstance().getAuthorizationStrategy().getACL(this);
+	}
+
+	/**
      * If this project is configured to be always built on this node,
      * return that {@link Node}. Otherwise null.
      */
@@ -609,7 +615,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
             }
 
         	Launcher launcher = workspace != null ? workspace.createLauncher(listener) : null;
-            LOGGER.info("Polling SCM changes of "+ getName());
+            LOGGER.fine("Polling SCM changes of "+ getName());
             return scm.pollChanges(this, launcher, workspace, listener );
         } catch (AbortException e) {
             listener.fatalError(Messages.AbstractProject_Aborted());

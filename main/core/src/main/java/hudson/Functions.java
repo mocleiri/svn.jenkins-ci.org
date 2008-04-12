@@ -17,28 +17,17 @@ import hudson.model.Run;
 import hudson.model.TopLevelItem;
 import hudson.model.View;
 import hudson.search.SearchableModelObject;
+import hudson.security.AccessControlled;
+import hudson.security.AuthorizationStrategy;
+import hudson.security.Permission;
+import hudson.security.SecurityRealm;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildWrappers;
 import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
-import hudson.security.SecurityRealm;
-import hudson.security.AuthorizationStrategy;
-import hudson.security.Permission;
-import org.apache.commons.jexl.parser.ASTSizeFunction;
-import org.apache.commons.jexl.util.Introspector;
-import org.apache.commons.jelly.JellyContext;
-import org.kohsuke.stapler.Ancestor;
-import org.kohsuke.stapler.Stapler;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -61,6 +50,20 @@ import java.util.TreeMap;
 import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;
 import java.util.regex.Pattern;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
+import org.apache.commons.jelly.JellyContext;
+import org.apache.commons.jexl.parser.ASTSizeFunction;
+import org.apache.commons.jexl.util.Introspector;
+import org.kohsuke.stapler.Ancestor;
+import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
 /**
  * Utility functions used in views.
@@ -428,6 +431,12 @@ public class Functions {
         Hudson.getInstance().getACL().checkPermission(permission);
     }
 
+    public static void checkPermission(AccessControlled object, Permission permission) throws IOException, ServletException {
+        if (permission != null) {
+        	object.checkPermission(permission);
+        }
+    }
+
     /**
      * Returns true if the current user has the given permission.
      *
@@ -436,6 +445,10 @@ public class Functions {
      */
     public static boolean hasPermission(Permission permission) throws IOException, ServletException {
         return permission==null || Hudson.getInstance().getACL().hasPermission(permission);
+    }
+
+    public static boolean hasPermission(AccessControlled object, Permission permission) throws IOException, ServletException {
+        return permission==null || object.hasPermission(permission);
     }
 
     public static void adminCheck(StaplerRequest req, StaplerResponse rsp, Object required, Permission permission) throws IOException, ServletException {

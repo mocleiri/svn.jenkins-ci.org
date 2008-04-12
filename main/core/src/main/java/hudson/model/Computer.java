@@ -4,25 +4,30 @@ import hudson.EnvVars;
 import hudson.node_monitors.NodeMonitor;
 import hudson.remoting.Channel;
 import hudson.remoting.VirtualChannel;
+import hudson.security.ACL;
+import hudson.security.AccessControlled;
+import hudson.security.Permission;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.Publisher;
 import hudson.util.DaemonThreadFactory;
 import hudson.util.RemotingDiagnostics;
 import hudson.util.RunList;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
 
-import javax.servlet.ServletException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.LogRecord;
+
+import javax.servlet.ServletException;
+
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
 
@@ -50,7 +55,7 @@ import org.kohsuke.stapler.export.ExportedBean;
  * @author Kohsuke Kawaguchi
  */
 @ExportedBean
-public abstract class Computer extends AbstractModelObject {
+public abstract class Computer extends AbstractModelObject implements AccessControlled {
     private final CopyOnWriteArrayList<Executor> executors = new CopyOnWriteArrayList<Executor>();
 
     private int numExecutors;
@@ -71,7 +76,21 @@ public abstract class Computer extends AbstractModelObject {
         setNode(node);
     }
 
-    /**
+	public ACL getACL() {
+		return Hudson.getInstance().getAuthorizationStrategy().getACL(this);
+	}
+
+    @Override
+	public void checkPermission(Permission permission) {
+		getACL().checkPermission(permission);
+	}
+
+    @Override
+	public boolean hasPermission(Permission permission) {
+		return getACL().hasPermission(permission);
+	}
+
+	/**
      * Gets the channel that can be used to run a program on this computer.
      *
      * @return
