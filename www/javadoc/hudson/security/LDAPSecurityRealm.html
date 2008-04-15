@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-LDAPSecurityRealm (Hudson core 1.206 API)
+LDAPSecurityRealm (Hudson core 1.207 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-09">
+<META NAME="date" CONTENT="2008-04-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LDAPSecurityRealm (Hudson core 1.206 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LDAPSecurityRealm (Hudson core 1.206 API)";
+        parent.document.title="LDAPSecurityRealm (Hudson core 1.207 API)";
     }
 }
 </SCRIPT>
@@ -173,6 +173,15 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.html#managerDN">managerDN</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If non-null, we use this and <A HREF="../../hudson/security/LDAPSecurityRealm.html#managerPassword"><CODE>managerPassword</CODE></A>
+ when binding to LDAP.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.html#rootDN">rootDN</A></B></CODE>
 
 <BR>
@@ -223,10 +232,12 @@ java.lang.Object
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.html#LDAPSecurityRealm(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">LDAPSecurityRealm</A></B>(java.lang.String&nbsp;server,
+<TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.html#LDAPSecurityRealm(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">LDAPSecurityRealm</A></B>(java.lang.String&nbsp;server,
                   java.lang.String&nbsp;rootDN,
                   java.lang.String&nbsp;userSearchBase,
-                  java.lang.String&nbsp;userSearch)</CODE>
+                  java.lang.String&nbsp;userSearch,
+                  java.lang.String&nbsp;managerDN,
+                  java.lang.String&nbsp;managerPassword)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -262,6 +273,14 @@ java.lang.Object
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.html#getLDAPURL()">getLDAPURL</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.html#getManagerPassword()">getManagerPassword</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -354,6 +373,21 @@ public final java.lang.String <B>userSearch</B></PRE>
 </DL>
 <HR>
 
+<A NAME="managerDN"><!-- --></A><H3>
+managerDN</H3>
+<PRE>
+public final java.lang.String <B>managerDN</B></PRE>
+<DL>
+<DD>If non-null, we use this and <A HREF="../../hudson/security/LDAPSecurityRealm.html#managerPassword"><CODE>managerPassword</CODE></A>
+ when binding to LDAP.
+
+ This is necessary when LDAP doesn't support anonymous access.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
 <A NAME="DESCRIPTOR"><!-- --></A><H3>
 DESCRIPTOR</H3>
 <PRE>
@@ -373,14 +407,16 @@ public static final <A HREF="../../hudson/security/LDAPSecurityRealm.DescriptorI
 </TR>
 </TABLE>
 
-<A NAME="LDAPSecurityRealm(java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
+<A NAME="LDAPSecurityRealm(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
 LDAPSecurityRealm</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>LDAPSecurityRealm</B>(java.lang.String&nbsp;server,
                                               java.lang.String&nbsp;rootDN,
                                               java.lang.String&nbsp;userSearchBase,
-                                              java.lang.String&nbsp;userSearch)</PRE>
+                                              java.lang.String&nbsp;userSearch,
+                                              java.lang.String&nbsp;managerDN,
+                                              java.lang.String&nbsp;managerPassword)</PRE>
 <DL>
 </DL>
 
@@ -393,6 +429,17 @@ LDAPSecurityRealm</H3>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="getManagerPassword()"><!-- --></A><H3>
+getManagerPassword</H3>
+<PRE>
+public java.lang.String <B>getManagerPassword</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="getLDAPURL()"><!-- --></A><H3>
 getLDAPURL</H3>

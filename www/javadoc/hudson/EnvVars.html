@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-EnvVars (Hudson core 1.206 API)
+EnvVars (Hudson core 1.207 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-09">
+<META NAME="date" CONTENT="2008-04-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ EnvVars (Hudson core 1.206 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="EnvVars (Hudson core 1.206 API)";
+        parent.document.title="EnvVars (Hudson core 1.207 API)";
     }
 }
 </SCRIPT>
@@ -282,6 +282,15 @@ masterEnvVars</H3>
 public static final java.util.Map&lt;java.lang.String,java.lang.String&gt; <B>masterEnvVars</B></PRE>
 <DL>
 <DD>Environmental variables that we've inherited.
+
+ <p>
+ Despite what the name might imply, this is the environment variable
+ of the current JVM process. And therefore, it is Hudson master's environment
+ variables only when you access this from the master.
+
+ <p>
+ If you access this field from slaves, then this is the environment
+ variable of the slave agent.
 <P>
 <DL>
 </DL>

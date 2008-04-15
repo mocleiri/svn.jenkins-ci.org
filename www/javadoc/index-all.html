@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.206 API)
+Index (Hudson core 1.207 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-09">
+<META NAME="date" CONTENT="2008-04-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.206 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.206 API)";
+        parent.document.title="Index (Hudson core 1.207 API)";
     }
 }
 </SCRIPT>
@@ -633,6 +633,9 @@ Method in class hudson.security.<A HREF="./hudson/security/AuthenticationManager
 <DT><A HREF="./hudson/security/LegacySecurityRealm.html#authenticate(org.acegisecurity.Authentication)"><B>authenticate(Authentication)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/LegacySecurityRealm.html" title="class in hudson.security">LegacySecurityRealm</A>
 <DD>&nbsp;
+<DT><A HREF="./org/acegisecurity/providers/ldap/authenticator/BindAuthenticator2.html#authenticate(java.lang.String, java.lang.String)"><B>authenticate(String, String)</B></A> - 
+Method in class org.acegisecurity.providers.ldap.authenticator.<A HREF="./org/acegisecurity/providers/ldap/authenticator/BindAuthenticator2.html" title="class in org.acegisecurity.providers.ldap.authenticator">BindAuthenticator2</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/security/HudsonFilter.html#AUTHENTICATION_MANAGER"><B>AUTHENTICATION_MANAGER</B></A> - 
 Static variable in class hudson.security.<A HREF="./hudson/security/HudsonFilter.html" title="class in hudson.security">HudsonFilter</A>
 <DD><CODE>AuthenticationManager</CODE> proxy so that the acegi filter chain can stay the same
@@ -750,6 +753,9 @@ Method in class hudson.util.spring.<A HREF="./hudson/util/spring/BeanBuilder.htm
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.BuildPtr.html" title="class in hudson.model">Fingerprint.BuildPtr</A>
 <DD>Returns true if <A HREF="./hudson/model/Fingerprint.BuildPtr.html" title="class in hudson.model"><CODE>Fingerprint.BuildPtr</CODE></A> points to the given job
  or one of its subordinates.
+<DT><A HREF="./org/acegisecurity/providers/ldap/authenticator/BindAuthenticator2.html" title="class in org.acegisecurity.providers.ldap.authenticator"><B>BindAuthenticator2</B></A> - Class in <A HREF="./org/acegisecurity/providers/ldap/authenticator/package-summary.html">org.acegisecurity.providers.ldap.authenticator</A><DD><CODE>BindAuthenticator</CODE> with improved diagnostics.<DT><A HREF="./org/acegisecurity/providers/ldap/authenticator/BindAuthenticator2.html#BindAuthenticator2(org.acegisecurity.ldap.InitialDirContextFactory)"><B>BindAuthenticator2(InitialDirContextFactory)</B></A> - 
+Constructor for class org.acegisecurity.providers.ldap.authenticator.<A HREF="./org/acegisecurity/providers/ldap/authenticator/BindAuthenticator2.html" title="class in org.acegisecurity.providers.ldap.authenticator">BindAuthenticator2</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/OneShotEvent.html#block()"><B>block()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/OneShotEvent.html" title="class in hudson.util">OneShotEvent</A>
 <DD>Blocks until the event becomes the signaled state.
@@ -4916,6 +4922,15 @@ Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/PackageResult.h
 <DT><A HREF="./hudson/tasks/junit/TestResult.html#getFailedTests()"><B>getFailedTests()</B></A> - 
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/junit/TestResultAction.html#getFailedTests()"><B>getFailedTests()</B></A> - 
+Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/TestResultAction.html" title="class in hudson.tasks.junit">TestResultAction</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/tasks/test/AbstractTestResultAction.html#getFailedTests()"><B>getFailedTests()</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test">AbstractTestResultAction</A>
+<DD>A shortcut for summary.jelly
+<DT><A HREF="./hudson/tasks/test/AggregatedTestResultAction.html#getFailedTests()"><B>getFailedTests()</B></A> - 
+Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultAction</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tasks/test/AbstractTestResultAction.html#getFailureDiffString()"><B>getFailureDiffString()</B></A> - 
 Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test">AbstractTestResultAction</A>
 <DD>Gets the diff string of failures.
@@ -5553,6 +5568,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/MailSender.html" title="cla
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#getManagementLinks()"><B>getManagementLinks()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/security/LDAPSecurityRealm.html#getManagerPassword()"><B>getManagerPassword()</B></A> - 
+Method in class hudson.security.<A HREF="./hudson/security/LDAPSecurityRealm.html" title="class in hudson.security">LDAPSecurityRealm</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/maven/MavenModuleSet.html#getMaven()"><B>getMaven()</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>
@@ -8250,7 +8268,7 @@ Constructor for class hudson.matrix.<A HREF="./hudson/matrix/Layouter.Column.htm
 <DT><A HREF="./hudson/matrix/Layouter.Row.html" title="class in hudson.matrix"><B>Layouter.Row</B></A> - Class in <A HREF="./hudson/matrix/package-summary.html">hudson.matrix</A><DD>Represents a row, which is a collection of <A HREF="./hudson/matrix/Layouter.Column.html" title="class in hudson.matrix"><CODE>Layouter.Column</CODE></A>s.<DT><A HREF="./hudson/matrix/Layouter.Row.html#Layouter.Row()"><B>Layouter.Row()</B></A> - 
 Constructor for class hudson.matrix.<A HREF="./hudson/matrix/Layouter.Row.html" title="class in hudson.matrix">Layouter.Row</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/security/LDAPSecurityRealm.html" title="class in hudson.security"><B>LDAPSecurityRealm</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD><A HREF="./hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> implementation that uses LDAP for authentication.<DT><A HREF="./hudson/security/LDAPSecurityRealm.html#LDAPSecurityRealm(java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><B>LDAPSecurityRealm(String, String, String, String)</B></A> - 
+<DT><A HREF="./hudson/security/LDAPSecurityRealm.html" title="class in hudson.security"><B>LDAPSecurityRealm</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD><A HREF="./hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> implementation that uses LDAP for authentication.<DT><A HREF="./hudson/security/LDAPSecurityRealm.html#LDAPSecurityRealm(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><B>LDAPSecurityRealm(String, String, String, String, String, String)</B></A> - 
 Constructor for class hudson.security.<A HREF="./hudson/security/LDAPSecurityRealm.html" title="class in hudson.security">LDAPSecurityRealm</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/security/LDAPSecurityRealm.DescriptorImpl.html" title="class in hudson.security"><B>LDAPSecurityRealm.DescriptorImpl</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD>&nbsp;<DT><A HREF="./hudson/security/LDAPSecurityRealm.MailAdressResolverImpl.html" title="class in hudson.security"><B>LDAPSecurityRealm.MailAdressResolverImpl</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD>If the security realm is LDAP, try to pick up e-mail address from LDAP.<DT><A HREF="./hudson/security/LDAPSecurityRealm.MailAdressResolverImpl.html#LDAPSecurityRealm.MailAdressResolverImpl()"><B>LDAPSecurityRealm.MailAdressResolverImpl()</B></A> - 
@@ -8581,6 +8599,10 @@ Constructor for class hudson.model.<A HREF="./hudson/model/ManagementLink.html" 
 <DT><A HREF="./hudson/security/SecurityRealm.SecurityComponents.html#manager"><B>manager</B></A> - 
 Variable in class hudson.security.<A HREF="./hudson/security/SecurityRealm.SecurityComponents.html" title="class in hudson.security">SecurityRealm.SecurityComponents</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/security/LDAPSecurityRealm.html#managerDN"><B>managerDN</B></A> - 
+Variable in class hudson.security.<A HREF="./hudson/security/LDAPSecurityRealm.html" title="class in hudson.security">LDAPSecurityRealm</A>
+<DD>If non-null, we use this and <A HREF="./hudson/security/LDAPSecurityRealm.html#managerPassword"><CODE>LDAPSecurityRealm.managerPassword</CODE></A>
+ when binding to LDAP.
 <DT><A HREF="./hudson/scheduler/CrontabLexer.html#mANNUALLY(boolean)"><B>mANNUALLY(boolean)</B></A> - 
 Method in class hudson.scheduler.<A HREF="./hudson/scheduler/CrontabLexer.html" title="class in hudson.scheduler">CrontabLexer</A>
 <DD>&nbsp;
@@ -9452,7 +9474,7 @@ Static variable in interface hudson.scheduler.<A HREF="./hudson/scheduler/Cronta
 <DT><A HREF="./hudson/model/Run.html#ORDER_BY_DATE"><B>ORDER_BY_DATE</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>Sort by date.
-<DT><A HREF="./hudson/tasks/labelers/OSLabeler.html" title="class in hudson.tasks.labelers"><B>OSLabeler</B></A> - Class in <A HREF="./hudson/tasks/labelers/package-summary.html">hudson.tasks.labelers</A><DD>Created by IntelliJ IDEA.<DT><A HREF="./hudson/util/DelegatingOutputStream.html#out"><B>out</B></A> - 
+<DT><A HREF="./org/acegisecurity/providers/ldap/authenticator/package-summary.html"><B>org.acegisecurity.providers.ldap.authenticator</B></A> - package org.acegisecurity.providers.ldap.authenticator<DD>&nbsp;<DT><A HREF="./hudson/tasks/labelers/OSLabeler.html" title="class in hudson.tasks.labelers"><B>OSLabeler</B></A> - Class in <A HREF="./hudson/tasks/labelers/package-summary.html">hudson.tasks.labelers</A><DD>Created by IntelliJ IDEA.<DT><A HREF="./hudson/util/DelegatingOutputStream.html#out"><B>out</B></A> - 
 Variable in class hudson.util.<A HREF="./hudson/util/DelegatingOutputStream.html" title="class in hudson.util">DelegatingOutputStream</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/EnvVars.html#override(java.lang.String, java.lang.String)"><B>override(String, String)</B></A> - 
