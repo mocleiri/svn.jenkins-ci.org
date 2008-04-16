@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractBuild (Hudson core 1.207 API)
+AbstractBuild (Hudson core 1.209 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-15">
+<META NAME="date" CONTENT="2008-04-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractBuild (Hudson core 1.207 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractBuild (Hudson core 1.207 API)";
+        parent.document.title="AbstractBuild (Hudson core 1.209 API)";
     }
 }
 </SCRIPT>
@@ -320,7 +320,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getEnvVars()">getEnvVars</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the map that contains environmental variables for this build.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the map that contains environmental variable overrides for this build.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -671,9 +671,13 @@ getEnvVars</H3>
 public java.util.Map&lt;java.lang.String,java.lang.String&gt; <B>getEnvVars</B>()</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Run.html#getEnvVars()">Run</A></CODE></B></DD>
-<DD>Returns the map that contains environmental variables for this build.
+<DD>Returns the map that contains environmental variable overrides for this build.
+
  <p>
- Used by <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A>s that invoke external processes.
+ <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A>s that invoke external processes should use this.
+ This allows <A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A>s and other project configurations (such as JDK selection)
+ to take effect.
+
  <p>
  On Windows systems, environment variables are case-preserving but
  comparison/query is case insensitive (IOW, you can set 'Path' to something
@@ -1006,6 +1010,6 @@ DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&n
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright © 2008. All Rights Reserved.
+Copyright &#169; 2008. All Rights Reserved.
 </BODY>
 </HTML>

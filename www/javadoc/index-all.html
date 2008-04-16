@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.207 API)
+Index (Hudson core 1.209 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-15">
+<META NAME="date" CONTENT="2008-04-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.207 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.207 API)";
+        parent.document.title="Index (Hudson core 1.209 API)";
     }
 }
 </SCRIPT>
@@ -572,6 +572,9 @@ Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title
 <DT><A HREF="./hudson/maven/ExecutedMojo.html#artifactId"><B>artifactId</B></A> - 
 Variable in class hudson.maven.<A HREF="./hudson/maven/ExecutedMojo.html" title="class in hudson.maven">ExecutedMojo</A>
 <DD>Plugin artifact ID.
+<DT><A HREF="./hudson/maven/ModuleDependency.html#artifactId"><B>artifactId</B></A> - 
+Variable in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/ModuleName.html#artifactId"><B>artifactId</B></A> - 
 Variable in class hudson.maven.<A HREF="./hudson/maven/ModuleName.html" title="class in hudson.maven">ModuleName</A>
 <DD>&nbsp;
@@ -584,6 +587,9 @@ Variable in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/Maven
 <DT><A HREF="./hudson/tasks/MailSender.html#artifactMatches(java.lang.String, B)"><B>artifactMatches(String, B)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/MailSender.html" title="class in hudson.tasks">MailSender</A>
 <DD>Check whether a path (/-separated) will be archived.
+<DT><A HREF="./hudson/maven/MavenModule.html#asDependency()"><B>asDependency()</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>
+<DD>Gets groupId+artifactId+version as <A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven"><CODE>ModuleDependency</CODE></A>.
 <DT><A HREF="./hudson/matrix/MatrixConfiguration.html#asProject()"><B>asProject()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A>
 <DD>&nbsp;
@@ -1845,6 +1851,57 @@ Constructor for class hudson.scm.<A HREF="./hudson/scm/CVSSCM.TagAction.html" ti
 <DT><A HREF="./hudson/scm/CVSSCM.TagWorkerThread.html" title="class in hudson.scm"><B>CVSSCM.TagWorkerThread</B></A> - Class in <A HREF="./hudson/scm/package-summary.html">hudson.scm</A><DD>&nbsp;<DT><A HREF="./hudson/scm/CVSSCM.TagWorkerThread.html#CVSSCM.TagWorkerThread(hudson.scm.CVSSCM.TagAction, java.util.Map)"><B>CVSSCM.TagWorkerThread(CVSSCM.TagAction, Map&lt;AbstractBuild, String&gt;)</B></A> - 
 Constructor for class hudson.scm.<A HREF="./hudson/scm/CVSSCM.TagWorkerThread.html" title="class in hudson.scm">CVSSCM.TagWorkerThread</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_DisplayName1()"><B>CVSSCM_DisplayName1()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>CVS tag
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_DisplayName2()"><B>CVSSCM_DisplayName2()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>CVS tags
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_ExpandingWorkspaceArchive(java.lang.Object)"><B>CVSSCM_ExpandingWorkspaceArchive(Object)</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>expanding the workspace archive into {0}
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_FailedToMarkForKeep(java.lang.Object)"><B>CVSSCM_FailedToMarkForKeep(Object)</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Failed to mark {0} for keep
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_HeadIsNotBranch()"><B>CVSSCM_HeadIsNotBranch()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Technically, HEAD is not a branch in CVS.
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_InvalidCvsroot()"><B>CVSSCM_InvalidCvsroot()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Invalid CVSROOT string
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_MissingCvsroot()"><B>CVSSCM_MissingCvsroot()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>CVSROOT is mandatory
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_NoValidTagNameGivenFor(java.lang.Object, java.lang.Object)"><B>CVSSCM_NoValidTagNameGivenFor(Object, Object)</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>No valid tag name given for {0} : {1}
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_PasswordNotSet()"><B>CVSSCM_PasswordNotSet()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>It doesn''t look like this CVSROOT has its password set.
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_TagContainsIllegalChar(java.lang.Object)"><B>CVSSCM_TagContainsIllegalChar(Object)</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Tag contains illegal ''{0}'' character
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_TaggingFailed()"><B>CVSSCM_TaggingFailed()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>tagging failed
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_TaggingWorkspace()"><B>CVSSCM_TaggingWorkspace()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>tagging the workspace
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_TagginXasY(java.lang.Object, java.lang.Object)"><B>CVSSCM_TagginXasY(Object, Object)</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Tagging {0} as {1}
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_TagIsEmpty()"><B>CVSSCM_TagIsEmpty()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Tag is empty
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_TagNeedsToStartWithAlphabet()"><B>CVSSCM_TagNeedsToStartWithAlphabet()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Tag needs to start with alphabet
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_TagThisBuild()"><B>CVSSCM_TagThisBuild()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Tag this build
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_WorkspaceInconsistent()"><B>CVSSCM_WorkspaceInconsistent()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Workspace is inconsistent with configuration.
 <DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/cvslib/CvsUser.html" title="class in hudson.org.apache.tools.ant.taskdefs.cvslib"><B>CvsUser</B></A> - Class in <A HREF="./hudson/org/apache/tools/ant/taskdefs/cvslib/package-summary.html">hudson.org.apache.tools.ant.taskdefs.cvslib</A><DD>Represents a CVS user with a userID and a full name.<DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/cvslib/CvsUser.html#CvsUser()"><B>CvsUser()</B></A> - 
 Constructor for class hudson.org.apache.tools.ant.taskdefs.cvslib.<A HREF="./hudson/org/apache/tools/ant/taskdefs/cvslib/CvsUser.html" title="class in hudson.org.apache.tools.ant.taskdefs.cvslib">CvsUser</A>
 <DD>&nbsp;
@@ -1874,6 +1931,9 @@ Static variable in class hudson.maven.<A HREF="./hudson/maven/MavenBuild.html" t
 <DT><A HREF="./hudson/maven/MavenModuleSetBuild.html#debug"><B>debug</B></A> - 
 Static variable in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven">MavenModuleSetBuild</A>
 <DD>Extra versbose debug switch.
+<DT><A HREF="./hudson/maven/reporters/MavenAbstractArtifactRecord.html#debug"><B>debug</B></A> - 
+Static variable in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenAbstractArtifactRecord.html" title="class in hudson.maven.reporters">MavenAbstractArtifactRecord</A>
+<DD>Debug probe for HUDSON-1461.
 <DT><A HREF="./hudson/scm/CVSSCM.html#debug"><B>debug</B></A> - 
 Static variable in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.html" title="class in hudson.scm">CVSSCM</A>
 <DD>Temporary hack for assisting trouble-shooting.
@@ -1905,7 +1965,7 @@ Static variable in class hudson.maven.<A HREF="./hudson/maven/MavenEmbedder.html
 <DT><A HREF="./hudson/maven/MavenEmbedder.html#DEFAULT_LOCAL_REPO_ID"><B>DEFAULT_LOCAL_REPO_ID</B></A> - 
 Static variable in class hudson.maven.<A HREF="./hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/Functions.html#defaulted(java.lang.Object, java.lang.Object)"><B>defaulted(Object, Object)</B></A> - 
+<DT><A HREF="./hudson/Functions.html#defaulted(T, T)"><B>defaulted(T, T)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
 <DD>If the value exists, return that value.
 <DT><A HREF="./hudson/Functions.html#defaultToTrue(java.lang.Boolean)"><B>defaultToTrue(Boolean)</B></A> - 
@@ -2807,6 +2867,9 @@ Constructor for class hudson.<A HREF="./hudson/EnvVars.html" title="class in hud
 <DD>&nbsp;
 <DT><A HREF="./hudson/scheduler/CrontabParserTokenTypes.html#EOF"><B>EOF</B></A> - 
 Static variable in interface hudson.scheduler.<A HREF="./hudson/scheduler/CrontabParserTokenTypes.html" title="interface in hudson.scheduler">CrontabParserTokenTypes</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/maven/ModuleDependency.html#equals(java.lang.Object)"><B>equals(Object)</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/maven/ModuleName.html#equals(java.lang.Object)"><B>equals(Object)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/ModuleName.html" title="class in hudson.maven">ModuleName</A>
@@ -4822,7 +4885,7 @@ Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class
 <DD>Gets the environment variables of the JVM on this computer.
 <DT><A HREF="./hudson/model/Run.html#getEnvVars()"><B>getEnvVars()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
-<DD>Returns the map that contains environmental variables for this build.
+<DD>Returns the map that contains environmental variable overrides for this build.
 <DT><A HREF="./hudson/tasks/junit/CaseResult.html#getErrorStackTrace()"><B>getErrorStackTrace()</B></A> - 
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>
 <DD>If there was an error or a failure, this is the stack trace, or otherwise null.
@@ -5674,6 +5737,9 @@ Method in class hudson.scm.<A HREF="./hudson/scm/ChangeLogSet.Entry.html" title=
 <DT><A HREF="./hudson/FilePath.html#getName()"><B>getName()</B></A> - 
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>Gets just the file name portion.
+<DT><A HREF="./hudson/maven/ModuleDependency.html#getName()"><B>getName()</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractItem.html#getName()"><B>getName()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A>
 <DD>&nbsp;
@@ -7153,6 +7219,9 @@ Static variable in class hudson.security.<A HREF="./hudson/security/Permission.h
 <DT><A HREF="./hudson/maven/ExecutedMojo.html#groupId"><B>groupId</B></A> - 
 Variable in class hudson.maven.<A HREF="./hudson/maven/ExecutedMojo.html" title="class in hudson.maven">ExecutedMojo</A>
 <DD>Plugin group ID.
+<DT><A HREF="./hudson/maven/ModuleDependency.html#groupId"><B>groupId</B></A> - 
+Variable in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/ModuleName.html#groupId"><B>groupId</B></A> - 
 Variable in class hudson.maven.<A HREF="./hudson/maven/ModuleName.html" title="class in hudson.maven">ModuleName</A>
 <DD>&nbsp;
@@ -7198,6 +7267,9 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenReporterDescriptor.htm
 <DT><A HREF="./hudson/maven/MavenModuleSet.html#hasDisabledModule()"><B>hasDisabledModule()</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>
 <DD>Returns true if there's any disabled module.
+<DT><A HREF="./hudson/maven/ModuleDependency.html#hashCode()"><B>hashCode()</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/ModuleName.html#hashCode()"><B>hashCode()</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/ModuleName.html" title="class in hudson.maven">ModuleName</A>
 <DD>&nbsp;
@@ -8229,7 +8301,7 @@ Method in class hudson.model.<A HREF="./hudson/model/Slave.ComputerImpl.html" ti
 <DD>&nbsp;
 <DT><A HREF="./hudson/Launcher.html#launchChannel(java.lang.String[], java.io.OutputStream, hudson.FilePath, java.util.Map)"><B>launchChannel(String[], OutputStream, FilePath, Map&lt;String, String&gt;)</B></A> - 
 Method in class hudson.<A HREF="./hudson/Launcher.html" title="class in hudson">Launcher</A>
-<DD>Launches a specified process and connects its input/output to a <CODE>Channel</CODE>, then
+<DD>Launches a specified process and connects its input/output to a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A>, then
  return it.
 <DT><A HREF="./hudson/Launcher.LocalLauncher.html#launchChannel(java.lang.String[], java.io.OutputStream, hudson.FilePath, java.util.Map)"><B>launchChannel(String[], OutputStream, FilePath, Map&lt;String, String&gt;)</B></A> - 
 Method in class hudson.<A HREF="./hudson/Launcher.LocalLauncher.html" title="class in hudson">Launcher.LocalLauncher</A>
@@ -8471,7 +8543,7 @@ Variable in class hudson.scm.<A HREF="./hudson/scm/SubversionSCM.ModuleLocation.
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.MasterComputer.html#localChannel"><B>localChannel</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Hudson.MasterComputer.html" title="class in hudson.model">Hudson.MasterComputer</A>
-<DD><CODE>LocalChannel</CODE> instance that can be used to execute programs locally.
+<DD><A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/LocalChannel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>LocalChannel</CODE></A> instance that can be used to execute programs locally.
 <DT><A HREF="./hudson/model/TaskAction.html#log"><B>log</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/TaskAction.html" title="class in hudson.model">TaskAction</A>
 <DD>Hold the log of the tagging operation.
@@ -8790,7 +8862,7 @@ Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title
 <DT><A HREF="./hudson/maven/Messages.html#MavenBuild_Triggering(java.lang.Object)"><B>MavenBuild_Triggering(Object)</B></A> - 
 Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
 <DD>Triggering a new build of {0}
-<DT><A HREF="./hudson/maven/MavenBuilder.html" title="class in hudson.maven"><B>MavenBuilder</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD><CODE>Callable</CODE> that invokes Maven CLI (in process) and drives a build.<DT><A HREF="./hudson/maven/MavenBuilder.html#MavenBuilder(hudson.model.BuildListener, java.util.List, java.util.Map)"><B>MavenBuilder(BuildListener, List&lt;String&gt;, Map&lt;String, String&gt;)</B></A> - 
+<DT><A HREF="./hudson/maven/MavenBuilder.html" title="class in hudson.maven"><B>MavenBuilder</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD><A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Callable</CODE></A> that invokes Maven CLI (in process) and drives a build.<DT><A HREF="./hudson/maven/MavenBuilder.html#MavenBuilder(hudson.model.BuildListener, java.util.List, java.util.Map)"><B>MavenBuilder(BuildListener, List&lt;String&gt;, Map&lt;String, String&gt;)</B></A> - 
 Constructor for class hudson.maven.<A HREF="./hudson/maven/MavenBuilder.html" title="class in hudson.maven">MavenBuilder</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/maven/Messages.html#MavenBuilder_Aborted()"><B>MavenBuilder_Aborted()</B></A> - 
@@ -8809,7 +8881,7 @@ Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title
  during the build.<DT><A HREF="./hudson/maven/MavenBuildProxy.BuildCallable.html" title="interface in hudson.maven"><B>MavenBuildProxy.BuildCallable</B></A>&lt;<A HREF="./hudson/maven/MavenBuildProxy.BuildCallable.html" title="type parameter in MavenBuildProxy.BuildCallable">V</A>,<A HREF="./hudson/maven/MavenBuildProxy.BuildCallable.html" title="type parameter in MavenBuildProxy.BuildCallable">T</A> extends java.lang.Throwable&gt; - Interface in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>&nbsp;<DT><A HREF="./hudson/maven/MavenBuildProxy.Filter.html" title="class in hudson.maven"><B>MavenBuildProxy.Filter</B></A>&lt;<A HREF="./hudson/maven/MavenBuildProxy.Filter.html" title="type parameter in MavenBuildProxy.Filter">CORE</A> extends <A HREF="./hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven">MavenBuildProxy</A>&gt; - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>Filter for <A HREF="./hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven"><CODE>MavenBuildProxy</CODE></A>.<DT><A HREF="./hudson/maven/MavenBuildProxy.Filter.html#MavenBuildProxy.Filter(CORE)"><B>MavenBuildProxy.Filter(CORE)</B></A> - 
 Constructor for class hudson.maven.<A HREF="./hudson/maven/MavenBuildProxy.Filter.html" title="class in hudson.maven">MavenBuildProxy.Filter</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/maven/MavenBuildProxy.Filter.AsyncInvoker.html" title="class in hudson.maven"><B>MavenBuildProxy.Filter.AsyncInvoker</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD><CODE>Callable</CODE> for invoking <A HREF="./hudson/maven/MavenBuildProxy.BuildCallable.html" title="interface in hudson.maven"><CODE>MavenBuildProxy.BuildCallable</CODE></A> asynchronously.<DT><A HREF="./hudson/maven/MavenBuildProxy.Filter.AsyncInvoker.html#MavenBuildProxy.Filter.AsyncInvoker(hudson.maven.MavenBuildProxy, hudson.maven.MavenBuildProxy.BuildCallable)"><B>MavenBuildProxy.Filter.AsyncInvoker(MavenBuildProxy, MavenBuildProxy.BuildCallable&lt;?, ?&gt;)</B></A> - 
+<DT><A HREF="./hudson/maven/MavenBuildProxy.Filter.AsyncInvoker.html" title="class in hudson.maven"><B>MavenBuildProxy.Filter.AsyncInvoker</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD><A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Callable</CODE></A> for invoking <A HREF="./hudson/maven/MavenBuildProxy.BuildCallable.html" title="interface in hudson.maven"><CODE>MavenBuildProxy.BuildCallable</CODE></A> asynchronously.<DT><A HREF="./hudson/maven/MavenBuildProxy.Filter.AsyncInvoker.html#MavenBuildProxy.Filter.AsyncInvoker(hudson.maven.MavenBuildProxy, hudson.maven.MavenBuildProxy.BuildCallable)"><B>MavenBuildProxy.Filter.AsyncInvoker(MavenBuildProxy, MavenBuildProxy.BuildCallable&lt;?, ?&gt;)</B></A> - 
 Constructor for class hudson.maven.<A HREF="./hudson/maven/MavenBuildProxy.Filter.AsyncInvoker.html" title="class in hudson.maven">MavenBuildProxy.Filter.AsyncInvoker</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/maven/MavenEmbedder.html" title="class in hudson.maven"><B>MavenEmbedder</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>Class intended to be used by clients who wish to embed Maven into their applications<DT><A HREF="./hudson/maven/MavenEmbedder.html#MavenEmbedder()"><B>MavenEmbedder()</B></A> - 
@@ -8992,6 +9064,27 @@ Method in class hudson.scheduler.<A HREF="./hudson/scheduler/CrontabLexer.html" 
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/ModelObject.html" title="interface in hudson.model"><B>ModelObject</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>A model object has a URL.<DT><A HREF="./hudson/scm/SubversionChangeLogSet.RevisionInfo.html#module"><B>module</B></A> - 
 Variable in class hudson.scm.<A HREF="./hudson/scm/SubversionChangeLogSet.RevisionInfo.html" title="class in hudson.scm">SubversionChangeLogSet.RevisionInfo</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven"><B>ModuleDependency</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>group id + artifact id + version.<DT><A HREF="./hudson/maven/ModuleDependency.html#ModuleDependency(java.lang.String, java.lang.String, java.lang.String)"><B>ModuleDependency(String, String, String)</B></A> - 
+Constructor for class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/maven/ModuleDependency.html#ModuleDependency(hudson.maven.ModuleName, java.lang.String)"><B>ModuleDependency(ModuleName, String)</B></A> - 
+Constructor for class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/maven/ModuleDependency.html#ModuleDependency(org.apache.maven.model.Dependency)"><B>ModuleDependency(Dependency)</B></A> - 
+Constructor for class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/maven/ModuleDependency.html#ModuleDependency(org.apache.maven.project.MavenProject)"><B>ModuleDependency(MavenProject)</B></A> - 
+Constructor for class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/maven/ModuleDependency.html#ModuleDependency(org.apache.maven.model.Plugin)"><B>ModuleDependency(Plugin)</B></A> - 
+Constructor for class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/maven/ModuleDependency.html#ModuleDependency(org.apache.maven.model.ReportPlugin)"><B>ModuleDependency(ReportPlugin)</B></A> - 
+Constructor for class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/maven/ModuleDependency.html#ModuleDependency(org.apache.maven.model.Extension)"><B>ModuleDependency(Extension)</B></A> - 
+Constructor for class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/maven/ModuleName.html" title="class in hudson.maven"><B>ModuleName</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>Version independent name of a Maven project.<DT><A HREF="./hudson/maven/ModuleName.html#ModuleName(java.lang.String, java.lang.String)"><B>ModuleName(String, String)</B></A> - 
 Constructor for class hudson.maven.<A HREF="./hudson/maven/ModuleName.html" title="class in hudson.maven">ModuleName</A>
@@ -9847,7 +9940,7 @@ Constructor for class hudson.<A HREF="./hudson/Proc.LocalProc.html" title="class
 <DT><A HREF="./hudson/Proc.LocalProc.html#Proc.LocalProc(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, java.io.File)"><B>Proc.LocalProc(String[], String[], InputStream, OutputStream, File)</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/Proc.LocalProc.html" title="class in hudson">Proc.LocalProc</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/Proc.RemoteProc.html" title="class in hudson"><B>Proc.RemoteProc</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD>Retemoly launched process via <CODE>Channel</CODE>.<DT><A HREF="./hudson/Proc.RemoteProc.html#Proc.RemoteProc(java.util.concurrent.Future)"><B>Proc.RemoteProc(Future&lt;Integer&gt;)</B></A> - 
+<DT><A HREF="./hudson/Proc.RemoteProc.html" title="class in hudson"><B>Proc.RemoteProc</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD>Retemoly launched process via <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A>.<DT><A HREF="./hudson/Proc.RemoteProc.html#Proc.RemoteProc(java.util.concurrent.Future)"><B>Proc.RemoteProc(Future&lt;Integer&gt;)</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/Proc.RemoteProc.html" title="class in hudson">Proc.RemoteProc</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/FormFieldValidator.html#process()"><B>process()</B></A> - 
@@ -10639,7 +10732,7 @@ Method in class hudson.org.apache.tools.ant.taskdefs.cvslib.<A HREF="./hudson/or
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Slave.ComputerImpl.html#setChannel(java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.remoting.Channel.Listener)"><B>setChannel(InputStream, OutputStream, OutputStream, Channel.Listener)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Slave.ComputerImpl.html" title="class in hudson.model">Slave.ComputerImpl</A>
-<DD>Creates a <CODE>Channel</CODE> from the given stream and sets that to this slave.
+<DD>Creates a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A> from the given stream and sets that to this slave.
 <DT><A HREF="./hudson/maven/MavenEmbedder.html#setClassLoader(java.lang.ClassLoader)"><B>setClassLoader(ClassLoader)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A>
 <DD>Set the classloader to use with the maven embedder.
@@ -11637,6 +11730,10 @@ Constructor for class hudson.search.<A HREF="./hudson/search/UnionSearchIndex.ht
 <DT><A HREF="./hudson/maven/RedeployPublisher.html#uniqueVersion"><B>uniqueVersion</B></A> - 
 Variable in class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.html" title="class in hudson.maven">RedeployPublisher</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/maven/ModuleDependency.html#UNKNOWN"><B>UNKNOWN</B></A> - 
+Static variable in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
+<DD>For compatibility reason, this value may be used in the verion field
+ to indicate that the version is unknown.
 <DT><A HREF="./hudson/security/GlobalMatrixAuthorizationStrategy.ConverterImpl.html#unmarshal(com.thoughtworks.xstream.io.HierarchicalStreamReader, com.thoughtworks.xstream.converters.UnmarshallingContext)"><B>unmarshal(HierarchicalStreamReader, UnmarshallingContext)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/GlobalMatrixAuthorizationStrategy.ConverterImpl.html" title="class in hudson.security">GlobalMatrixAuthorizationStrategy.ConverterImpl</A>
 <DD>&nbsp;
@@ -11892,6 +11989,9 @@ Method in class hudson.util.<A HREF="./hudson/util/ListBoxModel.html" title="cla
 <DT><A HREF="./hudson/maven/ExecutedMojo.html#version"><B>version</B></A> - 
 Variable in class hudson.maven.<A HREF="./hudson/maven/ExecutedMojo.html" title="class in hudson.maven">ExecutedMojo</A>
 <DD>Plugin version.
+<DT><A HREF="./hudson/maven/ModuleDependency.html#version"><B>version</B></A> - 
+Variable in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/PluginName.html#version"><B>version</B></A> - 
 Variable in class hudson.maven.<A HREF="./hudson/maven/PluginName.html" title="class in hudson.maven">PluginName</A>
 <DD>&nbsp;
@@ -11963,6 +12063,9 @@ Constructor for class hudson.widgets.<A HREF="./hudson/widgets/Widget.html" titl
 <DT><A HREF="./hudson/matrix/Layouter.html#width(int)"><B>width(int)</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/Layouter.html" title="class in hudson.matrix">Layouter</A>
 <DD>Computes the width of n-th X-axis.
+<DT><A HREF="./hudson/maven/ModuleDependency.html#withUnknownVersion()"><B>withUnknownVersion()</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
+<DD>Returns groupId+artifactId plus unknown version.
 <DT><A HREF="./hudson/model/TaskAction.html#workerThread"><B>workerThread</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/TaskAction.html" title="class in hudson.model">TaskAction</A>
 <DD>If non-null, that means either the activitiy is in progress
@@ -12348,6 +12451,57 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/scheduler/Messages.html#_CronTabList_InvalidInput(java.lang.Object, java.lang.Object)"><B>_CronTabList_InvalidInput(Object, Object)</B></A> - 
 Static method in class hudson.scheduler.<A HREF="./hudson/scheduler/Messages.html" title="class in hudson.scheduler">Messages</A>
 <DD>Invalid input: "{0}": {1}
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_DisplayName1()"><B>_CVSSCM_DisplayName1()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>CVS tag
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_DisplayName2()"><B>_CVSSCM_DisplayName2()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>CVS tags
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_ExpandingWorkspaceArchive(java.lang.Object)"><B>_CVSSCM_ExpandingWorkspaceArchive(Object)</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>expanding the workspace archive into {0}
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_FailedToMarkForKeep(java.lang.Object)"><B>_CVSSCM_FailedToMarkForKeep(Object)</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Failed to mark {0} for keep
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_HeadIsNotBranch()"><B>_CVSSCM_HeadIsNotBranch()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Technically, HEAD is not a branch in CVS.
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_InvalidCvsroot()"><B>_CVSSCM_InvalidCvsroot()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Invalid CVSROOT string
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_MissingCvsroot()"><B>_CVSSCM_MissingCvsroot()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>CVSROOT is mandatory
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_NoValidTagNameGivenFor(java.lang.Object, java.lang.Object)"><B>_CVSSCM_NoValidTagNameGivenFor(Object, Object)</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>No valid tag name given for {0} : {1}
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_PasswordNotSet()"><B>_CVSSCM_PasswordNotSet()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>It doesn''t look like this CVSROOT has its password set.
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_TagContainsIllegalChar(java.lang.Object)"><B>_CVSSCM_TagContainsIllegalChar(Object)</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Tag contains illegal ''{0}'' character
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_TaggingFailed()"><B>_CVSSCM_TaggingFailed()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>tagging failed
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_TaggingWorkspace()"><B>_CVSSCM_TaggingWorkspace()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>tagging the workspace
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_TagginXasY(java.lang.Object, java.lang.Object)"><B>_CVSSCM_TagginXasY(Object, Object)</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Tagging {0} as {1}
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_TagIsEmpty()"><B>_CVSSCM_TagIsEmpty()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Tag is empty
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_TagNeedsToStartWithAlphabet()"><B>_CVSSCM_TagNeedsToStartWithAlphabet()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Tag needs to start with alphabet
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_TagThisBuild()"><B>_CVSSCM_TagThisBuild()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Tag this build
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_WorkspaceInconsistent()"><B>_CVSSCM_WorkspaceInconsistent()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Workspace is inconsistent with configuration.
 <DT><A HREF="./hudson/node_monitors/Messages.html#_DiskSpaceMonitor_displayName()"><B>_DiskSpaceMonitor_displayName()</B></A> - 
 Static method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/Messages.html" title="class in hudson.node_monitors">Messages</A>
 <DD>Free Disk Space
@@ -12848,6 +13002,6 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright © 2008. All Rights Reserved.
+Copyright &#169; 2008. All Rights Reserved.
 </BODY>
 </HTML>

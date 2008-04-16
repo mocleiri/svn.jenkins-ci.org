@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.207 API)
+Functions (Hudson core 1.209 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-15">
+<META NAME="date" CONTENT="2008-04-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.207 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.207 API)";
+        parent.document.title="Functions (Hudson core 1.209 API)";
     }
 }
 </SCRIPT>
@@ -251,9 +251,16 @@ Utility functions used in views.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;java.lang.Object</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Functions.html#defaulted(java.lang.Object, java.lang.Object)">defaulted</A></B>(java.lang.Object&nbsp;value,
-          java.lang.Object&nbsp;defaultValue)</CODE>
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; T</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#defaulted(T, T)">defaulted</A></B>(T&nbsp;value,
+          T&nbsp;defaultValue)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the value exists, return that value.</TD>
@@ -1500,11 +1507,11 @@ public static boolean <B>defaultToTrue</B>(java.lang.Boolean&nbsp;b)</PRE>
 </DL>
 <HR>
 
-<A NAME="defaulted(java.lang.Object, java.lang.Object)"><!-- --></A><H3>
+<A NAME="defaulted(java.lang.Object,java.lang.Object)"><!-- --></A><A NAME="defaulted(T, T)"><!-- --></A><H3>
 defaulted</H3>
 <PRE>
-public static java.lang.Object <B>defaulted</B>(java.lang.Object&nbsp;value,
-                                         java.lang.Object&nbsp;defaultValue)</PRE>
+public static &lt;T&gt; T <B>defaulted</B>(T&nbsp;value,
+                              T&nbsp;defaultValue)</PRE>
 <DL>
 <DD>If the value exists, return that value. Otherwise return the default value.
  <p>
@@ -1675,6 +1682,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright © 2008. All Rights Reserved.
+Copyright &#169; 2008. All Rights Reserved.
 </BODY>
 </HTML>
