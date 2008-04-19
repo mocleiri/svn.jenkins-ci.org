@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Util (Hudson core 1.209 API)
+Util (Hudson core 1.210 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-16">
+<META NAME="date" CONTENT="2008-04-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson core 1.209 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson core 1.209 API)";
+        parent.document.title="Util (Hudson core 1.210 API)";
     }
 }
 </SCRIPT>
@@ -524,7 +524,7 @@ Various utility methods that don't have more proper home.
          java.lang.String&nbsp;delimiter)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tokenizes the text separated by delimiters.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -834,10 +834,16 @@ tokenize</H3>
 public static java.lang.String[] <B>tokenize</B>(java.lang.String&nbsp;s,
                                           java.lang.String&nbsp;delimiter)</PRE>
 <DL>
+<DD>Tokenizes the text separated by delimiters.
+
+ <p>
+ In 1.210, this method was changed to handle quotes like Unix shell does.
+ Before that, this method just used <CODE>StringTokenizer</CODE>.
+<P>
 <DD><DL>
 <DT><B>Since:</B></DT>
   <DD>1.145</DD>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../hudson/util/QuotedStringTokenizer.html" title="class in hudson.util"><CODE>QuotedStringTokenizer</CODE></A></DL>
 </DD>
 </DL>
 <HR>

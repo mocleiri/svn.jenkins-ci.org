@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ModuleDependency (Hudson core 1.209 API)
+ModuleDependency (Hudson core 1.210 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-16">
+<META NAME="date" CONTENT="2008-04-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ModuleDependency (Hudson core 1.209 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ModuleDependency (Hudson core 1.209 API)";
+        parent.document.title="ModuleDependency (Hudson core 1.210 API)";
     }
 }
 </SCRIPT>
@@ -140,6 +140,15 @@ group id + artifact id + version.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/ModuleDependency.html#NONE">NONE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When a plugin dependency is specified without giving a version,
+ the semantics of that is the latest released plugin.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -318,6 +327,26 @@ public static final java.lang.String <B>UNKNOWN</B></PRE>
 <P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../constant-values.html#hudson.maven.ModuleDependency.UNKNOWN">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="NONE"><!-- --></A><H3>
+NONE</H3>
+<PRE>
+public static final java.lang.String <B>NONE</B></PRE>
+<DL>
+<DD>When a plugin dependency is specified without giving a version,
+ the semantics of that is the latest released plugin.
+ In this case, we don't want the <A HREF="../../hudson/maven/ModuleDependency.html" title="class in hudson.maven"><CODE>ModuleDependency</CODE></A> version to become
+ <A HREF="../../hudson/maven/ModuleDependency.html#UNKNOWN"><CODE>UNKNOWN</CODE></A>, which would match any builds of the plugin.
+
+ <p>
+ So we use this constant to indicate a version, and this will not match
+ anything.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/maven/ModuleDependency.html#ModuleDependency(org.apache.maven.model.Plugin)"><CODE>ModuleDependency(Plugin)</CODE></A>, 
+<A HREF="../../constant-values.html#hudson.maven.ModuleDependency.NONE">Constant Field Values</A></DL>
 </DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
