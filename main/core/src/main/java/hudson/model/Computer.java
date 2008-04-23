@@ -80,12 +80,10 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
 		return Hudson.getInstance().getAuthorizationStrategy().getACL(this);
 	}
 
-    @Override
 	public void checkPermission(Permission permission) {
 		getACL().checkPermission(permission);
 	}
 
-    @Override
 	public boolean hasPermission(Permission permission) {
 		return getACL().hasPermission(permission);
 	}

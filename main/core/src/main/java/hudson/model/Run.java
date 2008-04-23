@@ -9,6 +9,7 @@ import hudson.FilePath;
 import hudson.Util;
 import static hudson.Util.combine;
 import hudson.XmlFile;
+import hudson.security.AccessControlled;
 import hudson.security.Permission;
 import hudson.security.PermissionGroup;
 import hudson.security.ACL;
@@ -70,7 +71,7 @@ import java.util.logging.Logger;
  */
 @ExportedBean
 public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
-        extends Actionable implements ExtensionPoint, Comparable<RunT> {
+        extends Actionable implements ExtensionPoint, Comparable<RunT>, AccessControlled {
 
     protected transient final JobT project;
 
@@ -656,6 +657,10 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
 
     public void checkPermission(Permission p) {
         getACL().checkPermission(p);
+    }
+
+    public boolean hasPermission(Permission p) {
+        return getACL().hasPermission(p);
     }
 
     public ACL getACL() {
