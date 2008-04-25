@@ -20,7 +20,7 @@ public class Memoizer<A, V> implements Computable<A, V> {
 		while (true) {
 			ExpiringFutureTask<V> f = cache.get(arg);
 			if (f != null && f.hasExpired()) {
-				cache.remove(f);
+				cache.remove(arg);
 				f = null;
 			}
 			if (f == null) {
@@ -43,6 +43,7 @@ public class Memoizer<A, V> implements Computable<A, V> {
 			} catch (ExecutionException e) {
 				// Kabutz: this is my addition to the code...
 				try {
+					cache.remove(arg, f);
 					throw e.getCause();
 				} catch (RuntimeException ex) {
 					throw ex;
