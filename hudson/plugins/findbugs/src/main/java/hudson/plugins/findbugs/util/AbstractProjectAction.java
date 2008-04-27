@@ -163,6 +163,13 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
     }
 
     /**
+     * Returns the title of the trend graph.
+     *
+     * @return the title of the trend graph.
+     */
+    public abstract String getTrendName();
+
+    /**
      * Display the trend map. Delegates to the the associated
      * {@link ResultAction}.
      *
@@ -226,7 +233,7 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
      *             in case of an error
      */
     public void doFlipTrend(final StaplerRequest request, final StaplerResponse response) throws IOException {
-        boolean useHealthBuilder = true;
+        boolean useHealthBuilder = false;
 
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -254,5 +261,5 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
      *
      * @return the flip trend cookie name.
      */
-    protected abstract String getCookieName();
+    public abstract String getCookieName();
 }
