@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-BuildTrigger (Hudson core 1.211 API)
+BuildTrigger (Hudson core 1.212 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-24">
+<META NAME="date" CONTENT="2008-04-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildTrigger (Hudson core 1.211 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildTrigger (Hudson core 1.211 API)";
+        parent.document.title="BuildTrigger (Hudson core 1.212 API)";
     }
 }
 </SCRIPT>
@@ -108,6 +108,16 @@ java.lang.Object
 
 <P>
 Triggers builds of other projects.
+
+ <p>
+ Despite what the name suggests, this class doesn't actually trigger other jobs
+ as a part of <A HREF="../../hudson/tasks/BuildTrigger.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)</CODE></A> method. Its main job is to simply augument
+ <A HREF="../../hudson/model/DependencyGraph.html" title="class in hudson.model"><CODE>DependencyGraph</CODE></A>. Jobs are responsible for triggering downstream jobs
+ on its own, because dependencies may come from other sources.
+
+ <p>
+ This class, however, does provide the <A HREF="../../hudson/tasks/BuildTrigger.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener, hudson.tasks.BuildTrigger)"><CODE>execute(AbstractBuild, BuildListener, BuildTrigger)</CODE></A>
+ method as a convenience method to invoke downstream builds.
 <P>
 
 <P>
@@ -229,6 +239,16 @@ Triggers builds of other projects.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new instance of the aggregator.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/BuildTrigger.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener, hudson.tasks.BuildTrigger)">execute</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+        <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+        <A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks">BuildTrigger</A>&nbsp;trigger)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience method to trigger downstream builds.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -484,6 +504,28 @@ public boolean <B>perform</B>(<A HREF="../../hudson/model/AbstractBuild.html" ti
 
 <DT><B>Returns:</B><DD>true if the build can continue, false if there was an error
       and the build needs to be aborted.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="execute(hudson.model.AbstractBuild, hudson.model.BuildListener, hudson.tasks.BuildTrigger)"><!-- --></A><H3>
+execute</H3>
+<PRE>
+public static boolean <B>execute</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+                              <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+                              <A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks">BuildTrigger</A>&nbsp;trigger)</PRE>
+<DL>
+<DD>Convenience method to trigger downstream builds.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>build</CODE> - The current build. Its downstreams will be triggered.<DD><CODE>listener</CODE> - Receives the progress report.<DD><CODE>trigger</CODE> - Optional <A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks"><CODE>BuildTrigger</CODE></A> configured for the current build.
+      If it is non-null, its configuration value will affect the triggering behavior.
+      But even when this is null (meaning no user-defined downstream project is set up),
+      there might be other dependencies defined by somebody else, so buidl would
+      still have to call this method.</DL>
 </DD>
 </DL>
 <HR>
