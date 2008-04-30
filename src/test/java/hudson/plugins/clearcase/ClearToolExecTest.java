@@ -7,6 +7,7 @@ import hudson.model.BuildListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Reader;
 import java.util.Calendar;
 import java.util.List;
 import org.jmock.Expectations;
@@ -221,6 +222,23 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
         String configSpec = clearToolExec.catcs("viewname");
         assertEquals("The config spec was not correct", "element * CHECKEDOUT\nelement * ...\\rel2_bugfix\\LATEST\nelement * \\main\\LATEST -mkbranch rel2_bugfix", configSpec);
         
+        context.assertIsSatisfied();
+    }
+    @Test
+    public void testLsactivity() throws Exception {
+        workspace.child("viewName").mkdirs();
+        context.checking(new Expectations() {
+            {
+                one(launcher).run(
+                        with(equal(new String[] { "commandname", "lsactivity", "-fmt", "ACTIVITY_FORMAT", 
+                                "ACTIVITY@VOB"})), (InputStream) with(anything()),
+                        (OutputStream) with(an(OutputStream.class)), with(aNull(FilePath.class)));
+                will(doAll(new StreamCopyAction(2, ClearToolExecTest.class.getResourceAsStream("ct-lsactivity-1.log")),
+                        returnValue(Boolean.TRUE)));
+            }
+        });
+        Reader reader = clearToolExec.lsactivity("ACTIVITY@VOB", "ACTIVITY_FORMAT");
+        assertNotNull("Returned console reader can not be null", reader);
         context.assertIsSatisfied();
     }
     /**

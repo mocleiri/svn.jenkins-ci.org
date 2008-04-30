@@ -1,6 +1,7 @@
 package hudson.plugins.clearcase;
 
 import java.io.IOException;
+import java.io.Reader;
 import java.util.Date;
 import java.util.List;
 
@@ -63,6 +64,14 @@ public interface ClearTool {
     List<ClearCaseChangeLogEntry> lshistory(Date lastBuildDate, String viewName,
             String branch, String vobPaths) throws IOException, InterruptedException;
 
+    /**
+     * Lists activities .......(?)
+     * @throws InterruptedException 
+     * @throws IOException
+     * @return reader containing command output 
+     */
+    Reader lsactivity(String activity, String commandFormat) throws IOException, InterruptedException;
+    
     /**
      * Lists view registry entries
      * 

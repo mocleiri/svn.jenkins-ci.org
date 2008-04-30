@@ -1,5 +1,6 @@
 package hudson.plugins.clearcase.ucm;
 
+import hudson.plugins.clearcase.ClearTool;
 import hudson.util.ArgumentListBuilder;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -71,9 +72,11 @@ public class UcmHistoryBuilder {
     private Pattern activityPattern;
     private Pattern integrationActivityPattern;
     private SimpleDateFormat dateFormatter;
-    private Map<String, UcmActivity> activityNameToEntry;    
+    private Map<String, UcmActivity> activityNameToEntry;
+    private final ClearTool cleartool;    
 
-    public UcmHistoryBuilder() {
+    public UcmHistoryBuilder(ClearTool cleartool) {
+        this.cleartool = cleartool;
         historyPattern = Pattern.compile(LOG_PATTERN);
         activityPattern = Pattern.compile(ACTIVITY_PATTERN);
         integrationActivityPattern = Pattern.compile(INTEGRATION_ACTIVITY_PATTERN);
@@ -111,9 +114,10 @@ public class UcmHistoryBuilder {
         } catch (ParseException e) {
             System.out.println("Parsecaught when building changelog " + e.getMessage());
             return new ArrayList<UcmActivity>();
+        } catch (InterruptedException e) {
+            System.out.println("Interrupted when building changelog " + e.getMessage());
+            return new ArrayList<UcmActivity>();
         }
-
-
     }
 
     public List<UcmActivity> parse(Reader inReader) throws IOException, ParseException {
@@ -196,27 +200,19 @@ public class UcmHistoryBuilder {
         }
         
     }
-    public UcmActivity performActivityLookup(String activityName,String vobName) {    
+    public UcmActivity performActivityLookup(String activityName,String vobName) throws IOException, InterruptedException {    
         UcmActivity result = new UcmActivity();
         result.setName(activityName);
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-        //todo: how to obtain this. Perhaps move actual lsactivity call to other place ?
-        //TODO:cmd.add(clearToolExec);
-        cmd.add("lsactivity");
 
+        String format;
         // Clearcase cannot handle [contrib_acts] if not a deliver or rebase activity
         if (result.isIntegrationActivity()) {
-            cmd.add("-fmt", INTEGRATION_ACTIVITY_FORMAT);
+            format = INTEGRATION_ACTIVITY_FORMAT;
         } else {
-            cmd.add("-fmt", ACTIVITY_FORMAT);
+            format = ACTIVITY_FORMAT;
         }
-        // activity name must be last
-        cmd.add(activityName + "@" + vobName);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        // how to get Launcher ?
-        if (launcher.run(cmd.toCommandArray(), null, baos, null)) {
-            parseActivityOutput(result,new InputStreamReader(new ByteArrayInputStream(baos.toByteArray())), vobName);
-        }
+        
+        parseActivityOutput(result,cleartool.lsactivity(activityName + "@" + vobName, format), vobName);
         return result;
     }
 

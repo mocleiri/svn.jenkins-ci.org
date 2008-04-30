@@ -95,6 +95,17 @@ public abstract class ClearToolExec implements ClearTool {
         }
         return vobNameArray;
     }
+    
+    public Reader lsactivity(String activity, String commandFormat) throws IOException, InterruptedException {
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
+        cmd.add(clearToolExec);
+        cmd.add("lsactivity");
+        cmd.add("-fmt", commandFormat);
+        cmd.add(activity);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        launcher.run(cmd.toCommandArray(), null, baos, null);
+        return new InputStreamReader(new ByteArrayInputStream(baos.toByteArray()));
+    }
 
     public void mklabel(String viewName, String label) throws IOException,
             InterruptedException {
