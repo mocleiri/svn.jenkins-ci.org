@@ -24,6 +24,8 @@ import hudson.util.StreamTaskListener;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.Converter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
@@ -37,15 +39,12 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
+
+import net.sf.json.JSONObject;
 
 /**
  * Information about a Hudson slave node.
@@ -129,14 +128,13 @@ public final class Slave implements Node, Serializable {
     /**
      * @stapler-constructor
      */
-    public Slave(String name, String description, SlaveStartMethod startMethod, String remoteFS, int numExecutors,
+    public Slave(String name, String description, String remoteFS, int numExecutors,
                  Mode mode, String label, Availability onlineAvailability, int demandPeriod,
                  int idlePeriod, String startupSpec, String shutdownSpec) throws FormException {
         this.name = name;
         this.description = description;
         this.numExecutors = numExecutors;
         this.mode = mode;
-        this.startMethod = startMethod;
         this.remoteFS = remoteFS;
         this.label = Util.fixNull(label).trim();
         this.onlineAvailability = onlineAvailability;
@@ -163,6 +161,10 @@ public final class Slave implements Node, Serializable {
 
     public SlaveStartMethod getStartMethod() {
         return startMethod == null ? new JNLPStartMethod() : startMethod;
+    }
+
+    public void setStartMethod(SlaveStartMethod startMethod) {
+        this.startMethod = startMethod;
     }
 
     public String getRemoteFS() {
@@ -670,7 +672,7 @@ public final class Slave implements Node, Serializable {
 
     public static class JNLPStartMethod implements SlaveStartMethod {
 
-        @DataBoundConstructor
+        //@DataBoundConstructor
         public JNLPStartMethod() {
         }
 
@@ -681,6 +683,10 @@ public final class Slave implements Node, Serializable {
         public static final Descriptor<SlaveStartMethod> DESCRIPTOR = new Descriptor<SlaveStartMethod>(JNLPStartMethod.class) {
             public String getDisplayName() {
                 return "Launch slave agents via JNLP";
+            }
+
+            public SlaveStartMethod newInstance(StaplerRequest req, JSONObject formData) throws FormException {
+                return new JNLPStartMethod();
             }
         };
     }
@@ -739,4 +745,17 @@ public final class Slave implements Node, Serializable {
      */
     private transient String agentCommand;
 
+
+//    static {
+//        ConvertUtils.register(new Converter(){
+//            public Object convert(Class type, Object value) {
+//                if (value != null) {
+//                System.out.println("CVT: " + type + " from (" + value.getClass() + ") " + value);
+//                } else {
+//                    System.out.println("CVT: " + type + " from " + value);
+//                }
+//                return null;  //To change body of implemented methods use File | Settings | File Templates.
+//            }
+//        }, SlaveStartMethod.class);
+//    }
 }

@@ -4,6 +4,9 @@ import hudson.ExtensionPoint;
 
 import java.util.List;
 
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.Converter;
+
 /**
  * Extension point to allow control over how Slaves are started.
  *
