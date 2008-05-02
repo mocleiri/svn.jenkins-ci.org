@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SurefireArchiver (Hudson core 1.212 API)
+SurefireArchiver (Hudson core 1.213 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-28">
+<META NAME="date" CONTENT="2008-05-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SurefireArchiver (Hudson core 1.212 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SurefireArchiver (Hudson core 1.212 API)";
+        parent.document.title="SurefireArchiver (Hudson core 1.213 API)";
     }
 }
 </SCRIPT>
@@ -206,7 +206,7 @@ Records the surefire test result.
 <TH ALIGN="left"><B>Methods inherited from class hudson.maven.<A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/maven/MavenReporter.html#end(hudson.maven.MavenBuild, hudson.Launcher, hudson.model.BuildListener)">end</A>, <A HREF="../../../hudson/maven/MavenReporter.html#enterModule(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">enterModule</A>, <A HREF="../../../hudson/maven/MavenReporter.html#leaveModule(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">leaveModule</A>, <A HREF="../../../hudson/maven/MavenReporter.html#postBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">postBuild</A>, <A HREF="../../../hudson/maven/MavenReporter.html#preBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">preBuild</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/maven/MavenReporter.html#end(hudson.maven.MavenBuild, hudson.Launcher, hudson.model.BuildListener)">end</A>, <A HREF="../../../hudson/maven/MavenReporter.html#enterModule(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">enterModule</A>, <A HREF="../../../hudson/maven/MavenReporter.html#getAggregatedProjectAction(hudson.maven.MavenModuleSet)">getAggregatedProjectAction</A>, <A HREF="../../../hudson/maven/MavenReporter.html#leaveModule(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">leaveModule</A>, <A HREF="../../../hudson/maven/MavenReporter.html#postBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">postBuild</A>, <A HREF="../../../hudson/maven/MavenReporter.html#preBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">preBuild</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -313,12 +313,25 @@ public <A HREF="../../../hudson/model/Action.html" title="interface in hudson.mo
 <DD><B>Description copied from class: <CODE><A HREF="../../../hudson/maven/MavenReporter.html#getProjectAction(hudson.maven.MavenModule)">MavenReporter</A></CODE></B></DD>
 <DD>Equivalent of <A HREF="../../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)"><CODE>BuildStep.getProjectAction(AbstractProject)</CODE></A>
  for <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>.
+
+ <p>
+ Registers a transient action to <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A> when it's rendered.
+ This is useful if you'd like to display an action at the module level.
+
+ <p>
+ Since this contributes a transient action, the returned <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>
+ will not be serialized.
+
+ <p>
+ For this method to be invoked, your <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A> has to invoke
+ <A HREF="../../../hudson/maven/MavenBuildProxy.html#registerAsProjectAction(hudson.maven.MavenReporter)"><CODE>MavenBuildProxy.registerAsProjectAction(MavenReporter)</CODE></A> during the build.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/maven/MavenReporter.html#getProjectAction(hudson.maven.MavenModule)">getProjectAction</A></CODE> in class <CODE><A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A></CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Returns:</B><DD>null not to contribute an action, which is the default.</DL>
 </DD>
 </DL>
 <HR>

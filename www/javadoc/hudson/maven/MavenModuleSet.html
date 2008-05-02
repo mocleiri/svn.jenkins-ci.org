@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MavenModuleSet (Hudson core 1.212 API)
+MavenModuleSet (Hudson core 1.213 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-28">
+<META NAME="date" CONTENT="2008-05-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenModuleSet (Hudson core 1.212 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenModuleSet (Hudson core 1.212 API)";
+        parent.document.title="MavenModuleSet (Hudson core 1.213 API)";
     }
 }
 </SCRIPT>
@@ -167,7 +167,7 @@ Group of <A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.ma
 <TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/AbstractProject.html#ABORT">ABORT</A>, <A HREF="../../hudson/model/AbstractProject.html#BUILD">BUILD</A>, <A HREF="../../hudson/model/AbstractProject.html#builds">builds</A>, <A HREF="../../hudson/model/AbstractProject.html#disabled">disabled</A>, <A HREF="../../hudson/model/AbstractProject.html#transientActions">transientActions</A>, <A HREF="../../hudson/model/AbstractProject.html#triggers">triggers</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/AbstractProject.html#ABORT">ABORT</A>, <A HREF="../../hudson/model/AbstractProject.html#BUILD">BUILD</A>, <A HREF="../../hudson/model/AbstractProject.html#builds">builds</A>, <A HREF="../../hudson/model/AbstractProject.html#disabled">disabled</A>, <A HREF="../../hudson/model/AbstractProject.html#transientActions">transientActions</A>, <A HREF="../../hudson/model/AbstractProject.html#triggers">triggers</A>, <A HREF="../../hudson/model/AbstractProject.html#WORKSPACE">WORKSPACE</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.model.Job"><!-- --></A>
@@ -299,6 +299,14 @@ Group of <A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.ma
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Determines Class&lt;R>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenModuleSet.html#getBuildWrappers()">getBuildWrappers</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of active <A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -943,6 +951,22 @@ getPublishers</H3>
 public <A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt; <B>getPublishers</B>()</PRE>
 <DL>
 <DD>List of active <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A>s. Can be empty but never null.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBuildWrappers()"><!-- --></A><H3>
+getBuildWrappers</H3>
+<PRE>
+public <A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>&gt;&gt; <B>getBuildWrappers</B>()</PRE>
+<DL>
+<DD>List of active <A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A>s. Can be empty but never null.
 <P>
 <DD><DL>
 </DL>

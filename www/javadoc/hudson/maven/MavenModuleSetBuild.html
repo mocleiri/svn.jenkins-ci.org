@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MavenModuleSetBuild (Hudson core 1.212 API)
+MavenModuleSetBuild (Hudson core 1.213 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-28">
+<META NAME="date" CONTENT="2008-05-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenModuleSetBuild (Hudson core 1.212 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenModuleSetBuild (Hudson core 1.212 API)";
+        parent.document.title="MavenModuleSetBuild (Hudson core 1.213 API)";
     }
 }
 </SCRIPT>
@@ -178,6 +178,15 @@ java.lang.Object
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extra versbose debug switch.</TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.AbstractBuild"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractBuild.html#buildEnvironments">buildEnvironments</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.model.Run"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
@@ -279,6 +288,14 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the combined status of all modules.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenModuleSetBuild.html#registerAsProjectAction(hudson.maven.MavenReporter)">registerAsProjectAction</A></B>(<A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>&nbsp;reporter)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -471,6 +488,17 @@ public java.util.Map&lt;<A HREF="../../hudson/maven/MavenModule.html" title="cla
 <DL>
 <DD>Computes the latest module builds that correspond to this build.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="registerAsProjectAction(hudson.maven.MavenReporter)"><!-- --></A><H3>
+registerAsProjectAction</H3>
+<PRE>
+public void <B>registerAsProjectAction</B>(<A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>&nbsp;reporter)</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

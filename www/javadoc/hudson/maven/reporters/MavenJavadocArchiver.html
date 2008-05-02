@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MavenJavadocArchiver (Hudson core 1.212 API)
+MavenJavadocArchiver (Hudson core 1.213 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-28">
+<META NAME="date" CONTENT="2008-05-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenJavadocArchiver (Hudson core 1.212 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenJavadocArchiver (Hudson core 1.212 API)";
+        parent.document.title="MavenJavadocArchiver (Hudson core 1.213 API)";
     }
 }
 </SCRIPT>
@@ -161,6 +161,15 @@ Records the javadoc and archives it.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenJavadocArchiver.html#getAggregatedProjectAction(hudson.maven.MavenModuleSet)">getAggregatedProjectAction</A></B>(<A HREF="../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works like <A HREF="../../../hudson/maven/MavenReporter.html#getProjectAction(hudson.maven.MavenModule)"><CODE>MavenReporter.getProjectAction(MavenModule)</CODE></A> but
+ works at <A HREF="../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven"><CODE>MavenModuleSet</CODE></A> level.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/maven/reporters/MavenJavadocArchiver.DescriptorImpl.html" title="class in hudson.maven.reporters">MavenJavadocArchiver.DescriptorImpl</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenJavadocArchiver.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
@@ -276,12 +285,48 @@ public <A HREF="../../../hudson/model/Action.html" title="interface in hudson.mo
 <DD><B>Description copied from class: <CODE><A HREF="../../../hudson/maven/MavenReporter.html#getProjectAction(hudson.maven.MavenModule)">MavenReporter</A></CODE></B></DD>
 <DD>Equivalent of <A HREF="../../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)"><CODE>BuildStep.getProjectAction(AbstractProject)</CODE></A>
  for <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>.
+
+ <p>
+ Registers a transient action to <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A> when it's rendered.
+ This is useful if you'd like to display an action at the module level.
+
+ <p>
+ Since this contributes a transient action, the returned <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>
+ will not be serialized.
+
+ <p>
+ For this method to be invoked, your <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A> has to invoke
+ <A HREF="../../../hudson/maven/MavenBuildProxy.html#registerAsProjectAction(hudson.maven.MavenReporter)"><CODE>MavenBuildProxy.registerAsProjectAction(MavenReporter)</CODE></A> during the build.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/maven/MavenReporter.html#getProjectAction(hudson.maven.MavenModule)">getProjectAction</A></CODE> in class <CODE><A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A></CODE></DL>
 </DD>
 <DD><DL>
+
+<DT><B>Returns:</B><DD>null not to contribute an action, which is the default.</DL>
+</DD>
 </DL>
+<HR>
+
+<A NAME="getAggregatedProjectAction(hudson.maven.MavenModuleSet)"><!-- --></A><H3>
+getAggregatedProjectAction</H3>
+<PRE>
+public <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A> <B>getAggregatedProjectAction</B>(<A HREF="../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>&nbsp;project)</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/maven/MavenReporter.html#getAggregatedProjectAction(hudson.maven.MavenModuleSet)">MavenReporter</A></CODE></B></DD>
+<DD>Works like <A HREF="../../../hudson/maven/MavenReporter.html#getProjectAction(hudson.maven.MavenModule)"><CODE>MavenReporter.getProjectAction(MavenModule)</CODE></A> but
+ works at <A HREF="../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven"><CODE>MavenModuleSet</CODE></A> level.
+
+ <p>
+ For this method to be invoked, your <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A> has to invoke
+ <A HREF="../../../hudson/maven/MavenBuildProxy.html#registerAsAggregatedProjectAction(hudson.maven.MavenReporter)"><CODE>MavenBuildProxy.registerAsAggregatedProjectAction(MavenReporter)</CODE></A> during the build.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/maven/MavenReporter.html#getAggregatedProjectAction(hudson.maven.MavenModuleSet)">getAggregatedProjectAction</A></CODE> in class <CODE><A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>null not to contribute an action, which is the default.</DL>
 </DD>
 </DL>
 <HR>

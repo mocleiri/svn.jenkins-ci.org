@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Util (Hudson core 1.212 API)
+Util (Hudson core 1.213 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-28">
+<META NAME="date" CONTENT="2008-05-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson core 1.212 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson core 1.212 API)";
+        parent.document.title="Util (Hudson core 1.213 API)";
     }
 }
 </SCRIPT>
@@ -533,6 +533,15 @@ Various utility methods that don't have more proper home.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates an empty file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.Number</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Util.html#tryParseNumber(java.lang.String, java.lang.Number)">tryParseNumber</A></B>(java.lang.String&nbsp;numberStr,
+               java.lang.Number&nbsp;defaultNumber)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the parsed string if parsed successful; otherwise returns the default number.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1237,6 +1246,23 @@ public static java.lang.String <B>wrapToErrorSpan</B>(java.lang.String&nbsp;s)</
 <DT><B>Since:</B></DT>
   <DD>1.173</DD>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="tryParseNumber(java.lang.String, java.lang.Number)"><!-- --></A><H3>
+tryParseNumber</H3>
+<PRE>
+public static java.lang.Number <B>tryParseNumber</B>(java.lang.String&nbsp;numberStr,
+                                              java.lang.Number&nbsp;defaultNumber)</PRE>
+<DL>
+<DD>Returns the parsed string if parsed successful; otherwise returns the default number.
+ If the string is null, empty or a ParseException is thrown then the defaultNumber
+ is returned.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>numberStr</CODE> - string to parse<DD><CODE>defaultNumber</CODE> - number to return if the string can not be parsed
+<DT><B>Returns:</B><DD>returns the parsed string; otherwise the default number</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

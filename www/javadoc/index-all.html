@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.212 API)
+Index (Hudson core 1.213 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-28">
+<META NAME="date" CONTENT="2008-05-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.212 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.212 API)";
+        parent.document.title="Index (Hudson core 1.213 API)";
     }
 }
 </SCRIPT>
@@ -551,6 +551,12 @@ Static method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/Mess
 <DT><A HREF="./hudson/maven/reporters/MavenArtifact.html#archive(hudson.maven.MavenBuildProxy, java.io.File, hudson.model.BuildListener)"><B>archive(MavenBuildProxy, File, BuildListener)</B></A> - 
 Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenArtifact.html" title="class in hudson.maven.reporters">MavenArtifact</A>
 <DD>Called from within Maven to archive an artifact in Hudson.
+<DT><A HREF="./hudson/util/Area.html" title="class in hudson.util"><B>Area</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Represents a two dimensional area.<DT><A HREF="./hudson/util/Area.html#Area(int, int)"><B>Area(int, int)</B></A> - 
+Constructor for class hudson.util.<A HREF="./hudson/util/Area.html" title="class in hudson.util">Area</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/util/Area.html#area()"><B>area()</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/Area.html" title="class in hudson.util">Area</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/ArgumentListBuilder.html" title="class in hudson.util"><B>ArgumentListBuilder</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Used to build up arguments for a process invocation.<DT><A HREF="./hudson/util/ArgumentListBuilder.html#ArgumentListBuilder()"><B>ArgumentListBuilder()</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A>
 <DD>&nbsp;
@@ -857,6 +863,10 @@ Method in class hudson.util.<A HREF="./hudson/util/DescribableList.html" title="
 <DT><A HREF="./hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List, java.lang.String)"><B>buildDescribable(StaplerRequest, List&lt;? extends Descriptor&lt;T&gt;&gt;, String)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/AbstractBuild.html#buildEnvironments"><B>buildEnvironments</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>
+<DD>During the build this field remembers <CODE>BuildWrapper.Environment</CODE>s created by
+ <A HREF="./hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A>.
 <DT><A HREF="./hudson/model/JDK.html#buildEnvVars(java.util.Map)"><B>buildEnvVars(Map&lt;String, String&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/JDK.html" title="class in hudson.model">JDK</A>
 <DD>Sets PATH and JAVA_HOME from this JDK.
@@ -2468,6 +2478,9 @@ Method in class hudson.util.<A HREF="./hudson/util/HudsonIsLoading.html" title="
 <DT><A HREF="./hudson/model/Hudson.html#doExit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doExit(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Shutdown the system.
+<DT><A HREF="./hudson/model/Hudson.html#doFieldCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doFieldCheck(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>Checks if the value for a field is set; if not an error or warning text is displayed.
 <DT><A HREF="./hudson/ResponseHeaderFilter.html#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)"><B>doFilter(ServletRequest, ServletResponse, FilterChain)</B></A> - 
 Method in class hudson.<A HREF="./hudson/ResponseHeaderFilter.html" title="class in hudson">ResponseHeaderFilter</A>
 <DD>&nbsp;
@@ -3430,9 +3443,15 @@ Variable in class hudson.maven.<A HREF="./hudson/maven/MavenBuilder.html" title=
 <A NAME="_G_"><!-- --></A><H2>
 <B>G</B></H2>
 <DL>
+<DT><A HREF="./hudson/util/ChartUtil.html#generateClickableMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, org.jfree.chart.JFreeChart, hudson.util.Area)"><B>generateClickableMap(StaplerRequest, StaplerResponse, JFreeChart, Area)</B></A> - 
+Static method in class hudson.util.<A HREF="./hudson/util/ChartUtil.html" title="class in hudson.util">ChartUtil</A>
+<DD>Generates the clickable map info and sends that to the response.
 <DT><A HREF="./hudson/util/ChartUtil.html#generateClickableMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, org.jfree.chart.JFreeChart, int, int)"><B>generateClickableMap(StaplerRequest, StaplerResponse, JFreeChart, int, int)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/ChartUtil.html" title="class in hudson.util">ChartUtil</A>
 <DD>Generates the clickable map info and sends that to the response.
+<DT><A HREF="./hudson/util/ChartUtil.html#generateGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, org.jfree.chart.JFreeChart, hudson.util.Area)"><B>generateGraph(StaplerRequest, StaplerResponse, JFreeChart, Area)</B></A> - 
+Static method in class hudson.util.<A HREF="./hudson/util/ChartUtil.html" title="class in hudson.util">ChartUtil</A>
+<DD>Generates the graph in PNG format and sends that to the response.
 <DT><A HREF="./hudson/util/ChartUtil.html#generateGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, org.jfree.chart.JFreeChart, int, int)"><B>generateGraph(StaplerRequest, StaplerResponse, JFreeChart, int, int)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/ChartUtil.html" title="class in hudson.util">ChartUtil</A>
 <DD>Generates the graph in PNG format and sends that to the response.
@@ -3592,6 +3611,13 @@ Method in class hudson.scm.<A HREF="./hudson/scm/SubversionChangeLogSet.LogEntry
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>
 <DD>Gets the number of consecutive builds (including this)
  that this test case has been failing.
+<DT><A HREF="./hudson/maven/MavenReporter.html#getAggregatedProjectAction(hudson.maven.MavenModuleSet)"><B>getAggregatedProjectAction(MavenModuleSet)</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>
+<DD>Works like <A HREF="./hudson/maven/MavenReporter.html#getProjectAction(hudson.maven.MavenModule)"><CODE>MavenReporter.getProjectAction(MavenModule)</CODE></A> but
+ works at <A HREF="./hudson/maven/MavenModuleSet.html" title="class in hudson.maven"><CODE>MavenModuleSet</CODE></A> level.
+<DT><A HREF="./hudson/maven/reporters/MavenJavadocArchiver.html#getAggregatedProjectAction(hudson.maven.MavenModuleSet)"><B>getAggregatedProjectAction(MavenModuleSet)</B></A> - 
+Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenJavadocArchiver.html" title="class in hudson.maven.reporters">MavenJavadocArchiver</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/HealthReport.html#getAggregatedReports()"><B>getAggregatedReports()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/HealthReport.html" title="class in hudson.model">HealthReport</A>
 <DD>Getter for property 'aggregatedReports'.
@@ -3936,6 +3962,9 @@ Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixConfiguration.html"
 <DT><A HREF="./hudson/matrix/MatrixProject.html#getBuildWrappers()"><B>getBuildWrappers()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixProject.html" title="class in hudson.matrix">MatrixProject</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/maven/MavenModuleSet.html#getBuildWrappers()"><B>getBuildWrappers()</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>
+<DD>List of active <A HREF="./hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A>s.
 <DT><A HREF="./hudson/model/Project.html#getBuildWrappers()"><B>getBuildWrappers()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Project.html" title="class in hudson.model">Project</A>
 <DD>&nbsp;
@@ -4897,9 +4926,6 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenProbeAction.html" titl
 <DD>Gets the environment variables of the JVM on this computer.
 <DT><A HREF="./hudson/model/AbstractBuild.html#getEnvVars()"><B>getEnvVars()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>
-<DD>&nbsp;
-<DT><A HREF="./hudson/model/Build.html#getEnvVars()"><B>getEnvVars()</B></A> - 
-Method in class hudson.model.<A HREF="./hudson/model/Build.html" title="class in hudson.model">Build</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Computer.html#getEnvVars()"><B>getEnvVars()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
@@ -6561,6 +6587,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DT><A HREF="./hudson/model/HealthReport.html#getScore()"><B>getScore()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/HealthReport.html" title="class in hudson.model">HealthReport</A>
 <DD>Getter for property 'score'.
+<DT><A HREF="./hudson/Functions.html#getScreenResolution()"><B>getScreenResolution()</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
+<DD>If we know the user's screen resolution, return it.
 <DT><A HREF="./hudson/model/AbstractModelObject.html#getSearch()"><B>getSearch()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A>
 <DD>&nbsp;
@@ -7407,6 +7436,9 @@ Constructor for class hudson.model.<A HREF="./hudson/model/HealthReport.html" ti
 <DT><A HREF="./hudson/model/HealthReportingAction.html" title="interface in hudson.model"><B>HealthReportingAction</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>An <A HREF="./hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> that can return information about the health of the Job.<DT><A HREF="./hudson/matrix/Layouter.html#height(int)"><B>height(int)</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/Layouter.html" title="class in hudson.matrix">Layouter</A>
 <DD>Computes the width of n-th X-axis.
+<DT><A HREF="./hudson/util/Area.html#height"><B>height</B></A> - 
+Variable in class hudson.util.<A HREF="./hudson/util/Area.html" title="class in hudson.util">Area</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/HexBinaryConverter.html" title="class in hudson.util"><B>HexBinaryConverter</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>&nbsp;<DT><A HREF="./hudson/util/HexBinaryConverter.html#HexBinaryConverter()"><B>HexBinaryConverter()</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/HexBinaryConverter.html" title="class in hudson.util">HexBinaryConverter</A>
 <DD>&nbsp;
@@ -7465,9 +7497,18 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#Hudson_NotADirectory(java.lang.Object)"><B>Hudson_NotADirectory(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>{0} is not a directory
+<DT><A HREF="./hudson/model/Messages.html#Hudson_NotANegativeNumber()"><B>Hudson_NotANegativeNumber()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Not a negative number
+<DT><A HREF="./hudson/model/Messages.html#Hudson_NotANumber()"><B>Hudson_NotANumber()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Not a number
 <DT><A HREF="./hudson/model/Messages.html#Hudson_NotAPlugin(java.lang.Object)"><B>Hudson_NotAPlugin(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>{0} is not a Hudson plugin
+<DT><A HREF="./hudson/model/Messages.html#Hudson_NotAPositiveNumber()"><B>Hudson_NotAPositiveNumber()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Not a positive number
 <DT><A HREF="./hudson/model/Messages.html#Hudson_NotJDKDir(java.lang.Object)"><B>Hudson_NotJDKDir(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>{0} doesn''t look like a JDK directory
@@ -9688,6 +9729,9 @@ Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/TestResult.html
 <DT><A HREF="./hudson/tasks/junit/TestResult.html#parse(java.io.File)"><B>parse(File)</B></A> - 
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A>
 <DD>Parses an additional report file.
+<DT><A HREF="./hudson/util/Area.html#parse(java.lang.String)"><B>parse(String)</B></A> - 
+Static method in class hudson.util.<A HREF="./hudson/util/Area.html" title="class in hudson.util">Area</A>
+<DD>Opposite of <A HREF="./hudson/util/Area.html#toString()"><CODE>Area.toString()</CODE></A>.
 <DT><A HREF="./hudson/util/spring/BeanBuilder.html#parse(java.io.InputStream)"><B>parse(InputStream)</B></A> - 
 Method in class hudson.util.spring.<A HREF="./hudson/util/spring/BeanBuilder.html" title="class in hudson.util.spring">BeanBuilder</A>
 <DD>Parses the bean definition groovy script.
@@ -10221,6 +10265,13 @@ Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/SCMList
 Method in class hudson.scm.<A HREF="./hudson/scm/ChangeLogAnnotator.html" title="class in hudson.scm">ChangeLogAnnotator</A>
 <DD>Registers this annotator, so that Hudson starts using this object
  for adding markup.
+<DT><A HREF="./hudson/maven/MavenBuildProxy.Filter.html#registerAsAggregatedProjectAction(hudson.maven.MavenReporter)"><B>registerAsAggregatedProjectAction(MavenReporter)</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MavenBuildProxy.Filter.html" title="class in hudson.maven">MavenBuildProxy.Filter</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/maven/MavenBuildProxy.html#registerAsAggregatedProjectAction(hudson.maven.MavenReporter)"><B>registerAsAggregatedProjectAction(MavenReporter)</B></A> - 
+Method in interface hudson.maven.<A HREF="./hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven">MavenBuildProxy</A>
+<DD>Nominates that the reporter will contribute a project action
+ for this build by using <A HREF="./hudson/maven/MavenReporter.html#getAggregatedProjectAction(hudson.maven.MavenModuleSet)"><CODE>MavenReporter.getAggregatedProjectAction(MavenModuleSet)</CODE></A>.
 <DT><A HREF="./hudson/maven/MavenBuild.html#registerAsProjectAction(hudson.maven.MavenReporter)"><B>registerAsProjectAction(MavenReporter)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>
 <DD>&nbsp;
@@ -10231,6 +10282,9 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenBuildProxy.Filter.html
 Method in interface hudson.maven.<A HREF="./hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven">MavenBuildProxy</A>
 <DD>Nominates that the reporter will contribute a project action
  for this build by using <A HREF="./hudson/maven/MavenReporter.html#getProjectAction(hudson.maven.MavenModule)"><CODE>MavenReporter.getProjectAction(MavenModule)</CODE></A>.
+<DT><A HREF="./hudson/maven/MavenModuleSetBuild.html#registerAsProjectAction(hudson.maven.MavenReporter)"><B>registerAsProjectAction(MavenReporter)</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven">MavenModuleSetBuild</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/spring/BeanBuilder.html#registerBeans(org.springframework.context.support.StaticApplicationContext)"><B>registerBeans(StaticApplicationContext)</B></A> - 
 Method in class hudson.util.spring.<A HREF="./hudson/util/spring/BeanBuilder.html" title="class in hudson.util.spring">BeanBuilder</A>
 <DD>&nbsp;
@@ -11159,7 +11213,7 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
 <DT><A HREF="./hudson/scm/CVSSCM.html#skipChangeLog"><B>skipChangeLog</B></A> - 
 Static variable in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.html" title="class in hudson.scm">CVSSCM</A>
 <DD>True to avoid computing the changelog.
-<DT><A HREF="./hudson/model/Slave.html" title="class in hudson.model"><B>Slave</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Information about a Hudson slave node.<DT><A HREF="./hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, int, hudson.model.Node.Mode, java.lang.String)"><B>Slave(String, String, String, String, int, Node.Mode, String)</B></A> - 
+<DT><A HREF="./hudson/model/Slave.html" title="class in hudson.model"><B>Slave</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Information about a Hudson slave node.<DT><A HREF="./hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String)"><B>Slave(String, String, String, String, String, Node.Mode, String)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Slave.html" title="class in hudson.model">Slave</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Slave.ComputerImpl.html" title="class in hudson.model"><B>Slave.ComputerImpl</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/Slave.JnlpJar.html" title="class in hudson.model"><B>Slave.JnlpJar</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Web-bound object used to serve jar files for JNLP.<DT><A HREF="./hudson/model/Slave.JnlpJar.html#Slave.JnlpJar(java.lang.String)"><B>Slave.JnlpJar(String)</B></A> - 
@@ -11725,6 +11779,9 @@ Method in class hudson.scm.<A HREF="./hudson/scm/SubversionSCM.SvnInfo.html" tit
 <DT><A HREF="./hudson/security/Permission.html#toString()"><B>toString()</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/Permission.html" title="class in hudson.security">Permission</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/Area.html#toString()"><B>toString()</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/Area.html" title="class in hudson.util">Area</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/ByteBuffer.html#toString()"><B>toString()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ByteBuffer.html" title="class in hudson.util">ByteBuffer</A>
 <DD>&nbsp;
@@ -11782,6 +11839,9 @@ Static variable in class hudson.triggers.<A HREF="./hudson/triggers/Triggers.htm
 <DT><A HREF="./hudson/scm/RepositoryBrowser.html#trimHeadSlash(java.lang.String)"><B>trimHeadSlash(String)</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>
 <DD>If the given string starts with '/', return a string that removes it.
+<DT><A HREF="./hudson/Util.html#tryParseNumber(java.lang.String, java.lang.Number)"><B>tryParseNumber(String, Number)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
+<DD>Returns the parsed string if parsed successful; otherwise returns the default number.
 <DT><A HREF="./hudson/model/Slave.ComputerImpl.html#tryReconnect()"><B>tryReconnect()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Slave.ComputerImpl.html" title="class in hudson.model">Slave.ComputerImpl</A>
 <DD>&nbsp;
@@ -12145,6 +12205,9 @@ Constructor for class hudson.widgets.<A HREF="./hudson/widgets/Widget.html" titl
 <DT><A HREF="./hudson/matrix/Layouter.html#width(int)"><B>width(int)</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/Layouter.html" title="class in hudson.matrix">Layouter</A>
 <DD>Computes the width of n-th X-axis.
+<DT><A HREF="./hudson/util/Area.html#width"><B>width</B></A> - 
+Variable in class hudson.util.<A HREF="./hudson/util/Area.html" title="class in hudson.util">Area</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/ModuleDependency.html#withUnknownVersion()"><B>withUnknownVersion()</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
 <DD>Returns groupId+artifactId plus unknown version.
@@ -12152,6 +12215,9 @@ Method in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" titl
 Variable in class hudson.model.<A HREF="./hudson/model/TaskAction.html" title="class in hudson.model">TaskAction</A>
 <DD>If non-null, that means either the activitiy is in progress
  asynchronously, or it failed unexpectedly and the thread is dead.
+<DT><A HREF="./hudson/model/AbstractProject.html#WORKSPACE"><B>WORKSPACE</B></A> - 
+Static variable in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/WorkspaceCleanupThread.html" title="class in hudson.model"><B>WorkspaceCleanupThread</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Clean up old left-over workspaces from slaves.<DT><A HREF="./hudson/model/WorkspaceCleanupThread.html#WorkspaceCleanupThread()"><B>WorkspaceCleanupThread()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/WorkspaceCleanupThread.html" title="class in hudson.model">WorkspaceCleanupThread</A>
 <DD>&nbsp;
@@ -12689,9 +12755,18 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#_Hudson_NotADirectory(java.lang.Object)"><B>_Hudson_NotADirectory(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>{0} is not a directory
+<DT><A HREF="./hudson/model/Messages.html#_Hudson_NotANegativeNumber()"><B>_Hudson_NotANegativeNumber()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Not a negative number
+<DT><A HREF="./hudson/model/Messages.html#_Hudson_NotANumber()"><B>_Hudson_NotANumber()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Not a number
 <DT><A HREF="./hudson/model/Messages.html#_Hudson_NotAPlugin(java.lang.Object)"><B>_Hudson_NotAPlugin(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>{0} is not a Hudson plugin
+<DT><A HREF="./hudson/model/Messages.html#_Hudson_NotAPositiveNumber()"><B>_Hudson_NotAPositiveNumber()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Not a positive number
 <DT><A HREF="./hudson/model/Messages.html#_Hudson_NotJDKDir(java.lang.Object)"><B>_Hudson_NotJDKDir(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>{0} doesn''t look like a JDK directory

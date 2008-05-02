@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MatrixRun (Hudson core 1.212 API)
+MatrixRun (Hudson core 1.213 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-28">
+<META NAME="date" CONTENT="2008-05-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MatrixRun (Hudson core 1.212 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MatrixRun (Hudson core 1.212 API)";
+        parent.document.title="MatrixRun (Hudson core 1.213 API)";
     }
 }
 </SCRIPT>
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.Build">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.Run">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.Build">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.AbstractBuild">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -167,6 +167,15 @@ Execution of <A HREF="../../hudson/matrix/MatrixConfiguration.html" title="class
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.AbstractBuild"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractBuild.html#buildEnvironments">buildEnvironments</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.model.Run"><!-- --></A>
@@ -272,7 +281,7 @@ Execution of <A HREF="../../hudson/matrix/MatrixConfiguration.html" title="class
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Build.html#getEnvVars()">getEnvVars</A>, <A HREF="../../hudson/model/Build.html#onEndBuilding()">onEndBuilding</A>, <A HREF="../../hudson/model/Build.html#onStartBuilding()">onStartBuilding</A>, <A HREF="../../hudson/model/Build.html#run()">run</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Build.html#onEndBuilding()">onEndBuilding</A>, <A HREF="../../hudson/model/Build.html#onStartBuilding()">onStartBuilding</A>, <A HREF="../../hudson/model/Build.html#run()">run</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractBuild"><!-- --></A>
@@ -281,7 +290,7 @@ Execution of <A HREF="../../hudson/matrix/MatrixConfiguration.html" title="class
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/AbstractBuild.html#doStop(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doStop</A>, <A HREF="../../hudson/model/AbstractBuild.html#due()">due</A>, <A HREF="../../hudson/model/AbstractBuild.html#getBuiltOn()">getBuiltOn</A>, <A HREF="../../hudson/model/AbstractBuild.html#getBuiltOnStr()">getBuiltOnStr</A>, <A HREF="../../hudson/model/AbstractBuild.html#getChangeSet()">getChangeSet</A>, <A HREF="../../hudson/model/AbstractBuild.html#getCulprits()">getCulprits</A>, <A HREF="../../hudson/model/AbstractBuild.html#getDependencyChanges(hudson.model.AbstractBuild)">getDependencyChanges</A>, <A HREF="../../hudson/model/AbstractBuild.html#getDownstreamBuilds()">getDownstreamBuilds</A>, <A HREF="../../hudson/model/AbstractBuild.html#getDownstreamBuilds(hudson.model.AbstractProject)">getDownstreamBuilds</A>, <A HREF="../../hudson/model/AbstractBuild.html#getDownstreamRelationship(hudson.model.AbstractProject)">getDownstreamRelationship</A>, <A HREF="../../hudson/model/AbstractBuild.html#getProject()">getProject</A>, <A HREF="../../hudson/model/AbstractBuild.html#getTestResultAction()">getTestResultAction</A>, <A HREF="../../hudson/model/AbstractBuild.html#getTransitiveUpstreamBuilds()">getTransitiveUpstreamBuilds</A>, <A HREF="../../hudson/model/AbstractBuild.html#getUpstreamBuilds()">getUpstreamBuilds</A>, <A HREF="../../hudson/model/AbstractBuild.html#getUpstreamRelationship(hudson.model.AbstractProject)">getUpstreamRelationship</A>, <A HREF="../../hudson/model/AbstractBuild.html#getUpstreamRelationshipBuild(hudson.model.AbstractProject)">getUpstreamRelationshipBuild</A>, <A HREF="../../hudson/model/AbstractBuild.html#hasChangeSetComputed()">hasChangeSetComputed</A>, <A HREF="../../hudson/model/AbstractBuild.html#hasParticipant(hudson.model.User)">hasParticipant</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/AbstractBuild.html#doStop(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doStop</A>, <A HREF="../../hudson/model/AbstractBuild.html#due()">due</A>, <A HREF="../../hudson/model/AbstractBuild.html#getBuiltOn()">getBuiltOn</A>, <A HREF="../../hudson/model/AbstractBuild.html#getBuiltOnStr()">getBuiltOnStr</A>, <A HREF="../../hudson/model/AbstractBuild.html#getChangeSet()">getChangeSet</A>, <A HREF="../../hudson/model/AbstractBuild.html#getCulprits()">getCulprits</A>, <A HREF="../../hudson/model/AbstractBuild.html#getDependencyChanges(hudson.model.AbstractBuild)">getDependencyChanges</A>, <A HREF="../../hudson/model/AbstractBuild.html#getDownstreamBuilds()">getDownstreamBuilds</A>, <A HREF="../../hudson/model/AbstractBuild.html#getDownstreamBuilds(hudson.model.AbstractProject)">getDownstreamBuilds</A>, <A HREF="../../hudson/model/AbstractBuild.html#getDownstreamRelationship(hudson.model.AbstractProject)">getDownstreamRelationship</A>, <A HREF="../../hudson/model/AbstractBuild.html#getEnvVars()">getEnvVars</A>, <A HREF="../../hudson/model/AbstractBuild.html#getProject()">getProject</A>, <A HREF="../../hudson/model/AbstractBuild.html#getTestResultAction()">getTestResultAction</A>, <A HREF="../../hudson/model/AbstractBuild.html#getTransitiveUpstreamBuilds()">getTransitiveUpstreamBuilds</A>, <A HREF="../../hudson/model/AbstractBuild.html#getUpstreamBuilds()">getUpstreamBuilds</A>, <A HREF="../../hudson/model/AbstractBuild.html#getUpstreamRelationship(hudson.model.AbstractProject)">getUpstreamRelationship</A>, <A HREF="../../hudson/model/AbstractBuild.html#getUpstreamRelationshipBuild(hudson.model.AbstractProject)">getUpstreamRelationshipBuild</A>, <A HREF="../../hudson/model/AbstractBuild.html#hasChangeSetComputed()">hasChangeSetComputed</A>, <A HREF="../../hudson/model/AbstractBuild.html#hasParticipant(hudson.model.User)">hasParticipant</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Run"><!-- --></A>
@@ -541,7 +550,7 @@ public <A HREF="../../hudson/matrix/MatrixConfiguration.html" title="class in hu
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.Build">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.Run">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.Build">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.AbstractBuild">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>

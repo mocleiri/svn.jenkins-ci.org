@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ChartUtil (Hudson core 1.212 API)
+ChartUtil (Hudson core 1.213 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-28">
+<META NAME="date" CONTENT="2008-05-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ChartUtil (Hudson core 1.212 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ChartUtil (Hudson core 1.212 API)";
+        parent.document.title="ChartUtil (Hudson core 1.213 API)";
     }
 }
 </SCRIPT>
@@ -195,6 +195,17 @@ Chart generation utility code around JFreeChart.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ChartUtil.html#generateClickableMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, org.jfree.chart.JFreeChart, hudson.util.Area)">generateClickableMap</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                     org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                     org.jfree.chart.JFreeChart&nbsp;chart,
+                     <A HREF="../../hudson/util/Area.html" title="class in hudson.util">Area</A>&nbsp;defaultSize)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generates the clickable map info and sends that to the response.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/ChartUtil.html#generateClickableMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, org.jfree.chart.JFreeChart, int, int)">generateClickableMap</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                      org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
                      org.jfree.chart.JFreeChart&nbsp;chart,
@@ -203,6 +214,17 @@ Chart generation utility code around JFreeChart.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generates the clickable map info and sends that to the response.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ChartUtil.html#generateGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, org.jfree.chart.JFreeChart, hudson.util.Area)">generateGraph</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+              org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+              org.jfree.chart.JFreeChart&nbsp;chart,
+              <A HREF="../../hudson/util/Area.html" title="class in hudson.util">Area</A>&nbsp;defaultSize)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generates the graph in PNG format and sends that to the response.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -287,6 +309,26 @@ public <B>ChartUtil</B>()</PRE>
 </TR>
 </TABLE>
 
+<A NAME="generateGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, org.jfree.chart.JFreeChart, hudson.util.Area)"><!-- --></A><H3>
+generateGraph</H3>
+<PRE>
+public static void <B>generateGraph</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                                 org.jfree.chart.JFreeChart&nbsp;chart,
+                                 <A HREF="../../hudson/util/Area.html" title="class in hudson.util">Area</A>&nbsp;defaultSize)
+                          throws java.io.IOException</PRE>
+<DL>
+<DD>Generates the graph in PNG format and sends that to the response.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>defaultSize</CODE> - The size of the picture to be generated. These values can be overridden
+      by the query paramter 'width' and 'height' in the request.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="generateGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, org.jfree.chart.JFreeChart, int, int)"><!-- --></A><H3>
 generateGraph</H3>
 <PRE>
@@ -302,6 +344,25 @@ public static void <B>generateGraph</B>(org.kohsuke.stapler.StaplerRequest&nbsp;
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>defaultW</CODE> - <DD><CODE>defaultH</CODE> - The size of the picture to be generated. These values can be overridden
       by the query paramter 'width' and 'height' in the request.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="generateClickableMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, org.jfree.chart.JFreeChart, hudson.util.Area)"><!-- --></A><H3>
+generateClickableMap</H3>
+<PRE>
+public static void <B>generateClickableMap</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                        org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                                        org.jfree.chart.JFreeChart&nbsp;chart,
+                                        <A HREF="../../hudson/util/Area.html" title="class in hudson.util">Area</A>&nbsp;defaultSize)
+                                 throws java.io.IOException</PRE>
+<DL>
+<DD>Generates the clickable map info and sends that to the response.
+<P>
+<DD><DL>
+
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
 </DD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.212 API)
+Functions (Hudson core 1.213 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-28">
+<META NAME="date" CONTENT="2008-05-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.212 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.212 API)";
+        parent.document.title="Functions (Hudson core 1.213 API)";
     }
 }
 </SCRIPT>
@@ -528,6 +528,14 @@ Utility functions used in views.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../hudson/util/Area.html" title="class in hudson.util">Area</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getScreenResolution()">getScreenResolution</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If we know the user's screen resolution, return it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#getSearchURL()">getSearchURL</A></B>()</CODE>
 
@@ -918,6 +926,21 @@ decompose</H3>
 public static <A HREF="../hudson/Functions.RunUrl.html" title="class in hudson">Functions.RunUrl</A> <B>decompose</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
 <DL>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getScreenResolution()"><!-- --></A><H3>
+getScreenResolution</H3>
+<PRE>
+public static <A HREF="../hudson/util/Area.html" title="class in hudson.util">Area</A> <B>getScreenResolution</B>()</PRE>
+<DL>
+<DD>If we know the user's screen resolution, return it. Otherwise null.
+<P>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.213</DD>
 </DL>
 </DD>
 </DL>

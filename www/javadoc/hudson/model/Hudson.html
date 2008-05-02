@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.212 API)
+Hudson (Hudson core 1.213 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-04-28">
+<META NAME="date" CONTENT="2008-05-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.212 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.212 API)";
+        parent.document.title="Hudson (Hudson core 1.213 API)";
     }
 }
 </SCRIPT>
@@ -493,6 +493,15 @@ Root object of the system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shutdown the system.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doFieldCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doFieldCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+             org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the value for a field is set; if not an error or warning text is displayed.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -3711,6 +3720,34 @@ public void <B>doItemExistsCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doFieldCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doFieldCheck</H3>
+<PRE>
+public void <B>doFieldCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                         org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                  throws java.io.IOException,
+                         javax.servlet.ServletException</PRE>
+<DL>
+<DD>Checks if the value for a field is set; if not an error or warning text is displayed.
+ If the parameter "value" is not set then the parameter "errorText" is displayed
+ as an error text. If the parameter "errorText" is not set, then the parameter "warningText" is
+ displayed as a warning text.
+ <p/> 
+ If the text is set and the parameter "type" is set, it will validate that the value is of the
+ correct type. Supported types are "number, "number-positive" and "number-negative".
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>req</CODE> - containing the parameter value and the errorText to display if the value isnt set<DD><CODE>rsp</CODE> - used by FormFieldValidator
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - thrown by FormFieldValidator.check()
+<DD><CODE>javax.servlet.ServletException</CODE> - thrown by FormFieldValidator.check()</DL>
 </DD>
 </DL>
 <HR>
