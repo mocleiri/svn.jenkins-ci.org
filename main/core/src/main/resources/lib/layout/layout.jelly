@@ -31,7 +31,7 @@
 <j:set var="imagesURL"  value="${rootURL}${h.resourcePath}/images" />
 <html>
   <head>
-    ${it.checkPermission(permission)}
+    ${h.checkPermission(it,permission)}
 
     <title>${h.appendIfNotNull(title, ' [Hudson]', 'Hudson')}</title>
     <link rel="stylesheet" href="${resURL}/css/style.css" type="text/css" />

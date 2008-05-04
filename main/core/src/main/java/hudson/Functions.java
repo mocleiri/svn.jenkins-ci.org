@@ -428,7 +428,9 @@ public class Functions {
     }
 
     public static void checkPermission(Permission permission) throws IOException, ServletException {
-        Hudson.getInstance().getACL().checkPermission(permission);
+    	if (permission != null) {
+    		Hudson.getInstance().getACL().checkPermission(permission);
+    	}
     }
 
     public static void checkPermission(AccessControlled object, Permission permission) throws IOException, ServletException {

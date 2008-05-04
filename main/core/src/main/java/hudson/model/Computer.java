@@ -7,6 +7,7 @@ import hudson.remoting.VirtualChannel;
 import hudson.security.ACL;
 import hudson.security.AccessControlled;
 import hudson.security.Permission;
+import hudson.security.PermissionGroup;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.Publisher;
 import hudson.util.DaemonThreadFactory;
@@ -26,6 +27,7 @@ import java.util.logging.LogRecord;
 
 import javax.servlet.ServletException;
 
+import org.jvnet.localizer.Localizable;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.export.Exported;
@@ -56,7 +58,8 @@ import org.kohsuke.stapler.export.ExportedBean;
  */
 @ExportedBean
 public abstract class Computer extends AbstractModelObject implements AccessControlled {
-    private final CopyOnWriteArrayList<Executor> executors = new CopyOnWriteArrayList<Executor>();
+
+	private final CopyOnWriteArrayList<Executor> executors = new CopyOnWriteArrayList<Executor>();
 
     private int numExecutors;
 
@@ -333,7 +336,7 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     }
 
     public void doToggleOffline( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
+        checkPermission(Hudson.ADMINISTER);
 
         setTemporarilyOffline(!temporarilyOffline);
         rsp.forwardToPreviousPage(req);
@@ -348,7 +351,7 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
      */
     public void doDumpExportTable( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         // this is a debug probe and may expose sensitive information
-        Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
+        checkPermission(Hudson.ADMINISTER);
 
         rsp.setContentType("text/plain");
         rsp.setCharacterEncoding("UTF-8");
@@ -360,7 +363,7 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     public void doScript( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         // ability to run arbitrary script is dangerous,
         // so tie it to the admin access
-        Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
+        checkPermission(Hudson.ADMINISTER);
 
         String text = req.getParameter("script");
         if(text!=null) {
