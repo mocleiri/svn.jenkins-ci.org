@@ -18,9 +18,12 @@ import hudson.plugins.sfee.webservice.NoSuchObjectFault;
 import hudson.plugins.sfee.webservice.PackageSoapRow;
 import hudson.plugins.sfee.webservice.PermissionDeniedFault;
 import hudson.plugins.sfee.webservice.ProjectSoapRow;
+import hudson.plugins.sfee.webservice.RbacAppSoap;
 import hudson.plugins.sfee.webservice.ReleaseSoapDO;
 import hudson.plugins.sfee.webservice.ReleaseSoapList;
 import hudson.plugins.sfee.webservice.ReleaseSoapRow;
+import hudson.plugins.sfee.webservice.RoleSoapList;
+import hudson.plugins.sfee.webservice.RoleSoapRow;
 import hudson.plugins.sfee.webservice.SearchQuerySyntaxFault;
 import hudson.plugins.sfee.webservice.SourceForgeSoap;
 import hudson.plugins.sfee.webservice.SystemFault;
@@ -39,7 +42,6 @@ import java.util.List;
 import javax.activation.DataHandler;
 import javax.activation.URLDataSource;
 
-import org.acegisecurity.Authentication;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -109,11 +111,6 @@ public class SourceForgeSite extends JobProperty<AbstractProject<?, ?>>
 	}
 
 	public synchronized String getSessionId() {
-		Authentication auth = Hudson.getAuthentication();
-		if (auth instanceof SFEEAuthenticationToken) {
-			return ((SFEEAuthenticationToken) auth).getSessionId();
-		}
-		
 		if (sessionId == null
 				|| (System.currentTimeMillis() - lastSessionRequest > 15000)) {
 			sessionId = SFEE.createSession(site, userName, password);
@@ -346,4 +343,5 @@ public class SourceForgeSite extends JobProperty<AbstractProject<?, ?>>
 		releaseData.setTitle("[obsolete] " + releaseData.getTitle());
 		frsApp.setReleaseData(sessionId, releaseData);
 	}
+	
 }

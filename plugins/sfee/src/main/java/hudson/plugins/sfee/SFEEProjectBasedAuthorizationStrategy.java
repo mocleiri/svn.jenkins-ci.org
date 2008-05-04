@@ -2,14 +2,11 @@ package hudson.plugins.sfee;
 
 import hudson.model.AbstractProject;
 import hudson.model.Descriptor;
-import hudson.model.Item;
-import hudson.model.MyView;
 import hudson.security.ACL;
 import hudson.security.AuthorizationStrategy;
 import hudson.security.Permission;
 import hudson.security.ProjectBasedAuthorizationStrategy;
 import hudson.security.SparseACL;
-import hudson.util.FormFieldValidator;
 import net.sf.json.JSONObject;
 
 import org.acegisecurity.GrantedAuthority;

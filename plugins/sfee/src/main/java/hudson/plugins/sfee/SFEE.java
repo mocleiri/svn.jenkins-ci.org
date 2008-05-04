@@ -1,10 +1,7 @@
 package hudson.plugins.sfee;
 
-import hudson.plugins.sfee.webservice.IllegalArgumentFault;
 import hudson.plugins.sfee.webservice.InvalidSessionFault;
 import hudson.plugins.sfee.webservice.LoginFault;
-import hudson.plugins.sfee.webservice.NoSuchObjectFault;
-import hudson.plugins.sfee.webservice.PermissionDeniedFault;
 import hudson.plugins.sfee.webservice.ProjectSoapList;
 import hudson.plugins.sfee.webservice.ProjectSoapRow;
 import hudson.plugins.sfee.webservice.RbacAppSoap;
@@ -14,15 +11,18 @@ import hudson.plugins.sfee.webservice.RoleSoapList;
 import hudson.plugins.sfee.webservice.RoleSoapRow;
 import hudson.plugins.sfee.webservice.SourceForgeSoap;
 import hudson.plugins.sfee.webservice.SystemFault;
-import hudson.plugins.sfee.webservice.UserSoapRow;
 
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.rmi.RemoteException;
 
+import javax.xml.parsers.SAXParserFactory;
+
 import org.acegisecurity.AuthenticationServiceException;
 import org.acegisecurity.BadCredentialsException;
 import org.apache.axis.AxisFault;
+
+import com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl;
 
 public class SFEE {
 
@@ -90,4 +90,20 @@ public class SFEE {
 		}
 	}
 
+	
+	public static void main(String[] args) throws Exception {
+		System.setProperty(SAXParserFactory.class.getName(), SAXParserFactoryImpl.class.getName());
+		String id = createSession("oasis.mitra.com", "awpyv", "SDF5422");
+		RbacAppSoap rbac = getSourceForgeApp("oasis.mitra.com", RbacAppSoap.class);
+		
+		RoleSoapList userRoleList = rbac.getUserRoleList(id, "proj1058", "bob");
+		for (RoleSoapRow role : userRoleList.getDataRows()) {
+			System.out.println(role.getTitle());
+			
+			RoleClusterSoapList listClusters = rbac.listClusters(id, role.getId());
+			for (RoleClusterSoapRow cluster: listClusters.getDataRows()) {
+				System.out.println(cluster.getFolderId() + " " + cluster.getOperationClusterName());
+			}
+		}
+	}
 }
