@@ -88,7 +88,7 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
     }
     
     private ClearTool createClearTool(ClearToolLauncher launcher) {
-        return new ClearToolSnapshot(launcher, PluginImpl.BASE_DESCRIPTOR.getCleartoolExe(), getMkviewOptionalParam());
+        return new ClearToolSnapshot(launcher, getMkviewOptionalParam());
     }
     
     /**

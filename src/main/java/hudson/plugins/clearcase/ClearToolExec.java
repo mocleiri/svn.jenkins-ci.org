@@ -23,12 +23,10 @@ import java.util.regex.Pattern;
 public abstract class ClearToolExec implements ClearTool {
 
     private transient Pattern viewListPattern;
-    protected transient String clearToolExec;
     protected ClearToolLauncher launcher;
 
-    public ClearToolExec(ClearToolLauncher launcher, String clearToolExec) {
+    public ClearToolExec(ClearToolLauncher launcher) {
         this.launcher = launcher;
-        this.clearToolExec = clearToolExec;
     }
 
     protected abstract FilePath getRootViewPath(ClearToolLauncher launcher);
@@ -37,7 +35,6 @@ public abstract class ClearToolExec implements ClearTool {
             String branch, String vobPaths) throws IOException, InterruptedException {
         SimpleDateFormat formatter = new SimpleDateFormat("d-MMM.HH:mm:ss");
         ArgumentListBuilder cmd = new ArgumentListBuilder();
-        cmd.add(clearToolExec);
         cmd.add("lshistory");
         cmd.add("-r");
         cmd.add("-since", formatter.format(lastBuildDate).toLowerCase());
@@ -98,7 +95,6 @@ public abstract class ClearToolExec implements ClearTool {
     
     public Reader lsactivity(String activity, String commandFormat) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
-        cmd.add(clearToolExec);
         cmd.add("lsactivity");
         cmd.add("-fmt", commandFormat);
         cmd.add(activity);
@@ -116,7 +112,6 @@ public abstract class ClearToolExec implements ClearTool {
             InterruptedException {
         viewListPattern = getListPattern();
         ArgumentListBuilder cmd = new ArgumentListBuilder();
-        cmd.add(clearToolExec);
         cmd.add("lsview");
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -130,7 +125,6 @@ public abstract class ClearToolExec implements ClearTool {
     public List<String> lsvob(boolean onlyMOunted) throws IOException, InterruptedException {
         viewListPattern = getListPattern();
         ArgumentListBuilder cmd = new ArgumentListBuilder();
-        cmd.add(clearToolExec);
         cmd.add("lsvob");
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -142,7 +136,6 @@ public abstract class ClearToolExec implements ClearTool {
 
     public String catcs(String viewName) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
-        cmd.add(clearToolExec);
         cmd.add("catcs");
         cmd.add("-tag", viewName);
 

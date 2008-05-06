@@ -27,7 +27,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
         context = new Mockery();
         launcher = context.mock(ClearToolLauncher.class);
         taskListener = context.mock(BuildListener.class);
-        clearToolExec = new ClearToolImpl(launcher, "commandname");
+        clearToolExec = new ClearToolImpl(launcher);
     }
     @After
     public void tearDown() throws Exception {
@@ -38,7 +38,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
     public void testListViews() throws Exception {
         context.checking(new Expectations() {
             {
-                one(launcher).run(with(equal(new String[] { "commandname", "lsview" })),
+                one(launcher).run(with(equal(new String[] { "lsview" })),
                         (InputStream) with(anything()), (OutputStream) with(an(OutputStream.class)),
                         with(aNull(FilePath.class)));
                 will(doAll(new StreamCopyAction(2, ClearToolExecTest.class.getResourceAsStream("ct-lsview-1.log")),
@@ -57,7 +57,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
     public void testListActiveDynamicViews() throws Exception {
         context.checking(new Expectations() {
             {
-                one(launcher).run(with(equal(new String[] { "commandname", "lsview" })),
+                one(launcher).run(with(equal(new String[] { "lsview" })),
                         (InputStream) with(anything()), (OutputStream) with(an(OutputStream.class)),
                         with(aNull(FilePath.class)));
                 will(doAll(new StreamCopyAction(2, ClearToolExecTest.class.getResourceAsStream("ct-lsview-1.log")),
@@ -73,7 +73,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
     public void testListVobs() throws Exception {
         context.checking(new Expectations() {
             {
-                one(launcher).run(with(equal(new String[] { "commandname", "lsvob" })), (InputStream) with(anything()),
+                one(launcher).run(with(equal(new String[] { "lsvob" })), (InputStream) with(anything()),
                         (OutputStream) with(an(OutputStream.class)), with(aNull(FilePath.class)));
                 will(doAll(new StreamCopyAction(2, ClearToolExecTest.class.getResourceAsStream("ct-lsvob-1.log")),
                         returnValue(Boolean.TRUE)));
@@ -93,7 +93,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
     public void testListVobsMounted() throws Exception {
         context.checking(new Expectations() {
             {
-                one(launcher).run(with(equal(new String[] { "commandname", "lsvob" })), (InputStream) with(anything()),
+                one(launcher).run(with(equal(new String[] { "lsvob" })), (InputStream) with(anything()),
                         (OutputStream) with(an(OutputStream.class)), with(aNull(FilePath.class)));
                 will(doAll(new StreamCopyAction(2, ClearToolExecTest.class.getResourceAsStream("ct-lsvob-1.log")),
                         returnValue(Boolean.TRUE)));
@@ -117,7 +117,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
                 one(launcher).getWorkspace();
                 will(returnValue(workspace));
                 one(launcher).run(
-                        with(allOf(hasItemInArray("commandname"), hasItemInArray("lshistory"), hasItemInArray("-r"),
+                        with(allOf(hasItemInArray("lshistory"), hasItemInArray("-r"),
                                 hasItemInArray("vob1"))), (InputStream) with(anything()),
                         (OutputStream) with(an(OutputStream.class)), with(aNonNull(FilePath.class)));
                 will(returnValue(Boolean.TRUE));
@@ -140,7 +140,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
                 one(launcher).getWorkspace();
                 will(returnValue(workspace));
                 one(launcher).run(
-                        with(allOf(hasItemInArray("commandname"), hasItemInArray("lshistory"), hasItemInArray("-r"),
+                        with(allOf(hasItemInArray("lshistory"), hasItemInArray("-r"),
                                 hasItemInArray("vob1"), hasItemInArray("vob2"), hasItemInArray("vob 4"))),
                         (InputStream) with(anything()), (OutputStream) with(an(OutputStream.class)),
                         with(aNonNull(FilePath.class)));
@@ -160,7 +160,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
                 one(launcher).getWorkspace();
                 will(returnValue(workspace));
                 one(launcher).run(
-                        with(equal(new String[] { "commandname", "lshistory", "-r", "-since", "18-nov.15:05:25",
+                        with(equal(new String[] { "lshistory", "-r", "-since", "18-nov.15:05:25",
                                 "-fmt", ClearToolHistoryParser.getLogFormat(), "-branch", "brtype:branch", "-nco",
                                 "vob1" })), (InputStream) with(anything()),
                         (OutputStream) with(an(OutputStream.class)), with(aNonNull(FilePath.class)));
@@ -183,7 +183,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
                 one(launcher).getWorkspace();
                 will(returnValue(workspace));
                 one(launcher).run(
-                        with(equal(new String[] { "commandname", "lshistory", "-r", "-since", "18-nov.15:05:25",
+                        with(equal(new String[] { "lshistory", "-r", "-since", "18-nov.15:05:25",
                                 "-fmt", ClearToolHistoryParser.getLogFormat(), "-branch", "brtype:branch", "-nco",
                                 "vob2/vob2-1", "vob4" })), (InputStream) with(anything()),
                         (OutputStream) with(an(OutputStream.class)), with(aNonNull(FilePath.class)));
@@ -213,7 +213,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
     public void testCatConfigSpec() throws Exception {
         context.checking(new Expectations() {
             {
-                one(launcher).run(with(equal(new String[] { "commandname", "catcs", "-tag", "viewname" })), (InputStream) with(anything()),
+                one(launcher).run(with(equal(new String[] { "catcs", "-tag", "viewname" })), (InputStream) with(anything()),
                         (OutputStream) with(an(OutputStream.class)), with(aNull(FilePath.class)));
                 will(doAll(new StreamCopyAction(2, ClearToolExecTest.class.getResourceAsStream("ct-catcs-1.log")),
                         returnValue(Boolean.TRUE)));
@@ -230,7 +230,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
         context.checking(new Expectations() {
             {
                 one(launcher).run(
-                        with(equal(new String[] { "commandname", "lsactivity", "-fmt", "ACTIVITY_FORMAT", 
+                        with(equal(new String[] { "lsactivity", "-fmt", "ACTIVITY_FORMAT", 
                                 "ACTIVITY@VOB"})), (InputStream) with(anything()),
                         (OutputStream) with(an(OutputStream.class)), with(aNull(FilePath.class)));
                 will(doAll(new StreamCopyAction(2, ClearToolExecTest.class.getResourceAsStream("ct-lsactivity-1.log")),
@@ -245,8 +245,8 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
      * Simple impl of ClearToolExec to help testing the methods in the class
      */
     private static class ClearToolImpl extends ClearToolExec {
-        public ClearToolImpl(ClearToolLauncher launcher, String clearToolExec) {
-            super(launcher, clearToolExec);
+        public ClearToolImpl(ClearToolLauncher launcher) {
+            super(launcher);
         }
         public void checkout(String configSpec, String viewName) throws IOException,
                 InterruptedException {

@@ -139,9 +139,9 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
 
     private ClearTool createClearTool(ClearToolLauncher launcher) {
         if (useDynamicView) {
-            return new ClearToolDynamic(launcher, PluginImpl.BASE_DESCRIPTOR.getCleartoolExe(), viewDrive);
+            return new ClearToolDynamic(launcher, viewDrive);
         } else {
-            return new ClearToolSnapshot(launcher, PluginImpl.BASE_DESCRIPTOR.getCleartoolExe(), getMkviewOptionalParam());
+            return new ClearToolSnapshot(launcher, getMkviewOptionalParam());
         }
     }
 

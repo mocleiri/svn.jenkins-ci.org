@@ -10,12 +10,12 @@ public class ClearToolSnapshot extends ClearToolExec {
 
     private String optionalMkviewParameters;
     
-    public ClearToolSnapshot(ClearToolLauncher launcher, String clearToolExec) {
-        super(launcher, clearToolExec);
+    public ClearToolSnapshot(ClearToolLauncher launcher) {
+        super(launcher);
     }
 
-    public ClearToolSnapshot(ClearToolLauncher launcher, String clearToolExec, String optionalParameters) {
-        this(launcher, clearToolExec);
+    public ClearToolSnapshot(ClearToolLauncher launcher, String optionalParameters) {
+        this(launcher);
         this.optionalMkviewParameters = optionalParameters;
     }
 
@@ -25,7 +25,6 @@ public class ClearToolSnapshot extends ClearToolExec {
         FilePath configSpecFile = workspace.createTextTempFile("configspec", ".txt", configSpec);
 
         ArgumentListBuilder cmd = new ArgumentListBuilder();
-        cmd.add(clearToolExec);
         cmd.add("setcs");
         cmd.add(".." + File.separatorChar + configSpecFile.getName());
         launcher.run(cmd.toCommandArray(), null, null, workspace.child(viewName));
@@ -35,7 +34,6 @@ public class ClearToolSnapshot extends ClearToolExec {
 
     public void mkview(String viewName, String streamSelector) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
-        cmd.add(clearToolExec);
         cmd.add("mkview");
         cmd.add("-snapshot");
         if (streamSelector != null) {
@@ -53,7 +51,6 @@ public class ClearToolSnapshot extends ClearToolExec {
 
     public void rmview(String viewName) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
-        cmd.add(clearToolExec);
         cmd.add("rmview");
         cmd.add("-force");
         cmd.add(viewName);
@@ -68,7 +65,6 @@ public class ClearToolSnapshot extends ClearToolExec {
 
     public void update(String viewName, String loadRules) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
-        cmd.add(clearToolExec);
         cmd.add("update");
         cmd.add("-force");
         cmd.add("-log", "NUL");
