@@ -73,15 +73,15 @@ public class UcmHistoryBuilder {
     private Pattern integrationActivityPattern;
     private SimpleDateFormat dateFormatter;
     private Map<String, UcmActivity> activityNameToEntry;
-    private final ClearTool cleartool;    
+    private final ClearTool cleartool=null;    
 
     public UcmHistoryBuilder(ClearTool cleartool) {
-        this.cleartool = cleartool;
-        historyPattern = Pattern.compile(LOG_PATTERN);
-        activityPattern = Pattern.compile(ACTIVITY_PATTERN);
-        integrationActivityPattern = Pattern.compile(INTEGRATION_ACTIVITY_PATTERN);
-        dateFormatter = new SimpleDateFormat("yyyyMMdd.HHmmss");
-        activityNameToEntry = new HashMap<String, UcmActivity>();
+//        this.cleartool = cleartool;
+//        historyPattern = Pattern.compile(LOG_PATTERN);
+//        activityPattern = Pattern.compile(ACTIVITY_PATTERN);
+//        integrationActivityPattern = Pattern.compile(INTEGRATION_ACTIVITY_PATTERN);
+//        dateFormatter = new SimpleDateFormat("yyyyMMdd.HHmmss");
+//        activityNameToEntry = new HashMap<String, UcmActivity>();
     }
 
     /**
@@ -94,163 +94,164 @@ public class UcmHistoryBuilder {
     }
 
     public List<UcmActivity> buildChangelog(Reader inReader,String vobName) {
-
-        try {
-            activityNameToEntry.clear();
-            List<UcmActivity> result = parse(inReader);
-            // we need it cleared as we are now going to use it as information cache for template UcmActivities
-            activityNameToEntry.clear();
-            for (UcmActivity activity : result) {
-                enhanceActivity(activity,vobName);
-                // entries don't have subactivities at this stage so don't loop those
+        return null;
+//
+//        try {
+//            activityNameToEntry.clear();
+//            List<UcmActivity> result = parse(inReader);
+//            // we need it cleared as we are now going to use it as information cache for template UcmActivities
+//            activityNameToEntry.clear();
+//            for (UcmActivity activity : result) {
+//                enhanceActivity(activity,vobName);
+//                // entries don't have subactivities at this stage so don't loop those
+//            }
+//
+//            return result;
+//
+//        } catch (IOException e) {
+//            //TODO: How to write to Hudson console log ?
+//            System.out.println("IOException caught when building changelog " + e.getMessage());
+//            return new ArrayList<UcmActivity>();
+//        } catch (ParseException e) {
+//            System.out.println("Parsecaught when building changelog " + e.getMessage());
+//            return new ArrayList<UcmActivity>();
+//        } catch (InterruptedException e) {
+//            System.out.println("Interrupted when building changelog " + e.getMessage());
+//            return new ArrayList<UcmActivity>();
+//        }
             }
 
-            return result;
-
-        } catch (IOException e) {
-            //TODO: How to write to Hudson console log ?
-            System.out.println("IOException caught when building changelog " + e.getMessage());
-            return new ArrayList<UcmActivity>();
-        } catch (ParseException e) {
-            System.out.println("Parsecaught when building changelog " + e.getMessage());
-            return new ArrayList<UcmActivity>();
-        } catch (InterruptedException e) {
-            System.out.println("Interrupted when building changelog " + e.getMessage());
-            return new ArrayList<UcmActivity>();
+//    public List<UcmActivity> parse(Reader inReader) throws IOException, ParseException {
+//        List<UcmActivity> result = new ArrayList<UcmActivity>();
+//
+//        BufferedReader reader = new BufferedReader(inReader);
+//
+//        StringBuilder commentBuilder = new StringBuilder();
+//        String line = reader.readLine();
+//
+//        UcmActivity.File currentFile = null;
+//        while (line != null) {
+//
+//            //TODO: better error handling
+//            if (line.startsWith("cleartool: Error:")) {
+//                line = reader.readLine();
+//                continue;
+//            }
+//            Matcher matcher = historyPattern.matcher(line);
+//
+//            // finder find start of lshistory entry
+//            if (matcher.find()) {
+//
+//                if (currentFile != null) {
+//                    currentFile.setComment(commentBuilder.toString());
+//                }
+//                commentBuilder = new StringBuilder();
+//                currentFile = new UcmActivity.File();
+//
+//                // read values;
+//                currentFile.setDate(dateFormatter.parse(matcher.group(DATE_INDEX)).getTime());
+//                currentFile.setName(matcher.group(FILE_INDEX));
+//                currentFile.setVersion(matcher.group(VERSION_INDEX));
+//                currentFile.setEvent(matcher.group(EVENT_INDEX));
+//                currentFile.setOperation(matcher.group(OPERATION_INDEX));
+//
+//                String activityName = matcher.group(ACTIVITY_INDEX);
+//
+//                UcmActivity activity = activityNameToEntry.get(activityName);
+//                if (activity == null) {
+//                    activity = new UcmActivity();                    
+//                    activity.setName(activityName);                    
+//                    activityNameToEntry.put(activityName, activity);
+//                    result.add(activity);
+//                }
+//
+//                activity.addFile(currentFile);
+//            } else {
+//                if (commentBuilder.length() > 0) {
+//                    commentBuilder.append("\n");
+//                }
+//                commentBuilder.append(line);
+//            }
+//            line = reader.readLine();
+//        }
+//        if (currentFile != null) {
+//            currentFile.setComment(commentBuilder.toString());
+//        }
+//        return result;
+//    }
+//
+//    public void enhanceActivity(UcmActivity entry, String vobName) throws IOException, InterruptedException {
+//        
+//        // lookup activity in cache, top levels will never be present
+//        UcmActivity templateActivity = activityNameToEntry.get(entry.getName());
+//        
+//        if (templateActivity == null) {
+//            templateActivity = performActivityLookup(entry.getName(),vobName);
+//            activityNameToEntry.put(entry.getName(),templateActivity);
+//        }
+//        
+//        entry.setHeadline(templateActivity.getHeadline());
+//        entry.setStream(templateActivity.getStream());
+//        entry.setUser(templateActivity.getUser());
+//        for (UcmActivity templateSubActivity : templateActivity.getSubActivities()) {
+//            UcmActivity subActivity = new UcmActivity();
+//            subActivity.setName(templateSubActivity.getName());
+//            enhanceActivity(subActivity, vobName);
+//            entry.addSubActivity(subActivity);                       
+//        }
+//        
+//    }
+//    public UcmActivity performActivityLookup(String activityName,String vobName) throws IOException, InterruptedException {    
+//        UcmActivity result = new UcmActivity();
+//        result.setName(activityName);
+//
+//        String format;
+//        // Clearcase cannot handle [contrib_acts] if not a deliver or rebase activity
+//        if (result.isIntegrationActivity()) {
+//            format = INTEGRATION_ACTIVITY_FORMAT;
+//        } else {
+//            format = ACTIVITY_FORMAT;
+//        }
+//        
+//        parseActivityOutput(result,cleartool.lsactivity(activityName + "@" + vobName, format), vobName);
+//        return result;
+//    }
+//
+//    private void parseActivityOutput(UcmActivity activity,Reader consoleReader, String vobName) throws IOException, InterruptedException {
+//        
+//        BufferedReader reader = new BufferedReader(consoleReader);
+//        String line = reader.readLine();
+//        Pattern currentPattern;
+//        
+//        if (activity.isIntegrationActivity()) {
+//            currentPattern = integrationActivityPattern;
+//        } else {
+//            currentPattern = activityPattern;
+//        }
+//                
+//        while (line != null) {
+//
+//            //TODO: better error handling
+//            if (line.startsWith("cleartool: Error:")) {
+//                line = reader.readLine();
+//                continue;
+//            }
+//
+//            Matcher matcher = currentPattern.matcher(line);
+//            if (matcher.find()) {
+//                activity.setHeadline(matcher.group(ACT_HEADLINE_INDEX));
+//                activity.setStream(matcher.group(ACT_STREAM_INDEX));
+//                String contributing = matcher.group(ACT_CONTRIB_INDEX);
+//                                               
+//                if (contributing.length() > 1) {
+//                    String[] contribs = contributing.split(" ");
+//                    for (String contrib : contribs) {
+//                        UcmActivity subActivity = new UcmActivity();
+//                        subActivity.setName(contrib);
+//                    }
+//                }
+//            }
+//            line = reader.readLine();
+//        }
+//    }
         }
-    }
-
-    public List<UcmActivity> parse(Reader inReader) throws IOException, ParseException {
-        List<UcmActivity> result = new ArrayList<UcmActivity>();
-
-        BufferedReader reader = new BufferedReader(inReader);
-
-        StringBuilder commentBuilder = new StringBuilder();
-        String line = reader.readLine();
-
-        UcmActivity.File currentFile = null;
-        while (line != null) {
-
-            //TODO: better error handling
-            if (line.startsWith("cleartool: Error:")) {
-                line = reader.readLine();
-                continue;
-            }
-            Matcher matcher = historyPattern.matcher(line);
-
-            // finder find start of lshistory entry
-            if (matcher.find()) {
-
-                if (currentFile != null) {
-                    currentFile.setComment(commentBuilder.toString());
-                }
-                commentBuilder = new StringBuilder();
-                currentFile = new UcmActivity.File();
-
-                // read values;
-                currentFile.setDate(dateFormatter.parse(matcher.group(DATE_INDEX)).getTime());
-                currentFile.setName(matcher.group(FILE_INDEX));
-                currentFile.setVersion(matcher.group(VERSION_INDEX));
-                currentFile.setEvent(matcher.group(EVENT_INDEX));
-                currentFile.setOperation(matcher.group(OPERATION_INDEX));
-
-                String activityName = matcher.group(ACTIVITY_INDEX);
-
-                UcmActivity activity = activityNameToEntry.get(activityName);
-                if (activity == null) {
-                    activity = new UcmActivity();                    
-                    activity.setName(activityName);                    
-                    activityNameToEntry.put(activityName, activity);
-                    result.add(activity);
-                }
-
-                activity.addFile(currentFile);
-            } else {
-                if (commentBuilder.length() > 0) {
-                    commentBuilder.append("\n");
-                }
-                commentBuilder.append(line);
-            }
-            line = reader.readLine();
-        }
-        if (currentFile != null) {
-            currentFile.setComment(commentBuilder.toString());
-        }
-        return result;
-    }
-
-    public void enhanceActivity(UcmActivity entry, String vobName) throws IOException, InterruptedException {
-        
-        // lookup activity in cache, top levels will never be present
-        UcmActivity templateActivity = activityNameToEntry.get(entry.getName());
-        
-        if (templateActivity == null) {
-            templateActivity = performActivityLookup(entry.getName(),vobName);
-            activityNameToEntry.put(entry.getName(),templateActivity);
-        }
-        
-        entry.setHeadline(templateActivity.getHeadline());
-        entry.setStream(templateActivity.getStream());
-        entry.setUser(templateActivity.getUser());
-        for (UcmActivity templateSubActivity : templateActivity.getSubActivities()) {
-            UcmActivity subActivity = new UcmActivity();
-            subActivity.setName(templateSubActivity.getName());
-            enhanceActivity(subActivity, vobName);
-            entry.addSubActivity(subActivity);                       
-        }
-        
-    }
-    public UcmActivity performActivityLookup(String activityName,String vobName) throws IOException, InterruptedException {    
-        UcmActivity result = new UcmActivity();
-        result.setName(activityName);
-
-        String format;
-        // Clearcase cannot handle [contrib_acts] if not a deliver or rebase activity
-        if (result.isIntegrationActivity()) {
-            format = INTEGRATION_ACTIVITY_FORMAT;
-        } else {
-            format = ACTIVITY_FORMAT;
-        }
-        
-        parseActivityOutput(result,cleartool.lsactivity(activityName + "@" + vobName, format), vobName);
-        return result;
-    }
-
-    private void parseActivityOutput(UcmActivity activity,Reader consoleReader, String vobName) throws IOException, InterruptedException {
-        
-        BufferedReader reader = new BufferedReader(consoleReader);
-        String line = reader.readLine();
-        Pattern currentPattern;
-        
-        if (activity.isIntegrationActivity()) {
-            currentPattern = integrationActivityPattern;
-        } else {
-            currentPattern = activityPattern;
-        }
-                
-        while (line != null) {
-
-            //TODO: better error handling
-            if (line.startsWith("cleartool: Error:")) {
-                line = reader.readLine();
-                continue;
-            }
-
-            Matcher matcher = currentPattern.matcher(line);
-            if (matcher.find()) {
-                activity.setHeadline(matcher.group(ACT_HEADLINE_INDEX));
-                activity.setStream(matcher.group(ACT_STREAM_INDEX));
-                String contributing = matcher.group(ACT_CONTRIB_INDEX);
-                                               
-                if (contributing.length() > 1) {
-                    String[] contribs = contributing.split(" ");
-                    for (String contrib : contribs) {
-                        UcmActivity subActivity = new UcmActivity();
-                        subActivity.setName(contrib);
-                    }
-                }
-            }
-            line = reader.readLine();
-        }
-    }
-}

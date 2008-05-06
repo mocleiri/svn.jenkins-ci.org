@@ -2,8 +2,12 @@ package hudson.plugins.clearcase.ucm;
 
 import hudson.model.User;
 import hudson.scm.ChangeLogSet;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,11 +16,14 @@ import java.util.List;
  * @author Henrik L. Hansen
  */
 public class UcmActivity extends ChangeLogSet.Entry {
+    private static final DateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     private String name;
     private String headline;
     private String stream;
+    private String view;
     private String user;
+    private String userName;
     private List<File> files = new ArrayList<File>();
     private List<UcmActivity> subActivities = new ArrayList<UcmActivity>();
 
@@ -56,6 +63,22 @@ public class UcmActivity extends ChangeLogSet.Entry {
         this.user = user;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getView() {
+        return view;
+    }
+
+    public void setView(String view) {
+        this.view = view;
+    }
+
     public boolean isIntegrationActivity() {
         if (name.startsWith("deliver.") || name.startsWith("rebase.")) {
             return true;
@@ -88,6 +111,14 @@ public class UcmActivity extends ChangeLogSet.Entry {
         return subActivities;
     }
 
+    /**
+     * Overrides the setParent() method so the ClearCaseChangeLogSet can access it.
+     */
+    @Override
+    public void setParent(ChangeLogSet parent) {
+        super.setParent(parent);
+    }
+
     @Override
     public String getMsg() {
         return headline;
@@ -109,7 +140,7 @@ public class UcmActivity extends ChangeLogSet.Entry {
         
     public static class File {
 
-        private long date;
+        private Date date;
         private String name;
         private String version;
         private String operation;
@@ -157,12 +188,28 @@ public class UcmActivity extends ChangeLogSet.Entry {
             this.comment = comment;
         }
 
-        public long getDate() {
+        public Date getDate() {
             return date;
         }
 
-        public void setDate(long date) {
+        public void setDate(Date date) {
             this.date = date;
+        }
+
+        public String getDateStr() {
+            if (date == null) {
+                return "";
+            } else {
+                return DATE_FORMATTER.format(date);
+    }
+}
+
+        public void setDateStr(String date) {
+            try {
+                this.date = DATE_FORMATTER.parse(date);
+            } catch (ParseException e) {
+                //TODO: error handling
+            }
         }
     }
 }
