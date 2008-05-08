@@ -168,9 +168,9 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
                         returnValue(Boolean.TRUE)));
             }
         });
-        List<ClearCaseChangeLogEntry> lshistory = clearToolExec.lshistory(mockedCalendar.getTime(),
+        Reader reader = clearToolExec.lshistory(mockedCalendar.getTime(),
                 "viewName", "branch","vob1");
-        assertEquals("The history should contain 3 items", 3, lshistory.size());
+        assertNotNull("Returned console reader can not be null", reader);
         context.assertIsSatisfied();
     }
     @Test

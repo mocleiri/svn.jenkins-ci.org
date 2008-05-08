@@ -31,7 +31,7 @@ public abstract class ClearToolExec implements ClearTool {
 
     protected abstract FilePath getRootViewPath(ClearToolLauncher launcher);
 
-    public List<ClearCaseChangeLogEntry> lshistory(Date lastBuildDate, String viewName,
+    public Reader lshistory(Date lastBuildDate, String viewName,
             String branch, String vobPaths) throws IOException, InterruptedException {
         SimpleDateFormat formatter = new SimpleDateFormat("d-MMM.HH:mm:ss");
         ArgumentListBuilder cmd = new ArgumentListBuilder();
@@ -54,19 +54,14 @@ public abstract class ClearToolExec implements ClearTool {
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             if (launcher.run(cmd.toCommandArray(), null, baos, viewPath)) {
-                try {
-                    ClearToolHistoryParser parser = new ClearToolHistoryParser();
-                    return parser.parse(new InputStreamReader(new ByteArrayInputStream(baos.toByteArray())));
-                } catch (ParseException pe) {
-                    throw new IOException2("There was a problem parsing the history log.", pe);
-                }
+                return new InputStreamReader(new ByteArrayInputStream(baos.toByteArray()));
             }
         } else {
             launcher.getListener().fatalError(
                     "No view found at '" + viewPath + "'. Create the view by initiating a build manually.");
             throw new AbortException();
         }
-        return new ArrayList<ClearCaseChangeLogEntry>();
+        return null;
     }
 
     private String[] getVobNames(FilePath viewPath, String vobPaths) throws IOException, InterruptedException {

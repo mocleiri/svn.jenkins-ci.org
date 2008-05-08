@@ -2,8 +2,13 @@ package hudson.plugins.clearcase.action;
 
 import hudson.plugins.clearcase.ClearCaseChangeLogEntry;
 import hudson.plugins.clearcase.ClearTool;
+import hudson.plugins.clearcase.ClearToolHistoryParser;
+import hudson.util.IOException2;
 
 import java.io.IOException;
+import java.io.Reader;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +24,16 @@ public class DefaultPollAction implements PollAction {
     }
 
     public List<ClearCaseChangeLogEntry> getChanges(Date time, String viewName, String branchName, String vobPaths) throws IOException, InterruptedException {
-        return cleartool.lshistory(time, viewName, branchName, vobPaths);
+        Reader reader = cleartool.lshistory(time, viewName, branchName, vobPaths);
+        if (reader != null) {
+            try {
+                ClearToolHistoryParser parser = new ClearToolHistoryParser();
+                return parser.parse(reader);
+            } catch (ParseException pe) {
+                throw new IOException2("There was a problem parsing the history log.", pe);
+            }
+        } else {
+            return new ArrayList<ClearCaseChangeLogEntry>();
+        }
     }
 }

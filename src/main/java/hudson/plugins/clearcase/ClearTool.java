@@ -52,16 +52,16 @@ public interface ClearTool {
     void mklabel(String viewName, String label) throws IOException, InterruptedException;
 
     /**
-     * Lists event records for VOB-database objects
+     * Returns Reader containing output from lshistory.
      * 
      * @param launcher launcher for launching the command
      * @param lastBuildDate lists events recorded since (that is, at or after) the specified date-time
      * @param viewName the name of the view
      * @param branch the name of the branch to get history events for; if null then history events for all branches are
      *                listed
-     * @return the event records
+     * @return Reader containing output from command
      */
-    List<ClearCaseChangeLogEntry> lshistory(Date lastBuildDate, String viewName,
+    Reader lshistory(Date lastBuildDate, String viewName,
             String branch, String vobPaths) throws IOException, InterruptedException;
 
     /**
