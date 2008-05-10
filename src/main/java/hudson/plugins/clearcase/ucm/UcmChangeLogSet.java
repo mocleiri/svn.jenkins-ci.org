@@ -1,20 +1,14 @@
 package hudson.plugins.clearcase.ucm;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.digester.Digester;
-import org.xml.sax.SAXException;
-
 import hudson.model.AbstractBuild;
+import hudson.plugins.clearcase.ClearCaseChangeLogSet;
 import hudson.scm.ChangeLogSet;
 
 /**
@@ -69,7 +63,7 @@ public class UcmChangeLogSet extends ChangeLogSet<UcmActivity> {
                 stream.print("\t\t<");
                 stream.print(UcmChangeLogSet.ACTIVITY_TAGS[tag]);
                 stream.print('>');
-                stream.print(escapeForXml(activityValues[tag]));
+                stream.print(ClearCaseChangeLogSet.escapeForXml(activityValues[tag]));
                 stream.print("</");
                 stream.print(UcmChangeLogSet.ACTIVITY_TAGS[tag]);
                 stream.println('>');
@@ -81,7 +75,7 @@ public class UcmChangeLogSet extends ChangeLogSet<UcmActivity> {
                     stream.print("\t\t\t<");
                     stream.print(UcmChangeLogSet.FILE_TAGS[tag]);
                     stream.print('>');
-                    stream.print(escapeForXml(fileValues[tag]));
+                    stream.print(ClearCaseChangeLogSet.escapeForXml(fileValues[tag]));
                     stream.print("</");
                     stream.print(UcmChangeLogSet.FILE_TAGS[tag]);
                     stream.println('>');
@@ -117,39 +111,4 @@ public class UcmChangeLogSet extends ChangeLogSet<UcmActivity> {
         return array;
     }    
     
-    private static String escapeForXml(String string) {
-        if (string == null) {
-            return "";
-        }
-
-        // Loop through and replace the special chars.
-        int size = string.length();
-        char ch = 0;
-        StringBuffer escapedString = new StringBuffer(size);
-        for (int index = 0; index < size; index++) {
-            // Convert special chars.
-            ch = string.charAt(index);
-            switch (ch) {
-                case '&':
-                    escapedString.append("&amp;");
-                    break;
-                case '<':
-                    escapedString.append("&lt;");
-                    break;
-                case '>':
-                    escapedString.append("&gt;");
-                    break;
-                case '\'':
-                    escapedString.append("&apos;");
-                    break;
-                case '\"':
-                    escapedString.append("&quot;");
-                    break;
-                default:
-                    escapedString.append(ch);
-            }
-        }
-
-        return escapedString.toString().trim();
-    }
 }

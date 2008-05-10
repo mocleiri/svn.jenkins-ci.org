@@ -12,9 +12,8 @@ import org.xml.sax.SAXException;
 
 import hudson.model.AbstractBuild;
 import hudson.scm.ChangeLogParser;
-import hudson.scm.ChangeLogSet;
 
-/***********************************************************************************************************************
+/**
  * ClearCase change log parser.
  * 
  * @author Erik Ramfelt

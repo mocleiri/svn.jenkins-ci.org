@@ -1,27 +1,16 @@
 package hudson.plugins.clearcase.ucm;
 
 import static org.junit.Assert.*;
-import hudson.plugins.clearcase.ClearCaseChangeLogEntry;
-import hudson.plugins.clearcase.ClearToolHistoryParser;
 import hudson.plugins.clearcase.ucm.UcmActivity.File;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.text.ParseException;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import org.junit.Assert;
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 public class UcmChangeLogParserTest {
 
     @Test
     public void assertParseOutput() throws Exception {
         UcmChangeLogParser parser = new UcmChangeLogParser();
-        UcmChangeLogSet logSet = parser.parse(null, UcmChangeLogParserTest.class.getResourceAsStream("UcmChangeLog.xml"));
+        UcmChangeLogSet logSet = parser.parse(null, UcmChangeLogParserTest.class.getResourceAsStream("ucmchangelog.xml"));
         assertEquals("The log set should only contain 1 entry", 1, logSet.getItems().length);
         
         UcmActivity activity = logSet.getLogs().get(0);

@@ -1,29 +1,14 @@
 package hudson.plugins.clearcase.action;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
-import hudson.FilePath;
-import hudson.Launcher;
-import hudson.plugins.clearcase.ClearCaseChangeLogEntry;
 import hudson.plugins.clearcase.ClearTool;
-import hudson.plugins.clearcase.ClearToolExecTest;
-import hudson.plugins.clearcase.ClearToolHistoryParser;
-import hudson.plugins.clearcase.StreamCopyAction;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.Reader;
-import java.util.Calendar;
-import java.util.List;
+import java.io.StringReader;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
-import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Before;
 import org.junit.Test;
-
 
 public class DefaultPollActionTest {
 
@@ -37,16 +22,62 @@ public class DefaultPollActionTest {
     }
 
     @Test
-    public void assertSuccessfulParse() throws Exception {
+    public void assertSeparateBranchCommands() throws Exception {
         context.checking(new Expectations() {
             {
-                one(cleartool).lshistory(null, "view", "branch", "vobpath");                
-                will(returnValue(new InputStreamReader( ClearToolExecTest.class.getResourceAsStream("ct-lshistory-1.log"))));
+                one(cleartool).lshistory(null, null, "view", "branchone", "vobpath");                
+                will(returnValue(new StringReader("")));
+                one(cleartool).lshistory(null, null, "view", "branchtwo", "vobpath");                
+                will(returnValue(new StringReader("\"20071015.151822\" \"Customer\\DataSet.xsd\" \"\\main\\sit_r6a\\2\" \"create version\" \"mkelem\" ")));
             }
         });
         
         DefaultPollAction action = new DefaultPollAction(cleartool);
-        List<ClearCaseChangeLogEntry> changes = action.getChanges(null, "view", "branch", "vobpath");
-        assertEquals("The history should contain 3 items", 3, changes.size());
+        boolean hasChange = action.getChanges(null, "view", new String[]{"branchone", "branchtwo"}, "vobpath");
+        assertTrue("The getChanges() method did not report a change", hasChange);
+    }
+
+    @Test
+    public void assertSuccessfulParse() throws Exception {
+        context.checking(new Expectations() {
+            {
+                one(cleartool).lshistory(null, null, "view", "branch", "vobpath");                
+                will(returnValue(new StringReader(
+                        "\"20071015.151822\" \"Customer\\DataSet.xsd\" \"\\main\\sit_r6a\\1\" \"create version\"  \"mkelem\" "
+                      + "\"20071015.151822\" \"Customer\\DataSet.xsd\" \"\\main\\sit_r6a\\2\" \"create version\"  \"mkelem\" ")));
+            }
+        });
+        
+        DefaultPollAction action = new DefaultPollAction(cleartool);
+        boolean hasChange = action.getChanges(null, "view", new String[]{"branch"}, "vobpath");
+        assertTrue("The getChanges() method did not report a change", hasChange);
+    }
+
+    @Test
+    public void assertIgnoringErrors() throws Exception {
+        context.checking(new Expectations() {
+            {
+                one(cleartool).lshistory(null, null, "view", "branch", "vobpath");                
+                will(returnValue(new StringReader("cleartool: Error: Not an object in a vob: \"view.dat\".\n")));
+            }
+        });
+        
+        DefaultPollAction action = new DefaultPollAction(cleartool);
+        boolean hasChange = action.getChanges(null, "view", new String[]{"branch"}, "vobpath");
+        assertFalse("The getChanges() method reported a change", hasChange);
+    }
+
+    @Test
+    public void assertIgnoringVersionZero() throws Exception {
+        context.checking(new Expectations() {
+            {
+                one(cleartool).lshistory(null, null, "view", "branch", "vobpath");                
+                will(returnValue(new StringReader("\"20071015.151822\" \"Customer\\DataSet.xsd\" \"\\main\\sit_r6a\\0\" \"create version\"  \"mkelem\" ")));
+            }
+        });
+        
+        DefaultPollAction action = new DefaultPollAction(cleartool);
+        boolean hasChange = action.getChanges(null, "view", new String[]{"branch"}, "vobpath");
+        assertFalse("The getChanges() method reported a change", hasChange);
     }
 }

@@ -53,20 +53,14 @@ public class UcmChangeLogAction implements ChangeLogAction {
         this.cleartool = cleartool;
     }
 
-    public List<UcmActivity> getChanges(Date time, String viewName, String branchName, String vobPaths) throws IOException, InterruptedException {
-
-        BufferedReader reader;// = new BufferedReader(cleartool.lshistory(time, viewName, branchName, vobPaths)); 
-        //List<UcmActivity> activities = parseHistory(reader);
-
-        return null;
+    public List<UcmActivity> getChanges(Date time, String viewName, String[] branchNames, String vobPaths) throws IOException, InterruptedException {
+        BufferedReader reader = new BufferedReader(cleartool.lshistory(historyHandler.getFormat(), time, viewName, branchNames[0], vobPaths)); 
+        return parseHistory(reader);
     }
-/*
-    
 
-    private List<UcmActivity> parseHistory(UcmBuildEnvironment environment, BufferedReader reader) throws InterruptedException,IOException {
+    private List<UcmActivity> parseHistory(BufferedReader reader) throws InterruptedException,IOException {
         List<UcmActivity> result = new ArrayList<UcmActivity>();
         try {
-
             StringBuilder commentBuilder = new StringBuilder();
             String line = reader.readLine();
 
@@ -107,7 +101,7 @@ public class UcmChangeLogAction implements ChangeLogAction {
                         activity = new UcmActivity();
                         activity.setName(activityName);
                         activityNameToEntry.put(activityName, activity);
-                        callLsActivity(environment, activity);
+                        callLsActivity(activity);
                         result.add(activity);
                     }
 
@@ -124,32 +118,21 @@ public class UcmChangeLogAction implements ChangeLogAction {
                 currentFile.setComment(commentBuilder.toString());
             }
         } catch (ParseException ex) {
-            environment.getListener().fatalError("Could not perform polling due to" + ex.getMessage());
             throw new IOException("Could not parse cleartool output", ex);
-        } catch (IOException ex) {
-            environment.getListener().fatalError("Could not perform polling due to" + ex.getMessage());
-            throw ex;
-        } catch (InterruptedException ex) {
-            environment.getListener().fatalError("Could not perform polling due to" + ex.getMessage());
-            throw ex;
         }
         return result;
     }
 
-    private void callLsActivity(UcmBuildEnvironment environment, UcmActivity activity) throws IOException, InterruptedException {
+    private void callLsActivity(UcmActivity activity) throws IOException, InterruptedException {
         ClearToolFormatHandler handler = null;
         if (activity.isIntegrationActivity()) {
             handler = new ClearToolFormatHandler(INTEGRATION_ACTIVITY_FORMAT);
         } else {
             handler = new ClearToolFormatHandler(ACTIVITY_FORMAT);
         }
-
-        LsActivityRequest commandRequest = new LsActivityRequest();
-
-        commandRequest.setOutputFormat(handler.getFormat());
-        commandRequest.setActivityName(activity.getName());
             
-        BufferedReader reader = environment.getClearTool().lsactivity(commandRequest);
+        BufferedReader reader = new BufferedReader(cleartool.lsactivity(activity.getName(), handler.getFormat()));
+        
         String line = reader.readLine();
         Matcher matcher = handler.checkLine(line);
         if (matcher != null) {
@@ -165,10 +148,9 @@ public class UcmChangeLogAction implements ChangeLogAction {
                 for (String contributing : contributingActivities.split(" ")) {
                     UcmActivity subActivity = new UcmActivity();
                     subActivity.setName(contributing);
-                    callLsActivity(environment, subActivity);
+                    callLsActivity(subActivity);
                 }
             }
         }
-    }
-    */
+    }    
 }

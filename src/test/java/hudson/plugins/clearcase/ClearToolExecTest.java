@@ -123,7 +123,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
                 will(returnValue(Boolean.TRUE));
             }
         });
-        clearToolExec.lshistory(mockedCalendar.getTime(), "viewName", "branch", " ");
+        clearToolExec.lshistory(null, mockedCalendar.getTime(), "viewName", "branch", " ");
         context.assertIsSatisfied();
     }
     @Test
@@ -147,7 +147,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
                 will(returnValue(Boolean.TRUE));
             }
         });
-        clearToolExec.lshistory(mockedCalendar.getTime(), "viewName", "branch", "");
+        clearToolExec.lshistory(null, mockedCalendar.getTime(), "viewName", "branch", "");
         context.assertIsSatisfied();
     }
     @Test
@@ -168,8 +168,8 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
                         returnValue(Boolean.TRUE)));
             }
         });
-        Reader reader = clearToolExec.lshistory(mockedCalendar.getTime(),
-                "viewName", "branch","vob1");
+        Reader reader = clearToolExec.lshistory(null,
+                mockedCalendar.getTime(), "viewName","branch", "vob1");
         assertNotNull("Returned console reader can not be null", reader);
         context.assertIsSatisfied();
     }
@@ -190,7 +190,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
                 will(returnValue(Boolean.TRUE));
             }
         });
-        clearToolExec.lshistory(mockedCalendar.getTime(), "viewName", "branch", "vob2/vob2-1 vob4");
+        clearToolExec.lshistory(null, mockedCalendar.getTime(), "viewName", "branch", "vob2/vob2-1 vob4");
         context.assertIsSatisfied();
     }
     @Test(expected=hudson.AbortException.class)
@@ -206,7 +206,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
                 one(taskListener).fatalError(with(any(String.class)));
             }
         });
-        clearToolExec.lshistory(mockedCalendar.getTime(), "viewName", "branch", "");
+        clearToolExec.lshistory(null, mockedCalendar.getTime(), "viewName", "branch", "");
         context.assertIsSatisfied();
     }
     @Test

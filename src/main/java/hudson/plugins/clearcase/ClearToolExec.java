@@ -3,7 +3,6 @@ package hudson.plugins.clearcase;
 import hudson.AbortException;
 import hudson.FilePath;
 import hudson.util.ArgumentListBuilder;
-import hudson.util.IOException2;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -12,7 +11,6 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,14 +29,14 @@ public abstract class ClearToolExec implements ClearTool {
 
     protected abstract FilePath getRootViewPath(ClearToolLauncher launcher);
 
-    public Reader lshistory(Date lastBuildDate, String viewName,
-            String branch, String vobPaths) throws IOException, InterruptedException {
+    public Reader lshistory(String format, Date lastBuildDate,
+            String viewName, String branch, String vobPaths) throws IOException, InterruptedException {
         SimpleDateFormat formatter = new SimpleDateFormat("d-MMM.HH:mm:ss");
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("lshistory");
         cmd.add("-r");
         cmd.add("-since", formatter.format(lastBuildDate).toLowerCase());
-        cmd.add("-fmt", ClearToolHistoryParser.getLogFormat());
+        cmd.add("-fmt", format);
         if ((branch != null) && (branch.length() > 0)) {
             cmd.add("-branch", "brtype:" + branch);
         }

@@ -6,11 +6,16 @@ import hudson.model.AbstractBuild;
 import hudson.model.Hudson;
 import hudson.model.ModelObject;
 import hudson.model.TaskListener;
+import hudson.plugins.clearcase.action.ChangeLogAction;
 import hudson.plugins.clearcase.action.CheckOutAction;
 import hudson.plugins.clearcase.action.DefaultPollAction;
 import hudson.plugins.clearcase.action.DynamicCheckoutAction;
 import hudson.plugins.clearcase.action.PollAction;
+import hudson.plugins.clearcase.action.SaveChangeLogAction;
 import hudson.plugins.clearcase.action.SnapshotCheckoutAction;
+import hudson.plugins.clearcase.action.TaggingAction;
+import hudson.plugins.clearcase.base.BaseChangeLogAction;
+import hudson.plugins.clearcase.base.BaseSaveChangeLogAction;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
 import hudson.util.ByteBuffer;
@@ -29,7 +34,7 @@ import java.util.Map;
 /**
  * Base ClearCase SCM.
  * 
- * This SCM is for normal Clearcase repositories.
+ * This SCM is for base ClearCase repositories.
  * 
  * @author Erik Ramfelt
  */
@@ -122,6 +127,21 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
         return new DefaultPollAction(createClearTool(launcher));
     }
 
+    @Override
+    protected ChangeLogAction createChangeLogAction(ClearToolLauncher launcher) {
+        return new BaseChangeLogAction(createClearTool(launcher), getDescriptor().getLogMergeTimeWindow());
+    }
+
+    @Override
+    protected SaveChangeLogAction createSaveChangeLogAction(ClearToolLauncher launcher) {
+        return new BaseSaveChangeLogAction();
+    }
+
+    @Override
+    protected TaggingAction createTaggingAction(ClearToolLauncher clearToolLauncher) {
+        return null;
+    }
+
     /**
      * Split the branch names into a string array.
      * @param branchString string containing none or several branches
@@ -137,11 +157,11 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
         return branchArray;
     }
 
-    private ClearTool createClearTool(ClearToolLauncher launcher) {
+    protected ClearTool createClearTool(ClearToolLauncher launcher) {
         if (useDynamicView) {
             return new ClearToolDynamic(launcher, viewDrive);
         } else {
-            return new ClearToolSnapshot(launcher, getMkviewOptionalParam());
+            return super.createClearTool(launcher);
         }
     }
 

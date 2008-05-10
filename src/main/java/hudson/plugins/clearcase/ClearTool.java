@@ -53,16 +53,16 @@ public interface ClearTool {
 
     /**
      * Returns Reader containing output from lshistory.
-     * 
-     * @param launcher launcher for launching the command
+     * @param format TODO
      * @param lastBuildDate lists events recorded since (that is, at or after) the specified date-time
      * @param viewName the name of the view
      * @param branch the name of the branch to get history events for; if null then history events for all branches are
      *                listed
+     * @param launcher launcher for launching the command
+     * 
      * @return Reader containing output from command
      */
-    Reader lshistory(Date lastBuildDate, String viewName,
-            String branch, String vobPaths) throws IOException, InterruptedException;
+    Reader lshistory(String format, Date lastBuildDate, String viewName, String branch, String vobPaths) throws IOException, InterruptedException;
 
     /**
      * Lists activities .......(?)

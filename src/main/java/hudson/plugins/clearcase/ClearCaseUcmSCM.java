@@ -7,10 +7,15 @@ import org.kohsuke.stapler.StaplerRequest;
 
 import hudson.Util;
 import hudson.model.ModelObject;
+import hudson.plugins.clearcase.action.ChangeLogAction;
 import hudson.plugins.clearcase.action.CheckOutAction;
 import hudson.plugins.clearcase.action.DefaultPollAction;
 import hudson.plugins.clearcase.action.PollAction;
+import hudson.plugins.clearcase.action.SaveChangeLogAction;
+import hudson.plugins.clearcase.action.TaggingAction;
 import hudson.plugins.clearcase.action.UcmSnapshotCheckoutAction;
+import hudson.plugins.clearcase.ucm.UcmChangeLogAction;
+import hudson.plugins.clearcase.ucm.UcmSaveChangeLogAction;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
 
@@ -86,9 +91,20 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
     protected PollAction createPollAction(ClearToolLauncher launcher) {
         return new DefaultPollAction(createClearTool(launcher));
     }
+
+    @Override
+    protected ChangeLogAction createChangeLogAction(ClearToolLauncher launcher) {
+        return new UcmChangeLogAction(createClearTool(launcher));
+    }
+
+    @Override
+    protected SaveChangeLogAction createSaveChangeLogAction(ClearToolLauncher launcher) {
+        return new UcmSaveChangeLogAction();
+    }
     
-    private ClearTool createClearTool(ClearToolLauncher launcher) {
-        return new ClearToolSnapshot(launcher, getMkviewOptionalParam());
+    @Override
+    protected TaggingAction createTaggingAction(ClearToolLauncher clearToolLauncher) {
+        return null;
     }
     
     /**
