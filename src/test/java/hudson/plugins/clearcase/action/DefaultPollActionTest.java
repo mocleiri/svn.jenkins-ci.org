@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import hudson.plugins.clearcase.ClearTool;
 
 import java.io.StringReader;
+import java.util.Date;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -25,9 +26,9 @@ public class DefaultPollActionTest {
     public void assertSeparateBranchCommands() throws Exception {
         context.checking(new Expectations() {
             {
-                one(cleartool).lshistory(null, null, "view", "branchone", "vobpath");                
+                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branchone")), with(equal("vobpath")));                
                 will(returnValue(new StringReader("")));
-                one(cleartool).lshistory(null, null, "view", "branchtwo", "vobpath");                
+                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branchtwo")), with(equal("vobpath")));                
                 will(returnValue(new StringReader("\"20071015.151822\" \"Customer\\DataSet.xsd\" \"\\main\\sit_r6a\\2\" \"create version\" \"mkelem\" ")));
             }
         });
@@ -41,7 +42,7 @@ public class DefaultPollActionTest {
     public void assertSuccessfulParse() throws Exception {
         context.checking(new Expectations() {
             {
-                one(cleartool).lshistory(null, null, "view", "branch", "vobpath");                
+                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branch")), with(equal("vobpath")));                
                 will(returnValue(new StringReader(
                         "\"20071015.151822\" \"Customer\\DataSet.xsd\" \"\\main\\sit_r6a\\1\" \"create version\"  \"mkelem\" "
                       + "\"20071015.151822\" \"Customer\\DataSet.xsd\" \"\\main\\sit_r6a\\2\" \"create version\"  \"mkelem\" ")));
@@ -57,7 +58,7 @@ public class DefaultPollActionTest {
     public void assertIgnoringErrors() throws Exception {
         context.checking(new Expectations() {
             {
-                one(cleartool).lshistory(null, null, "view", "branch", "vobpath");                
+                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branch")), with(equal("vobpath")));                
                 will(returnValue(new StringReader("cleartool: Error: Not an object in a vob: \"view.dat\".\n")));
             }
         });
@@ -71,7 +72,7 @@ public class DefaultPollActionTest {
     public void assertIgnoringVersionZero() throws Exception {
         context.checking(new Expectations() {
             {
-                one(cleartool).lshistory(null, null, "view", "branch", "vobpath");                
+                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branch")), with(equal("vobpath")));                
                 will(returnValue(new StringReader("\"20071015.151822\" \"Customer\\DataSet.xsd\" \"\\main\\sit_r6a\\0\" \"create version\"  \"mkelem\" ")));
             }
         });

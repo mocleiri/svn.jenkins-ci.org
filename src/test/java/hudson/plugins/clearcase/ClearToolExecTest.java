@@ -161,14 +161,14 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
                 will(returnValue(workspace));
                 one(launcher).run(
                         with(equal(new String[] { "lshistory", "-r", "-since", "18-nov.15:05:25",
-                                "-fmt", ClearToolHistoryParser.getLogFormat(), "-branch", "brtype:branch", "-nco",
+                                "-fmt", "FORMAT", "-branch", "brtype:branch", "-nco",
                                 "vob1" })), (InputStream) with(anything()),
                         (OutputStream) with(an(OutputStream.class)), with(aNonNull(FilePath.class)));
                 will(doAll(new StreamCopyAction(2, ClearToolExecTest.class.getResourceAsStream("ct-lshistory-1.log")),
                         returnValue(Boolean.TRUE)));
             }
         });
-        Reader reader = clearToolExec.lshistory(null,
+        Reader reader = clearToolExec.lshistory("FORMAT",
                 mockedCalendar.getTime(), "viewName","branch", "vob1");
         assertNotNull("Returned console reader can not be null", reader);
         context.assertIsSatisfied();
@@ -184,13 +184,13 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
                 will(returnValue(workspace));
                 one(launcher).run(
                         with(equal(new String[] { "lshistory", "-r", "-since", "18-nov.15:05:25",
-                                "-fmt", ClearToolHistoryParser.getLogFormat(), "-branch", "brtype:branch", "-nco",
+                                "-fmt", "FORMAT", "-branch", "brtype:branch", "-nco",
                                 "vob2/vob2-1", "vob4" })), (InputStream) with(anything()),
                         (OutputStream) with(an(OutputStream.class)), with(aNonNull(FilePath.class)));
                 will(returnValue(Boolean.TRUE));
             }
         });
-        clearToolExec.lshistory(null, mockedCalendar.getTime(), "viewName", "branch", "vob2/vob2-1 vob4");
+        clearToolExec.lshistory("FORMAT", mockedCalendar.getTime(), "viewName", "branch", "vob2/vob2-1 vob4");
         context.assertIsSatisfied();
     }
     @Test(expected=hudson.AbortException.class)
