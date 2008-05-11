@@ -144,6 +144,7 @@ public class UcmChangeLogAction implements ChangeLogAction {
 
                 for (String contributing : contributingActivities.split(" ")) {
                     UcmActivity subActivity = new UcmActivity();
+                    activity.addSubActivity(subActivity);
                     subActivity.setName(contributing);
                     callLsActivity(subActivity);
                 }

@@ -3,6 +3,7 @@ package hudson.plugins.clearcase.ucm;
 import static org.junit.Assert.assertEquals;
 
 import java.io.StringReader;
+import java.util.Date;
 import java.util.List;
 
 import hudson.plugins.clearcase.ClearTool;
@@ -24,35 +25,90 @@ public class UcmChangeLogActionTest {
     }
     
     @Test
-    public void assertParsingOfCommandOutput() throws Exception {
+    public void assertParsingOfNonIntegrationActivity() throws Exception {
         context.checking(new Expectations() {
             {
-                one(cleartool).lshistory("FORMAT", null, "IGNORED", "Usi_Release_2_1_int", "vobs/projects/Usi_Server");                
+                one(cleartool).lshistory(with(any(String.class)), with(aNull(Date.class)), 
+                        with(equal("IGNORED")), with(equal("Release_2_1_int")), with(equal("vobs/projects/Server")));                
                 will(returnValue(new StringReader(
-                        "\"20080427.134932\" " +
-                        "\"vobs/projects/Usi_Server/adp-war/src/main/java/net/apmoller/crb/usi/adp/AdpServlet.java\" " +
-                        "\"/main/Usi_Main_Int/Usi_Release_2_1_int/2\" " +
-                        "\"deliver.shared_development_2_1.20080427.154853\" " +
-                        "\"create version\" " +
+                        "\"20080509.140451\" " +
+                        "\"vobs/projects/Server//config-admin-client\" " +
+                        "\"/main/Product/Release_3_3_int/Release_3_3_jdk5/2\" " +
+                        "\"Release_3_3_jdk5.20080509.155359\" " +
+                        "\"create directory version\" " +
                         "\"checkin\" ")));
                 one(cleartool).lsactivity(
-                        with(equal("deliver.shared_development_2_1.20080427.154853@/vobs/UCM_project")), 
+                        with(equal("Release_3_3_jdk5.20080509.155359")), 
                         with(aNonNull(String.class)));
-                will(returnValue(new StringReader("\"deliver.shared_development_2_1.20080427.154853\" " +
-                		"\"deliver shared_development_2_1 on 04/27/08 15:48:53.\" " +
-                		"\"hlyh_test_ccplugin_servlet hlyh_test_exception_ccplug\" " +
-                		"\"user\" " +
-                		"\"user name\" ")));
+                will(returnValue(new StringReader("\"Convert to Java 6\" " +
+                		"\"Release_3_3_jdk5\" " +
+                		"\"bob\" " +
+                		"\"Bob Smith\" ")));
             }
         });
         
         UcmChangeLogAction action = new UcmChangeLogAction(cleartool);
-        List<UcmActivity> activities = action.getChanges(null, "IGNORED", new String[]{"Usi_Release_2_1_int"}, "vobs/projects/Usi_Server");
-        assertEquals("There should be 2 activities", 2, activities.size());
+        List<UcmActivity> activities = action.getChanges(null, "IGNORED", new String[]{"Release_2_1_int"}, "vobs/projects/Server");
+        assertEquals("There should be 1 activity", 1, activities.size());
         UcmActivity activity = activities.get(0);
-        assertEquals("Activity name is incorrect", "deliver.shared_development_2_1.20080427.154853", activity.getName());
-        assertEquals("Activity headline is incorrect", "", activity.getHeadline());
-        assertEquals("Activity stream is incorrect", "", activity.getStream());
-        assertEquals("Activity user is incorrect", "hlh005", activity.getUser());
+        assertEquals("Activity name is incorrect", "Release_3_3_jdk5.20080509.155359", activity.getName());
+        assertEquals("Activity headline is incorrect", "Convert to Java 6", activity.getHeadline());
+        assertEquals("Activity stream is incorrect", "Release_3_3_jdk5", activity.getStream());
+        assertEquals("Activity user is incorrect", "bob", activity.getUser());
+        assertEquals("Activity user is incorrect", "Bob Smith", activity.getUserName());
+    }
+    
+    @Test
+    public void assertParsingOfIntegrationActivity() throws Exception {
+        context.checking(new Expectations() {
+            {
+                one(cleartool).lshistory(with(any(String.class)), with(aNull(Date.class)), 
+                        with(equal("IGNORED")), with(equal("Release_2_1_int")), with(equal("vobs/projects/Server")));                
+                will(returnValue(new StringReader(
+                        "\"20080509.140451\" " +
+                        "\"vobs/projects/Server//config-admin-client\" " +
+                        "\"/main/Product/Release_3_3_int/Release_3_3_jdk5/2\" " +
+                        "\"rebase.Release_3_3_jdk5.20080509.155359\" " +
+                        "\"create directory version\" " +
+                        "\"checkin\" ")));
+                one(cleartool).lsactivity(
+                        with(equal("rebase.Release_3_3_jdk5.20080509.155359")), 
+                        with(aNonNull(String.class)));
+                will(returnValue(new StringReader("\"Convert to Java 6\" " +
+                                "\"Release_3_3_jdk5\" " +
+                                "\"bob\" " +
+                                "\"Bob Smith\" " +
+                                "\"maven2_Release_3_3.20080421.154619 maven2_Release_3_3.20080421.163355\" ")));
+                one(cleartool).lsactivity(
+                        with(equal("maven2_Release_3_3.20080421.154619")), 
+                        with(aNonNull(String.class)));
+                will(returnValue(new StringReader("\"Deliver maven2\" " +
+                                "\"Release_3_3\" " +
+                                "\"doe\" " +
+                                "\"John Doe\" ")));
+                one(cleartool).lsactivity(
+                        with(equal("maven2_Release_3_3.20080421.163355")), 
+                        with(aNonNull(String.class)));
+                will(returnValue(new StringReader("\"Deliver maven3\" " +
+                                "\"Release_3_3\" " +
+                                "\"doe\" " +
+                                "\"John Doe\" ")));
+            }
+        });
+        
+        UcmChangeLogAction action = new UcmChangeLogAction(cleartool);
+        List<UcmActivity> activities = action.getChanges(null, "IGNORED", new String[]{"Release_2_1_int"}, "vobs/projects/Server");
+        assertEquals("There should be 1 activity", 1, activities.size());
+        UcmActivity activity = activities.get(0);
+        assertEquals("Activity name is incorrect", "rebase.Release_3_3_jdk5.20080509.155359", activity.getName());
+        assertEquals("Activity headline is incorrect", "Convert to Java 6", activity.getHeadline());
+        assertEquals("Activity stream is incorrect", "Release_3_3_jdk5", activity.getStream());
+        assertEquals("Activity user is incorrect", "bob", activity.getUser());
+        assertEquals("Activity user is incorrect", "Bob Smith", activity.getUserName());
+        
+        List<UcmActivity> subActivities = activity.getSubActivities();
+        assertEquals("There should be 2 sub activities", 2, subActivities.size());
+        assertEquals("Name of first sub activity is incorrect", "maven2_Release_3_3.20080421.154619", subActivities.get(0).getName());
+        assertEquals("Name of second sub activity is incorrect", "maven2_Release_3_3.20080421.163355", subActivities.get(1).getName());
     }
 }
