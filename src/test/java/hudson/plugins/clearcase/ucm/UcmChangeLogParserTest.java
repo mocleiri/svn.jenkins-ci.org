@@ -17,7 +17,6 @@ public class UcmChangeLogParserTest {
         assertEquals("Activity name is incorrect", "name", activity.getName());
         assertEquals("Activity headline is incorrect", "headline", activity.getHeadline());
         assertEquals("Activity stream is incorrect", "stream", activity.getStream());
-        assertEquals("Activity view is incorrect", "view", activity.getView());
         assertEquals("Activity user is incorrect", "user", activity.getUser());
         
         assertEquals("Activity should contain one file", 1, activity.getFiles().size());

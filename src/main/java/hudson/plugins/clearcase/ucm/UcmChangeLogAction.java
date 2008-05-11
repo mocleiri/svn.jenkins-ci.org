@@ -31,13 +31,11 @@ public class UcmChangeLogAction implements ChangeLogAction {
     };
     private static final String[] ACTIVITY_FORMAT = {UCM_ACTIVITY_HEADLINE,
         UCM_ACTIVITY_STREAM,
-        UCM_ACTIVITY_VIEW,
         USER_ID,
         USER_FULLNAME
     };
     private static final String[] INTEGRATION_ACTIVITY_FORMAT = {UCM_ACTIVITY_HEADLINE,
         UCM_ACTIVITY_STREAM,
-        UCM_ACTIVITY_VIEW,
         USER_ID,
         USER_FULLNAME,
         UCM_ACTIVITY_CONTRIBUTING
@@ -138,12 +136,11 @@ public class UcmChangeLogAction implements ChangeLogAction {
         if (matcher != null) {
             activity.setHeadline(matcher.group(1));
             activity.setStream(matcher.group(2));
-            activity.setView(matcher.group(3));
-            activity.setUser(matcher.group(4));
-            activity.setUserName(matcher.group(5));
+            activity.setUser(matcher.group(3));
+            activity.setUserName(matcher.group(4));
 
             if (activity.isIntegrationActivity()) {
-                String contributingActivities = matcher.group(6);
+                String contributingActivities = matcher.group(5);
 
                 for (String contributing : contributingActivities.split(" ")) {
                     UcmActivity subActivity = new UcmActivity();

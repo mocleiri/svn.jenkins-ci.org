@@ -20,7 +20,6 @@ public class UcmChangeLogSetTest {
         activity.setName("name");
         activity.setStream("stream");
         activity.setUser("user");
-        activity.setView("view");
         
         UcmActivity.File activityFile = new UcmActivity.File();
         activityFile.setComment("file-comment");

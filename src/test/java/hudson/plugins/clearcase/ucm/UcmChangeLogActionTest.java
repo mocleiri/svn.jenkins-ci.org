@@ -53,7 +53,6 @@ public class UcmChangeLogActionTest {
         assertEquals("Activity name is incorrect", "deliver.shared_development_2_1.20080427.154853", activity.getName());
         assertEquals("Activity headline is incorrect", "", activity.getHeadline());
         assertEquals("Activity stream is incorrect", "", activity.getStream());
-        assertEquals("Activity view is incorrect", "", activity.getView());
         assertEquals("Activity user is incorrect", "hlh005", activity.getUser());
     }
 }
