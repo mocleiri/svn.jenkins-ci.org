@@ -88,11 +88,6 @@ public abstract class AbstractClearCaseScm extends SCM {
     public abstract String getVobPaths();
 
     @Override
-    public ChangeLogParser createChangeLogParser() {
-        return new ClearCaseChangeLogParser();
-    }
-
-    @Override
     public boolean supportsPolling() {
         return true;
     }

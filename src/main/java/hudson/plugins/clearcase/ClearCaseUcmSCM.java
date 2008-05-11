@@ -15,7 +15,10 @@ import hudson.plugins.clearcase.action.SaveChangeLogAction;
 import hudson.plugins.clearcase.action.TaggingAction;
 import hudson.plugins.clearcase.action.UcmSnapshotCheckoutAction;
 import hudson.plugins.clearcase.ucm.UcmChangeLogAction;
+import hudson.plugins.clearcase.ucm.UcmChangeLogParser;
+import hudson.plugins.clearcase.ucm.UcmChangeLogSet;
 import hudson.plugins.clearcase.ucm.UcmSaveChangeLogAction;
+import hudson.scm.ChangeLogParser;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
 
@@ -54,6 +57,11 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
     @Override
     public ClearCaseUcmScmDescriptor getDescriptor() {
         return PluginImpl.UCM_DESCRIPTOR;
+    }
+
+    @Override
+    public ChangeLogParser createChangeLogParser() {
+        return new UcmChangeLogParser();
     }
 
     @Override
