@@ -7,6 +7,13 @@ import org.junit.Test;
 public class ClearCaseUcmSCMTest {
 
     @Test
+    public void testCreateChangeLogParser() {
+        ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "loadrules", "viewname", "option");
+        assertNotNull("The change log parser is null", scm.createChangeLogParser());
+        assertNotSame("The change log parser is re-used", scm.createChangeLogParser(), scm.createChangeLogParser());
+    }
+    
+    @Test
     public void testGetLoadRules() {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "loadrules", "viewname", "option");
         assertEquals("The load rules arent correct", "loadrules", scm.getLoadRules());

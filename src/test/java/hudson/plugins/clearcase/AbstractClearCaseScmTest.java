@@ -21,6 +21,7 @@ import hudson.plugins.clearcase.action.CheckOutAction;
 import hudson.plugins.clearcase.action.PollAction;
 import hudson.plugins.clearcase.action.SaveChangeLogAction;
 import hudson.plugins.clearcase.action.TaggingAction;
+import hudson.scm.ChangeLogParser;
 import hudson.scm.SCMDescriptor;
 
 import org.jmock.Expectations;
@@ -92,13 +93,6 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
     public void testGetMkviewOptionalParam() {
         AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("viewname", "vob", "extra params");
         assertEquals("The MkviewOptionalParam isnt correct", "extra params", scm.getMkviewOptionalParam());
-    }
-
-    @Test
-    public void testCreateChangeLogParser() {
-        AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("viewname", "vobs/ avob", "");
-        assertNotNull("The change log parser is null", scm.createChangeLogParser());
-        assertNotSame("The change log parser is re-used", scm.createChangeLogParser(), scm.createChangeLogParser());
     }
 
     @Test
@@ -474,6 +468,11 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         @Override
         protected TaggingAction createTaggingAction(ClearToolLauncher clearToolLauncher) {
+            return null;
+        }
+
+        @Override
+        public ChangeLogParser createChangeLogParser() {
             return null;
         }
     }    

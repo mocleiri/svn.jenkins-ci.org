@@ -11,6 +11,13 @@ import org.junit.Test;
 public class ClearCaseSCMTest {
 
     @Test
+    public void testCreateChangeLogParser() {
+        ClearCaseSCM scm = new ClearCaseSCM("branch", "configspec", "viewname", true, "", false, "", null);
+        assertNotNull("The change log parser is null", scm.createChangeLogParser());
+        assertNotSame("The change log parser is re-used", scm.createChangeLogParser(), scm.createChangeLogParser());
+    }
+    
+    @Test
     public void testSnapshotBuildEnvVars() {
         ClearCaseSCM scm = new ClearCaseSCM("branch", "configspec", "viewname", true, "", false, "", null);
         Map<String, String> env = new HashMap<String, String>();
