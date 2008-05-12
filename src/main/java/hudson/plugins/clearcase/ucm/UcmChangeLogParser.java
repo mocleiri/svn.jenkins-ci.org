@@ -56,6 +56,15 @@ public class UcmChangeLogParser extends ChangeLogParser {
         // TODO, is the user name really needed? 
         // digester.addBeanPropertySetter("*/entry/userName");
 
+        digester.addObjectCreate("*/subactivity", UcmActivity.class);
+        digester.addBeanPropertySetter("*/subactivity/name");
+        digester.addBeanPropertySetter("*/subactivity/headline");
+        digester.addBeanPropertySetter("*/subactivity/stream");
+        digester.addBeanPropertySetter("*/subactivity/user");
+        // TODO, is the user name really needed? 
+        // digester.addBeanPropertySetter("*/subactivity/userName");        
+        digester.addSetNext("*/subactivity", "addSubActivity");
+        
         digester.addObjectCreate("*/entry/file", UcmActivity.File.class);
         digester.addBeanPropertySetter("*/entry/file/name");
         digester.addBeanPropertySetter("*/entry/file/date", "dateStr");

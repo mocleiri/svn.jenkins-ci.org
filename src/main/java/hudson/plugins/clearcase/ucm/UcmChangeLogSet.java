@@ -68,6 +68,9 @@ public class UcmChangeLogSet extends ChangeLogSet<UcmActivity> {
                 stream.print(UcmChangeLogSet.ACTIVITY_TAGS[tag]);
                 stream.println('>');
             }
+            for (UcmActivity subActivity : entry.getSubActivities()) {
+                writeSubActivity(stream,subActivity);
+            }            
             for (UcmActivity.File file : entry.getFiles()) {
                 stream.println("\t\t<file>");
                 String[] fileValues = getFileAsStrings(file);
@@ -108,6 +111,25 @@ public class UcmChangeLogSet extends ChangeLogSet<UcmActivity> {
         array[4] = entry.getEvent();
         array[5] = entry.getOperation();
         return array;
-    }    
+    }
+    
+    private static void writeSubActivity(PrintStream stream, UcmActivity activity) {
+            stream.println("<subactivity>");
+            String[] activityValues = getEntryAsStrings(activity);
+            for (int tag = 0; tag < ACTIVITY_TAGS.length; tag++) {
+                stream.print("\t<");
+                stream.print(UcmChangeLogSet.ACTIVITY_TAGS[tag]);
+                stream.print('>');
+                stream.print(ClearCaseChangeLogSet.escapeForXml(activityValues[tag]));
+                stream.print("</");
+                stream.print(UcmChangeLogSet.ACTIVITY_TAGS[tag]);
+                stream.println('>');
+            }
+            for (UcmActivity subActivity : activity.getSubActivities()) {
+                writeSubActivity(stream,subActivity);
+            }
+            stream.println("</subactivity>");
+        
+    }
     
 }
