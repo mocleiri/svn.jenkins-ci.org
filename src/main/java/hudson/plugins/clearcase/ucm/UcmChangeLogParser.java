@@ -52,7 +52,6 @@ public class UcmChangeLogParser extends ChangeLogParser {
         digester.addBeanPropertySetter("*/entry/name");
         digester.addBeanPropertySetter("*/entry/headline");
         digester.addBeanPropertySetter("*/entry/stream");
-        digester.addBeanPropertySetter("*/entry/view");
         digester.addBeanPropertySetter("*/entry/user");
         // TODO, is the user name really needed? 
         // digester.addBeanPropertySetter("*/entry/userName");
