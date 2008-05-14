@@ -6,9 +6,9 @@ package hudson.plugins.clearcase.util;
  */
 public interface OutputFormat {
     
-    // Format
+    // Format 
     public static final String START_DELIMITER ="\\\"";             
-    public static final String END_DELIMITER ="\\\" "; // Note the space
+    public static final String END_DELIMITER ="\\\" "; // Note the space!
     public static final String REGEX_GROUP = "\"(.+)\"\\s+";
     public static final String LINEEND = "\\n";
     public static final String PLACEHOLDER = "\\\" \\\" ";
