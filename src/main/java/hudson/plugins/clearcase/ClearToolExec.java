@@ -178,4 +178,10 @@ public abstract class ClearToolExec implements ClearTool {
         }
         return viewListPattern;
     }
+
+    public boolean mkbl(MkblRequest request) throws IOException, InterruptedException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    
 }
