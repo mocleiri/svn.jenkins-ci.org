@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractNodeMonitorDescriptor (Hudson core 1.213 API)
+AbstractNodeMonitorDescriptor (Hudson core 1.214 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-02">
+<META NAME="date" CONTENT="2008-05-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractNodeMonitorDescriptor (Hudson core 1.213 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractNodeMonitorDescriptor (Hudson core 1.213 API)";
+        parent.document.title="AbstractNodeMonitorDescriptor (Hudson core 1.214 API)";
     }
 }
 </SCRIPT>
@@ -278,6 +278,12 @@ protected abstract <A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescri
 <P>
 <DD><DL>
 
+<DT><B>Returns:</B><DD>Application-specific value that represents the observed monitoring value
+      on the given node. This value will be returned from the <A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html#get(hudson.model.Computer)"><CODE>get(Computer)</CODE></A> method.
+      If null is returned, it will be interpreted as "no observed value." This is
+      convenient way of abandoning the observation on a particular computer,
+      whereas <CODE>IOException</CODE> is useful for indicating a hard error that needs to be
+      corrected.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>

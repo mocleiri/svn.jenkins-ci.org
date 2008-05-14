@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractItem (Hudson core 1.213 API)
+AbstractItem (Hudson core 1.214 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-02">
+<META NAME="date" CONTENT="2008-05-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractItem (Hudson core 1.213 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractItem (Hudson core 1.213 API)";
+        parent.document.title="AbstractItem (Hudson core 1.214 API)";
     }
 }
 </SCRIPT>
@@ -99,7 +99,7 @@ java.lang.Object
           <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.AbstractItem</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, org.kohsuke.stapler.HttpDeletable</DD>
 </DL>
 <DL>
 <DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A></DD>
@@ -107,7 +107,7 @@ java.lang.Object
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1">@ExportedBean
-</FONT>public abstract class <B>AbstractItem</B><DT>extends <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">Actionable</A><DT>implements <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A></DL>
+</FONT>public abstract class <B>AbstractItem</B><DT>extends <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">Actionable</A><DT>implements <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>, org.kohsuke.stapler.HttpDeletable</DL>
 </PRE>
 
 <P>
@@ -199,6 +199,15 @@ Partial default implementation of <A HREF="../../hudson/model/Item.html" title="
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes this item.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractItem.html#delete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">delete</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+       org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -975,6 +984,26 @@ public void <B>doDoDelete</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="delete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+delete</H3>
+<PRE>
+public void <B>delete</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                   org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+            throws java.io.IOException,
+                   javax.servlet.ServletException</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>delete</CODE> in interface <CODE>org.kohsuke.stapler.HttpDeletable</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <HR>

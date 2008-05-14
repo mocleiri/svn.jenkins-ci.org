@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.213 API)
+Deprecated List (Hudson core 1.214 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-02">
+<META NAME="date" CONTENT="2008-05-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.213 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.213 API)";
+        parent.document.title="Deprecated List (Hudson core 1.214 API)";
     }
 }
 </SCRIPT>
@@ -137,6 +137,14 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>why are you calling a method that always return true?</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/Util.html#encodeRFC2396(java.lang.String)">hudson.Util.encodeRFC2396(String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>This method is broken (see ISSUE#1666). It should probably
+ be removed but I'm not sure if it is considered part of the public API
+ that needs to be maintained for backwards compatibility.
+ Use <A HREF="hudson/Util.html#encode(java.lang.String)"><CODE>Util.encode(String)</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Job.html#getBuild(java.lang.String)">hudson.model.Job.getBuild(String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>This is only used to support backward compatibility with
@@ -206,6 +214,11 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>You should almost always want <A HREF="hudson/model/Computer.html#isOffline()"><CODE>Computer.isOffline()</CODE></A>.
       This method is marked as deprecated to warn people when they
       accidentally call this method.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/maven/MavenReporterDescriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">hudson.maven.MavenReporterDescriptor.newInstance(StaplerRequest)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">hudson.model.Descriptor.newInstance(StaplerRequest)</A>

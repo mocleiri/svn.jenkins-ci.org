@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MavenReporterDescriptor (Hudson core 1.213 API)
+MavenReporterDescriptor (Hudson core 1.214 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-02">
+<META NAME="date" CONTENT="2008-05-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenReporterDescriptor (Hudson core 1.213 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenReporterDescriptor (Hudson core 1.213 API)";
+        parent.document.title="MavenReporterDescriptor (Hudson core 1.214 API)";
     }
 }
 </SCRIPT>
@@ -203,8 +203,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/maven/MavenReporterDescriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If <A HREF="../../hudson/maven/MavenReporterDescriptor.html#hasConfigScreen()"><CODE>the reporter has no configuration screen</CODE></A>,
- this method can safely return null, which is the default implementation.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
@@ -284,9 +283,12 @@ public <A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.ma
 <A NAME="newInstance(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
 newInstance</H3>
 <PRE>
-public <A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A> <B>newInstance</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)
+<FONT SIZE="-1">@Deprecated
+</FONT>public <A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A> <B>newInstance</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)
                           throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
 <DD>If <A HREF="../../hudson/maven/MavenReporterDescriptor.html#hasConfigScreen()"><CODE>the reporter has no configuration screen</CODE></A>,
  this method can safely return null, which is the default implementation.
 <P>

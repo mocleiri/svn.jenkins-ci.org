@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.213 API)
+Index (Hudson core 1.214 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-02">
+<META NAME="date" CONTENT="2008-05-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.213 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.213 API)";
+        parent.document.title="Index (Hudson core 1.214 API)";
     }
 }
 </SCRIPT>
@@ -1999,6 +1999,9 @@ Constructor for class hudson.util.<A HREF="./hudson/util/DelegatingOutputStream.
 <DT><A HREF="./hudson/FilePath.html#delete()"><B>delete()</B></A> - 
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>Deletes this file.
+<DT><A HREF="./hudson/model/AbstractItem.html#delete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>delete(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractItem.html#delete()"><B>delete()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A>
 <DD>Deletes this item.
@@ -2258,7 +2261,7 @@ Constructor for class hudson.model.<A HREF="./hudson/model/DirectoryBrowserSuppo
 <DT><A HREF="./hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, java.lang.String)"><B>DirectoryBrowserSupport(ModelObject, String)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model">DirectoryBrowserSupport</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/DirectoryBrowserSupport.Path.html" title="class in hudson.model"><B>DirectoryBrowserSupport.Path</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Represents information about one file or folder.<DT><A HREF="./hudson/model/DirectoryBrowserSupport.Path.html#DirectoryBrowserSupport.Path(java.lang.String, java.lang.String, boolean, long)"><B>DirectoryBrowserSupport.Path(String, String, boolean, long)</B></A> - 
+<DT><A HREF="./hudson/model/DirectoryBrowserSupport.Path.html" title="class in hudson.model"><B>DirectoryBrowserSupport.Path</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Represents information about one file or folder.<DT><A HREF="./hudson/model/DirectoryBrowserSupport.Path.html#DirectoryBrowserSupport.Path(java.lang.String, java.lang.String, boolean, long, boolean)"><B>DirectoryBrowserSupport.Path(String, String, boolean, long, boolean)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/DirectoryBrowserSupport.Path.html" title="class in hudson.model">DirectoryBrowserSupport.Path</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/maven/MavenModule.html#disable()"><B>disable()</B></A> - 
@@ -2846,7 +2849,10 @@ Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudso
 <DD>Escapes non-ASCII characters in URL.
 <DT><A HREF="./hudson/Util.html#encodeRFC2396(java.lang.String)"><B>encodeRFC2396(String)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
-<DD>Encodes the URL by RFC 2396.
+<DD><B>Deprecated.</B>&nbsp;<I>This method is broken (see ISSUE#1666). It should probably
+ be removed but I'm not sure if it is considered part of the public API
+ that needs to be maintained for backwards compatibility.
+ Use <A HREF="./hudson/Util.html#encode(java.lang.String)"><CODE>Util.encode(String)</CODE></A> instead.</I>
 <DT><A HREF="./hudson/util/EncodingStream.html" title="class in hudson.util"><B>EncodingStream</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Hex-binary encoding stream.<DT><A HREF="./hudson/util/EncodingStream.html#EncodingStream(java.io.OutputStream)"><B>EncodingStream(OutputStream)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/EncodingStream.html" title="class in hudson.util">EncodingStream</A>
 <DD>&nbsp;
@@ -7995,6 +8001,9 @@ Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenAr
 <DT><A HREF="./hudson/model/Hudson.html#isQuietingDown()"><B>isQuietingDown()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Returns true if Hudson is quieting down.
+<DT><A HREF="./hudson/model/DirectoryBrowserSupport.Path.html#isReadable()"><B>isReadable()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/DirectoryBrowserSupport.Path.html" title="class in hudson.model">DirectoryBrowserSupport.Path</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/FingerprintMap.html#isReady()"><B>isReady()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/FingerprintMap.html" title="class in hudson.model">FingerprintMap</A>
 <DD>Returns true if there's some data in the fingerprint database.
@@ -9301,8 +9310,7 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.DescriptorIm
 <DD>&nbsp;
 <DT><A HREF="./hudson/maven/MavenReporterDescriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)"><B>newInstance(StaplerRequest)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenReporterDescriptor.html" title="class in hudson.maven">MavenReporterDescriptor</A>
-<DD>If <A HREF="./hudson/maven/MavenReporterDescriptor.html#hasConfigScreen()"><CODE>the reporter has no configuration screen</CODE></A>,
- this method can safely return null, which is the default implementation.
+<DD><B>Deprecated.</B>&nbsp;
 <DT><A HREF="./hudson/maven/RedeployPublisher.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><B>newInstance(StaplerRequest, JSONObject)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.DescriptorImpl.html" title="class in hudson.maven">RedeployPublisher.DescriptorImpl</A>
 <DD>&nbsp;
@@ -10376,6 +10384,9 @@ Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudso
 <DT><A HREF="./hudson/model/AbstractProject.html#removeTrigger(hudson.triggers.TriggerDescriptor)"><B>removeTrigger(TriggerDescriptor)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/FilePath.html#renameTo(hudson.FilePath)"><B>renameTo(FilePath)</B></A> - 
+Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
+<DD>Rename this file/directory to the target filepath.
 <DT><A HREF="./hudson/model/Job.html#renameTo(java.lang.String)"><B>renameTo(String)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
 <DD>Renames a job.

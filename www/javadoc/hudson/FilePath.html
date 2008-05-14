@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FilePath (Hudson core 1.213 API)
+FilePath (Hudson core 1.214 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-02">
+<META NAME="date" CONTENT="2008-05-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson core 1.213 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson core 1.213 API)";
+        parent.document.title="FilePath (Hudson core 1.214 API)";
     }
 }
 </SCRIPT>
@@ -515,6 +515,14 @@ V</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reads this file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#renameTo(hudson.FilePath)">renameTo</A></B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rename this file/directory to the target filepath.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1190,6 +1198,28 @@ public java.lang.String <B>digest</B>()
                                java.lang.InterruptedException</PRE>
 <DL>
 <DD>Computes the MD5 digest of the file in hex string.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="renameTo(hudson.FilePath)"><!-- --></A><H3>
+renameTo</H3>
+<PRE>
+public void <B>renameTo</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)
+              throws java.io.IOException,
+                     java.lang.InterruptedException</PRE>
+<DL>
+<DD>Rename this file/directory to the target filepath.  This FilePath and the target must
+ be on the some host
 <P>
 <DD><DL>
 </DL>

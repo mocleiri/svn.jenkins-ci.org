@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Util (Hudson core 1.213 API)
+Util (Hudson core 1.214 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-02">
+<META NAME="date" CONTENT="2008-05-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson core 1.213 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson core 1.213 API)";
+        parent.document.title="Util (Hudson core 1.214 API)";
     }
 }
 </SCRIPT>
@@ -293,7 +293,10 @@ Various utility methods that don't have more proper home.
 <TD><CODE><B><A HREF="../hudson/Util.html#encodeRFC2396(java.lang.String)">encodeRFC2396</A></B>(java.lang.String&nbsp;url)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encodes the URL by RFC 2396.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This method is broken (see ISSUE#1666). It should probably
+ be removed but I'm not sure if it is considered part of the public API
+ that needs to be maintained for backwards compatibility.
+ Use <A HREF="../hudson/Util.html#encode(java.lang.String)"><CODE>encode(String)</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1220,8 +1223,14 @@ public static void <B>createSymlink</B>(java.io.File&nbsp;baseDir,
 <A NAME="encodeRFC2396(java.lang.String)"><!-- --></A><H3>
 encodeRFC2396</H3>
 <PRE>
-public static java.lang.String <B>encodeRFC2396</B>(java.lang.String&nbsp;url)</PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public static java.lang.String <B>encodeRFC2396</B>(java.lang.String&nbsp;url)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>This method is broken (see ISSUE#1666). It should probably
+ be removed but I'm not sure if it is considered part of the public API
+ that needs to be maintained for backwards compatibility.
+ Use <A HREF="../hudson/Util.html#encode(java.lang.String)"><CODE>encode(String)</CODE></A> instead.</I>
+<P>
 <DD>Encodes the URL by RFC 2396.
 
  I thought there's another spec that refers to UTF-8 as the encoding,

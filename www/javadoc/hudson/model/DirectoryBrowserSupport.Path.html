@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-DirectoryBrowserSupport.Path (Hudson core 1.213 API)
+DirectoryBrowserSupport.Path (Hudson core 1.214 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-02">
+<META NAME="date" CONTENT="2008-05-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DirectoryBrowserSupport.Path (Hudson core 1.213 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DirectoryBrowserSupport.Path (Hudson core 1.213 API)";
+        parent.document.title="DirectoryBrowserSupport.Path (Hudson core 1.214 API)";
     }
 }
 </SCRIPT>
@@ -127,10 +127,11 @@ Represents information about one file or folder.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/DirectoryBrowserSupport.Path.html#DirectoryBrowserSupport.Path(java.lang.String, java.lang.String, boolean, long)">DirectoryBrowserSupport.Path</A></B>(java.lang.String&nbsp;href,
+<TD><CODE><B><A HREF="../../hudson/model/DirectoryBrowserSupport.Path.html#DirectoryBrowserSupport.Path(java.lang.String, java.lang.String, boolean, long, boolean)">DirectoryBrowserSupport.Path</A></B>(java.lang.String&nbsp;href,
                              java.lang.String&nbsp;title,
                              boolean&nbsp;isFolder,
-                             long&nbsp;size)</CODE>
+                             long&nbsp;size,
+                             boolean&nbsp;isReadable)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -185,6 +186,14 @@ Represents information about one file or folder.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/DirectoryBrowserSupport.Path.html#isReadable()">isReadable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -208,13 +217,14 @@ Represents information about one file or folder.
 </TR>
 </TABLE>
 
-<A NAME="DirectoryBrowserSupport.Path(java.lang.String, java.lang.String, boolean, long)"><!-- --></A><H3>
+<A NAME="DirectoryBrowserSupport.Path(java.lang.String, java.lang.String, boolean, long, boolean)"><!-- --></A><H3>
 DirectoryBrowserSupport.Path</H3>
 <PRE>
 public <B>DirectoryBrowserSupport.Path</B>(java.lang.String&nbsp;href,
                                     java.lang.String&nbsp;title,
                                     boolean&nbsp;isFolder,
-                                    long&nbsp;size)</PRE>
+                                    long&nbsp;size,
+                                    boolean&nbsp;isReadable)</PRE>
 <DL>
 </DL>
 
@@ -232,6 +242,20 @@ public <B>DirectoryBrowserSupport.Path</B>(java.lang.String&nbsp;href,
 isFolder</H3>
 <PRE>
 public boolean <B>isFolder</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isReadable()"><!-- --></A><H3>
+isReadable</H3>
+<PRE>
+public boolean <B>isReadable</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
