@@ -89,6 +89,10 @@ public class UcmActivity extends ChangeLogSet.Entry {
     public List<File> getFiles() {
         return files;
     }
+    
+    public boolean hasFiles() {
+        return files.size() > 0;
+    }
 
     public void addSubActivity(UcmActivity activity) {
         subActivities.add(activity);
@@ -100,6 +104,10 @@ public class UcmActivity extends ChangeLogSet.Entry {
 
     public List<UcmActivity> getSubActivities() {
         return subActivities;
+    }
+    
+    public boolean hasSubActivities() {
+        return subActivities.size() >0;
     }
 
     /**

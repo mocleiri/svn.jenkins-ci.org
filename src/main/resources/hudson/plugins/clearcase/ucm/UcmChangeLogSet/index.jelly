@@ -8,34 +8,49 @@
     </j:when>
     <j:otherwise>
     <table class="pane" style="border:none">
-    <j:forEach var="cs" items="${it.logs}" varStatus="loop">
+    <j:forEach var="activity" items="${it.logs}" varStatus="loop">
       <tr class="pane">
         <td class="changeset" colspan="2">
           <a name="detail${loop.index}"></a>
           <div class="changeset-message">
-            <b>${loop.index + 1}. <a href="${rootURL}/${cs.author.url}/">${cs.author}</a> on ${cs.dateStr}</b><br/>
-            ${cs.activity}
+            <b>${loop.index + 1}. <a href="${rootURL}/${activity.author.url}/">${activity.author}</a> on ${activity.dateStr}</b><br/>
+            ${activity.headline}
           </div>
         </td>
       </tr>
-      <j:forEach var="activity" items="${cs.activityElements}">
-        <tr>
-        	<td align="right"> </td>
-        	<td>Contributing activity: ${activity.headline}</td>
-        </tr>
-      </j:forEach>
+      <!-- Print out any subactivities -->
+      <j:choose>
+        <j:when test="${activity.hasSubactivities}">
+            <tr>
+                <td colspan="2"><b>Contributing activities:</b></td>
+            </tr>
+            <j:forEach var="subactivity" items="${activity.subActivities}">
+                <tr>
+                    <td align="right"> </td>
+                    <td>${subactivity.headline}</td>
+                </tr>
+            </j:forEach>
+        </j:when>
+      </j:choose>
 
-
-      <j:forEach var="element" items="${cs.elements}">
-        <tr>
-        	<td align="right">
-        		<j:if test="${element.editType!=null}">
-        			<t:editTypeIcon type="${element.editType}" />
+      <j:choose>
+        <j:when test="${activity.hasFiles">
+            <tr>
+                <td colspan="2"><b>Files:</b></td>
+            </tr>
+        
+            <j:forEach var="file" items="${activity.files}">
+                <tr>
+                    <td align="right">
+        		<j:if test="${file.editType != null}">
+        			<t:editTypeIcon type="${file.editType}" />
         		</j:if>
-        	</td>
-        	<td>${element.file} : ${element.version} - ${element.comment}</td>
-        </tr>
-      </j:forEach>
+                    </td>
+                    <td>${file.name} : ${file.version} - ${file.comment}</td>
+                </tr>
+            </j:forEach>
+        </j:when>
+     </j:choose>
     </j:forEach>
     </table>
     
