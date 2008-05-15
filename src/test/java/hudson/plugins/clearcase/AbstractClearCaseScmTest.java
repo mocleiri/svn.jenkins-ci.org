@@ -152,6 +152,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
     public void assertCheckoutWithChanges() throws Exception {
         workspace.child("viewname").mkdirs();
         final File changelogFile = new File(parentFile, "changelog.xml");
+        final File extendedChangelogFile = new File(parentFile, "extended-changelog.xml");
         
         final ArrayList<ClearCaseChangeLogEntry> list = new ArrayList<ClearCaseChangeLogEntry>();
         list.add(new ClearCaseChangeLogEntry(new Date(12), "user", "comment"));
@@ -164,14 +165,26 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
             {
                 one(checkOutAction).checkout(launcher, workspace); 
                     will(returnValue(true));
+                    
+                // normal changelog
                 one(changeLogAction).getChanges(mockedCalendar.getTime(), "viewname", new String[] {"branch"}, "vob");
                     will(returnValue(list));
                 one(saveChangeLogAction).saveChangeLog(changelogFile, list);
+                
+                // extended changelog
+                one(changeLogAction).getChanges(mockedCalendar.getTime(), "viewname", new String[] {"branch"}, "vob");
+                    will(returnValue(list));                
+                one(saveChangeLogAction).saveChangeLog(extendedChangelogFile, list);                    
             }
         });
         classContext.checking(new Expectations() {
             {
+                // normal changelog
                 exactly(2).of(build).getPreviousBuild(); will(returnValue(build));
+                one(build).getTimestamp(); will(returnValue(mockedCalendar));
+                
+                // extended changelog
+                exactly(2).of(build).getPreviousNotFailedBuild(); will(returnValue(build));
                 one(build).getTimestamp(); will(returnValue(mockedCalendar));
             }
         });
