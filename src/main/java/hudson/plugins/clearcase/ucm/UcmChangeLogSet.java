@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.kohsuke.stapler.export.Exported;
+
 import hudson.model.AbstractBuild;
 import hudson.plugins.clearcase.ClearCaseChangeLogSet;
 import hudson.scm.ChangeLogSet;
@@ -39,6 +41,7 @@ public class UcmChangeLogSet extends ChangeLogSet<UcmActivity> {
         return history.iterator();
     }
 
+    @Exported
     public List<UcmActivity> getLogs() {
         return history;
     }

@@ -10,6 +10,9 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import org.kohsuke.stapler.export.Exported;
+import org.kohsuke.stapler.export.ExportedBean;
+
 /**
  * Changelog entry for UCM ClearCase
  *
@@ -30,6 +33,7 @@ public class UcmActivity extends ChangeLogSet.Entry {
         // empty by design
     }
 
+    @Exported
     public String getHeadline() {
         return headline;
     }
@@ -38,6 +42,7 @@ public class UcmActivity extends ChangeLogSet.Entry {
         this.headline = headline;
     }
 
+    @Exported
     public String getName() {
         return name;
     }
@@ -46,6 +51,7 @@ public class UcmActivity extends ChangeLogSet.Entry {
         this.name = name;
     }
 
+    @Exported
     public String getStream() {
         return stream;
     }
@@ -54,6 +60,7 @@ public class UcmActivity extends ChangeLogSet.Entry {
         this.stream = stream;
     }
 
+    @Exported
     public String getUser() {
         return user;
     }
@@ -62,6 +69,7 @@ public class UcmActivity extends ChangeLogSet.Entry {
         this.user = user;
     }
 
+    @Exported
     public String getUserName() {
         return userName;
     }
@@ -70,6 +78,7 @@ public class UcmActivity extends ChangeLogSet.Entry {
         this.userName = userName;
     }
 
+    @Exported
     public boolean isIntegrationActivity() {
         if (name.startsWith("deliver.") || name.startsWith("rebase.")) {
             return true;
@@ -86,10 +95,12 @@ public class UcmActivity extends ChangeLogSet.Entry {
         this.files.addAll(files);
     }
 
+    @Exported
     public List<File> getFiles() {
         return files;
     }
-    
+
+    @Exported
     public boolean hasFiles() {
         return files.size() > 0;
     }
@@ -102,10 +113,12 @@ public class UcmActivity extends ChangeLogSet.Entry {
         this.subActivities.addAll(activities);
     }
 
+    @Exported
     public List<UcmActivity> getSubActivities() {
         return subActivities;
     }
-    
+
+    @Exported
     public boolean hasSubActivities() {
         return subActivities.size() >0;
     }
@@ -136,7 +149,8 @@ public class UcmActivity extends ChangeLogSet.Entry {
         }
         return paths;
     }
-        
+    
+    @ExportedBean(defaultVisibility=999)
     public static class File {
 
         private Date date;
@@ -147,6 +161,7 @@ public class UcmActivity extends ChangeLogSet.Entry {
 
         private String comment;
 
+        @Exported
         public String getEvent() {
             return event;
         }
@@ -155,6 +170,7 @@ public class UcmActivity extends ChangeLogSet.Entry {
             this.event = event;
         }
 
+        @Exported
         public String getName() {
             return name;
         }
@@ -163,6 +179,7 @@ public class UcmActivity extends ChangeLogSet.Entry {
             this.name = name;
         }
 
+        @Exported
         public String getOperation() {
             return operation;
         }
@@ -171,6 +188,7 @@ public class UcmActivity extends ChangeLogSet.Entry {
             this.operation = operation;
         }
 
+        @Exported
         public String getVersion() {
             return version;
         }
@@ -179,6 +197,7 @@ public class UcmActivity extends ChangeLogSet.Entry {
             this.version = version;
         }
 
+        @Exported
         public String getComment() {
             return comment;
         }
@@ -187,6 +206,7 @@ public class UcmActivity extends ChangeLogSet.Entry {
             this.comment = comment;
         }
 
+        @Exported
         public Date getDate() {
             return date;
         }
@@ -200,8 +220,8 @@ public class UcmActivity extends ChangeLogSet.Entry {
                 return "";
             } else {
                 return DATE_FORMATTER.format(date);
-    }
-}
+            }
+        }
 
         public void setDateStr(String date) {
             try {
