@@ -230,14 +230,14 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
         context.checking(new Expectations() {
             {
                 one(launcher).run(
-                        with(equal(new String[] { "lsactivity", "-fmt", "ACTIVITY_FORMAT", 
+                        with(equal(new String[] { "lsactivity", "-fmt", "ACTIVITY_FORMAT","-view","VIEW_NAME", 
                                 "ACTIVITY@VOB"})), (InputStream) with(anything()),
                         (OutputStream) with(an(OutputStream.class)), with(aNull(FilePath.class)));
                 will(doAll(new StreamCopyAction(2, ClearToolExecTest.class.getResourceAsStream("ct-lsactivity-1.log")),
                         returnValue(Boolean.TRUE)));
             }
         });
-        Reader reader = clearToolExec.lsactivity("ACTIVITY@VOB", "ACTIVITY_FORMAT");
+        Reader reader = clearToolExec.lsactivity("ACTIVITY@VOB", "ACTIVITY_FORMAT","VIEW_NAME");
         assertNotNull("Returned console reader can not be null", reader);
         context.assertIsSatisfied();
     }

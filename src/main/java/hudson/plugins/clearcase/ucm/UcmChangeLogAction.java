@@ -53,10 +53,10 @@ public class UcmChangeLogAction implements ChangeLogAction {
 
     public List<UcmActivity> getChanges(Date time, String viewName, String[] branchNames, String vobPaths) throws IOException, InterruptedException {
         BufferedReader reader = new BufferedReader(cleartool.lshistory(historyHandler.getFormat(), time, viewName, branchNames[0], vobPaths)); 
-        return parseHistory(reader);
+        return parseHistory(reader,viewName);
     }
 
-    private List<UcmActivity> parseHistory(BufferedReader reader) throws InterruptedException,IOException {
+    private List<UcmActivity> parseHistory(BufferedReader reader,String viewname) throws InterruptedException,IOException {
         List<UcmActivity> result = new ArrayList<UcmActivity>();
         try {
             StringBuilder commentBuilder = new StringBuilder();
@@ -99,7 +99,7 @@ public class UcmChangeLogAction implements ChangeLogAction {
                         activity = new UcmActivity();
                         activity.setName(activityName);
                         activityNameToEntry.put(activityName, activity);
-                        callLsActivity(activity);
+                        callLsActivity(activity,viewname);
                         result.add(activity);
                     }
 
@@ -121,7 +121,7 @@ public class UcmChangeLogAction implements ChangeLogAction {
         return result;
     }
 
-    private void callLsActivity(UcmActivity activity) throws IOException, InterruptedException {
+    private void callLsActivity(UcmActivity activity,String viewname) throws IOException, InterruptedException {
         ClearToolFormatHandler handler = null;
         if (activity.isIntegrationActivity()) {
             handler = new ClearToolFormatHandler(INTEGRATION_ACTIVITY_FORMAT);
@@ -129,7 +129,7 @@ public class UcmChangeLogAction implements ChangeLogAction {
             handler = new ClearToolFormatHandler(ACTIVITY_FORMAT);
         }
             
-        BufferedReader reader = new BufferedReader(cleartool.lsactivity(activity.getName(), handler.getFormat()));
+        BufferedReader reader = new BufferedReader(cleartool.lsactivity(activity.getName(), handler.getFormat(),viewname));
         
         String line = reader.readLine();
         Matcher matcher = handler.checkLine(line);
@@ -146,7 +146,7 @@ public class UcmChangeLogAction implements ChangeLogAction {
                     UcmActivity subActivity = new UcmActivity();
                     activity.addSubActivity(subActivity);
                     subActivity.setName(contributing);
-                    callLsActivity(subActivity);
+                    callLsActivity(subActivity,viewname);
                 }
             }
         }

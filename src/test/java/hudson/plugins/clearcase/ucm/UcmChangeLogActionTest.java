@@ -39,7 +39,7 @@ public class UcmChangeLogActionTest {
                         "\"checkin\" ")));
                 one(cleartool).lsactivity(
                         with(equal("Release_3_3_jdk5.20080509.155359")), 
-                        with(aNonNull(String.class)));
+                        with(aNonNull(String.class)),with(aNonNull(String.class)));
                 will(returnValue(new StringReader("\"Convert to Java 6\" " +
                 		"\"Release_3_3_jdk5\" " +
                 		"\"bob\" " +
@@ -73,7 +73,7 @@ public class UcmChangeLogActionTest {
                         "\"checkin\" ")));
                 one(cleartool).lsactivity(
                         with(equal("rebase.Release_3_3_jdk5.20080509.155359")), 
-                        with(aNonNull(String.class)));
+                        with(aNonNull(String.class)),with(aNonNull(String.class)));
                 will(returnValue(new StringReader("\"Convert to Java 6\" " +
                                 "\"Release_3_3_jdk5\" " +
                                 "\"bob\" " +
@@ -81,14 +81,14 @@ public class UcmChangeLogActionTest {
                                 "\"maven2_Release_3_3.20080421.154619 maven2_Release_3_3.20080421.163355\" ")));
                 one(cleartool).lsactivity(
                         with(equal("maven2_Release_3_3.20080421.154619")), 
-                        with(aNonNull(String.class)));
+                        with(aNonNull(String.class)),with(aNonNull(String.class)));
                 will(returnValue(new StringReader("\"Deliver maven2\" " +
                                 "\"Release_3_3\" " +
                                 "\"doe\" " +
                                 "\"John Doe\" ")));
                 one(cleartool).lsactivity(
                         with(equal("maven2_Release_3_3.20080421.163355")), 
-                        with(aNonNull(String.class)));
+                        with(aNonNull(String.class)),with(aNonNull(String.class)));
                 will(returnValue(new StringReader("\"Deliver maven3\" " +
                                 "\"Release_3_3\" " +
                                 "\"doe\" " +

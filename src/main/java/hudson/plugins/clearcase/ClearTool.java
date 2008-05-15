@@ -70,7 +70,7 @@ public interface ClearTool {
      * @throws IOException
      * @return reader containing command output 
      */
-    Reader lsactivity(String activity, String commandFormat) throws IOException, InterruptedException;
+    Reader lsactivity(String activity, String commandFormat,String viewname) throws IOException, InterruptedException;
     
     /**
      * Lists view registry entries
