@@ -65,10 +65,12 @@
                 <s:dropdownList name="slave.startMethodClass" title="${%Start method}"
                                 help="/help/system-config/master-slave/startMethod.html">
                     <j:forEach var="d" items="${h.getSlaveStartMethodDescriptors()}" varStatus="loop">
+                        <j:if test="${d != null}">
                         <s:dropdownListBlock value="${d.class.name}" name="${d.displayName}"
                                              selected="${s.startMethod.descriptor==d}"
                                              title="${d.displayName}">
                             <s:nested>
+                                <j:if test='${d.configPage != ""}'>
                                 <div name="startMethod">
                                     <table width="100%">
                                         <j:set var="descriptor" value="${d}"/>
@@ -77,8 +79,11 @@
                                         <st:include from="${d}" page="${d.configPage}" optional="true"/>
                                     </table>
                                 </div>
+                                </j:if>
+                                <p>${d}, ${d.class.name}, ${d == null}</p>
                             </s:nested>
                         </s:dropdownListBlock>
+                        </j:if>
                     </j:forEach>
                 </s:dropdownList>
 

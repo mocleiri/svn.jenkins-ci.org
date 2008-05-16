@@ -3,6 +3,7 @@ package hudson.model;
 import hudson.ExtensionPoint;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.io.OutputStream;
 
@@ -23,8 +24,5 @@ public abstract class SlaveStartMethod implements Describable<SlaveStartMethod>,
 
     public abstract void start(Slave.ComputerImpl computer, Slave slave, OutputStream launchLog, Logger logger);
 
-    public static final List<Descriptor<SlaveStartMethod>> LIST = Descriptor.toList(
-            Slave.JNLPStartMethod.DESCRIPTOR,
-            Slave.CommandStartMethod.DESCRIPTOR
-    );
+    public static final List<Descriptor<SlaveStartMethod>> LIST = new ArrayList<Descriptor<SlaveStartMethod>>();
 }

@@ -764,6 +764,11 @@ public final class Slave implements Node, Serializable {
      */
     private transient String agentCommand;
 
+    static {
+        SlaveStartMethod.LIST.add(Slave.JNLPStartMethod.DESCRIPTOR);
+        SlaveStartMethod.LIST.add(Slave.CommandStartMethod.DESCRIPTOR);
+    }
+
 
 //    static {
 //        ConvertUtils.register(new Converter(){
