@@ -16,7 +16,6 @@ import hudson.plugins.clearcase.action.TaggingAction;
 import hudson.plugins.clearcase.action.UcmSnapshotCheckoutAction;
 import hudson.plugins.clearcase.ucm.UcmChangeLogAction;
 import hudson.plugins.clearcase.ucm.UcmChangeLogParser;
-import hudson.plugins.clearcase.ucm.UcmChangeLogSet;
 import hudson.plugins.clearcase.ucm.UcmSaveChangeLogAction;
 import hudson.scm.ChangeLogParser;
 import hudson.scm.SCM;
@@ -34,7 +33,7 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
     @DataBoundConstructor
     public ClearCaseUcmSCM(String stream, String loadrules, String viewname, String mkviewoptionalparam) {
         super(viewname, mkviewoptionalparam);
-        this.stream = stream;
+        this.stream = shortenStreamName(stream);
         this.loadRules = loadrules;
     }
 
@@ -113,6 +112,13 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
     @Override
     protected TaggingAction createTaggingAction(ClearToolLauncher clearToolLauncher) {
         return null;
+    }
+    
+    private String shortenStreamName(String longStream) {
+        if (longStream.startsWith("stream:")) {
+            return longStream.substring("stream:".length());
+        }
+        return longStream;
     }
     
     /**

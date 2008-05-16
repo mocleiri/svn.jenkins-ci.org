@@ -53,4 +53,9 @@ public class ClearCaseUcmSCMTest {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "file with space\nanotherfile", "viewname", "option");
         assertEquals("The vob path is not the same as the load rules", "\"file with space\" anotherfile", scm.getVobPaths());
     }
+    @Test 
+    public void testShortenStreamName() {
+        ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream:mystream", "file with space\nanotherfile", "viewname", "option");
+        assertEquals("stream name not shortenen correctly", "mystream",scm.getStream());
+    }
 }
