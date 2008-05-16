@@ -193,6 +193,28 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
         clearToolExec.lshistory("FORMAT", mockedCalendar.getTime(), "viewName", "branch", "vob2/vob2-1 vob4");
         context.assertIsSatisfied();
     }
+    
+    @Test
+    public void testLshistoryWithWindowsVobNames() throws Exception {
+        workspace.child("viewName").mkdirs();
+        final Calendar mockedCalendar = Calendar.getInstance();
+        mockedCalendar.set(2007, 10, 18, 15, 05, 25);
+        context.checking(new Expectations() {
+            {
+                one(launcher).getWorkspace();
+                will(returnValue(workspace));
+                one(launcher).run(
+                        with(equal(new String[] { "lshistory", "-r", "-since", "18-nov.15:05:25",
+                                "-fmt", "FORMAT", "-branch", "brtype:branch", "-nco",
+                                "\\\\C\\Drive" ,"\\C:\\somewhere"})), (InputStream) with(anything()),
+                        (OutputStream) with(an(OutputStream.class)), with(aNonNull(FilePath.class)));
+                will(returnValue(Boolean.TRUE));
+            }
+        });
+        clearToolExec.lshistory("FORMAT", mockedCalendar.getTime(), "viewName", "branch", "\\\\C\\Drive \\C:\\somewhere");
+        context.assertIsSatisfied();
+    }
+    
     @Test(expected=hudson.AbortException.class)
     public void testLshistoryNoViewPath() throws Exception {
         final Calendar mockedCalendar = Calendar.getInstance();
