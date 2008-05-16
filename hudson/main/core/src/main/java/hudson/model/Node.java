@@ -6,6 +6,9 @@ import hudson.node_monitors.NodeMonitor;
 import hudson.util.EnumConverter;
 import hudson.util.ClockDifference;
 import org.apache.commons.beanutils.ConvertUtils;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+import org.acegisecurity.ui.AbstractProcessingFilter;
 
 import java.util.Set;
 import java.io.IOException;
@@ -133,5 +136,38 @@ public interface Node {
         static {
             ConvertUtils.register(new EnumConverter(),Mode.class);
         }
+    }
+
+    public enum Availability {
+        ALWAYS("Keep this slave on-line as much as possible", "configPageAlways"),
+        SCHEDULED("Take this slave on-line and off-line at specific times", "configPageScheduled"),
+        DEMAND("Take this slave on-line and off-line as needed", "configPageDemand");
+
+        private final String configPage;
+
+        private final String description;
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getName() {
+            return name();
+        }
+
+        Availability(String description, String configPage) {
+            this.description = description;
+            this.configPage = configPage;
+        }
+
+        static {
+            ConvertUtils.register(new EnumConverter(),Availability.class);
+        }
+
+        public void doConfigPage( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+            rsp.sendRedirect2(configPage);
+        }
+
+
     }
 }
