@@ -89,9 +89,9 @@ public abstract class ClearToolExec implements ClearTool {
     public Reader lsactivity(String activity, String commandFormat,String viewname) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("lsactivity");
-        cmd.add("-fmt", commandFormat);
-        cmd.add("-view",viewname);
+        cmd.add("-fmt", commandFormat);        
         cmd.add(activity);
+        cmd.add("-view",viewname);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         launcher.run(cmd.toCommandArray(), null, baos, null);
         return new InputStreamReader(new ByteArrayInputStream(baos.toByteArray()));
