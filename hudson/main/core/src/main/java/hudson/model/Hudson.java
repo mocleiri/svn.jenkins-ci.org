@@ -1418,25 +1418,71 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
                 }
             }
 
-            numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
             quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
 
             systemMessage = Util.nullify(req.getParameter("system_message"));
 
-            {// update slave list
-//                List<Slave> newSlaves = new ArrayList<Slave>();
-//                String[] names = req.getParameterValues("slave.name");
-//                if(names!=null) {
-//                    for(int i=0;i< names.length;i++) {
-//                        newSlaves.add(req.bindParameters(Slave.class,"slave.",i));
-//                    }
-//                }
-//                this.slaves = newSlaves;
+            {// update JDK installations
+                jdks.clear();
+                String[] names = req.getParameterValues("jdk_name");
+                String[] homes = req.getParameterValues("jdk_home");
+                if(names!=null && homes!=null) {
+                    int len = Math.min(names.length,homes.length);
+                    for(int i=0;i<len;i++) {
+                        jdks.add(new JDK(names[i],homes[i]));
+                    }
+                }
+            }
+
+            boolean result = true;
+
+            for( Descriptor<Builder> d : BuildStep.BUILDERS )
+                result &= d.configure(req);
+
+            for( Descriptor<Publisher> d : BuildStep.PUBLISHERS )
+                result &= d.configure(req);
+
+            for( Descriptor<BuildWrapper> d : BuildWrappers.WRAPPERS )
+                result &= d.configure(req);
+
+            for( SCMDescriptor scmd : SCMS.SCMS )
+                result &= scmd.configure(req);
+
+            for( TriggerDescriptor d : Triggers.TRIGGERS )
+                result &= d.configure(req);
+
+            for( JobPropertyDescriptor d : Jobs.PROPERTIES )
+                result &= d.configure(req);
+
+            save();
+            if(result)
+                rsp.sendRedirect(req.getContextPath()+'/');  // go to the top page
+            else
+                rsp.sendRedirect("configure"); // back to config
+        } catch (FormException e) {
+            sendError(e,req,rsp);
+        }
+    }
+
+    /**
+     * Accepts submission from the configuration page.
+     */
+    public synchronized void doConfigExecutorsSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        try {
+            checkPermission(ADMINISTER);
+
+            req.setCharacterEncoding("UTF-8");
+
+            JSONObject json = StructuredForm.get(req);
+
+            numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
+
+            {
+                // update slave list
                 Object src = json.get("slaves");
                 ArrayList<Slave> r = new ArrayList<Slave>();
                 if (src instanceof JSONObject) {
                     JSONObject j = (JSONObject) src;
-                    System.out.println(j);
                     final Slave slave = req.bindJSON(Slave.class, j);
                     String clazz = j.get("startMethodClass").toString();
                     for (Descriptor<SlaveStartMethod> d: SlaveStartMethod.LIST) {
@@ -1483,39 +1529,10 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
                 }
             }
 
-            {// update JDK installations
-                jdks.clear();
-                String[] names = req.getParameterValues("jdk_name");
-                String[] homes = req.getParameterValues("jdk_home");
-                if(names!=null && homes!=null) {
-                    int len = Math.min(names.length,homes.length);
-                    for(int i=0;i<len;i++) {
-                        jdks.add(new JDK(names[i],homes[i]));
-                    }
-                }
-            }
-
             boolean result = true;
 
-            for( Descriptor<Builder> d : BuildStep.BUILDERS )
-                result &= d.configure(req);
-
-            for( Descriptor<Publisher> d : BuildStep.PUBLISHERS )
-                result &= d.configure(req);
-
-            for( Descriptor<BuildWrapper> d : BuildWrappers.WRAPPERS )
-                result &= d.configure(req);
-
-            for( SCMDescriptor scmd : SCMS.SCMS )
-                result &= scmd.configure(req);
-
-            for( TriggerDescriptor d : Triggers.TRIGGERS )
-                result &= d.configure(req);
-
-            for( JobPropertyDescriptor d : Jobs.PROPERTIES )
-                result &= d.configure(req);
-
             save();
+
             if(result)
                 rsp.sendRedirect(req.getContextPath()+'/');  // go to the top page
             else
