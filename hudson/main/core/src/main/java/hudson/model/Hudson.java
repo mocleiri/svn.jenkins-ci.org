@@ -1424,7 +1424,6 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             systemMessage = Util.nullify(req.getParameter("system_message"));
 
             {// update slave list
-                System.out.println(json);
 //                List<Slave> newSlaves = new ArrayList<Slave>();
 //                String[] names = req.getParameterValues("slave.name");
 //                if(names!=null) {
@@ -1437,6 +1436,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
                 ArrayList<Slave> r = new ArrayList<Slave>();
                 if (src instanceof JSONObject) {
                     JSONObject j = (JSONObject) src;
+                    System.out.println(j);
                     final Slave slave = req.bindJSON(Slave.class, j);
                     String clazz = j.get("startMethodClass").toString();
                     for (Descriptor<SlaveStartMethod> d: SlaveStartMethod.LIST) {

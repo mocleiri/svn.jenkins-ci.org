@@ -129,8 +129,7 @@ public final class Slave implements Node, Serializable {
      * @stapler-constructor
      */
     public Slave(String name, String description, String remoteFS, String numExecutors,
-                 Mode mode, String label, Availability onlineAvailability, int demandPeriod,
-                 int idlePeriod, String startupSpec, String shutdownSpec) throws FormException {
+                 Mode mode, String label, Availability onlineAvailability) throws FormException {
         this.name = name;
         this.description = description;
         this.numExecutors = Util.tryParseNumber(numExecutors, 1).intValue();

@@ -8,6 +8,7 @@ import hudson.util.ClockDifference;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.Stapler;
 import org.acegisecurity.ui.AbstractProcessingFilter;
 
 import java.util.Set;
@@ -135,6 +136,11 @@ public interface Node {
 
         static {
             ConvertUtils.register(new EnumConverter(),Mode.class);
+            Stapler.CONVERT_UTILS.register(new EnumConverter(),Mode.class);  // TODO ISSUE-1704
+            try {
+                Class.forName(Availability.class.getName());
+            } catch (ClassNotFoundException e) {
+            }
         }
     }
 
@@ -162,6 +168,7 @@ public interface Node {
 
         static {
             ConvertUtils.register(new EnumConverter(),Availability.class);
+            Stapler.CONVERT_UTILS.register(new EnumConverter(),Availability.class);    // TODO ISSUE-1704
         }
 
         public void doConfigPage( StaplerRequest req, StaplerResponse rsp ) throws IOException {
