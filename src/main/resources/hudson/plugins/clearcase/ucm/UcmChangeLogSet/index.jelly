@@ -13,7 +13,7 @@
         <td class="changeset" colspan="2">
           <a name="detail${loop.index}"></a>
           <div class="changeset-message">
-            <b>${loop.index + 1}. ${activity.headline} by <a href="${rootURL}/${activity.author.url}/">${activity.author}</a></b><br/>
+            <b>${loop.index + 1}. ${activity.headline} by <a href="${rootURL}/${activity.author.url}/">${activity.author}</a></b>
           </div>
         </td>
       </tr>
@@ -26,7 +26,7 @@
             <j:forEach var="subactivity" items="${activity.subActivities}">
                 <tr>
                     <td align="right"> </td>
-                    <td>${subactivity.headline}</td>
+                    <td>${subactivity.headline} <i>from stream </i> ${subactivity.stream} <i> by </i> <a href="${rootURL}/${activity.author.url}/"> ${subactivity.author}</a></td>
                 </tr>
             </j:forEach>
         </j:when>
