@@ -154,6 +154,7 @@ public abstract class AbstractClearCaseScm extends SCM {
         }        
         
         // Write the extended changelog file, that is changelog since last "not failed build"
+        changeLogAction = createChangeLogAction(clearToolLauncher);
         List<? extends ChangeLogSet.Entry> changesSincePreviousNotFalied = null;
         if (build.getPreviousNotFailedBuild() != null ) {
             Date lastNotFailedBuildTime = build.getPreviousNotFailedBuild().getTimestamp().getTime();
