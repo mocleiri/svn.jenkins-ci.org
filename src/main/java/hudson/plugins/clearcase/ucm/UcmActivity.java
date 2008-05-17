@@ -201,6 +201,11 @@ public class UcmActivity extends ChangeLogSet.Entry {
         public void setVersion(String version) {
             this.version = version;
         }
+        
+        @Exported
+        public String getShortVersion() {
+            return version.substring(version.lastIndexOf("/")+1);
+        }
 
         @Exported
         public String getComment() {

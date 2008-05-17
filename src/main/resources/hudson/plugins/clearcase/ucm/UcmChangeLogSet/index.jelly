@@ -13,14 +13,13 @@
         <td class="changeset" colspan="2">
           <a name="detail${loop.index}"></a>
           <div class="changeset-message">
-            <b>${loop.index + 1}. <a href="${rootURL}/${activity.author.url}/">${activity.author}</a> on ${activity.dateStr}</b><br/>
-            ${activity.headline}
+            <b>${loop.index + 1}. ${activity.headline} by <a href="${rootURL}/${activity.author.url}/">${activity.author}</a></b><br/>
           </div>
         </td>
       </tr>
       <!-- Print out any subactivities -->
       <j:choose>
-        <j:when test="${activity.hasSubactivities}">
+        <j:when test="${activity.hasSubActivities()}">
             <tr>
                 <td colspan="2"><b>Contributing activities:</b></td>
             </tr>
@@ -34,7 +33,7 @@
       </j:choose>
 
       <j:choose>
-        <j:when test="${activity.hasFiles">
+        <j:when test="${activity.hasFiles()}">
             <tr>
                 <td colspan="2"><b>Files:</b></td>
             </tr>
@@ -46,7 +45,7 @@
         			<t:editTypeIcon type="${file.editType}" />
         		</j:if>
                     </td>
-                    <td>${file.name} : ${file.version} - ${file.comment}</td>
+                    <td>${file.dateStr}: ${file.name} : ${file.shortVersion} - ${file.comment}</td>
                 </tr>
             </j:forEach>
         </j:when>
