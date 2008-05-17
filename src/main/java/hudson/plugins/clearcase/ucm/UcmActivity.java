@@ -19,7 +19,7 @@ import org.kohsuke.stapler.export.ExportedBean;
  * @author Henrik L. Hansen
  */
 public class UcmActivity extends ChangeLogSet.Entry {
-    private static final DateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    private static final DateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     private String name;
     private String headline;

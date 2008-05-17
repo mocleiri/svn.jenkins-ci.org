@@ -52,7 +52,7 @@ public class UcmChangeLogParserTest {
         assertEquals("File version is incorrect", "file-version", file.getVersion());
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(0);
-        cal.set(2008, 4, 8, 12, 20, 30);
+        cal.set(2008, 4, 8, 12, 20, 00);
         assertEquals("File date is incorrect", cal.getTime(), file.getDate());
     }
 }
