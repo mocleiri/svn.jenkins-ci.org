@@ -149,7 +149,12 @@ public class UcmActivity extends ChangeLogSet.Entry {
         }
         return paths;
     }
-    
+
+    @Override
+    public String toString() {
+        return name+": "+headline;
+    }
+      
     @ExportedBean(defaultVisibility=999)
     public static class File {
 
@@ -230,5 +235,10 @@ public class UcmActivity extends ChangeLogSet.Entry {
                 //TODO: error handling
             }
         }
+
+        @Override
+        public String toString() {
+            return name;
+        }               
     }
 }
