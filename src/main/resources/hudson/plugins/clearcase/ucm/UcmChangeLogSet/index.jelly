@@ -45,7 +45,7 @@
         			<t:editTypeIcon type="${file.editType}" />
         		</j:if>
                     </td>
-                    <td>${file.dateStr}: ${file.name} : ${file.shortVersion} - ${file.comment}</td>
+                    <td>${file.dateStr}: ${file.name} <i>version</i> ${file.shortVersion} <j:if test="${file.comment.length()>0}">-</j:if> ${file.comment}</td>
                 </tr>
             </j:forEach>
         </j:when>
