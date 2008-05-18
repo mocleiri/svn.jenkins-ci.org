@@ -1,51 +1,40 @@
 package hudson.model;
 
-import hudson.EnvVars;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Launcher.RemoteLauncher;
 import hudson.Util;
-import hudson.maven.agent.Main;
-import hudson.maven.agent.PluginManagerInterceptor;
+import hudson.slaves.SlaveStartMethod;
+import hudson.slaves.SlaveAvailabilityStrategy;
+import hudson.slaves.CommandStartMethod;
+import hudson.slaves.JNLPStartMethod;
+import hudson.slaves.SlaveComputer;
 import hudson.model.Descriptor.FormException;
 import hudson.remoting.Callable;
-import hudson.remoting.Channel;
-import hudson.remoting.Channel.Listener;
 import hudson.remoting.VirtualChannel;
-import hudson.remoting.Which;
 import hudson.tasks.DynamicLabeler;
 import hudson.tasks.LabelFinder;
 import hudson.util.ClockDifference;
-import hudson.util.NullStream;
-import hudson.util.ProcessTreeKiller;
 import hudson.util.RingBufferLogHandler;
-import hudson.util.StreamCopyThread;
-import hudson.util.StreamTaskListener;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.DataBoundConstructor;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-
-import net.sf.json.JSONObject;
 
 /**
  * Information about a Hudson slave node.
+ *
+ * <p>
+ * Ideally this would have been in the <tt>hudson.slaves</tt> package,
+ * but for compatibility reasons, it can't.
  *
  * @author Kohsuke Kawaguchi
  */
@@ -260,7 +249,7 @@ public final class Slave implements Node, Serializable {
     }
 
     public Computer createComputer() {
-        return new ComputerImpl(this);
+        return new SlaveComputer(this);
     }
 
     public FilePath getWorkspaceFor(TopLevelItem item) {
@@ -290,219 +279,6 @@ public final class Slave implements Node, Serializable {
         return r.child("workspace");
     }
 
-    public static final class ComputerImpl extends Computer {
-        private volatile Channel channel;
-        private Boolean isUnix;
-        /**
-         * Number of failed attempts to reconnect to this node
-         * (so that if we keep failing to reconnect, we can stop
-         * trying.)
-         */
-        private transient int numRetryAttempt;
-
-        /**
-         * This is where the log from the remote agent goes.
-         */
-        private File getLogFile() {
-            return new File(Hudson.getInstance().getRootDir(),"slave-"+nodeName+".log");
-        }
-
-        private ComputerImpl(Slave slave) {
-            super(slave);
-        }
-
-        public Slave getNode() {
-            return (Slave)super.getNode();
-        }
-
-        @Override
-        @Deprecated
-        public boolean isJnlpAgent() {
-            return getNode().getStartMethod() instanceof JNLPStartMethod;
-        }
-
-        @Override
-        public boolean isLaunchSupported() {
-            return getNode().getStartMethod().isLaunchSupported();
-        }
-
-        /**
-         * Launches a remote agent asynchronously.
-         */
-        private void launch(final Slave slave) {
-            closeChannel();
-            Computer.threadPoolForRemoting.execute(new Runnable() {
-                public void run() {
-                    // do this on another thread so that the lengthy launch operation
-                    // (which is typical) won't block UI thread.
-                    slave.startMethod.launch(ComputerImpl.this, new StreamTaskListener(openLogFile()));
-                }
-            });
-        }
-
-        public OutputStream openLogFile() {
-            OutputStream os;
-            try {
-                os = new FileOutputStream(getLogFile());
-            } catch (FileNotFoundException e) {
-                logger.log(Level.SEVERE, "Failed to create log file "+getLogFile(),e);
-                os = new NullStream();
-            }
-            return os;
-        }
-
-        private final Object channelLock = new Object();
-
-        /**
-         * Creates a {@link Channel} from the given stream and sets that to this slave.
-         */
-        public void setChannel(InputStream in, OutputStream out, OutputStream launchLog, Listener listener) throws IOException, InterruptedException {
-            synchronized(channelLock) {
-                if(this.channel!=null)
-                    throw new IllegalStateException("Already connected");
-
-                Channel channel = new Channel(nodeName,threadPoolForRemoting, Channel.Mode.NEGOTIATE,
-                    in,out, launchLog);
-                channel.addListener(new Listener() {
-                    public void onClosed(Channel c,IOException cause) {
-                        ComputerImpl.this.channel = null;
-                    }
-                });
-                channel.addListener(listener);
-
-                PrintWriter log = new PrintWriter(launchLog,true);
-
-                {// send jars that we need for our operations
-                    // TODO: maybe I should generalize this kind of "post initialization" processing
-                    FilePath dst = new FilePath(channel,getNode().getRemoteFS());
-                    new FilePath(Which.jarFile(Main.class)).copyTo(dst.child("maven-agent.jar"));
-                    log.println("Copied maven-agent.jar");
-                    new FilePath(Which.jarFile(PluginManagerInterceptor.class)).copyTo(dst.child("maven-interceptor.jar"));
-                    log.println("Copied maven-interceptor.jar");
-                }
-
-                isUnix = channel.call(new DetectOS());
-                log.println(isUnix?Messages.Slave_UnixSlave():Messages.Slave_WindowsSlave());
-
-                // install log handler
-                channel.call(new LogInstaller());
-
-                numRetryAttempt = 0;
-
-                // prevent others from seeing a channel that's not properly initialized yet
-                this.channel = channel;
-            }
-            Hudson.getInstance().getQueue().scheduleMaintenance();
-        }
-
-        @Override
-        public VirtualChannel getChannel() {
-            return channel;
-        }
-
-        public List<LogRecord> getLogRecords() throws IOException, InterruptedException {
-            if(channel==null)
-                return Collections.emptyList();
-            else
-                return channel.call(new Callable<List<LogRecord>,RuntimeException>() {
-                    public List<LogRecord> call() {
-                        return new ArrayList<LogRecord>(SLAVE_LOG_HANDLER.getView());
-                    }
-                });
-        }
-
-        public void doDoDisconnect(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-            Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
-            closeChannel();
-            rsp.sendRedirect(".");
-        }
-
-        public void doLaunchSlaveAgent(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-            if(channel!=null) {
-                rsp.sendError(HttpServletResponse.SC_NOT_FOUND);
-                return;
-            }
-
-            launch();
-
-            // TODO: would be nice to redirect the user to "launching..." wait page,
-            // then spend a few seconds there and poll for the completion periodically.
-            rsp.sendRedirect("log");
-        }
-
-        public void tryReconnect() {
-            numRetryAttempt++;
-            if(numRetryAttempt<6 || (numRetryAttempt%12)==0) {
-                // initially retry several times quickly, and after that, do it infrequently.
-                logger.info("Attempting to reconnect "+nodeName);
-                launch();
-            }
-        }
-
-        public void launch() {
-            if(channel==null)
-                launch(getNode());
-        }
-
-        /**
-         * Gets the string representation of the slave log.
-         */
-        public String getLog() throws IOException {
-            return Util.loadFile(getLogFile());
-        }
-
-        /**
-         * Handles incremental log.
-         */
-        public void doProgressiveLog( StaplerRequest req, StaplerResponse rsp) throws IOException {
-            new LargeText(getLogFile(),false).doProgressText(req,rsp);
-        }
-
-        /**
-         * Serves jar files for JNLP slave agents.
-         */
-        public JnlpJar getJnlpJars(String fileName) {
-            return new JnlpJar(fileName);
-        }
-
-        @Override
-        protected void kill() {
-            super.kill();
-            closeChannel();
-        }
-
-        /**
-         * If still connected, disconnect.
-         */
-        private void closeChannel() {
-            Channel c = channel;
-            channel = null;
-            isUnix=null;
-            if(c!=null)
-                try {
-                    c.close();
-                } catch (IOException e) {
-                    logger.log(Level.SEVERE, "Failed to terminate channel to "+getDisplayName(),e);
-                }
-        }
-
-        @Override
-        protected void setNode(Node node) {
-            super.setNode(node);
-            if(channel==null)
-                // maybe the configuration was changed to relaunch the slave, so try it now.
-                launch((Slave)node);
-        }
-
-        private static final Logger logger = Logger.getLogger(ComputerImpl.class.getName());
-
-        private static final class DetectOS implements Callable<Boolean,IOException> {
-            public Boolean call() throws IOException {
-                return File.pathSeparatorChar==':';
-            }
-        }
-    }
-
     /**
      * Web-bound object used to serve jar files for JNLP.
      */
@@ -529,15 +305,15 @@ public final class Slave implements Node, Serializable {
     }
 
     public Launcher createLauncher(TaskListener listener) {
-        ComputerImpl c = getComputer();
+        SlaveComputer c = getComputer();
         return new RemoteLauncher(listener, c.getChannel(), c.isUnix);
     }
 
     /**
      * Gets the corresponding computer object.
      */
-    public ComputerImpl getComputer() {
-        return (ComputerImpl)Hudson.getInstance().getComputer(this);
+    public SlaveComputer getComputer() {
+        return (SlaveComputer)Hudson.getInstance().getComputer(this);
     }
 
     public Computer toComputer() {
@@ -574,132 +350,6 @@ public final class Slave implements Node, Serializable {
         return this;
     }
 
-    /**
-     * This field is used on each slave node to record log records on the slave.
-     */
-    private static final RingBufferLogHandler SLAVE_LOG_HANDLER = new RingBufferLogHandler();
-
-    private static class LogInstaller implements Callable<Void,RuntimeException> {
-        public Void call() {
-            // avoid double installation of the handler
-            Logger logger = Logger.getLogger("hudson");
-            logger.removeHandler(SLAVE_LOG_HANDLER);
-            logger.addHandler(SLAVE_LOG_HANDLER);
-            return null;
-        }
-        private static final long serialVersionUID = 1L;
-    }
-
-    public static class JNLPStartMethod extends SlaveStartMethod {
-
-        @Override
-        public boolean isLaunchSupported() {
-            return false;
-        }
-
-        public void launch(ComputerImpl computer, StreamTaskListener listener) {
-            // do nothing as we cannot self start
-        }
-
-        //@DataBoundConstructor
-        public JNLPStartMethod() {
-        }
-
-        public Descriptor<SlaveStartMethod> getDescriptor() {
-            return DESCRIPTOR;
-        }
-
-        public static final Descriptor<SlaveStartMethod> DESCRIPTOR = new Descriptor<SlaveStartMethod>(JNLPStartMethod.class) {
-            public String getDisplayName() {
-                return "Launch slave agents via JNLP";
-            }
-
-            public SlaveStartMethod newInstance(StaplerRequest req, JSONObject formData) throws FormException {
-                return new JNLPStartMethod();
-            }
-        };
-    }
-
-    public static class CommandStartMethod extends SlaveStartMethod {
-
-        /**
-         * Command line to launch the agent, like
-         * "ssh myslave java -jar /path/to/hudson-remoting.jar"
-         */
-        private String agentCommand;
-
-        @DataBoundConstructor
-        public CommandStartMethod(String command) {
-            this.agentCommand = command;
-        }
-
-        public String getCommand() {
-            return agentCommand;
-        }
-
-        public Descriptor<SlaveStartMethod> getDescriptor() {
-            return DESCRIPTOR;
-        }
-
-        public static final Descriptor<SlaveStartMethod> DESCRIPTOR = new Descriptor<SlaveStartMethod>(CommandStartMethod.class) {
-            public String getDisplayName() {
-                return "Launch slave via execution of command on the Master";
-            }
-        };
-
-        /**
-         * Gets the formatted current time stamp.
-         */
-        private static String getTimestamp() {
-            return String.format("[%1$tD %1$tT]", new Date());
-        }
-
-        public void launch(ComputerImpl computer, final StreamTaskListener listener) {
-            try {
-                listener.getLogger().println(Messages.Slave_Launching(getTimestamp()));
-                listener.getLogger().println("$ " + getCommand());
-
-                ProcessBuilder pb = new ProcessBuilder(Util.tokenize(getCommand()));
-                final EnvVars cookie = ProcessTreeKiller.createCookie();
-                pb.environment().putAll(cookie);
-                final Process proc = pb.start();
-
-                // capture error information from stderr. this will terminate itself
-                // when the process is killed.
-                new StreamCopyThread("stderr copier for remote agent on " + computer.getDisplayName(),
-                        proc.getErrorStream(), listener.getLogger()).start();
-
-                computer.setChannel(proc.getInputStream(), proc.getOutputStream(), listener.getLogger(), new Listener() {
-                    public void onClosed(Channel channel, IOException cause) {
-                        if (cause != null) {
-                            cause.printStackTrace(
-                                listener.error(Messages.Slave_Terminated(getTimestamp())));
-                        }
-                        ProcessTreeKiller.get().kill(proc, cookie);
-                    }
-                });
-
-                LOGGER.info("slave agent launched for " + computer.getDisplayName());
-            } catch (InterruptedException e) {
-                e.printStackTrace(listener.error("aborted"));
-            } catch (IOException e) {
-                Util.displayIOException(e, listener);
-
-                String msg = Util.getWin32ErrorMessage(e);
-                if (msg == null) {
-                    msg = "";
-                } else {
-                    msg = " : " + msg;
-                }
-                msg = Messages.Slave_UnableToLaunch(computer.getDisplayName(), msg);
-                LOGGER.log(Level.SEVERE, msg, e);
-                e.printStackTrace(listener.error(msg));
-            }
-        }
-
-        private static final Logger LOGGER = Logger.getLogger(CommandStartMethod.class.getName());
-    }
-
 //
 // backwrad compatibility
 //
@@ -726,8 +376,8 @@ public final class Slave implements Node, Serializable {
     private transient String agentCommand;
 
     static {
-        SlaveStartMethod.LIST.add(Slave.JNLPStartMethod.DESCRIPTOR);
-        SlaveStartMethod.LIST.add(Slave.CommandStartMethod.DESCRIPTOR);
+        SlaveStartMethod.LIST.add(JNLPStartMethod.DESCRIPTOR);
+        SlaveStartMethod.LIST.add(CommandStartMethod.DESCRIPTOR);
     }
 
 
