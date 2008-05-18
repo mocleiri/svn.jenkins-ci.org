@@ -1,7 +1,10 @@
-package hudson.model;
+package hudson.slaves;
 
 import hudson.util.DescriptorList;
 import hudson.ExtensionPoint;
+import hudson.model.Describable;
+import hudson.model.Slave;
+import hudson.model.Descriptor;
 import org.kohsuke.stapler.StaplerRequest;
 import net.sf.json.JSONObject;
 

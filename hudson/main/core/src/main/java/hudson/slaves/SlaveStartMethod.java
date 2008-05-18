@@ -1,7 +1,9 @@
-package hudson.model;
+package hudson.slaves;
 
 import hudson.ExtensionPoint;
 import hudson.model.Slave.ComputerImpl;
+import hudson.model.Describable;
+import hudson.model.Computer;
 import hudson.remoting.Channel.Listener;
 import hudson.util.DescriptorList;
 import hudson.util.StreamTaskListener;
@@ -36,7 +38,7 @@ public abstract class SlaveStartMethod implements Describable<SlaveStartMethod>,
      * @param listener
      *      The progress of the launch, as well as any error, should be sent to this listener.
      */
-    public abstract void launch(Slave.ComputerImpl computer, StreamTaskListener listener);
+    public abstract void launch(ComputerImpl computer, StreamTaskListener listener);
 
     /**
      * All registered {@link SlaveStartMethod} implementations.
