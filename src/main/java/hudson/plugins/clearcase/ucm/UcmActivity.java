@@ -2,6 +2,7 @@ package hudson.plugins.clearcase.ucm;
 
 import hudson.model.User;
 import hudson.scm.ChangeLogSet;
+import hudson.scm.EditType;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -240,6 +241,18 @@ public class UcmActivity extends ChangeLogSet.Entry {
                 //TODO: error handling
             }
         }
+
+        @Exported
+        public EditType getEditType() {
+            if (operation.equalsIgnoreCase("mkelem")) {
+                return EditType.ADD;
+            } else if (operation.equalsIgnoreCase("rmelem")) {
+                return EditType.DELETE;
+            } else if (operation.equalsIgnoreCase("checkin")) {
+                return EditType.EDIT;
+            }
+            return null;
+        }        
 
         @Override
         public String toString() {
