@@ -91,9 +91,9 @@ public abstract class ClearToolExec implements ClearTool {
         cmd.add("lsactivity");
         cmd.add("-fmt", commandFormat);        
         cmd.add(activity);
-        cmd.add("-view",viewname);
+        FilePath workspace = launcher.getWorkspace();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        launcher.run(cmd.toCommandArray(), null, baos, null);
+        launcher.run(cmd.toCommandArray(), null, baos, workspace.child(viewname));
         return new InputStreamReader(new ByteArrayInputStream(baos.toByteArray()));
     }
 
