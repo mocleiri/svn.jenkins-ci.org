@@ -13,8 +13,8 @@ public interface PollAction {
      * @param time check for changes since this time
      * @param viewName the name of the view
      * @param branchNames the branch names
-     * @param vobPaths optional vob paths
+     * @param viewPaths optional vob paths
      * @return true, if the ClearCase repository has changes; false, otherwise.
      */
-    boolean getChanges(Date time, String viewName, String[] branchNames, String vobPaths) throws IOException, InterruptedException;
+    boolean getChanges(Date time, String viewName, String[] branchNames, String[] viewPaths) throws IOException, InterruptedException;
 }

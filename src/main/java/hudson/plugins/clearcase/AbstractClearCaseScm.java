@@ -82,10 +82,11 @@ public abstract class AbstractClearCaseScm extends SCM {
     public abstract String[] getBranchNames();
     
     /**
-     * Return string containing the vob paths that should be used when polling for changes.
-     * @return string that will be appended at the end of the lshistory command
+     * Return string array containing the paths in the view that should be used when polling for changes.
+     * @param viewPath the file path for the view
+     * @return string array that will be used by the lshistory command
      */
-    public abstract String getVobPaths();
+    public abstract String[] getViewPaths(FilePath viewPath) throws IOException, InterruptedException;
 
     @Override
     public boolean supportsPolling() {
@@ -142,7 +143,7 @@ public abstract class AbstractClearCaseScm extends SCM {
         List<? extends ChangeLogSet.Entry> changelogEntries = null;        
         if (build.getPreviousBuild() != null) {
             Date lastBuildTime = build.getPreviousBuild().getTimestamp().getTime();
-            changelogEntries = changeLogAction.getChanges(lastBuildTime, viewName, getBranchNames(), getVobPaths());
+            changelogEntries = changeLogAction.getChanges(lastBuildTime, viewName, getBranchNames(), getViewPaths(workspace.child(viewName)));
         }        
 
         // Save change log
@@ -158,7 +159,7 @@ public abstract class AbstractClearCaseScm extends SCM {
         List<? extends ChangeLogSet.Entry> changesSincePreviousNotFalied = null;
         if (build.getPreviousNotFailedBuild() != null ) {
             Date lastNotFailedBuildTime = build.getPreviousNotFailedBuild().getTimestamp().getTime();
-            changesSincePreviousNotFalied = changeLogAction.getChanges(lastNotFailedBuildTime, viewName, getBranchNames(), getVobPaths());
+            changesSincePreviousNotFalied = changeLogAction.getChanges(lastNotFailedBuildTime, viewName, getBranchNames(), getViewPaths(workspace));
         }
         
         File extendedChangelogFile = new File(changelogFile.getParentFile(),"extended-"+changelogFile.getName());
@@ -187,7 +188,7 @@ public abstract class AbstractClearCaseScm extends SCM {
         } else {
             Date buildTime = lastBuild.getTimestamp().getTime();
             PollAction pollAction = createPollAction(createClearToolLauncher(listener, workspace, launcher));
-            return pollAction.getChanges(buildTime, viewName, getBranchNames(), getVobPaths());
+            return pollAction.getChanges(buildTime, viewName, getBranchNames(), getViewPaths(workspace.child(viewName)));
         }
     }
     

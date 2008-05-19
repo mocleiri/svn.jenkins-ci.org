@@ -40,12 +40,12 @@ public class BaseChangeLogAction implements ChangeLogAction {
         this.maxTimeDifferenceMillis = maxTimeDifferenceMillis;
     }
     
-    public List<ClearCaseChangeLogEntry> getChanges(Date time, String viewName, String[] branchNames, String vobPaths) throws IOException, InterruptedException {
+    public List<ClearCaseChangeLogEntry> getChanges(Date time, String viewName, String[] branchNames, String[] viewPaths) throws IOException, InterruptedException {
         List<ClearCaseChangeLogEntry> fullList = new ArrayList<ClearCaseChangeLogEntry>();
         try {
             for (String branchName : branchNames) {
 
-                Reader reader = cleartool.lshistory(historyHandler.getFormat(), time, viewName, branchName, vobPaths);
+                Reader reader = cleartool.lshistory(historyHandler.getFormat(), time, viewName, branchName, viewPaths);
                 ClearToolHistoryParser parser = new ClearToolHistoryParser();
                 List<ClearCaseChangeLogEntry> data = parser.parse(reader);
                 fullList.addAll(data);

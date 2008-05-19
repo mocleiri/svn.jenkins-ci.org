@@ -1,10 +1,13 @@
 package hudson.plugins.clearcase;
 
+import java.io.IOException;
+
 import net.sf.json.JSONObject;
 
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 
+import hudson.FilePath;
 import hudson.Util;
 import hudson.model.ModelObject;
 import hudson.plugins.clearcase.action.ChangeLogAction;
@@ -73,20 +76,16 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
     }
 
     @Override
-    public String getVobPaths() {
-        StringBuilder builder = new StringBuilder();
-        String[] rules = Util.tokenize(loadRules, "\n");
+    public String[] getViewPaths(FilePath viewPath) throws IOException, InterruptedException {
+        String[] rules = loadRules.split("\n");
         for (int i = 0; i < rules.length; i++) {
-            if (i > 0)
-                builder.append(' ');
-
-            String str = rules[i];
-            if(str.indexOf(' ')>=0 || str.length()==0)
-                builder.append('"').append(str).append('"');
-            else
-                builder.append(str);
+            String rule = rules[i];
+            while (rule.startsWith("\\") || rule.startsWith("/")) {
+                rule = rule.substring(1);               
+            }
+            rules[i] = rule;
         }
-        return builder.toString();
+        return rules;
     }
 
     @Override

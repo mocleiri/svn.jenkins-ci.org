@@ -51,8 +51,8 @@ public class UcmChangeLogAction implements ChangeLogAction {
         this.cleartool = cleartool;
     }
 
-    public List<UcmActivity> getChanges(Date time, String viewName, String[] branchNames, String vobPaths) throws IOException, InterruptedException {
-        BufferedReader reader = new BufferedReader(cleartool.lshistory(historyHandler.getFormat(), time, viewName, branchNames[0], vobPaths)); 
+    public List<UcmActivity> getChanges(Date time, String viewName, String[] branchNames, String[] viewPaths) throws IOException, InterruptedException {
+        BufferedReader reader = new BufferedReader(cleartool.lshistory(historyHandler.getFormat(), time, viewName, branchNames[0], viewPaths)); 
         return parseHistory(reader,viewName);
     }
 

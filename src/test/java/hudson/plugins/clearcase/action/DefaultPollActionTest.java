@@ -26,15 +26,15 @@ public class DefaultPollActionTest {
     public void assertSeparateBranchCommands() throws Exception {
         context.checking(new Expectations() {
             {
-                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branchone")), with(equal("vobpath")));                
+                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branchone")), with(equal(new String[]{"vobpath"})));                
                 will(returnValue(new StringReader("")));
-                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branchtwo")), with(equal("vobpath")));                
+                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branchtwo")), with(equal(new String[]{"vobpath"})));                
                 will(returnValue(new StringReader("\"20071015.151822\" \"Customer\\DataSet.xsd\" \"\\main\\sit_r6a\\2\" \"create version\" \"mkelem\" ")));
             }
         });
         
         DefaultPollAction action = new DefaultPollAction(cleartool);
-        boolean hasChange = action.getChanges(null, "view", new String[]{"branchone", "branchtwo"}, "vobpath");
+        boolean hasChange = action.getChanges(null, "view", new String[]{"branchone", "branchtwo"}, new String[]{"vobpath"});
         assertTrue("The getChanges() method did not report a change", hasChange);
     }
 
@@ -42,7 +42,7 @@ public class DefaultPollActionTest {
     public void assertSuccessfulParse() throws Exception {
         context.checking(new Expectations() {
             {
-                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branch")), with(equal("vobpath")));                
+                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branch")), with(equal(new String[]{"vobpath"})));                
                 will(returnValue(new StringReader(
                         "\"20071015.151822\" \"Customer\\DataSet.xsd\" \"\\main\\sit_r6a\\1\" \"create version\"  \"mkelem\" "
                       + "\"20071015.151822\" \"Customer\\DataSet.xsd\" \"\\main\\sit_r6a\\2\" \"create version\"  \"mkelem\" ")));
@@ -50,7 +50,7 @@ public class DefaultPollActionTest {
         });
         
         DefaultPollAction action = new DefaultPollAction(cleartool);
-        boolean hasChange = action.getChanges(null, "view", new String[]{"branch"}, "vobpath");
+        boolean hasChange = action.getChanges(null, "view", new String[]{"branch"}, new String[]{"vobpath"});
         assertTrue("The getChanges() method did not report a change", hasChange);
     }
 
@@ -58,13 +58,13 @@ public class DefaultPollActionTest {
     public void assertIgnoringErrors() throws Exception {
         context.checking(new Expectations() {
             {
-                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branch")), with(equal("vobpath")));                
+                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branch")), with(equal(new String[]{"vobpath"})));                
                 will(returnValue(new StringReader("cleartool: Error: Not an object in a vob: \"view.dat\".\n")));
             }
         });
         
         DefaultPollAction action = new DefaultPollAction(cleartool);
-        boolean hasChange = action.getChanges(null, "view", new String[]{"branch"}, "vobpath");
+        boolean hasChange = action.getChanges(null, "view", new String[]{"branch"}, new String[]{"vobpath"});
         assertFalse("The getChanges() method reported a change", hasChange);
     }
 
@@ -72,13 +72,13 @@ public class DefaultPollActionTest {
     public void assertIgnoringVersionZero() throws Exception {
         context.checking(new Expectations() {
             {
-                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branch")), with(equal("vobpath")));                
+                one(cleartool).lshistory(with(aNonNull(String.class)), with(aNull(Date.class)), with(equal("view")), with(equal("branch")), with(equal(new String[]{"vobpath"})));                
                 will(returnValue(new StringReader("\"20071015.151822\" \"Customer\\DataSet.xsd\" \"\\main\\sit_r6a\\0\" \"create version\"  \"mkelem\" ")));
             }
         });
         
         DefaultPollAction action = new DefaultPollAction(cleartool);
-        boolean hasChange = action.getChanges(null, "view", new String[]{"branch"}, "vobpath");
+        boolean hasChange = action.getChanges(null, "view", new String[]{"branch"}, new String[]{"vobpath"});
         assertFalse("The getChanges() method reported a change", hasChange);
     }
 }

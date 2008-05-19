@@ -2,6 +2,8 @@ package hudson.plugins.clearcase;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 public class ClearCaseUcmSCMTest {
@@ -43,16 +45,18 @@ public class ClearCaseUcmSCMTest {
     }
 
     @Test
-    public void testGetVobPaths() {
+    public void testGetViewPaths() throws Exception {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "loadrules", "viewname", "option");
-        assertEquals("The vob path is not the same as the load rules", "loadrules", scm.getVobPaths());
+        assertEquals("The view path is not the same as the load rules", "loadrules", scm.getViewPaths(null)[0]);
+    }
+    
+    @Test
+    public void assertLoadRuleIsConvertedToRelativeViewPath() throws Exception {
+        ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "\\\\loadrule\\one\n/loadrule/two", "viewname", "option");
+        assertEquals("The first view path is not correct", "loadrule\\one", scm.getViewPaths(null)[0]);
+        assertEquals("The second view path is not correct", "loadrule/two", scm.getViewPaths(null)[1]);
     }
 
-    @Test
-    public void testGetVobPathsWithSpaces() {
-        ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "file with space\nanotherfile", "viewname", "option");
-        assertEquals("The vob path is not the same as the load rules", "\"file with space\" anotherfile", scm.getVobPaths());
-    }
     @Test 
     public void testShortenStreamName() {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream:mystream", "file with space\nanotherfile", "viewname", "option");

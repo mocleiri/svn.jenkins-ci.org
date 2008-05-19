@@ -1,6 +1,8 @@
 package hudson.plugins.clearcase;
 
+import hudson.FilePath;
 import hudson.Proc;
+import hudson.Util;
 import static hudson.Util.fixEmpty;
 import hudson.model.AbstractBuild;
 import hudson.model.Hudson;
@@ -27,9 +29,12 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import javax.servlet.ServletException;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -85,14 +90,35 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
     }
 
     /**
-     * Return the user configured vob paths that will be used when getting changes for a view.
-     * If the vob paths is empty, then the folder within the view will be used
-     * as vob paths.
-     * @return the vob paths that will be used when getting changes for a view.
+     * Return the view paths that will be used when getting changes for a view.
+     * If the user configured vob paths field is empty, then the folder within the view will be used
+     * as view paths.
+     * @return the view paths that will be used when getting changes for a view.
      */
-    public String getVobPaths() {
-        return vobPaths;
+    public String[] getViewPaths(FilePath viewPath) throws IOException, InterruptedException {
+        String[] vobNameArray;
+        if (Util.fixEmpty(vobPaths.trim()) == null) {
+            List<String> vobList = new ArrayList<String>();
+            List<FilePath> subFilePaths = viewPath.list((FileFilter) null);
+            if ((subFilePaths != null) && (subFilePaths.size() > 0)) {
+
+                for (int i = 0; i < subFilePaths.size(); i++) {
+                    if (subFilePaths.get(i).isDirectory()) {
+                        vobList.add(subFilePaths.get(i).getName());
+                    }
+                }
+            }
+            vobNameArray = vobList.toArray(new String[0]);
+        } else {
+            // split by whitespace, except "\ "
+            vobNameArray = vobPaths.split("(?<!\\\\)[ \\r\\n]+");
+            // now replace "\ " to " ".
+            for (int i = 0; i < vobNameArray.length; i++)
+                vobNameArray[i] = vobNameArray[i].replaceAll("\\\\ ", " ");
+        }
+        return vobNameArray;
     }
+   
 
     @Override
     public ClearCaseScmDescriptor getDescriptor() {

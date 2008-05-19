@@ -29,9 +29,9 @@ public class DefaultPollAction implements PollAction {
         this.cleartool = cleartool;
     }
 
-    public boolean getChanges(Date time, String viewName, String[] branchNames, String vobPaths) throws IOException, InterruptedException {
+    public boolean getChanges(Date time, String viewName, String[] branchNames, String[] viewPaths) throws IOException, InterruptedException {
         for (String branchName : branchNames) {            
-            Reader lshistoryOutput = cleartool.lshistory(historyHandler.getFormat(), time, viewName, branchName, vobPaths);            
+            Reader lshistoryOutput = cleartool.lshistory(historyHandler.getFormat(), time, viewName, branchName, viewPaths);            
             if (parseHistoryOutputForChanges(new BufferedReader(lshistoryOutput))) {
                 return true;
             }

@@ -58,11 +58,12 @@ public interface ClearTool {
      * @param viewName the name of the view
      * @param branch the name of the branch to get history events for; if null then history events for all branches are
      *                listed
-     * @param launcher launcher for launching the command
+     * @param pathsInView view paths that should be added to the lshistory command. The view paths
+     *                  must be relative. 
      * 
      * @return Reader containing output from command
      */
-    Reader lshistory(String format, Date lastBuildDate, String viewName, String branch, String vobPaths) throws IOException, InterruptedException;
+    Reader lshistory(String format, Date lastBuildDate, String viewName, String branch, String[] pathsInView) throws IOException, InterruptedException;
 
     /**
      * Lists activities .......(?)

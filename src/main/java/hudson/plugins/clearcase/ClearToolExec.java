@@ -30,7 +30,7 @@ public abstract class ClearToolExec implements ClearTool {
     protected abstract FilePath getRootViewPath(ClearToolLauncher launcher);
 
     public Reader lshistory(String format, Date lastBuildDate,
-            String viewName, String branch, String vobPaths) throws IOException, InterruptedException {
+            String viewName, String branch, String[] viewPaths) throws IOException, InterruptedException {
         SimpleDateFormat formatter = new SimpleDateFormat("d-MMM.HH:mm:ss");
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("lshistory");
@@ -44,46 +44,20 @@ public abstract class ClearToolExec implements ClearTool {
 
         FilePath viewPath = getRootViewPath(launcher).child(viewName);
 
-        if (viewPath.exists()) {
-            String[] vobNameArray = getVobNames(viewPath, vobPaths);
-            for (String vob : vobNameArray) {
-                cmd.add(vob);
+        for (String path : viewPaths) {
+            if (path.contains(" ")) {
+                cmd.addQuoted(path);
+            } else {
+                cmd.add(path);
             }
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            if (launcher.run(cmd.toCommandArray(), null, baos, viewPath)) {
-                return new InputStreamReader(new ByteArrayInputStream(baos.toByteArray()));
-            }
-        } else {
-            launcher.getListener().fatalError(
-                    "No view found at '" + viewPath + "'. Create the view by initiating a build manually.");
-            throw new AbortException();
         }
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        if (launcher.run(cmd.toCommandArray(), null, baos, viewPath)) {
+            return new InputStreamReader(new ByteArrayInputStream(baos.toByteArray()));
+        }
+        
         return null;
-    }
-
-    private String[] getVobNames(FilePath viewPath, String vobPaths) throws IOException, InterruptedException {
-        String[] vobNameArray;
-        if ((vobPaths == null) || (vobPaths.trim().length() == 0)) {
-            List<String> vobList = new ArrayList<String>();
-            List<FilePath> subFilePaths = viewPath.list((FileFilter) null);
-            if ((subFilePaths != null) && (subFilePaths.size() > 0)) {
-
-                for (int i = 0; i < subFilePaths.size(); i++) {
-                    if (subFilePaths.get(i).isDirectory()) {
-                        vobList.add(subFilePaths.get(i).getName());
-                    }
-                }
-            }
-            vobNameArray = vobList.toArray(new String[0]);
-        } else {
-            // split by whitespace, except "\ "
-            vobNameArray = vobPaths.split("(?<!\\\\)[ \\r\\n]+");
-            // now replace "\ " to " ".
-            for (int i = 0; i < vobNameArray.length; i++)
-                vobNameArray[i] = vobNameArray[i].replaceAll("\\\\ ", " ");
-        }
-        return vobNameArray;
     }
     
     public Reader lsactivity(String activity, String commandFormat,String viewname) throws IOException, InterruptedException {

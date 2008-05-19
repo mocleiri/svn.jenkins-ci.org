@@ -3,6 +3,7 @@ package hudson.plugins.clearcase;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -167,12 +168,12 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
                     will(returnValue(true));
                     
                 // normal changelog
-                one(changeLogAction).getChanges(mockedCalendar.getTime(), "viewname", new String[] {"branch"}, "vob");
+                one(changeLogAction).getChanges(mockedCalendar.getTime(), "viewname", new String[] {"branch"}, new String[]{"vob"});
                     will(returnValue(list));
                 one(saveChangeLogAction).saveChangeLog(changelogFile, list);
                 
                 // extended changelog
-                one(changeLogAction).getChanges(mockedCalendar.getTime(), "viewname", new String[] {"branch"}, "vob");
+                one(changeLogAction).getChanges(mockedCalendar.getTime(), "viewname", new String[] {"branch"}, new String[]{"vob"});
                     will(returnValue(list));                
                 one(saveChangeLogAction).saveChangeLog(extendedChangelogFile, list);                    
             }
@@ -209,7 +210,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
             {
                 one(checkOutAction).checkout(launcher, workspace); 
                     will(returnValue(true));
-                one(changeLogAction).getChanges(mockedCalendar.getTime(), "viewname", new String[] {"branch"}, "vob");
+                one(changeLogAction).getChanges(mockedCalendar.getTime(), "viewname", new String[] {"branch"}, new String[]{"vob"});
                     will(returnValue(null));
             }
         });
@@ -241,7 +242,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         context.checking(new Expectations() {
             {
                 one(checkOutAction).checkout(launcher, workspace);
-                one(changeLogAction).getChanges(mockedCalendar.getTime(), "viewname", new String[] {"branchone", "branchtwo"}, "vob");
+                one(changeLogAction).getChanges(mockedCalendar.getTime(), "viewname", new String[] {"branchone", "branchtwo"}, new String[]{"vob"});
                     will(returnValue(null));
             }
         });
@@ -270,7 +271,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         context.checking(new Expectations() {
             {
-                one(pollAction).getChanges(mockedCalendar.getTime(), "viewname", new String[] {"branch"}, "vob"); 
+                one(pollAction).getChanges(mockedCalendar.getTime(), "viewname", new String[] {"branch"}, new String[]{"vob"}); 
                 will(returnValue(true));
             }
         });
@@ -311,7 +312,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         context.checking(new Expectations() {
             {
-                one(pollAction).getChanges(mockedCalendar.getTime(), "viewname", new String[]{"branch"}, "vob"); 
+                one(pollAction).getChanges(mockedCalendar.getTime(), "viewname", new String[]{"branch"}, new String[]{"vob"}); 
                 will(returnValue(false));
             }
         });
@@ -340,7 +341,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         context.checking(new Expectations() {
             {
-                one(pollAction).getChanges(mockedCalendar.getTime(), "viewname", new String[]{"branchone", "branchtwo"}, "vob"); 
+                one(pollAction).getChanges(mockedCalendar.getTime(), "viewname", new String[]{"branchone", "branchtwo"}, new String[]{"vob"}); 
                 will(returnValue(true));
             }
         });
@@ -363,7 +364,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         final Calendar mockedCalendar = Calendar.getInstance();
         context.checking(new Expectations() {
             {
-                one(pollAction).getChanges(mockedCalendar.getTime(), "viewname", new String[]{"branch"}, "vob1 vob2/vob2-1 vob\\ 3"); 
+                one(pollAction).getChanges(mockedCalendar.getTime(), "viewname", new String[]{"branch"}, new String[]{"vob1", "vob2/vob2-1", "vob\\ 3"}); 
                 will(returnValue(true));
             }
         });
@@ -374,7 +375,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
             }
         });
 
-        AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("viewname", "vob1 vob2/vob2-1 vob\\ 3", "");
+        AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("viewname", new String[]{"vob1", "vob2/vob2-1", "vob\\ 3"}, "");
         scm.pollChanges(project, launcher, workspace, taskListener);
 
         classContext.assertIsSatisfied();
@@ -387,7 +388,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         final Calendar mockedCalendar = Calendar.getInstance();
         context.checking(new Expectations() {
             {
-                one(pollAction).getChanges(mockedCalendar.getTime(), "viewname", new String[]{""}, ""); 
+                one(pollAction).getChanges(mockedCalendar.getTime(), "viewname", new String[]{""}, new String[]{""}); 
                 will(returnValue(false));
             }
         });
@@ -411,7 +412,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         mockedCalendar.setTimeInMillis(400000);
         context.checking(new Expectations() {
             {
-                one(pollAction).getChanges(mockedCalendar.getTime(), "viewname", new String[]{"branch"}, ""); 
+                one(pollAction).getChanges(mockedCalendar.getTime(), "viewname", new String[]{"branch"}, new String[]{""}); 
                 will(returnValue(true));
             }
         });
@@ -432,10 +433,14 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
     private class AbstractClearCaseScmDummy extends AbstractClearCaseScm {
 
-        private final String vobPaths;
+        private final String[] vobPaths;
 
         public AbstractClearCaseScmDummy(String viewName, String vobPaths, String mkviewOptionalParam) {
-            super(viewName, mkviewOptionalParam);
+            this (viewName, new String[]{vobPaths}, mkviewOptionalParam);
+        }
+
+        public AbstractClearCaseScmDummy(String viewName, String[] vobPaths, String mkviewOptionalParam) {
+            super( viewName, mkviewOptionalParam);
             this.vobPaths = vobPaths;
         }
 
@@ -465,7 +470,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         }
 
         @Override
-        public String getVobPaths() {
+        public String[] getViewPaths(FilePath viewPath) throws IOException, InterruptedException {
             return vobPaths;
         }
 
