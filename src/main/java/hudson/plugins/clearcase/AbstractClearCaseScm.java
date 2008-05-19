@@ -159,7 +159,7 @@ public abstract class AbstractClearCaseScm extends SCM {
         List<? extends ChangeLogSet.Entry> changesSincePreviousNotFalied = null;
         if (build.getPreviousNotFailedBuild() != null ) {
             Date lastNotFailedBuildTime = build.getPreviousNotFailedBuild().getTimestamp().getTime();
-            changesSincePreviousNotFalied = changeLogAction.getChanges(lastNotFailedBuildTime, viewName, getBranchNames(), getViewPaths(workspace));
+            changesSincePreviousNotFalied = changeLogAction.getChanges(lastNotFailedBuildTime, viewName, getBranchNames(), getViewPaths(workspace.child(viewName)));
         }
         
         File extendedChangelogFile = new File(changelogFile.getParentFile(),"extended-"+changelogFile.getName());
