@@ -45,11 +45,7 @@ public abstract class ClearToolExec implements ClearTool {
         FilePath viewPath = getRootViewPath(launcher).child(viewName);
 
         for (String path : viewPaths) {
-            if (path.contains(" ")) {
-                cmd.addQuoted(path);
-            } else {
-                cmd.add(path);
-            }
+            cmd.add(path);
         }
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

@@ -120,7 +120,7 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
                 one(launcher).run(
                         with(equal(new String[] { "lshistory", "-r", "-since", "18-nov.15:05:25",
                                 "-fmt", "FORMAT", "-branch", "brtype:branch", "-nco",
-                                "vob1", "vob2", "\"vob 3\"" })), (InputStream) with(anything()),
+                                "vob1", "vob2", "vob 3" })), (InputStream) with(anything()),
                         (OutputStream) with(an(OutputStream.class)), with(aNonNull(FilePath.class)));
                 will(doAll(new StreamCopyAction(2, ClearToolExecTest.class.getResourceAsStream("ct-lshistory-1.log")),
                         returnValue(Boolean.TRUE)));
