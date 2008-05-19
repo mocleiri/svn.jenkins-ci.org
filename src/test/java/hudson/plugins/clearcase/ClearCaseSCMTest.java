@@ -103,7 +103,19 @@ public class ClearCaseSCMTest extends AbstractWorkspaceTest {
     }
 
     @Test
-    public void testGetVobPaths() throws Exception {
+    public void assertEmptyBranchIsReturnedAsABranch() {
+        ClearCaseSCM scm = new ClearCaseSCM("", "configspec", "viewname", true, "", true, "/tmp/c", null);
+        assertArrayEquals("The branch name array is incorrect", new String[]{""}, scm.getBranchNames());
+    }
+
+    @Test
+    public void assertBranchWithSpaceWorks() {
+        ClearCaseSCM scm = new ClearCaseSCM("branch\\ one", "configspec", "viewname", true, "", true, "/tmp/c", null);
+        assertArrayEquals("The branch name array is incorrect", new String[]{"branch one"}, scm.getBranchNames());
+    }
+
+    @Test
+    public void testGetViewPaths() throws Exception {
         ClearCaseSCM scm = new ClearCaseSCM("branchone branchtwo", "configspec", "viewname", true, "tmp", true, "", null);
         assertEquals("The vob paths string is incorrect", "tmp", scm.getViewPaths(workspace)[0]);
     }
