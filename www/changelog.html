@@ -26,6 +26,11 @@
     When Hudson fails to sucessfully launch a slave, terminate the pending connection.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1705">issue 1705</a>)
   <li class=rfe>
+    <tt>java -jar hudson.war</tt> no longer uses a temporary directory to avoid interferance
+    with programs like <tt>tmpwatch</tt>
+    (report <a href="http://www.nabble.com/Missing-Hudson-icons-to17273365.html">1</a>,
+            <a href="http://www.nabble.com/Missing-Hudson-icons-tp17333588p17335783.html">2</a>)
+  <li class=rfe>
     If the subversion workspace is locked, Hudson wipes it out and retries.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1459">issue 1459</a>)
   <li class=rfe>
