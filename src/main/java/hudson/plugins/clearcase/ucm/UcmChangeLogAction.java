@@ -87,6 +87,7 @@ public class UcmChangeLogAction implements ChangeLogAction {
                     currentFile.setOperation(matcher.group(6));
 
                     if (currentFile.getVersion().endsWith("/0") || currentFile.getVersion().endsWith("\\0") || currentFile.getEvent().equalsIgnoreCase("create branch")) {
+                        line = reader.readLine();
                         continue;
                     }
 
@@ -97,8 +98,15 @@ public class UcmChangeLogAction implements ChangeLogAction {
                         activity = new UcmActivity();
                         activity.setName(activityName);
                         activityNameToEntry.put(activityName, activity);
-                        callLsActivity(activity,viewname);
+                        if (activityName.length()!=0) {
+                            callLsActivity(activity,viewname);
+                        } else {
+                            activity.setHeadline("Unknown activity");
+                            activity.setUser("Unknown");
+                            activity.setStream("");
+                        }
                         result.add(activity);
+                            
                     }
 
                     activity.addFile(currentFile);
