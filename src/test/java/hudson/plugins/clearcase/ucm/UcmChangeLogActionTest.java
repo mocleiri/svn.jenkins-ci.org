@@ -42,8 +42,7 @@ public class UcmChangeLogActionTest {
                         with(aNonNull(String.class)),with(aNonNull(String.class)));
                 will(returnValue(new StringReader("\"Convert to Java 6\" " +
                 		"\"Release_3_3_jdk5\" " +
-                		"\"bob\" " +
-                		"\"Bob Smith\" ")));
+                		"\"bob\" ")));
             }
         });
         
@@ -55,7 +54,6 @@ public class UcmChangeLogActionTest {
         assertEquals("Activity headline is incorrect", "Convert to Java 6", activity.getHeadline());
         assertEquals("Activity stream is incorrect", "Release_3_3_jdk5", activity.getStream());
         assertEquals("Activity user is incorrect", "bob", activity.getUser());
-        assertEquals("Activity user is incorrect", "Bob Smith", activity.getUserName());
     }
     
     @Test
@@ -77,7 +75,6 @@ public class UcmChangeLogActionTest {
                 will(returnValue(new StringReader("\"Convert to Java 6\" " +
                                 "\"Release_3_3_jdk5\" " +
                                 "\"bob\" " +
-                                "\"Bob Smith\" " +
                                 "\"maven2_Release_3_3.20080421.154619 maven2_Release_3_3.20080421.163355\" ")));
                 one(cleartool).lsactivity(
                         with(equal("maven2_Release_3_3.20080421.154619")), 
@@ -104,7 +101,6 @@ public class UcmChangeLogActionTest {
         assertEquals("Activity headline is incorrect", "Convert to Java 6", activity.getHeadline());
         assertEquals("Activity stream is incorrect", "Release_3_3_jdk5", activity.getStream());
         assertEquals("Activity user is incorrect", "bob", activity.getUser());
-        assertEquals("Activity user is incorrect", "Bob Smith", activity.getUserName());
         
         List<UcmActivity> subActivities = activity.getSubActivities();
         assertEquals("There should be 2 sub activities", 2, subActivities.size());

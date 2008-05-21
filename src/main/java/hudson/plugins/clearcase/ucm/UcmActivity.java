@@ -26,7 +26,6 @@ public class UcmActivity extends ChangeLogSet.Entry {
     private String headline;
     private String stream;
     private String user;
-    private String userName;
     private List<File> files = new ArrayList<File>();
     private List<UcmActivity> subActivities = new ArrayList<UcmActivity>();
 
@@ -68,15 +67,6 @@ public class UcmActivity extends ChangeLogSet.Entry {
 
     public void setUser(String user) {
         this.user = user;
-    }
-
-    @Exported
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     @Exported

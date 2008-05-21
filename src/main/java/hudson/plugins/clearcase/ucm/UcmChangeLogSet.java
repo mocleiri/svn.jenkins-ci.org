@@ -20,7 +20,7 @@ import hudson.scm.ChangeLogSet;
  */
 public class UcmChangeLogSet extends ChangeLogSet<UcmActivity> {
 
-    static final String[] ACTIVITY_TAGS = new String[]{"name", "headline", "stream", "user", "userName"};
+    static final String[] ACTIVITY_TAGS = new String[]{"name", "headline", "stream", "user"};
     static final String[] FILE_TAGS = new String[]{"name", "date", "comment", "version", "event", "operation"};
     private List<UcmActivity> history = null;
 
@@ -101,7 +101,6 @@ public class UcmChangeLogSet extends ChangeLogSet<UcmActivity> {
         array[1] = entry.getHeadline();
         array[2] = entry.getStream();
         array[3] = entry.getUser();
-        array[4] = entry.getUserName();
         return array;
     }
 
