@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.215 API)
+Hudson (Hudson core 1.216 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-16">
+<META NAME="date" CONTENT="2008-05-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.215 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.215 API)";
+        parent.document.title="Hudson (Hudson core 1.216 API)";
     }
 }
 </SCRIPT>
@@ -387,6 +387,14 @@ Root object of the system.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#createPath(java.lang.String)">createPath</A></B>(java.lang.String&nbsp;absolutePath)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> on this node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#createProject(hudson.model.TopLevelItemDescriptor, java.lang.String)">createProject</A></B>(<A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A>&nbsp;type,
               java.lang.String&nbsp;name)</CODE>
@@ -405,8 +413,7 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCancelQuietDown(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCancelQuietDown</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCancelQuietDown(org.kohsuke.stapler.StaplerResponse)">doCancelQuietDown</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -423,8 +430,7 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doClassicThreadDump(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doClassicThreadDump</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                    org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doClassicThreadDump(org.kohsuke.stapler.StaplerResponse)">doClassicThreadDump</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Backward compatibility.</TD>
@@ -432,8 +438,16 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doConfigLogger(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String)">doConfigLogger</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-               org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doConfigExecutorsSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigExecutorsSubmit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                        org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accepts submission from the configuration page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doConfigLogger(org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String)">doConfigLogger</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
                java.lang.String&nbsp;name,
                java.lang.String&nbsp;level)</CODE>
 
@@ -506,8 +520,7 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doFingerprintCleanup(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doFingerprintCleanup</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                     org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doFingerprintCleanup(org.kohsuke.stapler.StaplerResponse)">doFingerprintCleanup</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -515,8 +528,7 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doGc(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doGc</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-     org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doGc(org.kohsuke.stapler.StaplerResponse)">doGc</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For debugging.</TD>
@@ -588,8 +600,7 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doQuietDown(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doQuietDown</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-            org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doQuietDown(org.kohsuke.stapler.StaplerResponse)">doQuietDown</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -660,8 +671,7 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doWorkspaceCleanup(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doWorkspaceCleanup</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                   org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doWorkspaceCleanup(org.kohsuke.stapler.StaplerResponse)">doWorkspaceCleanup</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -2600,6 +2610,23 @@ public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>
 </DL>
 <HR>
 
+<A NAME="createPath(java.lang.String)"><!-- --></A><H3>
+createPath</H3>
+<PRE>
+public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>createPath</B>(java.lang.String&nbsp;absolutePath)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Node.html#createPath(java.lang.String)">Node</A></CODE></B></DD>
+<DD>Gets the <A HREF="../../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> on this node.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Node.html#createPath(java.lang.String)">createPath</A></CODE> in interface <CODE><A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getClockDifference()"><!-- --></A><H3>
 getClockDifference</H3>
 <PRE>
@@ -3116,6 +3143,28 @@ public void <B>doConfigSubmit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
+<A NAME="doConfigExecutorsSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doConfigExecutorsSubmit</H3>
+<PRE>
+public void <B>doConfigExecutorsSubmit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                    org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                             throws java.io.IOException,
+                                    javax.servlet.ServletException</PRE>
+<DL>
+<DD>Accepts submission from the configuration page.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doSubmitDescription</H3>
 <PRE>
@@ -3138,11 +3187,10 @@ public void <B>doSubmitDescription</B>(org.kohsuke.stapler.StaplerRequest&nbsp;r
 </DL>
 <HR>
 
-<A NAME="doQuietDown(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doQuietDown(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doQuietDown</H3>
 <PRE>
-public void <B>doQuietDown</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                        org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+public void <B>doQuietDown</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                  throws java.io.IOException,
                         javax.servlet.ServletException</PRE>
 <DL>
@@ -3158,11 +3206,10 @@ public void <B>doQuietDown</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doCancelQuietDown(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doCancelQuietDown(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doCancelQuietDown</H3>
 <PRE>
-public void <B>doCancelQuietDown</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+public void <B>doCancelQuietDown</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                        throws java.io.IOException,
                               javax.servlet.ServletException</PRE>
 <DL>
@@ -3178,11 +3225,10 @@ public void <B>doCancelQuietDown</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req
 </DL>
 <HR>
 
-<A NAME="doClassicThreadDump(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doClassicThreadDump(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doClassicThreadDump</H3>
 <PRE>
-public void <B>doClassicThreadDump</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                                org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+public void <B>doClassicThreadDump</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                          throws java.io.IOException,
                                 javax.servlet.ServletException</PRE>
 <DL>
@@ -3450,11 +3496,10 @@ public void <B>doNocacheImages</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doGc(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doGc(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doGc</H3>
 <PRE>
-public void <B>doGc</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+public void <B>doGc</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
           throws java.io.IOException</PRE>
 <DL>
 <DD>For debugging. Expose URL to perform GC.
@@ -3509,11 +3554,10 @@ public static org.acegisecurity.Authentication <B>getAuthentication</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="doConfigLogger(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String)"><!-- --></A><H3>
+<A NAME="doConfigLogger(org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String)"><!-- --></A><H3>
 doConfigLogger</H3>
 <PRE>
-public void <B>doConfigLogger</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                           org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+public void <B>doConfigLogger</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
                            <FONT SIZE="-1">@QueryParameter(value="name")</FONT>
                            java.lang.String&nbsp;name,
                            <FONT SIZE="-1">@QueryParameter(value="level")</FONT>
@@ -3600,11 +3644,10 @@ public void <B>doIconSize</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doFingerprintCleanup(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doFingerprintCleanup(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doFingerprintCleanup</H3>
 <PRE>
-public void <B>doFingerprintCleanup</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+public void <B>doFingerprintCleanup</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                           throws java.io.IOException</PRE>
 <DL>
 <DD><DL>
@@ -3618,11 +3661,10 @@ public void <B>doFingerprintCleanup</B>(org.kohsuke.stapler.StaplerRequest&nbsp;
 </DL>
 <HR>
 
-<A NAME="doWorkspaceCleanup(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doWorkspaceCleanup(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doWorkspaceCleanup</H3>
 <PRE>
-public void <B>doWorkspaceCleanup</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+public void <B>doWorkspaceCleanup</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                         throws java.io.IOException</PRE>
 <DL>
 <DD><DL>

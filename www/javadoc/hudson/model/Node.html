@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Node (Hudson core 1.215 API)
+Node (Hudson core 1.216 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-16">
+<META NAME="date" CONTENT="2008-05-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Node (Hudson core 1.215 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Node (Hudson core 1.215 API)";
+        parent.document.title="Node (Hudson core 1.216 API)";
     }
 }
 </SCRIPT>
@@ -126,7 +126,7 @@ Commonality between <A HREF="../../hudson/model/Slave.html" title="class in huds
 <TD><CODE><B><A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constants that control how Hudson allocates jobs to slaves.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -153,6 +153,14 @@ Commonality between <A HREF="../../hudson/model/Slave.html" title="class in huds
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a <A HREF="../../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> for executing programs on this node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Node.html#createPath(java.lang.String)">createPath</A></B>(java.lang.String&nbsp;absolutePath)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> on this node.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -428,6 +436,19 @@ getRootPath</H3>
 
 <DT><B>Returns:</B><DD>null if the node is offline and hence the <A HREF="../../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A>
       object is not available.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createPath(java.lang.String)"><!-- --></A><H3>
+createPath</H3>
+<PRE>
+<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>createPath</B>(java.lang.String&nbsp;absolutePath)</PRE>
+<DL>
+<DD>Gets the <A HREF="../../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> on this node.
+<P>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

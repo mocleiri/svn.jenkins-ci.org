@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.model (Hudson core 1.215 API)
+hudson.model (Hudson core 1.216 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-16">
+<META NAME="date" CONTENT="2008-05-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson core 1.215 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson core 1.215 API)";
+        parent.document.title="hudson.model (Hudson core 1.216 API)";
     }
 }
 </SCRIPT>
@@ -239,7 +239,7 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></B></TD>
-<TD>Represents a set of <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s on the same computer.</TD>
+<TD>Represents the running state of a remote computer that holds <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/ComputerSet.html" title="class in hudson.model">ComputerSet</A></B></TD>
@@ -435,16 +435,8 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD>Information about a Hudson slave node.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD WIDTH="15%"><B><A HREF="../../hudson/model/Slave.ComputerImpl.html" title="class in hudson.model">Slave.ComputerImpl</A></B></TD>
-<TD>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Slave.JnlpJar.html" title="class in hudson.model">Slave.JnlpJar</A></B></TD>
 <TD>Web-bound object used to serve jar files for JNLP.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD WIDTH="15%"><B><A HREF="../../hudson/model/SlaveReconnectionWork.html" title="class in hudson.model">SlaveReconnectionWork</A></B></TD>
-<TD>Periodically checks the slaves and try to reconnect dead slaves.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/StreamBuildListener.html" title="class in hudson.model">StreamBuildListener</A></B></TD>
@@ -518,7 +510,7 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A></B></TD>
-<TD>&nbsp;</TD>
+<TD>Constants that control how Hudson allocates jobs to slaves.</TD>
 </TR>
 </TABLE>
 &nbsp;

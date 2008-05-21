@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Executor (Hudson core 1.215 API)
+Executor (Hudson core 1.216 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-16">
+<META NAME="date" CONTENT="2008-05-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Executor (Hudson core 1.215 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Executor (Hudson core 1.215 API)";
+        parent.document.title="Executor (Hudson core 1.216 API)";
     }
 }
 </SCRIPT>
@@ -228,6 +228,14 @@ Thread that executes builds.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computes a human-readable text that shows the expected remaining time
  until the build completes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Executor.html#getIdleStartMilliseconds()">getIdleStartMilliseconds</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns when this executor started or should start being idle.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -505,6 +513,22 @@ getOwner</H3>
 <PRE>
 public <A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A> <B>getOwner</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIdleStartMilliseconds()"><!-- --></A><H3>
+getIdleStartMilliseconds</H3>
+<PRE>
+public long <B>getIdleStartMilliseconds</B>()</PRE>
+<DL>
+<DD>Returns when this executor started or should start being idle.
+<P>
 <DD><DL>
 </DL>
 </DD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson.MasterComputer (Hudson core 1.215 API)
+Hudson.MasterComputer (Hudson core 1.216 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-16">
+<META NAME="date" CONTENT="2008-05-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson.MasterComputer (Hudson core 1.215 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson.MasterComputer (Hudson core 1.215 API)";
+        parent.document.title="Hudson.MasterComputer (Hudson core 1.216 API)";
     }
 }
 </SCRIPT>
@@ -191,6 +191,14 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.MasterComputer.html#getRetentionStrategy()">getRetentionStrategy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> associated with this computer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.MasterComputer.html#getUrl()">getUrl</A></B>()</CODE>
 
@@ -213,7 +221,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Computer.html#countIdle()">countIdle</A>, <A HREF="../../hudson/model/Computer.html#currentComputer()">currentComputer</A>, <A HREF="../../hudson/model/Computer.html#doDumpExportTable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDumpExportTable</A>, <A HREF="../../hudson/model/Computer.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/Computer.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/Computer.html#doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doScript</A>, <A HREF="../../hudson/model/Computer.html#doToggleOffline(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doToggleOffline</A>, <A HREF="../../hudson/model/Computer.html#getApi()">getApi</A>, <A HREF="../../hudson/model/Computer.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/Computer.html#getEnvVars()">getEnvVars</A>, <A HREF="../../hudson/model/Computer.html#getExecutors()">getExecutors</A>, <A HREF="../../hudson/model/Computer.html#getIcon()">getIcon</A>, <A HREF="../../hudson/model/Computer.html#getMonitorData()">getMonitorData</A>, <A HREF="../../hudson/model/Computer.html#getNode()">getNode</A>, <A HREF="../../hudson/model/Computer.html#getNumExecutors()">getNumExecutors</A>, <A HREF="../../hudson/model/Computer.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Computer.html#getSystemProperties()">getSystemProperties</A>, <A HREF="../../hudson/model/Computer.html#getThreadDump()">getThreadDump</A>, <A HREF="../../hudson/model/Computer.html#getTiedJobs()">getTiedJobs</A>, <A HREF="../../hudson/model/Computer.html#interrupt()">interrupt</A>, <A HREF="../../hudson/model/Computer.html#isJnlpAgent()">isJnlpAgent</A>, <A HREF="../../hudson/model/Computer.html#isOffline()">isOffline</A>, <A HREF="../../hudson/model/Computer.html#isTemporarilyOffline()">isTemporarilyOffline</A>, <A HREF="../../hudson/model/Computer.html#kill()">kill</A>, <A HREF="../../hudson/model/Computer.html#setNode(hudson.model.Node)">setNode</A>, <A HREF="../../hudson/model/Computer.html#setTemporarilyOffline(boolean)">setTemporarilyOffline</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Computer.html#countIdle()">countIdle</A>, <A HREF="../../hudson/model/Computer.html#currentComputer()">currentComputer</A>, <A HREF="../../hudson/model/Computer.html#disconnect()">disconnect</A>, <A HREF="../../hudson/model/Computer.html#doDumpExportTable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDumpExportTable</A>, <A HREF="../../hudson/model/Computer.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/Computer.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/Computer.html#doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doScript</A>, <A HREF="../../hudson/model/Computer.html#doToggleOffline(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doToggleOffline</A>, <A HREF="../../hudson/model/Computer.html#getApi()">getApi</A>, <A HREF="../../hudson/model/Computer.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/Computer.html#getDemandStartMilliseconds()">getDemandStartMilliseconds</A>, <A HREF="../../hudson/model/Computer.html#getEnvVars()">getEnvVars</A>, <A HREF="../../hudson/model/Computer.html#getExecutors()">getExecutors</A>, <A HREF="../../hudson/model/Computer.html#getIcon()">getIcon</A>, <A HREF="../../hudson/model/Computer.html#getIdleStartMilliseconds()">getIdleStartMilliseconds</A>, <A HREF="../../hudson/model/Computer.html#getMonitorData()">getMonitorData</A>, <A HREF="../../hudson/model/Computer.html#getNode()">getNode</A>, <A HREF="../../hudson/model/Computer.html#getNumExecutors()">getNumExecutors</A>, <A HREF="../../hudson/model/Computer.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Computer.html#getSystemProperties()">getSystemProperties</A>, <A HREF="../../hudson/model/Computer.html#getThreadDump()">getThreadDump</A>, <A HREF="../../hudson/model/Computer.html#getTiedJobs()">getTiedJobs</A>, <A HREF="../../hudson/model/Computer.html#interrupt()">interrupt</A>, <A HREF="../../hudson/model/Computer.html#isIdle()">isIdle</A>, <A HREF="../../hudson/model/Computer.html#isJnlpAgent()">isJnlpAgent</A>, <A HREF="../../hudson/model/Computer.html#isLaunchSupported()">isLaunchSupported</A>, <A HREF="../../hudson/model/Computer.html#isOffline()">isOffline</A>, <A HREF="../../hudson/model/Computer.html#isTemporarilyOffline()">isTemporarilyOffline</A>, <A HREF="../../hudson/model/Computer.html#kill()">kill</A>, <A HREF="../../hudson/model/Computer.html#setNode(hudson.model.Node)">setNode</A>, <A HREF="../../hudson/model/Computer.html#setTemporarilyOffline(boolean)">setTemporarilyOffline</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -306,6 +314,25 @@ public java.lang.String <B>getUrl</B>()</PRE>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRetentionStrategy()"><!-- --></A><H3>
+getRetentionStrategy</H3>
+<PRE>
+public <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A> <B>getRetentionStrategy</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Computer.html#getRetentionStrategy()">Computer</A></CODE></B></DD>
+<DD><A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> associated with this computer.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Computer.html#getRetentionStrategy()">getRetentionStrategy</A></CODE> in class <CODE><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>never null. This method return <code>RetentionStrategy&lt;? super T&gt;</code> where
+      <code>T=this.getClass()</code>.</DL>
 </DD>
 </DL>
 <HR>

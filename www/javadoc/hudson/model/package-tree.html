@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.model Class Hierarchy (Hudson core 1.215 API)
+hudson.model Class Hierarchy (Hudson core 1.216 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-16">
+<META NAME="date" CONTENT="2008-05-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model Class Hierarchy (Hudson core 1.215 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model Class Hierarchy (Hudson core 1.215 API)";
+        parent.document.title="hudson.model Class Hierarchy (Hudson core 1.216 API)";
     }
 }
 </SCRIPT>
@@ -141,7 +141,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/ExternalRun.html" title="class in hudson.model"><B>ExternalRun</B></A></UL>
 </UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Api.html" title="class in hudson.model"><B>Api</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><B>Computer</B></A><UL>
-<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Hudson.MasterComputer.html" title="class in hudson.model"><B>Hudson.MasterComputer</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Slave.ComputerImpl.html" title="class in hudson.model"><B>Slave.ComputerImpl</B></A></UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Hudson.MasterComputer.html" title="class in hudson.model"><B>Hudson.MasterComputer</B></A></UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/TaskAction.html" title="class in hudson.model"><B>TaskAction</B></A> (implements hudson.model.<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>)
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/User.html" title="class in hudson.model"><B>User</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/View.html" title="class in hudson.model"><B>View</B></A><UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><B>Hudson</B></A> (implements hudson.model.<A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;T&gt;, hudson.model.<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>, org.kohsuke.stapler.StaplerProxy)
@@ -162,7 +162,11 @@ Class Hierarchy
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Label.html" title="class in hudson.model"><B>Label</B></A> (implements java.lang.Comparable&lt;T&gt;, hudson.model.<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>)
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/LargeText.html" title="class in hudson.model"><B>LargeText</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model"><B>ManagementLink</B></A> (implements hudson.model.<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Messages.html" title="class in hudson.model"><B>Messages</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/NoFingerprintMatch.html" title="class in hudson.model"><B>NoFingerprintMatch</B></A> (implements hudson.model.<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>)
-<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model"><B>Queue.Item</B></A> (implements java.lang.Comparable&lt;T&gt;)
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model"><B>Queue.Item</B></A><UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Queue.NotWaitingItem.html" title="class in hudson.model"><B>Queue.NotWaitingItem</B></A><UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Queue.BlockedItem.html" title="class in hudson.model"><B>Queue.BlockedItem</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model"><B>Queue.BuildableItem</B></A></UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model"><B>Queue.WaitingItem</B></A> (implements java.lang.Comparable&lt;T&gt;)
+</UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Resource.html" title="class in hudson.model"><B>Resource</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/ResourceController.html" title="class in hudson.model"><B>ResourceController</B></A><UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Queue.html" title="class in hudson.model"><B>Queue</B></A></UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/ResourceList.html" title="class in hudson.model"><B>ResourceList</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Result.html" title="class in hudson.model"><B>Result</B></A> (implements org.kohsuke.stapler.export.CustomExportedBean, java.io.Serializable)
@@ -185,7 +189,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.triggers.<A HREF="../../hudson/triggers/SafeTimerTask.html" title="class in hudson.triggers"><B>SafeTimerTask</B></A><UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/PeriodicWork.html" title="class in hudson.model"><B>PeriodicWork</B></A><UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/FingerprintCleanupThread.html" title="class in hudson.model"><B>FingerprintCleanupThread</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/WorkspaceCleanupThread.html" title="class in hudson.model"><B>WorkspaceCleanupThread</B></A></UL>
-<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/SlaveReconnectionWork.html" title="class in hudson.model"><B>SlaveReconnectionWork</B></A></UL>
+</UL>
 </UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UserProperties.html" title="class in hudson.model"><B>UserProperties</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UserProperty.html" title="class in hudson.model"><B>UserProperty</B></A> (implements hudson.model.<A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/View.People.html" title="class in hudson.model"><B>View.People</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/View.UserInfo.html" title="class in hudson.model"><B>View.UserInfo</B></A> (implements java.lang.Comparable&lt;T&gt;)

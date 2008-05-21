@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.215 API)
+Functions (Hudson core 1.216 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-16">
+<META NAME="date" CONTENT="2008-05-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.215 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.215 API)";
+        parent.document.title="Functions (Hudson core 1.216 API)";
     }
 }
 </SCRIPT>
@@ -389,6 +389,14 @@ Utility functions used in views.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getComputerLauncherDescriptors()">getComputerLauncherDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;javax.servlet.http.Cookie</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#getCookie(javax.servlet.http.HttpServletRequest, java.lang.String)">getCookie</A></B>(javax.servlet.http.HttpServletRequest&nbsp;req,
           java.lang.String&nbsp;name)</CODE>
@@ -525,6 +533,14 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resoruce path prefix.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getRetentionStrategyDescriptors()">getRetentionStrategyDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1349,6 +1365,28 @@ public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title=
 getPublisherDescriptors</H3>
 <PRE>
 public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt; <B>getPublisherDescriptors</B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getComputerLauncherDescriptors()"><!-- --></A><H3>
+getComputerLauncherDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;&gt; <B>getComputerLauncherDescriptors</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRetentionStrategyDescriptors()"><!-- --></A><H3>
+getRetentionStrategyDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;&gt; <B>getRetentionStrategyDescriptors</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>

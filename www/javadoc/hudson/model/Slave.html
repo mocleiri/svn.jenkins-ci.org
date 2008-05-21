@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Slave (Hudson core 1.215 API)
+Slave (Hudson core 1.216 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-16">
+<META NAME="date" CONTENT="2008-05-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Slave (Hudson core 1.215 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Slave (Hudson core 1.215 API)";
+        parent.document.title="Slave (Hudson core 1.216 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/Slave.ComputerImpl.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/Slave.JnlpJar.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Slave.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Slave.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -106,6 +106,10 @@ java.lang.Object
 
 <P>
 Information about a Hudson slave node.
+
+ <p>
+ Ideally this would have been in the <tt>hudson.slaves</tt> package,
+ but for compatibility reasons, it can't.
 <P>
 
 <P>
@@ -123,14 +127,6 @@ Information about a Hudson slave node.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Nested Class Summary</B></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Slave.ComputerImpl.html" title="class in hudson.model">Slave.ComputerImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -187,9 +183,8 @@ Information about a Hudson slave node.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String)">Slave</A></B>(java.lang.String&nbsp;name,
+<TD><CODE><B><A HREF="../../hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String)">Slave</A></B>(java.lang.String&nbsp;name,
       java.lang.String&nbsp;description,
-      java.lang.String&nbsp;command,
       java.lang.String&nbsp;remoteFS,
       java.lang.String&nbsp;numExecutors,
       <A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
@@ -226,6 +221,14 @@ Information about a Hudson slave node.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Slave.html#createPath(java.lang.String)">createPath</A></B>(java.lang.String&nbsp;absolutePath)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> on this node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Slave.html#equals(java.lang.Object)">equals</A></B>(java.lang.Object&nbsp;o)</CODE>
 
@@ -251,15 +254,7 @@ Information about a Hudson slave node.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Slave.html#getCommand()">getCommand</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Slave.ComputerImpl.html" title="class in hudson.model">Slave.ComputerImpl</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Slave.html#getComputer()">getComputer</A></B>()</CODE>
 
 <BR>
@@ -277,6 +272,14 @@ Information about a Hudson slave node.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Slave.html#getLabelString()">getLabelString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Slave.html#getLauncher()">getLauncher</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -325,6 +328,14 @@ Information about a Hudson slave node.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Slave.html#getRetentionStrategy()">getRetentionStrategy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Slave.html#getRootPath()">getRootPath</A></B>()</CODE>
 
@@ -359,6 +370,22 @@ Information about a Hudson slave node.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Slave.html#hashCode()">hashCode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Slave.html#setLauncher(hudson.slaves.ComputerLauncher)">setLauncher</A></B>(<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Slave.html#setRetentionStrategy(hudson.slaves.RetentionStrategy)">setRetentionStrategy</A></B>(<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;availabilityStrategy)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -428,12 +455,11 @@ protected final java.lang.String <B>remoteFS</B></PRE>
 </TR>
 </TABLE>
 
-<A NAME="Slave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String)"><!-- --></A><H3>
+<A NAME="Slave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String)"><!-- --></A><H3>
 Slave</H3>
 <PRE>
 public <B>Slave</B>(java.lang.String&nbsp;name,
              java.lang.String&nbsp;description,
-             java.lang.String&nbsp;command,
              java.lang.String&nbsp;remoteFS,
              java.lang.String&nbsp;numExecutors,
              <A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
@@ -456,10 +482,24 @@ public <B>Slave</B>(java.lang.String&nbsp;name,
 </TR>
 </TABLE>
 
-<A NAME="getCommand()"><!-- --></A><H3>
-getCommand</H3>
+<A NAME="getLauncher()"><!-- --></A><H3>
+getLauncher</H3>
 <PRE>
-public java.lang.String <B>getCommand</B>()</PRE>
+public <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A> <B>getLauncher</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLauncher(hudson.slaves.ComputerLauncher)"><!-- --></A><H3>
+setLauncher</H3>
+<PRE>
+public void <B>setLauncher</B>(<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -551,6 +591,34 @@ public <A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Node.html#getMode()">getMode</A></CODE> in interface <CODE><A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRetentionStrategy()"><!-- --></A><H3>
+getRetentionStrategy</H3>
+<PRE>
+public <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A> <B>getRetentionStrategy</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRetentionStrategy(hudson.slaves.RetentionStrategy)"><!-- --></A><H3>
+setRetentionStrategy</H3>
+<PRE>
+public void <B>setRetentionStrategy</B>(<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;availabilityStrategy)</PRE>
+<DL>
+<DD><DL>
+</DL>
 </DD>
 <DD><DL>
 </DL>
@@ -706,6 +774,23 @@ public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>
 </DL>
 <HR>
 
+<A NAME="createPath(java.lang.String)"><!-- --></A><H3>
+createPath</H3>
+<PRE>
+public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>createPath</B>(java.lang.String&nbsp;absolutePath)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Node.html#createPath(java.lang.String)">Node</A></CODE></B></DD>
+<DD>Gets the <A HREF="../../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> on this node.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Node.html#createPath(java.lang.String)">createPath</A></CODE> in interface <CODE><A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getWorkspaceRoot()"><!-- --></A><H3>
 getWorkspaceRoot</H3>
 <PRE>
@@ -743,7 +828,7 @@ public <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>
 <A NAME="getComputer()"><!-- --></A><H3>
 getComputer</H3>
 <PRE>
-public <A HREF="../../hudson/model/Slave.ComputerImpl.html" title="class in hudson.model">Slave.ComputerImpl</A> <B>getComputer</B>()</PRE>
+public <A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A> <B>getComputer</B>()</PRE>
 <DL>
 <DD>Gets the corresponding computer object.
 <P>
@@ -832,7 +917,7 @@ public int <B>hashCode</B>()</PRE>
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/Slave.ComputerImpl.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/Slave.JnlpJar.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Slave.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Slave.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

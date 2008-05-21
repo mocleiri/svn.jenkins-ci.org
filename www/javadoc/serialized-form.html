@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Serialized Form (Hudson core 1.215 API)
+Serialized Form (Hudson core 1.216 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-16">
+<META NAME="date" CONTENT="2008-05-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Serialized Form (Hudson core 1.215 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Serialized Form (Hudson core 1.215 API)";
+        parent.document.title="Serialized Form (Hudson core 1.216 API)";
     }
 }
 </SCRIPT>
@@ -1411,12 +1411,22 @@ mode</H3>
 </DL>
 <HR>
 <H3>
-agentCommand</H3>
+retentionStrategy</H3>
 <PRE>
-java.lang.String <B>agentCommand</B></PRE>
+<A HREF="hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;<A HREF="hudson/slaves/RetentionStrategy.html" title="type parameter in RetentionStrategy">T</A> extends <A HREF="hudson/model/Computer.html" title="class in hudson.model">Computer</A>&gt; <B>retentionStrategy</B></PRE>
 <DL>
-<DD>Command line to launch the agent, like
- "ssh myslave java -jar /path/to/hudson-remoting.jar"
+<DD>Slave availablility strategy.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+<H3>
+launcher</H3>
+<PRE>
+<A HREF="hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A> <B>launcher</B></PRE>
+<DL>
+<DD>The starter that will startup this slave.
 <P>
 <DL>
 </DL>

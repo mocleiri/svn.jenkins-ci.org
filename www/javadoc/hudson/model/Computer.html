@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Computer (Hudson core 1.215 API)
+Computer (Hudson core 1.216 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-16">
+<META NAME="date" CONTENT="2008-05-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson core 1.215 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson core 1.215 API)";
+        parent.document.title="Computer (Hudson core 1.216 API)";
     }
 }
 </SCRIPT>
@@ -101,7 +101,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/Hudson.MasterComputer.html" title="class in hudson.model">Hudson.MasterComputer</A>, <A HREF="../../hudson/model/Slave.ComputerImpl.html" title="class in hudson.model">Slave.ComputerImpl</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/Hudson.MasterComputer.html" title="class in hudson.model">Hudson.MasterComputer</A>, <A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A></DD>
 </DL>
 <HR>
 <DL>
@@ -110,7 +110,7 @@ java.lang.Object
 </PRE>
 
 <P>
-Represents a set of <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s on the same computer.
+Represents the running state of a remote computer that holds <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s.
 
  <p>
  <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s on one <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> are transparently interchangeable
@@ -209,6 +209,14 @@ Represents a set of <A HREF="../../hudson/model/Executor.html" title="class in h
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#disconnect()">disconnect</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Disconnect this computer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#doDumpExportTable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDumpExportTable</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                   org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
@@ -294,6 +302,14 @@ Represents a set of <A HREF="../../hudson/model/Executor.html" title="class in h
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#getDemandStartMilliseconds()">getDemandStartMilliseconds</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the time when this computer first became in demand.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#getDisplayName()">getDisplayName</A></B>()</CODE>
 
@@ -326,6 +342,14 @@ Represents a set of <A HREF="../../hudson/model/Executor.html" title="class in h
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#getIdleStartMilliseconds()">getIdleStartMilliseconds</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the time when this computer first became idle.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;java.util.List&lt;java.util.logging.LogRecord&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#getLogRecords()">getLogRecords</A></B>()</CODE>
 
@@ -355,6 +379,14 @@ Represents a set of <A HREF="../../hudson/model/Executor.html" title="class in h
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s that are configured for this computer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#getRetentionStrategy()">getRetentionStrategy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> associated with this computer.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -407,10 +439,26 @@ Represents a set of <A HREF="../../hudson/model/Executor.html" title="class in h
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#isIdle()">isIdle</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if all the executors of this computer is idle.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#isJnlpAgent()">isJnlpAgent</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this computer is supposed to be launched via JNLP.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>see <A HREF="../../hudson/model/Computer.html#isLaunchSupported()">isLaunchSupported()</A> and <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#isLaunchSupported()">isLaunchSupported</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this computer can be launched by Hudson.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -612,6 +660,21 @@ public abstract void <B>launch</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="disconnect()"><!-- --></A><H3>
+disconnect</H3>
+<PRE>
+public void <B>disconnect</B>()</PRE>
+<DL>
+<DD>Disconnect this computer.
+
+ If this is the master, no-op
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getNumExecutors()"><!-- --></A><H3>
 getNumExecutors</H3>
 <PRE>
@@ -658,9 +721,26 @@ isOffline</H3>
 isJnlpAgent</H3>
 <PRE>
 <FONT SIZE="-1">@Exported
+@Deprecated
 </FONT>public boolean <B>isJnlpAgent</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>see <A HREF="../../hudson/model/Computer.html#isLaunchSupported()">isLaunchSupported()</A> and <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></I>
+<P>
 <DD>Returns true if this computer is supposed to be launched via JNLP.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isLaunchSupported()"><!-- --></A><H3>
+isLaunchSupported</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public boolean <B>isLaunchSupported</B>()</PRE>
+<DL>
+<DD>Returns true if this computer can be launched by Hudson.
 <P>
 <DD><DL>
 </DL>
@@ -825,6 +905,53 @@ public java.util.List&lt;<A HREF="../../hudson/model/Executor.html" title="class
 </DL>
 <HR>
 
+<A NAME="isIdle()"><!-- --></A><H3>
+isIdle</H3>
+<PRE>
+public final boolean <B>isIdle</B>()</PRE>
+<DL>
+<DD>Returns true if all the executors of this computer is idle.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIdleStartMilliseconds()"><!-- --></A><H3>
+getIdleStartMilliseconds</H3>
+<PRE>
+public final long <B>getIdleStartMilliseconds</B>()</PRE>
+<DL>
+<DD>Returns the time when this computer first became idle.
+
+ <p>
+ If this computer is already idle, the return value will point to the
+ time in the past since when this computer has been idle.
+
+ <p>
+ If this computer is busy, the return value will point to the
+ time in the future where this computer will be expected to become free.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDemandStartMilliseconds()"><!-- --></A><H3>
+getDemandStartMilliseconds</H3>
+<PRE>
+public final long <B>getDemandStartMilliseconds</B>()</PRE>
+<DL>
+<DD>Returns the time when this computer first became in demand.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="interrupt()"><!-- --></A><H3>
 interrupt</H3>
 <PRE>
@@ -851,6 +978,21 @@ public java.lang.String <B>getSearchUrl</B>()</PRE>
 <DT><B>Returns:</B><DD>URL like "foo" or "foo/bar". The path can end with '/'.
       The path that starts with '/' will be interpreted as the absolute path
       (within the context path of Hudson.)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRetentionStrategy()"><!-- --></A><H3>
+getRetentionStrategy</H3>
+<PRE>
+public abstract <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A> <B>getRetentionStrategy</B>()</PRE>
+<DL>
+<DD><A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> associated with this computer.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>never null. This method return <code>RetentionStrategy&lt;? super T&gt;</code> where
+      <code>T=this.getClass()</code>.</DL>
 </DD>
 </DL>
 <HR>
