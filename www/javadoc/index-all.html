@@ -5,7 +5,7 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.217 API)
+Index (Hudson core 1.218 API)
 </TITLE>
 
 <META NAME="date" CONTENT="2008-05-21">
@@ -16,7 +16,7 @@ Index (Hudson core 1.217 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.217 API)";
+        parent.document.title="Index (Hudson core 1.218 API)";
     }
 }
 </SCRIPT>
@@ -1528,6 +1528,14 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/Shell.DescriptorImpl.html" 
 <DT><A HREF="./hudson/util/EnumConverter.html#convert(java.lang.Class, java.lang.Object)"><B>convert(Class, Object)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/EnumConverter.html" title="class in hudson.util">EnumConverter</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/TimeUnit2.html#convert(long, hudson.util.TimeUnit2)"><B>convert(long, TimeUnit2)</B></A> - 
+Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
+<DD>Convert the given time duration in the given unit to this
+ unit.
+<DT><A HREF="./hudson/util/TimeUnit2.html#convert(long, java.util.concurrent.TimeUnit)"><B>convert(long, TimeUnit)</B></A> - 
+Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
+<DD>Convert the given time duration in the given unit to this
+ unit.
 <DT><A HREF="./hudson/util/QuotedStringTokenizer.html#convertHexDigit(byte)"><B>convertHexDigit(byte)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/QuotedStringTokenizer.html" title="class in hudson.util">QuotedStringTokenizer</A>
 <DD>&nbsp;
@@ -11454,6 +11462,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/slaves/SlaveComputer.html" title="class in hudson.slaves"><B>SlaveComputer</B></A> - Class in <A HREF="./hudson/slaves/package-summary.html">hudson.slaves</A><DD><A HREF="./hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> for <A HREF="./hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A>s.<DT><A HREF="./hudson/slaves/SlaveComputer.html#SlaveComputer(hudson.model.Slave)"><B>SlaveComputer(Slave)</B></A> - 
 Constructor for class hudson.slaves.<A HREF="./hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/TimeUnit2.html#sleep(long)"><B>sleep(long)</B></A> - 
+Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
+<DD>Performs a <tt>Thread.sleep</tt> using this unit.
 <DT><A HREF="./hudson/XmlFile.html#sniffEncoding()"><B>sniffEncoding()</B></A> - 
 Method in class hudson.<A HREF="./hudson/XmlFile.html" title="class in hudson">XmlFile</A>
 <DD>Parses the beginning of the file and determines the encoding.
@@ -11781,6 +11792,12 @@ Constructor for class hudson.util.<A HREF="./hudson/util/TextFile.html" title="c
 <DT><A HREF="./hudson/model/Computer.html#threadPoolForRemoting"><B>threadPoolForRemoting</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/TimeUnit2.html#timedJoin(java.lang.Thread, long)"><B>timedJoin(Thread, long)</B></A> - 
+Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
+<DD>Performs a timed <tt>Thread.join</tt> using this time unit.
+<DT><A HREF="./hudson/util/TimeUnit2.html#timedWait(java.lang.Object, long)"><B>timedWait(Object, long)</B></A> - 
+Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
+<DD>Performs a timed <tt>Object.wait</tt> using this time unit.
 <DT><A HREF="./hudson/triggers/Trigger.html#timer"><B>timer</B></A> - 
 Static variable in class hudson.triggers.<A HREF="./hudson/triggers/Trigger.html" title="class in hudson.triggers">Trigger</A>
 <DD>This timer is available for all the components inside Hudson to schedule
@@ -11800,7 +11817,9 @@ Variable in class hudson.model.<A HREF="./hudson/model/Queue.WaitingItem.html" t
 <DT><A HREF="./hudson/model/Run.html#timestamp"><B>timestamp</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>When the build is scheduled.
-<DT><A HREF="./hudson/maven/reporters/ReportAction.Entry.html#title"><B>title</B></A> - 
+<DT><A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util"><B>TimeUnit2</B></A> - Enum in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>A <tt>TimeUnit</tt> represents time durations at a given unit of
+ granularity and provides utility methods to convert across units,
+ and to perform timing and delay operations in these units.<DT><A HREF="./hudson/maven/reporters/ReportAction.Entry.html#title"><B>title</B></A> - 
 Variable in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/ReportAction.Entry.html" title="class in hudson.maven.reporters">ReportAction.Entry</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/DirectoryBrowserSupport.html#title"><B>title</B></A> - 
@@ -11846,6 +11865,9 @@ Method in interface hudson.model.<A HREF="./hudson/model/Node.html" title="inter
 <DT><A HREF="./hudson/model/Slave.html#toComputer()"><B>toComputer()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Slave.html" title="class in hudson.model">Slave</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/TimeUnit2.html#toDays(long)"><B>toDays(long)</B></A> - 
+Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
+<DD>Equivalent to <tt>DAYS.convert(duration, this)</tt>.
 <DT><A HREF="./hudson/model/Result.html#toExportedObject()"><B>toExportedObject()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Result.html" title="class in hudson.model">Result</A>
 <DD>&nbsp;
@@ -11862,6 +11884,9 @@ Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudso
 <DT><A HREF="./hudson/Util.html#toHexString(byte[])"><B>toHexString(byte[])</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/TimeUnit2.html#toHours(long)"><B>toHours(long)</B></A> - 
+Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
+<DD>Equivalent to <tt>HOURS.convert(duration, this)</tt>.
 <DT><A HREF="./hudson/node_monitors/DiskSpaceMonitor.html#toHtml(long)"><B>toHtml(long)</B></A> - 
 Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/DiskSpaceMonitor.html" title="class in hudson.node_monitors">DiskSpaceMonitor</A>
 <DD>Returns the HTML representation of the space.
@@ -11911,12 +11936,27 @@ Static method in class hudson.model.<A HREF="./hudson/model/Descriptor.html" tit
 <DT><A HREF="./hudson/util/DescribableList.html#toMap()"><B>toMap()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/TimeUnit2.html#toMicros(long)"><B>toMicros(long)</B></A> - 
+Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
+<DD>Equivalent to <tt>MICROSECONDS.convert(duration, this)</tt>.
+<DT><A HREF="./hudson/util/TimeUnit2.html#toMillis(long)"><B>toMillis(long)</B></A> - 
+Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
+<DD>Equivalent to <tt>MILLISECONDS.convert(duration, this)</tt>.
+<DT><A HREF="./hudson/util/TimeUnit2.html#toMinutes(long)"><B>toMinutes(long)</B></A> - 
+Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
+<DD>Equivalent to <tt>MINUTES.convert(duration, this)</tt>.
 <DT><A HREF="./hudson/model/Items.html#toNameList(java.util.Collection)"><B>toNameList(Collection&lt;? extends Item&gt;)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Items.html" title="class in hudson.model">Items</A>
 <DD>Converts a list of items into a camma-separated full names.
+<DT><A HREF="./hudson/util/TimeUnit2.html#toNanos(long)"><B>toNanos(long)</B></A> - 
+Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
+<DD>Equivalent to <tt>NANOSECONDS.convert(duration, this)</tt>.
 <DT><A HREF="./hudson/model/TopLevelItem.html" title="interface in hudson.model"><B>TopLevelItem</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD><A HREF="./hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> that can be directly displayed under <A HREF="./hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.<DT><A HREF="./hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model"><B>TopLevelItemDescriptor</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD><A HREF="./hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="./hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A>s.<DT><A HREF="./hudson/model/TopLevelItemDescriptor.html#TopLevelItemDescriptor(java.lang.Class)"><B>TopLevelItemDescriptor(Class&lt;? extends TopLevelItem&gt;)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/TimeUnit2.html#toSeconds(long)"><B>toSeconds(long)</B></A> - 
+Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
+<DD>Equivalent to <tt>SECONDS.convert(duration, this)</tt>.
 <DT><A HREF="./hudson/FilePath.html#toString()"><B>toString()</B></A> - 
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD><B>Deprecated.</B>&nbsp;
@@ -12314,6 +12354,9 @@ Static method in enum hudson.security.<A HREF="./hudson/security/SecurityMode.ht
 <DT><A HREF="./hudson/tasks/junit/CaseResult.Status.html#valueOf(java.lang.String)"><B>valueOf(String)</B></A> - 
 Static method in enum hudson.tasks.junit.<A HREF="./hudson/tasks/junit/CaseResult.Status.html" title="enum in hudson.tasks.junit">CaseResult.Status</A>
 <DD>Returns the enum constant of this type with the specified name.
+<DT><A HREF="./hudson/util/TimeUnit2.html#valueOf(java.lang.String)"><B>valueOf(String)</B></A> - 
+Static method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
+<DD>Returns the enum constant of this type with the specified name.
 <DT><A HREF="./hudson/matrix/Axis.html#values"><B>values</B></A> - 
 Variable in class hudson.matrix.<A HREF="./hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A>
 <DD>Possible values for this axis.
@@ -12339,6 +12382,10 @@ Method in class hudson.util.<A HREF="./hudson/util/CopyOnWriteMap.html" title="c
 <DT><A HREF="./hudson/util/ListBoxModel.html#values()"><B>values()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ListBoxModel.html" title="class in hudson.util">ListBoxModel</A>
 <DD><B>Deprecated.</B>&nbsp;<I>Exposed for stapler. Not meant for programatic consumption.</I>
+<DT><A HREF="./hudson/util/TimeUnit2.html#values()"><B>values()</B></A> - 
+Static method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
+<DD>Returns an array containing the constants of this enum type, in
+the order they are declared.
 <DT><A HREF="./hudson/maven/ExecutedMojo.html#version"><B>version</B></A> - 
 Variable in class hudson.maven.<A HREF="./hudson/maven/ExecutedMojo.html" title="class in hudson.maven">ExecutedMojo</A>
 <DD>Plugin version.
