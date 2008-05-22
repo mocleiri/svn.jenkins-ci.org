@@ -1,30 +1,33 @@
 package org.jvnet.hudson.update_center;
 
+import com.sun.xml.internal.bind.v2.util.EditDistance;
 import hudson.plugins.jira.soap.ConfluenceSoapService;
 import hudson.plugins.jira.soap.RemotePage;
 import hudson.plugins.jira.soap.RemotePageSummary;
 import org.jvnet.hudson.confluence.Confluence;
 
 import javax.xml.rpc.ServiceException;
-import java.net.URL;
 import java.io.IOException;
-import java.util.Map;
+import java.net.URL;
 import java.util.HashMap;
-
-import com.sun.xml.internal.bind.v2.util.EditDistance;
+import java.util.Map;
+import java.rmi.RemoteException;
 
 /**
  * List of plugins from confluence.
  *
+ * See http://confluence.atlassian.com/display/DOC/Remote+API+Specification
+ * for the confluence API.
+ *
  * @author Kohsuke Kawaguchi
  */
 public class ConfluencePluginList {
+    private final ConfluenceSoapService service;
     private final Map<String,RemotePageSummary> children = new HashMap<String, RemotePageSummary>();
-
     private final String[] normalizedTitles;
 
     public ConfluencePluginList() throws IOException, ServiceException {
-        ConfluenceSoapService service = Confluence.connect(new URL("http://hudson.gotdns.com/wiki/"));
+        service = Confluence.connect(new URL("http://hudson.gotdns.com/wiki/"));
         RemotePage page = service.getPage("", "HUDSON", "Plugins");
 
         for (RemotePageSummary child : service.getChildren("", page.getId()))
@@ -55,4 +58,14 @@ public class ConfluencePluginList {
         else
             return null;    // too far
     }
+
+    public RemotePage getPage(String url) throws RemoteException {
+        if(!url.startsWith(HUDSON_WIKI_PREFIX))
+            return null;
+
+        String pageName = url.substring(HUDSON_WIKI_PREFIX.length()).replace('+',' '); // poor hack for URL escape
+        return service.getPage("","HUDSON",pageName);
+    }
+
+    private static final String HUDSON_WIKI_PREFIX = "http://hudson.gotdns.com/wiki/display/HUDSON/";
 }
