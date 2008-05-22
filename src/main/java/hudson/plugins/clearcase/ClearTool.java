@@ -74,7 +74,8 @@ public interface ClearTool {
     Reader lsactivity(String activity, String commandFormat,String viewname) throws IOException, InterruptedException;
     
     /**
-     * Lists view registry entries
+     * Lists view registry entries.
+     * This command needs to be run inside a view.
      * 
      * @param launcher launcher for launching the command
      * @param onlyActiveDynamicViews true for only return active dynamic views; false all views are returned
