@@ -2,13 +2,10 @@ package org.jvnet.hudson.update_center;
 
 import org.kohsuke.jnt.JNFile;
 import org.kohsuke.jnt.JNFileFolder;
+import org.kohsuke.jnt.JNProject;
 import org.kohsuke.jnt.JavaNet;
 import org.kohsuke.jnt.ProcessingException;
-import org.kohsuke.jnt.JNProject;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.io.IOException;
 
 /**
@@ -24,23 +21,19 @@ public class Main {
 
             VersionedFile latest = findLatest(dir);
 
-            System.out.println("=> "+latest);
-
             if(latest!=null)
-                latest.writeTo(dir.getName());
+                System.out.println("=> "+latest.toJSON(dir.getName()));
         }
 
         JNFileFolder release = p.getFolder("/releases");
         VersionedFile latest = findLatest(release);
-        System.out.println("core\n=> "+latest);
-        latest.writeTo("core");
+        System.out.println("core\n=> "+latest.toJSON("core"));
     }
 
     private static VersionNumber parseVersion(JNFile file) {
         String n = file.getName();
         if(n.contains(" "))  n = n.substring(n.lastIndexOf(' ')+1);
-        VersionNumber vn = new VersionNumber(n);
-        return vn;
+        return new VersionNumber(n);
     }
 
     private static VersionedFile findLatest(JNFileFolder dir) throws ProcessingException {

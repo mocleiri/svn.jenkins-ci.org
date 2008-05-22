@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
 
+import net.sf.json.JSONObject;
+
 /**
  * @author Kohsuke Kawaguchi
  */
@@ -17,6 +19,14 @@ public class VersionedFile {
     public VersionedFile(JNFile file, VersionNumber version) {
         this.file = file;
         this.version = version;
+    }
+
+    public JSONObject toJSON(String name) {
+        JSONObject o = new JSONObject();
+        o.put("name",name);
+        o.put("version",version.toString());
+        o.put("url",file.getURL().toExternalForm());
+        return o;
     }
 
     public void writeTo(String name) throws IOException {
