@@ -172,10 +172,6 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
                     will(returnValue(list));
                 one(saveChangeLogAction).saveChangeLog(changelogFile, list);
                 
-                // extended changelog
-                one(changeLogAction).getChanges(mockedCalendar.getTime(), "viewname", new String[] {"branch"}, new String[]{"vob"});
-                    will(returnValue(list));                
-                one(saveChangeLogAction).saveChangeLog(extendedChangelogFile, list);                    
             }
         });
         classContext.checking(new Expectations() {
@@ -184,9 +180,6 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
                 exactly(2).of(build).getPreviousBuild(); will(returnValue(build));
                 one(build).getTimestamp(); will(returnValue(mockedCalendar));
                 
-                // extended changelog
-                exactly(2).of(build).getPreviousNotFailedBuild(); will(returnValue(build));
-                one(build).getTimestamp(); will(returnValue(mockedCalendar));
             }
         });
 

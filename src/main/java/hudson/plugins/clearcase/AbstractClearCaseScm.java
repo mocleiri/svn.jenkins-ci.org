@@ -154,24 +154,6 @@ public abstract class AbstractClearCaseScm extends SCM {
             saveChangeLogAction.saveChangeLog(changelogFile, changelogEntries);
         }        
         
-        // Write the extended changelog file, that is changelog since last "not failed build"
-        changeLogAction = createChangeLogAction(clearToolLauncher);
-        List<? extends ChangeLogSet.Entry> changesSincePreviousNotFalied = null;
-        if (build.getPreviousNotFailedBuild() != null ) {
-            Date lastNotFailedBuildTime = build.getPreviousNotFailedBuild().getTimestamp().getTime();
-            changesSincePreviousNotFalied = changeLogAction.getChanges(lastNotFailedBuildTime, viewName, getBranchNames(), getViewPaths(workspace.child(viewName)));
-        }
-        
-        File extendedChangelogFile = new File(changelogFile.getParentFile(),"extended-"+changelogFile.getName());
-        // Save change log
-        if ((changesSincePreviousNotFalied == null) || (changesSincePreviousNotFalied.isEmpty())) {
-            // no changes
-            return createEmptyChangeLog(extendedChangelogFile, listener, "changelog");
-        } else {
-            saveChangeLogAction.saveChangeLog(extendedChangelogFile, changesSincePreviousNotFalied);
-        }         
-                
-
         // Tag the build
         if (taggingAction != null) {
             // taggingAction.tag("lbl", "comment");
