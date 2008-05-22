@@ -31,6 +31,7 @@ public class Main {
         pw.println("updateCenter(");
         root.write(pw);
         pw.println(");");
+        pw.close();
     }
 
     /**
