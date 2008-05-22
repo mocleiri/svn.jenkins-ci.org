@@ -27,6 +27,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
+        <!-- run it like "mvn install exec:java" -->
         <executions>
           <execution>
             <goals>
@@ -36,6 +37,9 @@
         </executions>
         <configuration>
           <mainClass>org.jvnet.hudson.update_center.Main</mainClass>
+          <arguments>
+            <argument>${project.basedir}/output.json</argument>
+          </arguments>
         </configuration>
       </plugin>
     </plugins>
