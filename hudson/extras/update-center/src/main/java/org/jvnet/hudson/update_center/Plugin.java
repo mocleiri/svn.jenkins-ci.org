@@ -12,8 +12,11 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.Element;
+import net.sf.json.JSONObject;
 
 /**
+ * A Hudson plugin.
+ *
  * @author Kohsuke Kawaguchi
  */
 public class Plugin {
@@ -66,5 +69,14 @@ public class Plugin {
 
         // try to guess the Wiki page
         return cpl.findNearest(artifactId);
+    }
+
+    public JSONObject toJSON() {
+        JSONObject json = file.toJSON(artifactId);
+        if(page!=null) {
+            json.put("wiki",page.getUrl());
+            json.put("title",page.getTitle());
+        }
+        return json;
     }
 }
