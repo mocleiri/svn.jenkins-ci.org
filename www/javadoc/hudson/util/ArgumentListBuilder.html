@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ArgumentListBuilder (Hudson core 1.218 API)
+ArgumentListBuilder (Hudson core 1.219 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-21">
+<META NAME="date" CONTENT="2008-05-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ArgumentListBuilder (Hudson core 1.218 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ArgumentListBuilder (Hudson core 1.218 API)";
+        parent.document.title="ArgumentListBuilder (Hudson core 1.219 API)";
     }
 }
 </SCRIPT>
@@ -96,9 +96,12 @@ Class ArgumentListBuilder</H2>
 java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.ArgumentListBuilder</B>
 </PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.io.Serializable</DD>
+</DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>ArgumentListBuilder</B><DT>extends java.lang.Object</DL>
+<DT><PRE>public class <B>ArgumentListBuilder</B><DT>extends java.lang.Object<DT>implements java.io.Serializable</DL>
 </PRE>
 
 <P>
@@ -109,7 +112,7 @@ Used to build up arguments for a process invocation.
 <DL>
 <DT><B>Author:</B></DT>
   <DD>Kohsuke Kawaguchi</DD>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../../serialized-form.html#hudson.util.ArgumentListBuilder">Serialized Form</A></DL>
 <HR>
 
 <P>
@@ -137,6 +140,14 @@ Used to build up arguments for a process invocation.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ArgumentListBuilder.html#add(java.lang.Object)">add</A></B>(java.lang.Object&nbsp;a)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -259,11 +270,28 @@ public <B>ArgumentListBuilder</B>()</PRE>
 </TR>
 </TABLE>
 
+<A NAME="add(java.lang.Object)"><!-- --></A><H3>
+add</H3>
+<PRE>
+public <A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A> <B>add</B>(java.lang.Object&nbsp;a)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="add(java.lang.String)"><!-- --></A><H3>
 add</H3>
 <PRE>
 public <A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A> <B>add</B>(java.lang.String&nbsp;a)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -275,6 +303,9 @@ prepend</H3>
 <PRE>
 public <A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A> <B>prepend</B>(java.lang.String...&nbsp;args)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -296,6 +327,9 @@ public <A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in huds
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -304,6 +338,9 @@ add</H3>
 <PRE>
 public <A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A> <B>add</B>(java.lang.String...&nbsp;args)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -317,6 +354,9 @@ public <A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in huds
 <DL>
 <DD>Decomposes the given token into multiple arguments by splitting via whitespace.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -334,6 +374,9 @@ public <A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in huds
  <tt>-D</tt> portion is configurable.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 <DT><B>Since:</B></DT>
   <DD>1.114</DD>
 </DL>
@@ -346,6 +389,9 @@ toCommandArray</H3>
 <PRE>
 public java.lang.String[] <B>toCommandArray</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -374,6 +420,9 @@ public java.util.List&lt;java.lang.String&gt; <B>toList</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -382,6 +431,9 @@ toStringWithQuote</H3>
 <PRE>
 public java.lang.String <B>toStringWithQuote</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>

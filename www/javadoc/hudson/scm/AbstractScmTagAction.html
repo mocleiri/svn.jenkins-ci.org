@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractScmTagAction (Hudson core 1.218 API)
+AbstractScmTagAction (Hudson core 1.219 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-21">
+<META NAME="date" CONTENT="2008-05-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractScmTagAction (Hudson core 1.218 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractScmTagAction (Hudson core 1.218 API)";
+        parent.document.title="AbstractScmTagAction (Hudson core 1.219 API)";
     }
 }
 </SCRIPT>
@@ -99,14 +99,14 @@ java.lang.Object
           <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.scm.AbstractScmTagAction</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, java.io.Serializable</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, <A HREF="../../hudson/model/BuildBadgeAction.html" title="interface in hudson.model">BuildBadgeAction</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, java.io.Serializable</DD>
 </DL>
 <DL>
 <DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/scm/CVSSCM.TagAction.html" title="class in hudson.scm">CVSSCM.TagAction</A>, <A HREF="../../hudson/scm/SubversionTagAction.html" title="class in hudson.scm">SubversionTagAction</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>AbstractScmTagAction</B><DT>extends <A HREF="../../hudson/model/TaskAction.html" title="class in hudson.model">TaskAction</A></DL>
+<DT><PRE>public abstract class <B>AbstractScmTagAction</B><DT>extends <A HREF="../../hudson/model/TaskAction.html" title="class in hudson.model">TaskAction</A><DT>implements <A HREF="../../hudson/model/BuildBadgeAction.html" title="interface in hudson.model">BuildBadgeAction</A></DL>
 </PRE>
 
 <P>
@@ -223,10 +223,26 @@ Common part of <A HREF="../../hudson/scm/CVSSCM.TagAction.html" title="class in 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/AbstractScmTagAction.html#getTooltip()">getTooltip</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This message is shown as the tool tip of the build badge icon.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/AbstractScmTagAction.html#getUrlName()">getUrlName</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the URL path name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/AbstractScmTagAction.html#isTagged()">isTagged</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the build is tagged already.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.TaskAction"><!-- --></A>
@@ -335,6 +351,9 @@ public final java.lang.String <B>getUrlName</B>()</PRE>
  which is useful for directly connecting to external systems.
 <P>
 <DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Action.html#getUrlName()">getUrlName</A></CODE> in interface <CODE><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></DL>
+</DD>
+<DD><DL>
 
 <DT><B>Returns:</B><DD>null if this action object doesn't need to be bound to web.</DL>
 </DD>
@@ -362,6 +381,41 @@ getBuild</H3>
 <PRE>
 public <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A> <B>getBuild</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTooltip()"><!-- --></A><H3>
+getTooltip</H3>
+<PRE>
+public java.lang.String <B>getTooltip</B>()</PRE>
+<DL>
+<DD>This message is shown as the tool tip of the build badge icon.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isTagged()"><!-- --></A><H3>
+isTagged</H3>
+<PRE>
+public abstract boolean <B>isTagged</B>()</PRE>
+<DL>
+<DD>Returns true if the build is tagged already.
+<P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -394,6 +448,9 @@ public void <B>doIndex</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                     javax.servlet.ServletException</PRE>
 <DL>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
@@ -407,6 +464,9 @@ chooseAction</H3>
 <PRE>
 protected java.lang.String <B>chooseAction</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
