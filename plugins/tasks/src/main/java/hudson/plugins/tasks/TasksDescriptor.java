@@ -1,6 +1,7 @@
 package hudson.plugins.tasks;
 
 import hudson.plugins.tasks.util.PluginDescriptor;
+import net.sf.json.JSONObject;
 
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -12,9 +13,9 @@ import org.kohsuke.stapler.StaplerRequest;
  */
 public final class TasksDescriptor extends PluginDescriptor {
     /** Plug-in name. */
-    static final String PLUGIN_NAME = "tasks";
+    private static final String PLUGIN_NAME = "tasks";
     /** Icon to use for the result and project action. */
-    static final String ACTION_ICON = "/plugin/tasks/icons/tasks-24x24.png";
+    private static final String ACTION_ICON = "/plugin/tasks/icons/tasks-24x24.png";
 
     /**
      * Instantiates a new find bugs descriptor.
@@ -37,7 +38,13 @@ public final class TasksDescriptor extends PluginDescriptor {
 
     /** {@inheritDoc} */
     @Override
-    public TasksPublisher newInstance(final StaplerRequest request) throws FormException {
-        return request.bindParameters(TasksPublisher.class, PLUGIN_NAME + "_");
+    public String getIconUrl() {
+        return ACTION_ICON;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public TasksPublisher newInstance(final StaplerRequest request, final JSONObject formData) throws FormException {
+        return request.bindParameters(TasksPublisher.class, PLUGIN_NAME + ".");
     }
 }

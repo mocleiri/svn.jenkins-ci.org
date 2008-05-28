@@ -3,6 +3,8 @@ package hudson.plugins.findbugs;
 /**
  * Represents the result summary of the FindBugs parser. This summary will be
  * shown in the summary.jelly script of the FindBugs result action.
+ *
+ * @author Ulli Hafner
  */
 public final class ResultSummary {
     /**
@@ -30,11 +32,11 @@ public final class ResultSummary {
             summary.append("</a>");
         }
         summary.append(" ");
-        if (result.getNumberOfModules() > 1) {
-            summary.append(Messages.FindBugs_ResultAction_MultipleFiles(result.getNumberOfModules()));
+        if (result.getNumberOfModules() == 1) {
+            summary.append(Messages.FindBugs_ResultAction_OneFile());
         }
         else {
-            summary.append(Messages.FindBugs_ResultAction_OneFile());
+            summary.append(Messages.FindBugs_ResultAction_MultipleFiles(result.getNumberOfModules()));
         }
         return summary.toString();
     }

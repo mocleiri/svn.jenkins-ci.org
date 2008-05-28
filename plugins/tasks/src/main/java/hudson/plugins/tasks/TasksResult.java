@@ -1,4 +1,4 @@
-package hudson.plugins.tasks;
+package hudson.plugins.tasks; // NOPMD
 
 import hudson.XmlFile;
 import hudson.model.AbstractBuild;
@@ -14,7 +14,6 @@ import hudson.plugins.tasks.util.model.AnnotationProvider;
 import hudson.plugins.tasks.util.model.AnnotationStream;
 import hudson.plugins.tasks.util.model.FileAnnotation;
 import hudson.plugins.tasks.util.model.JavaPackage;
-import hudson.plugins.tasks.util.model.JavaProject;
 import hudson.plugins.tasks.util.model.MavenModule;
 import hudson.plugins.tasks.util.model.Priority;
 import hudson.plugins.tasks.util.model.WorkspaceFile;
@@ -43,7 +42,9 @@ import edu.umd.cs.findbugs.annotations.SuppressWarnings;
  *
  * @author Ulli Hafner
  */
-public class TasksResult implements ModelObject, Serializable  {
+//CHECKSTYLE:COUPLING-OFF
+@SuppressWarnings("PMD.TooManyFields")
+public class TasksResult implements ModelObject, Serializable, AnnotationProvider  {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = -344808345805935004L;
     /** Error logger. */
@@ -57,7 +58,7 @@ public class TasksResult implements ModelObject, Serializable  {
 
     /** The parsed project with annotations. */
     @SuppressWarnings("Se")
-    private transient WeakReference<JavaProject> project;
+    private transient WeakReference<TasksProject> project;
 
     /** Current build as owner of this action. */
     @SuppressWarnings("Se")
@@ -81,7 +82,7 @@ public class TasksResult implements ModelObject, Serializable  {
     /** The number of normal priority tasks in this build. */
     private final int normalPriorityTasks;
     /** The number of scanned files in the project. */
-    private int numberOfFiles;
+    private final int numberOfFiles;
 
     /**
      * Creates a new instance of <code>TasksResult</code>.
@@ -128,8 +129,8 @@ public class TasksResult implements ModelObject, Serializable  {
         numberOfTasks = project.getNumberOfAnnotations();
         delta = numberOfTasks - previousNumberOfTasks;
 
-        numberOfFiles = project.getNumberOfFiles();
-        this.project = new WeakReference<JavaProject>(project);
+        numberOfFiles = project.getNumberOfScannedFiles();
+        this.project = new WeakReference<TasksProject>(project);
 
         try {
             Collection<FileAnnotation> files = project.getAnnotations();
@@ -170,7 +171,7 @@ public class TasksResult implements ModelObject, Serializable  {
     /**
      * Returns the number of scanned files in this project.
      *
-     * @return the number of scanned files in a {@link JavaProject}
+     * @return the number of scanned files in a {@link TasksProject}
      */
     public int getNumberOfFiles() {
         return numberOfFiles;
@@ -207,17 +208,6 @@ public class TasksResult implements ModelObject, Serializable  {
     }
 
     /**
-     * Returns the annotations of the specified priority for this object.
-     *
-     * @param priority
-     *            the priority as a string object
-     * @return annotations of the specified priority for this object
-     */
-    public int getNumberOfAnnotations(final String priority) {
-        return getNumberOfAnnotations(Priority.fromString(priority));
-    }
-
-    /**
      * Returns the display name (bread crumb name) of this result.
      *
      * @return the display name of this result.
@@ -249,7 +239,7 @@ public class TasksResult implements ModelObject, Serializable  {
      *
      * @return the associated project of this result.
      */
-    public synchronized JavaProject getProject() {
+    public synchronized TasksProject getProject() {
         if (project == null) {
             loadResult();
         }
@@ -265,9 +255,9 @@ public class TasksResult implements ModelObject, Serializable  {
      * get removed by the garbage collector.
      */
     private void loadResult() {
-        JavaProject result;
+        TasksProject result;
         try {
-            JavaProject newProject = new JavaProject();
+            TasksProject newProject = new TasksProject(numberOfFiles);
             FileAnnotation[] annotations = (FileAnnotation[])getDataFile().read();
             newProject.addAnnotations(annotations);
             LOGGER.log(Level.INFO, "Loaded tasks data file " + getDataFile() + " for build " + getOwner().getNumber());
@@ -275,9 +265,9 @@ public class TasksResult implements ModelObject, Serializable  {
         }
         catch (IOException exception) {
             LOGGER.log(Level.WARNING, "Failed to load " + getDataFile(), exception);
-            result = new JavaProject();
+            result = new TasksProject();
         }
-        project = new WeakReference<JavaProject>(result);
+        project = new WeakReference<TasksProject>(result);
     }
 
     /**
@@ -314,7 +304,8 @@ public class TasksResult implements ModelObject, Serializable  {
         PriorityDetailFactory factory = new PriorityDetailFactory() {
             /** {@inheritDoc} */
             @Override
-            protected PrioritiesDetail createPrioritiesDetail(Priority priority, AbstractBuild<?, ?> build, AnnotationContainer container, String header) {
+            @SuppressWarnings("IMA")
+            protected PrioritiesDetail createPrioritiesDetail(final Priority priority, final AbstractBuild<?, ?> build, final AnnotationContainer container, final String header) {
                 return new TasksPrioritiesDetail(build, getProject(), priority, header, high, normal, low);
             }
         };
@@ -493,31 +484,56 @@ public class TasksResult implements ModelObject, Serializable  {
                 module.getPackage(request.getParameter("package")), module.getAnnotationBound());
     }
 
-    // Delegates to JavaProject
-
+    // Delegates to TasksProject
     // CHECKSTYLE:OFF
 
     public Collection<WorkspaceFile> getFiles() {
         return getProject().getFiles();
     }
 
+
+    /** {@inheritDoc} */
+    public FileAnnotation getAnnotation(final long key) {
+        return getProject().getAnnotation(key);
+    }
+
+    /** {@inheritDoc} */
+    public FileAnnotation getAnnotation(final String key) {
+        return getProject().getAnnotation(key);
+    }
+
+    /** {@inheritDoc} */
+    public Collection<FileAnnotation> getAnnotations(final Priority priority) {
+        return getProject().getAnnotations(priority);
+    }
+
+    /** {@inheritDoc} */
+    public Collection<FileAnnotation> getAnnotations(final String priority) {
+        return getProject().getAnnotations(priority);
+    }
+
+    /** {@inheritDoc} */
+    public boolean hasAnnotations(final Priority priority) {
+        return getProject().hasAnnotations(priority);
+    }
+
+    /** {@inheritDoc} */
+    public boolean hasAnnotations(final String priority) {
+        return getProject().hasAnnotations(priority);
+    }
+
+    /** {@inheritDoc} */
     public final boolean hasAnnotations() {
         return getProject().hasAnnotations();
     }
 
-    public final boolean hasAnnotations(final String priority) {
-        return getProject().hasAnnotations(priority);
-    }
-
-    public final FileAnnotation getAnnotation(final String key) {
-        return getProject().getAnnotation(key);
-    }
-
-    public final Collection<FileAnnotation> getAnnotations() {
+    /** {@inheritDoc} */
+    public Collection<FileAnnotation> getAnnotations() {
         return getProject().getAnnotations();
     }
 
-    public final Collection<FileAnnotation> getAnnotations(final String priority) {
-        return getProject().getAnnotations(priority);
+    /** {@inheritDoc} */
+    public int getNumberOfAnnotations(final String priority) {
+        return getNumberOfAnnotations(Priority.fromString(priority));
     }
 }

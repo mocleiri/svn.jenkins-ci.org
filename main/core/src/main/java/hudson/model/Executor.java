@@ -4,11 +4,12 @@ import hudson.Util;
 import hudson.security.ACL;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.acegisecurity.Authentication;
 import org.acegisecurity.context.SecurityContextHolder;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 
 /**
@@ -21,6 +22,10 @@ public class Executor extends Thread implements ModelObject {
     private final Queue queue;
 
     private long startTime;
+    /**
+     * Used to track when a job was last executed.
+     */
+    private long finishTime;
 
     /**
      * Executor number that identifies it among other executors for the same {@link Computer}.
@@ -46,6 +51,7 @@ public class Executor extends Thread implements ModelObject {
         SecurityContextHolder.getContext().setAuthentication(ACL.SYSTEM);
 
         try {
+            finishTime = System.currentTimeMillis();
             while(true) {
                 if(Hudson.getInstance().isTerminating())
                     return;
@@ -66,6 +72,11 @@ public class Executor extends Thread implements ModelObject {
                 }
 
                 try {
+                    // clear the interrupt flag as a precaution.
+                    // sometime an interrupt aborts a build but without clearing the flag.
+                    // see issue #1583
+                    Thread.interrupted();
+
                     startTime = System.currentTimeMillis();
                     executable = task.createExecutable();
                     queue.execute(executable,task);
@@ -73,8 +84,9 @@ public class Executor extends Thread implements ModelObject {
                     // for some reason the executor died. this is really
                     // a bug in the code, but we don't want the executor to die,
                     // so just leave some info and go on to build other things
-                    e.printStackTrace();
+                    LOGGER.log(Level.SEVERE, "Executor throw an exception unexpectedly",e);
                 }
+                finishTime = System.currentTimeMillis();
                 executable = null;
             }
         } catch(RuntimeException e) {
@@ -190,9 +202,23 @@ public class Executor extends Thread implements ModelObject {
     }
 
     /**
+     * Returns when this executor started or should start being idle.
+     */
+    public long getIdleStartMilliseconds() {
+        if (isIdle())
+            return finishTime;
+        else {
+            return Math.max(startTime + Math.max(0, executable.getParent().getEstimatedDuration()),
+                    System.currentTimeMillis() + 15000);
+        }
+    }
+
+    /**
      * Returns the executor of the current thread.
      */
     public static Executor currentExecutor() {
         return (Executor)Thread.currentThread();
     }
+
+    private static final Logger LOGGER = Logger.getLogger(Executor.class.getName());
 }

@@ -38,8 +38,14 @@ import hudson.model.AbstractBuild;
 import hudson.model.HealthReport;
 import hudson.model.HealthReportingAction;
 
+import hudson.maven.*;
+import java.util.*;
+
 import hudson.plugins.violations.graph.SeverityTypeDataSet;
 import hudson.plugins.violations.util.StringUtil;
+
+import hudson.plugins.violations.hudson.AbstractViolationsBuildAction;
+import hudson.plugins.violations.hudson.maven.ViolationsMavenAggregatedBuildAction;
 
 /**
  * This is the build action for the
@@ -50,8 +56,9 @@ import hudson.plugins.violations.util.StringUtil;
  */
 
 public class ViolationsBuildAction
-    extends Actionable
-    implements Action, HealthReportingAction, StaplerProxy {
+    extends AbstractViolationsBuildAction
+    implements AggregatableAction
+{
 
     private static final double LOG_VALUE_FOR_ZERO = 0.5;
     private boolean  useLog = false;
@@ -60,8 +67,7 @@ public class ViolationsBuildAction
     private static final int Y_SIZE = 200;
     private static final double PADDING = 5.0;
 
-    private final AbstractBuild<?, ?>   owner;
-    private final ViolationsReport report;
+    private ViolationsReport report;
 
     /**
      * Construct a build action.
@@ -71,82 +77,46 @@ public class ViolationsBuildAction
     public ViolationsBuildAction(
         AbstractBuild<?, ?> owner,
         ViolationsReport report) {
-        this.owner  = owner;
+        super(owner);
         this.report = report;
     }
 
     /**
-     * Get the build that owns this action.
-     * @return the build.
+     * Constructor used for M2 projects.
+     * This needs to be created during a "postExecute"
+     * due to sequencing issue (1582). However,
+     * it may be usefull to do this anyway.
+     * report is set later.
+     * @param owner the build that has created this action.
      */
-    public AbstractBuild<?, ?> getBuild() {
-        return owner;
+    public ViolationsBuildAction(
+        AbstractBuild<?, ?> owner) {
+        super(owner);
     }
 
-    // -------------------------------------------
-    //  These are the magic methods to tell hudson
-    //  the url, the object to go to when the url
-    //  is pressed.
-    // -------------------------------------------
-
-    /**
-     * The object to use then the URL is pressed
-     * This handles the url's from "${buildpage}/violations/" except
-     * for any overridded by do methods in this class (in this
-     * instance doGraph).
-     * @return the violations report.
-     */
-    public Object getTarget() {
-        return getReport();
+    public MavenAggregatedReport createAggregatedAction(
+        MavenModuleSetBuild build,
+        Map<MavenModule, List<MavenBuild>> moduleBuilds) {
+        return new ViolationsMavenAggregatedBuildAction(build);
     }
-
-    /**
-     * The display name for the url to be displayed
-     * on the build page right hand side.
-     * @return the display name.
-     */
-    public String getDisplayName() {
-        return "Violations";
-    }
-
-    /**
-     * Get the icon to display.
-     * FIXME: MAY NEED TO SPECIFY ROOT DIR.
-     * @return the violations 24x24 icon.
-     */
-    public String getIconFileName() {
-        return MagicNames.ICON_24;
-    }
-
-    /**
-     * The url to get to the "target" object.
-     * @return the url
-     */
-    public String getUrlName() {
-        return MagicNames.VIOLATIONS;
-    }
-
-    /**
-     * Get the search url.
-     * @return the url.
-     */
-    public String getSearchUrl() {
-        return getUrlName();
-    }
-
-    // -------------------------------------------
-    //  These are the magic methods to tell hudson
-    //  the url, the object to go to when the url
-    //  is pressed.
-    // -------------------------------------------
 
 
     /**
-     * Get the report.
-     * @return the report.
+     * Set the report.
+     * Used in M2.
+     * @param report the report for this build.
      */
+    public void setReport(
+        ViolationsReport report) {
+        report.setBuild(getBuild());
+        this.report = report;
+    }
+
     public ViolationsReport getReport() {
-        report.setBuild(owner);
+        if (report != null) {
+            // FIXME: really need to find the real reason for need to set build.
+            report.setBuild(getBuild());
+        }
         return report;
     }
 
@@ -154,156 +124,10 @@ public class ViolationsBuildAction
      * get rhe previous valid build result.
      * @return the previous violations build action.
      */
+    /*
     public ViolationsBuildAction getPreviousResult() {
-        AbstractBuild<?, ?> b = owner;
-        AbstractBuild<?, ?> previous = b.getPreviousBuild();
-        return getViolationsAction(previous);
+        return (ViolationsBuildAction) super.getPreviousResult();
     }
+    */
 
-    /**
-     * Get the build report.
-     * @return the build report (null if not available).
-     */
-    @Override
-    public HealthReport getBuildHealth() {
-        return report.getBuildHealth();
-    }
-
-
-    /**
-     * This corresponds to the url ./graph.
-     * @param req the request parameters.
-     * @param rsp the response.
-     * @throws IOException if there is an error writing the graph
-     */
-    public void doGraph(StaplerRequest req, StaplerResponse rsp)
-        throws IOException {
-        String type = req.getParameter("type");
-
-        if (ChartUtil.awtProblem) {
-            // not available. send out error message
-            rsp.sendRedirect2(req.getContextPath() + "/images/headless.png");
-            return;
-        }
-        Calendar t = owner.getTimestamp();
-
-        if (!StringUtil.isBlank(type)) {
-            ChartUtil.generateGraph(
-                req, rsp, new SeverityTypeDataSet(
-                    getReport(), type).createChart(),
-                X_SIZE, Y_SIZE);
-            return;
-        }
-
-        DataSetBuilder<String, ChartUtil.NumberOnlyBuildLabel> dsb
-            = new DataSetBuilder<String, ChartUtil.NumberOnlyBuildLabel>();
-
-        for (ViolationsBuildAction a = this; a != null;
-             a = a.getPreviousResult()) {
-            ViolationsReport report = a.getReport();
-            report.setBuild(owner);
-            ChartUtil.NumberOnlyBuildLabel label
-                = new ChartUtil.NumberOnlyBuildLabel(a.owner);
-            for (String ty: report.getViolations().keySet()) {
-                /*
-                System.out.println(
-                    "adding type " + type + " number "
-                    + report.getViolations().get(type)
-                    + " for build " + a.owner.getNumber());
-                */
-                dsb.add(roundUp(report.getViolations().get(ty)),
-                        ty, label);
-            }
-        }
-        ChartUtil.generateGraph(
-            req, rsp, createChart(dsb.build()), X_SIZE, Y_SIZE);
-    }
-
-    private double roundUp(int val) {
-        if (!useLog) {
-            return 1.0 * val;
-        }
-        if (val < 1) {
-            return LOG_VALUE_FOR_ZERO;
-        } else {
-            return 1.0 * val;
-        }
-    }
-
-    /**
-     * Get the violations build action from a build.
-     * @param start the build to start looking in.
-     * @return the action if found, null otherwise.
-     */
-    public static ViolationsBuildAction getViolationsAction(AbstractBuild<?, ?> start) {
-        AbstractBuild<?, ?> b = start;
-        while (b != null) {
-            if (b.getResult() == Result.FAILURE) {
-                b = b.getPreviousBuild();
-                continue;
-            }
-            ViolationsBuildAction r = b.getAction(ViolationsBuildAction.class);
-            if (r != null) {
-                return r;
-            }
-            b = b.getPreviousBuild();
-        }
-        return null;
-    }
-
-    // FIXME this should be in a utility class
-    private JFreeChart createChart(CategoryDataset dataset) {
-
-        final JFreeChart chart = ChartFactory.createLineChart(
-                null,                   // chart title
-                null,                   // unused
-                "count",                    // range axis label
-                dataset,                  // data
-                PlotOrientation.VERTICAL, // orientation
-                true,                     // include legend
-                true,                     // tooltips
-                false                     // urls
-        );
-
-        // NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
-
-        final LegendTitle legend = chart.getLegend();
-        legend.setPosition(RectangleEdge.RIGHT);
-
-        chart.setBackgroundPaint(Color.white);
-
-        final CategoryPlot plot = chart.getCategoryPlot();
-
-        if (useLog) {
-            final NumberAxis rangeAxis2 = new LogarithmicAxis("Log(y)");
-            plot.setRangeAxis(rangeAxis2);
-        }
-        // plot.setAxisOffset(new Spacer(Spacer.ABSOLUTE, 5.0, 5.0, 5.0, 5.0));
-        plot.setBackgroundPaint(Color.WHITE);
-        plot.setOutlinePaint(null);
-        plot.setRangeGridlinesVisible(true);
-        plot.setRangeGridlinePaint(Color.black);
-
-        CategoryAxis domainAxis = new ShiftedCategoryAxis(null);
-        plot.setDomainAxis(domainAxis);
-        domainAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_90);
-        domainAxis.setLowerMargin(0.0);
-        domainAxis.setUpperMargin(0.0);
-        domainAxis.setCategoryMargin(0.0);
-
-        final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
-        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-        //rangeAxis.setUpperBound(100);
-        rangeAxis.setLowerBound(0);
-
-        final LineAndShapeRenderer renderer
-            = (LineAndShapeRenderer) plot.getRenderer();
-        renderer.setStroke(new BasicStroke(2.0f));
-        ColorPalette.apply(renderer);
-
-        // crop extra space around the graph
-        plot.setInsets(new RectangleInsets(PADDING, 0, 0, PADDING));
-
-        return chart;
-    }
 }

@@ -41,6 +41,7 @@ public abstract class MavenReporterDescriptor extends Descriptor<MavenReporter> 
      * If {@link #hasConfigScreen() the reporter has no configuration screen},
      * this method can safely return null, which is the default implementation.
      */
+    @Deprecated
     public MavenReporter newInstance(StaplerRequest req) throws FormException {
         return null;
     }

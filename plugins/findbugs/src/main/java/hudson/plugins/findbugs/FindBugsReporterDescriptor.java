@@ -1,9 +1,12 @@
 package hudson.plugins.findbugs;
 
 import hudson.maven.MavenReporter;
-import hudson.maven.MavenReporterDescriptor;
+import hudson.plugins.findbugs.util.PluginDescriptor;
+import hudson.plugins.findbugs.util.ReporterDescriptor;
+import net.sf.json.JSONObject;
 
 import org.kohsuke.stapler.StaplerRequest;
+
 
 /**
  * Descriptor for the class {@link FindBugsReporter}. Used as a singleton. The
@@ -11,36 +14,20 @@ import org.kohsuke.stapler.StaplerRequest;
  *
  * @author Ulli Hafner
  */
-public class FindBugsReporterDescriptor extends MavenReporterDescriptor {
+public class FindBugsReporterDescriptor extends ReporterDescriptor {
     /**
      * Creates a new instance of <code>FindBugsReporterDescriptor</code>.
+     *
+     * @param pluginDescriptor
+     *            the plug-in descriptor of the publisher
      */
-    public FindBugsReporterDescriptor() {
-        super(FindBugsReporter.class);
+    public FindBugsReporterDescriptor(final PluginDescriptor pluginDescriptor) {
+        super(FindBugsReporter.class, pluginDescriptor);
     }
 
     /** {@inheritDoc} */
     @Override
-    public String getDisplayName() {
-        return Messages.FindBugs_Publisher_Name();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String getConfigPage() {
-        return getViewPage(FindBugsPublisher.class, "config.jelly");
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String getHelpFile() {
-        return "/plugin/" + FindBugsDescriptor.PLUGIN_NAME + "/help.html";
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public MavenReporter newInstance(final StaplerRequest request) throws FormException {
-        return request.bindParameters(FindBugsReporter.class, FindBugsDescriptor.PLUGIN_NAME + "_");
+    public MavenReporter newInstance(final StaplerRequest request, final JSONObject formData) throws FormException {
+        return request.bindParameters(FindBugsReporter.class, getPublisherDescriptor().getPluginName() + ".");
     }
 }
-

@@ -215,19 +215,21 @@ public final class FilePath implements Serializable {
             }
 
             private void scan(File f, ZipOutputStream zip, String path) throws IOException {
-                if(f.isDirectory()) {
-                    zip.putNextEntry(new ZipEntry(path+f.getName()+'/'));
-                    zip.closeEntry();
-                    for( File child : f.listFiles() )
-                        scan(child,zip,path+f.getName()+'/');
-                } else {
-                    zip.putNextEntry(new ZipEntry(path+f.getName()));
-                    FileInputStream in = new FileInputStream(f);
-                    int len;
-                    while((len=in.read(buf))>0)
-                        zip.write(buf,0,len);
-                    in.close();
-                    zip.closeEntry();
+                if (f.canRead()) {
+                    if(f.isDirectory()) {
+                        zip.putNextEntry(new ZipEntry(path+f.getName()+'/'));
+                        zip.closeEntry();
+                        for( File child : f.listFiles() )
+                            scan(child,zip,path+f.getName()+'/');
+                    } else {
+                        zip.putNextEntry(new ZipEntry(path+f.getName()));
+                        FileInputStream in = new FileInputStream(f);
+                        int len;
+                        while((len=in.read(buf))>0)
+                            zip.write(buf,0,len);
+                        in.close();
+                        zip.closeEntry();
+                    }
                 }
             }
             
@@ -258,13 +260,16 @@ public final class FilePath implements Serializable {
                 ZipOutputStream zip = new ZipOutputStream(out);
                 zip.setEncoding(System.getProperty("file.encoding"));
                 for( String entry : glob(dir,glob) ) {
-                    zip.putNextEntry(new ZipEntry(dir.getName()+'/'+entry));
-                    FileInputStream in = new FileInputStream(new File(dir,entry));
-                    int len;
-                    while((len=in.read(buf))>0)
-                        zip.write(buf,0,len);
-                    in.close();
-                    zip.closeEntry();
+                    File file = new File(dir,entry);
+                    if (file.canRead()) {
+                        zip.putNextEntry(new ZipEntry(dir.getName()+'/'+entry));
+                        FileInputStream in = new FileInputStream(file);
+                        int len;
+                        while((len=in.read(buf))>0)
+                            zip.write(buf,0,len);
+                        in.close();
+                        zip.closeEntry();
+                    }
                 }
 
                 zip.close();
@@ -357,9 +362,19 @@ public final class FilePath implements Serializable {
      * Creates this directory.
      */
     public void mkdirs() throws IOException, InterruptedException {
-        if(act(new FileCallable<Boolean>() {
+        if(!act(new FileCallable<Boolean>() {
             public Boolean invoke(File f, VirtualChannel channel) throws IOException {
-                return !f.mkdirs() && !f.exists();
+                if(f.mkdirs() || f.exists())
+                    return true;    // OK
+
+                // following Ant <mkdir> task to avoid possible race condition.
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    // ignore
+                }
+
+                return f.mkdirs() || f.exists();
             }
         }))
             throw new IOException("Failed to mkdirs: "+remote);
@@ -682,6 +697,22 @@ public final class FilePath implements Serializable {
         return act(new FileCallable<String>() {
             public String invoke(File f, VirtualChannel channel) throws IOException {
                 return Util.getDigestOf(new FileInputStream(f));
+            }
+        });
+    }
+
+    /**
+     * Rename this file/directory to the target filepath.  This FilePath and the target must
+     * be on the some host
+     */
+    public void renameTo(final FilePath target) throws IOException, InterruptedException {
+    	if(this.channel != target.channel) {
+    		throw new IOException("renameTo target must be on the same host");
+    	}
+        act(new FileCallable<Void>() {
+            public Void invoke(File f, VirtualChannel channel) throws IOException {
+            	f.renameTo(new File(target.remote));
+                return null;
             }
         });
     }

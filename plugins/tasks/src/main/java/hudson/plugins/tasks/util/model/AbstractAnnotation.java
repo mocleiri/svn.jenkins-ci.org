@@ -1,6 +1,5 @@
 package hudson.plugins.tasks.util.model;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,6 +10,8 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  *  A base class for annotations.
+ *
+ * @author Ulli Hafner
  */
 @SuppressWarnings("PMD.CyclomaticComplexity")
 public abstract class AbstractAnnotation implements FileAnnotation, Serializable {
@@ -50,7 +51,7 @@ public abstract class AbstractAnnotation implements FileAnnotation, Serializable
      */
     public AbstractAnnotation(final Priority priority, final String message, final int start, final int end) {
         this.priority = priority;
-        this.message = message;
+        this.message = StringUtils.strip(message);
 
         key = currentKey++;
 
@@ -85,7 +86,7 @@ public abstract class AbstractAnnotation implements FileAnnotation, Serializable
      * @param fileName the value to set
      */
     public final void setFileName(final String fileName) {
-        this.fileName = fileName.replace('\\', '/');
+        this.fileName = StringUtils.strip(fileName).replace('\\', '/');
     }
 
     /** {@inheritDoc} */

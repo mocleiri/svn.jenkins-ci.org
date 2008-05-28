@@ -24,6 +24,8 @@ import edu.umd.cs.findbugs.annotations.SuppressWarnings;
  * @author Ulli Hafner
  */
 public abstract class AbstractProjectAction<T extends ResultAction<?>> implements Action  {
+    /** Unique identifier of this class. */
+    private static final long serialVersionUID = -8775531952208541253L;
     /** One year (in seconds). */
     private static final int ONE_YEAR = 60 * 60 * 24 * 365;
     /** Project that owns this action. */
@@ -33,8 +35,12 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
     private final Class<T> resultActionType;
     /** The icon URL of this action: it will be shown as soon as a result is available. */
     private final String iconUrl;
-    /** URL to the results of the last build. */
-    private final String resultsUrl;
+    /** Plug-in URL. */
+    private final String url;
+    /** Plug-in results URL. */
+    private final String resultUrl;
+    /** Determines the height of the trend graph. */
+    private final int height;
 
     /**
      * Creates a new instance of <code>AbstractProjectAction</code>.
@@ -43,17 +49,18 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
      *            the project that owns this action
      * @param resultActionType
      *            the type of the result action
-     * @param iconUrl
-     *            the icon URL of this action: it will be shown as soon as a
-     *            result is available.
-     * @param pluginName
-     *            the plug-in name
+     * @param plugin
+     *            the plug-in that owns this action
+     * @param height
+     *            the height of the trend graph
      */
-    public AbstractProjectAction(final AbstractProject<?, ?> project, final Class<T> resultActionType, final String iconUrl, final String pluginName) {
+    public AbstractProjectAction(final AbstractProject<?, ?> project, final Class<T> resultActionType, final PluginDescriptor plugin, final int height) {
         this.project = project;
         this.resultActionType = resultActionType;
-        this.iconUrl = iconUrl;
-        this.resultsUrl = pluginName + "Result";
+        this.height = height;
+        iconUrl = plugin.getIconUrl();
+        url = plugin.getPluginName();
+        resultUrl = plugin.getPluginResultUrlName();
     }
 
     /**
@@ -83,12 +90,11 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
      * Returns whether we have enough valid results in order to draw a
      * meaningful graph.
      *
-     * @param build
-     *            the build to look backward from
      * @return <code>true</code> if the results are valid in order to draw a
      *         graph
      */
-    public final boolean hasValidResults(final AbstractBuild<?, ?> build) {
+    public final boolean hasValidResults() {
+        AbstractBuild<?, ?> build = getLastFinishedBuild();
         if (build != null) {
             ResultAction<?> resultAction = build.getAction(resultActionType);
             if (resultAction != null) {
@@ -109,6 +115,11 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
             return iconUrl;
         }
         return null;
+    }
+
+    /** {@inheritDoc} */
+    public final String getUrlName() {
+        return url;
     }
 
     /**
@@ -134,7 +145,7 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
      *            Stapler response
      * @throws IOException
      *             in case of an error in
-     *             {@link ResultAction#doGraph(StaplerRequest, StaplerResponse)}
+     *             {@link ResultAction#doGraph(StaplerRequest, StaplerResponse, int)}
      */
     public void doTrend(final StaplerRequest request, final StaplerResponse response) throws IOException {
         createGraph(request, response);
@@ -149,7 +160,7 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
      *            Stapler response
      * @throws IOException
      *             in case of an error in
-     *             {@link ResultAction#doGraph(StaplerRequest, StaplerResponse)}
+     *             {@link ResultAction#doGraph(StaplerRequest, StaplerResponse, int)}
      */
     private void createGraph(final StaplerRequest request, final StaplerResponse response)
             throws IOException {
@@ -158,9 +169,16 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
         else {
-            action.doGraph(request, response);
+            action.doGraph(request, response, height);
         }
     }
+
+    /**
+     * Returns the title of the trend graph.
+     *
+     * @return the title of the trend graph.
+     */
+    public abstract String getTrendName();
 
     /**
      * Display the trend map. Delegates to the the associated
@@ -179,7 +197,7 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
         else {
-            action.doGraphMap(request, response);
+            action.doGraphMap(request, response, height);
         }
     }
 
@@ -197,7 +215,7 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
     public void doIndex(final StaplerRequest request, final StaplerResponse response) throws IOException {
         AbstractBuild<?, ?> build = getLastFinishedBuild();
         if (build != null) {
-            response.sendRedirect2("../" + build.getNumber() + "/" + resultsUrl);
+            response.sendRedirect2(String.format("../%d/%s", build.getNumber(), resultUrl));
         }
     }
 
@@ -207,9 +225,9 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
      * @return the last finished build or <code>null</code> if there is no
      *         such build
      */
-    private AbstractBuild<?, ?> getLastFinishedBuild() {
+    public AbstractBuild<?, ?> getLastFinishedBuild() {
         AbstractBuild<?, ?> lastBuild = project.getLastBuild();
-        while (lastBuild != null && lastBuild.isBuilding()) {
+        while (lastBuild != null && (lastBuild.isBuilding() || lastBuild.getAction(resultActionType) == null)) {
             lastBuild = lastBuild.getPreviousBuild();
         }
         return lastBuild;
@@ -226,7 +244,7 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
      *             in case of an error
      */
     public void doFlipTrend(final StaplerRequest request, final StaplerResponse response) throws IOException {
-        boolean useHealthBuilder = true;
+        boolean useHealthBuilder = false;
 
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -254,5 +272,5 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
      *
      * @return the flip trend cookie name.
      */
-    protected abstract String getCookieName();
+    public abstract String getCookieName();
 }

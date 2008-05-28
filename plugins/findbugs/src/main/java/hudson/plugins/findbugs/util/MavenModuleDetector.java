@@ -12,16 +12,12 @@ import org.xml.sax.SAXException;
 
 /**
  * Detects maven module names by parsing the name of a source file.
+ *
+ * @author Ulli Hafner
  */
 public final class MavenModuleDetector {
     /** The factory to create input streams with. */
-    @edu.umd.cs.findbugs.annotations.SuppressWarnings("SIC")
-    private FileInputStreamFactory factory = new FileInputStreamFactory() {
-        /** {@inheritDoc} */
-        public InputStream create(String fileName) throws FileNotFoundException {
-            return new FileInputStream(new File(fileName));
-        }
-    };
+    private FileInputStreamFactory factory = new DefaultFileInputStreamFactory();
 
     /**
      * Sets the factory to the specified value.
@@ -109,6 +105,16 @@ public final class MavenModuleDetector {
             // ignore
         }
         return StringUtils.EMPTY;
+    }
+
+    /**
+     * A input stream factory based on a {@link FileInputStream}.
+     */
+    private static final class DefaultFileInputStreamFactory implements FileInputStreamFactory {
+        /** {@inheritDoc} */
+        public InputStream create(final String fileName) throws FileNotFoundException {
+            return new FileInputStream(new File(fileName));
+        }
     }
 }
 

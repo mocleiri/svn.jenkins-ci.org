@@ -4,6 +4,8 @@ package hudson.plugins.pmd;
 /**
  * Represents the result summary of the PMD parser. This summary will be
  * shown in the summary.jelly script of the PMD result action.
+ *
+ * @author Ulli Hafner
  */
 public final class ResultSummary {
     /**
@@ -31,11 +33,11 @@ public final class ResultSummary {
             summary.append("</a>");
         }
         summary.append(" ");
-        if (result.getNumberOfModules() > 1) {
-            summary.append(Messages.PMD_ResultAction_MultipleFiles(result.getNumberOfModules()));
+        if (result.getNumberOfModules() == 1) {
+            summary.append(Messages.PMD_ResultAction_OneFile());
         }
         else {
-            summary.append(Messages.PMD_ResultAction_OneFile());
+            summary.append(Messages.PMD_ResultAction_MultipleFiles(result.getNumberOfModules()));
         }
         return summary.toString();
     }

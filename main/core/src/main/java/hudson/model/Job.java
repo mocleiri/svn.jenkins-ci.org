@@ -89,9 +89,9 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
      * In 1.28 and earlier, this field was stored in the project configuration file,
      * so even though this is marked as transient, don't move it around.
      */
-    protected transient int nextBuildNumber = 1;
+    protected transient volatile int nextBuildNumber = 1;
 
-    private LogRotator logRotator;
+    private volatile LogRotator logRotator;
     
     /**
      * Not all plugins are good at calculating their health report quickly.
@@ -141,6 +141,19 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
     public void onCopiedFrom(Item src) {
         super.onCopiedFrom(src);
         this.nextBuildNumber = 1;     // reset the next build number
+    }
+
+    protected void performDelete() throws IOException {
+        // if a build is in progress. Cancel it.
+        RunT lb = getLastBuild();
+        if(lb!=null) {
+            Executor e = lb.getExecutor();
+            if(e!=null) {
+                e.interrupt();
+                // should we block until the build is cancelled?
+            }
+        }
+        super.performDelete();
     }
 
     private TextFile getNextBuildNumberFile() {
@@ -359,7 +372,9 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
                 doSetName(newName);
                 File newRoot = this.getRootDir();
 
-                {// rename data files
+                boolean success = false;
+
+                try {// rename data files
                     boolean interrupted=false;
                     boolean renamed = false;
 
@@ -406,6 +421,12 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
                             e.printStackTrace();
                         }
                     }
+
+                    success = true;
+                } finally {
+                    // if failed, back out the rename.
+                    if(!success)
+                        doSetName(oldName);
                 }
 
                 parent.onRenamed((TopLevelItem)this,oldName,newName);
@@ -588,6 +609,17 @@ public abstract class Job<JobT extends Job<JobT,RunT>, RunT extends Run<JobT,Run
         while(r!=null && (r.isBuilding() || r.getResult()!=Result.FAILURE))
             r=r.getPreviousBuild();
         return r;
+    }
+    
+    /**
+     * Returns the last completed build, if any. Otherwise null.
+     */
+    @Exported @QuickSilver
+    public RunT getLastCompletedBuild() {
+       RunT r = getLastBuild();
+       while(r!=null && r.isBuilding())
+           r=r.getPreviousBuild();
+       return r;
     }
 
     /**

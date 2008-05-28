@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Iterator;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,12 +29,15 @@ import hudson.plugins.violations.model.FileModel;
 import hudson.plugins.violations.util.RecurDynamic;
 import hudson.plugins.violations.util.HelpHudson;
 
+import hudson.plugins.violations.hudson.AbstractViolationsBuildAction;
+
 
 /**
  * This contains the report for the violations
  * of a particular build.
  */
-public class ViolationsReport implements Serializable {
+public class ViolationsReport
+    implements Serializable {
     private static final Logger LOG
         = Logger.getLogger(ViolationsReport.class.getName());
 
@@ -188,7 +193,11 @@ public class ViolationsReport implements Serializable {
      */
     public Object getDynamic(
         String token, StaplerRequest req, StaplerResponse rsp) {
+        System.out.println("LOOKING for " + req.getRestOfPath());
         String name =  req.getRestOfPath();
+        if (name.equals("")) {
+            return null;
+        }
         if (name.startsWith("/")) {
             name = name.substring(1);
         }
@@ -246,6 +255,8 @@ public class ViolationsReport implements Serializable {
      * Note that for some reason, yet unknown, hudson seems
      * to pick an in memory ViolationsReport object and
      * not the report for the build.
+     * (Reason may be related to the fact that serialized builds may not be
+     * the same as in-memory builds).
      * Need to find the correct build from the URI.
      * @param req the request paramters
      * @param rsp the response.
@@ -261,13 +272,47 @@ public class ViolationsReport implements Serializable {
                 tBuild = build;
             }
         }
-        ViolationsBuildAction r = tBuild.getAction(ViolationsBuildAction.class);
+        
+        AbstractViolationsBuildAction r
+            = tBuild.getAction(AbstractViolationsBuildAction.class);
         if (r == null) {
             return;
         }
         r.doGraph(req, rsp);
     }
 
+    /**
+     * Get the string number for a particular type.
+     * @param t the type
+     * @return the string - a number for a value type,
+     *         "" for not found and "No reports" for
+     *         < 0.
+     */
+    public String getNumberString(String t) {
+        Integer v = violations.get(t);
+        if (v == null) {
+            return "";
+        }
+        if (v < 0) {
+            return "<span style='color:red'>No reports</span>";
+        }
+        return "" + v;
+    }
+
+    /**
+     * Get the icon for a type.
+     * @param t the type
+     * @return the icon name.
+     */
+    public String getIcon(String t) {
+        Integer v = violations.get(t);
+        HealthReport h = getHealthReportFor(t);
+        if (h == null) {
+            return null;
+        }
+        return h.getIconUrl();
+    }
+    
     /**
      * Report class for a particular type.
      */
@@ -331,26 +376,7 @@ public class ViolationsReport implements Serializable {
      * @return the previous report if present, null otherwise.
      */
     public ViolationsReport previous() {
-        AbstractBuild<?, ?> b = build;
-        AbstractBuild<?, ?> curr = b.getPreviousBuild();
-        while (curr != null) {
-            int number = curr.getNumber();
-            if (curr.getResult() == Result.FAILURE) {
-                curr = curr.getPreviousBuild();
-                continue;
-            }
-            ViolationsBuildAction r = curr.getAction(
-                ViolationsBuildAction.class);
-            if (r != null) {
-                if (r.getReport().build.getNumber() != number) {
-                    System.out.println("SOMETHING is wrong!!");
-                    return null;
-                }
-                return r.getReport();
-            }
-            curr = curr.getPreviousBuild();
-        }
-        return null;
+        return findViolationsReport(build.getPreviousBuild());
     }
 
     /**
@@ -359,6 +385,9 @@ public class ViolationsReport implements Serializable {
      * @return the number of violations.
      */
     public int typeCount(String type) {
+        if (getModel() == null) {
+            return 0;
+        }
         return getModel().getTypeCountMap().get(type).getCount();
     }
 
@@ -368,6 +397,9 @@ public class ViolationsReport implements Serializable {
      * @return the number of files.
      */
     public int fileCount(String type) {
+        if (getModel() == null) {
+            return 0;
+        }
         return getModel().getTypeCountMap().get(type).getNumberFiles();
     }
 
@@ -393,5 +425,102 @@ public class ViolationsReport implements Serializable {
         return limit.getNumber();
     }
 
+    /**
+     * Get the unstable status for this report.
+     * @return true if one of the violations equals or exceed the
+     *         unstable threshold for that violations type.
+     */
+    private boolean isUnstable() {
+         for (String t: violations.keySet()) {
+            int count = violations.get(t);
+            if (count >= config.getTypeConfigs().get(t).getUnstable()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Get the failed status for this report.
+     * @return true if one of the violations equals or exceed the
+     *         failed threshold of that violations type.
+     */
+    private boolean isFailed() {
+         for (String t: violations.keySet()) {
+            int count = violations.get(t);
+            Integer failCount = config.getTypeConfigs().get(t).getFail();
+            if (failCount == null) {
+                continue;
+            }
+            if (count >= failCount) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Set the unstable/failed status of a build based
+     * on this violations report.
+     */
+    public void setBuildResult() {
+        if (isFailed()) {
+            build.setResult(Result.FAILURE);
+            return;
+        }
+        if (isUnstable()) {
+            build.setResult(Result.UNSTABLE);
+        }
+    }
+    
     private static final long serialVersionUID = 1L;
+
+    public static ViolationsReport findViolationsReport(
+        AbstractBuild<?, ?> b) {
+        for (; b != null; b = b.getPreviousBuild()) {
+            if (b.getResult().isWorseOrEqualTo(Result.FAILURE)) {
+                continue;
+            }
+            AbstractViolationsBuildAction action
+                = b.getAction(AbstractViolationsBuildAction.class);
+            if (action == null || action.getReport() == null) {
+                continue;
+            }
+            ViolationsReport ret = action.getReport();
+            ret.setBuild(b);
+            return ret;
+        }
+        return null;
+    }
+
+    public static ViolationsReportIterator iteration(
+        AbstractBuild<?, ?> build) {
+        return new ViolationsReportIterator(build);
+    }
+
+    public static class ViolationsReportIterator
+        implements Iterator<ViolationsReport>, Iterable<ViolationsReport> {
+        private AbstractBuild<?, ?> curr;
+        public ViolationsReportIterator(AbstractBuild<?, ?> curr) {
+            this.curr = curr;
+        }
+        @Override
+        public Iterator<ViolationsReport> iterator() {
+            return this;
+        }
+
+        public boolean hasNext() {
+            return findViolationsReport(curr) != null;
+        }
+        public ViolationsReport next() {
+            ViolationsReport ret = findViolationsReport(curr);
+            if (ret != null) {
+                curr = ret.getBuild().getPreviousBuild();
+            }
+            return ret;
+        }
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    }
 }

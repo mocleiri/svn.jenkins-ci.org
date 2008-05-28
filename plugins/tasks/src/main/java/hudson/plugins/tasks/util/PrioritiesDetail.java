@@ -1,16 +1,16 @@
 package hudson.plugins.tasks.util;
 
 import hudson.model.AbstractBuild;
+import hudson.model.ModelObject;
 import hudson.plugins.tasks.util.model.FileAnnotation;
 import hudson.plugins.tasks.util.model.Priority;
 
 import java.util.Collection;
 
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-
 /**
  * Result object to visualize the priorities statistics of an annotation container.
+ *
+ * @author Ulli Hafner
  */
 public class PrioritiesDetail extends AbstractAnnotationsDetail {
     /** Unique identifier of this class. */
@@ -50,17 +50,16 @@ public class PrioritiesDetail extends AbstractAnnotationsDetail {
     }
 
     /**
-     * Returns the dynamic result of the FindBugs analysis (detail page for a package).
+     * Returns the dynamic result of the FindBugs analysis (detail page for a
+     * package).
      *
-     * @param link the package name to get the result for
-     * @param request
-     *            Stapler request
-     * @param response
-     *            Stapler response
-     * @return the dynamic result of the FindBugs analysis (detail page for a package).
+     * @param link
+     *            the package name to get the result for
+     * @return the dynamic result of the FindBugs analysis (detail page for a
+     *         package).
      */
     @Override
-    public Object getDynamic(final String link, final StaplerRequest request, final StaplerResponse response) {
+    public ModelObject getDynamic(final String link) {
         return new SourceDetail(getOwner(), getAnnotation(link));
     }
 }

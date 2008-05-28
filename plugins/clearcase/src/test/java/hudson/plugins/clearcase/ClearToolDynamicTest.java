@@ -23,8 +23,8 @@ public class ClearToolDynamicTest extends AbstractWorkspaceTest {
         createWorkspace();
         context = new Mockery();
 
-        clearToolExec = new ClearToolDynamic("commandname", "/cc/drives");
         launcher = context.mock(ClearToolLauncher.class);
+        clearToolExec = new ClearToolDynamic(launcher, "commandname", "/cc/drives");
     }
 
     @After
@@ -46,21 +46,21 @@ public class ClearToolDynamicTest extends AbstractWorkspaceTest {
             }
         });
 
-        clearToolExec.setcs(launcher, "viewName", "configspec");
+        clearToolExec.setcs("viewName", "configspec");
         context.assertIsSatisfied();
     }
 
     @Test
-    public void testSetview() throws Exception {
+    public void testStartview() throws Exception {
         context.checking(new Expectations() {
             {
                 one(launcher).run(
-                        with(allOf(hasItemInArray("commandname"), hasItemInArray("setview"), hasItemInArray("viewName"))), 
+                        with(allOf(hasItemInArray("commandname"), hasItemInArray("startview"), hasItemInArray("viewName"))), 
                         with(aNull(InputStream.class)), with(aNull(OutputStream.class)), with(aNull(FilePath.class)));
             }
         });
 
-        clearToolExec.setView(launcher, "viewName");
+        clearToolExec.startView("viewName");
         context.assertIsSatisfied();
     }
 }

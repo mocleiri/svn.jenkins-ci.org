@@ -3,6 +3,7 @@ package hudson.plugins.clearcase;
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -33,9 +34,9 @@ public class ClearToolSnapshotTest extends AbstractWorkspaceTest {
         createWorkspace();
         context = new Mockery();
 
-        clearToolExec = new ClearToolSnapshot("commandname");
         launcher = context.mock(ClearToolLauncher.class);
         listener = context.mock(TaskListener.class);
+        clearToolExec = new ClearToolSnapshot(launcher, "commandname");
     }
 
     @After
@@ -55,7 +56,7 @@ public class ClearToolSnapshotTest extends AbstractWorkspaceTest {
             }
         });
 
-        clearToolExec.setcs(launcher, "viewName", "configspec");
+        clearToolExec.setcs("viewName", "configspec");
         context.assertIsSatisfied();
     }
 
@@ -71,7 +72,7 @@ public class ClearToolSnapshotTest extends AbstractWorkspaceTest {
             }
         });
 
-        clearToolExec.rmview(launcher, "viewName");
+        clearToolExec.rmview("viewName");
         context.assertIsSatisfied();
     }
 
@@ -93,7 +94,7 @@ public class ClearToolSnapshotTest extends AbstractWorkspaceTest {
             }
         });
 
-        clearToolExec.rmview(launcher, "viewName");
+        clearToolExec.rmview("viewName");
         assertFalse("View folder still exists", workspace.child("viewName").exists());
         context.assertIsSatisfied();
     }
@@ -109,7 +110,23 @@ public class ClearToolSnapshotTest extends AbstractWorkspaceTest {
             }
         });
 
-        clearToolExec.update(launcher, "viewName");
+        clearToolExec.update("viewName", null);
+        context.assertIsSatisfied();
+    }
+
+    @Test
+    public void testUpdateWithLoadRules() throws Exception {
+
+        context.checking(new Expectations() {
+            {
+                one(launcher).run(
+                        with(equal(new String[] { "commandname", "update", "-force", "-log", "NUL", "-add_loadrules", "viewName" + File.separator + "more_load_rules" })),
+                        with(aNull(InputStream.class)), with(aNull(OutputStream.class)), with(aNull(FilePath.class)));
+                will(returnValue(Boolean.TRUE));
+            }
+        });
+
+        clearToolExec.update("viewName", "more_load_rules");
         context.assertIsSatisfied();
     }
 
@@ -125,7 +142,23 @@ public class ClearToolSnapshotTest extends AbstractWorkspaceTest {
             }
         });
 
-        clearToolExec.mkview(launcher, "viewName");
+        clearToolExec.mkview("viewName", null);
+        context.assertIsSatisfied();
+    }
+
+    @Test
+    public void testCreateViewWithStream() throws Exception {
+        context.checking(new Expectations() {
+            {
+                one(launcher).run(
+                        with(equal(new String[] { "commandname", "mkview", "-snapshot", "-stream", "streamSelector", 
+                                "-tag", "viewName", "viewName" })), with(aNull(InputStream.class)),
+                        with(aNull(OutputStream.class)), with(aNull(FilePath.class)));
+                will(returnValue(Boolean.TRUE));
+            }
+        });
+
+        clearToolExec.mkview("viewName", "streamSelector");
         context.assertIsSatisfied();
     }
 
@@ -141,8 +174,25 @@ public class ClearToolSnapshotTest extends AbstractWorkspaceTest {
             }
         });
 
-        clearToolExec = new ClearToolSnapshot("commandname", "-anextraparam -anotherparam");
-        clearToolExec.mkview(launcher, "viewName");
+        clearToolExec = new ClearToolSnapshot(launcher, "commandname", "-anextraparam -anotherparam");
+        clearToolExec.mkview("viewName", null);
+        context.assertIsSatisfied();
+    }
+
+    @Test
+    public void testCreateUcmViewWithOptionalParams() throws Exception {
+        context.checking(new Expectations() {
+            {
+                one(launcher).run(
+                        with(equal(new String[] { "commandname", "mkview", "-snapshot", "-stream", "streamSelector", 
+                                "-tag", "viewName", "-anextraparam", "-anotherparam", "viewName" })), with(aNull(InputStream.class)),
+                        with(aNull(OutputStream.class)), with(aNull(FilePath.class)));
+                will(returnValue(Boolean.TRUE));
+            }
+        });
+
+        clearToolExec = new ClearToolSnapshot(launcher, "commandname", "-anextraparam -anotherparam");
+        clearToolExec.mkview("viewName", "streamSelector");
         context.assertIsSatisfied();
     }
 }

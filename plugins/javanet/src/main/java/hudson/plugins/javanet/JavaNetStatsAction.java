@@ -18,6 +18,8 @@ import java.util.regex.Pattern;
 import java.net.URL;
 
 /**
+ * UI for java.net stats. Added to the project.
+ *
  * @author Kohsuke Kawaguchi
  */
 public class JavaNetStatsAction implements Action {
@@ -68,7 +70,8 @@ public class JavaNetStatsAction implements Action {
      */
     public void upToDateCheck() {
         File indexHtml = new File(reportDir,"index.html");
-        if(!indexHtml.exists() || (System.currentTimeMillis()-indexHtml.lastModified()>7*DAY)) {
+        long diff = System.currentTimeMillis() - indexHtml.lastModified();
+        if(!indexHtml.exists() || (diff >7*DAY)) {
             scheduleGeneration();
         }
     }
@@ -106,6 +109,14 @@ public class JavaNetStatsAction implements Action {
         reportDir = getReportDirectory();
         FileUtils.writeStringToFile(getOverrideFile(),projectName,"UTF-8");
 
+        rsp.sendRedirect2(".");
+    }
+
+    /**
+     * Manually trigger the regeneration.
+     */
+    public void doRegenerate(StaplerResponse rsp) throws IOException, ServletException {
+        scheduleGeneration();
         rsp.sendRedirect2(".");
     }
 

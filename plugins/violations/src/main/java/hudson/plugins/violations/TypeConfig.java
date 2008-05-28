@@ -13,11 +13,21 @@ public class TypeConfig implements Cloneable, Serializable {
     public static final int DEFAULT_MIN = 10;
     /** Default max */
     public static final int DEFAULT_MAX = 999;
+    /** Default unstable */
+    public static final int DEFAULT_UNSTABLE = 999;
+    /** UNSTABLE BLANK */
+    public static final int UNSTABLE_BLANK = -4646;
+
+    /** Default fail */
+    public static final int DEFAULT_FAIL = 99999;
 
     private final String type;  // The type of this violation
 
     private int min = DEFAULT_MIN;  // Sunny report
     private int max = DEFAULT_MAX;  // Stormy report
+    private Integer unstable = DEFAULT_UNSTABLE; // unstable 
+    private Integer fail = null;
+    private boolean usePattern = false; // for maven2
 
     private String pattern = null; // File name pattern
 
@@ -76,6 +86,57 @@ public class TypeConfig implements Cloneable, Serializable {
     public void setMin(int min) {
         this.min = min;
     }
+ 
+   /**
+     * Get the unstable value
+     * @return the unstable value
+     */
+    public Integer getUnstable() {
+        if (unstable == null) { // OLD CONFIG
+            unstable = DEFAULT_UNSTABLE;
+        }
+        if (unstable == UNSTABLE_BLANK) {
+            return null;
+        }
+        return unstable;
+    }
+
+    /**
+     * Set the unstable value.
+     * @param unstable the value to use.
+     */
+    public void setUnstable(Integer unstable) {
+        if (unstable <= 0) {
+            unstable = UNSTABLE_BLANK;
+        }
+        this.unstable = unstable;
+    }
+ 
+
+    /**
+     * Set the fail value.
+     * @param fail the value to use.
+     */
+    public void setFail(Integer fail) {
+        if (fail == null || fail <= 0) {
+            this.fail = null;
+        } else {
+            this.fail = fail;
+        }
+    }
+
+    /**
+     * Get the fail value
+     * @return the fail value
+     */
+    public Integer getFail() {
+        /*
+        if (fail == null) { // OLD CONFIG
+            fail = DEFAULT_FAIL;
+        }
+        */
+        return fail;
+    }
 
     /**
      * Get the fileset pattern.
@@ -91,6 +152,22 @@ public class TypeConfig implements Cloneable, Serializable {
      */
     public void setPattern(String pattern) {
         this.pattern = pattern;
+    }
+
+    /**
+     * Set the usePattern value
+     * @param usePattern the value to use.
+     */
+    public void setUsePattern(boolean usePattern) {
+        this.usePattern = usePattern;
+    }
+
+    /**
+     * Get the usePattern value.
+     * @return the usePattern value.
+     */
+    public boolean isUsePattern() {
+        return usePattern;
     }
 
     /**

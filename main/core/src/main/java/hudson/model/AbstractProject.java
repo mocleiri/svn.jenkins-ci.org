@@ -64,7 +64,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      * To allow derived classes to link {@link SCM} config to elsewhere,
      * access to this variable should always go through {@link #getScm()}.
      */
-    private SCM scm = new NullSCM();
+    private volatile SCM scm = new NullSCM();
 
     /**
      * All the builds keyed by their build number.
@@ -74,7 +74,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     /**
      * The quiet period. Null to delegate to the system default.
      */
-    private Integer quietPeriod = null;
+    private volatile Integer quietPeriod = null;
 
     /**
      * If this project is configured to be only built on a certain label,
@@ -95,12 +95,12 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      * This somewhat ugly flag combination is so that we can migrate
      * existing Hudson installations nicely.
      */
-    private boolean canRoam;
+    private volatile boolean canRoam;
 
     /**
      * True to suspend new builds.
      */
-    protected boolean disabled;
+    protected volatile boolean disabled;
 
     /**
      * Identifies {@link JDK} to be used.
@@ -112,14 +112,14 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      *
      * @see Hudson#getJDK(String)
      */
-    private String jdk;
+    private volatile String jdk;
 
     /**
      * @deprecated
      */
     private transient boolean enableRemoteTrigger;
 
-    private BuildAuthorizationToken authToken = null;
+    private volatile BuildAuthorizationToken authToken = null;
 
     /**
      * List of all {@link Trigger}s for this project.
@@ -173,6 +173,14 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
 	}
 
 	/**
+
+    protected void performDelete() throws IOException {
+        // prevent a new build while a delete operation is in progress
+        makeDisabled(true);
+        super.performDelete();
+    }
+
+    /**
      * If this project is configured to be always built on this node,
      * return that {@link Node}. Otherwise null.
      */
@@ -314,8 +322,9 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
         for (Project p : Hudson.getInstance().getProjects()) {
             boolean isUpstream = upstream.contains(p);
             synchronized(p) {
-                List<AbstractProject> newChildProjects = new ArrayList<AbstractProject>(p.getDownstreamProjects());
-
+                // does 'p' include us in its BuildTrigger? 
+                BuildTrigger trigger = (BuildTrigger) p.getPublisher(BuildTrigger.DESCRIPTOR);
+                List<AbstractProject> newChildProjects = trigger == null ? new ArrayList<AbstractProject>():trigger.getChildProjects();
                 if(isUpstream) {
                     if(!newChildProjects.contains(this))
                         newChildProjects.add(this);
@@ -727,6 +736,28 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     }
 
     /**
+     * Returns only those upstream projects that defines {@link BuildTrigger} to this project.
+     * This is a subset of {@link #getUpstreamProjects()}
+     *
+     * @return A List of upstream projects that has a {@link BuildTrigger} to this project.
+     */
+    public final List<AbstractProject> getBuildTriggerUpstreamProjects() {
+        ArrayList<AbstractProject> result = new ArrayList<AbstractProject>();
+        for (AbstractProject ap : getUpstreamProjects()) {
+            if (ap instanceof Project) {
+                Project p = (Project) ap;
+                BuildTrigger buildTrigger = (BuildTrigger)p.getPublisher(BuildTrigger.DESCRIPTOR);
+                if (buildTrigger != null) {
+                    if (buildTrigger.getChildProjects().contains(this)) {
+                        result.add(p);
+                    }
+                }                
+            }
+        }        
+        return result;
+    }    
+    
+    /**
      * Gets all the upstream projects including transitive upstream projects.
      *
      * @since 1.138
@@ -905,8 +936,9 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      * Serves the workspace files.
      */
     public void doWs( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException, InterruptedException {
+        checkPermission(AbstractProject.WORKSPACE);
         FilePath ws = getWorkspace();
-        if(!ws.exists()) {
+        if ((ws == null) || (!ws.exists())) {
             // if there's no workspace, report a nice error message
             req.getView(this,"noWorkspace.jelly").forward(req,rsp);
         } else {
@@ -992,6 +1024,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     private static final Logger LOGGER = Logger.getLogger(AbstractProject.class.getName());
 
     public static final Permission BUILD = new Permission(PERMISSIONS, "Build", Permission.UPDATE);
+    public static final Permission WORKSPACE = new Permission(PERMISSIONS, "Workspace", Permission.READ);
     /**
      * Permission to abort a build. For now, let's make it the same as {@link #BUILD}
      */

@@ -33,6 +33,8 @@ import java.net.URISyntaxException;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,6 +44,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.SimpleTimeZone;
 import java.util.StringTokenizer;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -171,8 +174,15 @@ public class Util {
 
             makeWritable(f.getParentFile());
 
-            if(!f.delete() && f.exists())
+            if(!f.delete() && f.exists()) {
+                // trouble-shooting.
+                // see http://www.nabble.com/Sometimes-can%27t-delete-files-from-hudson.scm.SubversionSCM%24CheckOutTask.invoke%28%29-tt17333292.html
+                // I suspect other processes putting files in this directory
+                File[] files = f.listFiles();
+                if(files!=null && files.length>0)
+                    throw new IOException("Unable to delete " + f.getPath()+" - files in dir: "+Arrays.asList(files));
                 throw new IOException("Unable to delete " + f.getPath());
+            }
         }
     }
 
@@ -731,7 +741,12 @@ public class Util {
      * but don't remember it right now.
      *
      * @since 1.204
+     * @deprecated This method is broken (see ISSUE#1666). It should probably
+     * be removed but I'm not sure if it is considered part of the public API
+     * that needs to be maintained for backwards compatibility.
+     * Use {@link #encode(String)} instead. 
      */
+    @Deprecated
     public static String encodeRFC2396(String url) {
         try {
             return new URI(null,url,null).toASCIIString();
@@ -750,6 +765,25 @@ public class Util {
             Stapler.getCurrentRequest().getContextPath()+ Hudson.RESOURCE_PATH+
             "/images/none.gif' height=16 width=1>"+s+"</span>";
         return s;
+    }
+    
+    /**
+     * Returns the parsed string if parsed successful; otherwise returns the default number.
+     * If the string is null, empty or a ParseException is thrown then the defaultNumber
+     * is returned.
+     * @param numberStr string to parse
+     * @param defaultNumber number to return if the string can not be parsed
+     * @return returns the parsed string; otherwise the default number
+     */
+    public static Number tryParseNumber(String numberStr, Number defaultNumber) {
+        if ((numberStr == null) || (numberStr.length() == 0)) {
+            return defaultNumber;
+        }
+        try {
+            return NumberFormat.getNumberInstance().parse(numberStr);
+        } catch (ParseException e) {
+            return defaultNumber;
+        }
     }
 
     public static final SimpleDateFormat XS_DATETIME_FORMATTER = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");

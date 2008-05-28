@@ -14,6 +14,8 @@ import hudson.TcpSlaveAgentListener;
 import hudson.Util;
 import static hudson.Util.fixEmpty;
 import hudson.XmlFile;
+import hudson.slaves.ComputerLauncher;
+import hudson.slaves.RetentionStrategy;
 import hudson.model.Descriptor.FormException;
 import hudson.model.listeners.ItemListener;
 import hudson.model.listeners.JobListener;
@@ -65,6 +67,7 @@ import hudson.util.TextFile;
 import hudson.util.XStream2;
 import hudson.widgets.Widget;
 import net.sf.json.JSONObject;
+import net.sf.json.JSONArray;
 import org.acegisecurity.AccessDeniedException;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.GrantedAuthority;
@@ -100,8 +103,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.security.SecureRandom;
+import java.text.NumberFormat;
 import java.text.ParseException;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -178,7 +181,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
      * <p>
      * Intuitively, this corresponds to the user database.
      *
-     * See {@link HudsonFilter} for the concrete authentication protocol. 
+     * See {@link HudsonFilter} for the concrete authentication protocol.
      *
      * Never null. Always use {@link #setSecurityRealm(SecurityRealm)} to
      * update this field.
@@ -208,8 +211,8 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
      */
     private static Hudson theInstance;
 
-    private transient boolean isQuietingDown;
-    private transient boolean terminating;
+    private transient volatile boolean isQuietingDown;
+    private transient volatile boolean terminating;
 
     private List<JDK> jdks = new ArrayList<JDK>();
 
@@ -396,7 +399,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     /**
      * Returns a secret key that survives across container start/stop.
      * <p>
-     * This value is useful for implementing some of the security features. 
+     * This value is useful for implementing some of the security features.
      */
     public String getSecretKey() {
         return  secretKey;
@@ -940,6 +943,10 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         return new FilePath(getRootDir());
     }
 
+    public FilePath createPath(String absolutePath) {
+        return new FilePath((VirtualChannel)null,absolutePath);
+    }
+
     public ClockDifference getClockDifference() {
         return ClockDifference.ZERO;
     }
@@ -1316,7 +1323,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             authorizationStrategy = AuthorizationStrategy.UNSECURED;
             setSecurityRealm(SecurityRealm.NO_AUTHENTICATION);
         }
-        
+
 
         LOGGER.info(String.format("Took %s ms to load",System.currentTimeMillis()-startTime));
     }
@@ -1423,29 +1430,9 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
                 }
             }
 
-            numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
             quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
 
             systemMessage = Util.nullify(req.getParameter("system_message"));
-
-            {// update slave list
-                List<Slave> newSlaves = new ArrayList<Slave>();
-                String[] names = req.getParameterValues("slave.name");
-                if(names!=null) {
-                    for(int i=0;i< names.length;i++) {
-                        newSlaves.add(req.bindParameters(Slave.class,"slave.",i));
-                    }
-                }
-                this.slaves = newSlaves;
-                updateComputerList();
-
-                // label trim off
-                for (Label l : labels.values()) {
-                    l.reset();
-                    if(l.getNodes().isEmpty())
-                        labels.remove(l);
-                }
-            }
 
             {// update JDK installations
                 jdks.clear();
@@ -1490,6 +1477,84 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     }
 
     /**
+     * Accepts submission from the configuration page.
+     */
+    public synchronized void doConfigExecutorsSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        try {
+            checkPermission(ADMINISTER);
+
+            req.setCharacterEncoding("UTF-8");
+
+            JSONObject json = StructuredForm.get(req);
+
+            numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
+
+            {
+                // update slave list
+                Object src = json.get("slaves");
+                ArrayList<Slave> r = new ArrayList<Slave>();
+                if (src instanceof JSONObject) {
+                    r.add(newSlave(req, (JSONObject) src));
+                }
+                if (src instanceof JSONArray) {
+                    JSONArray a = (JSONArray) src;
+                    for (Object o : a) {
+                        if (o instanceof JSONObject) {
+                            r.add(newSlave(req, (JSONObject) o));
+                        }
+                    }
+                }
+                this.slaves = r;
+                updateComputerList();
+
+                // label trim off
+                for (Label l : labels.values()) {
+                    l.reset();
+                    if(l.getNodes().isEmpty())
+                        labels.remove(l);
+                }
+            }
+
+            boolean result = true;
+
+            save();
+
+            if(result)
+                rsp.sendRedirect(req.getContextPath()+'/');  // go to the top page
+            else
+                rsp.sendRedirect("configure"); // back to config
+        } catch (FormException e) {
+            sendError(e,req,rsp);
+        }
+    }
+
+    private Slave newSlave(StaplerRequest req, JSONObject j) throws FormException {
+        final ComputerLauncher launcher = newDescribedChild(req, j, "launcher", ComputerLauncher.LIST);
+        final RetentionStrategy retentionStrategy = newDescribedChild(req, j, "retentionStrategy", RetentionStrategy.LIST);
+        final Slave slave = req.bindJSON(Slave.class, j);
+        slave.setLauncher(launcher);
+        slave.setRetentionStrategy(retentionStrategy);
+        return slave;
+    }
+
+    private <T extends Describable<T>> T newDescribedChild(StaplerRequest req, JSONObject j,
+                                                           String name, List<Descriptor<T>> descriptors)
+            throws FormException {
+
+        if(!j.has(name + "Class"))  return null;
+        final String clazz = j.getString(name + "Class");
+        final JSONObject data = j.getJSONObject(name);
+        j.remove(name + "Class");
+        j.remove(name);
+        for (Descriptor<T> d: descriptors) {
+            if (d.getClass().getName().equals(clazz)) {
+                return d.newInstance(req, data);
+            }
+        }
+        return null;
+    }
+
+    /**
      * Accepts the new description.
      */
     public synchronized void doSubmitDescription( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
@@ -1501,13 +1566,13 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         rsp.sendRedirect(".");
     }
 
-    public synchronized void doQuietDown( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+    public synchronized void doQuietDown(StaplerResponse rsp) throws IOException, ServletException {
         checkPermission(ADMINISTER);
         isQuietingDown = true;
         rsp.sendRedirect2(".");
     }
 
-    public synchronized void doCancelQuietDown( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+    public synchronized void doCancelQuietDown(StaplerResponse rsp) throws IOException, ServletException {
         checkPermission(ADMINISTER);
         isQuietingDown = false;
         getQueue().scheduleMaintenance();
@@ -1517,7 +1582,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     /**
      * Backward compatibility. Redirect to the thread dump.
      */
-    public void doClassicThreadDump( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+    public void doClassicThreadDump(StaplerResponse rsp) throws IOException, ServletException {
         rsp.sendRedirect2("threadDump");
     }
 
@@ -1906,7 +1971,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     /**
      * For debugging. Expose URL to perform GC.
      */
-    public void doGc( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+    public void doGc(StaplerResponse rsp) throws IOException {
         System.gc();
         rsp.setStatus(HttpServletResponse.SC_OK);
         rsp.setContentType("text/plain");
@@ -1926,7 +1991,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         PrintWriter w = rsp.getWriter();
         w.println("Shutting down");
         w.close();
-        
+
         System.exit(0);
     }
 
@@ -1948,7 +2013,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     /**
      * Configure the logging level.
      */
-    public void doConfigLogger( StaplerRequest req, StaplerResponse rsp, @QueryParameter("name") String name, @QueryParameter("level") String level) throws IOException {
+    public void doConfigLogger(StaplerResponse rsp, @QueryParameter("name")String name, @QueryParameter("level")String level) throws IOException {
         checkPermission(ADMINISTER);
         Level lv;
         if(level.equals("inherit"))
@@ -2002,14 +2067,14 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         rsp.sendRedirect2(ref);
     }
 
-    public void doFingerprintCleanup( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+    public void doFingerprintCleanup(StaplerResponse rsp) throws IOException {
         FingerprintCleanupThread.invoke();
         rsp.setStatus(HttpServletResponse.SC_OK);
         rsp.setContentType("text/plain");
         rsp.getWriter().println("Invoked");
     }
 
-    public void doWorkspaceCleanup( StaplerRequest req, StaplerResponse rsp ) throws IOException {
+    public void doWorkspaceCleanup(StaplerResponse rsp) throws IOException {
         WorkspaceCleanupThread.invoke();
         rsp.setStatus(HttpServletResponse.SC_OK);
         rsp.setContentType("text/plain");
@@ -2089,6 +2154,85 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
                     ok();
                 else
                     error(Messages.Hudson_JobAlreadyExists(job));
+            }
+        }.process();
+    }
+    /**
+     * Checks if the value for a field is set; if not an error or warning text is displayed.
+     * If the parameter "value" is not set then the parameter "errorText" is displayed
+     * as an error text. If the parameter "errorText" is not set, then the parameter "warningText" is
+     * displayed as a warning text.
+     * <p/> 
+     * If the text is set and the parameter "type" is set, it will validate that the value is of the
+     * correct type. Supported types are "number, "number-positive" and "number-negative".
+     * @param req containing the parameter value and the errorText to display if the value isnt set
+     * @param rsp used by FormFieldValidator
+     * @throws IOException thrown by FormFieldValidator.check()
+     * @throws ServletException thrown by FormFieldValidator.check()
+     */
+    public void doFieldCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+        new FormFieldValidator(req, rsp, false) {
+            
+            /**
+             * Display the error text or warning text.
+             */
+            private void fieldCheckFailed() throws IOException, ServletException {
+                String v = fixEmpty(request.getParameter("errorText"));
+                if (v != null) {
+                    error(v);
+                    return;
+                }
+                v = fixEmpty(request.getParameter("warningText"));
+                if (v != null) {
+                    warning(v);
+                    return;
+                }
+                error("No error or warning text was set for fieldCheck().");
+                return;                
+            }
+            
+            /**
+             * Checks if the value is of the correct type.
+             * @param type the type of string
+             * @param value the actual value to check
+             * @return true, if the type was valid; false otherwise
+             */
+            private boolean checkType(String type, String value) throws IOException, ServletException {
+                try {
+                    if (type.equalsIgnoreCase("number")) {
+                        NumberFormat.getInstance().parse(value);                            
+                    } else if (type.equalsIgnoreCase("number-positive")) {
+                        if (NumberFormat.getInstance().parse(value).floatValue() <= 0) {
+                            error(Messages.Hudson_NotAPositiveNumber());
+                            return false;
+                        }
+                    } else if (type.equalsIgnoreCase("number-negative")) {
+                        if (NumberFormat.getInstance().parse(value).floatValue() >= 0) {
+                            error(Messages.Hudson_NotANegativeNumber());
+                            return false;
+                        }
+                    }
+                } catch (ParseException e) {
+                    error(Messages.Hudson_NotANumber());
+                    return false;
+                }
+                return true;
+            }
+            
+            @Override
+            protected void check() throws IOException, ServletException {
+                String value = fixEmpty(request.getParameter("value"));
+                if (value == null) {
+                    fieldCheckFailed();
+                    return;
+                }
+                String type = fixEmpty(request.getParameter("type"));
+                if (type != null) {
+                    if (!checkType(type, value)) {
+                        return;
+                    }
+                }
+                ok();
             }
         }.process();
     }
@@ -2219,6 +2363,10 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             return "computer/(master)/";
         }
 
+        public RetentionStrategy getRetentionStrategy() {
+            return RetentionStrategy.NOOP;
+        }
+
         @Override
         public VirtualChannel getChannel() {
             return localChannel;
@@ -2311,7 +2459,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     /**
      * Prefix to static resources like images and javascripts in the war file.
      * Either "" or strings like "/static/VERSION", which avoids Hudson to pick up
-     * stale cache when the user upgrades to a different version. 
+     * stale cache when the user upgrades to a different version.
      */
     public static String RESOURCE_PATH;
 

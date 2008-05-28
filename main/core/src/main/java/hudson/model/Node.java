@@ -1,14 +1,14 @@
 package hudson.model;
 
-import hudson.Launcher;
 import hudson.FilePath;
+import hudson.Launcher;
 import hudson.node_monitors.NodeMonitor;
-import hudson.util.EnumConverter;
 import hudson.util.ClockDifference;
-import org.apache.commons.beanutils.ConvertUtils;
+import hudson.util.EnumConverter;
+import org.kohsuke.stapler.Stapler;
 
-import java.util.Set;
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * Commonality between {@link Slave} and master {@link Hudson}.
@@ -103,6 +103,11 @@ public interface Node {
     FilePath getRootPath();
 
     /**
+     * Gets the {@link FilePath} on this node.
+     */
+    FilePath createPath(String absolutePath);
+
+    /**
      * Estimates the clock difference with this slave.
      *
      * @return
@@ -112,6 +117,9 @@ public interface Node {
      */
     ClockDifference getClockDifference() throws IOException, InterruptedException;
 
+    /**
+     * Constants that control how Hudson allocates jobs to slaves.
+     */
     public enum Mode {
         NORMAL("Utilize this slave as much as possible"),
         EXCLUSIVE("Leave this machine for tied jobs only");
@@ -131,7 +139,8 @@ public interface Node {
         }
 
         static {
-            ConvertUtils.register(new EnumConverter(),Mode.class);
+            Stapler.CONVERT_UTILS.register(new EnumConverter(), Mode.class);
         }
     }
+
 }

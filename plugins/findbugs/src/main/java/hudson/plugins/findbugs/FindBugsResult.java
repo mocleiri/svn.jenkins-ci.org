@@ -1,4 +1,4 @@
-package hudson.plugins.findbugs;
+package hudson.plugins.findbugs; // NOPMD
 
 import hudson.XmlFile;
 import hudson.model.AbstractBuild;
@@ -13,6 +13,7 @@ import hudson.plugins.findbugs.util.NewWarningsDetail;
 import hudson.plugins.findbugs.util.PackageDetail;
 import hudson.plugins.findbugs.util.PriorityDetailFactory;
 import hudson.plugins.findbugs.util.SourceDetail;
+import hudson.plugins.findbugs.util.model.AnnotationProvider;
 import hudson.plugins.findbugs.util.model.AnnotationStream;
 import hudson.plugins.findbugs.util.model.FileAnnotation;
 import hudson.plugins.findbugs.util.model.JavaPackage;
@@ -48,7 +49,9 @@ import edu.umd.cs.findbugs.annotations.SuppressWarnings;
  *
  * @author Ulli Hafner
  */
-public class FindBugsResult implements ModelObject, Serializable {
+// CHECKSTYLE:COUPLING-OFF
+@SuppressWarnings("PMD.TooManyFields")
+public class FindBugsResult implements ModelObject, Serializable, AnnotationProvider {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = 2768250056765266658L;
     /** Logger. */
@@ -92,16 +95,18 @@ public class FindBugsResult implements ModelObject, Serializable {
     private long zeroWarningsHighScore;
 
     /** Error messages. */
-    private final List<String> errors;
+    @SuppressWarnings("Se")
+    private List<String> errors;
 
     /** Current build as owner of this action. */
     @SuppressWarnings("Se")
     private final AbstractBuild<?, ?> owner;
 
     /** The modules with no warnings. */
-    private final Map<String, MavenModule> emptyModules;
+    @SuppressWarnings("Se")
+    private Map<String, MavenModule> emptyModules;
     /** The total number of modules with or without warnings. */
-    private final int numberOfModules;
+    private int numberOfModules;
 
     /**
      * Creates a new instance of <code>FindBugsResult</code>.
@@ -173,6 +178,20 @@ public class FindBugsResult implements ModelObject, Serializable {
         catch (IOException exception) {
             LOGGER.log(Level.WARNING, "Failed to serialize the findbugs result.", exception);
         }
+    }
+
+    /**
+     * Rebuilds > 2.0 properties.
+     *
+     * @return the created object
+     */
+    private Object readResolve() {
+        if (emptyModules == null) {
+            emptyModules = new HashMap<String, MavenModule>();
+            errors = new ArrayList<String>();
+            numberOfModules = 1;
+        }
+        return this;
     }
 
     /**
@@ -324,35 +343,6 @@ public class FindBugsResult implements ModelObject, Serializable {
         else {
             return low;
         }
-    }
-
-    /**
-     * Returns whether we have annotations in this project.
-     *
-     * @return <code>true</code> if we have annotations in this project
-     */
-    public final boolean hasAnnotations() {
-        return getProject().hasAnnotations();
-    }
-
-    /**
-     * Returns the annotations of this project.
-     *
-     * @return the annotations for this project.
-     */
-    public Collection<FileAnnotation> getAnnotations() {
-        return getProject().getAnnotations();
-    }
-
-    /**
-     * Returns the annotations of the specified priority for this object.
-     *
-     * @param priority
-     *            the priority as a string object
-     * @return annotations of the specified priority for this object
-     */
-    public int getNumberOfAnnotations(final String priority) {
-        return getNumberOfAnnotations(Priority.fromString(priority));
     }
 
     /**
@@ -675,5 +665,50 @@ public class FindBugsResult implements ModelObject, Serializable {
      */
     public Priority[] getPriorities() {
         return Priority.values();
+    }
+
+    /** {@inheritDoc} */
+    public FileAnnotation getAnnotation(final long key) {
+        return getProject().getAnnotation(key);
+    }
+
+    /** {@inheritDoc} */
+    public FileAnnotation getAnnotation(final String key) {
+        return getProject().getAnnotation(key);
+    }
+
+    /** {@inheritDoc} */
+    public Collection<FileAnnotation> getAnnotations(final Priority priority) {
+        return getProject().getAnnotations(priority);
+    }
+
+    /** {@inheritDoc} */
+    public Collection<FileAnnotation> getAnnotations(final String priority) {
+        return getProject().getAnnotations(priority);
+    }
+
+    /** {@inheritDoc} */
+    public boolean hasAnnotations(final Priority priority) {
+        return getProject().hasAnnotations(priority);
+    }
+
+    /** {@inheritDoc} */
+    public boolean hasAnnotations(final String priority) {
+        return getProject().hasAnnotations(priority);
+    }
+
+    /** {@inheritDoc} */
+    public final boolean hasAnnotations() {
+        return getProject().hasAnnotations();
+    }
+
+    /** {@inheritDoc} */
+    public Collection<FileAnnotation> getAnnotations() {
+        return getProject().getAnnotations();
+    }
+
+    /** {@inheritDoc} */
+    public int getNumberOfAnnotations(final String priority) {
+        return getNumberOfAnnotations(Priority.fromString(priority));
     }
 }

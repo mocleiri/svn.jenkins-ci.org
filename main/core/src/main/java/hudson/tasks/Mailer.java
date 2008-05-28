@@ -1,6 +1,7 @@
 package hudson.tasks;
 
 import hudson.Launcher;
+import hudson.Functions;
 import hudson.maven.AbstractMavenProject;
 import hudson.model.AbstractProject;
 import hudson.model.Build;
@@ -246,7 +247,7 @@ public class Mailer extends Publisher {
 
         public String getAdminAddress() {
             String v = adminAddress;
-            if(v==null)     v = "address not configured yet <nobody>";
+            if(v==null)     v = "address not configured yet <nobody@nowhere>";
             return v;
         }
 
@@ -270,6 +271,13 @@ public class Mailer extends Publisher {
             Mailer m = new Mailer();
             req.bindParameters(m,"mailer_");
             m.dontNotifyEveryUnstableBuild = req.getParameter("mailer_notifyEveryUnstableBuild")==null;
+
+            if(hudsonUrl==null) {
+                // if Hudson URL is not configured yet, infer some default
+                hudsonUrl = Functions.inferHudsonURL(req);
+                save();
+            }
+
             return m;
         }
 

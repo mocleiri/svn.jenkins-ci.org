@@ -1,25 +1,20 @@
 package hudson.plugins.cigame;
 
-import java.util.LinkedList;
-
 import net.sf.json.JSONObject;
 
 import org.kohsuke.stapler.StaplerRequest;
 
 import hudson.model.Descriptor;
-import hudson.plugins.cigame.model.Rule;
 import hudson.plugins.cigame.model.RuleBook;
 import hudson.plugins.cigame.model.RuleSet;
-import hudson.plugins.cigame.rules.basic.BuildResultRule;
-import hudson.plugins.cigame.rules.basic.IncreasingFailedTestsRule;
-import hudson.plugins.cigame.rules.basic.IncreasingPassedTestsRule;
-import hudson.plugins.cigame.rules.plugins.PluginRuleSet;
-import hudson.plugins.cigame.rules.plugins.opentasks.DefaultOpenTasksRule;
+import hudson.plugins.cigame.plugins.findbugs.FindBugsRuleSet;
+import hudson.plugins.cigame.rules.build.BuildRuleSet;
+import hudson.plugins.cigame.rules.plugins.checkstyle.CheckstyleRuleSet;
 import hudson.plugins.cigame.rules.plugins.opentasks.OpenTasksRuleSet;
 import hudson.plugins.cigame.rules.plugins.pmd.PmdRuleSet;
-import hudson.plugins.cigame.rules.plugins.violation.DefaultViolationRule;
 import hudson.plugins.cigame.rules.plugins.violation.ViolationsRuleSet;
-import hudson.plugins.tasks.util.model.Priority;
+import hudson.plugins.cigame.rules.plugins.warnings.WarningsRuleSet;
+import hudson.plugins.cigame.rules.unittesting.UnitTestingRuleSet;
 import hudson.tasks.Publisher;
 
 public class GameDescriptor extends Descriptor<Publisher> {
@@ -42,15 +37,14 @@ public class GameDescriptor extends Descriptor<Publisher> {
         if (rulebook == null) {
             rulebook = new RuleBook();
 
-            RuleSet ruleset = new RuleSet("Basic ruleset");
-            ruleset.add(new BuildResultRule());
-            ruleset.add(new IncreasingFailedTestsRule());
-            ruleset.add(new IncreasingPassedTestsRule());
-
-            rulebook.addRuleSet(ruleset);
-            // addRuleSetIfAvailable(book, new OpenTasksRuleSet());
-            // addRuleSetIfAvailable(rulebook, new ViolationsRuleSet());
-            // addRuleSetIfAvailable(rulebook, new PmdRuleSet());
+            addRuleSetIfAvailable(rulebook, new BuildRuleSet());
+            addRuleSetIfAvailable(rulebook, new UnitTestingRuleSet());
+            addRuleSetIfAvailable(rulebook, new OpenTasksRuleSet());
+            addRuleSetIfAvailable(rulebook, new ViolationsRuleSet());
+            addRuleSetIfAvailable(rulebook, new PmdRuleSet());
+            addRuleSetIfAvailable(rulebook, new FindBugsRuleSet());
+            addRuleSetIfAvailable(rulebook, new WarningsRuleSet());
+            addRuleSetIfAvailable(rulebook, new CheckstyleRuleSet());
         }
         return rulebook;
     }

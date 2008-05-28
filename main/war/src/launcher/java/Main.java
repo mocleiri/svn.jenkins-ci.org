@@ -11,6 +11,7 @@ import java.net.JarURLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Iterator;
 
 /**
  * Launcher class for stand-alone execution of Hudson as
@@ -20,6 +21,9 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) throws Exception {
+        // this is so that JFreeChart can work nicely even if we are launched as a daemon
+        System.setProperty("java.awt.headless","true");
+
         File me = whoAmI();
 
         // locate Winstone jar
@@ -53,9 +57,22 @@ public class Main {
         // figure out the arguments
         List arguments = new ArrayList(Arrays.asList(args));
         arguments.add(0,"--warfile="+ me.getAbsolutePath());
+        if(!hasWebRoot(arguments))
+            // defaults to ~/.hudson/war since many users reported that cron job attempts to clean up
+            // the contents in the temporary directory.
+            arguments.add("--webroot="+new File(System.getProperty("user.home"),".hudson/war"));
 
         // run
         mainMethod.invoke(null,new Object[]{arguments.toArray(new String[0])});
+    }
+
+    private static boolean hasWebRoot(List arguments) {
+        for (Iterator itr = arguments.iterator(); itr.hasNext();) {
+            String s = (String) itr.next();
+            if(s.startsWith("--webroot="))
+                return true;
+        }
+        return false;
     }
 
     /**

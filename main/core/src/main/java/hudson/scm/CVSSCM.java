@@ -6,7 +6,6 @@ import hudson.FilePath.FileCallable;
 import hudson.Launcher;
 import hudson.Proc;
 import hudson.Util;
-import hudson.security.Permission;
 import static hudson.Util.fixEmpty;
 import static hudson.Util.fixNull;
 import hudson.model.AbstractBuild;
@@ -22,7 +21,12 @@ import hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
 import hudson.remoting.Future;
 import hudson.remoting.RemoteOutputStream;
 import hudson.remoting.VirtualChannel;
-import hudson.util.*;
+import hudson.security.Permission;
+import hudson.util.ArgumentListBuilder;
+import hudson.util.ByteBuffer;
+import hudson.util.ForkOutputStream;
+import hudson.util.FormFieldValidator;
+import hudson.util.IOException2;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.tools.ant.BuildException;
@@ -611,7 +615,7 @@ public class CVSSCM extends SCM implements Serializable {
             try {
                 String s = new BufferedReader(r).readLine();
                 if (s == null) return false;
-                return s.trim().equals(contents.trim());
+                return massageForCheckContents(s).equals(massageForCheckContents(contents));
             } finally {
                 r.close();
             }
@@ -620,6 +624,34 @@ public class CVSSCM extends SCM implements Serializable {
         }
     }
 
+    /**
+     * Normalize the string for comparison in {@link #checkContents(File, String)}.
+     */
+    private String massageForCheckContents(String s) {
+        s=s.trim();
+        // this is somewhat ugly because we only want to do this for CVS/Root but still ended up doing this
+        // for all checks. OTOH, there shouldn'be really any false positive.
+        Matcher m = PSERVER_CVSROOT_WITH_PASSWORD.matcher(s);
+        if(m.matches())
+            s = m.group(1)+m.group(2);  // cut off password
+        return s;
+    }
+
+    /**
+     * Looks for CVSROOT that includes password, like ":pserver:uid:pwd@server:/path".
+     *
+     * <p>
+     * Some CVS client (likely CVSNT?) appears to add the password despite the fact that CVSROOT Hudson is setting
+     * doesn't include one. So when we compare CVSROOT, we need to remove the password.
+     *
+     * <p>
+     * Since the password equivalence shouldn't really affect the {@link #checkContents(File, String)}, we use
+     * this pattern to ignore password from both {@link #cvsroot} and the string found in <tt>path/CVS/Root</tt>
+     * and then compare.
+     *
+     * See http://www.nabble.com/Problem-with-polling-CVS%2C-from-version-1.181-tt15799926.html for the user report.
+     */
+    private static final Pattern PSERVER_CVSROOT_WITH_PASSWORD = Pattern.compile("(:pserver:[^@:]+):[^@:]+(@.+)");
 
     /**
      * Used to communicate the result of the detection in {@link CVSSCM#calcChangeLog(AbstractBuild, FilePath, List, File, BuildListener)}
@@ -1210,6 +1242,17 @@ public class CVSSCM extends SCM implements Serializable {
         @Override
         protected Permission getPermission() {
             return TAG;
+        }
+
+        @Override
+        public String getTooltip() {
+            if(tagName!=null)   return "Tag: "+tagName;
+            else                return null;
+        }
+
+        @Override
+        public boolean isTagged() {
+            return tagName!=null;
         }
 
         /**

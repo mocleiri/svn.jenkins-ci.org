@@ -1,6 +1,9 @@
 package hudson.model;
 
 import hudson.EnvVars;
+import hudson.Util;
+import hudson.slaves.ComputerLauncher;
+import hudson.slaves.RetentionStrategy;
 import hudson.node_monitors.NodeMonitor;
 import hudson.remoting.Channel;
 import hudson.remoting.VirtualChannel;
@@ -34,7 +37,7 @@ import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
 
 /**
- * Represents a set of {@link Executor}s on the same computer.
+ * Represents the running state of a remote computer that holds {@link Executor}s.
  *
  * <p>
  * {@link Executor}s on one {@link Computer} are transparently interchangeable
@@ -118,6 +121,13 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     public abstract void launch();
 
     /**
+     * Disconnect this computer.
+     *
+     * If this is the master, no-op
+     */
+    public void disconnect() { }
+
+    /**
      * Number of {@link Executor}s that are configured for this computer.
      *
      * <p>
@@ -145,10 +155,20 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
 
     /**
      * Returns true if this computer is supposed to be launched via JNLP.
+     * @deprecated see {@linkplain #isLaunchSupported()} and {@linkplain ComputerLauncher}
      */
     @Exported
+    @Deprecated
     public boolean isJnlpAgent() {
         return false;
+    }
+
+    /**
+     * Returns true if this computer can be launched by Hudson.
+     */
+    @Exported
+    public boolean isLaunchSupported() {
+        return true;
     }
 
     /**
@@ -201,7 +221,7 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     public List<AbstractProject> getTiedJobs() {
         return getNode().getSelfLabel().getTiedJobs();
     }
-    
+
     public RunList getBuilds() {
     	return new RunList(Hudson.getInstance().getAllItems(Job.class)).node(getNode());
     }
@@ -260,6 +280,46 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     }
 
     /**
+     * Returns true if all the executors of this computer is idle.
+     */
+    public final boolean isIdle() {
+        for (Executor e : executors)
+            if(!e.isIdle())
+                return false;
+        return true;
+    }
+
+    /**
+     * Returns the time when this computer first became idle.
+     *
+     * <p>
+     * If this computer is already idle, the return value will point to the
+     * time in the past since when this computer has been idle.
+     *
+     * <p>
+     * If this computer is busy, the return value will point to the
+     * time in the future where this computer will be expected to become free.
+     */
+    public final long getIdleStartMilliseconds() {
+        long firstIdle = Long.MIN_VALUE;
+        for (Executor e : executors) {
+            firstIdle = Math.max(firstIdle, e.getIdleStartMilliseconds());
+        }
+        return firstIdle;
+    }
+
+    /**
+     * Returns the time when this computer first became in demand.
+     */
+    public final long getDemandStartMilliseconds() {
+        long firstDemand = Long.MAX_VALUE;
+        for (Queue.BuildableItem item : Hudson.getInstance().getQueue().getBuildableItems(this)) {
+            firstDemand = Math.min(item.buildableStartMilliseconds, firstDemand);
+        }
+        return firstDemand;
+    }
+
+    /**
      * Called by {@link Executor} to kill excessive executors from this computer.
      */
     /*package*/ synchronized void removeExecutor(Executor e) {
@@ -280,6 +340,15 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     public String getSearchUrl() {
         return "computer/"+nodeName;
     }
+
+    /**
+     * {@link RetentionStrategy} associated with this computer.
+     *
+     * @return
+     *      never null. This method return {@code RetentionStrategy<? super T>} where
+     *      {@code T=this.getClass()}.
+     */
+    public abstract RetentionStrategy getRetentionStrategy();
 
     /**
      * Expose monitoring data for the remote API.

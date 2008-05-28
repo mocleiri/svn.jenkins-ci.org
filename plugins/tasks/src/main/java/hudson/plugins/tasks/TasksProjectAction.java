@@ -18,9 +18,11 @@ public class TasksProjectAction extends AbstractProjectAction<TasksResultAction>
      *
      * @param project
      *            the project that owns this action
+     * @param height
+     *            the height of the trend graph
      */
-    public TasksProjectAction(final AbstractProject<?, ?> project) {
-        super(project, TasksResultAction.class, TasksDescriptor.ACTION_ICON, TasksDescriptor.PLUGIN_NAME);
+    public TasksProjectAction(final AbstractProject<?, ?> project, final int height) {
+        super(project, TasksResultAction.class, TasksPublisher.TASK_SCANNER_DESCRIPTOR, height);
     }
 
     /** {@inheritDoc} */
@@ -29,14 +31,15 @@ public class TasksProjectAction extends AbstractProjectAction<TasksResultAction>
     }
 
     /** {@inheritDoc} */
-    public String getUrlName() {
-        return "tasks";
+    @Override
+    public String getCookieName() {
+        return "Tasks_displayMode";
     }
 
     /** {@inheritDoc} */
     @Override
-    protected String getCookieName() {
-        return "Tasks_displayMode";
+    public String getTrendName() {
+        return Messages.Tasks_Trend_Name();
     }
 }
 

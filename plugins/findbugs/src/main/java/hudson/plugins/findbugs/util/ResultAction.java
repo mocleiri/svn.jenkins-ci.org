@@ -55,10 +55,12 @@ public interface ResultAction<T> extends Action {
      *            Stapler request
      * @param response
      *            Stapler response
+     * @param height
+     *            the height of the trend graph
      * @throws IOException
      *             in case of an error
      */
-    void doGraph(StaplerRequest request, StaplerResponse response) throws IOException;
+    void doGraph(StaplerRequest request, StaplerResponse response, int height) throws IOException;
 
     /**
      * Generates a clickable map for the trend graph of this result action.
@@ -67,10 +69,12 @@ public interface ResultAction<T> extends Action {
      *            Stapler request
      * @param response
      *            Stapler response
+     * @param height
+     *            the height of the trend graph
      * @throws IOException
      *             in case of an error
      */
-    void doGraphMap(StaplerRequest request, StaplerResponse response) throws IOException;
+    void doGraphMap(StaplerRequest request, StaplerResponse response, int height) throws IOException;
 
     /**
      * Returns the associated health report builder.

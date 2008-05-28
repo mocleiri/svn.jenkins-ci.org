@@ -13,6 +13,7 @@ import hudson.model.Descriptor;
 import hudson.remoting.Callable;
 import hudson.remoting.VirtualChannel;
 import hudson.tasks.Builder;
+import hudson.util.DescriptorList;
 import hudson.util.NullStream;
 import hudson.util.StreamTaskListener;
 import java.io.ByteArrayInputStream;
@@ -25,64 +26,57 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.StringTokenizer;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * A Builder for Groovy scripts.
- * 
+ *
  * @author dvrzalik
  */
-public class Groovy extends Builder {
-    
-    public enum BuilderType { COMMAND,FILE }
-    
-    private BuilderType type;
+public class Groovy extends AbstractGroovy {
     
     private String groovyName;
-    private String command;
-    private String scriptFile;
     private String parameters;
     private String scriptParameters;
     private String properties;
 
-    /**
-     * @stapler-constructor
-     */
-    Groovy(BuilderType type, String groovyName, String command, String scriptFile, 
-            String parameters, String scriptParameters, String properties) {
-        this.type = type;
+    public Groovy(ScriptSource scriptSource, String groovyName, String parameters, 
+            String scriptParameters, String properties) {
+        super(scriptSource);
         this.groovyName = groovyName;
-        this.command = command;
-        this.scriptFile = scriptFile;
         this.parameters = parameters;
         this.scriptParameters = scriptParameters;
         this.properties = properties;
-    }  
-    
+    }
+
 
     @Override
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
-        
+
+        if (scriptSource == null) {
+            listener.fatalError("There is no script configured for this builder");
+            return false;
+        }
+
         AbstractProject proj = build.getProject();
         FilePath ws = proj.getWorkspace();
         FilePath script = null;
-        if(type == BuilderType.FILE) {
-            script = new FilePath(ws, scriptFile);
-        } else {
-           try {
-                script = ws.createTextTempFile("hudson", ".groovy", command, true);
-            } catch (IOException e) {
-                Util.displayIOException(e,listener);
-                e.printStackTrace( listener.fatalError("Unable to produce a script file") );
-                return false;
-            }
+        try {
+            script = scriptSource.getScriptFile(ws);
+        } catch (IOException e) {
+            Util.displayIOException(e, listener);
+            e.printStackTrace(listener.fatalError("Unable to produce a script file"));
+            return false;
         }
         try {
-            
             String[] cmd = buildCommandLine(script);
-           
+
             int result;
             try {
                 Map<String,String> envVars = build.getEnvVars();
@@ -90,28 +84,23 @@ public class Groovy extends Builder {
                 if(installation != null) {
                     envVars.put("GROOVY_HOME", installation.getHome());
                 }
-                
+
                 for(Map.Entry<String,String> e : build.getBuildVariables().entrySet())
                     envVars.put(e.getKey(),e.getValue());
-                
+
                 //Pass properties as JAVA_OPTS
                 if(properties != null) {
-                    String origJavaOpts = build.getBuildVariables().get("JAVA_OPTS"); 
+                    String origJavaOpts = build.getBuildVariables().get("JAVA_OPTS");
                     StringBuffer javaOpts = new StringBuffer((origJavaOpts != null) ? origJavaOpts : "");
-                    Properties props = new Properties();
-                    try {
-                        props.load(new StringReader(properties));
-                    } catch (NoSuchMethodError err) {
-                        props.load(new ByteArrayInputStream(properties.getBytes()));
-                    }
+                    Properties props = parseProperties(properties);
 
                     for (Entry<Object,Object> entry : props.entrySet()) {
                         javaOpts.append(" -D" + entry.getKey() + "=" + entry.getValue());
                     }
-                    
+
                     envVars.put("JAVA_OPTS", javaOpts.toString());
                  }
-                
+
                 result = launcher.launch(cmd,envVars,listener.getLogger(),ws).join();
             } catch (IOException e) {
                 Util.displayIOException(e,listener);
@@ -129,16 +118,16 @@ public class Groovy extends Builder {
             }
         }
     }
-   
+
     public Descriptor<Builder> getDescriptor() {
         return DESCRIPTOR;
-    }   
-    
-    
+    }
+
+
     public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
-    public static final class DescriptorImpl extends Descriptor<Builder> {
-        
+    public static final class DescriptorImpl extends AbstractGroovyDescriptor {
+
         @CopyOnWrite
         private volatile GroovyInstallation[] installations = new GroovyInstallation[0];
 
@@ -170,26 +159,24 @@ public class Groovy extends Builder {
 
         @Override
         public Builder newInstance(StaplerRequest req, JSONObject data) throws FormException {
+            ScriptSource source = getScriptSource(req, data);
+            String instName = data.getString("groovyName");
+            String params = data.getString("parameters");
+            String scriptParams = data.getString("scriptParameters");
+            String props = data.getString("properties");
             
-            String selectedType = req.getParameter("groovy.type");
-            String instName = req.getParameter("groovy.groovyName");
-            String cmd = req.getParameter("groovy.command");
-            String file = req.getParameter("groovy.scriptFile");
-            String params = req.getParameter("groovy.parameters");
-            String scriptParams = req.getParameter("groovy.scriptParameters");
-            String props = req.getParameter("groovy.properties");
-            return new Groovy(BuilderType.valueOf(selectedType), instName, cmd, file, params, scriptParams, props);
+            return new Groovy(source, instName, params, scriptParams, props);
         }
-        
+
         public static GroovyInstallation getGroovy(String groovyName) {
             for( GroovyInstallation i : DESCRIPTOR.getInstallations() ) {
                 if(groovyName!=null && i.getName().equals(groovyName))
-                return i;
+              return i;
             }
-            return null;
+          return null;
         }
     }
-    
+
     public static final class GroovyInstallation implements Serializable {
 
         private final String name;
@@ -200,11 +187,11 @@ public class Groovy extends Builder {
             this.name = name;
             this.home = home;
         }
-        
+
         /**
          * install directory.
          */
-        public String getHome() {    
+        public String getHome() {
             return home;
         }
 
@@ -250,50 +237,50 @@ public class Groovy extends Builder {
                 return false;
             }
         }
-    
+
         private static final long serialVersionUID = 1L;
     }
 
-    
-    
+
+
     protected GroovyInstallation getGroovy() {
         return DescriptorImpl.getGroovy(groovyName);
     }
-    
+
     protected String[] buildCommandLine(FilePath script) throws IOException, InterruptedException  {
         ArrayList<String> list = new ArrayList<String>();
-        
+
         String cmd = "groovy";//last hope in case of missing or not selected installation
-        
+
         GroovyInstallation installation = getGroovy();
         if(installation != null) {
             cmd = installation.getExecutable(script.getChannel());
         }
         list.add(cmd);
-        
+
         //Add groovy parameters
         if(parameters != null) {
             StringTokenizer tokens = new StringTokenizer(parameters);
             while(tokens.hasMoreTokens()) {
-                list.add(tokens.nextToken());  
+                list.add(tokens.nextToken());
             }
         }
-        
+
         list.add(script.getRemote());
-        
+
         //Add script parameters
         if(scriptParameters != null) {
             StringTokenizer tokens = new StringTokenizer(scriptParameters);
             while(tokens.hasMoreTokens()) {
-                list.add(tokens.nextToken());    
+                list.add(tokens.nextToken());
             }
         }
-        
+
         return list.toArray(new String[] {});
-        
+
     }
-    
-    
+
+
     public String getCommand() {
         return command;
     }
@@ -323,5 +310,31 @@ public class Groovy extends Builder {
     }
     
     
+    //---- Backward compatibility -------- //
     
+    public enum BuilderType { COMMAND,FILE }
+    
+    private BuilderType type;
+    private String command;
+    private String scriptFile;
+    
+    private Object readResolve() {
+        if (type != null) {
+            switch (type) {
+                case COMMAND:
+                    scriptSource = new StringScriptSource(command);
+                    break;
+                case FILE:
+                    scriptSource = new FileScriptSource(scriptFile);
+                    break;
+            }
+        }
+        
+        type = null;
+        command = null;
+        scriptFile = null;
+        
+        return this;
+    }
+
 }

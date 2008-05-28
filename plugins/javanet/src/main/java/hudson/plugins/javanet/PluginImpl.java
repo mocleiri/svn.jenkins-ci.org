@@ -35,23 +35,35 @@ public class PluginImpl extends Plugin {
 
                 Trigger.timer.scheduleAtFixedRate(new SafeTimerTask() {
                     protected void doRun() {
-                        for(AbstractProject<?,?> j : Hudson.getInstance().getAllItems(AbstractProject.class)) {
-                            StatsProperty p = j.getProperty(StatsProperty.class);
-                            if(p==null) continue;
-                            JavaNetStatsAction a = p.getJobAction(j);
-                            if(a==null)  continue;
+                        LOGGER.fine("Starting up-to-date check of java.net stat reports");
+                        long startTime = System.currentTimeMillis();
+                        try {
+                            for(AbstractProject<?,?> j : Hudson.getInstance().getAllItems(AbstractProject.class)) {
+                                StatsProperty p = j.getProperty(StatsProperty.class);
+                                if(p==null) continue;
+                                JavaNetStatsAction a = p.getJobAction(j);
+                                if(a==null)  continue;
 
-                            a.upToDateCheck();
+                                a.upToDateCheck();
+                            }
+                        } finally {
+                            LOGGER.fine("Completing up-to-date check of java.net stat reports. Took "+(System.currentTimeMillis()-startTime)+"ms");
                         }
                     }
-                },10*MINUTE,3*HOUR);
+                },debug?15*SEC:10*MINUTE,debug?15*SEC:3*HOUR);
             }
         });
     }
 
-    static final long MINUTE = 1000*60;
-    static final long HOUR   = 24*60*MINUTE;
+    static final long SEC = 1000;
+    static final long MINUTE = 60*SEC;
+    static final long HOUR   = 60*MINUTE;
     static final long DAY   = 24*HOUR;
 
     private static final Logger LOGGER = Logger.getLogger(PluginImpl.class.getName());
+
+    /**
+     * Debug flag. This will increase the frequency of timer-related work.
+     */
+    static final boolean debug = Boolean.getBoolean(PluginImpl.class.getName()+".debug");
 }

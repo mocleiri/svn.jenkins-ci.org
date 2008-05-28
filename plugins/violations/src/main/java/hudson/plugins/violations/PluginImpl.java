@@ -4,7 +4,7 @@ import hudson.Plugin;
 
 import hudson.tasks.Publisher;
 import hudson.maven.MavenReporters;
-import hudson.plugins.violations.hudson.ViolationsMavenReporter;
+import hudson.plugins.violations.hudson.maven.ViolationsMavenReporter;
 
 /**
  * Entry point of a plugin.
@@ -19,7 +19,6 @@ public class PluginImpl extends Plugin {
     @Override
     public void start() throws Exception {
         Publisher.PUBLISHERS.addRecorder(ViolationsPublisher.DESCRIPTOR);
-        // Disable for the moment
-        //MavenReporters.LIST.add(ViolationsMavenReporter.DESCRIPTOR);
+        MavenReporters.LIST.add(ViolationsMavenReporter.DESCRIPTOR);
     }
 }

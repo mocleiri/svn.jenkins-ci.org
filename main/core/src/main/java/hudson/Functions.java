@@ -1,21 +1,7 @@
 package hudson;
 
 import hudson.maven.ExecutedMojo;
-import hudson.model.AbstractProject;
-import hudson.model.Action;
-import hudson.model.Descriptor;
-import hudson.model.Hudson;
-import hudson.model.Item;
-import hudson.model.ItemGroup;
-import hudson.model.Items;
-import hudson.model.Job;
-import hudson.model.JobPropertyDescriptor;
-import hudson.model.ModelObject;
-import hudson.model.Node;
-import hudson.model.Project;
-import hudson.model.Run;
-import hudson.model.TopLevelItem;
-import hudson.model.View;
+import hudson.model.*;
 import hudson.search.SearchableModelObject;
 import hudson.security.AccessControlled;
 import hudson.security.AuthorizationStrategy;
@@ -27,6 +13,20 @@ import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildWrappers;
 import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
+import hudson.security.SecurityRealm;
+import hudson.security.AuthorizationStrategy;
+import hudson.security.Permission;
+import hudson.util.Area;
+import hudson.slaves.ComputerLauncher;
+import hudson.slaves.RetentionStrategy;
+import org.apache.commons.jexl.parser.ASTSizeFunction;
+import org.apache.commons.jexl.util.Introspector;
+import org.apache.commons.jelly.JellyContext;
+import org.kohsuke.stapler.Ancestor;
+import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
 
 import java.io.File;
 import java.io.IOException;
@@ -182,6 +182,17 @@ public class Functions {
         String rest = reqUri.substring(f.getUrl().length());
 
         return new RunUrl( (Run) f.getObject(), head, base, rest);
+    }
+
+    /**
+     * If we know the user's screen resolution, return it. Otherwise null.
+     * @since 1.213
+     */
+    public static Area getScreenResolution() {
+        Cookie res = Functions.getCookie(Stapler.getCurrentRequest(),"screenResolution");
+        if(res!=null)
+            return Area.parse(res.getValue());
+        return null;
     }
 
     /**
@@ -507,6 +518,14 @@ public class Functions {
 
     public static List<Descriptor<Publisher>> getPublisherDescriptors(AbstractProject<?,?> project) {
         return BuildStepDescriptor.filter(BuildStep.PUBLISHERS, project.getClass());
+    }
+
+    public static List<Descriptor<ComputerLauncher>> getComputerLauncherDescriptors() {
+        return ComputerLauncher.LIST;
+    }
+
+    public static List<Descriptor<RetentionStrategy<?>>> getRetentionStrategyDescriptors() {
+        return RetentionStrategy.LIST;
     }
 
     /**

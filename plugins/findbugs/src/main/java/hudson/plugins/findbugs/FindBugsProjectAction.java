@@ -19,9 +19,11 @@ public class FindBugsProjectAction extends AbstractProjectAction<FindBugsResultA
      *
      * @param project
      *            the project that owns this action
+     * @param height
+     *            the height of the trend graph
      */
-    public FindBugsProjectAction(final AbstractProject<?, ?> project) {
-        super(project, FindBugsResultAction.class, FindBugsDescriptor.ACTION_ICON, FindBugsDescriptor.PLUGIN_NAME);
+    public FindBugsProjectAction(final AbstractProject<?, ?> project, final int height) {
+        super(project, FindBugsResultAction.class, FindBugsPublisher.FIND_BUGS_DESCRIPTOR, height);
     }
 
     /** {@inheritDoc} */
@@ -30,14 +32,16 @@ public class FindBugsProjectAction extends AbstractProjectAction<FindBugsResultA
     }
 
     /** {@inheritDoc} */
-    public String getUrlName() {
-        return FindBugsDescriptor.PLUGIN_NAME;
+    @Override
+    // TODO: if a new graph is added replace with a super-class method
+    public String getCookieName() {
+        return "FindBugs_displayMode";
     }
 
     /** {@inheritDoc} */
     @Override
-    protected String getCookieName() {
-        return "FindBugs_displayMode";
+    public String getTrendName() {
+        return Messages.FindBugs_Trend_Name();
     }
 }
 

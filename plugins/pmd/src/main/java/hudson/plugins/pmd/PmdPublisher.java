@@ -1,14 +1,11 @@
 package hudson.plugins.pmd;
 
-import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
-import hudson.model.BuildListener;
 import hudson.model.Descriptor;
-import hudson.model.Result;
-import hudson.plugins.pmd.parser.PmdCollector;
-import hudson.plugins.pmd.util.AbortException;
+import hudson.plugins.pmd.parser.PmdParser;
+import hudson.plugins.pmd.util.FilesParser;
 import hudson.plugins.pmd.util.HealthAwarePublisher;
 import hudson.plugins.pmd.util.HealthReportBuilder;
 import hudson.plugins.pmd.util.model.JavaProject;
@@ -18,9 +15,10 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 import org.apache.commons.lang.StringUtils;
+import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
- * Publishes the results of the PMD analysis.
+ * Publishes the results of the PMD analysis  (freestyle project type).
  *
  * @author Ulli Hafner
  */
@@ -29,6 +27,8 @@ public class PmdPublisher extends HealthAwarePublisher {
     private static final String DEFAULT_PATTERN = "**/pmd.xml";
     /** Descriptor of this publisher. */
     public static final PmdDescriptor PMD_DESCRIPTOR = new PmdDescriptor();
+    /** Ant file-set pattern of files to work with. */
+    private final String pattern;
 
     /**
      * Creates a new instance of <code>PmdPublisher</code>.
@@ -44,137 +44,44 @@ public class PmdPublisher extends HealthAwarePublisher {
      * @param unHealthy
      *            Report health as 0% when the number of warnings is greater
      *            than this value
-     * @stapler-constructor
+     * @param height
+     *            the height of the trend graph
      */
-    public PmdPublisher(final String pattern, final String threshold, final String healthy, final String unHealthy) {
-        super(pattern, threshold, healthy, unHealthy);
+    @DataBoundConstructor
+    public PmdPublisher(final String pattern, final String threshold, final String healthy, final String unHealthy, final String height) {
+        super(threshold, healthy, unHealthy, height, "PMD");
+        this.pattern = pattern;
+    }
+
+    /**
+     * Returns the Ant file-set pattern of files to work with.
+     *
+     * @return Ant file-set pattern of files to work with
+     */
+    public String getPattern() {
+        return pattern;
     }
 
     /** {@inheritDoc} */
     @Override
     public Action getProjectAction(final AbstractProject<?, ?> project) {
-        return new PmdProjectAction(project);
+        return new PmdProjectAction(project, getTrendHeight());
     }
 
-    /**
-     * Scans the workspace and parses all found PMD XML files. Then, the
-     * annotations of all files are merged and persisted for a build. Finally,
-     * the number of bugs are counted and the result of the build is set
-     * accordingly ({@link #getThreshold()}.
-     *
-     * @param build
-     *            the build
-     * @param launcher
-     *            the launcher
-     * @param listener
-     *            the build listener
-     * @return <code>true</code> if the build could continue
-     * @throws IOException
-     *             if the files could not be copied
-     * @throws InterruptedException
-     *             if user cancels the operation
-     */
+    /** {@inheritDoc} */
     @Override
-    public boolean perform(final AbstractBuild<?, ?> build, final Launcher launcher,
-            final BuildListener listener) throws InterruptedException, IOException {
-        PrintStream logger = listener.getLogger();
-        try {
-            logger.println("Collecting pmd analysis files...");
+    public JavaProject perform(final AbstractBuild<?, ?> build, final PrintStream logger) throws InterruptedException, IOException {
+        log(logger, "Collecting pmd analysis files...");
+        FilesParser pmdCollector = new FilesParser(logger, StringUtils.defaultIfEmpty(getPattern(), DEFAULT_PATTERN), new PmdParser());
 
-            JavaProject project = parseAllWorkspaceFiles(build, logger);
-            PmdResult result = createResult(build, project);
+        JavaProject project = build.getProject().getWorkspace().act(pmdCollector);
+        PmdResult result = new PmdResultBuilder().build(build, project);
+        HealthReportBuilder healthReportBuilder = createHealthReporter(
+                Messages.PMD_ResultAction_HealthReportSingleItem(),
+                Messages.PMD_ResultAction_HealthReportMultipleItem("%d"));
+        build.getActions().add(new PmdResultAction(build, healthReportBuilder, result));
 
-            HealthReportBuilder healthReportBuilder = createHealthReporter(
-                    Messages.PMD_ResultAction_HealthReportSingleItem(),
-                    Messages.PMD_ResultAction_HealthReportMultipleItem("%d"));
-            build.getActions().add(new PmdResultAction(build, result, healthReportBuilder));
-
-            evaluateBuildResult(build, logger, project);
-
-            return true;
-        }
-        catch (AbortException exception) {
-            logger.println(exception.getMessage());
-            build.setResult(Result.FAILURE);
-            return false;
-        }
-    }
-
-    /**
-     * Evaluates the build result. The build is marked as unstable if the
-     * threshold has been exceeded.
-     *
-     * @param build
-     *            the build to create the action for
-     * @param logger
-     *            the logger
-     * @param project
-     *            the project with the annotations
-     */
-    private void evaluateBuildResult(final AbstractBuild<?, ?> build, final PrintStream logger, final JavaProject project) {
-        int warnings = project.getNumberOfAnnotations();
-        if (warnings > 0) {
-            logger.println(
-                    "A total of " + warnings + " warnings have been found.");
-            if (isThresholdEnabled() && warnings >= getMinimumAnnotations()) {
-                build.setResult(Result.UNSTABLE);
-            }
-        }
-        else {
-            logger.println("No warnings have been found.");
-        }
-    }
-
-    /**
-     * Scans the workspace for PMD files matching the specified pattern and
-     * returns all found annotations merged in a project.
-     *
-     * @param build
-     *            the build to create the action for
-     * @param logger
-     *            the logger
-     * @return the project with the annotations
-     * @throws IOException
-     *             if the files could not be read
-     * @throws InterruptedException
-     *             if user cancels the operation
-     */
-    private JavaProject parseAllWorkspaceFiles(final AbstractBuild<?, ?> build,
-            final PrintStream logger) throws IOException, InterruptedException {
-        PmdCollector pmdCollector = new PmdCollector(logger, build.getTimestamp().getTimeInMillis(),
-                        StringUtils.defaultIfEmpty(getPattern(), DEFAULT_PATTERN));
-
-        return build.getProject().getWorkspace().act(pmdCollector);
-    }
-
-    /**
-     * Creates a result that persists the PMD information for the
-     * specified build.
-     *
-     * @param build
-     *            the build to create the action for
-     * @param project
-     *            the project containing the annotations
-     * @return the result action
-     */
-    private PmdResult createResult(final AbstractBuild<?, ?> build, final JavaProject project) {
-        Object previous = build.getPreviousBuild();
-        PmdResult result;
-        if (previous instanceof AbstractBuild<?, ?>) {
-            AbstractBuild<?, ?> previousBuild = (AbstractBuild<?, ?>)previous;
-            PmdResultAction previousAction = previousBuild.getAction(PmdResultAction.class);
-            if (previousAction == null) {
-                result = new PmdResult(build, project);
-            }
-            else {
-                result = new PmdResult(build, project, previousAction.getResult().getProject(),
-                        previousAction.getResult().getZeroWarningsHighScore());
-            }
-        }
-        else {
-            result = new PmdResult(build, project);
-        }
-        return result;
+        return project;
     }
 
     /** {@inheritDoc} */

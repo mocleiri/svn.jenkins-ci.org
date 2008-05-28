@@ -1,9 +1,3 @@
-/*
- * Copyright (c) 2007 Avaya Inc.
- *
- * All rights reserved.
- */
-
 package hudson.plugins.vmware;
 
 import hudson.plugins.vmware.vix.Vix;
@@ -49,10 +43,6 @@ public class Host {
         }
     }
 
-    public enum HostType {
-        VMWARE_SERVER;
-    }
-
     public void disconnect() {
         if (usageCount.decrementAndGet() <= 0) {
             lib.getInstance().VixHost_Disconnect(handle);
@@ -68,4 +58,5 @@ public class Host {
         usageCount.getAndIncrement();
         return machine;
     }
+
 }

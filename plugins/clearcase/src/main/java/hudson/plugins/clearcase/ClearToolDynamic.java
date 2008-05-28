@@ -8,8 +8,8 @@ public class ClearToolDynamic extends ClearToolExec {
 
     private transient String viewDrive;
 
-    public ClearToolDynamic(String clearToolExec, String viewDrive) {
-        super(clearToolExec);
+    public ClearToolDynamic(ClearToolLauncher launcher, String clearToolExec, String viewDrive) {
+        super(launcher, clearToolExec);
         this.viewDrive = viewDrive;
     }
 
@@ -18,7 +18,13 @@ public class ClearToolDynamic extends ClearToolExec {
         return new FilePath(launcher.getWorkspace().getChannel(), viewDrive);
     }
 
-    public void setcs(ClearToolLauncher launcher, String viewName, String configSpec) throws IOException,
+    /**
+     * The view tag does need not be active.
+     * However, it is possible to set the config spec of a dynamic view from within a snapshot view
+     * using "-tag view-tag" 
+     * @see http://www.ipnom.com/ClearCase-Commands/setcs.html
+     */
+    public void setcs(String viewName, String configSpec) throws IOException,
             InterruptedException {
         FilePath configSpecFile = launcher.getWorkspace().createTextTempFile("configspec", ".txt", configSpec);
 
@@ -33,23 +39,24 @@ public class ClearToolDynamic extends ClearToolExec {
         configSpecFile.delete();
     }
 
-    public void mkview(ClearToolLauncher launcher, String viewName) throws IOException, InterruptedException {
-        launcher.getListener().fatalError("Dynamic view does not support mkview");
+    public void mkview(String viewName, String streamSelector) throws IOException, InterruptedException {
+        launcher.getListener().fatalError("Dynamic view does not support mkview");        
     }
 
-    public void rmview(ClearToolLauncher launcher, String viewName) throws IOException, InterruptedException {
+    public void rmview(String viewName) throws IOException, InterruptedException {
         launcher.getListener().fatalError("Dynamic view does not support rmview");
     }
 
-    public void update(ClearToolLauncher launcher, String viewName) throws IOException, InterruptedException {
+    public void update(String viewName, String loadRules) throws IOException, InterruptedException {
         launcher.getListener().fatalError("Dynamic view does not support update");
     }
 
-	public void setView(ClearToolLauncher launcher, String viewTag)  throws IOException, InterruptedException {
+    public void startView(String viewTags)  throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add(clearToolExec);
-        cmd.add("setview");
-        cmd.add(viewTag);
+        cmd.add("startview");
+        cmd.addTokenized(viewTags);
         launcher.run(cmd.toCommandArray(), null, null, null);
-	}
+    }
+
 }

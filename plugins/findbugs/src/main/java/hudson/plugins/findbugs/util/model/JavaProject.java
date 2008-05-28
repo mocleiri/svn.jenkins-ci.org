@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import edu.umd.cs.findbugs.annotations.SuppressWarnings;
+
 /**
  * A serializable Java Bean class representing a project that has been built by
  * Hudson.
@@ -19,6 +21,7 @@ public class JavaProject extends AnnotationContainer {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = 8556968267678442661L;
     /** All maven modules in this project (mapped by their name). */
+    @SuppressWarnings("Se")
     private final Map<String, MavenModule> moduleMapping = new HashMap<String, MavenModule>();
     /** Path of the workspace. */
     private String workspacePath;
@@ -74,11 +77,24 @@ public class JavaProject extends AnnotationContainer {
     }
 
     /**
+     * Returns whether the maven module with the given name exists.
+     *
+     * @param moduleName
+     *            the module to check for
+     * @return <code>true</code> if the maven module with the given name
+     *         exists, <code>false</code> otherwise
+     */
+    public boolean containsModule(final String moduleName) {
+        return moduleMapping.get(moduleName) != null;
+    }
+
+    /**
      * Returns the maven module with the given name.
      *
      * @param moduleName
      *            the module to get
      * @return the module with the given name
+     * @see #containsModule(String)
      */
     public MavenModule getModule(final String moduleName) {
         MavenModule mavenModule = moduleMapping.get(moduleName);
@@ -182,6 +198,17 @@ public class JavaProject extends AnnotationContainer {
         addAnnotations(module.getAnnotations());
         if (module.hasError()) {
             hasModuleError = true;
+        }
+    }
+
+    /**
+     * Adds the specified modules with their annotations to this project.
+     *
+     * @param modules the modules to add
+     */
+    public void addModules(final Collection<MavenModule> modules) {
+        for (MavenModule mavenModule : modules) {
+            addModule(mavenModule);
         }
     }
 

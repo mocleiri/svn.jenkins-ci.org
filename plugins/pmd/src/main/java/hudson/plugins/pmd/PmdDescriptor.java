@@ -1,6 +1,7 @@
 package hudson.plugins.pmd;
 
 import hudson.plugins.pmd.util.PluginDescriptor;
+import net.sf.json.JSONObject;
 
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -12,9 +13,9 @@ import org.kohsuke.stapler.StaplerRequest;
  */
 public final class PmdDescriptor extends PluginDescriptor {
     /** Plug-in name. */
-    static final String PLUGIN_NAME = "pmd";
+    private static final String PLUGIN_NAME = "pmd";
     /** Icon to use for the result and project action. */
-    static final String PMD_ACTION_LOGO = "/plugin/pmd/icons/pmd-24x24.gif";
+    private static final String ACTION_ICON = "/plugin/pmd/icons/pmd-24x24.gif";
 
     /**
      * Instantiates a new find bugs descriptor.
@@ -31,13 +32,19 @@ public final class PmdDescriptor extends PluginDescriptor {
 
     /** {@inheritDoc} */
     @Override
-    protected String getPluginName() {
+    public String getPluginName() {
         return PLUGIN_NAME;
     }
 
     /** {@inheritDoc} */
     @Override
-    public PmdPublisher newInstance(final StaplerRequest request) throws FormException {
-        return request.bindParameters(PmdPublisher.class, PLUGIN_NAME + "_");
+    public String getIconUrl() {
+        return ACTION_ICON;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public PmdPublisher newInstance(final StaplerRequest request, final JSONObject formData) throws FormException {
+        return request.bindParameters(PmdPublisher.class, PLUGIN_NAME + ".");
     }
 }

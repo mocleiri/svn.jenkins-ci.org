@@ -64,6 +64,11 @@ public class BitKeeperSCM extends SCM {
      */
     private final boolean quiet;
     
+    /** 
+     * How many times to retry clone/pull operations before declaring the build a failure
+     */
+    private final int maxAttempts = 9;
+    
     @DataBoundConstructor
     public BitKeeperSCM(String parent, String localRepo, boolean usePull, boolean quiet) {
         this.parent = parent;
@@ -105,16 +110,13 @@ public class BitKeeperSCM extends SCM {
     public boolean checkout(AbstractBuild build, Launcher launcher,
         FilePath workspace, BuildListener listener, File changelogFile)
         throws IOException, InterruptedException {
-        FilePath localRepo = workspace.child(localRepository);
         if(!this.usePull) {
-       	    localRepo.deleteRecursive();
-        }
-        if(!localRepo.exists()) {
         	cloneLocalRepo(build, launcher, listener, workspace);
         } else {
             pullLocalRepo(build, launcher, listener, workspace);
         }
         
+        FilePath localRepo = workspace.child(localRepository);        
         saveChangelog(build, launcher, listener, changelogFile, localRepo);
 
         String mostRecent = 
@@ -136,7 +138,7 @@ public class BitKeeperSCM extends SCM {
     	args.add(getDescriptor().getBkExe());
     	args.add("pull");
     	args.add("-u");
-    	args.add("-c9");
+    	args.add("-c" + maxAttempts);
     	if(quiet) args.add("-q");
     	args.add(parent);
 		if(launcher.launch(
@@ -171,7 +173,7 @@ public class BitKeeperSCM extends SCM {
                         "changes",
                 	"-v", 
                 	"-r" + recentCset + "..",
-                	"-d$if(:CHANGESET:){U :USER:\n$each(:C:){C (:C:)\n}}$unless(:CHANGESET:){F :GFILE:\n}"
+                	"-d$if(:CHANGESET:){U :USER:\n$each(:C:){C (:C:)\n}$each(:TAG:){T (:TAG:)\n}}$unless(:CHANGESET:){F :GFILE:\n}"
                     },
                     build.getEnvVars(), changelog,localRepo).join() != 0) 
                 {
@@ -194,6 +196,11 @@ public class BitKeeperSCM extends SCM {
 	public DescriptorImpl getDescriptor() {
 		return DescriptorImpl.DESCRIPTOR;
 	}
+	
+	@Override
+	public boolean requiresWorkspaceForPolling() {
+		return false;
+	}
 
 	@Override
 	public boolean pollChanges(AbstractProject project, Launcher launcher,
@@ -206,16 +213,7 @@ public class BitKeeperSCM extends SCM {
         String recentCset = tagAction == null ? null : tagAction.getCsetkey();
         String cset = 
             this.getLatestChangeset(Collections.<String,String>emptyMap(), launcher, workspace, parent, listener);
-        if(recentCset == null || recentCset.equals("")) {
-       	    recentCset = cset;
-        }
-        if(cset.equals(recentCset)) {
-            output.println("No changes");
-            return false;
-        } else {
-        	output.println("Changes detected");
-        	return true;
-        }
+        return !(cset.equals(recentCset));
     }
 	
 	private String getLatestChangeset(Map<String, String> env, Launcher launcher, 
@@ -251,6 +249,8 @@ public class BitKeeperSCM extends SCM {
     		TaskListener listener, FilePath workspace) 
     throws InterruptedException, IOException 
     {
+        FilePath localRepo = workspace.child(localRepository);
+
     	ArrayList<String> args = new ArrayList<String>();
     	args.add(getDescriptor().getBkExe());
     	args.add("clone");
@@ -258,12 +258,26 @@ public class BitKeeperSCM extends SCM {
     	args.add(parent);
     	args.add(localRepository);
     	PrintStream output = listener.getLogger();
-    	if(launcher.launch(
-    		args.toArray(new String[args.size()]),
-            build.getEnvVars(), output,workspace).join()!=0){
-    		listener.error("Failed to clone from " + this.parent);
+    	
+    	int attempt = 0;
+    	int result = 0;
+    	do {
+    		if(result != 0) {
+    			Thread.sleep(30000);
+    			listener.error("Retrying clone");
+    			
+    		}
+    		localRepo.deleteRecursive();
+    		result = launcher.launch(
+    				args.toArray(new String[args.size()]),
+    				build.getEnvVars(), output,workspace).join();
+    	} while(++attempt < maxAttempts && result != 0);
+    	
+    	if(result != 0) {
+    		listener.error("Failed to clone after " + maxAttempts + " attempts from " + this.parent);
     		throw new AbortException();
     	}
+    	
     	output.println("New clone made");
     }
 

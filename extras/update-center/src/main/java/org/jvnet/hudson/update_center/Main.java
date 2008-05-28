@@ -1,65 +1,73 @@
 package org.jvnet.hudson.update_center;
 
-import org.kohsuke.jnt.JNFile;
 import org.kohsuke.jnt.JNFileFolder;
+import org.kohsuke.jnt.JNProject;
 import org.kohsuke.jnt.JavaNet;
 import org.kohsuke.jnt.ProcessingException;
-import org.kohsuke.jnt.JNProject;
+import net.sf.json.JSONObject;
 
-import java.io.File;
+import javax.xml.rpc.ServiceException;
+import java.io.IOException;
+import java.io.Writer;
+import java.io.OutputStreamWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.io.IOException;
 
 /**
  * @author Kohsuke Kawaguchi
  */
 public class Main {
-    public static void main(String[] args) throws ProcessingException, IOException {
+    public static void main(String[] args) throws Exception {
         JavaNet jn = JavaNet.connect();
         JNProject p = jn.getProject("hudson");
-        JNFileFolder plugins = p.getFolder("/plugins");
-        for( JNFileFolder dir : plugins.getSubFolders().values() ) {
+
+        JSONObject root = new JSONObject();
+        root.put("updateCenterVersion","1");
+        root.put("plugins", buildPlugins(p));
+        root.put("core", buildCore(p));
+
+        Writer w = args.length==0 ? new OutputStreamWriter(System.out) : new FileWriter(args[0]);
+        PrintWriter pw = new PrintWriter(w);
+        pw.println("updateCenter(");
+        root.write(pw);
+        pw.println(");");
+        pw.close();
+    }
+
+    /**
+     * Build JSON for the plugin list.
+     */
+    private static JSONObject buildPlugins(JNProject p) throws ProcessingException, IOException, ServiceException {
+        JNFileFolder pluginsFolder = p.getFolder("/plugins");
+        ConfluencePluginList cpl = new ConfluencePluginList();
+
+        JSONObject plugins = new JSONObject();
+        for( JNFileFolder dir : pluginsFolder.getSubFolders().values() ) {
             System.out.println(dir.getName());
 
-            VersionedFile latest = findLatest(dir);
+            VersionedFile latest = VersionedFile.findLatestFrom(dir);
+            if(latest==null)
+                continue;       // couldn't find it
 
-            System.out.println("=> "+latest);
+            Plugin plugin = new Plugin(dir.getName(),latest,cpl);
 
-            if(latest!=null)
-                latest.writeTo(dir.getName());
+            if(plugin.page!=null)
+                System.out.println("=> "+plugin.page.getTitle());
+            System.out.println("=> "+plugin.toJSON());
+
+            plugins.put(plugin.artifactId,plugin.toJSON());
         }
+        return plugins;
+    }
 
+    /**
+     * Build JSON for the core Hudson.
+     */
+    private static JSONObject buildCore(JNProject p) throws ProcessingException {
         JNFileFolder release = p.getFolder("/releases");
-        VersionedFile latest = findLatest(release);
-        System.out.println("core\n=> "+latest);
-        latest.writeTo("core");
-    }
-
-    private static VersionNumber parseVersion(JNFile file) {
-        String n = file.getName();
-        if(n.contains(" "))  n = n.substring(n.lastIndexOf(' ')+1);
-        VersionNumber vn = new VersionNumber(n);
-        return vn;
-    }
-
-    private static VersionedFile findLatest(JNFileFolder dir) throws ProcessingException {
-        VersionNumber latestVer=null;
-        JNFile latest=null;
-
-        for( JNFile file : dir.getFiles().values() ) {
-            try {
-                VersionNumber vn = parseVersion(file);
-                if(latestVer==null || vn.compareTo(latestVer)>0) {
-                    latestVer = vn;
-                    latest = file;
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println("   Ignoring "+file.getName());
-            }
-        }
-
-        if(latest==null)    return null;
-        return new VersionedFile(latest,latestVer);
+        VersionedFile latest = VersionedFile.findLatestFrom(release);
+        JSONObject core = latest.toJSON("core");
+        System.out.println("core\n=> "+ core);
+        return core;
     }
 }

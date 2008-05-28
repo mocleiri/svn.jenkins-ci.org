@@ -2,8 +2,10 @@ package hudson.plugins.tasks.parser;
 
 import hudson.FilePath;
 import hudson.FilePath.FileCallable;
-import hudson.plugins.tasks.util.AbortException;
+import hudson.plugins.tasks.util.CsharpNamespaceDetector;
+import hudson.plugins.tasks.util.JavaPackageDetector;
 import hudson.plugins.tasks.util.MavenModuleDetector;
+import hudson.plugins.tasks.util.PackageDetector;
 import hudson.remoting.VirtualChannel;
 
 import java.io.File;
@@ -35,6 +37,8 @@ public class WorkspaceScanner implements FileCallable<TasksProject> {
     private final String normal;
     /** Tag identifiers indicating low priority. */
     private final String low;
+    /** Prefix of path. */
+    private String prefix;
 
     /**
      * Creates a new instance of <code>WorkspaceScanner</code>.
@@ -74,13 +78,27 @@ public class WorkspaceScanner implements FileCallable<TasksProject> {
         this.moduleName = moduleName;
     }
 
+    /**
+     * Sets the prefix to the specified value.
+     *
+     * @param prefix the value to set
+     */
+    public void setPrefix(final String prefix) {
+        this.prefix = prefix + "/";
+    }
+
+    /**
+     * Returns the prefix.
+     *
+     * @return the prefix
+     */
+    public String getPrefix() {
+        return StringUtils.defaultIfEmpty(prefix, StringUtils.EMPTY);
+    }
+
     /** {@inheritDoc} */
     public TasksProject invoke(final File workspace, final VirtualChannel channel) throws IOException {
         String[] files = findFiles(workspace);
-        if (files.length == 0) {
-            throw new AbortException("No files were found that match the pattern '"
-                    + filePattern + "'. Configuration error?");
-        }
 
         List<PackageDetector> detectors = new ArrayList<PackageDetector>();
         detectors.add(new JavaPackageDetector());
@@ -99,7 +117,7 @@ public class WorkspaceScanner implements FileCallable<TasksProject> {
                 String actualModule = StringUtils.defaultIfEmpty(moduleName, moduleDetector.guessModuleName(originalFile.getAbsolutePath()));
 
                 for (Task task : tasks) {
-                    task.setFileName(unixName);
+                    task.setFileName(getPrefix() + unixName);
                     task.setPackageName(packageName);
                     task.setModuleName(actualModule);
                 }
@@ -130,7 +148,7 @@ public class WorkspaceScanner implements FileCallable<TasksProject> {
                 return detector.detectPackageName(content);
             }
         }
-        return StringUtils.EMPTY;
+        return "n/a";
     }
 
     /**

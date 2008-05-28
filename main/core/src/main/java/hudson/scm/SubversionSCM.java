@@ -59,6 +59,7 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Chmod;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.putty.PuTTYKey;
 import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNErrorCode;
 import org.tmatesoft.svn.core.SVNErrorMessage;
@@ -366,7 +367,7 @@ public class SubversionSCM extends SCM implements Serializable {
         private final ISVNAuthenticationProvider authProvider;
         private final Date timestamp;
         // true to "svn update", false to "svn checkout".
-        private final boolean update;
+        private boolean update;
         private final TaskListener listener;
         private final ModuleLocation[] locations;
 
@@ -393,6 +394,13 @@ public class SubversionSCM extends SCM implements Serializable {
                             svnuc.doUpdate(new File(ws, l.local).getCanonicalFile(), revision, true);
 
                         } catch (final SVNException e) {
+                            if(e.getErrorMessage().getErrorCode()== SVNErrorCode.WC_LOCKED) {
+                                // work space locked. try fresh check out
+                                listener.getLogger().println("Workspace appear to be locked, so getting a fresh workspace");
+                                update = false;
+                                return invoke(ws,channel);
+                            }
+
                             e.printStackTrace(listener.error("Failed to update "+l.remote));
                             // trouble-shooting probe for #591
                             if(e.getErrorMessage().getErrorCode()== SVNErrorCode.WC_NOT_LOCKED) {
@@ -1066,12 +1074,18 @@ public class SubversionSCM extends SCM implements Serializable {
             } else {
                 item = parser.getFileItem(kind.equals("publickey")?"privateKey":"certificate");
                 keyFile = File.createTempFile("hudson","key");
-                if(item!=null)
+                if(item!=null) {
                     try {
                         item.write(keyFile);
                     } catch (Exception e) {
                         throw new IOException2(e);
                     }
+                    if(PuTTYKey.isPuTTYKeyFile(keyFile)) {
+                        // TODO: we need a passphrase support
+                        LOGGER.info("Converting "+keyFile+" from PuTTY format to OpenSSH format");
+                        new PuTTYKey(keyFile,null).toOpenSSH(keyFile);
+                    }
+                }
             }
 
             SVNRepository repository = null;

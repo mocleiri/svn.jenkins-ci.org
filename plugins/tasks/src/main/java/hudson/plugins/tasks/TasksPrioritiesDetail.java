@@ -9,8 +9,12 @@ import java.util.Collection;
 
 /**
  * Result object to visualize the priorities statistics of an annotation container.
+ *
+ * @author Ulli Hafner
  */
 public class TasksPrioritiesDetail extends PrioritiesDetail {
+    /** Unique identifier of this class. */
+    private static final long serialVersionUID = -4312016503040391234L;
     /** Handles the task tags. */
     private final TaskTagsHandler taskTagsHandler;
 

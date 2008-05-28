@@ -1,7 +1,15 @@
 package hudson.plugins.tasks.util;
 
+import hudson.Launcher;
+import hudson.model.AbstractBuild;
+import hudson.model.BuildListener;
 import hudson.model.Result;
+import hudson.plugins.tasks.util.model.JavaProject;
+import hudson.tasks.BuildStep;
 import hudson.tasks.Publisher;
+
+import java.io.IOException;
+import java.io.PrintStream;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -15,12 +23,11 @@ import org.apache.commons.lang.StringUtils;
  * <li>It provides thresholds for the build health, that could be adjusted in
  * the configuration screen. These values are used by the
  * {@link HealthReportBuilder} to compute the health and the health trend graph.</li>
- * <li>It works on files based on a user configurable file name pattern. </li>
  * </ul>
+ *
+ * @author Ulli Hafner
  */
 public abstract class HealthAwarePublisher extends Publisher {
-    /** Ant file-set pattern of files to work with. */
-    private final String pattern;
     /** Annotation threshold to be reached if a build should be considered as unstable. */
     private final String threshold;
     /** Determines whether to use the provided threshold to mark a build as unstable. */
@@ -37,12 +44,14 @@ public abstract class HealthAwarePublisher extends Publisher {
     private int unHealthyAnnotations;
     /** Determines whether to use the provided healthy thresholds. */
     private boolean healthyReportEnabled;
+    /** Determines the height of the trend graph. */
+    private final String height;
+    /** The name of the plug-in. */
+    private final String pluginName;
 
     /**
      * Creates a new instance of <code>HealthAwarePublisher</code>.
      *
-     * @param pattern
-     *            Ant file-set pattern of files to scan for open tasks in
      * @param threshold
      *            Tasks threshold to be reached if a build should be considered
      *            as unstable.
@@ -52,14 +61,19 @@ public abstract class HealthAwarePublisher extends Publisher {
      * @param unHealthy
      *            Report health as 0% when the number of open tasks is greater
      *            than this value
+     * @param height
+     *            the height of the trend graph
+     * @param pluginName
+     *            the name of the plug-in
      */
-    public HealthAwarePublisher(final String pattern, final String threshold,
-            final String healthy, final String unHealthy) {
+    public HealthAwarePublisher(final String threshold, final String healthy, final String unHealthy,
+            final String height, final String pluginName) {
         super();
         this.threshold = threshold;
         this.healthy = healthy;
         this.unHealthy = unHealthy;
-        this.pattern = pattern;
+        this.height = height;
+        this.pluginName = "[" + pluginName + "] ";
 
         if (!StringUtils.isEmpty(threshold)) {
             try {
@@ -84,6 +98,83 @@ public abstract class HealthAwarePublisher extends Publisher {
                 // nothing to do, we use the default value
             }
         }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final boolean perform(final AbstractBuild<?, ?> build, final Launcher launcher, final BuildListener listener) throws InterruptedException, IOException {
+        if (build.getResult() != Result.ABORTED && build.getResult() != Result.FAILURE) {
+            PrintStream logger = listener.getLogger();
+            try {
+                JavaProject project = perform(build, logger);
+                evaluateBuildResult(build, logger, project);
+            }
+            catch (AbortException exception) {
+                logger.println(exception.getMessage());
+                build.setResult(Result.FAILURE);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Performs the publishing of the results of this plug-in.
+     *
+     * @param build
+     *            the build
+     * @param logger the logger to report the progress to
+     *
+     * @return the java project containing the found annotations
+     *
+     * @throws InterruptedException
+     *             If the build is interrupted by the user (in an attempt to
+     *             abort the build.) Normally the {@link BuildStep}
+     *             implementations may simply forward the exception it got from
+     *             its lower-level functions.
+     * @throws IOException
+     *             If the implementation wants to abort the processing when an
+     *             {@link IOException} happens, it can simply propagate the
+     *             exception to the caller. This will cause the build to fail,
+     *             with the default error message. Implementations are
+     *             encouraged to catch {@link IOException} on its own to provide
+     *             a better error message, if it can do so, so that users have
+     *             better understanding on why it failed.
+     */
+    protected abstract JavaProject perform(AbstractBuild<?, ?> build, PrintStream logger) throws InterruptedException, IOException;
+
+    /**
+     * Evaluates the build result. The build is marked as unstable if the
+     * threshold has been exceeded.
+     *
+     * @param build
+     *            the build to create the action for
+     * @param logger
+     *            the logger
+     * @param project
+     *            the project with the annotations
+     */
+    private void evaluateBuildResult(final AbstractBuild<?, ?> build, final PrintStream logger, final JavaProject project) {
+        int annotationCount = project.getNumberOfAnnotations();
+        if (annotationCount > 0) {
+            log(logger, "A total of " + annotationCount + " annotations have been found.");
+            if (isThresholdEnabled() && annotationCount >= getMinimumAnnotations()) {
+                build.setResult(Result.UNSTABLE);
+            }
+        }
+        else {
+            log(logger, "No annotations have been found.");
+        }
+    }
+
+    /**
+     * Logs the specified message.
+     *
+     * @param logger the logger
+     * @param message the message
+     */
+    protected void log(final PrintStream logger, final String message) {
+        logger.println(StringUtils.defaultString(pluginName) + message);
     }
 
     /**
@@ -175,11 +266,20 @@ public abstract class HealthAwarePublisher extends Publisher {
     }
 
     /**
-     * Returns the Ant file-set pattern of files to work with.
+     * Returns the height of the trend graph.
      *
-     * @return Ant file-set pattern of files to work with
+     * @return the height of the trend graph
      */
-    public String getPattern() {
-        return pattern;
+    public String getHeight() {
+        return height;
+    }
+
+    /**
+     * Returns the height of the trend graph.
+     *
+     * @return the height of the trend graph
+     */
+    public int getTrendHeight() {
+        return new TrendReportSize(height).getHeight();
     }
 }

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import edu.umd.cs.findbugs.annotations.SuppressWarnings;
+
 /**
  * A serializable Java Bean class representing a maven module.
  *
@@ -19,6 +21,7 @@ public class MavenModule extends AnnotationContainer {
     /** Name of this module. */
     private String name; // NOPMD: backward compatibility
     /** All Java packages in this maven module (mapped by their name). */
+    @SuppressWarnings("Se")
     private final Map<String, JavaPackage> packageMapping = new HashMap<String, JavaPackage>();
     /** The error message that denotes that the creation of the module has been failed. */
     private String error;
@@ -108,7 +111,7 @@ public class MavenModule extends AnnotationContainer {
     @Override
     public WorkspaceFile getFile(final String fileName) {
         if (packageMapping.size() != 1) {
-            throw new IllegalArgumentException("Number of modules != 1");
+            throw new IllegalArgumentException("Number of packages != 1");
         }
         return packageMapping.values().iterator().next().getFile(fileName);
     }

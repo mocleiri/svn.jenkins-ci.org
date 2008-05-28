@@ -6,7 +6,6 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.io.IOException;
 import org.kohsuke.stapler.export.ExportedBean;
@@ -16,7 +15,7 @@ import org.kohsuke.stapler.export.Exported;
  * Serves as the top of {@link Computer}s in the URL hierarchy.
  * <p>
  * Getter methods are prefixed with '_' to avoid collision with computer names.
- * 
+ *
  * @author Kohsuke Kawaguchi
  */
 @ExportedBean
@@ -43,13 +42,13 @@ public final class ComputerSet implements ModelObject {
 
     public void do_launchAll(StaplerRequest req, StaplerResponse rsp) throws IOException {
         for(Computer c : get_all()) {
-            if(c.isJnlpAgent())
+            if(c.isLaunchSupported())
                 continue;
             c.launch();
         }
         rsp.sendRedirect(".");
     }
-    
+
     public Api getApi() {
         return new Api(this);
     }

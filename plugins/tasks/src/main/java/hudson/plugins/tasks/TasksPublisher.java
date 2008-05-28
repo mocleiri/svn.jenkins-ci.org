@@ -1,25 +1,23 @@
 package hudson.plugins.tasks;
 
-import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
-import hudson.model.BuildListener;
 import hudson.model.Descriptor;
-import hudson.model.Result;
 import hudson.plugins.tasks.parser.TasksProject;
 import hudson.plugins.tasks.parser.WorkspaceScanner;
-import hudson.plugins.tasks.util.AbortException;
 import hudson.plugins.tasks.util.HealthAwarePublisher;
 import hudson.plugins.tasks.util.HealthReportBuilder;
 import hudson.tasks.Publisher;
 
 import java.io.IOException;
+import java.io.PrintStream;
 
 import org.apache.commons.lang.StringUtils;
+import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
- * Publishes the results of the task scanner.
+ * Publishes the results of the task scanner (freestyle project type).
  *
  * @author Ulli Hafner
  */
@@ -34,9 +32,11 @@ public class TasksPublisher extends HealthAwarePublisher {
     private final String normal;
     /** Tag identifiers indicating low priority. */
     private final String low;
+    /** Ant file-set pattern of files to work with. */
+    private final String pattern;
 
     /**
-     * Creates a new instance of <code>TaskScannerPublisher</code>.
+     * Creates a new instance of <code>TasksPublisher</code>.
      *
      * @param pattern
      *            Ant file-set pattern of files to scan for open tasks in
@@ -49,22 +49,36 @@ public class TasksPublisher extends HealthAwarePublisher {
      * @param unHealthy
      *            Report health as 0% when the number of open tasks is greater
      *            than this value
+     * @param height
+     *            the height of the trend graph
      * @param high
      *            tag identifiers indicating high priority
      * @param normal
      *            tag identifiers indicating normal priority
      * @param low
      *            tag identifiers indicating low priority
-     * @stapler-constructor
      */
+    // CHECKSTYLE:OFF
+    @DataBoundConstructor
     public TasksPublisher(final String pattern, final String threshold,
-            final String healthy, final String unHealthy,
+            final String healthy, final String unHealthy, final String height,
             final String high, final String normal, final String low) {
-        super(pattern, threshold, healthy, unHealthy);
+        super(threshold, healthy, unHealthy, height, "TASKS");
 
+        this.pattern = pattern;
         this.high = high;
         this.normal = normal;
         this.low = low;
+    }
+    // CHECKSTYLE:ON
+
+    /**
+     * Returns the Ant file-set pattern of files to work with.
+     *
+     * @return Ant file-set pattern of files to work with
+     */
+    public String getPattern() {
+        return pattern;
     }
 
     /**
@@ -97,73 +111,24 @@ public class TasksPublisher extends HealthAwarePublisher {
     /** {@inheritDoc} */
     @Override
     public Action getProjectAction(final AbstractProject<?, ?> project) {
-        return new TasksProjectAction(project);
+        return new TasksProjectAction(project, getTrendHeight());
     }
 
-    /**
-     * Scans the workspace, collects all data files and copies these files to
-     * the build results folder. Then counts the number of bugs and sets the
-     * result of the build accordingly ({@link #getThreshold()}.
-     *
-     * @param build
-     *            the build
-     * @param launcher
-     *            the launcher
-     * @param listener
-     *            the build listener
-     * @return <code>true</code> if the build could continue
-     * @throws IOException
-     *             if the files could not be copied
-     * @throws InterruptedException
-     *             if user cancels the operation
-     */
+    /** {@inheritDoc} */
     @Override
-    public boolean perform(final AbstractBuild<?, ?> build, final Launcher launcher, final BuildListener listener) throws InterruptedException, IOException {
+    public TasksProject perform(final AbstractBuild<?, ?> build, final PrintStream logger) throws InterruptedException, IOException {
         TasksProject project;
-        try {
-            listener.getLogger().println("Scanning workspace files for tasks...");
-            project = build.getProject().getWorkspace().act(
-                    new WorkspaceScanner(StringUtils.defaultIfEmpty(getPattern(), DEFAULT_PATTERN), high, normal, low));
-        }
-        catch (AbortException exception) {
-            listener.getLogger().println(exception.getMessage());
-            build.setResult(Result.FAILURE);
-            return false;
-        }
+        log(logger, "Scanning workspace files for tasks...");
+        project = build.getProject().getWorkspace().act(
+                new WorkspaceScanner(StringUtils.defaultIfEmpty(getPattern(), DEFAULT_PATTERN), high, normal, low));
 
-        Object previous = build.getPreviousBuild();
-        TasksResult result;
-        if (previous instanceof AbstractBuild<?, ?>) {
-            AbstractBuild<?, ?> previousBuild = (AbstractBuild<?, ?>)previous;
-            TasksResultAction previousAction = previousBuild.getAction(TasksResultAction.class);
-            if (previousAction == null) {
-                result = new TasksResult(build, project, high, normal, low);
-            }
-            else {
-                result = new TasksResult(build, project, previousAction.getResult().getNumberOfAnnotations(), high, normal, low);
-            }
-        }
-        else {
-            result = new TasksResult(build, project, high, normal, low);
-        }
-
+        TasksResult result = new TasksResultBuilder().build(build, project, high, normal, low);
         HealthReportBuilder healthReportBuilder = createHealthReporter(
                 Messages.Tasks_ResultAction_HealthReportSingleItem(),
                 Messages.Tasks_ResultAction_HealthReportMultipleItem("%d"));
-        build.getActions().add(new TasksResultAction(build, result, healthReportBuilder));
+        build.getActions().add(new TasksResultAction(build, healthReportBuilder, result));
 
-        int warnings = project.getNumberOfAnnotations();
-        if (warnings > 0) {
-            listener.getLogger().println("A total of " + warnings + " open tasks have been found.");
-            if (isThresholdEnabled() && warnings >= getMinimumAnnotations()) {
-                build.setResult(Result.UNSTABLE);
-            }
-        }
-        else {
-            listener.getLogger().println("No open tasks have been found.");
-        }
-
-        return true;
+        return project;
     }
 
     /** {@inheritDoc} */

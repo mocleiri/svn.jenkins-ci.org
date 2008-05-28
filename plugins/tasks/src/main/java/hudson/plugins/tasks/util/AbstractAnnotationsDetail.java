@@ -18,8 +18,12 @@ import org.kohsuke.stapler.StaplerResponse;
 /**
  * Base class for annotation detail objects. Instances of this class could be used for
  * Hudson Stapler objects that contain a subset of annotations.
+ *
+ * @author Ulli Hafner
  */
 public abstract class AbstractAnnotationsDetail extends AnnotationContainer implements ModelObject {
+    /** Unique identifier of this class. */
+    private static final long serialVersionUID = 1750266351592937774L;
     /** Current build as owner of this object. */
     private final AbstractBuild<?, ?> owner;
 
@@ -30,9 +34,11 @@ public abstract class AbstractAnnotationsDetail extends AnnotationContainer impl
      *            current build as owner of this object.
      * @param annotations
      *            the set of warnings represented by this object
+     * @param name
+     *            the name of this object
      */
-    public AbstractAnnotationsDetail(final AbstractBuild<?, ?> owner, final Collection<FileAnnotation> annotations, final String header) {
-        super(true, header);
+    public AbstractAnnotationsDetail(final AbstractBuild<?, ?> owner, final Collection<FileAnnotation> annotations, final String name) {
+        super(true, name);
         this.owner = owner;
 
         addAnnotations(annotations);
@@ -111,12 +117,12 @@ public abstract class AbstractAnnotationsDetail extends AnnotationContainer impl
      *            Stapler response
      * @return the dynamic result of this module detail view
      */
-    public Object getDynamic(final String link, final StaplerRequest request, final StaplerResponse response) {
+    public final Object getDynamic(final String link, final StaplerRequest request, final StaplerResponse response) {
         PriorityDetailFactory factory = new PriorityDetailFactory();
         if (factory.isPriority(link)) {
             return factory.create(link, owner, this, getName());
         }
-        AbstractAnnotationsDetail detail = getDynamic(link);
+        ModelObject detail = getDynamic(link);
         if (detail == null) {
             return new SourceDetail(getOwner(), getAnnotation(link));
         }
@@ -137,7 +143,7 @@ public abstract class AbstractAnnotationsDetail extends AnnotationContainer impl
      *            source detail should be shown
      * @return the dynamic result of this module detail view
      */
-    protected AbstractAnnotationsDetail getDynamic(final String link) {
+    protected ModelObject getDynamic(final String link) {
         return null;
     }
 

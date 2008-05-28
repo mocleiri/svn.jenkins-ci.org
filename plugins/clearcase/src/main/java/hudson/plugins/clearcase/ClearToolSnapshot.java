@@ -1,28 +1,29 @@
 package hudson.plugins.clearcase;
 
 import hudson.FilePath;
-import hudson.Util;
 import hudson.util.ArgumentListBuilder;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.lang.StringUtils;
-
 public class ClearToolSnapshot extends ClearToolExec {
 
-    private String optionalParameters;
+    private String optionalMkviewParameters;
     
-    public ClearToolSnapshot(String clearToolExec) {
-        super(clearToolExec);
+    public ClearToolSnapshot(ClearToolLauncher launcher, String clearToolExec) {
+        super(launcher, clearToolExec);
     }
 
-    public ClearToolSnapshot(String clearToolExec, String optionalParameters) {
-        this(clearToolExec);
-        this.optionalParameters = optionalParameters;
+    public ClearToolSnapshot(ClearToolLauncher launcher, String clearToolExec, String optionalParameters) {
+        this(launcher, clearToolExec);
+        this.optionalMkviewParameters = optionalParameters;
     }
 
-    public void setcs(ClearToolLauncher launcher, String viewName, String configSpec) throws IOException,
+    /**
+     * To set the config spec of a snapshot view, you must be in or under the snapshot view root directory.
+     * @see http://www.ipnom.com/ClearCase-Commands/setcs.html
+     */
+    public void setcs(String viewName, String configSpec) throws IOException,
             InterruptedException {
         FilePath workspace = launcher.getWorkspace();
         FilePath configSpecFile = workspace.createTextTempFile("configspec", ".txt", configSpec);
@@ -36,21 +37,25 @@ public class ClearToolSnapshot extends ClearToolExec {
         configSpecFile.delete();
     }
 
-    public void mkview(ClearToolLauncher launcher, String viewName) throws IOException, InterruptedException {
+    public void mkview(String viewName, String streamSelector) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add(clearToolExec);
         cmd.add("mkview");
         cmd.add("-snapshot");
+        if (streamSelector != null) {
+            cmd.add("-stream");
+            cmd.add(streamSelector);
+        }
         cmd.add("-tag");
         cmd.add(viewName);
-        if ((optionalParameters != null) && (optionalParameters.length() > 0)) {
-            cmd.addTokenized(optionalParameters);
+        if ((optionalMkviewParameters != null) && (optionalMkviewParameters.length() > 0)) {
+            cmd.addTokenized(optionalMkviewParameters);
         }
         cmd.add(viewName);
         launcher.run(cmd.toCommandArray(), null, null, null);
     }
 
-    public void rmview(ClearToolLauncher launcher, String viewName) throws IOException, InterruptedException {
+    public void rmview(String viewName) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add(clearToolExec);
         cmd.add("rmview");
@@ -65,13 +70,18 @@ public class ClearToolSnapshot extends ClearToolExec {
         }
     }
 
-    public void update(ClearToolLauncher launcher, String viewName) throws IOException, InterruptedException {
+    public void update(String viewName, String loadRules) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add(clearToolExec);
         cmd.add("update");
         cmd.add("-force");
         cmd.add("-log", "NUL");
-        cmd.add(viewName);
+        if (loadRules == null) {
+            cmd.add(viewName);
+        } else {
+            cmd.add("-add_loadrules");
+            cmd.add(viewName + File.separator + loadRules);
+        }
         launcher.run(cmd.toCommandArray(), null, null, null);
     }
 
@@ -80,7 +90,7 @@ public class ClearToolSnapshot extends ClearToolExec {
         return launcher.getWorkspace();
     }
 
-	public void setView(ClearToolLauncher launcher, String viewTag) throws IOException, InterruptedException {
-		launcher.getListener().fatalError("Snapshot view does not support setview");
-	}
+    public void startView(String viewTag) throws IOException, InterruptedException {
+        launcher.getListener().fatalError("Snapshot view does not support startview");
+    }
 }

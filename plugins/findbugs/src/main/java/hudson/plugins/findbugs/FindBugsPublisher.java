@@ -1,14 +1,10 @@
 package hudson.plugins.findbugs;
 
-import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
-import hudson.model.BuildListener;
 import hudson.model.Descriptor;
-import hudson.model.Result;
 import hudson.plugins.findbugs.parser.FindBugsCollector;
-import hudson.plugins.findbugs.util.AbortException;
 import hudson.plugins.findbugs.util.HealthAwarePublisher;
 import hudson.plugins.findbugs.util.HealthReportBuilder;
 import hudson.plugins.findbugs.util.PluginDescriptor;
@@ -19,9 +15,10 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 import org.apache.commons.lang.StringUtils;
+import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
- * Publishes the results of the FindBugs analysis.
+ * Publishes the results of the FindBugs analysis (freestyle project type).
  *
  * @author Ulli Hafner
  */
@@ -30,6 +27,8 @@ public class FindBugsPublisher extends HealthAwarePublisher {
     private static final String DEFAULT_PATTERN = "**/findbugs.xml";
     /** Descriptor of this publisher. */
     public static final PluginDescriptor FIND_BUGS_DESCRIPTOR = new FindBugsDescriptor();
+    /** Ant file-set pattern of files to work with. */
+    private final String pattern;
 
     /**
      * Creates a new instance of <code>FindBugsPublisher</code>.
@@ -45,85 +44,44 @@ public class FindBugsPublisher extends HealthAwarePublisher {
      * @param unHealthy
      *            Report health as 0% when the number of warnings is greater
      *            than this value
-     * @stapler-constructor
+     * @param height
+     *            the height of the trend graph
      */
-    public FindBugsPublisher(final String pattern, final String threshold, final String healthy, final String unHealthy) {
-        super(pattern, threshold, healthy, unHealthy);
+    @DataBoundConstructor
+    public FindBugsPublisher(final String pattern, final String threshold, final String healthy, final String unHealthy, final String height) {
+        super(threshold, healthy, unHealthy, height, "FINDBUGS");
+        this.pattern = pattern;
+    }
+
+    /**
+     * Returns the Ant file-set pattern of files to work with.
+     *
+     * @return Ant file-set pattern of files to work with
+     */
+    public String getPattern() {
+        return pattern;
     }
 
     /** {@inheritDoc} */
     @Override
     public Action getProjectAction(final AbstractProject<?, ?> project) {
-        return new FindBugsProjectAction(project);
+        return new FindBugsProjectAction(project, getTrendHeight());
     }
 
-    /**
-     * Scans the workspace and parses all found FindBugs XML files. Then, the
-     * annotations of all files are merged and persisted for a build. Finally,
-     * the number of bugs are counted and the result of the build is set
-     * accordingly ({@link #getThreshold()}.
-     *
-     * @param build
-     *            the build
-     * @param launcher
-     *            the launcher
-     * @param listener
-     *            the build listener
-     * @return <code>true</code> if the build could continue
-     * @throws IOException
-     *             if the files could not be copied
-     * @throws InterruptedException
-     *             if user cancels the operation
-     */
+    /** {@inheritDoc} */
     @Override
-    public boolean perform(final AbstractBuild<?, ?> build, final Launcher launcher,
-            final BuildListener listener) throws InterruptedException, IOException {
-        PrintStream logger = listener.getLogger();
-        try {
-            logger.println("Collecting findbugs analysis files...");
+    public JavaProject perform(final AbstractBuild<?, ?> build, final PrintStream logger) throws InterruptedException, IOException {
+        log(logger, "Collecting findbugs analysis files...");
 
-            JavaProject project = parseAllWorkspaceFiles(build, logger);
-            FindBugsResult result = createResult(build, project);
+        JavaProject project = parseAllWorkspaceFiles(build, logger);
+        FindBugsResult result = new FindBugsResultBuilder().build(build, project);
 
-            HealthReportBuilder healthReportBuilder = createHealthReporter(
-                    Messages.FindBugs_ResultAction_HealthReportSingleItem(),
-                    Messages.FindBugs_ResultAction_HealthReportMultipleItem("%d"));
-            build.getActions().add(new FindBugsResultAction(build, result, healthReportBuilder));
+        HealthReportBuilder healthReportBuilder = createHealthReporter(
+                Messages.FindBugs_ResultAction_HealthReportSingleItem(),
+                Messages.FindBugs_ResultAction_HealthReportMultipleItem("%d"));
+        build.getActions().add(new FindBugsResultAction(build, healthReportBuilder, result));
 
-            evaluateBuildResult(build, logger, project);
-
-            return true;
-        }
-        catch (AbortException exception) {
-            logger.println(exception.getMessage());
-            build.setResult(Result.FAILURE);
-            return false;
-        }
-    }
-
-    /**
-     * Evaluates the build result. The build is marked as unstable if the
-     * threshold has been exceeded.
-     *
-     * @param build
-     *            the build to create the action for
-     * @param logger
-     *            the logger
-     * @param project
-     *            the project with the annotations
-     */
-    private void evaluateBuildResult(final AbstractBuild<?, ?> build, final PrintStream logger, final JavaProject project) {
-        int warnings = project.getNumberOfAnnotations();
-        if (warnings > 0) {
-            logger.println(
-                    "A total of " + warnings + " potential bugs have been found.");
-            if (isThresholdEnabled() && warnings >= getMinimumAnnotations()) {
-                build.setResult(Result.UNSTABLE);
-            }
-        }
-        else {
-            logger.println("No potential bugs have been found.");
-        }
+        return project;
     }
 
     /**
@@ -141,40 +99,9 @@ public class FindBugsPublisher extends HealthAwarePublisher {
      *             if user cancels the operation
      */
     private JavaProject parseAllWorkspaceFiles(final AbstractBuild<?, ?> build, final PrintStream logger) throws IOException, InterruptedException {
-        FindBugsCollector findBugsCollector = new FindBugsCollector(logger, build.getTimestamp().getTimeInMillis(),
-                        StringUtils.defaultIfEmpty(getPattern(), DEFAULT_PATTERN));
+        FindBugsCollector collector = new FindBugsCollector(logger, StringUtils.defaultIfEmpty(getPattern(), DEFAULT_PATTERN), true);
 
-        return build.getProject().getWorkspace().act(findBugsCollector);
-    }
-
-    /**
-     * Creates a result that persists the FindBugs information for the
-     * specified build.
-     *
-     * @param build
-     *            the build to create the action for
-     * @param project
-     *            the project containing the annotations
-     * @return the result action
-     */
-    private FindBugsResult createResult(final AbstractBuild<?, ?> build, final JavaProject project) {
-        Object previous = build.getPreviousBuild();
-        FindBugsResult result;
-        if (previous instanceof AbstractBuild<?, ?>) {
-            AbstractBuild<?, ?> previousBuild = (AbstractBuild<?, ?>)previous;
-            FindBugsResultAction previousAction = previousBuild.getAction(FindBugsResultAction.class);
-            if (previousAction == null) {
-                result = new FindBugsResult(build, project);
-            }
-            else {
-                result = new FindBugsResult(build, project, previousAction.getResult().getProject(),
-                        previousAction.getResult().getZeroWarningsHighScore());
-            }
-        }
-        else {
-            result = new FindBugsResult(build, project);
-        }
-        return result;
+        return build.getProject().getWorkspace().act(collector);
     }
 
     /** {@inheritDoc} */

@@ -1,7 +1,9 @@
 package hudson.plugins.pmd;
 
 import hudson.maven.MavenReporter;
-import hudson.maven.MavenReporterDescriptor;
+import hudson.plugins.pmd.util.PluginDescriptor;
+import hudson.plugins.pmd.util.ReporterDescriptor;
+import net.sf.json.JSONObject;
 
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -11,36 +13,21 @@ import org.kohsuke.stapler.StaplerRequest;
  *
  * @author Ulli Hafner
  */
-public class PmdReporterDescriptor extends MavenReporterDescriptor {
+public class PmdReporterDescriptor extends ReporterDescriptor {
     /**
      * Creates a new instance of <code>PmdReporterDescriptor</code>.
+     *
+     * @param pluginDescriptor
+     *            the plug-in descriptor of the publisher
      */
-    public PmdReporterDescriptor() {
-        super(PmdReporter.class);
+    public PmdReporterDescriptor(final PluginDescriptor pluginDescriptor) {
+        super(PmdReporter.class, pluginDescriptor);
     }
 
     /** {@inheritDoc} */
     @Override
-    public String getDisplayName() {
-        return Messages.PMD_Publisher_Name();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String getConfigPage() {
-        return getViewPage(PmdPublisher.class, "config.jelly");
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String getHelpFile() {
-        return "/plugin/pmd/help.html";
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public MavenReporter newInstance(final StaplerRequest request) throws FormException {
-        return request.bindParameters(PmdReporter.class, "pmd_");
+    public MavenReporter newInstance(final StaplerRequest request, final JSONObject formData) throws FormException {
+        return request.bindParameters(PmdReporter.class, getPublisherDescriptor().getPluginName() + ".");
     }
 }
 

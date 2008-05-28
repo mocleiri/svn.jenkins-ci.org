@@ -343,6 +343,11 @@ public abstract class FormFieldValidator {
             try {
                 FilePath ws = getBaseDirectory(p);
 
+                if(ws==null) {// can't check
+                    ok();
+                    return;
+                }
+
                 if(!ws.exists()) {// no workspace. can't check
                     ok();
                     return;
