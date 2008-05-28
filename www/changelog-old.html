@@ -1,0 +1,3227 @@
+<html>
+<head>
+  <title>Old Changelog</title>
+  <link rel="alternate" title="Hudson announcements" href="/servlets/ProjectNewsRSS" type="application/rss+xml">
+  <link rel="stylesheet" TYPE="text/css" href="changelog.css">
+</head>
+<body>
+<h1 style="text-align:center">Old Changelog</h1>
+
+<div align="right">Legend:
+	<span class="iconlegend">
+		<img src="images/rfe2.gif">major enhancement <img src="images/rfe.gif" >enhancement
+		<img src="images/bug2.gif">major bug fix     <img src="images/bug.gif" >bug fix
+	</span><span style="visibility:hidden">xxxxx</span>
+  <a href="/servlets/ProjectNewsRSS"><img src=atom.gif border=0> Subscribe to RSS feed</a>
+</div>
+
+<p>
+  More recent changelogs can be found in <a href="changelog.html">this file</a>.
+</p>
+
+<a name=v1.199><h3>What's new in 1.199</h3></a>
+<ul class=image>
+  <li class=bug>
+    login error should result in 401 status code.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1441">issue 1441</a>)
+  <li class=bug>
+    Fixed internal databinding problem when the repeatable object only has one item.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1443">issue 1443</a>)
+  <li class=bug>
+    In the page that creates a new job, the form validation kicks in before the text box
+    loses the focus
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1429">issue 1429</a>)
+  <li class=rfe>
+    Updated to work with Sventon 1.4
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1449">issue 1449</a>)
+  <li class=rfe>
+    Started to capture fingerprints of POM in Maven2 projects.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1438">issue 1438</a>)
+  <li class=rfe>
+    Artifact listing now prints a part of path if that's necessary to disambiguate names
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1435">issue 1435</a>)
+</ul>
+<a name=v1.198><h3>What's new in 1.198</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Native maven2 job types didn't work with Surefire &lt; 2.4
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1340">issue 1340</a>)
+  <li class=bug>
+    When legacy authentication is used with no view permission for anonymous users,
+    successful login takes the user to a wrong page.
+  <li class=bug>
+    "Remember me" doesn't work with the servlet authentication mode, so
+    removed the UI.
+  <li class=bug>
+    Form validation for "* * * * *" was failing.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1428">issue 1428</a>)
+  <li class=rfe>
+    URLs should stay within a view when a job is created inside a view.
+  <li class=rfe>
+    Localizatoin improvements in Russian, Brazilian Portuguese, Japanese, and French.
+</ul>
+<a name=v1.197><h3>What's new in 1.197</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    NPE when loading TestNG reports in the maven2 jobs.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1426">issue 1426</a>)
+  <li class=bug>
+    Fixed a permission related problem when two users try to run Hudson with "java -jar hudson.war"
+    on the same machine.
+    (<a href="http://www.nabble.com/Two-hudson-instances-on-the-same-machine-tt16033114.html">report</a>)
+  <li class=bug>
+    Fixed a bug in Winstone so that it purges temporary directory correctly during upgrade.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1408">issue 1408</a>)
+  <li class=rfe>
+    Job configuration can be now updated from the remote API.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1190">issue 1190</a>)
+  <li class=rfe>
+    Locale-specific resource selection is now available to plugins.
+    (<a href="http://www.nabble.com/I18n%3A-help.html-for-plugin-config-screen--tp16007552p16007552.html">report</a>)
+  <li class=rfe>
+    Error checks on crontab format is improved to detect typical mistakes like "* */4 * * *"
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1406">issue 1406</a>)
+  <li class=rfe>
+    Hudson now workarounds bugs in IBM JDK and WebSphere.
+    (<a href="http://www.nabble.com/WAS---Hudson-tt16026561.html">discussion</a>)
+</ul>
+<a name=v1.196><h3>What's new in 1.196</h3></a>
+<ul class=image>
+  <li class=bug>
+    Loss of workspace shouldn't result in a new build with Subversion.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1348">issue 1348</a>)
+  <li class=bug>
+    Don't try to archive surefire reports if tests are skipped
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1340">issue 1340</a>)
+  <li class=bug>
+    After-the-fact deployment of Maven artifacts weren't setting the right file extension
+    when custom <tt>ArtifactHandler</tt> is involved during a build.
+  <li class=bug>
+    Test failures in the native m2 job should make builds yellow, not red.
+    (<a href="http://www.nabble.com/Maven-job-and-test-failures-tt15947258.html">report</a>)
+  <li class=bug>
+    Actions to edit and delete view lists are now only shown for autohrized users.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1416">issue 1416</a>)
+  <li class=rfe>
+    Added ability to include jobs to a view using a regular expression.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=490">issue 
+490</a>)
+</ul>
+<a name=v1.195><h3>What's new in 1.195</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed <tt>IllegalArgumentException</tt> when trying to submit configuration for Matrix job
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1410">issue 1410</a>)
+  <li class=bug>
+    Attempt to set a log level to inherit from the UI has been causing 500 error.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1411">issue 1411</a>)
+  <li class=bug>
+    Stopping a build could have resulted in NPE, depending on timing
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1412">issue 1412</a>)
+  <li class=bug>
+    Tag SCM after-the-fact was not working.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1415">issue 1415</a>)
+  <li class=bug>
+    Fixed a bug in using wagon-webdav on Hudson (this is still a temporary solution.)
+  <li class=bug>
+    After-the-fact deployment of Maven artifacts shouldn't kick in if a build failed or is unstable.
+  <li class=rfe>
+    Added remote API support for master and slave nodes 
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1315">issue 1315</a>)
+  <li class=rfe>
+    More progress on Turkish localization.
+</ul>
+<a name=v1.194><h3>What's new in 1.194</h3></a>
+<ul class=image>
+  <li class=bug>
+    Hudson occasionally incorrectly report "0 tests started to fail".
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1389">issue 1389</a>)
+  <li class=bug>
+    Redeployment of artifacts wasn't picking up &lt;server> information from <tt>~/.m2/settings.xml</tt>
+  <li class=bug>
+    Package empty directories in a zip file.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1398">issue 1398</a>)
+  <li class=bug>
+    '@xxxx' syntax wasn't working in the cron setting.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1342">issue 1342</a>)
+  <li class=bug>
+    Hudson wasn't creating symlinks correctly on file systems with the m2 job type.
+  <li class=bug>
+    Fixed a bug in selecting the proper languages for messages on systems where the default locale is not English.
+    (<a href="http://www.nabble.com/I18n%3A-Hudson-core-uses-locale-of-browser%2C-Hudson-plugins-use-locale-of-machine-td15957682.html">report</a>)
+  <li class=rfe>
+    Added an extension point for plugins to add icons to the "manage Hudson" page.
+</ul>
+<a name=v1.193><h3>What's new in 1.193</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    There was a data corruption issue when you submit configuration for freestyle jobs.
+  <li class=rfe>
+    Improvement in French and Turkish localization.
+</ul>
+<a name=v1.192><h3><strike>What's new in 1.192</strike> Please use 1.193</h3></a>
+<ul class=image>
+  <li class=bug>
+    Matrix configuration run shouldn't wait for the quiet period.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1388">issue 1388</a>)
+  <li class=bug>
+    Remote API for users were not working when the security is enabled.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1393">issue 1393</a>)
+  <li class=bug>
+    Handling of absolute path in various places weren't correct.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1394">issue 1394</a>)
+  <li class=bug>
+    Fixed a dead lock
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1390">issue 1390</a>)
+  <li class=rfe>
+    Added extension point to infer e-mail address from SCM information.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1139">issue 1139</a>)
+  <li class=rfe>
+    Improvements to French and Brazilian Portuguese localization.
+</ul>
+<a name=v1.191><h3><strike>What's new in 1.191</strike> Please use 1.193</h3></a>
+<ul class=image>
+  <li class=bug>
+    When explicit downstream dependencies are configured, Maven2 jobs were scheduling them twice.
+  <li class=bug>
+    Maven module builds now have stable URLs within the whole build.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1384">issue 1384</a>)
+  <li class=bug>
+    Fixed HTML rendering issue in long view name with IE.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1378">issue 1378</a>)
+  <li class=bug>
+    Hudson wasn't performing the name safety check on renaming views.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1377">issue 1377</a>)
+  <li class=bug>
+    Fixed a bug that prevented build-timeout plugin from working on the latest Hudson.
+  <li class=rfe>
+    Added after-the-fact deployment support for the maven2 jobs.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=552">issue 552</a>,
+     <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=959">issue 959</a>)
+  <li class=rfe>
+    Improvements to Japanese and Turkish localization.
+</ul>
+<a name=v1.190><h3>What's new in 1.190</h3></a>
+<ul class=image>
+  <li class=bug>
+    Downstream triggering now happens "correctly" with the matrix job type
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1371">issue 1371</a>)
+  <li class=bug>
+    Require login before an user starts to modify configuration, to prevent
+    a loss of changes.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1360">issue 1360</a>)
+  <li class=bug>
+    Fixed a bug in handling of non-ASCII characters in URL with Winstone.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1352">issue 1352</a>)
+  <li class=bug>
+    Possibly fixed a performance problem on some system regarding the use of fingerprint.
+    (<a href="http://www.nabble.com/Maven-job-5-times-slower-than-a-free-style-job--tt14651245.html">discussion</a>)
+  <li class=rfe>
+    Hudson now tries to automatically attempt to reconnect slaves after a failure
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1364">issue 1364</a>)
+  <li class=rfe>
+    Initial Turkish localization, thanks to O&#x011F;uz Da&#x011F;.
+    (<a href="http://www.nabble.com/-Fwd%3A--Kohsuke-Kawaguchi%27s-Blog--New-Comment-Posted-to-%27Internationalization-of-Hudson-----Help-wanted%21%27--tt15879811.html">announcement</a>)
+</ul>
+<a name=v1.189><h3>What's new in 1.189</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed bug in collecting of TestNG test results in Maven projects.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1337">issue 1337</a>)
+  <li class=bug>
+    Fixed a bug in the form field validation of POM location in the maven2 job type.
+  <li class=bug>
+    Fix for aggregated test result graph for Maven project not showing skipped tests.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1362">issue 1362</a>)
+  <li class=bug>
+    <tt>JobProperty</tt>s were not invoked with the Maven2 job type.
+  <li class=rfe>
+    Initial Russian translation contributed by Mike Salnikov
+    (<a href="http://www.nabble.com/Russian-i18n-tt15867581.html">announcement</a>)
+</ul>
+<a name=v1.188><h3>What's new in 1.188</h3></a>
+<ul class=image>
+  <li class=bug>
+    The "perform the build once to parse POM" message needed to have zero-delay query parameter.
+  <li class=rfe>
+    Hudson URL is now exposed to build as the environment variable <tt>HUDSON_URL</tt>
+    (<a href="http://www.nabble.com/Hudson-port-avaiable-in-Ant--tp15756943p15756943.html">report</a>)
+  <li class=rfe>
+    A pending build can be now canceled from within the build history list.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1356">issue 1356</a>)
+  <li class=rfe>
+    Implemented a smarter Y-axis auto ranging algorithm for build time trend.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1246">issue 1246</a>)
+  <li class=rfe>
+    A node and a view now have its own aggregated build history view.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1174">issue 1174</a>)
+</ul>
+<a name=v1.187><h3>What's new in 1.187</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed bug in displaying the password field on a user page when using Hudson's own user database.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1284">issue 1284</a>)
+  <li class=rfe>
+    When a custom location of the build script is specified, Hudson sets the current directory
+    to the directory of the build script, to forestall unnecessary hassle.
+    (<a href="http://www.nabble.com/Base-dir-issue-when-running-Ant-JUnit-task-tt15727188.html">report</a>)
+  <li class=rfe>
+    Improved error diagnostics so that we can catch containers that are forcing older versions of Ant.
+    (<a href="http://www.nabble.com/Re%3A-problem-generating-junit-test-report-in-Hudson-tt15693402.html">report</a>)
+  <li class=rfe>
+    German translation is making more progress.
+</ul>
+<a name=v1.186><h3>What's new in 1.186</h3></a>
+<ul class=image>
+  <li class=bug>
+    Build descriptions edited in the UI were not persisted correctly.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1331">issue 1331</a>)
+  <li class=bug>
+    Fixed a bug in handling user names that include '.'
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1227">issue 1227</a>)
+  <li class=bug>
+    Fixed a performance bug in Winstone wrt serving a large file.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1275">issue 1275</a>)
+  <li class=bug>
+    Fix for NullPointerException parsing test results.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1317">issue 1317</a>)
+  <li class=rfe>
+    Matrix project now shows project actions.
+    (<a href="http://www.nabble.com/Project-actions-and-matrix-build-%28%2BPublishers-and-MavenBuild%29-td15415391.html">report</a>)
+  <li class=rfe>
+    Error diagnosis is improved for missing artifact archive configuration.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1307">issue 1307</a>)
+  <li class=rfe>
+    Error diagnosis is improved when two Hudson instances collide on each other on the same data directory
+    (<a href="http://www.nabble.com/Re%3A-%22multiple-versions-installed%22-error.-tt15663750.html#a15663750">report</a>)
+</ul>
+<a name=v1.185><h3>What's new in 1.185</h3></a>
+<ul class=image>
+  <li class=bug>
+    Builds are now run with the proper security privileges to do the work.
+    (<a href="do-this-when-nabble-is-back">report</a>)
+  <li class=bug>
+    The certificate used for signing <tt>hudson.war</tt> has been expired, so it was renewed.  
+  <li class=rfe>
+    More progress on Japanese translation.
+  <li class=rfe>
+    German translation is started and is making a good progress, thanks to
+    <a href="http://www.dr-wiest.com/">Simon Wiest</a>.
+</ul>
+<a name=v1.184><h3>What's new in 1.184</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a bug where build dependencies in the native m2 job type may create
+    self-recursion.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1266">issue 1266</a>)
+  <li class=rfe>
+    Adding <tt>WEB-INF/jonas-web.xml</tt> to make it work nicely within JONAS.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1276">issue 1276</a>)
+  <li class=rfe>
+    External job monitoring now avoids buffering the entire output on memory.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1283">issue 1283</a>)
+</ul>
+<a name=v1.183><h3>What's new in 1.183</h3></a>
+<ul class=image>
+  <li class=bug>
+    Some form field validation errors were incorrectly reported as warnings.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1273">issue 1273</a>)
+  <li class=bug>
+    <strike>Fixed a regression where downstream m2 jobs are not automatically triggered.</strike>
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1266">issue 1266</a>)
+  <li class=bug>
+    <tt>StringIndexOutOfRangeException</tt> during authentication in some environment.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1274">issue 1274</a>)
+  <li class=bug>
+    Fixed a bug in the remote API for the test cases.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1258">issue 1258</a>)
+  <li class=rfe>
+    Native m2 jobs now displays upstream/downstream project links.
+  <li class=rfe>
+    "Build now" really builds now, without any delay.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=356">issue 356</a>)
+</ul>
+<a name=v1.182><h3>What's new in 1.182</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    removed <tt>MSVCR90.DLL</tt> dependency on Windows when trying to abort builds.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1245">issue 1245</a>)
+  <li class=bug>
+    Fixed an NPE in permission check of aborting a build.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1270">issue 1270</a>)
+  <li class=bug>
+    Fixed a bug in parsing TestNG report files.
+    (<a href="http://www.nabble.com/Problems-with-testng-failed-test-parsing-tp15146287p15146287.html">report</a>)
+</ul>
+<a name=v1.181><h3>What's new in 1.181</h3></a>
+<ul class=image>
+  <li class=bug>
+    If the CVS configuration is changed, polling should notice and start tracking the new location.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1262">issue 1262</a>)
+  <li class=bug>
+    Integrated Winstone 0.9.10 to pick up various bug fixes.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=693">issue 693</a>)
+  <li class=bug>
+    Fixed a polling bug in svn:externals when the reference is with the -r option.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=898">issue 898</a>)
+  <li class=bug>
+    Even if anonymous users don't have the read permission, they should be allowed to sign up.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1192">issue 1192</a>)
+  <li class=rfe>
+    Cron syntax now supports Debian extensions like <tt>@weekly</tt>
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1255">issue 1255</a>)
+  <li class=rfe>
+    Improved an error diagnostics when the temporary directory is misconfigured.
+    (<a href="http://www.nabble.com/Image-links-broken-tt15316354.html">report</a>)
+  <li class=rfe>
+    French translation effort is making a good progress.
+    Thanks to <a href="http://ericlefevre.net/">Eric Lefevre</a>
+  <li class=rfe>
+    When aborting a build on Windows, Hudson now terminates child processes recursively.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1245">issue 1245</a>)
+</ul>
+<a name=v1.180><h3>What's new in 1.180</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a bug in the Windows/Unix handling logic when a file path includes ':' in Unix.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1248">issue 1248</a>)
+  <li class=bug>
+    Hudson couldn't serve "access denied" error page to users without the read access to Hudson.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1250">issue 1250</a>)
+  <li class=bug>
+    Fixed a bug so that the password field doesn't appear in the user configuration page
+    unless "Hudson's own user database" is enabled.
+    (<a href="http://www.nabble.com/password-field-must-be-filled-in-user-configure-even-when-using-LDAP-tt15163961.html">report</a>)
+  <li class=rfe>
+    Hudson now tries to detect the subversion server time stamp to avoid clock out of sync problems
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1244">issue 1244</a>)
+  <li class=rfe>
+    When artifact archiving fails to find any artifact, Hudson tries to diagnose the problem now.
+    (<a href="http://www.nabble.com/No-artifacts-found-for-matrix-project-tt15210002.html">report</a>)
+  <li class=rfe>
+    Improved the form validation heuristics in the file mask check.
+    (<a href="http://www.nabble.com/No-artifacts-found-for-matrix-project-tt15210002.html">report</a>)
+</ul>
+<a name=v1.179><h3>What's new in 1.179</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    JNLP slave agents stopped working since 1.175.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1237">issue 1237</a>)
+  <li class=bug>
+    Improved JUnit report file parsing robustness.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1233">issue 1233</a>)
+  <li class=bug>
+    Test result trend charts were not updated when a build fails.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1230">issue 1230</a>)
+  <li class=rfe>
+    Changed code so that plugins can never inadvertently update build timestamps.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1084">issue 1084</a>)
+</ul>
+<a name=v1.178><h3>What's new in 1.178</h3></a>
+<ul class=image>
+  <li class=bug>
+    Skipped tests (TestNG) are no longer treated as if they had passed.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1251">issue 1251</a>)
+  <li class=rfe>
+    Hudson now issues an error if it detects that two Hudson instances are running on the same data.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1236">issue 1236</a>)
+  <li class=rfe>
+    Exposed the build time stamp, just like build numbers.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=832">issue 832</a>)
+  <li class=rfe>
+    Added password confirmation text box.
+  <li class=rfe>
+    JUnit test results are now exposed through the remote API
+  <li class=rfe>
+    Slave listing page now includes the architecture and OS of the slaves.
+  <li class="major rfe">
+    <tt>Publisher</tt>s are now available to the native m2 job type.
+</ul>
+<a name=v1.177><h3>What's new in 1.177</h3></a>
+<ul class=image>
+  <li class=bug>
+    Removed the extra '$' sign from the permalinks that have accidentally crept in.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1232">issue 1232</a>)
+  <li class=bug>
+    Fixed a bug in SMTP authentication handling.
+    (<a href="http://www.nabble.com/Property-mail.smtp.auth-not-set-td15105594.html">report</a>)
+  <li class=bug>
+    Fixed a bug in handling CVS module names with space.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1234">issue 1234</a>)
+  <li class=rfe>
+    Build time descriptions are now more precise.  See the <a href="http://www.nabble.com/More-precise-time-strings-tt14781235.html">mailing list
+    discussion for more details</a>.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1160">issue 1160</a>)
+  <li class=rfe>
+    Added a Subversion repository browser implementation for CollabNet-powered sites (these include Java.net, Tigris.org and BEA's dev2dev).
+</ul>
+<a name=v1.176><h3>What's new in 1.176</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a regression in 1.175 with LDAP authentication
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1208">issue 1208</a>)
+  <li class=bug>
+    Fixed a regression in 1.175 where the deployment fails on some containers due to the initialization order.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1210">issue 1210</a>)
+  <li class=rfe>
+    CVS check out / update now cleans up sticky date tag, and checking out CVS tags are now supported.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=229">issue 229</a>)
+  <li class=rfe>
+    Jobs are now sorted case insensitively.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1211">issue 1211</a>)
+  <li class=rfe>
+    Environment variable expansions now work in <tt>MAVEN_OPTS</tt> setting.
+    (<a href="http://www.nabble.com/-patch--allow-M2-projects-to-use-environment-variables-in-options-tt15061026.html">report</a>)
+</ul>
+<a name=v1.175><h3>What's new in 1.175</h3></a>
+<ul class=image>
+  <li class=bug>
+    Don't allow # of executors to be 0.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=734">issue 734</a>)
+  <li class=rfe>
+    More Japanese localization and improved i18n support
+  <li class=rfe>
+    Added "remember me" feature to the login screen.
+  <li class=rfe>
+    Improved i18n support. Static HTML files can be now localized.
+  <li class="rfe">
+    Added a probe to the running Maven process to assist trouble-shooting.
+</ul>
+<a name=v1.174><h3>What's new in 1.174</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed NPE in the remote API job creation during error recovery.
+    (<a href="http://www.nabble.com/have-anyone-experience-with-the-hudson-remote-api---tt14922205.html">report</a>)
+  <li class=bug>
+    Supported multi-select &lt;SELECT> element for plugins
+    (<a href="http://www.nabble.com/Problems-with-multiple-select-in-jelly-scripts.-tt14913489.html">report</a>)
+  <li class=bug>
+    Fixed a rendering bug in build history.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1189">issue 1189</a>)
+  <li class=rfe>
+    TestNG DTD is bundled to avoid network traffic when TestNG XML reports are parsed.
+    (<a href="http://www.nabble.com/Hudson-Maven-build-fails-with-TestNG-tp14921230p14921230.html">report</a>)
+  <li class=rfe>
+    Removed pointless svn update line about directories.
+</ul>
+<a name=v1.173><h3>What's new in 1.173</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed an HTML rendering issue in the slave list page.
+  <li class=bug>
+    Fixed an assertion error when security is enabled with Tomcat.
+    (<a href="http://www.nabble.com/Matrix-authorization-problem-tt14602081.html#a14886312">report</a>)
+  <li class=bug>
+    Native m2 builds now launch Maven with the current directory set just like CLI tends to be run.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1185">issue 1185</a>)
+  <li class=bug>
+    Fixed the stall cache problem in AJAX-based project/build description editing
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1176">issue 1176</a>)
+  <li class=bug>
+    Fixed a bug where the user password may be lost when the e-mail address is manually set.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1178">issue 1178</a>)
+  <li class=rfe>
+    Improved form field validation in the maven2 job type.
+  <li class=rfe>
+    When using Hudson's own user database, password can be now reset via the web UI.
+</ul>
+<a name=v1.172><h3>What's new in 1.172</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a broken link in the help of "Hudson's own user database"
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1170">issue 1170</a>)
+  <li class=bug>
+    "Send e-mail for every unstable build" is not persisted in the maven configuration.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1172">issue 1172</a>)
+  <li class=bug>
+    Unlike Ant, Hudson won't use whitespace as a pattern separator (instead, only ','.)
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1175">issue 1175</a>)
+    INCOMPATIBLE CHANGE: you must now insert commas into artifact or test includes.
+  <li class=bug>
+    Fixed a bug in RSS links in HTML HEAD.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1177">issue 1177</a>)
+  <li class=bug>
+    Fixed HTML rendering issues of the login link with IE.
+  <li class=bug>
+    Fixed the bug where the Ant/Maven installation choice is not sent when configuring job with IE7.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1147">issue 1147</a>)
+  <li class=rfe>
+    Steady progress on Japanese translations in the past several releases
+    (<a href="http://d.hatena.ne.jp/cactusman/20080105">screenshot</a>)
+  <li class=rfe>
+    Allowing plugins to extend the navigation menu on left hand side of the top page.
+    (<a href="http://www.nabble.com/Hudson-Tray-Monitor-Application-tt14708070.html#a14708070">report</a>)
+</ul>
+<a name=v1.171><h3>What's new in 1.171</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed inconsistent use of button visual style.
+  <li class=bug>
+    Fixed a bug where some operations are hidden even from privileged users if they don't have the "admin" role.
+  <li class=bug>
+    Fix to force UTF-8 character encoding under Jetty 5.x.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1166">issue 1166</a>)
+  <li class=rfe>
+    Furhter improved the maven2 build performance.
+  <li class=rfe>
+    Added a permission to control tag creation
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1140">issue 1140</a>)
+  <li class=rfe>
+    Build health report is now a part of the remote API.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1146">issue 1146</a>)
+</ul>
+<a name=v1.170><h3>What's new in 1.170</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed an assertion error in <tt>MavenModuleSetBuild$Builder.postModule</tt>
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=906">issue 906</a>)
+  <li class=bug>
+    The native m2 job type now handles profile activation correctly during initial POM parsing.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=470">issue 470</a>)
+  <li class=bug>
+    Fixed a possible race condition that causes a sudden death of slaves.
+    (<a href="http://www.nabble.com/my-slave-is-dead-td14760029.html">report</a>)
+  <li class=bug>
+    Don't show "create new jobs" link to users who don't have permission to create jobs.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1171">issue 1171</a>)
+  <li class=rfe>
+    Improved the maven2 build performance.
+    (<a href="http://www.nabble.com/Maven-job-5-times-slower-than-a-free-style-job--td14651245.html">report</a>)
+</ul>
+<a name=v1.169><h3>What's new in 1.169</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a bug in redirection after successful login.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1138">issue 1138</a>)
+  <li class=bug>
+    Send a proper cache control header to prevent Opera from caching captcha images
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1167">issue 1167</a>)
+  <li class=bug>
+    Hudson dies with NPE if the user tries to access the page after signing up.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1168">issue 1168</a>)
+  <li class=bug>
+    Fixed a problem where the abort/start build links were not correctly displayed even for users with sufficient permissions.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1162">issue 1162</a>)
+  <li class=bug>
+    Fixed a problem where the new view links were not correctly displayed even for users with sufficient permissions.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1157">issue 1157</a>)
+</ul>
+<a name=v1.168><h3>What's new in 1.168</h3></a>
+<ul class=image>
+  <li class=bug>
+    Ensure sidebar links use correct hostname rather than localhost.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1111">issue 1111</a>)
+  <li class=bug>
+    Offline nodes were not marked as offline on the executor list.
+    (<a href="http://www.nabble.com/slave-no-longer-marked-offline-tt14717861.html">thread</a>)
+  <li class=bug>
+    Fixed a possible race condition in the matrix build aroudn detecting cancellation of child builds. 
+    (<a href="http://www.nabble.com/Master-slave-problem-tt14710987.html">thread</a>)
+  <li class=rfe>
+    Made the M2 project type main page layout more consistent with the other project layouts.
+    (<a href="http://www.nabble.com/New-layout-for-m2-project-high-level-summary-page--to14730878.html">thread</a>)
+  <li class=rfe>
+    In addition to "login" link, "sign up" link is now displayed whenever applicable.
+    (<a href="http://www.nabble.com/New-Security-Setup-tt14740386.html">thread</a>)
+</ul>
+<a name=v1.167><h3>What's new in 1.167</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a bug where project actions the modules of for m2 projects were not visible until a hudson restart.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1149">issue 1149</a>)
+  <li class=bug>
+    Command links on the top page and view pages weren't displayed correctly even for users with sufficient permissions.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1137">issue 1137</a>)
+  <li class=bug>
+    Fixed sidebar links on people page.
+    (<a href="https://hudson.dev.java.net/issues/show_bug_cgu?id=1142">issue 1142</a>)
+  <li class=rfe>
+    Improved the performance of subversion updates on slaves
+    (<a href="http://www.nabble.com/subversion-checkout-is-very-slow-tt13228583.html#a13228583">report</a>)
+  <li class=rfe>
+    The remote API now supports the optional <tt>depth</tt> parameter, which can be used to control
+    the amount of data you receive in a single call.
+    (<a href="http://www.nabble.com/hudson-portlet-tt14692803.html">report</a>)
+</ul>
+<a name=v1.166><h3>What's new in 1.166</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a bug where successful authentication still results in 403 after login under some configurations.
+    (<a href="http://www.nabble.com/Matrix-authorization-problem-tt14602081.html">report</a>)
+  <li class=bug>
+    Build links were not visible even if the current user has a sufficient permission.
+    (<a href="http://www.nabble.com/Matrix-authorization-problem-tt14602081.html">report</a>)
+  <li class=bug>
+    Fixed a bug in case insensitive environment variable name handling.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1115">issue 1115</a>)
+  <li class=bug>
+    Fixed typo in people configuration.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1130">issue 1130</a>)
+  <li class="major rfe">
+    Added LDAP authentication support
+</ul>
+<a name=v1.165><h3>What's new in 1.165</h3></a>
+<ul class=image>
+  <li class='rfe'>
+    Specifying XPath in the remote API that matches multiple nodes is now reported as an error.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1141">issue 1141</a>)
+  <li class='major bug'>
+    Fixed a bug where secured Hudson fails to authorize admins to access pages.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1118">issue 1118</a>)
+</ul>
+<a name=v1.164><h3>What's new in 1.164</h3></a>
+<ul class=image>
+  <li class=bug>
+    Hudson has been failing to serve workspace files that ends with "jelly" extension.
+  <li class=bug>
+    Fixed a problem in the core that causes some plugins to fail with
+    <tt>hudson.tasks.MailMessageIdAction@12524b0 returned null from the getUrlName()</tt>
+      (<a href="http://www.nabble.com/Cobertura-Hudson-Plugin-0.8.4---100--coverage--to14457572.html">report</a>)
+  <li class=bug>
+    Fixed a problem where JNLP slaves occasionally fail to reconnect to the server.
+    (<a href="http://www.nabble.com/slave-not-surviving-server-reboot-to14452705.html">report</a>)
+  <li class=bug>
+    Fixed problem with "New Job" and "People" links in side bar.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1111">issue 1111</a>)
+  <li class="major rfe">
+    <a href="https://stapler.dev.java.net/i18n.html">A mechanism to do i18n</a> is now in place,
+    and a partial Japanese localization is in place. Contributions welcome.
+  <li class="major rfe">
+    Implemented fine-grained security
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=326">issue 326</a>)
+</ul>
+<a name=v1.163><h3>What's new in 1.163</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a possible loading problem for user information
+  <li class=bug>
+    Test duration was not computed correctly for a class.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1063">issue 1063</a>)
+  <li class=rfe>
+    Added the remote API support for the people page.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1103">issue 1103</a>)
+</ul>
+<a name=v1.162><h3>What's new in 1.162</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a problem where Hudson fails to find wagon implementations.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1102">issue 1102</a>)
+  <li class=bug>
+    Fixed a problem where requesting schema for XML in the remote API on Java5 causes <tt>ClassFormatError</tt>
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1107">issue 1107</a>)
+  <li class=rfe>
+    Improved the notification e-mail subject line when a build is unstable
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1105">issue 1105</a>)
+  <li class=rfe>
+    Hudson now makes sure that configured <tt>sh</tt> actually exists.
+    (<a href="http://www.nabble.com/Problem-Execute-Shell-Script-Hudson-to14326430.html">report</a>)
+  <li class=rfe>
+    Exposed user e-mail address to the XML/JSON API.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1108">issue 1108</a>)
+</ul>
+<a name=v1.161><h3>What's new in 1.161</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed the wrong time zone use in some HTTP headers.
+    (<a href="http://www.nabble.com/downloading-with-wget%2C-time-stamp-invalid--tf4935871.html">report</a>)
+  <li class=bug>
+    Fixed a bug where path to Ant is computed incorrectly if the master and the slave are on different OS.
+  <li class=bug>
+    Fixed a bug in the resource lock controller
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1080">issue 1080</a>)
+  <li class=bug>
+    Fixed a bug in parsing JUnit test report that takes longer than 1000 secs to run.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1085">issue 1085</a>)
+  <li class="rfe">
+    Improved the robustness when temporary directory doesn't exist.
+    (<a href="http://www.nabble.com/ClearCase-plugin-0.2-not-working-with-1.160-tf4948031.html">report</a>)
+  <li class=rfe>
+    Added <tt>/exit</tt> URL to shutdown VM that runs Hudson.
+    (<a href="http://www.nabble.com/command-line-shutdown-to14355512.html">report</a>)
+  <li class=rfe>
+    Implemented ASCII-only remote communication mode for binary-unsafe transport.
+    (<a href="http://www.nabble.com/telnet-slave-to14216635.html">report</a>)
+</ul>
+<a name=v1.160><h3>What's new in 1.160</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a bug in the HTML rendering of repository browsers.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1052">issue 1052</a>)
+  <li class=bug>
+    Fixed JavaScript error that prevented hiding of optional blocks in IE.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1049">issue 1049</a>)
+  <li class=bug>
+    <tt>JOB_NAME</tt> variable on Matrix projects now includes the job name, not just the configuration name.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1047">issue 1047</a>)
+  <li class=bug>
+    Fixed a JavaScript issue with Opera 9 in the configuration page.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1056">issue 1056</a>)
+  <li class=bug>
+    "Latest Artifacts" are renamed to "Last Successful Artifacts" to better represent what it is.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1035">issue 1035</a>)
+  <li class=rfe>
+    Added a form in the log page (http://SERVER/hudson/log) to configure the logger setting.
+    (<a href="http://www.nabble.com/Workspace-is-disappearing-periodacilly...-tf4789417.html#a13763753">report</a>
+  <li class=rfe>
+    Improved the error diagnosis when Ant invocation fails.
+    (<a href="http://www.nabble.com/can%27t-run-ant--tf4892879.html">report</a>)
+  <li class=rfe>
+    Added a feature to test SMTP setting by sending out a trial e-mail.
+</ul>
+<a name=v1.159><h3>What's new in 1.159</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a bug in the remoting layer that prevented plugins from contributing to the native m2 build process.
+      (<a href="http://www.nabble.com/MavenReporter-throws-Serialization-Exception-for-ProjectActions-when-writing-to-build.xml-tf4784290.html">report</a>,
+       <a href="http://www.nabble.com/Help-Kohsuke%21-m2-project-type-and-cobertura-tf4829718.html">report</a>)
+  <li class=bug>
+    Fixed wrapping of log messages on changes pages.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1031">issue 1031</a>)
+  <li class=bug>
+    Removed maven wagon provider jars that were somehow sucked into the dependencies.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1023">issue 1023</a>)
+  <li class=bug>
+    Free-style Maven builders was only setting <tt>MAVEN_HOME</tt> but not <tt>M2_HOME</tt>.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1026">issue 1026</a>)
+  <li class=rfe>
+    JUnit report recorder now reports time it took to run tests.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=656">issue 656</a>)
+</ul>
+<a name=v1.158><h3>What's new in 1.158</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a bug where the submission of the matrix project configuration clobeers the on-going build.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=981">issue 981</a>)
+</ul>
+<a name=v1.157><h3>What's new in 1.157</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a bug in handling whitespace in ant properties on Windows.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1007">issue 1007</a>)
+  <li class=bug>
+    Fixed bug in changes view that showed only one change per build for Subversion repositories.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=856">issue 856</a>)
+  <li class=bug>
+    Fixed problem with WebSVN diff links.
+    (<a href="http://www.nabble.com/WebSVN-links-t4747555.html">report</a>)
+  <li class=bug>
+    Using the consistent button style in more places
+  <li class=rfe>
+    Added support for <a href="http://www.sventon.org">sventon</a> as a repsotory browser for Subversion.
+</ul>
+<a name=v1.156><h3>What's new in 1.156</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a bug where the submission of Hudson cofiguration loses MAVEN_HOME entries
+    (<a href="http://www.nabble.com/maven-entries-get-lost-tf4799649.html">report</a>)
+  <li class=bug>
+    Added "Expires" header to prevent unwanted page-caching in Opera.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=869">issue 869</a>)
+</ul>
+<a name=v1.155><h3>What's new in 1.155</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a regression in Ant that causes an empty "-file" line.
+    (<a href="http://www.nabble.com/Ant-builds-broken-tf4786202.html">report</a>)
+  <li class='major bug'>
+    Fixed NPE in external job result submission.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1006">issue 1006</a>)
+  <li class=bug>
+    Fix to avoid loading entire build log into memory.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=638">issue 638</a>)
+  <li class="rfe">
+    Report the empty <tt>MAVEN_HOME</tt> value more gracefully.
+    (<a href="http://www.nabble.com/NPE-in-new-Hudson-tf4798032.html">report</a>)
+  <li class="rfe">
+    Added additional logging for the workspace clean-up thread.
+</ul>
+<a name=v1.154><h3>What's new in 1.154</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed <tt>IllegalArgumentException</tt> in trying to load data from old Hudson
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=988">issue 988</a>)
+  <li class=bug>
+    Fixed an exception when getting zip file of an empty dir in workspace.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=788">issue 788</a>)
+  <li class=bug>
+    Environment variables need to be case insensitive but case preserving.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=968">issue 968</a>)
+  <li class=rfe>
+    Notification e-mails now form a thread.
+  <li class=rfe>
+    Hudson now produces <a href="http://confluence.public.thoughtworks.org/display/CCNET/CCTray">cctray</a>
+    compatible XML report in <tt>http://server/hudson/cc.xml</tt> or
+    <tt>http://server/hudson/view/ABC/cc.xml</tt>
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1003">issue 1003</a>)
+  <li class="rfe">
+    Added additional logging for project dependency related build ordering.
+</ul>
+<a name=v1.153><h3>What's new in 1.153</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a regression introduced in 1.152 wrt spawning native m2 process remotely.
+  <li class=bug>
+    Fixed a race condition between the inter-project dependency,
+    so that the downstream builds always correctly see the latest upstream build.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=980">issue 980</a>)
+  <li class=rfe>
+    Reduced the # of threads Hudson uses internally for efficiency
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=978">issue 978</a>)
+  <li class=rfe>
+    If no artifact is discovered when artifact archiving is configured, mark the build as an error.
+  <li class=rfe>
+    Removed clock checking from the system configuration, as the same information
+    is available from the node list view (<tt>http://SERVER/hudson/computer/</tt>)
+</ul>
+<a name=v1.152><h3>What's new in 1.152</h3></a>
+<ul class=image>
+  <li class=bug>
+    <strike>Environment variables need to be case insensitive but case preserving.</strike>
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=968">issue 968</a>)
+  <li class=bug>
+    Reject job names that contain ':' and ';' as an error
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=970">issue 970</a>)
+  <li class=bug>
+    JNLP slave agent now has the headless support.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=973">issue 973</a>)
+  <li class=bug>
+    Fixed a bug where the build status image after aborted build is incorrect. 
+  <li class=bug>
+    Don't report the build duration as 0 seconds when it's building.
+</ul>
+<a name=v1.151><h3>What's new in 1.151</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    svn+ssh connection was not properly working.
+    (<a href="http://www.nabble.com/Problems-using-svn%2Bssh-tf4710177.html">report</a>,
+     <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=578">issue 678</a>,
+     <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=811">issue 811</a>)
+  <li class=bug>
+    Fixed an incorrect reporting that the downstream build trigger makes. 
+  <li class=bug>
+    Error detection for servlet 2.4 support was not working.
+    (<a href="http://www.nabble.com/Error-running-hudson%3A-no-%22app%22-attribute-tf4519420.html">report</a>)
+  <li class=rfe>
+    SVN authentication error can now reveal full stack trace to assist trouble-shooting.
+  <li class=rfe>
+    Added debug probe for ssh library
+</ul>
+<a name=v1.150><h3>What's new in 1.150</h3></a>
+<ul class=image>
+  <li class=bug>
+    Tooltip for grey ball icon now correctly display different meanings of grey.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=944">issue 956</a>)
+  <li class=bug>
+    Fixed a bug that RSS feeds may expose internal URL behind a proxy/frontend.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=954">issue 954</a>)
+  <li class=rfe>
+    Attribute fingerprints to their builds correctly even when a build completes very quickly 
+  <li class=rfe>
+    "Build Now" link uses AJAX and thus no longer requires full page refresh.  
+  <li class=rfe>
+    Upgraded to YUI 2.3.1. Buttons are now YUI-themed.
+  <li class=rfe>
+    Implemented config GUI for handling a heterogeneous list by adding items from a menu
+    (this is for plugin developers.)
+  <li class=rfe>
+    Builder, Publisher, and BuildWrapper are generalized to work with non free-style projects.
+    (this is for plugin developers.)
+  <li class=rfe>
+    JobProperty now gets a chance to participate in a build.
+    (this is for plugin developers.)
+  <li class=rfe>
+    Matrix build now exposes <tt>$JDK</tt> and <tt>$LABEL</tt>, just like other use-defined axes.
+</ul>
+<a name=v1.149><h3>What's new in 1.149</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a regression in 1.148 that made it impossible even for an admin to start a build
+    if security is enabled.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=944">issue 944</a>)
+  <li class='major bug'>
+    Scripting console had apparently stopped working since 1.145. This is fixed.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=925">issue 925</a>)
+  <li class=bug>
+    In the "new job" page, the state control of the "OK" button was not quite right
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=849">issue 849</a>)
+  <li class=rfe>
+    If there's only one JDK configured in the system, don't offer pointless JDK selection
+    combobox.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=659">issue 659</a>)
+</ul>
+<a name=v1.148><h3>What's new in 1.148</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a security problem where project build URLs were not protected by default when security is enabled.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=922">issue 926</a>)
+  <li class='major bug'>
+    Fixed a bug where the HTML rendering of external jobs was completely broken.  
+  <li class=bug>
+    AJAX build history update was broken for the native m2 job type.
+  <li class=bug>
+    Fixed broken links from "no workspace" error page.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=922">issue 922</a>)
+  <li class=bug>
+    When a remote build is cancelled, the launched process needs to be cancelled, too.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=904">issue 904</a>)
+  <li class=bug>
+    Fixed a <tt>MalformedURLException</tt> with resin.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=879">issue 879</a>)
+  <li class=rfe>
+    Deletion of files is now a bit more robust, especially if Hudson runs on JDK6.
+  <li class=rfe>
+    Picked up the latest version of JEXL.
+</ul>
+<a name=v1.147><h3>What's new in 1.147</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a bug in computing the location of <tt>classworlds.jar</tt> for native m2 build.
+    (<a href="http://www.nabble.com/linux-slave-uses-wrong-maven-path-for-classworlds-jar-tf4648221.html">report</a>)
+  <li class=bug>
+    Fix a memory leak in the Subversion SCM
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=886">issue 886</a>)
+  <li class=rfe>
+    [XVNC] Starting display number for XVNC displays, normally 10, is now configurable.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=918">issue 918</a>) 
+  <li class=rfe>
+    Added a status indicator for each build in the build trend page.
+  <li class=rfe>
+    Hudson now masks password sent to child processes.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=911">issue 911</a>)
+  <li class=rfe>
+    SCM and AbstractProject now implement a getModuleRoots method
+    (this is for plugin developers only).
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=912">issue 912</a>) 
+  <li class=rfe>
+    <tt>hudson.war</tt> contains a commented out section that can be used to avoid
+    interference between security and cache control header.
+    (<a href="http://www.nabble.com/No-browser-caching-with-Hudson--tf4601857.html#a13224961">report</a>) 
+</ul>
+<a name=v1.146><h3>What's new in 1.146</h3></a>
+<ul class=image>
+  <li class=bug>
+    Disk space monitoring on slaves was not working
+  <li class=bug>
+    Fixed a bug where Hudson fails to recognize a JUnit test failure when a test failed to load.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=899">issue 899</a>)
+  <li class=bug>
+    JUnit test case name has been rendered without HTML escaping.
+  <li class=rfe>
+    Builder, Publisher and BuildWrapper can now implement ResourceActivity if they want to contribute
+    to the resource usage for the project (e.g. required to implement
+    <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=878">issue 878</a>, this is for plugin
+    developers only.)
+  <li class=rfe>
+    Introduced the internal 'widget' abstraction so that plugins can expand them.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=785">issue 785</a>)
+  <li class=rfe>
+    Generalized the internal job rename event notification.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=891">issue 891</a>)
+  <li class=rfe>
+    JUnit report archiver handles report files of length 0 more gracefully.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=903">issue 903</a>)
+  <li class=rfe>
+    Added an error margin on JUnit report archiver so that it doesn't report false positive
+    "no new reports found" error.
+</ul>
+<a name=v1.145><h3>What's new in 1.145</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a bug where Ant support didn't run on Tiger.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=884">issue 884</a>)
+  <li class=bug>
+    Fixed NPE in doSvnRemoteLocationCheck for svn+ssh (SVNGanymedConnector.close)
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=784">issue 784</a>)
+  <li class=bug>
+    Make CVS logging work even for very many files in a single build on Unix systems
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=864">issue 864</a>)
+  <li class=bug>
+    Fixed a bug that where the ajax build history update is broken for matrix configuration job.
+  <li class=rfe>
+    Added icons to the form-field validation error messages, and introduced a separate
+    visual style for warnings.
+  <li class=rfe>
+    &lt;f:optionalBlock> can be now nested inside &lt;f:repeatable> (this is for plugin developers only.)
+  <li class=rfe>
+    When a portion of the form unfolds, the page will scroll automatically to display the
+    newly visible area.
+  <li class=rfe>
+    Added <tt>RunListener</tt> for getting notifications for all builds.
+</ul>
+<a name=v1.144><h3>What's new in 1.144</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a bug in the "loading..." page auto refresh
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=829">issue 829</a>)
+  <li class=rfe>
+    Expanded search index to cover all the users.
+  <li class=rfe>
+    Added remote API support for fingerprints.
+    (<a href="http://www.nabble.com/FW%3A-Hudson-API-and-fingerprinting-tf4515739.html">report</a>)
+  <li class=rfe>
+    Improved user interface of Ant support
+    (<a href="http://www.nabble.com/Improving-Ant-Support-tf4504289.html">report</a>)
+  <li class=rfe>
+    Text area is now much smarter. Its height is adjustable, and its size is pre-configured to fit to the content
+    (as well as double-clicking the handle.)
+</ul>
+<a name=v1.143><h3>What's new in 1.143</h3></a>
+<ul class=image>
+  <li class=rfe>
+    Axis names are now exported as environment variables in all upper case for better cross-platform behavior)
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=842">issue 842</a>)
+  <li class=rfe>
+    <tt>CLASSPATH</tt> environment variable is no longer inherited to processes spawned from Hudson.
+    (<a href="http://www.nabble.com/Run-Job-with-JDK-1.4.2-tf4468601.html">report</a>)
+  <li class=rfe>
+    Macro expansion rule now supports ${ABC} syntax as well as $ABC.
+  <li class=rfe>
+    Maven invocation in free-style projects now does macro expansion.
+    (<a href="http://www.nabble.com/Supplying-Hudson-variables-to-Maven2-builds--tf4484367.html">report</a>)
+  <li class=rfe>
+    Added a workaround for slow subversion check out
+    (<a href="http://www.nabble.com/Slow-SVN-Checkout-tf4486786.html">report</a>)
+</ul>
+<a name=v1.142><h3>What's new in 1.142</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a start up NPE problem in native maven2 projects, introduced in 1.141. 
+  <li class=rfe>
+    Added error diagnostics screen for executor thread death.
+    (<a href="http://www.nabble.com/%22Dead%22-executor-...-tf4496934.html">report</a>)
+  <li class=rfe>
+    Added HTML titles to various test result related pages.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=843">issue 843</a>)
+</ul>
+<a name=v1.141><h3>What's new in 1.141</h3></a>
+<ul class=image>
+  <li class=bug>
+    For SCM polling, resize the thread pool when <i>Max # of concurrent polling</i> is changed
+  <li class=bug>
+    JUnit result reporting showed incorrect links when JUnit test names contain ':'
+  <li class=bug>
+    Fixed an NPE during initialization, which only happens with matrix build and master-only environment.
+  <li class=bug>
+    Fixed a JavaScript error on tooltip handling.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=830">issue 830</a>)
+  <li class=bug>
+    Fixed a bug so that actions show up properly in matrix project.
+  <li class=bug>
+    De-selecting "axes" in matrix project configuration should delete all axes.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=839">issue 839</a>)
+  <li class=rfe>
+    Do not perform SCM polling when Hudson is shutting down
+    (<a href="http://www.nabble.com/SCM-polling-tf4464983.html">report</a>)
+  <li class=rfe>
+    Fixed negative phrasing "don't send email on every unstable build"
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=827">issue 827</a>)
+</ul>
+<a name=v1.140><h3>What's new in 1.140</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fix a socket leak in SubversionSCM introduced in 1.137
+  <li class=bug>
+    Compute version number before loading Hudson, so that the HudsonIsLoading page
+    displays a version number
+  <li class=bug>
+    Matrix build can wait infinitely if its configuration builds are cancelled from the queue.
+  <li class=bug>
+    Fixed a security hole that allows unauthenticated users to access logs that Hudson produces.
+</ul>
+<a name=v1.139><h3>What's new in 1.139</h3></a>
+<ul class=image>
+  <li class=bug>
+    A failure in svnkit can cause an unexpected timer cancellation.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=813">issue 813</a>)
+  <li class=bug>
+    Hudson wasn't performing all the variable expansions in &lt;finalName> when archiving artifacts.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=812">issue 812</a>)
+  <li class=bug>
+    <tt>java -jar hudson-core.jar</tt> had unnecessary dependency to Ant.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=802">issue 802</a>)
+  <li class=rfe>
+    Added <a href="http://websvn.tigris.org/">WebSVN</a> support.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=617">issue 617</a>)
+  <li class=rfe>
+    Slave log now shows timestamps.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=791">issue 791</a>)
+  <li class=rfe>
+    Hudson now displays a dedicated UI during the initialization and reloading.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=756">issue 756</a>)
+</ul>
+<a name=v1.138><h3>What's new in 1.138</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Disabled m2 module list actually showed the enabled modules.
+  <li class='major bug'>
+    E-mail notifications were not working with aggregator-style Maven2 builds.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=807">issue 807</a>)
+  <li class=bug>
+    Native m2 Aggregated build was also "building" disabled modules.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=805">issue 805</a>)
+  <li class=bug>
+    Detailed build error message was not captured in the offending maven2 module build console output.
+  <li class=rfe>
+    CVS after-the-fact tagging screen now shows all the transitive dependencies.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=233">issue 233</a>)
+  <li class=rfe>
+    Search index now includes maven module display names.
+</ul>
+<a name=v1.137><h3>What's new in 1.137</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Additional JavaScript memory leak fix.
+  <li class=bug>
+    Slave thread dump was not working in JDK5.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=792">issue 792</a>)
+  <li class="bug">
+    Using local file path as <tt>HUDSON_HOME</tt> for monitoring external job is now obsoleted.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=799">issue 799</a>)
+  <li class=bug>
+    Scripting console needs to escape its output.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=798">issue 798</a>)
+  <li class="rfe">
+    Gracefully handle project deleted in SVN
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=763">issue 763</a>)
+  <li class="rfe">
+    List of possible culprits for repeated failed builds should be cumulative
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=747">issue 747</a>)
+  <li class="rfe">
+    Remote API support was expanded to build records of all job types.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=804">issue 804</a>)
+</ul>
+<a name=v1.136><h3>What's new in 1.136</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed JavaScript memory leak issues.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=670">issue 670</a>)
+  <li class=bug>
+    Table sorting feature stopped working in 1.135
+    (<a href="http://www.nabble.com/Sorting-of-projects-tf4371682.html">report</a>)
+  <li class=bug>
+    Hudson was still following symlinks when deleting recursively.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=585">issue 585</a>)
+  <li class='rfe'>
+    JavaScript performance improvement
+  <li class='rfe'>
+    Hudson now detects <a href="http://hudson.gotdns.com/wiki/display/HUDSON/Spawning+processes+from+build">a file descriptor leak situation</a> and report that as a warning, then let the build go.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=770">issue 770</a>)
+</ul>
+<a name=v1.135><h3>What's new in 1.135</h3></a>
+<ul class=image>
+  <li class=bug>
+    Icon size choice should be persisted across browser sessions.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=762">issue 762</a>)
+  <li class=bug>
+    Some binary data in console output has been causing 500 when you try to access it.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=778">issue 778</a>)
+  <li class=bug>
+    Fixed a bug in the native m2 surefire result recording when surefire is used more than once.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=751">issue 751</a>)
+  <li class=rfe>
+    Modified JUnit report archiving behavior to better align with Ant's &lt;junitreport> task.
+    (<a href="http://www.nabble.com/difference-in-junit-publisher-and-ant-junitreport-tf4308604.html#a12265700">report</a>)
+  <li class=rfe>
+    Updated to svnkit 1.1.4
+  <li class=rfe>
+    Updated to prototype.js 1.5.1.1
+  <li class=rfe>
+    Improved the absolute URL computation in Hudson to work better with httpd frontend.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=781">issue 781</a>)
+</ul>
+<a name=v1.134><h3>What's new in 1.134</h3></a>
+<ul class=image>
+  <li class=bug>
+    Aggregator-style build setting in the native m2 project was put under the wrong "advanced" button.
+    (<a href="http://www.nabble.com/issue-557.-tf4352687.html">report</a>)
+  <li class=bug>
+    Don't let test failures in the aggregator-style native m2 build to abort a build.
+    (<a href="http://www.nabble.com/issue-557.-tf4352687.html">report</a>)
+  <li class=bug>
+    Fixed NPE in job configuration.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=773">issue 773</a>)
+  <li class=bug>
+    Fixed an error handling in e-mail notification when e-mail address is empty.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=772">issue 772</a>)
+  <li class=bug>
+    Fixed a bug in inter-module dependency handling with aggregator-style native m2 build.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=774">issue 774</a>)
+  <li class=bug>
+    Native m2 module build records were not properly discarded even when configured. 
+  <li class=bug>
+    Test failures in aggregator-style native m2 module build was reported as red, not yellow.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=776">issue 776</a>)
+  <li class=bug>
+    Maven project page now shows aggregated test result trend (regression.)
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=775">issue 775</a>)
+</ul>
+<a name=v1.133><h3>What's new in 1.133</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a bug in the free-style maven/ant invocations when the master and slave run
+    in different OSes.
+    (<a href="http://www.nabble.com/Maven-module-build-order-has-resorted-in-need-to-fall-back-to-freestyle-BUT...-tf4315716.html">report</a>)
+  <li class=bug>
+    Subversion change log has been reported in the wrong order.
+    (<a href="http://www.nabble.com/Date-format-tf4322090.html#a12315508">report</a>)
+  <li class=rfe>
+    Maven modules are now displayed with indentation according to their POM hierarchy.
+    (Note that you'd have to build the project once for this to take effect.)
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=423">issue 423</a>)
+  <li class='major rfe'>
+    Supported more traditional maven build mode where a single maven process recursively
+    builds all the modules.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=557">issue 557</a>)
+</ul>
+<a name=v1.132><h3>What's new in 1.132</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed the login link visibility issue.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=758">issue 758</a>)
+  <li class=bug>
+    Trying to search for non-existent item now shows a list of candidates,
+    as opposed to 500 error.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=761">issue 761</a>)
+  <li class=rfe>
+    Search box auto-completion now shows prefix matches before other matches.
+  <li class=rfe>
+    Added a work around necessary to run with OC4J.
+    (<a href="http://www.nabble.com/forum/Search.jtp?forum=16872&local=y&query=oc4j">report</a>)
+</ul>
+<a name=v1.131><h3>What's new in 1.131</h3></a>
+<ul class=image>
+  <li class=bug>
+    Running "javadoc:javadoc" in the native m2 project was not recording javadoc.
+    (<a href="http://www.nabble.com/post-build-actions-in-maven-2-project-tf4251918.html">report</a>)
+  <li class=bug>
+    Changelogs were not displayed properly for maven2 modules.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=661">issue 661</a>)
+  <li class=bug>
+    Hudson now recognizes the JUnit output XML that starts with &lt;testsuites>
+    (<a href="http://www.nabble.com/More-JUnit-test-report-problems...-tf4267020.html#a12143611">report</a>)
+  <li class=rfe>
+    Changed svn polling code so that it doesn't rely on the left-over workspace
+    (<a href="http://www.nabble.com/Subversion-polling-issues.-tf4273726.html">report</a>)
+  <li class=rfe>
+    Subject of e-mail notifications that Hudson sends out is little more human readable. 
+  <li class='major rfe'>
+    Added search box for a quicker navigation around Hudson pages
+    (<a href="http://hudson.gotdns.com/wiki/display/HUDSON/Search+Box">detail</a>)
+</ul>
+<a name=v1.130><h3>What's new in 1.130</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a bug that matrix project initialization causes NPE.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=740">issue 740</a>)
+  <li class='major bug'>
+    Improved the stability of the native m2 builds when builds produce plugins,
+    and when different builds use different versions of plugins.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=740">issue 740</a>)
+  <li class=bug>
+    Slaves launched through JNLP couldn't launch the native maven2 builds.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=539">issue 539</a>)
+  <li class=rfe>
+    Archived Maven2 artifacts should honor the &lt;finalName> POM entry.
+    (<a href="http://www.nabble.com/Maven-build-artifacts%3A-FinalName-wrong--tf4279077.html">report</a>)
+</ul>
+<a name=v1.129><h3>What's new in 1.129</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a memory leak bug in distributed operations.
+    (<a href="http://www.nabble.com/Possible-memory-leak-in-hudson.remoting.ExportTable-tf4218077.html">report</a>)
+  <li class=bug>
+    Fixed a bad interaction between subversion repository browser vs master/slave operation.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=702">issue 702</a>)
+  <li class=bug>
+    In workspace browsing pages, HTML title was incorrect.
+  <li class=bug>
+    JNLP agent is modified to run on any JRE newer than 1.5, not just 1.5.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=735">issue 735</a>)
+  <li class=rfe>
+    Native Maven2 projects now expose the same set of variables as system properties that
+    free-style projects get as environment variables.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=700">issue 700</a>,
+     <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=700">issue 720</a>)
+  <li class=rfe>
+    Ant-style glob like <tt>"**/build.xml"</tt> can be entered in the text box
+    of the workspace/artifact view and Hudson shows matching files.  
+    <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=448">issue 448</a>)
+  <li class=rfe>
+    Improved error diagnostics in the subversion URL setting.
+  <li class=rfe>
+    <tt>JobProperty</tt>s for maven2 projects weren't given a chance to contribute actions.
+    (<a href="http://www.nabble.com/Maven2-project-actions-tf4261260.html">report</a>)
+  <li class=rfe>
+    When someone is listed in the recipient list of e-mail notification and when
+    that person is responsible for breaking the build, s/he now only gets one e-mail, not two.
+    (<a href="http://www.nabble.com/Duplicate-mail-recipients-tf4254810.html">report</a>)
+</ul>
+<a name=v1.128><h3>What's new in 1.128</h3></a>
+<ul class=image>
+  <li class=bug>
+    System log and slave log were not secured. 
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=716">issue 716</a>)
+  <li class=bug>
+    Fixed a bug where the console output could get truncated incorrectly.
+    (<a href="http://www.nabble.com/Output-of-build-console-is-truncated-tf4224151.html">report</a>)
+  <li class=bug>
+    Fixed subversion performance issue with symlinks
+    (<a href="http://www.nabble.com/hudson-tomcat-cloning-itself-tf4247979.html">report</a>)
+  <li class=rfe>
+    Insufficient security permission is now reported more gracefully.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=719">issue 719</a>)
+  <li class=rfe>
+    Even if the <tt>lastSuccessful</tt> symlink is turned into a directory,
+    Hudson will delete it correctly.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=704">issue 704</a>)
+  <li class=rfe>
+    When a new plugin is uploaded, a message will indicate that the restart
+    is needed for plugins to take effect
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=705">issue 705</a>)
+</ul>
+<a name=v1.127><h3>What's new in 1.127</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a bug that prevented weather report detail table to show up.
+    (<a href="http://www.nabble.com/Weather-tooltips-dissappeared-tf4216512.html">report</a>)
+  <li class=bug>
+    Fixed the problem where upgrade of Hudson often used to require clearing the browser cache.
+  <li class=bug>
+    Hudson now detects Windows/Unix of slaves more reliably.
+    (<a href="http://www.nabble.com/setting-up-ant-on-solaris-slave-tf4208376.html">report</a>)
+  <li class=rfe>
+    Hudson didn't check the client CVS version to see if the '-S' option can be used for computing changelog.
+    (<a href="http://www.nabble.com/Modifying-hudson-CVS-commands-tf4134359.html#a11758558">report</a>)
+  <li class=rfe>
+    Rendering performance is improved by better static resource cache control.
+  <li class=rfe>
+    Improved page rendering performance by using gzip compression in several places
+  <li class=rfe>
+    Workspace view now has a "view" link to view files inline.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=645">issue 645</a>)
+  <li class=rfe>
+    Updated the error diagnosis in the JUnit test result collection 
+</ul>
+<a name=v126><h3>What's new in 1.126</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a bug where "cvs co" put "-P" in a wrong position.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=696">issue 696</a>)
+</ul>
+<a name=v125><h3>What's new in 1.125</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed the character set handling in AJAX job/view description update
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=654">issue 654</a>)
+  <li class=bug>
+    Missing JavaScript files was making it impossible to configure slaves in the matrix project
+  (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=706">issue 706</a>)
+  <li class=rfe>
+    Improved the form validation and error diagnosis when JDK paths are not configured at all
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=659">issue 659</a>)
+  <li class=rfe>
+    CVS check out now uses the -P option to avoid checking out empty directories
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=696">issue 696</a>)
+  <li class=rfe>
+    Added a hook for plugins to specify additional CSS
+   (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=695">issue 695</a>)
+</ul>
+<a name=v124><h3>What's new in 1.124</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Build history listing always get doubled because of a bug in partial page update code.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=698">issue 698</a>)
+  <li class=bug>
+    Fixed a NPE when a HealthReportingAction is not providing a health report.
+    (<a href="see http://www.nabble.com/Healtreport-icon-tf4198496.html">report</a>)
+  <li class=bug>
+    Fixed a rendering issue with health report details on browsers that normalize malformed HTML pages.
+    (<a href="http://www.nabble.com/New-job-overview--tf4192401.html">report</a>)
+  <li class=bug>
+    Improved stability of the timer related code so that one failure won't shut down the entire timer. 
+</ul>
+<a name=v123><h3>What's new in 1.123</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a bug where remote API schema generation doesn't work with JDK1.5.
+    (<a href="http://www.nabble.com/http://www.nabble.com/How-to-create-and-modify-tasks--tf4160527.html">report</a>)
+  <li class=bug>
+    Fixed a bug where tooltips of the build history stops working when the page is partially updated by AJAX.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=683">issue 683</a>)
+  <li class=bug>
+    Fixed the dead lock issue in SCM polling
+  (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=690">issue 690</a>)
+  <li class=rfe>
+    Added upstream/downstream projects to the remote API.
+    (<a href="http://www.nabble.com/http://www.nabble.com/How-to-create-and-modify-tasks--tf4160527.html">report</a>)
+  <li class=rfe>
+    <tt>/job/JOBNAME/config.xml</tt> now sends back project configuration XML verbatim.
+    (<a href="http://www.nabble.com/http://www.nabble.com/How-to-create-and-modify-tasks--tf4160527.html">report</a>)
+  <li class=rfe>
+    Extended the remote API to support job submission.
+    (<a href="http://www.nabble.com/How-to-create-and-modify-tasks--tf4160527.html">report</a>)
+  <li class=rfe>
+    Added extensible slave monitoring mechanism. Initially this comes with clock difference
+    monitoring and free disk space monitoring. Linked from "Manage Hudson" page.
+  <li class=rfe>
+    Health/weather reports did not display the description under Safari. The fix allows
+    for displaying a table of all health reports (as before accessible by hovering over the
+    health/weather icon).
+</ul>
+<a name=v122><h3>What's new in 1.122</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    For some reason, a lot of Subversion related changes that were made in the past
+    has been lost since 1.114. I resurrected all such changes. Subversion users are recommended
+    to pick up Hudson 1.122.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=679">issue 679</a>)
+  <li class=bug>
+    "Just show failure" feature in the test report trend was not working.
+  <li class=bug>
+    Subversion after-the-fact tagging log incorrectly displays <tt>Object.toString()</tt> output.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=676">issue 676</a>)
+  <li class=bug>
+    Fixed a bug where JUnit report archived reports up-to-date check errors as negative values.
+    (<a href="http://www.nabble.com/JUnit-test-reports-problem%3A-%22Test-reports-were-found-but-none-of-them-are-new.%22-tf4158194.html">report</a>)
+  <li class=rfe>
+    A prominent link to the latest test result is now available on the project top page.
+    (This feature used be available but somewhere along the line I must have broken it.)
+  <li class=rfe>
+    Multiline-expandable text box now comes with tooltip to explain what it is.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=664">issue 664</a>)
+  <li class=rfe>
+    Trying to launch JNLP when JNLP agent TCP port is disabled now produces a warning.
+    (<a href="http://www.nabble.com/Problem-starting-hudson-slave-via-jnlp-tf4141904.html">report</a>)
+  <li class=rfe>
+    CVS now supports whitespace in module names by using "\ " as the escape syntax.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=663">issue 663</a>)
+  <li class='major rfe'>
+    Introduced a new project type called 'matrix project'. Particularly suitable for
+    building/testing on multiple platforms, or testing with non-trivial number of
+    different configuration.
+    (<a href="http://hudson.gotdns.com/wiki/display/HUDSON/Building+a+matrix+project">more</a>)
+</ul>
+<a name=v121><h3>What's new in 1.121</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed HTML escape related bugs in the project description.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=654">issue 654</a>)
+  <li class=bug>
+    Maven module configuration shouldn't offer name field as a textbox.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=632">issue 632</a>)
+  <li class=bug>
+    Fixed file handle leak in serving static resources.
+    (<a href="http://www.nabble.com/Static-resources-disappear-tf4069104.html#a11563375">report</a>)
+  <li class=bug>
+    "Tag this build" feature in Subversion was somehow disabled. Resurrected this feature.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=662">issue 662</a>)
+  <li class=rfe>
+    CVS tag form now gets form validation to warn invalid tag names upfront ('.' in tag, anyone?)
+  <li class=rfe>
+    Changed the way Maven project build result is computed.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=651">issue 651</a>)
+</ul>
+<a name=v120><h3>What's new in 1.120</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a security hole that allows non-admin users to disable/enable plugins.
+  <li class=rfe>
+    After a successful login, don't go back to the original page if the original page was the
+    "login error" page.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=641">issue 641</a>)
+  <li class=rfe>
+    Maven in the native 2m project is now invoked with the batch mode option (-B) 
+  <li class=rfe>
+    <tt>CVS_BRANCH</tt> environment variable is now available to the build if the SCM
+    is CVS and a branch is set.
+    (<a href="http://www.nabble.com/Getting-CVS-Branch-in-Ant-build-tf4104247.html">report</a>)
+</ul>
+<a name=v119><h3>What's new in 1.119</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed NPE in the end of a build.
+</ul>
+<a name=v118><h3>What's new in 1.118</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Memory fix bug in 1.117 was incorrect and Hudson fails to persist SVN credentials.
+  <li class=bug>
+    Re-implemented the SCM polling &amp; build locking mechanism.
+    (<a href="http://www.nabble.com/Error%3A-svn%3A-Working-copy-%3Cdir%3E-locked--try-performing-%27cleanup%27-tf4078015.html">report</a>)
+  <li class=rfe>
+    Views can be now renamed from the 'edit view' page
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=640">issue 640</a>)
+  <li class=rfe>
+    Improved the algorithm that detects e-mail address from user name.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=636">issue 636</a>)
+  <li class=rfe>
+    Improved slave Unix/Windows detection
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=631">issue 631</a>)
+</ul>
+<a name=v117><h3>What's new in 1.117</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a bug where build queue gets very confused if modules exist in 2 native m2 projects
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=521">issue 521</a>)
+  <li class=bug>
+    Fixed a bug where Hudson doesn't pick up a change to the root module in the native m2 project.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=588">issue 588</a>)
+  <li class=bug>
+    Fixed I/O error in locally launched channel with Maven.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=595">issue 595</a>)
+  <li class=bug>
+    Integrated Winstone 0.9.9 to pick up bug fixes.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=553">issue 553</a>,
+     <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=596">issue 596</a>)
+  <li class=bug>
+    Fixed a subversion&amp;slave related memory leak.
+    (<a href="http://www.nabble.com/OutOfMemroyError-tf4002294.html">report</a>)
+  <li class=rfe>
+    Added a command to delete all disabled modules from a m2 project in one click.
+  <li class=rfe>
+    [JIRA 1.3] JIRA plugin now works with the native m2 project type.
+    (<a href="http://www.nabble.com/Jira-Plugin-Post-build-actions-not-appearing-tf4070397.html">report</a>)
+</ul>
+<a name=v116><h3>What's new in 1.116</h3></a>
+<ul class=image>
+  <li class=bug>
+    Several subversion related error messages were incorrectly escaped.
+    (<a href="http://www.nabble.com/changelog.xml-make-me-crazy--%29-tf3991267.html">report</a>)
+  <li class=bug>
+    Fixed 404 in the "enter credential" link from Subversion help page.
+  <li class=bug>
+    Fixed a data file compatibility problem.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=628">issue 628</a>)
+  <li class=bug>
+    Fixed a bug where the downstream project list always gets sorted alphabetically.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=608">issue 608</a>)
+  <li class=bug>
+    Native m2 module builds no longer trigger downstream modules if tests fail.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=605">issue 605</a>)
+  <li class=rfe>
+    Improved form field validation for javadoc archive configuration.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=606">issue 606</a>)
+  <li class=rfe>
+    Improved error diagnostics in JUnit report archiving
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=579">issue 579</a>)
+  <li class=rfe>
+    Auto-refresh cookie is now persisted.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=580">issue 580</a>)
+</ul>
+<a name=v115><h3>What's new in 1.115</h3></a>
+<ul class=image>
+  <li class='bug'>
+    Modified to disable HTTP basic auth support (introduced in v1.112) when
+    security is disabled.
+    (<a href="http://www.nabble.com/Problem-with-Basic-Authentication-behind-Apache-tf3987591.html">report</a>)
+  <li class='bug'>
+    Fixed a possible NPE in fingerprint handling
+    (<a href="http://www.nabble.com/forum/ViewPost.jtp?post=11312005&framed=y">report</a>)
+  <li class='bug'>
+    Fixed a problem where workspace/archived files with unusual extensions are served with
+    "text/html" MIME type.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=627">issue 627</a>)
+  <li class='rfe'>
+    Added Subversion revision number to the remote API.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=626">issue 626</a>)
+  <li class='rfe'>
+    Supported XPath query in the remote API.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=626">issue 626</a>)
+  <li class='major rfe'>
+    Project health report icons on the project level view. The 'sickest' health report controls
+    the icon's tooltip text. Initial health report providers are Test Result and Recent Build Status.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=615">issue 615</a>)
+</ul>
+<a name=v114><h3>What's new in 1.114</h3></a>
+<ul class=image>
+  <li class='bug'>
+    Fixed 404 in Subversion config help link.
+  <li class='bug'>
+    Fixed NPE in the fingerprint record cleaning.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=618">issue 618</a>)
+  <li class='rfe'>
+    Maven modules now follow the project level log rotation setting.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=612">issue 612</a>)
+  <li class='rfe'>
+    [SVNCOMPAT13] Added the svncompat13 plugin to create working copies compatible with Subversion 1.3
+  <li class='rfe'>
+    Extract email from user id when available
+  <li class='rfe'>
+    Hudson now distinguishes aborted builds from failed builds.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=292">issue 292</a>)
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=614">issue 614</a>)
+  <li class='major rfe'>
+    Internal code is refactored to make room for another job type.
+</ul>
+<a name=v113><h3>What's new in 1.113</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed incorrect formatting in Subversion URL form validation.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=604">issue 604</a>)
+  <li class='major bug'>
+    Fixed NPE in form validation.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=607">issue 607</a>)
+  <li class='bug'>
+    Fixed a bug in svn+ssh password authentication.
+</ul>
+<a name=v112><h3>What's new in 1.112</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a problem where the user properties were not loaded correctly.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=600">issue 600</a>)
+  <li class='major bug'>
+    Fixed a bug where Winstone&amp;IE combination causes 404 when submitting system configuration.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=596">issue 596</a>)
+  <li class=bug>
+    Fixed "SVNException: Path ends in '.'" problem.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=597">issue 597</a>)
+  <li class=bug>
+    Fixed NPE in <tt>MavenModuleSetBuild.getResult</tt>
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=594">issue 594</a>)
+  <li class='rfe'>
+    When deleting directories, Hudson no longer recurse into symlinks.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=585">issue 585</a>)
+  <li class='rfe'>
+    Remote API now exposes XML Schema for its XML data. 
+  <li class='rfe'>
+    For Subversion-based projects, SVN revision is now made available to builds through
+    the environment variable <tt>SVN_REVISION</tt>.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=599">issue 599</a>)
+  <li class='major rfe'>
+    Added HTTP basic authentication support for scripting clients
+</ul>
+<a name=v111><h3>What's new in 1.111</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a few file handle leaks in Subversion support.
+    (<a href="http://www.nabble.com/too-many-open-files-tf3843627.html">report</a>)
+  <li class=bug>
+    Rolling back <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=590">#590 change</a> in 1.110
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=601">issue 601</a>)
+  <li class='major bug'>
+    Fixed several cross-site scripting vulnerabilities.
+    Thanks to <a href="http://opensource.fortifysoftware.com/">Fortify</a>.
+</ul>
+<a name=v110><h3>What's new in 1.110</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a DOM leak that caused browsers to eventually hang where partial page updates are involved.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=581">issue 581</a>)
+  <li class=bug>
+    Fixed NPE when the root POM field is left empty in the native m2 support.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=586">issue 586</a>)
+  <li class=bug>
+    Fixed NPE that involves copying a M2 job.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=588">issue 588</a>)
+  <li class=bug>
+    Fixed a bug in ViewCVS links where files in the Attic didn't resolve correctly
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=590">issue 590</a>)
+
+  <li class=rfe>
+    Improved compatibility with older version of ViewCVS
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=589">issue 589</a>)
+</ul>
+<a name=v109><h3>What's new in 1.109</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a NPE in <tt>MavenModule</tt>
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=574">issue 574</a>)
+  <li class=bug>
+    User config information is now properly reloaded when Hudson is reloaded from UI.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=564">issue 564</a>)
+  <li class=bug>
+    When a module is re-added in the native m2 project, it needs to be enabled.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=569">issue 569</a>)
+  <li class=bug>
+    When the back button is pressed, expandable radio blocks were not restored correctly
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=570">issue 570</a>)
+  <li class=bug>
+    Special characters are now properly escaped in JSON strings.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=576">issue 576</a>)
+
+  <li class=rfe>
+    Added more hyperlinks to the fingerprint list page.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=568">issue 568</a>)
+  <li class=rfe>
+    Build status icons now have the alt attribute for better accessibility.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=573">issue 573</a>)
+  <li class=rfe>
+    After-the-fact tagging now supported for Subversion projects.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=566">issue 566</a>)
+  <li class=rfe>
+    Made it easy to find the "enter subversion credential" page by
+    adding a link from the help page.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=571">issue 571</a>)
+</ul>
+<a name=v108><h3>What's new in 1.108</h3></a>
+<p>
+  No change
+</p>
+<a name=v107><h3>What's new in 1.107</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed an NPE when pom.xml has <tt>ciManagement</tt> doesn't have nested <tt>system</tt> element.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=540">issue 540</a>)
+  <li class=bug>
+    Added some defensive checks to avoid reported NPEs in <tt>MailSender</tt>.
+  <li class=bug>
+    Fixed an NPE when a module configuration is saved.
+    (<a href="http://www.nabble.com/Possible-NPE-bug--tf3793595.html">report</a>)
+
+  <li class=rfe>
+    Clock check on the system configuration now runs asynchronously to improve the user experience
+    with large number of slaves.
+  <li class=rfe>
+    Improved error handling when failed to create HUDSON_HOME.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=558">issue 558</a>)
+  <li class='major rfe'>
+    Slaves can now have labels, and jobs can be tied to labels.
+</ul>
+<a name=v106><h3>What's new in 1.106</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Trying to update a module in a native m2 project fails with NPE.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=534">issue 534</a>)
+  <li class='major bug'>
+    Fixed a bug that prevented the JIRA plugin from working.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=529">issue 529</a>)
+  <li class=bug>
+    When Hudson is aborting because of a failure to create <tt>HUDSON_HOME</tt>,
+    don't print out extra error messages.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=536">issue 536</a>)
+  <li class=bug>
+    JDK installation directory on Mac OS X was not properly recognized.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=533">issue 533</a>)
+  <li class=bug>
+    password-based SSH authentication was not working
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=531">issue 531</a>)
+  <li class=bug>
+    XML-unsafe chars were not escaped in the remote API.
+    (<a href="http://www.nabble.com/Eclipse-plugin-update-tf3724710.html">report</a>)
+  <li class=bug>
+    [JIRA 1.2] Hudson URL in JIRA comments was incorrectly interpreted by JIRA
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=544">issue 544</a>)
+  <li class=bug>
+    Fixed a bug where special characters like &lt; and &amp; are escaped multiple times in Subversion
+    changelog
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=530">issue 530</a>)
+  <li class=bug>
+    [JIRA 1.3] Hudson no longer gets confused with tokens that look like JIRA issues
+    that are actually not
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=548">issue 548</a>)
+
+  <li class=rfe>
+    Hudson now checks for invalid new names in job rename operation.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=519">issue 519</a>)
+  <li class=rfe>
+    Updated XStream to 1.2.1 to support BEA JRockIt.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=546">issue 546</a>)
+  <li class=rfe>
+    "Build other projects" now has a help text and option to trigger even when a build is unstable.
+    (<a href="http://www.nabble.com/auto-build-of-downstream-project-not-working-tf3665673.html">report</a>)
+  <li class=rfe>
+    Improve the error message when the native m2 support is attempted to run with Java 1.4
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=537">issue 537</a>)
+  <li class=rfe>
+    Added <tt>WORKSPACE</tt> to the environment variables provided to builds
+    (<a href="http://www.nabble.com/Add-WORKSPACE-environment-variable-for-Build-jobs-tf3681405.html#a10302151">report</a>)
+  <li class=rfe>
+    If javadoc archiver is used for archiving files other than javadoc,
+    change ths subject accordingly.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=543">issue 543</a>)
+  <li class=rfe>
+    Jar/war/ear built by Maven now includes the Hudson version number
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=526">issue 526</a>)
+</ul>
+<a name=v105><h3>What's new in 1.105</h3></a>
+<ul class=image>
+  <li class="bug">
+    Fixed a bug where the native m2 support doesn't honor the JDK setting.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=501">issue 501</a>)
+  <li class="bug">
+    Switched from Winstone 0.9.6 to 0.9.8 to incorporate fixes
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=374">issue 374</a>,
+     <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=413">issue 413</a>)
+  <li class="bug">
+    Fixed a bug where under certain conditions the war/jar execution fails with duplicate manifest entries
+    that Hudson adds.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=503">issue 503</a>)
+  <li class="bug">
+    SVNKit doesn't like '.' in the file path durin "svn info", so Hudson works around that problem.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=474">issue 474</a>)
+  <li class="bug">
+    Fixed a problem where SVN polling doesn't work on slaves
+    (<a href="http://www.nabble.com/Re%3A-poll-SCM-doesn%27t-work-p10168656.html">report</a>)
+  <li class="bug">
+    Fixed NPE in maven2 support in site generation
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=520">issue 520</a>)
+
+  <li class="rfe">
+    Added help section for the JUnit report archiver.
+  <li class="rfe">
+    Test result trend now includes records for failed builds.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=498">issue 498</a>)
+  <li class="rfe">
+    Project change list view is now completely customizable by <tt>SCM</tt> plugins.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=511">issue 511</a>)
+  <li class="rfe">
+    Removing some plugins (such as trac plugin) no longer stops Hudson from loading those
+    configuration.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=514">issue 514</a>)
+  <li class="rfe">
+    In the native m2 support, archived artifacts now honor the proper file extension
+    given by <tt>ArtifactHandler</tt>
+  <li class="rfe">
+    Hudson uses the <tt>-S</tt> option with CVS changelog computation when working on
+    a large number of files.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=479">issue 479</a>)
+  <li class="rfe">
+    [JIRA 1.2] JIRA plugin now works with the native m2 support.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=465">issue 465</a>)
+</ul>
+<a name=v104><h3>What's new in 1.104</h3></a>
+<ul class=image>
+  <li class="major bug">
+    Fixed NPE with the clean goal is run with the native m2 support.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=486">issue 486</a>)
+  <li class="bug">
+    Fixed a bug that caused <tt>ANT_OPTS</tt> configuration to be reset every time
+    a job configuration is submitted.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=482">issue 482</a>)
+  <li class="bug">
+    Fixed a bug where CVS changelog file details were not exposed to the remote API.
+  <li class="bug"><strike>
+    Fixed a bug where the native m2 support doesn't honor the JDK setting.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=501">issue 501</a>)</strike>
+  <li class="bug">
+    Fixed a problem where unexpected termination of the maven process affects
+    successive builds in the native m2 support.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=459">issue 459</a>)
+  <li class="bug">
+    Fixed a bug in the native m2 support where Hudson fails to determine the
+    dependency correctly when child Maven modules specify different modules as the parent.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=485">issue 485</a>)
+  <li class="bug">
+    Fixed a bug where CVS modules area did not work when multiline textarea
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=496">issue 496</a>)
+  <li class="bug">
+    Fixed a bug where Unix master fails to set proper PATH on Windows slaves, and vice
+    versa, when JDK is configured.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=452">issue 452</a>)
+  <li class="bug">
+    Modified not to display pointless configuration (like SCM, JDK version) for the
+    maven modules in the native m2 support.
+
+  <li class="rfe">
+    When you log in, you are now taken back to where you were, instead of the top page.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=483">issue 483</a>)
+  <li class="rfe">
+    Current build number is made available to the native m2 build
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=488">issue 488</a>)
+  <li class="rfe">
+    Hudson can be now configured not to use CVS compression ('-z')
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=497">issue 497</a>)
+  <li class="rfe">
+    Native m2 modules are now labaled as 'Module's, not 'Project's.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=502">issue 502</a>)
+  <li class="rfe">
+    Added <a href="http://en.wikipedia.org/wiki/Favicon">favicon</a>
+    (<a href="http://www.nabble.com/please-add-favicon-to-hudson--%29-tf3603358.html">report</a>)
+  <li class="rfe">
+    Internal refactoring to make room for more generality in the queue.
+  <li class="major rfe">
+    Hudson now puts the build number and other information to jar, ear, and war
+    build by its native m2 projects automatically.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=488">issue 488</a>)
+  <li class="major rfe">
+    [JABBER 0.2] Jabber plugin 0.2 release
+</ul>
+<a name=v103><h3>What's new in 1.103</h3></a>
+<ul class=image>
+  <li class="major bug">
+    Fixed a security hole where Hudson allowed anyone to tag the workspace.
+    Relevant UI issues are also fixed.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=478">issue 478</a>)
+  <li class=bug>
+    Modified to work around a classloading issue in Glassfish and SJSAS
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=458">issue 458</a>)
+  <li class=bug>
+    Fixed a possible race condition (<tt>ConcurrentModificationException</tt>) in <tt>ProcessCache</tt>.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=481">issue 481</a>)
+  <li class=bug>
+    Fixed several problems in RSS/ATOM feeds that Hudson produces
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=476">issue 476</a>)
+  <li class="bug trac">
+    [TRAC 1.4]
+    Wrong link to changelog was generated.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=477">issue 477</a>)
+  <li class="bug">
+    Fixed a bug where Subversion SSH authentication doesn't work on slaves
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=474">issue 474</a>)
+  <li class=rfe>
+    Supported multiple CVS tags on the same build.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=469">issue 469</a>)
+  <li class=rfe>
+    RSS/ATOM feeds now have more information 
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=461">issue 461</a>)
+</ul>
+<a name=v102><h3>What's new in 1.102</h3></a>
+<ul class=image>
+  <li class="major bug">
+    Improved the fix for <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=389">#389</a>
+    to only do this on Windows.
+  <li class="bug">
+    Fixed a bug where more than a month old m2 workspace will be deleted even if it's
+    the active workspace.
+    (<a href="http://www.nabble.com/Workspace-has-suddenly-gone-tf3580013.html">report</a>)
+  <li class="bug">
+    Fixed a bug where JDK configuration doesn't recognize JDK layout in Mac and reports
+    false validation errors.
+    (<a href="http://www.nabble.com/jdks-on-os-x-tf3567503.html">report</a>)
+  <li class="rfe">
+    Improved the error message handling when a M2 module references a non-existent POM.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=471">issue 471</a>)
+  <li class="rfe">
+    The native m2 support can now work with 2.0.6.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=444">issue 444</a>)
+  <li class="rfe">
+    Added a screen for trouble shooting to get the whole stack dump.
+  <li class="rfe">
+    Ant invocation now supports the ANT_OPTS configuration.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=473">issue 473</a>)
+  <li class="rfe">
+    View object is exposed to the remote API.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=475">issue 475</a>)
+  <li class="rfe">
+    User object is exposed to the remote API.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=468">issue 468</a>)
+  <li class="rfe">
+    JNLP slave agent TCP listener port is now configurable when the security is enabled.
+    (<a href="http://www.nabble.com/distributed-build-with-slaves-in-vpn-tf3553582.html">discussion</a>)
+</ul>
+<a name=v101><h3>What's new in 1.101</h3></a>
+<ul class=image>
+  <li class="major bug">
+    Fixed a bug where a long path name in javadoc or archived artifact causes the build to fail
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=462">issue 462</a>)
+  <li class="bug">
+    Fixed a bug in formatting svn:external revisions.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=457">issue 457</a>)
+  <li class="bug">
+    Fixed a bug where the bare console text page was not sending text/plain content type. 
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=464">issue 464</a>)
+  <li class="bug">
+    Fixed a bug in the native m2 support where Hudson fails to find the proper
+    triggering order of modules.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=450">issue 450</a>)
+  <li class="minor rfe">
+    Script console sets the focus to the text area upon loading.
+  <li class="rfe">
+    Project pages now expose changelogs as an RSS feed.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=460">issue 460</a>)
+  <li class="rfe">
+    Remote API for builds now expose a lot more data.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=454">issue 454</a>)
+  <li class="major rfe">
+    <a href="/remote-api.html">Remote API</a> is reimplemented so that Hudson
+    can generate schema and documentation for the structure of JSON later.
+</ul>
+<a name=v100><h3>What's new in 1.100</h3></a>
+<ul class=image>
+  <li class="major bug">
+    Fixed a bug in running Subversion SCM on a slave.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=447">issue 447</a>)
+  <li class="major bug">
+    Fixed a bug in the native m2 support where the association between project build
+    and module build was incorrect.
+  <li class="bug">
+    Fixed a bug in the test result aggregation of the native m2 support.
+  <li class="bug">
+    Hudson no longer puts disabled, archive-only maven modules into the dependency tree.
+  <li class="bug">
+    fixed a bug where upstream/downstream links from a maven module in one project to
+    a maven module in another project is broken.
+  <li class="major rfe">
+    In the native m2 support, the project page now shows the test result trend.
+  <li class="major rfe">
+    [POLARION 1.0] <a href="http://www.polarion.com/">Polarion for Subversion</a> plugin released. Kudos to Jonny Wray.
+</ul>
+<h3>What's new in 1.99</h3>
+<ul class=image>
+  <li class="major bug">
+    JNLP slave agent stopped working as of 1.97 is now fixed. 
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=442">issue 442</a>)
+  <li class="bug">
+    Hudson now correctly assigns build numbers to the native m2 builds
+    and their module builds.
+  <li class="bug">
+    Fixed a bug in Subversion log computation when file move is involved
+    (<a href="http://www.nabble.com/exception-during-doLog-tf3524675.html">report</a>)
+  <li class="minor bug">
+    Fixed a HTML rendering problem in the "executed mojo" page.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=441">issue 441</a>)
+  <li class="minor rfe">
+    CVS module list text box is now expandable.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=439">issue 439</a>)
+  <li class="minor rfe">
+    Enhanced the remote access API
+  <li class="rfe">
+    In the native m2 support, test results of modules are now aggregated and
+    displayed in the project build page.
+</ul>
+<h3>What's new in 1.98</h3>
+<ul class=image>
+  <li class="major bug">
+    Fixed a <b>critical bug</b> that crippled many parts of the Hudson UI.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=438">issue 438</a>)
+  <li class="minor bug">
+    Fixed a bug in the file mask form validation when dealing with ','-separated values.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=435">issue 435</a>)
+  <li class="minor bug">
+    Fixed a problem where test reports and such aren't displayed in the m2 projects when
+    a build fails.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=339">issue 339</a>)
+  <li class="minor rfe">
+    Upgraded to <a href="http://svn.svnkit.com/repos/svnkit/tags/1.1.2/changelog.txt">SVNKit 1.1.2.</a>
+  <li class="minor rfe">
+    Added form validation to the system admin e-mail address.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=428">issue 428</a>)
+  <li class="rfe">
+    Native m2 builds now record Maven plugins that were used during the build.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=297">issue 297</a>)
+</ul>
+<h3>What's new in 1.97</h3>
+<ul>
+  <li><b>Hudson now requires Java 1.5</b>
+  <li>Native m2 support can now work with Maven 2.0.6.
+  <li>Improved file transfer performance between slaves and master
+      especially when latency is big.
+  <li>Build history is now asynchronously updated to reflect status changes
+      in the server.
+  <li>Fixed several problems that caused Hudson to remain in memory
+      when the hudson webapp is re-deployed (lesson:
+      <a href="http://www.szegedi.org/articles/memleak.html">beware of commons-logging</a>)
+  <li>Supported <tt>svn+ssh</tt> authentication
+  <li>Performance improvement in the native m2 build. This should be especially effective
+      in the master/slave environment.
+  <li>Fixed a bug where the javadoc link in the job top page becomes broken
+      when the javadoc archiving is configured but no javadoc has built yet.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=433">issue 433</a>)
+  <li><strike>Improved the fix for <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=389">#389</a>
+      to only do this on Windows.</strike> The fix was broken and fixed properly in
+      <a href="v102">1.102</a>.
+  <li>Fixed a security problem. The configuration page was accessible to non-authorized users,
+      even though the submission fails.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=413">issue 413</a>)
+</ul>
+<h3>What's new in 1.96</h3>
+<ul>
+  <li>[TRAC 1.3] Added the repository browser support so that changelogs can be linked
+      to Trac.
+  <li>Added support for FishEye CVS browsing.
+  <li>svn:external support is now fully integrated into Hudson.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=411">issue 411</a>)
+  <li>When a build fails on a project with javadoc archiving, Hudson no longer
+      complains about the lack of javadoc dir, so that users don't get confused
+      as to what's the real error.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=419">issue 419</a>)
+  <li>Fixed NPE from <tt>ChangeLogParser.processFile</tt>
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=422">issue 422</a>)
+  <li>Fixed a bug where not all files in CVS projects get hyperlinked by a repository browser
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=417">issue 417</a>)
+</ul>
+<h3>What's new in 1.95</h3>
+<ul>
+  <li>Performance improvement in the master/slave communciation.
+  <li>Fixed JavaScript errors that occure when there's no entries for repetable form fields
+      (typically during the fresh install.)
+  <li>Hudson now warns the lack of MAVEN2_HOME configuration upfront when job is being configured,
+      instead of reporting a failure at the build time.
+  <li>In native M2 projects, surefire test failures now correctly mark the build as unstable,
+      not as a failure.
+  <li>Fixed the problem where external job monitoring doesn't collectly persist
+      the build duration.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=402">issue 402</a>)
+  <li>Implemented the computre view for the master so that you can check what jobs
+      are tied to the master.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=401">issue 401</a>)
+  <li>Hudson now shows a tooltip for a pending build to explain why it's pending
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=365">issue 365</a>)
+  <li>Fixed a bug where ViewSVN/FishEye reports incorrect diff link for newly added files and deleted files.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=404">issue 404</a>)
+  <li>[TEXT-FINDER 1.2] Now supports searching the console output.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=373">issue 373</a>)
+  <li>[TEXT-FINDER 1.2] Added on-the-fly regular expression validation.
+</ul>
+<h3>What's new in 1.94</h3>
+<ul>
+  <li>M2 project now shows build queue for modules.
+  <li>Improved exception propagation with master/slave mode.
+  <li>E-mail notification (and other build settings) can be now configured at
+      the M2 project level, as well as individual module level. (I thought I fixed this long time ago)
+  <li>The build time trend chart no longer displays the on-going build.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=399">issue 399</a>)
+  <li>Allowed admin to forcibly disconnect a slave.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=400">issue 400</a>)
+  <li>Fixed a problem where too many build records make the chart look too crowded.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=214">issue 214</a>)
+  <li>Fixed a problem where the M2 build launch would fail depending on which of 2 jars
+      a particular class is picked up from.
+      (<a href="http://www.nabble.com/Build-1.93---NoClassDefFoundError-on-Maven-2-Build-tf3483998.html">report</a>)
+  <li>"log rotation" is changed to "discard old builds"
+      (<a href="http://www.nabble.com/Deleting-old-builds-tf3485486.html">report</a>)
+</ul>
+<h3>What's new in 1.93</h3>
+<ul>
+  <li>Fixed a bug where people working on the native m2 projects don't show up in the
+      "people" links.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=391">issue 391</a>)
+  <li>Fixed a bug in Subversion URL validator.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=392">issue 392</a>)
+  <li>Fixed a rare bug where a long list of changes in a CVS project may cause
+      <tt>CreateProcess</tt> API call to fail with error code 87. 
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=389">issue 389</a>)
+  <li>Hudson now normalizes SCM repository browser URLs so that it can beter cope
+      with invalid input.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=394">issue 394</a>)
+  <li>Native m2 projects now support <tt>MAVEN_OPTS</tt> setting.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=396">issue 396</a>)
+</ul>
+<h3>What's new in 1.92</h3>
+<ul>
+  <li>Fixed a config page rendering bug where sometimes all the repository browser configurations
+      were displayed.
+  <li>Added HTML &lt;label> tags so that you can click anywhere in the title to
+      click checkboxes and radio buttons.
+  <li>Fixed a bug where FishEye links will have incorrectly formatted revision numbers if
+      n &gt; 1000.
+  <li>Started adding remote access API via XML and JSON.
+</ul>
+<h3>What's new in 1.91</h3>
+<ul>
+  <li>Fixed a bug where ViewCVS support doesn't point to the correct path.
+  <li>Improved the UI of project changelog list.
+  <li>Revised the FishEye setting so that Hudson can work with FishEye repositories
+      that only partially mirror a SVN repository.
+  <li>CVS config screen now checks for 'HEAD' in the branch field and issues a warning
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=387">issue 387</a>)
+  <li>Allowed images to be loaded from plugins. See
+      <a href="https://hudson.dev.java.net/nonav/javadoc/hudson/model/Action.html#getIconFileName()">javadoc</a>.
+  <li>Supported multiple subversion module checkouts
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=153">issue 153</a>)
+  <li>[EMMA 1.6] improved the handling of errors. Emma plugin doesn't die with a stack trace
+      if a report file is not found, and it doesn't report that as an error if the build
+      has already failed.
+  <li>[IRCBOT 1.6] Fixed a bug in per-project notification.
+      (<a href="http://www.nabble.com/IRC-Plugin-tf3431631.html">report</a>)
+  <li>Fixed a remote build issue introduced in 1.90.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=388">issue 388</a>)
+  <li>Fixed a upgrade problem to some old versions of Hudson to a new one (introduced in 1.87)
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=362">issue 362</a>)
+</ul>
+<h3>What's new in 1.90</h3>
+<ul>
+  <li>Fixed a bug where 'people' link doesn't show up if there are only m2 projects.
+      (<a href="http://www.nabble.com/Email-addresses-of-users-whose-commits-broke-the-build--tf3455200.html">report</a>)
+  <li>Artifact archiving, fingerprinting, and JUnit test report setting form fields are now
+      validated on the fly for improved usability.
+  <li>Fixed a 404 when help icon for the ViewCVS URL setting is clicked.
+  <li>Implemented ViewSVN support.
+  <li>Fixed a bug where Hudson displayed wrong module build numbers when
+      you are looking at the maven build record.
+  <li>Maven build status icon now reflects the aggregated results of all the module builds
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=376">issue 376</a>)
+  <li>Implemented FishEye support for Subversion.
+</ul>
+<h3>What's new in 1.89</h3>
+<ul>
+  <li>Added extension hooks for supporting repository browsers like ViewCVS/FishEye, etc.
+  <li>Implemented preliminary ViewCVS support.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=16">issue 16</a>)
+  <li>E-mail notification now supports SSL.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=382">issue 382</a>)
+  <li>Hudson now sends out a correct MIME type for ATOM feed
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=378">issue 378</a>)
+  <li>Fixed a bug where CVS/SVN polling doesn't work correctly when jobs are configured on slaves.
+      (<a href="http://www.nabble.com/CVS-Polling-not-working-tf3443888.html">report</a>)
+  <li>Improved the config submission handling to fix various issues.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=383">issue 383</a>)
+  <li>SCM polling schedule setting is now properly validated on the fly.
+  <li>Fixed a bug where SCM configuration didn't work with Safari due to DOM issue.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=381">issue 381</a>)
+</ul>
+<h3>What's new in 1.88</h3>
+<ul>
+  <li>Fixed a bug where the job properties like trac URL doesn't show up in the native
+      m2 build.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=360">issue 360</a>)
+  <li>Fixed a bug where the native m2 build doesn't run with NPE.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=368">issue 368</a>)
+  <li>Fixed a bug related to cyclic dependencies in the native m2 build.  
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=364">issue 364</a>)
+  <li>Fixed an IllegalArgumentException in the native m2 build when ~/.m2 doesn't exist.
+      (<a href="http://www.nabble.com/BUG-Report-tf3401736.html">report</a>)
+</ul>
+<h3>What's new in 1.87</h3>
+<ul>
+  <li>[TRAC 1.2] Fixed an NPE when configuring the native maven2 project.
+  <li>If there's only one Maven installation in the system, don't present a combobox
+      that only has one item in it.
+  <li>Fixed a bug where the native maven2 launch fails on release builds.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=357">issue 357</a>)
+  <li>Fixed a bug where the native m2 project doesn't send out e-mail notifications.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=341">issue 341</a>)
+  <li>[JIRA 1.1] Fixed a bug where the color of the build in the posted comment can be incorrect.
+  <li>[JIRA 1.1] Improved the compatibility with different versions of JIRA.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=359">issue 359</a>)
+</ul>
+<h3>What's new in 1.86</h3>
+<ul>
+  <li>Disabled maven modules are now displayed in a different tab
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=355">issue 355</a>)
+  <li>Fixed a bug where disabled maven module doesn't change the ball color accordingly
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=353">issue 353</a>)
+  <li>Fixed a bug where maven modules couldn't be deleted manually
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=354">issue 354</a>)
+  <li>Fixed a bug where JNLP agent connection fails with NPE
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=349">issue 349</a>)
+  <li>Changed the URLs of maven modules to avoid issues with some containers.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=351">issue 351</a>)
+  <li>Supported downloading artifacts and workspace files in a zip file.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=309">issue 309</a>)
+  <li>Modified the launch sequence with <tt>java -jar hudson.war</tt> to avoid
+      possible versioning issue.
+  <li>Fixed a potential security problem where unauthorized users can still see
+      configuration pages (although they cannot modify them.)
+  <li>[TRAC 1.1] projects can now specify their trac websites individually.
+  <li>[JIRA 1.0] first version of the JIRA plugin.
+  <li>[EMMA 1.5] fixed a bug in parsing emma output without line coverage.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=350">issue 350</a>)
+</ul>
+<h3>What's new in 1.85</h3>
+<ul>
+  <li>Fixed a bug where incrementally updated build queue and executor list
+      breaks tooltip.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=334">issue 334</a>)
+  <li>Supported dependencies among plugins
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=328">issue 328</a>)
+  <li>Modified the native maven support to launch Maven as a separate process.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=295">issue 295</a>,
+       <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=312">issue 312</a>,
+       <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=308">issue 308</a>,)
+  <li>Fixed an NPE (and the disappearance of the executors box) when a slave is removed.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=149">issue 149</a>)
+  <li>Fixed a bug where JNLP fails to launch if slave names contains space or
+      non-ASCII characters.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=321">issue 321</a>)
+  <li>When a build is tagged, mark the build as keep automatically.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=332">issue 332</a>)
+  <li>When recording a command that Hudson executed, quote parameters that need to be quoted.
+  <li>Fixed a bug where the "Go" button is not enabled in Safari
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=345">issue 345</a>)
+  <li>Fixed a bug where the native m2 support didn't handle &lt;module>../foo/&lt;/module> correctly
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=342">issue 342</a>)
+</ul>
+<h3>What's new in 1.84</h3>
+<ul>
+  <li>Fixed a NPE in computing Subversion changelog with JDK 1.4
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=306">issue 306</a>)
+  <li>Fixed a bug where <tt>hudson</tt> shell script was not working due to the lack of <tt>Main-Class</tt> entry in jar.
+  <li>Fixed a bug where copying multiple files from Windows slave to Unix master
+      had a file name separator translation issue.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=331">issue 331</a>)
+  <li>[EMMA 1.4] Fixed a problem in parsing floating point character problem in some locales.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=325">issue 325</a>)
+  <li>Fixed a bug in CVSROOT format check.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=323">issue 323</a>)
+  <li>Fixed a JDK5 dependency bug.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=319">issue 319</a>)
+  <li>Fixed a bug in handling missing index.html when serving javadoc.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=316">issue 316</a>)
+  <li>Fixed a bug where slaves launched by JNLP agents cause LinkageError 
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=320">issue 320</a>)
+</ul>
+<h3>What's new in 1.83</h3>
+<ul>
+  <li>Fixed a problem where Firefox may ends up using stale cache.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=272">issue 272</a>)
+  <li>Fixed a possible permission issue in JNLP agent
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=310">issue 310</a>)
+  <li>Modified not to display "cancel build" icon when the security is enabled
+      and the user is not logged in (clicking it was causing 403, so this is not
+      a security hole fix.)
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=311">issue 311</a>)
+  <li>Modified to report Win32 error message even if the master is on Unix,
+      in case it's reporting errors from slaves.
+  <li>Fixed a bug in the "new job" UI where the OK button don't become active when copying a job.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=318">issue 318</a>)
+  <li>Modified not to display javadoc link when no javadoc is built yet.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=318">issue 316</a>)
+</ul>
+<h3>What's new in 1.82</h3>
+<ul>
+  <li>Fixed the initial welcome text for the native m2 support
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=296">issue 296</a>)
+  <li>Fixed a bug where disabled projects were still performing SCM polling.
+  <li>Fixed a bug in the master/slave support where SVN credential checks on slaves
+      are not working correctly.
+  <li>Fixed a problem where form value checks were not working correctly with non-ASCII characters.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=301">issue 301</a>)
+  <li>Removed a JavaSE 5 dependency that has crept in.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=304">issue 304</a>)
+  <li>Fixed a race condition in the remoting code.
+  <li>Fixed a bug in handling ANT_HOME with whitespaces
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=307">issue 307</a>)
+  <li>Fixed a bug where textbox expansion by drop-down arrow didn't work in IE7
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=303">issue 303</a>)
+</ul>
+<h3>What's new in 1.81</h3>
+<ul>
+  <li>Fixed a bug where Hudson doesn't run on <a href="http://winstone.sourceforge.net/">Winstone</a>
+      when the temporary directory contains whitespace in path name (such as on Windows.)
+  <li><tt>hudson.war</tt> file is now executable as <tt>java -jar hudson.war</tt> thanks to
+      Winstone.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=137">issue 137</a>)
+  <li>Slave agents can be now launched via JNLP, making it easier to connect Windows slaves.
+  <li>Fixed a <tt>ClassCastException</tt> in the native maven2 support when POMs include
+      report plugins.
+  <li>When "default maven" is chosen for the build, Hudson now sniffs the workspace
+      and determine whether maven1 or maven2 should be used.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=273">issue 273</a>)
+  <li>Fixed a bug where the native maven2 support doesn't display the next scheduled build
+      number correctly for the project.
+</ul>
+<h3>What's new in 1.80</h3>
+<ul>
+  <li>Fixed a bug in launching Ant on Windows slave from Unix master
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=280">issue 280</a>)
+  <li>Triggers are now fully integrated into the native maven2 support.
+  <li>Various pages didn't have proper titles. Fixed hopefully all of them.
+  <li>Fixed a bug where the native maven2 support fails to build a maven-plugin project.
+  <li>Fixed a bug where Hudson didn't fire event nofication, causing JMX plugin to break
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=282">issue 282</a>)
+  <li>Modified the "new job" screen so that the OK button cannot be selected until
+      you choose the job type.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=283">issue 283</a>)
+</ul>
+<h3>What's new in 1.79</h3>
+<ul>
+  <li>A whole bunch of bug fixes in the native maven2 support.
+  <li>Javadoc archiver implemented for maven2.
+  <li>Surefire report archiver implemented for maven2.
+  <li>Build queue and executor status are now updated asynchronously without page refresh.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=55">issue 55</a>)
+  <li>Improved the chained build triggering for the native maven2 support.
+  <li>Fixed a problem where progressive text is apparently not handled by IE as expected.
+  (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=274">issue 274</a>)
+</ul>
+<h3>What's new in 1.78</h3>
+<ul>
+  <li>[JAVANET-UPLOADER 1.4] Supported wildcards and multiple file match.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=258">issue 258</a>)
+  <li>Fixed a problem where svn operations fail to work properly on slaves.
+  <li>Fixed a problem in the subversion remote revision computation.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=265">issue 265</a>)
+  <li>Re-implemented the new job creation page so that it has more information.
+  <li>Exposed the experimental new job type that supports deeper maven2 integration.
+  <li>Fixed a bug in handling M2_HOME path with whitespace
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=270">issue 270</a>)
+</ul>
+<h3>What's new in 1.77</h3>
+<ul>
+  <li>Modified to display plugin version numbers in the management screen.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=251">issue 251</a>)
+  <li>Modified to display information about plugins that were failed to load
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=250">issue 250</a>)
+  <li>For plugins, config pages are made optional just like global config pages.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=255">issue 255</a>)
+  <li>Added a column title to the status balls so that clickable area
+      can be more easily discovered.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=259">issue 259</a>)
+  <li>Supported file exclusions in the artifact archiving
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=257">issue 257</a>)
+</ul>
+<h3>What's new in 1.76</h3>
+<ul>
+  <li>Fixed a bug where custom cvs path was not taking effect in changelog computation 
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=242">issue 242</a>)
+  <li>Added form syntax validation for the timer trigger.
+  <li>Improved the error handling/diagnostics of the subversion connection problem.
+  <li>Improved the config UI so that Ant/Maven options/goals/targets field can be expanded into
+      a multi-line text area by clicking a button.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=248">issue 248</a>)
+  <li>Fixed a bug where Subversion initialization wasn't done early enough.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=245">issue 245</a>)
+</ul>
+<h3>What's new in 1.75</h3>
+<ul>
+  <li>Fixed a memory leak in the slave agent program.
+  <li>Made cvs binary location configurable.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=242">issue 242</a>)
+  <li>Improved the error reporting on failed "cvs --version" invocation from the system config screen.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=241">issue 241</a>)
+  <li>Fixed a bug where auto refresh still kicks in on the console page
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=239">issue 239</a>)
+  <li>Fixed a problem where links to builds from jobs inside views are not correctly computed  
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=237">issue 237</a>)
+  <li>Fixed 404 to "build trend" link  
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=235">issue 235</a>)
+  <li>Removed a bug in the caching of fingerprint records, which caused unnecessary
+      slow down in busy Hudson.
+  <li>Fixed a bug where a shutdown of Hudson doesn't terminate ssh used for slave agents
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=246">issue 246</a>)
+</ul>
+<h3>What's new in 1.74</h3>
+<ul>
+  <li>Fixed a page rendering bug when reporting a dependency change from an unknown revision
+      to a known revision.
+  <li>Improved the CVS tagging UI so that all the dependency projects can be tagged at one go.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=233">issue 233</a>)
+  <li>Supported incremental log update in CVS tagging UI.
+  <li>Fixed a bug in the CR/LF normalization with shell scripts on Windows.
+      Now it always normlizes to Unix style.
+  <li>Console view now sticks to the bottom, unless overridden by the user.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=226">issue 226</a>)
+  <li>Hudson now uses the integrated <a href="http://www.svnkit.org/">Java subversion client implementation</a>.
+</ul>
+<h3>What's new in 1.73</h3>
+<ul>
+  <li>[IRCBOT] Fixed a build issue that causes NoSuchFieldError. It's now built with the correct Hudson version.
+  <li>Fixed a bug in links from artifacts/workspace views to fingerprint records.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=221">issue 221</a>)
+  <li>Fixed a bug where subversion executable setting in the system configuration
+      is not persisted.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=222">issue 222</a>)
+  <li>If fails to calculate changelog, Hudson now reports "failed to determine"
+      instead of "not yet determined".
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=224">issue 224</a>)
+  <li>Modified not to display a link to build time trend page if there's no build.
+  <li>Items in the build queue now comes with a tool tip indicating why it's in the queue.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=230">issue 230</a>)
+  <li>Fixed a bug in the remoting mechanism where the exception handling doesn't work correctly.
+</ul>
+<h3>What's new in 1.72</h3>
+<ul>
+  <li>Added a new extension point <tt>JobProperty</tt> so that plugins can add additional
+      properties to <tt>Job</tt>.
+  <li>Breadcrumbs now include views so that users can easily go back to the view that contained the job.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=154">issue 154</a>)
+</ul>
+<h3>What's new in 1.71</h3>
+<ul>
+  <li>Modified to create a shell script file in the system-specific temporary directory
+      on each node, instead of the workspace.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=183">issue 183</a>)
+  <li>Fixed a serious bug where saving the job configuration is done <b>before</b>
+      reflecting the submitted configuration, instead of after. This could very likely
+      cause a data loss issue when Hudson is restarted. If you are using 1.69/1.70,
+      you can work around this problem by making changes, submitting it, then reopen
+      the config page and submit that one more time.
+</ul>
+<h3>What's new in 1.70</h3>
+<ul>
+  <li>Added a new listerner <tt>SCMListener</tt> so that plugins can do something
+      when change set is determined for a build. This is useful for integration with other systems.
+  <li>Added an extension point <tt>ChangeLogAnnotator</tt> so that plugins can do HTML markup
+      on changelog text. Again, this is useful for integration with other systems,
+      like hyperlinking to issue tracker.
+  <li>Fixed a packaging problem of <tt>slave.jar</tt>. It was missing dependency jars.
+</ul>
+<h3>What's new in 1.69</h3>
+<ul>
+  <li>Modified not to show the complete build records in case you have a large history. 
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=212">issue 212</a>)
+  <li>Progress bars now show the tool tip to indicate the ETA of builds.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=210">issue 210</a>)
+  <li>Fixed NPE in <tt>isAutoRefresh</tt>
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=207">issue 207</a>)
+  <li><b>Significantly reworked the distributed build implementation</b>.
+      If you've been using distributed builds,
+      please see <a href="https://hudson.dev.java.net/masterSlave.html">documentation</a>
+      and <a href="http://www.nabble.com/New-remoting-code-merged-to-the-trunk-tf2895706.html">
+      this e-mail</a> for more details.
+  <li>Improved hyperlinks in test reports.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=216">issue 216</a>)
+  <li>Build time trend chart is now clickable.
+  <li>Test result trend chart is now clickable.
+  <li>Modified the internals so that plugins can contribute graphs and other HTML fragments,
+      like test report trend.
+  <li>Fixed a bug where a change in the node affinity setting of a project
+      doesn't cause the rescheduling of builds if builds are already in queue.
+  <li><b>Be sure to also update your plugins if you are using any.</b>
+</ul>
+<h3>What's new in 1.68</h3>
+<ul>
+  <li>Fixed a bug where help links in a form set dynamically added don't work. 
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=168">issue 168</a>)
+  <li>Fixed a bug when individual files are specified as CVS modules.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=202">issue 202</a>)
+  <li>Improved the display style of the test result summary in the build status page.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=174">issue 174</a>)
+  <li>System log view now has RSS feeds.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=204">issue 204</a>)
+  <li>Fixed a bug in cvs change log computation wrt time zone
+      (<a href="http://www.nabble.com/Fwd%3A-Changes-not-in-summary-tf2819381.html">details</a>)
+  <li>Fixed a bug in cvs update wrt time zone
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=209">issue 209</a>)
+</ul>
+<h3>What's new in 1.67</h3>
+<ul>
+  <li>The build history panel now shows build descriptions, if any
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=148">issue 148</a>)
+  <li>System configuration can be now saved even if some slaves are down.
+  <li>Fixed a race condition which could cause changes made to large CVS projects to not be reported
+      in the build changelog. Now all CVS checkouts and updates use timestamps.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=192">issue 192</a>)
+  <li>Improved detection of deleted files when using CVS.
+  <li>Added a link to the build time trend in the build history.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=197">issue 197</a>)
+  <li>Fixed a bug where the build time trend report always show "master", not the actual slave
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=198">issue 198</a>)
+  <li>Fixed a bug where the labels of charts are often unnecessarily truncated.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=199">issue 199</a>)
+  <li>Build time graph now uses different colors to reflect the build status. 
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=200">issue 200</a>)
+  <li>Don't display "create view" link if the security is enabled and the user is not logged in.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=201">issue 201</a>)
+  <li>Fixed a problem so that form pages are not auto-refreshed regardless of the current user setting. 
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=193">issue 193</a>)
+</ul>
+<h3>What's new in 1.66</h3>
+<ul>
+  <li>Fixed a packaging error where <tt>hudson</tt> and <tt>slave</tt> script files were missing
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=188">issue 188</a>)
+  <li>Fixed a bug in prev/next navigation for projects with URL-unsafe characters in it (like space)
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=186">issue 186</a>)
+  <li>Fixed a broken link in the "no workspace" error page
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=181">issue 181</a>)
+  <li>Fixed a bug where '/' and '\' in the user name causes failures in persisting user information.
+  <li>Started adding event mechanism for some of Hudson model objects.
+  <li>Fixed a bug where Hudson incorrectly report that changes are not yet determined,
+      when in fact it's already determined that there is no change.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=176">issue 176</a>)
+  <li>Improved the error diagnostics when Hudson is run in a container that doesn't support servlet 2.4.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=189">issue 189</a>)
+  <li>Fixed an NPE that happens when Hudson tries to send e-mails to individuals, when
+      the default domain suffix is not configured. 
+</ul>
+<h3>What's new in 1.65</h3>
+<ul>
+  <li>Hudson's ATOM feeds are now ATOM 1.0 compliant
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=170">issue 170</a>)
+  <li>Improvements for the Builds View, where "keep build" and
+      "delete build" buttons are not shown to guest users
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=171">issue 171</a>)
+  <li>Fixed a bug where guest users could start builds via direct URLs
+      when Hudson security is enabled
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=177">issue 177</a>)
+  <li>Added an easy and secure way to trigger builds remotely from scripts when Hudson
+      security is enabled
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=178">issue 178</a>).
+      See <a href="build.html">"Building a project"</a> for more details.
+  <li>Added brief changelog information (author, message) to top of build failure mails.
+  <li>[XVNC] Display numbers now start at 10 to avoid clashes with normal displays.
+  <li>[XVNC] Fixed allocation of display numbers to recycle old numbers.
+  <li>[XVNC] Fixed stopping of vncserver process.
+             (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=173">issue 173</a>)
+  <li>If a build's log file has grown to a large size, a link <b>[raw]</b> is displayed
+      on the status page which jumps directly to the raw console text. Using this link
+      can save your browser from freezing up trying to view an enormous log file. You
+      may also wish to download the log file from this URL and browse offline in a text
+      viewer designed for large files.
+  <li>Persist auto refresh mode for session in a cookie.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=130">issue 130</a>)
+  <li>Fixed CVS update bug introduced in 1.64.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=190">issue 190</a>)
+</ul>
+<h3>What's new in 1.64</h3>
+<ul>
+  <li>Fixed a data-loss issue discovered in 1.63. Users upgrading from
+      older versions to 1.63 loses the Ant and Maven configurations.
+  <li>When changelog is not yet computed, the build page should report so.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=172">issue 172</a>)
+  <li>[BUILD-TIMEOUT] Implemented a new plugin that lets you automatically
+      abort builds if a build has not finished after the specified amount of time.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=157">issue 157</a>)
+  <li>[XVNC] Implemented a new plugin to run Xvnc server during the build,
+      for jobs that need GUIs.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=158">issue 158</a>)
+  <li>Added one more extension point in the architecture to support new plugins.
+  <li>If a project using both CVS "legacy mode" (multiple top-level modules) and update mode checks out
+      additional modules as part of its build, changes in these extra modules will be reported in
+      the changelog for subsequent builds.
+</ul>
+<h3>What's new in 1.63</h3>
+<p>
+  1.63 was taken off from the download because of the data loss issue fixed in 1.64.
+  Please use 1.64 instead.
+</p>
+<ul>
+  <li>Fixed a usability issue with the icon resize feature, and build page on individuals
+      now also reflect the icon size.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=159">issue 159</a>)
+  <li>Fixed a bug where "send separate e-mails to individuals who broke the build"
+      can cause NPE.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=165">issue 165</a>)
+  <li>Fixed a bug where RSS may publish non-finalized build results.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=163">issue 163</a>)
+  <li>Fixed a bug where the sort order of the status ball column was wrong
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=160">issue 160</a>)
+  <li>Removed the "people" link if there's nothing to display there.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=162">issue 162</a>)
+  <li>Form validation was added to the "build other projects" and "Build after other projects are built".
+      It even suggests what you might have intended.
+  <li>Added form validation to slave configurations.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=150">issue 150</a>)
+  <li>[JAVANET-UPLOADER] fixed broken links to help pages.
+  <li>[JAVANET-UPLOADER] added macro substitution support for configuration.
+</ul>
+<h3>What's new in 1.62</h3>
+<ul>
+  <li>Fixed a bug where empty list of recipients of build notification messages
+      causes NPE in Mailer component.
+  <li>Modified to set the date field in the outgoing e-mails.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=155">issue 155</a>)
+  <li>The # of concurrent SCM polling activities can be now bound to a certain number,
+      allowing the better throttling. This option is only available once you have
+      a certain number of jobs. Also, for a deployment with a large number of jobs,
+      a push-based notification via e-mail is recommended.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=151">issue 151</a>)
+  <li>More internal architecture improvement. <tt>Descriptor</tt>s are now persisted by XStream.
+  <li>Icon size in the view pages are now selectable from S, M, and L.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=152">issue 152</a>)
+  <li>Fixed the checkbox out-of-sync behavior when configuration page is reloaded
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=145">issue 145</a>)
+</ul>
+<h3>What's new in 1.61</h3>
+<ul>
+  <li>Fixed a bug where removing the slave from configuration causes NPE
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=149">issue 149</a>)
+  <li>When a build is marked to be kept, the build history now shows an icon indicating so.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=147">issue 147</a>)
+  <li>Build log can be now selectively deleted.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=25">issue 25</a>)
+  <li>Accept and handle relative <code>HUDSON_HOME</code> values
+  <li>Added <tt>EXECUTOR_NUMBER</tt> environment variable so that scripts can coordinate
+      allocation of machine local resources.
+</ul>
+<h3>What's new in 1.60</h3>
+<ul>
+  <li>Fixed one horrible synchronization bottle-neck
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=142">issue 142</a>)
+  <li>More internal restructuring in lights of newer plugin development effort.
+  <li>Added a scripting console where you can execute arbitrary Groovy script. Ideal for
+      trouble-shooting.
+  <li>Implemented a work around to <a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=40895">
+      the problem in Tomcat where it breaks XSLT.</a> This has been breaking JAPEX
+      plugin on JDK 5.0
+  <li>Added a project change log page that lists all changes in all the builds of a given project.
+  <li>Build page now reports changes in the dependency jars, if fingerprint recording is configured.
+  <li>Fixed a bug that prevented Hudson from running on Jetty.
+  <li>Changed the build system from Ant to Maven.
+  <li>Fixed a data file format problem with the retroweaver's enum class.
+  <li>Switching from retroweaver to retrotranslator.
+  <li>Fixed a bug where mail notification fails with <tt>PatternSyntaxException</tt>
+</ul>
+<h3>What's new in 1.59</h3>
+<ul>
+  <li>User build pages now have RSS feeds 
+  <li>Jobs in queue are now preserved when Hudson restarts
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=140">issue 140</a>)
+  <li>Improved error recovery from some fatal build problems
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=138">issue 138</a>)
+  <li>Expanded user properties. Now each user can have its own e-mail address and full name configured.
+  <li>User object now has extensible property mechanism so that plugins can add per-user information.
+  <li>Fixed a bug in "keep build logs of dependency" feature.
+  <li>A few infrastructure improvements.
+  <li>Implemented e-mail notification for individuals who broke the build.
+  <li>E-mail notifications can be now sent to individuals who broke the build.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=59">issue 59</a>)
+  <li>Fixeda bug where CVS tagging failure doesn't leave detailed error messages
+</ul>
+<h3>What's new in 1.58</h3>
+<ul>
+  <li>Supported RSS 2.0 feeds (on top of existing ATOM format)
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=135">issue 135</a>)
+  <li>Fixed a bug where the "just show failures" link wasn't working
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=129">issue 129</a>)
+  <li>Added the first cut for the per-user page, that lists information about a particular user.
+  <li>Improved visual cue on sortable table.
+  <li>System properties and environment variable list are now sorted by default.
+  <li>The top-level project list is now sortable.
+  <li>Implemented a feature where you can tell Hudson to always keep build logs
+      of dependency of your project.
+  <li>Implemented Windows batch file support.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=139">issue 139</a>)
+</ul>
+<h3>What's new in 1.57</h3>
+<ul>
+  <li>Fixed more memory consumption related issues.
+      Now Hudson uses even less memory.
+  <li>Fixed a bug where rendering of fingerprint details get messed up under some conditions.
+  <li>View and job has now inline editable description field.
+  <li>Builds can now have description associated with it.
+  <li>Fixed a JRE5 dependency that was crept in.
+</ul>
+<h3>What's new in 1.56</h3>
+<ul>
+  <li>[JAPEX] Implemented regression tracking.
+  <li>Added a graph to display the trend of build time.
+  <li>Supported SMTP authentication
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=128">issue 128</a>)
+  <li>Fixed a bug in CVS changelog computation logic where a change in a deep branch does not
+      always attributed to the right branch.
+  <li>Changed the mechanism to link to a plugin during the development.
+      This is a breaking change for plugin developers, but shouldn't affect users.
+</ul>
+<h3>What's new in 1.55</h3>
+<ul>
+  <li>Drastically reduced Hudson's disk usage with CVS projects, by only archiving
+      CVS control files and not the real files themselves.
+  <li>Added a plugin upload form in the plugin management screen.
+  <li>Made some internal modeling changes to accomodate more plugins.
+  <li>Fixed a memory leak bug in Hudson, which is especially visible with the Japex plugin.
+  <li>Fixed a bug in fingerprint-based build relation tracking.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=127">issue 127</a>)
+  <li>Fixed a bug where a progressive log output may report an error when
+      you look at the console output very early on the build stage.
+</ul>
+<h3>What's new in 1.54</h3>
+<ul>
+  <li>Fixed a problem where Hudson fails to report changelogs for some files.
+      The exact cause is unknown, but it's likely related to time zone difference between
+      client and server.
+  <li>On Unix, Hudson was unable to delete read-only files. Now it tries to do a better job.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=118">issue 118</a>)
+  <li>Hudson used to report 404 when you try to kill a build that has already been killed or stopped.
+      This is handled more gracefully.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=116">issue 116</a>)
+  <li>Fixed a bug where the location of the help box was sometimes incorrect.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=119">issue 119</a>)
+  <li>Updated to work with Subversion 1.4 correctly
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=124">issue 124</a>)
+  <li>Fixed a bug in the project dependency computation between unrelated projects.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=123">issue 123</a>)
+  <li>Fixed dead links
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=122">issue 122</a>)
+</ul>
+<h3>What's new in 1.53</h3>
+<ul>
+  <li>Hyperlinking filenames in log section of build failure mail to published artifacts, or failing that, to the workspace.
+  <li>Reduced synchronizations in favor of volatile and copy-on-write data structure.
+  <li>REGRESSION: cannot run Hudson on fresh installation (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=120">issue 120</a>).
+</ul>
+<h3>What's new in 1.52</h3>
+<ul>
+  <li>added an option to the artifact archiver to ignore all but the latest artifacts.
+  <li>Further fixes for the titles of web pages.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=112">issue 112</a>)
+  <li>Minor improvements to logging.
+  <li>Fixed one dead lock issue.
+</ul>
+<h3>What's new in 1.51</h3>
+<ul>
+  <li>Fixed a bug where the selection of the current maven installation is incorrectly shown when loading a project config page.
+  <li>Common web pages now have proper titles.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=112">issue 112</a>)
+  <li>Fixed a bug where CVS changelog sometimes display changes from different branches.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=111">issue 111</a>)
+  <li>Fixed a bug in the form field validation logic for CVSROOT,
+      where it often reports a false-positive error (with cvs >= 1.11.1)
+</ul>
+<h3>What's new in 1.50</h3>
+<ul>
+  <li>Fixed a bug that occasionally prevents fingerprints from being displayed,
+      when files are created outside Hudson.
+  <li>Added a mechanism to perform form field validation remotely.
+      The first one to use this is the subversion executable location field in the system configuration.
+      The form now validates if the executable actually exists, then it also checks the version to
+      see if it satisfies the minimum requirement.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=110">issue 110</a>)
+  <li>the value entered for the <tt>.cvspass</tt> field is now validated on the fly.
+  <li>Added a link from the system config screen to check the cvs client program version,
+      to assist trouble shooting.
+  <li>Added a primitive log viewer so that error information and such can be
+      viewed from a browser.
+  <li>All applicable system config form fields are validated
+      (more work to be done for other forms in the future versions.)
+  <li>Fixed a packaging error where the version number was not shown correctly.
+</ul>
+<h3>What's new in 1.49</h3>
+<ul>
+  <li>Fixed a concurrency bug in parsing timestamps from HTTP headers.
+  <li>Added a simple welcome screen to disply when Hudson is first installed.
+  <li>[JAPEX] Fixed a rendering problem when test case names contains URL unsafe characters like '/'
+  <li>Fixed a JSP->Jelly conversion error in the project relationship check page.
+  <li>If fingerprint recording is configured on both upstream and downstream projects,
+      the project index page shows a link to the relationship search page.
+  <li>Fixed minor formatting problems especially wrt SP char in various places.
+  <li>If fingerprint recording is configured, build index page now shows
+      corresponding upstream and downstream builds.
+</ul>
+<h3>What's new in 1.48</h3>
+<ul>
+  <li>The help section of the Ant invocation configuration now has a link to the list
+      of environment variable list, as suggested by Juozas.
+  <li>Hudson decodes win32 error code and shows human readable error message.
+  <li>Added system diagnostic page to show the system properties and environment variables
+      in which the container runs. Useful for trouble-shooting.
+  <li>Improved the error handling when MAVEN_HOME is misconfigured.
+  <li>Fixed a bug where Ant invocation on Windows fails to capture the exit code correctly.
+</ul>
+<h3>What's new in 1.47</h3>
+<ul>
+  <li>Moved the system-level management functions into one page to reduce the number of items in the task bar.
+  <li>Implemented a mechanism to prevent new builds from being executed, so that a busy
+      Hudson can be safely shutdown.
+  <li>Scrollbar is slowed down to avoid drawing attention too much
+  <li>Modified to periodically clean up unused workspaces on slaves.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=91">issue 91</a>)
+  <li>[JAVANET-UPLOADER] Don't post to java.net if a build failed.
+  <li>System config screen now displays the clock difference between master and slave nodes
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=84">issue 84</a>)
+</ul>
+<h3>What's new in 1.46</h3>
+<ul>
+  <li>Improved the error handling when no workspace is created yet.
+  <li>[JAPEX] Fixed a bug where it rendered the global configration page non-submittable.
+  <li>Improved the error handling in the timer scheduler. This should be a fix for
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=107">issue 107</a>)
+  <li>Fixed 404 when trying to remove jobs from bulid queues in view pages.
+</ul>
+<h3>What's new in 1.45</h3>
+<ul>
+  <li>Refactored various code to make it easy to maintain plugin backward compatibility.
+  <li>Links to workspace and artifacts on the project top page is now expanded to include icon.
+  <li>Fixed a bug where the build duration is not displayed correctly if there was no failure.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=108">issue 108</a>)
+  <li>Hudson Japex plugin 1.0 is posted.</li>
+  <li>Hudson java.net uploader plugin 1.0 is posted.</li>
+</ul>
+<h3>What's new in 1.44</h3>
+<ul>
+  <li>".svn" directories are now ignored from the workspace view
+  <li>Fixed a bug that static contents like javadoc or workspace served from Hudson
+      didn't have any MIME type associated with it.
+  <li>Help icons in the config page is now accessible via TAB key
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=105">issue 105</a>)
+  <li>Exposed plugin management screen.
+      (Still need to think about auto-installation and stuff like that)
+</ul>
+<h3>What's new in 1.43</h3>
+<ul>
+  <li>Implemented the plugin support.
+  <li>Documented the plugin support (see the bottom of the top page.)
+  <li>Fixed the CVS changelog date parsing issue with some locales
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=98">issue 98</a>)
+  <li>Fixed a bug in handling multiple modules in CVS.
+  <li>Fixed a bug where configuring downstream projects cause the upstream project
+      to list the same downstream projects multiple times.
+</ul>
+<h3>What's new in 1.42</h3>
+<ul>
+  <li>Fixed a bug in Subversion change polling logic.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=96">issue 96</a>)
+  <li>Issue 101 that was supposed to be fixed in 1.41 was not fixed.
+  <li>Changed the location of the default HUDSON_HOME to avoid web containers from
+      accidentally wiping out the workspace when hudson.war is updated.
+  <li>Started working on plugin support.
+</ul>
+<h3>What's new in 1.41</h3>
+<ul>
+  <li>Implemented the detection of unsupported JVMs.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=97">issue 97</a>)
+  <li>Improved error recovery from CVS changelog parsing failure.
+  <li>Fixed one more bug crept in during JSP -> Jelly conversion
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=99">issue 99</a>)
+  <li>Fixed a bug in the image file name "Save.gif" vs "save.gif".
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=100">issue 100</a>)
+  <li>Fixed a bg where character escapes were not done correctly in many places.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=101">issue 101</a>)
+</ul>
+<h3>What's new in 1.40</h3>
+<ul>
+  <li>Switched view technology from JSP to Jelly, for more flexibility.
+  <li>Implemented job renaming.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=90">issue 90</a>)
+  <li>Added code to clean up old records in fingerprint periodically 
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=89">issue 89</a>)
+</ul>
+<h3>What's new in 1.39</h3>
+<ul>
+  <li>Improved the config screen so that you can edit upstream projects.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=83">issue 83</a>)
+  <li>Improved the error recovery from <tt>HeadlessException</tt>.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=82">issue 82</a>)
+  <li>Improved the error recovery from X11 connection problem.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=93">issue 93</a>)
+  <li>Fixed a bug where CVS invocation doesn't handle whitespaces in directory names correctly.
+  <li>Fixed a bug where master/slave communication doesn't carry whitespaces in directory names
+      correctly.
+  <li>Modified to display a progress bar even if no previous records are available
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=88">issue 88</a>)
+</ul>
+<h3>What's new in 1.38</h3>
+<ul>
+  <li>Fixed a bug where a subversion changelog computation may cause a failure because of
+      non-existent revision number.
+  <li>Improved error diagnosability when subversion changelog computation fails.
+  <li>If the error notification e-mail gets too long, Hudson now truncates it just to show the last
+      part of it (which is usually what contains the error message.)
+  <li>Improved the diagnostics of the configuration error in the JUnit report.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=85">issue 85</a>)
+  <li>Added upstream project links (that complements the downstream projects)
+</ul>
+<h3>What's new in 1.37</h3>
+<ul>
+  <li>Fixed a bug where a large changelog message gets trucated.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=74">issue 74</a>)
+  <li>Fixed a bug where Subversion change log incorrectly shows one change from the previous build.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=75">issue 75</a>)
+  <li>Change the initialization order so that cron job now starts after Hudson finished loading.
+  <li>Hudson now uses "svn info --xml" for polling changes in the subversion repo.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=77">issue 77</a>)
+  <li>Fixed a bug in cron scheduler for interpreting hours field in PM.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=78">issue 78</a>)
+  <li>When a project is disabled, Hudson now shows it as grey for visual cue. 
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=79">issue 79</a>)
+  <li>Tweaking CVS changelog computation.
+</ul>
+<h3>What's new in 1.36</h3>
+<ul>
+  <li>Fixed a bug where "previous build" link appears incorrectly when logs are rotated.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=70">issue 70</a>)
+  <li>Copied Ant CVS changelog parser code into a different package to avoid NoSuchMethodError.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=71">issue 71</a>)
+  <li>
+</ul>
+<h3>What's new in 1.35</h3>
+<ul>
+  <li>Fixed a bug where "view as plaintext" link may get far too right when the console output is wide.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=69">issue 69</a>)
+  <li>CVS changelog computation is made a lot more efficient. Hudson will use the output from
+      <tt>cvs update</tt> to reduce the amount of traffic/time needed for the changelog computation.
+  <li>Implemented CVS/Subversion change polling.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=31">issue 31</a>)
+</ul>
+<h3>What's new in 1.34</h3>
+<ul>
+  <li>Command execution now prints the current directory name for assisting trouble-shooting.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=65">issue 65</a>)
+  <li>I think I fixed a bug where a job can accidentally run hung even though no executor
+      seems to be building it.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=62">issue 62</a>)
+</ul>
+<h3>What's new in 1.33</h3>
+<ul>
+  <li>Fixed bugs wrt handling non-ASCII characters in project names, test names, etc.
+      (The servlet spec is a real mess when it comes to i18n!)
+  <li>Added a new view to display console output as text/plain
+      (for downloading and maximum screen use)
+  <li>The last successful build log is kept regardless of the log rotation setting,
+      so that at least one successul build is always available for download.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=57">issue 57</a>)
+</ul>
+<h3>What's new in 1.32</h3>
+<ul>
+  <li>Added spinner image when console output is being loaded progressively.
+  <li>Added auto-completion to the project relationship comparison page.
+  <li>Added links from a project index page to "downstream" project pages
+      (those are the projects that will be built once the current project is built)
+  <li>Fixed a critical bug where the rendering of the external job page fails.
+  <li>If JUnit test report tallying is configured but no test is found,
+      Hudson assumes that it's a configuration error and marks a build as a failure.
+</ul>
+<h3>What's new in 1.31</h3>
+<ul>
+  <li>Modified to gracefully handle unsafe characters in the JUnit test reports.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=42">issue 42</a>)
+  <li>Hudson can now render Subversion change log details correctly.
+  <li>Fixed a typo
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=48">issue 48</a>)
+  <li>Fixed various issues in running Hudson in Jetty.
+  <li>Changed the format of <tt>$HUDSON_HOME/config.xml</tt> slightly to make it look nicer
+      (this is a backward compatible change.)
+  <li>Fixed various issues in running Hudson in JDK 1.4
+  <li>Subversion-based projects now display the repository revision number
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=50">issue 50</a>)
+</ul>
+<h3>What's new in 1.30</h3>
+<ul>
+  <li>Projects can be now configured to temporarily disable new builds
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=39">issue 39</a>)
+  <li>Build history now shows a new pending build.
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=44">issue 44</a>)
+  <li>Console output of an on-going build now updates automatically without reloading
+      (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=44">issue 46</a>)
+  <li>Implemented a new page where you can track which builds of one project is used
+      by which builds of another project.
+</ul>
+<h3>What's new in 1.29</h3>
+<ul>
+  <li>Test result trend can be displayed in two modes now. One is just to show failures,
+      the other is to show both total tests and failures. The former is useful when
+      you have healty tests (a large number of tests and small number of failures.)
+  <li>Fixed the bug where RSS pages weren't rendered correctly at all.
+</ul>
+<h3>What's new in 1.28</h3>
+<ul>
+  <li>Projects with junit report configured will now produce a trend report
+  <li>Improved the efficiency when loading a project page with a large test result
+  <li>Next build number of jobs are now stored in a separate file
+      so that configurations can be stored in CVS more easily
+  <li>Changed the URL assigned to fingerprint pages, so that they can be
+      bookmarked (for example, you can keep a bookmark of "fingerprint of foo.jar in the last successful build")
+  <li>Implemented cron-like scheduled execution.
+  <li>Updated help documents a bit.
+</ul>
+<h3>What's new in 1.27</h3>
+<ul>
+  <li>If no test result is found when a test report is configured, a build is considered a failure.
+  <li>A bug fix is made where sometimes the e-mail notification reports incorrect results
+      (this time, it's really fixed!)
+</ul>
+<h3>What's new in 1.26</h3>
+<ul>
+  <li>The URL in the e-mail was incorrect. Fixed that.
+  <li>When a new job is created by copying another, the build number wasn't reset to 1.
+  <li>A bug fix is made where sometimes the e-mail notification reports incorrect results.
+</ul>
+<h3>What's new in 1.25</h3>
+<ul>
+  <li>Improved the performance of rendering the build page with a large test result.
+  <li>Fixed a problem where a large test result consumes the PermGen space too much.
+  <li>Implemented the 'fingerprint' recording. See <a href="https://hudson.dev.java.net/fingerprint.html">
+      a separate document</a> for more details.
+  <li>Fixed a problem where "tag this build" pages don't show the left task bar.
+  <li>Slave can be now marked as "temporarily offline" to avoid builds to be scheduled on it
+  <li>Implemented a new switch on the e-mail notification to avoid sending out
+      e-mails on every unstable build. Useful for those lazy projects where test failures are the norm.
+</ul>
+<h3>What's new in 1.24</h3>
+<ul>
+  <li>Tweaked the way Hudson launches a remote job, so that it can work with older versions of Unix.
+      (Some Solaris systems seem to be unable to handle "~/bin/slave" while others do.)
+  <li>Placed the icon to cancel builds on more places (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=36">issue 36</a>)
+  <li>The top page and view pages can now display user-configured HTML.
+      Useful for linking to relevant resources or post a notice.
+  <li>Changed the URL assignment so that build #53 of project ABC is now ".../hudson/job/ABC/53".
+      The next build number is no longer modifiable through the configuration screen.
+      This change should make the URL more intuitive and short. Old URLs are still supported
+      for the backward compatibility.
+  <li>Implemented a workaround for <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=89419">a Firefox bug</a>
+      that sometimes displays build status icons incorrectly (when you reload a build page to check the updated status.)
+  <li>Fixed a bug where URLs in the notification e-mail is not escaped.
+</ul>
+<h3>What's new in 1.23</h3>
+<ul>
+  <li>Fixed a bug where e-mail notifications weren't working.
+</ul>
+<h3>What's new in 1.22</h3>
+<ul>
+  <li>Fixed a JBoss deployment problem reported by Wilson Jimmy.
+  <li>Introduced the "unstable" state to represent test failures.
+  <li>More help documents.
+  <li>build notice e-mail now includes a link to the website.
+  <li>Started adding page for each slave (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=35">issue 35</a>)
+  <li>Slaves can now be configured so that they can be reserved
+      for certain jobs.
+  <li>Fixed URL assignment to test failures, so that an URL to a test result
+      of the last successful build can point to the same test across builds.
+  <li>Test results in a class view is now sortable (just like all the other tables.) 
+</ul>
+<h3>What's new in 1.21</h3>
+<ul>
+  <li>RSS links are added to HTML header so that RSS-aware browsers can pick them up
+  <li>Added a new operation mode for CVS to prevent redundant intermediate directories.
+      Added a compatibility option so that existing projects won't be affected.
+</ul>
+<h3>What's new in 1.20</h3>
+<ul>
+  <li>Various bug fixes for regressions occured in 1.19
+  <li>Expanded the documentation.
+  <li>If there are a lot of the archived artifacts, Hudson now switches to the tree view.
+  <li>Modified not to display "build" link to non-buildable jobs.
+</ul>
+<h3>What's new in 1.19</h3>
+<ul>
+  <li>Various bug fixes and improvements in the test report.
+  <li>Next/Previous build link now cycles through the same page between builds.
+      So if you are reading the console output page, just clicking "previous build" will
+      take you to the console output of the previous build.
+  <li>Implemented master/slave support
+  <li>When a large number of build artifacts are archived,
+      Hudson won't show a very long list of bullet lists.
+  <li>Changed the icon that kills an on-going build to 'x' icon.
+  <li>Updated the ATOM feed icon to the one from http://feedicon.com/
+  <li>Fixed the location and color of login/logout link.
+</ul>
+<h3>What's new in 1.18</h3>
+<ul>
+  <li>Hudson now has JUnit test result report 
+  <li>Subversion configuration now allows more options to be set.
+  <li>Supported configuration of the "quiet period"
+  <li>Some /bin/sh doesn't like "-x -e". So changed it to "-xe"
+</ul>
+<h3>What's new in 1.17</h3>
+<ul>
+  <li>Changed the version scheme. Instead of 1.0.X, I'm now calling them 1.X.
+  <li>Clicking progress bars will take you to the console output page.
+  <li>Fixed a bug where an incorrect error handling causes 500 if you failed to properly create a project in a view.
+  <li>Fixed security holes.
+  <li>Improved the workspace file view
+  <li>Hudson now returns the "Last-Modified" header correctly so that clients can cache HTML smartly
+      (this was really a bug in <a href="https://stapler.dev.java.net/">stapler</a>
+  <li>Replaced PNG images by GIF images to avoid Internet Explorer &amp; PNG transparency issue
+</ul>
+<h3>What's new in 1.0.16</h3>
+<ul>
+  <li>Fixed a critical presentation issue in 1.0.15
+</ul>
+<h3>What's new in 1.0.15</h3>
+<ul>
+  <li>UI make over
+</ul>
+<h3>What's new in 1.0.14</h3>
+<ul>
+  <li>A new job can be now created by copying an existing one.
+  <li>Javadoc publisher can show the link to the project javaflow from the navigation bar.
+  <li>When entering CVSROOT, it auto-completes.
+  <li>Jobs can be now grouped into views.
+  <li>Workspace view now sorts files in alphabetical order.
+  <li>Added a new build publishing step that publishes javadoc to the project page.
+  <li>Patched Ant so that CVS changelog computation won't hang even when
+      commit messages confuses the changelog parser.
+</ul>
+<h3>What's new in 1.0.13</h3>
+<ul>
+  <li>Maven support.
+  <li>When terminating a build, kill all the processes spawned.
+  <li>Fixed rendering errors that appear in IE.
+  <li>Fixed a bug in subversion support.
+</ul>
+<h3>What's new in 1.0.12</h3>
+<ul>
+  <li>Builds in a queue can be now cancelled (issue 24)
+  <li>Hudson can now monitor external jobs that are run on remote machines.
+      See <a href="cron.html">the document</a> for details.
+  <li>Bug fixes.
+</ul>
+<h3>What's new in 1.0.11</h3>
+<ul>
+  <li>Reduced the disk space usage for CVS-based projects
+  <li>Projects can now declare the JDK version it wants to use more easily.
+      (Previously you needed to use the shell option.)
+  <li>Improved UI experience in Ant/JDK installation configurations by using JavaScript.
+  <li>Fixed the incorrect title of the RSS feeds (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=23">issue 23</a>)
+  <li>Bug fixes
+</ul>
+<h3>What's new in 1.0.10</h3>
+<ul>
+ <li>CVS-based projects now allow builds to be tagged long after they are completed.
+     (For example, if you realize 1 week later that build #95 is important, you can tag it.)
+ <li>Fixed bugs in the RSS feeds (thanks to Ronald Klop)
+ <li>Hudson now generates HTML files that prevents robots from accessing links
+</ul>
+</body>
+</html>
