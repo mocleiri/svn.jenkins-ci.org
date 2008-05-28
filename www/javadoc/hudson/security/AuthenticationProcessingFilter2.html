@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AuthenticationProcessingFilter2 (Hudson core 1.218 API)
+AuthenticationProcessingFilter2 (Hudson core 1.219 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-21">
+<META NAME="date" CONTENT="2008-05-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AuthenticationProcessingFilter2 (Hudson core 1.218 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AuthenticationProcessingFilter2 (Hudson core 1.218 API)";
+        parent.document.title="AuthenticationProcessingFilter2 (Hudson core 1.219 API)";
     }
 }
 </SCRIPT>
@@ -175,6 +175,15 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/AuthenticationProcessingFilter2.html#determineFailureUrl(javax.servlet.http.HttpServletRequest, org.acegisecurity.AuthenticationException)">determineFailureUrl</A></B>(javax.servlet.http.HttpServletRequest&nbsp;request,
+                    org.acegisecurity.AuthenticationException&nbsp;failed)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/AuthenticationProcessingFilter2.html#determineTargetUrl(javax.servlet.http.HttpServletRequest)">determineTargetUrl</A></B>(javax.servlet.http.HttpServletRequest&nbsp;request)</CODE>
 
 <BR>
@@ -196,7 +205,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class org.acegisecurity.ui.AbstractProcessingFilter</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>afterPropertiesSet, destroy, determineFailureUrl, doFilter, getAuthenticationDetailsSource, getAuthenticationFailureUrl, getAuthenticationManager, getDefaultTargetUrl, getExceptionMappings, getFilterProcessesUrl, getRememberMeServices, isAlwaysUseDefaultTargetUrl, isContinueChainBeforeSuccessfulAuthentication, obtainFullRequestUrl, onPreAuthentication, onSuccessfulAuthentication, onUnsuccessfulAuthentication, requiresAuthentication, sendRedirect, setAlwaysUseDefaultTargetUrl, setApplicationEventPublisher, setAuthenticationDetailsSource, setAuthenticationFailureUrl, setAuthenticationManager, setBufferSize, setContinueChainBeforeSuccessfulAuthentication, setDefaultTargetUrl, setExceptionMappings, setFilterProcessesUrl, setMessageSource, setRememberMeServices, setUseRelativeContext, successfulAuthentication, unsuccessfulAuthentication</CODE></TD>
+<TD><CODE>afterPropertiesSet, destroy, doFilter, getAuthenticationDetailsSource, getAuthenticationFailureUrl, getAuthenticationManager, getDefaultTargetUrl, getExceptionMappings, getFilterProcessesUrl, getRememberMeServices, isAlwaysUseDefaultTargetUrl, isContinueChainBeforeSuccessfulAuthentication, obtainFullRequestUrl, onPreAuthentication, onSuccessfulAuthentication, onUnsuccessfulAuthentication, requiresAuthentication, sendRedirect, setAlwaysUseDefaultTargetUrl, setApplicationEventPublisher, setAuthenticationDetailsSource, setAuthenticationFailureUrl, setAuthenticationManager, setBufferSize, setContinueChainBeforeSuccessfulAuthentication, setDefaultTargetUrl, setExceptionMappings, setFilterProcessesUrl, setMessageSource, setRememberMeServices, setUseRelativeContext, successfulAuthentication, unsuccessfulAuthentication</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -248,6 +257,21 @@ protected java.lang.String <B>determineTargetUrl</B>(javax.servlet.http.HttpServ
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="determineFailureUrl(javax.servlet.http.HttpServletRequest, org.acegisecurity.AuthenticationException)"><!-- --></A><H3>
+determineFailureUrl</H3>
+<PRE>
+protected java.lang.String <B>determineFailureUrl</B>(javax.servlet.http.HttpServletRequest&nbsp;request,
+                                               org.acegisecurity.AuthenticationException&nbsp;failed)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>determineFailureUrl</CODE> in class <CODE>org.acegisecurity.ui.AbstractProcessingFilter</CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><CODE>AbstractProcessingFilter.determineFailureUrl(javax.servlet.http.HttpServletRequest, org.acegisecurity.AuthenticationException)</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

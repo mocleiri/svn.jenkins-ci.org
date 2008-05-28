@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-LDAPSecurityRealm.DescriptorImpl (Hudson core 1.218 API)
+LDAPSecurityRealm.DescriptorImpl (Hudson core 1.219 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-21">
+<META NAME="date" CONTENT="2008-05-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LDAPSecurityRealm.DescriptorImpl (Hudson core 1.218 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LDAPSecurityRealm.DescriptorImpl (Hudson core 1.218 API)";
+        parent.document.title="LDAPSecurityRealm.DescriptorImpl (Hudson core 1.219 API)";
     }
 }
 </SCRIPT>
@@ -158,9 +158,11 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.DescriptorImpl.html#doServerCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doServerCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+<TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.DescriptorImpl.html#doServerCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String, java.lang.String)">doServerCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
               org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-              java.lang.String&nbsp;server)</CODE>
+              java.lang.String&nbsp;server,
+              java.lang.String&nbsp;managerDN,
+              java.lang.String&nbsp;managerPassword)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -265,13 +267,17 @@ public java.lang.String <B>getDisplayName</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="doServerCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
+<A NAME="doServerCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
 doServerCheck</H3>
 <PRE>
 public void <B>doServerCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                           org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
                           <FONT SIZE="-1">@QueryParameter(value="server")</FONT>
-                          java.lang.String&nbsp;server)
+                          java.lang.String&nbsp;server,
+                          <FONT SIZE="-1">@QueryParameter(value="managerDN")</FONT>
+                          java.lang.String&nbsp;managerDN,
+                          <FONT SIZE="-1">@QueryParameter(value="managerPassword")</FONT>
+                          java.lang.String&nbsp;managerPassword)
                    throws java.io.IOException,
                           javax.servlet.ServletException</PRE>
 <DL>

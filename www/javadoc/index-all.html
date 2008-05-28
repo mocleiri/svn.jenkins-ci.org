@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.218 API)
+Index (Hudson core 1.219 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-21">
+<META NAME="date" CONTENT="2008-05-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.218 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.218 API)";
+        parent.document.title="Index (Hudson core 1.219 API)";
     }
 }
 </SCRIPT>
@@ -291,6 +291,9 @@ Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/ClassResult.htm
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/test/AggregatedTestResultAction.html#add(hudson.tasks.test.AbstractTestResultAction)"><B>add(AbstractTestResultAction)</B></A> - 
 Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultAction</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/util/ArgumentListBuilder.html#add(java.lang.Object)"><B>add(Object)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/ArgumentListBuilder.html#add(java.lang.String)"><B>add(String)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A>
@@ -2288,6 +2291,9 @@ Method in class hudson.security.<A HREF="./hudson/security/UnwrapSecurityExcepti
 <DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.html#DETAILS_DESCRIPTOR"><B>DETAILS_DESCRIPTOR</B></A> - 
 Static variable in class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecurityRealm.html" title="class in hudson.security">HudsonPrivateSecurityRealm</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/security/AuthenticationProcessingFilter2.html#determineFailureUrl(javax.servlet.http.HttpServletRequest, org.acegisecurity.AuthenticationException)"><B>determineFailureUrl(HttpServletRequest, AuthenticationException)</B></A> - 
+Method in class hudson.security.<A HREF="./hudson/security/AuthenticationProcessingFilter2.html" title="class in hudson.security">AuthenticationProcessingFilter2</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/Functions.html#determineRows(java.lang.String)"><B>determineRows(String)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
 <DD>Counts the number of rows needed for textarea to fit the content.
@@ -2750,7 +2756,7 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DT><A HREF="./hudson/tasks/Mailer.DescriptorImpl.html#doSendTestMail(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doSendTestMail(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Mailer.DescriptorImpl.html" title="class in hudson.tasks">Mailer.DescriptorImpl</A>
 <DD>Send an email to the admin address
-<DT><A HREF="./hudson/security/LDAPSecurityRealm.DescriptorImpl.html#doServerCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><B>doServerCheck(StaplerRequest, StaplerResponse, String)</B></A> - 
+<DT><A HREF="./hudson/security/LDAPSecurityRealm.DescriptorImpl.html#doServerCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String, java.lang.String)"><B>doServerCheck(StaplerRequest, StaplerResponse, String, String, String)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/LDAPSecurityRealm.DescriptorImpl.html" title="class in hudson.security">LDAPSecurityRealm.DescriptorImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/maven/MavenModule.html#doSetName(java.lang.String)"><B>doSetName(String)</B></A> - 
@@ -5666,6 +5672,9 @@ Method in class hudson.model.<A HREF="./hudson/model/View.UserInfo.html" title="
 <DT><A HREF="./hudson/model/View.UserInfo.html#getLastChangeTimeString()"><B>getLastChangeTimeString()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/View.UserInfo.html" title="class in hudson.model">View.UserInfo</A>
 <DD>Returns a human-readable string representation of when this user was last active.
+<DT><A HREF="./hudson/model/Job.html#getLastCompletedBuild()"><B>getLastCompletedBuild()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
+<DD>Returns the last completed build, if any.
 <DT><A HREF="./hudson/model/Job.html#getLastFailedBuild()"><B>getLastFailedBuild()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
 <DD>Returns the last failed build, if any.
@@ -7028,6 +7037,15 @@ Method in class hudson.model.<A HREF="./hudson/model/BuildAuthorizationToken.htm
 <DT><A HREF="./hudson/matrix/MatrixBuild.RunPtr.html#getTooltip()"><B>getTooltip()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixBuild.RunPtr.html" title="class in hudson.matrix">MatrixBuild.RunPtr</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/scm/AbstractScmTagAction.html#getTooltip()"><B>getTooltip()</B></A> - 
+Method in class hudson.scm.<A HREF="./hudson/scm/AbstractScmTagAction.html" title="class in hudson.scm">AbstractScmTagAction</A>
+<DD>This message is shown as the tool tip of the build badge icon.
+<DT><A HREF="./hudson/scm/CVSSCM.TagAction.html#getTooltip()"><B>getTooltip()</B></A> - 
+Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.TagAction.html" title="class in hudson.scm">CVSSCM.TagAction</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/scm/SubversionTagAction.html#getTooltip()"><B>getTooltip()</B></A> - 
+Method in class hudson.scm.<A HREF="./hudson/scm/SubversionTagAction.html" title="class in hudson.scm">SubversionTagAction</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#getTopLevelItemNames()"><B>getTopLevelItemNames()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Gets the names of all the <A HREF="./hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A>s.
@@ -8197,6 +8215,12 @@ Method in class hudson.matrix.<A HREF="./hudson/matrix/Axis.html" title="class i
 <DT><A HREF="./hudson/scm/CVSSCM.html#isTag()"><B>isTag()</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.html" title="class in hudson.scm">CVSSCM</A>
 <DD>Returns true if <A HREF="./hudson/scm/CVSSCM.html#getBranch()"><CODE>CVSSCM.getBranch()</CODE></A> represents a tag.
+<DT><A HREF="./hudson/scm/AbstractScmTagAction.html#isTagged()"><B>isTagged()</B></A> - 
+Method in class hudson.scm.<A HREF="./hudson/scm/AbstractScmTagAction.html" title="class in hudson.scm">AbstractScmTagAction</A>
+<DD>Returns true if the build is tagged already.
+<DT><A HREF="./hudson/scm/CVSSCM.TagAction.html#isTagged()"><B>isTagged()</B></A> - 
+Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.TagAction.html" title="class in hudson.scm">CVSSCM.TagAction</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/scm/SubversionTagAction.html#isTagged()"><B>isTagged()</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/SubversionTagAction.html" title="class in hudson.scm">SubversionTagAction</A>
 <DD>Returns true if this build has already been tagged at least once.
@@ -10015,6 +10039,12 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenModule.html" title="cl
 <DT><A HREF="./hudson/model/AbstractItem.html#performDelete()"><B>performDelete()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A>
 <DD>Does the real job of deleting the item.
+<DT><A HREF="./hudson/model/AbstractProject.html#performDelete()"><B>performDelete()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Job.html#performDelete()"><B>performDelete()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/PeriodicWork.html" title="class in hudson.model"><B>PeriodicWork</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Abstract base class for a periodic work.<DT><A HREF="./hudson/model/PeriodicWork.html#PeriodicWork(java.lang.String)"><B>PeriodicWork(String)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/PeriodicWork.html" title="class in hudson.model">PeriodicWork</A>
 <DD>&nbsp;

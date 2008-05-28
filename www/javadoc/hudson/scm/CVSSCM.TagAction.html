@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-CVSSCM.TagAction (Hudson core 1.218 API)
+CVSSCM.TagAction (Hudson core 1.219 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-21">
+<META NAME="date" CONTENT="2008-05-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CVSSCM.TagAction (Hudson core 1.218 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CVSSCM.TagAction (Hudson core 1.218 API)";
+        parent.document.title="CVSSCM.TagAction (Hudson core 1.219 API)";
     }
 }
 </SCRIPT>
@@ -100,7 +100,7 @@ java.lang.Object
               <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.scm.CVSSCM.TagAction</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, java.io.Serializable</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, <A HREF="../../hudson/model/BuildBadgeAction.html" title="interface in hudson.model">BuildBadgeAction</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, java.io.Serializable</DD>
 </DL>
 <DL>
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/scm/CVSSCM.html" title="class in hudson.scm">CVSSCM</A></DD>
@@ -221,6 +221,22 @@ Action for a build that performs the tagging.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.TagAction.html#getTooltip()">getTooltip</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This message is shown as the tool tip of the build badge icon.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.TagAction.html#isTagged()">isTagged</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the build is tagged already.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -382,6 +398,40 @@ protected <A HREF="../../hudson/security/Permission.html" title="class in hudson
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/scm/AbstractScmTagAction.html#getPermission()">getPermission</A></CODE> in class <CODE><A HREF="../../hudson/scm/AbstractScmTagAction.html" title="class in hudson.scm">AbstractScmTagAction</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTooltip()"><!-- --></A><H3>
+getTooltip</H3>
+<PRE>
+public java.lang.String <B>getTooltip</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/scm/AbstractScmTagAction.html#getTooltip()">AbstractScmTagAction</A></CODE></B></DD>
+<DD>This message is shown as the tool tip of the build badge icon.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/scm/AbstractScmTagAction.html#getTooltip()">getTooltip</A></CODE> in class <CODE><A HREF="../../hudson/scm/AbstractScmTagAction.html" title="class in hudson.scm">AbstractScmTagAction</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isTagged()"><!-- --></A><H3>
+isTagged</H3>
+<PRE>
+public boolean <B>isTagged</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/scm/AbstractScmTagAction.html#isTagged()">AbstractScmTagAction</A></CODE></B></DD>
+<DD>Returns true if the build is tagged already.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/scm/AbstractScmTagAction.html#isTagged()">isTagged</A></CODE> in class <CODE><A HREF="../../hudson/scm/AbstractScmTagAction.html" title="class in hudson.scm">AbstractScmTagAction</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

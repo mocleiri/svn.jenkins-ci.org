@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Class Hierarchy (Hudson core 1.218 API)
+Class Hierarchy (Hudson core 1.219 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-21">
+<META NAME="date" CONTENT="2008-05-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Class Hierarchy (Hudson core 1.218 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Class Hierarchy (Hudson core 1.218 API)";
+        parent.document.title="Class Hierarchy (Hudson core 1.219 API)";
     }
 }
 </SCRIPT>
@@ -167,7 +167,8 @@ Class Hierarchy
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/Hudson.MasterComputer.html" title="class in hudson.model"><B>Hudson.MasterComputer</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/SlaveComputer.html" title="class in hudson.slaves"><B>SlaveComputer</B></A></UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/TaskAction.html" title="class in hudson.model"><B>TaskAction</B></A> (implements hudson.model.<A HREF="hudson/model/Action.html" title="interface in hudson.model">Action</A>)
 <UL>
-<LI TYPE="circle">hudson.scm.<A HREF="hudson/scm/AbstractScmTagAction.html" title="class in hudson.scm"><B>AbstractScmTagAction</B></A><UL>
+<LI TYPE="circle">hudson.scm.<A HREF="hudson/scm/AbstractScmTagAction.html" title="class in hudson.scm"><B>AbstractScmTagAction</B></A> (implements hudson.model.<A HREF="hudson/model/BuildBadgeAction.html" title="interface in hudson.model">BuildBadgeAction</A>)
+<UL>
 <LI TYPE="circle">hudson.scm.<A HREF="hudson/scm/CVSSCM.TagAction.html" title="class in hudson.scm"><B>CVSSCM.TagAction</B></A><LI TYPE="circle">hudson.scm.<A HREF="hudson/scm/SubversionTagAction.html" title="class in hudson.scm"><B>SubversionTagAction</B></A></UL>
 <LI TYPE="circle">hudson.maven.reporters.<A HREF="hudson/maven/reporters/MavenAbstractArtifactRecord.html" title="class in hudson.maven.reporters"><B>MavenAbstractArtifactRecord</B></A>&lt;T&gt; (implements hudson.model.<A HREF="hudson/model/BuildBadgeAction.html" title="interface in hudson.model">BuildBadgeAction</A>)
 <UL>
@@ -214,7 +215,8 @@ Class Hierarchy
 </UL>
 <LI TYPE="circle">hudson.util.<A HREF="hudson/util/AdaptedIterator.html" title="class in hudson.util"><B>AdaptedIterator</B></A>&lt;T,U&gt; (implements java.util.Iterator&lt;E&gt;)
 <LI TYPE="circle">hudson.tasks.test.<A HREF="hudson/tasks/test/AggregatedTestResultAction.Child.html" title="class in hudson.tasks.test"><B>AggregatedTestResultAction.Child</B></A><LI TYPE="circle">hudson.tasks.test.<A HREF="hudson/tasks/test/AggregatedTestResultAction.ChildReport.html" title="class in hudson.tasks.test"><B>AggregatedTestResultAction.ChildReport</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks"><B>Ant.AntInstallation</B></A> (implements java.io.Serializable)
-<LI TYPE="circle">hudson.util.<A HREF="hudson/util/Area.html" title="class in hudson.util"><B>Area</B></A><LI TYPE="circle">hudson.util.<A HREF="hudson/util/ArgumentListBuilder.html" title="class in hudson.util"><B>ArgumentListBuilder</B></A><LI TYPE="circle">hudson.security.<A HREF="hudson/security/AuthenticationManagerProxy.html" title="class in hudson.security"><B>AuthenticationManagerProxy</B></A> (implements org.acegisecurity.AuthenticationManager)
+<LI TYPE="circle">hudson.util.<A HREF="hudson/util/Area.html" title="class in hudson.util"><B>Area</B></A><LI TYPE="circle">hudson.util.<A HREF="hudson/util/ArgumentListBuilder.html" title="class in hudson.util"><B>ArgumentListBuilder</B></A> (implements java.io.Serializable)
+<LI TYPE="circle">hudson.security.<A HREF="hudson/security/AuthenticationManagerProxy.html" title="class in hudson.security"><B>AuthenticationManagerProxy</B></A> (implements org.acegisecurity.AuthenticationManager)
 <LI TYPE="circle">org.acegisecurity.ui.webapp.AuthenticationProcessingFilterEntryPoint (implements org.acegisecurity.ui.AuthenticationEntryPoint, org.springframework.beans.factory.InitializingBean)
 <UL>
 <LI TYPE="circle">hudson.security.<A HREF="hudson/security/LegacyAuthenticationProcessingFilterEntryPoint.html" title="class in hudson.security"><B>LegacyAuthenticationProcessingFilterEntryPoint</B></A></UL>
