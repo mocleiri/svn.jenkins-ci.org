@@ -54,12 +54,6 @@ public class VersionedFile implements Comparable<VersionedFile> {
         return o;
     }
 
-    public void writeTo(String name) throws IOException {
-        PrintWriter w = new PrintWriter(new FileWriter(new File(name+".js")));
-        w.printf("updateCenter('%s','%s');\n",name,version);
-        w.close();
-    }
-
     public String toString() {
         return file.getName()+" ("+version+")";
     }
