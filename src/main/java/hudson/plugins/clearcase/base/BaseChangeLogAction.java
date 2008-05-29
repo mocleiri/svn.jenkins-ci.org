@@ -45,7 +45,7 @@ public class BaseChangeLogAction implements ChangeLogAction {
         try {
             for (String branchName : branchNames) {
 
-                Reader reader = cleartool.lshistory(historyHandler.getFormat(), time, viewName, branchName, viewPaths);
+                Reader reader = cleartool.lshistory(historyHandler.getFormat() + COMMENT + LINEEND, time, viewName, branchName, viewPaths);
                 ClearToolHistoryParser parser = new ClearToolHistoryParser();
                 List<ClearCaseChangeLogEntry> data = parser.parse(reader);
                 fullList.addAll(data);

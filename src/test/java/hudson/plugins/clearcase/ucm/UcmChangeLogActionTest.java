@@ -23,6 +23,22 @@ public class UcmChangeLogActionTest {
         context = new Mockery();
         cleartool = context.mock(ClearTool.class);
     }
+
+    @Test
+    public void assertFormatContainsComment() throws Exception {
+        context.checking(new Expectations() {
+            {
+                one(cleartool).lshistory(with(equal("\\\"%Nd\\\" \\\"%En\\\" \\\"%Vn\\\" \\\"%[activity]p\\\" \\\"%e\\\" \\\"%o\\\" \\n%c\\n")), 
+                        with(any(Date.class)), with(any(String.class)), with(any(String.class)), 
+                        with(any(String[].class)));                
+                will(returnValue(new StringReader("")));
+            }
+        });
+        
+        UcmChangeLogAction action = new UcmChangeLogAction(cleartool);
+        action.getChanges(new Date(), "IGNORED", new String[]{"Release_2_1_int"}, new String[]{"vobs/projects/Server"});
+        context.assertIsSatisfied();
+    }
     
     @Test
     public void assertParsingOfNonIntegrationActivity() throws Exception {
