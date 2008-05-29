@@ -26,6 +26,9 @@
     The Hudson Webstart application can now be started in a headless environment by setting
     the system property <tt>hudson.webstart.headless</tt> to true.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1732">issue 1732</a>)
+  <li class=rfe>
+    Custom SMTP port can be specified for sending e-mail.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=984">issue 984</a>)
 </ul>
 </div><!--=END=-->
 <a name=v1.219><h3>What's new in 1.219</h3></a>
@@ -37,7 +40,7 @@
     Hudson's own user database had a huge bug that everyone was automatically considered as a member of the "admin" group.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1648">issue 1648</a>)
   <li class=bug>
-    When a job is being deleted, first disable the job to prevent concurrent builds. 
+    When a job is being deleted, first disable the job to prevent concurrent builds.
   <li class=bug>
     Fixed NPE in fingerprinting.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1672">issue 1672</a>)
@@ -57,8 +60,8 @@
     Fixed NPE when launching a new slave.
     <a href="http://www.nabble.com/hudson-1.217-issue--%22-Please-wait-while-hudson-is-getting-ready-to-work...%22-tt17374433.html">discussion</a>
   <li class=rfe>
-    <strike>The Hudson Webstart application can now be started in a headless environment by setting
-    the system property <tt>hudson.master.headless</tt> to true.</strike>
+    The Hudson Webstart application can now be started in a headless environment by setting
+    the system property <tt>hudson.master.headless</tt> to true.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1732">issue 1732</a>)
 </ul>
 <a name=v1.217><h3>What's new in 1.217</h3></a>
