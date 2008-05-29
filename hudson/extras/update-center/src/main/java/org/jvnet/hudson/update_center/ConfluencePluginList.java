@@ -1,6 +1,5 @@
 package org.jvnet.hudson.update_center;
 
-import com.sun.xml.internal.bind.v2.util.EditDistance;
 import hudson.plugins.jira.soap.ConfluenceSoapService;
 import hudson.plugins.jira.soap.RemotePage;
 import hudson.plugins.jira.soap.RemotePageSummary;
@@ -12,6 +11,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.rmi.RemoteException;
+
+import com.sun.xml.bind.v2.util.EditDistance;
 
 /**
  * List of plugins from confluence.
