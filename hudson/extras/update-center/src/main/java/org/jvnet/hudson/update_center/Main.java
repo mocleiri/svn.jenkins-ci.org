@@ -28,7 +28,7 @@ public class Main {
 
         Writer w = args.length==0 ? new OutputStreamWriter(System.out) : new FileWriter(args[0]);
         PrintWriter pw = new PrintWriter(w);
-        pw.println("updateCenter(");
+        pw.println("updateCenter.post(");
         root.write(pw);
         pw.println(");");
         pw.close();
