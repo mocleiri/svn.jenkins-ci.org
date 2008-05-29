@@ -107,7 +107,4 @@ public interface ClearTool {
      * @param viewTag Any view tag specifying a dynamic view that is registered for the current network region.
      */
     void setView(String viewTag)  throws IOException, InterruptedException;
-    
-    boolean mkbl(MkblRequest request) throws IOException, InterruptedException;
-    
 }
