@@ -1363,8 +1363,6 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         threadPoolForLoad.shutdown();
         
         LogFactory.releaseAll();
-        
-        theInstance = null;
     }
 
     public Object getDynamic(String token, StaplerRequest req, StaplerResponse rsp) {
