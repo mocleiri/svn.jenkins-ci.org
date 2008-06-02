@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.model (Hudson core 1.219 API)
+hudson.model (Hudson core 1.220 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-27">
+<META NAME="date" CONTENT="2008-06-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson core 1.219 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson core 1.219 API)";
+        parent.document.title="hudson.model (Hudson core 1.220 API)";
     }
 }
 </SCRIPT>
@@ -372,7 +372,7 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/LargeText.html" title="class in hudson.model">LargeText</A></B></TD>
-<TD>Represents a large text data.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>moved to stapler, as of Hudson 1.220</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/ListView.html" title="class in hudson.model">ListView</A></B></TD>
@@ -385,6 +385,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Messages.html" title="class in hudson.model">Messages</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/MyView.html" title="class in hudson.model">MyView</A></B></TD>
+<TD><A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> that only contains projects for which the current user has access to.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/NoFingerprintMatch.html" title="class in hudson.model">NoFingerprintMatch</A></B></TD>
@@ -459,6 +463,22 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A></B></TD>
 <TD><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A></B></TD>
+<TD>Controls update center capability.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/UpdateCenter.Data.html" title="class in hudson.model">UpdateCenter.Data</A></B></TD>
+<TD>In-memory representation of the update center data.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/UpdateCenter.Entry.html" title="class in hudson.model">UpdateCenter.Entry</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A></B></TD>
+<TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/User.html" title="class in hudson.model">User</A></B></TD>

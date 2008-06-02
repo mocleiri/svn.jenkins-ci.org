@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.util (Hudson core 1.219 API)
+hudson.util (Hudson core 1.220 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-27">
+<META NAME="date" CONTENT="2008-06-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.util (Hudson core 1.219 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.util (Hudson core 1.219 API)";
+        parent.document.title="hudson.util (Hudson core 1.220 API)";
     }
 }
 </SCRIPT>
@@ -131,7 +131,7 @@ Other miscellaneous utility code
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/ByteBuffer.html" title="class in hudson.util">ByteBuffer</A></B></TD>
-<TD><CODE>ByteArrayOutputStream</CODE> re-implementation.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>Moved to stapler</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/CaseInsensitiveComparator.html" title="class in hudson.util">CaseInsensitiveComparator</A></B></TD>
@@ -139,7 +139,7 @@ Other miscellaneous utility code
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/CharSpool.html" title="class in hudson.util">CharSpool</A></B></TD>
-<TD><CODE>Writer</CODE> that spools the output and writes to another <CODE>Writer</CODE> later.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>moved to stapler</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/ChartUtil.html" title="class in hudson.util">ChartUtil</A></B></TD>
@@ -189,10 +189,6 @@ Other miscellaneous utility code
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/CopyOnWriteMap.Tree.ConverterImpl.html" title="class in hudson.util">CopyOnWriteMap.Tree.ConverterImpl</A></B></TD>
 <TD>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD WIDTH="15%"><B><A HREF="../../hudson/util/CountingOutputStream.html" title="class in hudson.util">CountingOutputStream</A></B></TD>
-<TD><CODE>FilterOutputStream</CODE> that counts the number of bytes that were written.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/DaemonThreadFactory.html" title="class in hudson.util">DaemonThreadFactory</A></B></TD>
@@ -329,7 +325,7 @@ Other miscellaneous utility code
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/LineEndNormalizingWriter.html" title="class in hudson.util">LineEndNormalizingWriter</A></B></TD>
-<TD>Finds the lone LF and converts that to CR+LF.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>moved to stapler</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/ListBoxModel.html" title="class in hudson.util">ListBoxModel</A></B></TD>
@@ -361,6 +357,10 @@ Other miscellaneous utility code
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/OneShotEvent.html" title="class in hudson.util">OneShotEvent</A></B></TD>
 <TD>Concurrency primitive "event".</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/PluginServletFilter.html" title="class in hudson.util">PluginServletFilter</A></B></TD>
+<TD>Servlet <CODE>Filter</CODE> that chains multiple <CODE>Filter</CODE>s, provided by plugins</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/ProcessTreeKiller.html" title="class in hudson.util">ProcessTreeKiller</A></B></TD>
@@ -437,11 +437,6 @@ Other miscellaneous utility code
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/VersionNumber.html" title="class in hudson.util">VersionNumber</A></B></TD>
 <TD>Immutable representation of a dot-separated digits (such as "1.0.1").</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD WIDTH="15%"><B><A HREF="../../hudson/util/WriterOutputStream.html" title="class in hudson.util">WriterOutputStream</A></B></TD>
-<TD><CODE>OutputStream</CODE> that writes to <CODE>Writer</CODE>
- by assuming the platform default encoding.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/XStream2.html" title="class in hudson.util">XStream2</A></B></TD>

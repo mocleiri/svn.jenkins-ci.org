@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FormFieldValidator (Hudson core 1.219 API)
+FormFieldValidator (Hudson core 1.220 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-27">
+<META NAME="date" CONTENT="2008-06-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FormFieldValidator (Hudson core 1.219 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FormFieldValidator (Hudson core 1.219 API)";
+        parent.document.title="FormFieldValidator (Hudson core 1.220 API)";
     }
 }
 </SCRIPT>
@@ -190,6 +190,14 @@ Base class that provides the framework for doing on-the-fly form field validatio
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#CHECK">CHECK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;org.kohsuke.stapler.StaplerRequest</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#request">request</A></B></CODE>
 
@@ -220,6 +228,16 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#FormFieldValidator(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, boolean)">FormFieldValidator</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
                    org.kohsuke.stapler.StaplerResponse&nbsp;response,
                    boolean&nbsp;adminOnly)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#FormFieldValidator(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.security.Permission)">FormFieldValidator</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
+                   org.kohsuke.stapler.StaplerResponse&nbsp;response,
+                   <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -340,6 +358,16 @@ Base class that provides the framework for doing on-the-fly form field validatio
 </TR>
 </TABLE>
 
+<A NAME="CHECK"><!-- --></A><H3>
+CHECK</H3>
+<PRE>
+public static final <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A> <B>CHECK</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
 <A NAME="request"><!-- --></A><H3>
 request</H3>
 <PRE>
@@ -380,6 +408,16 @@ protected <B>FormFieldValidator</B>(org.kohsuke.stapler.StaplerRequest&nbsp;requ
 <DT><B>Parameters:</B><DD><CODE>adminOnly</CODE> - Pass true to only let admin users to run the check. This is necessary
       for security reason, so that unauthenticated user cannot obtain sensitive
       information or run a process that may have side-effect.</DL>
+</DL>
+<HR>
+
+<A NAME="FormFieldValidator(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.security.Permission)"><!-- --></A><H3>
+FormFieldValidator</H3>
+<PRE>
+protected <B>FormFieldValidator</B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
+                             org.kohsuke.stapler.StaplerResponse&nbsp;response,
+                             <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</PRE>
+<DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->

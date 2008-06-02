@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.219 API)
+Functions (Hudson core 1.220 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-27">
+<META NAME="date" CONTENT="2008-06-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.219 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.219 API)";
+        parent.document.title="Functions (Hudson core 1.220 API)";
     }
 }
 </SCRIPT>
@@ -211,6 +211,15 @@ Utility functions used in views.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#appendSpaceIfNotNull(java.lang.String)">appendSpaceIfNotNull</A></B>(java.lang.String&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#checkPermission(hudson.security.AccessControlled, hudson.security.Permission)">checkPermission</A></B>(<A HREF="../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>&nbsp;object,
+                <A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -618,6 +627,15 @@ Utility functions used in views.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#hasPermission(hudson.security.AccessControlled, hudson.security.Permission)">hasPermission</A></B>(<A HREF="../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>&nbsp;object,
+              <A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#hasPermission(hudson.security.Permission)">hasPermission</A></B>(<A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
@@ -754,6 +772,14 @@ Utility functions used in views.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts the Hudson build status to CruiseControl build status,
  which is either Success, Failure, Exception, or Unknown.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#toEmailSafeString(java.lang.String)">toEmailSafeString</A></B>(java.lang.String&nbsp;projectName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Escapes the character unsafe for e-mail address.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1256,6 +1282,23 @@ public static void <B>checkPermission</B>(<A HREF="../hudson/security/Permission
 </DL>
 <HR>
 
+<A NAME="checkPermission(hudson.security.AccessControlled, hudson.security.Permission)"><!-- --></A><H3>
+checkPermission</H3>
+<PRE>
+public static void <B>checkPermission</B>(<A HREF="../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>&nbsp;object,
+                                   <A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)
+                            throws java.io.IOException,
+                                   javax.servlet.ServletException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="hasPermission(hudson.security.Permission)"><!-- --></A><H3>
 hasPermission</H3>
 <PRE>
@@ -1267,6 +1310,23 @@ public static boolean <B>hasPermission</B>(<A HREF="../hudson/security/Permissio
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>permission</CODE> - If null, returns true. This defaulting is convenient in making the use of this method terse.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasPermission(hudson.security.AccessControlled, hudson.security.Permission)"><!-- --></A><H3>
+hasPermission</H3>
+<PRE>
+public static boolean <B>hasPermission</B>(<A HREF="../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>&nbsp;object,
+                                    <A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)
+                             throws java.io.IOException,
+                                    javax.servlet.ServletException</PRE>
+<DL>
+<DD><DL>
+
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
@@ -1677,6 +1737,21 @@ public static java.lang.String <B>getActionUrl</B>(java.lang.String&nbsp;itUrl,
 <DL>
 <DD>Computes the hyperlink to actions, to handle the situation when the <A HREF="../hudson/model/Action.html#getUrlName()"><CODE>Action.getUrlName()</CODE></A>
  returns absolute URL.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toEmailSafeString(java.lang.String)"><!-- --></A><H3>
+toEmailSafeString</H3>
+<PRE>
+public static java.lang.String <B>toEmailSafeString</B>(java.lang.String&nbsp;projectName)</PRE>
+<DL>
+<DD>Escapes the character unsafe for e-mail address.
+ See http://en.wikipedia.org/wiki/E-mail_address for the details,
+ but here the vocabulary is even more restricted.
 <P>
 <DD><DL>
 </DL>

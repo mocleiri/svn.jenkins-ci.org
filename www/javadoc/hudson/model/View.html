@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-View (Hudson core 1.219 API)
+View (Hudson core 1.220 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-05-27">
+<META NAME="date" CONTENT="2008-06-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ View (Hudson core 1.219 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="View (Hudson core 1.219 API)";
+        parent.document.title="View (Hudson core 1.220 API)";
     }
 }
 </SCRIPT>
@@ -98,15 +98,15 @@ java.lang.Object
       <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.View</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>, <A HREF="../../hudson/model/ListView.html" title="class in hudson.model">ListView</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>, <A HREF="../../hudson/model/ListView.html" title="class in hudson.model">ListView</A>, <A HREF="../../hudson/model/MyView.html" title="class in hudson.model">MyView</A></DD>
 </DL>
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1">@ExportedBean
-</FONT>public abstract class <B>View</B><DT>extends <A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A></DL>
+</FONT>public abstract class <B>View</B><DT>extends <A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A><DT>implements <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></DL>
 </PRE>
 
 <P>
@@ -227,7 +227,7 @@ Encapsulates the rendering of the list of <A HREF="../../hudson/model/TopLevelIt
 <TD><CODE><B><A HREF="../../hudson/model/View.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short for <code>getACL().checkPermission(p)</code></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenient short-cut for <code>getACL().checkPermission(permission)</code></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -370,6 +370,14 @@ Encapsulates the rendering of the list of <A HREF="../../hudson/model/TopLevelIt
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/View.html#hasPermission(hudson.security.Permission)">hasPermission</A></B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenient short-cut for <code>getACL().hasPermission(permission)</code></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/search/SearchIndexBuilder.html" title="class in hudson.search">SearchIndexBuilder</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/View.html#makeSearchIndex()">makeSearchIndex</A></B>()</CODE>
 
@@ -506,6 +514,9 @@ getItems</H3>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -519,6 +530,9 @@ public abstract <A HREF="../../hudson/model/TopLevelItem.html" title="interface 
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -529,6 +543,9 @@ public abstract boolean <B>contains</B>(<A HREF="../../hudson/model/TopLevelItem
 <DL>
 <DD>Checks if the job is in this collection.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -547,6 +564,9 @@ getViewName</H3>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -558,6 +578,9 @@ getDescription</H3>
 <DL>
 <DD>Message displayed in the top page. Can be null. Includes HTML.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -577,6 +600,9 @@ public abstract java.lang.String <B>getUrl</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -588,6 +614,9 @@ public java.lang.String <B>getSearchUrl</B>()</PRE>
 <DD><B>Description copied from interface: <CODE><A HREF="../../hudson/search/SearchItem.html#getSearchUrl()">SearchItem</A></CODE></B></DD>
 <DD>Returns the URL of this item relative to the parent <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search"><CODE>SearchItem</CODE></A>.
 <P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/search/SearchItem.html#getSearchUrl()">getSearchUrl</A></CODE> in interface <CODE><A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></CODE></DL>
+</DD>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>URL like "foo" or "foo/bar". The path can end with '/'.
@@ -609,6 +638,9 @@ getAbsoluteUrl</H3>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -617,6 +649,9 @@ getApi</H3>
 <PRE>
 public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -631,7 +666,11 @@ public <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"
 <DD>Returns the <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> for this object.
 <P>
 <DD><DL>
-</DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AccessControlled.html#getACL()">getACL</A></CODE> in interface <CODE><A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>never null.</DL>
 </DD>
 </DL>
 <HR>
@@ -641,8 +680,29 @@ checkPermission</H3>
 <PRE>
 public void <B>checkPermission</B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</PRE>
 <DL>
-<DD>Short for <code>getACL().checkPermission(p)</code>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/security/AccessControlled.html#checkPermission(hudson.security.Permission)">AccessControlled</A></CODE></B></DD>
+<DD>Convenient short-cut for <code>getACL().checkPermission(permission)</code>
 <P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AccessControlled.html#checkPermission(hudson.security.Permission)">checkPermission</A></CODE> in interface <CODE><A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasPermission(hudson.security.Permission)"><!-- --></A><H3>
+hasPermission</H3>
+<PRE>
+public boolean <B>hasPermission</B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/security/AccessControlled.html#hasPermission(hudson.security.Permission)">AccessControlled</A></CODE></B></DD>
+<DD>Convenient short-cut for <code>getACL().hasPermission(permission)</code>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AccessControlled.html#hasPermission(hudson.security.Permission)">hasPermission</A></CODE> in interface <CODE><A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -659,6 +719,9 @@ public final boolean <B>hasPeople</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -669,6 +732,9 @@ public final <A HREF="../../hudson/model/View.People.html" title="class in hudso
 <DL>
 <DD>Gets the users that show up in the changelog of this job collection.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -703,6 +769,9 @@ public abstract <A HREF="../../hudson/model/Item.html" title="interface in hudso
 <DD>Creates a new <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> in this collection.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Returns:</B><DD>null if fails.
 <DT><B>Throws:</B>
@@ -721,6 +790,9 @@ public void <B>doRssAll</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                      javax.servlet.ServletException</PRE>
 <DL>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
@@ -738,6 +810,9 @@ public void <B>doRssFailed</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                         javax.servlet.ServletException</PRE>
 <DL>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
@@ -754,6 +829,9 @@ public <A HREF="../../hudson/util/RunList.html" title="class in hudson.util">Run
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -762,6 +840,9 @@ getItemCreatePermission</H3>
 <PRE>
 public static <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A> <B>getItemCreatePermission</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
