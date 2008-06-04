@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Item (Hudson core 1.220 API)
+Item (Hudson core 1.221 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-02">
+<META NAME="date" CONTENT="2008-06-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Item (Hudson core 1.220 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Item (Hudson core 1.220 API)";
+        parent.document.title="Item (Hudson core 1.221 API)";
     }
 }
 </SCRIPT>
@@ -196,7 +196,10 @@ Basic configuration unit in Hudson.
 <TD><CODE><B><A HREF="../../hudson/model/Item.html#getAbsoluteUrl()">getAbsoluteUrl</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the absolute URL of this item.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This method shall <b>NEVER</b> be used during HTML page rendering, as it won't work with
+      network set up like Apache reverse proxy.
+      This method is only intended for the remote API clients who cannot resolve relative references
+      (even this won't work for the same reason, which should be fixed.)</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -542,6 +545,11 @@ getAbsoluteUrl</H3>
 <PRE>
 java.lang.String <B>getAbsoluteUrl</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>This method shall <b>NEVER</b> be used during HTML page rendering, as it won't work with
+      network set up like Apache reverse proxy.
+      This method is only intended for the remote API clients who cannot resolve relative references
+      (even this won't work for the same reason, which should be fixed.)</I>
+<P>
 <DD>Returns the absolute URL of this item. This relies on the current
  <CODE>StaplerRequest</CODE> to figure out what the host name is,
  so can be used only during processing client requests.

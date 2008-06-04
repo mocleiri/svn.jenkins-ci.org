@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.220 API)
+Index (Hudson core 1.221 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-02">
+<META NAME="date" CONTENT="2008-06-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.220 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.220 API)";
+        parent.document.title="Index (Hudson core 1.221 API)";
     }
 }
 </SCRIPT>
@@ -1165,6 +1165,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class
 <DT><A HREF="./hudson/model/Run.html#checkPermission(hudson.security.Permission)"><B>checkPermission(Permission)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/User.html#checkPermission(hudson.security.Permission)"><B>checkPermission(Permission)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/User.html" title="class in hudson.model">User</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/View.html#checkPermission(hudson.security.Permission)"><B>checkPermission(Permission)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
 <DD>&nbsp;
@@ -1273,6 +1276,9 @@ Method in class hudson.util.<A HREF="./hudson/util/RingBufferLogHandler.html" ti
 <DT><A HREF="./hudson/util/StreamTaskListener.html#close()"><B>close()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/WriterOutputStream.html#close()"><B>close()</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/WriterOutputStream.html" title="class in hudson.util">WriterOutputStream</A>
+<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/CloseProofOutputStream.html" title="class in hudson"><B>CloseProofOutputStream</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD><CODE>OutputStream</CODE> that blocks <A HREF="./hudson/CloseProofOutputStream.html#close()"><CODE>CloseProofOutputStream.close()</CODE></A> method.<DT><A HREF="./hudson/CloseProofOutputStream.html#CloseProofOutputStream(java.io.OutputStream)"><B>CloseProofOutputStream(OutputStream)</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/CloseProofOutputStream.html" title="class in hudson">CloseProofOutputStream</A>
 <DD>&nbsp;
@@ -3441,6 +3447,9 @@ Method in class hudson.util.<A HREF="./hudson/util/ForkOutputStream.html" title=
 <DT><A HREF="./hudson/util/RingBufferLogHandler.html#flush()"><B>flush()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/RingBufferLogHandler.html" title="class in hudson.util">RingBufferLogHandler</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/WriterOutputStream.html#flush()"><B>flush()</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/WriterOutputStream.html" title="class in hudson.util">WriterOutputStream</A>
+<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/model/TaskThread.ListenerAndText.html#forFile(java.io.File)"><B>forFile(File)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/TaskThread.ListenerAndText.html" title="class in hudson.model">TaskThread.ListenerAndText</A>
 <DD>Creates one that's backed by a file.
@@ -3646,10 +3655,16 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractItem.html" title="c
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Item.html#getAbsoluteUrl()"><B>getAbsoluteUrl()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Item.html" title="interface in hudson.model">Item</A>
-<DD>Returns the absolute URL of this item.
+<DD><B>Deprecated.</B>&nbsp;<I>This method shall <b>NEVER</b> be used during HTML page rendering, as it won't work with
+      network set up like Apache reverse proxy.
+      This method is only intended for the remote API clients who cannot resolve relative references
+      (even this won't work for the same reason, which should be fixed.)</I>
 <DT><A HREF="./hudson/model/Run.html#getAbsoluteUrl()"><B>getAbsoluteUrl()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
-<DD>&nbsp;
+<DD><B>Deprecated.</B>&nbsp;<I>This method shall <b>NEVER</b> be used during HTML page rendering, as it won't work with
+      network set up like Apache reverse proxy.
+      This method is only intended for the remote API clients who cannot resolve relative references
+      (even this won't work for the same reason, which should be fixed.)</I>
 <DT><A HREF="./hudson/model/User.html#getAbsoluteUrl()"><B>getAbsoluteUrl()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/User.html" title="class in hudson.model">User</A>
 <DD>The URL of the user page.
@@ -3661,6 +3676,9 @@ Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenAb
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractItem.html#getACL()"><B>getACL()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A>
+<DD>Returns the <A HREF="./hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> for this object.
+<DT><A HREF="./hudson/model/AbstractProject.html#getACL()"><B>getACL()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Returns the <A HREF="./hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> for this object.
 <DT><A HREF="./hudson/model/Computer.html#getACL()"><B>getACL()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
@@ -3674,6 +3692,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in h
 <DT><A HREF="./hudson/model/TaskAction.html#getACL()"><B>getACL()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/TaskAction.html" title="class in hudson.model">TaskAction</A>
 <DD>Gets the <A HREF="./hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> against which the permissions are checked.
+<DT><A HREF="./hudson/model/User.html#getACL()"><B>getACL()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/User.html" title="class in hudson.model">User</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/View.html#getACL()"><B>getACL()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
 <DD>Returns the <A HREF="./hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> for this object.
@@ -3692,6 +3713,9 @@ Method in class hudson.security.<A HREF="./hudson/security/AuthorizationStrategy
 <DT><A HREF="./hudson/security/AuthorizationStrategy.html#getACL(hudson.model.AbstractItem)"><B>getACL(AbstractItem)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>
 <DD>Implementation can choose to provide different ACL for different items.
+<DT><A HREF="./hudson/security/AuthorizationStrategy.html#getACL(hudson.model.User)"><B>getACL(User)</B></A> - 
+Method in class hudson.security.<A HREF="./hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>
+<DD>Implementation can choose to provide different ACL per user.
 <DT><A HREF="./hudson/security/AuthorizationStrategy.html#getACL(hudson.model.Computer)"><B>getACL(Computer)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>
 <DD>Implementation can choose to provide different ACL for different computers.
@@ -7657,6 +7681,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Run.html#hasPermission(hudson.security.Permission)"><B>hasPermission(Permission)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/User.html#hasPermission(hudson.security.Permission)"><B>hasPermission(Permission)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/User.html" title="class in hudson.model">User</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/View.html#hasPermission(hudson.security.Permission)"><B>hasPermission(Permission)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
@@ -12785,6 +12812,12 @@ Method in class hudson.util.<A HREF="./hudson/util/NullStream.html" title="class
 <DT><A HREF="./hudson/util/TextFile.html#write(java.lang.String)"><B>write(String)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/TextFile.html" title="class in hudson.util">TextFile</A>
 <DD>Overwrites the file by the given string.
+<DT><A HREF="./hudson/util/WriterOutputStream.html#write(int)"><B>write(int)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/WriterOutputStream.html" title="class in hudson.util">WriterOutputStream</A>
+<DD><B>Deprecated.</B>&nbsp;&nbsp;
+<DT><A HREF="./hudson/util/WriterOutputStream.html#write(byte[], int, int)"><B>write(byte[], int, int)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/WriterOutputStream.html" title="class in hudson.util">WriterOutputStream</A>
+<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/XmlFile.html#write(java.lang.Object)"><B>write(Object)</B></A> - 
 Method in class hudson.<A HREF="./hudson/XmlFile.html" title="class in hudson">XmlFile</A>
 <DD>&nbsp;
@@ -12797,6 +12830,9 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenEmbedder.html" title="
 <DT><A HREF="./hudson/XmlFile.html#writeRawTo(java.io.Writer)"><B>writeRawTo(Writer)</B></A> - 
 Method in class hudson.<A HREF="./hudson/XmlFile.html" title="class in hudson">XmlFile</A>
 <DD>Writes the raw XML to the given <CODE>Writer</CODE>.
+<DT><A HREF="./hudson/util/WriterOutputStream.html" title="class in hudson.util"><B>WriterOutputStream</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD><B>Deprecated.</B>&nbsp;<I>Use the one in stapler.</I><DT><A HREF="./hudson/util/WriterOutputStream.html#WriterOutputStream(java.io.Writer)"><B>WriterOutputStream(Writer)</B></A> - 
+Constructor for class hudson.util.<A HREF="./hudson/util/WriterOutputStream.html" title="class in hudson.util">WriterOutputStream</A>
+<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/util/ByteBuffer.html#writeTo(java.io.OutputStream)"><B>writeTo(OutputStream)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ByteBuffer.html" title="class in hudson.util">ByteBuffer</A>
 <DD><B>Deprecated.</B>&nbsp;Writes the contents of this buffer to another OutputStream.

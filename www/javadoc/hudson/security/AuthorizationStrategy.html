@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AuthorizationStrategy (Hudson core 1.220 API)
+AuthorizationStrategy (Hudson core 1.221 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-02">
+<META NAME="date" CONTENT="2008-06-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AuthorizationStrategy (Hudson core 1.220 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AuthorizationStrategy (Hudson core 1.220 API)";
+        parent.document.title="AuthorizationStrategy (Hudson core 1.221 API)";
     }
 }
 </SCRIPT>
@@ -211,6 +211,14 @@ Controls authorization throughout Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/security/ACL.html" title="class in hudson.security">ACL</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.User)">getACL</A></B>(<A HREF="../../hudson/model/User.html" title="class in hudson.model">User</A>&nbsp;user)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation can choose to provide different ACL per user.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/security/ACL.html" title="class in hudson.security">ACL</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.View)">getACL</A></B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;item)</CODE>
 
 <BR>
@@ -389,6 +397,28 @@ public <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"
 <DD><DL>
 <DT><B>Since:</B></DT>
   <DD>1.220</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getACL(hudson.model.User)"><!-- --></A><H3>
+getACL</H3>
+<PRE>
+public <A HREF="../../hudson/security/ACL.html" title="class in hudson.security">ACL</A> <B>getACL</B>(<A HREF="../../hudson/model/User.html" title="class in hudson.model">User</A>&nbsp;user)</PRE>
+<DL>
+<DD>Implementation can choose to provide different ACL per user.
+ This can be used as a basis for more fine-grained access control.
+
+ <p>
+ The default implementation returns <A HREF="../../hudson/security/AuthorizationStrategy.html#getRootACL()"><CODE>getRootACL()</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.221</DD>
 </DL>
 </DD>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.220 API)
+Deprecated List (Hudson core 1.221 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-02">
+<META NAME="date" CONTENT="2008-06-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.220 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.220 API)";
+        parent.document.title="Deprecated List (Hudson core 1.221 API)";
     }
 }
 </SCRIPT>
@@ -122,6 +122,11 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>moved to stapler</I>&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/WriterOutputStream.html" title="class in hudson.util">hudson.util.WriterOutputStream</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use the one in stapler.</I>&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -163,6 +168,22 @@ function windowTitle()
  be removed but I'm not sure if it is considered part of the public API
  that needs to be maintained for backwards compatibility.
  Use <A HREF="hudson/Util.html#encode(java.lang.String)"><CODE>Util.encode(String)</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Item.html#getAbsoluteUrl()">hudson.model.Item.getAbsoluteUrl()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>This method shall <b>NEVER</b> be used during HTML page rendering, as it won't work with
+      network set up like Apache reverse proxy.
+      This method is only intended for the remote API clients who cannot resolve relative references
+      (even this won't work for the same reason, which should be fixed.)</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Run.html#getAbsoluteUrl()">hudson.model.Run.getAbsoluteUrl()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>This method shall <b>NEVER</b> be used during HTML page rendering, as it won't work with
+      network set up like Apache reverse proxy.
+      This method is only intended for the remote API clients who cannot resolve relative references
+      (even this won't work for the same reason, which should be fixed.)</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Job.html#getBuild(java.lang.String)">hudson.model.Job.getBuild(String)</A>
