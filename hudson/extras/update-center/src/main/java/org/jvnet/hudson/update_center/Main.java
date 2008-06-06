@@ -44,7 +44,7 @@ public class Main {
         JNProject p = jn.getProject("hudson");
 
         JSONObject root = new JSONObject();
-        root.put("updateCenterVersion","1");
+        root.put("updateCenterVersion","1");    // we'll bump the version when we make incompatible changes
         root.put("plugins", buildPlugins(p));
         root.put("core", buildCore(p));
 
