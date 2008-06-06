@@ -67,6 +67,8 @@ public class Main {
         JSONObject plugins = new JSONObject();
         for( JNFileFolder dir : pluginsFolder.getSubFolders().values() ) {
             System.out.println(dir.getName());
+            if(dir.getName().equals("google-desktop-gadget"))
+                continue;       // this is not really a Hudson plugin. So excluding for now
 
             VersionedFile latest = VersionedFile.findLatestFrom(dir);
             if(latest==null)
