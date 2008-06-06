@@ -4,6 +4,12 @@ import net.sf.json.JSONObject;
 import org.kohsuke.jnt.JNFile;
 import org.kohsuke.jnt.JNFileFolder;
 import org.kohsuke.jnt.ProcessingException;
+import org.apache.commons.io.IOUtils;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Represents {@link JNFile} that has the version number as the file name.
@@ -56,5 +62,16 @@ public final class VersionedFile implements Comparable<VersionedFile> {
 
     public int compareTo(VersionedFile that) {
         return this.version.compareTo(that.version);
+    }
+
+    public void downloadTo(File f) throws IOException {
+        InputStream in = file.getURL().openStream();
+        FileOutputStream out = new FileOutputStream(f);
+        try {
+            IOUtils.copyLarge(in, out);
+        } finally {
+            IOUtils.closeQuietly(in);
+            IOUtils.closeQuietly(out);
+        }
     }
 }
