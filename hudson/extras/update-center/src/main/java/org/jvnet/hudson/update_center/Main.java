@@ -16,7 +16,10 @@ import java.io.OutputStreamWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -26,7 +29,7 @@ public class Main {
     public File cacheDir = new File("./cache");
 
     @Option(name="-o",usage="json file")
-    public String output = "-";
+    public File output = new File("output.json");
 
     public static void main(String[] args) throws Exception {
         Main main = new Main();
@@ -45,8 +48,7 @@ public class Main {
         root.put("plugins", buildPlugins(p));
         root.put("core", buildCore(p));
 
-        Writer w = output.equals("-") ? new OutputStreamWriter(System.out) : new FileWriter(output);
-        PrintWriter pw = new PrintWriter(w);
+        PrintWriter pw = new PrintWriter(new FileWriter(output));
         pw.println("updateCenter.post(");
         root.write(pw);
         pw.println(");");
@@ -56,9 +58,11 @@ public class Main {
     /**
      * Build JSON for the plugin list.
      */
-    private static JSONObject buildPlugins(JNProject p) throws ProcessingException, IOException, ServiceException {
+    private JSONObject buildPlugins(JNProject p) throws ProcessingException, IOException, ServiceException {
         JNFileFolder pluginsFolder = p.getFolder("/plugins");
         ConfluencePluginList cpl = new ConfluencePluginList();
+
+        Cache cache = new Cache(cacheDir);
 
         JSONObject plugins = new JSONObject();
         for( JNFileFolder dir : pluginsFolder.getSubFolders().values() ) {
@@ -68,7 +72,7 @@ public class Main {
             if(latest==null)
                 continue;       // couldn't find it
 
-            Plugin plugin = new Plugin(dir.getName(),latest,cpl);
+            Plugin plugin = new Plugin(dir.getName(),latest,cpl,cache);
 
             if(plugin.page!=null)
                 System.out.println("=> "+plugin.page.getTitle());
@@ -76,13 +80,16 @@ public class Main {
 
             plugins.put(plugin.artifactId,plugin.toJSON());
         }
+
+        cache.save();
+
         return plugins;
     }
 
     /**
      * Build JSON for the core Hudson.
      */
-    private static JSONObject buildCore(JNProject p) throws ProcessingException {
+    private JSONObject buildCore(JNProject p) throws ProcessingException {
         JNFileFolder release = p.getFolder("/releases");
         VersionedFile latest = VersionedFile.findLatestFrom(release);
         JSONObject core = latest.toJSON("core");

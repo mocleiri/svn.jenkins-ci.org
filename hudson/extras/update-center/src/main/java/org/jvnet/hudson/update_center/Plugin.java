@@ -6,6 +6,9 @@ import java.net.URL;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.text.MessageFormat;
+import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 
 import org.dom4j.io.SAXReader;
 import org.dom4j.Document;
@@ -13,6 +16,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.Element;
 import net.sf.json.JSONObject;
+import net.sf.json.JSONArray;
 
 /**
  * A Hudson plugin.
@@ -34,10 +38,13 @@ public class Plugin {
      */
     public final RemotePageSummary page;
 
-    public Plugin(String artifactId, VersionedFile file, ConfluencePluginList cpl) {
+    public final Cache cache;
+
+    public Plugin(String artifactId, VersionedFile file, ConfluencePluginList cpl, Cache cache) {
         this.artifactId = artifactId;
         this.file = file;
         this.page = findPage(cpl);
+        this.cache = cache;
     }
 
     /**
@@ -71,12 +78,20 @@ public class Plugin {
         return cpl.findNearest(artifactId);
     }
 
-    public JSONObject toJSON() {
+    public JSONObject toJSON() throws IOException {
         JSONObject json = file.toJSON(artifactId);
         if(page!=null) {
             json.put("wiki",page.getUrl());
             json.put("title",page.getTitle());
         }
+
+        HpiFile hpi = new HpiFile(cache.obtain(this));
+        json.put("requiredCore",hpi.getRequiredHudsonVersion());
+        JSONArray deps = new JSONArray();
+        for (HpiFile.Dependency d : hpi.getDependencies())
+            deps.add(d.toJSON());
+        json.put("dependencies",deps);
+
         return json;
     }
 }
