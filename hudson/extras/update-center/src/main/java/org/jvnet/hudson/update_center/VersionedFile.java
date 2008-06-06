@@ -1,20 +1,16 @@
 package org.jvnet.hudson.update_center;
 
+import net.sf.json.JSONObject;
 import org.kohsuke.jnt.JNFile;
 import org.kohsuke.jnt.JNFileFolder;
 import org.kohsuke.jnt.ProcessingException;
 
-import java.io.PrintWriter;
-import java.io.FileWriter;
-import java.io.File;
-import java.io.IOException;
-
-import net.sf.json.JSONObject;
-
 /**
+ * Represents {@link JNFile} that has the version number as the file name.
+ *
  * @author Kohsuke Kawaguchi
  */
-public class VersionedFile implements Comparable<VersionedFile> {
+public final class VersionedFile implements Comparable<VersionedFile> {
     final JNFile file;
     final VersionNumber version;
 
