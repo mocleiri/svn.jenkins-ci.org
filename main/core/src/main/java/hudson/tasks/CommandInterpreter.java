@@ -6,6 +6,7 @@ import hudson.Util;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
+import hudson.model.ParametersAction;
 import hudson.model.TaskListener;
 
 import java.io.IOException;
@@ -40,7 +41,12 @@ public abstract class CommandInterpreter extends Builder {
         FilePath script=null;
         try {
             try {
-                script = ws.createTextTempFile("hudson", getFileExtension(), getContents(), false);
+                String contents = getContents();
+                ParametersAction parameters = build.getAction(ParametersAction.class);
+                if (parameters != null) {
+                	contents = parameters.substitute(contents);
+                }
+				script = ws.createTextTempFile("hudson", getFileExtension(), contents, false);
             } catch (IOException e) {
                 Util.displayIOException(e,listener);
                 e.printStackTrace(listener.fatalError(Messages.CommandInterpreter_UnableToProduceScript()));

@@ -167,11 +167,6 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
         updateTransientActions();
     }
 
-    @Override
-	public ACL getACL() {
-		return Hudson.getInstance().getAuthorizationStrategy().getACL(this);
-	}
-
 	/**
 
     protected void performDelete() throws IOException {
@@ -361,7 +356,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      */
     public boolean scheduleBuild() {
         if(isDisabled())    return false;
-        return Hudson.getInstance().getQueue().add(this);
+        return Hudson.getInstance().getQueue().add(this, getQuietPeriod());
     }
 
     /**
@@ -830,6 +825,10 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     protected HistoryWidget createHistoryWidget() {
         return new BuildHistoryWidget<R>(this,getBuilds(),HISTORY_ADAPTER);
     }
+    
+    public boolean isParameterized() {
+    	return getProperty(ParametersDefinitionProperty.class) != null;
+    }
 
 //
 //
@@ -842,6 +841,12 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     public void doBuild( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         BuildAuthorizationToken.checkPermission(this, authToken, req, rsp);
 
+        ParametersDefinitionProperty pp = getProperty(ParametersDefinitionProperty.class);
+        if (pp != null) {
+        	rsp.sendRedirect("parameters");
+        	return;
+        }
+        
         String delay = req.getParameter("delay");
         if (delay!=null) {
             if (!isDisabled()) {
