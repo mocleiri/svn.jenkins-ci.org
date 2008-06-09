@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-PluginWrapper (Hudson core 1.221 API)
+PluginWrapper (Hudson core 1.222 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-04">
+<META NAME="date" CONTENT="2008-06-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginWrapper (Hudson core 1.221 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginWrapper (Hudson core 1.221 API)";
+        parent.document.title="PluginWrapper (Hudson core 1.222 API)";
     }
 }
 </SCRIPT>
@@ -249,11 +249,28 @@ Represents a Hudson plug-in and associated control information
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#getUpdateInfo()">getUpdateInfo</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the plugin has <A HREF="../hudson/PluginWrapper.html#getUpdateInfo()"><CODE>an update</CODE></A>,
+ returns the <CODE>UpdateCenter.Plugin</CODE> object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/PluginWrapper.html#getVersion()">getVersion</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the version number of this plugin</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#hasUpdate()">hasUpdate</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this plugin has update in the update center.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -494,6 +511,37 @@ public boolean <B>isEnabled</B>()</PRE>
 <DL>
 <DD>If true, the plugin is going to be activated next time
  Hudson runs.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUpdateInfo()"><!-- --></A><H3>
+getUpdateInfo</H3>
+<PRE>
+public <A HREF="../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A> <B>getUpdateInfo</B>()</PRE>
+<DL>
+<DD>If the plugin has <A HREF="../hudson/PluginWrapper.html#getUpdateInfo()"><CODE>an update</CODE></A>,
+ returns the <CODE>UpdateCenter.Plugin</CODE> object.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasUpdate()"><!-- --></A><H3>
+hasUpdate</H3>
+<PRE>
+public boolean <B>hasUpdate</B>()</PRE>
+<DL>
+<DD>Returns true if this plugin has update in the update center.
+
+ <p>
+ This method is conservative in the sense that if the version number is incomprehensible,
+ it always returns false.
 <P>
 <DD><DL>
 </DL>

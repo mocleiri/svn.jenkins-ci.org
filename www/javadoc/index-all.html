@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.221 API)
+Index (Hudson core 1.222 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-04">
+<META NAME="date" CONTENT="2008-06-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.221 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.221 API)";
+        parent.document.title="Index (Hudson core 1.222 API)";
     }
 }
 </SCRIPT>
@@ -1357,6 +1357,9 @@ Static variable in class hudson.model.<A HREF="./hudson/model/RunMap.html" title
 <DT><A HREF="./hudson/model/RunMap.html#comparator()"><B>comparator()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/RunMap.html" title="class in hudson.model">RunMap</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/DependencyGraph.html#compare(hudson.model.AbstractProject, hudson.model.AbstractProject)"><B>compare(AbstractProject, AbstractProject)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/DependencyGraph.html" title="class in hudson.model">DependencyGraph</A>
+<DD>Compare to Projects based on the topological order defined by this Dependency Graph
 <DT><A HREF="./hudson/util/CaseInsensitiveComparator.html#compare(java.lang.String, java.lang.String)"><B>compare(String, String)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/CaseInsensitiveComparator.html" title="class in hudson.util">CaseInsensitiveComparator</A>
 <DD>&nbsp;
@@ -2092,6 +2095,9 @@ Static variable in class hudson.scm.<A HREF="./hudson/scm/EditType.html" title="
 <DT><A HREF="./hudson/security/Permission.html#DELETE"><B>DELETE</B></A> - 
 Static variable in class hudson.security.<A HREF="./hudson/security/Permission.html" title="class in hudson.security">Permission</A>
 <DD>Generic delete access.
+<DT><A HREF="./hudson/util/TextFile.html#delete()"><B>delete()</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/TextFile.html" title="class in hudson.util">TextFile</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/FilePath.html#deleteContents()"><B>deleteContents()</B></A> - 
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>Deletes all the contents of this directory, but not the directory itself
@@ -2577,6 +2583,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/JavadocArchiver.JavadocActi
 <DT><A HREF="./hudson/util/DoubleLaunchChecker.html#doDynamic(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDynamic(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/DoubleLaunchChecker.html" title="class in hudson.util">DoubleLaunchChecker</A>
 <DD>Serve all URLs with the index view.
+<DT><A HREF="./hudson/util/ErrorObject.html#doDynamic(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDynamic(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/ErrorObject.html" title="class in hudson.util">ErrorObject</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/HudsonIsLoading.html#doDynamic(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDynamic(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/HudsonIsLoading.html" title="class in hudson.util">HudsonIsLoading</A>
 <DD>&nbsp;
@@ -2646,6 +2655,12 @@ Method in class hudson.scm.<A HREF="./hudson/scm/AbstractScmTagAction.html" titl
 <DT><A HREF="./hudson/search/Search.html#doIndex(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doIndex(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.search.<A HREF="./hudson/search/Search.html" title="class in hudson.search">Search</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.Plugin.html#doInstall(org.kohsuke.stapler.StaplerResponse)"><B>doInstall(StaplerResponse)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>
+<DD>Making the installation web bound.
+<DT><A HREF="./hudson/PluginManager.html#doInstall(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doInstall(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.<A HREF="./hudson/PluginManager.html" title="class in hudson">PluginManager</A>
+<DD>Performs the installation of the plugins.
 <DT><A HREF="./hudson/model/Hudson.html#doItemExistsCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doItemExistsCheck(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Checks if the top-level item with the given name exists.
@@ -2719,6 +2734,9 @@ Method in class hudson.slaves.<A HREF="./hudson/slaves/SlaveComputer.html" title
 <DT><A HREF="./hudson/model/LargeText.html#doProgressText(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doProgressText(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/LargeText.html" title="class in hudson.model">LargeText</A>
 <DD><B>Deprecated.</B>&nbsp;Implements the progressive text handling.
+<DT><A HREF="./hudson/PluginManager.html#doProxyConfigure(java.lang.String, java.lang.String, org.kohsuke.stapler.StaplerResponse)"><B>doProxyConfigure(String, String, StaplerResponse)</B></A> - 
+Method in class hudson.<A HREF="./hudson/PluginManager.html" title="class in hudson">PluginManager</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#doQuietDown(org.kohsuke.stapler.StaplerResponse)"><B>doQuietDown(StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
@@ -3068,6 +3086,9 @@ Method in class hudson.util.<A HREF="./hudson/util/StreamTaskListener.html" titl
 <DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.SignupInfo.html#errorMessage"><B>errorMessage</B></A> - 
 Variable in class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecurityRealm.SignupInfo.html" title="class in hudson.security">HudsonPrivateSecurityRealm.SignupInfo</A>
 <DD>To display an error message, set it here.
+<DT><A HREF="./hudson/util/ErrorObject.html" title="class in hudson.util"><B>ErrorObject</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Basis for error model objects.<DT><A HREF="./hudson/util/ErrorObject.html#ErrorObject()"><B>ErrorObject()</B></A> - 
+Constructor for class hudson.util.<A HREF="./hudson/util/ErrorObject.html" title="class in hudson.util">ErrorObject</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/FormFieldValidator.html#errorWithMarkup(java.lang.String)"><B>errorWithMarkup(String)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A>
 <DD>Sends out an HTML fragment that indicates an error.
@@ -3080,6 +3101,9 @@ Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudso
 <DT><A HREF="./hudson/security/ACL.html#EVERYONE"><B>EVERYONE</B></A> - 
 Static variable in class hudson.security.<A HREF="./hudson/security/ACL.html" title="class in hudson.security">ACL</A>
 <DD>Special <CODE>Sid</CODE> that represents "everyone", even including anonymous users.
+<DT><A HREF="./hudson/util/HudsonFailedToLoad.html#exception"><B>exception</B></A> - 
+Variable in class hudson.util.<A HREF="./hudson/util/HudsonFailedToLoad.html" title="class in hudson.util">HudsonFailedToLoad</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/InsufficientPermissionDetected.html#exception"><B>exception</B></A> - 
 Variable in class hudson.util.<A HREF="./hudson/util/InsufficientPermissionDetected.html" title="class in hudson.util">InsufficientPermissionDetected</A>
 <DD>&nbsp;
@@ -3463,6 +3487,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/TaskThread.ListenerA
 Constructor for class hudson.util.<A HREF="./hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/FormFieldValidator.html#FormFieldValidator(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.security.Permission)"><B>FormFieldValidator(StaplerRequest, StaplerResponse, Permission)</B></A> - 
+Constructor for class hudson.util.<A HREF="./hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/util/FormFieldValidator.html#FormFieldValidator(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.security.AccessControlled, hudson.security.Permission)"><B>FormFieldValidator(StaplerRequest, StaplerResponse, AccessControlled, Permission)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/FormFieldValidator.Executable.html" title="class in hudson.util"><B>FormFieldValidator.Executable</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Checks a valid executable binary (specified in the 'value' query parameter).<DT><A HREF="./hudson/util/FormFieldValidator.Executable.html#FormFieldValidator.Executable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>FormFieldValidator.Executable(StaplerRequest, StaplerResponse)</B></A> - 
@@ -4858,9 +4885,18 @@ Method in class hudson.model.<A HREF="./hudson/model/Run.KeepLogBuildBadge.html"
 <DT><A HREF="./hudson/model/TopLevelItemDescriptor.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A>
 <DD>Human readable name of this kind of configurable object.
+<DT><A HREF="./hudson/model/UpdateCenter.html#getDisplayName()"><B>getDisplayName()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.Plugin.html#getDisplayName()"><B>getDisplayName()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/User.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/User.html" title="class in hudson.model">User</A>
 <DD>Returns the user name.
+<DT><A HREF="./hudson/PluginManager.html#getDisplayName()"><B>getDisplayName()</B></A> - 
+Method in class hudson.<A HREF="./hudson/PluginManager.html" title="class in hudson">PluginManager</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/scm/browsers/FishEyeCVS.DescriptorImpl.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class hudson.scm.browsers.<A HREF="./hudson/scm/browsers/FishEyeCVS.DescriptorImpl.html" title="class in hudson.scm.browsers">FishEyeCVS.DescriptorImpl</A>
 <DD>&nbsp;
@@ -5606,6 +5642,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/Ant.DescriptorImpl.html" ti
 <DT><A HREF="./hudson/tasks/Maven.DescriptorImpl.html#getInstallations()"><B>getInstallations()</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Maven.DescriptorImpl.html" title="class in hudson.tasks">Maven.DescriptorImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.Plugin.html#getInstalled()"><B>getInstalled()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>
+<DD>If some version of this plugin is currently installed, return <A HREF="./hudson/PluginWrapper.html" title="class in hudson"><CODE>PluginWrapper</CODE></A>.
 <DT><A HREF="./hudson/model/Hudson.html#getInstance()"><B>getInstance()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
@@ -5746,6 +5785,9 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
 <DT><A HREF="./hudson/model/Fingerprint.html#getJobs()"><B>getJobs()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.html" title="class in hudson.model">Fingerprint</A>
 <DD>Gets the sorted list of job names where this jar is used.
+<DT><A HREF="./hudson/model/UpdateCenter.html#getJobs()"><B>getJobs()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
+<DD>Returns the list of <A HREF="./hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model"><CODE>UpdateCenter.UpdateCenterJob</CODE></A> representing scheduled installation attempts.
 <DT><A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#getJobs()"><B>getJobs()</B></A> - 
 Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.TestResultAction</A>
 <DD>Gets the jobs to be monitored.
@@ -6339,6 +6381,9 @@ Method in class hudson.security.<A HREF="./hudson/security/PermissionGroup.html"
 <DT><A HREF="./hudson/model/Hudson.html#getPlugin(java.lang.String)"><B>getPlugin(String)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Gets the plugin object from its short name.
+<DT><A HREF="./hudson/model/UpdateCenter.html#getPlugin(java.lang.String)"><B>getPlugin(String)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
+<DD>Gets the information about a specific plugin.
 <DT><A HREF="./hudson/PluginManager.html#getPlugin(java.lang.String)"><B>getPlugin(String)</B></A> - 
 Method in class hudson.<A HREF="./hudson/PluginManager.html" title="class in hudson">PluginManager</A>
 <DD>&nbsp;
@@ -6881,6 +6926,9 @@ Method in class hudson.model.<A HREF="./hudson/model/User.html" title="class in 
 <DT><A HREF="./hudson/model/View.html#getSearchUrl()"><B>getSearchUrl()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/PluginManager.html#getSearchUrl()"><B>getSearchUrl()</B></A> - 
+Method in class hudson.<A HREF="./hudson/PluginManager.html" title="class in hudson">PluginManager</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/search/SearchItem.html#getSearchUrl()"><B>getSearchUrl()</B></A> - 
 Method in interface hudson.search.<A HREF="./hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>
 <DD>Returns the URL of this item relative to the parent <A HREF="./hudson/search/SearchItem.html" title="interface in hudson.search"><CODE>SearchItem</CODE></A>.
@@ -6987,6 +7035,12 @@ Method in class hudson.triggers.<A HREF="./hudson/triggers/Trigger.html" title="
 <DT><A HREF="./hudson/util/spring/BeanBuilder.html#getSpringConfig()"><B>getSpringConfig()</B></A> - 
 Method in class hudson.util.spring.<A HREF="./hudson/util/spring/BeanBuilder.html" title="class in hudson.util.spring">BeanBuilder</A>
 <DD>Retrieves the RuntimeSpringConfiguration instance used the the BeanBuilder
+<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.Failure.html#getStackTrace()"><B>getStackTrace()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.Failure.html" title="class in hudson.model">UpdateCenter.InstallationJob.Failure</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/util/HudsonFailedToLoad.html#getStackTrace()"><B>getStackTrace()</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/HudsonFailedToLoad.html" title="class in hudson.util">HudsonFailedToLoad</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/NoTempDir.html#getStackTrace()"><B>getStackTrace()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/NoTempDir.html" title="class in hudson.util">NoTempDir</A>
 <DD>&nbsp;
@@ -6995,6 +7049,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.Range.html" tit
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/junit/CaseResult.html#getStatus()"><B>getStatus()</B></A> - 
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.ConnectionCheckJob.html#getStatuses()"><B>getStatuses()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.ConnectionCheckJob.html" title="class in hudson.model">UpdateCenter.ConnectionCheckJob</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/junit/SuiteResult.html#getStderr()"><B>getStderr()</B></A> - 
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/SuiteResult.html" title="class in hudson.tasks.junit">SuiteResult</A>
@@ -7028,6 +7085,9 @@ Method in class hudson.util.<A HREF="./hudson/util/IncompatibleVMDetected.html" 
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/RemotingDiagnostics.html#getSystemProperties(hudson.remoting.VirtualChannel)"><B>getSystemProperties(VirtualChannel)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/RemotingDiagnostics.html" title="class in hudson.util">RemotingDiagnostics</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/Functions.html#getSystemProperty(java.lang.String)"><B>getSystemProperty(String)</B></A> - 
+Method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/matrix/Layouter.html#getT(hudson.matrix.Combination)"><B>getT(Combination)</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/Layouter.html" title="class in hudson.matrix">Layouter</A>
@@ -7215,6 +7275,13 @@ Static method in class hudson.model.<A HREF="./hudson/model/User.html" title="cl
 <DT><A HREF="./hudson/model/Hudson.html#getUpdateCenter()"><B>getUpdateCenter()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/PluginWrapper.html#getUpdateInfo()"><B>getUpdateInfo()</B></A> - 
+Method in class hudson.<A HREF="./hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>
+<DD>If the plugin has <A HREF="./hudson/PluginWrapper.html#getUpdateInfo()"><CODE>an update</CODE></A>,
+ returns the <CODE>UpdateCenter.Plugin</CODE> object.
+<DT><A HREF="./hudson/model/UpdateCenter.html#getUpdates()"><B>getUpdates()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
+<DD>Returns the list of plugins that are updates to currently installed ones.
 <DT><A HREF="./hudson/model/DependencyGraph.html#getUpstream(hudson.model.AbstractProject)"><B>getUpstream(AbstractProject)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/DependencyGraph.html" title="class in hudson.model">DependencyGraph</A>
 <DD>Gets all the immediate upstream projects (IOW backward edges) of the given project.
@@ -7721,6 +7788,12 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/BuildTrigger.html" title="c
 <DT><A HREF="./hudson/model/Executor.html#hasStopPermission()"><B>hasStopPermission()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Executor.html" title="class in hudson.model">Executor</A>
 <DD>Checks if the current user has a permission to stop this build.
+<DT><A HREF="./hudson/PluginWrapper.html#hasUpdate()"><B>hasUpdate()</B></A> - 
+Method in class hudson.<A HREF="./hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>
+<DD>Returns true if this plugin has update in the update center.
+<DT><A HREF="./hudson/model/UpdateCenter.html#hasUpdates()"><B>hasUpdates()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
+<DD>Does any of the plugin has updates?
 <DT><A HREF="./hudson/model/RunMap.html#headMap(java.lang.Integer)"><B>headMap(Integer)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/RunMap.html" title="class in hudson.model">RunMap</A>
 <DD>&nbsp;
@@ -7821,6 +7894,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#Hudson_ViewName()"><B>Hudson_ViewName()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>All
+<DT><A HREF="./hudson/util/HudsonFailedToLoad.html" title="class in hudson.util"><B>HudsonFailedToLoad</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Model object used to display the generic error when Hudson start up fails fatally during initialization.<DT><A HREF="./hudson/util/HudsonFailedToLoad.html#HudsonFailedToLoad(java.lang.Throwable)"><B>HudsonFailedToLoad(Throwable)</B></A> - 
+Constructor for class hudson.util.<A HREF="./hudson/util/HudsonFailedToLoad.html" title="class in hudson.util">HudsonFailedToLoad</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/security/HudsonFilter.html" title="class in hudson.security"><B>HudsonFilter</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD><CODE>Filter</CODE> that Hudson uses to implement security support.<DT><A HREF="./hudson/security/HudsonFilter.html#HudsonFilter()"><B>HudsonFilter()</B></A> - 
 Constructor for class hudson.security.<A HREF="./hudson/security/HudsonFilter.html" title="class in hudson.security">HudsonFilter</A>
 <DD>&nbsp;
@@ -7853,6 +7929,12 @@ Variable in class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.html" t
 <DT><A HREF="./hudson/model/Queue.WaitingItem.html#id"><B>id</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A>
 <DD>Unique number of this <A HREF="./hudson/model/Queue.WaitingItem.html" title="class in hudson.model"><CODE>Queue.WaitingItem</CODE></A>.
+<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#id"><B>id</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A>
+<DD>Unique ID that identifies this job.
+<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.InstallationStatus.html#id"><B>id</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.InstallationStatus.html" title="class in hudson.model">UpdateCenter.InstallationJob.InstallationStatus</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Run.html#ID_FORMATTER"><B>ID_FORMATTER</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>&nbsp;
@@ -7913,6 +7995,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/ComputerSet.html" ti
 <DT><A HREF="./hudson/maven/reporters/MavenArtifactRecord.html#install(hudson.model.TaskListener)"><B>install(TaskListener)</B></A> - 
 Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenArtifactRecord.html" title="class in hudson.maven.reporters">MavenArtifactRecord</A>
 <DD>Installs the artifact to the local Maven repository.
+<DT><A HREF="./hudson/model/UpdateCenter.Plugin.html#install()"><B>install()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>
+<DD>Schedules the installation of this plugin.
 <DT><A HREF="./hudson/scm/browsers/ViewSVN.DescriptorImpl.html#INSTANCE"><B>INSTANCE</B></A> - 
 Static variable in class hudson.scm.browsers.<A HREF="./hudson/scm/browsers/ViewSVN.DescriptorImpl.html" title="class in hudson.scm.browsers">ViewSVN.DescriptorImpl</A>
 <DD>&nbsp;
@@ -10123,6 +10208,9 @@ Variable in class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecuri
 <DT><A HREF="./hudson/maven/reporters/ReportAction.Entry.html#path"><B>path</B></A> - 
 Variable in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/ReportAction.Entry.html" title="class in hudson.maven.reporters">ReportAction.Entry</A>
 <DD>Relative path to the top of the report withtin the project reporting directory.
+<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.Installing.html#percentage"><B>percentage</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.Installing.html" title="class in hudson.model">UpdateCenter.InstallationJob.Installing</A>
+<DD>% completed download, or -1 if the percentage is not known.
 <DT><A HREF="./hudson/maven/MavenRedeployer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><B>perform(AbstractBuild&lt;?, ?&gt;, Launcher, BuildListener)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenRedeployer.html" title="class in hudson.maven">MavenRedeployer</A>
 <DD>&nbsp;
@@ -10238,7 +10326,10 @@ Static variable in class hudson.model.<A HREF="./hudson/model/View.html" title="
 Static variable in class hudson.scm.<A HREF="./hudson/scm/SCM.html" title="class in hudson.scm">SCM</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/PersistenceRoot.html" title="interface in hudson.model"><B>PersistenceRoot</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Root object of a persisted object tree
- that gets its own file system directory.<DT><A HREF="./hudson/Plugin.html" title="class in hudson"><B>Plugin</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD>Base class of Hudson plugin.<DT><A HREF="./hudson/Plugin.html#Plugin()"><B>Plugin()</B></A> - 
+ that gets its own file system directory.<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#plugin"><B>plugin</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A>
+<DD>What plugin are we trying to install?
+<DT><A HREF="./hudson/Plugin.html" title="class in hudson"><B>Plugin</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD>Base class of Hudson plugin.<DT><A HREF="./hudson/Plugin.html#Plugin()"><B>Plugin()</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/Plugin.html" title="class in hudson">Plugin</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#pluginManager"><B>pluginManager</B></A> - 
@@ -10389,6 +10480,9 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
 <DD>&nbsp;
 <DT><A HREF="./hudson/Functions.html#printThrowable(java.lang.Throwable)"><B>printThrowable(Throwable)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.Failure.html#problem"><B>problem</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.Failure.html" title="class in hudson.model">UpdateCenter.InstallationJob.Failure</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/Proc.html" title="class in hudson"><B>Proc</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD>External process wrapper.<DT><A HREF="./hudson/Proc.LocalProc.html" title="class in hudson"><B>Proc.LocalProc</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD>Locally launched process.<DT><A HREF="./hudson/Proc.LocalProc.html#Proc.LocalProc(java.lang.String, java.util.Map, java.io.OutputStream, java.io.File)"><B>Proc.LocalProc(String, Map&lt;String, String&gt;, OutputStream, File)</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/Proc.LocalProc.html" title="class in hudson">Proc.LocalProc</A>
@@ -11007,6 +11101,12 @@ Method in interface hudson.model.<A HREF="./hudson/model/Run.Runner.html" title=
 <DT><A HREF="./hudson/model/TaskThread.html#run()"><B>run()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/TaskThread.html" title="class in hudson.model">TaskThread</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.ConnectionCheckJob.html#run()"><B>run()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.ConnectionCheckJob.html" title="class in hudson.model">UpdateCenter.ConnectionCheckJob</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#run()"><B>run()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/scm/CVSSCM.html#run(hudson.Launcher, hudson.util.ArgumentListBuilder, hudson.model.TaskListener, hudson.FilePath, java.io.OutputStream)"><B>run(Launcher, ArgumentListBuilder, TaskListener, FilePath, OutputStream)</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.html" title="class in hudson.scm">CVSSCM</A>
 <DD>Invokes the command with the specified command line option and wait for its completion.
@@ -11125,6 +11225,9 @@ Method in interface hudson.util.<A HREF="./hudson/util/DescribableList.Owner.htm
 <DD>Called whenever the list is changed, so that it can be saved.
 <DT><A HREF="./hudson/model/Job.html#saveNextBuildNumber()"><B>saveNextBuildNumber()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.UpdateCenterJob.html#schedule()"><B>schedule()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model">UpdateCenter.UpdateCenterJob</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/DoubleLaunchChecker.html#schedule()"><B>schedule()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/DoubleLaunchChecker.html" title="class in hudson.util">DoubleLaunchChecker</A>
@@ -11732,6 +11835,9 @@ Method in class hudson.scheduler.<A HREF="./hudson/scheduler/CrontabParser.html"
 <DT><A HREF="./hudson/model/Run.html#state"><B>state</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>The current build state.
+<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#status"><B>status</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A>
+<DD>Immutable object representing the current state of this job.
 <DT><A HREF="./hudson/maven/MavenEmbedder.html#stop()"><B>stop()</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A>
 <DD>&nbsp;
@@ -12419,11 +12525,35 @@ Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestRes
 <DT><A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model"><B>UpdateCenter</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Controls update center capability.<DT><A HREF="./hudson/model/UpdateCenter.html#UpdateCenter()"><B>UpdateCenter()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.ConnectionCheckJob.html" title="class in hudson.model"><B>UpdateCenter.ConnectionCheckJob</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Tests the internet connectivity.<DT><A HREF="./hudson/model/UpdateCenter.ConnectionCheckJob.html#UpdateCenter.ConnectionCheckJob()"><B>UpdateCenter.ConnectionCheckJob()</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.ConnectionCheckJob.html" title="class in hudson.model">UpdateCenter.ConnectionCheckJob</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.Data.html" title="class in hudson.model"><B>UpdateCenter.Data</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>In-memory representation of the update center data.<DT><A HREF="./hudson/model/UpdateCenter.Entry.html" title="class in hudson.model"><B>UpdateCenter.Entry</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/UpdateCenter.Entry.html#UpdateCenter.Entry(net.sf.json.JSONObject)"><B>UpdateCenter.Entry(JSONObject)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.Entry.html" title="class in hudson.model">UpdateCenter.Entry</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model"><B>UpdateCenter.InstallationJob</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Represents the state of the installation activity of one plugin.<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#UpdateCenter.InstallationJob(hudson.model.UpdateCenter.Plugin)"><B>UpdateCenter.InstallationJob(UpdateCenter.Plugin)</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.Failure.html" title="class in hudson.model"><B>UpdateCenter.InstallationJob.Failure</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Indicates that the installation of a plugin failed.<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.Failure.html#UpdateCenter.InstallationJob.Failure(java.lang.Throwable)"><B>UpdateCenter.InstallationJob.Failure(Throwable)</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.Failure.html" title="class in hudson.model">UpdateCenter.InstallationJob.Failure</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.InstallationStatus.html" title="class in hudson.model"><B>UpdateCenter.InstallationJob.InstallationStatus</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Indicates the status or the result of a plugin installation.<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.InstallationStatus.html#UpdateCenter.InstallationJob.InstallationStatus()"><B>UpdateCenter.InstallationJob.InstallationStatus()</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.InstallationStatus.html" title="class in hudson.model">UpdateCenter.InstallationJob.InstallationStatus</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.Installing.html" title="class in hudson.model"><B>UpdateCenter.InstallationJob.Installing</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Installation of a plugin is in progress.<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.Installing.html#UpdateCenter.InstallationJob.Installing(int)"><B>UpdateCenter.InstallationJob.Installing(int)</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.Installing.html" title="class in hudson.model">UpdateCenter.InstallationJob.Installing</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.Pending.html" title="class in hudson.model"><B>UpdateCenter.InstallationJob.Pending</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Indicates that the plugin is waiting for its turn for installation.<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.Pending.html#UpdateCenter.InstallationJob.Pending()"><B>UpdateCenter.InstallationJob.Pending()</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.Pending.html" title="class in hudson.model">UpdateCenter.InstallationJob.Pending</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.Success.html" title="class in hudson.model"><B>UpdateCenter.InstallationJob.Success</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Indicates that the plugin was successfully installed.<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.Success.html#UpdateCenter.InstallationJob.Success()"><B>UpdateCenter.InstallationJob.Success()</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.Success.html" title="class in hudson.model">UpdateCenter.InstallationJob.Success</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model"><B>UpdateCenter.Plugin</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/UpdateCenter.Plugin.html#UpdateCenter.Plugin(net.sf.json.JSONObject)"><B>UpdateCenter.Plugin(JSONObject)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model"><B>UpdateCenter.UpdateCenterJob</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Things that <A HREF="./hudson/model/UpdateCenter.html#installerService"><CODE>UpdateCenter.installerService</CODE></A> executes.<DT><A HREF="./hudson/model/UpdateCenter.UpdateCenterJob.html#UpdateCenter.UpdateCenterJob()"><B>UpdateCenter.UpdateCenterJob()</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model">UpdateCenter.UpdateCenterJob</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Job.html#updateNextBuildNumber(int)"><B>updateNextBuildNumber(int)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>

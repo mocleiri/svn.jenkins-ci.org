@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SidACL (Hudson core 1.221 API)
+SidACL (Hudson core 1.222 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-04">
+<META NAME="date" CONTENT="2008-06-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SidACL (Hudson core 1.221 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SidACL (Hudson core 1.221 API)";
+        parent.document.title="SidACL (Hudson core 1.222 API)";
     }
 }
 </SCRIPT>
@@ -287,9 +287,17 @@ protected abstract java.lang.Boolean <B>hasPermission</B>(org.acegisecurity.acls
  <A HREF="../../hudson/security/SidACL.html#hasPermission(org.acegisecurity.Authentication, hudson.security.Permission)"><CODE>hasPermission(Authentication, Permission)</CODE></A> is implemented
  by checking authentication's <CODE>GrantedAuthority</CODE> by using
  this method.
+
+ <p>
+ It is the implementor's responsibility to recognize <A HREF="../../hudson/security/Permission.html#impliedBy"><CODE>Permission.impliedBy</CODE></A>
+ and take that into account.
 <P>
 <DD><DL>
-</DL>
+
+<DT><B>Returns:</B><DD>true if the access should be granted, false if it should be denied.
+      The null value indicates that the ACL does no rule for this Sid/Permission
+      combination. The caller can decide what to do &mash; such as consulting the higher level ACL,
+      or denying the access (if the model is no-access-by-default.)</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

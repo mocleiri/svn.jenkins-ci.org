@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.221 API)
+Functions (Hudson core 1.222 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-04">
+<META NAME="date" CONTENT="2008-06-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.221 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.221 API)";
+        parent.document.title="Functions (Hudson core 1.222 API)";
     }
 }
 </SCRIPT>
@@ -579,6 +579,14 @@ Utility functions used in views.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.util.Map</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#getSystemProperties()">getSystemProperties</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getSystemProperty(java.lang.String)">getSystemProperty</A></B>(java.lang.String&nbsp;key)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1753,6 +1761,17 @@ public static java.lang.String <B>toEmailSafeString</B>(java.lang.String&nbsp;pr
  See http://en.wikipedia.org/wiki/E-mail_address for the details,
  but here the vocabulary is even more restricted.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSystemProperty(java.lang.String)"><!-- --></A><H3>
+getSystemProperty</H3>
+<PRE>
+public java.lang.String <B>getSystemProperty</B>(java.lang.String&nbsp;key)</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

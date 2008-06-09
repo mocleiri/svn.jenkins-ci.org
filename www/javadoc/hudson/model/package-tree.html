@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.model Class Hierarchy (Hudson core 1.221 API)
+hudson.model Class Hierarchy (Hudson core 1.222 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-04">
+<META NAME="date" CONTENT="2008-06-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model Class Hierarchy (Hudson core 1.221 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model Class Hierarchy (Hudson core 1.221 API)";
+        parent.document.title="hudson.model Class Hierarchy (Hudson core 1.222 API)";
     }
 }
 </SCRIPT>
@@ -151,7 +151,8 @@ Class Hierarchy
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/ListView.html" title="class in hudson.model"><B>ListView</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/MyView.html" title="class in hudson.model"><B>MyView</B></A></UL>
 </UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/BuildAuthorizationToken.html" title="class in hudson.model"><B>BuildAuthorizationToken</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/ComputerSet.html" title="class in hudson.model"><B>ComputerSet</B></A> (implements hudson.model.<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>)
-<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/DependencyGraph.html" title="class in hudson.model"><B>DependencyGraph</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><B>Descriptor</B></A>&lt;T&gt;<UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/DependencyGraph.html" title="class in hudson.model"><B>DependencyGraph</B></A> (implements java.util.Comparator&lt;T&gt;)
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><B>Descriptor</B></A>&lt;T&gt;<UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model"><B>JobPropertyDescriptor</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model"><B>TopLevelItemDescriptor</B></A><UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/ExternalJob.DescriptorImpl.html" title="class in hudson.model"><B>ExternalJob.DescriptorImpl</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/FreeStyleProject.DescriptorImpl.html" title="class in hudson.model"><B>FreeStyleProject.DescriptorImpl</B></A></UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model"><B>UserPropertyDescriptor</B></A></UL>
@@ -194,8 +195,14 @@ Class Hierarchy
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/FingerprintCleanupThread.html" title="class in hudson.model"><B>FingerprintCleanupThread</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/WorkspaceCleanupThread.html" title="class in hudson.model"><B>WorkspaceCleanupThread</B></A></UL>
 </UL>
 </UL>
-<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.html" title="class in hudson.model"><B>UpdateCenter</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.Data.html" title="class in hudson.model"><B>UpdateCenter.Data</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.Entry.html" title="class in hudson.model"><B>UpdateCenter.Entry</B></A><UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.html" title="class in hudson.model"><B>UpdateCenter</B></A> (implements hudson.model.<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>)
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.Data.html" title="class in hudson.model"><B>UpdateCenter.Data</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.Entry.html" title="class in hudson.model"><B>UpdateCenter.Entry</B></A><UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model"><B>UpdateCenter.Plugin</B></A></UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.InstallationJob.InstallationStatus.html" title="class in hudson.model"><B>UpdateCenter.InstallationJob.InstallationStatus</B></A><UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.InstallationJob.Failure.html" title="class in hudson.model"><B>UpdateCenter.InstallationJob.Failure</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.InstallationJob.Installing.html" title="class in hudson.model"><B>UpdateCenter.InstallationJob.Installing</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.InstallationJob.Pending.html" title="class in hudson.model"><B>UpdateCenter.InstallationJob.Pending</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.InstallationJob.Success.html" title="class in hudson.model"><B>UpdateCenter.InstallationJob.Success</B></A></UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model"><B>UpdateCenter.UpdateCenterJob</B></A> (implements java.lang.Runnable)
+<UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.ConnectionCheckJob.html" title="class in hudson.model"><B>UpdateCenter.ConnectionCheckJob</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model"><B>UpdateCenter.InstallationJob</B></A></UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UserProperties.html" title="class in hudson.model"><B>UserProperties</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UserProperty.html" title="class in hudson.model"><B>UserProperty</B></A> (implements hudson.model.<A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/View.People.html" title="class in hudson.model"><B>View.People</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/View.UserInfo.html" title="class in hudson.model"><B>View.UserInfo</B></A> (implements java.lang.Comparable&lt;T&gt;)
 </UL>

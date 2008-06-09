@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-UpdateCenter.Plugin (Hudson core 1.221 API)
+UpdateCenter.Plugin (Hudson core 1.222 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-04">
+<META NAME="date" CONTENT="2008-06-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter.Plugin (Hudson core 1.221 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter.Plugin (Hudson core 1.221 API)";
+        parent.document.title="UpdateCenter.Plugin (Hudson core 1.222 API)";
     }
 }
 </SCRIPT>
@@ -56,8 +56,8 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/UpdateCenter.Entry.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/User.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/UpdateCenter.InstallationJob.Success.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/UpdateCenter.Plugin.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="UpdateCenter.Plugin.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,9 +77,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#methods_inherited_from_class_java.lang.Object">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;METHOD</FONT></TD>
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -102,7 +102,7 @@ java.lang.Object
 </DL>
 <HR>
 <DL>
-<DT><PRE>public static final class <B>UpdateCenter.Plugin</B><DT>extends <A HREF="../../hudson/model/UpdateCenter.Entry.html" title="class in hudson.model">UpdateCenter.Entry</A></DL>
+<DT><PRE>public final class <B>UpdateCenter.Plugin</B><DT>extends <A HREF="../../hudson/model/UpdateCenter.Entry.html" title="class in hudson.model">UpdateCenter.Entry</A></DL>
 </PRE>
 
 <P>
@@ -168,6 +168,38 @@ java.lang.Object
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.Plugin.html#doInstall(org.kohsuke.stapler.StaplerResponse)">doInstall</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making the installation web bound.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.Plugin.html#getDisplayName()">getDisplayName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.Plugin.html#getInstalled()">getInstalled</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If some version of this plugin is currently installed, return <A HREF="../../hudson/PluginWrapper.html" title="class in hudson"><CODE>PluginWrapper</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.Plugin.html#install()">install</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules the installation of this plugin.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -209,6 +241,10 @@ title</H3>
 public final java.lang.String <B>title</B></PRE>
 <DL>
 <DD>Human readable title of the plugin, taken from Wiki page.
+ Can be null.
+
+ <p>
+ beware of XSS vulnerability since this data comes from Wiki
 <P>
 <DL>
 </DL>
@@ -230,6 +266,73 @@ UpdateCenter.Plugin</H3>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>UpdateCenter.Plugin</B>(net.sf.json.JSONObject&nbsp;o)</PRE>
 <DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getDisplayName()"><!-- --></A><H3>
+getDisplayName</H3>
+<PRE>
+public java.lang.String <B>getDisplayName</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInstalled()"><!-- --></A><H3>
+getInstalled</H3>
+<PRE>
+public <A HREF="../../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A> <B>getInstalled</B>()</PRE>
+<DL>
+<DD>If some version of this plugin is currently installed, return <A HREF="../../hudson/PluginWrapper.html" title="class in hudson"><CODE>PluginWrapper</CODE></A>.
+ Otherwise null.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="install()"><!-- --></A><H3>
+install</H3>
+<PRE>
+public void <B>install</B>()</PRE>
+<DL>
+<DD>Schedules the installation of this plugin.
+
+ <p>
+ This is mainly intended to be called from the UI. The actual installation work happens
+ asynchronously in another thread.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doInstall(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doInstall</H3>
+<PRE>
+public void <B>doInstall</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+               throws java.io.IOException</PRE>
+<DL>
+<DD>Making the installation web bound.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
@@ -262,8 +365,8 @@ UpdateCenter.Plugin</H3>
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/UpdateCenter.Entry.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/User.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/UpdateCenter.InstallationJob.Success.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/UpdateCenter.Plugin.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="UpdateCenter.Plugin.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -283,9 +386,9 @@ UpdateCenter.Plugin</H3>
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#methods_inherited_from_class_java.lang.Object">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;METHOD</FONT></TD>
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>
