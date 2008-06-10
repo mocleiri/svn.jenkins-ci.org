@@ -111,7 +111,7 @@ public class Plugin {
 
     static {
         try {
-            OVERRIDES.load(Plugin.class.getClassLoader().getResourceAsStream("wiki-overrides.properties");
+            OVERRIDES.load(Plugin.class.getClassLoader().getResourceAsStream("wiki-overrides.properties"));
         } catch (IOException e) {
             throw new IOError(e);
         }
