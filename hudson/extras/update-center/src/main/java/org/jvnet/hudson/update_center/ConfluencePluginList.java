@@ -1,5 +1,6 @@
 package org.jvnet.hudson.update_center;
 
+import com.sun.xml.bind.v2.util.EditDistance;
 import hudson.plugins.jira.soap.ConfluenceSoapService;
 import hudson.plugins.jira.soap.RemotePage;
 import hudson.plugins.jira.soap.RemotePageSummary;
@@ -8,11 +9,9 @@ import org.jvnet.hudson.confluence.Confluence;
 import javax.xml.rpc.ServiceException;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
-import java.rmi.RemoteException;
-
-import com.sun.xml.bind.v2.util.EditDistance;
 
 /**
  * List of plugins from confluence.
@@ -33,7 +32,6 @@ public class ConfluencePluginList {
 
         for (RemotePageSummary child : service.getChildren("", page.getId()))
             children.put(normalize(child.getTitle()),child);
-
         normalizedTitles = children.keySet().toArray(new String[children.size()]);
     }
 

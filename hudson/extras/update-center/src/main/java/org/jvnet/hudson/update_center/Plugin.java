@@ -7,8 +7,10 @@ import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.text.MessageFormat;
 import java.io.IOException;
+import java.io.IOError;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import org.dom4j.io.SAXReader;
 import org.dom4j.Document;
@@ -74,6 +76,15 @@ public class Plugin {
             e.printStackTrace();
         }
 
+        try {
+            String p = OVERRIDES.getProperty(artifactId);
+            if(p!=null)
+                return cpl.getPage(p);
+        } catch (RemoteException e) {
+            System.err.println("Override failed for "+artifactId);
+            e.printStackTrace();
+        }
+
         // try to guess the Wiki page
         return cpl.findNearest(artifactId);
     }
@@ -93,5 +104,16 @@ public class Plugin {
         json.put("dependencies",deps);
 
         return json;
+    }
+
+
+    private static final Properties OVERRIDES = new Properties();
+
+    static {
+        try {
+            OVERRIDES.load(Plugin.class.getClassLoader().getResourceAsStream("wiki-overrides.properties");
+        } catch (IOException e) {
+            throw new IOError(e);
+        }
     }
 }
