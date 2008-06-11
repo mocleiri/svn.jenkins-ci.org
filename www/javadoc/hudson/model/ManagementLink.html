@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ManagementLink (Hudson core 1.222 API)
+ManagementLink (Hudson core 1.223 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-09">
+<META NAME="date" CONTENT="2008-06-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ManagementLink (Hudson core 1.222 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ManagementLink (Hudson core 1.222 API)";
+        parent.document.title="ManagementLink (Hudson core 1.223 API)";
     }
 }
 </SCRIPT>
@@ -98,6 +98,9 @@ java.lang.Object
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, java.io.Serializable</DD>
+</DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/security/HudsonPrivateSecurityRealm.ManageUserLinks.html" title="class in hudson.security">HudsonPrivateSecurityRealm.ManageUserLinks</A></DD>
 </DL>
 <HR>
 <DL>
@@ -280,19 +283,9 @@ public abstract java.lang.String <B>getIconFileName</B>()</PRE>
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>If just a file name (like "abc.gif") is returned, it will be
-      interpreted as a file name inside <tt>/images/24x24</tt>.
-      This is useful for using one of the stock images.
-      <p>
-      If an absolute file name that starts from '/' is returned (like
-      "/plugin/foo/abc.gif'), then it will be interpreted as a path
-      from the context root of Hudson. This is useful to pick up
-      image files from a plugin.
-      <p>
-      Finally, return null to hide it from the task list. This is normally not very useful,
-      but this can be used for actions that only contribute <tt>floatBox.jelly</tt>
-      and no task list item. The other case where this is useful is
-      to avoid showing links that require a privilege when the user is anonymous.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Hudson.html#isAdmin()"><CODE>Hudson.isAdmin()</CODE></A></DL>
+<DT><B>Returns:</B><DD>As a special case, return null to exclude this object from the management link.
+      This is useful for defining <A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model"><CODE>ManagementLink</CODE></A> that only shows up under
+      certain circumstances.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Hudson.html#isAdmin()"><CODE>Hudson.isAdmin()</CODE></A></DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-UpdateCenter (Hudson core 1.222 API)
+UpdateCenter (Hudson core 1.223 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-09">
+<META NAME="date" CONTENT="2008-06-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter (Hudson core 1.222 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter (Hudson core 1.222 API)";
+        parent.document.title="UpdateCenter (Hudson core 1.223 API)";
     }
 }
 </SCRIPT>
@@ -214,6 +214,14 @@ Controls update center capability.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getAvailables()">getAvailables</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a list of plugins that should be shown in the "available" tab.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/UpdateCenter.Data.html" title="class in hudson.model">UpdateCenter.Data</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getData()">getData</A></B>()</CODE>
 
@@ -373,6 +381,23 @@ public <A HREF="../../hudson/model/UpdateCenter.Data.html" title="class in hudso
 <DD><DL>
 
 <DT><B>Returns:</B><DD>null if no data is available.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAvailables()"><!-- --></A><H3>
+getAvailables</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>&gt; <B>getAvailables</B>()</PRE>
+<DL>
+<DD>Returns a list of plugins that should be shown in the "available" tab.
+ These are "all plugins - installed plugins".
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

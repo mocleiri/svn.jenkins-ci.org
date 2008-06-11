@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AuthenticationProcessingFilter2 (Hudson core 1.222 API)
+AuthenticationProcessingFilter2 (Hudson core 1.223 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-09">
+<META NAME="date" CONTENT="2008-06-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AuthenticationProcessingFilter2 (Hudson core 1.222 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AuthenticationProcessingFilter2 (Hudson core 1.222 API)";
+        parent.document.title="AuthenticationProcessingFilter2 (Hudson core 1.223 API)";
     }
 }
 </SCRIPT>
@@ -189,6 +189,16 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/AuthenticationProcessingFilter2.html#onUnsuccessfulAuthentication(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, org.acegisecurity.AuthenticationException)">onUnsuccessfulAuthentication</A></B>(javax.servlet.http.HttpServletRequest&nbsp;request,
+                             javax.servlet.http.HttpServletResponse&nbsp;response,
+                             org.acegisecurity.AuthenticationException&nbsp;failed)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Leave the information about login failure.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.acegisecurity.ui.webapp.AuthenticationProcessingFilter"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -205,7 +215,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class org.acegisecurity.ui.AbstractProcessingFilter</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>afterPropertiesSet, destroy, doFilter, getAuthenticationDetailsSource, getAuthenticationFailureUrl, getAuthenticationManager, getDefaultTargetUrl, getExceptionMappings, getFilterProcessesUrl, getRememberMeServices, isAlwaysUseDefaultTargetUrl, isContinueChainBeforeSuccessfulAuthentication, obtainFullRequestUrl, onPreAuthentication, onSuccessfulAuthentication, onUnsuccessfulAuthentication, requiresAuthentication, sendRedirect, setAlwaysUseDefaultTargetUrl, setApplicationEventPublisher, setAuthenticationDetailsSource, setAuthenticationFailureUrl, setAuthenticationManager, setBufferSize, setContinueChainBeforeSuccessfulAuthentication, setDefaultTargetUrl, setExceptionMappings, setFilterProcessesUrl, setMessageSource, setRememberMeServices, setUseRelativeContext, successfulAuthentication, unsuccessfulAuthentication</CODE></TD>
+<TD><CODE>afterPropertiesSet, destroy, doFilter, getAuthenticationDetailsSource, getAuthenticationFailureUrl, getAuthenticationManager, getDefaultTargetUrl, getExceptionMappings, getFilterProcessesUrl, getRememberMeServices, isAlwaysUseDefaultTargetUrl, isContinueChainBeforeSuccessfulAuthentication, obtainFullRequestUrl, onPreAuthentication, onSuccessfulAuthentication, requiresAuthentication, sendRedirect, setAlwaysUseDefaultTargetUrl, setApplicationEventPublisher, setAuthenticationDetailsSource, setAuthenticationFailureUrl, setAuthenticationManager, setBufferSize, setContinueChainBeforeSuccessfulAuthentication, setDefaultTargetUrl, setExceptionMappings, setFilterProcessesUrl, setMessageSource, setRememberMeServices, setUseRelativeContext, successfulAuthentication, unsuccessfulAuthentication</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -272,6 +282,30 @@ protected java.lang.String <B>determineFailureUrl</B>(javax.servlet.http.HttpSer
 </DD>
 <DD><DL>
 <DT><B>See Also:</B><DD><CODE>AbstractProcessingFilter.determineFailureUrl(javax.servlet.http.HttpServletRequest, org.acegisecurity.AuthenticationException)</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onUnsuccessfulAuthentication(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, org.acegisecurity.AuthenticationException)"><!-- --></A><H3>
+onUnsuccessfulAuthentication</H3>
+<PRE>
+protected void <B>onUnsuccessfulAuthentication</B>(javax.servlet.http.HttpServletRequest&nbsp;request,
+                                            javax.servlet.http.HttpServletResponse&nbsp;response,
+                                            org.acegisecurity.AuthenticationException&nbsp;failed)
+                                     throws java.io.IOException</PRE>
+<DL>
+<DD>Leave the information about login failure.
+
+ <p>
+ Otherwise it seems like Acegi doesn't really leave the detail of the failure anywhere.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>onUnsuccessfulAuthentication</CODE> in class <CODE>org.acegisecurity.ui.AbstractProcessingFilter</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
