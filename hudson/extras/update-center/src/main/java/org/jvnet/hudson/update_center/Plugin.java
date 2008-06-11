@@ -1,24 +1,20 @@
 package org.jvnet.hudson.update_center;
 
 import hudson.plugins.jira.soap.RemotePageSummary;
-
-import java.net.URL;
-import java.net.MalformedURLException;
-import java.rmi.RemoteException;
-import java.text.MessageFormat;
-import java.io.IOException;
-import java.io.IOError;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Properties;
-
-import org.dom4j.io.SAXReader;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.Node;
 import org.dom4j.Element;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONArray;
+import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.text.MessageFormat;
+import java.util.Properties;
 
 /**
  * A Hudson plugin.
@@ -113,7 +109,7 @@ public class Plugin {
         try {
             OVERRIDES.load(Plugin.class.getClassLoader().getResourceAsStream("wiki-overrides.properties"));
         } catch (IOException e) {
-            throw new IOError(e);
+            throw new Error(e);
         }
     }
 }
