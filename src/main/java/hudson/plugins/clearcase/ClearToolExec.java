@@ -7,7 +7,6 @@ import hudson.util.ArgumentListBuilder;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -149,10 +148,4 @@ public abstract class ClearToolExec implements ClearTool {
         }
         return viewListPattern;
     }
-
-    public boolean mkbl(MkblRequest request) throws IOException, InterruptedException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
-    
 }
