@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-PluginManager (Hudson core 1.223 API)
+PluginManager (Hudson core 1.224 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-11">
+<META NAME="date" CONTENT="2008-06-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginManager (Hudson core 1.223 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginManager (Hudson core 1.223 API)";
+        parent.document.title="PluginManager (Hudson core 1.224 API)";
     }
 }
 </SCRIPT>
@@ -152,6 +152,14 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#pluginUploaded">pluginUploaded</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Once plugin is uploaded, this flag becomes true.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.io.File</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/PluginManager.html#rootDir">rootDir</A></B></CODE>
 
@@ -230,6 +238,15 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#doUploadPlugin(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doUploadPlugin</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uploads a plugin.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/PluginManager.html#getDisplayName()">getDisplayName</A></B>()</CODE>
 
@@ -267,6 +284,14 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the URL of this item relative to the parent <A HREF="../hudson/search/SearchItem.html" title="interface in hudson.search"><CODE>SearchItem</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#isPluginUploaded()">isPluginUploaded</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrurns true if any new plugin was added, which means a restart is required for the change to take effect.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -341,6 +366,20 @@ public final java.lang.ClassLoader <B>uberClassLoader</B></PRE>
 <DL>
 </DL>
 </DL>
+<HR>
+
+<A NAME="pluginUploaded"><!-- --></A><H3>
+pluginUploaded</H3>
+<PRE>
+public volatile boolean <B>pluginUploaded</B></PRE>
+<DL>
+<DD>Once plugin is uploaded, this flag becomes true.
+ This is used to report a message that Hudson needs to be restarted
+ for new plugins to take effect.
+<P>
+<DL>
+</DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -368,6 +407,19 @@ public <B>PluginManager</B>(javax.servlet.ServletContext&nbsp;context)</PRE>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="isPluginUploaded()"><!-- --></A><H3>
+isPluginUploaded</H3>
+<PRE>
+public boolean <B>isPluginUploaded</B>()</PRE>
+<DL>
+<DD>Retrurns true if any new plugin was added, which means a restart is required for the change to take effect.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="getPlugins()"><!-- --></A><H3>
 getPlugins</H3>
@@ -490,6 +542,25 @@ public void <B>doProxyConfigure</B>(<FONT SIZE="-1">@QueryParameter(value="proxy
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doUploadPlugin(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doUploadPlugin</H3>
+<PRE>
+public void <B>doUploadPlugin</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                    throws java.io.IOException,
+                           javax.servlet.ServletException</PRE>
+<DL>
+<DD>Uploads a plugin.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

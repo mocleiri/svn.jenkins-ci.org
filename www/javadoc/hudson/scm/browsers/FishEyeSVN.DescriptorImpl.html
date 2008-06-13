@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FishEyeSVN.DescriptorImpl (Hudson core 1.223 API)
+FishEyeSVN.DescriptorImpl (Hudson core 1.224 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-11">
+<META NAME="date" CONTENT="2008-06-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FishEyeSVN.DescriptorImpl (Hudson core 1.223 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FishEyeSVN.DescriptorImpl (Hudson core 1.223 API)";
+        parent.document.title="FishEyeSVN.DescriptorImpl (Hudson core 1.224 API)";
     }
 }
 </SCRIPT>
@@ -188,14 +188,6 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Human readable name of this kind of configurable object.</TD>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/scm/browsers/FishEyeSVN.html" title="class in hudson.scm.browsers">FishEyeSVN</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/scm/browsers/FishEyeSVN.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -203,7 +195,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A>, <A HREF="../../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">configure</A>, <A HREF="../../../hudson/model/Descriptor.html#convert(java.util.Map)">convert</A>, <A HREF="../../../hudson/model/Descriptor.html#find(java.util.Collection, java.lang.String)">find</A>, <A HREF="../../../hudson/model/Descriptor.html#getConfigPage()">getConfigPage</A>, <A HREF="../../../hudson/model/Descriptor.html#getGlobalConfigPage()">getGlobalConfigPage</A>, <A HREF="../../../hudson/model/Descriptor.html#getHelpFile()">getHelpFile</A>, <A HREF="../../../hudson/model/Descriptor.html#getViewPage(java.lang.Class, java.lang.String)">getViewPage</A>, <A HREF="../../../hudson/model/Descriptor.html#isInstance(T)">isInstance</A>, <A HREF="../../../hudson/model/Descriptor.html#load()">load</A>, <A HREF="../../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A>, <A HREF="../../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A>, <A HREF="../../../hudson/model/Descriptor.html#save()">save</A>, <A HREF="../../../hudson/model/Descriptor.html#toArray(T...)">toArray</A>, <A HREF="../../../hudson/model/Descriptor.html#toList(T...)">toList</A>, <A HREF="../../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A>, <A HREF="../../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">configure</A>, <A HREF="../../../hudson/model/Descriptor.html#convert(java.util.Map)">convert</A>, <A HREF="../../../hudson/model/Descriptor.html#find(java.util.Collection, java.lang.String)">find</A>, <A HREF="../../../hudson/model/Descriptor.html#getConfigPage()">getConfigPage</A>, <A HREF="../../../hudson/model/Descriptor.html#getGlobalConfigPage()">getGlobalConfigPage</A>, <A HREF="../../../hudson/model/Descriptor.html#getHelpFile()">getHelpFile</A>, <A HREF="../../../hudson/model/Descriptor.html#getViewPage(java.lang.Class, java.lang.String)">getViewPage</A>, <A HREF="../../../hudson/model/Descriptor.html#isInstance(T)">isInstance</A>, <A HREF="../../../hudson/model/Descriptor.html#load()">load</A>, <A HREF="../../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A>, <A HREF="../../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A>, <A HREF="../../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A>, <A HREF="../../../hudson/model/Descriptor.html#save()">save</A>, <A HREF="../../../hudson/model/Descriptor.html#toArray(T...)">toArray</A>, <A HREF="../../../hudson/model/Descriptor.html#toList(T...)">toList</A>, <A HREF="../../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -277,23 +269,6 @@ public void <B>doCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="newInstance(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
-newInstance</H3>
-<PRE>
-public <A HREF="../../../hudson/scm/browsers/FishEyeSVN.html" title="class in hudson.scm.browsers">FishEyeSVN</A> <B>newInstance</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)
-                       throws <A HREF="../../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
-<DL>
-<DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A></CODE> in class <CODE><A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></DL>
-</DD>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE><A HREF="../../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

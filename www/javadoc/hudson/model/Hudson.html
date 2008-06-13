@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.223 API)
+Hudson (Hudson core 1.224 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-11">
+<META NAME="date" CONTENT="2008-06-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.223 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.223 API)";
+        parent.document.title="Hudson (Hudson core 1.224 API)";
     }
 }
 </SCRIPT>
@@ -213,6 +213,14 @@ Root object of the system.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/ProxyConfiguration.html" title="class in hudson">ProxyConfiguration</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#proxy">proxy</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTTP proxy configuration.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#READ">READ</A></B></CODE>
 
@@ -401,6 +409,14 @@ Root object of the system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new job.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.net.Proxy</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#createProxy()">createProxy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the <CODE>Proxy</CODE> instance to talk to other HTTP servers.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -658,15 +674,6 @@ Root object of the system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accepts the new description.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doUploadPlugin(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doUploadPlugin</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uploads a plugin.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1334,14 +1341,6 @@ T</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#isPluginUploaded()">isPluginUploaded</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#isQuietingDown()">isQuietingDown</A></B>()</CODE>
 
 <BR>
@@ -1500,6 +1499,18 @@ servletContext</H3>
 <PRE>
 public final transient javax.servlet.ServletContext <B>servletContext</B></PRE>
 <DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="proxy"><!-- --></A><H3>
+proxy</H3>
+<PRE>
+public transient volatile <A HREF="../../hudson/ProxyConfiguration.html" title="class in hudson">ProxyConfiguration</A> <B>proxy</B></PRE>
+<DL>
+<DD>HTTP proxy configuration.
+<P>
 <DL>
 </DL>
 </DL>
@@ -1688,6 +1699,22 @@ getSlaveAgentPort</H3>
 <FONT SIZE="-1">@Exported
 </FONT>public int <B>getSlaveAgentPort</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createProxy()"><!-- --></A><H3>
+createProxy</H3>
+<PRE>
+public java.net.Proxy <B>createProxy</B>()</PRE>
+<DL>
+<DD>Obtains the <CODE>Proxy</CODE> instance to talk to other HTTP servers.
+<P>
 <DD><DL>
 </DL>
 </DD>
@@ -3433,42 +3460,6 @@ public void <B>doReload</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="isPluginUploaded()"><!-- --></A><H3>
-isPluginUploaded</H3>
-<PRE>
-public boolean <B>isPluginUploaded</B>()</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="doUploadPlugin(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-doUploadPlugin</H3>
-<PRE>
-public void <B>doUploadPlugin</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                    throws java.io.IOException,
-                           javax.servlet.ServletException</PRE>
-<DL>
-<DD>Uploads a plugin.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-DependencyGraph (Hudson core 1.223 API)
+DependencyGraph (Hudson core 1.224 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-11">
+<META NAME="date" CONTENT="2008-06-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DependencyGraph (Hudson core 1.223 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DependencyGraph (Hudson core 1.223 API)";
+        parent.document.title="DependencyGraph (Hudson core 1.224 API)";
     }
 }
 </SCRIPT>
@@ -176,8 +176,8 @@ Maintains the build dependencies between <A HREF="../../hudson/model/AbstractPro
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#addDependency(hudson.model.AbstractProject, hudson.model.AbstractProject)">addDependency</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;from,
-              <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;to)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#addDependency(hudson.model.AbstractProject, hudson.model.AbstractProject)">addDependency</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;upstream,
+              <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;downstream)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called during the dependency graph build phase to add a dependency edge.</TD>
@@ -185,8 +185,8 @@ Maintains the build dependencies between <A HREF="../../hudson/model/AbstractPro
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#addDependency(hudson.model.AbstractProject, java.util.Collection)">addDependency</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;from,
-              java.util.Collection&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;to)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#addDependency(hudson.model.AbstractProject, java.util.Collection)">addDependency</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;upstream,
+              java.util.Collection&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;downstream)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -194,8 +194,8 @@ Maintains the build dependencies between <A HREF="../../hudson/model/AbstractPro
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#addDependency(java.util.Collection, hudson.model.AbstractProject)">addDependency</A></B>(java.util.Collection&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;from,
-              <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;to)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#addDependency(java.util.Collection, hudson.model.AbstractProject)">addDependency</A></B>(java.util.Collection&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;upstream,
+              <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;downstream)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -203,7 +203,7 @@ Maintains the build dependencies between <A HREF="../../hudson/model/AbstractPro
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#addDependencyDeclarers(hudson.model.AbstractProject, java.util.Collection)">addDependencyDeclarers</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;from,
+<TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#addDependencyDeclarers(hudson.model.AbstractProject, java.util.Collection)">addDependencyDeclarers</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;upstream,
                        java.util.Collection&lt;?&gt;&nbsp;possibleDependecyDeclarers)</CODE>
 
 <BR>
@@ -375,8 +375,8 @@ public java.util.List&lt;<A HREF="../../hudson/model/AbstractProject.html" title
 <A NAME="addDependency(hudson.model.AbstractProject, hudson.model.AbstractProject)"><!-- --></A><H3>
 addDependency</H3>
 <PRE>
-public void <B>addDependency</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;from,
-                          <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;to)</PRE>
+public void <B>addDependency</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;upstream,
+                          <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;downstream)</PRE>
 <DL>
 <DD>Called during the dependency graph build phase to add a dependency edge.
 <P>
@@ -392,8 +392,8 @@ public void <B>addDependency</B>(<A HREF="../../hudson/model/AbstractProject.htm
 <A NAME="addDependency(hudson.model.AbstractProject, java.util.Collection)"><!-- --></A><H3>
 addDependency</H3>
 <PRE>
-public void <B>addDependency</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;from,
-                          java.util.Collection&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;to)</PRE>
+public void <B>addDependency</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;upstream,
+                          java.util.Collection&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;downstream)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -407,8 +407,8 @@ public void <B>addDependency</B>(<A HREF="../../hudson/model/AbstractProject.htm
 <A NAME="addDependency(java.util.Collection, hudson.model.AbstractProject)"><!-- --></A><H3>
 addDependency</H3>
 <PRE>
-public void <B>addDependency</B>(java.util.Collection&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;from,
-                          <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;to)</PRE>
+public void <B>addDependency</B>(java.util.Collection&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;upstream,
+                          <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;downstream)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -422,7 +422,7 @@ public void <B>addDependency</B>(java.util.Collection&lt;? extends <A HREF="../.
 <A NAME="addDependencyDeclarers(hudson.model.AbstractProject, java.util.Collection)"><!-- --></A><H3>
 addDependencyDeclarers</H3>
 <PRE>
-public void <B>addDependencyDeclarers</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;from,
+public void <B>addDependencyDeclarers</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;upstream,
                                    java.util.Collection&lt;?&gt;&nbsp;possibleDependecyDeclarers)</PRE>
 <DL>
 <DD>Lists up <A HREF="../../hudson/model/DependecyDeclarer.html" title="interface in hudson.model"><CODE>DependecyDeclarer</CODE></A> from the collection and let them builds dependencies.
