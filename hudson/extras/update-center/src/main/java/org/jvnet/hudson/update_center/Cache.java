@@ -29,7 +29,6 @@ public class Cache {
     }
 
     public File obtain(Plugin p) throws IOException {
-        String key = p.artifactId+':'+p.file.version;
         File f = new File(dir, p.artifactId);
 
         if(p.file.version.toString().equals(metadata.get(p.artifactId))) {
