@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Job (Hudson core 1.224 API)
+Job (Hudson core 1.225 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-13">
+<META NAME="date" CONTENT="2008-06-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson core 1.224 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson core 1.224 API)";
+        parent.document.title="Job (Hudson core 1.225 API)";
     }
 }
 </SCRIPT>
@@ -112,7 +112,7 @@ java.lang.Object
 
 <P>
 A job is an runnable entity under the monitoring of Hudson.
-
+ 
  <p>
  Every time it "runs", it will be recorded as a <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A> object.
 <P>
@@ -322,8 +322,8 @@ A job is an runnable entity under the monitoring of Hudson.
 <TD><CODE><B><A HREF="../../hudson/model/Job.html#getBuild(java.lang.String)">getBuild</A></B>(java.lang.String&nbsp;id)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This is only used to support backward compatibility with
-      old URLs.</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This is only used to support backward compatibility with old
+             URLs.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -485,7 +485,8 @@ A job is an runnable entity under the monitoring of Hudson.
 <TD><CODE><B><A HREF="../../hudson/model/Job.html#getPronoun()">getPronoun</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the term used in the UI to represent this kind of <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the term used in the UI to represent this kind of
+ <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -510,7 +511,8 @@ T</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Job.html#getProperty(java.lang.Class)">getProperty</A></B>(java.lang.Class&lt;T&gt;&nbsp;clazz)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the specific property, or null if the propert is not configured for this job.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the specific property, or null if the propert is not configured for
+ this job.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -643,7 +645,8 @@ T</CODE></FONT></TD>
        org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Derived class can override this to perform additional config submission work.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Derived class can override this to perform additional config submission
+ work.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -734,13 +737,12 @@ nextBuildNumber</H3>
 <PRE>
 protected transient volatile int <B>nextBuildNumber</B></PRE>
 <DL>
-<DD>Next build number.
- Kept in a separate file because this is the only information
- that gets updated often. This allows the rest of the configuration
- to be in the VCS.
+<DD>Next build number. Kept in a separate file because this is the only
+ information that gets updated often. This allows the rest of the
+ configuration to be in the VCS.
  <p>
- In 1.28 and earlier, this field was stored in the project configuration file,
- so even though this is marked as transient, don't move it around.
+ In 1.28 and earlier, this field was stored in the project configuration
+ file, so even though this is marked as transient, don't move it around.
 <P>
 <DL>
 </DL>
@@ -914,8 +916,8 @@ getPronoun</H3>
 <PRE>
 public java.lang.String <B>getPronoun</B>()</PRE>
 <DL>
-<DD>Get the term used in the UI to represent this kind of <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>.
- Must start with a capital letter.
+<DD>Get the term used in the UI to represent this kind of
+ <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>. Must start with a capital letter.
 <P>
 <DD><DL>
 </DL>
@@ -1002,10 +1004,10 @@ public void <B>updateNextBuildNumber</B>(int&nbsp;next)
                            throws java.io.IOException</PRE>
 <DL>
 <DD>Programatically updates the next build number.
-
+ 
  <p>
- Much of Hudson assumes that the build number is unique and monotonic,
- so this method can only accept a new value that's bigger than
+ Much of Hudson assumes that the build number is unique and monotonic, so
+ this method can only accept a new value that's bigger than
  <A HREF="../../hudson/model/Job.html#getNextBuildNumber()"><CODE>getNextBuildNumber()</CODE></A> returns. Otherwise it'll be no-op.
 <P>
 <DD><DL>
@@ -1015,8 +1017,7 @@ public void <B>updateNextBuildNumber</B>(int&nbsp;next)
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE><DT><B>Since:</B></DT>
-  <DD>1.199
-      (before that, this method was package private.)</DD>
+  <DD>1.199 (before that, this method was package private.)</DD>
 </DL>
 </DD>
 </DL>
@@ -1163,7 +1164,8 @@ getProperty</H3>
 <PRE>
 public &lt;T extends <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&gt; T <B>getProperty</B>(java.lang.Class&lt;T&gt;&nbsp;clazz)</PRE>
 <DL>
-<DD>Gets the specific property, or null if the propert is not configured for this job.
+<DD>Gets the specific property, or null if the propert is not configured for
+ this job.
 <P>
 <DD><DL>
 </DL>
@@ -1209,10 +1211,10 @@ public void <B>renameTo</B>(java.lang.String&nbsp;newName)
               throws java.io.IOException</PRE>
 <DL>
 <DD>Renames a job.
-
+ 
  <p>
- This method is defined on <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A> but really only applicable
- for <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s that are top-level items.
+ This method is defined on <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A> but really only applicable for
+ <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s that are top-level items.
 <P>
 <DD><DL>
 </DL>
@@ -1281,8 +1283,8 @@ getBuild</H3>
 <FONT SIZE="-1">@Deprecated
 </FONT>public <A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A> <B>getBuild</B>(java.lang.String&nbsp;id)</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>This is only used to support backward compatibility with
-      old URLs.</I>
+<DD><B>Deprecated.</B>&nbsp;<I>This is only used to support backward compatibility with old
+             URLs.</I>
 <P>
 <DD><DL>
 </DL>
@@ -1314,9 +1316,9 @@ getNearestBuild</H3>
 public final <A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A> <B>getNearestBuild</B>(int&nbsp;n)</PRE>
 <DL>
 <DD>Gets the youngest build #m that satisfies <tt>n&lt;=m</tt>.
-
- This is useful when you'd like to fetch a build but the exact build might be already
- gone (deleted, rotated, etc.)
+ 
+ This is useful when you'd like to fetch a build but the exact build might
+ be already gone (deleted, rotated, etc.)
 <P>
 <DD><DL>
 </DL>
@@ -1333,9 +1335,9 @@ getNearestOldBuild</H3>
 public final <A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A> <B>getNearestOldBuild</B>(int&nbsp;n)</PRE>
 <DL>
 <DD>Gets the latest build #m that satisfies <tt>m&lt;=n</tt>.
-
- This is useful when you'd like to fetch a build but the exact build might be already
- gone (deleted, rotated, etc.)
+ 
+ This is useful when you'd like to fetch a build but the exact build might
+ be already gone (deleted, rotated, etc.)
 <P>
 <DD><DL>
 </DL>
@@ -1369,9 +1371,9 @@ protected java.io.File <B>getBuildDir</B>()</PRE>
 <DL>
 <DD>Directory for storing <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A> records.
  <p>
- Some <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s may not have backing data store for <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>s,
- but those <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s that use file system for storing data
- should use this directory for consistency.
+ Some <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s may not have backing data store for <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>s, but
+ those <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s that use file system for storing data should use this
+ directory for consistency.
 <P>
 <DD><DL>
 </DL>
@@ -1388,9 +1390,9 @@ _getRuns</H3>
 protected abstract java.util.SortedMap&lt;java.lang.Integer,? extends <A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt; <B>_getRuns</B>()</PRE>
 <DL>
 <DD>Gets all the runs.
-
- The resulting map must be immutable (by employing copy-on-write semantics.)
- The map is descending order, with newest builds at the top.
+ 
+ The resulting map must be immutable (by employing copy-on-write
+ semantics.) The map is descending order, with newest builds at the top.
 <P>
 <DD><DL>
 </DL>
@@ -1407,9 +1409,9 @@ removeRun</H3>
 protected abstract void <B>removeRun</B>(<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&nbsp;run)</PRE>
 <DL>
 <DD>Called from <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A> to remove it from this job.
-
- The files are deleted already. So all the callee needs to do
- is to remove a reference from this <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.
+ 
+ The files are deleted already. So all the callee needs to do is to remove
+ a reference from this <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.
 <P>
 <DD><DL>
 </DL>
@@ -1460,8 +1462,8 @@ getLastSuccessfulBuild</H3>
 <FONT SIZE="-1">@Exported
 </FONT>public <A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A> <B>getLastSuccessfulBuild</B>()</PRE>
 <DL>
-<DD>Returns the last successful build, if any. Otherwise null.
- A stable build would include either <A HREF="../../hudson/model/Result.html#SUCCESS"><CODE>Result.SUCCESS</CODE></A> or <A HREF="../../hudson/model/Result.html#UNSTABLE"><CODE>Result.UNSTABLE</CODE></A>.
+<DD>Returns the last successful build, if any. Otherwise null. A stable build
+ would include either <A HREF="../../hudson/model/Result.html#SUCCESS"><CODE>Result.SUCCESS</CODE></A> or <A HREF="../../hudson/model/Result.html#UNSTABLE"><CODE>Result.UNSTABLE</CODE></A>.
 <P>
 <DD><DL>
 </DL>
@@ -1553,7 +1555,7 @@ public <A HREF="../../hudson/model/HealthReport.html" title="class in hudson.mod
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>the health report.  Never returns null</DL>
+<DT><B>Returns:</B><DD>the health report. Never returns null</DL>
 </DD>
 </DL>
 <HR>
@@ -1625,7 +1627,8 @@ protected void <B>submit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                       javax.servlet.ServletException,
                       <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
 <DL>
-<DD>Derived class can override this to perform additional config submission work.
+<DD>Derived class can override this to perform additional config submission
+ work.
 <P>
 <DD><DL>
 </DL>
@@ -1701,8 +1704,8 @@ public void <B>doBuildTimeGraphMap</B>(org.kohsuke.stapler.StaplerRequest&nbsp;r
                                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                          throws java.io.IOException</PRE>
 <DL>
-<DD>Returns the clickable map for the build time graph.
- Loaded lazily by AJAX.
+<DD>Returns the clickable map for the build time graph. Loaded lazily by
+ AJAX.
 <P>
 <DD><DL>
 </DL>

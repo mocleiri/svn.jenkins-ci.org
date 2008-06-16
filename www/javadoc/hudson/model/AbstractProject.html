@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractProject (Hudson core 1.224 API)
+AbstractProject (Hudson core 1.225 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-13">
+<META NAME="date" CONTENT="2008-06-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractProject (Hudson core 1.224 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractProject (Hudson core 1.224 API)";
+        parent.document.title="AbstractProject (Hudson core 1.225 API)";
     }
 }
 </SCRIPT>
@@ -870,7 +870,8 @@ void</CODE></FONT></TD>
        org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Derived class can override this to perform additional config submission work.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Derived class can override this to perform additional config submission
+ work.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1561,9 +1562,9 @@ public java.util.SortedMap&lt;java.lang.Integer,? extends <A HREF="../../hudson/
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Job.html#_getRuns()">Job</A></CODE></B></DD>
 <DD>Gets all the runs.
-
- The resulting map must be immutable (by employing copy-on-write semantics.)
- The map is descending order, with newest builds at the top.
+ 
+ The resulting map must be immutable (by employing copy-on-write
+ semantics.) The map is descending order, with newest builds at the top.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Job.html#_getRuns()">_getRuns</A></CODE> in class <CODE><A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">P</A> extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">P</A>,<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt;,<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A> extends <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">P</A>,<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt;&gt;</CODE></DL>
@@ -1581,9 +1582,9 @@ public void <B>removeRun</B>(<A HREF="../../hudson/model/AbstractProject.html" t
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Job.html#removeRun(RunT)">Job</A></CODE></B></DD>
 <DD>Called from <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A> to remove it from this job.
-
- The files are deleted already. So all the callee needs to do
- is to remove a reference from this <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.
+ 
+ The files are deleted already. So all the callee needs to do is to remove
+ a reference from this <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Job.html#removeRun(RunT)">removeRun</A></CODE> in class <CODE><A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">P</A> extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">P</A>,<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt;,<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A> extends <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">P</A>,<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt;&gt;</CODE></DL>
@@ -2288,7 +2289,8 @@ protected void <B>submit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                       <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Job.html#submit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">Job</A></CODE></B></DD>
-<DD>Derived class can override this to perform additional config submission work.
+<DD>Derived class can override this to perform additional config submission
+ work.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Job.html#submit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">submit</A></CODE> in class <CODE><A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">P</A> extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">P</A>,<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt;,<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A> extends <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">P</A>,<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt;&gt;</CODE></DL>
