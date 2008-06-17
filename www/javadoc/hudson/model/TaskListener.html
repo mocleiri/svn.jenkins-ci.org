@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-TaskListener (Hudson core 1.225 API)
+TaskListener (Hudson core 1.226 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-16">
+<META NAME="date" CONTENT="2008-06-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TaskListener (Hudson core 1.225 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TaskListener (Hudson core 1.225 API)";
+        parent.document.title="TaskListener (Hudson core 1.226 API)";
     }
 }
 </SCRIPT>
@@ -106,6 +106,11 @@ Interface TaskListener</H2>
 <P>
 Receives events that happen during some task execution,
  such as a build or SCM change polling.
+
+ <p>
+ This interface is implemented by Hudson core and passed to extension points so that
+ they can record the progress of the build without really knowing how those information
+ and handled/stored by Hudson.
 <P>
 
 <P>

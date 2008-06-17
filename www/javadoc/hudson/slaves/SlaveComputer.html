@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SlaveComputer (Hudson core 1.225 API)
+SlaveComputer (Hudson core 1.226 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-16">
+<META NAME="date" CONTENT="2008-06-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SlaveComputer (Hudson core 1.225 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SlaveComputer (Hudson core 1.225 API)";
+        parent.document.title="SlaveComputer (Hudson core 1.226 API)";
     }
 }
 </SCRIPT>
@@ -99,7 +99,7 @@ java.lang.Object
           <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.slaves.SlaveComputer</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ExecutorListener.html" title="interface in hudson.model">ExecutorListener</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></DD>
 </DL>
 <HR>
 <DL>
@@ -324,6 +324,36 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#taskAccepted(hudson.model.Executor, hudson.model.Queue.Task)">taskAccepted</A></B>(<A HREF="../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
+             <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is accepted by an executor.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#taskCompleted(hudson.model.Executor, hudson.model.Queue.Task, long)">taskCompleted</A></B>(<A HREF="../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
+              <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
+              long&nbsp;durationMS)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is completed without any problems by an executor.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)">taskCompletedWithProblems</A></B>(<A HREF="../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
+                          <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
+                          long&nbsp;durationMS,
+                          java.lang.Throwable&nbsp;problems)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is completed without any problems by an executor.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#tryReconnect()">tryReconnect</A></B>()</CODE>
 
 <BR>
@@ -482,6 +512,60 @@ public void <B>launch</B>()</PRE>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="taskAccepted(hudson.model.Executor, hudson.model.Queue.Task)"><!-- --></A><H3>
+taskAccepted</H3>
+<PRE>
+public void <B>taskAccepted</B>(<A HREF="../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
+                         <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</PRE>
+<DL>
+<DD>Called whenever a task is accepted by an executor.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ExecutorListener.html#taskAccepted(hudson.model.Executor, hudson.model.Queue.Task)">taskAccepted</A></CODE> in interface <CODE><A HREF="../../hudson/model/ExecutorListener.html" title="interface in hudson.model">ExecutorListener</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Computer.html#taskAccepted(hudson.model.Executor, hudson.model.Queue.Task)">taskAccepted</A></CODE> in class <CODE><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>executor</CODE> - The executor.<DD><CODE>task</CODE> - The task.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="taskCompleted(hudson.model.Executor, hudson.model.Queue.Task, long)"><!-- --></A><H3>
+taskCompleted</H3>
+<PRE>
+public void <B>taskCompleted</B>(<A HREF="../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
+                          <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
+                          long&nbsp;durationMS)</PRE>
+<DL>
+<DD>Called whenever a task is completed without any problems by an executor.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ExecutorListener.html#taskCompleted(hudson.model.Executor, hudson.model.Queue.Task, long)">taskCompleted</A></CODE> in interface <CODE><A HREF="../../hudson/model/ExecutorListener.html" title="interface in hudson.model">ExecutorListener</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Computer.html#taskCompleted(hudson.model.Executor, hudson.model.Queue.Task, long)">taskCompleted</A></CODE> in class <CODE><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>executor</CODE> - The executor.<DD><CODE>task</CODE> - The task.<DD><CODE>durationMS</CODE> - The number of milliseconds that the task took to complete.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)"><!-- --></A><H3>
+taskCompletedWithProblems</H3>
+<PRE>
+public void <B>taskCompletedWithProblems</B>(<A HREF="../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
+                                      <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
+                                      long&nbsp;durationMS,
+                                      java.lang.Throwable&nbsp;problems)</PRE>
+<DL>
+<DD>Called whenever a task is completed without any problems by an executor.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ExecutorListener.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)">taskCompletedWithProblems</A></CODE> in interface <CODE><A HREF="../../hudson/model/ExecutorListener.html" title="interface in hudson.model">ExecutorListener</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Computer.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)">taskCompletedWithProblems</A></CODE> in class <CODE><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>executor</CODE> - The executor.<DD><CODE>task</CODE> - The task.<DD><CODE>durationMS</CODE> - The number of milliseconds that the task took to complete.<DD><CODE>problems</CODE> - The exception that was thrown.</DL>
 </DD>
 </DL>
 <HR>

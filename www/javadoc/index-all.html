@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.225 API)
+Index (Hudson core 1.226 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-16">
+<META NAME="date" CONTENT="2008-06-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.225 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.225 API)";
+        parent.document.title="Index (Hudson core 1.226 API)";
     }
 }
 </SCRIPT>
@@ -3131,6 +3131,13 @@ Variable in class hudson.util.<A HREF="./hudson/util/InsufficientPermissionDetec
 <DT><A HREF="./hudson/util/NoTempDir.html#exception"><B>exception</B></A> - 
 Variable in class hudson.util.<A HREF="./hudson/util/NoTempDir.html" title="class in hudson.util">NoTempDir</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/ExceptionCatchingThreadFactory.html" title="class in hudson.util"><B>ExceptionCatchingThreadFactory</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD><CODE>ThreadFactory</CODE> that creates a thread, which in turn displays a stack trace
+ when it terminates unexpectedly.<DT><A HREF="./hudson/util/ExceptionCatchingThreadFactory.html#ExceptionCatchingThreadFactory()"><B>ExceptionCatchingThreadFactory()</B></A> - 
+Constructor for class hudson.util.<A HREF="./hudson/util/ExceptionCatchingThreadFactory.html" title="class in hudson.util">ExceptionCatchingThreadFactory</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/util/ExceptionCatchingThreadFactory.html#ExceptionCatchingThreadFactory(java.util.concurrent.ThreadFactory)"><B>ExceptionCatchingThreadFactory(ThreadFactory)</B></A> - 
+Constructor for class hudson.util.<A HREF="./hudson/util/ExceptionCatchingThreadFactory.html" title="class in hudson.util">ExceptionCatchingThreadFactory</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/MavenBuildProxy.html#execute(hudson.maven.MavenBuildProxy.BuildCallable)"><B>execute(MavenBuildProxy.BuildCallable&lt;V, T&gt;)</B></A> - 
 Method in interface hudson.maven.<A HREF="./hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven">MavenBuildProxy</A>
 <DD>Executes the given <A HREF="./hudson/maven/MavenBuildProxy.BuildCallable.html" title="interface in hudson.maven"><CODE>MavenBuildProxy.BuildCallable</CODE></A> on the master, where one
@@ -3192,7 +3199,7 @@ Constructor for class hudson.model.<A HREF="./hudson/model/Executor.html" title=
 <DT><A HREF="./hudson/model/Messages.html#Executor_NotAvailable()"><B>Executor_NotAvailable()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>N/A
-<DT><A HREF="./hudson/FilePath.html#exists()"><B>exists()</B></A> - 
+<DT><A HREF="./hudson/model/ExecutorListener.html" title="interface in hudson.model"><B>ExecutorListener</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>A listener for task related events from Executors<DT><A HREF="./hudson/FilePath.html#exists()"><B>exists()</B></A> - 
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>Checks if the file exists.
 <DT><A HREF="./hudson/util/TextFile.html#exists()"><B>exists()</B></A> - 
@@ -6553,6 +6560,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/BuildStepCompatibilityLayer
 <DT><A HREF="./hudson/tasks/BuildStepCompatibilityLayer.html#getProjectAction(hudson.model.Project)"><B>getProjectAction(Project&lt;?, ?&gt;)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/BuildStepCompatibilityLayer.html" title="class in hudson.tasks">BuildStepCompatibilityLayer</A>
 <DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="./hudson/tasks/BuildStepCompatibilityLayer.html#getProjectAction(hudson.model.AbstractProject)"><CODE>BuildStepCompatibilityLayer.getProjectAction(AbstractProject)</CODE></A> instead.</I>
+<DT><A HREF="./hudson/tasks/BuildWrapper.html#getProjectAction(hudson.model.AbstractProject)"><B>getProjectAction(AbstractProject)</B></A> - 
+Method in class hudson.tasks.<A HREF="./hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>
+<DD><A HREF="./hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> to be displayed in the job page.
 <DT><A HREF="./hudson/tasks/JavadocArchiver.html#getProjectAction(hudson.model.Project)"><B>getProjectAction(Project)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/JavadocArchiver.html" title="class in hudson.tasks">JavadocArchiver</A>
 <DD>&nbsp;
@@ -8071,7 +8081,7 @@ Static variable in class hudson.security.<A HREF="./hudson/security/HudsonPrivat
 <DD>&nbsp;
 <DT><A HREF="./hudson/slaves/RetentionStrategy.html#INSTANCE"><B>INSTANCE</B></A> - 
 Static variable in class hudson.slaves.<A HREF="./hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>
-<DD>Convenient singleton instance, sine this <A HREF="./hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> is stateless.
+<DD>Convenient singleton instance, since this <A HREF="./hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> is stateless.
 <DT><A HREF="./hudson/tasks/labelers/OSLabeler.html#INSTANCE"><B>INSTANCE</B></A> - 
 Static variable in class hudson.tasks.labelers.<A HREF="./hudson/tasks/labelers/OSLabeler.html" title="class in hudson.tasks.labelers">OSLabeler</A>
 <DD>&nbsp;
@@ -9924,6 +9934,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Descriptor.html" tit
 <DD>Used to build <A HREF="./hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A> instance list from &lt;f:hetero-list> tag.
 <DT><A HREF="./hudson/util/DaemonThreadFactory.html#newThread(java.lang.Runnable)"><B>newThread(Runnable)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/DaemonThreadFactory.html" title="class in hudson.util">DaemonThreadFactory</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/util/ExceptionCatchingThreadFactory.html#newThread(java.lang.Runnable)"><B>newThread(Runnable)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/ExceptionCatchingThreadFactory.html" title="class in hudson.util">ExceptionCatchingThreadFactory</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/AdaptedIterator.html#next()"><B>next()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/AdaptedIterator.html" title="class in hudson.util">AdaptedIterator</A>
@@ -12111,10 +12124,37 @@ Variable in class hudson.model.listeners.<A HREF="./hudson/model/listeners/RunLi
 <DT><A HREF="./hudson/model/Queue.Item.html#task"><B>task</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>
 <DD>Project to be built.
+<DT><A HREF="./hudson/model/Computer.html#taskAccepted(hudson.model.Executor, hudson.model.Queue.Task)"><B>taskAccepted(Executor, Queue.Task)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
+<DD>Called whenever a task is accepted by an executor.
+<DT><A HREF="./hudson/model/ExecutorListener.html#taskAccepted(hudson.model.Executor, hudson.model.Queue.Task)"><B>taskAccepted(Executor, Queue.Task)</B></A> - 
+Method in interface hudson.model.<A HREF="./hudson/model/ExecutorListener.html" title="interface in hudson.model">ExecutorListener</A>
+<DD>Called whenever a task is accepted by an executor.
+<DT><A HREF="./hudson/slaves/SlaveComputer.html#taskAccepted(hudson.model.Executor, hudson.model.Queue.Task)"><B>taskAccepted(Executor, Queue.Task)</B></A> - 
+Method in class hudson.slaves.<A HREF="./hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>
+<DD>Called whenever a task is accepted by an executor.
 <DT><A HREF="./hudson/model/TaskAction.html" title="class in hudson.model"><B>TaskAction</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Partial <A HREF="./hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> implementation for those who kick some
  processing asynchronously (such as SCM tagging.)<DT><A HREF="./hudson/model/TaskAction.html#TaskAction()"><B>TaskAction()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/TaskAction.html" title="class in hudson.model">TaskAction</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Computer.html#taskCompleted(hudson.model.Executor, hudson.model.Queue.Task, long)"><B>taskCompleted(Executor, Queue.Task, long)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
+<DD>Called whenever a task is completed without any problems by an executor.
+<DT><A HREF="./hudson/model/ExecutorListener.html#taskCompleted(hudson.model.Executor, hudson.model.Queue.Task, long)"><B>taskCompleted(Executor, Queue.Task, long)</B></A> - 
+Method in interface hudson.model.<A HREF="./hudson/model/ExecutorListener.html" title="interface in hudson.model">ExecutorListener</A>
+<DD>Called whenever a task is completed without any problems by an executor.
+<DT><A HREF="./hudson/slaves/SlaveComputer.html#taskCompleted(hudson.model.Executor, hudson.model.Queue.Task, long)"><B>taskCompleted(Executor, Queue.Task, long)</B></A> - 
+Method in class hudson.slaves.<A HREF="./hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>
+<DD>Called whenever a task is completed without any problems by an executor.
+<DT><A HREF="./hudson/model/Computer.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)"><B>taskCompletedWithProblems(Executor, Queue.Task, long, Throwable)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
+<DD>Called whenever a task is completed without any problems by an executor.
+<DT><A HREF="./hudson/model/ExecutorListener.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)"><B>taskCompletedWithProblems(Executor, Queue.Task, long, Throwable)</B></A> - 
+Method in interface hudson.model.<A HREF="./hudson/model/ExecutorListener.html" title="interface in hudson.model">ExecutorListener</A>
+<DD>Called whenever a task is completed without any problems by an executor.
+<DT><A HREF="./hudson/slaves/SlaveComputer.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)"><B>taskCompletedWithProblems(Executor, Queue.Task, long, Throwable)</B></A> - 
+Method in class hudson.slaves.<A HREF="./hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>
+<DD>Called whenever a task is completed without any problems by an executor.
 <DT><A HREF="./hudson/model/TaskListener.html" title="interface in hudson.model"><B>TaskListener</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Receives events that happen during some task execution,
  such as a build or SCM change polling.<DT><A HREF="./hudson/model/TaskThread.html" title="class in hudson.model"><B>TaskThread</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD><CODE>Thread</CODE> for performing one-off task.<DT><A HREF="./hudson/model/TaskThread.html#TaskThread(hudson.model.TaskAction, hudson.model.TaskThread.ListenerAndText)"><B>TaskThread(TaskAction, TaskThread.ListenerAndText)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/TaskThread.html" title="class in hudson.model">TaskThread</A>
@@ -12493,6 +12533,9 @@ Variable in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/Maven
 Variable in class hudson.<A HREF="./hudson/PluginManager.html" title="class in hudson">PluginManager</A>
 <DD><CODE>ClassLoader</CODE> that can load all the publicly visible classes from plugins
  (and including the classloader that loads Hudson itself.)
+<DT><A HREF="./hudson/util/ExceptionCatchingThreadFactory.html#uncaughtException(java.lang.Thread, java.lang.Throwable)"><B>uncaughtException(Thread, Throwable)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/ExceptionCatchingThreadFactory.html" title="class in hudson.util">ExceptionCatchingThreadFactory</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/ResourceList.html#union(hudson.model.ResourceList...)"><B>union(ResourceList...)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/ResourceList.html" title="class in hudson.model">ResourceList</A>
 <DD>Creates union of all resources.
