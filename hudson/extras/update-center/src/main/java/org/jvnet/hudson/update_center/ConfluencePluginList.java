@@ -47,13 +47,13 @@ public class ConfluencePluginList {
     /**
      * Finds the closest match, if any. Otherwise null.
      */
-    public RemotePageSummary findNearest(String pluginArtifactId) {
+    public RemotePage findNearest(String pluginArtifactId) throws RemoteException {
         // comparison is case insensitive
         pluginArtifactId = pluginArtifactId.toLowerCase();
 
         String nearest = EditDistance.findNearest(pluginArtifactId, normalizedTitles);
         if(EditDistance.editDistance(nearest,pluginArtifactId)<4)
-            return children.get(nearest);
+            return service.getPage("","HUDSON",children.get(nearest).getTitle());
         else
             return null;    // too far
     }

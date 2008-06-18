@@ -1,6 +1,6 @@
 package org.jvnet.hudson.update_center;
 
-import hudson.plugins.jira.soap.RemotePageSummary;
+import hudson.plugins.jira.soap.RemotePage;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.dom4j.Document;
@@ -15,6 +15,8 @@ import java.net.URL;
 import java.rmi.RemoteException;
 import java.text.MessageFormat;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A Hudson plugin.
@@ -34,7 +36,7 @@ public class Plugin {
      * Confluence page of this plugin in Wiki.
      * Null if we couldn't find it.
      */
-    public final RemotePageSummary page;
+    public final RemotePage page;
 
     public final Cache cache;
 
@@ -52,7 +54,7 @@ public class Plugin {
      * First we'll try to parse POM and obtain the URL.
      * If that fails, find the nearest name from the children list.
      */
-    private RemotePageSummary findPage(ConfluencePluginList cpl) {
+    private RemotePage findPage(ConfluencePluginList cpl) {
         try {
             URL pom = new URL(
                 MessageFormat.format("http://maven.dyndns.org/2/org/jvnet/hudson/plugins/{0}/{1}/{0}-{1}.pom",artifactId,file.version));
@@ -82,14 +84,43 @@ public class Plugin {
         }
 
         // try to guess the Wiki page
-        return cpl.findNearest(artifactId);
+        try {
+            return cpl.findNearest(artifactId);
+        } catch (RemoteException e) {
+            System.err.println("Failed to locate nearest");
+            e.printStackTrace();
+        }
+
+        return null;
     }
+
+    /**
+     * Obtains the excerpt of this wiki page in HTML. Otherwise null.
+     */
+    public String getExcerptInHTML() {
+        String content = page.getContent();
+        if(content==null)
+            return null;
+
+        Matcher m = EXCERPT_PATTERN.matcher(content);
+        if(!m.find())
+            return null;
+
+        String excerpt = m.group();
+        return HYPERLINK_PATTERN.matcher(excerpt).replaceAll("<a href='$2'>$1</a>");
+    }
+
+    private static final Pattern EXCERPT_PATTERN = Pattern.compile("\\{excerpt\\}.+\\{excerpt\\}");
+    private static final Pattern HYPERLINK_PATTERN = Pattern.compile("\\[([^]]+)\\|([^]]+)\\]");
 
     public JSONObject toJSON() throws IOException {
         JSONObject json = file.toJSON(artifactId);
         if(page!=null) {
             json.put("wiki",page.getUrl());
             json.put("title",page.getTitle());
+            String excerpt = getExcerptInHTML();
+            if(excerpt!=null)
+                json.put("excerpt",excerpt);
         }
 
         HpiFile hpi = new HpiFile(cache.obtain(this));
