@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.scm.RepositoryBrowser (Hudson core 1.226 API)
+Uses of Class hudson.scm.RepositoryBrowser (Hudson core 1.227 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-17">
+<META NAME="date" CONTENT="2008-06-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.scm.RepositoryBrowser (Hudson core 1.226 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.scm.RepositoryBrowser (Hudson core 1.226 API)";
+        parent.document.title="Uses of Class hudson.scm.RepositoryBrowser (Hudson core 1.227 API)";
     }
 }
 </SCRIPT>
@@ -205,12 +205,32 @@ T</CODE></FONT></TD>
 </TR>
 </TABLE>
 </CODE></FONT></TD>
+<TD><CODE><B>RepositoryBrowsers.</B><B><A HREF="../../../hudson/scm/RepositoryBrowsers.html#createInstance(java.lang.Class, org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String)">createInstance</A></B>(java.lang.Class&lt;T&gt;&nbsp;type,
+               org.kohsuke.stapler.StaplerRequest&nbsp;req,
+               net.sf.json.JSONObject&nbsp;parent,
+               java.lang.String&nbsp;fieldName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates an instance of <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> from a form submission.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T extends <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&gt; 
+<BR>
+T</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
 <TD><CODE><B>RepositoryBrowsers.</B><B><A HREF="../../../hudson/scm/RepositoryBrowsers.html#createInstance(java.lang.Class, org.kohsuke.stapler.StaplerRequest, java.lang.String)">createInstance</A></B>(java.lang.Class&lt;T&gt;&nbsp;type,
                org.kohsuke.stapler.StaplerRequest&nbsp;req,
                java.lang.String&nbsp;fieldName)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates an instance of <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> from a form submission.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../hudson/scm/RepositoryBrowsers.html#createInstance(java.lang.Class, org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String)"><CODE>RepositoryBrowsers.createInstance(Class, StaplerRequest, JSONObject, String)</CODE></A>.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -290,6 +310,13 @@ T</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../hudson/scm/SCMDescriptor.html#SCMDescriptor(java.lang.Class, java.lang.Class)">SCMDescriptor</A></B>(java.lang.Class&lt;<A HREF="../../../hudson/scm/SCMDescriptor.html" title="type parameter in SCMDescriptor">T</A>&gt;&nbsp;clazz,
               java.lang.Class&lt;? extends <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&gt;&nbsp;repositoryBrowser)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/scm/SubversionSCM.DescriptorImpl.html#SubversionSCM.DescriptorImpl(java.lang.Class, java.lang.Class)">SubversionSCM.DescriptorImpl</A></B>(java.lang.Class&nbsp;clazz,
+                             java.lang.Class&lt;? extends <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&gt;&nbsp;repositoryBrowser)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

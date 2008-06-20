@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Queue (Hudson core 1.226 API)
+Queue (Hudson core 1.227 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-17">
+<META NAME="date" CONTENT="2008-06-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue (Hudson core 1.226 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue (Hudson core 1.226 API)";
+        parent.document.title="Queue (Hudson core 1.227 API)";
     }
 }
 </SCRIPT>
@@ -99,7 +99,8 @@ java.lang.Object
 </PRE>
 <HR>
 <DL>
-<DT><PRE>public class <B>Queue</B><DT>extends <A HREF="../../hudson/model/ResourceController.html" title="class in hudson.model">ResourceController</A></DL>
+<DT><PRE><FONT SIZE="-1">@ExportedBean
+</FONT>public class <B>Queue</B><DT>extends <A HREF="../../hudson/model/ResourceController.html" title="class in hudson.model">ResourceController</A></DL>
 </PRE>
 
 <P>
@@ -264,6 +265,14 @@ Build queue.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this queue contains the said project.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#getApi()">getApi</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -494,7 +503,8 @@ public boolean <B>isEmpty</B>()</PRE>
 <A NAME="getItems()"><!-- --></A><H3>
 getItems</H3>
 <PRE>
-public <A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>[] <B>getItems</B>()</PRE>
+<FONT SIZE="-1">@Exported(inline=true)
+</FONT>public <A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>[] <B>getItems</B>()</PRE>
 <DL>
 <DD>Gets a snapshot of items in the queue.
 <P>
@@ -585,6 +595,17 @@ public void <B>scheduleMaintenance</B>()</PRE>
  <p>
  This wakes up one <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A> so that it will maintain a queue.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getApi()"><!-- --></A><H3>
+getApi</H3>
+<PRE>
+public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

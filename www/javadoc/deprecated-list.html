@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.226 API)
+Deprecated List (Hudson core 1.227 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-17">
+<META NAME="date" CONTENT="2008-06-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.226 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.226 API)";
+        parent.document.title="Deprecated List (Hudson core 1.227 API)";
     }
 }
 </SCRIPT>
@@ -160,6 +160,11 @@ function windowTitle()
 <TD><A HREF="hudson/model/Hudson.html#contains(hudson.model.TopLevelItem)">hudson.model.Hudson.contains(TopLevelItem)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>why are you calling a method that always return true?</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/scm/RepositoryBrowsers.html#createInstance(java.lang.Class, org.kohsuke.stapler.StaplerRequest, java.lang.String)">hudson.scm.RepositoryBrowsers.createInstance(Class<T>, StaplerRequest, String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/scm/RepositoryBrowsers.html#createInstance(java.lang.Class, org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String)"><CODE>RepositoryBrowsers.createInstance(Class, StaplerRequest, JSONObject, String)</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/Util.html#encodeRFC2396(java.lang.String)">hudson.Util.encodeRFC2396(String)</A>

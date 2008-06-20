@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Run (Hudson core 1.226 API)
+Run (Hudson core 1.227 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-17">
+<META NAME="date" CONTENT="2008-06-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson core 1.226 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson core 1.226 API)";
+        parent.document.title="Run (Hudson core 1.227 API)";
     }
 }
 </SCRIPT>
@@ -300,7 +300,7 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;java.util.Calendar</CODE></FONT></TD>
+<CODE>protected &nbsp;long</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#timestamp">timestamp</A></B></CODE>
 
 <BR>
@@ -350,6 +350,15 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads a run from a log file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#Run(JobT, long)">Run</A></B>(<A HREF="../../hudson/model/Run.html" title="type parameter in Run">JobT</A>&nbsp;job,
+    long&nbsp;timestamp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -958,7 +967,7 @@ protected transient volatile <A HREF="../../hudson/model/Run.html" title="type p
 <A NAME="timestamp"><!-- --></A><H3>
 timestamp</H3>
 <PRE>
-protected final transient java.util.Calendar <B>timestamp</B></PRE>
+protected final transient long <B>timestamp</B></PRE>
 <DL>
 <DD>When the build is scheduled.
 <P>
@@ -1113,6 +1122,15 @@ protected <B>Run</B>(<A HREF="../../hudson/model/Run.html" title="type parameter
 <DD>Constructor for creating a <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A> object in
  an arbitrary state.
 <P>
+</DL>
+<HR>
+
+<A NAME="Run(hudson.model.Job,long)"><!-- --></A><A NAME="Run(JobT, long)"><!-- --></A><H3>
+Run</H3>
+<PRE>
+protected <B>Run</B>(<A HREF="../../hudson/model/Run.html" title="type parameter in Run">JobT</A>&nbsp;job,
+              long&nbsp;timestamp)</PRE>
+<DL>
 </DL>
 <HR>
 

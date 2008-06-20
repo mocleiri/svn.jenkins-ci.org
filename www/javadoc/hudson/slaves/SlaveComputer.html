@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SlaveComputer (Hudson core 1.226 API)
+SlaveComputer (Hudson core 1.227 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-17">
+<META NAME="date" CONTENT="2008-06-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SlaveComputer (Hudson core 1.226 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SlaveComputer (Hudson core 1.226 API)";
+        parent.document.title="SlaveComputer (Hudson core 1.227 API)";
     }
 }
 </SCRIPT>
@@ -255,6 +255,14 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#isAcceptingTasks()">isAcceptingTasks</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns <code>true</code> if the computer is accepting tasks.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#isJnlpAgent()">isJnlpAgent</A></B>()</CODE>
 
 <BR>
@@ -300,6 +308,15 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#setAcceptingTasks(boolean)">setAcceptingTasks</A></B>(boolean&nbsp;acceptingTasks)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows a <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A> or a <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A> to
+ suspend tasks being accepted by the slave computer.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -416,6 +433,38 @@ public <B>SlaveComputer</B>(<A HREF="../../hudson/model/Slave.html" title="class
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="isAcceptingTasks()"><!-- --></A><H3>
+isAcceptingTasks</H3>
+<PRE>
+public boolean <B>isAcceptingTasks</B>()</PRE>
+<DL>
+<DD>Returns <code>true</code> if the computer is accepting tasks. Needed to allow slaves programmatic suspension of task
+ scheduling that does not overlap with being offline.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Computer.html#isAcceptingTasks()">isAcceptingTasks</A></CODE> in class <CODE><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> if the computer is accepting tasks</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAcceptingTasks(boolean)"><!-- --></A><H3>
+setAcceptingTasks</H3>
+<PRE>
+public void <B>setAcceptingTasks</B>(boolean&nbsp;acceptingTasks)</PRE>
+<DL>
+<DD>Allows a <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A> or a <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A> to
+ suspend tasks being accepted by the slave computer.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>acceptingTasks</CODE> - <code>true</code> if the slave can accept tasks.</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="isUnix()"><!-- --></A><H3>
 isUnix</H3>

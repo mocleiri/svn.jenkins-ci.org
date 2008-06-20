@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-LogRotator (Hudson core 1.226 API)
+LogRotator (Hudson core 1.227 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-17">
+<META NAME="date" CONTENT="2008-06-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LogRotator (Hudson core 1.226 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LogRotator (Hudson core 1.226 API)";
+        parent.document.title="LogRotator (Hudson core 1.227 API)";
     }
 }
 </SCRIPT>
@@ -169,6 +169,13 @@ Deletes old log files.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/tasks/LogRotator.html#LogRotator(java.lang.String, java.lang.String)">LogRotator</A></B>(java.lang.String&nbsp;logrotate_days,
+           java.lang.String&nbsp;logrotate_nums)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ========== METHOD SUMMARY =========== -->
@@ -215,6 +222,14 @@ Deletes old log files.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/LogRotator.html#getNumToKeepStr()">getNumToKeepStr</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/LogRotator.html#parse(java.lang.String)">parse</A></B>(java.lang.String&nbsp;p)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -269,6 +284,16 @@ public static final <A HREF="../../hudson/tasks/LogRotator.LRDescriptor.html" ti
 </TR>
 </TABLE>
 
+<A NAME="LogRotator(java.lang.String, java.lang.String)"><!-- --></A><H3>
+LogRotator</H3>
+<PRE>
+<FONT SIZE="-1">@DataBoundConstructor
+</FONT>public <B>LogRotator</B>(java.lang.String&nbsp;logrotate_days,
+                                       java.lang.String&nbsp;logrotate_nums)</PRE>
+<DL>
+</DL>
+<HR>
+
 <A NAME="LogRotator(int, int)"><!-- --></A><H3>
 LogRotator</H3>
 <PRE>
@@ -286,6 +311,20 @@ public <B>LogRotator</B>(int&nbsp;daysToKeep,
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="parse(java.lang.String)"><!-- --></A><H3>
+parse</H3>
+<PRE>
+public static int <B>parse</B>(java.lang.String&nbsp;p)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="perform(hudson.model.Job)"><!-- --></A><H3>
 perform</H3>
