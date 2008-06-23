@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.227 API)
+Hudson (Hudson core 1.228 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-20">
+<META NAME="date" CONTENT="2008-06-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.227 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.227 API)";
+        parent.document.title="Hudson (Hudson core 1.228 API)";
     }
 }
 </SCRIPT>
@@ -442,6 +442,15 @@ Root object of the system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the path is a valid path.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCheckURIEncoding</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                   org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if container uses UTF-8 to decode URLs.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1040,6 +1049,23 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;P extends <A HREF="../../hudson/Plugin.html" title="class in hudson">Plugin</A>&gt; 
+<BR>
+P</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getPlugin(java.lang.Class)">getPlugin</A></B>(java.lang.Class&lt;P&gt;&nbsp;clazz)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the plugin object from its class.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/Plugin.html" title="class in hudson">Plugin</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getPlugin(java.lang.String)">getPlugin</A></B>(java.lang.String&nbsp;shortName)</CODE>
 
@@ -1053,6 +1079,23 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;P extends <A HREF="../../hudson/Plugin.html" title="class in hudson">Plugin</A>&gt; 
+<BR>
+java.util.List&lt;P&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getPlugins(java.lang.Class)">getPlugins</A></B>(java.lang.Class&lt;P&gt;&nbsp;clazz)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the plugin objects from their super-class.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1337,6 +1380,14 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Define a custom <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> and check against ACL.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#isCheckURIEncodingEnabled()">isCheckURIEncodingEnabled</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Does not check when system default encoding is "ISO-8859-1".</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2036,6 +2087,45 @@ public <A HREF="../../hudson/Plugin.html" title="class in hudson">Plugin</A> <B>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPlugin(java.lang.Class)"><!-- --></A><H3>
+getPlugin</H3>
+<PRE>
+public &lt;P extends <A HREF="../../hudson/Plugin.html" title="class in hudson">Plugin</A>&gt; P <B>getPlugin</B>(java.lang.Class&lt;P&gt;&nbsp;clazz)</PRE>
+<DL>
+<DD>Gets the plugin object from its class.
+
+ <p>
+ This allows easy storage of plugin information in the plugin singleton without
+ every plugin reimplementing the singleton pattern.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>clazz</CODE> - The plugin class (beware class-loader fun, this will probably only work
+ from within the hpi that defines the plugin class, it may or may not work in other cases)
+<DT><B>Returns:</B><DD>The plugin instance.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPlugins(java.lang.Class)"><!-- --></A><H3>
+getPlugins</H3>
+<PRE>
+public &lt;P extends <A HREF="../../hudson/Plugin.html" title="class in hudson">Plugin</A>&gt; java.util.List&lt;P&gt; <B>getPlugins</B>(java.lang.Class&lt;P&gt;&nbsp;clazz)</PRE>
+<DL>
+<DD>Gets the plugin objects from their super-class.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>clazz</CODE> - The plugin class (beware class-loader fun)
+<DT><B>Returns:</B><DD>The plugin instances.</DL>
 </DD>
 </DL>
 <HR>
@@ -3831,6 +3921,45 @@ public void <B>doResources</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doCheckURIEncoding</H3>
+<PRE>
+public void <B>doCheckURIEncoding</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                        throws java.io.IOException,
+                               javax.servlet.ServletException</PRE>
+<DL>
+<DD>Checks if container uses UTF-8 to decode URLs. See
+ http://hudson.gotdns.com/wiki/display/HUDSON/Tomcat#Tomcat-i18n
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>req</CODE> - containing the parameter value<DD><CODE>rsp</CODE> - used by FormFieldValidator
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - thrown by FormFieldValidator.check()
+<DD><CODE>javax.servlet.ServletException</CODE> - thrown by FormFieldValidator.check()</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isCheckURIEncodingEnabled()"><!-- --></A><H3>
+isCheckURIEncodingEnabled</H3>
+<PRE>
+public static boolean <B>isCheckURIEncodingEnabled</B>()</PRE>
+<DL>
+<DD>Does not check when system default encoding is "ISO-8859-1".
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

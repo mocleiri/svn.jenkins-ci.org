@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-DependencyGraph (Hudson core 1.227 API)
+DependencyGraph (Hudson core 1.228 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-20">
+<META NAME="date" CONTENT="2008-06-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DependencyGraph (Hudson core 1.227 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DependencyGraph (Hudson core 1.227 API)";
+        parent.document.title="DependencyGraph (Hudson core 1.228 API)";
     }
 }
 </SCRIPT>
@@ -96,12 +96,9 @@ Class DependencyGraph</H2>
 java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.DependencyGraph</B>
 </PRE>
-<DL>
-<DT><B>All Implemented Interfaces:</B> <DD>java.util.Comparator&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;</DD>
-</DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>DependencyGraph</B><DT>extends java.lang.Object<DT>implements java.util.Comparator&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;</DL>
+<DT><PRE>public final class <B>DependencyGraph</B><DT>extends java.lang.Object</DL>
 </PRE>
 
 <P>
@@ -211,15 +208,6 @@ Maintains the build dependencies between <A HREF="../../hudson/model/AbstractPro
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;int</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#compare(hudson.model.AbstractProject, hudson.model.AbstractProject)">compare</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;o1,
-        <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;o2)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compare to Projects based on the topological order defined by this Dependency Graph</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#doGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doGraph</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
         org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
@@ -268,6 +256,14 @@ Maintains the build dependencies between <A HREF="../../hudson/model/AbstractPro
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if a project has a non-direct dependency to another project.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#sort(java.util.List)">sort</A></B>(java.util.List&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;list)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sort the given in their Buildorder.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -276,15 +272,6 @@ Maintains the build dependencies between <A HREF="../../hudson/model/AbstractPro
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_java.util.Comparator"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from interface java.util.Comparator</B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>equals</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -346,9 +333,6 @@ public java.util.List&lt;<A HREF="../../hudson/model/AbstractProject.html" title
 <DD>Gets all the immediate downstream projects (IOW forward edges) of the given project.
 <P>
 <DD><DL>
-</DL>
-</DD>
-<DD><DL>
 
 <DT><B>Returns:</B><DD>can be empty but never null.</DL>
 </DD>
@@ -362,9 +346,6 @@ public java.util.List&lt;<A HREF="../../hudson/model/AbstractProject.html" title
 <DL>
 <DD>Gets all the immediate upstream projects (IOW backward edges) of the given project.
 <P>
-<DD><DL>
-</DL>
-</DD>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>can be empty but never null.</DL>
@@ -383,9 +364,6 @@ public void <B>addDependency</B>(<A HREF="../../hudson/model/AbstractProject.htm
 <DD><DL>
 </DL>
 </DD>
-<DD><DL>
-</DL>
-</DD>
 </DL>
 <HR>
 
@@ -395,9 +373,6 @@ addDependency</H3>
 public void <B>addDependency</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;upstream,
                           java.util.Collection&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;downstream)</PRE>
 <DL>
-<DD><DL>
-</DL>
-</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -413,9 +388,6 @@ public void <B>addDependency</B>(java.util.Collection&lt;? extends <A HREF="../.
 <DD><DL>
 </DL>
 </DD>
-<DD><DL>
-</DL>
-</DD>
 </DL>
 <HR>
 
@@ -427,9 +399,6 @@ public void <B>addDependencyDeclarers</B>(<A HREF="../../hudson/model/AbstractPr
 <DL>
 <DD>Lists up <A HREF="../../hudson/model/DependecyDeclarer.html" title="interface in hudson.model"><CODE>DependecyDeclarer</CODE></A> from the collection and let them builds dependencies.
 <P>
-<DD><DL>
-</DL>
-</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -450,9 +419,6 @@ public boolean <B>hasIndirectDependencies</B>(<A HREF="../../hudson/model/Abstra
 <DD><DL>
 </DL>
 </DD>
-<DD><DL>
-</DL>
-</DD>
 </DL>
 <HR>
 
@@ -463,9 +429,6 @@ public java.util.Set&lt;<A HREF="../../hudson/model/AbstractProject.html" title=
 <DL>
 <DD>Gets all the direct and indirect upstream dependencies of the given project.
 <P>
-<DD><DL>
-</DL>
-</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -482,9 +445,6 @@ public java.util.Set&lt;<A HREF="../../hudson/model/AbstractProject.html" title=
 <DD><DL>
 </DL>
 </DD>
-<DD><DL>
-</DL>
-</DD>
 </DL>
 <HR>
 
@@ -498,9 +458,6 @@ public void <B>doGraph</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DD>Experimental visualization of project dependencies.
 <P>
 <DD><DL>
-</DL>
-</DD>
-<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
@@ -508,19 +465,16 @@ public void <B>doGraph</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="compare(hudson.model.AbstractProject, hudson.model.AbstractProject)"><!-- --></A><H3>
-compare</H3>
+<A NAME="sort(java.util.List)"><!-- --></A><H3>
+sort</H3>
 <PRE>
-public int <B>compare</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;o1,
-                   <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;o2)</PRE>
+public void <B>sort</B>(java.util.List&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;list)</PRE>
 <DL>
-<DD>Compare to Projects based on the topological order defined by this Dependency Graph
+<DD>Sort the given in their Buildorder. Note that there may be more than 
+ one possible order.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE>compare</CODE> in interface <CODE>java.util.Comparator&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;</CODE></DL>
-</DD>
-<DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>list</CODE> - to be ordered</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

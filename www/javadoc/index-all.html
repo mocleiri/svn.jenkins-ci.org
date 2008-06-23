@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.227 API)
+Index (Hudson core 1.228 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-20">
+<META NAME="date" CONTENT="2008-06-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.227 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.227 API)";
+        parent.document.title="Index (Hudson core 1.228 API)";
     }
 }
 </SCRIPT>
@@ -1159,6 +1159,10 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
 <DT><A HREF="./hudson/Functions.html#checkPermission(hudson.security.AccessControlled, hudson.security.Permission)"><B>checkPermission(AccessControlled, Permission)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/Functions.html#checkPermission(java.lang.Object, hudson.security.Permission)"><B>checkPermission(Object, Permission)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
+<DD>This version is so that the 'checkPermission' on <tt>layout.jelly</tt>
+ degrades gracefully if "it" is not an <A HREF="./hudson/security/AccessControlled.html" title="interface in hudson.security"><CODE>AccessControlled</CODE></A> object.
 <DT><A HREF="./hudson/model/AbstractItem.html#checkPermission(hudson.security.Permission)"><B>checkPermission(Permission)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A>
 <DD>Short for <code>getACL().checkPermission(p)</code>
@@ -1369,9 +1373,6 @@ Static variable in class hudson.model.<A HREF="./hudson/model/RunMap.html" title
 <DT><A HREF="./hudson/model/RunMap.html#comparator()"><B>comparator()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/RunMap.html" title="class in hudson.model">RunMap</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/DependencyGraph.html#compare(hudson.model.AbstractProject, hudson.model.AbstractProject)"><B>compare(AbstractProject, AbstractProject)</B></A> - 
-Method in class hudson.model.<A HREF="./hudson/model/DependencyGraph.html" title="class in hudson.model">DependencyGraph</A>
-<DD>Compare to Projects based on the topological order defined by this Dependency Graph
 <DT><A HREF="./hudson/util/CaseInsensitiveComparator.html#compare(java.lang.String, java.lang.String)"><B>compare(String, String)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/CaseInsensitiveComparator.html" title="class in hudson.util">CaseInsensitiveComparator</A>
 <DD>&nbsp;
@@ -2526,6 +2527,9 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" title=
 <DT><A HREF="./hudson/scm/CVSSCM.TagAction.html#doCheckTag(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doCheckTag(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.TagAction.html" title="class in hudson.scm">CVSSCM.TagAction</A>
 <DD>Checks if the value is a valid CVS tag name.
+<DT><A HREF="./hudson/model/Hudson.html#doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doCheckURIEncoding(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>Checks if container uses UTF-8 to decode URLs.
 <DT><A HREF="./hudson/model/Hudson.html#doClassicThreadDump(org.kohsuke.stapler.StaplerResponse)"><B>doClassicThreadDump(StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Backward compatibility.
@@ -3159,6 +3163,9 @@ Constructor for class hudson.util.<A HREF="./hudson/util/ExceptionCatchingThread
 <DT><A HREF="./hudson/util/ExceptionCatchingThreadFactory.html#ExceptionCatchingThreadFactory(java.util.concurrent.ThreadFactory)"><B>ExceptionCatchingThreadFactory(ThreadFactory)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/ExceptionCatchingThreadFactory.html" title="class in hudson.util">ExceptionCatchingThreadFactory</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.Plugin.html#excerpt"><B>excerpt</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>
+<DD>Optional excerpt string.
 <DT><A HREF="./hudson/maven/MavenBuildProxy.html#execute(hudson.maven.MavenBuildProxy.BuildCallable)"><B>execute(MavenBuildProxy.BuildCallable&lt;V, T&gt;)</B></A> - 
 Method in interface hudson.maven.<A HREF="./hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven">MavenBuildProxy</A>
 <DD>Executes the given <A HREF="./hudson/maven/MavenBuildProxy.BuildCallable.html" title="interface in hudson.maven"><CODE>MavenBuildProxy.BuildCallable</CODE></A> on the master, where one
@@ -6484,12 +6491,18 @@ Method in class hudson.security.<A HREF="./hudson/security/PermissionGroup.html"
 <DT><A HREF="./hudson/model/Hudson.html#getPlugin(java.lang.String)"><B>getPlugin(String)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Gets the plugin object from its short name.
+<DT><A HREF="./hudson/model/Hudson.html#getPlugin(java.lang.Class)"><B>getPlugin(Class&lt;P&gt;)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>Gets the plugin object from its class.
 <DT><A HREF="./hudson/model/UpdateCenter.html#getPlugin(java.lang.String)"><B>getPlugin(String)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
 <DD>Gets the information about a specific plugin.
 <DT><A HREF="./hudson/PluginManager.html#getPlugin(java.lang.String)"><B>getPlugin(String)</B></A> - 
 Method in class hudson.<A HREF="./hudson/PluginManager.html" title="class in hudson">PluginManager</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/PluginManager.html#getPlugin(java.lang.Class)"><B>getPlugin(Class&lt;? extends Plugin&gt;)</B></A> - 
+Method in class hudson.<A HREF="./hudson/PluginManager.html" title="class in hudson">PluginManager</A>
+<DD>Get the plugin instance that implements a specific class, use to find your plugin singleton.
 <DT><A HREF="./hudson/PluginWrapper.html#getPlugin()"><B>getPlugin()</B></A> - 
 Method in class hudson.<A HREF="./hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>
 <DD>Gets the instance of <A HREF="./hudson/Plugin.html" title="class in hudson"><CODE>Plugin</CODE></A> contributed by this plugin.
@@ -6502,9 +6515,15 @@ Method in class hudson.maven.<A HREF="./hudson/maven/ExecutedMojo.html" title="c
 <DT><A HREF="./hudson/model/Hudson.html#getPluginManager()"><B>getPluginManager()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Hudson.html#getPlugins(java.lang.Class)"><B>getPlugins(Class&lt;P&gt;)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>Gets the plugin objects from their super-class.
 <DT><A HREF="./hudson/PluginManager.html#getPlugins()"><B>getPlugins()</B></A> - 
 Method in class hudson.<A HREF="./hudson/PluginManager.html" title="class in hudson">PluginManager</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/PluginManager.html#getPlugins(java.lang.Class)"><B>getPlugins(Class&lt;? extends Plugin&gt;)</B></A> - 
+Method in class hudson.<A HREF="./hudson/PluginManager.html" title="class in hudson">PluginManager</A>
+<DD>Get the plugin instances that extend a specific class, use to find similar plugins.
 <DT><A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html#getPollingThreadCount()"><B>getPollingThreadCount()</B></A> - 
 Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A>
 <DD>Gets the number of concurrent threads used for polling.
@@ -8011,6 +8030,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#Hudson_NotJDKDir(java.lang.Object)"><B>Hudson_NotJDKDir(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>{0} doesn''t look like a JDK directory
+<DT><A HREF="./hudson/model/Messages.html#Hudson_NotUsesUTF8ToDecodeURL()"><B>Hudson_NotUsesUTF8ToDecodeURL()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Your container does''t use UTF-8 to decode URLs.
 <DT><A HREF="./hudson/model/Messages.html#Hudson_Permissions_Title()"><B>Hudson_Permissions_Title()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Overall
@@ -8035,7 +8057,8 @@ Constructor for class hudson.security.<A HREF="./hudson/security/HudsonPrivateSe
 <DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.DescriptorImpl.html" title="class in hudson.security"><B>HudsonPrivateSecurityRealm.DescriptorImpl</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD>&nbsp;<DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.Details.html" title="class in hudson.security"><B>HudsonPrivateSecurityRealm.Details</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD><A HREF="./hudson/model/UserProperty.html" title="class in hudson.model"><CODE>UserProperty</CODE></A> that provides the <CODE>UserDetails</CODE> view of the User object.<DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.HudsonUserDetailsService.html" title="class in hudson.security"><B>HudsonPrivateSecurityRealm.HudsonUserDetailsService</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD><CODE>UserDetailsService</CODE> that loads user information from <A HREF="./hudson/model/User.html" title="class in hudson.model"><CODE>User</CODE></A> object.<DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.HudsonUserDetailsService.html#HudsonPrivateSecurityRealm.HudsonUserDetailsService()"><B>HudsonPrivateSecurityRealm.HudsonUserDetailsService()</B></A> - 
 Constructor for class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecurityRealm.HudsonUserDetailsService.html" title="class in hudson.security">HudsonPrivateSecurityRealm.HudsonUserDetailsService</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.ManageUserLinks.html" title="class in hudson.security"><B>HudsonPrivateSecurityRealm.ManageUserLinks</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD>&nbsp;<DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.ManageUserLinks.html#HudsonPrivateSecurityRealm.ManageUserLinks()"><B>HudsonPrivateSecurityRealm.ManageUserLinks()</B></A> - 
+<DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.ManageUserLinks.html" title="class in hudson.security"><B>HudsonPrivateSecurityRealm.ManageUserLinks</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD>Displays "manage users" link in the system config if <A HREF="./hudson/security/HudsonPrivateSecurityRealm.html" title="class in hudson.security"><CODE>HudsonPrivateSecurityRealm</CODE></A>
+ is in effect.<DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.ManageUserLinks.html#HudsonPrivateSecurityRealm.ManageUserLinks()"><B>HudsonPrivateSecurityRealm.ManageUserLinks()</B></A> - 
 Constructor for class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecurityRealm.ManageUserLinks.html" title="class in hudson.security">HudsonPrivateSecurityRealm.ManageUserLinks</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.SignupInfo.html" title="class in hudson.security"><B>HudsonPrivateSecurityRealm.SignupInfo</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD>&nbsp;<DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.SignupInfo.html#HudsonPrivateSecurityRealm.SignupInfo()"><B>HudsonPrivateSecurityRealm.SignupInfo()</B></A> - 
@@ -8049,7 +8072,7 @@ Static method in class hudson.security.<A HREF="./hudson/security/Messages.html"
 <DD>The confirmed password is not the same as the one entered.
 <DT><A HREF="./hudson/security/Messages.html#HudsonPrivateSecurityRealm_DisplayName()"><B>HudsonPrivateSecurityRealm_DisplayName()</B></A> - 
 Static method in class hudson.security.<A HREF="./hudson/security/Messages.html" title="class in hudson.security">Messages</A>
-<DD>Hudson's own user database
+<DD>Hudson''s own user database
 <DT><A HREF="./hudson/security/Messages.html#HudsonPrivateSecurityRealm_ManageUserLinks_Description()"><B>HudsonPrivateSecurityRealm_ManageUserLinks_Description()</B></A> - 
 Static method in class hudson.security.<A HREF="./hudson/security/Messages.html" title="class in hudson.security">Messages</A>
 <DD>Create/delete/modify users that can log in to this Hudson
@@ -8341,6 +8364,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in h
 <DT><A HREF="./hudson/widgets/HistoryWidget.Adapter.html#isBuilding(T)"><B>isBuilding(T)</B></A> - 
 Method in interface hudson.widgets.<A HREF="./hudson/widgets/HistoryWidget.Adapter.html" title="interface in hudson.widgets">HistoryWidget.Adapter</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Hudson.html#isCheckURIEncodingEnabled()"><B>isCheckURIEncodingEnabled()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>Does not check when system default encoding is "ISO-8859-1".
 <DT><A HREF="./hudson/model/Resource.html#isCollidingWith(hudson.model.Resource, int)"><B>isCollidingWith(Resource, int)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Resource.html" title="class in hudson.model">Resource</A>
 <DD>Checks the resource collision.
@@ -11962,6 +11988,9 @@ Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in
 <DT><A HREF="./hudson/XmlFile.html#sniffEncoding()"><B>sniffEncoding()</B></A> - 
 Method in class hudson.<A HREF="./hudson/XmlFile.html" title="class in hudson">XmlFile</A>
 <DD>Parses the beginning of the file and determines the encoding.
+<DT><A HREF="./hudson/model/DependencyGraph.html#sort(java.util.List)"><B>sort(List&lt;AbstractProject&gt;)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/DependencyGraph.html" title="class in hudson.model">DependencyGraph</A>
+<DD>Sort the given in their Buildorder.
 <DT><A HREF="./hudson/model/View.html#SORTER"><B>SORTER</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
 <DD>&nbsp;
@@ -13624,6 +13653,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#_Hudson_NotJDKDir(java.lang.Object)"><B>_Hudson_NotJDKDir(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>{0} doesn''t look like a JDK directory
+<DT><A HREF="./hudson/model/Messages.html#_Hudson_NotUsesUTF8ToDecodeURL()"><B>_Hudson_NotUsesUTF8ToDecodeURL()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Your container does''t use UTF-8 to decode URLs.
 <DT><A HREF="./hudson/model/Messages.html#_Hudson_Permissions_Title()"><B>_Hudson_Permissions_Title()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Overall
@@ -13641,7 +13673,7 @@ Static method in class hudson.security.<A HREF="./hudson/security/Messages.html"
 <DD>The confirmed password is not the same as the one entered.
 <DT><A HREF="./hudson/security/Messages.html#_HudsonPrivateSecurityRealm_DisplayName()"><B>_HudsonPrivateSecurityRealm_DisplayName()</B></A> - 
 Static method in class hudson.security.<A HREF="./hudson/security/Messages.html" title="class in hudson.security">Messages</A>
-<DD>Hudson's own user database
+<DD>Hudson''s own user database
 <DT><A HREF="./hudson/security/Messages.html#_HudsonPrivateSecurityRealm_ManageUserLinks_Description()"><B>_HudsonPrivateSecurityRealm_ManageUserLinks_Description()</B></A> - 
 Static method in class hudson.security.<A HREF="./hudson/security/Messages.html" title="class in hudson.security">Messages</A>
 <DD>Create/delete/modify users that can log in to this Hudson

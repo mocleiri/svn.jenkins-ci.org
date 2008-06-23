@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-PluginManager (Hudson core 1.227 API)
+PluginManager (Hudson core 1.228 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-20">
+<META NAME="date" CONTENT="2008-06-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginManager (Hudson core 1.227 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginManager (Hudson core 1.227 API)";
+        parent.document.title="PluginManager (Hudson core 1.228 API)";
     }
 }
 </SCRIPT>
@@ -264,6 +264,14 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#getPlugin(java.lang.Class)">getPlugin</A></B>(java.lang.Class&lt;? extends <A HREF="../hudson/Plugin.html" title="class in hudson">Plugin</A>&gt;&nbsp;pluginClazz)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the plugin instance that implements a specific class, use to find your plugin singleton.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/PluginManager.html#getPlugin(java.lang.String)">getPlugin</A></B>(java.lang.String&nbsp;shortName)</CODE>
 
 <BR>
@@ -276,6 +284,14 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#getPlugins(java.lang.Class)">getPlugins</A></B>(java.lang.Class&lt;? extends <A HREF="../hudson/Plugin.html" title="class in hudson">Plugin</A>&gt;&nbsp;pluginSuperclass)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the plugin instances that extend a specific class, use to find similar plugins.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -450,6 +466,36 @@ public <A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrap
 <DL>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPlugin(java.lang.Class)"><!-- --></A><H3>
+getPlugin</H3>
+<PRE>
+public <A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A> <B>getPlugin</B>(java.lang.Class&lt;? extends <A HREF="../hudson/Plugin.html" title="class in hudson">Plugin</A>&gt;&nbsp;pluginClazz)</PRE>
+<DL>
+<DD>Get the plugin instance that implements a specific class, use to find your plugin singleton.
+ Note: beware the classloader fun.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pluginClazz</CODE> - The class that your plugin implements.
+<DT><B>Returns:</B><DD>The plugin singleton or <code>null</code> if for some reason the plugin is not loaded.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPlugins(java.lang.Class)"><!-- --></A><H3>
+getPlugins</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&gt; <B>getPlugins</B>(java.lang.Class&lt;? extends <A HREF="../hudson/Plugin.html" title="class in hudson">Plugin</A>&gt;&nbsp;pluginSuperclass)</PRE>
+<DL>
+<DD>Get the plugin instances that extend a specific class, use to find similar plugins.
+ Note: beware the classloader fun.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pluginSuperclass</CODE> - The class that your plugin is derived from.
+<DT><B>Returns:</B><DD>The list of plugins implementing the specified class.</DL>
 </DD>
 </DL>
 <HR>
