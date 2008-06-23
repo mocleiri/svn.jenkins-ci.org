@@ -106,11 +106,11 @@ public class Plugin {
         if(!m.find())
             return null;
 
-        String excerpt = m.group();
+        String excerpt = m.group(1);
         return HYPERLINK_PATTERN.matcher(excerpt).replaceAll("<a href='$2'>$1</a>");
     }
 
-    private static final Pattern EXCERPT_PATTERN = Pattern.compile("\\{excerpt\\}.+\\{excerpt\\}");
+    private static final Pattern EXCERPT_PATTERN = Pattern.compile("\\{excerpt\\}(.+)\\{excerpt\\}");
     private static final Pattern HYPERLINK_PATTERN = Pattern.compile("\\[([^]]+)\\|([^]]+)\\]");
 
     public JSONObject toJSON() throws IOException {
