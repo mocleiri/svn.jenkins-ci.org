@@ -146,6 +146,7 @@ public class Queue extends ResourceController {
         xstream.registerConverter(new AbstractSingleValueConverter() {
 
 			@Override
+			@SuppressWarnings("unchecked")
 			public boolean canConvert(Class klazz) {
 				return TopLevelItem.class.isAssignableFrom(klazz);
 			}
@@ -158,6 +159,30 @@ public class Queue extends ResourceController {
 			@Override
 			public String toString(Object item) {
 				return ((TopLevelItem) item).getName();
+			}
+        });
+        xstream.registerConverter(new AbstractSingleValueConverter() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public boolean canConvert(Class klazz) {
+				return Run.class.isAssignableFrom(klazz);
+			}
+
+			@Override
+			public Object fromString(String string) {
+				String[] split = string.split("#");
+				String projectName = split[0];
+				int buildNumber = Integer.parseInt(split[1]);
+				Job<?,?> job = (Job<?,?>) Hudson.getInstance().getItem(projectName);
+				Run<?,?> run = job.getBuildByNumber(buildNumber);
+				return run;
+			}
+
+			@Override
+			public String toString(Object object) {
+				Run<?,?> run = (Run<?,?>) object;
+				return run.getParent().getName() + "#" + run.getNumber();
 			}
         });
  
@@ -292,8 +317,8 @@ public class Queue extends ResourceController {
      */
     public synchronized boolean cancel(Task p) {
         LOGGER.fine("Cancelling " + p.getName());
-        for (Iterator itr = waitingList.iterator(); itr.hasNext();) {
-            Item item = (Item) itr.next();
+        for (Iterator<WaitingItem> itr = waitingList.iterator(); itr.hasNext();) {
+            Item item = itr.next();
             if (item.task == p) {
                 itr.remove();
                 return true;

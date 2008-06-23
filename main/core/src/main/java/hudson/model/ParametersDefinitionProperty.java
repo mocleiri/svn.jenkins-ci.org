@@ -86,7 +86,10 @@ public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?,
 		@Override
 		public JobProperty<?> newInstance(StaplerRequest req,
 				JSONObject formData) throws FormException {
-
+			if (formData.isNullObject()) {
+				return null;
+			}
+			
 			List<ParameterDefinition> parameterDefinitions = Descriptor.newInstancesFromHeteroList(
 					req, formData, "parameter", ParameterDefinition.LIST);
 

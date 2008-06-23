@@ -44,5 +44,14 @@ public class ParametersAction implements Action {
 	public String getUrlName() {
 		return "parameters";
 	}
+	
+	public Object getValue(String name) {
+		for (ParameterValue p: parameters) {
+			if (p.getName().equals(name)) {
+				return p.getValue();
+			}
+		}
+		return null;
+	}
 
 }
