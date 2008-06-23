@@ -1,6 +1,10 @@
 package hudson.security;
 
-import java.util.ArrayList;
+import hudson.model.Item;
+import hudson.model.Job;
+import hudson.model.JobProperty;
+import hudson.model.JobPropertyDescriptor;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,11 +14,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import hudson.model.Item;
-import hudson.model.Job;
-import hudson.model.JobProperty;
-import hudson.model.JobPropertyDescriptor;
-import hudson.security.GlobalMatrixAuthorizationStrategy.AclImpl;
 import net.sf.json.JSONObject;
 
 import org.acegisecurity.Authentication;
