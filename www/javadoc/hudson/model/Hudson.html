@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.228 API)
+Hudson (Hudson core 1.229 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-23">
+<META NAME="date" CONTENT="2008-06-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.228 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.228 API)";
+        parent.document.title="Hudson (Hudson core 1.229 API)";
     }
 }
 </SCRIPT>
@@ -2953,8 +2953,9 @@ getItem</H3>
 <PRE>
 public <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A> <B>getItem</B>(java.lang.String&nbsp;name)</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/View.html#getItem(java.lang.String)">View</A></CODE></B></DD>
-<DD>Gets the <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A> of the given name.
+<DD>Gets the <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A> of the given name..
+
+ Note that the look up is case-insensitive.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ItemGroup.html#getItem(java.lang.String)">getItem</A></CODE> in interface <CODE><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#getItem(java.lang.String)">getItem</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
