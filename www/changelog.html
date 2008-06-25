@@ -6,17 +6,19 @@
 </head>
 <body>
 <div align="right">Legend:
-	<span class="iconlegend">
-		<img src="images/rfe2.gif">major enhancement <img src="images/rfe.gif" >enhancement
-		<img src="images/bug2.gif">major bug fix     <img src="images/bug.gif" >bug fix
-	</span><span style="visibility:hidden">xxxxx</span>
+    <span class="iconlegend">
+        <img src="images/rfe2.gif">major enhancement <img src="images/rfe.gif" >enhancement
+        <img src="images/bug2.gif">major bug fix     <img src="images/bug.gif" >bug fix
+    </span><span style="visibility:hidden">xxxxx</span>
   <a href="/servlets/ProjectNewsRSS"><img src=atom.gif border=0> Subscribe to RSS feed</a>
 </div>
 
 <div style="display:none;"><!--=BEGIN=-->
 <a name=v1.230><h3>What's new in 1.230</h3></a>
 <ul class=image>
-  <li class=>
+  <li class=rfe>
+    Debian package improvements, notably run daemon as hudson user instead of root.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1959">issue 1959</a>)
 </ul>
 </div><!--=END=-->
 <a name=v1.229><h3>What's new in 1.229</h3></a>
@@ -58,7 +60,7 @@
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1913">issue 1913</a>)
   <li class=rfe>
     Hudson checks if the container uses UTF-8 to decode URls.
-	(<a href="https://hudson.dev.java.net/servlets/ReadMsg?list=ja&msgNo=32">discussion</a>)
+    (<a href="https://hudson.dev.java.net/servlets/ReadMsg?list=ja&msgNo=32">discussion</a>)
 </ul>
 <a name=v1.227><h3>What's new in 1.227</h3></a>
 <ul class=image>
@@ -93,7 +95,7 @@
     Take the <tt>-f</tt> option into account when auto-correcting the base directory.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1782">issue 1782</a>)
   <li class=bug>
-    "Hudson is loading" page was supposed to return 503 but it wasn't doing it 
+    "Hudson is loading" page was supposed to return 503 but it wasn't doing it
   <li class=rfe>
     <tt>BuildWrapper</tt> can now contribute project-level actions, too.
     (<a href="http://www.nabble.com/Plugin-development-help-tt17870443.html">discussion</a>)
@@ -110,7 +112,7 @@
     LDAP authentication with non-empty manager DN/password was not working correctly.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1802">issue 1802</a>)
   <li class=bug>
-    Users had to have the Administer privilege to "Keep this Build Forever" or "Delete this Build".  The Run|Update and Run|Delete privileges (correspondingly) control this now.  
+    Users had to have the Administer privilege to "Keep this Build Forever" or "Delete this Build".  The Run|Update and Run|Delete privileges (correspondingly) control this now.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1668">issue 1668</a>)
   <li class=bug>
     NumberFormatException in log for variants where build numbers are non-numeric
@@ -155,12 +157,12 @@
     Fixed NPE when trying to reset the proxy setting in the update center
     (<a href="http://www.nabble.com/Problem-with-httpProxy-in-plugin-update-center-tt17780399.html">discussion</a>)
   <li class=rfe>
-    "Hudson's own user database" can be now configured to prevent sign-up. 
+    "Hudson's own user database" can be now configured to prevent sign-up.
   <li class=rfe>
     Administrator can now create user accounts for others
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1193">issue 1193</a>)
   <li class=rfe>
-    Authentication failure now leaves the INFO log on Hudson server log. 
+    Authentication failure now leaves the INFO log on Hudson server log.
   <li class=rfe>
     Maven jobs can be now executed with its own private local Maven repository for better isolation.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1044">issue 1044</a>,
