@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.229 API)
+Hudson (Hudson core 1.230 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-24">
+<META NAME="date" CONTENT="2008-06-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.229 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.229 API)";
+        parent.document.title="Hudson (Hudson core 1.230 API)";
     }
 }
 </SCRIPT>
@@ -934,6 +934,21 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.util.List&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getItems(java.lang.Class)">getItems</A></B>(java.lang.Class&lt;T&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets just the immediate children of <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> but of the given type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/JDK.html" title="class in hudson.model">JDK</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getJDK(java.lang.String)">getJDK</A></B>(java.lang.String&nbsp;name)</CODE>
 
@@ -1371,7 +1386,18 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#isAdmin()">isAdmin</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Define a custom <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> and check against ACL.</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This method is deprecated when Hudson moved from simple Unix root-like model
+      of "admin gets to do everything, and others don't have any privilege" to more
+      complex <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> and <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> based scheme.
+
+      <p>
+      For a quick migration, use <code>Hudson.getInstance().getACL().hasPermission(Hudson.ADMINISTER)</code>
+      To check if the user has the 'administer' role in Hudson.
+
+      <p>
+      But ideally, your plugin should first identify a suitable <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> (or create one,
+      if appropriate), then identify a suitable <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security"><CODE>AccessControlled</CODE></A> object to check its permission
+      against.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1379,7 +1405,8 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#isAdmin(org.kohsuke.stapler.StaplerRequest)">isAdmin</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Define a custom <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> and check against ACL.</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Define a custom <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> and check against ACL.
+      See <A HREF="../../hudson/model/Hudson.html#isAdmin()"><CODE>isAdmin()</CODE></A> for more instructions.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2234,6 +2261,22 @@ public java.util.List&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="i
 </DD>
 <DD><DL>
 <DT><B>See Also:</B><DD><A HREF="../../hudson/model/Hudson.html#getAllItems(java.lang.Class)"><CODE>getAllItems(Class)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getItems(java.lang.Class)"><!-- --></A><H3>
+getItems</H3>
+<PRE>
+public &lt;T&gt; java.util.List&lt;T&gt; <B>getItems</B>(java.lang.Class&lt;T&gt;&nbsp;type)</PRE>
+<DL>
+<DD>Gets just the immediate children of <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> but of the given type.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -4122,7 +4165,18 @@ isAdmin</H3>
 <PRE>
 public static boolean <B>isAdmin</B>()</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Define a custom <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> and check against ACL.</I>
+<DD><B>Deprecated.</B>&nbsp;<I>This method is deprecated when Hudson moved from simple Unix root-like model
+      of "admin gets to do everything, and others don't have any privilege" to more
+      complex <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> and <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> based scheme.
+
+      <p>
+      For a quick migration, use <code>Hudson.getInstance().getACL().hasPermission(Hudson.ADMINISTER)</code>
+      To check if the user has the 'administer' role in Hudson.
+
+      <p>
+      But ideally, your plugin should first identify a suitable <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> (or create one,
+      if appropriate), then identify a suitable <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security"><CODE>AccessControlled</CODE></A> object to check its permission
+      against.</I>
 <P>
 <DD>Checks if the current user (for which we are processing the current request)
  has the admin access.
@@ -4141,7 +4195,8 @@ isAdmin</H3>
 <PRE>
 public static boolean <B>isAdmin</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Define a custom <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> and check against ACL.</I>
+<DD><B>Deprecated.</B>&nbsp;<I>Define a custom <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> and check against ACL.
+      See <A HREF="../../hudson/model/Hudson.html#isAdmin()"><CODE>isAdmin()</CODE></A> for more instructions.</I>
 <P>
 <DD><DL>
 </DL>

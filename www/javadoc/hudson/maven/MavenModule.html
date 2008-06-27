@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MavenModule (Hudson core 1.229 API)
+MavenModule (Hudson core 1.230 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-24">
+<META NAME="date" CONTENT="2008-06-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenModule (Hudson core 1.229 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenModule (Hudson core 1.229 API)";
+        parent.document.title="MavenModule (Hudson core 1.230 API)";
     }
 }
 </SCRIPT>
@@ -306,6 +306,14 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the term used in the UI to represent this kind of <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenModule.html#getPublishersList()">getPublishersList</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the live list of all <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A>s configured for this project.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -745,6 +753,27 @@ public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>null if the workspace is on a slave that's not connected.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPublishersList()"><!-- --></A><H3>
+getPublishersList</H3>
+<PRE>
+public <A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt; <B>getPublishersList</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractProject.html#getPublishersList()">AbstractProject</A></CODE></B></DD>
+<DD>Returns the live list of all <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A>s configured for this project.
+
+ <p>
+ This method couldn't be called <tt>getPublishers()</tt> because existing methods
+ in sub-classes return different inconsistent types.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.html#getPublishersList()">getPublishersList</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

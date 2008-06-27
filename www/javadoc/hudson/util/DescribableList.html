@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-DescribableList (Hudson core 1.229 API)
+DescribableList (Hudson core 1.230 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-24">
+<META NAME="date" CONTENT="2008-06-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DescribableList (Hudson core 1.229 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DescribableList (Hudson core 1.229 API)";
+        parent.document.title="DescribableList (Hudson core 1.230 API)";
     }
 }
 </SCRIPT>
@@ -107,6 +107,14 @@ java.lang.Object
 <P>
 Persisted list of <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>s with some operations specific
  to <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s.
+
+ <p>
+ This class allows multiple instances of the same descriptor. Some clients
+ use this semantics, while other clients use it as "up to one instance per
+ one descriptor" model.
+
+ Some of the methods defined in this class only makes sense in the latter model,
+ such as <A HREF="../../hudson/util/DescribableList.html#remove(D)"><CODE>remove(Descriptor)</CODE></A>.
 <P>
 
 <P>
@@ -230,6 +238,17 @@ Persisted list of <A HREF="../../hudson/model/Describable.html" title="interface
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/DescribableList.html#rebuildHetero(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.Collection, java.lang.String)">rebuildHetero</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+              net.sf.json.JSONObject&nbsp;formData,
+              java.util.Collection&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&gt;&nbsp;descriptors,
+              java.lang.String&nbsp;key)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rebuilds the list by creating a fresh instances from the submitted form.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/DescribableList.html#remove(D)">remove</A></B>(<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">D</A>&nbsp;descriptor)</CODE>
 
 <BR>
@@ -250,6 +269,14 @@ Persisted list of <A HREF="../../hudson/model/Describable.html" title="interface
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>s in an array.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/DescribableList.html#toList()">toList</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the snapshot view of instances as list.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -403,6 +430,22 @@ public java.util.Map&lt;<A HREF="../../hudson/util/DescribableList.html" title="
 </DL>
 <HR>
 
+<A NAME="toList()"><!-- --></A><H3>
+toList</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt; <B>toList</B>()</PRE>
+<DL>
+<DD>Returns the snapshot view of instances as list.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="toArray(hudson.model.Describable[])"><!-- --></A><A NAME="toArray(T[])"><!-- --></A><H3>
 toArray</H3>
 <PRE>
@@ -453,6 +496,33 @@ public void <B>rebuild</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>json</CODE> - Structured form data that includes the data for nested descriptor list.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="rebuildHetero(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.Collection, java.lang.String)"><!-- --></A><H3>
+rebuildHetero</H3>
+<PRE>
+public void <B>rebuildHetero</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                          net.sf.json.JSONObject&nbsp;formData,
+                          java.util.Collection&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&gt;&nbsp;descriptors,
+                          java.lang.String&nbsp;key)
+                   throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+<DL>
+<DD>Rebuilds the list by creating a fresh instances from the submitted form.
+
+ <p>
+ This version works with the the &lt;f:hetero-list> UI tag, where the user
+ is allowed to create multiple instances of the same descriptor. Order is also
+ significant.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
 </DD>
