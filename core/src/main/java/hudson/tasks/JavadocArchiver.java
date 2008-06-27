@@ -26,15 +26,21 @@ public class JavadocArchiver extends Publisher {
      * Path to the Javadoc directory in the workspace.
      */
     private final String javadocDir;
+    private boolean keepAll;
     
     @DataBoundConstructor
-    public JavadocArchiver(String javadoc_dir) {
+    public JavadocArchiver(String javadoc_dir, boolean keep_all) {
         this.javadocDir = javadoc_dir;
+        this.keepAll = keep_all;
     }
 
     public String getJavadocDir() {
         return javadocDir;
     }
+    
+    public boolean isKeepAll() {
+		return keepAll;
+	}
 
     /**
      * Gets the directory where the Javadoc is stored for the given project.
@@ -43,24 +49,68 @@ public class JavadocArchiver extends Publisher {
         return new File(project.getRootDir(),"javadoc");
     }
 
+    /**
+     * Gets the directory where the Javadoc is stored for the given build.
+     */
+    private static File getJavadocDir(Run run) {
+        return new File(run.getRootDir(),"javadoc");
+    }
+
     public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener) throws InterruptedException {
         listener.getLogger().println(Messages.JavadocArchiver_Publishing());
 
         FilePath javadoc = build.getParent().getWorkspace().child(javadocDir);
-        FilePath target = new FilePath(getJavadocDir(build.getParent()));
+        FilePath target = new FilePath(getJavadocDir(build));
 
         try {
-            // if the build has failed, then there's not much point in reporting an error
-            // saying javadoc directory doesn't exist. We want the user to focus on the real error,
-            // which is the build failure.
-            if(build.getResult().isWorseOrEqualTo(Result.FAILURE) && !javadoc.exists())
+            if (javadoc.copyRecursiveTo("**/*",target)==0) {
+                if(build.getResult().isBetterOrEqualTo(Result.UNSTABLE)) {
+                    // If the build failed, don't complain that there was no javadoc.
+                    // The build probably didn't even get to the point where it produces javadoc. 
+                    listener.error(Messages.JavadocArchiver_NoMatchFound(javadoc));
+                }
+                build.setResult(Result.FAILURE);
                 return true;
-
-            javadoc.copyRecursiveTo("**/*",target);
+            }
         } catch (IOException e) {
             Util.displayIOException(e,listener);
-            e.printStackTrace(listener.fatalError(Messages.JavadocArchiver_UnableToCopy(javadoc,target)));
-            build.setResult(Result.FAILURE);
+            e.printStackTrace(listener.error(
+            		Messages.JavadocArchiver_UnableToCopy(javadoc,target)));
+            return true;
+        }
+        
+        // add build action
+        build.addAction(new JavadocBuildAction(build));
+        
+        // if project level javadoc exists, delete it (left over from pre-1.233 implementation
+        File projectJavadocDir = getJavadocDir(build.getProject());
+        if (projectJavadocDir.exists()) {
+        	try {
+        		Util.deleteRecursive(projectJavadocDir);
+        	} catch (IOException ioe) {
+        		ioe.printStackTrace(listener.error(ioe.getMessage()));
+        	}
+        }
+
+        // If we should only keep latest, delete previous javadoc
+        if(!keepAll) {
+        	AbstractProject<?,?> p = build.getProject();
+            AbstractBuild<?,?> b = p.getLastSuccessfulBuild();
+            while(b != null) {
+
+                // remove old javadoc
+                File jd = getJavadocDir(b);
+                if(jd.exists()) {
+                    listener.getLogger().println(Messages.JavadocArchiver_DeletingOld(b.getDisplayName()));
+                    try {
+                        Util.deleteRecursive(jd);
+                    } catch (IOException e) {
+                        e.printStackTrace(listener.error(e.getMessage()));
+                    }
+                }
+                
+                b = b.getPreviousNotFailedBuild();
+            }
         }
 
         return true;
@@ -73,7 +123,6 @@ public class JavadocArchiver extends Publisher {
     public Descriptor<Publisher> getDescriptor() {
         return DESCRIPTOR;
     }
-
 
     public static final Descriptor<Publisher> DESCRIPTOR = new DescriptorImpl();
 
@@ -89,14 +138,67 @@ public class JavadocArchiver extends Publisher {
         }
 
         public String getDisplayName() {
-            if(new File(getJavadocDir(project),"help-doc.html").exists())
+        	if (new File(searchForJavadocDir(), "help-doc.html").exists())
                 return Messages.JavadocArchiver_DisplayName_Javadoc();
             else
                 return Messages.JavadocArchiver_DisplayName_Generic();
         }
 
         public String getIconFileName() {
-            if(getJavadocDir(project).exists())
+            if(searchForJavadocDir().exists())
+                return "help.gif";
+            
+            // hide it since we don't have javadoc yet.
+            return null;
+        }
+        
+        private File searchForJavadocDir() {
+    		// Would like to change AbstractItem to AbstractProject, but is 
+    		// that a backwards compatible change?
+    		if (project instanceof AbstractProject) {
+    			AbstractProject abstractProject = (AbstractProject) project;
+    			
+    			Run run = abstractProject.getLastBuild();
+    			while (run != null) {
+    				File javadocDir = getJavadocDir(run);
+    				
+    				if (javadocDir.exists()) {
+    					return javadocDir;
+    				}
+    				
+    				run = run.getPreviousBuild();
+    			}
+    		}
+    		
+        	return getJavadocDir(project);
+        }
+
+        public void doDynamic(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException, InterruptedException {
+            new DirectoryBrowserSupport(this,project.getDisplayName()+" javadoc")
+                .serveFile(req, rsp, new FilePath(searchForJavadocDir()), "help.gif", false);
+        }
+    }
+    
+    public static class JavadocBuildAction implements Action {
+    	private final AbstractBuild<?,?> build;
+    	
+    	public JavadocBuildAction(AbstractBuild<?,?> build) {
+    		this.build = build;
+    	}
+    	
+    	public String getUrlName() {
+    		return "javadoc";
+    	}
+
+        public String getDisplayName() {
+            if(new File(getJavadocDir(build),"help-doc.html").exists())
+                return Messages.JavadocArchiver_DisplayName_Javadoc();
+            else
+                return Messages.JavadocArchiver_DisplayName_Generic();
+        }
+
+        public String getIconFileName() {
+            if(getJavadocDir(build).exists())
                 return "help.gif";
             else
                 // hide it since we don't have javadoc yet.
@@ -104,9 +206,10 @@ public class JavadocArchiver extends Publisher {
         }
 
         public void doDynamic(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException, InterruptedException {
-            new DirectoryBrowserSupport(this,project.getDisplayName()+" javadoc")
-                .serveFile(req, rsp, new FilePath(getJavadocDir(project)), "help.gif", false);
+            new DirectoryBrowserSupport(this, build.getDisplayName()+" javadoc")
+                .serveFile(req, rsp, new FilePath(getJavadocDir(build)), "help.gif", false);
         }
+    	
     }
 
     public static class DescriptorImpl extends BuildStepDescriptor<Publisher> {
