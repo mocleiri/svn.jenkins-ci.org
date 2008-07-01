@@ -118,4 +118,8 @@ public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?,
 		return "parameters";
 	}
 
+
+	static {
+		ParameterDefinition.LIST.add(StringParameterDefinition.DESCRIPTOR);
+	}
 }

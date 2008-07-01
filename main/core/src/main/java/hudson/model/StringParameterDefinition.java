@@ -41,10 +41,6 @@ public class StringParameterDefinition extends ParameterDefinition {
 
 	public static final ParameterDescriptor DESCRIPTOR = new DescriptorImpl();
 
-	static {
-		LIST.add(StringParameterDefinition.DESCRIPTOR);
-	}
-
 	public static class DescriptorImpl extends ParameterDescriptor {
 
 		protected DescriptorImpl() {
