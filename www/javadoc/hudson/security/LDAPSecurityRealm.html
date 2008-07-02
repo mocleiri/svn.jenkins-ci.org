@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-LDAPSecurityRealm (Hudson core 1.230 API)
+LDAPSecurityRealm (Hudson core 1.231 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-27">
+<META NAME="date" CONTENT="2008-07-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LDAPSecurityRealm (Hudson core 1.230 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LDAPSecurityRealm (Hudson core 1.230 API)";
+        parent.document.title="LDAPSecurityRealm (Hudson core 1.231 API)";
     }
 }
 </SCRIPT>
@@ -173,6 +173,14 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.html#groupSearchBase">groupSearchBase</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This defines the organizational unit that contains groups.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.html#managerDN">managerDN</A></B></CODE>
 
 <BR>
@@ -232,10 +240,11 @@ java.lang.Object
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.html#LDAPSecurityRealm(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">LDAPSecurityRealm</A></B>(java.lang.String&nbsp;server,
+<TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.html#LDAPSecurityRealm(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">LDAPSecurityRealm</A></B>(java.lang.String&nbsp;server,
                   java.lang.String&nbsp;rootDN,
                   java.lang.String&nbsp;userSearchBase,
                   java.lang.String&nbsp;userSearch,
+                  java.lang.String&nbsp;groupSearchBase,
                   java.lang.String&nbsp;managerDN,
                   java.lang.String&nbsp;managerPassword)</CODE>
 
@@ -373,6 +382,20 @@ public final java.lang.String <B>userSearch</B></PRE>
 </DL>
 <HR>
 
+<A NAME="groupSearchBase"><!-- --></A><H3>
+groupSearchBase</H3>
+<PRE>
+public final java.lang.String <B>groupSearchBase</B></PRE>
+<DL>
+<DD>This defines the organizational unit that contains groups.
+
+ Normally "ou=groups"
+<P>
+<DL>
+<DT><B>See Also:</B><DD><CODE>FilterBasedLdapUserSearch</CODE></DL>
+</DL>
+<HR>
+
 <A NAME="managerDN"><!-- --></A><H3>
 managerDN</H3>
 <PRE>
@@ -407,7 +430,7 @@ public static final <A HREF="../../hudson/security/LDAPSecurityRealm.DescriptorI
 </TR>
 </TABLE>
 
-<A NAME="LDAPSecurityRealm(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
+<A NAME="LDAPSecurityRealm(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
 LDAPSecurityRealm</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
@@ -415,6 +438,7 @@ LDAPSecurityRealm</H3>
                                               java.lang.String&nbsp;rootDN,
                                               java.lang.String&nbsp;userSearchBase,
                                               java.lang.String&nbsp;userSearch,
+                                              java.lang.String&nbsp;groupSearchBase,
                                               java.lang.String&nbsp;managerDN,
                                               java.lang.String&nbsp;managerPassword)</PRE>
 <DL>

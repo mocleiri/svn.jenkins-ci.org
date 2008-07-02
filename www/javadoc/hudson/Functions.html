@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.230 API)
+Functions (Hudson core 1.231 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-27">
+<META NAME="date" CONTENT="2008-07-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.230 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.230 API)";
+        parent.document.title="Functions (Hudson core 1.231 API)";
     }
 }
 </SCRIPT>
@@ -584,6 +584,14 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getServerName()">getServerName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the host name of the Hudson server that clients can use to talk back to.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1803,6 +1811,22 @@ getSystemProperty</H3>
 <PRE>
 public java.lang.String <B>getSystemProperty</B>(java.lang.String&nbsp;key)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getServerName()"><!-- --></A><H3>
+getServerName</H3>
+<PRE>
+public java.lang.String <B>getServerName</B>()</PRE>
+<DL>
+<DD>Obtains the host name of the Hudson server that clients can use to talk back to.
+ <p>
+ This is primarily used in <tt>slave-agent.jnlp.jelly</tt> to specify the destination
+ that the slaves talk to.
+<P>
 <DD><DL>
 </DL>
 </DD>

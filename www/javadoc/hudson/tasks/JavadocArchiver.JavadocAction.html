@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-JavadocArchiver.JavadocAction (Hudson core 1.230 API)
+JavadocArchiver.JavadocAction (Hudson core 1.231 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-27">
+<META NAME="date" CONTENT="2008-07-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JavadocArchiver.JavadocAction (Hudson core 1.230 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JavadocArchiver.JavadocAction (Hudson core 1.230 API)";
+        parent.document.title="JavadocArchiver.JavadocAction (Hudson core 1.231 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/tasks/JavadocArchiver.DescriptorImpl.html" title="class in hudson.tasks"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/tasks/LabelFinder.html" title="interface in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/tasks/JavadocArchiver.JavadocBuildAction.html" title="class in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tasks/JavadocArchiver.JavadocAction.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="JavadocArchiver.JavadocAction.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -94,7 +94,8 @@ hudson.tasks</FONT>
 Class JavadocArchiver.JavadocAction</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.tasks.JavadocArchiver.JavadocAction</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/tasks/JavadocArchiver.BaseJavadocAction.html" title="class in hudson.tasks">hudson.tasks.JavadocArchiver.BaseJavadocAction</A>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.tasks.JavadocArchiver.JavadocAction</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/ProminentProjectAction.html" title="interface in hudson.model">ProminentProjectAction</A>, java.io.Serializable</DD>
@@ -104,7 +105,7 @@ java.lang.Object
 </DL>
 <HR>
 <DL>
-<DT><PRE>public static class <B>JavadocArchiver.JavadocAction</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/model/ProminentProjectAction.html" title="interface in hudson.model">ProminentProjectAction</A></DL>
+<DT><PRE>public static class <B>JavadocArchiver.JavadocAction</B><DT>extends <A HREF="../../hudson/tasks/JavadocArchiver.BaseJavadocAction.html" title="class in hudson.tasks">JavadocArchiver.BaseJavadocAction</A><DT>implements <A HREF="../../hudson/model/ProminentProjectAction.html" title="interface in hudson.model">ProminentProjectAction</A></DL>
 </PRE>
 
 <P>
@@ -140,36 +141,28 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/JavadocArchiver.JavadocAction.html#doDynamic(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDynamic</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-          org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>protected &nbsp;java.io.File</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/JavadocArchiver.JavadocAction.html#dir()">dir</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/JavadocArchiver.JavadocAction.html#getDisplayName()">getDisplayName</A></B>()</CODE>
+<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/JavadocArchiver.JavadocAction.html#getTitle()">getTitle</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the string to be displayed.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.tasks.JavadocArchiver.BaseJavadocAction"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.tasks.<A HREF="../../hudson/tasks/JavadocArchiver.BaseJavadocAction.html" title="class in hudson.tasks">JavadocArchiver.BaseJavadocAction</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/JavadocArchiver.JavadocAction.html#getIconFileName()">getIconFileName</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the file name of the icon.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/JavadocArchiver.JavadocAction.html#getUrlName()">getUrlName</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the URL path name.</TD>
+<TD><CODE><A HREF="../../hudson/tasks/JavadocArchiver.BaseJavadocAction.html#doDynamic(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDynamic</A>, <A HREF="../../hudson/tasks/JavadocArchiver.BaseJavadocAction.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/tasks/JavadocArchiver.BaseJavadocAction.html#getIconFileName()">getIconFileName</A>, <A HREF="../../hudson/tasks/JavadocArchiver.BaseJavadocAction.html#getUrlName()">getUrlName</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -179,6 +172,15 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Action"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Action.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Action.html#getIconFileName()">getIconFileName</A>, <A HREF="../../hudson/model/Action.html#getUrlName()">getUrlName</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -211,49 +213,13 @@ public <B>JavadocArchiver.JavadocAction</B>(<A HREF="../../hudson/model/Abstract
 </TR>
 </TABLE>
 
-<A NAME="getUrlName()"><!-- --></A><H3>
-getUrlName</H3>
+<A NAME="dir()"><!-- --></A><H3>
+dir</H3>
 <PRE>
-public java.lang.String <B>getUrlName</B>()</PRE>
+protected java.io.File <B>dir</B>()</PRE>
 <DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Action.html#getUrlName()">Action</A></CODE></B></DD>
-<DD>Gets the URL path name.
-
- <p>
- For example, if this method returns "xyz", and if the parent object
- (that this action is associated with) is bound to /foo/bar/zot,
- then this action object will be exposed to /foo/bar/zot/xyz.
-
- <p>
- This method should return a string that's unique among other <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s.
-
- <p>
- The returned string can be an absolute URL, like "http://www.sun.com/",
- which is useful for directly connecting to external systems.
-<P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Action.html#getUrlName()">getUrlName</A></CODE> in interface <CODE><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></DL>
-</DD>
-<DD><DL>
-
-<DT><B>Returns:</B><DD>null if this action object doesn't need to be bound to web.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getDisplayName()"><!-- --></A><H3>
-getDisplayName</H3>
-<PRE>
-public java.lang.String <B>getDisplayName</B>()</PRE>
-<DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Action.html#getDisplayName()">Action</A></CODE></B></DD>
-<DD>Gets the string to be displayed.
-
- The convention is to capitalize the first letter of each word,
- such as "Test Result".
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Action.html#getDisplayName()">getDisplayName</A></CODE> in interface <CODE><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ModelObject.html#getDisplayName()">getDisplayName</A></CODE> in interface <CODE><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/tasks/JavadocArchiver.BaseJavadocAction.html#dir()">dir</A></CODE> in class <CODE><A HREF="../../hudson/tasks/JavadocArchiver.BaseJavadocAction.html" title="class in hudson.tasks">JavadocArchiver.BaseJavadocAction</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -261,54 +227,16 @@ public java.lang.String <B>getDisplayName</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="getIconFileName()"><!-- --></A><H3>
-getIconFileName</H3>
+<A NAME="getTitle()"><!-- --></A><H3>
+getTitle</H3>
 <PRE>
-public java.lang.String <B>getIconFileName</B>()</PRE>
-<DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Action.html#getIconFileName()">Action</A></CODE></B></DD>
-<DD>Gets the file name of the icon.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Action.html#getIconFileName()">getIconFileName</A></CODE> in interface <CODE><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></DL>
-</DD>
-<DD><DL>
-
-<DT><B>Returns:</B><DD>If just a file name (like "abc.gif") is returned, it will be
-      interpreted as a file name inside <tt>/images/24x24</tt>.
-      This is useful for using one of the stock images.
-      <p>
-      If an absolute file name that starts from '/' is returned (like
-      "/plugin/foo/abc.gif'), then it will be interpreted as a path
-      from the context root of Hudson. This is useful to pick up
-      image files from a plugin.
-      <p>
-      Finally, return null to hide it from the task list. This is normally not very useful,
-      but this can be used for actions that only contribute <tt>floatBox.jelly</tt>
-      and no task list item. The other case where this is useful is
-      to avoid showing links that require a privilege when the user is anonymous.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Hudson.html#isAdmin()"><CODE>Hudson.isAdmin()</CODE></A></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="doDynamic(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-doDynamic</H3>
-<PRE>
-public void <B>doDynamic</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                      org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-               throws java.io.IOException,
-                      javax.servlet.ServletException,
-                      java.lang.InterruptedException</PRE>
+protected java.lang.String <B>getTitle</B>()</PRE>
 <DL>
 <DD><DL>
-</DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/tasks/JavadocArchiver.BaseJavadocAction.html#getTitle()">getTitle</A></CODE> in class <CODE><A HREF="../../hudson/tasks/JavadocArchiver.BaseJavadocAction.html" title="class in hudson.tasks">JavadocArchiver.BaseJavadocAction</A></CODE></DL>
 </DD>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
@@ -343,7 +271,7 @@ public void <B>doDynamic</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/tasks/JavadocArchiver.DescriptorImpl.html" title="class in hudson.tasks"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/tasks/LabelFinder.html" title="interface in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/tasks/JavadocArchiver.JavadocBuildAction.html" title="class in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tasks/JavadocArchiver.JavadocAction.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="JavadocArchiver.JavadocAction.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

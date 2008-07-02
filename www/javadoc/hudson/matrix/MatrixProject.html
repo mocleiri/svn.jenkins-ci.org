@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MatrixProject (Hudson core 1.230 API)
+MatrixProject (Hudson core 1.231 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-27">
+<META NAME="date" CONTENT="2008-07-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MatrixProject (Hudson core 1.230 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MatrixProject (Hudson core 1.230 API)";
+        parent.document.title="MatrixProject (Hudson core 1.231 API)";
     }
 }
 </SCRIPT>
@@ -241,6 +241,14 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all active configurations.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Collection&lt;? extends <A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/matrix/MatrixProject.html#getAllJobs()">getAllJobs</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the jobs that this <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> contains as descendants.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -479,7 +487,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Job.html#assignBuildNumber()">assignBuildNumber</A>, <A HREF="../../hudson/model/Job.html#doBuildStatus(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildStatus</A>, <A HREF="../../hudson/model/Job.html#doBuildTimeGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildTimeGraph</A>, <A HREF="../../hudson/model/Job.html#doBuildTimeGraphMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildTimeGraphMap</A>, <A HREF="../../hudson/model/Job.html#doConfigDotXml(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigDotXml</A>, <A HREF="../../hudson/model/Job.html#doDoRename(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoRename</A>, <A HREF="../../hudson/model/Job.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/Job.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/Job.html#getAllJobs()">getAllJobs</A>, <A HREF="../../hudson/model/Job.html#getBuild(java.lang.String)">getBuild</A>, <A HREF="../../hudson/model/Job.html#getBuildByNumber(int)">getBuildByNumber</A>, <A HREF="../../hudson/model/Job.html#getBuildDir()">getBuildDir</A>, <A HREF="../../hudson/model/Job.html#getBuildHealth()">getBuildHealth</A>, <A HREF="../../hudson/model/Job.html#getBuildHealthReports()">getBuildHealthReports</A>, <A HREF="../../hudson/model/Job.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/Job.html#getBuildsAsMap()">getBuildsAsMap</A>, <A HREF="../../hudson/model/Job.html#getBuildStatusUrl()">getBuildStatusUrl</A>, <A HREF="../../hudson/model/Job.html#getFirstBuild()">getFirstBuild</A>, <A HREF="../../hudson/model/Job.html#getLastBuild()">getLastBuild</A>, <A HREF="../../hudson/model/Job.html#getLastCompletedBuild()">getLastCompletedBuild</A>, <A HREF="../../hudson/model/Job.html#getLastFailedBuild()">getLastFailedBuild</A>, <A HREF="../../hudson/model/Job.html#getLastStableBuild()">getLastStableBuild</A>, <A HREF="../../hudson/model/Job.html#getLastSuccessfulBuild()">getLastSuccessfulBuild</A>, <A HREF="../../hudson/model/Job.html#getLogRotator()">getLogRotator</A>, <A HREF="../../hudson/model/Job.html#getNearestBuild(int)">getNearestBuild</A>, <A HREF="../../hudson/model/Job.html#getNearestOldBuild(int)">getNearestOldBuild</A>, <A HREF="../../hudson/model/Job.html#getNextBuildNumber()">getNextBuildNumber</A>, <A HREF="../../hudson/model/Job.html#getProperties()">getProperties</A>, <A HREF="../../hudson/model/Job.html#getProperty(java.lang.Class)">getProperty</A>, <A HREF="../../hudson/model/Job.html#getWidgets()">getWidgets</A>, <A HREF="../../hudson/model/Job.html#isKeepDependencies()">isKeepDependencies</A>, <A HREF="../../hudson/model/Job.html#isNameEditable()">isNameEditable</A>, <A HREF="../../hudson/model/Job.html#onCopiedFrom(hudson.model.Item)">onCopiedFrom</A>, <A HREF="../../hudson/model/Job.html#renameTo(java.lang.String)">renameTo</A>, <A HREF="../../hudson/model/Job.html#saveNextBuildNumber()">saveNextBuildNumber</A>, <A HREF="../../hudson/model/Job.html#setLogRotator(hudson.tasks.LogRotator)">setLogRotator</A>, <A HREF="../../hudson/model/Job.html#supportsLogRotator()">supportsLogRotator</A>, <A HREF="../../hudson/model/Job.html#updateNextBuildNumber(int)">updateNextBuildNumber</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Job.html#assignBuildNumber()">assignBuildNumber</A>, <A HREF="../../hudson/model/Job.html#doBuildStatus(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildStatus</A>, <A HREF="../../hudson/model/Job.html#doBuildTimeGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildTimeGraph</A>, <A HREF="../../hudson/model/Job.html#doBuildTimeGraphMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildTimeGraphMap</A>, <A HREF="../../hudson/model/Job.html#doConfigDotXml(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigDotXml</A>, <A HREF="../../hudson/model/Job.html#doDoRename(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoRename</A>, <A HREF="../../hudson/model/Job.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/Job.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/Job.html#getBuild(java.lang.String)">getBuild</A>, <A HREF="../../hudson/model/Job.html#getBuildByNumber(int)">getBuildByNumber</A>, <A HREF="../../hudson/model/Job.html#getBuildDir()">getBuildDir</A>, <A HREF="../../hudson/model/Job.html#getBuildHealth()">getBuildHealth</A>, <A HREF="../../hudson/model/Job.html#getBuildHealthReports()">getBuildHealthReports</A>, <A HREF="../../hudson/model/Job.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/Job.html#getBuildsAsMap()">getBuildsAsMap</A>, <A HREF="../../hudson/model/Job.html#getBuildStatusUrl()">getBuildStatusUrl</A>, <A HREF="../../hudson/model/Job.html#getFirstBuild()">getFirstBuild</A>, <A HREF="../../hudson/model/Job.html#getLastBuild()">getLastBuild</A>, <A HREF="../../hudson/model/Job.html#getLastCompletedBuild()">getLastCompletedBuild</A>, <A HREF="../../hudson/model/Job.html#getLastFailedBuild()">getLastFailedBuild</A>, <A HREF="../../hudson/model/Job.html#getLastStableBuild()">getLastStableBuild</A>, <A HREF="../../hudson/model/Job.html#getLastSuccessfulBuild()">getLastSuccessfulBuild</A>, <A HREF="../../hudson/model/Job.html#getLogRotator()">getLogRotator</A>, <A HREF="../../hudson/model/Job.html#getNearestBuild(int)">getNearestBuild</A>, <A HREF="../../hudson/model/Job.html#getNearestOldBuild(int)">getNearestOldBuild</A>, <A HREF="../../hudson/model/Job.html#getNextBuildNumber()">getNextBuildNumber</A>, <A HREF="../../hudson/model/Job.html#getProperties()">getProperties</A>, <A HREF="../../hudson/model/Job.html#getProperty(java.lang.Class)">getProperty</A>, <A HREF="../../hudson/model/Job.html#getWidgets()">getWidgets</A>, <A HREF="../../hudson/model/Job.html#isKeepDependencies()">isKeepDependencies</A>, <A HREF="../../hudson/model/Job.html#isNameEditable()">isNameEditable</A>, <A HREF="../../hudson/model/Job.html#onCopiedFrom(hudson.model.Item)">onCopiedFrom</A>, <A HREF="../../hudson/model/Job.html#renameTo(java.lang.String)">renameTo</A>, <A HREF="../../hudson/model/Job.html#saveNextBuildNumber()">saveNextBuildNumber</A>, <A HREF="../../hudson/model/Job.html#setLogRotator(hudson.tasks.LogRotator)">setLogRotator</A>, <A HREF="../../hudson/model/Job.html#supportsLogRotator()">supportsLogRotator</A>, <A HREF="../../hudson/model/Job.html#updateNextBuildNumber(int)">updateNextBuildNumber</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractItem"><!-- --></A>
@@ -542,7 +550,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Item.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/Item.html#getAllJobs()">getAllJobs</A>, <A HREF="../../hudson/model/Item.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Item.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/Item.html#getFullName()">getFullName</A>, <A HREF="../../hudson/model/Item.html#getName()">getName</A>, <A HREF="../../hudson/model/Item.html#getShortUrl()">getShortUrl</A>, <A HREF="../../hudson/model/Item.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Item.html#onCopiedFrom(hudson.model.Item)">onCopiedFrom</A>, <A HREF="../../hudson/model/Item.html#save()">save</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Item.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/Item.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Item.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/Item.html#getFullName()">getFullName</A>, <A HREF="../../hudson/model/Item.html#getName()">getName</A>, <A HREF="../../hudson/model/Item.html#getShortUrl()">getShortUrl</A>, <A HREF="../../hudson/model/Item.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Item.html#onCopiedFrom(hudson.model.Item)">onCopiedFrom</A>, <A HREF="../../hudson/model/Item.html#save()">save</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.PersistenceRoot"><!-- --></A>
@@ -788,6 +796,23 @@ public java.util.Collection&lt;<A HREF="../../hudson/matrix/MatrixConfiguration.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ItemGroup.html#getItems()">getItems</A></CODE> in interface <CODE><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAllJobs()"><!-- --></A><H3>
+getAllJobs</H3>
+<PRE>
+public java.util.Collection&lt;? extends <A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt; <B>getAllJobs</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractItem.html#getAllJobs()">AbstractItem</A></CODE></B></DD>
+<DD>Gets all the jobs that this <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> contains as descendants.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Item.html#getAllJobs()">getAllJobs</A></CODE> in interface <CODE><A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Job.html#getAllJobs()">getAllJobs</A></CODE> in class <CODE><A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&lt;<A HREF="../../hudson/matrix/MatrixProject.html" title="class in hudson.matrix">MatrixProject</A>,<A HREF="../../hudson/matrix/MatrixBuild.html" title="class in hudson.matrix">MatrixBuild</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
 </DL>

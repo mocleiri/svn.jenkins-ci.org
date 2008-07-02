@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.security (Hudson core 1.230 API)
+hudson.security (Hudson core 1.231 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-06-27">
+<META NAME="date" CONTENT="2008-07-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.security (Hudson core 1.230 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.security (Hudson core 1.230 API)";
+        parent.document.title="hudson.security (Hudson core 1.231 API)";
     }
 }
 </SCRIPT>
@@ -147,6 +147,11 @@ Security-related code
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/ContainerAuthentication.html" title="class in hudson.security">ContainerAuthentication</A></B></TD>
 <TD><CODE>Authentication</CODE> implementation for <CODE>Principal</CODE>
  given through <CODE>HttpServletRequest</CODE>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security">DeferredCreationLdapAuthoritiesPopulator</A></B></TD>
+<TD>Implementation of <CODE>LdapAuthoritiesPopulator</CODE> that defers creation of a
+ <CODE>DefaultLdapAuthoritiesPopulator</CODE> until one is needed.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/FullControlOnceLoggedInAuthorizationStrategy.html" title="class in hudson.security">FullControlOnceLoggedInAuthorizationStrategy</A></B></TD>
