@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Computer (Hudson core 1.231 API)
+Computer (Hudson core 1.232 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-02">
+<META NAME="date" CONTENT="2008-07-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson core 1.231 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson core 1.231 API)";
+        parent.document.title="Computer (Hudson core 1.232 API)";
     }
 }
 </SCRIPT>
@@ -815,7 +815,8 @@ public void <B>disconnect</B>()</PRE>
 <A NAME="getNumExecutors()"><!-- --></A><H3>
 getNumExecutors</H3>
 <PRE>
-public int <B>getNumExecutors</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public int <B>getNumExecutors</B>()</PRE>
 <DL>
 <DD>Number of <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s that are configured for this computer.
 
@@ -1150,7 +1151,8 @@ public int <B>countIdle</B>()</PRE>
 <A NAME="getExecutors()"><!-- --></A><H3>
 getExecutors</H3>
 <PRE>
-public java.util.List&lt;<A HREF="../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&gt; <B>getExecutors</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public java.util.List&lt;<A HREF="../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&gt; <B>getExecutors</B>()</PRE>
 <DL>
 <DD>Gets the read-only snapshot view of all <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s.
 <P>
@@ -1166,7 +1168,8 @@ public java.util.List&lt;<A HREF="../../hudson/model/Executor.html" title="class
 <A NAME="isIdle()"><!-- --></A><H3>
 isIdle</H3>
 <PRE>
-public final boolean <B>isIdle</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public final boolean <B>isIdle</B>()</PRE>
 <DL>
 <DD>Returns true if all the executors of this computer is idle.
 <P>

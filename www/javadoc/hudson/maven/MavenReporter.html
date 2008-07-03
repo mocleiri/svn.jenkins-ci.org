@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MavenReporter (Hudson core 1.231 API)
+MavenReporter (Hudson core 1.232 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-02">
+<META NAME="date" CONTENT="2008-07-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenReporter (Hudson core 1.231 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenReporter (Hudson core 1.231 API)";
+        parent.document.title="MavenReporter (Hudson core 1.232 API)";
     }
 }
 </SCRIPT>
@@ -431,6 +431,9 @@ public boolean <B>preExecute</B>(<A HREF="../../hudson/maven/MavenBuildProxy.htm
                           java.io.IOException</PRE>
 <DL>
 <DD>Called before execution of a single mojo.
+
+ <p>
+ When this method is invoked, <A HREF="../../hudson/maven/MojoInfo.html#mojo"><CODE>MojoInfo.mojo</CODE></A> is fully injected with its configuration values.
 <P>
 <DD><DL>
 </DL>

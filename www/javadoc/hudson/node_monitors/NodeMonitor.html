@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-NodeMonitor (Hudson core 1.231 API)
+NodeMonitor (Hudson core 1.232 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-02">
+<META NAME="date" CONTENT="2008-07-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ NodeMonitor (Hudson core 1.231 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="NodeMonitor (Hudson core 1.231 API)";
+        parent.document.title="NodeMonitor (Hudson core 1.232 API)";
     }
 }
 </SCRIPT>
@@ -205,6 +205,14 @@ Extension point for managing and monitoring <A HREF="../../hudson/model/Node.htm
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.Thread</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/NodeMonitor.html#triggerUpdate()">triggerUpdate</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts updating the data asynchronously.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -315,6 +323,28 @@ public java.lang.Object <B>data</B>(<A HREF="../../hudson/model/Computer.html" t
 </DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="triggerUpdate()"><!-- --></A><H3>
+triggerUpdate</H3>
+<PRE>
+public java.lang.Thread <B>triggerUpdate</B>()</PRE>
+<DL>
+<DD>Starts updating the data asynchronously.
+ If there's any precious updating activity going on, it'll be interrupted and aborted.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><CODE>Thread</CODE> object that carries out the update operation.
+      You can use this to interrupt the execution or waits for the completion.
+      Always non-null<DT><B>Since:</B></DT>
+  <DD>1.232</DD>
 </DL>
 </DD>
 </DL>

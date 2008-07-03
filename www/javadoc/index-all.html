@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.231 API)
+Index (Hudson core 1.232 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-02">
+<META NAME="date" CONTENT="2008-07-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.231 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.231 API)";
+        parent.document.title="Index (Hudson core 1.232 API)";
     }
 }
 </SCRIPT>
@@ -1093,7 +1093,7 @@ Static variable in class hudson.util.<A HREF="./hudson/util/ChartUtil.html" titl
 <DD>&nbsp;
 <DT><A HREF="./hudson/scheduler/CronTabList.html#check(java.util.Calendar)"><B>check(Calendar)</B></A> - 
 Method in class hudson.scheduler.<A HREF="./hudson/scheduler/CronTabList.html" title="class in hudson.scheduler">CronTabList</A>
-<DD>&nbsp;
+<DD>Returns true if the given calendar matches
 <DT><A HREF="./hudson/slaves/RetentionStrategy.Always.html#check(hudson.slaves.SlaveComputer)"><B>check(SlaveComputer)</B></A> - 
 Method in class hudson.slaves.<A HREF="./hudson/slaves/RetentionStrategy.Always.html" title="class in hudson.slaves">RetentionStrategy.Always</A>
 <DD>This method will be called periodically to allow this strategy to decide what to do with it's owning slave.
@@ -1373,6 +1373,9 @@ Static variable in class hudson.model.<A HREF="./hudson/model/RunMap.html" title
 <DT><A HREF="./hudson/model/RunMap.html#comparator()"><B>comparator()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/RunMap.html" title="class in hudson.model">RunMap</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/DependencyGraph.html#compare(hudson.model.AbstractProject, hudson.model.AbstractProject)"><B>compare(AbstractProject, AbstractProject)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/DependencyGraph.html" title="class in hudson.model">DependencyGraph</A>
+<DD>Compare to Projects based on the topological order defined by this Dependency Graph
 <DT><A HREF="./hudson/util/CaseInsensitiveComparator.html#compare(java.lang.String, java.lang.String)"><B>compare(String, String)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/CaseInsensitiveComparator.html" title="class in hudson.util">CaseInsensitiveComparator</A>
 <DD>&nbsp;
@@ -3968,6 +3971,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class
 <DT><A HREF="./hudson/model/ComputerSet.html#getApi()"><B>getApi()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ComputerSet.html" title="class in hudson.model">ComputerSet</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Executor.html#getApi()"><B>getApi()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Executor.html" title="class in hudson.model">Executor</A>
+<DD>Exposes the executor to the remote API.
 <DT><A HREF="./hudson/model/Fingerprint.html#getApi()"><B>getApi()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.html" title="class in hudson.model">Fingerprint</A>
 <DD>&nbsp;
@@ -5301,6 +5307,10 @@ Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title=
 Method in class hudson.model.<A HREF="./hudson/model/Executor.html" title="class in hudson.model">Executor</A>
 <DD>Computes a human-readable text that shows the expected remaining time
  until the build completes.
+<DT><A HREF="./hudson/model/Executor.html#getEstimatedRemainingTimeMillis()"><B>getEstimatedRemainingTimeMillis()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Executor.html" title="class in hudson.model">Executor</A>
+<DD>The same as <A HREF="./hudson/model/Executor.html#getEstimatedRemainingTime()"><CODE>Executor.getEstimatedRemainingTime()</CODE></A> but return
+ it as a number of milli-seconds.
 <DT><A HREF="./hudson/PluginManager.FailedPlugin.html#getExceptionString()"><B>getExceptionString()</B></A> - 
 Method in class hudson.<A HREF="./hudson/PluginManager.FailedPlugin.html" title="class in hudson">PluginManager.FailedPlugin</A>
 <DD>&nbsp;
@@ -8211,6 +8221,10 @@ Method in class hudson.util.<A HREF="./hudson/util/PluginServletFilter.html" tit
 <DT><A HREF="./hudson/model/ComputerSet.html#initialize()"><B>initialize()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/ComputerSet.html" title="class in hudson.model">ComputerSet</A>
 <DD>Just to force the execution of the static initializer.
+<DT><A HREF="./hudson/maven/MojoInfo.html#inject(java.lang.String, T)"><B>inject(String, T)</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MojoInfo.html" title="class in hudson.maven">MojoInfo</A>
+<DD>Injects the specified value (designated by the specified field name) into the mojo,
+ and returns its old value.
 <DT><A HREF="./hudson/maven/reporters/MavenArtifactRecord.html#install(hudson.model.TaskListener)"><B>install(TaskListener)</B></A> - 
 Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenArtifactRecord.html" title="class in hudson.maven.reporters">MavenArtifactRecord</A>
 <DD>Installs the artifact to the local Maven repository.
@@ -8242,13 +8256,16 @@ Method in class hudson.util.<A HREF="./hudson/util/RobustReflectionConverter.htm
  we find that we don't have enough permissions to run.<DT><A HREF="./hudson/util/InsufficientPermissionDetected.html#InsufficientPermissionDetected(java.lang.SecurityException)"><B>InsufficientPermissionDetected(SecurityException)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/InsufficientPermissionDetected.html" title="class in hudson.util">InsufficientPermissionDetected</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/maven/MojoInfo.html#intercept(java.lang.String, hudson.util.InvocationInterceptor)"><B>intercept(String, InvocationInterceptor)</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MojoInfo.html" title="class in hudson.maven">MojoInfo</A>
+<DD>Intercept the invocation from the mojo to its injected component (designated by the given field name.)
 <DT><A HREF="./hudson/model/Computer.html#interrupt()"><B>interrupt()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
 <DD>Interrupt all <A HREF="./hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s.
 <DT><A HREF="./hudson/security/InvalidatableUserDetails.html" title="interface in hudson.security"><B>InvalidatableUserDetails</B></A> - Interface in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD><CODE>UserDetails</CODE> that can mark <CODE>Authentication</CODE> invalid.<DT><A HREF="./hudson/model/InvisibleAction.html" title="class in hudson.model"><B>InvisibleAction</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Partial <A HREF="./hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> implementation that doesn't have any UI presence.<DT><A HREF="./hudson/model/InvisibleAction.html#InvisibleAction()"><B>InvisibleAction()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/InvisibleAction.html" title="class in hudson.model">InvisibleAction</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/FilePath.FileCallable.html#invoke(java.io.File, hudson.remoting.VirtualChannel)"><B>invoke(File, VirtualChannel)</B></A> - 
+<DT><A HREF="./hudson/util/InvocationInterceptor.html" title="interface in hudson.util"><B>InvocationInterceptor</B></A> - Interface in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Interceptor around <CODE>InvocationHandler</CODE>.<DT><A HREF="./hudson/FilePath.FileCallable.html#invoke(java.io.File, hudson.remoting.VirtualChannel)"><B>invoke(File, VirtualChannel)</B></A> - 
 Method in interface hudson.<A HREF="./hudson/FilePath.FileCallable.html" title="interface in hudson">FilePath.FileCallable</A>
 <DD>Performs the computational task on the node where the data is located.
 <DT><A HREF="./hudson/model/FingerprintCleanupThread.html#invoke()"><B>invoke()</B></A> - 
@@ -8257,6 +8274,10 @@ Static method in class hudson.model.<A HREF="./hudson/model/FingerprintCleanupTh
 <DT><A HREF="./hudson/model/WorkspaceCleanupThread.html#invoke()"><B>invoke()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/WorkspaceCleanupThread.html" title="class in hudson.model">WorkspaceCleanupThread</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/InvocationInterceptor.html#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[], java.lang.reflect.InvocationHandler)"><B>invoke(Object, Method, Object[], InvocationHandler)</B></A> - 
+Method in interface hudson.util.<A HREF="./hudson/util/InvocationInterceptor.html" title="interface in hudson.util">InvocationInterceptor</A>
+<DD>This method can intercept the invocation of <CODE>InvocationHandler</CODE> either before or after
+ the invocation happens.
 <DT><A HREF="./hudson/util/spring/ClosureScript.html#invokeMethod(java.lang.String, java.lang.Object)"><B>invokeMethod(String, Object)</B></A> - 
 Method in class hudson.util.spring.<A HREF="./hudson/util/spring/ClosureScript.html" title="class in hudson.util.spring">ClosureScript</A>
 <DD>&nbsp;
@@ -8266,6 +8287,9 @@ Constructor for exception hudson.util.<A HREF="./hudson/util/IOException2.html" 
 <DT><A HREF="./hudson/util/IOException2.html#IOException2(java.lang.String, java.lang.Throwable)"><B>IOException2(String, Throwable)</B></A> - 
 Constructor for exception hudson.util.<A HREF="./hudson/util/IOException2.html" title="class in hudson.util">IOException2</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/maven/MojoInfo.html#is(java.lang.String, java.lang.String, java.lang.String)"><B>is(String, String, String)</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MojoInfo.html" title="class in hudson.maven">MojoInfo</A>
+<DD>Returns true if this <A HREF="./hudson/maven/MojoInfo.html" title="class in hudson.maven"><CODE>MojoInfo</CODE></A> wraps the mojo of the given ID tuple.
 <DT><A HREF="./hudson/model/Fingerprint.BuildPtr.html#is(hudson.model.Run)"><B>is(Run)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.BuildPtr.html" title="class in hudson.model">Fingerprint.BuildPtr</A>
 <DD>Returns true if <A HREF="./hudson/model/Fingerprint.BuildPtr.html" title="class in hudson.model"><CODE>Fingerprint.BuildPtr</CODE></A> points to the given run.
@@ -10679,9 +10703,6 @@ Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenFi
 <DT><A HREF="./hudson/maven/MavenReporter.html#postExecute(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MojoInfo, hudson.model.BuildListener, java.lang.Throwable)"><B>postExecute(MavenBuildProxy, MavenProject, MojoInfo, BuildListener, Throwable)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>
 <DD>Called after execution of a single mojo.
-<DT><A HREF="./hudson/maven/reporters/MavenArtifactArchiver.html#postExecute(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MojoInfo, hudson.model.BuildListener, java.lang.Throwable)"><B>postExecute(MavenBuildProxy, MavenProject, MojoInfo, BuildListener, Throwable)</B></A> - 
-Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenArtifactArchiver.html" title="class in hudson.maven.reporters">MavenArtifactArchiver</A>
-<DD>&nbsp;
 <DT><A HREF="./hudson/maven/reporters/MavenFingerprinter.html#postExecute(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MojoInfo, hudson.model.BuildListener, java.lang.Throwable)"><B>postExecute(MavenBuildProxy, MavenProject, MojoInfo, BuildListener, Throwable)</B></A> - 
 Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenFingerprinter.html" title="class in hudson.maven.reporters">MavenFingerprinter</A>
 <DD>Mojos perform different dependency resolution, so we need to check this for each mojo.
@@ -10700,6 +10721,9 @@ Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/Surefir
 <DT><A HREF="./hudson/maven/MavenReporter.html#preBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)"><B>preBuild(MavenBuildProxy, MavenProject, BuildListener)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>
 <DD>Called before the actual maven2 execution begins.
+<DT><A HREF="./hudson/maven/reporters/MavenArtifactArchiver.html#preBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)"><B>preBuild(MavenBuildProxy, MavenProject, BuildListener)</B></A> - 
+Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenArtifactArchiver.html" title="class in hudson.maven.reporters">MavenArtifactArchiver</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/reporters/MavenFingerprinter.html#preBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)"><B>preBuild(MavenBuildProxy, MavenProject, BuildListener)</B></A> - 
 Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenFingerprinter.html" title="class in hudson.maven.reporters">MavenFingerprinter</A>
 <DD>&nbsp;
@@ -10735,6 +10759,9 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenReporter.html" title="
 <DD>Called before execution of a single mojo.
 <DT><A HREF="./hudson/maven/reporters/BuildInfoRecorder.html#preExecute(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MojoInfo, hudson.model.BuildListener)"><B>preExecute(MavenBuildProxy, MavenProject, MojoInfo, BuildListener)</B></A> - 
 Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/BuildInfoRecorder.html" title="class in hudson.maven.reporters">BuildInfoRecorder</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/maven/reporters/MavenArtifactArchiver.html#preExecute(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MojoInfo, hudson.model.BuildListener)"><B>preExecute(MavenBuildProxy, MavenProject, MojoInfo, BuildListener)</B></A> - 
+Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenArtifactArchiver.html" title="class in hudson.maven.reporters">MavenArtifactArchiver</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/maven/reporters/SurefireArchiver.html#preExecute(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MojoInfo, hudson.model.BuildListener)"><B>preExecute(MavenBuildProxy, MavenProject, MojoInfo, BuildListener)</B></A> - 
 Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/SurefireArchiver.html" title="class in hudson.maven.reporters">SurefireArchiver</A>
@@ -12100,9 +12127,6 @@ Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in
 <DT><A HREF="./hudson/XmlFile.html#sniffEncoding()"><B>sniffEncoding()</B></A> - 
 Method in class hudson.<A HREF="./hudson/XmlFile.html" title="class in hudson">XmlFile</A>
 <DD>Parses the beginning of the file and determines the encoding.
-<DT><A HREF="./hudson/model/DependencyGraph.html#sort(java.util.List)"><B>sort(List&lt;AbstractProject&gt;)</B></A> - 
-Method in class hudson.model.<A HREF="./hudson/model/DependencyGraph.html" title="class in hudson.model">DependencyGraph</A>
-<DD>Sort the given in their Buildorder.
 <DT><A HREF="./hudson/model/View.html#SORTER"><B>SORTER</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
 <DD>&nbsp;
@@ -12768,6 +12792,9 @@ Constructor for class hudson.triggers.<A HREF="./hudson/triggers/Triggers.html" 
 <DT><A HREF="./hudson/triggers/Triggers.html#TRIGGERS"><B>TRIGGERS</B></A> - 
 Static variable in class hudson.triggers.<A HREF="./hudson/triggers/Triggers.html" title="class in hudson.triggers">Triggers</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/node_monitors/NodeMonitor.html#triggerUpdate()"><B>triggerUpdate()</B></A> - 
+Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>
+<DD>Starts updating the data asynchronously.
 <DT><A HREF="./hudson/scm/RepositoryBrowser.html#trimHeadSlash(java.lang.String)"><B>trimHeadSlash(String)</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>
 <DD>If the given string starts with '/', return a string that removes it.

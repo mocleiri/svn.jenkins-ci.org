@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Executor (Hudson core 1.231 API)
+Executor (Hudson core 1.232 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-02">
+<META NAME="date" CONTENT="2008-07-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Executor (Hudson core 1.231 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Executor (Hudson core 1.231 API)";
+        parent.document.title="Executor (Hudson core 1.232 API)";
     }
 }
 </SCRIPT>
@@ -102,7 +102,8 @@ java.lang.Object
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>Executor</B><DT>extends java.lang.Thread<DT>implements <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></DL>
+<DT><PRE><FONT SIZE="-1">@ExportedBean
+</FONT>public class <B>Executor</B><DT>extends java.lang.Thread<DT>implements <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></DL>
 </PRE>
 
 <P>
@@ -198,6 +199,14 @@ Thread that executes builds.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Executor.html#getApi()">getApi</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes the executor to the remote API.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.Throwable</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Executor.html#getCauseOfDeath()">getCauseOfDeath</A></B>()</CODE>
 
@@ -228,6 +237,15 @@ Thread that executes builds.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computes a human-readable text that shows the expected remaining time
  until the build completes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Executor.html#getEstimatedRemainingTimeMillis()">getEstimatedRemainingTimeMillis</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The same as <A HREF="../../hudson/model/Executor.html#getEstimatedRemainingTime()"><CODE>getEstimatedRemainingTime()</CODE></A> but return
+ it as a number of milli-seconds.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -385,7 +403,8 @@ public java.lang.String <B>getDisplayName</B>()</PRE>
 <A NAME="getNumber()"><!-- --></A><H3>
 getNumber</H3>
 <PRE>
-public int <B>getNumber</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public int <B>getNumber</B>()</PRE>
 <DL>
 <DD>Gets the executor number that uniquely identifies it among
  other <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s for the same computer.
@@ -403,7 +422,8 @@ public int <B>getNumber</B>()</PRE>
 <A NAME="isIdle()"><!-- --></A><H3>
 isIdle</H3>
 <PRE>
-public boolean <B>isIdle</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public boolean <B>isIdle</B>()</PRE>
 <DL>
 <DD>Returns true if this <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A> is ready for action.
 <P>
@@ -438,7 +458,8 @@ public java.lang.Throwable <B>getCauseOfDeath</B>()</PRE>
 <A NAME="getProgress()"><!-- --></A><H3>
 getProgress</H3>
 <PRE>
-public int <B>getProgress</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public int <B>getProgress</B>()</PRE>
 <DL>
 <DD>Returns the progress of the current build in the number between 0-100.
 <P>
@@ -460,6 +481,23 @@ public java.lang.String <B>getEstimatedRemainingTime</B>()</PRE>
 <DL>
 <DD>Computes a human-readable text that shows the expected remaining time
  until the build completes.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEstimatedRemainingTimeMillis()"><!-- --></A><H3>
+getEstimatedRemainingTimeMillis</H3>
+<PRE>
+public long <B>getEstimatedRemainingTimeMillis</B>()</PRE>
+<DL>
+<DD>The same as <A HREF="../../hudson/model/Executor.html#getEstimatedRemainingTime()"><CODE>getEstimatedRemainingTime()</CODE></A> but return
+ it as a number of milli-seconds.
 <P>
 <DD><DL>
 </DL>
@@ -528,6 +566,22 @@ getIdleStartMilliseconds</H3>
 public long <B>getIdleStartMilliseconds</B>()</PRE>
 <DL>
 <DD>Returns when this executor started or should start being idle.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getApi()"><!-- --></A><H3>
+getApi</H3>
+<PRE>
+public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
+<DL>
+<DD>Exposes the executor to the remote API.
 <P>
 <DD><DL>
 </DL>
