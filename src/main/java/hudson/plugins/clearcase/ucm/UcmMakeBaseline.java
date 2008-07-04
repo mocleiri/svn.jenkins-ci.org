@@ -108,20 +108,21 @@ public class UcmMakeBaseline extends Publisher {
     return true;
     }
      */
+    @SuppressWarnings("unchecked")
     @Override
     public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
 
-        FilePath filePath = build.getProject().getWorkspace();
-
-
         if (build.getProject().getScm() instanceof ClearCaseUcmSCM) {
+            ClearCaseUcmSCM scm = (ClearCaseUcmSCM) build.getProject().getScm();
+            FilePath filePath = build.getProject().getWorkspace().child(scm.getViewName());
+            
             HudsonClearToolLauncher clearToolLauncher = new HudsonClearToolLauncher(PluginImpl.BASE_DESCRIPTOR.getCleartoolExe(),
                     getDescriptor().getDisplayName(), listener, filePath, launcher);
 
             if (build.getResult().equals(Result.SUCCESS)) {
 
                 ArgumentListBuilder cmd = new ArgumentListBuilder();
-
+                
                 String baselineName = Util.replaceMacro(namePattern, build.getEnvVars());
                 String baselineComment = Util.replaceMacro(commentPattern, build.getEnvVars());
                 cmd.add("mkbl");
