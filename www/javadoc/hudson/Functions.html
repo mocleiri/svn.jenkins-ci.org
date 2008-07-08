@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.232 API)
+Functions (Hudson core 1.233 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-03">
+<META NAME="date" CONTENT="2008-07-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.232 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.232 API)";
+        parent.document.title="Functions (Hudson core 1.233 API)";
     }
 }
 </SCRIPT>
@@ -666,6 +666,15 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the current user has the given permission.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#hasView(java.lang.Object, java.lang.String)">hasView</A></B>(java.lang.Object&nbsp;it,
+        java.lang.String&nbsp;path)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1653,6 +1662,18 @@ getViewResource</H3>
 <PRE>
 public static java.lang.String <B>getViewResource</B>(java.lang.Object&nbsp;it,
                                                java.lang.String&nbsp;path)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasView(java.lang.Object, java.lang.String)"><!-- --></A><H3>
+hasView</H3>
+<PRE>
+public static boolean <B>hasView</B>(java.lang.Object&nbsp;it,
+                              java.lang.String&nbsp;path)</PRE>
 <DL>
 <DD><DL>
 </DL>

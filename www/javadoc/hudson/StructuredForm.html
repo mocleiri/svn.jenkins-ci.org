@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-StructuredForm (Hudson core 1.232 API)
+StructuredForm (Hudson core 1.233 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-03">
+<META NAME="date" CONTENT="2008-07-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ StructuredForm (Hudson core 1.232 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StructuredForm (Hudson core 1.232 API)";
+        parent.document.title="StructuredForm (Hudson core 1.233 API)";
     }
 }
 </SCRIPT>
@@ -147,6 +147,15 @@ Obtains the structured form data from <CODE>StaplerRequest</CODE>.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;net.sf.json.JSONObject&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/StructuredForm.html#toList(net.sf.json.JSONObject, java.lang.String)">toList</A></B>(net.sf.json.JSONObject&nbsp;parent,
+       java.lang.String&nbsp;propertyName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieves the property of the given object and returns it as a list of <CODE>JSONObject</CODE>.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -193,6 +202,31 @@ get</H3>
 public static net.sf.json.JSONObject <B>get</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
 <DL>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toList(net.sf.json.JSONObject, java.lang.String)"><!-- --></A><H3>
+toList</H3>
+<PRE>
+public static java.util.List&lt;net.sf.json.JSONObject&gt; <B>toList</B>(net.sf.json.JSONObject&nbsp;parent,
+                                                            java.lang.String&nbsp;propertyName)</PRE>
+<DL>
+<DD>Retrieves the property of the given object and returns it as a list of <CODE>JSONObject</CODE>.
+
+ <p>
+ If the value doesn't exist, this method returns an empty list. If the value is
+ a <CODE>JSONObject</CODE>, this method will return a singleton list. If it's a <CODE>JSONArray</CODE>,
+ the contents will be returned as a list.
+
+ <p>
+ Because of the way structured form submission work, this is convenient way of
+ handling repeated multi-value entries.
+<P>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.233</DD>
 </DL>
 </DD>
 </DL>

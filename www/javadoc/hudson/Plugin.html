@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Plugin (Hudson core 1.232 API)
+Plugin (Hudson core 1.233 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-03">
+<META NAME="date" CONTENT="2008-07-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Plugin (Hudson core 1.232 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Plugin (Hudson core 1.232 API)";
+        parent.document.title="Plugin (Hudson core 1.233 API)";
     }
 }
 </SCRIPT>
@@ -118,6 +118,12 @@ Base class of Hudson plugin.
  views against your Plugin class, and those are visible in this URL, too.
 
  <p>
+ <A HREF="../hudson/Plugin.html" title="class in hudson"><CODE>Plugin</CODE></A> can have an optional <tt>config.jelly</tt> page. If present,
+ it will become a part of the system configuration page (http://server/hudson/configure).
+ This is convenient for exposing/maintaining configuration that doesn't
+ fit any <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s.
+
+ <p>
  Up until Hudson 1.150 or something, subclasses of <A HREF="../hudson/Plugin.html" title="class in hudson"><CODE>Plugin</CODE></A> required
  <tt>@plugin</tt> javadoc annotation, but that is no longer a requirement.
 <P>
@@ -156,6 +162,14 @@ Base class of Hudson plugin.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Plugin.html#configure(net.sf.json.JSONObject)">configure</A></B>(net.sf.json.JSONObject&nbsp;formData)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handles the submission for the system configuration.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -298,6 +312,32 @@ public void <B>stop</B>()
       each plugin author doesn't have to worry about catching an exception and
       recording it.<DT><B>Since:</B></DT>
   <DD>1.42</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="configure(net.sf.json.JSONObject)"><!-- --></A><H3>
+configure</H3>
+<PRE>
+public void <B>configure</B>(net.sf.json.JSONObject&nbsp;formData)
+               throws java.io.IOException,
+                      javax.servlet.ServletException,
+                      <A HREF="../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+<DL>
+<DD>Handles the submission for the system configuration.
+
+ <p>
+ If this class defines <tt>config.jelly</tt> view, be sure to
+ override this method and persists the submitted values accordingly.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE>
+<DD><CODE><A HREF="../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE><DT><B>Since:</B></DT>
+  <DD>1.233</DD>
 </DL>
 </DD>
 </DL>

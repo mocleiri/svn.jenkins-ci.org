@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.232 API)
+Index (Hudson core 1.233 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-03">
+<META NAME="date" CONTENT="2008-07-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.232 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.232 API)";
+        parent.document.title="Index (Hudson core 1.233 API)";
     }
 }
 </SCRIPT>
@@ -1478,6 +1478,9 @@ Static variable in interface hudson.model.<A HREF="./hudson/model/Item.html" tit
 <DT><A HREF="./hudson/model/View.html#CONFIGURE"><B>CONFIGURE</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/Plugin.html#configure(net.sf.json.JSONObject)"><B>configure(JSONObject)</B></A> - 
+Method in class hudson.<A HREF="./hudson/Plugin.html" title="class in hudson">Plugin</A>
+<DD>Handles the submission for the system configuration.
 <DT><A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest)"><B>configure(StaplerRequest)</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html" title="class in hudson.scm">CVSSCM.DescriptorImpl</A>
 <DD>&nbsp;
@@ -2241,6 +2244,9 @@ Static variable in class hudson.node_monitors.<A HREF="./hudson/node_monitors/Cl
 <DD>&nbsp;
 <DT><A HREF="./hudson/node_monitors/DiskSpaceMonitor.html#DESCRIPTOR"><B>DESCRIPTOR</B></A> - 
 Static variable in class hudson.node_monitors.<A HREF="./hudson/node_monitors/DiskSpaceMonitor.html" title="class in hudson.node_monitors">DiskSpaceMonitor</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/node_monitors/SwapSpaceMonitor.html#DESCRIPTOR"><B>DESCRIPTOR</B></A> - 
+Static variable in class hudson.node_monitors.<A HREF="./hudson/node_monitors/SwapSpaceMonitor.html" title="class in hudson.node_monitors">SwapSpaceMonitor</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/scm/browsers/CollabNetSVN.html#DESCRIPTOR"><B>DESCRIPTOR</B></A> - 
 Static variable in class hudson.scm.browsers.<A HREF="./hudson/scm/browsers/CollabNetSVN.html" title="class in hudson.scm.browsers">CollabNetSVN</A>
@@ -4682,6 +4688,9 @@ Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/DiskSpaceMo
 <DD>&nbsp;
 <DT><A HREF="./hudson/node_monitors/NodeMonitor.html#getDescriptor()"><B>getDescriptor()</B></A> - 
 Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/node_monitors/SwapSpaceMonitor.html#getDescriptor()"><B>getDescriptor()</B></A> - 
+Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/SwapSpaceMonitor.html" title="class in hudson.node_monitors">SwapSpaceMonitor</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/scm/browsers/CollabNetSVN.html#getDescriptor()"><B>getDescriptor()</B></A> - 
 Method in class hudson.scm.browsers.<A HREF="./hudson/scm/browsers/CollabNetSVN.html" title="class in hudson.scm.browsers">CollabNetSVN</A>
@@ -8007,6 +8016,9 @@ Method in class hudson.<A HREF="./hudson/PluginWrapper.html" title="class in hud
 <DT><A HREF="./hudson/model/UpdateCenter.html#hasUpdates()"><B>hasUpdates()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
 <DD>Does any of the plugin has updates?
+<DT><A HREF="./hudson/Functions.html#hasView(java.lang.Object, java.lang.String)"><B>hasView(Object, String)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/RunMap.html#headMap(java.lang.Integer)"><B>headMap(Integer)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/RunMap.html" title="class in hudson.model">RunMap</A>
 <DD>&nbsp;
@@ -12372,6 +12384,9 @@ Constructor for class hudson.scm.browsers.<A HREF="./hudson/scm/browsers/Sventon
 <DT><A HREF="./hudson/scm/browsers/Sventon.DescriptorImpl.html" title="class in hudson.scm.browsers"><B>Sventon.DescriptorImpl</B></A> - Class in <A HREF="./hudson/scm/browsers/package-summary.html">hudson.scm.browsers</A><DD>&nbsp;<DT><A HREF="./hudson/scm/browsers/Sventon.DescriptorImpl.html#Sventon.DescriptorImpl()"><B>Sventon.DescriptorImpl()</B></A> - 
 Constructor for class hudson.scm.browsers.<A HREF="./hudson/scm/browsers/Sventon.DescriptorImpl.html" title="class in hudson.scm.browsers">Sventon.DescriptorImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/node_monitors/SwapSpaceMonitor.html" title="class in hudson.node_monitors"><B>SwapSpaceMonitor</B></A> - Class in <A HREF="./hudson/node_monitors/package-summary.html">hudson.node_monitors</A><DD>Checks the swap space availability.<DT><A HREF="./hudson/node_monitors/SwapSpaceMonitor.html#SwapSpaceMonitor()"><B>SwapSpaceMonitor()</B></A> - 
+Constructor for class hudson.node_monitors.<A HREF="./hudson/node_monitors/SwapSpaceMonitor.html" title="class in hudson.node_monitors">SwapSpaceMonitor</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html#synchronousPolling"><B>synchronousPolling</B></A> - 
 Variable in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A>
 <DD>Whether the projects should be polled all in one go in the order of dependencies.
@@ -12589,6 +12604,9 @@ Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in
 <DT><A HREF="./hudson/node_monitors/DiskSpaceMonitor.html#toHtml(long)"><B>toHtml(long)</B></A> - 
 Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/DiskSpaceMonitor.html" title="class in hudson.node_monitors">DiskSpaceMonitor</A>
 <DD>Returns the HTML representation of the space.
+<DT><A HREF="./hudson/node_monitors/SwapSpaceMonitor.html#toHtml(org.jvnet.hudson.MemoryUsage)"><B>toHtml(MemoryUsage)</B></A> - 
+Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/SwapSpaceMonitor.html" title="class in hudson.node_monitors">SwapSpaceMonitor</A>
+<DD>Returns the HTML representation of the space.
 <DT><A HREF="./hudson/util/ClockDifference.html#toHtml()"><B>toHtml()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ClockDifference.html" title="class in hudson.util">ClockDifference</A>
 <DD>&nbsp;
@@ -12626,6 +12644,9 @@ Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudso
 <DT><A HREF="./hudson/model/Descriptor.html#toList(T...)"><B>toList(T...)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/StructuredForm.html#toList(net.sf.json.JSONObject, java.lang.String)"><B>toList(JSONObject, String)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/StructuredForm.html" title="class in hudson">StructuredForm</A>
+<DD>Retrieves the property of the given object and returns it as a list of <CODE>JSONObject</CODE>.
 <DT><A HREF="./hudson/util/ArgumentListBuilder.html#toList()"><B>toList()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A>
 <DD>&nbsp;
@@ -12637,6 +12658,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Descriptor.html" tit
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/DescribableList.html#toMap()"><B>toMap()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/node_monitors/SwapSpaceMonitor.html#toMB(org.jvnet.hudson.MemoryUsage)"><B>toMB(MemoryUsage)</B></A> - 
+Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/SwapSpaceMonitor.html" title="class in hudson.node_monitors">SwapSpaceMonitor</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/TimeUnit2.html#toMicros(long)"><B>toMicros(long)</B></A> - 
 Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
