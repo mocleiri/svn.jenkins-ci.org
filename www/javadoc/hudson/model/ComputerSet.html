@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ComputerSet (Hudson core 1.233 API)
+ComputerSet (Hudson core 1.234 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-08">
+<META NAME="date" CONTENT="2008-07-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ComputerSet (Hudson core 1.233 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ComputerSet (Hudson core 1.233 API)";
+        parent.document.title="ComputerSet (Hudson core 1.234 API)";
     }
 }
 </SCRIPT>
@@ -152,6 +152,15 @@ Serves as the top of <A HREF="../../hudson/model/Computer.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ComputerSet.html#doUpdateNow(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doUpdateNow</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+            org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Triggers the schedule update now.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -318,6 +327,30 @@ public void <B>do_launchAll</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doUpdateNow(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doUpdateNow</H3>
+<PRE>
+public void <B>doUpdateNow</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                        org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                 throws java.io.IOException,
+                        javax.servlet.ServletException</PRE>
+<DL>
+<DD>Triggers the schedule update now.
+
+ TODO: ajax on the client side to wait until the update completion might be nice.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <HR>

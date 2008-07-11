@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Run (Hudson core 1.233 API)
+Run (Hudson core 1.234 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-08">
+<META NAME="date" CONTENT="2008-07-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson core 1.233 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson core 1.233 API)";
+        parent.document.title="Run (Hudson core 1.234 API)";
     }
 }
 </SCRIPT>
@@ -228,7 +228,7 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected static&nbsp;java.text.SimpleDateFormat</CODE></FONT></TD>
+<CODE>protected static&nbsp;java.lang.ThreadLocal&lt;java.text.SimpleDateFormat&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#ID_FORMATTER">ID_FORMATTER</A></B></CODE>
 
 <BR>
@@ -1028,7 +1028,7 @@ protected long <B>duration</B></PRE>
 <A NAME="ID_FORMATTER"><!-- --></A><H3>
 ID_FORMATTER</H3>
 <PRE>
-protected static final java.text.SimpleDateFormat <B>ID_FORMATTER</B></PRE>
+protected static final java.lang.ThreadLocal&lt;java.text.SimpleDateFormat&gt; <B>ID_FORMATTER</B></PRE>
 <DL>
 <DL>
 </DL>

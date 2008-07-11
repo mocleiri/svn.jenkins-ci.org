@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ProxyConfiguration (Hudson core 1.233 API)
+ProxyConfiguration (Hudson core 1.234 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-08">
+<META NAME="date" CONTENT="2008-07-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ProxyConfiguration (Hudson core 1.233 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ProxyConfiguration (Hudson core 1.233 API)";
+        parent.document.title="ProxyConfiguration (Hudson core 1.234 API)";
     }
 }
 </SCRIPT>
@@ -103,6 +103,9 @@ java.lang.Object
 
 <P>
 HTTP proxy configuration.
+
+ <p>
+ Use <A HREF="../hudson/ProxyConfiguration.html#open(java.net.URL)"><CODE>open(URL)</CODE></A> to open a connection with the proxy setting.
 <P>
 
 <P>
@@ -152,6 +155,15 @@ HTTP proxy configuration.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#ProxyConfiguration(java.lang.String, int, java.lang.String, java.lang.String)">ProxyConfiguration</A></B>(java.lang.String&nbsp;name,
+                   int&nbsp;port,
+                   java.lang.String&nbsp;userName,
+                   java.lang.String&nbsp;password)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ========== METHOD SUMMARY =========== -->
@@ -172,6 +184,22 @@ HTTP proxy configuration.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#getPassword()">getPassword</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#getUserName()">getUserName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../hudson/XmlFile.html" title="class in hudson">XmlFile</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#getXmlFile()">getXmlFile</A></B>()</CODE>
 
@@ -182,6 +210,14 @@ HTTP proxy configuration.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../hudson/ProxyConfiguration.html" title="class in hudson">ProxyConfiguration</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#load()">load</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.net.URLConnection</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#open(java.net.URL)">open</A></B>(java.net.URL&nbsp;url)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -253,6 +289,17 @@ public <B>ProxyConfiguration</B>(java.lang.String&nbsp;name,
                           int&nbsp;port)</PRE>
 <DL>
 </DL>
+<HR>
+
+<A NAME="ProxyConfiguration(java.lang.String, int, java.lang.String, java.lang.String)"><!-- --></A><H3>
+ProxyConfiguration</H3>
+<PRE>
+public <B>ProxyConfiguration</B>(java.lang.String&nbsp;name,
+                          int&nbsp;port,
+                          java.lang.String&nbsp;userName,
+                          java.lang.String&nbsp;password)</PRE>
+<DL>
+</DL>
 
 <!-- ============ METHOD DETAIL ========== -->
 
@@ -263,6 +310,28 @@ public <B>ProxyConfiguration</B>(java.lang.String&nbsp;name,
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="getUserName()"><!-- --></A><H3>
+getUserName</H3>
+<PRE>
+public java.lang.String <B>getUserName</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPassword()"><!-- --></A><H3>
+getPassword</H3>
+<PRE>
+public java.lang.String <B>getPassword</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="createProxy()"><!-- --></A><H3>
 createProxy</H3>
@@ -305,6 +374,20 @@ load</H3>
 <PRE>
 public static <A HREF="../hudson/ProxyConfiguration.html" title="class in hudson">ProxyConfiguration</A> <B>load</B>()
                                throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="open(java.net.URL)"><!-- --></A><H3>
+open</H3>
+<PRE>
+public static java.net.URLConnection <B>open</B>(java.net.URL&nbsp;url)
+                                   throws java.io.IOException</PRE>
 <DL>
 <DD><DL>
 

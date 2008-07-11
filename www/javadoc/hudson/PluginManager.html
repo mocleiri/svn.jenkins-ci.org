@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-PluginManager (Hudson core 1.233 API)
+PluginManager (Hudson core 1.234 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-08">
+<META NAME="date" CONTENT="2008-07-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginManager (Hudson core 1.233 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginManager (Hudson core 1.233 API)";
+        parent.document.title="PluginManager (Hudson core 1.234 API)";
     }
 }
 </SCRIPT>
@@ -229,8 +229,10 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/PluginManager.html#doProxyConfigure(java.lang.String, java.lang.String, org.kohsuke.stapler.StaplerResponse)">doProxyConfigure</A></B>(java.lang.String&nbsp;server,
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#doProxyConfigure(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.kohsuke.stapler.StaplerResponse)">doProxyConfigure</A></B>(java.lang.String&nbsp;server,
                  java.lang.String&nbsp;port,
+                 java.lang.String&nbsp;userName,
+                 java.lang.String&nbsp;password,
                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
@@ -574,13 +576,17 @@ public void <B>doInstall</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doProxyConfigure(java.lang.String, java.lang.String, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doProxyConfigure(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doProxyConfigure</H3>
 <PRE>
 public void <B>doProxyConfigure</B>(<FONT SIZE="-1">@QueryParameter(value="proxy.server")</FONT>
                              java.lang.String&nbsp;server,
                              <FONT SIZE="-1">@QueryParameter(value="proxy.port")</FONT>
                              java.lang.String&nbsp;port,
+                             <FONT SIZE="-1">@QueryParameter(value="proxy.userName")</FONT>
+                             java.lang.String&nbsp;userName,
+                             <FONT SIZE="-1">@QueryParameter(value="proxy.password")</FONT>
+                             java.lang.String&nbsp;password,
                              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                       throws java.io.IOException</PRE>
 <DL>
