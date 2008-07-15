@@ -28,6 +28,10 @@ public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?,
         this.parameterDefinitions = parameterDefinitions;
     }
 
+    public AbstractProject<?,?> getOwner() {
+        return owner;
+    }
+
     public List<ParameterDefinition> getParameterDefinitions() {
         return parameterDefinitions;
     }

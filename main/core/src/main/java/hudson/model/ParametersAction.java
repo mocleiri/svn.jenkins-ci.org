@@ -41,7 +41,7 @@ public class ParametersAction implements Action {
 
     @Override
     public String getIconFileName() {
-        return "clock.gif";
+        return "document-properties.gif";
     }
 
     @Override
