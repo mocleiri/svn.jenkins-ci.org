@@ -1,11 +1,12 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
 	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form"
 	xmlns:i="jelly:fmt" xmlns:p="/lib/hudson/project">
-	<f:section title="Parameters">
-		<f:block>
-			<f:hetero-list name="parameter" hasHeader="true"
-				descriptors="${h.getParameterDescriptors()}" items="${instance.parameterDefinitions}"
-				addCaption="${%Add Parameter}" />
-		</f:block>
-	</f:section>
+  <f:optionalBlock name="parameterized" title="This build is parameterized"
+          checked="${instance!=null}">
+    <f:nested>
+      <f:hetero-list name="parameter" hasHeader="true"
+        descriptors="${h.getParameterDescriptors()}" items="${instance.parameterDefinitions}"
+        addCaption="${%Add Parameter}" />
+    </f:nested>
+  </f:optionalBlock>
 </j:jelly>

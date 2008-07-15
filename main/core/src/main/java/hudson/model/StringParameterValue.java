@@ -5,23 +5,16 @@ import org.kohsuke.stapler.DataBoundConstructor;
 /**
  * {@link ParameterValue} created from {@link StringParameterDefinition}.
  */
-public class StringParameterValue implements ParameterValue {
-
-    private final String name;
+public class StringParameterValue extends ParameterValue {
     private final String value;
 
     @DataBoundConstructor
     public StringParameterValue(String name, String value) {
-        this.name = name;
+        super(name);
         this.value = value;
     }
 
     public String getValue() {
         return value;
     }
-
-    public String getName() {
-        return name;
-    }
-
 }

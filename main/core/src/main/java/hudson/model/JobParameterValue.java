@@ -2,21 +2,13 @@ package hudson.model;
 
 import org.kohsuke.stapler.DataBoundConstructor;
 
-public class JobParameterValue implements ParameterValue {
-
-    private final String name;
+public class JobParameterValue extends ParameterValue {
     private final Job job;
 
     @DataBoundConstructor
     public JobParameterValue(String name, Job job) {
-        super();
+        super(name);
         this.job = job;
-        this.name = name;
-    }
-
-    @Override
-    public String getName() {
-        return name;
     }
 
     @Override

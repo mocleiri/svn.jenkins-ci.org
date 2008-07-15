@@ -37,6 +37,13 @@ import hudson.ExtensionPoint;
  * during a build.
  *
  *
+ *
+ * <h2>Persistence</h2>
+ * <p>
+ * Instances of {@link ParameterDefinition}s are persisted into job <tt>config.xml</tt>
+ * through XStream.
+ *
+ *
  * <h2>Assocaited Views</h2>
  * <h4>config.jelly</h4>
  * <p>
@@ -44,8 +51,8 @@ import hudson.ExtensionPoint;
  * fragment in the job configuration screen. Values entered there is fed back to
  * {@link ParameterDescriptor#newInstance(StaplerRequest, JSONObject)} to create {@link ParameterDefinition}s.
  *
- * <h4>value.jelly</h4>
- * The <tt>value.jelly</tt> view contributes a form fragment in the page where the user
+ * <h4>index.jelly</h4>
+ * The <tt>index.jelly</tt> view contributes a form fragment in the page where the user
  * enters actual values of parameters for a build. The result of this form submission
  * is then fed to {@link ParameterDefinition#createValue(StaplerRequest, JSONObject)} to
  * create {@link ParameterValue}s.
@@ -68,6 +75,9 @@ public abstract class ParameterDefinition implements
         this.name = name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public abstract ParameterDescriptor getDescriptor();
 
     public abstract ParameterValue createValue(StaplerRequest req, JSONObject jo);

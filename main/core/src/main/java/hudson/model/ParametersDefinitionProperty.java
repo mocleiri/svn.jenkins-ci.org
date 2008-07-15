@@ -51,7 +51,10 @@ public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?,
             JSONObject jo = (JSONObject) o;
             String name = jo.getString("name");
 
-            values.add(getParameterDefinition(name).createValue(req, jo));
+            ParameterDefinition d = getParameterDefinition(name);
+            if(d==null)
+                throw new IllegalArgumentException("No such parameter definition: " + name);
+            values.add(d.createValue(req, jo));
         }
 
         Hudson.getInstance().getQueue().add(
@@ -60,13 +63,14 @@ public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?,
         rsp.sendRedirect("..");
     }
 
-    private ParameterDefinition getParameterDefinition(String name) {
-        for (ParameterDefinition pd : parameterDefinitions) {
-            if (pd.getName().equals(name)) {
+    /**
+     * Gets the {@link ParameterDefinition} of the given name, if any.
+     */
+    public ParameterDefinition getParameterDefinition(String name) {
+        for (ParameterDefinition pd : parameterDefinitions)
+            if (pd.getName().equals(name))
                 return pd;
-            }
-        }
-        throw new IllegalArgumentException("No such parameter definition: " + name);
+        return null;
     }
 
     @Override
@@ -96,6 +100,8 @@ public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?,
 
             List<ParameterDefinition> parameterDefinitions = Descriptor.newInstancesFromHeteroList(
                     req, formData, "parameter", ParameterDefinition.LIST);
+            if(parameterDefinitions.isEmpty())
+                return null;
 
             return new ParametersDefinitionProperty(parameterDefinitions);
         }
