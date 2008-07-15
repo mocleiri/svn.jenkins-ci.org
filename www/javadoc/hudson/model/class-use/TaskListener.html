@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Interface hudson.model.TaskListener (Hudson core 1.234 API)
+Uses of Interface hudson.model.TaskListener (Hudson core 1.235 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-11">
+<META NAME="date" CONTENT="2008-07-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.TaskListener (Hudson core 1.234 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.TaskListener (Hudson core 1.234 API)";
+        parent.document.title="Uses of Interface hudson.model.TaskListener (Hudson core 1.235 API)";
     }
 }
 </SCRIPT>
@@ -241,11 +241,32 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A></CODE></FONT></TD>
-<TD><CODE><B>MavenUtil.</B><B><A HREF="../../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.lang.String)">createEmbedder</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+<TD><CODE><B>MavenUtil.</B><B><A HREF="../../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, hudson.model.AbstractProject, java.lang.String)">createEmbedder</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+               <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
+               java.lang.String&nbsp;profiles)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This version tries to infer mavenHome by looking at a project.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A></CODE></FONT></TD>
+<TD><CODE><B>MavenUtil.</B><B><A HREF="../../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String)">createEmbedder</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+               java.io.File&nbsp;mavenHome,
                java.lang.String&nbsp;profiles)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a fresh <A HREF="../../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven"><CODE>MavenEmbedder</CODE></A> instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A></CODE></FONT></TD>
+<TD><CODE><B>MavenUtil.</B><B><A HREF="../../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.lang.String)">createEmbedder</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+               java.lang.String&nbsp;profiles)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../hudson/tasks/Maven.MavenInstallation.html#createEmbedder(hudson.model.BuildListener, java.lang.String)"><CODE>Maven.MavenInstallation.createEmbedder(BuildListener, String)</CODE></A>
+      or other overloaded versions that infers maven home.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -293,14 +314,6 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>MavenArtifactRecord.</B><B><A HREF="../../../hudson/maven/reporters/MavenArtifactRecord.html#install(hudson.model.TaskListener)">install</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installs the artifact to the local Maven repository.</TD>
 </TR>
 </TABLE>
 &nbsp;

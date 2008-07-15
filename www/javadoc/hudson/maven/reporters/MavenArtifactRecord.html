@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MavenArtifactRecord (Hudson core 1.234 API)
+MavenArtifactRecord (Hudson core 1.235 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-11">
+<META NAME="date" CONTENT="2008-07-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenArtifactRecord (Hudson core 1.234 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenArtifactRecord (Hudson core 1.234 API)";
+        parent.document.title="MavenArtifactRecord (Hudson core 1.235 API)";
     }
 }
 </SCRIPT>
@@ -260,7 +260,7 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenArtifactRecord.html#install(hudson.model.TaskListener)">install</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenArtifactRecord.html#install(hudson.maven.MavenEmbedder)">install</A></B>(<A HREF="../../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A>&nbsp;embedder)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installs the artifact to the local Maven repository.</TD>
@@ -499,10 +499,10 @@ public void <B>deploy</B>(<A HREF="../../../hudson/maven/MavenEmbedder.html" tit
 </DL>
 <HR>
 
-<A NAME="install(hudson.model.TaskListener)"><!-- --></A><H3>
+<A NAME="install(hudson.maven.MavenEmbedder)"><!-- --></A><H3>
 install</H3>
 <PRE>
-public void <B>install</B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
+public void <B>install</B>(<A HREF="../../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A>&nbsp;embedder)
              throws org.apache.maven.embedder.MavenEmbedderException,
                     java.io.IOException,
                     org.codehaus.plexus.component.repository.exception.ComponentLookupException,

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.234 API)
+Index (Hudson core 1.235 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-11">
+<META NAME="date" CONTENT="2008-07-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.234 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.234 API)";
+        parent.document.title="Index (Hudson core 1.235 API)";
     }
 }
 </SCRIPT>
@@ -1766,7 +1766,17 @@ Static method in class hudson.util.<A HREF="./hudson/util/ProcessTreeKiller.html
  when we later kill the processes.
 <DT><A HREF="./hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.lang.String)"><B>createEmbedder(TaskListener, String)</B></A> - 
 Static method in class hudson.maven.<A HREF="./hudson/maven/MavenUtil.html" title="class in hudson.maven">MavenUtil</A>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="./hudson/tasks/Maven.MavenInstallation.html#createEmbedder(hudson.model.BuildListener, java.lang.String)"><CODE>Maven.MavenInstallation.createEmbedder(BuildListener, String)</CODE></A>
+      or other overloaded versions that infers maven home.</I>
+<DT><A HREF="./hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, hudson.model.AbstractProject, java.lang.String)"><B>createEmbedder(TaskListener, AbstractProject&lt;?, ?&gt;, String)</B></A> - 
+Static method in class hudson.maven.<A HREF="./hudson/maven/MavenUtil.html" title="class in hudson.maven">MavenUtil</A>
+<DD>This version tries to infer mavenHome by looking at a project.
+<DT><A HREF="./hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String)"><B>createEmbedder(TaskListener, File, String)</B></A> - 
+Static method in class hudson.maven.<A HREF="./hudson/maven/MavenUtil.html" title="class in hudson.maven">MavenUtil</A>
 <DD>Creates a fresh <A HREF="./hudson/maven/MavenEmbedder.html" title="class in hudson.maven"><CODE>MavenEmbedder</CODE></A> instance.
+<DT><A HREF="./hudson/tasks/Maven.MavenInstallation.html#createEmbedder(hudson.model.BuildListener, java.lang.String)"><B>createEmbedder(BuildListener, String)</B></A> - 
+Method in class hudson.tasks.<A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/scm/ChangeLogSet.html#createEmpty(hudson.model.AbstractBuild)"><B>createEmpty(AbstractBuild)</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/ChangeLogSet.html" title="class in hudson.scm">ChangeLogSet</A>
 <DD>Constant instance that represents no changes.
@@ -7831,6 +7841,9 @@ Static method in class hudson.security.<A HREF="./hudson/security/Messages.html"
 <DT><A HREF="./hudson/maven/ExecutedMojo.html#goal"><B>goal</B></A> - 
 Variable in class hudson.maven.<A HREF="./hudson/maven/ExecutedMojo.html" title="class in hudson.maven">ExecutedMojo</A>
 <DD>Mojo name.
+<DT><A HREF="./hudson/util/ColorPalette.html#GREY"><B>GREY</B></A> - 
+Static variable in class hudson.util.<A HREF="./hudson/util/ColorPalette.html" title="class in hudson.util">ColorPalette</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/MarkupText.SubText.html#group(int)"><B>group(int)</B></A> - 
 Method in class hudson.<A HREF="./hudson/MarkupText.SubText.html" title="class in hudson">MarkupText.SubText</A>
 <DD>Gets the text that represents the captured group.
@@ -8215,6 +8228,18 @@ Constructor for class hudson.<A HREF="./hudson/Indenter.html" title="class in hu
 <DT><A HREF="./hudson/Functions.html#inferHudsonURL(org.kohsuke.stapler.StaplerRequest)"><B>inferHudsonURL(StaplerRequest)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
 <DD>Infers the hudson installation URL from the given request.
+<DT><A HREF="./hudson/maven/MavenModule.html#inferMavenInstallation()"><B>inferMavenInstallation()</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/maven/MavenModuleSet.html#inferMavenInstallation()"><B>inferMavenInstallation()</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Project.html#inferMavenInstallation()"><B>inferMavenInstallation()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Project.html" title="class in hudson.model">Project</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/tasks/Maven.ProjectWithMaven.html#inferMavenInstallation()"><B>inferMavenInstallation()</B></A> - 
+Method in interface hudson.tasks.<A HREF="./hudson/tasks/Maven.ProjectWithMaven.html" title="interface in hudson.tasks">Maven.ProjectWithMaven</A>
+<DD>Gets the <A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks"><CODE>Maven.MavenInstallation</CODE></A> associated with the project.
 <DT><A HREF="./hudson/ResponseHeaderFilter.html#init(javax.servlet.FilterConfig)"><B>init(FilterConfig)</B></A> - 
 Method in class hudson.<A HREF="./hudson/ResponseHeaderFilter.html" title="class in hudson">ResponseHeaderFilter</A>
 <DD>&nbsp;
@@ -8243,7 +8268,7 @@ Static method in class hudson.model.<A HREF="./hudson/model/ComputerSet.html" ti
 Method in class hudson.maven.<A HREF="./hudson/maven/MojoInfo.html" title="class in hudson.maven">MojoInfo</A>
 <DD>Injects the specified value (designated by the specified field name) into the mojo,
  and returns its old value.
-<DT><A HREF="./hudson/maven/reporters/MavenArtifactRecord.html#install(hudson.model.TaskListener)"><B>install(TaskListener)</B></A> - 
+<DT><A HREF="./hudson/maven/reporters/MavenArtifactRecord.html#install(hudson.maven.MavenEmbedder)"><B>install(MavenEmbedder)</B></A> - 
 Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenArtifactRecord.html" title="class in hudson.maven.reporters">MavenArtifactRecord</A>
 <DD>Installs the artifact to the local Maven repository.
 <DT><A HREF="./hudson/model/UpdateCenter.Plugin.html#install()"><B>install()</B></A> - 
@@ -9618,7 +9643,8 @@ Constructor for class hudson.tasks.<A HREF="./hudson/tasks/Maven.html" title="cl
 <DT><A HREF="./hudson/tasks/Maven.DescriptorImpl.html" title="class in hudson.tasks"><B>Maven.DescriptorImpl</B></A> - Class in <A HREF="./hudson/tasks/package-summary.html">hudson.tasks</A><DD>&nbsp;<DT><A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks"><B>Maven.MavenInstallation</B></A> - Class in <A HREF="./hudson/tasks/package-summary.html">hudson.tasks</A><DD>&nbsp;<DT><A HREF="./hudson/tasks/Maven.MavenInstallation.html#Maven.MavenInstallation(java.lang.String, java.lang.String)"><B>Maven.MavenInstallation(String, String)</B></A> - 
 Constructor for class hudson.tasks.<A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/tasks/Messages.html#Maven_DisplayName()"><B>Maven_DisplayName()</B></A> - 
+<DT><A HREF="./hudson/tasks/Maven.ProjectWithMaven.html" title="interface in hudson.tasks"><B>Maven.ProjectWithMaven</B></A> - Interface in <A HREF="./hudson/tasks/package-summary.html">hudson.tasks</A><DD>Optional interface that can be implemented by <A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>
+ that has "contextual" <A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks"><CODE>Maven.MavenInstallation</CODE></A> associated with it.<DT><A HREF="./hudson/tasks/Messages.html#Maven_DisplayName()"><B>Maven_DisplayName()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>Invoke top-level Maven targets
 <DT><A HREF="./hudson/tasks/Messages.html#Maven_ExecFailed()"><B>Maven_ExecFailed()</B></A> - 
@@ -9710,7 +9736,7 @@ Constructor for class hudson.maven.<A HREF="./hudson/maven/MavenBuildProxy.Filte
 <DT><A HREF="./hudson/maven/MavenBuildProxy.Filter.AsyncInvoker.html" title="class in hudson.maven"><B>MavenBuildProxy.Filter.AsyncInvoker</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD><A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Callable</CODE></A> for invoking <A HREF="./hudson/maven/MavenBuildProxy.BuildCallable.html" title="interface in hudson.maven"><CODE>MavenBuildProxy.BuildCallable</CODE></A> asynchronously.<DT><A HREF="./hudson/maven/MavenBuildProxy.Filter.AsyncInvoker.html#MavenBuildProxy.Filter.AsyncInvoker(hudson.maven.MavenBuildProxy, hudson.maven.MavenBuildProxy.BuildCallable)"><B>MavenBuildProxy.Filter.AsyncInvoker(MavenBuildProxy, MavenBuildProxy.BuildCallable&lt;?, ?&gt;)</B></A> - 
 Constructor for class hudson.maven.<A HREF="./hudson/maven/MavenBuildProxy.Filter.AsyncInvoker.html" title="class in hudson.maven">MavenBuildProxy.Filter.AsyncInvoker</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/maven/MavenEmbedder.html" title="class in hudson.maven"><B>MavenEmbedder</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>Class intended to be used by clients who wish to embed Maven into their applications<DT><A HREF="./hudson/maven/MavenEmbedder.html#MavenEmbedder()"><B>MavenEmbedder()</B></A> - 
+<DT><A HREF="./hudson/maven/MavenEmbedder.html" title="class in hudson.maven"><B>MavenEmbedder</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>Class intended to be used by clients who wish to embed Maven into their applications<DT><A HREF="./hudson/maven/MavenEmbedder.html#MavenEmbedder(java.io.File)"><B>MavenEmbedder(File)</B></A> - 
 Constructor for class hudson.maven.<A HREF="./hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/maven/reporters/MavenFingerprinter.html" title="class in hudson.maven.reporters"><B>MavenFingerprinter</B></A> - Class in <A HREF="./hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A><DD>Records fingerprints of the builds to keep track of dependencies.<DT><A HREF="./hudson/maven/reporters/MavenFingerprinter.html#MavenFingerprinter()"><B>MavenFingerprinter()</B></A> - 

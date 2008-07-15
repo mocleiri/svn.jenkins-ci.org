@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.234 API)
+Deprecated List (Hudson core 1.235 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-11">
+<META NAME="date" CONTENT="2008-07-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.234 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.234 API)";
+        parent.document.title="Deprecated List (Hudson core 1.235 API)";
     }
 }
 </SCRIPT>
@@ -160,6 +160,12 @@ function windowTitle()
 <TD><A HREF="hudson/model/Hudson.html#contains(hudson.model.TopLevelItem)">hudson.model.Hudson.contains(TopLevelItem)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>why are you calling a method that always return true?</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.lang.String)">hudson.maven.MavenUtil.createEmbedder(TaskListener, String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/tasks/Maven.MavenInstallation.html#createEmbedder(hudson.model.BuildListener, java.lang.String)"><CODE>Maven.MavenInstallation.createEmbedder(BuildListener, String)</CODE></A>
+      or other overloaded versions that infers maven home.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/scm/RepositoryBrowsers.html#createInstance(java.lang.Class, org.kohsuke.stapler.StaplerRequest, java.lang.String)">hudson.scm.RepositoryBrowsers.createInstance(Class<T>, StaplerRequest, String)</A>
