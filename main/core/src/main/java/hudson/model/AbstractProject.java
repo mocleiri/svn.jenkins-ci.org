@@ -843,10 +843,10 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
 
         ParametersDefinitionProperty pp = getProperty(ParametersDefinitionProperty.class);
         if (pp != null) {
-        	rsp.sendRedirect("parameters");
-        	return;
+            rsp.sendRedirect("parameters");
+            return;
         }
-        
+
         String delay = req.getParameter("delay");
         if (delay!=null) {
             if (!isDisabled()) {
