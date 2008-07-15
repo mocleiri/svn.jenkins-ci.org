@@ -55,44 +55,44 @@ import hudson.ExtensionPoint;
  * @see StringParameterDefinition
  */
 public abstract class ParameterDefinition implements
-		Describable<ParameterDefinition>, ExtensionPoint {
+        Describable<ParameterDefinition>, ExtensionPoint {
 
-	private final String name;
+    private final String name;
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public ParameterDefinition(String name) {
-		super();
-		this.name = name;
-	}
+    public ParameterDefinition(String name) {
+        super();
+        this.name = name;
+    }
 
-	public abstract ParameterDescriptor getDescriptor();
+    public abstract ParameterDescriptor getDescriptor();
 
-	public abstract ParameterValue createValue(StaplerRequest req, JSONObject jo);
+    public abstract ParameterValue createValue(StaplerRequest req, JSONObject jo);
 
-	/**
-	 * A list of available parameter definition types
-	 */
-	public static final DescriptorList<ParameterDefinition> LIST = new DescriptorList<ParameterDefinition>();
+    /**
+     * A list of available parameter definition types
+     */
+    public static final DescriptorList<ParameterDefinition> LIST = new DescriptorList<ParameterDefinition>();
 
-	public abstract static class ParameterDescriptor extends
-			Descriptor<ParameterDefinition> {
+    public abstract static class ParameterDescriptor extends
+            Descriptor<ParameterDefinition> {
 
-		protected ParameterDescriptor(Class<? extends ParameterDefinition> klazz) {
-			super(klazz);
-		}
+        protected ParameterDescriptor(Class<? extends ParameterDefinition> klazz) {
+            super(klazz);
+        }
 
-		public String getValuePage() {
-			return getViewPage(clazz, "index.jelly");
-		}
+        public String getValuePage() {
+            return getViewPage(clazz, "index.jelly");
+        }
 
-		@Override
-		public String getDisplayName() {
-			return "Parameter";
-		}
+        @Override
+        public String getDisplayName() {
+            return "Parameter";
+        }
 
-	}
+    }
 
 }

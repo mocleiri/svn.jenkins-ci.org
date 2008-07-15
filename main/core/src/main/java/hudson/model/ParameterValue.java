@@ -7,7 +7,8 @@ package hudson.model;
  */
 public interface ParameterValue {
 
-	String getName();
-	Object getValue();
-	
+    String getName();
+
+    Object getValue();
+
 }

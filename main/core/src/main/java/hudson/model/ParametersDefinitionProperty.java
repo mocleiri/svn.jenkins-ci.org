@@ -20,110 +20,110 @@ import org.kohsuke.stapler.StaplerResponse;
  * a form to enter build parameters. 
  */
 public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?, ?>>
-		implements Action {
+        implements Action {
 
-	private final List<ParameterDefinition> parameterDefinitions;
+    private final List<ParameterDefinition> parameterDefinitions;
 
-	public ParametersDefinitionProperty(List<ParameterDefinition> parameterDefinitions) {
-		this.parameterDefinitions = parameterDefinitions;
-	}
+    public ParametersDefinitionProperty(List<ParameterDefinition> parameterDefinitions) {
+        this.parameterDefinitions = parameterDefinitions;
+    }
 
-	public List<ParameterDefinition> getParameterDefinitions() {
-		return parameterDefinitions;
-	}
+    public List<ParameterDefinition> getParameterDefinitions() {
+        return parameterDefinitions;
+    }
 
-	@Override
-	public Action getJobAction(AbstractProject<?, ?> job) {
-		return this;
-	}
+    @Override
+    public Action getJobAction(AbstractProject<?, ?> job) {
+        return this;
+    }
 
-	public AbstractProject<?, ?> getProject() {
-		return (AbstractProject<?, ?>) owner;
-	}
+    public AbstractProject<?, ?> getProject() {
+        return (AbstractProject<?, ?>) owner;
+    }
 
-	public void doBuild(StaplerRequest req, StaplerResponse rsp) throws IOException {
+    public void doBuild(StaplerRequest req, StaplerResponse rsp) throws IOException {
         List<ParameterValue> values = new ArrayList<ParameterValue>();
 
         JSONObject formData = StructuredForm.get(req);
         JSONArray a = JSONArray.fromObject(formData.get("parameter"));
 
         for (Object o : a) {
-            JSONObject jo = (JSONObject)o;
+            JSONObject jo = (JSONObject) o;
             String name = jo.getString("name");
-            
-            values.add(getParameterDefinition(name).createValue(req,jo));
+
+            values.add(getParameterDefinition(name).createValue(req, jo));
         }
 
-		Hudson.getInstance().getQueue().add(
-				new ParameterizedProjectTask(owner, values), 0);
-		
-		rsp.sendRedirect("..");
-	}
-	
-	private ParameterDefinition getParameterDefinition(String name) {
-		for (ParameterDefinition pd: parameterDefinitions) {
-			if (pd.getName().equals(name)) {
-				return pd;
-			}
-		}
-		throw new IllegalArgumentException("No such parameter definition: " + name);
-	}
+        Hudson.getInstance().getQueue().add(
+                new ParameterizedProjectTask(owner, values), 0);
 
-	@Override
-	public JobPropertyDescriptor getDescriptor() {
-		return DESCRIPTOR;
-	}
+        rsp.sendRedirect("..");
+    }
 
-	public static final JobPropertyDescriptor DESCRIPTOR = new DescriptorImpl();
+    private ParameterDefinition getParameterDefinition(String name) {
+        for (ParameterDefinition pd : parameterDefinitions) {
+            if (pd.getName().equals(name)) {
+                return pd;
+            }
+        }
+        throw new IllegalArgumentException("No such parameter definition: " + name);
+    }
 
-	public static class DescriptorImpl extends JobPropertyDescriptor {
+    @Override
+    public JobPropertyDescriptor getDescriptor() {
+        return DESCRIPTOR;
+    }
 
-		protected DescriptorImpl() {
-			super(ParametersDefinitionProperty.class);
-		}
+    public static final JobPropertyDescriptor DESCRIPTOR = new DescriptorImpl();
 
-		@Override
-		public boolean isApplicable(Class<? extends Job> jobType) {
-			return AbstractProject.class.isAssignableFrom(jobType);
-		}
+    public static class DescriptorImpl extends JobPropertyDescriptor {
 
-		@Override
-		public JobProperty<?> newInstance(StaplerRequest req,
-				JSONObject formData) throws FormException {
-			if (formData.isNullObject()) {
-				return null;
-			}
-			
-			List<ParameterDefinition> parameterDefinitions = Descriptor.newInstancesFromHeteroList(
-					req, formData, "parameter", ParameterDefinition.LIST);
+        protected DescriptorImpl() {
+            super(ParametersDefinitionProperty.class);
+        }
 
-			return new ParametersDefinitionProperty(parameterDefinitions);
-		}
+        @Override
+        public boolean isApplicable(Class<? extends Job> jobType) {
+            return AbstractProject.class.isAssignableFrom(jobType);
+        }
 
-		@Override
-		public String getDisplayName() {
-			return "Parameters";
-		}
+        @Override
+        public JobProperty<?> newInstance(StaplerRequest req,
+                                          JSONObject formData) throws FormException {
+            if (formData.isNullObject()) {
+                return null;
+            }
 
-	}
+            List<ParameterDefinition> parameterDefinitions = Descriptor.newInstancesFromHeteroList(
+                    req, formData, "parameter", ParameterDefinition.LIST);
 
-	@Override
-	public String getDisplayName() {
-		return null;
-	}
+            return new ParametersDefinitionProperty(parameterDefinitions);
+        }
 
-	@Override
-	public String getIconFileName() {
-		return null;
-	}
+        @Override
+        public String getDisplayName() {
+            return "Parameters";
+        }
 
-	@Override
-	public String getUrlName() {
-		return "parameters";
-	}
+    }
+
+    @Override
+    public String getDisplayName() {
+        return null;
+    }
+
+    @Override
+    public String getIconFileName() {
+        return null;
+    }
+
+    @Override
+    public String getUrlName() {
+        return "parameters";
+    }
 
 
-	static {
-		ParameterDefinition.LIST.add(StringParameterDefinition.DESCRIPTOR);
-	}
+    static {
+        ParameterDefinition.LIST.add(StringParameterDefinition.DESCRIPTOR);
+    }
 }
