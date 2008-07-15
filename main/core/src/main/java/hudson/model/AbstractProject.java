@@ -841,9 +841,10 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     public void doBuild( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         BuildAuthorizationToken.checkPermission(this, authToken, req, rsp);
 
+        // if a build is parameterized, let that take over
         ParametersDefinitionProperty pp = getProperty(ParametersDefinitionProperty.class);
         if (pp != null) {
-            rsp.sendRedirect("parameters");
+            pp._doBuild(req,rsp);
             return;
         }
 

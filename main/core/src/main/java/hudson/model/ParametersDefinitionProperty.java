@@ -12,6 +12,8 @@ import net.sf.json.JSONObject;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
+import javax.servlet.ServletException;
+
 /**
  * Keeps a list of the parameters defined for a project.
  *
@@ -45,7 +47,19 @@ public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?,
         return (AbstractProject<?, ?>) owner;
     }
 
-    public void doBuild(StaplerRequest req, StaplerResponse rsp) throws IOException {
+    /**
+     * Interprets the form submission and schedules a build for a parameterized job.
+     *
+     * <p>
+     * This method is supposed to be invoked from {@link AbstractProject#doBuild(StaplerRequest, StaplerResponse)}.
+     */
+    public void _doBuild(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+        if(!req.getMethod().equals("POST")) {
+            // show the parameter entry form.
+            req.getView(this,"index.jelly").forward(req,rsp);
+            return;
+        }
+
         List<ParameterValue> values = new ArrayList<ParameterValue>();
 
         JSONObject formData = StructuredForm.get(req);
@@ -64,7 +78,8 @@ public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?,
         Hudson.getInstance().getQueue().add(
                 new ParameterizedProjectTask(owner, values), 0);
 
-        rsp.sendRedirect("..");
+        // send the user back to the job top page.
+        rsp.sendRedirect(".");
     }
 
     /**
