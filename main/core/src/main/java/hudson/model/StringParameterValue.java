@@ -2,6 +2,9 @@ package hudson.model;
 
 import org.kohsuke.stapler.DataBoundConstructor;
 
+/**
+ * {@link ParameterValue} created from {@link StringParameterDefinition}.
+ */
 public class StringParameterValue implements ParameterValue {
 
 	private final String name;

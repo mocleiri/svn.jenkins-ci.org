@@ -5,6 +5,9 @@ import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 
+/**
+ * Parameter whose value is a string value.
+ */
 public class StringParameterDefinition extends ParameterDefinition {
 
 	private boolean optional;
@@ -61,7 +64,7 @@ public class StringParameterDefinition extends ParameterDefinition {
 	}
 
 	@Override
-	public ParameterValue newInstance(StaplerRequest req, JSONObject jo) {
+	public ParameterValue createValue(StaplerRequest req, JSONObject jo) {
 		return req.bindJSON(StringParameterValue.class, jo);
 	}
 

@@ -2,6 +2,8 @@ package hudson.model;
 
 /**
  * A value for a parameter in a build.
+ *
+ * @see ParameterDefinition
  */
 public interface ParameterValue {
 

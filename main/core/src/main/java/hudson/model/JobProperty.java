@@ -61,6 +61,10 @@ public abstract class JobProperty<J extends Job<?,?>> implements Describable<Job
     /**
      * {@link Action} to be displayed in the job page.
      *
+     * <p>
+     * Returning non-null from this method allows a job property to add an item
+     * to the left navigation bar in the job page.
+     *
      * @return
      *      null if there's no such action.
      * @since 1.102

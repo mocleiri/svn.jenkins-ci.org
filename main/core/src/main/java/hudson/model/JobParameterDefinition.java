@@ -39,7 +39,7 @@ public class JobParameterDefinition extends ParameterDefinition {
 	}
 
 	@Override
-	public ParameterValue newInstance(StaplerRequest req, JSONObject jo) {
+	public ParameterValue createValue(StaplerRequest req, JSONObject jo) {
 		return req.bindJSON(JobParameterValue.class, jo);
 	}
 

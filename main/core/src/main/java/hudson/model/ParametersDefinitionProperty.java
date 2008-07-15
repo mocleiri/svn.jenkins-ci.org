@@ -13,7 +13,11 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 /**
- * Keeps a list of the parameters defined for a project
+ * Keeps a list of the parameters defined for a project.
+ *
+ * <p>
+ * This class also implements {@link Action} so that <tt>index.jelly</tt> provides
+ * a form to enter build parameters. 
  */
 public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?, ?>>
 		implements Action {
@@ -47,7 +51,7 @@ public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?,
             JSONObject jo = (JSONObject)o;
             String name = jo.getString("name");
             
-            values.add(getParameterDefinition(name).newInstance(req,jo));
+            values.add(getParameterDefinition(name).createValue(req,jo));
         }
 
 		Hudson.getInstance().getQueue().add(

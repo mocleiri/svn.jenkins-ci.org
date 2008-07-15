@@ -3,7 +3,11 @@ package hudson.model;
 import java.util.List;
 
 /**
- * Records the parameter values used for a build
+ * Records the parameter values used for a build.
+ *
+ * <P>
+ * This object is associated with the build record so that we remember what parameters
+ * were used for what build.
  */
 public class ParametersAction implements Action {
 	

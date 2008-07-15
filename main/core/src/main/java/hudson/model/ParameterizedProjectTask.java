@@ -1,6 +1,7 @@
 package hudson.model;
 
 import hudson.model.Queue.Executable;
+import hudson.util.QueueTaskFilter;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,20 +10,16 @@ import java.util.List;
  * A task representing a project that should be built with a certain set of
  * parameter values
  */
-public class ParameterizedProjectTask implements Queue.Task {
+public class ParameterizedProjectTask extends QueueTaskFilter {
 
 	private final AbstractProject<?, ?> project;
 	private final List<ParameterValue> parameters;
 
 	public ParameterizedProjectTask(AbstractProject<?, ?> project,
 			List<ParameterValue> parameters) {
+		super(project);
 		this.project = project;
 		this.parameters = parameters;
-	}
-
-	@Override
-	public void checkAbortPermission() {
-		project.checkAbortPermission();
 	}
 
 	@Override
@@ -31,56 +28,6 @@ public class ParameterizedProjectTask implements Queue.Task {
 		build.addAction(new ParametersAction(parameters, build));
 
 		return build;
-	}
-
-	@Override
-	public Label getAssignedLabel() {
-		return project.getAssignedLabel();
-	}
-
-	@Override
-	public long getEstimatedDuration() {
-		return project.getEstimatedDuration();
-	}
-
-	@Override
-	public String getFullDisplayName() {
-		return project.getFullDisplayName();
-	}
-
-	@Override
-	public Node getLastBuiltOn() {
-		return project.getLastBuiltOn();
-	}
-
-	@Override
-	public String getName() {
-		return project.getName();
-	}
-
-	@Override
-	public String getWhyBlocked() {
-		return project.getWhyBlocked();
-	}
-
-	@Override
-	public boolean hasAbortPermission() {
-		return project.hasAbortPermission();
-	}
-
-	@Override
-	public boolean isBuildBlocked() {
-		return project.isBuildBlocked();
-	}
-
-	@Override
-	public String getDisplayName() {
-		return project.getDisplayName();
-	}
-
-	@Override
-	public ResourceList getResourceList() {
-		return project.getResourceList();
 	}
 
 	@Override
