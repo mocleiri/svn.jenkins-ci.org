@@ -19,6 +19,7 @@ import hudson.security.ACL;
 import hudson.security.Permission;
 import hudson.tasks.BuildTrigger;
 import hudson.tasks.Publisher;
+import hudson.tasks.BuildStep;
 import hudson.triggers.SCMTrigger;
 import hudson.triggers.Trigger;
 import hudson.triggers.TriggerDescriptor;
@@ -477,11 +478,20 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
         }
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * <p>
+     * Note that this method returns a read-only view of {@link Action}s.
+     * {@link BuildStep}s and others who want to add a project action
+     * should do so by implementing {@link BuildStep#getProjectAction(AbstractProject)}.
+     */
     public synchronized List<Action> getActions() {
         // add all the transient actions, too
         List<Action> actions = new Vector<Action>(super.getActions());
         actions.addAll(transientActions);
-        return actions;
+        // return the read only list to cause a failure on plugins who try to add an action here
+        return Collections.unmodifiableList(actions);
     }
 
     /**
@@ -610,17 +620,17 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
         }
 
         try {
-        	FilePath workspace = getWorkspace();
-        	if (scm.requiresWorkspaceForPolling() && (workspace==null || !workspace.exists())) {
+            FilePath workspace = getWorkspace();
+            if (scm.requiresWorkspaceForPolling() && (workspace == null || !workspace.exists())) {
                 // workspace offline. build now, or nothing will ever be built
                 Label label = getAssignedLabel();
-                if(label!=null && label.isSelfLabel()) {
+                if (label != null && label.isSelfLabel()) {
                     // if the build is fixed on a node, then attempting a build will do us
                     // no good. We should just wait for the slave to come back.
                     listener.getLogger().println(Messages.AbstractProject_NoWorkspace());
                     return false;
                 }
-                if(workspace==null)
+                if (workspace == null)
                     listener.getLogger().println(Messages.AbstractProject_WorkspaceOffline());
                 else
                     listener.getLogger().println(Messages.AbstractProject_NoWorkspace());
@@ -628,9 +638,9 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
                 return true;
             }
 
-        	Launcher launcher = workspace != null ? workspace.createLauncher(listener) : null;
-            LOGGER.fine("Polling SCM changes of "+ getName());
-            return scm.pollChanges(this, launcher, workspace, listener );
+            Launcher launcher = workspace != null ? workspace.createLauncher(listener) : null;
+            LOGGER.fine("Polling SCM changes of " + getName());
+            return scm.pollChanges(this, launcher, workspace, listener);
         } catch (AbortException e) {
             listener.fatalError(Messages.AbstractProject_Aborted());
             return false;
