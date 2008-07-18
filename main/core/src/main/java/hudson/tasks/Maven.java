@@ -123,9 +123,8 @@ public class Maven extends Builder {
 
         String targets = this.targets;
         ParametersAction parameters = build.getAction(ParametersAction.class);
-        if (parameters != null) {
-        	targets = parameters.substitute(targets);
-        }
+        if (parameters != null)
+            targets = parameters.substitute(build,targets);
 
         int startIndex = 0;
         int endIndex;
