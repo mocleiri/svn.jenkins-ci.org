@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.235 API)
+Hudson (Hudson core 1.236 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-15">
+<META NAME="date" CONTENT="2008-07-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.235 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.235 API)";
+        parent.document.title="Hudson (Hudson core 1.236 API)";
     }
 }
 </SCRIPT>
@@ -630,6 +630,16 @@ Root object of the system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reloads the configuration.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doRemoteFSCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doRemoteFSCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs syntactical check on the remote FS for slaves.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -3914,6 +3924,32 @@ public void <B>doFieldCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE> - thrown by FormFieldValidator.check()
 <DD><CODE>javax.servlet.ServletException</CODE> - thrown by FormFieldValidator.check()</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doRemoteFSCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
+doRemoteFSCheck</H3>
+<PRE>
+public void <B>doRemoteFSCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                            org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                            <FONT SIZE="-1">@QueryParameter(value="value")</FONT>
+                            java.lang.String&nbsp;value)
+                     throws java.io.IOException,
+                            javax.servlet.ServletException</PRE>
+<DL>
+<DD>Performs syntactical check on the remote FS for slaves.
+
+ TODO: find a better home for this method.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <HR>

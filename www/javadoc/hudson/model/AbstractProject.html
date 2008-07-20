@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractProject (Hudson core 1.235 API)
+AbstractProject (Hudson core 1.236 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-15">
+<META NAME="date" CONTENT="2008-07-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractProject (Hudson core 1.235 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractProject (Hudson core 1.235 API)";
+        parent.document.title="AbstractProject (Hudson core 1.236 API)";
     }
 }
 </SCRIPT>
@@ -1682,11 +1682,15 @@ getActions</H3>
 <PRE>
 public java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>getActions</B>()</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Actionable.html#getActions()">Actionable</A></CODE></B></DD>
 <DD>Gets actions contributed to this build.
 
  <p>
  A new <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> can be added by <code>getActions().add(...)</code>.
+
+ <p>
+ Note that this method returns a read-only view of <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s.
+ <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A>s and others who want to add a project action
+ should do so by implementing <A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)"><CODE>BuildStep.getProjectAction(AbstractProject)</CODE></A>.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Actionable.html#getActions()">getActions</A></CODE> in class <CODE><A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">Actionable</A></CODE></DL>

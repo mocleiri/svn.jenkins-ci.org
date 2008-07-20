@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Job (Hudson core 1.235 API)
+Job (Hudson core 1.236 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-15">
+<META NAME="date" CONTENT="2008-07-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson core 1.235 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson core 1.235 API)";
+        parent.document.title="Job (Hudson core 1.236 API)";
     }
 }
 </SCRIPT>
@@ -115,6 +115,9 @@ A job is an runnable entity under the monitoring of Hudson.
  
  <p>
  Every time it "runs", it will be recorded as a <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A> object.
+
+ <p>
+ To create a custom job type, add it to <A HREF="../../hudson/model/Items.html#LIST"><CODE>Items.LIST</CODE></A>.
 <P>
 
 <P>

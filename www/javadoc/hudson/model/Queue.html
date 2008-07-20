@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Queue (Hudson core 1.235 API)
+Queue (Hudson core 1.236 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-15">
+<META NAME="date" CONTENT="2008-07-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue (Hudson core 1.235 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue (Hudson core 1.235 API)";
+        parent.document.title="Queue (Hudson core 1.236 API)";
     }
 }
 </SCRIPT>
@@ -324,6 +324,14 @@ Build queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#maintain()">maintain</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Queue maintenance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.html#pop()">pop</A></B>()</CODE>
 
@@ -594,6 +602,22 @@ public void <B>scheduleMaintenance</B>()</PRE>
  When conditions are changed, this method should be invoked.
  <p>
  This wakes up one <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A> so that it will maintain a queue.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="maintain()"><!-- --></A><H3>
+maintain</H3>
+<PRE>
+public void <B>maintain</B>()</PRE>
+<DL>
+<DD>Queue maintenance.
+ <p>
+ Move projects between <A HREF="../../hudson/model/Queue.html#waitingList"><CODE>waitingList</CODE></A>, <A HREF="../../hudson/model/Queue.html#blockedProjects"><CODE>blockedProjects</CODE></A>, and <A HREF="../../hudson/model/Queue.html#buildables"><CODE>buildables</CODE></A>
+ appropriately.
 <P>
 <DD><DL>
 </DL>

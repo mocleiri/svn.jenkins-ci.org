@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-PluginWrapper (Hudson core 1.235 API)
+PluginWrapper (Hudson core 1.236 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-15">
+<META NAME="date" CONTENT="2008-07-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginWrapper (Hudson core 1.235 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginWrapper (Hudson core 1.235 API)";
+        parent.document.title="PluginWrapper (Hudson core 1.236 API)";
     }
 }
 </SCRIPT>
@@ -222,6 +222,14 @@ Represents a Hudson plug-in and associated control information
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the URL of the index page jelly script.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#getInfo()">getInfo</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns the <CODE>UpdateCenter.Plugin</CODE> object, or null.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -525,6 +533,21 @@ public <A HREF="../hudson/model/UpdateCenter.Plugin.html" title="class in hudson
 <DL>
 <DD>If the plugin has <A HREF="../hudson/PluginWrapper.html#getUpdateInfo()"><CODE>an update</CODE></A>,
  returns the <CODE>UpdateCenter.Plugin</CODE> object.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>This method may return null &mdash; for example,
+      the user may have installed a plugin locally developed.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInfo()"><!-- --></A><H3>
+getInfo</H3>
+<PRE>
+public <A HREF="../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A> <B>getInfo</B>()</PRE>
+<DL>
+<DD>returns the <CODE>UpdateCenter.Plugin</CODE> object, or null.
 <P>
 <DD><DL>
 </DL>
