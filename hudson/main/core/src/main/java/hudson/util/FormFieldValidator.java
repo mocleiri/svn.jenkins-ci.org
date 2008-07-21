@@ -90,6 +90,7 @@ public abstract class FormFieldValidator {
      * Sends out an HTML fragment that indicates a success.
      */
     public void ok() throws IOException, ServletException {
+    	response.setHeader("Cache-Control", "no-cache");
         response.setContentType("text/html");
         response.getWriter().print("<div/>");
     }
@@ -144,6 +145,7 @@ public abstract class FormFieldValidator {
         if(message==null) {
             ok();
         } else {
+        	response.setHeader("Cache-Control", "no-cache");
             response.setContentType("text/html;charset=UTF-8");
             // 1x16 spacer needed for IE since it doesn't support min-height
             response.getWriter().print("<div class="+ cssClass +"><img src='"+
