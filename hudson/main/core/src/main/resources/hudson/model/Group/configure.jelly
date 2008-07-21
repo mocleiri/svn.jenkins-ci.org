@@ -1,0 +1,138 @@
+<!--
+  Config page
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+  <l:layout norefresh="true" permission="${it.CONFIGURE}">
+    <st:include page="sidepanel.jelly" />
+    <l:main-panel>
+
+
+	<j:if test="${editableComboBox_source_loaded==null}">
+	  <script type="text/javascript" src="${request.contextPath}/scripts/utilities.js"></script>
+	  <script type="text/javascript" src="${request.contextPath}/scripts/combobox.js"></script>
+	  <j:set target="${requestScope}" property="editableComboBox_source_loaded" value="true" />
+	</j:if>
+
+	<script type="text/javascript">
+
+	  var nextid = 1;
+	  function installComboBox(obj) {
+	  	if (!obj.id) {
+	  		obj.id = nextid;
+	  		nextid++;
+	  		var cb = new ComboBox(obj.id, fullname_values_Callback);
+	  		cb.switchOnSubmit();
+	  		cb.setOnSelectCallback(onblur_Callback);
+	  	}
+	  }
+
+	  var all_users = {
+	  <!-- fill in values -->
+	  <j:set target="${requestScope}" property="allusers" value="${it.allUsers}" />
+	  <j:set target="${requestScope}" property="firstItem" value="true" />
+	  <j:if test="${allusers!=null}">
+	    <j:forEach var="u" items="${allusers}">
+	      <j:if test="${firstItem}">'${u.fullName}': '${u.id}'</j:if>
+	      <j:if test="${!firstItem}">,'${u.fullName}': '${u.id}'</j:if>
+	      <j:set target="${requestScope}" property="firstItem" value="false" />
+	    </j:forEach>
+	  </j:if>
+	  };
+
+		<![CDATA[
+	  function fullname_values_Callback(value /*, comboBox*/) {
+	    var items = new Array();
+	    if (value.length > 0) { // if no value, we'll not provide anything
+	      value = value.toLowerCase();
+	      for (i in all_users) {
+	        if (i.toLowerCase().indexOf(value) >= 0) {
+	          items.push(i);
+	          if(items.length>20)
+	            break; // 20 items in the list should be enough
+	        }
+	      }
+	    }
+	    return items; // equiv to: comboBox.setItems(items);
+	  }
+	  function onblur_Callback(f) {
+	  	f.parentNode.parentNode.childNodes[1].childNodes[0].value = all_users[f.value];
+	  }
+	  ]]>
+	</script>
+
+
+      <f:form method="post" action="configSubmit">
+        <f:entry title="${%Group name}">
+          <f:textbox name="name" value="${it.name}" readonly="true" />
+        </f:entry>
+        <f:entry title="${%Description}">
+          <f:textarea name="description" value="${it.description}"/>
+        </f:entry>        
+	    <f:entry title="Users list"
+	      description="List of users belonging to the group.">
+	      <table width="100%">
+	      	<tr>
+	      		<th width="50%" align="left">Full name</th>
+	      		<th width="40%" align="left">User id</th>
+	      		<th width="10%"> </th>
+	      	</tr>
+	      </table>
+	      <f:repeatable noAddButton="true" var="user" items="${it.users}">
+	      	<table width="100%">
+	          <tr>          
+		          <td width="50%">
+		            <input class="setting-input" name="fullName" readonly="true"
+		              type="text" value="${user.fullName}"/>
+		          </td>
+		          <td width="40%">
+		            <input class="setting-input" name="id" readonly="true"
+		              type="text" value="${user.id}"/>
+		          </td>		
+	              <td width="10%">
+		            <div align="right">
+		              <f:repeatableDeleteButton />
+		            </div>
+		          </td>
+	          </tr>
+	       	</table>
+	      </f:repeatable>
+	      <f:repeatable>
+	      	<table width="100%">
+	          <tr>          
+		          <td width="50%">
+		          	<input onFocus="installComboBox(this);" autocomplete="off" class="setting-input" name="fullName" value="" />
+		          </td>
+		          <td width="40%">
+		            <input class="setting-input" name="id" readonly="true"
+		              type="text" value=""/>
+		          </td>
+	              <td width="10%">
+		            <div align="right">
+		              <f:repeatableDeleteButton />
+		            </div>
+		          </td>
+	          </tr>
+	       	</table>
+	      </f:repeatable>
+	    </f:entry>
+
+        <!-- group property configurations -->
+        <j:getStatic var="descriptors" className="hudson.model.GroupProperties" field="LIST" />
+        <j:set var="instances" value="${it.properties}" />
+        <j:forEach var="d" items="${descriptors}" varStatus="loop">
+          <f:section title="${d.displayName}">
+            <j:set var="descriptor" value="${d}" />
+            <j:set var="instance" value="${instances[d]}" />
+            <f:rowSet name="groupProperty${loop.index}">
+              <st:include from="${d}" page="${d.configPage}" />
+            </f:rowSet>
+          </f:section>
+        </j:forEach>
+
+        <f:block>
+          <f:submit value="${%Save}" />
+        </f:block>
+      </f:form>
+    </l:main-panel>
+  </l:layout>
+</j:jelly>

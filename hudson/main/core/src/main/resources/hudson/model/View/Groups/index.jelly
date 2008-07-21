@@ -1,0 +1,19 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+	<l:layout title="Groups - ${it.parent.viewName}">
+		<st:include page="sidepanel.jelly" it="${it.parent}" />
+		<l:main-panel>
+      <table class="sortable pane bigtable" id="groups">
+        <tr>
+          <th />
+          <th>${%Name}</th>
+        </tr>
+        <j:forEach var="p" items="${it.groups}">
+          <tr>
+            <td width="5%"><a href="${rootURL}/${p.url}"><img src="${imagesURL}/24x24/group.gif"/></a></td>
+            <td><a href="${rootURL}/${p.url}">${p.name}</a></td>
+          </tr>
+        </j:forEach>
+      </table>
+    </l:main-panel>
+	</l:layout>
+</j:jelly>

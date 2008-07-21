@@ -1,0 +1,15 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+  <l:layout title="${it.displayName}">
+    <st:include page="sidepanel.jelly" />
+    <l:main-panel>
+      <h1>
+        <img src="${imagesURL}/24x24/group.gif" />
+        ${%Group} ${it.name}
+      </h1>
+      <t:editableDescription />
+      <br/>
+      <j:set var="items" value="${it.items}"/>
+      <t:projectView jobs="${items}" jobBaseUrl="${rootURL}/" showViewTabs="false" hideGroup="true" />
+    </l:main-panel>
+  </l:layout>
+</j:jelly>

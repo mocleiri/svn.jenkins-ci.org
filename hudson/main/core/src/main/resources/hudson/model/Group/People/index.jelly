@@ -1,0 +1,26 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+  <l:layout title="${it.displayName}">
+    <st:include page="sidepanel.jelly" it="${it.parent}" />
+    <l:main-panel>
+      <h1>
+        <img src="${imagesURL}/24x24/user.gif" />
+        Group ${it.parent.name} - ${%People}
+      </h1>
+
+	  <h3>Users</h3>
+      <table class="sortable pane bigtable" id="people">
+        <tr>
+          <th align="left">${%Full name}</th>
+          <th align="left">${%User id}</th>
+        </tr>
+        <j:forEach var="p" items="${it.users}">
+          <tr>
+            <td><a href="${rootURL}/${p.url}">${p.fullName}</a></td>
+            <td><a href="${rootURL}/${p.url}">${p.id}</a></td>            
+          </tr>
+        </j:forEach>
+      </table>
+
+    </l:main-panel>
+  </l:layout>
+</j:jelly>

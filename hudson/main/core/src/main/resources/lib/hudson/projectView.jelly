@@ -11,7 +11,6 @@
 <j:jelly xmlns:j="jelly:core" xmlns:x="jelly:xml" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
   <t:setIconSize/>
   <div class="dashboard">
-    <j:if test="${!empty(jobs)}">
       <!-- the caller can inject a tab bar here -->
       <d:invokeBody />
       <!-- project list -->
@@ -25,6 +24,9 @@
           <th>S</th>
           <th>W</th>
           <th initialSortDir="down">${%Job}</th>
+          <j:if test="${!hideGroup}">
+            <th>${%Group}</th>
+          </j:if>
           <th>${%Last Success}</th>
           <th>${%Last Failure}</th>
           <th>${%Last Duration}</th>
@@ -78,6 +80,13 @@
                   ${job.displayName}
               </a>
             </td>
+            <j:if test="${!hideGroup}">
+             <td>
+              <a href="${rootURL}/group/${job.group}">
+                  ${job.group}
+              </a>
+             </td>
+            </j:if>
             <td data="${h.ifThenElse(lsBuild==null,'-',lsBuild.timestampString2)}">
               <j:choose>
                 <j:when test="${lsBuild!=null}">
@@ -126,6 +135,5 @@
         </j:forEach>
       </x:element>
       <t:rssBar-with-iconSize/>
-    </j:if>
   </div>
 </j:jelly>

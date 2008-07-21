@@ -96,19 +96,26 @@ function ComboBox(id, callback, config) {
 			return ! self.isDropdownShowing;
 		};
 	}
+	this.field.oldonblur = this.field.onblur;
 	this.field.onblur = function() {
+		this.form.onsubmit = this.form.oldonsubmit;
 		var cb = this.comboBox;
 		this.hideTimeout = setTimeout(function() { cb.hideDropdown(); }, 100);
-		this.form.onsubmit = function() {
-			if (this.oldonsubmit) this.oldonsubmit();
-			return true;
-		};
+		if (this.oldonblur) this.oldonblur(this);
 	}
-	
+
 	// privileged methods
 	this.getConfigParam = function(name, defVal) {
 		return self.config[name] || defVal;
 	}
+}
+
+ComboBox.prototype.switchOnSubmit = function() {
+	this.field.onfocus();
+}
+
+ComboBox.prototype.setOnSelectCallback = function(f) {
+	this.field.onSelectCallback = f;
 }
 
 
@@ -275,6 +282,7 @@ ComboBox.prototype.chooseSelection = function() {
 		} else {
 			this.field.value = valueToAdd;
 		}
+		if (this.field.onSelectCallback) this.field.onSelectCallback(this.field);
 
 		this.field.oldValue = this.field.value;
 		this.field.focus();
