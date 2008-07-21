@@ -4,7 +4,7 @@ package test;
  * Hello world!
  *
  */
-public class App 
+public class AppB
 {
     public static void main( String[] args )
     {
