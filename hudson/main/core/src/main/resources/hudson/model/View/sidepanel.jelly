@@ -8,19 +8,12 @@
     <link rel="alternate" title="Hudson:${it.viewName} (failed builds)" href="${it.url}rssFailed" type="application/rss+xml" />
     <link rel="alternate" title="Hudson:${it.viewName} (failed builds) (RSS 2.0)" href="${it.url}rssFailed?flavor=rss20" type="application/rss+xml" />
   </l:header>
-  <j:new var="h" className="hudson.Functions" /><!-- instead of JSP functions -->
   <l:side-panel>
     <l:tasks>
       <l:task icon="images/24x24/new-package.gif" href="${rootURL}/${it.url}newJob" title="${%New Job}" permission="${it.itemCreatePermission}" />
       <l:task icon="images/24x24/setting.gif" href="${rootURL}/manage" title="${%Manage Hudson}" permission="${app.ADMINISTER}" />
-      <j:if test="${it.hasGroups()}">
-        <l:task icon="images/24x24/group.gif" href="${rootURL}/groups/" title="${%Groups}" />
-      </j:if>
       <j:if test="${it.hasPeople()}">
         <l:task icon="images/24x24/user.gif" href="${rootURL}/people/" title="${%People}" />
-      </j:if>
-      <j:if test="${!h.isAnonymous()}">
-        <l:task icon="images/24x24/my-views.gif" href="${rootURL}/${app.loggedUser.viewsUrl}" title="${%My Views}" />
       </j:if>
       <l:task icon="images/24x24/notepad.gif" href="${rootURL}/${it.url}builds" title="${%Build History}"/>
       <st:include page="sidepanel2.jelly" />

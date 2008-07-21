@@ -39,10 +39,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Arrays;
-import java.util.Vector;
-
-import java.text.ParseException;
 
 /**
  * Represents a user.
@@ -83,10 +79,6 @@ public class User extends AbstractModelObject implements AccessControlled {
     @CopyOnWrite
     private volatile List<UserProperty> properties = new ArrayList<UserProperty>();
 
-    /**
-     * {@link UserView}s.
-     */
-    private List<UserView> views; 
 
     private User(String id) {
         this.id = id;
@@ -350,19 +342,6 @@ public class User extends AbstractModelObject implements AccessControlled {
         return r;
     }
 
-    public List<Group> getGroups() {
-    	List<Group> groups = new ArrayList<Group> ();
-    	for (Group g : Group.getAll()) {
-    		for (User u : g.getUsers()) {
-    			if (this.equals(u)) {
-    				groups.add(g);
-    				break;
-    			}
-    		}
-    	}
-    	return groups;
-    }
-
     public String toString() {
         return fullName;
     }
@@ -424,100 +403,6 @@ public class User extends AbstractModelObject implements AccessControlled {
         } catch (FormException e) {
             sendError(e,req,rsp);
         }
-    }
-
-    /**
-     * Gets the read-only list of all {@link View}s.
-     */
-    @Exported
-    public synchronized View[] getViews() {
-        if(views==null)
-            views = new ArrayList<UserView>();
-        List<GroupView> groupViews = getGroupViews(Hudson.getInstance());
-        View[] r = new View[views.size()+groupViews.size()]; 
-        int index = 0;
-        if (views.size() > 0) {
-	        for (View view : views) {
-	        	r[index++] = view;
-	        }
-	        Arrays.sort(r,0,views.size(), View.SORTER);        
-        }
-        if (groupViews.size() > 0) {
-        	for (View view : groupViews) {
-            	r[index++] = view;
-            }
-            Arrays.sort(r,views.size(),r.length-1, View.SORTER);
-        }
-        return r;
-    }
-    
-    public List<GroupView> getGroupViews(Hudson hudson) {
-    	List<GroupView> groupViews = new ArrayList<GroupView>();
-    	for (Group group : getGroups()) {
-    		groupViews.add(new GroupView(hudson, group, this));
-    	}
-    	return groupViews;
-    }
-    
-    public View getGroupView(String name) {
-    	return new GroupView(Hudson.getInstance(), Group.create(name), this);
-    }
-    
-    public synchronized String getViewsUrl() {   
-    	if (views != null && views.size() > 0) {
-    		return views.get(0).getUrl();
-    	}
-    	if (getGroups().size() > 0) {
-    		Group group = getGroups().get(0);
-        	return new GroupView(Hudson.getInstance(), group, this).getUrl();
-    	}
-    	return getUrl() + "/noView";
-    }
-    
-    public synchronized void doCreateView( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        req.setCharacterEncoding("UTF-8");
-
-        String name = req.getParameter("name");
-
-        try {
-            Hudson.checkGoodName(name);
-        } catch (ParseException e) {
-            sendError(e, req, rsp);
-            return;
-        }
-
-        UserView view = null;
-        if(views==null) {
-            views = new Vector<UserView>();
-        } else {
-        	view = getUserView(name);
-        }
-        if (view==null) {
-        	view = new UserView(name, this);
-            views.add(view);
-            save();
-        }
-
-        // redirect to the config screen
-        rsp.sendRedirect2("userView/" + name + "/configure");
-    }
-    
-    public synchronized UserView getUserView(String name) {
-    	if (views!=null) {
-	    	for (UserView view : views) {
-	    		if (view.getDisplayName().equals(name)) {
-	    			return view;
-	    		}
-	    	}
-    	}
-    	return null;
-    }
-
-    public synchronized void deleteView(UserView view) throws IOException {
-    	if (views != null) {
-    		views.remove(view);
-    		save();
-    	}
     }
 
     public void doRssAll( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
@@ -595,17 +480,4 @@ public class User extends AbstractModelObject implements AccessControlled {
     public boolean hasPermission(Permission permission) {
         return getACL().hasPermission(permission);
     }
-
-	public synchronized void removeJobFromViews(String name) throws IOException {
-		if (views!=null) {
-			boolean modified = false;
-	    	for (UserView uv: views) {
-	    		modified |= uv.removeJob(name);
-	    	}
-	    	if (modified) {
-	    		save();
-	    	}
-		}
-	}
-
 }

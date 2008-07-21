@@ -11,9 +11,6 @@
             <f:textbox name="name" value="${it.name}" />
           </f:entry>
         </j:if>
-        <f:entry title="${%Group name}">
-          <f:editableComboBox id="group" name="group" items="${app.allGroups}" value="${it.group}" checkUrl="'${rootURL}/groupExistsCheck?value='+escape(this.value)" />
-        </f:entry>
         <f:entry title="${%Description}" help="/help/project-config/description.html">
           <f:textarea name="description" value="${it.description}"/>
         </f:entry>

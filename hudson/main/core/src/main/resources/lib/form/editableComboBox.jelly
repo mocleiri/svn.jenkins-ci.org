@@ -13,7 +13,7 @@
 	  <j:set target="${requestScope}" property="editableComboBox_source_loaded" value="true" />
 	</j:if>
 
-	<input id="${attrs.id}" autocomplete="off" class="${attrs.clazz} ${h.ifThenElse(attrs.checkUrl!=null,'validated','')}"
+	<input id="${attrs.id}" autocomplete="off" class="${attrs.clazz}"
          name="${attrs.name}" value="${attrs.value}"
          checkUrl="${attrs.checkUrl}" />
 	<j:set target="${requestScope}" property="editableComboBox" value="${attrs.id}" />

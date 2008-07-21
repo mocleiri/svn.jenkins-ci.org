@@ -104,7 +104,6 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
     private transient List<HealthReport> cachedBuildHealthReports = null;
 
     private boolean keepDependencies;
-    private String group = Group.DEFAULT;
 
     /**
      * List of {@link UserProperty}s configured for this project.
@@ -808,10 +807,6 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
         req.setCharacterEncoding("UTF-8");
 
         description = req.getParameter("description");
-        String groupName = Util.fixNull(req.getParameter("group")).trim();
-        Group groupObject = Group.createAsUser(groupName, User.current());
-        groupObject.checkPermission(groupObject.ADDJOB);
-        this.group = groupName;
 
         keepDependencies = req.getParameter("keepDependencies") != null;
 
@@ -1130,13 +1125,4 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
         RSS.forwardToRss(getDisplayName() + suffix, getUrl(), runs.newBuilds(),
                 Run.FEED_ADAPTER, req, rsp);
     }
-
-    @Exported
-	public String getGroup() {
-		return group;
-	}
-
-	public void setGroup(String group) {
-		this.group = group;
-	}
 }
