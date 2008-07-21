@@ -366,6 +366,10 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         for (ItemListener l : itemListeners)
             l.onLoaded();
 
+        // load users....
+        User.getAll();
+        Group.loadAllGroups();
+
         // create TokenBasedRememberMeServices, which depends on the availability of the secret key
         TokenBasedRememberMeServices2 rms = new TokenBasedRememberMeServices2();
         rms.setUserDetailsService(HudsonFilter.USER_DETAILS_SERVICE_PROXY);
@@ -736,6 +740,16 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         List<String> names = new ArrayList<String>();
         for (TopLevelItem j : items.values())
             names.add(j.getName());
+        return names;
+    }
+
+    /**
+     * Gets names of all groups.
+     */
+    public Collection<String> getAllGroups() {
+        List<String> names = new ArrayList<String>();
+        for (Group g : Group.getAll())
+            names.add(g.getName());
         return names;
     }
 
@@ -1177,6 +1191,10 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         return User.get(name);
     }
 
+    public Group getGroup(String name) {
+        return Group.create(name);
+    }
+
     /**
      * Creates a new job.
      *
@@ -1214,6 +1232,9 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
                 }
             }
             save();
+        }
+        for (User u: User.getAll()) {
+        	u.removeJobFromViews(item.getName());
         }
     }
 
@@ -1543,6 +1564,10 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             for( JobPropertyDescriptor d : Jobs.PROPERTIES )
                 result &= d.configure(req);
 
+            for( Descriptor<AuthorizationStrategy> d : AuthorizationStrategy.LIST ) {
+                result &= d.configure(req);
+            }
+
             for( JSONObject o : StructuredForm.toList(json,"plugin"))
                 pluginManager.getPlugin(o.getString("name")).getPlugin().configure(o);
 
@@ -1647,8 +1672,13 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         name = name.trim();
         String mode = req.getParameter("mode");
 
+        String group = Util.fixNull(req.getParameter("group")).trim();
+        Group groupObject = Group.createAsUser(group, User.current());
+        groupObject.checkPermission(groupObject.ADDJOB);
+
         try {
             checkGoodName(name);
+            checkGoodName(group);
         } catch (ParseException e) {
             rsp.setStatus(SC_BAD_REQUEST);
             sendError(e,req,rsp);
@@ -1713,6 +1743,13 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
                 }
                 result = createProject(Items.getDescriptor(mode), name);
             }
+        }
+
+        if (Job.class.isInstance(result)) {
+        	Group.create(group);
+        	Job job = (Job) result;
+        	job.setGroup(group);
+        	job.save();
         }
 
         for (ItemListener l : itemListeners)
@@ -2016,6 +2053,13 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         return a;
     }
 
+    public static User getLoggedUser() {
+        Authentication a = getAuthentication();
+        if(a instanceof AnonymousAuthenticationToken)
+        	return User.getUnknown();
+        return User.get(a.getName());
+    }
+
     /**
      * Configure the logging level.
      */
@@ -2148,7 +2192,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     public void doItemExistsCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
         // this method can be used to check if a file exists anywhere in the file system,
         // so it should be protected.
-        new FormFieldValidator(req,rsp,true) {
+        new FormFieldValidator(req,rsp,Job.CREATE) {
             protected void check() throws IOException, ServletException {
                 String job = fixEmpty(request.getParameter("value"));
                 if(job==null) {
@@ -2239,6 +2283,36 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
                     }
                 }
                 ok();
+            }
+        }.process();
+    }
+
+    /**
+     * Checks if the top-level item with the given name exists.
+     */
+    public void doGroupExistsCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+        // this method can be used to check if a file exists anywhere in the file system,
+        // so it should be protected.
+        new FormFieldValidator(req,rsp,false) {
+            protected void check() throws IOException, ServletException {
+                String group = fixEmpty(request.getParameter("value"));
+                if(group==null) {
+                    group = Group.DEFAULT;
+                }
+                group = group.trim();
+                if(Group.exists(group)) {
+                	if (Group.create(group).hasPermission(Group.ADDJOB)) {
+                		ok();
+                	} else {
+                		error("No permission to add jobs to " + group + " group");
+                	}
+                } else {
+                	if (hasPermission(Group.CREATE)) {
+                		warning(Messages.Hudson_NewGroupCreate());
+                	} else {
+                		error("No permission to create group");
+                	}
+                }
             }
         }.process();
     }

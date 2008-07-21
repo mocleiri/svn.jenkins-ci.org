@@ -11,6 +11,9 @@
                      onchange="updateOk(this.form)" onkeyup="updateOk(this.form)" />
           <script>$('name').focus();</script>
         </s:entry>
+        <s:entry title="${%Group name}">
+          <s:editableComboBox id="group" name="group" items="${app.allGroups}" checkUrl="'${rootURL}/groupExistsCheck?value='+escape(this.value)" />
+        </s:entry>
 
         <j:getStatic var="jobs" className="hudson.model.Items" field="LIST" />
         <j:forEach var="d" items="${jobs}">

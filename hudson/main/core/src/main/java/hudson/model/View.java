@@ -164,6 +164,10 @@ public abstract class View extends AbstractModelObject implements AccessControll
         }
     }
 
+    public final boolean hasGroups() {
+    	return Group.getSize()>1;
+    }
+
     /**
      * Does this {@link View} has any associated user information recorded?
      */
@@ -183,6 +187,29 @@ public abstract class View extends AbstractModelObject implements AccessControll
             }
         }
         return false;
+    }
+
+
+    public final Groups getGroups() {
+        return new Groups();
+    }
+
+    @ExportedBean
+    public final class Groups  {
+        @Exported
+        public final List<Group> groups;
+
+        public Groups() {
+        	this.groups = new ArrayList<Group>(Group.getAll());
+        }
+
+        public View getParent() {
+            return View.this;
+        }
+
+        public Api getApi() {
+            return new Api(this);
+        }
     }
 
     /**

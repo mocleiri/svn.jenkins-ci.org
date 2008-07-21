@@ -93,6 +93,7 @@ public final class MavenModule extends AbstractMavenProject<MavenModule,MavenBui
 
     /*package*/ MavenModule(MavenModuleSet parent, PomInfo pom, int firstBuildNumber) throws IOException {
         super(parent, pom.name.toFileSystemName());
+        setGroup(parent.getGroup());
         reconfigure(pom);
         updateNextBuildNumber(firstBuildNumber);
     }
