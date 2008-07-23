@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MavenJavadocArchiver (Hudson core 1.236 API)
+MavenJavadocArchiver (Hudson core 1.237 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-20">
+<META NAME="date" CONTENT="2008-07-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenJavadocArchiver (Hudson core 1.236 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenJavadocArchiver (Hudson core 1.236 API)";
+        parent.document.title="MavenJavadocArchiver (Hudson core 1.237 API)";
     }
 }
 </SCRIPT>
@@ -197,6 +197,17 @@ Records the javadoc and archives it.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called after execution of a single mojo.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenJavadocArchiver.html#reportGenerated(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MavenReportInfo, hudson.model.BuildListener)">reportGenerated</A></B>(<A HREF="../../../hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven">MavenBuildProxy</A>&nbsp;build,
+                org.apache.maven.project.MavenProject&nbsp;pom,
+                <A HREF="../../../hudson/maven/MavenReportInfo.html" title="class in hudson.maven">MavenReportInfo</A>&nbsp;report,
+                <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called after a <CODE>MavenReport</CODE> is successfully generated.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.maven.MavenReporter"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -273,6 +284,48 @@ public boolean <B>postExecute</B>(<A HREF="../../../hudson/maven/MavenBuildProxy
 <DT><B>Throws:</B>
 <DD><CODE>java.lang.InterruptedException</CODE>
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="reportGenerated(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MavenReportInfo, hudson.model.BuildListener)"><!-- --></A><H3>
+reportGenerated</H3>
+<PRE>
+public boolean <B>reportGenerated</B>(<A HREF="../../../hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven">MavenBuildProxy</A>&nbsp;build,
+                               org.apache.maven.project.MavenProject&nbsp;pom,
+                               <A HREF="../../../hudson/maven/MavenReportInfo.html" title="class in hudson.maven">MavenReportInfo</A>&nbsp;report,
+                               <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)
+                        throws java.lang.InterruptedException,
+                               java.io.IOException</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/maven/MavenReporter.html#reportGenerated(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MavenReportInfo, hudson.model.BuildListener)">MavenReporter</A></CODE></B></DD>
+<DD>Called after a <CODE>MavenReport</CODE> is successfully generated.
+
+ <p>
+ <CODE>MavenReport</CODE> is an execution unit inside the Maven site plugin mojos,
+ such as <tt>site:generate</tt>. These are what's configured through
+ &lt;reporting> tag inside POM, although there's normally more
+ <CODE>MavenReport</CODE>s than what's specified explicitly, due to defaulting
+ and inheritance and all the other Maven processing.
+
+ <p>
+ This provides an opportunity for
+ plugins to auto-perform some action when a certain reporting is generated.
+
+ <p>
+ This method is invoked during the execution of site mojos, between its
+ <A HREF="../../../hudson/maven/MavenReporter.html#preExecute(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MojoInfo, hudson.model.BuildListener)"><CODE>MavenReporter.preExecute(MavenBuildProxy, MavenProject, MojoInfo, BuildListener)</CODE></A>
+ and <A HREF="../../../hudson/maven/MavenReporter.html#postExecute(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MojoInfo, hudson.model.BuildListener, java.lang.Throwable)"><CODE>MavenReporter.postExecute(MavenBuildProxy, MavenProject, MojoInfo, BuildListener, Throwable)</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/maven/MavenReporter.html#reportGenerated(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MavenReportInfo, hudson.model.BuildListener)">reportGenerated</A></CODE> in class <CODE><A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>See <A HREF="../../../hudson/maven/MavenReporter.html#preBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)"><CODE>MavenReporter.preBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)</CODE></A>
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.InterruptedException</CODE> - See <A HREF="../../../hudson/maven/MavenReporter.html#preBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)"><CODE>MavenReporter.preBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)</CODE></A>
+<DD><CODE>java.io.IOException</CODE> - See <A HREF="../../../hudson/maven/MavenReporter.html#preBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)"><CODE>MavenReporter.preBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)</CODE></A></DL>
 </DD>
 </DL>
 <HR>

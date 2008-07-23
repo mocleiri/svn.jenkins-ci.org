@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Queue (Hudson core 1.236 API)
+Queue (Hudson core 1.237 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-20">
+<META NAME="date" CONTENT="2008-07-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue (Hudson core 1.236 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue (Hudson core 1.236 API)";
+        parent.document.title="Queue (Hudson core 1.237 API)";
     }
 }
 </SCRIPT>
@@ -253,7 +253,7 @@ Build queue.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Queue.html#cancel(hudson.model.AbstractProject)">cancel</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;p)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#cancel(hudson.model.Queue.Task)">cancel</A></B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cancels the item in the queue.</TD>
@@ -281,14 +281,6 @@ Build queue.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Queue.html#getItem(hudson.model.AbstractProject)">getItem</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;p)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left for backward compatibility.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -482,10 +474,10 @@ public boolean <B>add</B>(<A HREF="../../hudson/model/Queue.Task.html" title="in
 </DL>
 <HR>
 
-<A NAME="cancel(hudson.model.AbstractProject)"><!-- --></A><H3>
+<A NAME="cancel(hudson.model.Queue.Task)"><!-- --></A><H3>
 cancel</H3>
 <PRE>
-public boolean <B>cancel</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;p)</PRE>
+public boolean <B>cancel</B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p)</PRE>
 <DL>
 <DD>Cancels the item in the queue.
 <P>
@@ -543,19 +535,6 @@ public <A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model
 <DD><DL>
 
 <DT><B>Returns:</B><DD>null if the project is not in the queue.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getItem(hudson.model.AbstractProject)"><!-- --></A><H3>
-getItem</H3>
-<PRE>
-public <A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A> <B>getItem</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;p)</PRE>
-<DL>
-<DD>Left for backward compatibility.
-<P>
-<DD><DL>
-<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Queue.html#getItem(hudson.model.Queue.Task)"><CODE>getItem(Task)</CODE></A></DL>
 </DD>
 </DL>
 <HR>

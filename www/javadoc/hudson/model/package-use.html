@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Package hudson.model (Hudson core 1.236 API)
+Uses of Package hudson.model (Hudson core 1.237 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-20">
+<META NAME="date" CONTENT="2008-07-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.model (Hudson core 1.236 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.model (Hudson core 1.236 API)";
+        parent.document.title="Uses of Package hudson.model (Hudson core 1.237 API)";
     }
 }
 </SCRIPT>
@@ -241,6 +241,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constants that control how Hudson allocates jobs to slaves.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/ParameterDefinition.html#hudson"><B>ParameterDefinition</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defines a parameter for a build.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Project.html#hudson"><B>Project</B></A></B>
@@ -1077,6 +1083,24 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constants that control how Hudson allocates jobs to slaves.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/ParameterDefinition.html#hudson.model"><B>ParameterDefinition</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defines a parameter for a build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/ParameterDefinition.ParameterDescriptor.html#hudson.model"><B>ParameterDefinition.ParameterDescriptor</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/ParameterValue.html#hudson.model"><B>ParameterValue</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A value for a parameter in a build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/PeriodicWork.html#hudson.model"><B>PeriodicWork</B></A></B>
 
 <BR>
@@ -1610,10 +1634,22 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/model/class-use/Item.html#hudson.security"><B>Item</B></A></B>
+<TD><B><A HREF="../../hudson/model/class-use/Job.html#hudson.security"><B>Job</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic configuration unit in Hudson.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A job is an runnable entity under the monitoring of Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/JobProperty.html#hudson.security"><B>JobProperty</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extensible property of <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/JobPropertyDescriptor.html#hudson.security"><B>JobPropertyDescriptor</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/ManagementLink.html#hudson.security"><B>ManagementLink</B></A></B>
@@ -2128,10 +2164,46 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A job is an runnable entity under the monitoring of Hudson.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Label.html#hudson.util"><B>Label</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group of <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/ModelObject.html#hudson.util"><B>ModelObject</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A model object has a URL.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Node.html#hudson.util"><B>Node</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Commonality between <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> and master <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Queue.Executable.html#hudson.util"><B>Queue.Executable</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Queue.Task.html#hudson.util"><B>Queue.Task</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task whose execution is controlled by the queue.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/ResourceActivity.html#hudson.util"><B>ResourceActivity</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activity that requires certain resources for its execution.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/ResourceList.html#hudson.util"><B>ResourceList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of <A HREF="../../hudson/model/Resource.html" title="class in hudson.model"><CODE>Resource</CODE></A>s that an activity needs.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Run.html#hudson.util"><B>Run</B></A></B>

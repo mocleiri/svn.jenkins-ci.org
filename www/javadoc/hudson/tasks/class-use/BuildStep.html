@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Interface hudson.tasks.BuildStep (Hudson core 1.236 API)
+Uses of Interface hudson.tasks.BuildStep (Hudson core 1.237 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-20">
+<META NAME="date" CONTENT="2008-07-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.tasks.BuildStep (Hudson core 1.236 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.tasks.BuildStep (Hudson core 1.236 API)";
+        parent.document.title="Uses of Interface hudson.tasks.BuildStep (Hudson core 1.237 API)";
     }
 }
 </SCRIPT>
@@ -99,6 +99,10 @@ Packages that use <A HREF="../../../hudson/tasks/BuildStep.html" title="interfac
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.security"><B>hudson.security</B></A></TD>
+<TD>Security-related code&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.tasks"><B>hudson.tasks</B></A></TD>
 <TD>Built-in <a href="../../../hudson/tasks/Builder.html"><tt>Builder</tt></a>s and <a href="../../../hudson/tasks/Publisher.html"><tt>Publisher</tt></a>s
 that perform the actual heavy-lifting of a build.&nbsp;</TD>
@@ -172,6 +176,14 @@ Uses of <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudso
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extensible property of <A HREF="../../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/ParametersDefinitionProperty.html" title="class in hudson.model">ParametersDefinitionProperty</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Keeps a list of the parameters defined for a project.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -223,6 +235,31 @@ Uses of <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudso
 <CODE>protected &nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#preBuild(hudson.model.BuildListener, java.util.Map)">preBuild</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
          java.util.Map&lt;?,? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;steps)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.security"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A> in <A HREF="../../../hudson/security/package-summary.html">hudson.security</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/security/package-summary.html">hudson.security</A> that implement <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/security/AuthorizationMatrixProperty.html" title="class in hudson.security">AuthorizationMatrixProperty</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

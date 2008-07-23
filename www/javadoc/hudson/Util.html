@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Util (Hudson core 1.236 API)
+Util (Hudson core 1.237 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-20">
+<META NAME="date" CONTENT="2008-07-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson core 1.236 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson core 1.236 API)";
+        parent.document.title="Util (Hudson core 1.237 API)";
     }
 }
 </SCRIPT>
@@ -497,6 +497,15 @@ Various utility methods that don't have more proper home.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Util.html#replaceMacro(java.lang.String, hudson.util.VariableResolver)">replaceMacro</A></B>(java.lang.String&nbsp;s,
+             <A HREF="../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;java.lang.String&gt;&nbsp;resolver)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replaces the occurrence of '$key' by <tt>resolver.get('key')</tt>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Util.html#toHexString(byte[])">toHexString</A></B>(byte[]&nbsp;bytes)</CODE>
 
 <BR>
@@ -668,6 +677,23 @@ public static java.lang.String <B>replaceMacro</B>(java.lang.String&nbsp;s,
                                             java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;properties)</PRE>
 <DL>
 <DD>Replaces the occurrence of '$key' by <tt>properties.get('key')</tt>.
+
+ <p>
+ Unlike shell, undefined variables are left as-is (this behavior is the same as Ant.)
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="replaceMacro(java.lang.String, hudson.util.VariableResolver)"><!-- --></A><H3>
+replaceMacro</H3>
+<PRE>
+public static java.lang.String <B>replaceMacro</B>(java.lang.String&nbsp;s,
+                                            <A HREF="../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;java.lang.String&gt;&nbsp;resolver)</PRE>
+<DL>
+<DD>Replaces the occurrence of '$key' by <tt>resolver.get('key')</tt>.
 
  <p>
  Unlike shell, undefined variables are left as-is (this behavior is the same as Ant.)

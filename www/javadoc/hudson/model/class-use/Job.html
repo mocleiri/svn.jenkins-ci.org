@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.model.Job (Hudson core 1.236 API)
+Uses of Class hudson.model.Job (Hudson core 1.237 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-20">
+<META NAME="date" CONTENT="2008-07-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Job (Hudson core 1.236 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Job (Hudson core 1.236 API)";
+        parent.document.title="Uses of Class hudson.model.Job (Hudson core 1.237 API)";
     }
 }
 </SCRIPT>
@@ -109,6 +109,10 @@ Packages that use <A HREF="../../../hudson/model/Job.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model.listeners"><B>hudson.model.listeners</B></A></TD>
 <TD>Listener interfaces for various events that occur inside the server.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.security"><B>hudson.security</B></A></TD>
+<TD>Security-related code&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.tasks"><B>hudson.tasks</B></A></TD>
@@ -369,6 +373,14 @@ Uses of <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">J
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Job.html" title="class in hudson.model">Job</A></CODE></FONT></TD>
+<TD><CODE><B>JobParameterValue.</B><B><A HREF="../../../hudson/model/JobParameterValue.html#job">job</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;<A HREF="../../../hudson/model/JobProperty.html" title="type parameter in JobProperty">J</A></CODE></FONT></TD>
 <TD><CODE><B>JobProperty.</B><B><A HREF="../../../hudson/model/JobProperty.html#owner">owner</A></B></CODE>
 
@@ -475,12 +487,35 @@ Uses of <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">J
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>ParametersDefinitionProperty.DescriptorImpl.</B><B><A HREF="../../../hudson/model/ParametersDefinitionProperty.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt;&nbsp;jobType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>JobPropertyDescriptor.</B><B><A HREF="../../../hudson/model/JobPropertyDescriptor.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt;&nbsp;jobType)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this <A HREF="../../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A> type is applicable to the
  given job type.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with parameters of type <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">Job</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/model/JobParameterValue.html#JobParameterValue(java.lang.String, hudson.model.Job)">JobParameterValue</A></B>(java.lang.String&nbsp;name,
+                  <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">Job</A>&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -514,6 +549,31 @@ Uses of <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">J
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Called right before a job is going to be deleted.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.security"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">Job</A> in <A HREF="../../../hudson/security/package-summary.html">hudson.security</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Method parameters in <A HREF="../../../hudson/security/package-summary.html">hudson.security</A> with type arguments of type <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">Job</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>AuthorizationMatrixProperty.DescriptorImpl.</B><B><A HREF="../../../hudson/security/AuthorizationMatrixProperty.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt;&nbsp;jobType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;

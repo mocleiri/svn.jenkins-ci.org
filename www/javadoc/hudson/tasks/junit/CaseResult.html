@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-CaseResult (Hudson core 1.236 API)
+CaseResult (Hudson core 1.237 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-20">
+<META NAME="date" CONTENT="2008-07-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CaseResult (Hudson core 1.236 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CaseResult (Hudson core 1.236 API)";
+        parent.document.title="CaseResult (Hudson core 1.237 API)";
     }
 }
 </SCRIPT>
@@ -191,6 +191,14 @@ One test result.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the duration of the test, in seconds</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#getErrorDetails()">getErrorDetails</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If there was an error or a failure, this is the text from the message.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -528,6 +536,23 @@ getErrorStackTrace</H3>
 </FONT>public java.lang.String <B>getErrorStackTrace</B>()</PRE>
 <DL>
 <DD>If there was an error or a failure, this is the stack trace, or otherwise null.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getErrorDetails()"><!-- --></A><H3>
+getErrorDetails</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public java.lang.String <B>getErrorDetails</B>()</PRE>
+<DL>
+<DD>If there was an error or a failure, this is the text from the message.
 <P>
 <DD><DL>
 </DL>
