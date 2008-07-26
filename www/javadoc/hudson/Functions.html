@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.237 API)
+Functions (Hudson core 1.238 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-23">
+<META NAME="date" CONTENT="2008-07-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.237 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.237 API)";
+        parent.document.title="Functions (Hudson core 1.238 API)";
     }
 }
 </SCRIPT>
@@ -405,6 +405,16 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getCheckUrl(java.lang.String, java.lang.Object, java.lang.String)">getCheckUrl</A></B>(java.lang.String&nbsp;userDefined,
+            java.lang.Object&nbsp;descriptor,
+            java.lang.String&nbsp;field)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Determines the form validation check URL.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1866,6 +1876,21 @@ public java.lang.String <B>getServerName</B>()</PRE>
  <p>
  This is primarily used in <tt>slave-agent.jnlp.jelly</tt> to specify the destination
  that the slaves talk to.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCheckUrl(java.lang.String, java.lang.Object, java.lang.String)"><!-- --></A><H3>
+getCheckUrl</H3>
+<PRE>
+public java.lang.String <B>getCheckUrl</B>(java.lang.String&nbsp;userDefined,
+                                    java.lang.Object&nbsp;descriptor,
+                                    java.lang.String&nbsp;field)</PRE>
+<DL>
+<DD>Determines the form validation check URL. See textbox.jelly
 <P>
 <DD><DL>
 </DL>

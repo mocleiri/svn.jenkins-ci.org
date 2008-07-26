@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Descriptor (Hudson core 1.237 API)
+Descriptor (Hudson core 1.238 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-23">
+<META NAME="date" CONTENT="2008-07-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Descriptor (Hudson core 1.237 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Descriptor (Hudson core 1.237 API)";
+        parent.document.title="Descriptor (Hudson core 1.238 API)";
     }
 }
 </SCRIPT>
@@ -179,6 +179,14 @@ Metadata about a configurable instance.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Descriptor.html#ALL">ALL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All the live instances of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.Class&lt;? extends <A HREF="../../hudson/model/Descriptor.html" title="type parameter in Descriptor">T</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></B></CODE>
 
@@ -256,6 +264,15 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds a descriptor from a collection by its class name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)">getCheckUrl</A></B>(java.lang.String&nbsp;fieldName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the field "xyz" of a <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A> has the corresponding "doCheckXyz" method,
+ return the form-field validation string.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -440,6 +457,20 @@ public final transient java.lang.Class&lt;? extends <A HREF="../../hudson/model/
 <DL>
 </DL>
 </DL>
+<HR>
+
+<A NAME="ALL"><!-- --></A><H3>
+ALL</H3>
+<PRE>
+public static final <A HREF="../../hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&gt; <B>ALL</B></PRE>
+<DL>
+<DD>All the live instances of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.
+ <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s are all supposed to have the singleton semantics, so
+ this shouldn't cause a memory leak.
+<P>
+<DL>
+</DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -474,6 +505,22 @@ getDisplayName</H3>
 public abstract java.lang.String <B>getDisplayName</B>()</PRE>
 <DL>
 <DD>Human readable name of this kind of configurable object.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCheckUrl(java.lang.String)"><!-- --></A><H3>
+getCheckUrl</H3>
+<PRE>
+public java.lang.String <B>getCheckUrl</B>(java.lang.String&nbsp;fieldName)</PRE>
+<DL>
+<DD>If the field "xyz" of a <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A> has the corresponding "doCheckXyz" method,
+ return the form-field validation string. Otherwise null.
+ <p>
+ This method is used to hook up the form validation method to
 <P>
 <DD><DL>
 </DL>

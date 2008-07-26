@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-CVSSCM.DescriptorImpl (Hudson core 1.237 API)
+CVSSCM.DescriptorImpl (Hudson core 1.238 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-23">
+<META NAME="date" CONTENT="2008-07-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CVSSCM.DescriptorImpl (Hudson core 1.237 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CVSSCM.DescriptorImpl (Hudson core 1.237 API)";
+        parent.document.title="CVSSCM.DescriptorImpl (Hudson core 1.238 API)";
     }
 }
 </SCRIPT>
@@ -156,7 +156,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Descriptor.html#ALL">ALL</A>, <A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -189,11 +189,20 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.DescriptorImpl.html#doBranchCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBranchCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.DescriptorImpl.html#doCheckBranch(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCheckBranch</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks the correctness of the branch name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.DescriptorImpl.html#doCheckCvsRoot(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCheckCvsRoot</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks the entry to the CVSROOT field.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -212,15 +221,6 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.DescriptorImpl.html#doCvsrootCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCvsrootCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks the entry to the CVSROOT field.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -314,7 +314,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.util.Collection, java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#getConfigPage()">getConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getGlobalConfigPage()">getGlobalConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile()">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getViewPage(java.lang.Class, java.lang.String)">getViewPage</A>, <A HREF="../../hudson/model/Descriptor.html#isInstance(T)">isInstance</A>, <A HREF="../../hudson/model/Descriptor.html#load()">load</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A>, <A HREF="../../hudson/model/Descriptor.html#save()">save</A>, <A HREF="../../hudson/model/Descriptor.html#toArray(T...)">toArray</A>, <A HREF="../../hudson/model/Descriptor.html#toList(T...)">toList</A>, <A HREF="../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.util.Collection, java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)">getCheckUrl</A>, <A HREF="../../hudson/model/Descriptor.html#getConfigPage()">getConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getGlobalConfigPage()">getGlobalConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile()">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getViewPage(java.lang.Class, java.lang.String)">getViewPage</A>, <A HREF="../../hudson/model/Descriptor.html#isInstance(T)">isInstance</A>, <A HREF="../../hudson/model/Descriptor.html#load()">load</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A>, <A HREF="../../hudson/model/Descriptor.html#save()">save</A>, <A HREF="../../hudson/model/Descriptor.html#toArray(T...)">toArray</A>, <A HREF="../../hudson/model/Descriptor.html#toList(T...)">toList</A>, <A HREF="../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -576,10 +576,10 @@ public void <B>doVersion</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doBranchCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-doBranchCheck</H3>
+<A NAME="doCheckBranch(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doCheckBranch</H3>
 <PRE>
-public void <B>doBranchCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+public void <B>doCheckBranch</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                    throws java.io.IOException,
                           javax.servlet.ServletException</PRE>
@@ -598,10 +598,10 @@ public void <B>doBranchCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doCvsrootCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-doCvsrootCheck</H3>
+<A NAME="doCheckCvsRoot(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doCheckCvsRoot</H3>
 <PRE>
-public void <B>doCvsrootCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+public void <B>doCheckCvsRoot</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                            org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                     throws java.io.IOException,
                            javax.servlet.ServletException</PRE>

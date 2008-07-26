@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.237 API)
+Hudson (Hudson core 1.238 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-23">
+<META NAME="date" CONTENT="2008-07-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.237 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.237 API)";
+        parent.document.title="Hudson (Hudson core 1.238 API)";
     }
 }
 </SCRIPT>
@@ -825,6 +825,14 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message displayed in the top page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getDescriptor(java.lang.String)">getDescriptor</A></B>(java.lang.String&nbsp;fullyQualifiedClassName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> by its name to URL.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2000,6 +2008,25 @@ public <A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in h
 </DL>
 <HR>
 
+<A NAME="getDescriptor(java.lang.String)"><!-- --></A><H3>
+getDescriptor</H3>
+<PRE>
+public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> <B>getDescriptor</B>(java.lang.String&nbsp;fullyQualifiedClassName)</PRE>
+<DL>
+<DD>Exposes <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> by its name to URL.
+
+ After doing all the <code>getXXX(shortClassName)</code> methods, I finally realized that
+ this just doesn't scale.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getSecurityRealms(java.lang.String)"><!-- --></A><H3>
 getSecurityRealms</H3>
 <PRE>
@@ -2706,7 +2733,7 @@ public java.lang.String <B>getRootUrl</B>()</PRE>
       The caller must gracefully deal with this situation.
       The returned URL will always have the trailing '/'.<DT><B>Since:</B></DT>
   <DD>1.66</DD>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)"><CODE>Descriptor.getCheckUrl(String)</CODE></A></DL>
 </DD>
 </DL>
 <HR>

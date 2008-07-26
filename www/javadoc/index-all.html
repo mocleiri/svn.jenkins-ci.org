@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.237 API)
+Index (Hudson core 1.238 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-23">
+<META NAME="date" CONTENT="2008-07-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.237 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.237 API)";
+        parent.document.title="Index (Hudson core 1.238 API)";
     }
 }
 </SCRIPT>
@@ -488,6 +488,9 @@ Static method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/Messages.h
 <DT><A HREF="./hudson/tasks/test/Messages.html#AggregatedTestResultPublisher_Title()"><B>AggregatedTestResultPublisher_Title()</B></A> - 
 Static method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/Messages.html" title="class in hudson.tasks.test">Messages</A>
 <DD>Aggregated Test Result
+<DT><A HREF="./hudson/model/Descriptor.html#ALL"><B>ALL</B></A> - 
+Static variable in class hudson.model.<A HREF="./hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>
+<DD>All the live instances of <A HREF="./hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.
 <DT><A HREF="./hudson/scm/EditType.html#ALL"><B>ALL</B></A> - 
 Static variable in class hudson.scm.<A HREF="./hudson/scm/EditType.html" title="class in hudson.scm">EditType</A>
 <DD>&nbsp;
@@ -726,6 +729,9 @@ Constructor for class hudson.matrix.<A HREF="./hudson/matrix/AxisList.html" titl
 <DD>&nbsp;
 <DT><A HREF="./hudson/matrix/AxisList.html#AxisList(java.util.Collection)"><B>AxisList(Collection&lt;Axis&gt;)</B></A> - 
 Constructor for class hudson.matrix.<A HREF="./hudson/matrix/AxisList.html" title="class in hudson.matrix">AxisList</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/matrix/AxisList.ConverterImpl.html" title="class in hudson.matrix"><B>AxisList.ConverterImpl</B></A> - Class in <A HREF="./hudson/matrix/package-summary.html">hudson.matrix</A><DD><CODE>Converter</CODE> implementation for XStream.<DT><A HREF="./hudson/matrix/AxisList.ConverterImpl.html#AxisList.ConverterImpl(com.thoughtworks.xstream.mapper.Mapper)"><B>AxisList.ConverterImpl(Mapper)</B></A> - 
+Constructor for class hudson.matrix.<A HREF="./hudson/matrix/AxisList.ConverterImpl.html" title="class in hudson.matrix">AxisList.ConverterImpl</A>
 <DD>&nbsp;
 </DL>
 <HR>
@@ -1047,6 +1053,9 @@ Method in class hudson.scm.<A HREF="./hudson/scm/CVSChangeLogSet.CVSChangeLog.ht
 <DT><A HREF="./hudson/model/Queue.html#cancel(hudson.model.Queue.Task)"><B>cancel(Queue.Task)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in hudson.model">Queue</A>
 <DD>Cancels the item in the queue.
+<DT><A HREF="./hudson/matrix/AxisList.ConverterImpl.html#canConvert(java.lang.Class)"><B>canConvert(Class)</B></A> - 
+Method in class hudson.matrix.<A HREF="./hudson/matrix/AxisList.ConverterImpl.html" title="class in hudson.matrix">AxisList.ConverterImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/BuildAuthorizationToken.ConverterImpl.html#canConvert(java.lang.Class)"><B>canConvert(Class)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/BuildAuthorizationToken.ConverterImpl.html" title="class in hudson.model">BuildAuthorizationToken.ConverterImpl</A>
 <DD><B>Deprecated.</B>&nbsp;&nbsp;
@@ -2575,9 +2584,6 @@ Method in class hudson.widgets.<A HREF="./hudson/widgets/HistoryWidget.html" tit
 <DT><A HREF="./hudson/model/Run.html#doArtifact(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doArtifact(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>Serves the artifacts.
-<DT><A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html#doBranchCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doBranchCheck(StaplerRequest, StaplerResponse)</B></A> - 
-Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html" title="class in hudson.scm">CVSSCM.DescriptorImpl</A>
-<DD>Checks the correctness of the branch name.
 <DT><A HREF="./hudson/model/AbstractProject.html#doBuild(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doBuild(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Schedules a new build command.
@@ -2644,6 +2650,12 @@ Method in class hudson.triggers.<A HREF="./hudson/triggers/TimerTrigger.Descript
 <DT><A HREF="./hudson/tasks/Ant.DescriptorImpl.html#doCheckAntHome(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doCheckAntHome(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Ant.DescriptorImpl.html" title="class in hudson.tasks">Ant.DescriptorImpl</A>
 <DD>Checks if the ANT_HOME is valid.
+<DT><A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html#doCheckBranch(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doCheckBranch(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html" title="class in hudson.scm">CVSSCM.DescriptorImpl</A>
+<DD>Checks the correctness of the branch name.
+<DT><A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html#doCheckCvsRoot(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doCheckCvsRoot(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html" title="class in hudson.scm">CVSSCM.DescriptorImpl</A>
+<DD>Checks the entry to the CVSROOT field.
 <DT><A HREF="./hudson/model/Hudson.html#doCheckLocalFSRoot(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doCheckLocalFSRoot(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Checks if the path is a valid path.
@@ -2716,9 +2728,6 @@ Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html" tit
 <DT><A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html#doCvsPassCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doCvsPassCheck(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html" title="class in hudson.scm">CVSSCM.DescriptorImpl</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html#doCvsrootCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doCvsrootCheck(StaplerRequest, StaplerResponse)</B></A> - 
-Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html" title="class in hudson.scm">CVSSCM.DescriptorImpl</A>
-<DD>Checks the entry to the CVSROOT field.
 <DT><A HREF="./hudson/model/Hudson.html#doDefaultJDKCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDefaultJDKCheck(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>If the user chose the default JDK, make sure we got 'java' in PATH.
@@ -4509,6 +4518,13 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.MasterComputer.html"
 <DT><A HREF="./hudson/slaves/SlaveComputer.html#getChannel()"><B>getChannel()</B></A> - 
 Method in class hudson.slaves.<A HREF="./hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/Functions.html#getCheckUrl(java.lang.String, java.lang.Object, java.lang.String)"><B>getCheckUrl(String, Object, String)</B></A> - 
+Method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
+<DD>Determines the form validation check URL.
+<DT><A HREF="./hudson/model/Descriptor.html#getCheckUrl(java.lang.String)"><B>getCheckUrl(String)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>
+<DD>If the field "xyz" of a <A HREF="./hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A> has the corresponding "doCheckXyz" method,
+ return the form-field validation string.
 <DT><A HREF="./hudson/maven/reporters/SurefireAggregatedReport.html#getChildName(hudson.tasks.test.AbstractTestResultAction)"><B>getChildName(AbstractTestResultAction)</B></A> - 
 Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/SurefireAggregatedReport.html" title="class in hudson.maven.reporters">SurefireAggregatedReport</A>
 <DD>&nbsp;
@@ -4597,6 +4613,10 @@ Method in class hudson.slaves.<A HREF="./hudson/slaves/CommandLauncher.html" tit
 <DT><A HREF="./hudson/tasks/CommandInterpreter.html#getCommand()"><B>getCommand()</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/CommandInterpreter.html" title="class in hudson.tasks">CommandInterpreter</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/Launcher.html#getComputer()"><B>getComputer()</B></A> - 
+Method in class hudson.<A HREF="./hudson/Launcher.html" title="class in hudson">Launcher</A>
+<DD>If this <A HREF="./hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> is encapsulating an execution on a specific <A HREF="./hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>,
+ return it.
 <DT><A HREF="./hudson/model/Hudson.html#getComputer(java.lang.String)"><B>getComputer(String)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
@@ -4824,6 +4844,9 @@ Method in class hudson.model.<A HREF="./hudson/model/ExternalJob.html" title="cl
 <DT><A HREF="./hudson/model/FreeStyleProject.html#getDescriptor()"><B>getDescriptor()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/FreeStyleProject.html" title="class in hudson.model">FreeStyleProject</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Hudson.html#getDescriptor(java.lang.String)"><B>getDescriptor(String)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>Exposes <A HREF="./hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> by its name to URL.
 <DT><A HREF="./hudson/model/Items.html#getDescriptor(java.lang.String)"><B>getDescriptor(String)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Items.html" title="class in hudson.model">Items</A>
 <DD>&nbsp;
@@ -9878,6 +9901,9 @@ Constructor for class hudson.<A HREF="./hudson/MarkupText.html" title="class in 
 <DT><A HREF="./hudson/MarkupText.SubText.html" title="class in hudson"><B>MarkupText.SubText</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD>Represents a substring of a <A HREF="./hudson/MarkupText.html" title="class in hudson"><CODE>MarkupText</CODE></A>.<DT><A HREF="./hudson/MarkupText.SubText.html#MarkupText.SubText(java.util.regex.Matcher)"><B>MarkupText.SubText(Matcher)</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/MarkupText.SubText.html" title="class in hudson">MarkupText.SubText</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/matrix/AxisList.ConverterImpl.html#marshal(java.lang.Object, com.thoughtworks.xstream.io.HierarchicalStreamWriter, com.thoughtworks.xstream.converters.MarshallingContext)"><B>marshal(Object, HierarchicalStreamWriter, MarshallingContext)</B></A> - 
+Method in class hudson.matrix.<A HREF="./hudson/matrix/AxisList.ConverterImpl.html" title="class in hudson.matrix">AxisList.ConverterImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/security/AuthorizationMatrixProperty.ConverterImpl.html#marshal(java.lang.Object, com.thoughtworks.xstream.io.HierarchicalStreamWriter, com.thoughtworks.xstream.converters.MarshallingContext)"><B>marshal(Object, HierarchicalStreamWriter, MarshallingContext)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/AuthorizationMatrixProperty.ConverterImpl.html" title="class in hudson.security">AuthorizationMatrixProperty.ConverterImpl</A>
 <DD>&nbsp;
@@ -13368,6 +13394,9 @@ Variable in class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.html" t
 Static variable in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
 <DD>For compatibility reason, this value may be used in the verion field
  to indicate that the version is unknown.
+<DT><A HREF="./hudson/matrix/AxisList.ConverterImpl.html#unmarshal(com.thoughtworks.xstream.io.HierarchicalStreamReader, com.thoughtworks.xstream.converters.UnmarshallingContext)"><B>unmarshal(HierarchicalStreamReader, UnmarshallingContext)</B></A> - 
+Method in class hudson.matrix.<A HREF="./hudson/matrix/AxisList.ConverterImpl.html" title="class in hudson.matrix">AxisList.ConverterImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/security/AuthorizationMatrixProperty.ConverterImpl.html#unmarshal(com.thoughtworks.xstream.io.HierarchicalStreamReader, com.thoughtworks.xstream.converters.UnmarshallingContext)"><B>unmarshal(HierarchicalStreamReader, UnmarshallingContext)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/AuthorizationMatrixProperty.ConverterImpl.html" title="class in hudson.security">AuthorizationMatrixProperty.ConverterImpl</A>
 <DD>&nbsp;
