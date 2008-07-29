@@ -2,12 +2,10 @@
   xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form"
   xmlns:i="jelly:fmt" xmlns:local="local">
   <j:if test="${it.hasAnnotations()}">
-    <!-- JavaScript Dependencies for Tabview: -->
-    <script type="text/javascript" src="http://yui.yahooapis.com/2.5.2/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-    <script type="text/javascript" src="http://yui.yahooapis.com/2.5.2/build/element/element-beta-min.js"></script>
-
-    <!-- Source file for TabView -->
-    <script type="text/javascript" src="http://yui.yahooapis.com/2.5.2/build/tabview/tabview-min.js"></script>
+    <script type="text/javascript" src="${rootURL}/plugin/checkstyle/yui/yahoo-min.js"></script>
+    <script type="text/javascript" src="${rootURL}/plugin/checkstyle/yui/yahoo-dom-event.js"></script>
+    <script type="text/javascript" src="${rootURL}/plugin/checkstyle/yui/element-beta-min.js"></script>
+    <script type="text/javascript" src="${rootURL}/plugin/checkstyle/yui/tabview-min.js"></script>
 
     <script type="text/javascript">
       var myTabs = new YAHOO.widget.TabView("statistics");
@@ -59,11 +57,12 @@
           </li>
           <j:set var="class" value="" />
         </j:if>
-        <li>
+        <li class="${class}">
           <a href="#tab_details">
             <em>Details</em>
           </a>
         </li>
+        <j:set var="class" value="" />
         <j:if test="${it.newWarnings.size() > 0}">
           <li>
             <a href="#tab_new">
@@ -79,7 +78,7 @@
           </li>
         </j:if>
         <j:if test="${it.container.highAnnotations.size() > 0 and it.container.highAnnotations.size() != it.container.numberOfAnnotations}">
-          <li>
+          <li>m
             <a href="#tab_high">
               <em>High</em>
             </a>
@@ -92,7 +91,7 @@
             </a>
           </li>
         </j:if>
-        <j:if test="${it.container.lowAnnotations.size() > 0} and it.container.lowAnnotations.size() != it.container.numberOfAnnotations">
+        <j:if test="${it.container.lowAnnotations.size() > 0 and it.container.lowAnnotations.size() != it.container.numberOfAnnotations}">
           <li>
             <a href="#tab_low">
               <em>Low</em>
@@ -128,6 +127,7 @@
           </div>
         </j:if>
         <div id="tab_details">
+            <j:set var="annotations" value="${it.container.annotations}" />
           <st:include page="/tabview/details.jelly" />
         </div>
         <j:if test="${it.newWarnings.size() > 0}">

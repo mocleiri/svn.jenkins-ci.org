@@ -5,6 +5,8 @@ import static hudson.plugins.clearcase.util.OutputFormat.*;
 import hudson.plugins.clearcase.ClearTool;
 import hudson.plugins.clearcase.action.ChangeLogAction;
 import hudson.plugins.clearcase.util.ClearToolFormatHandler;
+import hudson.plugins.clearcase.util.EventRecordFilter;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -49,12 +51,14 @@ public class UcmChangeLogAction implements ChangeLogAction {
         this.cleartool = cleartool;
     }
 
-    public List<UcmActivity> getChanges(Date time, String viewName, String[] branchNames, String[] viewPaths) throws IOException, InterruptedException {
+    public List<UcmActivity> getChanges(EventRecordFilter eventFilter, Date time, String viewName, String[] branchNames, String[] viewPaths) throws IOException, InterruptedException {
         BufferedReader reader = new BufferedReader(cleartool.lshistory(historyHandler.getFormat() + COMMENT + LINEEND, time, viewName, branchNames[0], viewPaths)); 
-        return parseHistory(reader,viewName);
+        List<UcmActivity> history = parseHistory(reader,eventFilter,viewName);
+        reader.close();
+        return history;
     }
 
-    private List<UcmActivity> parseHistory(BufferedReader reader,String viewname) throws InterruptedException,IOException {
+    private List<UcmActivity> parseHistory(BufferedReader reader, EventRecordFilter eventRecordFilter,String viewname) throws InterruptedException,IOException {
         List<UcmActivity> result = new ArrayList<UcmActivity>();
         try {
             StringBuilder commentBuilder = new StringBuilder();
@@ -86,7 +90,7 @@ public class UcmChangeLogAction implements ChangeLogAction {
                     currentFile.setEvent(matcher.group(5));
                     currentFile.setOperation(matcher.group(6));
 
-                    if (currentFile.getVersion().endsWith("/0") || currentFile.getVersion().endsWith("\\0") || currentFile.getEvent().equalsIgnoreCase("create branch")) {
+                    if (! eventRecordFilter.accept(currentFile.getEvent(), currentFile.getVersion())) {
                         line = reader.readLine();
                         continue;
                     }
@@ -155,5 +159,7 @@ public class UcmChangeLogAction implements ChangeLogAction {
                 }
             }
         }
+        
+        reader.close();
     }    
 }

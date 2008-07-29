@@ -551,6 +551,40 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     }
 
     /**
+     * Gets the plugin object from its class.
+     *
+     * <p>
+     * This allows easy storage of plugin information in the plugin singleton without
+     * every plugin reimplementing the singleton pattern.
+     *
+     * @param clazz The plugin class (beware class-loader fun, this will probably only work
+     * from within the hpi that defines the plugin class, it may or may not work in other cases)
+     *
+     * @return The plugin instance.
+     */
+    @SuppressWarnings("unchecked")
+    public <P extends Plugin> P getPlugin(Class<P> clazz) {
+        PluginWrapper p = pluginManager.getPlugin(clazz);
+        if(p==null)     return null;
+        return (P) p.getPlugin();
+    }
+
+    /**
+     * Gets the plugin objects from their super-class.
+     *
+     * @param clazz The plugin class (beware class-loader fun)
+     *
+     * @return The plugin instances.
+     */
+    public <P extends Plugin> List<P> getPlugins(Class<P> clazz) {
+        List<P> result = new ArrayList<P>();
+        for (PluginWrapper w: pluginManager.getPlugins(clazz)) {
+            result.add((P)w.getPlugin());
+        }
+        return Collections.unmodifiableList(result);
+    }
+
+    /**
      * Synonym to {@link #getNodeDescription()}.
      */
     public String getSystemMessage() {
@@ -1085,6 +1119,11 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         return null;
     }
 
+    /**
+     * {@inheritDoc}.
+     *
+     * Note that the look up is case-insensitive.
+     */
     @Override
     public TopLevelItem getItem(String name) {
         return items.get(name);
@@ -1293,7 +1332,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         }
         File[] subdirs = projectsDir.listFiles(new FileFilter() {
             public boolean accept(File child) {
-                return child.isDirectory();
+                return child.isDirectory() && Items.getConfigFile(child).exists();
             }
         });
         items.clear();
@@ -1587,10 +1626,19 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             throws FormException {
 
         if(!j.has(name + "Class"))  return null;
-        final String clazz = j.getString(name + "Class");
-        final JSONObject data = j.getJSONObject(name);
+
+        // work around ISSUE-1913... the nesting has changed in dropDownList 
+
+        final Object container = j.get(name + "Class");
         j.remove(name + "Class");
-        j.remove(name);
+
+        final String clazz = container instanceof JSONArray
+                ? ((JSONArray) container).getString(0)
+                : (String) container;
+        final JSONObject data = container instanceof JSONArray
+                ? ((JSONArray)container).getJSONObject(1).getJSONObject(name)
+                : null;
+
         for (Descriptor<T> d: descriptors) {
             if (d.getClass().getName().equals(clazz)) {
                 return d.newInstance(req, data);
@@ -2286,11 +2334,42 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         "js|css|jpeg|jpg|png|gif|html|htm".split("\\|")
     ));
 
+    /**
+     * Checks if container uses UTF-8 to decode URLs. See
+     * http://hudson.gotdns.com/wiki/display/HUDSON/Tomcat#Tomcat-i18n
+     *
+     * @param req containing the parameter value
+     * @param rsp used by FormFieldValidator
+     * @throws IOException thrown by FormFieldValidator.check()
+     * @throws ServletException thrown by FormFieldValidator.check()
+     */
+    public void doCheckURIEncoding(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+        new FormFieldValidator(req, rsp, true) {
+            @Override
+            protected void check() throws IOException, ServletException {
+                request.setCharacterEncoding("UTF-8");
+                // expected is non-ASCII String
+                final String expected = "\u57f7\u4e8b";
+                final String value = fixEmpty(request.getParameter("value"));
+                if (!expected.equals(value)) {
+                    warningWithMarkup(Messages.Hudson_NotUsesUTF8ToDecodeURL());
+                    return;
+                }
+                ok();
+            }
+        }.process();
+    }
+
+    /**
+     * Does not check when system default encoding is "ISO-8859-1".
+     */
+    public static boolean isCheckURIEncodingEnabled() {
+        return !"ISO-8859-1".equalsIgnoreCase(System.getProperty("file.encoding"));
+    }
 
     public static boolean isWindows() {
         return File.pathSeparatorChar==';';
     }
-
 
     /**
      * Returns all {@code CVSROOT} strings used in the current Hudson installation.

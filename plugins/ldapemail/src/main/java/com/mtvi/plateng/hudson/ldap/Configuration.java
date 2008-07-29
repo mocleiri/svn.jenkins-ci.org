@@ -12,6 +12,10 @@ package com.mtvi.plateng.hudson.ldap;
  */
 public class Configuration {
 
+    /**
+     * Default value for the initialContextFactoryName property. Assumes a Sun
+     * JDK.
+     */
     public static final String DEFAULT_INITIAL_CONTEXT_FACTORY = "com.sun.jndi.ldap.LdapCtxFactory";
 
     /**
@@ -89,6 +93,13 @@ public class Configuration {
                 && (emailAttribute != null);
     }
 
+    /**
+     * Construct a user's distinguised name (DN) from their username.
+     * 
+     * @param userName
+     *            the user's username
+     * @return the DN
+     */
     public String makeUserDN(String userName) {
         StringBuilder builder = new StringBuilder();
         builder.append(getSearchAttribute()).append("=").append(userName);

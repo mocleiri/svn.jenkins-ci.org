@@ -969,7 +969,7 @@ public class CVSSCM extends SCM implements Serializable {
         @Override
         public SCM newInstance(StaplerRequest req, JSONObject formData) throws FormException {
             CVSSCM scm = req.bindJSON(CVSSCM.class,formData);
-            scm.repositoryBrowser = RepositoryBrowsers.createInstance(CVSRepositoryBrowser.class,req,"cvs.browser");
+            scm.repositoryBrowser = RepositoryBrowsers.createInstance(CVSRepositoryBrowser.class,req,formData,"browser");
             return scm;
         }
 
@@ -1163,7 +1163,7 @@ public class CVSSCM extends SCM implements Serializable {
         }
 
         private static final Pattern CVSROOT_PSERVER_PATTERN =
-            Pattern.compile(":(ext|pserver):[^@:]+(:[^@:]+)?@[^:]+:(\\d+:)?.+");
+            Pattern.compile(":(ext|extssh|pserver):[^@:]+(:[^@:]+)?@[^:]+:(\\d+:)?.+");
 
         /**
          * Runs cvs login command.

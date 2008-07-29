@@ -1,5 +1,6 @@
 package hudson.plugins.clearcase.action;
 
+import hudson.plugins.clearcase.util.EventRecordFilter;
 import hudson.scm.ChangeLogSet;
 import java.io.IOException;
 import java.util.Date;
@@ -12,5 +13,5 @@ import java.util.List;
  */
 public interface ChangeLogAction {
     
-    List<? extends ChangeLogSet.Entry> getChanges(Date time, String viewName, String[] branchNames, String[] viewPaths) throws IOException,InterruptedException;
+    List<? extends ChangeLogSet.Entry> getChanges(EventRecordFilter eventFilter, Date time, String viewName, String[] branchNames, String[] viewPaths) throws IOException,InterruptedException;
 }

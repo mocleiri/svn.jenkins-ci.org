@@ -93,6 +93,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
+import net.sf.json.JSONObject;
+
 /**
  * Subversion SCM.
  *
@@ -388,6 +390,13 @@ public class SubversionSCM extends SCM implements Serializable {
                             if(e.getErrorMessage().getErrorCode()== SVNErrorCode.WC_LOCKED) {
                                 // work space locked. try fresh check out
                                 listener.getLogger().println("Workspace appear to be locked, so getting a fresh workspace");
+                                update = false;
+                                return invoke(ws,channel);
+                            }
+                            if(e.getErrorMessage().getErrorCode()== SVNErrorCode.WC_OBSTRUCTED_UPDATE) {
+                                // HUDSON-1882. If existence of local files cause an update to fail,
+                                // revert to fresh check out
+                                listener.getLogger().println("Updated failed due to local files. Getting a fresh workspace");
                                 update = false;
                                 return invoke(ws,channel);
                             }
@@ -796,7 +805,7 @@ public class SubversionSCM extends SCM implements Serializable {
         return tokens[tokens.length-1]; // return the last token
     }
 
-    public static final class DescriptorImpl extends SCMDescriptor<SubversionSCM> {
+    public static class DescriptorImpl extends SCMDescriptor<SubversionSCM> {
         public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
         /**
@@ -1012,16 +1021,20 @@ public class SubversionSCM extends SCM implements Serializable {
             load();
         }
 
+        protected DescriptorImpl(Class clazz, Class<? extends RepositoryBrowser> repositoryBrowser) {
+            super(clazz,repositoryBrowser);
+        }
+
         public String getDisplayName() {
             return "Subversion";
         }
 
-        public SCM newInstance(StaplerRequest req) throws FormException {
+        public SCM newInstance(StaplerRequest req, JSONObject formData) throws FormException {
             return new SubversionSCM(
                 req.getParameterValues("svn.location_remote"),
                 req.getParameterValues("svn.location_local"),
                 req.getParameter("svn_use_update") != null,
-                    RepositoryBrowsers.createInstance(SubversionRepositoryBrowser.class, req, "svn.browser"));
+                    RepositoryBrowsers.createInstance(SubversionRepositoryBrowser.class, req, formData, "browser"));
         }
 
         /**

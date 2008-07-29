@@ -61,6 +61,7 @@ import com.thoughtworks.xstream.converters.basic.AbstractSingleValueConverter;
  *
  * @author Kohsuke Kawaguchi
  */
+@ExportedBean
 public class Queue extends ResourceController {
     /**
      * Items that are waiting for its quiet period to pass.
@@ -126,7 +127,7 @@ public class Queue extends ResourceController {
         }
 
         public boolean isAvailable() {
-            return item == null && !executor.getOwner().isOffline();
+            return item == null && !executor.getOwner().isOffline() && executor.getOwner().isAcceptingTasks();
         }
 
         public Node getNode() {
@@ -342,6 +343,7 @@ public class Queue extends ResourceController {
     /**
      * Gets a snapshot of items in the queue.
      */
+    @Exported(inline=true)
     public synchronized Item[] getItems() {
         Item[] r = new Item[waitingList.size() + blockedProjects.size() + buildables.size()];
         waitingList.toArray(r);
@@ -646,6 +648,10 @@ public class Queue extends ResourceController {
         }
     }
 
+    public Api getApi() {
+        return new Api(this);
+    }
+
     /**
      * Task whose execution is controlled by the queue.
      * <p>
@@ -747,6 +753,7 @@ public class Queue extends ResourceController {
         /**
          * Project to be built.
          */
+        @Exported
         public final Task task;
 
         /**
