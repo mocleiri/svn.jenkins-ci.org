@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ProjectMatrixAuthorizationStrategy (Hudson core 1.238 API)
+ProjectMatrixAuthorizationStrategy (Hudson core 1.239 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-07-26">
+<META NAME="date" CONTENT="2008-07-30">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ProjectMatrixAuthorizationStrategy (Hudson core 1.238 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ProjectMatrixAuthorizationStrategy (Hudson core 1.238 API)";
+        parent.document.title="ProjectMatrixAuthorizationStrategy (Hudson core 1.239 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.AclImpl.html" title="class in hudson.security"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/security/RememberMeServicesProxy.html" title="class in hudson.security"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/security/ProjectMatrixAuthorizationStrategy.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ProjectMatrixAuthorizationStrategy.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.security.GlobalMatrixAuthorizationStrategy">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -95,18 +95,19 @@ Class ProjectMatrixAuthorizationStrategy</H2>
 <PRE>
 java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">hudson.security.AuthorizationStrategy</A>
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.security.ProjectMatrixAuthorizationStrategy</B>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html" title="class in hudson.security">hudson.security.GlobalMatrixAuthorizationStrategy</A>
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.security.ProjectMatrixAuthorizationStrategy</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>ProjectMatrixAuthorizationStrategy</B><DT>extends <A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A></DL>
+<DT><PRE>public class <B>ProjectMatrixAuthorizationStrategy</B><DT>extends <A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html" title="class in hudson.security">GlobalMatrixAuthorizationStrategy</A></DL>
 </PRE>
 
 <P>
-Role-based authorization via a matrix.
+<A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html" title="class in hudson.security"><CODE>GlobalMatrixAuthorizationStrategy</CODE></A> plus per-project ACL.
 <P>
 
 <P>
@@ -125,47 +126,24 @@ Role-based authorization via a matrix.
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Nested Class Summary</B></FONT></TH>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.AclImpl.html" title="class in hudson.security">ProjectMatrixAuthorizationStrategy.AclImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.security.GlobalMatrixAuthorizationStrategy"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from class hudson.security.<A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html" title="class in hudson.security">GlobalMatrixAuthorizationStrategy</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.ConverterImpl.html" title="class in hudson.security">ProjectMatrixAuthorizationStrategy.ConverterImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Persist <A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.html" title="class in hudson.security"><CODE>ProjectMatrixAuthorizationStrategy</CODE></A> as a list of IDs that
- represent <A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.html#grantedPermissions"><CODE>grantedPermissions</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security">ProjectMatrixAuthorizationStrategy.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+<TD><CODE><A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.ConverterImpl.html" title="class in hudson.security">GlobalMatrixAuthorizationStrategy.ConverterImpl</A>, <A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security">GlobalMatrixAuthorizationStrategy.DescriptorImpl</A></CODE></TD>
 </TR>
 </TABLE>
-&nbsp;<!-- =========== FIELD SUMMARY =========== -->
+&nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Field Summary</B></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="../../hudson/security/ACL.html" title="class in hudson.security">ACL</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.html#acl">acl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -212,28 +190,11 @@ Role-based authorization via a matrix.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.html#add(hudson.security.Permission, java.lang.String)">add</A></B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p,
-    java.lang.String&nbsp;sid)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds to <A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.html#grantedPermissions"><CODE>grantedPermissions</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/security/ACL.html" title="class in hudson.security">ACL</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.html#getACL(hudson.model.AbstractProject)">getACL</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.List&lt;java.lang.String&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.html#getAllSIDs()">getAllSIDs</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all SIDs configured in this matrix, minus "anonymous"</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -243,32 +204,14 @@ Role-based authorization via a matrix.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.Set&lt;java.lang.String&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.html#getGroups()">getGroups</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the list of all group/role names used in this authorization strategy,
- and the ACL returned from the <A HREF="../../hudson/security/AuthorizationStrategy.html#getRootACL()"><CODE>AuthorizationStrategy.getRootACL()</CODE></A> method.</TD>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.security.GlobalMatrixAuthorizationStrategy"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.security.<A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html" title="class in hudson.security">GlobalMatrixAuthorizationStrategy</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/security/ACL.html" title="class in hudson.security">ACL</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.html#getRootACL()">getRootACL</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the instance of <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> where all the other <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> instances
- for all the other model objects eventually delegate.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.html#hasPermission(java.lang.String, hudson.security.Permission)">hasPermission</A></B>(java.lang.String&nbsp;sid,
-              <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the given SID has the given permission.</TD>
+<TD><CODE><A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html#getAllSIDs()">getAllSIDs</A>, <A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html#getGroups()">getGroups</A>, <A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html#getRootACL()">getRootACL</A>, <A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html#hasPermission(java.lang.String, hudson.security.Permission)">hasPermission</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.security.AuthorizationStrategy"><!-- --></A>
@@ -301,16 +244,6 @@ Role-based authorization via a matrix.
 <B>Field Detail</B></FONT></TH>
 </TR>
 </TABLE>
-
-<A NAME="acl"><!-- --></A><H3>
-acl</H3>
-<PRE>
-protected transient <A HREF="../../hudson/security/ACL.html" title="class in hudson.security">ACL</A> <B>acl</B></PRE>
-<DL>
-<DL>
-</DL>
-</DL>
-<HR>
 
 <A NAME="DESCRIPTOR"><!-- --></A><H3>
 DESCRIPTOR</H3>
@@ -348,42 +281,6 @@ public <B>ProjectMatrixAuthorizationStrategy</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="add(hudson.security.Permission, java.lang.String)"><!-- --></A><H3>
-add</H3>
-<PRE>
-protected void <B>add</B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p,
-                   java.lang.String&nbsp;sid)</PRE>
-<DL>
-<DD>Adds to <A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.html#grantedPermissions"><CODE>grantedPermissions</CODE></A>.
- Use of this method should be limited during construction,
- as this object itself is considered immutable once populated.
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getRootACL()"><!-- --></A><H3>
-getRootACL</H3>
-<PRE>
-public <A HREF="../../hudson/security/ACL.html" title="class in hudson.security">ACL</A> <B>getRootACL</B>()</PRE>
-<DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/security/AuthorizationStrategy.html#getRootACL()">AuthorizationStrategy</A></CODE></B></DD>
-<DD>Returns the instance of <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> where all the other <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> instances
- for all the other model objects eventually delegate.
- <p>
- IOW, this ACL will have the ultimate say on the access control.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AuthorizationStrategy.html#getRootACL()">getRootACL</A></CODE> in class <CODE><A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A></CODE></DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
 <A NAME="getACL(hudson.model.AbstractProject)"><!-- --></A><H3>
 getACL</H3>
 <PRE>
@@ -394,56 +291,6 @@ public <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"
 </DD>
 <DD><DL>
 </DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getGroups()"><!-- --></A><H3>
-getGroups</H3>
-<PRE>
-public java.util.Set&lt;java.lang.String&gt; <B>getGroups</B>()</PRE>
-<DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/security/AuthorizationStrategy.html#getGroups()">AuthorizationStrategy</A></CODE></B></DD>
-<DD>Returns the list of all group/role names used in this authorization strategy,
- and the ACL returned from the <A HREF="../../hudson/security/AuthorizationStrategy.html#getRootACL()"><CODE>AuthorizationStrategy.getRootACL()</CODE></A> method.
- <p>
- This method is used by <A HREF="../../hudson/security/ContainerAuthentication.html" title="class in hudson.security"><CODE>ContainerAuthentication</CODE></A> to work around the servlet API issue
- that prevents us from enumerating roles that the user has.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AuthorizationStrategy.html#getGroups()">getGroups</A></CODE> in class <CODE><A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A></CODE></DL>
-</DD>
-<DD><DL>
-
-<DT><B>Returns:</B><DD>never null.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="hasPermission(java.lang.String, hudson.security.Permission)"><!-- --></A><H3>
-hasPermission</H3>
-<PRE>
-public boolean <B>hasPermission</B>(java.lang.String&nbsp;sid,
-                             <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</PRE>
-<DL>
-<DD>Checks if the given SID has the given permission.
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getAllSIDs()"><!-- --></A><H3>
-getAllSIDs</H3>
-<PRE>
-public java.util.List&lt;java.lang.String&gt; <B>getAllSIDs</B>()</PRE>
-<DL>
-<DD>Returns all SIDs configured in this matrix, minus "anonymous"
-<P>
-<DD><DL>
-
-<DT><B>Returns:</B><DD>Always non-null.</DL>
 </DD>
 </DL>
 <HR>
@@ -461,6 +308,9 @@ public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model
  implementation, so if <tt>a.getClass()==b.getClass()</tt> then
  <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
 <P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html#getDescriptor()">getDescriptor</A></CODE> in class <CODE><A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html" title="class in hudson.security">GlobalMatrixAuthorizationStrategy</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -497,7 +347,7 @@ public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.AclImpl.html" title="class in hudson.security"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/security/RememberMeServicesProxy.html" title="class in hudson.security"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/security/ProjectMatrixAuthorizationStrategy.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ProjectMatrixAuthorizationStrategy.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -517,7 +367,7 @@ public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.security.GlobalMatrixAuthorizationStrategy">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
