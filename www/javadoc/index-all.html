@@ -5,7 +5,7 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.240 API)
+Index (Hudson core 1.241 API)
 </TITLE>
 
 <META NAME="date" CONTENT="2008-07-31">
@@ -16,7 +16,7 @@ Index (Hudson core 1.240 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.240 API)";
+        parent.document.title="Index (Hudson core 1.241 API)";
     }
 }
 </SCRIPT>
@@ -724,7 +724,7 @@ Constructor for class hudson.matrix.<A HREF="./hudson/matrix/AxisList.html" titl
 <DT><A HREF="./hudson/matrix/AxisList.html#AxisList(java.util.Collection)"><B>AxisList(Collection&lt;Axis&gt;)</B></A> - 
 Constructor for class hudson.matrix.<A HREF="./hudson/matrix/AxisList.html" title="class in hudson.matrix">AxisList</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/matrix/AxisList.ConverterImpl.html" title="class in hudson.matrix"><B>AxisList.ConverterImpl</B></A> - Class in <A HREF="./hudson/matrix/package-summary.html">hudson.matrix</A><DD><CODE>Converter</CODE> implementation for XStream.<DT><A HREF="./hudson/matrix/AxisList.ConverterImpl.html#AxisList.ConverterImpl(com.thoughtworks.xstream.mapper.Mapper)"><B>AxisList.ConverterImpl(Mapper)</B></A> - 
+<DT><A HREF="./hudson/matrix/AxisList.ConverterImpl.html" title="class in hudson.matrix"><B>AxisList.ConverterImpl</B></A> - Class in <A HREF="./hudson/matrix/package-summary.html">hudson.matrix</A><DD><CODE>Converter</CODE> implementation for XStream.<DT><A HREF="./hudson/matrix/AxisList.ConverterImpl.html#AxisList.ConverterImpl(com.thoughtworks.xstream.mapper.Mapper, com.thoughtworks.xstream.converters.reflection.ReflectionProvider)"><B>AxisList.ConverterImpl(Mapper, ReflectionProvider)</B></A> - 
 Constructor for class hudson.matrix.<A HREF="./hudson/matrix/AxisList.ConverterImpl.html" title="class in hudson.matrix">AxisList.ConverterImpl</A>
 <DD>&nbsp;
 </DL>
@@ -1537,13 +1537,13 @@ Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html" tit
 <DT><A HREF="./hudson/security/Permission.html#CONFIGURE"><B>CONFIGURE</B></A> - 
 Static variable in class hudson.security.<A HREF="./hudson/security/Permission.html" title="class in hudson.security">Permission</A>
 <DD>Generic configuration access.
-<DT><A HREF="./hudson/tasks/Ant.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest)"><B>configure(StaplerRequest)</B></A> - 
+<DT><A HREF="./hudson/tasks/Ant.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><B>configure(StaplerRequest, JSONObject)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Ant.DescriptorImpl.html" title="class in hudson.tasks">Ant.DescriptorImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/Mailer.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><B>configure(StaplerRequest, JSONObject)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Mailer.DescriptorImpl.html" title="class in hudson.tasks">Mailer.DescriptorImpl</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/tasks/Maven.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest)"><B>configure(StaplerRequest)</B></A> - 
+<DT><A HREF="./hudson/tasks/Maven.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><B>configure(StaplerRequest, JSONObject)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Maven.DescriptorImpl.html" title="class in hudson.tasks">Maven.DescriptorImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/Shell.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest)"><B>configure(StaplerRequest)</B></A> - 
@@ -1811,6 +1811,9 @@ Method in class hudson.scm.<A HREF="./hudson/scm/SCM.html" title="class in hudso
 <DT><A HREF="./hudson/scm/SubversionSCM.html#createChangeLogParser()"><B>createChangeLogParser()</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/SubversionSCM.html" title="class in hudson.scm">SubversionSCM</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/matrix/AxisList.ConverterImpl.html#createCollection(java.lang.Class)"><B>createCollection(Class)</B></A> - 
+Method in class hudson.matrix.<A HREF="./hudson/matrix/AxisList.ConverterImpl.html" title="class in hudson.matrix">AxisList.ConverterImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#createComputer()"><B>createComputer()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
@@ -1947,6 +1950,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/Mailer.DescriptorImpl.html"
 <DT><A HREF="./hudson/Util.html#createSubList(java.util.Collection, java.lang.Class)"><B>createSubList(Collection&lt;?&gt;, Class&lt;T&gt;)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
 <DD>Create a sub-list by only picking up instances of the specified type.
+<DT><A HREF="./hudson/scm/SubversionSCM.html#createSvnClientManager(org.tmatesoft.svn.core.auth.ISVNAuthenticationProvider)"><B>createSvnClientManager(ISVNAuthenticationProvider)</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/SubversionSCM.html" title="class in hudson.scm">SubversionSCM</A>
+<DD>Creates <CODE>SVNClientManager</CODE>.
 <DT><A HREF="./hudson/Util.html#createSymlink(java.io.File, java.lang.String, java.lang.String, hudson.model.TaskListener)"><B>createSymlink(File, String, String, TaskListener)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
 <DD>Creates a symlink to baseDir+targetPath at baseDir+symlinkPath.
@@ -9880,9 +9886,6 @@ Constructor for class hudson.<A HREF="./hudson/MarkupText.html" title="class in 
 <DT><A HREF="./hudson/MarkupText.SubText.html" title="class in hudson"><B>MarkupText.SubText</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD>Represents a substring of a <A HREF="./hudson/MarkupText.html" title="class in hudson"><CODE>MarkupText</CODE></A>.<DT><A HREF="./hudson/MarkupText.SubText.html#MarkupText.SubText(java.util.regex.Matcher)"><B>MarkupText.SubText(Matcher)</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/MarkupText.SubText.html" title="class in hudson">MarkupText.SubText</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/matrix/AxisList.ConverterImpl.html#marshal(java.lang.Object, com.thoughtworks.xstream.io.HierarchicalStreamWriter, com.thoughtworks.xstream.converters.MarshallingContext)"><B>marshal(Object, HierarchicalStreamWriter, MarshallingContext)</B></A> - 
-Method in class hudson.matrix.<A HREF="./hudson/matrix/AxisList.ConverterImpl.html" title="class in hudson.matrix">AxisList.ConverterImpl</A>
-<DD>&nbsp;
 <DT><A HREF="./hudson/security/AuthorizationMatrixProperty.ConverterImpl.html#marshal(java.lang.Object, com.thoughtworks.xstream.io.HierarchicalStreamWriter, com.thoughtworks.xstream.converters.MarshallingContext)"><B>marshal(Object, HierarchicalStreamWriter, MarshallingContext)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/AuthorizationMatrixProperty.ConverterImpl.html" title="class in hudson.security">AuthorizationMatrixProperty.ConverterImpl</A>
 <DD>&nbsp;
@@ -13360,9 +13363,6 @@ Variable in class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.html" t
 Static variable in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
 <DD>For compatibility reason, this value may be used in the verion field
  to indicate that the version is unknown.
-<DT><A HREF="./hudson/matrix/AxisList.ConverterImpl.html#unmarshal(com.thoughtworks.xstream.io.HierarchicalStreamReader, com.thoughtworks.xstream.converters.UnmarshallingContext)"><B>unmarshal(HierarchicalStreamReader, UnmarshallingContext)</B></A> - 
-Method in class hudson.matrix.<A HREF="./hudson/matrix/AxisList.ConverterImpl.html" title="class in hudson.matrix">AxisList.ConverterImpl</A>
-<DD>&nbsp;
 <DT><A HREF="./hudson/security/AuthorizationMatrixProperty.ConverterImpl.html#unmarshal(com.thoughtworks.xstream.io.HierarchicalStreamReader, com.thoughtworks.xstream.converters.UnmarshallingContext)"><B>unmarshal(HierarchicalStreamReader, UnmarshallingContext)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/AuthorizationMatrixProperty.ConverterImpl.html" title="class in hudson.security">AuthorizationMatrixProperty.ConverterImpl</A>
 <DD>&nbsp;

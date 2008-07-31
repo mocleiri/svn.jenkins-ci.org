@@ -5,7 +5,7 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AxisList.ConverterImpl (Hudson core 1.240 API)
+AxisList.ConverterImpl (Hudson core 1.241 API)
 </TITLE>
 
 <META NAME="date" CONTENT="2008-07-31">
@@ -16,7 +16,7 @@ AxisList.ConverterImpl (Hudson core 1.240 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AxisList.ConverterImpl (Hudson core 1.240 API)";
+        parent.document.title="AxisList.ConverterImpl (Hudson core 1.241 API)";
     }
 }
 </SCRIPT>
@@ -95,7 +95,9 @@ Class AxisList.ConverterImpl</H2>
 <PRE>
 java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by ">com.thoughtworks.xstream.converters.collections.AbstractCollectionConverter
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.matrix.AxisList.ConverterImpl</B>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by ">com.thoughtworks.xstream.converters.collections.CollectionConverter
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/util/RobustCollectionConverter.html" title="class in hudson.util">hudson.util.RobustCollectionConverter</A>
+              <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.matrix.AxisList.ConverterImpl</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD>com.thoughtworks.xstream.converters.Converter, com.thoughtworks.xstream.converters.ConverterMatcher</DD>
@@ -105,7 +107,7 @@ java.lang.Object
 </DL>
 <HR>
 <DL>
-<DT><PRE>public static final class <B>AxisList.ConverterImpl</B><DT>extends com.thoughtworks.xstream.converters.collections.AbstractCollectionConverter</DL>
+<DT><PRE>public static final class <B>AxisList.ConverterImpl</B><DT>extends <A HREF="../../hudson/util/RobustCollectionConverter.html" title="class in hudson.util">RobustCollectionConverter</A></DL>
 </PRE>
 
 <P>
@@ -126,7 +128,8 @@ java.lang.Object
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/matrix/AxisList.ConverterImpl.html#AxisList.ConverterImpl(com.thoughtworks.xstream.mapper.Mapper)">AxisList.ConverterImpl</A></B>(com.thoughtworks.xstream.mapper.Mapper&nbsp;mapper)</CODE>
+<TD><CODE><B><A HREF="../../hudson/matrix/AxisList.ConverterImpl.html#AxisList.ConverterImpl(com.thoughtworks.xstream.mapper.Mapper, com.thoughtworks.xstream.converters.reflection.ReflectionProvider)">AxisList.ConverterImpl</A></B>(com.thoughtworks.xstream.mapper.Mapper&nbsp;mapper,
+                       com.thoughtworks.xstream.converters.reflection.ReflectionProvider&nbsp;reflectionProvider)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -151,22 +154,29 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/matrix/AxisList.ConverterImpl.html#marshal(java.lang.Object, com.thoughtworks.xstream.io.HierarchicalStreamWriter, com.thoughtworks.xstream.converters.MarshallingContext)">marshal</A></B>(java.lang.Object&nbsp;source,
-        com.thoughtworks.xstream.io.HierarchicalStreamWriter&nbsp;writer,
-        com.thoughtworks.xstream.converters.MarshallingContext&nbsp;context)</CODE>
+<CODE>protected &nbsp;java.lang.Object</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/matrix/AxisList.ConverterImpl.html#createCollection(java.lang.Class)">createCollection</A></B>(java.lang.Class&nbsp;type)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.util.RobustCollectionConverter"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.util.<A HREF="../../hudson/util/RobustCollectionConverter.html" title="class in hudson.util">RobustCollectionConverter</A></B></TH>
+</TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/matrix/AxisList.html" title="class in hudson.matrix">AxisList</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/matrix/AxisList.ConverterImpl.html#unmarshal(com.thoughtworks.xstream.io.HierarchicalStreamReader, com.thoughtworks.xstream.converters.UnmarshallingContext)">unmarshal</A></B>(com.thoughtworks.xstream.io.HierarchicalStreamReader&nbsp;reader,
-          com.thoughtworks.xstream.converters.UnmarshallingContext&nbsp;context)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+<TD><CODE><A HREF="../../hudson/util/RobustCollectionConverter.html#populateCollection(com.thoughtworks.xstream.io.HierarchicalStreamReader, com.thoughtworks.xstream.converters.UnmarshallingContext, java.util.Collection)">populateCollection</A>, <A HREF="../../hudson/util/RobustCollectionConverter.html#unmarshal(com.thoughtworks.xstream.io.HierarchicalStreamReader, com.thoughtworks.xstream.converters.UnmarshallingContext)">unmarshal</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_com.thoughtworks.xstream.converters.collections.CollectionConverter"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class com.thoughtworks.xstream.converters.collections.CollectionConverter</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>marshal</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_com.thoughtworks.xstream.converters.collections.AbstractCollectionConverter"><!-- --></A>
@@ -175,7 +185,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class com.thoughtworks.xstream.converters.collections.AbstractCollectionConverter</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>createCollection, mapper, readItem, writeItem</CODE></TD>
+<TD><CODE>mapper, readItem, writeItem</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -200,10 +210,11 @@ java.lang.Object
 </TR>
 </TABLE>
 
-<A NAME="AxisList.ConverterImpl(com.thoughtworks.xstream.mapper.Mapper)"><!-- --></A><H3>
+<A NAME="AxisList.ConverterImpl(com.thoughtworks.xstream.mapper.Mapper, com.thoughtworks.xstream.converters.reflection.ReflectionProvider)"><!-- --></A><H3>
 AxisList.ConverterImpl</H3>
 <PRE>
-public <B>AxisList.ConverterImpl</B>(com.thoughtworks.xstream.mapper.Mapper&nbsp;mapper)</PRE>
+public <B>AxisList.ConverterImpl</B>(com.thoughtworks.xstream.mapper.Mapper&nbsp;mapper,
+                              com.thoughtworks.xstream.converters.reflection.ReflectionProvider&nbsp;reflectionProvider)</PRE>
 <DL>
 </DL>
 
@@ -223,7 +234,7 @@ canConvert</H3>
 public boolean <B>canConvert</B>(java.lang.Class&nbsp;type)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE>canConvert</CODE> in interface <CODE>com.thoughtworks.xstream.converters.ConverterMatcher</CODE><DT><B>Specified by:</B><DD><CODE>canConvert</CODE> in class <CODE>com.thoughtworks.xstream.converters.collections.AbstractCollectionConverter</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>canConvert</CODE> in interface <CODE>com.thoughtworks.xstream.converters.ConverterMatcher</CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/util/RobustCollectionConverter.html#canConvert(java.lang.Class)">canConvert</A></CODE> in class <CODE><A HREF="../../hudson/util/RobustCollectionConverter.html" title="class in hudson.util">RobustCollectionConverter</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -231,30 +242,13 @@ public boolean <B>canConvert</B>(java.lang.Class&nbsp;type)</PRE>
 </DL>
 <HR>
 
-<A NAME="marshal(java.lang.Object, com.thoughtworks.xstream.io.HierarchicalStreamWriter, com.thoughtworks.xstream.converters.MarshallingContext)"><!-- --></A><H3>
-marshal</H3>
+<A NAME="createCollection(java.lang.Class)"><!-- --></A><H3>
+createCollection</H3>
 <PRE>
-public void <B>marshal</B>(java.lang.Object&nbsp;source,
-                    com.thoughtworks.xstream.io.HierarchicalStreamWriter&nbsp;writer,
-                    com.thoughtworks.xstream.converters.MarshallingContext&nbsp;context)</PRE>
+protected java.lang.Object <B>createCollection</B>(java.lang.Class&nbsp;type)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE>marshal</CODE> in interface <CODE>com.thoughtworks.xstream.converters.Converter</CODE><DT><B>Specified by:</B><DD><CODE>marshal</CODE> in class <CODE>com.thoughtworks.xstream.converters.collections.AbstractCollectionConverter</CODE></DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="unmarshal(com.thoughtworks.xstream.io.HierarchicalStreamReader, com.thoughtworks.xstream.converters.UnmarshallingContext)"><!-- --></A><H3>
-unmarshal</H3>
-<PRE>
-public <A HREF="../../hudson/matrix/AxisList.html" title="class in hudson.matrix">AxisList</A> <B>unmarshal</B>(com.thoughtworks.xstream.io.HierarchicalStreamReader&nbsp;reader,
-                          com.thoughtworks.xstream.converters.UnmarshallingContext&nbsp;context)</PRE>
-<DL>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE>unmarshal</CODE> in interface <CODE>com.thoughtworks.xstream.converters.Converter</CODE><DT><B>Specified by:</B><DD><CODE>unmarshal</CODE> in class <CODE>com.thoughtworks.xstream.converters.collections.AbstractCollectionConverter</CODE></DL>
+<DT><B>Overrides:</B><DD><CODE>createCollection</CODE> in class <CODE>com.thoughtworks.xstream.converters.collections.AbstractCollectionConverter</CODE></DL>
 </DD>
 <DD><DL>
 </DL>

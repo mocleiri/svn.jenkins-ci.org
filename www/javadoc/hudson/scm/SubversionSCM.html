@@ -5,7 +5,7 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SubversionSCM (Hudson core 1.240 API)
+SubversionSCM (Hudson core 1.241 API)
 </TITLE>
 
 <META NAME="date" CONTENT="2008-07-31">
@@ -16,7 +16,7 @@ SubversionSCM (Hudson core 1.240 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionSCM (Hudson core 1.240 API)";
+        parent.document.title="SubversionSCM (Hudson core 1.241 API)";
     }
 }
 </SCRIPT>
@@ -108,6 +108,14 @@ java.lang.Object
 <P>
 Subversion SCM.
 
+ <h2>Plugin Developer Notes</h2>
+ <p>
+ Plugins that interact with Subversion can use <A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#createAuthenticationProvider()"><CODE>SubversionSCM.DescriptorImpl.createAuthenticationProvider()</CODE></A>
+ so that it can use the credentials (username, password, etc.) that the user entered for Hudson.
+ See the javadoc of this method for the precautions you need to take if you run Subversion operations
+ remotely on slaves.
+ 
+ <h2>Implementation Notes</h2>
  <p>
  Because this instance refers to some other classes that are not necessarily
  Java serializable (like <A HREF="../../hudson/scm/SubversionSCM.html#browser"><CODE>browser</CODE></A>), remotable <A HREF="../../hudson/FilePath.FileCallable.html" title="interface in hudson"><CODE>FilePath.FileCallable</CODE></A>s all
@@ -231,6 +239,14 @@ Subversion SCM.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The returned object will be used to parse <tt>changelog.xml</tt>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.tmatesoft.svn.core.wc.SVNClientManager</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#createSvnClientManager(org.tmatesoft.svn.core.auth.ISVNAuthenticationProvider)">createSvnClientManager</A></B>(org.tmatesoft.svn.core.auth.ISVNAuthenticationProvider&nbsp;authProvider)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates <CODE>SVNClientManager</CODE>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -505,6 +521,27 @@ public boolean <B>checkout</B>(<A HREF="../../hudson/model/AbstractBuild.html" t
 <DD><CODE>java.lang.InterruptedException</CODE> - interruption is usually caused by the user aborting the build.
       this exception will cause the build to fail.
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createSvnClientManager(org.tmatesoft.svn.core.auth.ISVNAuthenticationProvider)"><!-- --></A><H3>
+createSvnClientManager</H3>
+<PRE>
+public static org.tmatesoft.svn.core.wc.SVNClientManager <B>createSvnClientManager</B>(org.tmatesoft.svn.core.auth.ISVNAuthenticationProvider&nbsp;authProvider)</PRE>
+<DL>
+<DD>Creates <CODE>SVNClientManager</CODE>.
+
+ <p>
+ This method must be executed on the slave where svn operations are performed.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>authProvider</CODE> - The value obtained from <A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#createAuthenticationProvider()"><CODE>SubversionSCM.DescriptorImpl.createAuthenticationProvider()</CODE></A>.
+      If the operation runs on slaves,
+      (and properly remoted, if the svn operations run on slaves.)</DL>
 </DD>
 </DL>
 <HR>

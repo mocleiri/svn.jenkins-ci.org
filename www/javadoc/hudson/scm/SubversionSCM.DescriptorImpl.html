@@ -5,7 +5,7 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SubversionSCM.DescriptorImpl (Hudson core 1.240 API)
+SubversionSCM.DescriptorImpl (Hudson core 1.241 API)
 </TITLE>
 
 <META NAME="date" CONTENT="2008-07-31">
@@ -16,7 +16,7 @@ SubversionSCM.DescriptorImpl (Hudson core 1.240 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionSCM.DescriptorImpl (Hudson core 1.240 API)";
+        parent.document.title="SubversionSCM.DescriptorImpl (Hudson core 1.241 API)";
     }
 }
 </SCRIPT>
@@ -405,9 +405,14 @@ public org.tmatesoft.svn.core.auth.ISVNAuthenticationProvider <B>createAuthentic
 <DL>
 <DD>Creates <CODE>ISVNAuthenticationProvider</CODE> backed by <A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#credentials"><CODE>credentials</CODE></A>.
  This method must be invoked on the master, but the returned object is remotable.
+
+ <p>
+ Therefore, to access <CODE>ISVNAuthenticationProvider</CODE>, you need to call this method
+ on the master, then pass the object to the slave side, then call
+ <A HREF="../../hudson/scm/SubversionSCM.html#createSvnClientManager(org.tmatesoft.svn.core.auth.ISVNAuthenticationProvider)"><CODE>SubversionSCM.createSvnClientManager(ISVNAuthenticationProvider)</CODE></A> on the slave.
 <P>
 <DD><DL>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/scm/SubversionSCM.html#createSvnClientManager(org.tmatesoft.svn.core.auth.ISVNAuthenticationProvider)"><CODE>SubversionSCM.createSvnClientManager(ISVNAuthenticationProvider)</CODE></A></DL>
 </DD>
 </DL>
 <HR>
