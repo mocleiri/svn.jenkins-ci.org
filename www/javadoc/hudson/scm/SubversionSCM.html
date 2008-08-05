@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SubversionSCM (Hudson core 1.242 API)
+SubversionSCM (Hudson core 1.243 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-01">
+<META NAME="date" CONTENT="2008-08-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SubversionSCM (Hudson core 1.242 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionSCM (Hudson core 1.242 API)";
+        parent.document.title="SubversionSCM (Hudson core 1.243 API)";
     }
 }
 </SCRIPT>
@@ -485,6 +485,22 @@ public void <B>buildEnvVars</B>(<A HREF="../../hudson/model/AbstractBuild.html" 
 </DL>
 <HR>
 
+<A NAME="requiresWorkspaceForPolling()"><!-- --></A><H3>
+requiresWorkspaceForPolling</H3>
+<PRE>
+public boolean <B>requiresWorkspaceForPolling</B>()</PRE>
+<DL>
+<DD>Polling can happen on the master and does not require a workspace.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/scm/SCM.html#requiresWorkspaceForPolling()">requiresWorkspaceForPolling</A></CODE> in class <CODE><A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)"><!-- --></A><H3>
 checkout</H3>
 <PRE>
@@ -755,22 +771,6 @@ public static void <B>enableSshDebug</B>(java.util.logging.Level&nbsp;level)</PR
 <P>
 <DD><DL>
 </DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="requiresWorkspaceForPolling()"><!-- --></A><H3>
-requiresWorkspaceForPolling</H3>
-<PRE>
-public boolean <B>requiresWorkspaceForPolling</B>()</PRE>
-<DL>
-<DD>Polling can happen on the master and does not require a workspace.
-<P>
-<DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/scm/SCM.html#requiresWorkspaceForPolling()">requiresWorkspaceForPolling</A></CODE> in class <CODE><A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

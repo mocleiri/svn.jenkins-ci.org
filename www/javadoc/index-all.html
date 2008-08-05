@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.242 API)
+Index (Hudson core 1.243 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-01">
+<META NAME="date" CONTENT="2008-08-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.242 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.242 API)";
+        parent.document.title="Index (Hudson core 1.243 API)";
     }
 }
 </SCRIPT>
@@ -2357,6 +2357,9 @@ Static variable in class hudson.node_monitors.<A HREF="./hudson/node_monitors/Cl
 <DD>&nbsp;
 <DT><A HREF="./hudson/node_monitors/DiskSpaceMonitor.html#DESCRIPTOR"><B>DESCRIPTOR</B></A> - 
 Static variable in class hudson.node_monitors.<A HREF="./hudson/node_monitors/DiskSpaceMonitor.html" title="class in hudson.node_monitors">DiskSpaceMonitor</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/node_monitors/ResponseTimeMonitor.html#DESCRIPTOR"><B>DESCRIPTOR</B></A> - 
+Static variable in class hudson.node_monitors.<A HREF="./hudson/node_monitors/ResponseTimeMonitor.html" title="class in hudson.node_monitors">ResponseTimeMonitor</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/node_monitors/SwapSpaceMonitor.html#DESCRIPTOR"><B>DESCRIPTOR</B></A> - 
 Static variable in class hudson.node_monitors.<A HREF="./hudson/node_monitors/SwapSpaceMonitor.html" title="class in hudson.node_monitors">SwapSpaceMonitor</A>
@@ -4886,6 +4889,9 @@ Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/DiskSpaceMo
 <DT><A HREF="./hudson/node_monitors/NodeMonitor.html#getDescriptor()"><B>getDescriptor()</B></A> - 
 Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/node_monitors/ResponseTimeMonitor.html#getDescriptor()"><B>getDescriptor()</B></A> - 
+Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/ResponseTimeMonitor.html" title="class in hudson.node_monitors">ResponseTimeMonitor</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/node_monitors/SwapSpaceMonitor.html#getDescriptor()"><B>getDescriptor()</B></A> - 
 Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/SwapSpaceMonitor.html" title="class in hudson.node_monitors">SwapSpaceMonitor</A>
 <DD>&nbsp;
@@ -5490,6 +5496,9 @@ Method in class hudson.scm.<A HREF="./hudson/scm/SubversionChangeLogSet.Path.htm
 Method in class hudson.scm.<A HREF="./hudson/scm/SCM.html" title="class in hudson.scm">SCM</A>
 <DD>Returns the applicable <A HREF="./hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> for files
  controlled by this <A HREF="./hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A>.
+<DT><A HREF="./hudson/scm/SubversionWorkspaceSelector.html#getEnabledFactories(java.io.File, java.util.Collection, boolean)"><B>getEnabledFactories(File, Collection, boolean)</B></A> - 
+Method in class hudson.scm.<A HREF="./hudson/scm/SubversionWorkspaceSelector.html" title="class in hudson.scm">SubversionWorkspaceSelector</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Fingerprint.Range.html#getEnd()"><B>getEnd()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.Range.html" title="class in hudson.model">Fingerprint.Range</A>
 <DD>&nbsp;
@@ -11765,6 +11774,9 @@ Variable in class hudson.util.<A HREF="./hudson/util/FormFieldValidator.html" ti
  that are out of your control.<DT><A HREF="./hudson/ResponseHeaderFilter.html#ResponseHeaderFilter()"><B>ResponseHeaderFilter()</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/ResponseHeaderFilter.html" title="class in hudson">ResponseHeaderFilter</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/node_monitors/ResponseTimeMonitor.html" title="class in hudson.node_monitors"><B>ResponseTimeMonitor</B></A> - Class in <A HREF="./hudson/node_monitors/package-summary.html">hudson.node_monitors</A><DD>Monitors the round-trip response time to this slave.<DT><A HREF="./hudson/node_monitors/ResponseTimeMonitor.html#ResponseTimeMonitor()"><B>ResponseTimeMonitor()</B></A> - 
+Constructor for class hudson.node_monitors.<A HREF="./hudson/node_monitors/ResponseTimeMonitor.html" title="class in hudson.node_monitors">ResponseTimeMonitor</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/WorkspaceSnapshot.html#restoreTo(hudson.FilePath)"><B>restoreTo(FilePath)</B></A> - 
 Method in class hudson.<A HREF="./hudson/WorkspaceSnapshot.html" title="class in hudson">WorkspaceSnapshot</A>
 <DD>&nbsp;
@@ -12824,9 +12836,22 @@ Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="cl
 <DT><A HREF="./hudson/scm/SubversionTagAction.html" title="class in hudson.scm"><B>SubversionTagAction</B></A> - Class in <A HREF="./hudson/scm/package-summary.html">hudson.scm</A><DD><A HREF="./hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> that lets people create tag for the given build.<DT><A HREF="./hudson/scm/SubversionTagAction.TagWorkerThread.html" title="class in hudson.scm"><B>SubversionTagAction.TagWorkerThread</B></A> - Class in <A HREF="./hudson/scm/package-summary.html">hudson.scm</A><DD>The thread that performs tagging operation asynchronously.<DT><A HREF="./hudson/scm/SubversionTagAction.TagWorkerThread.html#SubversionTagAction.TagWorkerThread(java.util.Map)"><B>SubversionTagAction.TagWorkerThread(Map&lt;SubversionSCM.SvnInfo, String&gt;)</B></A> - 
 Constructor for class hudson.scm.<A HREF="./hudson/scm/SubversionTagAction.TagWorkerThread.html" title="class in hudson.scm">SubversionTagAction.TagWorkerThread</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/scm/Messages.html#SubversionTagAction_DisplayName_HasATag()"><B>SubversionTagAction_DisplayName_HasATag()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Subversion tag
+<DT><A HREF="./hudson/scm/Messages.html#SubversionTagAction_DisplayName_HasNoTag()"><B>SubversionTagAction_DisplayName_HasNoTag()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Tag this build
+<DT><A HREF="./hudson/scm/Messages.html#SubversionTagAction_DisplayName_HasTags()"><B>SubversionTagAction_DisplayName_HasTags()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Subversion tags
 <DT><A HREF="./hudson/scm/Messages.html#SubversionUpdateEventHandler_FetchExternal(java.lang.Object, java.lang.Object, java.lang.Object)"><B>SubversionUpdateEventHandler_FetchExternal(Object, Object, Object)</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
 <DD>Fetching ''{0}'' at {1} into ''{2}''
+<DT><A HREF="./hudson/scm/SubversionWorkspaceSelector.html" title="class in hudson.scm"><B>SubversionWorkspaceSelector</B></A> - Class in <A HREF="./hudson/scm/package-summary.html">hudson.scm</A><DD><CODE>ISVNAdminAreaFactorySelector</CODE> that uses 1.4 compatible workspace for new check out,
+ but still supports 1.5 workspace, if asked to work with it.<DT><A HREF="./hudson/scm/SubversionWorkspaceSelector.html#SubversionWorkspaceSelector()"><B>SubversionWorkspaceSelector()</B></A> - 
+Constructor for class hudson.scm.<A HREF="./hudson/scm/SubversionWorkspaceSelector.html" title="class in hudson.scm">SubversionWorkspaceSelector</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Result.html#SUCCESS"><B>SUCCESS</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Result.html" title="class in hudson.model">Result</A>
 <DD>The build didn't have any fatal errors not errors.
@@ -13108,6 +13133,9 @@ Method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in
 <DT><A HREF="./hudson/node_monitors/DiskSpaceMonitor.html#toHtml(long)"><B>toHtml(long)</B></A> - 
 Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/DiskSpaceMonitor.html" title="class in hudson.node_monitors">DiskSpaceMonitor</A>
 <DD>Returns the HTML representation of the space.
+<DT><A HREF="./hudson/node_monitors/ResponseTimeMonitor.html#toHtml(long)"><B>toHtml(long)</B></A> - 
+Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/ResponseTimeMonitor.html" title="class in hudson.node_monitors">ResponseTimeMonitor</A>
+<DD>Returns the HTML representation of the result.
 <DT><A HREF="./hudson/node_monitors/SwapSpaceMonitor.html#toHtml(org.jvnet.hudson.MemoryUsage)"><B>toHtml(MemoryUsage)</B></A> - 
 Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/SwapSpaceMonitor.html" title="class in hudson.node_monitors">SwapSpaceMonitor</A>
 <DD>Returns the HTML representation of the space.
@@ -14667,6 +14695,15 @@ Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="cl
 <DT><A HREF="./hudson/scm/Messages.html#_SubversionSCM_pollChanges_remoteRevisionAt(java.lang.Object, java.lang.Object)"><B>_SubversionSCM_pollChanges_remoteRevisionAt(Object, Object)</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
 <DD>{0} is at revision {1}
+<DT><A HREF="./hudson/scm/Messages.html#_SubversionTagAction_DisplayName_HasATag()"><B>_SubversionTagAction_DisplayName_HasATag()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Subversion tag
+<DT><A HREF="./hudson/scm/Messages.html#_SubversionTagAction_DisplayName_HasNoTag()"><B>_SubversionTagAction_DisplayName_HasNoTag()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Tag this build
+<DT><A HREF="./hudson/scm/Messages.html#_SubversionTagAction_DisplayName_HasTags()"><B>_SubversionTagAction_DisplayName_HasTags()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Subversion tags
 <DT><A HREF="./hudson/scm/Messages.html#_SubversionUpdateEventHandler_FetchExternal(java.lang.Object, java.lang.Object, java.lang.Object)"><B>_SubversionUpdateEventHandler_FetchExternal(Object, Object, Object)</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
 <DD>Fetching ''{0}'' at {1} into ''{2}''

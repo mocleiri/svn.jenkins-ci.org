@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.scm (Hudson core 1.242 API)
+hudson.scm (Hudson core 1.243 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-01">
+<META NAME="date" CONTENT="2008-08-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.scm (Hudson core 1.242 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.scm (Hudson core 1.242 API)";
+        parent.document.title="hudson.scm (Hudson core 1.243 API)";
     }
 }
 </SCRIPT>
@@ -240,6 +240,11 @@ Hudson's interface with source code management systems.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/scm/SubversionTagAction.html" title="class in hudson.scm">SubversionTagAction</A></B></TD>
 <TD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> that lets people create tag for the given build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/scm/SubversionWorkspaceSelector.html" title="class in hudson.scm">SubversionWorkspaceSelector</A></B></TD>
+<TD><CODE>ISVNAdminAreaFactorySelector</CODE> that uses 1.4 compatible workspace for new check out,
+ but still supports 1.5 workspace, if asked to work with it.</TD>
 </TR>
 </TABLE>
 &nbsp;
