@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.243 API)
+Index (Hudson core 1.244 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-05">
+<META NAME="date" CONTENT="2008-08-06">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.243 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.243 API)";
+        parent.document.title="Index (Hudson core 1.244 API)";
     }
 }
 </SCRIPT>
@@ -485,6 +485,9 @@ Static method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/Messages.h
 <DT><A HREF="./hudson/model/Descriptor.html#ALL"><B>ALL</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>
 <DD>All the live instances of <A HREF="./hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.
+<DT><A HREF="./hudson/model/PageDecorator.html#ALL"><B>ALL</B></A> - 
+Static variable in class hudson.model.<A HREF="./hudson/model/PageDecorator.html" title="class in hudson.model">PageDecorator</A>
+<DD>All the registered instances.
 <DT><A HREF="./hudson/scm/EditType.html#ALL"><B>ALL</B></A> - 
 Static variable in class hudson.scm.<A HREF="./hudson/scm/EditType.html" title="class in hudson.scm">EditType</A>
 <DD>&nbsp;
@@ -530,6 +533,9 @@ Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title
 <DT><A HREF="./hudson/tasks/Messages.html#Ant_ExecFailed()"><B>Ant_ExecFailed()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>command execution failed.
+<DT><A HREF="./hudson/tasks/Messages.html#Ant_ExecutableNotFound(java.lang.Object)"><B>Ant_ExecutableNotFound(Object)</B></A> - 
+Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
+<DD>Cannot find executable from the choosen Ant installation "{0}"
 <DT><A HREF="./hudson/tasks/Messages.html#Ant_GlobalConfigNeeded()"><B>Ant_GlobalConfigNeeded()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>Maybe you need to configure where your Ant installations are?
@@ -4859,6 +4865,9 @@ Method in class hudson.model.<A HREF="./hudson/model/JobParameterDefinition.html
 <DT><A HREF="./hudson/model/JobProperty.html#getDescriptor()"><B>getDescriptor()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>
 <DD>Gets the descriptor for this instance.
+<DT><A HREF="./hudson/model/PageDecorator.html#getDescriptor()"><B>getDescriptor()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/PageDecorator.html" title="class in hudson.model">PageDecorator</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/ParameterDefinition.html#getDescriptor()"><B>getDescriptor()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>
 <DD>Gets the descriptor for this instance.
@@ -5205,6 +5214,9 @@ Method in class hudson.model.<A HREF="./hudson/model/MyView.html" title="class i
 <DT><A HREF="./hudson/model/NoFingerprintMatch.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/NoFingerprintMatch.html" title="class in hudson.model">NoFingerprintMatch</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/PageDecorator.html#getDisplayName()"><B>getDisplayName()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/PageDecorator.html" title="class in hudson.model">PageDecorator</A>
+<DD>Unless this object has additional web presence, display name is not used at all.
 <DT><A HREF="./hudson/model/ParameterDefinition.ParameterDescriptor.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParameterDefinition.ParameterDescriptor.html" title="class in hudson.model">ParameterDefinition.ParameterDescriptor</A>
 <DD>&nbsp;
@@ -6686,6 +6698,9 @@ Method in class hudson.org.apache.tools.ant.taskdefs.<A HREF="./hudson/org/apach
 <DT><A HREF="./hudson/tasks/junit/CaseResult.html#getPackageName()"><B>getPackageName()</B></A> - 
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>
 <DD>Gets the package name of a test case
+<DT><A HREF="./hudson/Functions.html#getPageDecorators()"><B>getPageDecorators()</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
+<DD>Gets all the <A HREF="./hudson/model/PageDecorator.html" title="class in hudson.model"><CODE>PageDecorator</CODE></A>s.
 <DT><A HREF="./hudson/model/ParametersDefinitionProperty.html#getParameterDefinition(java.lang.String)"><B>getParameterDefinition(String)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParametersDefinitionProperty.html" title="class in hudson.model">ParametersDefinitionProperty</A>
 <DD>Gets the <A HREF="./hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A> of the given name, if any.
@@ -10854,6 +10869,9 @@ Static method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/Messages
 <DT><A HREF="./hudson/tasks/junit/Messages.html#PackageResult_getTitle(java.lang.Object)"><B>PackageResult_getTitle(Object)</B></A> - 
 Static method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/Messages.html" title="class in hudson.tasks.junit">Messages</A>
 <DD>Test Result : {0}
+<DT><A HREF="./hudson/model/PageDecorator.html" title="class in hudson.model"><B>PageDecorator</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Participates in the rendering of HTML pages for all pages of Hudson.<DT><A HREF="./hudson/model/PageDecorator.html#PageDecorator(java.lang.Class)"><B>PageDecorator(Class&lt;? extends PageDecorator&gt;)</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/PageDecorator.html" title="class in hudson.model">PageDecorator</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#parallelLoad"><B>parallelLoad</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
@@ -13500,6 +13518,9 @@ Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.Installa
 <DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.Success.html" title="class in hudson.model"><B>UpdateCenter.InstallationJob.Success</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Indicates that the plugin was successfully installed.<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.Success.html#UpdateCenter.InstallationJob.Success()"><B>UpdateCenter.InstallationJob.Success()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.Success.html" title="class in hudson.model">UpdateCenter.InstallationJob.Success</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.PageDecoratorImpl.html" title="class in hudson.model"><B>UpdateCenter.PageDecoratorImpl</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Adds the update center data retriever to HTML.<DT><A HREF="./hudson/model/UpdateCenter.PageDecoratorImpl.html#UpdateCenter.PageDecoratorImpl()"><B>UpdateCenter.PageDecoratorImpl()</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.PageDecoratorImpl.html" title="class in hudson.model">UpdateCenter.PageDecoratorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model"><B>UpdateCenter.Plugin</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/UpdateCenter.Plugin.html#UpdateCenter.Plugin(net.sf.json.JSONObject)"><B>UpdateCenter.Plugin(JSONObject)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>
 <DD>&nbsp;
@@ -14076,6 +14097,9 @@ Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title
 <DT><A HREF="./hudson/tasks/Messages.html#_Ant_ExecFailed()"><B>_Ant_ExecFailed()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>command execution failed.
+<DT><A HREF="./hudson/tasks/Messages.html#_Ant_ExecutableNotFound(java.lang.Object)"><B>_Ant_ExecutableNotFound(Object)</B></A> - 
+Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
+<DD>Cannot find executable from the choosen Ant installation "{0}"
 <DT><A HREF="./hudson/tasks/Messages.html#_Ant_GlobalConfigNeeded()"><B>_Ant_GlobalConfigNeeded()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>Maybe you need to configure where your Ant installations are?

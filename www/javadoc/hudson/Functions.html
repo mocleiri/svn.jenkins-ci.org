@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.243 API)
+Functions (Hudson core 1.244 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-05">
+<META NAME="date" CONTENT="2008-08-06">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.243 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.243 API)";
+        parent.document.title="Functions (Hudson core 1.244 API)";
     }
 }
 </SCRIPT>
@@ -530,6 +530,14 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/PageDecorator.html" title="class in hudson.model">PageDecorator</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getPageDecorators()">getPageDecorators</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the <A HREF="../hudson/model/PageDecorator.html" title="class in hudson.model"><CODE>PageDecorator</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1891,6 +1899,19 @@ public java.lang.String <B>getCheckUrl</B>(java.lang.String&nbsp;userDefined,
                                     java.lang.String&nbsp;field)</PRE>
 <DL>
 <DD>Determines the form validation check URL. See textbox.jelly
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPageDecorators()"><!-- --></A><H3>
+getPageDecorators</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/PageDecorator.html" title="class in hudson.model">PageDecorator</A>&gt; <B>getPageDecorators</B>()</PRE>
+<DL>
+<DD>Gets all the <A HREF="../hudson/model/PageDecorator.html" title="class in hudson.model"><CODE>PageDecorator</CODE></A>s.
 <P>
 <DD><DL>
 </DL>
