@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.245 API)
+Hudson (Hudson core 1.247 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-06">
+<META NAME="date" CONTENT="2008-08-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.245 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.245 API)";
+        parent.document.title="Hudson (Hudson core 1.247 API)";
     }
 }
 </SCRIPT>
@@ -689,6 +689,15 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doTestPost(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doTestPost</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doWorkspaceCleanup(org.kohsuke.stapler.StaplerResponse)">doWorkspaceCleanup</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
@@ -801,6 +810,14 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>&lt;<A HREF="../../hudson/slaves/ComputerListener.html" title="class in hudson.slaves">ComputerListener</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getComputerListeners()">getComputerListeners</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the installed <A HREF="../../hudson/slaves/ComputerListener.html" title="class in hudson.slaves"><CODE>ComputerListener</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1514,7 +1531,7 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/View.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/View.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/View.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/View.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/View.html#getApi(org.kohsuke.stapler.StaplerRequest)">getApi</A>, <A HREF="../../hudson/model/View.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/View.html#getItemCreatePermission()">getItemCreatePermission</A>, <A HREF="../../hudson/model/View.html#getPeople()">getPeople</A>, <A HREF="../../hudson/model/View.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/View.html#hasPeople()">hasPeople</A>, <A HREF="../../hudson/model/View.html#hasPermission(hudson.security.Permission)">hasPermission</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/View.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/View.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/View.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/View.html#doRssLatest(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssLatest</A>, <A HREF="../../hudson/model/View.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/View.html#getApi(org.kohsuke.stapler.StaplerRequest)">getApi</A>, <A HREF="../../hudson/model/View.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/View.html#getItemCreatePermission()">getItemCreatePermission</A>, <A HREF="../../hudson/model/View.html#getPeople()">getPeople</A>, <A HREF="../../hudson/model/View.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/View.html#hasPeople()">hasPeople</A>, <A HREF="../../hudson/model/View.html#hasPermission(hudson.security.Permission)">hasPermission</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -2101,6 +2118,22 @@ getSCMListeners</H3>
 public <A HREF="../../hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>&lt;<A HREF="../../hudson/model/listeners/SCMListener.html" title="class in hudson.model.listeners">SCMListener</A>&gt; <B>getSCMListeners</B>()</PRE>
 <DL>
 <DD>Gets all the installed <A HREF="../../hudson/model/listeners/SCMListener.html" title="class in hudson.model.listeners"><CODE>SCMListener</CODE></A>s.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getComputerListeners()"><!-- --></A><H3>
+getComputerListeners</H3>
+<PRE>
+public <A HREF="../../hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>&lt;<A HREF="../../hudson/slaves/ComputerListener.html" title="class in hudson.slaves">ComputerListener</A>&gt; <B>getComputerListeners</B>()</PRE>
+<DL>
+<DD>Gets all the installed <A HREF="../../hudson/slaves/ComputerListener.html" title="class in hudson.slaves"><CODE>ComputerListener</CODE></A>s.
 <P>
 <DD><DL>
 </DL>
@@ -3328,6 +3361,26 @@ public void <B>doConfigSubmit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DL>
 <DD>Accepts submission from the configuration page.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doTestPost(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doTestPost</H3>
+<PRE>
+public void <B>doTestPost</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                       org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                throws java.io.IOException,
+                       javax.servlet.ServletException</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

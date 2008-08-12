@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-PackageResult (Hudson core 1.245 API)
+PackageResult (Hudson core 1.247 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-06">
+<META NAME="date" CONTENT="2008-08-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PackageResult (Hudson core 1.245 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PackageResult (Hudson core 1.245 API)";
+        parent.document.title="PackageResult (Hudson core 1.247 API)";
     }
 }
 </SCRIPT>
@@ -99,11 +99,11 @@ java.lang.Object
           <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><B>hudson.tasks.junit.PackageResult</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, java.io.Serializable</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, java.io.Serializable, java.lang.Comparable&lt;<A HREF="../../../hudson/tasks/junit/PackageResult.html" title="class in hudson.tasks.junit">PackageResult</A>&gt;</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>PackageResult</B><DT>extends <A HREF="../../../hudson/tasks/junit/TabulatedResult.html" title="class in hudson.tasks.junit">TabulatedResult</A></DL>
+<DT><PRE>public final class <B>PackageResult</B><DT>extends <A HREF="../../../hudson/tasks/junit/TabulatedResult.html" title="class in hudson.tasks.junit">TabulatedResult</A><DT>implements java.lang.Comparable&lt;<A HREF="../../../hudson/tasks/junit/PackageResult.html" title="class in hudson.tasks.junit">PackageResult</A>&gt;</DL>
 </PRE>
 
 <P>
@@ -291,6 +291,9 @@ getName</H3>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -439,6 +442,9 @@ public <A HREF="../../../hudson/tasks/junit/ClassResult.html" title="class in hu
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -483,6 +489,9 @@ compareTo</H3>
 public int <B>compareTo</B>(<A HREF="../../../hudson/tasks/junit/PackageResult.html" title="class in hudson.tasks.junit">PackageResult</A>&nbsp;that)</PRE>
 <DL>
 <DD><DL>
+<DT><B>Specified by:</B><DD><CODE>compareTo</CODE> in interface <CODE>java.lang.Comparable&lt;<A HREF="../../../hudson/tasks/junit/PackageResult.html" title="class in hudson.tasks.junit">PackageResult</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
 </DL>
 </DD>
 </DL>
@@ -493,6 +502,9 @@ getDisplayName</H3>
 <PRE>
 public java.lang.String <B>getDisplayName</B>()</PRE>
 <DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/model/ModelObject.html#getDisplayName()">getDisplayName</A></CODE> in interface <CODE><A HREF="../../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>

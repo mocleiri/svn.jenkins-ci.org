@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FeedAdapter (Hudson core 1.245 API)
+FeedAdapter (Hudson core 1.247 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-06">
+<META NAME="date" CONTENT="2008-08-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FeedAdapter (Hudson core 1.245 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FeedAdapter (Hudson core 1.245 API)";
+        parent.document.title="FeedAdapter (Hudson core 1.247 API)";
     }
 }
 </SCRIPT>
@@ -99,6 +99,11 @@ Interface FeedAdapter&lt;E&gt;</H2>
 
 <P>
 Provides a RSS feed view of the data.
+
+ <p>
+ This interface allows data structure of any form to be exposed
+ as RSS feeds, just by writing a stateless singleton adapter code that
+ implements this interface.
 <P>
 
 <P>
@@ -117,6 +122,14 @@ Provides a RSS feed view of the data.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FeedAdapter.html#getEntryAuthor(E)">getEntryAuthor</A></B>(<A HREF="../hudson/FeedAdapter.html" title="type parameter in FeedAdapter">E</A>&nbsp;entry)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Author of this entry.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -207,6 +220,8 @@ java.lang.String <B>getEntryID</B>(<A HREF="../hudson/FeedAdapter.html" title="t
 <DL>
 <DD>Unique ID of each entry.
  RSS readers use this to determine what feeds are new and what are not.
+
+ This needs to produce a tag URL as per RFC 4151, required by Atom 1.0.
 <P>
 <DD><DL>
 </DL>
@@ -234,6 +249,19 @@ getEntryTimestamp</H3>
 java.util.Calendar <B>getEntryTimestamp</B>(<A HREF="../hudson/FeedAdapter.html" title="type parameter in FeedAdapter">E</A>&nbsp;entry)</PRE>
 <DL>
 <DD>Timestamp of the last change in this entry.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEntryAuthor(java.lang.Object)"><!-- --></A><A NAME="getEntryAuthor(E)"><!-- --></A><H3>
+getEntryAuthor</H3>
+<PRE>
+java.lang.String <B>getEntryAuthor</B>(<A HREF="../hudson/FeedAdapter.html" title="type parameter in FeedAdapter">E</A>&nbsp;entry)</PRE>
+<DL>
+<DD>Author of this entry.
 <P>
 <DD><DL>
 </DL>

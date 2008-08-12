@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AtomicFileWriter (Hudson core 1.245 API)
+AtomicFileWriter (Hudson core 1.247 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-06">
+<META NAME="date" CONTENT="2008-08-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AtomicFileWriter (Hudson core 1.245 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AtomicFileWriter (Hudson core 1.245 API)";
+        parent.document.title="AtomicFileWriter (Hudson core 1.247 API)";
     }
 }
 </SCRIPT>
@@ -163,6 +163,15 @@ Buffered <CODE>FileWriter</CODE> that uses UTF-8.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/AtomicFileWriter.html#abort()">abort</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When the write operation failed and you'd like to leave the original file intact,
+ you can optionally call this method to clean up a temporary file that was created by this writer.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -360,6 +369,23 @@ public void <B>close</B>()
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE>close</CODE> in interface <CODE>java.io.Closeable</CODE><DT><B>Specified by:</B><DD><CODE>close</CODE> in class <CODE>java.io.Writer</CODE></DL>
 </DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="abort()"><!-- --></A><H3>
+abort</H3>
+<PRE>
+public void <B>abort</B>()
+           throws java.io.IOException</PRE>
+<DL>
+<DD>When the write operation failed and you'd like to leave the original file intact,
+ you can optionally call this method to clean up a temporary file that was created by this writer.
+<P>
 <DD><DL>
 
 <DT><B>Throws:</B>

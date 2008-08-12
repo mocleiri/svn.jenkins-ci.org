@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractProject (Hudson core 1.245 API)
+AbstractProject (Hudson core 1.247 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-06">
+<META NAME="date" CONTENT="2008-08-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractProject (Hudson core 1.245 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractProject (Hudson core 1.245 API)";
+        parent.document.title="AbstractProject (Hudson core 1.247 API)";
     }
 }
 </SCRIPT>
@@ -858,6 +858,23 @@ void</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(int)">scheduleBuild</A></B>(int&nbsp;quietPeriod)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.concurrent.Future&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#scheduleBuild2(int)">scheduleBuild2</A></B>(int&nbsp;quietPeriod)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules a build of this project, and returns a <CODE>Future</CODE> object
+ to wait for the completion of the build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#schedulePolling()">schedulePolling</A></B>()</CODE>
 
 <BR>
@@ -1473,6 +1490,37 @@ public boolean <B>scheduleBuild</B>()</PRE>
 <DT><B>Returns:</B><DD>true if the project is actually added to the queue.
       false if the queue contained it and therefore the add()
       was noop</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="scheduleBuild(int)"><!-- --></A><H3>
+scheduleBuild</H3>
+<PRE>
+public boolean <B>scheduleBuild</B>(int&nbsp;quietPeriod)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="scheduleBuild2(int)"><!-- --></A><H3>
+scheduleBuild2</H3>
+<PRE>
+public java.util.concurrent.Future&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt; <B>scheduleBuild2</B>(int&nbsp;quietPeriod)</PRE>
+<DL>
+<DD>Schedules a build of this project, and returns a <CODE>Future</CODE> object
+ to wait for the completion of the build.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -2365,7 +2413,8 @@ buildDescribable</H3>
 protected final &lt;T extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;&gt; java.util.List&lt;T&gt; <B>buildDescribable</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                                                                               java.util.List&lt;? extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;&nbsp;descriptors,
                                                                               java.lang.String&nbsp;prefix)
-                                                                   throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+                                                                   throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A>,
+                                                                          javax.servlet.ServletException</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -2373,7 +2422,8 @@ protected final &lt;T extends <A HREF="../../hudson/model/Describable.html" titl
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <HR>

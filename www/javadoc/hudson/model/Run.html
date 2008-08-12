@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Run (Hudson core 1.245 API)
+Run (Hudson core 1.247 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-06">
+<META NAME="date" CONTENT="2008-08-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson core 1.245 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson core 1.245 API)";
+        parent.document.title="Run (Hudson core 1.247 API)";
     }
 }
 </SCRIPT>
@@ -225,6 +225,14 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/FeedAdapter.html" title="interface in hudson"><CODE>FeedAdapter</CODE></A> to produce feed from the summary of this build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/FeedAdapter.html" title="interface in hudson">FeedAdapter</A>&lt;<A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#FEED_ADAPTER_LATEST">FEED_ADAPTER_LATEST</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/FeedAdapter.html" title="interface in hudson"><CODE>FeedAdapter</CODE></A> to produce feeds to show one build per project.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -581,6 +589,14 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A> building this job, if it's being built.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getFullDisplayName()">getFullDisplayName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1059,6 +1075,18 @@ public static final <A HREF="../../hudson/FeedAdapter.html" title="interface in 
 </DL>
 <HR>
 
+<A NAME="FEED_ADAPTER_LATEST"><!-- --></A><H3>
+FEED_ADAPTER_LATEST</H3>
+<PRE>
+public static final <A HREF="../../hudson/FeedAdapter.html" title="interface in hudson">FeedAdapter</A>&lt;<A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A>&gt; <B>FEED_ADAPTER_LATEST</B></PRE>
+<DL>
+<DD><A HREF="../../hudson/FeedAdapter.html" title="interface in hudson"><CODE>FeedAdapter</CODE></A> to produce feeds to show one build per project.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
 <A NAME="PERMISSIONS"><!-- --></A><H3>
 PERMISSIONS</H3>
 <PRE>
@@ -1483,6 +1511,20 @@ public java.lang.String <B>toString</B>()</PRE>
 <DL>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFullDisplayName()"><!-- --></A><H3>
+getFullDisplayName</H3>
+<PRE>
+public java.lang.String <B>getFullDisplayName</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
 </DD>
 <DD><DL>
 </DL>

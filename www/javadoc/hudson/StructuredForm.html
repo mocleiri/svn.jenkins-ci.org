@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-StructuredForm (Hudson core 1.245 API)
+StructuredForm (Hudson core 1.247 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-06">
+<META NAME="date" CONTENT="2008-08-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ StructuredForm (Hudson core 1.245 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StructuredForm (Hudson core 1.245 API)";
+        parent.document.title="StructuredForm (Hudson core 1.247 API)";
     }
 }
 </SCRIPT>
@@ -199,12 +199,15 @@ public <B>StructuredForm</B>()</PRE>
 <A NAME="get(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
 get</H3>
 <PRE>
-public static net.sf.json.JSONObject <B>get</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
+public static net.sf.json.JSONObject <B>get</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)
+                                  throws javax.servlet.ServletException</PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>Use <CODE>StaplerRequest.getSubmittedForm()</CODE>. Since 1.238.</I>
 <P>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <HR>

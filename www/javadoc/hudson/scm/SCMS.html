@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SCMS (Hudson core 1.245 API)
+SCMS (Hudson core 1.247 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-06">
+<META NAME="date" CONTENT="2008-08-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCMS (Hudson core 1.245 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCMS (Hudson core 1.245 API)";
+        parent.document.title="SCMS (Hudson core 1.247 API)";
     }
 }
 </SCRIPT>
@@ -228,14 +228,16 @@ public <B>SCMS</B>()</PRE>
 parseSCM</H3>
 <PRE>
 public static <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A> <B>parseSCM</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)
-                    throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+                    throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A>,
+                           javax.servlet.ServletException</PRE>
 <DL>
 <DD>Parses <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A> configuration from the submitted form.
 <P>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

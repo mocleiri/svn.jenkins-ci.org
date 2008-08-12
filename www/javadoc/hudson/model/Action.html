@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Action (Hudson core 1.245 API)
+Action (Hudson core 1.247 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-06">
+<META NAME="date" CONTENT="2008-08-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Action (Hudson core 1.245 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Action (Hudson core 1.245 API)";
+        parent.document.title="Action (Hudson core 1.247 API)";
     }
 }
 </SCRIPT>
@@ -93,7 +93,7 @@ hudson.model</FONT>
 <BR>
 Interface Action</H2>
 <DL>
-<DT><B>All Superinterfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, java.io.Serializable</DD>
+<DT><B>All Superinterfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></DD>
 </DL>
 <DL>
 <DT><B>All Known Subinterfaces:</B> <DD><A HREF="../../hudson/maven/AggregatableAction.html" title="interface in hudson.maven">AggregatableAction</A>, <A HREF="../../hudson/model/BuildBadgeAction.html" title="interface in hudson.model">BuildBadgeAction</A>, <A HREF="../../hudson/model/HealthReportingAction.html" title="interface in hudson.model">HealthReportingAction</A>, <A HREF="../../hudson/maven/MavenAggregatedReport.html" title="interface in hudson.maven">MavenAggregatedReport</A>, <A HREF="../../hudson/model/ProminentProjectAction.html" title="interface in hudson.model">ProminentProjectAction</A></DD>
@@ -103,7 +103,7 @@ Interface Action</H2>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public interface <B>Action</B><DT>extends java.io.Serializable, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></DL>
+<DT><PRE>public interface <B>Action</B><DT>extends <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></DL>
 </PRE>
 
 <P>
@@ -118,9 +118,10 @@ Object that contributes an item to the left hand side menu
  the JUnit test result trend shows up in the project top page.
  See <A HREF="../../hudson/tasks/test/TestResultProjectAction.html" title="class in hudson.tasks.test"><CODE>TestResultProjectAction</CODE></A>.
 
+ <h2>Persistence</h2>
  <p>
- Actions are often serialized as a part of <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A>
- (for example with <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>.) In some other cases,
+ Actions are often persisted as a part of <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A>
+ (for example with <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>) via XStream. In some other cases,
  <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s are transient and not persisted (such as
  when it's used with <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>).
 <P>

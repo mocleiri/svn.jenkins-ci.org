@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SlaveComputer (Hudson core 1.245 API)
+SlaveComputer (Hudson core 1.247 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-06">
+<META NAME="date" CONTENT="2008-08-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SlaveComputer (Hudson core 1.245 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SlaveComputer (Hudson core 1.245 API)";
+        parent.document.title="SlaveComputer (Hudson core 1.247 API)";
     }
 }
 </SCRIPT>
@@ -189,15 +189,6 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#doProgressiveLog(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doProgressiveLog</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handles incremental log.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#getChannel()">getChannel</A></B>()</CODE>
 
@@ -219,14 +210,6 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#getLog()">getLog</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the string representation of the slave log.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -383,7 +366,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Computer.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Computer.html#countIdle()">countIdle</A>, <A HREF="../../hudson/model/Computer.html#currentComputer()">currentComputer</A>, <A HREF="../../hudson/model/Computer.html#doDumpExportTable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDumpExportTable</A>, <A HREF="../../hudson/model/Computer.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/Computer.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/Computer.html#doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doScript</A>, <A HREF="../../hudson/model/Computer.html#doToggleOffline(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doToggleOffline</A>, <A HREF="../../hudson/model/Computer.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Computer.html#getApi()">getApi</A>, <A HREF="../../hudson/model/Computer.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/Computer.html#getCaption()">getCaption</A>, <A HREF="../../hudson/model/Computer.html#getDemandStartMilliseconds()">getDemandStartMilliseconds</A>, <A HREF="../../hudson/model/Computer.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Computer.html#getEnvVars()">getEnvVars</A>, <A HREF="../../hudson/model/Computer.html#getExecutors()">getExecutors</A>, <A HREF="../../hudson/model/Computer.html#getIcon()">getIcon</A>, <A HREF="../../hudson/model/Computer.html#getIdleStartMilliseconds()">getIdleStartMilliseconds</A>, <A HREF="../../hudson/model/Computer.html#getMonitorData()">getMonitorData</A>, <A HREF="../../hudson/model/Computer.html#getName()">getName</A>, <A HREF="../../hudson/model/Computer.html#getNumExecutors()">getNumExecutors</A>, <A HREF="../../hudson/model/Computer.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Computer.html#getSystemProperties()">getSystemProperties</A>, <A HREF="../../hudson/model/Computer.html#getThreadDump()">getThreadDump</A>, <A HREF="../../hudson/model/Computer.html#getTiedJobs()">getTiedJobs</A>, <A HREF="../../hudson/model/Computer.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Computer.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Computer.html#interrupt()">interrupt</A>, <A HREF="../../hudson/model/Computer.html#isIdle()">isIdle</A>, <A HREF="../../hudson/model/Computer.html#isOffline()">isOffline</A>, <A HREF="../../hudson/model/Computer.html#isTemporarilyOffline()">isTemporarilyOffline</A>, <A HREF="../../hudson/model/Computer.html#setTemporarilyOffline(boolean)">setTemporarilyOffline</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Computer.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Computer.html#countIdle()">countIdle</A>, <A HREF="../../hudson/model/Computer.html#currentComputer()">currentComputer</A>, <A HREF="../../hudson/model/Computer.html#doDumpExportTable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDumpExportTable</A>, <A HREF="../../hudson/model/Computer.html#doProgressiveLog(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doProgressiveLog</A>, <A HREF="../../hudson/model/Computer.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/Computer.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/Computer.html#doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doScript</A>, <A HREF="../../hudson/model/Computer.html#doToggleOffline(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doToggleOffline</A>, <A HREF="../../hudson/model/Computer.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Computer.html#getApi()">getApi</A>, <A HREF="../../hudson/model/Computer.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/Computer.html#getCaption()">getCaption</A>, <A HREF="../../hudson/model/Computer.html#getDemandStartMilliseconds()">getDemandStartMilliseconds</A>, <A HREF="../../hudson/model/Computer.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Computer.html#getEnvVars()">getEnvVars</A>, <A HREF="../../hudson/model/Computer.html#getExecutors()">getExecutors</A>, <A HREF="../../hudson/model/Computer.html#getIcon()">getIcon</A>, <A HREF="../../hudson/model/Computer.html#getIdleStartMilliseconds()">getIdleStartMilliseconds</A>, <A HREF="../../hudson/model/Computer.html#getLog()">getLog</A>, <A HREF="../../hudson/model/Computer.html#getLogFile()">getLogFile</A>, <A HREF="../../hudson/model/Computer.html#getMonitorData()">getMonitorData</A>, <A HREF="../../hudson/model/Computer.html#getName()">getName</A>, <A HREF="../../hudson/model/Computer.html#getNumExecutors()">getNumExecutors</A>, <A HREF="../../hudson/model/Computer.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Computer.html#getSystemProperties()">getSystemProperties</A>, <A HREF="../../hudson/model/Computer.html#getThreadDump()">getThreadDump</A>, <A HREF="../../hudson/model/Computer.html#getTiedJobs()">getTiedJobs</A>, <A HREF="../../hudson/model/Computer.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Computer.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Computer.html#interrupt()">interrupt</A>, <A HREF="../../hudson/model/Computer.html#isIdle()">isIdle</A>, <A HREF="../../hudson/model/Computer.html#isOffline()">isOffline</A>, <A HREF="../../hudson/model/Computer.html#isTemporarilyOffline()">isTemporarilyOffline</A>, <A HREF="../../hudson/model/Computer.html#setTemporarilyOffline(boolean)">setTemporarilyOffline</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -757,39 +740,6 @@ public void <B>tryReconnect</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getLog()"><!-- --></A><H3>
-getLog</H3>
-<PRE>
-public java.lang.String <B>getLog</B>()
-                        throws java.io.IOException</PRE>
-<DL>
-<DD>Gets the string representation of the slave log.
-<P>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="doProgressiveLog(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-doProgressiveLog</H3>
-<PRE>
-public void <B>doProgressiveLog</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                             org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                      throws java.io.IOException</PRE>
-<DL>
-<DD>Handles incremental log.
-<P>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>
