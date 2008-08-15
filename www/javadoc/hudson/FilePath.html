@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FilePath (Hudson core 1.247 API)
+FilePath (Hudson core 1.248 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-12">
+<META NAME="date" CONTENT="2008-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson core 1.247 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson core 1.247 API)";
+        parent.document.title="FilePath (Hudson core 1.248 API)";
     }
 }
 </SCRIPT>
@@ -543,6 +543,14 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#unzip(hudson.FilePath)">unzip</A></B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> represents a zip file, extracts that zip file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#validateAntFileMask(java.lang.String)">validateAntFileMask</A></B>(java.lang.String&nbsp;fileMasks)</CODE>
 
@@ -691,6 +699,29 @@ public void <B>createZipArchive</B>(java.io.OutputStream&nbsp;os,
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
   <DD>1.129</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="unzip(hudson.FilePath)"><!-- --></A><H3>
+unzip</H3>
+<PRE>
+public void <B>unzip</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)
+           throws java.io.IOException,
+                  java.lang.InterruptedException</PRE>
+<DL>
+<DD>When this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> represents a zip file, extracts that zip file.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>target</CODE> - Target directory to expand files to. All the necessary directories will be created.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.248</DD>
 </DL>
 </DD>
 </DL>
@@ -1310,7 +1341,10 @@ public int <B>copyRecursiveTo</B>(java.lang.String&nbsp;fileMask,
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>excludes</CODE> - Files to be excluded. Can be null.
+<DT><B>Parameters:</B><DD><CODE>fileMask</CODE> - Ant GLOB pattern.
+      String like "foo/bar/*.xml" Multiple patterns can be separated
+      by ',', and whitespace can surround ',' (so that you can write
+      "abc, def" and "abc,def" to mean the same thing.<DD><CODE>excludes</CODE> - Files to be excluded. Can be null.
 <DT><B>Returns:</B><DD>the number of files copied.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>

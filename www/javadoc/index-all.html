@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.247 API)
+Index (Hudson core 1.248 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-12">
+<META NAME="date" CONTENT="2008-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.247 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.247 API)";
+        parent.document.title="Index (Hudson core 1.248 API)";
     }
 }
 </SCRIPT>
@@ -2005,6 +2005,9 @@ Method in class hudson.model.<A HREF="./hudson/model/ParametersAction.html" titl
 Method in class hudson.model.<A HREF="./hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>
 <DD>Returns a <A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> so that other components like <A HREF="./hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A>s
  can perform variable substitution to reflect parameter values into the build process.
+<DT><A HREF="./hudson/model/StringParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)"><B>createVariableResolver(AbstractBuild&lt;?, ?&gt;)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/StringParameterValue.html" title="class in hudson.model">StringParameterValue</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/FilePath.html#createZipArchive(java.io.OutputStream)"><B>createZipArchive(OutputStream)</B></A> - 
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>Creates a zip file from this directory or a file and sends that to the given output stream.
@@ -2777,6 +2780,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DT><A HREF="./hudson/model/Job.html#doDoRename(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDoRename(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
 <DD>Renames this job.
+<DT><A HREF="./hudson/model/AbstractProject.html#doDoWipeOutWorkspace(org.kohsuke.stapler.StaplerResponse)"><B>doDoWipeOutWorkspace(StaplerResponse)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
+<DD>Wipes out the workspace.
 <DT><A HREF="./hudson/model/Computer.html#doDumpExportTable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDumpExportTable(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
 <DD>Dumps the contents of the export table.
@@ -13565,6 +13571,9 @@ Static variable in class hudson.model.<A HREF="./hudson/model/Result.html" title
  can pick it up and initiate the redirection.<DT><A HREF="./hudson/security/UnwrapSecurityExceptionFilter.html#UnwrapSecurityExceptionFilter()"><B>UnwrapSecurityExceptionFilter()</B></A> - 
 Constructor for class hudson.security.<A HREF="./hudson/security/UnwrapSecurityExceptionFilter.html" title="class in hudson.security">UnwrapSecurityExceptionFilter</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/FilePath.html#unzip(hudson.FilePath)"><B>unzip(FilePath)</B></A> - 
+Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
+<DD>When this <A HREF="./hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> represents a zip file, extracts that zip file.
 <DT><A HREF="./hudson/maven/MavenAggregatedReport.html#update(java.util.Map, hudson.maven.MavenBuild)"><B>update(Map&lt;MavenModule, List&lt;MavenBuild&gt;&gt;, MavenBuild)</B></A> - 
 Method in interface hudson.maven.<A HREF="./hudson/maven/MavenAggregatedReport.html" title="interface in hudson.maven">MavenAggregatedReport</A>
 <DD>Called whenever a new module build is completed, to update the
@@ -13855,7 +13864,7 @@ Static variable in class hudson.model.<A HREF="./hudson/model/Hudson.html" title
 <DT><A HREF="./hudson/model/UpdateCenter.Entry.html#version"><B>version</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/UpdateCenter.Entry.html" title="class in hudson.model">UpdateCenter.Entry</A>
 <DD>The version.
-<DT><A HREF="./hudson/util/VersionNumber.html" title="class in hudson.util"><B>VersionNumber</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Immutable representation of a dot-separated digits (such as "1.0.1").<DT><A HREF="./hudson/util/VersionNumber.html#VersionNumber(java.lang.String)"><B>VersionNumber(String)</B></A> - 
+<DT><A HREF="./hudson/util/VersionNumber.html" title="class in hudson.util"><B>VersionNumber</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Immutable representation of a dot or '-'-separated digits (such as "1.0.1" or "1.0-52").<DT><A HREF="./hudson/util/VersionNumber.html#VersionNumber(java.lang.String)"><B>VersionNumber(String)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/VersionNumber.html" title="class in hudson.util">VersionNumber</A>
 <DD>Parses a string like "1.0.2" into the version number.
 <DT><A HREF="./hudson/model/View.html" title="class in hudson.model"><B>View</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Encapsulates the rendering of the list of <A HREF="./hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A>s

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-StringParameterValue (Hudson core 1.247 API)
+StringParameterValue (Hudson core 1.248 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-12">
+<META NAME="date" CONTENT="2008-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ StringParameterValue (Hudson core 1.247 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StringParameterValue (Hudson core 1.247 API)";
+        parent.document.title="StringParameterValue (Hudson core 1.248 API)";
     }
 }
 </SCRIPT>
@@ -171,6 +171,15 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes the name/value as an environment variable.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/StringParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)">createVariableResolver</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a <A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> so that other components like <A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A>s
+ can perform variable substitution to reflect parameter values into the build process.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.ParameterValue"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -178,7 +187,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/ParameterValue.html#createBuildWrapper(hudson.model.AbstractBuild)">createBuildWrapper</A>, <A HREF="../../hudson/model/ParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)">createVariableResolver</A>, <A HREF="../../hudson/model/ParameterValue.html#getName()">getName</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/ParameterValue.html#createBuildWrapper(hudson.model.AbstractBuild)">createBuildWrapper</A>, <A HREF="../../hudson/model/ParameterValue.html#getName()">getName</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -254,6 +263,30 @@ public void <B>buildEnvVars</B>(<A HREF="../../hudson/model/AbstractBuild.html" 
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>build</CODE> - The build for which this parameter is being used. Never null.<DD><CODE>env</CODE> - never null.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createVariableResolver(hudson.model.AbstractBuild)"><!-- --></A><H3>
+createVariableResolver</H3>
+<PRE>
+public <A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;java.lang.String&gt; <B>createVariableResolver</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/ParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)">ParameterValue</A></CODE></B></DD>
+<DD>Returns a <A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> so that other components like <A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A>s
+ can perform variable substitution to reflect parameter values into the build process.
+
+ <p.
+ This is yet another means in which a <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model"><CODE>ParameterValue</CODE></A> can influence
+ a build.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/ParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)">createVariableResolver</A></CODE> in class <CODE><A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>build</CODE> - The build for which this parameter is being used. Never null.
+<DT><B>Returns:</B><DD>if the parameter value is not interested in participating to the
+      variable replacement process, return <A HREF="../../hudson/util/VariableResolver.html#NONE"><CODE>VariableResolver.NONE</CODE></A>.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

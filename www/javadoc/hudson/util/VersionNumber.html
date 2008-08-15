@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-VersionNumber (Hudson core 1.247 API)
+VersionNumber (Hudson core 1.248 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-12">
+<META NAME="date" CONTENT="2008-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ VersionNumber (Hudson core 1.247 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="VersionNumber (Hudson core 1.247 API)";
+        parent.document.title="VersionNumber (Hudson core 1.248 API)";
     }
 }
 </SCRIPT>
@@ -105,10 +105,11 @@ java.lang.Object
 </PRE>
 
 <P>
-Immutable representation of a dot-separated digits (such as "1.0.1").
+Immutable representation of a dot or '-'-separated digits (such as "1.0.1" or "1.0-52").
 
  <A HREF="../../hudson/util/VersionNumber.html" title="class in hudson.util"><CODE>VersionNumber</CODE></A>s are <CODE>Comparable</CODE>.
 
+ <h2>Special tokens</h2>
  <p>
  We allow a component to be not just a number, but also "ea", "ea1", "ea2".
  "ea" is treated as "ea0", and eaN &lt; M for any M > 0.
@@ -116,8 +117,11 @@ Immutable representation of a dot-separated digits (such as "1.0.1").
  <p>
  '*' is also allowed as a component, and '*' > M for any M > 0.
 
+ <p>
+ 'SNAPSHOT' is also allowed as a component, and "N.SNAPSHOT" is interpreted as "N-1.*"
+
  <pre>
- 2.0.* > 2.0.1 > 2.0.0 > 2.0.ea > 2.0
+ 2.0.* > 2.0.1 > 2.0.1-SNAPSHOT > 2.0.0.99 > 2.0.0 > 2.0.ea > 2.0
  </pre>
 <P>
 
