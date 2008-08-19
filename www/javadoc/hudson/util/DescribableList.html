@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-DescribableList (Hudson core 1.248 API)
+DescribableList (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DescribableList (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DescribableList (Hudson core 1.248 API)";
+        parent.document.title="DescribableList (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -147,7 +147,7 @@ Persisted list of <A HREF="../../hudson/model/Describable.html" title="interface
 <TD><CODE><B><A HREF="../../hudson/util/DescribableList.Owner.html" title="interface in hudson.util">DescribableList.Owner</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Just implement <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model"><CODE>Saveable</CODE></A>.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -161,6 +161,12 @@ Persisted list of <A HREF="../../hudson/model/Describable.html" title="interface
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/util/DescribableList.html#DescribableList(hudson.util.DescribableList.Owner)">DescribableList</A></B>(<A HREF="../../hudson/util/DescribableList.Owner.html" title="interface in hudson.util">DescribableList.Owner</A>&nbsp;owner)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/util/DescribableList.html#DescribableList(hudson.model.Saveable)"><CODE>DescribableList(Saveable)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/util/DescribableList.html#DescribableList(hudson.model.Saveable)">DescribableList</A></B>(<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>&nbsp;owner)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -260,6 +266,14 @@ Persisted list of <A HREF="../../hudson/model/Describable.html" title="interface
 <TD><CODE><B><A HREF="../../hudson/util/DescribableList.html#setOwner(hudson.util.DescribableList.Owner)">setOwner</A></B>(<A HREF="../../hudson/util/DescribableList.Owner.html" title="interface in hudson.util">DescribableList.Owner</A>&nbsp;owner)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/util/DescribableList.html#setOwner(hudson.model.Saveable)"><CODE>setOwner(Saveable)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/DescribableList.html#setOwner(hudson.model.Saveable)">setOwner</A></B>(<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>&nbsp;owner)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -314,6 +328,16 @@ DescribableList</H3>
 <PRE>
 public <B>DescribableList</B>(<A HREF="../../hudson/util/DescribableList.Owner.html" title="interface in hudson.util">DescribableList.Owner</A>&nbsp;owner)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/util/DescribableList.html#DescribableList(hudson.model.Saveable)"><CODE>DescribableList(Saveable)</CODE></A></I>
+<P>
+</DL>
+<HR>
+
+<A NAME="DescribableList(hudson.model.Saveable)"><!-- --></A><H3>
+DescribableList</H3>
+<PRE>
+public <B>DescribableList</B>(<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>&nbsp;owner)</PRE>
+<DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -330,6 +354,22 @@ public <B>DescribableList</B>(<A HREF="../../hudson/util/DescribableList.Owner.h
 setOwner</H3>
 <PRE>
 public void <B>setOwner</B>(<A HREF="../../hudson/util/DescribableList.Owner.html" title="interface in hudson.util">DescribableList.Owner</A>&nbsp;owner)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/util/DescribableList.html#setOwner(hudson.model.Saveable)"><CODE>setOwner(Saveable)</CODE></A></I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setOwner(hudson.model.Saveable)"><!-- --></A><H3>
+setOwner</H3>
+<PRE>
+public void <B>setOwner</B>(<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>&nbsp;owner)</PRE>
 <DL>
 <DD><DL>
 </DL>

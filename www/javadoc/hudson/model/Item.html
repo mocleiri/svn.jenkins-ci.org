@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Item (Hudson core 1.248 API)
+Item (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Item (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Item (Hudson core 1.248 API)";
+        parent.document.title="Item (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -93,7 +93,7 @@ hudson.model</FONT>
 <BR>
 Interface Item</H2>
 <DL>
-<DT><B>All Superinterfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></DD>
+<DT><B>All Superinterfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></DD>
 </DL>
 <DL>
 <DT><B>All Known Subinterfaces:</B> <DD><A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model">BuildableItem</A>, <A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A>, <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></DD>
@@ -621,12 +621,12 @@ void <B>save</B>()
  to save the data.
 <P>
 <DD><DL>
-</DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Saveable.html#save()">save</A></CODE> in interface <CODE><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></CODE></DL>
 </DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE> - if the persistence failed.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SlaveComputer (Hudson core 1.248 API)
+SlaveComputer (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SlaveComputer (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SlaveComputer (Hudson core 1.248 API)";
+        parent.document.title="SlaveComputer (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -201,7 +201,8 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#getJnlpJars(java.lang.String)">getJnlpJars</A></B>(java.lang.String&nbsp;fileName)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serves jar files for JNLP slave agents.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This URL binding is no longer used and moved up directly under to <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>,
+      but it's left here for now just in case some old JNLP slave agents request it.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -749,6 +750,9 @@ getJnlpJars</H3>
 <PRE>
 public <A HREF="../../hudson/model/Slave.JnlpJar.html" title="class in hudson.model">Slave.JnlpJar</A> <B>getJnlpJars</B>(java.lang.String&nbsp;fileName)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>This URL binding is no longer used and moved up directly under to <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>,
+      but it's left here for now just in case some old JNLP slave agents request it.</I>
+<P>
 <DD>Serves jar files for JNLP slave agents.
 <P>
 <DD><DL>

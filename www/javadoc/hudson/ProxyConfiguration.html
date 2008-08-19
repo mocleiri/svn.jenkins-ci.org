@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ProxyConfiguration (Hudson core 1.248 API)
+ProxyConfiguration (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ProxyConfiguration (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ProxyConfiguration (Hudson core 1.248 API)";
+        parent.document.title="ProxyConfiguration (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -96,9 +96,12 @@ Class ProxyConfiguration</H2>
 java.lang.Object
   <IMG SRC="../resources/inherit.gif" ALT="extended by "><B>hudson.ProxyConfiguration</B>
 </PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DD>
+</DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>ProxyConfiguration</B><DT>extends java.lang.Object</DL>
+<DT><PRE>public final class <B>ProxyConfiguration</B><DT>extends java.lang.Object<DT>implements <A HREF="../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DL>
 </PRE>
 
 <P>
@@ -228,7 +231,7 @@ HTTP proxy configuration.
 <TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#save()">save</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Persists the state of this object into XML.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -319,6 +322,9 @@ public java.lang.String <B>getUserName</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -327,6 +333,9 @@ getPassword</H3>
 <PRE>
 public java.lang.String <B>getPassword</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -341,6 +350,9 @@ public java.net.Proxy <B>createProxy</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -350,10 +362,19 @@ save</H3>
 public void <B>save</B>()
           throws java.io.IOException</PRE>
 <DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../hudson/model/Saveable.html#save()">Saveable</A></CODE></B></DD>
+<DD>Persists the state of this object into XML.
+
+ <p>
+ For making a bulk change efficiently, see <A HREF="../hudson/BulkChange.html" title="class in hudson"><CODE>BulkChange</CODE></A>.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/model/Saveable.html#save()">save</A></CODE> in interface <CODE><A HREF="../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></CODE></DL>
+</DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE> - if the persistence failed.</DL>
 </DD>
 </DL>
 <HR>
@@ -366,6 +387,9 @@ public static <A HREF="../hudson/XmlFile.html" title="class in hudson">XmlFile</
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -375,6 +399,9 @@ load</H3>
 public static <A HREF="../hudson/ProxyConfiguration.html" title="class in hudson">ProxyConfiguration</A> <B>load</B>()
                                throws java.io.IOException</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -389,6 +416,9 @@ open</H3>
 public static java.net.URLConnection <B>open</B>(java.net.URL&nbsp;url)
                                    throws java.io.IOException</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 
 <DT><B>Throws:</B>

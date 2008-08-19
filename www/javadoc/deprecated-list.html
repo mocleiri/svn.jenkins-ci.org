@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.248 API)
+Deprecated List (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.248 API)";
+        parent.document.title="Deprecated List (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -86,11 +86,26 @@ function windowTitle()
 </CENTER>
 <HR SIZE="4" NOSHADE>
 <B>Contents</B><UL>
+<LI><A HREF="#interface">Deprecated Interfaces</A>
 <LI><A HREF="#class">Deprecated Classes</A>
 <LI><A HREF="#method">Deprecated Methods</A>
 <LI><A HREF="#constructor">Deprecated Constructors</A>
 </UL>
 
+<A NAME="interface"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Deprecated Interfaces</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/DescribableList.Owner.html" title="interface in hudson.util">hudson.util.DescribableList.Owner</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Just implement <A HREF="hudson/model/Saveable.html" title="interface in hudson.model"><CODE>Saveable</CODE></A>.</I>&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="class"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -229,6 +244,12 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/slaves/SlaveComputer.html#getJnlpJars(java.lang.String)">hudson.slaves.SlaveComputer.getJnlpJars(String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>This URL binding is no longer used and moved up directly under to <A HREF="hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>,
+      but it's left here for now just in case some old JNLP slave agents request it.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#getJob(java.lang.String)">hudson.model.Hudson.getJob(String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Left only for the compatibility of URLs.
@@ -352,6 +373,11 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Value is controlled by <A HREF="hudson/matrix/MatrixProject.html" title="class in hudson.matrix"><CODE>MatrixProject</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/DescribableList.html#setOwner(hudson.util.DescribableList.Owner)">hudson.util.DescribableList.setOwner(DescribableList.Owner)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/util/DescribableList.html#setOwner(hudson.model.Saveable)"><CODE>DescribableList.setOwner(Saveable)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/BuildWrapper.html#setUp(hudson.model.Build, hudson.Launcher, hudson.model.BuildListener)">hudson.tasks.BuildWrapper.setUp(Build, Launcher, BuildListener)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/tasks/BuildWrapper.html#setUp(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>BuildWrapper.setUp(AbstractBuild, Launcher, BuildListener)</CODE></A> instead.</I>&nbsp;</TD>
@@ -379,6 +405,11 @@ function windowTitle()
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Deprecated Constructors</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/DescribableList.html#DescribableList(hudson.util.DescribableList.Owner)">hudson.util.DescribableList(DescribableList.Owner)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/util/DescribableList.html#DescribableList(hudson.model.Saveable)"><CODE>DescribableList.DescribableList(Saveable)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject)">hudson.model.DirectoryBrowserSupport(ModelObject)</A>

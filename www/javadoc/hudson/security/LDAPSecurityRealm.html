@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-LDAPSecurityRealm (Hudson core 1.248 API)
+LDAPSecurityRealm (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LDAPSecurityRealm (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LDAPSecurityRealm (Hudson core 1.248 API)";
+        parent.document.title="LDAPSecurityRealm (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -491,6 +491,10 @@ public <A HREF="../../hudson/security/SecurityRealm.SecurityComponents.html" tit
  (for example, if the authentication is based on LDAP, the host name of the LDAP server
  depends on the user configuration), and such configuration is expected to be
  captured as instance variables of <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> implementation.
+
+ <p>
+ Your <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> may also wants to install a servlet <CODE>Filter</CODE>
+ through <A HREF="../../hudson/util/PluginServletFilter.html" title="class in hudson.util"><CODE>PluginServletFilter</CODE></A> to do a part of the authentication.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/SecurityRealm.html#createSecurityComponents()">createSecurityComponents</A></CODE> in class <CODE><A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A></CODE></DL>

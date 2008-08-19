@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Descriptor (Hudson core 1.248 API)
+Descriptor (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Descriptor (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Descriptor (Hudson core 1.248 API)";
+        parent.document.title="Descriptor (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -97,11 +97,14 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Descriptor&lt;T&gt;</B>
 </PRE>
 <DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DD>
+</DL>
+<DL>
 <DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors">AbstractNodeMonitorDescriptor</A>, <A HREF="../../hudson/tasks/Ant.DescriptorImpl.html" title="class in hudson.tasks">Ant.DescriptorImpl</A>, <A HREF="../../hudson/tasks/BatchFile.DescriptorImpl.html" title="class in hudson.tasks">BatchFile.DescriptorImpl</A>, <A HREF="../../hudson/tasks/BuildStepDescriptor.html" title="class in hudson.tasks">BuildStepDescriptor</A>, <A HREF="../../hudson/tasks/BuildWrapperDescriptor.html" title="class in hudson.tasks">BuildWrapperDescriptor</A>, <A HREF="../../hudson/scm/browsers/FishEyeCVS.DescriptorImpl.html" title="class in hudson.scm.browsers">FishEyeCVS.DescriptorImpl</A>, <A HREF="../../hudson/scm/browsers/FishEyeSVN.DescriptorImpl.html" title="class in hudson.scm.browsers">FishEyeSVN.DescriptorImpl</A>, <A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security">GlobalMatrixAuthorizationStrategy.DescriptorImpl</A>, <A HREF="../../hudson/security/HudsonPrivateSecurityRealm.DescriptorImpl.html" title="class in hudson.security">HudsonPrivateSecurityRealm.DescriptorImpl</A>, <A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model">JobPropertyDescriptor</A>, <A HREF="../../hudson/security/LDAPSecurityRealm.DescriptorImpl.html" title="class in hudson.security">LDAPSecurityRealm.DescriptorImpl</A>, <A HREF="../../hudson/security/LegacyAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security">LegacyAuthorizationStrategy.DescriptorImpl</A>, <A HREF="../../hudson/tasks/LogRotator.LRDescriptor.html" title="class in hudson.tasks">LogRotator.LRDescriptor</A>, <A HREF="../../hudson/tasks/Maven.DescriptorImpl.html" title="class in hudson.tasks">Maven.DescriptorImpl</A>, <A HREF="../../hudson/maven/MavenReporterDescriptor.html" title="class in hudson.maven">MavenReporterDescriptor</A>, <A HREF="../../hudson/model/PageDecorator.html" title="class in hudson.model">PageDecorator</A>, <A HREF="../../hudson/model/ParameterDefinition.ParameterDescriptor.html" title="class in hudson.model">ParameterDefinition.ParameterDescriptor</A>, <A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A>, <A HREF="../../hudson/tasks/Shell.DescriptorImpl.html" title="class in hudson.tasks">Shell.DescriptorImpl</A>, <A HREF="../../hudson/scm/browsers/Sventon.DescriptorImpl.html" title="class in hudson.scm.browsers">Sventon.DescriptorImpl</A>, <A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A>, <A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers">TriggerDescriptor</A>, <A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model">UserPropertyDescriptor</A>, <A HREF="../../hudson/scm/browsers/ViewSVN.DescriptorImpl.html" title="class in hudson.scm.browsers">ViewSVN.DescriptorImpl</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>Descriptor&lt;T extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;&gt;</B><DT>extends java.lang.Object</DL>
+<DT><PRE>public abstract class <B>Descriptor&lt;T extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;&gt;</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DL>
 </PRE>
 
 <P>
@@ -388,7 +391,7 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;void</CODE></FONT></TD>
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Descriptor.html#save()">save</A></B>()</CODE>
 
 <BR>
@@ -526,6 +529,9 @@ public abstract java.lang.String <B>getDisplayName</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -542,6 +548,9 @@ public java.lang.String <B>getCheckUrl</B>(java.lang.String&nbsp;fieldName)</PRE
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -552,6 +561,9 @@ public java.lang.String <B>getJsonSafeClassName</B>()</PRE>
 <DL>
 <DD>Gets the class name nicely escaped to be usable as a key in the structured form submission.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -567,6 +579,9 @@ public <A HREF="../../hudson/model/Descriptor.html" title="type parameter in Des
 <DD><B>Deprecated.</B>&nbsp;<I>Implement <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>newInstance(StaplerRequest, JSONObject)</CODE></A> method instead.
       Deprecated as of 1.145.</I>
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -597,6 +612,9 @@ public <A HREF="../../hudson/model/Descriptor.html" title="type parameter in Des
  ... which performs the databinding on the constructor of <A HREF="../../hudson/model/Descriptor.html#clazz"><CODE>clazz</CODE></A>.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 <DT><B>Parameters:</B><DD><CODE>req</CODE> - Always non-null. This object includes represents the entire submisison.<DD><CODE>formData</CODE> - The JSON object that captures the configuration data for this <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.
       See http://hudson.gotdns.com/wiki/display/HUDSON/Structured+Form+Submission
 <DT><B>Throws:</B>
@@ -621,6 +639,9 @@ public java.lang.String <B>getHelpFile</B>()</PRE>
  to refer to Jelly script <tt>abc.jelly</tt> or a method <tt>EmmaPublisher.doAbc()</tt>.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Returns:</B><DD>null to indicate that there's no help.</DL>
 </DD>
@@ -637,6 +658,9 @@ public final boolean <B>isInstance</B>(<A HREF="../../hudson/model/Descriptor.ht
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -649,6 +673,9 @@ configure</H3>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>As of 1.64. Use <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)"><CODE>configure(StaplerRequest)</CODE></A>.</I>
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -665,6 +692,9 @@ public boolean <B>configure</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>As of 1.239, use <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>configure(StaplerRequest, JSONObject)</CODE></A>.</I>
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -685,6 +715,9 @@ public boolean <B>configure</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
  Can be overriden to store descriptor-specific information.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 <DT><B>Parameters:</B><DD><CODE>formData</CODE> - The JSON object that captures the configuration data for this <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.
       See http://hudson.gotdns.com/wiki/display/HUDSON/Structured+Form+Submission
 <DT><B>Returns:</B><DD>false
@@ -703,6 +736,9 @@ public java.lang.String <B>getConfigPage</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -711,6 +747,9 @@ getGlobalConfigPage</H3>
 <PRE>
 public java.lang.String <B>getGlobalConfigPage</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -726,16 +765,22 @@ protected final java.lang.String <B>getViewPage</B>(java.lang.Class&lt;?&gt;&nbs
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
 <A NAME="save()"><!-- --></A><H3>
 save</H3>
 <PRE>
-protected void <B>save</B>()</PRE>
+public void <B>save</B>()</PRE>
 <DL>
 <DD>Saves the configuration info to the disk.
 <P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Saveable.html#save()">save</A></CODE> in interface <CODE><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -757,6 +802,9 @@ protected void <B>load</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -772,6 +820,9 @@ protected void <B>convert</B>(java.util.Map&lt;java.lang.String,java.lang.Object
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -780,6 +831,9 @@ toArray</H3>
 <PRE>
 public static &lt;T&gt; T[] <B>toArray</B>(T...&nbsp;values)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -794,6 +848,9 @@ public static &lt;T&gt; java.util.List&lt;T&gt; <B>toList</B>(T...&nbsp;values)<
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -802,6 +859,9 @@ toMap</H3>
 <PRE>
 public static &lt;T extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;&gt; java.util.Map&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;,T&gt; <B>toMap</B>(java.lang.Iterable&lt;T&gt;&nbsp;describables)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -820,6 +880,9 @@ public static &lt;T extends <A HREF="../../hudson/model/Describable.html" title=
 <DD>Used to build <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A> instance list from &lt;f:hetero-list> tag.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 <DT><B>Parameters:</B><DD><CODE>req</CODE> - Request that represents the form submission.<DD><CODE>formData</CODE> - Structured form data that represents the contains data for the list of describables.<DD><CODE>key</CODE> - The JSON property name for 'formData' that represents the data for the list of describables.<DD><CODE>descriptors</CODE> - List of descriptors to create instances from.
 <DT><B>Returns:</B><DD>Can be empty but never null.
 <DT><B>Throws:</B>
@@ -836,6 +899,9 @@ public static &lt;T extends <A HREF="../../hudson/model/Descriptor.html" title="
 <DL>
 <DD>Finds a descriptor from a collection by its class name.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>

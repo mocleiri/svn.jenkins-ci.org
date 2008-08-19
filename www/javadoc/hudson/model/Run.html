@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Run (Hudson core 1.248 API)
+Run (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson core 1.248 API)";
+        parent.document.title="Run (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -99,7 +99,7 @@ java.lang.Object
           <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Run&lt;JobT,RunT&gt;</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, java.lang.Comparable&lt;RunT&gt;</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, java.lang.Comparable&lt;RunT&gt;</DD>
 </DL>
 <DL>
 <DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>, <A HREF="../../hudson/model/ExternalRun.html" title="class in hudson.model">ExternalRun</A></DD>
@@ -107,7 +107,7 @@ java.lang.Object
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1">@ExportedBean
-</FONT>public abstract class <B>Run&lt;JobT extends <A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&lt;JobT,RunT&gt;,RunT extends Run&lt;JobT,RunT&gt;&gt;</B><DT>extends <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">Actionable</A><DT>implements <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, java.lang.Comparable&lt;RunT&gt;, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></DL>
+</FONT>public abstract class <B>Run&lt;JobT extends <A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&lt;JobT,RunT&gt;,RunT extends Run&lt;JobT,RunT&gt;&gt;</B><DT>extends <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">Actionable</A><DT>implements <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, java.lang.Comparable&lt;RunT&gt;, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A></DL>
 </PRE>
 
 <P>
@@ -1704,7 +1704,7 @@ public java.io.File <B>getRootDir</B>()</PRE>
  Files related to this <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A> should be stored below this directory.
 <P>
 <DD><DL>
-</DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/PersistenceRoot.html#getRootDir()">getRootDir</A></CODE> in interface <CODE><A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -1936,12 +1936,12 @@ public void <B>save</B>()
 <DD>Save the settings to a file.
 <P>
 <DD><DL>
-</DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Saveable.html#save()">save</A></CODE> in interface <CODE><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></CODE></DL>
 </DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE> - if the persistence failed.</DL>
 </DD>
 </DL>
 <HR>

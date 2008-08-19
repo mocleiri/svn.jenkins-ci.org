@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-GlobalMatrixAuthorizationStrategy (Hudson core 1.248 API)
+GlobalMatrixAuthorizationStrategy (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ GlobalMatrixAuthorizationStrategy (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="GlobalMatrixAuthorizationStrategy (Hudson core 1.248 API)";
+        parent.document.title="GlobalMatrixAuthorizationStrategy (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -199,6 +199,15 @@ Role-based authorization via a matrix.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html#add(hudson.security.Permission, java.lang.String)">add</A></B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p,
+    java.lang.String&nbsp;sid)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds to <A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html#grantedPermissions"><CODE>grantedPermissions</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;java.lang.String&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html#getAllSIDs()">getAllSIDs</A></B>()</CODE>
 
@@ -307,6 +316,22 @@ public <B>GlobalMatrixAuthorizationStrategy</B>()</PRE>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="add(hudson.security.Permission, java.lang.String)"><!-- --></A><H3>
+add</H3>
+<PRE>
+public void <B>add</B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p,
+                java.lang.String&nbsp;sid)</PRE>
+<DL>
+<DD>Adds to <A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html#grantedPermissions"><CODE>grantedPermissions</CODE></A>.
+ Use of this method should be limited during construction,
+ as this object itself is considered immutable once populated.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="getRootACL()"><!-- --></A><H3>
 getRootACL</H3>

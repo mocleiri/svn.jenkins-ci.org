@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Class Hierarchy (Hudson core 1.248 API)
+Class Hierarchy (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Class Hierarchy (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Class Hierarchy (Hudson core 1.248 API)";
+        parent.document.title="Class Hierarchy (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -160,7 +160,7 @@ Class Hierarchy
 </UL>
 </UL>
 </UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Run.html" title="class in hudson.model"><B>Run</B></A>&lt;JobT,RunT&gt; (implements hudson.security.<A HREF="hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, java.lang.Comparable&lt;T&gt;, hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Run.html" title="class in hudson.model"><B>Run</B></A>&lt;JobT,RunT&gt; (implements hudson.security.<A HREF="hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, java.lang.Comparable&lt;T&gt;, hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, hudson.model.<A HREF="hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>)
 <UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/AbstractBuild.html" title="class in hudson.model"><B>AbstractBuild</B></A>&lt;P,R&gt; (implements hudson.model.<A HREF="hudson/model/Queue.Executable.html" title="interface in hudson.model">Queue.Executable</A>)
 <UL>
@@ -183,7 +183,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.maven.reporters.<A HREF="hudson/maven/reporters/MavenArtifactRecord.html" title="class in hudson.maven.reporters"><B>MavenArtifactRecord</B></A> (implements hudson.maven.<A HREF="hudson/maven/AggregatableAction.html" title="interface in hudson.maven">AggregatableAction</A>)
 </UL>
 </UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/User.html" title="class in hudson.model"><B>User</B></A> (implements hudson.security.<A HREF="hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>)
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/User.html" title="class in hudson.model"><B>User</B></A> (implements hudson.security.<A HREF="hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, hudson.model.<A HREF="hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/View.html" title="class in hudson.model"><B>View</B></A> (implements hudson.security.<A HREF="hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>)
 <UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/Hudson.html" title="class in hudson.model"><B>Hudson</B></A> (implements hudson.model.<A HREF="hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;T&gt;, hudson.model.<A HREF="hudson/model/Node.html" title="interface in hudson.model">Node</A>, org.kohsuke.stapler.StaplerProxy)
@@ -228,7 +228,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.security.<A HREF="hudson/security/AuthenticationManagerProxy.html" title="class in hudson.security"><B>AuthenticationManagerProxy</B></A> (implements org.acegisecurity.AuthenticationManager)
 <LI TYPE="circle">org.acegisecurity.ui.webapp.AuthenticationProcessingFilterEntryPoint (implements org.acegisecurity.ui.AuthenticationEntryPoint, org.springframework.beans.factory.InitializingBean)
 <UL>
-<LI TYPE="circle">hudson.security.<A HREF="hudson/security/LegacyAuthenticationProcessingFilterEntryPoint.html" title="class in hudson.security"><B>LegacyAuthenticationProcessingFilterEntryPoint</B></A></UL>
+<LI TYPE="circle">hudson.security.<A HREF="hudson/security/HudsonAuthenticationEntryPoint.html" title="class in hudson.security"><B>HudsonAuthenticationEntryPoint</B></A></UL>
 <LI TYPE="circle">hudson.security.<A HREF="hudson/security/AuthorizationMatrixProperty.ConverterImpl.html" title="class in hudson.security"><B>AuthorizationMatrixProperty.ConverterImpl</B></A> (implements com.thoughtworks.xstream.converters.Converter)
 <LI TYPE="circle">hudson.security.<A HREF="hudson/security/AuthorizationStrategy.html" title="class in hudson.security"><B>AuthorizationStrategy</B></A> (implements hudson.model.<A HREF="hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
@@ -258,7 +258,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/Mailer.html" title="class in hudson.tasks"><B>Mailer</B></A><LI TYPE="circle">hudson.maven.<A HREF="hudson/maven/MavenRedeployer.html" title="class in hudson.maven"><B>MavenRedeployer</B></A><LI TYPE="circle">hudson.maven.<A HREF="hudson/maven/RedeployPublisher.html" title="class in hudson.maven"><B>RedeployPublisher</B></A></UL>
 </UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><B>BuildWrapper</B></A> (implements hudson.model.<A HREF="hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
-<LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/BuildWrapper.Environment.html" title="class in hudson.tasks"><B>BuildWrapper.Environment</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/BuildWrappers.html" title="class in hudson.tasks"><B>BuildWrappers</B></A><LI TYPE="circle">hudson.util.<A HREF="hudson/util/CaseInsensitiveComparator.html" title="class in hudson.util"><B>CaseInsensitiveComparator</B></A> (implements java.util.Comparator&lt;T&gt;, java.io.Serializable)
+<LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/BuildWrapper.Environment.html" title="class in hudson.tasks"><B>BuildWrapper.Environment</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/BuildWrappers.html" title="class in hudson.tasks"><B>BuildWrappers</B></A><LI TYPE="circle">hudson.<A HREF="hudson/BulkChange.html" title="class in hudson"><B>BulkChange</B></A><LI TYPE="circle">hudson.util.<A HREF="hudson/util/CaseInsensitiveComparator.html" title="class in hudson.util"><B>CaseInsensitiveComparator</B></A> (implements java.util.Comparator&lt;T&gt;, java.io.Serializable)
 <LI TYPE="circle">hudson.security.<A HREF="hudson/security/ChainedServletFilter.html" title="class in hudson.security"><B>ChainedServletFilter</B></A> (implements javax.servlet.Filter)
 <LI TYPE="circle">hudson.scm.<A HREF="hudson/scm/ChangeLogAnnotator.html" title="class in hudson.scm"><B>ChangeLogAnnotator</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <LI TYPE="circle">hudson.scm.<A HREF="hudson/scm/ChangeLogParser.html" title="class in hudson.scm"><B>ChangeLogParser</B></A><UL>
@@ -297,7 +297,8 @@ Class Hierarchy
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/DependencyGraph.html" title="class in hudson.model"><B>DependencyGraph</B></A> (implements java.util.Comparator&lt;T&gt;)
 <LI TYPE="circle">hudson.<A HREF="hudson/DependencyRunner.html" title="class in hudson"><B>DependencyRunner</B></A> (implements java.lang.Runnable)
 <LI TYPE="circle">hudson.util.<A HREF="hudson/util/DescribableList.html" title="class in hudson.util"><B>DescribableList</B></A>&lt;T,D&gt; (implements java.lang.Iterable&lt;T&gt;)
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Descriptor.html" title="class in hudson.model"><B>Descriptor</B></A>&lt;T&gt;<UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Descriptor.html" title="class in hudson.model"><B>Descriptor</B></A>&lt;T&gt; (implements hudson.model.<A HREF="hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
+<UL>
 <LI TYPE="circle">hudson.node_monitors.<A HREF="hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors"><B>AbstractNodeMonitorDescriptor</B></A>&lt;T&gt;<LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/Ant.DescriptorImpl.html" title="class in hudson.tasks"><B>Ant.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/BatchFile.DescriptorImpl.html" title="class in hudson.tasks"><B>BatchFile.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/BuildStepDescriptor.html" title="class in hudson.tasks"><B>BuildStepDescriptor</B></A>&lt;T&gt;<UL>
 <LI TYPE="circle">hudson.tasks.test.<A HREF="hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html" title="class in hudson.tasks.test"><B>AggregatedTestResultPublisher.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/ArtifactArchiver.DescriptorImpl.html" title="class in hudson.tasks"><B>ArtifactArchiver.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/BuildTrigger.DescriptorImpl.html" title="class in hudson.tasks"><B>BuildTrigger.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/Fingerprinter.DescriptorImpl.html" title="class in hudson.tasks"><B>Fingerprinter.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/JavadocArchiver.DescriptorImpl.html" title="class in hudson.tasks"><B>JavadocArchiver.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.junit.<A HREF="hudson/tasks/junit/JUnitResultArchiver.DescriptorImpl.html" title="class in hudson.tasks.junit"><B>JUnitResultArchiver.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/Mailer.DescriptorImpl.html" title="class in hudson.tasks"><B>Mailer.DescriptorImpl</B></A><LI TYPE="circle">hudson.maven.<A HREF="hudson/maven/MavenRedeployer.DescriptorImpl.html" title="class in hudson.maven"><B>MavenRedeployer.DescriptorImpl</B></A><LI TYPE="circle">hudson.maven.<A HREF="hudson/maven/RedeployPublisher.DescriptorImpl.html" title="class in hudson.maven"><B>RedeployPublisher.DescriptorImpl</B></A></UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/BuildWrapperDescriptor.html" title="class in hudson.tasks"><B>BuildWrapperDescriptor</B></A><LI TYPE="circle">hudson.scm.browsers.<A HREF="hudson/scm/browsers/FishEyeCVS.DescriptorImpl.html" title="class in hudson.scm.browsers"><B>FishEyeCVS.DescriptorImpl</B></A><LI TYPE="circle">hudson.scm.browsers.<A HREF="hudson/scm/browsers/FishEyeSVN.DescriptorImpl.html" title="class in hudson.scm.browsers"><B>FishEyeSVN.DescriptorImpl</B></A><LI TYPE="circle">hudson.security.<A HREF="hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security"><B>GlobalMatrixAuthorizationStrategy.DescriptorImpl</B></A><LI TYPE="circle">hudson.security.<A HREF="hudson/security/HudsonPrivateSecurityRealm.DescriptorImpl.html" title="class in hudson.security"><B>HudsonPrivateSecurityRealm.DescriptorImpl</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/JobPropertyDescriptor.html" title="class in hudson.model"><B>JobPropertyDescriptor</B></A><UL>
@@ -331,7 +332,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.maven.<A HREF="hudson/maven/ExecutedMojo.html" title="class in hudson.maven"><B>ExecutedMojo</B></A> (implements java.io.Serializable)
 <LI TYPE="circle">hudson.maven.<A HREF="hudson/maven/ExecutedMojo.Cache.html" title="class in hudson.maven"><B>ExecutedMojo.Cache</B></A><LI TYPE="circle">hudson.<A HREF="hudson/FilePath.html" title="class in hudson"><B>FilePath</B></A> (implements java.io.Serializable)
 <LI TYPE="circle">hudson.<A HREF="hudson/FileSystemProvisioner.html" title="class in hudson"><B>FileSystemProvisioner</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Fingerprint.html" title="class in hudson.model"><B>Fingerprint</B></A> (implements hudson.model.<A HREF="hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>)
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Fingerprint.html" title="class in hudson.model"><B>Fingerprint</B></A> (implements hudson.model.<A HREF="hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, hudson.model.<A HREF="hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/Fingerprint.BuildPtr.html" title="class in hudson.model"><B>Fingerprint.BuildPtr</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/Fingerprint.Range.html" title="class in hudson.model"><B>Fingerprint.Range</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/Fingerprint.RangeItem.html" title="class in hudson.model"><B>Fingerprint.RangeItem</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model"><B>Fingerprint.RangeSet</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/Fingerprinter.FingerprintAction.html" title="class in hudson.tasks"><B>Fingerprinter.FingerprintAction</B></A> (implements hudson.model.<A HREF="hudson/model/Action.html" title="interface in hudson.model">Action</A>)
 <LI TYPE="circle">hudson.search.<A HREF="hudson/search/FixedSet.html" title="class in hudson.search"><B>FixedSet</B></A> (implements hudson.search.<A HREF="hudson/search/SearchIndex.html" title="interface in hudson.search">SearchIndex</A>)
 <LI TYPE="circle">hudson.util.<A HREF="hudson/util/FormFieldValidator.html" title="class in hudson.util"><B>FormFieldValidator</B></A><UL>
@@ -426,7 +427,8 @@ Class Hierarchy
 </UL>
 </UL>
 <LI TYPE="circle">hudson.security.<A HREF="hudson/security/Permission.html" title="class in hudson.security"><B>Permission</B></A><LI TYPE="circle">hudson.security.<A HREF="hudson/security/PermissionGroup.html" title="class in hudson.security"><B>PermissionGroup</B></A> (implements java.lang.Comparable&lt;T&gt;, java.lang.Iterable&lt;T&gt;)
-<LI TYPE="circle">hudson.<A HREF="hudson/Plugin.html" title="class in hudson"><B>Plugin</B></A><LI TYPE="circle">hudson.<A HREF="hudson/PluginManager.FailedPlugin.html" title="class in hudson"><B>PluginManager.FailedPlugin</B></A><LI TYPE="circle">hudson.maven.<A HREF="hudson/maven/PluginName.html" title="class in hudson.maven"><B>PluginName</B></A><LI TYPE="circle">hudson.util.<A HREF="hudson/util/PluginServletFilter.html" title="class in hudson.util"><B>PluginServletFilter</B></A> (implements javax.servlet.Filter)
+<LI TYPE="circle">hudson.<A HREF="hudson/Plugin.html" title="class in hudson"><B>Plugin</B></A> (implements hudson.model.<A HREF="hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
+<LI TYPE="circle">hudson.<A HREF="hudson/PluginManager.FailedPlugin.html" title="class in hudson"><B>PluginManager.FailedPlugin</B></A><LI TYPE="circle">hudson.maven.<A HREF="hudson/maven/PluginName.html" title="class in hudson.maven"><B>PluginName</B></A><LI TYPE="circle">hudson.util.<A HREF="hudson/util/PluginServletFilter.html" title="class in hudson.util"><B>PluginServletFilter</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, javax.servlet.Filter)
 <LI TYPE="circle">hudson.<A HREF="hudson/PluginWrapper.html" title="class in hudson"><B>PluginWrapper</B></A><LI TYPE="circle">hudson.<A HREF="hudson/Proc.html" title="class in hudson"><B>Proc</B></A><UL>
 <LI TYPE="circle">hudson.<A HREF="hudson/Proc.LocalProc.html" title="class in hudson"><B>Proc.LocalProc</B></A><LI TYPE="circle">hudson.<A HREF="hudson/Proc.RemoteProc.html" title="class in hudson"><B>Proc.RemoteProc</B></A></UL>
 <LI TYPE="circle">hudson.maven.<A HREF="hudson/maven/ProcessCache.html" title="class in hudson.maven"><B>ProcessCache</B></A><LI TYPE="circle">hudson.util.<A HREF="hudson/util/ProcessTreeKiller.html" title="class in hudson.util"><B>ProcessTreeKiller</B></A><LI TYPE="circle">org.apache.tools.ant.ProjectComponent (implements java.lang.Cloneable)
@@ -442,7 +444,8 @@ Class Hierarchy
 <LI TYPE="circle">hudson.org.apache.tools.ant.taskdefs.cvslib.<A HREF="hudson/org/apache/tools/ant/taskdefs/cvslib/ChangeLogTask.html" title="class in hudson.org.apache.tools.ant.taskdefs.cvslib"><B>ChangeLogTask</B></A></UL>
 </UL>
 </UL>
-<LI TYPE="circle">hudson.util.<A HREF="hudson/util/Protector.html" title="class in hudson.util"><B>Protector</B></A><LI TYPE="circle">hudson.<A HREF="hudson/ProxyConfiguration.html" title="class in hudson"><B>ProxyConfiguration</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.Item.html" title="class in hudson.model"><B>Queue.Item</B></A><UL>
+<LI TYPE="circle">hudson.util.<A HREF="hudson/util/Protector.html" title="class in hudson.util"><B>Protector</B></A><LI TYPE="circle">hudson.<A HREF="hudson/ProxyConfiguration.html" title="class in hudson"><B>ProxyConfiguration</B></A> (implements hudson.model.<A HREF="hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.Item.html" title="class in hudson.model"><B>Queue.Item</B></A><UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.NotWaitingItem.html" title="class in hudson.model"><B>Queue.NotWaitingItem</B></A><UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.BlockedItem.html" title="class in hudson.model"><B>Queue.BlockedItem</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.BuildableItem.html" title="class in hudson.model"><B>Queue.BuildableItem</B></A></UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.WaitingItem.html" title="class in hudson.model"><B>Queue.WaitingItem</B></A> (implements java.lang.Comparable&lt;T&gt;)
@@ -460,7 +463,8 @@ Class Hierarchy
 <LI TYPE="circle">hudson.scm.browsers.<A HREF="hudson/scm/browsers/CollabNetSVN.html" title="class in hudson.scm.browsers"><B>CollabNetSVN</B></A><LI TYPE="circle">hudson.scm.browsers.<A HREF="hudson/scm/browsers/FishEyeSVN.html" title="class in hudson.scm.browsers"><B>FishEyeSVN</B></A><LI TYPE="circle">hudson.scm.browsers.<A HREF="hudson/scm/browsers/Sventon.html" title="class in hudson.scm.browsers"><B>Sventon</B></A><LI TYPE="circle">hudson.scm.browsers.<A HREF="hudson/scm/browsers/ViewSVN.html" title="class in hudson.scm.browsers"><B>ViewSVN</B></A><LI TYPE="circle">hudson.scm.browsers.<A HREF="hudson/scm/browsers/WebSVN.html" title="class in hudson.scm.browsers"><B>WebSVN</B></A></UL>
 </UL>
 <LI TYPE="circle">hudson.scm.<A HREF="hudson/scm/RepositoryBrowsers.html" title="class in hudson.scm"><B>RepositoryBrowsers</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/Resource.html" title="class in hudson.model"><B>Resource</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/ResourceController.html" title="class in hudson.model"><B>ResourceController</B></A><UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.html" title="class in hudson.model"><B>Queue</B></A></UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.html" title="class in hudson.model"><B>Queue</B></A> (implements hudson.model.<A HREF="hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
+</UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/ResourceList.html" title="class in hudson.model"><B>ResourceList</B></A><LI TYPE="circle">hudson.<A HREF="hudson/ResponseHeaderFilter.html" title="class in hudson"><B>ResponseHeaderFilter</B></A> (implements javax.servlet.Filter)
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/Result.html" title="class in hudson.model"><B>Result</B></A> (implements org.kohsuke.stapler.export.CustomExportedBean, java.io.Serializable)
 <LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><B>RetentionStrategy</B></A>&lt;T&gt; (implements hudson.model.<A HREF="hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
@@ -578,7 +582,7 @@ Interface Hierarchy
 <LI TYPE="circle">hudson.security.<A HREF="hudson/security/AccessControlled.html" title="interface in hudson.security"><B>AccessControlled</B></A><LI TYPE="circle">hudson.util.spring.<A HREF="hudson/util/spring/BeanConfiguration.html" title="interface in hudson.util.spring"><B>BeanConfiguration</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><B>BuildStep</B></A><LI TYPE="circle">hudson.scheduler.<A HREF="hudson/scheduler/CrontabParserTokenTypes.html" title="interface in hudson.scheduler"><B>CrontabParserTokenTypes</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/DependecyDeclarer.html" title="interface in hudson.model"><B>DependecyDeclarer</B></A><LI TYPE="circle">hudson.<A HREF="hudson/DependencyRunner.ProjectRunnable.html" title="interface in hudson"><B>DependencyRunner.ProjectRunnable</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/Describable.html" title="interface in hudson.model"><B>Describable</B></A>&lt;T&gt;<UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/TopLevelItem.html" title="interface in hudson.model"><B>TopLevelItem</B></A> (also extends hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, hudson.model.<A HREF="hudson/model/Item.html" title="interface in hudson.model">Item</A>)
 </UL>
-<LI TYPE="circle">hudson.util.<A HREF="hudson/util/DescribableList.Owner.html" title="interface in hudson.util"><B>DescribableList.Owner</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/ExecutorListener.html" title="interface in hudson.model"><B>ExecutorListener</B></A><LI TYPE="circle">hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson"><B>ExtensionPoint</B></A><UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/ExecutorListener.html" title="interface in hudson.model"><B>ExecutorListener</B></A><LI TYPE="circle">hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson"><B>ExtensionPoint</B></A><UL>
 <LI TYPE="circle">hudson.matrix.<A HREF="hudson/matrix/MatrixAggregatable.html" title="interface in hudson.matrix"><B>MatrixAggregatable</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/TopLevelItem.html" title="interface in hudson.model"><B>TopLevelItem</B></A> (also extends hudson.model.<A HREF="hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.model.<A HREF="hudson/model/Item.html" title="interface in hudson.model">Item</A>)
 </UL>
 <LI TYPE="circle">hudson.<A HREF="hudson/FeedAdapter.html" title="interface in hudson"><B>FeedAdapter</B></A>&lt;E&gt;<LI TYPE="circle">hudson.util.<A HREF="hudson/util/Function1.html" title="interface in hudson.util"><B>Function1</B></A>&lt;R,P1&gt;<LI TYPE="circle">hudson.widgets.<A HREF="hudson/widgets/HistoryWidget.Adapter.html" title="interface in hudson.widgets"><B>HistoryWidget.Adapter</B></A>&lt;T&gt;<LI TYPE="circle">hudson.util.<A HREF="hudson/util/InvocationInterceptor.html" title="interface in hudson.util"><B>InvocationInterceptor</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/LabelFinder.html" title="interface in hudson.tasks"><B>LabelFinder</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/Maven.ProjectWithMaven.html" title="interface in hudson.tasks"><B>Maven.ProjectWithMaven</B></A><LI TYPE="circle">hudson.maven.<A HREF="hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven"><B>MavenBuildProxy</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/ModelObject.html" title="interface in hudson.model"><B>ModelObject</B></A><UL>
@@ -617,7 +621,32 @@ Interface Hierarchy
 </UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/TopLevelItem.html" title="interface in hudson.model"><B>TopLevelItem</B></A> (also extends hudson.model.<A HREF="hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, hudson.model.<A HREF="hudson/model/Item.html" title="interface in hudson.model">Item</A>)
 </UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Node.html" title="interface in hudson.model"><B>Node</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/PersistenceRoot.html" title="interface in hudson.model"><B>PersistenceRoot</B></A><UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Node.html" title="interface in hudson.model"><B>Node</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/ResourceActivity.html" title="interface in hudson.model"><B>ResourceActivity</B></A><UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/BuildableItem.html" title="interface in hudson.model"><B>BuildableItem</B></A> (also extends hudson.model.<A HREF="hudson/model/Item.html" title="interface in hudson.model">Item</A>, hudson.model.<A HREF="hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>)
+<UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/SCMedItem.html" title="interface in hudson.model"><B>SCMedItem</B></A></UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.Task.html" title="interface in hudson.model"><B>Queue.Task</B></A> (also extends hudson.model.<A HREF="hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>)
+<UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/BuildableItem.html" title="interface in hudson.model"><B>BuildableItem</B></A> (also extends hudson.model.<A HREF="hudson/model/Item.html" title="interface in hudson.model">Item</A>)
+<UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/SCMedItem.html" title="interface in hudson.model"><B>SCMedItem</B></A></UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/SCMedItem.html" title="interface in hudson.model"><B>SCMedItem</B></A></UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/SCMedItem.html" title="interface in hudson.model"><B>SCMedItem</B></A></UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Run.Runner.html" title="interface in hudson.model"><B>Run.Runner</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/RunMap.Constructor.html" title="interface in hudson.model"><B>RunMap.Constructor</B></A>&lt;R&gt;<LI TYPE="circle">java.lang.Runnable<UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.Executable.html" title="interface in hudson.model"><B>Queue.Executable</B></A></UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Saveable.html" title="interface in hudson.model"><B>Saveable</B></A><UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/BuildableItem.html" title="interface in hudson.model"><B>BuildableItem</B></A> (also extends hudson.model.<A HREF="hudson/model/Item.html" title="interface in hudson.model">Item</A>, hudson.model.<A HREF="hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>)
+<UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/SCMedItem.html" title="interface in hudson.model"><B>SCMedItem</B></A></UL>
+<LI TYPE="circle">hudson.util.<A HREF="hudson/util/DescribableList.Owner.html" title="interface in hudson.util"><B>DescribableList.Owner</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/Item.html" title="interface in hudson.model"><B>Item</B></A> (also extends hudson.model.<A HREF="hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, hudson.search.<A HREF="hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>)
+<UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/BuildableItem.html" title="interface in hudson.model"><B>BuildableItem</B></A> (also extends hudson.model.<A HREF="hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>)
+<UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/SCMedItem.html" title="interface in hudson.model"><B>SCMedItem</B></A></UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/SCMedItem.html" title="interface in hudson.model"><B>SCMedItem</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/TopLevelItem.html" title="interface in hudson.model"><B>TopLevelItem</B></A> (also extends hudson.model.<A HREF="hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+</UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/ItemGroup.html" title="interface in hudson.model"><B>ItemGroup</B></A>&lt;T&gt; (also extends hudson.model.<A HREF="hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, hudson.model.<A HREF="hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>)
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/PersistenceRoot.html" title="interface in hudson.model"><B>PersistenceRoot</B></A><UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/BuildableItem.html" title="interface in hudson.model"><B>BuildableItem</B></A> (also extends hudson.model.<A HREF="hudson/model/Item.html" title="interface in hudson.model">Item</A>, hudson.model.<A HREF="hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>)
 <UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/SCMedItem.html" title="interface in hudson.model"><B>SCMedItem</B></A></UL>
@@ -631,19 +660,8 @@ Interface Hierarchy
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/ItemGroup.html" title="interface in hudson.model"><B>ItemGroup</B></A>&lt;T&gt; (also extends hudson.model.<A HREF="hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>)
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/SCMedItem.html" title="interface in hudson.model"><B>SCMedItem</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/TopLevelItem.html" title="interface in hudson.model"><B>TopLevelItem</B></A> (also extends hudson.model.<A HREF="hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, hudson.model.<A HREF="hudson/model/Item.html" title="interface in hudson.model">Item</A>)
 </UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/ResourceActivity.html" title="interface in hudson.model"><B>ResourceActivity</B></A><UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/BuildableItem.html" title="interface in hudson.model"><B>BuildableItem</B></A> (also extends hudson.model.<A HREF="hudson/model/Item.html" title="interface in hudson.model">Item</A>, hudson.model.<A HREF="hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>)
-<UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/SCMedItem.html" title="interface in hudson.model"><B>SCMedItem</B></A></UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.Task.html" title="interface in hudson.model"><B>Queue.Task</B></A> (also extends hudson.model.<A HREF="hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>)
-<UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/BuildableItem.html" title="interface in hudson.model"><B>BuildableItem</B></A> (also extends hudson.model.<A HREF="hudson/model/Item.html" title="interface in hudson.model">Item</A>)
-<UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/SCMedItem.html" title="interface in hudson.model"><B>SCMedItem</B></A></UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/SCMedItem.html" title="interface in hudson.model"><B>SCMedItem</B></A></UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/SCMedItem.html" title="interface in hudson.model"><B>SCMedItem</B></A></UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Run.Runner.html" title="interface in hudson.model"><B>Run.Runner</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/RunMap.Constructor.html" title="interface in hudson.model"><B>RunMap.Constructor</B></A>&lt;R&gt;<LI TYPE="circle">java.lang.Runnable<UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.Executable.html" title="interface in hudson.model"><B>Queue.Executable</B></A></UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/SCMedItem.html" title="interface in hudson.model"><B>SCMedItem</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/TopLevelItem.html" title="interface in hudson.model"><B>TopLevelItem</B></A> (also extends hudson.model.<A HREF="hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, hudson.model.<A HREF="hudson/model/Item.html" title="interface in hudson.model">Item</A>)
+</UL>
 <LI TYPE="circle">hudson.search.<A HREF="hudson/search/SearchIndex.html" title="interface in hudson.search"><B>SearchIndex</B></A><LI TYPE="circle">hudson.search.<A HREF="hudson/search/SearchItem.html" title="interface in hudson.search"><B>SearchItem</B></A><UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/BuildableItem.html" title="interface in hudson.model"><B>BuildableItem</B></A> (also extends hudson.model.<A HREF="hudson/model/Item.html" title="interface in hudson.model">Item</A>, hudson.model.<A HREF="hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>)
 <UL>

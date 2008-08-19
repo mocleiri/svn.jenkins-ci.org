@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.security (Hudson core 1.248 API)
+hudson.security (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.security (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.security (Hudson core 1.248 API)";
+        parent.document.title="hudson.security (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -190,6 +190,12 @@ Security-related code
  if <A HREF="../../hudson/security/InvalidatableUserDetails.html#isInvalid()"><CODE>InvalidatableUserDetails.isInvalid()</CODE></A> returns true.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/security/HudsonAuthenticationEntryPoint.html" title="class in hudson.security">HudsonAuthenticationEntryPoint</A></B></TD>
+<TD>For anonymous requests to pages that require authentication,
+ first respond with <CODE>HttpServletResponse.SC_FORBIDDEN</CODE>,
+ then redirect browsers automatically to the login page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/HudsonFilter.html" title="class in hudson.security">HudsonFilter</A></B></TD>
 <TD><CODE>Filter</CODE> that Hudson uses to implement security support.</TD>
 </TR>
@@ -229,13 +235,6 @@ Security-related code
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/LDAPSecurityRealm.MailAdressResolverImpl.html" title="class in hudson.security">LDAPSecurityRealm.MailAdressResolverImpl</A></B></TD>
 <TD>If the security realm is LDAP, try to pick up e-mail address from LDAP.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD WIDTH="15%"><B><A HREF="../../hudson/security/LegacyAuthenticationProcessingFilterEntryPoint.html" title="class in hudson.security">LegacyAuthenticationProcessingFilterEntryPoint</A></B></TD>
-<TD><CODE>AuthenticationProcessingFilterEntryPoint</CODE> for
- <A HREF="../../hudson/security/LegacySecurityRealm.html" title="class in hudson.security"><CODE>LegacySecurityRealm</CODE></A>, which puts the 'from' query parameter
- into the request, so that the user will be brought back to where
- he came from, after the authentication.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/LegacyAuthorizationStrategy.html" title="class in hudson.security">LegacyAuthorizationStrategy</A></B></TD>

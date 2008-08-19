@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-PluginServletFilter (Hudson core 1.248 API)
+PluginServletFilter (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginServletFilter (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginServletFilter (Hudson core 1.248 API)";
+        parent.document.title="PluginServletFilter (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -97,15 +97,19 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.PluginServletFilter</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD>javax.servlet.Filter</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, javax.servlet.Filter</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>PluginServletFilter</B><DT>extends java.lang.Object<DT>implements javax.servlet.Filter</DL>
+<DT><PRE>public class <B>PluginServletFilter</B><DT>extends java.lang.Object<DT>implements javax.servlet.Filter, <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DL>
 </PRE>
 
 <P>
 Servlet <CODE>Filter</CODE> that chains multiple <CODE>Filter</CODE>s, provided by plugins
+
+ <p>
+ While this class by itself is not an extension point, I'm marking this class
+ as an extension point so that this class will be more discoverable.
 <P>
 
 <P>

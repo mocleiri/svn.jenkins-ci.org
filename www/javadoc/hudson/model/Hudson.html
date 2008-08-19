@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.248 API)
+Hudson (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.248 API)";
+        parent.document.title="Hudson (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -99,7 +99,7 @@ java.lang.Object
           <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Hudson</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, org.kohsuke.stapler.StaplerProxy</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, org.kohsuke.stapler.StaplerProxy</DD>
 </DL>
 <HR>
 <DL>
@@ -992,6 +992,14 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Slave.JnlpJar.html" title="class in hudson.model">Slave.JnlpJar</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getJnlpJars(java.lang.String)">getJnlpJars</A></B>(java.lang.String&nbsp;fileName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serves jar files for JNLP slave agents.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getJob(java.lang.String)">getJob</A></B>(java.lang.String&nbsp;name)</CODE>
 
@@ -1515,6 +1523,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#setSlaves(java.util.List)">setSlaves</A></B>(java.util.List&lt;<A HREF="../../hudson/model/Slave.html" title="class in hudson.model">Slave</A>&gt;&nbsp;slaves)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updates the slave list.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2665,6 +2681,25 @@ public java.util.List&lt;<A HREF="../../hudson/model/Slave.html" title="class in
 </DL>
 <HR>
 
+<A NAME="setSlaves(java.util.List)"><!-- --></A><H3>
+setSlaves</H3>
+<PRE>
+public void <B>setSlaves</B>(java.util.List&lt;<A HREF="../../hudson/model/Slave.html" title="class in hudson.model">Slave</A>&gt;&nbsp;slaves)
+               throws java.io.IOException</PRE>
+<DL>
+<DD>Updates the slave list.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getQuietPeriod()"><!-- --></A><H3>
 getQuietPeriod</H3>
 <PRE>
@@ -3309,12 +3344,12 @@ public void <B>save</B>()
 <DD>Save the settings to a file.
 <P>
 <DD><DL>
-</DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Saveable.html#save()">save</A></CODE> in interface <CODE><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></CODE></DL>
 </DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE> - if the persistence failed.</DL>
 </DD>
 </DL>
 <HR>
@@ -3618,6 +3653,22 @@ public void <B>doLogout</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getJnlpJars(java.lang.String)"><!-- --></A><H3>
+getJnlpJars</H3>
+<PRE>
+public <A HREF="../../hudson/model/Slave.JnlpJar.html" title="class in hudson.model">Slave.JnlpJar</A> <B>getJnlpJars</B>(java.lang.String&nbsp;fileName)</PRE>
+<DL>
+<DD>Serves jar files for JNLP slave agents.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

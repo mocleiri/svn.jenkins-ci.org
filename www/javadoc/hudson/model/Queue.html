@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Queue (Hudson core 1.248 API)
+Queue (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue (Hudson core 1.248 API)";
+        parent.document.title="Queue (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -97,10 +97,13 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/ResourceController.html" title="class in hudson.model">hudson.model.ResourceController</A>
       <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Queue</B>
 </PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DD>
+</DL>
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1">@ExportedBean
-</FONT>public class <B>Queue</B><DT>extends <A HREF="../../hudson/model/ResourceController.html" title="class in hudson.model">ResourceController</A></DL>
+</FONT>public class <B>Queue</B><DT>extends <A HREF="../../hudson/model/ResourceController.html" title="class in hudson.model">ResourceController</A><DT>implements <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DL>
 </PRE>
 
 <P>
@@ -405,6 +408,9 @@ public void <B>load</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -415,6 +421,9 @@ public void <B>save</B>()</PRE>
 <DL>
 <DD>Persists the queue contents to the disk.
 <P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Saveable.html#save()">save</A></CODE> in interface <CODE><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -428,6 +437,9 @@ public boolean <B>add</B>(<A HREF="../../hudson/model/AbstractProject.html" titl
 <DL>
 <DD>Schedule a new build for this project.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>true if the project is actually added to the queue.
@@ -449,6 +461,9 @@ public boolean <B>add</B>(<A HREF="../../hudson/model/AbstractProject.html" titl
  Left for backward compatibility with &lt;1.114.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 <DT><B>Since:</B></DT>
   <DD>1.105</DD>
 </DL>
@@ -464,6 +479,9 @@ public boolean <B>add</B>(<A HREF="../../hudson/model/Queue.Task.html" title="in
 <DL>
 <DD>Schedules an execution of a task.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>quietPeriod</CODE> - Number of seconds that the task will be placed in queue.
                     Useful when the same task is likely scheduled for multiple
@@ -482,6 +500,9 @@ public boolean <B>cancel</B>(<A HREF="../../hudson/model/Queue.Task.html" title=
 <DD>Cancels the item in the queue.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Returns:</B><DD>true if the project was indeed in the queue and was removed.
          false if this was no-op.</DL>
@@ -494,6 +515,9 @@ isEmpty</H3>
 <PRE>
 public boolean <B>isEmpty</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -511,6 +535,9 @@ getItems</H3>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -519,6 +546,9 @@ getBuildableItems</H3>
 <PRE>
 public java.util.List&lt;<A HREF="../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>&gt; <B>getBuildableItems</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -532,6 +562,9 @@ public <A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model
 <DL>
 <DD>Gets the information about the queue item for the given project.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>null if the project is not in the queue.</DL>
@@ -549,6 +582,9 @@ public boolean <B>contains</B>(<A HREF="../../hudson/model/Queue.Task.html" titl
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -562,6 +598,9 @@ public <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.m
  <p>
  This method blocks until a next project becomes buildable.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -585,6 +624,9 @@ public void <B>scheduleMaintenance</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -601,6 +643,9 @@ public void <B>maintain</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -609,6 +654,9 @@ getApi</H3>
 <PRE>
 public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>

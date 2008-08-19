@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Plugin (Hudson core 1.248 API)
+Plugin (Hudson core 1.249 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-15">
+<META NAME="date" CONTENT="2008-08-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Plugin (Hudson core 1.248 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Plugin (Hudson core 1.248 API)";
+        parent.document.title="Plugin (Hudson core 1.249 API)";
     }
 }
 </SCRIPT>
@@ -96,9 +96,12 @@ Class Plugin</H2>
 java.lang.Object
   <IMG SRC="../resources/inherit.gif" ALT="extended by "><B>hudson.Plugin</B>
 </PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DD>
+</DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>Plugin</B><DT>extends java.lang.Object</DL>
+<DT><PRE>public abstract class <B>Plugin</B><DT>extends java.lang.Object<DT>implements <A HREF="../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DL>
 </PRE>
 
 <P>
@@ -199,7 +202,7 @@ Base class of Hudson plugin.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;void</CODE></FONT></TD>
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Plugin.html#save()">save</A></B>()</CODE>
 
 <BR>
@@ -281,6 +284,9 @@ public void <B>setServletContext</B>(javax.servlet.ServletContext&nbsp;context)<
  The default implementation is no-op.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 <DT><B>Parameters:</B><DD><CODE>context</CODE> - Always non-null.<DT><B>Since:</B></DT>
   <DD>1.42</DD>
 </DL>
@@ -308,6 +314,9 @@ public void <B>start</B>()
  See <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A> for the complete list of extension points in Hudson.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.lang.Exception</CODE> - any exception thrown by the plugin during the initialization will disable plugin.<DT><B>Since:</B></DT>
@@ -329,6 +338,9 @@ public void <B>stop</B>()
  This is a good opportunity to clean up resources that plugin started.
  This method will not be invoked if the <A HREF="../hudson/Plugin.html#start()"><CODE>start()</CODE></A> failed abnormally.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -376,6 +388,9 @@ public void <B>configure</B>(net.sf.json.JSONObject&nbsp;formData)
  using <A HREF="../hudson/Plugin.html#save()"><CODE>save()</CODE></A> and <A HREF="../hudson/Plugin.html#load()"><CODE>load()</CODE></A>.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
@@ -398,6 +413,9 @@ public void <B>doDynamic</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DD>This method serves static resources in the plugin under <tt>hudson/plugin/SHORTNAME</tt>.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
@@ -418,6 +436,9 @@ protected void <B>load</B>()
  If there was no previously persisted state, this method is no-op.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE><DT><B>Since:</B></DT>
@@ -430,15 +451,18 @@ protected void <B>load</B>()
 <A NAME="save()"><!-- --></A><H3>
 save</H3>
 <PRE>
-protected void <B>save</B>()
-             throws java.io.IOException</PRE>
+public void <B>save</B>()
+          throws java.io.IOException</PRE>
 <DL>
 <DD>Saves serializable fields of this instance to the persisted storage.
 <P>
 <DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/model/Saveable.html#save()">save</A></CODE> in interface <CODE><A HREF="../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></CODE></DL>
+</DD>
+<DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE><DT><B>Since:</B></DT>
+<DD><CODE>java.io.IOException</CODE> - if the persistence failed.<DT><B>Since:</B></DT>
   <DD>1.245</DD>
 </DL>
 </DD>
@@ -456,6 +480,9 @@ protected <A HREF="../hudson/XmlFile.html" title="class in hudson">XmlFile</A> <
  This method can be also overriden if the plugin wants to
  use a custom <CODE>XStream</CODE> instance to persist data.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 <DT><B>Since:</B></DT>
   <DD>1.245</DD>
