@@ -71,16 +71,17 @@ public class UcmMakeBaseline extends Publisher {
         @Override
         public Publisher newInstance(StaplerRequest req) throws FormException {
             Publisher p = new UcmMakeBaseline(
-                    req.getParameter("mkbl.namepattern"),
-                    req.getParameter("mkbl.commentpattern"),
-                    req.getParameter("mkbl.lock") != null,
-                    req.getParameter("mkbl.user"),
-                    req.getParameter("mkbl.password"));
+                req.getParameter("mkbl.namepattern"),
+                req.getParameter("mkbl.commentpattern"),
+                req.getParameter("mkbl.lock") != null,
+                req.getParameter("mkbl.user"),
+                req.getParameter("mkbl.password"));
             return p;
         }
     }
 
-    private UcmMakeBaseline(String namePattern, String commentPattern, boolean lock, String user, String password) {
+    private UcmMakeBaseline(String namePattern, String commentPattern,
+        boolean lock, String user, String password) {
         this.namePattern = namePattern;
         this.commentPattern = commentPattern;
         this.lockStream = lock;
@@ -110,33 +111,19 @@ public class UcmMakeBaseline extends Publisher {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
+    public boolean perform(AbstractBuild build, Launcher launcher,
+        BuildListener listener) throws InterruptedException, IOException {
 
         if (build.getProject().getScm() instanceof ClearCaseUcmSCM) {
             ClearCaseUcmSCM scm = (ClearCaseUcmSCM) build.getProject().getScm();
             FilePath filePath = build.getProject().getWorkspace().child(scm.getViewName());
-            
+
             HudsonClearToolLauncher clearToolLauncher = new HudsonClearToolLauncher(PluginImpl.BASE_DESCRIPTOR.getCleartoolExe(),
-                    getDescriptor().getDisplayName(), listener, filePath, launcher);
+                getDescriptor().getDisplayName(), listener, filePath, launcher);
 
             if (build.getResult().equals(Result.SUCCESS)) {
-
-                ArgumentListBuilder cmd = new ArgumentListBuilder();
-                
-                String baselineName = Util.replaceMacro(namePattern, build.getEnvVars());
-                String baselineComment = Util.replaceMacro(commentPattern, build.getEnvVars());
-                cmd.add("mkbl");
-                cmd.add("-comment");
-                cmd.add(baselineComment);
-                cmd.add("-incremental");
-                cmd.add(baselineName);
-
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-                clearToolLauncher.run(cmd.toCommandArray(), null, baos, filePath);
-                baos.close();
-
-            // TODO: Parse results
+                makeBaseline(build, clearToolLauncher, filePath);
+                recommedBaseline(scm.getStream(), clearToolLauncher, filePath);
             } else {
                 listener.getLogger().println("Not a UCM clearcase SCM, cannot create baseline");
             }
@@ -152,5 +139,45 @@ public class UcmMakeBaseline extends Publisher {
     @Override
     public Descriptor<Publisher> getDescriptor() {
         return DESCRIPTOR;
+    }
+    
+    @SuppressWarnings("unchecked")
+    private void makeBaseline(AbstractBuild build,
+        HudsonClearToolLauncher clearToolLauncher, FilePath filePath) throws InterruptedException, IOException {
+
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
+
+        String baselineName = Util.replaceMacro(namePattern, build.getEnvVars());
+        String baselineComment = Util.replaceMacro(commentPattern, build.getEnvVars());
+        cmd.add("mkbl");
+        cmd.add("-comment");
+        cmd.add(baselineComment);
+        cmd.add("-incremental");
+        cmd.add(baselineName);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        clearToolLauncher.run(cmd.toCommandArray(), null, baos, filePath);
+        baos.close();
+        
+        // TODO: Parse results, throw exception if not OK         
+        // "No changes in component" -> no baseline will be created, this is OK
+        // "cleartool: Error" -> NOK
+    }
+
+    private void recommedBaseline(String stream,
+        HudsonClearToolLauncher clearToolLauncher, FilePath filePath) throws InterruptedException, IOException {
+
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
+
+        cmd.add("chstream");
+        cmd.add("-rec");
+        cmd.add("-def");
+        cmd.add(stream);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        clearToolLauncher.run(cmd.toCommandArray(), null, baos, filePath);
+        baos.close();
+        // TODO: Parse results, throw exception if not OK         
     }
 }
