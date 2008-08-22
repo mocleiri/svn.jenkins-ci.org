@@ -1,0 +1,575 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+<html>
+  <head>
+    <title>Maven Hudson Plugin - Surefire Report</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      </head>
+  <body class="composite">
+    <!-- TODO: move this into JavaScript to patch the skin
+      <div class="xright">  </div>
+    -->
+    <div id="leftColumn">
+      <div id="navcolumn">
+             <dl class=navgroup>
+        <dt>Documentation</dt>
+        <dd><ul>
+              
+    <li class="none">
+              <a href="index.html">Introduction</a>
+        </li>
+          </ul></dd>
+    </dl>
+      <dl class=navgroup>
+        <dt>Project Documentation</dt>
+        <dd><ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+              <a href="project-info.html">Project Information</a>
+              </li>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+            
+            
+      
+            
+      
+            
+      
+              
+            <li class="expanded">
+              <a href="project-reports.html">Project Reports</a>
+                <ul>
+                  
+    <li class="none">
+              <a href="changelog.html">Change Log</a>
+        </li>
+                  
+    <li class="none">
+              <a href="changes-report.html">Changes Report</a>
+        </li>
+                  
+    <li class="none">
+              <a href="checkstyle.html">Checkstyle</a>
+        </li>
+                  
+    <li class="none">
+              <a href="clirr-report.html">Clirr</a>
+        </li>
+                  
+    <li class="none">
+              <a href="cobertura/index.html">Cobertura Test Coverage</a>
+        </li>
+                  
+    <li class="none">
+              <a href="cpd.html">CPD Report</a>
+        </li>
+                  
+    <li class="none">
+              <a href="dev-activity.html">Developer Activity</a>
+        </li>
+                  
+    <li class="none">
+              <a href="file-activity.html">File Activity</a>
+        </li>
+                  
+    <li class="none">
+              <a href="findbugs.html">FindBugs Report</a>
+        </li>
+                  
+    <li class="none">
+              <a href="apidocs/index.html">JavaDocs</a>
+        </li>
+                  
+    <li class="none">
+              <a href="javancss.html">JavaNCSS Report</a>
+        </li>
+                  
+    <li class="none">
+              <a href="jdepend-report.html">JDepend</a>
+        </li>
+                  
+    <li class="none">
+              <a href="plugin-info.html">Plugin Documentation</a>
+        </li>
+                  
+    <li class="none">
+              <a href="pmd.html">PMD Report</a>
+        </li>
+                  
+    <li class="none">
+              <a href="xref/index.html">Source Xref</a>
+        </li>
+                  
+    <li class="none">
+              <strong>Surefire Report</strong>
+        </li>
+                  
+    <li class="none">
+              <a href="taglist.html">Tag List</a>
+        </li>
+                  
+    <li class="none">
+              <a href="testapidocs/index.html">Test JavaDocs</a>
+        </li>
+                  
+    <li class="none">
+              <a href="xref-test/index.html">Test Source Xref</a>
+        </li>
+              </ul>
+        </li>
+          </ul></dd>
+    </dl>
+      <dl class=navgroup>
+        <dt>Parent Project</dt>
+        <dd><ul>
+              
+    <li class="none">
+              <a href="https://test-support.dev.java.net/master-project/master-public-java/master-public-maven-plugin/index.html">Master Maven POM for Public Maven Plugins</a>
+        </li>
+          </ul></dd>
+    </dl>
+        </div>
+      <script>
+        // replace the java.net project tools with the navigation bar from Maven.
+        // also get rid of "Get Involved" thingie too, while we are at it
+        var pt = document.getElementById("projecttools");
+        var nv = document.getElementById("navcolumn");
+        
+        while(pt.previousSibling!=null)
+          pt.parentNode.removeChild(pt.previousSibling);
+        
+        pt.parentNode.insertBefore(nv,pt);
+        pt.parentNode.removeChild(pt);
+      </script>
+      <script>
+        // kill "description" h3 bar
+        var ld = document.getElementById("longdescription");
+        if(ld!=null) {
+          for( n=ld.firstChild; n!=null; n=n.nextSibling ) {
+            if(n.nodeType==1 && n.innerHTML=="Description" ) {
+              n.parentNode.removeChild(n);
+              break;
+            }
+          }
+        }
+      </script>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <script type="text/javascript">
+function toggleDisplay(elementId) {
+ var elm = document.getElementById(elementId + 'error');
+ if (elm && typeof elm.style != "undefined") {
+ if (elm.style.display == "none") {
+ elm.style.display = "";
+ document.getElementById(elementId + 'off').style.display = "none";
+ document.getElementById(elementId + 'on').style.display = "inline";
+ } else if (elm.style.display == "") { elm.style.display = "none";
+ document.getElementById(elementId + 'off').style.display = "inline";
+ document.getElementById(elementId + 'on').style.display = "none";
+ } 
+ } 
+ }
+</script><div class="section"><h2>Surefire Report</h2>
+</div>
+<div class="section"><h2><a name="Summary"></a>Summary</h2>
+<div class="section">[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</div>
+<br />
+<table class="bodyTable"><tr class="a"><th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="b"><td>34</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>3.094</td>
+</tr>
+</table>
+<br />
+Note: failures are anticipated and checked for with assertions while errors are unanticipated.<br />
+</div>
+<div class="section"><h2><a name="Package_List"></a>Package List</h2>
+<div class="section">[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</div>
+<br />
+<table class="bodyTable"><tr class="a"><th>Package</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="b"><td><a href="#com.mtvi.plateng.maven.hudson">com.mtvi.plateng.maven.hudson</a></td>
+<td>34</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>3.094</td>
+</tr>
+</table>
+<br />
+Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.<div class="section"><h3><a name="com.mtvi.plateng.maven.hudson"></a>com.mtvi.plateng.maven.hudson</h3>
+<table class="bodyTable"><tr class="a"><th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="b"><td><a href="#com.mtvi.plateng.maven.hudsonAddTwitterMojoTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#com.mtvi.plateng.maven.hudsonAddTwitterMojoTest">AddTwitterMojoTest</a></td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.282</td>
+</tr>
+<tr class="a"><td><a href="#com.mtvi.plateng.maven.hudsonAdjustViolationsXMLTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#com.mtvi.plateng.maven.hudsonAdjustViolationsXMLTest">AdjustViolationsXMLTest</a></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.14</td>
+</tr>
+<tr class="b"><td><a href="#com.mtvi.plateng.maven.hudsonBuildAllTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#com.mtvi.plateng.maven.hudsonBuildAllTest">BuildAllTest</a></td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.297</td>
+</tr>
+<tr class="a"><td><a href="#com.mtvi.plateng.maven.hudsonCreatePayloadMojoTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#com.mtvi.plateng.maven.hudsonCreatePayloadMojoTest">CreatePayloadMojoTest</a></td>
+<td>10</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.469</td>
+</tr>
+<tr class="b"><td><a href="#com.mtvi.plateng.maven.hudsonCreatePostURLMojoTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#com.mtvi.plateng.maven.hudsonCreatePostURLMojoTest">CreatePostURLMojoTest</a></td>
+<td>7</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.734</td>
+</tr>
+<tr class="a"><td><a href="#com.mtvi.plateng.maven.hudsonExecuteTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#com.mtvi.plateng.maven.hudsonExecuteTest">ExecuteTest</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.703</td>
+</tr>
+<tr class="b"><td><a href="#com.mtvi.plateng.maven.hudsonExecuteWithAuthTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#com.mtvi.plateng.maven.hudsonExecuteWithAuthTest">ExecuteWithAuthTest</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.218</td>
+</tr>
+<tr class="a"><td><a href="#com.mtvi.plateng.maven.hudsonFindServerTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#com.mtvi.plateng.maven.hudsonFindServerTest">FindServerTest</a></td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.094</td>
+</tr>
+<tr class="b"><td><a href="#com.mtvi.plateng.maven.hudsonJobExistsMojoTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#com.mtvi.plateng.maven.hudsonJobExistsMojoTest">JobExistsMojoTest</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.157</td>
+</tr>
+</table>
+</div>
+<br />
+</div>
+<div class="section"><h2><a name="Test_Cases"></a>Test Cases</h2>
+<div class="section">[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</div>
+<div class="section"><h3><a name="com.mtvi.plateng.maven.hudsonAddTwitterMojoTest"></a>AddTwitterMojoTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testMultiProject</td>
+<td>0.157</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testSingleProject</td>
+<td>0.062</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testSingleProjectByName</td>
+<td>0.063</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="com.mtvi.plateng.maven.hudsonAdjustViolationsXMLTest"></a>AdjustViolationsXMLTest</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testOne</td>
+<td>0.14</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="com.mtvi.plateng.maven.hudsonBuildAllTest"></a>BuildAllTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testMultiProject</td>
+<td>0.141</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testSingleProject</td>
+<td>0.109</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateJobBuildURL</td>
+<td>0.047</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="com.mtvi.plateng.maven.hudsonCreatePayloadMojoTest"></a>CreatePayloadMojoTest</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateFullPayload</td>
+<td>0.125</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateNoCoberturaPayload</td>
+<td>0.093</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateNoEmailPayload</td>
+<td>0.032</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateNoJavadocPayload</td>
+<td>0.031</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateNoJunitPayload</td>
+<td>0.031</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateNoTwitterPayload</td>
+<td>0.063</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateNoViolationsPayload</td>
+<td>0.015</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePayloadWithAdditionalGoals</td>
+<td>0.016</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePayloadWithMultiplePortAllocation</td>
+<td>0.031</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePayloadWithSinglePortAllocation</td>
+<td>0.016</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="com.mtvi.plateng.maven.hudsonCreatePostURLMojoTest"></a>CreatePostURLMojoTest</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePostURLFromCI</td>
+<td>0.297</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePostURLFromCIAndProperty</td>
+<td>0.078</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePostURLFromCIForReplace</td>
+<td>0.078</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePostURLFromOtherCI</td>
+<td>0.062</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePostURLFromProperty</td>
+<td>0.062</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePostURLFromPropertyWithExtraSlash</td>
+<td>0.079</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePostURLWithNothing</td>
+<td>0.062</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="com.mtvi.plateng.maven.hudsonExecuteTest"></a>ExecuteTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testNoJob</td>
+<td>0.641</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testYesJob</td>
+<td>0.062</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="com.mtvi.plateng.maven.hudsonExecuteWithAuthTest"></a>ExecuteWithAuthTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testNoJob</td>
+<td>0.156</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testYesJob</td>
+<td>0.062</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="com.mtvi.plateng.maven.hudsonFindServerTest"></a>FindServerTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testFindServerHostAndPort</td>
+<td>0.078</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testFindServerJustHost</td>
+<td>0</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testFindServerJustHost2</td>
+<td>0</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testFindServerNull</td>
+<td>0</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="com.mtvi.plateng.maven.hudsonJobExistsMojoTest"></a>JobExistsMojoTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testNoJob</td>
+<td>0.047</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testYesJob</td>
+<td>0.11</td>
+</tr>
+</table>
+</div>
+<br />
+</div>
+<br />
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          1981-2008
+    
+          MTV Networks
+          
+  
+
+  
+  
+  &nbsp;| Last Published: 08/22/2008
+  &nbsp;| Version: 1.10-SNAPSHOT
+</div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>
