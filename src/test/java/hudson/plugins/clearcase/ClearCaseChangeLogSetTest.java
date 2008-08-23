@@ -74,7 +74,7 @@ public class ClearCaseChangeLogSetTest {
     @Test
     public void testUnicodeXml() throws IOException, SAXException {
         ClearCaseChangeLogEntry entry = new ClearCaseChangeLogEntry();
-        entry.setUser("Bülow");
+        entry.setUser("Balow");
         entry.setAction("action");
         entry.setComment("comment");
         entry.setDate(Calendar.getInstance().getTime());
@@ -95,7 +95,7 @@ public class ClearCaseChangeLogSetTest {
         fileInputStream.close();
         List<ClearCaseChangeLogEntry> logs = logSet.getLogs();
 
-        Assert.assertEquals("The comment wasnt correct", "Bülow", logs.get(0).getUser());
+        Assert.assertEquals("The comment wasnt correct", "Balow", logs.get(0).getUser());
     }
 
     @Test
