@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.io.Serializable;
+import java.io.File;
 
 /**
  * Used to build up arguments for a process invocation.
@@ -18,6 +19,10 @@ public class ArgumentListBuilder implements Serializable {
 
     public ArgumentListBuilder add(Object a) {
         return add(a.toString());
+    }
+
+    public ArgumentListBuilder add(File f) {
+        return add(f.getAbsolutePath());
     }
 
     public ArgumentListBuilder add(String a) {
@@ -81,6 +86,13 @@ public class ArgumentListBuilder implements Serializable {
         ArgumentListBuilder r = new ArgumentListBuilder();
         r.args.addAll(this.args);
         return r;
+    }
+
+    /**
+     * Re-initializes the arguments list.
+     */
+    public void clear() {
+        args.clear();
     }
 
     public List<String> toList() {
