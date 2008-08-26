@@ -48,6 +48,7 @@ import hudson.security.SecurityRealm.SecurityComponents;
 import hudson.security.TokenBasedRememberMeServices2;
 import hudson.slaves.ComputerListener;
 import hudson.slaves.RetentionStrategy;
+import hudson.slaves.NodeList;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildWrappers;
@@ -234,13 +235,16 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
     /**
      * Set of installed cluster nodes.
-     *
+     * <p>
      * We use this field with copy-on-write semantics.
      * This field has mutable list (to keep the serialization look clean),
      * but it shall never be modified. Only new completely populated slave
      * list can be set here.
+     * <p>
+     * The field name should be really {@code nodes}, but again the backward compatibility
+     * prevents us from renaming.
      */
-    private volatile List<Slave> slaves;
+    private volatile NodeList slaves;
 
     /**
      * Quiet period.
@@ -363,7 +367,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         pluginManager = new PluginManager(context);
 
         // if we are loading old data that doesn't have this field
-        if(slaves==null)    slaves = new ArrayList<Slave>();
+        if(slaves==null)    slaves = new NodeList();
 
         // work around to have MavenModule register itself until we either move it to a plugin
         // or make it a part of the core.
@@ -638,7 +642,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             Set<Computer> used = new HashSet<Computer>();
 
             updateComputer(this, byName, used);
-            for (Slave s : getSlaves())
+            for (Node s : getSlaves())
                 updateComputer(s, byName, used);
 
             // find out what computers are removed, and kill off all executors.
@@ -946,24 +950,52 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
     /**
      * Gets the slave node of the give name, hooked under this Hudson.
+     *
+     * @deprecated
+     *      Use {@link #getNode(String)}. Since 1.252.
      */
     public Slave getSlave(String name) {
-        for (Slave s : getSlaves()) {
+        Node n = getNode(name);
+        if (n instanceof Slave)
+            return (Slave)n;
+        return null;
+    }
+
+    /**
+     * Gets the slave node of the give name, hooked under this Hudson.
+     */
+    public Node getNode(String name) {
+        for (Node s : getSlaves()) {
             if(s.getNodeName().equals(name))
                 return s;
         }
         return null;
     }
 
+    /**
+     * @deprecated
+     *      Use {@link #getNodes()}. Since 1.252.
+     */
     public List<Slave> getSlaves() {
+        return (List)Collections.unmodifiableList(slaves);
+    }
+
+    public List<Node> getNodes() {
         return Collections.unmodifiableList(slaves);
     }
 
     /**
      * Updates the slave list.
+     *
+     * @deprecated
+     *      Use {@link #setNodes(List)}. Since 1.252.
      */
     public void setSlaves(List<Slave> slaves) throws IOException {
-        this.slaves = new ArrayList<Slave>(slaves);
+        setNodes(slaves);
+    }
+
+    public void setNodes(List<? extends Node> nodes) throws IOException {
+        this.slaves = new NodeList(nodes);
         updateComputerList();
 
         // label trim off
@@ -1428,7 +1460,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
         // recompute label objects
         if (null != slaves) { // only if we have slaves
-            for (Slave slave : slaves)
+            for (Node slave : slaves)
                 slave.getAssignedLabels();
         }
 
