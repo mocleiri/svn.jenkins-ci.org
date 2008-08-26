@@ -37,7 +37,7 @@ import java.util.*;
  *
  * @author Kohsuke Kawaguchi
  */
-public final class Slave implements Node, Serializable {
+public class Slave implements Node, Serializable {
     /**
      * Name of this slave node.
      */
