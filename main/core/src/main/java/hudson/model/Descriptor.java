@@ -2,6 +2,8 @@ package hudson.model;
 
 import hudson.XmlFile;
 import hudson.BulkChange;
+import hudson.Util;
+import static hudson.Util.singleQuote;
 import hudson.util.CopyOnWriteList;
 import hudson.scm.CVSSCM;
 import net.sf.json.JSONArray;
@@ -122,7 +124,7 @@ public abstract class Descriptor<T extends Describable<T>> implements Saveable {
         if(method==NONE)
             return null;
 
-        return '\''+Stapler.getCurrentRequest().getContextPath()+"/descriptor/"+clazz.getName()+"/check"+capitalizedFieldName+"?value='+encode(this.value)";
+        return singleQuote(Stapler.getCurrentRequest().getContextPath()+"/descriptor/"+clazz.getName()+"/check"+capitalizedFieldName+"?value=")+"+encode(this.value)";
     }
 
     /**
