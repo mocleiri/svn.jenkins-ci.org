@@ -41,4 +41,11 @@ public abstract class NodeFactory implements ExtensionPoint, Describable<NodeFac
      * All registered {@link NodeFactory} implementations.
      */
     public static final DescriptorList<NodeFactory> ALL = new DescriptorList<NodeFactory>();
+
+    /**
+     * Permission constant to control mutation operations on {@link NodeFactory}.
+     *
+     * This includes provisioning a new node, as well as removing it.
+     */
+    public static final Permission PROVISION = Hudson.ADMINISTER;
 }
