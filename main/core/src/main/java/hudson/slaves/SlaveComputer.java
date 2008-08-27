@@ -110,7 +110,14 @@ public final class SlaveComputer extends Computer {
             public void run() {
                 // do this on another thread so that the lengthy launch operation
                 // (which is typical) won't block UI thread.
-                launcher.launch(SlaveComputer.this, new StreamTaskListener(openLogFile()));
+                StreamTaskListener listener = new StreamTaskListener(openLogFile());
+                try {
+                    launcher.launch(SlaveComputer.this, listener);
+                } catch (IOException e) {
+                    e.printStackTrace(listener.error("Launch failed"));
+                } catch (InterruptedException e) {
+                    e.printStackTrace(listener.error("Launch failed"));
+                }
             }
         });
     }

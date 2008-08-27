@@ -9,6 +9,7 @@ import hudson.util.StreamTaskListener;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.IOException;
 
 /**
  * Extension point to allow control over how {@link Computer}s are "launched",
@@ -40,8 +41,13 @@ public abstract class ComputerLauncher implements Describable<ComputerLauncher>,
      *
      * @param listener
      *      The progress of the launch, as well as any error, should be sent to this listener.
+     *
+     * @throws IOException
+     *      if the method throws an {@link IOException} or {@link InterruptedException}, the launch was considered
+     *      a failure and the stack trace is reported into the listener. This handling is just so that the implementation
+     *      of this method doesn't have to dilligently catch those exceptions.
      */
-    public abstract void launch(SlaveComputer computer, StreamTaskListener listener);
+    public abstract void launch(SlaveComputer computer, StreamTaskListener listener) throws IOException , InterruptedException;
 
     /**
      * Allows the {@link ComputerLauncher} to tidy-up after a disconnect.
