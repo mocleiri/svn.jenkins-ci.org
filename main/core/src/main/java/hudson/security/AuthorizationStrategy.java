@@ -1,6 +1,7 @@
 package hudson.security;
 
 import hudson.ExtensionPoint;
+import hudson.slaves.NodeFactory;
 import hudson.model.AbstractItem;
 import hudson.model.AbstractProject;
 import hudson.model.Computer;
@@ -102,6 +103,19 @@ public abstract class AuthorizationStrategy implements Describable<Authorization
      * @since 1.220
      */
     public ACL getACL(Computer computer) {
+        return getRootACL();
+    }
+
+    /**
+     * Implementation can choose to provide different ACL for different {@link NodeFactory}s.
+     * This can be used as a basis for more fine-grained access control.
+     *
+     * <p>
+     * The default implementation returns {@link #getRootACL()}.
+     *
+     * @since 1.252
+     */
+    public ACL getACL(NodeFactory nodeFactory) {
         return getRootACL();
     }
 

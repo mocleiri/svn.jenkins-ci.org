@@ -980,6 +980,16 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     }
 
     /**
+     * Gets a {@link NodeFactory} by {@link NodeFactory#name its name}, or null.
+     */
+    public NodeFactory getNodeFactory(String name) {
+        for (NodeFactory nf : nodeFactories)
+            if(nf.name.equals(name))
+                return nf;
+        return null;
+    }
+
+    /**
      * @deprecated
      *      Use {@link #getNodes()}. Since 1.252.
      */
