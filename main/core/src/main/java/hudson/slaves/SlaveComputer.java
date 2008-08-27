@@ -9,6 +9,7 @@ import hudson.util.StreamTaskListener;
 import hudson.util.NullStream;
 import hudson.util.RingBufferLogHandler;
 import hudson.FilePath;
+import hudson.Util;
 import hudson.maven.agent.Main;
 import hudson.maven.agent.PluginManagerInterceptor;
 
@@ -114,9 +115,10 @@ public final class SlaveComputer extends Computer {
                 try {
                     launcher.launch(SlaveComputer.this, listener);
                 } catch (IOException e) {
-                    e.printStackTrace(listener.error("Launch failed"));
+                    Util.displayIOException(e,listener);
+                    e.printStackTrace(listener.error(Messages.ComputerLauncher_unexpectedError()));
                 } catch (InterruptedException e) {
-                    e.printStackTrace(listener.error("Launch failed"));
+                    e.printStackTrace(listener.error(Messages.ComputerLauncher_abortedLaunch()));
                 }
             }
         });
