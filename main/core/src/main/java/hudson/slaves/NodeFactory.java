@@ -14,5 +14,5 @@ public abstract class NodeFactory implements ExtensionPoint, Describable<NodeFac
     /**
      * All registered {@link NodeFactory} implementations.
      */
-    public static final DescriptorList<NodeFactory> LIST = new DescriptorList<NodeFactory>();
+    public static final DescriptorList<NodeFactory> ALL = new DescriptorList<NodeFactory>();
 }
