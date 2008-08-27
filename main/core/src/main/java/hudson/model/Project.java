@@ -31,7 +31,7 @@ import java.util.Set;
  * @author Kohsuke Kawaguchi
  */
 public abstract class Project<P extends Project<P,B>,B extends Build<P,B>>
-    extends AbstractProject<P,B> implements SCMedItem, DescribableList.Owner, ProjectWithMaven {
+    extends AbstractProject<P,B> implements SCMedItem, Saveable, ProjectWithMaven {
 
     /**
      * List of active {@link Builder}s configured for this project.
