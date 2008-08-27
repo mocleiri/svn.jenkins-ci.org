@@ -37,6 +37,11 @@
           </j:forEach>
         </tr>
       </j:forEach>
+
+      <!-- let NodeFactory contribute fragments here -->
+      <j:forEach var="nf" items="${app.nodeFactories}">
+        <st:include from="${nf}" page="computerSet.jelly" optional="true" />
+      </j:forEach>
     </table>
     <j:if test="${app.hasPermission(app.ADMINISTER)}">
       <div align="right" style="margin-top:0.5em">

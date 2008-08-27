@@ -25,6 +25,7 @@ import hudson.security.Permission;
 import hudson.security.SecurityRealm;
 import hudson.slaves.ComputerLauncher;
 import hudson.slaves.RetentionStrategy;
+import hudson.slaves.NodeFactory;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildWrapper;
@@ -33,6 +34,7 @@ import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
 import hudson.util.Area;
 import hudson.util.Iterators;
+import hudson.util.DescriptorList;
 import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jexl.parser.ASTSizeFunction;
@@ -938,6 +940,10 @@ public class Functions {
      */
     public static List<PageDecorator> getPageDecorators() {
         return (List)PageDecorator.ALL;
+    }
+    
+    public static DescriptorList<NodeFactory> getNodeFactoryDescriptors() {
+        return NodeFactory.ALL;
     }
 
     private static final Pattern SCHEME = Pattern.compile("[a-z]+://.+");

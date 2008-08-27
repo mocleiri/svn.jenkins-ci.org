@@ -2,77 +2,77 @@
   Config page
 -->
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout"
-         xmlns:t="/lib/hudson" xmlns:s="/lib/form">
+         xmlns:t="/lib/hudson" xmlns:f="/lib/form">
   <d:taglib uri="local">
     <d:tag name="mode">
-      <s:entry title="${%Usage}" help="/help/system-config/master-slave/usage.html">
+      <f:entry title="${%Usage}" help="/help/system-config/master-slave/usage.html">
         <select class="setting-input" name="${name}">
           <j:forEach var="m" items="${h.getNodeModes()}">
-            <s:option value="${m.name}" selected="${m==node.mode}">${m.description}</s:option>
+            <f:option value="${m.name}" selected="${m==node.mode}">${m.description}</f:option>
           </j:forEach>
         </select>
-      </s:entry>
+      </f:entry>
     </d:tag>
   </d:taglib>
   <l:layout norefresh="true" permission="${app.ADMINISTER}" xmlns:local="local">
     <st:include page="sidepanel.jelly"/>
     <l:main-panel>
-      <s:form method="post" action="configExecutorsSubmit">
-        <s:section title="${%Master/Slave Support}">
-          <s:entry title="${%Master}">
+      <f:form method="post" action="configExecutorsSubmit">
+        <f:section title="${%Master/Slave Support}">
+          <f:entry title="${%Master}">
             <table width="100%">
-              <s:entry title="${%Name}">
+              <f:entry title="${%Name}">
                 <b>${%Master}</b>
-              </s:entry>
-              <s:entry title="${%Description}">
+              </f:entry>
+              <f:entry title="${%Description}">
                 <b>${%This Hudson server}</b>
-              </s:entry>
-              <s:entry title="${%# of executors}" help="/help/system-config/numExecutors.html">
+              </f:entry>
+              <f:entry title="${%# of executors}" help="/help/system-config/numExecutors.html">
                 <input type="text" name="numExecutors" class="setting-input number"
                        value="${it.numExecutors}"/>
-              </s:entry>
-              <s:entry title="${%Local FS root}">
+              </f:entry>
+              <f:entry title="${%Local FS root}">
                 <b>${it.rootDir}</b>
-              </s:entry>
+              </f:entry>
 
               <j:if test="${!empty(it.slaves)}">
                 <local:mode name="master.mode" node="${it}" />
               </j:if>
             </table>
-          </s:entry>
-          <s:entry title="${%Slaves}">
-            <s:repeatable var="s" items="${it.slaves}" name="slaves">
+          </f:entry>
+          <f:entry title="${%Slaves}">
+            <f:repeatable var="s" items="${it.slaves}" name="slaves">
               <table width="100%">
-                <s:entry title="${%Name}" help="/help/system-config/master-slave/name.html">
-                  <s:textbox name="slave.name" value="${s.nodeName}"
+                <f:entry title="${%Name}" help="/help/system-config/master-slave/name.html">
+                  <f:textbox name="slave.name" value="${s.nodeName}"
                              checkUrl="'fieldCheck?errorText='+escape('${%Name is mandatory}')+'&amp;value='+escape(this.value)"/>
-                </s:entry>
+                </f:entry>
 
-                <s:entry title="${%Description}" help="/help/system-config/master-slave/description.html">
-                  <s:textbox name="slave.description" value="${s.nodeDescription}"/>
-                </s:entry>
+                <f:entry title="${%Description}" help="/help/system-config/master-slave/description.html">
+                  <f:textbox name="slave.description" value="${s.nodeDescription}"/>
+                </f:entry>
 
-                <s:entry title="${%# of executors}"
+                <f:entry title="${%# of executors}"
                          help="/help/system-config/master-slave/numExecutors.html">
-                  <s:textbox name="slave.numExecutors" value="${s.numExecutors}"
+                  <f:textbox name="slave.numExecutors" value="${s.numExecutors}"
                              checkUrl="'fieldCheck?errorText='+escape('${%Number of executors is mandatory.}')+'&amp;type=number-positive&amp;value='+escape(this.value)"/>
-                </s:entry>
+                </f:entry>
 
-                <s:entry title="${%Remote FS root}" help="/help/system-config/master-slave/remoteFS.html">
-                  <s:textbox name="slave.remoteFS" value="${s.remoteFS}"
+                <f:entry title="${%Remote FS root}" help="/help/system-config/master-slave/remoteFS.html">
+                  <f:textbox name="slave.remoteFS" value="${s.remoteFS}"
                              checkUrl="'remoteFSCheck?value='+escape(this.value)"/>
-                </s:entry>
+                </f:entry>
 
-                <s:entry title="${%Labels}" help="/help/system-config/master-slave/label.html">
-                  <s:textbox name="slave.label" value="${s.labelString}"/>
-                </s:entry>
+                <f:entry title="${%Labels}" help="/help/system-config/master-slave/label.html">
+                  <f:textbox name="slave.label" value="${s.labelString}"/>
+                </f:entry>
 
                 <local:mode name="slave.mode" node="${s}" />
 
-                <s:dropdownList name="slave.launcher" title="${%Launch method}"
+                <f:dropdownList name="slave.launcher" title="${%Launch method}"
                                 help="/help/system-config/master-slave/launcher.html">
                   <j:forEach var="d" items="${h.getComputerLauncherDescriptors()}" varStatus="loop">
-                    <s:dropdownListBlock value="${d.clazz.name}" name="${d.displayName}"
+                    <f:dropdownListBlock value="${d.clazz.name}" name="${d.displayName}"
                                          selected="${s.launcher.descriptor==d}"
                                          title="${d.displayName}">
                       <j:set var="descriptor" value="${d}"/>
@@ -82,17 +82,17 @@
                         <input type="hidden" name="stapler-class" value="${d.clazz.name}" />
                       </td></tr>
                       <st:include from="${d}" page="${d.configPage}" optional="true"/>
-                    </s:dropdownListBlock>
+                    </f:dropdownListBlock>
                   </j:forEach>
-                </s:dropdownList>
+                </f:dropdownList>
 
                 <!-- pointless to show this if there's only one option, which is the default -->
                 <j:if test="${h.getRetentionStrategyDescriptors().size() gt 1}">
-                  <s:dropdownList name="slave.retentionStrategy" title="${%Availability}"
+                  <f:dropdownList name="slave.retentionStrategy" title="${%Availability}"
                                   help="/help/system-config/master-slave/availability.html">
                     <j:forEach var="d" items="${h.getRetentionStrategyDescriptors()}">
                       <j:if test="${d != null}">
-                        <s:dropdownListBlock value="${d.clazz.name}" name="${d.displayName}"
+                        <f:dropdownListBlock value="${d.clazz.name}" name="${d.displayName}"
                                              selected="${s.retentionStrategy.descriptor==d}"
                                              title="${d.displayName}">
                           <j:set var="descriptor" value="${d}"/>
@@ -102,26 +102,38 @@
                             <input type="hidden" name="stapler-class" value="${d.clazz.name}" />
                           </td></tr>
                           <st:include from="${d}" page="${d.configPage}" optional="true"/>
-                        </s:dropdownListBlock>
+                        </f:dropdownListBlock>
                       </j:if>
                     </j:forEach>
-                  </s:dropdownList>
+                  </f:dropdownList>
                 </j:if>
 
-                <s:entry title="">
+                <f:entry title="">
                   <div align="right">
-                    <s:repeatableDeleteButton/>
+                    <f:repeatableDeleteButton/>
                   </div>
-                </s:entry>
+                </f:entry>
               </table>
-            </s:repeatable>
-          </s:entry>
-        </s:section>
+            </f:repeatable>
+          </f:entry>
+        </f:section>
 
-        <s:block>
-          <s:submit value="${%Save}"/>
-        </s:block>
-      </s:form>
+        <j:if test="${!empty(h.getNodeFactoryDescriptors())}">
+          <f:section title="${%Grid}">
+            <f:block>
+              <f:hetero-list name="nodeFactory" hasHeader="true"
+                             descriptors="${h.getNodeFactoryDescriptors()}"
+                             items="${it.nodeFactories.toList()}"
+                             addCaption="${%Add a new grid}"/>
+              <!-- TODO: remove toList() once the iterable support is added to Jelly -->
+            </f:block>
+          </f:section>
+        </j:if>
+
+        <f:block>
+          <f:submit value="${%Save}"/>
+        </f:block>
+      </f:form>
     </l:main-panel>
   </l:layout>
 </j:jelly>

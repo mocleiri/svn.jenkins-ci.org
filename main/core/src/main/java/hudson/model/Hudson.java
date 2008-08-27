@@ -49,6 +49,7 @@ import hudson.security.TokenBasedRememberMeServices2;
 import hudson.slaves.ComputerListener;
 import hudson.slaves.RetentionStrategy;
 import hudson.slaves.NodeList;
+import hudson.slaves.NodeFactory;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildWrappers;
@@ -71,6 +72,7 @@ import hudson.util.MultipartFormDataParser;
 import hudson.util.RemotingDiagnostics;
 import hudson.util.TextFile;
 import hudson.util.XStream2;
+import hudson.util.DescribableList;
 import hudson.widgets.Widget;
 import net.sf.json.JSONObject;
 import org.acegisecurity.AccessDeniedException;
@@ -245,6 +247,11 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
      * prevents us from renaming.
      */
     private volatile NodeList slaves;
+
+    /**
+     * Active {@link NodeFactory}s.
+     */
+    public final DescribableList<NodeFactory,Descriptor<NodeFactory>> nodeFactories = new DescribableList<NodeFactory,Descriptor<NodeFactory>>(this);
 
     /**
      * Quiet period.
@@ -1679,7 +1686,12 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             else
                 mode = Mode.NORMAL;
 
-            setSlaves(req.bindJSONToList(Slave.class,json.get("slaves")));
+            setNodes(req.bindJSONToList(Slave.class,json.get("slaves")));
+
+            nodeFactories.rebuildHetero(req,json,NodeFactory.ALL,"nodeFactory");
+        } catch (FormException e) {
+            rsp.setStatus(SC_BAD_REQUEST);
+            sendError(e, req, rsp);
         } finally {
             bc.commit();
         }
