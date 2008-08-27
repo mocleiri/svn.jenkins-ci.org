@@ -1011,6 +1011,15 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         setNodes(slaves);
     }
 
+    /**
+     * Adds one more {@link Node} to Hudson.
+     */
+    public synchronized void addNode(Node n) throws IOException {
+        ArrayList<Node> nl = new ArrayList<Node>(this.slaves);
+        nl.add(n);
+        setNodes(nl);
+    }
+
     public void setNodes(List<? extends Node> nodes) throws IOException {
         this.slaves = new NodeList(nodes);
         updateComputerList();
