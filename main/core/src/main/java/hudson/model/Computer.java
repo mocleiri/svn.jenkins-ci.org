@@ -130,7 +130,8 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
      * but outside the context of serving a request.
      *
      * <p>
-     * If already connected, no-op. This method may return immediately
+     * If already connected or if this computer doesn't support proactive launching, no-op.
+     * This method may return immediately
      * while the launch operation happens asynchronously.
      *
      * @see #disconnect()
