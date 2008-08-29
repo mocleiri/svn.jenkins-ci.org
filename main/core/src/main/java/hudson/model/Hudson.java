@@ -669,8 +669,10 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         if (c!=null) {
             c.setNode(n); // reuse
         } else {
-            if(n.getNumExecutors()>0)
+            if(n.getNumExecutors()>0) {
                 computers.put(n,c=n.createComputer());
+                c.launch();
+            }
         }
         used.add(c);
     }

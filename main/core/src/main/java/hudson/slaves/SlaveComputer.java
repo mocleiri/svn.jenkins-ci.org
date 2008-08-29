@@ -354,7 +354,10 @@ public class SlaveComputer extends Computer {
         launcher = ((Slave)node).getLauncher();
 
         // maybe the configuration was changed to relaunch the slave, so try to re-launch now.
-        launch();
+        // "launching==null" test is an ugly hack to avoid launching before the object is fully
+        // constructed.
+        if(launching!=null)
+            launch();
     }
 
     private static final Logger logger = Logger.getLogger(SlaveComputer.class.getName());

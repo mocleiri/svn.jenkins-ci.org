@@ -58,6 +58,10 @@ public interface Node {
      */
     Computer toComputer();
 
+    /**
+     * Creates a new {@link Computer} object that acts as the UI peer of this {@link Node}.
+     * Nobody but {@link Hudson#updateComputerList()} should call this method.
+     */
     Computer createComputer();
 
     /**
