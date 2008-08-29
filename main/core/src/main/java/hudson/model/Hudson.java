@@ -236,6 +236,11 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     private transient volatile DependencyGraph dependencyGraph;
 
     /**
+     * Active {@link NodeFactory}s.
+     */
+    public final DescribableList<NodeFactory,Descriptor<NodeFactory>> nodeFactories = new DescribableList<NodeFactory,Descriptor<NodeFactory>>(this);
+    
+    /**
      * Set of installed cluster nodes.
      * <p>
      * We use this field with copy-on-write semantics.
@@ -247,11 +252,6 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
      * prevents us from renaming.
      */
     private volatile NodeList slaves;
-
-    /**
-     * Active {@link NodeFactory}s.
-     */
-    public final DescribableList<NodeFactory,Descriptor<NodeFactory>> nodeFactories = new DescribableList<NodeFactory,Descriptor<NodeFactory>>(this);
 
     /**
      * Quiet period.
