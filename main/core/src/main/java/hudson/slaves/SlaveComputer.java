@@ -26,9 +26,11 @@ import java.util.logging.Logger;
 import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.export.Exported;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
@@ -51,6 +53,11 @@ public final class SlaveComputer extends Computer {
      */
     private transient int numRetryAttempt;
 
+    /**
+     * If we are launching this slave, this is > 0.
+     * Used to determine what icons to show.
+     */
+    private final AtomicInteger launching = new AtomicInteger();
 
     /**
      * {@inheritDoc}
@@ -89,6 +96,13 @@ public final class SlaveComputer extends Computer {
     }
 
     @Override
+    public String getIcon() {
+        if(launching.get()>0)
+            return "computer-flash.gif";
+        return super.getIcon();
+    }
+
+    @Override
     @Deprecated
     public boolean isJnlpAgent() {
         return launcher instanceof JNLPLauncher;
@@ -112,6 +126,7 @@ public final class SlaveComputer extends Computer {
                 // do this on another thread so that the lengthy launch operation
                 // (which is typical) won't block UI thread.
                 StreamTaskListener listener = new StreamTaskListener(openLogFile());
+                launching.incrementAndGet();
                 try {
                     launcher.launch(SlaveComputer.this, listener);
                 } catch (IOException e) {
@@ -119,6 +134,8 @@ public final class SlaveComputer extends Computer {
                     e.printStackTrace(listener.error(Messages.ComputerLauncher_unexpectedError()));
                 } catch (InterruptedException e) {
                     e.printStackTrace(listener.error(Messages.ComputerLauncher_abortedLaunch()));
+                } finally {
+                    launching.decrementAndGet();
                 }
             }
         });
