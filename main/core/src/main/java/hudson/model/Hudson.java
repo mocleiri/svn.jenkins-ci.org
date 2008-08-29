@@ -1020,6 +1020,17 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         setNodes(nl);
     }
 
+    /**
+     * Removes a {@link Node} from Hudson.
+     */
+    public synchronized void removeNode(Node n) throws IOException {
+        n.toComputer().disconnect();
+
+        ArrayList<Node> nl = new ArrayList<Node>(this.slaves);
+        nl.remove(n);
+        setNodes(nl);
+    }
+
     public void setNodes(List<? extends Node> nodes) throws IOException {
         this.slaves = new NodeList(nodes);
         updateComputerList();
