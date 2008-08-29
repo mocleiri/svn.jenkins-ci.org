@@ -52,7 +52,8 @@ import org.kohsuke.stapler.export.ExportedBean;
  *
  * Also, even if you remove a {@link Node}, it takes time for the corresponding
  * {@link Computer} to be removed, if some builds are already in progress on that
- * node.
+ * node. Or when the node configuration is changed, unaffected {@link Computer} object
+ * remains intact, while all the {@link Node} objects will go away.
  *
  * <p>
  * This object also serves UI (since {@link Node} is an interface and can't have
