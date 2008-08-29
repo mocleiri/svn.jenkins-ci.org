@@ -1,13 +1,12 @@
 package hudson.slaves;
 
 import hudson.ExtensionPoint;
-import hudson.security.AccessControlled;
-import hudson.security.ACL;
-import hudson.security.Permission;
-import hudson.util.DescriptorList;
 import hudson.model.Describable;
 import hudson.model.Hudson;
-import hudson.model.Descriptor;
+import hudson.security.ACL;
+import hudson.security.AccessControlled;
+import hudson.security.Permission;
+import hudson.util.DescriptorList;
 
 /**
  * Creates {@link EphemeralNode}s to dynamically expand/shrink the slaves attached to Hudson.
