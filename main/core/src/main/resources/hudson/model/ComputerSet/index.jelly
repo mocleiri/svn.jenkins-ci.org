@@ -40,7 +40,7 @@
 
       <!-- let NodeFactory contribute fragments here -->
       <j:forEach var="nf" items="${app.nodeFactories}">
-        <st:include from="${nf}" page="computerSet.jelly" optional="true" />
+        <st:include it="${nf}" page="computerSet.jelly" optional="true" />
       </j:forEach>
     </table>
     <j:if test="${app.hasPermission(app.ADMINISTER)}">
