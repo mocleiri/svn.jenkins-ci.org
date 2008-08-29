@@ -132,14 +132,21 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
      * Do the same as {@link #doLaunchSlaveAgent(StaplerRequest, StaplerResponse)}
      * but outside the context of serving a request.
      *
-     * If already connected, no-op.
+     * <p>
+     * If already connected, no-op. This method may return immediately
+     * while the launch operation happens asynchronously.
+     *
+     * @see #disconnect()
      */
     public abstract void launch();
 
     /**
      * Disconnect this computer.
      *
-     * If this is the master, no-op
+     * If this is the master, no-op. This method may return immediately
+     * while the launch operation happens asynchronously.
+     *
+     * @see #launch()
      */
     public void disconnect() { }
 
