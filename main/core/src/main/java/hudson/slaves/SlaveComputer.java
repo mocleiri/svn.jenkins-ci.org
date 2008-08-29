@@ -30,7 +30,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.export.Exported;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +39,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Kohsuke Kawaguchi
  */
-public final class SlaveComputer extends Computer {
+public class SlaveComputer extends Computer {
     private volatile Channel channel;
     private volatile transient boolean acceptingTasks = true;
     private Boolean isUnix;
