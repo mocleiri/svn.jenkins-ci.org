@@ -58,6 +58,10 @@ public class SlaveComputer extends Computer {
      */
     private final AtomicInteger launching = new AtomicInteger();
 
+    public SlaveComputer(Slave slave) {
+        super(slave);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -74,10 +78,6 @@ public class SlaveComputer extends Computer {
      */
     public void setAcceptingTasks(boolean acceptingTasks) {
         this.acceptingTasks = acceptingTasks;
-    }
-
-    public SlaveComputer(Slave slave) {
-        super(slave);
     }
 
     /**
