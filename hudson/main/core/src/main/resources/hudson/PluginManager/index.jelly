@@ -1,0 +1,15 @@
+<!--
+  Update Center main page
+
+  TODO:
+      categorize plugins
+      find excerpt from Wiki
+      
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <local:table page="updates" list="${app.updateCenter.updates}" xmlns:local="/hudson/PluginManager">
+    <div style="margin-top:1em">
+      ${%UpdatePageDescription}
+    </div>
+  </local:table>
+</j:jelly>

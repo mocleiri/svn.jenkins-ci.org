@@ -1,0 +1,17 @@
+<html xmlns:j="jelly:core">
+  <body>
+    You are ${app.who}
+
+    <h2>Permissions</h2>
+    <ul>
+      <j:forEach var="p" items="${it.allPermissions}">
+        <li>${p}</li>
+      </j:forEach>
+    </ul>
+
+    <hr/>
+    <a href="login">login</a>
+    |
+    <a href="logout">logout</a>
+  </body>
+</html>

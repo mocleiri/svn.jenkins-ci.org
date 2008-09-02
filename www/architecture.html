@@ -1,0 +1,119 @@
+<html>
+<head>
+  <style>
+    dt {
+      font-weight: bold;
+      margin-left: 1em;
+    }
+  </style>
+</head>
+<body><div class=app>
+<h1>Hudson Architecture</h1>
+
+<p>
+  Hudson is primarily a set of Java classes that model the concepts of
+  a build system in a straight-forward fashion (and if you are using
+  Hudson, you've seen most of those already. There are classes like
+
+  <a href="/nonav/javadoc/?hudson/model/Project.html"><tt>Project</tt></a>,
+  <a href="/nonav/javadoc/?hudson/model/Build.html"><tt>Build</tt></a>, that
+  represents what the name says. The root of this object model is
+  <a href="/nonav/javadoc/?hudson/model/Hudson.html"><tt>Hudson</tt></a>, and
+  all the other model objects are reachable from here.
+
+<p>
+  Then there are interfaces and classes that model code that performs
+  a part of a build, such as
+
+  <a href="/nonav/javadoc/?hudson/scm/SCM.html"><tt>SCM</tt></a> for accessing
+  source code control system, <a
+  href="/nonav/javadoc/?hudson/tasks/Ant.html"><tt>Ant</tt></a> for performing
+  an Ant-based build, <a
+  href="/nonav/javadoc/?hudson/tasks/Mailer.html"><tt>Mailer</tt></a> for
+  sending out e-mail notifications.
+
+<h3>Stapler</h3>
+<p>
+  Those Hudson classes are bound to URLs by using <a
+  href="https://stapler.dev.java.net/">Stapler</a>. The singleton
+  <tt>Hudson</tt> instance is bound to the "/" URL, and the rest of
+  the objects are bound accordingly.
+<p>
+  For example, there's the <tt>Hudson.getJob(String)</tt> method. So
+  the URL <tt>/job/foo/</tt> will be bound to the object returned by
+  <tt>Hudson.getJob("foo")</tt> (which would be a <tt>Project</tt>
+  object that corresponds to the "foo" project.  See stapler
+  documentation for more about how it binds Java object model to a URL
+  hierarchy.
+
+<p>
+  Each Hudson model objects have multiple "views" that are used to
+  render HTML pages about the object. Hudson uses <a
+  href="http://jakarta.apache.org/commons/jelly/">Jelly</a> as the
+  view technology (which is somewhat similar to JSP+<a
+  href="http://java.sun.com/products/jsp/jstl/">JSTL</a>.) Views are
+  really like methods, and each of them work against a particular
+  class. So <a
+  href="https://hudson.dev.java.net/source/browse/hudson/hudson/views/hudson/model/">the
+  views are organized according to classes</a> that they belong to,
+  just like methods are organized according to classes that they
+  belong to. Again, see <a href="https://stapler.dev.java.net/">the
+  stapler project</a> for more about how this works.
+
+<h4>Taglibs</h4>
+<p>
+  Hudson defines <a
+  href="https://hudson.dev.java.net/source/browse/hudson/hudson/views/lib/">a
+  few Jelly tag libraries</a> to encourage views to have the common
+  theme. For example, <a
+  href="https://hudson.dev.java.net/source/browse/hudson/hudson/views/lib/layout/">one
+  of them</a> defines tags that form the basic page layout of Hudson,
+  <a
+  href="https://hudson.dev.java.net/source/browse/hudson/hudson/views/lib/form/">another
+  one</a> defines tags that are used in the configuration pages, and
+  so on.
+
+<h3>Persistence</h3>
+<p>
+  Hudson uses the file system to store its data. Directories are
+  created inside <tt>$HUDSON_HOME</tt> in a way that models the object
+  model structure. Some data, like console output, are stored just as
+  plain text file. Some are stored in Java property file format. But
+  the majority of the structured data, such as how a project is
+  configured, or various records of the build, are persisted by using
+  <a href="http://xstream.codehaus.org/">XStream</a>.
+
+<p>
+  This allows object state to be persisted relatively easily
+  (including those from plugins), but one must pay attention to what's
+  serialized in XML, and take measures to preserve backward
+  compatibility. For example, in various parts of Hudson you see the
+  <tt>transient</tt> keyword (which instructs XStream not to bind the
+  field to XML), fields left strictly for backward compatibility, or
+  re-construction of in-memory data structure after data is loaded.
+
+<h4>More persistence topics</h4>
+<ul>
+  <!-- TODO: replace this link to javadoc -->
+  <li><a href="https://hudson.dev.java.net/source/browse/hudson/hudson/main/core/src/main/java/hudson/XmlFile.java?view=markup">Evolving data structure</a>
+</ul>
+
+<h3>Plugins</h3>
+<p>
+  Hudson's object model is extensible (for example, one can define
+  additional SCM implementations, provided that they implement certain
+  interfaces), and it supports the notion of
+  "plugins," which can plug into those extensibility points and extend
+  the capabilities of Hudson.
+
+<p>
+  Hudson loads each plugin into a separate class loader to avoid
+  conflicts. Plugins can then participate to the system activities
+  just like other Hudson built-in classes do. They can participate in
+  XStream-based persistence, they can provide "views" by Jelly, they
+  can provide static resources like images, and from users, everything
+  works seamlessly --- there's no distinction between functionalities
+  that are built-in vs those from plugins.
+
+</div></body>
+</html>
