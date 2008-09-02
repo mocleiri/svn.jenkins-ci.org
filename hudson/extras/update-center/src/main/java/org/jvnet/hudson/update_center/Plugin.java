@@ -7,6 +7,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
+import org.dom4j.DocumentFactory;
 import org.dom4j.io.SAXReader;
 
 import java.io.IOException;
@@ -15,6 +16,9 @@ import java.net.URL;
 import java.rmi.RemoteException;
 import java.text.MessageFormat;
 import java.util.Properties;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,10 +60,16 @@ public class Plugin {
      */
     private RemotePage findPage(ConfluencePluginList cpl) {
         try {
+
+            DocumentFactory factory = new DocumentFactory();
+            factory.setXPathNamespaceURIs(Collections.singletonMap("m","http://maven.apache.org/POM/4.0.0"));
+
             URL pom = new URL(
                 MessageFormat.format("http://maven.dyndns.org/2/org/jvnet/hudson/plugins/{0}/{1}/{0}-{1}.pom",artifactId,file.version));
-            Document dom = new SAXReader().read(pom);
+            Document dom = new SAXReader(factory).read(pom);
             Node url = dom.selectSingleNode("/project/url");
+            if(url==null)
+                url = dom.selectSingleNode("/m:project/m:url");
             if(url!=null) {
                 String wikiPage = ((Element)url).getTextTrim();
                 return cpl.getPage(wikiPage); // found the confluence page successfully
