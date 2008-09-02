@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.251 API)
+Index (Hudson core 1.252 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-23">
+<META NAME="date" CONTENT="2008-09-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.251 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.251 API)";
+        parent.document.title="Index (Hudson core 1.252 API)";
     }
 }
 </SCRIPT>
@@ -1325,6 +1325,9 @@ Method in class hudson.util.<A HREF="./hudson/util/MultipartFormDataParser.html"
 <DT><A HREF="./hudson/matrix/Combination.html#clear()"><B>clear()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/Combination.html" title="class in hudson.matrix">Combination</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Queue.html#clear()"><B>clear()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in hudson.model">Queue</A>
+<DD>Wipes out all the items currently in the queue, as if all of them are cancelled at once.
 <DT><A HREF="./hudson/util/CopyOnWriteList.html#clear()"><B>clear()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>
 <DD>&nbsp;
@@ -5694,6 +5697,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/Ant.AntInstallation.html" t
 <DT><A HREF="./hudson/tasks/Maven.MavenInstallation.html#getExists()"><B>getExists()</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A>
 <DD>Returns true if the executable exists.
+<DT><A HREF="./hudson/scm/SubversionSCM.ModuleLocation.html#getExpandedLocation(hudson.model.AbstractBuild)"><B>getExpandedLocation(AbstractBuild&lt;?, ?&gt;)</B></A> - 
+Method in class hudson.scm.<A HREF="./hudson/scm/SubversionSCM.ModuleLocation.html" title="class in hudson.scm">SubversionSCM.ModuleLocation</A>
+<DD>Expand location value based on Build parametric execution.
 <DT><A HREF="./hudson/tasks/junit/ClassResult.html#getFailCount()"><B>getFailCount()</B></A> - 
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/ClassResult.html" title="class in hudson.tasks.junit">ClassResult</A>
 <DD>&nbsp;
@@ -6372,6 +6378,10 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenEmbedder.html" title="
 <DT><A HREF="./hudson/scm/SubversionSCM.html#getLocations()"><B>getLocations()</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/SubversionSCM.html" title="class in hudson.scm">SubversionSCM</A>
 <DD>list of all configured svn locations
+<DT><A HREF="./hudson/scm/SubversionSCM.html#getLocations(hudson.model.AbstractBuild)"><B>getLocations(AbstractBuild&lt;?, ?&gt;)</B></A> - 
+Method in class hudson.scm.<A HREF="./hudson/scm/SubversionSCM.html" title="class in hudson.scm">SubversionSCM</A>
+<DD>list of all configured svn locations, expanded according to 
+ build parameters values;
 <DT><A HREF="./hudson/triggers/SCMTrigger.html#getLock()"><B>getLock()</B></A> - 
 Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.html" title="class in hudson.triggers">SCMTrigger</A>
 <DD>&nbsp;
@@ -6582,10 +6592,13 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractItem.html" title="c
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Computer.html#getName()"><B>getName()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
-<DD>Returns the name of the node.
+<DD>Returns <A HREF="./hudson/model/Node.html#getNodeName()"><CODE>the name of the node</CODE></A>.
 <DT><A HREF="./hudson/model/Fingerprint.BuildPtr.html#getName()"><B>getName()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.BuildPtr.html" title="class in hudson.model">Fingerprint.BuildPtr</A>
 <DD>Gets <A HREF="./hudson/model/AbstractItem.html#getFullName()"><CODE>the full name of the job</CODE></A>.
+<DT><A HREF="./hudson/model/Hudson.MasterComputer.html#getName()"><B>getName()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.MasterComputer.html" title="class in hudson.model">Hudson.MasterComputer</A>
+<DD>Returns "" to match with <A HREF="./hudson/model/Hudson.html#getNodeName()"><CODE>Hudson.getNodeName()</CODE></A>.
 <DT><A HREF="./hudson/model/Item.html#getName()"><B>getName()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Item.html" title="interface in hudson.model">Item</A>
 <DD>Gets the name of the item.
@@ -9502,6 +9515,9 @@ Method in class hudson.util.<A HREF="./hudson/util/ProcessTreeKiller.html" title
 Method in class hudson.util.<A HREF="./hudson/util/ProcessTreeKiller.html" title="class in hudson.util">ProcessTreeKiller</A>
 <DD>In addition to what <A HREF="./hudson/util/ProcessTreeKiller.html#kill(java.lang.Process)"><CODE>ProcessTreeKiller.kill(Process)</CODE></A> does, also tries to
  kill all the daemon processes launched.
+<DT><A HREF="./hudson/model/Hudson.html#KILL_AFTER_LOAD"><B>KILL_AFTER_LOAD</B></A> - 
+Static variable in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>&nbsp;
 </DL>
 <HR>
 <A NAME="_L_"><!-- --></A><H2>
@@ -9867,6 +9883,9 @@ Static variable in class hudson.model.<A HREF="./hudson/model/Hudson.MasterCompu
 <DT><A HREF="./hudson/model/TaskAction.html#log"><B>log</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/TaskAction.html" title="class in hudson.model">TaskAction</A>
 <DD>Hold the log of the tagging operation.
+<DT><A HREF="./hudson/model/Hudson.html#LOG_STARTUP_PERFORMANCE"><B>LOG_STARTUP_PERFORMANCE</B></A> - 
+Static variable in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/PeriodicWork.html#logger"><B>logger</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/PeriodicWork.html" title="class in hudson.model">PeriodicWork</A>
 <DD>&nbsp;
@@ -10995,7 +11014,7 @@ Static method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/Messages
 <DT><A HREF="./hudson/model/PageDecorator.html" title="class in hudson.model"><B>PageDecorator</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Participates in the rendering of HTML pages for all pages of Hudson.<DT><A HREF="./hudson/model/PageDecorator.html#PageDecorator(java.lang.Class)"><B>PageDecorator(Class&lt;? extends PageDecorator&gt;)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/PageDecorator.html" title="class in hudson.model">PageDecorator</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/Hudson.html#parallelLoad"><B>parallelLoad</B></A> - 
+<DT><A HREF="./hudson/model/Hudson.html#PARALLEL_LOAD"><B>PARALLEL_LOAD</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/ParameterDefinition.html" title="class in hudson.model"><B>ParameterDefinition</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Defines a parameter for a build.<DT><A HREF="./hudson/model/ParameterDefinition.html#ParameterDefinition(java.lang.String)"><B>ParameterDefinition(String)</B></A> - 
@@ -11846,7 +11865,7 @@ Variable in class hudson.scm.<A HREF="./hudson/scm/SCMDescriptor.html" title="cl
 <DT><A HREF="./hudson/scm/RepositoryBrowsers.html" title="class in hudson.scm"><B>RepositoryBrowsers</B></A> - Class in <A HREF="./hudson/scm/package-summary.html">hudson.scm</A><DD>List of all installed <A HREF="./hudson/scm/RepositoryBrowsers.html" title="class in hudson.scm"><CODE>RepositoryBrowsers</CODE></A>.<DT><A HREF="./hudson/scm/RepositoryBrowsers.html#RepositoryBrowsers()"><B>RepositoryBrowsers()</B></A> - 
 Constructor for class hudson.scm.<A HREF="./hudson/scm/RepositoryBrowsers.html" title="class in hudson.scm">RepositoryBrowsers</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/scm/SubversionSCM.html#repositoryLocationsExist()"><B>repositoryLocationsExist()</B></A> - 
+<DT><A HREF="./hudson/scm/SubversionSCM.html#repositoryLocationsExist(hudson.model.AbstractBuild, java.util.ArrayList)"><B>repositoryLocationsExist(AbstractBuild&lt;?, ?&gt;, ArrayList&lt;String&gt;)</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/SubversionSCM.html" title="class in hudson.scm">SubversionSCM</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/FormFieldValidator.html#request"><B>request</B></A> - 
@@ -12564,6 +12583,9 @@ Method in class hudson.slaves.<A HREF="./hudson/slaves/SlaveComputer.html" title
 <DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html#setNoexec(boolean)"><B>setNoexec(boolean)</B></A> - 
 Method in class hudson.org.apache.tools.ant.taskdefs.<A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html" title="class in hudson.org.apache.tools.ant.taskdefs">AbstractCvsTask</A>
 <DD>If true, report only and don't change any files.
+<DT><A HREF="./hudson/model/Hudson.html#setNumExecutors(int)"><B>setNumExecutors(int)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/MavenEmbedder.html#setOffline(boolean)"><B>setOffline(boolean)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A>
 <DD>&nbsp;
@@ -13451,6 +13473,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Run.Artifact.html" title="c
 <DT><A HREF="./hudson/model/Run.html#toString()"><B>toString()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/StringParameterValue.html#toString()"><B>toString()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/StringParameterValue.html" title="class in hudson.model">StringParameterValue</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/User.html#toString()"><B>toString()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/User.html" title="class in hudson.model">User</A>
 <DD>&nbsp;
@@ -14186,6 +14211,9 @@ Static variable in class hudson.model.<A HREF="./hudson/model/Hudson.html" title
 <DT><A HREF="./hudson/model/Items.html#XSTREAM"><B>XSTREAM</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Items.html" title="class in hudson.model">Items</A>
 <DD>Used to load/save job configuration.
+<DT><A HREF="./hudson/model/Queue.html#XSTREAM"><B>XSTREAM</B></A> - 
+Static variable in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in hudson.model">Queue</A>
+<DD>This <CODE>XStream</CODE> instance is used to persist <A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A>s.
 <DT><A HREF="./hudson/util/XStream2.html" title="class in hudson.util"><B>XStream2</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD><CODE>XStream</CODE> enhanced for additional Java5 support and improved robustness.<DT><A HREF="./hudson/util/XStream2.html#XStream2()"><B>XStream2()</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/XStream2.html" title="class in hudson.util">XStream2</A>
 <DD>&nbsp;

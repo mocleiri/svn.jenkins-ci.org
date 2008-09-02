@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SubversionSCM (Hudson core 1.251 API)
+SubversionSCM (Hudson core 1.252 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-23">
+<META NAME="date" CONTENT="2008-09-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SubversionSCM (Hudson core 1.251 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionSCM (Hudson core 1.251 API)";
+        parent.document.title="SubversionSCM (Hudson core 1.252 API)";
     }
 }
 </SCRIPT>
@@ -283,6 +283,15 @@ Subversion SCM.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/scm/SubversionSCM.ModuleLocation.html" title="class in hudson.scm">SubversionSCM.ModuleLocation</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#getLocations(hudson.model.AbstractBuild)">getLocations</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list of all configured svn locations, expanded according to 
+ build parameters values;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#getModuleRoot(hudson.FilePath)">getModuleRoot</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace)</CODE>
 
@@ -335,7 +344,8 @@ Subversion SCM.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#repositoryLocationsExist()">repositoryLocationsExist</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#repositoryLocationsExist(hudson.model.AbstractBuild, java.util.ArrayList)">repositoryLocationsExist</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+                         java.util.ArrayList&lt;java.lang.String&gt;&nbsp;warningList)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -422,6 +432,25 @@ getLocations</H3>
 public <A HREF="../../hudson/scm/SubversionSCM.ModuleLocation.html" title="class in hudson.scm">SubversionSCM.ModuleLocation</A>[] <B>getLocations</B>()</PRE>
 <DL>
 <DD>list of all configured svn locations
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.91</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLocations(hudson.model.AbstractBuild)"><!-- --></A><H3>
+getLocations</H3>
+<PRE>
+public <A HREF="../../hudson/scm/SubversionSCM.ModuleLocation.html" title="class in hudson.scm">SubversionSCM.ModuleLocation</A>[] <B>getLocations</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</PRE>
+<DL>
+<DD>list of all configured svn locations, expanded according to 
+ build parameters values;
 <P>
 <DD><DL>
 </DL>
@@ -743,10 +772,11 @@ public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>
 </DL>
 <HR>
 
-<A NAME="repositoryLocationsExist()"><!-- --></A><H3>
+<A NAME="repositoryLocationsExist(hudson.model.AbstractBuild, java.util.ArrayList)"><!-- --></A><H3>
 repositoryLocationsExist</H3>
 <PRE>
-public boolean <B>repositoryLocationsExist</B>()
+public boolean <B>repositoryLocationsExist</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+                                        java.util.ArrayList&lt;java.lang.String&gt;&nbsp;warningList)
                                  throws org.tmatesoft.svn.core.SVNException</PRE>
 <DL>
 <DD><DL>
