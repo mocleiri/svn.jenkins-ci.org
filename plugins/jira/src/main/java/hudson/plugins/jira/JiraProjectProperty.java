@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.Arrays;
 
 /**
  * Associates {@link AbstractProject} with {@link JiraSite}.
@@ -88,6 +89,11 @@ public class JiraProjectProperty extends JobProperty<AbstractProject<?,?>> {
         public JiraSite[] getSites() {
             return sites.toArray(new JiraSite[0]);
         }
+
+        public void setSites(JiraSite... sites) {
+            this.sites.replaceBy(Arrays.asList(sites));
+            save();
+        }
         
         public JobProperty<?> newInstance(StaplerRequest req) throws FormException {
             JiraProjectProperty jpp = req.bindParameters(JiraProjectProperty.class, "jira.");
@@ -154,10 +160,6 @@ public class JiraProjectProperty extends JobProperty<AbstractProject<?,?>> {
                     }
                 }
             }.process();
-        }
-
-        public void save() {
-            super.save();
         }
     }
 

@@ -32,9 +32,9 @@ public class JiraChangeLogAnnotator extends ChangeLogAnnotator {
                 JiraIssue issue = a!=null ? a.getIssue(id) : null;
 
                 if(issue==null) {
-                    token.surroundWith("<a href='"+url+"'>","</a>");
+                    token.addMarkup(0,token.length(),"<a href='"+url+"'>","</a>");
                 } else {
-                    token.surroundWith(
+                    token.addMarkup(0,token.length(),
                         String.format("<a href='%s' tooltip='%s'>",url,issue.title),
                         "</a>");
                 }
