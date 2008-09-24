@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Result (Hudson core 1.252 API)
+Result (Hudson core 1.253 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-09-02">
+<META NAME="date" CONTENT="2008-09-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Result (Hudson core 1.252 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Result (Hudson core 1.252 API)";
+        parent.document.title="Result (Hudson core 1.253 API)";
     }
 }
 </SCRIPT>
@@ -170,7 +170,7 @@ The build outcome.
 <TD><CODE><B><A HREF="../../hudson/model/Result.html#SUCCESS">SUCCESS</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The build didn't have any fatal errors not errors.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The build had no errors.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -178,7 +178,7 @@ The build outcome.
 <TD><CODE><B><A HREF="../../hudson/model/Result.html#UNSTABLE">UNSTABLE</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The build didn't have any fatal errors but some errors.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The build had some errors but they were not fatal.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -274,7 +274,7 @@ SUCCESS</H3>
 <PRE>
 public static final <A HREF="../../hudson/model/Result.html" title="class in hudson.model">Result</A> <B>SUCCESS</B></PRE>
 <DL>
-<DD>The build didn't have any fatal errors not errors.
+<DD>The build had no errors.
 <P>
 <DL>
 </DL>
@@ -286,7 +286,8 @@ UNSTABLE</H3>
 <PRE>
 public static final <A HREF="../../hudson/model/Result.html" title="class in hudson.model">Result</A> <B>UNSTABLE</B></PRE>
 <DL>
-<DD>The build didn't have any fatal errors but some errors.
+<DD>The build had some errors but they were not fatal.
+ For example, some tests failed.
 <P>
 <DL>
 </DL>

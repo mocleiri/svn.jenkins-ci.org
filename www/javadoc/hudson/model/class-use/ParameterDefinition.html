@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.model.ParameterDefinition (Hudson core 1.252 API)
+Uses of Class hudson.model.ParameterDefinition (Hudson core 1.253 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-09-02">
+<META NAME="date" CONTENT="2008-09-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.ParameterDefinition (Hudson core 1.252 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.ParameterDefinition (Hudson core 1.252 API)";
+        parent.document.title="Uses of Class hudson.model.ParameterDefinition (Hudson core 1.253 API)";
     }
 }
 </SCRIPT>
@@ -143,6 +143,14 @@ Uses of <A HREF="../../../hudson/model/ParameterDefinition.html" title="class in
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/FileParameterDefinition.html" title="class in hudson.model">FileParameterDefinition</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A> for doing file upload.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/JobParameterDefinition.html" title="class in hudson.model">JobParameterDefinition</A></B></CODE>
 
 <BR>
@@ -191,19 +199,21 @@ Uses of <A HREF="../../../hudson/model/ParameterDefinition.html" title="class in
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A></CODE></FONT></TD>
-<TD><CODE><B>ParametersDefinitionProperty.</B><B><A HREF="../../../hudson/model/ParametersDefinitionProperty.html#getParameterDefinition(java.lang.String)">getParameterDefinition</A></B>(java.lang.String&nbsp;name)</CODE>
+<TD><CODE><B>ParameterValue.</B><B><A HREF="../../../hudson/model/ParameterValue.html#getDefinition()">getDefinition</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../../hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A> of the given name, if any.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>parameter definition may change any time. So if you find yourself
+    in need of accessing the information from <A HREF="../../../hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A>,
+    instead copy them in <A HREF="../../../hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>createValue(StaplerRequest, JSONObject)</CODE></A>
+    into <A HREF="../../../hudson/model/ParameterValue.html" title="class in hudson.model"><CODE>ParameterValue</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A></CODE></FONT></TD>
-<TD><CODE><B>StringParameterDefinition.DescriptorImpl.</B><B><A HREF="../../../hudson/model/StringParameterDefinition.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-            net.sf.json.JSONObject&nbsp;formData)</CODE>
+<TD><CODE><B>ParametersDefinitionProperty.</B><B><A HREF="../../../hudson/model/ParametersDefinitionProperty.html#getParameterDefinition(java.lang.String)">getParameterDefinition</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../../hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A> of the given name, if any.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

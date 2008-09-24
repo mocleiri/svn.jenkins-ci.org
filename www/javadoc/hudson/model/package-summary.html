@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.model (Hudson core 1.252 API)
+hudson.model (Hudson core 1.253 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-09-02">
+<META NAME="date" CONTENT="2008-09-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson core 1.252 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson core 1.252 API)";
+        parent.document.title="hudson.model (Hudson core 1.253 API)";
     }
 }
 </SCRIPT>
@@ -147,6 +147,12 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></B></TD>
 <TD>Commonality between <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> and master <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/PermalinkProjectAction.html" title="interface in hudson.model">PermalinkProjectAction</A></B></TD>
+<TD>Optional interface for <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s that are attached
+ to <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A> (through <A HREF="../../hudson/model/JobProperty.html#getJobAction(J)"><CODE>JobProperty.getJobAction(Job)</CODE></A>),
+ which allows plugins to define additional permalinks in the project.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A></B></TD>
@@ -287,6 +293,18 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/ExternalRun.html" title="class in hudson.model">ExternalRun</A></B></TD>
 <TD><A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A> for <A HREF="../../hudson/model/ExternalJob.html" title="class in hudson.model"><CODE>ExternalJob</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/FileParameterDefinition.html" title="class in hudson.model">FileParameterDefinition</A></B></TD>
+<TD><A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A> for doing file upload.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/FileParameterDefinition.DescriptorImpl.html" title="class in hudson.model">FileParameterDefinition.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/FileParameterValue.html" title="class in hudson.model">FileParameterValue</A></B></TD>
+<TD><A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model"><CODE>ParameterValue</CODE></A> for <A HREF="../../hudson/model/FileParameterDefinition.html" title="class in hudson.model"><CODE>FileParameterDefinition</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Fingerprint.html" title="class in hudson.model">Fingerprint</A></B></TD>
@@ -450,6 +468,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/PeriodicWork.html" title="class in hudson.model">PeriodicWork</A></B></TD>
 <TD>Abstract base class for a periodic work.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/PermalinkProjectAction.Permalink.html" title="class in hudson.model">PermalinkProjectAction.Permalink</A></B></TD>
+<TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project&lt;P extends Project&lt;P,B&gt;,B extends Build&lt;P,B&gt;&gt;</A></B></TD>

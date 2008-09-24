@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson Class Hierarchy (Hudson core 1.252 API)
+hudson Class Hierarchy (Hudson core 1.253 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-09-02">
+<META NAME="date" CONTENT="2008-09-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson Class Hierarchy (Hudson core 1.252 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson Class Hierarchy (Hudson core 1.252 API)";
+        parent.document.title="hudson Class Hierarchy (Hudson core 1.253 API)";
     }
 }
 </SCRIPT>
@@ -105,8 +105,14 @@ Class Hierarchy
 <UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/PluginManager.html" title="class in hudson"><B>PluginManager</B></A></UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/BulkChange.html" title="class in hudson"><B>BulkChange</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/DependencyRunner.html" title="class in hudson"><B>DependencyRunner</B></A> (implements java.lang.Runnable)
+<LI TYPE="circle">hudson.model.<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><B>Descriptor</B></A>&lt;T&gt; (implements hudson.model.<A HREF="../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
+<UL>
+<LI TYPE="circle">hudson.<A HREF="../hudson/FileSystemProvisionerDescriptor.html" title="class in hudson"><B>FileSystemProvisionerDescriptor</B></A> (implements hudson.<A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+</UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/FilePath.html" title="class in hudson"><B>FilePath</B></A> (implements java.io.Serializable)
-<LI TYPE="circle">hudson.<A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson"><B>FileSystemProvisioner</B></A> (implements hudson.<A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<LI TYPE="circle">hudson.<A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson"><B>FileSystemProvisioner</B></A> (implements hudson.model.<A HREF="../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<UL>
+<LI TYPE="circle">hudson.<A HREF="../hudson/FileSystemProvisioner.Default.html" title="class in hudson"><B>FileSystemProvisioner.Default</B></A></UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/Functions.html" title="class in hudson"><B>Functions</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/Functions.RunUrl.html" title="class in hudson"><B>Functions.RunUrl</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/Indenter.html" title="class in hudson"><B>Indenter</B></A>&lt;J&gt;<LI TYPE="circle">hudson.<A HREF="../hudson/Launcher.html" title="class in hudson"><B>Launcher</B></A><UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><B>Launcher.LocalLauncher</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/Launcher.RemoteLauncher.html" title="class in hudson"><B>Launcher.RemoteLauncher</B></A></UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/Main.html" title="class in hudson"><B>Main</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/Messages.html" title="class in hudson"><B>Messages</B></A><LI TYPE="circle">java.io.OutputStream (implements java.io.Closeable, java.io.Flushable)
@@ -131,6 +137,8 @@ Class Hierarchy
 </UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/Util.html" title="class in hudson"><B>Util</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/WebAppMain.html" title="class in hudson"><B>WebAppMain</B></A> (implements javax.servlet.ServletContextListener)
 <LI TYPE="circle">hudson.<A HREF="../hudson/WorkspaceSnapshot.html" title="class in hudson"><B>WorkspaceSnapshot</B></A> (implements hudson.model.<A HREF="../hudson/model/Action.html" title="interface in hudson.model">Action</A>)
+<UL>
+<LI TYPE="circle">hudson.<A HREF="../hudson/FileSystemProvisioner.Default.WorkspaceSnapshotImpl.html" title="class in hudson"><B>FileSystemProvisioner.Default.WorkspaceSnapshotImpl</B></A></UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/XmlFile.html" title="class in hudson"><B>XmlFile</B></A></UL>
 </UL>
 <H2>

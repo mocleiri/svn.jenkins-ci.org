@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Job (Hudson core 1.252 API)
+Job (Hudson core 1.253 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-09-02">
+<META NAME="date" CONTENT="2008-09-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson core 1.252 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson core 1.252 API)";
+        parent.document.title="Job (Hudson core 1.253 API)";
     }
 }
 </SCRIPT>
@@ -481,6 +481,14 @@ A job is an runnable entity under the monitoring of Hudson.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Peeks the next build number.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/PermalinkProjectAction.Permalink.html" title="class in hudson.model">PermalinkProjectAction.Permalink</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#getPermalinks()">getPermalinks</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the <A HREF="../../hudson/model/PermalinkProjectAction.Permalink.html" title="class in hudson.model"><CODE>PermalinkProjectAction.Permalink</CODE></A>s defined for this job.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1466,7 +1474,7 @@ getLastSuccessfulBuild</H3>
 <FONT SIZE="-1">@Exported
 </FONT>public <A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A> <B>getLastSuccessfulBuild</B>()</PRE>
 <DL>
-<DD>Returns the last successful build, if any. Otherwise null. A stable build
+<DD>Returns the last successful build, if any. Otherwise null. A successful build
  would include either <A HREF="../../hudson/model/Result.html#SUCCESS"><CODE>Result.SUCCESS</CODE></A> or <A HREF="../../hudson/model/Result.html#UNSTABLE"><CODE>Result.UNSTABLE</CODE></A>.
 <P>
 <DD><DL>
@@ -1490,7 +1498,7 @@ getLastStableBuild</H3>
 </DL>
 </DD>
 <DD><DL>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Job.html#getLastSuccessfulBuild()"><CODE>getLastSuccessfulBuild()</CODE></A></DL>
 </DD>
 </DL>
 <HR>
@@ -1519,6 +1527,22 @@ getLastCompletedBuild</H3>
 </FONT>public <A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A> <B>getLastCompletedBuild</B>()</PRE>
 <DL>
 <DD>Returns the last completed build, if any. Otherwise null.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPermalinks()"><!-- --></A><H3>
+getPermalinks</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/model/PermalinkProjectAction.Permalink.html" title="class in hudson.model">PermalinkProjectAction.Permalink</A>&gt; <B>getPermalinks</B>()</PRE>
+<DL>
+<DD>Gets all the <A HREF="../../hudson/model/PermalinkProjectAction.Permalink.html" title="class in hudson.model"><CODE>PermalinkProjectAction.Permalink</CODE></A>s defined for this job.
 <P>
 <DD><DL>
 </DL>

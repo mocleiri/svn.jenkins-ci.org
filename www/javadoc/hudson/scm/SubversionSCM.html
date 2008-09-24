@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SubversionSCM (Hudson core 1.252 API)
+SubversionSCM (Hudson core 1.253 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-09-02">
+<META NAME="date" CONTENT="2008-09-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SubversionSCM (Hudson core 1.252 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionSCM (Hudson core 1.252 API)";
+        parent.document.title="SubversionSCM (Hudson core 1.253 API)";
     }
 }
 </SCRIPT>
@@ -344,8 +344,8 @@ Subversion SCM.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#repositoryLocationsExist(hudson.model.AbstractBuild, java.util.ArrayList)">repositoryLocationsExist</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
-                         java.util.ArrayList&lt;java.lang.String&gt;&nbsp;warningList)</CODE>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#repositoryLocationsExist(hudson.model.AbstractBuild, hudson.model.TaskListener)">repositoryLocationsExist</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+                         <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -457,7 +457,7 @@ public <A HREF="../../hudson/scm/SubversionSCM.ModuleLocation.html" title="class
 </DD>
 <DD><DL>
 <DT><B>Since:</B></DT>
-  <DD>1.91</DD>
+  <DD>1.252</DD>
 </DL>
 </DD>
 </DL>
@@ -772,11 +772,11 @@ public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>
 </DL>
 <HR>
 
-<A NAME="repositoryLocationsExist(hudson.model.AbstractBuild, java.util.ArrayList)"><!-- --></A><H3>
+<A NAME="repositoryLocationsExist(hudson.model.AbstractBuild, hudson.model.TaskListener)"><!-- --></A><H3>
 repositoryLocationsExist</H3>
 <PRE>
 public boolean <B>repositoryLocationsExist</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
-                                        java.util.ArrayList&lt;java.lang.String&gt;&nbsp;warningList)
+                                        <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
                                  throws org.tmatesoft.svn.core.SVNException</PRE>
 <DL>
 <DD><DL>

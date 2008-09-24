@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson (Hudson core 1.252 API)
+hudson (Hudson core 1.253 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-09-02">
+<META NAME="date" CONTENT="2008-09-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson (Hudson core 1.252 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson (Hudson core 1.252 API)";
+        parent.document.title="hudson (Hudson core 1.253 API)";
     }
 }
 </SCRIPT>
@@ -96,7 +96,7 @@ Package hudson
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TD>
 <TD>Marker interface that designates extensible components
- in Hudson that can be implemented by <A HREF="../hudson/Plugin.html" title="class in hudson"><CODE>Plugin</CODE></A>s.</TD>
+ in Hudson that can be implemented by plugins.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/FeedAdapter.html" title="interface in hudson">FeedAdapter&lt;E&gt;</A></B></TD>
@@ -144,6 +144,19 @@ Package hudson
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A></B></TD>
 <TD>Prepares and provisions workspaces for <A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/FileSystemProvisioner.Default.html" title="class in hudson">FileSystemProvisioner.Default</A></B></TD>
+<TD>Default implementation that doesn't rely on any file system specific capability,
+ and thus can be used anywhere that Hudson runs.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/FileSystemProvisioner.Default.WorkspaceSnapshotImpl.html" title="class in hudson">FileSystemProvisioner.Default.WorkspaceSnapshotImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/FileSystemProvisionerDescriptor.html" title="class in hudson">FileSystemProvisionerDescriptor</A></B></TD>
+<TD><A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson"><CODE>FileSystemProvisioner</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/Functions.html" title="class in hudson">Functions</A></B></TD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ParametersDefinitionProperty (Hudson core 1.252 API)
+ParametersDefinitionProperty (Hudson core 1.253 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-09-02">
+<META NAME="date" CONTENT="2008-09-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParametersDefinitionProperty (Hudson core 1.252 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParametersDefinitionProperty (Hudson core 1.252 API)";
+        parent.document.title="ParametersDefinitionProperty (Hudson core 1.253 API)";
     }
 }
 </SCRIPT>
@@ -392,6 +392,10 @@ public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model
  <p>
  Returning non-null from this method allows a job property to add an item
  to the left navigation bar in the job page.
+
+ <p>
+ <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> can implement additional marker interface to integrate
+ with the UI in different ways.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/JobProperty.html#getJobAction(J)">getJobAction</A></CODE> in class <CODE><A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&gt;</CODE></DL>
@@ -399,7 +403,8 @@ public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>job</CODE> - Always the same as <A HREF="../../hudson/model/JobProperty.html#owner"><CODE>JobProperty.owner</CODE></A> but passed in anyway for backward compatibility (I guess.)
       You really need not use this value at all.
-<DT><B>Returns:</B><DD>null if there's no such action.</DL>
+<DT><B>Returns:</B><DD>null if there's no such action.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/ProminentProjectAction.html" title="interface in hudson.model"><CODE>ProminentProjectAction</CODE></A>, 
+<A HREF="../../hudson/model/PermalinkProjectAction.html" title="interface in hudson.model"><CODE>PermalinkProjectAction</CODE></A></DL>
 </DD>
 </DL>
 <HR>

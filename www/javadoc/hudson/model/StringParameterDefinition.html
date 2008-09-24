@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-StringParameterDefinition (Hudson core 1.252 API)
+StringParameterDefinition (Hudson core 1.253 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-09-02">
+<META NAME="date" CONTENT="2008-09-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ StringParameterDefinition (Hudson core 1.252 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StringParameterDefinition (Hudson core 1.252 API)";
+        parent.document.title="StringParameterDefinition (Hudson core 1.253 API)";
     }
 }
 </SCRIPT>
@@ -176,9 +176,8 @@ Parameter whose value is a string value.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/StringParameterDefinition.html#StringParameterDefinition(java.lang.String, java.lang.String, boolean)">StringParameterDefinition</A></B>(java.lang.String&nbsp;name,
-                          java.lang.String&nbsp;defaultValue,
-                          boolean&nbsp;optional)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/StringParameterDefinition.html#StringParameterDefinition(java.lang.String, java.lang.String)">StringParameterDefinition</A></B>(java.lang.String&nbsp;name,
+                          java.lang.String&nbsp;defaultValue)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -204,6 +203,14 @@ Parameter whose value is a string value.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/StringParameterValue.html" title="class in hudson.model">StringParameterValue</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/StringParameterDefinition.html#getDefaultParameterValue()">getDefaultParameterValue</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns default parameter value for this definition.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/StringParameterDefinition.html#getDefaultValue()">getDefaultValue</A></B>()</CODE>
 
@@ -220,24 +227,8 @@ Parameter whose value is a string value.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/StringParameterDefinition.html#isOptional()">isOptional</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/StringParameterDefinition.html#setDefaultValue(java.lang.String)">setDefaultValue</A></B>(java.lang.String&nbsp;defaultValue)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/StringParameterDefinition.html#setOptional(boolean)">setOptional</A></B>(boolean&nbsp;optional)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -293,13 +284,12 @@ public static final <A HREF="../../hudson/model/ParameterDefinition.ParameterDes
 </TR>
 </TABLE>
 
-<A NAME="StringParameterDefinition(java.lang.String, java.lang.String, boolean)"><!-- --></A><H3>
+<A NAME="StringParameterDefinition(java.lang.String, java.lang.String)"><!-- --></A><H3>
 StringParameterDefinition</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>StringParameterDefinition</B>(java.lang.String&nbsp;name,
-                                                      java.lang.String&nbsp;defaultValue,
-                                                      boolean&nbsp;optional)</PRE>
+                                                      java.lang.String&nbsp;defaultValue)</PRE>
 <DL>
 </DL>
 
@@ -335,28 +325,6 @@ public <A HREF="../../hudson/model/ParameterDefinition.ParameterDescriptor.html"
 </DL>
 <HR>
 
-<A NAME="isOptional()"><!-- --></A><H3>
-isOptional</H3>
-<PRE>
-public boolean <B>isOptional</B>()</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="setOptional(boolean)"><!-- --></A><H3>
-setOptional</H3>
-<PRE>
-public void <B>setOptional</B>(boolean&nbsp;optional)</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
 <A NAME="getDefaultValue()"><!-- --></A><H3>
 getDefaultValue</H3>
 <PRE>
@@ -375,6 +343,24 @@ public void <B>setDefaultValue</B>(java.lang.String&nbsp;defaultValue)</PRE>
 <DL>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDefaultParameterValue()"><!-- --></A><H3>
+getDefaultParameterValue</H3>
+<PRE>
+public <A HREF="../../hudson/model/StringParameterValue.html" title="class in hudson.model">StringParameterValue</A> <B>getDefaultParameterValue</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/ParameterDefinition.html#getDefaultParameterValue()">ParameterDefinition</A></CODE></B></DD>
+<DD>Returns default parameter value for this definition.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/ParameterDefinition.html#getDefaultParameterValue()">getDefaultParameterValue</A></CODE> in class <CODE><A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>default parameter value or null if no defaults are available</DL>
 </DD>
 </DL>
 <HR>

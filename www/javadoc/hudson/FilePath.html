@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FilePath (Hudson core 1.252 API)
+FilePath (Hudson core 1.253 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-09-02">
+<META NAME="date" CONTENT="2008-09-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson core 1.252 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson core 1.252 API)";
+        parent.document.title="FilePath (Hudson core 1.253 API)";
     }
 }
 </SCRIPT>
@@ -285,6 +285,14 @@ V</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The same as <code>new FilePath(this,rel)</code> but more OO.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#copyFrom(org.apache.commons.fileupload.FileItem)">copyFrom</A></B>(org.apache.commons.fileupload.FileItem&nbsp;file)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Place the data from <CODE>FileItem</CODE> into the file location specified by this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> object.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -723,6 +731,27 @@ public void <B>unzip</B>(<A HREF="../hudson/FilePath.html" title="class in hudso
 <DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
   <DD>1.248</DD>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="copyFrom(org.apache.commons.fileupload.FileItem)"><!-- --></A><H3>
+copyFrom</H3>
+<PRE>
+public void <B>copyFrom</B>(org.apache.commons.fileupload.FileItem&nbsp;file)
+              throws java.io.IOException,
+                     java.lang.InterruptedException</PRE>
+<DL>
+<DD>Place the data from <CODE>FileItem</CODE> into the file location specified by this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> object.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>

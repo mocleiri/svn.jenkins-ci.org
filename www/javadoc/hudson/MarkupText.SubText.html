@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MarkupText.SubText (Hudson core 1.252 API)
+MarkupText.SubText (Hudson core 1.253 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-09-02">
+<META NAME="date" CONTENT="2008-09-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MarkupText.SubText (Hudson core 1.252 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MarkupText.SubText (Hudson core 1.252 API)";
+        parent.document.title="MarkupText.SubText (Hudson core 1.253 API)";
     }
 }
 </SCRIPT>
@@ -201,6 +201,14 @@ Represents a substring of a <A HREF="../hudson/MarkupText.html" title="class in 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/MarkupText.SubText.html#replace(java.lang.String)">replace</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replaces the group tokens like "$0", "$1", and etc with their actual matches.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/MarkupText.SubText.html#start()">start</A></B>()</CODE>
 
@@ -223,6 +231,16 @@ Represents a substring of a <A HREF="../hudson/MarkupText.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surrounds this subtext with the specified start tag and the end tag.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/MarkupText.SubText.html#surroundWithLiteral(java.lang.String, java.lang.String)">surroundWithLiteral</A></B>(java.lang.String&nbsp;startTag,
+                    java.lang.String&nbsp;endTag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works like <A HREF="../hudson/MarkupText.SubText.html#surroundWith(java.lang.String, java.lang.String)"><CODE>surroundWith(String, String)</CODE></A> except
+ that the token replacement is not performed on parameters.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.AbstractMarkupText"><!-- --></A>
@@ -327,7 +345,22 @@ public void <B>surroundWith</B>(java.lang.String&nbsp;startTag,
  <p>
  Start/end tag text can contain special tokens "$0", "$1", ...
  and they will be replaced by their <A HREF="../hudson/MarkupText.SubText.html#group(int)"><CODE>group match</CODE></A>.
- "\\c" can be used to escape characters.
+ "\$" can be used to escape characters.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="surroundWithLiteral(java.lang.String, java.lang.String)"><!-- --></A><H3>
+surroundWithLiteral</H3>
+<PRE>
+public void <B>surroundWithLiteral</B>(java.lang.String&nbsp;startTag,
+                                java.lang.String&nbsp;endTag)</PRE>
+<DL>
+<DD>Works like <A HREF="../hudson/MarkupText.SubText.html#surroundWith(java.lang.String, java.lang.String)"><CODE>surroundWith(String, String)</CODE></A> except
+ that the token replacement is not performed on parameters.
 <P>
 <DD><DL>
 </DL>
@@ -407,6 +440,19 @@ group</H3>
 public java.lang.String <B>group</B>(int&nbsp;groupIndex)</PRE>
 <DL>
 <DD>Gets the text that represents the captured group.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="replace(java.lang.String)"><!-- --></A><H3>
+replace</H3>
+<PRE>
+public java.lang.String <B>replace</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>Replaces the group tokens like "$0", "$1", and etc with their actual matches.
 <P>
 <DD><DL>
 </DL>

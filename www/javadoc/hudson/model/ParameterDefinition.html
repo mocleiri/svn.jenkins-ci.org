@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ParameterDefinition (Hudson core 1.252 API)
+ParameterDefinition (Hudson core 1.253 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-09-02">
+<META NAME="date" CONTENT="2008-09-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParameterDefinition (Hudson core 1.252 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParameterDefinition (Hudson core 1.252 API)";
+        parent.document.title="ParameterDefinition (Hudson core 1.253 API)";
     }
 }
 </SCRIPT>
@@ -100,7 +100,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>&gt;</DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/JobParameterDefinition.html" title="class in hudson.model">JobParameterDefinition</A>, <A HREF="../../hudson/model/RunParameterDefinition.html" title="class in hudson.model">RunParameterDefinition</A>, <A HREF="../../hudson/model/StringParameterDefinition.html" title="class in hudson.model">StringParameterDefinition</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/FileParameterDefinition.html" title="class in hudson.model">FileParameterDefinition</A>, <A HREF="../../hudson/model/JobParameterDefinition.html" title="class in hudson.model">JobParameterDefinition</A>, <A HREF="../../hudson/model/RunParameterDefinition.html" title="class in hudson.model">RunParameterDefinition</A>, <A HREF="../../hudson/model/StringParameterDefinition.html" title="class in hudson.model">StringParameterDefinition</A></DD>
 </DL>
 <HR>
 <DL>
@@ -237,6 +237,14 @@ Defines a parameter for a build.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParameterDefinition.html#getDefaultParameterValue()">getDefaultParameterValue</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns default parameter value for this definition.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;<A HREF="../../hudson/model/ParameterDefinition.ParameterDescriptor.html" title="class in hudson.model">ParameterDefinition.ParameterDescriptor</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ParameterDefinition.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
@@ -357,6 +365,25 @@ public abstract <A HREF="../../hudson/model/ParameterValue.html" title="class in
 </DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDefaultParameterValue()"><!-- --></A><H3>
+getDefaultParameterValue</H3>
+<PRE>
+public <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A> <B>getDefaultParameterValue</B>()</PRE>
+<DL>
+<DD>Returns default parameter value for this definition.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>default parameter value or null if no defaults are available<DT><B>Since:</B></DT>
+  <DD>1.253</DD>
 </DL>
 </DD>
 </DL>
