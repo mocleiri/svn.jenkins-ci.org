@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.253 API)
+Index (Hudson core 1.254 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-09-24">
+<META NAME="date" CONTENT="2008-09-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.253 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.253 API)";
+        parent.document.title="Index (Hudson core 1.254 API)";
     }
 }
 </SCRIPT>
@@ -2217,7 +2217,7 @@ Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="cl
 <DT><A HREF="./hudson/scm/Messages.html#CVSSCM_TagThisBuild()"><B>CVSSCM_TagThisBuild()</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
 <DD>Tag this build
-<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_WorkspaceInconsistent()"><B>CVSSCM_WorkspaceInconsistent()</B></A> - 
+<DT><A HREF="./hudson/scm/Messages.html#CVSSCM_WorkspaceInconsistent(java.lang.Object)"><B>CVSSCM_WorkspaceInconsistent(Object)</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
 <DD>Workspace is inconsistent with configuration.
 <DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/cvslib/CvsUser.html" title="class in hudson.org.apache.tools.ant.taskdefs.cvslib"><B>CvsUser</B></A> - Class in <A HREF="./hudson/org/apache/tools/ant/taskdefs/cvslib/package-summary.html">hudson.org.apache.tools.ant.taskdefs.cvslib</A><DD>Represents a CVS user with a userID and a full name.<DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/cvslib/CvsUser.html#CvsUser()"><B>CvsUser()</B></A> - 
@@ -2866,6 +2866,9 @@ Method in class hudson.slaves.<A HREF="./hudson/slaves/SlaveComputer.html" title
 <DT><A HREF="./hudson/model/Hudson.html#doDoFingerprintCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDoFingerprintCheck(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Do a finger-print check.
+<DT><A HREF="./hudson/lifecycle/WindowsInstallerLink.html#doDoInstall(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><B>doDoInstall(StaplerRequest, StaplerResponse, String)</B></A> - 
+Method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsInstallerLink.html" title="class in hudson.lifecycle">WindowsInstallerLink</A>
+<DD>Performs installation.
 <DT><A HREF="./hudson/model/Job.html#doDoRename(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDoRename(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
 <DD>Renames this job.
@@ -3059,6 +3062,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DT><A HREF="./hudson/model/Hudson.html#doResources(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doResources(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Serves static resources placed along with Jelly view files.
+<DT><A HREF="./hudson/lifecycle/WindowsInstallerLink.html#doRestart(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doRestart(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsInstallerLink.html" title="class in hudson.lifecycle">WindowsInstallerLink</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Computer.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doRssAll(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
 <DD>&nbsp;
@@ -3999,6 +4005,9 @@ Method in class hudson.util.<A HREF="./hudson/util/StackedAreaRenderer2.html" ti
 <DT><A HREF="./hudson/scm/SCMDescriptor.html#generation"><B>generation</B></A> - 
 Variable in class hudson.scm.<A HREF="./hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A>
 <DD>Incremented every time a new <A HREF="./hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A> instance is created from this descriptor.
+<DT><A HREF="./hudson/lifecycle/Lifecycle.html#get()"><B>get()</B></A> - 
+Static method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle">Lifecycle</A>
+<DD>Gets the singleton instance.
 <DT><A HREF="./hudson/matrix/Layouter.Column.html#get(int)"><B>get(int)</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/Layouter.Column.html" title="class in hudson.matrix">Layouter.Column</A>
 <DD>&nbsp;
@@ -4924,6 +4933,9 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractBuild.html" title="
 <DT><A HREF="./hudson/model/Hudson.html#getDependencyGraph()"><B>getDependencyGraph()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/lifecycle/WindowsInstallerLink.html#getDescription()"><B>getDescription()</B></A> - 
+Method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsInstallerLink.html" title="class in hudson.lifecycle">WindowsInstallerLink</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractItem.html#getDescription()"><B>getDescription()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A>
 <DD>Gets the project description HTML.
@@ -5264,6 +5276,9 @@ Method in class hudson.org.apache.tools.ant.taskdefs.cvslib.<A HREF="./hudson/or
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>
 <DD>Possibly empty list of all disabled modules (if disabled==true)
  or all enabeld modules (if disabled==false)
+<DT><A HREF="./hudson/lifecycle/WindowsInstallerLink.html#getDisplayName()"><B>getDisplayName()</B></A> - 
+Method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsInstallerLink.html" title="class in hudson.lifecycle">WindowsInstallerLink</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/matrix/MatrixConfiguration.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A>
 <DD>&nbsp;
@@ -6116,6 +6131,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in h
 <DT><A HREF="./hudson/model/Run.html#getIconColor()"><B>getIconColor()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>Gets the icon color for display.
+<DT><A HREF="./hudson/lifecycle/WindowsInstallerLink.html#getIconFileName()"><B>getIconFileName()</B></A> - 
+Method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsInstallerLink.html" title="class in hudson.lifecycle">WindowsInstallerLink</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/MavenProbeAction.html#getIconFileName()"><B>getIconFileName()</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenProbeAction.html" title="class in hudson.maven">MavenProbeAction</A>
 <DD>&nbsp;
@@ -8112,6 +8130,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DT><A HREF="./hudson/model/ItemGroup.html#getUrlChildPrefix()"><B>getUrlChildPrefix()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>
 <DD>Gets the URL token that prefixes the URLs for child <A HREF="./hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>s.
+<DT><A HREF="./hudson/lifecycle/WindowsInstallerLink.html#getUrlName()"><B>getUrlName()</B></A> - 
+Method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsInstallerLink.html" title="class in hudson.lifecycle">WindowsInstallerLink</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/MavenProbeAction.html#getUrlName()"><B>getUrlName()</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenProbeAction.html" title="class in hudson.maven">MavenProbeAction</A>
 <DD>&nbsp;
@@ -8653,7 +8674,7 @@ Constructor for class hudson.security.<A HREF="./hudson/security/HttpSessionCont
 <DT><A HREF="./hudson/package-summary.html"><B>hudson</B></A> - package hudson<DD>&nbsp;<DT><A HREF="./hudson/model/Hudson.html" title="class in hudson.model"><B>Hudson</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Root object of the system.<DT><A HREF="./hudson/model/Hudson.html#Hudson(java.io.File, javax.servlet.ServletContext)"><B>Hudson(File, ServletContext)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/Hudson.MasterComputer.html" title="class in hudson.model"><B>Hudson.MasterComputer</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/matrix/package-summary.html"><B>hudson.matrix</B></A> - package hudson.matrix<DD>Matrix project<DT><A HREF="./hudson/maven/package-summary.html"><B>hudson.maven</B></A> - package hudson.maven<DD>Maven support.<DT><A HREF="./hudson/maven/reporters/package-summary.html"><B>hudson.maven.reporters</B></A> - package hudson.maven.reporters<DD>&nbsp;<DT><A HREF="./hudson/model/package-summary.html"><B>hudson.model</B></A> - package hudson.model<DD>Core object model that are bound to URLs via stapler, rooted at <a href="./hudson/model/Hudson.html"><tt>Hudson</tt></a>.<DT><A HREF="./hudson/model/listeners/package-summary.html"><B>hudson.model.listeners</B></A> - package hudson.model.listeners<DD>Listener interfaces for various events that occur inside the server.<DT><A HREF="./hudson/node_monitors/package-summary.html"><B>hudson.node_monitors</B></A> - package hudson.node_monitors<DD>Code that monitors the health of slaves<DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/package-summary.html"><B>hudson.org.apache.tools.ant.taskdefs</B></A> - package hudson.org.apache.tools.ant.taskdefs<DD>&nbsp;<DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/cvslib/package-summary.html"><B>hudson.org.apache.tools.ant.taskdefs.cvslib</B></A> - package hudson.org.apache.tools.ant.taskdefs.cvslib<DD>Fork of Ant CVS <tt>changelog</tt> task to work around issues.<DT><A HREF="./hudson/scheduler/package-summary.html"><B>hudson.scheduler</B></A> - package hudson.scheduler<DD>Classes that implement cron-like features<DT><A HREF="./hudson/scm/package-summary.html"><B>hudson.scm</B></A> - package hudson.scm<DD>Hudson's interface with source code management systems.<DT><A HREF="./hudson/scm/browsers/package-summary.html"><B>hudson.scm.browsers</B></A> - package hudson.scm.browsers<DD>Code that computes links to external source code repository browsers.<DT><A HREF="./hudson/search/package-summary.html"><B>hudson.search</B></A> - package hudson.search<DD><a href="http://docs.blacktree.com/quicksilver/what_is_quicksilver">QuickSilver</a>-like
+<DT><A HREF="./hudson/lifecycle/package-summary.html"><B>hudson.lifecycle</B></A> - package hudson.lifecycle<DD>&nbsp;<DT><A HREF="./hudson/model/Hudson.MasterComputer.html" title="class in hudson.model"><B>Hudson.MasterComputer</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/matrix/package-summary.html"><B>hudson.matrix</B></A> - package hudson.matrix<DD>Matrix project<DT><A HREF="./hudson/maven/package-summary.html"><B>hudson.maven</B></A> - package hudson.maven<DD>Maven support.<DT><A HREF="./hudson/maven/reporters/package-summary.html"><B>hudson.maven.reporters</B></A> - package hudson.maven.reporters<DD>&nbsp;<DT><A HREF="./hudson/model/package-summary.html"><B>hudson.model</B></A> - package hudson.model<DD>Core object model that are bound to URLs via stapler, rooted at <a href="./hudson/model/Hudson.html"><tt>Hudson</tt></a>.<DT><A HREF="./hudson/model/listeners/package-summary.html"><B>hudson.model.listeners</B></A> - package hudson.model.listeners<DD>Listener interfaces for various events that occur inside the server.<DT><A HREF="./hudson/node_monitors/package-summary.html"><B>hudson.node_monitors</B></A> - package hudson.node_monitors<DD>Code that monitors the health of slaves<DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/package-summary.html"><B>hudson.org.apache.tools.ant.taskdefs</B></A> - package hudson.org.apache.tools.ant.taskdefs<DD>&nbsp;<DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/cvslib/package-summary.html"><B>hudson.org.apache.tools.ant.taskdefs.cvslib</B></A> - package hudson.org.apache.tools.ant.taskdefs.cvslib<DD>Fork of Ant CVS <tt>changelog</tt> task to work around issues.<DT><A HREF="./hudson/scheduler/package-summary.html"><B>hudson.scheduler</B></A> - package hudson.scheduler<DD>Classes that implement cron-like features<DT><A HREF="./hudson/scm/package-summary.html"><B>hudson.scm</B></A> - package hudson.scm<DD>Hudson's interface with source code management systems.<DT><A HREF="./hudson/scm/browsers/package-summary.html"><B>hudson.scm.browsers</B></A> - package hudson.scm.browsers<DD>Code that computes links to external source code repository browsers.<DT><A HREF="./hudson/search/package-summary.html"><B>hudson.search</B></A> - package hudson.search<DD><a href="http://docs.blacktree.com/quicksilver/what_is_quicksilver">QuickSilver</a>-like
 search/jump capability for better navigation around the website.<DT><A HREF="./hudson/security/package-summary.html"><B>hudson.security</B></A> - package hudson.security<DD>Security-related code<DT><A HREF="./hudson/slaves/package-summary.html"><B>hudson.slaves</B></A> - package hudson.slaves<DD>Code related to slaves.<DT><A HREF="./hudson/tasks/package-summary.html"><B>hudson.tasks</B></A> - package hudson.tasks<DD>Built-in <a href="./hudson/tasks/Builder.html"><tt>Builder</tt></a>s and <a href="./hudson/tasks/Publisher.html"><tt>Publisher</tt></a>s
 that perform the actual heavy-lifting of a build.<DT><A HREF="./hudson/tasks/junit/package-summary.html"><B>hudson.tasks.junit</B></A> - package hudson.tasks.junit<DD>Model objects that represent JUnit test reports.<DT><A HREF="./hudson/tasks/labelers/package-summary.html"><B>hudson.tasks.labelers</B></A> - package hudson.tasks.labelers<DD>&nbsp;<DT><A HREF="./hudson/tasks/test/package-summary.html"><B>hudson.tasks.test</B></A> - package hudson.tasks.test<DD>Defines contracts that need to be implemented by a test reporting
 action (such as the built-in JUnit one).<DT><A HREF="./hudson/triggers/package-summary.html"><B>hudson.triggers</B></A> - package hudson.triggers<DD>Built-in <a href="./hudson/triggers/Trigger.html"><tt>Trigger</tt></a>s that run periodically to kick a new build.<DT><A HREF="./hudson/util/package-summary.html"><B>hudson.util</B></A> - package hudson.util<DD>Other miscellaneous utility code<DT><A HREF="./hudson/util/spring/package-summary.html"><B>hudson.util.spring</B></A> - package hudson.util.spring<DD>Spring Bean Builder by using Groovy.<DT><A HREF="./hudson/widgets/package-summary.html"><B>hudson.widgets</B></A> - package hudson.widgets<DD>&nbsp;<DT><A HREF="./hudson/model/Messages.html#Hudson_BadPortNumber(java.lang.Object)"><B>Hudson_BadPortNumber(Object)</B></A> - 
@@ -9207,6 +9228,9 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title
 <DT><A HREF="./hudson/model/Job.html#isInQueue()"><B>isInQueue()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/lifecycle/WindowsInstallerLink.html#isInstalled()"><B>isInstalled()</B></A> - 
+Method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsInstallerLink.html" title="class in hudson.lifecycle">WindowsInstallerLink</A>
+<DD>Is the installation successful?
 <DT><A HREF="./hudson/model/Descriptor.html#isInstance(T)"><B>isInstance(T)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>
 <DD>Checks if the given object is created from this <A HREF="./hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.
@@ -9824,6 +9848,9 @@ Method in class hudson.<A HREF="./hudson/MarkupText.SubText.html" title="class i
 <DT><A HREF="./hudson/util/ByteBuffer.html#length()"><B>length()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ByteBuffer.html" title="class in hudson.util">ByteBuffer</A>
 <DD><B>Deprecated.</B>&nbsp;&nbsp;
+<DT><A HREF="./hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle"><B>Lifecycle</B></A> - Class in <A HREF="./hudson/lifecycle/package-summary.html">hudson.lifecycle</A><DD>Provides the capability for starting/stopping/restarting/uninstalling Hudson.<DT><A HREF="./hudson/lifecycle/Lifecycle.html#Lifecycle()"><B>Lifecycle()</B></A> - 
+Constructor for class hudson.lifecycle.<A HREF="./hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle">Lifecycle</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/ColorPalette.html#LINE_GRAPH"><B>LINE_GRAPH</B></A> - 
 Static variable in class hudson.util.<A HREF="./hudson/util/ColorPalette.html" title="class in hudson.util">ColorPalette</A>
 <DD>Color list usable for generating line charts.
@@ -11875,6 +11902,9 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSetBuild.html" t
 <DT><A HREF="./hudson/util/spring/BeanBuilder.html#registerBeans(org.springframework.context.support.StaticApplicationContext)"><B>registerBeans(StaticApplicationContext)</B></A> - 
 Method in class hudson.util.spring.<A HREF="./hudson/util/spring/BeanBuilder.html" title="class in hudson.util.spring">BeanBuilder</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/lifecycle/WindowsInstallerLink.html#registerIfApplicable()"><B>registerIfApplicable()</B></A> - 
+Static method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsInstallerLink.html" title="class in hudson.lifecycle">WindowsInstallerLink</A>
+<DD>Decide if <A HREF="./hudson/lifecycle/WindowsInstallerLink.html" title="class in hudson.lifecycle"><CODE>WindowsInstallerLink</CODE></A> should show up in UI, and if so, register it.
 <DT><A HREF="./hudson/util/RunList.html#regressionOnly()"><B>regressionOnly()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/RunList.html" title="class in hudson.util">RunList</A>
 <DD>Filter the list to regression builds only.
@@ -12483,6 +12513,12 @@ Constructor for class hudson.security.<A HREF="./hudson/security/SecurityRealm.S
 <DT><A HREF="./hudson/util/ListBoxModel.Option.html#selected"><B>selected</B></A> - 
 Variable in class hudson.util.<A HREF="./hudson/util/ListBoxModel.Option.html" title="class in hudson.util">ListBoxModel.Option</A>
 <DD>True to make this item selected.
+<DT><A HREF="./hudson/lifecycle/WindowsInstallerLink.html#sendError(java.lang.Exception, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>sendError(Exception, StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsInstallerLink.html" title="class in hudson.lifecycle">WindowsInstallerLink</A>
+<DD>Displays the error in a page.
+<DT><A HREF="./hudson/lifecycle/WindowsInstallerLink.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>sendError(String, StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsInstallerLink.html" title="class in hudson.lifecycle">WindowsInstallerLink</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractModelObject.html#sendError(java.lang.Exception, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>sendError(Exception, StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A>
 <DD>Displays the error in a page.
@@ -14219,6 +14255,9 @@ Variable in class hudson.util.<A HREF="./hudson/util/Area.html" title="class in 
 <DT><A HREF="./hudson/model/UpdateCenter.Plugin.html#wiki"><B>wiki</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>
 <DD>Optional URL to the Wiki page that discusses this plugin.
+<DT><A HREF="./hudson/lifecycle/WindowsInstallerLink.html" title="class in hudson.lifecycle"><B>WindowsInstallerLink</B></A> - Class in <A HREF="./hudson/lifecycle/package-summary.html">hudson.lifecycle</A><DD><A HREF="./hudson/model/ManagementLink.html" title="class in hudson.model"><CODE>ManagementLink</CODE></A> that allows the installation as a Windows service.<DT><A HREF="./hudson/lifecycle/WindowsServiceLifecycle.html" title="class in hudson.lifecycle"><B>WindowsServiceLifecycle</B></A> - Class in <A HREF="./hudson/lifecycle/package-summary.html">hudson.lifecycle</A><DD><A HREF="./hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle"><CODE>Lifecycle</CODE></A> for Hudson installed as Windows service.<DT><A HREF="./hudson/lifecycle/WindowsServiceLifecycle.html#WindowsServiceLifecycle()"><B>WindowsServiceLifecycle()</B></A> - 
+Constructor for class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsServiceLifecycle.html" title="class in hudson.lifecycle">WindowsServiceLifecycle</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/ModuleDependency.html#withUnknownVersion()"><B>withUnknownVersion()</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
 <DD>Returns groupId+artifactId plus unknown version.
@@ -14693,7 +14732,7 @@ Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="cl
 <DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_TagThisBuild()"><B>_CVSSCM_TagThisBuild()</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
 <DD>Tag this build
-<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_WorkspaceInconsistent()"><B>_CVSSCM_WorkspaceInconsistent()</B></A> - 
+<DT><A HREF="./hudson/scm/Messages.html#_CVSSCM_WorkspaceInconsistent(java.lang.Object)"><B>_CVSSCM_WorkspaceInconsistent(Object)</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
 <DD>Workspace is inconsistent with configuration.
 <DT><A HREF="./hudson/node_monitors/Messages.html#_DiskSpaceMonitor_displayName()"><B>_DiskSpaceMonitor_displayName()</B></A> - 
