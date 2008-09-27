@@ -131,7 +131,7 @@ public final class PluginManager extends AbstractModelObject {
 		String strategyName = System.getProperty(PluginStrategy.class.getName());
 		if (strategyName != null) {
 			try {
-				Class<?> klazz = Class.forName(strategyName);
+				Class<?> klazz = getClass().getClassLoader().loadClass(strategyName);
 				Object strategy = klazz.getConstructor(PluginManager.class)
 						.newInstance(this);
 				if (strategy instanceof PluginStrategy) {
