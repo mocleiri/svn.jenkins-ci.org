@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonTestCase (Test harness for Hudson and plugins 1.254 API)
+HudsonTestCase (Test harness for Hudson and plugins 1.255 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-09-27">
+<META NAME="date" CONTENT="2008-10-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Test harness for Hudson and plugins 1.254 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.254 API)";
+        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.255 API)";
     }
 }
 </SCRIPT>
@@ -292,6 +292,14 @@ Base class for all Hudson test cases.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.io.File</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#createTmpDir()">createTmpDir</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allocates a new temporary directory for the duration of this test.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -730,6 +738,22 @@ protected <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/La
 <P>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createTmpDir()"><!-- --></A><H3>
+createTmpDir</H3>
+<PRE>
+protected java.io.File <B>createTmpDir</B>()
+                             throws java.io.IOException</PRE>
+<DL>
+<DD>Allocates a new temporary directory for the duration of this test.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>
