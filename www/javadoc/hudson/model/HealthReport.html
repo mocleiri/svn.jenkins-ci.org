@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HealthReport (Hudson core 1.255 API)
+HealthReport (Hudson core 1.256 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-02">
+<META NAME="date" CONTENT="2008-10-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HealthReport (Hudson core 1.255 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HealthReport (Hudson core 1.255 API)";
+        parent.document.title="HealthReport (Hudson core 1.256 API)";
     }
 }
 </SCRIPT>
@@ -136,8 +136,23 @@ Represents health of something (typically project).
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new HealthReport.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/HealthReport.html#HealthReport(int, org.jvnet.localizer.Localizable)">HealthReport</A></B>(int&nbsp;score,
+             org.jvnet.localizer.Localizable&nbsp;description)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new HealthReport.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/model/HealthReport.html#HealthReport(int, java.lang.String)">HealthReport</A></B>(int&nbsp;score,
              java.lang.String&nbsp;description)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>use <A HREF="../../hudson/model/HealthReport.html#HealthReport(int, org.jvnet.localizer.Localizable)"><CODE>HealthReport(int, org.jvnet.localizer.Localizable)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/HealthReport.html#HealthReport(int, java.lang.String, org.jvnet.localizer.Localizable)">HealthReport</A></B>(int&nbsp;score,
+             java.lang.String&nbsp;iconUrl,
+             org.jvnet.localizer.Localizable&nbsp;description)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new HealthReport.</TD>
@@ -148,7 +163,7 @@ Represents health of something (typically project).
              java.lang.String&nbsp;description)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new HealthReport.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>use <A HREF="../../hudson/model/HealthReport.html#HealthReport(int, java.lang.String, org.jvnet.localizer.Localizable)"><CODE>HealthReport(int, String, org.jvnet.localizer.Localizable)</CODE></A></I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -199,6 +214,14 @@ Represents health of something (typically project).
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get's the iconUrl relative to the hudson root url, for the correct size.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/HealthReport.html#getLocalizableDescription()">getLocalizableDescription</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Getter for property 'localizibleDescription'.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -253,6 +276,14 @@ Represents health of something (typically project).
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/HealthReport.html#setLocalizibleDescription(org.jvnet.localizer.Localizable)">setLocalizibleDescription</A></B>(org.jvnet.localizer.Localizable&nbsp;localizibleDescription)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Setter for property 'localizibleDescription'.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/HealthReport.html#setScore(int)">setScore</A></B>(int&nbsp;score)</CODE>
 
 <BR>
@@ -284,9 +315,33 @@ Represents health of something (typically project).
 <A NAME="HealthReport(int, java.lang.String, java.lang.String)"><!-- --></A><H3>
 HealthReport</H3>
 <PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <B>HealthReport</B>(int&nbsp;score,
+                               java.lang.String&nbsp;iconUrl,
+                               java.lang.String&nbsp;description)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>use <A HREF="../../hudson/model/HealthReport.html#HealthReport(int, java.lang.String, org.jvnet.localizer.Localizable)"><CODE>HealthReport(int, String, org.jvnet.localizer.Localizable)</CODE></A></I>
+<P>
+<DD>Create a new HealthReport.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>score</CODE> - The percentage health score (from 0 to 100 inclusive).<DD><CODE>iconUrl</CODE> - The path to the icon corresponding to this <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>'s health or <code>null</code> to
+                    display the default icon corresponding to the current health score.
+                    <p/>
+                    If the path begins with a '/' then it will be the absolute path, otherwise the image is
+                    assumed to be in one of <code>/images/16x16/</code>, <code>/images/24x24/</code> or
+                    <code>/images/32x32/</code> depending on the icon size selected by the user.
+                    When calculating the url to display for absolute paths, the getIconUrl(String) method
+                    will replace /32x32/ in the path with the appropriate size.<DD><CODE>description</CODE> - The health icon's tool-tip.</DL>
+</DL>
+<HR>
+
+<A NAME="HealthReport(int, java.lang.String, org.jvnet.localizer.Localizable)"><!-- --></A><H3>
+HealthReport</H3>
+<PRE>
 public <B>HealthReport</B>(int&nbsp;score,
                     java.lang.String&nbsp;iconUrl,
-                    java.lang.String&nbsp;description)</PRE>
+                    org.jvnet.localizer.Localizable&nbsp;description)</PRE>
 <DL>
 <DD>Create a new HealthReport.
 <P>
@@ -305,8 +360,24 @@ public <B>HealthReport</B>(int&nbsp;score,
 <A NAME="HealthReport(int, java.lang.String)"><!-- --></A><H3>
 HealthReport</H3>
 <PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <B>HealthReport</B>(int&nbsp;score,
+                               java.lang.String&nbsp;description)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>use <A HREF="../../hudson/model/HealthReport.html#HealthReport(int, org.jvnet.localizer.Localizable)"><CODE>HealthReport(int, org.jvnet.localizer.Localizable)</CODE></A></I>
+<P>
+<DD>Create a new HealthReport.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>score</CODE> - The percentage health score (from 0 to 100 inclusive).<DD><CODE>description</CODE> - The health icon's tool-tip.</DL>
+</DL>
+<HR>
+
+<A NAME="HealthReport(int, org.jvnet.localizer.Localizable)"><!-- --></A><H3>
+HealthReport</H3>
+<PRE>
 public <B>HealthReport</B>(int&nbsp;score,
-                    java.lang.String&nbsp;description)</PRE>
+                    org.jvnet.localizer.Localizable&nbsp;description)</PRE>
 <DL>
 <DD>Create a new HealthReport.
 <P>
@@ -448,6 +519,39 @@ public void <B>setDescription</B>(java.lang.String&nbsp;description)</PRE>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>description</CODE> - Value to set for property 'description'.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLocalizableDescription()"><!-- --></A><H3>
+getLocalizableDescription</H3>
+<PRE>
+public org.jvnet.localizer.Localizable <B>getLocalizableDescription</B>()</PRE>
+<DL>
+<DD>Getter for property 'localizibleDescription'.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Value for property 'localizibleDescription'.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLocalizibleDescription(org.jvnet.localizer.Localizable)"><!-- --></A><H3>
+setLocalizibleDescription</H3>
+<PRE>
+public void <B>setLocalizibleDescription</B>(org.jvnet.localizer.Localizable&nbsp;localizibleDescription)</PRE>
+<DL>
+<DD>Setter for property 'localizibleDescription'.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>localizibleDescription</CODE> - Value to set for property 'localizibleDescription'.</DL>
 </DD>
 </DL>
 <HR>

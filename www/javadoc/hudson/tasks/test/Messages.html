@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Messages (Hudson core 1.255 API)
+Messages (Hudson core 1.256 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-02">
+<META NAME="date" CONTENT="2008-10-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Messages (Hudson core 1.255 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Messages (Hudson core 1.255 API)";
+        parent.document.title="Messages (Hudson core 1.256 API)";
     }
 }
 </SCRIPT>
@@ -141,19 +141,20 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/test/Messages.html#_AbstractTestResultAction_TestsDescription(java.lang.Object, java.lang.Object)">_AbstractTestResultAction_TestsDescription</A></B>(java.lang.Object&nbsp;arg1,
-                                           java.lang.Object&nbsp;arg2)</CODE>
+<TD><CODE><B><A HREF="../../../hudson/tasks/test/Messages.html#_AbstractTestResultAction_TestsDescription(java.lang.Object, java.lang.Object, java.lang.Object)">_AbstractTestResultAction_TestsDescription</A></B>(java.lang.Object&nbsp;arg1,
+                                           java.lang.Object&nbsp;arg2,
+                                           java.lang.Object&nbsp;arg3)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0} tests failing out of a total of {1} tests.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0}: {1} tests failing out of a total of {2} tests.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/test/Messages.html#_AbstractTestResultAction_zeroTestDescription()">_AbstractTestResultAction_zeroTestDescription</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../../hudson/tasks/test/Messages.html#_AbstractTestResultAction_zeroTestDescription(java.lang.Object)">_AbstractTestResultAction_zeroTestDescription</A></B>(java.lang.Object&nbsp;arg1)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 tests in total.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0}: 0 tests in total.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -182,19 +183,20 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/test/Messages.html#AbstractTestResultAction_TestsDescription(java.lang.Object, java.lang.Object)">AbstractTestResultAction_TestsDescription</A></B>(java.lang.Object&nbsp;arg1,
-                                          java.lang.Object&nbsp;arg2)</CODE>
+<TD><CODE><B><A HREF="../../../hudson/tasks/test/Messages.html#AbstractTestResultAction_TestsDescription(java.lang.Object, java.lang.Object, java.lang.Object)">AbstractTestResultAction_TestsDescription</A></B>(java.lang.Object&nbsp;arg1,
+                                          java.lang.Object&nbsp;arg2,
+                                          java.lang.Object&nbsp;arg3)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0} tests failing out of a total of {1} tests.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0}: {1} tests failing out of a total of {2} tests.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/test/Messages.html#AbstractTestResultAction_zeroTestDescription()">AbstractTestResultAction_zeroTestDescription</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../../hudson/tasks/test/Messages.html#AbstractTestResultAction_zeroTestDescription(java.lang.Object)">AbstractTestResultAction_zeroTestDescription</A></B>(java.lang.Object&nbsp;arg1)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 tests in total.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0}: 0 tests in total.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -278,13 +280,14 @@ public static org.jvnet.localizer.Localizable <B>_AggregatedTestResultPublisher_
 </DL>
 <HR>
 
-<A NAME="AbstractTestResultAction_TestsDescription(java.lang.Object, java.lang.Object)"><!-- --></A><H3>
+<A NAME="AbstractTestResultAction_TestsDescription(java.lang.Object, java.lang.Object, java.lang.Object)"><!-- --></A><H3>
 AbstractTestResultAction_TestsDescription</H3>
 <PRE>
 public static java.lang.String <B>AbstractTestResultAction_TestsDescription</B>(java.lang.Object&nbsp;arg1,
-                                                                         java.lang.Object&nbsp;arg2)</PRE>
+                                                                         java.lang.Object&nbsp;arg2,
+                                                                         java.lang.Object&nbsp;arg3)</PRE>
 <DL>
-<DD>{0} tests failing out of a total of {1} tests.
+<DD>{0}: {1} tests failing out of a total of {2} tests.
 <P>
 <DD><DL>
 </DL>
@@ -292,13 +295,14 @@ public static java.lang.String <B>AbstractTestResultAction_TestsDescription</B>(
 </DL>
 <HR>
 
-<A NAME="_AbstractTestResultAction_TestsDescription(java.lang.Object, java.lang.Object)"><!-- --></A><H3>
+<A NAME="_AbstractTestResultAction_TestsDescription(java.lang.Object, java.lang.Object, java.lang.Object)"><!-- --></A><H3>
 _AbstractTestResultAction_TestsDescription</H3>
 <PRE>
 public static org.jvnet.localizer.Localizable <B>_AbstractTestResultAction_TestsDescription</B>(java.lang.Object&nbsp;arg1,
-                                                                                         java.lang.Object&nbsp;arg2)</PRE>
+                                                                                         java.lang.Object&nbsp;arg2,
+                                                                                         java.lang.Object&nbsp;arg3)</PRE>
 <DL>
-<DD>{0} tests failing out of a total of {1} tests.
+<DD>{0}: {1} tests failing out of a total of {2} tests.
 <P>
 <DD><DL>
 </DL>
@@ -358,12 +362,12 @@ public static org.jvnet.localizer.Localizable <B>_AggregatedTestResultPublisher_
 </DL>
 <HR>
 
-<A NAME="AbstractTestResultAction_zeroTestDescription()"><!-- --></A><H3>
+<A NAME="AbstractTestResultAction_zeroTestDescription(java.lang.Object)"><!-- --></A><H3>
 AbstractTestResultAction_zeroTestDescription</H3>
 <PRE>
-public static java.lang.String <B>AbstractTestResultAction_zeroTestDescription</B>()</PRE>
+public static java.lang.String <B>AbstractTestResultAction_zeroTestDescription</B>(java.lang.Object&nbsp;arg1)</PRE>
 <DL>
-<DD>0 tests in total.
+<DD>{0}: 0 tests in total.
 <P>
 <DD><DL>
 </DL>
@@ -371,12 +375,12 @@ public static java.lang.String <B>AbstractTestResultAction_zeroTestDescription</
 </DL>
 <HR>
 
-<A NAME="_AbstractTestResultAction_zeroTestDescription()"><!-- --></A><H3>
+<A NAME="_AbstractTestResultAction_zeroTestDescription(java.lang.Object)"><!-- --></A><H3>
 _AbstractTestResultAction_zeroTestDescription</H3>
 <PRE>
-public static org.jvnet.localizer.Localizable <B>_AbstractTestResultAction_zeroTestDescription</B>()</PRE>
+public static org.jvnet.localizer.Localizable <B>_AbstractTestResultAction_zeroTestDescription</B>(java.lang.Object&nbsp;arg1)</PRE>
 <DL>
-<DD>0 tests in total.
+<DD>{0}: 0 tests in total.
 <P>
 <DD><DL>
 </DL>

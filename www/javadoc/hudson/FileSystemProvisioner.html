@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FileSystemProvisioner (Hudson core 1.255 API)
+FileSystemProvisioner (Hudson core 1.256 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-02">
+<META NAME="date" CONTENT="2008-10-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FileSystemProvisioner (Hudson core 1.255 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FileSystemProvisioner (Hudson core 1.255 API)";
+        parent.document.title="FileSystemProvisioner (Hudson core 1.256 API)";
     }
 }
 </SCRIPT>
@@ -158,8 +158,22 @@ Prepares and provisions workspaces for <A HREF="../hudson/model/AbstractProject.
  the workspace snapshot of the upstream? Yes, by using <A HREF="../hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners"><CODE>RunListener</CODE></A>.
  So this becomes like a special SCM type.
 
- To support promoted builds, we need an abstraction for permalinks.
- This is also needed for other UI.
+ <h2>Design take 2</h2>
+ <p>
+ The first piece of this is the custom <A HREF="../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A>, which inherits the
+ workspace of another job. When this executes, it picks up
+ <A HREF="../hudson/WorkspaceSnapshot.html" title="class in hudson"><CODE>WorkspaceSnapshot</CODE></A> from the other job and use it to obtain the workspace.
+
+ <p>
+ Then there's <A HREF="../hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners"><CODE>RunListener</CODE></A>, which creates a snapshot if
+ someone else is interested in using a snapshot later.
+
+ <h3>TODOs</h3>
+ <ul>
+ <li>
+ Garbage collection of workspace snapshots. 
+
+ </ul>
 <P>
 
 <P>
