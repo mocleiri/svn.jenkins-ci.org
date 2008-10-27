@@ -29,6 +29,10 @@ public class NodeListTest extends TestCase {
             throw new UnsupportedOperationException();
         }
 
+        public void setNodeName(String name) {
+            throw new UnsupportedOperationException();
+        }
+
         public String getNodeDescription() {
             throw new UnsupportedOperationException();
         }

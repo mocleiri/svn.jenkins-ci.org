@@ -423,6 +423,10 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         return "";
     }
 
+    public void setNodeName(String name) {
+        throw new UnsupportedOperationException(); // not allowed
+    }
+
     public String getNodeDescription() {
         return "the master Hudson node";
     }

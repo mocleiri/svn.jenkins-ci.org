@@ -48,7 +48,7 @@ public abstract class Slave implements Node, Serializable {
     /**
      * Name of this slave node.
      */
-    protected final String name;
+    protected String name;
 
     /**
      * Description of this node.
@@ -137,6 +137,10 @@ public abstract class Slave implements Node, Serializable {
 
     public String getNodeName() {
         return name;
+    }
+
+    public void setNodeName(String name) {
+        this.name = name; 
     }
 
     public String getNodeDescription() {

@@ -33,6 +33,18 @@ public interface Node extends Describable<Node>, ExtensionPoint, AccessControlle
     String getNodeName();
 
     /**
+     * When the user clones a {@link Node}, Hudson uses this method to change the node name right after
+     * the cloned {@link Node} object is instantiated.
+     *
+     * <p>
+     * This method is never used for any other purpose, and as such for all practical intents and purposes,
+     * the node name should be treated like immutable.
+     *
+     * @deprecated to indicate that this method isn't really meant to be called by random code.
+     */
+    void setNodeName(String name);
+
+    /**
      * Human-readable description of this node.
      */
     String getNodeDescription();

@@ -119,6 +119,7 @@ public final class ComputerSet extends AbstractModelObject {
             // copy through XStream
             String xml = Hudson.XSTREAM.toXML(src);
             Node result = (Node)Hudson.XSTREAM.fromXML(xml);
+            result.setNodeName(name);
 
             app.addNode(result);
 
