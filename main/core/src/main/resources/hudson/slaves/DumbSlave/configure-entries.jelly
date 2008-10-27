@@ -2,39 +2,27 @@
   Config page
 -->
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout"
-         xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:local="local">
-  <d:taglib uri="local">
-    <d:tag name="mode">
-      <f:entry title="${%Usage}" help="/help/system-config/master-slave/usage.html">
-        <select class="setting-input" name="${name}">
-          <j:forEach var="m" items="${h.getNodeModes()}">
-            <f:option value="${m.name}" selected="${m==node.mode}">${m.description}</f:option>
-          </j:forEach>
-        </select>
-      </f:entry>
-    </d:tag>
-  </d:taglib>
-
+         xmlns:t="/lib/hudson" xmlns:f="/lib/form">
   <f:entry title="${%Description}" help="/help/system-config/master-slave/description.html">
-    <f:textbox name="slave.description" value="${it.nodeDescription}"/>
+    <f:textbox name="description" value="${it.nodeDescription}"/>
   </f:entry>
 
   <f:entry title="${%# of executors}"
            help="/help/system-config/master-slave/numExecutors.html">
-    <f:textbox name="slave.numExecutors" value="${it.numExecutors}"
+    <f:textbox name="numExecutors" value="${it.numExecutors}"
                checkUrl="'/fieldCheck?errorText='+escape('${%Number of executors is mandatory.}')+'&amp;type=number-positive&amp;value='+escape(this.value)"/>
   </f:entry>
 
   <f:entry title="${%Remote FS root}" help="/help/system-config/master-slave/remoteFS.html">
-    <f:textbox name="slave.remoteFS" value="${it.remoteFS}"
+    <f:textbox name="remoteFS" value="${it.remoteFS}"
                checkUrl="'/remoteFSCheck?value='+escape(this.value)"/>
   </f:entry>
 
   <f:entry title="${%Labels}" help="/help/system-config/master-slave/label.html">
-    <f:textbox name="slave.label" value="${it.labelString}"/>
+    <f:textbox name="label" value="${it.labelString}"/>
   </f:entry>
 
-  <local:mode name="slave.mode" node="${s}" />
+  <f:slave-mode name="mode" node="${s}" />
 
   <f:dropdownList name="slave.launcher" title="${%Launch method}"
                   help="/help/system-config/master-slave/launcher.html">
