@@ -16,22 +16,22 @@
   </d:taglib>
 
   <f:entry title="${%Description}" help="/help/system-config/master-slave/description.html">
-    <f:textbox name="slave.description" value="${s.nodeDescription}"/>
+    <f:textbox name="slave.description" value="${it.nodeDescription}"/>
   </f:entry>
 
   <f:entry title="${%# of executors}"
            help="/help/system-config/master-slave/numExecutors.html">
-    <f:textbox name="slave.numExecutors" value="${s.numExecutors}"
-               checkUrl="'../fieldCheck?errorText='+escape('${%Number of executors is mandatory.}')+'&amp;type=number-positive&amp;value='+escape(this.value)"/>
+    <f:textbox name="slave.numExecutors" value="${it.numExecutors}"
+               checkUrl="'/fieldCheck?errorText='+escape('${%Number of executors is mandatory.}')+'&amp;type=number-positive&amp;value='+escape(this.value)"/>
   </f:entry>
 
   <f:entry title="${%Remote FS root}" help="/help/system-config/master-slave/remoteFS.html">
-    <f:textbox name="slave.remoteFS" value="${s.remoteFS}"
-               checkUrl="'../remoteFSCheck?value='+escape(this.value)"/>
+    <f:textbox name="slave.remoteFS" value="${it.remoteFS}"
+               checkUrl="'/remoteFSCheck?value='+escape(this.value)"/>
   </f:entry>
 
   <f:entry title="${%Labels}" help="/help/system-config/master-slave/label.html">
-    <f:textbox name="slave.label" value="${s.labelString}"/>
+    <f:textbox name="slave.label" value="${it.labelString}"/>
   </f:entry>
 
   <local:mode name="slave.mode" node="${s}" />
@@ -40,11 +40,11 @@
                   help="/help/system-config/master-slave/launcher.html">
     <j:forEach var="d" items="${h.getComputerLauncherDescriptors()}" varStatus="loop">
       <f:dropdownListBlock value="${d.clazz.name}" name="${d.displayName}"
-                           selected="${s.launcher.descriptor==d}"
+                           selected="${it.launcher.descriptor==d}"
                            title="${d.displayName}">
         <j:set var="descriptor" value="${d}"/>
         <j:set var="instance"
-               value="${h.ifThenElse(s.launcher.descriptor==d,s.launcher,null)}"/>
+               value="${h.ifThenElse(it.launcher.descriptor==d,it.launcher,null)}"/>
         <tr><td>
           <input type="hidden" name="stapler-class" value="${d.clazz.name}" />
         </td></tr>
@@ -60,11 +60,11 @@
       <j:forEach var="d" items="${h.getRetentionStrategyDescriptors()}">
         <j:if test="${d != null}">
           <f:dropdownListBlock value="${d.clazz.name}" name="${d.displayName}"
-                               selected="${s.retentionStrategy.descriptor==d}"
+                               selected="${it.retentionStrategy.descriptor==d}"
                                title="${d.displayName}">
             <j:set var="descriptor" value="${d}"/>
             <j:set var="instance"
-                   value="${h.ifThenElse(s.retentionStrategy.descriptor==d,s.retentionStrategy,null)}"/>
+                   value="${h.ifThenElse(it.retentionStrategy.descriptor==d,it.retentionStrategy,null)}"/>
             <tr><td>
               <input type="hidden" name="stapler-class" value="${d.clazz.name}" />
             </td></tr>
