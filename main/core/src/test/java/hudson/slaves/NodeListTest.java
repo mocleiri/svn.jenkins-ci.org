@@ -78,6 +78,10 @@ public class NodeListTest extends TestCase {
         public ClockDifference getClockDifference() throws IOException, InterruptedException {
             throw new UnsupportedOperationException();
         }
+
+        public NodeDescriptor getDescriptor() {
+            throw new UnsupportedOperationException();
+        }
     }
     static class EphemeralNode extends DummyNode implements hudson.slaves.EphemeralNode {
         public NodeFactory getFactory() {
