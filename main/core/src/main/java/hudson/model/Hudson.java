@@ -50,6 +50,8 @@ import hudson.slaves.ComputerListener;
 import hudson.slaves.RetentionStrategy;
 import hudson.slaves.NodeList;
 import hudson.slaves.NodeFactory;
+import hudson.slaves.DumbSlave;
+import hudson.slaves.NodeDescriptor;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildWrappers;
@@ -999,6 +1001,10 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         return (List)Collections.unmodifiableList(slaves);
     }
 
+    /**
+     * Returns all {@link Node}s in the system, excluding {@link Hudson} instance itself which
+     * represents the master.
+     */
     public List<Node> getNodes() {
         return Collections.unmodifiableList(slaves);
     }
@@ -1046,6 +1052,12 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         }
 
         save();
+    }
+
+    @Override
+    public NodeDescriptor getDescriptor() {
+        // TODO: implement this method later
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -1718,7 +1730,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             else
                 mode = Mode.NORMAL;
 
-            setNodes(req.bindJSONToList(Slave.class,json.get("slaves")));
+            setNodes(req.bindJSONToList(DumbSlave.class,json.get("slaves")));
 
             nodeFactories.rebuildHetero(req,json,NodeFactory.ALL,"nodeFactory");
         } catch (FormException e) {
@@ -1804,7 +1816,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             return null;
         }
 
-        if(mode!=null && mode.equals("copyJob")) {
+        if(mode!=null && mode.equals("copy")) {
             String from = req.getParameter("from");
             TopLevelItem src = getItem(from);
             if(src==null) {
@@ -2714,7 +2726,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
     static {
         XSTREAM.alias("hudson",Hudson.class);
-        XSTREAM.alias("slave",Slave.class);
+        XSTREAM.alias("slave", DumbSlave.class);
         XSTREAM.alias("jdk",JDK.class);
         // for backward compatibility with <1.75, recognize the tag name "view" as well.
         XSTREAM.alias("view", ListView.class);

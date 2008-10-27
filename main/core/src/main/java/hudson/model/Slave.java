@@ -9,6 +9,8 @@ import hudson.slaves.RetentionStrategy;
 import hudson.slaves.CommandLauncher;
 import hudson.slaves.JNLPLauncher;
 import hudson.slaves.SlaveComputer;
+import hudson.slaves.NodeDescriptor;
+import hudson.slaves.DumbSlave;
 import hudson.model.Descriptor.FormException;
 import hudson.remoting.Callable;
 import hudson.remoting.VirtualChannel;
@@ -35,9 +37,12 @@ import java.util.*;
  * Ideally this would have been in the <tt>hudson.slaves</tt> package,
  * but for compatibility reasons, it can't.
  *
+ * <p>
+ * TODO: move out more stuff to {@link DumbSlave}.
+ *
  * @author Kohsuke Kawaguchi
  */
-public class Slave implements Node, Serializable {
+public abstract class Slave implements Node, Serializable {
     /**
      * Name of this slave node.
      */

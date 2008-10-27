@@ -2,6 +2,8 @@ package hudson.model;
 
 import hudson.FilePath;
 import hudson.Launcher;
+import hudson.ExtensionPoint;
+import hudson.slaves.NodeDescriptor;
 import hudson.node_monitors.NodeMonitor;
 import hudson.util.ClockDifference;
 import hudson.util.EnumConverter;
@@ -11,12 +13,16 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
- * Commonality between {@link Slave} and master {@link Hudson}.
+ * Base type of Hudson slaves.
+ *
+ * <p>
+ * As a special case, {@link Hudson} extends from here.
  *
  * @author Kohsuke Kawaguchi
  * @see NodeMonitor
+ * @see NodeDescriptor
  */
-public interface Node {
+public interface Node extends Describable<Node>, ExtensionPoint {
     /**
      * Name of this node.
      *
@@ -110,6 +116,8 @@ public interface Node {
      * Gets the {@link FilePath} on this node.
      */
     FilePath createPath(String absolutePath);
+
+    public abstract NodeDescriptor getDescriptor();
 
     /**
      * Estimates the clock difference with this slave.

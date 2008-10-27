@@ -376,6 +376,10 @@ public abstract class Descriptor<T extends Describable<T>> implements Saveable {
         return null;
     }
 
+    public static Descriptor find(String className) {
+        return find(ALL.getView(),className);
+    }
+
     public static final class FormException extends Exception {
         private final String formField;
 
