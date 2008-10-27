@@ -140,8 +140,8 @@ public final class ComputerSet extends AbstractModelObject {
      * Really creates a new slave.
      */
     public synchronized void doDoCreateItem( StaplerRequest req, StaplerResponse rsp,
-                                           @QueryParameter("name") String name, @QueryParameter("type") String type,
-                                           @QueryParameter("from") String from ) throws IOException, ServletException {
+                                           @QueryParameter("name") String name,
+                                           @QueryParameter("type") String type ) throws IOException, ServletException {
         try {
             final Hudson app = Hudson.getInstance();
             app.checkPermission(Hudson.CONFIGURE);  // TODO: new permission?

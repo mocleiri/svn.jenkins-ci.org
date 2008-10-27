@@ -2,6 +2,7 @@ package hudson.model;
 
 import hudson.EnvVars;
 import hudson.Util;
+import hudson.model.Descriptor.FormException;
 import hudson.node_monitors.NodeMonitor;
 import hudson.remoting.Channel;
 import hudson.remoting.VirtualChannel;
@@ -497,6 +498,36 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
         }
 
         req.getView(this,"_script.jelly").forward(req,rsp);
+    }
+
+    /**
+     * Accepts the update to the node configuration.
+     */
+    public void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        try {
+            final Hudson app = Hudson.getInstance();
+            app.checkPermission(Hudson.CONFIGURE);  // TODO: new permission?
+
+            Node result = getNode().getDescriptor().newInstance(req, req.getSubmittedForm());
+
+            // replace the old Node object by the new one
+            synchronized (app) {
+                List<Node> nodes = new ArrayList<Node>(app.getNodes());
+                int i = nodes.indexOf(getNode());
+                if(i<0) {
+                    sendError("This slave appears to be removed while you were editing the configuration",req,rsp);
+                    return;
+                }
+
+                nodes.set(i,result);
+                app.setNodes(nodes);
+            }
+
+            // take the user back to the slave top page
+            rsp.sendRedirect2(".");
+        } catch (FormException e) {
+            sendError(e,req,rsp);
+        }
     }
 
     /**

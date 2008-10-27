@@ -2595,6 +2595,11 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             return RetentionStrategy.NOOP;
         }
 
+        public void doConfigSubmit(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+            // the master node isn't in the Hudson.getNodes(), so this method makes no sense.
+            throw new UnsupportedOperationException();
+        }
+
         @Override
         public VirtualChannel getChannel() {
             return localChannel;
