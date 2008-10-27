@@ -19,8 +19,6 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.json.JSONObject;
-
 /**
  * Serves as the top of {@link Computer}s in the URL hierarchy.
  * <p>
@@ -97,74 +95,93 @@ public final class ComputerSet extends AbstractModelObject {
     }
 
     /**
-     * Creates a new slave.
+     * First check point in creating a new slave.
      */
-    public synchronized Node doCreateItem( StaplerRequest req, StaplerResponse rsp,
+    public synchronized void doCreateItem( StaplerRequest req, StaplerResponse rsp,
+                                           @QueryParameter("name") String name, @QueryParameter("mode") String mode,
+                                           @QueryParameter("from") String from ) throws IOException, ServletException {
+        final Hudson app = Hudson.getInstance();
+        app.checkPermission(Hudson.CONFIGURE);  // TODO: new permission?
+
+        if (checkName(req, rsp, name)) return;
+
+        if(mode!=null && mode.equals("copy")) {
+            Node src = app.getNode(from);
+            if(src==null) {
+                rsp.setStatus(SC_BAD_REQUEST);
+                if(Util.fixEmpty(from)==null)
+                    sendError(Messages.ComputerSet_SpecifySlaveToCopy(),req,rsp);
+                else
+                    sendError(Messages.ComputerSet_NoSuchSlave(from),req,rsp);
+                return;
+            }
+
+            // copy through XStream
+            String xml = Hudson.XSTREAM.toXML(src);
+            Node result = (Node)Hudson.XSTREAM.fromXML(xml);
+
+            app.addNode(result);
+
+            // send the browser to the config page
+            rsp.sendRedirect2(result.getNodeName()+"/configure");
+        } else {
+            // proceed to step 2
+            if(mode==null) {
+                rsp.sendError(SC_BAD_REQUEST);
+                return;
+            }
+
+            req.setAttribute("descriptor", NodeDescriptor.ALL.find(mode));
+            req.getView(this,"_new.jelly").forward(req,rsp);
+        }
+    }
+
+    /**
+     * Really creates a new slave.
+     */
+    public synchronized void doDoCreateItem( StaplerRequest req, StaplerResponse rsp,
                                            @QueryParameter("name") String name, @QueryParameter("mode") String mode,
                                            @QueryParameter("from") String from ) throws IOException, ServletException {
         try {
             final Hudson app = Hudson.getInstance();
             app.checkPermission(Hudson.CONFIGURE);  // TODO: new permission?
 
-            if(name==null) {
-                rsp.sendError(HttpServletResponse.SC_BAD_REQUEST,"Query parameter 'name' is required");
-                return null;
-            }
-            name = name.trim();
+            if (checkName(req, rsp, name)) return;
 
-            mode = req.getParameter("mode");
-            try {
-                Hudson.checkGoodName(name);
-            } catch (ParseException e) {
-                rsp.setStatus(SC_BAD_REQUEST);
-                sendError(e,req,rsp);
-                return null;
-            }
-
-            if(app.getNode(name)!=null) {
-                rsp.setStatus(SC_BAD_REQUEST);
-                sendError(Messages.ComputerSet_SlaveAlreadyExists(name),req,rsp);
-                return null;
-            }
-
-            Node result;
-
-            if(mode!=null && mode.equals("copy")) {
-                Node src = app.getNode(from);
-                if(src==null) {
-                    rsp.setStatus(SC_BAD_REQUEST);
-                    if(Util.fixEmpty(from)==null)
-                        sendError(Messages.ComputerSet_SpecifySlaveToCopy(),req,rsp);
-                    else
-                        sendError(Messages.ComputerSet_NoSuchSlave(from),req,rsp);
-                    return null;
-                }
-
-                // copy through XStream
-                String xml = Hudson.XSTREAM.toXML(src);
-                result = (Node)Hudson.XSTREAM.fromXML(xml);
-            } else {
-                // create empty job and redirect to the project config screen
-                if(mode==null) {
-                    rsp.sendError(SC_BAD_REQUEST);
-                    return null;
-                }
-
-                // creates an empty Node object and then reconfigure it later.
-                JSONObject jo = new JSONObject();
-                jo.put("name",name);
-                result = NodeDescriptor.ALL.find(mode).newInstance(req,jo);
-            }
-
+            Node result = NodeDescriptor.ALL.find(mode).newInstance(req, req.getSubmittedForm());
             app.addNode(result);
 
-            // send the browser to the config page
-            rsp.sendRedirect2(result.getNodeName()+"/configure");
-
-            return result;
+            // take the user back to the slave list top page
+            rsp.sendRedirect2(".");
         } catch (FormException e) {
-            throw new ServletException(e);
+            sendError(e,req,rsp);
         }
+    }
+
+    /**
+     * Makes sure that the given name is good as a slave name.
+     */
+    private boolean checkName(StaplerRequest req, StaplerResponse rsp, String name) throws IOException, ServletException {
+        if(name==null) {
+            rsp.sendError(HttpServletResponse.SC_BAD_REQUEST,"Query parameter 'name' is required");
+            return true;
+        }
+        name = name.trim();
+
+        try {
+            Hudson.checkGoodName(name);
+        } catch (ParseException e) {
+            rsp.setStatus(SC_BAD_REQUEST);
+            sendError(e,req,rsp);
+            return true;
+        }
+
+        if(Hudson.getInstance().getNode(name)!=null) {
+            rsp.setStatus(SC_BAD_REQUEST);
+            sendError(Messages.ComputerSet_SlaveAlreadyExists(name),req,rsp);
+            return true;
+        }
+        return false;
     }
 
     public Api getApi() {

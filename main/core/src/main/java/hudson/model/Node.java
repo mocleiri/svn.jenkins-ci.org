@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
- * Base type of Hudson slaves.
+ * Base type of Hudson slaves (although in practice, you probably extend {@link Slave} to define a new slave type.)
  *
  * <p>
  * As a special case, {@link Hudson} extends from here.
