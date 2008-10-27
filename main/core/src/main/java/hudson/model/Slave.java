@@ -113,8 +113,9 @@ public abstract class Slave implements Node, Serializable {
         // so this check is harmful.
         //if (!localFS.exists())
         //    throw new FormException("Invalid slave configuration for " + name + ". No such directory exists: " + localFS, null);
-        if (remoteFS.equals(""))
-            throw new FormException(Messages.Slave_InvalidConfig_NoRemoteDir(name), null);
+
+//        if (remoteFS.equals(""))
+//            throw new FormException(Messages.Slave_InvalidConfig_NoRemoteDir(name), null);
 
         if (this.numExecutors<=0)
             throw new FormException(Messages.Slave_InvalidConfig_Executors(name), null);
