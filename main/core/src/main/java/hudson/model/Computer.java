@@ -524,8 +524,8 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
                 app.setNodes(nodes);
             }
 
-            // take the user back to the slave top page
-            rsp.sendRedirect2(".");
+            // take the user back to the slave top page.
+            rsp.sendRedirect2("../"+result.getNodeName()+'/');
         } catch (FormException e) {
             sendError(e,req,rsp);
         }
