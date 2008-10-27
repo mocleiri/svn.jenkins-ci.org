@@ -3,7 +3,7 @@
   <parent>
     <artifactId>pom</artifactId>
     <groupId>org.jvnet.hudson.main</groupId>
-    <version>1.251-SNAPSHOT</version>
+    <version>1.257-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jvnet.hudson.main</groupId>
@@ -40,12 +40,6 @@
           </dependency>
         </dependencies>
       </plugin>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <testFailureIgnore>true</testFailureIgnore>
-        </configuration>
-      </plugin>
     </plugins>
   </build>
   
@@ -78,7 +72,13 @@
     <dependency>
       <groupId>org.jvnet.hudson</groupId>
       <artifactId>htmlunit</artifactId>
-      <version>2.2-hudson-2</version>
+      <version>2.2-hudson-5</version>
+    </dependency>
+    <dependency>
+      <!-- for testing JNLP launch. -->
+      <groupId>org.jvnet.hudson</groupId>
+      <artifactId>netx</artifactId>
+      <version>0.5-hudson-1</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

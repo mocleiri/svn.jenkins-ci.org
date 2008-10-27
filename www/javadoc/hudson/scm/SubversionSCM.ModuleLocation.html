@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SubversionSCM.ModuleLocation (Hudson core 1.249 API)
+SubversionSCM.ModuleLocation (Hudson core 1.256 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-19">
+<META NAME="date" CONTENT="2008-10-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SubversionSCM.ModuleLocation (Hudson core 1.249 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionSCM.ModuleLocation (Hudson core 1.249 API)";
+        parent.document.title="SubversionSCM.ModuleLocation (Hudson core 1.256 API)";
     }
 }
 </SCRIPT>
@@ -172,6 +172,14 @@ small structure to store local and remote (repository) location
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/scm/SubversionSCM.ModuleLocation.html" title="class in hudson.scm">SubversionSCM.ModuleLocation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.ModuleLocation.html#getExpandedLocation(hudson.model.AbstractBuild)">getExpandedLocation</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expand location value based on Build parametric execution.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.ModuleLocation.html#toString()">toString</A></B>()</CODE>
 
@@ -258,6 +266,24 @@ public java.lang.String <B>toString</B>()</PRE>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getExpandedLocation(hudson.model.AbstractBuild)"><!-- --></A><H3>
+getExpandedLocation</H3>
+<PRE>
+public <A HREF="../../hudson/scm/SubversionSCM.ModuleLocation.html" title="class in hudson.scm">SubversionSCM.ModuleLocation</A> <B>getExpandedLocation</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</PRE>
+<DL>
+<DD>Expand location value based on Build parametric execution.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>build</CODE> - Build instance for expanding parameters into their values
+<DT><B>Returns:</B><DD>Output ModuleLocation expanded according to Build parameters
+         values.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

@@ -16,14 +16,14 @@ import hudson.plugins.tfs.model.Server;
 import hudson.plugins.tfs.model.Workspace;
 import hudson.plugins.tfs.model.Workspaces;
 
-import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 
 public class CheckoutActionTest {
 
     private FilePath hudsonWs;
 
-    @Before public void teardown() throws Exception {
+    @After public void teardown() throws Exception {
         if (hudsonWs != null) {
             hudsonWs.deleteRecursive();
         }
@@ -49,6 +49,7 @@ public class CheckoutActionTest {
         verify(workspaces).newWorkspace("workspace");
         verify(workspace).mapWorkfolder(project, ".");
         verify(project).getFiles(".");
+        verify(workspace).unmapWorkfolder(".");
         verify(workspaces).deleteWorkspace(workspace);
     }
 
@@ -84,7 +85,10 @@ public class CheckoutActionTest {
 
         stub(server.getWorkspaces()).toReturn(workspaces);
         stub(server.getProject("project")).toReturn(project);
-        stub(workspaces.exists(new Workspace(server, "workspace"))).toReturn(true);
+        stub(workspaces.exists("workspace")).toReturn(true);
+        stub(workspaces.getWorkspace("workspace")).toReturn(workspace);
+        stub(server.getLocalHostname()).toReturn("LocalComputer");
+        stub(workspace.getComputer()).toReturn("LocalComputer");
         
         CheckoutAction action = new CheckoutAction("workspace", "project", ".", true);
         action.checkout(server, hudsonWs, null);
@@ -114,6 +118,7 @@ public class CheckoutActionTest {
         verify(workspaces).newWorkspace("workspace");
         verify(workspace).mapWorkfolder(project, ".");
         verify(project).getFiles(".");
+        verify(workspace).unmapWorkfolder(".");
         verify(workspaces).deleteWorkspace(isA(Workspace.class));
     }
 
@@ -144,10 +149,14 @@ public class CheckoutActionTest {
         Server server = mock(Server.class);        
         Workspaces workspaces = mock(Workspaces.class);
         Project project = mock(Project.class);
+        Workspace workspace = mock(Workspace.class);
 
         stub(server.getWorkspaces()).toReturn(workspaces);
         stub(server.getProject("project")).toReturn(project);
-        stub(workspaces.exists(new Workspace(server, "workspace"))).toReturn(true);
+        stub(workspaces.exists("workspace")).toReturn(true);
+        stub(workspaces.getWorkspace("workspace")).toReturn(workspace);
+        stub(server.getLocalHostname()).toReturn("LocalComputer");
+        stub(workspace.getComputer()).toReturn("LocalComputer");
         
         CheckoutAction action = new CheckoutAction("workspace", "project", ".", true);
         action.checkout(server, hudsonWs, null);
@@ -161,11 +170,15 @@ public class CheckoutActionTest {
         Server server = mock(Server.class);        
         Workspaces workspaces = mock(Workspaces.class);
         Project project = mock(Project.class);
+        Workspace workspace = mock(Workspace.class);
 
         List<ChangeSet> list = new ArrayList<ChangeSet>();
         stub(server.getWorkspaces()).toReturn(workspaces);
         stub(server.getProject("project")).toReturn(project);
-        stub(workspaces.exists(new Workspace(server, "workspace"))).toReturn(true);
+        stub(workspaces.exists("workspace")).toReturn(true);
+        stub(workspaces.getWorkspace("workspace")).toReturn(workspace);
+        stub(server.getLocalHostname()).toReturn("LocalComputer");
+        stub(workspace.getComputer()).toReturn("LocalComputer");
         stub(project.getDetailedHistory(isA(Calendar.class), isA(Calendar.class))).toReturn(list);
         
         CheckoutAction action = new CheckoutAction("workspace", "project", ".", true);
@@ -213,10 +226,14 @@ public class CheckoutActionTest {
         Server server = mock(Server.class);        
         Workspaces workspaces = mock(Workspaces.class);
         Project project = mock(Project.class);
+        Workspace workspace = mock(Workspace.class);
 
         stub(server.getWorkspaces()).toReturn(workspaces);
         stub(server.getProject("project")).toReturn(project);
-        stub(workspaces.exists(new Workspace(server, "workspace"))).toReturn(true);
+        stub(workspaces.exists("workspace")).toReturn(true);
+        stub(workspaces.getWorkspace("workspace")).toReturn(workspace);
+        stub(server.getLocalHostname()).toReturn("LocalComputer");
+        stub(workspace.getComputer()).toReturn("LocalComputer");
         
         CheckoutAction action = new CheckoutAction("workspace", "project", "tfs-ws", true);
         action.checkout(server, hudsonWs, null);

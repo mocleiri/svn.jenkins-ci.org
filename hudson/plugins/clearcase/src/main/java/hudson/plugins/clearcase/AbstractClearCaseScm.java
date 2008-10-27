@@ -1,28 +1,34 @@
 package hudson.plugins.clearcase;
 
+import hudson.FilePath;
+import hudson.Launcher;
+import hudson.Util;
+import hudson.model.AbstractBuild;
+import hudson.model.AbstractProject;
+import hudson.model.BuildListener;
+import hudson.model.Hudson;
+import hudson.model.Item;
+import hudson.model.Run;
+import hudson.model.TaskListener;
+import hudson.model.listeners.ItemListener;
+import hudson.plugins.clearcase.action.ChangeLogAction;
+import hudson.plugins.clearcase.action.CheckOutAction;
+import hudson.plugins.clearcase.action.PollAction;
+import hudson.plugins.clearcase.action.SaveChangeLogAction;
+import hudson.plugins.clearcase.util.BuildVariableResolver;
+import hudson.plugins.clearcase.util.EventRecordFilter;
+import hudson.scm.ChangeLogSet;
+import hudson.scm.SCM;
+import hudson.util.StreamTaskListener;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import hudson.FilePath;
-import hudson.Launcher;
-import hudson.model.AbstractBuild;
-import hudson.model.AbstractProject;
-import hudson.model.BuildListener;
-import hudson.model.Run;
-import hudson.model.TaskListener;
-import hudson.plugins.clearcase.action.ChangeLogAction;
-import hudson.plugins.clearcase.action.CheckOutAction;
-import hudson.plugins.clearcase.action.PollAction;
-import hudson.plugins.clearcase.action.SaveChangeLogAction;
-import hudson.plugins.clearcase.action.TaggingAction;
-import hudson.plugins.clearcase.util.EventRecordFilter;
-import hudson.scm.ChangeLogSet;
-import hudson.scm.SCM;
 
 /**
  * Abstract class for ClearCase SCM.
@@ -37,14 +43,18 @@ public abstract class AbstractClearCaseScm extends SCM {
     private final String viewName;
     private final String mkviewOptionalParam;
     private final boolean filteringOutDestroySubBranchEvent;
-    private transient String normalizedViewName;
+    protected transient String normalizedViewName;
     
-    public AbstractClearCaseScm(String viewName, String mkviewOptionalParam, 
+    public AbstractClearCaseScm(final String viewName, String mkviewOptionalParam, 
             boolean filterOutDestroySubBranchEvent) {
         this.viewName = viewName;
         this.mkviewOptionalParam = mkviewOptionalParam;
         this.filteringOutDestroySubBranchEvent = filterOutDestroySubBranchEvent;
+        
+        createAndRegisterListener();
     }
+
+
     
     /**
      * Create a CheckOutAction that will be used by the checkout method.
@@ -73,14 +83,7 @@ public abstract class AbstractClearCaseScm extends SCM {
      * @param build the current build
      * @return an action that returns the change logs for a CC repository
      */
-    protected abstract ChangeLogAction createChangeLogAction(ClearToolLauncher launcher, AbstractBuild<?, ?> build);
-    
-    /**
-     * Create a TaggingAction that will be used at the end of the build to tag the CC repository
-     * @param launcher the command line launcher
-     * @return an action that can tag the CC repository; can be null.
-     */
-    protected abstract TaggingAction createTaggingAction(ClearToolLauncher clearToolLauncher);
+    protected abstract ChangeLogAction createChangeLogAction(ClearToolLauncher launcher, AbstractBuild<?, ?> build,Launcher baseLauncher);
     
     /**
      * Return string array containing the branch names that should be used when polling for changes.
@@ -116,7 +119,7 @@ public abstract class AbstractClearCaseScm extends SCM {
 
     public String getViewName() {
         if (viewName == null) {
-            return "hudson_view";
+            return "${USER_NAME}_${JOB_NAME}_${NODE_NAME}_view";
         } else {
             return viewName;
         }
@@ -130,16 +133,11 @@ public abstract class AbstractClearCaseScm extends SCM {
      * @param project the project to get the name from
      * @return a string containing no invalid chars.
      */
-    public String getNormalizedViewName(AbstractProject<?, ?> project) {
+    public String getNormalizedViewName(AbstractBuild<?, ?> build,Launcher launcher) {
         if (normalizedViewName == null) {
             normalizedViewName = viewName;
-            Matcher matcher = Pattern.compile("\\$\\{JOB_NAME\\}", Pattern.CASE_INSENSITIVE).matcher(normalizedViewName);
-            if (matcher.find()) {
-                normalizedViewName = matcher.replaceAll(project.getName());
-            }
-            matcher = Pattern.compile("\\$\\{USER_NAME\\}", Pattern.CASE_INSENSITIVE).matcher(normalizedViewName);
-            if (matcher.find()) {
-                normalizedViewName = matcher.replaceAll(System.getProperty("user.name"));
+            if (build != null) {
+                normalizedViewName = Util.replaceMacro(viewName, new BuildVariableResolver(build,launcher));
             }
             normalizedViewName = normalizedViewName.replaceAll("[\\s\\\\\\/:\\?\\*\\|]+", "_");
         }
@@ -173,10 +171,8 @@ public abstract class AbstractClearCaseScm extends SCM {
      */
     @Override
     public void buildEnvVars(AbstractBuild build, Map<String, String> env) {
-        if (viewName != null) {
-            
-            String normalizedViewName = getNormalizedViewName(build.getProject());
-            
+        if (normalizedViewName != null) {
+                        
             env.put(CLEARCASE_VIEWNAME_ENVSTR, normalizedViewName);
         
             String workspace = env.get("WORKSPACE");
@@ -189,24 +185,24 @@ public abstract class AbstractClearCaseScm extends SCM {
     @Override
     public boolean checkout(AbstractBuild build, Launcher launcher, FilePath workspace, BuildListener listener, File changelogFile) throws IOException, InterruptedException {
         ClearToolLauncher clearToolLauncher = createClearToolLauncher(listener, workspace, launcher);
+
         
         // Create actions
         CheckOutAction checkoutAction = createCheckOutAction(clearToolLauncher);
-        ChangeLogAction changeLogAction = createChangeLogAction(clearToolLauncher, build);
+        ChangeLogAction changeLogAction = createChangeLogAction(clearToolLauncher, build,launcher);
         SaveChangeLogAction saveChangeLogAction = createSaveChangeLogAction(clearToolLauncher);
-        TaggingAction taggingAction = createTaggingAction(clearToolLauncher);
 
         EventRecordFilter filter = new EventRecordFilter();
         filter.setFilterOutDestroySubBranchEvent(isFilteringOutDestroySubBranchEvent());
         
         // Checkout code
-        checkoutAction.checkout(launcher, workspace, getNormalizedViewName(build.getProject()));
+        checkoutAction.checkout(launcher, workspace, getNormalizedViewName(build,launcher));
         
         // Gather change log
         List<? extends ChangeLogSet.Entry> changelogEntries = null;        
         if (build.getPreviousBuild() != null) {
             Date lastBuildTime = build.getPreviousBuild().getTimestamp().getTime();
-            changelogEntries = changeLogAction.getChanges(filter, lastBuildTime, getNormalizedViewName(build.getProject()), getBranchNames(), getViewPaths(workspace.child(getNormalizedViewName(build.getProject()))));
+            changelogEntries = changeLogAction.getChanges(filter, lastBuildTime, getNormalizedViewName(build,launcher), getBranchNames(), getViewPaths(workspace.child(getNormalizedViewName(build,launcher))));
         }        
 
         // Save change log
@@ -216,12 +212,7 @@ public abstract class AbstractClearCaseScm extends SCM {
         } else {
             saveChangeLogAction.saveChangeLog(changelogFile, changelogEntries);
         }        
-        
-        // Tag the build
-        if (taggingAction != null) {
-            // taggingAction.tag("lbl", "comment");
-        }
-        
+                
         return true;
     }
 
@@ -237,7 +228,8 @@ public abstract class AbstractClearCaseScm extends SCM {
             filter.setFilterOutDestroySubBranchEvent(isFilteringOutDestroySubBranchEvent());
             
             PollAction pollAction = createPollAction(createClearToolLauncher(listener, workspace, launcher));
-            return pollAction.getChanges(filter, buildTime, getNormalizedViewName(project), getBranchNames(), getViewPaths(workspace.child(getNormalizedViewName(project))));
+            String normalizedViewName = getNormalizedViewName((AbstractBuild) lastBuild,launcher);
+            return pollAction.getChanges(filter, buildTime, normalizedViewName, getBranchNames(), getViewPaths(workspace.child(normalizedViewName)));
         }
     }
     
@@ -256,4 +248,38 @@ public abstract class AbstractClearCaseScm extends SCM {
     protected ClearTool createClearTool(ClearToolLauncher launcher) {
         return new ClearToolSnapshot(launcher, mkviewOptionalParam);
     }
+    
+    /**
+     * Register listeners for Hudson events. At the moment we listen to onDeleted and try to remove 
+     * the ClearCase view that was created for this job.
+     * @param viewName	the name of the view
+     */
+	protected void createAndRegisterListener() {
+		Hudson hudson = Hudson.getInstance();
+		if (hudson == null) {
+			// Probably a JUnit test run?
+			Logger.getLogger(AbstractClearCaseScm.class.getName()).log(Level.INFO, "Failed to get Hudson instance");
+			
+			return;
+		}
+		hudson.getJobListeners().add(new ItemListener() {
+        	@Override
+        	public void onDeleted(Item item) {
+        		if (item instanceof AbstractProject) {
+        			AbstractProject<?, ?> project = (AbstractProject<?, ?>)item;
+        			if (project.getScm() instanceof AbstractClearCaseScm) {        				
+        				//TaskListener listener = TaskListener.NULL;
+        				StreamTaskListener listener = new StreamTaskListener(System.out);
+        				Launcher launcher = Hudson.getInstance().createLauncher(listener);
+        				ClearTool ct = createClearTool(createClearToolLauncher(listener, project.getWorkspace().getParent().getParent(), launcher));
+        				try {
+							ct.rmview(getNormalizedViewName(null, launcher));
+						} catch (Exception e) {
+							Logger.getLogger(AbstractClearCaseScm.class.getName()).log(Level.WARNING, "Failed to remove ClearCase view", e);
+						}
+        			}
+        		}
+        	}
+        });
+	}
 }

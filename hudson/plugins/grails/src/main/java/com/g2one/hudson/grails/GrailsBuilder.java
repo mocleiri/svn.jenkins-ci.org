@@ -1,7 +1,11 @@
 package com.g2one.hudson.grails;
 
+import com.martiansoftware.jsap.JSAP;
+import com.martiansoftware.jsap.JSAPResult;
+import com.martiansoftware.jsap.UnflaggedOption;
 import hudson.Launcher;
 import hudson.Util;
+import hudson.FilePath;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
@@ -17,45 +21,43 @@ import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
+
+import net.sf.json.JSONObject;
 
 public class GrailsBuilder extends Builder {
 
     private final String targets;
     private final String name;
-    private boolean runTestApp;
-    private boolean runWar;
     private String grailsWorkDir;
-    private boolean runClean;
-    private boolean runUpgrade;
+    private String projectWorkDir;
+    private String projectBaseDir;
 
     @DataBoundConstructor
-    public GrailsBuilder(String targets, String name, boolean runUpgrade, boolean runClean, boolean runTestApp, boolean runWar, String grailsWorkDir) {
+    public GrailsBuilder(String targets, String name, String grailsWorkDir, String projectWorkDir, String projectBaseDir) {
         this.name = name;
-        this.runClean = runClean;
-        this.runUpgrade = runUpgrade;
         this.targets = targets;
-        this.runTestApp = runTestApp;
-        this.runWar = runWar;
         this.grailsWorkDir = grailsWorkDir;
+        this.projectWorkDir = projectWorkDir;
+        this.projectBaseDir = projectBaseDir;
     }
 
-    public boolean isRunUpgrade() {
-        return runUpgrade;
+    public String getProjectBaseDir() {
+        return projectBaseDir;
     }
 
-    public void setRunUpgrade(boolean runUpgrade) {
-        this.runUpgrade = runUpgrade;
+    public void setProjectBaseDir(String projectBaseDir) {
+        this.projectBaseDir = projectBaseDir;
     }
 
-    public boolean isRunClean() {
-        return runClean;
+    public String getProjectWorkDir() {
+        return projectWorkDir;
     }
 
-    public void setRunClean(boolean runClean) {
-        this.runClean = runClean;
+    public void setProjectWorkDir(String projectWorkDir) {
+        this.projectWorkDir = projectWorkDir;
     }
 
     public String getGrailsWorkDir() {
@@ -74,22 +76,6 @@ public class GrailsBuilder extends Builder {
         return targets;
     }
 
-    public boolean isRunTestApp() {
-        return runTestApp;
-    }
-
-    public void setRunTestApp(boolean runTestApp) {
-        this.runTestApp = runTestApp;
-    }
-
-    public boolean isRunWar() {
-        return runWar;
-    }
-
-    public void setRunWar(boolean runWar) {
-        this.runWar = runWar;
-    }
-
     public GrailsInstallation getGrails() {
         for (GrailsInstallation i : DESCRIPTOR.getInstallations()) {
             if (name != null && i.getName().equals(name))
@@ -100,19 +86,7 @@ public class GrailsBuilder extends Builder {
 
     public boolean perform(Build<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException {
         Project proj = build.getProject();
-
-        List<String> targetsToRun = new ArrayList<String>();
-        if (runUpgrade) targetsToRun.add("upgrade");
-        if (runClean) targetsToRun.add("clean");
-        if (runTestApp) targetsToRun.add("test-app");
-        if (runWar) targetsToRun.add("war");
-        String[] requestedTargets = targets.split(" ");
-        for (String target : requestedTargets) {
-            if (!"".equals(target.trim())) {
-                targetsToRun.add(target);
-            }
-        }
-
+        List<String[]> targetsToRun = getTargetsToRun();
         if (targetsToRun.size() > 0) {
             String execName;
             if (launcher.isUnix()) {
@@ -128,7 +102,9 @@ public class GrailsBuilder extends Builder {
                 env.put("GRAILS_HOME", grailsInstallation.getGrailsHome());
             }
 
-            for (String target : targetsToRun) {
+            for (String[] targetsAndArgs : targetsToRun) {
+
+                String target = targetsAndArgs[0];
                 ArgumentListBuilder args = new ArgumentListBuilder();
 
                 if (grailsInstallation == null) {
@@ -142,18 +118,21 @@ public class GrailsBuilder extends Builder {
                     args.add(exec.getPath());
                 }
                 args.addKeyValuePairs("-D", build.getBuildVariables());
+                Map sytemProperties = new HashMap();
                 if (grailsWorkDir != null && !"".equals(grailsWorkDir.trim())) {
-                    Map sytemProperties = new HashMap();
                     sytemProperties.put("grails.work.dir", grailsWorkDir.trim());
+                }
+                if (projectWorkDir != null && !"".equals(projectWorkDir.trim())) {
+                    sytemProperties.put("project.work.dir", projectWorkDir.trim());
+                }
+                if (sytemProperties.size() > 0) {
                     args.addKeyValuePairs("-D", sytemProperties);
                 }
 
-
                 args.add(target);
-                if("upgrade".equals(target)) {
-                    args.add("-force");
+                for (int i = 1; i < targetsAndArgs.length; i++) {
+                    args.add(targetsAndArgs[i]);
                 }
-
 
                 if (!launcher.isUnix()) {
                     args.prepend("cmd.exe", "/C");
@@ -161,7 +140,14 @@ public class GrailsBuilder extends Builder {
                 }
 
                 try {
-                    int r = launcher.launch(args.toCommandArray(), env, listener.getLogger(), proj.getModuleRoot()).join();
+                    final FilePath basePath;
+                    FilePath moduleRoot = proj.getModuleRoot();
+                    if(projectBaseDir != null && !"".equals(projectBaseDir.trim())) {
+                        basePath = new FilePath(moduleRoot, projectBaseDir);
+                    } else {
+                        basePath = moduleRoot;
+                    }
+                    int r = launcher.launch(args.toCommandArray(), env, listener.getLogger(), basePath).join();
                     if (r != 0) return false;
                 } catch (IOException e) {
                     Util.displayIOException(e, listener);
@@ -174,6 +160,27 @@ public class GrailsBuilder extends Builder {
             return false;
         }
         return true;
+    }
+
+    protected List<String[]> getTargetsToRun() {
+        List<String[]> targetsToRun = new ArrayList<String[]>();
+        if (targets != null && targets.length() > 0) {
+            try {
+                JSAP jsap = new JSAP();
+                UnflaggedOption option = new UnflaggedOption("targets");
+                option.setGreedy(true);
+                jsap.registerParameter(option);
+                JSAPResult jsapResult = jsap.parse(this.targets);
+                String[] targets = jsapResult.getStringArray("targets");
+                for (String targetAndArgs : targets) {
+                    String[] pieces = targetAndArgs.split(" ");
+                    targetsToRun.add(pieces);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return targetsToRun;
     }
 
     public Descriptor<Builder> getDescriptor() {
@@ -200,10 +207,13 @@ public class GrailsBuilder extends Builder {
             return true;
         }
 
-        public Builder newInstance(StaplerRequest req) {
-            return req.bindParameters(GrailsBuilder.class, "grails.");
-        }
+//        public Builder newInstance(StaplerRequest req) {
+//            return req.bindParameters(GrailsBuilder.class, "grails.");
+//        }
 
+        public Builder newInstance(StaplerRequest req, JSONObject formData) throws FormException {
+           return req.bindJSON(clazz,formData);
+        }
 
         public GrailsInstallation[] getInstallations() {
             return installations;

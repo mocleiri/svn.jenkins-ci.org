@@ -2,7 +2,9 @@ package hudson.model;
 
 import hudson.ExtensionPoint;
 import hudson.Plugin;
-import hudson.util.DescriptorList;
+
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Participates in the rendering of HTML pages for all pages of Hudson.
@@ -64,5 +66,5 @@ public abstract class PageDecorator extends Descriptor<PageDecorator> implements
     /**
      * All the registered instances.
      */
-    public static final DescriptorList<PageDecorator> ALL = new DescriptorList<PageDecorator>();
+    public static final List<PageDecorator> ALL = new CopyOnWriteArrayList<PageDecorator>();
 }

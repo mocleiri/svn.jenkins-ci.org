@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Queue.Task (Hudson core 1.249 API)
+Queue.Task (Hudson core 1.256 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-19">
+<META NAME="date" CONTENT="2008-10-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.Task (Hudson core 1.249 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.Task (Hudson core 1.249 API)";
+        parent.document.title="Queue.Task (Hudson core 1.256 API)";
     }
 }
 </SCRIPT>
@@ -111,10 +111,15 @@ Interface Queue.Task</H2>
 
 <P>
 Task whose execution is controlled by the queue.
+
  <p>
  <CODE>Value equality</CODE> of <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A>s is used
  to collapse two tasks into one. This is used to avoid infinite
  queue backlog.
+
+ <p>
+ Pending <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A>s are persisted when Hudson shuts down, so
+ it needs to be persistable.
 <P>
 
 <P>

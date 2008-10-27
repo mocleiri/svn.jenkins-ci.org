@@ -9,10 +9,20 @@ import hudson.maven.MavenBuildProxy.BuildCallable;
 import hudson.model.Action;
 import hudson.model.BuildListener;
 import hudson.model.Result;
+import hudson.plugins.tasks.util.model.AbstractAnnotation;
+import hudson.plugins.tasks.util.model.AnnotationContainer;
+import hudson.plugins.tasks.util.model.DefaultAnnotationContainer;
+import hudson.plugins.tasks.util.model.FileAnnotation;
+import hudson.plugins.tasks.util.model.Priority;
+import hudson.plugins.tasks.util.model.WorkspaceFile;
+import hudson.remoting.Channel;
 import hudson.tasks.BuildStep;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.project.MavenProject;
@@ -31,7 +41,10 @@ import org.apache.maven.project.MavenProject;
  *
  * @author Ulli Hafner
  */
+// CHECKSTYLE:COUPLING-OFF
 public abstract class HealthAwareMavenReporter extends MavenReporter {
+    /** Default threshold priority limit. */
+    private static final String DEFAULT_PRIORITY_THRESHOLD_LIMIT = "low";
     /** Unique identifier of this class. */
     private static final long serialVersionUID = 3003791883748835331L;
     /** Annotation threshold to be reached if a build should be considered as unstable. */
@@ -54,6 +67,8 @@ public abstract class HealthAwareMavenReporter extends MavenReporter {
     private final String height;
     /** The name of the plug-in. */
     private final String pluginName;
+    /** Determines which warning priorities should be considered when evaluating the build stability and health. */
+    private String thresholdLimit;
 
     /**
      * Creates a new instance of <code>HealthReportingMavenReporter</code>.
@@ -69,33 +84,42 @@ public abstract class HealthAwareMavenReporter extends MavenReporter {
      *            than this value
      * @param height
      *            the height of the trend graph
+     * @param thresholdLimit
+     *            determines which warning priorities should be considered when
+     *            evaluating the build stability and health
      * @param pluginName
      *            the name of the plug-in
      */
     public HealthAwareMavenReporter(final String threshold, final String healthy, final String unHealthy,
-            final String height, final String pluginName) {
+            final String height, final String thresholdLimit, final String pluginName) {
         super();
         this.threshold = threshold;
         this.healthy = healthy;
         this.unHealthy = unHealthy;
         this.height = height;
+        this.thresholdLimit = thresholdLimit;
         this.pluginName = "[" + pluginName + "] ";
 
-        if (!StringUtils.isEmpty(threshold)) {
-            try {
-                minimumAnnotations = Integer.valueOf(threshold);
-                if (minimumAnnotations >= 0) {
-                    thresholdEnabled = true;
-                }
-            }
-            catch (NumberFormatException exception) {
-                // nothing to do, we use the default value
-            }
+        validateThreshold(threshold);
+        validateHealthiness(healthy, unHealthy);
+        if (StringUtils.isBlank(thresholdLimit)) {
+            this.thresholdLimit = DEFAULT_PRIORITY_THRESHOLD_LIMIT;
         }
-        if (!StringUtils.isEmpty(healthy) && !StringUtils.isEmpty(unHealthy)) {
+    }
+
+    /**
+     * Validates the healthiness parameters and sets the according fields.
+     *
+     * @param healthyParameter
+     *            the healthy value to validate
+     * @param unHealthyParameter
+     *            the unhealthy value to validate
+     */
+    private void validateHealthiness(final String healthyParameter, final String unHealthyParameter) {
+        if (!StringUtils.isEmpty(healthyParameter) && !StringUtils.isEmpty(unHealthyParameter)) {
             try {
-                healthyAnnotations = Integer.valueOf(healthy);
-                unHealthyAnnotations = Integer.valueOf(unHealthy);
+                healthyAnnotations = Integer.valueOf(healthyParameter);
+                unHealthyAnnotations = Integer.valueOf(unHealthyParameter);
                 if (healthyAnnotations >= 0 && unHealthyAnnotations > healthyAnnotations) {
                     healthyReportEnabled = true;
                 }
@@ -106,8 +130,41 @@ public abstract class HealthAwareMavenReporter extends MavenReporter {
         }
     }
 
+    /**
+     * Validates the threshold parameter and sets the according fields.
+     *
+     * @param thresholdParameter
+     *            the threshold to validate
+     */
+    private void validateThreshold(final String thresholdParameter) {
+        if (!StringUtils.isEmpty(thresholdParameter)) {
+            try {
+                minimumAnnotations = Integer.valueOf(thresholdParameter);
+                if (minimumAnnotations >= 0) {
+                    thresholdEnabled = true;
+                }
+            }
+            catch (NumberFormatException exception) {
+                // nothing to do, we use the default value
+            }
+        }
+    }
+
+    /**
+     * Initializes new fields that are not serialized yet.
+     *
+     * @return the object
+     */
+    @edu.umd.cs.findbugs.annotations.SuppressWarnings("Se")
+    private Object readResolve() {
+        if (thresholdLimit == null) {
+            thresholdLimit = DEFAULT_PRIORITY_THRESHOLD_LIMIT;
+        }
+        return this;
+    }
+
     /** {@inheritDoc} */
-    @SuppressWarnings("serial")
+    @SuppressWarnings({"serial", "PMD.AvoidFinalLocalVariable"})
     @Override
     public final boolean postExecute(final MavenBuildProxy build, final MavenProject pom, final MojoInfo mojo,
             final BuildListener listener, final Throwable error) throws InterruptedException, IOException {
@@ -131,6 +188,9 @@ public abstract class HealthAwareMavenReporter extends MavenReporter {
                 }
             });
 
+            if (build.getRootDir().isRemote()) {
+                copyFilesToMaster(logger, build.getProjectRootDir(), build.getRootDir(), result.getAnnotations());
+            }
             evaluateBuildResult(build, logger, result);
         }
         catch (AbortException exception) {
@@ -140,6 +200,48 @@ public abstract class HealthAwareMavenReporter extends MavenReporter {
         }
 
         return true;
+    }
+
+
+    /**
+     * Copies all files with annotations from the slave to the master.
+     *
+     * @param logger
+     *            logger to log any problems
+     * @param slaveRoot
+     *            directory to copy the files from
+     * @param masterRoot
+     *            directory to store the copied files in
+     * @param annotations
+     *            annotations determining the actual files to copy
+     * @throws IOException
+     *             if the files could not be written
+     * @throws FileNotFoundException
+     *             if the files could not be written
+     * @throws InterruptedException
+     *             if the user cancels the processing
+     */
+    private void copyFilesToMaster(final PrintStream logger, final FilePath slaveRoot, final FilePath masterRoot, final Collection<FileAnnotation> annotations) throws IOException,
+            FileNotFoundException, InterruptedException {
+        FilePath directory = new FilePath(masterRoot, AbstractAnnotation.WORKSPACE_FILES);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        AnnotationContainer container = new DefaultAnnotationContainer(annotations);
+        for (WorkspaceFile file : container.getFiles()) {
+            FilePath masterFile = new FilePath(directory, file.getTempName());
+            if (!masterFile.exists()) {
+                try {
+                    new FilePath((Channel)null, file.getName()).copyTo(masterFile);
+                }
+                catch (IOException exception) {
+                    String message = "Can't copy file from slave to master: slave="
+                            + file.getName() + ", master=" + masterFile.getName();
+                    log(logger, message);
+                    exception.printStackTrace(logger);
+                }
+            }
+        }
     }
 
     /**
@@ -209,15 +311,14 @@ public abstract class HealthAwareMavenReporter extends MavenReporter {
      *            the project with the annotations
      */
     private void evaluateBuildResult(final MavenBuildProxy build, final PrintStream logger, final ParserResult result) {
-        int annotationCount = result.getAnnotations().size();
-        if (annotationCount > 0) {
-            log(logger, "A total of " + annotationCount + " annotations have been found.");
-            if (isThresholdEnabled() && annotationCount >= getMinimumAnnotations()) {
-                build.setResult(Result.UNSTABLE);
-            }
+        int annotationCount = 0;
+        for (Priority priority : getPriorities()) {
+            int numberOfAnnotations = result.getNumberOfAnnotations(priority);
+            log(logger, "A total of " + numberOfAnnotations + " annotations have been found for priority " + priority);
+            annotationCount += numberOfAnnotations;
         }
-        else {
-            log(logger, "No annotations have been found.");
+        if (annotationCount > 0 && isThresholdEnabled() && annotationCount >= getMinimumAnnotations()) {
+            build.setResult(Result.UNSTABLE);
         }
     }
 
@@ -362,6 +463,34 @@ public abstract class HealthAwareMavenReporter extends MavenReporter {
      */
     public int getTrendHeight() {
         return new TrendReportSize(height).getHeight();
+    }
+
+    /**
+     * Returns the priorities that should should be considered when evaluating
+     * the build stability and health.
+     *
+     * @return the priorities
+     */
+    protected Collection<Priority> getPriorities() {
+        ArrayList<Priority> priorities = new ArrayList<Priority>();
+        priorities.add(Priority.HIGH);
+        if ("normal".equals(thresholdLimit)) {
+            priorities.add(Priority.NORMAL);
+        }
+        if ("low".equals(thresholdLimit)) {
+            priorities.add(Priority.NORMAL);
+            priorities.add(Priority.LOW);
+        }
+        return priorities;
+    }
+
+    /**
+     * Returns the thresholdLimit.
+     *
+     * @return the thresholdLimit
+     */
+    public String getThresholdLimit() {
+        return thresholdLimit;
     }
 }
 

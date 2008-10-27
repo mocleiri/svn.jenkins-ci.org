@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MarkupText.SubText (Hudson core 1.249 API)
+MarkupText.SubText (Hudson core 1.256 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-19">
+<META NAME="date" CONTENT="2008-10-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MarkupText.SubText (Hudson core 1.249 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MarkupText.SubText (Hudson core 1.249 API)";
+        parent.document.title="MarkupText.SubText (Hudson core 1.256 API)";
     }
 }
 </SCRIPT>
@@ -94,14 +94,15 @@ hudson</FONT>
 Class MarkupText.SubText</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../resources/inherit.gif" ALT="extended by "><B>hudson.MarkupText.SubText</B>
+  <IMG SRC="../resources/inherit.gif" ALT="extended by "><A HREF="../hudson/AbstractMarkupText.html" title="class in hudson">hudson.AbstractMarkupText</A>
+      <IMG SRC="../resources/inherit.gif" ALT="extended by "><B>hudson.MarkupText.SubText</B>
 </PRE>
 <DL>
 <DT><B>Enclosing class:</B><DD><A HREF="../hudson/MarkupText.html" title="class in hudson">MarkupText</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>MarkupText.SubText</B><DT>extends java.lang.Object</DL>
+<DT><PRE>public final class <B>MarkupText.SubText</B><DT>extends <A HREF="../hudson/AbstractMarkupText.html" title="class in hudson">AbstractMarkupText</A></DL>
 </PRE>
 
 <P>
@@ -122,7 +123,8 @@ Represents a substring of a <A HREF="../hudson/MarkupText.html" title="class in 
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../hudson/MarkupText.SubText.html#MarkupText.SubText(java.util.regex.Matcher)">MarkupText.SubText</A></B>(java.util.regex.Matcher&nbsp;m)</CODE>
+<TD><CODE><B><A HREF="../hudson/MarkupText.SubText.html#MarkupText.SubText(java.util.regex.Matcher, int)">MarkupText.SubText</A></B>(java.util.regex.Matcher&nbsp;m,
+                   int&nbsp;textOffset)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -136,6 +138,25 @@ Represents a substring of a <A HREF="../hudson/MarkupText.html" title="class in 
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/MarkupText.SubText.html#addMarkup(int, int, java.lang.String, java.lang.String)">addMarkup</A></B>(int&nbsp;startPos,
+          int&nbsp;endPos,
+          java.lang.String&nbsp;startTag,
+          java.lang.String&nbsp;endTag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a start tag and end tag at the specified position.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../hudson/MarkupText.SubText.html" title="class in hudson">MarkupText.SubText</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/MarkupText.SubText.html#createSubText(java.util.regex.Matcher)">createSubText</A></B>(java.util.regex.Matcher&nbsp;m)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -156,10 +177,35 @@ Represents a substring of a <A HREF="../hudson/MarkupText.html" title="class in 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/MarkupText.SubText.html#getText()">getText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the plain text portion of this <A HREF="../hudson/MarkupText.html" title="class in hudson"><CODE>MarkupText</CODE></A> without
+ any markup.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/MarkupText.SubText.html#group(int)">group</A></B>(int&nbsp;groupIndex)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the text that represents the captured group.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/MarkupText.SubText.html#length()">length</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns <code>getText().length()</code></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/MarkupText.SubText.html#replace(java.lang.String)">replace</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replaces the group tokens like "$0", "$1", and etc with their actual matches.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -184,7 +230,26 @@ Represents a substring of a <A HREF="../hudson/MarkupText.html" title="class in 
              java.lang.String&nbsp;endTag)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surrounds this subext with the specifid start tag and the end tag.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surrounds this subtext with the specified start tag and the end tag.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/MarkupText.SubText.html#surroundWithLiteral(java.lang.String, java.lang.String)">surroundWithLiteral</A></B>(java.lang.String&nbsp;startTag,
+                    java.lang.String&nbsp;endTag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works like <A HREF="../hudson/MarkupText.SubText.html#surroundWith(java.lang.String, java.lang.String)"><CODE>surroundWith(String, String)</CODE></A> except
+ that the token replacement is not performed on parameters.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.AbstractMarkupText"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.<A HREF="../hudson/AbstractMarkupText.html" title="class in hudson">AbstractMarkupText</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../hudson/AbstractMarkupText.html#findTokens(java.util.regex.Pattern)">findTokens</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -209,10 +274,11 @@ Represents a substring of a <A HREF="../hudson/MarkupText.html" title="class in 
 </TR>
 </TABLE>
 
-<A NAME="MarkupText.SubText(java.util.regex.Matcher)"><!-- --></A><H3>
+<A NAME="MarkupText.SubText(java.util.regex.Matcher, int)"><!-- --></A><H3>
 MarkupText.SubText</H3>
 <PRE>
-public <B>MarkupText.SubText</B>(java.util.regex.Matcher&nbsp;m)</PRE>
+public <B>MarkupText.SubText</B>(java.util.regex.Matcher&nbsp;m,
+                          int&nbsp;textOffset)</PRE>
 <DL>
 </DL>
 
@@ -226,18 +292,75 @@ public <B>MarkupText.SubText</B>(java.util.regex.Matcher&nbsp;m)</PRE>
 </TR>
 </TABLE>
 
+<A NAME="getText()"><!-- --></A><H3>
+getText</H3>
+<PRE>
+public java.lang.String <B>getText</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../hudson/AbstractMarkupText.html#getText()">AbstractMarkupText</A></CODE></B></DD>
+<DD>Returns the plain text portion of this <A HREF="../hudson/MarkupText.html" title="class in hudson"><CODE>MarkupText</CODE></A> without
+ any markup.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/AbstractMarkupText.html#getText()">getText</A></CODE> in class <CODE><A HREF="../hudson/AbstractMarkupText.html" title="class in hudson">AbstractMarkupText</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addMarkup(int, int, java.lang.String, java.lang.String)"><!-- --></A><H3>
+addMarkup</H3>
+<PRE>
+public void <B>addMarkup</B>(int&nbsp;startPos,
+                      int&nbsp;endPos,
+                      java.lang.String&nbsp;startTag,
+                      java.lang.String&nbsp;endTag)</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../hudson/AbstractMarkupText.html#addMarkup(int, int, java.lang.String, java.lang.String)">AbstractMarkupText</A></CODE></B></DD>
+<DD>Adds a start tag and end tag at the specified position.
+
+ <p>
+ For example, if the text was "abc", then <tt>addMarkup(1,2,"&lt;b>","&lt;/b>")</tt>
+ would generate <tt>"a&lt;b>b&lt;/b>c"</tt>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/AbstractMarkupText.html#addMarkup(int, int, java.lang.String, java.lang.String)">addMarkup</A></CODE> in class <CODE><A HREF="../hudson/AbstractMarkupText.html" title="class in hudson">AbstractMarkupText</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="surroundWith(java.lang.String, java.lang.String)"><!-- --></A><H3>
 surroundWith</H3>
 <PRE>
 public void <B>surroundWith</B>(java.lang.String&nbsp;startTag,
                          java.lang.String&nbsp;endTag)</PRE>
 <DL>
-<DD>Surrounds this subext with the specifid start tag and the end tag.
+<DD>Surrounds this subtext with the specified start tag and the end tag.
 
  <p>
  Start/end tag text can contain special tokens "$0", "$1", ...
  and they will be replaced by their <A HREF="../hudson/MarkupText.SubText.html#group(int)"><CODE>group match</CODE></A>.
- "\\c" can be used to escape characters.
+ "\$" can be used to escape characters.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="surroundWithLiteral(java.lang.String, java.lang.String)"><!-- --></A><H3>
+surroundWithLiteral</H3>
+<PRE>
+public void <B>surroundWithLiteral</B>(java.lang.String&nbsp;startTag,
+                                java.lang.String&nbsp;endTag)</PRE>
+<DL>
+<DD>Works like <A HREF="../hudson/MarkupText.SubText.html#surroundWith(java.lang.String, java.lang.String)"><CODE>surroundWith(String, String)</CODE></A> except
+ that the token replacement is not performed on parameters.
 <P>
 <DD><DL>
 </DL>
@@ -298,6 +421,19 @@ public int <B>end</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="length()"><!-- --></A><H3>
+length</H3>
+<PRE>
+public int <B>length</B>()</PRE>
+<DL>
+<DD>Returns <code>getText().length()</code>
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="group(int)"><!-- --></A><H3>
 group</H3>
 <PRE>
@@ -305,6 +441,33 @@ public java.lang.String <B>group</B>(int&nbsp;groupIndex)</PRE>
 <DL>
 <DD>Gets the text that represents the captured group.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="replace(java.lang.String)"><!-- --></A><H3>
+replace</H3>
+<PRE>
+public java.lang.String <B>replace</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>Replaces the group tokens like "$0", "$1", and etc with their actual matches.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createSubText(java.util.regex.Matcher)"><!-- --></A><H3>
+createSubText</H3>
+<PRE>
+protected <A HREF="../hudson/MarkupText.SubText.html" title="class in hudson">MarkupText.SubText</A> <B>createSubText</B>(java.util.regex.Matcher&nbsp;m)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/AbstractMarkupText.html#createSubText(java.util.regex.Matcher)">createSubText</A></CODE> in class <CODE><A HREF="../hudson/AbstractMarkupText.html" title="class in hudson">AbstractMarkupText</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>

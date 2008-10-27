@@ -9,13 +9,12 @@ import hudson.plugins.tasks.util.model.Priority;
 
 import org.apache.commons.lang.StringUtils;
 
-import edu.umd.cs.findbugs.annotations.SuppressWarnings;
-
 /**
  * Creates detail objects for the selected element of a tasks container.
  *
  * @author Ulli Hafner
  */
+@SuppressWarnings("PMD")
 public class TaskDetailBuilder {
     /**
      * Returns a detail object for the selected element of a tasks container.
@@ -37,25 +36,25 @@ public class TaskDetailBuilder {
      * @return the dynamic result of the FindBugs analysis (detail page for a
      *         package).
      */
+    @edu.umd.cs.findbugs.annotations.SuppressWarnings({"IMA", "SIC"})
     public Object getDynamic(final String link, final AbstractBuild<?, ?> owner,
             final AnnotationContainer container, final String displayName,
             final String high, final String normal, final String low) {
         PriorityDetailFactory factory = new PriorityDetailFactory() {
             /** {@inheritDoc} */
             @Override
-            @SuppressWarnings("IMA")
-            protected PrioritiesDetail createPrioritiesDetail(final Priority priority, final AbstractBuild<?, ?> build, final AnnotationContainer container, final String header) {
-                return new TasksPrioritiesDetail(build, container, priority, header, high, normal, low);
+            protected PrioritiesDetail createPrioritiesDetail(final Priority priority, final AbstractBuild<?, ?> build, final AnnotationContainer annotationContainer, final String header) {
+                return new TasksPrioritiesDetail(build, annotationContainer, priority, header, high, normal, low);
             }
         };
         if (factory.isPriority(link)) {
             return factory.create(link, owner, container, displayName);
         }
         else if (link.startsWith("module.")) {
-            return new TasksModuleDetail(owner, container.getModule(StringUtils.substringAfter(link, "module.")), displayName, high, normal, low);
+            return new TasksModuleDetail(owner, container.getModule(Integer.valueOf(StringUtils.substringAfter(link, "module."))), displayName, high, normal, low);
         }
         else if (link.startsWith("package.")) {
-            return new TasksPackageDetail(owner, container.getPackage(StringUtils.substringAfter(link, "package.")), displayName, high, normal, low);
+            return new TasksPackageDetail(owner, container.getPackage(Integer.valueOf(StringUtils.substringAfter(link, "package."))), displayName, high, normal, low);
         }
         else if (link.startsWith("tab.tasks.")) {
             return new TasksTabDetail(owner, container, "/tasks/" + StringUtils.substringAfter(link, "tab.tasks.") + ".jelly", high, normal, low);

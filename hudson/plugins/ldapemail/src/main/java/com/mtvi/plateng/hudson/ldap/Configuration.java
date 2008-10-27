@@ -4,6 +4,9 @@
 
 package com.mtvi.plateng.hudson.ldap;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 /**
  * Class to store configuration for the plugin.
  * 
@@ -44,6 +47,12 @@ public class Configuration {
      * connecting to LDAP.
      */
     private String initialContextFactoryName;
+
+    /**
+     * If true, the user's LDAP account will be found by searching through the
+     * baseDN
+     */
+    private boolean performSearch = false;
 
     /**
      * The LDAP attribute to use for searching. Usually 'uid'
@@ -88,6 +97,10 @@ public class Configuration {
         return (bindDN != null) && (bindPassword != null);
     }
 
+    public boolean isPerformSearch() {
+        return performSearch;
+    }
+
     public boolean isValid() {
         return (server != null) && (baseDN != null) && (searchAttribute != null)
                 && (emailAttribute != null);
@@ -96,8 +109,7 @@ public class Configuration {
     /**
      * Construct a user's distinguised name (DN) from their username.
      * 
-     * @param userName
-     *            the user's username
+     * @param userName the user's username
      * @return the DN
      */
     public String makeUserDN(String userName) {
@@ -127,12 +139,29 @@ public class Configuration {
         this.initialContextFactoryName = initialContextFactoryName;
     }
 
+    public void setPerformSearch(boolean performSearch) {
+        this.performSearch = performSearch;
+    }
+
     public void setSearchAttribute(String searchAttribute) {
         this.searchAttribute = searchAttribute;
     }
 
     public void setServer(String server) {
         this.server = server;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("baseDN", baseDN)
+                .append("bindDN", bindDN).append("bindPassword",
+                        bindPassword != null ? "xxxx" : null).append("emailAttribute",
+                        emailAttribute).append("initialContextFactoryName",
+                        initialContextFactoryName).append("performSearch", performSearch).append(
+                        "server", server).toString();
     }
 
 }

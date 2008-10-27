@@ -1,15 +1,31 @@
 package org.jvnet.hudson.test;
 
+import com.gargoylesoftware.htmlunit.AjaxController;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import hudson.model.*;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
+import hudson.matrix.MatrixProject;
+import hudson.model.Descriptor;
+import hudson.model.FreeStyleProject;
+import hudson.model.Hudson;
+import hudson.model.Item;
+import hudson.model.UpdateCenter;
+import hudson.model.Saveable;
+import hudson.model.Run;
+import hudson.tasks.Mailer;
+import hudson.Launcher.LocalLauncher;
+import hudson.util.StreamTaskListener;
+import hudson.util.ProcessTreeKiller;
 import junit.framework.TestCase;
 import org.jvnet.hudson.test.HudsonHomeLoader.CopyExisting;
 import org.jvnet.hudson.test.recipes.Recipe;
 import org.jvnet.hudson.test.recipes.Recipe.Runner;
+import org.jvnet.hudson.test.rhino.JavaScriptDebugger;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.bio.SocketConnector;
 import org.mortbay.jetty.security.HashUserRealm;
@@ -17,25 +33,32 @@ import org.mortbay.jetty.security.UserRealm;
 import org.mortbay.jetty.webapp.Configuration;
 import org.mortbay.jetty.webapp.WebAppContext;
 import org.mortbay.jetty.webapp.WebXmlConfiguration;
-import org.xml.sax.SAXException;
-import org.w3c.css.sac.ErrorHandler;
-import org.w3c.css.sac.CSSParseException;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.ContextFactory;
 import org.w3c.css.sac.CSSException;
+import org.w3c.css.sac.CSSParseException;
+import org.w3c.css.sac.ErrorHandler;
+import org.xml.sax.SAXException;
 
 import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Base class for all Hudson test cases.
  *
+ * @see <a href="http://hudson.gotdns.com/wiki/display/HUDSON/Unit+Test">Wiki article about unit testing in Hudson</a>
  * @author Kohsuke Kawaguchi
  */
 public abstract class HudsonTestCase extends TestCase {
@@ -59,6 +82,22 @@ public abstract class HudsonTestCase extends TestCase {
      */
     protected List<LenientRunnable> tearDowns = new ArrayList<LenientRunnable>();
 
+    /**
+     * Remember {@link WebClient}s that are created, to release them properly.
+     */
+    private List<WeakReference<WebClient>> clients = new ArrayList<WeakReference<WebClient>>();
+
+    /**
+     * JavaScript "debugger" that provides you information about the JavaScript call stack
+     * and the current values of the local variables in those stack frame.
+     *
+     * <p>
+     * Unlike Java debugger, which you as a human interfaces directly and interactively,
+     * this JavaScript debugger is to be interfaced by your program (or through the
+     * expression evaluation capability of your Java debugger.) 
+     */
+    protected JavaScriptDebugger jsDebugger = new JavaScriptDebugger();
+
     protected HudsonTestCase(String name) {
         super(name);
     }
@@ -72,18 +111,42 @@ public abstract class HudsonTestCase extends TestCase {
         hudson = newHudson();
         hudson.servletContext.setAttribute("app",hudson);
         hudson.servletContext.setAttribute("version","?");
+
         // cause all the descriptors to reload.
         // ideally we'd like to reset them to properly emulate the behavior, but that's not possible.
+        Mailer.DESCRIPTOR.setHudsonUrl(null);
         for( Descriptor d : Descriptor.ALL )
             d.load();
     }
 
     protected void tearDown() throws Exception {
+        // cancel pending asynchronous operations, although this doesn't really seem to be working
+        for (WeakReference<WebClient> client : clients) {
+            WebClient c = client.get();
+            if(c==null) continue;
+            // unload the page to cancel asynchronous operations 
+            c.getPage("about:blank");
+        }
+        clients.clear();
+
         server.stop();
         for (LenientRunnable r : tearDowns)
             r.run();
         hudson.cleanUp();
         env.dispose();
+    }
+
+    protected void runTest() throws Throwable {
+        new JavaScriptEngine(null);   // ensure that ContextFactory is initialized
+        Context cx= ContextFactory.getGlobal().enterContext();
+        try {
+            cx.setOptimizationLevel(-1);
+            cx.setDebugger(jsDebugger,null);
+
+            super.runTest();
+        } finally {
+            Context.exit();
+        }
     }
 
     /**
@@ -101,7 +164,7 @@ public abstract class HudsonTestCase extends TestCase {
     protected ServletContext createWebServer() throws Exception {
         server = new Server();
 
-        WebAppContext context = new WebAppContext(WarExploder.EXPLODE_DIR.getPath(), contextPath);
+        WebAppContext context = new WebAppContext(WarExploder.getExplodedDir().getPath(), contextPath);
         context.setClassLoader(getClass().getClassLoader());
         context.setConfigurations(new Configuration[]{new WebXmlConfiguration(),new NoListenerConfiguration()});
         server.setHandler(context);
@@ -143,6 +206,45 @@ public abstract class HudsonTestCase extends TestCase {
 
     protected FreeStyleProject createFreeStyleProject(String name) throws IOException {
         return (FreeStyleProject)hudson.createProject(FreeStyleProject.DESCRIPTOR,name);
+    }
+
+    protected MatrixProject createMatrixProject() throws IOException {
+        return createMatrixProject("test");
+    }
+
+    protected MatrixProject createMatrixProject(String name) throws IOException {
+        return (MatrixProject)hudson.createProject(MatrixProject.DESCRIPTOR,name);
+    }
+
+    /**
+     * Creates {@link LocalLauncher}. Useful for launching processes.
+     */
+    protected LocalLauncher createLocalLauncher() {
+        return new LocalLauncher(new StreamTaskListener(System.out));
+    }
+
+    /**
+     * Allocates a new temporary directory for the duration of this test.
+     */
+    protected File createTmpDir() throws IOException {
+        return TestEnvironment.get().temporaryDirectoryAllocator.allocate();
+    }
+
+    /**
+     * Returns the last item in the list.
+     */
+    protected <T> T last(List<T> items) {
+        return items.get(items.size()-1);
+    }
+
+    /**
+     * Pauses the execution until ENTER is hit in the console.
+     * <p>
+     * This is often very useful so that you can interact with Hudson
+     * from an browser, while developing a test case.
+     */
+    protected void pause() throws IOException {
+        new BufferedReader(new InputStreamReader(System.in)).readLine();
     }
 
 //
@@ -199,13 +301,32 @@ public abstract class HudsonTestCase extends TestCase {
     }
 
     /**
+     * Sometimes a part of a test case may ends up creeping into the serialization tree of {@link Saveable#save()},
+     * so detect that and flag that as an error. 
+     */
+    private Object writeReplace() {
+        throw new AssertionError("HudsonTestCase "+getName()+" is not supposed to be serialized");
+    }
+
+    /**
      * Extends {@link com.gargoylesoftware.htmlunit.WebClient} and provide convenience methods
      * for accessing Hudson.
      */
     public class WebClient extends com.gargoylesoftware.htmlunit.WebClient {
         public WebClient() {
+            // default is IE6, but this causes 'n.doScroll('left')' to fail in event-debug.js:1907 as HtmlUnit doesn't implement such a method,
+            // so trying something else, until we discover another problem.
+            super(BrowserVersion.FIREFOX_2);
+
 //            setJavaScriptEnabled(false);
             setPageCreator(HudsonPageCreator.INSTANCE);
+            clients.add(new WeakReference<WebClient>(this));
+            // make ajax calls synchronous for predictable behaviors that simplify debugging
+            setAjaxController(new AjaxController() {
+                public boolean processSynchron(HtmlPage page, WebRequestSettings settings, boolean async) {
+                    return true;
+                }
+            });
         }
 
         /**
@@ -232,6 +353,23 @@ public abstract class HudsonTestCase extends TestCase {
         public WebClient login(String username) throws Exception {
             login(username,username);
             return this;
+        }
+
+        /**
+         * Short for {@code getPage(r,"")}, to access the top page of a build.
+         */
+        public HtmlPage getPage(Run r) throws IOException, SAXException {
+            return getPage(r,"");
+        }
+
+        /**
+         * Accesses a page inside {@link Run}.
+         *
+         * @param relative
+         *      Relative URL within the build URL, like "changes". Doesn't start with '/'. Can be empty.
+         */
+        public HtmlPage getPage(Run r, String relative) throws IOException, SAXException {
+            return goTo(r.getUrl()+relative);
         }
 
         public HtmlPage getPage(Item item) throws IOException, SAXException {
@@ -285,21 +423,28 @@ public abstract class HudsonTestCase extends TestCase {
 
             public void error(CSSParseException exception) throws CSSException {
                 if(!ignore(exception))
-                    defaultHandler.warning(exception);
+                    defaultHandler.error(exception);
             }
 
             public void fatalError(CSSParseException exception) throws CSSException {
                 if(!ignore(exception))
-                    defaultHandler.warning(exception);
+                    defaultHandler.fatalError(exception);
             }
 
             private boolean ignore(CSSParseException e) {
                 return e.getURI().contains("/yui/");
             }
         };
+
+        // clean up run-away processes extra hard
+        ProcessTreeKiller.enabled = true;
+
+        // suppress INFO output from Spring, which is verbose
+        Logger.getLogger("org.springframework").setLevel(Level.WARNING);
+
+        // hudson-behavior.js relies on this to decide whether it's running unit tests.
+        System.setProperty("hudson.unitTest","true");
     }
-
-
 
     private static final Logger LOGGER = Logger.getLogger(HudsonTestCase.class.getName());
 }

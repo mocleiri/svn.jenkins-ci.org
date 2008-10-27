@@ -133,7 +133,7 @@ public class Bug extends AbstractAnnotation {
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        final int prime = 31;
+        int prime = 31;
         int result = super.hashCode();
         result = prime * result + ((instanceHash == null) ? 0 : instanceHash.hashCode());
         return result;
@@ -145,7 +145,7 @@ public class Bug extends AbstractAnnotation {
         if (this == obj) {
             return true;
         }
-        if (!super.equals(obj)) {
+        if (obj == null) {
             return false;
         }
         if (getClass() != obj.getClass()) {

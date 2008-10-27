@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-JNLPLauncher (Hudson core 1.249 API)
+JNLPLauncher (Hudson core 1.256 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-19">
+<META NAME="date" CONTENT="2008-10-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JNLPLauncher (Hudson core 1.249 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JNLPLauncher (Hudson core 1.249 API)";
+        parent.document.title="JNLPLauncher (Hudson core 1.256 API)";
     }
 }
 </SCRIPT>
@@ -133,6 +133,15 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/JNLPLauncher.html#tunnel">tunnel</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the slave needs to tunnel the connection to the master,
+ specify the "host:port" here.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.slaves.ComputerLauncher"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -154,6 +163,12 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/slaves/JNLPLauncher.html#JNLPLauncher()">JNLPLauncher</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/slaves/JNLPLauncher.html#JNLPLauncher(java.lang.String)">JNLPLauncher</A></B>(java.lang.String&nbsp;tunnel)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -226,6 +241,26 @@ java.lang.Object
 </TR>
 </TABLE>
 
+<A NAME="tunnel"><!-- --></A><H3>
+tunnel</H3>
+<PRE>
+public final java.lang.String <B>tunnel</B></PRE>
+<DL>
+<DD>If the slave needs to tunnel the connection to the master,
+ specify the "host:port" here. This can include the special
+ syntax "host:" and ":port" to indicate the default host/port
+ shall be used.
+
+ <p>
+ Null if no tunneling is necessary.
+<P>
+<DL>
+<DT><B>Since:</B></DT>
+  <DD>1.250</DD>
+</DL>
+</DL>
+<HR>
+
 <A NAME="DESCRIPTOR"><!-- --></A><H3>
 DESCRIPTOR</H3>
 <PRE>
@@ -245,11 +280,19 @@ public static final <A HREF="../../hudson/model/Descriptor.html" title="class in
 </TR>
 </TABLE>
 
-<A NAME="JNLPLauncher()"><!-- --></A><H3>
+<A NAME="JNLPLauncher(java.lang.String)"><!-- --></A><H3>
 JNLPLauncher</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
-</FONT>public <B>JNLPLauncher</B>()</PRE>
+</FONT>public <B>JNLPLauncher</B>(java.lang.String&nbsp;tunnel)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="JNLPLauncher()"><!-- --></A><H3>
+JNLPLauncher</H3>
+<PRE>
+public <B>JNLPLauncher</B>()</PRE>
 <DL>
 </DL>
 

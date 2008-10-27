@@ -1,5 +1,6 @@
 package hudson.plugins.findbugs.parser;
 
+import hudson.plugins.findbugs.FindBugsMessages;
 import hudson.plugins.findbugs.util.model.FileAnnotation;
 import hudson.plugins.findbugs.util.model.LineRange;
 import hudson.plugins.findbugs.util.model.Priority;
@@ -46,8 +47,8 @@ public class NativeFindBugsParser {
      * the native FindBugs format.
      * @param file
      *            the FindBugs analysis file
-     * @param moduleRoot
-     *            the root path of the maven module
+     * @param sources
+     *            a collection of folders to scan for source files
      * @param moduleName
      *            name of maven module
      *
@@ -57,12 +58,12 @@ public class NativeFindBugsParser {
      * @throws DocumentException
      * @throws SAXException
      */
-    public Collection<FileAnnotation> parse(final File file, final String moduleRoot, final String moduleName)
+    public Collection<FileAnnotation> parse(final File file, final Collection<String> sources, final String moduleName)
             throws IOException, DocumentException, SAXException {
 
         Map<String, String> hashToMessageMapping = createHashToMessageMapping(new FileInputStream(file));
 
-        return parse(new FileInputStream(file), moduleRoot, moduleName, hashToMessageMapping);
+        return parse(new FileInputStream(file), sources, moduleName, hashToMessageMapping);
     }
 
     /**
@@ -107,8 +108,8 @@ public class NativeFindBugsParser {
      *
      * @param file
      *            the FindBugs analysis file
-     * @param moduleRoot
-     *            the root path of the maven module
+     * @param sources
+     *            a collection of folders to scan for source files
      * @param moduleName
      *            name of maven module
      * @param hashToMessageMapping
@@ -118,10 +119,10 @@ public class NativeFindBugsParser {
      *             if the file could not be parsed
      * @throws DocumentException in case of a parser exception
      */
-    public Collection<FileAnnotation> parse(final InputStream file, final String moduleRoot,
+    public Collection<FileAnnotation> parse(final InputStream file, final Collection<String> sources,
             final String moduleName, final Map<String, String> hashToMessageMapping) throws IOException,
             DocumentException {
-        Project project = createMavenProject(moduleRoot);
+        Project project = createMavenProject(sources);
 
         SortedBugCollection collection = new SortedBugCollection();
         collection.readXML(file, project);
@@ -136,8 +137,12 @@ public class NativeFindBugsParser {
         for (BugInstance warning : bugs) {
             SourceLineAnnotation sourceLine = warning.getPrimarySourceLineAnnotation();
 
+            String message = warning.getMessage();
+            if (message.contains("TEST: Unknown warning")) {
+                message = FindBugsMessages.getInstance().getShortMessage(warning.getType());
+            }
             Bug bug = new Bug(getPriority(warning),
-                    StringUtils.defaultIfEmpty(hashToMessageMapping.get(warning.getInstanceHash()), warning.getMessage()), warning.getBugPattern().getCategory(),
+                    StringUtils.defaultIfEmpty(hashToMessageMapping.get(warning.getInstanceHash()), message), warning.getBugPattern().getCategory(),
                         warning.getType(), sourceLine.getStartLine(), sourceLine.getEndLine());
             bug.setInstanceHash(warning.getInstanceHash());
 
@@ -206,15 +211,15 @@ public class NativeFindBugsParser {
     /**
      * Creates a maven project with some predefined source paths.
      *
-     * @param moduleRoot
-     *            the root path of the maven module
+     * @param sources
+     *            a collection of folders to scan for source files
      * @return the new project
      */
-    private Project createMavenProject(final String moduleRoot) {
+    private Project createMavenProject(final Collection<String> sources) {
         Project project = new Project();
-        project.addSourceDir(moduleRoot + "/src/main/java");
-        project.addSourceDir(moduleRoot + "/src/test/java");
-        project.addSourceDir(moduleRoot + "/src");
+        for (String sourceFolder : sources) {
+            project.addSourceDir(sourceFolder);
+        }
         return project;
     }
 }

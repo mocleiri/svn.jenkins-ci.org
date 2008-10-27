@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.249 API)
+Hudson (Hudson core 1.256 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-19">
+<META NAME="date" CONTENT="2008-10-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.249 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.249 API)";
+        parent.document.title="Hudson (Hudson core 1.256 API)";
     }
 }
 </SCRIPT>
@@ -181,6 +181,22 @@ Root object of the system.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#KILL_AFTER_LOAD">KILL_AFTER_LOAD</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#LOG_STARTUP_PERFORMANCE">LOG_STARTUP_PERFORMANCE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.util.List&lt;java.util.logging.LogRecord&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#logRecords">logRecords</A></B></CODE>
 
@@ -190,7 +206,7 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#parallelLoad">parallelLoad</A></B></CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#PARALLEL_LOAD">PARALLEL_LOAD</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1519,6 +1535,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#setNumExecutors(int)">setNumExecutors</A></B>(int&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#setSecurityRealm(hudson.security.SecurityRealm)">setSecurityRealm</A></B>(<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&nbsp;securityRealm)</CODE>
 
 <BR>
@@ -1694,6 +1718,8 @@ public static java.lang.String <B>RESOURCE_PATH</B></PRE>
 <DD>Prefix to static resources like images and javascripts in the war file.
  Either "" or strings like "/static/VERSION", which avoids Hudson to pick up
  stale cache when the user upgrades to a different version.
+ <p>
+ Value computed in <A HREF="../../hudson/WebAppMain.html" title="class in hudson"><CODE>WebAppMain</CODE></A>.
 <P>
 <DL>
 </DL>
@@ -1708,16 +1734,38 @@ public static java.lang.String <B>VIEW_RESOURCE_PATH</B></PRE>
 <DD>Prefix to resources alongside view scripts.
  Strings like "/resources/VERSION", which avoids Hudson to pick up
  stale cache when the user upgrades to a different version.
+ <p>
+ Value computed in <A HREF="../../hudson/WebAppMain.html" title="class in hudson"><CODE>WebAppMain</CODE></A>.
 <P>
 <DL>
 </DL>
 </DL>
 <HR>
 
-<A NAME="parallelLoad"><!-- --></A><H3>
-parallelLoad</H3>
+<A NAME="PARALLEL_LOAD"><!-- --></A><H3>
+PARALLEL_LOAD</H3>
 <PRE>
-public static boolean <B>parallelLoad</B></PRE>
+public static boolean <B>PARALLEL_LOAD</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="KILL_AFTER_LOAD"><!-- --></A><H3>
+KILL_AFTER_LOAD</H3>
+<PRE>
+public static boolean <B>KILL_AFTER_LOAD</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="LOG_STARTUP_PERFORMANCE"><!-- --></A><H3>
+LOG_STARTUP_PERFORMANCE</H3>
+<PRE>
+public static boolean <B>LOG_STARTUP_PERFORMANCE</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -3035,6 +3083,23 @@ public boolean <B>isTerminating</B>()</PRE>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNumExecutors(int)"><!-- --></A><H3>
+setNumExecutors</H3>
+<PRE>
+public void <B>setNumExecutors</B>(int&nbsp;n)
+                     throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>

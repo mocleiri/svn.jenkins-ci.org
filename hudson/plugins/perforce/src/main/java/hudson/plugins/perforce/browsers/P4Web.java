@@ -6,17 +6,14 @@ import hudson.plugins.perforce.*;
 import hudson.scm.RepositoryBrowser;
 import hudson.util.FormFieldValidator;
 
-import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.regex.Pattern;
 
 import com.tek42.perforce.model.Changelist;
 
@@ -40,6 +37,7 @@ public class P4Web extends PerforceRepositoryBrowser {
     
     @DataBoundConstructor
     public P4Web(URL url) throws MalformedURLException {
+	
         this.url = normalizeToEndWithSlash(url);
     }
 
@@ -50,12 +48,13 @@ public class P4Web extends PerforceRepositoryBrowser {
         int r = new Integer(file.getRevision());
         if(r <= 1)
         	return null;
-        return new URL(url, file.getFilename() + p4DifEndShite + "&rev1=" + (r - 1) + "&rev2=" + (r));
+        return new URL(url.toString() + file.getFilename() + p4DifEndShite + 
+        		"&rev1=" + (r - 1) + "&rev2=" + (r));
     }
 
     @Override
     public URL getFileLink(Changelist.FileEntry file) throws IOException {
-        return new URL(url, file.getFilename() + p4WebEndShite);
+        return new URL(url.toString() + file.getFilename() + p4WebEndShite);
     }
 
     /**

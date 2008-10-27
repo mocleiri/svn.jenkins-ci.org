@@ -38,11 +38,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.io.InputStreamReader;
+import java.io.FileInputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -60,6 +61,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.nio.charset.Charset;
 
 /**
  * A particular execution of {@link Job}.
@@ -144,6 +146,16 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     protected long duration;
 
     /**
+     * Charset in which the log file is written.
+     * For compatibility reason, this field may be null.
+     * For persistence, this field is string and not {@link Charset}.
+     *
+     * @see #getCharset()
+     * @since 1.257
+     */
+    private String charset;
+
+    /**
      * Keeps this log entries.
      */
     private boolean keepLog;
@@ -188,7 +200,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         getDataFile().unmarshal(this); // load the rest of the data
     }
 
-    private static long parseTimestampFromBuildDir(File buildDir) throws IOException {
+    /*package*/ static long parseTimestampFromBuildDir(File buildDir) throws IOException {
         try {
             return ID_FORMATTER.get().parse(buildDir.getName()).getTime();
         } catch (ParseException e) {
@@ -294,6 +306,16 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
             }
         }
         return null;
+    }
+
+    /**
+     * Gets the charset in which the log file is written.
+     * @return never null.
+     * @since 1.257
+     */
+    public final Charset getCharset() {
+        if(charset==null)   return Charset.defaultCharset();
+        return Charset.forName(charset);
     }
 
     /**
@@ -784,7 +806,9 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
             try {
                 try {
                     log = new PrintStream(new FileOutputStream(getLogFile()));
-                    listener = new StreamBuildListener(new CloseProofOutputStream(log));
+                    Charset charset = Computer.currentComputer().getDefaultCharset();
+                    this.charset = charset.name();
+                    listener = new StreamBuildListener(new PrintStream(new CloseProofOutputStream(log)),charset);
 
                     listener.started();
 
@@ -918,7 +942,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      */
     @Deprecated
     public String getLog() throws IOException {
-        return Util.loadFile(getLogFile());
+        return Util.loadFile(getLogFile(),getCharset());
     }
 
     /**
@@ -933,7 +957,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     public List<String> getLog(int maxLines) throws IOException {
         int lineCount = 0;
         List<String> logLines = new LinkedList<String>();
-        BufferedReader reader = new BufferedReader(new FileReader(getLogFile()));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(getLogFile()),getCharset()));
         try {
             for (String line = reader.readLine(); line != null; line = reader.readLine()) {
                 logLines.add(line);
@@ -1066,7 +1090,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      * Handles incremental log output.
      */
     public void doProgressiveLog( StaplerRequest req, StaplerResponse rsp) throws IOException {
-        new LargeText(getLogFile(),!isLogUpdated()).doProgressText(req,rsp);
+        new LargeText(getLogFile(),getCharset(),!isLogUpdated()).doProgressText(req,rsp);
     }
 
     public void doToggleLogKeep( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
@@ -1156,7 +1180,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         return env;
     }
 
-    private static final XStream XSTREAM = new XStream2();
+    public static final XStream XSTREAM = new XStream2();
     static {
         XSTREAM.alias("build",FreeStyleBuild.class);
         XSTREAM.alias("matrix-build",MatrixBuild.class);
@@ -1209,8 +1233,8 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     }
 
     public static final PermissionGroup PERMISSIONS = new PermissionGroup(Run.class,Messages._Run_Permissions_Title());
-    public static final Permission DELETE = new Permission(PERMISSIONS,"Delete", Permission.DELETE);
-    public static final Permission UPDATE = new Permission(PERMISSIONS,"Update", Permission.UPDATE);
+    public static final Permission DELETE = new Permission(PERMISSIONS,"Delete",Messages._Run_DeletePermission_Description(),Permission.DELETE);
+    public static final Permission UPDATE = new Permission(PERMISSIONS,"Update",Messages._Run_UpdatePermission_Description(),Permission.UPDATE);
 
     private static class DefaultFeedAdapter implements FeedAdapter<Run> {
         public String getEntryTitle(Run entry) {

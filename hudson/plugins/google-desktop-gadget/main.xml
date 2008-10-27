@@ -1,7 +1,7 @@
-﻿<view height="60" resizable="true" width="200" onopen="view_onOpen();"
-  onoptionchanged="onOptionChanged();">
-    <img height="35" name="backgroundImg" width="100%" y="1" src="stock_images\background.png"
-     />
+﻿<view height="120" resizable="true" showCaptionAlways="true" width="200"
+  onopen="view_onOpen();" onoptionchanged="onOptionChanged();"
+ >
+    <contentArea height="100%" name="contentArea" width="100%"/>
     <img height="23" name="img1" width="26" x="100" y="6" src="images\hudson.png"
      />
     <label enabled="true" height="15" hitTest="htclient" name="jobLabel"
@@ -16,7 +16,7 @@
         <listbox height="100%" name="jobList" width="87%" x="0" y="0" background="#FFFFFF"
           itemHeight="20" itemOverColor="#FFFFFF" itemSelectedColor="#FFFFFF">
             <item height="20" name="item0">
-                <a onclick="plugin.ShowOptionsDialog()">Configure your Hudson URL
+                <a onclick="plugin.ShowOptionsDialog()">Configure your Hudson URLs
                 </a>
             </item>
         </listbox>

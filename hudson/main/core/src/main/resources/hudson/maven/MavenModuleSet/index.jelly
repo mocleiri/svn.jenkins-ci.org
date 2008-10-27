@@ -34,15 +34,10 @@
         </j:if>
       </table>
 
+      <st:include page="jobpropertysummaries.jelly" />  
       <p:upstream-downstream />
       
-      <h2>${%Permalinks}</h2>
-      <ul>
-        <p:build-permalink property="lastBuild"           title="${%Last build}" />
-        <p:build-permalink property="lastStableBuild"     title="${%Last stable build}" />
-        <p:build-permalink property="lastSuccessfulBuild" title="${%Last successful build}" />
-        <p:build-permalink property="lastFailedBuild"     title="${%Last failed build}" />
-      </ul>
+      <st:include page="permalinks.jelly" />
     </l:main-panel>
   </l:layout>
 </j:jelly>

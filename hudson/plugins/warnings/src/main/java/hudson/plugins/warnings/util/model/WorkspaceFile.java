@@ -1,8 +1,5 @@
 package hudson.plugins.warnings.util.model;
 
-import java.util.Collection;
-import java.util.Collections;
-
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -32,7 +29,12 @@ public class WorkspaceFile extends AnnotationContainer {
      * @return a readable name of this workspace file.
      */
     public String getShortName() {
-        return StringUtils.substringAfterLast(getName(), "/");
+        if (getName().contains("/")) {
+            return StringUtils.substringAfterLast(getName(), "/");
+        }
+        else {
+            return getName();
+        }
     }
 
     /**
@@ -50,10 +52,22 @@ public class WorkspaceFile extends AnnotationContainer {
         return this;
     }
 
+    /**
+     * Returns a file name for a temporary file that will hold the contents of the source.
+     *
+     * @return the temporary name
+     */
+    public String getTempName() {
+        return Integer.toHexString(getName().hashCode()) + ".tmp";
+    }
+
     /** {@inheritDoc} */
     @Override
-    protected Collection<? extends AnnotationContainer> getChildren() {
-        return Collections.emptyList();
+    public int compareTo(final AnnotationContainer other) {
+        if (other instanceof WorkspaceFile) {
+            return getShortName().compareTo(((WorkspaceFile)other).getShortName());
+        }
+        return super.compareTo(other);
     }
 }
 

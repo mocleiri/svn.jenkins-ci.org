@@ -42,7 +42,7 @@
   
     
             <div class="xleft">
-        Last Published: 2008-04-28
+        Last Published: 2008-09-25
                       </div>
             <div class="xright">            <a href="">Maven Hudson Plugin</a>
             
@@ -193,6 +193,24 @@
 <td>6.1.1</td>
 <td>-</td>
 <td>maven-plugin</td>
+<td> </td>
+</tr>
+</table>
+</div>
+<div class="section"><h3>test</h3>
+<p>The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:</p>
+<table class="bodyTable"><tr class="a"><th>GroupId</th>
+<th>ArtifactId</th>
+<th>Version</th>
+<th>Classifier</th>
+<th>Type</th>
+<th>Optional</th>
+</tr>
+<tr class="b"><td>junit</td>
+<td>junit</td>
+<td>3.8</td>
+<td>-</td>
+<td>jar</td>
 <td> </td>
 </tr>
 </table>
@@ -698,24 +716,6 @@
 </tr>
 </table>
 </div>
-<div class="section"><h3>test</h3>
-<p>The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:</p>
-<table class="bodyTable"><tr class="a"><th>GroupId</th>
-<th>ArtifactId</th>
-<th>Version</th>
-<th>Classifier</th>
-<th>Type</th>
-<th>Optional</th>
-</tr>
-<tr class="b"><td>junit</td>
-<td>junit</td>
-<td>3.8</td>
-<td>-</td>
-<td>jar</td>
-<td> </td>
-</tr>
-</table>
-</div>
 <div class="section"><h3>system</h3>
 <p>The following is a list of system dependencies for this project. These dependencies are required to compile the application:</p>
 <table class="bodyTable"><tr class="a"><th>GroupId</th>
@@ -741,7 +741,11 @@
 <ul><li><a href="#org.apache.maven:maven-archiver:jar">org.apache.maven:maven-archiver:jar</a>
 </li>
 <li><a href="#org.mortbay.jetty:maven-jetty-plugin:maven-plugin">org.mortbay.jetty:maven-jetty-plugin:maven-plugin</a>
-<ul><li><a href="#org.mortbay.jetty:jetty-plus:jar">org.mortbay.jetty:jetty-plus:jar</a>
+<ul><li><a href="#commons-el:commons-el:jar">commons-el:commons-el:jar</a>
+</li>
+<li><a href="#org.apache.maven:maven-plugin-tools-api:jar">org.apache.maven:maven-plugin-tools-api:jar</a>
+</li>
+<li><a href="#org.mortbay.jetty:jetty-plus:jar">org.mortbay.jetty:jetty-plus:jar</a>
 <ul><li><a href="#javax.mail:mail:jar">javax.mail:mail:jar</a>
 </li>
 <li><a href="#javax.activation:activation:jar">javax.activation:activation:jar</a>
@@ -751,9 +755,7 @@
 </ul>
 </p>
 </li>
-<li><a href="#commons-el:commons-el:jar">commons-el:commons-el:jar</a>
-</li>
-<li><a href="#org.apache.maven:maven-plugin-tools-api:jar">org.apache.maven:maven-plugin-tools-api:jar</a>
+<li><a href="#org.mortbay.jetty:jetty-naming:jar">org.mortbay.jetty:jetty-naming:jar</a>
 </li>
 <li><a href="#org.mortbay.jetty:jetty-management:jar">org.mortbay.jetty:jetty-management:jar</a>
 <ul><li><a href="#org.mortbay.jetty:jetty:jar">org.mortbay.jetty:jetty:jar</a>
@@ -764,8 +766,6 @@
 </li>
 </ul>
 </p>
-</li>
-<li><a href="#org.mortbay.jetty:jetty-naming:jar">org.mortbay.jetty:jetty-naming:jar</a>
 </li>
 <li><a href="#org.mortbay.jetty:jsp-2.1:jar">org.mortbay.jetty:jsp-2.1:jar</a>
 <ul><li><a href="#org.eclipse.jdt:core:jar">org.eclipse.jdt:core:jar</a>
@@ -837,7 +837,13 @@
 </p>
 </li>
 <li><a href="#org.kohsuke.stapler:maven-stapler-plugin:jar">org.kohsuke.stapler:maven-stapler-plugin:jar</a>
-<ul><li><a href="#org.apache.maven:maven-core:jar">org.apache.maven:maven-core:jar</a>
+<ul><li><a href="#org.kohsuke.stapler:stapler:jar">org.kohsuke.stapler:stapler:jar</a>
+<ul><li><a href="#javax.servlet:jsp-api:jar">javax.servlet:jsp-api:jar</a>
+</li>
+</ul>
+</p>
+</li>
+<li><a href="#org.apache.maven:maven-core:jar">org.apache.maven:maven-core:jar</a>
 <ul><li><a href="#org.apache.maven:maven-settings:jar">org.apache.maven:maven-settings:jar</a>
 </li>
 <li><a href="#org.apache.maven.wagon:wagon-file:jar">org.apache.maven.wagon:wagon-file:jar</a>
@@ -885,36 +891,38 @@
 </ul>
 </p>
 </li>
-<li><a href="#qdox:qdox:jar">qdox:qdox:jar</a>
-</li>
-<li><a href="#com.sun:tools:jar">com.sun:tools:jar</a>
-</li>
-<li><a href="#org.kohsuke.stapler:stapler:jar">org.kohsuke.stapler:stapler:jar</a>
-<ul><li><a href="#javax.servlet:jsp-api:jar">javax.servlet:jsp-api:jar</a>
-</li>
-</ul>
-</p>
-</li>
 <li><a href="#org.apache.maven:maven-project:jar">org.apache.maven:maven-project:jar</a>
+</li>
+<li><a href="#qdox:qdox:jar">qdox:qdox:jar</a>
 </li>
 <li><a href="#org.apache.maven.plugins:maven-compiler-plugin:jar">org.apache.maven.plugins:maven-compiler-plugin:jar</a>
 <ul><li><a href="#org.apache.maven:maven-plugin-api:jar">org.apache.maven:maven-plugin-api:jar</a>
-</li>
-<li><a href="#org.codehaus.plexus:plexus-utils:jar">org.codehaus.plexus:plexus-utils:jar</a>
-</li>
-<li><a href="#org.codehaus.plexus:plexus-compiler-api:jar">org.codehaus.plexus:plexus-compiler-api:jar</a>
-</li>
-<li><a href="#org.codehaus.plexus:plexus-compiler-manager:jar">org.codehaus.plexus:plexus-compiler-manager:jar</a>
-</li>
-<li><a href="#org.codehaus.plexus:plexus-compiler-javac:jar">org.codehaus.plexus:plexus-compiler-javac:jar</a>
 </li>
 <li><a href="#org.apache.maven:maven-artifact:jar">org.apache.maven:maven-artifact:jar</a>
 </li>
 </ul>
 </p>
 </li>
+<li><a href="#org.codehaus.plexus:plexus-compiler-javac:jar">org.codehaus.plexus:plexus-compiler-javac:jar</a>
+<ul><li><a href="#org.codehaus.plexus:plexus-utils:jar">org.codehaus.plexus:plexus-utils:jar</a>
+</li>
 </ul>
 </p>
+</li>
+<li><a href="#org.codehaus.plexus:plexus-compiler-manager:jar">org.codehaus.plexus:plexus-compiler-manager:jar</a>
+<ul><li><a href="#org.codehaus.plexus:plexus-compiler-api:jar">org.codehaus.plexus:plexus-compiler-api:jar</a>
+</li>
+<li><a href="#org.codehaus.plexus:plexus-container-default:jar">org.codehaus.plexus:plexus-container-default:jar</a>
+</li>
+</ul>
+</p>
+</li>
+<li><a href="#com.sun:tools:jar">com.sun:tools:jar</a>
+</li>
+</ul>
+</p>
+</li>
+<li><a href="#junit:junit:jar">junit:junit:jar</a>
 </li>
 </ul>
 </p>
@@ -927,60 +935,59 @@
 </a>
 </p>
 <p>Maven2 plugin for developing Hudson plugins</p>
-<p><a class="externalLink" href="https://hudson.dev.java.net/tools/maven-hpi-plugin">https://hudson.dev.java.net/tools/maven-hpi-plugin</a>
+<p><a href="https://hudson.dev.java.net/tools/maven-hpi-plugin" class="externalLink">https://hudson.dev.java.net/tools/maven-hpi-plugin</a>
 </p>
 <p><a name="org.apache.maven:maven-archiver:jar"><b>Maven Archiver</b>
 </a>
 </p>
 <p>Maven is a project development management and comprehension tool. Based on the concept of a project object model: builds, dependency management, documentation creation, site publication, and distribution publication are all controlled from the declarative file. Maven can be extended by plugins to utilise a number of other development tools for reporting or the build process.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-archiver">http://maven.apache.org/maven-archiver</a>
+<p><a href="http://maven.apache.org/maven-archiver" class="externalLink">http://maven.apache.org/maven-archiver</a>
 </p>
 <p><a name="org.mortbay.jetty:maven-jetty-plugin:maven-plugin"><b>Maven Jetty Plugin</b>
 </a>
 </p>
-<p><a class="externalLink" href="http://jetty.mortbay.org/maven-jetty-plugin">http://jetty.mortbay.org/maven-jetty-plugin</a>
-</p>
-<p><a name="org.mortbay.jetty:jetty-plus:jar"><b>Jetty Plus</b>
-</a>
-</p>
-<p><a class="externalLink" href="http://jetty.mortbay.org">http://jetty.mortbay.org</a>
-</p>
-<p><a name="javax.mail:mail:jar"><b>JavaMail API</b>
-</a>
-</p>
-<p>The JavaMail API provides a platform-independent and protocol-independent framework to build mail and messaging applications.</p>
-<p><a class="externalLink" href="https://glassfish.dev.java.net/javaee5/mail/">https://glassfish.dev.java.net/javaee5/mail/</a>
-</p>
-<p><a name="javax.activation:activation:jar"><b>JavaBeans Activation Framework (JAF)</b>
-</a>
-</p>
-<p>JavaBeans Activation Framework (JAF) is a standard extension to the Java platform that lets you take advantage of standard services to: determine the type of an arbitrary piece of data; encapsulate access to it; discover the operations available on it; and instantiate the appropriate bean to perform the operation(s).</p>
-<p><a class="externalLink" href="http://java.sun.com/products/javabeans/jaf/index.jsp">http://java.sun.com/products/javabeans/jaf/index.jsp</a>
-</p>
-<p><a name="geronimo-spec:geronimo-spec-jta:jar"><b>Unnamed - geronimo-spec:geronimo-spec-jta:jar:1.0.1B-rc4</b>
-</a>
+<p><a href="http://jetty.mortbay.org/maven-jetty-plugin" class="externalLink">http://jetty.mortbay.org/maven-jetty-plugin</a>
 </p>
 <p><a name="commons-el:commons-el:jar"><b>EL</b>
 </a>
 </p>
 <p>JSP 2.0 Expression Language Interpreter Implementation</p>
-<p><a class="externalLink" href="http://jakarta.apache.org/commons/el/">http://jakarta.apache.org/commons/el/</a>
+<p><a href="http://jakarta.apache.org/commons/el/" class="externalLink">http://jakarta.apache.org/commons/el/</a>
 </p>
 <p><a name="org.apache.maven:maven-plugin-tools-api:jar"><b>Maven Plugin Tools APIs</b>
 </a>
 </p>
 <p>Maven is a project development management and comprehension tool. Based on the concept of a project object model: builds, dependency management, documentation creation, site publication, and distribution publication are all controlled from the declarative file. Maven can be extended by plugins to utilise a number of other development tools for reporting or the build process.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven2/maven-plugin-tools/maven-plugin-tools-api">http://maven.apache.org/maven2/maven-plugin-tools/maven-plugin-tools-api</a>
+<p><a href="http://maven.apache.org/maven2/maven-plugin-tools/maven-plugin-tools-api" class="externalLink">http://maven.apache.org/maven2/maven-plugin-tools/maven-plugin-tools-api</a>
+</p>
+<p><a name="org.mortbay.jetty:jetty-plus:jar"><b>Jetty Plus</b>
+</a>
+</p>
+<p><a href="http://jetty.mortbay.org" class="externalLink">http://jetty.mortbay.org</a>
+</p>
+<p><a name="javax.mail:mail:jar"><b>Unnamed - javax.mail:mail:jar:1.4</b>
+</a>
+</p>
+<p><a name="javax.activation:activation:jar"><b>Unnamed - javax.activation:activation:jar:1.1</b>
+</a>
+</p>
+<p><a name="geronimo-spec:geronimo-spec-jta:jar"><b>Unnamed - geronimo-spec:geronimo-spec-jta:jar:1.0.1B-rc4</b>
+</a>
+</p>
+<p><a name="org.mortbay.jetty:jetty-naming:jar"><b>Jetty Naming</b>
+</a>
+</p>
+<p><a href="http://jetty.mortbay.org" class="externalLink">http://jetty.mortbay.org</a>
 </p>
 <p><a name="org.mortbay.jetty:jetty-management:jar"><b>Jetty Management</b>
 </a>
 </p>
-<p><a class="externalLink" href="http://jetty.mortbay.org">http://jetty.mortbay.org</a>
+<p><a href="http://jetty.mortbay.org" class="externalLink">http://jetty.mortbay.org</a>
 </p>
 <p><a name="org.mortbay.jetty:jetty:jar"><b>Jetty Server</b>
 </a>
 </p>
-<p><a class="externalLink" href="http://jetty.mortbay.org">http://jetty.mortbay.org</a>
+<p><a href="http://jetty.mortbay.org" class="externalLink">http://jetty.mortbay.org</a>
 </p>
 <p><a name="mx4j:mx4j:jar"><b>Unnamed - mx4j:mx4j:jar:3.0.1</b>
 </a>
@@ -988,44 +995,39 @@
 <p><a name="mx4j:mx4j-tools:jar"><b>Unnamed - mx4j:mx4j-tools:jar:3.0.1</b>
 </a>
 </p>
-<p><a name="org.mortbay.jetty:jetty-naming:jar"><b>Jetty Naming</b>
-</a>
-</p>
-<p><a class="externalLink" href="http://jetty.mortbay.org">http://jetty.mortbay.org</a>
-</p>
 <p><a name="org.mortbay.jetty:jsp-2.1:jar"><b>Glassfish Jasper</b>
 </a>
 </p>
-<p><a class="externalLink" href="http://jetty.mortbay.org/modules/jsp-2.1">http://jetty.mortbay.org/modules/jsp-2.1</a>
+<p><a href="http://jetty.mortbay.org/modules/jsp-2.1" class="externalLink">http://jetty.mortbay.org/modules/jsp-2.1</a>
 </p>
 <p><a name="org.eclipse.jdt:core:jar"><b>Eclipse JDT Core</b>
 </a>
 </p>
-<p><a class="externalLink" href="http://www.eclipse.org/jdt/">http://www.eclipse.org/jdt/</a>
+<p><a href="http://www.eclipse.org/jdt/" class="externalLink">http://www.eclipse.org/jdt/</a>
 </p>
 <p><a name="org.mortbay.jetty:jsp-api-2.1:jar"><b>Glassfish Jasper API</b>
 </a>
 </p>
-<p><a class="externalLink" href="http://jetty.mortbay.org/modules/jsp-api-2.1">http://jetty.mortbay.org/modules/jsp-api-2.1</a>
+<p><a href="http://jetty.mortbay.org/modules/jsp-api-2.1" class="externalLink">http://jetty.mortbay.org/modules/jsp-api-2.1</a>
 </p>
 <p><a name="org.mortbay.jetty:servlet-api-2.5:jar"><b>Servlet Specification 2.5 API</b>
 </a>
 </p>
-<p><a class="externalLink" href="http://jetty.mortbay.org">http://jetty.mortbay.org</a>
+<p><a href="http://jetty.mortbay.org" class="externalLink">http://jetty.mortbay.org</a>
 </p>
 <p><a name="org.apache.maven.plugins:maven-archetype-plugin:maven-plugin"><b>Maven Archetype Plugin</b>
 </a>
 </p>
 <p>Maven is a software project management and comprehension tool. Based on the concept of a project object model
     (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-archetype/maven-archetype-plugin">http://maven.apache.org/maven-archetype/maven-archetype-plugin</a>
+<p><a href="http://maven.apache.org/maven-archetype/maven-archetype-plugin" class="externalLink">http://maven.apache.org/maven-archetype/maven-archetype-plugin</a>
 </p>
 <p><a name="org.apache.maven.archetype:maven-archetype-core:jar"><b>Maven Archetype Core</b>
 </a>
 </p>
 <p>Maven is a software project management and comprehension tool. Based on the concept of a project object model
     (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-archetype/maven-archetype-core">http://maven.apache.org/maven-archetype/maven-archetype-core</a>
+<p><a href="http://maven.apache.org/maven-archetype/maven-archetype-core" class="externalLink">http://maven.apache.org/maven-archetype/maven-archetype-core</a>
 </p>
 <p><a name="org.codehaus.plexus:plexus-velocity:jar"><b>Plexus Velocity Component</b>
 </a>
@@ -1042,7 +1044,7 @@
 <p>Velocity is a Java-based template engine. It permits anyone to use the
     simple yet powerful template language to reference objects defined in Java
     code.</p>
-<p><a class="externalLink" href="http://jakarta.apache.org/velocity/">http://jakarta.apache.org/velocity/</a>
+<p><a href="http://jakarta.apache.org/velocity/" class="externalLink">http://jakarta.apache.org/velocity/</a>
 </p>
 <p><a name="velocity:velocity-dep:jar"><b>Velocity</b>
 </a>
@@ -1050,21 +1052,21 @@
 <p>Velocity is a Java-based template engine. It permits anyone to use the
     simple yet powerful template language to reference objects defined in Java
     code.</p>
-<p><a class="externalLink" href="http://jakarta.apache.org/velocity/">http://jakarta.apache.org/velocity/</a>
+<p><a href="http://jakarta.apache.org/velocity/" class="externalLink">http://jakarta.apache.org/velocity/</a>
 </p>
 <p><a name="org.apache.maven.archetype:maven-archetype-creator:jar"><b>Maven Archetype Creator</b>
 </a>
 </p>
 <p>Maven is a software project management and comprehension tool. Based on the concept of a project object model
     (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.</p>
-<p><a class="externalLink" href="http://maven.apache.org">http://maven.apache.org</a>
+<p><a href="http://maven.apache.org" class="externalLink">http://maven.apache.org</a>
 </p>
 <p><a name="org.apache.maven.archetype:maven-archetype-model:jar"><b>Maven Archetype Model</b>
 </a>
 </p>
 <p>Maven is a software project management and comprehension tool. Based on the concept of a project object model
     (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-archetype/maven-archetype-model">http://maven.apache.org/maven-archetype/maven-archetype-model</a>
+<p><a href="http://maven.apache.org/maven-archetype/maven-archetype-model" class="externalLink">http://maven.apache.org/maven-archetype/maven-archetype-model</a>
 </p>
 <p><a name="org.codehaus.plexus:plexus-archiver:jar"><b>Plexus Archiver Component</b>
 </a>
@@ -1076,7 +1078,7 @@
 </a>
 </p>
 <p>java.net tasks : java.net automation library/tools</p>
-<p><a class="externalLink" href="http://javanettasks.dev.java.net/">http://javanettasks.dev.java.net/</a>
+<p><a href="http://javanettasks.dev.java.net/" class="externalLink">http://javanettasks.dev.java.net/</a>
 </p>
 <p><a name="nekohtml:nekohtml:jar"><b>Neko HTML</b>
 </a>
@@ -1088,7 +1090,7 @@
 </a>
 </p>
 <p>JTidy is a Java port of HTML Tidy, a HTML syntax checker and pretty printer. Like its non-Java cousin, JTidy can be used as a tool for cleaning up malformed and faulty HTML. In addition, JTidy provides a DOM parser for real-world HTML.</p>
-<p><a class="externalLink" href="http://jtidy.sourceforge.net">http://jtidy.sourceforge.net</a>
+<p><a href="http://jtidy.sourceforge.net" class="externalLink">http://jtidy.sourceforge.net</a>
 </p>
 <p><a name="ant:ant:jar"><b>Unnamed - ant:ant:jar:1.6.5</b>
 </a>
@@ -1098,19 +1100,19 @@
     pragmatic software license, and a desire to create high quality software that leads the way in its field.
     We consider ourselves not simply a group of projects sharing a server, but rather a community of developers
     and users.</p>
-<p><a class="externalLink" href="http://www.apache.org/ant">http://www.apache.org/ant</a>
+<p><a href="http://www.apache.org/ant" class="externalLink">http://www.apache.org/ant</a>
 </p>
 <p><a name="jaxen:jaxen:jar"><b>jaxen</b>
 </a>
 </p>
 <p>Jaxen is a universal Java XPath engine.</p>
-<p><a class="externalLink" href="http://jaxen.codehaus.org/">http://jaxen.codehaus.org/</a>
+<p><a href="http://jaxen.codehaus.org/" class="externalLink">http://jaxen.codehaus.org/</a>
 </p>
 <p><a name="dom4j:dom4j:jar"><b>dom4j</b>
 </a>
 </p>
 <p>dom4j: the flexible XML framework for Java</p>
-<p><a class="externalLink" href="http://dom4j.org">http://dom4j.org</a>
+<p><a href="http://dom4j.org" class="externalLink">http://dom4j.org</a>
 </p>
 <p><a name="xml-apis:xml-apis:jar"><b>XML Commons External Components XML APIs</b>
 </a>
@@ -1123,7 +1125,7 @@
     interfaces that are defined by external standards organizations. For DOM, 
     that's the W3C; for SAX it's David Megginson and sax.sourceforge.net; for 
     JAXP it's Sun.</p>
-<p><a class="externalLink" href="http://xml.apache.org/commons/#external">http://xml.apache.org/commons/#external</a>
+<p><a href="http://xml.apache.org/commons/#external" class="externalLink">http://xml.apache.org/commons/#external</a>
 </p>
 <p><a name="xerces:xercesImpl:jar"><b>Unnamed - xerces:xercesImpl:jar:2.2.1</b>
 </a>
@@ -1132,17 +1134,24 @@
 </a>
 </p>
 <p>Maven2 plugin for developing stapler applications</p>
+<p><a name="org.kohsuke.stapler:stapler:jar"><b>Stapler</b>
+</a>
+</p>
+<p>Stapler HTTP request handling engine</p>
+<p><a name="javax.servlet:jsp-api:jar"><b>Unnamed - javax.servlet:jsp-api:jar:2.0</b>
+</a>
+</p>
 <p><a name="org.apache.maven:maven-core:jar"><b>Maven Core</b>
 </a>
 </p>
 <p>Maven is a project development management and comprehension tool. Based on the concept of a project object model: builds, dependency management, documentation creation, site publication, and distribution publication are all controlled from the declarative file. Maven can be extended by plugins to utilise a number of other development tools for reporting or the build process.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-core">http://maven.apache.org/maven-core</a>
+<p><a href="http://maven.apache.org/maven-core" class="externalLink">http://maven.apache.org/maven-core</a>
 </p>
 <p><a name="org.apache.maven:maven-settings:jar"><b>Maven Local Settings Model</b>
 </a>
 </p>
 <p>Maven is a project development management and comprehension tool. Based on the concept of a project object model: builds, dependency management, documentation creation, site publication, and distribution publication are all controlled from the declarative file. Maven can be extended by plugins to utilise a number of other development tools for reporting or the build process.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-settings">http://maven.apache.org/maven-settings</a>
+<p><a href="http://maven.apache.org/maven-settings" class="externalLink">http://maven.apache.org/maven-settings</a>
 </p>
 <p><a name="org.apache.maven.wagon:wagon-file:jar"><b>Maven Wagon File Provider</b>
 </a>
@@ -1152,7 +1161,7 @@
 </a>
 </p>
 <p>Maven is a project development management and comprehension tool. Based on the concept of a project object model: builds, dependency management, documentation creation, site publication, and distribution publication are all controlled from the declarative file. Maven can be extended by plugins to utilise a number of other development tools for reporting or the build process.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-plugin-parameter-documenter">http://maven.apache.org/maven-plugin-parameter-documenter</a>
+<p><a href="http://maven.apache.org/maven-plugin-parameter-documenter" class="externalLink">http://maven.apache.org/maven-plugin-parameter-documenter</a>
 </p>
 <p><a name="org.apache.maven.wagon:wagon-http-lightweight:jar"><b>Maven Wagon Lightweight HTTP Provider</b>
 </a>
@@ -1162,30 +1171,30 @@
 </a>
 </p>
 <p>Maven is a project development management and comprehension tool. Based on the concept of a project object model: builds, dependency management, documentation creation, site publication, and distribution publication are all controlled from the declarative file. Maven can be extended by plugins to utilise a number of other development tools for reporting or the build process.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-reporting/maven-reporting-api">http://maven.apache.org/maven-reporting/maven-reporting-api</a>
+<p><a href="http://maven.apache.org/maven-reporting/maven-reporting-api" class="externalLink">http://maven.apache.org/maven-reporting/maven-reporting-api</a>
 </p>
 <p><a name="org.apache.maven.doxia:doxia-sink-api:jar"><b>Doxia Sink API</b>
 </a>
 </p>
-<p><a class="externalLink" href="http://maven.apache.org/doxia/doxia-sink-api">http://maven.apache.org/doxia/doxia-sink-api</a>
+<p><a href="http://maven.apache.org/doxia/doxia-sink-api" class="externalLink">http://maven.apache.org/doxia/doxia-sink-api</a>
 </p>
 <p><a name="org.apache.maven:maven-profile:jar"><b>Maven Profile Model</b>
 </a>
 </p>
 <p>Maven is a project development management and comprehension tool. Based on the concept of a project object model: builds, dependency management, documentation creation, site publication, and distribution publication are all controlled from the declarative file. Maven can be extended by plugins to utilise a number of other development tools for reporting or the build process.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-profile">http://maven.apache.org/maven-profile</a>
+<p><a href="http://maven.apache.org/maven-profile" class="externalLink">http://maven.apache.org/maven-profile</a>
 </p>
 <p><a name="org.apache.maven:maven-model:jar"><b>Maven Model</b>
 </a>
 </p>
 <p>Maven Model</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-model">http://maven.apache.org/maven-model</a>
+<p><a href="http://maven.apache.org/maven-model" class="externalLink">http://maven.apache.org/maven-model</a>
 </p>
 <p><a name="org.apache.maven:maven-repository-metadata:jar"><b>Maven Repository Metadata Model</b>
 </a>
 </p>
 <p>Maven Plugin Mapping</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-repository-metadata">http://maven.apache.org/maven-repository-metadata</a>
+<p><a href="http://maven.apache.org/maven-repository-metadata" class="externalLink">http://maven.apache.org/maven-repository-metadata</a>
 </p>
 <p><a name="org.apache.maven:maven-error-diagnostics:jar"><b>Maven Error Diagnostics</b>
 </a>
@@ -1193,13 +1202,13 @@
 <p>Provides a manager component which will process a given Throwable instance through a set of diagnostic
     sub-components, and return a String message with user-friendly information about the error and possibly
     how to fix it.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-error-diagnostics">http://maven.apache.org/maven-error-diagnostics</a>
+<p><a href="http://maven.apache.org/maven-error-diagnostics" class="externalLink">http://maven.apache.org/maven-error-diagnostics</a>
 </p>
 <p><a name="org.apache.maven:maven-plugin-registry:jar"><b>Maven Plugin Registry Model</b>
 </a>
 </p>
 <p>Maven is a project development management and comprehension tool. Based on the concept of a project object model: builds, dependency management, documentation creation, site publication, and distribution publication are all controlled from the declarative file. Maven can be extended by plugins to utilise a number of other development tools for reporting or the build process.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-plugin-registry">http://maven.apache.org/maven-plugin-registry</a>
+<p><a href="http://maven.apache.org/maven-plugin-registry" class="externalLink">http://maven.apache.org/maven-plugin-registry</a>
 </p>
 <p><a name="commons-cli:commons-cli:jar"><b>CLI</b>
 </a>
@@ -1209,19 +1218,19 @@
 </a>
 </p>
 <p>Maven is a project development management and comprehension tool. Based on the concept of a project object model: builds, dependency management, documentation creation, site publication, and distribution publication are all controlled from the declarative file. Maven can be extended by plugins to utilise a number of other development tools for reporting or the build process.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven2/maven-plugin-descriptor">http://maven.apache.org/maven2/maven-plugin-descriptor</a>
+<p><a href="http://maven.apache.org/maven2/maven-plugin-descriptor" class="externalLink">http://maven.apache.org/maven2/maven-plugin-descriptor</a>
 </p>
 <p><a name="org.apache.maven:maven-artifact-manager:jar"><b>Maven Artifact Manager</b>
 </a>
 </p>
 <p>Maven is a project development management and comprehension tool. Based on the concept of a project object model: builds, dependency management, documentation creation, site publication, and distribution publication are all controlled from the declarative file. Maven can be extended by plugins to utilise a number of other development tools for reporting or the build process.</p>
-<p><a class="externalLink" href="http://maven.apache.org">http://maven.apache.org</a>
+<p><a href="http://maven.apache.org" class="externalLink">http://maven.apache.org</a>
 </p>
 <p><a name="org.apache.maven:maven-monitor:jar"><b>Maven Monitor</b>
 </a>
 </p>
 <p>Maven is a project development management and comprehension tool. Based on the concept of a project object model: builds, dependency management, documentation creation, site publication, and distribution publication are all controlled from the declarative file. Maven can be extended by plugins to utilise a number of other development tools for reporting or the build process.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-monitor">http://maven.apache.org/maven-monitor</a>
+<p><a href="http://maven.apache.org/maven-monitor" class="externalLink">http://maven.apache.org/maven-monitor</a>
 </p>
 <p><a name="org.apache.maven.wagon:wagon-ssh:jar"><b>Maven Wagon SSH Provider</b>
 </a>
@@ -1238,10 +1247,17 @@
 </a>
 </p>
 <p></p>
-<p><a class="externalLink" href="http://classworlds.codehaus.org/">http://classworlds.codehaus.org/</a>
+<p><a href="http://classworlds.codehaus.org/" class="externalLink">http://classworlds.codehaus.org/</a>
 </p>
 <p><a name="org.codehaus.plexus:plexus-interactivity-api:jar"><b>Plexus Default Interactivity Handler</b>
 </a>
+</p>
+<p><a name="org.apache.maven:maven-project:jar"><b>Maven Project Builder</b>
+</a>
+</p>
+<p>This library is used to not only read Maven project object model files, but to assemble inheritence
+    and to retrieve remote models as required.</p>
+<p><a href="http://maven.apache.org/maven-project" class="externalLink">http://maven.apache.org/maven-project</a>
 </p>
 <p><a name="qdox:qdox:jar"><b>QDox</b>
 </a>
@@ -1250,55 +1266,50 @@
     class/interface/method definitions from source files complete with
     JavaDoc @tags. It is designed to be used by active code generators or
    documentation tools.</p>
-<p><a class="externalLink" href="http://qdox.codehaus.org/">http://qdox.codehaus.org/</a>
-</p>
-<p><a name="com.sun:tools:jar"><b>com.sun:tools:jar</b>
-</a>
-</p>
-<p>/usr/lib/jvm/java-6-sun-1.6.0.03/jre/../lib/tools.jar</p>
-<p><a name="org.kohsuke.stapler:stapler:jar"><b>Stapler</b>
-</a>
-</p>
-<p>Stapler HTTP request handling engine</p>
-<p><a name="javax.servlet:jsp-api:jar"><b>Unnamed - javax.servlet:jsp-api:jar:2.0</b>
-</a>
-</p>
-<p><a name="org.apache.maven:maven-project:jar"><b>Maven Project Builder</b>
-</a>
-</p>
-<p>This library is used to not only read Maven project object model files, but to assemble inheritence
-    and to retrieve remote models as required.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-project">http://maven.apache.org/maven-project</a>
+<p><a href="http://qdox.codehaus.org/" class="externalLink">http://qdox.codehaus.org/</a>
 </p>
 <p><a name="org.apache.maven.plugins:maven-compiler-plugin:jar"><b>Maven Compiler Plugin</b>
 </a>
 </p>
 <p>Maven Plugins</p>
-<p><a class="externalLink" href="http://maven.apache.org/plugins/maven-compiler-plugin">http://maven.apache.org/plugins/maven-compiler-plugin</a>
+<p><a href="http://maven.apache.org/plugins/maven-compiler-plugin" class="externalLink">http://maven.apache.org/plugins/maven-compiler-plugin</a>
 </p>
 <p><a name="org.apache.maven:maven-plugin-api:jar"><b>Maven Plugin API</b>
 </a>
 </p>
 <p>Maven is a project development management and comprehension tool. Based on the concept of a project object model: builds, dependency management, documentation creation, site publication, and distribution publication are all controlled from the declarative file. Maven can be extended by plugins to utilise a number of other development tools for reporting or the build process.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-plugin-api">http://maven.apache.org/maven-plugin-api</a>
-</p>
-<p><a name="org.codehaus.plexus:plexus-utils:jar"><b>Plexus Common Utilities</b>
-</a>
-</p>
-<p><a name="org.codehaus.plexus:plexus-compiler-api:jar"><b>Plexus Compiler Api</b>
-</a>
-</p>
-<p><a name="org.codehaus.plexus:plexus-compiler-manager:jar"><b>Plexus Compiler Manager</b>
-</a>
-</p>
-<p><a name="org.codehaus.plexus:plexus-compiler-javac:jar"><b>Plexus Javac Component</b>
-</a>
+<p><a href="http://maven.apache.org/maven-plugin-api" class="externalLink">http://maven.apache.org/maven-plugin-api</a>
 </p>
 <p><a name="org.apache.maven:maven-artifact:jar"><b>Maven Artifact</b>
 </a>
 </p>
 <p>Maven is a project development management and comprehension tool. Based on the concept of a project object model: builds, dependency management, documentation creation, site publication, and distribution publication are all controlled from the declarative file. Maven can be extended by plugins to utilise a number of other development tools for reporting or the build process.</p>
-<p><a class="externalLink" href="http://maven.apache.org/maven-artifact">http://maven.apache.org/maven-artifact</a>
+<p><a href="http://maven.apache.org/maven-artifact" class="externalLink">http://maven.apache.org/maven-artifact</a>
+</p>
+<p><a name="org.codehaus.plexus:plexus-compiler-javac:jar"><b>Plexus Javac Component</b>
+</a>
+</p>
+<p><a name="org.codehaus.plexus:plexus-utils:jar"><b>Plexus Common Utilities</b>
+</a>
+</p>
+<p><a name="org.codehaus.plexus:plexus-compiler-manager:jar"><b>Plexus Compiler Manager</b>
+</a>
+</p>
+<p><a name="org.codehaus.plexus:plexus-compiler-api:jar"><b>Plexus Compiler Api</b>
+</a>
+</p>
+<p><a name="org.codehaus.plexus:plexus-container-default:jar"><b>Default Plexus Container</b>
+</a>
+</p>
+<p><a name="com.sun:tools:jar"><b>com.sun:tools:jar</b>
+</a>
+</p>
+<p>/usr/local/java1.6.0_02/jre/../lib/tools.jar</p>
+<p><a name="junit:junit:jar"><b>JUnit</b>
+</a>
+</p>
+<p>JUnit is a regression testing framework written by Erich Gamma and Kent Beck. It is used by the developer who implements unit tests in Java.</p>
+<p><a href="http://junit.org" class="externalLink">http://junit.org</a>
 </p>
 </div>
 </div>

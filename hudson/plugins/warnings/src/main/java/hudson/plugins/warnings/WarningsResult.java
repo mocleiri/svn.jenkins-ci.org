@@ -14,6 +14,8 @@ import hudson.plugins.warnings.util.model.JavaProject;
  */
 public class WarningsResult extends AnnotationsBuildResult {
     /** Unique identifier of this class. */
+    private static final long serialVersionUID = -137460587767210579L;
+
     static {
         XSTREAM.alias("warning", Warning.class);
     }
@@ -53,17 +55,42 @@ public class WarningsResult extends AnnotationsBuildResult {
         return ResultSummary.createSummary(this);
     }
 
-    /**
-     * Returns the detail messages for the summary.jelly file.
-     *
-     * @return the summary message
-     */
+    /** {@inheritDoc} */
+    @Override
     public String getDetails() {
         String message = ResultSummary.createDeltaMessage(this);
         if (getNumberOfAnnotations() == 0 && getDelta() == 0) {
-            return message + "<li>" + Messages.Warnings_ResultAction_NoWarningsSince(getZeroWarningsSinceBuild()) + "</li>";
+            message += "<li>" + Messages.Warnings_ResultAction_NoWarningsSince(getZeroWarningsSinceBuild()) + "</li>";
+            message += createHighScoreMessage();
         }
         return message;
+    }
+
+
+    /**
+     * Creates a highscore message.
+     *
+     * @return a highscore message
+     */
+    private String createHighScoreMessage() {
+        if (isNewZeroWarningsHighScore()) {
+            long days = getDays(getZeroWarningsHighScore());
+            if (days == 1) {
+                return "<li>" + Messages.Warnings_ResultAction_OneHighScore() + "</li>";
+            }
+            else {
+                return "<li>" + Messages.Warnings_ResultAction_MultipleHighScore(days) + "</li>";
+            }
+        }
+        else {
+            long days = getDays(getHighScoreGap());
+            if (days == 1) {
+                return "<li>" + Messages.Warnings_ResultAction_OneNoHighScore() + "</li>";
+            }
+            else {
+                return "<li>" + Messages.Warnings_ResultAction_MultipleNoHighScore(days) + "</li>";
+            }
+        }
     }
 
     /** {@inheritDoc} */

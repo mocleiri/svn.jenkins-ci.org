@@ -4,8 +4,10 @@ import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import hudson.ExtensionPoint;
 import hudson.Util;
 import hudson.XmlFile;
+import hudson.PermalinkList;
 import hudson.model.Descriptor.FormException;
 import hudson.model.listeners.ItemListener;
+import hudson.model.PermalinkProjectAction.Permalink;
 import hudson.search.QuickSilver;
 import hudson.search.SearchIndex;
 import hudson.search.SearchIndexBuilder;
@@ -554,6 +556,12 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
                     return w;
             }
 
+            // is this a permalink?
+            for (Permalink p : getPermalinks()) {
+                if(p.getId().equals(token))
+                    return p.resolve(this);
+            }
+
             return super.getDynamic(token, req, rsp);
         }
     }
@@ -614,7 +622,7 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
     }
 
     /**
-     * Returns the last successful build, if any. Otherwise null. A stable build
+     * Returns the last successful build, if any. Otherwise null. A successful build
      * would include either {@link Result#SUCCESS} or {@link Result#UNSTABLE}.
      * 
      * @see #getLastStableBuild()
@@ -633,6 +641,7 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
 
     /**
      * Returns the last stable build, if any. Otherwise null.
+     * @see #getLastSuccessfulBuild
      */
     @Exported
     @QuickSilver
@@ -666,6 +675,23 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
         while (r != null && r.isBuilding())
             r = r.getPreviousBuild();
         return r;
+    }
+
+    /**
+     * Gets all the {@link Permalink}s defined for this job.
+     *
+     * @return never null
+     */
+    public PermalinkList getPermalinks() {
+        // TODO: shall we cache this?
+        PermalinkList permalinks = new PermalinkList(Permalink.BUILTIN);
+        for (Action a : getActions()) {
+            if (a instanceof PermalinkProjectAction) {
+                PermalinkProjectAction ppa = (PermalinkProjectAction) a;
+                permalinks.addAll(ppa.getPermalinks());
+            }
+        }
+        return permalinks;
     }
 
     /**
@@ -785,8 +811,7 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
             } else {
                 description = Messages.Job_NOfMFailed(failCount, totalCount);
             }
-            return new HealthReport(score, Messages
-                    .Job_BuildStability(description));
+            return new HealthReport(score, Messages._Job_BuildStability(description));
         }
         return null;
     }

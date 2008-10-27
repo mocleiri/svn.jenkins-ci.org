@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.PluginWrapper (Hudson core 1.249 API)
+Uses of Class hudson.PluginWrapper (Hudson core 1.256 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-19">
+<META NAME="date" CONTENT="2008-10-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.PluginWrapper (Hudson core 1.249 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.PluginWrapper (Hudson core 1.249 API)";
+        parent.document.title="Uses of Class hudson.PluginWrapper (Hudson core 1.256 API)";
     }
 }
 </SCRIPT>
@@ -118,6 +118,22 @@ Uses of <A HREF="../../hudson/PluginWrapper.html" title="class in hudson">Plugin
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A></CODE></FONT></TD>
+<TD><CODE><B>PluginStrategy.</B><B><A HREF="../../hudson/PluginStrategy.html#createPluginWrapper(java.io.File)">createPluginWrapper</A></B>(java.io.File&nbsp;archive)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a plugin wrapper, which provides a management interface for the plugin</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A></CODE></FONT></TD>
+<TD><CODE><B>ClassicPluginStrategy.</B><B><A HREF="../../hudson/ClassicPluginStrategy.html#createPluginWrapper(java.io.File)">createPluginWrapper</A></B>(java.io.File&nbsp;archive)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A></CODE></FONT></TD>
 <TD><CODE><B>PluginManager.</B><B><A HREF="../../hudson/PluginManager.html#getPlugin(java.lang.Class)">getPlugin</A></B>(java.lang.Class&lt;? extends <A HREF="../../hudson/Plugin.html" title="class in hudson">Plugin</A>&gt;&nbsp;pluginClazz)</CODE>
 
 <BR>
@@ -154,6 +170,54 @@ Uses of <A HREF="../../hudson/PluginWrapper.html" title="class in hudson">Plugin
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the plugin instances that extend a specific class, use to find similar plugins.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../hudson/package-summary.html">hudson</A> with parameters of type <A HREF="../../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>PluginStrategy.</B><B><A HREF="../../hudson/PluginStrategy.html#initializeComponents(hudson.PluginWrapper)">initializeComponents</A></B>(<A HREF="../../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&nbsp;plugin)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optionally start services provided by the plugin.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ClassicPluginStrategy.</B><B><A HREF="../../hudson/ClassicPluginStrategy.html#initializeComponents(hudson.PluginWrapper)">initializeComponents</A></B>(<A HREF="../../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&nbsp;plugin)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>PluginStrategy.</B><B><A HREF="../../hudson/PluginStrategy.html#load(hudson.PluginWrapper)">load</A></B>(<A HREF="../../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&nbsp;wrapper)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads the plugin and starts it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ClassicPluginStrategy.</B><B><A HREF="../../hudson/ClassicPluginStrategy.html#load(hudson.PluginWrapper)">load</A></B>(<A HREF="../../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&nbsp;wrapper)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ClassicPluginStrategy.</B><B><A HREF="../../hudson/ClassicPluginStrategy.html#startPlugin(hudson.PluginWrapper)">startPlugin</A></B>(<A HREF="../../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&nbsp;plugin)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;

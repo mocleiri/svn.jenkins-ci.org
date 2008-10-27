@@ -25,6 +25,7 @@ import org.apache.tools.tar.TarOutputStream;
 import org.apache.tools.zip.ZipOutputStream;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.fileupload.FileItem;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -327,6 +328,30 @@ public final class FilePath implements Serializable {
     }
 
     /**
+     * Place the data from {@link FileItem} into the file location specified by this {@link FilePath} object.
+     */
+    public void copyFrom(FileItem file) throws IOException, InterruptedException {
+        if(channel==null) {
+            try {
+                file.write(new File(remote));
+            } catch (IOException e) {
+                throw e;
+            } catch (Exception e) {
+                throw new IOException2(e);
+            }
+        } else {
+            InputStream i = file.getInputStream();
+            OutputStream o = write();
+            try {
+                IOUtils.copy(i,o);
+            } finally {
+                o.close();
+                i.close();
+            }
+        }
+    }
+
+    /**
      * Code that gets executed on the machine where the {@link FilePath} is local.
      * Used to act on {@link FilePath}.
      *
@@ -494,7 +519,7 @@ public final class FilePath implements Serializable {
     }
 
     /**
-     * Creates a temporary file.
+     * Creates a temporary file in the directory that this {@link FilePath} object designates.
      */
     public FilePath createTempFile(final String prefix, final String suffix) throws IOException, InterruptedException {
         try {
@@ -698,14 +723,14 @@ public final class FilePath implements Serializable {
      */
     public OutputStream write() throws IOException, InterruptedException {
         if(channel==null) {
-            File f = new File(remote);
+            File f = new File(remote).getAbsoluteFile();
             f.getParentFile().mkdirs();
             return new FileOutputStream(f);
         }
 
         return channel.call(new Callable<OutputStream,IOException>() {
             public OutputStream call() throws IOException {
-                File f = new File(remote);
+                File f = new File(remote).getAbsoluteFile();
                 f.getParentFile().mkdirs();
                 FileOutputStream fos = new FileOutputStream(f);
                 return new RemoteOutputStream(fos);

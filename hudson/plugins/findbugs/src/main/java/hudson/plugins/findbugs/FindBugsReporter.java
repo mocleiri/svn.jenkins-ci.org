@@ -14,6 +14,8 @@ import hudson.plugins.findbugs.util.ParserResult;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.component.configurator.ComponentConfigurationException;
@@ -24,6 +26,7 @@ import org.kohsuke.stapler.DataBoundConstructor;
  *
  * @author Ulli Hafner
  */
+// CHECKSTYLE:COUPLING-OFF
 public class FindBugsReporter extends HealthAwareMavenReporter {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = -288391908253344862L;
@@ -51,10 +54,13 @@ public class FindBugsReporter extends HealthAwareMavenReporter {
      *            than this value
      * @param height
      *            the height of the trend graph
+     * @param thresholdLimit
+     *            determines which warning priorities should be considered when
+     *            evaluating the build stability and health
      */
     @DataBoundConstructor
-    public FindBugsReporter(final String threshold, final String healthy, final String unHealthy, final String height) {
-        super(threshold, healthy, unHealthy, height, "FINDBUGS");
+    public FindBugsReporter(final String threshold, final String healthy, final String unHealthy, final String height, final String thresholdLimit) {
+        super(threshold, healthy, unHealthy, height, thresholdLimit, "FINDBUGS");
     }
 
     /** {@inheritDoc} */
@@ -64,10 +70,14 @@ public class FindBugsReporter extends HealthAwareMavenReporter {
     }
 
     /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
     @Override
     public ParserResult perform(final MavenBuildProxy build, final MavenProject pom, final MojoInfo mojo, final PrintStream logger) throws InterruptedException, IOException {
+        List<String> sources = new ArrayList<String>(pom.getCompileSourceRoots());
+        sources.addAll(pom.getTestCompileSourceRoots());
+
         FilesParser findBugsCollector = new FilesParser(logger, determineFileName(mojo),
-                    new FindBugsParser(build.getModuleSetRootDir()), true, false);
+                    new FindBugsParser(build.getModuleSetRootDir(), sources), true, false);
 
         return getTargetPath(pom).act(findBugsCollector);
     }
@@ -78,7 +88,7 @@ public class FindBugsReporter extends HealthAwareMavenReporter {
         FindBugsResult result = new FindBugsResultBuilder().build(build, project);
         HealthReportBuilder healthReportBuilder = createHealthBuilder(
                 Messages.FindBugs_ResultAction_HealthReportSingleItem(),
-                Messages.FindBugs_ResultAction_HealthReportMultipleItem("%d"));
+                Messages.FindBugs_ResultAction_HealthReportMultipleItem());
         build.getActions().add(new MavenFindBugsResultAction(build, healthReportBuilder, getHeight(), result));
         build.registerAsProjectAction(FindBugsReporter.this);
     }

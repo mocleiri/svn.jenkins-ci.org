@@ -18,8 +18,10 @@ public class Warning extends AbstractAnnotation {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = 5171661552905752370L;
 
+    /** The tooltip. */
     @SuppressWarnings("all")
-    private final String tooltip = StringUtils.EMPTY; // backward compatibility
+    @edu.umd.cs.findbugs.annotations.SuppressWarnings("")
+    private final String tooltip = StringUtils.EMPTY; // backward compatibility NOPMD
 
     /**
      * Creates a new instance of {@link Warning}.

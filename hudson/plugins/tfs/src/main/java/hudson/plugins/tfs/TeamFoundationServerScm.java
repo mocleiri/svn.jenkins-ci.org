@@ -7,8 +7,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 
@@ -26,12 +25,14 @@ import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.model.Hudson;
+import hudson.model.ParametersAction;
 import hudson.model.Run;
 import hudson.model.TaskListener;
 import hudson.plugins.tfs.actions.CheckoutAction;
 import hudson.plugins.tfs.browsers.TeamFoundationServerRepositoryBrowser;
 import hudson.plugins.tfs.model.Server;
 import hudson.plugins.tfs.model.ChangeSet;
+import hudson.plugins.tfs.util.BuildVariableResolver;
 import hudson.scm.ChangeLogParser;
 import hudson.scm.RepositoryBrowsers;
 import hudson.scm.SCM;
@@ -46,6 +47,10 @@ import hudson.util.Scrambler;
  */
 public class TeamFoundationServerScm extends SCM {
 
+    public static final String WORKSPACE_ENV_STR = "TFS_WORKSPACE";
+
+    public static final String WORKFOLDER_ENV_STR = "TFS_WORKFOLDER";
+    
     private final String serverUrl;
     private final String projectPath;
     private final String localPath;
@@ -64,11 +69,12 @@ public class TeamFoundationServerScm extends SCM {
         this.projectPath = projectPath;
         this.useUpdate = useUpdate;
         this.localPath = (Util.fixEmptyAndTrim(localPath) == null ? "." : localPath);
-        this.workspaceName = (Util.fixEmptyAndTrim(workspaceName) == null ? "Hudson-${JOB_NAME}" : workspaceName);
+        this.workspaceName = (Util.fixEmptyAndTrim(workspaceName) == null ? "Hudson-${JOB_NAME}-${NODE_NAME}" : workspaceName);
         this.userName = userName;
         this.userPassword = Scrambler.scramble(userPassword);
     }
 
+    // Bean properties need for job configuration
     public String getServerUrl() {
         return serverUrl;
     }
@@ -95,29 +101,44 @@ public class TeamFoundationServerScm extends SCM {
 
     public String getUserName() {
         return userName;
-    }
+    }    
+    // Bean properties END
 
-    public String getNormalizedWorkspaceName(AbstractProject<?,?> project) {
-        if (normalizedWorkspaceName == null) {
-            normalizedWorkspaceName = workspaceName;
-            Matcher matcher = Pattern.compile("\\$\\{JOB_NAME\\}", Pattern.CASE_INSENSITIVE).matcher(normalizedWorkspaceName);
-            if (matcher.find()) {
-                normalizedWorkspaceName = matcher.replaceAll(project.getName());
-            }
-            matcher = Pattern.compile("\\$\\{USER_NAME\\}", Pattern.CASE_INSENSITIVE).matcher(normalizedWorkspaceName);
-            if (matcher.find()) {
-                normalizedWorkspaceName = matcher.replaceAll(System.getProperty("user.name"));
-            }
+    String getWorkspaceName(AbstractBuild<?,?> build, Launcher launcher) {
+        normalizedWorkspaceName = workspaceName;
+        if (build != null) {
+            normalizedWorkspaceName = substituteBuildParameter(build, normalizedWorkspaceName);
+            normalizedWorkspaceName = Util.replaceMacro(normalizedWorkspaceName, new BuildVariableResolver(build.getProject(), launcher));
         }
+        normalizedWorkspaceName = normalizedWorkspaceName.replaceAll("[\"/:<>\\|\\*\\?]+", "_");
+        normalizedWorkspaceName = normalizedWorkspaceName.replaceAll("[\\.\\s]+$", "_");
         return normalizedWorkspaceName;
     }
 
+    public String getServerUrl(Run<?,?> run) {
+        return substituteBuildParameter(run, serverUrl);
+    }
+
+    String getProjectPath(Run<?,?> run) {
+        return substituteBuildParameter(run, projectPath);
+    }
+
+    private String substituteBuildParameter(Run<?,?> run, String text) {
+        if (run instanceof AbstractBuild<?, ?>){
+            AbstractBuild<?,?> build = (AbstractBuild<?, ?>) run;
+            if (build.getAction(ParametersAction.class) != null) {
+                return build.getAction(ParametersAction.class).substitute(build, text);
+            }
+        }
+        return text;
+    }
+    
     @Override
     public boolean checkout(AbstractBuild build, Launcher launcher, FilePath workspaceFilePath, BuildListener listener, File changelogFile) throws IOException, InterruptedException {
-        Server server = createServer(new TfTool(getDescriptor().getTfExecutable(), launcher, listener, workspaceFilePath));
+        Server server = createServer(new TfTool(getDescriptor().getTfExecutable(), launcher, listener, workspaceFilePath), build);
         
-        CheckoutAction action = new CheckoutAction(getNormalizedWorkspaceName(build.getProject()), 
-                projectPath, localPath, useUpdate);
+        CheckoutAction action = new CheckoutAction(getWorkspaceName(build, launcher), 
+                getProjectPath(build), getLocalPath(), isUseUpdate());
         try {
             List<ChangeSet> list = action.checkout(server, workspaceFilePath, (build.getPreviousBuild() != null ? build.getPreviousBuild().getTimestamp() : null));
             ChangeSetWriter writer = new ChangeSetWriter();
@@ -131,14 +152,14 @@ public class TeamFoundationServerScm extends SCM {
 
     @Override
     public boolean pollChanges(AbstractProject hudsonProject, Launcher launcher, FilePath workspace, TaskListener listener) throws IOException, InterruptedException {
-        Run<?,?> lastBuild = hudsonProject.getLastBuild();
-        if (lastBuild == null) {
+        Run<?,?> lastRun = hudsonProject.getLastBuild();
+        if (lastRun == null) {
             return true;
         } else {
-            Server server = createServer(new TfTool(getDescriptor().getTfExecutable(), launcher, listener, workspace));
+            Server server = createServer(new TfTool(getDescriptor().getTfExecutable(), launcher, listener, workspace), lastRun);
             try {
-                return (server.getProject(this.projectPath).getDetailedHistory(
-                            lastBuild.getTimestamp(), 
+                return (server.getProject(getProjectPath(lastRun)).getDetailedHistory(
+                            lastRun.getTimestamp(), 
                             Calendar.getInstance()
                         ).size() > 0);
             } catch (ParseException pe) {
@@ -148,8 +169,8 @@ public class TeamFoundationServerScm extends SCM {
         }
     }
     
-    protected Server createServer(TfTool tool) {
-        return new Server(tool, getServerUrl(), getUserName(), getUserPassword());
+    protected Server createServer(TfTool tool, Run<?,?> run) {
+        return new Server(tool, getServerUrl(run), getUserName(), getUserPassword());
     }
 
     @Override
@@ -169,12 +190,23 @@ public class TeamFoundationServerScm extends SCM {
 
     @Override
     public FilePath getModuleRoot(FilePath workspace) {
-        return workspace.child(localPath);
+        return workspace.child(getLocalPath());
     }
 
     @Override
     public TeamFoundationServerRepositoryBrowser getBrowser() {
         return repositoryBrowser;
+    }
+
+    @Override
+    public void buildEnvVars(AbstractBuild build, Map<String, String> env) {
+        super.buildEnvVars(build, env);
+        if (normalizedWorkspaceName != null) {
+            env.put(WORKSPACE_ENV_STR, normalizedWorkspaceName);
+        }
+        if (env.containsKey("WORKSPACE")) {
+            env.put(WORKFOLDER_ENV_STR, env.get("WORKSPACE") + File.separator + getLocalPath());
+        }
     }
 
     @Override
@@ -184,6 +216,7 @@ public class TeamFoundationServerScm extends SCM {
 
     public static class DescriptorImpl extends SCMDescriptor<TeamFoundationServerScm> {
         
+        public static final String WORKSPACE_NAME_REGEX = "[^\"/:<>\\|\\*\\?]+[^\\s\\.\"/:<>\\|\\*\\?]$";
         public static final String USER_AT_DOMAIN_REGEX = "\\w+@\\w+";
         public static final String DOMAIN_SLASH_USER_REGEX = "\\w+\\\\\\w+";
         public static final String PROJECT_PATH_REGEX = "^\\$\\/.*";
@@ -247,6 +280,12 @@ public class TeamFoundationServerScm extends SCM {
             doRegexCheck(new String[]{PROJECT_PATH_REGEX}, 
                     "Project path must begin with '$/'.", 
                     "Project path is mandatory.", req, rsp );
+        }
+        
+        public void doWorkspaceNameCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+            doRegexCheck(new String[]{WORKSPACE_NAME_REGEX}, 
+                    "Workspace name cannot end with a space or period, and cannot contain any of the following characters: \"/:<>|*?", 
+                    "Workspace name is mandatory", req, rsp);
         }
         
         public void doFieldCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {

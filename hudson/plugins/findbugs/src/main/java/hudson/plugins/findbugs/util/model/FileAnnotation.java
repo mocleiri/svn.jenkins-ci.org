@@ -1,5 +1,7 @@
 package hudson.plugins.findbugs.util.model;
 
+import hudson.model.AbstractBuild;
+
 import java.util.Collection;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Collection;
  *
  * @author Ulli Hafner
  */
-public interface FileAnnotation {
+public interface FileAnnotation extends Comparable<FileAnnotation> {
     /**
      * Returns the message of this annotation.
      *
@@ -58,6 +60,43 @@ public interface FileAnnotation {
      * @return the name of the workspace file that contains this annotation
      */
     String getFileName();
+
+    /**
+     * Returns a file name for a temporary file that will hold the contents of
+     * the source. This temporary file is used in a master - slave scenario
+     * where the original file remains on the slave while this temporary file is
+     * transferred to the master.
+     *
+     * @param owner
+     *            the owner that provides the root directory where the files are
+     *            stored
+     * @return the temporary name
+     */
+    String getTempName(AbstractBuild<?, ?> owner);
+
+    /**
+     * Sets the file name to the specified value.
+     *
+     * @param fileName the value to set
+     */
+    void setFileName(final String fileName);
+
+    /**
+     * Checks if the file exists.
+     *
+     * @param owner
+     *            the owner that provides the root directory where the files are
+     *            stored
+     * @return <code>true</code>, if successful
+     */
+    boolean canDisplayFile(AbstractBuild<?, ?> owner);
+
+    /**
+     * Gets the associated file name of this bug (without path).
+     *
+     * @return the short file name
+     */
+    String getShortFileName();
 
     /**
      * Returns the name of the maven or ant module that contains this annotation.

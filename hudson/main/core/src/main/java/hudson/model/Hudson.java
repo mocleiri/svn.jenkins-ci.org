@@ -1,6 +1,7 @@
 package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
+import hudson.BulkChange;
 import hudson.FeedAdapter;
 import hudson.FilePath;
 import hudson.Functions;
@@ -14,8 +15,9 @@ import hudson.StructuredForm;
 import hudson.TcpSlaveAgentListener;
 import hudson.Util;
 import static hudson.Util.fixEmpty;
+import hudson.WebAppMain;
 import hudson.XmlFile;
-import hudson.BulkChange;
+import hudson.lifecycle.WindowsInstallerLink;
 import hudson.model.Descriptor.FormException;
 import hudson.model.listeners.ItemListener;
 import hudson.model.listeners.JobListener;
@@ -131,13 +133,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import java.nio.charset.Charset;
 
 /**
  * Root object of the system.
@@ -370,6 +373,19 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
         load();
 
+//        try {
+//            // fill up the cache
+//            load();
+//
+//            Controller c = new Controller();
+//            c.startCPUProfiling(ProfilingModes.CPU_TRACING,""); // "java.*");
+//            load();
+//            c.stopCPUProfiling();
+//            c.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
+//        } catch (Exception e) {
+//            throw new Error(e);
+//        }
+
         if(slaveAgentPort!=-1)
             tcpSlaveAgentListener = new TcpSlaveAgentListener(slaveAgentPort);
         else
@@ -388,6 +404,8 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         rms.setKey(getSecretKey());
         rms.setParameter("remember_me"); // this is the form field name in login.jelly
         HudsonFilter.REMEMBER_ME_SERVICES_PROXY.setDelegate(rms);
+
+        WindowsInstallerLink.registerIfApplicable();
     }
 
     public TcpSlaveAgentListener getTcpSlaveAgentListener() {
@@ -1150,6 +1168,11 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         return terminating;
     }
 
+    public void setNumExecutors(int n) throws IOException {
+        this.numExecutors = n;
+        save();
+    }
+
     /**
      * @deprecated
      *      Left only for the compatibility of URLs.
@@ -1388,13 +1411,18 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             }
         });
         items.clear();
-        if(parallelLoad) {
+        if(PARALLEL_LOAD) {
             // load jobs in parallel for better performance
+            LOGGER.info("Loading in "+TWICE_CPU_NUM+" parallel threads");
             List<Future<TopLevelItem>> loaders = new ArrayList<Future<TopLevelItem>>();
             for (final File subdir : subdirs) {
                 loaders.add(threadPoolForLoad.submit(new Callable<TopLevelItem>() {
                     public TopLevelItem call() throws Exception {
-                        return (TopLevelItem) Items.load(Hudson.this, subdir);
+                        long start = System.currentTimeMillis();
+                        TopLevelItem item = (TopLevelItem) Items.load(Hudson.this, subdir);
+                        if(LOG_STARTUP_PERFORMANCE)
+                            LOGGER.info("Loaded "+item.getName()+" in "+(System.currentTimeMillis()-start)+"ms by "+Thread.currentThread().getName());
+                        return item;
                     }
                 }));
             }
@@ -1412,7 +1440,10 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         } else {
             for (File subdir : subdirs) {
                 try {
+                    long start = System.currentTimeMillis();
                     TopLevelItem item = (TopLevelItem)Items.load(this,subdir);
+                    if(LOG_STARTUP_PERFORMANCE)
+                        LOGGER.info("Loaded "+item.getName()+" in "+(System.currentTimeMillis()-start)+"ms");
                     items.put(item.getName(), item);
                 } catch (Error e) {
                     LOGGER.log(Level.WARNING, "Failed to load "+subdir,e);
@@ -1457,6 +1488,8 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
 
         LOGGER.info(String.format("Took %s ms to load",System.currentTimeMillis()-startTime));
+        if(KILL_AFTER_LOAD)
+            System.exit(0);
     }
 
     /**
@@ -1501,6 +1534,9 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
     public Object getDynamic(String token, StaplerRequest req, StaplerResponse rsp) {
         for (Action a : getActions())
+            if(a.getUrlName().equals(token))
+                return a;
+        for (Action a : getManagementLinks())
             if(a.getUrlName().equals(token))
                 return a;
         return null;
@@ -1604,6 +1640,9 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             for( JobPropertyDescriptor d : Jobs.PROPERTIES )
                 result &= configureDescriptor(req,json,d);
 
+            for( PageDecorator d : PageDecorator.ALL )
+                result &= configureDescriptor(req,json,d);
+
             for( JSONObject o : StructuredForm.toList(json,"plugin"))
                 pluginManager.getPlugin(o.getString("name")).getPlugin().configure(o);
 
@@ -1640,7 +1679,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         try {
             JSONObject json = req.getSubmittedForm();
 
-            numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
+            setNumExecutors(Integer.parseInt(req.getParameter("numExecutors")));
             if(req.hasParameter("master.mode"))
                 mode = Mode.valueOf(req.getParameter("master.mode"));
             else
@@ -2488,6 +2527,13 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             super(Hudson.getInstance());
         }
 
+        /**
+         * Returns "" to match with {@link Hudson#getNodeName()}.
+         */
+        public String getName() {
+            return "";
+        }
+
         @Override
         public String getDisplayName() {
             return Messages.Hudson_Computer_DisplayName();
@@ -2509,6 +2555,11 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         @Override
         public VirtualChannel getChannel() {
             return localChannel;
+        }
+
+        @Override
+        public Charset getDefaultCharset() {
+            return Charset.defaultCharset();
         }
 
         public List<LogRecord> getLogRecords() throws IOException, InterruptedException {
@@ -2591,13 +2642,15 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
      */
     public static final XStream XSTREAM = new XStream2();
 
+    private static final int TWICE_CPU_NUM = Runtime.getRuntime().availableProcessors() * 2;
+
     /**
      * Thread pool used to load configuration in parallel, to improve the start up time.
      * <p>
      * The idea here is to overlap the CPU and I/O, so we want more threads than CPU numbers.
      */
     /*package*/ static final ExecutorService threadPoolForLoad = new ThreadPoolExecutor(
-        0, Runtime.getRuntime().availableProcessors() * 2,
+        TWICE_CPU_NUM, TWICE_CPU_NUM,
         5L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new DaemonThreadFactory());
 
 
@@ -2611,25 +2664,31 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
      * Prefix to static resources like images and javascripts in the war file.
      * Either "" or strings like "/static/VERSION", which avoids Hudson to pick up
      * stale cache when the user upgrades to a different version.
+     * <p>
+     * Value computed in {@link WebAppMain}.
      */
-    public static String RESOURCE_PATH;
+    public static String RESOURCE_PATH = "";
 
     /**
      * Prefix to resources alongside view scripts.
      * Strings like "/resources/VERSION", which avoids Hudson to pick up
      * stale cache when the user upgrades to a different version.
+     * <p>
+     * Value computed in {@link WebAppMain}.
      */
-    public static String VIEW_RESOURCE_PATH;
+    public static String VIEW_RESOURCE_PATH = "/resources/TBD";
 
-    public static boolean parallelLoad = Boolean.getBoolean(Hudson.class.getName()+".parallelLoad");
+    public static boolean PARALLEL_LOAD = Boolean.getBoolean(Hudson.class.getName()+".parallelLoad");
+    public static boolean KILL_AFTER_LOAD = Boolean.getBoolean(Hudson.class.getName()+".killAfterLoad");
+    public static boolean LOG_STARTUP_PERFORMANCE = Boolean.getBoolean(Hudson.class.getName()+".logStartupPerformance");
 
     private static final Logger LOGGER = Logger.getLogger(Hudson.class.getName());
 
     private static final Pattern ICON_SIZE = Pattern.compile("\\d+x\\d+");
 
     public static final PermissionGroup PERMISSIONS = new PermissionGroup(Hudson.class,Messages._Hudson_Permissions_Title());
-    public static final Permission ADMINISTER = new Permission(PERMISSIONS,"Administer", Permission.FULL_CONTROL);
-    public static final Permission READ = new Permission(PERMISSIONS,"Read", Permission.READ);
+    public static final Permission ADMINISTER = new Permission(PERMISSIONS,"Administer",Messages._Hudson_AdministerPermission_Description(), Permission.FULL_CONTROL);
+    public static final Permission READ = new Permission(PERMISSIONS,"Read",Messages._Hudson_ReadPermission_Description(),Permission.READ);
 
     static {
         XSTREAM.alias("hudson",Hudson.class);

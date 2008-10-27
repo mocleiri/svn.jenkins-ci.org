@@ -28,12 +28,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.LogRecord;
+import java.nio.charset.Charset;
 
 import javax.servlet.ServletException;
 
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.framework.io.*;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
 
@@ -118,6 +118,14 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     public abstract VirtualChannel getChannel();
 
     /**
+     * Gets the default charset of this computer.
+     *
+     * @return
+     *      never null when {@link #isOffline()}==false.
+     */
+    public abstract Charset getDefaultCharset();
+
+    /**
      * Gets the logs recorded by this slave.
      */
     public abstract List<LogRecord> getLogRecords() throws IOException, InterruptedException;
@@ -156,7 +164,7 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     }
 
     /**
-     * Returns the name of the node.
+     * Returns {@link Node#getNodeName() the name of the node}.
      */
     public String getName() {
         return nodeName;

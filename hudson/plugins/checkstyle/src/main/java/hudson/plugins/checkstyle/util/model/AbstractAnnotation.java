@@ -1,6 +1,8 @@
 package hudson.plugins.checkstyle.util.model;
 
+import hudson.model.AbstractBuild;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,6 +18,8 @@ import org.apache.commons.lang.StringUtils;
  */
 @SuppressWarnings("PMD.CyclomaticComplexity")
 public abstract class AbstractAnnotation implements FileAnnotation, Serializable {
+    /** Temporary directory holding the workspace files. */
+    public static final String WORKSPACE_FILES = "workspace-files";
     /** Unique identifier of this class. */
     private static final long serialVersionUID = -1092014926477547148L;
     /** Current key of this annotation. */
@@ -53,6 +57,10 @@ public abstract class AbstractAnnotation implements FileAnnotation, Serializable
      *            the first line of the line range
      * @param end
      *            the last line of the line range
+     * @param category
+     *            the category of the annotation
+     * @param type
+     *            the type of the annotation
      */
     public AbstractAnnotation(final Priority priority, final String message, final int start, final int end,
             final String category, final String type) {
@@ -86,6 +94,14 @@ public abstract class AbstractAnnotation implements FileAnnotation, Serializable
     /** {@inheritDoc} */
     public final String getFileName() {
         return fileName;
+    }
+
+    /** {@inheritDoc} */
+    public String getTempName(final AbstractBuild<?, ?> owner) {
+        if (fileName != null) {
+            return owner.getRootDir().getAbsolutePath() + "/" + WORKSPACE_FILES + "/" + Integer.toHexString(fileName.hashCode()) + ".tmp";
+        }
+        return StringUtils.EMPTY;
     }
 
     /** {@inheritDoc} */
@@ -160,6 +176,7 @@ public abstract class AbstractAnnotation implements FileAnnotation, Serializable
     // CHECKSTYLE:OFF
 
     @Override
+    @SuppressWarnings("PMD")
     public int hashCode() {
         int prime = 31;
         int result = 1;
@@ -176,6 +193,7 @@ public abstract class AbstractAnnotation implements FileAnnotation, Serializable
     }
 
     @Override
+    @SuppressWarnings("PMD")
     public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
@@ -263,6 +281,25 @@ public abstract class AbstractAnnotation implements FileAnnotation, Serializable
      * @return the short file name
      */
     public String getShortFileName() {
-        return StringUtils.substringAfterLast(getFileName(), "/");
+        if (getFileName().contains("/")) {
+            return StringUtils.substringAfterLast(getFileName(), "/");
+        }
+        else {
+            return getFileName();
+        }
+    }
+
+    /**
+     * Checks if the file exists.
+     *
+     * @return <code>true</code>, if successful
+     */
+    public final boolean canDisplayFile(final AbstractBuild<?, ?> owner) {
+        return new File(getFileName()).exists() || new File(getTempName(owner)).exists();
+    }
+
+    /** {@inheritDoc} */
+    public int compareTo(final FileAnnotation other) {
+        return getFileName().compareTo(other.getFileName());
     }
 }

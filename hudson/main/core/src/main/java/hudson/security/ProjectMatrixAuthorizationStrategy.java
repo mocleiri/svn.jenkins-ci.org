@@ -1,34 +1,19 @@
 package hudson.security;
 
-import com.thoughtworks.xstream.converters.Converter;
-import com.thoughtworks.xstream.converters.MarshallingContext;
-import com.thoughtworks.xstream.converters.UnmarshallingContext;
-import com.thoughtworks.xstream.io.HierarchicalStreamReader;
-import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
-
 import hudson.model.AbstractProject;
 import hudson.model.Descriptor;
-import hudson.model.Job;
-import hudson.model.JobProperty;
 import hudson.model.Jobs;
-import net.sf.json.JSONObject;
-import org.acegisecurity.Authentication;
-import org.acegisecurity.acls.sid.GrantedAuthoritySid;
-import org.acegisecurity.acls.sid.PrincipalSid;
-import org.acegisecurity.acls.sid.Sid;
-import org.kohsuke.stapler.StaplerRequest;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+import hudson.util.RobustReflectionConverter;
+import com.thoughtworks.xstream.io.HierarchicalStreamReader;
+import com.thoughtworks.xstream.converters.UnmarshallingContext;
+import com.thoughtworks.xstream.mapper.Mapper;
+import com.thoughtworks.xstream.core.JVM;
 
 /**
  * {@link GlobalMatrixAuthorizationStrategy} plus per-project ACL.
+ *
+ * <p>
+ * Per-project ACL is stored in {@link AuthorizationMatrixProperty}.
  *
  * @author Kohsuke Kawaguchi
  */
@@ -58,6 +43,32 @@ public class ProjectMatrixAuthorizationStrategy extends GlobalMatrixAuthorizatio
             return Messages.ProjectMatrixAuthorizationStrategy_DisplayName();
         }
     };
+
+    public static class ConverterImpl extends GlobalMatrixAuthorizationStrategy.ConverterImpl {
+        private RobustReflectionConverter ref;
+
+        public ConverterImpl(Mapper m) {
+            ref = new RobustReflectionConverter(m,new JVM().bestReflectionProvider());
+        }
+
+        protected GlobalMatrixAuthorizationStrategy create() {
+            return new GlobalMatrixAuthorizationStrategy();
+        }
+
+        public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+            String name = reader.peekNextChild();
+            if(name!=null && name.equals("permission"))
+                // the proper serialization form
+                return super.unmarshal(reader, context);
+            else
+                // remain compatible with earlier problem where we used reflection converter
+                return ref.unmarshal(reader,context);
+        }
+
+        public boolean canConvert(Class type) {
+            return type==ProjectMatrixAuthorizationStrategy.class;
+        }
+    }
 
     static {
         LIST.add(DESCRIPTOR);

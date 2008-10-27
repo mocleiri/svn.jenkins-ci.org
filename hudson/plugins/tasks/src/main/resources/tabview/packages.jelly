@@ -11,12 +11,12 @@
       <j:forEach var="package" items="${it.container.packages}">
         <tr>
           <td class="pane">
-            <a href="package.${package.name}/">${package.name}</a>
+            <a href="package.${package.name.hashCode()}/">${package.name}</a>
           </td>
           <td class="pane">${package.numberOfAnnotations}
           </td>
           <td class="pane">
-            <div tooltip="${it.container.getPackage(package.name).toolTip}">
+            <div tooltip="${package.toolTip}">
               <img src="statistics?object=package.${package.name}" />
             </div>
           </td>

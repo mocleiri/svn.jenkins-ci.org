@@ -11,7 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -19,7 +18,7 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author Ulli Hafner
  */
-public abstract class RegexpParser implements AnnotationParser {
+public abstract class RegexpParser implements WarningsParser {
     /** Warning classification. */
     protected static final String DEPRECATION = "Deprecation";
     /** Warning classification. */
@@ -28,11 +27,34 @@ public abstract class RegexpParser implements AnnotationParser {
     private final Pattern pattern;
 
     /**
-     * Creates a new instance of <code>RegexpParser</code>.
-     * @param warningPattern pattern of compiler warnings.
+     * Creates a new instance of <code>RegexpParser</code>. Uses a single line matcher.
+     *
+     * @param warningPattern
+     *            pattern of compiler warnings.
      */
     public RegexpParser(final String warningPattern) {
-        pattern = Pattern.compile(warningPattern);
+        this(warningPattern, false);
+    }
+
+    /**
+     * Creates a new instance of <code>RegexpParser</code>.
+     *
+     * @param warningPattern
+     *            pattern of compiler warnings.
+     * @param useMultiLine
+     *            Enables multi line mode. In multi line mode the expressions
+     *            <tt>^</tt> and <tt>$</tt> match just after or just before,
+     *            respectively, a line terminator or the end of the input
+     *            sequence. By default these expressions only match at the
+     *            beginning and the end of the entire input sequence.
+     */
+    public RegexpParser(final String warningPattern, final boolean useMultiLine) {
+        if (useMultiLine) {
+            pattern = Pattern.compile(warningPattern, Pattern.MULTILINE);
+        }
+        else {
+            pattern = Pattern.compile(warningPattern);
+        }
     }
 
     /**
@@ -44,20 +66,20 @@ public abstract class RegexpParser implements AnnotationParser {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public Collection<FileAnnotation> parse(final InputStream file) throws IOException {
-        LineIterator iterator = IOUtils.lineIterator(file, null);
+        String content = IOUtils.toString(file);
+        file.close();
 
         ArrayList<FileAnnotation> warnings = new ArrayList<FileAnnotation>();
-        while (iterator.hasNext()) {
-            String line = iterator.nextLine();
-            Matcher matcher = pattern.matcher(line);
-            if (matcher.matches()) {
-                Warning warning = createWarning(matcher);
+        Matcher matcher = pattern.matcher(content);
+
+        while (matcher.find()) {
+            Warning warning = createWarning(matcher);
+            if (!warning.hasPackageName()) {
                 String packageName = new JavaPackageDetector().detectPackageName(warning.getFileName());
                 warning.setPackageName(packageName);
-                warnings.add(warning);
             }
+            warnings.add(warning);
         }
-
         return warnings;
     }
 

@@ -1,7 +1,6 @@
 package hudson.plugins.findbugs.util;
 
 import hudson.model.AbstractBuild;
-import hudson.plugins.findbugs.util.model.AnnotationContainer;
 import hudson.plugins.findbugs.util.model.FileAnnotation;
 
 import java.util.Collection;
@@ -37,24 +36,6 @@ public class AttributeDetail extends AbstractAnnotationsDetail {
     /** {@inheritDoc} */
     public String getDisplayName() {
         return attributeName;
-    }
-
-    /**
-     * Returns a tooltip showing the distribution of priorities for the selected
-     * category.
-     *
-     * @param category
-     *            the category to show the distribution for
-     * @return a tooltip showing the distribution of priorities
-     */
-    public String getToolTip(final String category) {
-        return "TODO";
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected Collection<? extends AnnotationContainer> getChildren() {
-        return getModules();
     }
 }
 

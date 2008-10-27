@@ -12,12 +12,13 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -27,6 +28,7 @@ import org.kohsuke.stapler.StaplerResponse;
  *
  * @author Ulli Hafner
  */
+@SuppressWarnings("PMD.TooManyFields")
 public abstract class AnnotationsBuildResult extends BuildResult {
     /** Unique ID of this class. */
     private static final long serialVersionUID = -5183039263351537465L;
@@ -70,12 +72,16 @@ public abstract class AnnotationsBuildResult extends BuildResult {
 
     /** The modules with no warnings. */
     @SuppressWarnings("unused")
-    private HashMap<String, MavenModule> emptyModules; // backward compatibility;
+    @edu.umd.cs.findbugs.annotations.SuppressWarnings("Se")
+    private Map<String, MavenModule> emptyModules; // backward compatibility;
     /** All parsed modules. */
-    @SuppressWarnings("unused")
     private Set<String> modules;
     /** The total number of parsed modules (regardless if there are annotations). */
     private int numberOfModules;
+    /** Determines if the old zero highscore has been broken. */
+    private boolean isZeroWarningsHighscore;
+    /** Determines the number of msec still to go before a new highscore is reached. */
+    private long highScoreGap;
 
     /**
      * Creates a new instance of {@link AnnotationsBuildResult}.
@@ -118,7 +124,24 @@ public abstract class AnnotationsBuildResult extends BuildResult {
                 zeroWarningsSinceDate = build.getTimestamp().getTimeInMillis();
             }
             zeroWarningsHighScore = Math.max(previous.getZeroWarningsHighScore(), build.getTimestamp().getTimeInMillis() - zeroWarningsSinceDate);
+            isZeroWarningsHighscore = zeroWarningsHighScore != previous.getZeroWarningsHighScore();
+            if (!isZeroWarningsHighscore) {
+                highScoreGap = previous.getZeroWarningsHighScore() - (build.getTimestamp().getTimeInMillis() - zeroWarningsSinceDate);
+            }
         }
+        else {
+            zeroWarningsHighScore = previous.getZeroWarningsHighScore();
+        }
+    }
+
+    /**
+     * Returns the number of days for the specified number of milliseconds.
+     *
+     * @param ms milliseconds
+     * @return the number of days
+     */
+    public static long getDays(final long ms) {
+        return Math.max(1, ms / DateUtils.MILLIS_PER_DAY);
     }
 
     /**
@@ -177,6 +200,13 @@ public abstract class AnnotationsBuildResult extends BuildResult {
     }
 
     /**
+     * Returns the detail messages for the summary.jelly file.
+     *
+     * @return the summary message
+     */
+    public abstract String getDetails();
+
+    /**
      * Returns the modules of this build result.
      *
      * @return the modules
@@ -228,6 +258,24 @@ public abstract class AnnotationsBuildResult extends BuildResult {
      */
     public long getZeroWarningsHighScore() {
         return zeroWarningsHighScore;
+    }
+
+    /**
+     * Returns if the current result reached the old zero warnings highscore.
+     *
+     * @return <code>true</code>, if the current result reached the old zero warnings highscore.
+     */
+    public boolean isNewZeroWarningsHighScore() {
+        return isZeroWarningsHighscore;
+    }
+
+    /**
+     * Returns the number of msec still to go before a new highscore is reached.
+     *
+     * @return the number of msec still to go before a new highscore is reached.
+     */
+    public long getHighScoreGap() {
+        return highScoreGap;
     }
 
     /**

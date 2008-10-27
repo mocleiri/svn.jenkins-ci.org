@@ -25,7 +25,7 @@ public class UnmapWorkfolderCommand extends AbstractCommand {
         if (workspaceName != null) {
             arguments.add(String.format("-workspace:%s", workspaceName));
         }        
-        addServerArgument(arguments);
+        //addServerArgument(arguments);
         addLoginArgument(arguments);
         return arguments;
     }

@@ -51,8 +51,18 @@ public class SubversionTagAction extends AbstractScmTagAction {
         tags.putAll(m);
     }
 
+    /**
+     * Was any tag created by the user already?
+     */
+    public boolean hasTags() {
+        for (Entry<SvnInfo, List<String>> e : tags.entrySet())
+            if(!e.getValue().isEmpty())
+                return true;
+        return false;
+    }
+
     public String getIconFileName() {
-        if(tags==null && !Hudson.isAdmin())
+        if(!hasTags() && !getACL().hasPermission(getPermission()))
             return null;
         return "save.gif";
     }
@@ -165,7 +175,8 @@ public class SubversionTagAction extends AbstractScmTagAction {
                             SVNURL dst = SVNURL.parseURIDecoded(e.getValue());
 
                             SVNCopyClient svncc = cm.getCopyClient();
-                            SVNCopySource csrc = new SVNCopySource(SVNRevision.UNDEFINED,SVNRevision.create(e.getKey().revision),src);
+                            SVNRevision sourceRevision = SVNRevision.create(e.getKey().revision);
+                            SVNCopySource csrc = new SVNCopySource(sourceRevision, sourceRevision, src);
                             svncc.doCopy(
                                     new SVNCopySource[]{csrc},
                                     dst, false, true, false, "Tagged from "+build, null );

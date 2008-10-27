@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-CVSChangeLogSet.CVSChangeLog (Hudson core 1.249 API)
+CVSChangeLogSet.CVSChangeLog (Hudson core 1.256 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-19">
+<META NAME="date" CONTENT="2008-10-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CVSChangeLogSet.CVSChangeLog (Hudson core 1.249 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CVSChangeLogSet.CVSChangeLog (Hudson core 1.249 API)";
+        parent.document.title="CVSChangeLogSet.CVSChangeLog (Hudson core 1.256 API)";
     }
 }
 </SCRIPT>
@@ -213,6 +213,14 @@ In-memory representation of CVS Changelog.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/CVSChangeLogSet.CVSChangeLog.html#isComplete()">isComplete</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if all the fields that are supposed to be non-null is present.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/CVSChangeLogSet.CVSChangeLog.html#merge(hudson.scm.CVSChangeLogSet.CVSChangeLog)">merge</A></B>(<A HREF="../../hudson/scm/CVSChangeLogSet.CVSChangeLog.html" title="class in hudson.scm">CVSChangeLogSet.CVSChangeLog</A>&nbsp;that)</CODE>
 
@@ -299,6 +307,20 @@ public <B>CVSChangeLogSet.CVSChangeLog</B>()</PRE>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="isComplete()"><!-- --></A><H3>
+isComplete</H3>
+<PRE>
+public boolean <B>isComplete</B>()</PRE>
+<DL>
+<DD>Returns true if all the fields that are supposed to be non-null is present.
+ This is used to make sure the XML file was correct.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="canBeMergedWith(hudson.scm.CVSChangeLogSet.CVSChangeLog)"><!-- --></A><H3>
 canBeMergedWith</H3>

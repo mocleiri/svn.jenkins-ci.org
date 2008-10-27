@@ -100,8 +100,7 @@ public class UcmChangeLogAction implements ChangeLogAction {
                     UcmActivity activity = activityNameToEntry.get(activityName);
                     if (activity == null) {
                         activity = new UcmActivity();
-                        activity.setName(activityName);
-                        activityNameToEntry.put(activityName, activity);
+                        activity.setName(activityName);                        
                         if (activityName.length()!=0) {
                             callLsActivity(activity,viewname);
                         } else {
@@ -109,8 +108,8 @@ public class UcmChangeLogAction implements ChangeLogAction {
                             activity.setUser("Unknown");
                             activity.setStream("");
                         }
-                        result.add(activity);
-                            
+                        activityNameToEntry.put(activityName, activity);
+                        result.add(activity);                            
                     }
 
                     activity.addFile(currentFile);
@@ -152,10 +151,20 @@ public class UcmChangeLogAction implements ChangeLogAction {
                 String contributingActivities = matcher.group(4);
 
                 for (String contributing : contributingActivities.split(" ")) {
-                    UcmActivity subActivity = new UcmActivity();
+                    
+                    UcmActivity subActivity = null;
+                    UcmActivity cachedActivity = activityNameToEntry.get(contributing);
+                    
+                    if (cachedActivity ==null) {
+                        subActivity = new UcmActivity();                        
+                        subActivity.setName(contributing);
+                        callLsActivity(subActivity,viewname);
+                        activityNameToEntry.put(contributing, subActivity);
+                    } else {
+                        /* do deep copy */
+                        subActivity = new UcmActivity(cachedActivity);
+                    }
                     activity.addSubActivity(subActivity);
-                    subActivity.setName(contributing);
-                    callLsActivity(subActivity,viewname);
                 }
             }
         }

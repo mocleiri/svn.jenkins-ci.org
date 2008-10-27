@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-WorkspaceSnapshot (Hudson core 1.249 API)
+WorkspaceSnapshot (Hudson core 1.256 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-19">
+<META NAME="date" CONTENT="2008-10-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ WorkspaceSnapshot (Hudson core 1.249 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="WorkspaceSnapshot (Hudson core 1.249 API)";
+        parent.document.title="WorkspaceSnapshot (Hudson core 1.256 API)";
     }
 }
 </SCRIPT>
@@ -99,6 +99,9 @@ java.lang.Object
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../hudson/model/Action.html" title="interface in hudson.model">Action</A>, <A HREF="../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></DD>
 </DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../hudson/FileSystemProvisioner.Default.WorkspaceSnapshotImpl.html" title="class in hudson">FileSystemProvisioner.Default.WorkspaceSnapshotImpl</A></DD>
+</DL>
 <HR>
 <DL>
 <DT><PRE>public abstract class <B>WorkspaceSnapshot</B><DT>extends java.lang.Object<DT>implements <A HREF="../hudson/model/Action.html" title="interface in hudson.model">Action</A></DL>
@@ -108,7 +111,9 @@ java.lang.Object
 Represents a workspace snapshot created by <A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson"><CODE>FileSystemProvisioner</CODE></A>.
 
  <p>
- This class encapsulates a logic to use the snapshot elsewhere. 
+ This class encapsulates a logic to use the snapshot elsewhere.
+ The instance will be persisted with the <A HREF="../hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A> object
+ as an <A HREF="../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>.
 
  <p>
  TODO: how to garbage-collect this object, especially for zfs?
@@ -119,7 +124,7 @@ Represents a workspace snapshot created by <A HREF="../hudson/FileSystemProvisio
 <DL>
 <DT><B>Author:</B></DT>
   <DD>Kohsuke Kawaguchi</DD>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson"><CODE>FileSystemProvisioner</CODE></A></DL>
 <HR>
 
 <P>
@@ -150,11 +155,37 @@ Represents a workspace snapshot created by <A HREF="../hudson/FileSystemProvisio
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/WorkspaceSnapshot.html#restoreTo(hudson.FilePath)">restoreTo</A></B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;dst)</CODE>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/WorkspaceSnapshot.html#getDisplayName()">getDisplayName</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the string to be displayed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/WorkspaceSnapshot.html#getIconFileName()">getIconFileName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the file name of the icon.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/WorkspaceSnapshot.html#getUrlName()">getUrlName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the URL path name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/WorkspaceSnapshot.html#restoreTo(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)">restoreTo</A></B>(<A HREF="../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;owner,
+          <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;dst,
+          <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restores the snapshot to the given file system location.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -164,15 +195,6 @@ Represents a workspace snapshot created by <A HREF="../hudson/FileSystemProvisio
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Action"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../hudson/model/Action.html" title="interface in hudson.model">Action</A></B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../hudson/model/Action.html#getDisplayName()">getDisplayName</A>, <A HREF="../hudson/model/Action.html#getIconFileName()">getIconFileName</A>, <A HREF="../hudson/model/Action.html#getUrlName()">getUrlName</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -205,16 +227,106 @@ public <B>WorkspaceSnapshot</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="restoreTo(hudson.FilePath)"><!-- --></A><H3>
+<A NAME="restoreTo(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)"><!-- --></A><H3>
 restoreTo</H3>
 <PRE>
-public abstract void <B>restoreTo</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;dst)</PRE>
+public abstract void <B>restoreTo</B>(<A HREF="../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;owner,
+                               <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;dst,
+                               <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
+                        throws java.io.IOException,
+                               java.lang.InterruptedException</PRE>
 <DL>
+<DD>Restores the snapshot to the given file system location.
+<P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
+<DT><B>Parameters:</B><DD><CODE>owner</CODE> - The build that owns this action. It's always the same value for any given <A HREF="../hudson/WorkspaceSnapshot.html" title="class in hudson"><CODE>WorkspaceSnapshot</CODE></A>,
+      but passed in separately so that implementations don't need to keep them in fields.<DD><CODE>dst</CODE> - The file path to which the snapshot shall be restored to.<DD><CODE>listener</CODE> - Send the progress of the restoration to this listener. Never null.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
 </DL>
+<HR>
+
+<A NAME="getIconFileName()"><!-- --></A><H3>
+getIconFileName</H3>
+<PRE>
+public java.lang.String <B>getIconFileName</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../hudson/model/Action.html#getIconFileName()">Action</A></CODE></B></DD>
+<DD>Gets the file name of the icon.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/model/Action.html#getIconFileName()">getIconFileName</A></CODE> in interface <CODE><A HREF="../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>If just a file name (like "abc.gif") is returned, it will be
+      interpreted as a file name inside <tt>/images/24x24</tt>.
+      This is useful for using one of the stock images.
+      <p>
+      If an absolute file name that starts from '/' is returned (like
+      "/plugin/foo/abc.gif'), then it will be interpreted as a path
+      from the context root of Hudson. This is useful to pick up
+      image files from a plugin.
+      <p>
+      Finally, return null to hide it from the task list. This is normally not very useful,
+      but this can be used for actions that only contribute <tt>floatBox.jelly</tt>
+      and no task list item. The other case where this is useful is
+      to avoid showing links that require a privilege when the user is anonymous.<DT><B>See Also:</B><DD><A HREF="../hudson/model/Hudson.html#isAdmin()"><CODE>Hudson.isAdmin()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDisplayName()"><!-- --></A><H3>
+getDisplayName</H3>
+<PRE>
+public java.lang.String <B>getDisplayName</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../hudson/model/Action.html#getDisplayName()">Action</A></CODE></B></DD>
+<DD>Gets the string to be displayed.
+
+ The convention is to capitalize the first letter of each word,
+ such as "Test Result".
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/model/Action.html#getDisplayName()">getDisplayName</A></CODE> in interface <CODE><A HREF="../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/model/ModelObject.html#getDisplayName()">getDisplayName</A></CODE> in interface <CODE><A HREF="../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUrlName()"><!-- --></A><H3>
+getUrlName</H3>
+<PRE>
+public java.lang.String <B>getUrlName</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../hudson/model/Action.html#getUrlName()">Action</A></CODE></B></DD>
+<DD>Gets the URL path name.
+
+ <p>
+ For example, if this method returns "xyz", and if the parent object
+ (that this action is associated with) is bound to /foo/bar/zot,
+ then this action object will be exposed to /foo/bar/zot/xyz.
+
+ <p>
+ This method should return a string that's unique among other <A HREF="../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s.
+
+ <p>
+ The returned string can be an absolute URL, like "http://www.sun.com/",
+ which is useful for directly connecting to external systems.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/model/Action.html#getUrlName()">getUrlName</A></CODE> in interface <CODE><A HREF="../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>null if this action object doesn't need to be bound to web.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

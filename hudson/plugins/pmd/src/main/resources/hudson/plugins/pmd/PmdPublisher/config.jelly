@@ -38,6 +38,21 @@
 			</tbody>
 		</table>
 	</f:entry>
+    <f:entry title="${%Priority evaluation}"
+          description="${%description.limit}">
+      <f:radio name="pmd.thresholdLimit" value="high" checked="${instance.thresholdLimit == 'high'}" id="thresholdLimit.high"/>
+      <st:nbsp/>
+      <label for="thresholdLimit.high">${%Only priority high}</label>
+      <st:nbsp />
+      <f:radio name="pmd.thresholdLimit" value="normal" checked="${instance.thresholdLimit == 'normal'}" id="thresholdLimit.normal"/>
+      <st:nbsp/>
+      <label for="thresholdLimit.normal">${%Priorities high and normal}</label>
+      <st:nbsp />
+      <f:radio name="pmd.thresholdLimit" value="low" title="" checked="${instance.thresholdLimit == 'low'}" id="thresholdLimit.low"/>
+      <st:nbsp/>
+      <label for="thresholdLimit.low">${%All priorities}</label>
+      <st:nbsp />
+    </f:entry>
 	<f:entry title="${%Trend report height}" description="${%description.height}">
 		<f:textbox name="height" value="${instance.height}" />
 	</f:entry>

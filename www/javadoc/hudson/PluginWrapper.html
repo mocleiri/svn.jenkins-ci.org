@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-PluginWrapper (Hudson core 1.249 API)
+PluginWrapper (Hudson core 1.256 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-19">
+<META NAME="date" CONTENT="2008-10-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginWrapper (Hudson core 1.249 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginWrapper (Hudson core 1.249 API)";
+        parent.document.title="PluginWrapper (Hudson core 1.256 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../hudson/PluginManager.FailedPlugin.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../hudson/PluginStrategy.html" title="interface in hudson"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../hudson/Proc.html" title="class in hudson"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/PluginWrapper.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -165,8 +165,13 @@ Represents a Hudson plug-in and associated control information
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#PluginWrapper(hudson.PluginManager, java.io.File)">PluginWrapper</A></B>(<A HREF="../hudson/PluginManager.html" title="class in hudson">PluginManager</A>&nbsp;owner,
-              java.io.File&nbsp;archive)</CODE>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#PluginWrapper(java.io.File, java.util.jar.Manifest, java.net.URL, java.lang.ClassLoader, java.io.File, java.util.List, java.util.List)">PluginWrapper</A></B>(java.io.File&nbsp;archive,
+              java.util.jar.Manifest&nbsp;manifest,
+              java.net.URL&nbsp;baseResourceURL,
+              java.lang.ClassLoader&nbsp;classLoader,
+              java.io.File&nbsp;disableFile,
+              java.util.List&lt;hudson.PluginWrapper.Dependency&gt;&nbsp;dependencies,
+              java.util.List&lt;hudson.PluginWrapper.Dependency&gt;&nbsp;optionalDependencies)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -217,6 +222,14 @@ Represents a Hudson plug-in and associated control information
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;hudson.PluginWrapper.Dependency&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#getDependencies()">getDependencies</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.net.URL</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/PluginWrapper.html#getIndexPage()">getIndexPage</A></B>()</CODE>
 
@@ -241,11 +254,35 @@ Represents a Hudson plug-in and associated control information
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.jar.Manifest</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#getManifest()">getManifest</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;hudson.PluginWrapper.Dependency&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#getOptionalDependencies()">getOptionalDependencies</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Plugin.html" title="class in hudson">Plugin</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/PluginWrapper.html#getPlugin()">getPlugin</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the instance of <A HREF="../hudson/Plugin.html" title="class in hudson"><CODE>Plugin</CODE></A> contributed by this plugin.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#getPluginClass()">getPluginClass</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -296,6 +333,14 @@ Represents a Hudson plug-in and associated control information
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If true, the plugin is going to be activated next time
  Hudson runs.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#setPlugin(hudson.Plugin)">setPlugin</A></B>(<A HREF="../hudson/Plugin.html" title="class in hudson">Plugin</A>&nbsp;plugin)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -364,18 +409,19 @@ public final java.net.URL <B>baseResourceURL</B></PRE>
 </TR>
 </TABLE>
 
-<A NAME="PluginWrapper(hudson.PluginManager, java.io.File)"><!-- --></A><H3>
+<A NAME="PluginWrapper(java.io.File, java.util.jar.Manifest, java.net.URL, java.lang.ClassLoader, java.io.File, java.util.List, java.util.List)"><!-- --></A><H3>
 PluginWrapper</H3>
 <PRE>
-public <B>PluginWrapper</B>(<A HREF="../hudson/PluginManager.html" title="class in hudson">PluginManager</A>&nbsp;owner,
-                     java.io.File&nbsp;archive)
-              throws java.io.IOException</PRE>
+public <B>PluginWrapper</B>(java.io.File&nbsp;archive,
+                     java.util.jar.Manifest&nbsp;manifest,
+                     java.net.URL&nbsp;baseResourceURL,
+                     java.lang.ClassLoader&nbsp;classLoader,
+                     java.io.File&nbsp;disableFile,
+                     java.util.List&lt;hudson.PluginWrapper.Dependency&gt;&nbsp;dependencies,
+                     java.util.List&lt;hudson.PluginWrapper.Dependency&gt;&nbsp;optionalDependencies)</PRE>
 <DL>
 <DL>
-<DT><B>Parameters:</B><DD><CODE>archive</CODE> - A .hpi archive file jar file, or a .hpl linked plugin.
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE> - if an installation of this plugin failed. The caller should
-      proceed to work with other plugins.</DL>
+<DT><B>Parameters:</B><DD><CODE>archive</CODE> - A .hpi archive file jar file, or a .hpl linked plugin.<DD><CODE>manifest</CODE> - The manifest for the plugin<DD><CODE>baseResourceURL</CODE> - A URL pointing to the resources for this plugin<DD><CODE>classLoader</CODE> - a classloader that loads classes from this plugin and its dependencies<DD><CODE>disableFile</CODE> - if this file exists on startup, the plugin will not be activated<DD><CODE>dependencies</CODE> - a list of mandatory dependencies<DD><CODE>optionalDependencies</CODE> - a list of optional dependencies</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -395,6 +441,28 @@ public java.net.URL <B>getIndexPage</B>()</PRE>
 <DL>
 <DD>Returns the URL of the index page jelly script.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDependencies()"><!-- --></A><H3>
+getDependencies</H3>
+<PRE>
+public java.util.List&lt;hudson.PluginWrapper.Dependency&gt; <B>getDependencies</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOptionalDependencies()"><!-- --></A><H3>
+getOptionalDependencies</H3>
+<PRE>
+public java.util.List&lt;hudson.PluginWrapper.Dependency&gt; <B>getOptionalDependencies</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>
@@ -526,6 +594,39 @@ public boolean <B>isEnabled</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="getManifest()"><!-- --></A><H3>
+getManifest</H3>
+<PRE>
+public java.util.jar.Manifest <B>getManifest</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPlugin(hudson.Plugin)"><!-- --></A><H3>
+setPlugin</H3>
+<PRE>
+public void <B>setPlugin</B>(<A HREF="../hudson/Plugin.html" title="class in hudson">Plugin</A>&nbsp;plugin)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPluginClass()"><!-- --></A><H3>
+getPluginClass</H3>
+<PRE>
+public java.lang.String <B>getPluginClass</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getUpdateInfo()"><!-- --></A><H3>
 getUpdateInfo</H3>
 <PRE>
@@ -631,7 +732,7 @@ public void <B>doMakeDisabled</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../hudson/PluginManager.FailedPlugin.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../hudson/PluginStrategy.html" title="interface in hudson"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../hudson/Proc.html" title="class in hudson"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/PluginWrapper.html" target="_top"><B>FRAMES</B></A>  &nbsp;

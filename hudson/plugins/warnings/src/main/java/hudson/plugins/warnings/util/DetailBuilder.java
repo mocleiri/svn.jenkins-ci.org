@@ -77,10 +77,10 @@ public class DetailBuilder {
             return factory.create(link, owner, container, displayName);
         }
         else if (link.startsWith("module.")) {
-            return new ModuleDetail(owner, container.getModule(StringUtils.substringAfter(link, "module.")), displayName);
+            return new ModuleDetail(owner, container.getModule(Integer.valueOf(StringUtils.substringAfter(link, "module."))), displayName);
         }
         else if (link.startsWith("package.")) {
-            return new PackageDetail(owner, container.getPackage(StringUtils.substringAfter(link, "package.")), displayName);
+            return new PackageDetail(owner, container.getPackage(Integer.valueOf(StringUtils.substringAfter(link, "package."))), displayName);
         }
         else if (link.startsWith("file.")) {
             return new FileDetail(owner, container.getFile(Integer.valueOf(StringUtils.substringAfter(link, "file."))), displayName);
@@ -93,11 +93,11 @@ public class DetailBuilder {
         }
         else if (link.startsWith("category.")) {
             String category = StringUtils.substringAfter(link, "category.");
-            return new AttributeDetail(owner, container.getCategory(category), displayName, Messages.CategoryDetail_header() + " " + category);
+            return new AttributeDetail(owner, container.getCategory(category).getAnnotations(), displayName, Messages.CategoryDetail_header() + " " + category);
         }
         else if (link.startsWith("type.")) {
             String type = StringUtils.substringAfter(link, "type.");
-            return new AttributeDetail(owner, container.getType(type), displayName, Messages.TypeDetail_header() + " " + type);
+            return new AttributeDetail(owner, container.getType(type).getAnnotations(), displayName, Messages.TypeDetail_header() + " " + type);
         }
         return null;
     }

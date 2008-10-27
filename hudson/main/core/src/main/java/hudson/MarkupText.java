@@ -77,10 +77,18 @@ public class MarkupText extends AbstractMarkupText {
          * <p>
          * Start/end tag text can contain special tokens "$0", "$1", ...
          * and they will be replaced by their {@link #group(int) group match}.
-         * "\\c" can be used to escape characters. 
+         * "\$" can be used to escape characters.
          */
         public void surroundWith(String startTag, String endTag) {
             addMarkup(0,length(),replace(startTag),replace(endTag));
+        }
+
+        /**
+         * Works like {@link #surroundWith(String, String)} except
+         * that the token replacement is not performed on parameters.
+         */
+        public void surroundWithLiteral(String startTag, String endTag) {
+            addMarkup(0,length(),startTag,endTag);
         }
 
         /**
@@ -136,7 +144,7 @@ public class MarkupText extends AbstractMarkupText {
         /**
          * Replaces the group tokens like "$0", "$1", and etc with their actual matches.
          */
-        private String replace(String s) {
+        public String replace(String s) {
             StringBuffer buf = new StringBuffer();
 
             for( int i=0; i<s.length(); i++) {

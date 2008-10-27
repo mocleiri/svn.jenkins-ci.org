@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.FilePath (Hudson core 1.249 API)
+Uses of Class hudson.FilePath (Hudson core 1.256 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-19">
+<META NAME="date" CONTENT="2008-10-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.FilePath (Hudson core 1.249 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.FilePath (Hudson core 1.249 API)";
+        parent.document.title="Uses of Class hudson.FilePath (Hudson core 1.256 API)";
     }
 }
 </SCRIPT>
@@ -95,6 +95,10 @@ Packages that use <A HREF="../../hudson/FilePath.html" title="class in hudson">F
 <TD>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.fsp"><B>hudson.fsp</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.matrix"><B>hudson.matrix</B></A></TD>
 <TD>Matrix project&nbsp;</TD>
 </TR>
@@ -151,7 +155,7 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
                java.lang.String&nbsp;suffix)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a temporary file.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a temporary file in the directory that this <A HREF="../../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> object designates.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -242,6 +246,15 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copies this file to the specified target.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>FileSystemProvisionerDescriptor.</B><B><A HREF="../../hudson/FileSystemProvisionerDescriptor.html#discard(hudson.FilePath, hudson.model.TaskListener)">discard</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws,
+        <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called to clean up a workspace that may potentially belong to this <A HREF="../../hudson/FileSystemProvisioner.html" title="class in hudson"><CODE>FileSystemProvisioner</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -436,6 +449,28 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>FileSystemProvisioner.</B><B><A HREF="../../hudson/FileSystemProvisioner.html#prepareWorkspace(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)">prepareWorkspace</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+                 <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws,
+                 <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called very early in the build (before a build places any files
+ in the workspace, such as SCM checkout) to provision a workspace
+ for the build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>FileSystemProvisioner.Default.</B><B><A HREF="../../hudson/FileSystemProvisioner.Default.html#prepareWorkspace(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)">prepareWorkspace</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+                 <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws,
+                 <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#printCommandLine(java.lang.String[], hudson.FilePath)">printCommandLine</A></B>(java.lang.String[]&nbsp;cmd,
                  <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
@@ -454,10 +489,42 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>WorkspaceSnapshot.</B><B><A HREF="../../hudson/WorkspaceSnapshot.html#restoreTo(hudson.FilePath)">restoreTo</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;dst)</CODE>
+<TD><CODE><B>WorkspaceSnapshot.</B><B><A HREF="../../hudson/WorkspaceSnapshot.html#restoreTo(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)">restoreTo</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;owner,
+          <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;dst,
+          <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restores the snapshot to the given file system location.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>FileSystemProvisioner.Default.WorkspaceSnapshotImpl.</B><B><A HREF="../../hudson/FileSystemProvisioner.Default.WorkspaceSnapshotImpl.html#restoreTo(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)">restoreTo</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;owner,
+          <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;dst,
+          <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../hudson/WorkspaceSnapshot.html" title="class in hudson">WorkspaceSnapshot</A></CODE></FONT></TD>
+<TD><CODE><B>FileSystemProvisioner.</B><B><A HREF="../../hudson/FileSystemProvisioner.html#snapshot(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)">snapshot</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+         <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws,
+         <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the snapshot of the workspace of the given build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/WorkspaceSnapshot.html" title="class in hudson">WorkspaceSnapshot</A></CODE></FONT></TD>
+<TD><CODE><B>FileSystemProvisioner.Default.</B><B><A HREF="../../hudson/FileSystemProvisioner.Default.html#snapshot(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)">snapshot</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+         <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws,
+         <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a tar ball.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -478,6 +545,46 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/FilePath.html#FilePath(hudson.FilePath, java.lang.String)">FilePath</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;base,
          java.lang.String&nbsp;rel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.fsp"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> in <A HREF="../../hudson/fsp/package-summary.html">hudson.fsp</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../hudson/fsp/package-summary.html">hudson.fsp</A> with parameters of type <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>WorkspaceSnapshotSCM.</B><B><A HREF="../../hudson/fsp/WorkspaceSnapshotSCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)">checkout</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+         <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+         <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+         <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+         java.io.File&nbsp;changelogFile)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>WorkspaceSnapshotSCM.</B><B><A HREF="../../hudson/fsp/WorkspaceSnapshotSCM.html#pollChanges(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener)">pollChanges</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
+            <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+            <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+            <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

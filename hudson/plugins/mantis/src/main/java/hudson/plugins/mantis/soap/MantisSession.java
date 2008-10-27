@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 
+import java.util.logging.Logger;
 import javax.xml.rpc.ServiceException;
 
 import org.apache.axis.AxisProperties;
@@ -36,11 +37,20 @@ public final class MantisSession {
                 ((Stub) portType).setUsername(site.getBasicUserName());
                 ((Stub) portType).setPassword(site.getBasicPassword());
             }
-            // Support https 
+            // Support https
             // Allowing unsigned server certs
-            AxisProperties.setProperty("axis.socketSecureFactory", 
+            AxisProperties.setProperty("axis.socketSecureFactory",
                     "org.apache.axis.components.net.SunFakeTrustSocketFactory");
-  
+            // Support HTTP Proxy
+            // Use Hudson global settings which is configured in PluginManager
+            if (site.getProxyHost() != null && site.getProxyHost() != null) {
+                AxisProperties.setProperty("http.proxyHost", site.getProxyHost());
+                AxisProperties.setProperty("http.proxyPort", site.getProxyPort());
+            }
+            if (site.getProxyUserName() != null && site.getProxyPassword() != null) {
+                AxisProperties.setProperty("http.proxyUser", site.getProxyUserName());
+                AxisProperties.setProperty("http.proxyPassword", site.getProxyPassword());
+            }
         } catch (final ServiceException e) {
             throw new MantisHandlingException(e);
         } catch (final MalformedURLException e) {
@@ -67,7 +77,7 @@ public final class MantisSession {
         return configString;
     }
 
-    public MantisIssue getIssue(final Long id) throws MantisHandlingException {
+    public MantisIssue getIssue(final int id) throws MantisHandlingException {
         IssueData data;
         try {
             data =
@@ -79,7 +89,7 @@ public final class MantisSession {
         return new MantisIssue(id, data.getSummary());
     }
 
-    public void addNote(final Long id, final MantisNote note)
+    public void addNote(final int id, final MantisNote note)
             throws MantisHandlingException {
         final IssueNoteData data = new IssueNoteData();
         data.setText(note.getText());
@@ -91,4 +101,6 @@ public final class MantisSession {
             throw new MantisHandlingException(e);
         }
     }
+
+    private static final Logger LOGGER = Logger.getLogger(MantisSession.class.getName());
 }

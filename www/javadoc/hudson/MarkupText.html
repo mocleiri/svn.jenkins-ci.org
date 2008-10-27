@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MarkupText (Hudson core 1.249 API)
+MarkupText (Hudson core 1.256 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-08-19">
+<META NAME="date" CONTENT="2008-10-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MarkupText (Hudson core 1.249 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MarkupText (Hudson core 1.249 API)";
+        parent.document.title="MarkupText (Hudson core 1.256 API)";
     }
 }
 </SCRIPT>
@@ -94,11 +94,12 @@ hudson</FONT>
 Class MarkupText</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../resources/inherit.gif" ALT="extended by "><B>hudson.MarkupText</B>
+  <IMG SRC="../resources/inherit.gif" ALT="extended by "><A HREF="../hudson/AbstractMarkupText.html" title="class in hudson">hudson.AbstractMarkupText</A>
+      <IMG SRC="../resources/inherit.gif" ALT="extended by "><B>hudson.MarkupText</B>
 </PRE>
 <HR>
 <DL>
-<DT><PRE>public class <B>MarkupText</B><DT>extends java.lang.Object</DL>
+<DT><PRE>public class <B>MarkupText</B><DT>extends <A HREF="../hudson/AbstractMarkupText.html" title="class in hudson">AbstractMarkupText</A></DL>
 </PRE>
 
 <P>
@@ -175,6 +176,14 @@ Mutable representation of string with HTML mark up.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../hudson/MarkupText.SubText.html" title="class in hudson">MarkupText.SubText</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/MarkupText.html#createSubText(java.util.regex.Matcher)">createSubText</A></B>(java.util.regex.Matcher&nbsp;m)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../hudson/MarkupText.SubText.html" title="class in hudson">MarkupText.SubText</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/MarkupText.html#findTokens(java.util.regex.Pattern)">findTokens</A></B>(java.util.regex.Pattern&nbsp;pattern)</CODE>
 
@@ -243,9 +252,13 @@ getText</H3>
 <PRE>
 public java.lang.String <B>getText</B>()</PRE>
 <DL>
+<DD><B>Description copied from class: <CODE><A HREF="../hudson/AbstractMarkupText.html#getText()">AbstractMarkupText</A></CODE></B></DD>
 <DD>Returns the plain text portion of this <A HREF="../hudson/MarkupText.html" title="class in hudson"><CODE>MarkupText</CODE></A> without
  any markup.
 <P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/AbstractMarkupText.html#getText()">getText</A></CODE> in class <CODE><A HREF="../hudson/AbstractMarkupText.html" title="class in hudson">AbstractMarkupText</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -260,12 +273,16 @@ public void <B>addMarkup</B>(int&nbsp;startPos,
                       java.lang.String&nbsp;startTag,
                       java.lang.String&nbsp;endTag)</PRE>
 <DL>
+<DD><B>Description copied from class: <CODE><A HREF="../hudson/AbstractMarkupText.html#addMarkup(int, int, java.lang.String, java.lang.String)">AbstractMarkupText</A></CODE></B></DD>
 <DD>Adds a start tag and end tag at the specified position.
 
  <p>
  For example, if the text was "abc", then <tt>addMarkup(1,2,"&lt;b>","&lt;/b>")</tt>
  would generate <tt>"a&lt;b>b&lt;/b>c"</tt>
 <P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/AbstractMarkupText.html#addMarkup(int, int, java.lang.String, java.lang.String)">addMarkup</A></CODE> in class <CODE><A HREF="../hudson/AbstractMarkupText.html" title="class in hudson">AbstractMarkupText</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -293,6 +310,7 @@ findTokens</H3>
 <PRE>
 public java.util.List&lt;<A HREF="../hudson/MarkupText.SubText.html" title="class in hudson">MarkupText.SubText</A>&gt; <B>findTokens</B>(java.util.regex.Pattern&nbsp;pattern)</PRE>
 <DL>
+<DD><B>Description copied from class: <CODE><A HREF="../hudson/AbstractMarkupText.html#findTokens(java.util.regex.Pattern)">AbstractMarkupText</A></CODE></B></DD>
 <DD>Find all "tokens" that match the given pattern in this text.
 
  <p>
@@ -305,6 +323,23 @@ public java.util.List&lt;<A HREF="../hudson/MarkupText.SubText.html" title="clas
  from natural text. You can then use <A HREF="../hudson/MarkupText.SubText.html#surroundWith(java.lang.String, java.lang.String)"><CODE>MarkupText.SubText.surroundWith(String,String)</CODE></A>
  to put mark up around such text.
 <P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../hudson/AbstractMarkupText.html#findTokens(java.util.regex.Pattern)">findTokens</A></CODE> in class <CODE><A HREF="../hudson/AbstractMarkupText.html" title="class in hudson">AbstractMarkupText</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createSubText(java.util.regex.Matcher)"><!-- --></A><H3>
+createSubText</H3>
+<PRE>
+protected <A HREF="../hudson/MarkupText.SubText.html" title="class in hudson">MarkupText.SubText</A> <B>createSubText</B>(java.util.regex.Matcher&nbsp;m)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/AbstractMarkupText.html#createSubText(java.util.regex.Matcher)">createSubText</A></CODE> in class <CODE><A HREF="../hudson/AbstractMarkupText.html" title="class in hudson">AbstractMarkupText</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>

@@ -3,12 +3,11 @@ package hudson.plugins.pmd.util;
 import hudson.plugins.pmd.util.model.AnnotationContainer;
 import hudson.plugins.pmd.util.model.AnnotationProvider;
 import hudson.plugins.pmd.util.model.DefaultAnnotationContainer;
-import hudson.plugins.pmd.util.model.FileAnnotation;
 import hudson.plugins.pmd.util.model.Priority;
 import hudson.util.ChartUtil;
 
 import java.io.IOException;
-import java.util.Set;
+import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
 import org.jfree.chart.JFreeChart;
@@ -22,32 +21,34 @@ import org.kohsuke.stapler.StaplerResponse;
  */
 public final class ChartRenderer {
     /**
-     * Generates a PNG image for high/normal/low distribution of the specified object.
-     * The type of the object is determined by the 'object' parameter of the {@link StaplerRequest}.
+     * Generates a PNG image for high/normal/low distribution of the specified
+     * object. The type of the object is determined by the 'object' parameter of
+     * the {@link StaplerRequest}.
+     *
      * @param request
      *            Stapler request
      * @param response
      *            Stapler response
+     * @param container
+     *            the selected container to create the chart for
      * @throws IOException
      *             in case of an error
      */
     public void doStatistics(final StaplerRequest request, final StaplerResponse response, final AnnotationContainer container) throws IOException {
         String parameter = request.getParameter("object");
         if (parameter.startsWith("category.")) {
-            Set<FileAnnotation> annotations = container.getCategory(StringUtils.substringAfter(parameter, "category."));
-            renderPriorititesChart(request, response, new DefaultAnnotationContainer(annotations), container.getAnnotationBound());
+            renderPriorititesChart(request, response, container.getCategory(StringUtils.substringAfter(parameter, "category.")), getUpperBound(container.getCategories()));
         }
         else if (parameter.startsWith("type.")) {
-            Set<FileAnnotation> annotations = container.getType(StringUtils.substringAfter(parameter, "type."));
-            renderPriorititesChart(request, response, new DefaultAnnotationContainer(annotations), container.getAnnotationBound());
+            renderPriorititesChart(request, response, container.getType(StringUtils.substringAfter(parameter, "type.")), getUpperBound(container.getTypes()));
         }
         else if (parameter.startsWith("file.")) {
             AnnotationContainer annotations = container.getFile(Integer.valueOf(StringUtils.substringAfter(parameter, "file.")));
-            renderPriorititesChart(request, response, annotations, container.getAnnotationBound());
+            renderPriorititesChart(request, response, annotations, getUpperBound(container.getFiles()));
         }
         else if (parameter.startsWith("package.")) {
             AnnotationContainer annotations = container.getPackage(StringUtils.substringAfter(parameter, "package."));
-            renderPriorititesChart(request, response, annotations, container.getAnnotationBound());
+            renderPriorititesChart(request, response, annotations, getUpperBound(container.getPackages()));
         }
         else if (parameter.startsWith("module.")) {
             String moduleName = StringUtils.substringAfter(parameter, "module.");
@@ -56,11 +57,25 @@ public final class ChartRenderer {
                 annotations = container.getModule(moduleName);
             }
             else {
-                annotations = new DefaultAnnotationContainer();
+                annotations = new DefaultAnnotationContainer(moduleName);
             }
-            renderPriorititesChart(request, response, annotations, container.getAnnotationBound());
+            renderPriorititesChart(request, response, annotations, getUpperBound(container.getModules()));
         }
-        // TODO: we should parameterize the annotation bound (second parameter instead of getChild)
+    }
+
+    /**
+     * Gets the maximum number of annotations within the specified containers.
+     *
+     * @param containers
+     *            the containers to scan for the upper bound
+     * @return the maximum number of annotations
+     */
+    private int getUpperBound(final Collection<? extends AnnotationContainer> containers) {
+        int maximum = 0;
+        for (AnnotationContainer container : containers) {
+            maximum = Math.max(maximum, container.getNumberOfAnnotations());
+        }
+        return maximum;
     }
 
     /**

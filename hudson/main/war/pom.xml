@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.jvnet.hudson.main</groupId>
     <artifactId>pom</artifactId>
-    <version>1.251-SNAPSHOT</version>
+    <version>1.257-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   
@@ -33,7 +33,7 @@
           </webResources>
           <!-- for putting Main-Class into war -->
           <archive>
-            <manifest>
+            <manifest>e
               <mainClass>Main</mainClass>
             </manifest>
           </archive>
@@ -77,7 +77,6 @@
                 <!-- dependencies that goes to unusual locations -->
                 <resolveArtifact artifactId="remoting" tofile="${basedir}/target/generated-resources/WEB-INF/remoting.jar" />
                 <resolveArtifact artifactId="remoting" tofile="${basedir}/target/generated-resources/WEB-INF/slave.jar" />
-                <resolveArtifact artifactId="jnlp-agent" tofile="${basedir}/target/generated-resources/WEB-INF/jnlp-agent.jar" />
                 <resolveArtifact artifactId="winstone" tofile="${basedir}/target/generated-resources/winstone.jar" />
               </tasks>
             </configuration>
@@ -87,10 +86,10 @@
       <plugin>
         <!-- this is really just a patched version of maven-jetty-plugin to workaround issue #932 -->
         <groupId>org.jvnet.hudson.tools</groupId>
-        <artifactId>maven-hudson-plugin</artifactId>
+        <artifactId>maven-hudson-dev-plugin</artifactId>
         <version>6.1.7</version>
         <configuration>
-          <contextPath>/</contextPath>
+          <contextPath>${contextPath}</contextPath>
           <!--
             read directly from core module's output directory,
             so that changes are picked up right away without running mvn.
@@ -132,16 +131,6 @@
   </build>
 
   <dependencies>
-    <dependency>
-      <groupId>org.jvnet.hudson.main</groupId>
-      <artifactId>jnlp-agent</artifactId>
-      <version>${project.version}</version>
-      <!--
-        not really a test scope, but we use dependency-maven-plugin to copy this jar,
-        so we don't want this to be bundled in war by maven-war-plugin.
-      -->
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.main</groupId>
       <artifactId>hudson-core</artifactId>
@@ -197,10 +186,6 @@
           <artifactId>commons-cli</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>commons-discovery</groupId>
-          <artifactId>commons-discovery</artifactId>
-        </exclusion>
-        <exclusion>
           <groupId>jaxme</groupId>
           <artifactId>jaxme-api</artifactId>
         </exclusion>
@@ -216,6 +201,11 @@
           <groupId>pull-parser</groupId>
           <artifactId>pull-parser</artifactId>
         </exclusion>
+        <!-- don't know where this is coming from -->
+        <exclusion>
+          <groupId>dom4j</groupId>
+          <artifactId>dom4j</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -225,7 +215,7 @@
       -->
       <groupId>org.jvnet.hudson</groupId>
       <artifactId>executable-war</artifactId>
-      <version>1.1</version>
+      <version>1.2</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -238,10 +228,19 @@
       <version>0.9.10-hudson-6</version>
       <scope>provided</scope>
     </dependency>
+    <!-- offline profiler API when we need it -->
+    <!--dependency>
+      <groupId>com.yourkit.api</groupId>
+      <artifactId>yjp</artifactId>
+      <version>dontcare</version>
+      <scope>system</scope>
+      <systemPath>/usr/local/yjp/lib/yjp.jar</systemPath>
+    </dependency-->
   </dependencies>
   
   <properties>
     <HUDSON_HOME>${basedir}/work</HUDSON_HOME>
+    <contextPath>/</contextPath><!-- context path during test -->
   </properties>
 
   <pluginRepositories>
@@ -256,104 +255,6 @@
   </pluginRepositories>
 
   <profiles>
-    <profile>
-      <id>hudson-libs-local</id>
-      <!-- if we have the libs checked out of CVS, use them directly -->
-      <activation>
-        <file>
-          <exists>main/lib</exists>
-        </file>
-      </activation>
-      <repositories>
-        <!-- checking the file system is fastest of all -->
-        <repository>
-          <id>hudson-libs</id>
-          <url>file:main/lib</url>
-          <layout>legacy</layout>
-          <releases>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-          </releases>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-        </repository>
-        <!-- put central second to speed majority artifact resolution -->
-        <repository>
-          <id>central</id>
-          <url>http://repo1.maven.org/maven2</url>
-          <releases>
-            <enabled>true</enabled>
-            <!-- only look for jars here when they are not present locally -->
-            <updatePolicy>never</updatePolicy>
-          </releases>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-        </repository>
-        <!-- last, but not least -->
-        <repository>
-          <id>java.net2</id>
-          <url>http://download.java.net/maven/2</url>
-          <releases>
-            <enabled>true</enabled>
-            <updatePolicy>never</updatePolicy>
-          </releases>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-        </repository>
-      </repositories>
-    </profile>
-    <profile>
-      <id>hudson-libs-remote</id>
-      <!-- otherwise, we'll have to use the slower route -->
-      <activation>
-        <file>
-          <missing>main/lib</missing>
-        </file>
-      </activation>
-      <repositories>
-        <!-- put central first to speed majority artifact resolution -->
-        <repository>
-          <id>central</id>
-          <url>http://repo1.maven.org/maven2</url>
-          <releases>
-            <enabled>true</enabled>
-            <!-- only look for jars here when they are not present locally -->
-            <updatePolicy>never</updatePolicy>
-          </releases>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-        </repository>
-        <!-- put java.net2 second, as it's faster than the https CVS access -->
-        <repository>
-          <id>java.net2</id>
-          <url>http://download.java.net/maven/2/</url>
-          <releases>
-            <enabled>true</enabled>
-            <updatePolicy>never</updatePolicy>
-          </releases>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-        </repository>
-        <!-- put hudson-libs last as it is the slowest to access -->
-        <repository>
-          <id>hudson-libs</id>
-          <url>https://hudson.dev.java.net/source/browse/*checkout*/hudson/hudson/main/lib</url>
-          <layout>legacy</layout>
-          <releases>
-            <enabled>true</enabled>
-            <updatePolicy>never</updatePolicy>
-          </releases>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-        </repository>
-      </repositories>
-    </profile>
     <profile>
       <!-- profile for creating Hudson IPS package -->
       <id>ips</id>
@@ -394,7 +295,12 @@
                 </goals>
                 <configuration>
                   <tasks>
-                    <!-- see ../jnlp-agent/pom.xml for details -->
+                    <!--
+                      during the development, debug profile defined in ../pom.xml will cause
+                      the jars to be signed by a self-certified dummy public key.
+
+                      For release, you should define the real values in ~/.m2/settings.xml
+                    -->
                     <signjar jar="target/hudson.war" alias="${hudson.sign.alias}" keystore="${hudson.sign.keystore}" storepass="${hudson.sign.storepass}" />
                   </tasks>
                 </configuration>

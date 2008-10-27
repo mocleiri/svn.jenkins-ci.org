@@ -4,6 +4,7 @@ import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Proc;
 import hudson.Util;
+import hudson.util.FormFieldValidator;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
@@ -20,6 +21,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.QueryParameter;
+import net.sf.json.JSONObject;
+
+import javax.servlet.ServletException;
 
 /**
  * {@link BuildWrapper} that runs <tt>xvnc</tt>.
@@ -33,8 +40,13 @@ public class Xvnc extends BuildWrapper {
      */
     public boolean takeScreenshot;
     
-    private static final String FILENAME_SCREENSHOT = "screenshot.jpg"; 
-    
+    private static final String FILENAME_SCREENSHOT = "screenshot.jpg";
+
+    @DataBoundConstructor
+    public Xvnc(boolean takeScreenshot) {
+        this.takeScreenshot = takeScreenshot;
+    }
+
     public Environment setUp(AbstractBuild build, final Launcher launcher, BuildListener listener) throws IOException, InterruptedException {
         final PrintStream logger = listener.getLogger();
 
@@ -46,7 +58,7 @@ public class Xvnc extends BuildWrapper {
         final int displayNumber = allocator.allocate(baseDisplayNumber);
         final String actualCmd = Util.replaceMacro(cmd, Collections.singletonMap("DISPLAY_NUMBER",String.valueOf(displayNumber)));
 
-        logger.println("Starting xvnc");
+        logger.println(Messages.Xvnc_STARTING());
 
         final Proc proc = launcher.launch(actualCmd, new String[0], logger, build.getProject().getWorkspace());
         Matcher m = Pattern.compile("([^ ]*vncserver ).*:\\d+.*").matcher(actualCmd);
@@ -59,7 +71,7 @@ public class Xvnc extends BuildWrapper {
                 // Do not release it; it may be "stuck" until cleaned up by an administrator.
                 //allocator.free(displayNumber);
                 throw new IOException("Failed to run '" + actualCmd + "' (exit code " + exit + "), blacklisting display #" + displayNumber +
-                                      "; consider adding to your Hudson launch script: killall Xvnc; rm -fv /tmp/.X*-lock /tmp/.X11-unix/X*");
+                                      "; consider adding to your Hudson launch script: killall Xvnc Xrealvnc; rm -fv /tmp/.X*-lock /tmp/.X11-unix/X*");
             }
         } else {
             vncserverCommand = null;
@@ -78,17 +90,17 @@ public class Xvnc extends BuildWrapper {
                         File artifactsDir = build.getArtifactsDir();
                         artifactsDir.mkdirs();
                         
-                        logger.println("Taking screenshot.");
+                        logger.println(Messages.Xvnc_TAKING_SCREENSHOT());
                         launcher.launch("import -window root -display :" + displayNumber + " "+FILENAME_SCREENSHOT, new String[0], logger, ws).join();
                         
                         ws.child(FILENAME_SCREENSHOT).copyTo(new FilePath(artifactsDir).child(FILENAME_SCREENSHOT));
                      
                     }
-                    logger.println("Terminating xvnc.");
+                    logger.println(Messages.Xvnc_TERMINATING());
                     // #173: stopping the wrapper script will accomplish nothing. It has already exited, in fact.
                     launcher.launch(vncserverCommand + "-kill :" + displayNumber, new String[0], logger, build.getProject().getWorkspace()).join();
                 } else {
-                    logger.println("Terminating xvnc.");
+                    logger.println(Messages.Xvnc_TERMINATING());
                     // Assume it can be shut down by being killed.
                     proc.kill();
                 }
@@ -143,14 +155,19 @@ public class Xvnc extends BuildWrapper {
             return "/plugin/xvnc/help-projectConfig.html";
         }
 
-        public Xvnc newInstance(StaplerRequest req) throws FormException {
-            Xvnc x = new Xvnc();
-            req.bindParameters(x, "xvnc.");
-            return x;
-        }
-
         public boolean isApplicable(AbstractProject<?, ?> item) {
             return true;
+        }
+
+        public void doCheckCommandLine(StaplerRequest req, StaplerResponse rsp, final @QueryParameter("value") String value) throws IOException, ServletException {
+            new FormFieldValidator(req,rsp,false) {
+                protected void check() throws IOException, ServletException {
+                    if(value.contains("$DISPLAY_NUMBER"))
+                        ok();
+                    else
+                        warningWithMarkup(Messages.Xvnc_SHOULD_INCLUDE_DISPLAY_NUMBER());
+                }
+            }.process();
         }
     }
 }

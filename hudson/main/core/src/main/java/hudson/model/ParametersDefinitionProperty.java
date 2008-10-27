@@ -125,7 +125,7 @@ public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?,
 
         @Override
         public String getDisplayName() {
-            return "Parameters";
+            return Messages.ParametersDefinitionProperty_DisplayName();
         }
 
     }
@@ -148,5 +148,6 @@ public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?,
 
     static {
         ParameterDefinition.LIST.add(StringParameterDefinition.DESCRIPTOR);
+        ParameterDefinition.LIST.add(FileParameterDefinition.DESCRIPTOR);
     }
 }

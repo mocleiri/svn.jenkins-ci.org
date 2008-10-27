@@ -7,6 +7,7 @@ import hudson.plugins.mantis.model.MantisNote;
 import hudson.plugins.mantis.model.MantisViewState;
 import hudson.plugins.mantis.soap.MantisSession;
 
+import hudson.util.Scrambler;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -15,9 +16,9 @@ import java.util.logging.Logger;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
- * Reperesents an external MAntis installation and configuration needed to access this
+ * Reperesents an external Mantis installation and configuration needed to access this
  * Mantis.
- * 
+ *
  * @author Seiji Sogabe
  */
 public final class MantisSite {
@@ -25,7 +26,7 @@ public final class MantisSite {
     /**
      * the root URL of Mantis installation.
      */
-    private URL url;
+    private final URL url;
 
     /**
      * user name for Mantis installation.
@@ -46,6 +47,26 @@ public final class MantisSite {
      * password for Basic Authentication.
      */
     private final String basicPassword;
+
+    /**
+     * HTTP-Proxy Host.
+     */
+    private final String proxyHost;
+
+    /**
+     * HTTP-Proxy Port.
+     */
+    private final String proxyPort;
+
+    /**
+     * HTTP-Proxy Username.
+     */
+    private final String proxyUserName;
+
+    /**
+     * HTTP-Proxy Password which is scrambled.
+     */
+    private final String proxyPassword;
 
     public static MantisSite get(final AbstractProject<?, ?> p) {
         final MantisProjectProperty mpp = p.getProperty(MantisProjectProperty.class);
@@ -73,7 +94,7 @@ public final class MantisSite {
     }
 
     public String getPassword() {
-        return password;
+        return Scrambler.descramble(password);
     }
 
     public String getName() {
@@ -88,9 +109,28 @@ public final class MantisSite {
         return basicPassword;
     }
 
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public String getProxyPort() {
+        return proxyPort;
+    }
+
+    public String getProxyUserName() {
+        return proxyUserName;
+    }
+
+    public String getProxyPassword() {
+        return Scrambler.descramble(proxyPassword);
+    }
+
     @DataBoundConstructor
-    public MantisSite(final URL url, final String userName, final String password,
-            final String basicUserName, final String basicPassword) {
+    public MantisSite(final URL url,
+            final String userName, final String password,
+            final String basicUserName, final String basicPassword,
+            final String proxyHost, final String proxyPort,
+            final String proxyUserName, final String proxyPassword) {
         if (!url.toExternalForm().endsWith("/")) {
             try {
                 this.url = new URL(url.toExternalForm() + '/');
@@ -102,9 +142,13 @@ public final class MantisSite {
         }
 
         this.userName = Util.fixEmptyAndTrim(userName);
-        this.password = Util.fixEmptyAndTrim(password);
+        this.password = Scrambler.scramble(Util.fixEmptyAndTrim(password));
         this.basicUserName = Util.fixEmptyAndTrim(basicUserName);
-        this.basicPassword = Util.fixEmptyAndTrim(basicPassword);
+        this.basicPassword = Scrambler.scramble(Util.fixEmptyAndTrim(basicPassword));
+        this.proxyHost = Util.fixEmptyAndTrim(proxyHost);
+        this.proxyPort = Util.fixEmptyAndTrim(proxyPort);
+        this.proxyUserName = Util.fixEmptyAndTrim(proxyUserName);
+        this.proxyPassword = Scrambler.scramble(Util.fixEmptyAndTrim(proxyPassword));
     }
 
     public boolean isConnect() {
@@ -113,22 +157,22 @@ public final class MantisSite {
             final MantisSession session = createSession();
             session.getConfigString("default_language");
         } catch (final MantisHandlingException e) {
-            LOGGER.log(Level.WARNING, 
+            LOGGER.log(Level.WARNING,
                     Messages.MantisSite_FailedToConnectToMantis(urlString, e.getMessage()));
             return false;
         }
 
-        LOGGER.log(Level.INFO, 
+        LOGGER.log(Level.INFO,
                 Messages.MantisSite_SucceedInConnectingToMantis(urlString));
         return true;
     }
 
-    public MantisIssue getIssue(final Long id) throws MantisHandlingException {
+    public MantisIssue getIssue(final int id) throws MantisHandlingException {
         final MantisSession session = createSession();
         return session.getIssue(id);
     }
 
-    public void updateIssue(final Long id, final String text, final boolean keepNotePrivate)
+    public void updateIssue(final int id, final String text, final boolean keepNotePrivate)
             throws MantisHandlingException {
 
         final MantisViewState viewState = keepNotePrivate ? MantisViewState.PRIVATE

@@ -14,6 +14,15 @@ function object(o) {
 // id generator
 var iota = 0;
 
+// are we run as unit tests?
+var isRunAsTest = (function() {
+    try {
+        return Packages.java.lang.System.getProperty("hudson.unitTest")!=null;
+    } catch(e) {
+        return false;
+    }
+})();
+
 // Form check code
 //========================================================
 var FormChecker = {
@@ -634,6 +643,7 @@ function expandTextArea(button,id) {
 // refresh a part of the HTML specified by the given ID,
 // by using the contents fetched from the given URL.
 function refreshPart(id,url) {
+    if(isRunAsTest) return;
     window.setTimeout(function() {
         new Ajax.Request(url, {
             method: "post",
@@ -892,6 +902,7 @@ function addRadioBlock(id) {
 
 
 function updateBuildHistory(ajaxUrl,nBuild) {
+    if(isRunAsTest) return;
     $('buildHistory').headers = ["n",nBuild];
 
     function updateBuilds() {
@@ -1329,3 +1340,38 @@ var updateCenter = {
         });
     }
 };
+
+/*
+redirects to a page once the page is ready.
+
+    @param url
+        Specifies the URL to redirect the user.
+*/
+function applySafeRedirector(url) {
+    var i=0;
+    new PeriodicalExecuter(function() {
+      i = (i+1)%4;
+      var s = "";
+      for( var j=0; j<i; j++ )
+        s+='.';
+      $('progress').innerHTML = s;
+    },1);
+
+    window.setTimeout(function() {
+      var statusChecker = arguments.callee;
+        new Ajax.Request(url, {
+            method: "get",
+            onFailure: function(rsp) {
+                if(rsp.status==503) {
+                  // redirect as long as we are still loading
+                  window.setTimeout(statusChecker,5000);
+                } else {
+                  window.location.replace(url);
+                }
+            },
+            onSuccess: function(rsp) {
+                window.location.replace(url);
+            }
+        });
+    }, 5000);
+}

@@ -4,6 +4,7 @@ import hudson.model.Item;
 import hudson.model.Job;
 import hudson.model.JobProperty;
 import hudson.model.JobPropertyDescriptor;
+import hudson.model.Hudson;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,6 +29,9 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
+/**
+ * {@link JobProperty} to associate ACL for each project.
+ */
 public class AuthorizationMatrixProperty extends JobProperty<Job<?, ?>> {
 
 	public static final JobPropertyDescriptor DESCRIPTOR = new DescriptorImpl();
@@ -122,7 +126,8 @@ public class AuthorizationMatrixProperty extends JobProperty<Job<?, ?>> {
 
 		@Override
 		public boolean isApplicable(Class<? extends Job> jobType) {
-			return true;
+            // only applicable when ProjectMatrixAuthorizationStrategy is in charge
+            return Hudson.getInstance().getAuthorizationStrategy() instanceof ProjectMatrixAuthorizationStrategy;
 		}
 
 		@Override
@@ -134,6 +139,9 @@ public class AuthorizationMatrixProperty extends JobProperty<Job<?, ?>> {
 			return Collections.singletonList(PermissionGroup.get(Item.class));
 		}
 
+        public boolean showPermission(Permission p) {
+            return p!=Item.CREATE;
+        }
 	}
 
 	private final class AclImpl extends SidACL {
@@ -144,7 +152,7 @@ public class AuthorizationMatrixProperty extends JobProperty<Job<?, ?>> {
 				if (set != null && set.contains(s))
 					return true;
 			}
-			return false;
+			return null;
 		}
 
 		protected Boolean _hasPermission(Authentication a, Permission permission) {

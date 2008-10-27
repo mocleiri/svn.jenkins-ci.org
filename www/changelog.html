@@ -14,6 +14,134 @@
 </div>
 
 <div style="display:none;"><!--=BEGIN=-->
+<a name=v1.257><h3>What's new in 1.257</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed an encoding issue when the master and a slave use incompatible encodings.
+  <li class=bug>
+    Permission matrix was missing tooltip text.
+    (<a href="http://www.nabble.com/Missing-hover-text-for-matrix-security-permissions--td20140205.html">report</a>)
+</ul>
+</div><!--=END=-->
+<a name=v1.256><h3>What's new in 1.256</h3></a>
+<ul class=image>
+  <li class=bug>
+    Hudson had two <tt>dom4j.jar</tt> that was causing a VerifyError in WebSphere.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2435">issue 2435</a>)
+  <li class=bug>
+    Fixed NPE in case of <tt>changelog.xml</tt> data corruption
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2428">issue 2428</a>)
+  <li class=rfe>
+    Improved the error detection when a Windows path is given to a Unix slave.
+    (<a href="http://www.nabble.com/windows-32-bit-hudson-talking-to-linux-64-bit-slave--td19755708.html">report</a>)
+  <li class=rfe>
+    Automatic dependency management for Maven projects can be now disabled.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1714">issue 1714</a>)
+</ul>
+<a name=v1.255><h3>What's new in 1.255</h3></a>
+<ul class=image>
+  <li class=bug>
+    Project-level ACL matrix shouldn't display "CREATE" permission.
+    (<a href="http://www.nabble.com/Project-based-authorization-%3A-Create-permission-td19729677.html">report</a>)
+  <li class=bug>
+    Fixed the serialized form of project-based matrix authorization strategy.
+  <li class=bug>
+    Fixed a bug where Hudson installed as service gets killed when the interactive user logs off.
+    (<a href="http://www.nabble.com/Project-based-authorization-%3A-Create-permission-td19729677.html">report</a>)
+  <li class=bug>
+    Timer-scheduled build shouldn't honor the quiet period.
+    (<a href="http://www.nabble.com/Build-periodically-Schedule-time-difference-vs-actual-execute-time-td19736583.html">report</a>)
+  <li class=rfe>
+    Hudson slave launched from JNLP is now capable of installing itself as a Windows service.
+</ul>
+<a name=v1.254><h3>What's new in 1.254</h3></a>
+<ul class=image>
+  <li class=bug>
+    IllegalArgumentException in DeferredCreationLdapAuthoritiesPopulator if groupSearchBase is omitted.
+    (<a href="http://www.nabble.com/IllegalArgumentException-in-DeferredCreationLdapAuthoritiesPopulator-if-groupSearchBase-is-omitted-td19689475.html">report</a>)
+  <li class=bug>
+    Fixed "Failed to tag" problem when tagging some builds
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2213">issue 2213</a>)
+  <li class=rfe>
+    Hudson is now capable of installing itself as a Windows service.
+  <li class=rfe>
+    Improved the diagnostics of why Hudson needs to do a fresh check out.
+    (<a href="http://www.nabble.com/Same-job-gets-rescheduled-again-and-again-td19662648.html">report</a>)
+</ul>
+<a name=v1.253><h3>What's new in 1.253</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed FormFieldValidator check for Windows path 
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2334">issue 2334</a>)
+  <li class=bug>
+    Support empty cvs executable and Shell executable on configure page
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1851">issue 1851</a>)
+  <li class=bug>
+    Fixed parametric Project build when scheduled automatically from SCM changes
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2336">issue 2336</a>)
+  <li class=bug>
+    "Tag this build" link shouldn't show up in the navigation bar if the user doesn't have a permission.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2380">issue 2380</a>)
+  <li class=bug>
+    Improved LDAP support so that it doesn't rely on <tt>ou=groups</tt>.
+  <li class=bug>
+    Project-based security matrix shouldn't show up in project config page unless the said option is enabled
+    in the global config
+  <li class=bug>
+    Fixed NPE during the sign up of a new user
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2376">issue 2376</a>)
+  <li class=rfe>
+    Suppress the need for a scroll-bar on the configure page when the PATH is very long
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2317">issue 2317</a>)
+  <li class=rfe>
+    Now UserProperty objects can provide a summary on a user's main page.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2331">issue 2331</a>)
+  <li class=rfe>
+    Validate Maven installation directory just like Ant installation
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2335">issue 2335</a>)
+  <li class=rfe>
+    Show <tt>summary.jelly</tt> files for JobProperties in the project page
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2398">issue 2398</a>)
+  <li class=rfe>
+    Improvements in French and Japanese localization.
+  <li class=rfe>
+    JNLP slaves now support port tunneling for security-restricted environments.
+  <li class=rfe>
+    <tt>slave.jar</tt> now supports a proactive connection initiation (like JNLP slaves.)
+    This can be used to replace JNLP slaves, especially when you want to run it as a service.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=779">issue 779</a>)
+  <li class=rfe>
+    Added a new extension to define permalinks
+  <li class=rfe>
+    Supported a file submission as one of the possible parameters for a parameterized build.
+  <li class=rfe>
+    The logic to disable slaves based on its response time is made more robust, to ignore temporary spike.
+  <li class=rfe>
+    Improved the robustness of the loading of persisted records to simplify plugin evolution.
+</ul>
+<a name=v1.252><h3>What's new in 1.252</h3></a>
+<ul class=image>
+  <li class=bug>
+    Fixed a queue persistence problem where sometimes executors die with NPEs.
+  <li class=bug>
+    <tt>PageDecorator</tt> with a <tt>global.jelly</tt> is now shown in the System configuration page
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2289">issue 2289</a>)
+  <li class=bug>
+    On security-enabled Hudson, redirection for a login didn't work correctly since 1.249.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2290">issue 2290</a>)
+  <li class=bug>
+    Hudson didn't give SCMs an opportunity to clean up the workspace before project deletion.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2271">issue 2271</a>)
+  <li class=rfe>
+    Subversion SCM enhancement for allowing parametric builds on Tags and Branches.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2298">issue 2298</a>)
+</ul>
+<a name=v1.251><h3>What's new in 1.251</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    JavaScript error in the system configuration prevents a form submission.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2260">issue 2260</a>)
+</ul>
 <a name=v1.250><h3>What's new in 1.250</h3></a>
 <ul class=image>
   <li class=bug>
@@ -29,7 +157,6 @@
     Added LDAPS support
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1445">issue 1445</a>)
 </ul>
-</div><!--=END=-->
 <a name=v1.249><h3>What's new in 1.249</h3></a>
 <ul class=image>
   <li class=bug>

@@ -8,7 +8,7 @@ import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 
 import hudson.FilePath;
-import hudson.Util;
+import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.ModelObject;
 import hudson.plugins.clearcase.action.ChangeLogAction;
@@ -16,7 +16,6 @@ import hudson.plugins.clearcase.action.CheckOutAction;
 import hudson.plugins.clearcase.action.DefaultPollAction;
 import hudson.plugins.clearcase.action.PollAction;
 import hudson.plugins.clearcase.action.SaveChangeLogAction;
-import hudson.plugins.clearcase.action.TaggingAction;
 import hudson.plugins.clearcase.action.UcmSnapshotCheckoutAction;
 import hudson.plugins.clearcase.ucm.UcmChangeLogAction;
 import hudson.plugins.clearcase.ucm.UcmChangeLogParser;
@@ -103,7 +102,7 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
     }
 
     @Override
-    protected ChangeLogAction createChangeLogAction(ClearToolLauncher launcher, AbstractBuild<?, ?> build) {
+    protected ChangeLogAction createChangeLogAction(ClearToolLauncher launcher, AbstractBuild<?, ?> build,Launcher baseLauncher) {
         return new UcmChangeLogAction(createClearTool(launcher));
     }
 
@@ -112,10 +111,6 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
         return new UcmSaveChangeLogAction();
     }
     
-    @Override
-    protected TaggingAction createTaggingAction(ClearToolLauncher clearToolLauncher) {
-        return null;
-    }
     
     private String shortenStreamName(String longStream) {
         if (longStream.startsWith("stream:")) {

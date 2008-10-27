@@ -11,6 +11,7 @@ import hudson.plugins.findbugs.util.model.MavenModule;
 import hudson.plugins.findbugs.util.model.Priority;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -50,7 +51,7 @@ public class NativeFindBugsParserTest extends AbstractEnglishLocaleTest {
      *             in case of an error
      */
     private MavenModule parseFile(final String fileName) throws IOException, DocumentException {
-        Collection<FileAnnotation> annotations = new NativeFindBugsParser().parse(NativeFindBugsParserTest.class.getResourceAsStream(fileName), "", fileName, new HashMap<String, String>());
+        Collection<FileAnnotation> annotations = new NativeFindBugsParser().parse(NativeFindBugsParserTest.class.getResourceAsStream(fileName), new ArrayList<String>(), fileName, new HashMap<String, String>());
         MavenModule module = new MavenModule(fileName);
         if (!annotations.isEmpty()) {
             module.setName(annotations.iterator().next().getModuleName());
@@ -139,6 +140,23 @@ public class NativeFindBugsParserTest extends AbstractEnglishLocaleTest {
             }
         }
         assertTrue("No warning in class ResultSummary.java found.", found);
+    }
+
+    /**
+     * Checks whether we generate a message if there is no message in the XML file.
+     *
+     * @throws IOException
+     *             in case of an error
+     * @throws DocumentException
+     *             in case of an error
+     */
+    @Test
+    public void handleFilesWithoutMessages() throws IOException, DocumentException {
+        MavenModule module = parseFile("findbugs-nomessage.xml");
+        assertEquals(WRONG_NUMBER_OF_WARNINGS_PARSED, 1, module.getNumberOfAnnotations());
+
+        FileAnnotation next = module.getAnnotations().iterator().next();
+        assertEquals("Warning has no message.", "Redundant nullcheck of value known to be non-null", next.getMessage());
     }
 
     /**

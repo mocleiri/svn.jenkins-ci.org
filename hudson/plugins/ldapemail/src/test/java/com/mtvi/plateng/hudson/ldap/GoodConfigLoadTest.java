@@ -7,30 +7,24 @@ package com.mtvi.plateng.hudson.ldap;
 import java.io.File;
 import java.io.IOException;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.jvnet.hudson.test.HudsonTestCase;
 
-import org.apache.commons.io.FileUtils;
+public class GoodConfigLoadTest extends HudsonTestCase {
 
-public class GoodConfigLoadTest extends TestCase {
-
+    @Test
     public void testGoodConfig() throws IOException {
         PluginImpl pi = new PluginImpl();
         Configuration config = pi.loadConfiguration();
-        assertTrue(config.isValid());
+        Assert.assertTrue(config.isValid());
 
     }
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
+        withExistingHome(new File("src/test/resources/unit/goodconfig"));
         super.setUp();
-        FileUtils.copyFile(new File("src/test/resources/unit/config.xml"), new File(
-                HudsonUtil.root, LdapMailAddressResolver.class.getName() + ".xml"));
-    }
-
-    @Override
-    protected void tearDown() throws Exception {
-        HudsonUtil.hudson.cleanUp();
-        FileUtils.deleteDirectory(HudsonUtil.root);
-        super.tearDown();
     }
 }
