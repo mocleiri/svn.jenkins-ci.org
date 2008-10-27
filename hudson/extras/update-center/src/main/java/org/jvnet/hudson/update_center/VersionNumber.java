@@ -66,7 +66,7 @@ public class VersionNumber implements Comparable<VersionNumber> {
      *      if the parsing fails.
      */
     public VersionNumber( String num ) {
-        StringTokenizer tokens = new StringTokenizer(num,".");
+        StringTokenizer tokens = new StringTokenizer(num,".-");
         digits = new int[tokens.countTokens()];
         if(digits.length<2)
             throw new IllegalArgumentException();
@@ -76,6 +76,12 @@ public class VersionNumber implements Comparable<VersionNumber> {
             String token = tokens.nextToken().toLowerCase();
             if(token.equals("*")) {
                 digits[i++] = 1000;
+            } else
+            if(token.equals("alpha")) {
+                digits[i++] = -2;
+            } else
+            if(token.equals("beta")) {
+                digits[i++] = -1;
             } else
             if(token.startsWith("ea")) {
                 if(token.length()==2)
