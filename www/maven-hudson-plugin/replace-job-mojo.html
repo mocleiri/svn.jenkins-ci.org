@@ -1,0 +1,430 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+<html>
+  <head>
+    <title>Maven Hudson Plugin - maven-hudson-plugin - hudson:replace-job</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      </head>
+  <body class="composite">
+    <!-- TODO: move this into JavaScript to patch the skin
+      <div class="xright">  </div>
+    -->
+    <div id="leftColumn">
+      <div id="navcolumn">
+             <dl class=navgroup>
+        <dt>Documentation</dt>
+        <dd><ul>
+              
+    <li class="none">
+              <a href="index.html">Introduction</a>
+        </li>
+          </ul></dd>
+    </dl>
+      <dl class=navgroup>
+        <dt>Project Documentation</dt>
+        <dd><ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+              <a href="project-info.html">Project Information</a>
+              </li>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+              <a href="project-reports.html">Project Reports</a>
+              </li>
+          </ul></dd>
+    </dl>
+      <dl class=navgroup>
+        <dt>Parent Project</dt>
+        <dd><ul>
+              
+    <li class="none">
+              <a href="https://test-support.dev.java.net/master-project/master-public-java/master-public-maven-plugin/index.html">Master Maven POM for Public Maven Plugins</a>
+        </li>
+          </ul></dd>
+    </dl>
+        </div>
+      <script>
+        // replace the java.net project tools with the navigation bar from Maven.
+        // also get rid of "Get Involved" thingie too, while we are at it
+        var pt = document.getElementById("projecttools");
+        var nv = document.getElementById("navcolumn");
+        
+        while(pt.previousSibling!=null)
+          pt.parentNode.removeChild(pt.previousSibling);
+        
+        pt.parentNode.insertBefore(nv,pt);
+        pt.parentNode.removeChild(pt);
+      </script>
+      <script>
+        // kill "description" h3 bar
+        var ld = document.getElementById("longdescription");
+        if(ld!=null) {
+          for( n=ld.firstChild; n!=null; n=n.nextSibling ) {
+            if(n.nodeType==1 && n.innerHTML=="Description" ) {
+              n.parentNode.removeChild(n);
+              break;
+            }
+          }
+        }
+      </script>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <div class="section"><h2><a name="hudson:replace-job"></a>hudson:replace-job</h2>
+<p><strong>Full name</strong>:</p>
+<p>org.jvnet.hudson.tools:maven-hudson-plugin:2.0-alpha-2:replace-job</p>
+<p><strong>Description</strong>:</p>
+<p>Goal which replaces a Hudson job's configuration</p>
+<p><strong>Attributes</strong>:</p>
+<ul><li>Requires a Maven 2.0 project to be executed.</li>
+<li>Executes as an aggregator plugin.</li>
+</ul>
+<div class="section"><h3><a name="Required_Parameters"></a>Required Parameters</h3>
+<table class="bodyTable"><tr class="a"><th>Name</th>
+<th>Type</th>
+<th>Since</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td><strong><a href="#includeCobertura">includeCobertura</a></strong></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>Should the produced project XML include Cobertura Publisher
+support. Default value is: <code>true</code>.</td>
+</tr>
+<tr class="a"><td><strong><a href="#includeEmail">includeEmail</a></strong></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>Should the produced project XML include email support. Default value is: <code>true</code>.</td>
+</tr>
+<tr class="b"><td><strong><a href="#includeJavadoc">includeJavadoc</a></strong></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>Should the produced project XML include Javadoc Publisher support. Default value is: <code>true</code>.</td>
+</tr>
+<tr class="a"><td><strong><a href="#includeJunit">includeJunit</a></strong></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>Should the produced project XML include JUnit Publisher support. Default value is: <code>true</code>.</td>
+</tr>
+<tr class="b"><td><strong><a href="#includeTwitter">includeTwitter</a></strong></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>Should the produced project XML include twitter support. Default value is: <code>true</code>.</td>
+</tr>
+<tr class="a"><td><strong><a href="#includeViolations">includeViolations</a></strong></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>Should the produced project XML include Violations Publisher
+support. Default value is: <code>true</code>.</td>
+</tr>
+<tr class="b"><td><strong><a href="#primaryGoal">primaryGoal</a></strong></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>Primary &quot;build&quot; goal to be executed. Usually either intstall or
+deploy. Default value is: <code>install</code>.</td>
+</tr>
+<tr class="a"><td><strong><a href="#subversionURL">subversionURL</a></strong></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>Subversion URL. </td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="Optional_Parameters"></a>Optional Parameters</h3>
+<table class="bodyTable"><tr class="b"><th>Name</th>
+<th>Type</th>
+<th>Since</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td><strong><a href="#additionalGoals">additionalGoals</a></strong></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>Additional goals to be run after any reporting goals are executed. </td>
+</tr>
+<tr class="b"><td><strong><a href="#allocatePorts">allocatePorts</a></strong></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>Comma-delimited list of environment variables to have set using the
+Port Allocator plugin. See
+http://hudson.gotdns.com/wiki/display/HUDSON/Port+Allocator+Plugin </td>
+</tr>
+<tr class="a"><td><strong><a href="#description">description</a></strong></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>Project description. </td>
+</tr>
+<tr class="b"><td><strong><a href="#hudsonURL">hudsonURL</a></strong></td>
+<td><code>URL</code></td>
+<td><code>-</code></td>
+<td>Hudson URL. </td>
+</tr>
+<tr class="a"><td><strong><a href="#jobName">jobName</a></strong></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>Name of the job to be created. </td>
+</tr>
+<tr class="b"><td><strong><a href="#performClean">performClean</a></strong></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>Should a clean be performed before the build. Default value is: <code>true</code>.</td>
+</tr>
+<tr class="a"><td><strong><a href="#shouldFailAtEnd">shouldFailAtEnd</a></strong></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>Should the -fae command-line option be passed to Maven, specifying
+that the build should only report a failure at the end. Default value is: <code>true</code>.</td>
+</tr>
+<tr class="b"><td><strong><a href="#shouldUseBatchMode">shouldUseBatchMode</a></strong></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>Should the -B command-line option be passed to Maven, specifying
+that the build is running in batch (i.e. non-interactive) mode. Default value is: <code>true</code>.</td>
+</tr>
+<tr class="a"><td><strong><a href="#startVNC">startVNC</a></strong></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>If true, will start a VNC session before each job execution. See
+http://hudson.gotdns.com/wiki/display/HUDSON/Xvnc+Plugin. </td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="Parameter_Details"></a>Parameter Details</h3>
+<p><strong><a name="additionalGoals">additionalGoals</a>:</strong></p>
+<p>Additional goals to be run after any reporting goals are executed.</p>
+<ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>Expression</strong>: <code>${additionalGoals}</code></li>
+</ul>
+<hr />
+<p><strong><a name="allocatePorts">allocatePorts</a>:</strong></p>
+<p>Comma-delimited list of environment variables to have set using the
+Port Allocator plugin. See
+http://hudson.gotdns.com/wiki/display/HUDSON/Port+Allocator+Plugin</p>
+<ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>Expression</strong>: <code>${allocatePorts}</code></li>
+</ul>
+<hr />
+<p><strong><a name="description">description</a>:</strong></p>
+<p>Project description.</p>
+<ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>Expression</strong>: <code>${project.description}</code></li>
+</ul>
+<hr />
+<p><strong><a name="hudsonURL">hudsonURL</a>:</strong></p>
+<p>Hudson URL.</p>
+<ul><li><strong>Type</strong>: <code>java.net.URL</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>Expression</strong>: <code>${hudson.url}</code></li>
+</ul>
+<hr />
+<p><strong><a name="includeCobertura">includeCobertura</a>:</strong></p>
+<p>Should the produced project XML include Cobertura Publisher
+support.</p>
+<ul><li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>Expression</strong>: <code>${includeCobertura}</code></li>
+<li><strong>Default</strong>: <code>true</code></li>
+</ul>
+<hr />
+<p><strong><a name="includeEmail">includeEmail</a>:</strong></p>
+<p>Should the produced project XML include email support.</p>
+<ul><li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>Expression</strong>: <code>${includeEmail}</code></li>
+<li><strong>Default</strong>: <code>true</code></li>
+</ul>
+<hr />
+<p><strong><a name="includeJavadoc">includeJavadoc</a>:</strong></p>
+<p>Should the produced project XML include Javadoc Publisher support.</p>
+<ul><li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>Expression</strong>: <code>${includeJavadoc}</code></li>
+<li><strong>Default</strong>: <code>true</code></li>
+</ul>
+<hr />
+<p><strong><a name="includeJunit">includeJunit</a>:</strong></p>
+<p>Should the produced project XML include JUnit Publisher support.</p>
+<ul><li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>Expression</strong>: <code>${includeJunit}</code></li>
+<li><strong>Default</strong>: <code>true</code></li>
+</ul>
+<hr />
+<p><strong><a name="includeTwitter">includeTwitter</a>:</strong></p>
+<p>Should the produced project XML include twitter support.</p>
+<ul><li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>Expression</strong>: <code>${includeTwitter}</code></li>
+<li><strong>Default</strong>: <code>true</code></li>
+</ul>
+<hr />
+<p><strong><a name="includeViolations">includeViolations</a>:</strong></p>
+<p>Should the produced project XML include Violations Publisher
+support.</p>
+<ul><li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>Expression</strong>: <code>${includeViolations}</code></li>
+<li><strong>Default</strong>: <code>true</code></li>
+</ul>
+<hr />
+<p><strong><a name="jobName">jobName</a>:</strong></p>
+<p>Name of the job to be created.</p>
+<ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>Expression</strong>: <code>${jobName}</code></li>
+</ul>
+<hr />
+<p><strong><a name="performClean">performClean</a>:</strong></p>
+<p>Should a clean be performed before the build.</p>
+<ul><li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>Expression</strong>: <code>${peformClean}</code></li>
+<li><strong>Default</strong>: <code>true</code></li>
+</ul>
+<hr />
+<p><strong><a name="primaryGoal">primaryGoal</a>:</strong></p>
+<p>Primary &quot;build&quot; goal to be executed. Usually either intstall or
+deploy.</p>
+<ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>Default</strong>: <code>install</code></li>
+</ul>
+<hr />
+<p><strong><a name="shouldFailAtEnd">shouldFailAtEnd</a>:</strong></p>
+<p>Should the -fae command-line option be passed to Maven, specifying
+that the build should only report a failure at the end.</p>
+<ul><li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>Expression</strong>: <code>${failAtEnd}</code></li>
+<li><strong>Default</strong>: <code>true</code></li>
+</ul>
+<hr />
+<p><strong><a name="shouldUseBatchMode">shouldUseBatchMode</a>:</strong></p>
+<p>Should the -B command-line option be passed to Maven, specifying
+that the build is running in batch (i.e. non-interactive) mode.</p>
+<ul><li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>Expression</strong>: <code>${useBatchMode}</code></li>
+<li><strong>Default</strong>: <code>true</code></li>
+</ul>
+<hr />
+<p><strong><a name="startVNC">startVNC</a>:</strong></p>
+<p>If true, will start a VNC session before each job execution. See
+http://hudson.gotdns.com/wiki/display/HUDSON/Xvnc+Plugin.</p>
+<ul><li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>Expression</strong>: <code>${startVNC}</code></li>
+</ul>
+<hr />
+<p><strong><a name="subversionURL">subversionURL</a>:</strong></p>
+<p>Subversion URL.</p>
+<ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>Expression</strong>: <code>${project.scm.developerConnection}</code></li>
+</ul>
+</div>
+</div>
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          1981-2008
+    
+          MTV Networks
+          
+  
+
+  
+  
+  &nbsp;| Last Published: 10/27/2008
+  &nbsp;| Version: 2.0-alpha-2
+</div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>
