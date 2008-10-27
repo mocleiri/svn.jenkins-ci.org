@@ -140,7 +140,7 @@ public final class ComputerSet extends AbstractModelObject {
      * Really creates a new slave.
      */
     public synchronized void doDoCreateItem( StaplerRequest req, StaplerResponse rsp,
-                                           @QueryParameter("name") String name, @QueryParameter("mode") String mode,
+                                           @QueryParameter("name") String name, @QueryParameter("type") String type,
                                            @QueryParameter("from") String from ) throws IOException, ServletException {
         try {
             final Hudson app = Hudson.getInstance();
@@ -148,7 +148,7 @@ public final class ComputerSet extends AbstractModelObject {
 
             if (checkName(req, rsp, name)) return;
 
-            Node result = NodeDescriptor.ALL.find(mode).newInstance(req, req.getSubmittedForm());
+            Node result = NodeDescriptor.ALL.find(type).newInstance(req, req.getSubmittedForm());
             app.addNode(result);
 
             // take the user back to the slave list top page
