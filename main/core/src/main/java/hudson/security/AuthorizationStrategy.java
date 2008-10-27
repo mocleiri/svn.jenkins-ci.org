@@ -10,6 +10,7 @@ import hudson.model.Descriptor;
 import hudson.model.Hudson;
 import hudson.model.User;
 import hudson.model.View;
+import hudson.model.Node;
 import hudson.util.DescriptorList;
 
 import java.io.Serializable;
@@ -98,12 +99,12 @@ public abstract class AuthorizationStrategy implements Describable<Authorization
      * This can be used as a basis for more fine-grained access control.
      *
      * <p>
-     * The default implementation returns {@link #getRootACL()}.
+     * The default implementation delegates to {@link #getACL(Node)}
      *
      * @since 1.220
      */
     public ACL getACL(Computer computer) {
-        return getRootACL();
+        return getACL(computer.getNode());
     }
 
     /**
@@ -116,6 +117,10 @@ public abstract class AuthorizationStrategy implements Describable<Authorization
      * @since 1.252
      */
     public ACL getACL(NodeFactory nodeFactory) {
+        return getRootACL();
+    }
+
+    public ACL getACL(Node node) {
         return getRootACL();
     }
 

@@ -175,7 +175,7 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     public Node getNode() {
         if(nodeName==null)
             return Hudson.getInstance();
-        return Hudson.getInstance().getSlave(nodeName);
+        return Hudson.getInstance().getNode(nodeName);
     }
 
     /**
@@ -505,8 +505,9 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
      */
     public void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         try {
+            checkPermission(Hudson.CONFIGURE);  // TODO: new permission?
+
             final Hudson app = Hudson.getInstance();
-            app.checkPermission(Hudson.CONFIGURE);  // TODO: new permission?
 
             Node result = getNode().getDescriptor().newInstance(req, req.getSubmittedForm());
 
@@ -555,4 +556,7 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     public boolean isAcceptingTasks() {
         return true;
     }
+
+    // TODO: define this as a separate permission?
+    public static final Permission CONFIGURE = Hudson.CONFIGURE;
 }

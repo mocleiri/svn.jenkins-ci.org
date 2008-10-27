@@ -10,6 +10,8 @@ import hudson.model.TopLevelItem;
 import hudson.XmlFile;
 import hudson.Launcher;
 import hudson.FilePath;
+import hudson.security.ACL;
+import hudson.security.Permission;
 import hudson.util.ClockDifference;
 
 import java.io.File;
@@ -80,6 +82,18 @@ public class NodeListTest extends TestCase {
         }
 
         public NodeDescriptor getDescriptor() {
+            throw new UnsupportedOperationException();
+        }
+
+        public ACL getACL() {
+            throw new UnsupportedOperationException();
+        }
+
+        public void checkPermission(Permission permission) {
+            throw new UnsupportedOperationException();
+        }
+
+        public boolean hasPermission(Permission permission) {
             throw new UnsupportedOperationException();
         }
     }

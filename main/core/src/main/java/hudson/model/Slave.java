@@ -4,6 +4,8 @@ import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Launcher.RemoteLauncher;
 import hudson.Util;
+import hudson.security.ACL;
+import hudson.security.Permission;
 import hudson.slaves.ComputerLauncher;
 import hudson.slaves.RetentionStrategy;
 import hudson.slaves.CommandLauncher;
@@ -247,6 +249,18 @@ public abstract class Slave implements Node, Serializable {
         long endTime = System.currentTimeMillis();
 
         return new ClockDifference((startTime+endTime)/2 - slaveTime);
+    }
+
+    public ACL getACL() {
+        return Hudson.getInstance().getAuthorizationStrategy().getACL(this);
+    }
+
+    public final void checkPermission(Permission permission) {
+        getACL().checkPermission(permission);
+    }
+
+    public final boolean hasPermission(Permission permission) {
+        return getACL().hasPermission(permission);
     }
 
     public Computer createComputer() {

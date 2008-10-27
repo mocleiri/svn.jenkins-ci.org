@@ -3,6 +3,7 @@ package hudson.model;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.ExtensionPoint;
+import hudson.security.AccessControlled;
 import hudson.slaves.NodeDescriptor;
 import hudson.node_monitors.NodeMonitor;
 import hudson.util.ClockDifference;
@@ -22,7 +23,7 @@ import java.util.Set;
  * @see NodeMonitor
  * @see NodeDescriptor
  */
-public interface Node extends Describable<Node>, ExtensionPoint {
+public interface Node extends Describable<Node>, ExtensionPoint, AccessControlled {
     /**
      * Name of this node.
      *
