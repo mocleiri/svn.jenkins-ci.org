@@ -1060,8 +1060,23 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
     @Override
     public NodeDescriptor getDescriptor() {
-        // TODO: implement this method later
-        throw new UnsupportedOperationException();
+        return DescriptorImpl.INSTANCE;
+    }
+
+    public static final class DescriptorImpl extends NodeDescriptor {
+        public static final DescriptorImpl INSTANCE = new DescriptorImpl();
+        private DescriptorImpl() {
+            super(Hudson.class);
+        }
+
+        public String getDisplayName() {
+            throw new UnsupportedOperationException();
+        }
+
+        // to route /descriptor/FQCN/xxx to getDescriptor(FQCN).xxx
+        public Object getDynamic(String token, StaplerRequest req, StaplerResponse rsp) {
+            return Hudson.getInstance().getDescriptor(token);
+        }
     }
 
     /**
