@@ -25,7 +25,7 @@ import hudson.security.Permission;
 import hudson.security.SecurityRealm;
 import hudson.slaves.ComputerLauncher;
 import hudson.slaves.RetentionStrategy;
-import hudson.slaves.NodeFactory;
+import hudson.slaves.Cloud;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildWrapper;
@@ -942,8 +942,8 @@ public class Functions {
         return (List)PageDecorator.ALL;
     }
     
-    public static DescriptorList<NodeFactory> getNodeFactoryDescriptors() {
-        return NodeFactory.ALL;
+    public static DescriptorList<Cloud> getCloudDescriptors() {
+        return Cloud.ALL;
     }
 
     private static final Pattern SCHEME = Pattern.compile("[a-z]+://.+");

@@ -121,13 +121,13 @@
       <local:globalConfig className="hudson.tasks.BuildStep" field="PUBLISHERS" />
       <local:globalConfig className="hudson.model.Jobs" field="PROPERTIES" />
 
-      <j:if test="${!empty(h.getNodeFactoryDescriptors())}">
-        <f:section title="${%Grid}">
+      <j:if test="${!empty(h.getCloudDescriptors())}">
+        <f:section title="${%Cloud}">
           <f:block>
-            <f:hetero-list name="nodeFactory" hasHeader="true"
-                           descriptors="${h.getNodeFactoryDescriptors()}"
-                           items="${it.nodeFactories}"
-                           addCaption="${%Add a new grid}"/>
+            <f:hetero-list name="cloud" hasHeader="true"
+                           descriptors="${h.getCloudDescriptors()}"
+                           items="${it.clouds}"
+                           addCaption="${%Add a new cloud}"/>
           </f:block>
         </f:section>
       </j:if>

@@ -1,7 +1,7 @@
 package hudson.security;
 
 import hudson.ExtensionPoint;
-import hudson.slaves.NodeFactory;
+import hudson.slaves.Cloud;
 import hudson.model.AbstractItem;
 import hudson.model.AbstractProject;
 import hudson.model.Computer;
@@ -108,7 +108,7 @@ public abstract class AuthorizationStrategy implements Describable<Authorization
     }
 
     /**
-     * Implementation can choose to provide different ACL for different {@link NodeFactory}s.
+     * Implementation can choose to provide different ACL for different {@link Cloud}s.
      * This can be used as a basis for more fine-grained access control.
      *
      * <p>
@@ -116,7 +116,7 @@ public abstract class AuthorizationStrategy implements Describable<Authorization
      *
      * @since 1.252
      */
-    public ACL getACL(NodeFactory nodeFactory) {
+    public ACL getACL(Cloud cloud) {
         return getRootACL();
     }
 

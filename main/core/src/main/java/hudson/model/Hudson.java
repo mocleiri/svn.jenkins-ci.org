@@ -49,7 +49,7 @@ import hudson.security.TokenBasedRememberMeServices2;
 import hudson.slaves.ComputerListener;
 import hudson.slaves.RetentionStrategy;
 import hudson.slaves.NodeList;
-import hudson.slaves.NodeFactory;
+import hudson.slaves.Cloud;
 import hudson.slaves.DumbSlave;
 import hudson.slaves.NodeDescriptor;
 import hudson.tasks.BuildStep;
@@ -238,9 +238,9 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     private transient volatile DependencyGraph dependencyGraph;
 
     /**
-     * Active {@link NodeFactory}s.
+     * Active {@link Cloud}s.
      */
-    public final DescribableList<NodeFactory,Descriptor<NodeFactory>> nodeFactories = new DescribableList<NodeFactory,Descriptor<NodeFactory>>(this);
+    public final DescribableList<Cloud,Descriptor<Cloud>> clouds = new DescribableList<Cloud,Descriptor<Cloud>>(this);
     
     /**
      * Set of installed cluster nodes.
@@ -988,10 +988,10 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     }
 
     /**
-     * Gets a {@link NodeFactory} by {@link NodeFactory#name its name}, or null.
+     * Gets a {@link Cloud} by {@link Cloud#name its name}, or null.
      */
-    public NodeFactory getNodeFactory(String name) {
-        for (NodeFactory nf : nodeFactories)
+    public Cloud getCloud(String name) {
+        for (Cloud nf : clouds)
             if(nf.name.equals(name))
                 return nf;
         return null;
@@ -1717,7 +1717,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             for( JSONObject o : StructuredForm.toList(json,"plugin"))
                 pluginManager.getPlugin(o.getString("name")).getPlugin().configure(o);
 
-            nodeFactories.rebuildHetero(req,json,NodeFactory.ALL,"nodeFactory");
+            clouds.rebuildHetero(req,json, Cloud.ALL, "cloud");
 
             save();
             if(result)
