@@ -7,30 +7,6 @@
     <st:include page="sidepanel.jelly"/>
     <l:main-panel>
       <f:form method="post" action="configExecutorsSubmit">
-        <f:section title="${%Master/Slave Support}">
-          <f:entry title="${%Master}">
-            <table width="100%">
-              <f:entry title="${%Name}">
-                <b>${%Master}</b>
-              </f:entry>
-              <f:entry title="${%Description}">
-                <b>${%This Hudson server}</b>
-              </f:entry>
-              <f:entry title="${%# of executors}" help="/help/system-config/numExecutors.html">
-                <input type="text" name="numExecutors" class="setting-input number"
-                       value="${it.numExecutors}"/>
-              </f:entry>
-              <f:entry title="${%Local FS root}">
-                <b>${it.rootDir}</b>
-              </f:entry>
-
-              <j:if test="${!empty(it.slaves)}">
-                <f:slave-mode name="master.mode" node="${it}" />
-              </j:if>
-            </table>
-          </f:entry>
-        </f:section>
-
         <j:if test="${!empty(h.getNodeFactoryDescriptors())}">
           <f:section title="${%Grid}">
             <f:block>

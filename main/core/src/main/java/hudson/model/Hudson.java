@@ -1656,6 +1656,12 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
                 }
             }
 
+            numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
+            if(req.hasParameter("master.mode"))
+                mode = Mode.valueOf(req.getParameter("master.mode"));
+            else
+                mode = Mode.NORMAL;
+
             quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
 
             systemMessage = Util.nullify(req.getParameter("system_message"));
@@ -1727,14 +1733,6 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         BulkChange bc = new BulkChange(this);
         try {
             JSONObject json = req.getSubmittedForm();
-
-            numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
-            if(req.hasParameter("master.mode"))
-                mode = Mode.valueOf(req.getParameter("master.mode"));
-            else
-                mode = Mode.NORMAL;
-
-            setNodes(req.bindJSONToList(DumbSlave.class,json.get("slaves")));
 
             nodeFactories.rebuildHetero(req,json,NodeFactory.ALL,"nodeFactory");
         } catch (FormException e) {
