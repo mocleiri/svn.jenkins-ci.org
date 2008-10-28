@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.256 API)
+Index (Hudson core 1.257 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-25">
+<META NAME="date" CONTENT="2008-10-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.256 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.256 API)";
+        parent.document.title="Index (Hudson core 1.257 API)";
     }
 }
 </SCRIPT>
@@ -155,6 +155,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#AbstractProject_BuildInProgress(java.lang.Object, java.lang.Object)"><B>AbstractProject_BuildInProgress(Object, Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Build #{0} is already in progress{1}
+<DT><A HREF="./hudson/model/Messages.html#AbstractProject_BuildPermission_Description()"><B>AbstractProject_BuildPermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission grants the ability to start a new build.
 <DT><A HREF="./hudson/model/Messages.html#AbstractProject_Disabled()"><B>AbstractProject_Disabled()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Build disabled
@@ -182,6 +185,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#AbstractProject_WorkspaceOffline()"><B>AbstractProject_WorkspaceOffline()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Workspace is offline.
+<DT><A HREF="./hudson/model/Messages.html#AbstractProject_WorkspacePermission_Description()"><B>AbstractProject_WorkspacePermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission grants the ability to retrieve the contents of a workspace Hudson checked out for performing builds.
 <DT><A HREF="./hudson/scm/AbstractScmTagAction.html" title="class in hudson.scm"><B>AbstractScmTagAction</B></A> - Class in <A HREF="./hudson/scm/package-summary.html">hudson.scm</A><DD>Common part of <A HREF="./hudson/scm/CVSSCM.TagAction.html" title="class in hudson.scm"><CODE>CVSSCM.TagAction</CODE></A> and <A HREF="./hudson/scm/SubversionTagAction.html" title="class in hudson.scm"><CODE>SubversionTagAction</CODE></A>.<DT><A HREF="./hudson/scm/AbstractScmTagAction.html#AbstractScmTagAction(hudson.model.AbstractBuild)"><B>AbstractScmTagAction(AbstractBuild)</B></A> - 
 Constructor for class hudson.scm.<A HREF="./hudson/scm/AbstractScmTagAction.html" title="class in hudson.scm">AbstractScmTagAction</A>
 <DD>&nbsp;
@@ -2100,10 +2106,10 @@ Method in class hudson.model.<A HREF="./hudson/model/StringParameterDefinition.h
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/ParametersAction.html#createVariableResolver(hudson.model.AbstractBuild)"><B>createVariableResolver(AbstractBuild&lt;?, ?&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParametersAction.html" title="class in hudson.model">ParametersAction</A>
-<DD>Creates an <A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> that aggregates all the parameters.
+<DD>Creates an <A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util"><CODE>VariableResolver</CODE></A> that aggregates all the parameters.
 <DT><A HREF="./hudson/model/ParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)"><B>createVariableResolver(AbstractBuild&lt;?, ?&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>
-<DD>Returns a <A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> so that other components like <A HREF="./hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A>s
+<DD>Returns a <A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util"><CODE>VariableResolver</CODE></A> so that other components like <A HREF="./hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A>s
  can perform variable substitution to reflect parameter values into the build process.
 <DT><A HREF="./hudson/model/StringParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)"><B>createVariableResolver(AbstractBuild&lt;?, ?&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/StringParameterValue.html" title="class in hudson.model">StringParameterValue</A>
@@ -2420,6 +2426,9 @@ Variable in class hudson.model.<A HREF="./hudson/model/AbstractItem.html" title=
 <DT><A HREF="./hudson/model/Run.html#description"><B>description</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>Human-readable description.
+<DT><A HREF="./hudson/security/Permission.html#description"><B>description</B></A> - 
+Variable in class hudson.security.<A HREF="./hudson/security/Permission.html" title="class in hudson.security">Permission</A>
+<DD>Human-readable description of this permission.
 <DT><A HREF="./hudson/matrix/MatrixProject.html#DESCRIPTOR"><B>DESCRIPTOR</B></A> - 
 Static variable in class hudson.matrix.<A HREF="./hudson/matrix/MatrixProject.html" title="class in hudson.matrix">MatrixProject</A>
 <DD>&nbsp;
@@ -2878,6 +2887,9 @@ Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html" tit
 <DT><A HREF="./hudson/model/Hudson.html#doDefaultJDKCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDefaultJDKCheck(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>If the user chose the default JDK, make sure we got 'java' in PATH.
+<DT><A HREF="./hudson/model/AbstractProject.html#doDisable(org.kohsuke.stapler.StaplerResponse)"><B>doDisable(StaplerResponse)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractItem.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDoDelete(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A>
 <DD>Deletes this item.
@@ -2925,6 +2937,9 @@ Method in class hudson.util.<A HREF="./hudson/util/ErrorObject.html" title="clas
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/HudsonIsLoading.html#doDynamic(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDynamic(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/HudsonIsLoading.html" title="class in hudson.util">HudsonIsLoading</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/AbstractProject.html#doEnable(org.kohsuke.stapler.StaplerResponse)"><B>doEnable(StaplerResponse)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#doExit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doExit(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
@@ -4608,6 +4623,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in h
 <DT><A HREF="./hudson/model/AbstractProject.html#getBuildTriggerUpstreamProjects()"><B>getBuildTriggerUpstreamProjects()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Returns only those upstream projects that defines <A HREF="./hudson/tasks/BuildTrigger.html" title="class in hudson.tasks"><CODE>BuildTrigger</CODE></A> to this project.
+<DT><A HREF="./hudson/model/AbstractBuild.html#getBuildVariableResolver()"><B>getBuildVariableResolver()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>
+<DD>Creates <A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util"><CODE>VariableResolver</CODE></A> backed by <A HREF="./hudson/model/AbstractBuild.html#getBuildVariables()"><CODE>AbstractBuild.getBuildVariables()</CODE></A>.
 <DT><A HREF="./hudson/matrix/MatrixRun.html#getBuildVariables()"><B>getBuildVariables()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixRun.html" title="class in hudson.matrix">MatrixRun</A>
 <DD>&nbsp;
@@ -4714,6 +4732,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.MasterComputer.html"
 <DT><A HREF="./hudson/slaves/SlaveComputer.html#getChannel()"><B>getChannel()</B></A> - 
 Method in class hudson.slaves.<A HREF="./hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Run.html#getCharset()"><B>getCharset()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
+<DD>Gets the charset in which the log file is written.
 <DT><A HREF="./hudson/Functions.html#getCheckUrl(java.lang.String, java.lang.Object, java.lang.String)"><B>getCheckUrl(String, Object, String)</B></A> - 
 Method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
 <DD>Determines the form validation check URL.
@@ -4941,6 +4962,15 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/LogRotator.html" title="cla
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/LogRotator.html#getDaysToKeepStr()"><B>getDaysToKeepStr()</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/LogRotator.html" title="class in hudson.tasks">LogRotator</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Computer.html#getDefaultCharset()"><B>getDefaultCharset()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
+<DD>Gets the default charset of this computer.
+<DT><A HREF="./hudson/model/Hudson.MasterComputer.html#getDefaultCharset()"><B>getDefaultCharset()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.MasterComputer.html" title="class in hudson.model">Hudson.MasterComputer</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/slaves/SlaveComputer.html#getDefaultCharset()"><B>getDefaultCharset()</B></A> - 
+Method in class hudson.slaves.<A HREF="./hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/ParameterDefinition.html#getDefaultParameterValue()"><B>getDefaultParameterValue()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>
@@ -8749,7 +8779,10 @@ Constructor for class hudson.model.<A HREF="./hudson/model/Hudson.html" title="c
 <DT><A HREF="./hudson/fsp/package-summary.html"><B>hudson.fsp</B></A> - package hudson.fsp<DD>&nbsp;<DT><A HREF="./hudson/lifecycle/package-summary.html"><B>hudson.lifecycle</B></A> - package hudson.lifecycle<DD>&nbsp;<DT><A HREF="./hudson/model/Hudson.MasterComputer.html" title="class in hudson.model"><B>Hudson.MasterComputer</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/matrix/package-summary.html"><B>hudson.matrix</B></A> - package hudson.matrix<DD>Matrix project<DT><A HREF="./hudson/maven/package-summary.html"><B>hudson.maven</B></A> - package hudson.maven<DD>Maven support.<DT><A HREF="./hudson/maven/reporters/package-summary.html"><B>hudson.maven.reporters</B></A> - package hudson.maven.reporters<DD>&nbsp;<DT><A HREF="./hudson/model/package-summary.html"><B>hudson.model</B></A> - package hudson.model<DD>Core object model that are bound to URLs via stapler, rooted at <a href="./hudson/model/Hudson.html"><tt>Hudson</tt></a>.<DT><A HREF="./hudson/model/listeners/package-summary.html"><B>hudson.model.listeners</B></A> - package hudson.model.listeners<DD>Listener interfaces for various events that occur inside the server.<DT><A HREF="./hudson/node_monitors/package-summary.html"><B>hudson.node_monitors</B></A> - package hudson.node_monitors<DD>Code that monitors the health of slaves<DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/package-summary.html"><B>hudson.org.apache.tools.ant.taskdefs</B></A> - package hudson.org.apache.tools.ant.taskdefs<DD>&nbsp;<DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/cvslib/package-summary.html"><B>hudson.org.apache.tools.ant.taskdefs.cvslib</B></A> - package hudson.org.apache.tools.ant.taskdefs.cvslib<DD>Fork of Ant CVS <tt>changelog</tt> task to work around issues.<DT><A HREF="./hudson/scheduler/package-summary.html"><B>hudson.scheduler</B></A> - package hudson.scheduler<DD>Classes that implement cron-like features<DT><A HREF="./hudson/scm/package-summary.html"><B>hudson.scm</B></A> - package hudson.scm<DD>Hudson's interface with source code management systems.<DT><A HREF="./hudson/scm/browsers/package-summary.html"><B>hudson.scm.browsers</B></A> - package hudson.scm.browsers<DD>Code that computes links to external source code repository browsers.<DT><A HREF="./hudson/search/package-summary.html"><B>hudson.search</B></A> - package hudson.search<DD><a href="http://docs.blacktree.com/quicksilver/what_is_quicksilver">QuickSilver</a>-like
 search/jump capability for better navigation around the website.<DT><A HREF="./hudson/security/package-summary.html"><B>hudson.security</B></A> - package hudson.security<DD>Security-related code<DT><A HREF="./hudson/slaves/package-summary.html"><B>hudson.slaves</B></A> - package hudson.slaves<DD>Code related to slaves.<DT><A HREF="./hudson/tasks/package-summary.html"><B>hudson.tasks</B></A> - package hudson.tasks<DD>Built-in <a href="./hudson/tasks/Builder.html"><tt>Builder</tt></a>s and <a href="./hudson/tasks/Publisher.html"><tt>Publisher</tt></a>s
 that perform the actual heavy-lifting of a build.<DT><A HREF="./hudson/tasks/junit/package-summary.html"><B>hudson.tasks.junit</B></A> - package hudson.tasks.junit<DD>Model objects that represent JUnit test reports.<DT><A HREF="./hudson/tasks/labelers/package-summary.html"><B>hudson.tasks.labelers</B></A> - package hudson.tasks.labelers<DD>&nbsp;<DT><A HREF="./hudson/tasks/test/package-summary.html"><B>hudson.tasks.test</B></A> - package hudson.tasks.test<DD>Defines contracts that need to be implemented by a test reporting
-action (such as the built-in JUnit one).<DT><A HREF="./hudson/triggers/package-summary.html"><B>hudson.triggers</B></A> - package hudson.triggers<DD>Built-in <a href="./hudson/triggers/Trigger.html"><tt>Trigger</tt></a>s that run periodically to kick a new build.<DT><A HREF="./hudson/util/package-summary.html"><B>hudson.util</B></A> - package hudson.util<DD>Other miscellaneous utility code<DT><A HREF="./hudson/util/spring/package-summary.html"><B>hudson.util.spring</B></A> - package hudson.util.spring<DD>Spring Bean Builder by using Groovy.<DT><A HREF="./hudson/widgets/package-summary.html"><B>hudson.widgets</B></A> - package hudson.widgets<DD>&nbsp;<DT><A HREF="./hudson/model/Messages.html#Hudson_BadPortNumber(java.lang.Object)"><B>Hudson_BadPortNumber(Object)</B></A> - 
+action (such as the built-in JUnit one).<DT><A HREF="./hudson/triggers/package-summary.html"><B>hudson.triggers</B></A> - package hudson.triggers<DD>Built-in <a href="./hudson/triggers/Trigger.html"><tt>Trigger</tt></a>s that run periodically to kick a new build.<DT><A HREF="./hudson/util/package-summary.html"><B>hudson.util</B></A> - package hudson.util<DD>Other miscellaneous utility code<DT><A HREF="./hudson/util/spring/package-summary.html"><B>hudson.util.spring</B></A> - package hudson.util.spring<DD>Spring Bean Builder by using Groovy.<DT><A HREF="./hudson/widgets/package-summary.html"><B>hudson.widgets</B></A> - package hudson.widgets<DD>&nbsp;<DT><A HREF="./hudson/model/Messages.html#Hudson_AdministerPermission_Description()"><B>Hudson_AdministerPermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission grants the ability to make system-wide configuration changes, as well as perform highly sensitive operations that amounts to full local system access (within the scope granted by the underlying OS.)
+<DT><A HREF="./hudson/model/Messages.html#Hudson_BadPortNumber(java.lang.Object)"><B>Hudson_BadPortNumber(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Bad port number {0}
 <DT><A HREF="./hudson/model/Messages.html#Hudson_Computer_Caption()"><B>Hudson_Computer_Caption()</B></A> - 
@@ -8800,6 +8833,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#Hudson_Permissions_Title()"><B>Hudson_Permissions_Title()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Overall
+<DT><A HREF="./hudson/model/Messages.html#Hudson_ReadPermission_Description()"><B>Hudson_ReadPermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>The read permission is necessary for viewing almost all pages of Hudson.
 <DT><A HREF="./hudson/model/Messages.html#Hudson_UnsafeChar(java.lang.Object)"><B>Hudson_UnsafeChar(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>''{0}'' is an unsafe character
@@ -10122,6 +10158,9 @@ Variable in class hudson.util.<A HREF="./hudson/util/KeyedDataStorage.html" titl
 <DT><A HREF="./hudson/Util.html#loadFile(java.io.File)"><B>loadFile(File)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
 <DD>Loads the contents of a file into a string.
+<DT><A HREF="./hudson/Util.html#loadFile(java.io.File, java.nio.charset.Charset)"><B>loadFile(File, Charset)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.HudsonUserDetailsService.html#loadUserByUsername(java.lang.String)"><B>loadUserByUsername(String)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecurityRealm.HudsonUserDetailsService.html" title="class in hudson.security">HudsonPrivateSecurityRealm.HudsonUserDetailsService</A>
 <DD>&nbsp;
@@ -11043,7 +11082,7 @@ Static variable in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.h
 <DD>When a plugin dependency is specified without giving a version,
  the semantics of that is the latest released plugin.
 <DT><A HREF="./hudson/util/VariableResolver.html#NONE"><B>NONE</B></A> - 
-Static variable in interface hudson.util.<A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>
+Static variable in class hudson.util.<A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util">VariableResolver</A>
 <DD>Empty resolver that always returns null.
 <DT><A HREF="./hudson/slaves/RetentionStrategy.html#NOOP"><B>NOOP</B></A> - 
 Static variable in class hudson.slaves.<A HREF="./hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>
@@ -11483,9 +11522,13 @@ Constructor for class hudson.<A HREF="./hudson/PermalinkList.html" title="class 
  which allows plugins to define additional permalinks in the project.<DT><A HREF="./hudson/model/PermalinkProjectAction.Permalink.html" title="class in hudson.model"><B>PermalinkProjectAction.Permalink</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/PermalinkProjectAction.Permalink.html#PermalinkProjectAction.Permalink()"><B>PermalinkProjectAction.Permalink()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/PermalinkProjectAction.Permalink.html" title="class in hudson.model">PermalinkProjectAction.Permalink</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/security/Permission.html" title="class in hudson.security"><B>Permission</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD>Permission, which represents activity that requires a security privilege.<DT><A HREF="./hudson/security/Permission.html#Permission(hudson.security.PermissionGroup, java.lang.String, hudson.security.Permission)"><B>Permission(PermissionGroup, String, Permission)</B></A> - 
+<DT><A HREF="./hudson/security/Permission.html" title="class in hudson.security"><B>Permission</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD>Permission, which represents activity that requires a security privilege.<DT><A HREF="./hudson/security/Permission.html#Permission(hudson.security.PermissionGroup, java.lang.String, org.jvnet.localizer.Localizable, hudson.security.Permission)"><B>Permission(PermissionGroup, String, Localizable, Permission)</B></A> - 
 Constructor for class hudson.security.<A HREF="./hudson/security/Permission.html" title="class in hudson.security">Permission</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/security/Permission.html#Permission(hudson.security.PermissionGroup, java.lang.String, hudson.security.Permission)"><B>Permission(PermissionGroup, String, Permission)</B></A> - 
+Constructor for class hudson.security.<A HREF="./hudson/security/Permission.html" title="class in hudson.security">Permission</A>
+<DD><B>Deprecated.</B>&nbsp;<I>since 1.257.
+      Use <A HREF="./hudson/security/Permission.html#Permission(hudson.security.PermissionGroup, java.lang.String, org.jvnet.localizer.Localizable, hudson.security.Permission)"><CODE>Permission.Permission(PermissionGroup, String, Localizable, Permission)</CODE></A></I>
 <DT><A HREF="./hudson/security/SparseACL.Entry.html#permission"><B>permission</B></A> - 
 Variable in class hudson.security.<A HREF="./hudson/security/SparseACL.Entry.html" title="class in hudson.security">SparseACL.Entry</A>
 <DD>&nbsp;
@@ -12122,6 +12165,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in h
 <DT><A HREF="./hudson/MarkupText.SubText.html#replace(java.lang.String)"><B>replace(String)</B></A> - 
 Method in class hudson.<A HREF="./hudson/MarkupText.SubText.html" title="class in hudson">MarkupText.SubText</A>
 <DD>Replaces the group tokens like "$0", "$1", and etc with their actual matches.
+<DT><A HREF="./hudson/util/VariableResolver.html#replaceAll(java.lang.String)"><B>replaceAll(String)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util">VariableResolver</A>
+<DD>Short for <code>Util.replaceMacro(text,this)</code>
 <DT><A HREF="./hudson/util/CopyOnWriteList.html#replaceBy(hudson.util.CopyOnWriteList)"><B>replaceBy(CopyOnWriteList&lt;? extends E&gt;)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>
 <DD>Completely replaces this list by the contents of the given list.
@@ -12181,6 +12227,9 @@ Method in class hudson.scm.<A HREF="./hudson/scm/SubversionSCM.html" title="clas
 <DT><A HREF="./hudson/util/FormFieldValidator.html#request"><B>request</B></A> - 
 Variable in class hudson.util.<A HREF="./hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/AbstractModelObject.html#requirePOST()"><B>requirePOST()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A>
+<DD>Convenience method to verify that the current request is a POST request.
 <DT><A HREF="./hudson/scm/SCM.html#requiresWorkspaceForPolling()"><B>requiresWorkspaceForPolling()</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/SCM.html" title="class in hudson.scm">SCM</A>
 <DD>Returns true if this SCM requires a checked out workspace for doing polling.
@@ -12213,7 +12262,7 @@ Static method in class hudson.tasks.<A HREF="./hudson/tasks/UserNameResolver.htm
 Method in class hudson.util.<A HREF="./hudson/util/VariableResolver.ByMap.html" title="class in hudson.util">VariableResolver.ByMap</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/VariableResolver.html#resolve(java.lang.String)"><B>resolve(String)</B></A> - 
-Method in interface hudson.util.<A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>
+Method in class hudson.util.<A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util">VariableResolver</A>
 <DD>Receives a variable name and obtains the value associated with the name.
 <DT><A HREF="./hudson/util/VariableResolver.Union.html#resolve(java.lang.String)"><B>resolve(String)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/VariableResolver.Union.html" title="class in hudson.util">VariableResolver.Union</A>
@@ -12459,6 +12508,9 @@ Constructor for class hudson.model.<A HREF="./hudson/model/Run.Summary.html" tit
 <DT><A HREF="./hudson/model/Messages.html#Run_BuildAborted()"><B>Run_BuildAborted()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Build was aborted
+<DT><A HREF="./hudson/model/Messages.html#Run_DeletePermission_Description()"><B>Run_DeletePermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission allows users to manually delete specific builds from the build history.
 <DT><A HREF="./hudson/model/Messages.html#Run_MarkedExplicitly()"><B>Run_MarkedExplicitly()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>explicitly marked to keep the record
@@ -12468,6 +12520,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#Run_UnableToDelete(java.lang.Object, java.lang.Object)"><B>Run_UnableToDelete(Object, Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Unable to delete {0}: {1}
+<DT><A HREF="./hudson/model/Messages.html#Run_UpdatePermission_Description()"><B>Run_UpdatePermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission allows users to update description and other properties of a build, for example to leave notes about the cause of a build failure.
 <DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html#runCommand(org.apache.tools.ant.types.Commandline)"><B>runCommand(Commandline)</B></A> - 
 Method in class hudson.org.apache.tools.ant.taskdefs.<A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html" title="class in hudson.org.apache.tools.ant.taskdefs">AbstractCvsTask</A>
 <DD>Sets up the environment for toExecute and then runs it.
@@ -12583,6 +12638,9 @@ Constructor for class hudson.scm.<A HREF="./hudson/scm/SCM.html" title="class in
 <DT><A HREF="./hudson/scm/Messages.html#SCM_Permissions_Title()"><B>SCM_Permissions_Title()</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
 <DD>SCM
+<DT><A HREF="./hudson/scm/Messages.html#SCM_TagPermission_Description()"><B>SCM_TagPermission_Description()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>This permission allows users to create a new tag in the source code repository for a given build.
 <DT><A HREF="./hudson/scm/SCMDescriptor.html" title="class in hudson.scm"><B>SCMDescriptor</B></A>&lt;<A HREF="./hudson/scm/SCMDescriptor.html" title="type parameter in SCMDescriptor">T</A> extends <A HREF="./hudson/scm/SCM.html" title="class in hudson.scm">SCM</A>&gt; - Class in <A HREF="./hudson/scm/package-summary.html">hudson.scm</A><DD><A HREF="./hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="./hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A>.<DT><A HREF="./hudson/scm/SCMDescriptor.html#SCMDescriptor(java.lang.Class, java.lang.Class)"><B>SCMDescriptor(Class&lt;T&gt;, Class&lt;? extends RepositoryBrowser&gt;)</B></A> - 
 Constructor for class hudson.scm.<A HREF="./hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A>
 <DD>&nbsp;
@@ -13280,6 +13338,9 @@ Constructor for class hudson.model.<A HREF="./hudson/model/StreamBuildListener.h
 <DT><A HREF="./hudson/model/StreamBuildListener.html#StreamBuildListener(java.io.PrintStream)"><B>StreamBuildListener(PrintStream)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/StreamBuildListener.html" title="class in hudson.model">StreamBuildListener</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/StreamBuildListener.html#StreamBuildListener(java.io.PrintStream, java.nio.charset.Charset)"><B>StreamBuildListener(PrintStream, Charset)</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/StreamBuildListener.html" title="class in hudson.model">StreamBuildListener</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/StreamCopyThread.html" title="class in hudson.util"><B>StreamCopyThread</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD><CODE>Thread</CODE> that copies <CODE>InputStream</CODE> to <CODE>OutputStream</CODE>.<DT><A HREF="./hudson/util/StreamCopyThread.html#StreamCopyThread(java.lang.String, java.io.InputStream, java.io.OutputStream)"><B>StreamCopyThread(String, InputStream, OutputStream)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/StreamCopyThread.html" title="class in hudson.util">StreamCopyThread</A>
 <DD>&nbsp;
@@ -13485,6 +13546,9 @@ Constructor for class hudson.node_monitors.<A HREF="./hudson/node_monitors/SwapS
 <DT><A HREF="./hudson/node_monitors/SwapSpaceMonitor.MemoryUsage2.html" title="class in hudson.node_monitors"><B>SwapSpaceMonitor.MemoryUsage2</B></A> - Class in <A HREF="./hudson/node_monitors/package-summary.html">hudson.node_monitors</A><DD>Memory Usage.<DT><A HREF="./hudson/node_monitors/SwapSpaceMonitor.MemoryUsage2.html#SwapSpaceMonitor.MemoryUsage2(org.jvnet.hudson.MemoryUsage)"><B>SwapSpaceMonitor.MemoryUsage2(MemoryUsage)</B></A> - 
 Constructor for class hudson.node_monitors.<A HREF="./hudson/node_monitors/SwapSpaceMonitor.MemoryUsage2.html" title="class in hudson.node_monitors">SwapSpaceMonitor.MemoryUsage2</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/node_monitors/Messages.html#SwapSpaceMonitor_displayName()"><B>SwapSpaceMonitor_displayName()</B></A> - 
+Static method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/Messages.html" title="class in hudson.node_monitors">Messages</A>
+<DD>Free Swap Space
 <DT><A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html#synchronousPolling"><B>synchronousPolling</B></A> - 
 Variable in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A>
 <DD>Whether the projects should be polled all in one go in the order of dependencies.
@@ -14307,11 +14371,14 @@ Method in class hudson.util.<A HREF="./hudson/util/ListBoxModel.html" title="cla
 Static method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
 <DD>Returns an array containing the constants of this enum type, in
 the order they are declared.
-<DT><A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util"><B>VariableResolver</B></A>&lt;<A HREF="./hudson/util/VariableResolver.html" title="type parameter in VariableResolver">V</A>&gt; - Interface in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Resolves variables to its value, while encapsulating
- how that resolution happens.<DT><A HREF="./hudson/util/VariableResolver.ByMap.html" title="class in hudson.util"><B>VariableResolver.ByMap</B></A>&lt;<A HREF="./hudson/util/VariableResolver.ByMap.html" title="type parameter in VariableResolver.ByMap">V</A>&gt; - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD><A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> backed by a <CODE>Map</CODE>.<DT><A HREF="./hudson/util/VariableResolver.ByMap.html#VariableResolver.ByMap(java.util.Map)"><B>VariableResolver.ByMap(Map&lt;String, V&gt;)</B></A> - 
+<DT><A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util"><B>VariableResolver</B></A>&lt;<A HREF="./hudson/util/VariableResolver.html" title="type parameter in VariableResolver">V</A>&gt; - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Resolves variables to its value, while encapsulating
+ how that resolution happens.<DT><A HREF="./hudson/util/VariableResolver.html#VariableResolver()"><B>VariableResolver()</B></A> - 
+Constructor for class hudson.util.<A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util">VariableResolver</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/util/VariableResolver.ByMap.html" title="class in hudson.util"><B>VariableResolver.ByMap</B></A>&lt;<A HREF="./hudson/util/VariableResolver.ByMap.html" title="type parameter in VariableResolver.ByMap">V</A>&gt; - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD><A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util"><CODE>VariableResolver</CODE></A> backed by a <CODE>Map</CODE>.<DT><A HREF="./hudson/util/VariableResolver.ByMap.html#VariableResolver.ByMap(java.util.Map)"><B>VariableResolver.ByMap(Map&lt;String, V&gt;)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/VariableResolver.ByMap.html" title="class in hudson.util">VariableResolver.ByMap</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/util/VariableResolver.Union.html" title="class in hudson.util"><B>VariableResolver.Union</B></A>&lt;<A HREF="./hudson/util/VariableResolver.Union.html" title="type parameter in VariableResolver.Union">V</A>&gt; - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Union of multiple <A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A>.<DT><A HREF="./hudson/util/VariableResolver.Union.html#VariableResolver.Union(hudson.util.VariableResolver...)"><B>VariableResolver.Union(VariableResolver&lt;? extends V&gt;...)</B></A> - 
+<DT><A HREF="./hudson/util/VariableResolver.Union.html" title="class in hudson.util"><B>VariableResolver.Union</B></A>&lt;<A HREF="./hudson/util/VariableResolver.Union.html" title="type parameter in VariableResolver.Union">V</A>&gt; - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Union of multiple <A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util"><CODE>VariableResolver</CODE></A>.<DT><A HREF="./hudson/util/VariableResolver.Union.html#VariableResolver.Union(hudson.util.VariableResolver...)"><B>VariableResolver.Union(VariableResolver&lt;? extends V&gt;...)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/VariableResolver.Union.html" title="class in hudson.util">VariableResolver.Union</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/VariableResolver.Union.html#VariableResolver.Union(java.util.Collection)"><B>VariableResolver.Union(Collection&lt;? extends VariableResolver&lt;? extends V&gt;&gt;)</B></A> - 
@@ -14345,7 +14412,16 @@ Constructor for class hudson.model.<A HREF="./hudson/model/View.html" title="cla
 <DT><A HREF="./hudson/model/View.People.html" title="class in hudson.model"><B>View.People</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/View.People.html#View.People()"><B>View.People()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/View.People.html" title="class in hudson.model">View.People</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/View.UserInfo.html" title="class in hudson.model"><B>View.UserInfo</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/Messages.html#View_Permissions_Title()"><B>View_Permissions_Title()</B></A> - 
+<DT><A HREF="./hudson/model/View.UserInfo.html" title="class in hudson.model"><B>View.UserInfo</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/Messages.html#View_ConfigurePermission_Description()"><B>View_ConfigurePermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission allows users to change the configuration of views.
+<DT><A HREF="./hudson/model/Messages.html#View_CreatePermission_Description()"><B>View_CreatePermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission allows users to create new views.
+<DT><A HREF="./hudson/model/Messages.html#View_DeletePermission_Description()"><B>View_DeletePermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission allows users to delete existing views.
+<DT><A HREF="./hudson/model/Messages.html#View_Permissions_Title()"><B>View_Permissions_Title()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>View
 <DT><A HREF="./hudson/model/Hudson.html#VIEW_RESOURCE_PATH"><B>VIEW_RESOURCE_PATH</B></A> - 
@@ -14670,6 +14746,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#_AbstractProject_BuildInProgress(java.lang.Object, java.lang.Object)"><B>_AbstractProject_BuildInProgress(Object, Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Build #{0} is already in progress{1}
+<DT><A HREF="./hudson/model/Messages.html#_AbstractProject_BuildPermission_Description()"><B>_AbstractProject_BuildPermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission grants the ability to start a new build.
 <DT><A HREF="./hudson/model/Messages.html#_AbstractProject_Disabled()"><B>_AbstractProject_Disabled()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Build disabled
@@ -14697,6 +14776,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#_AbstractProject_WorkspaceOffline()"><B>_AbstractProject_WorkspaceOffline()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Workspace is offline.
+<DT><A HREF="./hudson/model/Messages.html#_AbstractProject_WorkspacePermission_Description()"><B>_AbstractProject_WorkspacePermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission grants the ability to retrieve the contents of a workspace Hudson checked out for performing builds.
 <DT><A HREF="./hudson/tasks/test/Messages.html#_AbstractTestResultAction_getDisplayName()"><B>_AbstractTestResultAction_getDisplayName()</B></A> - 
 Static method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/Messages.html" title="class in hudson.tasks.test">Messages</A>
 <DD>Test Result
@@ -15000,6 +15082,9 @@ Method in class hudson.security.<A HREF="./hudson/security/SidACL.html" title="c
 <DT><A HREF="./hudson/maven/reporters/Messages.html#_HistoryWidgetImpl_Displayname()"><B>_HistoryWidgetImpl_Displayname()</B></A> - 
 Static method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/Messages.html" title="class in hudson.maven.reporters">Messages</A>
 <DD>Deployment History
+<DT><A HREF="./hudson/model/Messages.html#_Hudson_AdministerPermission_Description()"><B>_Hudson_AdministerPermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission grants the ability to make system-wide configuration changes, as well as perform highly sensitive operations that amounts to full local system access (within the scope granted by the underlying OS.)
 <DT><A HREF="./hudson/model/Messages.html#_Hudson_BadPortNumber(java.lang.Object)"><B>_Hudson_BadPortNumber(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Bad port number {0}
@@ -15051,6 +15136,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#_Hudson_Permissions_Title()"><B>_Hudson_Permissions_Title()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Overall
+<DT><A HREF="./hudson/model/Messages.html#_Hudson_ReadPermission_Description()"><B>_Hudson_ReadPermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>The read permission is necessary for viewing almost all pages of Hudson.
 <DT><A HREF="./hudson/model/Messages.html#_Hudson_UnsafeChar(java.lang.Object)"><B>_Hudson_UnsafeChar(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>''{0}'' is an unsafe character
@@ -15343,6 +15431,9 @@ Static method in class hudson.slaves.<A HREF="./hudson/slaves/Messages.html" tit
 <DT><A HREF="./hudson/model/Messages.html#_Run_BuildAborted()"><B>_Run_BuildAborted()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Build was aborted
+<DT><A HREF="./hudson/model/Messages.html#_Run_DeletePermission_Description()"><B>_Run_DeletePermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission allows users to manually delete specific builds from the build history.
 <DT><A HREF="./hudson/model/Messages.html#_Run_MarkedExplicitly()"><B>_Run_MarkedExplicitly()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>explicitly marked to keep the record
@@ -15352,9 +15443,15 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#_Run_UnableToDelete(java.lang.Object, java.lang.Object)"><B>_Run_UnableToDelete(Object, Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Unable to delete {0}: {1}
+<DT><A HREF="./hudson/model/Messages.html#_Run_UpdatePermission_Description()"><B>_Run_UpdatePermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission allows users to update description and other properties of a build, for example to leave notes about the cause of a build failure.
 <DT><A HREF="./hudson/scm/Messages.html#_SCM_Permissions_Title()"><B>_SCM_Permissions_Title()</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
 <DD>SCM
+<DT><A HREF="./hudson/scm/Messages.html#_SCM_TagPermission_Description()"><B>_SCM_TagPermission_Description()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>This permission allows users to create a new tag in the source code repository for a given build.
 <DT><A HREF="./hudson/triggers/Messages.html#_SCMTrigger_DisplayName()"><B>_SCMTrigger_DisplayName()</B></A> - 
 Static method in class hudson.triggers.<A HREF="./hudson/triggers/Messages.html" title="class in hudson.triggers">Messages</A>
 <DD>Poll SCM
@@ -15421,6 +15518,9 @@ Static method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/
 <DT><A HREF="./hudson/maven/reporters/Messages.html#_SurefireArchiver_Recording()"><B>_SurefireArchiver_Recording()</B></A> - 
 Static method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/Messages.html" title="class in hudson.maven.reporters">Messages</A>
 <DD>[HUDSON] Recording test results
+<DT><A HREF="./hudson/node_monitors/Messages.html#_SwapSpaceMonitor_displayName()"><B>_SwapSpaceMonitor_displayName()</B></A> - 
+Static method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/Messages.html" title="class in hudson.node_monitors">Messages</A>
+<DD>Free Swap Space
 <DT><A HREF="./hudson/tasks/junit/Messages.html#_TestResult_getChildTitle()"><B>_TestResult_getChildTitle()</B></A> - 
 Static method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/Messages.html" title="class in hudson.tasks.junit">Messages</A>
 <DD>Package
@@ -15472,6 +15572,15 @@ Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in h
 <DT><A HREF="./hudson/Messages.html#_Util_year(java.lang.Object)"><B>_Util_year(Object)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
 <DD>{0} yr
+<DT><A HREF="./hudson/model/Messages.html#_View_ConfigurePermission_Description()"><B>_View_ConfigurePermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission allows users to change the configuration of views.
+<DT><A HREF="./hudson/model/Messages.html#_View_CreatePermission_Description()"><B>_View_CreatePermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission allows users to create new views.
+<DT><A HREF="./hudson/model/Messages.html#_View_DeletePermission_Description()"><B>_View_DeletePermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission allows users to delete existing views.
 <DT><A HREF="./hudson/model/Messages.html#_View_Permissions_Title()"><B>_View_Permissions_Title()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>View

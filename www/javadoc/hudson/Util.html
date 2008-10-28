@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Util (Hudson core 1.256 API)
+Util (Hudson core 1.257 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-25">
+<META NAME="date" CONTENT="2008-10-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson core 1.256 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson core 1.256 API)";
+        parent.document.title="Util (Hudson core 1.257 API)";
     }
 }
 </SCRIPT>
@@ -462,6 +462,15 @@ Various utility methods that don't have more proper home.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Util.html#loadFile(java.io.File, java.nio.charset.Charset)">loadFile</A></B>(java.io.File&nbsp;logfile,
+         java.nio.charset.Charset&nbsp;charset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String[]</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Util.html#mapToEnv(java.util.Map)">mapToEnv</A></B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;m)</CODE>
 
@@ -506,7 +515,7 @@ Various utility methods that don't have more proper home.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Util.html#replaceMacro(java.lang.String, hudson.util.VariableResolver)">replaceMacro</A></B>(java.lang.String&nbsp;s,
-             <A HREF="../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;java.lang.String&gt;&nbsp;resolver)</CODE>
+             <A HREF="../hudson/util/VariableResolver.html" title="class in hudson.util">VariableResolver</A>&lt;java.lang.String&gt;&nbsp;resolver)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replaces the occurrence of '$key' by <tt>resolver.get('key')</tt>.</TD>
@@ -711,7 +720,7 @@ public static java.lang.String <B>replaceMacro</B>(java.lang.String&nbsp;s,
 replaceMacro</H3>
 <PRE>
 public static java.lang.String <B>replaceMacro</B>(java.lang.String&nbsp;s,
-                                            <A HREF="../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;java.lang.String&gt;&nbsp;resolver)</PRE>
+                                            <A HREF="../hudson/util/VariableResolver.html" title="class in hudson.util">VariableResolver</A>&lt;java.lang.String&gt;&nbsp;resolver)</PRE>
 <DL>
 <DD>Replaces the occurrence of '$key' by <tt>resolver.get('key')</tt>.
 
@@ -732,6 +741,21 @@ public static java.lang.String <B>loadFile</B>(java.io.File&nbsp;logfile)
 <DL>
 <DD>Loads the contents of a file into a string.
 <P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="loadFile(java.io.File, java.nio.charset.Charset)"><!-- --></A><H3>
+loadFile</H3>
+<PRE>
+public static java.lang.String <B>loadFile</B>(java.io.File&nbsp;logfile,
+                                        java.nio.charset.Charset&nbsp;charset)
+                                 throws java.io.IOException</PRE>
+<DL>
 <DD><DL>
 
 <DT><B>Throws:</B>

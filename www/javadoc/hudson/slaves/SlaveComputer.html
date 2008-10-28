@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SlaveComputer (Hudson core 1.256 API)
+SlaveComputer (Hudson core 1.257 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-25">
+<META NAME="date" CONTENT="2008-10-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SlaveComputer (Hudson core 1.256 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SlaveComputer (Hudson core 1.256 API)";
+        parent.document.title="SlaveComputer (Hudson core 1.257 API)";
     }
 }
 </SCRIPT>
@@ -194,6 +194,14 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the channel that can be used to run a program on this computer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.nio.charset.Charset</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#getDefaultCharset()">getDefaultCharset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the default charset of this computer.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -376,7 +384,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/AbstractModelObject.html#getSearch()">getSearch</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchIndex()">getSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchName()">getSearchName</A>, <A HREF="../../hudson/model/AbstractModelObject.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/AbstractModelObject.html#getSearch()">getSearch</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchIndex()">getSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchName()">getSearchName</A>, <A HREF="../../hudson/model/AbstractModelObject.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#requirePOST()">requirePOST</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -645,6 +653,24 @@ public <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Computer.html#getChannel()">getChannel</A></CODE> in class <CODE><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>never null when <A HREF="../../hudson/model/Computer.html#isOffline()"><CODE>Computer.isOffline()</CODE></A>==false.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDefaultCharset()"><!-- --></A><H3>
+getDefaultCharset</H3>
+<PRE>
+public java.nio.charset.Charset <B>getDefaultCharset</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Computer.html#getDefaultCharset()">Computer</A></CODE></B></DD>
+<DD>Gets the default charset of this computer.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Computer.html#getDefaultCharset()">getDefaultCharset</A></CODE> in class <CODE><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></DL>
 </DD>
 <DD><DL>
 

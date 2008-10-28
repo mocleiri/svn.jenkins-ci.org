@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Permission (Hudson core 1.256 API)
+Permission (Hudson core 1.257 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-25">
+<META NAME="date" CONTENT="2008-10-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Permission (Hudson core 1.256 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Permission (Hudson core 1.256 API)";
+        parent.document.title="Permission (Hudson core 1.257 API)";
     }
 }
 </SCRIPT>
@@ -150,6 +150,14 @@ Permission, which represents activity that requires a security privilege.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/Permission.html#description">description</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Human-readable description of this permission.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/Permission.html#FULL_CONTROL">FULL_CONTROL</A></B></CODE>
 
@@ -231,12 +239,22 @@ Permission, which represents activity that requires a security privilege.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/security/Permission.html#Permission(hudson.security.PermissionGroup, java.lang.String, org.jvnet.localizer.Localizable, hudson.security.Permission)">Permission</A></B>(<A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security">PermissionGroup</A>&nbsp;group,
+           java.lang.String&nbsp;name,
+           org.jvnet.localizer.Localizable&nbsp;description,
+           <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;impliedBy)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/security/Permission.html#Permission(hudson.security.PermissionGroup, java.lang.String, hudson.security.Permission)">Permission</A></B>(<A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security">PermissionGroup</A>&nbsp;group,
            java.lang.String&nbsp;name,
            <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;impliedBy)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 1.257.
+      Use <A HREF="../../hudson/security/Permission.html#Permission(hudson.security.PermissionGroup, java.lang.String, org.jvnet.localizer.Localizable, hudson.security.Permission)"><CODE>Permission(PermissionGroup, String, Localizable, Permission)</CODE></A></I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -337,6 +355,23 @@ public final java.lang.String <B>name</B></PRE>
  its owner class. The name must be a valid Java identifier.
  <p>
  The expected naming convention is something like "BrowseWorkspace".
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="description"><!-- --></A><H3>
+description</H3>
+<PRE>
+public final org.jvnet.localizer.Localizable <B>description</B></PRE>
+<DL>
+<DD>Human-readable description of this permission.
+ Used as a tooltip to explain this permission, so this message
+ should be a couple of sentences long.
+
+ <p>
+ If null, there will be no description text.
 <P>
 <DL>
 </DL>
@@ -468,6 +503,17 @@ public static final <A HREF="../../hudson/security/Permission.html" title="class
 </TR>
 </TABLE>
 
+<A NAME="Permission(hudson.security.PermissionGroup, java.lang.String, org.jvnet.localizer.Localizable, hudson.security.Permission)"><!-- --></A><H3>
+Permission</H3>
+<PRE>
+public <B>Permission</B>(<A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security">PermissionGroup</A>&nbsp;group,
+                  java.lang.String&nbsp;name,
+                  org.jvnet.localizer.Localizable&nbsp;description,
+                  <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;impliedBy)</PRE>
+<DL>
+</DL>
+<HR>
+
 <A NAME="Permission(hudson.security.PermissionGroup, java.lang.String, hudson.security.Permission)"><!-- --></A><H3>
 Permission</H3>
 <PRE>
@@ -475,6 +521,9 @@ public <B>Permission</B>(<A HREF="../../hudson/security/PermissionGroup.html" ti
                   java.lang.String&nbsp;name,
                   <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;impliedBy)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>since 1.257.
+      Use <A HREF="../../hudson/security/Permission.html#Permission(hudson.security.PermissionGroup, java.lang.String, org.jvnet.localizer.Localizable, hudson.security.Permission)"><CODE>Permission(PermissionGroup, String, Localizable, Permission)</CODE></A></I>
+<P>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->

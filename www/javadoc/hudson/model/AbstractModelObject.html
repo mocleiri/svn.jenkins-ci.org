@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractModelObject (Hudson core 1.256 API)
+AbstractModelObject (Hudson core 1.257 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-25">
+<META NAME="date" CONTENT="2008-10-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractModelObject (Hudson core 1.256 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractModelObject (Hudson core 1.256 API)";
+        parent.document.title="AbstractModelObject (Hudson core 1.257 API)";
     }
 }
 </SCRIPT>
@@ -179,6 +179,14 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractModelObject.html#requirePOST()">requirePOST</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience method to verify that the current request is a POST request.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A></B>(java.lang.Exception&nbsp;e,
           org.kohsuke.stapler.StaplerRequest&nbsp;req,
           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
@@ -294,6 +302,25 @@ protected final void <B>sendError</B>(java.lang.String&nbsp;message,
 <DT><B>Throws:</B>
 <DD><CODE>javax.servlet.ServletException</CODE>
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="requirePOST()"><!-- --></A><H3>
+requirePOST</H3>
+<PRE>
+protected final void <B>requirePOST</B>()
+                          throws javax.servlet.ServletException</PRE>
+<DL>
+<DD>Convenience method to verify that the current request is a POST request.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <HR>
