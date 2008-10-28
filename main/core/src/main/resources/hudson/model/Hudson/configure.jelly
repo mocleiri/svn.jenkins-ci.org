@@ -121,6 +121,17 @@
       <local:globalConfig className="hudson.tasks.BuildStep" field="PUBLISHERS" />
       <local:globalConfig className="hudson.model.Jobs" field="PROPERTIES" />
 
+      <j:if test="${!empty(h.getNodeFactoryDescriptors())}">
+        <f:section title="${%Grid}">
+          <f:block>
+            <f:hetero-list name="nodeFactory" hasHeader="true"
+                           descriptors="${h.getNodeFactoryDescriptors()}"
+                           items="${it.nodeFactories}"
+                           addCaption="${%Add a new grid}"/>
+          </f:block>
+        </f:section>
+      </j:if>
+
       <f:block>
         <f:submit value="${%Save}" />
       </f:block>

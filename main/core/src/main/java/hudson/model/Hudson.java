@@ -1604,6 +1604,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
      * Accepts submission from the configuration page.
      */
     public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        BulkChange bc = new BulkChange(this);
         try {
             checkPermission(ADMINISTER);
 
@@ -1701,6 +1702,8 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             for( JSONObject o : StructuredForm.toList(json,"plugin"))
                 pluginManager.getPlugin(o.getString("name")).getPlugin().configure(o);
 
+            nodeFactories.rebuildHetero(req,json,NodeFactory.ALL,"nodeFactory");
+
             save();
             if(result)
                 rsp.sendRedirect(req.getContextPath()+'/');  // go to the top page
@@ -1708,6 +1711,8 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
                 rsp.sendRedirect("configure"); // back to config
         } catch (FormException e) {
             sendError(e,req,rsp);
+        } finally {
+            bc.commit();
         }
     }
 
@@ -1722,27 +1727,6 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         JSONObject js = json.has(name) ? json.getJSONObject(name) : new JSONObject(); // if it doesn't have the property, the method returns invalid null object.
         json.putAll(js);
         return d.configure(req, js);
-    }
-
-    /**
-     * Accepts submission from the configuration page.
-     */
-    public synchronized void doConfigExecutorsSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        checkPermission(ADMINISTER);
-
-        BulkChange bc = new BulkChange(this);
-        try {
-            JSONObject json = req.getSubmittedForm();
-
-            nodeFactories.rebuildHetero(req,json,NodeFactory.ALL,"nodeFactory");
-        } catch (FormException e) {
-            rsp.setStatus(SC_BAD_REQUEST);
-            sendError(e, req, rsp);
-        } finally {
-            bc.commit();
-        }
-
-        rsp.sendRedirect(req.getContextPath()+'/');  // go to the top page
     }
 
     /**
