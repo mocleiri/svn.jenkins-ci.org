@@ -327,9 +327,10 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
     /**
      * Secrete key generated once and used for a long time, beyond
-     * container start/stop.
+     * container start/stop. Persisted outside <tt>config.xml</tt> to avoid
+     * accidental exposure.
      */
-    private final String secretKey;
+    private transient final String secretKey;
 
     private transient final UpdateCenter updateCenter = new UpdateCenter();
 
