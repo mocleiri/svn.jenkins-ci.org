@@ -1,6 +1,7 @@
 package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
+import com.trilead.ssh2.crypto.digest.SHA1;
 import hudson.FeedAdapter;
 import hudson.FilePath;
 import hudson.Functions;
@@ -102,6 +103,10 @@ import javax.servlet.http.HttpServletResponse;
 import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 import javax.servlet.http.HttpSession;
+import javax.crypto.SecretKey;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -110,6 +115,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.security.SecureRandom;
+import java.security.MessageDigest;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -449,7 +455,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
      * This value is useful for implementing some of the security features.
      */
     public String getSecretKey() {
-        return  secretKey;
+        return secretKey;
     }
 
     /**
