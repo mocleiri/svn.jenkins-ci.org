@@ -122,10 +122,13 @@ function registerValidator(e) {
  *      onclick handler
  */
 function makeButton(e,onclick) {
+    var h = e.onclick;
     var clsName = e.className;
     var btn = new YAHOO.widget.Button(e,{});
     if(onclick!=null)
         btn.addListener("click",onclick);
+    if(h!=null)
+        btn.addListener("click",h);
     Element.addClassName(btn.get("element"),clsName);
     return btn;
 }
