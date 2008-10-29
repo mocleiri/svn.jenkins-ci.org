@@ -474,4 +474,48 @@ public abstract class FormFieldValidator {
             ok();
         }
     }
+
+    /**
+     * Verifies that the 'value' parameter is correct base64 encoded text.
+     *
+     * @since 1.257
+     */
+    public static class Base64 extends FormFieldValidator {
+        private final boolean allowWhitespace;
+        private final boolean allowEmpty;
+        private final String errorMessage;
+
+        public Base64(StaplerRequest request, StaplerResponse response, boolean allowWhitespace, boolean allowEmpty, String errorMessage) {
+            super(request, response, false);
+            this.allowWhitespace = allowWhitespace;
+            this.allowEmpty = allowEmpty;
+            this.errorMessage = errorMessage;
+        }
+
+        protected void check() throws IOException, ServletException {
+            try {
+                String v = request.getParameter("value");
+                if(!allowWhitespace) {
+                    if(v.indexOf(' ')>=0 || v.indexOf('\n')>=0) {
+                        fail();
+                        return;
+                    }
+                }
+                v=v.trim();
+                if(!allowEmpty && v.length()==0) {
+                    fail();
+                    return;
+                }
+                
+                com.trilead.ssh2.crypto.Base64.decode(v.toCharArray());
+                ok();
+            } catch (IOException e) {
+                fail();
+            }
+        }
+
+        protected void fail() throws IOException, ServletException {
+            error(errorMessage);
+        }
+    }
 }
