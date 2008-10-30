@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.Stapler;
 
 /**
  * Base class that provides the framework for doing on-the-fly form field validation.
@@ -56,15 +57,33 @@ public abstract class FormFieldValidator {
         this(request, response, adminOnly?Hudson.getInstance():null, adminOnly?CHECK:null);
     }
 
+    /**
+     * @deprecated
+     *      Use {@link #FormFieldValidator(Permission)} and remove {@link StaplerRequest} and {@link StaplerResponse}
+     *      from your "doCheck..." method parameter
+     */
     protected FormFieldValidator(StaplerRequest request, StaplerResponse response, Permission permission) {
         this(request,response,Hudson.getInstance(),permission);
     }
 
+    protected FormFieldValidator(Permission permission) {
+        this(Stapler.getCurrentRequest(),Stapler.getCurrentResponse(),permission);
+    }
+
+    /**
+     * @deprecated
+     *      Use {@link #FormFieldValidator(AccessControlled,Permission)} and remove {@link StaplerRequest} and {@link StaplerResponse}
+     *      from your "doCheck..." method parameter
+     */
     protected FormFieldValidator(StaplerRequest request, StaplerResponse response, AccessControlled subject, Permission permission) {
         this.request = request;
         this.response = response;
         this.subject = subject;
         this.permission = permission;
+    }
+
+    protected FormFieldValidator(AccessControlled subject, Permission permission) {
+        this(Stapler.getCurrentRequest(),Stapler.getCurrentResponse(),subject,permission);
     }
 
     /**
