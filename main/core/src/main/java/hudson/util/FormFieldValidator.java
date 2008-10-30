@@ -108,7 +108,11 @@ public abstract class FormFieldValidator {
     public void warning(String message) throws IOException, ServletException {
         warningWithMarkup(message==null?null:Util.escape(message));
     }
-    
+
+    public void ok(String message) throws IOException, ServletException {
+        okWithMarkup(message==null?null:Util.escape(message));
+    }
+
     /**
      * Sends out a string error message that indicates an error,
      * by formatting it with {@link String#format(String, Object[])}
@@ -119,6 +123,10 @@ public abstract class FormFieldValidator {
 
     public void warning(String format, Object... args) throws IOException, ServletException {
         warning(String.format(format,args));
+    }
+
+    public void ok(String format, Object... args) throws IOException, ServletException {
+        ok(String.format(format,args));
     }
 
     /**
@@ -138,6 +146,10 @@ public abstract class FormFieldValidator {
 
     public void warningWithMarkup(String message) throws IOException, ServletException {
         _errorWithMarkup(message,"warning");
+    }
+
+    public void okWithMarkup(String message) throws IOException, ServletException {
+        _errorWithMarkup(message,"ok");
     }
 
     private void _errorWithMarkup(String message, String cssClass) throws IOException, ServletException {
