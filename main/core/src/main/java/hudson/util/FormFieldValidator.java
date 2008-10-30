@@ -66,6 +66,10 @@ public abstract class FormFieldValidator {
         this(request,response,Hudson.getInstance(),permission);
     }
 
+    /**
+     * @param permission
+     *      Permission needed to perform this validation, or null if no permission is necessary.
+     */
     protected FormFieldValidator(Permission permission) {
         this(Stapler.getCurrentRequest(),Stapler.getCurrentResponse(),permission);
     }
