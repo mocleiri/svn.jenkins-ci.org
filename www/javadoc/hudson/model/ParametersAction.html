@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ParametersAction (Hudson core 1.257 API)
+ParametersAction (Hudson core 1.258 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-28">
+<META NAME="date" CONTENT="2008-10-30">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParametersAction (Hudson core 1.257 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParametersAction (Hudson core 1.257 API)";
+        parent.document.title="ParametersAction (Hudson core 1.258 API)";
     }
 }
 </SCRIPT>
@@ -162,11 +162,11 @@ Records the parameter values used for a build.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/util/VariableResolver.html" title="class in hudson.util">VariableResolver</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ParametersAction.html#createVariableResolver(hudson.model.AbstractBuild)">createVariableResolver</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates an <A HREF="../../hudson/util/VariableResolver.html" title="class in hudson.util"><CODE>VariableResolver</CODE></A> that aggregates all the parameters.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates an <A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> that aggregates all the parameters.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -316,9 +316,9 @@ public java.lang.String <B>substitute</B>(<A HREF="../../hudson/model/AbstractBu
 <A NAME="createVariableResolver(hudson.model.AbstractBuild)"><!-- --></A><H3>
 createVariableResolver</H3>
 <PRE>
-public <A HREF="../../hudson/util/VariableResolver.html" title="class in hudson.util">VariableResolver</A>&lt;java.lang.String&gt; <B>createVariableResolver</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</PRE>
+public <A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;java.lang.String&gt; <B>createVariableResolver</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</PRE>
 <DL>
-<DD>Creates an <A HREF="../../hudson/util/VariableResolver.html" title="class in hudson.util"><CODE>VariableResolver</CODE></A> that aggregates all the parameters.
+<DD>Creates an <A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> that aggregates all the parameters.
 <P>
 <DD><DL>
 </DL>
@@ -446,7 +446,8 @@ public java.lang.String <B>getUrlName</B>()</PRE>
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>null if this action object doesn't need to be bound to web.</DL>
+<DT><B>Returns:</B><DD>null if this action object doesn't need to be bound to web
+      (when you do that, be sure to also return null from <A HREF="../../hudson/model/Action.html#getIconFileName()"><CODE>Action.getIconFileName()</CODE></A>.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

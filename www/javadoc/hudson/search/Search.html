@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Search (Hudson core 1.257 API)
+Search (Hudson core 1.258 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-28">
+<META NAME="date" CONTENT="2008-10-30">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Search (Hudson core 1.257 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Search (Hudson core 1.257 API)";
+        parent.document.title="Search (Hudson core 1.258 API)";
     }
 }
 </SCRIPT>
@@ -187,7 +187,7 @@ Web-bound object that serves QuickSilver-like search requests.
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/search/Search.html#doSuggestOpenSearch(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doSuggestOpenSearch</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                     org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                    java.lang.String&nbsp;query)</CODE>
+                    java.lang.String&nbsp;q)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used by OpenSearch auto-completion.</TD>
@@ -281,8 +281,8 @@ doSuggestOpenSearch</H3>
 <PRE>
 public void <B>doSuggestOpenSearch</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                                <FONT SIZE="-1">@QueryParameter(value="q")</FONT>
-                                java.lang.String&nbsp;query)
+                                <FONT SIZE="-1">@QueryParameter</FONT>
+                                java.lang.String&nbsp;q)
                          throws java.io.IOException,
                                 javax.servlet.ServletException</PRE>
 <DL>
@@ -308,7 +308,7 @@ doSuggest</H3>
 <PRE>
 public void <B>doSuggest</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                       org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                      <FONT SIZE="-1">@QueryParameter(value="query")</FONT>
+                      <FONT SIZE="-1">@QueryParameter</FONT>
                       java.lang.String&nbsp;query)
                throws java.io.IOException,
                       javax.servlet.ServletException</PRE>

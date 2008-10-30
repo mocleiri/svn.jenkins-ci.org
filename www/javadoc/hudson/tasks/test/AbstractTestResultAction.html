@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractTestResultAction (Hudson core 1.257 API)
+AbstractTestResultAction (Hudson core 1.258 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-28">
+<META NAME="date" CONTENT="2008-10-30">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractTestResultAction (Hudson core 1.257 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractTestResultAction (Hudson core 1.257 API)";
+        parent.document.title="AbstractTestResultAction (Hudson core 1.258 API)";
     }
 }
 </SCRIPT>
@@ -458,7 +458,8 @@ public java.lang.String <B>getUrlName</B>()</PRE>
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>null if this action object doesn't need to be bound to web.</DL>
+<DT><B>Returns:</B><DD>null if this action object doesn't need to be bound to web
+      (when you do that, be sure to also return null from <A HREF="../../../hudson/model/Action.html#getIconFileName()"><CODE>Action.getIconFileName()</CODE></A>.</DL>
 </DD>
 </DL>
 <HR>

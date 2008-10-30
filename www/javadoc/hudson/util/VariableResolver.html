@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-VariableResolver (Hudson core 1.257 API)
+VariableResolver (Hudson core 1.258 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-28">
+<META NAME="date" CONTENT="2008-10-30">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ VariableResolver (Hudson core 1.257 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="VariableResolver (Hudson core 1.257 API)";
+        parent.document.title="VariableResolver (Hudson core 1.258 API)";
     }
 }
 </SCRIPT>
@@ -77,9 +77,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -91,17 +91,13 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <FONT SIZE="-1">
 hudson.util</FONT>
 <BR>
-Class VariableResolver&lt;V&gt;</H2>
-<PRE>
-java.lang.Object
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.VariableResolver&lt;V&gt;</B>
-</PRE>
+Interface VariableResolver&lt;V&gt;</H2>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/util/VariableResolver.ByMap.html" title="class in hudson.util">VariableResolver.ByMap</A>, <A HREF="../../hudson/util/VariableResolver.Union.html" title="class in hudson.util">VariableResolver.Union</A></DD>
+<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/util/VariableResolver.ByMap.html" title="class in hudson.util">VariableResolver.ByMap</A>, <A HREF="../../hudson/util/VariableResolver.Union.html" title="class in hudson.util">VariableResolver.Union</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>VariableResolver&lt;V&gt;</B><DT>extends java.lang.Object</DL>
+<DT><PRE>public interface <B>VariableResolver&lt;V&gt;</B></DL>
 </PRE>
 
 <P>
@@ -131,7 +127,7 @@ Resolves variables to its value, while encapsulating
 <TD><CODE><B><A HREF="../../hudson/util/VariableResolver.ByMap.html" title="class in hudson.util">VariableResolver.ByMap</A>&lt;<A HREF="../../hudson/util/VariableResolver.ByMap.html" title="type parameter in VariableResolver.ByMap">V</A>&gt;</B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/util/VariableResolver.html" title="class in hudson.util"><CODE>VariableResolver</CODE></A> backed by a <CODE>Map</CODE>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> backed by a <CODE>Map</CODE>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -139,7 +135,7 @@ Resolves variables to its value, while encapsulating
 <TD><CODE><B><A HREF="../../hudson/util/VariableResolver.Union.html" title="class in hudson.util">VariableResolver.Union</A>&lt;<A HREF="../../hudson/util/VariableResolver.Union.html" title="type parameter in VariableResolver.Union">V</A>&gt;</B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Union of multiple <A HREF="../../hudson/util/VariableResolver.html" title="class in hudson.util"><CODE>VariableResolver</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Union of multiple <A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A>.</TD>
 </TR>
 </TABLE>
 &nbsp;<!-- =========== FIELD SUMMARY =========== -->
@@ -152,27 +148,11 @@ Resolves variables to its value, while encapsulating
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../hudson/util/VariableResolver.html" title="class in hudson.util">VariableResolver</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/VariableResolver.html#NONE">NONE</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empty resolver that always returns null.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-
-<A NAME="constructor_summary"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-<B>Constructor Summary</B></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/util/VariableResolver.html#VariableResolver()">VariableResolver</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -186,28 +166,11 @@ Resolves variables to its value, while encapsulating
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/util/VariableResolver.html#replaceAll(java.lang.String)">replaceAll</A></B>(java.lang.String&nbsp;text)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short for <code>Util.replaceMacro(text,this)</code></TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../../hudson/util/VariableResolver.html" title="type parameter in VariableResolver">V</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/util/VariableResolver.html" title="type parameter in VariableResolver">V</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/VariableResolver.html#resolve(java.lang.String)">resolve</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives a variable name and obtains the value associated with the name.</TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -226,29 +189,12 @@ Resolves variables to its value, while encapsulating
 <A NAME="NONE"><!-- --></A><H3>
 NONE</H3>
 <PRE>
-public static final <A HREF="../../hudson/util/VariableResolver.html" title="class in hudson.util">VariableResolver</A> <B>NONE</B></PRE>
+static final <A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A> <B>NONE</B></PRE>
 <DL>
 <DD>Empty resolver that always returns null.
 <P>
 <DL>
 </DL>
-</DL>
-
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-
-<A NAME="constructor_detail"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
-<B>Constructor Detail</B></FONT></TH>
-</TR>
-</TABLE>
-
-<A NAME="VariableResolver()"><!-- --></A><H3>
-VariableResolver</H3>
-<PRE>
-public <B>VariableResolver</B>()</PRE>
-<DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -264,7 +210,7 @@ public <B>VariableResolver</B>()</PRE>
 <A NAME="resolve(java.lang.String)"><!-- --></A><H3>
 resolve</H3>
 <PRE>
-public abstract <A HREF="../../hudson/util/VariableResolver.html" title="type parameter in VariableResolver">V</A> <B>resolve</B>(java.lang.String&nbsp;name)</PRE>
+<A HREF="../../hudson/util/VariableResolver.html" title="type parameter in VariableResolver">V</A> <B>resolve</B>(java.lang.String&nbsp;name)</PRE>
 <DL>
 <DD>Receives a variable name and obtains the value associated with the name.
 
@@ -280,19 +226,6 @@ public abstract <A HREF="../../hudson/util/VariableResolver.html" title="type pa
       marker syntax.
 <DT><B>Returns:</B><DD>Object referenced by the name.
       Null if not found.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="replaceAll(java.lang.String)"><!-- --></A><H3>
-replaceAll</H3>
-<PRE>
-public final java.lang.String <B>replaceAll</B>(java.lang.String&nbsp;text)</PRE>
-<DL>
-<DD>Short for <code>Util.replaceMacro(text,this)</code>
-<P>
-<DD><DL>
-</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
@@ -347,9 +280,9 @@ public final java.lang.String <B>replaceAll</B>(java.lang.String&nbsp;text)</PRE
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>

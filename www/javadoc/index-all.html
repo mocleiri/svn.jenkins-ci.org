@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.257 API)
+Index (Hudson core 1.258 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-28">
+<META NAME="date" CONTENT="2008-10-30">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.257 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.257 API)";
+        parent.document.title="Index (Hudson core 1.258 API)";
     }
 }
 </SCRIPT>
@@ -2106,10 +2106,10 @@ Method in class hudson.model.<A HREF="./hudson/model/StringParameterDefinition.h
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/ParametersAction.html#createVariableResolver(hudson.model.AbstractBuild)"><B>createVariableResolver(AbstractBuild&lt;?, ?&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParametersAction.html" title="class in hudson.model">ParametersAction</A>
-<DD>Creates an <A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util"><CODE>VariableResolver</CODE></A> that aggregates all the parameters.
+<DD>Creates an <A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> that aggregates all the parameters.
 <DT><A HREF="./hudson/model/ParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)"><B>createVariableResolver(AbstractBuild&lt;?, ?&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>
-<DD>Returns a <A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util"><CODE>VariableResolver</CODE></A> so that other components like <A HREF="./hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A>s
+<DD>Returns a <A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> so that other components like <A HREF="./hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A>s
  can perform variable substitution to reflect parameter values into the build process.
 <DT><A HREF="./hudson/model/StringParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)"><B>createVariableResolver(AbstractBuild&lt;?, ?&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/StringParameterValue.html" title="class in hudson.model">StringParameterValue</A>
@@ -4625,7 +4625,7 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title
 <DD>Returns only those upstream projects that defines <A HREF="./hudson/tasks/BuildTrigger.html" title="class in hudson.tasks"><CODE>BuildTrigger</CODE></A> to this project.
 <DT><A HREF="./hudson/model/AbstractBuild.html#getBuildVariableResolver()"><B>getBuildVariableResolver()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>
-<DD>Creates <A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util"><CODE>VariableResolver</CODE></A> backed by <A HREF="./hudson/model/AbstractBuild.html#getBuildVariables()"><CODE>AbstractBuild.getBuildVariables()</CODE></A>.
+<DD>Creates <A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> backed by <A HREF="./hudson/model/AbstractBuild.html#getBuildVariables()"><CODE>AbstractBuild.getBuildVariables()</CODE></A>.
 <DT><A HREF="./hudson/matrix/MatrixRun.html#getBuildVariables()"><B>getBuildVariables()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixRun.html" title="class in hudson.matrix">MatrixRun</A>
 <DD>&nbsp;
@@ -11082,7 +11082,7 @@ Static variable in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.h
 <DD>When a plugin dependency is specified without giving a version,
  the semantics of that is the latest released plugin.
 <DT><A HREF="./hudson/util/VariableResolver.html#NONE"><B>NONE</B></A> - 
-Static variable in class hudson.util.<A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util">VariableResolver</A>
+Static variable in interface hudson.util.<A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>
 <DD>Empty resolver that always returns null.
 <DT><A HREF="./hudson/slaves/RetentionStrategy.html#NOOP"><B>NOOP</B></A> - 
 Static variable in class hudson.slaves.<A HREF="./hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>
@@ -12165,9 +12165,6 @@ Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in h
 <DT><A HREF="./hudson/MarkupText.SubText.html#replace(java.lang.String)"><B>replace(String)</B></A> - 
 Method in class hudson.<A HREF="./hudson/MarkupText.SubText.html" title="class in hudson">MarkupText.SubText</A>
 <DD>Replaces the group tokens like "$0", "$1", and etc with their actual matches.
-<DT><A HREF="./hudson/util/VariableResolver.html#replaceAll(java.lang.String)"><B>replaceAll(String)</B></A> - 
-Method in class hudson.util.<A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util">VariableResolver</A>
-<DD>Short for <code>Util.replaceMacro(text,this)</code>
 <DT><A HREF="./hudson/util/CopyOnWriteList.html#replaceBy(hudson.util.CopyOnWriteList)"><B>replaceBy(CopyOnWriteList&lt;? extends E&gt;)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>
 <DD>Completely replaces this list by the contents of the given list.
@@ -12262,7 +12259,7 @@ Static method in class hudson.tasks.<A HREF="./hudson/tasks/UserNameResolver.htm
 Method in class hudson.util.<A HREF="./hudson/util/VariableResolver.ByMap.html" title="class in hudson.util">VariableResolver.ByMap</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/VariableResolver.html#resolve(java.lang.String)"><B>resolve(String)</B></A> - 
-Method in class hudson.util.<A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util">VariableResolver</A>
+Method in interface hudson.util.<A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>
 <DD>Receives a variable name and obtains the value associated with the name.
 <DT><A HREF="./hudson/util/VariableResolver.Union.html#resolve(java.lang.String)"><B>resolve(String)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/VariableResolver.Union.html" title="class in hudson.util">VariableResolver.Union</A>
@@ -14371,14 +14368,11 @@ Method in class hudson.util.<A HREF="./hudson/util/ListBoxModel.html" title="cla
 Static method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
 <DD>Returns an array containing the constants of this enum type, in
 the order they are declared.
-<DT><A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util"><B>VariableResolver</B></A>&lt;<A HREF="./hudson/util/VariableResolver.html" title="type parameter in VariableResolver">V</A>&gt; - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Resolves variables to its value, while encapsulating
- how that resolution happens.<DT><A HREF="./hudson/util/VariableResolver.html#VariableResolver()"><B>VariableResolver()</B></A> - 
-Constructor for class hudson.util.<A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util">VariableResolver</A>
-<DD>&nbsp;
-<DT><A HREF="./hudson/util/VariableResolver.ByMap.html" title="class in hudson.util"><B>VariableResolver.ByMap</B></A>&lt;<A HREF="./hudson/util/VariableResolver.ByMap.html" title="type parameter in VariableResolver.ByMap">V</A>&gt; - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD><A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util"><CODE>VariableResolver</CODE></A> backed by a <CODE>Map</CODE>.<DT><A HREF="./hudson/util/VariableResolver.ByMap.html#VariableResolver.ByMap(java.util.Map)"><B>VariableResolver.ByMap(Map&lt;String, V&gt;)</B></A> - 
+<DT><A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util"><B>VariableResolver</B></A>&lt;<A HREF="./hudson/util/VariableResolver.html" title="type parameter in VariableResolver">V</A>&gt; - Interface in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Resolves variables to its value, while encapsulating
+ how that resolution happens.<DT><A HREF="./hudson/util/VariableResolver.ByMap.html" title="class in hudson.util"><B>VariableResolver.ByMap</B></A>&lt;<A HREF="./hudson/util/VariableResolver.ByMap.html" title="type parameter in VariableResolver.ByMap">V</A>&gt; - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD><A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> backed by a <CODE>Map</CODE>.<DT><A HREF="./hudson/util/VariableResolver.ByMap.html#VariableResolver.ByMap(java.util.Map)"><B>VariableResolver.ByMap(Map&lt;String, V&gt;)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/VariableResolver.ByMap.html" title="class in hudson.util">VariableResolver.ByMap</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/util/VariableResolver.Union.html" title="class in hudson.util"><B>VariableResolver.Union</B></A>&lt;<A HREF="./hudson/util/VariableResolver.Union.html" title="type parameter in VariableResolver.Union">V</A>&gt; - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Union of multiple <A HREF="./hudson/util/VariableResolver.html" title="class in hudson.util"><CODE>VariableResolver</CODE></A>.<DT><A HREF="./hudson/util/VariableResolver.Union.html#VariableResolver.Union(hudson.util.VariableResolver...)"><B>VariableResolver.Union(VariableResolver&lt;? extends V&gt;...)</B></A> - 
+<DT><A HREF="./hudson/util/VariableResolver.Union.html" title="class in hudson.util"><B>VariableResolver.Union</B></A>&lt;<A HREF="./hudson/util/VariableResolver.Union.html" title="type parameter in VariableResolver.Union">V</A>&gt; - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Union of multiple <A HREF="./hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A>.<DT><A HREF="./hudson/util/VariableResolver.Union.html#VariableResolver.Union(hudson.util.VariableResolver...)"><B>VariableResolver.Union(VariableResolver&lt;? extends V&gt;...)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/VariableResolver.Union.html" title="class in hudson.util">VariableResolver.Union</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/VariableResolver.Union.html#VariableResolver.Union(java.util.Collection)"><B>VariableResolver.Union(Collection&lt;? extends VariableResolver&lt;? extends V&gt;&gt;)</B></A> - 
