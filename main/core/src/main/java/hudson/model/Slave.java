@@ -11,7 +11,6 @@ import hudson.slaves.RetentionStrategy;
 import hudson.slaves.CommandLauncher;
 import hudson.slaves.JNLPLauncher;
 import hudson.slaves.SlaveComputer;
-import hudson.slaves.NodeDescriptor;
 import hudson.slaves.DumbSlave;
 import hudson.model.Descriptor.FormException;
 import hudson.remoting.Callable;
@@ -97,9 +96,14 @@ public abstract class Slave implements Node, Serializable {
     @DataBoundConstructor
     public Slave(String name, String description, String remoteFS, String numExecutors,
                  Mode mode, String label, ComputerLauncher launcher, RetentionStrategy retentionStrategy) throws FormException {
+        this(name,description,remoteFS,Util.tryParseNumber(numExecutors, 1).intValue(),mode,label,launcher,retentionStrategy);
+    }
+
+    public Slave(String name, String description, String remoteFS, int numExecutors,
+                 Mode mode, String label, ComputerLauncher launcher, RetentionStrategy retentionStrategy) throws FormException {
         this.name = name;
         this.description = description;
-        this.numExecutors = Util.tryParseNumber(numExecutors, 1).intValue();
+        this.numExecutors = numExecutors;
         this.mode = mode;
         this.remoteFS = remoteFS;
         this.label = Util.fixNull(label).trim();
