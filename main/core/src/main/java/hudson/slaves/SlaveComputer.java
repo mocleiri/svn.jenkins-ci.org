@@ -391,6 +391,8 @@ public class SlaveComputer extends Computer {
      * This is useful for {@link SlaveComputer}s for clouds for example, where one normally needs
      * additional pre-launch step (such as waiting for the provisioned node to become available)
      * before the user specified launch step (like SSH connection) kicks in.
+     *
+     * @see ComputerLauncherFilter
      */
     protected ComputerLauncher grabLauncher(Node node) {
         return ((Slave)node).getLauncher();
