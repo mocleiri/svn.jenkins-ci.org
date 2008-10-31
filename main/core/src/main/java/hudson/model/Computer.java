@@ -343,7 +343,7 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     }
 
     /**
-     * Returns the time when this computer first became idle.
+     * Returns the time when this computer last became idle.
      *
      * <p>
      * If this computer is already idle, the return value will point to the
