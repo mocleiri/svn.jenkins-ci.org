@@ -65,18 +65,12 @@ public abstract class RetentionStrategy<T extends Computer> implements Describab
         public Always() {
         }
 
-        /**
-         * {@inheritDoc}
-         */
         public long check(SlaveComputer c) {
             if (c.isOffline() && c.isLaunchSupported())
                 c.tryReconnect();
             return 1;
         }
 
-        /**
-         * {@inheritDoc}
-         */
         public DescriptorImpl getDescriptor() {
             return DESCRIPTOR;
         }
@@ -91,9 +85,6 @@ public abstract class RetentionStrategy<T extends Computer> implements Describab
                 super(Always.class);
             }
 
-            /**
-             * {@inheritDoc}
-             */
             public String getDisplayName() {
                 return Messages.RetentionStrategy_Always_displayName();
             }
@@ -147,9 +138,6 @@ public abstract class RetentionStrategy<T extends Computer> implements Describab
 
         public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
-        /**
-         * {@inheritDoc}
-         */
         public synchronized long check(SlaveComputer c) {
             if (c.isOffline()) {
                 final long demandMilliseconds = System.currentTimeMillis() - c.getDemandStartMilliseconds();
@@ -172,9 +160,6 @@ public abstract class RetentionStrategy<T extends Computer> implements Describab
             return 1;
         }
 
-        /**
-         * {@inheritDoc}
-         */
         public Descriptor<RetentionStrategy<?>> getDescriptor() {
             return DESCRIPTOR;
         }
@@ -187,9 +172,6 @@ public abstract class RetentionStrategy<T extends Computer> implements Describab
                 super(Demand.class);
             }
 
-            /**
-             * {@inheritDoc}
-             */
             public String getDisplayName() {
                 return Messages.RetentionStrategy_Demand_displayName();
             }
