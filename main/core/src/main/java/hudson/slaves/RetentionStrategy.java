@@ -144,7 +144,7 @@ public abstract class RetentionStrategy<T extends Computer> implements Describab
                 if (demandMilliseconds > inDemandDelay * 1000 * 60 /*MINS->MILLIS*/) {
                     // we've been in demand for long enough
                     logger.log(Level.INFO, "Launching computer {0} as it has been in demand for {1}",
-                            new Object[]{c.getNode().getNodeName(), Util.getTimeSpanString(demandMilliseconds)});
+                            new Object[]{c.getName(), Util.getTimeSpanString(demandMilliseconds)});
                     if (c.isLaunchSupported())
                         c.launch();
                 }
@@ -153,7 +153,7 @@ public abstract class RetentionStrategy<T extends Computer> implements Describab
                 if (idleMilliseconds > idleDelay * 1000 * 60 /*MINS->MILLIS*/) {
                     // we've been idle for long enough
                     logger.log(Level.INFO, "Disconnecting computer {0} as it has been idle for {1}",
-                            new Object[]{c.getNode().getNodeName(), Util.getTimeSpanString(idleMilliseconds)});
+                            new Object[]{c.getName(), Util.getTimeSpanString(idleMilliseconds)});
                     c.disconnect();
                 }
             }
