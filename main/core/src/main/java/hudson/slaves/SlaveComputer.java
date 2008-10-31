@@ -46,6 +46,14 @@ public class SlaveComputer extends Computer {
     private volatile transient boolean acceptingTasks = true;
     private Charset defaultCharset;
     private Boolean isUnix;
+    /**
+     * Effective {@link ComputerLauncher} that hides the details of
+     * how we launch a slave agent on this computer.
+     *
+     * <p>
+     * This is normally the same as {@link Slave#getLauncher()} but
+     * can be different. See {@link #grabLauncher(Node)}. 
+     */
     private ComputerLauncher launcher;
 
     /**
@@ -365,13 +373,27 @@ public class SlaveComputer extends Computer {
     @Override
     protected void setNode(Node node) {
         super.setNode(node);
-        launcher = ((Slave)node).getLauncher();
+        launcher = grabLauncher(node);
 
         // maybe the configuration was changed to relaunch the slave, so try to re-launch now.
         // "launching==null" test is an ugly hack to avoid launching before the object is fully
         // constructed.
         if(launching!=null)
             launch();
+    }
+
+    /**
+     * Grabs a {@link ComputerLauncher} out of {@link Node} to keep it in this {@link Computer}.
+     * The returned launcher will be set to {@link #launcher} and used to carry out the actual launch operation.
+     *
+     * <p>
+     * Subtypes that needs to decorate {@link ComputerLauncher} can do so by overriding this method.
+     * This is useful for {@link SlaveComputer}s for clouds for example, where one normally needs
+     * additional pre-launch step (such as waiting for the provisioned node to become available)
+     * before the user specified launch step (like SSH connection) kicks in.
+     */
+    protected ComputerLauncher grabLauncher(Node node) {
+        return ((Slave)node).getLauncher();
     }
 
     private static final Logger logger = Logger.getLogger(SlaveComputer.class.getName());
