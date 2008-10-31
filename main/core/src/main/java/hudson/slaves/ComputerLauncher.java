@@ -15,6 +15,14 @@ import java.io.IOException;
  * Extension point to allow control over how {@link Computer}s are "launched",
  * meaning how they get connected to their slave agent program.
  *
+ * <h2>Associated View</h2>
+ * <dl>
+ * <dt>main.jelly</dt>
+ * <dd>
+ * This page will be rendered into the top page of the computer (/computer/NAME/)
+ * Useful for showing launch related commands and status reports.
+ * </dl>
+ *
  * <p>
  * <b>EXPERIMENTAL: SIGNATURE MAY CHANGE IN FUTURE RELEASES</b>
  *
