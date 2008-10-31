@@ -38,9 +38,9 @@
         </tr>
       </j:forEach>
 
-      <!-- let Cloud contribute fragments here -->
-      <j:forEach var="nf" items="${app.nodeFactories}">
-        <st:include it="${nf}" page="computerSet.jelly" optional="true" />
+      <!-- let clouds contribute fragments here -->
+      <j:forEach var="cloud" items="${app.clouds}">
+        <st:include it="${cloud}" page="computerSet.jelly" optional="true" />
       </j:forEach>
     </table>
     <j:if test="${app.hasPermission(app.ADMINISTER)}">
