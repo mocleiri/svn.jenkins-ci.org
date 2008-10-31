@@ -4,6 +4,7 @@ import hudson.ExtensionPoint;
 import hudson.model.Describable;
 import hudson.model.Hudson;
 import hudson.model.Node;
+import hudson.model.AbstractModelObject;
 import hudson.security.ACL;
 import hudson.security.AccessControlled;
 import hudson.security.Permission;
@@ -14,7 +15,7 @@ import hudson.util.DescriptorList;
  *
  * @author Kohsuke Kawaguchi
  */
-public abstract class Cloud implements ExtensionPoint, Describable<Cloud>, AccessControlled {
+public abstract class Cloud extends AbstractModelObject implements ExtensionPoint, Describable<Cloud>, AccessControlled {
 
     /**
      * Uniquely identifies this {@link Cloud} instance among other instances in {@link Hudson#clouds}.
@@ -23,6 +24,14 @@ public abstract class Cloud implements ExtensionPoint, Describable<Cloud>, Acces
 
     protected Cloud(String name) {
         this.name = name;
+    }
+
+    public String getDisplayName() {
+        return name;
+    }
+
+    public String getSearchUrl() {
+        return "cloud/"+name;
     }
 
     public ACL getACL() {
