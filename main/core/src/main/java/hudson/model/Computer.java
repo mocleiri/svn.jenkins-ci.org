@@ -292,7 +292,7 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     }
 
     /**
-     * Called to notify {@link Computer} that it will be discarded.
+     * Called by {@link Hudson#updateComputerList()} to notify {@link Computer} that it will be discarded.
      */
     protected void kill() {
         setNumExecutors(0);
@@ -532,6 +532,15 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     }
 
     /**
+     * Really deletes the slave.
+     */
+    public void doDoDelete(StaplerResponse rsp) throws IOException {
+        checkPermission(DELETE);
+        Hudson.getInstance().removeNode(getNode());
+        rsp.sendRedirect("..");
+    }
+
+    /**
      * Handles incremental log.
      */
     public void doProgressiveLog( StaplerRequest req, StaplerResponse rsp) throws IOException {
@@ -559,4 +568,5 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
 
     // TODO: define this as a separate permission?
     public static final Permission CONFIGURE = Hudson.CONFIGURE;
+    public static final Permission DELETE = Hudson.DELETE;
 }

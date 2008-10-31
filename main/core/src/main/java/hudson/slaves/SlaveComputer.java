@@ -279,18 +279,11 @@ public class SlaveComputer extends Computer {
                 // do this on another thread so that any lengthy disconnect operation
                 // (which could be typical) won't block UI thread.
                 StreamTaskListener listener = new StreamTaskListener(openLogFile());
-                _disconnect(listener);
+                launcher.beforeDisconnect(SlaveComputer.this, listener);
+                closeChannel();
+                launcher.afterDisconnect(SlaveComputer.this, listener);
             }
         });
-    }
-
-    /**
-     * Real meat of {@link #disconnect()}. Subclasses can override this method to customize disconnection behavior.
-     */
-    protected void _disconnect(StreamTaskListener listener) {
-        launcher.beforeDisconnect(this, listener);
-        closeChannel();
-        launcher.afterDisconnect(this, listener);
     }
 
     public void doLaunchSlaveAgent(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
