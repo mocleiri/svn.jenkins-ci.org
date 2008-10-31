@@ -5,11 +5,13 @@ import hudson.model.Hudson;
 import hudson.slaves.Cloud;
 import hudson.util.FormFieldValidator;
 import hudson.util.Secret;
+import hudson.util.StreamTaskListener;
 import hudson.scheduler.CronTabList;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.QueryParameter;
+import org.apache.commons.io.output.ByteArrayOutputStream;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -36,8 +38,8 @@ public class EC2Cloud extends Cloud {
     private final List<SlaveTemplate> templates;
 
     @DataBoundConstructor
-    public EC2Cloud(String name, String accessId, String secretKey, List<SlaveTemplate> templates) {
-        super(name);
+    public EC2Cloud(String accessId, String secretKey, List<SlaveTemplate> templates) {
+        super("ec2");
         this.accessId = accessId.trim();
         this.secretKey = Secret.fromString(secretKey.trim());
         this.templates = templates;
@@ -60,6 +62,31 @@ public class EC2Cloud extends Cloud {
 
     public List<SlaveTemplate> getTemplates() {
         return Collections.unmodifiableList(templates);
+    }
+
+    public SlaveTemplate getTemplate(String ami) {
+        for (SlaveTemplate t : templates)
+            if(t.ami.equals(ami))
+                return t;
+        return null;
+    }
+
+    public void doProvision(StaplerRequest req, StaplerResponse rsp, @QueryParameter String ami) throws ServletException, IOException {
+        checkPermission(PROVISION);
+        if(ami==null)   throw new ServletException("The 'ami' query parameter is missing");
+        SlaveTemplate t = getTemplate(ami);
+        if(t==null)
+            throw new ServletException("Invalid AMI: "+ami);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            EC2Slave node = t.provision(new StreamTaskListener(baos));
+            Hudson.getInstance().addNode(node);
+
+            rsp.sendRedirect2(req.getContextPath()+"/computer/"+node.getNodeName());
+        } catch (EC2Exception e) {
+            sendEr
+        }
     }
 
     public DescriptorImpl getDescriptor() {

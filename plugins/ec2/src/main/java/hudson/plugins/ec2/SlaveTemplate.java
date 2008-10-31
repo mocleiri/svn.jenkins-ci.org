@@ -50,6 +50,10 @@ public class SlaveTemplate implements Describable<SlaveTemplate> {
         return parent;
     }
 
+    public String getDisplayName() {
+        return description+" ("+ami+")";
+    }
+
     /**
      * Provisions a new EC2 slave.
      *
