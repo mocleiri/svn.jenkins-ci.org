@@ -1,0 +1,21 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <tr>
+    <td />
+    <td colspan="${monitors.size()+1}">
+      <f:form action="${rootURL}/cloud/${it.name}/provision" method="post" name="provision">
+        <!--f:submit value="${%submit}" /-->
+        <input type="submit" id="menubutton2" name="menubutton2_button" value="Menu Button 2" />
+        <select id="menubutton2select" name="menubutton2select">
+          <option value="0">One</option>
+          <option value="1">Two</option>
+          <option value="2">Three</option>
+        </select>
+        <script>
+          var oMenuButton2 = new YAHOO.widget.Button("menubutton2", {
+	                                        type: "menu",
+	                                        menu: "menubutton2select" });
+        </script>
+      </f:form>
+    </td>
+  </tr>
+</j:jelly>
