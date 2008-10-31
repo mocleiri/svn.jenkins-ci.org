@@ -23,6 +23,13 @@ public abstract class ComputerLauncherFilter extends ComputerLauncher {
         this.core = core;
     }
 
+    /**
+     * Returns the delegation target.
+     */
+    public ComputerLauncher getCore() {
+        return core;
+    }
+
     public boolean isLaunchSupported() {
         return core.isLaunchSupported();
     }
