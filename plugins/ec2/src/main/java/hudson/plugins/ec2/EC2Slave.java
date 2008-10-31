@@ -57,6 +57,14 @@ public final class EC2Slave extends Slave {
     }
 
     /**
+     * Gets the EC2 console output.
+     */
+    public String getConsoleOutput() throws EC2Exception {
+        Jec2 ec2 = EC2Cloud.get().connect();
+        return ec2.getConsoleOutput(getInstanceId()).getOutput();
+    }
+
+    /**
      * Terminates the instance in EC2.
      */
     public void terminate() {

@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.io.ObjectStreamException;
 import java.io.InvalidObjectException;
+import java.io.StringWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
@@ -73,19 +74,26 @@ public class EC2Cloud extends Cloud {
 
     public void doProvision(StaplerRequest req, StaplerResponse rsp, @QueryParameter String ami) throws ServletException, IOException {
         checkPermission(PROVISION);
-        if(ami==null)   throw new ServletException("The 'ami' query parameter is missing");
+        if(ami==null) {
+            sendError("The 'ami' query parameter is missing",req,rsp);
+            return;
+        }
         SlaveTemplate t = getTemplate(ami);
-        if(t==null)
-            throw new ServletException("Invalid AMI: "+ami);
+        if(t==null) {
+            sendError("No such AMI: "+ami,req,rsp);
+            return;
+        }
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        StringWriter sw = new StringWriter();
+        StreamTaskListener listener = new StreamTaskListener(sw);
         try {
-            EC2Slave node = t.provision(new StreamTaskListener(baos));
+            EC2Slave node = t.provision(listener);
             Hudson.getInstance().addNode(node);
 
             rsp.sendRedirect2(req.getContextPath()+"/computer/"+node.getNodeName());
         } catch (EC2Exception e) {
-            sendEr
+            e.printStackTrace(listener.error(e.getMessage()));
+            sendError(sw.toString(),req,rsp);
         }
     }
 
