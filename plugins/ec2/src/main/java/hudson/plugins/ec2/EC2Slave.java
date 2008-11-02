@@ -1,23 +1,19 @@
 package hudson.plugins.ec2;
 
+import com.xerox.amazonws.ec2.EC2Exception;
 import com.xerox.amazonws.ec2.InstanceType;
 import com.xerox.amazonws.ec2.Jec2;
-import com.xerox.amazonws.ec2.EC2Exception;
-import hudson.model.Descriptor.FormException;
-import hudson.model.Slave;
 import hudson.model.Computer;
+import hudson.model.Descriptor.FormException;
 import hudson.model.Hudson;
+import hudson.model.Slave;
 import hudson.slaves.ComputerLauncher;
 import hudson.slaves.NodeDescriptor;
-import hudson.slaves.RetentionStrategy;
-import hudson.slaves.SlaveComputer;
-import org.kohsuke.stapler.DataBoundConstructor;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.Collections;
-import java.util.logging.Logger;
-import java.util.logging.Level;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Slave running on EC2.
@@ -54,14 +50,6 @@ public final class EC2Slave extends Slave {
     @Override
     public Computer createComputer() {
         return new EC2Computer(this);
-    }
-
-    /**
-     * Gets the EC2 console output.
-     */
-    public String getConsoleOutput() throws EC2Exception {
-        Jec2 ec2 = EC2Cloud.get().connect();
-        return ec2.getConsoleOutput(getInstanceId()).getOutput();
     }
 
     /**
