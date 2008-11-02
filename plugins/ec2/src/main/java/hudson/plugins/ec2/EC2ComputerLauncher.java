@@ -29,7 +29,7 @@ public class EC2ComputerLauncher extends ComputerLauncherFilter {
             // wait until EC2 instance comes up and post console output
             boolean reportedWaiting = false;
             OUTER:
-        while(true) {
+            while(true) {
                 switch (computer.getState()) {
                     case PENDING:
                     case RUNNING:
