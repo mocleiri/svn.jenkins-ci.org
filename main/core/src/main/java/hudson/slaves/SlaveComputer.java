@@ -207,8 +207,26 @@ public class SlaveComputer extends Computer {
 
     private final Object channelLock = new Object();
 
+    public void setChannel(InputStream in, OutputStream out, TaskListener taskListener, Channel.Listener listener) throws IOException, InterruptedException {
+        setChannel(in,out,taskListener.getLogger(),listener);
+    }
+
     /**
      * Creates a {@link Channel} from the given stream and sets that to this slave.
+     *
+     * @param in
+     *      Stream connected to the remote "slave.jar". It's the caller's responsibility to do
+     *      buffering on this stream, if that's necessary.
+     * @param out
+     *      Stream connected to the remote peer. It's the caller's responsibility to do
+     *      buffering on this stream, if that's necessary.
+     * @param launchLog
+     *      If non-null, receive the portion of data in <tt>is</tt> before
+     *      the data goes into the "binary mode". This is useful
+     *      when the established communication channel might include some data that might
+     *      be useful for debugging/trouble-shooting.
+     * @param listener
+     *      Gets a notification when the channel closes, to perform clean up.
      */
     public void setChannel(InputStream in, OutputStream out, OutputStream launchLog, Channel.Listener listener) throws IOException, InterruptedException {
         if(this.channel!=null)
