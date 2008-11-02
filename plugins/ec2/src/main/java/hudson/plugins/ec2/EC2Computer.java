@@ -1,15 +1,12 @@
 package hudson.plugins.ec2;
 
+import com.xerox.amazonws.ec2.EC2Exception;
+import com.xerox.amazonws.ec2.Jec2;
+import com.xerox.amazonws.ec2.ReservationDescription;
+import com.xerox.amazonws.ec2.ReservationDescription.Instance;
 import hudson.slaves.SlaveComputer;
-import hudson.slaves.ComputerLauncher;
-import hudson.model.Node;
 
 import java.util.Collections;
-
-import com.xerox.amazonws.ec2.ReservationDescription.Instance;
-import com.xerox.amazonws.ec2.EC2Exception;
-import com.xerox.amazonws.ec2.ReservationDescription;
-import com.xerox.amazonws.ec2.Jec2;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -31,11 +28,6 @@ public class EC2Computer extends SlaveComputer {
 
     public String getInstanceId() {
         return getName();
-    }
-
-    @Override
-    protected ComputerLauncher grabLauncher(Node node) {
-        return new EC2ComputerLauncher(super.grabLauncher(node));
     }
 
     /**

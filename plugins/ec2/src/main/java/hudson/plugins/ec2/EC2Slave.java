@@ -9,6 +9,7 @@ import hudson.model.Hudson;
 import hudson.model.Slave;
 import hudson.slaves.ComputerLauncher;
 import hudson.slaves.NodeDescriptor;
+import hudson.plugins.ec2.ssh.EC2UnixLauncher;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -21,9 +22,9 @@ import java.util.logging.Logger;
  * @author Kohsuke Kawaguchi
  */
 public final class EC2Slave extends Slave {
-    public EC2Slave(String instanceId, String description, String remoteFS, InstanceType type, String label, ComputerLauncher launcher) throws FormException {
+    public EC2Slave(String instanceId, String description, String remoteFS, InstanceType type, String label) throws FormException {
         // TODO: retention policy for Amazon
-        super(instanceId, description, remoteFS, toNumExecutors(type), Mode.NORMAL, label, launcher, new EC2RetentionStrategy());
+        super(instanceId, description, remoteFS, toNumExecutors(type), Mode.NORMAL, label, new EC2UnixLauncher(), new EC2RetentionStrategy());
     }
 
     /**

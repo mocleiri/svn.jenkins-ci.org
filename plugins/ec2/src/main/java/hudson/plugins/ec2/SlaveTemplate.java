@@ -11,7 +11,6 @@ import hudson.model.Descriptor.FormException;
 import hudson.model.Hudson;
 import hudson.model.Node;
 import hudson.model.TaskListener;
-import hudson.slaves.ComputerLauncher;
 import hudson.util.FormFieldValidator;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
@@ -33,16 +32,14 @@ public class SlaveTemplate implements Describable<SlaveTemplate> {
     public final String remoteFS;
     public final InstanceType type;
     public final String label;
-    public final ComputerLauncher launcher;
     protected transient EC2Cloud parent;
 
     @DataBoundConstructor
-    public SlaveTemplate(String ami, String remoteFS, InstanceType type, String label, ComputerLauncher launcher, String description) {
+    public SlaveTemplate(String ami, String remoteFS, InstanceType type, String label, String description) {
         this.ami = ami;
         this.remoteFS = remoteFS;
         this.type = type;
         this.label = label;
-        this.launcher = launcher;
         this.description = description;
     }
     
@@ -68,7 +65,7 @@ public class SlaveTemplate implements Describable<SlaveTemplate> {
             logger.println("Launching "+ami);
             Instance inst = ec2.runInstances(ami, 1, 1, Collections.<String>emptyList(), null, "thekey", type).getInstances().get(0);
 
-            return new EC2Slave(inst.getInstanceId(),description,remoteFS,type,label,launcher);
+            return new EC2Slave(inst.getInstanceId(),description,remoteFS,type,label);
         } catch (FormException e) {
             throw new AssertionError(); // we should have discovered all configuration issues upfront
         }

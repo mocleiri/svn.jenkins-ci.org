@@ -1,32 +1,26 @@
 package hudson.plugins.ec2;
 
+import com.xerox.amazonws.ec2.EC2Exception;
+import com.xerox.amazonws.ec2.InstanceType;
+import com.xerox.amazonws.ec2.Jec2;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
 import hudson.slaves.Cloud;
 import hudson.util.FormFieldValidator;
 import hudson.util.Secret;
 import hudson.util.StreamTaskListener;
-import hudson.scheduler.CronTabList;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.QueryParameter;
-import org.apache.commons.io.output.ByteArrayOutputStream;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.io.ObjectStreamException;
-import java.io.InvalidObjectException;
 import java.io.StringWriter;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.logging.Level;
-
-import com.xerox.amazonws.ec2.Jec2;
-import com.xerox.amazonws.ec2.EC2Exception;
-import com.xerox.amazonws.ec2.InstanceType;
-import antlr.ANTLRException;
+import java.util.logging.Logger;
 
 /**
  * Hudson's view of EC2. 

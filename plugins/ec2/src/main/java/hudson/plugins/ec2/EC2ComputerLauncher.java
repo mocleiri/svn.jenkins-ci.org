@@ -1,6 +1,7 @@
 package hudson.plugins.ec2;
 
-import hudson.slaves.ComputerLauncherFilter;
+import com.xerox.amazonws.ec2.EC2Exception;
+import com.xerox.amazonws.ec2.ReservationDescription.Instance;
 import hudson.slaves.ComputerLauncher;
 import hudson.slaves.SlaveComputer;
 import hudson.util.StreamTaskListener;
@@ -8,23 +9,19 @@ import hudson.util.StreamTaskListener;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import com.xerox.amazonws.ec2.EC2Exception;
-
 /**
  * {@link ComputerLauncher} for EC2 that waits for the instance to really come up before proceeding to
  * the real user-specified {@link ComputerLauncher}.
  *
  * @author Kohsuke Kawaguchi
  */
-public class EC2ComputerLauncher extends ComputerLauncherFilter {
-    public EC2ComputerLauncher(ComputerLauncher core) {
-        super(core);
-    }
-
-    public void launch(SlaveComputer _computer, StreamTaskListener listener) throws IOException, InterruptedException {
+public abstract class EC2ComputerLauncher extends ComputerLauncher {
+    public void launch(SlaveComputer _computer, StreamTaskListener listener) {
         try {
-            EC2Computer computer = (EC2Computer) _computer;
+            EC2Computer computer = (EC2Computer)_computer;
             PrintStream logger = listener.getLogger();
+
+            Instance inst = computer.describeInstance();
 
             // wait until EC2 instance comes up and post console output
             boolean reportedWaiting = false;
@@ -51,9 +48,20 @@ public class EC2ComputerLauncher extends ComputerLauncherFilter {
                 }
             }
 
-            super.launch(computer, listener);
+            launch(computer, logger, inst);
         } catch (EC2Exception e) {
             e.printStackTrace(listener.error(e.getMessage()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
     }
+
+    /**
+     * Stage 2 of the launch. Called after the EC2 instance comes up.
+     */
+    protected abstract void launch(EC2Computer computer, PrintStream logger, Instance inst)
+            throws EC2Exception, IOException, InterruptedException;
 }
