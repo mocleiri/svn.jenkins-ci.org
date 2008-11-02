@@ -59,7 +59,6 @@ public class SlaveTemplate implements Describable<SlaveTemplate> {
      * @return always non-null. This needs to be then added to {@link Hudson#addNode(Node)}.
      */
     public EC2Slave provision(TaskListener listener) throws EC2Exception {
-        // TODO: key handling
         PrintStream logger = listener.getLogger();
         Jec2 ec2 = getParent().connect();
 
