@@ -21,6 +21,7 @@ import hudson.util.ClockDifference;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.apache.commons.io.IOUtils;
 
 import javax.servlet.ServletException;
 import java.io.File;
@@ -313,16 +314,28 @@ public abstract class Slave implements Node, Serializable {
         }
 
         public void doIndex( StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-            URL res = req.getServletContext().getResource("/WEB-INF/" + fileName);
+            URLConnection con = connect();
+            InputStream in = con.getInputStream();
+            rsp.serveFile(req, in, con.getLastModified(), con.getContentLength(), "*.jar" );
+            in.close();
+        }
+
+        private URLConnection connect() throws IOException {
+            URL res = Hudson.getInstance().servletContext.getResource("/WEB-INF/" + fileName);
             if(res==null) {
                 // during the development this path doesn't have the files.
                 res = new URL(new File(".").getAbsoluteFile().toURL(),"target/generated-resources/WEB-INF/"+fileName);
             }
+            return res.openConnection();
+        }
 
-            URLConnection con = res.openConnection();
-            InputStream in = con.getInputStream();
-            rsp.serveFile(req, in, con.getLastModified(), con.getContentLength(), "*.jar" );
-            in.close();
+        public byte[] readFully() throws IOException {
+            InputStream in = connect().getInputStream();
+            try {
+                return IOUtils.toByteArray(in);
+            } finally {
+                in.close();
+            }
         }
 
     }
