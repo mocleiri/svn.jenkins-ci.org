@@ -1,5 +1,6 @@
 package hudson.plugins.ec2.ssh;
 
+import static com.trilead.ssh2.ChannelCondition.*;
 import com.trilead.ssh2.Connection;
 import com.trilead.ssh2.SCPClient;
 import com.trilead.ssh2.Session;
@@ -15,6 +16,7 @@ import hudson.slaves.ComputerLauncher;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 
 /**
@@ -36,8 +38,57 @@ public class EC2UnixLauncher extends EC2ComputerLauncher {
             return;
         }
 
-        logger.println("Copying slave.jar");
         SCPClient scp = conn.createSCPClient();
+        String initScript = computer.getNode().initScript;
+
+        if(initScript.trim().length()>0) {
+            logger.println("Executing init script");
+            scp.put(initScript.getBytes("UTF-8"),"init.sh","/tmp","0700");
+            Session sess = conn.openSession();
+            sess.requestDumbPTY(); // so that the remote side bundles stdout and stderr
+            sess.execCommand("/tm/init.sh");
+
+            sess.getStdin().close();    // nothing to write here
+            InputStream stderr = sess.getStderr();
+            InputStream stdout = sess.getStdout();
+
+            byte[] buffer = new byte[8192];
+            // see SingleThreadStdoutStderr sample from Trilead distro zip
+            while (true) {
+                sess.requestDumbPTY();
+                if ((stdout.available() == 0) && (stderr.available() == 0)) {
+                    int conditions = sess.waitForCondition(STDOUT_DATA|STDERR_DATA|EOF,0);
+
+                    if ((conditions & EOF) != 0)
+                        if ((conditions & (STDOUT_DATA | STDERR_DATA)) == 0)
+                            break; // done
+
+                    //  still more data to process
+                }
+
+                while (stdout.available() > 0) {
+                    int len = stdout.read(buffer);
+                    logger.write(buffer, 0, len);
+                }
+
+                while (stderr.available() > 0) {
+                    int len = stderr.read(buffer);
+                    logger.write(buffer, 0, len);
+                }
+            }
+
+            int exitStatus = sess.getExitStatus();
+            sess.close();
+
+            if(exitStatus !=0) {
+                logger.println("init script failed: exit code="+exitStatus);
+                conn.close();
+                return;
+            }
+        }
+
+
+        logger.println("Copying slave.jar");
         scp.put(Hudson.getInstance().getJnlpJars("slave.jar").readFully(),
                     "slave.jar","/tmp");
 

@@ -22,9 +22,15 @@ import java.util.logging.Logger;
  * @author Kohsuke Kawaguchi
  */
 public final class EC2Slave extends Slave {
-    public EC2Slave(String instanceId, String description, String remoteFS, InstanceType type, String label) throws FormException {
+    /**
+     * Comes from {@link SlaveTemplate#initScript}.
+     */
+    public final String initScript;
+
+    public EC2Slave(String instanceId, String description, String remoteFS, InstanceType type, String label, String initScript) throws FormException {
         // TODO: retention policy for Amazon
         super(instanceId, description, remoteFS, toNumExecutors(type), Mode.NORMAL, label, new EC2UnixLauncher(), new EC2RetentionStrategy());
+        this.initScript  = initScript;
     }
 
     /**

@@ -32,15 +32,17 @@ public class SlaveTemplate implements Describable<SlaveTemplate> {
     public final String remoteFS;
     public final InstanceType type;
     public final String label;
+    public final String initScript;
     protected transient EC2Cloud parent;
 
     @DataBoundConstructor
-    public SlaveTemplate(String ami, String remoteFS, InstanceType type, String label, String description) {
+    public SlaveTemplate(String ami, String remoteFS, InstanceType type, String label, String description, String initScript) {
         this.ami = ami;
         this.remoteFS = remoteFS;
         this.type = type;
         this.label = label;
         this.description = description;
+        this.initScript = initScript;
     }
     
     public EC2Cloud getParent() {
@@ -65,7 +67,7 @@ public class SlaveTemplate implements Describable<SlaveTemplate> {
             logger.println("Launching "+ami);
             Instance inst = ec2.runInstances(ami, 1, 1, Collections.<String>emptyList(), null, "thekey", type).getInstances().get(0);
 
-            return new EC2Slave(inst.getInstanceId(),description,remoteFS,type,label);
+            return new EC2Slave(inst.getInstanceId(),description,remoteFS,type,label,initScript);
         } catch (FormException e) {
             throw new AssertionError(); // we should have discovered all configuration issues upfront
         }
