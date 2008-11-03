@@ -7,9 +7,8 @@ import hudson.model.Computer;
 import hudson.model.Descriptor.FormException;
 import hudson.model.Hudson;
 import hudson.model.Slave;
-import hudson.slaves.ComputerLauncher;
-import hudson.slaves.NodeDescriptor;
 import hudson.plugins.ec2.ssh.EC2UnixLauncher;
+import hudson.slaves.NodeDescriptor;
 
 import java.io.IOException;
 import java.util.Collections;
