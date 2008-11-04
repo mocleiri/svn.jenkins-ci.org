@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-PluginStrategy (Hudson core 1.258 API)
+PluginStrategy (Hudson core 1.259 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-30">
+<META NAME="date" CONTENT="2008-11-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginStrategy (Hudson core 1.258 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginStrategy (Hudson core 1.258 API)";
+        parent.document.title="PluginStrategy (Hudson core 1.259 API)";
     }
 }
 </SCRIPT>
@@ -93,12 +93,26 @@ hudson</FONT>
 <BR>
 Interface PluginStrategy</H2>
 <DL>
+<DT><B>All Superinterfaces:</B> <DD><A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DD>
+</DL>
+<DL>
 <DT><B>All Known Implementing Classes:</B> <DD><A HREF="../hudson/ClassicPluginStrategy.html" title="class in hudson">ClassicPluginStrategy</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public interface <B>PluginStrategy</B></DL>
+<DT><PRE>public interface <B>PluginStrategy</B><DT>extends <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DL>
 </PRE>
+
+<P>
+Pluggability point for how to create <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>PluginWrapper</CODE></A>.
+
+ <p>
+ This extension point was added to allow plugins to be loaded into a different environment
+ (such as loading it in an existing DI container like Plexus.) A plugin strategy is a singleton
+ instance, and as such this feature is primarily meant for OEM.
+
+ See <A HREF="../hudson/PluginManager.html#createPluginStrategy()"><CODE>PluginManager.createPluginStrategy()</CODE></A> for how this instance is created.
+<P>
 
 <P>
 <HR>
@@ -160,6 +174,9 @@ createPluginWrapper</H3>
 <DD>Creates a plugin wrapper, which provides a management interface for the plugin
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 <DT><B>Parameters:</B><DD><CODE>archive</CODE> - 
 <DT><B>Returns:</B><DD>
 <DT><B>Throws:</B>
@@ -181,6 +198,9 @@ void <B>load</B>(<A HREF="../hudson/PluginWrapper.html" title="class in hudson">
  the plugins, so that dependencies can be properly loaded by plugins.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
@@ -196,6 +216,9 @@ void <B>initializeComponents</B>(<A HREF="../hudson/PluginWrapper.html" title="c
 <DD>Optionally start services provided by the plugin. Should be called
  when all plugins are loaded.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>plugin</CODE> - </DL>
 </DD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-UpdateCenter.InstallationJob (Hudson core 1.258 API)
+UpdateCenter.InstallationJob (Hudson core 1.259 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-30">
+<META NAME="date" CONTENT="2008-11-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter.InstallationJob (Hudson core 1.258 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter.InstallationJob (Hudson core 1.258 API)";
+        parent.document.title="UpdateCenter.InstallationJob (Hudson core 1.259 API)";
     }
 }
 </SCRIPT>
@@ -56,8 +56,8 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/UpdateCenter.Entry.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/UpdateCenter.InstallationJob.Failure.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/UpdateCenter.HudsonUpgradeJob.RestartNeeded.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/UpdateCenter.PageDecoratorImpl.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/UpdateCenter.InstallationJob.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="UpdateCenter.InstallationJob.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.UpdateCenter.DownloadJob">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -95,7 +95,8 @@ Class UpdateCenter.InstallationJob</H2>
 <PRE>
 java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model">hudson.model.UpdateCenter.UpdateCenterJob</A>
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.UpdateCenter.InstallationJob</B>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">hudson.model.UpdateCenter.DownloadJob</A>
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.UpdateCenter.InstallationJob</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD>java.lang.Runnable</DD>
@@ -105,7 +106,7 @@ java.lang.Object
 </DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>UpdateCenter.InstallationJob</B><DT>extends <A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model">UpdateCenter.UpdateCenterJob</A></DL>
+<DT><PRE>public final class <B>UpdateCenter.InstallationJob</B><DT>extends <A HREF="../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A></DL>
 </PRE>
 
 <P>
@@ -124,48 +125,18 @@ Represents the state of the installation activity of one plugin.
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Nested Class Summary</B></FONT></TH>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.Failure.html" title="class in hudson.model">UpdateCenter.InstallationJob.Failure</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates that the installation of a plugin failed.</TD>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.model.UpdateCenter.DownloadJob"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from class hudson.model.<A HREF="../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.InstallationStatus.html" title="class in hudson.model">UpdateCenter.InstallationJob.InstallationStatus</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates the status or the result of a plugin installation.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.Installing.html" title="class in hudson.model">UpdateCenter.InstallationJob.Installing</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installation of a plugin is in progress.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.Pending.html" title="class in hudson.model">UpdateCenter.InstallationJob.Pending</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates that the plugin is waiting for its turn for installation.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.Success.html" title="class in hudson.model">UpdateCenter.InstallationJob.Success</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates that the plugin was successfully installed.</TD>
+<TD><CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.Failure.html" title="class in hudson.model">UpdateCenter.DownloadJob.Failure</A>, <A HREF="../../hudson/model/UpdateCenter.DownloadJob.InstallationStatus.html" title="class in hudson.model">UpdateCenter.DownloadJob.InstallationStatus</A>, <A HREF="../../hudson/model/UpdateCenter.DownloadJob.Installing.html" title="class in hudson.model">UpdateCenter.DownloadJob.Installing</A>, <A HREF="../../hudson/model/UpdateCenter.DownloadJob.Pending.html" title="class in hudson.model">UpdateCenter.DownloadJob.Pending</A>, <A HREF="../../hudson/model/UpdateCenter.DownloadJob.Success.html" title="class in hudson.model">UpdateCenter.DownloadJob.Success</A></CODE></TD>
 </TR>
 </TABLE>
-&nbsp;<!-- =========== FIELD SUMMARY =========== -->
+&nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -175,27 +146,20 @@ Represents the state of the installation activity of one plugin.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;int</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.html#id">id</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unique ID that identifies this job.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.html#plugin">plugin</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What plugin are we trying to install?</TD>
 </TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.UpdateCenter.DownloadJob"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A></B></TH>
+</TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/UpdateCenter.InstallationJob.InstallationStatus.html" title="class in hudson.model">UpdateCenter.InstallationJob.InstallationStatus</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.html#status">status</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Immutable object representing the current state of this job.</TD>
+<TD><CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#id">id</A>, <A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#status">status</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -225,11 +189,44 @@ Represents the state of the installation activity of one plugin.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.html#run()">run</A></B>()</CODE>
+<CODE>protected &nbsp;java.io.File</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.html#getDestination()">getDestination</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Where to download the file to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.html#getName()">getName</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.net.URL</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.html#getURL()">getURL</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Where to download the file from.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.html#onSuccess()">onSuccess</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called when the whole thing went successfully.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.UpdateCenter.DownloadJob"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#replace(java.io.File, java.io.File)">replace</A>, <A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#run()">run</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.UpdateCenter.UpdateCenterJob"><!-- --></A>
@@ -273,30 +270,6 @@ public final <A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class 
 <DL>
 </DL>
 </DL>
-<HR>
-
-<A NAME="id"><!-- --></A><H3>
-id</H3>
-<PRE>
-public final int <B>id</B></PRE>
-<DL>
-<DD>Unique ID that identifies this job.
-<P>
-<DL>
-</DL>
-</DL>
-<HR>
-
-<A NAME="status"><!-- --></A><H3>
-status</H3>
-<PRE>
-public volatile <A HREF="../../hudson/model/UpdateCenter.InstallationJob.InstallationStatus.html" title="class in hudson.model">UpdateCenter.InstallationJob.InstallationStatus</A> <B>status</B></PRE>
-<DL>
-<DD>Immutable object representing the current state of this job.
-<P>
-<DL>
-</DL>
-</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -325,11 +298,68 @@ public <B>UpdateCenter.InstallationJob</B>(<A HREF="../../hudson/model/UpdateCen
 </TR>
 </TABLE>
 
-<A NAME="run()"><!-- --></A><H3>
-run</H3>
+<A NAME="getURL()"><!-- --></A><H3>
+getURL</H3>
 <PRE>
-public void <B>run</B>()</PRE>
+protected java.net.URL <B>getURL</B>()
+                       throws java.net.MalformedURLException</PRE>
 <DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#getURL()">UpdateCenter.DownloadJob</A></CODE></B></DD>
+<DD>Where to download the file from.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#getURL()">getURL</A></CODE> in class <CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.net.MalformedURLException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDestination()"><!-- --></A><H3>
+getDestination</H3>
+<PRE>
+protected java.io.File <B>getDestination</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#getDestination()">UpdateCenter.DownloadJob</A></CODE></B></DD>
+<DD>Where to download the file to.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#getDestination()">getDestination</A></CODE> in class <CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getName()"><!-- --></A><H3>
+getName</H3>
+<PRE>
+public java.lang.String <B>getName</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#getName()">getName</A></CODE> in class <CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onSuccess()"><!-- --></A><H3>
+onSuccess</H3>
+<PRE>
+protected void <B>onSuccess</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#onSuccess()">UpdateCenter.DownloadJob</A></CODE></B></DD>
+<DD>Called when the whole thing went successfully.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#onSuccess()">onSuccess</A></CODE> in class <CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -365,8 +395,8 @@ public void <B>run</B>()</PRE>
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/UpdateCenter.Entry.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/UpdateCenter.InstallationJob.Failure.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/UpdateCenter.HudsonUpgradeJob.RestartNeeded.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/UpdateCenter.PageDecoratorImpl.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/UpdateCenter.InstallationJob.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="UpdateCenter.InstallationJob.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -386,7 +416,7 @@ public void <B>run</B>()</PRE>
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.UpdateCenter.DownloadJob">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>

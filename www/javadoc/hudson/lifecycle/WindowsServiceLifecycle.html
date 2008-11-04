@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-WindowsServiceLifecycle (Hudson core 1.258 API)
+WindowsServiceLifecycle (Hudson core 1.259 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-10-30">
+<META NAME="date" CONTENT="2008-11-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ WindowsServiceLifecycle (Hudson core 1.258 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="WindowsServiceLifecycle (Hudson core 1.258 API)";
+        parent.document.title="WindowsServiceLifecycle (Hudson core 1.259 API)";
     }
 }
 </SCRIPT>
@@ -77,9 +77,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#methods_inherited_from_class_hudson.lifecycle.Lifecycle">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;METHOD</FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -142,6 +142,22 @@ java.lang.Object
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/lifecycle/WindowsServiceLifecycle.html#restart()">restart</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If this life cycle supports a restart of Hudson, do so.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/lifecycle/WindowsServiceLifecycle.html#rewriteHudsonWar(java.io.File)">rewriteHudsonWar</A></B>(java.io.File&nbsp;by)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replaces hudson.war by the given file.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.lifecycle.Lifecycle"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -149,7 +165,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.lifecycle.<A HREF="../../hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle">Lifecycle</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/lifecycle/Lifecycle.html#get()">get</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/lifecycle/Lifecycle.html#canRewriteHudsonWar()">canRewriteHudsonWar</A>, <A HREF="../../hudson/lifecycle/Lifecycle.html#get()">get</A>, <A HREF="../../hudson/lifecycle/Lifecycle.html#getHudsonWar()">getHudsonWar</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -179,6 +195,67 @@ WindowsServiceLifecycle</H3>
 <PRE>
 public <B>WindowsServiceLifecycle</B>()</PRE>
 <DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="rewriteHudsonWar(java.io.File)"><!-- --></A><H3>
+rewriteHudsonWar</H3>
+<PRE>
+public void <B>rewriteHudsonWar</B>(java.io.File&nbsp;by)
+                      throws java.io.IOException</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/lifecycle/Lifecycle.html#rewriteHudsonWar(java.io.File)">Lifecycle</A></CODE></B></DD>
+<DD>Replaces hudson.war by the given file.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/lifecycle/Lifecycle.html#rewriteHudsonWar(java.io.File)">rewriteHudsonWar</A></CODE> in class <CODE><A HREF="../../hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle">Lifecycle</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="restart()"><!-- --></A><H3>
+restart</H3>
+<PRE>
+public void <B>restart</B>()
+             throws java.io.IOException,
+                    java.lang.InterruptedException</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/lifecycle/Lifecycle.html#restart()">Lifecycle</A></CODE></B></DD>
+<DD>If this life cycle supports a restart of Hudson, do so.
+ Otherwise, throw <CODE>UnsupportedOperationException</CODE>,
+ which is what the default implementation does.
+
+ <p>
+ The restart operation may happen synchronously (in which case
+ this method will never return), or asynchronously (in which
+ case this method will successfully return.)
+
+ <p>
+ Throw an exception if the operation fails unexpectedly.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/lifecycle/Lifecycle.html#restart()">restart</A></CODE> in class <CODE><A HREF="../../hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle">Lifecycle</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
@@ -232,9 +309,9 @@ public <B>WindowsServiceLifecycle</B>()</PRE>
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#methods_inherited_from_class_hudson.lifecycle.Lifecycle">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;METHOD</FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>
