@@ -17,6 +17,9 @@
 <a name=v1.260><h3>What's new in 1.260</h3></a>
 <ul class=image>
   <li class=bug>
+    Fixed tokenization handling in command line that involves quotes (like <tt>-Dabc="abc def"</tt>
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2584">issue 2584</a>)
+  <li class=bug>
     Hudson wasn't using persistent HTTP connections properly when using Subversion over HTTP.
   <li class=bug>
     Fixed <tt>svn:executable</tt> handling on 64bit Linux systems.
