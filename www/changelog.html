@@ -18,6 +18,8 @@
 <ul class=image>
   <li class=bug>
     Hudson wasn't using persistent HTTP connections properly when using Subversion over HTTP.
+  <li class=bug>
+    Fixed <tt>svn:executable</tt> handling on 64bit Linux systems.
   <li class=rfe>
     When a build is aborted, Hudson now kills all the descendant processes recursively to avoid run-away processes.
     This is available on Windows, Linux, and Solaris. Contributions for other OSes welcome.
