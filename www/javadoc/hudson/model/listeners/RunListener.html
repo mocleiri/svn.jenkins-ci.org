@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-RunListener (Hudson core 1.259 API)
+RunListener (Hudson core 1.260 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-04">
+<META NAME="date" CONTENT="2008-11-06">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RunListener (Hudson core 1.259 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RunListener (Hudson core 1.259 API)";
+        parent.document.title="RunListener (Hudson core 1.260 API)";
     }
 }
 </SCRIPT>
@@ -189,6 +189,14 @@ Receives notifications about builds.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/listeners/RunListener.html#fireFinalized(hudson.model.Run)">fireFinalized</A></B>(<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;r)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fires the <A HREF="../../../hudson/model/listeners/RunListener.html#onFinalized(R)"><CODE>onFinalized(Run)</CODE></A> event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/listeners/RunListener.html#fireStarted(hudson.model.Run, hudson.model.TaskListener)">fireStarted</A></B>(<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;r,
             <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
@@ -203,6 +211,14 @@ Receives notifications about builds.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called after a build is completed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/listeners/RunListener.html#onFinalized(R)">onFinalized</A></B>(<A HREF="../../../hudson/model/listeners/RunListener.html" title="type parameter in RunListener">R</A>&nbsp;r)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called after a build is moved to the <CODE>Run.State#COMPLETED</CODE> state.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -320,6 +336,26 @@ public void <B>onCompleted</B>(<A HREF="../../../hudson/model/listeners/RunListe
 </DL>
 <HR>
 
+<A NAME="onFinalized(hudson.model.Run)"><!-- --></A><A NAME="onFinalized(R)"><!-- --></A><H3>
+onFinalized</H3>
+<PRE>
+public void <B>onFinalized</B>(<A HREF="../../../hudson/model/listeners/RunListener.html" title="type parameter in RunListener">R</A>&nbsp;r)</PRE>
+<DL>
+<DD>Called after a build is moved to the <CODE>Run.State#COMPLETED</CODE> state.
+
+ <p>
+ At this point, all the records related to a build is written down to the disk. As such,
+ <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> is no longer available. This happens later than <A HREF="../../../hudson/model/listeners/RunListener.html#onCompleted(R, hudson.model.TaskListener)"><CODE>onCompleted(Run, TaskListener)</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="onStarted(hudson.model.Run,hudson.model.TaskListener)"><!-- --></A><A NAME="onStarted(R, hudson.model.TaskListener)"><!-- --></A><H3>
 onStarted</H3>
 <PRE>
@@ -397,6 +433,22 @@ public static void <B>fireStarted</B>(<A HREF="../../../hudson/model/Run.html" t
                                <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</PRE>
 <DL>
 <DD>Fires the <A HREF="../../../hudson/model/listeners/RunListener.html#onStarted(R, hudson.model.TaskListener)"><CODE>onStarted(R, hudson.model.TaskListener)</CODE></A> event.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="fireFinalized(hudson.model.Run)"><!-- --></A><H3>
+fireFinalized</H3>
+<PRE>
+public static void <B>fireFinalized</B>(<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;r)</PRE>
+<DL>
+<DD>Fires the <A HREF="../../../hudson/model/listeners/RunListener.html#onFinalized(R)"><CODE>onFinalized(Run)</CODE></A> event.
 <P>
 <DD><DL>
 </DL>

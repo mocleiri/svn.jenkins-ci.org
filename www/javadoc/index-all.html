@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.259 API)
+Index (Hudson core 1.260 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-04">
+<META NAME="date" CONTENT="2008-11-06">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.259 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.259 API)";
+        parent.document.title="Index (Hudson core 1.260 API)";
     }
 }
 </SCRIPT>
@@ -3808,6 +3808,9 @@ Constructor for class hudson.<A HREF="./hudson/FileSystemProvisioner.Default.Wor
 <DT><A HREF="./hudson/FileSystemProvisionerDescriptor.html" title="class in hudson"><B>FileSystemProvisionerDescriptor</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD><A HREF="./hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="./hudson/FileSystemProvisioner.html" title="class in hudson"><CODE>FileSystemProvisioner</CODE></A>.<DT><A HREF="./hudson/FileSystemProvisionerDescriptor.html#FileSystemProvisionerDescriptor(java.lang.Class)"><B>FileSystemProvisionerDescriptor(Class&lt;? extends FileSystemProvisioner&gt;)</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/FileSystemProvisionerDescriptor.html" title="class in hudson">FileSystemProvisionerDescriptor</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/HeadBufferingStream.html#fillSide()"><B>fillSide()</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/HeadBufferingStream.html" title="class in hudson.util">HeadBufferingStream</A>
+<DD>Read until we fill up the side buffer.
 <DT><A HREF="./hudson/Functions.html#filter(java.util.SortedMap, java.lang.String, java.lang.String)"><B>filter(SortedMap&lt;Integer, V&gt;, String, String)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
 <DD>Creates a sub map by using the given range (both ends inclusive).
@@ -3979,6 +3982,9 @@ Method in class hudson.model.<A HREF="./hudson/model/StreamBuildListener.html" t
 <DT><A HREF="./hudson/model/listeners/RunListener.html#fireCompleted(hudson.model.Run, hudson.model.TaskListener)"><B>fireCompleted(Run, TaskListener)</B></A> - 
 Static method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners">RunListener</A>
 <DD>Fires the <A HREF="./hudson/model/listeners/RunListener.html#onCompleted(R, hudson.model.TaskListener)"><CODE>RunListener.onCompleted(R, hudson.model.TaskListener)</CODE></A> event.
+<DT><A HREF="./hudson/model/listeners/RunListener.html#fireFinalized(hudson.model.Run)"><B>fireFinalized(Run)</B></A> - 
+Static method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners">RunListener</A>
+<DD>Fires the <A HREF="./hudson/model/listeners/RunListener.html#onFinalized(R)"><CODE>RunListener.onFinalized(Run)</CODE></A> event.
 <DT><A HREF="./hudson/model/listeners/RunListener.html#fireStarted(hudson.model.Run, hudson.model.TaskListener)"><B>fireStarted(Run, TaskListener)</B></A> - 
 Static method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners">RunListener</A>
 <DD>Fires the <A HREF="./hudson/model/listeners/RunListener.html#onStarted(R, hudson.model.TaskListener)"><CODE>RunListener.onStarted(R, hudson.model.TaskListener)</CODE></A> event.
@@ -7966,6 +7972,9 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractItem.html" title="c
 <DT><A HREF="./hudson/model/Item.html#getShortUrl()"><B>getShortUrl()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Item.html" title="interface in hudson.model">Item</A>
 <DD>Returns the URL of this item relative to the parent <A HREF="./hudson/model/ItemGroup.html" title="interface in hudson.model"><CODE>ItemGroup</CODE></A>.
+<DT><A HREF="./hudson/util/HeadBufferingStream.html#getSideBuffer()"><B>getSideBuffer()</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/HeadBufferingStream.html" title="class in hudson.util">HeadBufferingStream</A>
+<DD>Gets the side buffer content.
 <DT><A HREF="./hudson/scm/CVSChangeLogSet.File.html#getSimpleName()"><B>getSimpleName()</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/CVSChangeLogSet.File.html" title="class in hudson.scm">CVSChangeLogSet.File</A>
 <DD>Gets just the last component of the path, like "zot.c"
@@ -8895,6 +8904,9 @@ Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="c
 <DD>Does any of the plugin has updates?
 <DT><A HREF="./hudson/Functions.html#hasView(java.lang.Object, java.lang.String)"><B>hasView(Object, String)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/util/HeadBufferingStream.html" title="class in hudson.util"><B>HeadBufferingStream</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD><CODE>FilterInputStream</CODE> that buffers the first N bytes to a byte array on the side.<DT><A HREF="./hudson/util/HeadBufferingStream.html#HeadBufferingStream(java.io.InputStream, int)"><B>HeadBufferingStream(InputStream, int)</B></A> - 
+Constructor for class hudson.util.<A HREF="./hudson/util/HeadBufferingStream.html" title="class in hudson.util">HeadBufferingStream</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/RunMap.html#headMap(java.lang.Integer)"><B>headMap(Integer)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/RunMap.html" title="class in hudson.model">RunMap</A>
@@ -11448,6 +11460,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in h
 <DT><A HREF="./hudson/util/OneShotEvent.html" title="class in hudson.util"><B>OneShotEvent</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Concurrency primitive "event".<DT><A HREF="./hudson/util/OneShotEvent.html#OneShotEvent()"><B>OneShotEvent()</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/OneShotEvent.html" title="class in hudson.util">OneShotEvent</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/listeners/RunListener.html#onFinalized(R)"><B>onFinalized(R)</B></A> - 
+Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners">RunListener</A>
+<DD>Called after a build is moved to the <CODE>Run.State#COMPLETED</CODE> state.
 <DT><A HREF="./hudson/tasks/BuildTrigger.html#onJobRenamed(java.lang.String, java.lang.String)"><B>onJobRenamed(String, String)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/BuildTrigger.html" title="class in hudson.tasks">BuildTrigger</A>
 <DD>Called from <A HREF="./hudson/model/Job.html#renameTo(java.lang.String)"><CODE>Job.renameTo(String)</CODE></A> when a job is renamed.
@@ -12223,6 +12238,12 @@ Static variable in class hudson.security.<A HREF="./hudson/security/Permission.h
 <DT><A HREF="./hudson/util/CompressedFile.html#read()"><B>read()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/CompressedFile.html" title="class in hudson.util">CompressedFile</A>
 <DD>Reads the contents of a file.
+<DT><A HREF="./hudson/util/HeadBufferingStream.html#read()"><B>read()</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/HeadBufferingStream.html" title="class in hudson.util">HeadBufferingStream</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/util/HeadBufferingStream.html#read(byte[], int, int)"><B>read(byte[], int, int)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/HeadBufferingStream.html" title="class in hudson.util">HeadBufferingStream</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/TextFile.html#read()"><B>read()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/TextFile.html" title="class in hudson.util">TextFile</A>
 <DD>Reads the entire contents and returns it.
@@ -13591,6 +13612,9 @@ Variable in class hudson.security.<A HREF="./hudson/security/SparseACL.Entry.htm
  of the <CODE>Authentication</CODE>.<DT><A HREF="./hudson/security/SidACL.html#SidACL()"><B>SidACL()</B></A> - 
 Constructor for class hudson.security.<A HREF="./hudson/security/SidACL.html" title="class in hudson.security">SidACL</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/FilePath.html#SIDE_BUFFER_SIZE"><B>SIDE_BUFFER_SIZE</B></A> - 
+Static variable in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/OneShotEvent.html#signal()"><B>signal()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/OneShotEvent.html" title="class in hudson.util">OneShotEvent</A>
 <DD>Non-blocking method that signals this event.
@@ -14616,6 +14640,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#UpdateCenter_Status_CheckingJavaNet()"><B>UpdateCenter_Status_CheckingJavaNet()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Checking java.net connectivity
+<DT><A HREF="./hudson/model/Messages.html#UpdateCenter_Status_ConnectionFailed(java.lang.Object)"><B>UpdateCenter_Status_ConnectionFailed(Object)</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>&lt;span class=error>Failed to connect to {0}.
 <DT><A HREF="./hudson/model/Messages.html#UpdateCenter_Status_Success()"><B>UpdateCenter_Status_Success()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Success
@@ -16003,6 +16030,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#_UpdateCenter_Status_CheckingJavaNet()"><B>_UpdateCenter_Status_CheckingJavaNet()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Checking java.net connectivity
+<DT><A HREF="./hudson/model/Messages.html#_UpdateCenter_Status_ConnectionFailed(java.lang.Object)"><B>_UpdateCenter_Status_ConnectionFailed(Object)</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>&lt;span class=error>Failed to connect to {0}.
 <DT><A HREF="./hudson/model/Messages.html#_UpdateCenter_Status_Success()"><B>_UpdateCenter_Status_Success()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Success
