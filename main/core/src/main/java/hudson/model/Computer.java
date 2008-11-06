@@ -220,6 +220,10 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
         return temporarilyOffline || getChannel()==null;
     }
 
+    public final boolean isOnline() {
+        return !isOffline();
+    }
+
     /**
      * Returns true if this computer is supposed to be launched via JNLP.
      * @deprecated see {@linkplain #isLaunchSupported()} and {@linkplain ComputerLauncher}
@@ -337,6 +341,17 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
                 n++;
         }
         return n;
+    }
+
+    /**
+     * Returns the number of {@link Executor}s that are doing some work right now.
+     */
+    public final int countBusy() {
+        return countExecutors()-countIdle();
+    }
+
+    public final int countExecutors() {
+        return executors.size();
     }
 
     /**
