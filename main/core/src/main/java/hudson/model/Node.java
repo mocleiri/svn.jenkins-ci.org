@@ -130,7 +130,7 @@ public interface Node extends Describable<Node>, ExtensionPoint, AccessControlle
      */
     FilePath createPath(String absolutePath);
 
-    public abstract NodeDescriptor getDescriptor();
+    NodeDescriptor getDescriptor();
 
     /**
      * Estimates the clock difference with this slave.

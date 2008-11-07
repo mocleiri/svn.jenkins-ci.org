@@ -1,7 +1,6 @@
 package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
-import com.trilead.ssh2.crypto.digest.SHA1;
 import hudson.BulkChange;
 import hudson.FeedAdapter;
 import hudson.FilePath;
@@ -104,10 +103,6 @@ import javax.servlet.http.HttpServletResponse;
 import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 import javax.servlet.http.HttpSession;
-import javax.crypto.SecretKey;
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -116,7 +111,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.security.SecureRandom;
-import java.security.MessageDigest;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -315,6 +309,11 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     private transient Set<Label> labelSet;
     private transient volatile Set<Label> dynamicLabels = null;
 
+    /**
+     * Load statistics of the entire system.
+     */
+    public transient final OverallLoadStatistics overallLoad = new OverallLoadStatistics();
+
     public transient final ServletContext servletContext;
 
     /**
@@ -426,7 +425,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         HudsonFilter.REMEMBER_ME_SERVICES_PROXY.setDelegate(rms);
 
         WindowsInstallerLink.registerIfApplicable();
-        Label.registerLoadMonitor();
+        LoadStatistics.register();
     }
 
     public TcpSlaveAgentListener getTcpSlaveAgentListener() {
@@ -1083,7 +1082,6 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         save();
     }
 
-    @Override
     public NodeDescriptor getDescriptor() {
         return DescriptorImpl.INSTANCE;
     }

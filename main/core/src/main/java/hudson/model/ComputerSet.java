@@ -61,7 +61,34 @@ public final class ComputerSet extends AbstractModelObject {
         };
     }
 
-    @Override
+    /**
+     * Number of total {@link Executor}s that belong to this label that are functioning.
+     * <p>
+     * This excludes executors that belong to offline nodes.
+     */
+    @Exported
+    public int getTotalExecutors() {
+        int r=0;
+        for (Computer c : get_all()) {
+            if(c.isOnline())
+                r += c.countExecutors();
+        }
+        return r;
+    }
+
+    /**
+     * Number of busy {@link Executor}s that are carrying out some work right now.
+     */
+    @Exported
+    public int getBusyExecutors() {
+        int r=0;
+        for (Computer c : get_all()) {
+            if(c.isOnline())
+                r += c.countBusy();
+        }
+        return r;
+    }
+
     public String getSearchUrl() {
         return "/computers/";
     }

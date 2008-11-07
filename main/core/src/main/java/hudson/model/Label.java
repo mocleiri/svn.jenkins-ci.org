@@ -1,8 +1,6 @@
 package hudson.model;
 
 import hudson.Util;
-import hudson.triggers.SafeTimerTask;
-import hudson.triggers.Trigger;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
 
@@ -22,31 +20,11 @@ public class Label implements Comparable<Label>, ModelObject {
     private final String name;
     private volatile Set<Node> nodes;
 
-    /**
-     * Number of busy executors and how it changes over time.
-     */
-    public final MultiStageTimeSeries busyExecutors;
-
-    /**
-     * Number of total executors and how it changes over time.
-     */
-    public final MultiStageTimeSeries totalExecutors;
-
-    /**
-     * Number of {@link Queue.BuildableItem}s blocking for this label.
-     */
-    public final MultiStageTimeSeries queueLength;
-
-    /**
-     * With 0.90 decay ratio for every 10sec, half reduction is about 1 min.
-     */
-    private static final float DECAY = 0.9f;
+    public final LoadStatistics load;
 
     public Label(String name) {
         this.name = name;
-        this.totalExecutors = new MultiStageTimeSeries(getTotalExecutors(),DECAY);
-        this.busyExecutors = new MultiStageTimeSeries(getBusyExecutors(),DECAY);
-        this.queueLength = new MultiStageTimeSeries(0,DECAY);
+        this.load = new LoadStatistics(getTotalExecutors(),getBusyExecutors());
     }
 
     @Exported
@@ -195,31 +173,5 @@ public class Label implements Comparable<Label>, ModelObject {
 
     public int compareTo(Label that) {
         return this.name.compareTo(that.name);
-    }
-
-    /**
-     * Start updating the load average.
-     */
-    /*package*/ static void registerLoadMonitor() {
-        Trigger.timer.scheduleAtFixedRate(
-            new SafeTimerTask() {
-                protected void doRun() {
-                    Hudson h = Hudson.getInstance();
-                    List<Queue.BuildableItem> bis = h.getQueue().getBuildableItems();
-
-                    for( Label l : h.getLabels() ) {
-                        l.totalExecutors.update(l.getTotalExecutors());
-                        l.busyExecutors .update(l.getBusyExecutors());
-
-                        int q=0;
-                        for (Queue.BuildableItem bi : bis) {
-                            if(bi.task.getAssignedLabel()==l)
-                                q++;
-                        }
-                        l.queueLength.update(q);
-                    }
-                }
-            }, 10*1000, 10*1000
-        );                
     }
 }
