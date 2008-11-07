@@ -3,15 +3,14 @@ package hudson.model;
 import hudson.Util;
 import hudson.triggers.SafeTimerTask;
 import hudson.triggers.Trigger;
-
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Collections;
-import java.util.List;
-import java.util.ArrayList;
-
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Group of {@link Node}s.
@@ -27,10 +26,16 @@ public class Label implements Comparable<Label>, ModelObject {
      * Number of busy executors and how it changes over time.
      */
     public final MultiStageTimeSeries busyExecutors;
+
     /**
      * Number of total executors and how it changes over time.
      */
     public final MultiStageTimeSeries totalExecutors;
+
+    /**
+     * Number of {@link Queue.BuildableItem}s blocking for this label.
+     */
+    public final MultiStageTimeSeries queueLength;
 
     /**
      * With 0.90 decay ratio for every 10sec, half reduction is about 1 min.
@@ -41,6 +46,7 @@ public class Label implements Comparable<Label>, ModelObject {
         this.name = name;
         this.totalExecutors = new MultiStageTimeSeries(getTotalExecutors(),DECAY);
         this.busyExecutors = new MultiStageTimeSeries(getBusyExecutors(),DECAY);
+        this.queueLength = new MultiStageTimeSeries(0,DECAY);
     }
 
     @Exported
@@ -58,7 +64,6 @@ public class Label implements Comparable<Label>, ModelObject {
      */
     public boolean isSelfLabel() {
         return nodes.size() == 1 && nodes.iterator().next().getSelfLabel() == this;
-
     }
 
     /**
@@ -200,9 +205,18 @@ public class Label implements Comparable<Label>, ModelObject {
             new SafeTimerTask() {
                 protected void doRun() {
                     Hudson h = Hudson.getInstance();
+                    List<Queue.BuildableItem> bis = h.getQueue().getBuildableItems();
+
                     for( Label l : h.getLabels() ) {
                         l.totalExecutors.update(l.getTotalExecutors());
                         l.busyExecutors .update(l.getBusyExecutors());
+
+                        int q=0;
+                        for (Queue.BuildableItem bi : bis) {
+                            if(bi.task.getAssignedLabel()==l)
+                                q++;
+                        }
+                        l.queueLength.update(q);
                     }
                 }
             }, 10*1000, 10*1000
