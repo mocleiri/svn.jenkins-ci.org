@@ -73,7 +73,7 @@ public class NodeProvisioner extends SafeTimerTask {
                     if(excessWorkload<0)    break;  // enough slaves allocated
                     Collection<PlannedNode> additionalCapacities = c.provision(excessWorkload);
                     for (PlannedNode ac : additionalCapacities) {
-                        LOGGER.info(ac.displayName+" provisioned from "+c.name+" with "+ac.numExecutors+" (remaining excess:"+excessWorkload+")");
+                        LOGGER.info(ac.displayName+" provisioned from "+c.name+" with "+ac.numExecutors+" (remaining excess workload:"+excessWorkload+")");
                         excessWorkload -= ac.numExecutors;
                     }
                     pendingLaunches.addAll(additionalCapacities);
@@ -86,8 +86,8 @@ public class NodeProvisioner extends SafeTimerTask {
         Trigger.timer.scheduleAtFixedRate(new NodeProvisioner(),
                 // give some initial warm up time so that statically connected slaves
                 // can be brought online before we start allocating more. 
-                LoadStatistics.CLOCK*1000*10,
-                LoadStatistics.CLOCK*1000);
+                LoadStatistics.CLOCK*10,
+                LoadStatistics.CLOCK);
     }
 
     private static final float MARGIN = 0.1f;

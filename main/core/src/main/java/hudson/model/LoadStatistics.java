@@ -74,7 +74,7 @@ public class LoadStatistics {
                     h.overallLoad.queueLength.update(q);
                     h.overallLoad.totalQueueLength.update(bis.size());
                 }
-            }, CLOCK*1000, CLOCK*1000
+            }, CLOCK, CLOCK
         );
     }
 
@@ -84,7 +84,7 @@ public class LoadStatistics {
      */
     public static final float DECAY = Float.parseFloat(System.getProperty(LoadStatistics.class.getName()+".decay","0.9"));
     /**
-     * Load statistics clock cycle in seconds. Specify a small value for quickly debugging this feature and node provisioning through cloud.
+     * Load statistics clock cycle in milliseconds. Specify a small value for quickly debugging this feature and node provisioning through cloud.
      */
-    public static final int CLOCK = Integer.getInteger(LoadStatistics.class.getName()+".clock",10);
+    public static int CLOCK = Integer.getInteger(LoadStatistics.class.getName()+".clock",10*1000);
 }
