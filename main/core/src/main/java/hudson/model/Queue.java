@@ -343,6 +343,9 @@ public class Queue extends ResourceController implements Saveable {
         return r;
     }
 
+    /**
+     * Gets all the {@link BuildableItem}s that are waiting for an executor in the given {@link Computer}.
+     */
     public synchronized List<BuildableItem> getBuildableItems(Computer c) {
         List<BuildableItem> result = new ArrayList<BuildableItem>();
         for (BuildableItem p : buildables.values()) {
@@ -355,6 +358,13 @@ public class Queue extends ResourceController implements Saveable {
             result.add(p);
         }
         return result;
+    }
+
+    /**
+     * Gets the snapshot of {@link #buildables}.
+     */
+    public synchronized List<BuildableItem> getBuildableItems() {
+        return new ArrayList<BuildableItem>(buildables.values());
     }
 
     /**
