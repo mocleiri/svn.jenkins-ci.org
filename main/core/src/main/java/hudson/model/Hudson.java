@@ -426,6 +426,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         HudsonFilter.REMEMBER_ME_SERVICES_PROXY.setDelegate(rms);
 
         WindowsInstallerLink.registerIfApplicable();
+        Label.registerLoadMonitor();
     }
 
     public TcpSlaveAgentListener getTcpSlaveAgentListener() {
