@@ -2,6 +2,7 @@ package hudson.model;
 
 import hudson.triggers.SafeTimerTask;
 import hudson.triggers.Trigger;
+import hudson.model.MultiStageTimeSeries.Picker;
 
 import java.util.List;
 
@@ -28,15 +29,14 @@ public class LoadStatistics {
      */
     public final MultiStageTimeSeries queueLength;
 
-    /**
-     * With 0.90 decay ratio for every 10sec, half reduction is about 1 min.
-     */
-    protected static final float DECAY = 0.9f;
-
     protected LoadStatistics(int initialTotalExecutors, int initialBusyExecutors) {
         this.totalExecutors = new MultiStageTimeSeries(initialTotalExecutors,DECAY);
         this.busyExecutors = new MultiStageTimeSeries(initialBusyExecutors,DECAY);
         this.queueLength = new MultiStageTimeSeries(0,DECAY);
+    }
+
+    public float getLatestIdleExecutors(Picker picker) {
+        return totalExecutors.pick(picker).getLatest() - busyExecutors.pick(picker).getLatest();
     }
 
     /**
@@ -74,7 +74,17 @@ public class LoadStatistics {
                     h.overallLoad.queueLength.update(q);
                     h.overallLoad.totalQueueLength.update(bis.size());
                 }
-            }, 10*1000, 10*1000
+            }, CLOCK*1000, CLOCK*1000
         );
     }
+
+
+    /**
+     * With 0.90 decay ratio for every 10sec, half reduction is about 1 min.
+     */
+    public static final float DECAY = Float.parseFloat(System.getProperty(LoadStatistics.class.getName()+".decay","0.9"));
+    /**
+     * Load statistics clock cycle in seconds. Specify a small value for quickly debugging this feature and node provisioning through cloud.
+     */
+    public static final int CLOCK = Integer.getInteger(LoadStatistics.class.getName()+".clock",10);
 }

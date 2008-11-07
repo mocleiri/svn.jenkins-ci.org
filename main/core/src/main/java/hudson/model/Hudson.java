@@ -53,6 +53,7 @@ import hudson.slaves.NodeList;
 import hudson.slaves.Cloud;
 import hudson.slaves.DumbSlave;
 import hudson.slaves.NodeDescriptor;
+import hudson.slaves.NodeProvisioner;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildWrappers;
@@ -426,6 +427,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
         WindowsInstallerLink.registerIfApplicable();
         LoadStatistics.register();
+        NodeProvisioner.launch();
     }
 
     public TcpSlaveAgentListener getTcpSlaveAgentListener() {

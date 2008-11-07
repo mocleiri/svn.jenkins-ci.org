@@ -39,4 +39,28 @@ public class MultiStageTimeSeries {
         if(counter%6==0)    min.update(f);
         if(counter==0)      hour.update(f);
     }
+
+    /**
+     * Picks a {@link TimeSeries}.
+     */
+    public TimeSeries pick(Picker picker) {
+        switch (picker) {
+        case HOUR:  return hour;
+        case MIN:   return min;
+        case SEC10: return sec10;
+        default:    throw new AssertionError();
+        }
+    }
+
+    /**
+     * Gets the most up-to-date data point value.
+     */
+    public float getLatest(Picker picker) {
+        return pick(picker).getLatest();
+    }
+
+    /**
+     * Choose which datapoint to use.
+     */
+    public enum Picker { SEC10, MIN, HOUR }
 }

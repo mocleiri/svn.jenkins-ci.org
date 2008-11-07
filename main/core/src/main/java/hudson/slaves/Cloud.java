@@ -1,6 +1,7 @@
 package hudson.slaves;
 
 import hudson.ExtensionPoint;
+import hudson.slaves.NodeProvisioner.PlannedNode;
 import hudson.model.Describable;
 import hudson.model.Hudson;
 import hudson.model.Node;
@@ -9,6 +10,8 @@ import hudson.security.ACL;
 import hudson.security.AccessControlled;
 import hudson.security.Permission;
 import hudson.util.DescriptorList;
+
+import java.util.Collection;
 
 /**
  * Creates {@link Node}s to dynamically expand/shrink the slaves attached to Hudson.
@@ -45,6 +48,8 @@ public abstract class Cloud extends AbstractModelObject implements ExtensionPoin
     public final boolean hasPermission(Permission permission) {
         return getACL().hasPermission(permission);
     }
+
+    public abstract Collection<PlannedNode> provision(float excessWorkload);
 
     /**
      * All registered {@link Cloud} implementations.
