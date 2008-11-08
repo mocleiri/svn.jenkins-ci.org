@@ -73,7 +73,8 @@ public interface Node extends Describable<Node>, ExtensionPoint, AccessControlle
      * Gets the corresponding {@link Computer} object.
      *
      * @return
-     *      never null.
+     *      this method can return null if there's no {@link Computer} object for this node,
+     *      such as when this node has no executors at all.
      */
     Computer toComputer();
 
