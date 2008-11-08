@@ -24,7 +24,7 @@ public class Label implements Comparable<Label>, ModelObject {
 
     public Label(String name) {
         this.name = name;
-        this.load = new LoadStatistics(getTotalExecutors(),getBusyExecutors());
+        this.load = new LoadStatistics(0,0); // this causes infinite loop - getTotalExecutors(),getBusyExecutors());
     }
 
     @Exported
@@ -73,7 +73,7 @@ public class Label implements Comparable<Label>, ModelObject {
         int r=0;
         for (Node n : getNodes()) {
             Computer c = n.toComputer();
-            if(c.isOnline())
+            if(c!=null && c.isOnline())
                 r += c.countExecutors();
         }
         return r;
@@ -87,7 +87,7 @@ public class Label implements Comparable<Label>, ModelObject {
         int r=0;
         for (Node n : getNodes()) {
             Computer c = n.toComputer();
-            if(c.isOnline())
+            if(c!=null && c.isOnline())
                 r += c.countBusy();
         }
         return r;
