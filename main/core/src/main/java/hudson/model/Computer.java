@@ -33,15 +33,9 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.logging.LogRecord;
 import java.nio.charset.Charset;
-
-import javax.servlet.ServletException;
-
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.export.Exported;
-import org.kohsuke.stapler.export.ExportedBean;
 
 /**
  * Represents the running state of a remote computer that holds {@link Executor}s.
@@ -143,6 +137,13 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     public abstract void doLaunchSlaveAgent( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException;
 
     /**
+     * @deprecated  Use {@link #connect()}
+     */
+    public final void launch() {
+        connect();
+    }
+
+    /**
      * Do the same as {@link #doLaunchSlaveAgent(StaplerRequest, StaplerResponse)}
      * but outside the context of serving a request.
      *
@@ -152,8 +153,11 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
      * while the launch operation happens asynchronously.
      *
      * @see #disconnect()
+     *
+     * @return
+     *      A {@link Future} representing pending completion of the task. 
      */
-    public abstract void launch();
+    public abstract Future<?> connect();
 
     /**
      * Disconnect this computer.
@@ -161,7 +165,7 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
      * If this is the master, no-op. This method may return immediately
      * while the launch operation happens asynchronously.
      *
-     * @see #launch()
+     * @see #connect()
      */
     public void disconnect() { }
 

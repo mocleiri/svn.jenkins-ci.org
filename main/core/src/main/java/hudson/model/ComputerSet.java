@@ -101,7 +101,7 @@ public final class ComputerSet extends AbstractModelObject {
         for(Computer c : get_all()) {
             if(c.isLaunchSupported())
                 continue;
-            c.launch();
+            c.connect();
         }
         rsp.sendRedirect(".");
     }

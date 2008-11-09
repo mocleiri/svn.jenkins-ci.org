@@ -77,6 +77,7 @@ import hudson.util.RemotingDiagnostics;
 import hudson.util.TextFile;
 import hudson.util.XStream2;
 import hudson.util.DescribableList;
+import hudson.util.Futures;
 import hudson.widgets.Widget;
 import net.sf.json.JSONObject;
 import org.acegisecurity.AccessDeniedException;
@@ -142,6 +143,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.FutureTask;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -703,7 +705,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         } else {
             if(n.getNumExecutors()>0) {
                 computers.put(n,c=n.createComputer());
-                c.launch();
+                c.connect();
             }
         }
         used.add(c);
@@ -2674,8 +2676,8 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             rsp.sendError(SC_NOT_FOUND);
         }
 
-        public void launch() {
-            // noop
+        public Future<?> connect() {
+            return Futures.precomputed(null);
         }
 
         /**

@@ -8,6 +8,7 @@ import hudson.remoting.Callable;
 import hudson.util.StreamTaskListener;
 import hudson.util.NullStream;
 import hudson.util.RingBufferLogHandler;
+import hudson.util.Futures;
 import hudson.FilePath;
 import hudson.Util;
 import hudson.lifecycle.WindowsSlaveInstaller;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.Future;
 import java.nio.charset.Charset;
 
 import org.kohsuke.stapler.StaplerRequest;
@@ -127,11 +129,11 @@ public class SlaveComputer extends Computer {
         return launcher;
     }
 
-    public void launch() {
-        if(channel!=null)   return;
+    public Future<?> connect() {
+        if(channel!=null)   return Futures.precomputed(null);
 
         closeChannel();
-        Computer.threadPoolForRemoting.execute(new Runnable() {
+        return Computer.threadPoolForRemoting.submit(new Runnable() {
             public void run() {
                 // do this on another thread so that the lengthy launch operation
                 // (which is typical) won't block UI thread.
@@ -332,7 +334,7 @@ public class SlaveComputer extends Computer {
             return;
         }
 
-        launch();
+        connect();
 
         // TODO: would be nice to redirect the user to "launching..." wait page,
         // then spend a few seconds there and poll for the completion periodically.
@@ -344,7 +346,7 @@ public class SlaveComputer extends Computer {
         if(numRetryAttempt<6 || (numRetryAttempt%12)==0) {
             // initially retry several times quickly, and after that, do it infrequently.
             logger.info("Attempting to reconnect "+nodeName);
-            launch();
+            connect();
         }
     }
 
@@ -397,7 +399,7 @@ public class SlaveComputer extends Computer {
         // "launching==null" test is an ugly hack to avoid launching before the object is fully
         // constructed.
         if(launching!=null)
-            launch();
+            connect();
     }
 
     /**
