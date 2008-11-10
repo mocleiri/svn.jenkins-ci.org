@@ -142,7 +142,6 @@ public abstract class Project<P extends Project<P,B>,B extends Build<P,B>>
         return false;
     }
 
-    @Override
     public MavenInstallation inferMavenInstallation() {
         for (Builder builder : builders) {
             if (builder instanceof Maven)
