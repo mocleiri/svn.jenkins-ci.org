@@ -1,23 +1,22 @@
 package hudson.slaves;
 
+import hudson.BulkChange;
 import hudson.model.Computer;
 import hudson.model.Descriptor;
 import hudson.model.FreeStyleProject;
-import hudson.model.Node;
 import hudson.model.LoadStatistics;
+import hudson.model.Node;
 import hudson.model.Node.Mode;
-import hudson.slaves.NodeProvisioner.PlannedNode;
-import hudson.BulkChange;
-import hudson.remoting.Which;
 import hudson.remoting.Channel;
+import hudson.remoting.Which;
+import hudson.slaves.NodeProvisioner.PlannedNode;
 import org.jvnet.hudson.test.HudsonTestCase;
 import org.jvnet.hudson.test.SleepBuilder;
-import org.jvnet.hudson.test.TestEnvironment;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
