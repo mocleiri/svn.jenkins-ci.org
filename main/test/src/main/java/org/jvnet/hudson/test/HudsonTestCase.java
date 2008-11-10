@@ -228,7 +228,7 @@ public abstract class HudsonTestCase extends TestCase {
      * Allocates a new temporary directory for the duration of this test.
      */
     protected File createTmpDir() throws IOException {
-        return TestEnvironment.get().temporaryDirectoryAllocator.allocate();
+        return env.temporaryDirectoryAllocator.allocate();
     }
 
     /**
