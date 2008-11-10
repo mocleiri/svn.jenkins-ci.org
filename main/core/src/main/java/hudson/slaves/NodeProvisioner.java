@@ -50,10 +50,9 @@ public class NodeProvisioner extends SafeTimerTask {
 
         // clean up the cancelled launch activity, then count the # of executors that we are about to bring up.
         int plannedCapacity = 0;
-        for (Iterator<PlannedNode> itr = pendingLaunches.iterator(); itr.hasNext();) {
-            PlannedNode f =  itr.next();
+        for (PlannedNode f : pendingLaunches) {
             if(f.future.isDone()) {
-                itr.remove();
+                pendingLaunches.remove(f);
                 continue;
             }
             plannedCapacity += f.numExecutors;
