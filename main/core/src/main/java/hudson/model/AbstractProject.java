@@ -197,6 +197,21 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     }
 
     /**
+     * Sets the assigned label.
+     */
+    public void setAssignedLabel(Label l) throws IOException {
+        if(l==null) {
+            canRoam = true;
+            assignedNode = null;
+        } else {
+            canRoam = false;
+            if(l==Hudson.getInstance().getSelfLabel())  assignedNode = null;
+            else                                        assignedNode = l.getName();
+        }
+        save();
+    }
+
+    /**
      * Get the term used in the UI to represent this kind of {@link AbstractProject}.
      * Must start with a capital letter.
      */
