@@ -133,19 +133,22 @@ public class SlaveComputer extends Computer {
         if(channel!=null)   return Futures.precomputed(null);
 
         closeChannel();
-        return Computer.threadPoolForRemoting.submit(new Runnable() {
-            public void run() {
+        return Computer.threadPoolForRemoting.submit(new java.util.concurrent.Callable<Object>() {
+            public Object call() throws Exception {
                 // do this on another thread so that the lengthy launch operation
                 // (which is typical) won't block UI thread.
                 StreamTaskListener listener = new StreamTaskListener(openLogFile());
                 launching.incrementAndGet();
                 try {
                     launcher.launch(SlaveComputer.this, listener);
+                    return null;
                 } catch (IOException e) {
                     Util.displayIOException(e,listener);
                     e.printStackTrace(listener.error(Messages.ComputerLauncher_unexpectedError()));
+                    throw e;
                 } catch (InterruptedException e) {
                     e.printStackTrace(listener.error(Messages.ComputerLauncher_abortedLaunch()));
+                    throw e;
                 } finally {
                     launching.decrementAndGet();
                 }
