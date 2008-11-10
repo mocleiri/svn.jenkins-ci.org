@@ -10,10 +10,12 @@ import hudson.triggers.Trigger;
 
 import java.util.concurrent.Future;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutionException;
 import java.util.List;
 import java.util.Iterator;
 import java.util.Collection;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * Uses the {@link LoadStatistics} and determines when we need to allocate
@@ -52,6 +54,13 @@ public class NodeProvisioner extends SafeTimerTask {
         int plannedCapacity = 0;
         for (PlannedNode f : pendingLaunches) {
             if(f.future.isDone()) {
+                try {
+                    f.future.get();
+                } catch (InterruptedException e) {
+                    throw new AssertionError(e); // since we confirmed that the future is already done
+                } catch (ExecutionException e) {
+                    LOGGER.log(Level.WARNING, "Provisioned slave failed to launch",e.getCause());
+                }
                 pendingLaunches.remove(f);
                 continue;
             }
