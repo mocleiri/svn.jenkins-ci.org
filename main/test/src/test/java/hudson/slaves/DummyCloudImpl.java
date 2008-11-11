@@ -76,7 +76,10 @@ public class DummyCloudImpl extends Cloud {
             caller.hudson.addNode(slave);
             Computer c = slave.toComputer();
             c.connect(false).get();
-            System.out.println(c.getLog());
+            synchronized (DummyCloudImpl.this) {
+                System.out.println(c.getName()+" launch"+(c.isOnline()?"ed successfully":" failed"));
+                System.out.println(c.getLog());
+            }
             return null;
         }
     }
