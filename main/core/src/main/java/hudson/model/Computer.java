@@ -17,6 +17,7 @@ import hudson.util.DaemonThreadFactory;
 import hudson.util.ExceptionCatchingThreadFactory;
 import hudson.util.RemotingDiagnostics;
 import hudson.util.RunList;
+import hudson.util.Futures;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.export.Exported;
@@ -169,9 +170,11 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
      * If this is the master, no-op. This method may return immediately
      * while the launch operation happens asynchronously.
      *
+     * @return
+     *      {@link Future} to track the asynchronous disconnect operation.
      * @see #connect(boolean)
      */
-    public void disconnect() { }
+    public Future<?> disconnect() { return Futures.precomputed(null); }
 
     /**
      * Number of {@link Executor}s that are configured for this computer.
