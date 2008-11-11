@@ -47,7 +47,7 @@ public class DummyCloudImpl extends Cloud {
             System.out.println("Provisioning");
             numProvisioned++;
             Future<Node> f = Computer.threadPoolForRemoting.submit(new Launcher(delay));
-            r.add(new PlannedNode("test",f,1));
+            r.add(new PlannedNode(name+" #"+numProvisioned,f,1));
             excessWorkload-=1;
         }
         return r;
@@ -55,6 +55,10 @@ public class DummyCloudImpl extends Cloud {
 
     private final class Launcher implements Callable<Node> {
         private final long time;
+        /**
+         * This is so that we can find out the status of Callable from the debugger.
+         */
+        private volatile Computer computer;
 
         private Launcher(long time) {
             this.time = time;
@@ -67,11 +71,11 @@ public class DummyCloudImpl extends Cloud {
             
             System.out.println("launching slave");
             DumbSlave slave = caller.createSlave();
-            Computer c = slave.toComputer();
-            c.connect(false).get();
+            computer = slave.toComputer();
+            computer.connect(false).get();
             synchronized (DummyCloudImpl.this) {
-                System.out.println(c.getName()+" launch"+(c.isOnline()?"ed successfully":" failed"));
-                System.out.println(c.getLog());
+                System.out.println(computer.getName()+" launch"+(computer.isOnline()?"ed successfully":" failed"));
+                System.out.println(computer.getLog());
             }
             return slave;
         }
