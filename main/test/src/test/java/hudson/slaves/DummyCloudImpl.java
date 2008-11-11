@@ -2,6 +2,7 @@ package hudson.slaves;
 
 import hudson.model.Computer;
 import hudson.model.Descriptor;
+import hudson.model.Node;
 import hudson.model.Node.Mode;
 import hudson.slaves.NodeProvisioner.PlannedNode;
 import org.jvnet.hudson.test.HudsonTestCase;
@@ -47,7 +48,7 @@ public class DummyCloudImpl extends Cloud {
         while(excessWorkload>0) {
             System.out.println("Provisioning");
             numProvisioned++;
-            Future f = Computer.threadPoolForRemoting.submit(new Launcher(delay));
+            Future<Node> f = Computer.threadPoolForRemoting.submit(new Launcher(delay));
             r.add(new PlannedNode("test",f,1));
             excessWorkload-=1;
         }
@@ -56,14 +57,14 @@ public class DummyCloudImpl extends Cloud {
 
     private final AtomicInteger iota = new AtomicInteger();
 
-    private final class Launcher implements Callable {
+    private final class Launcher implements Callable<Node> {
         private final long time;
 
         private Launcher(long time) {
             this.time = time;
         }
 
-        public Object call() throws Exception {
+        public Node call() throws Exception {
             // simulate the delay in provisioning a new slave,
             // since it's normally some async operation.
             Thread.sleep(time);
@@ -80,7 +81,7 @@ public class DummyCloudImpl extends Cloud {
                 System.out.println(c.getName()+" launch"+(c.isOnline()?"ed successfully":" failed"));
                 System.out.println(c.getLog());
             }
-            return null;
+            return slave;
         }
     }
 
