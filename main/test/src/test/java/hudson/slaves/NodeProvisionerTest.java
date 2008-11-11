@@ -5,7 +5,6 @@ import hudson.model.FreeStyleBuild;
 import hudson.model.FreeStyleProject;
 import hudson.model.LoadStatistics;
 import hudson.model.Node;
-import hudson.model.Project;
 import hudson.model.Result;
 import org.jvnet.hudson.test.HudsonTestCase;
 import org.jvnet.hudson.test.SleepBuilder;
@@ -43,10 +42,10 @@ public class NodeProvisionerTest extends HudsonTestCase {
     public void testAutoProvision() throws Exception {
         BulkChange bc = new BulkChange(hudson);
         try {
-            DummyCloudImpl cloud = initHudson();
+            DummyCloudImpl cloud = initHudson(10);
 
 
-            FreeStyleProject p = createJob(100);
+            FreeStyleProject p = createJob(10);
 
             Future<FreeStyleBuild> f = p.scheduleBuild2(0);
             f.get(30, TimeUnit.SECONDS); // if it's taking too long, abort.
@@ -65,9 +64,9 @@ public class NodeProvisionerTest extends HudsonTestCase {
         return p;
     }
 
-    private DummyCloudImpl initHudson() throws IOException {
+    private DummyCloudImpl initHudson(int delay) throws IOException {
         // start a dummy service
-        DummyCloudImpl cloud = new DummyCloudImpl(this);
+        DummyCloudImpl cloud = new DummyCloudImpl(this, delay);
         hudson.clouds.add(cloud);
 
         // no build on the master, to make sure we get everything from the cloud
@@ -83,11 +82,13 @@ public class NodeProvisionerTest extends HudsonTestCase {
     public void testLoadSpike() throws Exception {
         BulkChange bc = new BulkChange(hudson);
         try {
-            DummyCloudImpl cloud = initHudson();
+            DummyCloudImpl cloud = initHudson(0);
 
             List<FreeStyleProject> jobs = new ArrayList<FreeStyleProject>();
             for( int i=0; i<10; i++)
-                jobs.add(createJob(3000)); //set a large delay, or else we'd only fire up 1 instance
+                //set a large delay, to simulate the situation where we need to provision more slaves
+                // to keep up with the load  
+                jobs.add(createJob(3000));
 
             System.out.println("Scheduling a build");
             List<Future<FreeStyleBuild>> builds = new ArrayList<Future<FreeStyleBuild>>();
@@ -100,8 +101,9 @@ public class NodeProvisionerTest extends HudsonTestCase {
                 assertEquals(Result.SUCCESS,b.getResult());
             }
 
-            // since there's only one job, we expect there to be just one slave
-            assertTrue(1<cloud.numProvisioned);
+            // the time it takes to complete a job is eternally long compared to the time it takes to launch
+            // a new slave, so in this scenario we end up allocating 10 slaves for 10 jobs.
+            assertEquals(10,cloud.numProvisioned);
         } finally {
             bc.abort();
         }

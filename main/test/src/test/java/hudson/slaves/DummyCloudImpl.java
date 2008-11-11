@@ -36,10 +36,10 @@ public class DummyCloudImpl extends Cloud {
     // stats counter to perform assertions later
     public int numProvisioned;
 
-    public DummyCloudImpl(HudsonTestCase caller) {
+    public DummyCloudImpl(HudsonTestCase caller, int delay) {
         super("test");
         this.caller = caller;
-        delay = 300;
+        this.delay = delay;
     }
 
     public Collection<PlannedNode> provision(float excessWorkload) {
