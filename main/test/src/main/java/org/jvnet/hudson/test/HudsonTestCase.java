@@ -202,7 +202,7 @@ public abstract class HudsonTestCase extends TestCase {
 //
 
     protected FreeStyleProject createFreeStyleProject() throws IOException {
-        return createFreeStyleProject("test");
+        return createFreeStyleProject("test"+hudson.getItems().size());
     }
 
     protected FreeStyleProject createFreeStyleProject(String name) throws IOException {
@@ -210,7 +210,7 @@ public abstract class HudsonTestCase extends TestCase {
     }
 
     protected MatrixProject createMatrixProject() throws IOException {
-        return createMatrixProject("test");
+        return createMatrixProject("test"+hudson.getItems().size());
     }
 
     protected MatrixProject createMatrixProject(String name) throws IOException {
