@@ -327,16 +327,21 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     }
 
     private synchronized void setNumExecutors(int n) {
+        if(numExecutors==n) return; // no-op
+
+        int diff = n-numExecutors;
         this.numExecutors = n;
 
-        // send signal to all idle executors to potentially kill them off
-        for( Executor e : executors )
-            if(e.isIdle())
-                e.interrupt();
-
-        // if the number is increased, add new ones
-        while(executors.size()<numExecutors)
-            executors.add(new Executor(this));
+        if(diff<0) {
+            // send signal to all idle executors to potentially kill them off
+            for( Executor e : executors )
+                if(e.isIdle())
+                    e.interrupt();
+        } else {
+            // if the number is increased, add new ones
+            while(executors.size()<numExecutors)
+                executors.add(new Executor(this));
+        }
     }
 
     /**
