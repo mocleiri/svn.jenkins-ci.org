@@ -1,47 +1,21 @@
 package hudson.slaves;
 
 import hudson.BulkChange;
-import hudson.model.Computer;
-import hudson.model.Descriptor;
+import hudson.model.FreeStyleBuild;
 import hudson.model.FreeStyleProject;
 import hudson.model.LoadStatistics;
 import hudson.model.Node;
-import hudson.model.Node.Mode;
-import hudson.remoting.Channel;
-import hudson.remoting.Which;
-import hudson.slaves.NodeProvisioner.PlannedNode;
 import org.jvnet.hudson.test.HudsonTestCase;
 import org.jvnet.hudson.test.SleepBuilder;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Kohsuke Kawaguchi
  */
 public class NodeProvisionerTest extends HudsonTestCase {
-    private final AtomicInteger iota = new AtomicInteger();
-    private final class Sleeper implements Callable {
-        private final long time;
-
-        private Sleeper(long time) {
-            this.time = time;
-        }
-
-        public Object call() throws Exception {
-            Thread.sleep(time);
-            System.out.println("launching slave");
-            DumbSlave slave = new DumbSlave("idiot" + iota.incrementAndGet(), "dummy",
-                    createTmpDir().getPath(), "1", Mode.NORMAL, "java -jar "+ Which.jarFile(Channel.class), new CommandLauncher(""), RetentionStrategy.NOOP);
-            hudson.addNode(slave);
-            return slave.toComputer().connect().get();
-        }
-    }
 
     private int original;
 
@@ -61,24 +35,10 @@ public class NodeProvisionerTest extends HudsonTestCase {
         BulkChange bc = new BulkChange(hudson);
         try {
             // start a dummy service
-            hudson.clouds.add(new Cloud("test") {
-                public Collection<PlannedNode> provision(float excessWorkload) {
-                    List<PlannedNode> r = new ArrayList<PlannedNode>();
-                    while(excessWorkload>0) {
-                        System.out.println("Provisioning");
-                        Future f = Computer.threadPoolForRemoting.submit(new Sleeper(300));
-                        r.add(new PlannedNode("test",f,1));
-                        excessWorkload-=1;
-                    }
-                    return r;
-                }
+            DummyCloudImpl cloud = new DummyCloudImpl(this);
+            hudson.clouds.add(cloud);
 
-                public Descriptor<Cloud> getDescriptor() {
-                    throw new UnsupportedOperationException();
-                }
-            });
-
-            // no build on the master
+            // no build on the master, to make sure we get everything from the cloud
             hudson.setNumExecutors(0);
             hudson.setNodes(Collections.<Node>emptyList());
 
@@ -86,9 +46,14 @@ public class NodeProvisionerTest extends HudsonTestCase {
             p.setAssignedLabel(null);   // let it roam free, or else it ties itself to the master since we have no slaves
             p.getBuildersList().add(new SleepBuilder(100));
 
-            p.scheduleBuild2(0).get();
+            Future<FreeStyleBuild> f = p.scheduleBuild2(0);
+            f.get(30, TimeUnit.SECONDS); // if it's taking too long, abort.
+
+            // since there's only one job, we expect there to be just one slave
+            assertEquals(1,cloud.numProvisioned);
         } finally {
             bc.abort();
         }
     }
+
 }
