@@ -9,13 +9,13 @@ import hudson.model.Result;
 import org.jvnet.hudson.test.HudsonTestCase;
 import org.jvnet.hudson.test.SleepBuilder;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.ExecutionException;
-import java.io.IOException;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -26,7 +26,7 @@ public class NodeProvisionerTest extends HudsonTestCase {
     @Override
     protected void setUp() throws Exception {
         original = LoadStatistics.CLOCK;
-        LoadStatistics.CLOCK = 10; // 10ms
+        LoadStatistics.CLOCK = 10; // run x1000 the regular speed to speed up the test
         super.setUp();
     }
 
@@ -65,11 +65,11 @@ public class NodeProvisionerTest extends HudsonTestCase {
         try {
             DummyCloudImpl cloud = initHudson(0);
 
-            verifySuccessfulCompletion(buildAll(create10SlowJobs()));
+            verifySuccessfulCompletion(buildAll(create5SlowJobs()));
 
             // the time it takes to complete a job is eternally long compared to the time it takes to launch
             // a new slave, so in this scenario we end up allocating 10 slaves for 10 jobs.
-            assertEquals(10,cloud.numProvisioned);
+            assertEquals(5,cloud.numProvisioned);
         } finally {
             bc.abort();
         }
@@ -83,13 +83,13 @@ public class NodeProvisionerTest extends HudsonTestCase {
         try {
             DummyCloudImpl cloud = initHudson(0);
             // add slaves statically upfront
-            createSlave();
-            createSlave();
+            createSlave().toComputer().connect(false).get();
+            createSlave().toComputer().connect(false).get();
 
-            verifySuccessfulCompletion(buildAll(create10SlowJobs()));
+            verifySuccessfulCompletion(buildAll(create5SlowJobs()));
 
-            // we should have used two static slaves, thus only 8 slaves should have been provisioned
-            assertEquals(8,cloud.numProvisioned);
+            // we should have used two static slaves, thus only 3 slaves should have been provisioned
+            assertEquals(3,cloud.numProvisioned);
         } finally {
             bc.abort();
         }
@@ -114,12 +114,12 @@ public class NodeProvisionerTest extends HudsonTestCase {
         return cloud;
     }
 
-    private List<FreeStyleProject> create10SlowJobs() throws IOException {
+    private List<FreeStyleProject> create5SlowJobs() throws IOException {
         List<FreeStyleProject> jobs = new ArrayList<FreeStyleProject>();
-        for( int i=0; i<10; i++)
+        for( int i=0; i<5; i++)
             //set a large delay, to simulate the situation where we need to provision more slaves
             // to keep up with the load
-            jobs.add(createJob(3000));
+            jobs.add(createJob(5000));
         return jobs;
     }
 
