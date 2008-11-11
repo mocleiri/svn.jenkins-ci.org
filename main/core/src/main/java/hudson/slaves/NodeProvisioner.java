@@ -12,7 +12,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.List;
-import java.util.Iterator;
 import java.util.Collection;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -74,7 +73,17 @@ public class NodeProvisioner extends SafeTimerTask {
 
         float idle = stat.getLatestIdleExecutors(picker);
         if(idle<MARGIN) {// the system is fully utilized
-            float qlen = stat.queueLength.getLatest(picker);
+            // make a conservative estimate of queue length
+            // stat.queueLength is the exponential moving average, so when there's a temporal queue length surge,
+            // it increases slowly, which helps us avoid over-reaction.
+            // OTOH, when the Q length goes down because of new capacity, the moving average decreases only slowly,
+            // while planned capacity goes down immediately, so this creates phantom excessive workload.
+            //
+            // so we look at the current Q length as well and take a smaller value, to be conservative.
+            // in a long run when nothing changes, the moving average and the snapshot value is identical,
+            // so this ensures that we won't have something in Q forever waiting for an extra capacity.
+            float qlen = Math.min(stat.queueLength.getLatest(picker), hudson.getQueue().getBuildableItems().size());
+
             float excessWorkload = qlen - plannedCapacity;
             if(excessWorkload>1-MARGIN) {// and there's more work to do than we are currently bringing up
                 LOGGER.fine("Excess workload "+excessWorkload+" detected. (planned capacity="+plannedCapacity+",Qlen="+qlen+")");
