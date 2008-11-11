@@ -143,6 +143,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -1616,11 +1617,12 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
      * Called to shut down the system.
      */
     public void cleanUp() {
+        Set<Future<?>> pending = new HashSet<Future<?>>();
         terminating = true;
         for( Computer c : computers.values() ) {
             c.interrupt();
             c.kill();
-            c.disconnect();
+            pending.add(c.disconnect());
         }
         ExternalJob.reloadThread.interrupt();
         Trigger.timer.cancel();
@@ -1637,7 +1639,18 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             getQueue().save();
 
         threadPoolForLoad.shutdown();
-        
+        for (Future<?> f : pending)
+            try {
+                f.get(10, TimeUnit.SECONDS);    // if clean up operation didn't complete in time, we fail the test
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;  // someone wants us to die now. quick!
+            } catch (ExecutionException e) {
+                LOGGER.log(Level.WARNING, "Failed to shut down properly",e);
+            } catch (TimeoutException e) {
+                LOGGER.log(Level.WARNING, "Failed to shut down properly",e);
+            }
+
         LogFactory.releaseAll();
 
         theInstance = null;
