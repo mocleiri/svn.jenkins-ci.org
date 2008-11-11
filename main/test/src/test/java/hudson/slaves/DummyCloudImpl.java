@@ -3,7 +3,6 @@ package hudson.slaves;
 import hudson.model.Computer;
 import hudson.model.Descriptor;
 import hudson.model.Node;
-import hudson.model.Node.Mode;
 import hudson.slaves.NodeProvisioner.PlannedNode;
 import org.jvnet.hudson.test.HudsonTestCase;
 
@@ -12,7 +11,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * {@link Cloud} implementation useful for testing.
@@ -55,8 +53,6 @@ public class DummyCloudImpl extends Cloud {
         return r;
     }
 
-    private final AtomicInteger iota = new AtomicInteger();
-
     private final class Launcher implements Callable<Node> {
         private final long time;
 
@@ -70,11 +66,7 @@ public class DummyCloudImpl extends Cloud {
             Thread.sleep(time);
             
             System.out.println("launching slave");
-            DumbSlave slave = new DumbSlave("idiot" + iota.incrementAndGet(), "dummy",
-                    caller.createTmpDir().getPath(), "1", Mode.NORMAL, "", new CommandLauncher(
-                            System.getProperty("java.home")+"/bin/java -jar "+
-                     caller.hudson.getJnlpJars("slave.jar").getURL().getPath()), RetentionStrategy.NOOP);
-            caller.hudson.addNode(slave);
+            DumbSlave slave = caller.createSlave();
             Computer c = slave.toComputer();
             c.connect(false).get();
             synchronized (DummyCloudImpl.this) {

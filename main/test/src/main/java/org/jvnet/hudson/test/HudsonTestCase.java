@@ -18,10 +18,14 @@ import hudson.model.UpdateCenter;
 import hudson.model.Saveable;
 import hudson.model.Run;
 import hudson.model.Result;
+import hudson.model.Node.Mode;
 import hudson.tasks.Mailer;
 import hudson.Launcher.LocalLauncher;
 import hudson.util.StreamTaskListener;
 import hudson.util.ProcessTreeKiller;
+import hudson.slaves.DumbSlave;
+import hudson.slaves.CommandLauncher;
+import hudson.slaves.RetentionStrategy;
 import junit.framework.TestCase;
 import org.jvnet.hudson.test.HudsonHomeLoader.CopyExisting;
 import org.jvnet.hudson.test.recipes.Recipe;
@@ -229,6 +233,19 @@ public abstract class HudsonTestCase extends TestCase {
      */
     public File createTmpDir() throws IOException {
         return env.temporaryDirectoryAllocator.allocate();
+    }
+
+    /**
+     * Creates and launches a new slave on the local host.
+     */
+    public DumbSlave createSlave() throws Exception {
+        CommandLauncher launcher = new CommandLauncher(
+                System.getProperty("java.home") + "/bin/java -jar " + hudson.getJnlpJars("slave.jar").getURL().getPath());
+
+        DumbSlave slave = new DumbSlave("slave" + hudson.getNodes().size(), "dummy",
+                createTmpDir().getPath(), "1", Mode.NORMAL, "", launcher, RetentionStrategy.NOOP);
+        hudson.addNode(slave);
+        return slave;
     }
 
     /**
