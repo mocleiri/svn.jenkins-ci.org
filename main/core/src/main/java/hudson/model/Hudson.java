@@ -2646,6 +2646,11 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         }
 
         @Override
+        public boolean isConnecting() {
+            return false;
+        }
+
+        @Override
         public String getDisplayName() {
             return Messages.Hudson_Computer_DisplayName();
         }

@@ -202,6 +202,12 @@ public class SlaveComputer extends Computer {
         }
     }
 
+    @Override
+    public boolean isConnecting() {
+        Future<?> l = lastConnectActivity;
+        return isOffline() && l!=null && !l.isDone();
+    }
+
     public OutputStream openLogFile() {
         OutputStream os;
         try {

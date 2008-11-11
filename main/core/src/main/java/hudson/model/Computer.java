@@ -236,6 +236,11 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     }
 
     /**
+     * Is a {@link #connect(boolean)} operation in progress?
+     */
+    public abstract boolean isConnecting();
+
+    /**
      * Returns true if this computer is supposed to be launched via JNLP.
      * @deprecated see {@linkplain #isLaunchSupported()} and {@linkplain ComputerLauncher}
      */
