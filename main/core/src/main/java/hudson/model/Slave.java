@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.MalformedURLException;
 import java.util.*;
 
 /**
@@ -321,12 +322,17 @@ public abstract class Slave implements Node, Serializable {
         }
 
         private URLConnection connect() throws IOException {
+            URL res = getURL();
+            return res.openConnection();
+        }
+
+        public URL getURL() throws MalformedURLException {
             URL res = Hudson.getInstance().servletContext.getResource("/WEB-INF/" + fileName);
             if(res==null) {
                 // during the development this path doesn't have the files.
                 res = new URL(new File(".").getAbsoluteFile().toURL(),"target/generated-resources/WEB-INF/"+fileName);
             }
-            return res.openConnection();
+            return res;
         }
 
         public byte[] readFully() throws IOException {

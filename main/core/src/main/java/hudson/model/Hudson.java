@@ -143,7 +143,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.FutureTask;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -705,7 +704,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         } else {
             if(n.getNumExecutors()>0) {
                 computers.put(n,c=n.createComputer());
-                c.connect();
+                c.connect(true);
             }
         }
         used.add(c);
@@ -2676,7 +2675,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             rsp.sendError(SC_NOT_FOUND);
         }
 
-        public Future<?> connect() {
+        public Future<?> connect(boolean forceReconnect) {
             return Futures.precomputed(null);
         }
 

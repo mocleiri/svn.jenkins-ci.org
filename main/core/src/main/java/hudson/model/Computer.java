@@ -137,10 +137,10 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     public abstract void doLaunchSlaveAgent( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException;
 
     /**
-     * @deprecated  Use {@link #connect()}
+     * @deprecated  Use {@link #connect(boolean)}
      */
     public final void launch() {
-        connect();
+        connect(true);
     }
 
     /**
@@ -154,10 +154,14 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
      *
      * @see #disconnect()
      *
+     * @param forceReconnect
+     *      If true and a connect activity is already in progress, it will be cancelled and
+     *      the new one will be started. If false, and a connect activity is already in progress, this method
+     *      will do nothing and just return the pending connection operation.
      * @return
-     *      A {@link Future} representing pending completion of the task. 
+     *      A {@link Future} representing pending completion of the task.
      */
-    public abstract Future<?> connect();
+    public abstract Future<?> connect(boolean forceReconnect);
 
     /**
      * Disconnect this computer.
@@ -165,7 +169,7 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
      * If this is the master, no-op. This method may return immediately
      * while the launch operation happens asynchronously.
      *
-     * @see #connect()
+     * @see #connect(boolean)
      */
     public void disconnect() { }
 
@@ -604,4 +608,6 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     // TODO: define this as a separate permission?
     public static final Permission CONFIGURE = Hudson.CONFIGURE;
     public static final Permission DELETE = Hudson.DELETE;
+
+
 }

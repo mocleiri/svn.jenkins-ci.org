@@ -28,7 +28,6 @@ import java.util.logging.Logger;
 import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.Future;
 import java.nio.charset.Charset;
 
@@ -66,10 +65,12 @@ public class SlaveComputer extends Computer {
     private transient int numRetryAttempt;
 
     /**
-     * If we are launching this slave, this is > 0.
-     * Used to determine what icons to show.
+     * Tracks the status of the last launch operation, which is always asynchronous.
+     * This can be used to wait for the completion, or cancel the launch activity.
      */
-    private final AtomicInteger launching = new AtomicInteger();
+    private volatile Future<?> lastConnectActivity = null;
+
+    private Object constructed = new Object();
 
     public SlaveComputer(Slave slave) {
         super(slave);
@@ -109,7 +110,8 @@ public class SlaveComputer extends Computer {
 
     @Override
     public String getIcon() {
-        if(launching.get()>0)
+        Future<?> l = lastConnectActivity;
+        if(l!=null && !l.isDone())
             return "computer-flash.gif";
         return super.getIcon();
     }
@@ -129,16 +131,17 @@ public class SlaveComputer extends Computer {
         return launcher;
     }
 
-    public Future<?> connect() {
+    public Future<?> connect(boolean forceReconnect) {
         if(channel!=null)   return Futures.precomputed(null);
+        if(!forceReconnect && lastConnectActivity!=null)
+            return lastConnectActivity;
 
         closeChannel();
-        return Computer.threadPoolForRemoting.submit(new java.util.concurrent.Callable<Object>() {
+        return lastConnectActivity = Computer.threadPoolForRemoting.submit(new java.util.concurrent.Callable<Object>() {
             public Object call() throws Exception {
                 // do this on another thread so that the lengthy launch operation
                 // (which is typical) won't block UI thread.
                 StreamTaskListener listener = new StreamTaskListener(openLogFile());
-                launching.incrementAndGet();
                 try {
                     launcher.launch(SlaveComputer.this, listener);
                     return null;
@@ -149,8 +152,6 @@ public class SlaveComputer extends Computer {
                 } catch (InterruptedException e) {
                     e.printStackTrace(listener.error(Messages.ComputerLauncher_abortedLaunch()));
                     throw e;
-                } finally {
-                    launching.decrementAndGet();
                 }
             }
         });
@@ -260,10 +261,8 @@ public class SlaveComputer extends Computer {
         {// send jars that we need for our operations
             // TODO: maybe I should generalize this kind of "post initialization" processing
             FilePath dst = new FilePath(channel, remoteFs);
-            new FilePath(Which.jarFile(Main.class)).copyTo(dst.child("maven-agent.jar"));
-            log.println("Copied maven-agent.jar");
-            new FilePath(Which.jarFile(PluginManagerInterceptor.class)).copyTo(dst.child("maven-interceptor.jar"));
-            log.println("Copied maven-interceptor.jar");
+            copyJar(log, dst, Main.class, "maven-agent");
+            copyJar(log, dst, PluginManagerInterceptor.class, "maven-interceptor");
         }
 
         channel.call(new LogInstaller());
@@ -289,6 +288,26 @@ public class SlaveComputer extends Computer {
         for (ComputerListener cl : Hudson.getInstance().getComputerListeners())
             cl.onOnline(this);
         Hudson.getInstance().getQueue().scheduleMaintenance();
+    }
+
+    /**
+     * Copies a jar file from the master to slave.
+     */
+    private void copyJar(PrintWriter log, FilePath dst, Class<?> representative, String seedName) throws IOException, InterruptedException {
+        // in normal execution environment, the master should be loading 'representative' from this jar, so
+        // in that way we can find it.
+        File jar = Which.jarFile(representative);
+
+        if(jar.isDirectory()) {
+            // but during the development and unit test environment, we may be picking the class up from the classes dir,
+            // in which case we need to find this in a tricker way.
+            String dir = Hudson.getInstance().servletContext.getRealPath("/WEB-INF/lib");
+            FilePath[] paths = new FilePath(new File(dir)).list(seedName + "-*.jar");
+            jar = new File(paths[0].getRemote());
+        }
+
+        new FilePath(jar).copyTo(dst.child(seedName +".jar"));
+        log.println("Copied "+seedName+".jar");
     }
 
     @Override
@@ -337,7 +356,7 @@ public class SlaveComputer extends Computer {
             return;
         }
 
-        connect();
+        connect(true);
 
         // TODO: would be nice to redirect the user to "launching..." wait page,
         // then spend a few seconds there and poll for the completion periodically.
@@ -349,7 +368,7 @@ public class SlaveComputer extends Computer {
         if(numRetryAttempt<6 || (numRetryAttempt%12)==0) {
             // initially retry several times quickly, and after that, do it infrequently.
             logger.info("Attempting to reconnect "+nodeName);
-            connect();
+            connect(true);
         }
     }
 
@@ -399,10 +418,10 @@ public class SlaveComputer extends Computer {
         launcher = grabLauncher(node);
 
         // maybe the configuration was changed to relaunch the slave, so try to re-launch now.
-        // "launching==null" test is an ugly hack to avoid launching before the object is fully
+        // "constructed==null" test is an ugly hack to avoid launching before the object is fully
         // constructed.
-        if(launching!=null)
-            connect();
+        if(constructed!=null)
+            connect(true);
     }
 
     /**
