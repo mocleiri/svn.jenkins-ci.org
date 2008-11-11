@@ -89,6 +89,18 @@ public final class ComputerSet extends AbstractModelObject {
         return r;
     }
 
+    /**
+     * {@code getTotalExecutors()-getBusyExecutors()}, plus executors that are being brought online.
+     */
+    public int getIdleExecutors() {
+        int r=0;
+        for (Computer c : get_all()) {
+            if(c.isOnline() || c.isConnecting())
+                r += c.countIdle();
+        }
+        return r;
+    }
+
     public String getSearchUrl() {
         return "/computers/";
     }
