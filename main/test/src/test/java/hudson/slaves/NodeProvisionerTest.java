@@ -22,14 +22,12 @@ import java.io.IOException;
  * @author Kohsuke Kawaguchi
  */
 public class NodeProvisionerTest extends HudsonTestCase {
-
     private int original;
 
     @Override
     protected void setUp() throws Exception {
         original = LoadStatistics.CLOCK;
         LoadStatistics.CLOCK = 10; // 10ms
-        Logger.getLogger(NodeProvisioner.class.getName()).setLevel(Level.FINE);
         super.setUp();
     }
 
@@ -59,25 +57,6 @@ public class NodeProvisionerTest extends HudsonTestCase {
             bc.abort();
         }
     }
-
-    private FreeStyleProject createJob(int delay) throws IOException {
-        FreeStyleProject p = createFreeStyleProject();
-        p.setAssignedLabel(null);   // let it roam free, or else it ties itself to the master since we have no slaves
-        p.getBuildersList().add(new SleepBuilder(delay));
-        return p;
-    }
-
-    private DummyCloudImpl initHudson(int delay) throws IOException {
-        // start a dummy service
-        DummyCloudImpl cloud = new DummyCloudImpl(this, delay);
-        hudson.clouds.add(cloud);
-
-        // no build on the master, to make sure we get everything from the cloud
-        hudson.setNumExecutors(0);
-        hudson.setNodes(Collections.<Node>emptyList());
-        return cloud;
-    }
-
 
     /**
      * Scenario: we got a lot of jobs all of the sudden, and we need to fire up a few nodes.
@@ -110,5 +89,24 @@ public class NodeProvisionerTest extends HudsonTestCase {
         } finally {
             bc.abort();
         }
+    }
+
+
+    private FreeStyleProject createJob(int delay) throws IOException {
+        FreeStyleProject p = createFreeStyleProject();
+        p.setAssignedLabel(null);   // let it roam free, or else it ties itself to the master since we have no slaves
+        p.getBuildersList().add(new SleepBuilder(delay));
+        return p;
+    }
+
+    private DummyCloudImpl initHudson(int delay) throws IOException {
+        // start a dummy service
+        DummyCloudImpl cloud = new DummyCloudImpl(this, delay);
+        hudson.clouds.add(cloud);
+
+        // no build on the master, to make sure we get everything from the cloud
+        hudson.setNumExecutors(0);
+        hudson.setNodes(Collections.<Node>emptyList());
+        return cloud;
     }
 }
