@@ -12,6 +12,8 @@ import org.jvnet.hudson.test.SleepBuilder;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.io.IOException;
@@ -27,6 +29,7 @@ public class NodeProvisionerTest extends HudsonTestCase {
     protected void setUp() throws Exception {
         original = LoadStatistics.CLOCK;
         LoadStatistics.CLOCK = 10; // 10ms
+        Logger.getLogger(NodeProvisioner.class.getName()).setLevel(Level.FINE);
         super.setUp();
     }
 

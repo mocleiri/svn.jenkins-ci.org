@@ -49,7 +49,10 @@ public abstract class Cloud extends AbstractModelObject implements ExtensionPoin
         return getACL().hasPermission(permission);
     }
 
-    public abstract Collection<PlannedNode> provision(float excessWorkload);
+    /**
+     * Provisions new {@link Node}s from this cloud.
+     */
+    public abstract Collection<PlannedNode> provision(int excessWorkload);
 
     /**
      * All registered {@link Cloud} implementations.

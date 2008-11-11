@@ -74,12 +74,20 @@ public class NodeProvisioner extends SafeTimerTask {
 
         float idle = stat.getLatestIdleExecutors(picker);
         if(idle<MARGIN) {// the system is fully utilized
-            float excessWorkload = stat.queueLength.getLatest(picker) - plannedCapacity;
+            float qlen = stat.queueLength.getLatest(picker);
+            float excessWorkload = qlen - plannedCapacity;
             if(excessWorkload>1-MARGIN) {// and there's more work to do than we are currently bringing up
-                LOGGER.fine("Excess workload "+excessWorkload+" detected.");
+                LOGGER.fine("Excess workload "+excessWorkload+" detected. (planned capacity="+plannedCapacity+",Qlen="+qlen+")");
                 for( Cloud c : hudson.clouds ) {
                     if(excessWorkload<0)    break;  // enough slaves allocated
-                    Collection<PlannedNode> additionalCapacities = c.provision(excessWorkload);
+
+                    // provisioning a new node should be conservative --- for example if exceeWorkload is 1.4,
+                    // we don't want to allocate two nodes but just one.
+                    // OTOH, because of the exponential decay, even when we need one slave, excess workload is always
+                    // something like 0.95, in which case we want to allocate one node.
+                    // so the threshold here is 1-MARGIN, and hence floor(excessWorkload+MARGIN) is needed to handle this.
+
+                    Collection<PlannedNode> additionalCapacities = c.provision((int)Math.round(Math.floor(excessWorkload+MARGIN)));
                     for (PlannedNode ac : additionalCapacities) {
                         LOGGER.info(ac.displayName+" provisioned from "+c.name+" with "+ac.numExecutors+" (remaining excess workload:"+excessWorkload+")");
                         excessWorkload -= ac.numExecutors;
