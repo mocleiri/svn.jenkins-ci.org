@@ -135,6 +135,8 @@ public class SlaveComputer extends Computer {
         if(channel!=null)   return Futures.precomputed(null);
         if(!forceReconnect && lastConnectActivity!=null)
             return lastConnectActivity;
+        if(forceReconnect && lastConnectActivity!=null)
+            logger.fine("Forcing a reconnect");
 
         closeChannel();
         return lastConnectActivity = Computer.threadPoolForRemoting.submit(new java.util.concurrent.Callable<Object>() {
@@ -337,8 +339,8 @@ public class SlaveComputer extends Computer {
     }
 
     @Override
-    public void disconnect() {
-        Computer.threadPoolForRemoting.execute(new Runnable() {
+    public Future<?> disconnect() {
+        return Computer.threadPoolForRemoting.submit(new Runnable() {
             public void run() {
                 // do this on another thread so that any lengthy disconnect operation
                 // (which could be typical) won't block UI thread.
@@ -421,7 +423,7 @@ public class SlaveComputer extends Computer {
         // "constructed==null" test is an ugly hack to avoid launching before the object is fully
         // constructed.
         if(constructed!=null)
-            connect(true);
+            connect(false);
     }
 
     /**
