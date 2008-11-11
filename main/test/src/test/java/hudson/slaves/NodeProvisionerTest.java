@@ -119,7 +119,7 @@ public class NodeProvisionerTest extends HudsonTestCase {
         for( int i=0; i<5; i++)
             //set a large delay, to simulate the situation where we need to provision more slaves
             // to keep up with the load
-            jobs.add(createJob(5000));
+            jobs.add(createJob(3000));
         return jobs;
     }
 
