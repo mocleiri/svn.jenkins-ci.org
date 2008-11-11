@@ -63,7 +63,7 @@ import java.util.logging.Logger;
  * @author Kohsuke Kawaguchi
  */
 public abstract class HudsonTestCase extends TestCase {
-    protected Hudson hudson;
+    public Hudson hudson;
 
     protected final TestEnvironment env = new TestEnvironment();
     protected HudsonHomeLoader homeLoader = HudsonHomeLoader.NEW;
@@ -227,7 +227,7 @@ public abstract class HudsonTestCase extends TestCase {
     /**
      * Allocates a new temporary directory for the duration of this test.
      */
-    protected File createTmpDir() throws IOException {
+    public File createTmpDir() throws IOException {
         return env.temporaryDirectoryAllocator.allocate();
     }
 
