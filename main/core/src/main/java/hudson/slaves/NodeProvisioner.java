@@ -4,6 +4,7 @@ import hudson.model.LoadStatistics;
 import hudson.model.Node;
 import hudson.model.Hudson;
 import hudson.model.MultiStageTimeSeries;
+import static hudson.model.LoadStatistics.DECAY;
 import hudson.model.MultiStageTimeSeries.Picker;
 import hudson.triggers.SafeTimerTask;
 import hudson.triggers.Trigger;
@@ -41,6 +42,14 @@ public class NodeProvisioner extends SafeTimerTask {
 
     private List<PlannedNode> pendingLaunches = new CopyOnWriteArrayList<PlannedNode>();
 
+    /**
+     * Exponential moving average of the "planned ePcapacity" over time, which is the number of
+     * additional executors being brought up.
+     *
+     * This is used to filter out high-frequency components from the planned capacity, so that
+     * the comparison with other low-frequency only variables won't leave spikes. 
+     */
+    private final MultiStageTimeSeries plannedCapacitiesEMA = new MultiStageTimeSeries(0,DECAY);
 
     private NodeProvisioner() {}
 
@@ -50,7 +59,7 @@ public class NodeProvisioner extends SafeTimerTask {
         MultiStageTimeSeries.Picker picker = Picker.SEC10;
 
         // clean up the cancelled launch activity, then count the # of executors that we are about to bring up.
-        int plannedCapacity = 0;
+        float plannedCapacity = 0;
         for (PlannedNode f : pendingLaunches) {
             if(f.future.isDone()) {
                 try {
@@ -65,6 +74,7 @@ public class NodeProvisioner extends SafeTimerTask {
             }
             plannedCapacity += f.numExecutors;
         }
+        plannedCapacitiesEMA.update(plannedCapacity);
 
         Hudson hudson = Hudson.getInstance();
 
@@ -83,6 +93,11 @@ public class NodeProvisioner extends SafeTimerTask {
             // in a long run when nothing changes, the moving average and the snapshot value is identical,
             // so this ensures that we won't have something in Q forever waiting for an extra capacity.
             float qlen = Math.min(stat.queueLength.getLatest(picker), hudson.getQueue().getBuildableItems().size());
+
+            // when we subtract plannedCapacity from qlen below, also make a conservative estimate
+            // by mixing in  the EMA of planned capacity. This prevents a temporary glitch from allocating
+            // more slaves.
+            plannedCapacity = Math.max(plannedCapacitiesEMA.getLatest(picker),plannedCapacity);
 
             float excessWorkload = qlen - plannedCapacity;
             if(excessWorkload>1-MARGIN) {// and there's more work to do than we are currently bringing up

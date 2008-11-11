@@ -33,7 +33,7 @@ public class MultiStageTimeSeries {
     /**
      * Call this method every 10 sec and supply a new data point.
      */
-    protected void update(float f) {
+    public void update(float f) {
         sec10.update(f);
         counter = (counter+1)%360;   // 1hour/10sec = 60mins/10sec=3600secs/10sec = 360
         if(counter%6==0)    min.update(f);
