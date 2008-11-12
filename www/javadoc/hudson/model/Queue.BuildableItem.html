@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Queue.BuildableItem (Hudson core 1.260 API)
+Queue.BuildableItem (Hudson core 1.261 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-06">
+<META NAME="date" CONTENT="2008-11-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.BuildableItem (Hudson core 1.260 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.BuildableItem (Hudson core 1.260 API)";
+        parent.document.title="Queue.BuildableItem (Hudson core 1.261 API)";
     }
 }
 </SCRIPT>
@@ -180,6 +180,14 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a human-readable status message describing why it's in the queu.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.BuildableItem.html#isStuck()">isStuck</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True if the item is starving for an executor for too long.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Queue.Item"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -247,6 +255,23 @@ public java.lang.String <B>getWhy</B>()</PRE>
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.Item.html#getWhy()">getWhy</A></CODE> in class <CODE><A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isStuck()"><!-- --></A><H3>
+isStuck</H3>
+<PRE>
+public boolean <B>isStuck</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Queue.Item.html#isStuck()">Queue.Item</A></CODE></B></DD>
+<DD>True if the item is starving for an executor for too long.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Queue.Item.html#isStuck()">isStuck</A></CODE> in class <CODE><A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ResponseTimeMonitor.Data (Hudson core 1.260 API)
+ResponseTimeMonitor.Data (Hudson core 1.261 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-06">
+<META NAME="date" CONTENT="2008-11-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ResponseTimeMonitor.Data (Hudson core 1.260 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ResponseTimeMonitor.Data (Hudson core 1.260 API)";
+        parent.document.title="ResponseTimeMonitor.Data (Hudson core 1.261 API)";
     }
 }
 </SCRIPT>
@@ -101,7 +101,8 @@ java.lang.Object
 </DL>
 <HR>
 <DL>
-<DT><PRE>public static final class <B>ResponseTimeMonitor.Data</B><DT>extends java.lang.Object</DL>
+<DT><PRE><FONT SIZE="-1">@ExportedBean
+</FONT>public static final class <B>ResponseTimeMonitor.Data</B><DT>extends java.lang.Object</DL>
 </PRE>
 
 <P>
@@ -124,7 +125,7 @@ Immutable representation of the monitoring data.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;long</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/node_monitors/ResponseTimeMonitor.Data.html#average()">average</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/ResponseTimeMonitor.Data.html#getAverage()">getAverage</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computes the average response time, by taking the time out into account.</TD>
@@ -168,10 +169,11 @@ Immutable representation of the monitoring data.
 </TR>
 </TABLE>
 
-<A NAME="average()"><!-- --></A><H3>
-average</H3>
+<A NAME="getAverage()"><!-- --></A><H3>
+getAverage</H3>
 <PRE>
-public long <B>average</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public long <B>getAverage</B>()</PRE>
 <DL>
 <DD>Computes the average response time, by taking the time out into account.
 <P>

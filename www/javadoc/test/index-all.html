@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Test harness for Hudson and plugins 1.260 API)
+Index (Test harness for Hudson and plugins 1.261 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-06">
+<META NAME="date" CONTENT="2008-11-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Test harness for Hudson and plugins 1.260 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Test harness for Hudson and plugins 1.260 API)";
+        parent.document.title="Index (Test harness for Hudson and plugins 1.261 API)";
     }
 }
 </SCRIPT>
@@ -97,7 +97,10 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/Temporary
 <DD>Allocates a new empty temporary directory and returns it.
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatus(hudson.model.Result, hudson.model.Run)"><B>assertBuildStatus(Result, Run)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
-<DD>&nbsp;
+<DD>Asserts that the outcome of the build is a specific outcome.
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertLogContains(java.lang.String, hudson.model.Run)"><B>assertLogContains(String, Run)</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>Asserts that the console output of the build contains the given substring.
 </DL>
 <HR>
 <A NAME="_B_"><!-- --></A><H2>
@@ -113,6 +116,9 @@ Variable in class org.jvnet.hudson.test.rhino.<A HREF="./org/jvnet/hudson/test/r
 <DD>Call stack as a list.
 <DT><A HREF="./org/jvnet/hudson/test/rhino/CallStackFrame.html" title="class in org.jvnet.hudson.test.rhino"><B>CallStackFrame</B></A> - Class in <A HREF="./org/jvnet/hudson/test/rhino/package-summary.html">org.jvnet.hudson.test.rhino</A><DD>Stack frame.<DT><A HREF="./org/jvnet/hudson/test/rhino/CallStackFrame.html#CallStackFrame(org.jvnet.hudson.test.rhino.JavaScriptDebugger, org.mozilla.javascript.debug.DebuggableScript)"><B>CallStackFrame(JavaScriptDebugger, DebuggableScript)</B></A> - 
 Constructor for class org.jvnet.hudson.test.rhino.<A HREF="./org/jvnet/hudson/test/rhino/CallStackFrame.html" title="class in org.jvnet.hudson.test.rhino">CallStackFrame</A>
+<DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/SingleFileSCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)"><B>checkout(AbstractBuild, Launcher, FilePath, BuildListener, File)</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/SingleFileSCM.html" title="class in org.jvnet.hudson.test">SingleFileSCM</A>
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#configureUserRealm()"><B>configureUserRealm()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
@@ -133,6 +139,9 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTes
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#createMatrixProject(java.lang.String)"><B>createMatrixProject(String)</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#createMavenProject(java.lang.String)"><B>createMavenProject(String)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/HudsonPageCreator.html#createPage(com.gargoylesoftware.htmlunit.WebResponse, com.gargoylesoftware.htmlunit.WebWindow)"><B>createPage(WebResponse, WebWindow)</B></A> - 
@@ -398,6 +407,15 @@ Method in class org.jvnet.hudson.test.recipes.<A HREF="./org/jvnet/hudson/test/r
 <DT><A HREF="./org/jvnet/hudson/test/recipes/Recipe.Runner.html#setup(org.jvnet.hudson.test.HudsonTestCase, T)"><B>setup(HudsonTestCase, T)</B></A> - 
 Method in class org.jvnet.hudson.test.recipes.<A HREF="./org/jvnet/hudson/test/recipes/Recipe.Runner.html" title="class in org.jvnet.hudson.test.recipes">Recipe.Runner</A>
 <DD>Called during <CODE>TestCase.setUp()</CODE> to prepare the test environment.
+<DT><A HREF="./org/jvnet/hudson/test/SingleFileSCM.html" title="class in org.jvnet.hudson.test"><B>SingleFileSCM</B></A> - Class in <A HREF="./org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A><DD><A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/scm/SCM.html?is-external=true" title="class or interface in hudson.scm"><CODE>SCM</CODE></A> useful for testing that puts just one file in the workspace.<DT><A HREF="./org/jvnet/hudson/test/SingleFileSCM.html#SingleFileSCM(java.lang.String, byte[])"><B>SingleFileSCM(String, byte[])</B></A> - 
+Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/SingleFileSCM.html" title="class in org.jvnet.hudson.test">SingleFileSCM</A>
+<DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/SingleFileSCM.html#SingleFileSCM(java.lang.String, java.lang.String)"><B>SingleFileSCM(String, String)</B></A> - 
+Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/SingleFileSCM.html" title="class in org.jvnet.hudson.test">SingleFileSCM</A>
+<DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/SingleFileSCM.html#SingleFileSCM(java.lang.String, java.net.URL)"><B>SingleFileSCM(String, URL)</B></A> - 
+Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/SingleFileSCM.html" title="class in org.jvnet.hudson.test">SingleFileSCM</A>
+<DD>When a check out is requested, serve the contents of the URL and place it with the given path name.
 </DL>
 <HR>
 <A NAME="_T_"><!-- --></A><H2>

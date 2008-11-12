@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Queue.Item (Hudson core 1.260 API)
+Queue.Item (Hudson core 1.261 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-06">
+<META NAME="date" CONTENT="2008-11-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.Item (Hudson core 1.260 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.Item (Hudson core 1.260 API)";
+        parent.document.title="Queue.Item (Hudson core 1.261 API)";
     }
 }
 </SCRIPT>
@@ -194,6 +194,14 @@ Item in a queue.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Build is waiting the executor to become available.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.Item.html#isStuck()">isStuck</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True if the item is starving for an executor for too long.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -281,6 +289,20 @@ isBuildable</H3>
 <DD>Build is waiting the executor to become available.
  This flag is only used in <A HREF="../../hudson/model/Queue.html#getItems()"><CODE>Queue.getItems()</CODE></A> for
  'pseudo' items that are actually not really in the queue.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isStuck()"><!-- --></A><H3>
+isStuck</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public boolean <B>isStuck</B>()</PRE>
+<DL>
+<DD>True if the item is starving for an executor for too long.
 <P>
 <DD><DL>
 </DL>

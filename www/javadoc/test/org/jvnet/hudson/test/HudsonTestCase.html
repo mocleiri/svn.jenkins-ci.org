@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonTestCase (Test harness for Hudson and plugins 1.260 API)
+HudsonTestCase (Test harness for Hudson and plugins 1.261 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-06">
+<META NAME="date" CONTENT="2008-11-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Test harness for Hudson and plugins 1.260 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.260 API)";
+        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.261 API)";
     }
 }
 </SCRIPT>
@@ -252,7 +252,16 @@ Base class for all Hudson test cases.
                   <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Run.html?is-external=true" title="class or interface in hudson.model">Run</A>&nbsp;r)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asserts that the outcome of the build is a specific outcome.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertLogContains(java.lang.String, hudson.model.Run)">assertLogContains</A></B>(java.lang.String&nbsp;substring,
+                  <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Run.html?is-external=true" title="class or interface in hudson.model">Run</A>&nbsp;run)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asserts that the console output of the build contains the given substring.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -298,6 +307,14 @@ Base class for all Hudson test cases.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/matrix/MatrixProject.html?is-external=true" title="class or interface in hudson.matrix">MatrixProject</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#createMatrixProject(java.lang.String)">createMatrixProject</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/maven/MavenModuleSet.html?is-external=true" title="class or interface in hudson.maven">MavenModuleSet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#createMavenProject(java.lang.String)">createMavenProject</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -738,6 +755,20 @@ protected <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/ma
 </DL>
 <HR>
 
+<A NAME="createMavenProject(java.lang.String)"><!-- --></A><H3>
+createMavenProject</H3>
+<PRE>
+protected <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/maven/MavenModuleSet.html?is-external=true" title="class or interface in hudson.maven">MavenModuleSet</A> <B>createMavenProject</B>(java.lang.String&nbsp;name)
+                                     throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="createLocalLauncher()"><!-- --></A><H3>
 createLocalLauncher</H3>
 <PRE>
@@ -806,6 +837,25 @@ public void <B>assertBuildStatus</B>(<A HREF="https://hudson.dev.java.net/pom/hu
                               <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Run.html?is-external=true" title="class or interface in hudson.model">Run</A>&nbsp;r)
                        throws java.lang.Exception</PRE>
 <DL>
+<DD>Asserts that the outcome of the build is a specific outcome.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="assertLogContains(java.lang.String, hudson.model.Run)"><!-- --></A><H3>
+assertLogContains</H3>
+<PRE>
+public void <B>assertLogContains</B>(java.lang.String&nbsp;substring,
+                              <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Run.html?is-external=true" title="class or interface in hudson.model">Run</A>&nbsp;run)
+                       throws java.lang.Exception</PRE>
+<DL>
+<DD>Asserts that the console output of the build contains the given substring.
+<P>
 <DD><DL>
 
 <DT><B>Throws:</B>

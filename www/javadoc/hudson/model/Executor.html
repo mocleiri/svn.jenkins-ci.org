@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Executor (Hudson core 1.260 API)
+Executor (Hudson core 1.261 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-06">
+<META NAME="date" CONTENT="2008-11-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Executor (Hudson core 1.260 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Executor (Hudson core 1.260 API)";
+        parent.document.title="Executor (Hudson core 1.261 API)";
     }
 }
 </SCRIPT>
@@ -291,10 +291,26 @@ Thread that executes builds.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Executor.html#isBusy()">isBusy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The opposite of <A HREF="../../hudson/model/Executor.html#isIdle()"><CODE>isIdle()</CODE></A> &mdash; the executor is doing some work.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Executor.html#isIdle()">isIdle</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A> is ready for action.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Executor.html#isLikelyStuck()">isLikelyStuck</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the current build is likely stuck.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -436,6 +452,22 @@ isIdle</H3>
 </DL>
 <HR>
 
+<A NAME="isBusy()"><!-- --></A><H3>
+isBusy</H3>
+<PRE>
+public boolean <B>isBusy</B>()</PRE>
+<DL>
+<DD>The opposite of <A HREF="../../hudson/model/Executor.html#isIdle()"><CODE>isIdle()</CODE></A> &mdash; the executor is doing some work.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getCauseOfDeath()"><!-- --></A><H3>
 getCauseOfDeath</H3>
 <PRE>
@@ -470,6 +502,27 @@ getProgress</H3>
 
 <DT><B>Returns:</B><DD>-1
       if it's impossible to estimate the progress.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isLikelyStuck()"><!-- --></A><H3>
+isLikelyStuck</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public boolean <B>isLikelyStuck</B>()</PRE>
+<DL>
+<DD>Returns true if the current build is likely stuck.
+
+ <p>
+ This is a heuristics based approach, but if the build is suspiciously taking for a long time,
+ this method returns true.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

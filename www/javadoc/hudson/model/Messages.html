@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Messages (Hudson core 1.260 API)
+Messages (Hudson core 1.261 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-06">
+<META NAME="date" CONTENT="2008-11-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Messages (Hudson core 1.260 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Messages (Hudson core 1.260 API)";
+        parent.document.title="Messages (Hudson core 1.261 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/MemoryUsageMonitor.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Messages.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -600,6 +600,22 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Messages.html#_Node_Mode_EXCLUSIVE()">_Node_Mode_EXCLUSIVE</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Leave this machine for tied jobs only</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Messages.html#_Node_Mode_NORMAL()">_Node_Mode_NORMAL</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Utilize this slave as much as possible</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Messages.html#_ParameterAction_DisplayName()">_ParameterAction_DisplayName</A></B>()</CODE>
 
 <BR>
@@ -648,6 +664,14 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Messages.html#_Queue_AllNodesOffline(java.lang.Object)">_Queue_AllNodesOffline</A></B>(java.lang.Object&nbsp;arg1)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All nodes of label ''{0}'' are offline</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Messages.html#_Queue_BlockedBy(java.lang.Object)">_Queue_BlockedBy</A></B>(java.lang.Object&nbsp;arg1)</CODE>
 
 <BR>
@@ -672,10 +696,34 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Messages.html#_Queue_NodeOffline(java.lang.Object)">_Queue_NodeOffline</A></B>(java.lang.Object&nbsp;arg1)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0} is offline</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Messages.html#_Queue_Unknown()">_Queue_Unknown</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;???</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Messages.html#_Queue_WaitingForNextAvailableExecutor()">_Queue_WaitingForNextAvailableExecutor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waiting for next available executor</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Messages.html#_Queue_WaitingForNextAvailableExecutorOn(java.lang.Object)">_Queue_WaitingForNextAvailableExecutorOn</A></B>(java.lang.Object&nbsp;arg1)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waiting for next available executor on {0}</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1341,6 +1389,22 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Messages.html#Node_Mode_EXCLUSIVE()">Node_Mode_EXCLUSIVE</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Leave this machine for tied jobs only</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Messages.html#Node_Mode_NORMAL()">Node_Mode_NORMAL</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Utilize this slave as much as possible</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Messages.html#ParameterAction_DisplayName()">ParameterAction_DisplayName</A></B>()</CODE>
 
 <BR>
@@ -1389,6 +1453,14 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Messages.html#Queue_AllNodesOffline(java.lang.Object)">Queue_AllNodesOffline</A></B>(java.lang.Object&nbsp;arg1)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All nodes of label ''{0}'' are offline</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Messages.html#Queue_BlockedBy(java.lang.Object)">Queue_BlockedBy</A></B>(java.lang.Object&nbsp;arg1)</CODE>
 
 <BR>
@@ -1413,10 +1485,34 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Messages.html#Queue_NodeOffline(java.lang.Object)">Queue_NodeOffline</A></B>(java.lang.Object&nbsp;arg1)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0} is offline</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Messages.html#Queue_Unknown()">Queue_Unknown</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;???</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Messages.html#Queue_WaitingForNextAvailableExecutor()">Queue_WaitingForNextAvailableExecutor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waiting for next available executor</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Messages.html#Queue_WaitingForNextAvailableExecutorOn(java.lang.Object)">Queue_WaitingForNextAvailableExecutorOn</A></B>(java.lang.Object&nbsp;arg1)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waiting for next available executor on {0}</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1860,6 +1956,32 @@ public static org.jvnet.localizer.Localizable <B>_AbstractBuild_KeptBecause</B>(
 </DL>
 <HR>
 
+<A NAME="Queue_WaitingForNextAvailableExecutor()"><!-- --></A><H3>
+Queue_WaitingForNextAvailableExecutor</H3>
+<PRE>
+public static java.lang.String <B>Queue_WaitingForNextAvailableExecutor</B>()</PRE>
+<DL>
+<DD>Waiting for next available executor
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_Queue_WaitingForNextAvailableExecutor()"><!-- --></A><H3>
+_Queue_WaitingForNextAvailableExecutor</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_Queue_WaitingForNextAvailableExecutor</B>()</PRE>
+<DL>
+<DD>Waiting for next available executor
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="Job_NoRecentBuildFailed()"><!-- --></A><H3>
 Job_NoRecentBuildFailed</H3>
 <PRE>
@@ -1879,6 +2001,32 @@ _Job_NoRecentBuildFailed</H3>
 public static org.jvnet.localizer.Localizable <B>_Job_NoRecentBuildFailed</B>()</PRE>
 <DL>
 <DD>No recent builds failed.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="Node_Mode_EXCLUSIVE()"><!-- --></A><H3>
+Node_Mode_EXCLUSIVE</H3>
+<PRE>
+public static java.lang.String <B>Node_Mode_EXCLUSIVE</B>()</PRE>
+<DL>
+<DD>Leave this machine for tied jobs only
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_Node_Mode_EXCLUSIVE()"><!-- --></A><H3>
+_Node_Mode_EXCLUSIVE</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_Node_Mode_EXCLUSIVE</B>()</PRE>
+<DL>
+<DD>Leave this machine for tied jobs only
 <P>
 <DD><DL>
 </DL>
@@ -2618,6 +2766,32 @@ public static org.jvnet.localizer.Localizable <B>_AbstractProject_WorkspacePermi
 </DL>
 <HR>
 
+<A NAME="Queue_AllNodesOffline(java.lang.Object)"><!-- --></A><H3>
+Queue_AllNodesOffline</H3>
+<PRE>
+public static java.lang.String <B>Queue_AllNodesOffline</B>(java.lang.Object&nbsp;arg1)</PRE>
+<DL>
+<DD>All nodes of label ''{0}'' are offline
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_Queue_AllNodesOffline(java.lang.Object)"><!-- --></A><H3>
+_Queue_AllNodesOffline</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_Queue_AllNodesOffline</B>(java.lang.Object&nbsp;arg1)</PRE>
+<DL>
+<DD>All nodes of label ''{0}'' are offline
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="Slave_InvalidConfig_NoName()"><!-- --></A><H3>
 Slave_InvalidConfig_NoName</H3>
 <PRE>
@@ -3001,6 +3175,32 @@ _Hudson_NotAPlugin</H3>
 public static org.jvnet.localizer.Localizable <B>_Hudson_NotAPlugin</B>(java.lang.Object&nbsp;arg1)</PRE>
 <DL>
 <DD>{0} is not a Hudson plugin
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="Queue_WaitingForNextAvailableExecutorOn(java.lang.Object)"><!-- --></A><H3>
+Queue_WaitingForNextAvailableExecutorOn</H3>
+<PRE>
+public static java.lang.String <B>Queue_WaitingForNextAvailableExecutorOn</B>(java.lang.Object&nbsp;arg1)</PRE>
+<DL>
+<DD>Waiting for next available executor on {0}
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_Queue_WaitingForNextAvailableExecutorOn(java.lang.Object)"><!-- --></A><H3>
+_Queue_WaitingForNextAvailableExecutorOn</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_Queue_WaitingForNextAvailableExecutorOn</B>(java.lang.Object&nbsp;arg1)</PRE>
+<DL>
+<DD>Waiting for next available executor on {0}
 <P>
 <DD><DL>
 </DL>
@@ -3428,6 +3628,32 @@ public static org.jvnet.localizer.Localizable <B>_Job_Pronoun</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="Node_Mode_NORMAL()"><!-- --></A><H3>
+Node_Mode_NORMAL</H3>
+<PRE>
+public static java.lang.String <B>Node_Mode_NORMAL</B>()</PRE>
+<DL>
+<DD>Utilize this slave as much as possible
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_Node_Mode_NORMAL()"><!-- --></A><H3>
+_Node_Mode_NORMAL</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_Node_Mode_NORMAL</B>()</PRE>
+<DL>
+<DD>Utilize this slave as much as possible
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="Permalink_LastFailedBuild()"><!-- --></A><H3>
 Permalink_LastFailedBuild</H3>
 <PRE>
@@ -3551,6 +3777,32 @@ _Job_BuildStability</H3>
 public static org.jvnet.localizer.Localizable <B>_Job_BuildStability</B>(java.lang.Object&nbsp;arg1)</PRE>
 <DL>
 <DD>Build stability: {0}
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="Queue_NodeOffline(java.lang.Object)"><!-- --></A><H3>
+Queue_NodeOffline</H3>
+<PRE>
+public static java.lang.String <B>Queue_NodeOffline</B>(java.lang.Object&nbsp;arg1)</PRE>
+<DL>
+<DD>{0} is offline
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_Queue_NodeOffline(java.lang.Object)"><!-- --></A><H3>
+_Queue_NodeOffline</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_Queue_NodeOffline</B>(java.lang.Object&nbsp;arg1)</PRE>
+<DL>
+<DD>{0} is offline
 <P>
 <DD><DL>
 </DL>
@@ -4083,7 +4335,7 @@ public static org.jvnet.localizer.Localizable <B>_Hudson_JobAlreadyExists</B>(ja
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/MemoryUsageMonitor.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Messages.html" target="_top"><B>FRAMES</B></A>  &nbsp;
