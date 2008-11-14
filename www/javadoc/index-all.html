@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.261 API)
+Index (Hudson core 1.262 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-12">
+<META NAME="date" CONTENT="2008-11-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.261 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.261 API)";
+        parent.document.title="Index (Hudson core 1.262 API)";
     }
 }
 </SCRIPT>
@@ -383,7 +383,12 @@ Static method in class hudson.util.<A HREF="./hudson/util/PluginServletFilter.ht
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/ArgumentListBuilder.html#addKeyValuePairs(java.lang.String, java.util.Map)"><B>addKeyValuePairs(String, Map&lt;String, String&gt;)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A>
-<DD>Adds key value pairs as "-Dkey=value -Dkey=value"...
+<DD>Adds key value pairs as "-Dkey=value -Dkey=value ..."
+
+ <tt>-D</tt> portion is configurable as the 'prefix' parameter.
+<DT><A HREF="./hudson/util/ArgumentListBuilder.html#addKeyValuePairsFromPropertyString(java.lang.String, java.lang.String, hudson.util.VariableResolver)"><B>addKeyValuePairsFromPropertyString(String, String, VariableResolver)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A>
+<DD>Adds key value pairs as "-Dkey=value -Dkey=value ..." by parsing a given string using <CODE>Properties</CODE>.
 <DT><A HREF="./hudson/EnvVars.html#addLine(java.lang.String)"><B>addLine(String)</B></A> - 
 Method in class hudson.<A HREF="./hudson/EnvVars.html" title="class in hudson">EnvVars</A>
 <DD>Takes a string that looks like "a=b" and adds that to this map.
@@ -960,6 +965,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/BuildTrigger.html" title="c
 Method in class hudson.util.<A HREF="./hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>
 <DD>Picks up <A HREF="./hudson/model/DependecyDeclarer.html" title="interface in hudson.model"><CODE>DependecyDeclarer</CODE></A>s and allow it to build dependencies.
 <DT><A HREF="./hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List, java.lang.String)"><B>buildDescribable(StaplerRequest, List&lt;? extends Descriptor&lt;T&gt;&gt;, String)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
+<DD><B>Deprecated.</B>&nbsp;<I>As of 1.261. Use <A HREF="./hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List)"><CODE>AbstractProject.buildDescribable(StaplerRequest, List)</CODE></A> instead.</I>
+<DT><A HREF="./hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List)"><B>buildDescribable(StaplerRequest, List&lt;? extends Descriptor&lt;T&gt;&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractBuild.html#buildEnvironments"><B>buildEnvironments</B></A> - 
@@ -9990,6 +9998,9 @@ Static method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/Messages
 <DT><A HREF="./hudson/tasks/junit/Messages.html#JUnitResultArchiver_ResultIsEmpty()"><B>JUnitResultArchiver_ResultIsEmpty()</B></A> - 
 Static method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/Messages.html" title="class in hudson.tasks.junit">Messages</A>
 <DD>None of the test reports contained any result
+<DT><A HREF="./hudson/tasks/Maven.html#jvmOptions"><B>jvmOptions</B></A> - 
+Variable in class hudson.tasks.<A HREF="./hudson/tasks/Maven.html" title="class in hudson.tasks">Maven</A>
+<DD>MAVEN_OPTS if not null.
 </DL>
 <HR>
 <A NAME="_K_"><!-- --></A><H2>
@@ -10245,9 +10256,12 @@ Static variable in class hudson.util.<A HREF="./hudson/util/ColorPalette.html" t
 <DT><A HREF="./hudson/util/LineEndNormalizingWriter.html" title="class in hudson.util"><B>LineEndNormalizingWriter</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD><B>Deprecated.</B>&nbsp;<I>moved to stapler</I><DT><A HREF="./hudson/util/LineEndNormalizingWriter.html#LineEndNormalizingWriter(java.io.Writer)"><B>LineEndNormalizingWriter(Writer)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/LineEndNormalizingWriter.html" title="class in hudson.util">LineEndNormalizingWriter</A>
 <DD><B>Deprecated.</B>&nbsp;&nbsp;
+<DT><A HREF="./hudson/FilePath.html#list()"><B>list()</B></A> - 
+Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
+<DD>List up files and directories in this directory.
 <DT><A HREF="./hudson/FilePath.html#list(java.io.FileFilter)"><B>list(FileFilter)</B></A> - 
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
-<DD>List up files in this directory.
+<DD>List up files in this directory, just like <CODE>File.listFiles(FileFilter)</CODE>.
 <DT><A HREF="./hudson/FilePath.html#list(java.lang.String)"><B>list(String)</B></A> - 
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>List up files in this directory that matches the given Ant-style filter.
@@ -10716,6 +10730,9 @@ Constructor for class hudson.tasks.test.<A HREF="./hudson/tasks/test/MatrixTestR
 <DT><A HREF="./hudson/tasks/Maven.html" title="class in hudson.tasks"><B>Maven</B></A> - Class in <A HREF="./hudson/tasks/package-summary.html">hudson.tasks</A><DD>Build by using Maven.<DT><A HREF="./hudson/tasks/Maven.html#Maven(java.lang.String, java.lang.String)"><B>Maven(String, String)</B></A> - 
 Constructor for class hudson.tasks.<A HREF="./hudson/tasks/Maven.html" title="class in hudson.tasks">Maven</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/Maven.html#Maven(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><B>Maven(String, String, String, String, String)</B></A> - 
+Constructor for class hudson.tasks.<A HREF="./hudson/tasks/Maven.html" title="class in hudson.tasks">Maven</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tasks/Maven.DescriptorImpl.html" title="class in hudson.tasks"><B>Maven.DescriptorImpl</B></A> - Class in <A HREF="./hudson/tasks/package-summary.html">hudson.tasks</A><DD>&nbsp;<DT><A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks"><B>Maven.MavenInstallation</B></A> - Class in <A HREF="./hudson/tasks/package-summary.html">hudson.tasks</A><DD>&nbsp;<DT><A HREF="./hudson/tasks/Maven.MavenInstallation.html#Maven.MavenInstallation(java.lang.String, java.lang.String)"><B>Maven.MavenInstallation(String, String)</B></A> - 
 Constructor for class hudson.tasks.<A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A>
 <DD>&nbsp;
@@ -10870,6 +10887,9 @@ Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title
 Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
 <DD>No such file {0}
  Perhaps you need to specify the correct POM file path in the project configuration?
+<DT><A HREF="./hudson/tasks/Maven.html#mavenName"><B>mavenName</B></A> - 
+Variable in class hudson.tasks.<A HREF="./hudson/tasks/Maven.html" title="class in hudson.tasks">Maven</A>
+<DD>Identifies <A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks"><CODE>Maven.MavenInstallation</CODE></A> to be used.
 <DT><A HREF="./hudson/maven/MavenProbeAction.html" title="class in hudson.maven"><B>MavenProbeAction</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>UI for probing Maven process.<DT><A HREF="./hudson/maven/Messages.html#MavenProbeAction_DisplayName()"><B>MavenProbeAction_DisplayName()</B></A> - 
 Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
 <DD>Monitor Maven Process
@@ -11965,6 +11985,9 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title
 <DT><A HREF="./hudson/model/SCMedItem.html#pollSCMChanges(hudson.model.TaskListener)"><B>pollSCMChanges(TaskListener)</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A>
 <DD>Checks if there's any update in SCM, and returns true if any is found.
+<DT><A HREF="./hudson/tasks/Maven.html#pom"><B>pom</B></A> - 
+Variable in class hudson.tasks.<A HREF="./hudson/tasks/Maven.html" title="class in hudson.tasks">Maven</A>
+<DD>Optional POM file path relative to the workspace.
 <DT><A HREF="./hudson/maven/reporters/MavenArtifactRecord.html#pomArtifact"><B>pomArtifact</B></A> - 
 Variable in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenArtifactRecord.html" title="class in hudson.maven.reporters">MavenArtifactRecord</A>
 <DD>POM artifact.
@@ -12155,6 +12178,9 @@ Variable in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in
 <DT><A HREF="./hudson/model/Jobs.html#PROPERTIES"><B>PROPERTIES</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Jobs.html" title="class in hudson.model">Jobs</A>
 <DD>List of all installed <A HREF="./hudson/model/JobPropertyDescriptor.html" title="class in hudson.model"><CODE>JobPropertyDescriptor</CODE></A> types.
+<DT><A HREF="./hudson/tasks/Maven.html#properties"><B>properties</B></A> - 
+Variable in class hudson.tasks.<A HREF="./hudson/tasks/Maven.html" title="class in hudson.tasks">Maven</A>
+<DD>Optional properties to be passed to Maven.
 <DT><A HREF="./hudson/util/Protector.html#protect(java.lang.String)"><B>protect(String)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/Protector.html" title="class in hudson.util">Protector</A>
 <DD>&nbsp;
@@ -14105,6 +14131,9 @@ Static variable in class hudson.scm.<A HREF="./hudson/scm/SCM.html" title="class
 <DT><A HREF="./hudson/model/RunMap.html#tailMap(java.lang.Integer)"><B>tailMap(Integer)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/RunMap.html" title="class in hudson.model">RunMap</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/Maven.html#targets"><B>targets</B></A> - 
+Variable in class hudson.tasks.<A HREF="./hudson/tasks/Maven.html" title="class in hudson.tasks">Maven</A>
+<DD>The targets and other maven options.
 <DT><A HREF="./hudson/model/listeners/RunListener.html#targetType"><B>targetType</B></A> - 
 Variable in class hudson.model.listeners.<A HREF="./hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners">RunListener</A>
 <DD>&nbsp;

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FilePath (Hudson core 1.261 API)
+FilePath (Hudson core 1.262 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-12">
+<META NAME="date" CONTENT="2008-11-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson core 1.261 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson core 1.261 API)";
+        parent.document.title="FilePath (Hudson core 1.262 API)";
     }
 }
 </SCRIPT>
@@ -512,10 +512,18 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#list()">list</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List up files and directories in this directory.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#list(java.io.FileFilter)">list</A></B>(java.io.FileFilter&nbsp;filter)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List up files in this directory.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List up files in this directory, just like <CODE>File.listFiles(FileFilter)</CODE>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1174,6 +1182,30 @@ public long <B>length</B>()
 </DL>
 <HR>
 
+<A NAME="list()"><!-- --></A><H3>
+list</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt; <B>list</B>()
+                              throws java.io.IOException,
+                                     java.lang.InterruptedException</PRE>
+<DL>
+<DD>List up files and directories in this directory.
+
+ <p>
+ This method returns direct children of the directory denoted by the 'this' object.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="list(java.io.FileFilter)"><!-- --></A><H3>
 list</H3>
 <PRE>
@@ -1181,7 +1213,7 @@ public java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudso
                               throws java.io.IOException,
                                      java.lang.InterruptedException</PRE>
 <DL>
-<DD>List up files in this directory.
+<DD>List up files in this directory, just like <CODE>File.listFiles(FileFilter)</CODE>.
 <P>
 <DD><DL>
 </DL>

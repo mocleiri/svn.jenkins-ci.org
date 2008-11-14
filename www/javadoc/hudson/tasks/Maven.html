@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Maven (Hudson core 1.261 API)
+Maven (Hudson core 1.262 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-12">
+<META NAME="date" CONTENT="2008-11-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Maven (Hudson core 1.261 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Maven (Hudson core 1.261 API)";
+        parent.document.title="Maven (Hudson core 1.262 API)";
     }
 }
 </SCRIPT>
@@ -178,6 +178,46 @@ Build by using Maven.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Maven.html#jvmOptions">jvmOptions</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAVEN_OPTS if not null.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Maven.html#mavenName">mavenName</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Identifies <A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks"><CODE>Maven.MavenInstallation</CODE></A> to be used.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Maven.html#pom">pom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional POM file path relative to the workspace.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Maven.html#properties">properties</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional properties to be passed to Maven.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Maven.html#targets">targets</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The targets and other maven options.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.tasks.BuildStep"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -200,6 +240,16 @@ Build by using Maven.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/tasks/Maven.html#Maven(java.lang.String, java.lang.String)">Maven</A></B>(java.lang.String&nbsp;targets,
       java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/tasks/Maven.html#Maven(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">Maven</A></B>(java.lang.String&nbsp;targets,
+      java.lang.String&nbsp;name,
+      java.lang.String&nbsp;pom,
+      java.lang.String&nbsp;properties,
+      java.lang.String&nbsp;jvmOptions)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -299,6 +349,68 @@ Build by using Maven.
 </TR>
 </TABLE>
 
+<A NAME="targets"><!-- --></A><H3>
+targets</H3>
+<PRE>
+public final java.lang.String <B>targets</B></PRE>
+<DL>
+<DD>The targets and other maven options.
+ Can be separated by SP or NL.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="mavenName"><!-- --></A><H3>
+mavenName</H3>
+<PRE>
+public final java.lang.String <B>mavenName</B></PRE>
+<DL>
+<DD>Identifies <A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks"><CODE>Maven.MavenInstallation</CODE></A> to be used.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="jvmOptions"><!-- --></A><H3>
+jvmOptions</H3>
+<PRE>
+public final java.lang.String <B>jvmOptions</B></PRE>
+<DL>
+<DD>MAVEN_OPTS if not null.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="pom"><!-- --></A><H3>
+pom</H3>
+<PRE>
+public final java.lang.String <B>pom</B></PRE>
+<DL>
+<DD>Optional POM file path relative to the workspace.
+ Used for the Maven '-f' option.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="properties"><!-- --></A><H3>
+properties</H3>
+<PRE>
+public final java.lang.String <B>properties</B></PRE>
+<DL>
+<DD>Optional properties to be passed to Maven. Follows <CODE>Properties</CODE> syntax.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
 <A NAME="DESCRIPTOR"><!-- --></A><H3>
 DESCRIPTOR</H3>
 <PRE>
@@ -321,9 +433,21 @@ public static final <A HREF="../../hudson/tasks/Maven.DescriptorImpl.html" title
 <A NAME="Maven(java.lang.String, java.lang.String)"><!-- --></A><H3>
 Maven</H3>
 <PRE>
+public <B>Maven</B>(java.lang.String&nbsp;targets,
+             java.lang.String&nbsp;name)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="Maven(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
+Maven</H3>
+<PRE>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>Maven</B>(java.lang.String&nbsp;targets,
-                                  java.lang.String&nbsp;name)</PRE>
+                                  java.lang.String&nbsp;name,
+                                  java.lang.String&nbsp;pom,
+                                  java.lang.String&nbsp;properties,
+                                  java.lang.String&nbsp;jvmOptions)</PRE>
 <DL>
 </DL>
 
