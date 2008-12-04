@@ -1,10 +1,9 @@
 <project>
    <modelVersion>4.0.0</modelVersion>
    <groupId>root.project</groupId>
-   <artifactId>ejbs</artifactId>
-   <packaging>ejb</packaging>
-   <version>1.0</version>
-   <name>enterprise java beans</name>
+   <artifactId>primary-source</artifactId>
+   <packaging>jar</packaging>
+   <name>core project classes</name>
    <parent>
       <groupId>root</groupId>
       <artifactId>project</artifactId>
@@ -12,24 +11,24 @@
    </parent>
    <dependencies>
       <dependency>
-         <groupId>root.project</groupId>
-         <artifactId>primary-source</artifactId>
-      </dependency>
-      <dependency>
          <groupId>root.project.projects</groupId>
          <artifactId>logging</artifactId>
-      </dependency>
-  </dependencies>
+      </dependency>                  
+   </dependencies>
    <build>
       <plugins>
          <plugin>
-            <artifactId>maven-ejb-plugin</artifactId>
+            <artifactId>maven-compiler-plugin</artifactId>
             <configuration>
-               <archive>
-                  <manifest>
-                     <addClasspath>true</addClasspath>
-                  </manifest>
-               </archive> 
+               <encoding>iso-8859-1</encoding>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+               <minmemory>128m</minmemory>
+               <maxmemory>512m</maxmemory>
             </configuration>
          </plugin>
       </plugins>

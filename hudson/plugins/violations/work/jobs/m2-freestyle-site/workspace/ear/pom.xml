@@ -1,10 +1,10 @@
 <project>
    <modelVersion>4.0.0</modelVersion>
    <groupId>root.project</groupId>
-   <artifactId>ejbs</artifactId>
-   <packaging>ejb</packaging>
+   <artifactId>ear</artifactId>
+   <packaging>ear</packaging>
    <version>1.0</version>
-   <name>enterprise java beans</name>
+   <name>ear assembly</name>
    <parent>
       <groupId>root</groupId>
       <artifactId>project</artifactId>
@@ -13,33 +13,35 @@
    <dependencies>
       <dependency>
          <groupId>root.project</groupId>
+         <artifactId>ejbs</artifactId>
+         <type>ejb</type>
+      </dependency>
+      <dependency>
+         <groupId>root.project.servlets</groupId>
+         <artifactId>servlet</artifactId>
+         <type>war</type>
+      </dependency>
+      <dependency>
+         <groupId>root.project</groupId>
          <artifactId>primary-source</artifactId>
       </dependency>
       <dependency>
          <groupId>root.project.projects</groupId>
          <artifactId>logging</artifactId>
       </dependency>
-  </dependencies>
+   </dependencies>
    <build>
       <plugins>
          <plugin>
-            <artifactId>maven-ejb-plugin</artifactId>
+            <artifactId>maven-ear-plugin</artifactId>
             <configuration>
                <archive>
                   <manifest>
                      <addClasspath>true</addClasspath>
                   </manifest>
-               </archive> 
+               </archive>
             </configuration>
          </plugin>
       </plugins>
    </build>
-   <reporting>
-     <plugins>
-       <plugin>
-         <groupId>org.apache.maven.plugins</groupId>
-         <artifactId>maven-checkstyle-plugin</artifactId>
-       </plugin>
-     </plugins>
-   </reporting>
 </project>
