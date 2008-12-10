@@ -53,6 +53,10 @@ public class SlaveTemplate implements Describable<SlaveTemplate> {
         return description+" ("+ami+")";
     }
 
+    public int getNumExecutors() {
+        return EC2Slave.toNumExecutors(type);
+    }
+
     /**
      * Provisions a new EC2 slave.
      *

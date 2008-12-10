@@ -35,7 +35,7 @@ public final class EC2Slave extends Slave {
     /**
      * See http://aws.amazon.com/ec2/instance-types/
      */
-    private static int toNumExecutors(InstanceType it) {
+    /*package*/ static int toNumExecutors(InstanceType it) {
         switch (it) {
         case DEFAULT:       return 1;
         case MEDIUM_HCPU:   return 5;
@@ -59,7 +59,7 @@ public final class EC2Slave extends Slave {
     }
 
     /**
-     * Terminates the instance in EC2.
+     * Terminates the instance in EC2.f
      */
     public void terminate() {
         Jec2 ec2 = EC2Cloud.get().connect();
