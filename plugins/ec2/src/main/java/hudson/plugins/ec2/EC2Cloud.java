@@ -6,7 +6,10 @@ import com.xerox.amazonws.ec2.Jec2;
 import com.xerox.amazonws.ec2.KeyPairInfo;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
+import hudson.model.Computer;
+import hudson.model.Node;
 import hudson.slaves.Cloud;
+import hudson.slaves.NodeProvisioner.PlannedNode;
 import hudson.util.FormFieldValidator;
 import hudson.util.Secret;
 import hudson.util.StreamTaskListener;
@@ -24,6 +27,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Collection;
+import java.util.ArrayList;
+import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -132,6 +138,26 @@ public class EC2Cloud extends Cloud {
             e.printStackTrace(listener.error(e.getMessage()));
             sendError(sw.toString(),req,rsp);
         }
+    }
+
+    @Override
+    public Collection<PlannedNode> provision(int i) {
+        // TODO: when we support labels, we can make more intelligent decisions about which AMI to start
+        // for a given provisioning request.
+        final SlaveTemplate t = templates.get(0);
+        
+        List<PlannedNode> r = new ArrayList<PlannedNode>();
+        for( ; i>0; i-- ) {
+            r.add(new PlannedNode(t.getDisplayName(),
+                    Computer.threadPoolForRemoting.submit(new Callable<Node>() {
+                        public Node call() throws Exception {
+                            // TODO: record the output somewhere
+                            return t.provision(new StreamTaskListener());
+                        }
+                    })
+                    ,t.getNumExecutors()));
+        }
+        return r;
     }
 
     public DescriptorImpl getDescriptor() {
