@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.262 API)
+Hudson (Hudson core 1.263 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-14">
+<META NAME="date" CONTENT="2008-12-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.262 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.262 API)";
+        parent.document.title="Hudson (Hudson core 1.263 API)";
     }
 }
 </SCRIPT>
@@ -687,6 +687,15 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doScriptText(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doScriptText</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+             org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Run arbitrary Groovy script and return result as plain text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doSecured(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSecured</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
@@ -1245,6 +1254,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the absolute URL of Hudson,
  such as "http://localhost/hudson/".</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getRootUrlFromRequest()">getRootUrlFromRequest</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the absolute URL of Hudson top page, such as "http://localhost/hudson/".</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2858,7 +2875,33 @@ public java.lang.String <B>getRootUrl</B>()</PRE>
       The caller must gracefully deal with this situation.
       The returned URL will always have the trailing '/'.<DT><B>Since:</B></DT>
   <DD>1.66</DD>
-<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)"><CODE>Descriptor.getCheckUrl(String)</CODE></A></DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)"><CODE>Descriptor.getCheckUrl(String)</CODE></A>, 
+<A HREF="../../hudson/model/Hudson.html#getRootUrlFromRequest()"><CODE>getRootUrlFromRequest()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRootUrlFromRequest()"><!-- --></A><H3>
+getRootUrlFromRequest</H3>
+<PRE>
+public java.lang.String <B>getRootUrlFromRequest</B>()</PRE>
+<DL>
+<DD>Gets the absolute URL of Hudson top page, such as "http://localhost/hudson/".
+
+ <p>
+ Unlike <A HREF="../../hudson/model/Hudson.html#getRootUrl()"><CODE>getRootUrl()</CODE></A>, which uses the manually configured value,
+ this one uses the current request to reconstruct the URL. The benefit is
+ that this is immune to the configuration mistake (users often fail to set the root URL
+ correctly, especially when a migration is involved), but the downside
+ is that unless you are processing a request, this method doesn't work.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.263</DD>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -3948,6 +3991,28 @@ public void <B>doScript</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DL>
 <DD>For system diagnostics.
  Run arbitrary Groovy script.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doScriptText(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doScriptText</H3>
+<PRE>
+public void <B>doScriptText</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                         org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                  throws java.io.IOException,
+                         javax.servlet.ServletException</PRE>
+<DL>
+<DD>Run arbitrary Groovy script and return result as plain text.
 <P>
 <DD><DL>
 </DL>

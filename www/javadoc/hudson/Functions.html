@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.262 API)
+Functions (Hudson core 1.263 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-14">
+<META NAME="date" CONTENT="2008-12-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.262 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.262 API)";
+        parent.document.title="Functions (Hudson core 1.263 API)";
     }
 }
 </SCRIPT>
@@ -1616,7 +1616,8 @@ public static java.util.Map&lt;java.lang.Thread,java.lang.StackTraceElement[]&gt
 <A NAME="getThreadInfos()"><!-- --></A><H3>
 getThreadInfos</H3>
 <PRE>
-public static java.lang.management.ThreadInfo[] <B>getThreadInfos</B>()</PRE>
+<FONT SIZE="-1">@IgnoreJRERequirement
+</FONT>public static java.lang.management.ThreadInfo[] <B>getThreadInfos</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -1627,7 +1628,8 @@ public static java.lang.management.ThreadInfo[] <B>getThreadInfos</B>()</PRE>
 <A NAME="isMustangOrAbove()"><!-- --></A><H3>
 isMustangOrAbove</H3>
 <PRE>
-public static boolean <B>isMustangOrAbove</B>()</PRE>
+<FONT SIZE="-1">@IgnoreJRERequirement
+</FONT>public static boolean <B>isMustangOrAbove</B>()</PRE>
 <DL>
 <DD>Are we running on JRE6 or above?
 <P>
@@ -1640,7 +1642,8 @@ public static boolean <B>isMustangOrAbove</B>()</PRE>
 <A NAME="dumpThreadInfo(java.lang.management.ThreadInfo)"><!-- --></A><H3>
 dumpThreadInfo</H3>
 <PRE>
-public static java.lang.String <B>dumpThreadInfo</B>(java.lang.management.ThreadInfo&nbsp;ti)</PRE>
+<FONT SIZE="-1">@IgnoreJRERequirement
+</FONT>public static java.lang.String <B>dumpThreadInfo</B>(java.lang.management.ThreadInfo&nbsp;ti)</PRE>
 <DL>
 <DD><DL>
 </DL>

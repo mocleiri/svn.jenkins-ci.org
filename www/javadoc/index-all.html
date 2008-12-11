@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.262 API)
+Index (Hudson core 1.263 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-14">
+<META NAME="date" CONTENT="2008-12-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.262 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.262 API)";
+        parent.document.title="Index (Hudson core 1.263 API)";
     }
 }
 </SCRIPT>
@@ -1428,10 +1428,10 @@ Constructor for class hudson.util.<A HREF="./hudson/util/ClockDifference.html" t
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/Messages.html#ClockDifference_Ahead()"><B>ClockDifference_Ahead()</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/Messages.html" title="class in hudson.util">Messages</A>
-<DD>" ahead"
+<DD>ahead
 <DT><A HREF="./hudson/util/Messages.html#ClockDifference_Behind()"><B>ClockDifference_Behind()</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/Messages.html" title="class in hudson.util">Messages</A>
-<DD>" behind"
+<DD>behind
 <DT><A HREF="./hudson/util/Messages.html#ClockDifference_Failed()"><B>ClockDifference_Failed()</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/Messages.html" title="class in hudson.util">Messages</A>
 <DD>Failed to check
@@ -3272,6 +3272,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class
 <DT><A HREF="./hudson/model/Hudson.html#doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doScript(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>For system diagnostics.
+<DT><A HREF="./hudson/model/Hudson.html#doScriptText(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doScriptText(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>Run arbitrary Groovy script and return result as plain text.
 <DT><A HREF="./hudson/model/Hudson.html#doSecured(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doSecured(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Checks if the user was successfully authenticated.
@@ -4999,8 +5002,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/CommandInterpreter.html" ti
 <DD>&nbsp;
 <DT><A HREF="./hudson/Launcher.html#getComputer()"><B>getComputer()</B></A> - 
 Method in class hudson.<A HREF="./hudson/Launcher.html" title="class in hudson">Launcher</A>
-<DD>If this <A HREF="./hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> is encapsulating an execution on a specific <A HREF="./hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>,
- return it.
+<DD><B>Deprecated.</B>&nbsp;<I>See the javadoc for why this is inherently unreliable. If you are trying to
+      figure out the current <A HREF="./hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> from within a build, use
+      <A HREF="./hudson/model/Computer.html#currentComputer()"><CODE>Computer.currentComputer()</CODE></A></I>
 <DT><A HREF="./hudson/model/Hudson.html#getComputer(java.lang.String)"><B>getComputer(String)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
@@ -7866,6 +7870,9 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" title=
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Gets the absolute URL of Hudson,
  such as "http://localhost/hudson/".
+<DT><A HREF="./hudson/model/Hudson.html#getRootUrlFromRequest()"><B>getRootUrlFromRequest()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>Gets the absolute URL of Hudson top page, such as "http://localhost/hudson/".
 <DT><A HREF="./hudson/matrix/Layouter.html#getRows()"><B>getRows()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/Layouter.html" title="class in hudson.matrix">Layouter</A>
 <DD>Gets list of <A HREF="./hudson/matrix/Layouter.Row.html" title="class in hudson.matrix"><CODE>Layouter.Row</CODE></A>s to be displayed.
@@ -9116,7 +9123,7 @@ Static method in class hudson.security.<A HREF="./hudson/security/Messages.html"
 <DL>
 <DT><A HREF="./hudson/maven/RedeployPublisher.html#id"><B>id</B></A> - 
 Variable in class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.html" title="class in hudson.maven">RedeployPublisher</A>
-<DD>&nbsp;
+<DD>Repository ID.
 <DT><A HREF="./hudson/model/Queue.WaitingItem.html#id"><B>id</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A>
 <DD>Unique number of this <A HREF="./hudson/model/Queue.WaitingItem.html" title="class in hudson.model"><CODE>Queue.WaitingItem</CODE></A>.
@@ -10926,6 +10933,9 @@ Constructor for class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/M
 <DT><A HREF="./hudson/maven/reporters/MavenSiteArchiver.DescriptorImpl.html" title="class in hudson.maven.reporters"><B>MavenSiteArchiver.DescriptorImpl</B></A> - Class in <A HREF="./hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A><DD>&nbsp;<DT><A HREF="./hudson/maven/reporters/MavenSiteArchiver.SiteAction.html" title="class in hudson.maven.reporters"><B>MavenSiteArchiver.SiteAction</B></A> - Class in <A HREF="./hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A><DD>&nbsp;<DT><A HREF="./hudson/maven/reporters/MavenSiteArchiver.SiteAction.html#MavenSiteArchiver.SiteAction(hudson.model.AbstractItem)"><B>MavenSiteArchiver.SiteAction(AbstractItem)</B></A> - 
 Constructor for class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenSiteArchiver.SiteAction.html" title="class in hudson.maven.reporters">MavenSiteArchiver.SiteAction</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/maven/reporters/Messages.html#MavenSiteArchiver_DisplayName()"><B>MavenSiteArchiver_DisplayName()</B></A> - 
+Static method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/Messages.html" title="class in hudson.maven.reporters">Messages</A>
+<DD>Maven-generated site
 <DT><A HREF="./hudson/maven/MavenUtil.html" title="class in hudson.maven"><B>MavenUtil</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>&nbsp;<DT><A HREF="./hudson/maven/MavenUtil.html#MavenUtil()"><B>MavenUtil()</B></A> - 
 Constructor for class hudson.maven.<A HREF="./hudson/maven/MavenUtil.html" title="class in hudson.maven">MavenUtil</A>
 <DD>&nbsp;
@@ -10941,7 +10951,7 @@ Method in class hudson.scheduler.<A HREF="./hudson/scheduler/CrontabLexer.html" 
 <DT><A HREF="./hudson/scheduler/CrontabLexer.html#mDIV(boolean)"><B>mDIV(boolean)</B></A> - 
 Method in class hudson.scheduler.<A HREF="./hudson/scheduler/CrontabLexer.html" title="class in hudson.scheduler">CrontabLexer</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/MemoryUsageMonitor.html" title="class in hudson.model"><B>MemoryUsageMonitor</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>TODO:<DT><A HREF="./hudson/model/MemoryUsageMonitor.html#MemoryUsageMonitor()"><B>MemoryUsageMonitor()</B></A> - 
+<DT><A HREF="./hudson/model/MemoryUsageMonitor.html" title="class in hudson.model"><B>MemoryUsageMonitor</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Monitors the memory usage of the system in OS specific way.<DT><A HREF="./hudson/model/MemoryUsageMonitor.html#MemoryUsageMonitor()"><B>MemoryUsageMonitor()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/MemoryUsageMonitor.html" title="class in hudson.model">MemoryUsageMonitor</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/scm/CVSChangeLogSet.CVSChangeLog.html#merge(hudson.scm.CVSChangeLogSet.CVSChangeLog)"><B>merge(CVSChangeLogSet.CVSChangeLog)</B></A> - 
@@ -13441,6 +13451,9 @@ Method in class hudson.model.<A HREF="./hudson/model/HealthReport.html" title="c
 <DT><A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html#setInitialDirContextFactory(org.acegisecurity.ldap.InitialDirContextFactory)"><B>setInitialDirContextFactory(InitialDirContextFactory)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security">DeferredCreationLdapAuthoritiesPopulator</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/Maven.DescriptorImpl.html#setInstallations(hudson.tasks.Maven.MavenInstallation...)"><B>setInstallations(Maven.MavenInstallation...)</B></A> - 
+Method in class hudson.tasks.<A HREF="./hudson/tasks/Maven.DescriptorImpl.html" title="class in hudson.tasks">Maven.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/MavenEmbedder.html#setInteractiveMode(boolean)"><B>setInteractiveMode(boolean)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A>
 <DD>&nbsp;
@@ -14021,6 +14034,9 @@ Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="cl
 <DT><A HREF="./hudson/scm/Messages.html#SubversionTagAction_DisplayName_HasTags()"><B>SubversionTagAction_DisplayName_HasTags()</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
 <DD>Subversion tags
+<DT><A HREF="./hudson/scm/Messages.html#SubversionTagAction_Tooltip()"><B>SubversionTagAction_Tooltip()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Tagged
 <DT><A HREF="./hudson/scm/Messages.html#SubversionUpdateEventHandler_FetchExternal(java.lang.Object, java.lang.Object, java.lang.Object)"><B>SubversionUpdateEventHandler_FetchExternal(Object, Object, Object)</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
 <DD>Fetching ''{0}'' at {1} into ''{2}''
@@ -15505,10 +15521,10 @@ Static method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/Messages
 <DD>Test Result : {0}
 <DT><A HREF="./hudson/util/Messages.html#_ClockDifference_Ahead()"><B>_ClockDifference_Ahead()</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/Messages.html" title="class in hudson.util">Messages</A>
-<DD>" ahead"
+<DD>ahead
 <DT><A HREF="./hudson/util/Messages.html#_ClockDifference_Behind()"><B>_ClockDifference_Behind()</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/Messages.html" title="class in hudson.util">Messages</A>
-<DD>" behind"
+<DD>behind
 <DT><A HREF="./hudson/util/Messages.html#_ClockDifference_Failed()"><B>_ClockDifference_Failed()</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/Messages.html" title="class in hudson.util">Messages</A>
 <DD>Failed to check
@@ -15948,6 +15964,9 @@ Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title
 <DT><A HREF="./hudson/maven/Messages.html#_MavenRedeployer_DisplayName()"><B>_MavenRedeployer_DisplayName()</B></A> - 
 Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
 <DD>Deploy to Maven repository
+<DT><A HREF="./hudson/maven/reporters/Messages.html#_MavenSiteArchiver_DisplayName()"><B>_MavenSiteArchiver_DisplayName()</B></A> - 
+Static method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/Messages.html" title="class in hudson.maven.reporters">Messages</A>
+<DD>Maven-generated site
 <DT><A HREF="./hudson/model/Messages.html#_Node_Mode_EXCLUSIVE()"><B>_Node_Mode_EXCLUSIVE()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Leave this machine for tied jobs only
@@ -16125,6 +16144,9 @@ Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="cl
 <DT><A HREF="./hudson/scm/Messages.html#_SubversionTagAction_DisplayName_HasTags()"><B>_SubversionTagAction_DisplayName_HasTags()</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
 <DD>Subversion tags
+<DT><A HREF="./hudson/scm/Messages.html#_SubversionTagAction_Tooltip()"><B>_SubversionTagAction_Tooltip()</B></A> - 
+Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
+<DD>Tagged
 <DT><A HREF="./hudson/scm/Messages.html#_SubversionUpdateEventHandler_FetchExternal(java.lang.Object, java.lang.Object, java.lang.Object)"><B>_SubversionUpdateEventHandler_FetchExternal(Object, Object, Object)</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/Messages.html" title="class in hudson.scm">Messages</A>
 <DD>Fetching ''{0}'' at {1} into ''{2}''

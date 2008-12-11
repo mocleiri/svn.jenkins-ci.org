@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.262 API)
+Deprecated List (Hudson core 1.263 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-14">
+<META NAME="date" CONTENT="2008-12-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.262 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.262 API)";
+        parent.document.title="Deprecated List (Hudson core 1.263 API)";
     }
 }
 </SCRIPT>
@@ -237,6 +237,13 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>This is only used to support backward compatibility with old
              URLs.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/Launcher.html#getComputer()">hudson.Launcher.getComputer()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>See the javadoc for why this is inherently unreliable. If you are trying to
+      figure out the current <A HREF="hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> from within a build, use
+      <A HREF="hudson/model/Computer.html#currentComputer()"><CODE>Computer.currentComputer()</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#getComputer()">hudson.model.Hudson.getComputer()</A>

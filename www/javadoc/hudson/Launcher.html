@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Launcher (Hudson core 1.262 API)
+Launcher (Hudson core 1.263 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-11-14">
+<META NAME="date" CONTENT="2008-12-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Launcher (Hudson core 1.262 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Launcher (Hudson core 1.262 API)";
+        parent.document.title="Launcher (Hudson core 1.263 API)";
     }
 }
 </SCRIPT>
@@ -227,8 +227,9 @@ Starts a process.
 <TD><CODE><B><A HREF="../hudson/Launcher.html#getComputer()">getComputer</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If this <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> is encapsulating an execution on a specific <A HREF="../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>,
- return it.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>See the javadoc for why this is inherently unreliable. If you are trying to
+      figure out the current <A HREF="../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> from within a build, use
+      <A HREF="../hudson/model/Computer.html#currentComputer()"><CODE>Computer.currentComputer()</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -517,6 +518,10 @@ getComputer</H3>
 <PRE>
 public <A HREF="../hudson/model/Computer.html" title="class in hudson.model">Computer</A> <B>getComputer</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>See the javadoc for why this is inherently unreliable. If you are trying to
+      figure out the current <A HREF="../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> from within a build, use
+      <A HREF="../hudson/model/Computer.html#currentComputer()"><CODE>Computer.currentComputer()</CODE></A></I>
+<P>
 <DD>If this <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> is encapsulating an execution on a specific <A HREF="../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>,
  return it.
 
