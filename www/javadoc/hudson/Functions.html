@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.263 API)
+Functions (Hudson core 1.264 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-11">
+<META NAME="date" CONTENT="2008-12-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.263 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.263 API)";
+        parent.document.title="Functions (Hudson core 1.264 API)";
     }
 }
 </SCRIPT>
@@ -149,6 +149,14 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set to true if you need to use the debug version of YUI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#isUnitTest">isUnitTest</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set to true if we are running unit tests.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -887,6 +895,18 @@ DEBUG_YUI</H3>
 public static boolean <B>DEBUG_YUI</B></PRE>
 <DL>
 <DD>Set to true if you need to use the debug version of YUI.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="isUnitTest"><!-- --></A><H3>
+isUnitTest</H3>
+<PRE>
+public static boolean <B>isUnitTest</B></PRE>
+<DL>
+<DD>Set to true if we are running unit tests.
 <P>
 <DL>
 </DL>

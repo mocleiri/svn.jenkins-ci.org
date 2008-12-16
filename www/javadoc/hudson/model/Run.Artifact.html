@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Run.Artifact (Hudson core 1.263 API)
+Run.Artifact (Hudson core 1.264 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-11">
+<META NAME="date" CONTENT="2008-12-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run.Artifact (Hudson core 1.263 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run.Artifact (Hudson core 1.263 API)";
+        parent.document.title="Run.Artifact (Hudson core 1.264 API)";
     }
 }
 </SCRIPT>
@@ -101,7 +101,8 @@ java.lang.Object
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>Run.Artifact</B><DT>extends java.lang.Object</DL>
+<DT><PRE><FONT SIZE="-1">@ExportedBean
+</FONT>public class <B>Run.Artifact</B><DT>extends java.lang.Object</DL>
 </PRE>
 
 <P>
@@ -196,7 +197,8 @@ A build artifact.
 <A NAME="relativePath"><!-- --></A><H3>
 relativePath</H3>
 <PRE>
-public final java.lang.String <B>relativePath</B></PRE>
+<FONT SIZE="-1">@Exported(visibility=3)
+</FONT>public final java.lang.String <B>relativePath</B></PRE>
 <DL>
 <DD>Relative path name from <A HREF="../../hudson/model/Run.html#getArtifactsDir()"><CODE>Run.getArtifactsDir()</CODE></A>
 <P>
@@ -230,7 +232,8 @@ public java.io.File <B>getFile</B>()</PRE>
 <A NAME="getFileName()"><!-- --></A><H3>
 getFileName</H3>
 <PRE>
-public java.lang.String <B>getFileName</B>()</PRE>
+<FONT SIZE="-1">@Exported(visibility=3)
+</FONT>public java.lang.String <B>getFileName</B>()</PRE>
 <DL>
 <DD>Returns just the file name portion, without the path.
 <P>
@@ -243,7 +246,8 @@ public java.lang.String <B>getFileName</B>()</PRE>
 <A NAME="getDisplayPath()"><!-- --></A><H3>
 getDisplayPath</H3>
 <PRE>
-public java.lang.String <B>getDisplayPath</B>()</PRE>
+<FONT SIZE="-1">@Exported(visibility=3)
+</FONT>public java.lang.String <B>getDisplayPath</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractNodeMonitorDescriptor (Hudson core 1.263 API)
+AbstractNodeMonitorDescriptor (Hudson core 1.264 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-11">
+<META NAME="date" CONTENT="2008-12-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractNodeMonitorDescriptor (Hudson core 1.263 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractNodeMonitorDescriptor (Hudson core 1.263 API)";
+        parent.document.title="AbstractNodeMonitorDescriptor (Hudson core 1.264 API)";
     }
 }
 </SCRIPT>
@@ -201,7 +201,7 @@ Convenient base class for common <A HREF="../../hudson/node_monitors/NodeMonitor
 <TD><CODE><B><A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html#get(hudson.model.Computer)">get</A></B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the monitoring result.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the monitoring result currently available, or null if no data is available.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -299,7 +299,10 @@ get</H3>
 <PRE>
 public <A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="type parameter in AbstractNodeMonitorDescriptor">T</A> <B>get</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</PRE>
 <DL>
-<DD>Obtains the monitoring result.
+<DD>Obtains the monitoring result currently available, or null if no data is available.
+
+ <p>
+ If no data is available, a background task to collect data will be started.
 <P>
 <DD><DL>
 </DL>

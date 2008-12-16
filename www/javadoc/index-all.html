@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.263 API)
+Index (Hudson core 1.264 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-11">
+<META NAME="date" CONTENT="2008-12-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.263 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.263 API)";
+        parent.document.title="Index (Hudson core 1.264 API)";
     }
 }
 </SCRIPT>
@@ -3824,7 +3824,10 @@ Constructor for class hudson.<A HREF="./hudson/FilePath.html" title="class in hu
 <DT><A HREF="./hudson/FilePath.html#FilePath(hudson.FilePath, java.lang.String)"><B>FilePath(FilePath, String)</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/FilePath.FileCallable.html" title="interface in hudson"><B>FilePath.FileCallable</B></A>&lt;<A HREF="./hudson/FilePath.FileCallable.html" title="type parameter in FilePath.FileCallable">T</A>&gt; - Interface in <A HREF="./hudson/package-summary.html">hudson</A><DD>Code that gets executed on the machine where the <A HREF="./hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> is local.<DT><A HREF="./hudson/Messages.html#FilePath_validateAntFileMask_doesntMatchAndSuggest(java.lang.Object, java.lang.Object)"><B>FilePath_validateAntFileMask_doesntMatchAndSuggest(Object, Object)</B></A> - 
+<DT><A HREF="./hudson/FilePath.FileCallable.html" title="interface in hudson"><B>FilePath.FileCallable</B></A>&lt;<A HREF="./hudson/FilePath.FileCallable.html" title="type parameter in FilePath.FileCallable">T</A>&gt; - Interface in <A HREF="./hudson/package-summary.html">hudson</A><DD>Code that gets executed on the machine where the <A HREF="./hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> is local.<DT><A HREF="./hudson/Messages.html#FilePath_TildaDoesntWork()"><B>FilePath_TildaDoesntWork()</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>''~'' is only supported in a Unix shell and nowhere else.
+<DT><A HREF="./hudson/Messages.html#FilePath_validateAntFileMask_doesntMatchAndSuggest(java.lang.Object, java.lang.Object)"><B>FilePath_validateAntFileMask_doesntMatchAndSuggest(Object, Object)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
 <DD>''{0}'' doesn''t match anything, but ''{1}'' does.
 <DT><A HREF="./hudson/Messages.html#FilePath_validateAntFileMask_whitespaceSeprator()"><B>FilePath_validateAntFileMask_whitespaceSeprator()</B></A> - 
@@ -4141,6 +4144,9 @@ Variable in class hudson.model.<A HREF="./hudson/model/AbstractBuild.DependencyC
 <DT><A HREF="./hudson/maven/ModuleName.html#fromFileSystemName(java.lang.String)"><B>fromFileSystemName(String)</B></A> - 
 Static method in class hudson.maven.<A HREF="./hudson/maven/ModuleName.html" title="class in hudson.maven">ModuleName</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/Util.html#fromHexString(java.lang.String)"><B>fromHexString(String)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractBuild.DependencyChange.html#fromId"><B>fromId</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/AbstractBuild.DependencyChange.html" title="class in hudson.model">AbstractBuild.DependencyChange</A>
 <DD>Version of the dependency project used in the previous build.
@@ -4246,7 +4252,7 @@ Static method in class hudson.model.<A HREF="./hudson/model/User.html" title="cl
 <DD>Gets the <A HREF="./hudson/model/User.html" title="class in hudson.model"><CODE>User</CODE></A> object by its id.
 <DT><A HREF="./hudson/node_monitors/AbstractNodeMonitorDescriptor.html#get(hudson.model.Computer)"><B>get(Computer)</B></A> - 
 Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors">AbstractNodeMonitorDescriptor</A>
-<DD>Obtains the monitoring result.
+<DD>Obtains the monitoring result currently available, or null if no data is available.
 <DT><A HREF="./hudson/PermalinkList.html#get(java.lang.String)"><B>get(String)</B></A> - 
 Method in class hudson.<A HREF="./hudson/PermalinkList.html" title="class in hudson">PermalinkList</A>
 <DD>Gets the <A HREF="./hudson/model/PermalinkProjectAction.Permalink.html" title="class in hudson.model"><CODE>PermalinkProjectAction.Permalink</CODE></A> by its <A HREF="./hudson/model/PermalinkProjectAction.Permalink.html#getId()"><CODE>id</CODE></A>.
@@ -8092,6 +8098,9 @@ Method in class hudson.util.<A HREF="./hudson/util/NoTempDir.html" title="class 
 <DT><A HREF="./hudson/model/Fingerprint.Range.html#getStart()"><B>getStart()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.Range.html" title="class in hudson.model">Fingerprint.Range</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UsageStatistics.html#getStatData()"><B>getStatData()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UsageStatistics.html" title="class in hudson.model">UsageStatistics</A>
+<DD>Gets the encrypted usage stat data to be sent to the Hudson server.
 <DT><A HREF="./hudson/tasks/junit/CaseResult.html#getStatus()"><B>getStatus()</B></A> - 
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>
 <DD>&nbsp;
@@ -9513,6 +9522,9 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title
 <DT><A HREF="./hudson/model/UpdateCenter.html#isDue()"><B>isDue()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
 <DD>Returns true if it's time for us to check for new version.
+<DT><A HREF="./hudson/model/UsageStatistics.html#isDue()"><B>isDue()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UsageStatistics.html" title="class in hudson.model">UsageStatistics</A>
+<DD>Returns true if it's time for us to check for new version.
 <DT><A HREF="./hudson/model/Fingerprint.RangeSet.html#isEmpty()"><B>isEmpty()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A>
 <DD>&nbsp;
@@ -9772,6 +9784,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DT><A HREF="./hudson/widgets/HistoryWidget.html#isTrimmed()"><B>isTrimmed()</B></A> - 
 Method in class hudson.widgets.<A HREF="./hudson/widgets/HistoryWidget.html" title="class in hudson.widgets">HistoryWidget</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/Functions.html#isUnitTest"><B>isUnitTest</B></A> - 
+Static variable in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
+<DD>Set to true if we are running unit tests.
 <DT><A HREF="./hudson/Launcher.html#isUnix()"><B>isUnix()</B></A> - 
 Method in class hudson.<A HREF="./hudson/Launcher.html" title="class in hudson">Launcher</A>
 <DD>Returns true if this <A HREF="./hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> is going to launch on Unix.
@@ -9781,6 +9796,9 @@ Method in class hudson.<A HREF="./hudson/Launcher.RemoteLauncher.html" title="cl
 <DT><A HREF="./hudson/slaves/SlaveComputer.html#isUnix()"><B>isUnix()</B></A> - 
 Method in class hudson.slaves.<A HREF="./hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>
 <DD>True if this computer is a Unix machine (as opposed to Windows machine).
+<DT><A HREF="./hudson/model/Hudson.html#isUsageStatisticsCollected()"><B>isUsageStatisticsCollected()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/security/AuthorizationMatrixProperty.html#isUseProjectSecurity()"><B>isUseProjectSecurity()</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/AuthorizationMatrixProperty.html" title="class in hudson.security">AuthorizationMatrixProperty</A>
 <DD>&nbsp;
@@ -14814,6 +14832,18 @@ Variable in class hudson.scm.browsers.<A HREF="./hudson/scm/browsers/WebSVN.html
 <DT><A HREF="./hudson/scm/SubversionSCM.SvnInfo.html#url"><B>url</B></A> - 
 Variable in class hudson.scm.<A HREF="./hudson/scm/SubversionSCM.SvnInfo.html" title="class in hudson.scm">SubversionSCM.SvnInfo</A>
 <DD>Decoded repository URL.
+<DT><A HREF="./hudson/model/UsageStatistics.html" title="class in hudson.model"><B>UsageStatistics</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/UsageStatistics.html#UsageStatistics()"><B>UsageStatistics()</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UsageStatistics.html" title="class in hudson.model">UsageStatistics</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UsageStatistics.html#UsageStatistics(java.lang.String)"><B>UsageStatistics(String)</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UsageStatistics.html" title="class in hudson.model">UsageStatistics</A>
+<DD>Creates an instance with a specific public key image.
+<DT><A HREF="./hudson/model/UsageStatistics.CombinedCipherInputStream.html" title="class in hudson.model"><B>UsageStatistics.CombinedCipherInputStream</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>The opposite of the <A HREF="./hudson/model/UsageStatistics.CombinedCipherOutputStream.html" title="class in hudson.model"><CODE>UsageStatistics.CombinedCipherOutputStream</CODE></A>.<DT><A HREF="./hudson/model/UsageStatistics.CombinedCipherInputStream.html#UsageStatistics.CombinedCipherInputStream(java.io.InputStream, javax.crypto.Cipher, java.lang.String, int)"><B>UsageStatistics.CombinedCipherInputStream(InputStream, Cipher, String, int)</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UsageStatistics.CombinedCipherInputStream.html" title="class in hudson.model">UsageStatistics.CombinedCipherInputStream</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UsageStatistics.CombinedCipherOutputStream.html" title="class in hudson.model"><B>UsageStatistics.CombinedCipherOutputStream</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Assymetric cipher is slow and in case of Sun RSA implementation it can only encyrypt the first block.<DT><A HREF="./hudson/model/UsageStatistics.CombinedCipherOutputStream.html#UsageStatistics.CombinedCipherOutputStream(java.io.OutputStream, javax.crypto.Cipher, java.lang.String)"><B>UsageStatistics.CombinedCipherOutputStream(OutputStream, Cipher, String)</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UsageStatistics.CombinedCipherOutputStream.html" title="class in hudson.model">UsageStatistics.CombinedCipherOutputStream</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/User.html" title="class in hudson.model"><B>User</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Represents a user.<DT><A HREF="./hudson/model/UserProperty.html#user"><B>user</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/UserProperty.html" title="class in hudson.model">UserProperty</A>
 <DD>The user object that owns this property.
@@ -15636,6 +15666,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#_FileParameterDefinition_DisplayName()"><B>_FileParameterDefinition_DisplayName()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>File Parameter
+<DT><A HREF="./hudson/Messages.html#_FilePath_TildaDoesntWork()"><B>_FilePath_TildaDoesntWork()</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>''~'' is only supported in a Unix shell and nowhere else.
 <DT><A HREF="./hudson/Messages.html#_FilePath_validateAntFileMask_doesntMatchAndSuggest(java.lang.Object, java.lang.Object)"><B>_FilePath_validateAntFileMask_doesntMatchAndSuggest(Object, Object)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
 <DD>''{0}'' doesn''t match anything, but ''{1}'' does.
