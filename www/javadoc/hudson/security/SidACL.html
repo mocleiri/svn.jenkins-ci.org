@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SidACL (Hudson core 1.264 API)
+SidACL (Hudson core 1.265 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-16">
+<META NAME="date" CONTENT="2008-12-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SidACL (Hudson core 1.264 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SidACL (Hudson core 1.264 API)";
+        parent.document.title="SidACL (Hudson core 1.265 API)";
     }
 }
 </SCRIPT>
@@ -188,6 +188,15 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the given <CODE>Sid</CODE> has the given <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A>.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/security/SidACL.html" title="class in hudson.security">SidACL</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/SidACL.html#newInheritingACL(hudson.security.SidACL)">newInheritingACL</A></B>(<A HREF="../../hudson/security/SidACL.html" title="class in hudson.security">SidACL</A>&nbsp;parent)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security"><CODE>SidACL</CODE></A> that first consults 'this' <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security"><CODE>SidACL</CODE></A> and then delegate to
+ the given parent <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security"><CODE>SidACL</CODE></A>.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.security.ACL"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -298,6 +307,21 @@ protected abstract java.lang.Boolean <B>hasPermission</B>(org.acegisecurity.acls
       The null value indicates that the ACL does no rule for this Sid/Permission
       combination. The caller can decide what to do &mash; such as consulting the higher level ACL,
       or denying the access (if the model is no-access-by-default.)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="newInheritingACL(hudson.security.SidACL)"><!-- --></A><H3>
+newInheritingACL</H3>
+<PRE>
+public final <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security">SidACL</A> <B>newInheritingACL</B>(<A HREF="../../hudson/security/SidACL.html" title="class in hudson.security">SidACL</A>&nbsp;parent)</PRE>
+<DL>
+<DD>Creates a new <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security"><CODE>SidACL</CODE></A> that first consults 'this' <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security"><CODE>SidACL</CODE></A> and then delegate to
+ the given parent <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security"><CODE>SidACL</CODE></A>. By doing this at the <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security"><CODE>SidACL</CODE></A> level and not at the
+ <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> level, this allows the child ACLs to have an explicit deny entry.
+<P>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

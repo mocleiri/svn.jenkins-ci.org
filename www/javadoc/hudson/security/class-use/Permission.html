@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.security.Permission (Hudson core 1.264 API)
+Uses of Class hudson.security.Permission (Hudson core 1.265 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-16">
+<META NAME="date" CONTENT="2008-12-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.security.Permission (Hudson core 1.264 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.security.Permission (Hudson core 1.264 API)";
+        parent.document.title="Uses of Class hudson.security.Permission (Hudson core 1.265 API)";
     }
 }
 </SCRIPT>
@@ -172,11 +172,12 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>Functions.</B><B><A HREF="../../../hudson/Functions.html#hasPermission(hudson.security.AccessControlled, hudson.security.Permission)">hasPermission</A></B>(<A HREF="../../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>&nbsp;object,
+<TD><CODE><B>Functions.</B><B><A HREF="../../../hudson/Functions.html#hasPermission(java.lang.Object, hudson.security.Permission)">hasPermission</A></B>(java.lang.Object&nbsp;object,
               <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This version is so that the 'hasPermission' can degrade gracefully
+ if "it" is not an <A HREF="../../../hudson/security/AccessControlled.html" title="interface in hudson.security"><CODE>AccessControlled</CODE></A> object.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

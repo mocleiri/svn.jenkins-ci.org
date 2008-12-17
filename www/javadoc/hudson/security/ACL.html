@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ACL (Hudson core 1.264 API)
+ACL (Hudson core 1.265 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-16">
+<META NAME="date" CONTENT="2008-12-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ACL (Hudson core 1.264 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ACL (Hudson core 1.264 API)";
+        parent.document.title="ACL (Hudson core 1.265 API)";
     }
 }
 </SCRIPT>
@@ -265,10 +265,9 @@ public static final org.acegisecurity.Authentication <B>SYSTEM</B></PRE>
  of acting on behalf of an user, such as doing builds.
 
  <p>
- Technically speaking, this is probably a broken concept, because Hudson never
- does anything on its own; for example, it builds a project because someone
- configures it or someone triggers it, so ideally Hudson should be impersonating
- that user when executing things.
+ (Note that one of the features being considered is to keep track of who triggered
+ a build &mdash; so in a future, perhaps <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A> will run on behalf of
+ the user who triggered a build.)
 <P>
 <DL>
 </DL>
