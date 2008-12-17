@@ -31,8 +31,14 @@
           <label for="${id}"><b>${%Copy existing job}</b></label>
         </s:block>
         <s:entry>
-          ${%Copy from}
-          <s:editableComboBox id="from" name="from" items="${app.topLevelItemNames}" />
+          <table style="width:100%">
+            <tr>
+              <td style="white-space:nowrap">${%Copy from}</td>
+              <td style="width:100%">
+                <s:editableComboBox id="from" name="from" dataSourceUrl="${rootURL}/suggestTopLevelJobNames" />
+              </td>
+            </tr>
+          </table>
         </s:entry>
 
 		    <s:block>

@@ -6,6 +6,7 @@ import hudson.FilePath.FileCallable;
 import hudson.Launcher;
 import hudson.Proc;
 import hudson.Util;
+import hudson.search.Search;
 import static hudson.Util.fixEmpty;
 import static hudson.Util.fixNull;
 import hudson.model.AbstractBuild;
@@ -17,6 +18,7 @@ import hudson.model.ModelObject;
 import hudson.model.Run;
 import hudson.model.TaskListener;
 import hudson.model.TaskThread;
+import hudson.model.TopLevelItem;
 import hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
 import hudson.remoting.Future;
 import hudson.remoting.RemoteOutputStream;
@@ -36,6 +38,8 @@ import org.apache.tools.zip.ZipOutputStream;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.QueryParameter;
+import org.kohsuke.stapler.export.Flavor;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
@@ -1198,6 +1202,31 @@ public class CVSSCM extends SCM implements Serializable {
                 new ByteArrayInputStream((password+"\n").getBytes()),
                 rsp.getOutputStream());
             proc.join();
+        }
+
+        /**
+         * Returns all {@code CVSROOT} strings used in the current Hudson installation.
+         *
+         * <p>
+         * Ideally this shouldn't be defined in here
+         * but EL doesn't provide a convenient way of invoking a static function,
+         * so I'm putting it here for now.
+         */
+        public void doSuggestAllCvsRoots(StaplerRequest req, StaplerResponse rsp, @QueryParameter String query) throws IOException, ServletException {
+            query = query.trim();
+            Search.Result r = new Search.Result();
+            for (AbstractProject p : Hudson.getInstance().getAllItems(AbstractProject.class)) {
+                SCM scm = p.getScm();
+                if (scm instanceof CVSSCM) {
+                    CVSSCM cvsscm = (CVSSCM) scm;
+                    if(cvsscm.getCvsRoot().startsWith(query))
+                        r.add(cvsscm.getCvsRoot()); 
+                }
+                if(r.suggestions.size()>20)
+                    break;  // pointless to have too many options. Just cut the search.
+            }
+
+            rsp.serveExposedBean(req,r, Flavor.JSON);
         }
     }
 

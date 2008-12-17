@@ -9,15 +9,15 @@
       <form action="projectRelationship" method="get">
         <table width="100%">
           <tr>
-            <j:set var="names" value="${app.jobNames}" />
-            <td style="text-align:right;">
-              ${%upstream project}:
-              <f:editableComboBox id="lhs" name="lhs" value="${request.getParameter('lhs')}" items="${names}" />
+            <td>
+              <f:editableComboBox id="lhs" name="lhs" value="${request.getParameter('lhs')}" style="width:15em;"
+                                  dataSourceUrl="${rootURL}/suggestAllJobNames" title="${%upstream project}:" />
             </td>
             <td style="width:32px; text-align:center;"><img src="${imagesURL}/24x24/next.gif" alt="->"/></td>
             <td>
-              ${%downstream project}:
-              <f:editableComboBox id="rhs" name="rhs" value="${request.getParameter('rhs')}" items="${names}" />
+
+              <f:editableComboBox id="rhs" name="rhs" value="${request.getParameter('rhs')}" style="width:15em;"
+                                  dataSourceUrl="${rootURL}/suggestAllJobNames" title="${%downstream project}:"/>
             </td>
           </tr>
           <tr>

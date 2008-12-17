@@ -7,27 +7,30 @@
 	Otherwise
 	   @name and @value are mandatory.
 
-	<%@attribute name="id" required="true" %>
+  @id:              specifies the ID. Mandatory.
+  @dataSourceUrl:   where to request the completion. Optional.
 	<%@attribute name="clazz" required="false" %>
 	<%@attribute name="items" type="java.lang.Object" description="Optional list of possible values" %>
+
+
 -->
 <!-- Tomcat doesn't like us using the attribute called 'class' -->
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-	<j:if test="${editableComboBox_source_loaded==null}">
-	  <script type="text/javascript" src="${request.contextPath}/scripts/utilities.js"/>
-    <script type="text/javascript" src="${request.contextPath}/scripts/combobox.js"/>
-	  <j:set target="${requestScope}" property="editableComboBox_source_loaded" value="true" />
-	</j:if>
-
   <j:set var="checkUrl" value="${h.getCheckUrl(attrs.checkUrl,descriptor,attrs.field)}" />
 
-  <input id="${attrs.id}" autocomplete="off" class="${attrs.clazz} ${h.ifThenElse(checkUrl!=null,'validated','')}"
-         name ="${h.defaulted(attrs.name,'_.'+attrs.field)}"
-         value="${h.defaulted(attrs.value,instance[attrs.field])}"
-         checkUrl="${checkUrl}" />
+  <div id="${attrs.id}-outer" style="${attrs.style}; font-family: inherit">
+    ${attrs.title}
+    <!-- whitespace -->
+    ${h.ifThenElse(empty(attrs.title),"","&#xA0;")}
+    <input id="${attrs.id}" autocomplete="off" class="${attrs.clazz} ${h.ifThenElse(checkUrl!=null,'validated','')}"
+           name ="${h.defaulted(attrs.name,'_.'+attrs.field)}"
+           value="${h.defaulted(attrs.value,instance[attrs.field])}"
+           checkUrl="${checkUrl}"/>
+    <div id="${attrs.id}-box" style="text-align: left" />
+  </div>
 	<j:set target="${requestScope}" property="editableComboBox" value="${attrs.id}" />
 	<script type="text/javascript">
-	  var ${id}_values = new Array();
+	  var ${id}_values = [];
 
 	  <!-- fill in values -->
 	  <j:if test="${items!=null}">
@@ -37,28 +40,22 @@
 	  </j:if>
 	  <d:invokeBody />
 
-		<![CDATA[
-	  function ${id}_Callback(value /*, comboBox*/) {
-	    var items = new Array();
-	    var candidates = ${id}_values;
-	    if (value.length > 0) { // if no value, we'll not provide anything
-	      value = value.toLowerCase();
-	      for (var i = 0; i < candidates.length; i++) {
-	        if (candidates[i].toLowerCase().indexOf(value) >= 0) {
-	          items.push(candidates[i]);
-	          if(items.length>20)
-	            break; // 20 items in the list should be enough
-	        }
-	      }
-	    }
-	    return items; // equiv to: comboBox.setItems(items);
-	  }
-	  ]]>
-
-	  <!-- IE doesn't like a combobox to be created before the page is fully loaded. -->
-	  var oldOnLoadFor${id} = window.onload;
-	  window.onload = function() { if(oldOnLoadFor${id}) oldOnLoadFor${id}();
-	    new ComboBox("${id}", ${id}_Callback);
-	  }
+      <j:choose>
+        <j:when test="${dataSourceUrl!=null}">
+          // var ds = new YAHOO.widget.DS_XHR("${dataSourceUrl}");
+          // ds.responseSchema = { resultsList: "suggestions", fields:[ {key:"name"}]};
+          var ds = new YAHOO.util.LocalDataSource(["apples", "broccoli", "cherries"]); 
+        </j:when>
+        <j:otherwise>
+          var ds = new YAHOO.util.LocalDataSource(${id}_values);
+        </j:otherwise>
+      </j:choose>
+      var autoComp = new YAHOO.widget.AutoComplete("${id}","${id}-box",ds);
+ <!--autoComp.doBeforeExpandContainer = function(oTextbox, oContainer, sQuery, aResults) { -->
+	        <!--var pos = YAHOO.util.Dom.getXY(oTextbox);-->
+	        <!--pos[1] += YAHOO.util.Dom.get(oTextbox).offsetHeight + 2;-->
+	        <!--YAHOO.util.Dom.setXY(oContainer,pos);-->
+	        <!--return true;-->
+	    <!--};-->
 	</script>
 </j:jelly>

@@ -35,6 +35,8 @@ import hudson.scm.SCMS;
 import hudson.scm.SubversionSCM;
 import hudson.search.CollectionSearchIndex;
 import hudson.search.SearchIndexBuilder;
+import hudson.search.SuggestedItem;
+import hudson.search.Search;
 import hudson.security.ACL;
 import hudson.security.AccessControlled;
 import hudson.security.AuthorizationStrategy;
@@ -75,6 +77,7 @@ import hudson.util.XStream2;
 import hudson.util.HudsonIsRestarting;
 import hudson.widgets.Widget;
 import net.sf.json.JSONObject;
+import net.sf.json.JSONArray;
 import org.acegisecurity.AccessDeniedException;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.GrantedAuthority;
@@ -91,6 +94,7 @@ import org.kohsuke.stapler.StaplerProxy;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.export.Exported;
+import org.kohsuke.stapler.export.Flavor;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -1693,6 +1697,46 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         rsp.sendRedirect("foo");
     }
 
+    /**
+     * Used by various forms to auto-complete top-level job names.
+     *
+     * @param query
+     *      The current value that the user has typed in. 
+     */
+    public void doSuggestTopLevelJobNames(StaplerRequest req, StaplerResponse rsp, @QueryParameter String query) throws IOException, ServletException {
+        query = query.toLowerCase().trim();
+        Search.Result r = new Search.Result();
+        for (TopLevelItem i : items.values()) {
+            String fn = i.getFullName();
+            if(fn.toLowerCase().contains(query))
+                r.add(fn);
+            if(r.suggestions.size()>20)
+                break;  // pointless to have too many options. Just cut the search.
+        }
+
+        rsp.serveExposedBean(req,r, Flavor.JSON);
+    }
+
+    /**
+     * Used by various forms to auto-complete top-level job names.
+     *
+     * @param query
+     *      The current value that the user has typed in.
+     */
+    public void doSuggestAllJobNames(StaplerRequest req, StaplerResponse rsp, @QueryParameter String query) throws IOException, ServletException {
+        query = query.toLowerCase().trim();
+        Search.Result r = new Search.Result();
+        for (Item i : getAllItems(Item.class)) {
+            String fn = i.getFullName();
+            if(fn.toLowerCase().contains(query))
+                r.add(fn);
+            if(r.suggestions.size()>20)
+                break;  // pointless to have too many options. Just cut the search.
+        }
+
+        rsp.serveExposedBean(req,r, Flavor.JSON);
+    }
+
     private boolean configureDescriptor(StaplerRequest req, JSONObject json, Descriptor<?> d) throws FormException {
         // collapse the structure to remain backward compatible with the JSON structure before 1.
         String name = d.getJsonSafeClassName();
@@ -2517,27 +2561,6 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
     public static boolean isWindows() {
         return File.pathSeparatorChar==';';
-    }
-
-    /**
-     * Returns all {@code CVSROOT} strings used in the current Hudson installation.
-     *
-     * <p>
-     * Ideally this shouldn't be defined in here
-     * but EL doesn't provide a convenient way of invoking a static function,
-     * so I'm putting it here for now.
-     */
-    public Set<String> getAllCvsRoots() {
-        Set<String> r = new TreeSet<String>();
-        for( AbstractProject p : getAllItems(AbstractProject.class) ) {
-            SCM scm = p.getScm();
-            if (scm instanceof CVSSCM) {
-                CVSSCM cvsscm = (CVSSCM) scm;
-                r.add(cvsscm.getCvsRoot());
-            }
-        }
-
-        return r;
     }
 
     /**

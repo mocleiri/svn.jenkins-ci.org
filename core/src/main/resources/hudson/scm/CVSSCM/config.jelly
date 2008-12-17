@@ -1,6 +1,6 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
 	<f:entry title="CVSROOT" help="/help/_cvs/cvsroot.html">
-	  <f:editableComboBox id="cvs_root" clazz="setting-input" field="cvsRoot" items="${app.allCvsRoots}" />
+	  <f:editableComboBox id="cvs_root" clazz="setting-input" field="cvsRoot" dataSourceUrl="${rootURL}/descriptor/hudson.scm.CVSSCM/suggestAllCvsRoots" />
 	</f:entry>
 	<f:entry title="${%Modules}" help="/help/_cvs/modules.html">
 	  <f:expandableTextbox name="cvs.module" value="${scm.allModules}"/>

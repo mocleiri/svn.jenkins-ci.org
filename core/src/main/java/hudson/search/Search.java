@@ -119,6 +119,13 @@ public class Search {
     public static class Result {
         @Exported
         public List<Item> suggestions = new ArrayList<Item>();
+
+        public void add(String name) {
+            for (Item item : suggestions)
+                if(item.name.contains(name))
+                    return; // already added
+            suggestions.add(new Item(name));
+        }
     }
 
     @ExportedBean(defaultVisibility=999)
