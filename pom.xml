@@ -10,6 +10,12 @@
   <name>Hudson Synergy Plugin</name>
   <inceptionYear>2008</inceptionYear>
   
+  <parent>
+    <groupId>org.jvnet.hudson.plugins</groupId>
+    <artifactId>plugin</artifactId>
+    <version>1.247</version>
+  </parent>
+  
   <dependencies>
     <!--
       Replace 1.153 with any version of Hudson that you'd like to develop against.
@@ -44,6 +50,7 @@
         <extensions>true</extensions>
       </plugin>
     </plugins>
+
   </build>
 
   <repositories>
@@ -147,19 +154,6 @@
   <scm>
   	<connection>scm:svn:https://svn.dev.java.net/svn/hudson/tags/synergy-1.0</connection>
   </scm>
-  
-    <distributionManagement>
-      <repository>
-      <uniqueVersion>false</uniqueVersion>
-      <id>java.net-m2-repository</id>
-      <url>java-net:/maven2-repository/trunk/www/repository/</url>
-    </repository>
-    <snapshotRepository>
-      <!-- prevent accidental deployment of SNAPSHOTS to repository -->
-      <id>local</id>
-      <url>file:.</url>
-    </snapshotRepository>
-  </distributionManagement>
   
   <developers>
   	<developer>
