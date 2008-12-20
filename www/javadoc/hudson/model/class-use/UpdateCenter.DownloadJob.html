@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.model.UpdateCenter.DownloadJob (Hudson core 1.265 API)
+Uses of Class hudson.model.UpdateCenter.DownloadJob (Hudson core 1.266 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-17">
+<META NAME="date" CONTENT="2008-12-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.UpdateCenter.DownloadJob (Hudson core 1.265 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.UpdateCenter.DownloadJob (Hudson core 1.265 API)";
+        parent.document.title="Uses of Class hudson.model.UpdateCenter.DownloadJob (Hudson core 1.266 API)";
     }
 }
 </SCRIPT>
@@ -126,6 +126,65 @@ Uses of <A HREF="../../../hudson/model/UpdateCenter.DownloadJob.html" title="cla
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the state of the installation activity of one plugin.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with parameters of type <A HREF="../../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.io.File</CODE></FONT></TD>
+<TD><CODE><B>UpdateCenter.UpdateCenterConfiguration.</B><B><A HREF="../../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html#download(hudson.model.UpdateCenter.DownloadJob, java.net.URL)">download</A></B>(<A HREF="../../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>&nbsp;job,
+         java.net.URL&nbsp;src)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Download a plugin or core upgrade in preparation for installing it
+ into its final location.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>UpdateCenter.UpdateCenterConfiguration.</B><B><A HREF="../../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html#install(hudson.model.UpdateCenter.DownloadJob, java.io.File, java.io.File)">install</A></B>(<A HREF="../../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>&nbsp;job,
+        java.io.File&nbsp;src,
+        java.io.File&nbsp;dst)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called after a plugin has been downloaded to move it into its final
+ location.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>UpdateCenter.UpdateCenterConfiguration.</B><B><A HREF="../../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html#postValidate(hudson.model.UpdateCenter.DownloadJob, java.io.File)">postValidate</A></B>(<A HREF="../../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>&nbsp;job,
+             java.io.File&nbsp;src)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate the resource after it has been downloaded, before it is
+ installed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>UpdateCenter.UpdateCenterConfiguration.</B><B><A HREF="../../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html#preValidate(hudson.model.UpdateCenter.DownloadJob, java.net.URL)">preValidate</A></B>(<A HREF="../../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>&nbsp;job,
+            java.net.URL&nbsp;src)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate the URL of the resource before downloading it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>UpdateCenter.UpdateCenterConfiguration.</B><B><A HREF="../../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html#upgrade(hudson.model.UpdateCenter.DownloadJob, java.io.File, java.io.File)">upgrade</A></B>(<A HREF="../../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>&nbsp;job,
+        java.io.File&nbsp;src,
+        java.io.File&nbsp;dst)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called after an upgrade has been downloaded to move it into its final
+ location.</TD>
 </TR>
 </TABLE>
 &nbsp;

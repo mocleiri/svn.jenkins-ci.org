@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.265 API)
+Hudson (Hudson core 1.266 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-17">
+<META NAME="date" CONTENT="2008-12-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.265 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.265 API)";
+        parent.document.title="Hudson (Hudson core 1.266 API)";
     }
 }
 </SCRIPT>
@@ -194,6 +194,14 @@ Root object of the system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Map&lt;java.lang.String,<A HREF="../../hudson/model/LogRecorder.html" title="class in hudson.model">LogRecorder</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#logRecorders">logRecorders</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/LogRecorder.html" title="class in hudson.model"><CODE>LogRecorder</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1091,6 +1099,22 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle">Lifecycle</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getLifecycle()">getLifecycle</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/LogRecorder.html" title="class in hudson.model">LogRecorder</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getLog(java.lang.String)">getLog</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes <A HREF="../../hudson/model/LogRecorder.html" title="class in hudson.model"><CODE>LogRecorder</CODE></A>s to URL.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model">ManagementLink</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getManagementLinks()">getManagementLinks</A></B>()</CODE>
 
@@ -1689,6 +1713,18 @@ proxy</H3>
 public transient volatile <A HREF="../../hudson/ProxyConfiguration.html" title="class in hudson">ProxyConfiguration</A> <B>proxy</B></PRE>
 <DL>
 <DD>HTTP proxy configuration.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="logRecorders"><!-- --></A><H3>
+logRecorders</H3>
+<PRE>
+public final transient java.util.Map&lt;java.lang.String,<A HREF="../../hudson/model/LogRecorder.html" title="class in hudson.model">LogRecorder</A>&gt; <B>logRecorders</B></PRE>
+<DL>
+<DD><A HREF="../../hudson/model/LogRecorder.html" title="class in hudson.model"><CODE>LogRecorder</CODE></A>s.
 <P>
 <DL>
 </DL>
@@ -3093,6 +3129,20 @@ public void <B>setSecurityRealm</B>(<A HREF="../../hudson/security/SecurityRealm
 </DL>
 <HR>
 
+<A NAME="getLifecycle()"><!-- --></A><H3>
+getLifecycle</H3>
+<PRE>
+public <A HREF="../../hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle">Lifecycle</A> <B>getLifecycle</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getACL()"><!-- --></A><H3>
 getACL</H3>
 <PRE>
@@ -3222,6 +3272,22 @@ public <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ItemGroup.html#getItem(java.lang.String)">getItem</A></CODE> in interface <CODE><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#getItem(java.lang.String)">getItem</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLog(java.lang.String)"><!-- --></A><H3>
+getLog</H3>
+<PRE>
+public <A HREF="../../hudson/model/LogRecorder.html" title="class in hudson.model">LogRecorder</A> <B>getLog</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD>Exposes <A HREF="../../hudson/model/LogRecorder.html" title="class in hudson.model"><CODE>LogRecorder</CODE></A>s to URL.
+<P>
+<DD><DL>
+</DL>
 </DD>
 <DD><DL>
 </DL>

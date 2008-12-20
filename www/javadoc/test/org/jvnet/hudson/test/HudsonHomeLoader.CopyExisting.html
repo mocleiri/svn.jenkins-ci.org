@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonHomeLoader.CopyExisting (Test harness for Hudson and plugins 1.265 API)
+HudsonHomeLoader.CopyExisting (Test harness for Hudson and plugins 1.266 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-17">
+<META NAME="date" CONTENT="2008-12-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonHomeLoader.CopyExisting (Test harness for Hudson and plugins 1.265 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonHomeLoader.CopyExisting (Test harness for Hudson and plugins 1.265 API)";
+        parent.document.title="HudsonHomeLoader.CopyExisting (Test harness for Hudson and plugins 1.266 API)";
     }
 }
 </SCRIPT>
@@ -217,10 +217,15 @@ Allocates a new directory by copying from an existing directory, or unzipping fr
 <A NAME="HudsonHomeLoader.CopyExisting(java.io.File)"><!-- --></A><H3>
 HudsonHomeLoader.CopyExisting</H3>
 <PRE>
-public <B>HudsonHomeLoader.CopyExisting</B>(java.io.File&nbsp;source)</PRE>
+public <B>HudsonHomeLoader.CopyExisting</B>(java.io.File&nbsp;source)
+                              throws java.net.MalformedURLException</PRE>
 <DL>
 <DD>Either a zip file or a directory that contains the home image.
 <P>
+<DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.net.MalformedURLException</CODE></DL>
 </DL>
 <HR>
 

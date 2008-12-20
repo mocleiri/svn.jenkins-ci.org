@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-LegacyAuthorizationStrategy (Hudson core 1.265 API)
+LegacyAuthorizationStrategy (Hudson core 1.266 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-17">
+<META NAME="date" CONTENT="2008-12-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LegacyAuthorizationStrategy (Hudson core 1.265 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LegacyAuthorizationStrategy (Hudson core 1.265 API)";
+        parent.document.title="LegacyAuthorizationStrategy (Hudson core 1.266 API)";
     }
 }
 </SCRIPT>
@@ -310,6 +310,10 @@ public java.util.Collection&lt;java.lang.String&gt; <B>getGroups</B>()</PRE>
  <p>
  This method is used by <A HREF="../../hudson/security/ContainerAuthentication.html" title="class in hudson.security"><CODE>ContainerAuthentication</CODE></A> to work around the servlet API issue
  that prevents us from enumerating roles that the user has.
+ <p>
+ If such enumeration is impossible, do the best to list as many as possible, then
+ return it. In the worst case, just return an empty list. Doing so would prevent
+ users from using role names as group names (see HUDSON-2716 for such one such report.)
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AuthorizationStrategy.html#getGroups()">getGroups</A></CODE> in class <CODE><A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A></CODE></DL>

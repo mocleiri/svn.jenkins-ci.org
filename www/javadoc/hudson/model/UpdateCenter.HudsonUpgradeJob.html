@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-UpdateCenter.HudsonUpgradeJob (Hudson core 1.265 API)
+UpdateCenter.HudsonUpgradeJob (Hudson core 1.266 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-17">
+<META NAME="date" CONTENT="2008-12-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter.HudsonUpgradeJob (Hudson core 1.265 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter.HudsonUpgradeJob (Hudson core 1.265 API)";
+        parent.document.title="UpdateCenter.HudsonUpgradeJob (Hudson core 1.266 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/UpdateCenter.Entry.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/UpdateCenter.HudsonUpgradeJob.RestartNeeded.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/UpdateCenter.HudsonUpgradeJob.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="UpdateCenter.HudsonUpgradeJob.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.UpdateCenter.DownloadJob">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.UpdateCenter.DownloadJob">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.UpdateCenter.DownloadJob">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -125,14 +125,6 @@ Represents the state of the upgrade activity of Hudson core.
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Nested Class Summary</B></FONT></TH>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.HudsonUpgradeJob.RestartNeeded.html" title="class in hudson.model">UpdateCenter.HudsonUpgradeJob.RestartNeeded</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates that the upgrade needs a restart.</TD>
-</TR>
 </TABLE>
 &nbsp;<A NAME="nested_classes_inherited_from_class_hudson.model.UpdateCenter.DownloadJob"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -172,7 +164,7 @@ Represents the state of the upgrade activity of Hudson core.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.HudsonUpgradeJob.html#UpdateCenter.HudsonUpgradeJob()">UpdateCenter.HudsonUpgradeJob</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.HudsonUpgradeJob.html#UpdateCenter.HudsonUpgradeJob(org.acegisecurity.Authentication)">UpdateCenter.HudsonUpgradeJob</A></B>(org.acegisecurity.Authentication&nbsp;auth)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -236,7 +228,7 @@ Represents the state of the upgrade activity of Hudson core.
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#run()">run</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#getUser()">getUser</A>, <A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#run()">run</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.UpdateCenter.UpdateCenterJob"><!-- --></A>
@@ -270,10 +262,10 @@ Represents the state of the upgrade activity of Hudson core.
 </TR>
 </TABLE>
 
-<A NAME="UpdateCenter.HudsonUpgradeJob()"><!-- --></A><H3>
+<A NAME="UpdateCenter.HudsonUpgradeJob(org.acegisecurity.Authentication)"><!-- --></A><H3>
 UpdateCenter.HudsonUpgradeJob</H3>
 <PRE>
-public <B>UpdateCenter.HudsonUpgradeJob</B>()</PRE>
+public <B>UpdateCenter.HudsonUpgradeJob</B>(org.acegisecurity.Authentication&nbsp;auth)</PRE>
 <DL>
 </DL>
 
@@ -407,7 +399,7 @@ protected void <B>replace</B>(java.io.File&nbsp;dst,
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/UpdateCenter.Entry.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/UpdateCenter.HudsonUpgradeJob.RestartNeeded.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/UpdateCenter.HudsonUpgradeJob.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="UpdateCenter.HudsonUpgradeJob.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -427,7 +419,7 @@ protected void <B>replace</B>(java.io.File&nbsp;dst,
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.UpdateCenter.DownloadJob">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.UpdateCenter.DownloadJob">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.UpdateCenter.DownloadJob">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>

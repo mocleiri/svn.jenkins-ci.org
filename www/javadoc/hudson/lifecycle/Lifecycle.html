@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Lifecycle (Hudson core 1.265 API)
+Lifecycle (Hudson core 1.266 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-17">
+<META NAME="date" CONTENT="2008-12-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Lifecycle (Hudson core 1.265 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Lifecycle (Hudson core 1.265 API)";
+        parent.document.title="Lifecycle (Hudson core 1.266 API)";
     }
 }
 </SCRIPT>
@@ -150,6 +150,14 @@ Provides the capability for starting/stopping/restarting/uninstalling Hudson.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/lifecycle/Lifecycle.html#canRestart()">canRestart</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can the <A HREF="../../hudson/lifecycle/Lifecycle.html#restart()"><CODE>restart()</CODE></A> method restart Hudson?</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -332,6 +340,22 @@ public void <B>restart</B>()
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="canRestart()"><!-- --></A><H3>
+canRestart</H3>
+<PRE>
+public boolean <B>canRestart</B>()</PRE>
+<DL>
+<DD>Can the <A HREF="../../hudson/lifecycle/Lifecycle.html#restart()"><CODE>restart()</CODE></A> method restart Hudson?
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
