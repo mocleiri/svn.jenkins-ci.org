@@ -148,6 +148,19 @@
   	<connection>scm:svn:https://svn.dev.java.net/svn/hudson/tags/synergy-1.0</connection>
   </scm>
   
+    <distributionManagement>
+      <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>java.net-m2-repository</id>
+      <url>java-net:/maven2-repository/trunk/www/repository/</url>
+    </repository>
+    <snapshotRepository>
+      <!-- prevent accidental deployment of SNAPSHOTS to repository -->
+      <id>local</id>
+      <url>file:.</url>
+    </snapshotRepository>
+  </distributionManagement>
+  
   <developers>
   	<developer>
  		<id>jribette</id>
