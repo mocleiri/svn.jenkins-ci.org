@@ -22,7 +22,7 @@ public class LogRecorderManager extends AbstractModelObject {
     /**
      * {@link LogRecorder}s.
      */
-    public transient final Map<String,LogRecorder> logRecorders = new CopyOnWriteMap.Hash<String,LogRecorder>();
+    public transient final Map<String,LogRecorder> logRecorders = new CopyOnWriteMap.Tree<String,LogRecorder>();
 
     public String getDisplayName() {
         return "log";
