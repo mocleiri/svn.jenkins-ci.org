@@ -2,53 +2,50 @@
   Log view
 -->
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-<l:layout title="Log" permission="${app.ADMINISTER}">
+<l:layout title="Log">
   <st:include page="sidepanel.jelly" />
-  <l:main-panel>
-    <h1><img src="images/48x48/clipboard.gif" alt=""/>${%Hudson Log}</h1>
-    <j:forEach var="log" items="${h.logRecords}">
-      <pre>${h.printLogRecord(log)}</pre>
-    </j:forEach>
-
-    <h2>
+  <l:main-panel xmlns:local="local">
+    <h1><img src="${imagesURL}/48x48/clipboard.gif" alt=""/>
       ${%Log Recorders}
-      <t:help href="http://hudson.gotdns.com/wiki/display/HUDSON/Log+Recorders" />
-    </h2>
-    
+      <t:help href="http://hudson.gotdns.com/wiki/display/HUDSON/Log+Recorders" />    
+    </h1>
 
-    <h2>
-      ${%Logger Configuration}
-      <t:help href="http://hudson.gotdns.com/wiki/display/HUDSON/Logger+Configuration" />
-    </h2>
-    <form action="configLogger" method="post">
-      ${%Name}: <input type="text" name="name" width="40" />
-      ${%Level}:
-      <select name="level">
-        <option>inherit</option>
-        <option>off</option>
-        <option>severe</option>
-        <option>warning</option>
-        <option>info</option>
-        <option>config</option>
-        <option>fine</option>
-        <option>finer</option>
-        <option>finest</option>
-        <option>all</option>
-      </select>
-      <st:nbsp/>
-      <f:submit value="${%Submit}"/>
-    </form>
+    <d:taglib uri="local">
+      <d:tag name="row">
+        <tr>
+          <td width="32">
+            <img src="${imagesURL}/32x32/clipboard.gif" width="32" height="32" alt=""/>
+          </td>
+          <td style="padding-left:2em"><a href="${href}">${name}</a></td>
+          <td width="32">
+            <d:invokeBody />
+          </td>
+        </tr>
+      </d:tag>
+    </d:taglib>
 
-    <!-- TODO: put this in the <head> tag. -->
-    <div align="right" style="margin:1em">
-      <img src="${imagesURL}/atom.gif" border="0" alt="Feed"/>
-      <st:nbsp/><st:nbsp/><st:nbsp/><st:nbsp/>
-      <a href="logRss">${%All}</a>
-      <st:nbsp/><st:nbsp/><st:nbsp/><st:nbsp/>
-      <a href="logRss?level=SEVERE">${%&gt; SEVERE}</a>
-      <st:nbsp/><st:nbsp/><st:nbsp/><st:nbsp/>
-      <a href="logRss?level=WARNING">${%&gt; WARNING}</a>
-    </div>
+    <table id="logRecorders" class="sortable pane bigtable">
+      <tr>
+        <th width="32">S</th>
+        <th initialSortDir="down">${%Name}</th>
+        <th width="32"/>
+      </tr>
+      <local:row href="all" name="${%All Hudson Logs}" />
+      <j:forEach var="lr" items="${it.logRecorders.values()}">
+        <local:row name="${lr.name}" href="${lr.name}/">
+          <a href="${lr.name}/configure">
+            <img src="${imagesURL}/32x32/setting.gif" width="32" height="32" alt="[configure]" title="Configure"/>
+          </a>
+        </local:row>
+      </j:forEach>
+      <tr>
+        <td colspan="3" style="height:32px; padding-left: 48px">
+          <form method="get" action="new">
+            <f:submit value="${%Add new log recorder}" />
+          </form>
+        </td>
+      </tr>
+    </table>
   </l:main-panel>
 </l:layout>
 </j:jelly>
