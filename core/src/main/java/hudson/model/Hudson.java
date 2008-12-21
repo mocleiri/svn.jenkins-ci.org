@@ -2016,51 +2016,13 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
     /**
      * RSS feed for log entries.
+     *
+     * @deprecated
+     *   As on 1.267, moved to "/log/rss..."
      */
     public void doLogRss( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        checkPermission(ADMINISTER);
-
-        List<LogRecord> logs = logRecords;
-
-        // filter log records based on the log level
-        String level = req.getParameter("level");
-        if(level!=null) {
-            Level threshold = Level.parse(level);
-            List<LogRecord> filtered = new ArrayList<LogRecord>();
-            for (LogRecord r : logs) {
-                if(r.getLevel().intValue() >= threshold.intValue())
-                    filtered.add(r);
-            }
-            logs = filtered;
-        }
-
-        RSS.forwardToRss("Hudson log","", logs, new FeedAdapter<LogRecord>() {
-            public String getEntryTitle(LogRecord entry) {
-                return entry.getMessage();
-            }
-
-            public String getEntryUrl(LogRecord entry) {
-                return "log";   // TODO: one URL for one log entry?
-            }
-
-            public String getEntryID(LogRecord entry) {
-                return String.valueOf(entry.getSequenceNumber());
-            }
-
-            public String getEntryDescription(LogRecord entry) {
-                return Functions.printLogRecord(entry);
-            }
-
-            public Calendar getEntryTimestamp(LogRecord entry) {
-                GregorianCalendar cal = new GregorianCalendar();
-                cal.setTimeInMillis(entry.getMillis());
-                return cal;
-            }
-
-            public String getEntryAuthor(LogRecord entry) {
-                return Mailer.DESCRIPTOR.getAdminAddress();
-            }
-        },req,rsp);
+        String qs = req.getQueryString();
+        rsp.sendRedirect2("./log/rss"+(qs==null?"":'?'+qs));
     }
 
     /**

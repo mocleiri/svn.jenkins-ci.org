@@ -1,6 +1,9 @@
 package hudson.model;
 
 import hudson.util.CopyOnWriteMap;
+import hudson.FeedAdapter;
+import hudson.Functions;
+import hudson.tasks.Mailer;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -12,6 +15,12 @@ import java.io.File;
 import java.io.FileFilter;
 import java.text.ParseException;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.logging.LogRecord;
+import java.util.logging.Level;
 
 /**
  * Owner of {@link LogRecorder}s, bound to "/log".
@@ -68,5 +77,52 @@ public class LogRecorderManager extends AbstractModelObject {
 
         // redirect to the config screen
         rsp.sendRedirect2(name+"/configure");
+    }
+
+    /**
+     * RSS feed for log entries.
+     */
+    public void doLogRss( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        List<LogRecord> logs = Hudson.logRecords;
+
+        // filter log records based on the log level
+        String level = req.getParameter("level");
+        if(level!=null) {
+            Level threshold = Level.parse(level);
+            List<LogRecord> filtered = new ArrayList<LogRecord>();
+            for (LogRecord r : logs) {
+                if(r.getLevel().intValue() >= threshold.intValue())
+                    filtered.add(r);
+            }
+            logs = filtered;
+        }
+
+        RSS.forwardToRss("Hudson log","", logs, new FeedAdapter<LogRecord>() {
+            public String getEntryTitle(LogRecord entry) {
+                return entry.getMessage();
+            }
+
+            public String getEntryUrl(LogRecord entry) {
+                return "log";   // TODO: one URL for one log entry?
+            }
+
+            public String getEntryID(LogRecord entry) {
+                return String.valueOf(entry.getSequenceNumber());
+            }
+
+            public String getEntryDescription(LogRecord entry) {
+                return Functions.printLogRecord(entry);
+            }
+
+            public Calendar getEntryTimestamp(LogRecord entry) {
+                GregorianCalendar cal = new GregorianCalendar();
+                cal.setTimeInMillis(entry.getMillis());
+                return cal;
+            }
+
+            public String getEntryAuthor(LogRecord entry) {
+                return Mailer.DESCRIPTOR.getAdminAddress();
+            }
+        },req,rsp);
     }
 }
