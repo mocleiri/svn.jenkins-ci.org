@@ -340,6 +340,9 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         if(theInstance!=null)
             throw new IllegalStateException("second instance");
         theInstance = this;
+
+        log.load();
+        
         Trigger.timer = new Timer("Hudson cron thread");
         queue = new Queue();
 

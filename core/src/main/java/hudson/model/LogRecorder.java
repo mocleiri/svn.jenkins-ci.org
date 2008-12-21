@@ -1,21 +1,21 @@
 package hudson.model;
 
+import com.thoughtworks.xstream.XStream;
+import hudson.BulkChange;
+import hudson.XmlFile;
 import hudson.util.CopyOnWriteList;
 import hudson.util.RingBufferLogHandler;
+import hudson.util.WeakLogHandler;
+import hudson.util.XStream2;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
+import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.lang.ref.WeakReference;
 import java.util.List;
-import java.util.logging.ErrorManager;
-import java.util.logging.Filter;
-import java.util.logging.Formatter;
-import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -33,7 +33,7 @@ import java.util.logging.Logger;
  * @author Kohsuke Kawaguchi
  * @see LogRecorderManager
  */
-public class LogRecorder extends AbstractModelObject {
+public class LogRecorder extends AbstractModelObject implements Saveable {
     private volatile String name;
 
     public final CopyOnWriteList<Target> targets = new CopyOnWriteList<Target>();
@@ -69,7 +69,7 @@ public class LogRecorder extends AbstractModelObject {
 
         @DataBoundConstructor
         public Target(String name, String level) {
-            this(name,Level.parse(level));
+            this(name,Level.parse(level.toUpperCase()));
         }
 
         public Level getLevel() {
@@ -84,6 +84,19 @@ public class LogRecorder extends AbstractModelObject {
 
             String rest = r.getLoggerName().substring(name.length());
             return rest.startsWith(".") || rest.length()==0;
+        }
+
+        public Logger getLogger() {
+            return Logger.getLogger(name);
+        }
+
+        /**
+         * Makes sure that the logger passes through messages at the correct level to us.
+         */
+        public void enable() {
+            Logger l = getLogger();
+            if(l.getLevel().intValue()>level)
+                l.setLevel(getLevel());
         }
     }
 
@@ -115,14 +128,46 @@ public class LogRecorder extends AbstractModelObject {
      */
     public synchronized void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         JSONObject src = req.getSubmittedForm();
-        // rename
-        getParent().logRecorders.remove(name);
-        this.name = src.getString("name");
-        getParent().logRecorders.put(name,this);
 
-        targets.replaceBy(req.bindJSONToList(Target.class,src.get("targets")));
+        String newName = src.getString("name");
+        if(!name.equals(newName)) {
+            // rename
+            getParent().logRecorders.remove(name);
+            this.name = newName;
+            getParent().logRecorders.put(name,this);
+        }
 
+        List<Target> newTargets = req.bindJSONToList(Target.class, src.get("targets"));
+        for (Target t : newTargets)
+            t.enable();
+        targets.replaceBy(newTargets);
+
+        save();
         rsp.sendRedirect2(".");
+    }
+
+    /**
+     * Loads the settings from a file.
+     */
+    public synchronized void load() throws IOException {
+        getConfigFile().unmarshal(this);
+        for (Target t : targets)
+            t.enable();
+    }
+
+    /**
+     * Save the settings to a file.
+     */
+    public synchronized void save() throws IOException {
+        if(BulkChange.contains(this))   return;
+        getConfigFile().write(this);
+    }
+
+    /**
+     * The file we save our configuration.
+     */
+    private XmlFile getConfigFile() {
+        return new XmlFile(XSTREAM, new File(Hudson.getInstance().getRootDir(),"log/"+name+".xml"));
     }
 
     /**
@@ -133,91 +178,12 @@ public class LogRecorder extends AbstractModelObject {
     }
 
     /**
-     * Delegating {@link Handler} that uses {@link WeakReference},
-     * which de-registers itself when an object disappears via GC.
+     * Thread-safe reusable {@link XStream}.
      */
-    public static final class WeakLogHandler extends Handler {
-        private final WeakReference<Handler> target;
-        private final Logger logger;
+    public static final XStream XSTREAM = new XStream2();
 
-        public WeakLogHandler(Handler target, Logger logger) {
-            this.logger = logger;
-            logger.addHandler(this);
-            this.target = new WeakReference<Handler>(target);
-        }
-
-        public void publish(LogRecord record) {
-            Handler t = resolve();
-            if(t!=null)
-                t.publish(record);
-        }
-
-        public void flush() {
-            Handler t = resolve();
-            if(t!=null)
-                t.flush();
-        }
-
-        public void close() throws SecurityException {
-            Handler t = resolve();
-            if(t!=null)
-                t.close();
-        }
-
-        private Handler resolve() {
-            Handler r = target.get();
-            if(r==null)
-                logger.removeHandler(this);
-            return r;
-        }
-
-        @Override
-        public void setFormatter(Formatter newFormatter) throws SecurityException {
-            super.setFormatter(newFormatter);
-            Handler t = resolve();
-            if(t!=null)
-                t.setFormatter(newFormatter);
-        }
-
-        @Override
-        public void setEncoding(String encoding) throws SecurityException, UnsupportedEncodingException {
-            super.setEncoding(encoding);
-            Handler t = resolve();
-            if(t!=null)
-                t.setEncoding(encoding);
-        }
-
-        @Override
-        public void setFilter(Filter newFilter) throws SecurityException {
-            super.setFilter(newFilter);
-            Handler t = resolve();
-            if(t!=null)
-                t.setFilter(newFilter);
-        }
-
-        @Override
-        public void setErrorManager(ErrorManager em) {
-            super.setErrorManager(em);
-            Handler t = resolve();
-            if(t!=null)
-                t.setErrorManager(em);
-        }
-
-        @Override
-        public void setLevel(Level newLevel) throws SecurityException {
-            super.setLevel(newLevel);
-            Handler t = resolve();
-            if(t!=null)
-                t.setLevel(newLevel);
-        }
-
-        @Override
-        public boolean isLoggable(LogRecord record) {
-            Handler t = resolve();
-            if(t!=null)
-                return t.isLoggable(record);
-            else
-                return super.isLoggable(record);
-        }
+    static {
+        XSTREAM.alias("log",LogRecorder.class);
+        XSTREAM.alias("target",Target.class);
     }
 }
