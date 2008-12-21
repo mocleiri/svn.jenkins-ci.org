@@ -164,6 +164,15 @@ public class LogRecorder extends AbstractModelObject implements Saveable {
     }
 
     /**
+     * Deletes this recorder, then go back to the parent.
+     */
+    public synchronized void doDoDelete(StaplerResponse rsp) throws IOException, ServletException {
+        requirePOST();
+        getParent().logRecorders.remove(name);
+        rsp.sendRedirect2("..");
+    }
+
+    /**
      * The file we save our configuration.
      */
     private XmlFile getConfigFile() {
