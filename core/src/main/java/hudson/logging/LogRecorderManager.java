@@ -52,7 +52,11 @@ public class LogRecorderManager extends AbstractModelObject {
         return logRecorders.get(token);
     }
 
+    /**
+     * Loads the configuration from disk.
+     */
     public void load() throws IOException {
+        logRecorders.clear();
         File dir = new File(Hudson.getInstance().getRootDir(), "log");
         File[] files = dir.listFiles((FileFilter)new WildcardFileFilter("*.xml"));
         if(files==null)     return;
