@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -205,4 +206,11 @@ public class LogRecorder extends AbstractModelObject implements Saveable {
         XSTREAM.alias("log",LogRecorder.class);
         XSTREAM.alias("target",Target.class);
     }
+
+    /**
+     * Log levels that can be configured for {@link Target}.
+     */
+    public static List<Level> LEVELS =
+            Arrays.asList(Level.SEVERE, Level.WARNING, Level.INFO, Level.CONFIG,
+                    Level.FINE, Level.FINER, Level.FINEST, Level.ALL);
 }
