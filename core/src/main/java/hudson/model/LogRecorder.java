@@ -95,7 +95,7 @@ public class LogRecorder extends AbstractModelObject implements Saveable {
          */
         public void enable() {
             Logger l = getLogger();
-            if(l.getLevel().intValue()>level)
+            if(!lb.isLoggable(getLevel()))
                 l.setLevel(getLevel());
         }
     }
