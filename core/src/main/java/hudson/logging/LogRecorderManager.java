@@ -1,29 +1,29 @@
 package hudson.logging;
 
-import hudson.util.CopyOnWriteMap;
 import hudson.FeedAdapter;
 import hudson.Functions;
 import hudson.model.AbstractModelObject;
 import hudson.model.Hudson;
 import hudson.model.RSS;
 import hudson.tasks.Mailer;
+import hudson.util.CopyOnWriteMap;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.apache.commons.io.filefilter.WildcardFileFilter;
 
 import javax.servlet.ServletException;
-import java.io.IOException;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
 import java.text.ParseException;
-import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.logging.LogRecord;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
+import java.util.logging.LogRecord;
 
 /**
  * Owner of {@link LogRecorder}s, bound to "/log".
@@ -85,9 +85,14 @@ public class LogRecorderManager extends AbstractModelObject {
     /**
      * RSS feed for log entries.
      */
-    public void doLogRss( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        List<LogRecord> logs = Hudson.logRecords;
+    public void doRss( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        doRss(req, rsp, Hudson.logRecords);
+    }
 
+    /**
+     * Renders the given log recorders as RSS.
+     */
+    /*package*/ static void doRss(StaplerRequest req, StaplerResponse rsp, List<LogRecord> logs) throws IOException, ServletException {
         // filter log records based on the log level
         String level = req.getParameter("level");
         if(level!=null) {

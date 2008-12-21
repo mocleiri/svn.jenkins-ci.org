@@ -3,12 +3,11 @@ package hudson.logging;
 import com.thoughtworks.xstream.XStream;
 import hudson.BulkChange;
 import hudson.XmlFile;
-import hudson.model.Hudson;
 import hudson.model.AbstractModelObject;
+import hudson.model.Hudson;
 import hudson.model.Saveable;
 import hudson.util.CopyOnWriteList;
 import hudson.util.RingBufferLogHandler;
-import hudson.logging.WeakLogHandler;
 import hudson.util.XStream2;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -122,7 +121,7 @@ public class LogRecorder extends AbstractModelObject implements Saveable {
         return name;
     }
 
-    private LogRecorderManager getParent() {
+    public LogRecorderManager getParent() {
         return Hudson.getInstance().getLog();
     }
 
@@ -174,6 +173,13 @@ public class LogRecorder extends AbstractModelObject implements Saveable {
         getConfigFile().delete();
         getParent().logRecorders.remove(name);
         rsp.sendRedirect2("..");
+    }
+
+    /**
+     * RSS feed for log entries.
+     */
+    public void doRss( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        LogRecorderManager.doRss(req,rsp,getLogRecords());
     }
 
     /**
