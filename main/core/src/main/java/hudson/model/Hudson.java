@@ -663,6 +663,8 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         return new LocalLauncher(listener);
     }
 
+    private final transient Object updateComputerLock = new Object();
+
     /**
      * Updates {@link #computers} by using {@link #getSlaves()}.
      *
@@ -671,7 +673,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
      * so that we won't upset {@link Executor}s running in it.
      */
     private void updateComputerList() throws IOException {
-        synchronized(computers) {// this synchronization is still necessary so that no two update happens concurrently
+        synchronized(updateComputerLock) {// just so that we don't have two code updating computer list at the same time
             Map<String,Computer> byName = new HashMap<String,Computer>();
             for (Computer c : computers.values()) {
                 if(c.getNode()==null)
