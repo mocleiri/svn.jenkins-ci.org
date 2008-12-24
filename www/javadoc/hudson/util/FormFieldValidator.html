@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FormFieldValidator (Hudson core 1.266 API)
+FormFieldValidator (Hudson core 1.267 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-20">
+<META NAME="date" CONTENT="2008-12-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FormFieldValidator (Hudson core 1.266 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FormFieldValidator (Hudson core 1.266 API)";
+        parent.document.title="FormFieldValidator (Hudson core 1.267 API)";
     }
 }
 </SCRIPT>
@@ -198,6 +198,14 @@ Base class that provides the framework for doing on-the-fly form field validatio
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#permission">permission</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission to check, or null if this check doesn't require any permission.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;org.kohsuke.stapler.StaplerRequest</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#request">request</A></B></CODE>
 
@@ -211,6 +219,14 @@ Base class that provides the framework for doing on-the-fly form field validatio
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#subject">subject</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The object to which the permission is checked against.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -394,6 +410,31 @@ response</H3>
 <PRE>
 protected final org.kohsuke.stapler.StaplerResponse <B>response</B></PRE>
 <DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="permission"><!-- --></A><H3>
+permission</H3>
+<PRE>
+protected final <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A> <B>permission</B></PRE>
+<DL>
+<DD>Permission to check, or null if this check doesn't require any permission.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="subject"><!-- --></A><H3>
+subject</H3>
+<PRE>
+protected final <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A> <B>subject</B></PRE>
+<DL>
+<DD>The object to which the permission is checked against.
+ If <A HREF="../../hudson/util/FormFieldValidator.html#permission"><CODE>permission</CODE></A> is non-null, must be non-null.
+<P>
 <DL>
 </DL>
 </DL>

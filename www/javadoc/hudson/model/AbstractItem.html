@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractItem (Hudson core 1.266 API)
+AbstractItem (Hudson core 1.267 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-20">
+<META NAME="date" CONTENT="2008-12-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractItem (Hudson core 1.266 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractItem (Hudson core 1.266 API)";
+        parent.document.title="AbstractItem (Hudson core 1.267 API)";
     }
 }
 </SCRIPT>
@@ -283,6 +283,14 @@ Partial default implementation of <A HREF="../../hudson/model/Item.html" title="
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the project description HTML.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractItem.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A></B>(java.lang.String&nbsp;className)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> by its name to URL.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -942,6 +950,26 @@ public final <A HREF="../../hudson/XmlFile.html" title="class in hudson">XmlFile
 </DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDescriptorByName(java.lang.String)"><!-- --></A><H3>
+getDescriptorByName</H3>
+<PRE>
+public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> <B>getDescriptorByName</B>(java.lang.String&nbsp;className)</PRE>
+<DL>
+<DD>Exposes <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> by its name to URL.
+
+ This allows descriptor to perform a job-specific check easily.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>className</CODE> - Either fully qualified class name (recommended) or the short name.<DT><B>Since:</B></DT>
+  <DD>1.270.</DD>
 </DL>
 </DD>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AccessControlled (Hudson core 1.266 API)
+AccessControlled (Hudson core 1.267 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-20">
+<META NAME="date" CONTENT="2008-12-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AccessControlled (Hudson core 1.266 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AccessControlled (Hudson core 1.266 API)";
+        parent.document.title="AccessControlled (Hudson core 1.267 API)";
     }
 }
 </SCRIPT>
@@ -179,12 +179,15 @@ getACL</H3>
 <A NAME="checkPermission(hudson.security.Permission)"><!-- --></A><H3>
 checkPermission</H3>
 <PRE>
-void <B>checkPermission</B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</PRE>
+void <B>checkPermission</B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)
+                     throws org.acegisecurity.AccessDeniedException</PRE>
 <DL>
 <DD>Convenient short-cut for <code>getACL().checkPermission(permission)</code>
 <P>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.acegisecurity.AccessDeniedException</CODE></DL>
 </DD>
 </DL>
 <HR>

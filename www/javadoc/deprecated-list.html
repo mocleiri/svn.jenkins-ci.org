@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.266 API)
+Deprecated List (Hudson core 1.267 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-20">
+<META NAME="date" CONTENT="2008-12-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.266 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.266 API)";
+        parent.document.title="Deprecated List (Hudson core 1.267 API)";
     }
 }
 </SCRIPT>
@@ -88,6 +88,7 @@ function windowTitle()
 <B>Contents</B><UL>
 <LI><A HREF="#interface">Deprecated Interfaces</A>
 <LI><A HREF="#class">Deprecated Classes</A>
+<LI><A HREF="#field">Deprecated Fields</A>
 <LI><A HREF="#method">Deprecated Methods</A>
 <LI><A HREF="#constructor">Deprecated Constructors</A>
 </UL>
@@ -151,6 +152,20 @@ function windowTitle()
 </TABLE>
 &nbsp;
 <P>
+<A NAME="field"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Deprecated Fields</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/ChartUtil.html#awtProblem">hudson.util.ChartUtil.awtProblem</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <code>awtProblemCause!=null</code> instead. As of 1.267.</I>&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="method"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -202,6 +217,11 @@ function windowTitle()
 <TD><A HREF="hudson/scm/RepositoryBrowsers.html#createInstance(java.lang.Class, org.kohsuke.stapler.StaplerRequest, java.lang.String)">hudson.scm.RepositoryBrowsers.createInstance(Class<T>, StaplerRequest, String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/scm/RepositoryBrowsers.html#createInstance(java.lang.Class, org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String)"><CODE>RepositoryBrowsers.createInstance(Class, StaplerRequest, JSONObject, String)</CODE></A>.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Hudson.html#doLogRss(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">hudson.model.Hudson.doLogRss(StaplerRequest, StaplerResponse)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As on 1.267, moved to "/log/rss..."</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/Util.html#encodeRFC2396(java.lang.String)">hudson.Util.encodeRFC2396(String)</A>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SidACL (Hudson core 1.266 API)
+SidACL (Hudson core 1.267 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-20">
+<META NAME="date" CONTENT="2008-12-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SidACL (Hudson core 1.266 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SidACL (Hudson core 1.266 API)";
+        parent.document.title="SidACL (Hudson core 1.267 API)";
     }
 }
 </SCRIPT>
@@ -197,6 +197,14 @@ java.lang.Object
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security"><CODE>SidACL</CODE></A> that first consults 'this' <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security"><CODE>SidACL</CODE></A> and then delegate to
  the given parent <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security"><CODE>SidACL</CODE></A>.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/SidACL.html#toString(org.acegisecurity.acls.sid.Sid)">toString</A></B>(org.acegisecurity.acls.sid.Sid&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.security.ACL"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -311,6 +319,17 @@ protected abstract java.lang.Boolean <B>hasPermission</B>(org.acegisecurity.acls
 </DL>
 <HR>
 
+<A NAME="toString(org.acegisecurity.acls.sid.Sid)"><!-- --></A><H3>
+toString</H3>
+<PRE>
+protected java.lang.String <B>toString</B>(org.acegisecurity.acls.sid.Sid&nbsp;p)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="newInheritingACL(hudson.security.SidACL)"><!-- --></A><H3>
 newInheritingACL</H3>
 <PRE>
@@ -319,6 +338,9 @@ public final <A HREF="../../hudson/security/SidACL.html" title="class in hudson.
 <DD>Creates a new <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security"><CODE>SidACL</CODE></A> that first consults 'this' <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security"><CODE>SidACL</CODE></A> and then delegate to
  the given parent <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security"><CODE>SidACL</CODE></A>. By doing this at the <A HREF="../../hudson/security/SidACL.html" title="class in hudson.security"><CODE>SidACL</CODE></A> level and not at the
  <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> level, this allows the child ACLs to have an explicit deny entry.
+ Note that the combined ACL calls hasPermission(Sid,Permission) in the child and parent
+ SidACLs directly, so if these override _hasPermission then this custom behavior will
+ not be applied.
 <P>
 <DD><DL>
 </DL>

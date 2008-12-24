@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.266 API)
+Functions (Hudson core 1.267 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-20">
+<META NAME="date" CONTENT="2008-12-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.266 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.266 API)";
+        parent.document.title="Functions (Hudson core 1.267 API)";
     }
 }
 </SCRIPT>
@@ -721,6 +721,14 @@ Utility functions used in views.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#hyperlinkMatchesCurrentPage(java.lang.String)">hyperlinkMatchesCurrentPage</A></B>(java.lang.String&nbsp;href)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the given href link is matching the current page, return true.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.Object</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#ifThenElse(boolean, java.lang.Object, java.lang.Object)">ifThenElse</A></B>(boolean&nbsp;cond,
            java.lang.Object&nbsp;thenValue,
@@ -816,6 +824,14 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#runScript(org.apache.commons.jelly.Script)">runScript</A></B>(org.apache.commons.jelly.Script&nbsp;script)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evaluate a Jelly script and return output as a String.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1855,6 +1871,24 @@ public static org.apache.commons.jelly.JellyContext <B>getCurrentJellyContext</B
 </DL>
 <HR>
 
+<A NAME="runScript(org.apache.commons.jelly.Script)"><!-- --></A><H3>
+runScript</H3>
+<PRE>
+public static java.lang.String <B>runScript</B>(org.apache.commons.jelly.Script&nbsp;script)
+                                  throws org.apache.commons.jelly.JellyTagException</PRE>
+<DL>
+<DD>Evaluate a Jelly script and return output as a String.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.apache.commons.jelly.JellyTagException</CODE><DT><B>Since:</B></DT>
+  <DD>1.267</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="subList(java.util.List, int)"><!-- --></A><H3>
 subList</H3>
 <PRE>
@@ -1950,6 +1984,24 @@ public java.lang.String <B>getUpdateCenterUrl</B>()</PRE>
 <P>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hyperlinkMatchesCurrentPage(java.lang.String)"><!-- --></A><H3>
+hyperlinkMatchesCurrentPage</H3>
+<PRE>
+public boolean <B>hyperlinkMatchesCurrentPage</B>(java.lang.String&nbsp;href)
+                                    throws java.io.UnsupportedEncodingException</PRE>
+<DL>
+<DD>If the given href link is matching the current page, return true.
+
+ Used in <tt>task.jelly</tt> to decide if the page should be highlighted.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.UnsupportedEncodingException</CODE></DL>
 </DD>
 </DL>
 <HR>
