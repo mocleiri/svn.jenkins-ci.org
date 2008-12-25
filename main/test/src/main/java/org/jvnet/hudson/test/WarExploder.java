@@ -62,7 +62,7 @@ final class WarExploder {
             throw new AssertionError("hudson.war is not in the classpath.");
         File war = Which.jarFile(Class.forName("executable.Executable"));
 
-        File explodeDir = new File("./target/hudson-for-test");
+        File explodeDir = new File("./target/hudson-for-test").getAbsoluteFile();
         File timestamp = new File(explodeDir,".timestamp");
 
         if(!timestamp.exists() || (timestamp.lastModified()!=war.lastModified())) {
