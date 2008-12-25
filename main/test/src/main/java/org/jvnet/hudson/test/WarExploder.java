@@ -43,8 +43,7 @@ final class WarExploder {
         File d = new File(".").getAbsoluteFile();
         for( ; d!=null; d=d.getParentFile()) {
             if(!d.getName().equals("main")) continue;
-            File p = d.getParentFile();
-            if(p!=null && p.getName().equals("hudson"))
+            if(new File(d,".hudson").exists())
                 break;
         }
         if(d!=null) {
