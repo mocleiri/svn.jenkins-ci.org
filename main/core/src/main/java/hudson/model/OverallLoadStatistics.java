@@ -3,6 +3,11 @@ package hudson.model;
 /**
  * {@link LoadStatistics} for the entire system (the master and all the slaves combined.)
  *
+ * <p>
+ * {@link #computeQueueLength()} and {@link #queueLength} counts those tasks
+ * that are unassigned to any node, whereas {@link #totalQueueLength}
+ * tracks the queue length including tasks that are assigned to a specific node.
+ *
  * @author Kohsuke Kawaguchi
  * @see Hudson#overallLoad
  */
@@ -25,6 +30,6 @@ public class OverallLoadStatistics extends LoadStatistics {
 
     @Override
     public int computeQueueLength() {
-        return hudson.getQueue().getBuildableItems().size();
+        return hudson.getQueue().countBuildableItemsFor(null);
     }
 }

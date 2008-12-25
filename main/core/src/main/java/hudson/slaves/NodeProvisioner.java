@@ -160,12 +160,12 @@ public class NodeProvisioner {
     }
 
     public static void launch() {
+        // periodically invoke NodeProvisioners
         Trigger.timer.scheduleAtFixedRate(new SafeTimerTask() {
                 @Override
                 protected void doRun() {
                     Hudson h = Hudson.getInstance();
-
-                    // periodically invoke NodeProvisioner on slaves
+                    h.overallNodeProvisioner.update();
                     for( Label l : h.getLabels() )
                         l.nodeProvisioner.update();
                 }
