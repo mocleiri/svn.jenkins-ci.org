@@ -12,7 +12,19 @@ public class OverallLoadStatistics extends LoadStatistics {
      */
     public final MultiStageTimeSeries totalQueueLength = new MultiStageTimeSeries(0,DECAY);
 
+    private final Hudson hudson = Hudson.getInstance();
+
     /*package*/ OverallLoadStatistics() {
         super(0,0);
+    }
+
+    @Override
+    public int computeIdleExecutors() {
+        return hudson.getComputer().getIdleExecutors();
+    }
+
+    @Override
+    public int computeQueueLength() {
+        return hudson.getQueue().getBuildableItems().size();
     }
 }

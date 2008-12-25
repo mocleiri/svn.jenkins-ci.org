@@ -6,6 +6,7 @@ import hudson.model.Describable;
 import hudson.model.Hudson;
 import hudson.model.Node;
 import hudson.model.AbstractModelObject;
+import hudson.model.Label;
 import hudson.security.ACL;
 import hudson.security.AccessControlled;
 import hudson.security.Permission;
@@ -52,7 +53,7 @@ public abstract class Cloud extends AbstractModelObject implements ExtensionPoin
     /**
      * Provisions new {@link Node}s from this cloud.
      */
-    public abstract Collection<PlannedNode> provision(int excessWorkload);
+    public abstract Collection<PlannedNode> provision(Label label, int excessWorkload);
 
     /**
      * All registered {@link Cloud} implementations.

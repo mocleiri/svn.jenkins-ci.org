@@ -94,10 +94,9 @@ public final class ComputerSet extends AbstractModelObject {
      */
     public int getIdleExecutors() {
         int r=0;
-        for (Computer c : get_all()) {
+        for (Computer c : get_all())
             if(c.isOnline() || c.isConnecting())
                 r += c.countIdle();
-        }
         return r;
     }
 

@@ -9,11 +9,18 @@ import java.util.List;
 /**
  * Utilization statistics for a node or a set of nodes.
  *
+ * <h2>Implementation Note</h2>
+ * <p>
+ * Instances of this class is not capable of updating the statistics itself
+ * &mdash; instead, it's done by the single {@link #register()} method.
+ * This is more efficient (as it allows us a single pass to update all stats),
+ * but it's not clear to me if the loss of autonomy is worth it.
+ *
  * @author Kohsuke Kawaguchi
  * @see Label#load
  * @see Hudson#overallLoad
  */
-public class LoadStatistics {
+public abstract class LoadStatistics {
     /**
      * Number of busy executors and how it changes over time.
      */
@@ -38,6 +45,16 @@ public class LoadStatistics {
     public float getLatestIdleExecutors(Picker picker) {
         return totalExecutors.pick(picker).getLatest() - busyExecutors.pick(picker).getLatest();
     }
+
+    /**
+     * Computes the # of idle executors right now and obtains the snapshot value.
+     */
+    public abstract int computeIdleExecutors();
+
+    /**
+     * Computes the # of queue length right now and obtains the snapshot value.
+     */
+    public abstract int computeQueueLength();
 
     /**
      * Start updating the load average.

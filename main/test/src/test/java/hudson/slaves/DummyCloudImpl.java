@@ -3,6 +3,7 @@ package hudson.slaves;
 import hudson.model.Computer;
 import hudson.model.Descriptor;
 import hudson.model.Node;
+import hudson.model.Label;
 import hudson.slaves.NodeProvisioner.PlannedNode;
 import org.jvnet.hudson.test.HudsonTestCase;
 
@@ -24,7 +25,7 @@ public class DummyCloudImpl extends Cloud {
     private final transient HudsonTestCase caller;
 
     /**
-     * Configurable delay between the {@link #provision(int)} and the actual launch of a slave,
+     * Configurable delay between the {@link Cloud#provision(Label,int)} and the actual launch of a slave,
      * to emulate a real cloud that takes some time for provisioning a new system.
      *
      * <p>
@@ -41,7 +42,7 @@ public class DummyCloudImpl extends Cloud {
         this.delay = delay;
     }
 
-    public Collection<PlannedNode> provision(int excessWorkload) {
+    public Collection<PlannedNode> provision(Label label, int excessWorkload) {
         List<PlannedNode> r = new ArrayList<PlannedNode>();
         while(excessWorkload>0) {
             System.out.println("Provisioning");

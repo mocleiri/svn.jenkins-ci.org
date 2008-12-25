@@ -4,6 +4,7 @@ import hudson.model.LoadStatistics;
 import hudson.model.Node;
 import hudson.model.Hudson;
 import hudson.model.MultiStageTimeSeries;
+import hudson.model.Label;
 import static hudson.model.LoadStatistics.DECAY;
 import hudson.model.MultiStageTimeSeries.Picker;
 import hudson.triggers.SafeTimerTask;
@@ -19,11 +20,11 @@ import java.util.logging.Level;
 
 /**
  * Uses the {@link LoadStatistics} and determines when we need to allocate
- * a new {@link Node} through {@link Cloud}.
+ * new {@link Node}s through {@link Cloud}.
  *
  * @author Kohsuke Kawaguchi
  */
-public class NodeProvisioner extends SafeTimerTask {
+public class NodeProvisioner {
     /**
      * The node addition activity in progress.
      */
@@ -40,23 +41,40 @@ public class NodeProvisioner extends SafeTimerTask {
         }
     }
 
+    /**
+     * Load for the label.
+     */
+    private final LoadStatistics stat;
+
+    /**
+     * For which label are we working?
+     * Null if this {@link NodeProvisioner} is working for the entire Hudson,
+     * for jobs that are unassigned to any particular node.
+     */
+    private final Label label;
+
     private List<PlannedNode> pendingLaunches = new CopyOnWriteArrayList<PlannedNode>();
 
     /**
-     * Exponential moving average of the "planned ePcapacity" over time, which is the number of
+     * Exponential moving average of the "planned capacity" over time, which is the number of
      * additional executors being brought up.
      *
      * This is used to filter out high-frequency components from the planned capacity, so that
-     * the comparison with other low-frequency only variables won't leave spikes. 
+     * the comparison with other low-frequency only variables won't leave spikes.
      */
     private final MultiStageTimeSeries plannedCapacitiesEMA = new MultiStageTimeSeries(0,DECAY);
 
-    private NodeProvisioner() {}
+    public NodeProvisioner(Label label, LoadStatistics loadStatistics) {
+        this.label = label;
+        this.stat = loadStatistics;
+    }
 
-    @Override
-    protected void doRun() {
-        // TODO: picker should be selectable
-        MultiStageTimeSeries.Picker picker = Picker.SEC10;
+    /**
+     * Periodically invoked to keep track of the load.
+     * Launches additional nodes if necessary.
+     */
+    private void update() {
+        Hudson hudson = Hudson.getInstance();
 
         // clean up the cancelled launch activity, then count the # of executors that we are about to bring up.
         float plannedCapacity = 0;
@@ -75,11 +93,6 @@ public class NodeProvisioner extends SafeTimerTask {
             plannedCapacity += f.numExecutors;
         }
         plannedCapacitiesEMA.update(plannedCapacity);
-
-        Hudson hudson = Hudson.getInstance();
-
-        // TODO: do this for each label separately.
-        LoadStatistics stat = hudson.overallLoad;
 
         /*
             Here we determine how many additional slaves we need to keep up with the load (if at all),
@@ -113,15 +126,15 @@ public class NodeProvisioner extends SafeTimerTask {
             estimate won't create a starvation.
          */
 
-        float idle = Math.min(stat.getLatestIdleExecutors(picker),hudson.getComputer().getIdleExecutors());
+        float idle = Math.min(stat.getLatestIdleExecutors(PICKER),stat.computeIdleExecutors());
         if(idle<MARGIN) {
             // make sure the system is fully utilized before attempting any new launch.
 
             // this is the amount of work left to be done
-            float qlen = Math.min(stat.queueLength.getLatest(picker), hudson.getQueue().getBuildableItems().size());
+            float qlen = Math.min(stat.queueLength.getLatest(PICKER), stat.computeQueueLength());
 
             // ... and this is the additional executors we've already provisioned.
-            plannedCapacity = Math.max(plannedCapacitiesEMA.getLatest(picker),plannedCapacity);
+            plannedCapacity = Math.max(plannedCapacitiesEMA.getLatest(PICKER),plannedCapacity);
 
             float excessWorkload = qlen - plannedCapacity;
             if(excessWorkload>1-MARGIN) {// and there's more work to do...
@@ -135,7 +148,7 @@ public class NodeProvisioner extends SafeTimerTask {
                     // something like 0.95, in which case we want to allocate one node.
                     // so the threshold here is 1-MARGIN, and hence floor(excessWorkload+MARGIN) is needed to handle this.
 
-                    Collection<PlannedNode> additionalCapacities = c.provision((int)Math.round(Math.floor(excessWorkload+MARGIN)));
+                    Collection<PlannedNode> additionalCapacities = c.provision(label, (int)Math.round(Math.floor(excessWorkload+MARGIN)));
                     for (PlannedNode ac : additionalCapacities) {
                         LOGGER.info("Provisioned "+ac.displayName+" from "+c.name+" with "+ac.numExecutors+" executors. Remaining excess workload:"+excessWorkload);
                         excessWorkload -= ac.numExecutors;
@@ -147,13 +160,25 @@ public class NodeProvisioner extends SafeTimerTask {
     }
 
     public static void launch() {
-        Trigger.timer.scheduleAtFixedRate(new NodeProvisioner(),
-                // give some initial warm up time so that statically connected slaves
-                // can be brought online before we start allocating more. 
-                LoadStatistics.CLOCK*10,
-                LoadStatistics.CLOCK);
+        Trigger.timer.scheduleAtFixedRate(new SafeTimerTask() {
+                @Override
+                protected void doRun() {
+                    Hudson h = Hudson.getInstance();
+
+                    // periodically invoke NodeProvisioner on slaves
+                    for( Label l : h.getLabels() )
+                        l.nodeProvisioner.update();
+                }
+            },
+            // give some initial warm up time so that statically connected slaves
+            // can be brought online before we start allocating more.
+            LoadStatistics.CLOCK*10,
+            LoadStatistics.CLOCK);
     }
 
     private static final float MARGIN = 0.1f;
     private static final Logger LOGGER = Logger.getLogger(NodeProvisioner.class.getName());
+
+    // TODO: picker should be selectable
+    private static final MultiStageTimeSeries.Picker PICKER = Picker.SEC10;
 }

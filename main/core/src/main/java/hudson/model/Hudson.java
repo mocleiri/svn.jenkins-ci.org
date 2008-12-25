@@ -318,6 +318,11 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
      */
     public transient final OverallLoadStatistics overallLoad = new OverallLoadStatistics();
 
+    /**
+     * {@link NodeProvisioner} that reacts to {@link OverallLoadStatistics}.
+     */
+    public transient final NodeProvisioner overallNodeProvisioner = new NodeProvisioner(null,overallLoad);
+
     public transient final ServletContext servletContext;
 
     /**

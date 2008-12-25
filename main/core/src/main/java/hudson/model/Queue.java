@@ -370,6 +370,17 @@ public class Queue extends ResourceController implements Saveable {
     }
 
     /**
+     * How many {@link BuildableItem}s are assigned for the given label?
+     */
+    public synchronized int countBuildableItemsFor(Label l) {
+        int r = 0;
+        for (BuildableItem bi : buildables.values())
+            if(bi.task.getAssignedLabel()==l)
+                r++;
+        return r;
+    }
+
+    /**
      * Gets the information about the queue item for the given project.
      *
      * @return null if the project is not in the queue.

@@ -1,6 +1,7 @@
 package hudson.model;
 
 import hudson.Util;
+import hudson.slaves.NodeProvisioner;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
 
@@ -23,10 +24,22 @@ public class Label implements Comparable<Label>, ModelObject {
     private volatile Set<Node> nodes;
 
     public final LoadStatistics load;
+    public final NodeProvisioner nodeProvisioner;
 
     public Label(String name) {
         this.name = name;
-        this.load = new LoadStatistics(0,0); // this causes infinite loop - getTotalExecutors(),getBusyExecutors());
+         // passing these causes an infinite loop - getTotalExecutors(),getBusyExecutors());
+        this.load = new LoadStatistics(0,0) {
+            @Override
+            public int computeIdleExecutors() {
+                return Label.this.getIdleExecutors();
+            }
+            @Override
+            public int computeQueueLength() {
+                return Hudson.getInstance().getQueue().countBuildableItemsFor(Label.this);
+            }
+        };
+        this.nodeProvisioner = new NodeProvisioner(this,load);
     }
 
     @Exported
@@ -92,6 +105,20 @@ public class Label implements Comparable<Label>, ModelObject {
             Computer c = n.toComputer();
             if(c!=null && c.isOnline())
                 r += c.countBusy();
+        }
+        return r;
+    }
+
+    /**
+     * Number of idle {@link Executor}s that can start working immediately.
+     */
+    @Exported
+    public int getIdleExecutors() {
+        int r=0;
+        for (Node n : getNodes()) {
+            Computer c = n.toComputer();
+            if(c!=null && (c.isOnline() || c.isConnecting()))
+                r += c.countIdle();
         }
         return r;
     }
