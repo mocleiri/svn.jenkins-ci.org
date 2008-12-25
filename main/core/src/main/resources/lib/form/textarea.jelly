@@ -1,0 +1,24 @@
+<!--
+	<textarea> tag on steroid.
+
+	The textarea will be rendered to fit the content. It also gets the resize handle.
+
+	If @field is specified:
+	   no other mandatory fields.
+	   in this case, name and value are inferred from field,
+	   and checkUrl is auto-generated if the check method is present.
+	Otherwise
+	   @name and @value are mandatory.
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler">
+  <j:set var="checkUrl" value="${h.getCheckUrl(attrs.checkUrl,descriptor,attrs.field)}" />
+  <textarea id="${attrs.id}" style="${attrs.style}"
+            name ="${h.defaulted(attrs.name,'_.'+attrs.field)}"
+            class="setting-input ${h.ifThenElse(checkUrl!=null,'validated','')}"
+            checkUrl="${checkUrl}"
+            rows="${h.determineRows(attrs.value)}">
+    <st:out value="${h.defaulted(attrs.value,instance[attrs.field])}" />
+  </textarea>
+  <!-- resize handle -->
+  <div class="textarea-handle"/>
+</j:jelly>
