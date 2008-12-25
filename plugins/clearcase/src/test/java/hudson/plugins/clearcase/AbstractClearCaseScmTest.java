@@ -1,15 +1,9 @@
 package hudson.plugins.clearcase;
 
-import static org.junit.Assert.*;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.matrix.MatrixBuild;
@@ -26,6 +20,15 @@ import hudson.plugins.clearcase.action.SaveChangeLogAction;
 import hudson.plugins.clearcase.util.EventRecordFilter;
 import hudson.scm.ChangeLogParser;
 import hudson.scm.SCMDescriptor;
+import hudson.util.VariableResolver;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -52,6 +55,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
     private String[] branchArray = new String[] {"branch"};
     public ChangeLogAction changeLogAction;
     public SaveChangeLogAction saveChangeLogAction;
+	private VariableResolver resolver;
     
     @Before
     public void setUp() throws Exception {
@@ -73,6 +77,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         computer = classContext.mock(Computer.class);
         Map systemProperties = new HashMap();
         systemProperties.put("user.name", "henrik");
+        resolver = context.mock(VariableResolver.class);
     }
 
     @After
@@ -122,7 +127,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         });
         String username = System.getProperty("user.name");
         AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("${JOB_NAME}-${USER_NAME}-view", "vob", "", true);
-        assertEquals("The macros were not replaced in the normalized view name", "Hudson-" + username + "-view", scm.getNormalizedViewName(build,launcher));
+        assertEquals("The macros were not replaced in the normalized view name", "Hudson-" + username + "-view", scm.generateNormalizedViewName(build,launcher));
         classContext.assertIsSatisfied();
     }
 
@@ -135,7 +140,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         });        
         AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("view  with\\-/-:-?-*-|-,", "vob", "", true);
         assertEquals("The invalid view name chars were not removed from the view name", 
-                "view_with_-_-_-_-_-_-,", scm.getNormalizedViewName(build,launcher));
+                "view_with_-_-_-_-_-_-,", scm.generateNormalizedViewName(build,launcher));
         classContext.assertIsSatisfied();
     }    
 
@@ -155,10 +160,10 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("viewname", "vob", "");
         Map<String, String> env = new HashMap<String, String>();
         env.put("WORKSPACE", "/hudson/jobs/job/workspace");
-        scm.getNormalizedViewName(build, launcher);
+        scm.generateNormalizedViewName(build, launcher);
         scm.buildEnvVars(build, env);
-        assertEquals("The env var VIEWNAME wasnt set", "viewname", env.get(ClearCaseSCM.CLEARCASE_VIEWNAME_ENVSTR));
-        assertEquals("The env var VIEWPATH wasnt set", "/hudson/jobs/job/workspace" + File.separator +"viewname", env.get(ClearCaseSCM.CLEARCASE_VIEWPATH_ENVSTR));
+        assertEquals("The env var VIEWNAME wasnt set", "viewname", env.get(AbstractClearCaseScm.CLEARCASE_VIEWNAME_ENVSTR));
+        assertEquals("The env var VIEWPATH wasnt set", "/hudson/jobs/job/workspace" + File.separator +"viewname", env.get(AbstractClearCaseScm.CLEARCASE_VIEWPATH_ENVSTR));
     }
     
     @Test
@@ -167,8 +172,8 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         Map<String, String> env = new HashMap<String, String>();
         env.put("WORKSPACE", "/hudson/jobs/job/workspace");
         scm.buildEnvVars(build, env);
-        assertFalse("The env var VIEWNAME was set", env.containsKey(ClearCaseSCM.CLEARCASE_VIEWNAME_ENVSTR));
-        assertFalse("The env var VIEWPATH was set", env.containsKey(ClearCaseSCM.CLEARCASE_VIEWPATH_ENVSTR));
+        assertFalse("The env var VIEWNAME was set", env.containsKey(AbstractClearCaseScm.CLEARCASE_VIEWNAME_ENVSTR));
+        assertFalse("The env var VIEWPATH was set", env.containsKey(AbstractClearCaseScm.CLEARCASE_VIEWPATH_ENVSTR));
     }
 
     @Test
@@ -180,10 +185,10 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         });
         AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("viewname", "vob", "");
         Map<String, String> env = new HashMap<String, String>();
-        scm.getNormalizedViewName(build, launcher);
+        scm.generateNormalizedViewName(build, launcher);
         scm.buildEnvVars(build, env);
-        assertTrue("The env var VIEWNAME wasnt set", env.containsKey(ClearCaseSCM.CLEARCASE_VIEWNAME_ENVSTR));
-        assertFalse("The env var VIEWPATH was set", env.containsKey(ClearCaseSCM.CLEARCASE_VIEWPATH_ENVSTR));
+        assertTrue("The env var VIEWNAME wasnt set", env.containsKey(AbstractClearCaseScm.CLEARCASE_VIEWNAME_ENVSTR));
+        assertFalse("The env var VIEWPATH was set", env.containsKey(AbstractClearCaseScm.CLEARCASE_VIEWPATH_ENVSTR));
     }
 
     @Test
@@ -197,10 +202,10 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("viewname-${JOB_NAME}", "vob", "");
         Map<String, String> env = new HashMap<String, String>();
         env.put("WORKSPACE", "/hudson/jobs/job/workspace");
-        scm.getNormalizedViewName(build, launcher);
+        scm.generateNormalizedViewName(build, launcher);
         scm.buildEnvVars(build, env);
-        assertEquals("The env var VIEWNAME wasnt set", "viewname-CCHudson", env.get(ClearCaseSCM.CLEARCASE_VIEWNAME_ENVSTR));
-        assertEquals("The env var VIEWPATH wasnt set", "/hudson/jobs/job/workspace" + File.separator +"viewname-CCHudson", env.get(ClearCaseSCM.CLEARCASE_VIEWPATH_ENVSTR));
+        assertEquals("The env var VIEWNAME wasnt set", "viewname-CCHudson", env.get(AbstractClearCaseScm.CLEARCASE_VIEWNAME_ENVSTR));
+        assertEquals("The env var VIEWPATH wasnt set", "/hudson/jobs/job/workspace" + File.separator +"viewname-CCHudson", env.get(AbstractClearCaseScm.CLEARCASE_VIEWPATH_ENVSTR));
     }
     
     @Test
@@ -294,7 +299,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
                 ignoring(build).getPreviousBuild(); will(returnValue(build));
                 ignoring(build).getTimestamp(); will(returnValue(Calendar.getInstance()));
                 ignoring(build).getParent(); will(returnValue(project));
-                one(project).getName(); will(returnValue("CCHudson"));
+                ignoring(project).getName(); will(returnValue("CCHudson"));
                 
             }
         });
@@ -660,7 +665,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         public AbstractClearCaseScmDummy(String viewName, String[] vobPaths, String mkviewOptionalParam,
                 boolean filterOutDestroySubBranchEvent) {
-            super( viewName, mkviewOptionalParam, filterOutDestroySubBranchEvent);
+            super( viewName, mkviewOptionalParam, filterOutDestroySubBranchEvent, false);
             this.vobPaths = vobPaths;
         }
 
@@ -675,12 +680,12 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         }
 
         @Override
-        protected CheckOutAction createCheckOutAction(ClearToolLauncher launcher) {
+        protected CheckOutAction createCheckOutAction(VariableResolver resolver,ClearToolLauncher launcher) {
             return checkOutAction;
         }
-
+ 
         @Override
-        protected PollAction createPollAction(ClearToolLauncher launcher) {
+        protected PollAction createPollAction(VariableResolver resolver, ClearToolLauncher launcher) {
             return pollAction;
         }
 

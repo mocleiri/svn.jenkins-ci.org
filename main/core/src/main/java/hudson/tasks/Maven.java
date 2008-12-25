@@ -21,6 +21,7 @@ import hudson.util.ArgumentListBuilder;
 import hudson.util.FormFieldValidator;
 import hudson.util.NullStream;
 import hudson.util.StreamTaskListener;
+import hudson.util.VariableResolver;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -32,6 +33,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.Properties;
 
 import net.sf.json.JSONObject;
 
@@ -45,20 +47,43 @@ public class Maven extends Builder {
      * The targets and other maven options.
      * Can be separated by SP or NL.
      */
-    private final String targets;
+    public final String targets;
 
     /**
      * Identifies {@link MavenInstallation} to be used.
      */
-    private final String mavenName;
-    
+    public final String mavenName;
+
+    /**
+     * MAVEN_OPTS if not null.
+     */
+    public final String jvmOptions;
+
+    /**
+     * Optional POM file path relative to the workspace.
+     * Used for the Maven '-f' option.
+     */
+    public final String pom;
+
+    /**
+     * Optional properties to be passed to Maven. Follows {@link Properties} syntax.
+     */
+    public final String properties;
+
     private final static String MAVEN_1_INSTALLATION_COMMON_FILE = "bin/maven";
     private final static String MAVEN_2_INSTALLATION_COMMON_FILE = "bin/mvn";
 
-    @DataBoundConstructor
     public Maven(String targets,String name) {
+        this(targets,name,null,null,null);
+    }
+
+    @DataBoundConstructor
+    public Maven(String targets,String name, String pom, String properties, String jvmOptions) {
         this.targets = targets;
         this.mavenName = name;
+        this.pom = Util.fixEmptyAndTrim(pom);
+        this.properties = Util.fixEmptyAndTrim(properties);
+        this.jvmOptions = Util.fixEmptyAndTrim(jvmOptions);
     }
 
     public String getTargets() {
@@ -128,10 +153,12 @@ public class Maven extends Builder {
     public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener) throws IOException, InterruptedException {
         AbstractProject proj = build.getProject();
 
-        String targets = this.targets;
+        VariableResolver<String> vr = build.getBuildVariableResolver();
         ParametersAction parameters = build.getAction(ParametersAction.class);
-        if (parameters != null)
-            targets = parameters.substitute(build,targets);
+        if(parameters!=null)
+            vr = parameters.createVariableResolver(build);
+
+        String targets = Util.replaceMacro(this.targets,vr);
 
         int startIndex = 0;
         int endIndex;
@@ -162,7 +189,10 @@ public class Maven extends Builder {
                 }
                 args.add(exec);
             }
+            if(pom!=null)
+                args.add("-f",pom);
             args.addKeyValuePairs("-D",build.getBuildVariables());
+            args.addKeyValuePairsFromPropertyString("-D",properties,vr);
             args.addTokenized(normalizedTarget);
 
             if(ai!=null) {
@@ -179,6 +209,9 @@ public class Maven extends Builder {
             // just as a precaution
             // see http://maven.apache.org/continuum/faqs.html#how-does-continuum-detect-a-successful-build
             env.put("MAVEN_TERMINATE_CMD","on");
+
+            if(jvmOptions!=null)
+                env.put("MAVEN_OPTS",jvmOptions);
 
             try {
                 int r = launcher.launch(args.toCommandArray(),env,listener.getLogger(),proj.getModuleRoot()).join();
@@ -226,6 +259,10 @@ public class Maven extends Builder {
 
         public MavenInstallation[] getInstallations() {
             return installations;
+        }
+
+        public void setInstallations(MavenInstallation... installations) {
+            this.installations = installations;
         }
 
         @Override

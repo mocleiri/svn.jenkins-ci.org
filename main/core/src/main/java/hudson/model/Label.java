@@ -14,6 +14,8 @@ import java.util.Set;
  * Group of {@link Node}s.
  * 
  * @author Kohsuke Kawaguchi
+ * @see Hudson#getLabels()
+ * @see Hudson#getLabel(String) 
  */
 @ExportedBean
 public class Label implements Comparable<Label>, ModelObject {
@@ -41,6 +43,7 @@ public class Label implements Comparable<Label>, ModelObject {
      * which means the label is the name of a {@link Node}.
      */
     public boolean isSelfLabel() {
+        Set<Node> nodes = getNodes();
         return nodes.size() == 1 && nodes.iterator().next().getSelfLabel() == this;
     }
 
@@ -120,6 +123,10 @@ public class Label implements Comparable<Label>, ModelObject {
         StringBuilder buf = new StringBuilder("group of ");
         boolean first=true;
         for (Node n : nodes) {
+            if(buf.length()>80) {
+                buf.append(",...");
+                break;
+            }
             if(!first)  buf.append(',');
             else        first=false;
             buf.append(n.getNodeName());

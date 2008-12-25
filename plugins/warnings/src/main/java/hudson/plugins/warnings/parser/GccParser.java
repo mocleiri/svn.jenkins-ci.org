@@ -9,16 +9,16 @@ import java.util.regex.Matcher;
  *
  * @author Greg Roth
  */
-public class GccParser extends RegexpParser {
+public class GccParser extends RegexpLineParser {
     /** Warning type of this parser. */
     static final String WARNING_TYPE = "gcc";
     /** Pattern of gcc compiler warnings. */
-    private static final String GCC_WARNING_PATTERN = "(.*\\.[chpsola0-9]+):(?:(\\d*):(?:\\d*:)*\\s*(warning|error)\\s*:|\\s*undefined reference to)(.*)";
+    private static final String GCC_WARNING_PATTERN = "^(.*\\.[chpsola0-9]+):(?:(\\d*):(?:\\d*:)*\\s*(warning|error)\\s*:|\\s*undefined reference to)(.*)$";
     /**
      * Creates a new instance of <code>GccParser</code>.
      */
     public GccParser() {
-        super(GCC_WARNING_PATTERN);
+        super(GCC_WARNING_PATTERN, "GNU compiler (gcc)");
     }
 
     /** {@inheritDoc} */

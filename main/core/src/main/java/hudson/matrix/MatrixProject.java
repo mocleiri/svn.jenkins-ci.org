@@ -19,6 +19,7 @@ import hudson.model.Node;
 import hudson.model.SCMedItem;
 import hudson.model.TopLevelItem;
 import hudson.model.TopLevelItemDescriptor;
+import hudson.model.Saveable;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildWrapper;
@@ -56,7 +57,7 @@ import java.util.logging.Logger;
  *
  * @author Kohsuke Kawaguchi
  */
-public class MatrixProject extends AbstractProject<MatrixProject,MatrixBuild> implements TopLevelItem, SCMedItem, ItemGroup<MatrixConfiguration>, DescribableList.Owner {
+public class MatrixProject extends AbstractProject<MatrixProject,MatrixBuild> implements TopLevelItem, SCMedItem, ItemGroup<MatrixConfiguration>, Saveable {
     /**
      * Other configuration axes.
      *
@@ -99,6 +100,15 @@ public class MatrixProject extends AbstractProject<MatrixProject,MatrixBuild> im
 
     public AxisList getAxes() {
         return axes;
+    }
+
+    /**
+     * Reconfigures axes.
+     */
+    public void setAxes(AxisList axes) throws IOException {
+        this.axes = new AxisList(axes);
+        rebuildConfigurations();
+        save();
     }
 
     protected void updateTransientActions() {
@@ -366,6 +376,10 @@ public class MatrixProject extends AbstractProject<MatrixProject,MatrixBuild> im
 
     public List<Builder> getBuilders() {
         return builders.toList();
+    }
+
+    public DescribableList<Builder,Descriptor<Builder>> getBuildersList() {
+        return builders;
     }
 
     public Map<Descriptor<Publisher>,Publisher> getPublishers() {

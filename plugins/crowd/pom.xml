@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.jvnet.hudson.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>1.258</version>
+        <version>1.267</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>com.ds.tools.hudson</groupId>
@@ -12,31 +13,24 @@
     <packaging>hpi</packaging>
     <version>1.0-SNAPSHOT</version>
     <build>
-        <defaultGoal>package</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.jvnet.hudson.tools</groupId>
                 <artifactId>maven-hpi-plugin</artifactId>
-                <extensions>true</extensions>
-                <dependencies>
+                <!-- <dependencies>
                     <dependency>
-                        <artifactId>stax</artifactId>
                         <groupId>stax</groupId>
-                        <version>1.2.0</version>
+                        <artifactId>stax-api</artifactId>
+                        <version>1.0.1</version>
                     </dependency>
-                </dependencies>
+                </dependencies> -->
             </plugin>
         </plugins>
     </build>
     <repositories>
         <repository>
-            <releases />
-            <snapshots>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <id>central</id>
-            <url>https://m2proxy.atlassian.com/repository/public
-            </url>
+            <id>atlassian</id>
+            <url>https://m2proxy.atlassian.com/repository/public</url>
         </repository>
     </repositories>
     <dependencies>
@@ -44,6 +38,16 @@
             <groupId>com.atlassian.crowd</groupId>
             <artifactId>crowd-integration-client</artifactId>
             <version>1.3</version>
+           <!--  <exclusions>
+                <exclusion>
+                    <groupId>stax</groupId>
+                    <artifactId>stax-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.codehaus.woodstox</groupId>
+                    <artifactId>wstx-asl</artifactId>
+                </exclusion>
+            </exclusions> -->
         </dependency>
     </dependencies>
 </project>

@@ -1,6 +1,7 @@
 package hudson.model;
 
 import hudson.Util;
+import hudson.util.TimeUnit2;
 import hudson.security.ACL;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -12,6 +13,7 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -118,6 +120,7 @@ public class Executor extends Thread implements ModelObject {
      * @return
      *      null if the executor is idle.
      */
+    @Exported
     public Queue.Executable getCurrentExecutable() {
         return executable;
     }
@@ -150,6 +153,13 @@ public class Executor extends Thread implements ModelObject {
     }
 
     /**
+     * The opposite of {@link #isIdle()} &mdash; the executor is doing some work.
+     */
+    public boolean isBusy() {
+        return executable!=null;
+    }
+
+    /**
      * If this thread dies unexpectedly, obtain the cause of the failure.
      *
      * @return null if the death is expected death or the thread is {@link #isAlive() still alive}.
@@ -175,6 +185,29 @@ public class Executor extends Thread implements ModelObject {
         int num = (int)((System.currentTimeMillis()-startTime)*100/d);
         if(num>=100)    num=99;
         return num;
+    }
+
+    /**
+     * Returns true if the current build is likely stuck.
+     *
+     * <p>
+     * This is a heuristics based approach, but if the build is suspiciously taking for a long time,
+     * this method returns true.
+     */
+    @Exported
+    public boolean isLikelyStuck() {
+        Queue.Executable e = executable;
+        if(e==null)     return false;
+
+        long elapsed = System.currentTimeMillis() - startTime;
+        long d = e.getParent().getEstimatedDuration();
+        if(d>=0) {
+            // if it's taking 10 times longer than ETA, consider it stuck
+            return d*10 < elapsed;
+        } else {
+            // if no ETA is available, a build taking longer than a day is considered stuck
+            return TimeUnit2.MILLISECONDS.toHours(elapsed)>24;
+        }
     }
 
     /**

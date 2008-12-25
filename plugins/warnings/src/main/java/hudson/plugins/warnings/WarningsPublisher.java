@@ -9,13 +9,15 @@ import hudson.plugins.warnings.parser.FileWarningsParser;
 import hudson.plugins.warnings.parser.ParserRegistry;
 import hudson.plugins.warnings.util.FilesParser;
 import hudson.plugins.warnings.util.HealthAwarePublisher;
-import hudson.plugins.warnings.util.HealthReportBuilder;
+import hudson.plugins.warnings.util.ModuleMapper;
 import hudson.plugins.warnings.util.ParserResult;
 import hudson.tasks.Publisher;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -26,12 +28,16 @@ import org.kohsuke.stapler.DataBoundConstructor;
  * @author Ulli Hafner
  */
 public class WarningsPublisher extends HealthAwarePublisher {
+    /** Unique ID of this class. */
+    private static final long serialVersionUID = -5936973521277401764L;
     /** Descriptor of this publisher. */
     public static final WarningsDescriptor WARNINGS_DESCRIPTOR = new WarningsDescriptor();
     /** Ant file-set pattern of files to work with. */
     private final String pattern;
     /** Ant file-set pattern of files to exclude from report. */
     private final String excludePattern;
+    /** Name of parsers to use for scanning the logs. */
+    private Set<String> parserNames = new HashSet<String>();
 
     /**
      * Creates a new instance of <code>WarningPublisher</code>.
@@ -60,6 +66,39 @@ public class WarningsPublisher extends HealthAwarePublisher {
         super(threshold, healthy, unHealthy, height, thresholdLimit, "WARNINGS");
         this.pattern = pattern;
         this.excludePattern = StringUtils.stripToNull(excludePattern);
+    }
+
+    /**
+     * Returns the names of the configured parsers of this publisher.
+     *
+     * @return the parser names
+     */
+    public Set<String> getParserNames() {
+        return parserNames;
+    }
+
+    /**
+     * Adds the specified parsers to this publisher.
+     *
+     * @param parserNames
+     *            the parsers to use when scanning the files
+     */
+    public void setParserNames(final Set<String> parserNames) {
+        this.parserNames = parserNames;
+    }
+
+    /**
+     * Creates a new parser set for old versions of this class.
+     *
+     * @return this
+     */
+    @Override
+    protected Object readResolve() {
+        super.readResolve();
+        if (parserNames == null) {
+            parserNames = new HashSet<String>();
+        }
+        return this;
     }
 
     /**
@@ -100,20 +139,18 @@ public class WarningsPublisher extends HealthAwarePublisher {
 
         ParserResult project;
         if (StringUtils.isNotBlank(getPattern())) {
-            FilesParser parser = new FilesParser(logger, getPattern(), new FileWarningsParser(getExcludePattern()), isMavenBuild(build), isAntBuild(build));
+            FilesParser parser = new FilesParser(logger, getPattern(), new FileWarningsParser(parserNames, getExcludePattern()), isMavenBuild(build), isAntBuild(build));
             project = build.getProject().getWorkspace().act(parser);
         }
         else {
             project = new ParserResult(build.getProject().getWorkspace());
         }
 
-        project.addAnnotations(new ParserRegistry(getExcludePattern()).parse(logFile));
+        project.addAnnotations(new ParserRegistry(ParserRegistry.getParsers(parserNames), getExcludePattern()).parse(logFile));
 
+        project = build.getProject().getWorkspace().act(new ModuleMapper(project));
         WarningsResult result = new WarningsResultBuilder().build(build, project);
-        HealthReportBuilder healthReportBuilder = createHealthReporter(
-                Messages.Warnings_ResultAction_HealthReportSingleItem(),
-                Messages.Warnings_ResultAction_HealthReportMultipleItem());
-        build.getActions().add(new WarningsResultAction(build, healthReportBuilder, result));
+        build.getActions().add(new WarningsResultAction(build, this, result));
 
         return project;
     }

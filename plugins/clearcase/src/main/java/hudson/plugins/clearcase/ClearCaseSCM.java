@@ -1,10 +1,10 @@
 package hudson.plugins.clearcase;
 
+import static hudson.Util.fixEmpty;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Proc;
 import hudson.Util;
-import static hudson.Util.fixEmpty;
 import hudson.model.AbstractBuild;
 import hudson.model.Hudson;
 import hudson.model.ModelObject;
@@ -17,16 +17,13 @@ import hudson.plugins.clearcase.action.SaveChangeLogAction;
 import hudson.plugins.clearcase.action.SnapshotCheckoutAction;
 import hudson.plugins.clearcase.base.BaseChangeLogAction;
 import hudson.plugins.clearcase.base.BaseSaveChangeLogAction;
+import hudson.plugins.clearcase.util.BuildVariableResolver;
 import hudson.scm.ChangeLogParser;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
 import hudson.util.ByteBuffer;
 import hudson.util.FormFieldValidator;
-
-import org.kohsuke.stapler.DataBoundConstructor;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import javax.servlet.ServletException;
+import hudson.util.VariableResolver;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -38,6 +35,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+
+import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+
 /**
  * Base ClearCase SCM.
  * 
@@ -47,29 +50,25 @@ import java.util.Map;
  */
 public class ClearCaseSCM extends AbstractClearCaseScm {
 
-	private boolean useUpdate;
 	private String configSpec;
 	private boolean useDynamicView;
 	private String viewDrive;
 	private final String branch;
 	private final String vobPaths;
+    private boolean doNotUpdateConfigSpec;
 
-	@DataBoundConstructor
-	public ClearCaseSCM(String branch, String configspec, String viewname,
-			boolean useupdate, String vobpaths, boolean usedynamicview,
-			String viewdrive, String mkviewoptionalparam,
-			boolean filterOutDestroySubBranchEvent) {
-		super(viewname, mkviewoptionalparam, filterOutDestroySubBranchEvent);
-		this.branch = branch;
-		this.configSpec = configspec;
-		this.useUpdate = useupdate;
-		this.vobPaths = vobpaths;
-		this.useDynamicView = usedynamicview;
-		this.viewDrive = viewdrive;
+    @DataBoundConstructor
+    public ClearCaseSCM(String branch, String configspec, String viewname, boolean useupdate, String vobpaths,
+            boolean usedynamicview, String viewdrive, String mkviewoptionalparam, boolean filterOutDestroySubBranchEvent,
+            boolean doNotUpdateConfigSpec) {
+        super(viewname, mkviewoptionalparam, filterOutDestroySubBranchEvent, (!usedynamicview) && useupdate);
+        this.branch = branch;
+        this.configSpec = configspec;
+        this.vobPaths = vobpaths;
+        this.useDynamicView = usedynamicview;
+        this.viewDrive = viewdrive;
+        this.doNotUpdateConfigSpec = doNotUpdateConfigSpec;
 
-		if (this.useDynamicView) {
-			this.useUpdate = false;
-		}
 	}
 
 	public String getBranch() {
@@ -80,10 +79,6 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
 		return configSpec;
 	}
 
-	public boolean isUseUpdate() {
-		return useUpdate;
-	}
-
 	public boolean isUseDynamicView() {
 		return useDynamicView;
 	}
@@ -91,10 +86,14 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
 	public String getViewDrive() {
 		return viewDrive;
 	}
+    
+    public String getVobPaths() {
+    	return vobPaths;
+    }
 
-	public Object getVobPaths() {
-		return vobPaths;
-	}
+    public boolean isDoNotUpdateConfigSpec() {
+    	return doNotUpdateConfigSpec;
+    }
 
 	/**
 	 * Return the view paths that will be used when getting changes for a view.
@@ -141,11 +140,10 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
 	@Override
 	public void buildEnvVars(AbstractBuild build, Map<String, String> env) {
 		super.buildEnvVars(build, env);
-
 		if (useDynamicView) {
 			if (viewDrive != null) {
 				env.put(CLEARCASE_VIEWPATH_ENVSTR, viewDrive + File.separator
-						+ normalizedViewName);
+						+ getNormalizedViewName());
 			} else {
 				env.remove(CLEARCASE_VIEWPATH_ENVSTR);
 			}
@@ -153,21 +151,21 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
 	}
 
 	@Override
-	protected CheckOutAction createCheckOutAction(ClearToolLauncher launcher) {
+	protected CheckOutAction createCheckOutAction(VariableResolver variableResolver, ClearToolLauncher launcher) {
 		CheckOutAction action;
 		if (useDynamicView) {
-			action = new DynamicCheckoutAction(createClearTool(launcher),
-					configSpec);
+			action = new DynamicCheckoutAction(createClearTool(variableResolver, launcher),
+					configSpec, doNotUpdateConfigSpec);
 		} else {
-			action = new SnapshotCheckoutAction(createClearTool(launcher),
-					configSpec, useUpdate);
+			action = new SnapshotCheckoutAction(createClearTool(variableResolver, launcher),
+					configSpec, isUseUpdate());
 		}
 		return action;
 	}
 
 	@Override
-	protected PollAction createPollAction(ClearToolLauncher launcher) {
-		return new DefaultPollAction(createClearTool(launcher));
+	protected PollAction createPollAction(VariableResolver variableResolver, ClearToolLauncher launcher) {
+		return new DefaultPollAction(createClearTool(variableResolver, launcher));
 	}
 
 	@Override
@@ -181,8 +179,9 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
 	protected BaseChangeLogAction createChangeLogAction(
 			ClearToolLauncher launcher, AbstractBuild<?, ?> build,
 			int logMergeTimeWindow, Launcher baseLauncher) {
+		BuildVariableResolver variableResolver = new BuildVariableResolver(build, baseLauncher);
 		BaseChangeLogAction action = new BaseChangeLogAction(
-				createClearTool(launcher), logMergeTimeWindow);
+				createClearTool(variableResolver, launcher), logMergeTimeWindow);
 		if (useDynamicView) {
 			String extendedViewPath = viewDrive;
 			if (!(viewDrive.endsWith("\\") && viewDrive.endsWith("/"))) {
@@ -193,7 +192,7 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
 					extendedViewPath += "\\";
 				}
 			}
-			extendedViewPath += getNormalizedViewName(build, baseLauncher);
+			extendedViewPath += generateNormalizedViewName(build, baseLauncher);
 			action.setExtendedViewPath(extendedViewPath);
 		}
 		return action;
@@ -223,11 +222,11 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
 	}
 
 	@Override
-	protected ClearTool createClearTool(ClearToolLauncher launcher) {
+	protected ClearTool createClearTool(VariableResolver variableResolver, ClearToolLauncher launcher) {
 		if (useDynamicView) {
-			return new ClearToolDynamic(launcher, viewDrive);
+			return new ClearToolDynamic(variableResolver, launcher, viewDrive);
 		} else {
-			return super.createClearTool(launcher);
+			return super.createClearTool(variableResolver, launcher);
 		}
 	}
 
@@ -286,7 +285,7 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
 
 		@Override
 		public SCM newInstance(StaplerRequest req) throws FormException {
-			ClearCaseSCM scm = new ClearCaseSCM(
+			AbstractClearCaseScm scm = new ClearCaseSCM(
 					req.getParameter("cc.branch"),
 					req.getParameter("cc.configspec"),
 					req.getParameter("cc.viewname"),
@@ -295,7 +294,8 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
 					req.getParameter("cc.usedynamicview") != null,
 					req.getParameter("cc.viewdrive"),
 					req.getParameter("cc.mkviewoptionalparam"),
-					req.getParameter("cc.filterOutDestroySubBranchEvent") != null);
+					req.getParameter("cc.filterOutDestroySubBranchEvent") != null,
+					req.getParameter("cc.doNotUpdateConfigSpec") != null);			
 			return scm;
 		}
 
@@ -318,10 +318,7 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
 						error("Config spec is mandatory");
 						return;
 					}
-					
-					if (v.toLowerCase().indexOf("load") < 0) {
-						error("Config spec must contain LOAD directive");
-					}
+
 					// all tests passed so far
 					ok();
 				}

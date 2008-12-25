@@ -14,15 +14,6 @@ function object(o) {
 // id generator
 var iota = 0;
 
-// are we run as unit tests?
-var isRunAsTest = (function() {
-    try {
-        return Packages.java.lang.System.getProperty("hudson.unitTest")!=null;
-    } catch(e) {
-        return false;
-    }
-})();
-
 // Form check code
 //========================================================
 var FormChecker = {
@@ -379,7 +370,7 @@ var hudsonRules = {
             e.getAttribute("lazymap"),
             {
                 method : 'get',
-                onComplete : function(x) {
+                onSuccess : function(x) {
                     var div = document.createElement("div");
                     document.body.appendChild(div);
                     div.innerHTML = x.responseText;
@@ -1350,15 +1341,20 @@ var DragDrop = function(id, sGroup, config) {
     });
 })();
 
+function loadScript(href) {
+    var s = document.createElement("script");
+    s.setAttribute("src",href);
+    document.getElementsByTagName("HEAD")[0].appendChild(s);
+}
+
 var updateCenter = {
     postBackURL : null,
-    version: "?",
+    info: {},
     completionHandler: null,
+    url: "https://hudson.dev.java.net/",
 
     checkUpdates : function() {
-        var s = document.createElement("script");
-        s.setAttribute("src","https://hudson.dev.java.net/update-center.json?version="+updateCenter.version);
-        document.getElementsByTagName("HEAD")[0].appendChild(s);
+        loadScript(updateCenter.url+"update-center.json?"+Hash.toQueryString(updateCenter.info));
     },
 
     post : function(data) {

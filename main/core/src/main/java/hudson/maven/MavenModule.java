@@ -18,6 +18,7 @@ import hudson.model.Job;
 import hudson.model.Label;
 import hudson.model.Node;
 import hudson.model.Resource;
+import hudson.model.Saveable;
 import hudson.tasks.LogRotator;
 import hudson.tasks.Publisher;
 import hudson.tasks.Maven.MavenInstallation;
@@ -41,7 +42,7 @@ import java.util.HashSet;
  * 
  * @author Kohsuke Kawaguchi
  */
-public final class MavenModule extends AbstractMavenProject<MavenModule,MavenBuild> implements DescribableList.Owner {
+public final class MavenModule extends AbstractMavenProject<MavenModule,MavenBuild> implements Saveable {
     private DescribableList<MavenReporter,Descriptor<MavenReporter>> reporters =
         new DescribableList<MavenReporter,Descriptor<MavenReporter>>(this);
 
@@ -375,7 +376,6 @@ public final class MavenModule extends AbstractMavenProject<MavenModule,MavenBui
         }
     }
 
-    @Override
     public MavenInstallation inferMavenInstallation() {
         return getParent().inferMavenInstallation();
     }
@@ -401,16 +401,6 @@ public final class MavenModule extends AbstractMavenProject<MavenModule,MavenBui
     protected void performDelete() throws IOException {
         super.performDelete();
         getParent().onModuleDeleted(this);
-    }
-
-    /**
-     * Marks this build as disabled.
-     */
-    public void disable() throws IOException {
-        if(!disabled) {
-            disabled = true;
-            save();
-        }
     }
 
     /**

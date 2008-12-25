@@ -1,21 +1,28 @@
 package hudson.plugins.clearcase;
 
 import hudson.FilePath;
+import hudson.Util;
+import hudson.plugins.clearcase.util.BuildVariableResolver;
 import hudson.util.ArgumentListBuilder;
+import hudson.util.VariableResolver;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class ClearToolSnapshot extends ClearToolExec {
 
     private String optionalMkviewParameters;
     
-    public ClearToolSnapshot(ClearToolLauncher launcher) {
-        super(launcher);
+    public ClearToolSnapshot(VariableResolver variableResolver, ClearToolLauncher launcher) {
+        super(variableResolver, launcher);
     }
 
-    public ClearToolSnapshot(ClearToolLauncher launcher, String optionalParameters) {
-        this(launcher);
+    public ClearToolSnapshot(VariableResolver variableResolver, ClearToolLauncher launcher, String optionalParameters) {
+        this(variableResolver, launcher);
         this.optionalMkviewParameters = optionalParameters;
     }
 
@@ -46,8 +53,10 @@ public class ClearToolSnapshot extends ClearToolExec {
         }
         cmd.add("-tag");
         cmd.add(viewName);
+        
         if ((optionalMkviewParameters != null) && (optionalMkviewParameters.length() > 0)) {
-            cmd.addTokenized(optionalMkviewParameters);
+        	String variabledResolvedParams = Util.replaceMacro(optionalMkviewParameters, this.variableResolver);
+            cmd.addTokenized(variabledResolvedParams);
         }
         cmd.add(viewName);
         launcher.run(cmd.toCommandArray(), null, null, null);
@@ -58,7 +67,27 @@ public class ClearToolSnapshot extends ClearToolExec {
         cmd.add("rmview");
         cmd.add("-force");
         cmd.add(viewName);
-        launcher.run(cmd.toCommandArray(), null, null, null);
+        
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+        launcher.run(cmd.toCommandArray(), null, baos, null);
+        BufferedReader reader = new BufferedReader( new InputStreamReader(new ByteArrayInputStream(baos.toByteArray())));
+        baos.close();
+        String line = reader.readLine();
+        StringBuilder builder = new StringBuilder();
+        while (line != null) {
+            if (builder.length() > 0) {
+                builder.append("\n");
+            }
+            builder.append(line);
+            line = reader.readLine();
+        }
+        reader.close();
+        
+        if (builder.toString().contains("cleartool: Error")) {
+        	throw new IOException("Failed to remove view: " + builder.toString());
+        }
+       
+        
         FilePath viewFilePath = launcher.getWorkspace().child(viewName);
         if (viewFilePath.exists()) {
             launcher.getListener().getLogger().println(
@@ -88,5 +117,9 @@ public class ClearToolSnapshot extends ClearToolExec {
 
     public void startView(String viewTag) throws IOException, InterruptedException {
         launcher.getListener().fatalError("Snapshot view does not support startview");
+    }
+    
+    public void syncronizeViewWithStream(String viewName, String stream) throws IOException, InterruptedException {
+        launcher.getListener().fatalError("Snapshot view does not support syncronize");
     }
 }

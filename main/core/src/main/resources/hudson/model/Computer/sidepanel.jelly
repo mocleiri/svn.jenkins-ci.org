@@ -12,6 +12,9 @@
       <l:task icon="images/24x24/notepad.gif" href="${rootURL}/${it.url}builds" title="${%Build History}" />
       <l:task icon="images/24x24/terminal.gif" href="script" title="${%Script Console}" />
       <st:include page="sidepanel2.jelly" optional="true" /><!-- hook for derived class to add more items -->
+      <l:isAdmin>
+        <l:task icon="images/24x24/notepad.gif" href="script" title="${%Script Console}" />
+      </l:isAdmin>
     </l:tasks>
   </l:side-panel>
 </j:jelly>

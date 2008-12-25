@@ -5,6 +5,7 @@ import hudson.model.Hudson;
 import hudson.AbortException;
 import hudson.FilePath;
 import hudson.util.StreamTaskListener;
+import hudson.util.jna.DotNet;
 import hudson.Launcher.LocalLauncher;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
@@ -77,6 +78,10 @@ public class WindowsInstallerLink extends ManagementLink {
             sendError("Installation is already complete",req,rsp);
             return;
         }
+        if(!DotNet.isInstalled(2,0)) {
+            sendError(".NET Framework 2.0 or later is required for this feature",req,rsp);
+            return;
+        }
         
         Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
 
@@ -91,7 +96,8 @@ public class WindowsInstallerLink extends ManagementLink {
             // copy files over there
             copy(req, rsp, dir, getClass().getResource("/windows-service/hudson.exe"), "hudson.exe");
             copy(req, rsp, dir, getClass().getResource("/windows-service/hudson.xml"), "hudson.xml");
-            copy(req, rsp, dir, hudsonWar.toURL(), "hudson.war");
+            if(!hudsonWar.getCanonicalFile().equals(new File(dir,"hudson.war").getCanonicalFile()))
+                copy(req, rsp, dir, hudsonWar.toURL(), "hudson.war");
 
             // install as a service
             ByteArrayOutputStream baos = new ByteArrayOutputStream();

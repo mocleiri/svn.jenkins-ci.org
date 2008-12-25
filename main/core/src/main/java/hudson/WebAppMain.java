@@ -15,6 +15,8 @@ import hudson.util.RingBufferLogHandler;
 import hudson.util.NoTempDir;
 import hudson.util.IncompatibleAntVersionDetected;
 import hudson.util.HudsonFailedToLoad;
+import hudson.util.ChartUtil;
+import hudson.util.AWTProblem;
 import org.jvnet.localizer.LocaleProvider;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
@@ -113,6 +115,12 @@ public final class WebAppMain implements ServletContextListener {
                 return;
             }
 
+            // make sure AWT is functioning, or else JFreeChart won't even load.
+            if(ChartUtil.awtProblemCause!=null) {
+                context.setAttribute(APP,new AWTProblem(ChartUtil.awtProblemCause));
+                return;
+            }
+
             // some containers (in particular Tomcat) doesn't abort a launch
             // even if the temp directory doesn't exist.
             // check that and report an error
@@ -143,7 +151,7 @@ public final class WebAppMain implements ServletContextListener {
                 }
             }
 
-            Stapler.setExpressionFactory(event, new ExpressionFactory2());
+            installExpressionFactory(event);
 
             context.setAttribute(APP,new HudsonIsLoading());
 
@@ -186,6 +194,10 @@ public final class WebAppMain implements ServletContextListener {
             LOGGER.log(Level.SEVERE, "Failed to initialize Hudson",e);
             throw e;
         }
+    }
+
+    public static void installExpressionFactory(ServletContextEvent event) {
+        Stapler.setExpressionFactory(event, new ExpressionFactory2());
     }
 
     protected void computeVersion(ServletContext context) {

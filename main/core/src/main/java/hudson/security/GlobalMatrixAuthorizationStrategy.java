@@ -29,7 +29,7 @@ import java.util.Set;
  */
 // TODO: think about the concurrency commitment of this class
 public class GlobalMatrixAuthorizationStrategy extends AuthorizationStrategy {
-    private transient ACL acl = new AclImpl();
+    private transient SidACL acl = new AclImpl();
 
     /**
      * List up all permissions that are granted.
@@ -64,7 +64,7 @@ public class GlobalMatrixAuthorizationStrategy extends AuthorizationStrategy {
     }
 
     @Override
-    public ACL getRootACL() {
+    public SidACL getRootACL() {
         return acl;
     }
 
@@ -111,22 +111,6 @@ public class GlobalMatrixAuthorizationStrategy extends AuthorizationStrategy {
             if(GlobalMatrixAuthorizationStrategy.this.hasPermission(toString(p),permission))
                 return true;
             return null;
-        }
-
-        protected Boolean _hasPermission(Authentication a, Permission permission) {
-            Boolean b = super._hasPermission(a,permission);
-            // permissions granted to anonymous users are granted to everyone
-            if(b==null) b=hasPermission(ANONYMOUS,permission);
-            return b;
-        }
-
-        private String toString(Sid p) {
-            if (p instanceof GrantedAuthoritySid)
-                return ((GrantedAuthoritySid) p).getGrantedAuthority();
-            if (p instanceof PrincipalSid)
-                return ((PrincipalSid) p).getPrincipal();
-            // hmm...
-            return p.toString();
         }
     }
 

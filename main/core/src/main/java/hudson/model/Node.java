@@ -147,8 +147,8 @@ public interface Node extends Describable<Node>, ExtensionPoint, AccessControlle
      * Constants that control how Hudson allocates jobs to slaves.
      */
     public enum Mode {
-        NORMAL("Utilize this machine as much as possible"),
-        EXCLUSIVE("Leave this machine for tied jobs only");
+        NORMAL(Messages.Node_Mode_NORMAL()),
+        EXCLUSIVE(Messages.Node_Mode_EXCLUSIVE());
 
         private final String description;
 

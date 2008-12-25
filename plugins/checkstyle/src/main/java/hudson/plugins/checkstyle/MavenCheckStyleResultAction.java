@@ -8,7 +8,7 @@ import hudson.maven.MavenModuleSet;
 import hudson.maven.MavenModuleSetBuild;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
-import hudson.plugins.checkstyle.util.HealthReportBuilder;
+import hudson.plugins.checkstyle.util.HealthDescriptor;
 import hudson.plugins.checkstyle.util.TrendReportSize;
 
 import java.util.List;
@@ -32,13 +32,13 @@ public class MavenCheckStyleResultAction extends CheckStyleResultAction implemen
      *
      * @param owner
      *            the associated build of this action
-     * @param healthReportBuilder
-     *            health builder to use
+     * @param healthDescriptor
+     *            health descriptor to use
      * @param height
      *            the height of the trend graph
      */
-    public MavenCheckStyleResultAction(final AbstractBuild<?, ?> owner, final HealthReportBuilder healthReportBuilder, final String height) {
-        super(owner, healthReportBuilder);
+    public MavenCheckStyleResultAction(final AbstractBuild<?, ?> owner, final HealthDescriptor healthDescriptor, final String height) {
+        super(owner, healthDescriptor);
         this.height = height;
     }
 
@@ -47,21 +47,21 @@ public class MavenCheckStyleResultAction extends CheckStyleResultAction implemen
      *
      * @param owner
      *            the associated build of this action
-     * @param healthReportBuilder
-     *            health builder to use
+     * @param healthDescriptor
+     *            health descriptor to use
      * @param height
      *            the height of the trend graph
      * @param result
      *            the result in this build
      */
-    public MavenCheckStyleResultAction(final AbstractBuild<?, ?> owner, final HealthReportBuilder healthReportBuilder, final String height, final CheckStyleResult result) {
-        super(owner, healthReportBuilder, result);
+    public MavenCheckStyleResultAction(final AbstractBuild<?, ?> owner, final HealthDescriptor healthDescriptor, final String height, final CheckStyleResult result) {
+        super(owner, healthDescriptor, result);
         this.height = height;
     }
 
     /** {@inheritDoc} */
     public MavenAggregatedReport createAggregatedAction(final MavenModuleSetBuild build, final Map<MavenModule, List<MavenBuild>> moduleBuilds) {
-        return new MavenCheckStyleResultAction(build, getHealthReportBuilder(), height);
+        return new MavenCheckStyleResultAction(build, getHealthDescriptor(), height);
     }
 
     /** {@inheritDoc} */

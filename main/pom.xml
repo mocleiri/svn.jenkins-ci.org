@@ -9,7 +9,7 @@
   
   <groupId>org.jvnet.hudson.main</groupId>
   <artifactId>pom</artifactId>
-  <version>1.259-SNAPSHOT</version>
+  <version>1.268-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <name>Hudson main module</name>
@@ -35,6 +35,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
+        <version>2.0-beta-8</version>
         <configuration>
           <!-- enable release profile during the release, create IPS package, and sign bits. -->
           <prepareVerifyArgs>-P release,ips,sign</prepareVerifyArgs>
@@ -42,11 +43,12 @@
             also run assembly during the release.
             http://www.nabble.com/Release-Plugin%3A-Include-assemblies-for-deploying-tf2642295s177.html#a7377938
            -->
-          <goals>install javadoc:javadoc assembly:attached deploy</goals>
+          <goals>install javadoc:javadoc animal-sniffer:check assembly:attached deploy</goals>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
+        <inherited>false</inherited>
         <configuration>
           <finalName>hudson-${version}</finalName>
           <descriptors>
@@ -69,6 +71,20 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <!-- make sure our code doesn't have 1.6 dependencies except where we know it -->
+        <groupId>org.jvnet</groupId>
+        <artifactId>animal-sniffer</artifactId>
+        <version>1.2</version>
+        <configuration>
+          <signature>
+            <groupId>org.jvnet.animal-sniffer</groupId>
+            <artifactId>java1.5</artifactId>
+            <version>1.0</version>
+          </signature>
+        </configuration>
+      </plugin>
+
       <!--<plugin>
         <groupId>org.jvnet.fix1600</groupId>
         <artifactId>fix1600</artifactId>
@@ -82,7 +98,17 @@
       </plugin>-->
     </plugins>
   </build>
-  
+
+  <dependencies>
+    <dependency>
+      <!-- for JRE requirement check annotation -->
+      <groupId>org.jvnet</groupId>
+      <artifactId>animal-sniffer-annotation</artifactId>
+      <version>1.0</version>
+      <optional>true</optional><!-- no need to have this at runtime -->
+    </dependency>
+  </dependencies>
+
   <properties>
     <maven.version>2.0.4</maven.version>
   </properties>

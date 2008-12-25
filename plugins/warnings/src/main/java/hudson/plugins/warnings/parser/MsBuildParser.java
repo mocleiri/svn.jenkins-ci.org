@@ -9,17 +9,17 @@ import java.util.regex.Matcher;
  *
  * @author Ulli Hafner
  */
-public class MsBuildParser extends RegexpParser {
+public class MsBuildParser extends RegexpLineParser {
     /** Warning type of this parser. */
     static final String WARNING_TYPE = "MSBuild";
     /** Pattern of MSBuild compiler warnings. */
-    private static final String MS_BUILD_WARNING_PATTERN = "(.*)\\((\\d*).*\\)\\s*:\\s*([Ww]arning|(?:fatal\\s*)?[Ee]rror)\\s*([^:]*):\\s*(.*)";
+    private static final String MS_BUILD_WARNING_PATTERN = "^(.*)\\((\\d*).*\\)\\s*:\\s*([Ww]arning|(?:fatal\\s*)?[Ee]rror)\\s*([^:]*):\\s*(.*)$";
 
     /**
      * Creates a new instance of <code>MsBuildParser</code>.
      */
     public MsBuildParser() {
-        super(MS_BUILD_WARNING_PATTERN);
+        super(MS_BUILD_WARNING_PATTERN, WARNING_TYPE);
     }
 
     /** {@inheritDoc} */

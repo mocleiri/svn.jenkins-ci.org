@@ -22,7 +22,7 @@ public class ProjectMatrixAuthorizationStrategy extends GlobalMatrixAuthorizatio
     public ACL getACL(AbstractProject<?,?> project) {
         AuthorizationMatrixProperty amp = project.getProperty(AuthorizationMatrixProperty.class);
         if (amp != null && amp.isUseProjectSecurity()) {
-            return amp.getACL();
+            return amp.getACL().newInheritingACL(getRootACL());
         } else {
             return getRootACL();
         }
@@ -52,12 +52,12 @@ public class ProjectMatrixAuthorizationStrategy extends GlobalMatrixAuthorizatio
         }
 
         protected GlobalMatrixAuthorizationStrategy create() {
-            return new GlobalMatrixAuthorizationStrategy();
+            return new ProjectMatrixAuthorizationStrategy();
         }
 
         public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
             String name = reader.peekNextChild();
-            if(name!=null && name.equals("permission"))
+            if(name!=null && (name.equals("permission") || name.equals("useProjectSecurity")))
                 // the proper serialization form
                 return super.unmarshal(reader, context);
             else

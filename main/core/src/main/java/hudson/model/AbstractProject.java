@@ -33,7 +33,6 @@ import hudson.widgets.HistoryWidget;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.export.Exported;
 
 import javax.servlet.ServletException;
@@ -282,6 +281,8 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     public void makeDisabled(boolean b) throws IOException {
         if(disabled==b)     return; // noop
         this.disabled = b;
+        if(b)
+            Hudson.getInstance().getQueue().cancel(this);
         save();
     }
 
@@ -436,7 +437,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
 
         Future<R> f = new AsyncFutureImpl<R>() {
             final RunListener r = new RunListener<AbstractBuild>(AbstractBuild.class) {
-                public void onCompleted(AbstractBuild r, TaskListener listener) {
+                public void onFinalized(AbstractBuild r) {
                     if(r.getProject()==AbstractProject.this && r.getNumber()>n) {
                         set((R)r);
                         unregister();
@@ -624,6 +625,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     }
 
     public R createExecutable() throws IOException {
+        if(isDisabled())    return null;
         return newBuild();
     }
 
@@ -992,7 +994,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     protected void submit(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException, FormException {
         super.submit(req,rsp);
 
-        disabled = req.getParameter("disable")!=null;
+        makeDisabled(req.getParameter("disable")!=null);
 
         jdk = req.getParameter("jdk");
         if(req.getParameter("hasCustomQuietPeriod")!=null) {
@@ -1019,22 +1021,30 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
 
         for (Trigger t : triggers)
             t.stop();
-        triggers = buildDescribable(req, Triggers.getApplicableTriggers(this), "trigger");
+        triggers = buildDescribable(req, Triggers.getApplicableTriggers(this));
         for (Trigger t : triggers)
             t.start(this,true);
 
         updateTransientActions();
     }
 
-    protected final <T extends Describable<T>> List<T> buildDescribable(StaplerRequest req, List<? extends Descriptor<T>> descriptors, String prefix)
+    /**
+     * @deprecated
+     *      As of 1.261. Use {@link #buildDescribable(StaplerRequest, List)} instead.
+     */
+    protected final <T extends Describable<T>> List<T> buildDescribable(StaplerRequest req, List<? extends Descriptor<T>> descriptors, String prefix) throws FormException, ServletException {
+        return buildDescribable(req,descriptors);
+    }
+
+    protected final <T extends Describable<T>> List<T> buildDescribable(StaplerRequest req, List<? extends Descriptor<T>> descriptors)
         throws FormException, ServletException {
 
         JSONObject data = req.getSubmittedForm();
         List<T> r = new Vector<T>();
-        for( int i=0; i< descriptors.size(); i++ ) {
-            String name = prefix + i;
-            if(req.getParameter(name)!=null) {
-                T instance = descriptors.get(i).newInstance(req,data.getJSONObject(name));
+        for (Descriptor<T> d : descriptors) {
+            String name = d.getJsonSafeClassName();
+            if (req.getParameter(name) != null) {
+                T instance = d.newInstance(req, data.getJSONObject(name));
                 r.add(instance);
             }
         }
@@ -1049,6 +1059,10 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
         FilePath ws = getWorkspace();
         if ((ws == null) || (!ws.exists())) {
             // if there's no workspace, report a nice error message
+            // Would be good if when asked for *plain*, do something else!
+            // (E.g. return 404, or send empty doc.)
+            // Not critical; client can just check if content type is not text/plain,
+            // which also serves to detect old versions of Hudson.
             req.getView(this,"noWorkspace.jelly").forward(req,rsp);
         } else {
             new DirectoryBrowserSupport(this,getDisplayName()+" workspace").serveFile(req, rsp, ws, "folder.gif", true);

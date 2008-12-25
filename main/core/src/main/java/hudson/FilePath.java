@@ -14,6 +14,7 @@ import hudson.remoting.VirtualChannel;
 import hudson.util.FormFieldValidator;
 import hudson.util.IOException2;
 import hudson.util.StreamResource;
+import hudson.util.HeadBufferingStream;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Project;
@@ -551,7 +552,7 @@ public final class FilePath implements Serializable {
             return new FilePath(channel,act(new FileCallable<String>() {
                 public String invoke(File dir, VirtualChannel channel) throws IOException {
                     if(!inThisDirectory)
-                        dir = null;
+                        dir = new File(System.getProperty("java.io.tmpdir"));
                     else
                         dir.mkdirs();
 
@@ -635,7 +636,17 @@ public final class FilePath implements Serializable {
     }
 
     /**
-     * List up files in this directory.
+     * List up files and directories in this directory.
+     *
+     * <p>
+     * This method returns direct children of the directory denoted by the 'this' object.
+     */
+    public List<FilePath> list() throws IOException, InterruptedException {
+        return list((FileFilter)null);
+    }
+
+    /**
+     * List up files in this directory, just like {@link File#listFiles(FileFilter)}.
      *
      * @param filter
      *      The optional filter used to narrow down the result.
@@ -990,10 +1001,17 @@ public final class FilePath implements Serializable {
     /**
      * Reads from a tar stream and stores obtained files to the base dir.
      */
-    private static void readFromTar(String name, File baseDir, InputStream in) throws IOException {
+    private static void readFromTar(String name, File baseDir, InputStream _in) throws IOException {
         Untar untar = new Untar();
         untar.setProject(new Project());
-        untar.add(new StreamResource(name,new BufferedInputStream(new GZIPInputStream(in))));
+        HeadBufferingStream in = new HeadBufferingStream(_in,SIDE_BUFFER_SIZE);
+        try {
+            untar.add(new StreamResource(name,new BufferedInputStream(new GZIPInputStream(in))));
+        } catch (IOException e) {
+            // various people reported "java.io.IOException: Not in GZIP format" here, so diagnose this problem better
+            in.fillSide();
+            throw new IOException2(e.getMessage()+"\nstream="+Util.toHexString(in.getSideBuffer()),e);
+        }
         untar.setDest(baseDir);
         try {
             untar.execute();
@@ -1029,6 +1047,9 @@ public final class FilePath implements Serializable {
     public String validateAntFileMask(final String fileMasks) throws IOException, InterruptedException {
         return act(new FileCallable<String>() {
             public String invoke(File dir, VirtualChannel channel) throws IOException {
+                if(fileMasks.startsWith("~"))
+                    return Messages.FilePath_TildaDoesntWork();
+
                 StringTokenizer tokens = new StringTokenizer(fileMasks,",");
 
                 while(tokens.hasMoreTokens()) {
@@ -1186,6 +1207,8 @@ public final class FilePath implements Serializable {
     }
 
     private static final long serialVersionUID = 1L;
+
+    public static int SIDE_BUFFER_SIZE = 1024;
 
     /**
      * Adapts {@link FileCallable} to {@link Callable}.

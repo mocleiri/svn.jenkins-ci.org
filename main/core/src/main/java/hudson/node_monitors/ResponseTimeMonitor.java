@@ -5,6 +5,7 @@ import hudson.model.Computer;
 import hudson.remoting.Callable;
 import hudson.remoting.Future;
 import hudson.util.TimeUnit2;
+import hudson.util.IOException2;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -13,6 +14,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Logger;
+import org.kohsuke.stapler.export.Exported;
+import org.kohsuke.stapler.export.ExportedBean;
 
 /**
  * Monitors the round-trip response time to this slave.
@@ -36,7 +39,7 @@ public class ResponseTimeMonitor extends NodeMonitor {
                 long end = System.nanoTime();
                 d = new Data(old,TimeUnit2.NANOSECONDS.toMillis(end-start));
             } catch (ExecutionException e) {
-                throw new IOException(e.getCause());    // I don't think this is possible
+                throw new IOException2(e.getCause());    // I don't think this is possible
             } catch (TimeoutException e) {
                 // special constant to indicate that the processing timed out.
                 d = new Data(old,-1L);
@@ -65,6 +68,7 @@ public class ResponseTimeMonitor extends NodeMonitor {
     /**
      * Immutable representation of the monitoring data.
      */
+    @ExportedBean
     public static final class Data {
         /**
          * Record of the past 5 times. -1 if time out. Otherwise in milliseconds.
@@ -96,7 +100,8 @@ public class ResponseTimeMonitor extends NodeMonitor {
         /**
          * Computes the average response time, by taking the time out into account.
          */
-        public long average() {
+        @Exported
+        public long getAverage() {
             long total=0;
             for (long l : past5) {
                 if(l<0)     total += TIMEOUT;
@@ -122,7 +127,7 @@ public class ResponseTimeMonitor extends NodeMonitor {
             int fc = failureCount();
             if(fc>0)
                 return Util.wrapToErrorSpan(Messages.ResponseTimeMonitor_TimeOut(fc));
-            return average()+"ms";
+            return getAverage()+"ms";
         }
     }
 

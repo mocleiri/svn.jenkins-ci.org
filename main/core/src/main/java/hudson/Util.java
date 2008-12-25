@@ -14,6 +14,7 @@ import org.apache.tools.ant.taskdefs.Chmod;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.commons.lang.time.FastDateFormat;
 import org.kohsuke.stapler.Stapler;
+import org.jvnet.animal_sniffer.IgnoreJRERequirement;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -91,7 +92,7 @@ public class Util {
     /**
      * Pattern for capturing variables. Either $xyz or ${xyz}, while ignoring "$$"
       */
-    private static final Pattern VARIABLE = Pattern.compile("(?<!\\$)\\$([A-Za-z0-9_]+|\\{[A-Za-z0-9_]+\\})");
+    private static final Pattern VARIABLE = Pattern.compile("\\$([A-Za-z0-9_]+|\\{[A-Za-z0-9_]+\\}|\\$)");
 
     /**
      * Replaces the occurrence of '$key' by <tt>properties.get('key')</tt>.
@@ -117,14 +118,21 @@ public class Util {
             if(!m.find(idx))   return s;
 
             String key = m.group().substring(1);
-            if(key.charAt(0)=='{')  key = key.substring(1,key.length()-1);
 
-            String value = resolver.resolve(key);
+            // escape the dollar sign or get the key to resolve
+            String value;
+            if(key.charAt(0)=='$') {
+               value = "$";
+            } else {
+               if(key.charAt(0)=='{')  key = key.substring(1,key.length()-1);
+               value = resolver.resolve(key);
+            }
+
             if(value==null)
-                idx = m.start()+1; // skip this
+                idx = m.end(); // skip this
             else {
                 s = s.substring(0,m.start())+value+s.substring(m.end());
-                idx = m.start();
+                idx = m.start() + value.length();
             }
         }
     }
@@ -140,7 +148,7 @@ public class Util {
         if(!logfile.exists())
             return "";
 
-        StringBuffer str = new StringBuffer((int)logfile.length());
+        StringBuilder str = new StringBuilder((int)logfile.length());
 
         BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream(logfile),charset));
         char[] buf = new char[1024];
@@ -206,6 +214,7 @@ public class Util {
     /**
      * Makes the given file writable.
      */
+    @IgnoreJRERequirement
     private static void makeWritable(File f) {
         // try chmod. this becomes no-op if this is not Unix.
         try {
@@ -424,7 +433,7 @@ public class Util {
     }
 
     public static String toHexString(byte[] data, int start, int len) {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for( int i=0; i<len; i++ ) {
             int b = data[start+i]&0xFF;
             if(b<16)    buf.append('0');
@@ -435,6 +444,13 @@ public class Util {
 
     public static String toHexString(byte[] bytes) {
         return toHexString(bytes,0,bytes.length);
+    }
+
+    public static byte[] fromHexString(String data) {
+        byte[] r = new byte[data.length() / 2];
+        for (int i = 0; i < data.length(); i += 2)
+            r[i / 2] = (byte) Integer.parseInt(data.substring(i, i + 2), 16);
+        return r;
     }
 
     /**
@@ -532,7 +548,7 @@ public class Util {
         try {
             boolean escaped = false;
 
-            StringBuffer out = new StringBuffer(s.length());
+            StringBuilder out = new StringBuilder(s.length());
 
             ByteArrayOutputStream buf = new ByteArrayOutputStream();
             OutputStreamWriter w = new OutputStreamWriter(buf,"UTF-8");
@@ -572,7 +588,7 @@ public class Util {
      * Escapes HTML unsafe characters like &lt;, &amp;to the respective character entities.
      */
     public static String escape(String text) {
-        StringBuffer buf = new StringBuffer(text.length()+64);
+        StringBuilder buf = new StringBuilder(text.length()+64);
         for( int i=0; i<text.length(); i++ ) {
             char ch = text.charAt(i);
             if(ch=='\n')
@@ -598,7 +614,7 @@ public class Util {
     }
 
     public static String xmlEscape(String text) {
-        StringBuffer buf = new StringBuffer(text.length()+64);
+        StringBuilder buf = new StringBuilder(text.length()+64);
         for( int i=0; i<text.length(); i++ ) {
             char ch = text.charAt(i);
             if(ch=='<')

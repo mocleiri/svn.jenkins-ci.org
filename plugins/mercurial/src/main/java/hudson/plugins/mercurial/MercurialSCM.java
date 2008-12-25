@@ -26,6 +26,8 @@ import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+import net.sf.json.JSONObject;
+
 /**
  * Mercurial SCM.
  * 
@@ -50,12 +52,15 @@ public class MercurialSCM extends SCM implements Serializable {
      */
     private final String branch;
 
+    private final boolean clean;
+
     private HgWeb browser;
 
     @DataBoundConstructor
-    public MercurialSCM(String source, String branch, String modules, HgWeb browser) {
+    public MercurialSCM(String source, String branch, String modules, HgWeb browser, boolean clean) {
         this.source = source;
         this.modules = modules;
+        this.clean = clean;
 
         // split by commas and whitespace, except "\ "
         String[] r = modules.split("(?<!\\\\)[ \\r\\n,]+");
@@ -100,6 +105,14 @@ public class MercurialSCM extends SCM implements Serializable {
     @Override
     public HgWeb getBrowser() {
         return browser;
+    }
+
+    /**
+     * True if we want clean check out each time. This means deleting everything in the workspace
+     * (except <tt>.hg</tt>)
+     */
+    public boolean isClean() {
+        return clean;
     }
 
     private static final String FILES_STYLE = "changeset = 'files:{files}\\n'\n" + "file = '{file}:'";
@@ -193,6 +206,7 @@ public class MercurialSCM extends SCM implements Serializable {
                 if(upstream==null)  return false;
 
                 if(upstream.equals(source)) return true;
+                if((upstream+'/').equals(source))   return true;
                 return source.startsWith("file:/") && new File(upstream).toURI().toString().equals(source);
             }
         });
@@ -207,6 +221,13 @@ public class MercurialSCM extends SCM implements Serializable {
      * Updates the current workspace.
      */
     private boolean update(AbstractBuild<?,?> build, Launcher launcher, FilePath workspace, BuildListener listener, File changelogFile) throws InterruptedException, IOException {
+        if(clean) {
+            listener.getLogger().println("Cleaning up the workspace");
+            for( FilePath child : workspace.list((FileFilter)null) ) {
+                if(child.getName().equals(".hg"))   continue;
+                child.deleteRecursive();
+            }
+        }
         FilePath hgBundle = new FilePath(workspace, "hg.bundle");
 
         // delete the file prior to "hg incoming",
@@ -222,10 +243,12 @@ public class MercurialSCM extends SCM implements Serializable {
             ArgumentListBuilder args = new ArgumentListBuilder();
             args.add(getDescriptor().getHgExe(),"incoming","--quiet","--bundle","hg.bundle");
 
-            String template = MercurialChangeSet.CHANGELOG_TEMPLATE_09x;
+            String template;
 
             if(isHg10orLater()) {
                 template = MercurialChangeSet.CHANGELOG_TEMPLATE_10x;
+            } else {
+                template = MercurialChangeSet.CHANGELOG_TEMPLATE_09x;
                 // Pre-1.0 Hg fails to honor {file_adds} and {file_dels} without --debug.
                 args.add("--debug");
             }
@@ -371,13 +394,10 @@ public class MercurialSCM extends SCM implements Serializable {
         }
 
         @Override
-        public SCM newInstance(StaplerRequest req) throws FormException {
-            //return req.bindParameters(MercurialSCM.class,"mercurial.");
-            return new MercurialSCM(
-                    req.getParameter("mercurial.source"),
-                    req.getParameter("mercurial.branch"),
-                    req.getParameter("mercurial.modules"),
-                    RepositoryBrowsers.createInstance(HgWeb.class, req, "mercurial.browser"));
+        public SCM newInstance(StaplerRequest req, JSONObject formData) throws FormException {
+            MercurialSCM scm = req.bindJSON(MercurialSCM.class,formData);
+            scm.browser = RepositoryBrowsers.createInstance(HgWeb.class,req,formData,"browser");
+            return scm;
         }
 
         @Override

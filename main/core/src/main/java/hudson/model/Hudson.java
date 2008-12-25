@@ -2,7 +2,6 @@ package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
 import hudson.BulkChange;
-import hudson.FeedAdapter;
 import hudson.FilePath;
 import hudson.Functions;
 import hudson.Launcher;
@@ -17,7 +16,9 @@ import hudson.Util;
 import static hudson.Util.fixEmpty;
 import hudson.WebAppMain;
 import hudson.XmlFile;
+import hudson.logging.LogRecorderManager;
 import hudson.lifecycle.WindowsInstallerLink;
+import hudson.lifecycle.Lifecycle;
 import hudson.model.Descriptor.FormException;
 import hudson.model.listeners.ItemListener;
 import hudson.model.listeners.JobListener;
@@ -78,6 +79,7 @@ import hudson.util.TextFile;
 import hudson.util.XStream2;
 import hudson.util.DescribableList;
 import hudson.util.Futures;
+import hudson.util.HudsonIsRestarting;
 import hudson.widgets.Widget;
 import net.sf.json.JSONObject;
 import org.acegisecurity.AccessDeniedException;
@@ -117,11 +119,9 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -149,6 +149,7 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.nio.charset.Charset;
+import javax.servlet.RequestDispatcher;
 
 /**
  * Root object of the system.
@@ -339,10 +340,19 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     private transient final UpdateCenter updateCenter = new UpdateCenter();
 
     /**
+     * True if the user opted out from the statistics tracking. We'll never send anything if this is true.
+     */
+    private Boolean noUsageStatistics;
+
+    /**
      * HTTP proxy configuration.
      */
     public transient volatile ProxyConfiguration proxy;
 
+    /**
+     * Bound to "/log".
+     */
+    private transient final LogRecorderManager log = new LogRecorderManager();
 
     public Hudson(File root, ServletContext context) throws IOException {
         this.root = root;
@@ -350,6 +360,9 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         if(theInstance!=null)
             throw new IllegalStateException("second instance");
         theInstance = this;
+
+        log.load();
+        
         Trigger.timer = new Timer("Hudson cron thread");
         queue = new Queue();
 
@@ -430,6 +443,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         WindowsInstallerLink.registerIfApplicable();
         LoadStatistics.register();
         NodeProvisioner.launch();
+        UsageStatistics.register();
     }
 
     public TcpSlaveAgentListener getTcpSlaveAgentListener() {
@@ -469,6 +483,10 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
     public UpdateCenter getUpdateCenter() {
         return updateCenter;
+    }
+
+    public boolean isUsageStatisticsCollected() {
+        return noUsageStatistics==null || !noUsageStatistics;
     }
 
     /**
@@ -1167,7 +1185,8 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
      *      The caller must gracefully deal with this situation.
      *      The returned URL will always have the trailing '/'.
      * @since 1.66
-     * @see Descriptor#getCheckUrl(String) 
+     * @see Descriptor#getCheckUrl(String)
+     * @see #getRootUrlFromRequest()
      */
     public String getRootUrl() {
         // for compatibility. the actual data is stored in Mailer
@@ -1175,16 +1194,32 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         if(url!=null)   return url;
 
         StaplerRequest req = Stapler.getCurrentRequest();
-        if(req!=null) {
-            StringBuilder buf = new StringBuilder();
-            buf.append("http://");
-            buf.append(req.getServerName());
-            if(req.getServerPort()!=80)
-                buf.append(':').append(req.getServerPort());
-            buf.append(req.getContextPath()).append('/');
-            return buf.toString();
-        }
+        if(req!=null)
+            return getRootUrlFromRequest();
         return null;
+    }
+
+    /**
+     * Gets the absolute URL of Hudson top page, such as "http://localhost/hudson/".
+     *
+     * <p>
+     * Unlike {@link #getRootUrl()}, which uses the manually configured value,
+     * this one uses the current request to reconstruct the URL. The benefit is
+     * that this is immune to the configuration mistake (users often fail to set the root URL
+     * correctly, especially when a migration is involved), but the downside
+     * is that unless you are processing a request, this method doesn't work.
+     *
+     * @since 1.263
+     */
+    public String getRootUrlFromRequest() {
+        StaplerRequest req = Stapler.getCurrentRequest();
+        StringBuilder buf = new StringBuilder();
+        buf.append("http://");
+        buf.append(req.getServerName());
+        if(req.getServerPort()!=80)
+            buf.append(':').append(req.getServerPort());
+        buf.append(req.getContextPath()).append('/');
+        return buf.toString();
     }
 
     public File getRootDir() {
@@ -1205,6 +1240,15 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
     public ClockDifference getClockDifference() {
         return ClockDifference.ZERO;
+    }
+
+    /**
+     * For binding {@link LogRecorderManager} to "/log".
+     * Everything below here is admin-only, so do the check here.
+     */
+    public LogRecorderManager getLog() {
+        checkPermission(ADMINISTER);
+        return log;
     }
 
     /**
@@ -1245,6 +1289,10 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         SecurityComponents sc = securityRealm.createSecurityComponents();
         HudsonFilter.AUTHENTICATION_MANAGER.setDelegate(sc.manager);
         HudsonFilter.USER_DETAILS_SERVICE_PROXY.setDelegate(sc.userDetails);
+    }
+    
+    public Lifecycle getLifecycle() {
+        return Lifecycle.get();
     }
 
     /**
@@ -1702,6 +1750,8 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
                 authorizationStrategy = AuthorizationStrategy.UNSECURED;
             }
 
+            noUsageStatistics = json.has("usageStatisticsCollected") ? null : true;
+
             {
                 String v = req.getParameter("slaveAgentPortType");
                 if(!isUseSecurity() || v==null || v.equals("random"))
@@ -2077,51 +2127,13 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
 
     /**
      * RSS feed for log entries.
+     *
+     * @deprecated
+     *   As on 1.267, moved to "/log/rss..."
      */
     public void doLogRss( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        checkPermission(ADMINISTER);
-
-        List<LogRecord> logs = logRecords;
-
-        // filter log records based on the log level
-        String level = req.getParameter("level");
-        if(level!=null) {
-            Level threshold = Level.parse(level);
-            List<LogRecord> filtered = new ArrayList<LogRecord>();
-            for (LogRecord r : logs) {
-                if(r.getLevel().intValue() >= threshold.intValue())
-                    filtered.add(r);
-            }
-            logs = filtered;
-        }
-
-        RSS.forwardToRss("Hudson log","", logs, new FeedAdapter<LogRecord>() {
-            public String getEntryTitle(LogRecord entry) {
-                return entry.getMessage();
-            }
-
-            public String getEntryUrl(LogRecord entry) {
-                return "log";   // TODO: one URL for one log entry?
-            }
-
-            public String getEntryID(LogRecord entry) {
-                return String.valueOf(entry.getSequenceNumber());
-            }
-
-            public String getEntryDescription(LogRecord entry) {
-                return Functions.printLogRecord(entry);
-            }
-
-            public Calendar getEntryTimestamp(LogRecord entry) {
-                GregorianCalendar cal = new GregorianCalendar();
-                cal.setTimeInMillis(entry.getMillis());
-                return cal;
-            }
-
-            public String getEntryAuthor(LogRecord entry) {
-                return Mailer.DESCRIPTOR.getAdminAddress();
-            }
-        },req,rsp);
+        String qs = req.getQueryString();
+        rsp.sendRedirect2("./log/rss"+(qs==null?"":'?'+qs));
     }
 
     /**
@@ -2214,6 +2226,25 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     }
 
     /**
+     * Perform a restart of Hudson, if we can.
+     */
+    public void doRestart(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+        requirePOST();
+        checkPermission(ADMINISTER);
+        try {
+            Lifecycle.get().restart();
+            servletContext.setAttribute("app",new HudsonIsRestarting());
+            rsp.sendRedirect2(".");
+        } catch (UnsupportedOperationException e) {
+            sendError("Restart is not supported in this running mode.",req,rsp);
+        } catch (IOException e) {
+            sendError(e,req,rsp);
+        } catch (InterruptedException e) {
+            sendError(e,req,rsp);
+        }
+    }
+
+    /**
      * Shutdown the system.
      * @since 1.161
      */
@@ -2263,21 +2294,32 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
      * For system diagnostics.
      * Run arbitrary Groovy script.
      */
-    public void doScript( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+    public void doScript(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+        doScript(req, rsp, req.getView(this, "_script.jelly"));
+    }
+    
+    /**
+     * Run arbitrary Groovy script and return result as plain text.
+     */
+    public void doScriptText(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+        doScript(req, rsp, req.getView(this, "_scriptText.jelly"));
+    }
+
+    private void doScript(StaplerRequest req, StaplerResponse rsp, RequestDispatcher view) throws IOException, ServletException {
         // ability to run arbitrary script is dangerous
         checkPermission(ADMINISTER);
 
         String text = req.getParameter("script");
-        if(text!=null) {
+        if (text != null) {
             try {
                 req.setAttribute("output",
-                RemotingDiagnostics.executeGroovy(text, MasterComputer.localChannel));
+                        RemotingDiagnostics.executeGroovy(text, MasterComputer.localChannel));
             } catch (InterruptedException e) {
                 throw new ServletException(e);
             }
         }
 
-        req.getView(this,"_script.jelly").forward(req,rsp);
+        view.forward(req, rsp);
     }
 
     /**
@@ -2377,7 +2419,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     public void doItemExistsCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
         // this method can be used to check if a file exists anywhere in the file system,
         // so it should be protected.
-        new FormFieldValidator(req,rsp,true) {
+        new FormFieldValidator(req,rsp,Item.CREATE) {
             protected void check() throws IOException, ServletException {
                 String job = fixEmpty(request.getParameter("value"));
                 if(job==null) {

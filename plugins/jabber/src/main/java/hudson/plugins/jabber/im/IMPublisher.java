@@ -2,16 +2,18 @@ package hudson.plugins.jabber.im;
 
 import hudson.Launcher;
 import hudson.Util;
-import hudson.model.Build;
+import hudson.model.AbstractBuild;
 import hudson.model.BuildListener;
 import hudson.model.Hudson;
 import hudson.model.Result;
 import hudson.plugins.jabber.NotificationStrategy;
 import hudson.plugins.jabber.im.transport.JabberPublisherDescriptor;
 import hudson.plugins.jabber.tools.Assert;
+import hudson.plugins.jabber.tools.MessageHelper;
 import hudson.plugins.jabber.user.JabberUserProperty;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.ChangeLogSet.Entry;
+import hudson.tasks.BuildStep;
 import hudson.tasks.Publisher;
 
 import java.io.IOException;
@@ -26,7 +28,7 @@ import java.util.Set;
  * @author Uwe Schaefer
  *
  */
-public abstract class IMPublisher extends Publisher
+public abstract class IMPublisher extends Publisher implements BuildStep
 {
     private static final IMMessageTargetConverter CONVERTER = new DefaultIMMessageTargetConverter();
     private final List<IMMessageTarget> targets = new LinkedList<IMMessageTarget>();
@@ -120,23 +122,20 @@ public abstract class IMPublisher extends Publisher
     	return notifyFixers;
     }
 
-    public boolean perform(final Build<?,?> build, final Launcher launcher, final BuildListener buildListener)
+    public boolean perform(final AbstractBuild<?,?> build, final Launcher launcher, final BuildListener buildListener)
             throws InterruptedException, IOException
     {
         Assert.isNotNull(build, "Parameter 'build' must not be null.");
         Assert.isNotNull(buildListener, "Parameter 'arg2' must not be null.");
         if (getNotificationStrategy().notificationWanted(build))
         {
-            // Escape any spaces and non-ASCII characters in the build URL.
-            String buildUrl = Util.encode(build.getUrl());
-
             final StringBuffer sb = new StringBuffer();
         	sb.append("Project ").append(build.getProject().getName())
         	.append(" build (").append(build.getNumber()).append("): ")
         	.append(build.getResult()).append(" in ")
         	.append(build.getDurationString())
         	.append(": ")
-        	.append(Hudson.getInstance().getRootUrl()).append(buildUrl);
+        	.append(MessageHelper.getBuildURL(build));
         	
         	if ((build.getChangeSet() != null) && (! build.getChangeSet().isEmptySet())) {
         		boolean hasManyChangeSets = build.getChangeSet().getItems().length > 1;
@@ -166,9 +165,9 @@ public abstract class IMPublisher extends Publisher
         
         if (this.notifySuspects && build.getResult().isWorseThan(Result.SUCCESS)) {
         	final String message = new StringBuffer("You're suspected of having broken ")
-        	.append(build.getProject().getName()).append(": ")
-        	.append(Hudson.getInstance().getRootUrl()).append(build.getUrl())
-        	.toString();
+        		.append(build.getProject().getName()).append(": ")
+        		.append(MessageHelper.getBuildURL(build)).toString();
+        	
         	for (final IMMessageTarget target : calculateSuspectsTargets(build.getChangeSet())) {
         		try {
         			getIMConnection().send(target, message);
@@ -182,8 +181,8 @@ public abstract class IMPublisher extends Publisher
         		(build.getPreviousBuild() != null) && build.getPreviousBuild().getResult().isWorseThan(Result.SUCCESS)) {
         	final String message = new StringBuffer("Seems you've fixed  ")
         	.append(build.getProject().getName()).append(": ")
-        	.append(Hudson.getInstance().getRootUrl()).append(build.getUrl())
-        	.toString();
+        	.append(MessageHelper.getBuildURL(build)).toString();
+        	
         	for (final IMMessageTarget target : calculateSuspectsTargets(build.getChangeSet())) {
         		try {
         			getIMConnection().send(target, message);
@@ -200,7 +199,7 @@ public abstract class IMPublisher extends Publisher
 	 * @see hudson.tasks.Publisher#prebuild(hudson.model.Build, hudson.model.BuildListener)
 	 */
 	@Override
-	public boolean prebuild(Build build, BuildListener buildListener) {
+	public boolean prebuild(AbstractBuild<?, ?> build, BuildListener buildListener) {
 		try {
 			if (notifyOnBuildStart) {
 				final StringBuffer sb = new StringBuffer("Starting build ").append(build.getNumber())

@@ -19,13 +19,20 @@ import hudson.model.Saveable;
 import hudson.model.Run;
 import hudson.model.Result;
 import hudson.model.Node.Mode;
+import hudson.model.JDK;
 import hudson.tasks.Mailer;
+import hudson.tasks.Maven;
+import hudson.tasks.Maven.MavenInstallation;
 import hudson.Launcher.LocalLauncher;
 import hudson.util.StreamTaskListener;
 import hudson.util.ProcessTreeKiller;
 import hudson.slaves.DumbSlave;
 import hudson.slaves.CommandLauncher;
 import hudson.slaves.RetentionStrategy;
+import hudson.maven.MavenModuleSet;
+import hudson.FilePath;
+import hudson.Functions;
+import hudson.WebAppMain;
 import junit.framework.TestCase;
 import org.jvnet.hudson.test.HudsonHomeLoader.CopyExisting;
 import org.jvnet.hudson.test.recipes.Recipe;
@@ -44,12 +51,15 @@ import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
 import org.xml.sax.SAXException;
+import org.apache.commons.io.IOUtils;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
@@ -116,6 +126,10 @@ public abstract class HudsonTestCase extends TestCase {
         hudson = newHudson();
         hudson.servletContext.setAttribute("app",hudson);
         hudson.servletContext.setAttribute("version","?");
+        WebAppMain.installExpressionFactory(new ServletContextEvent(hudson.servletContext));
+
+        // set a default JDK to be the one that the harness is using.
+        hudson.getJDKs().add(new JDK("default",System.getProperty("java.home")));
 
         // cause all the descriptors to reload.
         // ideally we'd like to reset them to properly emulate the behavior, but that's not possible.
@@ -201,12 +215,41 @@ public abstract class HudsonTestCase extends TestCase {
         return realm;
     }
 
+    /**
+     * Locates Maven2 and configure that as the only Maven in the system.
+     */
+    protected void configureDefaultMaven() throws Exception {
+        // first if we are running inside Maven, pick that Maven.
+        String home = System.getProperty("maven.home");
+        if(home!=null) {
+            Maven.DESCRIPTOR.setInstallations(new MavenInstallation("default",home));
+            return;
+        }
+
+        // otherwise extract the copy we have.
+        // this happens when a test is invoked from an IDE, for example.
+        LOGGER.warning("Extracting a copy of Maven bundled in the test harness. " +
+                "To avoid a performance hit, set the system property 'maven.home' to point to a Maven2 installation.");
+        FilePath mvn = hudson.getRootPath().createTempFile("maven", "zip");
+        OutputStream os = mvn.write();
+        try {
+            IOUtils.copy(HudsonTestCase.class.getClassLoader().getResourceAsStream("maven-2.0.7-bin.zip"), os);
+        } finally {
+            os.close();
+        }
+        File mvnHome = createTmpDir();
+        mvn.unzip(new FilePath(mvnHome));
+
+        Maven.DESCRIPTOR.setInstallations(new MavenInstallation("default",
+                new File(mvnHome,"maven-2.0.7").getAbsolutePath()));
+    }
+
 //
 // Convenience methods
 //
 
     protected FreeStyleProject createFreeStyleProject() throws IOException {
-        return createFreeStyleProject("test"+hudson.getItems().size());
+        return createFreeStyleProject(createUniqueProjectName());
     }
 
     protected FreeStyleProject createFreeStyleProject(String name) throws IOException {
@@ -214,11 +257,33 @@ public abstract class HudsonTestCase extends TestCase {
     }
 
     protected MatrixProject createMatrixProject() throws IOException {
-        return createMatrixProject("test"+hudson.getItems().size());
+        return createMatrixProject(createUniqueProjectName());
     }
 
     protected MatrixProject createMatrixProject(String name) throws IOException {
         return (MatrixProject)hudson.createProject(MatrixProject.DESCRIPTOR,name);
+    }
+
+    /**
+     * Creates a empty Maven project with an unique name.
+     *
+     * @see #configureDefaultMaven()
+     */
+    protected MavenModuleSet createMavenProject() throws IOException {
+        return createMavenProject(createUniqueProjectName());
+    }
+
+    /**
+     * Creates a empty Maven project with the given name.
+     *
+     * @see #configureDefaultMaven()
+     */
+    protected MavenModuleSet createMavenProject(String name) throws IOException {
+        return (MavenModuleSet)hudson.createProject(MavenModuleSet.DESCRIPTOR,name);
+    }
+
+    private String createUniqueProjectName() {
+        return "test"+hudson.getItems().size();
     }
 
     /**
@@ -265,6 +330,9 @@ public abstract class HudsonTestCase extends TestCase {
         new BufferedReader(new InputStreamReader(System.in)).readLine();
     }
 
+    /**
+     * Asserts that the outcome of the build is a specific outcome.
+     */
     public void assertBuildStatus(Result status, Run r) throws Exception {
         if(status==r.getResult())
             return;
@@ -272,6 +340,22 @@ public abstract class HudsonTestCase extends TestCase {
         // dump the build output
         System.out.println(r.getLog());
         assertEquals(status,r.getResult());
+    }
+
+    public void assertBuildStatusSuccess(Run r) throws Exception {
+        assertBuildStatus(Result.SUCCESS,r);
+    }
+
+    /**
+     * Asserts that the console output of the build contains the given substring.
+     */
+    public void assertLogContains(String substring, Run run) throws Exception {
+        String log = run.getLog();
+        if(log.contains(substring))
+            return; // good!
+
+        System.out.println(log);
+        fail("Console output of "+run+" didn't contain "+substring);
     }
 
 //
@@ -305,7 +389,7 @@ public abstract class HudsonTestCase extends TestCase {
         return with(HudsonHomeLoader.NEW);
     }
 
-    public HudsonTestCase withExistingHome(File source) {
+    public HudsonTestCase withExistingHome(File source) throws Exception {
         return with(new CopyExisting(source));
     }
 
@@ -439,7 +523,7 @@ public abstract class HudsonTestCase extends TestCase {
         Locale.setDefault(Locale.ENGLISH);
         // don't waste bandwidth talking to the update center
         UpdateCenter.neverUpdate = true;
-        
+
         // we don't care CSS errors in YUI
         final ErrorHandler defaultHandler = Stylesheet.CSS_ERROR_HANDLER;
         Stylesheet.CSS_ERROR_HANDLER = new ErrorHandler() {
@@ -470,7 +554,7 @@ public abstract class HudsonTestCase extends TestCase {
         Logger.getLogger("org.springframework").setLevel(Level.WARNING);
 
         // hudson-behavior.js relies on this to decide whether it's running unit tests.
-        System.setProperty("hudson.unitTest","true");
+        Functions.isUnitTest = true;
     }
 
     private static final Logger LOGGER = Logger.getLogger(HudsonTestCase.class.getName());

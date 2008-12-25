@@ -32,16 +32,24 @@ import org.kohsuke.stapler.StaplerRequest;
  * namePattern and commentPattern variables.
  * 
  * @author Peter Liljenberg
+ * 
+ * @author Gregory Boissinot 
+ * 2008-10-11 Add the rebase dynamic view feature
+ * 2008-11-21 Restric the baseline creation on read/write components
+ * 
  */
 public class UcmMakeBaseline extends Publisher {
 
     private static final String ENV_CC_BASELINE_NAME = "CC_BASELINE_NAME";
 
-    private transient List<String> latestBaselines = null;
+    private transient List<String> readWriteComponents = null;
     
-    private transient List<String> createdBaselines = null;
+    private transient List<String> latestBaselines = null;
+
+    private transient List<String> createdBaselines = new ArrayList<String>();
 
     public final static Descriptor<Publisher> DESCRIPTOR = new UcmMakeBaselineDescriptor();
+    
 
     private final String namePattern;
 
@@ -56,6 +64,10 @@ public class UcmMakeBaseline extends Publisher {
     private final boolean fullBaseline;
 
     private final boolean identical;
+
+    private final String dynamicViewName;
+
+    private final boolean rebaseDynamicView;
 
     public String getCommentPattern() {
         return this.commentPattern;
@@ -81,6 +93,21 @@ public class UcmMakeBaseline extends Publisher {
         return this.identical;
     }
 
+    public String getDynamicViewName() {
+        return this.dynamicViewName;
+    }
+
+    public boolean isRebaseDynamicView() {
+        return this.rebaseDynamicView;
+    }
+
+    public List<String> getReadWriteComponents() {
+		return readWriteComponents;
+	}
+
+
+    
+    
     public static final class UcmMakeBaselineDescriptor extends
             Descriptor<Publisher> {
 
@@ -101,7 +128,9 @@ public class UcmMakeBaseline extends Publisher {
                     .getParameter("mkbl.lock") != null, req
                     .getParameter("mkbl.recommend") != null, req
                     .getParameter("mkbl.fullBaseline") != null, req
-                    .getParameter("mkbl.identical") != null);
+                    .getParameter("mkbl.identical") != null, req
+                    .getParameter("mkbl.rebaseDynamicView") != null, req
+                    .getParameter("mkbl.dynamicViewName"));
             return p;
         }
 
@@ -114,13 +143,16 @@ public class UcmMakeBaseline extends Publisher {
     private UcmMakeBaseline(final String namePattern,
             final String commentPattern, final boolean lock,
             final boolean recommend, final boolean fullBaseline,
-            final boolean identical) {
+            final boolean identical, final boolean rebaseDynamicView,
+            final String dynamicViewName) {
         this.namePattern = namePattern;
         this.commentPattern = commentPattern;
         this.lockStream = lock;
         this.recommend = recommend;
         this.fullBaseline = fullBaseline;
         this.identical = identical;
+        this.rebaseDynamicView = rebaseDynamicView;
+        this.dynamicViewName = dynamicViewName;
     }
 
     @Override
@@ -133,13 +165,14 @@ public class UcmMakeBaseline extends Publisher {
 
         ClearCaseUcmSCM scm = (ClearCaseUcmSCM) build.getProject().getScm();
 
-        FilePath filePath = build.getProject().getWorkspace().child(
-                scm.getViewName());
         Launcher launcher = Executor.currentExecutor().getOwner().getNode()
                 .createLauncher(listener);
-        HudsonClearToolLauncher clearToolLauncher = new HudsonClearToolLauncher(
-                PluginImpl.BASE_DESCRIPTOR.getCleartoolExe(), getDescriptor()
-                        .getDisplayName(), listener, filePath, launcher);
+        HudsonClearToolLauncher clearToolLauncher = getHudsonClearToolLauncher(
+                build, listener, launcher);
+
+        FilePath filePath = build.getProject().getWorkspace().child(
+                scm.generateNormalizedViewName(build, launcher));
+
         if (this.lockStream) {
             try {
                 this.streamSuccessfullyLocked = lockStream(scm.getStream(),
@@ -150,10 +183,17 @@ public class UcmMakeBaseline extends Publisher {
             }
         }
         try {
-            makeBaseline(build, clearToolLauncher, filePath);
-            this.latestBaselines = getLatestBaselineNames(clearToolLauncher,
-                    filePath);
-            addBuildParameter(build);
+        	
+        	//Get read/write component
+        	this.readWriteComponents = getReadWriteComponent(clearToolLauncher,filePath);
+        	   
+        	if (readWriteComponents.size()!=0){
+        		makeBaseline(build, clearToolLauncher, filePath);            
+        		this.latestBaselines = getLatestBaselineNames(clearToolLauncher,filePath);
+            
+        		addBuildParameter(build);
+        	}
+            
         } catch (Exception ex) {
             listener.getLogger().println("Failed to create baseline: " + ex);
             return false;
@@ -161,6 +201,15 @@ public class UcmMakeBaseline extends Publisher {
 
         return true;
 
+    }
+
+    private HudsonClearToolLauncher getHudsonClearToolLauncher(
+            AbstractBuild<?, ?> build, BuildListener listener, Launcher launcher) {
+        FilePath workspaceRoot = build.getProject().getWorkspace();
+        HudsonClearToolLauncher clearToolLauncher = new HudsonClearToolLauncher(
+                PluginImpl.BASE_DESCRIPTOR.getCleartoolExe(), getDescriptor()
+                        .getDisplayName(), listener, workspaceRoot, launcher);
+        return clearToolLauncher;
     }
 
     private void addBuildParameter(AbstractBuild<?, ?> build) {
@@ -181,40 +230,54 @@ public class UcmMakeBaseline extends Publisher {
         if (build.getProject().getScm() instanceof ClearCaseUcmSCM) {
             ClearCaseUcmSCM scm = (ClearCaseUcmSCM) build.getProject().getScm();
             FilePath filePath = build.getProject().getWorkspace().child(
-                    scm.getViewName());
+                    scm.generateNormalizedViewName(build, launcher));
 
-            HudsonClearToolLauncher clearToolLauncher = new HudsonClearToolLauncher(
-                    PluginImpl.BASE_DESCRIPTOR.getCleartoolExe(),
-                    getDescriptor().getDisplayName(), listener, filePath,
-                    launcher);
+            HudsonClearToolLauncher clearToolLauncher = getHudsonClearToolLauncher(
+                    build, listener, launcher);
 
             if (build.getResult().equals(Result.SUCCESS)) {
-            	// On success, promote all current baselines in stream
-				for (String baselineName : this.latestBaselines) {
-					promoteBaselineToBuiltLevel(scm.getStream(), clearToolLauncher,
-							filePath, baselineName);
-				}
+                // On success, promote all current baselines in stream
+                for (String baselineName : this.latestBaselines) {
+                    promoteBaselineToBuiltLevel(scm.getStream(),
+                            clearToolLauncher, filePath, baselineName);
+                }
                 if (this.recommend) {
                     recommedBaseline(scm.getStream(), clearToolLauncher,
                             filePath);
                 }
+
+                // Rebase a dynamic view
+                if (this.rebaseDynamicView) {
+                    for (String baseline : this.latestBaselines) {
+                        rebaseDynamicView(clearToolLauncher, filePath,
+                                this.dynamicViewName, baseline);
+                    }
+                }
+
             } else if (build.getResult().equals(Result.FAILURE)) {
+              
+            	List<String> alreadyRejected = new ArrayList<String>();
+            	
             	// On failure, demote only baselines created in this build
-            	for (String baselineName : this.createdBaselines) {
-            		// Find full baseline name from latest baselines
-            		String realBaselineName = null;
-            		for (String fullBaselineName : this.latestBaselines ) {
-            			if (fullBaselineName.startsWith(baselineName)) {
-            				realBaselineName = fullBaselineName;
-            			}
-            		}
-            		if (realBaselineName == null) {
-            			listener.getLogger().println("Couldn't find baseline name for "+baselineName);
-            		} else {
-            			demoteBaselineToRejectedLevel(scm.getStream(), clearToolLauncher,
-            					filePath, realBaselineName);
-            		}
-            	}
+                for (String baselineName : this.createdBaselines) {
+                
+                	// Find full baseline name from latest baselines
+                    String realBaselineName = null;
+                    for (String fullBaselineName : this.latestBaselines) {
+                        if (fullBaselineName.startsWith(baselineName)) {
+                            if (!alreadyRejected.contains(fullBaselineName)){
+                            	realBaselineName = fullBaselineName;
+                            }
+                        }
+                    }
+                    if (realBaselineName == null) {
+                        listener.getLogger().println("Couldn't find baseline name for "+ baselineName);
+                    } else {
+                        demoteBaselineToRejectedLevel(scm.getStream(),
+                                clearToolLauncher, filePath, realBaselineName);
+                        alreadyRejected.add(realBaselineName);
+                    }
+                }
             }
 
             if (this.lockStream && this.streamSuccessfullyLocked) {
@@ -232,6 +295,21 @@ public class UcmMakeBaseline extends Publisher {
         return DESCRIPTOR;
     }
 
+    private void rebaseDynamicView(HudsonClearToolLauncher clearToolLauncher,
+            FilePath filePath, String dynamicView, String blName)
+            throws InterruptedException, IOException {
+
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
+        cmd.add("rebase");
+        cmd.add("-baseline");
+        cmd.add(blName);
+        cmd.add("-view");
+        cmd.add(dynamicView);
+        cmd.add("-complete");
+
+        clearToolLauncher.run(cmd.toCommandArray(), null, null, filePath);
+    }
+
     private void unlockStream(String stream,
             HudsonClearToolLauncher clearToolLauncher, FilePath filePath)
             throws IOException, InterruptedException {
@@ -239,8 +317,7 @@ public class UcmMakeBaseline extends Publisher {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
 
         cmd.add("unlock");
-        cmd.add("stream:");
-        cmd.add(stream);
+        cmd.add("stream:" + stream);
 
         clearToolLauncher.run(cmd.toCommandArray(), null, null, filePath);
 
@@ -260,8 +337,7 @@ public class UcmMakeBaseline extends Publisher {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
 
         cmd.add("lock");
-        cmd.add("stream:");
-        cmd.add(stream);
+        cmd.add("stream:" + stream);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
@@ -296,8 +372,21 @@ public class UcmMakeBaseline extends Publisher {
         } else {
             cmd.add("-incremental");
         }
-        cmd.add(baselineName);
 
+
+        //Make baseline only for read/write components (identical or not)
+        cmd.add("-comp");
+        StringBuffer lstComp = new StringBuffer();
+        for (String comp:this.readWriteComponents){
+        	lstComp.append(",");
+        	lstComp.append(comp);        	
+        }
+        lstComp.delete(0, 1);
+        cmd.add(lstComp.toString());
+        
+        
+        cmd.add(baselineName);        
+        
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         clearToolLauncher.run(cmd.toCommandArray(), null, baos, filePath);
@@ -307,16 +396,15 @@ public class UcmMakeBaseline extends Publisher {
             throw new Exception("Failed to make baseline, reason: "
                     + cleartoolResult);
         }
-        
-        this.createdBaselines = new ArrayList<String>();
-        
-    	Pattern pattern = Pattern.compile("Created baseline \".+?\"");
-    	Matcher matcher = pattern.matcher(cleartoolResult);
-    	while (matcher.find()) {
-    		String match = matcher.group();
-    		String newBaseline = match.substring(match.indexOf("\"")+1, match.length()-1);
-    		this.createdBaselines.add(newBaseline);
-    	}        
+
+        Pattern pattern = Pattern.compile("Created baseline \".+?\"");
+        Matcher matcher = pattern.matcher(cleartoolResult);
+        while (matcher.find()) {
+            String match = matcher.group();
+            String newBaseline = match.substring(match.indexOf("\"") + 1, match
+                    .length() - 1);
+            this.createdBaselines.add(newBaseline);
+        }
 
     }
 
@@ -350,7 +438,7 @@ public class UcmMakeBaseline extends Publisher {
 
         clearToolLauncher.run(cmd.toCommandArray(), null, null, filePath);
     }
-    
+
     private void demoteBaselineToRejectedLevel(String stream,
             HudsonClearToolLauncher clearToolLauncher, FilePath filePath,
             String blName) throws InterruptedException, IOException {
@@ -366,8 +454,76 @@ public class UcmMakeBaseline extends Publisher {
         cmd.add(blName);
 
         clearToolLauncher.run(cmd.toCommandArray(), null, null, filePath);
-    }    
+    }
+    
+    
+    /**
+     * Retrieve the read/write component list with PVOB
+     * @param clearToolLauncher
+     * @param filePath
+     * @return the read/write component like 'DeskCore@\P_ORC DeskShared@\P_ORC build_Product@\P_ORC'
+     * @throws Exception
+     */
+    private List<String> getReadWriteComponent(
+            HudsonClearToolLauncher clearToolLauncher, FilePath filePath)
+            throws Exception {
+        
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
 
+        cmd.add("lsstream");
+        cmd.add("-fmt");
+        cmd.add("%[mod_comps]Xp");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        clearToolLauncher.run(cmd.toCommandArray(), null, baos, filePath);
+        baos.close();
+        String cleartoolResult = baos.toString();
+            	
+        final String prefix = "component:";
+        if (cleartoolResult != null && cleartoolResult.startsWith(prefix)) {
+            List<String> componentNames = new ArrayList<String>();
+            String[] componentNamesSplit = cleartoolResult.split(" ");
+            for (String componentName : componentNamesSplit) {
+                String componentNameTrimmed = componentName.substring(componentName.indexOf(prefix)+prefix.length()).trim();
+                if (!componentNameTrimmed.equals("")) {
+                	componentNames.add(componentNameTrimmed);
+                }
+            }
+            return componentNames;
+        }
+        throw new Exception("Failed to get read/write component, reason: "+ cleartoolResult);        
+    }
+            
+
+    /**
+     * Get the component binding to the baseline
+     * @param clearToolLauncher
+     * @param filePath
+     * @param blName the baseline name like 'deskCore_3.2-146_2008-11-14_18-07-22.3543@\P_ORC'
+     * @return the component name like 'Desk_Core@\P_ORC'
+     * @throws InterruptedException
+     * @throws IOException
+     */
+    private String getComponentforBaseline(
+                HudsonClearToolLauncher clearToolLauncher, FilePath filePath,
+                String blName) throws InterruptedException, IOException {    	
+  
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
+
+        cmd.add("lsbl");
+        cmd.add("-fmt");
+        cmd.add("%[component]Xp");
+        cmd.add(blName);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();   
+        
+        clearToolLauncher.run(cmd.toCommandArray(), null, baos, filePath);
+        baos.close();
+        String cleartoolResult = baos.toString();
+        
+        String prefix = "component:";
+        return cleartoolResult.substring(cleartoolResult.indexOf(cleartoolResult)+prefix.length());
+    }
+    
+    
     private List<String> getLatestBaselineNames(
             HudsonClearToolLauncher clearToolLauncher, FilePath filePath)
             throws Exception {
@@ -384,19 +540,24 @@ public class UcmMakeBaseline extends Publisher {
         String cleartoolResult = baos.toString();
         String prefix = "baseline:";
         if (cleartoolResult != null && cleartoolResult.startsWith(prefix)) {
-			List<String> baselineNames = new ArrayList<String>();
-			String[] baselineNamesSplit = cleartoolResult.split("baseline:");
-			for (String baselineName : baselineNamesSplit) {
-				String baselineNameTrimmed = baselineName.trim();
-				if (!baselineNameTrimmed.equals("")) {
-					baselineNames.add(baselineNameTrimmed);
-				}
-			}
+            List<String> baselineNames = new ArrayList<String>();
+            String[] baselineNamesSplit = cleartoolResult.split("baseline:");
+            for (String baselineName : baselineNamesSplit) {
+                String baselineNameTrimmed = baselineName.trim();
+                if (!baselineNameTrimmed.equals("")) {      
+                		//Retrict to baseline bind to read/write component
+                		String blComp = getComponentforBaseline(clearToolLauncher, filePath, baselineNameTrimmed);
+                		if (this.readWriteComponents.contains(blComp))                	
+                			baselineNames.add(baselineNameTrimmed);
+                }
+            }
             return baselineNames;
         }
         throw new Exception("Failed to get baselinename, reason: "
                 + cleartoolResult);
 
     }
+
+
 
 }

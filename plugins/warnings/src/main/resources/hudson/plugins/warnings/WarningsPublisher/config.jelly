@@ -5,6 +5,27 @@
     <f:textbox name="pattern" value="${instance.pattern}"
       checkUrl="'${rootURL}/publisher/WarningsPublisher/checkPattern?job=${it.fullName}&amp;value='+escape(this.value)" />
   </f:entry>
+  <f:entry title="${%Parsers}" description="${%description.parsers}">
+    <j:invokeStatic var="allParsers" className="hudson.plugins.warnings.parser.ParserRegistry" method="getAvailableParsers"/>
+    <f:repeatable var="publisherParser" items="${instance.parserNames}" name="parsers">
+      <table cellspacing="0" width="100%">
+        <f:entry title="">
+          <select class="setting-input" name="parserName">
+            <j:forEach var="availableParser" items="${allParsers}">
+              <f:option selected="${publisherParser == availableParser}">${availableParser.toString()}</f:option>
+            </j:forEach>
+          </select>
+        </f:entry>
+
+        <f:entry title="">
+          <div align="right">
+            <f:repeatableDeleteButton />
+          </div>
+        </f:entry>
+      </table>
+    </f:repeatable>
+  </f:entry>
+
   <f:advanced>
         <f:entry title="${%Files to exclude from report}"
           description="${%description.excludePattern}">
@@ -53,7 +74,12 @@
       <st:nbsp/>
       <label for="thresholdLimit.normal">${%Priorities high and normal}</label>
       <st:nbsp />
-      <f:radio name="warnings.thresholdLimit" value="low" title="" checked="${instance.thresholdLimit == 'low'}" id="thresholdLimit.low"/>
+      <j:if test="${instance != null}">
+        <f:radio name="warnings.thresholdLimit" value="low" title="" checked="${instance.thresholdLimit == 'low'}" id="thresholdLimit.low"/>
+      </j:if>
+      <j:if test="${instance == null}">
+        <f:radio name="warnings.thresholdLimit" value="low" title="" checked="${true}" id="thresholdLimit.low"/>
+      </j:if>
       <st:nbsp/>
       <label for="thresholdLimit.low">${%All priorities}</label>
       <st:nbsp />

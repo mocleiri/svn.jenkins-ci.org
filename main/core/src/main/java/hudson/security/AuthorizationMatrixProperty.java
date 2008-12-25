@@ -5,9 +5,9 @@ import hudson.model.Job;
 import hudson.model.JobProperty;
 import hudson.model.JobPropertyDescriptor;
 import hudson.model.Hudson;
+import hudson.model.Run;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -36,7 +36,7 @@ public class AuthorizationMatrixProperty extends JobProperty<Job<?, ?>> {
 
 	public static final JobPropertyDescriptor DESCRIPTOR = new DescriptorImpl();
 
-	private transient ACL acl = new AclImpl();
+	private transient SidACL acl = new AclImpl();
 
 	private boolean useProjectSecurity;
 
@@ -136,7 +136,7 @@ public class AuthorizationMatrixProperty extends JobProperty<Job<?, ?>> {
 		}
 
 		public List<PermissionGroup> getAllGroups() {
-			return Collections.singletonList(PermissionGroup.get(Item.class));
+			return Arrays.asList(PermissionGroup.get(Item.class),PermissionGroup.get(Run.class));
 		}
 
         public boolean showPermission(Permission p) {
@@ -146,30 +146,9 @@ public class AuthorizationMatrixProperty extends JobProperty<Job<?, ?>> {
 
 	private final class AclImpl extends SidACL {
 		protected Boolean hasPermission(Sid sid, Permission p) {
-			String s = toString(sid);
-			for (; p != null; p = p.impliedBy) {
-				Set<String> set = grantedPermissions.get(p);
-				if (set != null && set.contains(s))
-					return true;
-			}
+			if (AuthorizationMatrixProperty.this.hasPermission(toString(sid),p))
+				return true;
 			return null;
-		}
-
-		protected Boolean _hasPermission(Authentication a, Permission permission) {
-			Boolean b = super._hasPermission(a, permission);
-			// permissions granted to anonymous users are granted to everyone
-			if (b == null)
-				b = hasPermission(ANONYMOUS, permission);
-			return b;
-		}
-
-		private String toString(Sid p) {
-			if (p instanceof GrantedAuthoritySid)
-				return ((GrantedAuthoritySid) p).getGrantedAuthority();
-			if (p instanceof PrincipalSid)
-				return ((PrincipalSid) p).getPrincipal();
-			// hmm...
-			return p.toString();
 		}
 	}
 
@@ -178,7 +157,7 @@ public class AuthorizationMatrixProperty extends JobProperty<Job<?, ?>> {
 		return this;
 	}
 
-	public ACL getACL() {
+	public SidACL getACL() {
 		return acl;
 	}
 
@@ -217,6 +196,10 @@ public class AuthorizationMatrixProperty extends JobProperty<Job<?, ?>> {
 				MarshallingContext context) {
 			AuthorizationMatrixProperty amp = (AuthorizationMatrixProperty) source;
 
+			writer.startNode("useProjectSecurity");
+			context.convertAnother(Boolean.valueOf(amp.isUseProjectSecurity()));
+			writer.endNode();
+			
 			for (Entry<Permission, Set<String>> e : amp.grantedPermissions
 					.entrySet()) {
 				String p = e.getKey().getId();
@@ -233,6 +216,13 @@ public class AuthorizationMatrixProperty extends JobProperty<Job<?, ?>> {
 				final UnmarshallingContext context) {
 			AuthorizationMatrixProperty as = new AuthorizationMatrixProperty();
 
+			String prop = reader.peekNextChild();
+			if (prop!=null && prop.equals("useProjectSecurity")) {
+				reader.moveDown();
+				Boolean useSecurity = (Boolean) context.convertAnother(as, Boolean.class);
+				as.setUseProjectSecurity(useSecurity.booleanValue());
+				reader.moveUp();
+			}
 			while (reader.hasMoreChildren()) {
 				reader.moveDown();
 				String id = (String) context.convertAnother(as, String.class);

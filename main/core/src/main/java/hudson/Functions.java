@@ -37,12 +37,16 @@ import hudson.util.Iterators;
 import hudson.util.DescriptorList;
 import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
 import org.apache.commons.jelly.JellyContext;
+import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.Script;
+import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.jexl.parser.ASTSizeFunction;
 import org.apache.commons.jexl.util.Introspector;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import org.jvnet.animal_sniffer.IgnoreJRERequirement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -52,6 +56,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.lang.management.LockInfo;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MonitorInfo;
@@ -61,6 +66,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.MalformedURLException;
+import java.net.URLDecoder;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
@@ -490,8 +496,25 @@ public class Functions {
         return hasPermission(Hudson.getInstance(),permission);
     }
 
-    public static boolean hasPermission(AccessControlled object, Permission permission) throws IOException, ServletException {
-        return permission==null || object.hasPermission(permission);
+    /**
+     * This version is so that the 'hasPermission' can degrade gracefully
+     * if "it" is not an {@link AccessControlled} object.
+     */
+    public static boolean hasPermission(Object object, Permission permission) throws IOException, ServletException {
+        if (permission == null)
+            return true;
+        if (object instanceof AccessControlled)
+            return ((AccessControlled)object).hasPermission(permission);
+        else {
+            List<Ancestor> ancs = Stapler.getCurrentRequest().getAncestors();
+            for(Ancestor anc : Iterators.reverse(ancs)) {
+                Object o = anc.getObject();
+                if (o instanceof AccessControlled) {
+                    return ((AccessControlled)o).hasPermission(permission);
+                }
+            }
+            return Hudson.getInstance().hasPermission(permission);
+        }
     }
 
     public static void adminCheck(StaplerRequest req, StaplerResponse rsp, Object required, Permission permission) throws IOException, ServletException {
@@ -633,6 +656,7 @@ public class Functions {
         return Thread.getAllStackTraces();
     }
 
+    @IgnoreJRERequirement
     public static ThreadInfo[] getThreadInfos() {
         ThreadMXBean mbean = ManagementFactory.getThreadMXBean();
         return mbean.getThreadInfo(mbean.getAllThreadIds(),mbean.isObjectMonitorUsageSupported(),mbean.isSynchronizerUsageSupported());
@@ -641,6 +665,7 @@ public class Functions {
     /**
      * Are we running on JRE6 or above?
      */
+    @IgnoreJRERequirement
     public static boolean isMustangOrAbove() {
         try {
             System.console();
@@ -651,6 +676,7 @@ public class Functions {
     }
 
     // ThreadInfo.toString() truncates the stack trace by first 8, so needed my own version
+    @IgnoreJRERequirement
     public static String dumpThreadInfo(ThreadInfo ti) {
         StringBuilder sb = new StringBuilder("\"" + ti.getThreadName() + "\"" +
                                              " Id=" + ti.getThreadId() + " " +
@@ -853,6 +879,17 @@ public class Functions {
     }
 
     /**
+     * Evaluate a Jelly script and return output as a String.
+     *
+     * @since 1.267
+     */
+    public static String runScript(Script script) throws JellyTagException {
+        StringWriter out = new StringWriter();
+        script.run(getCurrentJellyContext(), XMLOutput.createXMLOutput(out));
+        return out.toString();
+    }
+
+    /**
      * Returns a sub-list if the given list is bigger than the specified 'maxSize'
      */
     public static <T> List<T> subList(List<T> base, int maxSize) {
@@ -937,6 +974,27 @@ public class Functions {
     }
 
     /**
+     * Gets the URL for the update center server
+     */
+    public String getUpdateCenterUrl() {
+        return Hudson.getInstance().getUpdateCenter().getUrl();
+    }
+
+    /**
+     * If the given href link is matching the current page, return true.
+     *
+     * Used in <tt>task.jelly</tt> to decide if the page should be highlighted.
+     */
+    public boolean hyperlinkMatchesCurrentPage(String href) throws UnsupportedEncodingException {
+        String url = Stapler.getCurrentRequest().getRequestURL().toString();
+        url = URLDecoder.decode(url,"UTF-8");
+        href = URLDecoder.decode(href,"UTF-8");
+
+        return (href.length()>1 && url.endsWith(href))
+            || (href.equals(".") && url.endsWith("."));
+    }
+
+    /**
      * Gets all the {@link PageDecorator}s.
      */
     public static List<PageDecorator> getPageDecorators() {
@@ -948,4 +1006,9 @@ public class Functions {
     }
 
     private static final Pattern SCHEME = Pattern.compile("[a-z]+://.+");
+
+    /**
+     * Set to true if we are running unit tests.
+     */
+    public static boolean isUnitTest = false;
 }

@@ -1,10 +1,10 @@
 package hudson.tasks;
 
 import hudson.CopyOnWrite;
+import hudson.EnvVars;
+import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
-import hudson.FilePath;
-import hudson.EnvVars;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
@@ -21,13 +21,10 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import javax.servlet.ServletException;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.io.StringReader;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Properties;
 
 /**
@@ -151,21 +148,7 @@ public class Ant extends Builder {
         if(parameters!=null)
             vr = parameters.createVariableResolver(build);
         
-        if (properties != null) {
-            Properties p = new Properties();
-            try {
-                p.load(new StringReader(properties));
-            } catch (NoSuchMethodError e) {
-                // load(Reader) method is only available on JDK6.
-                // this fall back version doesn't work correctly with non-ASCII characters,
-                // but there's no other easy ways out it seems.
-                p.load(new ByteArrayInputStream(properties.getBytes()));
-            }
-
-            for (Entry<Object,Object> entry : p.entrySet()) {
-                args.add("-D" + entry.getKey() + "=" + Util.replaceMacro(entry.getValue().toString(),vr));
-            }
-        }
+        args.addKeyValuePairsFromPropertyString("-D",properties,vr);
 
         args.addTokenized(Util.replaceMacro(targets,vr).replaceAll("[\t\r\n]+"," "));
 

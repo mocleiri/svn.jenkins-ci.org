@@ -2,14 +2,16 @@ package hudson.plugins.clearcase;
 
 import hudson.FilePath;
 import hudson.util.ArgumentListBuilder;
+import hudson.util.VariableResolver;
+
 import java.io.IOException;
 
 public class ClearToolDynamic extends ClearToolExec {
 
     private transient String viewDrive;
 
-    public ClearToolDynamic(ClearToolLauncher launcher, String viewDrive) {
-        super(launcher);
+    public ClearToolDynamic(VariableResolver variableResolver, ClearToolLauncher launcher, String viewDrive) {
+        super(variableResolver, launcher);
         this.viewDrive = viewDrive;
     }
 
@@ -48,6 +50,10 @@ public class ClearToolDynamic extends ClearToolExec {
 
     public void update(String viewName, String loadRules) throws IOException, InterruptedException {
         launcher.getListener().fatalError("Dynamic view does not support update");
+    }
+    
+    public void syncronizeViewWithStream(String viewName, String stream) throws IOException, InterruptedException {
+        launcher.getListener().fatalError("Dynamic view does not support syncronize");
     }
 
     public void startView(String viewTags)  throws IOException, InterruptedException {

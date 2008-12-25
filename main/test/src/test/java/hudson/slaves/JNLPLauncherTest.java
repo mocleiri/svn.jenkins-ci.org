@@ -17,6 +17,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -26,6 +27,11 @@ public class JNLPLauncherTest extends HudsonTestCase {
      * Starts a JNLP slave agent and makes sure it successfully connects to Hudson. 
      */
     public void testLaunch() throws Exception {
+        if(Boolean.getBoolean("java.awt.headless")) {
+            System.err.println("Skipping JNLPLauncherTest.testLaunch because we are running headless");
+            return;
+        }
+        System.err.println("Not in headless mode, continuing with JNLPLauncherTest.testLaunch...");
         Computer c = addTestSlave();
         launchJnlpAndVerify(c, buildJnlpArgs(c));
     }
@@ -66,7 +72,9 @@ public class JNLPLauncherTest extends HudsonTestCase {
 
             assertFalse("Slave failed to go online", c.isOffline());
             // run some trivial thing
-            c.getChannel().call(new NoopTask());
+            System.err.println("Calling task...");
+            assertEquals("done", c.getChannel().callAsync(new NoopTask()).get(5, TimeUnit.MINUTES));
+            System.err.println("...done.");
         } finally {
             proc.kill();
         }
@@ -101,7 +109,7 @@ public class JNLPLauncherTest extends HudsonTestCase {
 
     private static class NoopTask implements Callable<String,RuntimeException> {
         public String call() {
-            return null;
+            return "done";
         }
 
         private static final long serialVersionUID = 1L;

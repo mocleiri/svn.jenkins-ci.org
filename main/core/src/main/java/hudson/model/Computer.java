@@ -289,6 +289,13 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
             return "computer.gif";
     }
 
+    public String getIconAltText() {
+        if(isOffline())
+            return "[offline]";
+        else
+            return "[online]";
+    }
+
     @Exported
     public String getDisplayName() {
         return nodeName;

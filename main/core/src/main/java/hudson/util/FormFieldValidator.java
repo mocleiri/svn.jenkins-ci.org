@@ -6,6 +6,8 @@ import hudson.FilePath;
 import hudson.Util;
 import hudson.model.AbstractProject;
 import hudson.model.Hudson;
+import hudson.model.Item;
+import hudson.model.Job;
 import hudson.security.Permission;
 import hudson.security.AccessControlled;
 
@@ -22,6 +24,7 @@ import javax.servlet.ServletException;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.Stapler;
+import org.acegisecurity.AccessDeniedException;
 
 /**
  * Base class that provides the framework for doing on-the-fly form field validation.
@@ -40,12 +43,13 @@ public abstract class FormFieldValidator {
     /**
      * Permission to check, or null if this check doesn't require any permission.
      */
-    private final Permission permission;
+    protected final Permission permission;
 
     /**
      * The object to which the permission is checked against.
+     * If {@link #permission} is non-null, must be non-null.
      */
-    private final AccessControlled subject;
+    protected final AccessControlled subject;
 
     /**
      * @param adminOnly
@@ -95,7 +99,14 @@ public abstract class FormFieldValidator {
      */
     public final void process() throws IOException, ServletException {
         if(permission!=null)
-            subject.checkPermission(permission);
+            try {
+                subject.checkPermission(permission);
+            } catch (AccessDeniedException e) {
+                // if the user has hudson-wisde admin permission, all checks are allowed
+                // this is to protect Hudson administrator from broken ACL/SecurityRealm implementation/configuration.
+                if(!Hudson.getInstance().hasPermission(Hudson.ADMINISTER))
+                    throw e;
+            }
 
         check();
     }
@@ -306,13 +317,14 @@ public abstract class FormFieldValidator {
         }
 
         public WorkspaceFileMask(StaplerRequest request, StaplerResponse response, boolean errorIfNotExist) {
-            super(request, response, false);
+            // Require CONFIGURE permission on the job
+            super(request, response, (AbstractProject) request.findAncestor(AbstractProject.class).getObject(), Item.CONFIGURE);
             this.errorIfNotExist = errorIfNotExist;
         }
 
         protected void check() throws IOException, ServletException {
             String value = fixEmpty(request.getParameter("value"));
-            AbstractProject<?,?> p = Hudson.getInstance().getItemByFullName(request.getParameter("job"),AbstractProject.class);
+            AbstractProject<?,?> p = (AbstractProject<?,?>)subject;
 
             if(value==null || p==null) {
                 ok(); // none entered yet, or something is seriously wrong
@@ -368,14 +380,15 @@ public abstract class FormFieldValidator {
         private final boolean expectingFile;
 
         public WorkspaceFilePath(StaplerRequest request, StaplerResponse response, boolean errorIfNotExist, boolean expectingFile) {
-            super(request, response, false);
+            // Require CONFIGURE permission on this job
+            super(request, response, (AbstractProject) request.findAncestor(AbstractProject.class).getObject(), Item.CONFIGURE);
             this.errorIfNotExist = errorIfNotExist;
             this.expectingFile = expectingFile;
         }
 
         protected void check() throws IOException, ServletException {
             String value = fixEmpty(request.getParameter("value"));
-            AbstractProject<?, ?> p = getProject();
+            AbstractProject<?,?> p = (AbstractProject<?,?>)subject;
 
             if(value==null || p==null) {
                 ok(); // none entered yet, or something is seriously wrong
@@ -429,10 +442,6 @@ public abstract class FormFieldValidator {
         protected FilePath getBaseDirectory(AbstractProject<?,?> p) {
             return p.getWorkspace();
         }
-
-        protected AbstractProject<?,?> getProject() {
-            return Hudson.getInstance().getItemByFullName(request.getParameter("job"),AbstractProject.class);
-        }
     }
 
     /**
@@ -451,6 +460,7 @@ public abstract class FormFieldValidator {
     public static class Executable extends FormFieldValidator {
 
         public Executable(StaplerRequest request, StaplerResponse response) {
+            // Require admin permission
             super(request, response, true);
         }
 
