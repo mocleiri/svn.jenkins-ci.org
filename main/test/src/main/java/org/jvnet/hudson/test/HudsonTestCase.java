@@ -20,6 +20,7 @@ import hudson.model.Run;
 import hudson.model.Result;
 import hudson.model.Node.Mode;
 import hudson.model.JDK;
+import hudson.model.Label;
 import hudson.tasks.Mailer;
 import hudson.tasks.Maven;
 import hudson.tasks.Maven.MavenInstallation;
@@ -300,15 +301,19 @@ public abstract class HudsonTestCase extends TestCase {
         return env.temporaryDirectoryAllocator.allocate();
     }
 
+    public DumbSlave createSlave() throws Exception {
+        return createSlave(null);
+    }
+
     /**
      * Creates and launches a new slave on the local host.
      */
-    public DumbSlave createSlave() throws Exception {
+    public DumbSlave createSlave(Label l) throws Exception {
         CommandLauncher launcher = new CommandLauncher(
                 System.getProperty("java.home") + "/bin/java -jar " + hudson.getJnlpJars("slave.jar").getURL().getPath());
 
         DumbSlave slave = new DumbSlave("slave" + hudson.getNodes().size(), "dummy",
-                createTmpDir().getPath(), "1", Mode.NORMAL, "", launcher, RetentionStrategy.NOOP);
+                createTmpDir().getPath(), "1", Mode.NORMAL, l==null?"":l.getName(), launcher, RetentionStrategy.NOOP);
         hudson.addNode(slave);
         return slave;
     }

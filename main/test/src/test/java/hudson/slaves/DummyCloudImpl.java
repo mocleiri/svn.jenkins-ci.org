@@ -36,6 +36,11 @@ public class DummyCloudImpl extends Cloud {
     // stats counter to perform assertions later
     public int numProvisioned;
 
+    /**
+     * Only reacts to provisioning for this label.
+     */
+    public Label label;
+
     public DummyCloudImpl(HudsonTestCase caller, int delay) {
         super("test");
         this.caller = caller;
@@ -44,6 +49,8 @@ public class DummyCloudImpl extends Cloud {
 
     public Collection<PlannedNode> provision(Label label, int excessWorkload) {
         List<PlannedNode> r = new ArrayList<PlannedNode>();
+        if(label!=this.label)   return r;   // provisioning impossible
+
         while(excessWorkload>0) {
             System.out.println("Provisioning");
             numProvisioned++;
@@ -52,6 +59,10 @@ public class DummyCloudImpl extends Cloud {
             excessWorkload-=1;
         }
         return r;
+    }
+
+    public boolean canProvision(Label label) {
+        return label==this.label;
     }
 
     private final class Launcher implements Callable<Node> {
@@ -71,7 +82,7 @@ public class DummyCloudImpl extends Cloud {
             Thread.sleep(time);
             
             System.out.println("launching slave");
-            DumbSlave slave = caller.createSlave();
+            DumbSlave slave = caller.createSlave(label);
             computer = slave.toComputer();
             computer.connect(false).get();
             synchronized (DummyCloudImpl.this) {

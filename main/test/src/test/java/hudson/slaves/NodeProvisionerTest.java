@@ -6,8 +6,10 @@ import hudson.model.FreeStyleProject;
 import hudson.model.LoadStatistics;
 import hudson.model.Node;
 import hudson.model.Result;
+import hudson.model.Label;
 import org.jvnet.hudson.test.HudsonTestCase;
 import org.jvnet.hudson.test.SleepBuilder;
+import org.jvnet.hudson.test.LenientRunnable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,7 +70,7 @@ public class NodeProvisionerTest extends HudsonTestCase {
             verifySuccessfulCompletion(buildAll(create5SlowJobs()));
 
             // the time it takes to complete a job is eternally long compared to the time it takes to launch
-            // a new slave, so in this scenario we end up allocating 10 slaves for 10 jobs.
+            // a new slave, so in this scenario we end up allocating 5 slaves for 5 jobs.
             assertEquals(5,cloud.numProvisioned);
         } finally {
             bc.abort();
@@ -90,6 +92,42 @@ public class NodeProvisionerTest extends HudsonTestCase {
 
             // we should have used two static slaves, thus only 3 slaves should have been provisioned
             assertEquals(3,cloud.numProvisioned);
+        } finally {
+            bc.abort();
+        }
+    }
+
+    /**
+     * Scenario: loads on one label shouldn't translate to load on another label.
+     */
+    public void testLabels() throws Exception {
+        BulkChange bc = new BulkChange(hudson);
+        try {
+            DummyCloudImpl cloud = initHudson(0);
+            Label blue = hudson.getLabel("blue");
+            Label red = hudson.getLabel("red");
+            cloud.label = red;
+
+            // red jobs
+            List<FreeStyleProject> redJobs = create5SlowJobs();
+            for (FreeStyleProject p : redJobs)
+                p.setAssignedLabel(red);
+
+            // blue jobs
+            List<FreeStyleProject> blueJobs = create5SlowJobs();
+            for (FreeStyleProject p : blueJobs)
+                p.setAssignedLabel(blue);
+
+            // build all
+            List<Future<FreeStyleBuild>> blueBuilds = buildAll(blueJobs);
+            verifySuccessfulCompletion(buildAll(redJobs));
+
+            // cloud should only give us 5 nodes for 5 red jobs
+            assertEquals(5,cloud.numProvisioned);
+
+            // and all blue jobs should be still stuck in the queue
+            for (Future<FreeStyleBuild> bb : blueBuilds)
+                assertFalse(bb.isDone());
         } finally {
             bc.abort();
         }
@@ -127,7 +165,7 @@ public class NodeProvisionerTest extends HudsonTestCase {
      * Builds all the given projects at once.
      */
     private List<Future<FreeStyleBuild>> buildAll(List<FreeStyleProject> jobs) {
-        System.out.println("Scheduling a build");
+        System.out.println("Scheduling builds for "+jobs.size()+" jobs");
         List<Future<FreeStyleBuild>> builds = new ArrayList<Future<FreeStyleBuild>>();
         for (FreeStyleProject job : jobs)
             builds.add(job.scheduleBuild2(0));
