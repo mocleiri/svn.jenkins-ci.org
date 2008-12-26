@@ -1110,6 +1110,11 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     }
 
     public void setNodes(List<? extends Node> nodes) throws IOException {
+        // make sure that all names are unique
+        Set<String> names = new HashSet<String>();
+        for (Node n : nodes)
+            if(!names.add(n.getNodeName()))
+                throw new IllegalArgumentException(n.getNodeName()+" is defined more than once");
         this.slaves = new NodeList(nodes);
         updateComputerList();
         trimLabels();

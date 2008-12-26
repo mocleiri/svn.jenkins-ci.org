@@ -312,10 +312,13 @@ public abstract class HudsonTestCase extends TestCase {
         CommandLauncher launcher = new CommandLauncher(
                 System.getProperty("java.home") + "/bin/java -jar " + hudson.getJnlpJars("slave.jar").getURL().getPath());
 
-        DumbSlave slave = new DumbSlave("slave" + hudson.getNodes().size(), "dummy",
-                createTmpDir().getPath(), "1", Mode.NORMAL, l==null?"":l.getName(), launcher, RetentionStrategy.NOOP);
-        hudson.addNode(slave);
-        return slave;
+        // this synchronization block is so that we don't end up adding the same slave name more than once.
+        synchronized (hudson) {
+            DumbSlave slave = new DumbSlave("slave" + hudson.getNodes().size(), "dummy",
+                    createTmpDir().getPath(), "1", Mode.NORMAL, l==null?"":l.getName(), launcher, RetentionStrategy.NOOP);
+            hudson.addNode(slave);
+            return slave;
+        }
     }
 
     /**
