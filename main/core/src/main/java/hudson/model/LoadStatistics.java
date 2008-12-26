@@ -52,6 +52,11 @@ public abstract class LoadStatistics {
     public abstract int computeIdleExecutors();
 
     /**
+     * Computes the # of total executors right now and obtains the snapshot value.
+     */
+    public abstract int computeTotalExecutors();
+
+    /**
      * Computes the # of queue length right now and obtains the snapshot value.
      */
     public abstract int computeQueueLength();

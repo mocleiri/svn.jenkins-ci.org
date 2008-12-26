@@ -27,6 +27,11 @@ public class OverallLoadStatistics extends LoadStatistics {
     }
 
     @Override
+    public int computeTotalExecutors() {
+        return Hudson.getInstance().getComputer().getTotalExecutors();
+    }
+
+    @Override
     public int computeQueueLength() {
         return Hudson.getInstance().getQueue().countBuildableItemsFor(null);
     }

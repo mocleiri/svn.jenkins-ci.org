@@ -82,7 +82,7 @@ public class NodeProvisioner {
         for (Iterator<PlannedNode> itr = pendingLaunches.iterator(); itr.hasNext();) {
             PlannedNode f = itr.next();
             if(f.future.isDone()) {
-                LOGGER.fine(f.displayName+" provisioning completed.");
+                LOGGER.info(f.displayName+" provisioning completed. We have now "+hudson.getComputers().length+" computer(s)");
                 try {
                     f.future.get();
                 } catch (InterruptedException e) {
@@ -129,7 +129,8 @@ public class NodeProvisioner {
          */
 
         int idleSnapshot = stat.computeIdleExecutors();
-        float idle = Math.min(stat.getLatestIdleExecutors(PICKER), idleSnapshot);
+        int totalSnapshot = stat.computeTotalExecutors();
+        float idle = Math.max(stat.getLatestIdleExecutors(PICKER), idleSnapshot);
         if(idle<MARGIN) {
             // make sure the system is fully utilized before attempting any new launch.
 
@@ -141,7 +142,7 @@ public class NodeProvisioner {
 
             float excessWorkload = qlen - plannedCapacity;
             if(excessWorkload>1-MARGIN) {// and there's more work to do...
-                LOGGER.info("Excess workload "+excessWorkload+" detected. (planned capacity="+plannedCapacity+",Qlen="+qlen+",idle="+idle+"&"+idleSnapshot+")");
+                LOGGER.info("Excess workload "+excessWorkload+" detected. (planned capacity="+plannedCapacity+",Qlen="+qlen+",idle="+idle+"&"+idleSnapshot+",total="+totalSnapshot+")");
                 for( Cloud c : hudson.clouds ) {
                     if(excessWorkload<0)    break;  // enough slaves allocated
 
@@ -153,8 +154,8 @@ public class NodeProvisioner {
 
                     Collection<PlannedNode> additionalCapacities = c.provision(label, (int)Math.round(Math.floor(excessWorkload+MARGIN)));
                     for (PlannedNode ac : additionalCapacities) {
-                        LOGGER.info("Provisioned "+ac.displayName+" from "+c.name+" with "+ac.numExecutors+" executors. Remaining excess workload:"+excessWorkload);
                         excessWorkload -= ac.numExecutors;
+                        LOGGER.info("Started provisioning "+ac.displayName+" from "+c.name+" with "+ac.numExecutors+" executors. Remaining excess workload:"+excessWorkload);
                     }
                     pendingLaunches.addAll(additionalCapacities);
                 }

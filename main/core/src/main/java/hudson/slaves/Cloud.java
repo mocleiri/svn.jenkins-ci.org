@@ -56,6 +56,11 @@ public abstract class Cloud extends AbstractModelObject implements ExtensionPoin
     public abstract Collection<PlannedNode> provision(Label label, int excessWorkload);
 
     /**
+     * Returns true if this cloud is capable of provisioning new nodes for the given label.
+     */
+    public abstract boolean canProvision(Label label);
+
+    /**
      * All registered {@link Cloud} implementations.
      */
     public static final DescriptorList<Cloud> ALL = new DescriptorList<Cloud>();
