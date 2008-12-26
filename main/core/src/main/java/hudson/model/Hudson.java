@@ -1,6 +1,8 @@
 package hudson.model;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.mapper.Mapper;
+import com.thoughtworks.xstream.converters.collections.AbstractCollectionConverter;
 import hudson.BulkChange;
 import hudson.FilePath;
 import hudson.Functions;
@@ -246,8 +248,19 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     /**
      * Active {@link Cloud}s.
      */
-    public final DescribableList<Cloud,Descriptor<Cloud>> clouds = new DescribableList<Cloud,Descriptor<Cloud>>(this);
-    
+    public final CloudList clouds = new CloudList(this);
+
+    public static class CloudList extends DescribableList<Cloud,Descriptor<Cloud>> {
+        public CloudList(Hudson h) {
+            super(h);
+        }
+
+        protected void onModified() throws IOException {
+            super.onModified();
+            Hudson.getInstance().trimLabels();
+        }
+    }
+
     /**
      * Set of installed cluster nodes.
      * <p>
@@ -979,7 +992,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     public Set<Label> getLabels() {
         Set<Label> r = new TreeSet<Label>();
         for (Label l : labels.values()) {
-            if(!l.getNodes().isEmpty())
+            if(!l.isEmpty())
                 r.add(l);
         }
         return r;
@@ -1099,16 +1112,20 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
     public void setNodes(List<? extends Node> nodes) throws IOException {
         this.slaves = new NodeList(nodes);
         updateComputerList();
+        trimLabels();
+        save();
+    }
 
-        // label trim off
+    /**
+     * Resets all labels and remove invalid ones.
+     */
+    private void trimLabels() {
         for (Iterator<Label> itr = labels.values().iterator(); itr.hasNext();) {
             Label l = itr.next();
             l.reset();
-            if(l.getNodes().isEmpty())
+            if(l.isEmpty())
                 itr.remove();
         }
-
-        save();
     }
 
     public NodeDescriptor getDescriptor() {
@@ -1681,6 +1698,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
         }
         ExternalJob.reloadThread.interrupt();
         Trigger.timer.cancel();
+        // TODO: how to wait for the completion of the last job?
         Trigger.timer = null;
         if(tcpSlaveAgentListener!=null)
             tcpSlaveAgentListener.shutdown();

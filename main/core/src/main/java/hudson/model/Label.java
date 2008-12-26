@@ -1,7 +1,9 @@
 package hudson.model;
 
 import hudson.Util;
+import hudson.util.Secret;
 import hudson.slaves.NodeProvisioner;
+import hudson.slaves.Cloud;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
 
@@ -10,6 +12,12 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.thoughtworks.xstream.converters.Converter;
+import com.thoughtworks.xstream.converters.MarshallingContext;
+import com.thoughtworks.xstream.converters.UnmarshallingContext;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 
 /**
  * Group of {@link Node}s.
@@ -22,6 +30,7 @@ import java.util.Set;
 public class Label implements Comparable<Label>, ModelObject {
     private final String name;
     private volatile Set<Node> nodes;
+    private volatile Set<Cloud> clouds;
 
     public final LoadStatistics load;
     public final NodeProvisioner nodeProvisioner;
@@ -34,6 +43,12 @@ public class Label implements Comparable<Label>, ModelObject {
             public int computeIdleExecutors() {
                 return Label.this.getIdleExecutors();
             }
+
+            @Override
+            public int computeTotalExecutors() {
+                return Label.this.getTotalExecutors();
+            }
+
             @Override
             public int computeQueueLength() {
                 return Hudson.getInstance().getQueue().countBuildableItemsFor(Label.this);
@@ -70,13 +85,30 @@ public class Label implements Comparable<Label>, ModelObject {
             Hudson h = Hudson.getInstance();
             if(h.getAssignedLabels().contains(this))
                 r.add(h);
-            for (Slave s : h.getSlaves()) {
-                if(s.getAssignedLabels().contains(this))
-                    r.add(s);
+            for (Node n : h.getNodes()) {
+                if(n.getAssignedLabels().contains(this))
+                    r.add(n);
             }
             nodes = Collections.unmodifiableSet(r);
         }
         return nodes;
+    }
+
+    /**
+     * Gets all {@link Cloud}s that can launch for this label.
+     */
+    @Exported
+    public Set<Cloud> getClouds() {
+        if(clouds==null) {
+            Set<Cloud> r = new HashSet<Cloud>();
+            Hudson h = Hudson.getInstance();
+            for (Cloud c : h.clouds) {
+                if(c.canProvision(this))
+                    r.add(c);
+            }
+            clouds = Collections.unmodifiableSet(r);
+        }
+        return clouds;
     }
 
     /**
@@ -178,12 +210,17 @@ public class Label implements Comparable<Label>, ModelObject {
         return getNodes().contains(node);
     }
 
+    /**
+     * If there's no such label defined in {@link Node} or {@link Cloud}.
+     * This is usually used as a signal that this label is invalid.
+     */
     public boolean isEmpty() {
-        return getNodes().isEmpty();
+        return getNodes().isEmpty() && getClouds().isEmpty();
     }
     
     /*package*/ void reset() {
         nodes = null;
+        clouds = null;
     }
 
     /**
@@ -207,5 +244,28 @@ public class Label implements Comparable<Label>, ModelObject {
 
     public int compareTo(Label that) {
         return this.name.compareTo(that.name);
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public static final class ConverterImpl implements Converter {
+        public ConverterImpl() {
+        }
+
+        public boolean canConvert(Class type) {
+            return type==Label.class;
+        }
+
+        public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+            Label src = (Label) source;
+            writer.setValue(src.getName());
+        }
+
+        public Object unmarshal(HierarchicalStreamReader reader, final UnmarshallingContext context) {
+            return Hudson.getInstance().getLabel(reader.getValue());
+        }
     }
 }
