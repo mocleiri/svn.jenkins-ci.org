@@ -708,7 +708,7 @@ public final class Hudson extends View implements ItemGroup<TopLevelItem>, Node,
             Set<Computer> used = new HashSet<Computer>();
 
             updateComputer(this, byName, used);
-            for (Node s : getSlaves())
+            for (Node s : getNodes())
                 updateComputer(s, byName, used);
 
             // find out what computers are removed, and kill off all executors.
