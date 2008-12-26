@@ -11,10 +11,11 @@ import hudson.triggers.SafeTimerTask;
 import hudson.triggers.Trigger;
 
 import java.util.concurrent.Future;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.List;
 import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -53,7 +54,7 @@ public class NodeProvisioner {
      */
     private final Label label;
 
-    private List<PlannedNode> pendingLaunches = new CopyOnWriteArrayList<PlannedNode>();
+    private List<PlannedNode> pendingLaunches = new ArrayList<PlannedNode>();
 
     /**
      * Exponential moving average of the "planned capacity" over time, which is the number of
@@ -78,8 +79,10 @@ public class NodeProvisioner {
 
         // clean up the cancelled launch activity, then count the # of executors that we are about to bring up.
         float plannedCapacity = 0;
-        for (PlannedNode f : pendingLaunches) {
+        for (Iterator<PlannedNode> itr = pendingLaunches.iterator(); itr.hasNext();) {
+            PlannedNode f = itr.next();
             if(f.future.isDone()) {
+                LOGGER.fine(f.displayName+" provisioning completed.");
                 try {
                     f.future.get();
                 } catch (InterruptedException e) {
@@ -87,10 +90,9 @@ public class NodeProvisioner {
                 } catch (ExecutionException e) {
                     LOGGER.log(Level.WARNING, "Provisioned slave failed to launch",e.getCause());
                 }
-                pendingLaunches.remove(f);
-                continue;
-            }
-            plannedCapacity += f.numExecutors;
+                itr.remove();
+            } else
+                plannedCapacity += f.numExecutors;
         }
         plannedCapacitiesEMA.update(plannedCapacity);
 
@@ -126,7 +128,8 @@ public class NodeProvisioner {
             estimate won't create a starvation.
          */
 
-        float idle = Math.min(stat.getLatestIdleExecutors(PICKER),stat.computeIdleExecutors());
+        int idleSnapshot = stat.computeIdleExecutors();
+        float idle = Math.min(stat.getLatestIdleExecutors(PICKER), idleSnapshot);
         if(idle<MARGIN) {
             // make sure the system is fully utilized before attempting any new launch.
 
@@ -138,7 +141,7 @@ public class NodeProvisioner {
 
             float excessWorkload = qlen - plannedCapacity;
             if(excessWorkload>1-MARGIN) {// and there's more work to do...
-                LOGGER.info("Excess workload "+excessWorkload+" detected. (planned capacity="+plannedCapacity+",Qlen="+qlen+")");
+                LOGGER.info("Excess workload "+excessWorkload+" detected. (planned capacity="+plannedCapacity+",Qlen="+qlen+",idle="+idle+"&"+idleSnapshot+")");
                 for( Cloud c : hudson.clouds ) {
                     if(excessWorkload<0)    break;  // enough slaves allocated
 
