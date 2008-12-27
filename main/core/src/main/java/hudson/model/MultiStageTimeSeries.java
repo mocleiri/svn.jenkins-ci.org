@@ -1,5 +1,7 @@
 package hudson.model;
 
+import hudson.util.TimeUnit2;
+
 /**
  * Maintains several {@link TimeSeries} with different update frequencies to satisfy three goals;
  * (1) retain data over long timespan, (2) save memory, and (3) retain accurate data for the recent past.
@@ -34,8 +36,8 @@ public class MultiStageTimeSeries {
      * Call this method every 10 sec and supply a new data point.
      */
     public void update(float f) {
-        sec10.update(f);
         counter = (counter+1)%360;   // 1hour/10sec = 60mins/10sec=3600secs/10sec = 360
+        sec10.update(f);
         if(counter%6==0)    min.update(f);
         if(counter==0)      hour.update(f);
     }
@@ -62,5 +64,19 @@ public class MultiStageTimeSeries {
     /**
      * Choose which datapoint to use.
      */
-    public enum Picker { SEC10, MIN, HOUR }
+    public enum Picker {
+        SEC10(TimeUnit2.SECONDS.toMillis(10)),
+        MIN(TimeUnit2.MINUTES.toMillis(1)),
+        HOUR(TimeUnit2.HOURS.toMillis(1));
+
+        /**
+         * Number of milliseconds (10 secs, 1 min, and 1 hour)
+         * that this constant represents.
+         */
+        public final long tick;
+
+        Picker(long tick) {
+            this.tick = tick;
+        }
+    }
 }
