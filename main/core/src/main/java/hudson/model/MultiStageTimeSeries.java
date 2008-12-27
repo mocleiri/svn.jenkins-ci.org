@@ -43,10 +43,10 @@ public class MultiStageTimeSeries {
     }
 
     /**
-     * Picks a {@link TimeSeries}.
+     * Selects a {@link TimeSeries}.
      */
-    public TimeSeries pick(Picker picker) {
-        switch (picker) {
+    public TimeSeries pick(TimeScale timeScale) {
+        switch (timeScale) {
         case HOUR:  return hour;
         case MIN:   return min;
         case SEC10: return sec10;
@@ -57,14 +57,14 @@ public class MultiStageTimeSeries {
     /**
      * Gets the most up-to-date data point value.
      */
-    public float getLatest(Picker picker) {
-        return pick(picker).getLatest();
+    public float getLatest(TimeScale timeScale) {
+        return pick(timeScale).getLatest();
     }
 
     /**
      * Choose which datapoint to use.
      */
-    public enum Picker {
+    public enum TimeScale {
         SEC10(TimeUnit2.SECONDS.toMillis(10)),
         MIN(TimeUnit2.MINUTES.toMillis(1)),
         HOUR(TimeUnit2.HOURS.toMillis(1));
@@ -75,7 +75,7 @@ public class MultiStageTimeSeries {
          */
         public final long tick;
 
-        Picker(long tick) {
+        TimeScale(long tick) {
             this.tick = tick;
         }
     }

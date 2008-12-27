@@ -1,6 +1,6 @@
 package hudson.model;
 
-import hudson.model.MultiStageTimeSeries.Picker;
+import hudson.model.MultiStageTimeSeries.TimeScale;
 import hudson.triggers.SafeTimerTask;
 import hudson.triggers.Trigger;
 import hudson.util.ColorPalette;
@@ -58,8 +58,8 @@ public abstract class LoadStatistics {
         this.queueLength = new MultiStageTimeSeries(0,DECAY);
     }
 
-    public float getLatestIdleExecutors(Picker picker) {
-        return totalExecutors.pick(picker).getLatest() - busyExecutors.pick(picker).getLatest();
+    public float getLatestIdleExecutors(TimeScale timeScale) {
+        return totalExecutors.pick(timeScale).getLatest() - busyExecutors.pick(timeScale).getLatest();
     }
 
     /**
@@ -80,7 +80,7 @@ public abstract class LoadStatistics {
     /**
      * Creates a trend chart.
      */
-    public JFreeChart createChart(Picker timeScale) {
+    public JFreeChart createChart(TimeScale timeScale) {
 
         float[] b = busyExecutors.pick(timeScale).getHistory();
         float[] t = totalExecutors.pick(timeScale).getHistory();

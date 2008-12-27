@@ -1,6 +1,6 @@
 package hudson.model;
 
-import hudson.model.MultiStageTimeSeries.Picker;
+import hudson.model.MultiStageTimeSeries.TimeScale;
 import junit.framework.TestCase;
 import org.jfree.chart.JFreeChart;
 
@@ -40,7 +40,7 @@ public class LoadStatisticsTest extends TestCase {
             ls.queueLength.update(1);
         }
 
-        JFreeChart chart = ls.createChart(Picker.SEC10);
+        JFreeChart chart = ls.createChart(TimeScale.SEC10);
         BufferedImage image = chart.createBufferedImage(400,200);
         ImageIO.write(image, "PNG", new FileOutputStream("chart.png"));
     }

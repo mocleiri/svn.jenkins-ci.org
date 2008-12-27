@@ -6,7 +6,7 @@ import hudson.model.Hudson;
 import hudson.model.MultiStageTimeSeries;
 import hudson.model.Label;
 import static hudson.model.LoadStatistics.DECAY;
-import hudson.model.MultiStageTimeSeries.Picker;
+import hudson.model.MultiStageTimeSeries.TimeScale;
 import hudson.triggers.SafeTimerTask;
 import hudson.triggers.Trigger;
 
@@ -130,15 +130,15 @@ public class NodeProvisioner {
 
         int idleSnapshot = stat.computeIdleExecutors();
         int totalSnapshot = stat.computeTotalExecutors();
-        float idle = Math.max(stat.getLatestIdleExecutors(PICKER), idleSnapshot);
+        float idle = Math.max(stat.getLatestIdleExecutors(TIME_SCALE), idleSnapshot);
         if(idle<MARGIN) {
             // make sure the system is fully utilized before attempting any new launch.
 
             // this is the amount of work left to be done
-            float qlen = Math.min(stat.queueLength.getLatest(PICKER), stat.computeQueueLength());
+            float qlen = Math.min(stat.queueLength.getLatest(TIME_SCALE), stat.computeQueueLength());
 
             // ... and this is the additional executors we've already provisioned.
-            plannedCapacity = Math.max(plannedCapacitiesEMA.getLatest(PICKER),plannedCapacity);
+            plannedCapacity = Math.max(plannedCapacitiesEMA.getLatest(TIME_SCALE),plannedCapacity);
 
             float excessWorkload = qlen - plannedCapacity;
             if(excessWorkload>1-MARGIN) {// and there's more work to do...
@@ -184,5 +184,5 @@ public class NodeProvisioner {
     private static final Logger LOGGER = Logger.getLogger(NodeProvisioner.class.getName());
 
     // TODO: picker should be selectable
-    private static final MultiStageTimeSeries.Picker PICKER = Picker.SEC10;
+    private static final TimeScale TIME_SCALE = TimeScale.SEC10;
 }
