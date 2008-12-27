@@ -157,6 +157,7 @@ public abstract class HudsonTestCase extends TestCase {
     }
 
     protected void runTest() throws Throwable {
+        System.out.println("=== Starting "+getName());
         new JavaScriptEngine(null);   // ensure that ContextFactory is initialized
         Context cx= ContextFactory.getGlobal().enterContext();
         try {
