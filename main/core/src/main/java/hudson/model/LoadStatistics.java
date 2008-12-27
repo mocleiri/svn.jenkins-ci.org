@@ -1,9 +1,23 @@
 package hudson.model;
 
+import hudson.model.MultiStageTimeSeries.Picker;
 import hudson.triggers.SafeTimerTask;
 import hudson.triggers.Trigger;
-import hudson.model.MultiStageTimeSeries.Picker;
+import hudson.util.ColorPalette;
+import hudson.util.NoOverlapCategoryAxis;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.ui.RectangleInsets;
 
+import java.awt.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -60,6 +74,66 @@ public abstract class LoadStatistics {
      * Computes the # of queue length right now and obtains the snapshot value.
      */
     public abstract int computeQueueLength();
+
+    /**
+     * Creates a trend chart.
+     */
+    public JFreeChart createChart(Picker timeScale) {
+        Date dt = new Date();
+
+        float[] b = busyExecutors.pick(timeScale).getHistory();
+        float[] t = totalExecutors.pick(timeScale).getHistory();
+        float[] q = queueLength.pick(timeScale).getHistory();
+        assert b.length==t.length && t.length==q.length;
+
+        DefaultCategoryDataset ds = new DefaultCategoryDataset();
+
+        for (int i = q.length-1; i>=0; i--) {
+            ds.addValue(t[i],"Total executors",dt);
+            ds.addValue(b[i],"Busy executors",dt);
+            ds.addValue(q[i],"Queue length",dt);
+            dt = new Date(dt.getTime()-timeScale.tick);
+        }
+
+        final JFreeChart chart = ChartFactory.createLineChart(null, // chart title
+                null, // unused
+                null, // range axis label
+                ds, // data
+                PlotOrientation.VERTICAL, // orientation
+                true, // include legend
+                true, // tooltips
+                false // urls
+                );
+
+        chart.setBackgroundPaint(Color.white);
+
+        final CategoryPlot plot = chart.getCategoryPlot();
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setOutlinePaint(null);
+        plot.setRangeGridlinesVisible(true);
+        plot.setRangeGridlinePaint(Color.black);
+
+        final LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
+        renderer.setBaseStroke(new BasicStroke(3));
+        renderer.setSeriesPaint(0, ColorPalette.BLUE);  // total
+        renderer.setSeriesPaint(1, ColorPalette.RED);   // busy
+        renderer.setSeriesPaint(2, ColorPalette.GREY);  // queue
+
+        final CategoryAxis domainAxis = new NoOverlapCategoryAxis(null);
+        plot.setDomainAxis(domainAxis);
+        domainAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_90);
+        domainAxis.setLowerMargin(0.0);
+        domainAxis.setUpperMargin(0.0);
+        domainAxis.setCategoryMargin(0.0);
+
+        final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+
+        // crop extra space around the graph
+        plot.setInsets(new RectangleInsets(0, 0, 0, 5.0));
+
+        return chart;
+    }
 
     /**
      * Start updating the load average.
