@@ -9,7 +9,6 @@ import hudson.model.Result;
 import hudson.model.Label;
 import org.jvnet.hudson.test.HudsonTestCase;
 import org.jvnet.hudson.test.SleepBuilder;
-import org.jvnet.hudson.test.LenientRunnable;
 
 import java.io.IOException;
 import java.util.ArrayList;
