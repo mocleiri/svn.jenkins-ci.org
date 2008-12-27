@@ -10,11 +10,8 @@
       <l:task icon="images/24x24/edit-delete.gif" href="${url}/delete" title="${%Delete Slave}" permission="${it.DELETE}" />
       <l:task icon="images/24x24/setting.gif" href="${url}/configure" title="${%Configure}" permission="${it.CONFIGURE}" />
       <l:task icon="images/24x24/notepad.gif" href="${rootURL}/${it.url}builds" title="${%Build History}" />
-      <l:task icon="images/24x24/terminal.gif" href="script" title="${%Script Console}" />
+      <l:task icon="images/24x24/terminal.gif" href="script" title="${%Script Console}" permission="${app.ADMINISTER}" />
       <st:include page="sidepanel2.jelly" optional="true" /><!-- hook for derived class to add more items -->
-      <l:isAdmin>
-        <l:task icon="images/24x24/notepad.gif" href="script" title="${%Script Console}" />
-      </l:isAdmin>
     </l:tasks>
   </l:side-panel>
 </j:jelly>
