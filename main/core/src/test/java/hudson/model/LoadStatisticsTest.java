@@ -42,6 +42,6 @@ public class LoadStatisticsTest extends TestCase {
 
         JFreeChart chart = ls.createChart(Picker.SEC10);
         BufferedImage image = chart.createBufferedImage(400,200);
-        ImageIO.write(image, "PNG", new FileOutputStream("target/chart.png"));
+        ImageIO.write(image, "PNG", new FileOutputStream("chart.png"));
     }
 }

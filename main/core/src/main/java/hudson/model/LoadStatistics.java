@@ -19,6 +19,8 @@ import org.jfree.ui.RectangleInsets;
 import java.awt.*;
 import java.util.Date;
 import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * Utilization statistics for a node or a set of nodes.
@@ -79,7 +81,6 @@ public abstract class LoadStatistics {
      * Creates a trend chart.
      */
     public JFreeChart createChart(Picker timeScale) {
-        Date dt = new Date();
 
         float[] b = busyExecutors.pick(timeScale).getHistory();
         float[] t = totalExecutors.pick(timeScale).getHistory();
@@ -88,11 +89,21 @@ public abstract class LoadStatistics {
 
         DefaultCategoryDataset ds = new DefaultCategoryDataset();
 
+        DateFormat format;
+        switch (timeScale) {
+        case HOUR:  format = new SimpleDateFormat("MMM/dd HH"); break;
+        case MIN:   format = new SimpleDateFormat("HH:mm"); break;
+        case SEC10: format = new SimpleDateFormat("HH:mm:ss"); break;
+        default:    throw new AssertionError();
+        }
+
+        Date dt = new Date(System.currentTimeMillis()-timeScale.tick*q.length);
         for (int i = q.length-1; i>=0; i--) {
-            ds.addValue(t[i],"Total executors",dt);
-            ds.addValue(b[i],"Busy executors",dt);
-            ds.addValue(q[i],"Queue length",dt);
-            dt = new Date(dt.getTime()-timeScale.tick);
+            dt = new Date(dt.getTime()+timeScale.tick);
+            String l = format.format(dt);
+            ds.addValue(t[i],"Total executors",l);
+            ds.addValue(b[i],"Busy executors",l);
+            ds.addValue(q[i],"Queue length",l);
         }
 
         final JFreeChart chart = ChartFactory.createLineChart(null, // chart title
