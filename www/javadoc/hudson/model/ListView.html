@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ListView (Hudson core 1.267 API)
+ListView (Hudson core 1.268 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-24">
+<META NAME="date" CONTENT="2008-12-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ListView (Hudson core 1.267 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ListView (Hudson core 1.267 API)";
+        parent.document.title="ListView (Hudson core 1.268 API)";
     }
 }
 </SCRIPT>
@@ -236,6 +236,14 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ListView.html#getActions()">getActions</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the transient <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s associated with the top page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ListView.html#getDescription()">getDescription</A></B>()</CODE>
 
@@ -272,7 +280,7 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 <TD><CODE><B><A HREF="../../hudson/model/ListView.html#getItems()">getItems</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the transient <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s associated with the top page.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a read-only view of all <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s in this view.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -357,28 +365,35 @@ public <B>ListView</B>(<A HREF="../../hudson/model/Hudson.html" title="class in 
 </TR>
 </TABLE>
 
+<A NAME="getActions()"><!-- --></A><H3>
+getActions</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>getActions</B>()</PRE>
+<DL>
+<DD>Returns the transient <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s associated with the top page.
+<P>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Hudson.html#getActions()"><CODE>Hudson.getActions()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getItems()"><!-- --></A><H3>
 getItems</H3>
 <PRE>
 public java.util.List&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt; <B>getItems</B>()</PRE>
 <DL>
-<DD>Returns the transient <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s associated with the top page.
+<DD>Returns a read-only view of all <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s in this view.
+
+ <p>
+ This method returns a separate copy each time to avoid
+ concurrent modification issue.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#getItems()">getItems</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
 </DD>
 <DD><DL>
-<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Hudson.html#getActions()"><CODE>/
-    public List<Action> getActions() {
-        return Hudson.getInstance().getActions();
-    }
-
-    /**
- Returns a read-only view of all {@link Job}s in this view.
-
- <p>
- This method returns a separate copy each time to avoid
- concurrent modification issue.</CODE></A></DL>
+</DL>
 </DD>
 </DL>
 <HR>

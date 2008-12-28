@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonTestCase (Test harness for Hudson and plugins 1.267 API)
+HudsonTestCase (Test harness for Hudson and plugins 1.268 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-24">
+<META NAME="date" CONTENT="2008-12-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Test harness for Hudson and plugins 1.267 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.267 API)";
+        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.268 API)";
     }
 }
 </SCRIPT>
@@ -195,6 +195,14 @@ Base class for all Hudson test cases.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.util.List&lt;<A HREF="../../../../org/jvnet/hudson/test/recipes/Recipe.Runner.html" title="class in org.jvnet.hudson.test.recipes">Recipe.Runner</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#recipes">recipes</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;org.mortbay.jetty.Server</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#server">server</A></B></CODE>
 
@@ -253,6 +261,14 @@ Base class for all Hudson test cases.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asserts that the outcome of the build is a specific outcome.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatusSuccess(hudson.model.Run)">assertBuildStatusSuccess</A></B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Run.html?is-external=true" title="class or interface in hudson.model">Run</A>&nbsp;r)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -560,6 +576,16 @@ protected java.util.List&lt;<A HREF="../../../../org/jvnet/hudson/test/LenientRu
 <DL>
 <DD><CODE>Runnable</CODE>s to be invoked at <A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#tearDown()"><CODE>tearDown()</CODE></A>.
 <P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="recipes"><!-- --></A><H3>
+recipes</H3>
+<PRE>
+protected java.util.List&lt;<A HREF="../../../../org/jvnet/hudson/test/recipes/Recipe.Runner.html" title="class in org.jvnet.hudson.test.recipes">Recipe.Runner</A>&gt; <B>recipes</B></PRE>
+<DL>
 <DL>
 </DL>
 </DL>
@@ -889,6 +915,20 @@ public void <B>assertBuildStatus</B>(<A HREF="https://hudson.dev.java.net/pom/hu
 <DL>
 <DD>Asserts that the outcome of the build is a specific outcome.
 <P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="assertBuildStatusSuccess(hudson.model.Run)"><!-- --></A><H3>
+assertBuildStatusSuccess</H3>
+<PRE>
+public void <B>assertBuildStatusSuccess</B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Run.html?is-external=true" title="class or interface in hudson.model">Run</A>&nbsp;r)
+                              throws java.lang.Exception</PRE>
+<DL>
 <DD><DL>
 
 <DT><B>Throws:</B>

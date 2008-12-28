@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Test harness for Hudson and plugins 1.267 API)
+Index (Test harness for Hudson and plugins 1.268 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-24">
+<META NAME="date" CONTENT="2008-12-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Test harness for Hudson and plugins 1.267 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Test harness for Hudson and plugins 1.267 API)";
+        parent.document.title="Index (Test harness for Hudson and plugins 1.268 API)";
     }
 }
 </SCRIPT>
@@ -98,6 +98,9 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/Temporary
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatus(hudson.model.Result, hudson.model.Run)"><B>assertBuildStatus(Result, Run)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Asserts that the outcome of the build is a specific outcome.
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatusSuccess(hudson.model.Run)"><B>assertBuildStatusSuccess(Run)</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertLogContains(java.lang.String, hudson.model.Run)"><B>assertLogContains(String, Run)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Asserts that the console output of the build contains the given substring.
@@ -165,6 +168,13 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTes
 <A NAME="_D_"><!-- --></A><H2>
 <B>D</B></H2>
 <DL>
+<DT><A HREF="./org/jvnet/hudson/test/recipes/Recipe.Runner.html#decorateHome(org.jvnet.hudson.test.HudsonTestCase, java.io.File)"><B>decorateHome(HudsonTestCase, File)</B></A> - 
+Method in class org.jvnet.hudson.test.recipes.<A HREF="./org/jvnet/hudson/test/recipes/Recipe.Runner.html" title="class in org.jvnet.hudson.test.recipes">Recipe.Runner</A>
+<DD>Called right before <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Hudson.html?is-external=true#Hudson(java.io.File, javax.servlet.ServletContext)" title="class or interface in hudson.model"><CODE>Hudson.Hudson(File, ServletContext)</CODE></A> is invoked
+ to decorate the hudson home directory.
+<DT><A HREF="./org/jvnet/hudson/test/recipes/WithPlugin.RunnerImpl.html#decorateHome(org.jvnet.hudson.test.HudsonTestCase, java.io.File)"><B>decorateHome(HudsonTestCase, File)</B></A> - 
+Method in class org.jvnet.hudson.test.recipes.<A HREF="./org/jvnet/hudson/test/recipes/WithPlugin.RunnerImpl.html" title="class in org.jvnet.hudson.test.recipes">WithPlugin.RunnerImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/FailureBuilder.html#DESCRIPTOR"><B>DESCRIPTOR</B></A> - 
 Static variable in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/FailureBuilder.html" title="class in org.jvnet.hudson.test">FailureBuilder</A>
 <DD>&nbsp;
@@ -387,6 +397,9 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTes
  the test environment set up.<DT><A HREF="./org/jvnet/hudson/test/recipes/Recipe.Runner.html" title="class in org.jvnet.hudson.test.recipes"><B>Recipe.Runner</B></A>&lt;<A HREF="./org/jvnet/hudson/test/recipes/Recipe.Runner.html" title="type parameter in Recipe.Runner">T</A> extends java.lang.annotation.Annotation&gt; - Class in <A HREF="./org/jvnet/hudson/test/recipes/package-summary.html">org.jvnet.hudson.test.recipes</A><DD>The code that implements the recipe semantics.<DT><A HREF="./org/jvnet/hudson/test/recipes/Recipe.Runner.html#Recipe.Runner()"><B>Recipe.Runner()</B></A> - 
 Constructor for class org.jvnet.hudson.test.recipes.<A HREF="./org/jvnet/hudson/test/recipes/Recipe.Runner.html" title="class in org.jvnet.hudson.test.recipes">Recipe.Runner</A>
 <DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#recipes"><B>recipes</B></A> - 
+Variable in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/LenientRunnable.html#run()"><B>run()</B></A> - 
 Method in interface org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/LenientRunnable.html" title="interface in org.jvnet.hudson.test">LenientRunnable</A>
 <DD>&nbsp;
@@ -413,6 +426,9 @@ Method in class org.jvnet.hudson.test.recipes.<A HREF="./org/jvnet/hudson/test/r
 <DT><A HREF="./org/jvnet/hudson/test/recipes/Recipe.Runner.html#setup(org.jvnet.hudson.test.HudsonTestCase, T)"><B>setup(HudsonTestCase, T)</B></A> - 
 Method in class org.jvnet.hudson.test.recipes.<A HREF="./org/jvnet/hudson/test/recipes/Recipe.Runner.html" title="class in org.jvnet.hudson.test.recipes">Recipe.Runner</A>
 <DD>Called during <CODE>TestCase.setUp()</CODE> to prepare the test environment.
+<DT><A HREF="./org/jvnet/hudson/test/recipes/WithPlugin.RunnerImpl.html#setup(org.jvnet.hudson.test.HudsonTestCase, org.jvnet.hudson.test.recipes.WithPlugin)"><B>setup(HudsonTestCase, WithPlugin)</B></A> - 
+Method in class org.jvnet.hudson.test.recipes.<A HREF="./org/jvnet/hudson/test/recipes/WithPlugin.RunnerImpl.html" title="class in org.jvnet.hudson.test.recipes">WithPlugin.RunnerImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/SingleFileSCM.html" title="class in org.jvnet.hudson.test"><B>SingleFileSCM</B></A> - Class in <A HREF="./org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A><DD><A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/scm/SCM.html?is-external=true" title="class or interface in hudson.scm"><CODE>SCM</CODE></A> useful for testing that puts just one file in the workspace.<DT><A HREF="./org/jvnet/hudson/test/SingleFileSCM.html#SingleFileSCM(java.lang.String, byte[])"><B>SingleFileSCM(String, byte[])</B></A> - 
 Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/SingleFileSCM.html" title="class in org.jvnet.hudson.test">SingleFileSCM</A>
 <DD>&nbsp;
@@ -479,6 +495,9 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTes
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#withNewHome()"><B>withNewHome()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/recipes/WithPlugin.html" title="annotation in org.jvnet.hudson.test.recipes"><B>WithPlugin</B></A> - Annotation Type in <A HREF="./org/jvnet/hudson/test/recipes/package-summary.html">org.jvnet.hudson.test.recipes</A><DD>Installs the specified plugin before launching Hudson.<DT><A HREF="./org/jvnet/hudson/test/recipes/WithPlugin.RunnerImpl.html" title="class in org.jvnet.hudson.test.recipes"><B>WithPlugin.RunnerImpl</B></A> - Class in <A HREF="./org/jvnet/hudson/test/recipes/package-summary.html">org.jvnet.hudson.test.recipes</A><DD>&nbsp;<DT><A HREF="./org/jvnet/hudson/test/recipes/WithPlugin.RunnerImpl.html#WithPlugin.RunnerImpl()"><B>WithPlugin.RunnerImpl()</B></A> - 
+Constructor for class org.jvnet.hudson.test.recipes.<A HREF="./org/jvnet/hudson/test/recipes/WithPlugin.RunnerImpl.html" title="class in org.jvnet.hudson.test.recipes">WithPlugin.RunnerImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#withPresetData(java.lang.String)"><B>withPresetData(String)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>

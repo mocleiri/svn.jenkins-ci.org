@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Recipe.Runner (Test harness for Hudson and plugins 1.267 API)
+Recipe.Runner (Test harness for Hudson and plugins 1.268 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-24">
+<META NAME="date" CONTENT="2008-12-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Recipe.Runner (Test harness for Hudson and plugins 1.267 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Recipe.Runner (Test harness for Hudson and plugins 1.267 API)";
+        parent.document.title="Recipe.Runner (Test harness for Hudson and plugins 1.268 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../../../../org/jvnet/hudson/test/recipes/Recipe.html" title="annotation in org.jvnet.hudson.test.recipes"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;NEXT CLASS</FONT></TD>
+&nbsp;<A HREF="../../../../../org/jvnet/hudson/test/recipes/WithPlugin.html" title="annotation in org.jvnet.hudson.test.recipes"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../../../index.html?org/jvnet/hudson/test/recipes/Recipe.Runner.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Recipe.Runner.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -99,7 +99,7 @@ java.lang.Object
 <DL>
 <DT><DT><B>Type Parameters:</B><DD><CODE>T</CODE> - The recipe annotation associated with this runner.</DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../org/jvnet/hudson/test/recipes/LocalData.RunnerImpl.html" title="class in org.jvnet.hudson.test.recipes">LocalData.RunnerImpl</A>, <A HREF="../../../../../org/jvnet/hudson/test/recipes/PresetData.RunnerImpl.html" title="class in org.jvnet.hudson.test.recipes">PresetData.RunnerImpl</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../org/jvnet/hudson/test/recipes/LocalData.RunnerImpl.html" title="class in org.jvnet.hudson.test.recipes">LocalData.RunnerImpl</A>, <A HREF="../../../../../org/jvnet/hudson/test/recipes/PresetData.RunnerImpl.html" title="class in org.jvnet.hudson.test.recipes">PresetData.RunnerImpl</A>, <A HREF="../../../../../org/jvnet/hudson/test/recipes/WithPlugin.RunnerImpl.html" title="class in org.jvnet.hudson.test.recipes">WithPlugin.RunnerImpl</A></DD>
 </DL>
 <DL>
 <DT><B>Enclosing class:</B><DD><A HREF="../../../../../org/jvnet/hudson/test/recipes/Recipe.html" title="annotation in org.jvnet.hudson.test.recipes">Recipe</A></DD>
@@ -141,6 +141,16 @@ The code that implements the recipe semantics.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/jvnet/hudson/test/recipes/Recipe.Runner.html#decorateHome(org.jvnet.hudson.test.HudsonTestCase, java.io.File)">decorateHome</A></B>(<A HREF="../../../../../org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>&nbsp;testCase,
+             java.io.File&nbsp;home)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called right before <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Hudson.html?is-external=true#Hudson(java.io.File, javax.servlet.ServletContext)" title="class or interface in hudson.model"><CODE>Hudson.Hudson(File, ServletContext)</CODE></A> is invoked
+ to decorate the hudson home directory.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -217,6 +227,24 @@ public void <B>setup</B>(<A HREF="../../../../../org/jvnet/hudson/test/HudsonTes
 </DL>
 <HR>
 
+<A NAME="decorateHome(org.jvnet.hudson.test.HudsonTestCase, java.io.File)"><!-- --></A><H3>
+decorateHome</H3>
+<PRE>
+public void <B>decorateHome</B>(<A HREF="../../../../../org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>&nbsp;testCase,
+                         java.io.File&nbsp;home)
+                  throws java.lang.Exception</PRE>
+<DL>
+<DD>Called right before <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Hudson.html?is-external=true#Hudson(java.io.File, javax.servlet.ServletContext)" title="class or interface in hudson.model"><CODE>Hudson.Hudson(File, ServletContext)</CODE></A> is invoked
+ to decorate the hudson home directory.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="tearDown(org.jvnet.hudson.test.HudsonTestCase,java.lang.annotation.Annotation)"><!-- --></A><A NAME="tearDown(org.jvnet.hudson.test.HudsonTestCase, T)"><!-- --></A><H3>
 tearDown</H3>
 <PRE>
@@ -264,7 +292,7 @@ public void <B>tearDown</B>(<A HREF="../../../../../org/jvnet/hudson/test/Hudson
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../../../../org/jvnet/hudson/test/recipes/Recipe.html" title="annotation in org.jvnet.hudson.test.recipes"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;NEXT CLASS</FONT></TD>
+&nbsp;<A HREF="../../../../../org/jvnet/hudson/test/recipes/WithPlugin.html" title="annotation in org.jvnet.hudson.test.recipes"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../../../index.html?org/jvnet/hudson/test/recipes/Recipe.Runner.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Recipe.Runner.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
