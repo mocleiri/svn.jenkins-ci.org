@@ -205,6 +205,10 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
         return Hudson.getInstance().getNode(nodeName);
     }
 
+    public LoadStatistics getLoadStatistics() {
+        return getNode().getSelfLabel().loadStatistics;
+    }
+
     /**
      * {@inheritDoc}
      */
