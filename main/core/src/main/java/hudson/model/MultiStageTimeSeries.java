@@ -2,6 +2,9 @@ package hudson.model;
 
 import hudson.util.TimeUnit2;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * Maintains several {@link TimeSeries} with different update frequencies to satisfy three goals;
  * (1) retain data over long timespan, (2) save memory, and (3) retain accurate data for the recent past.
@@ -77,6 +80,19 @@ public class MultiStageTimeSeries {
 
         TimeScale(long tick) {
             this.tick = tick;
+        }
+
+        /**
+         * Creates a new {@link DateFormat} suitable for processing
+         * this {@link TimeScale}.
+         */
+        public DateFormat createDateFormat() {
+            switch (this) {
+            case HOUR:  return new SimpleDateFormat("MMM/dd HH");
+            case MIN:   return new SimpleDateFormat("HH:mm");
+            case SEC10: return new SimpleDateFormat("HH:mm:ss");
+            default:    throw new AssertionError();
+            }
         }
     }
 }
