@@ -1,5 +1,8 @@
 package hudson.model;
 
+import hudson.model.MultiStageTimeSeries.TimeScale;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 /**
  * {@link LoadStatistics} for the entire system (the master and all the slaves combined.)
  *
@@ -34,5 +37,19 @@ public class OverallLoadStatistics extends LoadStatistics {
     @Override
     public int computeQueueLength() {
         return Hudson.getInstance().getQueue().countBuildableItemsFor(null);
+    }
+
+    /**
+     * When drawing the overall load statistics, use the total queue length,
+     * not {@link #queueLength}, which just shows jobs that are to be run on the master. 
+     */
+    protected DefaultCategoryDataset createOverallDataset(TimeScale timeScale) {
+        return createDataset(timeScale,
+                new float[][]{
+                    busyExecutors.pick(timeScale).getHistory(),
+                    totalExecutors.pick(timeScale).getHistory(),
+                    totalQueueLength.pick(timeScale).getHistory()
+                },
+                new String[]{"Total executors","Busy executors","Queue length"});
     }
 }

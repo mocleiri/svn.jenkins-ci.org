@@ -15,6 +15,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.ui.RectangleInsets;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
@@ -23,7 +24,6 @@ import org.kohsuke.stapler.StaplerResponse;
 import java.awt.*;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -85,32 +85,7 @@ public abstract class LoadStatistics {
     /**
      * Creates a trend chart.
      */
-    public JFreeChart createChart(TimeScale timeScale) {
-
-        float[] b = busyExecutors.pick(timeScale).getHistory();
-        float[] t = totalExecutors.pick(timeScale).getHistory();
-        float[] q = queueLength.pick(timeScale).getHistory();
-        assert b.length==t.length && t.length==q.length;
-
-        DefaultCategoryDataset ds = new DefaultCategoryDataset();
-
-        DateFormat format;
-        switch (timeScale) {
-        case HOUR:  format = new SimpleDateFormat("MMM/dd HH"); break;
-        case MIN:   format = new SimpleDateFormat("HH:mm"); break;
-        case SEC10: format = new SimpleDateFormat("HH:mm:ss"); break;
-        default:    throw new AssertionError();
-        }
-
-        Date dt = new Date(System.currentTimeMillis()-timeScale.tick*q.length);
-        for (int i = q.length-1; i>=0; i--) {
-            dt = new Date(dt.getTime()+timeScale.tick);
-            String l = format.format(dt);
-            ds.addValue(t[i],"Total executors",l);
-            ds.addValue(b[i],"Busy executors",l);
-            ds.addValue(q[i],"Queue length",l);
-        }
-
+    public JFreeChart createChart(CategoryDataset ds) {
         final JFreeChart chart = ChartFactory.createLineChart(null, // chart title
                 null, // unused
                 null, // range axis label
@@ -131,9 +106,7 @@ public abstract class LoadStatistics {
 
         final LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
         renderer.setBaseStroke(new BasicStroke(3));
-        renderer.setSeriesPaint(0, ColorPalette.BLUE);  // total
-        renderer.setSeriesPaint(1, ColorPalette.RED);   // busy
-        renderer.setSeriesPaint(2, ColorPalette.GREY);  // queue
+        configureRenderer(renderer);
 
         final CategoryAxis domainAxis = new NoOverlapCategoryAxis(null);
         plot.setDomainAxis(domainAxis);
@@ -151,13 +124,53 @@ public abstract class LoadStatistics {
         return chart;
     }
 
+    protected void configureRenderer(LineAndShapeRenderer renderer) {
+        renderer.setSeriesPaint(0, ColorPalette.BLUE);  // total
+        renderer.setSeriesPaint(1, ColorPalette.RED);   // busy
+        renderer.setSeriesPaint(2, ColorPalette.GREY);  // queue
+    }
+
+    /**
+     * Creates {@link CategoryDataset} which then becomes the basis
+     * of the load statistics graph.
+     */
+    public CategoryDataset createDataset(TimeScale timeScale) {
+        return createDataset(timeScale,
+                new float[][]{
+                    busyExecutors.pick(timeScale).getHistory(),
+                    totalExecutors.pick(timeScale).getHistory(),
+                    queueLength.pick(timeScale).getHistory()
+                },
+                new String[]{"Total executors","Busy executors","Queue length"});
+    }
+
+    protected final DefaultCategoryDataset createDataset(TimeScale timeScale, float[][] dataPoints, String[] legends) {
+        assert dataPoints.length==legends.length;
+        int dataLength = dataPoints[0].length;
+        for (float[] dataPoint : dataPoints)
+            assert dataLength ==dataPoint.length;
+
+        DefaultCategoryDataset ds = new DefaultCategoryDataset();
+
+        DateFormat format = timeScale.createDateFormat();
+
+        Date dt = new Date(System.currentTimeMillis()-timeScale.tick*dataLength);
+        for (int i = dataLength-1; i>=0; i--) {
+            dt = new Date(dt.getTime()+timeScale.tick);
+            String l = format.format(dt);
+            for(int j=0; j<dataPoints.length; j++)
+                ds.addValue(dataPoints[j][i],legends[j],l);
+        }
+        return ds;
+    }
+
     /**
      * Generates the load statistics graph.
      */
     public void doGraph(StaplerRequest req, StaplerResponse rsp, @QueryParameter String type) throws IOException {
         if(type==null)   type=TimeScale.MIN.name();
         TimeScale scale = Enum.valueOf(TimeScale.class, type.toUpperCase());
-        ChartUtil.generateGraph(req, rsp, createChart(scale), 500, 400);
+        ChartUtil.generateGraph(req, rsp, createChart(createDataset(scale)), 500, 400);
     }
 
     /**
