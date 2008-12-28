@@ -1,0 +1,11 @@
+<!-- renders an HTML fragment that shows trend graph -->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+  <j:set var="id" value="${h.generateId()}" />
+  <j:set var="url" value="${h.defaulted(prefix,'loadStatistics')}/graph" />
+  <img id="graph${id}" src="${url}" />
+  <div align="right">
+    <a href="#" onclick="document.getElementById('${id}').href='${url}?10sec">10sec</a>
+    <a href="#" onclick="document.getElementById('${id}').href='${url}?min">min</a>
+    <a href="#" onclick="document.getElementById('${id}').href='${url}?hour">hour</a>
+  </div>
+</j:jelly>
