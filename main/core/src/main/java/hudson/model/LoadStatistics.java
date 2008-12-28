@@ -3,6 +3,7 @@ package hudson.model;
 import hudson.model.MultiStageTimeSeries.TimeScale;
 import hudson.triggers.SafeTimerTask;
 import hudson.triggers.Trigger;
+import hudson.util.ChartUtil;
 import hudson.util.ColorPalette;
 import hudson.util.NoOverlapCategoryAxis;
 import org.jfree.chart.ChartFactory;
@@ -15,12 +16,16 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.RectangleInsets;
+import org.kohsuke.stapler.QueryParameter;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
 import java.awt.*;
-import java.util.Date;
-import java.util.List;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Utilization statistics for a node or a set of nodes.
@@ -33,7 +38,7 @@ import java.text.SimpleDateFormat;
  * but it's not clear to me if the loss of autonomy is worth it.
  *
  * @author Kohsuke Kawaguchi
- * @see Label#load
+ * @see Label#loadStatistics
  * @see Hudson#overallLoad
  */
 public abstract class LoadStatistics {
@@ -147,6 +152,15 @@ public abstract class LoadStatistics {
     }
 
     /**
+     * Generates the load statistics graph.
+     */
+    public void doGraph(StaplerRequest req, StaplerResponse rsp, @QueryParameter String type) throws IOException {
+        if(type==null)  type=TimeScale.MIN.name();
+        TimeScale scale = Enum.valueOf(TimeScale.class, type.toUpperCase());
+        ChartUtil.generateGraph(req, rsp, createChart(scale), 500, 400);
+    }
+
+    /**
      * Start updating the load average.
      */
     /*package*/ static void register() {
@@ -158,15 +172,15 @@ public abstract class LoadStatistics {
 
                     // update statistics on slaves
                     for( Label l : h.getLabels() ) {
-                        l.load.totalExecutors.update(l.getTotalExecutors());
-                        l.load.busyExecutors .update(l.getBusyExecutors());
+                        l.loadStatistics.totalExecutors.update(l.getTotalExecutors());
+                        l.loadStatistics.busyExecutors .update(l.getBusyExecutors());
 
                         int q=0;
                         for (Queue.BuildableItem bi : bis) {
                             if(bi.task.getAssignedLabel()==l)
                                 q++;
                         }
-                        l.load.queueLength.update(q);
+                        l.loadStatistics.queueLength.update(q);
                     }
 
                     // update statistics of the entire system

@@ -1,7 +1,6 @@
 package hudson.model;
 
 import hudson.Util;
-import hudson.util.Secret;
 import hudson.slaves.NodeProvisioner;
 import hudson.slaves.Cloud;
 import org.kohsuke.stapler.export.Exported;
@@ -32,13 +31,13 @@ public class Label implements Comparable<Label>, ModelObject {
     private volatile Set<Node> nodes;
     private volatile Set<Cloud> clouds;
 
-    public final LoadStatistics load;
+    public final LoadStatistics loadStatistics;
     public final NodeProvisioner nodeProvisioner;
 
     public Label(String name) {
         this.name = name;
          // passing these causes an infinite loop - getTotalExecutors(),getBusyExecutors());
-        this.load = new LoadStatistics(0,0) {
+        this.loadStatistics = new LoadStatistics(0,0) {
             @Override
             public int computeIdleExecutors() {
                 return Label.this.getIdleExecutors();
@@ -54,7 +53,7 @@ public class Label implements Comparable<Label>, ModelObject {
                 return Hudson.getInstance().getQueue().countBuildableItemsFor(Label.this);
             }
         };
-        this.nodeProvisioner = new NodeProvisioner(this,load);
+        this.nodeProvisioner = new NodeProvisioner(this, loadStatistics);
     }
 
     @Exported
