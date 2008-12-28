@@ -14,4 +14,7 @@
   </div>
   <j:set var="type" value="${h.defaulted(request.getParameter('type'),'min')}" />
   <img src="${h.defaulted(prefix,'loadStatistics')}/graph?type=${type}&amp;width=500&amp;height=300" />
+  <div style="margin-top: 2em;">
+    ${%blurb}
+  </div>
 </j:jelly>
