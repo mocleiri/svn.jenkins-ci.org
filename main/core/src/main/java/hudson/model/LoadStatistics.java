@@ -155,7 +155,7 @@ public abstract class LoadStatistics {
      * Generates the load statistics graph.
      */
     public void doGraph(StaplerRequest req, StaplerResponse rsp, @QueryParameter String type) throws IOException {
-        if(type==null)  type=TimeScale.MIN.name();
+        if(type==null)   type=TimeScale.MIN.name();
         TimeScale scale = Enum.valueOf(TimeScale.class, type.toUpperCase());
         ChartUtil.generateGraph(req, rsp, createChart(scale), 500, 400);
     }

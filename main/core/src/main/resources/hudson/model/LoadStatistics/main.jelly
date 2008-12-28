@@ -1,11 +1,15 @@
 <!-- renders an HTML fragment that shows trend graph -->
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
   <j:set var="id" value="${h.generateId()}" />
-  <j:set var="url" value="${h.defaulted(prefix,'loadStatistics')}/graph" />
-  <img id="graph${id}" src="${url}" />
-  <div align="right">
-    <a href="#" onclick="document.getElementById('${id}').href='${url}?10sec">10sec</a>
-    <a href="#" onclick="document.getElementById('${id}').href='${url}?min">min</a>
-    <a href="#" onclick="document.getElementById('${id}').href='${url}?hour">hour</a>
+  <j:set var="type" value="${h.defaulted(request.getParameter('type'),'min')}" />
+  <j:set var="url" value="${h.defaulted(prefix,'loadStatistics')}/graph?type=${type}&amp;width=500&amp;height=300" />
+  <div>
+    ${%Timespan}:
+    <a href="?type=sec10">${%Short}</a>
+    <st:nbsp />
+    <a href="?type=min">${%Medium}</a>
+    <st:nbsp />
+    <a href="?type=hour">${%Long}</a>
   </div>
+  <img id="${id}" src="${url}" />
 </j:jelly>
