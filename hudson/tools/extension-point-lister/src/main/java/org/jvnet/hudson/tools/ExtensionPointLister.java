@@ -16,7 +16,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.net.URL;
 
 import hudson.plugins.jira.soap.ConfluenceSoapService;
@@ -37,6 +40,14 @@ public class ExtensionPointLister implements AnnotationProcessor {
     }
 
     public void process() {
+        // build type name Map
+        Map<String/*simple name*/,String/*qualified name*/> typeNames = new HashMap<String, String>();
+        for (TypeDeclaration td : env.getTypeDeclarations()) {
+            if(typeNames.put(td.getSimpleName(),td.getQualifiedName())!=null)
+                // conflict
+                typeNames.put(td.getSimpleName(),"");
+        }
+
         // list up extension points
         List<TypeDeclaration> extensionPoints = new ArrayList<TypeDeclaration>();
         for( TypeDeclaration td : env.getTypeDeclarations() )
@@ -64,6 +75,24 @@ public class ExtensionPointLister implements AnnotationProcessor {
                 pw.printf("h4.[%s|%s@javadoc]\n",ep.getSimpleName(),ep.getQualifiedName().replace('.','/'));
                 for( String line : ep.getDocComment().split("\n")) {
                     if(line.trim().length()==0) break;
+
+                    {// replace @link
+                        Matcher m = LINK.matcher(line);
+                        StringBuffer sb = new StringBuffer();
+                        while(m.find()) {
+                            String simpleName = m.group(1);
+                            String fullName = typeNames.get(simpleName);
+                            if(fullName==null || fullName.length()==0) {
+                                // unknown
+                                m.appendReplacement(sb,"{{$1{}}}");
+                            } else {
+                                m.appendReplacement(sb, '['+simpleName+'|'+fullName.replace('.','/')+"@javadoc]");
+                            }
+                        }
+                        m.appendTail(sb);
+                        line = sb.toString();
+                    }
+
                     for (Macro m : MACROS)
                         line = m.replace(line);
                     pw.print(line);
@@ -112,8 +141,9 @@ public class ExtensionPointLister implements AnnotationProcessor {
         }
     }
 
+    private static final Pattern LINK = Pattern.compile("\\{@link ([^}]+)}");
     private static final Macro[] MACROS = new Macro[] {
-        new Macro(Pattern.compile("\\{@link ([^}]+)}"),     "{{$1{}}}"),
+        new Macro(LINK,     "{{$1{}}}"),
         new Macro(Pattern.compile("<tt>([^<]+?)</tt>"),  "{{$1{}}}"),
         new Macro(Pattern.compile("<b>([^<]+?)</b>"),  "*$1*"),
         new Macro(Pattern.compile("<p/?>"),  "\n"),
