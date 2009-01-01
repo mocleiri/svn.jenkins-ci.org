@@ -4,27 +4,36 @@ import com.sun.mirror.apt.AnnotationProcessor;
 import com.sun.mirror.apt.AnnotationProcessorEnvironment;
 import com.sun.mirror.declaration.TypeDeclaration;
 import com.sun.mirror.type.InterfaceType;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.FileUtils;
+import org.jvnet.hudson.confluence.Confluence;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.InputStreamReader;
-import java.util.List;
+import java.io.PrintWriter;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.StringTokenizer;
+import java.util.List;
 import java.util.regex.Pattern;
+import java.net.URL;
 
-import org.apache.commons.io.IOUtils;
+import hudson.plugins.jira.soap.ConfluenceSoapService;
+import hudson.plugins.jira.soap.RemotePage;
+
+import javax.xml.rpc.ServiceException;
 
 /**
  * @author Kohsuke Kawaguchi
  */
 public class ExtensionPointLister implements AnnotationProcessor {
     private final AnnotationProcessorEnvironment env;
+    private final String pageName;
 
-    public ExtensionPointLister(AnnotationProcessorEnvironment env) {
+    public ExtensionPointLister(AnnotationProcessorEnvironment env, String pageName) {
         this.env = env;
+        this.pageName = pageName;
     }
 
     public void process() {
@@ -40,8 +49,13 @@ public class ExtensionPointLister implements AnnotationProcessor {
             }
         });
 
+        // without a proper context classloader Axis dies with NPE.
+        ClassLoader oldCC = Thread.currentThread().getContextClassLoader();
+        Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
+
         try {
-            PrintWriter pw = new PrintWriter("./target/extension-points.wiki");
+            File target = new File("./target/extension-points.wiki");
+            PrintWriter pw = new PrintWriter(target);
             IOUtils.copy(
                     new InputStreamReader(getClass().getResourceAsStream("preamble.txt")),
                     pw);
@@ -59,8 +73,21 @@ public class ExtensionPointLister implements AnnotationProcessor {
             }
 
             pw.close();
+
+            if(pageName!=null) {
+                env.getMessager().printNotice("Uploading to "+pageName);
+                ConfluenceSoapService service = Confluence.connect(new URL("http://hudson.gotdns.com/wiki/"));
+                RemotePage p = service.getPage("", "HUDSON", pageName);
+                p.setContent(FileUtils.readFileToString(target));
+                service.storePage("",p);
+            }
         } catch (IOException e) {
             env.getMessager().printError(e.getMessage());
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            env.getMessager().printError(e.getMessage());
+        } finally {
+            Thread.currentThread().setContextClassLoader(oldCC);
         }
     }
 

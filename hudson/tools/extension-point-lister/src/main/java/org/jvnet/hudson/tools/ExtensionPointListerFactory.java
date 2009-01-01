@@ -21,7 +21,12 @@ public class ExtensionPointListerFactory implements AnnotationProcessorFactory {
         return Collections.singletonList("*");
     }
 
-    public AnnotationProcessor getProcessorFor(Set<AnnotationTypeDeclaration> annotationTypeDeclarations, AnnotationProcessorEnvironment annotationProcessorEnvironment) {
-        return new ExtensionPointLister(annotationProcessorEnvironment); 
+    public AnnotationProcessor getProcessorFor(Set<AnnotationTypeDeclaration> decls, AnnotationProcessorEnvironment env) {
+        String page = null;
+        for( String k : env.getOptions().keySet() ) {
+            if(k.startsWith("-Apage="))
+                page = k.substring(7);
+        }
+        return new ExtensionPointLister(env,page);
     }
 }
