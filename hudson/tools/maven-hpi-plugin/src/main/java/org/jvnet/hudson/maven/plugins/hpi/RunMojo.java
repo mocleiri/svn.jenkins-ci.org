@@ -107,6 +107,10 @@ public class RunMojo extends AbstractJetty6Mojo {
                 hudsonHome = new File("./work");
         }
 
+        // auto-enable stapler trace, unless otherwise configured already.
+        if(System.getProperty("stapler.trace")==null)
+            System.setProperty("stapler.trace","true");
+
         // look for hudson.war
         for( Artifact a : (Set<Artifact>)getProject().getArtifacts() ) {
             if(a.getArtifactId().equals("hudson-war") && a.getType().equals("war")) {
