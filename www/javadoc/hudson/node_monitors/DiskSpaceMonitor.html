@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-DiskSpaceMonitor (Hudson core 1.268 API)
+DiskSpaceMonitor (Hudson core 1.269 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-28">
+<META NAME="date" CONTENT="2009-01-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DiskSpaceMonitor (Hudson core 1.268 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DiskSpaceMonitor (Hudson core 1.268 API)";
+        parent.document.title="DiskSpaceMonitor (Hudson core 1.269 API)";
     }
 }
 </SCRIPT>
@@ -173,6 +173,14 @@ Checks available disk space of the node.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/DiskSpaceMonitor.html#getColumnCaption()">getColumnCaption</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the name of the column to be added to <A HREF="../../hudson/model/ComputerSet.html" title="class in hudson.model"><CODE>ComputerSet</CODE></A> index.jelly.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors">AbstractNodeMonitorDescriptor</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/node_monitors/DiskSpaceMonitor.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
@@ -202,7 +210,7 @@ Checks available disk space of the node.
 <TH ALIGN="left"><B>Methods inherited from class hudson.node_monitors.<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/node_monitors/NodeMonitor.html#data(hudson.model.Computer)">data</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#getAll()">getAll</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#getColumnCaption()">getColumnCaption</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#triggerUpdate()">triggerUpdate</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/node_monitors/NodeMonitor.html#data(hudson.model.Computer)">data</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#getAll()">getAll</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#triggerUpdate()">triggerUpdate</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -307,6 +315,24 @@ public java.lang.String <B>toHtml</B>(long&nbsp;space)</PRE>
 </DL>
 </DD>
 </DL>
+<HR>
+
+<A NAME="getColumnCaption()"><!-- --></A><H3>
+getColumnCaption</H3>
+<PRE>
+public java.lang.String <B>getColumnCaption</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/node_monitors/NodeMonitor.html#getColumnCaption()">NodeMonitor</A></CODE></B></DD>
+<DD>Returns the name of the column to be added to <A HREF="../../hudson/model/ComputerSet.html" title="class in hudson.model"><CODE>ComputerSet</CODE></A> index.jelly.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/node_monitors/NodeMonitor.html#getColumnCaption()">getColumnCaption</A></CODE> in class <CODE><A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>null to not render a column. The convention is to use capitalization like "Foo Bar Zot".</DL>
+</DD>
+</DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
 
@@ -368,6 +394,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2008. All Rights Reserved.
+Copyright &#169; 2009. All Rights Reserved.
 </BODY>
 </HTML>

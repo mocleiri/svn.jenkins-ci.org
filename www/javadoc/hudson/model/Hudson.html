@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.268 API)
+Hudson (Hudson core 1.269 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-28">
+<META NAME="date" CONTENT="2009-01-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.268 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.268 API)";
+        parent.document.title="Hudson (Hudson core 1.269 API)";
     }
 }
 </SCRIPT>
@@ -95,15 +95,14 @@ Class Hudson</H2>
 <PRE>
 java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">hudson.model.AbstractModelObject</A>
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/View.html" title="class in hudson.model">hudson.model.View</A>
-          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Hudson</B>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Hudson</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, org.kohsuke.stapler.StaplerProxy</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, org.kohsuke.stapler.StaplerFallback, org.kohsuke.stapler.StaplerProxy</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>Hudson</B><DT>extends <A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A><DT>implements <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;, <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>, org.kohsuke.stapler.StaplerProxy</DL>
+<DT><PRE>public final class <B>Hudson</B><DT>extends <A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A><DT>implements <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;, <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>, org.kohsuke.stapler.StaplerProxy, org.kohsuke.stapler.StaplerFallback, <A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></DL>
 </PRE>
 
 <P>
@@ -135,17 +134,7 @@ Root object of the system.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
-&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.model.View"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Nested classes/interfaces inherited from class hudson.model.<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/View.People.html" title="class in hudson.model">View.People</A>, <A HREF="../../hudson/model/View.UserInfo.html" title="class in hudson.model">View.UserInfo</A></CODE></TD>
-</TR>
-</TABLE>
-&nbsp;
-<A NAME="nested_classes_inherited_from_class_hudson.model.Node"><!-- --></A>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.model.Node"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.model.<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></B></TH>
@@ -286,6 +275,14 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#VERSION_HASH">VERSION_HASH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash of <A HREF="../../hudson/model/Hudson.html#VERSION"><CODE>VERSION</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#VIEW_RESOURCE_PATH">VIEW_RESOURCE_PATH</A></B></CODE>
 
 <BR>
@@ -298,15 +295,6 @@ Root object of the system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thread-safe reusable <CODE>XStream</CODE>.</TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="fields_inherited_from_class_hudson.model.View"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/View.html#CONFIGURE">CONFIGURE</A>, <A HREF="../../hudson/model/View.html#CREATE">CREATE</A>, <A HREF="../../hudson/model/View.html#DELETE">DELETE</A>, <A HREF="../../hudson/model/View.html#SORTER">SORTER</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -357,7 +345,7 @@ Root object of the system.
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#adminCheck()">adminCheck</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/View.html#checkPermission(hudson.security.Permission)"><CODE>View.checkPermission(Permission)</CODE></A></I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Hudson.html#checkPermission(hudson.security.Permission)"><CODE>checkPermission(Permission)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -366,7 +354,7 @@ Root object of the system.
            org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/View.html#checkPermission(hudson.security.Permission)"><CODE>View.checkPermission(Permission)</CODE></A></I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Hudson.html#checkPermission(hudson.security.Permission)"><CODE>checkPermission(Permission)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -380,18 +368,18 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenient short-cut for <code>getACL().checkPermission(permission)</code></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#cleanUp()">cleanUp</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called to shut down the system.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#contains(hudson.model.TopLevelItem)">contains</A></B>(<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&nbsp;view)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>why are you calling a method that always return true?</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -429,10 +417,10 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#deleteView(hudson.model.ListView)">deleteView</A></B>(<A HREF="../../hudson/model/ListView.html" title="class in hudson.model">ListView</A>&nbsp;view)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#deleteView(hudson.model.View)">deleteView</A></B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes a view in this group.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -480,16 +468,6 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doConfigLogger(org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String)">doConfigLogger</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-               java.lang.String&nbsp;name,
-               java.lang.String&nbsp;level)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Configure the logging level.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
@@ -503,7 +481,7 @@ Root object of the system.
              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> in this collection.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -732,6 +710,15 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doViewExistsCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doViewExistsCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if a top-level view with the given name exists.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doWorkspaceCleanup(org.kohsuke.stapler.StaplerResponse)">doWorkspaceCleanup</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
@@ -752,6 +739,14 @@ Root object of the system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the transient <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s associated with the top page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.kohsuke.stapler.framework.adjunct.AdjunctManager</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getAdjuncts(java.lang.String)">getAdjuncts</A></B>(java.lang.String&nbsp;dummy)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Makes <CODE>AdjunctManager</CODE> URL-bound.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -778,6 +773,14 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>s recursively in the <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model"><CODE>ItemGroup</CODE></A> tree
  and filter them by the given type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getApi()">getApi</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -875,7 +878,7 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getDescription()">getDescription</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message displayed in the top page.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -957,7 +960,7 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getItem(java.lang.String)">getItem</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A> of the given name.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> inside this group that has a given name.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1149,6 +1152,14 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/View.People.html" title="class in hudson.model">View.People</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getPeople()">getPeople</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>
 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
 <TR ALIGN="right" VALIGN="">
@@ -1196,6 +1207,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the plugin objects from their super-class.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getPrimaryView()">getPrimaryView</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the primary <A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> that renders the top-page of Hudson.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1298,6 +1317,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getSearchUrl()">getSearchUrl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the URL of this item relative to the parent <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search"><CODE>SearchItem</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getSecretKey()">getSecretKey</A></B>()</CODE>
 
 <BR>
@@ -1359,6 +1386,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getStaplerFallback()">getStaplerFallback</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fallback to the primary view.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1439,19 +1474,11 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getView(java.lang.String)">getView</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a view of the given name.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getViewName()">getViewName</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the name of all this collection.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>[]</CODE></FONT></TD>
+<CODE>&nbsp;java.util.Collection&lt;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getViews()">getViews</A></B>()</CODE>
 
 <BR>
@@ -1472,6 +1499,22 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a "workspace" directory for the given <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#hasPeople()">hasPeople</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Does this <A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> has any associated user information recorded?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#hasPermission(hudson.security.Permission)">hasPermission</A></B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenient short-cut for <code>getACL().hasPermission(permission)</code></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1561,6 +1604,16 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#onViewRenamed(hudson.model.View, java.lang.String, java.lang.String)">onViewRenamed</A></B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view,
+              java.lang.String&nbsp;oldName,
+              java.lang.String&nbsp;newName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> calls this method when it's renamed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#rebuildDependencyGraph()">rebuildDependencyGraph</A></B>()</CODE>
 
 <BR>
@@ -1613,15 +1666,6 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the corresponding <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> object.</TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_hudson.model.View"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/View.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/View.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/View.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/View.html#doRssLatest(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssLatest</A>, <A HREF="../../hudson/model/View.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/View.html#getApi(org.kohsuke.stapler.StaplerRequest)">getApi</A>, <A HREF="../../hudson/model/View.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/View.html#getItemCreatePermission()">getItemCreatePermission</A>, <A HREF="../../hudson/model/View.html#getPeople()">getPeople</A>, <A HREF="../../hudson/model/View.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/View.html#hasPeople()">hasPeople</A>, <A HREF="../../hudson/model/View.html#hasPermission(hudson.security.Permission)">hasPermission</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -1754,6 +1798,18 @@ VERSION</H3>
 public static java.lang.String <B>VERSION</B></PRE>
 <DL>
 <DD>Version number of this Hudson.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="VERSION_HASH"><!-- --></A><H3>
+VERSION_HASH</H3>
+<PRE>
+public static java.lang.String <B>VERSION_HASH</B></PRE>
+<DL>
+<DD>Hash of <A HREF="../../hudson/model/Hudson.html#VERSION"><CODE>VERSION</CODE></A>.
 <P>
 <DL>
 </DL>
@@ -1912,6 +1968,24 @@ public <A HREF="../../hudson/TcpSlaveAgentListener.html" title="class in hudson"
 </DL>
 <HR>
 
+<A NAME="getAdjuncts(java.lang.String)"><!-- --></A><H3>
+getAdjuncts</H3>
+<PRE>
+public org.kohsuke.stapler.framework.adjunct.AdjunctManager <B>getAdjuncts</B>(java.lang.String&nbsp;dummy)</PRE>
+<DL>
+<DD>Makes <CODE>AdjunctManager</CODE> URL-bound.
+ The dummy parameter allows us to use different URLs for the same adjunct,
+ for proper cache handling.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getSlaveAgentPort()"><!-- --></A><H3>
 getSlaveAgentPort</H3>
 <PRE>
@@ -1969,11 +2043,8 @@ getDescription</H3>
 <PRE>
 public java.lang.String <B>getDescription</B>()</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/View.html#getDescription()">View</A></CODE></B></DD>
-<DD>Message displayed in the top page. Can be null. Includes HTML.
-<P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#getDescription()">getDescription</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
+</DL>
 </DD>
 <DD><DL>
 </DL>
@@ -2013,6 +2084,50 @@ public <A HREF="../../hudson/model/UpdateCenter.html" title="class in hudson.mod
 isUsageStatisticsCollected</H3>
 <PRE>
 public boolean <B>isUsageStatisticsCollected</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPeople()"><!-- --></A><H3>
+getPeople</H3>
+<PRE>
+public <A HREF="../../hudson/model/View.People.html" title="class in hudson.model">View.People</A> <B>getPeople</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasPeople()"><!-- --></A><H3>
+hasPeople</H3>
+<PRE>
+public final boolean <B>hasPeople</B>()</PRE>
+<DL>
+<DD>Does this <A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> has any associated user information recorded?
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getApi()"><!-- --></A><H3>
+getApi</H3>
+<PRE>
+public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -2431,7 +2546,7 @@ public java.util.List&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="i
 <DD>Gets just the immediate children of <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ItemGroup.html#getItems()">getItems</A></CODE> in interface <CODE><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#getItems()">getItems</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ItemGroup.html#getItems()">getItems</A></CODE> in interface <CODE><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>See Also:</B><DD><A HREF="../../hudson/model/Hudson.html#getAllItems(java.lang.Class)"><CODE>getAllItems(Class)</CODE></A></DL>
@@ -2524,32 +2639,18 @@ public java.util.Collection&lt;java.lang.String&gt; <B>getTopLevelItemNames</B>(
 </DL>
 <HR>
 
-<A NAME="contains(hudson.model.TopLevelItem)"><!-- --></A><H3>
-contains</H3>
-<PRE>
-<FONT SIZE="-1">@Deprecated
-</FONT>public boolean <B>contains</B>(<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&nbsp;view)</PRE>
-<DL>
-<DD><B>Deprecated.</B>&nbsp;<I>why are you calling a method that always return true?</I>
-<P>
-<DD>Every job belongs to us.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#contains(hudson.model.TopLevelItem)">contains</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
 <A NAME="getView(java.lang.String)"><!-- --></A><H3>
 getView</H3>
 <PRE>
 public <A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A> <B>getView</B>(java.lang.String&nbsp;name)</PRE>
 <DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/ViewGroup.html#getView(java.lang.String)">ViewGroup</A></CODE></B></DD>
+<DD>Gets a view of the given name.
+
+ This also creates the URL binding for views (in the form of ".../view/FOOBAR/...")
+<P>
 <DD><DL>
-</DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ViewGroup.html#getView(java.lang.String)">getView</A></CODE> in interface <CODE><A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -2561,49 +2662,36 @@ public <A HREF="../../hudson/model/View.html" title="class in hudson.model">View
 getViews</H3>
 <PRE>
 <FONT SIZE="-1">@Exported
-</FONT>public <A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>[] <B>getViews</B>()</PRE>
+</FONT>public java.util.Collection&lt;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&gt; <B>getViews</B>()</PRE>
 <DL>
 <DD>Gets the read-only list of all <A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A>s.
 <P>
 <DD><DL>
-</DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ViewGroup.html#getViews()">getViews</A></CODE> in interface <CODE><A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A></CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Returns:</B><DD>can be empty but never null.</DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="deleteView(hudson.model.ListView)"><!-- --></A><H3>
+<A NAME="deleteView(hudson.model.View)"><!-- --></A><H3>
 deleteView</H3>
 <PRE>
-public void <B>deleteView</B>(<A HREF="../../hudson/model/ListView.html" title="class in hudson.model">ListView</A>&nbsp;view)
+public void <B>deleteView</B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view)
                 throws java.io.IOException</PRE>
 <DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/ViewGroup.html#deleteView(hudson.model.View)">ViewGroup</A></CODE></B></DD>
+<DD>Deletes a view in this group.
+<P>
 <DD><DL>
-</DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ViewGroup.html#deleteView(hudson.model.View)">deleteView</A></CODE> in interface <CODE><A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A></CODE></DL>
 </DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getViewName()"><!-- --></A><H3>
-getViewName</H3>
-<PRE>
-public java.lang.String <B>getViewName</B>()</PRE>
-<DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/View.html#getViewName()">View</A></CODE></B></DD>
-<DD>Gets the name of all this collection.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#getViewName()">getViewName</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
-</DD>
-<DD><DL>
-</DL>
 </DD>
 </DL>
 <HR>
@@ -2836,14 +2924,57 @@ public java.lang.String <B>getUrl</B>()</PRE>
 <DD><B>Deprecated.</B>&nbsp;<I>Why are you calling a method that always returns ""?
       Perhaps you meant <A HREF="../../hudson/model/Hudson.html#getRootUrl()"><CODE>getRootUrl()</CODE></A>.</I>
 <P>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/View.html#getUrl()">View</A></CODE></B></DD>
-<DD>Returns the path relative to the context root.
-
- Doesn't start with '/' but ends with '/'. (except when this is
- Hudson,
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/ItemGroup.html#getUrl()">ItemGroup</A></CODE></B></DD>
+<DD>Returns the path relative to the context root,
+ like "foo/bar/zot/". Note no leading slash but trailing slash.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ItemGroup.html#getUrl()">getUrl</A></CODE> in interface <CODE><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#getUrl()">getUrl</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ItemGroup.html#getUrl()">getUrl</A></CODE> in interface <CODE><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ViewGroup.html#getUrl()">getUrl</A></CODE> in interface <CODE><A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSearchUrl()"><!-- --></A><H3>
+getSearchUrl</H3>
+<PRE>
+public java.lang.String <B>getSearchUrl</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/search/SearchItem.html#getSearchUrl()">SearchItem</A></CODE></B></DD>
+<DD>Returns the URL of this item relative to the parent <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search"><CODE>SearchItem</CODE></A>.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/search/SearchItem.html#getSearchUrl()">getSearchUrl</A></CODE> in interface <CODE><A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>URL like "foo" or "foo/bar". The path can end with '/'.
+      The path that starts with '/' will be interpreted as the absolute path
+      (within the context path of Hudson.)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onViewRenamed(hudson.model.View, java.lang.String, java.lang.String)"><!-- --></A><H3>
+onViewRenamed</H3>
+<PRE>
+public void <B>onViewRenamed</B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view,
+                          java.lang.String&nbsp;oldName,
+                          java.lang.String&nbsp;newName)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/ViewGroup.html#onViewRenamed(hudson.model.View, java.lang.String, java.lang.String)">ViewGroup</A></CODE></B></DD>
+<DD><A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> calls this method when it's renamed.
+ This method is intended to work as a notification to the <A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model"><CODE>ViewGroup</CODE></A>
+ (so that it can adjust its internal data structure, for example.)
+
+ <p>
+ It is the caller's responsibility to ensure that the new name is a
+ <A HREF="../../hudson/model/Hudson.html#checkGoodName(java.lang.String)">legal view name</A>.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ViewGroup.html#onViewRenamed(hudson.model.View, java.lang.String, java.lang.String)">onViewRenamed</A></CODE> in interface <CODE><A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -2860,7 +2991,23 @@ public <A HREF="../../hudson/search/SearchIndexBuilder.html" title="class in hud
 <DD>Default implementation that returns empty index.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/View.html#makeSearchIndex()">makeSearchIndex</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/AbstractModelObject.html#makeSearchIndex()">makeSearchIndex</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPrimaryView()"><!-- --></A><H3>
+getPrimaryView</H3>
+<PRE>
+public <A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A> <B>getPrimaryView</B>()</PRE>
+<DL>
+<DD>Returns the primary <A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> that renders the top-page of Hudson.
+<P>
+<DD><DL>
+</DL>
 </DD>
 <DD><DL>
 </DL>
@@ -3148,11 +3295,45 @@ public <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"
 <DD>Returns the root <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A>.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AccessControlled.html#getACL()">getACL</A></CODE> in interface <CODE><A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/View.html#getACL()">getACL</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AccessControlled.html#getACL()">getACL</A></CODE> in interface <CODE><A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></CODE></DL>
 </DD>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>never null.<DT><B>See Also:</B><DD><A HREF="../../hudson/security/AuthorizationStrategy.html#getRootACL()"><CODE>AuthorizationStrategy.getRootACL()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="checkPermission(hudson.security.Permission)"><!-- --></A><H3>
+checkPermission</H3>
+<PRE>
+public void <B>checkPermission</B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/security/AccessControlled.html#checkPermission(hudson.security.Permission)">AccessControlled</A></CODE></B></DD>
+<DD>Convenient short-cut for <code>getACL().checkPermission(permission)</code>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AccessControlled.html#checkPermission(hudson.security.Permission)">checkPermission</A></CODE> in interface <CODE><A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasPermission(hudson.security.Permission)"><!-- --></A><H3>
+hasPermission</H3>
+<PRE>
+public boolean <B>hasPermission</B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/security/AccessControlled.html#hasPermission(hudson.security.Permission)">AccessControlled</A></CODE></B></DD>
+<DD>Convenient short-cut for <code>getACL().hasPermission(permission)</code>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AccessControlled.html#hasPermission(hudson.security.Permission)">hasPermission</A></CODE> in interface <CODE><A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -3263,12 +3444,12 @@ getItem</H3>
 <PRE>
 public <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A> <B>getItem</B>(java.lang.String&nbsp;name)</PRE>
 <DL>
-<DD>Gets the <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A> of the given name..
+<DD>Gets the <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> inside this group that has a given name..
 
  Note that the look up is case-insensitive.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ItemGroup.html#getItem(java.lang.String)">getItem</A></CODE> in interface <CODE><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#getItem(java.lang.String)">getItem</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ItemGroup.html#getItem(java.lang.String)">getItem</A></CODE> in interface <CODE><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -3725,15 +3906,11 @@ public <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">
                   throws java.io.IOException,
                          javax.servlet.ServletException</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/View.html#doCreateItem(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">View</A></CODE></B></DD>
-<DD>Creates a new <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> in this collection.
-<P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#doCreateItem(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCreateItem</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
+</DL>
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>null if fails.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
@@ -4029,29 +4206,6 @@ public static org.acegisecurity.Authentication <B>getAuthentication</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="doConfigLogger(org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String)"><!-- --></A><H3>
-doConfigLogger</H3>
-<PRE>
-public void <B>doConfigLogger</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                           <FONT SIZE="-1">@QueryParameter</FONT>
-                           java.lang.String&nbsp;name,
-                           <FONT SIZE="-1">@QueryParameter</FONT>
-                           java.lang.String&nbsp;level)
-                    throws java.io.IOException</PRE>
-<DL>
-<DD>Configure the logging level.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
-</DD>
-</DL>
-<HR>
-
 <A NAME="doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doScript</H3>
 <PRE>
@@ -4250,6 +4404,28 @@ public void <B>doItemExistsCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req
                               javax.servlet.ServletException</PRE>
 <DL>
 <DD>Checks if the top-level item with the given name exists.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doViewExistsCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doViewExistsCheck</H3>
+<PRE>
+public void <B>doViewExistsCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                       throws java.io.IOException,
+                              javax.servlet.ServletException</PRE>
+<DL>
+<DD>Checks if a top-level view with the given name exists.
 <P>
 <DD><DL>
 </DL>
@@ -4496,13 +4672,29 @@ public java.lang.Object <B>getTarget</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="getStaplerFallback()"><!-- --></A><H3>
+getStaplerFallback</H3>
+<PRE>
+public <A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A> <B>getStaplerFallback</B>()</PRE>
+<DL>
+<DD>Fallback to the primary view.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>getStaplerFallback</CODE> in interface <CODE>org.kohsuke.stapler.StaplerFallback</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="adminCheck()"><!-- --></A><H3>
 adminCheck</H3>
 <PRE>
 public static boolean <B>adminCheck</B>()
                           throws java.io.IOException</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/View.html#checkPermission(hudson.security.Permission)"><CODE>View.checkPermission(Permission)</CODE></A></I>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Hudson.html#checkPermission(hudson.security.Permission)"><CODE>checkPermission(Permission)</CODE></A></I>
 <P>
 <DD><DL>
 </DL>
@@ -4522,7 +4714,7 @@ public static boolean <B>adminCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;
                                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                           throws java.io.IOException</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/View.html#checkPermission(hudson.security.Permission)"><CODE>View.checkPermission(Permission)</CODE></A></I>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Hudson.html#checkPermission(hudson.security.Permission)"><CODE>checkPermission(Permission)</CODE></A></I>
 <P>
 <DD><DL>
 </DL>
@@ -4641,6 +4833,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2008. All Rights Reserved.
+Copyright &#169; 2009. All Rights Reserved.
 </BODY>
 </HTML>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ListView (Hudson core 1.268 API)
+ListView (Hudson core 1.269 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-28">
+<META NAME="date" CONTENT="2009-01-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ListView (Hudson core 1.268 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ListView (Hudson core 1.268 API)";
+        parent.document.title="ListView (Hudson core 1.269 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/LargeText.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/ListView.DescriptorImpl.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/ListView.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ListView.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,9 +77,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.View">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.View">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -99,7 +99,7 @@ java.lang.Object
           <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.ListView</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></DD>
 </DL>
 <HR>
 <DL>
@@ -126,6 +126,14 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Nested Class Summary</B></FONT></TH>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ListView.DescriptorImpl.html" title="class in hudson.model">ListView.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="nested_classes_inherited_from_class_hudson.model.View"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -145,6 +153,14 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Field Summary</B></FONT></TH>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/model/ListView.DescriptorImpl.html" title="class in hudson.model">ListView.DescriptorImpl</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ListView.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.model.View"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -152,7 +168,7 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 <TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/View.html#CONFIGURE">CONFIGURE</A>, <A HREF="../../hudson/model/View.html#CREATE">CREATE</A>, <A HREF="../../hudson/model/View.html#DELETE">DELETE</A>, <A HREF="../../hudson/model/View.html#PERMISSIONS">PERMISSIONS</A>, <A HREF="../../hudson/model/View.html#SORTER">SORTER</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/View.html#CONFIGURE">CONFIGURE</A>, <A HREF="../../hudson/model/View.html#CREATE">CREATE</A>, <A HREF="../../hudson/model/View.html#DELETE">DELETE</A>, <A HREF="../../hudson/model/View.html#description">description</A>, <A HREF="../../hudson/model/View.html#LIST">LIST</A>, <A HREF="../../hudson/model/View.html#name">name</A>, <A HREF="../../hudson/model/View.html#owner">owner</A>, <A HREF="../../hudson/model/View.html#PERMISSIONS">PERMISSIONS</A>, <A HREF="../../hudson/model/View.html#SORTER">SORTER</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -165,8 +181,7 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/ListView.html#ListView(hudson.model.Hudson, java.lang.String)">ListView</A></B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;owner,
-         java.lang.String&nbsp;name)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/ListView.html#ListView(java.lang.String)">ListView</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -191,15 +206,6 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ListView.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accepts submission from the configuration page.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ListView.html#doCreateItem(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCreateItem</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
@@ -209,54 +215,11 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ListView.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/model/ViewDescriptor.html" title="class in hudson.model">ViewDescriptor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ListView.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes this view.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ListView.html#doIncludeRegexCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doIncludeRegexCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                    org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the include regular expression is valid.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ListView.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                    org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accepts the new description.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ListView.html#getActions()">getActions</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the transient <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s associated with the top page.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ListView.html#getDescription()">getDescription</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message displayed in the top page.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ListView.html#getDisplayName()">getDisplayName</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -268,14 +231,6 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ListView.html#getItem(java.lang.String)">getItem</A></B>(java.lang.String&nbsp;name)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A> of the given name.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ListView.html#getItems()">getItems</A></B>()</CODE>
 
@@ -284,27 +239,21 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ListView.html#getJob(java.lang.String)">getJob</A></B>(java.lang.String&nbsp;name)</CODE>
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ListView.html#onJobRenamed(hudson.model.Item, java.lang.String, java.lang.String)">onJobRenamed</A></B>(<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item,
+             java.lang.String&nbsp;oldName,
+             java.lang.String&nbsp;newName)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called when a job name is changed or deleted.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ListView.html#getUrl()">getUrl</A></B>()</CODE>
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ListView.html#submit(org.kohsuke.stapler.StaplerRequest)">submit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the path relative to the context root.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ListView.html#getViewName()">getViewName</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the name of all this collection.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handles the configuration submission.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.View"><!-- --></A>
@@ -313,7 +262,7 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/View.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/View.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/View.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/View.html#doRssLatest(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssLatest</A>, <A HREF="../../hudson/model/View.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/View.html#getACL()">getACL</A>, <A HREF="../../hudson/model/View.html#getApi(org.kohsuke.stapler.StaplerRequest)">getApi</A>, <A HREF="../../hudson/model/View.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/View.html#getItemCreatePermission()">getItemCreatePermission</A>, <A HREF="../../hudson/model/View.html#getPeople()">getPeople</A>, <A HREF="../../hudson/model/View.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/View.html#hasPeople()">hasPeople</A>, <A HREF="../../hudson/model/View.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/View.html#makeSearchIndex()">makeSearchIndex</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/View.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/View.html#create(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.model.ViewGroup)">create</A>, <A HREF="../../hudson/model/View.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A>, <A HREF="../../hudson/model/View.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/View.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/View.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/View.html#doRssLatest(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssLatest</A>, <A HREF="../../hudson/model/View.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/View.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/View.html#getACL()">getACL</A>, <A HREF="../../hudson/model/View.html#getActions()">getActions</A>, <A HREF="../../hudson/model/View.html#getApi()">getApi</A>, <A HREF="../../hudson/model/View.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/View.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/View.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/View.html#getItem(java.lang.String)">getItem</A>, <A HREF="../../hudson/model/View.html#getItemCreatePermission()">getItemCreatePermission</A>, <A HREF="../../hudson/model/View.html#getJob(java.lang.String)">getJob</A>, <A HREF="../../hudson/model/View.html#getOwner()">getOwner</A>, <A HREF="../../hudson/model/View.html#getPeople()">getPeople</A>, <A HREF="../../hudson/model/View.html#getPostConstructLandingPage()">getPostConstructLandingPage</A>, <A HREF="../../hudson/model/View.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/View.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/View.html#getViewName()">getViewName</A>, <A HREF="../../hudson/model/View.html#hasPeople()">hasPeople</A>, <A HREF="../../hudson/model/View.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/View.html#isDefault()">isDefault</A>, <A HREF="../../hudson/model/View.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/View.html#rename(java.lang.String)">rename</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -337,6 +286,25 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 &nbsp;
 <P>
 
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="DESCRIPTOR"><!-- --></A><H3>
+DESCRIPTOR</H3>
+<PRE>
+public static final <A HREF="../../hudson/model/ListView.DescriptorImpl.html" title="class in hudson.model">ListView.DescriptorImpl</A> <B>DESCRIPTOR</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
 <A NAME="constructor_detail"><!-- --></A>
@@ -347,11 +315,11 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 </TR>
 </TABLE>
 
-<A NAME="ListView(hudson.model.Hudson, java.lang.String)"><!-- --></A><H3>
+<A NAME="ListView(java.lang.String)"><!-- --></A><H3>
 ListView</H3>
 <PRE>
-public <B>ListView</B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;owner,
-                java.lang.String&nbsp;name)</PRE>
+<FONT SIZE="-1">@DataBoundConstructor
+</FONT>public <B>ListView</B>(java.lang.String&nbsp;name)</PRE>
 <DL>
 </DL>
 
@@ -364,19 +332,6 @@ public <B>ListView</B>(<A HREF="../../hudson/model/Hudson.html" title="class in 
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
-
-<A NAME="getActions()"><!-- --></A><H3>
-getActions</H3>
-<PRE>
-public java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>getActions</B>()</PRE>
-<DL>
-<DD>Returns the transient <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s associated with the top page.
-<P>
-<DD><DL>
-<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Hudson.html#getActions()"><CODE>Hudson.getActions()</CODE></A></DL>
-</DD>
-</DL>
-<HR>
 
 <A NAME="getItems()"><!-- --></A><H3>
 getItems</H3>
@@ -398,34 +353,6 @@ public java.util.List&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="i
 </DL>
 <HR>
 
-<A NAME="getItem(java.lang.String)"><!-- --></A><H3>
-getItem</H3>
-<PRE>
-public <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A> <B>getItem</B>(java.lang.String&nbsp;name)</PRE>
-<DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/View.html#getItem(java.lang.String)">View</A></CODE></B></DD>
-<DD>Gets the <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A> of the given name.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#getItem(java.lang.String)">getItem</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getJob(java.lang.String)"><!-- --></A><H3>
-getJob</H3>
-<PRE>
-public <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A> <B>getJob</B>(java.lang.String&nbsp;name)</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
 <A NAME="contains(hudson.model.TopLevelItem)"><!-- --></A><H3>
 contains</H3>
 <PRE>
@@ -437,51 +364,6 @@ public boolean <B>contains</B>(<A HREF="../../hudson/model/TopLevelItem.html" ti
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#contains(hudson.model.TopLevelItem)">contains</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
 </DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getViewName()"><!-- --></A><H3>
-getViewName</H3>
-<PRE>
-public java.lang.String <B>getViewName</B>()</PRE>
-<DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/View.html#getViewName()">View</A></CODE></B></DD>
-<DD>Gets the name of all this collection.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#getViewName()">getViewName</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getDescription()"><!-- --></A><H3>
-getDescription</H3>
-<PRE>
-public java.lang.String <B>getDescription</B>()</PRE>
-<DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/View.html#getDescription()">View</A></CODE></B></DD>
-<DD>Message displayed in the top page. Can be null. Includes HTML.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#getDescription()">getDescription</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getDisplayName()"><!-- --></A><H3>
-getDisplayName</H3>
-<PRE>
-public java.lang.String <B>getDisplayName</B>()</PRE>
-<DL>
 <DD><DL>
 </DL>
 </DD>
@@ -509,6 +391,10 @@ public <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/View.html#doCreateItem(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">View</A></CODE></B></DD>
 <DD>Creates a new <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> in this collection.
+
+ <p>
+ This method should call <A HREF="../../hudson/model/Hudson.html#doCreateItem(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><CODE>Hudson.doCreateItem(StaplerRequest, StaplerResponse)</CODE></A>
+ and then add the newly created item to this view.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#doCreateItem(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCreateItem</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
@@ -523,19 +409,40 @@ public <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">
 </DL>
 <HR>
 
-<A NAME="getUrl()"><!-- --></A><H3>
-getUrl</H3>
+<A NAME="onJobRenamed(hudson.model.Item, java.lang.String, java.lang.String)"><!-- --></A><H3>
+onJobRenamed</H3>
 <PRE>
-public java.lang.String <B>getUrl</B>()</PRE>
+public void <B>onJobRenamed</B>(<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item,
+                         java.lang.String&nbsp;oldName,
+                         java.lang.String&nbsp;newName)</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/View.html#getUrl()">View</A></CODE></B></DD>
-<DD>Returns the path relative to the context root.
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/View.html#onJobRenamed(hudson.model.Item, java.lang.String, java.lang.String)">View</A></CODE></B></DD>
+<DD>Called when a job name is changed or deleted.
 
- Doesn't start with '/' but ends with '/'. (except when this is
- Hudson,
+ <p>
+ If this view contains this job, it should update the view membership so that
+ the renamed job will remain in the view, and the deleted job is removed.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#getUrl()">getUrl</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#onJobRenamed(hudson.model.Item, java.lang.String, java.lang.String)">onJobRenamed</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>item</CODE> - The item whose name is being changed.<DD><CODE>oldName</CODE> - Old name of the item. Always non-null.<DD><CODE>newName</CODE> - New name of the item, if the item is renamed. Or null, if the item is removed.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="submit(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
+submit</H3>
+<PRE>
+protected void <B>submit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
+<DL>
+<DD>Handles the configuration submission.
+
+ Load view-specific properties here.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#submit(org.kohsuke.stapler.StaplerRequest)">submit</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -543,78 +450,24 @@ public java.lang.String <B>getUrl</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-doConfigSubmit</H3>
+<A NAME="getDescriptor()"><!-- --></A><H3>
+getDescriptor</H3>
 <PRE>
-public void <B>doConfigSubmit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                    throws java.io.IOException,
-                           javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/model/ViewDescriptor.html" title="class in hudson.model">ViewDescriptor</A> <B>getDescriptor</B>()</PRE>
 <DL>
-<DD>Accepts submission from the configuration page.
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
+<DD>Gets the descriptor for this instance.
+
+ <p>
+ <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> is a singleton for every concrete <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
+ implementation, so if <tt>a.getClass()==b.getClass()</tt> then
+ <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
 <P>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#getDescriptor()">getDescriptor</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
 </DD>
-</DL>
-<HR>
-
-<A NAME="doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-doSubmitDescription</H3>
-<PRE>
-public void <B>doSubmitDescription</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                                org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                         throws java.io.IOException,
-                                javax.servlet.ServletException</PRE>
-<DL>
-<DD>Accepts the new description.
-<P>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
-</DD>
 </DL>
-<HR>
-
-<A NAME="doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-doDoDelete</H3>
-<PRE>
-public void <B>doDoDelete</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                       org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                throws java.io.IOException</PRE>
-<DL>
-<DD>Deletes this view.
-<P>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="doIncludeRegexCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-doIncludeRegexCheck</H3>
-<PRE>
-public void <B>doIncludeRegexCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                                org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                         throws java.io.IOException,
-                                javax.servlet.ServletException,
-                                java.lang.InterruptedException</PRE>
-<DL>
-<DD>Checks if the include regular expression is valid.
-<P>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
@@ -649,7 +502,7 @@ public void <B>doIncludeRegexCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;r
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/LargeText.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/ListView.DescriptorImpl.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/ListView.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ListView.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -669,15 +522,15 @@ public void <B>doIncludeRegexCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;r
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.View">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.View">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2008. All Rights Reserved.
+Copyright &#169; 2009. All Rights Reserved.
 </BODY>
 </HTML>

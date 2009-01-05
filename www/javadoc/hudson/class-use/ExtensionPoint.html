@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Interface hudson.ExtensionPoint (Hudson core 1.268 API)
+Uses of Interface hudson.ExtensionPoint (Hudson core 1.269 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-28">
+<META NAME="date" CONTENT="2009-01-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.ExtensionPoint (Hudson core 1.268 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.ExtensionPoint (Hudson core 1.268 API)";
+        parent.document.title="Uses of Interface hudson.ExtensionPoint (Hudson core 1.269 API)";
     }
 }
 </SCRIPT>
@@ -598,6 +598,14 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AllView.html" title="class in hudson.model">AllView</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> that contains everything.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build&lt;P extends Project&lt;P,B&gt;,B extends Build&lt;P,B&gt;&gt;</A></B></CODE>
 
 <BR>
@@ -672,10 +680,26 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ListView.html" title="class in hudson.model">ListView</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s in a flat list view.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model">ManagementLink</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point to add icon to <tt>http://server/hudson/manage</tt> page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/MyView.html" title="class in hudson.model">MyView</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> that only contains projects for which the current user has access to.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -735,6 +759,14 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/TreeView.html" title="class in hudson.model">TreeView</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXPERIMENTAL</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.PageDecoratorImpl.html" title="class in hudson.model">UpdateCenter.PageDecoratorImpl</A></B></CODE>
 
@@ -768,6 +800,15 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encapsulates the rendering of the list of <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A>s
+ that <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> owns.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ViewJob.html" title="class in hudson.model">ViewJob&lt;JobT extends ViewJob&lt;JobT,RunT&gt;,RunT extends Run&lt;JobT,RunT&gt;&gt;</A></B></CODE>
 
 <BR>
@@ -797,7 +838,7 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 <TD><CODE><B><A HREF="../../hudson/model/listeners/ItemListener.html" title="class in hudson.model.listeners">ItemListener</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives notifications about CRUD operations of <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1662,6 +1703,6 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2008. All Rights Reserved.
+Copyright &#169; 2009. All Rights Reserved.
 </BODY>
 </HTML>

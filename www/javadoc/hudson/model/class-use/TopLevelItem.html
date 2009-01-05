@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Interface hudson.model.TopLevelItem (Hudson core 1.268 API)
+Uses of Interface hudson.model.TopLevelItem (Hudson core 1.269 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-28">
+<META NAME="date" CONTENT="2009-01-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.TopLevelItem (Hudson core 1.268 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.TopLevelItem (Hudson core 1.268 API)";
+        parent.document.title="Uses of Interface hudson.model.TopLevelItem (Hudson core 1.269 API)";
     }
 }
 </SCRIPT>
@@ -208,50 +208,18 @@ Uses of <A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
-<TD><CODE><B>ListView.</B><B><A HREF="../../../hudson/model/ListView.html#getItem(java.lang.String)">getItem</A></B>(java.lang.String&nbsp;name)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
-<TD><CODE><B>MyView.</B><B><A HREF="../../../hudson/model/MyView.html#getItem(java.lang.String)">getItem</A></B>(java.lang.String&nbsp;name)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
 <TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getItem(java.lang.String)">getItem</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A> of the given name.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> inside this group that has a given name.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
 <TD><CODE><B>View.</B><B><A HREF="../../../hudson/model/View.html#getItem(java.lang.String)">getItem</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A> of the given name.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
-<TD><CODE><B>ListView.</B><B><A HREF="../../../hudson/model/ListView.html#getJob(java.lang.String)">getJob</A></B>(java.lang.String&nbsp;name)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
-<TD><CODE><B>MyView.</B><B><A HREF="../../../hudson/model/MyView.html#getJob(java.lang.String)">getJob</A></B>(java.lang.String&nbsp;name)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -261,6 +229,14 @@ Uses of <A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hu
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Left only for the compatibility of URLs.
       Should not be invoked for any other purpose.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
+<TD><CODE><B>View.</B><B><A HREF="../../../hudson/model/View.html#getJob(java.lang.String)">getJob</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alias for <A HREF="../../../hudson/model/View.html#getItem(java.lang.String)"><CODE>View.getItem(String)</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -313,6 +289,22 @@ Uses of <A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>TreeView.</B><B><A HREF="../../../hudson/model/TreeView.html#getItems()">getItems</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a read-only view of all <A HREF="../../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s in this view.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Collection&lt;<A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>AllView.</B><B><A HREF="../../../hudson/model/AllView.html#getItems()">getItems</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getItems()">getItems</A></B>()</CODE>
 
 <BR>
@@ -353,10 +345,18 @@ Uses of <A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#contains(hudson.model.TopLevelItem)">contains</A></B>(<A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&nbsp;view)</CODE>
+<TD><CODE><B>TreeView.</B><B><A HREF="../../../hudson/model/TreeView.html#contains(hudson.model.TopLevelItem)">contains</A></B>(<A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&nbsp;item)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>why are you calling a method that always return true?</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>AllView.</B><B><A HREF="../../../hudson/model/AllView.html#contains(hudson.model.TopLevelItem)">contains</A></B>(<A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&nbsp;item)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -469,6 +469,6 @@ Uses of <A HREF="../../../hudson/model/TopLevelItem.html" title="interface in hu
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2008. All Rights Reserved.
+Copyright &#169; 2009. All Rights Reserved.
 </BODY>
 </HTML>

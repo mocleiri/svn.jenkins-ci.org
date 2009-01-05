@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.model.View (Hudson core 1.268 API)
+Uses of Class hudson.model.View (Hudson core 1.269 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-28">
+<META NAME="date" CONTENT="2009-01-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.View (Hudson core 1.268 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.View (Hudson core 1.268 API)";
+        parent.document.title="Uses of Class hudson.model.View (Hudson core 1.269 API)";
     }
 }
 </SCRIPT>
@@ -122,10 +122,10 @@ Uses of <A HREF="../../../hudson/model/View.html" title="class in hudson.model">
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A></B></CODE>
+<TD><CODE><B><A HREF="../../../hudson/model/AllView.html" title="class in hudson.model">AllView</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Root object of the system.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> that contains everything.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -143,6 +143,14 @@ Uses of <A HREF="../../../hudson/model/View.html" title="class in hudson.model">
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> that only contains projects for which the current user has access to.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/TreeView.html" title="class in hudson.model">TreeView</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXPERIMENTAL</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -150,6 +158,14 @@ Uses of <A HREF="../../../hudson/model/View.html" title="class in hudson.model">
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with type parameters of type <A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>View.</B><B><A HREF="../../../hudson/model/View.html#LIST">LIST</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A list of available view types.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -169,11 +185,45 @@ Uses of <A HREF="../../../hudson/model/View.html" title="class in hudson.model">
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></FONT></TD>
-<TD><CODE><B>View.People.</B><B><A HREF="../../../hudson/model/View.People.html#getParent()">getParent</A></B>()</CODE>
+<CODE>static&nbsp;<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></FONT></TD>
+<TD><CODE><B>View.</B><B><A HREF="../../../hudson/model/View.html#create(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.model.ViewGroup)">create</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+       org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+       <A HREF="../../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A>&nbsp;owner)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getPrimaryView()">getPrimaryView</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the primary <A HREF="../../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> that renders the top-page of Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getStaplerFallback()">getStaplerFallback</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fallback to the primary view.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></FONT></TD>
+<TD><CODE><B>TreeView.</B><B><A HREF="../../../hudson/model/TreeView.html#getView(java.lang.String)">getView</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></FONT></TD>
+<TD><CODE><B>ViewGroup.</B><B><A HREF="../../../hudson/model/ViewGroup.html#getView(java.lang.String)">getView</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a view of the given name.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -183,13 +233,127 @@ Uses of <A HREF="../../../hudson/model/View.html" title="class in hudson.model">
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> that return types with arguments of type <A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A></FONT></TH>
+</TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A>[]</CODE></FONT></TD>
+<CODE>&nbsp;java.util.Collection&lt;<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>TreeView.</B><B><A HREF="../../../hudson/model/TreeView.html#getViews()">getViews</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Collection&lt;<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>ViewGroup.</B><B><A HREF="../../../hudson/model/ViewGroup.html#getViews()">getViews</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the views in this group.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Collection&lt;<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getViews()">getViews</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the read-only list of all <A HREF="../../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A>s.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with parameters of type <A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>TreeView.</B><B><A HREF="../../../hudson/model/TreeView.html#deleteView(hudson.model.View)">deleteView</A></B>(<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ViewGroup.</B><B><A HREF="../../../hudson/model/ViewGroup.html#deleteView(hudson.model.View)">deleteView</A></B>(<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes a view in this group.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#deleteView(hudson.model.View)">deleteView</A></B>(<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>TreeView.</B><B><A HREF="../../../hudson/model/TreeView.html#onViewRenamed(hudson.model.View, java.lang.String, java.lang.String)">onViewRenamed</A></B>(<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view,
+              java.lang.String&nbsp;oldName,
+              java.lang.String&nbsp;newName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ViewGroup.</B><B><A HREF="../../../hudson/model/ViewGroup.html#onViewRenamed(hudson.model.View, java.lang.String, java.lang.String)">onViewRenamed</A></B>(<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view,
+              java.lang.String&nbsp;oldName,
+              java.lang.String&nbsp;newName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> calls this method when it's renamed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#onViewRenamed(hudson.model.View, java.lang.String, java.lang.String)">onViewRenamed</A></B>(<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view,
+              java.lang.String&nbsp;oldName,
+              java.lang.String&nbsp;newName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with parameters of type <A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/model/View.People.html#View.People(hudson.model.View)">View.People</A></B>(<A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;parent)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructor parameters in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with type arguments of type <A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/model/ViewDescriptor.html#ViewDescriptor(java.lang.Class)">ViewDescriptor</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/View.html" title="class in hudson.model">View</A>&gt;&nbsp;clazz)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -296,6 +460,6 @@ Uses of <A HREF="../../../hudson/model/View.html" title="class in hudson.model">
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2008. All Rights Reserved.
+Copyright &#169; 2009. All Rights Reserved.
 </BODY>
 </HTML>

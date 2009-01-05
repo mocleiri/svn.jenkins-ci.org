@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-View.People (Hudson core 1.268 API)
+View.People (Hudson core 1.269 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-28">
+<META NAME="date" CONTENT="2009-01-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ View.People (Hudson core 1.268 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="View.People (Hudson core 1.268 API)";
+        parent.document.title="View.People (Hudson core 1.269 API)";
     }
 }
 </SCRIPT>
@@ -102,7 +102,7 @@ java.lang.Object
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1">@ExportedBean
-</FONT>public final class <B>View.People</B><DT>extends java.lang.Object</DL>
+</FONT>public static final class <B>View.People</B><DT>extends java.lang.Object</DL>
 </PRE>
 
 <P>
@@ -116,6 +116,14 @@ java.lang.Object
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.Object</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/View.People.html#parent">parent</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -136,7 +144,13 @@ java.lang.Object
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/View.People.html#View.People()">View.People</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/View.People.html#View.People(hudson.model.Hudson)">View.People</A></B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;parent)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/View.People.html#View.People(hudson.model.View)">View.People</A></B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;parent)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -161,8 +175,8 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/View.People.html#getParent()">getParent</A></B>()</CODE>
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/View.People.html#isApplicable(java.util.Collection)">isApplicable</A></B>(java.util.Collection&lt;? extends <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;items)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -199,6 +213,16 @@ users</H3>
 <DL>
 </DL>
 </DL>
+<HR>
+
+<A NAME="parent"><!-- --></A><H3>
+parent</H3>
+<PRE>
+public final java.lang.Object <B>parent</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -210,10 +234,18 @@ users</H3>
 </TR>
 </TABLE>
 
-<A NAME="View.People()"><!-- --></A><H3>
+<A NAME="View.People(hudson.model.Hudson)"><!-- --></A><H3>
 View.People</H3>
 <PRE>
-public <B>View.People</B>()</PRE>
+public <B>View.People</B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;parent)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="View.People(hudson.model.View)"><!-- --></A><H3>
+View.People</H3>
+<PRE>
+public <B>View.People</B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;parent)</PRE>
 <DL>
 </DL>
 
@@ -227,10 +259,10 @@ public <B>View.People</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="getParent()"><!-- --></A><H3>
-getParent</H3>
+<A NAME="getApi()"><!-- --></A><H3>
+getApi</H3>
 <PRE>
-public <A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A> <B>getParent</B>()</PRE>
+public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -238,10 +270,10 @@ public <A HREF="../../hudson/model/View.html" title="class in hudson.model">View
 </DL>
 <HR>
 
-<A NAME="getApi()"><!-- --></A><H3>
-getApi</H3>
+<A NAME="isApplicable(java.util.Collection)"><!-- --></A><H3>
+isApplicable</H3>
 <PRE>
-public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
+public static boolean <B>isApplicable</B>(java.util.Collection&lt;? extends <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;items)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -308,6 +340,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2008. All Rights Reserved.
+Copyright &#169; 2009. All Rights Reserved.
 </BODY>
 </HTML>

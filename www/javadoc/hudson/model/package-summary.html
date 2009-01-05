@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.model (Hudson core 1.268 API)
+hudson.model (Hudson core 1.269 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-28">
+<META NAME="date" CONTENT="2009-01-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson core 1.268 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson core 1.268 API)";
+        parent.document.title="hudson.model (Hudson core 1.269 API)";
     }
 }
 </SCRIPT>
@@ -201,6 +201,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></B></TD>
 <TD><A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> that can be directly displayed under <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A></B></TD>
+<TD>Container of <A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A>s.</TD>
+</TR>
 </TABLE>
 &nbsp;
 
@@ -234,6 +238,14 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">Actionable</A></B></TD>
 <TD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A> that can have additional <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/AllView.html" title="class in hudson.model">AllView</A></B></TD>
+<TD><A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> that contains everything.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/AllView.DescriptorImpl.html" title="class in hudson.model">AllView.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A></B></TD>
@@ -417,6 +429,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD>Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s in a flat list view.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/ListView.DescriptorImpl.html" title="class in hudson.model">ListView.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model">ManagementLink</A></B></TD>
 <TD>Extension point to add icon to <tt>http://server/hudson/manage</tt> page.</TD>
 </TR>
@@ -431,6 +447,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/MyView.html" title="class in hudson.model">MyView</A></B></TD>
 <TD><A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> that only contains projects for which the current user has access to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/MyView.DescriptorImpl.html" title="class in hudson.model">MyView.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/NoFingerprintMatch.html" title="class in hudson.model">NoFingerprintMatch</A></B></TD>
@@ -510,6 +530,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD>A particular execution of <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/Run.RedirectUp.html" title="class in hudson.model">Run.RedirectUp</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Run.Summary.html" title="class in hudson.model">Run.Summary</A></B></TD>
 <TD>&nbsp;</TD>
 </TR>
@@ -572,6 +596,14 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/TreeView.html" title="class in hudson.model">TreeView</A></B></TD>
+<TD>EXPERIMENTAL</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/TreeView.DescriptorImpl.html" title="class in hudson.model">TreeView.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A></B></TD>
 <TD>Controls update center capability.</TD>
 </TR>
@@ -621,8 +653,16 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
  that <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> owns.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/View.People.html" title="class in hudson.model">View.People</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/View.UserInfo.html" title="class in hudson.model">View.UserInfo</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/ViewDescriptor.html" title="class in hudson.model">ViewDescriptor</A></B></TD>
+<TD><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/ViewJob.html" title="class in hudson.model">ViewJob&lt;JobT extends ViewJob&lt;JobT,RunT&gt;,RunT extends Run&lt;JobT,RunT&gt;&gt;</A></B></TD>
@@ -740,6 +780,6 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2008. All Rights Reserved.
+Copyright &#169; 2009. All Rights Reserved.
 </BODY>
 </HTML>

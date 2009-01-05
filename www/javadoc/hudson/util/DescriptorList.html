@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-DescriptorList (Hudson core 1.268 API)
+DescriptorList (Hudson core 1.269 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2008-12-28">
+<META NAME="date" CONTENT="2009-01-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DescriptorList (Hudson core 1.268 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DescriptorList (Hudson core 1.268 API)";
+        parent.document.title="DescriptorList (Hudson core 1.269 API)";
     }
 }
 </SCRIPT>
@@ -151,6 +151,14 @@ List of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.mode
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/DescriptorList.html#findByName(java.lang.String)">findByName</A></B>(java.lang.String&nbsp;fullyQualifiedClassName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds a descriptor by their <A HREF="../../hudson/model/Descriptor.html#clazz"><CODE>Descriptor.clazz</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/DescriptorList.html#load(java.lang.Class)">load</A></B>(java.lang.Class&lt;? extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&gt;&nbsp;c)</CODE>
 
@@ -258,6 +266,21 @@ public <A HREF="../../hudson/util/DescriptorList.html" title="type parameter in 
 </DL>
 <HR>
 
+<A NAME="findByName(java.lang.String)"><!-- --></A><H3>
+findByName</H3>
+<PRE>
+public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt; <B>findByName</B>(java.lang.String&nbsp;fullyQualifiedClassName)</PRE>
+<DL>
+<DD>Finds a descriptor by their <A HREF="../../hudson/model/Descriptor.html#clazz"><CODE>Descriptor.clazz</CODE></A>.
+
+ If none is found, null is returned.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="load(java.lang.Class)"><!-- --></A><H3>
 load</H3>
 <PRE>
@@ -340,6 +363,6 @@ DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&n
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2008. All Rights Reserved.
+Copyright &#169; 2009. All Rights Reserved.
 </BODY>
 </HTML>
