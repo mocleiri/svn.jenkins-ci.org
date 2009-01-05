@@ -33,10 +33,12 @@ import javax.xml.rpc.ServiceException;
 public class ExtensionPointLister implements AnnotationProcessor {
     private final AnnotationProcessorEnvironment env;
     private final String pageName;
+    private final File output;
 
-    public ExtensionPointLister(AnnotationProcessorEnvironment env, String pageName) {
+    public ExtensionPointLister(AnnotationProcessorEnvironment env, String pageName, File output) {
         this.env = env;
         this.pageName = pageName;
+        this.output = output;
     }
 
     public void process() {
@@ -65,8 +67,7 @@ public class ExtensionPointLister implements AnnotationProcessor {
         Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
 
         try {
-            File target = new File("./target/extension-points.wiki");
-            PrintWriter pw = new PrintWriter(target);
+            PrintWriter pw = new PrintWriter(output);
             IOUtils.copy(
                     new InputStreamReader(getClass().getResourceAsStream("preamble.txt")),
                     pw);
@@ -107,7 +108,7 @@ public class ExtensionPointLister implements AnnotationProcessor {
                 env.getMessager().printNotice("Uploading to "+pageName);
                 ConfluenceSoapService service = Confluence.connect(new URL("http://hudson.gotdns.com/wiki/"));
                 RemotePage p = service.getPage("", "HUDSON", pageName);
-                p.setContent(FileUtils.readFileToString(target));
+                p.setContent(FileUtils.readFileToString(output));
                 service.storePage("",p);
             }
         } catch (IOException e) {
