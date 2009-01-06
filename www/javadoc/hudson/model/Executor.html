@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Executor (Hudson core 1.269 API)
+Executor (Hudson core 1.270 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-05">
+<META NAME="date" CONTENT="2009-01-06">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Executor (Hudson core 1.269 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Executor (Hudson core 1.269 API)";
+        parent.document.title="Executor (Hudson core 1.270 API)";
     }
 }
 </SCRIPT>
@@ -186,7 +186,7 @@ Thread that executes builds.
 <TD><CODE><B><A HREF="../../hudson/model/Executor.html#currentExecutor()">currentExecutor</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the executor of the current thread.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the executor of the current thread or null if current thread is not an executor.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -651,7 +651,7 @@ currentExecutor</H3>
 <PRE>
 public static <A HREF="../../hudson/model/Executor.html" title="class in hudson.model">Executor</A> <B>currentExecutor</B>()</PRE>
 <DL>
-<DD>Returns the executor of the current thread.
+<DD>Returns the executor of the current thread or null if current thread is not an executor.
 <P>
 <DD><DL>
 </DL>
