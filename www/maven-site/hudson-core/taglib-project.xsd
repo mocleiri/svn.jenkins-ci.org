@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="/lib/hudson/project" elementFormDefault="qualified">
+    <xsd:annotation>
+<xsd:documentation>Tag files used in project pages</xsd:documentation>
+</xsd:annotation>
+    <xsd:element name="matrix">
+<xsd:annotation>
+<xsd:documentation>
+    Generate configuration matrix and invoke body with 'p' as the instance of T
+    (of Layouter&lt;T&gt;)
+
+    
+  </xsd:documentation>
+</xsd:annotation>
+<xsd:complexType mixed="true">
+<xsd:sequence>
+<xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+<xsd:attribute name="autoRefresh">
+<xsd:annotation>
+<xsd:documentation>
+      If specified, the content of the matrix will be automatically updated via AJAX.
+      (This happens by requesting URL "./ajaxMatrix", so the caller needs "ajaxMatrix.jelly"
+      to serve this request.)
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+    <xsd:element name="config-trigger">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true">
+<xsd:sequence>
+<xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+    <xsd:element name="config-buildWrappers">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="config-upstream-pseudo-trigger">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="projectActionFloatingBox">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="config-publishers">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="config-disableBuild">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="upstream-downstream">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="config-scm">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="config-builders">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="build-permalink">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="config-quietPeriod">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+  </xsd:schema>
