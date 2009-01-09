@@ -1,0 +1,41 @@
+<html xmlns:j="jelly:core" xmlns:d="jelly:define" xmlns:local="local">
+<head>
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+  <title>Mailing Lists</title>
+</head>
+<body>
+  <d:taglib uri="local">
+    <d:tag name="mailingList">
+      <h2>${name}@hudson.dev.java.net</h2>
+
+       <p>
+          <a href="https://hudson.dev.java.net/servlets/SummarizeList?listName=${name}">View mailing list archive</a> | <a href="https://hudson.dev.java.net/servlets/SearchList?listName=${name}">Search mailing list archive</a>
+         </p>
+       
+       <dl>
+        <dt>Description</dt>
+        <dd>${description}</dd>
+       </dl>
+    </d:tag>
+  </d:taglib>
+  
+  <h1>Discussion Lists</h1>
+  <local:mailingList name="dev"
+                     description="Developer discussion list"/>
+  <local:mailingList name="users"
+                     description="A general discussion list for the projects end users."/>
+  <local:mailingList name="ja"
+                     description="日本語ユーザーおよび開発者の為のメーリングリスト"/>
+  
+  <h1>Notification Lists</h1>
+  <local:mailingList name="issues"
+                     description="Automated notifications and discussions of the projects reported issues/artifacts and changes made to issues/artifacts."/>
+  <local:mailingList name="commits"
+                     description="A mailing list for Subversion commit messages."/>
+
+  <h1>Archive Lists</h1>
+  <local:mailingList name="cvs"
+                     description="Automated notification of file version control changes in the project and discussion of those changes."/>
+
+</body>
+</html>
