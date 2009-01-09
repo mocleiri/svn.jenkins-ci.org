@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.slaves (Hudson core 1.270 API)
+hudson.slaves (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.slaves (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.slaves (Hudson core 1.270 API)";
+        parent.document.title="hudson.slaves (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -93,7 +93,25 @@ Code related to slaves.
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Interface Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/EphemeralNode.html" title="interface in hudson.slaves">EphemeralNode</A></B></TD>
+<TD><A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s that are created by <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A> and hence not persisted as configuration by itself.</TD>
+</TR>
+</TABLE>
+&nbsp;
+
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A></B></TD>
+<TD>Creates <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s to dynamically expand/shrink the slaves attached to Hudson.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/CommandLauncher.html" title="class in hudson.slaves">CommandLauncher</A></B></TD>
@@ -109,6 +127,10 @@ Code related to slaves.
  meaning how they get connected to their slave agent program.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/ComputerLauncherFilter.html" title="class in hudson.slaves">ComputerLauncherFilter</A></B></TD>
+<TD><A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> filter that can be used as a base class for decorators.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/ComputerListener.html" title="class in hudson.slaves">ComputerListener</A></B></TD>
 <TD>Receives notifications about status changes of <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>s.</TD>
 </TR>
@@ -117,12 +139,43 @@ Code related to slaves.
 <TD>Periodically checks the slaves and try to reconnect dead slaves.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/DumbSlave.html" title="class in hudson.slaves">DumbSlave</A></B></TD>
+<TD>Default <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> implementation for computers that do not belong to a higher level structure,
+ like grid or cloud.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/DumbSlave.DescriptorImpl.html" title="class in hudson.slaves">DumbSlave.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/JNLPLauncher.html" title="class in hudson.slaves">JNLPLauncher</A></B></TD>
 <TD><A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> via JNLP.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/Messages.html" title="class in hudson.slaves">Messages</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/NodeDescriptor.html" title="class in hudson.slaves">NodeDescriptor</A></B></TD>
+<TD><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/NodeList.html" title="class in hudson.slaves">NodeList</A></B></TD>
+<TD><CODE>CopyOnWriteArrayList</CODE> for <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> that has special serialization semantics
+ of not serializing <A HREF="../../hudson/slaves/EphemeralNode.html" title="interface in hudson.slaves"><CODE>EphemeralNode</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/NodeList.ConverterImpl.html" title="class in hudson.slaves">NodeList.ConverterImpl</A></B></TD>
+<TD><CODE>Converter</CODE> implementation for XStream.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/NodeProvisioner.html" title="class in hudson.slaves">NodeProvisioner</A></B></TD>
+<TD>Uses the <A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model"><CODE>LoadStatistics</CODE></A> and determines when we need to allocate
+ new <A HREF="../../hudson/slaves/NodeProvisioner.PlannedNode.html" title="class in hudson.slaves"><CODE>NodeProvisioner.PlannedNode</CODE></A>s through <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/NodeProvisioner.PlannedNode.html" title="class in hudson.slaves">NodeProvisioner.PlannedNode</A></B></TD>
+<TD>The node addition activity in progress.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy&lt;T extends Computer&gt;</A></B></TD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Package hudson.model (Hudson core 1.270 API)
+Uses of Package hudson.model (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.model (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.model (Hudson core 1.270 API)";
+        parent.document.title="Uses of Package hudson.model (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -306,8 +306,9 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/TaskListener.html#hudson"><B>TaskListener</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some task execution,
- such as a build or SCM change polling.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some lengthy operation
+ that has some chance of failures, such as a build, SCM change polling,
+ slave launch, and so on.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/UpdateCenter.Plugin.html#hudson"><B>UpdateCenter.Plugin</B></A></B>
@@ -352,8 +353,9 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/TaskListener.html#hudson.fsp"><B>TaskListener</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some task execution,
- such as a build or SCM change polling.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some lengthy operation
+ that has some chance of failures, such as a build, SCM change polling,
+ slave launch, and so on.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -801,8 +803,9 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/TaskListener.html#hudson.maven"><B>TaskListener</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some task execution,
- such as a build or SCM change polling.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some lengthy operation
+ that has some chance of failures, such as a build, SCM change polling,
+ slave launch, and so on.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/TopLevelItem.html#hudson.maven"><B>TopLevelItem</B></A></B>
@@ -930,8 +933,9 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/TaskListener.html#hudson.maven.reporters"><B>TaskListener</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some task execution,
- such as a build or SCM change polling.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some lengthy operation
+ that has some chance of failures, such as a build, SCM change polling,
+ slave launch, and so on.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1081,6 +1085,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Descriptor.PropertyType.html#hudson.model"><B>Descriptor.PropertyType</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a readable property on <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Executor.html#hudson.model"><B>Executor</B></A></B>
 
 <BR>
@@ -1179,6 +1189,18 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Root object of the system.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Hudson.CloudList.html#hudson.model"><B>Hudson.CloudList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Hudson.DescriptorImpl.html#hudson.model"><B>Hudson.DescriptorImpl</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Item.html#hudson.model"><B>Item</B></A></B>
 
 <BR>
@@ -1227,6 +1249,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/LoadStatistics.html#hudson.model"><B>LoadStatistics</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Utilization statistics for a node or a set of nodes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/ManagementLink.html#hudson.model"><B>ManagementLink</B></A></B>
 
 <BR>
@@ -1239,6 +1267,19 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A model object has a URL.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/MultiStageTimeSeries.html#hudson.model"><B>MultiStageTimeSeries</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maintains several <A HREF="../../hudson/model/TimeSeries.html" title="class in hudson.model"><CODE>TimeSeries</CODE></A> with different update frequencies to satisfy three goals;
+ (1) retain data over long timespan, (2) save memory, and (3) retain accurate data for the recent past.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/MultiStageTimeSeries.TimeScale.html#hudson.model"><B>MultiStageTimeSeries.TimeScale</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Choose which datapoint to use.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/MyView.DescriptorImpl.html#hudson.model"><B>MyView.DescriptorImpl</B></A></B>
 
 <BR>
@@ -1248,13 +1289,19 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Node.html#hudson.model"><B>Node</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Commonality between <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> and master <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base type of Hudson slaves (although in practice, you probably extend <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> to define a new slave type.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Node.Mode.html#hudson.model"><B>Node.Mode</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constants that control how Hudson allocates jobs to slaves.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/OverallLoadStatistics.html#hudson.model"><B>OverallLoadStatistics</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model"><CODE>LoadStatistics</CODE></A> for the entire system (the master and all the slaves combined.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/PageDecorator.html#hudson.model"><B>PageDecorator</B></A></B>
@@ -1469,8 +1516,9 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/TaskListener.html#hudson.model"><B>TaskListener</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some task execution,
- such as a build or SCM change polling.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some lengthy operation
+ that has some chance of failures, such as a build, SCM change polling,
+ slave launch, and so on.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/TaskThread.html#hudson.model"><B>TaskThread</B></A></B>
@@ -1484,6 +1532,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tuple of <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> and <A HREF="../../hudson/model/LargeText.html" title="class in hudson.model"><CODE>LargeText</CODE></A>, representing
  the interface for producing output and how to retrieve it later.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/TimeSeries.html#hudson.model"><B>TimeSeries</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scalar value that changes over the time (such as load average, Q length, # of executors, etc.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/TopLevelItem.html#hudson.model"><B>TopLevelItem</B></A></B>
@@ -1656,8 +1710,9 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/TaskListener.html#hudson.model.listeners"><B>TaskListener</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some task execution,
- such as a build or SCM change polling.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some lengthy operation
+ that has some chance of failures, such as a build, SCM change polling,
+ slave launch, and so on.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1768,7 +1823,7 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Node.html#hudson.scm"><B>Node</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Commonality between <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> and master <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base type of Hudson slaves (although in practice, you probably extend <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> to define a new slave type.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Saveable.html#hudson.scm"><B>Saveable</B></A></B>
@@ -1787,8 +1842,9 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/TaskListener.html#hudson.scm"><B>TaskListener</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some task execution,
- such as a build or SCM change polling.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some lengthy operation
+ that has some chance of failures, such as a build, SCM change polling,
+ slave launch, and so on.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/TaskThread.html#hudson.scm"><B>TaskThread</B></A></B>
@@ -1928,6 +1984,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A model object has a URL.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Node.html#hudson.security"><B>Node</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base type of Hudson slaves (although in practice, you probably extend <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> to define a new slave type.)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Saveable.html#hudson.security"><B>Saveable</B></A></B>
 
 <BR>
@@ -1992,6 +2054,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Metadata about a configurable instance.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Descriptor.FormException.html#hudson.slaves"><B>Descriptor.FormException</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Executor.html#hudson.slaves"><B>Executor</B></A></B>
 
 <BR>
@@ -2004,6 +2072,18 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A listener for task related events from Executors</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Label.html#hudson.slaves"><B>Label</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group of <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/LoadStatistics.html#hudson.slaves"><B>LoadStatistics</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Utilization statistics for a node or a set of nodes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/ModelObject.html#hudson.slaves"><B>ModelObject</B></A></B>
 
 <BR>
@@ -2013,7 +2093,13 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Node.html#hudson.slaves"><B>Node</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Commonality between <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> and master <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base type of Hudson slaves (although in practice, you probably extend <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> to define a new slave type.)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Node.Mode.html#hudson.slaves"><B>Node.Mode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constants that control how Hudson allocates jobs to slaves.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Queue.Task.html#hudson.slaves"><B>Queue.Task</B></A></B>
@@ -2038,6 +2124,14 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web-bound object used to serve jar files for JNLP.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/TaskListener.html#hudson.slaves"><B>TaskListener</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some lengthy operation
+ that has some chance of failures, such as a build, SCM change polling,
+ slave launch, and so on.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -2165,8 +2259,9 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/TaskListener.html#hudson.tasks"><B>TaskListener</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some task execution,
- such as a build or SCM change polling.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some lengthy operation
+ that has some chance of failures, such as a build, SCM change polling,
+ slave launch, and so on.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/User.html#hudson.tasks"><B>User</B></A></B>
@@ -2479,7 +2574,7 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Node.html#hudson.util"><B>Node</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Commonality between <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> and master <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base type of Hudson slaves (although in practice, you probably extend <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> to define a new slave type.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Queue.Executable.html#hudson.util"><B>Queue.Executable</B></A></B>
@@ -2521,8 +2616,9 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/TaskListener.html#hudson.util"><B>TaskListener</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some task execution,
- such as a build or SCM change polling.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some lengthy operation
+ that has some chance of failures, such as a build, SCM change polling,
+ slave launch, and so on.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/View.html#hudson.util"><B>View</B></A></B>

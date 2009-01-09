@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Package hudson.slaves (Hudson core 1.270 API)
+Uses of Package hudson.slaves (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.slaves (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.slaves (Hudson core 1.270 API)";
+        parent.document.title="Uses of Package hudson.slaves (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -99,6 +99,10 @@ Packages that use <A HREF="../../hudson/slaves/package-summary.html">hudson.slav
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.security"><B>hudson.security</B></A></TD>
+<TD>Security-related code&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.slaves"><B>hudson.slaves</B></A></TD>
 <TD>Code related to slaves.&nbsp;</TD>
 </TR>
@@ -110,6 +114,12 @@ Packages that use <A HREF="../../hudson/slaves/package-summary.html">hudson.slav
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 Classes in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> used by <A HREF="../../hudson/package-summary.html">hudson</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/Cloud.html#hudson"><B>Cloud</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s to dynamically expand/shrink the slaves attached to Hudson.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/slaves/class-use/ComputerLauncher.html#hudson"><B>ComputerLauncher</B></A></B>
@@ -134,6 +144,12 @@ Classes in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> 
 Classes in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> used by <A HREF="../../hudson/model/package-summary.html">hudson.model</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/Cloud.html#hudson.model"><B>Cloud</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s to dynamically expand/shrink the slaves attached to Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/slaves/class-use/ComputerLauncher.html#hudson.model"><B>ComputerLauncher</B></A></B>
 
 <BR>
@@ -145,6 +161,19 @@ Classes in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives notifications about status changes of <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/NodeDescriptor.html#hudson.model"><B>NodeDescriptor</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/NodeProvisioner.html#hudson.model"><B>NodeProvisioner</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uses the <A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model"><CODE>LoadStatistics</CODE></A> and determines when we need to allocate
+ new <A HREF="../../hudson/slaves/NodeProvisioner.PlannedNode.html" title="class in hudson.slaves"><CODE>NodeProvisioner.PlannedNode</CODE></A>s through <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/slaves/class-use/RetentionStrategy.html#hudson.model"><B>RetentionStrategy</B></A></B>
@@ -161,6 +190,21 @@ Classes in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> 
 </TABLE>
 &nbsp;
 <P>
+<A NAME="hudson.security"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> used by <A HREF="../../hudson/security/package-summary.html">hudson.security</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/Cloud.html#hudson.security"><B>Cloud</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s to dynamically expand/shrink the slaves attached to Hudson.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="hudson.slaves"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -168,11 +212,35 @@ Classes in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> 
 Classes in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> used by <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/Cloud.html#hudson.slaves"><B>Cloud</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s to dynamically expand/shrink the slaves attached to Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/slaves/class-use/ComputerLauncher.html#hudson.slaves"><B>ComputerLauncher</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point to allow control over how <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>s are "launched",
  meaning how they get connected to their slave agent program.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/DumbSlave.DescriptorImpl.html#hudson.slaves"><B>DumbSlave.DescriptorImpl</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/NodeDescriptor.html#hudson.slaves"><B>NodeDescriptor</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/NodeProvisioner.PlannedNode.html#hudson.slaves"><B>NodeProvisioner.PlannedNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The node addition activity in progress.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/slaves/class-use/RetentionStrategy.html#hudson.slaves"><B>RetentionStrategy</B></A></B>

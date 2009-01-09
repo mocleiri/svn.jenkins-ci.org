@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ArgumentListBuilder (Hudson core 1.270 API)
+ArgumentListBuilder (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ArgumentListBuilder (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ArgumentListBuilder (Hudson core 1.270 API)";
+        parent.document.title="ArgumentListBuilder (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -144,6 +144,14 @@ Used to build up arguments for a process invocation.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ArgumentListBuilder.html#add(java.io.File)">add</A></B>(java.io.File&nbsp;f)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/ArgumentListBuilder.html#add(java.lang.Object)">add</A></B>(java.lang.Object&nbsp;a)</CODE>
 
 <BR>
@@ -188,6 +196,14 @@ Used to build up arguments for a process invocation.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ArgumentListBuilder.html#addMasked(java.lang.String)">addMasked</A></B>(java.lang.String&nbsp;string)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a masked argument</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/ArgumentListBuilder.html#addQuoted(java.lang.String)">addQuoted</A></B>(java.lang.String&nbsp;a)</CODE>
 
@@ -204,11 +220,27 @@ Used to build up arguments for a process invocation.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ArgumentListBuilder.html#clear()">clear</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Re-initializes the arguments list.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/ArgumentListBuilder.html#clone()">clone</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ArgumentListBuilder.html#hasMaskedArguments()">hasMaskedArguments</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if there are any masked arguments.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -233,6 +265,14 @@ Used to build up arguments for a process invocation.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ArgumentListBuilder.html#toMaskArray()">toMaskArray</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of booleans where the masked arguments are marked as true</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -286,6 +326,20 @@ public <B>ArgumentListBuilder</B>()</PRE>
 add</H3>
 <PRE>
 public <A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A> <B>add</B>(java.lang.Object&nbsp;a)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="add(java.io.File)"><!-- --></A><H3>
+add</H3>
+<PRE>
+public <A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A> <B>add</B>(java.io.File&nbsp;f)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -448,6 +502,22 @@ public <A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in huds
 </DL>
 <HR>
 
+<A NAME="clear()"><!-- --></A><H3>
+clear</H3>
+<PRE>
+public void <B>clear</B>()</PRE>
+<DL>
+<DD>Re-initializes the arguments list.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="toList()"><!-- --></A><H3>
 toList</H3>
 <PRE>
@@ -472,6 +542,56 @@ public java.lang.String <B>toStringWithQuote</B>()</PRE>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasMaskedArguments()"><!-- --></A><H3>
+hasMaskedArguments</H3>
+<PRE>
+public boolean <B>hasMaskedArguments</B>()</PRE>
+<DL>
+<DD>Returns true if there are any masked arguments.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>true if there are any masked arguments; false otherwise</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toMaskArray()"><!-- --></A><H3>
+toMaskArray</H3>
+<PRE>
+public boolean[] <B>toMaskArray</B>()</PRE>
+<DL>
+<DD>Returns an array of booleans where the masked arguments are marked as true
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>an array of booleans.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addMasked(java.lang.String)"><!-- --></A><H3>
+addMasked</H3>
+<PRE>
+public void <B>addMasked</B>(java.lang.String&nbsp;string)</PRE>
+<DL>
+<DD>Add a masked argument
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>string</CODE> - the argument</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

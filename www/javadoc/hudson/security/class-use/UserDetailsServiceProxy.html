@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.security.UserDetailsServiceProxy (Hudson core 1.270 API)
+Uses of Class hudson.security.UserDetailsServiceProxy (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.security.UserDetailsServiceProxy (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.security.UserDetailsServiceProxy (Hudson core 1.270 API)";
+        parent.document.title="Uses of Class hudson.security.UserDetailsServiceProxy (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -117,8 +117,9 @@ Uses of <A HREF="../../../hudson/security/UserDetailsServiceProxy.html" title="c
 <TD><CODE><B>HudsonFilter.</B><B><A HREF="../../../hudson/security/HudsonFilter.html#USER_DETAILS_SERVICE_PROXY">USER_DETAILS_SERVICE_PROXY</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<CODE>UserDetailsService</CODE> proxy so that the acegi filter chain can stay the same
- even when security setting is reconfigured.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>in 1.271.
+ This proxy always delegate to <code>Hudson.getInstance().getSecurityRealm().getSecurityComponents().userDetails</code>,
+ so use that instead.</I></TD>
 </TR>
 </TABLE>
 &nbsp;

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SecurityRealm.SecurityComponents (Hudson core 1.270 API)
+SecurityRealm.SecurityComponents (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SecurityRealm.SecurityComponents (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SecurityRealm.SecurityComponents (Hudson core 1.270 API)";
+        parent.document.title="SecurityRealm.SecurityComponents (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -107,6 +107,9 @@ java.lang.Object
 <P>
 Just a tuple so that we can create various inter-related security related objects and
  return them all at once.
+
+ <p>
+ None of the fields are ever null.
 <P>
 
 <P>
@@ -127,6 +130,14 @@ Just a tuple so that we can create various inter-related security related object
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;org.acegisecurity.AuthenticationManager</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.SecurityComponents.html#manager">manager</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.acegisecurity.ui.rememberme.RememberMeServices</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.SecurityComponents.html#rememberMe">rememberMe</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -168,6 +179,14 @@ Just a tuple so that we can create various inter-related security related object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.SecurityComponents.html#SecurityRealm.SecurityComponents(org.acegisecurity.AuthenticationManager, org.acegisecurity.userdetails.UserDetailsService, org.acegisecurity.ui.rememberme.RememberMeServices)">SecurityRealm.SecurityComponents</A></B>(org.acegisecurity.AuthenticationManager&nbsp;manager,
+                                 org.acegisecurity.userdetails.UserDetailsService&nbsp;userDetails,
+                                 org.acegisecurity.ui.rememberme.RememberMeServices&nbsp;rememberMe)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ========== METHOD SUMMARY =========== -->
@@ -204,7 +223,7 @@ Just a tuple so that we can create various inter-related security related object
 <A NAME="manager"><!-- --></A><H3>
 manager</H3>
 <PRE>
-public org.acegisecurity.AuthenticationManager <B>manager</B></PRE>
+public final org.acegisecurity.AuthenticationManager <B>manager</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -214,7 +233,17 @@ public org.acegisecurity.AuthenticationManager <B>manager</B></PRE>
 <A NAME="userDetails"><!-- --></A><H3>
 userDetails</H3>
 <PRE>
-public org.acegisecurity.userdetails.UserDetailsService <B>userDetails</B></PRE>
+public final org.acegisecurity.userdetails.UserDetailsService <B>userDetails</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="rememberMe"><!-- --></A><H3>
+rememberMe</H3>
+<PRE>
+public final org.acegisecurity.ui.rememberme.RememberMeServices <B>rememberMe</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -251,6 +280,16 @@ SecurityRealm.SecurityComponents</H3>
 <PRE>
 public <B>SecurityRealm.SecurityComponents</B>(org.acegisecurity.AuthenticationManager&nbsp;manager,
                                         org.acegisecurity.userdetails.UserDetailsService&nbsp;userDetails)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="SecurityRealm.SecurityComponents(org.acegisecurity.AuthenticationManager, org.acegisecurity.userdetails.UserDetailsService, org.acegisecurity.ui.rememberme.RememberMeServices)"><!-- --></A><H3>
+SecurityRealm.SecurityComponents</H3>
+<PRE>
+public <B>SecurityRealm.SecurityComponents</B>(org.acegisecurity.AuthenticationManager&nbsp;manager,
+                                        org.acegisecurity.userdetails.UserDetailsService&nbsp;userDetails,
+                                        org.acegisecurity.ui.rememberme.RememberMeServices&nbsp;rememberMe)</PRE>
 <DL>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

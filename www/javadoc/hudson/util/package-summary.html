@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.util (Hudson core 1.270 API)
+hudson.util (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.util (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.util (Hudson core 1.270 API)";
+        parent.document.title="hudson.util (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -275,6 +275,10 @@ Other miscellaneous utility code
 <TD>Base class that provides the framework for doing on-the-fly form field validation.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.Base64.html" title="class in hudson.util">FormFieldValidator.Base64</A></B></TD>
+<TD>Verifies that the 'value' parameter is correct base64 encoded text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.Executable.html" title="class in hudson.util">FormFieldValidator.Executable</A></B></TD>
 <TD>Checks a valid executable binary (specified in the 'value' query parameter).</TD>
 </TR>
@@ -300,6 +304,10 @@ Other miscellaneous utility code
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceFilePath.html" title="class in hudson.util">FormFieldValidator.WorkspaceFilePath</A></B></TD>
 <TD>Checks a valid file name or directory (specified in the 'value' query parameter) against
  the current workspace.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/Futures.html" title="class in hudson.util">Futures</A></B></TD>
+<TD>Various <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Future.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Future</CODE></A> implementations.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/HeadBufferingStream.html" title="class in hudson.util">HeadBufferingStream</A></B></TD>
@@ -384,6 +392,11 @@ Other miscellaneous utility code
  we couldn't create the home directory.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/NoOverlapCategoryAxis.html" title="class in hudson.util">NoOverlapCategoryAxis</A></B></TD>
+<TD>This class implements X-axis label skipping algorithm to
+ avoid drawing overlapping labels.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/NoTempDir.html" title="class in hudson.util">NoTempDir</A></B></TD>
 <TD>Model object used to display the error top page if
  there appears to be no temporary directory.</TD>
@@ -440,6 +453,14 @@ Other miscellaneous utility code
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/Scrambler.html" title="class in hudson.util">Scrambler</A></B></TD>
 <TD>Used when storing passwords in configuration files.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/Secret.html" title="class in hudson.util">Secret</A></B></TD>
+<TD>Glorified <CODE>String</CODE> that uses encryption in the persisted form, to avoid accidental exposure of a secret.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/Secret.ConverterImpl.html" title="class in hudson.util">Secret.ConverterImpl</A></B></TD>
+<TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/Service.html" title="class in hudson.util">Service</A></B></TD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ListView (Hudson core 1.270 API)
+ListView (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ListView (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ListView (Hudson core 1.270 API)";
+        parent.document.title="ListView (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -215,6 +215,14 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ListView.html#getActions()">getActions</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the transient <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s associated with the top page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/ViewDescriptor.html" title="class in hudson.model">ViewDescriptor</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ListView.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
@@ -262,7 +270,7 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/View.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/View.html#create(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.model.ViewGroup)">create</A>, <A HREF="../../hudson/model/View.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A>, <A HREF="../../hudson/model/View.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/View.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/View.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/View.html#doRssLatest(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssLatest</A>, <A HREF="../../hudson/model/View.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/View.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/View.html#getACL()">getACL</A>, <A HREF="../../hudson/model/View.html#getActions()">getActions</A>, <A HREF="../../hudson/model/View.html#getApi()">getApi</A>, <A HREF="../../hudson/model/View.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/View.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/View.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/View.html#getItem(java.lang.String)">getItem</A>, <A HREF="../../hudson/model/View.html#getItemCreatePermission()">getItemCreatePermission</A>, <A HREF="../../hudson/model/View.html#getJob(java.lang.String)">getJob</A>, <A HREF="../../hudson/model/View.html#getOwner()">getOwner</A>, <A HREF="../../hudson/model/View.html#getPeople()">getPeople</A>, <A HREF="../../hudson/model/View.html#getPostConstructLandingPage()">getPostConstructLandingPage</A>, <A HREF="../../hudson/model/View.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/View.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/View.html#getViewName()">getViewName</A>, <A HREF="../../hudson/model/View.html#hasPeople()">hasPeople</A>, <A HREF="../../hudson/model/View.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/View.html#isDefault()">isDefault</A>, <A HREF="../../hudson/model/View.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/View.html#rename(java.lang.String)">rename</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/View.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/View.html#create(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.model.ViewGroup)">create</A>, <A HREF="../../hudson/model/View.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A>, <A HREF="../../hudson/model/View.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/View.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/View.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/View.html#doRssLatest(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssLatest</A>, <A HREF="../../hudson/model/View.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/View.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/View.html#getACL()">getACL</A>, <A HREF="../../hudson/model/View.html#getApi()">getApi</A>, <A HREF="../../hudson/model/View.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/View.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/View.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/View.html#getItem(java.lang.String)">getItem</A>, <A HREF="../../hudson/model/View.html#getItemCreatePermission()">getItemCreatePermission</A>, <A HREF="../../hudson/model/View.html#getJob(java.lang.String)">getJob</A>, <A HREF="../../hudson/model/View.html#getOwner()">getOwner</A>, <A HREF="../../hudson/model/View.html#getPeople()">getPeople</A>, <A HREF="../../hudson/model/View.html#getPostConstructLandingPage()">getPostConstructLandingPage</A>, <A HREF="../../hudson/model/View.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/View.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/View.html#getViewName()">getViewName</A>, <A HREF="../../hudson/model/View.html#hasPeople()">hasPeople</A>, <A HREF="../../hudson/model/View.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/View.html#isDefault()">isDefault</A>, <A HREF="../../hudson/model/View.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/View.html#rename(java.lang.String)">rename</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -332,6 +340,22 @@ ListView</H3>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="getActions()"><!-- --></A><H3>
+getActions</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>getActions</B>()</PRE>
+<DL>
+<DD>Returns the transient <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s associated with the top page.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/View.html#getActions()">getActions</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Hudson.html#getActions()"><CODE>Hudson.getActions()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="getItems()"><!-- --></A><H3>
 getItems</H3>

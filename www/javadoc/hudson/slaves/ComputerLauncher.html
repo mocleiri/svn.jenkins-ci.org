@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ComputerLauncher (Hudson core 1.270 API)
+ComputerLauncher (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ComputerLauncher (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ComputerLauncher (Hudson core 1.270 API)";
+        parent.document.title="ComputerLauncher (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/slaves/CommandLauncher.DescriptorImpl.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/slaves/ComputerListener.html" title="class in hudson.slaves"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/slaves/ComputerLauncherFilter.html" title="class in hudson.slaves"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/slaves/ComputerLauncher.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ComputerLauncher.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -100,7 +100,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;</DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/slaves/CommandLauncher.html" title="class in hudson.slaves">CommandLauncher</A>, <A HREF="../../hudson/slaves/JNLPLauncher.html" title="class in hudson.slaves">JNLPLauncher</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/slaves/CommandLauncher.html" title="class in hudson.slaves">CommandLauncher</A>, <A HREF="../../hudson/slaves/ComputerLauncherFilter.html" title="class in hudson.slaves">ComputerLauncherFilter</A>, <A HREF="../../hudson/slaves/JNLPLauncher.html" title="class in hudson.slaves">JNLPLauncher</A></DD>
 </DL>
 <HR>
 <DL>
@@ -110,6 +110,14 @@ java.lang.Object
 <P>
 Extension point to allow control over how <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>s are "launched",
  meaning how they get connected to their slave agent program.
+
+ <h2>Associated View</h2>
+ <dl>
+ <dt>main.jelly</dt>
+ <dd>
+ This page will be rendered into the top page of the computer (/computer/NAME/)
+ Useful for showing launch related commands and status reports.
+ </dl>
 
  <p>
  <b>EXPERIMENTAL: SIGNATURE MAY CHANGE IN FUTURE RELEASES</b>
@@ -294,7 +302,9 @@ public boolean <B>isLaunchSupported</B>()</PRE>
 launch</H3>
 <PRE>
 public abstract void <B>launch</B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-                            <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</PRE>
+                            <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)
+                     throws java.io.IOException,
+                            java.lang.InterruptedException</PRE>
 <DL>
 <DD>Launches the slave agent for the given <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.
 
@@ -308,7 +318,12 @@ public abstract void <B>launch</B>(<A HREF="../../hudson/slaves/SlaveComputer.ht
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>listener</CODE> - The progress of the launch, as well as any error, should be sent to this listener.</DL>
+<DT><B>Parameters:</B><DD><CODE>listener</CODE> - The progress of the launch, as well as any error, should be sent to this listener.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - if the method throws an <CODE>IOException</CODE> or <CODE>InterruptedException</CODE>, the launch was considered
+      a failure and the stack trace is reported into the listener. This handling is just so that the implementation
+      of this method doesn't have to dilligently catch those exceptions.
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -377,7 +392,7 @@ public void <B>beforeDisconnect</B>(<A HREF="../../hudson/slaves/SlaveComputer.h
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/slaves/CommandLauncher.DescriptorImpl.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/slaves/ComputerListener.html" title="class in hudson.slaves"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/slaves/ComputerLauncherFilter.html" title="class in hudson.slaves"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/slaves/ComputerLauncher.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ComputerLauncher.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

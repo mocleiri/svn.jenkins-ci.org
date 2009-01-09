@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FormFieldValidator (Hudson core 1.270 API)
+FormFieldValidator (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FormFieldValidator (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FormFieldValidator (Hudson core 1.270 API)";
+        parent.document.title="FormFieldValidator (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/util/ForkOutputStream.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/util/FormFieldValidator.Executable.html" title="class in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/util/FormFieldValidator.Base64.html" title="class in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/util/FormFieldValidator.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="FormFieldValidator.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -97,7 +97,7 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.FormFieldValidator</B>
 </PRE>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/util/FormFieldValidator.Executable.html" title="class in hudson.util">FormFieldValidator.Executable</A>, <A HREF="../../hudson/util/FormFieldValidator.URLCheck.html" title="class in hudson.util">FormFieldValidator.URLCheck</A>, <A HREF="../../hudson/util/FormFieldValidator.WorkspaceFileMask.html" title="class in hudson.util">FormFieldValidator.WorkspaceFileMask</A>, <A HREF="../../hudson/util/FormFieldValidator.WorkspaceFilePath.html" title="class in hudson.util">FormFieldValidator.WorkspaceFilePath</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/util/FormFieldValidator.Base64.html" title="class in hudson.util">FormFieldValidator.Base64</A>, <A HREF="../../hudson/util/FormFieldValidator.Executable.html" title="class in hudson.util">FormFieldValidator.Executable</A>, <A HREF="../../hudson/util/FormFieldValidator.URLCheck.html" title="class in hudson.util">FormFieldValidator.URLCheck</A>, <A HREF="../../hudson/util/FormFieldValidator.WorkspaceFileMask.html" title="class in hudson.util">FormFieldValidator.WorkspaceFileMask</A>, <A HREF="../../hudson/util/FormFieldValidator.WorkspaceFilePath.html" title="class in hudson.util">FormFieldValidator.WorkspaceFilePath</A></DD>
 </DL>
 <HR>
 <DL>
@@ -127,6 +127,14 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.Base64.html" title="class in hudson.util">FormFieldValidator.Base64</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verifies that the 'value' parameter is correct base64 encoded text.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -241,13 +249,31 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#FormFieldValidator(hudson.security.AccessControlled, hudson.security.Permission)">FormFieldValidator</A></B>(<A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>&nbsp;subject,
+                   <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#FormFieldValidator(hudson.security.Permission)">FormFieldValidator</A></B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#FormFieldValidator(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.security.AccessControlled, hudson.security.Permission)">FormFieldValidator</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
                    org.kohsuke.stapler.StaplerResponse&nbsp;response,
                    <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>&nbsp;subject,
                    <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/util/FormFieldValidator.html#FormFieldValidator(hudson.security.AccessControlled, hudson.security.Permission)"><CODE>FormFieldValidator(AccessControlled,Permission)</CODE></A> and remove <CODE>StaplerRequest</CODE> and <CODE>StaplerResponse</CODE>
+      from your "doCheck..." method parameter</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -267,7 +293,8 @@ Base class that provides the framework for doing on-the-fly form field validatio
                    <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/util/FormFieldValidator.html#FormFieldValidator(hudson.security.Permission)"><CODE>FormFieldValidator(Permission)</CODE></A> and remove <CODE>StaplerRequest</CODE> and <CODE>StaplerResponse</CODE>
+      from your "doCheck..." method parameter</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -328,6 +355,31 @@ Base class that provides the framework for doing on-the-fly form field validatio
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sends out an HTML fragment that indicates a success.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#ok(java.lang.String)">ok</A></B>(java.lang.String&nbsp;message)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#ok(java.lang.String, java.lang.Object...)">ok</A></B>(java.lang.String&nbsp;format,
+   java.lang.Object...&nbsp;args)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#okWithMarkup(java.lang.String)">okWithMarkup</A></B>(java.lang.String&nbsp;message)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -470,6 +522,19 @@ protected <B>FormFieldValidator</B>(org.kohsuke.stapler.StaplerRequest&nbsp;requ
                              org.kohsuke.stapler.StaplerResponse&nbsp;response,
                              <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/util/FormFieldValidator.html#FormFieldValidator(hudson.security.Permission)"><CODE>FormFieldValidator(Permission)</CODE></A> and remove <CODE>StaplerRequest</CODE> and <CODE>StaplerResponse</CODE>
+      from your "doCheck..." method parameter</I>
+<P>
+</DL>
+<HR>
+
+<A NAME="FormFieldValidator(hudson.security.Permission)"><!-- --></A><H3>
+FormFieldValidator</H3>
+<PRE>
+protected <B>FormFieldValidator</B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</PRE>
+<DL>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>permission</CODE> - Permission needed to perform this validation, or null if no permission is necessary.</DL>
 </DL>
 <HR>
 
@@ -479,6 +544,18 @@ FormFieldValidator</H3>
 protected <B>FormFieldValidator</B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
                              org.kohsuke.stapler.StaplerResponse&nbsp;response,
                              <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>&nbsp;subject,
+                             <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/util/FormFieldValidator.html#FormFieldValidator(hudson.security.AccessControlled, hudson.security.Permission)"><CODE>FormFieldValidator(AccessControlled,Permission)</CODE></A> and remove <CODE>StaplerRequest</CODE> and <CODE>StaplerResponse</CODE>
+      from your "doCheck..." method parameter</I>
+<P>
+</DL>
+<HR>
+
+<A NAME="FormFieldValidator(hudson.security.AccessControlled, hudson.security.Permission)"><!-- --></A><H3>
+FormFieldValidator</H3>
+<PRE>
+protected <B>FormFieldValidator</B>(<A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>&nbsp;subject,
                              <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</PRE>
 <DL>
 </DL>
@@ -593,6 +670,22 @@ public void <B>warning</B>(java.lang.String&nbsp;message)
 </DL>
 <HR>
 
+<A NAME="ok(java.lang.String)"><!-- --></A><H3>
+ok</H3>
+<PRE>
+public void <B>ok</B>(java.lang.String&nbsp;message)
+        throws java.io.IOException,
+               javax.servlet.ServletException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="error(java.lang.String, java.lang.Object...)"><!-- --></A><H3>
 error</H3>
 <PRE>
@@ -620,6 +713,23 @@ public void <B>warning</B>(java.lang.String&nbsp;format,
                     java.lang.Object...&nbsp;args)
              throws java.io.IOException,
                     javax.servlet.ServletException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="ok(java.lang.String, java.lang.Object...)"><!-- --></A><H3>
+ok</H3>
+<PRE>
+public void <B>ok</B>(java.lang.String&nbsp;format,
+               java.lang.Object...&nbsp;args)
+        throws java.io.IOException,
+               javax.servlet.ServletException</PRE>
 <DL>
 <DD><DL>
 
@@ -667,6 +777,22 @@ public void <B>warningWithMarkup</B>(java.lang.String&nbsp;message)
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
+<HR>
+
+<A NAME="okWithMarkup(java.lang.String)"><!-- --></A><H3>
+okWithMarkup</H3>
+<PRE>
+public void <B>okWithMarkup</B>(java.lang.String&nbsp;message)
+                  throws java.io.IOException,
+                         javax.servlet.ServletException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
 
@@ -699,7 +825,7 @@ public void <B>warningWithMarkup</B>(java.lang.String&nbsp;message)
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/util/ForkOutputStream.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/util/FormFieldValidator.Executable.html" title="class in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/util/FormFieldValidator.Base64.html" title="class in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/util/FormFieldValidator.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="FormFieldValidator.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

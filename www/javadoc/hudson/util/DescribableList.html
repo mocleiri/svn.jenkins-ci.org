@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-DescribableList (Hudson core 1.270 API)
+DescribableList (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DescribableList (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DescribableList (Hudson core 1.270 API)";
+        parent.document.title="DescribableList (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -98,6 +98,9 @@ java.lang.Object
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD>java.lang.Iterable&lt;T&gt;</DD>
+</DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/Hudson.CloudList.html" title="class in hudson.model">Hudson.CloudList</A></DD>
 </DL>
 <HR>
 <DL>
@@ -232,6 +235,24 @@ Persisted list of <A HREF="../../hudson/model/Describable.html" title="interface
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/DescribableList.html#onModified()">onModified</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called when a list is mutated.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/DescribableList.html#rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List)">rebuild</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+        net.sf.json.JSONObject&nbsp;json,
+        java.util.List&lt;? extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&gt;&nbsp;descriptors)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rebuilds the list by creating a fresh instances from the submitted form.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/DescribableList.html#rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List, java.lang.String)">rebuild</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
         net.sf.json.JSONObject&nbsp;json,
@@ -239,7 +260,8 @@ Persisted list of <A HREF="../../hudson/model/Describable.html" title="interface
         java.lang.String&nbsp;prefix)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rebuilds the list by creating a fresh instances from the submitted form.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.271
+      Use <A HREF="../../hudson/util/DescribableList.html#rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List)"><CODE>rebuild(StaplerRequest, JSONObject, List)</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -456,6 +478,25 @@ public java.util.Iterator&lt;<A HREF="../../hudson/util/DescribableList.html" ti
 </DL>
 <HR>
 
+<A NAME="onModified()"><!-- --></A><H3>
+onModified</H3>
+<PRE>
+protected void <B>onModified</B>()
+                   throws java.io.IOException</PRE>
+<DL>
+<DD>Called when a list is mutated.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="toMap()"><!-- --></A><H3>
 toMap</H3>
 <PRE>
@@ -516,13 +557,12 @@ public void <B>addAllTo</B>(java.util.Collection&lt;? super <A HREF="../../hudso
 </DL>
 <HR>
 
-<A NAME="rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List, java.lang.String)"><!-- --></A><H3>
+<A NAME="rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List)"><!-- --></A><H3>
 rebuild</H3>
 <PRE>
 public void <B>rebuild</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                     net.sf.json.JSONObject&nbsp;json,
-                    java.util.List&lt;? extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&gt;&nbsp;descriptors,
-                    java.lang.String&nbsp;prefix)
+                    java.util.List&lt;? extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&gt;&nbsp;descriptors)
              throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
 <DL>
 <DD>Rebuilds the list by creating a fresh instances from the submitted form.
@@ -536,6 +576,29 @@ public void <B>rebuild</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>json</CODE> - Structured form data that includes the data for nested descriptor list.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List, java.lang.String)"><!-- --></A><H3>
+rebuild</H3>
+<PRE>
+public void <B>rebuild</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                    net.sf.json.JSONObject&nbsp;json,
+                    java.util.List&lt;? extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&gt;&nbsp;descriptors,
+                    java.lang.String&nbsp;prefix)
+             throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.271
+      Use <A HREF="../../hudson/util/DescribableList.html#rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List)"><CODE>rebuild(StaplerRequest, JSONObject, List)</CODE></A> instead.</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
 </DD>

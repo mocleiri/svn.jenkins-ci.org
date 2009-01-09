@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.270 API)
+Hudson (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.270 API)";
+        parent.document.title="Hudson (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/HealthReportingAction.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/Hudson.MasterComputer.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/Hudson.CloudList.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Hudson.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Hudson.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -98,7 +98,7 @@ java.lang.Object
       <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Hudson</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, org.kohsuke.stapler.StaplerFallback, org.kohsuke.stapler.StaplerProxy</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt;, <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, org.kohsuke.stapler.StaplerFallback, org.kohsuke.stapler.StaplerProxy</DD>
 </DL>
 <HR>
 <DL>
@@ -125,6 +125,22 @@ Root object of the system.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.CloudList.html" title="class in hudson.model">Hudson.CloudList</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.DescriptorImpl.html" title="class in hudson.model">Hudson.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -171,6 +187,14 @@ Root object of the system.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Hudson.CloudList.html" title="class in hudson.model">Hudson.CloudList</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#clouds">clouds</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Active <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#KILL_AFTER_LOAD">KILL_AFTER_LOAD</A></B></CODE>
 
@@ -192,6 +216,22 @@ Root object of the system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Live view of recent <CODE>LogRecord</CODE>s produced by Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/OverallLoadStatistics.html" title="class in hudson.model">OverallLoadStatistics</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#overallLoad">overallLoad</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Load statistics of the entire system.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/slaves/NodeProvisioner.html" title="class in hudson.slaves">NodeProvisioner</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#overallNodeProvisioner">overallNodeProvisioner</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/slaves/NodeProvisioner.html" title="class in hudson.slaves"><CODE>NodeProvisioner</CODE></A> that reacts to <A HREF="../../hudson/model/OverallLoadStatistics.html" title="class in hudson.model"><CODE>OverallLoadStatistics</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -342,6 +382,14 @@ Root object of the system.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#addNode(hudson.model.Node)">addNode</A></B>(<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds one more <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> to Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#adminCheck()">adminCheck</A></B>()</CODE>
 
@@ -388,7 +436,7 @@ Root object of the system.
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#createComputer()">createComputer</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> object that acts as the UI peer of this <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -835,6 +883,14 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getCloud(java.lang.String)">getCloud</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A> by <A HREF="../../hudson/slaves/Cloud.html#name"><CODE>its name</CODE></A>, or null.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/ComputerSet.html" title="class in hudson.model">ComputerSet</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getComputer()">getComputer</A></B>()</CODE>
 
@@ -863,7 +919,7 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getComputers()">getComputers</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the read-only list of all <A HREF="../../hudson/model/Hudson.MasterComputer.html" title="class in hudson.model"><CODE>Hudson.MasterComputer</CODE></A>s.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the read-only list of all <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -880,6 +936,14 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/slaves/NodeDescriptor.html" title="class in hudson.slaves">NodeDescriptor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1095,6 +1159,14 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getLabelString()">getLabelString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle">Lifecycle</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getLifecycle()">getLifecycle</A></B>()</CODE>
 
@@ -1129,6 +1201,14 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getNode(java.lang.String)">getNode</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the slave node of the give name, hooked under this Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getNodeDescription()">getNodeDescription</A></B>()</CODE>
 
@@ -1142,6 +1222,15 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getNodes()">getNodes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s in the system, excluding <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> instance itself which
+ represents the master.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1370,7 +1459,7 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getSlave(java.lang.String)">getSlave</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the slave node of the give name, hooked under this Hudson.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Hudson.html#getNode(java.lang.String)"><CODE>getNode(String)</CODE></A>. Since 1.252.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1386,7 +1475,7 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getSlaves()">getSlaves</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Hudson.html#getNodes()"><CODE>getNodes()</CODE></A>. Since 1.252.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1631,10 +1720,35 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#removeNode(hudson.model.Node)">removeNode</A></B>(<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes a <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> from Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#save()">save</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the settings to a file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#setNodeName(java.lang.String)">setNodeName</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When the user clones a <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>, Hudson uses this method to change the node name right after
+ the cloned <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> object is instantiated.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#setNodes(java.util.List)">setNodes</A></B>(java.util.List&lt;? extends <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt;&nbsp;nodes)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1658,7 +1772,7 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#setSlaves(java.util.List)">setSlaves</A></B>(java.util.List&lt;<A HREF="../../hudson/model/Slave.html" title="class in hudson.model">Slave</A>&gt;&nbsp;slaves)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updates the slave list.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Hudson.html#setNodes(java.util.List)"><CODE>setNodes(List)</CODE></A>. Since 1.252.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1712,6 +1826,18 @@ public final transient java.io.File <B>root</B></PRE>
 </DL>
 <HR>
 
+<A NAME="clouds"><!-- --></A><H3>
+clouds</H3>
+<PRE>
+public final <A HREF="../../hudson/model/Hudson.CloudList.html" title="class in hudson.model">Hudson.CloudList</A> <B>clouds</B></PRE>
+<DL>
+<DD>Active <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A>s.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
 <A NAME="pluginManager"><!-- --></A><H3>
 pluginManager</H3>
 <PRE>
@@ -1729,6 +1855,30 @@ tcpSlaveAgentListener</H3>
 <PRE>
 public transient volatile <A HREF="../../hudson/TcpSlaveAgentListener.html" title="class in hudson">TcpSlaveAgentListener</A> <B>tcpSlaveAgentListener</B></PRE>
 <DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="overallLoad"><!-- --></A><H3>
+overallLoad</H3>
+<PRE>
+public final transient <A HREF="../../hudson/model/OverallLoadStatistics.html" title="class in hudson.model">OverallLoadStatistics</A> <B>overallLoad</B></PRE>
+<DL>
+<DD>Load statistics of the entire system.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="overallNodeProvisioner"><!-- --></A><H3>
+overallNodeProvisioner</H3>
+<PRE>
+public final transient <A HREF="../../hudson/slaves/NodeProvisioner.html" title="class in hudson.slaves">NodeProvisioner</A> <B>overallNodeProvisioner</B></PRE>
+<DL>
+<DD><A HREF="../../hudson/slaves/NodeProvisioner.html" title="class in hudson.slaves"><CODE>NodeProvisioner</CODE></A> that reacts to <A HREF="../../hudson/model/OverallLoadStatistics.html" title="class in hudson.model"><CODE>OverallLoadStatistics</CODE></A>.
+<P>
 <DL>
 </DL>
 </DL>
@@ -2018,6 +2168,28 @@ getNodeName</H3>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>"" if this is master</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNodeName(java.lang.String)"><!-- --></A><H3>
+setNodeName</H3>
+<PRE>
+public void <B>setNodeName</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Node.html#setNodeName(java.lang.String)">Node</A></CODE></B></DD>
+<DD>When the user clones a <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>, Hudson uses this method to change the node name right after
+ the cloned <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> object is instantiated.
+
+ <p>
+ This method is never used for any other purpose, and as such for all practical intents and purposes,
+ the node name should be treated like immutable.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Node.html#setNodeName(java.lang.String)">setNodeName</A></CODE> in interface <CODE><A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -2702,7 +2874,7 @@ getComputers</H3>
 <PRE>
 public <A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>[] <B>getComputers</B>()</PRE>
 <DL>
-<DD>Gets the read-only list of all <A HREF="../../hudson/model/Hudson.MasterComputer.html" title="class in hudson.model"><CODE>Hudson.MasterComputer</CODE></A>s.
+<DD>Gets the read-only list of all <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>s.
 <P>
 <DD><DL>
 </DL>
@@ -2756,7 +2928,8 @@ public <A HREF="../../hudson/model/Computer.html" title="class in hudson.model">
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>never null.</DL>
+<DT><B>Returns:</B><DD>this method can return null if there's no <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> object for this node,
+      such as when this node has no executors at all.</DL>
 </DD>
 </DL>
 <HR>
@@ -2857,7 +3030,41 @@ getSlave</H3>
 <PRE>
 public <A HREF="../../hudson/model/Slave.html" title="class in hudson.model">Slave</A> <B>getSlave</B>(java.lang.String&nbsp;name)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Hudson.html#getNode(java.lang.String)"><CODE>getNode(String)</CODE></A>. Since 1.252.</I>
+<P>
 <DD>Gets the slave node of the give name, hooked under this Hudson.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNode(java.lang.String)"><!-- --></A><H3>
+getNode</H3>
+<PRE>
+public <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A> <B>getNode</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD>Gets the slave node of the give name, hooked under this Hudson.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCloud(java.lang.String)"><!-- --></A><H3>
+getCloud</H3>
+<PRE>
+public <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A> <B>getCloud</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD>Gets a <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A> by <A HREF="../../hudson/slaves/Cloud.html#name"><CODE>its name</CODE></A>, or null.
 <P>
 <DD><DL>
 </DL>
@@ -2873,6 +3080,25 @@ getSlaves</H3>
 <PRE>
 public java.util.List&lt;<A HREF="../../hudson/model/Slave.html" title="class in hudson.model">Slave</A>&gt; <B>getSlaves</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Hudson.html#getNodes()"><CODE>getNodes()</CODE></A>. Since 1.252.</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNodes()"><!-- --></A><H3>
+getNodes</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt; <B>getNodes</B>()</PRE>
+<DL>
+<DD>Returns all <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s in the system, excluding <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> instance itself which
+ represents the master.
+<P>
 <DD><DL>
 </DL>
 </DD>
@@ -2888,6 +3114,8 @@ setSlaves</H3>
 public void <B>setSlaves</B>(java.util.List&lt;<A HREF="../../hudson/model/Slave.html" title="class in hudson.model">Slave</A>&gt;&nbsp;slaves)
                throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Hudson.html#setNodes(java.util.List)"><CODE>setNodes(List)</CODE></A>. Since 1.252.</I>
+<P>
 <DD>Updates the slave list.
 <P>
 <DD><DL>
@@ -2897,6 +3125,83 @@ public void <B>setSlaves</B>(java.util.List&lt;<A HREF="../../hudson/model/Slave
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addNode(hudson.model.Node)"><!-- --></A><H3>
+addNode</H3>
+<PRE>
+public void <B>addNode</B>(<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&nbsp;n)
+             throws java.io.IOException</PRE>
+<DL>
+<DD>Adds one more <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> to Hudson.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeNode(hudson.model.Node)"><!-- --></A><H3>
+removeNode</H3>
+<PRE>
+public void <B>removeNode</B>(<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&nbsp;n)
+                throws java.io.IOException</PRE>
+<DL>
+<DD>Removes a <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> from Hudson.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNodes(java.util.List)"><!-- --></A><H3>
+setNodes</H3>
+<PRE>
+public void <B>setNodes</B>(java.util.List&lt;? extends <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt;&nbsp;nodes)
+              throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDescriptor()"><!-- --></A><H3>
+getDescriptor</H3>
+<PRE>
+public <A HREF="../../hudson/slaves/NodeDescriptor.html" title="class in hudson.slaves">NodeDescriptor</A> <B>getDescriptor</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
+<DD>Gets the descriptor for this instance.
+
+ <p>
+ <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> is a singleton for every concrete <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
+ implementation, so if <tt>a.getClass()==b.getClass()</tt> then
+ <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Node.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -3639,6 +3944,20 @@ public <A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">
 </DL>
 <HR>
 
+<A NAME="getLabelString()"><!-- --></A><H3>
+getLabelString</H3>
+<PRE>
+public java.lang.String <B>getLabelString</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getAssignedLabels()"><!-- --></A><H3>
 getAssignedLabels</H3>
 <PRE>
@@ -3695,6 +4014,10 @@ createComputer</H3>
 <PRE>
 public <A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A> <B>createComputer</B>()</PRE>
 <DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Node.html#createComputer()">Node</A></CODE></B></DD>
+<DD>Creates a new <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> object that acts as the UI peer of this <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>.
+ Nobody but <A HREF="../../hudson/model/Hudson.html#updateComputerList()"><CODE>updateComputerList()</CODE></A> should call this method.
+<P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Node.html#createComputer()">createComputer</A></CODE> in interface <CODE><A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></CODE></DL>
 </DD>
@@ -4806,7 +5129,7 @@ public static boolean <B>isAdmin</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/HealthReportingAction.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/Hudson.MasterComputer.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/Hudson.CloudList.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Hudson.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Hudson.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

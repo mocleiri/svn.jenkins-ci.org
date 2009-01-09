@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-PluginServletFilter (Hudson core 1.270 API)
+PluginServletFilter (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginServletFilter (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginServletFilter (Hudson core 1.270 API)";
+        parent.document.title="PluginServletFilter (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -110,9 +110,15 @@ Servlet <CODE>Filter</CODE> that chains multiple <CODE>Filter</CODE>s, provided 
  <p>
  While this class by itself is not an extension point, I'm marking this class
  as an extension point so that this class will be more discoverable.
+
+ <p>
+ <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> that wants to contribute <CODE>Filter</CODE>s should first
+ check if <A HREF="../../hudson/security/SecurityRealm.html#createFilter(javax.servlet.FilterConfig)"><CODE>SecurityRealm.createFilter(FilterConfig)</CODE></A> is more appropriate.
 <P>
 
 <P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A></DL>
 <HR>
 
 <P>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Util (Hudson core 1.270 API)
+Util (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson core 1.270 API)";
+        parent.document.title="Util (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -527,6 +527,14 @@ Various utility methods that don't have more proper home.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replaces the occurrence of '$key' by <tt>resolver.get('key')</tt>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Util.html#singleQuote(java.lang.String)">singleQuote</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surrounds by a single-quote.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1119,6 +1127,19 @@ encode</H3>
 public static java.lang.String <B>encode</B>(java.lang.String&nbsp;s)</PRE>
 <DL>
 <DD>Escapes non-ASCII characters in URL.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="singleQuote(java.lang.String)"><!-- --></A><H3>
+singleQuote</H3>
+<PRE>
+public static java.lang.String <B>singleQuote</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>Surrounds by a single-quote.
 <P>
 <DD><DL>
 </DL>

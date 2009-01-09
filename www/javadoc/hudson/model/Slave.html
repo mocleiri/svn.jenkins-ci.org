@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Slave (Hudson core 1.270 API)
+Slave (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Slave (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Slave (Hudson core 1.270 API)";
+        parent.document.title="Slave (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -97,11 +97,14 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Slave</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>, java.io.Serializable</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt;, <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, java.io.Serializable</DD>
+</DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/slaves/DumbSlave.html" title="class in hudson.slaves">DumbSlave</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>Slave</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>, java.io.Serializable</DL>
+<DT><PRE>public abstract class <B>Slave</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>, java.io.Serializable</DL>
 </PRE>
 
 <P>
@@ -110,6 +113,9 @@ Information about a Hudson slave node.
  <p>
  Ideally this would have been in the <tt>hudson.slaves</tt> package,
  but for compatibility reasons, it can't.
+
+ <p>
+ TODO: move out more stuff to <A HREF="../../hudson/slaves/DumbSlave.html" title="class in hudson.slaves"><CODE>DumbSlave</CODE></A>.
 <P>
 
 <P>
@@ -183,6 +189,19 @@ Information about a Hudson slave node.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, int, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)">Slave</A></B>(java.lang.String&nbsp;name,
+      java.lang.String&nbsp;description,
+      java.lang.String&nbsp;remoteFS,
+      int&nbsp;numExecutors,
+      <A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
+      java.lang.String&nbsp;label,
+      <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
+      <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)">Slave</A></B>(java.lang.String&nbsp;name,
       java.lang.String&nbsp;description,
       java.lang.String&nbsp;remoteFS,
@@ -207,11 +226,19 @@ Information about a Hudson slave node.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Slave.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenient short-cut for <code>getACL().checkPermission(permission)</code></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Slave.html#createComputer()">createComputer</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> object that acts as the UI peer of this <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -236,6 +263,14 @@ Information about a Hudson slave node.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/security/ACL.html" title="class in hudson.security">ACL</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Slave.html#getACL()">getACL</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the ACL associated with this object.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -378,11 +413,28 @@ Information about a Hudson slave node.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Slave.html#hasPermission(hudson.security.Permission)">hasPermission</A></B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenient short-cut for <code>getACL().hasPermission(permission)</code></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Slave.html#setLauncher(hudson.slaves.ComputerLauncher)">setLauncher</A></B>(<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Slave.html#setNodeName(java.lang.String)">setNodeName</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When the user clones a <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>, Hudson uses this method to change the node name right after
+ the cloned <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> object is instantiated.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -410,6 +462,15 @@ Information about a Hudson slave node.
 <TD><CODE>clone, finalize, getClass, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Node"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Node.html#getDescriptor()">getDescriptor</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
 <P>
 
@@ -426,7 +487,7 @@ Information about a Hudson slave node.
 <A NAME="name"><!-- --></A><H3>
 name</H3>
 <PRE>
-protected final java.lang.String <B>name</B></PRE>
+protected java.lang.String <B>name</B></PRE>
 <DL>
 <DD>Name of this slave node.
 <P>
@@ -469,6 +530,26 @@ Slave</H3>
                                   java.lang.String&nbsp;label,
                                   <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
                                   <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy)
+      throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+<DL>
+<DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+</DL>
+<HR>
+
+<A NAME="Slave(java.lang.String, java.lang.String, java.lang.String, int, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)"><!-- --></A><H3>
+Slave</H3>
+<PRE>
+public <B>Slave</B>(java.lang.String&nbsp;name,
+             java.lang.String&nbsp;description,
+             java.lang.String&nbsp;remoteFS,
+             int&nbsp;numExecutors,
+             <A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
+             java.lang.String&nbsp;label,
+             <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
+             <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy)
       throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
 <DL>
 <DL>
@@ -543,6 +624,28 @@ public java.lang.String <B>getNodeName</B>()</PRE>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>"" if this is master</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNodeName(java.lang.String)"><!-- --></A><H3>
+setNodeName</H3>
+<PRE>
+public void <B>setNodeName</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Node.html#setNodeName(java.lang.String)">Node</A></CODE></B></DD>
+<DD>When the user clones a <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>, Hudson uses this method to change the node name right after
+ the cloned <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> object is instantiated.
+
+ <p>
+ This method is never used for any other purpose, and as such for all practical intents and purposes,
+ the node name should be treated like immutable.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Node.html#setNodeName(java.lang.String)">setNodeName</A></CODE> in interface <CODE><A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -720,11 +823,67 @@ public <A HREF="../../hudson/util/ClockDifference.html" title="class in hudson.u
 </DL>
 <HR>
 
+<A NAME="getACL()"><!-- --></A><H3>
+getACL</H3>
+<PRE>
+public <A HREF="../../hudson/security/ACL.html" title="class in hudson.security">ACL</A> <B>getACL</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/security/AccessControlled.html#getACL()">AccessControlled</A></CODE></B></DD>
+<DD>Obtains the ACL associated with this object.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AccessControlled.html#getACL()">getACL</A></CODE> in interface <CODE><A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>never null.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="checkPermission(hudson.security.Permission)"><!-- --></A><H3>
+checkPermission</H3>
+<PRE>
+public final void <B>checkPermission</B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/security/AccessControlled.html#checkPermission(hudson.security.Permission)">AccessControlled</A></CODE></B></DD>
+<DD>Convenient short-cut for <code>getACL().checkPermission(permission)</code>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AccessControlled.html#checkPermission(hudson.security.Permission)">checkPermission</A></CODE> in interface <CODE><A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasPermission(hudson.security.Permission)"><!-- --></A><H3>
+hasPermission</H3>
+<PRE>
+public final boolean <B>hasPermission</B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/security/AccessControlled.html#hasPermission(hudson.security.Permission)">AccessControlled</A></CODE></B></DD>
+<DD>Convenient short-cut for <code>getACL().hasPermission(permission)</code>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AccessControlled.html#hasPermission(hudson.security.Permission)">hasPermission</A></CODE> in interface <CODE><A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="createComputer()"><!-- --></A><H3>
 createComputer</H3>
 <PRE>
 public <A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A> <B>createComputer</B>()</PRE>
 <DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Node.html#createComputer()">Node</A></CODE></B></DD>
+<DD>Creates a new <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> object that acts as the UI peer of this <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>.
+ Nobody but <A HREF="../../hudson/model/Hudson.html#updateComputerList()"><CODE>Hudson.updateComputerList()</CODE></A> should call this method.
+<P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Node.html#createComputer()">createComputer</A></CODE> in interface <CODE><A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></CODE></DL>
 </DD>
@@ -859,7 +1018,8 @@ public <A HREF="../../hudson/model/Computer.html" title="class in hudson.model">
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>never null.</DL>
+<DT><B>Returns:</B><DD>this method can return null if there's no <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> object for this node,
+      such as when this node has no executors at all.</DL>
 </DD>
 </DL>
 <HR>

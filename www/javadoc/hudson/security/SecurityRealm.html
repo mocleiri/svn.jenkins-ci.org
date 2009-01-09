@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SecurityRealm (Hudson core 1.270 API)
+SecurityRealm (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SecurityRealm (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SecurityRealm (Hudson core 1.270 API)";
+        parent.document.title="SecurityRealm (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -116,9 +116,41 @@ Pluggable security realm that connects external user database to Hudson.
  <p>
  If additional views/URLs need to be exposed,
  an active <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> is bound to <tt>CONTEXT_ROOT/securityRealm/</tt>
- through <A HREF="../../hudson/model/Hudson.html#getSecurityRealm()"><CODE>Hudson.getSecurityRealm()</CODE></A>. 
+ through <A HREF="../../hudson/model/Hudson.html#getSecurityRealm()"><CODE>Hudson.getSecurityRealm()</CODE></A>, so you can define additional pages and
+ operations on your <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A>.
 
- <h3>Supported Views</h3>
+ <h2>How do I implement this class?</h2>
+ <p>
+ For compatibility reasons, there are two somewhat different ways to implement a custom SecurityRealm.
+
+ <p>
+ One is to override the <A HREF="../../hudson/security/SecurityRealm.html#createSecurityComponents()"><CODE>createSecurityComponents()</CODE></A> and create key Acegi components
+ that control the authentication process.
+ The default <A HREF="../../hudson/security/SecurityRealm.html#createFilter(javax.servlet.FilterConfig)"><CODE>createFilter(FilterConfig)</CODE></A> implementation then assembles them
+ into a chain of <CODE>Filter</CODE>s. All the incoming requests to Hudson go through this filter chain,
+ and when the filter chain is done, <CODE>SecurityContext.getAuthentication()</CODE> would tell us
+ who the current user is.
+
+ <p>
+ If your <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> needs to touch the default <CODE>Filter</CODE> chain configuration
+ (e.g., adding new ones), then you can also override <A HREF="../../hudson/security/SecurityRealm.html#createFilter(javax.servlet.FilterConfig)"><CODE>createFilter(FilterConfig)</CODE></A> to do so.
+
+ <p>
+ This model is expected to fit most <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> implementations.
+
+
+ <p>
+ The other way of doing this is to ignore <A HREF="../../hudson/security/SecurityRealm.html#createSecurityComponents()"><CODE>createSecurityComponents()</CODE></A> completely (by returning
+ <A HREF="../../hudson/security/SecurityRealm.SecurityComponents.html" title="class in hudson.security"><CODE>SecurityRealm.SecurityComponents</CODE></A> created by the default constructor) and just concentrate on <A HREF="../../hudson/security/SecurityRealm.html#createFilter(javax.servlet.FilterConfig)"><CODE>createFilter(FilterConfig)</CODE></A>.
+ As long as the resulting filter chain properly sets up <CODE>Authentication</CODE> object at the end of the processing,
+ Hudson doesn't really need you to fit the standard Acegi models like <CODE>AuthenticationManager</CODE> and
+ <CODE>UserDetailsService</CODE>.
+
+ <p>
+ This model is for those "weird" implementations.
+
+
+ <h2>Views</h2>
  <dl>
  <dt>loginLink.jelly</dt>
  <dd>
@@ -126,6 +158,10 @@ Pluggable security realm that connects external user database to Hudson.
  is anonymous. For <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A>s that support user sign-up, this is a good place
  to show a "sign up" link. See <A HREF="../../hudson/security/HudsonPrivateSecurityRealm.html" title="class in hudson.security"><CODE>HudsonPrivateSecurityRealm</CODE></A> implementation
  for an example of this.
+
+ <dt>config.jelly</dt>
+ <dd>
+ This view is used to render the configuration page in the system config screen.
  </dl>
 <P>
 
@@ -217,6 +253,15 @@ Pluggable security realm that connects external user database to Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;javax.servlet.Filter</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.html#createFilter(javax.servlet.FilterConfig)">createFilter</A></B>(javax.servlet.FilterConfig&nbsp;filterConfig)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates <CODE>Filter</CODE> that all the incoming HTTP requests will go through
+ for authentication.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;<A HREF="../../hudson/security/SecurityRealm.SecurityComponents.html" title="class in hudson.security">SecurityRealm.SecurityComponents</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.html#createSecurityComponents()">createSecurityComponents</A></B>()</CODE>
 
@@ -272,6 +317,15 @@ Pluggable security realm that connects external user database to Hudson.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the target URL of the "login" link.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/security/SecurityRealm.SecurityComponents.html" title="class in hudson.security">SecurityRealm.SecurityComponents</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.html#getSecurityComponents()">getSecurityComponents</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use this function to get the security components, without necessarily
+ recreating them.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -364,14 +418,15 @@ public abstract <A HREF="../../hudson/security/SecurityRealm.SecurityComponents.
  is configured.
 
  <p>
- <CODE>AuthenticationManager</CODE> instantiation often depends on the user configuration
- (for example, if the authentication is based on LDAP, the host name of the LDAP server
- depends on the user configuration), and such configuration is expected to be
- captured as instance variables of <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> implementation.
+ <CODE>AuthenticationManager</CODE> instantiation often depends on the user-specified parameters
+ (for example, if the authentication is based on LDAP, the user needs to specify
+ the host name of the LDAP server.) Such configuration is expected to be
+ presented to the user via <tt>config.jelly</tt> and then
+ captured as instance variables inside the <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> implementation.
 
  <p>
- Your <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> may also wants to install a servlet <CODE>Filter</CODE>
- through <A HREF="../../hudson/util/PluginServletFilter.html" title="class in hudson.util"><CODE>PluginServletFilter</CODE></A> to do a part of the authentication.
+ Your <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> may also wants to alter <CODE>Filter</CODE> set up by
+ overriding <A HREF="../../hudson/security/SecurityRealm.html#createFilter(javax.servlet.FilterConfig)"><CODE>createFilter(FilterConfig)</CODE></A>.
 <P>
 <DD><DL>
 </DL>
@@ -524,6 +579,51 @@ protected static &lt;T&gt; T <B>findBean</B>(java.lang.Class&lt;T&gt;&nbsp;type,
 </DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSecurityComponents()"><!-- --></A><H3>
+getSecurityComponents</H3>
+<PRE>
+public <A HREF="../../hudson/security/SecurityRealm.SecurityComponents.html" title="class in hudson.security">SecurityRealm.SecurityComponents</A> <B>getSecurityComponents</B>()</PRE>
+<DL>
+<DD>Use this function to get the security components, without necessarily
+ recreating them.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createFilter(javax.servlet.FilterConfig)"><!-- --></A><H3>
+createFilter</H3>
+<PRE>
+public javax.servlet.Filter <B>createFilter</B>(javax.servlet.FilterConfig&nbsp;filterConfig)</PRE>
+<DL>
+<DD>Creates <CODE>Filter</CODE> that all the incoming HTTP requests will go through
+ for authentication.
+
+ <p>
+ The default implementation uses <A HREF="../../hudson/security/SecurityRealm.html#getSecurityComponents()"><CODE>getSecurityComponents()</CODE></A> and builds
+ a standard filter chain from /WEB-INF/security/SecurityFilters.groovy.
+ But subclasses can override this to completely change the filter sequence.
+
+ <p>
+ For other plugins that want to contribute <CODE>Filter</CODE>, see
+ <A HREF="../../hudson/util/PluginServletFilter.html" title="class in hudson.util"><CODE>PluginServletFilter</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.271</DD>
 </DL>
 </DD>
 </DL>

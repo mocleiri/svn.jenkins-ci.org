@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-TaskListener (Hudson core 1.270 API)
+TaskListener (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TaskListener (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TaskListener (Hudson core 1.270 API)";
+        parent.document.title="TaskListener (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -104,13 +104,20 @@ Interface TaskListener</H2>
 </PRE>
 
 <P>
-Receives events that happen during some task execution,
- such as a build or SCM change polling.
+Receives events that happen during some lengthy operation
+ that has some chance of failures, such as a build, SCM change polling,
+ slave launch, and so on.
 
  <p>
  This interface is implemented by Hudson core and passed to extension points so that
- they can record the progress of the build without really knowing how those information
+ they can record the progress of the operation without really knowing how those information
  and handled/stored by Hudson.
+
+ <p>
+ The information is one way or the other made available to users, and
+ so the expectation is that when something goes wrong, enough information
+ shall be written to a <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> so that the user can diagnose
+ what's going wrong.
 <P>
 
 <P>

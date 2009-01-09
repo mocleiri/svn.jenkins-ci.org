@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MailSender (Hudson core 1.270 API)
+MailSender (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MailSender (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MailSender (Hudson core 1.270 API)";
+        parent.document.title="MailSender (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -91,14 +91,14 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <FONT SIZE="-1">
 hudson.tasks</FONT>
 <BR>
-Class MailSender&lt;P extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;P,B&gt;,B extends <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;P,B&gt;&gt;</H2>
+Class MailSender</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.tasks.MailSender&lt;P,B&gt;</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.tasks.MailSender</B>
 </PRE>
 <HR>
 <DL>
-<DT><PRE>public class <B>MailSender&lt;P extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;P,B&gt;,B extends <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;P,B&gt;&gt;</B><DT>extends java.lang.Object</DL>
+<DT><PRE>public class <B>MailSender</B><DT>extends java.lang.Object</DL>
 </PRE>
 
 <P>
@@ -160,8 +160,8 @@ Core logic of sending out notification e-mail.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/MailSender.html#artifactMatches(java.lang.String, B)">artifactMatches</A></B>(java.lang.String&nbsp;path,
-                <A HREF="../../hudson/tasks/MailSender.html" title="type parameter in MailSender">B</A>&nbsp;build)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tasks/MailSender.html#artifactMatches(java.lang.String, hudson.model.AbstractBuild)">artifactMatches</A></B>(java.lang.String&nbsp;path,
+                <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check whether a path (/-separated) will be archived.</TD>
@@ -169,7 +169,7 @@ Core logic of sending out notification e-mail.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/MailSender.html#execute(B, hudson.model.BuildListener)">execute</A></B>(<A HREF="../../hudson/tasks/MailSender.html" title="type parameter in MailSender">B</A>&nbsp;build,
+<TD><CODE><B><A HREF="../../hudson/tasks/MailSender.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener)">execute</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
         <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
 
 <BR>
@@ -178,7 +178,7 @@ Core logic of sending out notification e-mail.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;javax.mail.internet.MimeMessage</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/MailSender.html#getMail(B, hudson.model.BuildListener)">getMail</A></B>(<A HREF="../../hudson/tasks/MailSender.html" title="type parameter in MailSender">B</A>&nbsp;build,
+<TD><CODE><B><A HREF="../../hudson/tasks/MailSender.html#getMail(hudson.model.AbstractBuild, hudson.model.BuildListener)">getMail</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
         <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
 
 <BR>
@@ -245,10 +245,10 @@ public <B>MailSender</B>(java.lang.String&nbsp;recipients,
 </TR>
 </TABLE>
 
-<A NAME="execute(hudson.model.AbstractBuild,hudson.model.BuildListener)"><!-- --></A><A NAME="execute(B, hudson.model.BuildListener)"><!-- --></A><H3>
+<A NAME="execute(hudson.model.AbstractBuild, hudson.model.BuildListener)"><!-- --></A><H3>
 execute</H3>
 <PRE>
-public boolean <B>execute</B>(<A HREF="../../hudson/tasks/MailSender.html" title="type parameter in MailSender">B</A>&nbsp;build,
+public boolean <B>execute</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
                        <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)
                 throws java.lang.InterruptedException</PRE>
 <DL>
@@ -260,10 +260,10 @@ public boolean <B>execute</B>(<A HREF="../../hudson/tasks/MailSender.html" title
 </DL>
 <HR>
 
-<A NAME="getMail(hudson.model.AbstractBuild,hudson.model.BuildListener)"><!-- --></A><A NAME="getMail(B, hudson.model.BuildListener)"><!-- --></A><H3>
+<A NAME="getMail(hudson.model.AbstractBuild, hudson.model.BuildListener)"><!-- --></A><H3>
 getMail</H3>
 <PRE>
-protected javax.mail.internet.MimeMessage <B>getMail</B>(<A HREF="../../hudson/tasks/MailSender.html" title="type parameter in MailSender">B</A>&nbsp;build,
+protected javax.mail.internet.MimeMessage <B>getMail</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
                                                   <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)
                                            throws javax.mail.MessagingException,
                                                   java.lang.InterruptedException</PRE>
@@ -277,11 +277,11 @@ protected javax.mail.internet.MimeMessage <B>getMail</B>(<A HREF="../../hudson/t
 </DL>
 <HR>
 
-<A NAME="artifactMatches(java.lang.String,hudson.model.AbstractBuild)"><!-- --></A><A NAME="artifactMatches(java.lang.String, B)"><!-- --></A><H3>
+<A NAME="artifactMatches(java.lang.String, hudson.model.AbstractBuild)"><!-- --></A><H3>
 artifactMatches</H3>
 <PRE>
 protected boolean <B>artifactMatches</B>(java.lang.String&nbsp;path,
-                                  <A HREF="../../hudson/tasks/MailSender.html" title="type parameter in MailSender">B</A>&nbsp;build)</PRE>
+                                  <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</PRE>
 <DL>
 <DD>Check whether a path (/-separated) will be archived.
 <P>

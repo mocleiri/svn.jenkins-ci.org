@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.model (Hudson core 1.270 API)
+hudson.model (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson core 1.270 API)";
+        parent.document.title="hudson.model (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -146,7 +146,7 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></B></TD>
-<TD>Commonality between <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> and master <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.</TD>
+<TD>Base type of Hudson slaves (although in practice, you probably extend <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> to define a new slave type.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/PermalinkProjectAction.html" title="interface in hudson.model">PermalinkProjectAction</A></B></TD>
@@ -194,8 +194,9 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A></B></TD>
-<TD>Receives events that happen during some task execution,
- such as a build or SCM change polling.</TD>
+<TD>Receives events that happen during some lengthy operation
+ that has some chance of failures, such as a build, SCM change polling,
+ slave launch, and so on.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></B></TD>
@@ -279,6 +280,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor&lt;T extends Describable&lt;T&gt;&gt;</A></B></TD>
 <TD>Metadata about a configurable instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/Descriptor.PropertyType.html" title="class in hudson.model">Descriptor.PropertyType</A></B></TD>
+<TD>Represents a readable property on <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model">DirectoryBrowserSupport</A></B></TD>
@@ -368,6 +373,14 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD>Root object of the system.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/Hudson.CloudList.html" title="class in hudson.model">Hudson.CloudList</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/Hudson.DescriptorImpl.html" title="class in hudson.model">Hudson.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Hudson.MasterComputer.html" title="class in hudson.model">Hudson.MasterComputer</A></B></TD>
 <TD>&nbsp;</TD>
 </TR>
@@ -421,6 +434,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD>Group of <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/Label.ConverterImpl.html" title="class in hudson.model">Label.ConverterImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/LargeText.html" title="class in hudson.model">LargeText</A></B></TD>
 <TD><B>Deprecated.</B>&nbsp;<I>moved to stapler, as of Hudson 1.220</I></TD>
 </TR>
@@ -431,6 +448,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/ListView.DescriptorImpl.html" title="class in hudson.model">ListView.DescriptorImpl</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model">LoadStatistics</A></B></TD>
+<TD>Utilization statistics for a node or a set of nodes.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model">ManagementLink</A></B></TD>
@@ -445,6 +466,11 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A></B></TD>
+<TD>Maintains several <A HREF="../../hudson/model/TimeSeries.html" title="class in hudson.model"><CODE>TimeSeries</CODE></A> with different update frequencies to satisfy three goals;
+ (1) retain data over long timespan, (2) save memory, and (3) retain accurate data for the recent past.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/MyView.html" title="class in hudson.model">MyView</A></B></TD>
 <TD><A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> that only contains projects for which the current user has access to.</TD>
 </TR>
@@ -455,6 +481,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/NoFingerprintMatch.html" title="class in hudson.model">NoFingerprintMatch</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/OverallLoadStatistics.html" title="class in hudson.model">OverallLoadStatistics</A></B></TD>
+<TD><A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model"><CODE>LoadStatistics</CODE></A> for the entire system (the master and all the slaves combined.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/PageDecorator.html" title="class in hudson.model">PageDecorator</A></B></TD>
@@ -592,6 +622,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
  the interface for producing output and how to retrieve it later.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/TimeSeries.html" title="class in hudson.model">TimeSeries</A></B></TD>
+<TD>Scalar value that changes over the time (such as load average, Q length, # of executors, etc.)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A></B></TD>
 <TD><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A>s.</TD>
 </TR>
@@ -686,6 +720,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/BallColor.html" title="enum in hudson.model">BallColor</A></B></TD>
 <TD>Ball color used for the build status indication.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/MultiStageTimeSeries.TimeScale.html" title="enum in hudson.model">MultiStageTimeSeries.TimeScale</A></B></TD>
+<TD>Choose which datapoint to use.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A></B></TD>

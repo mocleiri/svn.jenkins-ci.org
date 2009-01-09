@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Serialized Form (Hudson core 1.270 API)
+Serialized Form (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Serialized Form (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Serialized Form (Hudson core 1.270 API)";
+        parent.document.title="Serialized Form (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -2089,6 +2089,36 @@ java.lang.String <B>password</B></PRE>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="center"><FONT SIZE="+2">
+<B>Package</B> <B>hudson.slaves</B></FONT></TH>
+</TR>
+</TABLE>
+
+<P>
+<A NAME="hudson.slaves.DumbSlave"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Class <A HREF="hudson/slaves/DumbSlave.html" title="class in hudson.slaves">hudson.slaves.DumbSlave</A> extends <A HREF="hudson/model/Slave.html" title="class in hudson.model">Slave</A> implements Serializable</B></FONT></TH>
+</TR>
+</TABLE>
+
+<P>
+
+<P>
+<A NAME="hudson.slaves.NodeList"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Class <A HREF="hudson/slaves/NodeList.html" title="class in hudson.slaves">hudson.slaves.NodeList</A> extends java.util.concurrent.CopyOnWriteArrayList&lt;<A HREF="hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt; implements Serializable</B></FONT></TH>
+</TR>
+</TABLE>
+
+<P>
+<HR SIZE="4" NOSHADE>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="center"><FONT SIZE="+2">
 <B>Package</B> <B>hudson.tasks</B></FONT></TH>
 </TR>
 </TABLE>
@@ -2701,6 +2731,15 @@ java.util.List&lt;E&gt; <B>args</B></PRE>
 <DL>
 </DL>
 </DL>
+<HR>
+<H3>
+mask</H3>
+<PRE>
+java.util.BitSet <B>mask</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
 
 <P>
 <A NAME="hudson.util.CaseInsensitiveComparator"><!-- --></A>
@@ -2766,6 +2805,17 @@ java.lang.Throwable <B>cause</B></PRE>
 <P>
 
 <P>
+<A NAME="hudson.util.NoOverlapCategoryAxis"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Class <A HREF="hudson/util/NoOverlapCategoryAxis.html" title="class in hudson.util">hudson.util.NoOverlapCategoryAxis</A> extends org.jfree.chart.axis.CategoryAxis implements Serializable</B></FONT></TH>
+</TR>
+</TABLE>
+
+<P>
+
+<P>
 <A NAME="hudson.util.RobustReflectionConverter.DuplicateFieldException"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
@@ -2792,7 +2842,7 @@ java.lang.Throwable <B>cause</B></PRE>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-<B>Class <A HREF="hudson/util/ShiftedCategoryAxis.html" title="class in hudson.util">hudson.util.ShiftedCategoryAxis</A> extends org.jfree.chart.axis.CategoryAxis implements Serializable</B></FONT></TH>
+<B>Class <A HREF="hudson/util/ShiftedCategoryAxis.html" title="class in hudson.util">hudson.util.ShiftedCategoryAxis</A> extends <A HREF="hudson/util/NoOverlapCategoryAxis.html" title="class in hudson.util">NoOverlapCategoryAxis</A> implements Serializable</B></FONT></TH>
 </TR>
 </TABLE>
 

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SlaveComputer (Hudson core 1.270 API)
+SlaveComputer (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SlaveComputer (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SlaveComputer (Hudson core 1.270 API)";
+        parent.document.title="SlaveComputer (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -103,7 +103,7 @@ java.lang.Object
 </DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>SlaveComputer</B><DT>extends <A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></DL>
+<DT><PRE>public class <B>SlaveComputer</B><DT>extends <A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></DL>
 </PRE>
 
 <P>
@@ -133,7 +133,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Computer.html#nodeName">nodeName</A>, <A HREF="../../hudson/model/Computer.html#threadPoolForRemoting">threadPoolForRemoting</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Computer.html#CONFIGURE">CONFIGURE</A>, <A HREF="../../hudson/model/Computer.html#DELETE">DELETE</A>, <A HREF="../../hudson/model/Computer.html#nodeName">nodeName</A>, <A HREF="../../hudson/model/Computer.html#PERMISSIONS">PERMISSIONS</A>, <A HREF="../../hudson/model/Computer.html#threadPoolForRemoting">threadPoolForRemoting</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -163,7 +163,16 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
+<CODE>&nbsp;java.util.concurrent.Future&lt;?&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#connect(boolean)">connect</A></B>(boolean&nbsp;forceReconnect)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Do the same as <A HREF="../../hudson/model/Computer.html#doLaunchSlaveAgent(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><CODE>Computer.doLaunchSlaveAgent(StaplerRequest, StaplerResponse)</CODE></A>
+ but outside the context of serving a request.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.concurrent.Future&lt;?&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#disconnect()">disconnect</A></B>()</CODE>
 
 <BR>
@@ -202,6 +211,14 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the default charset of this computer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#getIcon()">getIcon</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -246,11 +263,27 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#grabLauncher(hudson.model.Node)">grabLauncher</A></B>(<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grabs a <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> out of <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> to keep it in this <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#isAcceptingTasks()">isAcceptingTasks</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns <code>true</code> if the computer is accepting tasks.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#isConnecting()">isConnecting</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is a <A HREF="../../hudson/model/Computer.html#connect(boolean)"><CODE>Computer.connect(boolean)</CODE></A> operation in progress?</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -282,16 +315,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#kill()">kill</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called to notify <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> that it will be discarded.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#launch()">launch</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Do the same as <A HREF="../../hudson/model/Computer.html#doLaunchSlaveAgent(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><CODE>Computer.doLaunchSlaveAgent(StaplerRequest, StaplerResponse)</CODE></A>
- but outside the context of serving a request.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by <A HREF="../../hudson/model/Hudson.html#updateComputerList()"><CODE>Hudson.updateComputerList()</CODE></A> to notify <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> that it will be discarded.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -320,6 +344,17 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A> from the given stream and sets that to this slave.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#setChannel(java.io.InputStream, java.io.OutputStream, hudson.model.TaskListener, hudson.remoting.Channel.Listener)">setChannel</A></B>(java.io.InputStream&nbsp;in,
+           java.io.OutputStream&nbsp;out,
+           <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;taskListener,
+           <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.Listener.html?is-external=true" title="class or interface in hudson.remoting">Channel.Listener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -375,7 +410,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Computer.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Computer.html#countIdle()">countIdle</A>, <A HREF="../../hudson/model/Computer.html#currentComputer()">currentComputer</A>, <A HREF="../../hudson/model/Computer.html#doDumpExportTable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDumpExportTable</A>, <A HREF="../../hudson/model/Computer.html#doProgressiveLog(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doProgressiveLog</A>, <A HREF="../../hudson/model/Computer.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/Computer.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/Computer.html#doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doScript</A>, <A HREF="../../hudson/model/Computer.html#doToggleOffline(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doToggleOffline</A>, <A HREF="../../hudson/model/Computer.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Computer.html#getApi()">getApi</A>, <A HREF="../../hudson/model/Computer.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/Computer.html#getCaption()">getCaption</A>, <A HREF="../../hudson/model/Computer.html#getDemandStartMilliseconds()">getDemandStartMilliseconds</A>, <A HREF="../../hudson/model/Computer.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Computer.html#getEnvVars()">getEnvVars</A>, <A HREF="../../hudson/model/Computer.html#getExecutors()">getExecutors</A>, <A HREF="../../hudson/model/Computer.html#getIcon()">getIcon</A>, <A HREF="../../hudson/model/Computer.html#getIconAltText()">getIconAltText</A>, <A HREF="../../hudson/model/Computer.html#getIdleStartMilliseconds()">getIdleStartMilliseconds</A>, <A HREF="../../hudson/model/Computer.html#getLog()">getLog</A>, <A HREF="../../hudson/model/Computer.html#getLogFile()">getLogFile</A>, <A HREF="../../hudson/model/Computer.html#getMonitorData()">getMonitorData</A>, <A HREF="../../hudson/model/Computer.html#getName()">getName</A>, <A HREF="../../hudson/model/Computer.html#getNumExecutors()">getNumExecutors</A>, <A HREF="../../hudson/model/Computer.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Computer.html#getSystemProperties()">getSystemProperties</A>, <A HREF="../../hudson/model/Computer.html#getThreadDump()">getThreadDump</A>, <A HREF="../../hudson/model/Computer.html#getTiedJobs()">getTiedJobs</A>, <A HREF="../../hudson/model/Computer.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Computer.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Computer.html#interrupt()">interrupt</A>, <A HREF="../../hudson/model/Computer.html#isIdle()">isIdle</A>, <A HREF="../../hudson/model/Computer.html#isOffline()">isOffline</A>, <A HREF="../../hudson/model/Computer.html#isTemporarilyOffline()">isTemporarilyOffline</A>, <A HREF="../../hudson/model/Computer.html#setTemporarilyOffline(boolean)">setTemporarilyOffline</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Computer.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Computer.html#countBusy()">countBusy</A>, <A HREF="../../hudson/model/Computer.html#countExecutors()">countExecutors</A>, <A HREF="../../hudson/model/Computer.html#countIdle()">countIdle</A>, <A HREF="../../hudson/model/Computer.html#currentComputer()">currentComputer</A>, <A HREF="../../hudson/model/Computer.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A>, <A HREF="../../hudson/model/Computer.html#doDoDelete(org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/Computer.html#doDumpExportTable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDumpExportTable</A>, <A HREF="../../hudson/model/Computer.html#doProgressiveLog(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doProgressiveLog</A>, <A HREF="../../hudson/model/Computer.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/Computer.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/Computer.html#doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doScript</A>, <A HREF="../../hudson/model/Computer.html#doToggleOffline(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doToggleOffline</A>, <A HREF="../../hudson/model/Computer.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Computer.html#getApi()">getApi</A>, <A HREF="../../hudson/model/Computer.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/Computer.html#getCaption()">getCaption</A>, <A HREF="../../hudson/model/Computer.html#getDemandStartMilliseconds()">getDemandStartMilliseconds</A>, <A HREF="../../hudson/model/Computer.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Computer.html#getEnvVars()">getEnvVars</A>, <A HREF="../../hudson/model/Computer.html#getExecutors()">getExecutors</A>, <A HREF="../../hudson/model/Computer.html#getIconAltText()">getIconAltText</A>, <A HREF="../../hudson/model/Computer.html#getIdleStartMilliseconds()">getIdleStartMilliseconds</A>, <A HREF="../../hudson/model/Computer.html#getLoadStatistics()">getLoadStatistics</A>, <A HREF="../../hudson/model/Computer.html#getLog()">getLog</A>, <A HREF="../../hudson/model/Computer.html#getLogFile()">getLogFile</A>, <A HREF="../../hudson/model/Computer.html#getMonitorData()">getMonitorData</A>, <A HREF="../../hudson/model/Computer.html#getName()">getName</A>, <A HREF="../../hudson/model/Computer.html#getNumExecutors()">getNumExecutors</A>, <A HREF="../../hudson/model/Computer.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Computer.html#getSystemProperties()">getSystemProperties</A>, <A HREF="../../hudson/model/Computer.html#getThreadDump()">getThreadDump</A>, <A HREF="../../hudson/model/Computer.html#getTiedJobs()">getTiedJobs</A>, <A HREF="../../hudson/model/Computer.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Computer.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Computer.html#interrupt()">interrupt</A>, <A HREF="../../hudson/model/Computer.html#isIdle()">isIdle</A>, <A HREF="../../hudson/model/Computer.html#isOffline()">isOffline</A>, <A HREF="../../hudson/model/Computer.html#isOnline()">isOnline</A>, <A HREF="../../hudson/model/Computer.html#isTemporarilyOffline()">isTemporarilyOffline</A>, <A HREF="../../hudson/model/Computer.html#launch()">launch</A>, <A HREF="../../hudson/model/Computer.html#setTemporarilyOffline(boolean)">setTemporarilyOffline</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -489,6 +524,20 @@ public <A HREF="../../hudson/model/Slave.html" title="class in hudson.model">Sla
 </DL>
 <HR>
 
+<A NAME="getIcon()"><!-- --></A><H3>
+getIcon</H3>
+<PRE>
+public java.lang.String <B>getIcon</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Computer.html#getIcon()">getIcon</A></CODE> in class <CODE><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="isJnlpAgent()"><!-- --></A><H3>
 isJnlpAgent</H3>
 <PRE>
@@ -537,22 +586,28 @@ public <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudso
 </DL>
 <HR>
 
-<A NAME="launch()"><!-- --></A><H3>
-launch</H3>
+<A NAME="connect(boolean)"><!-- --></A><H3>
+connect</H3>
 <PRE>
-public void <B>launch</B>()</PRE>
+public java.util.concurrent.Future&lt;?&gt; <B>connect</B>(boolean&nbsp;forceReconnect)</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Computer.html#launch()">Computer</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Computer.html#connect(boolean)">Computer</A></CODE></B></DD>
 <DD>Do the same as <A HREF="../../hudson/model/Computer.html#doLaunchSlaveAgent(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><CODE>Computer.doLaunchSlaveAgent(StaplerRequest, StaplerResponse)</CODE></A>
  but outside the context of serving a request.
 
- If already connected, no-op.
+ <p>
+ If already connected or if this computer doesn't support proactive launching, no-op.
+ This method may return immediately
+ while the launch operation happens asynchronously.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Computer.html#launch()">launch</A></CODE> in class <CODE><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Computer.html#connect(boolean)">connect</A></CODE> in class <CODE><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>forceReconnect</CODE> - If true and a connect activity is already in progress, it will be cancelled and
+      the new one will be started. If false, and a connect activity is already in progress, this method
+      will do nothing and just return the pending connection operation.
+<DT><B>Returns:</B><DD>A <CODE>Future</CODE> representing pending completion of the task.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Computer.html#disconnect()"><CODE>Computer.disconnect()</CODE></A></DL>
 </DD>
 </DL>
 <HR>
@@ -611,6 +666,23 @@ public void <B>taskCompletedWithProblems</B>(<A HREF="../../hudson/model/Executo
 </DL>
 <HR>
 
+<A NAME="isConnecting()"><!-- --></A><H3>
+isConnecting</H3>
+<PRE>
+public boolean <B>isConnecting</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Computer.html#isConnecting()">Computer</A></CODE></B></DD>
+<DD>Is a <A HREF="../../hudson/model/Computer.html#connect(boolean)"><CODE>Computer.connect(boolean)</CODE></A> operation in progress?
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Computer.html#isConnecting()">isConnecting</A></CODE> in class <CODE><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="openLogFile()"><!-- --></A><H3>
 openLogFile</H3>
 <PRE>
@@ -618,6 +690,25 @@ public java.io.OutputStream <B>openLogFile</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setChannel(java.io.InputStream, java.io.OutputStream, hudson.model.TaskListener, hudson.remoting.Channel.Listener)"><!-- --></A><H3>
+setChannel</H3>
+<PRE>
+public void <B>setChannel</B>(java.io.InputStream&nbsp;in,
+                       java.io.OutputStream&nbsp;out,
+                       <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;taskListener,
+                       <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.Listener.html?is-external=true" title="class or interface in hudson.remoting">Channel.Listener</A>&nbsp;listener)
+                throws java.io.IOException,
+                       java.lang.InterruptedException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -635,7 +726,12 @@ public void <B>setChannel</B>(java.io.InputStream&nbsp;in,
 <DD>Creates a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A> from the given stream and sets that to this slave.
 <P>
 <DD><DL>
-
+<DT><B>Parameters:</B><DD><CODE>in</CODE> - Stream connected to the remote "slave.jar". It's the caller's responsibility to do
+      buffering on this stream, if that's necessary.<DD><CODE>out</CODE> - Stream connected to the remote peer. It's the caller's responsibility to do
+      buffering on this stream, if that's necessary.<DD><CODE>launchLog</CODE> - If non-null, receive the portion of data in <tt>is</tt> before
+      the data goes into the "binary mode". This is useful
+      when the established communication channel might include some data that might
+      be useful for debugging/trouble-shooting.<DD><CODE>listener</CODE> - Gets a notification when the channel closes, to perform clean up.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>
@@ -721,18 +817,20 @@ public void <B>doDoDisconnect</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <A NAME="disconnect()"><!-- --></A><H3>
 disconnect</H3>
 <PRE>
-public void <B>disconnect</B>()</PRE>
+public java.util.concurrent.Future&lt;?&gt; <B>disconnect</B>()</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Computer.html#disconnect()">Computer</A></CODE></B></DD>
 <DD>Disconnect this computer.
 
- If this is the master, no-op
+ If this is the master, no-op. This method may return immediately
+ while the launch operation happens asynchronously.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Computer.html#disconnect()">disconnect</A></CODE> in class <CODE><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Returns:</B><DD><CODE>Future</CODE> to track the asynchronous disconnect operation.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Computer.html#connect(boolean)"><CODE>Computer.connect(boolean)</CODE></A></DL>
 </DD>
 </DL>
 <HR>
@@ -793,7 +891,7 @@ kill</H3>
 protected void <B>kill</B>()</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Computer.html#kill()">Computer</A></CODE></B></DD>
-<DD>Called to notify <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> that it will be discarded.
+<DD>Called by <A HREF="../../hudson/model/Hudson.html#updateComputerList()"><CODE>Hudson.updateComputerList()</CODE></A> to notify <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> that it will be discarded.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Computer.html#kill()">kill</A></CODE> in class <CODE><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></DL>
@@ -837,6 +935,26 @@ protected void <B>setNode</B>(<A HREF="../../hudson/model/Node.html" title="inte
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="grabLauncher(hudson.model.Node)"><!-- --></A><H3>
+grabLauncher</H3>
+<PRE>
+protected <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A> <B>grabLauncher</B>(<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&nbsp;node)</PRE>
+<DL>
+<DD>Grabs a <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> out of <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> to keep it in this <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.
+ The returned launcher will be set to <A HREF="../../hudson/slaves/SlaveComputer.html#launcher"><CODE>launcher</CODE></A> and used to carry out the actual launch operation.
+
+ <p>
+ Subtypes that needs to decorate <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> can do so by overriding this method.
+ This is useful for <A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves"><CODE>SlaveComputer</CODE></A>s for clouds for example, where one normally needs
+ additional pre-launch step (such as waiting for the provisioned node to become available)
+ before the user specified launch step (like SSH connection) kicks in.
+<P>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/slaves/ComputerLauncherFilter.html" title="class in hudson.slaves"><CODE>ComputerLauncherFilter</CODE></A></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

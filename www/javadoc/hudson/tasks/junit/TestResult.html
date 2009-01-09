@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-TestResult (Hudson core 1.270 API)
+TestResult (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TestResult (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TestResult (Hudson core 1.270 API)";
+        parent.document.title="TestResult (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -222,6 +222,14 @@ Root of all the test results for one build.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestResult.html#getName()">getName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the name of this object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestResult.html#getOwner()">getOwner</A></B>()</CODE>
 
@@ -293,7 +301,7 @@ Root of all the test results for one build.
 <TH ALIGN="left"><B>Methods inherited from class hudson.tasks.junit.<A HREF="../../../hudson/tasks/junit/TabulatedResult.html" title="class in hudson.tasks.junit">TabulatedResult</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/tasks/junit/TabulatedResult.html#getTotalCount()">getTotalCount</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/tasks/junit/TabulatedResult.html#getSafeName()">getSafeName</A>, <A HREF="../../../hudson/tasks/junit/TabulatedResult.html#getTotalCount()">getTotalCount</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.tasks.junit.TestObject"><!-- --></A>
@@ -561,6 +569,23 @@ getChildren</H3>
 <P>
 <DD><DL>
 </DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getName()"><!-- --></A><H3>
+getName</H3>
+<PRE>
+public java.lang.String <B>getName</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/junit/TabulatedResult.html#getName()">TabulatedResult</A></CODE></B></DD>
+<DD>Gets the name of this object.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/tasks/junit/TabulatedResult.html#getName()">getName</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/junit/TabulatedResult.html" title="class in hudson.tasks.junit">TabulatedResult</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

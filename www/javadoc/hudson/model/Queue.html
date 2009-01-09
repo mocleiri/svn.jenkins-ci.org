@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Queue (Hudson core 1.270 API)
+Queue (Hudson core 1.271 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-06">
+<META NAME="date" CONTENT="2009-01-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue (Hudson core 1.270 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue (Hudson core 1.270 API)";
+        parent.document.title="Queue (Hudson core 1.271 API)";
     }
 }
 </SCRIPT>
@@ -296,6 +296,14 @@ Build queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#countBuildableItemsFor(hudson.model.Label)">countBuildableItemsFor</A></B>(<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&nbsp;l)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How many <A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model"><CODE>BuildableItem</CODE></A>s are assigned for the given label?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.html#getApi()">getApi</A></B>()</CODE>
 
@@ -305,10 +313,18 @@ Build queue.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#getBuildableItems()">getBuildableItems</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the snapshot of <A HREF="../../hudson/model/Queue.html#buildables"><CODE>buildables</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.html#getBuildableItems(hudson.model.Computer)">getBuildableItems</A></B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the <A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model"><CODE>BuildableItem</CODE></A>s that are waiting for an executor in the given <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -608,6 +624,40 @@ getBuildableItems</H3>
 <PRE>
 public java.util.List&lt;<A HREF="../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>&gt; <B>getBuildableItems</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</PRE>
 <DL>
+<DD>Gets all the <A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model"><CODE>BuildableItem</CODE></A>s that are waiting for an executor in the given <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBuildableItems()"><!-- --></A><H3>
+getBuildableItems</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>&gt; <B>getBuildableItems</B>()</PRE>
+<DL>
+<DD>Gets the snapshot of <A HREF="../../hudson/model/Queue.html#buildables"><CODE>buildables</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="countBuildableItemsFor(hudson.model.Label)"><!-- --></A><H3>
+countBuildableItemsFor</H3>
+<PRE>
+public int <B>countBuildableItemsFor</B>(<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&nbsp;l)</PRE>
+<DL>
+<DD>How many <A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model"><CODE>BuildableItem</CODE></A>s are assigned for the given label?
+<P>
 <DD><DL>
 </DL>
 </DD>
