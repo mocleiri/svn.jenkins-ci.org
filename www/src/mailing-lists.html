@@ -5,37 +5,75 @@
 </head>
 <body>
   <d:taglib uri="local">
+    <d:tag name="group">
+      <tr>
+        <td colspan="5">
+          <h2>${name}</h2>
+        </td>
+      </tr>
+      <d:invokeBody/>
+    </d:tag>
     <d:tag name="mailingList">
-      <h2>${name}@hudson.dev.java.net</h2>
-
-       <p>
-          <a href="https://hudson.dev.java.net/servlets/SummarizeList?listName=${name}">View mailing list archive</a> | <a href="https://hudson.dev.java.net/servlets/SearchList?listName=${name}">Search mailing list archive</a>
-         </p>
-       
-       <dl>
-        <dt>Description</dt>
-        <dd>${description}</dd>
-       </dl>
+      <tr>
+        <td>${name}@hudson.dev.java.net</td>
+        <td>${description}</td>
+        <td>
+          <j:choose>
+            <j:when test="${nabble!=null}">
+              <a href="${nabble}">
+                (archive)
+              </a>
+            </j:when>
+            <j:otherwise>
+              <a href="https://hudson.dev.java.net/servlets/SummarizeList?listName=${name}">
+                (archive)
+              </a>
+            </j:otherwise>
+          </j:choose>
+        </td>
+        <td><a href="mailto:${name}-subscribe@hudson.dev.java.net">(subscribe)</a></td>
+        <td><a href="mailto:${name}-ubsubscribe@hudson.dev.java.net">(unsubscribe)</a></td>
+      </tr>
+    </d:tag>
+    <d:tag name="table">
+      <table>
+        <!--tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Archive</th>
+          <th>Subscribe</th>
+          <th>Unsubscribe</th>
+        </tr-->
+        <d:invokeBody />
+      </table>
     </d:tag>
   </d:taglib>
   
-  <h1>Discussion Lists</h1>
-  <local:mailingList name="dev"
-                     description="Developer discussion list"/>
-  <local:mailingList name="users"
-                     description="A general discussion list for the projects end users."/>
-  <local:mailingList name="ja"
-                     description="日本語ユーザーおよび開発者の為のメーリングリスト"/>
-  
-  <h1>Notification Lists</h1>
-  <local:mailingList name="issues"
-                     description="Automated notifications and discussions of the projects reported issues/artifacts and changes made to issues/artifacts."/>
-  <local:mailingList name="commits"
-                     description="A mailing list for Subversion commit messages."/>
-
-  <h1>Archive Lists</h1>
-  <local:mailingList name="cvs"
-                     description="Automated notification of file version control changes in the project and discussion of those changes."/>
-
+  <local:table>
+    <local:group name="Discussion Lists">
+      <local:mailingList name="dev"
+                         description="Developer discussion list"
+                         nabble="http://www.nabble.com/Hudson-dev-f25543.html" />
+      <local:mailingList name="users"
+                         description="A general discussion list for the projects end users."
+                         nabble="http://www.nabble.com/Hudson-users-f16872.html" />
+      <local:mailingList name="ja"
+                         description="日本語ユーザーおよび開発者の為のメーリングリスト"
+                         nabble="http://www.nabble.com/Hudson-ja-f29991.html"/>
+    </local:group>
+                       
+    <local:group name="Notification Lists">
+      <local:mailingList name="issues"
+                         description="Automated notifications and discussions of the projects reported issues/artifacts and changes made to issues/artifacts."
+                         nabble="http://www.nabble.com/Hudson-issues-f16873.html"/>
+      <local:mailingList name="commits"
+                         description="A mailing list for Subversion commit messages."/>
+    </local:group>
+                       
+    <local:group name="Archive Only">
+      <local:mailingList name="cvs"
+                         description="Automated notification of file version control changes in the project and discussion of those changes."/>
+    </local:group>
+  </local:table>
 </body>
 </html>
