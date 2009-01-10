@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.271 API)
+Hudson (Hudson core 1.272 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-09">
+<META NAME="date" CONTENT="2009-01-10">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.271 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.271 API)";
+        parent.document.title="Hudson (Hudson core 1.272 API)";
     }
 }
 </SCRIPT>
@@ -558,6 +558,15 @@ Root object of the system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Do a finger-print check.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doEval(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doEval</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+       org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evaluates the Jelly script submitted by the client.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1753,6 +1762,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#setNoUsageStatistics(java.lang.Boolean)">setNoUsageStatistics</A></B>(java.lang.Boolean&nbsp;noUsageStatistics)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#setNumExecutors(int)">setNumExecutors</A></B>(int&nbsp;n)</CODE>
 
 <BR>
@@ -1773,6 +1790,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Hudson.html#setNodes(java.util.List)"><CODE>setNodes(List)</CODE></A>. Since 1.252.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#setSystemMessage(java.lang.String)">setSystemMessage</A></B>(java.lang.String&nbsp;message)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the system message.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2214,7 +2239,8 @@ public java.lang.String <B>getNodeDescription</B>()</PRE>
 <A NAME="getDescription()"><!-- --></A><H3>
 getDescription</H3>
 <PRE>
-public java.lang.String <B>getDescription</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public java.lang.String <B>getDescription</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -2263,6 +2289,23 @@ public boolean <B>isUsageStatisticsCollected</B>()</PRE>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNoUsageStatistics(java.lang.Boolean)"><!-- --></A><H3>
+setNoUsageStatistics</H3>
+<PRE>
+public void <B>setNoUsageStatistics</B>(java.lang.Boolean&nbsp;noUsageStatistics)
+                          throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2635,6 +2678,25 @@ public java.lang.String <B>getSystemMessage</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="setSystemMessage(java.lang.String)"><!-- --></A><H3>
+setSystemMessage</H3>
+<PRE>
+public void <B>setSystemMessage</B>(java.lang.String&nbsp;message)
+                      throws java.io.IOException</PRE>
+<DL>
+<DD>Sets the system message.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="createLauncher(hudson.model.TaskListener)"><!-- --></A><H3>
 createLauncher</H3>
 <PRE>
@@ -2714,7 +2776,8 @@ public java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interfa
 <A NAME="getItems()"><!-- --></A><H3>
 getItems</H3>
 <PRE>
-public java.util.List&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt; <B>getItems</B>()</PRE>
+<FONT SIZE="-1">@Exported(name="jobs")
+</FONT>public java.util.List&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt; <B>getItems</B>()</PRE>
 <DL>
 <DD>Gets just the immediate children of <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.
 <P>
@@ -3308,7 +3371,7 @@ public <A HREF="../../hudson/search/SearchIndexBuilder.html" title="class in hud
 <A NAME="getPrimaryView()"><!-- --></A><H3>
 getPrimaryView</H3>
 <PRE>
-<FONT SIZE="-1">@Exported(inline=true)
+<FONT SIZE="-1">@Exported
 </FONT>public <A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A> <B>getPrimaryView</B>()</PRE>
 <DL>
 <DD>Returns the primary <A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> that renders the top-page of Hudson.
@@ -4563,6 +4626,30 @@ public void <B>doScriptText</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                          javax.servlet.ServletException</PRE>
 <DL>
 <DD>Run arbitrary Groovy script and return result as plain text.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doEval(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doEval</H3>
+<PRE>
+public void <B>doEval</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                   org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+            throws java.io.IOException,
+                   javax.servlet.ServletException</PRE>
+<DL>
+<DD>Evaluates the Jelly script submitted by the client.
+
+ This is useful for system administration as well as unit testing.
 <P>
 <DD><DL>
 </DL>

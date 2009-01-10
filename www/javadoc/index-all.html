@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.271 API)
+Index (Hudson core 1.272 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-09">
+<META NAME="date" CONTENT="2009-01-10">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.271 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.271 API)";
+        parent.document.title="Index (Hudson core 1.272 API)";
     }
 }
 </SCRIPT>
@@ -3313,6 +3313,9 @@ Method in class hudson.util.<A HREF="./hudson/util/HudsonIsRestarting.html" titl
 <DT><A HREF="./hudson/model/AbstractProject.html#doEnable(org.kohsuke.stapler.StaplerResponse)"><B>doEnable(StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Hudson.html#doEval(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doEval(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>Evaluates the Jelly script submitted by the client.
 <DT><A HREF="./hudson/model/Hudson.html#doExit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doExit(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Shutdown the system.
@@ -3691,7 +3694,10 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractBuild.html" title="
  like grid or cloud.<DT><A HREF="./hudson/slaves/DumbSlave.html#DumbSlave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)"><B>DumbSlave(String, String, String, String, Node.Mode, String, ComputerLauncher, RetentionStrategy)</B></A> - 
 Constructor for class hudson.slaves.<A HREF="./hudson/slaves/DumbSlave.html" title="class in hudson.slaves">DumbSlave</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/slaves/DumbSlave.DescriptorImpl.html" title="class in hudson.slaves"><B>DumbSlave.DescriptorImpl</B></A> - Class in <A HREF="./hudson/slaves/package-summary.html">hudson.slaves</A><DD>&nbsp;<DT><A HREF="./hudson/Functions.html#dumpAllThreads()"><B>dumpAllThreads()</B></A> - 
+<DT><A HREF="./hudson/slaves/DumbSlave.DescriptorImpl.html" title="class in hudson.slaves"><B>DumbSlave.DescriptorImpl</B></A> - Class in <A HREF="./hudson/slaves/package-summary.html">hudson.slaves</A><DD>&nbsp;<DT><A HREF="./hudson/slaves/Messages.html#DumbSlave_displayName()"><B>DumbSlave_displayName()</B></A> - 
+Static method in class hudson.slaves.<A HREF="./hudson/slaves/Messages.html" title="class in hudson.slaves">Messages</A>
+<DD>Dumb Slave
+<DT><A HREF="./hudson/Functions.html#dumpAllThreads()"><B>dumpAllThreads()</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/Functions.html#dumpThreadInfo(java.lang.management.ThreadInfo)"><B>dumpThreadInfo(ThreadInfo)</B></A> - 
@@ -6482,6 +6488,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class
 <DT><A HREF="./hudson/model/Run.html#getEnvVars()"><B>getEnvVars()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>Returns the map that contains environmental variable overrides for this build.
+<DT><A HREF="./hudson/util/jna/JnaException.html#getErrorCode()"><B>getErrorCode()</B></A> - 
+Method in exception hudson.util.jna.<A HREF="./hudson/util/jna/JnaException.html" title="class in hudson.util.jna">JnaException</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tasks/junit/CaseResult.html#getErrorDetails()"><B>getErrorDetails()</B></A> - 
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>
 <DD>If there was an error or a failure, this is the text from the message.
@@ -8706,9 +8715,15 @@ Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/CaseResult.html
 <DT><A HREF="./hudson/model/UpdateCenter.ConnectionCheckJob.html#getStatuses()"><B>getStatuses()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.ConnectionCheckJob.html" title="class in hudson.model">UpdateCenter.ConnectionCheckJob</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/junit/CaseResult.html#getStderr()"><B>getStderr()</B></A> - 
+Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>
+<DD>The stderr of this test.
 <DT><A HREF="./hudson/tasks/junit/SuiteResult.html#getStderr()"><B>getStderr()</B></A> - 
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/SuiteResult.html" title="class in hudson.tasks.junit">SuiteResult</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/junit/CaseResult.html#getStdout()"><B>getStdout()</B></A> - 
+Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>
+<DD>The stdout of this test.
 <DT><A HREF="./hudson/tasks/junit/SuiteResult.html#getStdout()"><B>getStdout()</B></A> - 
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/SuiteResult.html" title="class in hudson.tasks.junit">SuiteResult</A>
 <DD>&nbsp;
@@ -9310,6 +9325,9 @@ Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudso
 <DT><A HREF="./hudson/Util.html#getWin32ErrorMessage(java.lang.Throwable)"><B>getWin32ErrorMessage(Throwable)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
 <DD>Extracts the Win32 error message from <CODE>Throwable</CODE> if possible.
+<DT><A HREF="./hudson/Util.html#getWin32ErrorMessage(int)"><B>getWin32ErrorMessage(int)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
+<DD>Gets a human readable mesasge for the given Win32 error code.
 <DT><A HREF="./hudson/model/TaskAction.html#getWorkerThread()"><B>getWorkerThread()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/TaskAction.html" title="class in hudson.model">TaskAction</A>
 <DD>&nbsp;
@@ -11206,6 +11224,15 @@ Variable in class hudson.model.<A HREF="./hudson/model/Label.html" title="class 
 <DT><A HREF="./hudson/model/LoadStatistics.html" title="class in hudson.model"><B>LoadStatistics</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Utilization statistics for a node or a set of nodes.<DT><A HREF="./hudson/model/LoadStatistics.html#LoadStatistics(int, int)"><B>LoadStatistics(int, int)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/LoadStatistics.html" title="class in hudson.model">LoadStatistics</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Messages.html#LoadStatistics_Legends_BusyExecutors()"><B>LoadStatistics_Legends_BusyExecutors()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Busy executors
+<DT><A HREF="./hudson/model/Messages.html#LoadStatistics_Legends_QueueLength()"><B>LoadStatistics_Legends_QueueLength()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Queue length
+<DT><A HREF="./hudson/model/Messages.html#LoadStatistics_Legends_TotalExecutors()"><B>LoadStatistics_Legends_TotalExecutors()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Total executors
 <DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.HudsonUserDetailsService.html#loadUserByUsername(java.lang.String)"><B>loadUserByUsername(String)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecurityRealm.HudsonUserDetailsService.html" title="class in hudson.security">HudsonPrivateSecurityRealm.HudsonUserDetailsService</A>
 <DD>&nbsp;
@@ -14522,6 +14549,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html#setNoexec(boolean)"><B>setNoexec(boolean)</B></A> - 
 Method in class hudson.org.apache.tools.ant.taskdefs.<A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html" title="class in hudson.org.apache.tools.ant.taskdefs">AbstractCvsTask</A>
 <DD>If true, report only and don't change any files.
+<DT><A HREF="./hudson/model/Hudson.html#setNoUsageStatistics(java.lang.Boolean)"><B>setNoUsageStatistics(Boolean)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#setNumExecutors(int)"><B>setNumExecutors(int)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
@@ -14653,6 +14683,9 @@ Method in class hudson.util.spring.<A HREF="./hudson/util/spring/BeanBuilder.htm
 <DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/cvslib/ChangeLogTask.html#setStart(java.util.Date)"><B>setStart(Date)</B></A> - 
 Method in class hudson.org.apache.tools.ant.taskdefs.cvslib.<A HREF="./hudson/org/apache/tools/ant/taskdefs/cvslib/ChangeLogTask.html" title="class in hudson.org.apache.tools.ant.taskdefs.cvslib">ChangeLogTask</A>
 <DD>Set the date at which the changelog should start.
+<DT><A HREF="./hudson/model/Hudson.html#setSystemMessage(java.lang.String)"><B>setSystemMessage(String)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>Sets the system message.
 <DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html#setTag(java.lang.String)"><B>setTag(String)</B></A> - 
 Method in class hudson.org.apache.tools.ant.taskdefs.<A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html" title="class in hudson.org.apache.tools.ant.taskdefs">AbstractCvsTask</A>
 <DD>The tag of the package/module to operate upon.
@@ -16769,6 +16802,9 @@ Static method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/Mess
 <DT><A HREF="./hudson/model/ParametersDefinitionProperty.html#_doBuild(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>_doBuild(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParametersDefinitionProperty.html" title="class in hudson.model">ParametersDefinitionProperty</A>
 <DD>Interprets the form submission and schedules a build for a parameterized job.
+<DT><A HREF="./hudson/slaves/Messages.html#_DumbSlave_displayName()"><B>_DumbSlave_displayName()</B></A> - 
+Static method in class hudson.slaves.<A HREF="./hudson/slaves/Messages.html" title="class in hudson.slaves">Messages</A>
+<DD>Dumb Slave
 <DT><A HREF="./hudson/model/Messages.html#_Executor_NotAvailable()"><B>_Executor_NotAvailable()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>N/A
@@ -16994,6 +17030,15 @@ Static method in class hudson.security.<A HREF="./hudson/security/Messages.html"
 <DT><A HREF="./hudson/model/Messages.html#_ListView_DisplayName()"><B>_ListView_DisplayName()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>List View
+<DT><A HREF="./hudson/model/Messages.html#_LoadStatistics_Legends_BusyExecutors()"><B>_LoadStatistics_Legends_BusyExecutors()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Busy executors
+<DT><A HREF="./hudson/model/Messages.html#_LoadStatistics_Legends_QueueLength()"><B>_LoadStatistics_Legends_QueueLength()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Queue length
+<DT><A HREF="./hudson/model/Messages.html#_LoadStatistics_Legends_TotalExecutors()"><B>_LoadStatistics_Legends_TotalExecutors()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Total executors
 <DT><A HREF="./hudson/tasks/Messages.html#_Mailer_DisplayName()"><B>_Mailer_DisplayName()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>E-mail Notification

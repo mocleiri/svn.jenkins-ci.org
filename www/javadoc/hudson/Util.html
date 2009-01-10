@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Util (Hudson core 1.271 API)
+Util (Hudson core 1.272 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-09">
+<META NAME="date" CONTENT="2009-01-10">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson core 1.271 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson core 1.271 API)";
+        parent.document.title="Util (Hudson core 1.272 API)";
     }
 }
 </SCRIPT>
@@ -426,6 +426,14 @@ Various utility methods that don't have more proper home.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a human readable text of the time duration.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Util.html#getWin32ErrorMessage(int)">getWin32ErrorMessage</A></B>(int&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a human readable mesasge for the given Win32 error code.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -879,6 +887,20 @@ public static java.lang.String <B>getWin32ErrorMessage</B>(java.lang.Throwable&n
 <DD><DL>
 
 <DT><B>Returns:</B><DD>null if there seems to be no error code or if the platform is not Win32.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getWin32ErrorMessage(int)"><!-- --></A><H3>
+getWin32ErrorMessage</H3>
+<PRE>
+public static java.lang.String <B>getWin32ErrorMessage</B>(int&nbsp;n)</PRE>
+<DL>
+<DD>Gets a human readable mesasge for the given Win32 error code.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>null if no such message is available.</DL>
 </DD>
 </DL>
 <HR>
