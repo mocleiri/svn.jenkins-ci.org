@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SCMTrigger (Hudson core 1.272 API)
+SCMTrigger (Hudson core 1.273 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-10">
+<META NAME="date" CONTENT="2009-01-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCMTrigger (Hudson core 1.272 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCMTrigger (Hudson core 1.272 API)";
+        parent.document.title="SCMTrigger (Hudson core 1.273 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/triggers/SafeTimerTask.html" title="class in hudson.triggers"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/triggers/SCMTrigger.AdministrativeMonitorImpl.html" title="class in hudson.triggers"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/triggers/SCMTrigger.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="SCMTrigger.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -128,10 +128,26 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/triggers/SCMTrigger.AdministrativeMonitorImpl.html" title="class in hudson.triggers">SCMTrigger.AdministrativeMonitorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers">SCMTrigger.Runner</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<CODE>Runnable</CODE> that actually performs polling.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -157,6 +173,14 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/triggers/SCMTrigger.html#STARVATION_THRESHOLD">STARVATION_THRESHOLD</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How long is too long for a polling activity to be in the queue?</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.triggers.Trigger"><!-- --></A>
@@ -279,6 +303,18 @@ DESCRIPTOR</H3>
 <PRE>
 public static final <A HREF="../../hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A> <B>DESCRIPTOR</B></PRE>
 <DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="STARVATION_THRESHOLD"><!-- --></A><H3>
+STARVATION_THRESHOLD</H3>
+<PRE>
+public static long <B>STARVATION_THRESHOLD</B></PRE>
+<DL>
+<DD>How long is too long for a polling activity to be in the queue?
+<P>
 <DL>
 </DL>
 </DL>
@@ -447,7 +483,7 @@ public <A HREF="../../hudson/triggers/SCMTrigger.DescriptorImpl.html" title="cla
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/triggers/SafeTimerTask.html" title="class in hudson.triggers"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/triggers/SCMTrigger.AdministrativeMonitorImpl.html" title="class in hudson.triggers"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/triggers/SCMTrigger.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="SCMTrigger.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

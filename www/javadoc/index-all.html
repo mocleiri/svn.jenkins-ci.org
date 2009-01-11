@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.272 API)
+Index (Hudson core 1.273 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-10">
+<META NAME="date" CONTENT="2009-01-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.272 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.272 API)";
+        parent.document.title="Index (Hudson core 1.273 API)";
     }
 }
 </SCRIPT>
@@ -489,6 +489,13 @@ Static method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="
 <DT><A HREF="./hudson/model/Hudson.html#ADMINISTER"><B>ADMINISTER</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/AdministrativeMonitor.html" title="class in hudson.model"><B>AdministrativeMonitor</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Checks the health of a subsystem of Hudson and if there's something
+ that requires administrator's attention, notify the administrator.<DT><A HREF="./hudson/model/AdministrativeMonitor.html#AdministrativeMonitor(java.lang.String)"><B>AdministrativeMonitor(String)</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/AdministrativeMonitor.html" title="class in hudson.model">AdministrativeMonitor</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Hudson.html#administrativeMonitors"><B>administrativeMonitors</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD><A HREF="./hudson/model/AdministrativeMonitor.html" title="class in hudson.model"><CODE>AdministrativeMonitor</CODE></A>s installed on this system.
 <DT><A HREF="./hudson/util/jna/Advapi32.html" title="interface in hudson.util.jna"><B>Advapi32</B></A> - Interface in <A HREF="./hudson/util/jna/package-summary.html">hudson.util.jna</A><DD>&nbsp;<DT><A HREF="./hudson/util/jna/Advapi32.ChangeServiceConfig2Info.html" title="class in hudson.util.jna"><B>Advapi32.ChangeServiceConfig2Info</B></A> - Class in <A HREF="./hudson/util/jna/package-summary.html">hudson.util.jna</A><DD>&nbsp;<DT><A HREF="./hudson/util/jna/Advapi32.ChangeServiceConfig2Info.html#Advapi32.ChangeServiceConfig2Info()"><B>Advapi32.ChangeServiceConfig2Info()</B></A> - 
 Constructor for class hudson.util.jna.<A HREF="./hudson/util/jna/Advapi32.ChangeServiceConfig2Info.html" title="class in hudson.util.jna">Advapi32.ChangeServiceConfig2Info</A>
 <DD>&nbsp;
@@ -1528,6 +1535,10 @@ Constructor for class hudson.node_monitors.<A HREF="./hudson/node_monitors/Clock
 <DT><A HREF="./hudson/node_monitors/Messages.html#ClockMonitor_displayName()"><B>ClockMonitor_displayName()</B></A> - 
 Static method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/Messages.html" title="class in hudson.node_monitors">Messages</A>
 <DD>Clock Difference
+<DT><A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html#clogCheck()"><B>clogCheck()</B></A> - 
+Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A>
+<DD>Checks if the queue is clogged, and if so,
+ activate <A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html#monitor"><CODE>SCMTrigger.DescriptorImpl.monitor</CODE></A>.
 <DT><A HREF="./hudson/util/ArgumentListBuilder.html#clone()"><B>clone()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A>
 <DD>&nbsp;
@@ -3792,7 +3803,9 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
 <DD>&nbsp;
 <DT><A HREF="./hudson/Util.html#encode(java.lang.String)"><B>encode(String)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
-<DD>Escapes non-ASCII characters in URL.
+<DD><B>Deprecated.</B>&nbsp;<I>Only escapes non-ASCII but leaves other URL-unsafe characters.
+ Util.rawEncode should generally be used instead, though be careful to pass only
+ a single path component to that method (it will encode /, but this method does not).</I>
 <DT><A HREF="./hudson/Util.html#encodeRFC2396(java.lang.String)"><B>encodeRFC2396(String)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
 <DD><B>Deprecated.</B>&nbsp;<I>This method is broken (see ISSUE#1666). It should probably
@@ -3941,7 +3954,7 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
 <DD>&nbsp;
 <DT><A HREF="./hudson/Util.html#escape(java.lang.String)"><B>escape(String)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
-<DD>Escapes HTML unsafe characters like &lt;, &amp;to the respective character entities.
+<DD>Escapes HTML unsafe characters like &lt;, &amp; to the respective character entities.
 <DT><A HREF="./hudson/security/ACL.html#EVERYONE"><B>EVERYONE</B></A> - 
 Static variable in class hudson.security.<A HREF="./hudson/security/ACL.html" title="class in hudson.security">ACL</A>
 <DD>Special <CODE>Sid</CODE> that represents "everyone", even including anonymous users.
@@ -5539,6 +5552,9 @@ Method in class hudson.org.apache.tools.ant.taskdefs.<A HREF="./hudson/org/apach
 <DT><A HREF="./hudson/scm/CVSSCM.html#getCvsRsh()"><B>getCvsRsh()</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.html" title="class in hudson.scm">CVSSCM</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.CoreUpdateMonitor.html#getData()"><B>getData()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.CoreUpdateMonitor.html" title="class in hudson.model">UpdateCenter.CoreUpdateMonitor</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.html#getData()"><B>getData()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
 <DD>Loads the update center data, if any.
@@ -6369,6 +6385,9 @@ Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/TestObject.html
 <DT><A HREF="./hudson/tasks/junit/TestResult.html#getDuration()"><B>getDuration()</B></A> - 
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/triggers/SCMTrigger.Runner.html#getDuration()"><B>getDuration()</B></A> - 
+Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers">SCMTrigger.Runner</A>
+<DD>Human readable string of when this polling is started.
 <DT><A HREF="./hudson/maven/ExecutedMojo.html#getDurationString()"><B>getDurationString()</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/ExecutedMojo.html" title="class in hudson.maven">ExecutedMojo</A>
 <DD>Returns duration in a human readable text.
@@ -7352,6 +7371,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in h
 <DT><A HREF="./hudson/triggers/SCMTrigger.html#getLogFile()"><B>getLogFile()</B></A> - 
 Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.html" title="class in hudson.triggers">SCMTrigger</A>
 <DD>Returns the file that records the last/current polling activity.
+<DT><A HREF="./hudson/triggers/SCMTrigger.Runner.html#getLogFile()"><B>getLogFile()</B></A> - 
+Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers">SCMTrigger.Runner</A>
+<DD>Where the log file is written.
 <DT><A HREF="./hudson/logging/LogRecorder.Target.html#getLogger()"><B>getLogger()</B></A> - 
 Method in class hudson.logging.<A HREF="./hudson/logging/LogRecorder.Target.html" title="class in hudson.logging">LogRecorder.Target</A>
 <DD>&nbsp;
@@ -8476,6 +8498,9 @@ Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixBuild.RunPtr.html" 
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.BuildPtr.html" title="class in hudson.model">Fingerprint.BuildPtr</A>
 <DD>Gets the <A HREF="./hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A> that this pointer points to,
  or null if such a job no longer exists.
+<DT><A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html#getRunners()"><B>getRunners()</B></A> - 
+Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A>
+<DD>Gets the snapshot of <A HREF="./hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers"><CODE>SCMTrigger.Runner</CODE></A>s that are performing polling.
 <DT><A HREF="./hudson/matrix/MatrixBuild.html#getRuns()"><B>getRuns()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixBuild.html" title="class in hudson.matrix">MatrixBuild</A>
 <DD>Returns all <A HREF="./hudson/matrix/MatrixRun.html" title="class in hudson.matrix"><CODE>MatrixRun</CODE></A>s for this <A HREF="./hudson/matrix/MatrixBuild.html" title="class in hudson.matrix"><CODE>MatrixBuild</CODE></A>.
@@ -8706,6 +8731,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DT><A HREF="./hudson/model/Fingerprint.Range.html#getStart()"><B>getStart()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.Range.html" title="class in hudson.model">Fingerprint.Range</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/triggers/SCMTrigger.Runner.html#getStartTime()"><B>getStartTime()</B></A> - 
+Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers">SCMTrigger.Runner</A>
+<DD>When was this polling started?
 <DT><A HREF="./hudson/model/UsageStatistics.html#getStatData()"><B>getStatData()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UsageStatistics.html" title="class in hudson.model">UsageStatistics</A>
 <DD>Gets the encrypted usage stat data to be sent to the Hudson server.
@@ -8784,6 +8812,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DT><A HREF="./hudson/tasks/junit/TestResultAction.html#getTarget()"><B>getTarget()</B></A> - 
 Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/TestResultAction.html" title="class in hudson.tasks.junit">TestResultAction</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/triggers/SCMTrigger.Runner.html#getTarget()"><B>getTarget()</B></A> - 
+Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers">SCMTrigger.Runner</A>
+<DD>For which <A HREF="./hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> are we polling?
 <DT><A HREF="./hudson/tasks/Ant.html#getTargets()"><B>getTargets()</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Ant.html" title="class in hudson.tasks">Ant</A>
 <DD>&nbsp;
@@ -9818,6 +9849,9 @@ Method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson"
 <DT><A HREF="./hudson/maven/RedeployPublisher.html#id"><B>id</B></A> - 
 Variable in class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.html" title="class in hudson.maven">RedeployPublisher</A>
 <DD>Repository ID.
+<DT><A HREF="./hudson/model/AdministrativeMonitor.html#id"><B>id</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/AdministrativeMonitor.html" title="class in hudson.model">AdministrativeMonitor</A>
+<DD>Human-readable ID of this monitor, which needs to be unique within the system.
 <DT><A HREF="./hudson/model/Queue.WaitingItem.html#id"><B>id</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A>
 <DD>Unique number of this <A HREF="./hudson/model/Queue.WaitingItem.html" title="class in hudson.model"><CODE>Queue.WaitingItem</CODE></A>.
@@ -10017,6 +10051,16 @@ Method in class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecurity
 <DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.Details.html#isAccountNonLocked()"><B>isAccountNonLocked()</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecurityRealm.Details.html" title="class in hudson.security">HudsonPrivateSecurityRealm.Details</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/AdministrativeMonitor.html#isActivated()"><B>isActivated()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AdministrativeMonitor.html" title="class in hudson.model">AdministrativeMonitor</A>
+<DD>Returns true if this monitor is activated and
+ wants to produce a warning message.
+<DT><A HREF="./hudson/model/UpdateCenter.CoreUpdateMonitor.html#isActivated()"><B>isActivated()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.CoreUpdateMonitor.html" title="class in hudson.model">UpdateCenter.CoreUpdateMonitor</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/triggers/SCMTrigger.AdministrativeMonitorImpl.html#isActivated()"><B>isActivated()</B></A> - 
+Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.AdministrativeMonitorImpl.html" title="class in hudson.triggers">SCMTrigger.AdministrativeMonitorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/PluginWrapper.html#isActive()"><B>isActive()</B></A> - 
 Method in class hudson.<A HREF="./hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>
 <DD>Returns true if this plugin is enabled for this session.
@@ -10185,6 +10229,10 @@ Method in class hudson.model.<A HREF="./hudson/model/Executor.html" title="class
 <DT><A HREF="./hudson/model/Hudson.html#isCheckURIEncodingEnabled()"><B>isCheckURIEncodingEnabled()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Does not check when system default encoding is "ISO-8859-1".
+<DT><A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html#isClogged()"><B>isClogged()</B></A> - 
+Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A>
+<DD>Returns true if the SCM polling thread queue has too many jobs
+ than it can handle.
 <DT><A HREF="./hudson/model/Resource.html#isCollidingWith(hudson.model.Resource, int)"><B>isCollidingWith(Resource, int)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Resource.html" title="class in hudson.model">Resource</A>
 <DD>Checks the resource collision.
@@ -10484,6 +10532,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.Range.html" tit
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A>
 <DD>Returns true if all the integers logically in this <A HREF="./hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model"><CODE>Fingerprint.RangeSet</CODE></A>
  is smaller than the given integer.
+<DT><A HREF="./hudson/triggers/SCMTrigger.Runner.html#isStarving()"><B>isStarving()</B></A> - 
+Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers">SCMTrigger.Runner</A>
+<DD>Returns true if too much time is spent since this item is put into the queue.
 <DT><A HREF="./hudson/model/Queue.BuildableItem.html#isStuck()"><B>isStuck()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>
 <DD>&nbsp;
@@ -11177,6 +11228,9 @@ Method in interface hudson.<A HREF="./hudson/PluginStrategy.html" title="interfa
 <DD>Loads the plugin and starts it.
 <DT><A HREF="./hudson/ProxyConfiguration.html#load()"><B>load()</B></A> - 
 Static method in class hudson.<A HREF="./hudson/ProxyConfiguration.html" title="class in hudson">ProxyConfiguration</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html#load()"><B>load()</B></A> - 
+Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/DescriptorList.html#load(java.lang.Class)"><B>load(Class&lt;? extends Describable&gt;)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>
@@ -13286,6 +13340,9 @@ Method in class hudson.model.<A HREF="./hudson/model/ResourceList.html" title="c
 <DT><A HREF="./hudson/model/Fingerprint.RangeItem.html#ranges"><B>ranges</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/Fingerprint.RangeItem.html" title="class in hudson.model">Fingerprint.RangeItem</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/Util.html#rawEncode(java.lang.String)"><B>rawEncode(String)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
+<DD>Encode a single path component for use in an HTTP URL.
 <DT><A HREF="./hudson/FilePath.html#read()"><B>read()</B></A> - 
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>Reads this file.
@@ -13976,6 +14033,9 @@ Method in class hudson.triggers.<A HREF="./hudson/triggers/SafeTimerTask.html" t
 <DT><A HREF="./hudson/triggers/SCMTrigger.html#run()"><B>run()</B></A> - 
 Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.html" title="class in hudson.triggers">SCMTrigger</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/triggers/SCMTrigger.Runner.html#run()"><B>run()</B></A> - 
+Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers">SCMTrigger.Runner</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/triggers/TimerTrigger.html#run()"><B>run()</B></A> - 
 Method in class hudson.triggers.<A HREF="./hudson/triggers/TimerTrigger.html" title="class in hudson.triggers">TimerTrigger</A>
 <DD>&nbsp;
@@ -14162,7 +14222,10 @@ Static variable in class hudson.scm.<A HREF="./hudson/scm/SCMS.html" title="clas
 <DT><A HREF="./hudson/triggers/SCMTrigger.html" title="class in hudson.triggers"><B>SCMTrigger</B></A> - Class in <A HREF="./hudson/triggers/package-summary.html">hudson.triggers</A><DD><A HREF="./hudson/triggers/Trigger.html" title="class in hudson.triggers"><CODE>Trigger</CODE></A> that checks for SCM updates periodically.<DT><A HREF="./hudson/triggers/SCMTrigger.html#SCMTrigger(java.lang.String)"><B>SCMTrigger(String)</B></A> - 
 Constructor for class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.html" title="class in hudson.triggers">SCMTrigger</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers"><B>SCMTrigger.DescriptorImpl</B></A> - Class in <A HREF="./hudson/triggers/package-summary.html">hudson.triggers</A><DD>&nbsp;<DT><A HREF="./hudson/triggers/SCMTrigger.SCMAction.html" title="class in hudson.triggers"><B>SCMTrigger.SCMAction</B></A> - Class in <A HREF="./hudson/triggers/package-summary.html">hudson.triggers</A><DD>Action object for <A HREF="./hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.<DT><A HREF="./hudson/triggers/SCMTrigger.SCMAction.html#SCMTrigger.SCMAction()"><B>SCMTrigger.SCMAction()</B></A> - 
+<DT><A HREF="./hudson/triggers/SCMTrigger.AdministrativeMonitorImpl.html" title="class in hudson.triggers"><B>SCMTrigger.AdministrativeMonitorImpl</B></A> - Class in <A HREF="./hudson/triggers/package-summary.html">hudson.triggers</A><DD>&nbsp;<DT><A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers"><B>SCMTrigger.DescriptorImpl</B></A> - Class in <A HREF="./hudson/triggers/package-summary.html">hudson.triggers</A><DD>&nbsp;<DT><A HREF="./hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers"><B>SCMTrigger.Runner</B></A> - Class in <A HREF="./hudson/triggers/package-summary.html">hudson.triggers</A><DD><CODE>Runnable</CODE> that actually performs polling.<DT><A HREF="./hudson/triggers/SCMTrigger.Runner.html#SCMTrigger.Runner()"><B>SCMTrigger.Runner()</B></A> - 
+Constructor for class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers">SCMTrigger.Runner</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/triggers/SCMTrigger.SCMAction.html" title="class in hudson.triggers"><B>SCMTrigger.SCMAction</B></A> - Class in <A HREF="./hudson/triggers/package-summary.html">hudson.triggers</A><DD>Action object for <A HREF="./hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.<DT><A HREF="./hudson/triggers/SCMTrigger.SCMAction.html#SCMTrigger.SCMAction()"><B>SCMTrigger.SCMAction()</B></A> - 
 Constructor for class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.SCMAction.html" title="class in hudson.triggers">SCMTrigger.SCMAction</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/triggers/Messages.html#SCMTrigger_DisplayName()"><B>SCMTrigger_DisplayName()</B></A> - 
@@ -14926,6 +14989,9 @@ Method in interface hudson.util.jna.<A HREF="./hudson/util/jna/Advapi32.html" ti
 <DT><A HREF="./hudson/util/jna/Advapi32.html#StartServiceCtrlDispatcher(com.sun.jna.Structure[])"><B>StartServiceCtrlDispatcher(Structure[])</B></A> - 
 Method in interface hudson.util.jna.<A HREF="./hudson/util/jna/Advapi32.html" title="interface in hudson.util.jna">Advapi32</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/triggers/SCMTrigger.html#STARVATION_THRESHOLD"><B>STARVATION_THRESHOLD</B></A> - 
+Static variable in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.html" title="class in hudson.triggers">SCMTrigger</A>
+<DD>How long is too long for a polling activity to be in the queue?
 <DT><A HREF="./hudson/model/Run.html#state"><B>state</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>The current build state.
@@ -15003,6 +15069,9 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
 <DT><A HREF="./hudson/model/RunMap.html#subMap(java.lang.Integer, java.lang.Integer)"><B>subMap(Integer, Integer)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/RunMap.html" title="class in hudson.model">RunMap</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/triggers/SCMTrigger.Runner.html#submissionTime"><B>submissionTime</B></A> - 
+Variable in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers">SCMTrigger.Runner</A>
+<DD>When was this object submitted to <A HREF="./hudson/triggers/SCMTrigger.DescriptorImpl.html#getExecutor()"><CODE>SCMTrigger.DescriptorImpl.getExecutor()</CODE></A>?
 <DT><A HREF="./hudson/matrix/MatrixProject.html#submit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>submit(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixProject.html" title="class in hudson.matrix">MatrixProject</A>
 <DD>&nbsp;
@@ -15823,11 +15892,14 @@ Static variable in class hudson.security.<A HREF="./hudson/security/Permission.h
 <DT><A HREF="./hudson/tasks/test/AggregatedTestResultAction.html#update(java.util.List)"><B>update(List&lt;? extends AbstractTestResultAction&gt;)</B></A> - 
 Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultAction</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model"><B>UpdateCenter</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Controls update center capability.<DT><A HREF="./hudson/model/UpdateCenter.html#UpdateCenter()"><B>UpdateCenter()</B></A> - 
+<DT><A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model"><B>UpdateCenter</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Controls update center capability.<DT><A HREF="./hudson/model/UpdateCenter.html#UpdateCenter(hudson.model.Hudson)"><B>UpdateCenter(Hudson)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
 <DD>Create update center to get plugins/updates from hudson.dev.java.net
 <DT><A HREF="./hudson/model/UpdateCenter.ConnectionCheckJob.html" title="class in hudson.model"><B>UpdateCenter.ConnectionCheckJob</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Tests the internet connectivity.<DT><A HREF="./hudson/model/UpdateCenter.ConnectionCheckJob.html#UpdateCenter.ConnectionCheckJob()"><B>UpdateCenter.ConnectionCheckJob()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.ConnectionCheckJob.html" title="class in hudson.model">UpdateCenter.ConnectionCheckJob</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.CoreUpdateMonitor.html" title="class in hudson.model"><B>UpdateCenter.CoreUpdateMonitor</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD><A HREF="./hudson/model/AdministrativeMonitor.html" title="class in hudson.model"><CODE>AdministrativeMonitor</CODE></A> that checks if there's Hudson update.<DT><A HREF="./hudson/model/UpdateCenter.CoreUpdateMonitor.html#UpdateCenter.CoreUpdateMonitor()"><B>UpdateCenter.CoreUpdateMonitor()</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.CoreUpdateMonitor.html" title="class in hudson.model">UpdateCenter.CoreUpdateMonitor</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.Data.html" title="class in hudson.model"><B>UpdateCenter.Data</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>In-memory representation of the update center data.<DT><A HREF="./hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model"><B>UpdateCenter.DownloadJob</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Base class for a job that downloads a file from the Hudson project.<DT><A HREF="./hudson/model/UpdateCenter.DownloadJob.html#UpdateCenter.DownloadJob(org.acegisecurity.Authentication)"><B>UpdateCenter.DownloadJob(Authentication)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>

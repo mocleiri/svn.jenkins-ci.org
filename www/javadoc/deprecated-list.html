@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.272 API)
+Deprecated List (Hudson core 1.273 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-10">
+<META NAME="date" CONTENT="2009-01-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.272 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.272 API)";
+        parent.document.title="Deprecated List (Hudson core 1.273 API)";
     }
 }
 </SCRIPT>
@@ -238,6 +238,13 @@ function windowTitle()
 <TD><A HREF="hudson/model/Hudson.html#doLogRss(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">hudson.model.Hudson.doLogRss(StaplerRequest, StaplerResponse)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As on 1.267, moved to "/log/rss..."</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/Util.html#encode(java.lang.String)">hudson.Util.encode(String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Only escapes non-ASCII but leaves other URL-unsafe characters.
+ Util.rawEncode should generally be used instead, though be careful to pass only
+ a single path component to that method (it will encode /, but this method does not).</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/Util.html#encodeRFC2396(java.lang.String)">hudson.Util.encodeRFC2396(String)</A>

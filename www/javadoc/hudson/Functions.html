@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.272 API)
+Functions (Hudson core 1.273 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-10">
+<META NAME="date" CONTENT="2009-01-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.272 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.272 API)";
+        parent.document.title="Functions (Hudson core 1.273 API)";
     }
 }
 </SCRIPT>
@@ -1769,10 +1769,13 @@ public static java.lang.String <B>getViewResource</B>(java.lang.Object&nbsp;it,
 hasView</H3>
 <PRE>
 public static boolean <B>hasView</B>(java.lang.Object&nbsp;it,
-                              java.lang.String&nbsp;path)</PRE>
+                              java.lang.String&nbsp;path)
+                       throws java.io.IOException</PRE>
 <DL>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>

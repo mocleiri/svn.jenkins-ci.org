@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-UpdateCenter (Hudson core 1.272 API)
+UpdateCenter (Hudson core 1.273 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-10">
+<META NAME="date" CONTENT="2009-01-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter (Hudson core 1.272 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter (Hudson core 1.272 API)";
+        parent.document.title="UpdateCenter (Hudson core 1.273 API)";
     }
 }
 </SCRIPT>
@@ -147,6 +147,14 @@ Controls update center capability.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.CoreUpdateMonitor.html" title="class in hudson.model">UpdateCenter.CoreUpdateMonitor</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model"><CODE>AdministrativeMonitor</CODE></A> that checks if there's Hudson update.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.Data.html" title="class in hudson.model">UpdateCenter.Data</A></B></CODE>
 
 <BR>
@@ -244,7 +252,7 @@ Controls update center capability.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#UpdateCenter()">UpdateCenter</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#UpdateCenter(hudson.model.Hudson)">UpdateCenter</A></B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;parent)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create update center to get plugins/updates from hudson.dev.java.net</TD>
@@ -425,10 +433,10 @@ public static boolean <B>neverUpdate</B></PRE>
 </TR>
 </TABLE>
 
-<A NAME="UpdateCenter()"><!-- --></A><H3>
+<A NAME="UpdateCenter(hudson.model.Hudson)"><!-- --></A><H3>
 UpdateCenter</H3>
 <PRE>
-public <B>UpdateCenter</B>()</PRE>
+public <B>UpdateCenter</B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;parent)</PRE>
 <DL>
 <DD>Create update center to get plugins/updates from hudson.dev.java.net
 <P>
