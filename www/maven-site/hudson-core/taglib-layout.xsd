@@ -258,12 +258,44 @@
 </xsd:element>
     <xsd:element name="pane">
 <xsd:annotation>
-<xsd:documentation/>
+<xsd:documentation>
+    Used in the &lt;l:side-panel&gt; to draw a box with a title.
+
+    The box is drawn as a table, and the body of this tag
+    is expected to draw a series of &lt;TR&gt;s to fill in the contents
+    of the box.
+    
+    
+    
+    
+  </xsd:documentation>
 </xsd:annotation>
 <xsd:complexType mixed="true">
 <xsd:sequence>
 <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 </xsd:sequence>
+<xsd:attribute name="title" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      Title of the box. Can include HTML.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="width" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      Specify the number of columns in the table
+      (so that the title can stretch to the entire table width.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="id">
+<xsd:annotation>
+<xsd:documentation>
+      @id of the table, if specified.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
 </xsd:complexType>
 </xsd:element>
     <xsd:element name="side-panel">

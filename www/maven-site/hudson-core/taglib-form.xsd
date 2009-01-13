@@ -63,13 +63,61 @@
 </xsd:element>
     <xsd:element name="password">
 <xsd:annotation>
-<xsd:documentation/>
+<xsd:documentation>
+    Glorified &lt;input type="password"&gt;
+
+    
+    
+    
+    
+  </xsd:documentation>
 </xsd:annotation>
-<xsd:complexType mixed="true"/>
+<xsd:complexType mixed="true">
+<xsd:attribute name="field">
+<xsd:annotation>
+<xsd:documentation>
+      Used for databinding. TBD.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="name">
+<xsd:annotation>
+<xsd:documentation>
+      This becomes @name of the &lt;input&gt; tag.
+      If @field is specified, this value is inferred from it.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="value">
+<xsd:annotation>
+<xsd:documentation>
+      The initial value of the field. This becomes the @value of the &lt;input&gt; tag.
+      If @field is specified, the current property from the "instance" object
+      will be set as the initial value automatically,
+      which is the recommended approach.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="checkUrl">
+<xsd:annotation>
+<xsd:documentation>
+      If specified, the value entered in this input field will be checked (via AJAX)
+      against this URL, and errors will be rendered under the text field.
+
+      If @field is specified, this will be inferred automatically,
+      which is the recommended approach.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:complexType>
 </xsd:element>
     <xsd:element name="advanced">
 <xsd:annotation>
-<xsd:documentation/>
+<xsd:documentation>
+    Expandable section that shows "advanced..." button by default.
+    Upon clicking it, a section unfolds, and the HTML rendered by the body of this tag
+    appears.
+  </xsd:documentation>
 </xsd:annotation>
 <xsd:complexType mixed="true">
 <xsd:sequence>
@@ -79,18 +127,66 @@
 </xsd:element>
     <xsd:element name="editableComboBoxValue">
 <xsd:annotation>
+<xsd:documentation>
+    Used inside &lt;f:editableComboBox/&gt; to specify one value of a combobox.
+    Normally one would use multiple values.
+    
+  </xsd:documentation>
+</xsd:annotation>
+<xsd:complexType mixed="true">
+<xsd:attribute name="value" use="required">
+<xsd:annotation>
 <xsd:documentation/>
 </xsd:annotation>
-<xsd:complexType mixed="true"/>
+</xsd:attribute>
+</xsd:complexType>
 </xsd:element>
     <xsd:element name="descriptorList">
 <xsd:annotation>
-<xsd:documentation/>
+<xsd:documentation>
+    Generate config pages from a list of Descriptors into a section.
+
+    
+    
+    
+    
+  </xsd:documentation>
 </xsd:annotation>
 <xsd:complexType mixed="true">
 <xsd:sequence>
 <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 </xsd:sequence>
+<xsd:attribute name="title" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      Human readable title of the section to be rendered in HTML.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="descriptors" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      hudson.model.Descriptor collection whose configuration page is rendered.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="instances" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      Map&lt;Descriptor,Describable&gt; that defines current instances of those descriptors.
+      These are used to fill initial values. Other classes that define the get(Descriptor)
+      method works fine, too.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="targetType">
+<xsd:annotation>
+<xsd:documentation>
+      the type for which descriptors will be configured.
+      default to ${it.class}
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
 </xsd:complexType>
 </xsd:element>
     <xsd:element name="repeatable">
@@ -207,7 +303,9 @@
 </xsd:element>
     <xsd:element name="description">
 <xsd:annotation>
-<xsd:documentation/>
+<xsd:documentation>
+    Renders a row that shows description text below an input field.
+  </xsd:documentation>
 </xsd:annotation>
 <xsd:complexType mixed="true">
 <xsd:sequence>
@@ -325,7 +423,11 @@
 </xsd:element>
     <xsd:element name="validateButton">
 <xsd:annotation>
-<xsd:documentation/>
+<xsd:documentation>
+    See
+    http://hudson.gotdns.com/wiki/display/HUDSON/Jelly+form+controls
+    for the reference.
+  </xsd:documentation>
 </xsd:annotation>
 <xsd:complexType mixed="true"/>
 </xsd:element>
@@ -414,7 +516,9 @@
 </xsd:element>
     <xsd:element name="block">
 <xsd:annotation>
-<xsd:documentation/>
+<xsd:documentation>
+    Full-width space in the form table that can be filled with arbitrary HTML.
+  </xsd:documentation>
 </xsd:annotation>
 <xsd:complexType mixed="true">
 <xsd:sequence>
@@ -505,12 +609,59 @@
 </xsd:element>
     <xsd:element name="radioBlock">
 <xsd:annotation>
-<xsd:documentation/>
+<xsd:documentation>
+    Radio button with a label that hides additional controls.
+    When checked, those additional controls are displayed. This is useful
+    for presenting mutually exclusive options, where each option comes
+    with a subform that provides additional configuration.
+
+    
+    
+    
+    
+    
+  </xsd:documentation>
 </xsd:annotation>
 <xsd:complexType mixed="true">
 <xsd:sequence>
 <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 </xsd:sequence>
+<xsd:attribute name="name" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      Name of the radio button group.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="value" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      @value of the &lt;input&gt; element.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="title" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      Human readable label text to be rendered next to the radio button.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="checked" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      Should this control be initially checked or not?
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="help">
+<xsd:annotation>
+<xsd:documentation>
+      If specified, the (?) help icon will be rendered on the right,
+      for in place help text. See &lt;f:entry&gt; for the details.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
 </xsd:complexType>
 </xsd:element>
     <xsd:element name="textbox">
@@ -566,9 +717,38 @@
 </xsd:element>
     <xsd:element name="richtextarea">
 <xsd:annotation>
+<xsd:documentation>
+    Rich HTML editor from http://developer.yahoo.com/yui/editor/
+    All the attributes are those of the &lt;textarea&gt; tag.
+
+    
+    
+    
+    
+  </xsd:documentation>
+</xsd:annotation>
+<xsd:complexType mixed="true">
+<xsd:attribute name="name" use="required">
+<xsd:annotation>
 <xsd:documentation/>
 </xsd:annotation>
-<xsd:complexType mixed="true"/>
+</xsd:attribute>
+<xsd:attribute name="value" use="required">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="id">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="style">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:complexType>
 </xsd:element>
     <xsd:element name="slave-mode">
 <xsd:annotation>
@@ -578,7 +758,9 @@
 </xsd:element>
     <xsd:element name="helpArea">
 <xsd:annotation>
-<xsd:documentation/>
+<xsd:documentation>
+    Place holder to lazy-load help text via AJAX.
+  </xsd:documentation>
 </xsd:annotation>
 <xsd:complexType mixed="true"/>
 </xsd:element>
@@ -619,22 +801,81 @@
 </xsd:element>
     <xsd:element name="descriptorRadioList">
 <xsd:annotation>
-<xsd:documentation/>
+<xsd:documentation>
+    Generate config pages from a list of Descriptors into a section.
+
+    
+    
+    
+    
+    
+  </xsd:documentation>
 </xsd:annotation>
 <xsd:complexType mixed="true">
 <xsd:sequence>
 <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 </xsd:sequence>
+<xsd:attribute name="title" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      Human readable title of the section to be rendered in HTML.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="descriptors" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      hudson.model.Descriptor collection whose configuration page is rendered.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="instances" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      Map&lt;Descriptor,Describable&gt; that defines current instances of those descriptors.
+      These are used to fill initial values. Other classes that define the get(Descriptor)
+      method works fine, too.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="targetType">
+<xsd:annotation>
+<xsd:documentation>
+      the type for which descriptors will be configured.
+      default to ${it.class}
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="varName" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      Used as a variable name as well as block name.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
 </xsd:complexType>
 </xsd:element>
     <xsd:element name="enum">
 <xsd:annotation>
-<xsd:documentation/>
+<xsd:documentation>
+    Binds an enum field to a &lt;select&gt; element.
+    The body of this tag is evaluated for each enum value,
+    which is passed as 'it'.
+
+    
+  </xsd:documentation>
 </xsd:annotation>
 <xsd:complexType mixed="true">
 <xsd:sequence>
 <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 </xsd:sequence>
+<xsd:attribute name="field">
+<xsd:annotation>
+<xsd:documentation>
+      Used for databinding. TBD.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
 </xsd:complexType>
 </xsd:element>
     <xsd:element name="form">
