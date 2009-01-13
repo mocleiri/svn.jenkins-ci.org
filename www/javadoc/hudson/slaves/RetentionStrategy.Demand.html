@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-RetentionStrategy.Demand (Hudson core 1.273 API)
+RetentionStrategy.Demand (Hudson core 1.274 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-11">
+<META NAME="date" CONTENT="2009-01-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RetentionStrategy.Demand (Hudson core 1.273 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RetentionStrategy.Demand (Hudson core 1.273 API)";
+        parent.document.title="RetentionStrategy.Demand (Hudson core 1.274 API)";
     }
 }
 </SCRIPT>
@@ -320,8 +320,8 @@ public long <B>check</B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title=
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/slaves/RetentionStrategy.html#check(T)">check</A></CODE> in class <CODE><A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>c</CODE> - <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> for which this strategy is assigned. This object also exposes a bunch of properties
-          that the callee can use to decide what action to take.
+<DT><B>Parameters:</B><DD><CODE>c</CODE> - <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> for which this strategy is assigned. This computer may be online or offline.
+          This object also exposes a bunch of properties that the callee can use to decide what action to take.
 <DT><B>Returns:</B><DD>The number of minutes after which the strategy would like to be checked again. The strategy may be
          rechecked earlier or later that this!</DL>
 </DD>
