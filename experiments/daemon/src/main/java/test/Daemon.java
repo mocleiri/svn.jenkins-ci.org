@@ -5,6 +5,9 @@ import com.sun.jna.Native;
 
 import java.io.FileWriter;
 
+import sun.misc.Signal;
+import sun.misc.SignalHandler;
+
 /**
  * Hello world!
  *
@@ -52,7 +55,18 @@ public class Daemon
         fw.write(String.valueOf(lib.getpid()));
         fw.close();
 
-        while(true)
-            Thread.sleep(1000*10);
+        Signal.handle(
+                new Signal("TERM"),
+                new SignalHandler() {
+                    @Override
+                    public void handle(Signal signal) {
+                        System.exit(-1);
+                    }
+                });
+
+        while(true) {
+            Thread.sleep(1000);
+            System.out.println("test");
+        }
     }
 }
