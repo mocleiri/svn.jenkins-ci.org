@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Lifecycle (Hudson core 1.274 API)
+Lifecycle (Hudson core 1.275 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-13">
+<META NAME="date" CONTENT="2009-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Lifecycle (Hudson core 1.274 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Lifecycle (Hudson core 1.274 API)";
+        parent.document.title="Lifecycle (Hudson core 1.275 API)";
     }
 }
 </SCRIPT>
@@ -100,7 +100,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/lifecycle/WindowsServiceLifecycle.html" title="class in hudson.lifecycle">WindowsServiceLifecycle</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/lifecycle/SolarisSMFLifecycle.html" title="class in hudson.lifecycle">SolarisSMFLifecycle</A>, <A HREF="../../hudson/lifecycle/WindowsServiceLifecycle.html" title="class in hudson.lifecycle">WindowsServiceLifecycle</A></DD>
 </DL>
 <HR>
 <DL>
@@ -285,6 +285,11 @@ public void <B>rewriteHudsonWar</B>(java.io.File&nbsp;by)
                       throws java.io.IOException</PRE>
 <DL>
 <DD>Replaces hudson.war by the given file.
+
+ <p>
+ On some system, most notably Windows, a file being in use cannot be changed,
+ so rewriting <tt>hudson.war</tt> requires some special trick. Override this method
+ to do so.
 <P>
 <DD><DL>
 </DL>

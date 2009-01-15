@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Computer (Hudson core 1.274 API)
+Computer (Hudson core 1.275 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-13">
+<META NAME="date" CONTENT="2009-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson core 1.274 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson core 1.274 API)";
+        parent.document.title="Computer (Hudson core 1.275 API)";
     }
 }
 </SCRIPT>
@@ -622,7 +622,15 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#isLaunchSupported()">isLaunchSupported</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this computer can be launched by Hudson.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this computer can be launched by Hudson proactively and automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#isManualLaunchAllowed()">isManualLaunchAllowed</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method is called to determine whether manual launching of the slave is allowed at this point in time.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1201,6 +1209,24 @@ public final boolean <B>isOnline</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="isManualLaunchAllowed()"><!-- --></A><H3>
+isManualLaunchAllowed</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public boolean <B>isManualLaunchAllowed</B>()</PRE>
+<DL>
+<DD>This method is called to determine whether manual launching of the slave is allowed at this point in time.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> if manual launching of the slave is allowed at this point in time.</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="isConnecting()"><!-- --></A><H3>
 isConnecting</H3>
 <PRE>
@@ -1243,7 +1269,11 @@ isLaunchSupported</H3>
 <FONT SIZE="-1">@Exported
 </FONT>public boolean <B>isLaunchSupported</B>()</PRE>
 <DL>
-<DD>Returns true if this computer can be launched by Hudson.
+<DD>Returns true if this computer can be launched by Hudson proactively and automatically.
+
+ <p>
+ For example, JNLP slaves return <code>false</code> from this, because the launch process
+ needs to be initiated from the slave side.
 <P>
 <DD><DL>
 </DL>

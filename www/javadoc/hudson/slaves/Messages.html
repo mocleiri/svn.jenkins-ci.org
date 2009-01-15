@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Messages (Hudson core 1.274 API)
+Messages (Hudson core 1.275 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-13">
+<META NAME="date" CONTENT="2009-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Messages (Hudson core 1.274 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Messages (Hudson core 1.274 API)";
+        parent.document.title="Messages (Hudson core 1.275 API)";
     }
 }
 </SCRIPT>
@@ -196,6 +196,14 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/Messages.html#_SimpleScheduledRetentionStrategy_displayName()">_SimpleScheduledRetentionStrategy_displayName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Take this slave on-line according to a schedule</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/Messages.html#CommandLauncher_displayName()">CommandLauncher_displayName</A></B>()</CODE>
 
@@ -258,6 +266,14 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Take this slave on-line when in demand and off-line when idle</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/Messages.html#SimpleScheduledRetentionStrategy_displayName()">SimpleScheduledRetentionStrategy_displayName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Take this slave on-line according to a schedule</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -297,84 +313,6 @@ public <B>Messages</B>()</PRE>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
-
-<A NAME="DumbSlave_displayName()"><!-- --></A><H3>
-DumbSlave_displayName</H3>
-<PRE>
-public static java.lang.String <B>DumbSlave_displayName</B>()</PRE>
-<DL>
-<DD>Dumb Slave
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="_DumbSlave_displayName()"><!-- --></A><H3>
-_DumbSlave_displayName</H3>
-<PRE>
-public static org.jvnet.localizer.Localizable <B>_DumbSlave_displayName</B>()</PRE>
-<DL>
-<DD>Dumb Slave
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="JNLPLauncher_displayName()"><!-- --></A><H3>
-JNLPLauncher_displayName</H3>
-<PRE>
-public static java.lang.String <B>JNLPLauncher_displayName</B>()</PRE>
-<DL>
-<DD>Launch slave agents via JNLP
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="_JNLPLauncher_displayName()"><!-- --></A><H3>
-_JNLPLauncher_displayName</H3>
-<PRE>
-public static org.jvnet.localizer.Localizable <B>_JNLPLauncher_displayName</B>()</PRE>
-<DL>
-<DD>Launch slave agents via JNLP
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="RetentionStrategy_Demand_displayName()"><!-- --></A><H3>
-RetentionStrategy_Demand_displayName</H3>
-<PRE>
-public static java.lang.String <B>RetentionStrategy_Demand_displayName</B>()</PRE>
-<DL>
-<DD>Take this slave on-line when in demand and off-line when idle
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="_RetentionStrategy_Demand_displayName()"><!-- --></A><H3>
-_RetentionStrategy_Demand_displayName</H3>
-<PRE>
-public static org.jvnet.localizer.Localizable <B>_RetentionStrategy_Demand_displayName</B>()</PRE>
-<DL>
-<DD>Take this slave on-line when in demand and off-line when idle
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
 
 <A NAME="RetentionStrategy_Always_displayName()"><!-- --></A><H3>
 RetentionStrategy_Always_displayName</H3>
@@ -428,12 +366,12 @@ public static org.jvnet.localizer.Localizable <B>_ComputerLauncher_abortedLaunch
 </DL>
 <HR>
 
-<A NAME="ComputerLauncher_unexpectedError()"><!-- --></A><H3>
-ComputerLauncher_unexpectedError</H3>
+<A NAME="RetentionStrategy_Demand_displayName()"><!-- --></A><H3>
+RetentionStrategy_Demand_displayName</H3>
 <PRE>
-public static java.lang.String <B>ComputerLauncher_unexpectedError</B>()</PRE>
+public static java.lang.String <B>RetentionStrategy_Demand_displayName</B>()</PRE>
 <DL>
-<DD>Unexpected error in launching a slave. This is probably a bug in Hudson
+<DD>Take this slave on-line when in demand and off-line when idle
 <P>
 <DD><DL>
 </DL>
@@ -441,12 +379,90 @@ public static java.lang.String <B>ComputerLauncher_unexpectedError</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="_ComputerLauncher_unexpectedError()"><!-- --></A><H3>
-_ComputerLauncher_unexpectedError</H3>
+<A NAME="_RetentionStrategy_Demand_displayName()"><!-- --></A><H3>
+_RetentionStrategy_Demand_displayName</H3>
 <PRE>
-public static org.jvnet.localizer.Localizable <B>_ComputerLauncher_unexpectedError</B>()</PRE>
+public static org.jvnet.localizer.Localizable <B>_RetentionStrategy_Demand_displayName</B>()</PRE>
 <DL>
-<DD>Unexpected error in launching a slave. This is probably a bug in Hudson
+<DD>Take this slave on-line when in demand and off-line when idle
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="DumbSlave_displayName()"><!-- --></A><H3>
+DumbSlave_displayName</H3>
+<PRE>
+public static java.lang.String <B>DumbSlave_displayName</B>()</PRE>
+<DL>
+<DD>Dumb Slave
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_DumbSlave_displayName()"><!-- --></A><H3>
+_DumbSlave_displayName</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_DumbSlave_displayName</B>()</PRE>
+<DL>
+<DD>Dumb Slave
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="SimpleScheduledRetentionStrategy_displayName()"><!-- --></A><H3>
+SimpleScheduledRetentionStrategy_displayName</H3>
+<PRE>
+public static java.lang.String <B>SimpleScheduledRetentionStrategy_displayName</B>()</PRE>
+<DL>
+<DD>Take this slave on-line according to a schedule
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_SimpleScheduledRetentionStrategy_displayName()"><!-- --></A><H3>
+_SimpleScheduledRetentionStrategy_displayName</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_SimpleScheduledRetentionStrategy_displayName</B>()</PRE>
+<DL>
+<DD>Take this slave on-line according to a schedule
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="JNLPLauncher_displayName()"><!-- --></A><H3>
+JNLPLauncher_displayName</H3>
+<PRE>
+public static java.lang.String <B>JNLPLauncher_displayName</B>()</PRE>
+<DL>
+<DD>Launch slave agents via JNLP
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_JNLPLauncher_displayName()"><!-- --></A><H3>
+_JNLPLauncher_displayName</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_JNLPLauncher_displayName</B>()</PRE>
+<DL>
+<DD>Launch slave agents via JNLP
 <P>
 <DD><DL>
 </DL>
@@ -473,6 +489,32 @@ _CommandLauncher_NoLaunchCommand</H3>
 public static org.jvnet.localizer.Localizable <B>_CommandLauncher_NoLaunchCommand</B>()</PRE>
 <DL>
 <DD>No launch command specified
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="ComputerLauncher_unexpectedError()"><!-- --></A><H3>
+ComputerLauncher_unexpectedError</H3>
+<PRE>
+public static java.lang.String <B>ComputerLauncher_unexpectedError</B>()</PRE>
+<DL>
+<DD>Unexpected error in launching a slave. This is probably a bug in Hudson
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_ComputerLauncher_unexpectedError()"><!-- --></A><H3>
+_ComputerLauncher_unexpectedError</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_ComputerLauncher_unexpectedError</B>()</PRE>
+<DL>
+<DD>Unexpected error in launching a slave. This is probably a bug in Hudson
 <P>
 <DD><DL>
 </DL>

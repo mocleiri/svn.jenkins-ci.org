@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-WindowsServiceLifecycle (Hudson core 1.274 API)
+WindowsServiceLifecycle (Hudson core 1.275 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-13">
+<META NAME="date" CONTENT="2009-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ WindowsServiceLifecycle (Hudson core 1.274 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="WindowsServiceLifecycle (Hudson core 1.274 API)";
+        parent.document.title="WindowsServiceLifecycle (Hudson core 1.275 API)";
     }
 }
 </SCRIPT>
@@ -156,7 +156,8 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/lifecycle/WindowsServiceLifecycle.html#rewriteHudsonWar(java.io.File)">rewriteHudsonWar</A></B>(java.io.File&nbsp;by)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replaces hudson.war by the given file.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On Windows, hudson.war is locked, so we place a new version under a special name,
+ which is picked up by the service wrapper upon restart.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.lifecycle.Lifecycle"><!-- --></A>
@@ -213,8 +214,8 @@ rewriteHudsonWar</H3>
 public void <B>rewriteHudsonWar</B>(java.io.File&nbsp;by)
                       throws java.io.IOException</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/lifecycle/Lifecycle.html#rewriteHudsonWar(java.io.File)">Lifecycle</A></CODE></B></DD>
-<DD>Replaces hudson.war by the given file.
+<DD>On Windows, hudson.war is locked, so we place a new version under a special name,
+ which is picked up by the service wrapper upon restart.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/lifecycle/Lifecycle.html#rewriteHudsonWar(java.io.File)">rewriteHudsonWar</A></CODE> in class <CODE><A HREF="../../hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle">Lifecycle</A></CODE></DL>

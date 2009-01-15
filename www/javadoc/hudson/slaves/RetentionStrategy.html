@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-RetentionStrategy (Hudson core 1.274 API)
+RetentionStrategy (Hudson core 1.275 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-13">
+<META NAME="date" CONTENT="2009-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RetentionStrategy (Hudson core 1.274 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RetentionStrategy (Hudson core 1.274 API)";
+        parent.document.title="RetentionStrategy (Hudson core 1.275 API)";
     }
 }
 </SCRIPT>
@@ -100,7 +100,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;</DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/slaves/RetentionStrategy.Always.html" title="class in hudson.slaves">RetentionStrategy.Always</A>, <A HREF="../../hudson/slaves/RetentionStrategy.Demand.html" title="class in hudson.slaves">RetentionStrategy.Demand</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/slaves/RetentionStrategy.Always.html" title="class in hudson.slaves">RetentionStrategy.Always</A>, <A HREF="../../hudson/slaves/RetentionStrategy.Demand.html" title="class in hudson.slaves">RetentionStrategy.Demand</A>, <A HREF="../../hudson/slaves/SimpleScheduledRetentionStrategy.html" title="class in hudson.slaves">SimpleScheduledRetentionStrategy</A></DD>
 </DL>
 <HR>
 <DL>
@@ -212,6 +212,14 @@ Controls when to take <A HREF="../../hudson/model/Computer.html" title="class in
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method will be called periodically to allow this strategy to decide what to do with it's owning slave.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/RetentionStrategy.html#isManualLaunchAllowed(T)">isManualLaunchAllowed</A></B>(<A HREF="../../hudson/slaves/RetentionStrategy.html" title="type parameter in RetentionStrategy">T</A>&nbsp;c)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method is called to determine whether manual launching of the slave is allowed at this point in time.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -321,6 +329,25 @@ public abstract long <B>check</B>(<A HREF="../../hudson/slaves/RetentionStrategy
           This object also exposes a bunch of properties that the callee can use to decide what action to take.
 <DT><B>Returns:</B><DD>The number of minutes after which the strategy would like to be checked again. The strategy may be
          rechecked earlier or later that this!</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isManualLaunchAllowed(hudson.model.Computer)"><!-- --></A><A NAME="isManualLaunchAllowed(T)"><!-- --></A><H3>
+isManualLaunchAllowed</H3>
+<PRE>
+public boolean <B>isManualLaunchAllowed</B>(<A HREF="../../hudson/slaves/RetentionStrategy.html" title="type parameter in RetentionStrategy">T</A>&nbsp;c)</PRE>
+<DL>
+<DD>This method is called to determine whether manual launching of the slave is allowed at this point in time.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>c</CODE> - <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> for which this strategy is assigned. This computer may be online or offline.
+          This object also exposes a bunch of properties that the callee can use to decide if manual launching is
+ allowed at this time.
+<DT><B>Returns:</B><DD><code>true</code> if manual launching of the slave is allowed at this point in time.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

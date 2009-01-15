@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SlaveComputer (Hudson core 1.274 API)
+SlaveComputer (Hudson core 1.275 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-13">
+<META NAME="date" CONTENT="2009-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SlaveComputer (Hudson core 1.274 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SlaveComputer (Hudson core 1.274 API)";
+        parent.document.title="SlaveComputer (Hudson core 1.275 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/slaves/RetentionStrategy.Demand.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/slaves/SimpleScheduledRetentionStrategy.DescriptorImpl.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;NEXT CLASS</FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/slaves/SlaveComputer.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -299,7 +299,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#isLaunchSupported()">isLaunchSupported</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this computer can be launched by Hudson.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this computer can be launched by Hudson proactively and automatically.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -410,7 +410,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Computer.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Computer.html#countBusy()">countBusy</A>, <A HREF="../../hudson/model/Computer.html#countExecutors()">countExecutors</A>, <A HREF="../../hudson/model/Computer.html#countIdle()">countIdle</A>, <A HREF="../../hudson/model/Computer.html#currentComputer()">currentComputer</A>, <A HREF="../../hudson/model/Computer.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A>, <A HREF="../../hudson/model/Computer.html#doDoDelete(org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/Computer.html#doDumpExportTable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDumpExportTable</A>, <A HREF="../../hudson/model/Computer.html#doProgressiveLog(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doProgressiveLog</A>, <A HREF="../../hudson/model/Computer.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/Computer.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/Computer.html#doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doScript</A>, <A HREF="../../hudson/model/Computer.html#doToggleOffline(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doToggleOffline</A>, <A HREF="../../hudson/model/Computer.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Computer.html#getApi()">getApi</A>, <A HREF="../../hudson/model/Computer.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/Computer.html#getCaption()">getCaption</A>, <A HREF="../../hudson/model/Computer.html#getDemandStartMilliseconds()">getDemandStartMilliseconds</A>, <A HREF="../../hudson/model/Computer.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Computer.html#getEnvVars()">getEnvVars</A>, <A HREF="../../hudson/model/Computer.html#getExecutors()">getExecutors</A>, <A HREF="../../hudson/model/Computer.html#getIconAltText()">getIconAltText</A>, <A HREF="../../hudson/model/Computer.html#getIdleStartMilliseconds()">getIdleStartMilliseconds</A>, <A HREF="../../hudson/model/Computer.html#getLoadStatistics()">getLoadStatistics</A>, <A HREF="../../hudson/model/Computer.html#getLog()">getLog</A>, <A HREF="../../hudson/model/Computer.html#getLogFile()">getLogFile</A>, <A HREF="../../hudson/model/Computer.html#getMonitorData()">getMonitorData</A>, <A HREF="../../hudson/model/Computer.html#getName()">getName</A>, <A HREF="../../hudson/model/Computer.html#getNumExecutors()">getNumExecutors</A>, <A HREF="../../hudson/model/Computer.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Computer.html#getSystemProperties()">getSystemProperties</A>, <A HREF="../../hudson/model/Computer.html#getThreadDump()">getThreadDump</A>, <A HREF="../../hudson/model/Computer.html#getTiedJobs()">getTiedJobs</A>, <A HREF="../../hudson/model/Computer.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Computer.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Computer.html#interrupt()">interrupt</A>, <A HREF="../../hudson/model/Computer.html#isIdle()">isIdle</A>, <A HREF="../../hudson/model/Computer.html#isOffline()">isOffline</A>, <A HREF="../../hudson/model/Computer.html#isOnline()">isOnline</A>, <A HREF="../../hudson/model/Computer.html#isTemporarilyOffline()">isTemporarilyOffline</A>, <A HREF="../../hudson/model/Computer.html#launch()">launch</A>, <A HREF="../../hudson/model/Computer.html#setTemporarilyOffline(boolean)">setTemporarilyOffline</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Computer.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Computer.html#countBusy()">countBusy</A>, <A HREF="../../hudson/model/Computer.html#countExecutors()">countExecutors</A>, <A HREF="../../hudson/model/Computer.html#countIdle()">countIdle</A>, <A HREF="../../hudson/model/Computer.html#currentComputer()">currentComputer</A>, <A HREF="../../hudson/model/Computer.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A>, <A HREF="../../hudson/model/Computer.html#doDoDelete(org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/Computer.html#doDumpExportTable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDumpExportTable</A>, <A HREF="../../hudson/model/Computer.html#doProgressiveLog(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doProgressiveLog</A>, <A HREF="../../hudson/model/Computer.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/Computer.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/Computer.html#doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doScript</A>, <A HREF="../../hudson/model/Computer.html#doToggleOffline(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doToggleOffline</A>, <A HREF="../../hudson/model/Computer.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Computer.html#getApi()">getApi</A>, <A HREF="../../hudson/model/Computer.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/Computer.html#getCaption()">getCaption</A>, <A HREF="../../hudson/model/Computer.html#getDemandStartMilliseconds()">getDemandStartMilliseconds</A>, <A HREF="../../hudson/model/Computer.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Computer.html#getEnvVars()">getEnvVars</A>, <A HREF="../../hudson/model/Computer.html#getExecutors()">getExecutors</A>, <A HREF="../../hudson/model/Computer.html#getIconAltText()">getIconAltText</A>, <A HREF="../../hudson/model/Computer.html#getIdleStartMilliseconds()">getIdleStartMilliseconds</A>, <A HREF="../../hudson/model/Computer.html#getLoadStatistics()">getLoadStatistics</A>, <A HREF="../../hudson/model/Computer.html#getLog()">getLog</A>, <A HREF="../../hudson/model/Computer.html#getLogFile()">getLogFile</A>, <A HREF="../../hudson/model/Computer.html#getMonitorData()">getMonitorData</A>, <A HREF="../../hudson/model/Computer.html#getName()">getName</A>, <A HREF="../../hudson/model/Computer.html#getNumExecutors()">getNumExecutors</A>, <A HREF="../../hudson/model/Computer.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Computer.html#getSystemProperties()">getSystemProperties</A>, <A HREF="../../hudson/model/Computer.html#getThreadDump()">getThreadDump</A>, <A HREF="../../hudson/model/Computer.html#getTiedJobs()">getTiedJobs</A>, <A HREF="../../hudson/model/Computer.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Computer.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Computer.html#interrupt()">interrupt</A>, <A HREF="../../hudson/model/Computer.html#isIdle()">isIdle</A>, <A HREF="../../hudson/model/Computer.html#isManualLaunchAllowed()">isManualLaunchAllowed</A>, <A HREF="../../hudson/model/Computer.html#isOffline()">isOffline</A>, <A HREF="../../hudson/model/Computer.html#isOnline()">isOnline</A>, <A HREF="../../hudson/model/Computer.html#isTemporarilyOffline()">isTemporarilyOffline</A>, <A HREF="../../hudson/model/Computer.html#launch()">launch</A>, <A HREF="../../hudson/model/Computer.html#setTemporarilyOffline(boolean)">setTemporarilyOffline</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -564,7 +564,11 @@ isLaunchSupported</H3>
 public boolean <B>isLaunchSupported</B>()</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Computer.html#isLaunchSupported()">Computer</A></CODE></B></DD>
-<DD>Returns true if this computer can be launched by Hudson.
+<DD>Returns true if this computer can be launched by Hudson proactively and automatically.
+
+ <p>
+ For example, JNLP slaves return <code>false</code> from this, because the launch process
+ needs to be initiated from the slave side.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Computer.html#isLaunchSupported()">isLaunchSupported</A></CODE> in class <CODE><A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></DL>
@@ -988,7 +992,7 @@ protected <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hu
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/slaves/RetentionStrategy.Demand.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/slaves/SimpleScheduledRetentionStrategy.DescriptorImpl.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;NEXT CLASS</FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/slaves/SlaveComputer.html" target="_top"><B>FRAMES</B></A>  &nbsp;

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.274 API)
+Hudson (Hudson core 1.275 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-13">
+<META NAME="date" CONTENT="2009-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.274 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.274 API)";
+        parent.document.title="Hudson (Hudson core 1.275 API)";
     }
 }
 </SCRIPT>
@@ -1365,6 +1365,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getRetentionStrategy(java.lang.String)">getRetentionStrategy</A></B>(java.lang.String&nbsp;shortClassName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the retention strategy descriptor by name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.io.File</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getRootDir()">getRootDir</A></B>()</CODE>
 
@@ -2478,6 +2486,22 @@ getTrigger</H3>
 public <A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers">TriggerDescriptor</A> <B>getTrigger</B>(java.lang.String&nbsp;shortClassName)</PRE>
 <DL>
 <DD>Gets the trigger descriptor by name. Primarily used for making them web-visible.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRetentionStrategy(java.lang.String)"><!-- --></A><H3>
+getRetentionStrategy</H3>
+<PRE>
+public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt; <B>getRetentionStrategy</B>(java.lang.String&nbsp;shortClassName)</PRE>
+<DL>
+<DD>Gets the retention strategy descriptor by name. Primarily used for making them web-visible.
 <P>
 <DD><DL>
 </DL>
