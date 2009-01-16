@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonTestCase (Test harness for Hudson and plugins 1.275 API)
+HudsonTestCase (Test harness for Hudson and plugins 1.276 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-15">
+<META NAME="date" CONTENT="2009-01-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Test harness for Hudson and plugins 1.275 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.275 API)";
+        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.276 API)";
     }
 }
 </SCRIPT>
@@ -440,6 +440,15 @@ Base class for all Hudson test cases.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called during the <A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#setUp()"><CODE>setUp()</CODE></A> to give a test case an opportunity to
  control the test environment in which Hudson is run.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#recipeLoadCurrentPlugin()">recipeLoadCurrentPlugin</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If this test harness is launched for a Hudson plugin, locate the <tt>target/test-classes/the.hpl</tt>
+ and add a recipe to install that to the new Hudson.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1102,7 +1111,29 @@ protected void <B>recipe</B>()
  control the test environment in which Hudson is run.
 
  <p>
- From here, call a series of <code>withXXX</code> methods.
+ One could override this method and call a series of <code>withXXX</code> methods,
+ or you can use the annotations with <A HREF="../../../../org/jvnet/hudson/test/recipes/Recipe.html" title="annotation in org.jvnet.hudson.test.recipes"><CODE>Recipe</CODE></A> meta-annotation.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="recipeLoadCurrentPlugin()"><!-- --></A><H3>
+recipeLoadCurrentPlugin</H3>
+<PRE>
+protected void <B>recipeLoadCurrentPlugin</B>()
+                                throws java.lang.Exception</PRE>
+<DL>
+<DD>If this test harness is launched for a Hudson plugin, locate the <tt>target/test-classes/the.hpl</tt>
+ and add a recipe to install that to the new Hudson.
+
+ <p>
+ This file is created by <tt>maven-hpi-plugin</tt> at the testCompile phase when the current
+ packaging is <tt>hpi</tt>.
 <P>
 <DD><DL>
 

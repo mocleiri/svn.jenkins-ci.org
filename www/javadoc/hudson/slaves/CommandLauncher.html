@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-CommandLauncher (Hudson core 1.275 API)
+CommandLauncher (Hudson core 1.276 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-15">
+<META NAME="date" CONTENT="2009-01-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CommandLauncher (Hudson core 1.275 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CommandLauncher (Hudson core 1.275 API)";
+        parent.document.title="CommandLauncher (Hudson core 1.276 API)";
     }
 }
 </SCRIPT>
@@ -323,6 +323,10 @@ public void <B>launch</B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title
  should be invoked in the end to notify Hudson of the established connection.
  The operation could also fail, in which case there's no need to make any callback notification,
  (except to notify the user of the failure through <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util"><CODE>StreamTaskListener</CODE></A>.)
+
+ <p>
+ This method must operate synchronously. Asynchrony is provided by <A HREF="../../hudson/model/Computer.html#connect(boolean)"><CODE>Computer.connect(boolean)</CODE></A> and
+ its correct operation depends on this.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">launch</A></CODE> in class <CODE><A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></CODE></DL>

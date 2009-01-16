@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson.MasterComputer (Hudson core 1.275 API)
+Hudson.MasterComputer (Hudson core 1.276 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-15">
+<META NAME="date" CONTENT="2009-01-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson.MasterComputer (Hudson core 1.275 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson.MasterComputer (Hudson core 1.275 API)";
+        parent.document.title="Hudson.MasterComputer (Hudson core 1.276 API)";
     }
 }
 </SCRIPT>
@@ -608,7 +608,9 @@ public java.util.concurrent.Future&lt;?&gt; <B>connect</B>(boolean&nbsp;forceRec
 <DT><B>Parameters:</B><DD><CODE>forceReconnect</CODE> - If true and a connect activity is already in progress, it will be cancelled and
       the new one will be started. If false, and a connect activity is already in progress, this method
       will do nothing and just return the pending connection operation.
-<DT><B>Returns:</B><DD>A <CODE>Future</CODE> representing pending completion of the task.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Computer.html#disconnect()"><CODE>Computer.disconnect()</CODE></A></DL>
+<DT><B>Returns:</B><DD>A <CODE>Future</CODE> representing pending completion of the task. The 'completion' includes
+      both a successful completion and a non-successful completion (such distinction typically doesn't
+      make much sense because as soon as <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> is connected it can be disconnected by some other threads.)<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Computer.html#disconnect()"><CODE>Computer.disconnect()</CODE></A></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

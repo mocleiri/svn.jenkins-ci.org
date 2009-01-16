@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-RetentionStrategy (Hudson core 1.275 API)
+RetentionStrategy (Hudson core 1.276 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-15">
+<META NAME="date" CONTENT="2009-01-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RetentionStrategy (Hudson core 1.275 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RetentionStrategy (Hudson core 1.275 API)";
+        parent.document.title="RetentionStrategy (Hudson core 1.276 API)";
     }
 }
 </SCRIPT>
@@ -220,6 +220,15 @@ Controls when to take <A HREF="../../hudson/model/Computer.html" title="class in
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method is called to determine whether manual launching of the slave is allowed at this point in time.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/RetentionStrategy.html#start(T)">start</A></B>(<A HREF="../../hudson/slaves/RetentionStrategy.html" title="type parameter in RetentionStrategy">T</A>&nbsp;c)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called when a new <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> object is introduced (such as when Hudson started, or when
+ a new slave is added.)</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -348,6 +357,29 @@ public boolean <B>isManualLaunchAllowed</B>(<A HREF="../../hudson/slaves/Retenti
           This object also exposes a bunch of properties that the callee can use to decide if manual launching is
  allowed at this time.
 <DT><B>Returns:</B><DD><code>true</code> if manual launching of the slave is allowed at this point in time.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="start(hudson.model.Computer)"><!-- --></A><A NAME="start(T)"><!-- --></A><H3>
+start</H3>
+<PRE>
+public void <B>start</B>(<A HREF="../../hudson/slaves/RetentionStrategy.html" title="type parameter in RetentionStrategy">T</A>&nbsp;c)</PRE>
+<DL>
+<DD>Called when a new <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> object is introduced (such as when Hudson started, or when
+ a new slave is added.)
+
+ <p>
+ The default implementation of this method delegates to <A HREF="../../hudson/slaves/RetentionStrategy.html#check(T)"><CODE>check(Computer)</CODE></A>,
+ but this allows <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> to distinguish the first time invocation from the rest.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.275</DD>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
