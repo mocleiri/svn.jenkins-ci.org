@@ -12,7 +12,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Maven Hudson Plugin - maven-hpi-plugin - hpi:hpi</title>
+    <title>Maven Hudson Plugin - maven-hpi-plugin - hpi:test-hpl</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -116,16 +116,16 @@
     </div>
     <div id="bodyColumn">
       <div id="contentBox">
-        <div class="section"><h2><a name="hpi:hpi"></a>
-hpi:hpi</h2>
+        <div class="section"><h2><a name="hpi:test-hpl"></a>
+hpi:test-hpl</h2>
 <p><strong>Full name</strong>:</p>
-<p>org.jvnet.hudson.tools:maven-hpi-plugin:1.27:hpi</p>
+<p>org.jvnet.hudson.tools:maven-hpi-plugin:1.27:test-hpl</p>
 <p><strong>Description</strong>:</p>
-<p>Build a war/webapp.</p>
+<p>Generate .hpl file in the test class directory so that test harness
+can locate the plugin.</p>
 <p><strong>Attributes</strong>:</p>
 <ul><li>Requires a Maven 2.0 project to be executed.</li>
-<li>Requires dependency resolution of artifacts in scope: <code>runtime</code>.</li>
-<li>Binds by default to the lifecycle phase: <code>package</code>.</li>
+<li>Requires dependency resolution of artifacts in scope: <code>test</code>.</li>
 </ul>
 <div class="section"><h3><a name="Required_Parameters"></a>
 Required Parameters</h3>
@@ -134,31 +134,25 @@ Required Parameters</h3>
 <th>Since</th>
 <th>Description</th>
 </tr>
-<tr class="b"><td><strong><a href="#hpiName">hpiName</a>
-</strong></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>The name of the generated hpi. </td>
-</tr>
-<tr class="a"><td><strong><a href="#outputDirectory">outputDirectory</a>
+<tr class="b"><td><strong><a href="#outputDirectory">outputDirectory</a>
 </strong></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
 <td>The directory for the generated WAR. </td>
 </tr>
-<tr class="b"><td><strong><a href="#warSourceDirectory">warSourceDirectory</a>
+<tr class="a"><td><strong><a href="#warSourceDirectory">warSourceDirectory</a>
 </strong></td>
 <td><code>File</code></td>
 <td><code>-</code></td>
 <td>Single directory for extra files to include in the WAR. </td>
 </tr>
-<tr class="a"><td><strong><a href="#webappDirectory">webappDirectory</a>
+<tr class="b"><td><strong><a href="#webappDirectory">webappDirectory</a>
 </strong></td>
 <td><code>File</code></td>
 <td><code>-</code></td>
 <td>The directory where the webapp is built. </td>
 </tr>
-<tr class="b"><td><strong><a href="#workDirectory">workDirectory</a>
+<tr class="a"><td><strong><a href="#workDirectory">workDirectory</a>
 </strong></td>
 <td><code>File</code></td>
 <td><code>-</code></td>
@@ -168,16 +162,10 @@ Required Parameters</h3>
 </div>
 <div class="section"><h3><a name="Optional_Parameters"></a>
 Optional Parameters</h3>
-<table class="bodyTable"><tr class="a"><th>Name</th>
+<table class="bodyTable"><tr class="b"><th>Name</th>
 <th>Type</th>
 <th>Since</th>
 <th>Description</th>
-</tr>
-<tr class="b"><td><strong><a href="#archive">archive</a>
-</strong></td>
-<td><code>MavenArchiveConfiguration</code></td>
-<td><code>-</code></td>
-<td>The maven archive configuration to use. </td>
 </tr>
 <tr class="a"><td><strong><a href="#containerConfigXML">containerConfigXML</a>
 </strong></td>
@@ -205,20 +193,28 @@ overlay. Default is '**' </td>
 <td><code>-</code></td>
 <td>(no description) </td>
 </tr>
-<tr class="a"><td><strong><a href="#warSourceExcludes">warSourceExcludes</a>
+<tr class="a"><td><strong><a href="#hudsonHome">hudsonHome</a>
+</strong></td>
+<td><code>File</code></td>
+<td><code>-</code></td>
+<td>Path to <tt>$HUDSON_HOME</tt>
+. A .hpl file will be generated to
+this location. </td>
+</tr>
+<tr class="b"><td><strong><a href="#warSourceExcludes">warSourceExcludes</a>
 </strong></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
 <td>The comma separated list of tokens to exclude from the WAR. </td>
 </tr>
-<tr class="b"><td><strong><a href="#warSourceIncludes">warSourceIncludes</a>
+<tr class="a"><td><strong><a href="#warSourceIncludes">warSourceIncludes</a>
 </strong></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
 <td>The comma separated list of tokens to include in the WAR. Default
 is '**'. </td>
 </tr>
-<tr class="a"><td><strong><a href="#webResources">webResources</a>
+<tr class="b"><td><strong><a href="#webResources">webResources</a>
 </strong></td>
 <td><code>Resource[]</code></td>
 <td><code>-</code></td>
@@ -228,13 +224,6 @@ is '**'. </td>
 </div>
 <div class="section"><h3><a name="Parameter_Details"></a>
 Parameter Details</h3>
-<p><strong><a name="archive">archive</a>
-:</strong></p>
-<p>The maven archive configuration to use.</p>
-<ul><li><strong>Type</strong>: <code>org.apache.maven.archiver.MavenArchiveConfiguration</code></li>
-<li><strong>Required</strong>: <code>No</code></li>
-</ul>
-<hr />
 <p><strong><a name="containerConfigXML">containerConfigXML</a>
 :</strong></p>
 <p>The path to the context.xml file to use.</p>
@@ -267,12 +256,14 @@ overlay. Default is '**'</p>
 <li><strong>Expression</strong>: <code>${project.build.filters}</code></li>
 </ul>
 <hr />
-<p><strong><a name="hpiName">hpiName</a>
+<p><strong><a name="hudsonHome">hudsonHome</a>
 :</strong></p>
-<p>The name of the generated hpi.</p>
-<ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>Expression</strong>: <code>${project.build.finalName}</code></li>
+<p>Path to <tt>$HUDSON_HOME</tt>
+. A .hpl file will be generated to
+this location.</p>
+<ul><li><strong>Type</strong>: <code>java.io.File</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>Expression</strong>: <code>${hudsonHome}</code></li>
 </ul>
 <hr />
 <p><strong><a name="outputDirectory">outputDirectory</a>
