@@ -121,7 +121,7 @@ public class Plugin {
     }
 
     private static final Pattern EXCERPT_PATTERN = Pattern.compile("\\{excerpt\\}(.+)\\{excerpt\\}");
-    private static final Pattern HYPERLINK_PATTERN = Pattern.compile("\\[([^]]+)\\|([^]]+)\\]");
+    private static final Pattern HYPERLINK_PATTERN = Pattern.compile("\\[([^|\\]]+)\\|([^|\\]]+)(|([^]])+)?\\]");
 
     public JSONObject toJSON() throws IOException {
         JSONObject json = file.toJSON(artifactId);
