@@ -16,7 +16,7 @@ import sun.misc.SignalHandler;
 import org.apache.commons.io.IOUtils;
 
 /**
- * Hello world!
+ * Daemon programming in Java.
  *
  * See http://www.enderunix.org/docs/eng/daemon.php
  */
