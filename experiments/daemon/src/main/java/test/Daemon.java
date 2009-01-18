@@ -2,6 +2,7 @@ package test;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;
+import com.sun.jna.StringArray;
 
 import java.io.FileWriter;
 import java.io.File;
@@ -30,7 +31,7 @@ public class Daemon
         int getpid();
         int getppid();
         int chdir(String dir);
-        int execv(String file, String[] args);
+        int execv(String file, StringArray args);
     }
 
 
@@ -48,15 +49,19 @@ public class Daemon
             newArgs.addAll(Arrays.asList(cmdline.split("\0")));
             newArgs.add(1,"-verbose:gc");
             newArgs.add("nofork");
-            newArgs.add(null);
             args = newArgs.toArray(new String[newArgs.size()]);
-
+            // don't know exactly why, but creating a StringArray upfront prevents
+            // mysterious random exec failure. Perhaps it's related to the fact
+            // that the garbage collector and other critical system threads are lost
+            // after fork?
+            StringArray sa = new StringArray(args);
+            
             int i = lib.fork();
             if(i<0) System.exit(-1);    // fork failed
             if(i>0) System.exit(0);     // parent exits
 
             // with fork, we lose all the other critical threads, to exec to Java again
-            int r = lib.execv(exe,args);
+            int r = lib.execv(exe,sa);
             System.err.println("Exec failed: "+r);
             return;
         }
