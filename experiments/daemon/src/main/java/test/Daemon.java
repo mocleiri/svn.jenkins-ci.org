@@ -58,6 +58,9 @@ public class Daemon
             // after fork?
             StringArray sa = new StringArray(args);
 
+            // run execv once (this will fail) to load all the relevant classes upfront
+            lib.execv("",new StringArray(new String[]{""}));
+
             int i = lib.fork();
             if(i<0) {
                 lib.perror("initial fork failed");
