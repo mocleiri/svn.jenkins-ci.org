@@ -32,11 +32,13 @@ public class Daemon
         int getppid();
         int chdir(String dir);
         int execv(String file, StringArray args);
+        void perror(String msg);
     }
 
 
     public static void main( String[] args ) throws Exception
     {
+        System.err.print("");
         CLibrary lib = CLibrary.INSTANCE;
 
         if(args.length==0) {
@@ -55,14 +57,19 @@ public class Daemon
             // that the garbage collector and other critical system threads are lost
             // after fork?
             StringArray sa = new StringArray(args);
-            
+
             int i = lib.fork();
-            if(i<0) System.exit(-1);    // fork failed
+            if(i<0) {
+                lib.perror("initial fork failed");
+                System.exit(-1);
+            }
             if(i>0) System.exit(0);     // parent exits
 
             // with fork, we lose all the other critical threads, to exec to Java again
-            int r = lib.execv(exe,sa);
-            System.err.println("Exec failed: "+r);
+            lib.execv(exe,sa);
+            System.err.println("exec failed");
+            lib.perror("initial exec failed");
+            System.exit(-1);
             return;
         }
 
