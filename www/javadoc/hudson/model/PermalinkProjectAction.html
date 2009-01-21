@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-PermalinkProjectAction (Hudson core 1.276 API)
+PermalinkProjectAction (Hudson core 1.277 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-16">
+<META NAME="date" CONTENT="2009-01-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PermalinkProjectAction (Hudson core 1.276 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PermalinkProjectAction (Hudson core 1.276 API)";
+        parent.document.title="PermalinkProjectAction (Hudson core 1.277 API)";
     }
 }
 </SCRIPT>
@@ -135,7 +135,7 @@ Optional interface for <A HREF="../../hudson/model/Action.html" title="interface
 <TD><CODE><B><A HREF="../../hudson/model/PermalinkProjectAction.Permalink.html" title="class in hudson.model">PermalinkProjectAction.Permalink</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permalink as a strategy pattern.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -184,6 +184,11 @@ getPermalinks</H3>
 java.util.List&lt;<A HREF="../../hudson/model/PermalinkProjectAction.Permalink.html" title="class in hudson.model">PermalinkProjectAction.Permalink</A>&gt; <B>getPermalinks</B>()</PRE>
 <DL>
 <DD>Gets the permalinks defined for this project.
+
+ <p>
+ Because <A HREF="../../hudson/model/PermalinkProjectAction.Permalink.html" title="class in hudson.model"><CODE>PermalinkProjectAction.Permalink</CODE></A> is a strategy-pattern object,
+ this method should normally return a pre-initialzied
+ read-only static list object.
 <P>
 <DD><DL>
 </DL>

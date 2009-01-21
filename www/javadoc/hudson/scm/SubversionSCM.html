@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SubversionSCM (Hudson core 1.276 API)
+SubversionSCM (Hudson core 1.277 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-16">
+<META NAME="date" CONTENT="2009-01-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SubversionSCM (Hudson core 1.276 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionSCM (Hudson core 1.276 API)";
+        parent.document.title="SubversionSCM (Hudson core 1.277 API)";
     }
 }
 </SCRIPT>
@@ -192,6 +192,12 @@ Subversion SCM.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#SubversionSCM(java.lang.String)">SubversionSCM</A></B>(java.lang.String&nbsp;svnUrl)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience constructor, especially during testing.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#SubversionSCM(java.lang.String[], java.lang.String[], boolean, hudson.scm.SubversionRepositoryBrowser)">SubversionSCM</A></B>(java.lang.String[]&nbsp;remoteLocations,
               java.lang.String[]&nbsp;localLocations,
               boolean&nbsp;useUpdate,
@@ -239,6 +245,14 @@ Subversion SCM.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The returned object will be used to parse <tt>changelog.xml</tt>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.tmatesoft.svn.core.wc.SVNClientManager</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#createSvnClientManager()">createSvnClientManager</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates <CODE>SVNClientManager</CODE> for code running on the master.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -398,6 +412,16 @@ public <B>SubversionSCM</B>(java.lang.String[]&nbsp;remoteLocations,
                      boolean&nbsp;useUpdate,
                      <A HREF="../../hudson/scm/SubversionRepositoryBrowser.html" title="class in hudson.scm">SubversionRepositoryBrowser</A>&nbsp;browser)</PRE>
 <DL>
+</DL>
+<HR>
+
+<A NAME="SubversionSCM(java.lang.String)"><!-- --></A><H3>
+SubversionSCM</H3>
+<PRE>
+public <B>SubversionSCM</B>(java.lang.String&nbsp;svnUrl)</PRE>
+<DL>
+<DD>Convenience constructor, especially during testing.
+<P>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -587,6 +611,26 @@ public static org.tmatesoft.svn.core.wc.SVNClientManager <B>createSvnClientManag
 <DT><B>Parameters:</B><DD><CODE>authProvider</CODE> - The value obtained from <A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#createAuthenticationProvider()"><CODE>SubversionSCM.DescriptorImpl.createAuthenticationProvider()</CODE></A>.
       If the operation runs on slaves,
       (and properly remoted, if the svn operations run on slaves.)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createSvnClientManager()"><!-- --></A><H3>
+createSvnClientManager</H3>
+<PRE>
+public static org.tmatesoft.svn.core.wc.SVNClientManager <B>createSvnClientManager</B>()</PRE>
+<DL>
+<DD>Creates <CODE>SVNClientManager</CODE> for code running on the master.
+ <p>
+ CAUTION: this code only works when invoked on master. On slaves, use
+ <A HREF="../../hudson/scm/SubversionSCM.html#createSvnClientManager(org.tmatesoft.svn.core.auth.ISVNAuthenticationProvider)"><CODE>createSvnClientManager(ISVNAuthenticationProvider)</CODE></A> and get <CODE>ISVNAuthenticationProvider</CODE>
+ from the master via remoting.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

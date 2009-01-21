@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-CVSSCM.TagWorkerThread (Hudson core 1.276 API)
+CVSSCM.TagWorkerThread (Hudson core 1.277 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-16">
+<META NAME="date" CONTENT="2009-01-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CVSSCM.TagWorkerThread (Hudson core 1.276 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CVSSCM.TagWorkerThread (Hudson core 1.276 API)";
+        parent.document.title="CVSSCM.TagWorkerThread (Hudson core 1.277 API)";
     }
 }
 </SCRIPT>
@@ -200,7 +200,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.TagWorkerThread.html#start()">start</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts the task execution asynchronously.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.TaskThread"><!-- --></A>
@@ -209,7 +209,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/TaskThread.html" title="class in hudson.model">TaskThread</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/TaskThread.html#associateWith(hudson.model.TaskAction)">associateWith</A>, <A HREF="../../hudson/model/TaskThread.html#createListener()">createListener</A>, <A HREF="../../hudson/model/TaskThread.html#readAll()">readAll</A>, <A HREF="../../hudson/model/TaskThread.html#run()">run</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/TaskThread.html#associateWith(hudson.model.TaskAction)">associateWith</A>, <A HREF="../../hudson/model/TaskThread.html#createListener()">createListener</A>, <A HREF="../../hudson/model/TaskThread.html#isRunning()">isRunning</A>, <A HREF="../../hudson/model/TaskThread.html#readAll()">readAll</A>, <A HREF="../../hudson/model/TaskThread.html#run()">run</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Thread"><!-- --></A>
@@ -266,6 +266,9 @@ start</H3>
 <PRE>
 public void <B>start</B>()</PRE>
 <DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/TaskThread.html#start()">TaskThread</A></CODE></B></DD>
+<DD>Starts the task execution asynchronously.
+<P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/TaskThread.html#start()">start</A></CODE> in class <CODE><A HREF="../../hudson/model/TaskThread.html" title="class in hudson.model">TaskThread</A></CODE></DL>
 </DD>

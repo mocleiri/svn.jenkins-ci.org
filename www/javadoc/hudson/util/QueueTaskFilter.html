@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-QueueTaskFilter (Hudson core 1.276 API)
+QueueTaskFilter (Hudson core 1.277 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-16">
+<META NAME="date" CONTENT="2009-01-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ QueueTaskFilter (Hudson core 1.276 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="QueueTaskFilter (Hudson core 1.276 API)";
+        parent.document.title="QueueTaskFilter (Hudson core 1.277 API)";
     }
 }
 </SCRIPT>
@@ -443,12 +443,15 @@ public java.lang.String <B>getName</B>()</PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Queue.Task.html#getName()">Queue.Task</A></CODE></B></DD>
 <DD>Unique name of this task.
+
+ <p>
+ This method is no longer used, left here for compatibility. Just return <A HREF="../../hudson/model/ModelObject.html#getDisplayName()"><CODE>ModelObject.getDisplayName()</CODE></A>.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.Task.html#getName()">getName</A></CODE> in interface <CODE><A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></CODE></DL>
 </DD>
 <DD><DL>
-<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Item.html#getName()"><CODE>TODO: this doesn't make sense anymore. remove it.</CODE></A></DL>
+</DL>
 </DD>
 </DL>
 <HR>

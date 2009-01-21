@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-TaskAction (Hudson core 1.276 API)
+TaskAction (Hudson core 1.277 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-16">
+<META NAME="date" CONTENT="2009-01-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TaskAction (Hudson core 1.276 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TaskAction (Hudson core 1.276 API)";
+        parent.document.title="TaskAction (Hudson core 1.277 API)";
     }
 }
 </SCRIPT>
@@ -205,11 +205,11 @@ Partial <A HREF="../../hudson/model/Action.html" title="interface in hudson.mode
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.ref.WeakReference&lt;org.kohsuke.stapler.framework.io.LargeText&gt;</CODE></FONT></TD>
+<CODE>&nbsp;org.kohsuke.stapler.framework.io.LargeText</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/TaskAction.html#getLog()">getLog</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the log file.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -362,8 +362,18 @@ protected abstract <A HREF="../../hudson/security/ACL.html" title="class in huds
 <A NAME="getLog()"><!-- --></A><H3>
 getLog</H3>
 <PRE>
-public java.lang.ref.WeakReference&lt;org.kohsuke.stapler.framework.io.LargeText&gt; <B>getLog</B>()</PRE>
+public org.kohsuke.stapler.framework.io.LargeText <B>getLog</B>()</PRE>
 <DL>
+<DD>Obtains the log file.
+
+ <p>
+ The default implementation get this from <A HREF="../../hudson/model/TaskAction.html#workerThread"><CODE>workerThread</CODE></A>,
+ so when it's complete, the log could be gone any time.
+
+ <p>
+ Derived classes that persist the text should override this
+ method so that it fetches the file from disk.
+<P>
 <DD><DL>
 </DL>
 </DD>

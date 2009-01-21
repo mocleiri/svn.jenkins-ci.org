@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Test harness for Hudson and plugins 1.276 API)
+Index (Test harness for Hudson and plugins 1.277 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-16">
+<META NAME="date" CONTENT="2009-01-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Test harness for Hudson and plugins 1.276 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Test harness for Hudson and plugins 1.276 API)";
+        parent.document.title="Index (Test harness for Hudson and plugins 1.277 API)";
     }
 }
 </SCRIPT>
@@ -95,10 +95,10 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonHom
 <DT><A HREF="./org/jvnet/hudson/test/TemporaryDirectoryAllocator.html#allocate()"><B>allocate()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/TemporaryDirectoryAllocator.html" title="class in org.jvnet.hudson.test">TemporaryDirectoryAllocator</A>
 <DD>Allocates a new empty temporary directory and returns it.
-<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatus(hudson.model.Result, hudson.model.Run)"><B>assertBuildStatus(Result, Run)</B></A> - 
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatus(hudson.model.Result, R)"><B>assertBuildStatus(Result, R)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Asserts that the outcome of the build is a specific outcome.
-<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatusSuccess(hudson.model.Run)"><B>assertBuildStatusSuccess(Run)</B></A> - 
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatusSuccess(R)"><B>assertBuildStatusSuccess(R)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertLogContains(java.lang.String, hudson.model.Run)"><B>assertLogContains(String, Run)</B></A> - 
@@ -240,6 +240,9 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/FailureBu
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/SleepBuilder.html#getDescriptor()"><B>getDescriptor()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/SleepBuilder.html" title="class in org.jvnet.hudson.test">SleepBuilder</A>
+<DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/TestBuilder.html#getDescriptor()"><B>getDescriptor()</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/TestBuilder.html" title="class in org.jvnet.hudson.test">TestBuilder</A>
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/FailureBuilder.DescriptorImpl.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/FailureBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">FailureBuilder.DescriptorImpl</A>
@@ -408,6 +411,9 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/FailureBu
 <DT><A HREF="./org/jvnet/hudson/test/SleepBuilder.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><B>perform(AbstractBuild&lt;?, ?&gt;, Launcher, BuildListener)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/SleepBuilder.html" title="class in org.jvnet.hudson.test">SleepBuilder</A>
 <DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/TestBuilder.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><B>perform(AbstractBuild&lt;?, ?&gt;, Launcher, BuildListener)</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/TestBuilder.html" title="class in org.jvnet.hudson.test">TestBuilder</A>
+<DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/TestEnvironment.html#pin()"><B>pin()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/TestEnvironment.html" title="class in org.jvnet.hudson.test">TestEnvironment</A>
 <DD>&nbsp;
@@ -503,6 +509,9 @@ Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/Tem
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/TestEnvironment.html#temporaryDirectoryAllocator"><B>temporaryDirectoryAllocator</B></A> - 
 Variable in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/TestEnvironment.html" title="class in org.jvnet.hudson.test">TestEnvironment</A>
+<DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/TestBuilder.html" title="class in org.jvnet.hudson.test"><B>TestBuilder</B></A> - Class in <A HREF="./org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A><DD>Partial <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/tasks/Builder.html?is-external=true" title="class or interface in hudson.tasks"><CODE>Builder</CODE></A> implementation for writing a one-off throw-away builder used during tests.<DT><A HREF="./org/jvnet/hudson/test/TestBuilder.html#TestBuilder()"><B>TestBuilder()</B></A> - 
+Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/TestBuilder.html" title="class in org.jvnet.hudson.test">TestBuilder</A>
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/TestEnvironment.html" title="class in org.jvnet.hudson.test"><B>TestEnvironment</B></A> - Class in <A HREF="./org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A><DD>&nbsp;<DT><A HREF="./org/jvnet/hudson/test/TestEnvironment.html#TestEnvironment()"><B>TestEnvironment()</B></A> - 
 Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/TestEnvironment.html" title="class in org.jvnet.hudson.test">TestEnvironment</A>

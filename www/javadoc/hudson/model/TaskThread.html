@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-TaskThread (Hudson core 1.276 API)
+TaskThread (Hudson core 1.277 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-16">
+<META NAME="date" CONTENT="2009-01-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TaskThread (Hudson core 1.276 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TaskThread (Hudson core 1.276 API)";
+        parent.document.title="TaskThread (Hudson core 1.277 API)";
     }
 }
 </SCRIPT>
@@ -110,6 +110,9 @@ java.lang.Object
 
 <P>
 <CODE>Thread</CODE> for performing one-off task.
+
+ <p>
+ Designed to be used inside <A HREF="../../hudson/model/TaskAction.html" title="class in hudson.model"><CODE>TaskAction</CODE></A>.
 <P>
 
 <P>
@@ -118,7 +121,7 @@ java.lang.Object
   <DD>1.191</DD>
 <DT><B>Author:</B></DT>
   <DD>Kohsuke Kawaguchi</DD>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/TaskAction.html" title="class in hudson.model"><CODE>TaskAction</CODE></A></DL>
 <HR>
 
 <P>
@@ -215,6 +218,14 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/TaskThread.html#isRunning()">isRunning</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected abstract &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/TaskThread.html#perform(hudson.model.TaskListener)">perform</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
@@ -243,7 +254,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/model/TaskThread.html#start()">start</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts the task execution asynchronously.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Thread"><!-- --></A>
@@ -331,9 +342,22 @@ start</H3>
 <PRE>
 public void <B>start</B>()</PRE>
 <DL>
+<DD>Starts the task execution asynchronously.
+<P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE>start</CODE> in class <CODE>java.lang.Thread</CODE></DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isRunning()"><!-- --></A><H3>
+isRunning</H3>
+<PRE>
+public boolean <B>isRunning</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

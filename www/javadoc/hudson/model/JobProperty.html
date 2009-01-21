@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-JobProperty (Hudson core 1.276 API)
+JobProperty (Hudson core 1.277 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-16">
+<META NAME="date" CONTENT="2009-01-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JobProperty (Hudson core 1.276 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JobProperty (Hudson core 1.276 API)";
+        parent.document.title="JobProperty (Hudson core 1.277 API)";
     }
 }
 </SCRIPT>
@@ -97,6 +97,10 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.JobProperty&lt;J&gt;</B>
 </PRE>
 <DL>
+<DT><DT><B>Type Parameters:</B><DD><CODE>J</CODE> - When you restrict your job property to be only applicable to a certain
+      subtype of <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>, you can use this type parameter to improve
+      the type signature of this class. See <A HREF="../../hudson/model/JobPropertyDescriptor.html#isApplicable(java.lang.Class)"><CODE>JobPropertyDescriptor.isApplicable(Class)</CODE></A>.</DL>
+<DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&lt;?&gt;&gt;, <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></DD>
 </DL>
 <DL>
@@ -124,7 +128,9 @@ Extensible property of <A HREF="../../hudson/model/Job.html" title="class in hud
  Starting 1.150, <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A> implements <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A>,
  meaning it gets the same hook as <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A> and <A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A>.
  The primary intention of this mechanism is so that <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A>s
- can add actions to the new build.
+ can add actions to the new build. The <A HREF="../../hudson/model/JobProperty.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>perform(AbstractBuild, Launcher, BuildListener)</CODE></A>
+ and <A HREF="../../hudson/model/JobProperty.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>prebuild(AbstractBuild, BuildListener)</CODE></A> are invoked after those
+ of <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A>s.
 <P>
 
 <P>

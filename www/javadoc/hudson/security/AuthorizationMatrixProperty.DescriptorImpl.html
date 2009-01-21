@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AuthorizationMatrixProperty.DescriptorImpl (Hudson core 1.276 API)
+AuthorizationMatrixProperty.DescriptorImpl (Hudson core 1.277 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-16">
+<META NAME="date" CONTENT="2009-01-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AuthorizationMatrixProperty.DescriptorImpl (Hudson core 1.276 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AuthorizationMatrixProperty.DescriptorImpl (Hudson core 1.276 API)";
+        parent.document.title="AuthorizationMatrixProperty.DescriptorImpl (Hudson core 1.277 API)";
     }
 }
 </SCRIPT>
@@ -320,14 +320,13 @@ public boolean <B>isApplicable</B>(java.lang.Class&lt;? extends <A HREF="../../h
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/JobPropertyDescriptor.html#isApplicable(java.lang.Class)">JobPropertyDescriptor</A></CODE></B></DD>
 <DD>Returns true if this <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A> type is applicable to the
  given job type.
-
+ 
  <p>
- Normally, this method is implemented like
- <code>return AbstractProject.class.isAssignableFrom(jobType)</code>
- where "<tt>AbstractProject</tt>" is the J of <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A><tt>&lt;J></tt>.
+ The default implementation of this method checks if the given job type is assignable to 'J' of
+ <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A><tt>&lt;J></tt>, but subtypes can extend this to change this behavior.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/JobPropertyDescriptor.html#isApplicable(java.lang.Class)">isApplicable</A></CODE> in class <CODE><A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model">JobPropertyDescriptor</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/JobPropertyDescriptor.html#isApplicable(java.lang.Class)">isApplicable</A></CODE> in class <CODE><A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model">JobPropertyDescriptor</A></CODE></DL>
 </DD>
 <DD><DL>
 

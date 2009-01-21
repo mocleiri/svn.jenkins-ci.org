@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonTestCase (Test harness for Hudson and plugins 1.276 API)
+HudsonTestCase (Test harness for Hudson and plugins 1.277 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-16">
+<META NAME="date" CONTENT="2009-01-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Test harness for Hudson and plugins 1.276 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.276 API)";
+        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.277 API)";
     }
 }
 </SCRIPT>
@@ -255,17 +255,35 @@ Base class for all Hudson test cases.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatus(hudson.model.Result, hudson.model.Run)">assertBuildStatus</A></B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Result.html?is-external=true" title="class or interface in hudson.model">Result</A>&nbsp;status,
-                  <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Run.html?is-external=true" title="class or interface in hudson.model">Run</A>&nbsp;r)</CODE>
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;R extends <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Run.html?is-external=true" title="class or interface in hudson.model">Run</A>&gt; 
+<BR>
+R</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatus(hudson.model.Result, R)">assertBuildStatus</A></B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Result.html?is-external=true" title="class or interface in hudson.model">Result</A>&nbsp;status,
+                  R&nbsp;r)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asserts that the outcome of the build is a specific outcome.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatusSuccess(hudson.model.Run)">assertBuildStatusSuccess</A></B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Run.html?is-external=true" title="class or interface in hudson.model">Run</A>&nbsp;r)</CODE>
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;R extends <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Run.html?is-external=true" title="class or interface in hudson.model">Run</A>&gt; 
+<BR>
+R</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatusSuccess(R)">assertBuildStatusSuccess</A></B>(R&nbsp;r)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1010,12 +1028,12 @@ protected com.gargoylesoftware.htmlunit.Page <B>search</B>(java.lang.String&nbsp
 </DL>
 <HR>
 
-<A NAME="assertBuildStatus(hudson.model.Result, hudson.model.Run)"><!-- --></A><H3>
+<A NAME="assertBuildStatus(hudson.model.Result,hudson.model.Run)"><!-- --></A><A NAME="assertBuildStatus(hudson.model.Result, R)"><!-- --></A><H3>
 assertBuildStatus</H3>
 <PRE>
-public void <B>assertBuildStatus</B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Result.html?is-external=true" title="class or interface in hudson.model">Result</A>&nbsp;status,
-                              <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Run.html?is-external=true" title="class or interface in hudson.model">Run</A>&nbsp;r)
-                       throws java.lang.Exception</PRE>
+public &lt;R extends <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Run.html?is-external=true" title="class or interface in hudson.model">Run</A>&gt; R <B>assertBuildStatus</B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Result.html?is-external=true" title="class or interface in hudson.model">Result</A>&nbsp;status,
+                                           R&nbsp;r)
+                                throws java.lang.Exception</PRE>
 <DL>
 <DD>Asserts that the outcome of the build is a specific outcome.
 <P>
@@ -1027,11 +1045,11 @@ public void <B>assertBuildStatus</B>(<A HREF="https://hudson.dev.java.net/pom/hu
 </DL>
 <HR>
 
-<A NAME="assertBuildStatusSuccess(hudson.model.Run)"><!-- --></A><H3>
+<A NAME="assertBuildStatusSuccess(hudson.model.Run)"><!-- --></A><A NAME="assertBuildStatusSuccess(R)"><!-- --></A><H3>
 assertBuildStatusSuccess</H3>
 <PRE>
-public void <B>assertBuildStatusSuccess</B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Run.html?is-external=true" title="class or interface in hudson.model">Run</A>&nbsp;r)
-                              throws java.lang.Exception</PRE>
+public &lt;R extends <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Run.html?is-external=true" title="class or interface in hudson.model">Run</A>&gt; R <B>assertBuildStatusSuccess</B>(R&nbsp;r)
+                                       throws java.lang.Exception</PRE>
 <DL>
 <DD><DL>
 
