@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-PageDecorator (Hudson core 1.277 API)
+PageDecorator (Hudson core 1.278 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-21">
+<META NAME="date" CONTENT="2009-01-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PageDecorator (Hudson core 1.277 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PageDecorator (Hudson core 1.277 API)";
+        parent.document.title="PageDecorator (Hudson core 1.278 API)";
     }
 }
 </SCRIPT>
@@ -207,6 +207,14 @@ Participates in the rendering of HTML pages for all pages of Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/PageDecorator.html#PageDecorator()">PageDecorator</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Infers the type of the corresponding <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A> from the outer class.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/PageDecorator.html#PageDecorator(java.lang.Class)">PageDecorator</A></B>(java.lang.Class&lt;? extends <A HREF="../../hudson/model/PageDecorator.html" title="class in hudson.model">PageDecorator</A>&gt;&nbsp;yourClass)</CODE>
 
 <BR>
@@ -299,6 +307,22 @@ protected <B>PageDecorator</B>(java.lang.Class&lt;? extends <A HREF="../../hudso
 <DL>
 <DT><B>Parameters:</B><DD><CODE>yourClass</CODE> - pass-in "this.getClass()" (except that the constructor parameters cannot use 'this',
       so you'd have to hard-code the class name.</DL>
+</DL>
+<HR>
+
+<A NAME="PageDecorator()"><!-- --></A><H3>
+PageDecorator</H3>
+<PRE>
+protected <B>PageDecorator</B>()</PRE>
+<DL>
+<DD>Infers the type of the corresponding <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A> from the outer class.
+ This version works when you follow the common convention, where a descriptor
+ is written as the static nested class of the describable class.
+<P>
+<DL>
+<DT><B>Since:</B></DT>
+  <DD>1.278</DD>
+</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->

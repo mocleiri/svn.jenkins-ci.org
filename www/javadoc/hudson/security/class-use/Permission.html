@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.security.Permission (Hudson core 1.277 API)
+Uses of Class hudson.security.Permission (Hudson core 1.278 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-21">
+<META NAME="date" CONTENT="2009-01-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.security.Permission (Hudson core 1.277 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.security.Permission (Hudson core 1.277 API)";
+        parent.document.title="Uses of Class hudson.security.Permission (Hudson core 1.278 API)";
     }
 }
 </SCRIPT>
@@ -287,7 +287,7 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#CONFIGURE">CONFIGURE</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission to create new jobs.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission to configure slaves.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -625,7 +625,15 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TD><CODE><B>Permission.</B><B><A HREF="../../../hudson/security/Permission.html#FULL_CONTROL">FULL_CONTROL</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Root of all permissions</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../hudson/model/Hudson.html#ADMINISTER"><CODE>Hudson.ADMINISTER</CODE></A>.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
+<TD><CODE><B>Permission.</B><B><A HREF="../../../hudson/security/Permission.html#HUDSON_ADMINISTER">HUDSON_ADMINISTER</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Access <A HREF="../../../hudson/model/Hudson.html#ADMINISTER"><CODE>Hudson.ADMINISTER</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -791,6 +799,24 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>GlobalMatrixAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/GlobalMatrixAuthorizationStrategy.html#hasExplicitPermission(java.lang.String, hudson.security.Permission)">hasExplicitPermission</A></B>(java.lang.String&nbsp;sid,
+                      <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the permission is explicitly given, instead of implied through <A HREF="../../../hudson/security/Permission.html#impliedBy"><CODE>impliedBy</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>AuthorizationMatrixProperty.</B><B><A HREF="../../../hudson/security/AuthorizationMatrixProperty.html#hasExplicitPermission(java.lang.String, hudson.security.Permission)">hasExplicitPermission</A></B>(java.lang.String&nbsp;sid,
+                      <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the permission is explicitly given, instead of implied through <A HREF="../../../hudson/security/Permission.html#impliedBy"><CODE>impliedBy</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

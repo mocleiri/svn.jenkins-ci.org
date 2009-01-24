@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AuthorizationMatrixProperty (Hudson core 1.277 API)
+AuthorizationMatrixProperty (Hudson core 1.278 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-21">
+<META NAME="date" CONTENT="2009-01-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AuthorizationMatrixProperty (Hudson core 1.277 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AuthorizationMatrixProperty (Hudson core 1.277 API)";
+        parent.document.title="AuthorizationMatrixProperty (Hudson core 1.278 API)";
     }
 }
 </SCRIPT>
@@ -253,6 +253,15 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/AuthorizationMatrixProperty.html#hasExplicitPermission(java.lang.String, hudson.security.Permission)">hasExplicitPermission</A></B>(java.lang.String&nbsp;sid,
+                      <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the permission is explicitly given, instead of implied through <A HREF="../../hudson/security/Permission.html#impliedBy"><CODE>Permission.impliedBy</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/AuthorizationMatrixProperty.html#hasPermission(java.lang.String, hudson.security.Permission)">hasPermission</A></B>(java.lang.String&nbsp;sid,
               <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
 
@@ -446,6 +455,20 @@ public boolean <B>hasPermission</B>(java.lang.String&nbsp;sid,
                              <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</PRE>
 <DL>
 <DD>Checks if the given SID has the given permission.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasExplicitPermission(java.lang.String, hudson.security.Permission)"><!-- --></A><H3>
+hasExplicitPermission</H3>
+<PRE>
+public boolean <B>hasExplicitPermission</B>(java.lang.String&nbsp;sid,
+                                     <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</PRE>
+<DL>
+<DD>Checks if the permission is explicitly given, instead of implied through <A HREF="../../hudson/security/Permission.html#impliedBy"><CODE>Permission.impliedBy</CODE></A>.
 <P>
 <DD><DL>
 </DL>

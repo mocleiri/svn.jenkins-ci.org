@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.277 API)
+Deprecated List (Hudson core 1.278 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-21">
+<META NAME="date" CONTENT="2009-01-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.277 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.277 API)";
+        parent.document.title="Deprecated List (Hudson core 1.278 API)";
     }
 }
 </SCRIPT>
@@ -171,6 +171,21 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <code>awtProblemCause!=null</code> instead. As of 1.267.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/security/Permission.html#FULL_CONTROL">hudson.security.Permission.FULL_CONTROL</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/Hudson.html#ADMINISTER"><CODE>Hudson.ADMINISTER</CODE></A>.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/security/Permission.html#HUDSON_ADMINISTER">hudson.security.Permission.HUDSON_ADMINISTER</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Access <A HREF="hudson/model/Hudson.html#ADMINISTER"><CODE>Hudson.ADMINISTER</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/security/Permission.html#HUDSON_PERMISSIONS">hudson.security.Permission.HUDSON_PERMISSIONS</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Access <A HREF="hudson/model/Hudson.html#PERMISSIONS"><CODE>Hudson.PERMISSIONS</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/security/HudsonFilter.html#REMEMBER_ME_SERVICES_PROXY">hudson.security.HudsonFilter.REMEMBER_ME_SERVICES_PROXY</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>in 1.271.
@@ -274,6 +289,11 @@ function windowTitle()
       network set up like Apache reverse proxy.
       This method is only intended for the remote API clients who cannot resolve relative references
       (even this won't work for the same reason, which should be fixed.)</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/security/AuthorizationStrategy.html#getACL(hudson.model.AbstractProject)">hudson.security.AuthorizationStrategy.getACL(AbstractProject<?, ?>)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Override <A HREF="hudson/security/AuthorizationStrategy.html#getACL(hudson.model.Job)"><CODE>AuthorizationStrategy.getACL(Job)</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Job.html#getBuild(java.lang.String)">hudson.model.Job.getBuild(String)</A>

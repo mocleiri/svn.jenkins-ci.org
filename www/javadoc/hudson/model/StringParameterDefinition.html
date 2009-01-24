@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-StringParameterDefinition (Hudson core 1.277 API)
+StringParameterDefinition (Hudson core 1.278 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-21">
+<META NAME="date" CONTENT="2009-01-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ StringParameterDefinition (Hudson core 1.277 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StringParameterDefinition (Hudson core 1.277 API)";
+        parent.document.title="StringParameterDefinition (Hudson core 1.278 API)";
     }
 }
 </SCRIPT>
@@ -195,11 +195,19 @@ Parameter whose value is a string value.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/StringParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest)">createValue</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a parameter value from a GET (with query string) or POST.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/StringParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">createValue</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
             net.sf.json.JSONObject&nbsp;jo)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a parameter value from a form submission</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -371,11 +379,34 @@ createValue</H3>
 public <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A> <B>createValue</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                                   net.sf.json.JSONObject&nbsp;jo)</PRE>
 <DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">ParameterDefinition</A></CODE></B></DD>
+<DD>Create a parameter value from a form submission
+<P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">createValue</A></CODE> in class <CODE><A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A></CODE></DL>
 </DD>
 <DD><DL>
+
+<DT><B>Returns:</B><DD></DL>
+</DD>
 </DL>
+<HR>
+
+<A NAME="createValue(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
+createValue</H3>
+<PRE>
+public <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A> <B>createValue</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest)">ParameterDefinition</A></CODE></B></DD>
+<DD>Create a parameter value from a GET (with query string) or POST.
+ If no value is available in the request, it returns a default value if possible, or null.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest)">createValue</A></CODE> in class <CODE><A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

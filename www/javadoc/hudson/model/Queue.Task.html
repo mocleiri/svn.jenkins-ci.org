@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Queue.Task (Hudson core 1.277 API)
+Queue.Task (Hudson core 1.278 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-21">
+<META NAME="date" CONTENT="2009-01-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.Task (Hudson core 1.277 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.Task (Hudson core 1.277 API)";
+        parent.document.title="Queue.Task (Hudson core 1.278 API)";
     }
 }
 </SCRIPT>
@@ -153,6 +153,15 @@ Task whose execution is controlled by the queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#doCancelQueue(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCancelQueue</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called from queue.jelly.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#getAssignedLabel()">getAssignedLabel</A></B>()</CODE>
 
@@ -192,6 +201,14 @@ Task whose execution is controlled by the queue.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unique name of this task.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#getUrl()">getUrl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The relative url for this task</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -429,6 +446,44 @@ boolean <B>hasAbortPermission</B>()</PRE>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUrl()"><!-- --></A><H3>
+getUrl</H3>
+<PRE>
+java.lang.String <B>getUrl</B>()</PRE>
+<DL>
+<DD>The relative url for this task
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doCancelQueue(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doCancelQueue</H3>
+<PRE>
+void <B>doCancelQueue</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                   org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                   throws java.io.IOException,
+                          javax.servlet.ServletException</PRE>
+<DL>
+<DD>Called from queue.jelly.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

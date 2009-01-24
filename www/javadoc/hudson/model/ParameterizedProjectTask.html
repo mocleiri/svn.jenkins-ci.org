@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ParameterizedProjectTask (Hudson core 1.277 API)
+ParameterizedProjectTask (Hudson core 1.278 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-21">
+<META NAME="date" CONTENT="2009-01-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParameterizedProjectTask (Hudson core 1.277 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParameterizedProjectTask (Hudson core 1.277 API)";
+        parent.document.title="ParameterizedProjectTask (Hudson core 1.278 API)";
     }
 }
 </SCRIPT>
@@ -168,11 +168,52 @@ A task representing a project that should be built with a certain set of
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParameterizedProjectTask.html#doCancelQueue(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCancelQueue</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cancels a scheduled build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ParameterizedProjectTask.html#equals(java.lang.Object)">equals</A></B>(java.lang.Object&nbsp;obj)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParameterizedProjectTask.html#getParameters()">getParameters</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParameterizedProjectTask.html#getProject()">getProject</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParameterizedProjectTask.html#getQueueKey()">getQueueKey</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParameterizedProjectTask.html#getUrl()">getUrl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The relative url for this task</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -232,6 +273,28 @@ public <B>ParameterizedProjectTask</B>(<A HREF="../../hudson/model/AbstractProje
 </TR>
 </TABLE>
 
+<A NAME="getProject()"><!-- --></A><H3>
+getProject</H3>
+<PRE>
+public <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt; <B>getProject</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParameters()"><!-- --></A><H3>
+getParameters</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>&gt; <B>getParameters</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="createExecutable()"><!-- --></A><H3>
 createExecutable</H3>
 <PRE>
@@ -248,6 +311,25 @@ public <A HREF="../../hudson/model/Queue.Executable.html" title="interface in hu
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doCancelQueue(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doCancelQueue</H3>
+<PRE>
+public void <B>doCancelQueue</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                          org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                   throws java.io.IOException,
+                          javax.servlet.ServletException</PRE>
+<DL>
+<DD>Cancels a scheduled build.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -274,6 +356,31 @@ public boolean <B>equals</B>(java.lang.Object&nbsp;obj)</PRE>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/QueueTaskFilter.html#equals(java.lang.Object)">equals</A></CODE> in class <CODE><A HREF="../../hudson/util/QueueTaskFilter.html" title="class in hudson.util">QueueTaskFilter</A></CODE></DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUrl()"><!-- --></A><H3>
+getUrl</H3>
+<PRE>
+public java.lang.String <B>getUrl</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Queue.Task.html#getUrl()">Queue.Task</A></CODE></B></DD>
+<DD>The relative url for this task
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getQueueKey()"><!-- --></A><H3>
+getQueueKey</H3>
+<PRE>
+public java.lang.String <B>getQueueKey</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

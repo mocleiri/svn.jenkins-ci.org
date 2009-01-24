@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SCMDescriptor (Hudson core 1.277 API)
+SCMDescriptor (Hudson core 1.278 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-21">
+<META NAME="date" CONTENT="2009-01-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCMDescriptor (Hudson core 1.277 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCMDescriptor (Hudson core 1.277 API)";
+        parent.document.title="SCMDescriptor (Hudson core 1.278 API)";
     }
 }
 </SCRIPT>
@@ -189,6 +189,14 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SCMDescriptor.html#SCMDescriptor(java.lang.Class)">SCMDescriptor</A></B>(java.lang.Class&lt;? extends <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&gt;&nbsp;repositoryBrowser)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Infers the type of the corresponding <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A> from the outer class.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/SCMDescriptor.html#SCMDescriptor(java.lang.Class, java.lang.Class)">SCMDescriptor</A></B>(java.lang.Class&lt;<A HREF="../../hudson/scm/SCMDescriptor.html" title="type parameter in SCMDescriptor">T</A>&gt;&nbsp;clazz,
               java.lang.Class&lt;? extends <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&gt;&nbsp;repositoryBrowser)</CODE>
 
@@ -298,6 +306,22 @@ SCMDescriptor</H3>
 protected <B>SCMDescriptor</B>(java.lang.Class&lt;<A HREF="../../hudson/scm/SCMDescriptor.html" title="type parameter in SCMDescriptor">T</A>&gt;&nbsp;clazz,
                         java.lang.Class&lt;? extends <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&gt;&nbsp;repositoryBrowser)</PRE>
 <DL>
+</DL>
+<HR>
+
+<A NAME="SCMDescriptor(java.lang.Class)"><!-- --></A><H3>
+SCMDescriptor</H3>
+<PRE>
+protected <B>SCMDescriptor</B>(java.lang.Class&lt;? extends <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&gt;&nbsp;repositoryBrowser)</PRE>
+<DL>
+<DD>Infers the type of the corresponding <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A> from the outer class.
+ This version works when you follow the common convention, where a descriptor
+ is written as the static nested class of the describable class.
+<P>
+<DL>
+<DT><B>Since:</B></DT>
+  <DD>1.278</DD>
+</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->

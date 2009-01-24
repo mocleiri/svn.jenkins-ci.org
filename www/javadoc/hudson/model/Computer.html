@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Computer (Hudson core 1.277 API)
+Computer (Hudson core 1.278 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-21">
+<META NAME="date" CONTENT="2009-01-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson core 1.277 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson core 1.277 API)";
+        parent.document.title="Computer (Hudson core 1.278 API)";
     }
 }
 </SCRIPT>
@@ -154,7 +154,7 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#CONFIGURE">CONFIGURE</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission to create new jobs.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission to configure slaves.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -341,7 +341,26 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
          org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For system diagnostics.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doScript</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+         org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+         java.lang.String&nbsp;view)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#doScriptText(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doScriptText</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+             org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Run arbitrary Groovy script and return result as plain text.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -791,7 +810,7 @@ CONFIGURE</H3>
 <PRE>
 public static final <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A> <B>CONFIGURE</B></PRE>
 <DL>
-<DD>Permission to create new jobs.
+<DD>Permission to configure slaves.
 <P>
 <DL>
 </DL>
@@ -1819,6 +1838,52 @@ doScript</H3>
 <PRE>
 public void <B>doScript</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                      org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+              throws java.io.IOException,
+                     javax.servlet.ServletException</PRE>
+<DL>
+<DD>For system diagnostics.
+ Run arbitrary Groovy script.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doScriptText(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doScriptText</H3>
+<PRE>
+public void <B>doScriptText</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                         org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                  throws java.io.IOException,
+                         javax.servlet.ServletException</PRE>
+<DL>
+<DD>Run arbitrary Groovy script and return result as plain text.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
+doScript</H3>
+<PRE>
+public void <B>doScript</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                     org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                     java.lang.String&nbsp;view)
               throws java.io.IOException,
                      javax.servlet.ServletException</PRE>
 <DL>
