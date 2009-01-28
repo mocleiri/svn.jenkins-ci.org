@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MavenBuildProxy.Filter (Hudson core 1.278 API)
+MavenBuildProxy.Filter (Hudson core 1.279 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-24">
+<META NAME="date" CONTENT="2009-01-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenBuildProxy.Filter (Hudson core 1.278 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenBuildProxy.Filter (Hudson core 1.278 API)";
+        parent.document.title="MavenBuildProxy.Filter (Hudson core 1.279 API)";
     }
 }
 </SCRIPT>
@@ -223,6 +223,14 @@ V</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenBuildProxy.Filter.html#getMilliSecsSinceBuildStart()">getMilliSecsSinceBuildStart</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# of milliseconds elapsed since <A HREF="../../hudson/maven/MavenBuildProxy.html#getTimestamp()"><CODE>MavenBuildProxy.getTimestamp()</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -496,6 +504,27 @@ public java.util.Calendar <B>getTimestamp</B>()</PRE>
 </DD>
 <DD><DL>
 <DT><B>See Also:</B><DD><A HREF="../../hudson/model/Run.html#getTimestamp()"><CODE>Run.getTimestamp()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getMilliSecsSinceBuildStart()"><!-- --></A><H3>
+getMilliSecsSinceBuildStart</H3>
+<PRE>
+public long <B>getMilliSecsSinceBuildStart</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/maven/MavenBuildProxy.html#getMilliSecsSinceBuildStart()">MavenBuildProxy</A></CODE></B></DD>
+<DD># of milliseconds elapsed since <A HREF="../../hudson/maven/MavenBuildProxy.html#getTimestamp()"><CODE>MavenBuildProxy.getTimestamp()</CODE></A>.
+
+ Where the clock skew is involved between the master and the Maven JVM, comparing
+ current time on Maven JVM with <A HREF="../../hudson/maven/MavenBuildProxy.html#getTimestamp()"><CODE>MavenBuildProxy.getTimestamp()</CODE></A> could be problematic,
+ but this value is more robust.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/maven/MavenBuildProxy.html#getMilliSecsSinceBuildStart()">getMilliSecsSinceBuildStart</A></CODE> in interface <CODE><A HREF="../../hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven">MavenBuildProxy</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

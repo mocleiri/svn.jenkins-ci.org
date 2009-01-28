@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ParameterizedProjectTask (Hudson core 1.278 API)
+ParameterizedProjectTask (Hudson core 1.279 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-24">
+<META NAME="date" CONTENT="2009-01-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParameterizedProjectTask (Hudson core 1.278 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParameterizedProjectTask (Hudson core 1.278 API)";
+        parent.document.title="ParameterizedProjectTask (Hudson core 1.279 API)";
     }
 }
 </SCRIPT>
@@ -213,7 +213,7 @@ A task representing a project that should be built with a certain set of
 <TD><CODE><B><A HREF="../../hudson/model/ParameterizedProjectTask.html#getUrl()">getUrl</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The relative url for this task</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the URL of this task relative to the context root of the application.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -368,10 +368,15 @@ getUrl</H3>
 public java.lang.String <B>getUrl</B>()</PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Queue.Task.html#getUrl()">Queue.Task</A></CODE></B></DD>
-<DD>The relative url for this task
+<DD>Returns the URL of this task relative to the context root of the application.
+
+ <p>
+ When the user clicks an item in the queue, this is the page where the user is taken to.
+ Hudson expects the current instance to be bound to the URL returned by this method.
 <P>
 <DD><DL>
-</DL>
+
+<DT><B>Returns:</B><DD>URL that ends with '/'.</DL>
 </DD>
 </DL>
 <HR>

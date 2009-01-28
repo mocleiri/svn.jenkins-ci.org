@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-BuildStep (Hudson core 1.278 API)
+BuildStep (Hudson core 1.279 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-24">
+<META NAME="date" CONTENT="2009-01-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildStep (Hudson core 1.278 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildStep (Hudson core 1.278 API)";
+        parent.document.title="BuildStep (Hudson core 1.279 API)";
     }
 }
 </SCRIPT>
@@ -320,6 +320,12 @@ getProjectAction</H3>
  <p>
  <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> calls this method for every <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> that
  it owns when the rendering is requested.
+
+ <p>
+ This action can have optional <tt>jobMain.jelly</tt> view, which will be
+ aggregated into the main panel of the job top page. The jelly file
+ should have an &lt;h2> tag that shows the section title, followed by some
+ block elements to render the details of the section.
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>project</CODE> - <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> that owns this build step,

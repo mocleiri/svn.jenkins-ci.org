@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Job (Hudson core 1.278 API)
+Job (Hudson core 1.279 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-24">
+<META NAME="date" CONTENT="2009-01-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson core 1.278 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson core 1.278 API)";
+        parent.document.title="Job (Hudson core 1.279 API)";
     }
 }
 </SCRIPT>
@@ -627,6 +627,31 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T extends <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&gt; 
+<BR>
+T</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#removeProperty(java.lang.Class)">removeProperty</A></B>(java.lang.Class&lt;T&gt;&nbsp;clazz)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes the property of the given type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#removeProperty(hudson.model.JobProperty)">removeProperty</A></B>(<A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&lt;? super <A HREF="../../hudson/model/Job.html" title="type parameter in Job">JobT</A>&gt;&nbsp;jobProp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected abstract &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Job.html#removeRun(RunT)">removeRun</A></B>(<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&nbsp;run)</CODE>
 
@@ -1157,6 +1182,49 @@ public void <B>addProperty</B>(<A HREF="../../hudson/model/JobProperty.html" tit
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE><DT><B>Since:</B></DT>
   <DD>1.188</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeProperty(hudson.model.JobProperty)"><!-- --></A><H3>
+removeProperty</H3>
+<PRE>
+public void <B>removeProperty</B>(<A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&lt;? super <A HREF="../../hudson/model/Job.html" title="type parameter in Job">JobT</A>&gt;&nbsp;jobProp)
+                    throws java.io.IOException</PRE>
+<DL>
+<DD>Removes <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE><DT><B>Since:</B></DT>
+  <DD>1.279</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeProperty(java.lang.Class)"><!-- --></A><H3>
+removeProperty</H3>
+<PRE>
+public &lt;T extends <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&gt; T <B>removeProperty</B>(java.lang.Class&lt;T&gt;&nbsp;clazz)
+                                     throws java.io.IOException</PRE>
+<DL>
+<DD>Removes the property of the given type.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The property that was just removed.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE><DT><B>Since:</B></DT>
+  <DD>1.279</DD>
 </DL>
 </DD>
 </DL>

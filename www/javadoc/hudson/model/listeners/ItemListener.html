@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ItemListener (Hudson core 1.278 API)
+ItemListener (Hudson core 1.279 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-24">
+<META NAME="date" CONTENT="2009-01-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ItemListener (Hudson core 1.278 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ItemListener (Hudson core 1.278 API)";
+        parent.document.title="ItemListener (Hudson core 1.279 API)";
     }
 }
 </SCRIPT>
@@ -181,6 +181,14 @@ Receives notifications about CRUD operations of <A HREF="../../../hudson/model/I
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called after a job is renamed.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/listeners/ItemListener.html#register()">register</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registers this instance to Hudson and start getting notifications.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -287,6 +295,22 @@ public void <B>onRenamed</B>(<A HREF="../../../hudson/model/Item.html" title="in
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>item</CODE> - The job being renamed.<DD><CODE>oldName</CODE> - The old name of the job.<DD><CODE>newName</CODE> - The new name of the job. Same as <A HREF="../../../hudson/model/Item.html#getName()"><CODE>Item.getName()</CODE></A>.<DT><B>Since:</B></DT>
   <DD>1.146</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="register()"><!-- --></A><H3>
+register</H3>
+<PRE>
+public void <B>register</B>()</PRE>
+<DL>
+<DD>Registers this instance to Hudson and start getting notifications.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
 </DL>
 </DD>
 </DL>

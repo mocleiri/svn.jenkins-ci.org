@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MarkupText.SubText (Hudson core 1.278 API)
+MarkupText.SubText (Hudson core 1.279 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-24">
+<META NAME="date" CONTENT="2009-01-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MarkupText.SubText (Hudson core 1.278 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MarkupText.SubText (Hudson core 1.278 API)";
+        parent.document.title="MarkupText.SubText (Hudson core 1.279 API)";
     }
 }
 </SCRIPT>
@@ -193,14 +193,6 @@ Represents a substring of a <A HREF="../hudson/MarkupText.html" title="class in 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;int</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/MarkupText.SubText.html#length()">length</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns <code>getText().length()</code></TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/MarkupText.SubText.html#replace(java.lang.String)">replace</A></B>(java.lang.String&nbsp;s)</CODE>
 
@@ -249,7 +241,7 @@ Represents a substring of a <A HREF="../hudson/MarkupText.html" title="class in 
 <TH ALIGN="left"><B>Methods inherited from class hudson.<A HREF="../hudson/AbstractMarkupText.html" title="class in hudson">AbstractMarkupText</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../hudson/AbstractMarkupText.html#findTokens(java.util.regex.Pattern)">findTokens</A></CODE></TD>
+<TD><CODE><A HREF="../hudson/AbstractMarkupText.html#findTokens(java.util.regex.Pattern)">findTokens</A>, <A HREF="../hudson/AbstractMarkupText.html#length()">length</A>, <A HREF="../hudson/AbstractMarkupText.html#wrapBy(java.lang.String, java.lang.String)">wrapBy</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -414,19 +406,6 @@ end</H3>
 public int <B>end</B>()</PRE>
 <DL>
 <DD>Gets the end index of this subtext within <A HREF="../hudson/MarkupText.html#getText()"><CODE>MarkupText.getText()</CODE></A>.
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="length()"><!-- --></A><H3>
-length</H3>
-<PRE>
-public int <B>length</B>()</PRE>
-<DL>
-<DD>Returns <code>getText().length()</code>
 <P>
 <DD><DL>
 </DL>

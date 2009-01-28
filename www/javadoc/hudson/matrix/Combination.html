@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Combination (Hudson core 1.278 API)
+Combination (Hudson core 1.279 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-24">
+<META NAME="date" CONTENT="2009-01-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Combination (Hudson core 1.278 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Combination (Hudson core 1.278 API)";
+        parent.document.title="Combination (Hudson core 1.279 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/matrix/AxisList.ConverterImpl.html" title="class in hudson.matrix"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/matrix/Layouter.html" title="class in hudson.matrix"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/matrix/Combination.BooleanCategory.html" title="class in hudson.matrix"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/matrix/Combination.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Combination.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_java.util.AbstractMap">NESTED</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -128,6 +128,14 @@ A particular combination of <A HREF="../../hudson/matrix/Axis.html" title="class
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/matrix/Combination.BooleanCategory.html" title="class in hudson.matrix">Combination.BooleanCategory</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duck-typing for boolean expressions.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="nested_classes_inherited_from_class_java.util.AbstractMap"><!-- --></A>
@@ -205,6 +213,15 @@ A particular combination of <A HREF="../../hudson/matrix/Axis.html" title="class
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/matrix/Combination.html#evalGroovyExpression(hudson.matrix.AxisList, java.lang.String)">evalGroovyExpression</A></B>(<A HREF="../../hudson/matrix/AxisList.html" title="class in hudson.matrix">AxisList</A>&nbsp;axes,
+                     java.lang.String&nbsp;expression)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evaluates the given Groovy expression with values bound from this combination.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../hudson/matrix/Combination.html" title="class in hudson.matrix">Combination</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/matrix/Combination.html#fromString(java.lang.String)">fromString</A></B>(java.lang.String&nbsp;id)</CODE>
 
@@ -243,6 +260,15 @@ A particular combination of <A HREF="../../hudson/matrix/Axis.html" title="class
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates compact string representataion suitable for display purpose.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/matrix/Combination.html#toIndex(hudson.matrix.AxisList)">toIndex</A></B>(<A HREF="../../hudson/matrix/AxisList.html" title="class in hudson.matrix">AxisList</A>&nbsp;axis)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the continuous unique index number of this <A HREF="../../hudson/matrix/Combination.html" title="class in hudson.matrix"><CODE>Combination</CODE></A>
+ in the given <A HREF="../../hudson/matrix/AxisList.html" title="class in hudson.matrix"><CODE>AxisList</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -354,6 +380,44 @@ public <B>Combination</B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="toIndex(hudson.matrix.AxisList)"><!-- --></A><H3>
+toIndex</H3>
+<PRE>
+public int <B>toIndex</B>(<A HREF="../../hudson/matrix/AxisList.html" title="class in hudson.matrix">AxisList</A>&nbsp;axis)</PRE>
+<DL>
+<DD>Obtains the continuous unique index number of this <A HREF="../../hudson/matrix/Combination.html" title="class in hudson.matrix"><CODE>Combination</CODE></A>
+ in the given <A HREF="../../hudson/matrix/AxisList.html" title="class in hudson.matrix"><CODE>AxisList</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="evalGroovyExpression(hudson.matrix.AxisList, java.lang.String)"><!-- --></A><H3>
+evalGroovyExpression</H3>
+<PRE>
+public boolean <B>evalGroovyExpression</B>(<A HREF="../../hudson/matrix/AxisList.html" title="class in hudson.matrix">AxisList</A>&nbsp;axes,
+                                    java.lang.String&nbsp;expression)</PRE>
+<DL>
+<DD>Evaluates the given Groovy expression with values bound from this combination.
+
+ <p>
+ For example, if this combination is a=X,b=Y, then expressions like <tt>a=="X"</tt> would evaluate to
+ true.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="compareTo(hudson.matrix.Combination)"><!-- --></A><H3>
 compareTo</H3>
@@ -556,7 +620,7 @@ public java.lang.String <B>remove</B>(java.lang.Object&nbsp;key)</PRE>
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/matrix/AxisList.ConverterImpl.html" title="class in hudson.matrix"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/matrix/Layouter.html" title="class in hudson.matrix"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/matrix/Combination.BooleanCategory.html" title="class in hudson.matrix"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/matrix/Combination.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Combination.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -576,7 +640,7 @@ public java.lang.String <B>remove</B>(java.lang.Object&nbsp;key)</PRE>
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_java.util.AbstractMap">NESTED</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
