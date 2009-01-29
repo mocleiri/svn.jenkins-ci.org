@@ -1,11 +1,14 @@
 package hudson.model;
 
-import com.thoughtworks.xstream.XStream;
+import static hudson.Util.fixEmpty;
+import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
+import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
+import static org.acegisecurity.ui.rememberme.TokenBasedRememberMeServices.ACEGI_SECURITY_HASHED_REMEMBER_ME_COOKIE_KEY;
 import hudson.BulkChange;
+import hudson.EnvVars;
 import hudson.FilePath;
 import hudson.Functions;
 import hudson.Launcher;
-import hudson.Launcher.LocalLauncher;
 import hudson.Plugin;
 import hudson.PluginManager;
 import hudson.PluginWrapper;
@@ -13,17 +16,17 @@ import hudson.ProxyConfiguration;
 import hudson.StructuredForm;
 import hudson.TcpSlaveAgentListener;
 import hudson.Util;
-import static hudson.Util.fixEmpty;
 import hudson.WebAppMain;
 import hudson.XmlFile;
-import hudson.logging.LogRecorderManager;
-import hudson.lifecycle.WindowsInstallerLink;
+import hudson.Launcher.LocalLauncher;
 import hudson.lifecycle.Lifecycle;
+import hudson.lifecycle.WindowsInstallerLink;
+import hudson.logging.LogRecorderManager;
 import hudson.model.Descriptor.FormException;
 import hudson.model.listeners.ItemListener;
 import hudson.model.listeners.JobListener;
-import hudson.model.listeners.JobListener.JobListenerAdapter;
 import hudson.model.listeners.SCMListener;
+import hudson.model.listeners.JobListener.JobListenerAdapter;
 import hudson.remoting.LocalChannel;
 import hudson.remoting.VirtualChannel;
 import hudson.scm.CVSSCM;
@@ -46,13 +49,17 @@ import hudson.security.Permission;
 import hudson.security.PermissionGroup;
 import hudson.security.SecurityMode;
 import hudson.security.SecurityRealm;
-import hudson.slaves.ComputerListener;
-import hudson.slaves.RetentionStrategy;
-import hudson.slaves.NodeList;
 import hudson.slaves.Cloud;
+import hudson.slaves.ComputerListener;
 import hudson.slaves.DumbSlave;
+import hudson.slaves.EnvironmentVariablesNodeProperty;
 import hudson.slaves.NodeDescriptor;
+import hudson.slaves.NodeList;
+import hudson.slaves.NodeProperties;
+import hudson.slaves.NodeProperty;
+import hudson.slaves.NodePropertyDescriptor;
 import hudson.slaves.NodeProvisioner;
+import hudson.slaves.RetentionStrategy;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildWrappers;
@@ -69,56 +76,27 @@ import hudson.util.ClockDifference;
 import hudson.util.CopyOnWriteList;
 import hudson.util.CopyOnWriteMap;
 import hudson.util.DaemonThreadFactory;
+import hudson.util.DescribableList;
 import hudson.util.FormFieldValidator;
+import hudson.util.Futures;
 import hudson.util.HudsonIsLoading;
+import hudson.util.HudsonIsRestarting;
 import hudson.util.MultipartFormDataParser;
 import hudson.util.RemotingDiagnostics;
 import hudson.util.TextFile;
 import hudson.util.XStream2;
-import hudson.util.HudsonIsRestarting;
-import hudson.util.DescribableList;
-import hudson.util.Futures;
 import hudson.widgets.Widget;
-import net.sf.json.JSONObject;
-import org.acegisecurity.*;
-import org.acegisecurity.context.SecurityContextHolder;
-import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
-import org.acegisecurity.ui.AbstractProcessingFilter;
-import static org.acegisecurity.ui.rememberme.TokenBasedRememberMeServices.ACEGI_SECURITY_HASHED_REMEMBER_ME_COOKIE_KEY;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.jelly.Script;
-import org.apache.commons.jelly.JellyException;
-import org.kohsuke.stapler.MetaClass;
-import org.kohsuke.stapler.QueryParameter;
-import org.kohsuke.stapler.Stapler;
-import org.kohsuke.stapler.StaplerProxy;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.StaplerFallback;
-import org.kohsuke.stapler.WebApp;
-import org.kohsuke.stapler.jelly.JellyClassLoaderTearOff;
-import org.kohsuke.stapler.jelly.JellyRequestDispatcher;
-import org.kohsuke.stapler.framework.adjunct.AdjunctManager;
-import org.kohsuke.stapler.export.Exported;
-import org.kohsuke.stapler.export.ExportedBean;
-import org.xml.sax.InputSource;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
-import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.InputStream;
+import java.io.ObjectStreamException;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.security.SecureRandom;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -132,29 +110,65 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.Timer;
 import java.util.TreeSet;
-import java.util.Properties;
+import java.util.Map.Entry;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import java.nio.charset.Charset;
+
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONObject;
+
+import org.acegisecurity.AccessDeniedException;
+import org.acegisecurity.AcegiSecurityException;
+import org.acegisecurity.Authentication;
+import org.acegisecurity.GrantedAuthority;
+import org.acegisecurity.GrantedAuthorityImpl;
+import org.acegisecurity.context.SecurityContextHolder;
+import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
+import org.acegisecurity.ui.AbstractProcessingFilter;
+import org.apache.commons.jelly.JellyException;
+import org.apache.commons.jelly.Script;
+import org.apache.commons.logging.LogFactory;
+import org.kohsuke.stapler.MetaClass;
+import org.kohsuke.stapler.QueryParameter;
+import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.StaplerFallback;
+import org.kohsuke.stapler.StaplerProxy;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.WebApp;
+import org.kohsuke.stapler.export.Exported;
+import org.kohsuke.stapler.export.ExportedBean;
+import org.kohsuke.stapler.framework.adjunct.AdjunctManager;
+import org.kohsuke.stapler.jelly.JellyClassLoaderTearOff;
+import org.kohsuke.stapler.jelly.JellyRequestDispatcher;
+import org.xml.sax.InputSource;
+
+import com.thoughtworks.xstream.XStream;
 
 /**
  * Root object of the system.
@@ -221,6 +235,8 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
      * Message displayed in the top page.
      */
     private String systemMessage;
+    
+    private Map<String,String> envVars;
 
     /**
      * Root directory of the system.
@@ -568,7 +584,15 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
     public String getSecretKey() {
         return secretKey;
     }
-
+    
+    public Object readResolve() throws ObjectStreamException  {
+    	if (nodeProperties == null) {
+    		nodeProperties = new DescribableList<NodeProperty<?>, NodePropertyDescriptor>(this);
+    	}
+    	
+    	return this;
+    }
+    
     /**
      * Gets the SCM descriptor by name. Primarily used for making them web-visible.
      */
@@ -1154,6 +1178,21 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
         updateComputerList();
         trimLabels();
         save();
+    }
+
+	private DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties;
+
+    public DescribableList<NodeProperty<?>, NodePropertyDescriptor> getNodeProperties() {
+    	return nodeProperties;
+    }
+    
+    public <N extends NodeProperty<?>> N getNodeProperty(Class<N> clazz) {
+    	for (NodeProperty<?> p: nodeProperties) {
+    		if (clazz.isInstance(p)) {
+    			return clazz.cast(p);
+    		}
+    	}
+    	return null;
     }
 
     /**
@@ -1939,6 +1978,8 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
                 pluginManager.getPlugin(o.getString("name")).getPlugin().configure(o);
 
             clouds.rebuildHetero(req,json, Cloud.ALL, "cloud");
+            
+            nodeProperties.rebuild(req, json, NodeProperties.getFor(this));
 
             save();
             if(result)
@@ -3101,4 +3142,8 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
         assert PERMISSIONS!=null;
         assert ADMINISTER!=null;
     }
+
+	public void setNodeProperties(DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties) {
+		this.nodeProperties = nodeProperties;
+	}
 }

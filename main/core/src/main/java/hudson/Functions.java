@@ -25,6 +25,8 @@ import hudson.security.Permission;
 import hudson.security.SecurityRealm;
 import hudson.slaves.Cloud;
 import hudson.slaves.ComputerLauncher;
+import hudson.slaves.NodeProperties;
+import hudson.slaves.NodePropertyDescriptor;
 import hudson.slaves.RetentionStrategy;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepDescriptor;
@@ -35,23 +37,7 @@ import hudson.tasks.Publisher;
 import hudson.util.Area;
 import hudson.util.DescriptorList;
 import hudson.util.Iterators;
-import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
-import org.apache.commons.jelly.JellyContext;
-import org.apache.commons.jelly.JellyTagException;
-import org.apache.commons.jelly.Script;
-import org.apache.commons.jelly.XMLOutput;
-import org.apache.commons.jexl.parser.ASTSizeFunction;
-import org.apache.commons.jexl.util.Introspector;
-import org.jvnet.animal_sniffer.IgnoreJRERequirement;
-import org.kohsuke.stapler.Ancestor;
-import org.kohsuke.stapler.Stapler;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -76,6 +62,24 @@ import java.util.TreeMap;
 import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;
 import java.util.regex.Pattern;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
+import org.apache.commons.jelly.JellyContext;
+import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.Script;
+import org.apache.commons.jelly.XMLOutput;
+import org.apache.commons.jexl.parser.ASTSizeFunction;
+import org.apache.commons.jexl.util.Introspector;
+import org.jvnet.animal_sniffer.IgnoreJRERequirement;
+import org.kohsuke.stapler.Ancestor;
+import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
 /**
  * Utility functions used in views.
@@ -553,6 +557,10 @@ public class Functions {
         return BuildWrappers.getFor(project);
     }
 
+    public static List<NodePropertyDescriptor> getNodePropertyDescriptors(Node node) {
+    	return NodeProperties.getFor(node);
+    }
+    
     public static List<Descriptor<SecurityRealm>> getSecurityRealmDescriptors() {
         return SecurityRealm.LIST;
     }

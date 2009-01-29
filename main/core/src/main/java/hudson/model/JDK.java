@@ -1,8 +1,11 @@
 package hudson.model;
 
+import hudson.tasks.Maven.MavenInstallation;
 import hudson.util.StreamTaskListener;
 import hudson.util.NullStream;
+import hudson.EnvVars;
 import hudson.Launcher;
+import hudson.Util;
 
 import java.io.File;
 import java.io.IOException;
@@ -74,6 +77,21 @@ public final class JDK {
             env.put("HUDSON_HOME", Hudson.getInstance().getRootDir().getPath() );
     }
 
+    /**
+     * Returns a copy of this JDK in which the variables in the path have
+     * been resolved using the properties for the given environment. 
+     * 
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+	public JDK forEnvironment(Map<String,String> env) {
+    	String javaHome = Util.replaceMacro(
+    			this.javaHome, 
+    			env, 
+    			EnvVars.masterEnvVars);
+    	return new JDK(name, javaHome);
+    }
+    
     /**
      * Checks if "java" is in PATH on the given node.
      *

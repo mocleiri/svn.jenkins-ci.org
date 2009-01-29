@@ -1,19 +1,23 @@
 package hudson.tasks;
 
 import hudson.CopyOnWrite;
-import hudson.FilePath.FileCallable;
+import hudson.EnvVars;
 import hudson.Functions;
 import hudson.Launcher;
-import hudson.Launcher.LocalLauncher;
 import hudson.Util;
-import hudson.EnvVars;
+import hudson.FilePath.FileCallable;
+import hudson.Launcher.LocalLauncher;
 import hudson.maven.MavenEmbedder;
 import hudson.maven.MavenUtil;
 import hudson.maven.RedeployPublisher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
+import hudson.model.Computer;
 import hudson.model.Descriptor;
+import hudson.model.Executor;
+import hudson.model.Hudson;
+import hudson.model.Node;
 import hudson.model.ParametersAction;
 import hudson.remoting.Callable;
 import hudson.remoting.VirtualChannel;
@@ -22,20 +26,22 @@ import hudson.util.FormFieldValidator;
 import hudson.util.NullStream;
 import hudson.util.StreamTaskListener;
 import hudson.util.VariableResolver;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.DataBoundConstructor;
-import org.apache.maven.embedder.MavenEmbedderException;
 
-import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;
-import java.util.StringTokenizer;
 import java.util.Properties;
+import java.util.StringTokenizer;
+
+import javax.servlet.ServletException;
 
 import net.sf.json.JSONObject;
+
+import org.apache.maven.embedder.MavenEmbedderException;
+import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
 /**
  * Build by using Maven.
@@ -177,14 +183,16 @@ public class Maven extends Builder {
             normalizedTarget = Util.replaceMacro(normalizedTarget,env);
 
             ArgumentListBuilder args = new ArgumentListBuilder();
-            MavenInstallation ai = getMaven();
-            if(ai==null) {
+            MavenInstallation mi = getMaven();
+            if (mi != null) mi = mi.forEnvironment(env);
+            
+            if(mi==null) {
                 String execName = proj.getWorkspace().act(new DecideDefaultMavenCommand(normalizedTarget));
                 args.add(execName);
             } else {
-                String exec = ai.getExecutable(launcher);
+                String exec = mi.getExecutable(launcher);
                 if(exec==null) {
-                    listener.fatalError(Messages.Maven_NoExecutable(ai.getMavenHome()));
+                    listener.fatalError(Messages.Maven_NoExecutable(mi.getMavenHome()));
                     return false;
                 }
                 args.add(exec);
@@ -195,7 +203,7 @@ public class Maven extends Builder {
             args.addKeyValuePairsFromPropertyString("-D",properties,vr);
             args.addTokenized(normalizedTarget);
 
-            if(ai!=null) {
+            if(mi!=null) {
                 // if somebody has use M2_HOME they will get a classloading error
                 // when M2_HOME points to a different version of Maven2 from
                 // MAVEN_HOME (as Maven 2 gives M2_HOME priority.)
@@ -203,8 +211,8 @@ public class Maven extends Builder {
                 // The other solution would be to set M2_HOME if we are calling Maven2 
                 // and MAVEN_HOME for Maven1 (only of use for strange people that
                 // are calling Maven2 from Maven1)
-                env.put("M2_HOME",ai.getMavenHome());
-                env.put("MAVEN_HOME",ai.getMavenHome());
+                env.put("M2_HOME", mi.getMavenHome());
+                env.put("MAVEN_HOME", mi.getMavenHome());
             }
             // just as a precaution
             // see http://maven.apache.org/continuum/faqs.html#how-does-continuum-detect-a-successful-build
@@ -359,9 +367,7 @@ public class Maven extends Builder {
             if(File.separatorChar=='\\')
                 execName += ".bat";
 
-            String m2Home = Util.replaceMacro(getMavenHome(),EnvVars.masterEnvVars);
-
-            return new File(m2Home, "bin/" + execName);
+            return new File(getMavenHome(), "bin/" + execName);
         }
 
         /**
@@ -380,10 +386,26 @@ public class Maven extends Builder {
         public MavenEmbedder createEmbedder(BuildListener listener, String profiles) throws MavenEmbedderException, IOException {
             return MavenUtil.createEmbedder(listener,getHomeDir(),profiles);
         }
+        
+        /**
+         * Returns a copy of this MavenInstallation in which the variables in the path have
+         * been resolved using the properties for the current node. Can only be called during
+         * a build.
+         * 
+         * @return
+         */
+        @SuppressWarnings("unchecked")
+		public MavenInstallation forEnvironment(Map<String,String> environment) {
+        	String mavenHome = Util.replaceMacro(
+        			this.mavenHome, 
+        			environment, 
+        			EnvVars.masterEnvVars);
+        	return new MavenInstallation(name, mavenHome);
+        }
 
         private static final long serialVersionUID = 1L;
     }
-
+    
     /**
      * Optional interface that can be implemented by {@link AbstractProject}
      * that has "contextual" {@link MavenInstallation} associated with it.

@@ -13,9 +13,12 @@ import hudson.FilePath;
 import hudson.security.ACL;
 import hudson.security.Permission;
 import hudson.util.ClockDifference;
+import hudson.util.DescribableList;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -100,6 +103,23 @@ public class NodeListTest extends TestCase {
         public boolean hasPermission(Permission permission) {
             throw new UnsupportedOperationException();
         }
+
+		public Map<String, String> getEnvVars() {
+			throw new UnsupportedOperationException();
+		}
+
+		public DescribableList<NodeProperty<?>, NodePropertyDescriptor> getNodeProperties() {
+			return null;
+		}
+
+		public <N extends NodeProperty<?>> N getNodeProperty(Class<N> clazz) {
+			return null;
+		}
+
+		public void setNodeProperties(
+				DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties) {
+		}
+
     }
     static class EphemeralNode extends DummyNode implements hudson.slaves.EphemeralNode {
         public Cloud getCloud() {

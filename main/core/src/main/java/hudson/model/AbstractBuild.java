@@ -11,24 +11,19 @@ import hudson.model.listeners.SCMListener;
 import hudson.scm.CVSChangeLogParser;
 import hudson.scm.ChangeLogParser;
 import hudson.scm.ChangeLogSet;
-import hudson.scm.ChangeLogSet.Entry;
 import hudson.scm.SCM;
+import hudson.scm.ChangeLogSet.Entry;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.Builder;
-import hudson.tasks.Fingerprinter.FingerprintAction;
+import hudson.tasks.Environment;
 import hudson.tasks.Publisher;
+import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.util.AdaptedIterator;
 import hudson.util.Iterators;
 import hudson.util.VariableResolver;
-import org.kohsuke.stapler.Stapler;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.export.Exported;
-import org.xml.sax.SAXException;
 
-import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.util.AbstractSet;
@@ -42,6 +37,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.servlet.ServletException;
+
+import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.export.Exported;
+import org.xml.sax.SAXException;
 
 /**
  * Base implementation of {@link Run}s that build software.
@@ -94,7 +97,7 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
      * During the build this field remembers {@link BuildWrapper.Environment}s created by
      * {@link BuildWrapper}. This design is bit ugly but forced due to compatibility.
      */
-    protected transient List<BuildWrapper.Environment> buildEnvironments;
+    protected transient List<Environment> buildEnvironments;
 
     protected AbstractBuild(P job) throws IOException {
         super(job);
@@ -388,9 +391,10 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
         // see http://www.nabble.com/Run-Job-with-JDK-1.4.2-tf4468601.html
         env.put("CLASSPATH","");
 
-        JDK jdk = project.getJDK();
-        if(jdk !=null)
-            jdk.buildEnvVars(env);
+    	JDK jdk = project.getJDK();
+        if(jdk !=null) {
+        	jdk.forEnvironment(env).buildEnvVars(env);
+        }
         project.getScm().buildEnvVars(this,env);
 
         ParametersAction parameters = getAction(ParametersAction.class);
@@ -398,7 +402,7 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
             parameters.buildEnvVars(this,env);
 
         if(buildEnvironments!=null)
-            for (BuildWrapper.Environment e : buildEnvironments)
+            for (Environment e : buildEnvironments)
                 e.buildEnvVars(env);
         
         return env;

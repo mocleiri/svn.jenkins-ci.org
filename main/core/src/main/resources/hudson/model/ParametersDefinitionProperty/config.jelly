@@ -1,6 +1,7 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
 	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form"
 	xmlns:i="jelly:fmt" xmlns:p="/lib/hudson/project">
+  <f:section title="${%Parameters}">
   <f:optionalBlock name="parameterized" title="${%This build is parameterized}"
           checked="${instance!=null}" help="/help/project-config/parameterized-build.html">
     <f:nested>
@@ -9,4 +10,6 @@
         addCaption="${%Add Parameter}" />
     </f:nested>
   </f:optionalBlock>
+  <p> </p>
+  </f:section>
 </j:jelly>

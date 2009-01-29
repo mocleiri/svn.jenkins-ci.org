@@ -53,7 +53,7 @@ public class ParameterizedProjectTask extends QueueTaskFilter {
      * Cancels a scheduled build.
      */
     public void doCancelQueue( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        project.checkPermission(AbstractProject.BUILD);
+        project.checkPermission(AbstractProject.ABORT);
 
         Hudson.getInstance().getQueue().cancel(this);
         rsp.forwardToPreviousPage(req);

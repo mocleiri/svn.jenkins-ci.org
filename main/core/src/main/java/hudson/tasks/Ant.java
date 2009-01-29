@@ -8,7 +8,10 @@ import hudson.Util;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
+import hudson.model.Computer;
 import hudson.model.Descriptor;
+import hudson.model.Executor;
+import hudson.model.Hudson;
 import hudson.model.ParametersAction;
 import hudson.model.TaskListener;
 import hudson.remoting.Callable;
@@ -106,6 +109,8 @@ public class Ant extends Builder {
         ArgumentListBuilder args = new ArgumentListBuilder();
 
         AntInstallation ai = getAnt();
+        if (ai != null) ai = ai.forEnvironment(build.getEnvVars());
+
         if(ai==null) {
             args.add(launcher.isUnix() ? "ant" : "ant.bat");
         } else {
@@ -154,7 +159,7 @@ public class Ant extends Builder {
 
         Map<String,String> env = build.getEnvVars();
         if(ai!=null)
-            env.put("ANT_HOME",ai.getAntHome());
+            env.put("ANT_HOME", Util.replaceMacro(ai.getAntHome(), env));
         if(antOpts!=null)
             env.put("ANT_OPTS",antOpts);
 
@@ -344,6 +349,21 @@ public class Ant extends Builder {
          */
         public boolean getExists() throws IOException, InterruptedException {
             return getExecutable(new Launcher.LocalLauncher(TaskListener.NULL))!=null;
+        }
+        
+        /**
+         * Returns a copy of this AntInstallation in which the variables in the path have
+         * been resolved using the properties for the given environment. 
+         * 
+         * @return
+         */
+        @SuppressWarnings("unchecked")
+		public AntInstallation forEnvironment(Map<String,String> env) {
+        	String antHome = Util.replaceMacro(
+        			this.antHome, 
+        			env, 
+        			EnvVars.masterEnvVars);
+        	return new AntInstallation(name, antHome);
         }
 
         private static final long serialVersionUID = 1L;

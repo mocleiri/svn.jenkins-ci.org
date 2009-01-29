@@ -7,8 +7,12 @@ import hudson.util.CaseInsensitiveComparator;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
  * Environment variables.
@@ -107,4 +111,25 @@ public class EnvVars extends TreeMap<String,String> {
      * variable of the slave agent.
      */
     public static final Map<String,String> masterEnvVars = new EnvVars(System.getenv());
+    
+    
+    public static Map<String,String> toMap(List<Entry> list) {
+        Map<String,String> envVars = new LinkedHashMap<String,String>();
+        if (envVars != null) {
+        	for (EnvVars.Entry e: list) {
+        		envVars.put(e.key.toUpperCase(), e.value);
+        	}
+        }
+        return envVars;
+    }
+    
+    public static class Entry {
+    	public final String key, value;
+
+    	@DataBoundConstructor
+		public Entry(String key, String value) {
+			this.key = key;
+			this.value = value;
+		}
+    }
 }

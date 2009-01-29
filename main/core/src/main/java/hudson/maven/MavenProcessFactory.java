@@ -1,9 +1,10 @@
 package hudson.maven;
 
+import static hudson.Util.fixNull;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Proc;
-import static hudson.Util.fixNull;
+import hudson.Util;
 import hudson.maven.agent.Main;
 import hudson.model.BuildListener;
 import hudson.model.Computer;
@@ -11,8 +12,8 @@ import hudson.model.Executor;
 import hudson.model.Hudson;
 import hudson.model.JDK;
 import hudson.model.Node;
-import hudson.model.Run.RunnerAbortedException;
 import hudson.model.TaskListener;
+import hudson.model.Run.RunnerAbortedException;
 import hudson.remoting.Callable;
 import hudson.remoting.Channel;
 import hudson.remoting.RemoteInputStream;
@@ -234,9 +235,12 @@ final class MavenProcessFactory implements ProcessCache.Factory {
             listener.error("Maven '%s' doesn't have its home set",mvn.getName());
             throw new RunnerAbortedException();
         }
+        
+        mvn = mvn.forEnvironment(envVars);
 
         // find classworlds.jar
-        String classWorldsJar = launcher.getChannel().call(new GetClassWorldsJar(mvn.getMavenHome(),listener));
+        String mavenHome = hudson.Util.replaceMacro(mvn.getMavenHome(), envVars);
+        String classWorldsJar = launcher.getChannel().call(new GetClassWorldsJar(mavenHome,listener));
 
         boolean isMaster = getCurrentNode()== Hudson.getInstance();
         FilePath slaveRoot=null;
@@ -247,8 +251,9 @@ final class MavenProcessFactory implements ProcessCache.Factory {
         JDK jdk = mms.getJDK();
         if(jdk==null)
             args.add("java");
-        else
-            args.add(jdk.getJavaHome()+"/bin/java");
+        else {
+        	args.add(jdk.forEnvironment(envVars).getJavaHome()+"/bin/java");
+        }
 
         if(debugPort!=0)
             args.add("-Xrunjdwp:transport=dt_socket,server=y,address="+debugPort);
@@ -264,7 +269,7 @@ final class MavenProcessFactory implements ProcessCache.Factory {
         args.add(Main.class.getName());
 
         // M2_HOME
-        args.add(mvn.getMavenHome());
+        args.add(Util.replaceMacro(mvn.getMavenHome(), envVars));
 
         // remoting.jar
         args.add(launcher.getChannel().call(new GetRemotingJar()));

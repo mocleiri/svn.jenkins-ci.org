@@ -1,17 +1,23 @@
 package hudson.model;
 
+import hudson.ExtensionPoint;
 import hudson.FilePath;
 import hudson.Launcher;
-import hudson.ExtensionPoint;
+import hudson.node_monitors.NodeMonitor;
 import hudson.security.AccessControlled;
 import hudson.slaves.NodeDescriptor;
-import hudson.node_monitors.NodeMonitor;
+import hudson.slaves.NodeProperty;
+import hudson.slaves.NodePropertyDescriptor;
 import hudson.util.ClockDifference;
+import hudson.util.DescribableList;
 import hudson.util.EnumConverter;
-import org.kohsuke.stapler.Stapler;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import org.kohsuke.stapler.Stapler;
 
 /**
  * Base type of Hudson slaves (although in practice, you probably extend {@link Slave} to define a new slave type.)
@@ -142,6 +148,12 @@ public interface Node extends Describable<Node>, ExtensionPoint, AccessControlle
      *      if the operation is aborted.
      */
     ClockDifference getClockDifference() throws IOException, InterruptedException;
+    
+    DescribableList<NodeProperty<?>, NodePropertyDescriptor> getNodeProperties();
+    
+    void setNodeProperties(DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties);
+    
+    <N extends NodeProperty<?>> N getNodeProperty(Class<N> clazz);
 
     /**
      * Constants that control how Hudson allocates jobs to slaves.

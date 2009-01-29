@@ -109,6 +109,21 @@ public class Util {
     }
 
     /**
+     * Replaces the occurrence of '$key' by <tt>properties.get('key')</tt>, for each of the property maps passed.
+     *
+     * <p>
+     * Unlike shell, undefined variables are left as-is (this behavior is the same as Ant.)
+     *
+     */
+    public static String replaceMacro(String s, Map<String,String>... properties) {
+    	for (Map<String,String> p: properties) {
+    		s = replaceMacro(s, new VariableResolver.ByMap<String>(p));
+    	}
+    	return s;
+    }
+
+    
+    /**
      * Replaces the occurrence of '$key' by <tt>resolver.get('key')</tt>.
      *
      * <p>

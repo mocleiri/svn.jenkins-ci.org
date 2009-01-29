@@ -1,18 +1,19 @@
 package hudson.model;
 
+import hudson.slaves.NodeProperty;
 import hudson.tasks.BuildStep;
-import hudson.tasks.BuildWrapper;
-import hudson.tasks.BuildWrapper.Environment;
-import hudson.tasks.Builder;
 import hudson.tasks.BuildTrigger;
+import hudson.tasks.BuildWrapper;
+import hudson.tasks.Builder;
+import hudson.tasks.Environment;
 import hudson.triggers.SCMTrigger;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Logger;
 
@@ -102,6 +103,14 @@ public abstract class Build <P extends Project<P,B>,B extends Build<P,B>>
                 ParametersAction parameters = getAction(ParametersAction.class);
                 if (parameters != null)
                     parameters.createBuildWrappers(Build.this,wrappers);
+                
+                Node node = Computer.currentComputer().getNode();
+                for (NodeProperty<?> p: node.getNodeProperties()) {
+                    Environment e = p.setUp(Build.this, launcher, listener);
+                    if(e==null)
+                        return Result.FAILURE;
+                    buildEnvironments.add(e);
+                }
 
                 for( BuildWrapper w : wrappers ) {
                     Environment e = w.setUp((AbstractBuild)Build.this, launcher, listener);

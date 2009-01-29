@@ -2,36 +2,48 @@ package hudson.model;
 
 import hudson.FilePath;
 import hudson.Launcher;
-import hudson.Launcher.RemoteLauncher;
 import hudson.Util;
-import hudson.security.ACL;
-import hudson.security.Permission;
-import hudson.slaves.ComputerLauncher;
-import hudson.slaves.RetentionStrategy;
-import hudson.slaves.CommandLauncher;
-import hudson.slaves.JNLPLauncher;
-import hudson.slaves.SlaveComputer;
-import hudson.slaves.DumbSlave;
+import hudson.Launcher.RemoteLauncher;
 import hudson.model.Descriptor.FormException;
 import hudson.remoting.Callable;
 import hudson.remoting.VirtualChannel;
+import hudson.security.ACL;
+import hudson.security.Permission;
+import hudson.slaves.CommandLauncher;
+import hudson.slaves.ComputerLauncher;
+import hudson.slaves.DumbSlave;
+import hudson.slaves.EnvironmentVariablesNodeProperty;
+import hudson.slaves.JNLPLauncher;
+import hudson.slaves.NodeProperty;
+import hudson.slaves.NodePropertyDescriptor;
+import hudson.slaves.RetentionStrategy;
+import hudson.slaves.SlaveComputer;
 import hudson.tasks.DynamicLabeler;
 import hudson.tasks.LabelFinder;
 import hudson.util.ClockDifference;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.DataBoundConstructor;
-import org.apache.commons.io.IOUtils;
+import hudson.util.DescribableList;
 
-import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.MalformedURLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.servlet.ServletException;
+
+import org.apache.commons.io.IOUtils;
+import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
 /**
  * Information about a Hudson slave node.
@@ -71,7 +83,7 @@ public abstract class Slave implements Node, Serializable {
      * Job allocation strategy.
      */
     private Mode mode;
-
+    
     /**
      * Slave availablility strategy.
      */
@@ -111,6 +123,7 @@ public abstract class Slave implements Node, Serializable {
         this.label = Util.fixNull(label).trim();
         this.launcher = launcher;
         this.retentionStrategy = retentionStrategy;
+        
         getAssignedLabels();    // compute labels now
 
         if (name.equals(""))
@@ -151,6 +164,25 @@ public abstract class Slave implements Node, Serializable {
 
     public String getNodeDescription() {
         return description;
+    }
+    
+	private DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties;
+
+    public DescribableList<NodeProperty<?>, NodePropertyDescriptor> getNodeProperties() {
+    	return nodeProperties;
+    }
+    
+    public void setNodeProperties(DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties) {
+    	this.nodeProperties = nodeProperties;
+    }
+    
+    public <N extends NodeProperty<?>> N getNodeProperty(Class<N> clazz) {
+    	for (NodeProperty<?> p: nodeProperties) {
+    		if (clazz.isInstance(p)) {
+    			return clazz.cast(p);
+    		}
+    	}
+    	return null;
     }
 
     public int getNumExecutors() {
@@ -295,7 +327,16 @@ public abstract class Slave implements Node, Serializable {
         return new FilePath(ch,absolutePath);
     }
 
-    /**
+//	public Map<String, String> getEnvVars() {
+//		EnvironmentVariablesNodeProperty property = getNodeProperty(EnvironmentVariablesNodeProperty.class);
+//		if (property != null) {
+//			return property.getEnvVars();
+//		} else {
+//			return new HashMap<String,String>();
+//		}
+//	}
+
+	/**
      * Root directory on this slave where all the job workspaces are laid out.
      * @return
      *      null if not connected.
@@ -391,6 +432,11 @@ public abstract class Slave implements Node, Serializable {
                     ? new JNLPLauncher()
                     : new CommandLauncher(agentCommand);
         }
+
+        if (nodeProperties == null) {
+    		nodeProperties = new DescribableList<NodeProperty<?>, NodePropertyDescriptor>(Hudson.getInstance()); // TODO verify owner
+    	}
+        
         return this;
     }
 

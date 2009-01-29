@@ -2,11 +2,9 @@ package hudson.maven;
 
 import hudson.AbortException;
 import hudson.FilePath;
-import hudson.FilePath.FileCallable;
 import hudson.Launcher;
 import hudson.Util;
-import hudson.tasks.BuildWrapper;
-import hudson.tasks.Maven.MavenInstallation;
+import hudson.FilePath.FileCallable;
 import hudson.maven.MavenBuild.ProxyImpl2;
 import hudson.maven.reporters.MavenFingerprinter;
 import hudson.model.AbstractBuild;
@@ -16,22 +14,15 @@ import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Fingerprint;
 import hudson.model.Hudson;
-import hudson.model.Result;
 import hudson.model.ParametersAction;
+import hudson.model.Result;
 import hudson.remoting.Channel;
 import hudson.remoting.VirtualChannel;
+import hudson.tasks.BuildWrapper;
+import hudson.tasks.Environment;
+import hudson.tasks.Maven.MavenInstallation;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.StreamTaskListener;
-import org.apache.maven.BuildFailureException;
-import org.apache.maven.embedder.MavenEmbedderException;
-import org.apache.maven.execution.MavenSession;
-import org.apache.maven.execution.ReactorManager;
-import org.apache.maven.lifecycle.LifecycleExecutionException;
-import org.apache.maven.monitor.event.EventDispatcher;
-import org.apache.maven.project.MavenProject;
-import org.apache.maven.project.ProjectBuildingException;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,10 +35,21 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.apache.maven.BuildFailureException;
+import org.apache.maven.embedder.MavenEmbedderException;
+import org.apache.maven.execution.MavenSession;
+import org.apache.maven.execution.ReactorManager;
+import org.apache.maven.lifecycle.LifecycleExecutionException;
+import org.apache.maven.monitor.event.EventDispatcher;
+import org.apache.maven.project.MavenProject;
+import org.apache.maven.project.ProjectBuildingException;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
 /**
  * {@link Build} for {@link MavenModuleSet}.
@@ -297,7 +299,7 @@ public final class MavenModuleSetBuild extends AbstractBuild<MavenModuleSet,Mave
                         if (parameters != null)
                             parameters.createBuildWrappers(MavenModuleSetBuild.this,wrappers);
 
-                        buildEnvironments = new ArrayList<BuildWrapper.Environment>();
+                        buildEnvironments = new ArrayList<Environment>();
                         for( BuildWrapper w : wrappers) {
                             BuildWrapper.Environment e = w.setUp((AbstractBuild)MavenModuleSetBuild.this, launcher, listener);
                             if(e==null)
@@ -687,7 +689,7 @@ public final class MavenModuleSetBuild extends AbstractBuild<MavenModuleSet,Mave
                 logger.println("Parsing "+pom);
 
             try {
-                MavenEmbedder embedder = mavenHome.createEmbedder(listener,profiles);
+                MavenEmbedder embedder = mavenHome.forEnvironment(new HashMap() /* TODO !!!!!! */).createEmbedder(listener,profiles);
                 MavenProject mp = embedder.readProject(pom);
                 Map<MavenProject,String> relPath = new HashMap<MavenProject,String>();
                 MavenUtil.resolveModules(embedder,mp,getRootPath(),relPath,listener);

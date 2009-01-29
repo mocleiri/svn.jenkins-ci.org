@@ -62,4 +62,13 @@
       </j:forEach>
     </f:dropdownList>
   </j:if>
+  
+  <j:set var="properties" value="${h.getNodePropertyDescriptors(it)}" />
+  <j:if test="${!empty(properties)}">
+    <f:descriptorList title="${%Node Properties}"
+    				  name="nodeProperties"
+                      descriptors="${properties}"
+                      instances="${it.nodeProperties}" />
+  </j:if>
+
 </j:jelly>
