@@ -13,8 +13,6 @@ import hudson.util.DescribableList;
 import hudson.util.EnumConverter;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.kohsuke.stapler.Stapler;
@@ -150,8 +148,6 @@ public interface Node extends Describable<Node>, ExtensionPoint, AccessControlle
     ClockDifference getClockDifference() throws IOException, InterruptedException;
     
     DescribableList<NodeProperty<?>, NodePropertyDescriptor> getNodeProperties();
-    
-    void setNodeProperties(DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties);
     
     <N extends NodeProperty<?>> N getNodeProperty(Class<N> clazz);
 
