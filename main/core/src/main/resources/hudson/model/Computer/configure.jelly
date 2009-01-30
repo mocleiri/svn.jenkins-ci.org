@@ -12,8 +12,11 @@
                      checkUrl="'${rootURL}/fieldCheck?errorText='+escape('${%Name is mandatory}')+'&amp;value='+escape(this.value)"/>
         </f:entry>
 
+        <!-- preparation for activating form data binding -->
+        <j:set var="instance" value="${it.node}" />
+        <j:set var="descriptor" value="${it.node.descriptor}"/>
         <!-- main body of the configuration -->
-        <st:include it="${it.node}" page="configure-entries.jelly" />
+        <st:include it="${instance}" page="configure-entries.jelly" />
 
         <f:block>
           <f:submit value="${%Save}"/>

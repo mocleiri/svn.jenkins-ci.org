@@ -12,7 +12,6 @@ import hudson.security.Permission;
 import hudson.slaves.CommandLauncher;
 import hudson.slaves.ComputerLauncher;
 import hudson.slaves.DumbSlave;
-import hudson.slaves.EnvironmentVariablesNodeProperty;
 import hudson.slaves.JNLPLauncher;
 import hudson.slaves.NodeProperty;
 import hudson.slaves.NodePropertyDescriptor;
@@ -30,12 +29,9 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -107,10 +103,17 @@ public abstract class Slave implements Node, Serializable {
     private transient volatile Set<Label> dynamicLabels;
     private transient volatile int dynamicLabelsInstanceHash;
 
+    // persistence is done through Hudson root object, so designate that as the Saveable
+    private final DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties =
+            new DescribableList<NodeProperty<?>, NodePropertyDescriptor>(Hudson.getInstance());
+
+
     @DataBoundConstructor
     public Slave(String name, String description, String remoteFS, String numExecutors,
-                 Mode mode, String label, ComputerLauncher launcher, RetentionStrategy retentionStrategy) throws FormException {
+                 Mode mode, String label, ComputerLauncher launcher, RetentionStrategy retentionStrategy,
+                 List<NodeProperty<?>> nodeProperties) throws FormException, IOException {
         this(name,description,remoteFS,Util.tryParseNumber(numExecutors, 1).intValue(),mode,label,launcher,retentionStrategy);
+        this.nodeProperties.replaceBy(nodeProperties);
     }
 
     public Slave(String name, String description, String remoteFS, int numExecutors,
@@ -166,14 +169,8 @@ public abstract class Slave implements Node, Serializable {
         return description;
     }
     
-	private DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties;
-
     public DescribableList<NodeProperty<?>, NodePropertyDescriptor> getNodeProperties() {
     	return nodeProperties;
-    }
-    
-    public void setNodeProperties(DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties) {
-    	this.nodeProperties = nodeProperties;
     }
     
     public <N extends NodeProperty<?>> N getNodeProperty(Class<N> clazz) {
@@ -433,10 +430,6 @@ public abstract class Slave implements Node, Serializable {
                     : new CommandLauncher(agentCommand);
         }
 
-        if (nodeProperties == null) {
-    		nodeProperties = new DescribableList<NodeProperty<?>, NodePropertyDescriptor>(Hudson.getInstance()); // TODO verify owner
-    	}
-        
         return this;
     }
 

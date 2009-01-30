@@ -382,6 +382,8 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
      */
     public transient final List<AdministrativeMonitor> administrativeMonitors = new CopyOnWriteArrayList<AdministrativeMonitor>();
 
+    private final DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties = new DescribableList<NodeProperty<?>, NodePropertyDescriptor>(this);
+
     /**
      * {@link AdjunctManager}
      */
@@ -583,14 +585,6 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
      */
     public String getSecretKey() {
         return secretKey;
-    }
-    
-    public Object readResolve() throws ObjectStreamException  {
-    	if (nodeProperties == null) {
-    		nodeProperties = new DescribableList<NodeProperty<?>, NodePropertyDescriptor>(this);
-    	}
-    	
-    	return this;
     }
     
     /**
@@ -1179,8 +1173,6 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
         trimLabels();
         save();
     }
-
-	private DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties;
 
     public DescribableList<NodeProperty<?>, NodePropertyDescriptor> getNodeProperties() {
     	return nodeProperties;
@@ -3142,8 +3134,4 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
         assert PERMISSIONS!=null;
         assert ADMINISTER!=null;
     }
-
-	public void setNodeProperties(DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties) {
-		this.nodeProperties = nodeProperties;
-	}
 }

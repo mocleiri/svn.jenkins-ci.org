@@ -35,11 +35,6 @@ public abstract class NodeDescriptor extends Descriptor<Node> {
 	public Node newInstance(StaplerRequest req, JSONObject formData)
 			throws FormException {
 		Node node = super.newInstance(req, formData);
-		DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties = new DescribableList<NodeProperty<?>, NodePropertyDescriptor>(
-				Hudson.getInstance()); // TODO verify owner
-		nodeProperties.rebuild(req, formData, Functions
-				.getNodePropertyDescriptors(node));
-		node.setNodeProperties(nodeProperties);
 		return node;
 	}
     

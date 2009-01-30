@@ -115,11 +115,6 @@ public class NodeListTest extends TestCase {
 		public <N extends NodeProperty<?>> N getNodeProperty(Class<N> clazz) {
 			return null;
 		}
-
-		public void setNodeProperties(
-				DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties) {
-		}
-
     }
     static class EphemeralNode extends DummyNode implements hudson.slaves.EphemeralNode {
         public Cloud getCloud() {
