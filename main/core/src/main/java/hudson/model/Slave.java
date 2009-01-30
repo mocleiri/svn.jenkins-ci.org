@@ -104,7 +104,7 @@ public abstract class Slave implements Node, Serializable {
     private transient volatile int dynamicLabelsInstanceHash;
 
     // persistence is done through Hudson root object, so designate that as the Saveable
-    private final DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties =
+    private /*almost final*/ DescribableList<NodeProperty<?>, NodePropertyDescriptor> nodeProperties =
             new DescribableList<NodeProperty<?>, NodePropertyDescriptor>(Hudson.getInstance());
 
 
@@ -429,6 +429,8 @@ public abstract class Slave implements Node, Serializable {
                     ? new JNLPLauncher()
                     : new CommandLauncher(agentCommand);
         }
+        if (nodeProperties==null)
+            nodeProperties = new DescribableList<NodeProperty<?>, NodePropertyDescriptor>(Hudson.getInstance());
 
         return this;
     }
