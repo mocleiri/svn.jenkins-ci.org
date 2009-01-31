@@ -1,5 +1,6 @@
 package hudson.slaves;
 
+import java.util.Collections;
 import java.util.List;
 import java.io.IOException;
 
@@ -24,6 +25,15 @@ public final class DumbSlave extends Slave {
 				retentionStrategy, nodeProperties);
 	}
 
+	@Deprecated
+	public DumbSlave(String name, String description, String remoteFS,
+			String numExecutors, Mode mode, String label,
+			ComputerLauncher launcher, RetentionStrategy retentionStrategy)
+            throws FormException, IOException {
+		super(name, description, remoteFS, numExecutors, mode, label, launcher,
+				retentionStrategy, Collections.EMPTY_LIST);
+	}
+	
 	public DescriptorImpl getDescriptor() {
 		return DescriptorImpl.INSTANCE;
 	}

@@ -90,6 +90,18 @@ public abstract class Build <P extends Project<P,B>,B extends Build<P,B>>
     }
     
     protected class RunnerImpl extends AbstractRunner {
+    	/**
+    	 * This method is largely responsible for setting up the environment for the build.
+    	 * Environment variables are set up in this order:
+    	 * - Hudson master node properties
+    	 * - Executor node properties
+    	 * - Build parameters
+    	 * - BuildWrapper
+    	 * 
+    	 * Later (in the build() ) additional properties could be set, usually by builders.
+    	 * 
+    	 * In each step the previous values can be overwritten, or made use of.
+    	 */
         protected Result doRun(BuildListener listener) throws Exception {
             if(!preBuild(listener,project.getBuilders()))
                 return Result.FAILURE;
@@ -99,18 +111,28 @@ public abstract class Build <P extends Project<P,B>,B extends Build<P,B>>
             buildEnvironments = new ArrayList<Environment>();
             try {
                 List<BuildWrapper> wrappers = new ArrayList<BuildWrapper>(project.getBuildWrappers().values());
+                
+                Hudson hudson = Hudson.getInstance();
+				for (NodeProperty<?> p: hudson.getNodeProperties()) {
+                	Environment e = p.setUp(Build.this, launcher, listener);
+                	if(e==null)
+                		return Result.FAILURE;
+                	buildEnvironments.add(e);
+                }
+                
+                Node node = Computer.currentComputer().getNode();
+                if (node != hudson) { // no need to repeat if we are running on the master
+                	for (NodeProperty<?> p: node.getNodeProperties()) {
+                		Environment e = p.setUp(Build.this, launcher, listener);
+                		if(e==null)
+                			return Result.FAILURE;
+                		buildEnvironments.add(e);
+                	}
+                }
 
                 ParametersAction parameters = getAction(ParametersAction.class);
                 if (parameters != null)
                     parameters.createBuildWrappers(Build.this,wrappers);
-                
-                Node node = Computer.currentComputer().getNode();
-                for (NodeProperty<?> p: node.getNodeProperties()) {
-                    Environment e = p.setUp(Build.this, launcher, listener);
-                    if(e==null)
-                        return Result.FAILURE;
-                    buildEnvironments.add(e);
-                }
 
                 for( BuildWrapper w : wrappers ) {
                     Environment e = w.setUp((AbstractBuild)Build.this, launcher, listener);

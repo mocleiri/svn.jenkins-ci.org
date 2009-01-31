@@ -10,6 +10,7 @@ import hudson.tasks.BuildWrapper;
 import hudson.tasks.Environment;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,9 @@ public class EnvironmentVariablesNodeProperty extends NodeProperty<Node> {
         this.envVars = EnvVars.toMap(env);
     }
 
+    public EnvironmentVariablesNodeProperty(EnvVars.Entry... env) {
+        this(Arrays.asList(env));
+    }
 	
 	public NodePropertyDescriptor getDescriptor() {
 		return DESCRIPTOR;

@@ -389,10 +389,7 @@ public class Maven extends Builder {
         
         /**
          * Returns a copy of this MavenInstallation in which the variables in the path have
-         * been resolved using the properties for the current node. Can only be called during
-         * a build.
-         * 
-         * @return
+         * been resolved using the properties for the current node. 
          */
         @SuppressWarnings("unchecked")
 		public MavenInstallation forEnvironment(Map<String,String> environment) {

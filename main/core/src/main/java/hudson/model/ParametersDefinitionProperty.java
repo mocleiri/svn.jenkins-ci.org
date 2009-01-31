@@ -2,8 +2,8 @@ package hudson.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 
@@ -27,6 +27,10 @@ public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?,
 
     public ParametersDefinitionProperty(List<ParameterDefinition> parameterDefinitions) {
         this.parameterDefinitions = parameterDefinitions;
+    }
+
+    public ParametersDefinitionProperty(ParameterDefinition... parameterDefinitions) {
+        this(Arrays.asList(parameterDefinitions));
     }
 
     public AbstractProject<?,?> getOwner() {

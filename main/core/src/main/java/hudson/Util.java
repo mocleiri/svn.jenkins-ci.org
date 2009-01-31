@@ -110,6 +110,7 @@ public class Util {
 
     /**
      * Replaces the occurrence of '$key' by <tt>properties.get('key')</tt>, for each of the property maps passed.
+     * Maps are evaulated in order, so the first to provide a property will win.
      *
      * <p>
      * Unlike shell, undefined variables are left as-is (this behavior is the same as Ant.)

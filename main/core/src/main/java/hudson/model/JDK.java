@@ -1,11 +1,10 @@
 package hudson.model;
 
-import hudson.tasks.Maven.MavenInstallation;
-import hudson.util.StreamTaskListener;
-import hudson.util.NullStream;
 import hudson.EnvVars;
 import hudson.Launcher;
 import hudson.Util;
+import hudson.util.NullStream;
+import hudson.util.StreamTaskListener;
 
 import java.io.File;
 import java.io.IOException;

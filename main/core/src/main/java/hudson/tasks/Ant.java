@@ -8,27 +8,27 @@ import hudson.Util;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
-import hudson.model.Computer;
 import hudson.model.Descriptor;
-import hudson.model.Executor;
-import hudson.model.Hudson;
 import hudson.model.ParametersAction;
 import hudson.model.TaskListener;
 import hudson.remoting.Callable;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.FormFieldValidator;
 import hudson.util.VariableResolver;
-import net.sf.json.JSONObject;
-import org.kohsuke.stapler.DataBoundConstructor;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
 
-import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Properties;
+
+import javax.servlet.ServletException;
+
+import net.sf.json.JSONObject;
+
+import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 
 /**
  * Ant launcher.
@@ -104,7 +104,7 @@ public class Ant extends Builder {
     }
 
     public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
-        AbstractProject proj = build.getProject();
+        AbstractProject<?,?> proj = build.getProject();
 
         ArgumentListBuilder args = new ArgumentListBuilder();
 
@@ -159,7 +159,7 @@ public class Ant extends Builder {
 
         Map<String,String> env = build.getEnvVars();
         if(ai!=null)
-            env.put("ANT_HOME", Util.replaceMacro(ai.getAntHome(), env));
+            env.put("ANT_HOME", ai.getAntHome());
         if(antOpts!=null)
             env.put("ANT_OPTS",antOpts);
 
