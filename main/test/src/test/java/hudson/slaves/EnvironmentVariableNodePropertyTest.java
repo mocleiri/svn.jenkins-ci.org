@@ -38,37 +38,35 @@ public class EnvironmentVariableNodePropertyTest extends HudsonTestCase {
 	private Computer slave;
 	private FreeStyleProject project;
 
-	public void test1() throws Exception {
-		setVariables(slave.getNode(), new EnvVars.Entry("KEY", "value"));
-
+	public void testSlavePropertyOnSlave() throws Exception {
+		setVariables(slave.getNode(), new EnvVars.Entry("KEY", "slaveValue"));
 		Map<String, String> envVars = executeBuild(slave);
-
-		Assert.assertEquals("value", envVars.get("KEY"));
+		Assert.assertEquals("slaveValue", envVars.get("KEY"));
 	}
 
-	public void test2() throws Exception {
-		setVariables(Hudson.getInstance(), new EnvVars.Entry("KEY", "value"));
+	public void testMasterPropertyOnMaster() throws Exception {
+		setVariables(Hudson.getInstance(), new EnvVars.Entry("KEY", "masterValue"));
 
 		Map<String, String> envVars = executeBuild(slave);
 
-		Assert.assertEquals("value", envVars.get("KEY"));
+		Assert.assertEquals("masterValue", envVars.get("KEY"));
 	}
 	
-	public void test3() throws Exception {
-		setVariables(Hudson.getInstance(), new EnvVars.Entry("KEY", "value"));
-		setVariables(slave.getNode(), new EnvVars.Entry("KEY", "overridden-value"));
+	public void testSlaveAndMasterPropertyOnSlave() throws Exception {
+		setVariables(Hudson.getInstance(), new EnvVars.Entry("KEY", "masterValue"));
+		setVariables(slave.getNode(), new EnvVars.Entry("KEY", "slaveValue"));
 
 		Map<String, String> envVars = executeBuild(slave);
 
-		Assert.assertEquals("overridden-value", envVars.get("KEY"));
+		Assert.assertEquals("slaveValue", envVars.get("KEY"));
 	}
 
-	public void test4() throws Exception {
+	public void testSlaveAndMasterAndParameterOnSlave() throws Exception {
 		ParametersDefinitionProperty pdp = new ParametersDefinitionProperty(new StringParameterDefinition("KEY", "parameterValue"));
 		project.addProperty(pdp);
 		
-		setVariables(Hudson.getInstance(), new EnvVars.Entry("KEY", "value"));
-		setVariables(slave.getNode(), new EnvVars.Entry("KEY", "overridden-value"));
+		setVariables(Hudson.getInstance(), new EnvVars.Entry("KEY", "masterValue"));
+		setVariables(slave.getNode(), new EnvVars.Entry("KEY", "slaveValue"));
 
 		Map<String, String> envVars = executeBuild(slave);
 

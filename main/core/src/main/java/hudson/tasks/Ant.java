@@ -108,8 +108,11 @@ public class Ant extends Builder {
 
         ArgumentListBuilder args = new ArgumentListBuilder();
 
+        Map<String, String> env = build.getEnvVars();
         AntInstallation ai = getAnt();
-        if (ai != null) ai = ai.forEnvironment(build.getEnvVars());
+        if (ai != null) {
+			ai = ai.forEnvironment(env);
+		}
 
         if(ai==null) {
             args.add(launcher.isUnix() ? "ant" : "ant.bat");
@@ -129,7 +132,7 @@ public class Ant extends Builder {
             // with where the build file path is relative to. Now it's too late to change this behavior
             // due to compatibility issue, but at least we can make this less painful by looking for errors
             // and diagnosing it nicely. See HUDSON-1782
-
+        	
             // first check if this appears to be a valid relative path from workspace root
             FilePath buildFilePath2 = buildFilePath(proj.getWorkspace());
             if(buildFilePath2.exists()) {
@@ -157,7 +160,6 @@ public class Ant extends Builder {
 
         args.addTokenized(Util.replaceMacro(targets,vr).replaceAll("[\t\r\n]+"," "));
 
-        Map<String,String> env = build.getEnvVars();
         if(ai!=null)
             env.put("ANT_HOME", ai.getAntHome());
         if(antOpts!=null)

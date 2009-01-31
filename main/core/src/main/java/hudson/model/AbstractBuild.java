@@ -397,13 +397,13 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
         }
         project.getScm().buildEnvVars(this,env);
 
-        ParametersAction parameters = getAction(ParametersAction.class);
-        if (parameters != null)
-            parameters.buildEnvVars(this,env);
-
         if(buildEnvironments!=null)
             for (Environment e : buildEnvironments)
                 e.buildEnvVars(env);
+        
+        ParametersAction parameters = getAction(ParametersAction.class);
+        if (parameters != null)
+        	parameters.buildEnvVars(this,env);
         
         return env;
     }

@@ -1,29 +1,15 @@
 package hudson.slaves;
 
 import hudson.model.Descriptor;
-import hudson.model.JobProperty;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import net.sf.json.JSONObject;
-
 import org.jvnet.tiger_types.Types;
-import org.kohsuke.stapler.StaplerRequest;
 
 public abstract class NodePropertyDescriptor extends Descriptor<NodeProperty<?>> {
 
 	protected NodePropertyDescriptor() {}
-	
-    /**
-     * {@inheritDoc}
-     *
-     * @return
-     *      null to avoid setting an instance of {@link JobProperty} to the target project.
-     */
-    public NodeProperty<?> newInstance(StaplerRequest req, JSONObject formData) throws FormException {
-        return super.newInstance(req, formData);
-    }
 	
     /**
      * Returns true if this {@link NodeProperty} type is applicable to the

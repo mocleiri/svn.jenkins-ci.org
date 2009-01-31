@@ -4,9 +4,7 @@ import hudson.EnvVars;
 import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.BuildListener;
-import hudson.model.Descriptor;
 import hudson.model.Node;
-import hudson.tasks.BuildWrapper;
 import hudson.tasks.Environment;
 
 import java.io.IOException;
