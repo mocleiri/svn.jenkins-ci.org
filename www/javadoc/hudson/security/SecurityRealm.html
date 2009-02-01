@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SecurityRealm (Hudson core 1.279 API)
+SecurityRealm (Hudson core 1.280 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-28">
+<META NAME="date" CONTENT="2009-02-01">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SecurityRealm (Hudson core 1.279 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SecurityRealm (Hudson core 1.279 API)";
+        parent.document.title="SecurityRealm (Hudson core 1.280 API)";
     }
 }
 </SCRIPT>
@@ -329,6 +329,23 @@ Pluggable security realm that connects external user database to Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/security/GroupDetails.html" title="class in hudson.security">GroupDetails</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.html#loadGroupByGroupname(java.lang.String)">loadGroupByGroupname</A></B>(java.lang.String&nbsp;groupname)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If this <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> supports a look up of <A HREF="../../hudson/security/GroupDetails.html" title="class in hudson.security"><CODE>GroupDetails</CODE></A> by their names, override this method
+ to provide the look up.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.acegisecurity.userdetails.UserDetails</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.html#loadUserByUsername(java.lang.String)">loadUserByUsername</A></B>(java.lang.String&nbsp;username)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shortcut for <CODE>UserDetailsService.loadUserByUsername(String)</CODE>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.html#validateCaptcha(java.lang.String)">validateCaptcha</A></B>(java.lang.String&nbsp;text)</CODE>
 
@@ -522,6 +539,55 @@ public boolean <B>allowsSignup</B>()</PRE>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="loadUserByUsername(java.lang.String)"><!-- --></A><H3>
+loadUserByUsername</H3>
+<PRE>
+public final org.acegisecurity.userdetails.UserDetails <B>loadUserByUsername</B>(java.lang.String&nbsp;username)
+                                                                   throws org.acegisecurity.userdetails.UsernameNotFoundException,
+                                                                          org.springframework.dao.DataAccessException</PRE>
+<DL>
+<DD>Shortcut for <CODE>UserDetailsService.loadUserByUsername(String)</CODE>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>never null.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../hudson/security/UserMayOrMayNotExistException.html" title="class in hudson.security">UserMayOrMayNotExistException</A></CODE> - If the security realm cannot even tell if the user exists or not.
+<DD><CODE>org.acegisecurity.userdetails.UsernameNotFoundException</CODE>
+<DD><CODE>org.springframework.dao.DataAccessException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="loadGroupByGroupname(java.lang.String)"><!-- --></A><H3>
+loadGroupByGroupname</H3>
+<PRE>
+public <A HREF="../../hudson/security/GroupDetails.html" title="class in hudson.security">GroupDetails</A> <B>loadGroupByGroupname</B>(java.lang.String&nbsp;groupname)
+                                  throws org.acegisecurity.userdetails.UsernameNotFoundException,
+                                         org.springframework.dao.DataAccessException</PRE>
+<DL>
+<DD>If this <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> supports a look up of <A HREF="../../hudson/security/GroupDetails.html" title="class in hudson.security"><CODE>GroupDetails</CODE></A> by their names, override this method
+ to provide the look up.
+
+ <p>
+ This information, when available, can be used by <A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security"><CODE>AuthorizationStrategy</CODE></A>s to improve the UI and
+ error diagnostics for the user.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.acegisecurity.userdetails.UsernameNotFoundException</CODE>
+<DD><CODE>org.springframework.dao.DataAccessException</CODE></DL>
 </DD>
 </DL>
 <HR>

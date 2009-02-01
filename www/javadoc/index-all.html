@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.279 API)
+Index (Hudson core 1.280 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-28">
+<META NAME="date" CONTENT="2009-02-01">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.279 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.279 API)";
+        parent.document.title="Index (Hudson core 1.280 API)";
     }
 }
 </SCRIPT>
@@ -2321,6 +2321,12 @@ Static method in class hudson.scm.<A HREF="./hudson/scm/RepositoryBrowsers.html"
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>Creates a <A HREF="./hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> for starting processes on the node
  that has this file.
+<DT><A HREF="./hudson/model/AbstractBuild.AbstractRunner.html#createLauncher(hudson.model.BuildListener)"><B>createLauncher(BuildListener)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AbstractBuild.AbstractRunner.html" title="class in hudson.model">AbstractBuild.AbstractRunner</A>
+<DD>Creates a <A HREF="./hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> that this build will use.
+<DT><A HREF="./hudson/model/Build.RunnerImpl.html#createLauncher(hudson.model.BuildListener)"><B>createLauncher(BuildListener)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Build.RunnerImpl.html" title="class in hudson.model">Build.RunnerImpl</A>
+<DD>Decorates the <A HREF="./hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A>
 <DT><A HREF="./hudson/model/Hudson.html#createLauncher(hudson.model.TaskListener)"><B>createLauncher(TaskListener)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
@@ -2671,6 +2677,9 @@ Constructor for class hudson.util.<A HREF="./hudson/util/DecodingStream.html" ti
 <DT><A HREF="./hudson/Functions.html#decompose(org.kohsuke.stapler.StaplerRequest)"><B>decompose(StaplerRequest)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/BuildWrapper.html#decorateLauncher(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><B>decorateLauncher(AbstractBuild, Launcher, BuildListener)</B></A> - 
+Method in class hudson.tasks.<A HREF="./hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>
+<DD>Provides an opportunity for a <A HREF="./hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A> to decorate a <A HREF="./hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> to be used in the build.
 <DT><A HREF="./hudson/util/Secret.html#decrypt(java.lang.String)"><B>decrypt(String)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/Secret.html" title="class in hudson.util">Secret</A>
 <DD>Reverse operation of <A HREF="./hudson/util/Secret.html#getEncryptedValue()"><CODE>Secret.getEncryptedValue()</CODE></A>.
@@ -2693,10 +2702,11 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
 <DT><A HREF="./hudson/Functions.html#defaultToTrue(java.lang.Boolean)"><B>defaultToTrue(Boolean)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
 <DD>Can be used to check a checkbox by default.
-<DT><A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security"><B>DeferredCreationLdapAuthoritiesPopulator</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD>Implementation of <CODE>LdapAuthoritiesPopulator</CODE> that defers creation of a
- <CODE>DefaultLdapAuthoritiesPopulator</CODE> until one is needed.<DT><A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html#DeferredCreationLdapAuthoritiesPopulator(org.acegisecurity.ldap.InitialDirContextFactory, java.lang.String)"><B>DeferredCreationLdapAuthoritiesPopulator(InitialDirContextFactory, String)</B></A> - 
+<DT><A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security"><B>DeferredCreationLdapAuthoritiesPopulator</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD><B>Deprecated.</B>&nbsp;<I>as of 1.280
+      <A HREF="./hudson/security/SecurityRealm.SecurityComponents.html" title="class in hudson.security"><CODE>SecurityRealm.SecurityComponents</CODE></A> are now created after <A HREF="./hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> is created, so
+      the initialization order issue that this code was trying to address no longer exists.</I><DT><A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html#DeferredCreationLdapAuthoritiesPopulator(org.acegisecurity.ldap.InitialDirContextFactory, java.lang.String)"><B>DeferredCreationLdapAuthoritiesPopulator(InitialDirContextFactory, String)</B></A> - 
 Constructor for class hudson.security.<A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security">DeferredCreationLdapAuthoritiesPopulator</A>
-<DD>Constructor.
+<DD><B>Deprecated.</B>&nbsp;Constructor.
 <DT><A HREF="./hudson/util/QueueTaskFilter.html#delegate"><B>delegate</B></A> - 
 Variable in class hudson.util.<A HREF="./hudson/util/QueueTaskFilter.html" title="class in hudson.util">QueueTaskFilter</A>
 <DD>Delegation target.
@@ -3240,6 +3250,12 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DT><A HREF="./hudson/tasks/Maven.DescriptorImpl.html#doCheckMavenHome(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doCheckMavenHome(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Maven.DescriptorImpl.html" title="class in hudson.tasks">Maven.DescriptorImpl</A>
 <DD>Checks if the MAVEN_HOME is valid.
+<DT><A HREF="./hudson/security/AuthorizationMatrixProperty.DescriptorImpl.html#doCheckName(java.lang.String)"><B>doCheckName(String)</B></A> - 
+Method in class hudson.security.<A HREF="./hudson/security/AuthorizationMatrixProperty.DescriptorImpl.html" title="class in hudson.security">AuthorizationMatrixProperty.DescriptorImpl</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html#doCheckName(java.lang.String)"><B>doCheckName(String)</B></A> - 
+Method in class hudson.security.<A HREF="./hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security">GlobalMatrixAuthorizationStrategy.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/MavenModuleSet.html#doCheckRootPOM(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doCheckRootPOM(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>
 <DD>Check the location of POM.
@@ -6342,6 +6358,9 @@ Method in class hudson.security.<A HREF="./hudson/security/AuthorizationMatrixPr
 <DT><A HREF="./hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security">GlobalMatrixAuthorizationStrategy.DescriptorImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/security/GroupDetails.html#getDisplayName()"><B>getDisplayName()</B></A> - 
+Method in class hudson.security.<A HREF="./hudson/security/GroupDetails.html" title="class in hudson.security">GroupDetails</A>
+<DD>Returns the human-readable name used for rendering in HTML.
 <DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.DescriptorImpl.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecurityRealm.DescriptorImpl.html" title="class in hudson.security">HudsonPrivateSecurityRealm.DescriptorImpl</A>
 <DD>&nbsp;
@@ -6907,7 +6926,7 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" title=
 <DD>Gets the list of goals to execute.
 <DT><A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html#getGrantedAuthorities(org.acegisecurity.userdetails.ldap.LdapUserDetails)"><B>getGrantedAuthorities(LdapUserDetails)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security">DeferredCreationLdapAuthoritiesPopulator</A>
-<DD>&nbsp;
+<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/security/AuthorizationMatrixProperty.html#getGroups()"><B>getGroups()</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/AuthorizationMatrixProperty.html" title="class in hudson.security">AuthorizationMatrixProperty</A>
 <DD>&nbsp;
@@ -7747,6 +7766,9 @@ Method in class hudson.search.<A HREF="./hudson/search/CollectionSearchIndex.htm
 <DT><A HREF="./hudson/security/ContainerAuthentication.html#getName()"><B>getName()</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/ContainerAuthentication.html" title="class in hudson.security">ContainerAuthentication</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/security/GroupDetails.html#getName()"><B>getName()</B></A> - 
+Method in class hudson.security.<A HREF="./hudson/security/GroupDetails.html" title="class in hudson.security">GroupDetails</A>
+<DD>Returns the name of the group.
 <DT><A HREF="./hudson/tasks/Ant.AntInstallation.html#getName()"><B>getName()</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>
 <DD>Human readable display name.
@@ -9603,6 +9625,12 @@ Variable in class hudson.security.<A HREF="./hudson/security/Permission.html" ti
 <DT><A HREF="./hudson/security/Permission.html#GROUP"><B>GROUP</B></A> - 
 Static variable in class hudson.security.<A HREF="./hudson/security/Permission.html" title="class in hudson.security">Permission</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/security/LDAPSecurityRealm.html#GROUP_SEARCH"><B>GROUP_SEARCH</B></A> - 
+Static variable in class hudson.security.<A HREF="./hudson/security/LDAPSecurityRealm.html" title="class in hudson.security">LDAPSecurityRealm</A>
+<DD>LDAP filter to look for groups by their names.
+<DT><A HREF="./hudson/security/GroupDetails.html" title="class in hudson.security"><B>GroupDetails</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD>Represents the details of a group.<DT><A HREF="./hudson/security/GroupDetails.html#GroupDetails()"><B>GroupDetails()</B></A> - 
+Constructor for class hudson.security.<A HREF="./hudson/security/GroupDetails.html" title="class in hudson.security">GroupDetails</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/ExecutedMojo.html#groupId"><B>groupId</B></A> - 
 Variable in class hudson.maven.<A HREF="./hudson/maven/ExecutedMojo.html" title="class in hudson.maven">ExecutedMojo</A>
 <DD>Plugin group ID.
@@ -11217,7 +11245,7 @@ Variable in class hudson.matrix.<A HREF="./hudson/matrix/MatrixAggregator.html" 
 <DT><A HREF="./hudson/model/AbstractBuild.AbstractRunner.html#launcher"><B>launcher</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/AbstractBuild.AbstractRunner.html" title="class in hudson.model">AbstractBuild.AbstractRunner</A>
 <DD>Since configuration can be changed while a build is in progress,
- stick to one launcher and use it.
+ create a launcher once and stick to it for the entire build duration.
 <DT><A HREF="./hudson/Launcher.LocalLauncher.html" title="class in hudson"><B>Launcher.LocalLauncher</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD><A HREF="./hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> that launches process locally.<DT><A HREF="./hudson/Launcher.LocalLauncher.html#Launcher.LocalLauncher(hudson.model.TaskListener)"><B>Launcher.LocalLauncher(TaskListener)</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/Launcher.LocalLauncher.html" title="class in hudson">Launcher.LocalLauncher</A>
 <DD>&nbsp;
@@ -11500,6 +11528,16 @@ Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudso
 <DT><A HREF="./hudson/Util.html#loadFile(java.io.File, java.nio.charset.Charset)"><B>loadFile(File, Charset)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.html#loadGroupByGroupname(java.lang.String)"><B>loadGroupByGroupname(String)</B></A> - 
+Method in class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecurityRealm.html" title="class in hudson.security">HudsonPrivateSecurityRealm</A>
+<DD>This implementation doesn't support groups.
+<DT><A HREF="./hudson/security/LDAPSecurityRealm.html#loadGroupByGroupname(java.lang.String)"><B>loadGroupByGroupname(String)</B></A> - 
+Method in class hudson.security.<A HREF="./hudson/security/LDAPSecurityRealm.html" title="class in hudson.security">LDAPSecurityRealm</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/security/SecurityRealm.html#loadGroupByGroupname(java.lang.String)"><B>loadGroupByGroupname(String)</B></A> - 
+Method in class hudson.security.<A HREF="./hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>
+<DD>If this <A HREF="./hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> supports a look up of <A HREF="./hudson/security/GroupDetails.html" title="class in hudson.security"><CODE>GroupDetails</CODE></A> by their names, override this method
+ to provide the look up.
 <DT><A HREF="./hudson/model/Label.html#loadStatistics"><B>loadStatistics</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/Label.html" title="class in hudson.model">Label</A>
 <DD>&nbsp;
@@ -11518,6 +11556,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.HudsonUserDetailsService.html#loadUserByUsername(java.lang.String)"><B>loadUserByUsername(String)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecurityRealm.HudsonUserDetailsService.html" title="class in hudson.security">HudsonPrivateSecurityRealm.HudsonUserDetailsService</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/security/SecurityRealm.html#loadUserByUsername(java.lang.String)"><B>loadUserByUsername(String)</B></A> - 
+Method in class hudson.security.<A HREF="./hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>
+<DD>Shortcut for <CODE>UserDetailsService.loadUserByUsername(String)</CODE>.
 <DT><A HREF="./hudson/security/UserDetailsServiceProxy.html#loadUserByUsername(java.lang.String)"><B>loadUserByUsername(String)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/UserDetailsServiceProxy.html" title="class in hudson.security">UserDetailsServiceProxy</A>
 <DD>&nbsp;
@@ -14123,6 +14164,9 @@ Constructor for class hudson.model.<A HREF="./hudson/model/ResourceController.ht
 <DT><A HREF="./hudson/model/ResourceList.html" title="class in hudson.model"><B>ResourceList</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>List of <A HREF="./hudson/model/Resource.html" title="class in hudson.model"><CODE>Resource</CODE></A>s that an activity needs.<DT><A HREF="./hudson/model/ResourceList.html#ResourceList()"><B>ResourceList()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/ResourceList.html" title="class in hudson.model">ResourceList</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/FormFieldValidator.html#respond(java.lang.String)"><B>respond(String)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A>
+<DD>Sends out an arbitrary HTML fragment.
 <DT><A HREF="./hudson/util/FormFieldValidator.html#response"><B>response</B></A> - 
 Variable in class hudson.util.<A HREF="./hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A>
 <DD>&nbsp;
@@ -14652,6 +14696,9 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title
 <DT><A HREF="./hudson/security/ContainerAuthentication.html#setAuthenticated(boolean)"><B>setAuthenticated(boolean)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/ContainerAuthentication.html" title="class in hudson.security">ContainerAuthentication</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Hudson.html#setAuthorizationStrategy(hudson.security.AuthorizationStrategy)"><B>setAuthorizationStrategy(AuthorizationStrategy)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/spring/BeanConfiguration.html#setAutowire(java.lang.String)"><B>setAutowire(String)</B></A> - 
 Method in interface hudson.util.spring.<A HREF="./hudson/util/spring/BeanConfiguration.html" title="interface in hudson.util.spring">BeanConfiguration</A>
 <DD>Sets the autowire type, either "byType" or "byName"
@@ -14688,7 +14735,7 @@ Method in class hudson.org.apache.tools.ant.taskdefs.<A HREF="./hudson/org/apach
  it disables compression.
 <DT><A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html#setConvertToUpperCase(boolean)"><B>setConvertToUpperCase(boolean)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security">DeferredCreationLdapAuthoritiesPopulator</A>
-<DD>&nbsp;
+<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html#setCvsExe(java.lang.String)"><B>setCvsExe(String)</B></A> - 
 Method in class hudson.org.apache.tools.ant.taskdefs.<A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html" title="class in hudson.org.apache.tools.ant.taskdefs">AbstractCvsTask</A>
 <DD>&nbsp;
@@ -14718,7 +14765,7 @@ Method in class hudson.scm.<A HREF="./hudson/scm/CVSChangeLogSet.File.html" titl
 <DD>&nbsp;
 <DT><A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html#setDefaultRole(java.lang.String)"><B>setDefaultRole(String)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security">DeferredCreationLdapAuthoritiesPopulator</A>
-<DD>&nbsp;
+<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/tasks/Mailer.DescriptorImpl.html#setDefaultSuffix(java.lang.String)"><B>setDefaultSuffix(String)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Mailer.DescriptorImpl.html" title="class in hudson.tasks">Mailer.DescriptorImpl</A>
 <DD>&nbsp;
@@ -14821,13 +14868,13 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenEmbedder.html" title="
 <DD>&nbsp;
 <DT><A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html#setGroupRoleAttribute(java.lang.String)"><B>setGroupRoleAttribute(String)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security">DeferredCreationLdapAuthoritiesPopulator</A>
-<DD>&nbsp;
+<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html#setGroupSearchBase(java.lang.String)"><B>setGroupSearchBase(String)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security">DeferredCreationLdapAuthoritiesPopulator</A>
-<DD>&nbsp;
+<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html#setGroupSearchFilter(java.lang.String)"><B>setGroupSearchFilter(String)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security">DeferredCreationLdapAuthoritiesPopulator</A>
-<DD>&nbsp;
+<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/tasks/Mailer.DescriptorImpl.html#setHudsonUrl(java.lang.String)"><B>setHudsonUrl(String)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Mailer.DescriptorImpl.html" title="class in hudson.tasks">Mailer.DescriptorImpl</A>
 <DD>&nbsp;
@@ -14836,7 +14883,7 @@ Method in class hudson.model.<A HREF="./hudson/model/HealthReport.html" title="c
 <DD>Setter for property 'iconUrl'.
 <DT><A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html#setInitialDirContextFactory(org.acegisecurity.ldap.InitialDirContextFactory)"><B>setInitialDirContextFactory(InitialDirContextFactory)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security">DeferredCreationLdapAuthoritiesPopulator</A>
-<DD>&nbsp;
+<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/tasks/Maven.DescriptorImpl.html#setInstallations(hudson.tasks.Maven.MavenInstallation...)"><B>setInstallations(Maven.MavenInstallation...)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Maven.DescriptorImpl.html" title="class in hudson.tasks">Maven.DescriptorImpl</A>
 <DD>&nbsp;
@@ -15007,7 +15054,7 @@ Method in class hudson.scm.<A HREF="./hudson/scm/SubversionChangeLogSet.LogEntry
 <DD>&nbsp;
 <DT><A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html#setRolePrefix(java.lang.String)"><B>setRolePrefix(String)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security">DeferredCreationLdapAuthoritiesPopulator</A>
-<DD>&nbsp;
+<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/model/AbstractProject.html#setScm(hudson.scm.SCM)"><B>setScm(SCM)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>&nbsp;
@@ -15016,7 +15063,7 @@ Method in class hudson.model.<A HREF="./hudson/model/HealthReport.html" title="c
 <DD>Setter for property 'score'.
 <DT><A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html#setSearchSubtree(boolean)"><B>setSearchSubtree(boolean)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security">DeferredCreationLdapAuthoritiesPopulator</A>
-<DD>&nbsp;
+<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#setSecurityRealm(hudson.security.SecurityRealm)"><B>setSecurityRealm(SecurityRealm)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
@@ -16380,6 +16427,18 @@ Static method in class hudson.security.<A HREF="./hudson/security/Messages.html"
 <DD>Unable to query user information: {0}
 <DT><A HREF="./hudson/maven/MavenEmbedder.html#userHome"><B>userHome</B></A> - 
 Static variable in class hudson.maven.<A HREF="./hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/security/UserMayOrMayNotExistException.html" title="class in hudson.security"><B>UserMayOrMayNotExistException</B></A> - Exception in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD>Thrown from <CODE>UserDetailsService.loadUserByUsername(String)</CODE>
+ to indicate that the underlying <A HREF="./hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> is incapable
+ of retrieving the information, and furthermore, the system cannot
+ tell if such an user exists or not.<DT><A HREF="./hudson/security/UserMayOrMayNotExistException.html#UserMayOrMayNotExistException(java.lang.String)"><B>UserMayOrMayNotExistException(String)</B></A> - 
+Constructor for exception hudson.security.<A HREF="./hudson/security/UserMayOrMayNotExistException.html" title="class in hudson.security">UserMayOrMayNotExistException</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/security/UserMayOrMayNotExistException.html#UserMayOrMayNotExistException(java.lang.String, java.lang.Object)"><B>UserMayOrMayNotExistException(String, Object)</B></A> - 
+Constructor for exception hudson.security.<A HREF="./hudson/security/UserMayOrMayNotExistException.html" title="class in hudson.security">UserMayOrMayNotExistException</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/security/UserMayOrMayNotExistException.html#UserMayOrMayNotExistException(java.lang.String, java.lang.Throwable)"><B>UserMayOrMayNotExistException(String, Throwable)</B></A> - 
+Constructor for exception hudson.security.<A HREF="./hudson/security/UserMayOrMayNotExistException.html" title="class in hudson.security">UserMayOrMayNotExistException</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.SignupInfo.html#username"><B>username</B></A> - 
 Variable in class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecurityRealm.SignupInfo.html" title="class in hudson.security">HudsonPrivateSecurityRealm.SignupInfo</A>

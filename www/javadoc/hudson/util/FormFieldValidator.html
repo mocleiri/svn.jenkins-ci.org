@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FormFieldValidator (Hudson core 1.279 API)
+FormFieldValidator (Hudson core 1.280 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-28">
+<META NAME="date" CONTENT="2009-02-01">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FormFieldValidator (Hudson core 1.279 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FormFieldValidator (Hudson core 1.279 API)";
+        parent.document.title="FormFieldValidator (Hudson core 1.280 API)";
     }
 }
 </SCRIPT>
@@ -392,6 +392,14 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#respond(java.lang.String)">respond</A></B>(java.lang.String&nbsp;html)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sends out an arbitrary HTML fragment.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#warning(java.lang.String)">warning</A></B>(java.lang.String&nbsp;message)</CODE>
 
 <BR>
@@ -625,6 +633,24 @@ public void <B>ok</B>()
                javax.servlet.ServletException</PRE>
 <DL>
 <DD>Sends out an HTML fragment that indicates a success.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="respond(java.lang.String)"><!-- --></A><H3>
+respond</H3>
+<PRE>
+public void <B>respond</B>(java.lang.String&nbsp;html)
+             throws java.io.IOException,
+                    javax.servlet.ServletException</PRE>
+<DL>
+<DD>Sends out an arbitrary HTML fragment.
 <P>
 <DD><DL>
 

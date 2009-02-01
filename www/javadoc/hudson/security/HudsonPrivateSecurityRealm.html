@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonPrivateSecurityRealm (Hudson core 1.279 API)
+HudsonPrivateSecurityRealm (Hudson core 1.280 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-28">
+<META NAME="date" CONTENT="2009-02-01">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonPrivateSecurityRealm (Hudson core 1.279 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonPrivateSecurityRealm (Hudson core 1.279 API)";
+        parent.document.title="HudsonPrivateSecurityRealm (Hudson core 1.280 API)";
     }
 }
 </SCRIPT>
@@ -323,6 +323,14 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenient short-cut for <code>getACL().hasPermission(permission)</code></TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/security/GroupDetails.html" title="class in hudson.security">GroupDetails</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/HudsonPrivateSecurityRealm.html#loadGroupByGroupname(java.lang.String)">loadGroupByGroupname</A></B>(java.lang.String&nbsp;groupname)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This implementation doesn't support groups.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.security.SecurityRealm"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -330,7 +338,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.security.<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/security/SecurityRealm.html#createFilter(javax.servlet.FilterConfig)">createFilter</A>, <A HREF="../../hudson/security/SecurityRealm.html#doCaptcha(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCaptcha</A>, <A HREF="../../hudson/security/SecurityRealm.html#findBean(java.lang.Class, org.springframework.context.ApplicationContext)">findBean</A>, <A HREF="../../hudson/security/SecurityRealm.html#getAuthenticationGatewayUrl()">getAuthenticationGatewayUrl</A>, <A HREF="../../hudson/security/SecurityRealm.html#getLoginUrl()">getLoginUrl</A>, <A HREF="../../hudson/security/SecurityRealm.html#getSecurityComponents()">getSecurityComponents</A>, <A HREF="../../hudson/security/SecurityRealm.html#validateCaptcha(java.lang.String)">validateCaptcha</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/security/SecurityRealm.html#createFilter(javax.servlet.FilterConfig)">createFilter</A>, <A HREF="../../hudson/security/SecurityRealm.html#doCaptcha(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCaptcha</A>, <A HREF="../../hudson/security/SecurityRealm.html#findBean(java.lang.Class, org.springframework.context.ApplicationContext)">findBean</A>, <A HREF="../../hudson/security/SecurityRealm.html#getAuthenticationGatewayUrl()">getAuthenticationGatewayUrl</A>, <A HREF="../../hudson/security/SecurityRealm.html#getLoginUrl()">getLoginUrl</A>, <A HREF="../../hudson/security/SecurityRealm.html#getSecurityComponents()">getSecurityComponents</A>, <A HREF="../../hudson/security/SecurityRealm.html#loadUserByUsername(java.lang.String)">loadUserByUsername</A>, <A HREF="../../hudson/security/SecurityRealm.html#validateCaptcha(java.lang.String)">validateCaptcha</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -415,6 +423,27 @@ public boolean <B>allowsSignup</B>()</PRE>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="loadGroupByGroupname(java.lang.String)"><!-- --></A><H3>
+loadGroupByGroupname</H3>
+<PRE>
+public <A HREF="../../hudson/security/GroupDetails.html" title="class in hudson.security">GroupDetails</A> <B>loadGroupByGroupname</B>(java.lang.String&nbsp;groupname)
+                                  throws org.acegisecurity.userdetails.UsernameNotFoundException,
+                                         org.springframework.dao.DataAccessException</PRE>
+<DL>
+<DD>This implementation doesn't support groups.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/security/SecurityRealm.html#loadGroupByGroupname(java.lang.String)">loadGroupByGroupname</A></CODE> in class <CODE><A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.acegisecurity.userdetails.UsernameNotFoundException</CODE>
+<DD><CODE>org.springframework.dao.DataAccessException</CODE></DL>
 </DD>
 </DL>
 <HR>

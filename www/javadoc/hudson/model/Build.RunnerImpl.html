@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Build.RunnerImpl (Hudson core 1.279 API)
+Build.RunnerImpl (Hudson core 1.280 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-28">
+<META NAME="date" CONTENT="2009-02-01">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Build.RunnerImpl (Hudson core 1.279 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Build.RunnerImpl (Hudson core 1.279 API)";
+        parent.document.title="Build.RunnerImpl (Hudson core 1.280 API)";
     }
 }
 </SCRIPT>
@@ -167,6 +167,14 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Build.RunnerImpl.html#createLauncher(hudson.model.BuildListener)">createLauncher</A></B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decorates the <A HREF="../../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;<A HREF="../../hudson/model/Result.html" title="class in hudson.model">Result</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Build.RunnerImpl.html#doRun(hudson.model.BuildListener)">doRun</A></B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
 
@@ -251,6 +259,27 @@ protected <A HREF="../../hudson/model/Result.html" title="class in hudson.model"
       Return a non-null value to abort the build right there with the specified result code.
 <DT><B>Throws:</B>
 <DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createLauncher(hudson.model.BuildListener)"><!-- --></A><H3>
+createLauncher</H3>
+<PRE>
+protected <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>createLauncher</B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)
+                           throws java.io.IOException,
+                                  java.lang.InterruptedException</PRE>
+<DL>
+<DD>Decorates the <A HREF="../../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html#createLauncher(hudson.model.BuildListener)">createLauncher</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html" title="class in hudson.model">AbstractBuild.AbstractRunner</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>listener</CODE> - Always non-null. Connected to the main build output.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractBuild.AbstractRunner (Hudson core 1.279 API)
+AbstractBuild.AbstractRunner (Hudson core 1.280 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-28">
+<META NAME="date" CONTENT="2009-02-01">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractBuild.AbstractRunner (Hudson core 1.279 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractBuild.AbstractRunner (Hudson core 1.279 API)";
+        parent.document.title="AbstractBuild.AbstractRunner (Hudson core 1.280 API)";
     }
 }
 </SCRIPT>
@@ -129,7 +129,7 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Since configuration can be changed while a build is in progress,
- stick to one launcher and use it.</TD>
+ create a launcher once and stick to it for the entire build duration.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -166,6 +166,14 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs final clean up action.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html#createLauncher(hudson.model.BuildListener)">createLauncher</A></B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a <A HREF="../../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> that this build will use.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -284,7 +292,7 @@ launcher</H3>
 protected <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>launcher</B></PRE>
 <DL>
 <DD>Since configuration can be changed while a build is in progress,
- stick to one launcher and use it.
+ create a launcher once and stick to it for the entire build duration.
 <P>
 <DL>
 </DL>
@@ -349,6 +357,28 @@ public <A HREF="../../hudson/model/Result.html" title="class in hudson.model">Re
 
 <DT><B>Throws:</B>
 <DD><CODE>java.lang.Exception</CODE> - exception will be recorded and the build will be considered a failure.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createLauncher(hudson.model.BuildListener)"><!-- --></A><H3>
+createLauncher</H3>
+<PRE>
+protected <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>createLauncher</B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)
+                           throws java.io.IOException,
+                                  java.lang.InterruptedException</PRE>
+<DL>
+<DD>Creates a <A HREF="../../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> that this build will use. This can be overridden by derived types
+ to decorate the resulting <A HREF="../../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>listener</CODE> - Always non-null. Connected to the main build output.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>

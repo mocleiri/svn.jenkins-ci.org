@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.279 API)
+Deprecated List (Hudson core 1.280 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-28">
+<META NAME="date" CONTENT="2009-02-01">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.279 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.279 API)";
+        parent.document.title="Deprecated List (Hudson core 1.280 API)";
     }
 }
 </SCRIPT>
@@ -128,6 +128,13 @@ function windowTitle()
 <TD><A HREF="hudson/util/CharSpool.html" title="class in hudson.util">hudson.util.CharSpool</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>moved to stapler</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security">hudson.security.DeferredCreationLdapAuthoritiesPopulator</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.280
+      <A HREF="hudson/security/SecurityRealm.SecurityComponents.html" title="class in hudson.security"><CODE>SecurityRealm.SecurityComponents</CODE></A> are now created after <A HREF="hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> is created, so
+      the initialization order issue that this code was trying to address no longer exists.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">hudson.model.listeners.JobListener</A>

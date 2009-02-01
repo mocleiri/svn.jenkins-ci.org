@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.security (Hudson core 1.279 API)
+hudson.security (Hudson core 1.280 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-01-28">
+<META NAME="date" CONTENT="2009-02-01">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.security (Hudson core 1.279 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.security (Hudson core 1.279 API)";
+        parent.document.title="hudson.security (Hudson core 1.280 API)";
     }
 }
 </SCRIPT>
@@ -163,8 +163,9 @@ Security-related code
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security">DeferredCreationLdapAuthoritiesPopulator</A></B></TD>
-<TD>Implementation of <CODE>LdapAuthoritiesPopulator</CODE> that defers creation of a
- <CODE>DefaultLdapAuthoritiesPopulator</CODE> until one is needed.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.280
+      <A HREF="../../hudson/security/SecurityRealm.SecurityComponents.html" title="class in hudson.security"><CODE>SecurityRealm.SecurityComponents</CODE></A> are now created after <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> is created, so
+      the initialization order issue that this code was trying to address no longer exists.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/FullControlOnceLoggedInAuthorizationStrategy.html" title="class in hudson.security">FullControlOnceLoggedInAuthorizationStrategy</A></B></TD>
@@ -183,6 +184,10 @@ Security-related code
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security">GlobalMatrixAuthorizationStrategy.DescriptorImpl</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/security/GroupDetails.html" title="class in hudson.security">GroupDetails</A></B></TD>
+<TD>Represents the details of a group.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/HttpSessionContextIntegrationFilter2.html" title="class in hudson.security">HttpSessionContextIntegrationFilter2</A></B></TD>
@@ -324,6 +329,23 @@ Security-related code
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/SecurityMode.html" title="enum in hudson.security">SecurityMode</A></B></TD>
 <TD>What security enforcement does Hudson do?</TD>
+</TR>
+</TABLE>
+&nbsp;
+
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Exception Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/security/UserMayOrMayNotExistException.html" title="class in hudson.security">UserMayOrMayNotExistException</A></B></TD>
+<TD>Thrown from <CODE>UserDetailsService.loadUserByUsername(String)</CODE>
+ to indicate that the underlying <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> is incapable
+ of retrieving the information, and furthermore, the system cannot
+ tell if such an user exists or not.</TD>
 </TR>
 </TABLE>
 &nbsp;
