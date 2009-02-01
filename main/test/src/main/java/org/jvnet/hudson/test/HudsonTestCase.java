@@ -364,8 +364,9 @@ public abstract class HudsonTestCase extends TestCase {
      * Creates and launches a new slave on the local host.
      */
     public DumbSlave createSlave(Label l) throws Exception {
-        CommandLauncher launcher = new CommandLauncher(
-                System.getProperty("java.home") + "/bin/java -jar " + hudson.getJnlpJars("slave.jar").getURL().getPath());
+		CommandLauncher launcher = new CommandLauncher(
+                System.getProperty("java.home") + "/bin/java -jar \"" + 
+                new File(hudson.getJnlpJars("slave.jar").getURL().getPath()).getAbsolutePath() + "\"");
 
         // this synchronization block is so that we don't end up adding the same slave name more than once.
         synchronized (hudson) {
