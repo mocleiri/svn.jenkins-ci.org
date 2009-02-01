@@ -236,8 +236,6 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
      */
     private String systemMessage;
     
-    private Map<String,String> envVars;
-
     /**
      * Root directory of the system.
      */

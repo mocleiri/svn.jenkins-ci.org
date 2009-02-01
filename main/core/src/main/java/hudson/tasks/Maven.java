@@ -15,6 +15,7 @@ import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.model.Computer;
 import hudson.model.Descriptor;
+import hudson.model.EnvironmentSpecific;
 import hudson.model.Executor;
 import hudson.model.Hudson;
 import hudson.model.Node;
@@ -318,7 +319,9 @@ public class Maven extends Builder {
         }
     }
 
-    public static final class MavenInstallation implements Serializable {
+    public static final class MavenInstallation implements Serializable, 
+    	EnvironmentSpecific<MavenInstallation> {
+    	
         private final String name;
         private final String mavenHome;
 
@@ -389,7 +392,7 @@ public class Maven extends Builder {
         
         /**
          * Returns a copy of this MavenInstallation in which the variables in the path have
-         * been resolved using the properties for the current node. 
+         * been resolved using the given environment 
          */
         @SuppressWarnings("unchecked")
 		public MavenInstallation forEnvironment(Map<String,String> environment) {

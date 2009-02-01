@@ -15,7 +15,7 @@ import java.util.Map;
  *
  * @author Kohsuke Kawaguchi
  */
-public final class JDK {
+public final class JDK implements EnvironmentSpecific<JDK> {
     private final String name;
     private final String javaHome;
 

@@ -324,15 +324,6 @@ public abstract class Slave implements Node, Serializable {
         return new FilePath(ch,absolutePath);
     }
 
-//	public Map<String, String> getEnvVars() {
-//		EnvironmentVariablesNodeProperty property = getNodeProperty(EnvironmentVariablesNodeProperty.class);
-//		if (property != null) {
-//			return property.getEnvVars();
-//		} else {
-//			return new HashMap<String,String>();
-//		}
-//	}
-
 	/**
      * Root directory on this slave where all the job workspaces are laid out.
      * @return

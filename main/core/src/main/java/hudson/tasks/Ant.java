@@ -9,6 +9,7 @@ import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
+import hudson.model.EnvironmentSpecific;
 import hudson.model.ParametersAction;
 import hudson.model.TaskListener;
 import hudson.remoting.Callable;
@@ -291,7 +292,9 @@ public class Ant extends Builder {
         }
     }
 
-    public static final class AntInstallation implements Serializable {
+    public static final class AntInstallation 
+    	implements Serializable, EnvironmentSpecific<AntInstallation> {
+    	
         private final String name;
         private final String antHome;
 

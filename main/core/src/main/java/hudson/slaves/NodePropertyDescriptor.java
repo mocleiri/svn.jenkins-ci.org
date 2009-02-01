@@ -1,6 +1,7 @@
 package hudson.slaves;
 
 import hudson.model.Descriptor;
+import hudson.model.Node;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -16,14 +17,14 @@ public abstract class NodePropertyDescriptor extends Descriptor<NodeProperty<?>>
      * given job type.
      * 
      * <p>
-     * The default implementation of this method checks if the given job type is assignable to 'N' of
+     * The default implementation of this method checks if the given node type is assignable to 'N' of
      * {@link NodeProperty}<tt>&lt;N></tt>, but subtypes can extend this to change this behavior.
      *
      * @return
      *      true to indicate applicable, in which case the property will be
-     *      displayed in the configuration screen of this job.
+     *      displayed in the configuration screen of this node.
      */
-    public boolean isApplicable(Class<? extends NodeProperty<?>> nodeType) {
+    public boolean isApplicable(Class<? extends Node> nodeType) {
         Type parameterization = Types.getBaseClass(clazz, NodeProperty.class);
         if (parameterization instanceof ParameterizedType) {
             ParameterizedType pt = (ParameterizedType) parameterization;

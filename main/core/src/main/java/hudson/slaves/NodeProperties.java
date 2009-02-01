@@ -5,22 +5,25 @@ import hudson.model.Node;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildWrapperDescriptor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NodeProperties {
-    public static final List<NodePropertyDescriptor> PROPERTIES = Descriptor.toList(
-    		(NodePropertyDescriptor) EnvironmentVariablesNodeProperty.DESCRIPTOR
-    );
+	public static final List<NodePropertyDescriptor> PROPERTIES = Descriptor
+			.toList((NodePropertyDescriptor) EnvironmentVariablesNodeProperty.DESCRIPTOR);
 
-    /**
-     * List up all {@link NodePropertyDescriptor}s that are applicable for the given project.
-     *
-     * @return
-     *      The signature doesn't use {@link BuildWrapperDescriptor} to maintain compatibility
-     *      with {@link BuildWrapper} implementations before 1.150.
-     */
-    public static List<NodePropertyDescriptor> getFor(Node node) {
-		return PROPERTIES;
-    }
+	/**
+	 * List up all {@link NodePropertyDescriptor}s that are applicable for the
+	 * given project.
+	 */
+	public static List<NodePropertyDescriptor> getFor(Node node) {
+		List<NodePropertyDescriptor> result = new ArrayList<NodePropertyDescriptor>();
+		for (NodePropertyDescriptor npd : PROPERTIES) {
+			if (npd.isApplicable(node.getClass())) {
+				result.add(npd);
+			}
+		}
+		return result;
+	}
 
 }

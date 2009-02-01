@@ -239,8 +239,8 @@ final class MavenProcessFactory implements ProcessCache.Factory {
         mvn = mvn.forEnvironment(envVars);
 
         // find classworlds.jar
-        String mavenHome = hudson.Util.replaceMacro(mvn.getMavenHome(), envVars);
-        String classWorldsJar = launcher.getChannel().call(new GetClassWorldsJar(mavenHome,listener));
+        String classWorldsJar = launcher.getChannel().call(
+        		new GetClassWorldsJar(mvn.getMavenHome(), listener));
 
         boolean isMaster = getCurrentNode()== Hudson.getInstance();
         FilePath slaveRoot=null;
@@ -269,7 +269,7 @@ final class MavenProcessFactory implements ProcessCache.Factory {
         args.add(Main.class.getName());
 
         // M2_HOME
-        args.add(Util.replaceMacro(mvn.getMavenHome(), envVars));
+        args.add(mvn.getMavenHome());
 
         // remoting.jar
         args.add(launcher.getChannel().call(new GetRemotingJar()));
