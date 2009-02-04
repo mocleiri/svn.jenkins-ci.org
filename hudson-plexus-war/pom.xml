@@ -1,0 +1,241 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.sonatype.haven</groupId>
+    <artifactId>hudson-plexus</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  
+  <artifactId>hudson-war</artifactId> <!-- need this artifactId, since hpi plugin looks for it -->
+  <packaging>war</packaging>
+  
+  <build>
+    <directory>target</directory>
+    <finalName>hudson</finalName>
+    
+    <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.0</version>
+        <configuration>
+          <webResources>
+            <resource>
+              <directory>${hudson.main}/war/resources</directory>
+              <!--excludes> not much size improvements
+                <exclude>**/*-debug.js</exclude>
+              </excludes-->
+            </resource>
+            <resource>
+              <directory>${basedir}/target/generated-resources</directory>
+            </resource>
+          </webResources>
+          <!-- for putting Main-Class into war -->
+          <archive>
+            <manifest>
+              <mainClass>Main</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jvnet.maven-antrun-extended-plugin</groupId>
+        <artifactId>maven-antrun-extended-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>package</id>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <!-- deploy the war as a jar, so that the tests can pull this into the classpath -->
+                <attachArtifact file="target/hudson.war" classifier="war-for-test" type="jar" />
+              </tasks>
+            </configuration>
+          </execution>
+          <execution>
+            <id>resgen</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <mkdir dir="target/generated-resources" />
+
+                <!-- put executable war header -->
+                <resolveArtifact artifactId="executable-war" property="executable-war.jar" />
+                <unjar src="${executable-war.jar}" dest="target/generated-resources">
+                  <patternset>
+                    <include name="**/*.class" />
+                  </patternset>
+                </unjar>
+
+                <!-- dependencies that goes to unusual locations -->
+                <resolveArtifact artifactId="remoting" tofile="${basedir}/target/generated-resources/WEB-INF/remoting.jar" />
+                <resolveArtifact artifactId="remoting" tofile="${basedir}/target/generated-resources/WEB-INF/slave.jar" />
+                <resolveArtifact artifactId="winstone" tofile="${basedir}/target/generated-resources/winstone.jar" />
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <!-- this is really just a patched version of maven-jetty-plugin to workaround issue #932 -->
+        <groupId>org.jvnet.hudson.tools</groupId>
+        <artifactId>maven-hudson-dev-plugin</artifactId>
+        <version>6.1.7</version>
+        <configuration>
+          <contextPath>${contextPath}</contextPath>
+          <!--
+            read directly from core module's output directory,
+            so that changes are picked up right away without running mvn.
+          -->
+          <classesDirectory>${hudson.main}/core/target/classes</classesDirectory>
+          <!-- use the test classpath for loading resources, since this takes priority -->
+          <testClassesDirectory>${hudson.main}/core/src/main/resources</testClassesDirectory>
+          <useTestClasspath>true</useTestClasspath>
+          <!--
+            Reload webapp when you hit ENTER. (See JETTY-282 for more)
+          -->
+          <consoleForceReload>true</consoleForceReload>
+          <webAppSourceDirectory>${hudson.main}/war/resources</webAppSourceDirectory>
+          <userRealms>
+            <userRealm implementation="org.mortbay.jetty.security.HashUserRealm">
+              <name>default</name>
+              <config>${hudson.main}/war/src/realm.properties</config>
+            </userRealm>
+          </userRealms>
+          <systemProperties>
+            <systemProperty>
+              <name>HUDSON_HOME</name>
+              <value>${HUDSON_HOME}</value>
+            </systemProperty>
+            <systemProperty>
+              <!-- always reload views during debugging -->
+              <name>stapler.jelly.noCache</name>
+              <value>true</value>
+            </systemProperty>
+            <systemProperty>
+              <!-- load view resources from the source directly, again for real time change -->
+              <name>stapler.resourcePath</name>
+              <value>${hudson.main}/core/src/main/resources</value>
+            </systemProperty>
+            <systemProperty>
+              <!-- select the Plexus plugin strategy -->
+              <name>hudson.PluginStrategy</name>
+              <value>hudson.plexus.PlexusPluginStrategy</value>
+            </systemProperty>
+          </systemProperties>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.sonatype.haven</groupId>
+      <artifactId>hudson-plexus-strategy</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jvnet.hudson.main</groupId>
+      <artifactId>hudson-core</artifactId>
+      <version>${hudson.version}</version>
+      <exclusions>
+        <!-- jars that are not needed in war -->
+        <exclusion>
+          <groupId>javax.servlet</groupId>
+          <artifactId>servlet-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>xalan</groupId>
+          <artifactId>xalan</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>javax.servlet</groupId>
+          <artifactId>jsp-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>xerces</groupId>
+          <artifactId>xercesImpl</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>xml-apis</groupId>
+          <artifactId>xml-apis</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>xerces</groupId>
+          <artifactId>xmlParserAPIs</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>msv</groupId>
+          <artifactId>xsdlib</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>msv</groupId>
+          <artifactId>relaxngDatatype</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>forehead</groupId>
+          <artifactId>forehead</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>jdom</groupId>
+          <artifactId>jdom</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>xom</groupId>
+          <artifactId>xom</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>commons-cli</groupId>
+          <artifactId>commons-cli</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>jaxme</groupId>
+          <artifactId>jaxme-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>stax</groupId>
+          <artifactId>stax-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>pull-parser</groupId>
+          <artifactId>pull-parser</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <!--
+        classes in this jar will be rebundled into the war.
+        marking it provided so that this won't show up in WEB-INF/lib
+      -->
+      <groupId>org.jvnet.hudson</groupId>
+      <artifactId>executable-war</artifactId>
+      <version>1.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <!--
+        this dependency is just so that we can put winstone.jar in the war.
+        marking it provided so that this won't show up in WEB-INF/lib
+      -->
+      <groupId>org.jvnet.hudson.winstone</groupId>
+      <artifactId>winstone</artifactId>
+      <version>0.9.10-hudson-6</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  
+  <properties>
+    <hudson.main>${project.basedir}/../../hudson/main</hudson.main>
+    <HUDSON_HOME>${basedir}/work</HUDSON_HOME>
+    <contextPath>/</contextPath><!-- context path during test -->
+  </properties>
+</project>
