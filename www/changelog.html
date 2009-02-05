@@ -17,6 +17,9 @@
 <a name=v1.281><h3>What's new in 1.281</h3></a>
 <ul class=image>
   <li class='major bug'>
+    Remote API access to test results was broken since 1.272.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2760">issue 2760</a>)
+  <li class='major bug'>
     Fixed problem in 1.280 where saving top-level settings with LDAP authentication resulted in very large config.xml
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2958">issue 2958</a>)
   <li class=bug>
@@ -24,6 +27,9 @@
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2959">issue 2959</a>)
   <li class=rfe>
     <tt>hudson.war</tt> now supports the <tt>--daemon</tt> option for forking into background on Unix.
+  <li class=rfe>
+    Remote API supports stdout/stderr from test reports.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2760">issue 2760</a>)
 </ul>
 </div><!--=END=-->
 <a name=v1.280><h3>What's new in 1.280</h3></a>
@@ -192,9 +198,6 @@
   <li class=rfe>
     Remote XML API now suports the 'exclude' query parameter to remove nodes that match the specified XPath.
     (<a href="http://d.hatena.ne.jp/masanobuimai/20090109#1231507972">report</a>)
-  <li class=rfe>
-    Remote API supports stdout/stderr from test reports.
-    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2760">issue 2760</a>)
 </ul>
 <a name=v1.271><h3>What's new in 1.271</h3></a>
 <ul class=image>
