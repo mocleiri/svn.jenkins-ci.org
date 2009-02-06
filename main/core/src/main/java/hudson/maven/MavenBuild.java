@@ -5,14 +5,20 @@ import hudson.Util;
 import hudson.maven.agent.AbortException;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
+import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Computer;
 import hudson.model.DependencyGraph;
 import hudson.model.Hudson;
+import hudson.model.Node;
 import hudson.model.Result;
 import hudson.model.Run;
 import hudson.remoting.Channel;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.ChangeLogSet.Entry;
+import hudson.slaves.NodeProperties;
+import hudson.slaves.NodeProperty;
+import hudson.tasks.Environment;
 import hudson.util.ArgumentListBuilder;
 import org.apache.maven.BuildFailureException;
 import org.apache.maven.execution.MavenSession;
@@ -425,6 +431,9 @@ public class MavenBuild extends AbstractBuild<MavenModule,MavenBuild> {
         private List<MavenReporter> reporters;
 
         protected Result doRun(BuildListener listener) throws Exception {
+        	buildEnvironments = new ArrayList<Environment>();
+        	NodeProperties.setupEnvironment(buildEnvironments, MavenBuild.this, launcher, listener);
+
             // pick up a list of reporters to run
             reporters = getProject().createReporters();
             if(debug)

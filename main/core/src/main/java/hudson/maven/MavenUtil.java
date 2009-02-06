@@ -1,7 +1,9 @@
 package hudson.maven;
 
 import hudson.AbortException;
+import hudson.model.AbstractBuild;
 import hudson.model.BuildListener;
+import hudson.model.Job;
 import hudson.model.TaskListener;
 import hudson.model.AbstractProject;
 import hudson.tasks.Maven.MavenInstallation;
@@ -35,6 +37,7 @@ public class MavenUtil {
      * This version tries to infer mavenHome by looking at a project.
      *
      * @see #createEmbedder(TaskListener, File, String)
+     * @deprecated this does not take variables into account - use {@link #createEmbedder(TaskListener, AbstractBuild, String)}
      */
     public static MavenEmbedder createEmbedder(TaskListener listener, AbstractProject<?,?> project, String profiles) throws MavenEmbedderException, IOException {
         MavenInstallation m=null;
@@ -44,6 +47,21 @@ public class MavenUtil {
         return createEmbedder(listener,m!=null?m.getHomeDir():null,profiles);
     }
 
+    /**
+     * This version tries to infer mavenHome by looking at a build.
+     * Variables present in the maven installation configuration will be resolved relative to this build
+     *
+     * @see #createEmbedder(TaskListener, File, String)
+     */
+    public static MavenEmbedder createEmbedder(TaskListener listener, AbstractBuild<?,?> build, String profiles) throws MavenEmbedderException, IOException {
+        MavenInstallation m=null;
+        Job<?,?> project = build.getProject();
+        if (project instanceof ProjectWithMaven)
+            m = ((ProjectWithMaven) project).inferMavenInstallation().forEnvironment(build.getEnvVars());
+
+        return createEmbedder(listener,m!=null?m.getHomeDir():null,profiles);
+    }
+    
     /**
      * Creates a fresh {@link MavenEmbedder} instance.
      *

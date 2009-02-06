@@ -12,12 +12,16 @@ import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Computer;
 import hudson.model.Fingerprint;
 import hudson.model.Hudson;
+import hudson.model.Node;
 import hudson.model.ParametersAction;
 import hudson.model.Result;
 import hudson.remoting.Channel;
 import hudson.remoting.VirtualChannel;
+import hudson.slaves.NodeProperties;
+import hudson.slaves.NodeProperty;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.Environment;
 import hudson.tasks.Maven.MavenInstallation;
@@ -283,6 +287,11 @@ public final class MavenModuleSetBuild extends AbstractBuild<MavenModuleSet,Mave
         protected Result doRun(final BuildListener listener) throws Exception {
             PrintStream logger = listener.getLogger();
             try {
+                buildEnvironments = new ArrayList<Environment>();
+            	NodeProperties.setupEnvironment(buildEnvironments, MavenModuleSetBuild.this, launcher, listener);
+
+                List<BuildWrapper> wrappers = project.getBuildWrappers().toList();
+                
                 parsePoms(listener, logger);
 
                 if(!project.isAggregatorStyleBuild()) {
@@ -292,14 +301,13 @@ public final class MavenModuleSetBuild extends AbstractBuild<MavenModuleSet,Mave
                 } else {
                     // do builds here
                     try {
-                        List<BuildWrapper> wrappers = new ArrayList<BuildWrapper>();
+                        wrappers = new ArrayList<BuildWrapper>();
                         for (BuildWrapper w : project.getBuildWrappers())
                             wrappers.add(w);
                         ParametersAction parameters = getAction(ParametersAction.class);
                         if (parameters != null)
                             parameters.createBuildWrappers(MavenModuleSetBuild.this,wrappers);
 
-                        buildEnvironments = new ArrayList<Environment>();
                         for( BuildWrapper w : wrappers) {
                             BuildWrapper.Environment e = w.setUp((AbstractBuild)MavenModuleSetBuild.this, launcher, listener);
                             if(e==null)
@@ -386,6 +394,8 @@ public final class MavenModuleSetBuild extends AbstractBuild<MavenModuleSet,Mave
                 throw new AbortException();
             }
 
+            mvn = mvn.forEnvironment(getEnvVars());
+            
             List<PomInfo> poms;
             try {
                 poms = project.getModuleRoot().act(new PomParser(listener, mvn,project.getRootPOM(),project.getProfiles()));
