@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-TestResult (Hudson core 1.280 API)
+TestResult (Hudson core 1.281 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-01">
+<META NAME="date" CONTENT="2009-02-06">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TestResult (Hudson core 1.280 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TestResult (Hudson core 1.280 API)";
+        parent.document.title="TestResult (Hudson core 1.281 API)";
     }
 }
 </SCRIPT>
@@ -264,6 +264,14 @@ Root of all the test results for one build.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/tasks/junit/SuiteResult.html" title="class in hudson.tasks.junit">SuiteResult</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestResult.html#getSuite(java.lang.String)">getSuite</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Collection&lt;<A HREF="../../../hudson/tasks/junit/SuiteResult.html" title="class in hudson.tasks.junit">SuiteResult</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestResult.html#getSuites()">getSuites</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -560,9 +568,7 @@ public java.util.List&lt;<A HREF="../../../hudson/tasks/junit/CaseResult.html" t
 <A NAME="getChildren()"><!-- --></A><H3>
 getChildren</H3>
 <PRE>
-<FONT SIZE="-1">@Exported(name="child",
-          inline=true)
-</FONT>public java.util.Collection&lt;<A HREF="../../../hudson/tasks/junit/PackageResult.html" title="class in hudson.tasks.junit">PackageResult</A>&gt; <B>getChildren</B>()</PRE>
+public java.util.Collection&lt;<A HREF="../../../hudson/tasks/junit/PackageResult.html" title="class in hudson.tasks.junit">PackageResult</A>&gt; <B>getChildren</B>()</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/junit/TabulatedResult.html#getChildren()">TabulatedResult</A></CODE></B></DD>
 <DD>Gets the child test result objects.
@@ -570,6 +576,18 @@ getChildren</H3>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSuites()"><!-- --></A><H3>
+getSuites</H3>
+<PRE>
+<FONT SIZE="-1">@Exported(inline=true)
+</FONT>public java.util.Collection&lt;<A HREF="../../../hudson/tasks/junit/SuiteResult.html" title="class in hudson.tasks.junit">SuiteResult</A>&gt; <B>getSuites</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

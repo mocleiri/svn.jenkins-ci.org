@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SuiteResult (Hudson core 1.280 API)
+SuiteResult (Hudson core 1.281 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-01">
+<META NAME="date" CONTENT="2009-02-06">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SuiteResult (Hudson core 1.280 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SuiteResult (Hudson core 1.280 API)";
+        parent.document.title="SuiteResult (Hudson core 1.281 API)";
     }
 }
 </SCRIPT>
@@ -189,7 +189,7 @@ Result of one test suite.
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/SuiteResult.html#getStderr()">getStderr</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The stderr of this test.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -197,7 +197,7 @@ Result of one test suite.
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/SuiteResult.html#getStdout()">getStdout</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The stdout of this test.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -266,10 +266,16 @@ getStdout</H3>
 <FONT SIZE="-1">@Exported
 </FONT>public java.lang.String <B>getStdout</B>()</PRE>
 <DL>
+<DD>The stdout of this test. Note that due to the design of the format,
+ stdout for the entire <A HREF="../../../hudson/tasks/junit/SuiteResult.html" title="class in hudson.tasks.junit"><CODE>SuiteResult</CODE></A> is reported,
+ and Hudson cannot tell what portion of the output corresponds to this test.
+<P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.281</DD>
 </DL>
 </DD>
 </DL>
@@ -281,10 +287,16 @@ getStderr</H3>
 <FONT SIZE="-1">@Exported
 </FONT>public java.lang.String <B>getStderr</B>()</PRE>
 <DL>
+<DD>The stderr of this test. Note that due to the design of the format,
+ stdout for the entire <A HREF="../../../hudson/tasks/junit/SuiteResult.html" title="class in hudson.tasks.junit"><CODE>SuiteResult</CODE></A> is reported,
+ and Hudson cannot tell what portion of the output corresponds to this test.
+<P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.281</DD>
 </DL>
 </DD>
 </DL>
@@ -322,7 +334,7 @@ getTimestamp</H3>
 <A NAME="getCases()"><!-- --></A><H3>
 getCases</H3>
 <PRE>
-<FONT SIZE="-1">@Exported
+<FONT SIZE="-1">@Exported(inline=true)
 </FONT>public java.util.List&lt;<A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>&gt; <B>getCases</B>()</PRE>
 <DL>
 <DD><DL>
