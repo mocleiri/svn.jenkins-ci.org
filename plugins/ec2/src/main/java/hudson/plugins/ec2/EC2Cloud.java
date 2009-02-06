@@ -7,6 +7,7 @@ import com.xerox.amazonws.ec2.KeyPairInfo;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
 import hudson.model.Computer;
+import hudson.model.Label;
 import hudson.model.Node;
 import hudson.slaves.Cloud;
 import hudson.slaves.NodeProvisioner.PlannedNode;
@@ -140,7 +141,6 @@ public class EC2Cloud extends Cloud {
         }
     }
 
-    @Override
     public Collection<PlannedNode> provision(int i) {
         // TODO: when we support labels, we can make more intelligent decisions about which AMI to start
         // for a given provisioning request.
@@ -176,6 +176,16 @@ public class EC2Cloud extends Cloud {
      */
     public Jec2 connect() {
         return new Jec2(accessId,secretKey.toString());
+    }
+
+    @Override
+    public Collection<PlannedNode> provision(Label label, int excessWorkload) {
+        return provision(excessWorkload);
+    }
+
+    @Override
+    public boolean canProvision(Label label) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public static final class DescriptorImpl extends Descriptor<Cloud> {
