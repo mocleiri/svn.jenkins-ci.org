@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.281 API)
+Functions (Hudson core 1.282 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-06">
+<META NAME="date" CONTENT="2009-02-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.281 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.281 API)";
+        parent.document.title="Functions (Hudson core 1.282 API)";
     }
 }
 </SCRIPT>
@@ -812,6 +812,15 @@ Utility functions used in views.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#nbspIndent(java.lang.String)">nbspIndent</A></B>(java.lang.String&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;One nbsp per 10 pixels in given size, which may be a plain number or "NxN"
+ (like an iconSize).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#printLogRecord(java.util.logging.LogRecord)">printLogRecord</A></B>(java.util.logging.LogRecord&nbsp;r)</CODE>
 
 <BR>
@@ -1334,6 +1343,20 @@ appendSpaceIfNotNull</H3>
 <PRE>
 public static java.lang.String <B>appendSpaceIfNotNull</B>(java.lang.String&nbsp;n)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="nbspIndent(java.lang.String)"><!-- --></A><H3>
+nbspIndent</H3>
+<PRE>
+public static java.lang.String <B>nbspIndent</B>(java.lang.String&nbsp;size)</PRE>
+<DL>
+<DD>One nbsp per 10 pixels in given size, which may be a plain number or "NxN"
+ (like an iconSize).  Useful in a sortable table heading.
+<P>
 <DD><DL>
 </DL>
 </DD>

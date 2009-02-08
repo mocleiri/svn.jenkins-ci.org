@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ParametersAction (Hudson core 1.281 API)
+ParametersAction (Hudson core 1.282 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-06">
+<META NAME="date" CONTENT="2009-02-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParametersAction (Hudson core 1.281 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParametersAction (Hudson core 1.281 API)";
+        parent.document.title="ParametersAction (Hudson core 1.282 API)";
     }
 }
 </SCRIPT>
@@ -319,6 +319,9 @@ createVariableResolver</H3>
 public <A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;java.lang.String&gt; <B>createVariableResolver</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</PRE>
 <DL>
 <DD>Creates an <A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> that aggregates all the parameters.
+
+ <p>
+ If you are a <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A>, most likely you should call <A HREF="../../hudson/model/AbstractBuild.html#getBuildVariableResolver()"><CODE>AbstractBuild.getBuildVariableResolver()</CODE></A>.
 <P>
 <DD><DL>
 </DL>

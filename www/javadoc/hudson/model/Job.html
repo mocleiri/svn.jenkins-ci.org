@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Job (Hudson core 1.281 API)
+Job (Hudson core 1.282 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-06">
+<META NAME="date" CONTENT="2009-02-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson core 1.281 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson core 1.281 API)";
+        parent.document.title="Job (Hudson core 1.282 API)";
     }
 }
 </SCRIPT>
@@ -326,6 +326,14 @@ A job is an runnable entity under the monitoring of Hudson.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the jobs that this <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> contains as descendants.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&lt;? super <A HREF="../../hudson/model/Job.html" title="type parameter in Job">JobT</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#getAllProperties()">getAllProperties</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of all <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A> exposed primarily for the remoting API.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1241,6 +1249,26 @@ public java.util.Map&lt;<A HREF="../../hudson/model/JobPropertyDescriptor.html" 
 </DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAllProperties()"><!-- --></A><H3>
+getAllProperties</H3>
+<PRE>
+<FONT SIZE="-1">@Exported(name="property",
+          inline=true)
+</FONT>public java.util.List&lt;<A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&lt;? super <A HREF="../../hudson/model/Job.html" title="type parameter in Job">JobT</A>&gt;&gt; <B>getAllProperties</B>()</PRE>
+<DL>
+<DD>List of all <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A> exposed primarily for the remoting API.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.282</DD>
 </DL>
 </DD>
 </DL>
