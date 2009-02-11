@@ -17,13 +17,16 @@ public class App {
         }
 
         // approve anything as long as it doesn't contain SNAPSHOT
+        System.out.println("Scanning the news items");
         JNNewsItems news = JavaNet.connect().getProject("hudson").getNewsItems();
         for( JNNewsItem n : news.getPendingApprovals() ) {
             String headline = n.getHeadline();
             if(headline.endsWith(" released")) {
                 if(headline.contains("SNAPSHOT")) {
+                    System.out.println("Rejecting "+headline);
                     n.disapprove();
                 } else {
+                    System.out.println("Approving "+headline);
                     n.approve();
                 }
             }
