@@ -57,18 +57,25 @@ public class PropertyFileEncodingCheckerMojo extends AbstractMojo {
      */
     protected MavenProject project;
 
+    private boolean hadError = false;
+
     public void execute() throws MojoExecutionException, MojoFailureException {
         try {
+            hadError = false;
             Project p = new Project();
             for( Resource res : (List<Resource>)project.getResources() ) {
                 FileSet fs = new FileSet();
                 fs.setProject(p);
                 File baseDir = new File(res.getDirectory());
-                fs.setDir(baseDir);
-                fs.setIncludes("**/*.properties");
-                for( String f : fs.getDirectoryScanner(p).getIncludedFiles() )
-                    check(new File(baseDir,f));
+                if(baseDir.exists()) {
+                    fs.setDir(baseDir);
+                    fs.setIncludes("**/*.properties");
+                    for( String f : fs.getDirectoryScanner(p).getIncludedFiles() )
+                        check(new File(baseDir,f));
+                }
             }
+            if(hadError)
+                throw new MojoExecutionException("Problems detected");
         } catch (IOException e) {
             throw new MojoExecutionException("Failed to check encoding of resource files",e);
         }
@@ -92,7 +99,7 @@ public class PropertyFileEncodingCheckerMojo extends AbstractMojo {
                 int ch = b;
                 ch = ch&0xFF;
                 if(0x80<=ch && ch<=0x9F)
-                    throw new MojoExecutionException(f+" contains illegal iso-8859-1 character");
+                    error(f);
             }
 
             // look for EF BF BD. this is UTF-8 representation of U+FFFD, when Java's decoder
@@ -100,11 +107,16 @@ public class PropertyFileEncodingCheckerMojo extends AbstractMojo {
             // See CharsetDecoder constructor
             for( int i=0; i<bytes.length-3; i++ ) {
                 if(toInt(bytes[i])==0xEF && toInt(bytes[i+1])==0xBF && toInt(bytes[i+2])==0xBD)
-                    throw new MojoExecutionException(f+" contains illegal iso-8859-1 character");
+                    error(f);
             }
         } finally {
             is.close();
         }
+    }
+
+    private void error(File f) {
+        System.out.println(f+" contains illegal iso-8859-1 character");
+        hadError = true;
     }
 
     private int toInt(byte b) {
