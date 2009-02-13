@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Queue.Task (Hudson core 1.282 API)
+Queue.Task (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.Task (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.Task (Hudson core 1.282 API)";
+        parent.document.title="Queue.Task (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/Queue.NotWaitingItem.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/Queue.QueueAction.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Queue.Task.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -99,7 +99,7 @@ Interface Queue.Task</H2>
 <DT><B>All Known Subinterfaces:</B> <DD><A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model">BuildableItem</A>, <A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A></DD>
 </DL>
 <DL>
-<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/maven/AbstractMavenProject.html" title="class in hudson.maven">AbstractMavenProject</A>, <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>, <A HREF="../../hudson/model/FreeStyleProject.html" title="class in hudson.model">FreeStyleProject</A>, <A HREF="../../hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A>, <A HREF="../../hudson/matrix/MatrixProject.html" title="class in hudson.matrix">MatrixProject</A>, <A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>, <A HREF="../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>, <A HREF="../../hudson/model/ParameterizedProjectTask.html" title="class in hudson.model">ParameterizedProjectTask</A>, <A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project</A>, <A HREF="../../hudson/util/QueueTaskFilter.html" title="class in hudson.util">QueueTaskFilter</A></DD>
+<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/maven/AbstractMavenProject.html" title="class in hudson.maven">AbstractMavenProject</A>, <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>, <A HREF="../../hudson/model/FreeStyleProject.html" title="class in hudson.model">FreeStyleProject</A>, <A HREF="../../hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A>, <A HREF="../../hudson/matrix/MatrixProject.html" title="class in hudson.matrix">MatrixProject</A>, <A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>, <A HREF="../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>, <A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project</A></DD>
 </DL>
 <DL>
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/model/Queue.html" title="class in hudson.model">Queue</A></DD>
@@ -150,15 +150,6 @@ Task whose execution is controlled by the queue.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates <A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model"><CODE>Queue.Executable</CODE></A>, which performs the actual execution of the task.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#doCancelQueue(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCancelQueue</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called from queue.jelly.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -469,28 +460,6 @@ java.lang.String <B>getUrl</B>()</PRE>
 <DT><B>Returns:</B><DD>URL that ends with '/'.</DL>
 </DD>
 </DL>
-<HR>
-
-<A NAME="doCancelQueue(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-doCancelQueue</H3>
-<PRE>
-void <B>doCancelQueue</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                   org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                   throws java.io.IOException,
-                          javax.servlet.ServletException</PRE>
-<DL>
-<DD>Called from queue.jelly.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
-</DD>
-</DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
 
@@ -522,7 +491,7 @@ void <B>doCancelQueue</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/Queue.NotWaitingItem.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/Queue.QueueAction.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Queue.Task.html" target="_top"><B>FRAMES</B></A>  &nbsp;

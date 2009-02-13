@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Interface hudson.model.Action (Hudson core 1.282 API)
+Uses of Interface hudson.model.Action (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.Action (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.Action (Hudson core 1.282 API)";
+        parent.document.title="Uses of Interface hudson.model.Action (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -525,6 +525,14 @@ Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.m
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marker interface for <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s that should be displayed
  at the top of the project page.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;interface</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/Queue.QueueAction.html" title="interface in hudson.model">Queue.QueueAction</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An optional interface for actions on Queue.Item.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -532,6 +540,14 @@ Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.m
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> that implement <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/CauseAction.html" title="class in hudson.model">CauseAction</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -739,11 +755,71 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#add(hudson.model.Queue.Task, int, hudson.model.Action...)">add</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
+    int&nbsp;quietPeriod,
+    <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>...&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>Actionable.</B><B><A HREF="../../../hudson/model/Actionable.html#addAction(hudson.model.Action)">addAction</A></B>(<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&nbsp;a)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a new action.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Method parameters in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with type arguments of type <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#add(hudson.model.Queue.Task, int, java.util.List)">add</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
+    int&nbsp;quietPeriod,
+    java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules an execution of a task.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Queue.QueueAction.</B><B><A HREF="../../../hudson/model/Queue.QueueAction.html#shouldSchedule(java.util.List)">shouldSchedule</A></B>(java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns whether the new item should be scheduled.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>ParametersAction.</B><B><A HREF="../../../hudson/model/ParametersAction.html#shouldSchedule(java.util.List)">shouldSchedule</A></B>(java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allow an other build of the same project to be scheduled, if it has other parameters parameters.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructor parameters in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with type arguments of type <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/model/Queue.Item.html#Queue.Item(hudson.model.Queue.Task, java.util.List, int)">Queue.Item</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
+           java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions,
+           int&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;

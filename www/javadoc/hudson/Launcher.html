@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Launcher (Hudson core 1.282 API)
+Launcher (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Launcher (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Launcher (Hudson core 1.282 API)";
+        parent.document.title="Launcher (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -238,6 +238,14 @@ Starts a process.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> is going to launch on Unix.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#kill(java.util.Map)">kill</A></B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;modelEnvVars)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calls <A HREF="../hudson/util/ProcessTreeKiller.html#kill(java.util.Map)"><CODE>ProcessTreeKiller.kill(Map)</CODE></A> to kill processes.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -816,6 +824,24 @@ public boolean <B>isUnix</B>()</PRE>
 <P>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="kill(java.util.Map)"><!-- --></A><H3>
+kill</H3>
+<PRE>
+public abstract void <B>kill</B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;modelEnvVars)
+                   throws java.io.IOException,
+                          java.lang.InterruptedException</PRE>
+<DL>
+<DD>Calls <A HREF="../hudson/util/ProcessTreeKiller.html#kill(java.util.Map)"><CODE>ProcessTreeKiller.kill(Map)</CODE></A> to kill processes.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>

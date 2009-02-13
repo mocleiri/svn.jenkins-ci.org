@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Queue.BuildableItem (Hudson core 1.282 API)
+Queue.BuildableItem (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.BuildableItem (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.BuildableItem (Hudson core 1.282 API)";
+        parent.document.title="Queue.BuildableItem (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -94,16 +94,21 @@ hudson.model</FONT>
 Class Queue.BuildableItem</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">hudson.model.Queue.Item</A>
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Queue.NotWaitingItem.html" title="class in hudson.model">hudson.model.Queue.NotWaitingItem</A>
-          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Queue.BuildableItem</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">hudson.model.AbstractModelObject</A>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">hudson.model.Actionable</A>
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">hudson.model.Queue.Item</A>
+              <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Queue.NotWaitingItem.html" title="class in hudson.model">hudson.model.Queue.NotWaitingItem</A>
+                  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Queue.BuildableItem</B>
 </PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></DD>
+</DL>
 <DL>
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/model/Queue.html" title="class in hudson.model">Queue</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>Queue.BuildableItem</B><DT>extends <A HREF="../../hudson/model/Queue.NotWaitingItem.html" title="class in hudson.model">Queue.NotWaitingItem</A></DL>
+<DT><PRE>public static final class <B>Queue.BuildableItem</B><DT>extends <A HREF="../../hudson/model/Queue.NotWaitingItem.html" title="class in hudson.model">Queue.NotWaitingItem</A></DL>
 </PRE>
 
 <P>
@@ -138,7 +143,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Queue.Item.html#task">task</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Queue.Item.html#id">id</A>, <A HREF="../../hudson/model/Queue.Item.html#task">task</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -178,7 +183,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/model/Queue.BuildableItem.html#getWhy()">getWhy</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a human-readable status message describing why it's in the queu.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a human-readable status message describing why it's in the queue.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -195,7 +200,25 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Queue.Item.html#hasCancelPermission()">hasCancelPermission</A>, <A HREF="../../hudson/model/Queue.Item.html#isBlocked()">isBlocked</A>, <A HREF="../../hudson/model/Queue.Item.html#isBuildable()">isBuildable</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Queue.Item.html#doCancelQueue(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCancelQueue</A>, <A HREF="../../hudson/model/Queue.Item.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Queue.Item.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Queue.Item.html#hasCancelPermission()">hasCancelPermission</A>, <A HREF="../../hudson/model/Queue.Item.html#isBlocked()">isBlocked</A>, <A HREF="../../hudson/model/Queue.Item.html#isBuildable()">isBuildable</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Actionable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">Actionable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Actionable.html#addAction(hudson.model.Action)">addAction</A>, <A HREF="../../hudson/model/Actionable.html#getAction(java.lang.Class)">getAction</A>, <A HREF="../../hudson/model/Actionable.html#getAction(int)">getAction</A>, <A HREF="../../hudson/model/Actionable.html#getActions()">getActions</A>, <A HREF="../../hudson/model/Actionable.html#getActions(java.lang.Class)">getActions</A>, <A HREF="../../hudson/model/Actionable.html#getDynamic(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">getDynamic</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractModelObject.html#getSearch()">getSearch</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchIndex()">getSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchName()">getSearchName</A>, <A HREF="../../hudson/model/AbstractModelObject.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#requirePOST()">requirePOST</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -251,7 +274,7 @@ getWhy</H3>
 public java.lang.String <B>getWhy</B>()</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Queue.Item.html#getWhy()">Queue.Item</A></CODE></B></DD>
-<DD>Gets a human-readable status message describing why it's in the queu.
+<DD>Gets a human-readable status message describing why it's in the queue.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.Item.html#getWhy()">getWhy</A></CODE> in class <CODE><A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A></CODE></DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.282 API)
+Hudson (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.282 API)";
+        parent.document.title="Hudson (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -386,7 +386,7 @@ Root object of the system.
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#addListener(hudson.model.listeners.JobListener)">addListener</A></B>(<A HREF="../../hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">JobListener</A>&nbsp;l)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <code>getJobListners().add(l)</code> instead.</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <code>getJobListeners().add(l)</code> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -849,6 +849,14 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Makes <CODE>AdjunctManager</CODE> URL-bound.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model">AdministrativeMonitor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getAdministrativeMonitor(java.lang.String)">getAdministrativeMonitor</A></B>(java.lang.String&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binds <A HREF="../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model"><CODE>AdministrativeMonitor</CODE></A>s to URL.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1776,7 +1784,7 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#removeListener(hudson.model.listeners.JobListener)">removeListener</A></B>(<A HREF="../../hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">JobListener</A>&nbsp;l)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <code>getJobListners().remove(l)</code> instead.</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <code>getJobListeners().remove(l)</code> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2612,7 +2620,7 @@ addListener</H3>
 <PRE>
 public void <B>addListener</B>(<A HREF="../../hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">JobListener</A>&nbsp;l)</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Use <code>getJobListners().add(l)</code> instead.</I>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <code>getJobListeners().add(l)</code> instead.</I>
 <P>
 <DD>Adds a new <A HREF="../../hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners"><CODE>JobListener</CODE></A>.
 <P>
@@ -2630,7 +2638,7 @@ removeListener</H3>
 <PRE>
 public boolean <B>removeListener</B>(<A HREF="../../hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">JobListener</A>&nbsp;l)</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Use <code>getJobListners().remove(l)</code> instead.</I>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <code>getJobListeners().remove(l)</code> instead.</I>
 <P>
 <DD>Deletes an existing <A HREF="../../hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners"><CODE>JobListener</CODE></A>.
 <P>
@@ -3331,6 +3339,22 @@ public void <B>setNodes</B>(java.util.List&lt;? extends <A HREF="../../hudson/mo
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAdministrativeMonitor(java.lang.String)"><!-- --></A><H3>
+getAdministrativeMonitor</H3>
+<PRE>
+public <A HREF="../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model">AdministrativeMonitor</A> <B>getAdministrativeMonitor</B>(java.lang.String&nbsp;id)</PRE>
+<DL>
+<DD>Binds <A HREF="../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model"><CODE>AdministrativeMonitor</CODE></A>s to URL.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonTestCase.WebClient (Test harness for Hudson and plugins 1.282 API)
+HudsonTestCase.WebClient (Test harness for Hudson and plugins 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase.WebClient (Test harness for Hudson and plugins 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase.WebClient (Test harness for Hudson and plugins 1.282 API)";
+        parent.document.title="HudsonTestCase.WebClient (Test harness for Hudson and plugins 1.283 API)";
     }
 }
 </SCRIPT>
@@ -182,6 +182,23 @@ Extends <CODE>WebClient</CODE> and provide convenience methods
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;com.gargoylesoftware.htmlunit.html.HtmlPage</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#getPage(hudson.model.Item, java.lang.String)">getPage</A></B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Item.html?is-external=true" title="class or interface in hudson.model">Item</A>&nbsp;item,
+        java.lang.String&nbsp;relative)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;com.gargoylesoftware.htmlunit.html.HtmlPage</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#getPage(hudson.model.Node)">getPage</A></B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Node.html?is-external=true" title="class or interface in hudson.model">Node</A>&nbsp;item)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;com.gargoylesoftware.htmlunit.html.HtmlPage</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#getPage(hudson.model.Node, java.lang.String)">getPage</A></B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Node.html?is-external=true" title="class or interface in hudson.model">Node</A>&nbsp;item,
         java.lang.String&nbsp;relative)</CODE>
 
 <BR>
@@ -392,6 +409,39 @@ public com.gargoylesoftware.htmlunit.html.HtmlPage <B>getPage</B>(<A HREF="https
 getPage</H3>
 <PRE>
 public com.gargoylesoftware.htmlunit.html.HtmlPage <B>getPage</B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Item.html?is-external=true" title="class or interface in hudson.model">Item</A>&nbsp;item,
+                                                           java.lang.String&nbsp;relative)
+                                                    throws java.io.IOException,
+                                                           org.xml.sax.SAXException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>org.xml.sax.SAXException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPage(hudson.model.Node)"><!-- --></A><H3>
+getPage</H3>
+<PRE>
+public com.gargoylesoftware.htmlunit.html.HtmlPage <B>getPage</B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Node.html?is-external=true" title="class or interface in hudson.model">Node</A>&nbsp;item)
+                                                    throws java.io.IOException,
+                                                           org.xml.sax.SAXException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>org.xml.sax.SAXException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPage(hudson.model.Node, java.lang.String)"><!-- --></A><H3>
+getPage</H3>
+<PRE>
+public com.gargoylesoftware.htmlunit.html.HtmlPage <B>getPage</B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Node.html?is-external=true" title="class or interface in hudson.model">Node</A>&nbsp;item,
                                                            java.lang.String&nbsp;relative)
                                                     throws java.io.IOException,
                                                            org.xml.sax.SAXException</PRE>
