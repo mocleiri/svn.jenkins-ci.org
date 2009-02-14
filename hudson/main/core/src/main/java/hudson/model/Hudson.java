@@ -43,7 +43,7 @@ import hudson.UDPBroadcastThread;
 import hudson.logging.LogRecorderManager;
 import hudson.lifecycle.WindowsInstallerLink;
 import hudson.lifecycle.Lifecycle;
-import hudson.lifecycle.ZFSInstaller;
+import hudson.os.solaris.ZFSInstaller;
 import hudson.model.Descriptor.FormException;
 import hudson.model.listeners.ItemListener;
 import hudson.model.listeners.JobListener;
@@ -188,7 +188,7 @@ import javax.servlet.RequestDispatcher;
  * @author Kohsuke Kawaguchi
  */
 @ExportedBean
-public final class Hudson extends AbstractModelObject implements ItemGroup<TopLevelItem>, Node, StaplerProxy, StaplerFallback, ViewGroup, AccessControlled {
+public final class Hudson extends Node implements ItemGroup<TopLevelItem>, StaplerProxy, StaplerFallback, ViewGroup, AccessControlled {
     private transient final Queue queue;
 
     /**
@@ -1034,10 +1034,6 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
         return new ComputerSet();
     }
 
-    public Computer toComputer() {
-        return getComputer(this);
-    }
-
     /**
      * Gets the label that exists on this system by the name.
      *
@@ -1435,14 +1431,6 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
      */
     public ACL getACL() {
         return authorizationStrategy.getRootACL();
-    }
-
-    public void checkPermission(Permission p) {
-        getACL().checkPermission(p);
-    }
-
-    public boolean hasPermission(Permission p) {
-        return getACL().hasPermission(p);
     }
 
     /**
