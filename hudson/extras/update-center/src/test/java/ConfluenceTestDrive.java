@@ -11,7 +11,7 @@ import hudson.plugins.jira.soap.ConfluenceSoapService;
  */
 public class ConfluenceTestDrive {
     public static void main(String[] args) throws Exception {
-        ConfluenceSoapService service = Confluence.connect(new URL("http://hudson.gotdns.com/wiki/"));
+        ConfluenceSoapService service = Confluence.connect(new URL("http://wiki.hudson-ci.org/"));
         RemotePage page = service.getPage("", "HUDSON", "Ivy Plugin");
         HashMap m = new HashMap();
         m.put("style","clean");
