@@ -264,6 +264,11 @@ public abstract class Launcher {
     }
 
     /**
+     * Calls {@link ProcessTreeKiller#kill(Map)} to kill processes.
+     */
+    public abstract void kill(Map<String,String> modelEnvVars) throws IOException, InterruptedException;
+
+    /**
      * Prints out the command line to the listener so that users know what we are doing.
      */
     protected final void printCommandLine(String[] cmd, FilePath workDir) {
@@ -345,15 +350,31 @@ public abstract class Launcher {
         public Channel launchChannel(String[] cmd, OutputStream out, FilePath workDir, Map<String,String> envVars) throws IOException {
             printCommandLine(cmd, workDir);
 
-            final EnvVars cookie = ProcessTreeKiller.createCookie();
-            EnvVars map = Launcher.inherit(envVars);
-            map.putAll(cookie);
-            final Process proc = Runtime.getRuntime().exec(cmd, Util.mapToEnv(map), toFile(workDir));
+            ProcessBuilder pb = new ProcessBuilder(cmd);
+            pb.directory(toFile(workDir));
 
-            final Thread t2 = new StreamCopyThread(Arrays.asList(cmd)+": stderr copier", proc.getErrorStream(), out);
+            return launchChannel(out, pb);
+        }
+
+        @Override
+        public void kill(Map<String, String> modelEnvVars) {
+            ProcessTreeKiller.get().kill(modelEnvVars);
+        }
+
+        /**
+         * @param out
+         *      Where the stderr from the launched process will be sent.
+         */
+        public Channel launchChannel(OutputStream out, ProcessBuilder pb) throws IOException {
+            final EnvVars cookie = ProcessTreeKiller.createCookie();
+            pb.environment().putAll(cookie);
+
+            final Process proc = pb.start();
+
+            final Thread t2 = new StreamCopyThread(pb.command()+": stderr copier", proc.getErrorStream(), out);
             t2.start();
 
-            return new Channel("locally launched channel on "+ Arrays.toString(cmd),
+            return new Channel("locally launched channel on "+ pb.command(),
                 Computer.threadPoolForRemoting, proc.getInputStream(), proc.getOutputStream(), out) {
 
                 /**
@@ -422,6 +443,26 @@ public abstract class Launcher {
         @Override
         public boolean isUnix() {
             return isUnix;
+        }
+
+        @Override
+        public void kill(final Map<String,String> modelEnvVars) throws IOException, InterruptedException {
+            getChannel().call(new KillTask(modelEnvVars));
+        }
+
+        private static final class KillTask implements Callable<Void,RuntimeException> {
+            private final Map<String, String> modelEnvVars;
+
+            public KillTask(Map<String, String> modelEnvVars) {
+                this.modelEnvVars = modelEnvVars;
+            }
+
+            public Void call() throws RuntimeException {
+                ProcessTreeKiller.get().kill(modelEnvVars);
+                return null;
+            }
+
+            private static final long serialVersionUID = 1L;
         }
     }
 

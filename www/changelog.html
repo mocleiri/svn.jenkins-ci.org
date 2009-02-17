@@ -14,19 +14,61 @@
 </div>
 
 <div style="display:none;"><!--=BEGIN=-->
+<a name=v1.284><h3>What's new in 1.284</h3></a>
+<ul class=image>
+  <li class='major bug'>
+    Login using Hudson's own user database did not work since 1.283.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3043">issue 3043</a>)
+  <li class=bug>
+    View of parameters used for a build did not work since 1.283.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3061">issue 3061</a>)
+  <li class=bug>
+    Equal quiet period and SCM polling schedule could trigger extra build with no changes.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2671">issue 2671</a>)
+  <li class=bug>
+    Fix localization of some messages in build health reports.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1670">issue 1670</a>)
+  <li class=bug>
+    Fixed a possible memory leak in the distributed build.
+    (<a href="http://www.nabble.com/Possible-memory-leak-in-hudson.remoting.ExportTable-td12000299.html">report</a>)
+  <li class=rfe>
+    Suppress more pointless error messages in Winstone when clients cut the connection in the middle.
+    (<a href="http://www.nabble.com/javax.servlet.%2CServletException-td22002253.html">report</a>)
+</ul>
+</div><!--=END=-->
 <a name=v1.283><h3>What's new in 1.283</h3></a>
 <ul class=image>
+  <li class='major bug'>
+    Fixed a concurrent build problem in the parallel parameterized build.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2997">issue 2997</a>)
   <li class=bug>
     Maven2 job types didn't handle property-based profile activations correctly.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1454">issue 1454</a>)
+  <li class=bug>
+    LDAP group permissions were not applied when logged in via remember-me cookie.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2329">issue 2329</a>)
+  <li class='major rfe'>
+    Record how each build was started and show this in build page and remote API.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=291">issue 291</a>)
   <li class=rfe>
     Added the --version option to CLI to show the version. The version information is also visible in the help screen.
     (<a href="http://www.nabble.com/Naming-of-the-Hudson-Warfile-td21921859.html">report</a>)
   <li class=rfe>
     Hudson's own user database now stores SHA-256 encrypted passwords instead of reversible base-64 scrambling.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2381">issue 2381</a>)
+  <li class=rfe>
+    Built-in servlet container no longer reports pointless error messages when clients abort the TCP connection.
+    (<a href="http://www.nabble.com/Hudson-Evaluation---Log-output-td21943690.html">report</a>)
+  <li class=rfe>
+    On Solaris, Hudson now supports the migration of the data to ZFS.
+  <li class=rfe>
+    Plugin manager now honors the plugin URL from inside .hpi, not just from the update center.
+    (<a href="http://www.nabble.com/Plugin-deployment-issues-td21982824.html">report</a>)
+  <li class=rfe>
+    Hudson will now kill all the processes that are left behind by a build, to maintain
+    the stability of the cluster.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2729">issue 2729</a>)
 </ul>
-</div><!--=END=-->
 <a name=v1.282><h3>What's new in 1.282</h3></a>
 <ul class=image>
   <li class=bug>
@@ -1057,7 +1099,7 @@
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1888">issue 1888</a>)
   <li class=bug>
     Removed use of <tt>Calendar</tt> from the <tt>Run</tt> class to fix suspected thread safety related calendar corruption.
-    (<a href="http://hudson.gotdns.com/wiki/display/SUN/Archived+artifact+is+missing">investigation</a>)
+    (<a href="http://wiki.hudson-ci.org/display/SUN/Archived+artifact+is+missing">investigation</a>)
   <li class=bug>
     Fixed an infinite redirect loop when Hudson is shutting down and the user is not authenticated.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1872">issue 1872</a>)

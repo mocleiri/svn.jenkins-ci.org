@@ -43,6 +43,7 @@ import hudson.UDPBroadcastThread;
 import hudson.logging.LogRecorderManager;
 import hudson.lifecycle.WindowsInstallerLink;
 import hudson.lifecycle.Lifecycle;
+import hudson.os.solaris.ZFSInstaller;
 import hudson.model.Descriptor.FormException;
 import hudson.model.listeners.ItemListener;
 import hudson.model.listeners.JobListener;
@@ -173,6 +174,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -186,7 +188,7 @@ import javax.servlet.RequestDispatcher;
  * @author Kohsuke Kawaguchi
  */
 @ExportedBean
-public final class Hudson extends AbstractModelObject implements ItemGroup<TopLevelItem>, Node, StaplerProxy, StaplerFallback, ViewGroup, AccessControlled {
+public final class Hudson extends Node implements ItemGroup<TopLevelItem>, StaplerProxy, StaplerFallback, ViewGroup, AccessControlled {
     private transient final Queue queue;
 
     /**
@@ -334,7 +336,7 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
     private transient UDPBroadcastThread udpBroadcastThread;
 
     /**
-     * List of registered {@link JobListener}s.
+     * List of registered {@link ItemListener}s.
      */
     private transient final CopyOnWriteList<ItemListener> itemListeners = new CopyOnWriteList<ItemListener>();
 
@@ -391,6 +393,8 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
      * @see AdministrativeMonitor
      */
     public transient final List<AdministrativeMonitor> administrativeMonitors = new CopyOnWriteArrayList<AdministrativeMonitor>();
+
+    /*package*/ final CopyOnWriteArraySet<String> disabledAdministrativeMonitors = new CopyOnWriteArraySet<String>();
 
     /**
      * {@link AdjunctManager}
@@ -467,6 +471,7 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
 
         // run the init code of SubversionSCM before we load plugins so that plugins can change SubversionWorkspaceSelector.
         SubversionSCM.DescriptorImpl.DESCRIPTOR.getDisplayName();
+        ZFSInstaller.init();
 
         // load plugins.
         pluginManager = new PluginManager(context);
@@ -693,7 +698,7 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
      * Adds a new {@link JobListener}.
      *
      * @deprecated
-     *      Use {@code getJobListners().add(l)} instead.
+     *      Use {@code getJobListeners().add(l)} instead.
      */
     public void addListener(JobListener l) {
         itemListeners.add(new JobListenerAdapter(l));
@@ -703,7 +708,7 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
      * Deletes an existing {@link JobListener}.
      *
      * @deprecated
-     *      Use {@code getJobListners().remove(l)} instead.
+     *      Use {@code getJobListeners().remove(l)} instead.
      */
     public boolean removeListener(JobListener l ) {
         return itemListeners.remove(new JobListenerAdapter(l));
@@ -1029,10 +1034,6 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
         return new ComputerSet();
     }
 
-    public Computer toComputer() {
-        return getComputer(this);
-    }
-
     /**
      * Gets the label that exists on this system by the name.
      *
@@ -1195,6 +1196,16 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
             if(l.isEmpty())
                 itr.remove();
         }
+    }
+
+    /**
+     * Binds {@link AdministrativeMonitor}s to URL.
+     */
+    public AdministrativeMonitor getAdministrativeMonitor(String id) {
+        for (AdministrativeMonitor m : administrativeMonitors)
+            if(m.id.equals(id))
+                return m;
+        return null;
     }
 
     public NodeDescriptor getDescriptor() {
@@ -1420,14 +1431,6 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
      */
     public ACL getACL() {
         return authorizationStrategy.getRootACL();
-    }
-
-    public void checkPermission(Permission p) {
-        getACL().checkPermission(p);
-    }
-
-    public boolean hasPermission(Permission p) {
-        return getACL().hasPermission(p);
     }
 
     /**
@@ -2711,30 +2714,6 @@ public final class Hudson extends AbstractModelObject implements ItemGroup<TopLe
                         return;
                     }
                 }
-                ok();
-            }
-        }.process();
-    }
-
-    /**
-     * Performs syntactical check on the remote FS for slaves.
-     *
-     * TODO: find a better home for this method.
-     */
-    public void doRemoteFSCheck(StaplerRequest req, StaplerResponse rsp, @QueryParameter final String value) throws IOException, ServletException {
-        new FormFieldValidator(req,rsp,false) {
-            protected void check() throws IOException, ServletException {
-                if(Util.fixEmptyAndTrim(value)==null) {
-                    error("Remote directory is mandatory");
-                    return;
-                }
-
-                if(value.startsWith("\\\\") || value.startsWith("/net/")) {
-                    warning("Are you sure you want to use network mounted file system for FS root? " +
-                            "Note that this directory needs not be visible to the master.");
-                    return;
-                }
-
                 ok();
             }
         }.process();

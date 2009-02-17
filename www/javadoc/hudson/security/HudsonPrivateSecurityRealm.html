@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonPrivateSecurityRealm (Hudson core 1.282 API)
+HudsonPrivateSecurityRealm (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonPrivateSecurityRealm (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonPrivateSecurityRealm (Hudson core 1.282 API)";
+        parent.document.title="HudsonPrivateSecurityRealm (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -197,6 +197,14 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.acegisecurity.providers.encoding.PasswordEncoder</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/HudsonPrivateSecurityRealm.html#PASSWORD_ENCODER">PASSWORD_ENCODER</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<CODE>PasswordEncoder</CODE> based on SHA-256 and random salt generation.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.security.SecurityRealm"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -247,6 +255,15 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenient short-cut for <code>getACL().checkPermission(permission)</code></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/User.html" title="class in hudson.model">User</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/HudsonPrivateSecurityRealm.html#createAccount(java.lang.String, java.lang.String)">createAccount</A></B>(java.lang.String&nbsp;userName,
+              java.lang.String&nbsp;password)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new user account by registering a password to the user.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -368,6 +385,26 @@ DETAILS_DESCRIPTOR</H3>
 <PRE>
 public static final <A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model">UserPropertyDescriptor</A> <B>DETAILS_DESCRIPTOR</B></PRE>
 <DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PASSWORD_ENCODER"><!-- --></A><H3>
+PASSWORD_ENCODER</H3>
+<PRE>
+public static final org.acegisecurity.providers.encoding.PasswordEncoder <B>PASSWORD_ENCODER</B></PRE>
+<DL>
+<DD><CODE>PasswordEncoder</CODE> based on SHA-256 and random salt generation.
+
+ <p>
+ The salt is prepended to the hashed password and returned. So the encoded password is of the form
+ <tt>SALT ':' hash(PASSWORD,SALT)</tt>.
+
+ <p>
+ This abbreviates the need to store the salt separately, which in turn allows us to hide the salt handling
+ in this little class. The rest of the Acegi thinks that we are not using salt.
+<P>
 <DL>
 </DL>
 </DL>
@@ -548,6 +585,26 @@ public void <B>doCreateAccountByAdmin</B>(org.kohsuke.stapler.StaplerRequest&nbs
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createAccount(java.lang.String, java.lang.String)"><!-- --></A><H3>
+createAccount</H3>
+<PRE>
+public <A HREF="../../hudson/model/User.html" title="class in hudson.model">User</A> <B>createAccount</B>(java.lang.String&nbsp;userName,
+                          java.lang.String&nbsp;password)
+                   throws java.io.IOException</PRE>
+<DL>
+<DD>Creates a new user account by registering a password to the user.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>

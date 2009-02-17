@@ -30,6 +30,8 @@ import hudson.util.VariableResolver;
 import java.util.Map;
 
 import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.export.Exported;
+import org.kohsuke.stapler.export.ExportedBean;
 import net.sf.json.JSONObject;
 
 /**
@@ -58,8 +60,9 @@ import net.sf.json.JSONObject;
  * </ol>
  * @see ParameterDefinition
  */
+@ExportedBean
 public abstract class ParameterValue {
-    protected final String name;
+	protected final String name;
 
     protected ParameterValue(String name) {
         this.name = name;
@@ -71,6 +74,7 @@ public abstract class ParameterValue {
      * This uniquely distinguishes {@link ParameterValue} among other parameters
      * for the same build. This must be the same as {@link ParameterDefinition#getName()}.
      */
+    @Exported(visibility=3)
     public final String getName() {
         return name;
     }
@@ -149,4 +153,30 @@ public abstract class ParameterValue {
     public ParameterDefinition getDefinition() {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ParameterValue other = (ParameterValue) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
 }

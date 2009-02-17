@@ -28,6 +28,7 @@ import com.sun.jna.StringArray;
 import com.sun.jna.Pointer;
 import com.sun.jna.Native;
 import com.sun.jna.ptr.IntByReference;
+import org.jvnet.libpam.impl.CLibrary.passwd;
 
 /**
  * GNU C library.
@@ -40,13 +41,30 @@ public interface GNUCLibrary extends Library {
     int setsid();
     int umask(int mask);
     int getpid();
+    int geteuid();
+    int getegid();
     int getppid();
     int chdir(String dir);
+    int getdtablesize();
+
     int execv(String file, StringArray args);
     int setenv(String name, String value);
     int unsetenv(String name);
     void perror(String msg);
     String strerror(int errno);
+
+    passwd getpwuid(int uid);
+
+    int fcntl(int fd, int command);
+    int fcntl(int fd, int command, int flags);
+
+    // obtained from Linux. Needs to be checked if these values are portable.
+    static final int F_GETFD = 1;
+    static final int F_SETFD = 2;
+    static final int FD_CLOEXEC = 1;
+
+    int chown(String fileName, int uid, int gid);
+    
 
     // this is listed in http://developer.apple.com/DOCUMENTATION/Darwin/Reference/ManPages/man3/sysctlbyname.3.html
     // but not in http://www.gnu.org/software/libc/manual/html_node/System-Parameters.html#index-sysctl-3493

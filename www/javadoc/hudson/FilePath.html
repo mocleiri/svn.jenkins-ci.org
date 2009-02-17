@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FilePath (Hudson core 1.282 API)
+FilePath (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson core 1.282 API)";
+        parent.document.title="FilePath (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -584,6 +584,14 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#unzipFrom(java.io.InputStream)">unzipFrom</A></B>(java.io.InputStream&nbsp;_in)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reads the given InputStream as a zip file and extracts it into this directory.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#validateAntFileMask(java.lang.String)">validateAntFileMask</A></B>(java.lang.String&nbsp;fileMasks)</CODE>
 
@@ -774,6 +782,29 @@ public void <B>unzip</B>(<A HREF="../hudson/FilePath.html" title="class in hudso
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
   <DD>1.248</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="unzipFrom(java.io.InputStream)"><!-- --></A><H3>
+unzipFrom</H3>
+<PRE>
+public void <B>unzipFrom</B>(java.io.InputStream&nbsp;_in)
+               throws java.io.IOException,
+                      java.lang.InterruptedException</PRE>
+<DL>
+<DD>Reads the given InputStream as a zip file and extracts it into this directory.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>_in</CODE> - The stream will be closed by this method after it's fully read.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.283</DD>
 </DL>
 </DD>
 </DL>

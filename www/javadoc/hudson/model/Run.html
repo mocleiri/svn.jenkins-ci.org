@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Run (Hudson core 1.282 API)
+Run (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson core 1.282 API)";
+        parent.document.title="Run (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -557,6 +557,15 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getCharacteristicEnvVars()">getCharacteristicEnvVars</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builds up the environment variable map that's sufficient to identify a process
+ as ours.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2324,6 +2333,23 @@ public java.util.Map&lt;java.lang.String,java.lang.String&gt; <B>getEnvVars</B>(
  comparison/query is case insensitive (IOW, you can set 'Path' to something
  and you get the same value by doing '%PATH%'.)  So to implement this semantics
  the map returned from here is a <CODE>TreeMap</CODE> with a special comparator.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCharacteristicEnvVars()"><!-- --></A><H3>
+getCharacteristicEnvVars</H3>
+<PRE>
+protected final <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <B>getCharacteristicEnvVars</B>()</PRE>
+<DL>
+<DD>Builds up the environment variable map that's sufficient to identify a process
+ as ours. This is used to kill run-away processes via <A HREF="../../hudson/util/ProcessTreeKiller.html" title="class in hudson.util"><CODE>ProcessTreeKiller</CODE></A>.
 <P>
 <DD><DL>
 </DL>

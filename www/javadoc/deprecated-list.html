@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.282 API)
+Deprecated List (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.282 API)";
+        parent.document.title="Deprecated List (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -218,7 +218,7 @@ function windowTitle()
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#addListener(hudson.model.listeners.JobListener)">hudson.model.Hudson.addListener(JobListener)</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <code>getJobListners().add(l)</code> instead.</I>&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <code>getJobListeners().add(l)</code> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#adminCheck()">hudson.model.Hudson.adminCheck()</A>
@@ -248,7 +248,7 @@ function windowTitle()
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.lang.String)">hudson.maven.MavenUtil.createEmbedder(TaskListener, String)</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/tasks/Maven.MavenInstallation.html#createEmbedder(hudson.model.BuildListener, java.lang.String)"><CODE>Maven.MavenInstallation.createEmbedder(BuildListener, String)</CODE></A>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <CODE>MavenInstallation#createEmbedder(BuildListener, String)</CODE>
       or other overloaded versions that infers maven home.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -466,7 +466,37 @@ function windowTitle()
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#removeListener(hudson.model.listeners.JobListener)">hudson.model.Hudson.removeListener(JobListener)</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <code>getJobListners().remove(l)</code> instead.</I>&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <code>getJobListeners().remove(l)</code> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/AbstractProject.html#scheduleBuild()">hudson.model.AbstractProject.scheduleBuild()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/AbstractProject.html#scheduleBuild(hudson.model.Cause)"><CODE>AbstractProject.scheduleBuild(Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/BuildableItem.html#scheduleBuild()">hudson.model.BuildableItem.scheduleBuild()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/BuildableItem.html#scheduleBuild(hudson.model.Cause)"><CODE>BuildableItem.scheduleBuild(Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/AbstractProject.html#scheduleBuild(int)">hudson.model.AbstractProject.scheduleBuild(int)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/AbstractProject.html#scheduleBuild(int, hudson.model.Cause)"><CODE>AbstractProject.scheduleBuild(int, Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/BuildableItem.html#scheduleBuild(int)">hudson.model.BuildableItem.scheduleBuild(int)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/BuildableItem.html#scheduleBuild(int, hudson.model.Cause)"><CODE>BuildableItem.scheduleBuild(int, Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/matrix/MatrixConfiguration.html#scheduleBuild(hudson.model.ParametersAction)">hudson.matrix.MatrixConfiguration.scheduleBuild(ParametersAction)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/matrix/MatrixConfiguration.html#scheduleBuild(hudson.model.ParametersAction, hudson.model.Cause)"><CODE>MatrixConfiguration.scheduleBuild(ParametersAction, Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/AbstractProject.html#scheduleBuild2(int)">hudson.model.AbstractProject.scheduleBuild2(int)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/AbstractProject.html#scheduleBuild2(int, hudson.model.Cause)"><CODE>AbstractProject.scheduleBuild2(int, Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/matrix/MatrixConfiguration.html#setJDK(hudson.model.JDK)">hudson.matrix.MatrixConfiguration.setJDK(JDK)</A>

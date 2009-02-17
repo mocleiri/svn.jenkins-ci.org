@@ -37,8 +37,6 @@ import hudson.util.StreamTaskListener;
 import hudson.util.TimeUnit2;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.DataBoundConstructor;
-import org.kohsuke.stapler.export.Exported;
-import org.kohsuke.stapler.export.ExportedBean;
 
 import java.io.File;
 import java.io.IOException;
@@ -291,10 +289,6 @@ public class SCMTrigger extends Trigger<SCMedItem> {
     public static final class AdministrativeMonitorImpl extends AdministrativeMonitor {
         private boolean on;
 
-        AdministrativeMonitorImpl() {
-            super(SCMTrigger.class.getName());
-        }
-
         public boolean isActivated() {
             return on;
         }
@@ -417,6 +411,8 @@ public class SCMTrigger extends Trigger<SCMedItem> {
         }
 
         public void run() {
+            String threadName = Thread.currentThread().getName();
+            Thread.currentThread().setName("SCM polling for "+job);
             try {
                 while(pollingScheduled) {
                     getLock().lockInterruptibly();
@@ -447,19 +443,17 @@ public class SCMTrigger extends Trigger<SCMedItem> {
                 }
             } catch (InterruptedException e) {
                 LOGGER.info("Aborted");
+            } finally {
+                Thread.currentThread().setName(threadName);
             }
         }
     }
 
-    @ExportedBean
     public static class SCMTriggerCause extends Cause {
-
-    	@Override
-    	@Exported
-    	public String getShortDescription() {
-    		return "A SCM change trigger started this job";
-    	}
-
+        @Override
+        public String getShortDescription() {
+            return Messages.SCMTrigger_SCMTriggerCause_ShortDescription();
+        }
     }
 
     /**

@@ -27,23 +27,19 @@ import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Launcher.RemoteLauncher;
 import hudson.Util;
-import hudson.security.ACL;
-import hudson.security.Permission;
-import hudson.slaves.ComputerLauncher;
-import hudson.slaves.RetentionStrategy;
-import hudson.slaves.CommandLauncher;
-import hudson.slaves.JNLPLauncher;
-import hudson.slaves.SlaveComputer;
-import hudson.slaves.DumbSlave;
+import hudson.slaves.*;
 import hudson.model.Descriptor.FormException;
 import hudson.remoting.Callable;
 import hudson.remoting.VirtualChannel;
 import hudson.tasks.DynamicLabeler;
 import hudson.tasks.LabelFinder;
 import hudson.util.ClockDifference;
+import hudson.util.FormFieldValidator;
+import hudson.util.FormFieldValidator.NonNegativeInteger;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.QueryParameter;
 import org.apache.commons.io.IOUtils;
 
 import javax.servlet.ServletException;
@@ -68,7 +64,7 @@ import java.util.*;
  *
  * @author Kohsuke Kawaguchi
  */
-public abstract class Slave implements Node, Serializable {
+public abstract class Slave extends Node implements Serializable {
     /**
      * Name of this slave node.
      */
@@ -119,15 +115,15 @@ public abstract class Slave implements Node, Serializable {
     private transient volatile int dynamicLabelsInstanceHash;
 
     @DataBoundConstructor
-    public Slave(String name, String description, String remoteFS, String numExecutors,
+    public Slave(String name, String nodeDescription, String remoteFS, String numExecutors,
                  Mode mode, String label, ComputerLauncher launcher, RetentionStrategy retentionStrategy) throws FormException {
-        this(name,description,remoteFS,Util.tryParseNumber(numExecutors, 1).intValue(),mode,label,launcher,retentionStrategy);
+        this(name,nodeDescription,remoteFS,Util.tryParseNumber(numExecutors, 1).intValue(),mode,label,launcher,retentionStrategy);
     }
 
-    public Slave(String name, String description, String remoteFS, int numExecutors,
+    public Slave(String name, String nodeDescription, String remoteFS, int numExecutors,
                  Mode mode, String label, ComputerLauncher launcher, RetentionStrategy retentionStrategy) throws FormException {
         this.name = name;
-        this.description = description;
+        this.description = nodeDescription;
         this.numExecutors = numExecutors;
         this.mode = mode;
         this.remoteFS = remoteFS;
@@ -272,10 +268,6 @@ public abstract class Slave implements Node, Serializable {
         }
     }
 
-    public Label getSelfLabel() {
-        return Hudson.getInstance().getLabel(name);
-    }
-
     public ClockDifference getClockDifference() throws IOException, InterruptedException {
         VirtualChannel channel = getComputer().getChannel();
         if(channel==null)
@@ -286,18 +278,6 @@ public abstract class Slave implements Node, Serializable {
         long endTime = System.currentTimeMillis();
 
         return new ClockDifference((startTime+endTime)/2 - slaveTime);
-    }
-
-    public ACL getACL() {
-        return Hudson.getInstance().getAuthorizationStrategy().getACL(this);
-    }
-
-    public final void checkPermission(Permission permission) {
-        getACL().checkPermission(permission);
-    }
-
-    public final boolean hasPermission(Permission permission) {
-        return getACL().hasPermission(permission);
     }
 
     public Computer createComputer() {
@@ -312,14 +292,6 @@ public abstract class Slave implements Node, Serializable {
 
     public FilePath getRootPath() {
         return createPath(remoteFS);
-    }
-
-    public FilePath createPath(String absolutePath) {
-        SlaveComputer computer = getComputer();
-        if (computer==null) return null; // offline
-        VirtualChannel ch = computer.getChannel();
-        if(ch==null)    return null;    // offline
-        return new FilePath(ch,absolutePath);
     }
 
     /**
@@ -387,10 +359,6 @@ public abstract class Slave implements Node, Serializable {
         return (SlaveComputer)Hudson.getInstance().getComputer(this);
     }
 
-    public Computer toComputer() {
-        return getComputer();
-    }
-
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -420,6 +388,37 @@ public abstract class Slave implements Node, Serializable {
         }
         return this;
     }
+
+    public abstract SlaveDescriptor getDescriptor();
+
+    public static abstract class SlaveDescriptor extends NodeDescriptor {
+        public void doCheckNumExecutors() throws IOException, ServletException {
+            new NonNegativeInteger().process();
+        }
+
+        /**
+         * Performs syntactical check on the remote FS for slaves.
+         */
+        public void doCheckRemoteFs(StaplerRequest req, StaplerResponse rsp, @QueryParameter final String value) throws IOException, ServletException {
+            new FormFieldValidator(req,rsp,false) {
+                protected void check() throws IOException, ServletException {
+                    if(Util.fixEmptyAndTrim(value)==null) {
+                        error("Remote directory is mandatory");
+                        return;
+                    }
+
+                    if(value.startsWith("\\\\") || value.startsWith("/net/")) {
+                        warning("Are you sure you want to use network mounted file system for FS root? " +
+                                "Note that this directory needs not be visible to the master.");
+                        return;
+                    }
+
+                    ok();
+                }
+            }.process();
+        }
+    }
+
 
 //
 // backwrad compatibility

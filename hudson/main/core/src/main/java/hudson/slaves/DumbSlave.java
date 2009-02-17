@@ -25,11 +25,7 @@ package hudson.slaves;
 
 import hudson.model.Descriptor.FormException;
 import hudson.model.Slave;
-import hudson.util.FormFieldValidator.NonNegativeInteger;
 import org.kohsuke.stapler.DataBoundConstructor;
-
-import javax.servlet.ServletException;
-import java.io.IOException;
 
 /**
  * Default {@link Slave} implementation for computers that do not belong to a higher level structure,
@@ -39,23 +35,19 @@ import java.io.IOException;
  */
 public final class DumbSlave extends Slave {
     @DataBoundConstructor
-    public DumbSlave(String name, String description, String remoteFS, String numExecutors, Mode mode, String label, ComputerLauncher launcher, RetentionStrategy retentionStrategy) throws FormException {
-        super(name, description, remoteFS, numExecutors, mode, label, launcher, retentionStrategy);
+    public DumbSlave(String name, String nodeDescription, String remoteFS, String numExecutors, Mode mode, String label, ComputerLauncher launcher, RetentionStrategy retentionStrategy) throws FormException {
+        super(name, nodeDescription, remoteFS, numExecutors, mode, label, launcher, retentionStrategy);
     }
 
     public DescriptorImpl getDescriptor() {
         return DescriptorImpl.INSTANCE;
     }
 
-    public static final class DescriptorImpl extends NodeDescriptor {
+    public static final class DescriptorImpl extends SlaveDescriptor {
         public static final DescriptorImpl INSTANCE = new DescriptorImpl();
 
         public String getDisplayName() {
             return Messages.DumbSlave_displayName();
-        }
-
-        public void doCheckNumExecutors() throws IOException, ServletException {
-            new NonNegativeInteger().process();
         }
     }
 

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-DumbSlave (Hudson core 1.282 API)
+DumbSlave (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DumbSlave (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DumbSlave (Hudson core 1.282 API)";
+        parent.document.title="DumbSlave (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -220,7 +220,7 @@ Default <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><C
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Slave.html" title="class in hudson.model">Slave</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Slave.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Slave.html#createComputer()">createComputer</A>, <A HREF="../../hudson/model/Slave.html#createLauncher(hudson.model.TaskListener)">createLauncher</A>, <A HREF="../../hudson/model/Slave.html#createPath(java.lang.String)">createPath</A>, <A HREF="../../hudson/model/Slave.html#equals(java.lang.Object)">equals</A>, <A HREF="../../hudson/model/Slave.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Slave.html#getAssignedLabels()">getAssignedLabels</A>, <A HREF="../../hudson/model/Slave.html#getClockDifference()">getClockDifference</A>, <A HREF="../../hudson/model/Slave.html#getComputer()">getComputer</A>, <A HREF="../../hudson/model/Slave.html#getDynamicLabels()">getDynamicLabels</A>, <A HREF="../../hudson/model/Slave.html#getLabelString()">getLabelString</A>, <A HREF="../../hudson/model/Slave.html#getLauncher()">getLauncher</A>, <A HREF="../../hudson/model/Slave.html#getMode()">getMode</A>, <A HREF="../../hudson/model/Slave.html#getNodeDescription()">getNodeDescription</A>, <A HREF="../../hudson/model/Slave.html#getNodeName()">getNodeName</A>, <A HREF="../../hudson/model/Slave.html#getNumExecutors()">getNumExecutors</A>, <A HREF="../../hudson/model/Slave.html#getRemoteFS()">getRemoteFS</A>, <A HREF="../../hudson/model/Slave.html#getRetentionStrategy()">getRetentionStrategy</A>, <A HREF="../../hudson/model/Slave.html#getRootPath()">getRootPath</A>, <A HREF="../../hudson/model/Slave.html#getSelfLabel()">getSelfLabel</A>, <A HREF="../../hudson/model/Slave.html#getWorkspaceFor(hudson.model.TopLevelItem)">getWorkspaceFor</A>, <A HREF="../../hudson/model/Slave.html#getWorkspaceRoot()">getWorkspaceRoot</A>, <A HREF="../../hudson/model/Slave.html#hashCode()">hashCode</A>, <A HREF="../../hudson/model/Slave.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Slave.html#setLauncher(hudson.slaves.ComputerLauncher)">setLauncher</A>, <A HREF="../../hudson/model/Slave.html#setNodeName(java.lang.String)">setNodeName</A>, <A HREF="../../hudson/model/Slave.html#setRetentionStrategy(hudson.slaves.RetentionStrategy)">setRetentionStrategy</A>, <A HREF="../../hudson/model/Slave.html#toComputer()">toComputer</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Slave.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Slave.html#createComputer()">createComputer</A>, <A HREF="../../hudson/model/Slave.html#createLauncher(hudson.model.TaskListener)">createLauncher</A>, <A HREF="../../hudson/model/Slave.html#createPath(java.lang.String)">createPath</A>, <A HREF="../../hudson/model/Slave.html#equals(java.lang.Object)">equals</A>, <A HREF="../../hudson/model/Slave.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Slave.html#getAssignedLabels()">getAssignedLabels</A>, <A HREF="../../hudson/model/Slave.html#getClockDifference()">getClockDifference</A>, <A HREF="../../hudson/model/Slave.html#getComputer()">getComputer</A>, <A HREF="../../hudson/model/Slave.html#getDynamicLabels()">getDynamicLabels</A>, <A HREF="../../hudson/model/Slave.html#getLabelString()">getLabelString</A>, <A HREF="../../hudson/model/Slave.html#getLauncher()">getLauncher</A>, <A HREF="../../hudson/model/Slave.html#getMode()">getMode</A>, <A HREF="../../hudson/model/Slave.html#getNodeDescription()">getNodeDescription</A>, <A HREF="../../hudson/model/Slave.html#getNodeName()">getNodeName</A>, <A HREF="../../hudson/model/Slave.html#getNumExecutors()">getNumExecutors</A>, <A HREF="../../hudson/model/Slave.html#getRemoteFS()">getRemoteFS</A>, <A HREF="../../hudson/model/Slave.html#getRetentionStrategy()">getRetentionStrategy</A>, <A HREF="../../hudson/model/Slave.html#getRootPath()">getRootPath</A>, <A HREF="../../hudson/model/Slave.html#getSelfLabel()">getSelfLabel</A>, <A HREF="../../hudson/model/Slave.html#getWorkspaceFor(hudson.model.TopLevelItem)">getWorkspaceFor</A>, <A HREF="../../hudson/model/Slave.html#getWorkspaceRoot()">getWorkspaceRoot</A>, <A HREF="../../hudson/model/Slave.html#hashCode()">hashCode</A>, <A HREF="../../hudson/model/Slave.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Slave.html#setLauncher(hudson.slaves.ComputerLauncher)">setLauncher</A>, <A HREF="../../hudson/model/Slave.html#setMode(hudson.model.Node.Mode)">setMode</A>, <A HREF="../../hudson/model/Slave.html#setNodeName(java.lang.String)">setNodeName</A>, <A HREF="../../hudson/model/Slave.html#setRetentionStrategy(hudson.slaves.RetentionStrategy)">setRetentionStrategy</A>, <A HREF="../../hudson/model/Slave.html#toComputer()">toComputer</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>

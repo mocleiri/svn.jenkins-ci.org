@@ -23,17 +23,16 @@
  */
 package hudson.model;
 
-import com.thoughtworks.xstream.XStream;
+import static hudson.Util.combine;
+import hudson.AbortException;
+import hudson.BulkChange;
 import hudson.CloseProofOutputStream;
 import hudson.EnvVars;
 import hudson.ExtensionPoint;
 import hudson.FeedAdapter;
 import hudson.FilePath;
 import hudson.Util;
-import static hudson.Util.combine;
 import hudson.XmlFile;
-import hudson.AbortException;
-import hudson.BulkChange;
 import hudson.matrix.MatrixBuild;
 import hudson.matrix.MatrixRun;
 import hudson.model.listeners.RunListener;
@@ -48,26 +47,22 @@ import hudson.tasks.LogRotator;
 import hudson.tasks.Mailer;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.util.IOException2;
+import hudson.util.ProcessTreeKiller;
 import hudson.util.XStream2;
-import org.kohsuke.stapler.QueryParameter;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.export.Exported;
-import org.kohsuke.stapler.export.ExportedBean;
-import org.kohsuke.stapler.framework.io.LargeText;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.Reader;
 import java.io.Writer;
-import java.io.InputStreamReader;
-import java.io.FileInputStream;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -85,7 +80,19 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.nio.charset.Charset;
+import java.util.zip.GZIPInputStream;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
+
+import org.kohsuke.stapler.QueryParameter;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.export.Exported;
+import org.kohsuke.stapler.export.ExportedBean;
+import org.kohsuke.stapler.framework.io.LargeText;
+
+import com.thoughtworks.xstream.XStream;
 
 /**
  * A particular execution of {@link Job}.
@@ -734,6 +741,28 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         return new File(getRootDir(),"log");
     }
 
+    /**
+     * Returns a Reader that reads from the log file.
+     * It will use a gzip-compressed log file (log.gz) if that exists.
+     * @throws IOException 
+     * @return a reader from the log file, or null if none exists
+     */
+    public Reader getLogReader() throws IOException {
+    	File logFile = getLogFile();
+    	if (logFile.exists() ) {
+    		return new FileReader(logFile);
+    	} 
+
+    	File compressedLogFile = new File(logFile.getParentFile(), logFile.getName()+ ".gz");
+    	if (compressedLogFile.exists()) {
+    		return new InputStreamReader(
+    				new GZIPInputStream(
+    						new FileInputStream(compressedLogFile)));
+    	} 
+    	
+    	return null;
+    }
+    
     protected SearchIndexBuilder makeSearchIndex() {
         SearchIndexBuilder builder = super.makeSearchIndex()
                 .add("console")
@@ -745,7 +774,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         return builder;
     }
 
-    public Api getApi(final StaplerRequest req) {
+    public Api getApi() {
         return new Api(this);
     }
 
@@ -867,9 +896,9 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
                     LOGGER.info(toString()+" main build action completed: "+result);
                 } catch (ThreadDeath t) {
                     throw t;
-                } catch( AbortException e ) {
+                } catch( AbortException e ) {// orderly abortion.
                     result = Result.FAILURE;
-                } catch( RunnerAbortedException e ) {
+                } catch( RunnerAbortedException e ) {// orderly abortion.
                     result = Result.FAILURE;
                 } catch( InterruptedException e) {
                     // aborted
@@ -917,14 +946,16 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
                 try {
                     save();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOGGER.log(Level.SEVERE, "Failed to save build record",e);
                 }
             }
 
             try {
                 getParent().logRotate();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "Failed to rotate log",e);
+            } catch (InterruptedException e) {
+                LOGGER.log(Level.SEVERE, "Failed to rotate log",e);
             }
         } finally {
             onEndBuilding();
@@ -1211,11 +1242,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      *
      */
     public Map<String,String> getEnvVars() {
-        EnvVars env = new EnvVars();
-        env.put("BUILD_NUMBER",String.valueOf(number));
-        env.put("BUILD_ID",getId());
-        env.put("BUILD_TAG","hudson-"+getParent().getName()+"-"+number);
-        env.put("JOB_NAME",getParent().getFullName());
+        EnvVars env = getCharacteristicEnvVars();
         String rootUrl = Hudson.getInstance().getRootUrl();
         if(rootUrl!=null)
             env.put("HUDSON_URL", rootUrl);
@@ -1226,6 +1253,19 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
             env.put("EXECUTOR_NUMBER",String.valueOf(e.getNumber()));
         }
 
+        return env;
+    }
+
+    /**
+     * Builds up the environment variable map that's sufficient to identify a process
+     * as ours. This is used to kill run-away processes via {@link ProcessTreeKiller}.
+     */
+    protected final EnvVars getCharacteristicEnvVars() {
+        EnvVars env = new EnvVars();
+        env.put("BUILD_NUMBER",String.valueOf(number));
+        env.put("BUILD_ID",getId());
+        env.put("BUILD_TAG","hudson-"+getParent().getName()+"-"+number);
+        env.put("JOB_NAME",getParent().getFullName());
         return env;
     }
 
