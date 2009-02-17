@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Interface hudson.model.Queue.Task (Hudson core 1.282 API)
+Uses of Interface hudson.model.Queue.Task (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.Queue.Task (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.Queue.Task (Hudson core 1.282 API)";
+        parent.document.title="Uses of Interface hudson.model.Queue.Task (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -105,10 +105,6 @@ Packages that use <A HREF="../../../hudson/model/Queue.Task.html" title="interfa
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.slaves"><B>hudson.slaves</B></A></TD>
 <TD>Code related to slaves.&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.util"><B>hudson.util</B></A></TD>
-<TD>Other miscellaneous utility code&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.widgets"><B>hudson.widgets</B></A></TD>
@@ -250,15 +246,6 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/model/ParameterizedProjectTask.html" title="class in hudson.model">ParameterizedProjectTask</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A task representing a project that should be built with a certain set of
- parameter values</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/Project.html" title="class in hudson.model">Project&lt;P extends Project&lt;P,B&gt;,B extends Build&lt;P,B&gt;&gt;</A></B></CODE>
 
 <BR>
@@ -296,14 +283,6 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task from which this executable was created.</TD>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></CODE></FONT></TD>
-<TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#pop()">pop</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by the executor to fetch something to build next.</TD>
-</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -317,6 +296,26 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#add(hudson.model.Queue.Task, int)">add</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
     int&nbsp;quietPeriod)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#add(hudson.model.Queue.Task, int, hudson.model.Action...)">add</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
+    int&nbsp;quietPeriod,
+    <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>...&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#add(hudson.model.Queue.Task, int, java.util.List)">add</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
+    int&nbsp;quietPeriod,
+    java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules an execution of a task.</TD>
@@ -341,6 +340,14 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A></CODE></FONT></TD>
 <TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#getItem(hudson.model.Queue.Task)">getItem</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;t)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the information about the queue item for the given project.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#getItems(hudson.model.Queue.Task)">getItems</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;t)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the information about the queue item for the given project.</TD>
@@ -414,7 +421,9 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with parameters of type <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../hudson/model/Queue.Item.html#Queue.Item(hudson.model.Queue.Task)">Queue.Item</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;project)</CODE>
+<TD><CODE><B><A HREF="../../../hudson/model/Queue.Item.html#Queue.Item(hudson.model.Queue.Task, java.util.List, int)">Queue.Item</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
+           java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions,
+           int&nbsp;id)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -465,61 +474,6 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is completed without any problems by an executor.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson.util"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A> in <A HREF="../../../hudson/util/package-summary.html">hudson.util</A></FONT></TH>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/util/package-summary.html">hudson.util</A> that implement <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/util/QueueTaskFilter.html" title="class in hudson.util">QueueTaskFilter</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenient base class for <CODE>Queue.Task</CODE> decorators.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/util/package-summary.html">hudson.util</A> declared as <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></CODE></FONT></TD>
-<TD><CODE><B>QueueTaskFilter.</B><B><A HREF="../../../hudson/util/QueueTaskFilter.html#delegate">delegate</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delegation target.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/util/package-summary.html">hudson.util</A> with parameters of type <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../hudson/util/QueueTaskFilter.html#QueueTaskFilter(hudson.model.Queue.Task)">QueueTaskFilter</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;delegate)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;

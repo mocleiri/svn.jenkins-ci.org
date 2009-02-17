@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Advapi32 (Hudson core 1.282 API)
+Advapi32 (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Advapi32 (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Advapi32 (Hudson core 1.282 API)";
+        parent.document.title="Advapi32 (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -304,6 +304,15 @@ Interface Advapi32</H2>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/util/jna/Advapi32.html#GetUserName(char[], com.sun.jna.ptr.IntByReference)">GetUserName</A></B>(char[]&nbsp;buffer,
+            com.sun.jna.ptr.IntByReference&nbsp;lpnSize)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieves the name of the user associated with the current thread.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/util/jna/Advapi32.html#LookupAccountName(java.lang.String, java.lang.String, byte[], com.sun.jna.ptr.IntByReference, char[], com.sun.jna.ptr.IntByReference, com.sun.jna.ptr.PointerByReference)">LookupAccountName</A></B>(java.lang.String&nbsp;lpSystemName,
                   java.lang.String&nbsp;lpAccountName,
                   byte[]&nbsp;Sid,
@@ -537,6 +546,26 @@ static final <A HREF="../../../hudson/util/jna/Advapi32.html" title="interface i
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="GetUserName(char[], com.sun.jna.ptr.IntByReference)"><!-- --></A><H3>
+GetUserName</H3>
+<PRE>
+boolean <B>GetUserName</B>(char[]&nbsp;buffer,
+                    com.sun.jna.ptr.IntByReference&nbsp;lpnSize)</PRE>
+<DL>
+<DD>Retrieves the name of the user associated with the current thread.
+
+ <p>
+ See http://msdn.microsoft.com/en-us/library/ms724432(VS.85).aspx
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="LookupAccountName(java.lang.String, java.lang.String, byte[], com.sun.jna.ptr.IntByReference, char[], com.sun.jna.ptr.IntByReference, com.sun.jna.ptr.PointerByReference)"><!-- --></A><H3>
 LookupAccountName</H3>

@@ -47,7 +47,7 @@ import org.apache.commons.io.FileUtils;
  * @author Kohsuke Kawaguchi
  */
 public class NodeListTest extends TestCase {
-    static class DummyNode implements Node {
+    static class DummyNode extends Node {
         public String getNodeName() {
             throw new UnsupportedOperationException();
         }
@@ -72,10 +72,6 @@ public class NodeListTest extends TestCase {
             throw new UnsupportedOperationException();
         }
 
-        public Computer toComputer() {
-            throw new UnsupportedOperationException();
-        }
-
         public Computer createComputer() {
             throw new UnsupportedOperationException();
         }
@@ -88,19 +84,11 @@ public class NodeListTest extends TestCase {
             throw new UnsupportedOperationException();
         }
 
-        public Label getSelfLabel() {
-            throw new UnsupportedOperationException();
-        }
-
         public FilePath getWorkspaceFor(TopLevelItem item) {
             throw new UnsupportedOperationException();
         }
 
         public FilePath getRootPath() {
-            throw new UnsupportedOperationException();
-        }
-
-        public FilePath createPath(String absolutePath) {
             throw new UnsupportedOperationException();
         }
 
@@ -111,22 +99,14 @@ public class NodeListTest extends TestCase {
         public NodeDescriptor getDescriptor() {
             throw new UnsupportedOperationException();
         }
-
-        public ACL getACL() {
-            throw new UnsupportedOperationException();
-        }
-
-        public void checkPermission(Permission permission) {
-            throw new UnsupportedOperationException();
-        }
-
-        public boolean hasPermission(Permission permission) {
-            throw new UnsupportedOperationException();
-        }
     }
     static class EphemeralNode extends DummyNode implements hudson.slaves.EphemeralNode {
         public Cloud getCloud() {
             throw new UnsupportedOperationException();
+        }
+
+        public Node asNode() {
+            return this;
         }
     }
 

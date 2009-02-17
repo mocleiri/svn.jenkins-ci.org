@@ -42,8 +42,8 @@ public class LineChartMaker extends AbstractChartMaker {
 	}
 	
 	@Override
-	protected void setupRangeAxis(NumberAxis rangeAxis) {
-		super.setupRangeAxis(rangeAxis);
+	protected void setupRangeAxis(int axisID, NumberAxis rangeAxis) {
+		super.setupRangeAxis(axisID, rangeAxis);
 		rangeAxis.setStandardTickUnits(NumberAxis.createStandardTickUnits());
 	}
 }

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractProject (Hudson core 1.282 API)
+AbstractProject (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractProject (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractProject (Hudson core 1.282 API)";
+        parent.document.title="AbstractProject (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -904,6 +904,14 @@ void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#scheduleBuild()">scheduleBuild</A></B>()</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(hudson.model.Cause)"><CODE>scheduleBuild(Cause)</CODE></A>.  Since 1.283</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(hudson.model.Cause)">scheduleBuild</A></B>(<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&nbsp;c)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules a build of this project.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -912,12 +920,30 @@ void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(int)">scheduleBuild</A></B>(int&nbsp;quietPeriod)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(int, hudson.model.Cause)"><CODE>scheduleBuild(int, Cause)</CODE></A>.  Since 1.283</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(int, hudson.model.Cause)">scheduleBuild</A></B>(int&nbsp;quietPeriod,
+              <A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&nbsp;c)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.concurrent.Future&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#scheduleBuild2(int)">scheduleBuild2</A></B>(int&nbsp;quietPeriod)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild2(int, hudson.model.Cause)"><CODE>scheduleBuild2(int, Cause)</CODE></A>.  Since 1.283</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.concurrent.Future&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#scheduleBuild2(int, hudson.model.Cause)">scheduleBuild2</A></B>(int&nbsp;quietPeriod,
+               <A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&nbsp;c)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules a build of this project, and returns a <CODE>Future</CODE> object
@@ -1584,10 +1610,42 @@ scheduleBuild</H3>
 <PRE>
 public boolean <B>scheduleBuild</B>()</PRE>
 <DL>
-<DD>Schedules a build of this project.
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(hudson.model.Cause)"><CODE>scheduleBuild(Cause)</CODE></A>.  Since 1.283</I>
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/BuildableItem.html#scheduleBuild()">scheduleBuild</A></CODE> in interface <CODE><A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model">BuildableItem</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="scheduleBuild(int)"><!-- --></A><H3>
+scheduleBuild</H3>
+<PRE>
+public boolean <B>scheduleBuild</B>(int&nbsp;quietPeriod)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(int, hudson.model.Cause)"><CODE>scheduleBuild(int, Cause)</CODE></A>.  Since 1.283</I>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/BuildableItem.html#scheduleBuild(int)">scheduleBuild</A></CODE> in interface <CODE><A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model">BuildableItem</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="scheduleBuild(hudson.model.Cause)"><!-- --></A><H3>
+scheduleBuild</H3>
+<PRE>
+public boolean <B>scheduleBuild</B>(<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&nbsp;c)</PRE>
+<DL>
+<DD>Schedules a build of this project.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/BuildableItem.html#scheduleBuild(hudson.model.Cause)">scheduleBuild</A></CODE> in interface <CODE><A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model">BuildableItem</A></CODE></DL>
 </DD>
 <DD><DL>
 
@@ -1598,13 +1656,14 @@ public boolean <B>scheduleBuild</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="scheduleBuild(int)"><!-- --></A><H3>
+<A NAME="scheduleBuild(int, hudson.model.Cause)"><!-- --></A><H3>
 scheduleBuild</H3>
 <PRE>
-public boolean <B>scheduleBuild</B>(int&nbsp;quietPeriod)</PRE>
+public boolean <B>scheduleBuild</B>(int&nbsp;quietPeriod,
+                             <A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&nbsp;c)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/BuildableItem.html#scheduleBuild(int)">scheduleBuild</A></CODE> in interface <CODE><A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model">BuildableItem</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/BuildableItem.html#scheduleBuild(int, hudson.model.Cause)">scheduleBuild</A></CODE> in interface <CODE><A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model">BuildableItem</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -1616,6 +1675,23 @@ public boolean <B>scheduleBuild</B>(int&nbsp;quietPeriod)</PRE>
 scheduleBuild2</H3>
 <PRE>
 public java.util.concurrent.Future&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt; <B>scheduleBuild2</B>(int&nbsp;quietPeriod)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild2(int, hudson.model.Cause)"><CODE>scheduleBuild2(int, Cause)</CODE></A>.  Since 1.283</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="scheduleBuild2(int, hudson.model.Cause)"><!-- --></A><H3>
+scheduleBuild2</H3>
+<PRE>
+public java.util.concurrent.Future&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt; <B>scheduleBuild2</B>(int&nbsp;quietPeriod,
+                                                     <A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&nbsp;c)</PRE>
 <DL>
 <DD>Schedules a build of this project, and returns a <CODE>Future</CODE> object
  to wait for the completion of the build.
@@ -2496,7 +2572,7 @@ public void <B>doCancelQueue</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DD>Cancels a scheduled build.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.Task.html#doCancelQueue(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCancelQueue</A></CODE> in interface <CODE><A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></CODE></DL>
+</DL>
 </DD>
 <DD><DL>
 

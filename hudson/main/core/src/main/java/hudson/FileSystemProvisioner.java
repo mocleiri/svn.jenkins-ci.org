@@ -47,7 +47,7 @@ import java.io.OutputStream;
  *
  *
  * <p>
- * STILL A WORK IN PROGRESS. SUBJECT TO CHANGE!
+ * STILL A WORK IN PROGRESS. SUBJECT TO CHANGE! DO NOT EXTEND.
  *
  * TODO: is this per {@link Computer}? Per {@link Job}?
  *   -> probably per slave.
@@ -82,14 +82,18 @@ import java.io.OutputStream;
  * - when a slave connects, we auto-detect the file system provisioner.
  *   (for example, ZFS FSP would check the slave root user prop
  *   and/or attempt to "pfexec zfs create" and take over.)
- *     -> hmm, is it better to do this manually?
  *
  * - the user may configure jobs for snapshot collection, along with
  *   the retention policy.
  *
+ * - keep workspace snapshots that correspond to the permalinks
+ *   In ZFS, use a user property to remember the build and the job.
+ *
  * Can't the 2nd step happen automatically, when someone else depends on
  * the workspace snapshot of the upstream? Yes, by using {@link RunListener}.
  * So this becomes like a special SCM type.
+ *
+ *
  *
  * <h2>Design take 2</h2>
  * <p>
@@ -134,8 +138,14 @@ public abstract class FileSystemProvisioner implements ExtensionPoint, Describab
     /**
      * When a project is deleted, this method is called to undo the effect of
      * {@link #prepareWorkspace(AbstractBuild, FilePath, TaskListener)}.
+     *
+     * @param project
+     *      Project whose workspace is being discarded.
+     * @param ws
+     *      Workspace to be discarded. This workspace is on the node
+     *      this {@link FileSystemProvisioner} is provisioned for.
      */
-    public abstract void discardWorkspace(AbstractProject<?,?> project, TaskListener listener) throws IOException, InterruptedException;
+    public abstract void discardWorkspace(AbstractProject<?, ?> project, FilePath ws) throws IOException, InterruptedException;
 
 //    public abstract void moveWorkspace(AbstractProject<?,?> project, File oldWorkspace, File newWorkspace) throws IOException;
 
@@ -180,11 +190,9 @@ public abstract class FileSystemProvisioner implements ExtensionPoint, Describab
         private Default() {}
 
         public void prepareWorkspace(AbstractBuild<?, ?> build, FilePath ws, TaskListener listener) throws IOException, InterruptedException {
-            ws.mkdirs();
         }
 
-        public void discardWorkspace(AbstractProject<?, ?> project, TaskListener listener) throws IOException, InterruptedException {
-            project.getWorkspace().deleteRecursive();
+        public void discardWorkspace(AbstractProject<?, ?> project, FilePath ws) throws IOException, InterruptedException {
         }
 
         /**

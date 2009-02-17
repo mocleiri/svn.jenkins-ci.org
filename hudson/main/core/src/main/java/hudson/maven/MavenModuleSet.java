@@ -415,7 +415,7 @@ public final class MavenModuleSet extends AbstractMavenProject<MavenModuleSet,Ma
         return super.assignBuildNumber();
     }
 
-    public void logRotate() throws IOException {
+    public void logRotate() throws IOException, InterruptedException {
         super.logRotate();
         // perform the log rotation of modules
         for (MavenModule m : modules.values())
@@ -613,7 +613,7 @@ public final class MavenModuleSet extends AbstractMavenProject<MavenModuleSet,Ma
     /**
      * Delete all disabled modules.
      */
-    public void doDoDeleteAllDisabledModules(StaplerRequest req, StaplerResponse rsp) throws IOException {
+    public void doDoDeleteAllDisabledModules(StaplerResponse rsp) throws IOException, InterruptedException {
         checkPermission(DELETE);
         for( MavenModule m : getDisabledModules(true))
             m.delete();

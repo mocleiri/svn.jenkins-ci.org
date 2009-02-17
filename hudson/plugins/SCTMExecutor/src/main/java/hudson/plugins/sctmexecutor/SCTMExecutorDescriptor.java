@@ -4,12 +4,13 @@ import hudson.model.Descriptor;
 import hudson.model.Hudson;
 import hudson.plugins.sctmexecutor.validators.EmptySingleFieldValidator;
 import hudson.plugins.sctmexecutor.validators.NumberCSVSingleFieldValidator;
-import hudson.plugins.sctmexecutor.validators.NumberSingleFieldValidator;
-import hudson.plugins.sctmexecutor.validators.SCTMUrlValidator;
 import hudson.plugins.sctmexecutor.validators.TestConnectionValidator;
 import hudson.tasks.Builder;
+import hudson.util.FormFieldValidator;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -47,13 +48,7 @@ public final class SCTMExecutorDescriptor extends Descriptor<Builder> {
     String execDefIds = formData.getString("execDefIds"); //$NON-NLS-1$
     String str = formData.getString("projectId"); //$NON-NLS-1$
     int projectId = Integer.parseInt(str);
-    str = formData.getString("timeout"); //$NON-NLS-1$
-    int timeout;
-    if (str != null && !str.equals(""))
-      timeout = Integer.parseInt(str);
-    else
-      timeout = 0;
-    return new SCTMExecutor(projectId, execDefIds, timeout);
+    return new SCTMExecutor(projectId, execDefIds);
   }
 
   @Override
@@ -96,7 +91,29 @@ public final class SCTMExecutorDescriptor extends Descriptor<Builder> {
   public void doCheckServiceURL(StaplerRequest req, StaplerResponse rsp, 
       @QueryParameter("value") final String value)
       throws IOException, ServletException {
-    new SCTMUrlValidator(req, rsp, value).process();
+    new FormFieldValidator.URLCheck(req, rsp) {
+      @Override
+      protected void check() throws IOException, ServletException {
+        if (value == null ||
+            (value != null && !value.matches("http(s)?://(((\\d{1,3}.){3}\\d{1,3})?|([\\p{Alnum}-_.])*)(:\\d{0,5})?(/([\\p{Alnum}-_.])*)?/services"))) { //$NON-NLS-1$
+          error(Messages.getString("SCTMUrlValidator.msg.noValidURL")); //$NON-NLS-1$
+          return;
+        }
+        try {
+          URL url = new URL(value);
+          BufferedReader reader = open(url);
+          if (findText(reader, "tmexecution"))
+            ok();
+          else
+            warning(Messages.getString("SCTMURL.Validator.msg.noServiceFound"));
+        } catch (IOException e) {
+          handleIOException(value, e);
+        } catch (IllegalArgumentException e) {
+          error(Messages.getString("SCTMUrlValidator.msg.noValidURL")); //$NON-NLS-1$
+          
+        }
+      }
+    }.process();
   }
 
   public void doCheckUser(StaplerRequest req, StaplerResponse rsp, 
@@ -120,7 +137,7 @@ public final class SCTMExecutorDescriptor extends Descriptor<Builder> {
   public void doCheckProjectId(StaplerRequest req, StaplerResponse rsp, 
       @QueryParameter("value") final String value)
       throws IOException, ServletException {
-    new NumberSingleFieldValidator(value).process();
+    new FormFieldValidator.NonNegativeInteger().process();
   }
 
   public void doTestConnection(StaplerRequest req, StaplerResponse rsp, 

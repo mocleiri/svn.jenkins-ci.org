@@ -45,7 +45,6 @@ import hudson.tasks.test.AbstractTestResultAction;
 import hudson.util.AdaptedIterator;
 import hudson.util.Iterators;
 import hudson.util.VariableResolver;
-import hudson.util.VariableResolver.ByMap;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -260,6 +259,8 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
             if(node instanceof Slave)
                 listener.getLogger().println(Messages.AbstractBuild_BuildingRemotely(node.getNodeName()));
 
+            node.getFileSystemProvisioner().prepareWorkspace(AbstractBuild.this,project.getWorkspace(),listener);
+
             if(checkout(listener))
                 return Result.FAILURE;
 
@@ -268,8 +269,13 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
 
             Result result = doRun(listener);
 
+            // kill run-away processes that are left
+            // use multiple environment variables so that people can escape this massacre by overriding an environment
+            // variable for some processes
+            launcher.kill(getCharacteristicEnvVars());
+
             // this is ugly, but for historical reason, if non-null value is returned
-            // it should become the final say.
+            // it should become the final result.
             if(result==null)    result = getResult();
             if(result==null)    result = Result.SUCCESS;
 

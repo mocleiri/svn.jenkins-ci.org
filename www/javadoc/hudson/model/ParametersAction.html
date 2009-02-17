@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ParametersAction (Hudson core 1.282 API)
+ParametersAction (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParametersAction (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParametersAction (Hudson core 1.282 API)";
+        parent.document.title="ParametersAction (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/ParameterizedProjectTask.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/ParameterDefinition.ParameterDescriptor.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/model/ParametersDefinitionProperty.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/ParametersAction.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -97,11 +97,12 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.ParametersAction</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, java.lang.Iterable&lt;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>&gt;</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/Queue.QueueAction.html" title="interface in hudson.model">Queue.QueueAction</A>, java.lang.Iterable&lt;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>&gt;</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>ParametersAction</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, java.lang.Iterable&lt;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>&gt;</DL>
+<DT><PRE><FONT SIZE="-1">@ExportedBean
+</FONT>public class <B>ParametersAction</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, java.lang.Iterable&lt;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>&gt;, <A HREF="../../hudson/model/Queue.QueueAction.html" title="interface in hudson.model">Queue.QueueAction</A></DL>
 </PRE>
 
 <P>
@@ -109,7 +110,8 @@ Records the parameter values used for a build.
 
  <P>
  This object is associated with the build record so that we remember what parameters
- were used for what build.
+ were used for what build. It is also attached to the queue item to remember parameter
+ that were specified when scheduling.
 <P>
 
 <P>
@@ -126,8 +128,13 @@ Records the parameter values used for a build.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/ParametersAction.html#ParametersAction(java.util.List, hudson.model.AbstractBuild)">ParametersAction</A></B>(java.util.List&lt;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>&gt;&nbsp;parameters,
-                 <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/ParametersAction.html#ParametersAction(java.util.List)">ParametersAction</A></B>(java.util.List&lt;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>&gt;&nbsp;parameters)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/ParametersAction.html#ParametersAction(hudson.model.ParameterValue...)">ParametersAction</A></B>(<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>...&nbsp;parameters)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -167,14 +174,6 @@ Records the parameter values used for a build.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates an <A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> that aggregates all the parameters.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ParametersAction.html#getBuild()">getBuild</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -218,6 +217,14 @@ Records the parameter values used for a build.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParametersAction.html#shouldSchedule(java.util.List)">shouldSchedule</A></B>(java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allow an other build of the same project to be scheduled, if it has other parameters parameters.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ParametersAction.html#substitute(hudson.model.AbstractBuild, java.lang.String)">substitute</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
            java.lang.String&nbsp;text)</CODE>
@@ -248,11 +255,18 @@ Records the parameter values used for a build.
 </TR>
 </TABLE>
 
-<A NAME="ParametersAction(java.util.List, hudson.model.AbstractBuild)"><!-- --></A><H3>
+<A NAME="ParametersAction(java.util.List)"><!-- --></A><H3>
 ParametersAction</H3>
 <PRE>
-public <B>ParametersAction</B>(java.util.List&lt;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>&gt;&nbsp;parameters,
-                        <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</PRE>
+public <B>ParametersAction</B>(java.util.List&lt;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>&gt;&nbsp;parameters)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="ParametersAction(hudson.model.ParameterValue...)"><!-- --></A><H3>
+ParametersAction</H3>
+<PRE>
+public <B>ParametersAction</B>(<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>...&nbsp;parameters)</PRE>
 <DL>
 </DL>
 
@@ -332,20 +346,6 @@ public <A HREF="../../hudson/util/VariableResolver.html" title="interface in hud
 </DL>
 <HR>
 
-<A NAME="getBuild()"><!-- --></A><H3>
-getBuild</H3>
-<PRE>
-public <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt; <B>getBuild</B>()</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
 <A NAME="iterator()"><!-- --></A><H3>
 iterator</H3>
 <PRE>
@@ -363,7 +363,8 @@ public java.util.Iterator&lt;<A HREF="../../hudson/model/ParameterValue.html" ti
 <A NAME="getParameters()"><!-- --></A><H3>
 getParameters</H3>
 <PRE>
-public java.util.List&lt;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>&gt; <B>getParameters</B>()</PRE>
+<FONT SIZE="-1">@Exported(visibility=2)
+</FONT>public java.util.List&lt;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>&gt; <B>getParameters</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -453,6 +454,22 @@ public java.lang.String <B>getUrlName</B>()</PRE>
       (when you do that, be sure to also return null from <A HREF="../../hudson/model/Action.html#getIconFileName()"><CODE>Action.getIconFileName()</CODE></A>.</DL>
 </DD>
 </DL>
+<HR>
+
+<A NAME="shouldSchedule(java.util.List)"><!-- --></A><H3>
+shouldSchedule</H3>
+<PRE>
+public boolean <B>shouldSchedule</B>(java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</PRE>
+<DL>
+<DD>Allow an other build of the same project to be scheduled, if it has other parameters parameters.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.QueueAction.html#shouldSchedule(java.util.List)">shouldSchedule</A></CODE> in interface <CODE><A HREF="../../hudson/model/Queue.QueueAction.html" title="interface in hudson.model">Queue.QueueAction</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
 
@@ -484,7 +501,7 @@ public java.lang.String <B>getUrlName</B>()</PRE>
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/ParameterizedProjectTask.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/ParameterDefinition.ParameterDescriptor.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/model/ParametersDefinitionProperty.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/ParametersAction.html" target="_top"><B>FRAMES</B></A>  &nbsp;

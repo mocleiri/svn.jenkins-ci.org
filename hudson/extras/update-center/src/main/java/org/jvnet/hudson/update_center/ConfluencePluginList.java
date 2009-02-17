@@ -27,7 +27,7 @@ public class ConfluencePluginList {
     private final String[] normalizedTitles;
 
     public ConfluencePluginList() throws IOException, ServiceException {
-        service = Confluence.connect(new URL("http://hudson.gotdns.com/wiki/"));
+        service = Confluence.connect(new URL("http://wiki.hudson-ci.org/"));
         RemotePage page = service.getPage("", "HUDSON", "Plugins");
 
         for (RemotePageSummary child : service.getChildren("", page.getId()))
@@ -59,12 +59,18 @@ public class ConfluencePluginList {
     }
 
     public RemotePage getPage(String url) throws RemoteException {
-        if(!url.startsWith(HUDSON_WIKI_PREFIX))
-            return null;
+        for( String p : HUDSON_WIKI_PREFIX ) {
+            if(!url.startsWith(p))
+                continue;
 
-        String pageName = url.substring(HUDSON_WIKI_PREFIX.length()).replace('+',' '); // poor hack for URL escape
-        return service.getPage("","HUDSON",pageName);
+            String pageName = url.substring(p.length()).replace('+',' '); // poor hack for URL escape
+            return service.getPage("","HUDSON",pageName);
+        }
+        return null;
     }
 
-    private static final String HUDSON_WIKI_PREFIX = "http://hudson.gotdns.com/wiki/display/HUDSON/";
+    private static final String[] HUDSON_WIKI_PREFIX = {
+            "http://hudson.gotdns.com/wiki/display/HUDSON/",
+            "http://wiki.hudson-ci.org/display/HUDSON/",
+    };
 }

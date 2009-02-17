@@ -24,6 +24,7 @@
 package hudson.model;
 
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.export.Exported;
 
 import java.util.Map;
 
@@ -33,6 +34,7 @@ import hudson.util.VariableResolver;
  * {@link ParameterValue} created from {@link StringParameterDefinition}.
  */
 public class StringParameterValue extends ParameterValue {
+    @Exported(visibility=3)
     public final String value;
 
     @DataBoundConstructor
@@ -58,7 +60,33 @@ public class StringParameterValue extends ParameterValue {
         };
     }
     
-    @Override
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		StringParameterValue other = (StringParameterValue) obj;
+		if (value == null) {
+			if (other.value != null)
+				return false;
+		} else if (!value.equals(other.value))
+			return false;
+		return true;
+	}
+
+	@Override
     public String toString() {
     	return "(StringParameterValue) " + getName() + "='" + value + "'";
     }

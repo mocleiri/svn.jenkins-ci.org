@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ProcessTreeKiller (Hudson core 1.282 API)
+ProcessTreeKiller (Hudson core 1.283 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-08">
+<META NAME="date" CONTENT="2009-02-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ProcessTreeKiller (Hudson core 1.282 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ProcessTreeKiller (Hudson core 1.282 API)";
+        parent.document.title="ProcessTreeKiller (Hudson core 1.283 API)";
     }
 }
 </SCRIPT>
@@ -189,13 +189,19 @@ Kills a process tree to clean up the mess left by a build.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;void</CODE></FONT></TD>
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ProcessTreeKiller.html#kill(java.util.Map)">kill</A></B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;modelEnvVars)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short for <code>kill(null,modelEnvVars)</code></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/ProcessTreeKiller.html#kill(java.lang.Process)">kill</A></B>(java.lang.Process&nbsp;proc)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kills the given process (like <CODE>Process.destroy()</CODE>
- but also attempts to kill descendant processes created from the given
- process.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short for <code>kill(proc,null)</code></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -275,18 +281,9 @@ public <B>ProcessTreeKiller</B>()</PRE>
 <A NAME="kill(java.lang.Process)"><!-- --></A><H3>
 kill</H3>
 <PRE>
-public abstract void <B>kill</B>(java.lang.Process&nbsp;proc)</PRE>
+public void <B>kill</B>(java.lang.Process&nbsp;proc)</PRE>
 <DL>
-<DD>Kills the given process (like <CODE>Process.destroy()</CODE>
- but also attempts to kill descendant processes created from the given
- process.
-
- <p>
- The implementation is obviously OS-dependent.
-
- <p>
- The execution doesn't have to be blocking; the method may return
- before processes are actually killed.
+<DD>Short for <code>kill(proc,null)</code>
 <P>
 <DD><DL>
 </DL>
@@ -304,14 +301,35 @@ public abstract void <B>kill</B>(java.lang.Process&nbsp;proc,
  kill all the daemon processes launched.
 
  <p>
- Daemon processes are hard to find because they normally detach themselves
- from the parent process. In this method, the method is given a
+ Kills the given process (like <CODE>Process.destroy()</CODE>
+ but also attempts to kill descendant processes created from the given
+ process.
+
+ <p>
+ In addition, optionally perform "search and destroy" based on environment
+ variables. In this method, the method is given a
  "model environment variables", which is a list of environment variables
  and their values that are characteristic to the launched process.
  The implementation is expected to find processes
  in the system that inherit these environment variables, and kill
- them even if the <code>proc</code> and such processes do not have direct
- ancestor/descendant relationship.
+ them all. This is suitable for locating daemon processes
+ that cannot be tracked by the regular
+
+ <p>
+ The implementation is obviously OS-dependent.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>proc</CODE> - Process to be killed recursively. Can be null.<DD><CODE>modelEnvVars</CODE> - If non-null, search-and-destroy will be performed.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="kill(java.util.Map)"><!-- --></A><H3>
+kill</H3>
+<PRE>
+public void <B>kill</B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;modelEnvVars)</PRE>
+<DL>
+<DD>Short for <code>kill(null,modelEnvVars)</code>
 <P>
 <DD><DL>
 </DL>

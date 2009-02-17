@@ -197,12 +197,14 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
         updateTransientActions();
     }
 
-    protected void performDelete() throws IOException {
+    protected void performDelete() throws IOException, InterruptedException {
         // prevent a new build while a delete operation is in progress
         makeDisabled(true);
         FilePath ws = getWorkspace();
-        if(ws!=null)
+        if(ws!=null) {
             getScm().processWorkspaceBeforeDeletion(this, ws,getLastBuiltOn());
+            getLastBuiltOn().getFileSystemProvisioner().discardWorkspace(this,ws);
+        }
         super.performDelete();
     }
 
@@ -450,10 +452,10 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
             return false;
 
         if (isParameterized())
-            return Hudson.getInstance().getQueue().add(
-                    new ParameterizedProjectTask(this, getDefaultParametersValues(), c), quietPeriod);
+        	return Hudson.getInstance().getQueue().add(
+        			this, quietPeriod, new ParametersAction(getDefaultParametersValues()), new CauseAction(c));
         else
-            return Hudson.getInstance().getQueue().add(new ParameterizedProjectTask(this, c), quietPeriod);
+            return Hudson.getInstance().getQueue().add(this, quietPeriod, new CauseAction(c));
     }
 
     private List<ParameterValue> getDefaultParametersValues() {
@@ -578,10 +580,23 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      */
     protected abstract Class<R> getBuildClass();
 
+    // keep track of the previous time we started a build
+    private transient long lastBuildStartTime;
+    
     /**
      * Creates a new build of this project for immediate execution.
      */
-    protected R newBuild() throws IOException {
+    protected synchronized R newBuild() throws IOException {
+    	// make sure we don't start two builds in the same second
+    	// so the build directories will be different too
+    	long timeSinceLast = System.currentTimeMillis() - lastBuildStartTime;
+    	if (timeSinceLast < 1000) {
+    		try {
+				Thread.sleep(1000 - timeSinceLast);
+			} catch (InterruptedException e) {
+			}
+    	}
+    	lastBuildStartTime = System.currentTimeMillis();
         try {
             R lastBuild = getBuildClass().getConstructor(getClass()).newInstance(this);
             builds.put(lastBuild);
@@ -735,7 +750,15 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
         if(scm==null)
             return true;    // no SCM
 
+        // Acquire lock for SCMTrigger so poll won't run while we checkout/update
+        SCMTrigger scmt = getTrigger(SCMTrigger.class);
+        boolean locked = false;
         try {
+            if (scmt!=null) {
+                scmt.getLock().lockInterruptibly();
+                locked = true;
+            }
+
             FilePath workspace = getWorkspace();
             workspace.mkdirs();
 
@@ -744,6 +767,9 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
             listener.getLogger().println(Messages.AbstractProject_ScmAborted());
             LOGGER.log(Level.INFO,build.toString()+" aborted",e);
             return false;
+        } finally {
+            if (locked)
+                scmt.getLock().unlock();
         }
     }
 
@@ -1016,10 +1042,8 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
                     // TODO: more unit handling
                     if(delay.endsWith("sec"))   delay=delay.substring(0,delay.length()-3);
                     if(delay.endsWith("secs"))  delay=delay.substring(0,delay.length()-4);
-                    Hudson.getInstance().getQueue().add(
-                    		new ParameterizedProjectTask(this, new UserCause()), 
-                    		Integer.parseInt(delay)
-                    );
+                    Hudson.getInstance().getQueue().add(this, Integer.parseInt(delay), 
+                    		new CauseAction(new UserCause()));
                 } catch (NumberFormatException e) {
                     throw new ServletException("Invalid delay parameter value: "+delay);
                 }
