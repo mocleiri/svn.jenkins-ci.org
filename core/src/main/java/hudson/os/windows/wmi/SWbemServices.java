@@ -23,8 +23,11 @@
  */
 package hudson.os.windows.wmi;
 
+import org.kohsuke.jinterop.JIProxy;
+
 /**
  * @author Kohsuke Kawaguchi
  */
-public class SWbemServices {
+public interface SWbemServices extends JIProxy {
+    SWbemObjectSet InstancesOf(String clazz, int flags, Object unused);
 }
