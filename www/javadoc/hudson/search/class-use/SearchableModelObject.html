@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Interface hudson.search.SearchableModelObject (Hudson core 1.283 API)
+Uses of Interface hudson.search.SearchableModelObject (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.search.SearchableModelObject (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.search.SearchableModelObject (Hudson core 1.283 API)";
+        parent.document.title="Uses of Interface hudson.search.SearchableModelObject (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -95,10 +95,6 @@ Packages that use <A HREF="../../../hudson/search/SearchableModelObject.html" ti
 <TD>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.lifecycle"><B>hudson.lifecycle</B></A></TD>
-<TD>&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.logging"><B>hudson.logging</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
 </TR>
@@ -117,6 +113,10 @@ Packages that use <A HREF="../../../hudson/search/SearchableModelObject.html" ti
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.os.solaris"><B>hudson.os.solaris</B></A></TD>
+<TD>Solaris specific features of Hudson.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.scm"><B>hudson.scm</B></A></TD>
@@ -159,47 +159,6 @@ Uses of <A HREF="../../../hudson/search/SearchableModelObject.html" title="inter
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manages <A HREF="../../../hudson/PluginWrapper.html" title="class in hudson"><CODE>PluginWrapper</CODE></A>s.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson.lifecycle"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Uses of <A HREF="../../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A> in <A HREF="../../../hudson/lifecycle/package-summary.html">hudson.lifecycle</A></FONT></TH>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/lifecycle/package-summary.html">hudson.lifecycle</A> that implement <A HREF="../../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/lifecycle/ZFSInstaller.html" title="class in hudson.lifecycle">ZFSInstaller</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encourages the user to migrate HUDSON_HOME on a ZFS file system.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/lifecycle/ZFSInstaller.MigrationCompleteNotice.html" title="class in hudson.lifecycle">ZFSInstaller.MigrationCompleteNotice</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to indicate that the migration was completed successfully.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/lifecycle/ZFSInstaller.MigrationFailedNotice.html" title="class in hudson.lifecycle">ZFSInstaller.MigrationFailedNotice</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to indicate a failure in the migration.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -607,6 +566,14 @@ Uses of <A HREF="../../../hudson/search/SearchableModelObject.html" title="inter
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base type of Hudson slaves (although in practice, you probably extend <A HREF="../../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> to define a new slave type.)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/Project.html" title="class in hudson.model">Project&lt;P extends Project&lt;P,B&gt;,B extends Build&lt;P,B&gt;&gt;</A></B></CODE>
 
 <BR>
@@ -659,6 +626,14 @@ Uses of <A HREF="../../../hudson/search/SearchableModelObject.html" title="inter
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A particular execution of <A HREF="../../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/Slave.html" title="class in hudson.model">Slave</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Information about a Hudson slave node.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -718,6 +693,47 @@ Uses of <A HREF="../../../hudson/search/SearchableModelObject.html" title="inter
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A> that monitors activities that happen outside Hudson,
  which requires occasional batch reload activity to obtain the up-to-date information.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.os.solaris"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A> in <A HREF="../../../hudson/os/solaris/package-summary.html">hudson.os.solaris</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/os/solaris/package-summary.html">hudson.os.solaris</A> that implement <A HREF="../../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/os/solaris/ZFSInstaller.html" title="class in hudson.os.solaris">ZFSInstaller</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encourages the user to migrate HUDSON_HOME on a ZFS file system.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/os/solaris/ZFSInstaller.MigrationCompleteNotice.html" title="class in hudson.os.solaris">ZFSInstaller.MigrationCompleteNotice</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to indicate that the migration was completed successfully.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/os/solaris/ZFSInstaller.MigrationFailedNotice.html" title="class in hudson.os.solaris">ZFSInstaller.MigrationFailedNotice</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to indicate a failure in the migration.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -854,7 +870,16 @@ Uses of <A HREF="../../../hudson/search/SearchableModelObject.html" title="inter
 <TD><CODE><B><A HREF="../../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates <A HREF="../../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s to dynamically expand/shrink the slaves attached to Hudson.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s to dynamically expand/shrink the slaves attached to Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/slaves/DumbSlave.html" title="class in hudson.slaves">DumbSlave</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default <A HREF="../../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> implementation for computers that do not belong to a higher level structure,
+ like grid or cloud.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

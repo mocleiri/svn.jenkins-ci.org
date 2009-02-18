@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.model.AbstractProject (Hudson core 1.283 API)
+Uses of Class hudson.model.AbstractProject (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.AbstractProject (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.AbstractProject (Hudson core 1.283 API)";
+        parent.document.title="Uses of Class hudson.model.AbstractProject (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -111,6 +111,10 @@ Packages that use <A HREF="../../../hudson/model/AbstractProject.html" title="cl
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.os.solaris"><B>hudson.os.solaris</B></A></TD>
+<TD>Solaris specific features of Hudson.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.scm"><B>hudson.scm</B></A></TD>
 <TD>Hudson's interface with source code management systems.&nbsp;</TD>
 </TR>
@@ -160,8 +164,8 @@ Uses of <A HREF="../../../hudson/model/AbstractProject.html" title="class in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>FileSystemProvisioner.</B><B><A HREF="../../../hudson/FileSystemProvisioner.html#discardWorkspace(hudson.model.AbstractProject, hudson.model.TaskListener)">discardWorkspace</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
-                 <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+<TD><CODE><B>FileSystemProvisioner.</B><B><A HREF="../../../hudson/FileSystemProvisioner.html#discardWorkspace(hudson.model.AbstractProject, hudson.FilePath)">discardWorkspace</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
+                 <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When a project is deleted, this method is called to undo the effect of
@@ -170,8 +174,8 @@ Uses of <A HREF="../../../hudson/model/AbstractProject.html" title="class in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>FileSystemProvisioner.Default.</B><B><A HREF="../../../hudson/FileSystemProvisioner.Default.html#discardWorkspace(hudson.model.AbstractProject, hudson.model.TaskListener)">discardWorkspace</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
-                 <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+<TD><CODE><B>FileSystemProvisioner.Default.</B><B><A HREF="../../../hudson/FileSystemProvisioner.Default.html#discardWorkspace(hudson.model.AbstractProject, hudson.FilePath)">discardWorkspace</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
+                 <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -986,6 +990,32 @@ T</CODE></FONT></TD>
 </TABLE>
 &nbsp;
 <P>
+<A NAME="hudson.os.solaris"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A> in <A HREF="../../../hudson/os/solaris/package-summary.html">hudson.os.solaris</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/os/solaris/package-summary.html">hudson.os.solaris</A> with parameters of type <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ZFSProvisioner.</B><B><A HREF="../../../hudson/os/solaris/ZFSProvisioner.html#discardWorkspace(hudson.model.AbstractProject, hudson.FilePath)">discardWorkspace</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
+                 <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="hudson.scm"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -1049,7 +1079,7 @@ Uses of <A HREF="../../../hudson/model/AbstractProject.html" title="class in hud
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>SCM.</B><B><A HREF="../../../hudson/scm/SCM.html#processWorkspaceBeforeDeletion(hudson.model.AbstractProject, hudson.FilePath, hudson.model.Node)">processWorkspaceBeforeDeletion</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
                                <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
-                               <A HREF="../../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&nbsp;node)</CODE>
+                               <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called before a workspace is deleted on the given node, to provide SCM an opportunity to perform clean up.</TD>

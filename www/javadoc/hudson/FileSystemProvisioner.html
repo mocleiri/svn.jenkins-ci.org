@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FileSystemProvisioner (Hudson core 1.283 API)
+FileSystemProvisioner (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FileSystemProvisioner (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FileSystemProvisioner (Hudson core 1.283 API)";
+        parent.document.title="FileSystemProvisioner (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -100,7 +100,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A>&gt;</DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../hudson/FileSystemProvisioner.Default.html" title="class in hudson">FileSystemProvisioner.Default</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../hudson/FileSystemProvisioner.Default.html" title="class in hudson">FileSystemProvisioner.Default</A>, <A HREF="../hudson/os/solaris/ZFSProvisioner.html" title="class in hudson.os.solaris">ZFSProvisioner</A></DD>
 </DL>
 <HR>
 <DL>
@@ -114,7 +114,7 @@ Prepares and provisions workspaces for <A HREF="../hudson/model/AbstractProject.
 
 
  <p>
- STILL A WORK IN PROGRESS. SUBJECT TO CHANGE!
+ STILL A WORK IN PROGRESS. SUBJECT TO CHANGE! DO NOT EXTEND.
 
  TODO: is this per <A HREF="../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>? Per <A HREF="../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>?
    -> probably per slave.
@@ -149,14 +149,18 @@ Prepares and provisions workspaces for <A HREF="../hudson/model/AbstractProject.
  - when a slave connects, we auto-detect the file system provisioner.
    (for example, ZFS FSP would check the slave root user prop
    and/or attempt to "pfexec zfs create" and take over.)
-     -> hmm, is it better to do this manually?
 
  - the user may configure jobs for snapshot collection, along with
    the retention policy.
 
+ - keep workspace snapshots that correspond to the permalinks
+   In ZFS, use a user property to remember the build and the job.
+
  Can't the 2nd step happen automatically, when someone else depends on
  the workspace snapshot of the upstream? Yes, by using <A HREF="../hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners"><CODE>RunListener</CODE></A>.
  So this becomes like a special SCM type.
+
+
 
  <h2>Design take 2</h2>
  <p>
@@ -257,8 +261,8 @@ Prepares and provisions workspaces for <A HREF="../hudson/model/AbstractProject.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FileSystemProvisioner.html#discardWorkspace(hudson.model.AbstractProject, hudson.model.TaskListener)">discardWorkspace</A></B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
-                 <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+<TD><CODE><B><A HREF="../hudson/FileSystemProvisioner.html#discardWorkspace(hudson.model.AbstractProject, hudson.FilePath)">discardWorkspace</A></B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
+                 <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When a project is deleted, this method is called to undo the effect of
@@ -401,11 +405,11 @@ public abstract void <B>prepareWorkspace</B>(<A HREF="../hudson/model/AbstractBu
 </DL>
 <HR>
 
-<A NAME="discardWorkspace(hudson.model.AbstractProject, hudson.model.TaskListener)"><!-- --></A><H3>
+<A NAME="discardWorkspace(hudson.model.AbstractProject, hudson.FilePath)"><!-- --></A><H3>
 discardWorkspace</H3>
 <PRE>
 public abstract void <B>discardWorkspace</B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
-                                      <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
+                                      <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws)
                                throws java.io.IOException,
                                       java.lang.InterruptedException</PRE>
 <DL>
@@ -416,7 +420,8 @@ public abstract void <B>discardWorkspace</B>(<A HREF="../hudson/model/AbstractPr
 </DL>
 </DD>
 <DD><DL>
-
+<DT><B>Parameters:</B><DD><CODE>project</CODE> - Project whose workspace is being discarded.<DD><CODE>ws</CODE> - Workspace to be discarded. This workspace is on the node
+      this <A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson"><CODE>FileSystemProvisioner</CODE></A> is provisioned for.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>

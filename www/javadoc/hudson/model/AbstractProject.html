@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractProject (Hudson core 1.283 API)
+AbstractProject (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractProject (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractProject (Hudson core 1.283 API)";
+        parent.document.title="AbstractProject (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -478,7 +478,7 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If this project is configured to be always built on this node,
- return that <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>.</TD>
+ return that <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -547,11 +547,11 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getLastBuiltOn()">getLastBuiltOn</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> where this project was last built on.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> where this project was last built on.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1260,7 +1260,8 @@ public void <B>onLoad</B>(<A HREF="../../hudson/model/ItemGroup.html" title="int
 performDelete</H3>
 <PRE>
 protected void <B>performDelete</B>()
-                      throws java.io.IOException</PRE>
+                      throws java.io.IOException,
+                             java.lang.InterruptedException</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractItem.html#performDelete()">AbstractItem</A></CODE></B></DD>
 <DD>Does the real job of deleting the item.
@@ -1271,7 +1272,8 @@ protected void <B>performDelete</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1282,7 +1284,7 @@ getAssignedLabel</H3>
 public <A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A> <B>getAssignedLabel</B>()</PRE>
 <DL>
 <DD>If this project is configured to be always built on this node,
- return that <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>. Otherwise null.
+ return that <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>. Otherwise null.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.Task.html#getAssignedLabel()">getAssignedLabel</A></CODE> in interface <CODE><A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></CODE></DL>
@@ -1941,9 +1943,9 @@ public java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interfa
 <A NAME="getLastBuiltOn()"><!-- --></A><H3>
 getLastBuiltOn</H3>
 <PRE>
-public <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A> <B>getLastBuiltOn</B>()</PRE>
+public <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A> <B>getLastBuiltOn</B>()</PRE>
 <DL>
-<DD>Gets the <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> where this project was last built on.
+<DD>Gets the <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> where this project was last built on.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.Task.html#getLastBuiltOn()">getLastBuiltOn</A></CODE> in interface <CODE><A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></CODE></DL>

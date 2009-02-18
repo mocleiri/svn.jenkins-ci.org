@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Package hudson.model (Hudson core 1.283 API)
+Uses of Package hudson.model (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.model (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.model (Hudson core 1.283 API)";
+        parent.document.title="Uses of Package hudson.model (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -129,6 +129,10 @@ Packages that use <A HREF="../../hudson/model/package-summary.html">hudson.model
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.node_monitors"><B>hudson.node_monitors</B></A></TD>
 <TD>Code that monitors the health of slaves&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.os.solaris"><B>hudson.os.solaris</B></A></TD>
+<TD>Solaris specific features of Hudson.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.scm"><B>hudson.scm</B></A></TD>
@@ -377,25 +381,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> used by <A HREF="../../hudson/lifecycle/package-summary.html">hudson.lifecycle</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/model/class-use/AbstractModelObject.html#hudson.lifecycle"><B>AbstractModelObject</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A> with some convenience methods.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Action.html#hudson.lifecycle"><B>Action</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes an item to the left hand side menu
  of a <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
  (for example to <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>, <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>, and etc.)</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/model/class-use/AdministrativeMonitor.html#hudson.lifecycle"><B>AdministrativeMonitor</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks the health of a subsystem of Hudson and if there's something
- that requires administrator's attention, notify the administrator.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/ManagementLink.html#hudson.lifecycle"><B>ManagementLink</B></A></B>
@@ -565,7 +556,7 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Label.html#hudson.matrix"><B>Label</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group of <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/ModelObject.html#hudson.matrix"><B>ModelObject</B></A></B>
@@ -765,7 +756,7 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Label.html#hudson.maven"><B>Label</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group of <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/ModelObject.html#hudson.maven"><B>ModelObject</B></A></B>
@@ -1288,7 +1279,7 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Label.html#hudson.model"><B>Label</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group of <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/ListView.DescriptorImpl.html#hudson.model"><B>ListView.DescriptorImpl</B></A></B>
@@ -1554,6 +1545,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web-bound object used to serve jar files for JNLP.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Slave.SlaveDescriptor.html#hudson.model"><B>Slave.SlaveDescriptor</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/StringParameterValue.html#hudson.model"><B>StringParameterValue</B></A></B>
 
 <BR>
@@ -1800,6 +1797,66 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object whose state is persisted to XML.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.os.solaris"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> used by <A HREF="../../hudson/os/solaris/package-summary.html">hudson.os.solaris</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/AbstractBuild.html#hudson.os.solaris"><B>AbstractBuild</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>s that build software.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/AbstractModelObject.html#hudson.os.solaris"><B>AbstractModelObject</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A> with some convenience methods.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/AbstractProject.html#hudson.os.solaris"><B>AbstractProject</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base implementation of <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s that build software.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/AdministrativeMonitor.html#hudson.os.solaris"><B>AdministrativeMonitor</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks the health of a subsystem of Hudson and if there's something
+ that requires administrator's attention, notify the administrator.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Describable.html#hudson.os.solaris"><B>Describable</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Classes that are described by <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/ModelObject.html#hudson.os.solaris"><B>ModelObject</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A model object has a URL.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Node.html#hudson.os.solaris"><B>Node</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base type of Hudson slaves (although in practice, you probably extend <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> to define a new slave type.)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/TaskListener.html#hudson.os.solaris"><B>TaskListener</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some lengthy operation
+ that has some chance of failures, such as a build, SCM change polling,
+ slave launch, and so on.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -2129,7 +2186,7 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Label.html#hudson.slaves"><B>Label</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group of <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/LoadStatistics.html#hudson.slaves"><B>LoadStatistics</B></A></B>
@@ -2178,6 +2235,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web-bound object used to serve jar files for JNLP.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Slave.SlaveDescriptor.html#hudson.slaves"><B>Slave.SlaveDescriptor</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/TaskListener.html#hudson.slaves"><B>TaskListener</B></A></B>

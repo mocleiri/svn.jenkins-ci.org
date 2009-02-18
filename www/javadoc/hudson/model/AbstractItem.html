@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractItem (Hudson core 1.283 API)
+AbstractItem (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractItem (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractItem (Hudson core 1.283 API)";
+        parent.document.title="AbstractItem (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -1003,7 +1003,8 @@ doDoDelete</H3>
 public void <B>doDoDelete</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                        org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                 throws java.io.IOException,
-                       javax.servlet.ServletException</PRE>
+                       javax.servlet.ServletException,
+                       java.lang.InterruptedException</PRE>
 <DL>
 <DD>Deletes this item.
 <P>
@@ -1014,7 +1015,8 @@ public void <B>doDoDelete</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+<DD><CODE>javax.servlet.ServletException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1043,7 +1045,8 @@ public void <B>delete</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 delete</H3>
 <PRE>
 public void <B>delete</B>()
-            throws java.io.IOException</PRE>
+            throws java.io.IOException,
+                   java.lang.InterruptedException</PRE>
 <DL>
 <DD>Deletes this item.
 <P>
@@ -1053,7 +1056,8 @@ public void <B>delete</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1062,7 +1066,8 @@ public void <B>delete</B>()
 performDelete</H3>
 <PRE>
 protected void <B>performDelete</B>()
-                      throws java.io.IOException</PRE>
+                      throws java.io.IOException,
+                             java.lang.InterruptedException</PRE>
 <DL>
 <DD>Does the real job of deleting the item.
 <P>
@@ -1072,7 +1077,8 @@ protected void <B>performDelete</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>

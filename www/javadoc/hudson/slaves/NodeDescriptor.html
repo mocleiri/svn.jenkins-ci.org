@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-NodeDescriptor (Hudson core 1.283 API)
+NodeDescriptor (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ NodeDescriptor (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="NodeDescriptor (Hudson core 1.283 API)";
+        parent.document.title="NodeDescriptor (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -94,18 +94,18 @@ hudson.slaves</FONT>
 Class NodeDescriptor</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">hudson.model.Descriptor</A>&lt;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt;
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">hudson.model.Descriptor</A>&lt;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;
       <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.slaves.NodeDescriptor</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/slaves/DumbSlave.DescriptorImpl.html" title="class in hudson.slaves">DumbSlave.DescriptorImpl</A>, <A HREF="../../hudson/model/Hudson.DescriptorImpl.html" title="class in hudson.model">Hudson.DescriptorImpl</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/Hudson.DescriptorImpl.html" title="class in hudson.model">Hudson.DescriptorImpl</A>, <A HREF="../../hudson/model/Slave.SlaveDescriptor.html" title="class in hudson.model">Slave.SlaveDescriptor</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>NodeDescriptor</B><DT>extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt;</DL>
+<DT><PRE>public abstract class <B>NodeDescriptor</B><DT>extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;</DL>
 </PRE>
 
 <P>
@@ -156,7 +156,7 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt;</CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/NodeDescriptor.html#ALL">ALL</A></B></CODE>
 
 <BR>
@@ -192,7 +192,7 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected </CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/slaves/NodeDescriptor.html#NodeDescriptor(java.lang.Class)">NodeDescriptor</A></B>(java.lang.Class&lt;? extends <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt;&nbsp;clazz)</CODE>
+<TD><CODE><B><A HREF="../../hudson/slaves/NodeDescriptor.html#NodeDescriptor(java.lang.Class)">NodeDescriptor</A></B>(java.lang.Class&lt;? extends <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;clazz)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -230,7 +230,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#convert(java.util.Map)">convert</A>, <A HREF="../../hudson/model/Descriptor.html#doHelp(org.kohsuke.stapler.StaplerResponse)">doHelp</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.util.Collection, java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)">getCheckUrl</A>, <A HREF="../../hudson/model/Descriptor.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Descriptor.html#getGlobalConfigPage()">getGlobalConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile()">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getJsonSafeClassName()">getJsonSafeClassName</A>, <A HREF="../../hudson/model/Descriptor.html#getPropertyType(java.lang.String)">getPropertyType</A>, <A HREF="../../hudson/model/Descriptor.html#getViewPage(java.lang.Class, java.lang.String)">getViewPage</A>, <A HREF="../../hudson/model/Descriptor.html#isInstance(T)">isInstance</A>, <A HREF="../../hudson/model/Descriptor.html#load()">load</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A>, <A HREF="../../hudson/model/Descriptor.html#save()">save</A>, <A HREF="../../hudson/model/Descriptor.html#toArray(T...)">toArray</A>, <A HREF="../../hudson/model/Descriptor.html#toList(T...)">toList</A>, <A HREF="../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#convert(java.util.Map)">convert</A>, <A HREF="../../hudson/model/Descriptor.html#doHelp(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doHelp</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.util.Collection, java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)">getCheckUrl</A>, <A HREF="../../hudson/model/Descriptor.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Descriptor.html#getGlobalConfigPage()">getGlobalConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile()">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile(java.lang.String)">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getJsonSafeClassName()">getJsonSafeClassName</A>, <A HREF="../../hudson/model/Descriptor.html#getPropertyType(java.lang.String)">getPropertyType</A>, <A HREF="../../hudson/model/Descriptor.html#getViewPage(java.lang.Class, java.lang.String)">getViewPage</A>, <A HREF="../../hudson/model/Descriptor.html#isInstance(T)">isInstance</A>, <A HREF="../../hudson/model/Descriptor.html#load()">load</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A>, <A HREF="../../hudson/model/Descriptor.html#save()">save</A>, <A HREF="../../hudson/model/Descriptor.html#toArray(T...)">toArray</A>, <A HREF="../../hudson/model/Descriptor.html#toList(T...)">toList</A>, <A HREF="../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -258,7 +258,7 @@ java.lang.Object
 <A NAME="ALL"><!-- --></A><H3>
 ALL</H3>
 <PRE>
-public static final <A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt; <B>ALL</B></PRE>
+public static final <A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt; <B>ALL</B></PRE>
 <DL>
 <DD>All the registered instances.
 <P>
@@ -279,7 +279,7 @@ public static final <A HREF="../../hudson/util/DescriptorList.html" title="class
 <A NAME="NodeDescriptor(java.lang.Class)"><!-- --></A><H3>
 NodeDescriptor</H3>
 <PRE>
-protected <B>NodeDescriptor</B>(java.lang.Class&lt;? extends <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt;&nbsp;clazz)</PRE>
+protected <B>NodeDescriptor</B>(java.lang.Class&lt;? extends <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;clazz)</PRE>
 <DL>
 </DL>
 <HR>
@@ -318,7 +318,7 @@ getConfigPage</H3>
 public java.lang.String <B>getConfigPage</B>()</PRE>
 <DL>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Descriptor.html#getConfigPage()">getConfigPage</A></CODE> in class <CODE><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt;</CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Descriptor.html#getConfigPage()">getConfigPage</A></CODE> in class <CODE><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
 </DL>

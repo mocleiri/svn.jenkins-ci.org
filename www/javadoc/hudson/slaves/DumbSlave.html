@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-DumbSlave (Hudson core 1.283 API)
+DumbSlave (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DumbSlave (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DumbSlave (Hudson core 1.283 API)";
+        parent.document.title="DumbSlave (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -94,11 +94,13 @@ hudson.slaves</FONT>
 Class DumbSlave</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Slave.html" title="class in hudson.model">hudson.model.Slave</A>
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.slaves.DumbSlave</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">hudson.model.AbstractModelObject</A>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Node.html" title="class in hudson.model">hudson.model.Node</A>
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Slave.html" title="class in hudson.model">hudson.model.Slave</A>
+              <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.slaves.DumbSlave</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&gt;, <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, java.io.Serializable</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, java.io.Serializable</DD>
 </DL>
 <HR>
 <DL>
@@ -141,14 +143,14 @@ Default <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><C
 <TH ALIGN="left"><B>Nested classes/interfaces inherited from class hudson.model.<A HREF="../../hudson/model/Slave.html" title="class in hudson.model">Slave</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Slave.JnlpJar.html" title="class in hudson.model">Slave.JnlpJar</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Slave.JnlpJar.html" title="class in hudson.model">Slave.JnlpJar</A>, <A HREF="../../hudson/model/Slave.SlaveDescriptor.html" title="class in hudson.model">Slave.SlaveDescriptor</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
 <A NAME="nested_classes_inherited_from_class_hudson.model.Node"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.model.<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></B></TH>
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from class hudson.model.<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A></CODE></TD>
@@ -184,7 +186,7 @@ Default <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><C
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/slaves/DumbSlave.html#DumbSlave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)">DumbSlave</A></B>(java.lang.String&nbsp;name,
-          java.lang.String&nbsp;description,
+          java.lang.String&nbsp;nodeDescription,
           java.lang.String&nbsp;remoteFS,
           java.lang.String&nbsp;numExecutors,
           <A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
@@ -220,7 +222,25 @@ Default <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><C
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Slave.html" title="class in hudson.model">Slave</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Slave.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Slave.html#createComputer()">createComputer</A>, <A HREF="../../hudson/model/Slave.html#createLauncher(hudson.model.TaskListener)">createLauncher</A>, <A HREF="../../hudson/model/Slave.html#createPath(java.lang.String)">createPath</A>, <A HREF="../../hudson/model/Slave.html#equals(java.lang.Object)">equals</A>, <A HREF="../../hudson/model/Slave.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Slave.html#getAssignedLabels()">getAssignedLabels</A>, <A HREF="../../hudson/model/Slave.html#getClockDifference()">getClockDifference</A>, <A HREF="../../hudson/model/Slave.html#getComputer()">getComputer</A>, <A HREF="../../hudson/model/Slave.html#getDynamicLabels()">getDynamicLabels</A>, <A HREF="../../hudson/model/Slave.html#getLabelString()">getLabelString</A>, <A HREF="../../hudson/model/Slave.html#getLauncher()">getLauncher</A>, <A HREF="../../hudson/model/Slave.html#getMode()">getMode</A>, <A HREF="../../hudson/model/Slave.html#getNodeDescription()">getNodeDescription</A>, <A HREF="../../hudson/model/Slave.html#getNodeName()">getNodeName</A>, <A HREF="../../hudson/model/Slave.html#getNumExecutors()">getNumExecutors</A>, <A HREF="../../hudson/model/Slave.html#getRemoteFS()">getRemoteFS</A>, <A HREF="../../hudson/model/Slave.html#getRetentionStrategy()">getRetentionStrategy</A>, <A HREF="../../hudson/model/Slave.html#getRootPath()">getRootPath</A>, <A HREF="../../hudson/model/Slave.html#getSelfLabel()">getSelfLabel</A>, <A HREF="../../hudson/model/Slave.html#getWorkspaceFor(hudson.model.TopLevelItem)">getWorkspaceFor</A>, <A HREF="../../hudson/model/Slave.html#getWorkspaceRoot()">getWorkspaceRoot</A>, <A HREF="../../hudson/model/Slave.html#hashCode()">hashCode</A>, <A HREF="../../hudson/model/Slave.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Slave.html#setLauncher(hudson.slaves.ComputerLauncher)">setLauncher</A>, <A HREF="../../hudson/model/Slave.html#setMode(hudson.model.Node.Mode)">setMode</A>, <A HREF="../../hudson/model/Slave.html#setNodeName(java.lang.String)">setNodeName</A>, <A HREF="../../hudson/model/Slave.html#setRetentionStrategy(hudson.slaves.RetentionStrategy)">setRetentionStrategy</A>, <A HREF="../../hudson/model/Slave.html#toComputer()">toComputer</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Slave.html#createComputer()">createComputer</A>, <A HREF="../../hudson/model/Slave.html#createLauncher(hudson.model.TaskListener)">createLauncher</A>, <A HREF="../../hudson/model/Slave.html#equals(java.lang.Object)">equals</A>, <A HREF="../../hudson/model/Slave.html#getAssignedLabels()">getAssignedLabels</A>, <A HREF="../../hudson/model/Slave.html#getClockDifference()">getClockDifference</A>, <A HREF="../../hudson/model/Slave.html#getComputer()">getComputer</A>, <A HREF="../../hudson/model/Slave.html#getDynamicLabels()">getDynamicLabels</A>, <A HREF="../../hudson/model/Slave.html#getLabelString()">getLabelString</A>, <A HREF="../../hudson/model/Slave.html#getLauncher()">getLauncher</A>, <A HREF="../../hudson/model/Slave.html#getMode()">getMode</A>, <A HREF="../../hudson/model/Slave.html#getNodeDescription()">getNodeDescription</A>, <A HREF="../../hudson/model/Slave.html#getNodeName()">getNodeName</A>, <A HREF="../../hudson/model/Slave.html#getNumExecutors()">getNumExecutors</A>, <A HREF="../../hudson/model/Slave.html#getRemoteFS()">getRemoteFS</A>, <A HREF="../../hudson/model/Slave.html#getRetentionStrategy()">getRetentionStrategy</A>, <A HREF="../../hudson/model/Slave.html#getRootPath()">getRootPath</A>, <A HREF="../../hudson/model/Slave.html#getWorkspaceFor(hudson.model.TopLevelItem)">getWorkspaceFor</A>, <A HREF="../../hudson/model/Slave.html#getWorkspaceRoot()">getWorkspaceRoot</A>, <A HREF="../../hudson/model/Slave.html#hashCode()">hashCode</A>, <A HREF="../../hudson/model/Slave.html#setLauncher(hudson.slaves.ComputerLauncher)">setLauncher</A>, <A HREF="../../hudson/model/Slave.html#setMode(hudson.model.Node.Mode)">setMode</A>, <A HREF="../../hudson/model/Slave.html#setNodeName(java.lang.String)">setNodeName</A>, <A HREF="../../hudson/model/Slave.html#setRetentionStrategy(hudson.slaves.RetentionStrategy)">setRetentionStrategy</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Node"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Node.html#createPath(java.lang.String)">createPath</A>, <A HREF="../../hudson/model/Node.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Node.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Node.html#getFileSystemProvisioner()">getFileSystemProvisioner</A>, <A HREF="../../hudson/model/Node.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Node.html#getSelfLabel()">getSelfLabel</A>, <A HREF="../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Node.html#toComputer()">toComputer</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractModelObject.html#getSearch()">getSearch</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchIndex()">getSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchName()">getSearchName</A>, <A HREF="../../hudson/model/AbstractModelObject.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#requirePOST()">requirePOST</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -250,7 +270,7 @@ DumbSlave</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>DumbSlave</B>(java.lang.String&nbsp;name,
-                                      java.lang.String&nbsp;description,
+                                      java.lang.String&nbsp;nodeDescription,
                                       java.lang.String&nbsp;remoteFS,
                                       java.lang.String&nbsp;numExecutors,
                                       <A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
@@ -288,6 +308,9 @@ public <A HREF="../../hudson/slaves/DumbSlave.DescriptorImpl.html" title="class 
  implementation, so if <tt>a.getClass()==b.getClass()</tt> then
  <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
 <P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Slave.html#getDescriptor()">getDescriptor</A></CODE> in class <CODE><A HREF="../../hudson/model/Slave.html" title="class in hudson.model">Slave</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>

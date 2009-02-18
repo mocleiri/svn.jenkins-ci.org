@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Computer (Hudson core 1.283 API)
+Computer (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson core 1.283 API)";
+        parent.document.title="Computer (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -117,18 +117,18 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
  (that is the definition of <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.)
 
  <p>
- This object is related to <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> but they have some significant difference.
+ This object is related to <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> but they have some significant difference.
  <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> primarily works as a holder of <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s, so
- if a <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> is configured (probably temporarily) with 0 executors,
+ if a <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> is configured (probably temporarily) with 0 executors,
  you won't have a <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> object for it.
 
- Also, even if you remove a <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>, it takes time for the corresponding
+ Also, even if you remove a <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>, it takes time for the corresponding
  <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> to be removed, if some builds are already in progress on that
  node. Or when the node configuration is changed, unaffected <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> object
- remains intact, while all the <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> objects will go away.
+ remains intact, while all the <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> objects will go away.
 
  <p>
- This object also serves UI (since <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> is an interface and can't have
+ This object also serves UI (since <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> is an interface and can't have
  related side pages.)
 <P>
 
@@ -170,7 +170,7 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#nodeName">nodeName</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> object may be created and deleted independently
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> object may be created and deleted independently
  from this object.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -200,7 +200,7 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/Computer.html#Computer(hudson.model.Node)">Computer</A></B>(<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&nbsp;node)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#Computer(hudson.model.Node)">Computer</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -525,11 +525,11 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#getNode()">getNode</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> that this computer represents.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> that this computer represents.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -696,10 +696,10 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Computer.html#setNode(hudson.model.Node)">setNode</A></B>(<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&nbsp;node)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#setNode(hudson.model.Node)">setNode</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called to notify <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> that its corresponding <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called to notify <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> that its corresponding <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>
  configuration is updated.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -777,7 +777,7 @@ nodeName</H3>
 <PRE>
 protected java.lang.String <B>nodeName</B></PRE>
 <DL>
-<DD><A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> object may be created and deleted independently
+<DD><A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> object may be created and deleted independently
  from this object.
 <P>
 <DL>
@@ -839,7 +839,7 @@ public static final <A HREF="../../hudson/security/Permission.html" title="class
 <A NAME="Computer(hudson.model.Node)"><!-- --></A><H3>
 Computer</H3>
 <PRE>
-public <B>Computer</B>(<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&nbsp;node)</PRE>
+public <B>Computer</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</PRE>
 <DL>
 </DL>
 
@@ -1120,9 +1120,9 @@ public java.lang.String <B>getName</B>()</PRE>
 <A NAME="getNode()"><!-- --></A><H3>
 getNode</H3>
 <PRE>
-public <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A> <B>getNode</B>()</PRE>
+public <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A> <B>getNode</B>()</PRE>
 <DL>
-<DD>Returns the <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A> that this computer represents.
+<DD>Returns the <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> that this computer represents.
 <P>
 <DD><DL>
 </DL>
@@ -1450,9 +1450,9 @@ public <A HREF="../../hudson/util/RunList.html" title="class in hudson.util">Run
 <A NAME="setNode(hudson.model.Node)"><!-- --></A><H3>
 setNode</H3>
 <PRE>
-protected void <B>setNode</B>(<A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&nbsp;node)</PRE>
+protected void <B>setNode</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</PRE>
 <DL>
-<DD>Called to notify <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> that its corresponding <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>
+<DD>Called to notify <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> that its corresponding <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>
  configuration is updated.
 <P>
 <DD><DL>

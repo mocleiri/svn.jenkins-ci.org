@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MatrixProject (Hudson core 1.283 API)
+MatrixProject (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MatrixProject (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MatrixProject (Hudson core 1.283 API)";
+        parent.document.title="MatrixProject (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -848,7 +848,8 @@ public void <B>onLoad</B>(<A HREF="../../hudson/model/ItemGroup.html" title="int
 logRotate</H3>
 <PRE>
 public void <B>logRotate</B>()
-               throws java.io.IOException</PRE>
+               throws java.io.IOException,
+                      java.lang.InterruptedException</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Job.html#logRotate()">Job</A></CODE></B></DD>
 <DD>Perform log rotation.
@@ -859,7 +860,8 @@ public void <B>logRotate</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MavenModuleSet (Hudson core 1.283 API)
+MavenModuleSet (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenModuleSet (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenModuleSet (Hudson core 1.283 API)";
+        parent.document.title="MavenModuleSet (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -278,8 +278,7 @@ Group of <A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.ma
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/maven/MavenModuleSet.html#doDoDeleteAllDisabledModules(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDeleteAllDisabledModules</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                             org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenModuleSet.html#doDoDeleteAllDisabledModules(org.kohsuke.stapler.StaplerResponse)">doDoDeleteAllDisabledModules</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete all disabled modules.</TD>
@@ -1239,7 +1238,8 @@ public int <B>assignBuildNumber</B>()
 logRotate</H3>
 <PRE>
 public void <B>logRotate</B>()
-               throws java.io.IOException</PRE>
+               throws java.io.IOException,
+                      java.lang.InterruptedException</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Job.html#logRotate()">Job</A></CODE></B></DD>
 <DD>Perform log rotation.
@@ -1250,7 +1250,8 @@ public void <B>logRotate</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1513,12 +1514,12 @@ protected void <B>submit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doDoDeleteAllDisabledModules(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doDoDeleteAllDisabledModules(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doDoDeleteAllDisabledModules</H3>
 <PRE>
-public void <B>doDoDeleteAllDisabledModules</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                                         org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                                  throws java.io.IOException</PRE>
+public void <B>doDoDeleteAllDisabledModules</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                                  throws java.io.IOException,
+                                         java.lang.InterruptedException</PRE>
 <DL>
 <DD>Delete all disabled modules.
 <P>
@@ -1528,7 +1529,8 @@ public void <B>doDoDeleteAllDisabledModules</B>(org.kohsuke.stapler.StaplerReque
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>

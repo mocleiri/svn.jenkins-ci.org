@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MavenModule (Hudson core 1.283 API)
+MavenModule (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenModule (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenModule (Hudson core 1.283 API)";
+        parent.document.title="MavenModule (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -1141,7 +1141,8 @@ protected void <B>submit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 performDelete</H3>
 <PRE>
 protected void <B>performDelete</B>()
-                      throws java.io.IOException</PRE>
+                      throws java.io.IOException,
+                             java.lang.InterruptedException</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractItem.html#performDelete()">AbstractItem</A></CODE></B></DD>
 <DD>Does the real job of deleting the item.
@@ -1152,7 +1153,8 @@ protected void <B>performDelete</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>

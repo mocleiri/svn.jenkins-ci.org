@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Cloud (Hudson core 1.283 API)
+Cloud (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Cloud (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Cloud (Hudson core 1.283 API)";
+        parent.document.title="Cloud (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -106,7 +106,7 @@ java.lang.Object
 </PRE>
 
 <P>
-Creates <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s to dynamically expand/shrink the slaves attached to Hudson.
+Creates <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s to dynamically expand/shrink the slaves attached to Hudson.
 
  <p>
  Put another way, this class encapsulates different communication protocols
@@ -236,7 +236,7 @@ Creates <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"
           int&nbsp;excessWorkload)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provisions new <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s from this cloud.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provisions new <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s from this cloud.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -435,7 +435,7 @@ provision</H3>
 public abstract java.util.Collection&lt;<A HREF="../../hudson/slaves/NodeProvisioner.PlannedNode.html" title="class in hudson.slaves">NodeProvisioner.PlannedNode</A>&gt; <B>provision</B>(<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&nbsp;label,
                                                                             int&nbsp;excessWorkload)</PRE>
 <DL>
-<DD>Provisions new <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>s from this cloud.
+<DD>Provisions new <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s from this cloud.
 
  <p>
  <A HREF="../../hudson/slaves/NodeProvisioner.html" title="class in hudson.slaves"><CODE>NodeProvisioner</CODE></A> performs a trend analysis on the load,
@@ -457,7 +457,7 @@ public abstract java.util.Collection&lt;<A HREF="../../hudson/slaves/NodeProvisi
       Always >= 1. For example, if this is 3, the implementation
       should launch 3 slaves with 1 executor each, or 1 slave with
       3 executors, etc.
-<DT><B>Returns:</B><DD><A HREF="../../hudson/slaves/NodeProvisioner.PlannedNode.html" title="class in hudson.slaves"><CODE>NodeProvisioner.PlannedNode</CODE></A>s that represent asynchronous <A HREF="../../hudson/model/Node.html" title="interface in hudson.model"><CODE>Node</CODE></A>
+<DT><B>Returns:</B><DD><A HREF="../../hudson/slaves/NodeProvisioner.PlannedNode.html" title="class in hudson.slaves"><CODE>NodeProvisioner.PlannedNode</CODE></A>s that represent asynchronous <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>
       launch operations. Can be empty but must not be null.</DL>
 </DD>
 </DL>

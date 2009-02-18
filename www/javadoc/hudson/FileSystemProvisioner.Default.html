@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FileSystemProvisioner.Default (Hudson core 1.283 API)
+FileSystemProvisioner.Default (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FileSystemProvisioner.Default (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FileSystemProvisioner.Default (Hudson core 1.283 API)";
+        parent.document.title="FileSystemProvisioner.Default (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -174,8 +174,8 @@ Default implementation that doesn't rely on any file system specific capability,
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FileSystemProvisioner.Default.html#discardWorkspace(hudson.model.AbstractProject, hudson.model.TaskListener)">discardWorkspace</A></B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
-                 <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+<TD><CODE><B><A HREF="../hudson/FileSystemProvisioner.Default.html#discardWorkspace(hudson.model.AbstractProject, hudson.FilePath)">discardWorkspace</A></B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
+                 <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When a project is deleted, this method is called to undo the effect of
@@ -269,23 +269,24 @@ public void <B>prepareWorkspace</B>(<A HREF="../hudson/model/AbstractBuild.html"
 </DL>
 <HR>
 
-<A NAME="discardWorkspace(hudson.model.AbstractProject, hudson.model.TaskListener)"><!-- --></A><H3>
+<A NAME="discardWorkspace(hudson.model.AbstractProject, hudson.FilePath)"><!-- --></A><H3>
 discardWorkspace</H3>
 <PRE>
 public void <B>discardWorkspace</B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
-                             <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
+                             <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws)
                       throws java.io.IOException,
                              java.lang.InterruptedException</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../hudson/FileSystemProvisioner.html#discardWorkspace(hudson.model.AbstractProject, hudson.model.TaskListener)">FileSystemProvisioner</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../hudson/FileSystemProvisioner.html#discardWorkspace(hudson.model.AbstractProject, hudson.FilePath)">FileSystemProvisioner</A></CODE></B></DD>
 <DD>When a project is deleted, this method is called to undo the effect of
  <A HREF="../hudson/FileSystemProvisioner.html#prepareWorkspace(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)"><CODE>FileSystemProvisioner.prepareWorkspace(AbstractBuild, FilePath, TaskListener)</CODE></A>.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/FileSystemProvisioner.html#discardWorkspace(hudson.model.AbstractProject, hudson.model.TaskListener)">discardWorkspace</A></CODE> in class <CODE><A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/FileSystemProvisioner.html#discardWorkspace(hudson.model.AbstractProject, hudson.FilePath)">discardWorkspace</A></CODE> in class <CODE><A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A></CODE></DL>
 </DD>
 <DD><DL>
-
+<DT><B>Parameters:</B><DD><CODE>project</CODE> - Project whose workspace is being discarded.<DD><CODE>ws</CODE> - Workspace to be discarded. This workspace is on the node
+      this <A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson"><CODE>FileSystemProvisioner</CODE></A> is provisioned for.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>

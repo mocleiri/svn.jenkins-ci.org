@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ChangeLogSet (Hudson core 1.283 API)
+ChangeLogSet (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ChangeLogSet (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ChangeLogSet (Hudson core 1.283 API)";
+        parent.document.title="ChangeLogSet (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -207,6 +207,14 @@ Represents SCM change list.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/ChangeLogSet.html#getKind()">getKind</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional identification of the kind of SCM being used.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/ChangeLogSet.html#isEmptySet()">isEmptySet</A></B>()</CODE>
 
@@ -311,6 +319,26 @@ getItems</H3>
 </DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getKind()"><!-- --></A><H3>
+getKind</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public java.lang.String <B>getKind</B>()</PRE>
+<DL>
+<DD>Optional identification of the kind of SCM being used.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>a short token, such as the SCM's main CLI executable name<DT><B>Since:</B></DT>
+  <DD>1.284</DD>
 </DL>
 </DD>
 </DL>

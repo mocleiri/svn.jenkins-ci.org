@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Descriptor (Hudson core 1.283 API)
+Descriptor (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Descriptor (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Descriptor (Hudson core 1.283 API)";
+        parent.document.title="Descriptor (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -284,7 +284,8 @@ Metadata about a configurable instance.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Descriptor.html#doHelp(org.kohsuke.stapler.StaplerResponse)">doHelp</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Descriptor.html#doHelp(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doHelp</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+       org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serves <tt>help.html</tt> from the resource of <A HREF="../../hudson/model/Descriptor.html#clazz"><CODE>clazz</CODE></A>.</TD>
@@ -355,6 +356,14 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the resource path to the help screen HTML, if any.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Descriptor.html#getHelpFile(java.lang.String)">getHelpFile</A></B>(java.lang.String&nbsp;fieldName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the path to the help screen HTML for the given field.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -731,6 +740,26 @@ public java.lang.String <B>getHelpFile</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="getHelpFile(java.lang.String)"><!-- --></A><H3>
+getHelpFile</H3>
+<PRE>
+public java.lang.String <B>getHelpFile</B>(java.lang.String&nbsp;fieldName)</PRE>
+<DL>
+<DD>Returns the path to the help screen HTML for the given field.
+
+ <p>
+ The help files are assumed to be at "help/FIELDNAME.html" with possible
+ locale variations.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="isInstance(hudson.model.Describable)"><!-- --></A><A NAME="isInstance(T)"><!-- --></A><H3>
 isInstance</H3>
 <PRE>
@@ -909,11 +938,13 @@ protected void <B>convert</B>(java.util.Map&lt;java.lang.String,java.lang.Object
 </DL>
 <HR>
 
-<A NAME="doHelp(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doHelp(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doHelp</H3>
 <PRE>
-public void <B>doHelp</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-            throws java.io.IOException</PRE>
+public void <B>doHelp</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                   org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+            throws java.io.IOException,
+                   javax.servlet.ServletException</PRE>
 <DL>
 <DD>Serves <tt>help.html</tt> from the resource of <A HREF="../../hudson/model/Descriptor.html#clazz"><CODE>clazz</CODE></A>.
 <P>
@@ -923,7 +954,8 @@ public void <B>doHelp</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <HR>

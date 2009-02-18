@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SCM (Hudson core 1.283 API)
+SCM (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCM (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCM (Hudson core 1.283 API)";
+        parent.document.title="SCM (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -291,7 +291,7 @@ Captures the configuration information in it.
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/SCM.html#processWorkspaceBeforeDeletion(hudson.model.AbstractProject, hudson.FilePath, hudson.model.Node)">processWorkspaceBeforeDeletion</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
                                <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
-                               <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&nbsp;node)</CODE>
+                               <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called before a workspace is deleted on the given node, to provide SCM an opportunity to perform clean up.</TD>
@@ -479,7 +479,9 @@ processWorkspaceBeforeDeletion</H3>
 <PRE>
 public boolean <B>processWorkspaceBeforeDeletion</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
                                               <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
-                                              <A HREF="../../hudson/model/Node.html" title="interface in hudson.model">Node</A>&nbsp;node)</PRE>
+                                              <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)
+                                       throws java.io.IOException,
+                                              java.lang.InterruptedException</PRE>
 <DL>
 <DD>Called before a workspace is deleted on the given node, to provide SCM an opportunity to perform clean up.
 
@@ -509,7 +511,10 @@ public boolean <B>processWorkspaceBeforeDeletion</B>(<A HREF="../../hudson/model
 <DT><B>Parameters:</B><DD><CODE>project</CODE> - The project that owns this <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A>. This is always the same object for a particular instance
       of <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A>. Just passed in here so that <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A> itself doesn't have to remember the value.<DD><CODE>workspace</CODE> - The workspace which is about to be deleted. Never null. This can be a remote file path.<DD><CODE>node</CODE> - The node that hosts the workspace. SCM can use this information to determine the course of action.
 <DT><B>Returns:</B><DD>true if <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A> is OK to let Hudson proceed with deleting the workspace.
-      False to veto the workspace deletion.<DT><B>Since:</B></DT>
+      False to veto the workspace deletion.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
   <DD>1.246</DD>
 </DL>
 </DD>

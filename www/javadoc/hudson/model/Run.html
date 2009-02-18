@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Run (Hudson core 1.283 API)
+Run (Hudson core 1.284 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-13">
+<META NAME="date" CONTENT="2009-02-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson core 1.283 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson core 1.283 API)";
+        parent.document.title="Run (Hudson core 1.284 API)";
     }
 }
 </SCRIPT>
@@ -513,7 +513,7 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Run.html#getApi(org.kohsuke.stapler.StaplerRequest)">getApi</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getApi()">getApi</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -689,6 +689,14 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the log file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.io.Reader</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getLogReader()">getLogReader</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a Reader that reads from the log file.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1853,6 +1861,27 @@ public java.io.File <B>getLogFile</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="getLogReader()"><!-- --></A><H3>
+getLogReader</H3>
+<PRE>
+public java.io.Reader <B>getLogReader</B>()
+                            throws java.io.IOException</PRE>
+<DL>
+<DD>Returns a Reader that reads from the log file.
+ It will use a gzip-compressed log file (log.gz) if that exists.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>a reader from the log file, or null if none exists
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="makeSearchIndex()"><!-- --></A><H3>
 makeSearchIndex</H3>
 <PRE>
@@ -1870,10 +1899,10 @@ protected <A HREF="../../hudson/search/SearchIndexBuilder.html" title="class in 
 </DL>
 <HR>
 
-<A NAME="getApi(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
+<A NAME="getApi()"><!-- --></A><H3>
 getApi</H3>
 <PRE>
-public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
+public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
