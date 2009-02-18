@@ -21,4 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+/**
+ * Windows Management Instrumentation (WMI) binding for j-interop.
+ *
+ * <p>
+ * This enables Hudson to talk to Windows and perform remote management,
+ * regardless of what OS Hudson itself runs on.
+ *
+ * @see http://msdn.microsoft.com/en-us/library/aa394582.aspx
+ */
 package hudson.os.windows.wmi;
