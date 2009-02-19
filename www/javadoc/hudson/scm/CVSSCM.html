@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-CVSSCM (Hudson core 1.284 API)
+CVSSCM (Hudson core 1.285 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-18">
+<META NAME="date" CONTENT="2009-02-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CVSSCM (Hudson core 1.284 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CVSSCM (Hudson core 1.284 API)";
+        parent.document.title="CVSSCM (Hudson core 1.285 API)";
     }
 }
 </SCRIPT>
@@ -202,13 +202,14 @@ CVS.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.html#CVSSCM(java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean, boolean, boolean)">CVSSCM</A></B>(java.lang.String&nbsp;cvsRoot,
+<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.html#CVSSCM(java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean, boolean, boolean, java.lang.String)">CVSSCM</A></B>(java.lang.String&nbsp;cvsRoot,
        java.lang.String&nbsp;module,
        java.lang.String&nbsp;branch,
        java.lang.String&nbsp;cvsRsh,
        boolean&nbsp;canUseUpdate,
        boolean&nbsp;legacy,
-       boolean&nbsp;isTag)</CODE>
+       boolean&nbsp;isTag,
+       java.lang.String&nbsp;excludedRegions)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -335,6 +336,22 @@ CVS.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.html#getExcludedRegions()">getExcludedRegions</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.html#getExcludedRegionsNormalized()">getExcludedRegionsNormalized</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -471,7 +488,7 @@ public static boolean <B>skipChangeLog</B></PRE>
 </TR>
 </TABLE>
 
-<A NAME="CVSSCM(java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean, boolean, boolean)"><!-- --></A><H3>
+<A NAME="CVSSCM(java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean, boolean, boolean, java.lang.String)"><!-- --></A><H3>
 CVSSCM</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
@@ -481,7 +498,8 @@ CVSSCM</H3>
                                    java.lang.String&nbsp;cvsRsh,
                                    boolean&nbsp;canUseUpdate,
                                    boolean&nbsp;legacy,
-                                   boolean&nbsp;isTag)</PRE>
+                                   boolean&nbsp;isTag,
+                                   java.lang.String&nbsp;excludedRegions)</PRE>
 <DL>
 </DL>
 
@@ -623,6 +641,34 @@ public <A HREF="../../hudson/scm/ChangeLogParser.html" title="class in hudson.sc
 getAllModules</H3>
 <PRE>
 public java.lang.String <B>getAllModules</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getExcludedRegions()"><!-- --></A><H3>
+getExcludedRegions</H3>
+<PRE>
+public java.lang.String <B>getExcludedRegions</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getExcludedRegionsNormalized()"><!-- --></A><H3>
+getExcludedRegionsNormalized</H3>
+<PRE>
+public java.lang.String[] <B>getExcludedRegionsNormalized</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>

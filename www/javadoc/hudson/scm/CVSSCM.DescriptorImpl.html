@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-CVSSCM.DescriptorImpl (Hudson core 1.284 API)
+CVSSCM.DescriptorImpl (Hudson core 1.285 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-18">
+<META NAME="date" CONTENT="2009-02-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CVSSCM.DescriptorImpl (Hudson core 1.284 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CVSSCM.DescriptorImpl (Hudson core 1.284 API)";
+        parent.document.title="CVSSCM.DescriptorImpl (Hudson core 1.285 API)";
     }
 }
 </SCRIPT>
@@ -221,6 +221,15 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.DescriptorImpl.html#doExcludeRegionsCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doExcludeRegionsCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                      org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates the excludeRegions Regex</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -624,6 +633,28 @@ public void <B>doCheckCvsRoot</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DD>Checks the entry to the CVSROOT field.
  <p>
  Also checks if .cvspass file contains the entry for this.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doExcludeRegionsCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doExcludeRegionsCheck</H3>
+<PRE>
+public void <B>doExcludeRegionsCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                           throws java.io.IOException,
+                                  javax.servlet.ServletException</PRE>
+<DL>
+<DD>Validates the excludeRegions Regex
 <P>
 <DD><DL>
 </DL>

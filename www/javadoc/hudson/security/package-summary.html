@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.security (Hudson core 1.284 API)
+hudson.security (Hudson core 1.285 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-18">
+<META NAME="date" CONTENT="2009-02-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.security (Hudson core 1.284 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.security (Hudson core 1.284 API)";
+        parent.document.title="hudson.security (Hudson core 1.285 API)";
     }
 }
 </SCRIPT>
@@ -101,7 +101,8 @@ Security-related code
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/InvalidatableUserDetails.html" title="interface in hudson.security">InvalidatableUserDetails</A></B></TD>
-<TD><CODE>UserDetails</CODE> that can mark <CODE>Authentication</CODE> invalid.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>Starting 1.285, Hudson stops persisting <CODE>Authentication</CODE> altogether
+      (see <A HREF="../../hudson/security/NotSerilizableSecurityContext.html" title="class in hudson.security"><CODE>NotSerilizableSecurityContext</CODE></A>), so there's no need to use this mechanism.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -258,6 +259,10 @@ Security-related code
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/Messages.html" title="class in hudson.security">Messages</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/security/NotSerilizableSecurityContext.html" title="class in hudson.security">NotSerilizableSecurityContext</A></B></TD>
+<TD>The same as <CODE>SecurityContextImpl</CODE> but doesn't serialize <CODE>Authentication</CODE>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/PAMSecurityRealm.html" title="class in hudson.security">PAMSecurityRealm</A></B></TD>
