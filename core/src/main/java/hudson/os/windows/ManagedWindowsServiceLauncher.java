@@ -32,6 +32,8 @@ import hudson.util.StreamTaskListener;
 import hudson.util.Secret;
 import hudson.util.jna.DotNet;
 import jcifs.smb.SmbFile;
+import jcifs.smb.SmbException;
+import jcifs.smb.NtlmPasswordAuthentication;
 import org.apache.commons.io.IOUtils;
 import org.jinterop.dcom.common.JIException;
 import org.jinterop.dcom.common.JIDefaultAuthInfoImpl;
@@ -79,6 +81,11 @@ public class ManagedWindowsServiceLauncher extends ComputerLauncher {
         return new JIDefaultAuthInfoImpl("", userName, password.toString());
     }
 
+    private NtlmPasswordAuthentication createSmbAuth() {
+        JIDefaultAuthInfoImpl auth = createAuth();
+        return new NtlmPasswordAuthentication(auth.getDomain(), auth.getUserName(), auth.getPassword());
+    }
+
     public void launch(SlaveComputer computer, StreamTaskListener listener) throws IOException, InterruptedException {
         try {
             PrintStream logger = listener.getLogger();
@@ -94,12 +101,13 @@ public class ManagedWindowsServiceLauncher extends ComputerLauncher {
                 logger.println("Installing the Hudson slave service");
                 if(!DotNet.isInstalled(2,0,computer.getName(), auth)) {
                     // abort the launch
-                    logger.println(".NET Framework 2.0 or later is required to run a Hudson slave as a Windows service");
+                    logger.println(".NET Framework 2.0 or later is required on this computer to run a Hudson slave as a Windows service");
                     return;
                 }
     
                 String path = computer.getNode().getRemoteFS();
-                SmbFile remoteRoot = new SmbFile("smb://" + computer.getName() + "/" + path.replace('\\', '/').replace(':', '$'));
+                SmbFile remoteRoot = new SmbFile("smb://" + computer.getName() + "/" + path.replace('\\', '/').replace(':', '$')+"/",createSmbAuth());
+                remoteRoot.mkdirs();
 
                 // copy exe
                 logger.println("Copying hudson-slave.exe");
@@ -124,17 +132,19 @@ public class ManagedWindowsServiceLauncher extends ComputerLauncher {
                 int r = svc.Create(
                         dom.selectSingleNode("/service/id").getText(),
                         dom.selectSingleNode("/service/name").getText(),
-                        "java "+dom.selectSingleNode("/service/arguments").getText(),
-                        Win32OwnProcess, 0, "Auto", true);
+                        path+"\\hudson-slave.exe",
+                        Win32OwnProcess, 0, "Automatic", true);
                 if(r!=0) {
-                    listener.error("Failed to create a service. Error code="+r);
+                    listener.error("Failed to create a service: "+svc.getCreateErrorMessage(r));
                     return;
                 }
                 slaveService = services.getService("hudsonslave");
             }
 
             logger.println("Starting the service");
-            slaveService.StartService();
+            slaveService.start();
+        } catch (SmbException e) {
+            e.printStackTrace(listener.error(e.getMessage()));
         } catch (JIException e) {
             e.printStackTrace(listener.error(e.getMessage()));
         } catch (DocumentException e) {
@@ -182,5 +192,9 @@ public class ManagedWindowsServiceLauncher extends ComputerLauncher {
         public String getDisplayName() {
             return "Let Hudson control this Windows slave as a Windows service";
         }
+    }
+
+    static {
+        LIST.add(DescriptorImpl.INSTANCE);
     }
 }
