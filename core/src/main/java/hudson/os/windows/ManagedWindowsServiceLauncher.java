@@ -31,6 +31,10 @@ import hudson.slaves.SlaveComputer;
 import hudson.util.StreamTaskListener;
 import hudson.util.Secret;
 import hudson.util.jna.DotNet;
+import hudson.remoting.Channel;
+import hudson.remoting.SocketInputStream;
+import hudson.remoting.SocketOutputStream;
+import hudson.remoting.Channel.Listener;
 import jcifs.smb.SmbFile;
 import jcifs.smb.SmbException;
 import jcifs.smb.NtlmPasswordAuthentication;
@@ -53,7 +57,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.io.PrintStream;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.net.UnknownHostException;
+import java.net.Socket;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * Windows slave installed/managed as a service entirely remotely
@@ -86,7 +95,7 @@ public class ManagedWindowsServiceLauncher extends ComputerLauncher {
         return new NtlmPasswordAuthentication(auth.getDomain(), auth.getUserName(), auth.getPassword());
     }
 
-    public void launch(SlaveComputer computer, StreamTaskListener listener) throws IOException, InterruptedException {
+    public void launch(final SlaveComputer computer, final StreamTaskListener listener) throws IOException, InterruptedException {
         try {
             PrintStream logger = listener.getLogger();
 
@@ -95,6 +104,9 @@ public class ManagedWindowsServiceLauncher extends ComputerLauncher {
             JISession session = JISession.createSession(auth);
             session.setGlobalSocketTimeout(60000);
             SWbemServices services = WMI.connect(session, computer.getName());
+
+            String path = computer.getNode().getRemoteFS();
+            SmbFile remoteRoot = new SmbFile("smb://" + computer.getName() + "/" + path.replace('\\', '/').replace(':', '$')+"/",createSmbAuth());
 
             Win32Service slaveService = services.getService("hudsonslave");
             if(slaveService==null) {
@@ -105,8 +117,6 @@ public class ManagedWindowsServiceLauncher extends ComputerLauncher {
                     return;
                 }
     
-                String path = computer.getNode().getRemoteFS();
-                SmbFile remoteRoot = new SmbFile("smb://" + computer.getName() + "/" + path.replace('\\', '/').replace(':', '$')+"/",createSmbAuth());
                 remoteRoot.mkdirs();
 
                 // copy exe
@@ -114,14 +124,11 @@ public class ManagedWindowsServiceLauncher extends ComputerLauncher {
                 copyAndClose(getClass().getResource("/windows-service/hudson.exe").openStream(),
                         new SmbFile(remoteRoot,"hudson-slave.exe").getOutputStream());
 
-                // copy slave.jar
-                logger.println("Copying slave.jar");
-                copyAndClose(Hudson.getInstance().getJnlpJars("slave.jar").getURL().openStream(),
-                        new SmbFile(remoteRoot,"slave.jar").getOutputStream());
+                copySlaveJar(logger, remoteRoot);
 
                 // copy hudson-slave.xml
                 logger.println("Copying hudson-slave.xml");
-                String xml = WindowsSlaveInstaller.generateSlaveXml("java.exe",Hudson.getInstance().getRootUrl()+computer.getUrl()+"slave-agent.jnlp");
+                String xml = WindowsSlaveInstaller.generateSlaveXml("javaw.exe","-tcp %BASE%\\port.txt");
                 copyAndClose(new ByteArrayInputStream(xml.getBytes("UTF-8")),
                         new SmbFile(remoteRoot,"hudson-slave.xml").getOutputStream());
 
@@ -133,22 +140,66 @@ public class ManagedWindowsServiceLauncher extends ComputerLauncher {
                         dom.selectSingleNode("/service/id").getText(),
                         dom.selectSingleNode("/service/name").getText(),
                         path+"\\hudson-slave.exe",
-                        Win32OwnProcess, 0, "Automatic", true);
+                        Win32OwnProcess, 0, "Manual", true);
                 if(r!=0) {
-                    listener.error("Failed to create a service: "+svc.getCreateErrorMessage(r));
+                    listener.error("Failed to create a service: "+svc.getErrorMessage(r));
                     return;
                 }
                 slaveService = services.getService("hudsonslave");
+            } else {
+                copySlaveJar(logger, remoteRoot);                
             }
 
             logger.println("Starting the service");
             slaveService.start();
+
+            // wait until we see the port.txt, but don't do so forever
+            logger.println("Waiting for the service to become ready");
+            SmbFile portFile = new SmbFile(remoteRoot, "port.txt");
+            for( int i=0; !portFile.exists(); i++ ) {
+                if(i>=30) {
+                    listener.error("The service didn't respond. Perphaps it failed to launch?");
+                    return;
+                }
+                Thread.sleep(1000);
+            }
+            int p = readSmbFile(portFile);
+
+            // connect
+            logger.println("Connecting to port "+p);
+            final Socket s = new Socket(computer.getName(),p);
+
+            // ready
+            computer.setChannel(new BufferedInputStream(new SocketInputStream(s)),
+                new BufferedOutputStream(new SocketOutputStream(s)),
+                listener.getLogger(),new Listener() {
+                    public void onClosed(Channel channel, IOException cause) {
+                        afterDisconnect(computer,listener);
+                    }
+                });
         } catch (SmbException e) {
             e.printStackTrace(listener.error(e.getMessage()));
         } catch (JIException e) {
             e.printStackTrace(listener.error(e.getMessage()));
         } catch (DocumentException e) {
             e.printStackTrace(listener.error(e.getMessage()));
+        }
+    }
+
+    private void copySlaveJar(PrintStream logger, SmbFile remoteRoot) throws IOException {
+        // copy slave.jar
+        logger.println("Copying slave.jar");
+        copyAndClose(Hudson.getInstance().getJnlpJars("slave.jar").getURL().openStream(),
+                        new SmbFile(remoteRoot,"slave.jar").getOutputStream());
+    }
+
+    private int readSmbFile(SmbFile f) throws IOException {
+        InputStream in=null;
+        try {
+            in = f.getInputStream();
+            return Integer.parseInt(IOUtils.toString(in));
+        } finally {
+            IOUtils.closeQuietly(in);
         }
     }
 
@@ -196,5 +247,6 @@ public class ManagedWindowsServiceLauncher extends ComputerLauncher {
 
     static {
         LIST.add(DescriptorImpl.INSTANCE);
+        Logger.getLogger("org.jinterop").setLevel(Level.WARNING);
     }
 }
