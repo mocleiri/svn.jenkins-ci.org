@@ -1,7 +1,7 @@
 <!--
 The MIT License
 
-Copyright (c) 2004-2009, Sun Microsystems, Inc.
+Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 
-<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-  <f:entry title="${%Administrator user name}" field="userName">
-    <f:textbox />
-  </f:entry>
-  <f:entry title="${%Password}" field="password">
-    <f:password />
-  </f:entry>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define">
+  <st:documentation>
+    Modifies the 'attrs.field' of the parent to inherit @field from the enclosing &lt;f:entry>
+    if available. Also computes the @checkUrl attribute.
+  </st:documentation>
+  <j:set var="pattrs" value="${parentScope.attrs}" />
+  <j:if test="${pattrs.field==null}">
+    <j:set target="${pattrs}" property="field"
+           value="${h.findAncestorTag(pattrs,'/lib/form','entry').attributes.field}" />
+  </j:if>
+  <j:set target="${pattrs}" property="checkUrl"
+         value="${h.getCheckUrl(pattrs.checkUrl,descriptor,pattrs.field)}" />
 </j:jelly>
