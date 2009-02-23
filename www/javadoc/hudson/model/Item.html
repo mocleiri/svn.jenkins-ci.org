@@ -1,0 +1,704 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<!-- -->
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<TITLE>
+Item (Hudson core 1.285 API)
+</TITLE>
+
+<META NAME="date" CONTENT="2009-02-19">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="Item (Hudson core 1.285 API)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Item.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../hudson/model/InvisibleAction.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../index.html?hudson/model/Item.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Item.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+hudson.model</FONT>
+<BR>
+Interface Item</H2>
+<DL>
+<DT><B>All Superinterfaces:</B> <DD><A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></DD>
+</DL>
+<DL>
+<DT><B>All Known Subinterfaces:</B> <DD><A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model">BuildableItem</A>, <A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A>, <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></DD>
+</DL>
+<DL>
+<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A>, <A HREF="../../hudson/maven/AbstractMavenProject.html" title="class in hudson.maven">AbstractMavenProject</A>, <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>, <A HREF="../../hudson/model/ExternalJob.html" title="class in hudson.model">ExternalJob</A>, <A HREF="../../hudson/model/FreeStyleProject.html" title="class in hudson.model">FreeStyleProject</A>, <A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>, <A HREF="../../hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A>, <A HREF="../../hudson/matrix/MatrixProject.html" title="class in hudson.matrix">MatrixProject</A>, <A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>, <A HREF="../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>, <A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project</A>, <A HREF="../../hudson/model/ViewJob.html" title="class in hudson.model">ViewJob</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public interface <B>Item</B><DT>extends <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></DL>
+</PRE>
+
+<P>
+Basic configuration unit in Hudson.
+
+ <p>
+ Every <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> is hosted in an <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model"><CODE>ItemGroup</CODE></A> called "parent",
+ and some <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>s are <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model"><CODE>ItemGroup</CODE></A>s. This form a tree
+ structure, which is rooted at <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.
+
+ <p>
+ Unlike file systems, where a file can be moved from one directory
+ to another, <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> inherently belongs to a single <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model"><CODE>ItemGroup</CODE></A>
+ and that relationship will not change.
+ Think of
+ <a href="http://images.google.com/images?q=Windows%20device%20manager">Windows device manager</a>
+ &mdash; an HDD always show up under 'Disk drives' and it can never be moved to another parent.
+
+ Similarly, <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model"><CODE>ItemGroup</CODE></A> is not a generic container. Each subclass
+ of <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model"><CODE>ItemGroup</CODE></A> can usually only host a certain limited kinds of
+ <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>s.
+
+ <p>
+ <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>s have unique <A HREF="../../hudson/model/Item.html#getName()"><CODE>name</CODE></A>s that distinguish themselves
+ among their siblings uniquely. The names can be combined by '/' to form an
+ item full name, which uniquely identifies an <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> inside the whole <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Kohsuke Kawaguchi</DD>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Items.html" title="class in hudson.model"><CODE>Items</CODE></A></DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#CONFIGURE">CONFIGURE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#CREATE">CREATE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#DELETE">DELETE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security">PermissionGroup</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#PERMISSIONS">PERMISSIONS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#getAbsoluteUrl()">getAbsoluteUrl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This method shall <b>NEVER</b> be used during HTML page rendering, as it won't work with
+      network set up like Apache reverse proxy.
+      This method is only intended for the remote API clients who cannot resolve relative references
+      (even this won't work for the same reason, which should be fixed.)</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Collection&lt;? extends <A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#getAllJobs()">getAllJobs</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the jobs that this <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> contains as descendants.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#getDisplayName()">getDisplayName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the human readable short name of this item.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#getFullDisplayName()">getFullDisplayName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works like <A HREF="../../hudson/model/Item.html#getDisplayName()"><CODE>getDisplayName()</CODE></A> but return
+ the full path that includes all the display names
+ of the ancestors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#getFullName()">getFullName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the full name of this item, like "abc/def/ghi".</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#getName()">getName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the name of the item.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#getParent()">getParent</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the parent that contains this item.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#getShortUrl()">getShortUrl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the URL of this item relative to the parent <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model"><CODE>ItemGroup</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#getUrl()">getUrl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the URL of this item relative to the context root of the application.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#onCopiedFrom(hudson.model.Item)">onCopiedFrom</A></B>(<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;src)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When a <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> is copied from existing one,
+ the files are first copied on the file system,
+ then it will be loaded, then this method will be invoked
+ to perform any implementation-specific work.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></B>(<A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
+       java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called right after when a <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> is loaded from disk.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#save()">save</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the settings to a file.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.PersistenceRoot"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/PersistenceRoot.html#getRootDir()">getRootDir</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.search.SearchableModelObject"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.search.<A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/search/SearchableModelObject.html#getSearch()">getSearch</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.search.SearchItem"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.search.<A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/search/SearchItem.html#getSearchIndex()">getSearchIndex</A>, <A HREF="../../hudson/search/SearchItem.html#getSearchName()">getSearchName</A>, <A HREF="../../hudson/search/SearchItem.html#getSearchUrl()">getSearchUrl</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.security.AccessControlled"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.security.<A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/security/AccessControlled.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/security/AccessControlled.html#getACL()">getACL</A>, <A HREF="../../hudson/security/AccessControlled.html#hasPermission(hudson.security.Permission)">hasPermission</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="PERMISSIONS"><!-- --></A><H3>
+PERMISSIONS</H3>
+<PRE>
+static final <A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security">PermissionGroup</A> <B>PERMISSIONS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CREATE"><!-- --></A><H3>
+CREATE</H3>
+<PRE>
+static final <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A> <B>CREATE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DELETE"><!-- --></A><H3>
+DELETE</H3>
+<PRE>
+static final <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A> <B>DELETE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CONFIGURE"><!-- --></A><H3>
+CONFIGURE</H3>
+<PRE>
+static final <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A> <B>CONFIGURE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getParent()"><!-- --></A><H3>
+getParent</H3>
+<PRE>
+<A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt; <B>getParent</B>()</PRE>
+<DL>
+<DD>Gets the parent that contains this item.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAllJobs()"><!-- --></A><H3>
+getAllJobs</H3>
+<PRE>
+java.util.Collection&lt;? extends <A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt; <B>getAllJobs</B>()</PRE>
+<DL>
+<DD>Gets all the jobs that this <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> contains as descendants.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getName()"><!-- --></A><H3>
+getName</H3>
+<PRE>
+java.lang.String <B>getName</B>()</PRE>
+<DL>
+<DD>Gets the name of the item.
+
+ <p>
+ The name must be unique among other <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>s that belong
+ to the same parent.
+
+ <p>
+ This name is also used for directory name, so it cannot contain
+ any character that's not allowed on the file system.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Item.html#getFullName()"><CODE>getFullName()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFullName()"><!-- --></A><H3>
+getFullName</H3>
+<PRE>
+java.lang.String <B>getFullName</B>()</PRE>
+<DL>
+<DD>Gets the full name of this item, like "abc/def/ghi".
+
+ <p>
+ Full name consists of <A HREF="../../hudson/model/Item.html#getName()"><CODE>name</CODE></A>s of <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>s
+ that lead from the root <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> to this <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>,
+ separated by '/'. This is the unique name that identifies this
+ <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> inside the whole <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Hudson.html#getItemByFullName(java.lang.String, java.lang.Class)"><CODE>Hudson.getItemByFullName(String,Class)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDisplayName()"><!-- --></A><H3>
+getDisplayName</H3>
+<PRE>
+java.lang.String <B>getDisplayName</B>()</PRE>
+<DL>
+<DD>Gets the human readable short name of this item.
+
+ <p>
+ This method should try to return a short concise human
+ readable string that describes this item.
+ The string need not be unique.
+
+ <p>
+ The returned string should not include the display names
+ of <A HREF="../../hudson/model/Item.html#getParent()"><CODE>ancestor items</CODE></A>.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ModelObject.html#getDisplayName()">getDisplayName</A></CODE> in interface <CODE><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFullDisplayName()"><!-- --></A><H3>
+getFullDisplayName</H3>
+<PRE>
+java.lang.String <B>getFullDisplayName</B>()</PRE>
+<DL>
+<DD>Works like <A HREF="../../hudson/model/Item.html#getDisplayName()"><CODE>getDisplayName()</CODE></A> but return
+ the full path that includes all the display names
+ of the ancestors.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUrl()"><!-- --></A><H3>
+getUrl</H3>
+<PRE>
+java.lang.String <B>getUrl</B>()</PRE>
+<DL>
+<DD>Returns the URL of this item relative to the context root of the application.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>URL that ends with '/'.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/AbstractItem.html#getUrl()"><CODE>for how to implement this.</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getShortUrl()"><!-- --></A><H3>
+getShortUrl</H3>
+<PRE>
+java.lang.String <B>getShortUrl</B>()</PRE>
+<DL>
+<DD>Returns the URL of this item relative to the parent <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model"><CODE>ItemGroup</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>URL that ends with '/'.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/AbstractItem.html#getShortUrl()"><CODE>for how to implement this.</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAbsoluteUrl()"><!-- --></A><H3>
+getAbsoluteUrl</H3>
+<PRE>
+java.lang.String <B>getAbsoluteUrl</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>This method shall <b>NEVER</b> be used during HTML page rendering, as it won't work with
+      network set up like Apache reverse proxy.
+      This method is only intended for the remote API clients who cannot resolve relative references
+      (even this won't work for the same reason, which should be fixed.)</I>
+<P>
+<DD>Returns the absolute URL of this item. This relies on the current
+ <CODE>StaplerRequest</CODE> to figure out what the host name is,
+ so can be used only during processing client requests.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>absolute URL.
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalStateException</CODE> - if the method is invoked outside the HTTP request processing.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onLoad(hudson.model.ItemGroup, java.lang.String)"><!-- --></A><H3>
+onLoad</H3>
+<PRE>
+void <B>onLoad</B>(<A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
+            java.lang.String&nbsp;name)
+            throws java.io.IOException</PRE>
+<DL>
+<DD>Called right after when a <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> is loaded from disk.
+ This is an opporunity to do a post load processing.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - Name of the directory (not a path --- just the name portion) from
+      which the configuration was loaded. This usually becomes the
+      <A HREF="../../hudson/model/Item.html#getName()"><CODE>name</CODE></A> of this item.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onCopiedFrom(hudson.model.Item)"><!-- --></A><H3>
+onCopiedFrom</H3>
+<PRE>
+void <B>onCopiedFrom</B>(<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;src)</PRE>
+<DL>
+<DD>When a <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> is copied from existing one,
+ the files are first copied on the file system,
+ then it will be loaded, then this method will be invoked
+ to perform any implementation-specific work.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="save()"><!-- --></A><H3>
+save</H3>
+<PRE>
+void <B>save</B>()
+          throws java.io.IOException</PRE>
+<DL>
+<DD>Save the settings to a file.
+
+ Use <A HREF="../../hudson/model/Items.html#getConfigFile(hudson.model.Item)"><CODE>Items.getConfigFile(Item)</CODE></A>
+ or <A HREF="../../hudson/model/AbstractItem.html#getConfigFile()"><CODE>AbstractItem.getConfigFile()</CODE></A> to obtain the file
+ to save the data.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Saveable.html#save()">save</A></CODE> in interface <CODE><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - if the persistence failed.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Item.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../hudson/model/InvisibleAction.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../index.html?hudson/model/Item.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Item.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &#169; 2009. All Rights Reserved.
+</BODY>
+</HTML>

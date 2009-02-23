@@ -1,0 +1,851 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<!-- -->
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<TITLE>
+Project (Hudson core 1.285 API)
+</TITLE>
+
+<META NAME="date" CONTENT="2009-02-19">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="Project (Hudson core 1.285 API)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Project.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/ProminentProjectAction.html" title="interface in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../index.html?hudson/model/Project.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Project.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.AbstractProject">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+hudson.model</FONT>
+<BR>
+Class Project&lt;P extends Project&lt;P,B&gt;,B extends <A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>&lt;P,B&gt;&gt;</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">hudson.model.AbstractModelObject</A>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">hudson.model.Actionable</A>
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractItem.html" title="class in hudson.model">hudson.model.AbstractItem</A>
+              <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Job.html" title="class in hudson.model">hudson.model.Job</A>&lt;P,R&gt;
+                  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">hudson.model.AbstractProject</A>&lt;P,B&gt;
+                      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Project&lt;P,B&gt;</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model">BuildableItem</A>, <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>, <A HREF="../../hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, <A HREF="../../hudson/tasks/Maven.ProjectWithMaven.html" title="interface in hudson.tasks">Maven.ProjectWithMaven</A>, org.kohsuke.stapler.HttpDeletable</DD>
+</DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/FreeStyleProject.html" title="class in hudson.model">FreeStyleProject</A>, <A HREF="../../hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public abstract class <B>Project&lt;P extends Project&lt;P,B&gt;,B extends <A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>&lt;P,B&gt;&gt;</B><DT>extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;P,B&gt;<DT>implements <A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/tasks/Maven.ProjectWithMaven.html" title="interface in hudson.tasks">Maven.ProjectWithMaven</A></DL>
+</PRE>
+
+<P>
+Buildable software project.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Kohsuke Kawaguchi</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.AbstractProject"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractProject.html#ABORT">ABORT</A>, <A HREF="../../hudson/model/AbstractProject.html#BUILD">BUILD</A>, <A HREF="../../hudson/model/AbstractProject.html#builds">builds</A>, <A HREF="../../hudson/model/AbstractProject.html#disabled">disabled</A>, <A HREF="../../hudson/model/AbstractProject.html#transientActions">transientActions</A>, <A HREF="../../hudson/model/AbstractProject.html#triggers">triggers</A>, <A HREF="../../hudson/model/AbstractProject.html#WORKSPACE">WORKSPACE</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Job"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Job.html#HISTORY_ADAPTER">HISTORY_ADAPTER</A>, <A HREF="../../hudson/model/Job.html#nextBuildNumber">nextBuildNumber</A>, <A HREF="../../hudson/model/Job.html#properties">properties</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.AbstractItem"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractItem.html#description">description</A>, <A HREF="../../hudson/model/AbstractItem.html#name">name</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Item"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Item.html#CONFIGURE">CONFIGURE</A>, <A HREF="../../hudson/model/Item.html#CREATE">CREATE</A>, <A HREF="../../hudson/model/Item.html#DELETE">DELETE</A>, <A HREF="../../hudson/model/Item.html#PERMISSIONS">PERMISSIONS</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#Project(hudson.model.ItemGroup, java.lang.String)">Project</A></B>(<A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&nbsp;parent,
+        java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new project.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#addPublisher(hudson.tasks.Publisher)">addPublisher</A></B>(<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&nbsp;buildStep)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a new <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> to this <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> and saves the configuration.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#asProject()">asProject</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model"><CODE>SCMedItem</CODE></A> needs to be an instance of
+ <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#buildDependencyGraph(hudson.model.DependencyGraph)">buildDependencyGraph</A></B>(<A HREF="../../hudson/model/DependencyGraph.html" title="class in hudson.model">DependencyGraph</A>&nbsp;graph)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builds the dependency graph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#getBuilders()">getBuilders</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#getBuildersList()">getBuildersList</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Map&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>&gt;,<A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#getBuildWrappers()">getBuildWrappers</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#getPublisher(hudson.model.Descriptor)">getPublisher</A></B>(<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&nbsp;descriptor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Map&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;,<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#getPublishers()">getPublishers</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#getPublishersList()">getPublishersList</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the live list of all <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A>s configured for this project.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.util.Set&lt;<A HREF="../../hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#getResourceActivities()">getResourceActivities</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set of child resource activities of the build of this project (override in child projects).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#inferMavenInstallation()">inferMavenInstallation</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks"><CODE>Maven.MavenInstallation</CODE></A> associated with the project.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#isFingerprintConfigured()">isFingerprintConfigured</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True if the builds of this project produces <A HREF="../../hudson/model/Fingerprint.html" title="class in hudson.model"><CODE>Fingerprint</CODE></A> records.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></B>(<A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
+       java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called right after when a <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> is loaded from disk.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#removePublisher(hudson.model.Descriptor)">removePublisher</A></B>(<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&nbsp;descriptor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes a publisher from this project, if it's active.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#submit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">submit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+       org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Derived class can override this to perform additional config submission
+ work.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Project.html#updateTransientActions()">updateTransientActions</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractProject"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractProject.html#_getRuns()">_getRuns</A>, <A HREF="../../hudson/model/AbstractProject.html#addProperty(hudson.model.JobProperty)">addProperty</A>, <A HREF="../../hudson/model/AbstractProject.html#addToList(T, java.util.List)">addToList</A>, <A HREF="../../hudson/model/AbstractProject.html#addTrigger(hudson.triggers.Trigger)">addTrigger</A>, <A HREF="../../hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List)">buildDescribable</A>, <A HREF="../../hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List, java.lang.String)">buildDescribable</A>, <A HREF="../../hudson/model/AbstractProject.html#checkAbortPermission()">checkAbortPermission</A>, <A HREF="../../hudson/model/AbstractProject.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener, java.io.File)">checkout</A>, <A HREF="../../hudson/model/AbstractProject.html#createExecutable()">createExecutable</A>, <A HREF="../../hudson/model/AbstractProject.html#createHistoryWidget()">createHistoryWidget</A>, <A HREF="../../hudson/model/AbstractProject.html#doBuild(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#doBuildWithParameters(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildWithParameters</A>, <A HREF="../../hudson/model/AbstractProject.html#doCancelQueue(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCancelQueue</A>, <A HREF="../../hudson/model/AbstractProject.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A>, <A HREF="../../hudson/model/AbstractProject.html#doDisable(org.kohsuke.stapler.StaplerResponse)">doDisable</A>, <A HREF="../../hudson/model/AbstractProject.html#doDoWipeOutWorkspace(org.kohsuke.stapler.StaplerResponse)">doDoWipeOutWorkspace</A>, <A HREF="../../hudson/model/AbstractProject.html#doEnable(org.kohsuke.stapler.StaplerResponse)">doEnable</A>, <A HREF="../../hudson/model/AbstractProject.html#doPolling(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doPolling</A>, <A HREF="../../hudson/model/AbstractProject.html#doRssChangelog(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssChangelog</A>, <A HREF="../../hudson/model/AbstractProject.html#doWs(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doWs</A>, <A HREF="../../hudson/model/AbstractProject.html#findNearest(java.lang.String)">findNearest</A>, <A HREF="../../hudson/model/AbstractProject.html#getActions()">getActions</A>, <A HREF="../../hudson/model/AbstractProject.html#getAssignedLabel()">getAssignedLabel</A>, <A HREF="../../hudson/model/AbstractProject.html#getAuthToken()">getAuthToken</A>, <A HREF="../../hudson/model/AbstractProject.html#getBuildClass()">getBuildClass</A>, <A HREF="../../hudson/model/AbstractProject.html#getBuildTriggerUpstreamProjects()">getBuildTriggerUpstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getDownstreamProjects()">getDownstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getEstimatedDuration()">getEstimatedDuration</A>, <A HREF="../../hudson/model/AbstractProject.html#getHasCustomQuietPeriod()">getHasCustomQuietPeriod</A>, <A HREF="../../hudson/model/AbstractProject.html#getIconColor()">getIconColor</A>, <A HREF="../../hudson/model/AbstractProject.html#getJDK()">getJDK</A>, <A HREF="../../hudson/model/AbstractProject.html#getLastBuiltOn()">getLastBuiltOn</A>, <A HREF="../../hudson/model/AbstractProject.html#getModuleRoot()">getModuleRoot</A>, <A HREF="../../hudson/model/AbstractProject.html#getModuleRoots()">getModuleRoots</A>, <A HREF="../../hudson/model/AbstractProject.html#getProminentActions()">getProminentActions</A>, <A HREF="../../hudson/model/AbstractProject.html#getPronoun()">getPronoun</A>, <A HREF="../../hudson/model/AbstractProject.html#getQueueItem()">getQueueItem</A>, <A HREF="../../hudson/model/AbstractProject.html#getQuietPeriod()">getQuietPeriod</A>, <A HREF="../../hudson/model/AbstractProject.html#getRelationship(hudson.model.AbstractProject)">getRelationship</A>, <A HREF="../../hudson/model/AbstractProject.html#getResourceList()">getResourceList</A>, <A HREF="../../hudson/model/AbstractProject.html#getRootProject()">getRootProject</A>, <A HREF="../../hudson/model/AbstractProject.html#getScm()">getScm</A>, <A HREF="../../hudson/model/AbstractProject.html#getTransitiveDownstreamProjects()">getTransitiveDownstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getTransitiveUpstreamProjects()">getTransitiveUpstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getTrigger(java.lang.Class)">getTrigger</A>, <A HREF="../../hudson/model/AbstractProject.html#getTriggers()">getTriggers</A>, <A HREF="../../hudson/model/AbstractProject.html#getUpstreamProjects()">getUpstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getWhyBlocked()">getWhyBlocked</A>, <A HREF="../../hudson/model/AbstractProject.html#getWorkspace()">getWorkspace</A>, <A HREF="../../hudson/model/AbstractProject.html#getWorkspaceResource()">getWorkspaceResource</A>, <A HREF="../../hudson/model/AbstractProject.html#hasAbortPermission()">hasAbortPermission</A>, <A HREF="../../hudson/model/AbstractProject.html#hasParticipant(hudson.model.User)">hasParticipant</A>, <A HREF="../../hudson/model/AbstractProject.html#isBuildable()">isBuildable</A>, <A HREF="../../hudson/model/AbstractProject.html#isBuildBlocked()">isBuildBlocked</A>, <A HREF="../../hudson/model/AbstractProject.html#isBuilding()">isBuilding</A>, <A HREF="../../hudson/model/AbstractProject.html#isConfigurable()">isConfigurable</A>, <A HREF="../../hudson/model/AbstractProject.html#isDisabled()">isDisabled</A>, <A HREF="../../hudson/model/AbstractProject.html#isInQueue()">isInQueue</A>, <A HREF="../../hudson/model/AbstractProject.html#isParameterized()">isParameterized</A>, <A HREF="../../hudson/model/AbstractProject.html#loadBuild(java.io.File)">loadBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#makeDisabled(boolean)">makeDisabled</A>, <A HREF="../../hudson/model/AbstractProject.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/AbstractProject.html#newBuild()">newBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#performDelete()">performDelete</A>, <A HREF="../../hudson/model/AbstractProject.html#pollSCMChanges(hudson.model.TaskListener)">pollSCMChanges</A>, <A HREF="../../hudson/model/AbstractProject.html#removeFromList(hudson.model.Descriptor, java.util.List)">removeFromList</A>, <A HREF="../../hudson/model/AbstractProject.html#removeRun(R)">removeRun</A>, <A HREF="../../hudson/model/AbstractProject.html#removeTrigger(hudson.triggers.TriggerDescriptor)">removeTrigger</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild()">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(hudson.model.Cause)">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(int)">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(int, hudson.model.Cause)">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild2(int)">scheduleBuild2</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild2(int, hudson.model.Cause)">scheduleBuild2</A>, <A HREF="../../hudson/model/AbstractProject.html#schedulePolling()">schedulePolling</A>, <A HREF="../../hudson/model/AbstractProject.html#setAssignedLabel(hudson.model.Label)">setAssignedLabel</A>, <A HREF="../../hudson/model/AbstractProject.html#setJDK(hudson.model.JDK)">setJDK</A>, <A HREF="../../hudson/model/AbstractProject.html#setScm(hudson.scm.SCM)">setScm</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Job"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Job.html#assignBuildNumber()">assignBuildNumber</A>, <A HREF="../../hudson/model/Job.html#doBuildStatus(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildStatus</A>, <A HREF="../../hudson/model/Job.html#doBuildTimeGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildTimeGraph</A>, <A HREF="../../hudson/model/Job.html#doBuildTimeGraphMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildTimeGraphMap</A>, <A HREF="../../hudson/model/Job.html#doConfigDotXml(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigDotXml</A>, <A HREF="../../hudson/model/Job.html#doDoRename(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoRename</A>, <A HREF="../../hudson/model/Job.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/Job.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/Job.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Job.html#getAllJobs()">getAllJobs</A>, <A HREF="../../hudson/model/Job.html#getAllProperties()">getAllProperties</A>, <A HREF="../../hudson/model/Job.html#getBuild(java.lang.String)">getBuild</A>, <A HREF="../../hudson/model/Job.html#getBuildByNumber(int)">getBuildByNumber</A>, <A HREF="../../hudson/model/Job.html#getBuildDir()">getBuildDir</A>, <A HREF="../../hudson/model/Job.html#getBuildHealth()">getBuildHealth</A>, <A HREF="../../hudson/model/Job.html#getBuildHealthReports()">getBuildHealthReports</A>, <A HREF="../../hudson/model/Job.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/Job.html#getBuildsAsMap()">getBuildsAsMap</A>, <A HREF="../../hudson/model/Job.html#getBuildStatusUrl()">getBuildStatusUrl</A>, <A HREF="../../hudson/model/Job.html#getDynamic(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">getDynamic</A>, <A HREF="../../hudson/model/Job.html#getFirstBuild()">getFirstBuild</A>, <A HREF="../../hudson/model/Job.html#getLastBuild()">getLastBuild</A>, <A HREF="../../hudson/model/Job.html#getLastCompletedBuild()">getLastCompletedBuild</A>, <A HREF="../../hudson/model/Job.html#getLastFailedBuild()">getLastFailedBuild</A>, <A HREF="../../hudson/model/Job.html#getLastStableBuild()">getLastStableBuild</A>, <A HREF="../../hudson/model/Job.html#getLastSuccessfulBuild()">getLastSuccessfulBuild</A>, <A HREF="../../hudson/model/Job.html#getLogRotator()">getLogRotator</A>, <A HREF="../../hudson/model/Job.html#getNearestBuild(int)">getNearestBuild</A>, <A HREF="../../hudson/model/Job.html#getNearestOldBuild(int)">getNearestOldBuild</A>, <A HREF="../../hudson/model/Job.html#getNextBuildNumber()">getNextBuildNumber</A>, <A HREF="../../hudson/model/Job.html#getPermalinks()">getPermalinks</A>, <A HREF="../../hudson/model/Job.html#getProperties()">getProperties</A>, <A HREF="../../hudson/model/Job.html#getProperty(java.lang.Class)">getProperty</A>, <A HREF="../../hudson/model/Job.html#getWidgets()">getWidgets</A>, <A HREF="../../hudson/model/Job.html#isKeepDependencies()">isKeepDependencies</A>, <A HREF="../../hudson/model/Job.html#isNameEditable()">isNameEditable</A>, <A HREF="../../hudson/model/Job.html#logRotate()">logRotate</A>, <A HREF="../../hudson/model/Job.html#onCopiedFrom(hudson.model.Item)">onCopiedFrom</A>, <A HREF="../../hudson/model/Job.html#removeProperty(java.lang.Class)">removeProperty</A>, <A HREF="../../hudson/model/Job.html#removeProperty(hudson.model.JobProperty)">removeProperty</A>, <A HREF="../../hudson/model/Job.html#renameTo(java.lang.String)">renameTo</A>, <A HREF="../../hudson/model/Job.html#saveNextBuildNumber()">saveNextBuildNumber</A>, <A HREF="../../hudson/model/Job.html#setLogRotator(hudson.tasks.LogRotator)">setLogRotator</A>, <A HREF="../../hudson/model/Job.html#supportsLogRotator()">supportsLogRotator</A>, <A HREF="../../hudson/model/Job.html#updateNextBuildNumber(int)">updateNextBuildNumber</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractItem"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractItem.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#delete()">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#delete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/AbstractItem.html#doSetName(java.lang.String)">doSetName</A>, <A HREF="../../hudson/model/AbstractItem.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getApi()">getApi</A>, <A HREF="../../hudson/model/AbstractItem.html#getConfigFile()">getConfigFile</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A>, <A HREF="../../hudson/model/AbstractItem.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullName()">getFullName</A>, <A HREF="../../hudson/model/AbstractItem.html#getName()">getName</A>, <A HREF="../../hudson/model/AbstractItem.html#getParent()">getParent</A>, <A HREF="../../hudson/model/AbstractItem.html#getRootDir()">getRootDir</A>, <A HREF="../../hudson/model/AbstractItem.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getShortUrl()">getShortUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#save()">save</A>, <A HREF="../../hudson/model/AbstractItem.html#setDescription(java.lang.String)">setDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#toString()">toString</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Actionable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">Actionable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Actionable.html#addAction(hudson.model.Action)">addAction</A>, <A HREF="../../hudson/model/Actionable.html#getAction(java.lang.Class)">getAction</A>, <A HREF="../../hudson/model/Actionable.html#getAction(int)">getAction</A>, <A HREF="../../hudson/model/Actionable.html#getActions(java.lang.Class)">getActions</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractModelObject.html#getSearch()">getSearch</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchIndex()">getSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchName()">getSearchName</A>, <A HREF="../../hudson/model/AbstractModelObject.html#requirePOST()">requirePOST</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.SCMedItem"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/SCMedItem.html#getScm()">getScm</A>, <A HREF="../../hudson/model/SCMedItem.html#pollSCMChanges(hudson.model.TaskListener)">pollSCMChanges</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.BuildableItem"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model">BuildableItem</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/BuildableItem.html#scheduleBuild()">scheduleBuild</A>, <A HREF="../../hudson/model/BuildableItem.html#scheduleBuild(hudson.model.Cause)">scheduleBuild</A>, <A HREF="../../hudson/model/BuildableItem.html#scheduleBuild(int)">scheduleBuild</A>, <A HREF="../../hudson/model/BuildableItem.html#scheduleBuild(int, hudson.model.Cause)">scheduleBuild</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Item"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Item.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/Item.html#getAllJobs()">getAllJobs</A>, <A HREF="../../hudson/model/Item.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Item.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/Item.html#getFullName()">getFullName</A>, <A HREF="../../hudson/model/Item.html#getName()">getName</A>, <A HREF="../../hudson/model/Item.html#getParent()">getParent</A>, <A HREF="../../hudson/model/Item.html#getShortUrl()">getShortUrl</A>, <A HREF="../../hudson/model/Item.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Item.html#onCopiedFrom(hudson.model.Item)">onCopiedFrom</A>, <A HREF="../../hudson/model/Item.html#save()">save</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.PersistenceRoot"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/PersistenceRoot.html#getRootDir()">getRootDir</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.search.SearchableModelObject"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.search.<A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/search/SearchableModelObject.html#getSearch()">getSearch</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.search.SearchItem"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.search.<A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/search/SearchItem.html#getSearchIndex()">getSearchIndex</A>, <A HREF="../../hudson/search/SearchItem.html#getSearchName()">getSearchName</A>, <A HREF="../../hudson/search/SearchItem.html#getSearchUrl()">getSearchUrl</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.security.AccessControlled"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.security.<A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/security/AccessControlled.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/security/AccessControlled.html#getACL()">getACL</A>, <A HREF="../../hudson/security/AccessControlled.html#hasPermission(hudson.security.Permission)">hasPermission</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Queue.Task"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Queue.Task.html#checkAbortPermission()">checkAbortPermission</A>, <A HREF="../../hudson/model/Queue.Task.html#createExecutable()">createExecutable</A>, <A HREF="../../hudson/model/Queue.Task.html#getAssignedLabel()">getAssignedLabel</A>, <A HREF="../../hudson/model/Queue.Task.html#getEstimatedDuration()">getEstimatedDuration</A>, <A HREF="../../hudson/model/Queue.Task.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/Queue.Task.html#getLastBuiltOn()">getLastBuiltOn</A>, <A HREF="../../hudson/model/Queue.Task.html#getName()">getName</A>, <A HREF="../../hudson/model/Queue.Task.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Queue.Task.html#getWhyBlocked()">getWhyBlocked</A>, <A HREF="../../hudson/model/Queue.Task.html#hasAbortPermission()">hasAbortPermission</A>, <A HREF="../../hudson/model/Queue.Task.html#isBuildBlocked()">isBuildBlocked</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.ResourceActivity"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/ResourceActivity.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/ResourceActivity.html#getResourceList()">getResourceList</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="Project(hudson.model.ItemGroup, java.lang.String)"><!-- --></A><H3>
+Project</H3>
+<PRE>
+public <B>Project</B>(<A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&nbsp;parent,
+               java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD>Creates a new project.
+<P>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="onLoad(hudson.model.ItemGroup, java.lang.String)"><!-- --></A><H3>
+onLoad</H3>
+<PRE>
+public void <B>onLoad</B>(<A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
+                   java.lang.String&nbsp;name)
+            throws java.io.IOException</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractItem.html#onLoad(hudson.model.ItemGroup, java.lang.String)">AbstractItem</A></CODE></B></DD>
+<DD>Called right after when a <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> is loaded from disk.
+ This is an opporunity to do a post load processing.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Item.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></CODE> in interface <CODE><A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A> extends <A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A>,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A>&gt;,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A> extends <A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A>,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A>&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+<DD><CODE>name</CODE> - Name of the directory (not a path --- just the name portion) from
+      which the configuration was loaded. This usually becomes the
+      <A HREF="../../hudson/model/Item.html#getName()"><CODE>name</CODE></A> of this item.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="asProject()"><!-- --></A><H3>
+asProject</H3>
+<PRE>
+public <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt; <B>asProject</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/SCMedItem.html#asProject()">SCMedItem</A></CODE></B></DD>
+<DD><A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model"><CODE>SCMedItem</CODE></A> needs to be an instance of
+ <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>.
+
+ <p>
+ This method must be always implemented as <code>(AbstractProject)this</code>, but
+ defining this method emphasizes the fact that this cast must be doable.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/SCMedItem.html#asProject()">asProject</A></CODE> in interface <CODE><A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBuilders()"><!-- --></A><H3>
+getBuilders</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt; <B>getBuilders</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPublishers()"><!-- --></A><H3>
+getPublishers</H3>
+<PRE>
+public java.util.Map&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;,<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt; <B>getPublishers</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBuildersList()"><!-- --></A><H3>
+getBuildersList</H3>
+<PRE>
+public <A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;&gt; <B>getBuildersList</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPublishersList()"><!-- --></A><H3>
+getPublishersList</H3>
+<PRE>
+public <A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt; <B>getPublishersList</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractProject.html#getPublishersList()">AbstractProject</A></CODE></B></DD>
+<DD>Returns the live list of all <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A>s configured for this project.
+
+ <p>
+ This method couldn't be called <tt>getPublishers()</tt> because existing methods
+ in sub-classes return different inconsistent types.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.html#getPublishersList()">getPublishersList</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A> extends <A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A>,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A>&gt;,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A> extends <A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A>,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A>&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBuildWrappers()"><!-- --></A><H3>
+getBuildWrappers</H3>
+<PRE>
+public java.util.Map&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>&gt;,<A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>&gt; <B>getBuildWrappers</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getResourceActivities()"><!-- --></A><H3>
+getResourceActivities</H3>
+<PRE>
+protected java.util.Set&lt;<A HREF="../../hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A>&gt; <B>getResourceActivities</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractProject.html#getResourceActivities()">AbstractProject</A></CODE></B></DD>
+<DD>Set of child resource activities of the build of this project (override in child projects).
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.html#getResourceActivities()">getResourceActivities</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A> extends <A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A>,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A>&gt;,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A> extends <A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A>,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A>&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The set of child resource activities of the build of this project.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addPublisher(hudson.tasks.Publisher)"><!-- --></A><H3>
+addPublisher</H3>
+<PRE>
+public void <B>addPublisher</B>(<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&nbsp;buildStep)
+                  throws java.io.IOException</PRE>
+<DL>
+<DD>Adds a new <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> to this <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> and saves the configuration.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removePublisher(hudson.model.Descriptor)"><!-- --></A><H3>
+removePublisher</H3>
+<PRE>
+public void <B>removePublisher</B>(<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&nbsp;descriptor)
+                     throws java.io.IOException</PRE>
+<DL>
+<DD>Removes a publisher from this project, if it's active.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPublisher(hudson.model.Descriptor)"><!-- --></A><H3>
+getPublisher</H3>
+<PRE>
+public <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A> <B>getPublisher</B>(<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&nbsp;descriptor)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="buildDependencyGraph(hudson.model.DependencyGraph)"><!-- --></A><H3>
+buildDependencyGraph</H3>
+<PRE>
+protected void <B>buildDependencyGraph</B>(<A HREF="../../hudson/model/DependencyGraph.html" title="class in hudson.model">DependencyGraph</A>&nbsp;graph)</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractProject.html#buildDependencyGraph(hudson.model.DependencyGraph)">AbstractProject</A></CODE></B></DD>
+<DD>Builds the dependency graph.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.html#buildDependencyGraph(hudson.model.DependencyGraph)">buildDependencyGraph</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A> extends <A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A>,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A>&gt;,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A> extends <A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A>,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A>&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/DependencyGraph.html" title="class in hudson.model"><CODE>DependencyGraph</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFingerprintConfigured()"><!-- --></A><H3>
+isFingerprintConfigured</H3>
+<PRE>
+public boolean <B>isFingerprintConfigured</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractProject.html#isFingerprintConfigured()">AbstractProject</A></CODE></B></DD>
+<DD>True if the builds of this project produces <A HREF="../../hudson/model/Fingerprint.html" title="class in hudson.model"><CODE>Fingerprint</CODE></A> records.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.html#isFingerprintConfigured()">isFingerprintConfigured</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A> extends <A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A>,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A>&gt;,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A> extends <A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A>,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A>&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="inferMavenInstallation()"><!-- --></A><H3>
+inferMavenInstallation</H3>
+<PRE>
+public <A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A> <B>inferMavenInstallation</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/Maven.ProjectWithMaven.html#inferMavenInstallation()">Maven.ProjectWithMaven</A></CODE></B></DD>
+<DD>Gets the <A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks"><CODE>Maven.MavenInstallation</CODE></A> associated with the project.
+ Can be null.
+
+ <p>
+ If the Maven installation can not be uniquely determined,
+ it's often better to return just one of them, rather than returning
+ null, since this method is currently ultimately only used to
+ decide where to parse <tt>conf/settings.xml</tt> from.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/tasks/Maven.ProjectWithMaven.html#inferMavenInstallation()">inferMavenInstallation</A></CODE> in interface <CODE><A HREF="../../hudson/tasks/Maven.ProjectWithMaven.html" title="interface in hudson.tasks">Maven.ProjectWithMaven</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="submit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+submit</H3>
+<PRE>
+protected void <B>submit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                      org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+               throws java.io.IOException,
+                      javax.servlet.ServletException,
+                      <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Job.html#submit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">Job</A></CODE></B></DD>
+<DD>Derived class can override this to perform additional config submission
+ work.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.html#submit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">submit</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A> extends <A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A>,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A>&gt;,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A> extends <A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A>,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A>&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="updateTransientActions()"><!-- --></A><H3>
+updateTransientActions</H3>
+<PRE>
+protected void <B>updateTransientActions</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.html#updateTransientActions()">updateTransientActions</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A> extends <A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A>,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A>&gt;,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A> extends <A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>&lt;<A HREF="../../hudson/model/Project.html" title="type parameter in Project">P</A>,<A HREF="../../hudson/model/Project.html" title="type parameter in Project">B</A>&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Project.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/ProminentProjectAction.html" title="interface in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../index.html?hudson/model/Project.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Project.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.AbstractProject">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &#169; 2009. All Rights Reserved.
+</BODY>
+</HTML>

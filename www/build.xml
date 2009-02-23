@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<project name="doc generation" basedir="." default="doc">
+  <target name="doc">
+    <taskdef name="htmlmacro" classname="com.sun.wts.tools.htmlmacro.HtmlMacroTask">
+      <classpath>
+        <fileset dir="lib" includes="*.jar" />
+      </classpath>
+    </taskdef>
+    <htmlmacro destdir="." xhtml="true">
+      <documents dir="src" includes="*.html" />
+    </htmlmacro>
+  </target>
+</project>
