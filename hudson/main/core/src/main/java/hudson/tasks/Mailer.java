@@ -23,17 +23,19 @@
  */
 package hudson.tasks;
 
-import hudson.Launcher;
-import hudson.Functions;
 import hudson.Extension;
-import hudson.maven.AbstractMavenProject;
+import hudson.Functions;
+import hudson.Launcher;
+import hudson.matrix.MatrixProject;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
+import hudson.model.Hudson;
+import hudson.model.Project;
 import hudson.model.User;
 import hudson.model.UserPropertyDescriptor;
-import hudson.model.Hudson;
 import hudson.util.FormFieldValidator;
+import net.sf.json.JSONObject;
 import org.apache.tools.ant.types.selectors.SelectorUtils;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
@@ -58,8 +60,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import net.sf.json.JSONObject;
 
 /**
  * {@link Publisher} that sends the build result in e-mail.
@@ -416,7 +416,7 @@ public class Mailer extends Notifier {
 
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
             // for historical reasons, Maven uses MavenMailer
-            return !AbstractMavenProject.class.isAssignableFrom(jobType);
+            return Project.class.isAssignableFrom(jobType) || MatrixProject.class.isAssignableFrom(jobType);
         }
     }
 

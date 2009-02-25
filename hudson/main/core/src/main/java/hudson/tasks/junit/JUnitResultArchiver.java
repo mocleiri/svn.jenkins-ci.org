@@ -27,10 +27,10 @@ import hudson.FilePath.FileCallable;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.Extension;
-import hudson.maven.AbstractMavenProject;
 import hudson.matrix.MatrixAggregatable;
 import hudson.matrix.MatrixAggregator;
 import hudson.matrix.MatrixBuild;
+import hudson.matrix.MatrixProject;
 import hudson.model.*;
 import hudson.remoting.VirtualChannel;
 import hudson.tasks.Publisher;
@@ -153,7 +153,7 @@ public class JUnitResultArchiver extends Recorder implements Serializable, Matri
 
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
             // for Maven we have SurefireArchiver that automatically kicks in.
-            return !AbstractMavenProject.class.isAssignableFrom(jobType);
+            return Project.class.isAssignableFrom(jobType) || MatrixProject.class.isAssignableFrom(jobType);
         }
     }
 }

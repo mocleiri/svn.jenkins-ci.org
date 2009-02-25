@@ -21,11 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package hudson.model;
+package hudson.maven;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import hudson.matrix.MatrixProject;
+import hudson.maven.MavenModuleSet;
+import hudson.model.FreeStyleProject;
+import hudson.model.TopLevelItemDescriptor;
+import hudson.model.Job;
+import hudson.model.JobProperty;
+import hudson.model.JobPropertyDescriptor;
 import org.jvnet.hudson.test.HudsonTestCase;
 
 public class JobPropertyTest extends HudsonTestCase {
@@ -33,22 +39,19 @@ public class JobPropertyTest extends HudsonTestCase {
     /**
      * Asserts that rfe#2398 is fixed.
      */
-    public void testJobPropertySummaryIsShownInMatrixProjectIndexPage() throws Exception {
-        assertJobPropertySummaryIsShownInIndexPage(MatrixProject.DESCRIPTOR);
-    }
-    public void testJobPropertySummaryIsShownInFreeStyleProjectIndexPage() throws Exception {
-        assertJobPropertySummaryIsShownInIndexPage(FreeStyleProject.DESCRIPTOR);
+    public void testJobPropertySummaryIsShownInMavenModuleSetIndexPage() throws Exception {
+        assertJobPropertySummaryIsShownInIndexPage(MavenModuleSet.DESCRIPTOR);
     }
 
     private void assertJobPropertySummaryIsShownInIndexPage(TopLevelItemDescriptor type) throws Exception {
         JobPropertyImpl jp = new JobPropertyImpl("NeedleInPage");
         Job<?,?> project = (Job<?, ?>) hudson.createProject(type, "job-test-case");
         project.addProperty(jp);
-        
+
         HtmlPage page = new WebClient().goTo("job/job-test-case");
         WebAssert.assertTextPresent(page, "NeedleInPage");
     }
-    
+
     public static class JobPropertyImpl extends JobProperty<Job<?,?>> {
         public static DescriptorImpl DESCRIPTOR = new DescriptorImpl();
         private final String propertyString;
@@ -65,7 +68,7 @@ public class JobPropertyTest extends HudsonTestCase {
             return DESCRIPTOR;
         }
 
-        @SuppressWarnings("unchecked")        
+        @SuppressWarnings("unchecked")
         private static class DescriptorImpl extends JobPropertyDescriptor {
             @Override
             public boolean isApplicable(Class<? extends Job> jobType) {

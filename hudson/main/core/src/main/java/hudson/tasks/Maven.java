@@ -33,7 +33,6 @@ import hudson.Launcher.LocalLauncher;
 import hudson.FilePath.FileCallable;
 import hudson.maven.MavenEmbedder;
 import hudson.maven.MavenUtil;
-import hudson.maven.RedeployPublisher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;

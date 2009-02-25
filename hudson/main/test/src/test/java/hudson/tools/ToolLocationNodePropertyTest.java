@@ -35,7 +35,6 @@ import hudson.tasks.Ant;
 import hudson.tasks.Ant.AntInstallation;
 import hudson.tasks.Maven.MavenInstallation;
 import hudson.tasks.Maven.MavenInstallation.DescriptorImpl;
-import hudson.maven.MavenBuilder;
 import hudson.EnvVars;
 
 import java.io.IOException;

@@ -74,6 +74,10 @@ final class WarExploder {
         if (new File(d, "main/war/target/hudson").exists()) {
             return new File(d, "main/war/target/hudson");
         }
+        // TEMPORARY just in case we were started from hudson instead of from hudson/maven-plugin/...
+        if (new File(d, "war/target/hudson").exists()) {
+            return new File(d, "war/target/hudson");
+        }
 
         for( ; d!=null; d=d.getParentFile()) {
             if(!d.getName().equals("main")) continue;

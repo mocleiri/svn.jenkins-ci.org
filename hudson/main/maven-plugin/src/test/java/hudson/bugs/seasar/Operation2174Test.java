@@ -26,6 +26,7 @@ package hudson.bugs.seasar;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import hudson.maven.MavenModuleSet;
+import hudson.maven.MavenTestCase;
 import hudson.model.FreeStyleProject;
 import hudson.tasks.BuildTrigger;
 import hudson.tasks.BuildTrigger.DescriptorImpl;
@@ -38,7 +39,7 @@ import java.util.Collections;
  *
  * @author Kohsuke Kawaguchi
  */
-public class Operation2174Test extends HudsonTestCase {
+public class Operation2174Test extends MavenTestCase {
     /**
      * Upstream/downstream relationship lost.
      */

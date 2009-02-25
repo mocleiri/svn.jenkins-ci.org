@@ -28,7 +28,6 @@ import hudson.FeedAdapter;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
-import hudson.maven.MavenModule;
 import hudson.model.Cause.LegacyCodeCause;
 import hudson.model.Cause.UserCause;
 import hudson.model.Cause.RemoteCause;

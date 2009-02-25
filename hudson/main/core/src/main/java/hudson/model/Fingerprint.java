@@ -33,8 +33,6 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import hudson.Util;
 import hudson.XmlFile;
 import hudson.BulkChange;
-import hudson.maven.MavenModule;
-import hudson.maven.MavenModuleSet;
 import hudson.util.HexBinaryConverter;
 import hudson.util.Iterators;
 import hudson.util.XStream2;

@@ -34,6 +34,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
 import java.net.URL;
 
+import hudson.Util;
+
 /**
  * Installs the specified plugin before launching Hudson. 
  *
@@ -62,8 +64,14 @@ public @interface WithPlugin {
 
         @Override
         public void decorateHome(HudsonTestCase testCase, File home) throws Exception {
-            URL res = getClass().getClassLoader().getResource("plugins/" + a.value());
-            FileUtils.copyURLToFile(res,new File(home,"plugins/"+a.value()));
+            String[] plugins = a.value().split(",");
+            for (String plugin: plugins) {
+                plugin = plugin.trim();
+                URL res = getClass().getClassLoader().getResource("plugins/" + plugin);
+                FileUtils.copyURLToFile(res,new File(home,"plugins/"+plugin));
+            }
+
+
         }
     }
 }

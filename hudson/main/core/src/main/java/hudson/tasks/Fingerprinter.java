@@ -28,7 +28,7 @@ import hudson.FilePath.FileCallable;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.Extension;
-import hudson.maven.AbstractMavenProject;
+import hudson.matrix.MatrixProject;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
@@ -39,6 +39,7 @@ import hudson.model.Fingerprint.BuildPtr;
 import hudson.model.FingerprintMap;
 import hudson.model.Hudson;
 import hudson.model.Result;
+import hudson.model.Project;
 import hudson.remoting.VirtualChannel;
 import hudson.util.FormFieldValidator;
 import hudson.util.IOException2;
@@ -220,7 +221,7 @@ public class Fingerprinter extends Recorder implements Serializable {
 
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
             // for Maven, fingerprinting kicks in automatically.
-            return !AbstractMavenProject.class.isAssignableFrom(jobType);
+            return Project.class.isAssignableFrom(jobType) || MatrixProject.class.isAssignableFrom(jobType);
         }
     }
 

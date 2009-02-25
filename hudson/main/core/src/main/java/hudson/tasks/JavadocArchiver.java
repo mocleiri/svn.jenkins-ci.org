@@ -27,7 +27,7 @@ import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.Extension;
-import hudson.maven.AbstractMavenProject;
+import hudson.matrix.MatrixProject;
 import hudson.model.*;
 import hudson.util.FormFieldValidator;
 
@@ -208,7 +208,7 @@ public class JavadocArchiver extends Recorder {
 
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
             // for Maven, javadoc archiving kicks in automatically
-            return !AbstractMavenProject.class.isAssignableFrom(jobType);
+            return Project.class.isAssignableFrom(jobType) || MatrixProject.class.isAssignableFrom(jobType);
         }
     }
 }

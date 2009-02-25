@@ -27,12 +27,13 @@ import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.Extension;
-import hudson.maven.AbstractMavenProject;
+import hudson.matrix.MatrixProject;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.Result;
+import hudson.model.Project;
 import hudson.util.FormFieldValidator;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -171,7 +172,7 @@ public class ArtifactArchiver extends Recorder {
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
             // for Maven, this happens automatically.
             // TODO: we should still consider enabling this for additional controls?
-            return !AbstractMavenProject.class.isAssignableFrom(jobType);
+            return Project.class.isAssignableFrom(jobType) || MatrixProject.class.isAssignableFrom(jobType);
         }
     }
 }

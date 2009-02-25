@@ -26,7 +26,6 @@ package hudson.tasks;
 import hudson.Launcher;
 import hudson.DescriptorExtensionList;
 import hudson.Extension;
-import hudson.maven.MavenReporter;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
@@ -53,7 +52,7 @@ import java.util.Comparator;
  * project type, not just the freestyle project type (in particular,
  * the native maven2 job type.) This is convenient default for
  * {@link Publisher}s in particular initially, but we encourage advanced
- * plugins to consider writing {@link MavenReporter}, as it offers the
+ * plugins to consider writing MavenReporter, as it offers the
  * potential of reducing the amount of configuration needed to run the plugin.
  *
  * For those plugins that don't want {@link Publisher} to show up in

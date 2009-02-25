@@ -23,7 +23,6 @@
  */
 package hudson.tasks.test;
 
-import hudson.maven.MavenBuild;
 import hudson.model.AbstractBuild;
 import hudson.tasks.junit.CaseResult;
 import hudson.tasks.junit.TestResult;

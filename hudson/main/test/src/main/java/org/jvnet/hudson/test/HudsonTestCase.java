@@ -23,14 +23,25 @@
  */
 package org.jvnet.hudson.test;
 
+import com.gargoylesoftware.htmlunit.AjaxController;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
+import com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest;
 import hudson.CloseProofOutputStream;
+import hudson.EnvVars;
 import hudson.FilePath;
 import hudson.Functions;
-import hudson.WebAppMain;
-import hudson.EnvVars;
 import hudson.Launcher.LocalLauncher;
+import hudson.WebAppMain;
 import hudson.matrix.MatrixProject;
-import hudson.maven.MavenModuleSet;
+import hudson.model.AbstractProject;
 import hudson.model.Descriptor;
 import hudson.model.FreeStyleProject;
 import hudson.model.Hudson;
@@ -38,53 +49,22 @@ import hudson.model.Item;
 import hudson.model.JDK;
 import hudson.model.Label;
 import hudson.model.Node;
+import hudson.model.Node.Mode;
 import hudson.model.Result;
 import hudson.model.Run;
 import hudson.model.Saveable;
 import hudson.model.TaskListener;
 import hudson.model.UpdateCenter;
-import hudson.model.AbstractProject;
-import hudson.model.Node.Mode;
 import hudson.slaves.CommandLauncher;
 import hudson.slaves.DumbSlave;
 import hudson.slaves.RetentionStrategy;
-import hudson.tasks.BuildStep;
+import hudson.tasks.Ant;
 import hudson.tasks.Mailer;
 import hudson.tasks.Maven;
-import hudson.tasks.Ant;
-import hudson.tasks.Publisher;
 import hudson.tasks.Maven.MavenInstallation;
 import hudson.util.ProcessTreeKiller;
 import hudson.util.StreamTaskListener;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.lang.annotation.Annotation;
-import java.lang.ref.WeakReference;
-import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.jar.Manifest;
-import java.util.logging.Filter;
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-
 import junit.framework.TestCase;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.jvnet.hudson.test.HudsonHomeLoader.CopyExisting;
@@ -108,17 +88,29 @@ import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
 import org.xml.sax.SAXException;
 
-import com.gargoylesoftware.htmlunit.AjaxController;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
-import com.gargoylesoftware.htmlunit.html.HtmlButton;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
-import com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.lang.annotation.Annotation;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.jar.Manifest;
+import java.util.logging.Filter;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 /**
  * Base class for all Hudson test cases.
@@ -175,7 +167,6 @@ public abstract class HudsonTestCase extends TestCase {
     protected void setUp() throws Exception {
         env.pin();
         recipe();
-        AbstractProject.WORKSPACE.toString();
         hudson = newHudson();
         hudson.setNoUsageStatistics(true); // collecting usage stats from tests are pointless.
         hudson.servletContext.setAttribute("app",hudson);
@@ -363,25 +354,7 @@ public abstract class HudsonTestCase extends TestCase {
         return (MatrixProject)hudson.createProject(MatrixProject.DESCRIPTOR,name);
     }
 
-    /**
-     * Creates a empty Maven project with an unique name.
-     *
-     * @see #configureDefaultMaven()
-     */
-    protected MavenModuleSet createMavenProject() throws IOException {
-        return createMavenProject(createUniqueProjectName());
-    }
-
-    /**
-     * Creates a empty Maven project with the given name.
-     *
-     * @see #configureDefaultMaven()
-     */
-    protected MavenModuleSet createMavenProject(String name) throws IOException {
-        return (MavenModuleSet)hudson.createProject(MavenModuleSet.DESCRIPTOR,name);
-    }
-
-    private String createUniqueProjectName() {
+    protected String createUniqueProjectName() {
         return "test"+hudson.getItems().size();
     }
 

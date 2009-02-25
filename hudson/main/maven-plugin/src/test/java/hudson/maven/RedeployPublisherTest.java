@@ -21,44 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package hudson.util;
+package hudson.maven;
 
-import junit.framework.TestCase;
+import hudson.model.Result;
+import org.jvnet.hudson.test.Bug;
+import org.jvnet.hudson.test.HudsonTestCase;
+import org.jvnet.hudson.test.SingleFileSCM;
 
-import java.io.StringWriter;
-import java.io.Writer;
-import java.io.IOException;
+import java.io.File;
 
 /**
  * @author Kohsuke Kawaguchi
  */
-public class LineEndNormalizingWriterTest extends TestCase {
-    public void test1() throws IOException {
-        StringWriter sw = new StringWriter();
-        Writer w = new LineEndNormalizingWriter(sw);
+public class RedeployPublisherTest extends MavenTestCase {
+    @Bug(2593)
+    public void testBug2593() throws Exception {
+        configureDefaultMaven();
+        MavenModuleSet m2 = createMavenProject();
+        File repo = createTmpDir();
 
-        w.write("abc\r\ndef\r");
-        w.write("\n");
+        // a fake build
+        m2.setScm(new SingleFileSCM("pom.xml",getClass().getResource("big-artifact.pom")));
+        m2.getPublishersList().add(new RedeployPublisher("",repo.toURI().toString(),true));
 
-        assertEquals(sw.toString(),"abc\r\ndef\r\n");
+        MavenModuleSetBuild b = m2.scheduleBuild2(0).get();
+        assertBuildStatus(Result.SUCCESS, b);
+
+        // TODO: confirm that the artifacts use a consistent timestamp
+        // TODO: we need to somehow introduce a large delay between deploy since timestamp is only second precision
+        // TODO: or maybe we could use a btrace like capability to count the # of invocations?
+
+        System.out.println(repo);
     }
 
-    public void test2() throws IOException {
-        StringWriter sw = new StringWriter();
-        Writer w = new LineEndNormalizingWriter(sw);
 
-        w.write("abc\ndef\n");
-        w.write("\n");
-
-        assertEquals(sw.toString(),"abc\r\ndef\r\n\r\n");
-    }
-
-    public void test3() throws IOException {
-        StringWriter sw = new StringWriter();
-        Writer w = new LineEndNormalizingWriter(sw);
-
-        w.write("\r\n\n");
-
-        assertEquals(sw.toString(),"\r\n\r\n");
-    }
 }

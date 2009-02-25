@@ -1,6 +1,5 @@
-package hudson.model;
+package hudson.maven;
 
-import org.jvnet.hudson.test.HudsonTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 
@@ -9,24 +8,17 @@ import java.util.List;
 import hudson.tasks.Publisher;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Builder;
-import hudson.model.HelpLinkTest.HelpNotFoundBuilder.DescriptorImpl;
+import hudson.model.Job;
 
 /**
  * Click all the help links and make sure they resolve to some text, not 404.
  *
  * @author Kohsuke Kawaguchi
  */
-public class HelpLinkTest extends HudsonTestCase {
-    public void testSystemConfig() throws Exception {
-        clickAllHelpLinks(new WebClient().goTo("configure"));
-    }
+public class HelpLinkTest extends MavenTestCase {
 
-    public void testFreestyleConfig() throws Exception {
-        clickAllHelpLinks(createFreeStyleProject());
-    }
-
-    public void testMatrixConfig() throws Exception {
-        clickAllHelpLinks(createMatrixProject());
+    public void testMavenConfig() throws Exception {
+        clickAllHelpLinks(createMavenProject());
     }
 
     private void clickAllHelpLinks(Job j) throws Exception {
@@ -59,23 +51,4 @@ public class HelpLinkTest extends HudsonTestCase {
         }
     }
 
-    /**
-     * Make sure that this test is meaningful.
-     * Intentionally put 404 and verify that it's detected.
-     */
-    public void testNegative() throws Exception {
-        DescriptorImpl d = new DescriptorImpl();
-        Publisher.all().add(d);
-        try {
-            clickAllHelpLinks(createFreeStyleProject());
-            fail("should detect a failure");
-        } catch(AssertionError e) {
-            if(e.getMessage().contains(d.getHelpFile()))
-                ; // expected
-            else
-                throw e;
-        } finally {
-            Publisher.all().remove(d);
-        }
-    }
 }

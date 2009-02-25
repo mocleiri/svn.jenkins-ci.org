@@ -156,6 +156,14 @@ public class ClassicPluginStrategy implements PluginStrategy {
 			}
 		}
 
+        boolean isMavenPlugin = "maven-plugin".equals(manifest.getMainAttributes().getValue("Short-Name"));
+        String hudsonVersion = manifest.getMainAttributes().getValue("Hudson-Version");
+        // TODO compare if this was built with some hudson version that bundled Maven
+        PluginWrapper.Dependency mavenDependency = new Dependency("maven-plugin:1.286-SNAPSHOT");
+        if (!isMavenPlugin) {
+            optionalDependencies.add(mavenDependency); //
+        }
+
 		ClassLoader dependencyLoader = new DependencyClassLoader(getClass()
 				.getClassLoader(), dependencies);
 		ClassLoader classLoader = new URLClassLoader(paths.toArray(new URL[paths.size()]),
