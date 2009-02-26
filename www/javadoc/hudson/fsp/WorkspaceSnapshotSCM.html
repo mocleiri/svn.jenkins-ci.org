@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-WorkspaceSnapshotSCM (Hudson core 1.285 API)
+WorkspaceSnapshotSCM (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ WorkspaceSnapshotSCM (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="WorkspaceSnapshotSCM (Hudson core 1.285 API)";
+        parent.document.title="WorkspaceSnapshotSCM (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -117,6 +117,25 @@ java.lang.Object
 <HR>
 
 <P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -233,7 +252,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.scm.<A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/scm/SCM.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)">buildEnvVars</A>, <A HREF="../../hudson/scm/SCM.html#createEmptyChangeLog(java.io.File, hudson.model.BuildListener, java.lang.String)">createEmptyChangeLog</A>, <A HREF="../../hudson/scm/SCM.html#getBrowser()">getBrowser</A>, <A HREF="../../hudson/scm/SCM.html#getEffectiveBrowser()">getEffectiveBrowser</A>, <A HREF="../../hudson/scm/SCM.html#getModuleRoot(hudson.FilePath)">getModuleRoot</A>, <A HREF="../../hudson/scm/SCM.html#getModuleRoots(hudson.FilePath)">getModuleRoots</A>, <A HREF="../../hudson/scm/SCM.html#nullify(java.lang.String)">nullify</A>, <A HREF="../../hudson/scm/SCM.html#processWorkspaceBeforeDeletion(hudson.model.AbstractProject, hudson.FilePath, hudson.model.Node)">processWorkspaceBeforeDeletion</A>, <A HREF="../../hudson/scm/SCM.html#requiresWorkspaceForPolling()">requiresWorkspaceForPolling</A>, <A HREF="../../hudson/scm/SCM.html#supportsPolling()">supportsPolling</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/scm/SCM.html#all()">all</A>, <A HREF="../../hudson/scm/SCM.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)">buildEnvVars</A>, <A HREF="../../hudson/scm/SCM.html#createEmptyChangeLog(java.io.File, hudson.model.BuildListener, java.lang.String)">createEmptyChangeLog</A>, <A HREF="../../hudson/scm/SCM.html#getBrowser()">getBrowser</A>, <A HREF="../../hudson/scm/SCM.html#getEffectiveBrowser()">getEffectiveBrowser</A>, <A HREF="../../hudson/scm/SCM.html#getModuleRoot(hudson.FilePath)">getModuleRoot</A>, <A HREF="../../hudson/scm/SCM.html#getModuleRoots(hudson.FilePath)">getModuleRoots</A>, <A HREF="../../hudson/scm/SCM.html#nullify(java.lang.String)">nullify</A>, <A HREF="../../hudson/scm/SCM.html#processWorkspaceBeforeDeletion(hudson.model.AbstractProject, hudson.FilePath, hudson.model.Node)">processWorkspaceBeforeDeletion</A>, <A HREF="../../hudson/scm/SCM.html#requiresWorkspaceForPolling()">requiresWorkspaceForPolling</A>, <A HREF="../../hudson/scm/SCM.html#supportsPolling()">supportsPolling</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -434,7 +453,7 @@ public <A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm"
  <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/scm/SCM.html#getDescriptor()">getDescriptor</A></CODE> in class <CODE><A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A>&gt;</CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/scm/SCM.html#getDescriptor()">getDescriptor</A></CODE> in class <CODE><A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

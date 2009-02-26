@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-RetentionStrategy (Hudson core 1.285 API)
+RetentionStrategy (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RetentionStrategy (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RetentionStrategy (Hudson core 1.285 API)";
+        parent.document.title="RetentionStrategy (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/slaves/NodeProvisioner.PlannedNode.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/slaves/RetentionStrategy.Always.html" title="class in hudson.slaves"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/slaves/RetentionStrategy.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -146,7 +146,17 @@ Controls when to take <A HREF="../../hudson/model/Computer.html" title="class in
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> that tries to keep the node offline when not in use.</TD>
 </TR>
 </TABLE>
-&nbsp;<!-- =========== FIELD SUMMARY =========== -->
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -168,7 +178,8 @@ Controls when to take <A HREF="../../hudson/model/Computer.html" title="class in
 <TD><CODE><B><A HREF="../../hudson/slaves/RetentionStrategy.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> implementations.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../hudson/slaves/RetentionStrategy.html#all()"><CODE>all()</CODE></A> for read access, and <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -206,11 +217,27 @@ Controls when to take <A HREF="../../hudson/model/Computer.html" title="class in
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/RetentionStrategy.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;long</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/RetentionStrategy.html#check(T)">check</A></B>(<A HREF="../../hudson/slaves/RetentionStrategy.html" title="type parameter in RetentionStrategy">T</A>&nbsp;c)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method will be called periodically to allow this strategy to decide what to do with it's owning slave.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/RetentionStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -239,15 +266,6 @@ Controls when to take <A HREF="../../hudson/model/Computer.html" title="class in
 <TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Describable"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A></B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE></TD>
-</TR>
-</TABLE>
 &nbsp;
 <P>
 
@@ -266,7 +284,8 @@ LIST</H3>
 <PRE>
 public static final <A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt; <B>LIST</B></PRE>
 <DL>
-<DD>All registered <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> implementations.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../hudson/slaves/RetentionStrategy.html#all()"><CODE>all()</CODE></A> for read access, and <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I><DD>All registered <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> implementations.
 <P>
 <DL>
 </DL>
@@ -382,6 +401,44 @@ public void <B>start</B>(<A HREF="../../hudson/slaves/RetentionStrategy.html" ti
 </DL>
 </DD>
 </DL>
+<HR>
+
+<A NAME="getDescriptor()"><!-- --></A><H3>
+getDescriptor</H3>
+<PRE>
+public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt; <B>getDescriptor</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
+<DD>Gets the descriptor for this instance.
+
+ <p>
+ <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> is a singleton for every concrete <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
+ implementation, so if <tt>a.getClass()==b.getClass()</tt> then
+ <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;&gt; <B>all</B>()</PRE>
+<DL>
+<DD>Returns all the registered <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> descriptors.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
 
@@ -413,7 +470,7 @@ public void <B>start</B>(<A HREF="../../hudson/slaves/RetentionStrategy.html" ti
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/slaves/NodeProvisioner.PlannedNode.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/slaves/RetentionStrategy.Always.html" title="class in hudson.slaves"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/slaves/RetentionStrategy.html" target="_top"><B>FRAMES</B></A>  &nbsp;

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Iterators (Hudson core 1.285 API)
+Iterators (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Iterators (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Iterators (Hudson core 1.285 API)";
+        parent.document.title="Iterators (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -177,6 +177,21 @@ Varios <A HREF="../../hudson/util/Iterators.FlattenIterator.html" title="class i
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the empty iterator.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.util.Iterator&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/Iterators.html#readOnly(java.util.Iterator)">readOnly</A></B>(java.util.Iterator&lt;T&gt;&nbsp;itr)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a read-only mutator that disallows <A HREF="../../hudson/util/Iterators.FlattenIterator.html#remove()"><CODE>Iterators.FlattenIterator.remove()</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -353,6 +368,19 @@ reverseSequence</H3>
 public static java.util.List&lt;java.lang.Integer&gt; <B>reverseSequence</B>(int&nbsp;start,
                                                                 int&nbsp;end)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="readOnly(java.util.Iterator)"><!-- --></A><H3>
+readOnly</H3>
+<PRE>
+public static &lt;T&gt; java.util.Iterator&lt;T&gt; <B>readOnly</B>(java.util.Iterator&lt;T&gt;&nbsp;itr)</PRE>
+<DL>
+<DD>Creates a read-only mutator that disallows <A HREF="../../hudson/util/Iterators.FlattenIterator.html#remove()"><CODE>Iterators.FlattenIterator.remove()</CODE></A>.
+<P>
 <DD><DL>
 </DL>
 </DD>

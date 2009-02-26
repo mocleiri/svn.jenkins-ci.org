@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.util.DescriptorList (Hudson core 1.285 API)
+Uses of Class hudson.util.DescriptorList (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.util.DescriptorList (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.util.DescriptorList (Hudson core 1.285 API)";
+        parent.document.title="Uses of Class hudson.util.DescriptorList (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -91,10 +91,6 @@ function windowTitle()
 Packages that use <A HREF="../../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson"><B>hudson</B></A></TD>
-<TD>&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
@@ -113,47 +109,6 @@ Packages that use <A HREF="../../../hudson/util/DescriptorList.html" title="clas
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.views"><B>hudson.views</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Uses of <A HREF="../../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A> in <A HREF="../../../hudson/package-summary.html">hudson</A></FONT></TH>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/package-summary.html">hudson</A> declared as <A HREF="../../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../../../hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>FileSystemProvisioner.</B><B><A HREF="../../../hudson/FileSystemProvisioner.html#LIST">LIST</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A list of available file system provider types.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/package-summary.html">hudson</A> that return <A HREF="../../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>Functions.</B><B><A HREF="../../../hudson/Functions.html#getCloudDescriptors()">getCloudDescriptors</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -178,7 +133,8 @@ Uses of <A HREF="../../../hudson/util/DescriptorList.html" title="class in hudso
 <TD><CODE><B>ParameterDefinition.</B><B><A HREF="../../../hudson/model/ParameterDefinition.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A list of available parameter definition types</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../../hudson/model/ParameterDefinition.html#all()"><CODE>ParameterDefinition.all()</CODE></A> for read access, and <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -186,7 +142,8 @@ Uses of <A HREF="../../../hudson/util/DescriptorList.html" title="class in hudso
 <TD><CODE><B>View.</B><B><A HREF="../../../hudson/model/View.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A list of available view types.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../../hudson/model/View.html#all()"><CODE>View.all()</CODE></A> for read access, and use <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -211,7 +168,8 @@ Uses of <A HREF="../../../hudson/util/DescriptorList.html" title="class in hudso
 <TD><CODE><B>NodeMonitor.</B><B><A HREF="../../../hudson/node_monitors/NodeMonitor.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A>s.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <A HREF="../../../hudson/node_monitors/NodeMonitor.html#all()"><CODE>NodeMonitor.all()</CODE></A> for read access and <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -236,7 +194,7 @@ Uses of <A HREF="../../../hudson/util/DescriptorList.html" title="class in hudso
 <TD><CODE><B>AuthorizationStrategy.</B><B><A HREF="../../../hudson/security/AuthorizationStrategy.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> implementations.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../hudson/security/AuthorizationStrategy.html#all()"><CODE>AuthorizationStrategy.all()</CODE></A> for read access, and <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -244,7 +202,8 @@ Uses of <A HREF="../../../hudson/util/DescriptorList.html" title="class in hudso
 <TD><CODE><B>SecurityRealm.</B><B><A HREF="../../../hudson/security/SecurityRealm.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> implementations.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../../hudson/security/SecurityRealm.html#all()"><CODE>SecurityRealm.all()</CODE></A> for read access, and use <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -269,7 +228,8 @@ Uses of <A HREF="../../../hudson/util/DescriptorList.html" title="class in hudso
 <TD><CODE><B>Cloud.</B><B><A HREF="../../../hudson/slaves/Cloud.html#ALL">ALL</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A> implementations.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../../hudson/slaves/Cloud.html#all()"><CODE>Cloud.all()</CODE></A> for read access, and <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -277,7 +237,8 @@ Uses of <A HREF="../../../hudson/util/DescriptorList.html" title="class in hudso
 <TD><CODE><B>NodeDescriptor.</B><B><A HREF="../../../hudson/slaves/NodeDescriptor.html#ALL">ALL</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All the registered instances.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../../hudson/slaves/NodeDescriptor.html#all()"><CODE>NodeDescriptor.all()</CODE></A> for read access, and <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -285,7 +246,8 @@ Uses of <A HREF="../../../hudson/util/DescriptorList.html" title="class in hudso
 <TD><CODE><B>RetentionStrategy.</B><B><A HREF="../../../hudson/slaves/RetentionStrategy.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> implementations.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../../hudson/slaves/RetentionStrategy.html#all()"><CODE>RetentionStrategy.all()</CODE></A> for read access, and <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -293,7 +255,9 @@ Uses of <A HREF="../../../hudson/util/DescriptorList.html" title="class in hudso
 <TD><CODE><B>ComputerLauncher.</B><B><A HREF="../../../hudson/slaves/ComputerLauncher.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> implementations.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.281
+      Use <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration, and use
+      <A HREF="../../../hudson/model/Hudson.html#getDescriptorList(java.lang.Class)"><CODE>Hudson.getDescriptorList(Class)</CODE></A> for read access.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -318,7 +282,8 @@ Uses of <A HREF="../../../hudson/util/DescriptorList.html" title="class in hudso
 <TD><CODE><B>ListViewColumn.</B><B><A HREF="../../../hudson/views/ListViewColumn.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views"><CODE>ListViewColumn</CODE></A>s.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.281
+      Use <A HREF="../../../hudson/views/ListViewColumn.html#all()"><CODE>ListViewColumn.all()</CODE></A> for read access and <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;

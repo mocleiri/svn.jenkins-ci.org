@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-BuildStep (Hudson core 1.285 API)
+BuildStep (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildStep (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildStep (Hudson core 1.285 API)";
+        parent.document.title="BuildStep (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -93,7 +93,7 @@ hudson.tasks</FONT>
 <BR>
 Interface BuildStep</H2>
 <DL>
-<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/tasks/test/AggregatedTestResultPublisher.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher</A>, <A HREF="../../hudson/tasks/Ant.html" title="class in hudson.tasks">Ant</A>, <A HREF="../../hudson/tasks/ArtifactArchiver.html" title="class in hudson.tasks">ArtifactArchiver</A>, <A HREF="../../hudson/security/AuthorizationMatrixProperty.html" title="class in hudson.security">AuthorizationMatrixProperty</A>, <A HREF="../../hudson/tasks/BatchFile.html" title="class in hudson.tasks">BatchFile</A>, <A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>, <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html" title="class in hudson.tasks">BuildStepCompatibilityLayer</A>, <A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks">BuildTrigger</A>, <A HREF="../../hudson/tasks/CommandInterpreter.html" title="class in hudson.tasks">CommandInterpreter</A>, <A HREF="../../hudson/tasks/Fingerprinter.html" title="class in hudson.tasks">Fingerprinter</A>, <A HREF="../../hudson/tasks/JavadocArchiver.html" title="class in hudson.tasks">JavadocArchiver</A>, <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>, <A HREF="../../hudson/tasks/junit/JUnitResultArchiver.html" title="class in hudson.tasks.junit">JUnitResultArchiver</A>, <A HREF="../../hudson/tasks/Mailer.html" title="class in hudson.tasks">Mailer</A>, <A HREF="../../hudson/tasks/Maven.html" title="class in hudson.tasks">Maven</A>, <A HREF="../../hudson/maven/MavenRedeployer.html" title="class in hudson.maven">MavenRedeployer</A>, <A HREF="../../hudson/model/ParametersDefinitionProperty.html" title="class in hudson.model">ParametersDefinitionProperty</A>, <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>, <A HREF="../../hudson/maven/RedeployPublisher.html" title="class in hudson.maven">RedeployPublisher</A>, <A HREF="../../hudson/tasks/Shell.html" title="class in hudson.tasks">Shell</A></DD>
+<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/tasks/test/AggregatedTestResultPublisher.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher</A>, <A HREF="../../hudson/tasks/Ant.html" title="class in hudson.tasks">Ant</A>, <A HREF="../../hudson/tasks/ArtifactArchiver.html" title="class in hudson.tasks">ArtifactArchiver</A>, <A HREF="../../hudson/security/AuthorizationMatrixProperty.html" title="class in hudson.security">AuthorizationMatrixProperty</A>, <A HREF="../../hudson/tasks/BatchFile.html" title="class in hudson.tasks">BatchFile</A>, <A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>, <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html" title="class in hudson.tasks">BuildStepCompatibilityLayer</A>, <A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks">BuildTrigger</A>, <A HREF="../../hudson/tasks/CommandInterpreter.html" title="class in hudson.tasks">CommandInterpreter</A>, <A HREF="../../hudson/tasks/Fingerprinter.html" title="class in hudson.tasks">Fingerprinter</A>, <A HREF="../../hudson/tasks/JavadocArchiver.html" title="class in hudson.tasks">JavadocArchiver</A>, <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>, <A HREF="../../hudson/tasks/junit/JUnitResultArchiver.html" title="class in hudson.tasks.junit">JUnitResultArchiver</A>, <A HREF="../../hudson/tasks/Mailer.html" title="class in hudson.tasks">Mailer</A>, <A HREF="../../hudson/tasks/Maven.html" title="class in hudson.tasks">Maven</A>, <A HREF="../../hudson/maven/MavenRedeployer.html" title="class in hudson.maven">MavenRedeployer</A>, <A HREF="../../hudson/tasks/Notifier.html" title="class in hudson.tasks">Notifier</A>, <A HREF="../../hudson/model/ParametersDefinitionProperty.html" title="class in hudson.model">ParametersDefinitionProperty</A>, <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>, <A HREF="../../hudson/tasks/Recorder.html" title="class in hudson.tasks">Recorder</A>, <A HREF="../../hudson/maven/RedeployPublisher.html" title="class in hudson.maven">RedeployPublisher</A>, <A HREF="../../hudson/tasks/Shell.html" title="class in hudson.tasks">Shell</A></DD>
 </DL>
 <HR>
 <DL>
@@ -157,7 +157,9 @@ One step of the whole build process.
 <TD><CODE><B><A HREF="../../hudson/tasks/BuildStep.html#BUILDERS">BUILDERS</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of all installed builders.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <A HREF="../../hudson/tasks/Builder.html#all()"><CODE>Builder.all()</CODE></A> for read access, and use
+      <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -165,7 +167,9 @@ One step of the whole build process.
 <TD><CODE><B><A HREF="../../hudson/tasks/BuildStep.html#PUBLISHERS">PUBLISHERS</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of all installed publishers.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <A HREF="../../hudson/tasks/Publisher.html#all()"><CODE>Publisher.all()</CODE></A> for read access, and use
+      <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -224,7 +228,9 @@ BUILDERS</H3>
 <PRE>
 static final java.util.List&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;&gt; <B>BUILDERS</B></PRE>
 <DL>
-<DD>List of all installed builders.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <A HREF="../../hudson/tasks/Builder.html#all()"><CODE>Builder.all()</CODE></A> for read access, and use
+      <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I><DD>List of all installed builders.
 
  Builders are invoked to perform the build itself.
 <P>
@@ -238,7 +244,9 @@ PUBLISHERS</H3>
 <PRE>
 static final <A HREF="../../hudson/tasks/BuildStep.PublisherList.html" title="class in hudson.tasks">BuildStep.PublisherList</A> <B>PUBLISHERS</B></PRE>
 <DL>
-<DD>List of all installed publishers.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <A HREF="../../hudson/tasks/Publisher.html#all()"><CODE>Publisher.all()</CODE></A> for read access, and use
+      <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I><DD>List of all installed publishers.
 
  Publishers are invoked after the build is completed, normally to perform
  some post-actions on build results, such as sending notifications, collecting

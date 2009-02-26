@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-BuildWrappers (Hudson core 1.285 API)
+BuildWrappers (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildWrappers (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildWrappers (Hudson core 1.285 API)";
+        parent.document.title="BuildWrappers (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -127,7 +127,8 @@ List of all installed <A HREF="../../hudson/tasks/BuildWrapper.html" title="clas
 <TD><CODE><B><A HREF="../../hudson/tasks/BuildWrappers.html#WRAPPERS">WRAPPERS</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.281. Use <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration, and use <A HREF="../../hudson/tasks/BuildWrapper.html#all()"><CODE>BuildWrapper.all()</CODE></A>
+      for listing them.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -191,7 +192,8 @@ WRAPPERS</H3>
 <PRE>
 public static final java.util.List&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>&gt;&gt; <B>WRAPPERS</B></PRE>
 <DL>
-<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.281. Use <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration, and use <A HREF="../../hudson/tasks/BuildWrapper.html#all()"><CODE>BuildWrapper.all()</CODE></A>
+      for listing them.</I><DL>
 </DL>
 </DL>
 

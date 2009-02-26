@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SecurityRealm (Hudson core 1.285 API)
+SecurityRealm (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SecurityRealm (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SecurityRealm (Hudson core 1.285 API)";
+        parent.document.title="SecurityRealm (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -111,9 +111,6 @@ java.lang.Object
 Pluggable security realm that connects external user database to Hudson.
 
  <p>
- New implementations should be registered to <A HREF="../../hudson/security/SecurityRealm.html#LIST"><CODE>LIST</CODE></A>.
-
- <p>
  If additional views/URLs need to be exposed,
  an active <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> is bound to <tt>CONTEXT_ROOT/securityRealm/</tt>
  through <A HREF="../../hudson/model/Hudson.html#getSecurityRealm()"><CODE>Hudson.getSecurityRealm()</CODE></A>, so you can define additional pages and
@@ -193,7 +190,17 @@ Pluggable security realm that connects external user database to Hudson.
  return them all at once.</TD>
 </TR>
 </TABLE>
-&nbsp;<!-- =========== FIELD SUMMARY =========== -->
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -203,11 +210,21 @@ Pluggable security realm that connects external user database to Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.acegisecurity.GrantedAuthority</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.html#AUTHENTICATED_AUTHORITY">AUTHENTICATED_AUTHORITY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<CODE>GrantedAuthority</CODE> that represents the built-in "authenticated" role, which is granted to
+ anyone non-anomyous.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> implementations.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../hudson/security/SecurityRealm.html#all()"><CODE>all()</CODE></A> for read access, and use <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -242,6 +259,14 @@ Pluggable security realm that connects external user database to Hudson.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> descriptors.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -304,7 +329,7 @@ Pluggable security realm that connects external user database to Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
@@ -392,7 +417,21 @@ LIST</H3>
 <PRE>
 public static final <A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt; <B>LIST</B></PRE>
 <DL>
-<DD>All registered <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> implementations.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../hudson/security/SecurityRealm.html#all()"><CODE>all()</CODE></A> for read access, and use <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I><DD>All registered <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> implementations.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="AUTHENTICATED_AUTHORITY"><!-- --></A><H3>
+AUTHENTICATED_AUTHORITY</H3>
+<PRE>
+public static final org.acegisecurity.GrantedAuthority <B>AUTHENTICATED_AUTHORITY</B></PRE>
+<DL>
+<DD><CODE>GrantedAuthority</CODE> that represents the built-in "authenticated" role, which is granted to
+ anyone non-anomyous.
 <P>
 <DL>
 </DL>
@@ -457,7 +496,7 @@ public abstract <A HREF="../../hudson/security/SecurityRealm.SecurityComponents.
 <A NAME="getDescriptor()"><!-- --></A><H3>
 getDescriptor</H3>
 <PRE>
-public abstract <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt; <B>getDescriptor</B>()</PRE>
+public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt; <B>getDescriptor</B>()</PRE>
 <DL>
 <DD>Gets the descriptor for this instance.
 
@@ -690,6 +729,22 @@ public javax.servlet.Filter <B>createFilter</B>(javax.servlet.FilterConfig&nbsp;
 <DD><DL>
 <DT><B>Since:</B></DT>
   <DD>1.271</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;&gt; <B>all</B>()</PRE>
+<DL>
+<DD>Returns all the registered <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> descriptors.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
 </DL>
 </DD>
 </DL>

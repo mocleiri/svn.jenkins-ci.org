@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.tasks Class Hierarchy (Hudson core 1.285 API)
+hudson.tasks Class Hierarchy (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.tasks Class Hierarchy (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.tasks Class Hierarchy (Hudson core 1.285 API)";
+        parent.document.title="hudson.tasks Class Hierarchy (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -97,12 +97,13 @@ Class Hierarchy
 <UL>
 <LI TYPE="circle">java.util.AbstractList&lt;E&gt; (implements java.util.List&lt;E&gt;)
 <UL>
-<LI TYPE="circle">java.util.ArrayList&lt;E&gt; (implements java.lang.Cloneable, java.util.List&lt;E&gt;, java.util.RandomAccess, java.io.Serializable)
-<UL>
-<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BuildStep.PublisherList.html" title="class in hudson.tasks"><B>BuildStep.PublisherList</B></A></UL>
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BuildStep.PublisherList.html" title="class in hudson.tasks"><B>BuildStep.PublisherList</B></A><LI TYPE="circle">hudson.<A HREF="../../hudson/ExtensionList.html" title="class in hudson"><B>ExtensionList</B></A>&lt;T&gt;<UL>
+<LI TYPE="circle">hudson.<A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson"><B>DescriptorExtensionList</B></A>&lt;T,D&gt;<UL>
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Publisher.DescriptorExtensionListImpl.html" title="class in hudson.tasks"><B>Publisher.DescriptorExtensionListImpl</B></A> (implements java.util.Comparator&lt;T&gt;)
 </UL>
 </UL>
-<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks"><B>Ant.AntInstallation</B></A> (implements java.io.Serializable)
+</UL>
+</UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html" title="class in hudson.tasks"><B>BuildStepCompatibilityLayer</B></A> (implements hudson.tasks.<A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>)
 <UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks"><B>Builder</B></A> (implements hudson.tasks.<A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>, hudson.model.<A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
@@ -110,22 +111,35 @@ Class Hierarchy
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Ant.html" title="class in hudson.tasks"><B>Ant</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/CommandInterpreter.html" title="class in hudson.tasks"><B>CommandInterpreter</B></A><UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BatchFile.html" title="class in hudson.tasks"><B>BatchFile</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Shell.html" title="class in hudson.tasks"><B>Shell</B></A></UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Maven.html" title="class in hudson.tasks"><B>Maven</B></A></UL>
-<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><B>Publisher</B></A> (implements hudson.tasks.<A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>, hudson.model.<A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><B>Publisher</B></A> (implements hudson.tasks.<A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>, hudson.model.<A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;)
+<UL>
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Notifier.html" title="class in hudson.tasks"><B>Notifier</B></A> (implements hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<UL>
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Mailer.html" title="class in hudson.tasks"><B>Mailer</B></A></UL>
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Recorder.html" title="class in hudson.tasks"><B>Recorder</B></A> (implements hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/ArtifactArchiver.html" title="class in hudson.tasks"><B>ArtifactArchiver</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks"><B>BuildTrigger</B></A> (implements hudson.model.<A HREF="../../hudson/model/DependecyDeclarer.html" title="interface in hudson.model">DependecyDeclarer</A>, hudson.matrix.<A HREF="../../hudson/matrix/MatrixAggregatable.html" title="interface in hudson.matrix">MatrixAggregatable</A>)
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Fingerprinter.html" title="class in hudson.tasks"><B>Fingerprinter</B></A> (implements java.io.Serializable)
-<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/JavadocArchiver.html" title="class in hudson.tasks"><B>JavadocArchiver</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Mailer.html" title="class in hudson.tasks"><B>Mailer</B></A></UL>
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/JavadocArchiver.html" title="class in hudson.tasks"><B>JavadocArchiver</B></A></UL>
+</UL>
 </UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><B>BuildWrapper</B></A> (implements hudson.model.<A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
-<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BuildWrapper.Environment.html" title="class in hudson.tasks"><B>BuildWrapper.Environment</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BuildWrappers.html" title="class in hudson.tasks"><B>BuildWrappers</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><B>Descriptor</B></A>&lt;T&gt; (implements hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BuildWrappers.html" title="class in hudson.tasks"><B>BuildWrappers</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><B>Descriptor</B></A>&lt;T&gt; (implements hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
 <UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Ant.DescriptorImpl.html" title="class in hudson.tasks"><B>Ant.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BatchFile.DescriptorImpl.html" title="class in hudson.tasks"><B>BatchFile.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BuildStepDescriptor.html" title="class in hudson.tasks"><B>BuildStepDescriptor</B></A>&lt;T&gt;<UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/ArtifactArchiver.DescriptorImpl.html" title="class in hudson.tasks"><B>ArtifactArchiver.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BuildTrigger.DescriptorImpl.html" title="class in hudson.tasks"><B>BuildTrigger.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Fingerprinter.DescriptorImpl.html" title="class in hudson.tasks"><B>Fingerprinter.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/JavadocArchiver.DescriptorImpl.html" title="class in hudson.tasks"><B>JavadocArchiver.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html" title="class in hudson.tasks"><B>Mailer.DescriptorImpl</B></A></UL>
-<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BuildWrapperDescriptor.html" title="class in hudson.tasks"><B>BuildWrapperDescriptor</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/LogRotator.LRDescriptor.html" title="class in hudson.tasks"><B>LogRotator.LRDescriptor</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Maven.DescriptorImpl.html" title="class in hudson.tasks"><B>Maven.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Shell.DescriptorImpl.html" title="class in hudson.tasks"><B>Shell.DescriptorImpl</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model"><B>UserPropertyDescriptor</B></A><UL>
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BuildWrapperDescriptor.html" title="class in hudson.tasks"><B>BuildWrapperDescriptor</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/LogRotator.LRDescriptor.html" title="class in hudson.tasks"><B>LogRotator.LRDescriptor</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Maven.DescriptorImpl.html" title="class in hudson.tasks"><B>Maven.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Shell.DescriptorImpl.html" title="class in hudson.tasks"><B>Shell.DescriptorImpl</B></A><LI TYPE="circle">hudson.tools.<A HREF="../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools"><B>ToolDescriptor</B></A>&lt;T&gt;<UL>
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Ant.AntInstallation.DescriptorImpl.html" title="class in hudson.tasks"><B>Ant.AntInstallation.DescriptorImpl</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Maven.MavenInstallation.DescriptorImpl.html" title="class in hudson.tasks"><B>Maven.MavenInstallation.DescriptorImpl</B></A></UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model"><B>UserPropertyDescriptor</B></A><UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Mailer.UserProperty.DescriptorImpl.html" title="class in hudson.tasks"><B>Mailer.UserProperty.DescriptorImpl</B></A></UL>
 </UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/DynamicLabeler.html" title="class in hudson.tasks"><B>DynamicLabeler</B></A> (implements hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, hudson.tasks.<A HREF="../../hudson/tasks/LabelFinder.html" title="interface in hudson.tasks">LabelFinder</A>)
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Environment.html" title="class in hudson.model"><B>Environment</B></A><UL>
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BuildWrapper.Environment.html" title="class in hudson.tasks"><B>BuildWrapper.Environment</B></A></UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Fingerprinter.FingerprintAction.html" title="class in hudson.tasks"><B>Fingerprinter.FingerprintAction</B></A> (implements hudson.model.<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>)
+<LI TYPE="circle">hudson.model.listeners.<A HREF="../../hudson/model/listeners/ItemListener.html" title="class in hudson.model.listeners"><B>ItemListener</B></A> (implements hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<UL>
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/BuildTrigger.DescriptorImpl.ItemListenerImpl.html" title="class in hudson.tasks"><B>BuildTrigger.DescriptorImpl.ItemListenerImpl</B></A></UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/JavadocArchiver.BaseJavadocAction.html" title="class in hudson.tasks"><B>JavadocArchiver.BaseJavadocAction</B></A> (implements hudson.model.<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>)
 <UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/JavadocArchiver.JavadocAction.html" title="class in hudson.tasks"><B>JavadocArchiver.JavadocAction</B></A> (implements hudson.model.<A HREF="../../hudson/model/ProminentProjectAction.html" title="interface in hudson.model">ProminentProjectAction</A>)
@@ -135,8 +149,12 @@ Class Hierarchy
 <UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/MailAddressResolver.DefaultAddressResolver.html" title="class in hudson.tasks"><B>MailAddressResolver.DefaultAddressResolver</B></A></UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/MailMessageIdAction.html" title="class in hudson.tasks"><B>MailMessageIdAction</B></A> (implements hudson.model.<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>)
-<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/MailSender.html" title="class in hudson.tasks"><B>MailSender</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks"><B>Maven.MavenInstallation</B></A> (implements java.io.Serializable)
-<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Messages.html" title="class in hudson.tasks"><B>Messages</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/UserNameResolver.html" title="class in hudson.tasks"><B>UserNameResolver</B></A> (implements hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/MailSender.html" title="class in hudson.tasks"><B>MailSender</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Messages.html" title="class in hudson.tasks"><B>Messages</B></A><LI TYPE="circle">hudson.tools.<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><B>ToolInstallation</B></A> (implements hudson.model.<A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, java.io.Serializable)
+<UL>
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks"><B>Ant.AntInstallation</B></A> (implements hudson.model.<A HREF="../../hudson/model/EnvironmentSpecific.html" title="interface in hudson.model">EnvironmentSpecific</A>&lt;T&gt;, hudson.slaves.<A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;T&gt;)
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks"><B>Maven.MavenInstallation</B></A> (implements hudson.model.<A HREF="../../hudson/model/EnvironmentSpecific.html" title="interface in hudson.model">EnvironmentSpecific</A>&lt;T&gt;, hudson.slaves.<A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;T&gt;)
+</UL>
+<LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/UserNameResolver.html" title="class in hudson.tasks"><B>UserNameResolver</B></A> (implements hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UserProperty.html" title="class in hudson.model"><B>UserProperty</B></A> (implements hudson.model.<A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="../../hudson/tasks/Mailer.UserProperty.html" title="class in hudson.tasks"><B>Mailer.UserProperty</B></A></UL>

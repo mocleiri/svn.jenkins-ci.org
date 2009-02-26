@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ChangeLogAnnotator (Hudson core 1.285 API)
+ChangeLogAnnotator (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ChangeLogAnnotator (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ChangeLogAnnotator (Hudson core 1.285 API)";
+        parent.document.title="ChangeLogAnnotator (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -113,7 +113,7 @@ Performs mark up on changelog messages to be displayed.
  external issue tracking system.)
 
  <p>
- Plugins that are interested in doing so may extend this class and call <A HREF="../../hudson/scm/ChangeLogAnnotator.html#register()"><CODE>register()</CODE></A>.
+ Plugins that are interested in doing so may extend this class and put <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on it.
  When multiple annotators are registered, their results will be combined.
 <P>
 
@@ -127,6 +127,25 @@ Performs mark up on changelog messages to be displayed.
 <HR>
 
 <P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -141,7 +160,8 @@ Performs mark up on changelog messages to be displayed.
 <TD><CODE><B><A HREF="../../hudson/scm/ChangeLogAnnotator.html#annotators">annotators</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../hudson/scm/ChangeLogAnnotator.html" title="class in hudson.scm"><CODE>ChangeLogAnnotator</CODE></A>s.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../hudson/scm/ChangeLogAnnotator.html#all()"><CODE>all()</CODE></A> for read access, and <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -171,6 +191,14 @@ Performs mark up on changelog messages to be displayed.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/scm/ChangeLogAnnotator.html" title="class in hudson.scm">ChangeLogAnnotator</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/ChangeLogAnnotator.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../hudson/scm/ChangeLogAnnotator.html" title="class in hudson.scm"><CODE>ChangeLogAnnotator</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/ChangeLogAnnotator.html#annotate(hudson.model.AbstractBuild, hudson.scm.ChangeLogSet.Entry, hudson.MarkupText)">annotate</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
          <A HREF="../../hudson/scm/ChangeLogSet.Entry.html" title="class in hudson.scm">ChangeLogSet.Entry</A>&nbsp;change,
@@ -185,8 +213,8 @@ Performs mark up on changelog messages to be displayed.
 <TD><CODE><B><A HREF="../../hudson/scm/ChangeLogAnnotator.html#register()">register</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registers this annotator, so that Hudson starts using this object
- for adding markup.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Prefer automatic registration via <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -224,7 +252,8 @@ annotators</H3>
 <PRE>
 public static final <A HREF="../../hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>&lt;<A HREF="../../hudson/scm/ChangeLogAnnotator.html" title="class in hudson.scm">ChangeLogAnnotator</A>&gt; <B>annotators</B></PRE>
 <DL>
-<DD>All registered <A HREF="../../hudson/scm/ChangeLogAnnotator.html" title="class in hudson.scm"><CODE>ChangeLogAnnotator</CODE></A>s.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../hudson/scm/ChangeLogAnnotator.html#all()"><CODE>all()</CODE></A> for read access, and <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I><DD>All registered <A HREF="../../hudson/scm/ChangeLogAnnotator.html" title="class in hudson.scm"><CODE>ChangeLogAnnotator</CODE></A>s.
 <P>
 <DL>
 </DL>
@@ -295,6 +324,9 @@ register</H3>
 <PRE>
 public final void <B>register</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Prefer automatic registration via <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A></I>
+<P>
 <DD>Registers this annotator, so that Hudson starts using this object
  for adding markup.
 <P>
@@ -313,6 +345,22 @@ unregister</H3>
 public final boolean <B>unregister</B>()</PRE>
 <DL>
 <DD>Unregisters this annotator, so that Hudson stops using this object.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/scm/ChangeLogAnnotator.html" title="class in hudson.scm">ChangeLogAnnotator</A>&gt; <B>all</B>()</PRE>
+<DL>
+<DD>Returns all the registered <A HREF="../../hudson/scm/ChangeLogAnnotator.html" title="class in hudson.scm"><CODE>ChangeLogAnnotator</CODE></A> descriptors.
 <P>
 <DD><DL>
 </DL>

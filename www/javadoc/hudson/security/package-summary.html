@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.security (Hudson core 1.285 API)
+hudson.security (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.security (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.security (Hudson core 1.285 API)";
+        parent.document.title="hudson.security (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -150,6 +150,14 @@ Security-related code
 <TD>Controls authorization throughout Hudson.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/security/AuthorizationStrategy.Unsecured.html" title="class in hudson.security">AuthorizationStrategy.Unsecured</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/security/AuthorizationStrategy.Unsecured.DescriptorImpl.html" title="class in hudson.security">AuthorizationStrategy.Unsecured.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/BasicAuthenticationFilter.html" title="class in hudson.security">BasicAuthenticationFilter</A></B></TD>
 <TD>Implements the dual authentcation mechanism.</TD>
 </TR>
@@ -218,6 +226,10 @@ Security-related code
 <TD><A HREF="../../hudson/model/UserProperty.html" title="class in hudson.model"><CODE>UserProperty</CODE></A> that provides the <CODE>UserDetails</CODE> view of the User object.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/security/HudsonPrivateSecurityRealm.Details.DescriptorImpl.html" title="class in hudson.security">HudsonPrivateSecurityRealm.Details.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/HudsonPrivateSecurityRealm.HudsonUserDetailsService.html" title="class in hudson.security">HudsonPrivateSecurityRealm.HudsonUserDetailsService</A></B></TD>
 <TD><CODE>UserDetailsService</CODE> that loads user information from <A HREF="../../hudson/model/User.html" title="class in hudson.model"><CODE>User</CODE></A> object.</TD>
 </TR>
@@ -233,6 +245,10 @@ Security-related code
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/LDAPSecurityRealm.html" title="class in hudson.security">LDAPSecurityRealm</A></B></TD>
 <TD><A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> implementation that uses LDAP for authentication.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/security/LDAPSecurityRealm.AuthoritiesPopulatorImpl.html" title="class in hudson.security">LDAPSecurityRealm.AuthoritiesPopulatorImpl</A></B></TD>
+<TD><CODE>LdapAuthoritiesPopulator</CODE> that adds the automatic 'authenticated' role.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/security/LDAPSecurityRealm.DescriptorImpl.html" title="class in hudson.security">LDAPSecurityRealm.DescriptorImpl</A></B></TD>

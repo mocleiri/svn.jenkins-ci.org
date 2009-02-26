@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Package hudson (Hudson core 1.285 API)
+Uses of Package hudson (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson (Hudson core 1.285 API)";
+        parent.document.title="Uses of Package hudson (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -131,6 +131,10 @@ Packages that use <A HREF="../hudson/package-summary.html">hudson</A></FONT></TH
 <TD>Solaris specific features of Hudson.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.os.windows"><B>hudson.os.windows</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.scm"><B>hudson.scm</B></A></TD>
 <TD>Hudson's interface with source code management systems.&nbsp;</TD>
 </TR>
@@ -163,6 +167,10 @@ that perform the actual heavy-lifting of a build.&nbsp;</TD>
 <TD><A HREF="#hudson.tasks.test"><B>hudson.tasks.test</B></A></TD>
 <TD>Defines contracts that need to be implemented by a test reporting
 action (such as the built-in JUnit one).&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tools"><B>hudson.tools</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.triggers"><B>hudson.triggers</B></A></TD>
@@ -207,6 +215,32 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/DescriptorExtensionList.html#hudson"><B>DescriptorExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> for holding a set of <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s, which is a group of descriptors for
+ the same extension point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/ExtensionFinder.html#hudson"><B>ExtensionFinder</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discovers the implementations of an extension point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/ExtensionList.html#hudson"><B>ExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retains the known extension instances for the given type 'T'.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson"><B>ExtensionPoint</B></A></B>
@@ -350,6 +384,13 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/lifecycle/package-summary.html">hudson.lifecycle</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.lifecycle"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.lifecycle"><B>ExtensionPoint</B></A></B>
 
 <BR>
@@ -364,6 +405,13 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/matrix/package-summary.html">hudson.matrix</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.matrix"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.matrix"><B>ExtensionPoint</B></A></B>
@@ -400,6 +448,13 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signals a failure where the error message was reported.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.maven"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.maven"><B>ExtensionPoint</B></A></B>
 
 <BR>
@@ -434,6 +489,13 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.maven.reporters"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.maven.reporters"><B>ExtensionPoint</B></A></B>
 
 <BR>
@@ -456,10 +518,30 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/model/package-summary.html">hudson.model</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/DescriptorExtensionList.html#hudson.model"><B>DescriptorExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> for holding a set of <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s, which is a group of descriptors for
+ the same extension point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/EnvVars.html#hudson.model"><B>EnvVars</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Environment variables.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.model"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/ExtensionList.html#hudson.model"><B>ExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retains the known extension instances for the given type 'T'.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.model"><B>ExtensionPoint</B></A></B>
@@ -467,6 +549,13 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marker interface that designates extensible components
  in Hudson that can be implemented by plugins.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/ExtensionPoint.LegacyInstancesAreScopedToHudson.html#hudson.model"><B>ExtensionPoint.LegacyInstancesAreScopedToHudson</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used by designers of extension points (direct subtypes of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>) to indicate that
+ the legacy instances are scoped to <A HREF="../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> instance.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/FeedAdapter.html#hudson.model"><B>FeedAdapter</B></A></B>
@@ -551,6 +640,12 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/model/listeners/package-summary.html">hudson.model.listeners</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/ExtensionList.html#hudson.model.listeners"><B>ExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retains the known extension instances for the given type 'T'.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.model.listeners"><B>ExtensionPoint</B></A></B>
 
 <BR>
@@ -567,6 +662,20 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/node_monitors/package-summary.html">hudson.node_monitors</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/DescriptorExtensionList.html#hudson.node_monitors"><B>DescriptorExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> for holding a set of <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s, which is a group of descriptors for
+ the same extension point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.node_monitors"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.node_monitors"><B>ExtensionPoint</B></A></B>
 
 <BR>
@@ -581,6 +690,13 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/os/solaris/package-summary.html">hudson.os.solaris</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.os.solaris"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.os.solaris"><B>ExtensionPoint</B></A></B>
@@ -602,16 +718,33 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepares and provisions workspaces for <A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../hudson/class-use/FileSystemProvisionerDescriptor.html#hudson.os.solaris"><B>FileSystemProvisionerDescriptor</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson"><CODE>FileSystemProvisioner</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/WorkspaceSnapshot.html#hudson.os.solaris"><B>WorkspaceSnapshot</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a workspace snapshot created by <A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson"><CODE>FileSystemProvisioner</CODE></A>.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.os.windows"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/os/windows/package-summary.html">hudson.os.windows</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.os.windows"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.os.windows"><B>ExtensionPoint</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marker interface that designates extensible components
+ in Hudson that can be implemented by plugins.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -621,6 +754,26 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/scm/package-summary.html">hudson.scm</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/DescriptorExtensionList.html#hudson.scm"><B>DescriptorExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> for holding a set of <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s, which is a group of descriptors for
+ the same extension point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.scm"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/ExtensionList.html#hudson.scm"><B>ExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retains the known extension instances for the given type 'T'.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.scm"><B>ExtensionPoint</B></A></B>
@@ -657,6 +810,13 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/scm/browsers/package-summary.html">hudson.scm.browsers</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.scm.browsers"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.scm.browsers"><B>ExtensionPoint</B></A></B>
 
 <BR>
@@ -671,6 +831,20 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/security/package-summary.html">hudson.security</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/DescriptorExtensionList.html#hudson.security"><B>DescriptorExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> for holding a set of <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s, which is a group of descriptors for
+ the same extension point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.security"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.security"><B>ExtensionPoint</B></A></B>
@@ -689,11 +863,43 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/slaves/package-summary.html">hudson.slaves</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/DescriptorExtensionList.html#hudson.slaves"><B>DescriptorExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> for holding a set of <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s, which is a group of descriptors for
+ the same extension point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/EnvVars.html#hudson.slaves"><B>EnvVars</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Environment variables.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.slaves"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/ExtensionList.html#hudson.slaves"><B>ExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retains the known extension instances for the given type 'T'.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.slaves"><B>ExtensionPoint</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marker interface that designates extensible components
  in Hudson that can be implemented by plugins.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Launcher.html#hudson.slaves"><B>Launcher</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts a process.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -703,6 +909,32 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/tasks/package-summary.html">hudson.tasks</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/DescriptorExtensionList.html#hudson.tasks"><B>DescriptorExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> for holding a set of <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s, which is a group of descriptors for
+ the same extension point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/EnvVars.html#hudson.tasks"><B>EnvVars</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Environment variables.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.tasks"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/ExtensionList.html#hudson.tasks"><B>ExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retains the known extension instances for the given type 'T'.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.tasks"><B>ExtensionPoint</B></A></B>
@@ -731,6 +963,13 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/tasks/junit/package-summary.html">hudson.tasks.junit</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.tasks.junit"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.tasks.junit"><B>ExtensionPoint</B></A></B>
@@ -771,6 +1010,13 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/tasks/test/package-summary.html">hudson.tasks.test</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.tasks.test"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.tasks.test"><B>ExtensionPoint</B></A></B>
 
 <BR>
@@ -786,11 +1032,55 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 </TABLE>
 &nbsp;
 <P>
+<A NAME="hudson.tools"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/tools/package-summary.html">hudson.tools</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/DescriptorExtensionList.html#hudson.tools"><B>DescriptorExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> for holding a set of <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s, which is a group of descriptors for
+ the same extension point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.tools"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.tools"><B>ExtensionPoint</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marker interface that designates extensible components
+ in Hudson that can be implemented by plugins.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="hudson.triggers"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/triggers/package-summary.html">hudson.triggers</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/DescriptorExtensionList.html#hudson.triggers"><B>DescriptorExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> for holding a set of <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s, which is a group of descriptors for
+ the same extension point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.triggers"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.triggers"><B>ExtensionPoint</B></A></B>
@@ -835,6 +1125,13 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/views/package-summary.html">hudson.views</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/DescriptorExtensionList.html#hudson.views"><B>DescriptorExtensionList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> for holding a set of <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s, which is a group of descriptors for
+ the same extension point.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.views"><B>ExtensionPoint</B></A></B>

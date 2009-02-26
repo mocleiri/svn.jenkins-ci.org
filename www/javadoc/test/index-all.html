@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Test harness for Hudson and plugins 1.285 API)
+Index (Test harness for Hudson and plugins 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Test harness for Hudson and plugins 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Test harness for Hudson and plugins 1.285 API)";
+        parent.document.title="Index (Test harness for Hudson and plugins 1.286 API)";
     }
 }
 </SCRIPT>
@@ -123,12 +123,21 @@ Variable in class org.jvnet.hudson.test.rhino.<A HREF="./org/jvnet/hudson/test/r
 <DT><A HREF="./org/jvnet/hudson/test/rhino/CallStackFrame.html" title="class in org.jvnet.hudson.test.rhino"><B>CallStackFrame</B></A> - Class in <A HREF="./org/jvnet/hudson/test/rhino/package-summary.html">org.jvnet.hudson.test.rhino</A><DD>Stack frame.<DT><A HREF="./org/jvnet/hudson/test/rhino/CallStackFrame.html#CallStackFrame(org.jvnet.hudson.test.rhino.JavaScriptDebugger, org.mozilla.javascript.debug.DebuggableScript)"><B>CallStackFrame(JavaScriptDebugger, DebuggableScript)</B></A> - 
 Constructor for class org.jvnet.hudson.test.rhino.<A HREF="./org/jvnet/hudson/test/rhino/CallStackFrame.html" title="class in org.jvnet.hudson.test.rhino">CallStackFrame</A>
 <DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/CaptureEnvironmentBuilder.html" title="class in org.jvnet.hudson.test"><B>CaptureEnvironmentBuilder</B></A> - Class in <A HREF="./org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A><DD><A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/tasks/Builder.html?is-external=true" title="class or interface in hudson.tasks"><CODE>Builder</CODE></A> that captures the environment variables used during a build.<DT><A HREF="./org/jvnet/hudson/test/CaptureEnvironmentBuilder.html#CaptureEnvironmentBuilder()"><B>CaptureEnvironmentBuilder()</B></A> - 
+Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/CaptureEnvironmentBuilder.html" title="class in org.jvnet.hudson.test">CaptureEnvironmentBuilder</A>
+<DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/CaptureEnvironmentBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test"><B>CaptureEnvironmentBuilder.DescriptorImpl</B></A> - Class in <A HREF="./org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A><DD>&nbsp;<DT><A HREF="./org/jvnet/hudson/test/CaptureEnvironmentBuilder.DescriptorImpl.html#CaptureEnvironmentBuilder.DescriptorImpl()"><B>CaptureEnvironmentBuilder.DescriptorImpl()</B></A> - 
+Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/CaptureEnvironmentBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">CaptureEnvironmentBuilder.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/ExtractResourceSCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)"><B>checkout(AbstractBuild, Launcher, FilePath, BuildListener, File)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/ExtractResourceSCM.html" title="class in org.jvnet.hudson.test">ExtractResourceSCM</A>
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/SingleFileSCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)"><B>checkout(AbstractBuild, Launcher, FilePath, BuildListener, File)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/SingleFileSCM.html" title="class in org.jvnet.hudson.test">SingleFileSCM</A>
 <DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#configureDefaultAnt()"><B>configureDefaultAnt()</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>Extracts Ant and configures it.
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#configureDefaultMaven()"><B>configureDefaultMaven()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Locates Maven2 and configure that as the only Maven in the system.
@@ -168,6 +177,9 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTes
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#createSlave(hudson.model.Label)"><B>createSlave(Label)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Creates and launches a new slave on the local host.
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#createSlave(hudson.model.Label, hudson.EnvVars)"><B>createSlave(Label, EnvVars)</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>Creates a slave with certain additional environment variables
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#createTaskListener()"><B>createTaskListener()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Creates a <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/TaskListener.html?is-external=true" title="class or interface in hudson.model"><CODE>TaskListener</CODE></A> connected to stdout.
@@ -189,12 +201,6 @@ Method in class org.jvnet.hudson.test.recipes.<A HREF="./org/jvnet/hudson/test/r
  to decorate the hudson home directory.
 <DT><A HREF="./org/jvnet/hudson/test/recipes/WithPlugin.RunnerImpl.html#decorateHome(org.jvnet.hudson.test.HudsonTestCase, java.io.File)"><B>decorateHome(HudsonTestCase, File)</B></A> - 
 Method in class org.jvnet.hudson.test.recipes.<A HREF="./org/jvnet/hudson/test/recipes/WithPlugin.RunnerImpl.html" title="class in org.jvnet.hudson.test.recipes">WithPlugin.RunnerImpl</A>
-<DD>&nbsp;
-<DT><A HREF="./org/jvnet/hudson/test/FailureBuilder.html#DESCRIPTOR"><B>DESCRIPTOR</B></A> - 
-Static variable in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/FailureBuilder.html" title="class in org.jvnet.hudson.test">FailureBuilder</A>
-<DD>&nbsp;
-<DT><A HREF="./org/jvnet/hudson/test/SleepBuilder.html#DESCRIPTOR"><B>DESCRIPTOR</B></A> - 
-Static variable in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/SleepBuilder.html" title="class in org.jvnet.hudson.test">SleepBuilder</A>
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/TemporaryDirectoryAllocator.html#dispose()"><B>dispose()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/TemporaryDirectoryAllocator.html" title="class in org.jvnet.hudson.test">TemporaryDirectoryAllocator</A>
@@ -244,20 +250,20 @@ Static method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/Te
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.WebClient.html#getContextPath()"><B>getContextPath()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.WebClient.html" title="class in org.jvnet.hudson.test">HudsonTestCase.WebClient</A>
 <DD>Returns the URL of the webapp top page.
-<DT><A HREF="./org/jvnet/hudson/test/FailureBuilder.html#getDescriptor()"><B>getDescriptor()</B></A> - 
-Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/FailureBuilder.html" title="class in org.jvnet.hudson.test">FailureBuilder</A>
-<DD>&nbsp;
-<DT><A HREF="./org/jvnet/hudson/test/SleepBuilder.html#getDescriptor()"><B>getDescriptor()</B></A> - 
-Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/SleepBuilder.html" title="class in org.jvnet.hudson.test">SleepBuilder</A>
-<DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/TestBuilder.html#getDescriptor()"><B>getDescriptor()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/TestBuilder.html" title="class in org.jvnet.hudson.test">TestBuilder</A>
+<DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/CaptureEnvironmentBuilder.DescriptorImpl.html#getDisplayName()"><B>getDisplayName()</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/CaptureEnvironmentBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">CaptureEnvironmentBuilder.DescriptorImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/FailureBuilder.DescriptorImpl.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/FailureBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">FailureBuilder.DescriptorImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/SleepBuilder.DescriptorImpl.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/SleepBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">SleepBuilder.DescriptorImpl</A>
+<DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/CaptureEnvironmentBuilder.html#getEnvVars()"><B>getEnvVars()</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/CaptureEnvironmentBuilder.html" title="class in org.jvnet.hudson.test">CaptureEnvironmentBuilder</A>
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/rhino/JavaScriptDebugger.html#getFrame(org.mozilla.javascript.Context, org.mozilla.javascript.debug.DebuggableScript)"><B>getFrame(Context, DebuggableScript)</B></A> - 
 Method in class org.jvnet.hudson.test.rhino.<A HREF="./org/jvnet/hudson/test/rhino/JavaScriptDebugger.html" title="class in org.jvnet.hudson.test.rhino">JavaScriptDebugger</A>
@@ -383,6 +389,9 @@ Static variable in interface org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/t
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#newHudson()"><B>newHudson()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Creates a new instance of <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Hudson.html?is-external=true" title="class or interface in hudson.model"><CODE>Hudson</CODE></A>.
+<DT><A HREF="./org/jvnet/hudson/test/CaptureEnvironmentBuilder.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><B>newInstance(StaplerRequest, JSONObject)</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/CaptureEnvironmentBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">CaptureEnvironmentBuilder.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/FailureBuilder.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><B>newInstance(StaplerRequest, JSONObject)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/FailureBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">FailureBuilder.DescriptorImpl</A>
 <DD>&nbsp;
@@ -420,6 +429,9 @@ Variable in class org.jvnet.hudson.test.rhino.<A HREF="./org/jvnet/hudson/test/r
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#pause()"><B>pause()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Pauses the execution until ENTER is hit in the console.
+<DT><A HREF="./org/jvnet/hudson/test/CaptureEnvironmentBuilder.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><B>perform(AbstractBuild&lt;?, ?&gt;, Launcher, BuildListener)</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/CaptureEnvironmentBuilder.html" title="class in org.jvnet.hudson.test">CaptureEnvironmentBuilder</A>
+<DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/FailureBuilder.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><B>perform(AbstractBuild&lt;?, ?&gt;, Launcher, BuildListener)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/FailureBuilder.html" title="class in org.jvnet.hudson.test">FailureBuilder</A>
 <DD>&nbsp;

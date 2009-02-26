@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Jobs (Hudson core 1.285 API)
+Jobs (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Jobs (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Jobs (Hudson core 1.285 API)";
+        parent.document.title="Jobs (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -127,7 +127,9 @@ List of all installed <A HREF="../../hudson/model/Job.html" title="class in huds
 <TD><CODE><B><A HREF="../../hudson/model/Jobs.html#PROPERTIES">PROPERTIES</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of all installed <A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model"><CODE>JobPropertyDescriptor</CODE></A> types.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.281
+      Use <A HREF="../../hudson/model/JobPropertyDescriptor.html#all()"><CODE>JobPropertyDescriptor.all()</CODE></A> for read access,
+      and <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -183,7 +185,9 @@ PROPERTIES</H3>
 <PRE>
 public static final java.util.List&lt;<A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model">JobPropertyDescriptor</A>&gt; <B>PROPERTIES</B></PRE>
 <DL>
-<DD>List of all installed <A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model"><CODE>JobPropertyDescriptor</CODE></A> types.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.281
+      Use <A HREF="../../hudson/model/JobPropertyDescriptor.html#all()"><CODE>JobPropertyDescriptor.all()</CODE></A> for read access,
+      and <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I><DD>List of all installed <A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model"><CODE>JobPropertyDescriptor</CODE></A> types.
 
  <p>
  Plugins can add their <A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model"><CODE>JobPropertyDescriptor</CODE></A>s to this list.

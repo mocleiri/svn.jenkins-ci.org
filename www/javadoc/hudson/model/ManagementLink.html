@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ManagementLink (Hudson core 1.285 API)
+ManagementLink (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ManagementLink (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ManagementLink (Hudson core 1.285 API)";
+        parent.document.title="ManagementLink (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -116,10 +116,7 @@ Extension point to add icon to <tt>http://server/hudson/manage</tt> page.
  be added to <A HREF="../../hudson/model/Hudson.html#getActions()"><CODE>Hudson.getActions()</CODE></A>.) 
 
  <p>
- To register a new instance, the typical code looks like this:
- <pre>
- ManagementLink.LIST.add(new MyManagementLinkImpl());
- </pre>
+ To register a new instance, put <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your implementation class.
 <P>
 
 <P>
@@ -132,6 +129,25 @@ Extension point to add icon to <tt>http://server/hudson/manage</tt> page.
 <HR>
 
 <P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -146,7 +162,8 @@ Extension point to add icon to <tt>http://server/hudson/manage</tt> page.
 <TD><CODE><B><A HREF="../../hudson/model/ManagementLink.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered instances.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../hudson/model/ManagementLink.html#all()"><CODE>all()</CODE></A> for read access and put <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -173,6 +190,14 @@ Extension point to add icon to <tt>http://server/hudson/manage</tt> page.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model">ManagementLink</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ManagementLink.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All regsitered instances.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -236,7 +261,8 @@ LIST</H3>
 <PRE>
 public static final java.util.List&lt;<A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model">ManagementLink</A>&gt; <B>LIST</B></PRE>
 <DL>
-<DD>All registered instances.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../hudson/model/ManagementLink.html#all()"><CODE>all()</CODE></A> for read access and put <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I><DD>All registered instances.
 <P>
 <DL>
 </DL>
@@ -340,6 +366,22 @@ public abstract java.lang.String <B>getUrlName</B>()</PRE>
 
 <DT><B>Returns:</B><DD>null if this action object doesn't need to be bound to web
       (when you do that, be sure to also return null from <A HREF="../../hudson/model/Action.html#getIconFileName()"><CODE>Action.getIconFileName()</CODE></A>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model">ManagementLink</A>&gt; <B>all</B>()</PRE>
+<DL>
+<DD>All regsitered instances.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

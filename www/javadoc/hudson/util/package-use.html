@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Package hudson.util (Hudson core 1.285 API)
+Uses of Package hudson.util (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.util (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.util (Hudson core 1.285 API)";
+        parent.document.title="Uses of Package hudson.util (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -119,6 +119,10 @@ Packages that use <A HREF="../../hudson/util/package-summary.html">hudson.util</
 <TD>Code that monitors the health of slaves&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.os.windows"><B>hudson.os.windows</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.scm"><B>hudson.scm</B></A></TD>
 <TD>Hudson's interface with source code management systems.&nbsp;</TD>
 </TR>
@@ -154,16 +158,16 @@ Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a two dimensional area.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/CopyOnWriteList.html#hudson"><B>CopyOnWriteList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<CODE>List</CODE>-like implementation that has copy-on-write semantics.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/util/class-use/DelegatingOutputStream.html#hudson"><B>DelegatingOutputStream</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works like <CODE>FilterOutputStream</CODE> except its performance problem.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/util/class-use/DescriptorList.html#hudson"><B>DescriptorList</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/util/class-use/VariableResolver.html#hudson"><B>VariableResolver</B></A></B>
@@ -331,6 +335,27 @@ Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.os.windows"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used by <A HREF="../../hudson/os/windows/package-summary.html">hudson.os.windows</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/Secret.html#hudson.os.windows"><B>Secret</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glorified <CODE>String</CODE> that uses encryption in the persisted form, to avoid accidental exposure of a secret.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/StreamTaskListener.html#hudson.os.windows"><B>StreamTaskListener</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> that generates output into a single stream.</TD>
 </TR>
 </TABLE>
 &nbsp;

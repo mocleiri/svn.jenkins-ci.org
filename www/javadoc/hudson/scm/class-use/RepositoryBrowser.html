@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.scm.RepositoryBrowser (Hudson core 1.285 API)
+Uses of Class hudson.scm.RepositoryBrowser (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.scm.RepositoryBrowser (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.scm.RepositoryBrowser (Hudson core 1.285 API)";
+        parent.document.title="Uses of Class hudson.scm.RepositoryBrowser (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -174,7 +174,8 @@ Uses of <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hud
 <TD><CODE><B>RepositoryBrowsers.</B><B><A HREF="../../../hudson/scm/RepositoryBrowsers.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of all installed <A HREF="../../../hudson/scm/RepositoryBrowsers.html" title="class in hudson.scm"><CODE>RepositoryBrowsers</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <A HREF="../../../hudson/scm/RepositoryBrowser.html#all()"><CODE>all()</CODE></A> for read access and <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -268,6 +269,22 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>RepositoryBrowser.</B><B><A HREF="../../../hudson/scm/RepositoryBrowser.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>RepositoryBrowser.</B><B><A HREF="../../../hudson/scm/RepositoryBrowser.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;&gt;</CODE></FONT></TD>
 <TD><CODE><B>RepositoryBrowsers.</B><B><A HREF="../../../hudson/scm/RepositoryBrowsers.html#filter(java.lang.Class)">filter</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&gt;&nbsp;t)</CODE>
 
@@ -282,6 +299,14 @@ T</CODE></FONT></TD>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the list of <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>
  that can be used with this SCM.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>RepositoryBrowser.</B><B><A HREF="../../../hudson/scm/RepositoryBrowser.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -406,95 +431,16 @@ Uses of <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hud
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/scm/browsers/package-summary.html">hudson.scm.browsers</A> with type parameters of type <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A></FONT></TH>
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/scm/browsers/package-summary.html">hudson.scm.browsers</A> that return <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>FishEyeSVN.</B><B><A HREF="../../../hudson/scm/browsers/FishEyeSVN.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
+<CODE>&nbsp;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;</CODE></FONT></TD>
+<TD><CODE><B>CollabNetSVN.DescriptorImpl.</B><B><A HREF="../../../hudson/scm/browsers/CollabNetSVN.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+            net.sf.json.JSONObject&nbsp;formData)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>CollabNetSVN.</B><B><A HREF="../../../hudson/scm/browsers/CollabNetSVN.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>ViewCVS.</B><B><A HREF="../../../hudson/scm/browsers/ViewCVS.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>Sventon.</B><B><A HREF="../../../hudson/scm/browsers/Sventon.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>WebSVN.</B><B><A HREF="../../../hudson/scm/browsers/WebSVN.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/scm/browsers/package-summary.html">hudson.scm.browsers</A> that return types with arguments of type <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>FishEyeSVN.</B><B><A HREF="../../../hudson/scm/browsers/FishEyeSVN.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>CollabNetSVN.</B><B><A HREF="../../../hudson/scm/browsers/CollabNetSVN.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>ViewCVS.</B><B><A HREF="../../../hudson/scm/browsers/ViewCVS.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>Sventon.</B><B><A HREF="../../../hudson/scm/browsers/Sventon.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>WebSVN.</B><B><A HREF="../../../hudson/scm/browsers/WebSVN.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the descriptor value.</TD>
 </TR>
 </TABLE>
 &nbsp;

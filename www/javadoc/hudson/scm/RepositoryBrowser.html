@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-RepositoryBrowser (Hudson core 1.285 API)
+RepositoryBrowser (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RepositoryBrowser (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RepositoryBrowser (Hudson core 1.285 API)";
+        parent.document.title="RepositoryBrowser (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -120,8 +120,7 @@ Connects Hudson to repository browsers like ViewCVS or FishEye,
  <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> is persisted with <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A>.
 
  <p>
- To have Hudson recognize <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A>, add the descriptor
- to <A HREF="../../hudson/scm/RepositoryBrowsers.html#LIST"><CODE>RepositoryBrowsers.LIST</CODE></A>.
+ To have Hudson recognize <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A>, put <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.
 <P>
 
 <P>
@@ -135,6 +134,25 @@ Connects Hudson to repository browsers like ViewCVS or FishEye,
 <HR>
 
 <P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
@@ -162,11 +180,27 @@ Connects Hudson to repository browsers like ViewCVS or FishEye,
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/RepositoryBrowser.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;java.net.URL</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/RepositoryBrowser.html#getChangeSetLink(E)">getChangeSetLink</A></B>(<A HREF="../../hudson/scm/RepositoryBrowser.html" title="type parameter in RepositoryBrowser">E</A>&nbsp;changeSet)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Determines the link to the given change set.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/RepositoryBrowser.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -192,15 +226,6 @@ Connects Hudson to repository browsers like ViewCVS or FishEye,
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Describable"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A></B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -279,6 +304,44 @@ protected static java.net.URL <B>normalizeToEndWithSlash</B>(java.net.URL&nbsp;u
 <DD>Normalize the URL so that it ends with '/'.
  <p>
  An attention is paid to preserve the query parameters in URL if any.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDescriptor()"><!-- --></A><H3>
+getDescriptor</H3>
+<PRE>
+public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt; <B>getDescriptor</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
+<DD>Gets the descriptor for this instance.
+
+ <p>
+ <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> is a singleton for every concrete <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
+ implementation, so if <tt>a.getClass()==b.getClass()</tt> then
+ <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;&gt; <B>all</B>()</PRE>
+<DL>
+<DD>Returns all the registered <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> descriptors.
 <P>
 <DD><DL>
 </DL>

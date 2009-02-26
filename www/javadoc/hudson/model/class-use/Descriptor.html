@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.model.Descriptor (Hudson core 1.285 API)
+Uses of Class hudson.model.Descriptor (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Descriptor (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Descriptor (Hudson core 1.285 API)";
+        parent.document.title="Uses of Class hudson.model.Descriptor (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -115,6 +115,10 @@ Packages that use <A HREF="../../../hudson/model/Descriptor.html" title="class i
 <TD>Code that monitors the health of slaves&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.os.windows"><B>hudson.os.windows</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.scm"><B>hudson.scm</B></A></TD>
 <TD>Hudson's interface with source code management systems.&nbsp;</TD>
 </TR>
@@ -145,12 +149,20 @@ that perform the actual heavy-lifting of a build.&nbsp;</TD>
 action (such as the built-in JUnit one).&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tools"><B>hudson.tools</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.triggers"><B>hudson.triggers</B></A></TD>
 <TD>Built-in <a href="../../../hudson/triggers/Trigger.html"><tt>Trigger</tt></a>s that run periodically to kick a new build.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.util"><B>hudson.util</B></A></TD>
 <TD>Other miscellaneous utility code&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.views"><B>hudson.views</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -167,6 +179,23 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/package-summary.html">hudson</A> with type parameters of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList&lt;T extends Describable&lt;T&gt;,D extends Descriptor&lt;T&gt;&gt;</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> for holding a set of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s, which is a group of descriptors for
+ the same extension point.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../hudson/package-summary.html">hudson</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -176,6 +205,48 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../../hudson/FileSystemProvisioner.html" title="class in hudson"><CODE>FileSystemProvisioner</CODE></A>.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/package-summary.html">hudson</A> with type parameters of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T extends <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;,D extends <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt; 
+<BR>
+<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;T,D&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B>DescriptorExtensionList.</B><B><A HREF="../../../hudson/DescriptorExtensionList.html#create(hudson.model.Hudson, java.lang.Class)">create</A></B>(<A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson,
+       java.lang.Class&lt;T&gt;&nbsp;describableType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new instance.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/package-summary.html">hudson</A> that return <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">T</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>DescriptorExtensionList.</B><B><A HREF="../../../hudson/DescriptorExtensionList.html#findByName(java.lang.String)">findByName</A></B>(java.lang.String&nbsp;fullyQualifiedClassName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds a descriptor by their <A HREF="../../../hudson/model/Descriptor.html#clazz"><CODE>clazz</CODE></A>.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -211,16 +282,16 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>Functions.</B><B><A HREF="../../../hudson/Functions.html#getComputerLauncherDescriptors()">getComputerLauncherDescriptors</A></B>()</CODE>
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>Functions.</B><B><A HREF="../../../hudson/Functions.html#getCloudDescriptors()">getCloudDescriptors</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>Functions.</B><B><A HREF="../../../hudson/Functions.html#getParameterDescriptors()">getParameterDescriptors</A></B>()</CODE>
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>Functions.</B><B><A HREF="../../../hudson/Functions.html#getComputerLauncherDescriptors()">getComputerLauncherDescriptors</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -600,6 +671,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model">JDK.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/JobParameterDefinition.DescriptorImpl.html" title="class in hudson.model">JobParameterDefinition.DescriptorImpl</A></B></CODE>
 
 <BR>
@@ -731,22 +810,6 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with type parameters of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>Descriptor.</B><B><A HREF="../../../hudson/model/Descriptor.html#ALL">ALL</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All the live instances of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with type parameters of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -766,6 +829,41 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds a descriptor from a collection by its class name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T extends <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&gt; 
+<BR>
+T</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getDescriptorByType(java.lang.Class)">getDescriptorByType</A></B>(java.lang.Class&lt;T&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> instance in the current Hudson by its type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T extends <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;,D extends <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt; 
+<BR>
+<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;T,D&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getDescriptorList(java.lang.Class)">getDescriptorList</A></B>(java.lang.Class&lt;T&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns <A HREF="../../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> that retains the discovered <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> instances for the given
+ kind of <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -814,6 +912,14 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getDescriptor(java.lang.Class)">getDescriptor</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> that corresponds to the given <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A> type.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1086,6 +1192,55 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
  where the "monitoring" consists of executing something periodically on every node
  and taking some action based on its result.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/node_monitors/ArchitectureMonitor.DescriptorImpl.html" title="class in hudson.node_monitors">ArchitectureMonitor.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/node_monitors/package-summary.html">hudson.node_monitors</A> that return types with arguments of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>NodeMonitor.</B><B><A HREF="../../../hudson/node_monitors/NodeMonitor.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A> descriptors.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.os.windows"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../hudson/os/windows/package-summary.html">hudson.os.windows</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../hudson/os/windows/package-summary.html">hudson.os.windows</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/os/windows/ManagedWindowsServiceLauncher.DescriptorImpl.html" title="class in hudson.os.windows">ManagedWindowsServiceLauncher.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -1149,7 +1304,24 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TD><CODE><B>RepositoryBrowsers.</B><B><A HREF="../../../hudson/scm/RepositoryBrowsers.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of all installed <A HREF="../../../hudson/scm/RepositoryBrowsers.html" title="class in hudson.scm"><CODE>RepositoryBrowsers</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <A HREF="../../../hudson/scm/RepositoryBrowser.html#all()"><CODE>RepositoryBrowser.all()</CODE></A> for read access and <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/scm/package-summary.html">hudson.scm</A> that return <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>RepositoryBrowser.</B><B><A HREF="../../../hudson/scm/RepositoryBrowser.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1158,6 +1330,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/scm/package-summary.html">hudson.scm</A> that return types with arguments of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>RepositoryBrowser.</B><B><A HREF="../../../hudson/scm/RepositoryBrowser.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> descriptors.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1196,6 +1376,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/scm/browsers/CollabNetSVN.DescriptorImpl.html" title="class in hudson.scm.browsers">CollabNetSVN.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/scm/browsers/FishEyeCVS.DescriptorImpl.html" title="class in hudson.scm.browsers">FishEyeCVS.DescriptorImpl</A></B></CODE>
 
 <BR>
@@ -1220,106 +1408,26 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/scm/browsers/ViewCVS.DescriptorImpl.html" title="class in hudson.scm.browsers">ViewCVS.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/scm/browsers/ViewSVN.DescriptorImpl.html" title="class in hudson.scm.browsers">ViewSVN.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/scm/browsers/package-summary.html">hudson.scm.browsers</A> declared as <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
-</TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>FishEyeSVN.</B><B><A HREF="../../../hudson/scm/browsers/FishEyeSVN.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/scm/browsers/WebSVN.DescriptorImpl.html" title="class in hudson.scm.browsers">WebSVN.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>CollabNetSVN.</B><B><A HREF="../../../hudson/scm/browsers/CollabNetSVN.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>ViewCVS.</B><B><A HREF="../../../hudson/scm/browsers/ViewCVS.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>Sventon.</B><B><A HREF="../../../hudson/scm/browsers/Sventon.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>WebSVN.</B><B><A HREF="../../../hudson/scm/browsers/WebSVN.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/scm/browsers/package-summary.html">hudson.scm.browsers</A> that return <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>FishEyeSVN.</B><B><A HREF="../../../hudson/scm/browsers/FishEyeSVN.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>CollabNetSVN.</B><B><A HREF="../../../hudson/scm/browsers/CollabNetSVN.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>ViewCVS.</B><B><A HREF="../../../hudson/scm/browsers/ViewCVS.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>Sventon.</B><B><A HREF="../../../hudson/scm/browsers/Sventon.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>WebSVN.</B><B><A HREF="../../../hudson/scm/browsers/WebSVN.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the descriptor value.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1349,6 +1457,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/security/AuthorizationStrategy.Unsecured.DescriptorImpl.html" title="class in hudson.security">AuthorizationStrategy.Unsecured.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security">GlobalMatrixAuthorizationStrategy.DescriptorImpl</A></B></CODE>
 
 <BR>
@@ -1358,6 +1474,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/security/HudsonPrivateSecurityRealm.DescriptorImpl.html" title="class in hudson.security">HudsonPrivateSecurityRealm.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/security/HudsonPrivateSecurityRealm.Details.DescriptorImpl.html" title="class in hudson.security">HudsonPrivateSecurityRealm.Details.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1418,14 +1542,6 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>LegacyAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/LegacyAuthorizationStrategy.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -1437,7 +1553,7 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>FullControlOnceLoggedInAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/FullControlOnceLoggedInAuthorizationStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+<TD><CODE><B>AuthorizationStrategy.</B><B><A HREF="../../../hudson/security/AuthorizationStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1445,58 +1561,34 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>LegacySecurityRealm.</B><B><A HREF="../../../hudson/security/LegacySecurityRealm.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>PAMSecurityRealm.</B><B><A HREF="../../../hudson/security/PAMSecurityRealm.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>ProjectMatrixAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/ProjectMatrixAuthorizationStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>HudsonPrivateSecurityRealm.</B><B><A HREF="../../../hudson/security/HudsonPrivateSecurityRealm.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>GlobalMatrixAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/GlobalMatrixAuthorizationStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>LegacyAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/LegacyAuthorizationStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>SecurityRealm.</B><B><A HREF="../../../hudson/security/SecurityRealm.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/security/package-summary.html">hudson.security</A> that return types with arguments of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>AuthorizationStrategy.</B><B><A HREF="../../../hudson/security/AuthorizationStrategy.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security"><CODE>AuthorizationStrategy</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>SecurityRealm.</B><B><A HREF="../../../hudson/security/SecurityRealm.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> descriptors.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1533,11 +1625,43 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/slaves/EnvironmentVariablesNodeProperty.DescriptorImpl.html" title="class in hudson.slaves">EnvironmentVariablesNodeProperty.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/slaves/NodeDescriptor.html" title="class in hudson.slaves">NodeDescriptor</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Descriptor for <A HREF="../../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/slaves/RetentionStrategy.Always.DescriptorImpl.html" title="class in hudson.slaves">RetentionStrategy.Always.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/slaves/RetentionStrategy.Demand.DescriptorImpl.html" title="class in hudson.slaves">RetentionStrategy.Demand.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1558,14 +1682,6 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>CommandLauncher.</B><B><A HREF="../../../hudson/slaves/CommandLauncher.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>JNLPLauncher.</B><B><A HREF="../../../hudson/slaves/JNLPLauncher.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
 
 <BR>
@@ -1582,7 +1698,15 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>RetentionStrategy.Demand.</B><B><A HREF="../../../hudson/slaves/RetentionStrategy.Demand.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+<TD><CODE><B>RetentionStrategy.</B><B><A HREF="../../../hudson/slaves/RetentionStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>Cloud.</B><B><A HREF="../../../hudson/slaves/Cloud.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1590,15 +1714,7 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>CommandLauncher.</B><B><A HREF="../../../hudson/slaves/CommandLauncher.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>SimpleScheduledRetentionStrategy.</B><B><A HREF="../../../hudson/slaves/SimpleScheduledRetentionStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+<TD><CODE><B>ComputerLauncher.</B><B><A HREF="../../../hudson/slaves/ComputerLauncher.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1611,13 +1727,29 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A> that return types with arguments of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>JNLPLauncher.</B><B><A HREF="../../../hudson/slaves/JNLPLauncher.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>RetentionStrategy.</B><B><A HREF="../../../hudson/slaves/RetentionStrategy.html#all()">all</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>Cloud.</B><B><A HREF="../../../hudson/slaves/Cloud.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A> descriptors.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1635,6 +1767,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/Ant.AntInstallation.DescriptorImpl.html" title="class in hudson.tasks">Ant.AntInstallation.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1735,47 +1875,15 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/Maven.MavenInstallation.DescriptorImpl.html" title="class in hudson.tasks">Maven.MavenInstallation.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/Shell.DescriptorImpl.html" title="class in hudson.tasks">Shell.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A> declared as <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>Fingerprinter.</B><B><A HREF="../../../hudson/tasks/Fingerprinter.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>BuildTrigger.</B><B><A HREF="../../../hudson/tasks/BuildTrigger.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>JavadocArchiver.</B><B><A HREF="../../../hudson/tasks/JavadocArchiver.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>ArtifactArchiver.</B><B><A HREF="../../../hudson/tasks/ArtifactArchiver.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1794,7 +1902,9 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TD><CODE><B>BuildStep.</B><B><A HREF="../../../hudson/tasks/BuildStep.html#BUILDERS">BUILDERS</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of all installed builders.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <A HREF="../../../hudson/tasks/Builder.html#all()"><CODE>Builder.all()</CODE></A> for read access, and use
+      <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1802,7 +1912,8 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TD><CODE><B>BuildWrappers.</B><B><A HREF="../../../hudson/tasks/BuildWrappers.html#WRAPPERS">WRAPPERS</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.281. Use <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration, and use <A HREF="../../../hudson/tasks/BuildWrapper.html#all()"><CODE>BuildWrapper.all()</CODE></A>
+      for listing them.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1814,8 +1925,8 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>BatchFile.</B><B><A HREF="../../../hudson/tasks/BatchFile.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>BuildStep.PublisherList.</B><B><A HREF="../../../hudson/tasks/BuildStep.PublisherList.html#get(int)">get</A></B>(int&nbsp;index)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1823,15 +1934,7 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>Fingerprinter.</B><B><A HREF="../../../hudson/tasks/Fingerprinter.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>BuildTrigger.</B><B><A HREF="../../../hudson/tasks/BuildTrigger.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+<TD><CODE><B>Publisher.</B><B><A HREF="../../../hudson/tasks/Publisher.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1839,47 +1942,7 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>Shell.</B><B><A HREF="../../../hudson/tasks/Shell.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>JavadocArchiver.</B><B><A HREF="../../../hudson/tasks/JavadocArchiver.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>Ant.</B><B><A HREF="../../../hudson/tasks/Ant.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>Maven.</B><B><A HREF="../../../hudson/tasks/Maven.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>Mailer.</B><B><A HREF="../../../hudson/tasks/Mailer.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>ArtifactArchiver.</B><B><A HREF="../../../hudson/tasks/ArtifactArchiver.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+<TD><CODE><B>Builder.</B><B><A HREF="../../../hudson/tasks/Builder.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1891,6 +1954,30 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A> that return types with arguments of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>BuildWrapper.</B><B><A HREF="../../../hudson/tasks/BuildWrapper.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>Publisher.</B><B><A HREF="../../../hudson/tasks/Publisher.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>Builder.</B><B><A HREF="../../../hudson/tasks/Builder.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A> descriptors.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1917,6 +2004,22 @@ java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class i
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List up all <A HREF="../../../hudson/tasks/BuildWrapperDescriptor.html" title="class in hudson.tasks"><CODE>BuildWrapperDescriptor</CODE></A>s that are applicable for the given project.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Iterator&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>BuildStep.PublisherList.</B><B><A HREF="../../../hudson/tasks/BuildStep.PublisherList.html#iterator()">iterator</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>Publisher.DescriptorExtensionListImpl.</B><B><A HREF="../../../hudson/tasks/Publisher.DescriptorExtensionListImpl.html#sort(java.util.List)">sort</A></B>(java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;&nbsp;r)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1962,6 +2065,24 @@ java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class i
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a new publisher descriptor, which (generally speaking)
  alter the build result based on some artifacts of the build.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B>Publisher.DescriptorExtensionListImpl.</B><B><A HREF="../../../hudson/tasks/Publisher.DescriptorExtensionListImpl.html#compare(hudson.model.Descriptor, hudson.model.Descriptor)">compare</A></B>(<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&nbsp;lhs,
+        <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&nbsp;rhs)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B>Publisher.DescriptorExtensionListImpl.</B><B><A HREF="../../../hudson/tasks/Publisher.DescriptorExtensionListImpl.html#compare(hudson.model.Descriptor, hudson.model.Descriptor)">compare</A></B>(<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&nbsp;lhs,
+        <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&nbsp;rhs)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -1988,16 +2109,10 @@ java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class i
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fiters a descriptor for <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A>s by using <A HREF="../../../hudson/tasks/BuildStepDescriptor.html#isApplicable(java.lang.Class)"><CODE>BuildStepDescriptor.isApplicable(Class)</CODE></A>.</TD>
 </TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Constructor parameters in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A> with type arguments of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
-</TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../hudson/tasks/BuildStep.PublisherList.html#BuildStep.PublisherList(java.util.Collection)">BuildStep.PublisherList</A></B>(java.util.Collection&lt;? extends <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;&nbsp;c)</CODE>
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>Publisher.DescriptorExtensionListImpl.</B><B><A HREF="../../../hudson/tasks/Publisher.DescriptorExtensionListImpl.html#sort(java.util.List)">sort</A></B>(java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;&nbsp;r)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -2030,38 +2145,6 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 </TABLE>
 &nbsp;
 <P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/tasks/junit/package-summary.html">hudson.tasks.junit</A> declared as <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>JUnitResultArchiver.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.DescriptorImpl.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/tasks/junit/package-summary.html">hudson.tasks.junit</A> that return <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>JUnitResultArchiver.</B><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
 <A NAME="hudson.tasks.test"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -2080,6 +2163,39 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tools"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../hudson/tools/package-summary.html">hudson.tools</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../hudson/tools/package-summary.html">hudson.tools</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools">ToolDescriptor&lt;T extends ToolInstallation&gt;</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/ToolLocationNodeProperty.DescriptorImpl.html" title="class in hudson.tools">ToolLocationNodeProperty.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -2175,6 +2291,57 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds a descriptor by their <A HREF="../../../hudson/model/Descriptor.html#clazz"><CODE>clazz</CODE></A>.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>DescriptorList.</B><B><A HREF="../../../hudson/util/DescriptorList.html#get(int)">get</A></B>(int&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/util/package-summary.html">hudson.util</A> that return types with arguments of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Iterator&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>DescriptorList.</B><B><A HREF="../../../hudson/util/DescriptorList.html#iterator()">iterator</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/util/package-summary.html">hudson.util</A> with parameters of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>DescriptorList.</B><B><A HREF="../../../hudson/util/DescriptorList.html#add(hudson.model.Descriptor)">add</A></B>(<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&nbsp;d)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>As of 1.286. Put <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your descriptor to have it auto-registered,
+      instead of registering a descriptor manually.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>DescriptorList.</B><B><A HREF="../../../hudson/util/DescriptorList.html#add(int, hudson.model.Descriptor)">add</A></B>(int&nbsp;index,
+    <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&nbsp;element)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>As of 1.286. Put <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your descriptor to have it auto-registered,
+      instead of registering a descriptor manually.</I></TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -2228,7 +2395,32 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TD><CODE><B><A HREF="../../../hudson/util/DescriptorList.html#DescriptorList(hudson.model.Descriptor...)">DescriptorList</A></B>(<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;...&nbsp;descriptors)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>As of 1.286. Use <A HREF="../../../hudson/util/DescriptorList.html#DescriptorList(java.lang.Class)"><CODE>DescriptorList.DescriptorList(Class)</CODE></A> instead.</I></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.views"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../hudson/views/package-summary.html">hudson.views</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/views/package-summary.html">hudson.views</A> that return types with arguments of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>ListViewColumn.</B><B><A HREF="../../../hudson/views/ListViewColumn.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views"><CODE>ListViewColumn</CODE></A> descriptors.</TD>
 </TR>
 </TABLE>
 &nbsp;

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.tasks.test Class Hierarchy (Hudson core 1.285 API)
+hudson.tasks.test Class Hierarchy (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.tasks.test Class Hierarchy (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.tasks.test Class Hierarchy (Hudson core 1.285 API)";
+        parent.document.title="hudson.tasks.test Class Hierarchy (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../../hudson/tasks/labelers/package-tree.html"><B>PREV</B></A>&nbsp;
-&nbsp;<A HREF="../../../hudson/triggers/package-tree.html"><B>NEXT</B></A></FONT></TD>
+&nbsp;<A HREF="../../../hudson/tools/package-tree.html"><B>NEXT</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../index.html?hudson/tasks/test/package-tree.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="package-tree.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -100,9 +100,12 @@ Class Hierarchy
 <LI TYPE="circle">hudson.tasks.test.<A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html" title="class in hudson.tasks.test"><B>AggregatedTestResultPublisher.TestResultAction</B></A></UL>
 <LI TYPE="circle">hudson.tasks.test.<A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.Child.html" title="class in hudson.tasks.test"><B>AggregatedTestResultAction.Child</B></A><LI TYPE="circle">hudson.tasks.test.<A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.ChildReport.html" title="class in hudson.tasks.test"><B>AggregatedTestResultAction.ChildReport</B></A><LI TYPE="circle">hudson.tasks.<A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html" title="class in hudson.tasks"><B>BuildStepCompatibilityLayer</B></A> (implements hudson.tasks.<A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>)
 <UL>
-<LI TYPE="circle">hudson.tasks.<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><B>Publisher</B></A> (implements hudson.tasks.<A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>, hudson.model.<A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<LI TYPE="circle">hudson.tasks.<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><B>Publisher</B></A> (implements hudson.tasks.<A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>, hudson.model.<A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;)
+<UL>
+<LI TYPE="circle">hudson.tasks.<A HREF="../../../hudson/tasks/Recorder.html" title="class in hudson.tasks"><B>Recorder</B></A> (implements hudson.<A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
 <LI TYPE="circle">hudson.tasks.test.<A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.html" title="class in hudson.tasks.test"><B>AggregatedTestResultPublisher</B></A></UL>
+</UL>
 </UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><B>Descriptor</B></A>&lt;T&gt; (implements hudson.model.<A HREF="../../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
 <UL>
@@ -112,7 +115,10 @@ Class Hierarchy
 <LI TYPE="circle">hudson.matrix.<A HREF="../../../hudson/matrix/MatrixAggregator.html" title="class in hudson.matrix"><B>MatrixAggregator</B></A> (implements hudson.<A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
 <LI TYPE="circle">hudson.tasks.test.<A HREF="../../../hudson/tasks/test/TestResultAggregator.html" title="class in hudson.tasks.test"><B>TestResultAggregator</B></A></UL>
-<LI TYPE="circle">hudson.tasks.test.<A HREF="../../../hudson/tasks/test/Messages.html" title="class in hudson.tasks.test"><B>Messages</B></A><LI TYPE="circle">hudson.tasks.test.<A HREF="../../../hudson/tasks/test/TestResultProjectAction.html" title="class in hudson.tasks.test"><B>TestResultProjectAction</B></A> (implements hudson.model.<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>)
+<LI TYPE="circle">hudson.tasks.test.<A HREF="../../../hudson/tasks/test/Messages.html" title="class in hudson.tasks.test"><B>Messages</B></A><LI TYPE="circle">hudson.model.listeners.<A HREF="../../../hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners"><B>RunListener</B></A>&lt;R&gt; (implements hudson.<A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<UL>
+<LI TYPE="circle">hudson.tasks.test.<A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.RunListenerImpl.html" title="class in hudson.tasks.test"><B>AggregatedTestResultPublisher.TestResultAction.RunListenerImpl</B></A></UL>
+<LI TYPE="circle">hudson.tasks.test.<A HREF="../../../hudson/tasks/test/TestResultProjectAction.html" title="class in hudson.tasks.test"><B>TestResultProjectAction</B></A> (implements hudson.model.<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>)
 </UL>
 </UL>
 <HR>
@@ -146,7 +152,7 @@ Class Hierarchy
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../../hudson/tasks/labelers/package-tree.html"><B>PREV</B></A>&nbsp;
-&nbsp;<A HREF="../../../hudson/triggers/package-tree.html"><B>NEXT</B></A></FONT></TD>
+&nbsp;<A HREF="../../../hudson/tools/package-tree.html"><B>NEXT</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../index.html?hudson/tasks/test/package-tree.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="package-tree.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

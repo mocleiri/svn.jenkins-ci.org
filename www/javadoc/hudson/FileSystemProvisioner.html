@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FileSystemProvisioner (Hudson core 1.285 API)
+FileSystemProvisioner (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FileSystemProvisioner (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FileSystemProvisioner (Hudson core 1.285 API)";
+        parent.document.title="FileSystemProvisioner (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -208,7 +208,17 @@ Prepares and provisions workspaces for <A HREF="../hudson/model/AbstractProject.
  and thus can be used anywhere that Hudson runs.</TD>
 </TR>
 </TABLE>
-&nbsp;<!-- =========== FIELD SUMMARY =========== -->
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -223,14 +233,6 @@ Prepares and provisions workspaces for <A HREF="../hudson/model/AbstractProject.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default implementation.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FileSystemProvisioner.html#LIST">LIST</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A list of available file system provider types.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -260,6 +262,14 @@ Prepares and provisions workspaces for <A HREF="../hudson/model/AbstractProject.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A>,<A HREF="../hudson/FileSystemProvisionerDescriptor.html" title="class in hudson">FileSystemProvisionerDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FileSystemProvisioner.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson"><CODE>FileSystemProvisioner</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FileSystemProvisioner.html#discardWorkspace(hudson.model.AbstractProject, hudson.FilePath)">discardWorkspace</A></B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
                  <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws)</CODE>
@@ -270,7 +280,7 @@ Prepares and provisions workspaces for <A HREF="../hudson/model/AbstractProject.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../hudson/FileSystemProvisionerDescriptor.html" title="class in hudson">FileSystemProvisionerDescriptor</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../hudson/FileSystemProvisionerDescriptor.html" title="class in hudson">FileSystemProvisionerDescriptor</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FileSystemProvisioner.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
@@ -320,18 +330,6 @@ Prepares and provisions workspaces for <A HREF="../hudson/model/AbstractProject.
 <B>Field Detail</B></FONT></TH>
 </TR>
 </TABLE>
-
-<A NAME="LIST"><!-- --></A><H3>
-LIST</H3>
-<PRE>
-public static final <A HREF="../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A>&gt; <B>LIST</B></PRE>
-<DL>
-<DD>A list of available file system provider types.
-<P>
-<DL>
-</DL>
-</DL>
-<HR>
 
 <A NAME="DEFAULT"><!-- --></A><H3>
 DEFAULT</H3>
@@ -468,7 +466,7 @@ public abstract <A HREF="../hudson/WorkspaceSnapshot.html" title="class in hudso
 <A NAME="getDescriptor()"><!-- --></A><H3>
 getDescriptor</H3>
 <PRE>
-public abstract <A HREF="../hudson/FileSystemProvisionerDescriptor.html" title="class in hudson">FileSystemProvisionerDescriptor</A> <B>getDescriptor</B>()</PRE>
+public <A HREF="../hudson/FileSystemProvisionerDescriptor.html" title="class in hudson">FileSystemProvisionerDescriptor</A> <B>getDescriptor</B>()</PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
 <DD>Gets the descriptor for this instance.
@@ -480,6 +478,22 @@ public abstract <A HREF="../hudson/FileSystemProvisionerDescriptor.html" title="
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A>,<A HREF="../hudson/FileSystemProvisionerDescriptor.html" title="class in hudson">FileSystemProvisionerDescriptor</A>&gt; <B>all</B>()</PRE>
+<DL>
+<DD>Returns all the registered <A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson"><CODE>FileSystemProvisioner</CODE></A> descriptors.
+<P>
+<DD><DL>
+</DL>
 </DD>
 <DD><DL>
 </DL>

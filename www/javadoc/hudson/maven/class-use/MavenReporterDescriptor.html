@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.maven.MavenReporterDescriptor (Hudson core 1.285 API)
+Uses of Class hudson.maven.MavenReporterDescriptor (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.maven.MavenReporterDescriptor (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.maven.MavenReporterDescriptor (Hudson core 1.285 API)";
+        parent.document.title="Uses of Class hudson.maven.MavenReporterDescriptor (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -121,7 +121,8 @@ Uses of <A HREF="../../../hudson/maven/MavenReporterDescriptor.html" title="clas
 <TD><CODE><B>MavenReporters.</B><B><A HREF="../../../hudson/maven/MavenReporters.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of all installed <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>s.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286. Use <code>MavenReporterDescriptor#all()</code> for listing reporters, and
+ use <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for automatic registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -133,7 +134,7 @@ Uses of <A HREF="../../../hudson/maven/MavenReporterDescriptor.html" title="clas
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../../../hudson/maven/MavenReporterDescriptor.html" title="class in hudson.maven">MavenReporterDescriptor</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../../hudson/maven/MavenReporterDescriptor.html" title="class in hudson.maven">MavenReporterDescriptor</A></CODE></FONT></TD>
 <TD><CODE><B>MavenReporter.</B><B><A HREF="../../../hudson/maven/MavenReporter.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
@@ -146,6 +147,14 @@ Uses of <A HREF="../../../hudson/maven/MavenReporterDescriptor.html" title="clas
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A> that return types with arguments of type <A HREF="../../../hudson/maven/MavenReporterDescriptor.html" title="class in hudson.maven">MavenReporterDescriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.Collection&lt;<A HREF="../../../hudson/maven/MavenReporterDescriptor.html" title="class in hudson.maven">MavenReporterDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>MavenReporterDescriptor.</B><B><A HREF="../../../hudson/maven/MavenReporterDescriptor.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists all the currently registered instances of <A HREF="../../../hudson/maven/MavenReporterDescriptor.html" title="class in hudson.maven"><CODE>MavenReporterDescriptor</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson (Hudson core 1.285 API)
+hudson (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson (Hudson core 1.285 API)";
+        parent.document.title="hudson (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -142,8 +142,29 @@ Package hudson
 <TD>Runs a job on all projects in the order of dependencies</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList&lt;T extends Describable&lt;T&gt;,D extends Descriptor&lt;T&gt;&gt;</A></B></TD>
+<TD><A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> for holding a set of <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s, which is a group of descriptors for
+ the same extension point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/EnvVars.html" title="class in hudson">EnvVars</A></B></TD>
 <TD>Environment variables.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/ExtensionFinder.html" title="class in hudson">ExtensionFinder</A></B></TD>
+<TD>Discovers the implementations of an extension point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/ExtensionFinder.Sezpoz.html" title="class in hudson">ExtensionFinder.Sezpoz</A></B></TD>
+<TD>The default implementation that looks for the <A HREF="../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> marker.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/ExtensionList.html" title="class in hudson">ExtensionList&lt;T&gt;</A></B></TD>
+<TD>Retains the known extension instances for the given type 'T'.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/ExtensionListView.html" title="class in hudson">ExtensionListView</A></B></TD>
+<TD>Compatibility layer for legacy manual registration of extension points.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A></B></TD>
@@ -299,6 +320,16 @@ Package hudson
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/CopyOnWrite.html" title="annotation in hudson">CopyOnWrite</A></B></TD>
 <TD>Represents fields that are protected for concurrency by the copy-on-write semantics.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/Extension.html" title="annotation in hudson">Extension</A></B></TD>
+<TD>Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></B></TD>
+<TD>Used by designers of extension points (direct subtypes of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>) to indicate that
+ the legacy instances are scoped to <A HREF="../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> instance.</TD>
 </TR>
 </TABLE>
 &nbsp;

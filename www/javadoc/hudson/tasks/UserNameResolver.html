@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-UserNameResolver (Hudson core 1.285 API)
+UserNameResolver (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UserNameResolver (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UserNameResolver (Hudson core 1.285 API)";
+        parent.document.title="UserNameResolver (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -109,14 +109,12 @@ Finds full name off the user when none is specified.
 
  <p>
  This is an extension point of Hudson. Plugins tha contribute new implementation
- of this class must register it to <A HREF="../../hudson/tasks/UserNameResolver.html#LIST"><CODE>LIST</CODE></A>. The typical way to do this is:
+ of this class should use <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> to register the instance into Hudson, like this:
 
  <pre>
- class PluginImpl extends <A HREF="../../hudson/Plugin.html" title="class in hudson"><CODE>Plugin</CODE></A> {
-   public void start() {
-     ...
-     UserNameResolver.LIST.add(new UserNameResolver());
-   }
+ &#64;Extension
+ class MyserNameResolver extends UserNameResolver {
+   ...
  }
  </pre>
 <P>
@@ -131,6 +129,25 @@ Finds full name off the user when none is specified.
 <HR>
 
 <P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -145,7 +162,7 @@ Finds full name off the user when none is specified.
 <TD><CODE><B><A HREF="../../hudson/tasks/UserNameResolver.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../hudson/tasks/UserNameResolver.html" title="class in hudson.tasks"><CODE>UserNameResolver</CODE></A> implementations.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/tasks/UserNameResolver.html#all()"><CODE>all()</CODE></A> for read access, and use <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -172,6 +189,14 @@ Finds full name off the user when none is specified.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/tasks/UserNameResolver.html" title="class in hudson.tasks">UserNameResolver</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/UserNameResolver.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../hudson/tasks/UserNameResolver.html" title="class in hudson.tasks"><CODE>UserNameResolver</CODE></A> descriptors.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -217,7 +242,7 @@ LIST</H3>
 <PRE>
 public static final java.util.List&lt;<A HREF="../../hudson/tasks/UserNameResolver.html" title="class in hudson.tasks">UserNameResolver</A>&gt; <B>LIST</B></PRE>
 <DL>
-<DD>All registered <A HREF="../../hudson/tasks/UserNameResolver.html" title="class in hudson.tasks"><CODE>UserNameResolver</CODE></A> implementations.
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/tasks/UserNameResolver.html#all()"><CODE>all()</CODE></A> for read access, and use <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I><DD>All registered <A HREF="../../hudson/tasks/UserNameResolver.html" title="class in hudson.tasks"><CODE>UserNameResolver</CODE></A> implementations.
 <P>
 <DL>
 </DL>
@@ -283,6 +308,22 @@ resolve</H3>
 <PRE>
 public static java.lang.String <B>resolve</B>(<A HREF="../../hudson/model/User.html" title="class in hudson.model">User</A>&nbsp;u)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/tasks/UserNameResolver.html" title="class in hudson.tasks">UserNameResolver</A>&gt; <B>all</B>()</PRE>
+<DL>
+<DD>Returns all the registered <A HREF="../../hudson/tasks/UserNameResolver.html" title="class in hudson.tasks"><CODE>UserNameResolver</CODE></A> descriptors.
+<P>
 <DD><DL>
 </DL>
 </DD>

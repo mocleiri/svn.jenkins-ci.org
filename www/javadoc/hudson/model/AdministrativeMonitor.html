@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AdministrativeMonitor (Hudson core 1.285 API)
+AdministrativeMonitor (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AdministrativeMonitor (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AdministrativeMonitor (Hudson core 1.285 API)";
+        parent.document.title="AdministrativeMonitor (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -115,8 +115,7 @@ Checks the health of a subsystem of Hudson and if there's something
  <h2>How to implement?</h2>
  <p>
  Plugins who wish to contribute such notifications can implement this
- class and add to <A HREF="../../hudson/model/Hudson.html#administrativeMonitors"><CODE>Hudson.administrativeMonitors</CODE></A> to register
- the object to Hudson.
+ class and put to <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> to register it to Hudson.
 
  <p>
  Once installed, it's the implementor's responsibility to perform
@@ -153,6 +152,25 @@ Checks the health of a subsystem of Hudson and if there's something
 <HR>
 
 <P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -204,6 +222,14 @@ Checks the health of a subsystem of Hudson and if there's something
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model">AdministrativeMonitor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AdministrativeMonitor.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model"><CODE>AdministrativeMonitor</CODE></A> instances.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -471,6 +497,22 @@ public void <B>doDisable</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model">AdministrativeMonitor</A>&gt; <B>all</B>()</PRE>
+<DL>
+<DD>All registered <A HREF="../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model"><CODE>AdministrativeMonitor</CODE></A> instances.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

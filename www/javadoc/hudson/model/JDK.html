@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-JDK (Hudson core 1.285 API)
+JDK (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JDK (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JDK (Hudson core 1.285 API)";
+        parent.document.title="JDK (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/Items.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/Job.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/JDK.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="JDK.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -94,11 +94,15 @@ hudson.model</FONT>
 Class JDK</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.JDK</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">hudson.tools.ToolInstallation</A>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.JDK</B>
 </PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;, <A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;<A HREF="../../hudson/model/JDK.html" title="class in hudson.model">JDK</A>&gt;, java.io.Serializable</DD>
+</DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>JDK</B><DT>extends java.lang.Object</DL>
+<DT><PRE>public final class <B>JDK</B><DT>extends <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A><DT>implements <A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;<A HREF="../../hudson/model/JDK.html" title="class in hudson.model">JDK</A>&gt;</DL>
 </PRE>
 
 <P>
@@ -109,10 +113,37 @@ Information about JDK installation.
 <DL>
 <DT><B>Author:</B></DT>
   <DD>Kohsuke Kawaguchi</DD>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../../serialized-form.html#hudson.model.JDK">Serialized Form</A></DL>
 <HR>
 
 <P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model">JDK.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
@@ -149,6 +180,14 @@ Information about JDK installation.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/JDK.html" title="class in hudson.model">JDK</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/JDK.html#forNode(hudson.model.Node)">forNode</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a specialized copy of T for functioning in the given node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.io.File</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/JDK.html#getBinDir()">getBinDir</A></B>()</CODE>
 
@@ -166,18 +205,18 @@ Information about JDK installation.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/JDK.html#getJavaHome()">getJavaHome</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/JDK.html#getHome()">getHome</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;install directory.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the home directory of this tool.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/JDK.html#getName()">getName</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/JDK.html#getJavaHome()">getJavaHome</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Human readable display name.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;install directory.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -186,6 +225,15 @@ Information about JDK installation.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if "java" is in PATH on the given node.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.tools.ToolInstallation"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.tools.<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/tools/ToolInstallation.html#all()">all</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getName()">getName</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -238,16 +286,26 @@ public java.lang.String <B>getJavaHome</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
-<A NAME="getName()"><!-- --></A><H3>
-getName</H3>
+<A NAME="getHome()"><!-- --></A><H3>
+getHome</H3>
 <PRE>
-public java.lang.String <B>getName</B>()</PRE>
+public java.lang.String <B>getHome</B>()</PRE>
 <DL>
-<DD>Human readable display name.
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/tools/ToolInstallation.html#getHome()">ToolInstallation</A></CODE></B></DD>
+<DD>Gets the home directory of this tool.
+ 
+ The path can be in Unix format as well as in Windows format.
+ Must be absolute.
 <P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/tools/ToolInstallation.html#getHome()">getHome</A></CODE> in class <CODE><A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -264,6 +322,9 @@ public java.io.File <B>getBinDir</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -277,6 +338,9 @@ public boolean <B>getExists</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -287,6 +351,26 @@ public void <B>buildEnvVars</B>(java.util.Map&lt;java.lang.String,java.lang.Stri
 <DL>
 <DD>Sets PATH and JAVA_HOME from this JDK.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="forNode(hudson.model.Node)"><!-- --></A><H3>
+forNode</H3>
+<PRE>
+public <A HREF="../../hudson/model/JDK.html" title="class in hudson.model">JDK</A> <B>forNode</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)">NodeSpecific</A></CODE></B></DD>
+<DD>Returns a specialized copy of T for functioning in the given node.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)">forNode</A></CODE> in interface <CODE><A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;<A HREF="../../hudson/model/JDK.html" title="class in hudson.model">JDK</A>&gt;</CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -304,6 +388,9 @@ public static boolean <B>isDefaultJDKValid</B>(<A HREF="../../hudson/model/Node.
  If it's not, then the user must specify a configured JDK,
  so this is often useful for form field validation.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -340,7 +427,7 @@ public static boolean <B>isDefaultJDKValid</B>(<A HREF="../../hudson/model/Node.
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/Items.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/Job.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/JDK.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="JDK.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -360,7 +447,7 @@ public static boolean <B>isDefaultJDKValid</B>(<A HREF="../../hudson/model/Node.
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>

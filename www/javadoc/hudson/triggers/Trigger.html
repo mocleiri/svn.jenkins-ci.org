@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Trigger (Hudson core 1.285 API)
+Trigger (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Trigger (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Trigger (Hudson core 1.285 API)";
+        parent.document.title="Trigger (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -112,7 +112,7 @@ Triggers a <A HREF="../../hudson/model/Build.html" title="class in hudson.model"
 
  <p>
  To register a custom <A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers"><CODE>Trigger</CODE></A> from a plugin,
- add it to <A HREF="../../hudson/triggers/Triggers.html#TRIGGERS"><CODE>Triggers.TRIGGERS</CODE></A>.
+ put <CODE>Extension</CODE> on your <A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers"><CODE>TriggerDescriptor</CODE></A> class.
 <P>
 
 <P>
@@ -123,6 +123,25 @@ Triggers a <A HREF="../../hudson/model/Build.html" title="class in hudson.model"
 <HR>
 
 <P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -203,6 +222,14 @@ Triggers a <A HREF="../../hudson/model/Build.html" title="class in hudson.model"
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers">Trigger</A>&lt;?&gt;,<A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers">TriggerDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/triggers/Trigger.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers"><CODE>Trigger</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/triggers/Trigger.html#checkTriggers(java.util.Calendar)">checkTriggers</A></B>(java.util.Calendar&nbsp;cal)</CODE>
 
@@ -211,7 +238,15 @@ Triggers a <A HREF="../../hudson/model/Build.html" title="class in hudson.model"
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers">TriggerDescriptor</A></CODE></FONT></TD>
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers">TriggerDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/triggers/Trigger.html#for_(hudson.model.Item)">for_</A></B>(<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;i)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a subset of <A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers"><CODE>TriggerDescriptor</CODE></A>s that applys to the given item.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers">TriggerDescriptor</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/triggers/Trigger.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
@@ -467,7 +502,7 @@ public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model
 <A NAME="getDescriptor()"><!-- --></A><H3>
 getDescriptor</H3>
 <PRE>
-public abstract <A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers">TriggerDescriptor</A> <B>getDescriptor</B>()</PRE>
+public <A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers">TriggerDescriptor</A> <B>getDescriptor</B>()</PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
 <DD>Gets the descriptor for this instance.
@@ -540,6 +575,38 @@ init</H3>
 <PRE>
 public static void <B>init</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers">Trigger</A>&lt;?&gt;,<A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers">TriggerDescriptor</A>&gt; <B>all</B>()</PRE>
+<DL>
+<DD>Returns all the registered <A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers"><CODE>Trigger</CODE></A> descriptors.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="for_(hudson.model.Item)"><!-- --></A><H3>
+for_</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers">TriggerDescriptor</A>&gt; <B>for_</B>(<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;i)</PRE>
+<DL>
+<DD>Returns a subset of <A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers"><CODE>TriggerDescriptor</CODE></A>s that applys to the given item.
+<P>
 <DD><DL>
 </DL>
 </DD>

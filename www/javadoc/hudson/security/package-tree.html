@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.security Class Hierarchy (Hudson core 1.285 API)
+hudson.security Class Hierarchy (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.security Class Hierarchy (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.security Class Hierarchy (Hudson core 1.285 API)";
+        parent.document.title="hudson.security Class Hierarchy (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -110,18 +110,24 @@ Class Hierarchy
 <LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/AuthorizationMatrixProperty.ConverterImpl.html" title="class in hudson.security"><B>AuthorizationMatrixProperty.ConverterImpl</B></A> (implements com.thoughtworks.xstream.converters.Converter)
 <LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security"><B>AuthorizationStrategy</B></A> (implements hudson.model.<A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
+<LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/AuthorizationStrategy.Unsecured.html" title="class in hudson.security"><B>AuthorizationStrategy.Unsecured</B></A> (implements java.io.Serializable)
 <LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/FullControlOnceLoggedInAuthorizationStrategy.html" title="class in hudson.security"><B>FullControlOnceLoggedInAuthorizationStrategy</B></A><LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html" title="class in hudson.security"><B>GlobalMatrixAuthorizationStrategy</B></A><UL>
 <LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.html" title="class in hudson.security"><B>ProjectMatrixAuthorizationStrategy</B></A></UL>
 <LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/LegacyAuthorizationStrategy.html" title="class in hudson.security"><B>LegacyAuthorizationStrategy</B></A></UL>
 <LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/BasicAuthenticationFilter.html" title="class in hudson.security"><B>BasicAuthenticationFilter</B></A> (implements javax.servlet.Filter)
 <LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/ChainedServletFilter.html" title="class in hudson.security"><B>ChainedServletFilter</B></A> (implements javax.servlet.Filter)
 <LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/ContainerAuthentication.html" title="class in hudson.security"><B>ContainerAuthentication</B></A> (implements org.acegisecurity.Authentication)
+<LI TYPE="circle">org.acegisecurity.providers.ldap.populator.DefaultLdapAuthoritiesPopulator (implements org.acegisecurity.providers.ldap.LdapAuthoritiesPopulator)
+<UL>
+<LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/LDAPSecurityRealm.AuthoritiesPopulatorImpl.html" title="class in hudson.security"><B>LDAPSecurityRealm.AuthoritiesPopulatorImpl</B></A></UL>
 <LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/DeferredCreationLdapAuthoritiesPopulator.html" title="class in hudson.security"><B>DeferredCreationLdapAuthoritiesPopulator</B></A> (implements org.acegisecurity.providers.ldap.LdapAuthoritiesPopulator)
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><B>Descriptor</B></A>&lt;T&gt; (implements hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
 <UL>
-<LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security"><B>GlobalMatrixAuthorizationStrategy.DescriptorImpl</B></A><LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/HudsonPrivateSecurityRealm.DescriptorImpl.html" title="class in hudson.security"><B>HudsonPrivateSecurityRealm.DescriptorImpl</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model"><B>JobPropertyDescriptor</B></A><UL>
+<LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/AuthorizationStrategy.Unsecured.DescriptorImpl.html" title="class in hudson.security"><B>AuthorizationStrategy.Unsecured.DescriptorImpl</B></A><LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security"><B>GlobalMatrixAuthorizationStrategy.DescriptorImpl</B></A><LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/HudsonPrivateSecurityRealm.DescriptorImpl.html" title="class in hudson.security"><B>HudsonPrivateSecurityRealm.DescriptorImpl</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model"><B>JobPropertyDescriptor</B></A><UL>
 <LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/AuthorizationMatrixProperty.DescriptorImpl.html" title="class in hudson.security"><B>AuthorizationMatrixProperty.DescriptorImpl</B></A></UL>
-<LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/LDAPSecurityRealm.DescriptorImpl.html" title="class in hudson.security"><B>LDAPSecurityRealm.DescriptorImpl</B></A><LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/LegacyAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security"><B>LegacyAuthorizationStrategy.DescriptorImpl</B></A><LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/PAMSecurityRealm.DescriptorImpl.html" title="class in hudson.security"><B>PAMSecurityRealm.DescriptorImpl</B></A></UL>
+<LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/LDAPSecurityRealm.DescriptorImpl.html" title="class in hudson.security"><B>LDAPSecurityRealm.DescriptorImpl</B></A><LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/LegacyAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security"><B>LegacyAuthorizationStrategy.DescriptorImpl</B></A><LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/PAMSecurityRealm.DescriptorImpl.html" title="class in hudson.security"><B>PAMSecurityRealm.DescriptorImpl</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model"><B>UserPropertyDescriptor</B></A><UL>
+<LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/HudsonPrivateSecurityRealm.Details.DescriptorImpl.html" title="class in hudson.security"><B>HudsonPrivateSecurityRealm.Details.DescriptorImpl</B></A></UL>
+</UL>
 <LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.ConverterImpl.html" title="class in hudson.security"><B>GlobalMatrixAuthorizationStrategy.ConverterImpl</B></A> (implements com.thoughtworks.xstream.converters.Converter)
 <UL>
 <LI TYPE="circle">hudson.security.<A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.ConverterImpl.html" title="class in hudson.security"><B>ProjectMatrixAuthorizationStrategy.ConverterImpl</B></A></UL>

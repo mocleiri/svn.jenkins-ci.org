@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-EnvVars (Hudson core 1.285 API)
+EnvVars (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ EnvVars (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="EnvVars (Hudson core 1.285 API)";
+        parent.document.title="EnvVars (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -56,8 +56,8 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../hudson/DependencyRunner.ProjectRunnable.html" title="interface in hudson"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../hudson/DescriptorExtensionList.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../hudson/Extension.html" title="annotation in hudson"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/EnvVars.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="EnvVars.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -183,6 +183,12 @@ Environment variables.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../hudson/EnvVars.html#EnvVars(java.lang.String...)">EnvVars</A></B>(java.lang.String...&nbsp;keyValuePairs)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ========== METHOD SUMMARY =========== -->
@@ -200,6 +206,14 @@ Environment variables.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Takes a string that looks like "a=b" and adds that to this map.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/EnvVars.html#expand(java.lang.String)">expand</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expands the variables in the given string by using environment variables represented in 'this'.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -225,6 +239,14 @@ Environment variables.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/EnvVars.html#resolve(java.util.Map)">resolve</A></B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolves environment variables against each other.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.util.TreeMap"><!-- --></A>
@@ -320,6 +342,14 @@ EnvVars</H3>
 public <B>EnvVars</B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;m)</PRE>
 <DL>
 </DL>
+<HR>
+
+<A NAME="EnvVars(java.lang.String...)"><!-- --></A><H3>
+EnvVars</H3>
+<PRE>
+public <B>EnvVars</B>(java.lang.String...&nbsp;keyValuePairs)</PRE>
+<DL>
+</DL>
 
 <!-- ============ METHOD DETAIL ========== -->
 
@@ -359,12 +389,38 @@ public void <B>overrideAll</B>(java.util.Map&lt;java.lang.String,java.lang.Strin
 </DL>
 <HR>
 
+<A NAME="resolve(java.util.Map)"><!-- --></A><H3>
+resolve</H3>
+<PRE>
+public static void <B>resolve</B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env)</PRE>
+<DL>
+<DD>Resolves environment variables against each other.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="addLine(java.lang.String)"><!-- --></A><H3>
 addLine</H3>
 <PRE>
 public void <B>addLine</B>(java.lang.String&nbsp;line)</PRE>
 <DL>
 <DD>Takes a string that looks like "a=b" and adds that to this map.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="expand(java.lang.String)"><!-- --></A><H3>
+expand</H3>
+<PRE>
+public java.lang.String <B>expand</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>Expands the variables in the given string by using environment variables represented in 'this'.
 <P>
 <DD><DL>
 </DL>
@@ -419,8 +475,8 @@ public static java.util.Map&lt;java.lang.String,java.lang.String&gt; <B>getRemot
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../hudson/DependencyRunner.ProjectRunnable.html" title="interface in hudson"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../hudson/DescriptorExtensionList.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../hudson/Extension.html" title="annotation in hudson"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/EnvVars.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="EnvVars.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

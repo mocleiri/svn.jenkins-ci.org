@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-UserProperties (Hudson core 1.285 API)
+UserProperties (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UserProperties (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UserProperties (Hudson core 1.285 API)";
+        parent.document.title="UserProperties (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -97,6 +97,8 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.UserProperties</B>
 </PRE>
 <HR>
+<B>Deprecated.</B>&nbsp;<I>as of 1.286</I>
+<P>
 <DL>
 <DT><PRE>public class <B>UserProperties</B><DT>extends java.lang.Object</DL>
 </PRE>
@@ -127,7 +129,8 @@ List of all installed <A HREF="../../hudson/model/UserProperty.html" title="clas
 <TD><CODE><B><A HREF="../../hudson/model/UserProperties.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../hudson/model/UserProperty.html#all()"><CODE>UserProperty.all()</CODE></A> for read access and <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for auto-registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -143,7 +146,7 @@ List of all installed <A HREF="../../hudson/model/UserProperty.html" title="clas
 <TD><CODE><B><A HREF="../../hudson/model/UserProperties.html#UserProperties()">UserProperties</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -183,7 +186,8 @@ LIST</H3>
 <PRE>
 public static final java.util.List&lt;<A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model">UserPropertyDescriptor</A>&gt; <B>LIST</B></PRE>
 <DL>
-<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../hudson/model/UserProperty.html#all()"><CODE>UserProperty.all()</CODE></A> for read access and <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for auto-registration.</I><DL>
 </DL>
 </DL>
 
@@ -202,7 +206,7 @@ UserProperties</H3>
 <PRE>
 public <B>UserProperties</B>()</PRE>
 <DL>
-</DL>
+<DD><B>Deprecated.</B>&nbsp;</DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
 

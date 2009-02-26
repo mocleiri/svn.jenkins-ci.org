@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Proc.LocalProc (Hudson core 1.285 API)
+Proc.LocalProc (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Proc.LocalProc (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Proc.LocalProc (Hudson core 1.285 API)";
+        parent.document.title="Proc.LocalProc (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -208,6 +208,14 @@ Locally launched process.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Proc.LocalProc.html#isAlive()">isAlive</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the process is still alive.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Proc.LocalProc.html#join()">join</A></B>()</CODE>
 
@@ -368,6 +376,28 @@ public int <B>join</B>()
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE> - if there's an error launching/joining a process
       and a stack trace could help the trouble-shooting.
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isAlive()"><!-- --></A><H3>
+isAlive</H3>
+<PRE>
+public boolean <B>isAlive</B>()
+                throws java.io.IOException,
+                       java.lang.InterruptedException</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../hudson/Proc.html#isAlive()">Proc</A></CODE></B></DD>
+<DD>Checks if the process is still alive.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/Proc.html#isAlive()">isAlive</A></CODE> in class <CODE><A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>

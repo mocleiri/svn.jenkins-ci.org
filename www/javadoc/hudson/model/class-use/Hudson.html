@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.model.Hudson (Hudson core 1.285 API)
+Uses of Class hudson.model.Hudson (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Hudson (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Hudson (Hudson core 1.285 API)";
+        parent.document.title="Uses of Class hudson.model.Hudson (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -106,6 +106,11 @@ Packages that use <A HREF="../../../hudson/model/Hudson.html" title="class in hu
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks"><B>hudson.tasks</B></A></TD>
+<TD>Built-in <a href="../../../hudson/tasks/Builder.html"><tt>Builder</tt></a>s and <a href="../../../hudson/tasks/Publisher.html"><tt>Publisher</tt></a>s
+that perform the actual heavy-lifting of a build.&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -121,7 +126,119 @@ Uses of <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/package-summary.html">hudson</A> declared as <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A></CODE></FONT></TD>
+<TD><CODE><B>ExtensionList.</B><B><A HREF="../../../hudson/ExtensionList.html#hudson">hudson</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/package-summary.html">hudson</A> with parameters of type <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; <A HREF="../../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B>ExtensionList.</B><B><A HREF="../../../hudson/ExtensionList.html#create(hudson.model.Hudson, java.lang.Class)">create</A></B>(<A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson,
+       java.lang.Class&lt;T&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T extends <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;,D extends <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt; 
+<BR>
+<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;T,D&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B>DescriptorExtensionList.</B><B><A HREF="../../../hudson/DescriptorExtensionList.html#create(hudson.model.Hudson, java.lang.Class)">create</A></B>(<A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson,
+       java.lang.Class&lt;T&gt;&nbsp;describableType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract 
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.util.Collection&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B>ExtensionFinder.</B><B><A HREF="../../../hudson/ExtensionFinder.html#findExtensions(java.lang.Class, hudson.model.Hudson)">findExtensions</A></B>(java.lang.Class&lt;T&gt;&nbsp;type,
+               <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discover extensions of the given type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.util.Collection&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B>ExtensionFinder.Sezpoz.</B><B><A HREF="../../../hudson/ExtensionFinder.Sezpoz.html#findExtensions(java.lang.Class, hudson.model.Hudson)">findExtensions</A></B>(java.lang.Class&lt;T&gt;&nbsp;type,
+               <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/package-summary.html">hudson</A> with parameters of type <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/DescriptorExtensionList.html#DescriptorExtensionList(hudson.model.Hudson, java.lang.Class)">DescriptorExtensionList</A></B>(<A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson,
+                        java.lang.Class&lt;<A HREF="../../../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">T</A>&gt;&nbsp;describableType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/ExtensionList.html#ExtensionList(hudson.model.Hudson, java.lang.Class)">ExtensionList</A></B>(<A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson,
+              java.lang.Class&lt;<A HREF="../../../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&nbsp;extensionType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/ExtensionList.html#ExtensionList(hudson.model.Hudson, java.lang.Class, java.util.concurrent.CopyOnWriteArrayList)">ExtensionList</A></B>(<A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson,
+              java.lang.Class&lt;<A HREF="../../../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&nbsp;extensionType,
+              java.util.concurrent.CopyOnWriteArrayList&lt;<A HREF="../../../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&nbsp;legacyStore)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../hudson/UDPBroadcastThread.html#UDPBroadcastThread(hudson.model.Hudson)">UDPBroadcastThread</A></B>(<A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson)</CODE>
@@ -264,6 +381,29 @@ Uses of <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../hudson/model/ViewJob.html#ViewJob(hudson.model.Hudson, java.lang.String)">ViewJob</A></B>(<A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;parent,
         java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A> in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A> with parameters of type <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/tasks/Publisher.DescriptorExtensionListImpl.html#Publisher.DescriptorExtensionListImpl(hudson.model.Hudson)">Publisher.DescriptorExtensionListImpl</A></B>(<A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

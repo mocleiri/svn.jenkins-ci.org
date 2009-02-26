@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Proc (Hudson core 1.285 API)
+Proc (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Proc (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Proc (Hudson core 1.285 API)";
+        parent.document.title="Proc (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -155,6 +155,14 @@ External process wrapper.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Proc.html#isAlive()">isAlive</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the process is still alive.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;int</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Proc.html#join()">join</A></B>()</CODE>
 
@@ -191,6 +199,24 @@ External process wrapper.
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="isAlive()"><!-- --></A><H3>
+isAlive</H3>
+<PRE>
+public abstract boolean <B>isAlive</B>()
+                         throws java.io.IOException,
+                                java.lang.InterruptedException</PRE>
+<DL>
+<DD>Checks if the process is still alive.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="kill()"><!-- --></A><H3>
 kill</H3>

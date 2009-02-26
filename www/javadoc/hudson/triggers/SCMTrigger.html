@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SCMTrigger (Hudson core 1.285 API)
+SCMTrigger (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCMTrigger (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCMTrigger (Hudson core 1.285 API)";
+        parent.document.title="SCMTrigger (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -166,21 +166,23 @@ java.lang.Object
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
-&nbsp;<!-- =========== FIELD SUMMARY =========== -->
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Field Summary</B></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/triggers/SCMTrigger.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -281,7 +283,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.triggers.<A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers">Trigger</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/triggers/Trigger.html#checkTriggers(java.util.Calendar)">checkTriggers</A>, <A HREF="../../hudson/triggers/Trigger.html#getSpec()">getSpec</A>, <A HREF="../../hudson/triggers/Trigger.html#init()">init</A>, <A HREF="../../hudson/triggers/Trigger.html#start(J, boolean)">start</A>, <A HREF="../../hudson/triggers/Trigger.html#stop()">stop</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/triggers/Trigger.html#all()">all</A>, <A HREF="../../hudson/triggers/Trigger.html#checkTriggers(java.util.Calendar)">checkTriggers</A>, <A HREF="../../hudson/triggers/Trigger.html#for_(hudson.model.Item)">for_</A>, <A HREF="../../hudson/triggers/Trigger.html#getSpec()">getSpec</A>, <A HREF="../../hudson/triggers/Trigger.html#init()">init</A>, <A HREF="../../hudson/triggers/Trigger.html#start(J, boolean)">start</A>, <A HREF="../../hudson/triggers/Trigger.html#stop()">stop</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -305,16 +307,6 @@ java.lang.Object
 <B>Field Detail</B></FONT></TH>
 </TR>
 </TABLE>
-
-<A NAME="DESCRIPTOR"><!-- --></A><H3>
-DESCRIPTOR</H3>
-<PRE>
-public static final <A HREF="../../hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A> <B>DESCRIPTOR</B></PRE>
-<DL>
-<DL>
-</DL>
-</DL>
-<HR>
 
 <A NAME="STARVATION_THRESHOLD"><!-- --></A><H3>
 STARVATION_THRESHOLD</H3>
@@ -408,6 +400,28 @@ public void <B>run</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="getDescriptor()"><!-- --></A><H3>
+getDescriptor</H3>
+<PRE>
+public <A HREF="../../hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A> <B>getDescriptor</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
+<DD>Gets the descriptor for this instance.
+
+ <p>
+ <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> is a singleton for every concrete <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
+ implementation, so if <tt>a.getClass()==b.getClass()</tt> then
+ <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers">Trigger</A>&lt;?&gt;&gt;</CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/triggers/Trigger.html#getDescriptor()">getDescriptor</A></CODE> in class <CODE><A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers">Trigger</A>&lt;<A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getProjectAction()"><!-- --></A><H3>
 getProjectAction</H3>
 <PRE>
@@ -433,28 +447,6 @@ public java.io.File <B>getLogFile</B>()</PRE>
 <DL>
 <DD>Returns the file that records the last/current polling activity.
 <P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getDescriptor()"><!-- --></A><H3>
-getDescriptor</H3>
-<PRE>
-public <A HREF="../../hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A> <B>getDescriptor</B>()</PRE>
-<DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
-<DD>Gets the descriptor for this instance.
-
- <p>
- <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> is a singleton for every concrete <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
- implementation, so if <tt>a.getClass()==b.getClass()</tt> then
- <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers">Trigger</A>&lt;?&gt;&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/triggers/Trigger.html#getDescriptor()">getDescriptor</A></CODE> in class <CODE><A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers">Trigger</A>&lt;<A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A>&gt;</CODE></DL>
-</DD>
 <DD><DL>
 </DL>
 </DD>

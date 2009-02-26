@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-NullSCM (Hudson core 1.285 API)
+NullSCM (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ NullSCM (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="NullSCM (Hudson core 1.285 API)";
+        parent.document.title="NullSCM (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -134,7 +134,17 @@ No <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CO
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
-&nbsp;<!-- =========== FIELD SUMMARY =========== -->
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -200,14 +210,6 @@ No <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CO
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/scm/NullSCM.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/NullSCM.html#pollChanges(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener)">pollChanges</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
             <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
@@ -224,7 +226,7 @@ No <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CO
 <TH ALIGN="left"><B>Methods inherited from class hudson.scm.<A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/scm/SCM.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)">buildEnvVars</A>, <A HREF="../../hudson/scm/SCM.html#createEmptyChangeLog(java.io.File, hudson.model.BuildListener, java.lang.String)">createEmptyChangeLog</A>, <A HREF="../../hudson/scm/SCM.html#getBrowser()">getBrowser</A>, <A HREF="../../hudson/scm/SCM.html#getEffectiveBrowser()">getEffectiveBrowser</A>, <A HREF="../../hudson/scm/SCM.html#getModuleRoot(hudson.FilePath)">getModuleRoot</A>, <A HREF="../../hudson/scm/SCM.html#getModuleRoots(hudson.FilePath)">getModuleRoots</A>, <A HREF="../../hudson/scm/SCM.html#nullify(java.lang.String)">nullify</A>, <A HREF="../../hudson/scm/SCM.html#processWorkspaceBeforeDeletion(hudson.model.AbstractProject, hudson.FilePath, hudson.model.Node)">processWorkspaceBeforeDeletion</A>, <A HREF="../../hudson/scm/SCM.html#requiresWorkspaceForPolling()">requiresWorkspaceForPolling</A>, <A HREF="../../hudson/scm/SCM.html#supportsPolling()">supportsPolling</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/scm/SCM.html#all()">all</A>, <A HREF="../../hudson/scm/SCM.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)">buildEnvVars</A>, <A HREF="../../hudson/scm/SCM.html#createEmptyChangeLog(java.io.File, hudson.model.BuildListener, java.lang.String)">createEmptyChangeLog</A>, <A HREF="../../hudson/scm/SCM.html#getBrowser()">getBrowser</A>, <A HREF="../../hudson/scm/SCM.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/scm/SCM.html#getEffectiveBrowser()">getEffectiveBrowser</A>, <A HREF="../../hudson/scm/SCM.html#getModuleRoot(hudson.FilePath)">getModuleRoot</A>, <A HREF="../../hudson/scm/SCM.html#getModuleRoots(hudson.FilePath)">getModuleRoots</A>, <A HREF="../../hudson/scm/SCM.html#nullify(java.lang.String)">nullify</A>, <A HREF="../../hudson/scm/SCM.html#processWorkspaceBeforeDeletion(hudson.model.AbstractProject, hudson.FilePath, hudson.model.Node)">processWorkspaceBeforeDeletion</A>, <A HREF="../../hudson/scm/SCM.html#requiresWorkspaceForPolling()">requiresWorkspaceForPolling</A>, <A HREF="../../hudson/scm/SCM.html#supportsPolling()">supportsPolling</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -334,28 +336,6 @@ public boolean <B>checkout</B>(<A HREF="../../hudson/model/AbstractBuild.html" t
 <DD><CODE>java.lang.InterruptedException</CODE> - interruption is usually caused by the user aborting the build.
       this exception will cause the build to fail.
 <DD><CODE>java.io.IOException</CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getDescriptor()"><!-- --></A><H3>
-getDescriptor</H3>
-<PRE>
-public <A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A> <B>getDescriptor</B>()</PRE>
-<DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
-<DD>Gets the descriptor for this instance.
-
- <p>
- <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> is a singleton for every concrete <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
- implementation, so if <tt>a.getClass()==b.getClass()</tt> then
- <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/scm/SCM.html#getDescriptor()">getDescriptor</A></CODE> in class <CODE><A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A></CODE></DL>
-</DD>
-<DD><DL>
-</DL>
 </DD>
 </DL>
 <HR>

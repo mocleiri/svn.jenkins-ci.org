@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.285 API)
+Functions (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.285 API)";
+        parent.document.title="Functions (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -374,6 +374,16 @@ Utility functions used in views.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.apache.commons.jelly.Tag</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#findAncestorTag(java.util.Map, java.lang.String, java.lang.String)">findAncestorTag</A></B>(java.util.Map&nbsp;attributes,
+                java.lang.String&nbsp;nsUri,
+                java.lang.String&nbsp;local)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to assist form databinding.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#generateId()">generateId</A></B>()</CODE>
 
@@ -426,7 +436,7 @@ Utility functions used in views.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt;</CODE></FONT></TD>
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt;&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#getCloudDescriptors()">getCloudDescriptors</A></B>()</CODE>
 
 <BR>
@@ -549,6 +559,14 @@ Utility functions used in views.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getNodePropertyDescriptors(java.lang.Class)">getNodePropertyDescriptors</A></B>(java.lang.Class&lt;? extends <A HREF="../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;clazz)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/PageDecorator.html" title="class in hudson.model">PageDecorator</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#getPageDecorators()">getPageDecorators</A></B>()</CODE>
 
@@ -557,7 +575,7 @@ Utility functions used in views.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>&gt;&gt;</CODE></FONT></TD>
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/ParameterDefinition.ParameterDescriptor.html" title="class in hudson.model">ParameterDefinition.ParameterDescriptor</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#getParameterDescriptors()">getParameterDescriptors</A></B>()</CODE>
 
 <BR>
@@ -1633,7 +1651,18 @@ public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title=
 <A NAME="getParameterDescriptors()"><!-- --></A><H3>
 getParameterDescriptors</H3>
 <PRE>
-public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>&gt;&gt; <B>getParameterDescriptors</B>()</PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/ParameterDefinition.ParameterDescriptor.html" title="class in hudson.model">ParameterDefinition.ParameterDescriptor</A>&gt; <B>getParameterDescriptors</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNodePropertyDescriptors(java.lang.Class)"><!-- --></A><H3>
+getNodePropertyDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt; <B>getNodePropertyDescriptors</B>(java.lang.Class&lt;? extends <A HREF="../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;clazz)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -2082,8 +2111,24 @@ public static java.util.List&lt;<A HREF="../hudson/model/PageDecorator.html" tit
 <A NAME="getCloudDescriptors()"><!-- --></A><H3>
 getCloudDescriptors</H3>
 <PRE>
-public static <A HREF="../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt; <B>getCloudDescriptors</B>()</PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt;&gt; <B>getCloudDescriptors</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="findAncestorTag(java.util.Map, java.lang.String, java.lang.String)"><!-- --></A><H3>
+findAncestorTag</H3>
+<PRE>
+public org.apache.commons.jelly.Tag <B>findAncestorTag</B>(java.util.Map&nbsp;attributes,
+                                                    java.lang.String&nbsp;nsUri,
+                                                    java.lang.String&nbsp;local)</PRE>
+<DL>
+<DD>Used to assist form databinding. Given the "attrs" object,
+ find the ancestor tag file of the given name.
+<P>
 <DD><DL>
 </DL>
 </DD>

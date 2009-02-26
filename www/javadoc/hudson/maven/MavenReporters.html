@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MavenReporters (Hudson core 1.285 API)
+MavenReporters (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenReporters (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenReporters (Hudson core 1.285 API)";
+        parent.document.title="MavenReporters (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -123,7 +123,8 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/maven/MavenReporters.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of all installed <A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>s.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286. Use <code>MavenReporterDescriptor#all()</code> for listing reporters, and
+ use <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for automatic registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -187,7 +188,8 @@ LIST</H3>
 <PRE>
 public static final java.util.List&lt;<A HREF="../../hudson/maven/MavenReporterDescriptor.html" title="class in hudson.maven">MavenReporterDescriptor</A>&gt; <B>LIST</B></PRE>
 <DL>
-<DD>List of all installed <A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>s.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286. Use <code>MavenReporterDescriptor#all()</code> for listing reporters, and
+ use <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for automatic registration.</I><DD>List of all installed <A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>s.
 <P>
 <DL>
 </DL>

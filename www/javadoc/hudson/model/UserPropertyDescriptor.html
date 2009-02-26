@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-UserPropertyDescriptor (Hudson core 1.285 API)
+UserPropertyDescriptor (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UserPropertyDescriptor (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UserPropertyDescriptor (Hudson core 1.285 API)";
+        parent.document.title="UserPropertyDescriptor (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -101,7 +101,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/tasks/Mailer.UserProperty.DescriptorImpl.html" title="class in hudson.tasks">Mailer.UserProperty.DescriptorImpl</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/security/HudsonPrivateSecurityRealm.Details.DescriptorImpl.html" title="class in hudson.security">HudsonPrivateSecurityRealm.Details.DescriptorImpl</A>, <A HREF="../../hudson/tasks/Mailer.UserProperty.DescriptorImpl.html" title="class in hudson.tasks">Mailer.UserProperty.DescriptorImpl</A></DD>
 </DL>
 <HR>
 <DL>
@@ -154,7 +154,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Descriptor.html#ALL">ALL</A>, <A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -305,7 +305,7 @@ public boolean <B>isEnabled</B>()</PRE>
  <p>
  Returning false from this method essentially has the same effect of
  making Hudson behaves as if this <A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model"><CODE>UserPropertyDescriptor</CODE></A> is
- not a part of <A HREF="../../hudson/model/UserProperties.html#LIST"><CODE>UserProperties.LIST</CODE></A>.
+ not a part of <A HREF="../../hudson/model/UserProperty.html#all()"><CODE>UserProperty.all()</CODE></A>.
 
  <p>
  This mechanism is useful if the availability of the property is

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-BuildWrapper.Environment (Hudson core 1.285 API)
+BuildWrapper.Environment (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildWrapper.Environment (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildWrapper.Environment (Hudson core 1.285 API)";
+        parent.document.title="BuildWrapper.Environment (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -94,14 +94,15 @@ hudson.tasks</FONT>
 Class BuildWrapper.Environment</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.tasks.BuildWrapper.Environment</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Environment.html" title="class in hudson.model">hudson.model.Environment</A>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.tasks.BuildWrapper.Environment</B>
 </PRE>
 <DL>
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>BuildWrapper.Environment</B><DT>extends java.lang.Object</DL>
+<DT><PRE>public abstract class <B>BuildWrapper.Environment</B><DT>extends <A HREF="../../hudson/model/Environment.html" title="class in hudson.model">Environment</A></DL>
 </PRE>
 
 <P>
@@ -143,14 +144,6 @@ Represents the environment set up by <A HREF="../../hudson/tasks/BuildWrapper.ht
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/BuildWrapper.Environment.html#buildEnvVars(java.util.Map)">buildEnvVars</A></B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds environmental variables for the builds to the given map.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/BuildWrapper.Environment.html#tearDown(hudson.model.AbstractBuild, hudson.model.BuildListener)">tearDown</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
          <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
@@ -166,6 +159,15 @@ Represents the environment set up by <A HREF="../../hudson/tasks/BuildWrapper.ht
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/tasks/BuildWrapper.Environment.html#tearDown(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>tearDown(AbstractBuild, BuildListener)</CODE></A> instead.</I></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Environment"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Environment.html" title="class in hudson.model">Environment</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Environment.html#buildEnvVars(java.util.Map)">buildEnvVars</A>, <A HREF="../../hudson/model/Environment.html#create(hudson.EnvVars)">create</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -207,28 +209,6 @@ public <B>BuildWrapper.Environment</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="buildEnvVars(java.util.Map)"><!-- --></A><H3>
-buildEnvVars</H3>
-<PRE>
-public void <B>buildEnvVars</B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env)</PRE>
-<DL>
-<DD>Adds environmental variables for the builds to the given map.
-
- <p>
- If the <A HREF="../../hudson/tasks/BuildWrapper.Environment.html" title="class in hudson.tasks"><CODE>BuildWrapper.Environment</CODE></A> object wants to pass in information
- to the build that runs, it can do so by exporting additional
- environment variables to the map.
-
- <p>
- When this method is invoked, the map already contains the
- current "planned export" list.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>env</CODE> - never null.</DL>
-</DD>
-</DL>
-<HR>
-
 <A NAME="tearDown(hudson.model.AbstractBuild, hudson.model.BuildListener)"><!-- --></A><H3>
 tearDown</H3>
 <PRE>
@@ -245,6 +225,9 @@ public boolean <B>tearDown</B>(<A HREF="../../hudson/model/AbstractBuild.html" t
  (for example, you'll want to stop application server even if a build
  fails.)
 <P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Environment.html#tearDown(hudson.model.AbstractBuild, hudson.model.BuildListener)">tearDown</A></CODE> in class <CODE><A HREF="../../hudson/model/Environment.html" title="class in hudson.model">Environment</A></CODE></DL>
+</DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>build</CODE> - The same <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A> object given to the set up method.<DD><CODE>listener</CODE> - The same <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model"><CODE>BuildListener</CODE></A> object given to the set up method.
 <DT><B>Returns:</B><DD>true if the build can continue, false if there was an error

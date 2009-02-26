@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-RunListener (Hudson core 1.285 API)
+RunListener (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RunListener (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RunListener (Hudson core 1.285 API)";
+        parent.document.title="RunListener (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -99,6 +99,9 @@ java.lang.Object
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DD>
 </DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.RunListenerImpl.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.TestResultAction.RunListenerImpl</A></DD>
+</DL>
 <HR>
 <DL>
 <DT><PRE>public abstract class <B>RunListener&lt;R extends <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&gt;</B><DT>extends java.lang.Object<DT>implements <A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DL>
@@ -125,6 +128,25 @@ Receives notifications about builds.
 <HR>
 
 <P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -139,7 +161,8 @@ Receives notifications about builds.
 <TD><CODE><B><A HREF="../../../hudson/model/listeners/RunListener.html#LISTENERS">LISTENERS</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of registered listeners.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.281
+      Use <A HREF="../../../hudson/model/listeners/RunListener.html#all()"><CODE>all()</CODE></A> for read access, and use <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -176,6 +199,14 @@ Receives notifications about builds.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../../hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners">RunListener</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/listeners/RunListener.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners"><CODE>RunListener</CODE></A> descriptors.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -235,8 +266,7 @@ Receives notifications about builds.
 <TD><CODE><B><A HREF="../../../hudson/model/listeners/RunListener.html#register()">register</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registers this object as an active listener so that it can start getting
- callbacks invoked.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Put <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your class to get it auto-registered.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -284,7 +314,8 @@ LISTENERS</H3>
 <PRE>
 public static final <A HREF="../../../hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>&lt;<A HREF="../../../hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners">RunListener</A>&gt; <B>LISTENERS</B></PRE>
 <DL>
-<DD>List of registered listeners.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.281
+      Use <A HREF="../../../hudson/model/listeners/RunListener.html#all()"><CODE>all()</CODE></A> for read access, and use <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I><DD>List of registered listeners.
 <P>
 <DL>
 </DL>
@@ -380,6 +411,8 @@ register</H3>
 <PRE>
 public void <B>register</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Put <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your class to get it auto-registered.</I>
+<P>
 <DD>Registers this object as an active listener so that it can start getting
  callbacks invoked.
 <P>
@@ -448,6 +481,22 @@ fireFinalized</H3>
 public static void <B>fireFinalized</B>(<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;r)</PRE>
 <DL>
 <DD>Fires the <A HREF="../../../hudson/model/listeners/RunListener.html#onFinalized(R)"><CODE>onFinalized(Run)</CODE></A> event.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../../hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners">RunListener</A>&gt; <B>all</B>()</PRE>
+<DL>
+<DD>Returns all the registered <A HREF="../../../hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners"><CODE>RunListener</CODE></A> descriptors.
 <P>
 <DD><DL>
 </DL>

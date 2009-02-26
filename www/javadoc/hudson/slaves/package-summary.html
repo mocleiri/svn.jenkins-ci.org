@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.slaves (Hudson core 1.285 API)
+hudson.slaves (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.slaves (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.slaves (Hudson core 1.285 API)";
+        parent.document.title="hudson.slaves (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -99,6 +99,10 @@ Code related to slaves.
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/EphemeralNode.html" title="interface in hudson.slaves">EphemeralNode</A></B></TD>
 <TD><A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s that are created by <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A> and hence not persisted as configuration by itself.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific&lt;T extends NodeSpecific&lt;T&gt;&gt;</A></B></TD>
+<TD>Represents any concept that can be adapted for a node.</TD>
+</TR>
 </TABLE>
 &nbsp;
 
@@ -148,6 +152,18 @@ Code related to slaves.
 <TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/EnvironmentVariablesNodeProperty.html" title="class in hudson.slaves">EnvironmentVariablesNodeProperty</A></B></TD>
+<TD><A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A> that sets additional environment variables.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/EnvironmentVariablesNodeProperty.DescriptorImpl.html" title="class in hudson.slaves">EnvironmentVariablesNodeProperty.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/EnvironmentVariablesNodeProperty.Entry.html" title="class in hudson.slaves">EnvironmentVariablesNodeProperty.Entry</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/JNLPLauncher.html" title="class in hudson.slaves">JNLPLauncher</A></B></TD>
 <TD><A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> via JNLP.</TD>
 </TR>
@@ -169,6 +185,14 @@ Code related to slaves.
 <TD><CODE>Converter</CODE> implementation for XStream.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty&lt;N extends Node&gt;</A></B></TD>
+<TD>Extensible property of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A></B></TD>
+<TD>Descriptor for <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/NodeProvisioner.html" title="class in hudson.slaves">NodeProvisioner</A></B></TD>
 <TD>Uses the <A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model"><CODE>LoadStatistics</CODE></A> and determines when we need to allocate
  new <A HREF="../../hudson/slaves/NodeProvisioner.PlannedNode.html" title="class in hudson.slaves"><CODE>NodeProvisioner.PlannedNode</CODE></A>s through <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A>.</TD>
@@ -186,8 +210,16 @@ Code related to slaves.
 <TD><A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> that tries to keep the node online all the time.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/RetentionStrategy.Always.DescriptorImpl.html" title="class in hudson.slaves">RetentionStrategy.Always.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/RetentionStrategy.Demand.html" title="class in hudson.slaves">RetentionStrategy.Demand</A></B></TD>
 <TD><A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> that tries to keep the node offline when not in use.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/RetentionStrategy.Demand.DescriptorImpl.html" title="class in hudson.slaves">RetentionStrategy.Demand.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/SimpleScheduledRetentionStrategy.html" title="class in hudson.slaves">SimpleScheduledRetentionStrategy</A></B></TD>

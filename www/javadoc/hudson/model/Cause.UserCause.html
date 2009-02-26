@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Cause.UserCause (Hudson core 1.285 API)
+Cause.UserCause (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Cause.UserCause (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Cause.UserCause (Hudson core 1.285 API)";
+        parent.document.title="Cause.UserCause (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -124,7 +124,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Nested classes/interfaces inherited from class hudson.model.<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Cause.LegacyCodeCause.html" title="class in hudson.model">Cause.LegacyCodeCause</A>, <A HREF="../../hudson/model/Cause.UpstreamCause.html" title="class in hudson.model">Cause.UpstreamCause</A>, <A HREF="../../hudson/model/Cause.UserCause.html" title="class in hudson.model">Cause.UserCause</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Cause.LegacyCodeCause.html" title="class in hudson.model">Cause.LegacyCodeCause</A>, <A HREF="../../hudson/model/Cause.RemoteCause.html" title="class in hudson.model">Cause.RemoteCause</A>, <A HREF="../../hudson/model/Cause.UpstreamCause.html" title="class in hudson.model">Cause.UpstreamCause</A>, <A HREF="../../hudson/model/Cause.UserCause.html" title="class in hudson.model">Cause.UserCause</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -156,7 +156,7 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Cause.UserCause.html#getHTMLDescription()">getHTMLDescription</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Cause.UserCause.html#getShortDescription()">getShortDescription</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -164,7 +164,7 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Cause.UserCause.html#getShortDescription()">getShortDescription</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Cause.UserCause.html#getUserName()">getUserName</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -209,6 +209,17 @@ public <B>Cause.UserCause</B>()</PRE>
 </TR>
 </TABLE>
 
+<A NAME="getUserName()"><!-- --></A><H3>
+getUserName</H3>
+<PRE>
+public java.lang.String <B>getUserName</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getShortDescription()"><!-- --></A><H3>
 getShortDescription</H3>
 <PRE>
@@ -216,20 +227,6 @@ public java.lang.String <B>getShortDescription</B>()</PRE>
 <DL>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Cause.html#getShortDescription()">getShortDescription</A></CODE> in class <CODE><A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A></CODE></DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getHTMLDescription()"><!-- --></A><H3>
-getHTMLDescription</H3>
-<PRE>
-public java.lang.String <B>getHTMLDescription</B>()</PRE>
-<DL>
-<DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Cause.html#getHTMLDescription()">getHTMLDescription</A></CODE> in class <CODE><A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

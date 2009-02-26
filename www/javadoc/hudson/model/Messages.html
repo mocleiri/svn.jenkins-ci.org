@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Messages (Hudson core 1.285 API)
+Messages (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Messages (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Messages (Hudson core 1.285 API)";
+        parent.document.title="Messages (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -335,13 +335,10 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Messages.html#_Cause_UpstreamCause_HTMLDescription(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)">_Cause_UpstreamCause_HTMLDescription</A></B>(java.lang.Object&nbsp;arg1,
-                                     java.lang.Object&nbsp;arg2,
-                                     java.lang.Object&nbsp;arg3,
-                                     java.lang.Object&nbsp;arg4)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Messages.html#_Cause_RemoteCause_ShortDescription(java.lang.Object)">_Cause_RemoteCause_ShortDescription</A></B>(java.lang.Object&nbsp;arg1)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Started by upstream project &lt;a href="{3}/{2}">{0}&lt;/a> build number &lt;a href="{3}/{2}{1}/">{1}&lt;/a></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Started by remote {0}</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -351,15 +348,6 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Started by upstream project "{0}" build number {1}</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Messages.html#_Cause_UserCause_HTMLDescription(java.lang.Object, java.lang.Object)">_Cause_UserCause_HTMLDescription</A></B>(java.lang.Object&nbsp;arg1,
-                                 java.lang.Object&nbsp;arg2)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Started by user &lt;a href="{1}/user/{0}/">{0}&lt;/a></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1265,13 +1253,10 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Messages.html#Cause_UpstreamCause_HTMLDescription(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)">Cause_UpstreamCause_HTMLDescription</A></B>(java.lang.Object&nbsp;arg1,
-                                    java.lang.Object&nbsp;arg2,
-                                    java.lang.Object&nbsp;arg3,
-                                    java.lang.Object&nbsp;arg4)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Messages.html#Cause_RemoteCause_ShortDescription(java.lang.Object)">Cause_RemoteCause_ShortDescription</A></B>(java.lang.Object&nbsp;arg1)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Started by upstream project &lt;a href="{3}/{2}">{0}&lt;/a> build number &lt;a href="{3}/{2}{1}/">{1}&lt;/a></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Started by remote {0}</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1281,15 +1266,6 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Started by upstream project "{0}" build number {1}</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Messages.html#Cause_UserCause_HTMLDescription(java.lang.Object, java.lang.Object)">Cause_UserCause_HTMLDescription</A></B>(java.lang.Object&nbsp;arg1,
-                                java.lang.Object&nbsp;arg2)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Started by user &lt;a href="{1}/user/{0}/">{0}&lt;/a></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2519,34 +2495,6 @@ _Run_Permissions_Title</H3>
 public static org.jvnet.localizer.Localizable <B>_Run_Permissions_Title</B>()</PRE>
 <DL>
 <DD>Run
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="Cause_UserCause_HTMLDescription(java.lang.Object, java.lang.Object)"><!-- --></A><H3>
-Cause_UserCause_HTMLDescription</H3>
-<PRE>
-public static java.lang.String <B>Cause_UserCause_HTMLDescription</B>(java.lang.Object&nbsp;arg1,
-                                                               java.lang.Object&nbsp;arg2)</PRE>
-<DL>
-<DD>Started by user &lt;a href="{1}/user/{0}/">{0}&lt;/a>
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="_Cause_UserCause_HTMLDescription(java.lang.Object, java.lang.Object)"><!-- --></A><H3>
-_Cause_UserCause_HTMLDescription</H3>
-<PRE>
-public static org.jvnet.localizer.Localizable <B>_Cause_UserCause_HTMLDescription</B>(java.lang.Object&nbsp;arg1,
-                                                                               java.lang.Object&nbsp;arg2)</PRE>
-<DL>
-<DD>Started by user &lt;a href="{1}/user/{0}/">{0}&lt;/a>
 <P>
 <DD><DL>
 </DL>
@@ -4226,6 +4174,32 @@ public static org.jvnet.localizer.Localizable <B>_Node_Mode_NORMAL</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="Cause_RemoteCause_ShortDescription(java.lang.Object)"><!-- --></A><H3>
+Cause_RemoteCause_ShortDescription</H3>
+<PRE>
+public static java.lang.String <B>Cause_RemoteCause_ShortDescription</B>(java.lang.Object&nbsp;arg1)</PRE>
+<DL>
+<DD>Started by remote {0}
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_Cause_RemoteCause_ShortDescription(java.lang.Object)"><!-- --></A><H3>
+_Cause_RemoteCause_ShortDescription</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_Cause_RemoteCause_ShortDescription</B>(java.lang.Object&nbsp;arg1)</PRE>
+<DL>
+<DD>Started by remote {0}
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="Permalink_LastFailedBuild()"><!-- --></A><H3>
 Permalink_LastFailedBuild</H3>
 <PRE>
@@ -4557,38 +4531,6 @@ _LoadStatistics_Legends_TotalExecutors</H3>
 public static org.jvnet.localizer.Localizable <B>_LoadStatistics_Legends_TotalExecutors</B>()</PRE>
 <DL>
 <DD>Total executors
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="Cause_UpstreamCause_HTMLDescription(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)"><!-- --></A><H3>
-Cause_UpstreamCause_HTMLDescription</H3>
-<PRE>
-public static java.lang.String <B>Cause_UpstreamCause_HTMLDescription</B>(java.lang.Object&nbsp;arg1,
-                                                                   java.lang.Object&nbsp;arg2,
-                                                                   java.lang.Object&nbsp;arg3,
-                                                                   java.lang.Object&nbsp;arg4)</PRE>
-<DL>
-<DD>Started by upstream project &lt;a href="{3}/{2}">{0}&lt;/a> build number &lt;a href="{3}/{2}{1}/">{1}&lt;/a>
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="_Cause_UpstreamCause_HTMLDescription(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)"><!-- --></A><H3>
-_Cause_UpstreamCause_HTMLDescription</H3>
-<PRE>
-public static org.jvnet.localizer.Localizable <B>_Cause_UpstreamCause_HTMLDescription</B>(java.lang.Object&nbsp;arg1,
-                                                                                   java.lang.Object&nbsp;arg2,
-                                                                                   java.lang.Object&nbsp;arg3,
-                                                                                   java.lang.Object&nbsp;arg4)</PRE>
-<DL>
-<DD>Started by upstream project &lt;a href="{3}/{2}">{0}&lt;/a> build number &lt;a href="{3}/{2}{1}/">{1}&lt;/a>
 <P>
 <DD><DL>
 </DL>

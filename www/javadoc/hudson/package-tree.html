@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson Class Hierarchy (Hudson core 1.285 API)
+hudson Class Hierarchy (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson Class Hierarchy (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson Class Hierarchy (Hudson core 1.285 API)";
+        parent.document.title="hudson Class Hierarchy (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -100,6 +100,8 @@ Class Hierarchy
 <LI TYPE="circle">java.util.ArrayList&lt;E&gt; (implements java.lang.Cloneable, java.util.List&lt;E&gt;, java.util.RandomAccess, java.io.Serializable)
 <UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/PermalinkList.html" title="class in hudson"><B>PermalinkList</B></A></UL>
+<LI TYPE="circle">hudson.<A HREF="../hudson/ExtensionList.html" title="class in hudson"><B>ExtensionList</B></A>&lt;T&gt;<UL>
+<LI TYPE="circle">hudson.<A HREF="../hudson/DescriptorExtensionList.html" title="class in hudson"><B>DescriptorExtensionList</B></A>&lt;T,D&gt;</UL>
 </UL>
 </UL>
 <LI TYPE="circle">java.util.AbstractMap&lt;K,V&gt; (implements java.util.Map&lt;K,V&gt;)
@@ -119,7 +121,10 @@ Class Hierarchy
 <UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/FileSystemProvisionerDescriptor.html" title="class in hudson"><B>FileSystemProvisionerDescriptor</B></A> (implements hudson.<A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 </UL>
-<LI TYPE="circle">hudson.<A HREF="../hudson/FilePath.html" title="class in hudson"><B>FilePath</B></A> (implements java.io.Serializable)
+<LI TYPE="circle">hudson.<A HREF="../hudson/ExtensionFinder.html" title="class in hudson"><B>ExtensionFinder</B></A> (implements hudson.<A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<UL>
+<LI TYPE="circle">hudson.<A HREF="../hudson/ExtensionFinder.Sezpoz.html" title="class in hudson"><B>ExtensionFinder.Sezpoz</B></A></UL>
+<LI TYPE="circle">hudson.<A HREF="../hudson/ExtensionListView.html" title="class in hudson"><B>ExtensionListView</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/FilePath.html" title="class in hudson"><B>FilePath</B></A> (implements java.io.Serializable)
 <LI TYPE="circle">hudson.<A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson"><B>FileSystemProvisioner</B></A> (implements hudson.model.<A HREF="../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/FileSystemProvisioner.Default.html" title="class in hudson"><B>FileSystemProvisioner.Default</B></A></UL>
@@ -165,6 +170,8 @@ Annotation Type Hierarchy
 </H2>
 <UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/CopyOnWrite.html" title="annotation in hudson"><B>CopyOnWrite</B></A> (implements java.lang.annotation.Annotation)
+<LI TYPE="circle">hudson.<A HREF="../hudson/Extension.html" title="annotation in hudson"><B>Extension</B></A> (implements java.lang.annotation.Annotation)
+<LI TYPE="circle">hudson.<A HREF="../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson"><B>ExtensionPoint.LegacyInstancesAreScopedToHudson</B></A> (implements java.lang.annotation.Annotation)
 </UL>
 <HR>
 

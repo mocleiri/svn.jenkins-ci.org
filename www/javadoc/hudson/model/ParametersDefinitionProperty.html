@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ParametersDefinitionProperty (Hudson core 1.285 API)
+ParametersDefinitionProperty (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParametersDefinitionProperty (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParametersDefinitionProperty (Hudson core 1.285 API)";
+        parent.document.title="ParametersDefinitionProperty (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -77,9 +77,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.JobProperty">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -144,6 +144,16 @@ Keeps a list of the parameters defined for a project.
 </TR>
 </TABLE>
 &nbsp;
+<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -151,14 +161,6 @@ Keeps a list of the parameters defined for a project.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Field Summary</B></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model">JobPropertyDescriptor</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ParametersDefinitionProperty.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.model.JobProperty"><!-- --></A>
@@ -194,6 +196,12 @@ Keeps a list of the parameters defined for a project.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/ParametersDefinitionProperty.html#ParametersDefinitionProperty(hudson.model.ParameterDefinition...)">ParametersDefinitionProperty</A></B>(<A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>...&nbsp;parameterDefinitions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ========== METHOD SUMMARY =========== -->
@@ -221,14 +229,6 @@ Keeps a list of the parameters defined for a project.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model">JobPropertyDescriptor</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ParametersDefinitionProperty.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -301,7 +301,7 @@ Keeps a list of the parameters defined for a project.
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/JobProperty.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A>, <A HREF="../../hudson/model/JobProperty.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A>, <A HREF="../../hudson/model/JobProperty.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A>, <A HREF="../../hudson/model/JobProperty.html#setOwner(J)">setOwner</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/JobProperty.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/model/JobProperty.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A>, <A HREF="../../hudson/model/JobProperty.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A>, <A HREF="../../hudson/model/JobProperty.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A>, <A HREF="../../hudson/model/JobProperty.html#setOwner(J)">setOwner</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -315,25 +315,6 @@ Keeps a list of the parameters defined for a project.
 </TABLE>
 &nbsp;
 <P>
-
-<!-- ============ FIELD DETAIL =========== -->
-
-<A NAME="field_detail"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
-<B>Field Detail</B></FONT></TH>
-</TR>
-</TABLE>
-
-<A NAME="DESCRIPTOR"><!-- --></A><H3>
-DESCRIPTOR</H3>
-<PRE>
-public static final <A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model">JobPropertyDescriptor</A> <B>DESCRIPTOR</B></PRE>
-<DL>
-<DL>
-</DL>
-</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -349,6 +330,14 @@ public static final <A HREF="../../hudson/model/JobPropertyDescriptor.html" titl
 ParametersDefinitionProperty</H3>
 <PRE>
 public <B>ParametersDefinitionProperty</B>(java.util.List&lt;<A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>&gt;&nbsp;parameterDefinitions)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="ParametersDefinitionProperty(hudson.model.ParameterDefinition...)"><!-- --></A><H3>
+ParametersDefinitionProperty</H3>
+<PRE>
+public <B>ParametersDefinitionProperty</B>(<A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>...&nbsp;parameterDefinitions)</PRE>
 <DL>
 </DL>
 
@@ -491,28 +480,6 @@ public <A HREF="../../hudson/model/ParameterDefinition.html" title="class in hud
 </DL>
 <HR>
 
-<A NAME="getDescriptor()"><!-- --></A><H3>
-getDescriptor</H3>
-<PRE>
-public <A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model">JobPropertyDescriptor</A> <B>getDescriptor</B>()</PRE>
-<DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/JobProperty.html#getDescriptor()">JobProperty</A></CODE></B></DD>
-<DD>Gets the descriptor for this instance.
-
- <p>
- <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> is a singleton for every concrete <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
- implementation, so if <tt>a.getClass()==b.getClass()</tt> then
- <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&lt;?&gt;&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/JobProperty.html#getDescriptor()">getDescriptor</A></CODE> in class <CODE><A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&gt;</CODE></DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
 <A NAME="getDisplayName()"><!-- --></A><H3>
 getDisplayName</H3>
 <PRE>
@@ -644,9 +611,9 @@ public java.lang.String <B>getUrlName</B>()</PRE>
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.JobProperty">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>

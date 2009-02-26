@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.security.AuthorizationStrategy (Hudson core 1.285 API)
+Uses of Class hudson.security.AuthorizationStrategy (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.security.AuthorizationStrategy (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.security.AuthorizationStrategy (Hudson core 1.285 API)";
+        parent.document.title="Uses of Class hudson.security.AuthorizationStrategy (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -187,6 +187,14 @@ Uses of <A HREF="../../../hudson/security/AuthorizationStrategy.html" title="cla
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/security/AuthorizationStrategy.Unsecured.html" title="class in hudson.security">AuthorizationStrategy.Unsecured</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/security/FullControlOnceLoggedInAuthorizationStrategy.html" title="class in hudson.security">FullControlOnceLoggedInAuthorizationStrategy</A></B></CODE>
 
@@ -261,19 +269,11 @@ Uses of <A HREF="../../../hudson/security/AuthorizationStrategy.html" title="cla
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>LegacyAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/LegacyAuthorizationStrategy.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>AuthorizationStrategy.</B><B><A HREF="../../../hudson/security/AuthorizationStrategy.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> implementations.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../hudson/security/AuthorizationStrategy.html#all()"><CODE>all()</CODE></A> for read access, and <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -282,6 +282,15 @@ Uses of <A HREF="../../../hudson/security/AuthorizationStrategy.html" title="cla
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/security/package-summary.html">hudson.security</A> that return <A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A></CODE></FONT></TD>
+<TD><CODE><B>AuthorizationStrategy.Unsecured.DescriptorImpl.</B><B><A HREF="../../../hudson/security/AuthorizationStrategy.Unsecured.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+            net.sf.json.JSONObject&nbsp;formData)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -302,32 +311,24 @@ Uses of <A HREF="../../../hudson/security/AuthorizationStrategy.html" title="cla
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>FullControlOnceLoggedInAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/FullControlOnceLoggedInAuthorizationStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>AuthorizationStrategy.</B><B><A HREF="../../../hudson/security/AuthorizationStrategy.html#all()">all</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security"><CODE>AuthorizationStrategy</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>AuthorizationStrategy.</B><B><A HREF="../../../hudson/security/AuthorizationStrategy.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security"><CODE>AuthorizationStrategy</CODE></A> descriptors.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>ProjectMatrixAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/ProjectMatrixAuthorizationStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>GlobalMatrixAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/GlobalMatrixAuthorizationStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>LegacyAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/LegacyAuthorizationStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+<TD><CODE><B>AuthorizationStrategy.</B><B><A HREF="../../../hudson/security/AuthorizationStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

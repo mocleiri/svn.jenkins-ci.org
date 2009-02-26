@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Node (Hudson core 1.285 API)
+Node (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Node (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Node (Hudson core 1.285 API)";
+        parent.document.title="Node (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -141,7 +141,17 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constants that control how Hudson allocates jobs to slaves.</TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
+
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <A NAME="constructor_summary"><!-- --></A>
@@ -245,7 +255,7 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 <TD><CODE><B><A HREF="../../hudson/model/Node.html#getDynamicLabels()">getDynamicLabels</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the possibly empty set of labels that it has been determined as supported by this node.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -280,6 +290,22 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name of this node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;,<A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Node.html#getNodeProperties()">getNodeProperties</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A> instances configured for this <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Node.html#getNodePropertyDescriptors()">getNodePropertyDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -594,13 +620,11 @@ getDynamicLabels</H3>
 <PRE>
 public abstract java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt; <B>getDynamicLabels</B>()</PRE>
 <DL>
-<DD>Returns the possibly empty set of labels that it has been determined as supported by this node.
-<P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
-<DT><B>See Also:</B><DD><A HREF="../../hudson/tasks/LabelFinder.html" title="interface in hudson.tasks"><CODE>LabelFinder</CODE></A></DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -684,6 +708,36 @@ public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>
 getFileSystemProvisioner</H3>
 <PRE>
 public <A HREF="../../hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A> <B>getFileSystemProvisioner</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNodeProperties()"><!-- --></A><H3>
+getNodeProperties</H3>
+<PRE>
+public abstract <A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;,<A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt; <B>getNodeProperties</B>()</PRE>
+<DL>
+<DD>Gets the <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A> instances configured for this <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNodePropertyDescriptors()"><!-- --></A><H3>
+getNodePropertyDescriptors</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt; <B>getNodePropertyDescriptors</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>

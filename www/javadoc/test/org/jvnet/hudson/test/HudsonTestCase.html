@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonTestCase (Test harness for Hudson and plugins 1.285 API)
+HudsonTestCase (Test harness for Hudson and plugins 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Test harness for Hudson and plugins 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.285 API)";
+        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.286 API)";
     }
 }
 </SCRIPT>
@@ -308,7 +308,15 @@ R</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;void</CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/tasks/Ant.AntInstallation.html?is-external=true" title="class or interface in hudson.tasks">Ant.AntInstallation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#configureDefaultAnt()">configureDefaultAnt</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extracts Ant and configures it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/tasks/Maven.MavenInstallation.html?is-external=true" title="class or interface in hudson.tasks">Maven.MavenInstallation</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#configureDefaultMaven()">configureDefaultMaven</A></B>()</CODE>
 
 <BR>
@@ -393,6 +401,15 @@ R</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates and launches a new slave on the local host.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/slaves/DumbSlave.html?is-external=true" title="class or interface in hudson.slaves">DumbSlave</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#createSlave(hudson.model.Label, hudson.EnvVars)">createSlave</A></B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Label.html?is-external=true" title="class or interface in hudson.model">Label</A>&nbsp;l,
+            <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/EnvVars.html?is-external=true" title="class or interface in hudson">EnvVars</A>&nbsp;env)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a slave with certain additional environment variables</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -820,10 +837,26 @@ protected org.mortbay.jetty.security.UserRealm <B>configureUserRealm</B>()</PRE>
 <A NAME="configureDefaultMaven()"><!-- --></A><H3>
 configureDefaultMaven</H3>
 <PRE>
-protected void <B>configureDefaultMaven</B>()
-                              throws java.lang.Exception</PRE>
+protected <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/tasks/Maven.MavenInstallation.html?is-external=true" title="class or interface in hudson.tasks">Maven.MavenInstallation</A> <B>configureDefaultMaven</B>()
+                                                 throws java.lang.Exception</PRE>
 <DL>
 <DD>Locates Maven2 and configure that as the only Maven in the system.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="configureDefaultAnt()"><!-- --></A><H3>
+configureDefaultAnt</H3>
+<PRE>
+protected <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/tasks/Ant.AntInstallation.html?is-external=true" title="class or interface in hudson.tasks">Ant.AntInstallation</A> <B>configureDefaultAnt</B>()
+                                           throws java.lang.Exception</PRE>
+<DL>
+<DD>Extracts Ant and configures it.
 <P>
 <DD><DL>
 
@@ -971,6 +1004,23 @@ public <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/slave
                       throws java.lang.Exception</PRE>
 <DL>
 <DD>Creates and launches a new slave on the local host.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createSlave(hudson.model.Label, hudson.EnvVars)"><!-- --></A><H3>
+createSlave</H3>
+<PRE>
+public <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/slaves/DumbSlave.html?is-external=true" title="class or interface in hudson.slaves">DumbSlave</A> <B>createSlave</B>(<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/Label.html?is-external=true" title="class or interface in hudson.model">Label</A>&nbsp;l,
+                             <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/EnvVars.html?is-external=true" title="class or interface in hudson">EnvVars</A>&nbsp;env)
+                      throws java.lang.Exception</PRE>
+<DL>
+<DD>Creates a slave with certain additional environment variables
 <P>
 <DD><DL>
 

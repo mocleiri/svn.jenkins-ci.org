@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonPrivateSecurityRealm (Hudson core 1.285 API)
+HudsonPrivateSecurityRealm (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonPrivateSecurityRealm (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonPrivateSecurityRealm (Hudson core 1.285 API)";
+        parent.document.title="HudsonPrivateSecurityRealm (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -181,6 +181,16 @@ java.lang.Object
 </TR>
 </TABLE>
 &nbsp;
+<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -188,14 +198,6 @@ java.lang.Object
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Field Summary</B></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model">UserPropertyDescriptor</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/HudsonPrivateSecurityRealm.html#DETAILS_DESCRIPTOR">DETAILS_DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -212,7 +214,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Fields inherited from class hudson.security.<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/security/SecurityRealm.html#LIST">LIST</A>, <A HREF="../../hudson/security/SecurityRealm.html#NO_AUTHENTICATION">NO_AUTHENTICATION</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/security/SecurityRealm.html#AUTHENTICATED_AUTHORITY">AUTHENTICATED_AUTHORITY</A>, <A HREF="../../hudson/security/SecurityRealm.html#LIST">LIST</A>, <A HREF="../../hudson/security/SecurityRealm.html#NO_AUTHENTICATION">NO_AUTHENTICATION</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -310,14 +312,6 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/HudsonPrivateSecurityRealm.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/HudsonPrivateSecurityRealm.html#getDisplayName()">getDisplayName</A></B>()</CODE>
 
@@ -355,7 +349,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.security.<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/security/SecurityRealm.html#createFilter(javax.servlet.FilterConfig)">createFilter</A>, <A HREF="../../hudson/security/SecurityRealm.html#doCaptcha(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCaptcha</A>, <A HREF="../../hudson/security/SecurityRealm.html#findBean(java.lang.Class, org.springframework.context.ApplicationContext)">findBean</A>, <A HREF="../../hudson/security/SecurityRealm.html#getAuthenticationGatewayUrl()">getAuthenticationGatewayUrl</A>, <A HREF="../../hudson/security/SecurityRealm.html#getLoginUrl()">getLoginUrl</A>, <A HREF="../../hudson/security/SecurityRealm.html#getSecurityComponents()">getSecurityComponents</A>, <A HREF="../../hudson/security/SecurityRealm.html#loadUserByUsername(java.lang.String)">loadUserByUsername</A>, <A HREF="../../hudson/security/SecurityRealm.html#validateCaptcha(java.lang.String)">validateCaptcha</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/security/SecurityRealm.html#all()">all</A>, <A HREF="../../hudson/security/SecurityRealm.html#createFilter(javax.servlet.FilterConfig)">createFilter</A>, <A HREF="../../hudson/security/SecurityRealm.html#doCaptcha(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCaptcha</A>, <A HREF="../../hudson/security/SecurityRealm.html#findBean(java.lang.Class, org.springframework.context.ApplicationContext)">findBean</A>, <A HREF="../../hudson/security/SecurityRealm.html#getAuthenticationGatewayUrl()">getAuthenticationGatewayUrl</A>, <A HREF="../../hudson/security/SecurityRealm.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/security/SecurityRealm.html#getLoginUrl()">getLoginUrl</A>, <A HREF="../../hudson/security/SecurityRealm.html#getSecurityComponents()">getSecurityComponents</A>, <A HREF="../../hudson/security/SecurityRealm.html#loadUserByUsername(java.lang.String)">loadUserByUsername</A>, <A HREF="../../hudson/security/SecurityRealm.html#validateCaptcha(java.lang.String)">validateCaptcha</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -379,16 +373,6 @@ java.lang.Object
 <B>Field Detail</B></FONT></TH>
 </TR>
 </TABLE>
-
-<A NAME="DETAILS_DESCRIPTOR"><!-- --></A><H3>
-DETAILS_DESCRIPTOR</H3>
-<PRE>
-public static final <A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model">UserPropertyDescriptor</A> <B>DETAILS_DESCRIPTOR</B></PRE>
-<DL>
-<DL>
-</DL>
-</DL>
-<HR>
 
 <A NAME="PASSWORD_ENCODER"><!-- --></A><H3>
 PASSWORD_ENCODER</H3>
@@ -508,33 +492,6 @@ public <A HREF="../../hudson/security/SecurityRealm.SecurityComponents.html" tit
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/SecurityRealm.html#createSecurityComponents()">createSecurityComponents</A></CODE> in class <CODE><A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A></CODE></DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getDescriptor()"><!-- --></A><H3>
-getDescriptor</H3>
-<PRE>
-public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt; <B>getDescriptor</B>()</PRE>
-<DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/security/SecurityRealm.html#getDescriptor()">SecurityRealm</A></CODE></B></DD>
-<DD>Gets the descriptor for this instance.
-
- <p>
- <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> is a singleton for every concrete <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
- implementation, so if <tt>a.getClass()==b.getClass()</tt> then
- <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
-
- <p>
- <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> is a singleton resource in Hudson, and therefore
- it's always configured through <tt>config.jelly</tt> and never with
- <tt>global.jelly</tt>.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/SecurityRealm.html#getDescriptor()">getDescriptor</A></CODE> in class <CODE><A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FullControlOnceLoggedInAuthorizationStrategy (Hudson core 1.285 API)
+FullControlOnceLoggedInAuthorizationStrategy (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FullControlOnceLoggedInAuthorizationStrategy (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FullControlOnceLoggedInAuthorizationStrategy (Hudson core 1.285 API)";
+        parent.document.title="FullControlOnceLoggedInAuthorizationStrategy (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.security.AuthorizationStrategy">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -118,6 +118,35 @@ java.lang.Object
 <HR>
 
 <P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.security.AuthorizationStrategy"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from class hudson.security.<A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/security/AuthorizationStrategy.Unsecured.html" title="class in hudson.security">AuthorizationStrategy.Unsecured</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -171,14 +200,6 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/FullControlOnceLoggedInAuthorizationStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;java.lang.String&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/FullControlOnceLoggedInAuthorizationStrategy.html#getGroups()">getGroups</A></B>()</CODE>
 
@@ -202,7 +223,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.security.<A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.AbstractItem)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.AbstractProject)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.slaves.Cloud)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.Computer)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.Job)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.Node)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.User)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.View)">getACL</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/security/AuthorizationStrategy.html#all()">all</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.AbstractItem)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.AbstractProject)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.slaves.Cloud)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.Computer)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.Job)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.Node)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.User)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.View)">getACL</A>, <A HREF="../../hudson/security/AuthorizationStrategy.html#getDescriptor()">getDescriptor</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -230,7 +251,8 @@ java.lang.Object
 <A NAME="DESCRIPTOR"><!-- --></A><H3>
 DESCRIPTOR</H3>
 <PRE>
-public static final <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt; <B>DESCRIPTOR</B></PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/Extension.html" title="annotation in hudson">@Extension</A>
+</FONT>public static final <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt; <B>DESCRIPTOR</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -307,25 +329,6 @@ public java.util.List&lt;java.lang.String&gt; <B>getGroups</B>()</PRE>
 <DT><B>Returns:</B><DD>never null.</DL>
 </DD>
 </DL>
-<HR>
-
-<A NAME="getDescriptor()"><!-- --></A><H3>
-getDescriptor</H3>
-<PRE>
-public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt; <B>getDescriptor</B>()</PRE>
-<DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
-<DD>Gets the descriptor for this instance.
-
- <p>
- <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> is a singleton for every concrete <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
- implementation, so if <tt>a.getClass()==b.getClass()</tt> then
- <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
 
@@ -378,7 +381,7 @@ public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.security.AuthorizationStrategy">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>

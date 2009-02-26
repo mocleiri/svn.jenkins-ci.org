@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.285 API)
+Hudson (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.285 API)";
+        parent.document.title="Hudson (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -159,6 +159,16 @@ Root object of the system.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -490,6 +500,24 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> on this node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T extends <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt; 
+<BR>
+T</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#createProject(java.lang.Class, java.lang.String)">createProject</A></B>(java.lang.Class&lt;T&gt;&nbsp;type,
+              java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new job.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -955,7 +983,8 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getComputerListeners()">getComputerListeners</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the installed <A HREF="../../hudson/slaves/ComputerListener.html" title="class in hudson.slaves"><CODE>ComputerListener</CODE></A>s.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <A HREF="../../hudson/slaves/ComputerListener.html#all()"><CODE>ComputerListener.all()</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -992,10 +1021,53 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getDescriptor(java.lang.Class)">getDescriptor</A></B>(java.lang.Class&lt;? extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> that corresponds to the given <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A> type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getDescriptor(java.lang.String)">getDescriptor</A></B>(java.lang.String&nbsp;fullyQualifiedClassName)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> by its name to URL.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&gt; 
+<BR>
+T</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getDescriptorByType(java.lang.Class)">getDescriptorByType</A></B>(java.lang.Class&lt;T&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> instance in the current Hudson by its type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;,D extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt; 
+<BR>
+<A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;T,D&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getDescriptorList(java.lang.Class)">getDescriptorList</A></B>(java.lang.Class&lt;T&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns <A HREF="../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> that retains the discovered <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> instances for the given
+ kind of <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1022,6 +1094,21 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the possibly empty set of labels that it has been determined as supported by this node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; <A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getExtensionList(java.lang.Class)">getExtensionList</A></B>(java.lang.Class&lt;T&gt;&nbsp;extensionType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns <A HREF="../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> that retains the discovered instances for the given extension type.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1054,6 +1141,14 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the full name of this <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model"><CODE>ItemGroup</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;,<A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getGlobalNodeProperties()">getGlobalNodeProperties</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1167,7 +1262,8 @@ T</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getJobListeners()">getJobListeners</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the installed <A HREF="../../hudson/model/listeners/ItemListener.html" title="class in hudson.model.listeners"><CODE>ItemListener</CODE></A>s.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <A HREF="../../hudson/model/listeners/ItemListener.html#all()"><CODE>ItemListener.all()</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1266,6 +1362,14 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;,<A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getNodeProperties()">getNodeProperties</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A> instances configured for this <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1849,7 +1953,7 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Node.html#getFileSystemProvisioner()">getFileSystemProvisioner</A>, <A HREF="../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Node.html#toComputer()">toComputer</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Node.html#getFileSystemProvisioner()">getFileSystemProvisioner</A>, <A HREF="../../hudson/model/Node.html#getNodePropertyDescriptors()">getNodePropertyDescriptors</A>, <A HREF="../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Node.html#toComputer()">toComputer</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -2584,6 +2688,41 @@ public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model
 </DL>
 <HR>
 
+<A NAME="getDescriptor(java.lang.Class)"><!-- --></A><H3>
+getDescriptor</H3>
+<PRE>
+public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> <B>getDescriptor</B>(java.lang.Class&lt;? extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&gt;&nbsp;type)</PRE>
+<DL>
+<DD>Gets the <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> that corresponds to the given <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A> type.
+ <p>
+ If you have an instance of <code>type</code> and call <A HREF="../../hudson/model/Describable.html#getDescriptor()"><CODE>Describable.getDescriptor()</CODE></A>,
+ you'll get the same instance that this method returns.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDescriptorByType(java.lang.Class)"><!-- --></A><H3>
+getDescriptorByType</H3>
+<PRE>
+public &lt;T extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&gt; T <B>getDescriptorByType</B>(java.lang.Class&lt;T&gt;&nbsp;type)</PRE>
+<DL>
+<DD>Gets the <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> instance in the current Hudson by its type.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getSecurityRealms(java.lang.String)"><!-- --></A><H3>
 getSecurityRealms</H3>
 <PRE>
@@ -2641,6 +2780,9 @@ getJobListeners</H3>
 <PRE>
 public <A HREF="../../hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>&lt;<A HREF="../../hudson/model/listeners/ItemListener.html" title="class in hudson.model.listeners">ItemListener</A>&gt; <B>getJobListeners</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <A HREF="../../hudson/model/listeners/ItemListener.html#all()"><CODE>ItemListener.all()</CODE></A>.</I>
+<P>
 <DD>Gets all the installed <A HREF="../../hudson/model/listeners/ItemListener.html" title="class in hudson.model.listeners"><CODE>ItemListener</CODE></A>s.
 <P>
 <DD><DL>
@@ -2673,6 +2815,9 @@ getComputerListeners</H3>
 <PRE>
 public <A HREF="../../hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>&lt;<A HREF="../../hudson/slaves/ComputerListener.html" title="class in hudson.slaves">ComputerListener</A>&gt; <B>getComputerListeners</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <A HREF="../../hudson/slaves/ComputerListener.html#all()"><CODE>ComputerListener.all()</CODE></A>.</I>
+<P>
 <DD>Gets all the installed <A HREF="../../hudson/slaves/ComputerListener.html" title="class in hudson.slaves"><CODE>ComputerListener</CODE></A>s.
 <P>
 <DD><DL>
@@ -3309,6 +3454,37 @@ public void <B>setNodes</B>(java.util.List&lt;? extends <A HREF="../../hudson/mo
 </DL>
 <HR>
 
+<A NAME="getNodeProperties()"><!-- --></A><H3>
+getNodeProperties</H3>
+<PRE>
+public <A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;,<A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt; <B>getNodeProperties</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Node.html#getNodeProperties()">Node</A></CODE></B></DD>
+<DD>Gets the <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A> instances configured for this <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Node.html#getNodeProperties()">getNodeProperties</A></CODE> in class <CODE><A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getGlobalNodeProperties()"><!-- --></A><H3>
+getGlobalNodeProperties</H3>
+<PRE>
+public <A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;,<A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt; <B>getGlobalNodeProperties</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getAdministrativeMonitor(java.lang.String)"><!-- --></A><H3>
 getAdministrativeMonitor</H3>
 <PRE>
@@ -3749,6 +3925,42 @@ public <A HREF="../../hudson/lifecycle/Lifecycle.html" title="class in hudson.li
 </DL>
 <HR>
 
+<A NAME="getExtensionList(java.lang.Class)"><!-- --></A><H3>
+getExtensionList</H3>
+<PRE>
+public &lt;T&gt; <A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;T&gt; <B>getExtensionList</B>(java.lang.Class&lt;T&gt;&nbsp;extensionType)</PRE>
+<DL>
+<DD>Returns <A HREF="../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> that retains the discovered instances for the given extension type.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>extensionType</CODE> - The base type that represents the extension point. Normally <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A> subtype
+      but that's not a hard requirement.
+<DT><B>Returns:</B><DD>Can be an empty list but never null.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDescriptorList(java.lang.Class)"><!-- --></A><H3>
+getDescriptorList</H3>
+<PRE>
+public &lt;T extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;,D extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt; <A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;T,D&gt; <B>getDescriptorList</B>(java.lang.Class&lt;T&gt;&nbsp;type)</PRE>
+<DL>
+<DD>Returns <A HREF="../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> that retains the discovered <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> instances for the given
+ kind of <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Can be an empty list but never null.</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getACL()"><!-- --></A><H3>
 getACL</H3>
 <PRE>
@@ -3962,6 +4174,30 @@ public <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson
                            throws java.io.IOException</PRE>
 <DL>
 <DD>Creates a new job.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - if the project of the given name already exists.
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createProject(java.lang.Class, java.lang.String)"><!-- --></A><H3>
+createProject</H3>
+<PRE>
+public &lt;T extends <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt; T <B>createProject</B>(java.lang.Class&lt;T&gt;&nbsp;type,
+                                                java.lang.String&nbsp;name)
+                                     throws java.io.IOException</PRE>
+<DL>
+<DD>Creates a new job.
+
+ <p>
+ This version infers the descriptor from the type of the top-level item.
 <P>
 <DD><DL>
 </DL>

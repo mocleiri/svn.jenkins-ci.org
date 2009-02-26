@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Slave (Hudson core 1.285 API)
+Slave (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Slave (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Slave (Hudson core 1.285 API)";
+        parent.document.title="Slave (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -163,6 +163,16 @@ Information about a Hudson slave node.
 </TR>
 </TABLE>
 &nbsp;
+<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -209,17 +219,32 @@ Information about a Hudson slave node.
       <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, int, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy, java.util.List)">Slave</A></B>(java.lang.String&nbsp;name,
+      java.lang.String&nbsp;nodeDescription,
+      java.lang.String&nbsp;remoteFS,
+      int&nbsp;numExecutors,
+      <A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
+      java.lang.String&nbsp;label,
+      <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
+      <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy,
+      java.util.List&lt;? extends <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;&gt;&nbsp;nodeProperties)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)">Slave</A></B>(java.lang.String&nbsp;name,
+<TD><CODE><B><A HREF="../../hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy, java.util.List)">Slave</A></B>(java.lang.String&nbsp;name,
       java.lang.String&nbsp;nodeDescription,
       java.lang.String&nbsp;remoteFS,
       java.lang.String&nbsp;numExecutors,
       <A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
       java.lang.String&nbsp;label,
       <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
-      <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy)</CODE>
+      <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy,
+      java.util.List&lt;? extends <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;&gt;&nbsp;nodeProperties)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -285,7 +310,7 @@ Information about a Hudson slave node.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../../hudson/model/Slave.SlaveDescriptor.html" title="class in hudson.model">Slave.SlaveDescriptor</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/model/Slave.SlaveDescriptor.html" title="class in hudson.model">Slave.SlaveDescriptor</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Slave.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
@@ -340,6 +365,14 @@ Information about a Hudson slave node.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name of this node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;,<A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Slave.html#getNodeProperties()">getNodeProperties</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A> instances configured for this <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -437,7 +470,7 @@ Information about a Hudson slave node.
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Node.html#createPath(java.lang.String)">createPath</A>, <A HREF="../../hudson/model/Node.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Node.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Node.html#getFileSystemProvisioner()">getFileSystemProvisioner</A>, <A HREF="../../hudson/model/Node.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Node.html#getSelfLabel()">getSelfLabel</A>, <A HREF="../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Node.html#toComputer()">toComputer</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Node.html#createPath(java.lang.String)">createPath</A>, <A HREF="../../hudson/model/Node.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Node.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Node.html#getFileSystemProvisioner()">getFileSystemProvisioner</A>, <A HREF="../../hudson/model/Node.html#getNodePropertyDescriptors()">getNodePropertyDescriptors</A>, <A HREF="../../hudson/model/Node.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Node.html#getSelfLabel()">getSelfLabel</A>, <A HREF="../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Node.html#toComputer()">toComputer</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -505,7 +538,7 @@ protected final java.lang.String <B>remoteFS</B></PRE>
 </TR>
 </TABLE>
 
-<A NAME="Slave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)"><!-- --></A><H3>
+<A NAME="Slave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy, java.util.List)"><!-- --></A><H3>
 Slave</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
@@ -516,17 +549,45 @@ Slave</H3>
                                   <A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
                                   java.lang.String&nbsp;label,
                                   <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
-                                  <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy)
-      throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+                                  <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy,
+                                  java.util.List&lt;? extends <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;&gt;&nbsp;nodeProperties)
+      throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A>,
+             java.io.IOException</PRE>
 <DL>
 <DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DL>
 <HR>
 
 <A NAME="Slave(java.lang.String, java.lang.String, java.lang.String, int, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)"><!-- --></A><H3>
+Slave</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <B>Slave</B>(java.lang.String&nbsp;name,
+                        java.lang.String&nbsp;nodeDescription,
+                        java.lang.String&nbsp;remoteFS,
+                        int&nbsp;numExecutors,
+                        <A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
+                        java.lang.String&nbsp;label,
+                        <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
+                        <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy)
+      throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A>,
+             java.io.IOException</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DL>
+<HR>
+
+<A NAME="Slave(java.lang.String, java.lang.String, java.lang.String, int, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy, java.util.List)"><!-- --></A><H3>
 Slave</H3>
 <PRE>
 public <B>Slave</B>(java.lang.String&nbsp;name,
@@ -536,13 +597,16 @@ public <B>Slave</B>(java.lang.String&nbsp;name,
              <A HREF="../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
              java.lang.String&nbsp;label,
              <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
-             <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy)
-      throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+             <A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy,
+             java.util.List&lt;? extends <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;&gt;&nbsp;nodeProperties)
+      throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A>,
+             java.io.IOException</PRE>
 <DL>
 <DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -700,6 +764,23 @@ public void <B>setMode</B>(<A HREF="../../hudson/model/Node.Mode.html" title="en
 <DL>
 <DD><DL>
 </DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNodeProperties()"><!-- --></A><H3>
+getNodeProperties</H3>
+<PRE>
+public <A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;,<A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt; <B>getNodeProperties</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Node.html#getNodeProperties()">Node</A></CODE></B></DD>
+<DD>Gets the <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A> instances configured for this <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Node.html#getNodeProperties()">getNodeProperties</A></CODE> in class <CODE><A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -951,7 +1032,7 @@ public int <B>hashCode</B>()</PRE>
 <A NAME="getDescriptor()"><!-- --></A><H3>
 getDescriptor</H3>
 <PRE>
-public abstract <A HREF="../../hudson/model/Slave.SlaveDescriptor.html" title="class in hudson.model">Slave.SlaveDescriptor</A> <B>getDescriptor</B>()</PRE>
+public <A HREF="../../hudson/model/Slave.SlaveDescriptor.html" title="class in hudson.model">Slave.SlaveDescriptor</A> <B>getDescriptor</B>()</PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
 <DD>Gets the descriptor for this instance.

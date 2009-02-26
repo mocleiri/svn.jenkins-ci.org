@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-DescriptorList (Hudson core 1.285 API)
+DescriptorList (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DescriptorList (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DescriptorList (Hudson core 1.285 API)";
+        parent.document.title="DescriptorList (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_java.util.AbstractList">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -94,24 +94,42 @@ hudson.util</FONT>
 Class DescriptorList&lt;T extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;&gt;</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by ">java.util.concurrent.CopyOnWriteArrayList&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.DescriptorList&lt;T&gt;</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by ">java.util.AbstractCollection&lt;E&gt;
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by ">java.util.AbstractList&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.DescriptorList&lt;T&gt;</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD>java.io.Serializable, java.lang.Cloneable, java.lang.Iterable&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;, java.util.Collection&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;, java.util.List&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;, java.util.RandomAccess</DD>
+<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Iterable&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;, java.util.Collection&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;, java.util.List&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>DescriptorList&lt;T extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;&gt;</B><DT>extends java.util.concurrent.CopyOnWriteArrayList&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;</DL>
+<DT><PRE>public final class <B>DescriptorList&lt;T extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;&gt;</B><DT>extends java.util.AbstractList&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;</DL>
 </PRE>
 
 <P>
 List of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s.
 
  <p>
- This class is really just a list but also defines
- some Hudson specific methods that operate on
- <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> list.
+ Before Hudson 1.286, this class stored <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s directly, but since 1.286,
+ this class works in two modes that are rather different.
+
+ <p>
+ One is the compatibility mode, where it works just like pre 1.286 and store everything locally,
+ disconnected from any of the additions of 1.286. This is necessary for situations where
+ <A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util"><CODE>DescriptorList</CODE></A> is owned by pre-1.286 plugins where this class doesn't know 'T'.
+ In this mode, <A HREF="../../hudson/util/DescriptorList.html#legacy"><CODE>legacy</CODE></A> is non-null but <A HREF="../../hudson/util/DescriptorList.html#type"><CODE>type</CODE></A> is null.
+
+ <p>
+ The other mode is the new mode, where the <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s are actually stored in <A HREF="../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A>
+ (see <A HREF="../../hudson/model/Hudson.html#getDescriptorList(java.lang.Class)"><CODE>Hudson.getDescriptorList(Class)</CODE></A>) and this class acts as a view to it. This enables
+ bi-directional interoperability &mdash; both descriptors registred automatically and descriptors registered
+ manually are visible from both <A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util"><CODE>DescriptorList</CODE></A> and <A HREF="../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A>. In this mode,
+ <A HREF="../../hudson/util/DescriptorList.html#legacy"><CODE>legacy</CODE></A> is null but <A HREF="../../hudson/util/DescriptorList.html#type"><CODE>type</CODE></A> is non-null.
+
+ <p>
+ The number of plugins that define extension points are limited, so we expect to be able to remove
+ this dual behavior first, then when everyone stops using <A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util"><CODE>DescriptorList</CODE></A>,  we can remove this class
+ altogether.
 <P>
 
 <P>
@@ -120,11 +138,29 @@ List of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.mode
   <DD>1.161</DD>
 <DT><B>Author:</B></DT>
   <DD>Kohsuke Kawaguchi</DD>
-<DT><B>See Also:</B><DD><A HREF="../../serialized-form.html#hudson.util.DescriptorList">Serialized Form</A></DL>
+</DL>
 <HR>
 
 <P>
+<!-- =========== FIELD SUMMARY =========== -->
 
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_java.util.AbstractList"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class java.util.AbstractList</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>modCount</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <A NAME="constructor_summary"><!-- --></A>
@@ -134,10 +170,16 @@ List of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.mode
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/util/DescriptorList.html#DescriptorList(java.lang.Class)">DescriptorList</A></B>(java.lang.Class&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a <A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util"><CODE>DescriptorList</CODE></A> backed by <A HREF="../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/util/DescriptorList.html#DescriptorList(hudson.model.Descriptor...)">DescriptorList</A></B>(<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;...&nbsp;descriptors)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>As of 1.286. Use <A HREF="../../hudson/util/DescriptorList.html#DescriptorList(java.lang.Class)"><CODE>DescriptorList(Class)</CODE></A> instead.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -148,6 +190,25 @@ List of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.mode
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/DescriptorList.html#add(hudson.model.Descriptor)">add</A></B>(<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&nbsp;d)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>As of 1.286. Put <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your descriptor to have it auto-registered,
+      instead of registering a descriptor manually.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/DescriptorList.html#add(int, hudson.model.Descriptor)">add</A></B>(int&nbsp;index,
+    <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&nbsp;element)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>As of 1.286. Put <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your descriptor to have it auto-registered,
+      instead of registering a descriptor manually.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -164,6 +225,22 @@ List of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.mode
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds a descriptor by their <A HREF="../../hudson/model/Descriptor.html#clazz"><CODE>Descriptor.clazz</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/DescriptorList.html#get(int)">get</A></B>(int&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Iterator&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/DescriptorList.html#iterator()">iterator</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -192,14 +269,31 @@ List of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.mode
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/DescriptorList.html#size()">size</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_java.util.concurrent.CopyOnWriteArrayList"><!-- --></A>
+&nbsp;<A NAME="methods_inherited_from_class_java.util.AbstractList"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.util.concurrent.CopyOnWriteArrayList</B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.util.AbstractList</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>add, add, addAll, addAll, addAllAbsent, addIfAbsent, clear, clone, contains, containsAll, equals, get, hashCode, indexOf, indexOf, isEmpty, iterator, lastIndexOf, lastIndexOf, listIterator, listIterator, remove, remove, removeAll, retainAll, set, size, subList, toArray, toArray, toString</CODE></TD>
+<TD><CODE>addAll, clear, equals, hashCode, indexOf, lastIndexOf, listIterator, listIterator, remove, removeRange, set, subList</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.util.AbstractCollection"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.util.AbstractCollection</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>addAll, contains, containsAll, isEmpty, remove, removeAll, retainAll, toArray, toArray, toString</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -208,7 +302,16 @@ List of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.mode
 <TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>finalize, getClass, notify, notifyAll, wait, wait, wait</CODE></TD>
+<TD><CODE>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.util.List"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface java.util.List</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>addAll, contains, containsAll, isEmpty, remove, removeAll, retainAll, toArray, toArray</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -229,6 +332,21 @@ DescriptorList</H3>
 <PRE>
 public <B>DescriptorList</B>(<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;...&nbsp;descriptors)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>As of 1.286. Use <A HREF="../../hudson/util/DescriptorList.html#DescriptorList(java.lang.Class)"><CODE>DescriptorList(Class)</CODE></A> instead.</I>
+<P>
+<DD>This will create a legacy <A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util"><CODE>DescriptorList</CODE></A> that is disconnected from
+ <A HREF="../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A>.
+<P>
+</DL>
+<HR>
+
+<A NAME="DescriptorList(java.lang.Class)"><!-- --></A><H3>
+DescriptorList</H3>
+<PRE>
+public <B>DescriptorList</B>(java.lang.Class&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&nbsp;type)</PRE>
+<DL>
+<DD>Creates a <A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util"><CODE>DescriptorList</CODE></A> backed by <A HREF="../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A>.
+<P>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -240,6 +358,87 @@ public <B>DescriptorList</B>(<A HREF="../../hudson/model/Descriptor.html" title=
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="get(int)"><!-- --></A><H3>
+get</H3>
+<PRE>
+public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt; <B>get</B>(int&nbsp;index)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>get</CODE> in interface <CODE>java.util.List&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;&gt;</CODE><DT><B>Specified by:</B><DD><CODE>get</CODE> in class <CODE>java.util.AbstractList&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="size()"><!-- --></A><H3>
+size</H3>
+<PRE>
+public int <B>size</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>size</CODE> in interface <CODE>java.util.Collection&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;&gt;</CODE><DT><B>Specified by:</B><DD><CODE>size</CODE> in interface <CODE>java.util.List&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;&gt;</CODE><DT><B>Specified by:</B><DD><CODE>size</CODE> in class <CODE>java.util.AbstractCollection&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="iterator()"><!-- --></A><H3>
+iterator</H3>
+<PRE>
+public java.util.Iterator&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt; <B>iterator</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>iterator</CODE> in interface <CODE>java.lang.Iterable&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;&gt;</CODE><DT><B>Specified by:</B><DD><CODE>iterator</CODE> in interface <CODE>java.util.Collection&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;&gt;</CODE><DT><B>Specified by:</B><DD><CODE>iterator</CODE> in interface <CODE>java.util.List&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;&gt;</CODE><DT><B>Overrides:</B><DD><CODE>iterator</CODE> in class <CODE>java.util.AbstractList&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="add(hudson.model.Descriptor)"><!-- --></A><H3>
+add</H3>
+<PRE>
+public boolean <B>add</B>(<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&nbsp;d)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>As of 1.286. Put <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your descriptor to have it auto-registered,
+      instead of registering a descriptor manually.</I>
+<P>
+<DD>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>add</CODE> in interface <CODE>java.util.Collection&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;&gt;</CODE><DT><B>Specified by:</B><DD><CODE>add</CODE> in interface <CODE>java.util.List&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;&gt;</CODE><DT><B>Overrides:</B><DD><CODE>add</CODE> in class <CODE>java.util.AbstractList&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="add(int, hudson.model.Descriptor)"><!-- --></A><H3>
+add</H3>
+<PRE>
+public void <B>add</B>(int&nbsp;index,
+                <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&nbsp;element)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>As of 1.286. Put <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your descriptor to have it auto-registered,
+      instead of registering a descriptor manually.</I>
+<P>
+<DD>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>add</CODE> in interface <CODE>java.util.List&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;&gt;</CODE><DT><B>Overrides:</B><DD><CODE>add</CODE> in class <CODE>java.util.AbstractList&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/util/DescriptorList.html" title="type parameter in DescriptorList">T</A>&gt;&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="newInstanceFromRadioList(net.sf.json.JSONObject)"><!-- --></A><H3>
 newInstanceFromRadioList</H3>
@@ -375,7 +574,7 @@ public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_java.util.AbstractList">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>

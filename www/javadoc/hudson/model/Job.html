@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Job (Hudson core 1.285 API)
+Job (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson core 1.285 API)";
+        parent.document.title="Job (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/JDK.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/model/JobParameterDefinition.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Job.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -117,7 +117,7 @@ A job is an runnable entity under the monitoring of Hudson.
  Every time it "runs", it will be recorded as a <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A> object.
 
  <p>
- To create a custom job type, add it to <A HREF="../../hudson/model/Items.html#LIST"><CODE>Items.LIST</CODE></A>.
+ To create a custom job type, extend <A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model"><CODE>TopLevelItemDescriptor</CODE></A> and put <CODE>Extension</CODE> on it.
 <P>
 
 <P>
@@ -128,6 +128,25 @@ A job is an runnable entity under the monitoring of Hudson.
 <HR>
 
 <P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -176,7 +195,7 @@ A job is an runnable entity under the monitoring of Hudson.
 <TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Item.html#CONFIGURE">CONFIGURE</A>, <A HREF="../../hudson/model/Item.html#CREATE">CREATE</A>, <A HREF="../../hudson/model/Item.html#DELETE">DELETE</A>, <A HREF="../../hudson/model/Item.html#PERMISSIONS">PERMISSIONS</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Item.html#BUILD">BUILD</A>, <A HREF="../../hudson/model/Item.html#CONFIGURE">CONFIGURE</A>, <A HREF="../../hudson/model/Item.html#CREATE">CREATE</A>, <A HREF="../../hudson/model/Item.html#DELETE">DELETE</A>, <A HREF="../../hudson/model/Item.html#PERMISSIONS">PERMISSIONS</A>, <A HREF="../../hudson/model/Item.html#WORKSPACE">WORKSPACE</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1965,7 +1984,7 @@ public <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/JDK.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/model/JobParameterDefinition.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Job.html" target="_top"><B>FRAMES</B></A>  &nbsp;

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Cause (Hudson core 1.285 API)
+Cause (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Cause (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Cause (Hudson core 1.285 API)";
+        parent.document.title="Cause (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -97,7 +97,7 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Cause</B>
 </PRE>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/Cause.LegacyCodeCause.html" title="class in hudson.model">Cause.LegacyCodeCause</A>, <A HREF="../../hudson/model/Cause.UpstreamCause.html" title="class in hudson.model">Cause.UpstreamCause</A>, <A HREF="../../hudson/model/Cause.UserCause.html" title="class in hudson.model">Cause.UserCause</A>, <A HREF="../../hudson/triggers/SCMTrigger.SCMTriggerCause.html" title="class in hudson.triggers">SCMTrigger.SCMTriggerCause</A>, <A HREF="../../hudson/triggers/TimerTrigger.TimerTriggerCause.html" title="class in hudson.triggers">TimerTrigger.TimerTriggerCause</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/Cause.LegacyCodeCause.html" title="class in hudson.model">Cause.LegacyCodeCause</A>, <A HREF="../../hudson/model/Cause.RemoteCause.html" title="class in hudson.model">Cause.RemoteCause</A>, <A HREF="../../hudson/model/Cause.UpstreamCause.html" title="class in hudson.model">Cause.UpstreamCause</A>, <A HREF="../../hudson/model/Cause.UserCause.html" title="class in hudson.model">Cause.UserCause</A>, <A HREF="../../hudson/triggers/SCMTrigger.SCMTriggerCause.html" title="class in hudson.triggers">SCMTrigger.SCMTriggerCause</A>, <A HREF="../../hudson/triggers/TimerTrigger.TimerTriggerCause.html" title="class in hudson.triggers">TimerTrigger.TimerTriggerCause</A></DD>
 </DL>
 <HR>
 <DL>
@@ -131,6 +131,14 @@ Cause object base class.  This class hierarchy is used to keep track of why
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Cause.LegacyCodeCause.html" title="class in hudson.model">Cause.LegacyCodeCause</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Cause.RemoteCause.html" title="class in hudson.model">Cause.RemoteCause</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -176,14 +184,6 @@ Cause object base class.  This class hierarchy is used to keep track of why
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Cause.html#getHTMLDescription()">getHTMLDescription</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -238,17 +238,6 @@ getShortDescription</H3>
 <PRE>
 <FONT SIZE="-1">@Exported(visibility=3)
 </FONT>public abstract java.lang.String <B>getShortDescription</B>()</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getHTMLDescription()"><!-- --></A><H3>
-getHTMLDescription</H3>
-<PRE>
-public java.lang.String <B>getHTMLDescription</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>

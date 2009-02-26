@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.slaves.RetentionStrategy (Hudson core 1.285 API)
+Uses of Class hudson.slaves.RetentionStrategy (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.slaves.RetentionStrategy (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.slaves.RetentionStrategy (Hudson core 1.285 API)";
+        parent.document.title="Uses of Class hudson.slaves.RetentionStrategy (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -219,17 +219,32 @@ Uses of <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in 
       <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, int, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy, java.util.List)">Slave</A></B>(java.lang.String&nbsp;name,
+      java.lang.String&nbsp;nodeDescription,
+      java.lang.String&nbsp;remoteFS,
+      int&nbsp;numExecutors,
+      <A HREF="../../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
+      java.lang.String&nbsp;label,
+      <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
+      <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy,
+      java.util.List&lt;? extends <A HREF="../../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;&gt;&nbsp;nodeProperties)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)">Slave</A></B>(java.lang.String&nbsp;name,
+<TD><CODE><B><A HREF="../../../hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy, java.util.List)">Slave</A></B>(java.lang.String&nbsp;name,
       java.lang.String&nbsp;nodeDescription,
       java.lang.String&nbsp;remoteFS,
       java.lang.String&nbsp;numExecutors,
       <A HREF="../../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
       java.lang.String&nbsp;label,
       <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
-      <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy)</CODE>
+      <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy,
+      java.util.List&lt;? extends <A HREF="../../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;&gt;&nbsp;nodeProperties)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -305,7 +320,8 @@ Uses of <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in 
 <TD><CODE><B>RetentionStrategy.</B><B><A HREF="../../../hudson/slaves/RetentionStrategy.html#LIST">LIST</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> implementations.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../../hudson/slaves/RetentionStrategy.html#all()"><CODE>all()</CODE></A> for read access, and <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -333,16 +349,24 @@ Uses of <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>RetentionStrategy.Demand.</B><B><A HREF="../../../hudson/slaves/RetentionStrategy.Demand.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>RetentionStrategy.</B><B><A HREF="../../../hudson/slaves/RetentionStrategy.html#all()">all</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>RetentionStrategy.</B><B><A HREF="../../../hudson/slaves/RetentionStrategy.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> descriptors.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>SimpleScheduledRetentionStrategy.</B><B><A HREF="../../../hudson/slaves/SimpleScheduledRetentionStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+<TD><CODE><B>RetentionStrategy.</B><B><A HREF="../../../hudson/slaves/RetentionStrategy.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -364,6 +388,21 @@ Uses of <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in 
           java.lang.String&nbsp;label,
           <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
           <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <CODE>#DumbSlave(String, String, String, String, Mode, String, ComputerLauncher, RetentionStrategy, List)</CODE></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/slaves/DumbSlave.html#DumbSlave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy, java.util.List)">DumbSlave</A></B>(java.lang.String&nbsp;name,
+          java.lang.String&nbsp;nodeDescription,
+          java.lang.String&nbsp;remoteFS,
+          java.lang.String&nbsp;numExecutors,
+          <A HREF="../../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
+          java.lang.String&nbsp;label,
+          <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
+          <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy,
+          java.util.List&lt;? extends <A HREF="../../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;&gt;&nbsp;nodeProperties)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

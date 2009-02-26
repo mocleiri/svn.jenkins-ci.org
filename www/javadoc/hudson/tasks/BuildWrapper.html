@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-BuildWrapper (Hudson core 1.285 API)
+BuildWrapper (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildWrapper (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildWrapper (Hudson core 1.285 API)";
+        parent.document.title="BuildWrapper (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/tasks/BuildTrigger.DescriptorImpl.html" title="class in hudson.tasks"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/tasks/BuildTrigger.DescriptorImpl.ItemListenerImpl.html" title="class in hudson.tasks"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/tasks/BuildWrapper.Environment.html" title="class in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tasks/BuildWrapper.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -108,9 +108,6 @@ java.lang.Object
 Pluggability point for performing pre/post actions for the build process.
 
  <p>
- <b>STILL EXPERIMENTAL. SUBJECT TO CHANGE</b>
-
- <p>
  This extension point enables a plugin to set up / tear down additional
  services needed to perform a build, such as setting up local X display,
  or launching and stopping application servers for testing.
@@ -149,7 +146,17 @@ Pluggability point for performing pre/post actions for the build process.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the environment set up by <A HREF="../../hudson/tasks/BuildWrapper.html#setUp(hudson.model.Build, hudson.Launcher, hudson.model.BuildListener)"><CODE>setUp(Build,Launcher,BuildListener)</CODE></A>.</TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
+
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <A NAME="constructor_summary"><!-- --></A>
@@ -173,6 +180,14 @@ Pluggability point for performing pre/post actions for the build process.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/BuildWrapper.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A> descriptors.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -373,6 +388,22 @@ public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model
 </DL>
 </DD>
 </DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>&gt;&gt; <B>all</B>()</PRE>
+<DL>
+<DD>Returns all the registered <A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A> descriptors.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
 
@@ -404,7 +435,7 @@ public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/tasks/BuildTrigger.DescriptorImpl.html" title="class in hudson.tasks"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/tasks/BuildTrigger.DescriptorImpl.ItemListenerImpl.html" title="class in hudson.tasks"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/tasks/BuildWrapper.Environment.html" title="class in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tasks/BuildWrapper.html" target="_top"><B>FRAMES</B></A>  &nbsp;

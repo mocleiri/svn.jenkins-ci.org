@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SubversionSCM (Hudson core 1.285 API)
+SubversionSCM (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SubversionSCM (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionSCM (Hudson core 1.285 API)";
+        parent.document.title="SubversionSCM (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -110,7 +110,7 @@ Subversion SCM.
 
  <h2>Plugin Developer Notes</h2>
  <p>
- Plugins that interact with Subversion can use <A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#createAuthenticationProvider()"><CODE>SubversionSCM.DescriptorImpl.createAuthenticationProvider()</CODE></A>
+ Plugins that interact with Subversion can use <CODE>DescriptorImpl#createAuthenticationProvider()</CODE>
  so that it can use the credentials (username, password, etc.) that the user entered for Hudson.
  See the javadoc of this method for the precautions you need to take if you run Subversion operations
  remotely on slaves.
@@ -164,7 +164,17 @@ Subversion SCM.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
-&nbsp;<!-- =========== FIELD SUMMARY =========== -->
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -206,10 +216,11 @@ Subversion SCM.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience constructor, especially during testing.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#SubversionSCM(java.lang.String[], java.lang.String[], boolean, hudson.scm.SubversionRepositoryBrowser)">SubversionSCM</A></B>(java.lang.String[]&nbsp;remoteLocations,
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#SubversionSCM(java.lang.String[], java.lang.String[], boolean, hudson.scm.SubversionRepositoryBrowser, java.lang.String)">SubversionSCM</A></B>(java.lang.String[]&nbsp;remoteLocations,
               java.lang.String[]&nbsp;localLocations,
               boolean&nbsp;useUpdate,
-              <A HREF="../../hudson/scm/SubversionRepositoryBrowser.html" title="class in hudson.scm">SubversionRepositoryBrowser</A>&nbsp;browser)</CODE>
+              <A HREF="../../hudson/scm/SubversionRepositoryBrowser.html" title="class in hudson.scm">SubversionRepositoryBrowser</A>&nbsp;browser,
+              java.lang.String&nbsp;excludedRegions)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -297,6 +308,22 @@ Subversion SCM.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#getExcludedRegions()">getExcludedRegions</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#getExcludedRegionsNormalized()">getExcludedRegionsNormalized</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/scm/SubversionSCM.ModuleLocation.html" title="class in hudson.scm">SubversionSCM.ModuleLocation</A>[]</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#getLocations()">getLocations</A></B>()</CODE>
 
@@ -346,6 +373,14 @@ Subversion SCM.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#init()">init</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.html#isUseUpdate()">isUseUpdate</A></B>()</CODE>
 
@@ -387,7 +422,7 @@ Subversion SCM.
 <TH ALIGN="left"><B>Methods inherited from class hudson.scm.<A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/scm/SCM.html#createEmptyChangeLog(java.io.File, hudson.model.BuildListener, java.lang.String)">createEmptyChangeLog</A>, <A HREF="../../hudson/scm/SCM.html#getEffectiveBrowser()">getEffectiveBrowser</A>, <A HREF="../../hudson/scm/SCM.html#nullify(java.lang.String)">nullify</A>, <A HREF="../../hudson/scm/SCM.html#processWorkspaceBeforeDeletion(hudson.model.AbstractProject, hudson.FilePath, hudson.model.Node)">processWorkspaceBeforeDeletion</A>, <A HREF="../../hudson/scm/SCM.html#supportsPolling()">supportsPolling</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/scm/SCM.html#all()">all</A>, <A HREF="../../hudson/scm/SCM.html#createEmptyChangeLog(java.io.File, hudson.model.BuildListener, java.lang.String)">createEmptyChangeLog</A>, <A HREF="../../hudson/scm/SCM.html#getEffectiveBrowser()">getEffectiveBrowser</A>, <A HREF="../../hudson/scm/SCM.html#nullify(java.lang.String)">nullify</A>, <A HREF="../../hudson/scm/SCM.html#processWorkspaceBeforeDeletion(hudson.model.AbstractProject, hudson.FilePath, hudson.model.Node)">processWorkspaceBeforeDeletion</A>, <A HREF="../../hudson/scm/SCM.html#supportsPolling()">supportsPolling</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -435,13 +470,14 @@ public static int <B>DEFAULT_TIMEOUT</B></PRE>
 </TR>
 </TABLE>
 
-<A NAME="SubversionSCM(java.lang.String[], java.lang.String[], boolean, hudson.scm.SubversionRepositoryBrowser)"><!-- --></A><H3>
+<A NAME="SubversionSCM(java.lang.String[], java.lang.String[], boolean, hudson.scm.SubversionRepositoryBrowser, java.lang.String)"><!-- --></A><H3>
 SubversionSCM</H3>
 <PRE>
 public <B>SubversionSCM</B>(java.lang.String[]&nbsp;remoteLocations,
                      java.lang.String[]&nbsp;localLocations,
                      boolean&nbsp;useUpdate,
-                     <A HREF="../../hudson/scm/SubversionRepositoryBrowser.html" title="class in hudson.scm">SubversionRepositoryBrowser</A>&nbsp;browser)</PRE>
+                     <A HREF="../../hudson/scm/SubversionRepositoryBrowser.html" title="class in hudson.scm">SubversionRepositoryBrowser</A>&nbsp;browser,
+                     java.lang.String&nbsp;excludedRegions)</PRE>
 <DL>
 </DL>
 <HR>
@@ -552,6 +588,34 @@ public <A HREF="../../hudson/scm/SubversionRepositoryBrowser.html" title="class 
 </DL>
 <HR>
 
+<A NAME="getExcludedRegions()"><!-- --></A><H3>
+getExcludedRegions</H3>
+<PRE>
+public java.lang.String <B>getExcludedRegions</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getExcludedRegionsNormalized()"><!-- --></A><H3>
+getExcludedRegionsNormalized</H3>
+<PRE>
+public java.lang.String[] <B>getExcludedRegionsNormalized</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="buildEnvVars(hudson.model.AbstractBuild, java.util.Map)"><!-- --></A><H3>
 buildEnvVars</H3>
 <PRE>
@@ -639,7 +703,7 @@ public static org.tmatesoft.svn.core.wc.SVNClientManager <B>createSvnClientManag
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>authProvider</CODE> - The value obtained from <A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#createAuthenticationProvider()"><CODE>SubversionSCM.DescriptorImpl.createAuthenticationProvider()</CODE></A>.
+<DT><B>Parameters:</B><DD><CODE>authProvider</CODE> - The value obtained from <CODE>DescriptorImpl#createAuthenticationProvider()</CODE>.
       If the operation runs on slaves,
       (and properly remoted, if the svn operations run on slaves.)</DL>
 </DD>
@@ -748,7 +812,7 @@ public <A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html" title="class
  <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/scm/SCM.html#getDescriptor()">getDescriptor</A></CODE> in class <CODE><A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A>&gt;</CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/scm/SCM.html#getDescriptor()">getDescriptor</A></CODE> in class <CODE><A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -861,6 +925,20 @@ public boolean <B>repositoryLocationsExist</B>(<A HREF="../../hudson/model/Abstr
 
 <DT><B>Throws:</B>
 <DD><CODE>org.tmatesoft.svn.core.SVNException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="init()"><!-- --></A><H3>
+init</H3>
+<PRE>
+public static void <B>init</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

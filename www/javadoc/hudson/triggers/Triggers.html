@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Triggers (Hudson core 1.285 API)
+Triggers (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Triggers (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Triggers (Hudson core 1.285 API)";
+        parent.document.title="Triggers (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -97,6 +97,9 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.triggers.Triggers</B>
 </PRE>
 <HR>
+<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      See each member for how to migrate your code.</I>
+<P>
 <DL>
 <DT><PRE>public class <B>Triggers</B><DT>extends java.lang.Object</DL>
 </PRE>
@@ -127,7 +130,8 @@ List of all installed <A HREF="../../hudson/triggers/Trigger.html" title="class 
 <TD><CODE><B><A HREF="../../hudson/triggers/Triggers.html#TRIGGERS">TRIGGERS</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../hudson/triggers/Trigger.html#all()"><CODE>Trigger.all()</CODE></A> for read access, and <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -143,7 +147,7 @@ List of all installed <A HREF="../../hudson/triggers/Trigger.html" title="class 
 <TD><CODE><B><A HREF="../../hudson/triggers/Triggers.html#Triggers()">Triggers</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -161,7 +165,8 @@ List of all installed <A HREF="../../hudson/triggers/Trigger.html" title="class 
 <TD><CODE><B><A HREF="../../hudson/triggers/Triggers.html#getApplicableTriggers(hudson.model.Item)">getApplicableTriggers</A></B>(<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;i)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a subset of <A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers"><CODE>TriggerDescriptor</CODE></A>s that applys to the given item.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../hudson/triggers/Trigger.html#for_(hudson.model.Item)"><CODE>Trigger.for_(Item)</CODE></A>.</I></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -191,6 +196,9 @@ TRIGGERS</H3>
 <PRE>
 public static final java.util.List&lt;<A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers">TriggerDescriptor</A>&gt; <B>TRIGGERS</B></PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../hudson/triggers/Trigger.html#all()"><CODE>Trigger.all()</CODE></A> for read access, and <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I><DD>All registered <A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers"><CODE>TriggerDescriptor</CODE></A> implementations.
+<P>
 <DL>
 </DL>
 </DL>
@@ -210,7 +218,7 @@ Triggers</H3>
 <PRE>
 public <B>Triggers</B>()</PRE>
 <DL>
-</DL>
+<DD><B>Deprecated.</B>&nbsp;</DL>
 
 <!-- ============ METHOD DETAIL ========== -->
 
@@ -227,6 +235,9 @@ getApplicableTriggers</H3>
 <PRE>
 public static java.util.List&lt;<A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers">TriggerDescriptor</A>&gt; <B>getApplicableTriggers</B>(<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;i)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../hudson/triggers/Trigger.html#for_(hudson.model.Item)"><CODE>Trigger.for_(Item)</CODE></A>.</I>
+<P>
 <DD>Returns a subset of <A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers"><CODE>TriggerDescriptor</CODE></A>s that applys to the given item.
 <P>
 <DD><DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SlaveComputer (Hudson core 1.285 API)
+SlaveComputer (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SlaveComputer (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SlaveComputer (Hudson core 1.285 API)";
+        parent.document.title="SlaveComputer (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -737,7 +737,7 @@ public void <B>setChannel</B>(java.io.InputStream&nbsp;in,
       buffering on this stream, if that's necessary.<DD><CODE>launchLog</CODE> - If non-null, receive the portion of data in <tt>is</tt> before
       the data goes into the "binary mode". This is useful
       when the established communication channel might include some data that might
-      be useful for debugging/trouble-shooting.<DD><CODE>listener</CODE> - Gets a notification when the channel closes, to perform clean up.
+      be useful for debugging/trouble-shooting.<DD><CODE>listener</CODE> - Gets a notification when the channel closes, to perform clean up. Can be null.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>

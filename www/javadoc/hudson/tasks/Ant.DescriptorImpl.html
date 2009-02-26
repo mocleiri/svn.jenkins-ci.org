@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Ant.DescriptorImpl (Hudson core 1.285 API)
+Ant.DescriptorImpl (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Ant.DescriptorImpl (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Ant.DescriptorImpl (Hudson core 1.285 API)";
+        parent.document.title="Ant.DescriptorImpl (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/tasks/Ant.AntInstallation.DescriptorImpl.html" title="class in hudson.tasks"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/tasks/ArtifactArchiver.html" title="class in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tasks/Ant.DescriptorImpl.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -105,7 +105,8 @@ java.lang.Object
 </DL>
 <HR>
 <DL>
-<DT><PRE>public static class <B>Ant.DescriptorImpl</B><DT>extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;</DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="../../hudson/Extension.html" title="annotation in hudson">@Extension</A>
+</FONT>public static class <B>Ant.DescriptorImpl</B><DT>extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;</DL>
 </PRE>
 
 <P>
@@ -146,7 +147,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Descriptor.html#ALL">ALL</A>, <A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -157,6 +158,14 @@ java.lang.Object
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Ant.DescriptorImpl.html#Ant.DescriptorImpl()">Ant.DescriptorImpl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -237,6 +246,14 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a configured instance from the submitted form.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Ant.DescriptorImpl.html#setInstallations(hudson.tasks.Ant.AntInstallation...)">setInstallations</A></B>(<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>...&nbsp;antInstallations)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -268,6 +285,14 @@ java.lang.Object
 <B>Constructor Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="Ant.DescriptorImpl()"><!-- --></A><H3>
+Ant.DescriptorImpl</H3>
+<PRE>
+public <B>Ant.DescriptorImpl</B>()</PRE>
+<DL>
+</DL>
+<HR>
 
 <A NAME="Ant.DescriptorImpl(java.lang.Class)"><!-- --></A><H3>
 Ant.DescriptorImpl</H3>
@@ -439,6 +464,17 @@ public void <B>doCheckAntHome</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
+<HR>
+
+<A NAME="setInstallations(hudson.tasks.Ant.AntInstallation...)"><!-- --></A><H3>
+setInstallations</H3>
+<PRE>
+public void <B>setInstallations</B>(<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>...&nbsp;antInstallations)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
 
@@ -470,7 +506,7 @@ public void <B>doCheckAntHome</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/tasks/Ant.AntInstallation.DescriptorImpl.html" title="class in hudson.tasks"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/tasks/ArtifactArchiver.html" title="class in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tasks/Ant.DescriptorImpl.html" target="_top"><B>FRAMES</B></A>  &nbsp;

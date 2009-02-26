@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-DotNet (Hudson core 1.285 API)
+DotNet (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DotNet (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DotNet (Hudson core 1.285 API)";
+        parent.document.title="DotNet (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -147,6 +147,18 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the .NET framework of the given version (or greater) is installed.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/util/jna/DotNet.html#isInstalled(int, int, java.lang.String, org.jinterop.dcom.common.IJIAuthInfo)">isInstalled</A></B>(int&nbsp;major,
+            int&nbsp;minor,
+            java.lang.String&nbsp;targetMachine,
+            org.jinterop.dcom.common.IJIAuthInfo&nbsp;session)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the .NET framework of the given version (or grater) is installed
+ on a remote machine.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -197,6 +209,28 @@ public static boolean <B>isInstalled</B>(int&nbsp;major,
 <P>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isInstalled(int, int, java.lang.String, org.jinterop.dcom.common.IJIAuthInfo)"><!-- --></A><H3>
+isInstalled</H3>
+<PRE>
+public static boolean <B>isInstalled</B>(int&nbsp;major,
+                                  int&nbsp;minor,
+                                  java.lang.String&nbsp;targetMachine,
+                                  org.jinterop.dcom.common.IJIAuthInfo&nbsp;session)
+                           throws org.jinterop.dcom.common.JIException,
+                                  java.net.UnknownHostException</PRE>
+<DL>
+<DD>Returns true if the .NET framework of the given version (or grater) is installed
+ on a remote machine.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.jinterop.dcom.common.JIException</CODE>
+<DD><CODE>java.net.UnknownHostException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

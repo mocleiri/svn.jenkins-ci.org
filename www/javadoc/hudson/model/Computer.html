@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Computer (Hudson core 1.285 API)
+Computer (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson core 1.285 API)";
+        parent.document.title="Computer (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -1817,7 +1817,8 @@ doDumpExportTable</H3>
 public void <B>doDumpExportTable</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                        throws java.io.IOException,
-                              javax.servlet.ServletException</PRE>
+                              javax.servlet.ServletException,
+                              java.lang.InterruptedException</PRE>
 <DL>
 <DD>Dumps the contents of the export table.
 <P>
@@ -1828,7 +1829,8 @@ public void <B>doDumpExportTable</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+<DD><CODE>javax.servlet.ServletException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>

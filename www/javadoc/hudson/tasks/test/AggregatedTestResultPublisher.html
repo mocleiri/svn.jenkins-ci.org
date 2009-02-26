@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AggregatedTestResultPublisher (Hudson core 1.285 API)
+AggregatedTestResultPublisher (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AggregatedTestResultPublisher (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AggregatedTestResultPublisher (Hudson core 1.285 API)";
+        parent.document.title="AggregatedTestResultPublisher (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -96,14 +96,15 @@ Class AggregatedTestResultPublisher</H2>
 java.lang.Object
   <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html" title="class in hudson.tasks">hudson.tasks.BuildStepCompatibilityLayer</A>
       <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">hudson.tasks.Publisher</A>
-          <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><B>hudson.tasks.test.AggregatedTestResultPublisher</B>
+          <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../hudson/tasks/Recorder.html" title="class in hudson.tasks">hudson.tasks.Recorder</A>
+              <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><B>hudson.tasks.test.AggregatedTestResultPublisher</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;, <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>AggregatedTestResultPublisher</B><DT>extends <A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A></DL>
+<DT><PRE>public class <B>AggregatedTestResultPublisher</B><DT>extends <A HREF="../../../hudson/tasks/Recorder.html" title="class in hudson.tasks">Recorder</A></DL>
 </PRE>
 
 <P>
@@ -145,7 +146,27 @@ Aggregates downstream test reports into a single consolidated report,
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action that serves the aggregated record.</TD>
 </TR>
 </TABLE>
-&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.tasks.BuildStep"><!-- --></A>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.tasks.Publisher"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from class hudson.tasks.<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../hudson/tasks/Publisher.DescriptorExtensionListImpl.html" title="class in hudson.tasks">Publisher.DescriptorExtensionListImpl</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<A NAME="nested_classes_inherited_from_class_hudson.tasks.BuildStep"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.tasks.<A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></B></TH>
@@ -208,14 +229,6 @@ Aggregates downstream test reports into a single consolidated report,
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.DescriptorImpl</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
         <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
@@ -225,13 +238,22 @@ Aggregates downstream test reports into a single consolidated report,
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs the step over the given build and reports the progress to the listener.</TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.tasks.Recorder"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.tasks.<A HREF="../../../hudson/tasks/Recorder.html" title="class in hudson.tasks">Recorder</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../hudson/tasks/Recorder.html#getDescriptor()">getDescriptor</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.tasks.Publisher"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left"><B>Methods inherited from class hudson.tasks.<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/tasks/Publisher.html#getProjectAction(hudson.model.Project)">getProjectAction</A>, <A HREF="../../../hudson/tasks/Publisher.html#needsToRunAfterFinalized()">needsToRunAfterFinalized</A>, <A HREF="../../../hudson/tasks/Publisher.html#prebuild(hudson.model.Build, hudson.model.BuildListener)">prebuild</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/tasks/Publisher.html#all()">all</A>, <A HREF="../../../hudson/tasks/Publisher.html#getProjectAction(hudson.model.Project)">getProjectAction</A>, <A HREF="../../../hudson/tasks/Publisher.html#needsToRunAfterFinalized()">needsToRunAfterFinalized</A>, <A HREF="../../../hudson/tasks/Publisher.html#prebuild(hudson.model.Build, hudson.model.BuildListener)">prebuild</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.tasks.BuildStepCompatibilityLayer"><!-- --></A>
@@ -347,25 +369,6 @@ public boolean <B>perform</B>(<A HREF="../../../hudson/model/AbstractBuild.html"
       Implementations are encouraged to catch <CODE>IOException</CODE> on its own to
       provide a better error message, if it can do so, so that users have better
       understanding on why it failed.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getDescriptor()"><!-- --></A><H3>
-getDescriptor</H3>
-<PRE>
-public <A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.DescriptorImpl.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher.DescriptorImpl</A> <B>getDescriptor</B>()</PRE>
-<DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
-<DD>Gets the descriptor for this instance.
-
- <p>
- <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> is a singleton for every concrete <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
- implementation, so if <tt>a.getClass()==b.getClass()</tt> then
- <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
-<P>
-<DD><DL>
-</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

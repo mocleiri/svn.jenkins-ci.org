@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-UserProperty (Hudson core 1.285 API)
+UserProperty (Hudson core 1.286 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-19">
+<META NAME="date" CONTENT="2009-02-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UserProperty (Hudson core 1.285 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UserProperty (Hudson core 1.285 API)";
+        parent.document.title="UserProperty (Hudson core 1.286 API)";
     }
 }
 </SCRIPT>
@@ -127,10 +127,29 @@ Extensible property of <A HREF="../../hudson/model/User.html" title="class in hu
 <DL>
 <DT><B>Author:</B></DT>
   <DD>Kohsuke Kawaguchi</DD>
-<DT><B>See Also:</B><DD><A HREF="../../hudson/model/UserProperties.html#LIST"><CODE>UserProperties.LIST</CODE></A></DL>
+</DL>
 <HR>
 
 <P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -175,7 +194,15 @@ Extensible property of <A HREF="../../hudson/model/User.html" title="class in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model">UserPropertyDescriptor</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/model/UserProperty.html" title="class in hudson.model">UserProperty</A>,<A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model">UserPropertyDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UserProperty.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model"><CODE>UserPropertyDescriptor</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model">UserPropertyDescriptor</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UserProperty.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
@@ -247,7 +274,7 @@ public <B>UserProperty</B>()</PRE>
 <A NAME="getDescriptor()"><!-- --></A><H3>
 getDescriptor</H3>
 <PRE>
-public abstract <A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model">UserPropertyDescriptor</A> <B>getDescriptor</B>()</PRE>
+public <A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model">UserPropertyDescriptor</A> <B>getDescriptor</B>()</PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
 <DD>Gets the descriptor for this instance.
@@ -259,6 +286,22 @@ public abstract <A HREF="../../hudson/model/UserPropertyDescriptor.html" title="
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/UserProperty.html" title="class in hudson.model">UserProperty</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/model/UserProperty.html" title="class in hudson.model">UserProperty</A>,<A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model">UserPropertyDescriptor</A>&gt; <B>all</B>()</PRE>
+<DL>
+<DD>Returns all the registered <A HREF="../../hudson/model/UserPropertyDescriptor.html" title="class in hudson.model"><CODE>UserPropertyDescriptor</CODE></A>s.
+<P>
+<DD><DL>
+</DL>
 </DD>
 <DD><DL>
 </DL>
