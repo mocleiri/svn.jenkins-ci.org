@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Iterators (Hudson core 1.286 API)
+Iterators (Hudson core 1.287 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-26">
+<META NAME="date" CONTENT="2009-02-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Iterators (Hudson core 1.286 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Iterators (Hudson core 1.286 API)";
+        parent.document.title="Iterators (Hudson core 1.287 API)";
     }
 }
 </SCRIPT>
@@ -169,6 +169,36 @@ Varios <A HREF="../../hudson/util/Iterators.FlattenIterator.html" title="class i
 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
 <TR ALIGN="right" VALIGN="">
 <TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.lang.Iterable&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/Iterators.html#cast(java.lang.Iterable)">cast</A></B>(java.lang.Iterable&lt;? extends T&gt;&nbsp;itr)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Casts <CODE>Iterable</CODE> by taking advantage of its covariant-ness.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.util.Iterator&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/Iterators.html#cast(java.util.Iterator)">cast</A></B>(java.util.Iterator&lt;? extends T&gt;&nbsp;itr)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Casts <A HREF="../../hudson/util/Iterators.FlattenIterator.html" title="class in hudson.util"><CODE>Iterators.FlattenIterator</CODE></A> by taking advantage of its covariant-ness.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
 <CODE>&lt;T&gt; java.util.Iterator&lt;T&gt;</CODE></FONT></TD>
 </TR>
 </TABLE>
@@ -245,6 +275,21 @@ Varios <A HREF="../../hudson/util/Iterators.FlattenIterator.html" title="class i
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a list that represents [start,end).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.lang.Iterable&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/Iterators.html#sequence(java.lang.Iterable...)">sequence</A></B>(java.lang.Iterable&lt;? extends T&gt;...&nbsp;iterables)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an <CODE>Iterable</CODE> that iterates over all the given <CODE>Iterable</CODE>s.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -374,12 +419,54 @@ public static java.util.List&lt;java.lang.Integer&gt; <B>reverseSequence</B>(int
 </DL>
 <HR>
 
+<A NAME="cast(java.util.Iterator)"><!-- --></A><H3>
+cast</H3>
+<PRE>
+public static &lt;T&gt; java.util.Iterator&lt;T&gt; <B>cast</B>(java.util.Iterator&lt;? extends T&gt;&nbsp;itr)</PRE>
+<DL>
+<DD>Casts <A HREF="../../hudson/util/Iterators.FlattenIterator.html" title="class in hudson.util"><CODE>Iterators.FlattenIterator</CODE></A> by taking advantage of its covariant-ness.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="cast(java.lang.Iterable)"><!-- --></A><H3>
+cast</H3>
+<PRE>
+public static &lt;T&gt; java.lang.Iterable&lt;T&gt; <B>cast</B>(java.lang.Iterable&lt;? extends T&gt;&nbsp;itr)</PRE>
+<DL>
+<DD>Casts <CODE>Iterable</CODE> by taking advantage of its covariant-ness.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="readOnly(java.util.Iterator)"><!-- --></A><H3>
 readOnly</H3>
 <PRE>
 public static &lt;T&gt; java.util.Iterator&lt;T&gt; <B>readOnly</B>(java.util.Iterator&lt;T&gt;&nbsp;itr)</PRE>
 <DL>
 <DD>Creates a read-only mutator that disallows <A HREF="../../hudson/util/Iterators.FlattenIterator.html#remove()"><CODE>Iterators.FlattenIterator.remove()</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="sequence(java.lang.Iterable...)"><!-- --></A><H3>
+sequence</H3>
+<PRE>
+public static &lt;T&gt; java.lang.Iterable&lt;T&gt; <B>sequence</B>(java.lang.Iterable&lt;? extends T&gt;...&nbsp;iterables)</PRE>
+<DL>
+<DD>Returns an <CODE>Iterable</CODE> that iterates over all the given <CODE>Iterable</CODE>s.
+
+ <p>
+ That is, this creates {A,B,C,D} from {A,B},{C,D}.
 <P>
 <DD><DL>
 </DL>

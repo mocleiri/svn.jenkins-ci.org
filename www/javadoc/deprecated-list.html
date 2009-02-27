@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.286 API)
+Deprecated List (Hudson core 1.287 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-26">
+<META NAME="date" CONTENT="2009-02-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.286 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.286 API)";
+        parent.document.title="Deprecated List (Hudson core 1.287 API)";
     }
 }
 </SCRIPT>
@@ -238,6 +238,13 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
       Use <A HREF="hudson/tasks/Mailer.html#descriptor()"><CODE>Mailer.descriptor()</CODE></A> to obtain the current instance.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/ArtifactArchiver.html#DESCRIPTOR">hudson.tasks.ArtifactArchiver.DESCRIPTOR</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
+      Some plugin depends on this, so this field is left here and points to the last created instance.
+      Use <A HREF="hudson/model/Hudson.html#getDescriptorByType(java.lang.Class)"><CODE>Hudson.getDescriptorByType(Class)</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/security/Permission.html#FULL_CONTROL">hudson.security.Permission.FULL_CONTROL</A>
@@ -863,6 +870,11 @@ function windowTitle()
 <TD><A HREF="hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, int, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)">hudson.model.Slave(String, String, String, int, Node.Mode, String, ComputerLauncher, RetentionStrategy)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/scm/SubversionSCM.html#SubversionSCM(java.lang.String[], java.lang.String[], boolean, hudson.scm.SubversionRepositoryBrowser)">hudson.scm.SubversionSCM(String[], String[], boolean, SubversionRepositoryBrowser)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286</I>&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-View (Hudson core 1.286 API)
+View (Hudson core 1.287 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-26">
+<META NAME="date" CONTENT="2009-02-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ View (Hudson core 1.286 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="View (Hudson core 1.286 API)";
+        parent.document.title="View (Hudson core 1.287 API)";
     }
 }
 </SCRIPT>
@@ -522,6 +522,14 @@ Encapsulates the rendering of the list of <A HREF="../../hudson/model/TopLevelIt
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/widgets/Widget.html" title="class in hudson.widgets">Widget</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/View.html#getWidgets()">getWidgets</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/widgets/Widget.html" title="class in hudson.widgets"><CODE>Widget</CODE></A>s registered on this object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/View.html#hasPeople()">hasPeople</A></B>()</CODE>
 
@@ -902,6 +910,25 @@ public java.lang.String <B>getDisplayName</B>()</PRE>
 <DL>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ModelObject.html#getDisplayName()">getDisplayName</A></CODE> in interface <CODE><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getWidgets()"><!-- --></A><H3>
+getWidgets</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/widgets/Widget.html" title="class in hudson.widgets">Widget</A>&gt; <B>getWidgets</B>()</PRE>
+<DL>
+<DD>Gets the <A HREF="../../hudson/widgets/Widget.html" title="class in hudson.widgets"><CODE>Widget</CODE></A>s registered on this object.
+
+ <p>
+ For now, this just returns the widgets registered to Hudson.
+<P>
+<DD><DL>
+</DL>
 </DD>
 <DD><DL>
 </DL>

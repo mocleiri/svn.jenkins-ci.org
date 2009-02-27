@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.286 API)
+Index (Hudson core 1.287 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-26">
+<META NAME="date" CONTENT="2009-02-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.286 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.286 API)";
+        parent.document.title="Index (Hudson core 1.287 API)";
     }
 }
 </SCRIPT>
@@ -1453,6 +1453,12 @@ Static method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/Messages
 <DT><A HREF="./hudson/tasks/junit/Messages.html#CaseResult_Status_Skipped()"><B>CaseResult_Status_Skipped()</B></A> - 
 Static method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/Messages.html" title="class in hudson.tasks.junit">Messages</A>
 <DD>Skipped
+<DT><A HREF="./hudson/util/Iterators.html#cast(java.util.Iterator)"><B>cast(Iterator&lt;? extends T&gt;)</B></A> - 
+Static method in class hudson.util.<A HREF="./hudson/util/Iterators.html" title="class in hudson.util">Iterators</A>
+<DD>Casts <A HREF="./hudson/util/Iterators.FlattenIterator.html" title="class in hudson.util"><CODE>Iterators.FlattenIterator</CODE></A> by taking advantage of its covariant-ness.
+<DT><A HREF="./hudson/util/Iterators.html#cast(java.lang.Iterable)"><B>cast(Iterable&lt;? extends T&gt;)</B></A> - 
+Static method in class hudson.util.<A HREF="./hudson/util/Iterators.html" title="class in hudson.util">Iterators</A>
+<DD>Casts <CODE>Iterable</CODE> by taking advantage of its covariant-ness.
 <DT><A HREF="./hudson/model/Cause.html" title="class in hudson.model"><B>Cause</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Cause object base class.<DT><A HREF="./hudson/model/Cause.html#Cause()"><B>Cause()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Cause.html" title="class in hudson.model">Cause</A>
 <DD>&nbsp;
@@ -3110,6 +3116,11 @@ Static variable in class hudson.security.<A HREF="./hudson/security/ProjectMatri
 <DT><A HREF="./hudson/slaves/JNLPLauncher.html#DESCRIPTOR"><B>DESCRIPTOR</B></A> - 
 Static variable in class hudson.slaves.<A HREF="./hudson/slaves/JNLPLauncher.html" title="class in hudson.slaves">JNLPLauncher</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/ArtifactArchiver.html#DESCRIPTOR"><B>DESCRIPTOR</B></A> - 
+Static variable in class hudson.tasks.<A HREF="./hudson/tasks/ArtifactArchiver.html" title="class in hudson.tasks">ArtifactArchiver</A>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Some plugin depends on this, so this field is left here and points to the last created instance.
+      Use <A HREF="./hudson/model/Hudson.html#getDescriptorByType(java.lang.Class)"><CODE>Hudson.getDescriptorByType(Class)</CODE></A> instead.</I>
 <DT><A HREF="./hudson/tasks/LogRotator.html#DESCRIPTOR"><B>DESCRIPTOR</B></A> - 
 Static variable in class hudson.tasks.<A HREF="./hudson/tasks/LogRotator.html" title="class in hudson.tasks">LogRotator</A>
 <DD>&nbsp;
@@ -9959,6 +9970,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DT><A HREF="./hudson/model/Job.html#getWidgets()"><B>getWidgets()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/View.html#getWidgets()"><B>getWidgets()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
+<DD>Gets the <A HREF="./hudson/widgets/Widget.html" title="class in hudson.widgets"><CODE>Widget</CODE></A>s registered on this object.
 <DT><A HREF="./hudson/Functions.html#getWin32ErrorMessage(java.io.IOException)"><B>getWin32ErrorMessage(IOException)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
 <DD>&nbsp;
@@ -11938,6 +11952,9 @@ Variable in class hudson.maven.<A HREF="./hudson/maven/MavenBuilder.html" title=
 Static variable in class hudson.model.listeners.<A HREF="./hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners">RunListener</A>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.281
       Use <A HREF="./hudson/model/listeners/RunListener.html#all()"><CODE>RunListener.all()</CODE></A> for read access, and use <A HREF="./hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>
+<DT><A HREF="./hudson/DescriptorExtensionList.html#listLegacyInstances()"><B>listLegacyInstances()</B></A> - 
+Static method in class hudson.<A HREF="./hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>
+<DD>List up all the legacy instances currently in use.
 <DT><A HREF="./hudson/model/Fingerprint.RangeSet.html#listNumbers()"><B>listNumbers()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A>
 <DD>List all numbers in this range set, in the ascending order.
@@ -14610,6 +14627,9 @@ Method in class hudson.matrix.<A HREF="./hudson/matrix/Combination.html" title="
 <DT><A HREF="./hudson/model/RunMap.html#remove(R)"><B>remove(R)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/RunMap.html" title="class in hudson.model">RunMap</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/BuildStep.PublisherList.html#remove(java.lang.Object)"><B>remove(Object)</B></A> - 
+Method in class hudson.tasks.<A HREF="./hudson/tasks/BuildStep.PublisherList.html" title="class in hudson.tasks">BuildStep.PublisherList</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/AdaptedIterator.html#remove()"><B>remove()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/AdaptedIterator.html" title="class in hudson.util">AdaptedIterator</A>
 <DD>&nbsp;
@@ -14624,6 +14644,9 @@ Method in class hudson.util.<A HREF="./hudson/util/DescribableList.html" title="
 <DD>Removes an instance by its type.
 <DT><A HREF="./hudson/util/DescribableList.html#remove(D)"><B>remove(D)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/util/DescriptorList.html#remove(java.lang.Object)"><B>remove(Object)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/Iterators.FilterIterator.html#remove()"><B>remove()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/Iterators.FilterIterator.html" title="class in hudson.util">Iterators.FilterIterator</A>
@@ -15364,6 +15387,9 @@ Static method in class hudson.util.<A HREF="./hudson/util/Iterators.html" title=
 <DT><A HREF="./hudson/util/Iterators.html#sequence(int, int)"><B>sequence(int, int)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/Iterators.html" title="class in hudson.util">Iterators</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/Iterators.html#sequence(java.lang.Iterable...)"><B>sequence(Iterable&lt;? extends T&gt;...)</B></A> - 
+Static method in class hudson.util.<A HREF="./hudson/util/Iterators.html" title="class in hudson.util">Iterators</A>
+<DD>Returns an <CODE>Iterable</CODE> that iterates over all the given <CODE>Iterable</CODE>s.
 <DT><A HREF="./hudson/util/RobustReflectionConverter.html#serializationMethodInvoker"><B>serializationMethodInvoker</B></A> - 
 Variable in class hudson.util.<A HREF="./hudson/util/RobustReflectionConverter.html" title="class in hudson.util">RobustReflectionConverter</A>
 <DD>&nbsp;
@@ -16300,7 +16326,10 @@ Constructor for class hudson.scm.<A HREF="./hudson/scm/SubversionEventHandlerImp
 <DT><A HREF="./hudson/scm/SubversionRepositoryBrowser.html" title="class in hudson.scm"><B>SubversionRepositoryBrowser</B></A> - Class in <A HREF="./hudson/scm/package-summary.html">hudson.scm</A><DD><A HREF="./hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> for Subversion.<DT><A HREF="./hudson/scm/SubversionRepositoryBrowser.html#SubversionRepositoryBrowser()"><B>SubversionRepositoryBrowser()</B></A> - 
 Constructor for class hudson.scm.<A HREF="./hudson/scm/SubversionRepositoryBrowser.html" title="class in hudson.scm">SubversionRepositoryBrowser</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/scm/SubversionSCM.html" title="class in hudson.scm"><B>SubversionSCM</B></A> - Class in <A HREF="./hudson/scm/package-summary.html">hudson.scm</A><DD>Subversion SCM.<DT><A HREF="./hudson/scm/SubversionSCM.html#SubversionSCM(java.lang.String[], java.lang.String[], boolean, hudson.scm.SubversionRepositoryBrowser, java.lang.String)"><B>SubversionSCM(String[], String[], boolean, SubversionRepositoryBrowser, String)</B></A> - 
+<DT><A HREF="./hudson/scm/SubversionSCM.html" title="class in hudson.scm"><B>SubversionSCM</B></A> - Class in <A HREF="./hudson/scm/package-summary.html">hudson.scm</A><DD>Subversion SCM.<DT><A HREF="./hudson/scm/SubversionSCM.html#SubversionSCM(java.lang.String[], java.lang.String[], boolean, hudson.scm.SubversionRepositoryBrowser)"><B>SubversionSCM(String[], String[], boolean, SubversionRepositoryBrowser)</B></A> - 
+Constructor for class hudson.scm.<A HREF="./hudson/scm/SubversionSCM.html" title="class in hudson.scm">SubversionSCM</A>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286</I>
+<DT><A HREF="./hudson/scm/SubversionSCM.html#SubversionSCM(java.lang.String[], java.lang.String[], boolean, hudson.scm.SubversionRepositoryBrowser, java.lang.String)"><B>SubversionSCM(String[], String[], boolean, SubversionRepositoryBrowser, String)</B></A> - 
 Constructor for class hudson.scm.<A HREF="./hudson/scm/SubversionSCM.html" title="class in hudson.scm">SubversionSCM</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/scm/SubversionSCM.html#SubversionSCM(java.lang.String)"><B>SubversionSCM(String)</B></A> - 
@@ -17440,6 +17469,9 @@ Method in class hudson.util.<A HREF="./hudson/util/CopyOnWriteMap.html" title="c
 <DT><A HREF="./hudson/util/ListBoxModel.html#values()"><B>values()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ListBoxModel.html" title="class in hudson.util">ListBoxModel</A>
 <DD><B>Deprecated.</B>&nbsp;<I>Exposed for stapler. Not meant for programatic consumption.</I>
+<DT><A HREF="./hudson/util/Memoizer.html#values()"><B>values()</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/Memoizer.html" title="class in hudson.util">Memoizer</A>
+<DD>Provides a snapshot view of all <code>V</code>s.
 <DT><A HREF="./hudson/util/TimeUnit2.html#values()"><B>values()</B></A> - 
 Static method in enum hudson.util.<A HREF="./hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A>
 <DD>Returns an array containing the constants of this enum type, in
