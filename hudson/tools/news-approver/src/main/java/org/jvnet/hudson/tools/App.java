@@ -25,9 +25,11 @@ public class App {
                 if(headline.contains("SNAPSHOT")) {
                     System.out.println("Rejecting "+headline);
                     n.disapprove();
+                    System.out.println("disapproved "+headline);
                 } else {
                     System.out.println("Approving "+headline);
                     n.approve();
+                    System.out.println("approved "+headline);
                 }
             }
         }
