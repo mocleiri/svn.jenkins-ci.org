@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-EnvVars (Hudson core 1.287 API)
+EnvVars (Hudson core 1.288 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-27">
+<META NAME="date" CONTENT="2009-03-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ EnvVars (Hudson core 1.287 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="EnvVars (Hudson core 1.287 API)";
+        parent.document.title="EnvVars (Hudson core 1.288 API)";
     }
 }
 </SCRIPT>
@@ -217,7 +217,7 @@ Environment variables.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;java.util.Map&lt;java.lang.String,java.lang.String&gt;</CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/EnvVars.html#getRemote(hudson.remoting.VirtualChannel)">getRemote</A></B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
 
 <BR>
@@ -234,11 +234,11 @@ Environment variables.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/EnvVars.html#overrideAll(java.util.Map)">overrideAll</A></B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;all)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overrides all values in the map.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -381,10 +381,13 @@ public void <B>override</B>(java.lang.String&nbsp;key,
 <A NAME="overrideAll(java.util.Map)"><!-- --></A><H3>
 overrideAll</H3>
 <PRE>
-public void <B>overrideAll</B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;all)</PRE>
+public <A HREF="../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <B>overrideAll</B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;all)</PRE>
 <DL>
+<DD>Overrides all values in the map. See #override
+<P>
 <DD><DL>
-</DL>
+
+<DT><B>Returns:</B><DD>this</DL>
 </DD>
 </DL>
 <HR>
@@ -431,9 +434,9 @@ public java.lang.String <B>expand</B>(java.lang.String&nbsp;s)</PRE>
 <A NAME="getRemote(hudson.remoting.VirtualChannel)"><!-- --></A><H3>
 getRemote</H3>
 <PRE>
-public static java.util.Map&lt;java.lang.String,java.lang.String&gt; <B>getRemote</B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)
-                                                                  throws java.io.IOException,
-                                                                         java.lang.InterruptedException</PRE>
+public static <A HREF="../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <B>getRemote</B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)
+                         throws java.io.IOException,
+                                java.lang.InterruptedException</PRE>
 <DL>
 <DD>Obtains the environment variables of a remote peer.
 <P>

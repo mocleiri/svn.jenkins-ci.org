@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ArtifactArchiver.DescriptorImpl (Hudson core 1.287 API)
+ArtifactArchiver.DescriptorImpl (Hudson core 1.288 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-27">
+<META NAME="date" CONTENT="2009-03-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ArtifactArchiver.DescriptorImpl (Hudson core 1.287 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ArtifactArchiver.DescriptorImpl (Hudson core 1.287 API)";
+        parent.document.title="ArtifactArchiver.DescriptorImpl (Hudson core 1.288 API)";
     }
 }
 </SCRIPT>
@@ -179,8 +179,8 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/ArtifactArchiver.DescriptorImpl.html#doCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-        org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tasks/ArtifactArchiver.DescriptorImpl.html#doCheckArtifacts(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCheckArtifacts</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs on-the-fly validation on the file mask wildcard.</TD>
@@ -192,14 +192,6 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Human readable name of this kind of configurable object.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/ArtifactArchiver.DescriptorImpl.html#getHelpFile()">getHelpFile</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the resource path to the help screen HTML, if any.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -234,7 +226,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#convert(java.util.Map)">convert</A>, <A HREF="../../hudson/model/Descriptor.html#doHelp(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doHelp</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.util.Collection, java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)">getCheckUrl</A>, <A HREF="../../hudson/model/Descriptor.html#getConfigPage()">getConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getGlobalConfigPage()">getGlobalConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile(java.lang.String)">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getJsonSafeClassName()">getJsonSafeClassName</A>, <A HREF="../../hudson/model/Descriptor.html#getPropertyType(java.lang.String)">getPropertyType</A>, <A HREF="../../hudson/model/Descriptor.html#getViewPage(java.lang.Class, java.lang.String)">getViewPage</A>, <A HREF="../../hudson/model/Descriptor.html#isInstance(T)">isInstance</A>, <A HREF="../../hudson/model/Descriptor.html#load()">load</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A>, <A HREF="../../hudson/model/Descriptor.html#save()">save</A>, <A HREF="../../hudson/model/Descriptor.html#toArray(T...)">toArray</A>, <A HREF="../../hudson/model/Descriptor.html#toList(T...)">toList</A>, <A HREF="../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#convert(java.util.Map)">convert</A>, <A HREF="../../hudson/model/Descriptor.html#doHelp(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doHelp</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.util.Collection, java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)">getCheckUrl</A>, <A HREF="../../hudson/model/Descriptor.html#getConfigPage()">getConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getGlobalConfigPage()">getGlobalConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile()">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile(java.lang.String)">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getJsonSafeClassName()">getJsonSafeClassName</A>, <A HREF="../../hudson/model/Descriptor.html#getPropertyType(java.lang.String)">getPropertyType</A>, <A HREF="../../hudson/model/Descriptor.html#getViewPage(java.lang.Class, java.lang.String)">getViewPage</A>, <A HREF="../../hudson/model/Descriptor.html#isInstance(T)">isInstance</A>, <A HREF="../../hudson/model/Descriptor.html#load()">load</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A>, <A HREF="../../hudson/model/Descriptor.html#save()">save</A>, <A HREF="../../hudson/model/Descriptor.html#toArray(T...)">toArray</A>, <A HREF="../../hudson/model/Descriptor.html#toList(T...)">toList</A>, <A HREF="../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -293,42 +285,13 @@ public java.lang.String <B>getDisplayName</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="getHelpFile()"><!-- --></A><H3>
-getHelpFile</H3>
+<A NAME="doCheckArtifacts(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doCheckArtifacts</H3>
 <PRE>
-public java.lang.String <B>getHelpFile</B>()</PRE>
-<DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Descriptor.html#getHelpFile()">Descriptor</A></CODE></B></DD>
-<DD>Returns the resource path to the help screen HTML, if any.
-
- <p>
- Starting 1.282, this method uses "convention over configuration" &mdash; you should
- just put the "help.html" (and its localized versions, if any) in the same directory
- you put your Jelly view files, and this method will automatically does the right thing.
-
- <p>
- This value is relative to the context root of Hudson, so normally
- the values are something like <tt>"/plugin/emma/help.html"</tt> to
- refer to static resource files in a plugin, or <tt>"/publisher/EmmaPublisher/abc"</tt>
- to refer to Jelly script <tt>abc.jelly</tt> or a method <tt>EmmaPublisher.doAbc()</tt>.
-<P>
-<DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Descriptor.html#getHelpFile()">getHelpFile</A></CODE> in class <CODE><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></DL>
-</DD>
-<DD><DL>
-
-<DT><B>Returns:</B><DD>null to indicate that there's no help.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="doCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-doCheck</H3>
-<PRE>
-public void <B>doCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                    org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-             throws java.io.IOException,
-                    javax.servlet.ServletException</PRE>
+public void <B>doCheckArtifacts</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                             org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                      throws java.io.IOException,
+                             javax.servlet.ServletException</PRE>
 <DL>
 <DD>Performs on-the-fly validation on the file mask wildcard.
 <P>

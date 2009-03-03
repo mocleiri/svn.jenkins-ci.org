@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-RunListener (Hudson core 1.287 API)
+RunListener (Hudson core 1.288 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-27">
+<META NAME="date" CONTENT="2009-03-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RunListener (Hudson core 1.287 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RunListener (Hudson core 1.287 API)";
+        parent.document.title="RunListener (Hudson core 1.288 API)";
     }
 }
 </SCRIPT>
@@ -220,6 +220,14 @@ Receives notifications about builds.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/listeners/RunListener.html#fireDeleted(hudson.model.Run)">fireDeleted</A></B>(<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;r)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fires the <A HREF="../../../hudson/model/listeners/RunListener.html#onFinalized(R)"><CODE>onFinalized(Run)</CODE></A> event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/listeners/RunListener.html#fireFinalized(hudson.model.Run)">fireFinalized</A></B>(<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;r)</CODE>
 
 <BR>
@@ -242,6 +250,14 @@ Receives notifications about builds.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called after a build is completed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/listeners/RunListener.html#onDeleted(R)">onDeleted</A></B>(<A HREF="../../../hudson/model/listeners/RunListener.html" title="type parameter in RunListener">R</A>&nbsp;r)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called right before a build is going to be deleted.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -406,6 +422,22 @@ public void <B>onStarted</B>(<A HREF="../../../hudson/model/listeners/RunListene
 </DL>
 <HR>
 
+<A NAME="onDeleted(hudson.model.Run)"><!-- --></A><A NAME="onDeleted(R)"><!-- --></A><H3>
+onDeleted</H3>
+<PRE>
+public void <B>onDeleted</B>(<A HREF="../../../hudson/model/listeners/RunListener.html" title="type parameter in RunListener">R</A>&nbsp;r)</PRE>
+<DL>
+<DD>Called right before a build is going to be deleted.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>r</CODE> - The build.</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="register()"><!-- --></A><H3>
 register</H3>
 <PRE>
@@ -479,6 +511,22 @@ public static void <B>fireStarted</B>(<A HREF="../../../hudson/model/Run.html" t
 fireFinalized</H3>
 <PRE>
 public static void <B>fireFinalized</B>(<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;r)</PRE>
+<DL>
+<DD>Fires the <A HREF="../../../hudson/model/listeners/RunListener.html#onFinalized(R)"><CODE>onFinalized(Run)</CODE></A> event.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="fireDeleted(hudson.model.Run)"><!-- --></A><H3>
+fireDeleted</H3>
+<PRE>
+public static void <B>fireDeleted</B>(<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;r)</PRE>
 <DL>
 <DD>Fires the <A HREF="../../../hudson/model/listeners/RunListener.html#onFinalized(R)"><CODE>onFinalized(Run)</CODE></A> event.
 <P>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-CauseAction (Hudson core 1.287 API)
+CauseAction (Hudson core 1.288 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-27">
+<META NAME="date" CONTENT="2009-03-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CauseAction (Hudson core 1.287 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CauseAction (Hudson core 1.287 API)";
+        parent.document.title="CauseAction (Hudson core 1.288 API)";
     }
 }
 </SCRIPT>
@@ -97,12 +97,12 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.CauseAction</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, <A HREF="../../hudson/model/FoldableAction.html" title="interface in hudson.model">FoldableAction</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></DD>
 </DL>
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1">@ExportedBean
-</FONT>public class <B>CauseAction</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A></DL>
+</FONT>public class <B>CauseAction</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/model/FoldableAction.html" title="interface in hudson.model">FoldableAction</A></DL>
 </PRE>
 
 <P>
@@ -124,6 +124,12 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/CauseAction.html#CauseAction(hudson.model.CauseAction)">CauseAction</A></B>(<A HREF="../../hudson/model/CauseAction.html" title="class in hudson.model">CauseAction</A>&nbsp;ca)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ========== METHOD SUMMARY =========== -->
@@ -136,8 +142,17 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/CauseAction.html#getCause()">getCause</A></B>()</CODE>
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/CauseAction.html#foldIntoExisting(hudson.model.Queue.Task, java.util.List)">foldIntoExisting</A></B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;t,
+                 java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/CauseAction.html#getCauses()">getCauses</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -157,14 +172,6 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the file name of the icon.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/CauseAction.html#getShortDescription()">getShortDescription</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -203,6 +210,14 @@ CauseAction</H3>
 public <B>CauseAction</B>(<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&nbsp;c)</PRE>
 <DL>
 </DL>
+<HR>
+
+<A NAME="CauseAction(hudson.model.CauseAction)"><!-- --></A><H3>
+CauseAction</H3>
+<PRE>
+public <B>CauseAction</B>(<A HREF="../../hudson/model/CauseAction.html" title="class in hudson.model">CauseAction</A>&nbsp;ca)</PRE>
+<DL>
+</DL>
 
 <!-- ============ METHOD DETAIL ========== -->
 
@@ -214,25 +229,11 @@ public <B>CauseAction</B>(<A HREF="../../hudson/model/Cause.html" title="class i
 </TR>
 </TABLE>
 
-<A NAME="getCause()"><!-- --></A><H3>
-getCause</H3>
+<A NAME="getCauses()"><!-- --></A><H3>
+getCauses</H3>
 <PRE>
 <FONT SIZE="-1">@Exported(visibility=2)
-</FONT>public <A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A> <B>getCause</B>()</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getShortDescription()"><!-- --></A><H3>
-getShortDescription</H3>
-<PRE>
-public java.lang.String <B>getShortDescription</B>()</PRE>
+</FONT>public java.util.List&lt;<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&gt; <B>getCauses</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -320,6 +321,21 @@ public java.lang.String <B>getUrlName</B>()</PRE>
 
 <DT><B>Returns:</B><DD>null if this action object doesn't need to be bound to web
       (when you do that, be sure to also return null from <A HREF="../../hudson/model/Action.html#getIconFileName()"><CODE>Action.getIconFileName()</CODE></A>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="foldIntoExisting(hudson.model.Queue.Task, java.util.List)"><!-- --></A><H3>
+foldIntoExisting</H3>
+<PRE>
+public void <B>foldIntoExisting</B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;t,
+                             java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/FoldableAction.html#foldIntoExisting(hudson.model.Queue.Task, java.util.List)">foldIntoExisting</A></CODE> in interface <CODE><A HREF="../../hudson/model/FoldableAction.html" title="interface in hudson.model">FoldableAction</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

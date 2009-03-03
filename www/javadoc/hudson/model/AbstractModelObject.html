@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractModelObject (Hudson core 1.287 API)
+AbstractModelObject (Hudson core 1.288 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-27">
+<META NAME="date" CONTENT="2009-03-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractModelObject (Hudson core 1.287 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractModelObject (Hudson core 1.287 API)";
+        parent.document.title="AbstractModelObject (Hudson core 1.288 API)";
     }
 }
 </SCRIPT>
@@ -220,6 +220,17 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, boolean)">sendError</A></B>(java.lang.String&nbsp;message,
+          org.kohsuke.stapler.StaplerRequest&nbsp;req,
+          org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+          boolean&nbsp;pre)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -334,6 +345,28 @@ protected final void <B>sendError</B>(java.lang.String&nbsp;message,
 </DD>
 <DD><DL>
 
+<DT><B>Throws:</B>
+<DD><CODE>javax.servlet.ServletException</CODE>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, boolean)"><!-- --></A><H3>
+sendError</H3>
+<PRE>
+protected final void <B>sendError</B>(java.lang.String&nbsp;message,
+                               org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                               org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                               boolean&nbsp;pre)
+                        throws javax.servlet.ServletException,
+                               java.io.IOException</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pre</CODE> - If true, the message is put in a PRE tag.
 <DT><B>Throws:</B>
 <DD><CODE>javax.servlet.ServletException</CODE>
 <DD><CODE>java.io.IOException</CODE></DL>

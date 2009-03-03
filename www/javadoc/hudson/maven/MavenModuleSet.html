@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MavenModuleSet (Hudson core 1.287 API)
+MavenModuleSet (Hudson core 1.288 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-27">
+<META NAME="date" CONTENT="2009-03-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenModuleSet (Hudson core 1.287 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenModuleSet (Hudson core 1.287 API)";
+        parent.document.title="MavenModuleSet (Hudson core 1.288 API)";
     }
 }
 </SCRIPT>
@@ -583,6 +583,30 @@ Group of <A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.ma
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenModuleSet.html#setGoals(java.lang.String)">setGoals</A></B>(java.lang.String&nbsp;goals)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenModuleSet.html#setMaven(java.lang.String)">setMaven</A></B>(java.lang.String&nbsp;mavenName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenModuleSet.html#setRootPOM(java.lang.String)">setRootPOM</A></B>(java.lang.String&nbsp;rootPOM)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/maven/MavenModuleSet.html#submit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">submit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
        org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
@@ -650,7 +674,7 @@ Group of <A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.ma
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/AbstractModelObject.html#getSearch()">getSearch</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchIndex()">getSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchName()">getSearchName</A>, <A HREF="../../hudson/model/AbstractModelObject.html#requirePOST()">requirePOST</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/AbstractModelObject.html#getSearch()">getSearch</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchIndex()">getSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchName()">getSearchName</A>, <A HREF="../../hudson/model/AbstractModelObject.html#requirePOST()">requirePOST</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, boolean)">sendError</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -1356,6 +1380,20 @@ public java.lang.String <B>getRootPOM</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="setRootPOM(java.lang.String)"><!-- --></A><H3>
+setRootPOM</H3>
+<PRE>
+public void <B>setRootPOM</B>(java.lang.String&nbsp;rootPOM)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="asProject()"><!-- --></A><H3>
 asProject</H3>
 <PRE>
@@ -1385,6 +1423,20 @@ public java.lang.String <B>getGoals</B>()</PRE>
 <DL>
 <DD>Gets the list of goals to execute.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setGoals(java.lang.String)"><!-- --></A><H3>
+setGoals</H3>
+<PRE>
+public void <B>setGoals</B>(java.lang.String&nbsp;goals)</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>
@@ -1452,6 +1504,20 @@ public <A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in
 <DD>Gets the Maven to invoke.
  If null, we pick any random Maven installation.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setMaven(java.lang.String)"><!-- --></A><H3>
+setMaven</H3>
+<PRE>
+public void <B>setMaven</B>(java.lang.String&nbsp;mavenName)</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

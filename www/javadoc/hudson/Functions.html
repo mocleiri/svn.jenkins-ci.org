@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.287 API)
+Functions (Hudson core 1.288 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-27">
+<META NAME="date" CONTENT="2009-03-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.287 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.287 API)";
+        parent.document.title="Functions (Hudson core 1.288 API)";
     }
 }
 </SCRIPT>
@@ -835,6 +835,15 @@ Utility functions used in views.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;One nbsp per 10 pixels in given size, which may be a plain number or "NxN"
  (like an iconSize).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#prepend(java.lang.String, java.lang.String)">prepend</A></B>(java.lang.String&nbsp;prefix,
+        java.lang.String&nbsp;body)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepend a prefix only when there's the specified body.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2128,6 +2137,20 @@ public org.apache.commons.jelly.Tag <B>findAncestorTag</B>(java.util.Map&nbsp;at
 <DL>
 <DD>Used to assist form databinding. Given the "attrs" object,
  find the ancestor tag file of the given name.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="prepend(java.lang.String, java.lang.String)"><!-- --></A><H3>
+prepend</H3>
+<PRE>
+public java.lang.String <B>prepend</B>(java.lang.String&nbsp;prefix,
+                                java.lang.String&nbsp;body)</PRE>
+<DL>
+<DD>Prepend a prefix only when there's the specified body.
 <P>
 <DD><DL>
 </DL>

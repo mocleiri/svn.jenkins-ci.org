@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Interface hudson.model.Action (Hudson core 1.287 API)
+Uses of Interface hudson.model.Action (Hudson core 1.288 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-27">
+<META NAME="date" CONTENT="2009-03-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.Action (Hudson core 1.287 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.Action (Hudson core 1.287 API)";
+        parent.document.title="Uses of Interface hudson.model.Action (Hudson core 1.288 API)";
     }
 }
 </SCRIPT>
@@ -501,6 +501,14 @@ Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;interface</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/FoldableAction.html" title="interface in hudson.model">FoldableAction</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;interface</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/HealthReportingAction.html" title="interface in hudson.model">HealthReportingAction</A></B></CODE>
 
 <BR>
@@ -802,13 +810,21 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#add(hudson.model.Queue.Task, int, java.util.List)">add</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
-    int&nbsp;quietPeriod,
-    java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>FoldableAction.</B><B><A HREF="../../../hudson/model/FoldableAction.html#foldIntoExisting(hudson.model.Queue.Task, java.util.List)">foldIntoExisting</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;t,
+                 java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules an execution of a task.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>CauseAction.</B><B><A HREF="../../../hudson/model/CauseAction.html#foldIntoExisting(hudson.model.Queue.Task, java.util.List)">foldIntoExisting</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;t,
+                 java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

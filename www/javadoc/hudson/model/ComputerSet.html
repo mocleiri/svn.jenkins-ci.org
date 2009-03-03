@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ComputerSet (Hudson core 1.287 API)
+ComputerSet (Hudson core 1.288 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-02-27">
+<META NAME="date" CONTENT="2009-03-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ComputerSet (Hudson core 1.287 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ComputerSet (Hudson core 1.287 API)";
+        parent.document.title="ComputerSet (Hudson core 1.288 API)";
     }
 }
 </SCRIPT>
@@ -157,6 +157,16 @@ Serves as the top of <A HREF="../../hudson/model/Computer.html" title="class in 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ComputerSet.html#doCheckName(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doCheckName</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+            org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+            java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Makes sure that the given name is good as a slave name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ComputerSet.html#doCreateItem(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String, java.lang.String)">doCreateItem</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
              org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
              java.lang.String&nbsp;name,
@@ -283,7 +293,7 @@ Serves as the top of <A HREF="../../hudson/model/Computer.html" title="class in 
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/AbstractModelObject.html#getSearch()">getSearch</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchIndex()">getSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchName()">getSearchName</A>, <A HREF="../../hudson/model/AbstractModelObject.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#requirePOST()">requirePOST</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/AbstractModelObject.html#getSearch()">getSearch</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchIndex()">getSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchName()">getSearchName</A>, <A HREF="../../hudson/model/AbstractModelObject.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#requirePOST()">requirePOST</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, boolean)">sendError</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -521,6 +531,27 @@ public void <B>doDoCreateItem</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                            javax.servlet.ServletException</PRE>
 <DL>
 <DD>Really creates a new slave.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doCheckName(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
+doCheckName</H3>
+<PRE>
+public void <B>doCheckName</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                        org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                        <FONT SIZE="-1">@QueryParameter</FONT>
+                        java.lang.String&nbsp;value)
+                 throws java.io.IOException,
+                        javax.servlet.ServletException</PRE>
+<DL>
+<DD>Makes sure that the given name is good as a slave name.
 <P>
 <DD><DL>
 
