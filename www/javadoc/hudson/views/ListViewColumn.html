@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ListViewColumn (Hudson core 1.288 API)
+ListViewColumn (Hudson core 1.289 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-03">
+<META NAME="date" CONTENT="2009-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ListViewColumn (Hudson core 1.288 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ListViewColumn (Hudson core 1.288 API)";
+        parent.document.title="ListViewColumn (Hudson core 1.289 API)";
     }
 }
 </SCRIPT>
@@ -56,8 +56,8 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;PREV CLASS&nbsp;
-&nbsp;NEXT CLASS</FONT></TD>
+&nbsp;<A HREF="../../hudson/views/LastSuccessColumn.DescriptorImpl.html" title="class in hudson.views"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/views/StatusColumn.html" title="class in hudson.views"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/views/ListViewColumn.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ListViewColumn.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -99,6 +99,9 @@ java.lang.Object
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</DD>
 </DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/views/BuildButtonColumn.html" title="class in hudson.views">BuildButtonColumn</A>, <A HREF="../../hudson/views/JobColumn.html" title="class in hudson.views">JobColumn</A>, <A HREF="../../hudson/views/LastDurationColumn.html" title="class in hudson.views">LastDurationColumn</A>, <A HREF="../../hudson/views/LastFailureColumn.html" title="class in hudson.views">LastFailureColumn</A>, <A HREF="../../hudson/views/LastSuccessColumn.html" title="class in hudson.views">LastSuccessColumn</A>, <A HREF="../../hudson/views/StatusColumn.html" title="class in hudson.views">StatusColumn</A>, <A HREF="../../hudson/views/WeatherColumn.html" title="class in hudson.views">WeatherColumn</A></DD>
+</DL>
 <HR>
 <DL>
 <DT><PRE>public abstract class <B>ListViewColumn</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</DL>
@@ -112,7 +115,9 @@ Extension point for adding a column to <A HREF="../../hudson/model/ListView.html
  is called for each cell of this column. The <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> object
  is passed in the "job" variable. The view should render
  the &lt;td> tag.
-
+ <p>
+ This object may have an additional <tt>columHeader.jelly</tt>. The default ColmnHeader
+ will render ColumnCaption.
  <p>
  For now, <A HREF="../../hudson/model/ListView.html" title="class in hudson.model"><CODE>ListView</CODE></A> doesn't allow <A HREF="../../hudson/views/ListViewColumn.html" title="class in hudson.views"><CODE>ListViewColumn</CODE></A>s to be configured
  (instead it just shows all the columns available in <A HREF="../../hudson/views/ListViewColumn.html#all()"><CODE>all()</CODE></A>),
@@ -342,8 +347,8 @@ public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class i
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;PREV CLASS&nbsp;
-&nbsp;NEXT CLASS</FONT></TD>
+&nbsp;<A HREF="../../hudson/views/LastSuccessColumn.DescriptorImpl.html" title="class in hudson.views"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/views/StatusColumn.html" title="class in hudson.views"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/views/ListViewColumn.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ListViewColumn.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
