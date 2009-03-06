@@ -113,7 +113,7 @@ public class HudsonJobNode extends AbstractNode {
         htmlDisplayName = job.getDisplayName();
         color = job.getColor();
         setShortDescription(job.getUrl());
-        
+
         // Decorate node
         switch(color) {
         case red:
@@ -144,6 +144,15 @@ public class HudsonJobNode extends AbstractNode {
         case grey_anime:
             setIconBaseWithExtension(ICON_BASE_GREY_RUN);
             htmlDisplayName = "<b>"+job.getDisplayName()+"</b>";
+            break;
+        case disabled:
+            setIconBaseWithExtension(ICON_BASE_GREY);
+            break;
+        case aborted:
+            setIconBaseWithExtension(ICON_BASE_GREY);
+            break;
+        default:
+            setIconBaseWithExtension(ICON_BASE_GREY);
             break;
         }
         
