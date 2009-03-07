@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.289 API)
+Deprecated List (Hudson core 1.290 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-05">
+<META NAME="date" CONTENT="2009-03-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.289 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.289 API)";
+        parent.document.title="Deprecated List (Hudson core 1.290 API)";
     }
 }
 </SCRIPT>
@@ -434,6 +434,12 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <code>getJobListeners().add(l)</code> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Project.html#addPublisher(hudson.tasks.Publisher)">hudson.model.Project.addPublisher(Publisher)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.290
+      Use <code>getPublishersList().add(x)</code></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#adminCheck()">hudson.model.Hudson.adminCheck()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/Node.html#checkPermission(hudson.security.Permission)"><CODE>Node.checkPermission(Permission)</CODE></A></I>&nbsp;</TD>
@@ -603,6 +609,12 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/tasks/BuildStepCompatibilityLayer.html#getProjectAction(hudson.model.AbstractProject)"><CODE>BuildStepCompatibilityLayer.getProjectAction(AbstractProject)</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/CauseAction.html#getShortDescription()">hudson.model.CauseAction.getShortDescription()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.288
+      but left here for backward compatibility.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#getSlave(java.lang.String)">hudson.model.Hudson.getSlave(String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/Hudson.html#getNode(java.lang.String)"><CODE>Hudson.getNode(String)</CODE></A>. Since 1.252.</I>&nbsp;</TD>
@@ -721,6 +733,12 @@ function windowTitle()
 <TD><A HREF="hudson/model/Hudson.html#removeListener(hudson.model.listeners.JobListener)">hudson.model.Hudson.removeListener(JobListener)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <code>getJobListeners().remove(l)</code> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Project.html#removePublisher(hudson.model.Descriptor)">hudson.model.Project.removePublisher(Descriptor<Publisher>)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.290
+      Use <code>getPublishersList().remove(x)</code></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/AbstractProject.html#scheduleBuild()">hudson.model.AbstractProject.scheduleBuild()</A>
@@ -865,6 +883,12 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Don't extend from <A HREF="hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A> directly. Instead, choose <A HREF="hudson/tasks/Recorder.html" title="class in hudson.tasks"><CODE>Recorder</CODE></A> or <A HREF="hudson/tasks/Notifier.html" title="class in hudson.tasks"><CODE>Notifier</CODE></A>
       as your base class.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/maven/RedeployPublisher.DescriptorImpl.html#RedeployPublisher.DescriptorImpl(java.lang.Class)">hudson.maven.RedeployPublisher.DescriptorImpl(Class<? extends Publisher>)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.290
+      Use the default constructor.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, int, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)">hudson.model.Slave(String, String, String, int, Node.Mode, String, ComputerLauncher, RetentionStrategy)</A>

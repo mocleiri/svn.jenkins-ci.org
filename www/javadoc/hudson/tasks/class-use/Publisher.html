@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.tasks.Publisher (Hudson core 1.289 API)
+Uses of Class hudson.tasks.Publisher (Hudson core 1.290 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-05">
+<META NAME="date" CONTENT="2009-03-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.tasks.Publisher (Hudson core 1.289 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.tasks.Publisher (Hudson core 1.289 API)";
+        parent.document.title="Uses of Class hudson.tasks.Publisher (Hudson core 1.290 API)";
     }
 }
 </SCRIPT>
@@ -221,6 +221,22 @@ Uses of <A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.ta
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>MatrixConfiguration.</B><B><A HREF="../../../hudson/matrix/MatrixConfiguration.html#getPublishersList()">getPublishersList</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>MatrixConfiguration.</B><B><A HREF="../../../hudson/matrix/MatrixConfiguration.html#getPublishersList()">getPublishersList</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;</CODE></FONT></TD>
 <TD><CODE><B>MatrixProject.</B><B><A HREF="../../../hudson/matrix/MatrixProject.html#getPublishersList()">getPublishersList</A></B>()</CODE>
 
 <BR>
@@ -360,6 +376,21 @@ Uses of <A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.ta
 </TABLE>
 &nbsp;
 <P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructor parameters in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A> with type arguments of type <A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/maven/RedeployPublisher.DescriptorImpl.html#RedeployPublisher.DescriptorImpl(java.lang.Class)">RedeployPublisher.DescriptorImpl</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&nbsp;clazz)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.290
+      Use the default constructor.</I></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="hudson.model"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -460,7 +491,8 @@ Uses of <A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.ta
 <TD><CODE><B>Project.</B><B><A HREF="../../../hudson/model/Project.html#addPublisher(hudson.tasks.Publisher)">addPublisher</A></B>(<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&nbsp;buildStep)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a new <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> to this <A HREF="../../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> and saves the configuration.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.290
+      Use <code>getPublishersList().add(x)</code></I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -484,7 +516,8 @@ Uses of <A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.ta
 <TD><CODE><B>Project.</B><B><A HREF="../../../hudson/model/Project.html#removePublisher(hudson.model.Descriptor)">removePublisher</A></B>(<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&nbsp;descriptor)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes a publisher from this project, if it's active.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.290
+      Use <code>getPublishersList().remove(x)</code></I></TD>
 </TR>
 </TABLE>
 &nbsp;

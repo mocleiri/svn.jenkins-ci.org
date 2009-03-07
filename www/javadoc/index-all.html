@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.289 API)
+Index (Hudson core 1.290 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-05">
+<META NAME="date" CONTENT="2009-03-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.289 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.289 API)";
+        parent.document.title="Index (Hudson core 1.290 API)";
     }
 }
 </SCRIPT>
@@ -476,7 +476,8 @@ Method in interface hudson.util.spring.<A HREF="./hudson/util/spring/BeanConfigu
 <DD>Adds a property value to this bean
 <DT><A HREF="./hudson/model/Project.html#addPublisher(hudson.tasks.Publisher)"><B>addPublisher(Publisher)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Project.html" title="class in hudson.model">Project</A>
-<DD>Adds a new <A HREF="./hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> to this <A HREF="./hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> and saves the configuration.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.290
+      Use <code>getPublishersList().add(x)</code></I>
 <DT><A HREF="./hudson/util/ArgumentListBuilder.html#addQuoted(java.lang.String)"><B>addQuoted(String)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A>
 <DD>Adds an argument by quoting it.
@@ -5627,6 +5628,9 @@ Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixProject.html" title
 <DT><A HREF="./hudson/model/Project.html#getBuilders()"><B>getBuilders()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Project.html" title="class in hudson.model">Project</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/matrix/MatrixConfiguration.html#getBuildersList()"><B>getBuildersList()</B></A> - 
+Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/matrix/MatrixProject.html#getBuildersList()"><B>getBuildersList()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixProject.html" title="class in hudson.matrix">MatrixProject</A>
 <DD>&nbsp;
@@ -6273,6 +6277,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/Ant.html" title="class in h
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/Builder.html#getDescriptor()"><B>getDescriptor()</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/tasks/BuildWrapper.html#getDescriptor()"><B>getDescriptor()</B></A> - 
+Method in class hudson.tasks.<A HREF="./hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/LogRotator.html#getDescriptor()"><B>getDescriptor()</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/LogRotator.html" title="class in hudson.tasks">LogRotator</A>
@@ -8872,6 +8879,9 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" title=
 <DT><A HREF="./hudson/model/Project.html#getPublishers()"><B>getPublishers()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Project.html" title="class in hudson.model">Project</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/matrix/MatrixConfiguration.html#getPublishersList()"><B>getPublishersList()</B></A> - 
+Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/matrix/MatrixProject.html#getPublishersList()"><B>getPublishersList()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixProject.html" title="class in hudson.matrix">MatrixProject</A>
 <DD>&nbsp;
@@ -9320,6 +9330,10 @@ Method in class hudson.model.<A HREF="./hudson/model/Cause.UpstreamCause.html" t
 <DT><A HREF="./hudson/model/Cause.UserCause.html#getShortDescription()"><B>getShortDescription()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Cause.UserCause.html" title="class in hudson.model">Cause.UserCause</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/CauseAction.html#getShortDescription()"><B>getShortDescription()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/CauseAction.html" title="class in hudson.model">CauseAction</A>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.288
+      but left here for backward compatibility.</I>
 <DT><A HREF="./hudson/triggers/SCMTrigger.SCMTriggerCause.html#getShortDescription()"><B>getShortDescription()</B></A> - 
 Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.SCMTriggerCause.html" title="class in hudson.triggers">SCMTrigger.SCMTriggerCause</A>
 <DD>&nbsp;
@@ -14183,6 +14197,9 @@ Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenAr
 <DT><A HREF="./hudson/maven/reporters/MavenFingerprinter.html#postBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)"><B>postBuild(MavenBuildProxy, MavenProject, BuildListener)</B></A> - 
 Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenFingerprinter.html" title="class in hudson.maven.reporters">MavenFingerprinter</A>
 <DD>Sends the collected fingerprints over to the master and record them.
+<DT><A HREF="./hudson/scm/SubversionSCM.DescriptorImpl.html#postCredential(java.lang.String, java.lang.String, java.lang.String, java.io.File, java.io.PrintWriter)"><B>postCredential(String, String, String, File, PrintWriter)</B></A> - 
+Method in class hudson.scm.<A HREF="./hudson/scm/SubversionSCM.DescriptorImpl.html" title="class in hudson.scm">SubversionSCM.DescriptorImpl</A>
+<DD>Submits the authentication info.
 <DT><A HREF="./hudson/maven/MavenReporter.html#postExecute(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MojoInfo, hudson.model.BuildListener, java.lang.Throwable)"><B>postExecute(MavenBuildProxy, MavenProject, MojoInfo, BuildListener, Throwable)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>
 <DD>Called after execution of a single mojo.
@@ -14635,6 +14652,10 @@ Constructor for class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.htm
 <DT><A HREF="./hudson/maven/RedeployPublisher.DescriptorImpl.html" title="class in hudson.maven"><B>RedeployPublisher.DescriptorImpl</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>&nbsp;<DT><A HREF="./hudson/maven/RedeployPublisher.DescriptorImpl.html#RedeployPublisher.DescriptorImpl()"><B>RedeployPublisher.DescriptorImpl()</B></A> - 
 Constructor for class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.DescriptorImpl.html" title="class in hudson.maven">RedeployPublisher.DescriptorImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/maven/RedeployPublisher.DescriptorImpl.html#RedeployPublisher.DescriptorImpl(java.lang.Class)"><B>RedeployPublisher.DescriptorImpl(Class&lt;? extends Publisher&gt;)</B></A> - 
+Constructor for class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.DescriptorImpl.html" title="class in hudson.maven">RedeployPublisher.DescriptorImpl</A>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.290
+      Use the default constructor.</I>
 <DT><A HREF="./hudson/maven/Messages.html#RedeployPublisher_getDisplayName()"><B>RedeployPublisher_getDisplayName()</B></A> - 
 Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
 <DD>Deploy artifacts to Maven repository
@@ -14882,7 +14903,8 @@ Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in h
 <DD>Removes the property of the given type.
 <DT><A HREF="./hudson/model/Project.html#removePublisher(hudson.model.Descriptor)"><B>removePublisher(Descriptor&lt;Publisher&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Project.html" title="class in hudson.model">Project</A>
-<DD>Removes a publisher from this project, if it's active.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.290
+      Use <code>getPublishersList().remove(x)</code></I>
 <DT><A HREF="./hudson/model/AbstractProject.html#removeRun(R)"><B>removeRun(R)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>&nbsp;

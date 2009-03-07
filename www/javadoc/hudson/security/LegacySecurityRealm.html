@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-LegacySecurityRealm (Hudson core 1.289 API)
+LegacySecurityRealm (Hudson core 1.290 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-05">
+<META NAME="date" CONTENT="2009-03-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LegacySecurityRealm (Hudson core 1.289 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LegacySecurityRealm (Hudson core 1.289 API)";
+        parent.document.title="LegacySecurityRealm (Hudson core 1.290 API)";
     }
 }
 </SCRIPT>
@@ -383,7 +383,7 @@ public java.lang.String <B>getLoginUrl</B>()</PRE>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/security/SecurityRealm.html#getLoginUrl()">SecurityRealm</A></CODE></B></DD>
 <DD>Gets the target URL of the "login" link.
  There's no need to override this, except for <A HREF="../../hudson/security/LegacySecurityRealm.html" title="class in hudson.security"><CODE>LegacySecurityRealm</CODE></A>.
- On legacy implementation this should point to "longinEntry", which
+ On legacy implementation this should point to <code>loginEntry</code>, which
  is protected by <tt>web.xml</tt>, so that the user can be eventually authenticated
  by the container.
 <P>

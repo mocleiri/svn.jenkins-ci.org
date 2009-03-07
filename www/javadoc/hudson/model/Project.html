@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Project (Hudson core 1.289 API)
+Project (Hudson core 1.290 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-05">
+<META NAME="date" CONTENT="2009-03-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Project (Hudson core 1.289 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Project (Hudson core 1.289 API)";
+        parent.document.title="Project (Hudson core 1.290 API)";
     }
 }
 </SCRIPT>
@@ -220,7 +220,8 @@ Buildable software project.
 <TD><CODE><B><A HREF="../../hudson/model/Project.html#addPublisher(hudson.tasks.Publisher)">addPublisher</A></B>(<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&nbsp;buildStep)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a new <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> to this <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> and saves the configuration.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.290
+      Use <code>getPublishersList().add(x)</code></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -326,7 +327,8 @@ Buildable software project.
 <TD><CODE><B><A HREF="../../hudson/model/Project.html#removePublisher(hudson.model.Descriptor)">removePublisher</A></B>(<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&nbsp;descriptor)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes a publisher from this project, if it's active.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.290
+      Use <code>getPublishersList().remove(x)</code></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -662,6 +664,9 @@ addPublisher</H3>
 public void <B>addPublisher</B>(<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&nbsp;buildStep)
                   throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.290
+      Use <code>getPublishersList().add(x)</code></I>
+<P>
 <DD>Adds a new <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> to this <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> and saves the configuration.
 <P>
 <DD><DL>
@@ -681,6 +686,9 @@ removePublisher</H3>
 public void <B>removePublisher</B>(<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&nbsp;descriptor)
                      throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.290
+      Use <code>getPublishersList().remove(x)</code></I>
+<P>
 <DD>Removes a publisher from this project, if it's active.
 <P>
 <DD><DL>

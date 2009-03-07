@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SubversionSCM (Hudson core 1.289 API)
+SubversionSCM (Hudson core 1.290 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-05">
+<META NAME="date" CONTENT="2009-03-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SubversionSCM (Hudson core 1.289 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionSCM (Hudson core 1.289 API)";
+        parent.document.title="SubversionSCM (Hudson core 1.290 API)";
     }
 }
 </SCRIPT>
@@ -110,7 +110,7 @@ Subversion SCM.
 
  <h2>Plugin Developer Notes</h2>
  <p>
- Plugins that interact with Subversion can use <CODE>DescriptorImpl#createAuthenticationProvider()</CODE>
+ Plugins that interact with Subversion can use <A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#createAuthenticationProvider()"><CODE>SubversionSCM.DescriptorImpl.createAuthenticationProvider()</CODE></A>
  so that it can use the credentials (username, password, etc.) that the user entered for Hudson.
  See the javadoc of this method for the precautions you need to take if you run Subversion operations
  remotely on slaves.
@@ -725,7 +725,7 @@ public static org.tmatesoft.svn.core.wc.SVNClientManager <B>createSvnClientManag
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>authProvider</CODE> - The value obtained from <CODE>DescriptorImpl#createAuthenticationProvider()</CODE>.
+<DT><B>Parameters:</B><DD><CODE>authProvider</CODE> - The value obtained from <A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#createAuthenticationProvider()"><CODE>SubversionSCM.DescriptorImpl.createAuthenticationProvider()</CODE></A>.
       If the operation runs on slaves,
       (and properly remoted, if the svn operations run on slaves.)</DL>
 </DD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SubversionSCM.DescriptorImpl (Hudson core 1.289 API)
+SubversionSCM.DescriptorImpl (Hudson core 1.290 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-05">
+<META NAME="date" CONTENT="2009-03-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SubversionSCM.DescriptorImpl (Hudson core 1.289 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionSCM.DescriptorImpl (Hudson core 1.289 API)";
+        parent.document.title="SubversionSCM.DescriptorImpl (Hudson core 1.290 API)";
     }
 }
 </SCRIPT>
@@ -282,6 +282,18 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a configured instance from the submitted form.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#postCredential(java.lang.String, java.lang.String, java.lang.String, java.io.File, java.io.PrintWriter)">postCredential</A></B>(java.lang.String&nbsp;url,
+               java.lang.String&nbsp;username,
+               java.lang.String&nbsp;password,
+               java.io.File&nbsp;keyFile,
+               java.io.PrintWriter&nbsp;logWriter)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Submits the authentication info.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.scm.SCMDescriptor"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -428,14 +440,36 @@ public void <B>doPostCredential</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                              javax.servlet.ServletException</PRE>
 <DL>
 <DD>Submits the authentication info.
-
- This code is fairly ugly because of the way SVNKit handles credentials.
 <P>
 <DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="postCredential(java.lang.String, java.lang.String, java.lang.String, java.io.File, java.io.PrintWriter)"><!-- --></A><H3>
+postCredential</H3>
+<PRE>
+public void <B>postCredential</B>(java.lang.String&nbsp;url,
+                           java.lang.String&nbsp;username,
+                           java.lang.String&nbsp;password,
+                           java.io.File&nbsp;keyFile,
+                           java.io.PrintWriter&nbsp;logWriter)
+                    throws org.tmatesoft.svn.core.SVNException,
+                           java.io.IOException</PRE>
+<DL>
+<DD>Submits the authentication info.
+
+ This code is fairly ugly because of the way SVNKit handles credentials.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.tmatesoft.svn.core.SVNException</CODE>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>
