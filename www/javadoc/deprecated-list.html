@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.290 API)
+Deprecated List (Hudson core 1.291 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-07">
+<META NAME="date" CONTENT="2009-03-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.290 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.290 API)";
+        parent.document.title="Deprecated List (Hudson core 1.291 API)";
     }
 }
 </SCRIPT>
@@ -604,6 +604,11 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I></I>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/Publisher.html#getProjectAction(hudson.model.Project)">hudson.tasks.Publisher.getProjectAction(Project)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/BuildStepCompatibilityLayer.html#getProjectAction(hudson.model.Project)">hudson.tasks.BuildStepCompatibilityLayer.getProjectAction(Project<?, ?>)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/tasks/BuildStepCompatibilityLayer.html#getProjectAction(hudson.model.AbstractProject)"><CODE>BuildStepCompatibilityLayer.getProjectAction(AbstractProject)</CODE></A> instead.</I>&nbsp;</TD>
@@ -701,6 +706,11 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/tasks/BuildStepCompatibilityLayer.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>BuildStepCompatibilityLayer.prebuild(AbstractBuild, BuildListener)</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/Publisher.html#prebuild(hudson.model.Build, hudson.model.BuildListener)">hudson.tasks.Publisher.prebuild(Build, BuildListener)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/util/DescribableList.html#rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List, java.lang.String)">hudson.util.DescribableList.rebuild(StaplerRequest, JSONObject, List<? extends Descriptor<T>>, String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.271
@@ -764,11 +774,6 @@ function windowTitle()
 <TD><A HREF="hudson/matrix/MatrixConfiguration.html#scheduleBuild(hudson.model.ParametersAction)">hudson.matrix.MatrixConfiguration.scheduleBuild(ParametersAction)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/matrix/MatrixConfiguration.html#scheduleBuild(hudson.model.ParametersAction, hudson.model.Cause)"><CODE>MatrixConfiguration.scheduleBuild(ParametersAction, Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/model/AbstractProject.html#scheduleBuild2(int)">hudson.model.AbstractProject.scheduleBuild2(int)</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/AbstractProject.html#scheduleBuild2(int, hudson.model.Cause)"><CODE>AbstractProject.scheduleBuild2(int, Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/matrix/MatrixConfiguration.html#setJDK(hudson.model.JDK)">hudson.matrix.MatrixConfiguration.setJDK(JDK)</A>

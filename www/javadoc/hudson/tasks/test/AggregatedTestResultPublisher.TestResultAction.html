@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AggregatedTestResultPublisher.TestResultAction (Hudson core 1.290 API)
+AggregatedTestResultPublisher.TestResultAction (Hudson core 1.291 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-07">
+<META NAME="date" CONTENT="2009-03-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AggregatedTestResultPublisher.TestResultAction (Hudson core 1.290 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AggregatedTestResultPublisher.TestResultAction (Hudson core 1.290 API)";
+        parent.document.title="AggregatedTestResultPublisher.TestResultAction (Hudson core 1.291 API)";
     }
 }
 </SCRIPT>
@@ -207,6 +207,14 @@ Action that serves the aggregated record.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#getHasFingerprintAction()">getHasFingerprintAction</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test">AbstractTestResultAction</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#getIndividuals()">getIndividuals</A></B>()</CODE>
 
@@ -220,6 +228,15 @@ Action that serves the aggregated record.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the jobs to be monitored.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#getNoFingerprints()">getNoFingerprints</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the downstream projects that have available test results, but 
+ do not appear to have fingerprinting enabled.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -387,6 +404,31 @@ public java.util.List&lt;<A HREF="../../../hudson/model/AbstractProject.html" ti
 <DD>Gets the downstream projects that haven't run yet, but
  expected to produce test results.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNoFingerprints()"><!-- --></A><H3>
+getNoFingerprints</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt; <B>getNoFingerprints</B>()</PRE>
+<DL>
+<DD>Gets the downstream projects that have available test results, but 
+ do not appear to have fingerprinting enabled.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHasFingerprintAction()"><!-- --></A><H3>
+getHasFingerprintAction</H3>
+<PRE>
+public boolean <B>getHasFingerprintAction</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

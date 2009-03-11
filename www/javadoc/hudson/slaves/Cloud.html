@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Cloud (Hudson core 1.290 API)
+Cloud (Hudson core 1.291 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-07">
+<META NAME="date" CONTENT="2009-03-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Cloud (Hudson core 1.290 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Cloud (Hudson core 1.290 API)";
+        parent.document.title="Cloud (Hudson core 1.291 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../hudson/slaves/Channels.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/slaves/CommandLauncher.html" title="class in hudson.slaves"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/slaves/Cloud.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -481,7 +481,9 @@ public abstract java.util.Collection&lt;<A HREF="../../hudson/slaves/NodeProvisi
 <DT><B>Parameters:</B><DD><CODE>label</CODE> - The label that indicates what kind of nodes are needed now.
       Newly launched node needs to have this label.
       Only those <A HREF="../../hudson/model/Label.html" title="class in hudson.model"><CODE>Label</CODE></A>s that this instance returned true
-      from the <A HREF="../../hudson/slaves/Cloud.html#canProvision(hudson.model.Label)"><CODE>canProvision(Label)</CODE></A> method will be passed here.<DD><CODE>excessWorkload</CODE> - Number of total executors needed to meet the current demand.
+      from the <A HREF="../../hudson/slaves/Cloud.html#canProvision(hudson.model.Label)"><CODE>canProvision(Label)</CODE></A> method will be passed here.
+      This parameter is null if Hudson needs to provision a new <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>
+      for jobs that don't have any tie to any label.<DD><CODE>excessWorkload</CODE> - Number of total executors needed to meet the current demand.
       Always >= 1. For example, if this is 3, the implementation
       should launch 3 slaves with 1 executor each, or 1 slave with
       3 executors, etc.
@@ -574,7 +576,7 @@ public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class i
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../hudson/slaves/Channels.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/slaves/CommandLauncher.html" title="class in hudson.slaves"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/slaves/Cloud.html" target="_top"><B>FRAMES</B></A>  &nbsp;

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-BuildListener (Hudson core 1.290 API)
+BuildListener (Hudson core 1.291 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-07">
+<META NAME="date" CONTENT="2009-03-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildListener (Hudson core 1.290 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildListener (Hudson core 1.290 API)";
+        parent.document.title="BuildListener (Hudson core 1.291 API)";
     }
 }
 </SCRIPT>
@@ -153,7 +153,7 @@ Receives events that happen during a build.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/BuildListener.html#started()">started</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/BuildListener.html#started(java.util.List)">started</A></B>(java.util.List&lt;<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&gt;&nbsp;causes)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called when a build is started.</TD>
@@ -181,10 +181,10 @@ Receives events that happen during a build.
 </TR>
 </TABLE>
 
-<A NAME="started()"><!-- --></A><H3>
+<A NAME="started(java.util.List)"><!-- --></A><H3>
 started</H3>
 <PRE>
-void <B>started</B>()</PRE>
+void <B>started</B>(java.util.List&lt;<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&gt;&nbsp;causes)</PRE>
 <DL>
 <DD>Called when a build is started.
 <P>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Launcher (Hudson core 1.290 API)
+Launcher (Hudson core 1.291 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-07">
+<META NAME="date" CONTENT="2009-03-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Launcher (Hudson core 1.290 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Launcher (Hudson core 1.290 API)";
+        parent.document.title="Launcher (Hudson core 1.291 API)";
     }
 }
 </SCRIPT>
@@ -230,6 +230,15 @@ Starts a process.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>See the javadoc for why this is inherently unreliable. If you are trying to
       figure out the current <A HREF="../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> from within a build, use
       <A HREF="../hudson/model/Computer.html#currentComputer()"><CODE>Computer.currentComputer()</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#getListener()">getListener</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> that this launcher uses to
+ report the commands that it's executing.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -517,6 +526,20 @@ public <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting
 <DT><B>Returns:</B><DD>null if the target node is not configured to support this.
       this is a transitional measure.
       Note that a launcher for the master is always non-null.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getListener()"><!-- --></A><H3>
+getListener</H3>
+<PRE>
+public <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A> <B>getListener</B>()</PRE>
+<DL>
+<DD>Gets the <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> that this launcher uses to
+ report the commands that it's executing.
+<P>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

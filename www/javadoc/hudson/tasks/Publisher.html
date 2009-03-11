@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Publisher (Hudson core 1.290 API)
+Publisher (Hudson core 1.291 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-07">
+<META NAME="date" CONTENT="2009-03-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Publisher (Hudson core 1.290 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Publisher (Hudson core 1.290 API)";
+        parent.document.title="Publisher (Hudson core 1.291 API)";
     }
 }
 </SCRIPT>
@@ -231,7 +231,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/tasks/Publisher.html#getProjectAction(hudson.model.Project)">getProjectAction</A></B>(<A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project</A>&nbsp;project)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default implementation that does nothing.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -249,7 +249,7 @@ java.lang.Object
          <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default implementation that does nothing.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.tasks.BuildStepCompatibilityLayer"><!-- --></A>
@@ -315,9 +315,12 @@ protected <B>Publisher</B>()</PRE>
 <A NAME="prebuild(hudson.model.Build, hudson.model.BuildListener)"><!-- --></A><H3>
 prebuild</H3>
 <PRE>
-public boolean <B>prebuild</B>(<A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>&nbsp;build,
-                        <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public boolean <B>prebuild</B>(<A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>&nbsp;build,
+                                   <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
 <DD>Default implementation that does nothing.
 <P>
 <DD><DL>
@@ -332,8 +335,11 @@ public boolean <B>prebuild</B>(<A HREF="../../hudson/model/Build.html" title="cl
 <A NAME="getProjectAction(hudson.model.Project)"><!-- --></A><H3>
 getProjectAction</H3>
 <PRE>
-public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A> <B>getProjectAction</B>(<A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project</A>&nbsp;project)</PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A> <B>getProjectAction</B>(<A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project</A>&nbsp;project)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
 <DD>Default implementation that does nothing.
 <P>
 <DD><DL>
