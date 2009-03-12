@@ -47,7 +47,7 @@ import java.util.Set;
  * </p>
  * 
  * @goal run
- * @requiresDependencyResolution test
+ * @requiresDependencyResolution runtime
  * @execute phase=compile
  * @description Runs Hudson with the current plugin
  * @author Kohsuke Kawaguchi
