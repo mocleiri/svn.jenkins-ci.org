@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ComputerListener (Hudson core 1.291 API)
+ComputerListener (Hudson core 1.292 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-03-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ComputerListener (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ComputerListener (Hudson core 1.291 API)";
+        parent.document.title="ComputerListener (Hudson core 1.292 API)";
     }
 }
 </SCRIPT>
@@ -184,6 +184,16 @@ Receives notifications about status changes of <A HREF="../../hudson/model/Compu
 <TD><CODE><B><A HREF="../../hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer)">onOnline</A></B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.292
+      Use <A HREF="../../hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer, hudson.model.TaskListener)"><CODE>onOnline(Computer, TaskListener)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer, hudson.model.TaskListener)">onOnline</A></B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c,
+         <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called right after a <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> comes online.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -248,6 +258,9 @@ onOnline</H3>
 <PRE>
 public void <B>onOnline</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.292
+      Use <A HREF="../../hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer, hudson.model.TaskListener)"><CODE>onOnline(Computer, TaskListener)</CODE></A></I>
+<P>
 <DD>Called right after a <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> comes online.
 <P>
 <DD><DL>
@@ -255,6 +268,38 @@ public void <B>onOnline</B>(<A HREF="../../hudson/model/Computer.html" title="cl
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onOnline(hudson.model.Computer, hudson.model.TaskListener)"><!-- --></A><H3>
+onOnline</H3>
+<PRE>
+public void <B>onOnline</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c,
+                     <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
+              throws java.io.IOException,
+                     java.lang.InterruptedException</PRE>
+<DL>
+<DD>Called right after a <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> comes online.
+
+ <p>
+ This enables you to do some work on all the slaves
+ as they get connected.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>listener</CODE> - This is connected to the launch log of the computer.
+      Since this method is called synchronously from the thread
+      that launches a computer, if this method performs a time-consuming
+      operation, this listener should be notified of the progress.
+      This is also a good listener for reporting problems.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - Exceptions will be recorded to the listener. Note that
+      throwing an exception doesn't put the computer offline.
+<DD><CODE>java.lang.InterruptedException</CODE> - Exceptions will be recorded to the listener. Note that
+      throwing an exception doesn't put the computer offline.</DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-TestObject (Hudson core 1.291 API)
+TestObject (Hudson core 1.292 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-03-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TestObject (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TestObject (Hudson core 1.291 API)";
+        parent.document.title="TestObject (Hudson core 1.292 API)";
     }
 }
 </SCRIPT>
@@ -172,6 +172,14 @@ Base class for all test result objects.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getName()">getName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the name of this object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getOwner()">getOwner</A></B>()</CODE>
 
@@ -188,11 +196,28 @@ Base class for all test result objects.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getSafeName()">getSafeName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the version of <A HREF="../../../hudson/tasks/junit/TestObject.html#getName()"><CODE>getName()</CODE></A> that's URL-safe.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#safe(java.lang.String)">safe</A></B>(java.lang.String&nbsp;s)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replaces URL-unsafe characters.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#uniquifyName(java.util.Collection, java.lang.String)">uniquifyName</A></B>(java.util.Collection&lt;? extends <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&gt;&nbsp;siblings,
+             java.lang.String&nbsp;base)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#2988: uniquifies a <A HREF="../../../hudson/tasks/junit/TestObject.html#getSafeName()"><CODE>getSafeName()</CODE></A> amongst children of the parent.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -314,6 +339,55 @@ getApi</H3>
 public <A HREF="../../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
 <DL>
 <DD>Exposes this object through the remote API.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getName()"><!-- --></A><H3>
+getName</H3>
+<PRE>
+public java.lang.String <B>getName</B>()</PRE>
+<DL>
+<DD>Gets the name of this object.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSafeName()"><!-- --></A><H3>
+getSafeName</H3>
+<PRE>
+public java.lang.String <B>getSafeName</B>()</PRE>
+<DL>
+<DD>Gets the version of <A HREF="../../../hudson/tasks/junit/TestObject.html#getName()"><CODE>getName()</CODE></A> that's URL-safe.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="uniquifyName(java.util.Collection, java.lang.String)"><!-- --></A><H3>
+uniquifyName</H3>
+<PRE>
+protected final java.lang.String <B>uniquifyName</B>(java.util.Collection&lt;? extends <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&gt;&nbsp;siblings,
+                                              java.lang.String&nbsp;base)</PRE>
+<DL>
+<DD>#2988: uniquifies a <A HREF="../../../hudson/tasks/junit/TestObject.html#getSafeName()"><CODE>getSafeName()</CODE></A> amongst children of the parent.
 <P>
 <DD><DL>
 </DL>

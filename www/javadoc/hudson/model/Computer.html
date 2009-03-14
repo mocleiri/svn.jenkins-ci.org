@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Computer (Hudson core 1.291 API)
+Computer (Hudson core 1.292 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-03-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson core 1.291 API)";
+        parent.document.title="Computer (Hudson core 1.292 API)";
     }
 }
 </SCRIPT>
@@ -437,11 +437,20 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#getEnvironment()">getEnvironment</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the environment variables of the JVM on this computer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.Map&lt;java.lang.String,java.lang.String&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#getEnvVars()">getEnvVars</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the environment variables of the JVM on this computer.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.292
+      Use <A HREF="../../hudson/model/Computer.html#getEnvironment()"><CODE>getEnvironment()</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1699,6 +1708,28 @@ getEnvVars</H3>
 public java.util.Map&lt;java.lang.String,java.lang.String&gt; <B>getEnvVars</B>()
                                                             throws java.io.IOException,
                                                                    java.lang.InterruptedException</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.292
+      Use <A HREF="../../hudson/model/Computer.html#getEnvironment()"><CODE>getEnvironment()</CODE></A> instead.</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEnvironment()"><!-- --></A><H3>
+getEnvironment</H3>
+<PRE>
+public <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <B>getEnvironment</B>()
+                       throws java.io.IOException,
+                              java.lang.InterruptedException</PRE>
 <DL>
 <DD>Gets the environment variables of the JVM on this computer.
  If this is the master, it returns the system property of the master computer.
