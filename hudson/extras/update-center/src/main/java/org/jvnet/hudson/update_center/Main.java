@@ -1,25 +1,18 @@
 package org.jvnet.hudson.update_center;
 
+import net.sf.json.JSONObject;
+import org.kohsuke.args4j.CmdLineParser;
+import org.kohsuke.args4j.Option;
 import org.kohsuke.jnt.JNFileFolder;
 import org.kohsuke.jnt.JNProject;
 import org.kohsuke.jnt.JavaNet;
 import org.kohsuke.jnt.ProcessingException;
-import org.kohsuke.args4j.Option;
-import org.kohsuke.args4j.CmdLineParser;
-import org.kohsuke.args4j.Argument;
-import net.sf.json.JSONObject;
 
 import javax.xml.rpc.ServiceException;
-import java.io.IOException;
-import java.io.Writer;
-import java.io.OutputStreamWriter;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.List;
-import java.util.Properties;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @author Kohsuke Kawaguchi
