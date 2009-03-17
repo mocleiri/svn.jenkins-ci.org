@@ -69,6 +69,8 @@ public class Main {
             System.out.println(dir.getName());
             if(dir.getName().equals("google-desktop-gadget"))
                 continue;       // this is not really a Hudson plugin. So excluding for now
+            if(dir.getName().equals("ivy2"))
+                continue;       // subsumed into the ivy plugin. Hiding from the update center
 
             VersionedFile latest = VersionedFile.findLatestFrom(dir);
             if(latest==null)
