@@ -37,6 +37,7 @@ public class AppTest
     }
 
     public void testFailure() {
+        System.out.println("Some output");
         fail("Some failure");
     }
 }
