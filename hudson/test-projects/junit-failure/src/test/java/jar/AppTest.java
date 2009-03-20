@@ -37,7 +37,8 @@ public class AppTest
     }
 
     public void testFailure() {
-        System.out.println("Some output");
+        System.out.println("Some output [stdout]");
+        System.err.println("Some output [stderr]");
         fail("Some failure");
     }
 }
