@@ -37,6 +37,8 @@ public class AppTest extends TestCase {
             String n = plugin.getName().toLowerCase();
             if(n.equals("bco"))
                 continue;   // this isn't a plugin in Hudson SVN
+            if(n.equals("ivy2"))
+                continue;   // merged to the ivy plugin
             if(names.contains(n) || names.contains(n+"-plugin"))
                 continue;   // OK
             problems.add(plugin.getName());
