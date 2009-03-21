@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-PeriodicWork (Hudson core 1.292 API)
+PeriodicWork (Hudson core 1.293 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-14">
+<META NAME="date" CONTENT="2009-03-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PeriodicWork (Hudson core 1.292 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PeriodicWork (Hudson core 1.292 API)";
+        parent.document.title="PeriodicWork (Hudson core 1.293 API)";
     }
 }
 </SCRIPT>
@@ -99,28 +99,59 @@ java.lang.Object
           <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.PeriodicWork</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Runnable</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, java.lang.Runnable</DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/FingerprintCleanupThread.html" title="class in hudson.model">FingerprintCleanupThread</A>, <A HREF="../../hudson/model/WorkspaceCleanupThread.html" title="class in hudson.model">WorkspaceCleanupThread</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/AsyncPeriodicWork.html" title="class in hudson.model">AsyncPeriodicWork</A>, <A HREF="../../hudson/slaves/ComputerRetentionWork.html" title="class in hudson.slaves">ComputerRetentionWork</A>, <A HREF="../../hudson/diagnosis/HudsonHomeDiskUsageChecker.html" title="class in hudson.diagnosis">HudsonHomeDiskUsageChecker</A>, <A HREF="../../hudson/model/LoadStatistics.LoadStatisticsUpdater.html" title="class in hudson.model">LoadStatistics.LoadStatisticsUpdater</A>, <A HREF="../../hudson/slaves/NodeProvisioner.NodeProvisionerInvoker.html" title="class in hudson.slaves">NodeProvisioner.NodeProvisionerInvoker</A>, <A HREF="../../hudson/triggers/Trigger.Cron.html" title="class in hudson.triggers">Trigger.Cron</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>PeriodicWork</B><DT>extends <A HREF="../../hudson/triggers/SafeTimerTask.html" title="class in hudson.triggers">SafeTimerTask</A></DL>
+<DT><PRE>public abstract class <B>PeriodicWork</B><DT>extends <A HREF="../../hudson/triggers/SafeTimerTask.html" title="class in hudson.triggers">SafeTimerTask</A><DT>implements <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DL>
 </PRE>
 
 <P>
-Abstract base class for a periodic work.
+Extension point to perform a periodic task in Hudson (through <CODE>Timer</CODE>.)
+
+ <p>
+ This extension point is useful if your plugin needs to perform some work in the background periodically
+ (for example, monitoring, batch processing, garbage collection, etc.)
+
+ <p>
+ Put <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your class to have it picked up and registered automatically, or
+ manually insert this to <A HREF="../../hudson/triggers/Trigger.html#timer"><CODE>Trigger.timer</CODE></A>.
+
+ <p>
+ This class is designed to run a short task. Implementations whose periodic work takes a long time
+ to run should extend from <A HREF="../../hudson/model/AsyncPeriodicWork.html" title="class in hudson.model"><CODE>AsyncPeriodicWork</CODE></A> instead.
 <P>
 
 <P>
 <DL>
 <DT><B>Author:</B></DT>
   <DD>Kohsuke Kawaguchi</DD>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/AsyncPeriodicWork.html" title="class in hudson.model"><CODE>AsyncPeriodicWork</CODE></A></DL>
 <HR>
 
 <P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -131,8 +162,32 @@ Abstract base class for a periodic work.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/PeriodicWork.html#DAY">DAY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/PeriodicWork.html#HOUR">HOUR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;java.util.logging.Logger</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/PeriodicWork.html#logger">logger</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/PeriodicWork.html#MIN">MIN</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -148,9 +203,7 @@ Abstract base class for a periodic work.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected </CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/PeriodicWork.html#PeriodicWork(java.lang.String)">PeriodicWork</A></B>(java.lang.String&nbsp;name)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/PeriodicWork.html#PeriodicWork()">PeriodicWork</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -167,19 +220,27 @@ Abstract base class for a periodic work.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/PeriodicWork.html#doRun()">doRun</A></B>()</CODE>
+<CODE>static&nbsp;<A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/model/PeriodicWork.html" title="class in hudson.model">PeriodicWork</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/PeriodicWork.html#all()">all</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules this periodic work now in a new thread, if one isn't already running.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../hudson/model/PeriodicWork.html" title="class in hudson.model"><CODE>PeriodicWork</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/PeriodicWork.html#execute()">execute</A></B>()</CODE>
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/PeriodicWork.html#getInitialDelay()">getInitialDelay</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the number of milliseconds til the first execution.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/PeriodicWork.html#getRecurrencePeriod()">getRecurrencePeriod</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the number of milliseconds between successive executions.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.triggers.SafeTimerTask"><!-- --></A>
@@ -188,7 +249,7 @@ Abstract base class for a periodic work.
 <TH ALIGN="left"><B>Methods inherited from class hudson.triggers.<A HREF="../../hudson/triggers/SafeTimerTask.html" title="class in hudson.triggers">SafeTimerTask</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/triggers/SafeTimerTask.html#run()">run</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/triggers/SafeTimerTask.html#doRun()">doRun</A>, <A HREF="../../hudson/triggers/SafeTimerTask.html#run()">run</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.util.TimerTask"><!-- --></A>
@@ -230,6 +291,36 @@ protected final java.util.logging.Logger <B>logger</B></PRE>
 <DL>
 </DL>
 </DL>
+<HR>
+
+<A NAME="MIN"><!-- --></A><H3>
+MIN</H3>
+<PRE>
+protected static final long <B>MIN</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../constant-values.html#hudson.model.PeriodicWork.MIN">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="HOUR"><!-- --></A><H3>
+HOUR</H3>
+<PRE>
+protected static final long <B>HOUR</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../constant-values.html#hudson.model.PeriodicWork.HOUR">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="DAY"><!-- --></A><H3>
+DAY</H3>
+<PRE>
+protected static final long <B>DAY</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../constant-values.html#hudson.model.PeriodicWork.DAY">Constant Field Values</A></DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -241,10 +332,10 @@ protected final java.util.logging.Logger <B>logger</B></PRE>
 </TR>
 </TABLE>
 
-<A NAME="PeriodicWork(java.lang.String)"><!-- --></A><H3>
+<A NAME="PeriodicWork()"><!-- --></A><H3>
 PeriodicWork</H3>
 <PRE>
-protected <B>PeriodicWork</B>(java.lang.String&nbsp;name)</PRE>
+public <B>PeriodicWork</B>()</PRE>
 <DL>
 </DL>
 
@@ -258,15 +349,23 @@ protected <B>PeriodicWork</B>(java.lang.String&nbsp;name)</PRE>
 </TR>
 </TABLE>
 
-<A NAME="doRun()"><!-- --></A><H3>
-doRun</H3>
+<A NAME="getRecurrencePeriod()"><!-- --></A><H3>
+getRecurrencePeriod</H3>
 <PRE>
-public final void <B>doRun</B>()</PRE>
+public abstract long <B>getRecurrencePeriod</B>()</PRE>
 <DL>
-<DD>Schedules this periodic work now in a new thread, if one isn't already running.
+<DD>Gets the number of milliseconds between successive executions.
+
+ <p>
+ Hudson calls this method once to set up a recurring timer, instead of
+ calling this each time after the previous execution completed. So this class cannot be
+ used to implement a non-regular recurring timer.
+
+ <p>
+ IOW, the method should always return the same value.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/triggers/SafeTimerTask.html#doRun()">doRun</A></CODE> in class <CODE><A HREF="../../hudson/triggers/SafeTimerTask.html" title="class in hudson.triggers">SafeTimerTask</A></CODE></DL>
+</DL>
 </DD>
 <DD><DL>
 </DL>
@@ -274,11 +373,35 @@ public final void <B>doRun</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="execute()"><!-- --></A><H3>
-execute</H3>
+<A NAME="getInitialDelay()"><!-- --></A><H3>
+getInitialDelay</H3>
 <PRE>
-protected abstract void <B>execute</B>()</PRE>
+public long <B>getInitialDelay</B>()</PRE>
 <DL>
+<DD>Gets the number of milliseconds til the first execution.
+
+ <p>
+ By default it chooses the value randomly between 0 and <A HREF="../../hudson/model/PeriodicWork.html#getRecurrencePeriod()"><CODE>getRecurrencePeriod()</CODE></A>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/model/PeriodicWork.html" title="class in hudson.model">PeriodicWork</A>&gt; <B>all</B>()</PRE>
+<DL>
+<DD>Returns all the registered <A HREF="../../hudson/model/PeriodicWork.html" title="class in hudson.model"><CODE>PeriodicWork</CODE></A>s.
+<P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>

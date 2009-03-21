@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonTestCase (Test harness for Hudson and plugins 1.292 API)
+HudsonTestCase (Test harness for Hudson and plugins 1.293 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-14">
+<META NAME="date" CONTENT="2009-03-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Test harness for Hudson and plugins 1.292 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.292 API)";
+        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.293 API)";
     }
 }
 </SCRIPT>
@@ -516,6 +516,15 @@ R</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Submits the form.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;com.gargoylesoftware.htmlunit.html.HtmlPage</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#submit(com.gargoylesoftware.htmlunit.html.HtmlForm, java.lang.String)">submit</A></B>(com.gargoylesoftware.htmlunit.html.HtmlForm&nbsp;form,
+       java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Submits the form by clikcing the submit button of the given name.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1150,6 +1159,23 @@ public com.gargoylesoftware.htmlunit.html.HtmlPage <B>submit</B>(com.gargoylesof
 <P>
 <DD><DL>
 
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="submit(com.gargoylesoftware.htmlunit.html.HtmlForm, java.lang.String)"><!-- --></A><H3>
+submit</H3>
+<PRE>
+public com.gargoylesoftware.htmlunit.html.HtmlPage <B>submit</B>(com.gargoylesoftware.htmlunit.html.HtmlForm&nbsp;form,
+                                                          java.lang.String&nbsp;name)
+                                                   throws java.lang.Exception</PRE>
+<DL>
+<DD>Submits the form by clikcing the submit button of the given name.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - This corresponds to the @name of &lt;f:submit />
 <DT><B>Throws:</B>
 <DD><CODE>java.lang.Exception</CODE></DL>
 </DD>

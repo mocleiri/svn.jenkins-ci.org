@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.triggers.SafeTimerTask (Hudson core 1.292 API)
+Uses of Class hudson.triggers.SafeTimerTask (Hudson core 1.293 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-14">
+<META NAME="date" CONTENT="2009-03-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.triggers.SafeTimerTask (Hudson core 1.292 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.triggers.SafeTimerTask (Hudson core 1.292 API)";
+        parent.document.title="Uses of Class hudson.triggers.SafeTimerTask (Hudson core 1.293 API)";
     }
 }
 </SCRIPT>
@@ -91,12 +91,46 @@ function windowTitle()
 Packages that use <A HREF="../../../hudson/triggers/SafeTimerTask.html" title="class in hudson.triggers">SafeTimerTask</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.diagnosis"><B>hudson.diagnosis</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.slaves"><B>hudson.slaves</B></A></TD>
 <TD>Code related to slaves.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.triggers"><B>hudson.triggers</B></A></TD>
+<TD>Built-in <a href="../../../hudson/triggers/Trigger.html"><tt>Trigger</tt></a>s that run periodically to kick a new build.&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.diagnosis"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/triggers/SafeTimerTask.html" title="class in hudson.triggers">SafeTimerTask</A> in <A HREF="../../../hudson/diagnosis/package-summary.html">hudson.diagnosis</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/triggers/SafeTimerTask.html" title="class in hudson.triggers">SafeTimerTask</A> in <A HREF="../../../hudson/diagnosis/package-summary.html">hudson.diagnosis</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/diagnosis/HudsonHomeDiskUsageChecker.html" title="class in hudson.diagnosis">HudsonHomeDiskUsageChecker</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Periodically checks the disk usage of <tt>HUDSON_HOME</tt>,
+ and activate <A HREF="../../../hudson/diagnosis/HudsonHomeDiskUsageMonitor.html" title="class in hudson.diagnosis"><CODE>HudsonHomeDiskUsageMonitor</CODE></A> if necessary.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -118,11 +152,27 @@ Uses of <A HREF="../../../hudson/triggers/SafeTimerTask.html" title="class in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/AsyncPeriodicWork.html" title="class in hudson.model">AsyncPeriodicWork</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/PeriodicWork.html" title="class in hudson.model"><CODE>PeriodicWork</CODE></A> that takes a long time to run.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/FingerprintCleanupThread.html" title="class in hudson.model">FingerprintCleanupThread</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scans the fingerprint database and remove old records
  that are no longer relevant.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/LoadStatistics.LoadStatisticsUpdater.html" title="class in hudson.model">LoadStatistics.LoadStatisticsUpdater</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Periodically update the load statistics average.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -138,7 +188,7 @@ Uses of <A HREF="../../../hudson/triggers/SafeTimerTask.html" title="class in hu
 <TD><CODE><B><A HREF="../../../hudson/model/PeriodicWork.html" title="class in hudson.model">PeriodicWork</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abstract base class for a periodic work.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point to perform a periodic task in Hudson (through <CODE>Timer</CODE>.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -172,6 +222,39 @@ Uses of <A HREF="../../../hudson/triggers/SafeTimerTask.html" title="class in hu
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Periodically checks the slaves and try to reconnect dead slaves.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/slaves/NodeProvisioner.NodeProvisionerInvoker.html" title="class in hudson.slaves">NodeProvisioner.NodeProvisionerInvoker</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Periodically invoke NodeProvisioners</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.triggers"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/triggers/SafeTimerTask.html" title="class in hudson.triggers">SafeTimerTask</A> in <A HREF="../../../hudson/triggers/package-summary.html">hudson.triggers</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/triggers/SafeTimerTask.html" title="class in hudson.triggers">SafeTimerTask</A> in <A HREF="../../../hudson/triggers/package-summary.html">hudson.triggers</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/triggers/Trigger.Cron.html" title="class in hudson.triggers">Trigger.Cron</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs every minute to check <A HREF="../../../hudson/triggers/TimerTrigger.html" title="class in hudson.triggers"><CODE>TimerTrigger</CODE></A> and schedules build.</TD>
 </TR>
 </TABLE>
 &nbsp;

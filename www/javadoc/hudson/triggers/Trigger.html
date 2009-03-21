@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Trigger (Hudson core 1.292 API)
+Trigger (Hudson core 1.293 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-14">
+<META NAME="date" CONTENT="2009-03-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Trigger (Hudson core 1.292 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Trigger (Hudson core 1.292 API)";
+        parent.document.title="Trigger (Hudson core 1.293 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/triggers/TimerTrigger.TimerTriggerCause.html" title="class in hudson.triggers"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/triggers/Trigger.Cron.html" title="class in hudson.triggers"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/triggers/Trigger.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Trigger.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -112,7 +112,7 @@ Triggers a <A HREF="../../hudson/model/Build.html" title="class in hudson.model"
 
  <p>
  To register a custom <A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers"><CODE>Trigger</CODE></A> from a plugin,
- put <CODE>Extension</CODE> on your <A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers"><CODE>TriggerDescriptor</CODE></A> class.
+ put <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your <A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers"><CODE>TriggerDescriptor</CODE></A> class.
 <P>
 
 <P>
@@ -130,6 +130,14 @@ Triggers a <A HREF="../../hudson/model/Build.html" title="class in hudson.model"
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/triggers/Trigger.Cron.html" title="class in hudson.triggers">Trigger.Cron</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs every minute to check <A HREF="../../hudson/triggers/TimerTrigger.html" title="class in hudson.triggers"><CODE>TimerTrigger</CODE></A> and schedules build.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
@@ -372,6 +380,8 @@ public static java.util.Timer <B>timer</B></PRE>
  some work.
 
  Initialized and cleaned up by <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>, but value kept here for compatibility.
+
+ If plugins want to run periodic jobs, they should implement <A HREF="../../hudson/model/PeriodicWork.html" title="class in hudson.model"><CODE>PeriodicWork</CODE></A>.
 <P>
 <DL>
 </DL>
@@ -646,7 +656,7 @@ public static java.util.List&lt;<A HREF="../../hudson/triggers/TriggerDescriptor
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/triggers/TimerTrigger.TimerTriggerCause.html" title="class in hudson.triggers"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/triggers/TriggerDescriptor.html" title="class in hudson.triggers"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/triggers/Trigger.Cron.html" title="class in hudson.triggers"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/triggers/Trigger.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Trigger.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -666,7 +676,7 @@ public static java.util.List&lt;<A HREF="../../hudson/triggers/TriggerDescriptor
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.model (Hudson core 1.292 API)
+hudson.model (Hudson core 1.293 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-14">
+<META NAME="date" CONTENT="2009-03-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson core 1.292 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson core 1.292 API)";
+        parent.document.title="hudson.model (Hudson core 1.293 API)";
     }
 }
 </SCRIPT>
@@ -266,6 +266,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD>Used to expose remote access API for ".../api/"</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/AsyncPeriodicWork.html" title="class in hudson.model">AsyncPeriodicWork</A></B></TD>
+<TD><A HREF="../../hudson/model/PeriodicWork.html" title="class in hudson.model"><CODE>PeriodicWork</CODE></A> that takes a long time to run.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build&lt;P extends Project&lt;P,B&gt;,B extends Build&lt;P,B&gt;&gt;</A></B></TD>
 <TD>A build of a <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.</TD>
 </TR>
@@ -500,6 +504,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD>Utilization statistics for a node or a set of nodes.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/LoadStatistics.LoadStatisticsUpdater.html" title="class in hudson.model">LoadStatistics.LoadStatisticsUpdater</A></B></TD>
+<TD>Periodically update the load statistics average.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model">ManagementLink</A></B></TD>
 <TD>Extension point to add icon to <tt>http://server/hudson/manage</tt> page.</TD>
 </TR>
@@ -566,7 +574,7 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/PeriodicWork.html" title="class in hudson.model">PeriodicWork</A></B></TD>
-<TD>Abstract base class for a periodic work.</TD>
+<TD>Extension point to perform a periodic task in Hudson (through <CODE>Timer</CODE>.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/PermalinkProjectAction.Permalink.html" title="class in hudson.model">PermalinkProjectAction.Permalink</A></B></TD>
