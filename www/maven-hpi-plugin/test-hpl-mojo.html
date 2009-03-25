@@ -12,7 +12,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Maven Hudson Plugin - hpi:test-hpl</title>
+    <title>Maven Hudson Plugin - maven-hpi-plugin - hpi:test-hpl</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -42,7 +42,7 @@
   
     
             <div class="xleft">
-        Last Published: 2009-03-20
+        Last Published: 2009-03-25
                       </div>
             <div class="xright">            <a href="">Maven Hudson Plugin</a>
             
@@ -120,175 +120,206 @@
     </div>
     <div id="bodyColumn">
       <div id="contentBox">
-        <div class="section"><h2><a name="hpi:test-hpl"></a>hpi:test-hpl</h2>
+        <div class="section"><h2><a name="hpi:test-hpl"></a>
+hpi:test-hpl</h2>
 <p><strong>Full name</strong>:</p>
-<p>org.jvnet.hudson.tools:maven-hpi-plugin:1.32:test-hpl</p>
+<p>org.jvnet.hudson.tools:maven-hpi-plugin:1.33:test-hpl</p>
 <p><strong>Description</strong>:</p>
-<div>Generate .hpl file in the test class directory so that test harness
-can locate the plugin.</div><p><strong>Attributes</strong>:</p>
+<p>Generate .hpl file in the test class directory so that test harness
+can locate the plugin.</p>
+<p><strong>Attributes</strong>:</p>
 <ul><li>Requires a Maven 2.0 project to be executed.</li>
 <li>Requires dependency resolution of artifacts in scope: <code>test</code>.</li>
 </ul>
-<div class="section"><h3><a name="Required_Parameters"></a>Required Parameters</h3>
+<div class="section"><h3><a name="Required_Parameters"></a>
+Required Parameters</h3>
 <table class="bodyTable"><tr class="a"><th>Name</th>
 <th>Type</th>
 <th>Since</th>
 <th>Description</th>
 </tr>
-<tr class="b"><td><strong><a href="#outputDirectory">outputDirectory</a></strong></td>
+<tr class="b"><td><strong><a href="#outputDirectory">outputDirectory</a>
+</strong></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
-<td>The directory for the generated WAR.<br />
-</td>
+<td>The directory for the generated WAR. </td>
 </tr>
-<tr class="a"><td><strong><a href="#warSourceDirectory">warSourceDirectory</a></strong></td>
+<tr class="a"><td><strong><a href="#warSourceDirectory">warSourceDirectory</a>
+</strong></td>
 <td><code>File</code></td>
 <td><code>-</code></td>
-<td>Single directory for extra files to include in the WAR.<br />
-</td>
+<td>Single directory for extra files to include in the WAR. </td>
 </tr>
-<tr class="b"><td><strong><a href="#webappDirectory">webappDirectory</a></strong></td>
+<tr class="b"><td><strong><a href="#webappDirectory">webappDirectory</a>
+</strong></td>
 <td><code>File</code></td>
 <td><code>-</code></td>
-<td>The directory where the webapp is built.<br />
-</td>
+<td>The directory where the webapp is built. </td>
 </tr>
-<tr class="a"><td><strong><a href="#workDirectory">workDirectory</a></strong></td>
+<tr class="a"><td><strong><a href="#workDirectory">workDirectory</a>
+</strong></td>
 <td><code>File</code></td>
 <td><code>-</code></td>
-<td>Directory to unpack dependent WARs into if needed<br />
-</td>
+<td>Directory to unpack dependent WARs into if needed </td>
 </tr>
 </table>
 </div>
-<div class="section"><h3><a name="Optional_Parameters"></a>Optional Parameters</h3>
+<div class="section"><h3><a name="Optional_Parameters"></a>
+Optional Parameters</h3>
 <table class="bodyTable"><tr class="b"><th>Name</th>
 <th>Type</th>
 <th>Since</th>
 <th>Description</th>
 </tr>
-<tr class="a"><td><strong><a href="#containerConfigXML">containerConfigXML</a></strong></td>
+<tr class="a"><td><strong><a href="#containerConfigXML">containerConfigXML</a>
+</strong></td>
 <td><code>File</code></td>
 <td><code>-</code></td>
-<td>The path to the context.xml file to use.<br />
-</td>
+<td>The path to the context.xml file to use. </td>
 </tr>
-<tr class="b"><td><strong><a href="#dependentWarExcludes">dependentWarExcludes</a></strong></td>
+<tr class="b"><td><strong><a href="#dependentWarExcludes">dependentWarExcludes</a>
+</strong></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
 <td>The comma separated list of tokens to exclude when doing a way
-overlay.<br />
-</td>
+overlay. </td>
 </tr>
-<tr class="a"><td><strong><a href="#dependentWarIncludes">dependentWarIncludes</a></strong></td>
+<tr class="a"><td><strong><a href="#dependentWarIncludes">dependentWarIncludes</a>
+</strong></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
 <td>The comma separated list of tokens to include when doing a war
-overlay. Default is '**'<br />
-</td>
+overlay. Default is '**' </td>
 </tr>
-<tr class="b"><td><strong><a href="#filters">filters</a></strong></td>
+<tr class="b"><td><strong><a href="#filters">filters</a>
+</strong></td>
 <td><code>List</code></td>
 <td><code>-</code></td>
-<td>(no description)<br />
-</td>
+<td>(no description) </td>
 </tr>
-<tr class="a"><td><strong><a href="#hudsonHome">hudsonHome</a></strong></td>
+<tr class="a"><td><strong><a href="#hudsonHome">hudsonHome</a>
+</strong></td>
 <td><code>File</code></td>
 <td><code>-</code></td>
-<td>Path to <tt>$HUDSON_HOME</tt>. A .hpl file will be generated to
-this location.<br />
-</td>
+<td>Path to <tt>$HUDSON_HOME</tt>
+. A .hpl file will be generated to
+this location. </td>
 </tr>
-<tr class="b"><td><strong><a href="#warSourceExcludes">warSourceExcludes</a></strong></td>
+<tr class="b"><td><strong><a href="#warSourceExcludes">warSourceExcludes</a>
+</strong></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
-<td>The comma separated list of tokens to exclude from the WAR.<br />
-</td>
+<td>The comma separated list of tokens to exclude from the WAR. </td>
 </tr>
-<tr class="a"><td><strong><a href="#warSourceIncludes">warSourceIncludes</a></strong></td>
+<tr class="a"><td><strong><a href="#warSourceIncludes">warSourceIncludes</a>
+</strong></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
 <td>The comma separated list of tokens to include in the WAR. Default
-is '**'.<br />
-</td>
+is '**'. </td>
 </tr>
-<tr class="b"><td><strong><a href="#webResources">webResources</a></strong></td>
+<tr class="b"><td><strong><a href="#webResources">webResources</a>
+</strong></td>
 <td><code>Resource[]</code></td>
 <td><code>-</code></td>
-<td>The list of webResources we want to transfer.<br />
-</td>
+<td>The list of webResources we want to transfer. </td>
 </tr>
 </table>
 </div>
-<div class="section"><h3><a name="Parameter_Details"></a>Parameter Details</h3>
-<p><strong><a name="containerConfigXML">containerConfigXML</a>:</strong></p>
-<div>The path to the context.xml file to use.</div><ul><li><strong>Type</strong>: <code>java.io.File</code></li>
+<div class="section"><h3><a name="Parameter_Details"></a>
+Parameter Details</h3>
+<p><strong><a name="containerConfigXML">containerConfigXML</a>
+:</strong></p>
+<p>The path to the context.xml file to use.</p>
+<ul><li><strong>Type</strong>: <code>java.io.File</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
 <li><strong>Expression</strong>: <code>${maven.war.containerConfigXML}</code></li>
 </ul>
 <hr />
-<p><strong><a name="dependentWarExcludes">dependentWarExcludes</a>:</strong></p>
-<div>The comma separated list of tokens to exclude when doing a way
-overlay.</div><ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
+<p><strong><a name="dependentWarExcludes">dependentWarExcludes</a>
+:</strong></p>
+<p>The comma separated list of tokens to exclude when doing a way
+overlay.</p>
+<ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
 </ul>
 <hr />
-<p><strong><a name="dependentWarIncludes">dependentWarIncludes</a>:</strong></p>
-<div>The comma separated list of tokens to include when doing a war
-overlay. Default is '**'</div><ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
+<p><strong><a name="dependentWarIncludes">dependentWarIncludes</a>
+:</strong></p>
+<p>The comma separated list of tokens to include when doing a war
+overlay. Default is '**'</p>
+<ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
 </ul>
 <hr />
-<p><strong><a name="filters">filters</a>:</strong></p>
-<div>(no description)</div><ul><li><strong>Type</strong>: <code>java.util.List</code></li>
+<p><strong><a name="filters">filters</a>
+:</strong></p>
+<p>(no description)</p>
+<ul><li><strong>Type</strong>: <code>java.util.List</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
 <li><strong>Expression</strong>: <code>${project.build.filters}</code></li>
 </ul>
 <hr />
-<p><strong><a name="hudsonHome">hudsonHome</a>:</strong></p>
-<div>Path to <tt>$HUDSON_HOME</tt>. A .hpl file will be generated to
-this location.</div><ul><li><strong>Type</strong>: <code>java.io.File</code></li>
+<p><strong><a name="hudsonHome">hudsonHome</a>
+:</strong></p>
+<p>Path to <tt>$HUDSON_HOME</tt>
+. A .hpl file will be generated to
+this location.</p>
+<ul><li><strong>Type</strong>: <code>java.io.File</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
 <li><strong>Expression</strong>: <code>${hudsonHome}</code></li>
 </ul>
 <hr />
-<p><strong><a name="outputDirectory">outputDirectory</a>:</strong></p>
-<div>The directory for the generated WAR.</div><ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
+<p><strong><a name="outputDirectory">outputDirectory</a>
+:</strong></p>
+<p>The directory for the generated WAR.</p>
+<ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
 <li><strong>Expression</strong>: <code>${project.build.directory}</code></li>
 </ul>
 <hr />
-<p><strong><a name="warSourceDirectory">warSourceDirectory</a>:</strong></p>
-<div>Single directory for extra files to include in the WAR.</div><ul><li><strong>Type</strong>: <code>java.io.File</code></li>
+<p><strong><a name="warSourceDirectory">warSourceDirectory</a>
+:</strong></p>
+<p>Single directory for extra files to include in the WAR.</p>
+<ul><li><strong>Type</strong>: <code>java.io.File</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
 <li><strong>Expression</strong>: <code>${basedir}/src/main/webapp</code></li>
 </ul>
 <hr />
-<p><strong><a name="warSourceExcludes">warSourceExcludes</a>:</strong></p>
-<div>The comma separated list of tokens to exclude from the WAR.</div><ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
+<p><strong><a name="warSourceExcludes">warSourceExcludes</a>
+:</strong></p>
+<p>The comma separated list of tokens to exclude from the WAR.</p>
+<ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
 </ul>
 <hr />
-<p><strong><a name="warSourceIncludes">warSourceIncludes</a>:</strong></p>
-<div>The comma separated list of tokens to include in the WAR. Default
-is '**'.</div><ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
+<p><strong><a name="warSourceIncludes">warSourceIncludes</a>
+:</strong></p>
+<p>The comma separated list of tokens to include in the WAR. Default
+is '**'.</p>
+<ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
 </ul>
 <hr />
-<p><strong><a name="webResources">webResources</a>:</strong></p>
-<div>The list of webResources we want to transfer.</div><ul><li><strong>Type</strong>: <code>org.apache.maven.model.Resource[]</code></li>
+<p><strong><a name="webResources">webResources</a>
+:</strong></p>
+<p>The list of webResources we want to transfer.</p>
+<ul><li><strong>Type</strong>: <code>org.apache.maven.model.Resource[]</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
 </ul>
 <hr />
-<p><strong><a name="webappDirectory">webappDirectory</a>:</strong></p>
-<div>The directory where the webapp is built.</div><ul><li><strong>Type</strong>: <code>java.io.File</code></li>
+<p><strong><a name="webappDirectory">webappDirectory</a>
+:</strong></p>
+<p>The directory where the webapp is built.</p>
+<ul><li><strong>Type</strong>: <code>java.io.File</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
 <li><strong>Expression</strong>: <code>${project.build.directory}/${project.build.finalName}</code></li>
 </ul>
 <hr />
-<p><strong><a name="workDirectory">workDirectory</a>:</strong></p>
-<div>Directory to unpack dependent WARs into if needed</div><ul><li><strong>Type</strong>: <code>java.io.File</code></li>
+<p><strong><a name="workDirectory">workDirectory</a>
+:</strong></p>
+<p>Directory to unpack dependent WARs into if needed</p>
+<ul><li><strong>Type</strong>: <code>java.io.File</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
 <li><strong>Expression</strong>: <code>${project.build.directory}/war/work</code></li>
 </ul>
