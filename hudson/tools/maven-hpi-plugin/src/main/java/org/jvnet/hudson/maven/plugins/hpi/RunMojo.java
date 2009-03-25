@@ -126,7 +126,7 @@ public class RunMojo extends AbstractJetty6Mojo {
                 "  <groupId>org.jvnet.hudson.main</groupId>\n" +
                 "  <artifactId>hudson-war</artifactId>\n" +
                 "  <type>war</type>\n" +
-                "  <version>1.83<!-- replace this with the version you want--></version>\n" +
+                "  <version>1.293<!-- replace this with the version you want--></version>\n" +
                 "  <scope>test</scope>\n" +
                 "</dependency>"
             );
