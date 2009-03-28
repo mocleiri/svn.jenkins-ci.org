@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.model (Hudson core 1.293 API)
+hudson.model (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson core 1.293 API)";
+        parent.document.title="hudson.model (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -123,6 +123,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable&lt;T extends Describable&lt;T&gt;&gt;</A></B></TD>
 <TD>Classes that are described by <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model">DescriptorByNameOwner</A></B></TD>
+<TD>Adds <A HREF="../../hudson/model/DescriptorByNameOwner.html#getDescriptorByName(java.lang.String)"><CODE>DescriptorByNameOwner.getDescriptorByName(String)</CODE></A> to bind <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s to URL.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/EnvironmentSpecific.html" title="interface in hudson.model">EnvironmentSpecific&lt;T extends EnvironmentSpecific&lt;T&gt;&gt;</A></B></TD>
@@ -243,6 +247,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject&lt;P extends AbstractProject&lt;P,R&gt;,R extends AbstractBuild&lt;P,R&gt;&gt;</A></B></TD>
 <TD>Base implementation of <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s that build software.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/AbstractProject.AbstractProjectDescriptor.html" title="class in hudson.model">AbstractProject.AbstractProjectDescriptor</A></B></TD>
+<TD><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A> subtypes should implement this base class as a descriptor.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">Actionable</A></B></TD>

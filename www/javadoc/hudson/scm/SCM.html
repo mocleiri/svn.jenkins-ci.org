@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SCM (Hudson core 1.293 API)
+SCM (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCM (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCM (Hudson core 1.293 API)";
+        parent.document.title="SCM (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -203,6 +203,14 @@ Captures the configuration information in it.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A>&lt;?&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SCM.html#_for(hudson.model.AbstractProject)">_for</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the list of <A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm"><CODE>SCMDescriptor</CODE></A>s that are applicable to the given project.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -805,6 +813,22 @@ all</H3>
 public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A>,<A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A>&lt;?&gt;&gt; <B>all</B>()</PRE>
 <DL>
 <DD>Returns all the registered <A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm"><CODE>SCMDescriptor</CODE></A>s.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_for(hudson.model.AbstractProject)"><!-- --></A><H3>
+_for</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A>&lt;?&gt;&gt; <B>_for</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project)</PRE>
+<DL>
+<DD>Returns the list of <A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm"><CODE>SCMDescriptor</CODE></A>s that are applicable to the given project.
 <P>
 <DD><DL>
 </DL>

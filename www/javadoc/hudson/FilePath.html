@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FilePath (Hudson core 1.293 API)
+FilePath (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson core 1.293 API)";
+        parent.document.title="FilePath (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -641,6 +641,59 @@ V</CODE></FONT></TD>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates the ant file mask (like "foo/bar/*.txt, zot/*.jar")
  against this directory, and try to point out the problem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateFileMask(hudson.FilePath, java.lang.String)">validateFileMask</A></B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;pathOrNull,
+                 java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shortcut for <A HREF="../hudson/FilePath.html#validateFileMask(java.lang.String)"><CODE>validateFileMask(String)</CODE></A> in case the left-hand side can be null.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateFileMask(java.lang.String)">validateFileMask</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short for <code>validateFileMask(value,true)</code></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateFileMask(java.lang.String, boolean)">validateFileMask</A></B>(java.lang.String&nbsp;value,
+                 boolean&nbsp;errorIfNotExist)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks the GLOB-style file mask.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateRelativeDirectory(java.lang.String)">validateRelativeDirectory</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateRelativeDirectory(java.lang.String, boolean)">validateRelativeDirectory</A></B>(java.lang.String&nbsp;value,
+                          boolean&nbsp;errorIfNotExist)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A convenience method over <A HREF="../hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)"><CODE>validateRelativePath(String, boolean, boolean)</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)">validateRelativePath</A></B>(java.lang.String&nbsp;value,
+                     boolean&nbsp;errorIfNotExist,
+                     boolean&nbsp;expectingFile)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates a relative file path from this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1649,7 +1702,7 @@ public java.lang.String <B>validateAntFileMask</B>(java.lang.String&nbsp;fileMas
  against this directory, and try to point out the problem.
 
  <p>
- This is useful in conjunction with <A HREF="../hudson/util/FormFieldValidator.html" title="class in hudson.util"><CODE>FormFieldValidator</CODE></A>.
+ This is useful in conjunction with <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util"><CODE>FormValidation</CODE></A>.
 <P>
 <DD><DL>
 </DL>
@@ -1661,7 +1714,127 @@ public java.lang.String <B>validateAntFileMask</B>(java.lang.String&nbsp;fileMas
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
   <DD>1.90</DD>
-<DT><B>See Also:</B><DD><CODE>FormFieldValidator.WorkspaceFileMask</CODE></DL>
+<DT><B>See Also:</B><DD><A HREF="../hudson/FilePath.html#validateFileMask(hudson.FilePath, java.lang.String)"><CODE>validateFileMask(FilePath, String)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="validateFileMask(hudson.FilePath, java.lang.String)"><!-- --></A><H3>
+validateFileMask</H3>
+<PRE>
+public static <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateFileMask</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;pathOrNull,
+                                              java.lang.String&nbsp;value)
+                                       throws java.io.IOException</PRE>
+<DL>
+<DD>Shortcut for <A HREF="../hudson/FilePath.html#validateFileMask(java.lang.String)"><CODE>validateFileMask(String)</CODE></A> in case the left-hand side can be null.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="validateFileMask(java.lang.String)"><!-- --></A><H3>
+validateFileMask</H3>
+<PRE>
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateFileMask</B>(java.lang.String&nbsp;value)
+                                throws java.io.IOException</PRE>
+<DL>
+<DD>Short for <code>validateFileMask(value,true)</code>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="validateFileMask(java.lang.String, boolean)"><!-- --></A><H3>
+validateFileMask</H3>
+<PRE>
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateFileMask</B>(java.lang.String&nbsp;value,
+                                       boolean&nbsp;errorIfNotExist)
+                                throws java.io.IOException</PRE>
+<DL>
+<DD>Checks the GLOB-style file mask. See <A HREF="../hudson/FilePath.html#validateAntFileMask(java.lang.String)"><CODE>validateAntFileMask(String)</CODE></A>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE><DT><B>Since:</B></DT>
+  <DD>1.294</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="validateRelativePath(java.lang.String, boolean, boolean)"><!-- --></A><H3>
+validateRelativePath</H3>
+<PRE>
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateRelativePath</B>(java.lang.String&nbsp;value,
+                                           boolean&nbsp;errorIfNotExist,
+                                           boolean&nbsp;expectingFile)
+                                    throws java.io.IOException</PRE>
+<DL>
+<DD>Validates a relative file path from this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>value</CODE> - The relative path being validated.<DD><CODE>errorIfNotExist</CODE> - If true, report an error if the given relative path doesn't exist. Otherwise it's a warning.<DD><CODE>expectingFile</CODE> - If true, we expect the relative path to point to a file.
+      Otherwise, the relative path is expected to be pointing to a directory.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="validateRelativeDirectory(java.lang.String, boolean)"><!-- --></A><H3>
+validateRelativeDirectory</H3>
+<PRE>
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateRelativeDirectory</B>(java.lang.String&nbsp;value,
+                                                boolean&nbsp;errorIfNotExist)
+                                         throws java.io.IOException</PRE>
+<DL>
+<DD>A convenience method over <A HREF="../hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)"><CODE>validateRelativePath(String, boolean, boolean)</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="validateRelativeDirectory(java.lang.String)"><!-- --></A><H3>
+validateRelativeDirectory</H3>
+<PRE>
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateRelativeDirectory</B>(java.lang.String&nbsp;value)
+                                         throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>

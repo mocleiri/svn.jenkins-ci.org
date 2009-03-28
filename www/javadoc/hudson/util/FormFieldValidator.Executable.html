@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FormFieldValidator.Executable (Hudson core 1.293 API)
+FormFieldValidator.Executable (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FormFieldValidator.Executable (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FormFieldValidator.Executable (Hudson core 1.293 API)";
+        parent.document.title="FormFieldValidator.Executable (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -101,6 +101,8 @@ java.lang.Object
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A></DD>
 </DL>
 <HR>
+<B>Deprecated.</B>&nbsp;<I>as of 1.294. Use <A HREF="../../hudson/util/FormValidation.html#validateExecutable(java.lang.String)"><CODE>FormValidation.validateExecutable(String)</CODE></A></I>
+<P>
 <DL>
 <DT><PRE>public static class <B>FormFieldValidator.Executable</B><DT>extends <A HREF="../../hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A></DL>
 </PRE>
@@ -176,7 +178,7 @@ Checks a valid executable binary (specified in the 'value' query parameter).
                               org.kohsuke.stapler.StaplerResponse&nbsp;response)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -194,7 +196,7 @@ Checks a valid executable binary (specified in the 'value' query parameter).
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.Executable.html#check()">check</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -202,7 +204,7 @@ Checks a valid executable binary (specified in the 'value' query parameter).
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.Executable.html#checkExecutable(java.io.File)">checkExecutable</A></B>(java.io.File&nbsp;exe)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provides an opportunity for derived classes to do additional checks on the executable.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Provides an opportunity for derived classes to do additional checks on the executable.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.util.FormFieldValidator"><!-- --></A>
@@ -242,7 +244,7 @@ FormFieldValidator.Executable</H3>
 public <B>FormFieldValidator.Executable</B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
                                      org.kohsuke.stapler.StaplerResponse&nbsp;response)</PRE>
 <DL>
-</DL>
+<DD><B>Deprecated.</B>&nbsp;</DL>
 
 <!-- ============ METHOD DETAIL ========== -->
 
@@ -261,7 +263,7 @@ protected void <B>check</B>()
               throws java.io.IOException,
                      javax.servlet.ServletException</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/FormFieldValidator.html#check()">check</A></CODE> in class <CODE><A HREF="../../hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A></CODE></DL>
 </DD>
 <DD><DL>
@@ -280,7 +282,7 @@ protected void <B>checkExecutable</B>(java.io.File&nbsp;exe)
                         throws java.io.IOException,
                                javax.servlet.ServletException</PRE>
 <DL>
-<DD>Provides an opportunity for derived classes to do additional checks on the executable.
+<DD><B>Deprecated.</B>&nbsp;<DD>Provides an opportunity for derived classes to do additional checks on the executable.
 <P>
 <DD><DL>
 

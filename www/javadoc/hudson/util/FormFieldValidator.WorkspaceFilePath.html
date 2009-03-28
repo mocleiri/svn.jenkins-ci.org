@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FormFieldValidator.WorkspaceFilePath (Hudson core 1.293 API)
+FormFieldValidator.WorkspaceFilePath (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FormFieldValidator.WorkspaceFilePath (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FormFieldValidator.WorkspaceFilePath (Hudson core 1.293 API)";
+        parent.document.title="FormFieldValidator.WorkspaceFilePath (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/util/FormFieldValidator.WorkspaceFileMask.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/util/Function1.html" title="interface in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/util/FormFieldValidator.WorkspaceFilePath.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="FormFieldValidator.WorkspaceFilePath.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -104,6 +104,8 @@ java.lang.Object
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A></DD>
 </DL>
 <HR>
+<B>Deprecated.</B>&nbsp;<I>as of 1.294. Use <A HREF="../../hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)"><CODE>FilePath.validateRelativePath(String, boolean, boolean)</CODE></A></I>
+<P>
 <DL>
 <DT><PRE>public static class <B>FormFieldValidator.WorkspaceFilePath</B><DT>extends <A HREF="../../hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A></DL>
 </PRE>
@@ -174,7 +176,7 @@ Checks a valid file name or directory (specified in the 'value' query parameter)
                                      boolean&nbsp;expectingFile)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -192,7 +194,7 @@ Checks a valid file name or directory (specified in the 'value' query parameter)
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceFilePath.html#check()">check</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -200,7 +202,7 @@ Checks a valid file name or directory (specified in the 'value' query parameter)
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceFilePath.html#getBaseDirectory(hudson.model.AbstractProject)">getBaseDirectory</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;p)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The base directory from which the path name is resolved.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;The base directory from which the path name is resolved.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.util.FormFieldValidator"><!-- --></A>
@@ -242,7 +244,7 @@ public <B>FormFieldValidator.WorkspaceFilePath</B>(org.kohsuke.stapler.StaplerRe
                                             boolean&nbsp;errorIfNotExist,
                                             boolean&nbsp;expectingFile)</PRE>
 <DL>
-</DL>
+<DD><B>Deprecated.</B>&nbsp;</DL>
 
 <!-- ============ METHOD DETAIL ========== -->
 
@@ -261,7 +263,7 @@ protected void <B>check</B>()
               throws java.io.IOException,
                      javax.servlet.ServletException</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/FormFieldValidator.html#check()">check</A></CODE> in class <CODE><A HREF="../../hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A></CODE></DL>
 </DD>
 <DD><DL>
@@ -278,7 +280,7 @@ getBaseDirectory</H3>
 <PRE>
 protected <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>getBaseDirectory</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;p)</PRE>
 <DL>
-<DD>The base directory from which the path name is resolved.
+<DD><B>Deprecated.</B>&nbsp;<DD>The base directory from which the path name is resolved.
 <P>
 <DD><DL>
 </DL>
@@ -316,7 +318,7 @@ protected <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath<
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/util/FormFieldValidator.WorkspaceFileMask.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/util/Function1.html" title="interface in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/util/FormFieldValidator.WorkspaceFilePath.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="FormFieldValidator.WorkspaceFilePath.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

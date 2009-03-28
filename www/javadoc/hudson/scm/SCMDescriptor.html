@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SCMDescriptor (Hudson core 1.293 API)
+SCMDescriptor (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCMDescriptor (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCMDescriptor (Hudson core 1.293 API)";
+        parent.document.title="SCMDescriptor (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -225,6 +225,14 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SCMDescriptor.html#isApplicable(hudson.model.AbstractProject)">isApplicable</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows <A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm"><CODE>SCMDescriptor</CODE></A>s to choose which projects it wants to be configurable against.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/SCMDescriptor.html#isBrowserReusable(T, T)">isBrowserReusable</A></B>(<A HREF="../../hudson/scm/SCMDescriptor.html" title="type parameter in SCMDescriptor">T</A>&nbsp;x,
                   <A HREF="../../hudson/scm/SCMDescriptor.html" title="type parameter in SCMDescriptor">T</A>&nbsp;y)</CODE>
 
@@ -350,6 +358,25 @@ public boolean <B>isBrowserReusable</B>(<A HREF="../../hudson/scm/SCMDescriptor.
 
 <DT><B>Returns:</B><DD>true if the two given SCM configurations are similar enough
       that they can reuse <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> between them.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isApplicable(hudson.model.AbstractProject)"><!-- --></A><H3>
+isApplicable</H3>
+<PRE>
+public boolean <B>isApplicable</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project)</PRE>
+<DL>
+<DD>Allows <A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm"><CODE>SCMDescriptor</CODE></A>s to choose which projects it wants to be configurable against.
+
+ <p>
+ When this method returns false, this <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A> will not appear in the configuration screen
+ for the given project. The default method always return true.
+<P>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.294</DD>
+</DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Fingerprinter.DescriptorImpl (Hudson core 1.293 API)
+Fingerprinter.DescriptorImpl (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Fingerprinter.DescriptorImpl (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Fingerprinter.DescriptorImpl (Hudson core 1.293 API)";
+        parent.document.title="Fingerprinter.DescriptorImpl (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -178,9 +178,9 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/Fingerprinter.DescriptorImpl.html#doCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-        org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Fingerprinter.DescriptorImpl.html#doCheck(hudson.model.AbstractProject, java.lang.String)">doCheck</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
+        java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs on-the-fly validation on the file mask wildcard.</TD>
@@ -321,21 +321,21 @@ public java.lang.String <B>getHelpFile</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="doCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doCheck(hudson.model.AbstractProject, java.lang.String)"><!-- --></A><H3>
 doCheck</H3>
 <PRE>
-public void <B>doCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                    org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-             throws java.io.IOException,
-                    javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheck</B>(<FONT SIZE="-1">@AncestorInPath</FONT>
+                              <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
+                              <FONT SIZE="-1">@QueryParameter</FONT>
+                              java.lang.String&nbsp;value)
+                       throws java.io.IOException</PRE>
 <DL>
 <DD>Performs on-the-fly validation on the file mask wildcard.
 <P>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -367,7 +367,7 @@ public boolean <B>isApplicable</B>(java.lang.Class&lt;? extends <A HREF="../../h
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>true to allow user to configure this post-promotion task for the given project.</DL>
+<DT><B>Returns:</B><DD>true to allow user to configure this post-promotion task for the given project.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/AbstractProject.AbstractProjectDescriptor.html#isApplicable(hudson.model.Descriptor)"><CODE>AbstractProject.AbstractProjectDescriptor.isApplicable(Descriptor)</CODE></A></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

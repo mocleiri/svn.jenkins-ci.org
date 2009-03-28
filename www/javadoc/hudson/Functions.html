@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.293 API)
+Functions (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.293 API)";
+        parent.document.title="Functions (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -623,6 +623,14 @@ Utility functions used in views.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A>&lt;?&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getSCMDescriptors(hudson.model.AbstractProject)">getSCMDescriptors</A></B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../hudson/util/Area.html" title="class in hudson.util">Area</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#getScreenResolution()">getScreenResolution</A></B>()</CODE>
 
@@ -761,7 +769,9 @@ Utility functions used in views.
            java.lang.Object&nbsp;elseValue)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.294
+      JEXL now supports the real ternary operator "x?y:z", so this work around
+      is no longer necessary.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1182,6 +1192,10 @@ public static java.lang.Object <B>ifThenElse</B>(boolean&nbsp;cond,
                                           java.lang.Object&nbsp;thenValue,
                                           java.lang.Object&nbsp;elseValue)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.294
+      JEXL now supports the real ternary operator "x?y:z", so this work around
+      is no longer necessary.</I>
+<P>
 <DD><DL>
 </DL>
 </DD>
@@ -1635,6 +1649,17 @@ public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title=
 </DL>
 <HR>
 
+<A NAME="getSCMDescriptors(hudson.model.AbstractProject)"><!-- --></A><H3>
+getSCMDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A>&lt;?&gt;&gt; <B>getSCMDescriptors</B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getComputerLauncherDescriptors()"><!-- --></A><H3>
 getComputerLauncherDescriptors</H3>
 <PRE>
@@ -1879,7 +1904,7 @@ public static &lt;T&gt; T <B>defaulted</B>(T&nbsp;value,
 <DL>
 <DD>If the value exists, return that value. Otherwise return the default value.
  <p>
- This method is useful for supplying a default value to a form field.
+ Starting 1.294, JEXL supports the elvis operator "x?:y" that supercedes this.
 <P>
 <DD><DL>
 <DT><B>Since:</B></DT>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.293 API)
+Hudson (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.293 API)";
+        parent.document.title="Hudson (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -99,12 +99,12 @@ java.lang.Object
           <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Hudson</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;, <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, org.kohsuke.stapler.StaplerFallback, org.kohsuke.stapler.StaplerProxy</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;, <A HREF="../../hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model">DescriptorByNameOwner</A>, <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, org.kohsuke.stapler.StaplerFallback, org.kohsuke.stapler.StaplerProxy</DD>
 </DL>
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1">@ExportedBean
-</FONT>public final class <B>Hudson</B><DT>extends <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A><DT>implements <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;, org.kohsuke.stapler.StaplerProxy, org.kohsuke.stapler.StaplerFallback, <A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></DL>
+</FONT>public final class <B>Hudson</B><DT>extends <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A><DT>implements <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;, org.kohsuke.stapler.StaplerProxy, org.kohsuke.stapler.StaplerFallback, <A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, <A HREF="../../hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model">DescriptorByNameOwner</A></DL>
 </PRE>
 
 <P>
@@ -546,18 +546,9 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCheckLocalFSRoot(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCheckLocalFSRoot</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                   org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the path is a valid path.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCheckURIEncoding</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                   org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, java.lang.String)">doCheckURIEncoding</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
+                   java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if container uses UTF-8 to decode URLs.</TD>
@@ -608,9 +599,9 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doDefaultJDKCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDefaultJDKCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doDefaultJDKCheck(org.kohsuke.stapler.StaplerRequest, java.lang.String)">doDefaultJDKCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
+                  java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the user chose the default JDK, make sure we got 'java' in PATH.</TD>
@@ -649,6 +640,18 @@ T</CODE></FONT></TD>
              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Define your own check method, instead of relying on this generic one.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doFieldCheck(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">doFieldCheck</A></B>(java.lang.String&nbsp;value,
+             java.lang.String&nbsp;type,
+             java.lang.String&nbsp;errorText,
+             java.lang.String&nbsp;warningText)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the value for a field is set; if not an error or warning text is displayed.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -678,18 +681,16 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doItemExistsCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doItemExistsCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doItemExistsCheck(java.lang.String)">doItemExistsCheck</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the top-level item with the given name exists.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doJavaHomeCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doJavaHomeCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doJavaHomeCheck(java.io.File)">doJavaHomeCheck</A></B>(java.io.File&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the JAVA_HOME is a valid JAVA_HOME path.</TD>
@@ -822,9 +823,8 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doViewExistsCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doViewExistsCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doViewExistsCheck(java.lang.String)">doViewExistsCheck</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if a top-level view with the given name exists.</TD>
@@ -1029,10 +1029,18 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getDescriptor(java.lang.String)">getDescriptor</A></B>(java.lang.String&nbsp;fullyQualifiedClassName)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getDescriptor(java.lang.String)">getDescriptor</A></B>(java.lang.String&nbsp;className)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> by its name to URL.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A></B>(java.lang.String&nbsp;className)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alias for <A HREF="../../hudson/model/Hudson.html#getDescriptor(java.lang.String)"><CODE>getDescriptor(String)</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2672,7 +2680,7 @@ public <A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in h
 <A NAME="getDescriptor(java.lang.String)"><!-- --></A><H3>
 getDescriptor</H3>
 <PRE>
-public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> <B>getDescriptor</B>(java.lang.String&nbsp;fullyQualifiedClassName)</PRE>
+public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> <B>getDescriptor</B>(java.lang.String&nbsp;className)</PRE>
 <DL>
 <DD>Exposes <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> by its name to URL.
 
@@ -2683,7 +2691,23 @@ public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model
 </DL>
 </DD>
 <DD><DL>
+<DT><B>Parameters:</B><DD><CODE>className</CODE> - Either fully qualified class name (recommended) or the short name.</DL>
+</DD>
 </DL>
+<HR>
+
+<A NAME="getDescriptorByName(java.lang.String)"><!-- --></A><H3>
+getDescriptorByName</H3>
+<PRE>
+public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> <B>getDescriptorByName</B>(java.lang.String&nbsp;className)</PRE>
+<DL>
+<DD>Alias for <A HREF="../../hudson/model/Hudson.html#getDescriptor(java.lang.String)"><CODE>getDescriptor(String)</CODE></A>.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/DescriptorByNameOwner.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A></CODE> in interface <CODE><A HREF="../../hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model">DescriptorByNameOwner</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>className</CODE> - Either fully qualified class name (recommended) or the short name.</DL>
 </DD>
 </DL>
 <HR>
@@ -5074,35 +5098,11 @@ public void <B>doWorkspaceCleanup</B>(org.kohsuke.stapler.StaplerResponse&nbsp;r
 </DL>
 <HR>
 
-<A NAME="doCheckLocalFSRoot(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-doCheckLocalFSRoot</H3>
-<PRE>
-public void <B>doCheckLocalFSRoot</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                        throws java.io.IOException,
-                               javax.servlet.ServletException</PRE>
-<DL>
-<DD>Checks if the path is a valid path.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="doJavaHomeCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doJavaHomeCheck(java.io.File)"><!-- --></A><H3>
 doJavaHomeCheck</H3>
 <PRE>
-public void <B>doJavaHomeCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                            org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                     throws java.io.IOException,
-                            javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doJavaHomeCheck</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                      java.io.File&nbsp;value)</PRE>
 <DL>
 <DD>Checks if the JAVA_HOME is a valid JAVA_HOME path.
 <P>
@@ -5110,21 +5110,17 @@ public void <B>doJavaHomeCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 </DD>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="doDefaultJDKCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doDefaultJDKCheck(org.kohsuke.stapler.StaplerRequest, java.lang.String)"><!-- --></A><H3>
 doDefaultJDKCheck</H3>
 <PRE>
-public void <B>doDefaultJDKCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                       throws java.io.IOException,
-                              javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doDefaultJDKCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
+                                        <FONT SIZE="-1">@QueryParameter</FONT>
+                                        java.lang.String&nbsp;value)</PRE>
 <DL>
 <DD>If the user chose the default JDK, make sure we got 'java' in PATH.
 <P>
@@ -5132,21 +5128,16 @@ public void <B>doDefaultJDKCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req
 </DL>
 </DD>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="doItemExistsCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doItemExistsCheck(java.lang.String)"><!-- --></A><H3>
 doItemExistsCheck</H3>
 <PRE>
-public void <B>doItemExistsCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                       throws java.io.IOException,
-                              javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doItemExistsCheck</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                        java.lang.String&nbsp;value)</PRE>
 <DL>
 <DD>Checks if the top-level item with the given name exists.
 <P>
@@ -5154,21 +5145,16 @@ public void <B>doItemExistsCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req
 </DL>
 </DD>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="doViewExistsCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doViewExistsCheck(java.lang.String)"><!-- --></A><H3>
 doViewExistsCheck</H3>
 <PRE>
-public void <B>doViewExistsCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                       throws java.io.IOException,
-                              javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doViewExistsCheck</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                        java.lang.String&nbsp;value)</PRE>
 <DL>
 <DD>Checks if a top-level view with the given name exists.
 <P>
@@ -5176,10 +5162,7 @@ public void <B>doViewExistsCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req
 </DL>
 </DD>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -5192,11 +5175,38 @@ public void <B>doFieldCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                   throws java.io.IOException,
                          javax.servlet.ServletException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Define your own check method, instead of relying on this generic one.</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doFieldCheck(java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
+doFieldCheck</H3>
+<PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doFieldCheck</B>(<FONT SIZE="-1">@QueryParameter(fixEmpty=true)</FONT>
+                                   java.lang.String&nbsp;value,
+                                   <FONT SIZE="-1">@QueryParameter(fixEmpty=true)</FONT>
+                                   java.lang.String&nbsp;type,
+                                   <FONT SIZE="-1">@QueryParameter(fixEmpty=true)</FONT>
+                                   java.lang.String&nbsp;errorText,
+                                   <FONT SIZE="-1">@QueryParameter(fixEmpty=true)</FONT>
+                                   java.lang.String&nbsp;warningText)</PRE>
+<DL>
 <DD>Checks if the value for a field is set; if not an error or warning text is displayed.
  If the parameter "value" is not set then the parameter "errorText" is displayed
  as an error text. If the parameter "errorText" is not set, then the parameter "warningText" is
  displayed as a warning text.
- <p/>
+ <p>
  If the text is set and the parameter "type" is set, it will validate that the value is of the
  correct type. Supported types are "number, "number-positive" and "number-negative".
 <P>
@@ -5204,10 +5214,7 @@ public void <B>doFieldCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>req</CODE> - containing the parameter value and the errorText to display if the value isnt set<DD><CODE>rsp</CODE> - used by FormFieldValidator
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE> - thrown by FormFieldValidator.check()
-<DD><CODE>javax.servlet.ServletException</CODE> - thrown by FormFieldValidator.check()</DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -5239,13 +5246,13 @@ public void <B>doResources</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, java.lang.String)"><!-- --></A><H3>
 doCheckURIEncoding</H3>
 <PRE>
-public void <B>doCheckURIEncoding</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                        throws java.io.IOException,
-                               javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckURIEncoding</B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
+                                         <FONT SIZE="-1">@QueryParameter</FONT>
+                                         java.lang.String&nbsp;value)
+                                  throws java.io.IOException</PRE>
 <DL>
 <DD>Checks if container uses UTF-8 to decode URLs. See
  http://hudson.gotdns.com/wiki/display/HUDSON/Tomcat#Tomcat-i18n
@@ -5254,10 +5261,9 @@ public void <B>doCheckURIEncoding</B>(org.kohsuke.stapler.StaplerRequest&nbsp;re
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>req</CODE> - containing the parameter value<DD><CODE>rsp</CODE> - used by FormFieldValidator
+
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE> - thrown by FormFieldValidator.check()
-<DD><CODE>javax.servlet.ServletException</CODE> - thrown by FormFieldValidator.check()</DL>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Iterators (Hudson core 1.293 API)
+Iterators (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Iterators (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Iterators (Hudson core 1.293 API)";
+        parent.document.title="Iterators (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -291,6 +291,24 @@ Varios <A HREF="../../hudson/util/Iterators.FlattenIterator.html" title="class i
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an <CODE>Iterable</CODE> that iterates over all the given <CODE>Iterable</CODE>s.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;U,T extends U&gt; 
+<BR>
+java.util.Iterator&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/Iterators.html#subType(java.util.Iterator, java.lang.Class)">subType</A></B>(java.util.Iterator&lt;U&gt;&nbsp;itr,
+        java.lang.Class&lt;T&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an <A HREF="../../hudson/util/Iterators.FlattenIterator.html" title="class in hudson.util"><CODE>Iterators.FlattenIterator</CODE></A> that only returns items of the given subtype.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -438,6 +456,20 @@ cast</H3>
 public static &lt;T&gt; java.lang.Iterable&lt;T&gt; <B>cast</B>(java.lang.Iterable&lt;? extends T&gt;&nbsp;itr)</PRE>
 <DL>
 <DD>Casts <CODE>Iterable</CODE> by taking advantage of its covariant-ness.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="subType(java.util.Iterator, java.lang.Class)"><!-- --></A><H3>
+subType</H3>
+<PRE>
+public static &lt;U,T extends U&gt; java.util.Iterator&lt;T&gt; <B>subType</B>(java.util.Iterator&lt;U&gt;&nbsp;itr,
+                                                            java.lang.Class&lt;T&gt;&nbsp;type)</PRE>
+<DL>
+<DD>Returns an <A HREF="../../hudson/util/Iterators.FlattenIterator.html" title="class in hudson.util"><CODE>Iterators.FlattenIterator</CODE></A> that only returns items of the given subtype.
 <P>
 <DD><DL>
 </DL>

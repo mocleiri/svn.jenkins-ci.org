@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonTestCase (Test harness for Hudson and plugins 1.293 API)
+HudsonTestCase (Test harness for Hudson and plugins 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Test harness for Hudson and plugins 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.293 API)";
+        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.294 API)";
     }
 }
 </SCRIPT>
@@ -435,6 +435,14 @@ R</CODE></FONT></TD>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepares a webapp hosting environment to get <CODE>ServletContext</CODE> implementation
  that we need for testing.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#interactiveBreak()">interactiveBreak</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blocks until the ENTER key is hit.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1030,6 +1038,23 @@ public <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/slave
                       throws java.lang.Exception</PRE>
 <DL>
 <DD>Creates a slave with certain additional environment variables
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="interactiveBreak()"><!-- --></A><H3>
+interactiveBreak</H3>
+<PRE>
+public void <B>interactiveBreak</B>()
+                      throws java.lang.Exception</PRE>
+<DL>
+<DD>Blocks until the ENTER key is hit.
+ This is useful during debugging a test so that one can inspect the state of Hudson through the web browser.
 <P>
 <DD><DL>
 

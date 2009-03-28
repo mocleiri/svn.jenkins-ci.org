@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.util (Hudson core 1.293 API)
+hudson.util (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.util (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.util (Hudson core 1.293 API)";
+        parent.document.title="hudson.util (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -272,7 +272,8 @@ Other miscellaneous utility code
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A></B></TD>
-<TD>Base class that provides the framework for doing on-the-fly form field validation.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Use <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util"><CODE>FormValidation</CODE></A> as a return value in your check method.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.Base64.html" title="class in hudson.util">FormFieldValidator.Base64</A></B></TD>
@@ -280,7 +281,7 @@ Other miscellaneous utility code
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.Executable.html" title="class in hudson.util">FormFieldValidator.Executable</A></B></TD>
-<TD>Checks a valid executable binary (specified in the 'value' query parameter).</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.294.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.HudsonURL.html" title="class in hudson.util">FormFieldValidator.HudsonURL</A></B></TD>
@@ -288,26 +289,37 @@ Other miscellaneous utility code
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.NonNegativeInteger.html" title="class in hudson.util">FormFieldValidator.NonNegativeInteger</A></B></TD>
-<TD>Verifies that the 'value' parameter is an integer >= 0.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Use <A HREF="../../hudson/util/FormValidation.html#validateNonNegativeInteger(java.lang.String)"><CODE>FormValidation.validateNonNegativeInteger(String)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.URLCheck.html" title="class in hudson.util">FormFieldValidator.URLCheck</A></B></TD>
-<TD>Convenient base class for checking the validity of URLs</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Use <A HREF="../../hudson/util/FormValidation.URLCheck.html" title="class in hudson.util"><CODE>FormValidation.URLCheck</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceDirectory.html" title="class in hudson.util">FormFieldValidator.WorkspaceDirectory</A></B></TD>
-<TD>Checks a valid directory name (specified in the 'value' query parameter) against
- the current workspace.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.294.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceFileMask.html" title="class in hudson.util">FormFieldValidator.WorkspaceFileMask</A></B></TD>
-<TD>Checks the file mask (specified in the 'value' query parameter) against
- the current workspace.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.294.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceFilePath.html" title="class in hudson.util">FormFieldValidator.WorkspaceFilePath</A></B></TD>
-<TD>Checks a valid file name or directory (specified in the 'value' query parameter) against
- the current workspace.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.294.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></B></TD>
+<TD>Represents the result of the form field validation.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/FormValidation.FileValidator.html" title="class in hudson.util">FormValidation.FileValidator</A></B></TD>
+<TD>Performs an application-specific validation on the given file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/FormValidation.URLCheck.html" title="class in hudson.util">FormValidation.URLCheck</A></B></TD>
+<TD>Convenient base class for checking the validity of URLs.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/Futures.html" title="class in hudson.util">Futures</A></B></TD>
@@ -538,6 +550,10 @@ Other miscellaneous utility code
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Enum Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/FormValidation.Kind.html" title="enum in hudson.util">FormValidation.Kind</A></B></TD>
+<TD>Indicates the kind of result.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A></B></TD>

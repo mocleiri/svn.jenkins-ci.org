@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FormFieldValidator (Hudson core 1.293 API)
+FormFieldValidator (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FormFieldValidator (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FormFieldValidator (Hudson core 1.293 API)";
+        parent.document.title="FormFieldValidator (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -100,6 +100,9 @@ java.lang.Object
 <DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/util/FormFieldValidator.Base64.html" title="class in hudson.util">FormFieldValidator.Base64</A>, <A HREF="../../hudson/util/FormFieldValidator.Executable.html" title="class in hudson.util">FormFieldValidator.Executable</A>, <A HREF="../../hudson/util/FormFieldValidator.NonNegativeInteger.html" title="class in hudson.util">FormFieldValidator.NonNegativeInteger</A>, <A HREF="../../hudson/util/FormFieldValidator.URLCheck.html" title="class in hudson.util">FormFieldValidator.URLCheck</A>, <A HREF="../../hudson/util/FormFieldValidator.WorkspaceFileMask.html" title="class in hudson.util">FormFieldValidator.WorkspaceFileMask</A>, <A HREF="../../hudson/util/FormFieldValidator.WorkspaceFilePath.html" title="class in hudson.util">FormFieldValidator.WorkspaceFilePath</A></DD>
 </DL>
 <HR>
+<B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Use <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util"><CODE>FormValidation</CODE></A> as a return value in your check method.</I>
+<P>
 <DL>
 <DT><PRE>public abstract class <B>FormFieldValidator</B><DT>extends java.lang.Object</DL>
 </PRE>
@@ -134,7 +137,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.Base64.html" title="class in hudson.util">FormFieldValidator.Base64</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verifies that the 'value' parameter is correct base64 encoded text.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Verifies that the 'value' parameter is correct base64 encoded text.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -142,7 +145,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.Executable.html" title="class in hudson.util">FormFieldValidator.Executable</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks a valid executable binary (specified in the 'value' query parameter).</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.294. Use <A HREF="../../hudson/util/FormValidation.html#validateExecutable(java.lang.String)"><CODE>FormValidation.validateExecutable(String)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -150,7 +153,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.HudsonURL.html" title="class in hudson.util">FormFieldValidator.HudsonURL</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the given value is an URL to some Hudson's top page.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Checks if the given value is an URL to some Hudson's top page.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -158,7 +161,8 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.NonNegativeInteger.html" title="class in hudson.util">FormFieldValidator.NonNegativeInteger</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verifies that the 'value' parameter is an integer >= 0.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Use <A HREF="../../hudson/util/FormValidation.html#validateNonNegativeInteger(java.lang.String)"><CODE>FormValidation.validateNonNegativeInteger(String)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -166,7 +170,8 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.URLCheck.html" title="class in hudson.util">FormFieldValidator.URLCheck</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenient base class for checking the validity of URLs</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Use <A HREF="../../hudson/util/FormValidation.URLCheck.html" title="class in hudson.util"><CODE>FormValidation.URLCheck</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -174,8 +179,8 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceDirectory.html" title="class in hudson.util">FormFieldValidator.WorkspaceDirectory</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks a valid directory name (specified in the 'value' query parameter) against
- the current workspace.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.294. Use <A HREF="../../hudson/FilePath.html#validateRelativeDirectory(java.lang.String, boolean)"><CODE>FilePath.validateRelativeDirectory(String, boolean)</CODE></A>
+      (see <CODE>JavadocArchiver.DescriptorImpl#doCheck(AbstractProject, String)</CODE></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -183,8 +188,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceFileMask.html" title="class in hudson.util">FormFieldValidator.WorkspaceFileMask</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks the file mask (specified in the 'value' query parameter) against
- the current workspace.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.294. Use <A HREF="../../hudson/FilePath.html#validateFileMask(java.lang.String, boolean)"><CODE>FilePath.validateFileMask(String, boolean)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -192,8 +196,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceFilePath.html" title="class in hudson.util">FormFieldValidator.WorkspaceFilePath</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks a valid file name or directory (specified in the 'value' query parameter) against
- the current workspace.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.294. Use <A HREF="../../hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)"><CODE>FilePath.validateRelativePath(String, boolean, boolean)</CODE></A></I></TD>
 </TR>
 </TABLE>
 &nbsp;<!-- =========== FIELD SUMMARY =========== -->
@@ -210,7 +213,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#CHECK">CHECK</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -218,7 +221,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#permission">permission</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission to check, or null if this check doesn't require any permission.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Permission to check, or null if this check doesn't require any permission.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -226,7 +229,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#request">request</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -234,7 +237,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#response">response</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -242,7 +245,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#subject">subject</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The object to which the permission is checked against.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;The object to which the permission is checked against.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -261,7 +264,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
                    <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -269,7 +272,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#FormFieldValidator(hudson.security.Permission)">FormFieldValidator</A></B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -291,7 +294,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
                    boolean&nbsp;adminOnly)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -320,7 +323,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#check()">check</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -328,7 +331,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#error(java.lang.String)">error</A></B>(java.lang.String&nbsp;message)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sends out a string error message that indicates an error.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Sends out a string error message that indicates an error.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -337,7 +340,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
       java.lang.Object...&nbsp;args)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sends out a string error message that indicates an error,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Sends out a string error message that indicates an error,
  by formatting it with <CODE>String.format(String, Object[])</CODE></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -346,7 +349,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#errorWithMarkup(java.lang.String)">errorWithMarkup</A></B>(java.lang.String&nbsp;message)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sends out an HTML fragment that indicates an error.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Sends out an HTML fragment that indicates an error.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -354,7 +357,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#getFileParameter(java.lang.String)">getFileParameter</A></B>(java.lang.String&nbsp;paramName)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the parameter as a file.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Gets the parameter as a file.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -362,7 +365,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#ok()">ok</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sends out an HTML fragment that indicates a success.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Sends out an HTML fragment that indicates a success.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -370,7 +373,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#ok(java.lang.String)">ok</A></B>(java.lang.String&nbsp;message)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -379,7 +382,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
    java.lang.Object...&nbsp;args)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -387,7 +390,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#okWithMarkup(java.lang.String)">okWithMarkup</A></B>(java.lang.String&nbsp;message)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -395,7 +398,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#process()">process</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs the validation code.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Runs the validation code.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -403,7 +406,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#respond(java.lang.String)">respond</A></B>(java.lang.String&nbsp;html)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sends out an arbitrary HTML fragment.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Sends out an arbitrary HTML fragment.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -411,7 +414,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#warning(java.lang.String)">warning</A></B>(java.lang.String&nbsp;message)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -420,7 +423,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
         java.lang.Object...&nbsp;args)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -428,7 +431,7 @@ Base class that provides the framework for doing on-the-fly form field validatio
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.html#warningWithMarkup(java.lang.String)">warningWithMarkup</A></B>(java.lang.String&nbsp;message)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -458,7 +461,7 @@ CHECK</H3>
 <PRE>
 public static final <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A> <B>CHECK</B></PRE>
 <DL>
-<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
 </DL>
 </DL>
 <HR>
@@ -468,7 +471,7 @@ request</H3>
 <PRE>
 protected final org.kohsuke.stapler.StaplerRequest <B>request</B></PRE>
 <DL>
-<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
 </DL>
 </DL>
 <HR>
@@ -478,7 +481,7 @@ response</H3>
 <PRE>
 protected final org.kohsuke.stapler.StaplerResponse <B>response</B></PRE>
 <DL>
-<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
 </DL>
 </DL>
 <HR>
@@ -488,7 +491,7 @@ permission</H3>
 <PRE>
 protected final <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A> <B>permission</B></PRE>
 <DL>
-<DD>Permission to check, or null if this check doesn't require any permission.
+<DD><B>Deprecated.</B>&nbsp;<DD>Permission to check, or null if this check doesn't require any permission.
 <P>
 <DL>
 </DL>
@@ -500,7 +503,7 @@ subject</H3>
 <PRE>
 protected final <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A> <B>subject</B></PRE>
 <DL>
-<DD>The object to which the permission is checked against.
+<DD><B>Deprecated.</B>&nbsp;<DD>The object to which the permission is checked against.
  If <A HREF="../../hudson/util/FormFieldValidator.html#permission"><CODE>permission</CODE></A> is non-null, must be non-null.
 <P>
 <DL>
@@ -524,7 +527,7 @@ protected <B>FormFieldValidator</B>(org.kohsuke.stapler.StaplerRequest&nbsp;requ
                              org.kohsuke.stapler.StaplerResponse&nbsp;response,
                              boolean&nbsp;adminOnly)</PRE>
 <DL>
-<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
 <DT><B>Parameters:</B><DD><CODE>adminOnly</CODE> - Pass true to only let admin users to run the check. This is necessary
       for security reason, so that unauthenticated user cannot obtain sensitive
       information or run a process that may have side-effect.</DL>
@@ -549,7 +552,7 @@ FormFieldValidator</H3>
 <PRE>
 protected <B>FormFieldValidator</B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</PRE>
 <DL>
-<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
 <DT><B>Parameters:</B><DD><CODE>permission</CODE> - Permission needed to perform this validation, or null if no permission is necessary.</DL>
 </DL>
 <HR>
@@ -574,7 +577,7 @@ FormFieldValidator</H3>
 protected <B>FormFieldValidator</B>(<A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>&nbsp;subject,
                              <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</PRE>
 <DL>
-</DL>
+<DD><B>Deprecated.</B>&nbsp;</DL>
 
 <!-- ============ METHOD DETAIL ========== -->
 
@@ -593,7 +596,7 @@ public final void <B>process</B>()
                    throws java.io.IOException,
                           javax.servlet.ServletException</PRE>
 <DL>
-<DD>Runs the validation code.
+<DD><B>Deprecated.</B>&nbsp;<DD>Runs the validation code.
 <P>
 <DD><DL>
 
@@ -611,7 +614,7 @@ protected abstract void <B>check</B>()
                        throws java.io.IOException,
                               javax.servlet.ServletException</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
@@ -625,7 +628,7 @@ getFileParameter</H3>
 <PRE>
 protected final java.io.File <B>getFileParameter</B>(java.lang.String&nbsp;paramName)</PRE>
 <DL>
-<DD>Gets the parameter as a file.
+<DD><B>Deprecated.</B>&nbsp;<DD>Gets the parameter as a file.
 <P>
 <DD><DL>
 </DL>
@@ -640,7 +643,7 @@ public void <B>ok</B>()
         throws java.io.IOException,
                javax.servlet.ServletException</PRE>
 <DL>
-<DD>Sends out an HTML fragment that indicates a success.
+<DD><B>Deprecated.</B>&nbsp;<DD>Sends out an HTML fragment that indicates a success.
 <P>
 <DD><DL>
 
@@ -658,7 +661,7 @@ public void <B>respond</B>(java.lang.String&nbsp;html)
              throws java.io.IOException,
                     javax.servlet.ServletException</PRE>
 <DL>
-<DD>Sends out an arbitrary HTML fragment.
+<DD><B>Deprecated.</B>&nbsp;<DD>Sends out an arbitrary HTML fragment.
 <P>
 <DD><DL>
 
@@ -676,7 +679,7 @@ public void <B>error</B>(java.lang.String&nbsp;message)
            throws java.io.IOException,
                   javax.servlet.ServletException</PRE>
 <DL>
-<DD>Sends out a string error message that indicates an error.
+<DD><B>Deprecated.</B>&nbsp;<DD>Sends out a string error message that indicates an error.
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>message</CODE> - Human readable message to be sent. <tt>error(null)</tt>
@@ -695,7 +698,7 @@ public void <B>warning</B>(java.lang.String&nbsp;message)
              throws java.io.IOException,
                     javax.servlet.ServletException</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
@@ -711,7 +714,7 @@ public void <B>ok</B>(java.lang.String&nbsp;message)
         throws java.io.IOException,
                javax.servlet.ServletException</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
@@ -728,7 +731,7 @@ public void <B>error</B>(java.lang.String&nbsp;format,
            throws java.io.IOException,
                   javax.servlet.ServletException</PRE>
 <DL>
-<DD>Sends out a string error message that indicates an error,
+<DD><B>Deprecated.</B>&nbsp;<DD>Sends out a string error message that indicates an error,
  by formatting it with <CODE>String.format(String, Object[])</CODE>
 <P>
 <DD><DL>
@@ -748,7 +751,7 @@ public void <B>warning</B>(java.lang.String&nbsp;format,
              throws java.io.IOException,
                     javax.servlet.ServletException</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
@@ -765,7 +768,7 @@ public void <B>ok</B>(java.lang.String&nbsp;format,
         throws java.io.IOException,
                javax.servlet.ServletException</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
@@ -781,7 +784,7 @@ public void <B>errorWithMarkup</B>(java.lang.String&nbsp;message)
                      throws java.io.IOException,
                             javax.servlet.ServletException</PRE>
 <DL>
-<DD>Sends out an HTML fragment that indicates an error.
+<DD><B>Deprecated.</B>&nbsp;<DD>Sends out an HTML fragment that indicates an error.
 
  <p>
  This method must be used with care to avoid cross-site scripting
@@ -804,7 +807,7 @@ public void <B>warningWithMarkup</B>(java.lang.String&nbsp;message)
                        throws java.io.IOException,
                               javax.servlet.ServletException</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
@@ -820,7 +823,7 @@ public void <B>okWithMarkup</B>(java.lang.String&nbsp;message)
                   throws java.io.IOException,
                          javax.servlet.ServletException</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>

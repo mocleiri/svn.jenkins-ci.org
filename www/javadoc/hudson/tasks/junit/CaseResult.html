@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-CaseResult (Hudson core 1.293 API)
+CaseResult (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CaseResult (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CaseResult (Hudson core 1.293 API)";
+        parent.document.title="CaseResult (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -299,6 +299,22 @@ One test result.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#getStderr()">getStderr</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The stderr of this test.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#getStdout()">getStdout</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The stdout of this test.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#isPassed()">isPassed</A></B>()</CODE>
 
@@ -507,6 +523,53 @@ getAge</H3>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStdout()"><!-- --></A><H3>
+getStdout</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public java.lang.String <B>getStdout</B>()</PRE>
+<DL>
+<DD>The stdout of this test.
+
+ <p>
+ Depending on the tool that produced the XML report, this method works somewhat inconsistently.
+ With some tools (such as Maven surefire plugin), you get the accurate information, that is
+ the stdout from this test case. With some other tools (such as the JUnit task in Ant), this
+ method returns the stdout produced by the entire test suite.
+
+ <p>
+ If you need to know which is the case, compare this output from <A HREF="../../../hudson/tasks/junit/SuiteResult.html#getStdout()"><CODE>SuiteResult.getStdout()</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.294</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStderr()"><!-- --></A><H3>
+getStderr</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public java.lang.String <B>getStderr</B>()</PRE>
+<DL>
+<DD>The stderr of this test.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.294</DD>
+<DT><B>See Also:</B><DD><A HREF="../../../hudson/tasks/junit/CaseResult.html#getStdout()"><CODE>getStdout()</CODE></A></DL>
 </DD>
 </DL>
 <HR>

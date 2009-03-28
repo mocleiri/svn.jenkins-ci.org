@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FormFieldValidator.URLCheck (Hudson core 1.293 API)
+FormFieldValidator.URLCheck (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FormFieldValidator.URLCheck (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FormFieldValidator.URLCheck (Hudson core 1.293 API)";
+        parent.document.title="FormFieldValidator.URLCheck (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -104,6 +104,9 @@ java.lang.Object
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A></DD>
 </DL>
 <HR>
+<B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Use <A HREF="../../hudson/util/FormValidation.URLCheck.html" title="class in hudson.util"><CODE>FormValidation.URLCheck</CODE></A></I>
+<P>
 <DL>
 <DT><PRE>public abstract static class <B>FormFieldValidator.URLCheck</B><DT>extends <A HREF="../../hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A></DL>
 </PRE>
@@ -167,7 +170,7 @@ Convenient base class for checking the validity of URLs
                             org.kohsuke.stapler.StaplerResponse&nbsp;response)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -186,7 +189,7 @@ Convenient base class for checking the validity of URLs
          java.lang.String&nbsp;literal)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds the string literal from the given reader.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Finds the string literal from the given reader.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -195,7 +198,7 @@ Convenient base class for checking the validity of URLs
                   java.io.IOException&nbsp;e)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calls the <A HREF="../../hudson/util/FormFieldValidator.html#error(java.lang.String)"><CODE>FormFieldValidator.error(String)</CODE></A> method with a reasonable error message.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Calls the <A HREF="../../hudson/util/FormFieldValidator.html#error(java.lang.String)"><CODE>FormFieldValidator.error(String)</CODE></A> method with a reasonable error message.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -203,7 +206,7 @@ Convenient base class for checking the validity of URLs
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.URLCheck.html#open(java.net.URL)">open</A></B>(java.net.URL&nbsp;url)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the given URL and reads text content from it.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Opens the given URL and reads text content from it.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.util.FormFieldValidator"><!-- --></A>
@@ -243,7 +246,7 @@ FormFieldValidator.URLCheck</H3>
 public <B>FormFieldValidator.URLCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
                                    org.kohsuke.stapler.StaplerResponse&nbsp;response)</PRE>
 <DL>
-</DL>
+<DD><B>Deprecated.</B>&nbsp;</DL>
 
 <!-- ============ METHOD DETAIL ========== -->
 
@@ -261,7 +264,7 @@ open</H3>
 protected java.io.BufferedReader <B>open</B>(java.net.URL&nbsp;url)
                                throws java.io.IOException</PRE>
 <DL>
-<DD>Opens the given URL and reads text content from it.
+<DD><B>Deprecated.</B>&nbsp;<DD>Opens the given URL and reads text content from it.
  This method honors Content-type header.
 <P>
 <DD><DL>
@@ -279,7 +282,7 @@ protected boolean <B>findText</B>(java.io.BufferedReader&nbsp;in,
                            java.lang.String&nbsp;literal)
                     throws java.io.IOException</PRE>
 <DL>
-<DD>Finds the string literal from the given reader.
+<DD><B>Deprecated.</B>&nbsp;<DD>Finds the string literal from the given reader.
 <P>
 <DD><DL>
 
@@ -298,7 +301,7 @@ protected void <B>handleIOException</B>(java.lang.String&nbsp;url,
                           throws java.io.IOException,
                                  javax.servlet.ServletException</PRE>
 <DL>
-<DD>Calls the <A HREF="../../hudson/util/FormFieldValidator.html#error(java.lang.String)"><CODE>FormFieldValidator.error(String)</CODE></A> method with a reasonable error message.
+<DD><B>Deprecated.</B>&nbsp;<DD>Calls the <A HREF="../../hudson/util/FormFieldValidator.html#error(java.lang.String)"><CODE>FormFieldValidator.error(String)</CODE></A> method with a reasonable error message.
  Use this method when the <A HREF="../../hudson/util/FormFieldValidator.URLCheck.html#open(java.net.URL)"><CODE>open(URL)</CODE></A> or <A HREF="../../hudson/util/FormFieldValidator.URLCheck.html#findText(java.io.BufferedReader, java.lang.String)"><CODE>findText(BufferedReader, String)</CODE></A> fails.
 <P>
 <DD><DL>

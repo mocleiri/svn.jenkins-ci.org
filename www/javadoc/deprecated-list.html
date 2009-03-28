@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.293 API)
+Deprecated List (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.293 API)";
+        parent.document.title="Deprecated List (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -141,6 +141,45 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.280
       <A HREF="hudson/security/SecurityRealm.SecurityComponents.html" title="class in hudson.security"><CODE>SecurityRealm.SecurityComponents</CODE></A> are now created after <A HREF="hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> is created, so
       the initialization order issue that this code was trying to address no longer exists.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.html" title="class in hudson.util">hudson.util.FormFieldValidator</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294
+      Use <A HREF="hudson/util/FormValidation.html" title="class in hudson.util"><CODE>FormValidation</CODE></A> as a return value in your check method.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.Executable.html" title="class in hudson.util">hudson.util.FormFieldValidator.Executable</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294. Use <A HREF="hudson/util/FormValidation.html#validateExecutable(java.lang.String)"><CODE>FormValidation.validateExecutable(String)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.NonNegativeInteger.html" title="class in hudson.util">hudson.util.FormFieldValidator.NonNegativeInteger</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294
+      Use <A HREF="hudson/util/FormValidation.html#validateNonNegativeInteger(java.lang.String)"><CODE>FormValidation.validateNonNegativeInteger(String)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.URLCheck.html" title="class in hudson.util">hudson.util.FormFieldValidator.URLCheck</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294
+      Use <A HREF="hudson/util/FormValidation.URLCheck.html" title="class in hudson.util"><CODE>FormValidation.URLCheck</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.WorkspaceDirectory.html" title="class in hudson.util">hudson.util.FormFieldValidator.WorkspaceDirectory</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294. Use <A HREF="hudson/FilePath.html#validateRelativeDirectory(java.lang.String, boolean)"><CODE>FilePath.validateRelativeDirectory(String, boolean)</CODE></A>
+      (see <CODE>JavadocArchiver.DescriptorImpl#doCheck(AbstractProject, String)</CODE></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.WorkspaceFileMask.html" title="class in hudson.util">hudson.util.FormFieldValidator.WorkspaceFileMask</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294. Use <A HREF="hudson/FilePath.html#validateFileMask(java.lang.String, boolean)"><CODE>FilePath.validateFileMask(String, boolean)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.WorkspaceFilePath.html" title="class in hudson.util">hudson.util.FormFieldValidator.WorkspaceFilePath</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294. Use <A HREF="hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)"><CODE>FilePath.validateRelativePath(String, boolean, boolean)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">hudson.model.listeners.JobListener</A>
@@ -467,13 +506,19 @@ function windowTitle()
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.lang.String)">hudson.maven.MavenUtil.createEmbedder(TaskListener, String)</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <CODE>MavenInstallation#createEmbedder(BuildListener, String)</CODE>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/tasks/Maven.MavenInstallation.html#createEmbedder(hudson.model.BuildListener, java.lang.String, java.util.Properties)"><CODE>Maven.MavenInstallation.createEmbedder(BuildListener, String, Properties)</CODE></A> 
       or other overloaded versions that infers maven home.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/scm/RepositoryBrowsers.html#createInstance(java.lang.Class, org.kohsuke.stapler.StaplerRequest, java.lang.String)">hudson.scm.RepositoryBrowsers.createInstance(Class<T>, StaplerRequest, String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/scm/RepositoryBrowsers.html#createInstance(java.lang.Class, org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String)"><CODE>RepositoryBrowsers.createInstance(Class, StaplerRequest, JSONObject, String)</CODE></A>.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Hudson.html#doFieldCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">hudson.model.Hudson.doFieldCheck(StaplerRequest, StaplerResponse)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294
+      Define your own check method, instead of relying on this generic one.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#doLogRss(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">hudson.model.Hudson.doLogRss(StaplerRequest, StaplerResponse)</A>
@@ -648,6 +693,13 @@ function windowTitle()
       Perhaps you meant <A HREF="hudson/model/Hudson.html#getRootUrl()"><CODE>Hudson.getRootUrl()</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/Functions.html#ifThenElse(boolean, java.lang.Object, java.lang.Object)">hudson.Functions.ifThenElse(boolean, Object, Object)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294
+      JEXL now supports the real ternary operator "x?y:z", so this work around
+      is no longer necessary.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#isAdmin()">hudson.model.Hudson.isAdmin()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>This method is deprecated when Hudson moved from simple Unix root-like model
@@ -712,6 +764,12 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.292
       Use <A HREF="hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer, hudson.model.TaskListener)"><CODE>ComputerListener.onOnline(Computer, TaskListener)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/scm/SCMS.html#parseSCM(org.kohsuke.stapler.StaplerRequest)">hudson.scm.SCMS.parseSCM(StaplerRequest)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294
+      Use <A HREF="hudson/scm/SCMS.html#parseSCM(org.kohsuke.stapler.StaplerRequest, hudson.model.AbstractProject)"><CODE>SCMS.parseSCM(StaplerRequest, AbstractProject)</CODE></A> and pass in the caller's project type.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.Build, hudson.Launcher, hudson.model.BuildListener)">hudson.tasks.BuildStepCompatibilityLayer.perform(Build<?, ?>, Launcher, BuildListener)</A>

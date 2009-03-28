@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-TopLevelItemDescriptor (Hudson core 1.293 API)
+TopLevelItemDescriptor (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TopLevelItemDescriptor (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TopLevelItemDescriptor (Hudson core 1.293 API)";
+        parent.document.title="TopLevelItemDescriptor (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -101,7 +101,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/ExternalJob.DescriptorImpl.html" title="class in hudson.model">ExternalJob.DescriptorImpl</A>, <A HREF="../../hudson/model/FreeStyleProject.DescriptorImpl.html" title="class in hudson.model">FreeStyleProject.DescriptorImpl</A>, <A HREF="../../hudson/matrix/MatrixProject.DescriptorImpl.html" title="class in hudson.matrix">MatrixProject.DescriptorImpl</A>, <A HREF="../../hudson/maven/MavenModuleSet.DescriptorImpl.html" title="class in hudson.maven">MavenModuleSet.DescriptorImpl</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/AbstractProject.AbstractProjectDescriptor.html" title="class in hudson.model">AbstractProject.AbstractProjectDescriptor</A>, <A HREF="../../hudson/model/ExternalJob.DescriptorImpl.html" title="class in hudson.model">ExternalJob.DescriptorImpl</A></DD>
 </DL>
 <HR>
 <DL>
@@ -202,6 +202,14 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/TopLevelItemDescriptor.html#isApplicable(hudson.model.Descriptor)">isApplicable</A></B>(<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&nbsp;descriptor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model"><CODE>TopLevelItemDescriptor</CODE></A>s often uses other descriptors to decorate itself.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/TopLevelItemDescriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
 
@@ -288,6 +296,26 @@ protected <B>TopLevelItemDescriptor</B>()</PRE>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="isApplicable(hudson.model.Descriptor)"><!-- --></A><H3>
+isApplicable</H3>
+<PRE>
+public boolean <B>isApplicable</B>(<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&nbsp;descriptor)</PRE>
+<DL>
+<DD><A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model"><CODE>TopLevelItemDescriptor</CODE></A>s often uses other descriptors to decorate itself.
+ This method allows the subtype of <A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model"><CODE>TopLevelItemDescriptor</CODE></A>s to filter them out.
+
+ <p>
+ This is useful for a workflow/company specific job type that wants to eliminate
+ options that the user would see.
+<P>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.294</DD>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="getDisplayName()"><!-- --></A><H3>
 getDisplayName</H3>

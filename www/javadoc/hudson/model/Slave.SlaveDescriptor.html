@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Slave.SlaveDescriptor (Hudson core 1.293 API)
+Slave.SlaveDescriptor (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Slave.SlaveDescriptor (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Slave.SlaveDescriptor (Hudson core 1.293 API)";
+        parent.document.title="Slave.SlaveDescriptor (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -189,18 +189,16 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Slave.SlaveDescriptor.html#doCheckNumExecutors()">doCheckNumExecutors</A></B>()</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Slave.SlaveDescriptor.html#doCheckNumExecutors(java.lang.String)">doCheckNumExecutors</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Slave.SlaveDescriptor.html#doCheckRemoteFs(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doCheckRemoteFs</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                java.lang.String&nbsp;value)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Slave.SlaveDescriptor.html#doCheckRemoteFs(java.lang.String)">doCheckRemoteFs</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs syntactical check on the remote FS for slaves.</TD>
@@ -263,31 +261,25 @@ public <B>Slave.SlaveDescriptor</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="doCheckNumExecutors()"><!-- --></A><H3>
+<A NAME="doCheckNumExecutors(java.lang.String)"><!-- --></A><H3>
 doCheckNumExecutors</H3>
 <PRE>
-public void <B>doCheckNumExecutors</B>()
-                         throws java.io.IOException,
-                                javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckNumExecutors</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                          java.lang.String&nbsp;value)</PRE>
 <DL>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="doCheckRemoteFs(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
+<A NAME="doCheckRemoteFs(java.lang.String)"><!-- --></A><H3>
 doCheckRemoteFs</H3>
 <PRE>
-public void <B>doCheckRemoteFs</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                            org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                            <FONT SIZE="-1">@QueryParameter</FONT>
-                            java.lang.String&nbsp;value)
-                     throws java.io.IOException,
-                            javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckRemoteFs</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                      java.lang.String&nbsp;value)
+                               throws java.io.IOException,
+                                      javax.servlet.ServletException</PRE>
 <DL>
 <DD>Performs syntactical check on the remote FS for slaves.
 <P>

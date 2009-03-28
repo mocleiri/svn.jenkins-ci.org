@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AuthorizationMatrixProperty.DescriptorImpl (Hudson core 1.293 API)
+AuthorizationMatrixProperty.DescriptorImpl (Hudson core 1.294 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-21">
+<META NAME="date" CONTENT="2009-03-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AuthorizationMatrixProperty.DescriptorImpl (Hudson core 1.293 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AuthorizationMatrixProperty.DescriptorImpl (Hudson core 1.293 API)";
+        parent.document.title="AuthorizationMatrixProperty.DescriptorImpl (Hudson core 1.294 API)";
     }
 }
 </SCRIPT>
@@ -178,9 +178,8 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/AuthorizationMatrixProperty.DescriptorImpl.html#doCheckName(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doCheckName</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-            org.kohsuke.stapler.StaplerResponse&nbsp;res,
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/AuthorizationMatrixProperty.DescriptorImpl.html#doCheckName(hudson.model.AbstractProject, java.lang.String)">doCheckName</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
             java.lang.String&nbsp;value)</CODE>
 
 <BR>
@@ -384,15 +383,15 @@ public boolean <B>showPermission</B>(<A HREF="../../hudson/security/Permission.h
 </DL>
 <HR>
 
-<A NAME="doCheckName(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
+<A NAME="doCheckName(hudson.model.AbstractProject, java.lang.String)"><!-- --></A><H3>
 doCheckName</H3>
 <PRE>
-public void <B>doCheckName</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                        org.kohsuke.stapler.StaplerResponse&nbsp;res,
-                        <FONT SIZE="-1">@QueryParameter</FONT>
-                        java.lang.String&nbsp;value)
-                 throws java.io.IOException,
-                        javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckName</B>(<FONT SIZE="-1">@AncestorInPath</FONT>
+                                  <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
+                                  <FONT SIZE="-1">@QueryParameter</FONT>
+                                  java.lang.String&nbsp;value)
+                           throws java.io.IOException,
+                                  javax.servlet.ServletException</PRE>
 <DL>
 <DD><DL>
 
