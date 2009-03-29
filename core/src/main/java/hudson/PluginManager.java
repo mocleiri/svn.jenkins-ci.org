@@ -39,6 +39,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -123,8 +124,23 @@ public final class PluginManager extends AbstractModelObject {
         }
         
         strategy = createPluginStrategy();
-        
-        for( File arc : archives ) {
+
+        // load plugins from a system property, for use in the "mvn hudson-dev:run"
+        List<File> archivesList = new ArrayList<File>(Arrays.asList(archives));
+        String hplProperty = System.getProperty("hudson.bundled.plugins");
+        if (hplProperty != null) {
+            String[] hplLocations = hplProperty.split(",");
+            for (String hplLocation: hplLocations) {
+                File hpl = new File(hplLocation.trim());
+                if (hpl.exists()) {
+                    archivesList.add(hpl);
+                } else {
+                    LOGGER.warning("bundled plugin " + hplLocation + " does not exist");
+                }
+            }
+        }
+
+        for( File arc : archivesList ) {
             try {
                 PluginWrapper p = strategy.createPluginWrapper(arc);
                 plugins.add(p);
@@ -155,6 +171,10 @@ public final class PluginManager extends AbstractModelObject {
      * If the war file has any "/WEB-INF/plugins/*.hpi", extract them into the plugin directory.
      */
     private void loadBundledPlugins() {
+        // this is used in tests, when we want to override the default bundled plugins with .hpl versions
+        if (System.getProperty("hudson.bundled.plugins") != null) {
+            return;
+        }
         Set paths = context.getResourcePaths("/WEB-INF/plugins");
         if(paths==null) return; // crap
         for( String path : (Set<String>) paths) {
