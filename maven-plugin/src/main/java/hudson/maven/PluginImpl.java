@@ -40,9 +40,4 @@ public class PluginImpl extends Plugin {
         Items.XSTREAM.alias("maven2-moduleset", MavenModuleSet.class);
     }
 
-
-    public static ExecutedMojo.Cache createExecutedMojoCache() {
-        return new ExecutedMojo.Cache();
-    }
-
 }
