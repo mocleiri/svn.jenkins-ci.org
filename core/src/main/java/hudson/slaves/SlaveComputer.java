@@ -35,8 +35,6 @@ import hudson.util.Futures;
 import hudson.FilePath;
 import hudson.lifecycle.WindowsSlaveInstaller;
 import hudson.Util;
-import hudson.maven.agent.Main;
-import hudson.maven.agent.PluginManagerInterceptor;
 
 import java.io.File;
 import java.io.OutputStream;
@@ -293,10 +291,15 @@ public class SlaveComputer extends Computer {
             log.println("WARNING: "+remoteFs+" looks suspiciously like Windows path. Maybe you meant "+remoteFs.replace('\\','/')+"?");
 
         {// send jars that we need for our operations
-            // TODO: maybe I should generalize this kind of "post initialization" processing
+            // TODO: should generalize this kind of "post initialization" processing so this could move to the Maven plugin.
             FilePath dst = new FilePath(channel, remoteFs);
-            copyJar(log, dst, Main.class, "maven-agent");
-            copyJar(log, dst, PluginManagerInterceptor.class, "maven-interceptor");
+            ClassLoader cl = Hudson.getInstance().getPluginManager().uberClassLoader;
+            try {
+                copyJar(log, dst, cl.loadClass("hudson.maven.agent.Main"), "maven-agent");
+                copyJar(log, dst, cl.loadClass("hudson.maven.agent.PluginManagerInterceptor"), "maven-interceptor");
+            } catch (ClassNotFoundException e) {
+                log.println("Could not find Maven agent or interceptor jar. Maven plugin was probably disabled.");
+            }
         }
 
         channel.call(new SlaveInitializer());
