@@ -51,7 +51,6 @@ import org.apache.commons.io.FileUtils;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.QueryParameter;
-import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.WebApp;
 
 /**
@@ -180,7 +179,17 @@ public final class PluginManager extends AbstractModelObject {
         for( String path : (Set<String>) paths) {
             String fileName = path.substring(path.lastIndexOf('/')+1);
             try {
-                FileUtils.copyURLToFile(context.getResource(path),new File(rootDir,fileName));
+                URL url = context.getResource(path);
+                long lastModified = url.openConnection().getLastModified();
+                File file = new File(rootDir, fileName);
+                if (file.exists() && file.lastModified() != lastModified) {
+                    FileUtils.copyURLToFile(url, file);
+                    file.setLastModified(url.openConnection().getLastModified());
+                    // lastModified is set for two reasons:
+                    // - to avoid unpacking as much as possible, but still do it on both upgrade and downgrade
+                    // - to make sure the value is not changed after each restart, so we can avoid
+                    // unpacking the plugin itself in ClassicPluginStrategy.explode
+                }
             } catch (IOException e) {
                 LOGGER.log(Level.SEVERE, "Failed to extract the bundled plugin "+fileName,e);
             }
