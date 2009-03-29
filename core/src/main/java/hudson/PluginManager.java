@@ -128,14 +128,12 @@ public final class PluginManager extends AbstractModelObject {
         List<File> archivesList = new ArrayList<File>(Arrays.asList(archives));
         String hplProperty = System.getProperty("hudson.bundled.plugins");
         if (hplProperty != null) {
-            String[] hplLocations = hplProperty.split(",");
-            for (String hplLocation: hplLocations) {
+            for (String hplLocation: hplProperty.split(",")) {
                 File hpl = new File(hplLocation.trim());
-                if (hpl.exists()) {
+                if (hpl.exists())
                     archivesList.add(hpl);
-                } else {
+                else
                     LOGGER.warning("bundled plugin " + hplLocation + " does not exist");
-                }
             }
         }
 
