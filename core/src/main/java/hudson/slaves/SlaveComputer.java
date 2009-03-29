@@ -25,7 +25,6 @@ package hudson.slaves;
 
 import hudson.model.*;
 import hudson.remoting.Channel;
-import hudson.remoting.Which;
 import hudson.remoting.VirtualChannel;
 import hudson.remoting.Callable;
 import hudson.util.StreamTaskListener;
@@ -289,21 +288,12 @@ public class SlaveComputer extends Computer {
         String remoteFs = getNode().getRemoteFS();
         if(_isUnix && !remoteFs.contains("/") && remoteFs.contains("\\"))
             log.println("WARNING: "+remoteFs+" looks suspiciously like Windows path. Maybe you meant "+remoteFs.replace('\\','/')+"?");
-
-        {// send jars that we need for our operations
-            // TODO: should generalize this kind of "post initialization" processing so this could move to the Maven plugin.
-            FilePath dst = new FilePath(channel, remoteFs);
-            ClassLoader cl = Hudson.getInstance().getPluginManager().uberClassLoader;
-            try {
-                copyJar(log, dst, cl.loadClass("hudson.maven.agent.Main"), "maven-agent");
-                copyJar(log, dst, cl.loadClass("hudson.maven.agent.PluginManagerInterceptor"), "maven-interceptor");
-            } catch (ClassNotFoundException e) {
-                log.println("Could not find Maven agent or interceptor jar. Maven plugin was probably disabled.");
-            }
-        }
+        FilePath root = new FilePath(channel,getNode().getRemoteFS());
 
         channel.call(new SlaveInitializer());
         channel.call(new WindowsSlaveInstaller(remoteFs));
+        for (ComputerListener cl : ComputerListener.all())
+            cl.preOnline(this,channel,root,taskListener);
 
         // update the data structure atomically to prevent others from seeing a channel that's not properly initialized yet
         synchronized(channelLock) {
@@ -327,26 +317,6 @@ public class SlaveComputer extends Computer {
         Hudson.getInstance().getQueue().scheduleMaintenance();
     }
 
-    /**
-     * Copies a jar file from the master to slave.
-     */
-    private void copyJar(PrintWriter log, FilePath dst, Class<?> representative, String seedName) throws IOException, InterruptedException {
-        // in normal execution environment, the master should be loading 'representative' from this jar, so
-        // in that way we can find it.
-        File jar = Which.jarFile(representative);
-
-        if(jar.isDirectory()) {
-            // but during the development and unit test environment, we may be picking the class up from the classes dir,
-            // in which case we need to find this in a tricker way.
-            String dir = Hudson.getInstance().servletContext.getRealPath("/WEB-INF/lib");
-            FilePath[] paths = new FilePath(new File(dir)).list(seedName + "-*.jar");
-            jar = new File(paths[0].getRemote());
-        }
-
-        new FilePath(jar).copyTo(dst.child(seedName +".jar"));
-        log.println("Copied "+seedName+".jar");
-    }
-
     @Override
     public VirtualChannel getChannel() {
         return channel;
@@ -367,7 +337,7 @@ public class SlaveComputer extends Computer {
             });
     }
 
-    public void doDoDisconnect(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+    public void doDoDisconnect(StaplerResponse rsp) throws IOException, ServletException {
         checkPermission(Hudson.ADMINISTER);
         disconnect();
         rsp.sendRedirect(".");
@@ -445,7 +415,7 @@ public class SlaveComputer extends Computer {
                 logger.log(Level.SEVERE, "Failed to terminate channel to " + getDisplayName(), e);
             }
         }
-        for (ComputerListener cl : Hudson.getInstance().getComputerListeners())
+        for (ComputerListener cl : ComputerListener.all())
             cl.onOffline(this);
     }
 
