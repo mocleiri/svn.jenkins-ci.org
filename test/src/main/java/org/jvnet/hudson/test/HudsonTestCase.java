@@ -190,10 +190,6 @@ public abstract class HudsonTestCase extends TestCase {
         recipe();
         AbstractProject.WORKSPACE.toString();
 
-        // Since the Maven plugin is a dependency of the test-harness, it is already picked up through the class path.
-        // This property is set to an invalid value, so its effect will be that existing bundled plugins will be ignored. 
-        System.setProperty("hudson.bundled.plugins", "IGNORE ME");
-
         hudson = newHudson();
         hudson.setNoUsageStatistics(true); // collecting usage stats from tests are pointless.
         hudson.servletContext.setAttribute("app",hudson);
