@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.295 API)
+Deprecated List (Hudson core 1.296 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-04-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.295 API)";
+        parent.document.title="Deprecated List (Hudson core 1.296 API)";
     }
 }
 </SCRIPT>
@@ -307,12 +307,6 @@ function windowTitle()
       Use <A HREF="hudson/scm/RepositoryBrowser.html#all()"><CODE>RepositoryBrowser.all()</CODE></A> for read access and <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/maven/MavenReporters.html#LIST">hudson.maven.MavenReporters.LIST</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286. Use <code>MavenReporterDescriptor#all()</code> for listing reporters, and
- use <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for automatic registration.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/UserProperties.html#LIST">hudson.model.UserProperties.LIST</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
@@ -502,12 +496,6 @@ function windowTitle()
 <TD><A HREF="hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">hudson.model.Descriptor.configure(StaplerRequest)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As of 1.239, use <A HREF="hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>Descriptor.configure(StaplerRequest, JSONObject)</CODE></A>.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.lang.String)">hudson.maven.MavenUtil.createEmbedder(TaskListener, String)</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/tasks/Maven.MavenInstallation.html#createEmbedder(hudson.model.BuildListener, java.lang.String, java.util.Properties)"><CODE>Maven.MavenInstallation.createEmbedder(BuildListener, String, Properties)</CODE></A> 
-      or other overloaded versions that infers maven home.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/scm/RepositoryBrowsers.html#createInstance(java.lang.Class, org.kohsuke.stapler.StaplerRequest, java.lang.String)">hudson.scm.RepositoryBrowsers.createInstance(Class<T>, StaplerRequest, String)</A>
@@ -744,11 +732,6 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/Computer.html#connect(boolean)"><CODE>Computer.connect(boolean)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/maven/MavenReporterDescriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">hudson.maven.MavenReporterDescriptor.newInstance(StaplerRequest)</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">hudson.model.Descriptor.newInstance(StaplerRequest)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Implement <A HREF="hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>Descriptor.newInstance(StaplerRequest, JSONObject)</CODE></A> method instead.
@@ -857,11 +840,6 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Not supported.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/maven/MavenModule.html#setLogRotator(hudson.tasks.LogRotator)">hudson.maven.MavenModule.setLogRotator(LogRotator)</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Not allowed to configure log rotation per module.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/matrix/MatrixConfiguration.html#setLogRotator(hudson.tasks.LogRotator)">hudson.matrix.MatrixConfiguration.setLogRotator(LogRotator)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Value is controlled by <A HREF="hudson/matrix/MatrixProject.html" title="class in hudson.matrix"><CODE>MatrixProject</CODE></A>.</I>&nbsp;</TD>
@@ -964,12 +942,6 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Don't extend from <A HREF="hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A> directly. Instead, choose <A HREF="hudson/tasks/Recorder.html" title="class in hudson.tasks"><CODE>Recorder</CODE></A> or <A HREF="hudson/tasks/Notifier.html" title="class in hudson.tasks"><CODE>Notifier</CODE></A>
       as your base class.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/maven/RedeployPublisher.DescriptorImpl.html#RedeployPublisher.DescriptorImpl(java.lang.Class)">hudson.maven.RedeployPublisher.DescriptorImpl(Class<? extends Publisher>)</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.290
-      Use the default constructor.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, int, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)">hudson.model.Slave(String, String, String, int, Node.Mode, String, ComputerLauncher, RetentionStrategy)</A>

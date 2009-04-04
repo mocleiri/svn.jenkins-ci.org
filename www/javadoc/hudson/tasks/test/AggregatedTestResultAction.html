@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AggregatedTestResultAction (Hudson core 1.295 API)
+AggregatedTestResultAction (Hudson core 1.296 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-04-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AggregatedTestResultAction (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AggregatedTestResultAction (Hudson core 1.295 API)";
+        parent.document.title="AggregatedTestResultAction (Hudson core 1.296 API)";
     }
 }
 </SCRIPT>
@@ -101,7 +101,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, <A HREF="../../../hudson/model/HealthReportingAction.html" title="interface in hudson.model">HealthReportingAction</A>, <A HREF="../../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../hudson/tasks/test/MatrixTestResult.html" title="class in hudson.tasks.test">MatrixTestResult</A>, <A HREF="../../../hudson/maven/reporters/SurefireAggregatedReport.html" title="class in hudson.maven.reporters">SurefireAggregatedReport</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../hudson/tasks/test/MatrixTestResult.html" title="class in hudson.tasks.test">MatrixTestResult</A></DD>
 </DL>
 <HR>
 <DL>
@@ -164,7 +164,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#children">children</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/maven/MavenBuild.html" title="class in hudson.maven"><CODE>MavenBuild</CODE></A>s whose test results are used for aggregation.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;child builds whose test results are used for aggregation.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.tasks.test.AbstractTestResultAction"><!-- --></A>
@@ -327,7 +327,7 @@ children</H3>
 <PRE>
 public final java.util.List&lt;<A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.Child.html" title="class in hudson.tasks.test">AggregatedTestResultAction.Child</A>&gt; <B>children</B></PRE>
 <DL>
-<DD><A HREF="../../../hudson/maven/MavenBuild.html" title="class in hudson.maven"><CODE>MavenBuild</CODE></A>s whose test results are used for aggregation.
+<DD>child builds whose test results are used for aggregation.
 <P>
 <DL>
 </DL>

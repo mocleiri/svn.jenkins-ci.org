@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonTestCase (Test harness for Hudson and plugins 1.295 API)
+HudsonTestCase (Test harness for Hudson and plugins 1.296 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-04-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Test harness for Hudson and plugins 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.295 API)";
+        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.296 API)";
     }
 }
 </SCRIPT>
@@ -372,7 +372,7 @@ R</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/maven/MavenModuleSet.html?is-external=true" title="class or interface in hudson.maven">MavenModuleSet</A></CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/maven.MavenModuleSet.html?is-external=true" title="class or interface in hudson">hudson.maven.MavenModuleSet</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#createMavenProject()">createMavenProject</A></B>()</CODE>
 
 <BR>
@@ -380,7 +380,7 @@ R</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/maven/MavenModuleSet.html?is-external=true" title="class or interface in hudson.maven">MavenModuleSet</A></CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/maven.MavenModuleSet.html?is-external=true" title="class or interface in hudson">hudson.maven.MavenModuleSet</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#createMavenProject(java.lang.String)">createMavenProject</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
@@ -508,6 +508,14 @@ R</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs a search from the search box.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#setJavaNetCredential()">setJavaNetCredential</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets guest credentials to access java.net Subversion repo.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -851,6 +859,24 @@ protected org.mortbay.jetty.security.UserRealm <B>configureUserRealm</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="setJavaNetCredential()"><!-- --></A><H3>
+setJavaNetCredential</H3>
+<PRE>
+protected void <B>setJavaNetCredential</B>()
+                             throws org.tmatesoft.svn.core.SVNException,
+                                    java.io.IOException</PRE>
+<DL>
+<DD>Sets guest credentials to access java.net Subversion repo.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.tmatesoft.svn.core.SVNException</CODE>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="configureDefaultMaven()"><!-- --></A><H3>
 configureDefaultMaven</H3>
 <PRE>
@@ -942,8 +968,8 @@ protected <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/ma
 <A NAME="createMavenProject()"><!-- --></A><H3>
 createMavenProject</H3>
 <PRE>
-protected <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/maven/MavenModuleSet.html?is-external=true" title="class or interface in hudson.maven">MavenModuleSet</A> <B>createMavenProject</B>()
-                                     throws java.io.IOException</PRE>
+protected <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/maven.MavenModuleSet.html?is-external=true" title="class or interface in hudson">hudson.maven.MavenModuleSet</A> <B>createMavenProject</B>()
+                                                  throws java.io.IOException</PRE>
 <DL>
 <DD>Creates a empty Maven project with an unique name.
 <P>
@@ -958,8 +984,8 @@ protected <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/ma
 <A NAME="createMavenProject(java.lang.String)"><!-- --></A><H3>
 createMavenProject</H3>
 <PRE>
-protected <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/maven/MavenModuleSet.html?is-external=true" title="class or interface in hudson.maven">MavenModuleSet</A> <B>createMavenProject</B>(java.lang.String&nbsp;name)
-                                     throws java.io.IOException</PRE>
+protected <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/maven.MavenModuleSet.html?is-external=true" title="class or interface in hudson">hudson.maven.MavenModuleSet</A> <B>createMavenProject</B>(java.lang.String&nbsp;name)
+                                                  throws java.io.IOException</PRE>
 <DL>
 <DD>Creates a empty Maven project with the given name.
 <P>

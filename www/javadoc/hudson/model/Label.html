@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Label (Hudson core 1.295 API)
+Label (Hudson core 1.296 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-04-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Label (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Label (Hudson core 1.295 API)";
+        parent.document.title="Label (Hudson core 1.296 API)";
     }
 }
 </SCRIPT>
@@ -284,6 +284,14 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Label.html#getTotalConfiguredExecutors()">getTotalConfiguredExecutors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of total <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s that belong to this label.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Label.html#getTotalExecutors()">getTotalExecutors</A></B>()</CODE>
 
 <BR>
@@ -469,6 +477,24 @@ getClouds</H3>
 </FONT>public java.util.Set&lt;<A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt; <B>getClouds</B>()</PRE>
 <DL>
 <DD>Gets all <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A>s that can launch for this label.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTotalConfiguredExecutors()"><!-- --></A><H3>
+getTotalConfiguredExecutors</H3>
+<PRE>
+public int <B>getTotalConfiguredExecutors</B>()</PRE>
+<DL>
+<DD>Number of total <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s that belong to this label.
+ <p>
+ This includes executors that belong to offline nodes.
 <P>
 <DD><DL>
 </DL>

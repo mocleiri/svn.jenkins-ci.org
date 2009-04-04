@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FilePath (Hudson core 1.295 API)
+FilePath (Hudson core 1.296 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-04-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson core 1.295 API)";
+        parent.document.title="FilePath (Hudson core 1.296 API)";
     }
 }
 </SCRIPT>
@@ -1675,7 +1675,9 @@ public int <B>copyRecursiveTo</B>(java.lang.String&nbsp;fileMask,
 <A NAME="createLauncher(hudson.model.TaskListener)"><!-- --></A><H3>
 createLauncher</H3>
 <PRE>
-public <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>createLauncher</B>(<A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</PRE>
+public <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>createLauncher</B>(<A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
+                        throws java.io.IOException,
+                               java.lang.InterruptedException</PRE>
 <DL>
 <DD>Creates a <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> for starting processes on the node
  that has this file.
@@ -1684,7 +1686,10 @@ public <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Since:</B></DT>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
   <DD>1.89</DD>
 </DL>
 </DD>

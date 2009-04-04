@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-BuildTrigger (Hudson core 1.295 API)
+BuildTrigger (Hudson core 1.296 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-04-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildTrigger (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildTrigger (Hudson core 1.295 API)";
+        parent.document.title="BuildTrigger (Hudson core 1.296 API)";
     }
 }
 </SCRIPT>
@@ -566,7 +566,7 @@ public boolean <B>needsToRunAfterFinalized</B>()</PRE>
  this is problematic. One of such cases is when a publisher needs to
  trigger other builds, whcih in turn need to see this build as a
  completed build. Those plugins that need to do this can return true
- from this method, so that the <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>BuildStepCompatibilityLayer.perform(AbstractBuild, Launcher, BuildListener)</CODE></A>
+ from this method, so that the <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>BuildStepCompatibilityLayer.perform(AbstractBuild, Launcher, BuildListener)</CODE></A> 
  method is called after the build is marked as completed.
 
  <p>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.295 API)
+Hudson (Hudson core 1.296 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-04-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.295 API)";
+        parent.document.title="Hudson (Hudson core 1.296 API)";
     }
 }
 </SCRIPT>
@@ -406,6 +406,14 @@ Root object of the system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds one more <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> to Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#addView(hudson.model.View)">addView</A></B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;v)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1199,6 +1207,14 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> object by its full name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Map&lt;java.lang.String,<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getItemMap()">getItemMap</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the read-only view of all the <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A>s keyed by their names.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -3040,6 +3056,26 @@ getItems</H3>
 </DL>
 <HR>
 
+<A NAME="getItemMap()"><!-- --></A><H3>
+getItemMap</H3>
+<PRE>
+public java.util.Map&lt;java.lang.String,<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt; <B>getItemMap</B>()</PRE>
+<DL>
+<DD>Returns the read-only view of all the <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A>s keyed by their names.
+ <p>
+ This method is efficient, as it doesn't involve any copying.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.296</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getItems(java.lang.Class)"><!-- --></A><H3>
 getItems</H3>
 <PRE>
@@ -3158,6 +3194,23 @@ getViews</H3>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>can be empty but never null.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addView(hudson.model.View)"><!-- --></A><H3>
+addView</H3>
+<PRE>
+public void <B>addView</B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;v)
+             throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Publisher (Hudson core 1.295 API)
+Publisher (Hudson core 1.296 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-04-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Publisher (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Publisher (Hudson core 1.295 API)";
+        parent.document.title="Publisher (Hudson core 1.296 API)";
     }
 }
 </SCRIPT>
@@ -101,7 +101,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;, <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/maven/MavenRedeployer.html" title="class in hudson.maven">MavenRedeployer</A>, <A HREF="../../hudson/tasks/Notifier.html" title="class in hudson.tasks">Notifier</A>, <A HREF="../../hudson/tasks/Recorder.html" title="class in hudson.tasks">Recorder</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/tasks/Notifier.html" title="class in hudson.tasks">Notifier</A>, <A HREF="../../hudson/tasks/Recorder.html" title="class in hudson.tasks">Recorder</A></DD>
 </DL>
 <HR>
 <DL>
@@ -120,7 +120,7 @@ java.lang.Object
  project type, not just the freestyle project type (in particular,
  the native maven2 job type.) This is convenient default for
  <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A>s in particular initially, but we encourage advanced
- plugins to consider writing <A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>, as it offers the
+ plugins to consider writing MavenReporter, as it offers the
  potential of reducing the amount of configuration needed to run the plugin.
 
  For those plugins that don't want <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A> to show up in
@@ -369,7 +369,7 @@ public boolean <B>needsToRunAfterFinalized</B>()</PRE>
  this is problematic. One of such cases is when a publisher needs to
  trigger other builds, whcih in turn need to see this build as a
  completed build. Those plugins that need to do this can return true
- from this method, so that the <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>BuildStepCompatibilityLayer.perform(AbstractBuild, Launcher, BuildListener)</CODE></A>
+ from this method, so that the <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>BuildStepCompatibilityLayer.perform(AbstractBuild, Launcher, BuildListener)</CODE></A> 
  method is called after the build is marked as completed.
 
  <p>
