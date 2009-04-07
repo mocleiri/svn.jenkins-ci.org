@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Util (Hudson core 1.296 API)
+Util (Hudson core 1.297 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-04">
+<META NAME="date" CONTENT="2009-04-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson core 1.296 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson core 1.296 API)";
+        parent.document.title="Util (Hudson core 1.297 API)";
     }
 }
 </SCRIPT>
@@ -460,6 +460,21 @@ Various utility methods that don't have more proper home.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the given file represents a symlink.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.util.List&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Util.html#join(java.util.Collection...)">join</A></B>(java.util.Collection&lt;? extends T&gt;...&nbsp;items)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Combines all the given collections into a single list.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1323,6 +1338,19 @@ public static java.lang.String <B>join</B>(java.util.Collection&lt;java.lang.Str
                                     java.lang.String&nbsp;seprator)</PRE>
 <DL>
 <DD>Concatenate multiple strings by inserting a separator.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="join(java.util.Collection...)"><!-- --></A><H3>
+join</H3>
+<PRE>
+public static &lt;T&gt; java.util.List&lt;T&gt; <B>join</B>(java.util.Collection&lt;? extends T&gt;...&nbsp;items)</PRE>
+<DL>
+<DD>Combines all the given collections into a single list.
 <P>
 <DD><DL>
 </DL>
