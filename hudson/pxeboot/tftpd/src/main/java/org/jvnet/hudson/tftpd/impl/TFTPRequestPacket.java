@@ -24,6 +24,7 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.LinkedHashMap;
 
 /***
  * An abstract class derived from TFTPPacket definiing a TFTP Request
@@ -77,7 +78,7 @@ public abstract class TFTPRequestPacket extends TFTPPacket
     /*** The filename of the request. ***/
     String _filename;
 
-    public final Map<String,String> options = new TreeMap<String,String>();
+    public final Map<String,String> options = new LinkedHashMap<String,String>();
 
     /***
      * Creates a request packet of a given type to be sent to a host at a

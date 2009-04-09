@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
+import java.net.SocketTimeoutException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import static java.util.logging.Level.FINE;
@@ -99,7 +100,8 @@ public class TFTPServer implements Runnable {
         private /*final*/ InputStream stream;
         private final InetSocketAddress dest;
         private final TFTPReadRequestPacket session;
-        private int nextAck;
+        private int blockSize = TFTPPacket.SEGMENT_SIZE;
+
 
         TFTPSession(TFTPReadRequestPacket rp) throws IOException {
             open();
@@ -112,7 +114,10 @@ public class TFTPServer implements Runnable {
                     sendError(FILE_NOT_FOUND, "no such file exists");
                 else {
                     stream = data.read();
-                    new Thread(this).start();
+                    if(stream==null)
+                        sendError(FILE_NOT_FOUND, "no such file exists");
+                    else
+                        new Thread(this).start();
                 }
             } catch (IOException e) {
                 sendError(FILE_NOT_FOUND, "no such file exists");
@@ -123,7 +128,7 @@ public class TFTPServer implements Runnable {
          * Sends a TFTP error packet.
          */
         private void sendError(int errorCode, String msg) throws IOException {
-            LOGGER.info("Error: "+msg);
+            LOGGER.info("Error: "+msg+" -> "+dest);
             send(new TFTPErrorPacket(dest.getAddress(),dest.getPort(), errorCode,msg));
         }
 
@@ -131,7 +136,7 @@ public class TFTPServer implements Runnable {
          * Reads the next data packet out of the {@link #data}, in a way that follows the TFTP protocol.
          */
         private TFTPDataPacket readNextBlock(int blockNumber) throws IOException {
-            byte[] buf = new byte[TFTPPacket.SEGMENT_SIZE];
+            byte[] buf = new byte[blockSize];
             int read = 0;
 
             while(true) {
@@ -143,46 +148,63 @@ public class TFTPServer implements Runnable {
             return new TFTPDataPacket(dest.getAddress(),dest.getPort(),blockNumber,buf,0,read);
         }
 
-        private void waitAck() throws IOException {
+        private void sendAndWait(TFTPPacket p, int expected) throws IOException {
+            int retry = 0;
+            while (true) {
+                send(p);
+                try {
+                    if(waitAck(expected))
+                        return; // got an ACK
+                } catch (SocketTimeoutException e) {
+                    if(retry++ > 10)
+                        throw e; // too many retries. abort
+                    LOGGER.fine("Retransmitting "+p);
+                }
+            }
+        }
+
+        private boolean waitAck(int expected) throws IOException {
             TFTPPacket p = receive();
             if (!(p instanceof TFTPAckPacket)) {
                 if (p instanceof TFTPErrorPacket) {
                     TFTPErrorPacket ep = (TFTPErrorPacket) p;
-                    LOGGER.info("Expecting ACK="+nextAck+" but got "+p+" :"+ep.getError()+":"+ep.getMessage());
+                    LOGGER.info("Expecting ACK="+expected+" but got "+p+" :"+ep.getError()+":"+ep.getMessage());
                 } else {
-                    LOGGER.info("Expecting ACK="+nextAck+" but got "+p);
+                    LOGGER.info("Expecting ACK="+expected+" but got "+p);
+                    sendError(FILE_NOT_FOUND, "");
                 }
-                sendError(FILE_NOT_FOUND, "");
                 throw new IOException("Aborting");
             }
 
             TFTPAckPacket ack = (TFTPAckPacket) p;
-            if(ack.getBlockNumber()!=nextAck) {
-                LOGGER.info("Expecting ACK="+nextAck+" but got ACK for "+ack.getBlockNumber()+" instead. Aborting");
-                sendError(FILE_NOT_FOUND, "");
-                throw new IOException("Aborting");
+            if(ack.getBlockNumber()!=expected) {
+                LOGGER.info("Expecting ACK="+expected+" but got ACK for "+ack.getBlockNumber()+" instead. Retransmitting");
+                return false;
             }
 
-            nextAck++;
+            return true;
         }
 
         public void run() {
             try {
-                if(session.options.containsKey("tsize")) {
-                    LOGGER.fine("Got tsize");
+                boolean hasTsize = session.options.containsKey("tsize");
+                boolean hasBlksize = session.options.containsKey("blksize");
+                if(hasTsize || hasBlksize) {
+                    LOGGER.fine("Got options "+session.options);
                     TFTPOAckPacket oack = new TFTPOAckPacket(dest.getAddress(), dest.getPort());
-                    oack.options.put("tsize",String.valueOf(data.size()));
-                    send(oack);
-                    
-                    waitAck();
+                    if(hasTsize)
+                        oack.options.put("tsize",String.valueOf(data.size()));
+                    if(hasBlksize) {
+                        blockSize = Integer.parseInt(session.options.get("blksize"));
+                        oack.options.put("blksize",String.valueOf(blockSize));
+                    }
+                    sendAndWait(oack,0);
                 }
 
-                for( int blockNumber=0; ; blockNumber++ ) {
+                for( int blockNumber=1; ; blockNumber++ ) {
                     TFTPDataPacket dp = readNextBlock(blockNumber);
-                    send(dp);
-                    LOGGER.fine("Sent block #"+blockNumber+" ("+dp.getDataLength()+")");
-
-                    waitAck();
+                    LOGGER.fine("Sending block #"+blockNumber+" ("+dp.getDataLength()+")");
+                    sendAndWait(dp,blockNumber);
 
                     if(dp.getDataLength()<TFTPPacket.SEGMENT_SIZE) {
                         LOGGER.fine("Transmission complete");
@@ -195,7 +217,8 @@ public class TFTPServer implements Runnable {
                 LOGGER.fine("Closing a session");
                 close();
                 try {
-                    stream.close();
+                    if(stream!=null)
+                        stream.close();
                 } catch (IOException e) {
                     LOGGER.log(FINE, "Failed to close "+ data,e);
                 }

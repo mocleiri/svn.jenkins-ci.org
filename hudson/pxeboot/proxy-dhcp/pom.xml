@@ -11,8 +11,17 @@
   <build>
     <plugins>
       <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>attached</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
         <configuration>
+          <descriptorId>jar-with-dependencies</descriptorId>
           <archive>
             <manifest>
               <mainClass>org.jvnet.hudson.proxy_dhcp.ProxyDhcpService</mainClass>

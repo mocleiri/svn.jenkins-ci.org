@@ -18,7 +18,7 @@ public class DataInputStream2 extends DataInputStream {
     }
 
     public DataInputStream2(DatagramPacket packet) {
-        this(new ByteArrayInputStream(packet.getData()));
+        this(new ByteArrayInputStream(packet.getData(),0,packet.getLength()));
     }
 
     public Inet4Address readInet4Address() throws IOException {
@@ -42,7 +42,7 @@ public class DataInputStream2 extends DataInputStream {
     public String readNullTerminatedString() throws IOException {
         StringBuilder buf = new StringBuilder();
         int ch;
-        while((ch=readByte())!=0)
+        while((ch=read())!=0)
             buf.append((char)ch);
         return buf.toString();
     }

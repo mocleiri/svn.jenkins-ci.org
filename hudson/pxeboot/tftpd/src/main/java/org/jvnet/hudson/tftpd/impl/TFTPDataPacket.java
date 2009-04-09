@@ -85,6 +85,8 @@ public final class TFTPDataPacket extends TFTPPacket
         _blockNumber = blockNumber;
         _data = data;
         _offset = offset;
+
+        _length = length;
     }
 
     public TFTPDataPacket(InetAddress destination, int port, int blockNumber,
@@ -245,5 +247,10 @@ public final class TFTPDataPacket extends TFTPPacket
     public byte[] getData()
     {
         return _data;
+    }
+
+    @Override
+    public String toString() {
+        return "Data #"+_blockNumber;
     }
 }

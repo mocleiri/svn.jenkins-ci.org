@@ -19,6 +19,7 @@ package org.jvnet.hudson.tftpd.impl;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;
+import java.io.IOException;
 
 /***
  * A class derived from TFTPRequestPacket definiing a TFTP read request
@@ -72,7 +73,7 @@ public final class TFTPReadRequestPacket extends TFTPRequestPacket
      * @throws TFTPPacketException  If the datagram isn't a valid TFTP
      *         request packet.
      ***/
-    TFTPReadRequestPacket(DatagramPacket datagram) throws TFTPPacketException
+    TFTPReadRequestPacket(DatagramPacket datagram) throws IOException
     {
         super(TFTPPacket.READ_REQUEST, datagram);
     }
