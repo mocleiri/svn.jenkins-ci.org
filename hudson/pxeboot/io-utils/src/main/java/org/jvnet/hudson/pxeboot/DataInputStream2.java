@@ -39,4 +39,11 @@ public class DataInputStream2 extends DataInputStream {
         return new String(b,0,i,"US-ASCII"); 
     }
 
+    public String readNullTerminatedString() throws IOException {
+        StringBuilder buf = new StringBuilder();
+        int ch;
+        while((ch=readByte())!=0)
+            buf.append((char)ch);
+        return buf.toString();
+    }
 }

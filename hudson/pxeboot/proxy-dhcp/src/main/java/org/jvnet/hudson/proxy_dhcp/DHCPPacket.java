@@ -1,6 +1,8 @@
 package org.jvnet.hudson.proxy_dhcp;
 
 import static org.jvnet.hudson.proxy_dhcp.DHCPOption.*;
+import org.jvnet.hudson.pxeboot.DataInputStream2;
+import org.jvnet.hudson.pxeboot.DataOutputStream2;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

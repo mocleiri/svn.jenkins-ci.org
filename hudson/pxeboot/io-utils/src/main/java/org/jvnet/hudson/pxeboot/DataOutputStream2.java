@@ -11,7 +11,7 @@ import java.net.Inet4Address;
  * @author Kohsuke Kawaguchi
  */
 public class DataOutputStream2 extends DataOutputStream {
-    DataOutputStream2(OutputStream out) {
+    public DataOutputStream2(OutputStream out) {
         super(out);
     }
 
