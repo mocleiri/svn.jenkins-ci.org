@@ -1,16 +1,16 @@
 package org.jvnet.hudson.tftpd.impl;
 
-import java.net.InetAddress;
-import java.net.DatagramPacket;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.Map.Entry;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInput;
 import java.io.DataInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 /**
  * @author Kohsuke Kawaguchi

@@ -1,7 +1,6 @@
 package org.jvnet.hudson.tftpd;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * The file system view of TFTP server.
@@ -18,5 +17,5 @@ public interface PathResolver {
      * @throws IOException
      *      If no such file exists.
      */
-    InputStream open(String fileName) throws IOException;
+    Data open(String fileName) throws IOException;
 }

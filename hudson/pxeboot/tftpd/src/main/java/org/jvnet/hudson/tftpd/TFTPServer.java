@@ -1,25 +1,27 @@
 package org.jvnet.hudson.tftpd;
 
-import static org.jvnet.hudson.tftpd.impl.TFTPErrorPacket.FILE_NOT_FOUND;
 import org.jvnet.hudson.tftpd.impl.TFTP;
-import org.jvnet.hudson.tftpd.impl.TFTPPacket;
-import org.jvnet.hudson.tftpd.impl.TFTPReadRequestPacket;
-import org.jvnet.hudson.tftpd.impl.TFTPPacketException;
-import org.jvnet.hudson.tftpd.impl.TFTPErrorPacket;
-import org.jvnet.hudson.tftpd.impl.TFTPDataPacket;
 import org.jvnet.hudson.tftpd.impl.TFTPAckPacket;
+import org.jvnet.hudson.tftpd.impl.TFTPDataPacket;
+import org.jvnet.hudson.tftpd.impl.TFTPErrorPacket;
+import static org.jvnet.hudson.tftpd.impl.TFTPErrorPacket.FILE_NOT_FOUND;
+import org.jvnet.hudson.tftpd.impl.TFTPOAckPacket;
+import org.jvnet.hudson.tftpd.impl.TFTPPacket;
+import org.jvnet.hudson.tftpd.impl.TFTPPacketException;
+import org.jvnet.hudson.tftpd.impl.TFTPReadRequestPacket;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.INFO;
+import java.util.logging.Logger;
 
 /**
  * TFTP server.
@@ -42,7 +44,7 @@ public class TFTPServer implements Runnable {
         try {
             execute();
         } catch (IOException e) {
-            if(e.getMessage().equals("Socket closed"))
+            if("Socket closed".equals(e.getMessage()))
                 // there's no reliable way to detect this situation
                 LOGGER.fine("TFTP accept thread closed");
             else
@@ -93,19 +95,25 @@ public class TFTPServer implements Runnable {
      */
     final class TFTPSession extends TFTP implements Runnable {
         private final String fileName;
+        private /*final*/ Data data;
         private /*final*/ InputStream stream;
         private final InetSocketAddress dest;
+        private final TFTPReadRequestPacket session;
+        private int nextAck;
 
         TFTPSession(TFTPReadRequestPacket rp) throws IOException {
             open();
+            session = rp;
             fileName = rp.getFilename();
             dest = new InetSocketAddress(rp.getAddress(),rp.getPort());
             try {
-                stream = resolver.open(fileName);
-                if(stream==null) // this is against the contract, but be defensive.
+                data = resolver.open(fileName);
+                if(data ==null) // this is against the contract, but be defensive.
                     sendError(FILE_NOT_FOUND, "no such file exists");
-                else
+                else {
+                    stream = data.read();
                     new Thread(this).start();
+                }
             } catch (IOException e) {
                 sendError(FILE_NOT_FOUND, "no such file exists");
             }
@@ -114,15 +122,15 @@ public class TFTPServer implements Runnable {
         /**
          * Sends a TFTP error packet.
          */
-        public void sendError(int errorCode, String msg) throws IOException {
+        private void sendError(int errorCode, String msg) throws IOException {
             LOGGER.info("Error: "+msg);
             send(new TFTPErrorPacket(dest.getAddress(),dest.getPort(), errorCode,msg));
         }
 
         /**
-         * Reads the next data packet out of the {@link #stream}, in a way that follows the TFTP protocol.
+         * Reads the next data packet out of the {@link #data}, in a way that follows the TFTP protocol.
          */
-        public TFTPDataPacket readNextBlock(int blockNumber) throws IOException {
+        private TFTPDataPacket readNextBlock(int blockNumber) throws IOException {
             byte[] buf = new byte[TFTPPacket.SEGMENT_SIZE];
             int read = 0;
 
@@ -135,32 +143,46 @@ public class TFTPServer implements Runnable {
             return new TFTPDataPacket(dest.getAddress(),dest.getPort(),blockNumber,buf,0,read);
         }
 
+        private void waitAck() throws IOException {
+            TFTPPacket p = receive();
+            if (!(p instanceof TFTPAckPacket)) {
+                if (p instanceof TFTPErrorPacket) {
+                    TFTPErrorPacket ep = (TFTPErrorPacket) p;
+                    LOGGER.info("Expecting ACK="+nextAck+" but got "+p+" :"+ep.getError()+":"+ep.getMessage());
+                } else {
+                    LOGGER.info("Expecting ACK="+nextAck+" but got "+p);
+                }
+                sendError(FILE_NOT_FOUND, "");
+                throw new IOException("Aborting");
+            }
+
+            TFTPAckPacket ack = (TFTPAckPacket) p;
+            if(ack.getBlockNumber()!=nextAck) {
+                LOGGER.info("Expecting ACK="+nextAck+" but got ACK for "+ack.getBlockNumber()+" instead. Aborting");
+                sendError(FILE_NOT_FOUND, "");
+                throw new IOException("Aborting");
+            }
+
+            nextAck++;
+        }
+
         public void run() {
             try {
+                if(session.options.containsKey("tsize")) {
+                    LOGGER.fine("Got tsize");
+                    TFTPOAckPacket oack = new TFTPOAckPacket(dest.getAddress(), dest.getPort());
+                    oack.options.put("tsize",String.valueOf(data.size()));
+                    send(oack);
+                    
+                    waitAck();
+                }
 
                 for( int blockNumber=0; ; blockNumber++ ) {
                     TFTPDataPacket dp = readNextBlock(blockNumber);
                     send(dp);
                     LOGGER.fine("Sent block #"+blockNumber+" ("+dp.getDataLength()+")");
 
-                    TFTPPacket p = receive();
-                    if (!(p instanceof TFTPAckPacket)) {
-                        if (p instanceof TFTPErrorPacket) {
-                            TFTPErrorPacket ep = (TFTPErrorPacket) p;
-                            LOGGER.info("Expecting ACK for "+blockNumber+" but got "+p+" :"+ep.getError());
-                        } else {
-                            LOGGER.info("Expecting ACK for "+blockNumber+" but got "+p);
-                        }
-                        sendError(FILE_NOT_FOUND, "");
-                        return;
-                    }
-
-                    TFTPAckPacket ack = (TFTPAckPacket) p;
-                    if(ack.getBlockNumber()!=blockNumber) {
-                        LOGGER.info("Expecting ACK for "+blockNumber+" but got ACK for "+ack.getBlockNumber()+" instead. Aborting");
-                        sendError(FILE_NOT_FOUND, "");
-                        return;
-                    }
+                    waitAck();
 
                     if(dp.getDataLength()<TFTPPacket.SEGMENT_SIZE) {
                         LOGGER.fine("Transmission complete");
@@ -175,7 +197,7 @@ public class TFTPServer implements Runnable {
                 try {
                     stream.close();
                 } catch (IOException e) {
-                    LOGGER.log(FINE, "Failed to close "+stream,e);
+                    LOGGER.log(FINE, "Failed to close "+ data,e);
                 }
             }
         }
@@ -196,8 +218,15 @@ public class TFTPServer implements Runnable {
 
         // serve current directory
         TFTPServer server = new TFTPServer(new PathResolver() {
-            public InputStream open(String fileName) throws IOException {
-                return new FileInputStream(fileName);
+            public Data open(final String fileName) throws IOException {
+                return new Data() {
+                    public InputStream read() throws IOException {
+                        return new FileInputStream(fileName);
+                    }
+                    public int size() {
+                        return (int)new File(fileName).length();
+                    }
+                };
             }
         });
         new Thread(server).start();

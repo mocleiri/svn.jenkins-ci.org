@@ -17,8 +17,13 @@
 
 package org.jvnet.hudson.tftpd.impl;
 
+import org.jvnet.hudson.pxeboot.DataInputStream2;
+
+import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
+import java.util.Map;
+import java.util.TreeMap;
 
 /***
  * An abstract class derived from TFTPPacket definiing a TFTP Request
@@ -43,7 +48,6 @@ import java.net.InetAddress;
  * @author Daniel F. Savarese
  * @see TFTPPacket
  * @see TFTPReadRequestPacket
- * @see TFTPWriteRequestPacket
  * @see TFTPPacketException
  * @see TFTP
  ***/
@@ -72,6 +76,8 @@ public abstract class TFTPRequestPacket extends TFTPPacket
 
     /*** The filename of the request. ***/
     String _filename;
+
+    public final Map<String,String> options = new TreeMap<String,String>();
 
     /***
      * Creates a request packet of a given type to be sent to a host at a
@@ -105,64 +111,35 @@ public abstract class TFTPRequestPacket extends TFTPPacket
      * @throws TFTPPacketException  If the datagram isn't a valid TFTP
      *         request packet of the appropriate type.
      ***/
-    TFTPRequestPacket(int type, DatagramPacket datagram)
-    throws TFTPPacketException
-    {
+    TFTPRequestPacket(int type, DatagramPacket datagram) throws IOException {
         super(type, datagram.getAddress(), datagram.getPort());
 
-        byte[] data;
-        int index, length;
-        String mode;
-        StringBuffer buffer;
+        DataInputStream2 in = new DataInputStream2(datagram);
 
-        data = datagram.getData();
-
-        if (getType() != data[1])
+        if (getType() != in.readShort())
             throw new TFTPPacketException("TFTP operator code does not match type.");
 
-        buffer = new StringBuffer();
+        _filename = in.readNullTerminatedString();
+        String mode = in.readNullTerminatedString().toLowerCase(java.util.Locale.ENGLISH);
 
-        index = 2;
-        length = datagram.getLength();
-
-        while (index < length && data[index] != 0)
-        {
-            buffer.append((char)data[index]);
-            ++index;
-        }
-
-        _filename = buffer.toString();
-
-        if (index >= length)
-            throw new TFTPPacketException("Bad filename and mode format.");
-
-        buffer.setLength(0);
-        ++index; // need to advance beyond the end of string marker
-        while (index < length && data[index] != 0)
-        {
-            buffer.append((char)data[index]);
-            ++index;
-        }
-
-        mode = buffer.toString().toLowerCase(java.util.Locale.ENGLISH);
-        length = _modeStrings.length;
-
-        for (index = 0; index < length; index++)
-        {
-            if (mode.equals(_modeStrings[index]))
-            {
+        _mode = -1;
+        for (int index = 0; index < _modeStrings.length; index++) {
+            if (mode.equals(_modeStrings[index])) {
                 _mode = index;
                 break;
             }
         }
 
-        if (index >= length)
-        {
+        if (_mode == -1) {
             throw new TFTPPacketException("Unrecognized TFTP transfer mode: " + mode);
             // May just want to default to binary mode instead of throwing
             // exception.
             //_mode = TFTP.OCTET_MODE;
         }
+
+        // read options
+        while(in.available()>0)
+            options.put(in.readNullTerminatedString(),in.readNullTerminatedString());
     }
 
 

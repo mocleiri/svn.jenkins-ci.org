@@ -17,11 +17,9 @@
 
 package org.jvnet.hudson.tftpd.impl;
 
-import org.apache.commons.net.tftp.TFTPWriteRequestPacket;
-
+import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
-import java.io.IOException;
 
 /***
  * TFTPPacket is an abstract class encapsulating the functionality common

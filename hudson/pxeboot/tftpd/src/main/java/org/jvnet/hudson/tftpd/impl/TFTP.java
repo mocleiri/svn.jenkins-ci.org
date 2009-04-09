@@ -17,12 +17,12 @@
 
 package org.jvnet.hudson.tftpd.impl;
 
+import org.apache.commons.net.DatagramSocketClient;
+
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.net.DatagramPacket;
 import java.net.SocketException;
-
-import org.apache.commons.net.DatagramSocketClient;
 
 /***
  * The TFTP class exposes a set of methods to allow you to deal with the TFTP
