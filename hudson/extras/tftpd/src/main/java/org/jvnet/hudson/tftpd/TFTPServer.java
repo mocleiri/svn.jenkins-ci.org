@@ -1,13 +1,13 @@
 package org.jvnet.hudson.tftpd;
 
-import org.apache.commons.net.tftp.TFTP;
-import org.apache.commons.net.tftp.TFTPAckPacket;
-import org.apache.commons.net.tftp.TFTPDataPacket;
-import org.apache.commons.net.tftp.TFTPErrorPacket;
-import static org.apache.commons.net.tftp.TFTPErrorPacket.FILE_NOT_FOUND;
-import org.apache.commons.net.tftp.TFTPPacket;
-import org.apache.commons.net.tftp.TFTPPacketException;
-import org.apache.commons.net.tftp.TFTPReadRequestPacket;
+import static org.jvnet.hudson.tftpd.impl.TFTPErrorPacket.FILE_NOT_FOUND;
+import org.jvnet.hudson.tftpd.impl.TFTP;
+import org.jvnet.hudson.tftpd.impl.TFTPPacket;
+import org.jvnet.hudson.tftpd.impl.TFTPReadRequestPacket;
+import org.jvnet.hudson.tftpd.impl.TFTPPacketException;
+import org.jvnet.hudson.tftpd.impl.TFTPErrorPacket;
+import org.jvnet.hudson.tftpd.impl.TFTPDataPacket;
+import org.jvnet.hudson.tftpd.impl.TFTPAckPacket;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -65,8 +65,8 @@ public class TFTPServer implements Runnable {
                 try {
                     TFTPPacket p = tftp.receive();
                     if (p instanceof TFTPReadRequestPacket) {
-                        LOGGER.fine("Starting a new session");
                         TFTPReadRequestPacket rp = (TFTPReadRequestPacket) p;
+                        LOGGER.fine("Starting a new session to transfer "+rp.getFilename());
                         new TFTPSession(rp); // this starts a new thread if necessary
                     } else {
                         LOGGER.fine("Unexpected packet "+p);
@@ -145,7 +145,12 @@ public class TFTPServer implements Runnable {
 
                     TFTPPacket p = receive();
                     if (!(p instanceof TFTPAckPacket)) {
-                        LOGGER.info("Expecting ACK for "+blockNumber+" but got "+p);
+                        if (p instanceof TFTPErrorPacket) {
+                            TFTPErrorPacket ep = (TFTPErrorPacket) p;
+                            LOGGER.info("Expecting ACK for "+blockNumber+" but got "+p+" :"+ep.getError());
+                        } else {
+                            LOGGER.info("Expecting ACK for "+blockNumber+" but got "+p);
+                        }
                         sendError(FILE_NOT_FOUND, "");
                         return;
                     }
@@ -164,8 +169,6 @@ public class TFTPServer implements Runnable {
                 }
             } catch(IOException e) {
                 LOGGER.log(INFO, "IO exception in TFTP session", e);
-            } catch (TFTPPacketException e) {
-                LOGGER.log(INFO, "Invalid TFTP packet", e);
             } finally {
                 LOGGER.fine("Closing a session");
                 close();

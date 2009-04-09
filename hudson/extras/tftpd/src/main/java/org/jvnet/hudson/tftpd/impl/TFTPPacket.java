@@ -21,6 +21,7 @@ import org.apache.commons.net.tftp.TFTPWriteRequestPacket;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;
+import java.io.IOException;
 
 /***
  * TFTPPacket is an abstract class encapsulating the functionality common
@@ -95,6 +96,11 @@ public abstract class TFTPPacket
      ***/
     public static final int ERROR = 5;
 
+    /**
+     * Option Acknowledgement packet.
+     */
+    public static final int OACK = 6;
+
     /***
      * The TFTP data packet maximum segment size in bytes.  This is 512
      * and is useful for those familiar with the TFTP protocol who want
@@ -124,8 +130,8 @@ public abstract class TFTPPacket
      * @exception TFTPPacketException  If the datagram does not contain a valid
      *             TFTP packet.
      ***/
-    public final static TFTPPacket newTFTPPacket(DatagramPacket datagram)
-    throws TFTPPacketException
+    public static TFTPPacket newTFTPPacket(DatagramPacket datagram)
+            throws IOException
     {
         byte[] data;
         TFTPPacket packet = null;
@@ -152,6 +158,9 @@ public abstract class TFTPPacket
             break;
         case ERROR:
             packet = new TFTPErrorPacket(datagram);
+            break;
+        case OACK:
+            packet = new TFTPOAckPacket(datagram);
             break;
         default:
             throw new TFTPPacketException(

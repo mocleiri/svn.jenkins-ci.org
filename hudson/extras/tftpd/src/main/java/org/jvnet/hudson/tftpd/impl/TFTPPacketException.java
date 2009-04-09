@@ -17,6 +17,8 @@
 
 package org.jvnet.hudson.tftpd.impl;
 
+import java.io.IOException;
+
 /***
  * A class used to signify the occurrence of an error in the creation of
  * a TFTP packet.  It is not declared final so that it may be subclassed
@@ -36,7 +38,7 @@ package org.jvnet.hudson.tftpd.impl;
  * @see TFTP
  ***/
 
-public class TFTPPacketException extends Exception
+public class TFTPPacketException extends IOException
 {
 
     /***
