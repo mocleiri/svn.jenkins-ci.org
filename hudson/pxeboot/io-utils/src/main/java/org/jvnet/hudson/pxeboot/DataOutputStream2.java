@@ -1,4 +1,4 @@
-package org.jvnet.hudson.proxy_dhcp;
+package org.jvnet.hudson.pxeboot;
 
 import java.io.DataOutputStream;
 import java.io.OutputStream;
@@ -6,9 +6,11 @@ import java.io.IOException;
 import java.net.Inet4Address;
 
 /**
+ * {@link DataOutputStream} with a few more convenience methods.
+ * 
  * @author Kohsuke Kawaguchi
  */
-class DataOutputStream2 extends DataOutputStream {
+public class DataOutputStream2 extends DataOutputStream {
     DataOutputStream2(OutputStream out) {
         super(out);
     }

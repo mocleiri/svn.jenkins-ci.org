@@ -1,16 +1,18 @@
-package org.jvnet.hudson.proxy_dhcp;
+package org.jvnet.hudson.pxeboot;
 
-import java.io.DataInputStream;
-import java.io.InputStream;
 import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.DatagramPacket;
 import java.net.Inet4Address;
 
 /**
+ * {@link DataInputStream} with a few more convenience methods.
+ *
  * @author Kohsuke Kawaguchi
  */
-class DataInputStream2 extends DataInputStream {
+public class DataInputStream2 extends DataInputStream {
     public DataInputStream2(InputStream in) {
         super(in);
     }

@@ -1,8 +1,10 @@
 package org.jvnet.hudson.proxy_dhcp;
 
+import org.jvnet.hudson.pxeboot.DataInputStream2;
+import org.jvnet.hudson.pxeboot.DataOutputStream2;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 import java.net.Inet4Address;
 
 /**
