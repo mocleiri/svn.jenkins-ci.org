@@ -141,9 +141,9 @@ public abstract class TFTPPacket
         case READ_REQUEST:
             packet = new TFTPReadRequestPacket(datagram);
             break;
-        case WRITE_REQUEST:
-            packet = new TFTPWriteRequestPacket(datagram);
-            break;
+//        case WRITE_REQUEST:
+//            packet = new TFTPWriteRequestPacket(datagram);
+//            break;
         case DATA:
             packet = new TFTPDataPacket(datagram);
             break;
