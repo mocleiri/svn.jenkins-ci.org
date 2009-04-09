@@ -156,7 +156,7 @@ public class TFTPServer implements Runnable {
                     if(waitAck(expected))
                         return; // got an ACK
                 } catch (SocketTimeoutException e) {
-                    if(retry++ > 10)
+                    if(retry++ > 5)
                         throw e; // too many retries. abort
                     LOGGER.fine("Retransmitting "+p);
                 }
@@ -206,7 +206,7 @@ public class TFTPServer implements Runnable {
                     LOGGER.fine("Sending block #"+blockNumber+" ("+dp.getDataLength()+")");
                     sendAndWait(dp,blockNumber);
 
-                    if(dp.getDataLength()<TFTPPacket.SEGMENT_SIZE) {
+                    if(dp.getDataLength()<blockSize) {
                         LOGGER.fine("Transmission complete");
                         return;
                     }
