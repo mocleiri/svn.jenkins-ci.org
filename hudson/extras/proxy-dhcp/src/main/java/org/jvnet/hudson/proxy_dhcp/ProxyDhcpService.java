@@ -5,10 +5,12 @@ import static org.jvnet.hudson.proxy_dhcp.DHCPOption.OPTION_DHCP_SERVER_IDENTIFI
 import static org.jvnet.hudson.proxy_dhcp.DHCPPacket.OP_BOOTREQUEST;
 
 import java.io.IOException;
+import java.io.Closeable;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.SocketException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import static java.util.logging.Level.INFO;
@@ -17,23 +19,32 @@ import java.util.logging.Logger;
 /**
  * @author Kohsuke Kawaguchi
  */
-public class ProxyDhcpService {
+public class ProxyDhcpService implements Runnable, Closeable {
 
     public final Inet4Address tftpServer;
     public final String bootFileName;
+    private final DatagramSocket server;
 
-    public ProxyDhcpService(Inet4Address tftpServer, String bootFileName) {
+    public ProxyDhcpService(Inet4Address tftpServer, String bootFileName) throws SocketException {
         this.tftpServer = tftpServer;
         this.bootFileName = bootFileName;
+
+        server = new DatagramSocket(DHCP_SERVER_PORT);
+        server.setBroadcast(true);
 
         LOGGER.info("TFTP server: "+tftpServer.getHostAddress());
         LOGGER.info("Boot file: "+bootFileName);
     }
 
-    public void run() throws IOException {
-        DatagramSocket server = new DatagramSocket(DHCP_SERVER_PORT);
-        server.setBroadcast(true);
+    public void run() {
+        try {
+            execute();
+        } catch (IOException e) {
+            LOGGER.log(Level.WARNING,"IO exception in proxy DHCP service",e);
+        }
+    }
 
+    public void execute() throws IOException {
         DatagramPacket datagram = new DatagramPacket(new byte[8192],8192);
         while(true) {
             server.receive(datagram);
@@ -44,6 +55,10 @@ public class ProxyDhcpService {
                 LOGGER.log(INFO,"Failed to handle a DHCP packet",e);
             }
         }
+    }
+
+    public void close() {
+        server.close();
     }
 
     private void handle(DatagramSocket server, DatagramPacket datagram) throws IOException {
