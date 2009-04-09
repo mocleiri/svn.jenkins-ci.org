@@ -85,11 +85,6 @@ public final class TFTPDataPacket extends TFTPPacket
         _blockNumber = blockNumber;
         _data = data;
         _offset = offset;
-
-        if (length > MAX_DATA_LENGTH)
-            _length = MAX_DATA_LENGTH;
-        else
-            _length = length;
     }
 
     public TFTPDataPacket(InetAddress destination, int port, int blockNumber,
