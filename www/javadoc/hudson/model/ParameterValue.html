@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ParameterValue (Hudson core 1.297 API)
+ParameterValue (Hudson core 1.299 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-07">
+<META NAME="date" CONTENT="2009-04-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParameterValue (Hudson core 1.297 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParameterValue (Hudson core 1.297 API)";
+        parent.document.title="ParameterValue (Hudson core 1.299 API)";
     }
 }
 </SCRIPT>
@@ -97,7 +97,7 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.ParameterValue</B>
 </PRE>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/FileParameterValue.html" title="class in hudson.model">FileParameterValue</A>, <A HREF="../../hudson/model/JobParameterValue.html" title="class in hudson.model">JobParameterValue</A>, <A HREF="../../hudson/model/RunParameterValue.html" title="class in hudson.model">RunParameterValue</A>, <A HREF="../../hudson/model/StringParameterValue.html" title="class in hudson.model">StringParameterValue</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/BooleanParameterValue.html" title="class in hudson.model">BooleanParameterValue</A>, <A HREF="../../hudson/model/FileParameterValue.html" title="class in hudson.model">FileParameterValue</A>, <A HREF="../../hudson/model/JobParameterValue.html" title="class in hudson.model">JobParameterValue</A>, <A HREF="../../hudson/model/RunParameterValue.html" title="class in hudson.model">RunParameterValue</A>, <A HREF="../../hudson/model/StringParameterValue.html" title="class in hudson.model">StringParameterValue</A></DD>
 </DL>
 <HR>
 <DL>
@@ -171,6 +171,15 @@ A value for a parameter in a build.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#ParameterValue(java.lang.String, java.lang.String)">ParameterValue</A></B>(java.lang.String&nbsp;name,
+               java.lang.String&nbsp;description)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ========== METHOD SUMMARY =========== -->
@@ -230,6 +239,14 @@ A value for a parameter in a build.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#getDescription()">getDescription</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#getName()">getName</A></B>()</CODE>
 
 <BR>
@@ -239,6 +256,14 @@ A value for a parameter in a build.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#hashCode()">hashCode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#setDescription(java.lang.String)">setDescription</A></B>(java.lang.String&nbsp;description)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -285,6 +310,15 @@ protected final java.lang.String <B>name</B></PRE>
 </TR>
 </TABLE>
 
+<A NAME="ParameterValue(java.lang.String, java.lang.String)"><!-- --></A><H3>
+ParameterValue</H3>
+<PRE>
+protected <B>ParameterValue</B>(java.lang.String&nbsp;name,
+                         java.lang.String&nbsp;description)</PRE>
+<DL>
+</DL>
+<HR>
+
 <A NAME="ParameterValue(java.lang.String)"><!-- --></A><H3>
 ParameterValue</H3>
 <PRE>
@@ -301,6 +335,28 @@ protected <B>ParameterValue</B>(java.lang.String&nbsp;name)</PRE>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="getDescription()"><!-- --></A><H3>
+getDescription</H3>
+<PRE>
+public java.lang.String <B>getDescription</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDescription(java.lang.String)"><!-- --></A><H3>
+setDescription</H3>
+<PRE>
+public void <B>setDescription</B>(java.lang.String&nbsp;description)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="getName()"><!-- --></A><H3>
 getName</H3>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.model (Hudson core 1.297 API)
+hudson.model (Hudson core 1.299 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-07">
+<META NAME="date" CONTENT="2009-04-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson core 1.297 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson core 1.297 API)";
+        parent.document.title="hudson.model (Hudson core 1.299 API)";
     }
 }
 </SCRIPT>
@@ -278,6 +278,18 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD><A HREF="../../hudson/model/PeriodicWork.html" title="class in hudson.model"><CODE>PeriodicWork</CODE></A> that takes a long time to run.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/BooleanParameterDefinition.html" title="class in hudson.model">BooleanParameterDefinition</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/BooleanParameterDefinition.DescriptorImpl.html" title="class in hudson.model">BooleanParameterDefinition.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/BooleanParameterValue.html" title="class in hudson.model">BooleanParameterValue</A></B></TD>
+<TD><A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model"><CODE>ParameterValue</CODE></A> created from <A HREF="../../hudson/model/StringParameterDefinition.html" title="class in hudson.model"><CODE>StringParameterDefinition</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build&lt;P extends Project&lt;P,B&gt;,B extends Build&lt;P,B&gt;&gt;</A></B></TD>
 <TD>A build of a <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.</TD>
 </TR>
@@ -311,6 +323,14 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/CauseAction.html" title="class in hudson.model">CauseAction</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/ChoiceParameterDefinition.html" title="class in hudson.model">ChoiceParameterDefinition</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/ChoiceParameterDefinition.DescriptorImpl.html" title="class in hudson.model">ChoiceParameterDefinition.DescriptorImpl</A></B></TD>
 <TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -520,10 +540,6 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD>Extension point to add icon to <tt>http://server/hudson/manage</tt> page.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD WIDTH="15%"><B><A HREF="../../hudson/model/MemoryUsageMonitor.html" title="class in hudson.model">MemoryUsageMonitor</A></B></TD>
-<TD>Monitors the memory usage of the system in OS specific way.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Messages.html" title="class in hudson.model">Messages</A></B></TD>
 <TD>&nbsp;</TD>
 </TR>
@@ -531,6 +547,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A></B></TD>
 <TD>Maintains several <A HREF="../../hudson/model/TimeSeries.html" title="class in hudson.model"><CODE>TimeSeries</CODE></A> with different update frequencies to satisfy three goals;
  (1) retain data over long timespan, (2) save memory, and (3) retain accurate data for the recent past.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/MultiStageTimeSeries.TrendChart.html" title="class in hudson.model">MultiStageTimeSeries.TrendChart</A></B></TD>
+<TD>Represents the trend chart that consists of several <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model"><CODE>MultiStageTimeSeries</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/MyView.html" title="class in hudson.model">MyView</A></B></TD>

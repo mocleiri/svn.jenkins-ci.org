@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-HudsonTestCase (Test harness for Hudson and plugins 1.297 API)
+HudsonTestCase (Test harness for Hudson and plugins 1.299 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-07">
+<META NAME="date" CONTENT="2009-04-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Test harness for Hudson and plugins 1.297 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.297 API)";
+        parent.document.title="HudsonTestCase (Test harness for Hudson and plugins 1.299 API)";
     }
 }
 </SCRIPT>
@@ -287,6 +287,16 @@ R</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertEqualBeans(java.lang.Object, java.lang.Object, java.lang.String)">assertEqualBeans</A></B>(java.lang.Object&nbsp;lhs,
+                 java.lang.Object&nbsp;rhs,
+                 java.lang.String&nbsp;properties)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asserts that two JavaBeans are equal as far as the given list of properties are concerned.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1241,6 +1251,38 @@ public <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model
 <DD>Creates a <A HREF="https://hudson.dev.java.net/pom/hudson-core/apidocs/hudson/model/TaskListener.html?is-external=true" title="class or interface in hudson.model"><CODE>TaskListener</CODE></A> connected to stdout.
 <P>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="assertEqualBeans(java.lang.Object, java.lang.Object, java.lang.String)"><!-- --></A><H3>
+assertEqualBeans</H3>
+<PRE>
+public void <B>assertEqualBeans</B>(java.lang.Object&nbsp;lhs,
+                             java.lang.Object&nbsp;rhs,
+                             java.lang.String&nbsp;properties)
+                      throws java.lang.Exception</PRE>
+<DL>
+<DD>Asserts that two JavaBeans are equal as far as the given list of properties are concerned.
+
+ <p>
+ This method takes two objects that have properties (getXyz, isXyz, or just the public xyz field),
+ and makes sure that the property values for each given property are equals (by using <CODE>Assert.assertEquals(Object, Object)</CODE>)
+
+ <p>
+ Property values can be null on both objects, and that is OK, but passing in a property that doesn't
+ exist will fail an assertion.
+
+ <p>
+ This method is very convenient for comparing a large number of properties on two objects,
+ for example to verify that the configuration is identical after a config screen roundtrip.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>lhs</CODE> - One of the two objects to be compared.<DD><CODE>rhs</CODE> - The other object to be compared<DD><CODE>properties</CODE> - ','-separated list of property names that are compared.
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE><DT><B>Since:</B></DT>
+  <DD>1.297</DD>
 </DL>
 </DD>
 </DL>

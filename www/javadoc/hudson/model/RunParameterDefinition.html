@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-RunParameterDefinition (Hudson core 1.297 API)
+RunParameterDefinition (Hudson core 1.299 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-07">
+<META NAME="date" CONTENT="2009-04-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RunParameterDefinition (Hudson core 1.297 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RunParameterDefinition (Hudson core 1.297 API)";
+        parent.document.title="RunParameterDefinition (Hudson core 1.299 API)";
     }
 }
 </SCRIPT>
@@ -174,7 +174,9 @@ java.lang.Object
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/RunParameterDefinition.html#RunParameterDefinition(java.lang.String)">RunParameterDefinition</A></B>(java.lang.String&nbsp;name)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/RunParameterDefinition.html#RunParameterDefinition(java.lang.String, java.lang.String, java.lang.String)">RunParameterDefinition</A></B>(java.lang.String&nbsp;name,
+                       java.lang.String&nbsp;projectName,
+                       java.lang.String&nbsp;description)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -206,6 +208,30 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a parameter value from a form submission</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/RunParameterDefinition.html#getDefaultParameterValue()">getDefaultParameterValue</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns default parameter value for this definition.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/RunParameterDefinition.html#getProject()">getProject</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/RunParameterDefinition.html#getProjectName()">getProjectName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.ParameterDefinition"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -213,7 +239,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/ParameterDefinition.html#all()">all</A>, <A HREF="../../hudson/model/ParameterDefinition.html#getDefaultParameterValue()">getDefaultParameterValue</A>, <A HREF="../../hudson/model/ParameterDefinition.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/model/ParameterDefinition.html#getName()">getName</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/ParameterDefinition.html#all()">all</A>, <A HREF="../../hudson/model/ParameterDefinition.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/ParameterDefinition.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/model/ParameterDefinition.html#getName()">getName</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -238,11 +264,13 @@ java.lang.Object
 </TR>
 </TABLE>
 
-<A NAME="RunParameterDefinition(java.lang.String)"><!-- --></A><H3>
+<A NAME="RunParameterDefinition(java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
 RunParameterDefinition</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
-</FONT>public <B>RunParameterDefinition</B>(java.lang.String&nbsp;name)</PRE>
+</FONT>public <B>RunParameterDefinition</B>(java.lang.String&nbsp;name,
+                                                   java.lang.String&nbsp;projectName,
+                                                   java.lang.String&nbsp;description)</PRE>
 <DL>
 </DL>
 
@@ -255,6 +283,46 @@ RunParameterDefinition</H3>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="getProjectName()"><!-- --></A><H3>
+getProjectName</H3>
+<PRE>
+public java.lang.String <B>getProjectName</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getProject()"><!-- --></A><H3>
+getProject</H3>
+<PRE>
+public <A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A> <B>getProject</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDefaultParameterValue()"><!-- --></A><H3>
+getDefaultParameterValue</H3>
+<PRE>
+public <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A> <B>getDefaultParameterValue</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/ParameterDefinition.html#getDefaultParameterValue()">ParameterDefinition</A></CODE></B></DD>
+<DD>Returns default parameter value for this definition.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/ParameterDefinition.html#getDefaultParameterValue()">getDefaultParameterValue</A></CODE> in class <CODE><A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>default parameter value or null if no defaults are available</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="createValue(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><!-- --></A><H3>
 createValue</H3>

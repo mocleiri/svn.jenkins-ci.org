@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.297 API)
+Deprecated List (Hudson core 1.299 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-07">
+<META NAME="date" CONTENT="2009-04-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.297 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.297 API)";
+        parent.document.title="Deprecated List (Hudson core 1.299 API)";
     }
 }
 </SCRIPT>
@@ -835,6 +835,13 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/matrix/MatrixConfiguration.html#scheduleBuild(hudson.model.ParametersAction, hudson.model.Cause)"><CODE>MatrixConfiguration.scheduleBuild(ParametersAction, Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/DirectoryBrowserSupport.html#serveFile(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.FilePath, java.lang.String, boolean)">hudson.model.DirectoryBrowserSupport.serveFile(StaplerRequest, StaplerResponse, FilePath, String, boolean)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.297
+      Instead of calling this method explicitly, just return the <A HREF="hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model"><CODE>DirectoryBrowserSupport</CODE></A> object
+      from the <code>doXYZ</code> method and let Stapler generate a response for you.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/matrix/MatrixConfiguration.html#setJDK(hudson.model.JDK)">hudson.matrix.MatrixConfiguration.setJDK(JDK)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Not supported.</I>&nbsp;</TD>
@@ -904,6 +911,12 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, java.lang.String)"><CODE>DirectoryBrowserSupport.DirectoryBrowserSupport(ModelObject, String)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, java.lang.String)">hudson.model.DirectoryBrowserSupport(ModelObject, String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.297
+      Use <A HREF="hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, hudson.FilePath, java.lang.String, java.lang.String, boolean)"><CODE>DirectoryBrowserSupport.DirectoryBrowserSupport(ModelObject, FilePath, String, String, boolean)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/slaves/DumbSlave.html#DumbSlave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)">hudson.slaves.DumbSlave(String, String, String, String, Node.Mode, String, ComputerLauncher, RetentionStrategy)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286.
@@ -930,6 +943,11 @@ function windowTitle()
 <TD><A HREF="hudson/model/HealthReport.html#HealthReport(int, java.lang.String, java.lang.String)">hudson.model.HealthReport(int, String, String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>use <A HREF="hudson/model/HealthReport.html#HealthReport(int, java.lang.String, org.jvnet.localizer.Localizable)"><CODE>HealthReport.HealthReport(int, String, org.jvnet.localizer.Localizable)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/MultiStageTimeSeries.html#MultiStageTimeSeries(float, float)">hudson.model.MultiStageTimeSeries(float, float)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/MultiStageTimeSeries.html#MultiStageTimeSeries(org.jvnet.localizer.Localizable, java.awt.Color, float, float)"><CODE>MultiStageTimeSeries.MultiStageTimeSeries(Localizable, Color, float, float)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/security/Permission.html#Permission(hudson.security.PermissionGroup, java.lang.String, hudson.security.Permission)">hudson.security.Permission(PermissionGroup, String, Permission)</A>

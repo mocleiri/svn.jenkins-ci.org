@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Run (Hudson core 1.297 API)
+Run (Hudson core 1.299 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-07">
+<META NAME="date" CONTENT="2009-04-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson core 1.297 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson core 1.297 API)";
+        parent.document.title="Run (Hudson core 1.299 API)";
     }
 }
 </SCRIPT>
@@ -430,9 +430,8 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Run.html#doArtifact(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doArtifact</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model">DirectoryBrowserSupport</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#doArtifact()">doArtifact</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serves the artifacts.</TD>
@@ -497,6 +496,14 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#doToggleLogKeep(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doToggleLogKeep</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A>&lt;?,?&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#fromExternalizableId(java.lang.String)">fromExternalizableId</A></B>(java.lang.String&nbsp;id)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -660,6 +667,14 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A> building this job, if it's being built.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getExternalizableId()">getExternalizableId</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2190,14 +2205,10 @@ public <A HREF="../../hudson/model/Run.Summary.html" title="class in hudson.mode
 </DL>
 <HR>
 
-<A NAME="doArtifact(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doArtifact()"><!-- --></A><H3>
 doArtifact</H3>
 <PRE>
-public void <B>doArtifact</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                       org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                throws java.io.IOException,
-                       javax.servlet.ServletException,
-                       java.lang.InterruptedException</PRE>
+public <A HREF="../../hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model">DirectoryBrowserSupport</A> <B>doArtifact</B>()</PRE>
 <DL>
 <DD>Serves the artifacts.
 <P>
@@ -2205,11 +2216,7 @@ public void <B>doArtifact</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 </DD>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -2449,6 +2456,34 @@ protected final <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvV
 <DD>Builds up the environment variable map that's sufficient to identify a process
  as ours. This is used to kill run-away processes via <A HREF="../../hudson/util/ProcessTreeKiller.html" title="class in hudson.util"><CODE>ProcessTreeKiller</CODE></A>.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getExternalizableId()"><!-- --></A><H3>
+getExternalizableId</H3>
+<PRE>
+public java.lang.String <B>getExternalizableId</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="fromExternalizableId(java.lang.String)"><!-- --></A><H3>
+fromExternalizableId</H3>
+<PRE>
+public static <A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A>&lt;?,?&gt; <B>fromExternalizableId</B>(java.lang.String&nbsp;id)</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-JNLPLauncher (Hudson core 1.297 API)
+JNLPLauncher (Hudson core 1.299 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-07">
+<META NAME="date" CONTENT="2009-04-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JNLPLauncher (Hudson core 1.297 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JNLPLauncher (Hudson core 1.297 API)";
+        parent.document.title="JNLPLauncher (Hudson core 1.299 API)";
     }
 }
 </SCRIPT>
@@ -161,6 +161,14 @@ java.lang.Object
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the slave needs to tunnel the connection to the master,
  specify the "host:port" here.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/JNLPLauncher.html#vmargs">vmargs</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Additional JVM arguments.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.slaves.ComputerLauncher"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -187,7 +195,8 @@ java.lang.Object
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/slaves/JNLPLauncher.html#JNLPLauncher(java.lang.String)">JNLPLauncher</A></B>(java.lang.String&nbsp;tunnel)</CODE>
+<TD><CODE><B><A HREF="../../hudson/slaves/JNLPLauncher.html#JNLPLauncher(java.lang.String, java.lang.String)">JNLPLauncher</A></B>(java.lang.String&nbsp;tunnel,
+             java.lang.String&nbsp;vmargs)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -272,6 +281,20 @@ public final java.lang.String <B>tunnel</B></PRE>
 </DL>
 <HR>
 
+<A NAME="vmargs"><!-- --></A><H3>
+vmargs</H3>
+<PRE>
+public final java.lang.String <B>vmargs</B></PRE>
+<DL>
+<DD>Additional JVM arguments. Can be null.
+<P>
+<DL>
+<DT><B>Since:</B></DT>
+  <DD>1.297</DD>
+</DL>
+</DL>
+<HR>
+
 <A NAME="DESCRIPTOR"><!-- --></A><H3>
 DESCRIPTOR</H3>
 <PRE>
@@ -292,11 +315,12 @@ DESCRIPTOR</H3>
 </TR>
 </TABLE>
 
-<A NAME="JNLPLauncher(java.lang.String)"><!-- --></A><H3>
+<A NAME="JNLPLauncher(java.lang.String, java.lang.String)"><!-- --></A><H3>
 JNLPLauncher</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
-</FONT>public <B>JNLPLauncher</B>(java.lang.String&nbsp;tunnel)</PRE>
+</FONT>public <B>JNLPLauncher</B>(java.lang.String&nbsp;tunnel,
+                                         java.lang.String&nbsp;vmargs)</PRE>
 <DL>
 </DL>
 <HR>

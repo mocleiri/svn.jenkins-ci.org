@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-OverallLoadStatistics (Hudson core 1.297 API)
+OverallLoadStatistics (Hudson core 1.299 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-07">
+<META NAME="date" CONTENT="2009-04-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ OverallLoadStatistics (Hudson core 1.297 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="OverallLoadStatistics (Hudson core 1.297 API)";
+        parent.document.title="OverallLoadStatistics (Hudson core 1.299 API)";
     }
 }
 </SCRIPT>
@@ -199,8 +199,8 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;org.jfree.data.category.DefaultCategoryDataset</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/OverallLoadStatistics.html#createOverallDataset(hudson.model.MultiStageTimeSeries.TimeScale)">createOverallDataset</A></B>(<A HREF="../../hudson/model/MultiStageTimeSeries.TimeScale.html" title="enum in hudson.model">MultiStageTimeSeries.TimeScale</A>&nbsp;timeScale)</CODE>
+<CODE>protected &nbsp;<A HREF="../../hudson/model/MultiStageTimeSeries.TrendChart.html" title="class in hudson.model">MultiStageTimeSeries.TrendChart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/OverallLoadStatistics.html#createOverallTrendChart(hudson.model.MultiStageTimeSeries.TimeScale)">createOverallTrendChart</A></B>(<A HREF="../../hudson/model/MultiStageTimeSeries.TimeScale.html" title="enum in hudson.model">MultiStageTimeSeries.TimeScale</A>&nbsp;timeScale)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When drawing the overall load statistics, use the total queue length,
@@ -213,7 +213,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model">LoadStatistics</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/LoadStatistics.html#configureRenderer(org.jfree.chart.renderer.category.LineAndShapeRenderer)">configureRenderer</A>, <A HREF="../../hudson/model/LoadStatistics.html#createChart(org.jfree.data.category.CategoryDataset)">createChart</A>, <A HREF="../../hudson/model/LoadStatistics.html#createDataset(hudson.model.MultiStageTimeSeries.TimeScale)">createDataset</A>, <A HREF="../../hudson/model/LoadStatistics.html#createDataset(hudson.model.MultiStageTimeSeries.TimeScale, float[][], java.lang.String[])">createDataset</A>, <A HREF="../../hudson/model/LoadStatistics.html#doGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doGraph</A>, <A HREF="../../hudson/model/LoadStatistics.html#getLatestIdleExecutors(hudson.model.MultiStageTimeSeries.TimeScale)">getLatestIdleExecutors</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/LoadStatistics.html#configureRenderer(org.jfree.chart.renderer.category.LineAndShapeRenderer)">configureRenderer</A>, <A HREF="../../hudson/model/LoadStatistics.html#createChart(org.jfree.data.category.CategoryDataset)">createChart</A>, <A HREF="../../hudson/model/LoadStatistics.html#createTrendChart(hudson.model.MultiStageTimeSeries.TimeScale)">createTrendChart</A>, <A HREF="../../hudson/model/LoadStatistics.html#doGraph(java.lang.String)">doGraph</A>, <A HREF="../../hudson/model/LoadStatistics.html#getLatestIdleExecutors(hudson.model.MultiStageTimeSeries.TimeScale)">getLatestIdleExecutors</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -310,10 +310,10 @@ public int <B>computeQueueLength</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="createOverallDataset(hudson.model.MultiStageTimeSeries.TimeScale)"><!-- --></A><H3>
-createOverallDataset</H3>
+<A NAME="createOverallTrendChart(hudson.model.MultiStageTimeSeries.TimeScale)"><!-- --></A><H3>
+createOverallTrendChart</H3>
 <PRE>
-protected org.jfree.data.category.DefaultCategoryDataset <B>createOverallDataset</B>(<A HREF="../../hudson/model/MultiStageTimeSeries.TimeScale.html" title="enum in hudson.model">MultiStageTimeSeries.TimeScale</A>&nbsp;timeScale)</PRE>
+protected <A HREF="../../hudson/model/MultiStageTimeSeries.TrendChart.html" title="class in hudson.model">MultiStageTimeSeries.TrendChart</A> <B>createOverallTrendChart</B>(<A HREF="../../hudson/model/MultiStageTimeSeries.TimeScale.html" title="enum in hudson.model">MultiStageTimeSeries.TimeScale</A>&nbsp;timeScale)</PRE>
 <DL>
 <DD>When drawing the overall load statistics, use the total queue length,
  not <A HREF="../../hudson/model/LoadStatistics.html#queueLength"><CODE>LoadStatistics.queueLength</CODE></A>, which just shows jobs that are to be run on the master.

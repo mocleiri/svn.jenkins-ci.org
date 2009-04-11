@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-MultiStageTimeSeries (Hudson core 1.297 API)
+MultiStageTimeSeries (Hudson core 1.299 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-07">
+<META NAME="date" CONTENT="2009-04-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MultiStageTimeSeries (Hudson core 1.297 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MultiStageTimeSeries (Hudson core 1.297 API)";
+        parent.document.title="MultiStageTimeSeries (Hudson core 1.299 API)";
     }
 }
 </SCRIPT>
@@ -132,6 +132,14 @@ Maintains several <A HREF="../../hudson/model/TimeSeries.html" title="class in h
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Choose which datapoint to use.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/MultiStageTimeSeries.TrendChart.html" title="class in hudson.model">MultiStageTimeSeries.TrendChart</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the trend chart that consists of several <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model"><CODE>MultiStageTimeSeries</CODE></A>.</TD>
+</TR>
 </TABLE>
 &nbsp;<!-- =========== FIELD SUMMARY =========== -->
 
@@ -140,6 +148,14 @@ Maintains several <A HREF="../../hudson/model/TimeSeries.html" title="class in h
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.awt.Color</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/MultiStageTimeSeries.html#color">color</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to render a line in the trend chart.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -165,6 +181,14 @@ Maintains several <A HREF="../../hudson/model/TimeSeries.html" title="class in h
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updated every 10 seconds.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/MultiStageTimeSeries.html#title">title</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name of this data series.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -180,6 +204,15 @@ Maintains several <A HREF="../../hudson/model/TimeSeries.html" title="class in h
                      float&nbsp;decay)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/MultiStageTimeSeries.html#MultiStageTimeSeries(org.jvnet.localizer.Localizable, java.awt.Color, float, float)"><CODE>MultiStageTimeSeries(Localizable, Color, float, float)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/MultiStageTimeSeries.html#MultiStageTimeSeries(org.jvnet.localizer.Localizable, java.awt.Color, float, float)">MultiStageTimeSeries</A></B>(org.jvnet.localizer.Localizable&nbsp;title,
+                     java.awt.Color&nbsp;color,
+                     float&nbsp;initialValue,
+                     float&nbsp;decay)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
@@ -191,6 +224,15 @@ Maintains several <A HREF="../../hudson/model/TimeSeries.html" title="class in h
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/model/MultiStageTimeSeries.TrendChart.html" title="class in hudson.model">MultiStageTimeSeries.TrendChart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/MultiStageTimeSeries.html#createTrendChart(hudson.model.MultiStageTimeSeries.TimeScale, hudson.model.MultiStageTimeSeries...)">createTrendChart</A></B>(<A HREF="../../hudson/model/MultiStageTimeSeries.TimeScale.html" title="enum in hudson.model">MultiStageTimeSeries.TimeScale</A>&nbsp;scale,
+                 <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A>...&nbsp;data)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -239,6 +281,30 @@ Maintains several <A HREF="../../hudson/model/TimeSeries.html" title="class in h
 </TR>
 </TABLE>
 
+<A NAME="title"><!-- --></A><H3>
+title</H3>
+<PRE>
+public final org.jvnet.localizer.Localizable <B>title</B></PRE>
+<DL>
+<DD>Name of this data series.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="color"><!-- --></A><H3>
+color</H3>
+<PRE>
+public final java.awt.Color <B>color</B></PRE>
+<DL>
+<DD>Used to render a line in the trend chart.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
 <A NAME="sec10"><!-- --></A><H3>
 sec10</H3>
 <PRE>
@@ -284,12 +350,25 @@ public final <A HREF="../../hudson/model/TimeSeries.html" title="class in hudson
 </TR>
 </TABLE>
 
+<A NAME="MultiStageTimeSeries(org.jvnet.localizer.Localizable, java.awt.Color, float, float)"><!-- --></A><H3>
+MultiStageTimeSeries</H3>
+<PRE>
+public <B>MultiStageTimeSeries</B>(org.jvnet.localizer.Localizable&nbsp;title,
+                            java.awt.Color&nbsp;color,
+                            float&nbsp;initialValue,
+                            float&nbsp;decay)</PRE>
+<DL>
+</DL>
+<HR>
+
 <A NAME="MultiStageTimeSeries(float, float)"><!-- --></A><H3>
 MultiStageTimeSeries</H3>
 <PRE>
 public <B>MultiStageTimeSeries</B>(float&nbsp;initialValue,
                             float&nbsp;decay)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/MultiStageTimeSeries.html#MultiStageTimeSeries(org.jvnet.localizer.Localizable, java.awt.Color, float, float)"><CODE>MultiStageTimeSeries(Localizable, Color, float, float)</CODE></A></I>
+<P>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -335,6 +414,18 @@ public float <B>getLatest</B>(<A HREF="../../hudson/model/MultiStageTimeSeries.T
 <DL>
 <DD>Gets the most up-to-date data point value.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createTrendChart(hudson.model.MultiStageTimeSeries.TimeScale, hudson.model.MultiStageTimeSeries...)"><!-- --></A><H3>
+createTrendChart</H3>
+<PRE>
+public static <A HREF="../../hudson/model/MultiStageTimeSeries.TrendChart.html" title="class in hudson.model">MultiStageTimeSeries.TrendChart</A> <B>createTrendChart</B>(<A HREF="../../hudson/model/MultiStageTimeSeries.TimeScale.html" title="enum in hudson.model">MultiStageTimeSeries.TimeScale</A>&nbsp;scale,
+                                                               <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A>...&nbsp;data)</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>
