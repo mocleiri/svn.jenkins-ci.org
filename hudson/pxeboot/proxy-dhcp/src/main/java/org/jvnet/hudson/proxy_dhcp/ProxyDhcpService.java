@@ -17,6 +17,8 @@ import static java.util.logging.Level.INFO;
 import java.util.logging.Logger;
 
 /**
+ * DHCP 
+ *
  * @author Kohsuke Kawaguchi
  */
 public class ProxyDhcpService implements Runnable, Closeable {
@@ -26,10 +28,14 @@ public class ProxyDhcpService implements Runnable, Closeable {
     private final DatagramSocket server;
 
     public ProxyDhcpService(Inet4Address tftpServer, String bootFileName) throws SocketException {
+        this(tftpServer,bootFileName,null);
+    }
+    
+    public ProxyDhcpService(Inet4Address tftpServer, String bootFileName, InetAddress interfaceToListen) throws SocketException {
         this.tftpServer = tftpServer;
         this.bootFileName = bootFileName;
 
-        server = new DatagramSocket(DHCP_SERVER_PORT);
+        server = new DatagramSocket(DHCP_SERVER_PORT,interfaceToListen);
         server.setBroadcast(true);
 
         LOGGER.info("TFTP server: "+tftpServer.getHostAddress());
