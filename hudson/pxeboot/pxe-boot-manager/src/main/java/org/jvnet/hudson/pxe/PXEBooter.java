@@ -58,11 +58,11 @@ public class PXEBooter {
                 }
 
                 // default
-                return new Data() {
-                    public InputStream read() throws IOException {
-                        return classLoader.getResourceAsStream("tftp/"+fileName.replace('\\','/'));
-                    }
-                };
+                URL res = classLoader.getResource("tftp/" + fileName.replace('\\', '/'));
+                if(res!=null)
+                    return Data.fromURL(res);
+
+                throw new IOException("No such file: "+fileName);
             }
         });
         start(tftp);

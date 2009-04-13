@@ -2,6 +2,7 @@ package org.jvnet.hudson.tftpd;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -31,5 +32,22 @@ public abstract class Data {
             size+=chunk;
 
         return size;
+    }
+
+    /**
+     * Creates a {@link Data} object from a URL.
+     */
+    public static Data fromURL(final URL url) {
+        return new Data() {
+            public InputStream read() throws IOException {
+                return url.openStream();
+            }
+
+            public int size() throws IOException {
+                int len = url.openConnection().getContentLength();
+                if(len>=0)      return len;
+                return super.size();
+            }
+        };
     }
 }
