@@ -60,7 +60,7 @@ public class PXEBooter {
                 // default
                 URL res = classLoader.getResource("tftp/" + fileName.replace('\\', '/'));
                 if(res!=null)
-                    return Data.fromURL(res);
+                    return Data.from(res);
 
                 throw new IOException("No such file: "+fileName);
             }

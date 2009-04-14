@@ -2,6 +2,7 @@ package org.jvnet.hudson.tftpd;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ByteArrayInputStream;
 import java.net.URL;
 
 /**
@@ -37,7 +38,7 @@ public abstract class Data {
     /**
      * Creates a {@link Data} object from a URL.
      */
-    public static Data fromURL(final URL url) {
+    public static Data from(final URL url) {
         return new Data() {
             public InputStream read() throws IOException {
                 return url.openStream();
@@ -47,6 +48,28 @@ public abstract class Data {
                 int len = url.openConnection().getContentLength();
                 if(len>=0)      return len;
                 return super.size();
+            }
+        };
+    }
+
+    /**
+     * Creates a {@link Data} object around a String.
+     */
+    public static Data from(final String data) {
+        return from(data.getBytes());
+    }
+
+    /**
+     * Creates a {@link Data} object around a byte array.
+     */
+    public static Data from(final byte[] data) {
+        return new Data() {
+            public InputStream read() {
+                return new ByteArrayInputStream(data);
+            }
+
+            public int size() {
+                return data.length;
             }
         };
     }
