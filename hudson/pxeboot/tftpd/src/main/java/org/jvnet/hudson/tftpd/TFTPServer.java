@@ -111,16 +111,17 @@ public class TFTPServer implements Runnable {
             try {
                 data = resolver.open(fileName);
                 if(data ==null) // this is against the contract, but be defensive.
-                    sendError(FILE_NOT_FOUND, "no such file exists");
+                    sendError(FILE_NOT_FOUND, "no such file exists: "+fileName);
                 else {
                     stream = data.read();
                     if(stream==null)
-                        sendError(FILE_NOT_FOUND, "no such file exists");
+                        sendError(FILE_NOT_FOUND, "no such file exists: "+fileName);
                     else
                         new Thread(this).start();
                 }
             } catch (IOException e) {
-                sendError(FILE_NOT_FOUND, "no such file exists");
+                sendError(FILE_NOT_FOUND, "failed to read "+fileName+" : "+e.getMessage());
+                LOGGER.log(Level.INFO,"Failed to read "+fileName,e);
             }
         }
 
