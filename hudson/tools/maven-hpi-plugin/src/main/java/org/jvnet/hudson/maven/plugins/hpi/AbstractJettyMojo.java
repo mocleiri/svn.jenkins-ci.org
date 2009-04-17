@@ -91,7 +91,7 @@ public abstract class AbstractJettyMojo extends AbstractMojo {
      * The interval in seconds to scan the webapp for changes
      * and restart the context if necessary. Disabled by default.
      *
-     * @parameter expression="1"
+     * @parameter expression="${scanIntervalSeconds}" default-value="1"
      * @required
      */
     private int scanIntervalSeconds;
