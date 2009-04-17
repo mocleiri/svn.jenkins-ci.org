@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson (Hudson core 1.299 API)
+hudson (Hudson core 1.300 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-11">
+<META NAME="date" CONTENT="2009-04-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson (Hudson core 1.299 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson (Hudson core 1.299 API)";
+        parent.document.title="hudson (Hudson core 1.300 API)";
     }
 }
 </SCRIPT>
@@ -214,6 +214,11 @@ Package hudson
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/Launcher.RemoteLauncher.html" title="class in hudson">Launcher.RemoteLauncher</A></B></TD>
 <TD>Launches processes remotely by using the given channel.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/LauncherDecorator.html" title="class in hudson">LauncherDecorator</A></B></TD>
+<TD>Decorates <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> so that one can intercept executions of commands
+ and alters the command being executed, such as doing this in fakeroot, sudo, pfexec, etc.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/Main.html" title="class in hudson">Main</A></B></TD>

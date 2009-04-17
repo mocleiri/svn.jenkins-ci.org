@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.299 API)
+Hudson (Hudson core 1.300 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-11">
+<META NAME="date" CONTENT="2009-04-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.299 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.299 API)";
+        parent.document.title="Hudson (Hudson core 1.300 API)";
     }
 }
 </SCRIPT>
@@ -2978,6 +2978,9 @@ public <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Node.html#createLauncher(hudson.model.TaskListener)">Node</A></CODE></B></DD>
 <DD>Returns a <A HREF="../../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> for executing programs on this node.
+
+ <p>
+ The callee must call <A HREF="../../hudson/Launcher.html#decorateFor(hudson.model.Node)"><CODE>Launcher.decorateFor(Node)</CODE></A> before returning to complete the decoration.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Node.html#createLauncher(hudson.model.TaskListener)">createLauncher</A></CODE> in class <CODE><A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Interface hudson.model.TaskListener (Hudson core 1.299 API)
+Uses of Interface hudson.model.TaskListener (Hudson core 1.300 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-11">
+<META NAME="date" CONTENT="2009-04-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.TaskListener (Hudson core 1.299 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.TaskListener (Hudson core 1.299 API)";
+        parent.document.title="Uses of Interface hudson.model.TaskListener (Hudson core 1.300 API)";
     }
 }
 </SCRIPT>
@@ -105,6 +105,10 @@ Packages that use <A HREF="../../../hudson/model/TaskListener.html" title="inter
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model.listeners"><B>hudson.model.listeners</B></A></TD>
 <TD>Listener interfaces for various events that occur inside the server.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.os"><B>hudson.os</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.os.solaris"><B>hudson.os.solaris</B></A></TD>
@@ -228,6 +232,16 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On Windows, error messages for IOException aren't very helpful.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>FilePath.</B><B><A HREF="../../../hudson/FilePath.html#installIfNecessaryFrom(java.net.URL, hudson.model.TaskListener, java.lang.String)">installIfNecessaryFrom</A></B>(java.net.URL&nbsp;archive,
+                       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                       java.lang.String&nbsp;message)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given a tgz/zip file, extracts it to the given target directory, if necessary.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -563,6 +577,53 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TABLE>
 &nbsp;
 <P>
+<A NAME="hudson.os"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A> in <A HREF="../../../hudson/os/package-summary.html">hudson.os</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/os/package-summary.html">hudson.os</A> with parameters of type <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;V,T extends java.lang.Throwable&gt; 
+<BR>
+V</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B>SU.</B><B><A HREF="../../../hudson/os/SU.html#execute(hudson.model.TaskListener, java.lang.String, java.lang.String, hudson.remoting.Callable)">execute</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+        java.lang.String&nbsp;rootUsername,
+        java.lang.String&nbsp;rootPassword,
+        <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting">Callable</A>&lt;V,T&gt;&nbsp;closure)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts a new priviledge-escalated environment, execute a closure, and shut it down.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<TD><CODE><B>SU.</B><B><A HREF="../../../hudson/os/SU.html#start(hudson.model.TaskListener, java.lang.String, java.lang.String)">start</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+      java.lang.String&nbsp;rootUsername,
+      java.lang.String&nbsp;rootPassword)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>VirtualChannel</CODE></A> that's connected to the priviledge-escalated environment.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="hudson.os.solaris"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -750,6 +811,19 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A> with parameters of type <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting">Channel</A></CODE></FONT></TD>
+<TD><CODE><B>Channels.</B><B><A HREF="../../../hudson/slaves/Channels.html#newJVM(java.lang.String, hudson.model.TaskListener, hudson.FilePath, hudson.util.ClasspathBuilder, java.util.Map)">newJVM</A></B>(java.lang.String&nbsp;displayName,
+       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+       <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir,
+       <A HREF="../../../hudson/util/ClasspathBuilder.html" title="class in hudson.util">ClasspathBuilder</A>&nbsp;classpath,
+       java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;systemProperties)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launches a new JVM with the given classpath and system properties, establish a communication channel,
+ and return a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A> to it.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

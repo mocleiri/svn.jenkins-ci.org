@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Computer (Hudson core 1.299 API)
+Computer (Hudson core 1.300 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-11">
+<META NAME="date" CONTENT="2009-04-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson core 1.299 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson core 1.299 API)";
+        parent.document.title="Computer (Hudson core 1.300 API)";
     }
 }
 </SCRIPT>
@@ -459,6 +459,14 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the read-only snapshot view of all <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#getHostName()">getHostName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method tries to compute the name of the host that's reachable by all the other nodes.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1764,6 +1772,40 @@ public java.util.Map&lt;java.lang.String,java.lang.String&gt; <B>getThreadDump</
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHostName()"><!-- --></A><H3>
+getHostName</H3>
+<PRE>
+public java.lang.String <B>getHostName</B>()
+                             throws java.io.IOException,
+                                    java.lang.InterruptedException</PRE>
+<DL>
+<DD>This method tries to compute the name of the host that's reachable by all the other nodes.
+
+ <p>
+ Since it's possible that the slave is not reachable from the master (it may be behind a firewall,
+ connecting to master via JNLP), in which case this method returns null.
+
+ It's surprisingly tricky for a machine to know a name that other systems can get to,
+ especially between things like DNS search suffix, the hosts file, and YP.
+
+ <p>
+ So the technique here is to compute possible interfaces and names on the slave,
+ then try to ping them from the master, and pick the one that worked.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.300</DD>
+</DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Launcher (Hudson core 1.299 API)
+Launcher (Hudson core 1.300 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-11">
+<META NAME="date" CONTENT="2009-04-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Launcher (Hudson core 1.299 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Launcher (Hudson core 1.299 API)";
+        parent.document.title="Launcher (Hudson core 1.300 API)";
     }
 }
 </SCRIPT>
@@ -197,6 +197,16 @@ Starts a process.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#Launcher(hudson.Launcher)">Launcher</A></B>(<A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructor for a decorator.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Launcher.html#Launcher(hudson.model.TaskListener, hudson.remoting.VirtualChannel)">Launcher</A></B>(<A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
          <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
 
@@ -212,6 +222,23 @@ Starts a process.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#decorateByPrefix(java.lang.String...)">decorateByPrefix</A></B>(java.lang.String...&nbsp;prefix)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a decorated <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> that puts the given set of arguments as a prefix to any commands
+ that it invokes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#decorateFor(hudson.model.Node)">decorateFor</A></B>(<A HREF="../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a decorated <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> for the given node.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -502,6 +529,16 @@ Launcher</H3>
 public <B>Launcher</B>(<A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
                 <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</PRE>
 <DL>
+</DL>
+<HR>
+
+<A NAME="Launcher(hudson.Launcher)"><!-- --></A><H3>
+Launcher</H3>
+<PRE>
+protected <B>Launcher</B>(<A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher)</PRE>
+<DL>
+<DD>Constructor for a decorator.
+<P>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -896,6 +933,35 @@ protected final void <B>maskedPrintCommandLine</B>(java.lang.String[]&nbsp;cmd,
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>cmd</CODE> - The commands<DD><CODE>mask</CODE> - An array of booleans which control whether a cmd element should be masked (<code>true</code>) or
                 remain unmasked (<code>false</code>).<DD><CODE>workDir</CODE> - The work dir.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="decorateFor(hudson.model.Node)"><!-- --></A><H3>
+decorateFor</H3>
+<PRE>
+public final <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>decorateFor</B>(<A HREF="../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</PRE>
+<DL>
+<DD>Returns a decorated <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> for the given node.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="decorateByPrefix(java.lang.String...)"><!-- --></A><H3>
+decorateByPrefix</H3>
+<PRE>
+public final <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>decorateByPrefix</B>(java.lang.String...&nbsp;prefix)</PRE>
+<DL>
+<DD>Returns a decorated <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> that puts the given set of arguments as a prefix to any commands
+ that it invokes.
+<P>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.299</DD>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

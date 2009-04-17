@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Run.KeepLogBuildBadge (Hudson core 1.299 API)
+Run.KeepLogBuildBadge (Hudson core 1.300 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-11">
+<META NAME="date" CONTENT="2009-04-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run.KeepLogBuildBadge (Hudson core 1.299 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run.KeepLogBuildBadge (Hudson core 1.299 API)";
+        parent.document.title="Run.KeepLogBuildBadge (Hudson core 1.300 API)";
     }
 }
 </SCRIPT>
@@ -281,6 +281,10 @@ public java.lang.String <B>getUrlName</B>()</PRE>
  <p>
  The returned string can be an absolute URL, like "http://www.sun.com/",
  which is useful for directly connecting to external systems.
+
+ <p>
+ If the returned string starts with '/', like '/foo', then it's assumed to be
+ relative to the context path of the Hudson webapp.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Action.html#getUrlName()">getUrlName</A></CODE> in interface <CODE><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></DL>

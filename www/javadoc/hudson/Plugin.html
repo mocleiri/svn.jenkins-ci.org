@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Plugin (Hudson core 1.299 API)
+Plugin (Hudson core 1.300 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-11">
+<META NAME="date" CONTENT="2009-04-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Plugin (Hudson core 1.299 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Plugin (Hudson core 1.299 API)";
+        parent.document.title="Plugin (Hudson core 1.300 API)";
     }
 }
 </SCRIPT>
@@ -221,6 +221,14 @@ Base class of Hudson plugin.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Plugin.html#postInitialize()">postInitialize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called after <A HREF="../hudson/Plugin.html#start()"><CODE>start()</CODE></A> is called for all the plugins.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Plugin.html#save()">save</A></B>()</CODE>
 
 <BR>
@@ -352,7 +360,9 @@ public void <B>start</B>()
 
  <p>
  If a plugin wants to run an initialization step after all plugins and extension points
- are registered, a good place to do that is <A HREF="../hudson/model/listeners/ItemListener.html#onLoaded()"><CODE>ItemListener.onLoaded()</CODE></A>
+ are registered, a good place to do that is <A HREF="../hudson/Plugin.html#postInitialize()"><CODE>postInitialize()</CODE></A>.
+ If a plugin wants to run an initialization step after all the jobs are loaded,
+ <A HREF="../hudson/model/listeners/ItemListener.html#onLoaded()"><CODE>ItemListener.onLoaded()</CODE></A> is a good place.
 <P>
 <DD><DL>
 </DL>
@@ -362,7 +372,27 @@ public void <B>start</B>()
 <DT><B>Throws:</B>
 <DD><CODE>java.lang.Exception</CODE> - any exception thrown by the plugin during the initialization will disable plugin.<DT><B>Since:</B></DT>
   <DD>1.42</DD>
-<DT><B>See Also:</B><DD><A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A></DL>
+<DT><B>See Also:</B><DD><A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>, 
+<A HREF="../hudson/Plugin.html#postInitialize()"><CODE>postInitialize()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="postInitialize()"><!-- --></A><H3>
+postInitialize</H3>
+<PRE>
+public void <B>postInitialize</B>()
+                    throws java.lang.Exception</PRE>
+<DL>
+<DD>Called after <A HREF="../hudson/Plugin.html#start()"><CODE>start()</CODE></A> is called for all the plugins.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE> - any exception thrown by the plugin during the initialization will disable plugin.</DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FilePath (Hudson core 1.299 API)
+FilePath (Hudson core 1.300 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-11">
+<META NAME="date" CONTENT="2009-04-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson core 1.299 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson core 1.299 API)";
+        parent.document.title="FilePath (Hudson core 1.300 API)";
     }
 }
 </SCRIPT>
@@ -504,6 +504,16 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#installIfNecessaryFrom(java.net.URL, hudson.model.TaskListener, java.lang.String)">installIfNecessaryFrom</A></B>(java.net.URL&nbsp;archive,
+                       <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                       java.lang.String&nbsp;message)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given a tgz/zip file, extracts it to the given target directory, if necessary.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#isDirectory()">isDirectory</A></B>()</CODE>
 
 <BR>
@@ -589,6 +599,14 @@ V</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#touch(long)">touch</A></B>(long&nbsp;timestamp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a file (if not already exist) and sets the timestamp.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -949,6 +967,46 @@ public void <B>untarFrom</B>(java.io.InputStream&nbsp;_in,
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
   <DD>1.292</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="installIfNecessaryFrom(java.net.URL, hudson.model.TaskListener, java.lang.String)"><!-- --></A><H3>
+installIfNecessaryFrom</H3>
+<PRE>
+public boolean <B>installIfNecessaryFrom</B>(java.net.URL&nbsp;archive,
+                                      <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                                      java.lang.String&nbsp;message)
+                               throws java.io.IOException,
+                                      java.lang.InterruptedException</PRE>
+<DL>
+<DD>Given a tgz/zip file, extracts it to the given target directory, if necessary.
+
+ <p>
+ This method is a convenience method designed for installing a binary package to a location
+ that supports upgrade and downgrade. Specifically,
+
+ <ul>
+ <li>If the target directory doesn't exit <A HREF="../hudson/FilePath.html#mkdirs()">it'll be created</A>.
+ <li>The timestamp of the .tgz file is left in the installation directory upon extraction.
+ <li>If the timestamp left in the directory doesn't match with the timestamp of the current archive file,
+     the directory contents will be discarded and the archive file will be re-extracted.
+ </ul>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>archive</CODE> - The resource that represents the tgz/zip file. This URL must support the "Last-Modified" header.
+      (Most common usage is to get this from <CODE>ClassLoader.getResource(String)</CODE>)<DD><CODE>listener</CODE> - If non-null, a message will be printed to this listener once this method decides to
+      extract an archive.
+<DT><B>Returns:</B><DD>true if the archive was extracted. false if the extraction was skipped because the target directory
+      was considered up to date.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.299</DD>
 </DL>
 </DD>
 </DL>
@@ -1355,7 +1413,31 @@ public long <B>lastModified</B>()
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>See Also:</B><DD><CODE>File.lastModified()</CODE></DL>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>See Also:</B><DD><CODE>File.lastModified()</CODE>, 
+<A HREF="../hudson/FilePath.html#touch(long)"><CODE>touch(long)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="touch(long)"><!-- --></A><H3>
+touch</H3>
+<PRE>
+public void <B>touch</B>(long&nbsp;timestamp)
+           throws java.io.IOException,
+                  java.lang.InterruptedException</PRE>
+<DL>
+<DD>Creates a file (if not already exist) and sets the timestamp.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.299</DD>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -1465,7 +1547,7 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>[] 
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>includes</CODE> - See <CODE>FileSet</CODE> for the syntax. String like "foo/*.zip".
+<DT><B>Parameters:</B><DD><CODE>includes</CODE> - See <CODE>FileSet</CODE> for the syntax. String like "foo/*.zip" or "foo/*&#42;/*.xml"
 <DT><B>Returns:</B><DD>can be empty but always non-null.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>

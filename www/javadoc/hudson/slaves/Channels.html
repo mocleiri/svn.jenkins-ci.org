@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Channels (Hudson core 1.299 API)
+Channels (Hudson core 1.300 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-11">
+<META NAME="date" CONTENT="2009-04-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Channels (Hudson core 1.299 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Channels (Hudson core 1.299 API)";
+        parent.document.title="Channels (Hudson core 1.300 API)";
     }
 }
 </SCRIPT>
@@ -141,6 +141,20 @@ Various convenient subtype of <A HREF="https://hudson.dev.java.net/pom/remoting/
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting">Channel</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.Proc)">forProcess</A></B>(java.lang.String&nbsp;name,
+           java.util.concurrent.ExecutorService&nbsp;execService,
+           java.io.InputStream&nbsp;in,
+           java.io.OutputStream&nbsp;out,
+           java.io.OutputStream&nbsp;header,
+           <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A>&nbsp;proc)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a channel that wraps a remote process, so that when we shut down the connection
+ we kill the process.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting">Channel</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, hudson.Proc)">forProcess</A></B>(java.lang.String&nbsp;name,
            java.util.concurrent.ExecutorService&nbsp;execService,
            java.io.InputStream&nbsp;in,
@@ -148,8 +162,31 @@ Various convenient subtype of <A HREF="https://hudson.dev.java.net/pom/remoting/
            <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A>&nbsp;proc)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a channel that wraps a remote process, so that when we shut down the connection
- we kill the process.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.Proc)"><CODE>forProcess(String, ExecutorService, InputStream, OutputStream, OutputStream, Proc)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting">Channel</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.lang.Process, java.io.OutputStream)">forProcess</A></B>(java.lang.String&nbsp;name,
+           java.util.concurrent.ExecutorService&nbsp;execService,
+           java.lang.Process&nbsp;proc,
+           java.io.OutputStream&nbsp;header)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting">Channel</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/Channels.html#newJVM(java.lang.String, hudson.model.TaskListener, hudson.FilePath, hudson.util.ClasspathBuilder, java.util.Map)">newJVM</A></B>(java.lang.String&nbsp;displayName,
+       <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+       <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir,
+       <A HREF="../../hudson/util/ClasspathBuilder.html" title="class in hudson.util">ClasspathBuilder</A>&nbsp;classpath,
+       java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;systemProperties)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launches a new JVM with the given classpath and system properties, establish a communication channel,
+ and return a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A> to it.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -201,6 +238,27 @@ public static <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/r
                                  <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A>&nbsp;proc)
                           throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.Proc)"><CODE>forProcess(String, ExecutorService, InputStream, OutputStream, OutputStream, Proc)</CODE></A></I>
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.Proc)"><!-- --></A><H3>
+forProcess</H3>
+<PRE>
+public static <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting">Channel</A> <B>forProcess</B>(java.lang.String&nbsp;name,
+                                 java.util.concurrent.ExecutorService&nbsp;execService,
+                                 java.io.InputStream&nbsp;in,
+                                 java.io.OutputStream&nbsp;out,
+                                 java.io.OutputStream&nbsp;header,
+                                 <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A>&nbsp;proc)
+                          throws java.io.IOException</PRE>
+<DL>
 <DD>Creates a channel that wraps a remote process, so that when we shut down the connection
  we kill the process.
 <P>
@@ -208,6 +266,52 @@ public static <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/r
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.lang.Process, java.io.OutputStream)"><!-- --></A><H3>
+forProcess</H3>
+<PRE>
+public static <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting">Channel</A> <B>forProcess</B>(java.lang.String&nbsp;name,
+                                 java.util.concurrent.ExecutorService&nbsp;execService,
+                                 java.lang.Process&nbsp;proc,
+                                 java.io.OutputStream&nbsp;header)
+                          throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="newJVM(java.lang.String, hudson.model.TaskListener, hudson.FilePath, hudson.util.ClasspathBuilder, java.util.Map)"><!-- --></A><H3>
+newJVM</H3>
+<PRE>
+public static <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting">Channel</A> <B>newJVM</B>(java.lang.String&nbsp;displayName,
+                             <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                             <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir,
+                             <A HREF="../../hudson/util/ClasspathBuilder.html" title="class in hudson.util">ClasspathBuilder</A>&nbsp;classpath,
+                             java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;systemProperties)
+                      throws java.io.IOException</PRE>
+<DL>
+<DD>Launches a new JVM with the given classpath and system properties, establish a communication channel,
+ and return a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A> to it.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>displayName</CODE> - Human readable name of what this JVM represents. For example "Selenium grid" or "Hadoop".
+      This token is used for messages to <code>listener</code>.<DD><CODE>listener</CODE> - The progress of the launcher and the failure information will be sent here. Must not be null.<DD><CODE>workDir</CODE> - If non-null, the new JVM will have this directory as the working directory. This must be a local path.<DD><CODE>classpath</CODE> - The classpath of the new JVM. Can be null if you just need <code>slave.jar</code> (and everything else
+      can be sent over the channel.) But if you have jars that are known to be necessary by the new JVM,
+      setting it here will improve the classloading performance (by avoiding remote class file transfer.)
+      Classes in this classpath will also take precedence over any other classes that's sent via the channel
+      later, so it's also useful for making sure you gee the version of the classes you want.<DD><CODE>systemProperties</CODE> - If the new JVM should have a certain system properties set. Can be null.
+<DT><B>Returns:</B><DD>never null
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE><DT><B>Since:</B></DT>
+  <DD>1.300</DD>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
