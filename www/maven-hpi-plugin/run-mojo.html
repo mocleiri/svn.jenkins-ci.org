@@ -42,7 +42,7 @@
   
     
             <div class="xleft">
-        Last Published: 2009-03-26
+        Last Published: 2009-04-18
                       </div>
             <div class="xright">            <a href="">Maven Hudson Plugin</a>
             
@@ -123,7 +123,7 @@
         <div class="section"><h2><a name="hpi:run"></a>
 hpi:run</h2>
 <p><strong>Full name</strong>:</p>
-<p>org.jvnet.hudson.tools:maven-hpi-plugin:1.34:run</p>
+<p>org.jvnet.hudson.tools:maven-hpi-plugin:1.35:run</p>
 <p><strong>Description</strong>:</p>
 <p>Runs Hudson with the current plugin project. 
 
@@ -163,7 +163,7 @@ Required Parameters</h3>
 <td><code>int</code></td>
 <td><code>-</code></td>
 <td>The interval in seconds to scan the webapp for changes and restart
-the context if necessary. Disabled by default. </td>
+the context if necessary. Disabled by default. Default value is: <code>1</code>.</td>
 </tr>
 <tr class="a"><td><strong><a href="#tmpDirectory">tmpDirectory</a>
 </strong></td>
@@ -308,7 +308,8 @@ Optional.</p>
 the context if necessary. Disabled by default.</p>
 <ul><li><strong>Type</strong>: <code>int</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>Expression</strong>: <code>1</code></li>
+<li><strong>Expression</strong>: <code>${scanIntervalSeconds}</code></li>
+<li><strong>Default</strong>: <code>1</code></li>
 </ul>
 <hr />
 <p><strong><a name="systemProperties">systemProperties</a>

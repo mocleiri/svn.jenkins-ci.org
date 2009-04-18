@@ -42,7 +42,7 @@
   
     
             <div class="xleft">
-        Last Published: 2009-03-26
+        Last Published: 2009-04-18
                       </div>
             <div class="xright">            <a href="">Maven Hudson Plugin</a>
             
@@ -131,37 +131,19 @@
 <table class="bodyTable"><tr class="a"><th>Goal</th>
 <th>Description</th>
 </tr>
-<tr class="b"><td><a href="announce-mojo.html">hpi:announce</a>
-</td>
-<td>Posts a release announcement.</td>
-</tr>
-<tr class="a"><td><a href="apt-compile-mojo.html">hpi:apt-compile</a>
+<tr class="b"><td><a href="apt-compile-mojo.html">hpi:apt-compile</a>
 </td>
 <td>No description.</td>
 </tr>
-<tr class="b"><td><a href="hpl-mojo.html">hpi:hpl</a>
+<tr class="a"><td><a href="hpl-mojo.html">hpi:hpl</a>
 </td>
 <td>Generate .hpl file.</td>
 </tr>
-<tr class="a"><td><a href="test-hpl-mojo.html">hpi:test-hpl</a>
+<tr class="b"><td><a href="upload-mojo.html">hpi:upload</a>
 </td>
-<td>Generate .hpl file in the test class directory so that test harness
-can locate the plugin.</td>
+<td>Posts the hpi file to java.net.</td>
 </tr>
-<tr class="b"><td><a href="hpi-mojo.html">hpi:hpi</a>
-</td>
-<td>Build a war/webapp.</td>
-</tr>
-<tr class="a"><td><a href="create-mojo.html">hpi:create</a>
-</td>
-<td>Builds a new plugin template. 
-
-<p />
-<p />Most of this is really just a rip-off from the
-<tt>archetype:create</tt> goal, but since Maven doesn't really let
-one Mojo calls another Mojo, this turns out to be the easiest.</td>
-</tr>
-<tr class="b"><td><a href="run-mojo.html">hpi:run</a>
+<tr class="a"><td><a href="run-mojo.html">hpi:run</a>
 </td>
 <td>Runs Hudson with the current plugin project. 
 
@@ -171,9 +153,27 @@ compile phase.</p>
 <p>To specify the HTTP port, use
 <tt>-Djetty.port=<i>PORT</i></tt></p></td>
 </tr>
-<tr class="a"><td><a href="upload-mojo.html">hpi:upload</a>
+<tr class="b"><td><a href="create-mojo.html">hpi:create</a>
 </td>
-<td>Posts the hpi file to java.net.</td>
+<td>Builds a new plugin template. 
+
+<p />
+<p />Most of this is really just a rip-off from the
+<tt>archetype:create</tt> goal, but since Maven doesn't really let
+one Mojo calls another Mojo, this turns out to be the easiest.</td>
+</tr>
+<tr class="a"><td><a href="announce-mojo.html">hpi:announce</a>
+</td>
+<td>Posts a release announcement.</td>
+</tr>
+<tr class="b"><td><a href="hpi-mojo.html">hpi:hpi</a>
+</td>
+<td>Build a war/webapp.</td>
+</tr>
+<tr class="a"><td><a href="test-hpl-mojo.html">hpi:test-hpl</a>
+</td>
+<td>Generate .hpl file in the test class directory so that test harness
+can locate the plugin.</td>
 </tr>
 </table>
 </div>
@@ -203,7 +203,7 @@ compile phase.</p>
         &lt;plugin&gt;
           &lt;groupId&gt;org.jvnet.hudson.tools&lt;groupId&gt;
           &lt;artifactId&gt;maven-hpi-plugin&lt;artifactId&gt;
-          &lt;version&gt;1.34&lt;version&gt;
+          &lt;version&gt;1.35&lt;version&gt;
         &lt;/plugin&gt;
         ...
       &lt;/plugins&gt;
@@ -213,7 +213,7 @@ compile phase.</p>
       &lt;plugin&gt;
         &lt;groupId&gt;org.jvnet.hudson.tools&lt;groupId&gt;
         &lt;artifactId&gt;maven-hpi-plugin&lt;artifactId&gt;
-        &lt;version&gt;1.34&lt;version&gt;
+        &lt;version&gt;1.35&lt;version&gt;
       &lt;/plugin&gt;
       ...
     &lt;/plugins&gt;
