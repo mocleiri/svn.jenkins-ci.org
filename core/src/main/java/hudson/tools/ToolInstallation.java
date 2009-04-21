@@ -106,6 +106,7 @@ public abstract class ToolInstallation implements Serializable, Describable<Tool
      * @return
      *      never null.
      */
+    @SuppressWarnings("deprecation")
     protected String translateFor(Node node) {
         return ToolLocationNodeProperty.getToolHome(node,this);
     }
