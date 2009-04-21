@@ -39,20 +39,20 @@ public abstract class ToolDescriptor<T extends ToolInstallation> extends Descrip
     /**
      * Configured instances of {@link ToolInstallation}s.
      *
-     * @return
-     *      can be empty but never null. Treat this as a read-only copy, do not mutate.
+     * @return read-only list of installations;
+     *      can be empty but never null.
      */
     public T[] getInstallations() {
-        return installations;
+        return installations.clone();
     }
 
     /**
      * Overwrites {@link ToolInstallation}s.
      *
-     * @return
+     * @param installations list of installations;
      *      can be empty but never null.
      */
     public void setInstallations(T[] installations) {
-        this.installations = installations;
+        this.installations = installations.clone();
     }
 }
