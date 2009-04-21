@@ -41,7 +41,7 @@ THE SOFTWARE.
     </f:entry>
   </f:optionalBlock>
 
-  <f:entry title="${%Columns}">
+  <f:section title="${%Columns}">
     <j:invokeStatic var="allColumns" className="hudson.views.ListViewColumn" method="all"/>
     <f:block>
       <f:hetero-list name="columns" hasHeader="true"
@@ -49,6 +49,6 @@ THE SOFTWARE.
                      items="${it.columns}"
                      addCaption="${%Add column}"/>
     </f:block>
-  </f:entry>
+  </f:section>
 
 </j:jelly>
