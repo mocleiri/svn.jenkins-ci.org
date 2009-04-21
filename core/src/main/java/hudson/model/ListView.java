@@ -36,6 +36,7 @@ import hudson.views.StatusColumn;
 import hudson.views.WeatherColumn;
 import hudson.model.Descriptor.FormException;
 import hudson.util.CaseInsensitiveComparator;
+import hudson.util.DescribableList;
 import hudson.util.FormValidation;
 
 import org.kohsuke.stapler.StaplerRequest;
@@ -49,7 +50,10 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.SortedSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -64,7 +68,7 @@ public class ListView extends View {
      */
     /*package*/ final SortedSet<String> jobNames = new TreeSet<String>(CaseInsensitiveComparator.INSTANCE);
 
-    protected transient List<ListViewColumn> columns = new ArrayList<ListViewColumn>();
+    private DescribableList<ListViewColumn, Descriptor<ListViewColumn>> columns;
 
     // First add all the known instances in the correct order:
     private static final Descriptor [] defaultColumnDescriptors  =  {
@@ -101,6 +105,11 @@ public class ListView extends View {
     }
 
     protected void initColumns() {
+        if (columns != null) {
+            // already persisted
+            return;
+        }
+        // OK, set up default list of columns:
         // create all instances
         ArrayList<ListViewColumn> r = new ArrayList<ListViewColumn>();
         DescriptorExtensionList<ListViewColumn, Descriptor<ListViewColumn>> all = ListViewColumn.all();
@@ -124,7 +133,18 @@ public class ListView extends View {
             } catch (FormException e) {
                 // so far impossible. TODO: report
             }
-        columns = Collections.unmodifiableList(r);
+        Iterator<ListViewColumn> filter = r.iterator();
+        while (filter.hasNext()) {
+            if (!filter.next().shownByDefault()) {
+                filter.remove();
+            }
+        }
+        columns = new DescribableList<ListViewColumn, Descriptor<ListViewColumn>>(owner);
+        try {
+            columns.replaceBy(r);
+        } catch (IOException ex) {
+            Logger.getLogger(ListView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -137,7 +157,7 @@ public class ListView extends View {
         return Hudson.getInstance().getActions();
     }
 
-    public List<ListViewColumn> getColumns() {
+    public Iterable<ListViewColumn> getColumns() {
         return columns;
     }
     
@@ -215,7 +235,7 @@ public class ListView extends View {
      * Load view-specific properties here.
      */
     @Override
-    protected void submit(StaplerRequest req) {
+    protected void submit(StaplerRequest req) throws ServletException, FormException {
         jobNames.clear();
         for (TopLevelItem item : Hudson.getInstance().getItems()) {
             if(req.getParameter(item.getName())!=null)
@@ -229,6 +249,11 @@ public class ListView extends View {
             includeRegex = null;
             includePattern = null;
         }
+
+        if (columns == null) {
+            columns = new DescribableList<ListViewColumn,Descriptor<ListViewColumn>>(owner);
+        }
+        columns.rebuildHetero(req, req.getSubmittedForm(), Hudson.getInstance().getDescriptorList(ListViewColumn.class), "columns");
     }
 
     @Extension
