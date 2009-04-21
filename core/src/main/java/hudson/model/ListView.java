@@ -63,6 +63,11 @@ import java.util.regex.PatternSyntaxException;
  * @author Kohsuke Kawaguchi
  */
 public class ListView extends View {
+
+    private static final Saveable NO_SAVABLE = new Saveable() {
+        public void save() throws IOException {}
+    };
+
     /**
      * List of job names. This is what gets serialized.
      */
@@ -139,7 +144,7 @@ public class ListView extends View {
                 filter.remove();
             }
         }
-        columns = new DescribableList<ListViewColumn, Descriptor<ListViewColumn>>(owner);
+        columns = new DescribableList<ListViewColumn, Descriptor<ListViewColumn>>(NO_SAVABLE);
         try {
             columns.replaceBy(r);
         } catch (IOException ex) {
@@ -251,7 +256,7 @@ public class ListView extends View {
         }
 
         if (columns == null) {
-            columns = new DescribableList<ListViewColumn,Descriptor<ListViewColumn>>(owner);
+            columns = new DescribableList<ListViewColumn,Descriptor<ListViewColumn>>(NO_SAVABLE);
         }
         columns.rebuildHetero(req, req.getSubmittedForm(), Hudson.getInstance().getDescriptorList(ListViewColumn.class), "columns");
     }
