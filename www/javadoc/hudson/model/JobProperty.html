@@ -1,0 +1,564 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<!-- -->
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<TITLE>
+JobProperty (Hudson core 1.300 API)
+</TITLE>
+
+<META NAME="date" CONTENT="2009-04-17">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="JobProperty (Hudson core 1.300 API)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/JobProperty.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../hudson/model/JobParameterValue.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../index.html?hudson/model/JobProperty.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="JobProperty.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+hudson.model</FONT>
+<BR>
+Class JobProperty&lt;J extends <A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&lt;?,?&gt;&gt;</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.JobProperty&lt;J&gt;</B>
+</PRE>
+<DL>
+<DT><DT><B>Type Parameters:</B><DD><CODE>J</CODE> - When you restrict your job property to be only applicable to a certain
+      subtype of <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>, you can use this type parameter to improve
+      the type signature of this class. See <A HREF="../../hudson/model/JobPropertyDescriptor.html#isApplicable(java.lang.Class)"><CODE>JobPropertyDescriptor.isApplicable(Class)</CODE></A>.</DL>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&lt;?&gt;&gt;, <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></DD>
+</DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/security/AuthorizationMatrixProperty.html" title="class in hudson.security">AuthorizationMatrixProperty</A>, <A HREF="../../hudson/model/ParametersDefinitionProperty.html" title="class in hudson.model">ParametersDefinitionProperty</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1">@ExportedBean
+</FONT>public abstract class <B>JobProperty&lt;J extends <A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&lt;?,?&gt;&gt;</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&lt;?&gt;&gt;, <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>, <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DL>
+</PRE>
+
+<P>
+Extensible property of <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.
+
+ <p>
+ <A HREF="../../hudson/Plugin.html" title="class in hudson"><CODE>Plugin</CODE></A>s can extend this to define custom properties
+ for <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s. <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A>s show up in the user
+ configuration screen, and they are persisted with the job object.
+
+ <p>
+ Configuration screen should be defined in <tt>config.jelly</tt>.
+ Within this page, the <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A> instance is available
+ as <tt>instance</tt> variable (while <tt>it</tt> refers to <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.
+
+ <p>
+ Starting 1.150, <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A> implements <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A>,
+ meaning it gets the same hook as <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A> and <A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A>.
+ The primary intention of this mechanism is so that <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A>s
+ can add actions to the new build. The <A HREF="../../hudson/model/JobProperty.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>perform(AbstractBuild, Launcher, BuildListener)</CODE></A>
+ and <A HREF="../../hudson/model/JobProperty.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>prebuild(AbstractBuild, BuildListener)</CODE></A> are invoked after those
+ of <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A>s.
+<P>
+
+<P>
+<DL>
+<DT><B>Since:</B></DT>
+  <DD>1.72</DD>
+<DT><B>Author:</B></DT>
+  <DD>Kohsuke Kawaguchi</DD>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model"><CODE>JobPropertyDescriptor</CODE></A></DL>
+<HR>
+
+<P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.tasks.BuildStep"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.tasks.<A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/tasks/BuildStep.PublisherList.html" title="class in hudson.tasks">BuildStep.PublisherList</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/model/JobProperty.html" title="type parameter in JobProperty">J</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/JobProperty.html#owner">owner</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A> object that owns this property.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.tasks.BuildStep"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.tasks.<A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/tasks/BuildStep.html#BUILDERS">BUILDERS</A>, <A HREF="../../hudson/tasks/BuildStep.html#PUBLISHERS">PUBLISHERS</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/JobProperty.html#JobProperty()">JobProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model">JobPropertyDescriptor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/JobProperty.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/JobProperty.html#getJobAction(J)">getJobAction</A></B>(<A HREF="../../hudson/model/JobProperty.html" title="type parameter in JobProperty">J</A>&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> to be displayed in the job page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/JobProperty.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an action object if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has an action
+ to contribute to a <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/JobProperty.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs the step over the given build and reports the progress to the listener.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/JobProperty.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+         <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs before the build begins.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/JobProperty.html#setOwner(J)">setOwner</A></B>(<A HREF="../../hudson/model/JobProperty.html" title="type parameter in JobProperty">J</A>&nbsp;owner)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hook for performing post-initialization action.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="owner"><!-- --></A><H3>
+owner</H3>
+<PRE>
+protected transient <A HREF="../../hudson/model/JobProperty.html" title="type parameter in JobProperty">J</A> extends <A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&lt;?,?&gt; <B>owner</B></PRE>
+<DL>
+<DD>The <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A> object that owns this property.
+ This value will be set by the Hudson code.
+ Derived classes can expect this value to be always set.
+<P>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="JobProperty()"><!-- --></A><H3>
+JobProperty</H3>
+<PRE>
+public <B>JobProperty</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="setOwner(hudson.model.Job)"><!-- --></A><A NAME="setOwner(J)"><!-- --></A><H3>
+setOwner</H3>
+<PRE>
+protected void <B>setOwner</B>(<A HREF="../../hudson/model/JobProperty.html" title="type parameter in JobProperty">J</A>&nbsp;owner)</PRE>
+<DL>
+<DD>Hook for performing post-initialization action.
+
+ <p>
+ This method is invoked in two cases. One is when the <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A> that owns
+ this property is loaded from disk, and the other is when a job is re-configured
+ and all the <A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model"><CODE>JobProperty</CODE></A> instances got re-created.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDescriptor()"><!-- --></A><H3>
+getDescriptor</H3>
+<PRE>
+public <A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model">JobPropertyDescriptor</A> <B>getDescriptor</B>()</PRE>
+<DL>
+<DD>Gets the descriptor for this instance.
+
+ <p>
+ <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> is a singleton for every concrete <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
+ implementation, so if <tt>a.getClass()==b.getClass()</tt> then
+ <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&lt;?&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getJobAction(hudson.model.Job)"><!-- --></A><A NAME="getJobAction(J)"><!-- --></A><H3>
+getJobAction</H3>
+<PRE>
+public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A> <B>getJobAction</B>(<A HREF="../../hudson/model/JobProperty.html" title="type parameter in JobProperty">J</A>&nbsp;job)</PRE>
+<DL>
+<DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> to be displayed in the job page.
+
+ <p>
+ Returning non-null from this method allows a job property to add an item
+ to the left navigation bar in the job page.
+
+ <p>
+ <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> can implement additional marker interface to integrate
+ with the UI in different ways.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>job</CODE> - Always the same as <A HREF="../../hudson/model/JobProperty.html#owner"><CODE>owner</CODE></A> but passed in anyway for backward compatibility (I guess.)
+      You really need not use this value at all.
+<DT><B>Returns:</B><DD>null if there's no such action.<DT><B>Since:</B></DT>
+  <DD>1.102</DD>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/ProminentProjectAction.html" title="interface in hudson.model"><CODE>ProminentProjectAction</CODE></A>, 
+<A HREF="../../hudson/model/PermalinkProjectAction.html" title="interface in hudson.model"><CODE>PermalinkProjectAction</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)"><!-- --></A><H3>
+prebuild</H3>
+<PRE>
+public boolean <B>prebuild</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+                        <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/BuildStep.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">BuildStep</A></CODE></B></DD>
+<DD>Runs before the build begins.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/tasks/BuildStep.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></CODE> in interface <CODE><A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>true if the build can continue, false if there was an error
+      and the build needs to be aborted.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><!-- --></A><H3>
+perform</H3>
+<PRE>
+public boolean <B>perform</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+                       <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                       <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)
+                throws java.lang.InterruptedException,
+                       java.io.IOException</PRE>
+<DL>
+<DD>Runs the step over the given build and reports the progress to the listener.
+
+ <p>
+ A plugin can contribute the action object to <A HREF="../../hudson/model/Actionable.html#getActions()"><CODE>Actionable.getActions()</CODE></A>
+ so that a 'report' becomes a part of the persisted data of <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>.
+ This is how JUnit plugin attaches the test report to a build page, for example.
+
+ <p>
+ Invoked after <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A>s have run.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/tasks/BuildStep.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></CODE> in interface <CODE><A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>true if the build can continue, false if there was an error
+      and the build needs to be aborted.
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.InterruptedException</CODE> - If the build is interrupted by the user (in an attempt to abort the build.)
+      Normally the <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> implementations may simply forward the exception
+      it got from its lower-level functions.
+<DD><CODE>java.io.IOException</CODE> - If the implementation wants to abort the processing when an <CODE>IOException</CODE>
+      happens, it can simply propagate the exception to the caller. This will cause
+      the build to fail, with the default error message.
+      Implementations are encouraged to catch <CODE>IOException</CODE> on its own to
+      provide a better error message, if it can do so, so that users have better
+      understanding on why it failed.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getProjectAction(hudson.model.AbstractProject)"><!-- --></A><H3>
+getProjectAction</H3>
+<PRE>
+public final <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A> <B>getProjectAction</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">BuildStep</A></CODE></B></DD>
+<DD>Returns an action object if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has an action
+ to contribute to a <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.
+
+ <p>
+ <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> calls this method for every <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> that
+ it owns when the rendering is requested.
+
+ <p>
+ This action can have optional <tt>jobMain.jelly</tt> view, which will be
+ aggregated into the main panel of the job top page. The jelly file
+ should have an &lt;h2> tag that shows the section title, followed by some
+ block elements to render the details of the section.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></CODE> in interface <CODE><A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>project</CODE> - <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> that owns this build step,
+      since <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> object doesn't usually have this "parent" pointer.
+<DT><B>Returns:</B><DD>null if there's no action to be contributed.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/JobProperty.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../hudson/model/JobParameterValue.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../index.html?hudson/model/JobProperty.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="JobProperty.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &#169; 2009. All Rights Reserved.
+</BODY>
+</HTML>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>hudson</artifactId>
+    <groupId>org.jvnet.hudson</groupId>
+    <version>1.7</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jvnet.hudson.pxeboot</groupId>
+  <artifactId>pxeboot</artifactId>
+  <packaging>pom</packaging>
+  <name>PXEBoot parent POM</name>
+  <version>1.1-SNAPSHOT</version>
+  
+  <modules>
+    <module>proxy-dhcp</module>
+    <module>tftpd</module>
+    <module>pxe-boot-manager</module>
+    <module>io-utils</module>
+  </modules>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

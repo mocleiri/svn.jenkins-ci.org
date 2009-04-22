@@ -1,0 +1,24 @@
+# install a fresh system instead of upgrade
+install
+url --url=${absoluteUrl}/image
+lang ${locale}
+keyboard us
+network --bootproto dhcp
+rootpw  --iscrypted ${password}
+firewall --service=ssh
+authconfig --enableshadow
+selinux --enforcing
+timezone --utc ${timeZone}
+bootloader --location=mbr
+reboot
+
+%packages
+@admin-tools
+@base
+@core
+@editors
+@gnome-desktop
+@graphical-internet
+@hardware-support
+@java
+${packageList}

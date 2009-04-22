@@ -1,0 +1,74 @@
+<html>
+<head>
+	<style>
+		DL {
+			margin-left: 1em;
+		}
+	</style>
+</head>
+<body><div class=app>
+<h1>Tracking versions in Hudson by using fingerprints</h1>
+
+<p>
+	When you have interdependent projects on Hudson. It often becomes hard to keep track of which version of this is used by which version of that. Hudson supports "file fingerprinting" to simplify this.
+	
+<p>
+	For example, suppose you have the TOP project that depends on the MIDDLE project, which in turn depends on the BOTTOM project.
+	
+	You are working on the BOTTOM project. The TOP team reported that <tt>bottom.jar</tt> that they are using causes an NPE, which you thought you fixed in BOTTOM #32. Hudson can tell you which MIDDLE builds and TOP builds are using (or not using) your <tt>bottom.jar</tt> #32.
+
+<h3>How do I set it up?</h3>
+<p>
+	To make this work, all the relevant projects need to be configured to record fingerprints of the jar files (in this case, <tt>bottom.jar</tt>.)
+<p>
+	For example, if you just want to track which BOTTOM builds are used by which TOP builds, configure TOP and BOTTOM to record <tt>bottom.jar</tt>. If you also want to know which MIDDLE builds are using which <tt>bottom.jar</tt>, also configure MIDDLE.
+<p>
+	Since recording fingerprints is a cheap operation, the simplest thing to do is just blindly record all fingerprints of the followings:
+<ol>
+	<li>jar files that your project produce
+	<li>jar files that your project rely on
+</ol>
+<p>
+	The disk usage is affected more by the number of files fingerprinted, as opposed to the size of files or the number of builds they are used. So unless you have a plenty of disk space, you don't want to fingerprint <tt>"**/*"</tt>.
+
+<h3>How does it work?</h3>
+<p>
+	The fingerprint of a file is simply a MD5 checksum. Hudson maintains a database of md5sum, and for each md5sum, Hudson records which builds of which projects used. This database is updated every time a build runs and files are fingerprinted.
+<p>
+	To avoid the excessive disk usage, Hudson does not store the actual file. Instead, it just stores md5sum and their usages. These files can be seen in <tt>$HUDSON_HOME/fingerprints</tt>.
+
+
+<h3>How can I use it?</h3>
+<p>
+	Here is a few typical scenarios that benefit from this feature:
+	<dl>
+		<dt>
+			You develop the BOTTOM project and you want to know who is using BOTTOM #13 in which builds
+		<dd>
+		<ol>
+			<li>Go to BOTTOM #13 build page.
+			<li>Click the "fingeprint" icon of <tt>bottom.jar</tt> in the build artifacts
+			<li>You'll see all the projects and builds that uses it.
+		</ol>
+		
+		
+		<dt>
+			You develop the TOP project and you want to know which build of <tt>bottom.jar</tt> and <tt>middle.jar</tt> you are using in TOP #10.
+		<dd>
+		<ol>
+			<li>Go to TOP #10 build page.
+			<li>Click "see fingerprints"
+			<li>You'll see all the files fingerprinted in TOP #10, along with where they came from.
+		
+		<dt>
+			You have the TOP project that builds a jar. You also have the TOP-TEST project that runs after the TOP project and does extensive integration tests on the latest TOP bits. You want to know the test results of TOP #7.
+		<dd>
+		<ol>
+			<li>Go to TOP #7 build page.
+			<li>Click the "fingeprint" icon of <tt>top.jar</tt> in the build artifacts
+			<li>You'll see all the TOP-TEST builds that used it. Click it and you'll be taken to the appropriate TOP-TEST build page, which will show you test reports.
+			<li>If there's no TOP-TEST builds displayed, then that means TOP-TEST build didn't run against TOP #7. Maybe it skipped TOP #7 (this can happen if there are a lot of TOP builds in a short period of time), or maybe a new TOP-TEST build is in progress.
+		</ol>
+	</dl>
+</div></body>
+</html>
