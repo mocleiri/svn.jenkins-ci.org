@@ -96,8 +96,11 @@ public abstract class ToolInstallation implements Serializable, Describable<Tool
     }
 
     /**
+     * Finds a tool on a node.
      * Checks if the location of the tool is overridden for the given node, and if so,
-     * return the node-specific home directory. Otherwise return {@code installation.getHome()}
+     * return the node-specific home directory.
+     * Also checks available {@link ToolLocationTranslator}s.
+     * Otherwise returns {@code installation.getHome()}.
      *
      * <p>
      * This is the core logic behind {@link NodeSpecific#forNode(Node)} for {@link ToolInstallation},
