@@ -31,7 +31,6 @@ import hudson.EnvVars;
 import hudson.slaves.NodeSpecific;
 import hudson.tools.ToolInstallation;
 import hudson.tools.ToolDescriptor;
-import hudson.tools.ToolLocationNodeProperty;
 
 import java.io.File;
 import java.io.IOException;
