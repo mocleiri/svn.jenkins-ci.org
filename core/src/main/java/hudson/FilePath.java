@@ -382,7 +382,7 @@ public final class FilePath implements Serializable {
 
     private void unzip(File dir, InputStream in) throws IOException {
         dir = dir.getAbsoluteFile();    // without absolutization, getParentFile below seems to fail
-        ZipInputStream zip = new ZipInputStream(in);
+        ZipInputStream zip = new ZipInputStream(new BufferedInputStream(in));
         java.util.zip.ZipEntry e;
 
         try {
