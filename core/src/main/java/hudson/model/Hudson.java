@@ -2204,7 +2204,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
                 result &= configureDescriptor(req,json,d);
 
             for( JSONObject o : StructuredForm.toList(json,"plugin"))
-                pluginManager.getPlugin(o.getString("name")).getPlugin().configure(o);
+                pluginManager.getPlugin(o.getString("name")).getPlugin().configure(req, o);
 
             clouds.rebuildHetero(req,json, Cloud.all(), "cloud");
 
