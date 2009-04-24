@@ -4,22 +4,20 @@ import hudson.ExtensionPoint;
 import hudson.FilePath;
 import hudson.Util;
 import hudson.model.Describable;
-import hudson.model.Descriptor;
 import hudson.model.Hudson;
+import hudson.model.Label;
 import hudson.model.Node;
+import hudson.model.TaskListener;
 import hudson.tools.ToolDescriptor;
 import hudson.tools.ToolInstallation;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
  * An object which can ensure that a generic {@link ToolInstallation} in fact exists on a node.
- * The subclass should provide a {@code config.jelly}.
- * @see ToolInstallerDescriptor
+ * The subclass should have a {@link ToolInstallerDescriptor} and provide a {@code config.jelly}.
  */
 public abstract class ToolInstaller implements Describable<ToolInstaller>, ExtensionPoint {
 
@@ -37,61 +35,63 @@ public abstract class ToolInstaller implements Describable<ToolInstaller>, Exten
     /**
      * Associated tool name.
      */
-    public String getToolName() {
+    public final String getToolName() {
         return toolName;
     }
 
-    public static List<ToolInstallation> allTools() {
-        List<ToolInstallation> tools = new ArrayList<ToolInstallation>();
-        for (ToolDescriptor d : ToolInstallation.all()) {
-            tools.addAll(Arrays.asList(d.getInstallations()));
-        }
-        return tools;
-    }
-
+    /**
+     * Names of all registered tools.
+     */
     public static List<String> allToolNames() {
         List<String> names = new ArrayList<String>();
-        for (ToolInstallation t : allTools()) {
-            names.add(t.getName());
-        }
-        return names;
-    }
-
-    /**
-     * Associated tool.
-     * Its {@link ToolInstallation#getHome} will serve only as a fallback value.
-     * @return tool with the configured name, or null if not found
-     */
-    public ToolInstallation getTool() {
-        for (ToolInstallation t : allTools()) {
-            if (t.getName().equals(toolName)) {
-                return t;
+        for (ToolDescriptor d : ToolInstallation.all()) {
+            for (ToolInstallation t : d.getInstallations()) {
+                names.add(t.getName());
             }
         }
-        return null;
+        return names;
     }
 
     /**
      * Label to limit which nodes this installation can be performed on.
      * Can be null to not impose a limit.
      */
-    public String getLabel() {
+    public final String getLabel() {
         return label;
+    }
+
+    /**
+     * Checks whether this installer can be applied to a given tool.
+     * (By default, just checks the tool name.)
+     */
+    public boolean appliesTo(ToolInstallation tool) {
+        return tool.getName().equals(toolName);
+    }
+
+    /**
+     * Checks whether this installer can be applied to a given node.
+     * (By default, just checks the label.)
+     */
+    public boolean appliesTo(Node node) {
+        Label l = Hudson.getInstance().getLabel(label);
+        return l == null || l.contains(node);
     }
 
     /**
      * Ensure that the configured tool is really installed.
      * If it is already installed, do nothing.
+     * Called only if {@link #appliesTo(ToolInstallation)} and {@link #appliesTo(Node)} are true.
+     * @param tool the tool being installed
      * @param node the computer on which to install the tool
      * @param log any status messages produced by the installation go here
      * @return the (directory) path at which the tool can be found (like {@link ToolInstallation#getHome})
      * @throws IOException if installation fails
+     * @throws InterruptedException if communication with a slave is interrupted
      */
-    public abstract FilePath ensureInstalled(Node node, OutputStream log) throws IOException;
+    public abstract FilePath performInstallation(ToolInstallation tool, Node node, TaskListener log) throws IOException, InterruptedException;
 
-    @SuppressWarnings("unchecked")
-    public Descriptor<ToolInstaller> getDescriptor() {
-        return Hudson.getInstance().getDescriptor(getClass());
+    public ToolInstallerDescriptor<?> getDescriptor() {
+        return (ToolInstallerDescriptor) Hudson.getInstance().getDescriptor(getClass());
     }
 
 }
