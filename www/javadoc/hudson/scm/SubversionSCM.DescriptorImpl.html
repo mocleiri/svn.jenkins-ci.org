@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-SubversionSCM.DescriptorImpl (Hudson core 1.300 API)
+SubversionSCM.DescriptorImpl (Hudson core 1.301-SNAPSHOT API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-17">
+<META NAME="date" CONTENT="2009-04-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SubversionSCM.DescriptorImpl (Hudson core 1.300 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionSCM.DescriptorImpl (Hudson core 1.300 API)";
+        parent.document.title="SubversionSCM.DescriptorImpl (Hudson core 1.301-SNAPSHOT API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/scm/SubversionSCM.html" title="class in hudson.scm"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/scm/SubversionSCM.ModuleLocation.html" title="class in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.Credential.html" title="class in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/scm/SubversionSCM.DescriptorImpl.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="SubversionSCM.DescriptorImpl.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.Descriptor">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.scm.SCMDescriptor">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.scm.SCMDescriptor">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -122,6 +122,14 @@ java.lang.Object
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Nested Class Summary</B></FONT></TH>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.Credential.html" title="class in hudson.scm">SubversionSCM.DescriptorImpl.Credential</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stores <CODE>SVNAuthentication</CODE> for a single realm.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="nested_classes_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -158,6 +166,15 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -598,7 +615,7 @@ public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.ut
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/scm/SubversionSCM.html" title="class in hudson.scm"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/scm/SubversionSCM.ModuleLocation.html" title="class in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.Credential.html" title="class in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/scm/SubversionSCM.DescriptorImpl.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="SubversionSCM.DescriptorImpl.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -618,7 +635,7 @@ public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.ut
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.Descriptor">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.scm.SCMDescriptor">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.scm.SCMDescriptor">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>

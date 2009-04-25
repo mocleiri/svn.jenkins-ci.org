@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Computer (Hudson core 1.300 API)
+Computer (Hudson core 1.301-SNAPSHOT API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-17">
+<META NAME="date" CONTENT="2009-04-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson core 1.300 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson core 1.300 API)";
+        parent.document.title="Computer (Hudson core 1.301-SNAPSHOT API)";
     }
 }
 </SCRIPT>
@@ -217,6 +217,16 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#_doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">_doScript</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+          org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+          java.lang.String&nbsp;view)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
@@ -342,16 +352,6 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For system diagnostics.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Computer.html#doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doScript</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-         org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-         java.lang.String&nbsp;view)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1953,14 +1953,14 @@ public void <B>doScriptText</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
-doScript</H3>
+<A NAME="_doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
+_doScript</H3>
 <PRE>
-public void <B>doScript</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                     org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                     java.lang.String&nbsp;view)
-              throws java.io.IOException,
-                     javax.servlet.ServletException</PRE>
+protected void <B>_doScript</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                         org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                         java.lang.String&nbsp;view)
+                  throws java.io.IOException,
+                         javax.servlet.ServletException</PRE>
 <DL>
 <DD><DL>
 </DL>

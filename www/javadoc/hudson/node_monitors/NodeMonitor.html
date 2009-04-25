@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-NodeMonitor (Hudson core 1.300 API)
+NodeMonitor (Hudson core 1.301-SNAPSHOT API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-17">
+<META NAME="date" CONTENT="2009-04-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ NodeMonitor (Hudson core 1.300 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="NodeMonitor (Hudson core 1.300 API)";
+        parent.document.title="NodeMonitor (Hudson core 1.301-SNAPSHOT API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/node_monitors/Messages.html" title="class in hudson.node_monitors"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/node_monitors/MonitorMarkedNodeOffline.html" title="class in hudson.node_monitors"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/node_monitors/ResponseTimeMonitor.html" title="class in hudson.node_monitors"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/node_monitors/NodeMonitor.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -118,7 +118,16 @@ Extension point for managing and monitoring <A HREF="../../hudson/model/Node.htm
  Invoked from <A HREF="../../hudson/model/ComputerSet.html" title="class in hudson.model"><CODE>ComputerSet</CODE></A> <tt>index.jelly</tt> to render a column.
  The <A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A> instance is accessible through the "from" variable.
  Also see <A HREF="../../hudson/node_monitors/NodeMonitor.html#getColumnCaption()"><CODE>getColumnCaption()</CODE></A>.
+
+ <dt>config.jelly (optional)</dt>
+ <dd>
+ Configuration fragment to be displayed in <code>http://server/hudson/computer/configure</code>.
+ Used for configuring the threshold for taking nodes offline. 
  </dl>
+
+ <h2>Persistence</h2>
+ <p>
+ <A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A>s are persisted via XStream.
 <P>
 
 <P>
@@ -232,6 +241,22 @@ Extension point for managing and monitoring <A HREF="../../hudson/model/Node.htm
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/NodeMonitor.html#isIgnored()">isIgnored</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True if this monitoring shouldn't mark the slaves offline.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/NodeMonitor.html#setIgnored(boolean)">setIgnored</A></B>(boolean&nbsp;ignored)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -397,6 +422,46 @@ public static java.util.List&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.
 </DL>
 <HR>
 
+<A NAME="isIgnored()"><!-- --></A><H3>
+isIgnored</H3>
+<PRE>
+public boolean <B>isIgnored</B>()</PRE>
+<DL>
+<DD>True if this monitoring shouldn't mark the slaves offline.
+
+ <p>
+ Many <A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A>s implement a logic that if the value goes above/below
+ a threshold, the slave will be marked offline as a preventive measure.
+ This flag controls that.
+
+ <p>
+ Unlike <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A>, where the absence of an instance indicates that it's disengaged,
+ in <A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A> this boolean flag is used to indicate the disengagement, so that
+ monitors work in opt-out basis.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIgnored(boolean)"><!-- --></A><H3>
+setIgnored</H3>
+<PRE>
+public void <B>setIgnored</B>(boolean&nbsp;ignored)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="all()"><!-- --></A><H3>
 all</H3>
 <PRE>
@@ -442,7 +507,7 @@ public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class i
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/node_monitors/Messages.html" title="class in hudson.node_monitors"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/node_monitors/MonitorMarkedNodeOffline.html" title="class in hudson.node_monitors"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/node_monitors/ResponseTimeMonitor.html" title="class in hudson.node_monitors"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/node_monitors/NodeMonitor.html" target="_top"><B>FRAMES</B></A>  &nbsp;
