@@ -5,7 +5,7 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.301-SNAPSHOT API)
+Hudson (Hudson core 1.301 API)
 </TITLE>
 
 <META NAME="date" CONTENT="2009-04-25">
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.301-SNAPSHOT API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.301-SNAPSHOT API)";
+        parent.document.title="Hudson (Hudson core 1.301 API)";
     }
 }
 </SCRIPT>
@@ -3273,11 +3273,18 @@ public boolean <B>isUpgradedFromBefore</B>(<A HREF="../../hudson/util/VersionNum
  <p>
  This method continues to return true until the system configuration is saved, at which point
  <A HREF="../../hudson/model/Hudson.html#version"><CODE>version</CODE></A> will be overwritten and Hudson forgets the upgrade history.
+
+ <p>
+ To handle SNAPSHOTS correctly, pass in "1.N.*" to test if it's upgrading from the version
+ equal or younger than N. So say if you implement a feature in 1.301 and you want to check
+ if the installation upgraded from pre-1.301, pass in "1.300.*"
 <P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.301</DD>
 </DL>
 </DD>
 </DL>
