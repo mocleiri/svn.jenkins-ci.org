@@ -103,8 +103,8 @@ public class ProxyDhcpService implements Runnable, Closeable {
         LOGGER.fine("responded");
     }
 
-    private static final int DHCP_CLIENT_PORT = 68;
-    private static final int DHCP_SERVER_PORT = 67;
+    public static final int DHCP_CLIENT_PORT = 68;
+    public static final int DHCP_SERVER_PORT = 67;
 
     private static final Logger LOGGER = Logger.getLogger(ProxyDhcpService.class.getName());
 

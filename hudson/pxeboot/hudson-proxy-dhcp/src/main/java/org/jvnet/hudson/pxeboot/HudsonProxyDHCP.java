@@ -1,7 +1,10 @@
 package org.jvnet.hudson.pxeboot;
 
 import org.jvnet.hudson.proxy_dhcp.ProxyDhcpService;
+import static org.jvnet.hudson.proxy_dhcp.ProxyDhcpService.DHCP_SERVER_PORT;
 
+import java.io.File;
+import java.net.BindException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.URL;
@@ -17,8 +20,12 @@ import java.util.logging.Logger;
  */
 public class HudsonProxyDHCP {
     public static void main(String[] args) throws Exception {
+        final boolean isUnix = File.pathSeparatorChar == ':';
+
         if(args.length!=1) {
-            System.out.println("Usage: java -jar hudson-proxy-dhcp.jar [URL of Hudson]");
+            String prefix="";
+            if(isUnix) prefix="sudo ";
+            System.out.println("Usage: "+prefix+"java -jar hudson-proxy-dhcp.jar [URL of Hudson]");
             System.exit(-1);
         }
 
@@ -39,7 +46,13 @@ public class HudsonProxyDHCP {
         LOGGER.addHandler(h);
         LOGGER.setUseParentHandlers(false);
 
-        new ProxyDhcpService((Inet4Address) InetAddress.getByName(url.getHost()),"pxelinux.0").run();
+        try {
+            new ProxyDhcpService((Inet4Address) InetAddress.getByName(url.getHost()),"pxelinux.0").run();
+        } catch (BindException e) {
+            if(isUnix)
+                System.out.println("Failed to bind to port "+DHCP_SERVER_PORT+". Make sure you are running this as root");
+            throw e;
+        }
     }
 
     private static final Logger LOGGER = Logger.getLogger(HudsonProxyDHCP.class.getName());
