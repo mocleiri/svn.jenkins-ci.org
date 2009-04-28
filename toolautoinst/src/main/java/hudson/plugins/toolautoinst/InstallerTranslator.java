@@ -31,6 +31,7 @@ public class InstallerTranslator extends ToolLocationTranslator {
                         // XXX cannot send to project's build log from here
                         Logger.getLogger(InstallerTranslator.class.getName()).log(Level.INFO, logText);
                     }
+                    // XXX cache the result for this node & tool, if installer's config (XStream?) has not changed
                     return result.getRemote();
                 } catch (Exception x) {
                     log.close();
