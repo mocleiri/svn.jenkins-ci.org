@@ -476,6 +476,7 @@ public final class FilePath implements Serializable {
      * <li>The timestamp of the .tgz file is left in the installation directory upon extraction.
      * <li>If the timestamp left in the directory doesn't match with the timestamp of the current archive file,
      *     the directory contents will be discarded and the archive file will be re-extracted.
+     * <li>If the connection is refused but the target directory already exists, it is left alone.
      * </ul>
      *
      * @param archive
@@ -490,7 +491,21 @@ public final class FilePath implements Serializable {
      * @since 1.299
      */
     public boolean installIfNecessaryFrom(URL archive, TaskListener listener, String message) throws IOException, InterruptedException {
-        URLConnection con = archive.openConnection();
+        URLConnection con;
+        try {
+            con = archive.openConnection();
+            con.connect();
+        } catch (IOException x) {
+            if (this.exists()) {
+                // Cannot connect now, so assume whatever was last unpacked is still OK.
+                if (listener != null) {
+                    listener.getLogger().println("Skipping installation of " + archive + " to " + remote + ": " + x);
+                }
+                return false;
+            } else {
+                throw x;
+            }
+        }
         long sourceTimestamp = con.getLastModified();
         FilePath timestamp = this.child(".timestamp");
 
