@@ -47,7 +47,7 @@ public class CommandExtraction extends ToolInstaller {
         // XXX support Windows batch scripts, Unix scripts with interpreter line, etc. (see CommandInterpreter subclasses)
         FilePath script = tools.createTextTempFile("hudson", ".sh", command);
         try {
-            String[] cmd = {"sh", "-xe", script.getRemote()};
+            String[] cmd = {"sh", "-e", script.getRemote()};
             int r = node.createLauncher(log).launch(cmd, Collections.<String,String>emptyMap(), log.getLogger(), tools).join();
             if (r != 0) {
                 throw new IOException("Command returned status " + r);
