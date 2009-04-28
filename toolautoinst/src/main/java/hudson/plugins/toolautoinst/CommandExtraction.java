@@ -62,14 +62,14 @@ public class CommandExtraction extends ToolInstaller {
     public static class DescriptorImpl extends ToolInstallerDescriptor<CommandExtraction> {
 
         public String getDisplayName() {
-            return "Run Command"; // XXX I18N
+            return Messages.CommandExtraction_DescriptorImpl_displayName();
         }
 
         public FormValidation doCheckCommand(@QueryParameter String value) {
             if (value.length() > 0) {
                 return FormValidation.ok();
             } else {
-                return FormValidation.error("Must provide a command to run."); // XXX I18N
+                return FormValidation.error(Messages.CommandExtraction_no_command());
             }
         }
 
@@ -77,7 +77,7 @@ public class CommandExtraction extends ToolInstaller {
             if (value.length() > 0) {
                 return FormValidation.ok();
             } else {
-                return FormValidation.error("Must provide a tool home directory."); // XXX I18N
+                return FormValidation.error(Messages.CommandExtraction_no_toolHome());
             }
         }
 

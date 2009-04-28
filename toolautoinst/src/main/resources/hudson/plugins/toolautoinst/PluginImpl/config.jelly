@@ -1,5 +1,5 @@
 <j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
-    <f:section title="Tool Auto-Installation">
+    <f:section title="${%Tool Auto-Installation}">
         <f:block>
             <j:invokeStatic var="descriptors" className="hudson.plugins.toolautoinst.ToolInstallerDescriptor" method="all"/>
             <f:hetero-list name="installers" items="${it.installers}" descriptors="${descriptors}" hasHeader="true"/>

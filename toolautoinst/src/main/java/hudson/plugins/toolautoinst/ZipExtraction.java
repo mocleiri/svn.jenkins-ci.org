@@ -64,7 +64,7 @@ public class ZipExtraction extends ToolInstaller {
     public static class DescriptorImpl extends ToolInstallerDescriptor<ZipExtraction> {
 
         public String getDisplayName() {
-            return "Extract *.zip/*.tar.gz"; // XXX I18N
+            return Messages.ZipExtraction_DescriptorImpl_displayName();
         }
 
         public FormValidation doCheckUrl(@QueryParameter String value) {
@@ -73,14 +73,14 @@ public class ZipExtraction extends ToolInstaller {
                 conn.connect();
                 if (conn instanceof HttpURLConnection) {
                     if (((HttpURLConnection) conn).getResponseCode() != HttpURLConnection.HTTP_OK) {
-                        return FormValidation.error("Server rejected connection."); // XXX I18N
+                        return FormValidation.error(Messages.ZipExtraction_bad_connection());
                     }
                 }
                 return FormValidation.ok();
             } catch (MalformedURLException x) {
-                return FormValidation.error("Malformed URL."); // XXX I18N
+                return FormValidation.error(Messages.ZipExtraction_malformed_url());
             } catch (IOException x) {
-                return FormValidation.error("Could not connect to URL."); // XXX I18N
+                return FormValidation.error(Messages.ZipExtraction_could_not_connect());
             }
         }
 
