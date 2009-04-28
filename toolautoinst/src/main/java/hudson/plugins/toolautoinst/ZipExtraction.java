@@ -50,8 +50,9 @@ public class ZipExtraction extends ToolInstaller {
     public FilePath performInstallation(ToolInstallation tool, Node node, TaskListener log) throws IOException, InterruptedException {
         String dirname = tool.getName().replaceAll("[^A-Za-z0-9_.-]+", "_");
         FilePath dir = node.getRootPath().child("tools").child(dirname);
-        dir.installIfNecessaryFrom(new URL(url), log, "Unpacking " + url + " to " + dir + " on " + node.getDisplayName());
-        dir.act(new ChmodRecAPlusX());
+        if (dir.installIfNecessaryFrom(new URL(url), log, "Unpacking " + url + " to " + dir + " on " + node.getDisplayName())) {
+            dir.act(new ChmodRecAPlusX());
+        }
         if (subdir == null) {
             return dir;
         } else {
@@ -97,7 +98,7 @@ public class ZipExtraction extends ToolInstaller {
         }
         private void process(File f) {
             if (f.isFile()) {
-                f.setExecutable(true); // XXX JDK 6-specific
+                f.setExecutable(true, false); // XXX JDK 6-specific
             } else {
                 File[] kids = f.listFiles();
                 if (kids != null) {
