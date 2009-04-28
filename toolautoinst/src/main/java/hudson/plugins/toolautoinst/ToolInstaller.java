@@ -17,7 +17,9 @@ import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
  * An object which can ensure that a generic {@link ToolInstallation} in fact exists on a node.
- * The subclass should have a {@link ToolInstallerDescriptor} and provide a {@code config.jelly}.
+ * The subclass should have a {@link ToolInstallerDescriptor}.
+ * A {@code config.jelly} should be provided to customize specific fields;
+ * {@code <st:include page="config-base.jelly"/>} to customize {@code toolName} and {@code label}.
  */
 public abstract class ToolInstaller implements Describable<ToolInstaller>, ExtensionPoint {
 
