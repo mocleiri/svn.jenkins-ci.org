@@ -1,10 +1,10 @@
 <j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form" xmlns:st="jelly:stapler">
     <!-- XXX should extract tool & label fields into separate file -->
-    <f:entry title="${%Tool}"><!-- help="/help/..."-->
+    <f:entry title="${%Tool}" field="toolName">
         <!-- XXX is there some way to also capture the names of tools added before this page has been saved? -->
         <j:invokeStatic var="toolNames" className="hudson.plugins.toolautoinst.ToolInstaller" method="allToolNames"/>
         <!-- XXX why does this show a text field rather than a combo box?
-        <f:editableComboBox id="toolName" field="toolName" items="${toolNames}"/>
+        <f:editableComboBox id="toolName" items="${toolNames}"/>
         -->
         <select class="setting-input" name="toolName">
             <j:forEach var="n" items="${toolNames}">
@@ -12,14 +12,14 @@
             </j:forEach>
         </select>
     </f:entry>
-    <f:entry title="${%Label}"><!-- help="/help/..."-->
+    <f:entry title="${%Label}" field="label">
         <!-- XXX could use Hudson.getLabels and make a combo box -->
-        <f:textbox field="label"/>
+        <f:textbox/>
     </f:entry>
-    <f:entry title="${%Download URL for binary archive}"><!-- help="/help/..."-->
-        <f:textbox field="url"/>
+    <f:entry title="${%Download URL for binary archive}" field="url">
+        <f:textbox/>
     </f:entry>
-    <f:entry title="${%Subdirectory of extracted archive}"><!-- help="/help/..."-->
-        <f:textbox field="subdir"/>
+    <f:entry title="${%Subdirectory of extracted archive}" field="subdir">
+        <f:textbox/>
     </f:entry>
 </j:jelly>
