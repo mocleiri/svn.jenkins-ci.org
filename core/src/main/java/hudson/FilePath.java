@@ -472,7 +472,7 @@ public final class FilePath implements Serializable {
      * that supports upgrade and downgrade. Specifically,
      *
      * <ul>
-     * <li>If the target directory doesn't exit {@linkplain #mkdirs() it'll be created}.
+     * <li>If the target directory doesn't exist {@linkplain #mkdirs() it'll be created}.
      * <li>The timestamp of the .tgz file is left in the installation directory upon extraction.
      * <li>If the timestamp left in the directory doesn't match with the timestamp of the current archive file,
      *     the directory contents will be discarded and the archive file will be re-extracted.
