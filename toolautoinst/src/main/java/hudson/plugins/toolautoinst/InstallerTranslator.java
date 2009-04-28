@@ -6,8 +6,9 @@ import hudson.model.Hudson;
 import hudson.model.Node;
 import hudson.tools.ToolInstallation;
 import hudson.tools.ToolLocationTranslator;
-import hudson.util.StreamTaskListener;
-import java.io.StringWriter;
+import java.util.Map;
+import java.util.WeakHashMap;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,26 +18,41 @@ import java.util.logging.Logger;
 @Extension
 public class InstallerTranslator extends ToolLocationTranslator {
 
+    private static final Logger LOG = Logger.getLogger(InstallerTranslator.class.getName());
+    private static final Map<Node,Map<ToolInstallation,Semaphore>> mutexByNode = new WeakHashMap<Node,Map<ToolInstallation,Semaphore>>();
+
     public String getToolHome(Node node, ToolInstallation tool) {
         for (ToolInstaller installer : Hudson.getInstance().getPlugin(PluginImpl.class).installers) {
             if (installer.appliesTo(tool) && installer.appliesTo(node)) {
-                StringWriter w = new StringWriter();
-                StreamTaskListener log = new StreamTaskListener(w);
+                Map<ToolInstallation, Semaphore> mutexByTool = mutexByNode.get(node);
+                if (mutexByTool == null) {
+                    mutexByNode.put(node, mutexByTool = new WeakHashMap<ToolInstallation, Semaphore>());
+                }
+                Semaphore semaphore = mutexByTool.get(tool);
+                if (semaphore == null) {
+                    mutexByTool.put(tool, semaphore = new Semaphore(1));
+                }
                 try {
-                    FilePath result = installer.performInstallation(tool, node, log);
-                    log.close();
-                    // XXX would be better to log lines of text in real time
-                    String logText = w.toString().replaceFirst("\r?\n$", "");
-                    if (logText.length() > 0) {
-                        // XXX cannot send to project's build log from here
-                        Logger.getLogger(InstallerTranslator.class.getName()).log(Level.INFO, logText);
+                    semaphore.acquire();
+                } catch (InterruptedException x) {
+                    LOG.log(Level.WARNING, null, x);
+                    break;
+                }
+                try {
+                    FilePath result;
+                    // XXX cannot send to project's build log from here
+                    LogTaskListener log = new LogTaskListener(LOG, Level.INFO);
+                    try {
+                        result = installer.performInstallation(tool, node, log);
+                    } finally {
+                        log.close();
                     }
-                    // XXX cache the result for this node & tool, if installer's config (XStream?) has not changed
                     return result.getRemote();
                 } catch (Exception x) {
-                    log.close();
-                    Logger.getLogger(InstallerTranslator.class.getName()).log(Level.WARNING, w.toString(), x);
+                    LOG.log(Level.WARNING, "Failed to install " + tool.getName() + " on " + node.getDisplayName(), x);
                     break;
+                } finally {
+                    semaphore.release();
                 }
             }
         }
