@@ -192,6 +192,11 @@ public final class FilePath implements Serializable {
         this.remote = localPath.getPath();
     }
 
+    /**
+     * Construct a path starting with a base location.
+     * @param base starting point for resolution, and defines channel
+     * @param rel a path which if relative will be resolved against base
+     */
     public FilePath(FilePath base, String rel) {
         this.channel = base.channel;
         if(isAbsolute(rel)) {
@@ -724,7 +729,9 @@ public final class FilePath implements Serializable {
     }
 
     /**
-     * The same as {@code new FilePath(this,rel)} but more OO.
+     * The same as {@link FilePath#FilePath(FilePath,String)} but more OO.
+     * @param rel a relative or absolute path
+     * @return a file on the same channel
      */
     public FilePath child(String rel) {
         return new FilePath(this,rel);
