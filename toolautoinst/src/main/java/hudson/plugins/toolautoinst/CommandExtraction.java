@@ -72,6 +72,7 @@ public class CommandExtraction extends ToolInstaller {
         FilePath script = tools.createTextTempFile("hudson", ".sh", command);
         try {
             String[] cmd = {"sh", "-e", script.getRemote()};
+            // XXX it always logs at least: "INFO: [tools] $ sh -e /hudson/tools/hudson8889216416382058262.sh"
             int r = node.createLauncher(log).launch(cmd, Collections.<String,String>emptyMap(), log.getLogger(), tools).join();
             if (r != 0) {
                 throw new IOException("Command returned status " + r);
@@ -79,7 +80,7 @@ public class CommandExtraction extends ToolInstaller {
         } finally {
             script.delete();
         }
-        return node.createPath(toolHome);
+        return tools.child(toolHome);
     }
 
     @Extension
