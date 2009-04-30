@@ -215,6 +215,14 @@ var hudsonRules = {
 // other behavior rules change them (like YUI buttons.)
 
     "DIV.hetero-list-container" : function(e) {
+        /*
+            If we are inside 'to-be-removed' class, don't apply a behavior just yet. We'll be applied when
+            the removed master copy gets reinserted later (and since this function has a side effect of removing
+            prototypes, if we do it now, re-insertion will fail to find prototypes)
+         */
+        if(Element.ancestors(e).find(function(f){return f.hasClassName("to-be-removed");}))
+            return;
+
         // components for the add button
         var menu = document.createElement("SELECT");
         var btn = findElementsBySelector(e,"INPUT.hetero-list-add")[0];
@@ -278,6 +286,10 @@ var hudsonRules = {
     },
 
     "DIV.repeated-container" : function(e) {
+        // see the comment of where we do the same above in "DIV.hetero-list-container"
+        if(Element.ancestors(e).find(function(f){return f.hasClassName("to-be-removed");}))
+            return;
+
         // compute the insertion point
         var ip = e.lastChild;
         while (!Element.hasClassName(ip, "repeatable-insertion-point"))
