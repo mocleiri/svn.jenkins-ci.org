@@ -2178,17 +2178,8 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
 
             systemMessage = Util.nullify(req.getParameter("system_message"));
 
-            {// update JDK installations
-                jdks.clear();
-                String[] names = req.getParameterValues("jdk_name");
-                String[] homes = req.getParameterValues("jdk_home");
-                if(names!=null && homes!=null) {
-                    int len = Math.min(names.length,homes.length);
-                    for(int i=0;i<len;i++) {
-                        jdks.add(new JDK(names[i],homes[i]));
-                    }
-                }
-            }
+            jdks.clear();
+            jdks.addAll(req.bindJSONToList(JDK.class,json.get("jdks")));
 
             boolean result = true;
 
@@ -2830,24 +2821,6 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         rsp.setStatus(HttpServletResponse.SC_OK);
         rsp.setContentType("text/plain");
         rsp.getWriter().println("Invoked");
-    }
-
-    /**
-     * Checks if the JAVA_HOME is a valid JAVA_HOME path.
-     */
-    public FormValidation doJavaHomeCheck(@QueryParameter File value) {
-        // this can be used to check the existence of a file on the server, so needs to be protected
-        checkPermission(ADMINISTER);
-
-        if(!value.isDirectory())
-            return FormValidation.error(Messages.Hudson_NotADirectory(value));
-
-        File toolsJar = new File(value,"lib/tools.jar");
-        File mac = new File(value,"lib/dt.jar");
-        if(!toolsJar.exists() && !mac.exists())
-            return FormValidation.error(Messages.Hudson_NotJDKDir(value));
-
-        return FormValidation.ok();
     }
 
     /**

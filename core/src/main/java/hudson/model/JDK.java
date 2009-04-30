@@ -25,17 +25,23 @@ package hudson.model;
 
 import hudson.util.StreamTaskListener;
 import hudson.util.NullStream;
+import hudson.util.FormValidation;
 import hudson.Launcher;
 import hudson.Extension;
 import hudson.EnvVars;
 import hudson.slaves.NodeSpecific;
 import hudson.tools.ToolInstallation;
 import hudson.tools.ToolDescriptor;
+import hudson.tools.ToolProperty;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.List;
+import java.util.Arrays;
+
+import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.QueryParameter;
 
 /**
  * Information about JDK installation.
@@ -48,6 +54,11 @@ public final class JDK extends ToolInstallation implements NodeSpecific<JDK>, En
 
     public JDK(String name, String javaHome) {
         super(name, javaHome);
+    }
+
+    @DataBoundConstructor
+    public JDK(String name, String home, List<? extends ToolProperty<?>> properties) throws IOException {
+        super(name, home, properties);
     }
 
     /**
@@ -139,8 +150,25 @@ public final class JDK extends ToolInstallation implements NodeSpecific<JDK>, En
         public synchronized void setInstallations(JDK... jdks) {
             List<JDK> list = Hudson.getInstance().getJDKs();
             list.clear();
-            for (JDK jdk: jdks) list.add(jdk);
+            list.addAll(Arrays.asList(jdks));
         }
 
+        /**
+         * Checks if the JAVA_HOME is a valid JAVA_HOME path.
+         */
+        public FormValidation doCheckHome(@QueryParameter File value) {
+            // this can be used to check the existence of a file on the server, so needs to be protected
+            Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
+
+            if(!value.isDirectory())
+                return FormValidation.error(Messages.Hudson_NotADirectory(value));
+
+            File toolsJar = new File(value,"lib/tools.jar");
+            File mac = new File(value,"lib/dt.jar");
+            if(!toolsJar.exists() && !mac.exists())
+                return FormValidation.error(Messages.Hudson_NotJDKDir(value));
+
+            return FormValidation.ok();
+        }
     }
 }

@@ -26,6 +26,8 @@ package hudson.tools;
 
 import hudson.model.Descriptor;
 
+import java.util.List;
+
 /**
  * {@link Descriptor} for {@link ToolInstallation}.
  *
@@ -54,5 +56,12 @@ public abstract class ToolDescriptor<T extends ToolInstallation> extends Descrip
      */
     public void setInstallations(T[] installations) {
         this.installations = installations.clone();
+    }
+
+    /**
+     * Lists up {@link ToolPropertyDescriptor}s that are applicable to this {@link ToolInstallation}.
+     */
+    public List<ToolPropertyDescriptor> getPropertyDescriptors() {
+        return PropertyDescriptor.for_(ToolProperty.all(),clazz);
     }
 }

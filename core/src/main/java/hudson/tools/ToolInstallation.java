@@ -25,16 +25,21 @@
 package hudson.tools;
 
 import hudson.DescriptorExtensionList;
+import hudson.EnvVars;
 import hudson.Extension;
 import hudson.ExtensionPoint;
-import hudson.EnvVars;
 import hudson.model.Describable;
 import hudson.model.EnvironmentSpecific;
 import hudson.model.Hudson;
 import hudson.model.Node;
+import hudson.model.Saveable;
 import hudson.slaves.NodeSpecific;
+import hudson.slaves.NodeProperty;
+import hudson.util.DescribableList;
 
 import java.io.Serializable;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Formalization of a tool installed in nodes used for builds
@@ -65,13 +70,32 @@ import java.io.Serializable;
  * @since 1.286
  */
 public abstract class ToolInstallation implements Serializable, Describable<ToolInstallation>, ExtensionPoint {
-
     private final String name;
     private final String home;
 
+    /**
+     * {@link ToolProperty}s that are associated with this tool.
+     */
+    private /*almost final*/ DescribableList<ToolProperty<?>,ToolPropertyDescriptor> properties
+            = new DescribableList<ToolProperty<?>,ToolPropertyDescriptor>(Saveable.NOOP);
+
+    /**
+     * @deprecated
+     *      as of 1.302. Use {@link #ToolInstallation(String, String, List)} 
+     */
     public ToolInstallation(String name, String home) {
         this.name = name;
         this.home = home;
+    }
+
+    public ToolInstallation(String name, String home, List<? extends ToolProperty<?>> properties) throws IOException {
+        this.name = name;
+        this.home = home;
+        if(properties!=null) {
+            this.properties.replaceBy(properties);
+            for (ToolProperty p : properties)
+                p.setTool(this);
+        }
     }
 
     /**
@@ -89,6 +113,11 @@ public abstract class ToolInstallation implements Serializable, Describable<Tool
      */
     public String getHome() {
         return home;
+    }
+
+    public DescribableList<ToolProperty<?>,ToolPropertyDescriptor> getProperties() {
+        assert properties!=null;
+        return properties;
     }
 
     public ToolDescriptor<?> getDescriptor() {
@@ -112,6 +141,17 @@ public abstract class ToolInstallation implements Serializable, Describable<Tool
     @SuppressWarnings("deprecation")
     protected String translateFor(Node node) {
         return ToolLocationNodeProperty.getToolHome(node,this);
+    }
+
+    /**
+     * Invoked by XStream when this object is read into memory.
+     */
+    private Object readResolve() {
+        if(properties==null)
+            properties = new DescribableList<ToolProperty<?>,ToolPropertyDescriptor>(Saveable.NOOP);
+        for (ToolProperty p : properties)
+            p.setTool(this);
+        return this;
     }
 
     /**
