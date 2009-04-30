@@ -111,6 +111,9 @@ public class RunMojo extends AbstractJetty6Mojo {
         // auto-enable stapler trace, unless otherwise configured already.
         if(System.getProperty("stapler.trace")==null)
             System.setProperty("stapler.trace","true");
+        // run YUI in the debug mode, unless otherwise configured
+        if(System.getProperty("debug.YUI")==null)
+            System.setProperty("debug.YUI","true");
 
         // look for hudson.war
         for( Artifact a : (Set<Artifact>)getProject().getArtifacts() ) {
