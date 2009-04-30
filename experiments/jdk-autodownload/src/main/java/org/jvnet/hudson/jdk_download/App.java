@@ -131,10 +131,17 @@ public class App {
     public enum Arch {
         i386, amd64, Sparc, Itanium;
 
+        /**
+         * In JDK5u3, I see platform like "Linux AMD64", while JDK6u3 refers to "Linux x64", so
+         * just use "64" for locating bits. 
+         */
         public Preference accept(String line) {
             switch (this) {
+            // these two guys are totally incompatible with everything else, so no fallback
             case Sparc:     return must(line.contains("SPARC"));
             case Itanium:   return must(line.contains("ITANIUM"));
+
+            // 64bit Solaris, Linux, and Windows can all run 32bit executable, so fall back to 32bit if 64bit bundle is not found
             case amd64:
                 if(line.contains("64"))     return PRIMARY;
                 if(line.contains("SPARC") || line.contains("ITANIUM"))  return UNACCEPTABLE;
