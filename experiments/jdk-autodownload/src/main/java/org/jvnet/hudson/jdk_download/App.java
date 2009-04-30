@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.logging.Logger;
 import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
@@ -28,7 +29,36 @@ import static org.jvnet.hudson.jdk_download.App.Preference.PRIMARY;
  */
 public class App {
     public static void main(String[] args) throws IOException {
-        download("jdk-6u11", Platform.LINUX, Arch.i386);
+        testCombinations();
+    }
+
+    private static void testCombinations() throws IOException {
+        for (Platform p : Platform.values()) {
+            for(Arch a : Arch.values()) {
+                if(p==Platform.SOLARIS ^ a==Arch.Sparc)  continue;
+                System.out.println(p+"&"+a+"\t-> "+locate("jdk-6u11", p, a));
+            }
+        }
+    }
+
+    /**
+     * Downloads one thing.
+     */
+    private static void testOne() throws IOException {
+        URL url = locate("jdk-6u11", Platform.LINUX, Arch.i386);
+
+        retrieve(url);
+
+        // execute this as "echo yes | ./test.bin > install.log"
+        // redirect, or else "more" will ask you to read the whole license.
+    }
+
+    private static void retrieve(URL url) throws IOException {
+        FileOutputStream out = new FileOutputStream("test.bin");
+        InputStream in = url.openStream();
+        IOUtils.copy(in, out);
+        in.close();
+        out.close();
     }
 
     /**
@@ -37,7 +67,7 @@ public class App {
      *      Product code internally used in http://cds.sun.com/
      *      http://java.sun.com/products/archive/ gives you a good entry point to discover codes
      */
-    private static void download(String code, Platform platform, Arch arch) throws IOException {
+    private static URL locate(String code, Platform platform, Arch arch) throws IOException {
         WebClient wc = new WebClient();
         wc.setJavaScriptEnabled(false);
         wc.setCssEnabled(false);
@@ -79,18 +109,11 @@ public class App {
             if(url.contains("sparcv9"))  continue;
 
             urls.add(url);
-            System.out.println(url);
+            LOGGER.fine("Found a download candidate: "+url);
         }
 
         // prefer the first match because sometimes "optional downloads" follow the main bundle
-        FileOutputStream out = new FileOutputStream("test.bin");
-        InputStream in = new URL(urls.get(0)).openStream();
-        IOUtils.copy(in, out);
-        in.close();
-        out.close();
-
-        // execute this as "echo yes | ./test.bin > install.log"
-        // redirect, or else "more" will ask you to read the whole license.
+        return new URL(urls.get(0));
     }
 
     public enum Preference {
@@ -127,4 +150,6 @@ public class App {
     private static Preference must(boolean b) {
          return b ? PRIMARY : UNACCEPTABLE;
     }
+
+    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 }
