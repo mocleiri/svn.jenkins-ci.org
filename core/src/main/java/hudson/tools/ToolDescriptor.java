@@ -54,7 +54,7 @@ public abstract class ToolDescriptor<T extends ToolInstallation> extends Descrip
      * @param installations list of installations;
      *      can be empty but never null.
      */
-    public void setInstallations(T[] installations) {
+    public void setInstallations(T... installations) {
         this.installations = installations.clone();
     }
 

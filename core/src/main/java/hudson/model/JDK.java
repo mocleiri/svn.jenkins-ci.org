@@ -52,6 +52,7 @@ public final class JDK extends ToolInstallation implements NodeSpecific<JDK>, En
     @Deprecated // kept for backward compatibility - use getHome() instead
     private String javaHome;
 
+    @Deprecated
     public JDK(String name, String javaHome) {
         super(name, javaHome);
     }
@@ -68,7 +69,7 @@ public final class JDK extends ToolInstallation implements NodeSpecific<JDK>, En
         return getHome();
     }
 
-    public String getHome() {
+    public @Override String getHome() {
         if (javaHome != null) return javaHome;
         return super.getHome();
     }
@@ -142,12 +143,12 @@ public final class JDK extends ToolInstallation implements NodeSpecific<JDK>, En
             return "Java Development Kit";
         }
 
-        public JDK[] getInstallations() {
+        public @Override JDK[] getInstallations() {
             return Hudson.getInstance().getJDKs().toArray(new JDK[0]);
         }
 
         // this isn't really synchronized well since the list is Hudson.jdks :(
-        public synchronized void setInstallations(JDK... jdks) {
+        public @Override synchronized void setInstallations(JDK... jdks) {
             List<JDK> list = Hudson.getInstance().getJDKs();
             list.clear();
             list.addAll(Arrays.asList(jdks));
