@@ -66,7 +66,7 @@ public class CommandExtraction extends ToolInstaller {
         return toolHome;
     }
 
-    public FilePath performInstallation(ToolInstallation tool, Node node, TaskListener log) throws IOException, InterruptedException {
+    public FilePath performInstallation(ToolInstallation tool, Node node, FilePath expectedLocation, TaskListener log) throws IOException, InterruptedException {
         FilePath tools = node.getRootPath().child("tools");
         // XXX support Windows batch scripts, Unix scripts with interpreter line, etc. (see CommandInterpreter subclasses)
         FilePath script = tools.createTextTempFile("hudson", ".sh", command);

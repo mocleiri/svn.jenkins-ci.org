@@ -71,7 +71,7 @@ public class ZipExtraction extends ToolInstaller {
         return subdir;
     }
 
-    public FilePath performInstallation(ToolInstallation tool, Node node, TaskListener log) throws IOException, InterruptedException {
+    public FilePath performInstallation(ToolInstallation tool, Node node, FilePath expectedLocation, TaskListener log) throws IOException, InterruptedException {
         String dirname = tool.getName().replaceAll("[^A-Za-z0-9_.-]+", "_");
         FilePath dir = node.getRootPath().child("tools").child(dirname);
         if (dir.installIfNecessaryFrom(new URL(url), log, "Unpacking " + url + " to " + dir + " on " + node.getDisplayName())) {

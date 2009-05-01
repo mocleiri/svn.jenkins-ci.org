@@ -69,7 +69,7 @@ public class InstallerTranslator extends ToolLocationTranslator {
                     // XXX cannot send to project's build log from here
                     LogTaskListener log = new LogTaskListener(LOG, Level.INFO);
                     try {
-                        result = installer.performInstallation(tool, node, log);
+                        result = installer.performInstallation(tool, node, node.createPath(tool.getHome()), log);
                     } finally {
                         log.close();
                     }
