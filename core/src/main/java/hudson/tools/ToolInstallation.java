@@ -98,6 +98,7 @@ public abstract class ToolInstallation implements Serializable, Describable<Tool
         }
     }
 
+    // helper function necessary to avoid a warning
     private <T extends ToolInstallation> void _setTool(ToolProperty<T> prop, ToolInstallation t) {
         prop.setTool(prop.type().cast(t));
     }
