@@ -39,6 +39,11 @@ public abstract class ToolProperty<T extends ToolInstallation> implements Descri
     }
 
     /**
+     * What is your 'T'?
+     */
+    public abstract Class<T> type();
+
+    /**
      * Lists up all the registered {@link ToolPropertyDescriptor}s in the system.
      *
      * @see ToolDescriptor#getPropertyDescriptors() 

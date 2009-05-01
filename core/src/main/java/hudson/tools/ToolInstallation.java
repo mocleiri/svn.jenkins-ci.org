@@ -93,9 +93,13 @@ public abstract class ToolInstallation implements Serializable, Describable<Tool
         this.home = home;
         if(properties!=null) {
             this.properties.replaceBy(properties);
-            for (ToolProperty p : properties)
-                p.setTool(this);
+            for (ToolProperty<?> p : properties)
+                _setTool(p,this);
         }
+    }
+
+    private <T extends ToolInstallation> void _setTool(ToolProperty<T> prop, ToolInstallation t) {
+        prop.setTool(prop.type().cast(t));
     }
 
     /**
