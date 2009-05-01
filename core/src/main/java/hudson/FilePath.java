@@ -899,13 +899,8 @@ public final class FilePath implements Serializable {
         if(!isUnix())   return;
         act(new FileCallable<Void>() {
             public Void invoke(File f, VirtualChannel channel) throws IOException {
-                if(Functions.isMustangOrAbove()) {
-                    if(!f.setExecutable(true))
-                        throw new IOException("Failed to chmod "+f);
-                } else {
-                    if(LIBC.chmod(f.getAbsolutePath(),mask)!=0)
-                        throw new IOException("Failed to chmod "+f+" : "+LIBC.strerror(Native.getLastError()));
-                }
+                if(LIBC.chmod(f.getAbsolutePath(),mask)!=0)
+                    throw new IOException("Failed to chmod "+f+" : "+LIBC.strerror(Native.getLastError()));
                 return null;
             }
         });
