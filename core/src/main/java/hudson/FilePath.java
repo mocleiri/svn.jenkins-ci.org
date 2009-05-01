@@ -40,7 +40,7 @@ import hudson.remoting.RemoteInputStream;
 import hudson.util.IOException2;
 import hudson.util.HeadBufferingStream;
 import hudson.util.FormValidation;
-import hudson.util.jna.GNUCLibrary;
+import static hudson.util.jna.GNUCLibrary.LIBC;
 import static hudson.Util.fixEmpty;
 import static hudson.FilePath.TarCompression.GZIP;
 import org.apache.tools.ant.BuildException;
@@ -87,6 +87,8 @@ import java.util.concurrent.TimeoutException;
 import java.util.zip.GZIPOutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipInputStream;
+
+import com.sun.jna.Native;
 
 /**
  * {@link File} like object with remoting support.
@@ -887,6 +889,24 @@ public final class FilePath implements Serializable {
     }
 
     /**
+     * Sets the file permission.
+     *
+     * On Windows, no-op.
+     *
+     * @since 1.303
+     */
+    public void chmod(final int mask) throws IOException, InterruptedException {
+        if(!isUnix())   return;
+        act(new FileCallable<Void>() {
+            public Void invoke(File f, VirtualChannel channel) throws IOException {
+                if(LIBC.chmod(f.getAbsolutePath(),mask)!=0)
+                    throw new IOException("Failed to chmod "+f+" : "+LIBC.strerror(Native.getLastError()));
+                return null;
+            }
+        });
+    }
+
+    /**
      * List up files and directories in this directory.
      *
      * <p>
@@ -1287,7 +1307,7 @@ public final class FilePath implements Serializable {
                     f.setLastModified(te.getModTime().getTime());
                     int mode = te.getMode()&0777;
                     if(mode!=0 && !Hudson.isWindows()) // be defensive
-                        GNUCLibrary.LIBC.chmod(f.getPath(),mode);
+                        LIBC.chmod(f.getPath(),mode);
                 }
             }
         } catch(IOException e) {
