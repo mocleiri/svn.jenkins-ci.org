@@ -47,35 +47,23 @@ import org.kohsuke.stapler.DataBoundConstructor;
  */
 public abstract class ToolInstaller implements Describable<ToolInstaller>, ExtensionPoint {
 
-    private final String toolName;
     private final String label;
+
+    protected transient ToolInstallation tool;
 
     /**
      * Subclasses should pass these parameters in using {@link DataBoundConstructor}.
      */
-    protected ToolInstaller(String toolName, String label) {
-        this.toolName = toolName;
+    protected ToolInstaller(String label) {
         this.label = Util.fixEmptyAndTrim(label);
     }
 
     /**
-     * Associated tool name.
+     * Called during the initialization to tell {@link ToolInstaller} what {@link ToolInstallation}
+     * it is configured against.
      */
-    public final String getToolName() {
-        return toolName;
-    }
-
-    /**
-     * Names of all registered tools.
-     */
-    public static List<String> allToolNames() {
-        List<String> names = new ArrayList<String>();
-        for (ToolDescriptor d : ToolInstallation.all()) {
-            for (ToolInstallation t : d.getInstallations()) {
-                names.add(t.getName());
-            }
-        }
-        return names;
+    protected void setTool(ToolInstallation t) {
+        this.tool = t;
     }
 
     /**
@@ -84,14 +72,6 @@ public abstract class ToolInstaller implements Describable<ToolInstaller>, Exten
      */
     public final String getLabel() {
         return label;
-    }
-
-    /**
-     * Checks whether this installer can be applied to a given tool.
-     * (By default, just checks the tool name.)
-     */
-    public boolean appliesTo(ToolInstallation tool) {
-        return tool.getName().equals(toolName);
     }
 
     /**
@@ -106,7 +86,7 @@ public abstract class ToolInstaller implements Describable<ToolInstaller>, Exten
     /**
      * Ensure that the configured tool is really installed.
      * If it is already installed, do nothing.
-     * Called only if {@link #appliesTo(ToolInstallation)} and {@link #appliesTo(Node)} are true.
+     * Called only if {@link #appliesTo(Node)} are true.
      * @param tool the tool being installed
      * @param node the computer on which to install the tool
      * @param log any status messages produced by the installation go here
@@ -119,5 +99,4 @@ public abstract class ToolInstaller implements Describable<ToolInstaller>, Exten
     public ToolInstallerDescriptor<?> getDescriptor() {
         return (ToolInstallerDescriptor) Hudson.getInstance().getDescriptor(getClass());
     }
-
 }

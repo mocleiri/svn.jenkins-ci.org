@@ -52,8 +52,8 @@ public class CommandExtraction extends ToolInstaller {
     private final String toolHome;
 
     @DataBoundConstructor
-    public CommandExtraction(String toolName, String label, String command, String toolHome) {
-        super(toolName, label);
+    public CommandExtraction(String label, String command, String toolHome) {
+        super(label);
         this.command = command;
         this.toolHome = toolHome;
     }

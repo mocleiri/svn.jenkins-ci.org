@@ -21,35 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package hudson.plugins.toolautoinst;
 
-import hudson.Plugin;
-import hudson.model.Descriptor;
-import hudson.model.Descriptor.FormException;
-import hudson.model.Hudson;
+import hudson.tools.ToolInstallation;
+import hudson.tools.ToolProperty;
+import hudson.tools.ToolPropertyDescriptor;
+import hudson.Extension;
 import hudson.util.DescribableList;
+import hudson.model.Descriptor;
+import hudson.model.Saveable;
+import org.kohsuke.stapler.DataBoundConstructor;
+
+import java.util.List;
 import java.io.IOException;
-import javax.servlet.ServletException;
-import net.sf.json.JSONObject;
-import org.kohsuke.stapler.StaplerRequest;
 
-public class PluginImpl extends Plugin {
+/**
+ * {@link ToolProperty} that shows auto installation options.
+ *
+ * @author Kohsuke Kawaguchi
+ */
+public class InstallSourceProperty extends ToolProperty<ToolInstallation> {
+    // TODO: get the proper Saveable
+    public final DescribableList<ToolInstaller, Descriptor<ToolInstaller>> installers =
+            new DescribableList<ToolInstaller, Descriptor<ToolInstaller>>(Saveable.NOOP);
 
-    public DescribableList<ToolInstaller, Descriptor<ToolInstaller>> installers =
-            new DescribableList<ToolInstaller, Descriptor<ToolInstaller>>(this);
-
-    @Override
-    public void start() throws Exception {
-        super.start();
-        load();
+    @DataBoundConstructor
+    public InstallSourceProperty(List<ToolInstaller> installers) throws IOException {
+        this.installers.replaceBy(installers);
     }
 
     @Override
-    public void configure(StaplerRequest req, JSONObject formData) throws IOException, ServletException, FormException {
-        super.configure(req, formData);
-        installers.rebuildHetero(req, formData, Hudson.getInstance().getDescriptorList(ToolInstaller.class), "installers");
-        save();
+    public void setTool(ToolInstallation t) {
+        super.setTool(t);
+        for (ToolInstaller installer : installers)
+            installer.setTool(t);
     }
 
+    public Class<ToolInstallation> type() {
+        return ToolInstallation.class;
+    }
+
+    @Extension
+   public static class DescriptorImpl extends ToolPropertyDescriptor {
+        public String getDisplayName() {
+            return "Install automatically";
+        }
+    }
 }

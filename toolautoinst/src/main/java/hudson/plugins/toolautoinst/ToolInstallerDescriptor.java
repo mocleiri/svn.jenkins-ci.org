@@ -25,16 +25,41 @@
 package hudson.plugins.toolautoinst;
 
 import hudson.DescriptorExtensionList;
+import hudson.tools.ToolInstallation;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
+
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Descriptor for a {@link ToolInstaller}.
  */
 public abstract class ToolInstallerDescriptor<T extends ToolInstaller> extends Descriptor<ToolInstaller> {
 
-    public static DescriptorExtensionList all() {
+    /**
+     * Controls what kind of {@link ToolInstallation} this installer can be applied to.
+     *
+     * <p>
+     * By default, this method just returns true to everything, claiming it's applicable to any tool installations.
+     */
+    public boolean isApplicable(Class<? extends ToolInstallation> toolType) {
+        return true;
+    }
+
+    public static DescriptorExtensionList<ToolInstaller,ToolInstallerDescriptor<?>> all() {
         return Hudson.getInstance().getDescriptorList(ToolInstaller.class);
+    }
+
+    /**
+     * Filters {@link #all()} by eliminating things that are not applicable to the given type.
+     */
+    public static List<ToolInstallerDescriptor<?>> for_(Class<? extends ToolInstallation> type) {
+        List<ToolInstallerDescriptor<?>> r = new ArrayList<ToolInstallerDescriptor<?>>();
+        for (ToolInstallerDescriptor<?> d : all())
+            if(d.isApplicable(type))
+                r.add(d);
+        return r;
     }
 
 }

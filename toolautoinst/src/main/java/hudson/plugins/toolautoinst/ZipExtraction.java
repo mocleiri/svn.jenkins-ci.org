@@ -57,8 +57,8 @@ public class ZipExtraction extends ToolInstaller {
     private final String subdir;
 
     @DataBoundConstructor
-    public ZipExtraction(String toolName, String label, String url, String subdir) {
-        super(toolName, label);
+    public ZipExtraction(String label, String url, String subdir) {
+        super(label);
         this.url = url;
         this.subdir = Util.fixEmptyAndTrim(subdir);
     }

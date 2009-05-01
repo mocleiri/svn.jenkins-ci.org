@@ -26,7 +26,6 @@ package hudson.plugins.toolautoinst;
 
 import hudson.Extension;
 import hudson.FilePath;
-import hudson.model.Hudson;
 import hudson.model.Node;
 import hudson.tools.ToolInstallation;
 import hudson.tools.ToolLocationTranslator;
@@ -46,8 +45,11 @@ public class InstallerTranslator extends ToolLocationTranslator {
     private static final Map<Node,Map<ToolInstallation,Semaphore>> mutexByNode = new WeakHashMap<Node,Map<ToolInstallation,Semaphore>>();
 
     public String getToolHome(Node node, ToolInstallation tool) {
-        for (ToolInstaller installer : Hudson.getInstance().getPlugin(PluginImpl.class).installers) {
-            if (installer.appliesTo(tool) && installer.appliesTo(node)) {
+        InstallSourceProperty isp = tool.getProperties().get(InstallSourceProperty.class);
+        if(isp==null)   return null;
+
+        for (ToolInstaller installer : isp.installers) {
+            if (installer.appliesTo(node)) {
                 Map<ToolInstallation, Semaphore> mutexByTool = mutexByNode.get(node);
                 if (mutexByTool == null) {
                     mutexByNode.put(node, mutexByTool = new WeakHashMap<ToolInstallation, Semaphore>());
