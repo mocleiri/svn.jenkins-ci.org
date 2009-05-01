@@ -30,14 +30,9 @@ THE SOFTWARE.
     <f:entry title="${%name}" field="name">
       <f:textbox />
     </f:entry>
-
-    <j:set var="status" value="${null}" />
-    <j:if test="${instance!=null and !instance.exists and instance.name!=''}">
-      <j:set var="status" value="${%no.such.JDK}" />
-    </j:if>
-    <f:entry title="JAVA_HOME" description="${status}" field="home">
+    <f:entry title="JAVA_HOME" field="home">
       <f:textbox />
-    </f:entry>
+    </f:entry>   
     <f:descriptorList descriptors="${descriptor.propertyDescriptors}" field="properties" />
     <f:entry title="">
       <div align="right">
