@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.301 API)
+Hudson (Hudson core 1.302 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-25">
+<META NAME="date" CONTENT="2009-05-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.301 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.301 API)";
+        parent.document.title="Hudson (Hudson core 1.302 API)";
     }
 }
 </SCRIPT>
@@ -577,6 +577,15 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Backward compatibility.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCli(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCli</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+      org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handles HTTP requests for duplex channels for CLI.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -4994,6 +5003,30 @@ public void <B>doGc</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doCli(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doCli</H3>
+<PRE>
+public void <B>doCli</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+           throws java.io.IOException,
+                  javax.servlet.ServletException,
+                  java.lang.InterruptedException</PRE>
+<DL>
+<DD>Handles HTTP requests for duplex channels for CLI.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>

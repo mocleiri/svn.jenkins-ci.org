@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Interface hudson.ExtensionPoint (Hudson core 1.301 API)
+Uses of Interface hudson.ExtensionPoint (Hudson core 1.302 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-25">
+<META NAME="date" CONTENT="2009-05-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.ExtensionPoint (Hudson core 1.301 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.ExtensionPoint (Hudson core 1.301 API)";
+        parent.document.title="Uses of Interface hudson.ExtensionPoint (Hudson core 1.302 API)";
     }
 }
 </SCRIPT>
@@ -93,6 +93,10 @@ Packages that use <A HREF="../../hudson/ExtensionPoint.html" title="interface in
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson"><B>hudson</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.cli"><B>hudson.cli</B></A></TD>
+<TD>Server-side CLI commands for Hudson.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.diagnosis"><B>hudson.diagnosis</B></A></TD>
@@ -282,6 +286,55 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decorates <A HREF="../../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> so that one can intercept executions of commands
  and alters the command being executed, such as doing this in fakeroot, sudo, pfexec, etc.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.cli"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A> in <A HREF="../../hudson/cli/package-summary.html">hudson.cli</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../hudson/cli/package-summary.html">hudson.cli</A> that implement <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base class for Hudson CLI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/GroovyshCommand.html" title="class in hudson.cli">GroovyshCommand</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes Groovy shell.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/HelpCommand.html" title="class in hudson.cli">HelpCommand</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the list of all commands.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/VersionCommand.html" title="class in hudson.cli">VersionCommand</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shows the version.</TD>
 </TR>
 </TABLE>
 &nbsp;
