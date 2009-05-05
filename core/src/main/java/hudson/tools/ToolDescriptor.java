@@ -25,9 +25,11 @@
 package hudson.tools;
 
 import hudson.model.Descriptor;
+import hudson.util.DescribableList;
 
 import java.util.Collections;
 import java.util.List;
+import java.io.IOException;
 
 /**
  * {@link Descriptor} for {@link ToolInstallation}.
@@ -72,8 +74,22 @@ public abstract class ToolDescriptor<T extends ToolInstallation> extends Descrip
      * they can be returned here for the user's convenience.
      * @since XXX
      */
-    public List<ToolInstaller> getDefaultInstallers() {
+    public List<? extends ToolInstaller> getDefaultInstallers() {
         return Collections.emptyList();
+    }
+
+    /**
+     * Default value for {@link ToolInstallation#getProperties()} used in the form binding.
+     */
+    public DescribableList<ToolProperty<?>,ToolPropertyDescriptor> getDefaultProperties() throws IOException {
+        DescribableList<ToolProperty<?>,ToolPropertyDescriptor> r
+                = new DescribableList<ToolProperty<?>, ToolPropertyDescriptor>(NOOP);
+
+        List<? extends ToolInstaller> installers = getDefaultInstallers();
+        if(!installers.isEmpty())
+            r.add(new InstallSourceProperty(installers));
+
+        return r;
     }
 
 }

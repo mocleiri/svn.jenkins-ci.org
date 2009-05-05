@@ -43,7 +43,7 @@ public class InstallSourceProperty extends ToolProperty<ToolInstallation> {
             new DescribableList<ToolInstaller, Descriptor<ToolInstaller>>(Saveable.NOOP);
 
     @DataBoundConstructor
-    public InstallSourceProperty(List<ToolInstaller> installers) throws IOException {
+    public InstallSourceProperty(List<? extends ToolInstaller> installers) throws IOException {
         this.installers.replaceBy(installers);
     }
 

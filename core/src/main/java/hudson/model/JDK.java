@@ -33,12 +33,16 @@ import hudson.slaves.NodeSpecific;
 import hudson.tools.ToolInstallation;
 import hudson.tools.ToolDescriptor;
 import hudson.tools.ToolProperty;
+import hudson.tools.ToolInstallerDescriptor;
+import hudson.tools.JDKInstaller;
+import hudson.tools.ToolInstaller;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.List;
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
@@ -155,6 +159,11 @@ public final class JDK extends ToolInstallation implements NodeSpecific<JDK>, En
             List<JDK> list = Hudson.getInstance().getJDKs();
             list.clear();
             list.addAll(Arrays.asList(jdks));
+        }
+
+        @Override
+        public List<JDKInstaller> getDefaultInstallers() {
+            return Collections.singletonList(new JDKInstaller(null,false));
         }
 
         /**
