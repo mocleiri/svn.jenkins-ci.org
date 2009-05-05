@@ -154,8 +154,8 @@ public abstract class ToolInstallation implements Serializable, Describable<Tool
     private Object readResolve() {
         if(properties==null)
             properties = new DescribableList<ToolProperty<?>,ToolPropertyDescriptor>(Saveable.NOOP);
-        for (ToolProperty p : properties)
-            p.setTool(this);
+        for (ToolProperty<?> p : properties)
+            _setTool(p, this);
         return this;
     }
 
