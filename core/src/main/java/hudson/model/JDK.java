@@ -64,6 +64,9 @@ public final class JDK extends ToolInstallation implements NodeSpecific<JDK>, En
 
     /**
      * install directory.
+     *
+     * @deprecated as of 1.304
+     *      Use {@link #getHome()}
      */
     public String getJavaHome() {
         return getHome();
@@ -78,7 +81,7 @@ public final class JDK extends ToolInstallation implements NodeSpecific<JDK>, En
      * Gets the path to the bin directory.
      */
     public File getBinDir() {
-        return new File(getJavaHome(),"bin");
+        return new File(getHome(),"bin");
     }
     /**
      * Gets the path to 'java'.
@@ -90,7 +93,7 @@ public final class JDK extends ToolInstallation implements NodeSpecific<JDK>, En
         else
             execName = "java";
 
-        return new File(getJavaHome(),"bin/"+execName);
+        return new File(getHome(),"bin/"+execName);
     }
 
     /**
@@ -106,7 +109,7 @@ public final class JDK extends ToolInstallation implements NodeSpecific<JDK>, En
     public void buildEnvVars(Map<String,String> env) {
         // see EnvVars javadoc for why this adss PATH.
         env.put("PATH+JDK",getBinDir().getPath());
-        env.put("JAVA_HOME",getJavaHome());
+        env.put("JAVA_HOME",getHome());
     }
 
     public JDK forNode(Node node, TaskListener log) throws IOException, InterruptedException {
