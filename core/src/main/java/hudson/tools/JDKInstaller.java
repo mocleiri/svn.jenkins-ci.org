@@ -81,7 +81,8 @@ public class JDKInstaller extends ToolInstaller {
         this.acceptLicense = acceptLicense;
     }
 
-    public FilePath performInstallation(ToolInstallation tool, Node node, FilePath expectedLocation, TaskListener log) throws IOException, InterruptedException {
+    public FilePath performInstallation(ToolInstallation tool, Node node, TaskListener log) throws IOException, InterruptedException {
+        FilePath expectedLocation = node.createPath(tool.getHome());
         PrintStream out = log.getLogger();
         try {
             if(!acceptLicense) {

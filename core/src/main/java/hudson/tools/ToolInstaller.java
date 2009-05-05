@@ -87,19 +87,14 @@ public abstract class ToolInstaller implements Describable<ToolInstaller>, Exten
      * @param tool the tool being installed
      * @param node the computer on which to install the tool
      * @param log any status messages produced by the installation go here
-     * @param expectedLocation
-     *      {@link FilePath} that the user configured as {@linkplain ToolInstallation#getHome() the home of this tool}.
-     *      Implementation of this method can choose to do two things; it can completely ignore this value,
-     *      install the tool into some fixed location, then return that from this method. Or it can try to install
-     *      the tool into this directory, to honor user's intention. 
      * @return
      *      The (directory) path at which the tool can be found (like {@link ToolInstallation#getHome})
-     *      As a tip, you can return {@code expectedLocation}
+     *      As a tip, you can return {@code node.createPath(tool.getHome())}
      *      if your implementation wants to skip the installation and behaves as if it was a no-op.
      * @throws IOException if installation fails
      * @throws InterruptedException if communication with a slave is interrupted
      */
-    public abstract FilePath performInstallation(ToolInstallation tool, Node node, FilePath expectedLocation, TaskListener log) throws IOException, InterruptedException;
+    public abstract FilePath performInstallation(ToolInstallation tool, Node node, TaskListener log) throws IOException, InterruptedException;
 
     public ToolInstallerDescriptor<?> getDescriptor() {
         return (ToolInstallerDescriptor) Hudson.getInstance().getDescriptor(getClass());

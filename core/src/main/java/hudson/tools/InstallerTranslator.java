@@ -57,7 +57,7 @@ public class InstallerTranslator extends ToolLocationTranslator {
                 }
                 semaphore.acquire();
                 try {
-                    return installer.performInstallation(tool, node, node.createPath(tool.getHome()), log).getRemote();
+                    return installer.performInstallation(tool, node, log).getRemote();
                 } finally {
                     semaphore.release();
                 }
