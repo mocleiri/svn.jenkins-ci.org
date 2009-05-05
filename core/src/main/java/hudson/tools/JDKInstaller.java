@@ -332,9 +332,32 @@ public class JDKInstaller extends ToolInstaller {
 
     @Extension
     public static final class DescriptorImpl extends ToolInstallerDescriptor<JDKInstaller> {
+
         public String getDisplayName() {
-            return "Install from java.sun.com";
+            return "Install from java.sun.com"; // XXX I18N
         }
+
+        /* XXX id is always false even when you fill in a value
+        public FormValidation doCheckId(@QueryParameter String id) {
+            if (Util.fixEmpty(id) == null) {
+                return FormValidation.error("Define JDK ID"); // XXX I18N and improve message
+            } else {
+                // XXX further checks?
+                return FormValidation.ok();
+            }
+        }
+         */
+
+        /* XXX never called (and can't figure out how to fix checkbox.jelly to call it)
+        public FormValidation doCheckAcceptLicense(@QueryParameter boolean acceptLicense) {
+            if (acceptLicense) {
+                return FormValidation.ok();
+            } else {
+                return FormValidation.error("You must agree to the license to download the JDK."); // XXX I18N
+            }
+        }
+         */
+
     }
 
     private static final Logger LOGGER = Logger.getLogger(JDKInstaller.class.getName());
