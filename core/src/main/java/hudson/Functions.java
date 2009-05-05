@@ -42,7 +42,6 @@ import hudson.model.Run;
 import hudson.model.TopLevelItem;
 import hudson.model.View;
 import hudson.model.JDK;
-import hudson.model.JDK.DescriptorImpl;
 import hudson.search.SearchableModelObject;
 import hudson.security.AccessControlled;
 import hudson.security.AuthorizationStrategy;
@@ -853,7 +852,7 @@ public class Functions {
      * Converts "abc" to "Abc".
      */
     public static String capitalize(String s) {
-        if(s==null || s.length()==0) return null;
+        if(s==null || s.length()==0) return s;
         return Character.toUpperCase(s.charAt(0))+s.substring(1);
     }
 
