@@ -38,7 +38,7 @@ import org.kohsuke.stapler.QueryParameter;
 /**
  * Installs a tool by running an arbitrary shell command.
  */
-public class CommandExtraction extends ToolInstaller {
+public class CommandInstaller extends ToolInstaller {
 
     /**
      * Command to execute, similar to {@link CommandInterpreter#command}.
@@ -51,7 +51,7 @@ public class CommandExtraction extends ToolInstaller {
     private final String toolHome;
 
     @DataBoundConstructor
-    public CommandExtraction(String label, String command, String toolHome) {
+    public CommandInstaller(String label, String command, String toolHome) {
         super(label);
         this.command = command;
         this.toolHome = toolHome;
@@ -83,17 +83,17 @@ public class CommandExtraction extends ToolInstaller {
     }
 
     @Extension
-    public static class DescriptorImpl extends ToolInstallerDescriptor<CommandExtraction> {
+    public static class DescriptorImpl extends ToolInstallerDescriptor<CommandInstaller> {
 
         public String getDisplayName() {
-            return Messages.CommandExtraction_DescriptorImpl_displayName();
+            return Messages.CommandInstaller_DescriptorImpl_displayName();
         }
 
         public FormValidation doCheckCommand(@QueryParameter String value) {
             if (value.length() > 0) {
                 return FormValidation.ok();
             } else {
-                return FormValidation.error(Messages.CommandExtraction_no_command());
+                return FormValidation.error(Messages.CommandInstaller_no_command());
             }
         }
 
@@ -101,7 +101,7 @@ public class CommandExtraction extends ToolInstaller {
             if (value.length() > 0) {
                 return FormValidation.ok();
             } else {
-                return FormValidation.error(Messages.CommandExtraction_no_toolHome());
+                return FormValidation.error(Messages.CommandInstaller_no_toolHome());
             }
         }
 

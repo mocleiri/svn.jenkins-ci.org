@@ -44,7 +44,7 @@ import org.kohsuke.stapler.QueryParameter;
 /**
  * Installs a tool into the Hudson working area by downloading and unpacking a ZIP file.
  */
-public class ZipExtraction extends ToolInstaller {
+public class ZipExtractionInstaller extends ToolInstaller {
 
     /**
      * URL of a ZIP file which should be downloaded in case the tool is missing.
@@ -56,7 +56,7 @@ public class ZipExtraction extends ToolInstaller {
     private final String subdir;
 
     @DataBoundConstructor
-    public ZipExtraction(String label, String url, String subdir) {
+    public ZipExtractionInstaller(String label, String url, String subdir) {
         super(label);
         this.url = url;
         this.subdir = Util.fixEmptyAndTrim(subdir);
@@ -84,10 +84,10 @@ public class ZipExtraction extends ToolInstaller {
     }
 
     @Extension
-    public static class DescriptorImpl extends ToolInstallerDescriptor<ZipExtraction> {
+    public static class DescriptorImpl extends ToolInstallerDescriptor<ZipExtractionInstaller> {
 
         public String getDisplayName() {
-            return Messages.ZipExtraction_DescriptorImpl_displayName();
+            return Messages.ZipExtractionInstaller_DescriptorImpl_displayName();
         }
 
         public FormValidation doCheckUrl(@QueryParameter String value) {
@@ -96,14 +96,14 @@ public class ZipExtraction extends ToolInstaller {
                 conn.connect();
                 if (conn instanceof HttpURLConnection) {
                     if (((HttpURLConnection) conn).getResponseCode() != HttpURLConnection.HTTP_OK) {
-                        return FormValidation.error(Messages.ZipExtraction_bad_connection());
+                        return FormValidation.error(Messages.ZipExtractionInstaller_bad_connection());
                     }
                 }
                 return FormValidation.ok();
             } catch (MalformedURLException x) {
-                return FormValidation.error(Messages.ZipExtraction_malformed_url());
+                return FormValidation.error(Messages.ZipExtractionInstaller_malformed_url());
             } catch (IOException x) {
-                return FormValidation.error(Messages.ZipExtraction_could_not_connect());
+                return FormValidation.error(Messages.ZipExtractionInstaller_could_not_connect());
             }
         }
 
