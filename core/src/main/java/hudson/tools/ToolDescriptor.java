@@ -80,6 +80,7 @@ public abstract class ToolDescriptor<T extends ToolInstallation> extends Descrip
 
     /**
      * Default value for {@link ToolInstallation#getProperties()} used in the form binding.
+     * @since XXX
      */
     public DescribableList<ToolProperty<?>,ToolPropertyDescriptor> getDefaultProperties() throws IOException {
         DescribableList<ToolProperty<?>,ToolPropertyDescriptor> r
