@@ -177,7 +177,7 @@ public abstract class Plugin implements Saveable {
      * <p>
      * If you are using this method, you'll likely be interested in
      * using {@link #save()} and {@link #load()}.
-     * @since 1.301
+     * @since XXX
      */
     public void configure(StaplerRequest req, JSONObject formData) throws IOException, ServletException, FormException {
         configure(formData);
