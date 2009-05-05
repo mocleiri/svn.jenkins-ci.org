@@ -109,8 +109,8 @@ public final class JDK extends ToolInstallation implements NodeSpecific<JDK>, En
         env.put("JAVA_HOME",getJavaHome());
     }
 
-    public JDK forNode(Node node) {
-        return new JDK(getName(),translateFor(node));
+    public JDK forNode(Node node, TaskListener log) throws IOException, InterruptedException {
+        return new JDK(getName(), translateFor(node, log));
     }
 
     public JDK forEnvironment(EnvVars environment) {

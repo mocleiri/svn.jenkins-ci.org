@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package hudson.tools;
+package hudson.util;
 
 import hudson.model.TaskListener;
 import hudson.util.StreamTaskListener;
@@ -38,7 +38,7 @@ import java.util.logging.Logger;
 /**
  * {@link TaskListener} which sends messages to a {@link Logger}.
  */
-class LogTaskListener implements TaskListener {
+public class LogTaskListener implements TaskListener {
     
     private final TaskListener delegate;
 

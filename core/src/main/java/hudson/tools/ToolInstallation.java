@@ -33,8 +33,8 @@ import hudson.model.EnvironmentSpecific;
 import hudson.model.Hudson;
 import hudson.model.Node;
 import hudson.model.Saveable;
+import hudson.model.TaskListener;
 import hudson.slaves.NodeSpecific;
-import hudson.slaves.NodeProperty;
 import hudson.util.DescribableList;
 
 import java.io.Serializable;
@@ -144,8 +144,8 @@ public abstract class ToolInstallation implements Serializable, Describable<Tool
      *      never null.
      */
     @SuppressWarnings("deprecation")
-    protected String translateFor(Node node) {
-        return ToolLocationNodeProperty.getToolHome(node,this);
+    protected String translateFor(Node node, TaskListener log) throws IOException, InterruptedException {
+        return ToolLocationNodeProperty.getToolHome(node, this, log);
     }
 
     /**

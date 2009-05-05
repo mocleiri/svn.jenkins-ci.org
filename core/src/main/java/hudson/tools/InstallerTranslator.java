@@ -25,13 +25,12 @@
 package hudson.tools;
 
 import hudson.Extension;
-import hudson.FilePath;
 import hudson.model.Node;
+import hudson.model.TaskListener;
+import java.io.IOException;
 import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.Semaphore;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Actually runs installations.
@@ -39,13 +38,13 @@ import java.util.logging.Logger;
 @Extension
 public class InstallerTranslator extends ToolLocationTranslator {
 
-    private static final Logger LOG = Logger.getLogger(InstallerTranslator.class.getName());
     private static final Map<Node,Map<ToolInstallation,Semaphore>> mutexByNode = new WeakHashMap<Node,Map<ToolInstallation,Semaphore>>();
 
-    public String getToolHome(Node node, ToolInstallation tool) {
+    public String getToolHome(Node node, ToolInstallation tool, TaskListener log) throws IOException, InterruptedException {
         InstallSourceProperty isp = tool.getProperties().get(InstallSourceProperty.class);
-        if(isp==null)   return null;
-
+        if (isp == null) {
+            return null;
+        }
         for (ToolInstaller installer : isp.installers) {
             if (installer.appliesTo(node)) {
                 Map<ToolInstallation, Semaphore> mutexByTool = mutexByNode.get(node);
@@ -56,25 +55,9 @@ public class InstallerTranslator extends ToolLocationTranslator {
                 if (semaphore == null) {
                     mutexByTool.put(tool, semaphore = new Semaphore(1));
                 }
+                semaphore.acquire();
                 try {
-                    semaphore.acquire();
-                } catch (InterruptedException x) {
-                    LOG.log(Level.WARNING, null, x);
-                    break;
-                }
-                try {
-                    FilePath result;
-                    // XXX cannot send to project's build log from here
-                    LogTaskListener log = new LogTaskListener(LOG, Level.INFO);
-                    try {
-                        result = installer.performInstallation(tool, node, node.createPath(tool.getHome()), log);
-                    } finally {
-                        log.close();
-                    }
-                    return result.getRemote();
-                } catch (Exception x) {
-                    LOG.log(Level.WARNING, "Failed to install " + tool.getName() + " on " + node.getDisplayName(), x);
-                    break;
+                    return installer.performInstallation(tool, node, node.createPath(tool.getHome()), log).getRemote();
                 } finally {
                     semaphore.release();
                 }
