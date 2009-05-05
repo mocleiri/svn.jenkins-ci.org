@@ -26,6 +26,7 @@ package hudson.tools;
 
 import hudson.model.Descriptor;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -64,4 +65,15 @@ public abstract class ToolDescriptor<T extends ToolInstallation> extends Descrip
     public List<ToolPropertyDescriptor> getPropertyDescriptors() {
         return PropertyDescriptor.for_(ToolProperty.all(),clazz);
     }
+
+    /**
+     * Optional list of installers to be configured by default for new tools of this type.
+     * If there are popular versions of the tool available using generic installation techniques,
+     * they can be returned here for the user's convenience.
+     * @since XXX
+     */
+    public List<ToolInstaller> getDefaultInstallers() {
+        return Collections.emptyList();
+    }
+
 }
