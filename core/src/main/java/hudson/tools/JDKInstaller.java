@@ -32,6 +32,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import hudson.AbortException;
 import hudson.Extension;
 import hudson.FilePath;
+import hudson.Util;
+import hudson.util.FormValidation;
 import hudson.FilePath.FileCallable;
 import hudson.model.Node;
 import hudson.model.TaskListener;
@@ -39,6 +41,7 @@ import static hudson.tools.JDKInstaller.Preference.*;
 import hudson.remoting.Callable;
 import hudson.remoting.VirtualChannel;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.QueryParameter;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -337,26 +340,22 @@ public class JDKInstaller extends ToolInstaller {
             return "Install from java.sun.com"; // XXX I18N
         }
 
-        /* XXX id is always false even when you fill in a value
-        public FormValidation doCheckId(@QueryParameter String id) {
-            if (Util.fixEmpty(id) == null) {
+        public FormValidation doCheckId(@QueryParameter String value) {
+            if (Util.fixEmpty(value) == null) {
                 return FormValidation.error("Define JDK ID"); // XXX I18N and improve message
             } else {
                 // XXX further checks?
                 return FormValidation.ok();
             }
         }
-         */
 
-        /* XXX never called (and can't figure out how to fix checkbox.jelly to call it)
-        public FormValidation doCheckAcceptLicense(@QueryParameter boolean acceptLicense) {
-            if (acceptLicense) {
+        public FormValidation doCheckAcceptLicense(@QueryParameter boolean value) {
+            if (value) {
                 return FormValidation.ok();
             } else {
                 return FormValidation.error("You must agree to the license to download the JDK."); // XXX I18N
             }
         }
-         */
 
     }
 
