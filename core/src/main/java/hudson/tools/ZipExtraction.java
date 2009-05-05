@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package hudson.plugins.toolautoinst;
+package hudson.tools;
 
 import hudson.Extension;
 import hudson.FilePath;
@@ -31,7 +31,6 @@ import hudson.Util;
 import hudson.model.Node;
 import hudson.model.TaskListener;
 import hudson.remoting.VirtualChannel;
-import hudson.tools.ToolInstallation;
 import hudson.util.FormValidation;
 import java.io.File;
 import java.io.IOException;

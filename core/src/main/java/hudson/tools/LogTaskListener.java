@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package hudson.plugins.toolautoinst;
+package hudson.tools;
 
 import hudson.model.TaskListener;
 import hudson.util.StreamTaskListener;

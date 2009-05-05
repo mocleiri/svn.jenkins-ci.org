@@ -21,11 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package hudson.plugins.toolautoinst;
+package hudson.tools;
 
-import hudson.tools.ToolInstallation;
-import hudson.tools.ToolProperty;
-import hudson.tools.ToolPropertyDescriptor;
 import hudson.Extension;
 import hudson.util.DescribableList;
 import hudson.model.Descriptor;

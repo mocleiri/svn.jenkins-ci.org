@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package hudson.plugins.toolautoinst;
+package hudson.tools;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -35,10 +35,9 @@ import hudson.FilePath;
 import hudson.FilePath.FileCallable;
 import hudson.model.Node;
 import hudson.model.TaskListener;
-import static hudson.plugins.toolautoinst.JDKInstaller.Preference.*;
+import static hudson.tools.JDKInstaller.Preference.*;
 import hudson.remoting.Callable;
 import hudson.remoting.VirtualChannel;
-import hudson.tools.ToolInstallation;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.ByteArrayInputStream;

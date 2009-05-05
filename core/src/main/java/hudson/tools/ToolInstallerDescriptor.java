@@ -22,10 +22,9 @@
  * THE SOFTWARE.
  */
 
-package hudson.plugins.toolautoinst;
+package hudson.tools;
 
 import hudson.DescriptorExtensionList;
-import hudson.tools.ToolInstallation;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
 

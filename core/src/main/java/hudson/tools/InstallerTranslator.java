@@ -22,13 +22,11 @@
  * THE SOFTWARE.
  */
 
-package hudson.plugins.toolautoinst;
+package hudson.tools;
 
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.model.Node;
-import hudson.tools.ToolInstallation;
-import hudson.tools.ToolLocationTranslator;
 import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.Semaphore;

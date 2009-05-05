@@ -21,13 +21,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
-<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form" xmlns:st="jelly:stapler">
-    <st:documentation>
-        Puts the input field for allowing an user to limit this installer to a certain label.
-        Meant to be used from config.jelly of ToolInstaller subypes. 
-    </st:documentation>
-    <f:entry title="${%Label}" field="label" help="/plugin/toolautoinst/help-label.html">
-        <!-- XXX could use Hudson.getLabels and make a combo box -->
-        <f:textbox/>
-    </f:entry>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+  <!-- XXX t:label? -->
+  <f:entry title="${%ID}" field="id">
+    <!-- TODO: change it to dropdown -->
+    <f:textbox/>
+  </f:entry>
+  <f:entry title="" field="acceptLicense">
+    <f:checkbox/>
+    <label class="attach-previous">I agree to the Java SE Development Kit License Agreement</label>
+  </f:entry>
 </j:jelly>

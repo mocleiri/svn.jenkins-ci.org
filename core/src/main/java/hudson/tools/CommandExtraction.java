@@ -22,14 +22,13 @@
  * THE SOFTWARE.
  */
 
-package hudson.plugins.toolautoinst;
+package hudson.tools;
 
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.model.Node;
 import hudson.model.TaskListener;
 import hudson.tasks.CommandInterpreter;
-import hudson.tools.ToolInstallation;
 import hudson.util.FormValidation;
 import java.io.IOException;
 import java.util.Collections;

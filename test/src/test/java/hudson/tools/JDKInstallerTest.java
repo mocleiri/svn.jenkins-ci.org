@@ -1,4 +1,4 @@
-package hudson.plugins.toolautoinst;
+package hudson.tools;
 
 import org.jvnet.hudson.test.HudsonTestCase;
 import hudson.model.JDK;

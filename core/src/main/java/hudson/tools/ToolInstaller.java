@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package hudson.plugins.toolautoinst;
+package hudson.tools;
 
 import hudson.ExtensionPoint;
 import hudson.FilePath;
@@ -32,11 +32,7 @@ import hudson.model.Hudson;
 import hudson.model.Label;
 import hudson.model.Node;
 import hudson.model.TaskListener;
-import hudson.tools.ToolDescriptor;
-import hudson.tools.ToolInstallation;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
@@ -44,6 +40,7 @@ import org.kohsuke.stapler.DataBoundConstructor;
  * The subclass should have a {@link ToolInstallerDescriptor}.
  * A {@code config.jelly} should be provided to customize specific fields;
  * {@code <st:include page="config-base.jelly"/>} to customize {@code toolName} and {@code label}.
+ * @see <a href="http://wiki.hudson-ci.org/display/HUDSON/Tool+Auto-Installation">Tool Auto-Installation</a>
  */
 public abstract class ToolInstaller implements Describable<ToolInstaller>, ExtensionPoint {
 
