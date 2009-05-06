@@ -36,13 +36,12 @@ JSONArray all = new JSONArray();
     return new JSONObject().accumulate("name",f.name).accumulate("list",listFamily(p,f));
 }
 
-json = new JSONObject().accumulate("jdks",all).toString(2);
-
-System.out.println(json);
+envelope = new JSONObject().accumulate("jdks", all)
+System.out.println(envelope.toString(2));
 
 if(project!=null) {
-    // if we run from GMaven during a build, put that out in a file as well
-    new File(project.basedir,"target/jdk-list.json").write(json); 
+    // if we run from GMaven during a build, put that out in a file as well, with the JSONP support
+    new File(project.basedir,"target/jdk-list.json").write("post('https://hudson.dev.java.net/jdk.json',${envelope.toString()})");
 }
 
 JSONArray listFamily(HtmlPage p, Family f) throws Exception {
