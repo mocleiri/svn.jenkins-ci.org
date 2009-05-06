@@ -41,7 +41,7 @@ System.out.println(envelope.toString(2));
 
 if(project!=null) {
     // if we run from GMaven during a build, put that out in a file as well, with the JSONP support
-    new File(project.basedir,"target/jdk-list.json").write("post('https://hudson.dev.java.net/jdk.json',${envelope.toString()})");
+    new File(project.basedir,"target/jdk-list.json").write("listOfJDKs(${envelope.toString()})");
 }
 
 JSONArray listFamily(HtmlPage p, Family f) throws Exception {
