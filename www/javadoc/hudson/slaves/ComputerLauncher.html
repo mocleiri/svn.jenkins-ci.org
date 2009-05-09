@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ComputerLauncher (Hudson core 1.303 API)
+ComputerLauncher (Hudson core 1.304 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-03">
+<META NAME="date" CONTENT="2009-05-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ComputerLauncher (Hudson core 1.303 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ComputerLauncher (Hudson core 1.303 API)";
+        parent.document.title="ComputerLauncher (Hudson core 1.304 API)";
     }
 }
 </SCRIPT>
@@ -203,6 +203,16 @@ Extension point to allow control over how <A HREF="../../hudson/model/Computer.h
                 <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.304
+  Use <A HREF="../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>afterDisconnect(SlaveComputer, TaskListener)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">afterDisconnect</A></B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+                <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows the <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> to tidy-up after a disconnect.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -210,6 +220,16 @@ Extension point to allow control over how <A HREF="../../hudson/model/Computer.h
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">beforeDisconnect</A></B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
                  <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.304
+  Use <A HREF="../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>beforeDisconnect(SlaveComputer, TaskListener)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">beforeDisconnect</A></B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+                 <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows the <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> to prepare for a disconnect.</TD>
@@ -233,9 +253,19 @@ Extension point to allow control over how <A HREF="../../hudson/model/Computer.h
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;void</CODE></FONT></TD>
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">launch</A></B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
        <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.304
+  Use <A HREF="../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>launch(SlaveComputer, TaskListener)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">launch</A></B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+       <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launches the slave agent for the given <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.</TD>
@@ -320,13 +350,13 @@ public boolean <B>isLaunchSupported</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)"><!-- --></A><H3>
+<A NAME="launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public abstract void <B>launch</B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-                            <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)
-                     throws java.io.IOException,
-                            java.lang.InterruptedException</PRE>
+public void <B>launch</B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+                   <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
+            throws java.io.IOException,
+                   java.lang.InterruptedException</PRE>
 <DL>
 <DD>Launches the slave agent for the given <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.
 
@@ -354,13 +384,71 @@ public abstract void <B>launch</B>(<A HREF="../../hudson/slaves/SlaveComputer.ht
 </DL>
 <HR>
 
+<A NAME="launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)"><!-- --></A><H3>
+launch</H3>
+<PRE>
+public void <B>launch</B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+                   <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)
+            throws java.io.IOException,
+                   java.lang.InterruptedException</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.304
+  Use <A HREF="../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>launch(SlaveComputer, TaskListener)</CODE></A></I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><!-- --></A><H3>
+afterDisconnect</H3>
+<PRE>
+public void <B>afterDisconnect</B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+                            <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</PRE>
+<DL>
+<DD>Allows the <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> to tidy-up after a disconnect.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="afterDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)"><!-- --></A><H3>
 afterDisconnect</H3>
 <PRE>
 public void <B>afterDisconnect</B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
                             <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</PRE>
 <DL>
-<DD>Allows the <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> to tidy-up after a disconnect.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.304
+  Use <A HREF="../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>afterDisconnect(SlaveComputer, TaskListener)</CODE></A></I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><!-- --></A><H3>
+beforeDisconnect</H3>
+<PRE>
+public void <B>beforeDisconnect</B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+                             <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</PRE>
+<DL>
+<DD>Allows the <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> to prepare for a disconnect.
 <P>
 <DD><DL>
 </DL>
@@ -377,7 +465,8 @@ beforeDisconnect</H3>
 public void <B>beforeDisconnect</B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
                              <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</PRE>
 <DL>
-<DD>Allows the <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> to prepare for a disconnect.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.304
+  Use <A HREF="../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>beforeDisconnect(SlaveComputer, TaskListener)</CODE></A></I>
 <P>
 <DD><DL>
 </DL>
