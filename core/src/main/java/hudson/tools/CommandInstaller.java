@@ -45,24 +45,14 @@ public class CommandInstaller extends ToolInstaller {
      */
     private final String command;
 
-    /**
-     * Resulting tool home directory.
-     */
-    private final String toolHome;
-
     @DataBoundConstructor
-    public CommandInstaller(String label, String command, String toolHome) {
+    public CommandInstaller(String label, String command) {
         super(label);
         this.command = command;
-        this.toolHome = toolHome;
     }
 
     public String getCommand() {
         return command;
-    }
-
-    public String getToolHome() {
-        return toolHome;
     }
 
     public FilePath performInstallation(ToolInstallation tool, Node node, TaskListener log) throws IOException, InterruptedException {
@@ -79,7 +69,7 @@ public class CommandInstaller extends ToolInstaller {
         } finally {
             script.delete();
         }
-        return tools.child(toolHome);
+        return node.createPath(tool.getHome());
     }
 
     @Extension
@@ -96,15 +86,6 @@ public class CommandInstaller extends ToolInstaller {
                 return FormValidation.error(Messages.CommandInstaller_no_command());
             }
         }
-
-        public FormValidation doCheckToolHome(@QueryParameter String value) {
-            if (value.length() > 0) {
-                return FormValidation.ok();
-            } else {
-                return FormValidation.error(Messages.CommandInstaller_no_toolHome());
-            }
-        }
-
     }
 
 }
