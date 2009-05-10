@@ -1443,6 +1443,29 @@ function loadScript(href) {
     document.getElementsByTagName("HEAD")[0].appendChild(s);
 }
 
+var downloadService = {
+    continuations: {},
+
+    download : function(id,url,info, postBack,completionHandler) {
+        this.continuations[id] = {postBack:postBack,completionHandler:completionHandler};
+        loadScript(url+"?"+Hash.toQueryString(info));
+    },
+
+    post : function(id,data) {
+        var o = this.continuations[id];
+        new Ajax.Request(o.postBack, {
+            method:"post",
+            parameters:{json:Object.toJSON(data)},
+            onSuccess: function() {
+                if(o.completionHandler!=null)
+                    o.completionHandler();
+            }
+        });
+    }
+};
+
+// update center service. for historical reasons,
+// this is separate from downloadSerivce
 var updateCenter = {
     postBackURL : null,
     info: {},
