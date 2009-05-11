@@ -60,7 +60,7 @@ import java.util.List;
  *
  * <p>
  * Implementations of this class are strongly encouraged to also implement {@link NodeSpecific}
- * (by using {@link #translateFor(Node)}) and
+ * (by using {@link #translateFor(Node, TaskListener)}) and
  * {@link EnvironmentSpecific} (by using {@link EnvVars#expand(String)}.)
  *
  * <p>
@@ -88,13 +88,17 @@ public abstract class ToolInstallation implements Serializable, Describable<Tool
         this.home = home;
     }
 
-    public ToolInstallation(String name, String home, List<? extends ToolProperty<?>> properties) throws IOException {
+    public ToolInstallation(String name, String home, List<? extends ToolProperty<?>> properties) {
         this.name = name;
         this.home = home;
         if(properties!=null) {
-            this.properties.replaceBy(properties);
-            for (ToolProperty<?> p : properties)
-                _setTool(p,this);
+            try {
+                this.properties.replaceBy(properties);
+                for (ToolProperty<?> p : properties)
+                    _setTool(p,this);
+            } catch (IOException e) {
+                throw new AssertionError(e); // no Saveable, so can't happen
+            }
         }
     }
 
@@ -137,7 +141,7 @@ public abstract class ToolInstallation implements Serializable, Describable<Tool
      * Otherwise returns {@code installation.getHome()}.
      *
      * <p>
-     * This is the core logic behind {@link NodeSpecific#forNode(Node)} for {@link ToolInstallation},
+     * This is the core logic behind {@link NodeSpecific#forNode(Node, TaskListener)} for {@link ToolInstallation},
      * and meant to be used by the {@code forNode} implementations.
      *
      * @return

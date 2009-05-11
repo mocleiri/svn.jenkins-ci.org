@@ -10,6 +10,9 @@ import org.kohsuke.stapler.Stapler;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
+
+import net.sf.json.JSONObject;
 
 /**
  * Service for plugins to periodically retrieve update data files
@@ -64,7 +67,7 @@ public class DownloadService extends PageDecorator {
     public static abstract class Downloadable implements ExtensionPoint {
         private final String id;
         private final String url;
-        private final int interval;
+        private final long interval;
         private volatile long due=0;
 
         /**
@@ -77,7 +80,7 @@ public class DownloadService extends PageDecorator {
          *      For security and privacy reasons, we don't allow the retrieval
          *      from random locations.
          */
-        protected Downloadable(String id, String url, int interval) {
+        protected Downloadable(String id, String url, long interval) {
             this.id = id;
             this.url = url;
             this.interval = interval;
@@ -100,7 +103,7 @@ public class DownloadService extends PageDecorator {
          * @return
          *      number of milliseconds between retrieval.
          */
-        public int getInterval() {
+        public long getInterval() {
             return interval;
         }
 
@@ -124,7 +127,18 @@ public class DownloadService extends PageDecorator {
         }
 
         /**
-         * This is where the browser sends us the data.
+         * Loads the current file into JSON and returns it, or null
+         * if no data exists.
+         */
+        public JSONObject getData() throws IOException {
+            TextFile df = getDataFile();
+            if(df.exists())
+                return JSONObject.fromObject(df.read());
+            return null;
+        }
+
+        /**
+         * This is where the browser sends us the data. 
          */
         public void doPostBack(@QueryParameter String json) throws IOException {
             long dataTimestamp = System.currentTimeMillis();
@@ -132,6 +146,7 @@ public class DownloadService extends PageDecorator {
             df.write(json);
             df.file.setLastModified(dataTimestamp);
             due = dataTimestamp+getInterval();
+            LOGGER.info("Obtained the updated data file for "+id);
         }
 
         /**
@@ -140,5 +155,7 @@ public class DownloadService extends PageDecorator {
         public static ExtensionList<Downloadable> all() {
             return Hudson.getInstance().getExtensionList(Downloadable.class);
         }
+
+        private static final Logger LOGGER = Logger.getLogger(Downloadable.class.getName());
     }
 }

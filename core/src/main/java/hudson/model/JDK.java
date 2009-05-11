@@ -33,9 +33,7 @@ import hudson.slaves.NodeSpecific;
 import hudson.tools.ToolInstallation;
 import hudson.tools.ToolDescriptor;
 import hudson.tools.ToolProperty;
-import hudson.tools.ToolInstallerDescriptor;
 import hudson.tools.JDKInstaller;
-import hudson.tools.ToolInstaller;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,13 +54,12 @@ public final class JDK extends ToolInstallation implements NodeSpecific<JDK>, En
     @Deprecated // kept for backward compatibility - use getHome() instead
     private String javaHome;
 
-    @Deprecated
     public JDK(String name, String javaHome) {
-        super(name, javaHome);
+        super(name, javaHome, Collections.<ToolProperty<?>>emptyList());
     }
 
     @DataBoundConstructor
-    public JDK(String name, String home, List<? extends ToolProperty<?>> properties) throws IOException {
+    public JDK(String name, String home, List<? extends ToolProperty<?>> properties) {
         super(name, home, properties);
     }
 
@@ -76,6 +73,7 @@ public final class JDK extends ToolInstallation implements NodeSpecific<JDK>, En
         return getHome();
     }
 
+    @SuppressWarnings({"deprecation"})
     public @Override String getHome() {
         if (javaHome != null) return javaHome;
         return super.getHome();

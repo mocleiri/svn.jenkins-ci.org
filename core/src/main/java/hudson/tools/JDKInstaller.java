@@ -34,9 +34,11 @@ import hudson.Extension;
 import hudson.FilePath;
 import hudson.Util;
 import hudson.util.FormValidation;
+import hudson.util.TimeUnit2;
 import hudson.FilePath.FileCallable;
 import hudson.model.Node;
 import hudson.model.TaskListener;
+import hudson.model.DownloadService.Downloadable;
 import static hudson.tools.JDKInstaller.Preference.*;
 import hudson.remoting.Callable;
 import hudson.remoting.VirtualChannel;
@@ -52,9 +54,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Arrays;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import net.sf.json.JSONObject;
 
 /**
  * Install JDKs from java.sun.com.
@@ -333,9 +338,25 @@ public class JDKInstaller extends ToolInstaller {
         }
     }
 
+    public static final class JDKFamilyList {
+        public JDKFamily[] jdks = new JDKFamily[0];
+    }
+
+    public static final class JDKFamily {
+        public String name;
+        public InstallableJDK[] list;
+    }
+
+    public static final class InstallableJDK {
+        public String name;
+        /**
+         * Product code.
+         */
+        public String id;
+    }
+
     @Extension
     public static final class DescriptorImpl extends ToolInstallerDescriptor<JDKInstaller> {
-
         public String getDisplayName() {
             return "Install from java.sun.com"; // XXX I18N
         }
@@ -344,9 +365,17 @@ public class JDKInstaller extends ToolInstaller {
             if (Util.fixEmpty(value) == null) {
                 return FormValidation.error("Define JDK ID"); // XXX I18N and improve message
             } else {
-                // XXX further checks?
+                // XXX further checks? 
                 return FormValidation.ok();
             }
+        }
+
+        /**
+         * List of installable JDKs.
+         * @return never null.
+         */
+        public List<JDKFamily> getInstallableJDKs() throws IOException {
+            return Arrays.asList(JDKList.all().get(JDKList.class).toList().jdks);
         }
 
         public FormValidation doCheckAcceptLicense(@QueryParameter boolean value) {
@@ -356,7 +385,22 @@ public class JDKInstaller extends ToolInstaller {
                 return FormValidation.error("You must agree to the license to download the JDK."); // XXX I18N
             }
         }
+    }
 
+    /**
+     * JDK list.
+     */
+    @Extension
+    public static final class JDKList extends Downloadable {
+        public JDKList() {
+            super(JDKInstaller.class.getName(), "jdk.json", TimeUnit2.DAYS.toMillis(1));
+        }
+
+        public JDKFamilyList toList() throws IOException {
+            JSONObject d = getData();
+            if(d==null) return new JDKFamilyList();
+            return (JDKFamilyList)JSONObject.toBean(d,JDKFamilyList.class);
+        }
     }
 
     private static final Logger LOGGER = Logger.getLogger(JDKInstaller.class.getName());
