@@ -44,12 +44,15 @@ import hudson.remoting.Callable;
 import hudson.remoting.VirtualChannel;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
+import org.apache.commons.io.IOUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -129,12 +132,32 @@ public class JDKInstaller extends ToolInstaller {
                 paths.get(0).delete();
                 file.delete();
 
-                marker.touch(System.currentTimeMillis());
                 break;
             case WINDOWS:
-                // TODO: implement this later
-                throw new UnsupportedOperationException();
+                FilePath logFile = node.getRootPath().createTempFile("jdk-install",".log");
+                // JDK6u13 doesn't like path representation like "/tmp/foo", so make it a strict Windows format
+                String normalizedPath = expectedLocation.absolutize().getRemote();
+
+                if(node.createLauncher(log).launch(new String[]{file.getRemote(),"/s","/L",logFile.getRemote(),"/v\"/qn REBOOT=Suppress INSTALLDIR="+normalizedPath+" \""},new String[0],out,expectedLocation).join()!=0) {
+                    out.println("Failed to install JDK");
+                    // log file is in UTF-16
+                    InputStreamReader in = new InputStreamReader(logFile.read(), "UTF-16");
+                    try {
+                        IOUtils.copy(in,new OutputStreamWriter(out));
+                    } finally {
+                        in.close();
+                    }
+                    throw new AbortException();
+                }
+
+                logFile.delete();
+
+                break;
             }
+
+            // successfully installed
+            marker.touch(System.currentTimeMillis());
+
         } catch (DetectionFailedException e) {
             out.println("JDK installation skipped: "+e.getMessage());
         }

@@ -416,6 +416,17 @@ public final class FilePath implements Serializable {
     }
 
     /**
+     * Absolutizes this {@link FilePath} and returns the new one.
+     */
+    public FilePath absolutize() throws IOException, InterruptedException {
+        return new FilePath(channel,act(new FileCallable<String>() {
+            public String invoke(File f, VirtualChannel channel) throws IOException {
+                return f.getAbsolutePath();
+            }
+        }));
+    }
+
+    /**
      * Supported tar file compression methods.
      */
     public enum TarCompression {
