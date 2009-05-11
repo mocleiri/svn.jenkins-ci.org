@@ -35,6 +35,7 @@ import hudson.FilePath;
 import hudson.Util;
 import hudson.util.FormValidation;
 import hudson.util.TimeUnit2;
+import hudson.util.ArgumentListBuilder;
 import hudson.FilePath.FileCallable;
 import hudson.model.Node;
 import hudson.model.TaskListener;
@@ -130,15 +131,42 @@ public class JDKInstaller extends ToolInstaller {
 
                 // clean up
                 paths.get(0).delete();
-                file.delete();
 
                 break;
             case WINDOWS:
+                /*
+                    Windows silent installation is full of bad know-how.
+
+                    On Windows, command line argument to a process at the OS level is a single string,
+                    not a string array like POSIX. When we pass arguments as string array, JRE eventually
+                    turn it into a single string with adding quotes to "the right place". Unfortunately,
+                    with the strange argument layout of InstallShield (like /v/qn" INSTALLDIR=foobar"),
+                    it appears that the escaping done by JRE gets in the way, and prevents the installation.
+                    Presumably because of this, my attempt to use /q/vn" INSTALLDIR=foo" didn't work with JDK5.
+
+                    I tried to locate exactly how InstallShield parses the arguments (and why it uses
+                    awkward option like /qn, but couldn't find any. Instead, experiments revealed that
+                    "/q/vn ARG ARG ARG" works just as well. This is presumably due to the Visual C++ runtime library
+                    (which does single string -> string array conversion to invoke the main method in most Win32 process),
+                    and this consistently worked on JDK5 and JDK4.
+
+                    Some of the official documentations are available at
+                    - http://java.sun.com/j2se/1.5.0/sdksilent.html
+                    - http://java.sun.com/j2se/1.4.2/docs/guide/plugin/developer_guide/silent.html
+                 */
+                // see
+                //
+                
                 FilePath logFile = node.getRootPath().createTempFile("jdk-install",".log");
                 // JDK6u13 doesn't like path representation like "/tmp/foo", so make it a strict Windows format
                 String normalizedPath = expectedLocation.absolutize().getRemote();
 
-                if(node.createLauncher(log).launch(new String[]{file.getRemote(),"/s","/L",logFile.getRemote(),"/v\"/qn REBOOT=Suppress INSTALLDIR="+normalizedPath+" \""},new String[0],out,expectedLocation).join()!=0) {
+                ArgumentListBuilder args = new ArgumentListBuilder();
+                args.add(file.getRemote());
+                args.add("/s");
+                args.add("/v/qn REBOOT=Suppress INSTALLDIR="+normalizedPath+" /L "+logFile.getRemote());
+                
+                if(node.createLauncher(log).launch(args.toCommandArray(),new String[0],out,expectedLocation).join()!=0) {
                     out.println("Failed to install JDK");
                     // log file is in UTF-16
                     InputStreamReader in = new InputStreamReader(logFile.read(), "UTF-16");
@@ -156,6 +184,7 @@ public class JDKInstaller extends ToolInstaller {
             }
 
             // successfully installed
+            file.delete();
             marker.touch(System.currentTimeMillis());
 
         } catch (DetectionFailedException e) {
