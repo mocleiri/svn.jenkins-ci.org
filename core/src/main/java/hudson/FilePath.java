@@ -613,6 +613,8 @@ public final class FilePath implements Serializable {
             // run this on a remote system
             try {
                 return channel.call(new FileCallableWrapper<T>(callable));
+            } catch (AbortException e) {
+                throw e;    // pass through so that the caller can catch it as AbortException
             } catch (IOException e) {
                 // wrap it into a new IOException so that we get the caller's stack trace as well.
                 throw new IOException2("remote file operation failed",e);
