@@ -61,10 +61,15 @@ public abstract class Cause {
 		private transient Cause upstreamCause;
 		private List<Cause> upstreamCauses = new ArrayList<Cause>();
 		
-		public UpstreamCause(AbstractBuild<?, ?> up) {
+		// for backward bytecode compatibility
+		public UpstreamCause(AbstractBuild<?,?> up) {
+		    this((Run<?,?>)up);
+		}
+		
+		public UpstreamCause(Run<?, ?> up) {
 			upstreamBuild = up.getNumber();
-			upstreamProject = up.getProject().getName();
-			upstreamUrl = up.getProject().getUrl();
+			upstreamProject = up.getParent().getName();
+			upstreamUrl = up.getParent().getUrl();
 			CauseAction ca = up.getAction(CauseAction.class);
 			upstreamCauses = ca == null ? null : ca.getCauses();
 		}

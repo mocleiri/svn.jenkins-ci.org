@@ -8,25 +8,15 @@ import hudson.model.HealthReport;
 import hudson.model.HealthReportingAction;
 import hudson.model.Result;
 import hudson.plugins.dry.util.model.AbstractAnnotation;
-import hudson.plugins.dry.util.model.Priority;
-import hudson.util.ChartUtil;
-import hudson.util.DataSetBuilder;
-import hudson.util.ChartUtil.NumberOnlyBuildLabel;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.commons.lang.StringUtils;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.CategoryDataset;
 import org.kohsuke.stapler.StaplerProxy;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
 
 import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 
@@ -46,8 +36,6 @@ import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 public abstract class AbstractResultAction<T extends BuildResult> implements StaplerProxy, HealthReportingAction, ToolTipProvider, ResultAction<T> {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = -7201451538713818948L;
-    /** Width of the graph. */
-    private static final int WIDTH = 500;
 
     /** The associated build of this action. */
     @SuppressWarnings("Se")
@@ -112,18 +100,14 @@ public abstract class AbstractResultAction<T extends BuildResult> implements Sta
         return getDescriptor().getPluginResultUrlName();
     }
 
-    /**
-     * Returns the associated health report builder.
-     *
-     * @return the associated health report builder
-     */
-    public final HealthReportBuilder getHealthReportBuilder() {
-        return new HealthReportBuilder(getHealthDescriptor());
+    /** {@inheritDoc} */
+    public final HealthReport getBuildHealth() {
+        return new HealthReportBuilder(getHealthDescriptor()).computeHealth(getResult());
     }
 
     /** {@inheritDoc} */
-    public final HealthReport getBuildHealth() {
-        return getHealthReportBuilder().computeHealth(getResult());
+    public ToolTipProvider getToolTipProvider() {
+        return this;
     }
 
     /**
@@ -132,6 +116,11 @@ public abstract class AbstractResultAction<T extends BuildResult> implements Sta
      * @return the associated build of this action
      */
     public final AbstractBuild<?, ?> getOwner() {
+        return owner;
+    }
+
+    /** {@inheritDoc} */
+    public final AbstractBuild<?, ?> getBuild() {
         return owner;
     }
 
@@ -156,91 +145,6 @@ public abstract class AbstractResultAction<T extends BuildResult> implements Sta
             return getDescriptor().getIconUrl();
         }
         return null;
-    }
-
-    /**
-     * Generates a PNG image for the result trend.
-     *
-     * @param request
-     *            Stapler request
-     * @param response
-     *            Stapler response
-     * @param height
-     *            the height of the trend graph
-     * @throws IOException
-     *             in case of an error
-     */
-    public final void doGraph(final StaplerRequest request, final StaplerResponse response, final int height) throws IOException {
-        if (ChartUtil.awtProblemCause != null) {
-            response.sendRedirect2(request.getContextPath() + "/images/headless.png");
-            return;
-        }
-        ChartUtil.generateGraph(request, response, createChart(request), WIDTH, height);
-    }
-
-    /**
-     * Generates a PNG image for the result trend.
-     *
-     * @param request
-     *            Stapler request
-     * @param response
-     *            Stapler response
-     * @param height
-     *            the height of the trend graph
-     * @throws IOException
-     *             in case of an error
-     */
-    public final void doGraphMap(final StaplerRequest request, final StaplerResponse response, final int height) throws IOException {
-        ChartUtil.generateClickableMap(request, response, createChart(request), WIDTH, height);
-    }
-
-    /**
-     * Creates the chart for this action.
-     *
-     * @param request
-     *            Stapler request
-     * @return the chart for this action.
-     */
-    private JFreeChart createChart(final StaplerRequest request) {
-        String parameter = request.getParameter("useHealthBuilder");
-        boolean useHealthBuilder = Boolean.valueOf(StringUtils.defaultIfEmpty(parameter, "true"));
-
-        return getHealthReportBuilder().createGraph(useHealthBuilder,
-                getDescriptor().getPluginResultUrlName(), buildDataSet(useHealthBuilder), this);
-    }
-
-    /**
-     * Returns the data set that represents the result. For each build, the
-     * number of warnings is used as result value.
-     *
-     * @param useHealthBuilder
-     *            determines whether the health builder should be used to create
-     *            the data set
-     * @return the data set
-     */
-    protected CategoryDataset buildDataSet(final boolean useHealthBuilder) {
-        DataSetBuilder<Integer, NumberOnlyBuildLabel> builder = new DataSetBuilder<Integer, NumberOnlyBuildLabel>();
-        for (AbstractResultAction<T> action = this; action != null; action = action.getPreviousBuild()) {
-            T current = action.getResult();
-            if (current != null) {
-                List<Integer> series;
-                if (useHealthBuilder && getHealthReportBuilder().isEnabled()) {
-                    series = getHealthReportBuilder().createSeries(current.getNumberOfAnnotations());
-                }
-                else {
-                    series = new ArrayList<Integer>();
-                    series.add(current.getNumberOfAnnotations(Priority.LOW));
-                    series.add(current.getNumberOfAnnotations(Priority.NORMAL));
-                    series.add(current.getNumberOfAnnotations(Priority.HIGH));
-                }
-                int level = 0;
-                for (Integer integer : series) {
-                    builder.add(integer, level, new NumberOnlyBuildLabel(action.getOwner()));
-                    level++;
-                }
-            }
-        }
-        return builder.build();
     }
 
     /**
@@ -325,7 +229,6 @@ public abstract class AbstractResultAction<T extends BuildResult> implements Sta
         }
     }
 
-
     /**
      * Updates the build status if the number of annotations exceeds one of the
      * thresholds.
@@ -343,6 +246,32 @@ public abstract class AbstractResultAction<T extends BuildResult> implements Sta
             build.setResult(hudsonResult);
         }
     }
+
+    /** {@inheritDoc} */
+    public String getTooltip(final int numberOfItems) {
+        if (numberOfItems == 1) {
+            return getSingleItemTooltip();
+        }
+        else {
+            return getMultipleItemsTooltip(numberOfItems);
+        }
+    }
+
+    /**
+     * Returns the tooltip for several items.
+     *
+     * @param numberOfItems
+     *            the number of items to display the tooltip for
+     * @return the tooltip for several items
+     */
+    protected abstract String getMultipleItemsTooltip(int numberOfItems);
+
+    /**
+     * Returns the tooltip for exactly one item.
+     *
+     * @return the tooltip for exactly one item
+     */
+    protected abstract String getSingleItemTooltip();
 
     /** Backward compatibility. */
     @Deprecated

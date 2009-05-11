@@ -22,19 +22,13 @@ public class WarningsProjectAction extends AbstractProjectAction<WarningsResultA
      * @param height
      *            the height of the trend graph
      */
-    public WarningsProjectAction(final AbstractProject<?, ?> project, final int height) {
-        super(project, WarningsResultAction.class, WarningsPublisher.WARNINGS_DESCRIPTOR, height);
+    public WarningsProjectAction(final AbstractProject<?, ?> project) {
+        super(project, WarningsResultAction.class, WarningsPublisher.WARNINGS_DESCRIPTOR);
     }
 
     /** {@inheritDoc} */
     public String getDisplayName() {
         return Messages.Warnings_ProjectAction_Name();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String getCookieName() {
-        return "Warnings_displayMode";
     }
 
     /** {@inheritDoc} */

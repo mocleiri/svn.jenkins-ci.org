@@ -12,7 +12,7 @@ import java.util.List;
  * @author Seiji Sogabe
  * @since 0.7
  */
-public class SubversionChangeSet extends AbstractChangeSet {
+public class SubversionChangeSet extends AbstractChangeSet<SubversionChangeLogSet.LogEntry> {
 
     private static final long serialVersionUID = 1L;
 
@@ -41,12 +41,12 @@ public class SubversionChangeSet extends AbstractChangeSet {
     }
 
     protected String getRevision() {
-        return String.valueOf(((SubversionChangeLogSet.LogEntry) entry).getRevision());
+        return String.valueOf(entry.getRevision());
     }
 
     private List<AffectedPath> getAffectedPaths() {
         final List<AffectedPath> paths = new ArrayList<AffectedPath>();
-        for (final SubversionChangeLogSet.Path path : ((SubversionChangeLogSet.LogEntry) entry).getPaths()) {
+        for (final SubversionChangeLogSet.Path path : entry.getPaths()) {
             paths.add(new AffectedPath(path.getEditType(), path.getValue()));
         }
         return paths;

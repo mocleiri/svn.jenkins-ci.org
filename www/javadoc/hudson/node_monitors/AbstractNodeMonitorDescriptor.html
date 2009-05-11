@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractNodeMonitorDescriptor (Hudson core 1.300 API)
+AbstractNodeMonitorDescriptor (Hudson core 1.304 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-17">
+<META NAME="date" CONTENT="2009-05-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractNodeMonitorDescriptor (Hudson core 1.300 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractNodeMonitorDescriptor (Hudson core 1.300 API)";
+        parent.document.title="AbstractNodeMonitorDescriptor (Hudson core 1.304 API)";
     }
 }
 </SCRIPT>
@@ -162,6 +162,15 @@ Convenient base class for common <A HREF="../../hudson/node_monitors/NodeMonitor
 <TD><CODE><A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
@@ -221,6 +230,22 @@ Convenient base class for common <A HREF="../../hudson/node_monitors/NodeMonitor
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the monitoring result currently available, or null if no data is available.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html#isIgnored()">isIgnored</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is this monitor currently ignored?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html#markOffline(hudson.model.Computer)">markOffline</A></B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Utility method to mark the computer offline for derived classes.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -341,6 +366,35 @@ public <A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" t
 <P>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isIgnored()"><!-- --></A><H3>
+isIgnored</H3>
+<PRE>
+public boolean <B>isIgnored</B>()</PRE>
+<DL>
+<DD>Is this monitor currently ignored?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="markOffline(hudson.model.Computer)"><!-- --></A><H3>
+markOffline</H3>
+<PRE>
+protected boolean <B>markOffline</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</PRE>
+<DL>
+<DD>Utility method to mark the computer offline for derived classes.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>true
+      if the node was actually taken offline by this act (as opposed to us deciding not to do it,
+      or the computer already marked offline.)</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

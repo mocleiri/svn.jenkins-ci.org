@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Queue (Hudson core 1.300 API)
+Queue (Hudson core 1.304 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-17">
+<META NAME="date" CONTENT="2009-05-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue (Hudson core 1.300 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue (Hudson core 1.300 API)";
+        parent.document.title="Queue (Hudson core 1.304 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/ProminentProjectAction.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/Queue.BlockedItem.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/Queue.ApplicableJobOfferList.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Queue.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Queue.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -148,6 +148,15 @@ Build queue.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.ApplicableJobOfferList.html" title="class in hudson.model">Queue.ApplicableJobOfferList</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a list of applicable <A HREF="../../hudson/model/Queue.JobOffer.html" title="class in hudson.model"><CODE>Queue.JobOffer</CODE></A>s
+ and provides various typical</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.BlockedItem.html" title="class in hudson.model">Queue.BlockedItem</A></B></CODE>
 
 <BR>
@@ -176,6 +185,14 @@ Build queue.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item in a queue.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.JobOffer.html" title="class in hudson.model">Queue.JobOffer</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data structure created for each idle <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -227,6 +244,15 @@ Build queue.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This <CODE>XStream</CODE> instance is used to persist <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A>s.</TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
@@ -237,7 +263,7 @@ Build queue.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/Queue.html#Queue()">Queue</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#Queue(hudson.model.LoadBalancer)">Queue</A></B>(<A HREF="../../hudson/model/LoadBalancer.html" title="class in hudson.model">LoadBalancer</A>&nbsp;loadBalancer)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -386,6 +412,14 @@ Build queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/LoadBalancer.html" title="class in hudson.model">LoadBalancer</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#getLoadBalancer()">getLoadBalancer</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.html#isEmpty()">isEmpty</A></B>()</CODE>
 
@@ -431,6 +465,14 @@ Build queue.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks the queue and runs anything that can be run.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#setLoadBalancer(hudson.model.LoadBalancer)">setLoadBalancer</A></B>(<A HREF="../../hudson/model/LoadBalancer.html" title="class in hudson.model">LoadBalancer</A>&nbsp;loadBalancer)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.ResourceController"><!-- --></A>
@@ -485,10 +527,10 @@ public static final com.thoughtworks.xstream.XStream <B>XSTREAM</B></PRE>
 </TR>
 </TABLE>
 
-<A NAME="Queue()"><!-- --></A><H3>
+<A NAME="Queue(hudson.model.LoadBalancer)"><!-- --></A><H3>
 Queue</H3>
 <PRE>
-public <B>Queue</B>()</PRE>
+public <B>Queue</B>(<A HREF="../../hudson/model/LoadBalancer.html" title="class in hudson.model">LoadBalancer</A>&nbsp;loadBalancer)</PRE>
 <DL>
 </DL>
 
@@ -501,6 +543,34 @@ public <B>Queue</B>()</PRE>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="getLoadBalancer()"><!-- --></A><H3>
+getLoadBalancer</H3>
+<PRE>
+public <A HREF="../../hudson/model/LoadBalancer.html" title="class in hudson.model">LoadBalancer</A> <B>getLoadBalancer</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLoadBalancer(hudson.model.LoadBalancer)"><!-- --></A><H3>
+setLoadBalancer</H3>
+<PRE>
+public void <B>setLoadBalancer</B>(<A HREF="../../hudson/model/LoadBalancer.html" title="class in hudson.model">LoadBalancer</A>&nbsp;loadBalancer)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="load()"><!-- --></A><H3>
 load</H3>
@@ -902,7 +972,7 @@ public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/ProminentProjectAction.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/Queue.BlockedItem.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/Queue.ApplicableJobOfferList.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Queue.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Queue.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.jvnet.hudson.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>1.300</version>
+        <version>1.304</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>mantis</artifactId>
-    <version>0.7.1-SNAPSHOT</version>
+    <version>0.7.2-SNAPSHOT</version>
     <packaging>hpi</packaging>
     <name>Hudson Mantis plugin</name>
     <description>Integrates Hudson to Mantis</description>
@@ -146,6 +146,18 @@
             <groupId>commons-discovery</groupId>
             <artifactId>commons-discovery</artifactId>
             <version>0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jvnet.hudson.plugins</groupId>
+            <artifactId>mercurial</artifactId>
+            <version>1.15</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.jvnet.hudson.plugins</groupId>
+            <artifactId>git</artifactId>
+            <version>0.5</version>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 </project>

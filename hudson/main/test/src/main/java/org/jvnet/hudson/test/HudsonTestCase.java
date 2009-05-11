@@ -226,6 +226,12 @@ public abstract class HudsonTestCase extends TestCase {
         env.dispose();
         ExtensionList.clearLegacyInstances();
         DescriptorExtensionList.clearLegacyInstances();
+
+        // Hudson creates ClassLoaders for plugins that hold on to file descriptors of its jar files,
+        // but because there's no explicit dispose method on ClassLoader, they won't get GC-ed until
+        // at some later point, leading to possible file descriptor overflow. So encourage GC now.
+        // see http://bugs.sun.com/view_bug.do?bug_id=4950148
+        System.gc();
     }
 
     protected void runTest() throws Throwable {
@@ -453,7 +459,7 @@ public abstract class HudsonTestCase extends TestCase {
      * This is useful during debugging a test so that one can inspect the state of Hudson through the web browser.
      */
     public void interactiveBreak() throws Exception {
-        System.out.println("Hudson is running at localhost:"+localPort);
+        System.out.println("Hudson is running at http://localhost:"+localPort+"/");
         new BufferedReader(new InputStreamReader(System.in)).readLine();
     }
 

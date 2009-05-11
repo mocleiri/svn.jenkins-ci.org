@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.300 API)
+Deprecated List (Hudson core 1.304 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-17">
+<META NAME="date" CONTENT="2009-05-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.300 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.300 API)";
+        parent.document.title="Deprecated List (Hudson core 1.304 API)";
     }
 }
 </SCRIPT>
@@ -483,6 +483,18 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/Node.html#checkPermission(hudson.security.Permission)"><CODE>Node.checkPermission(Permission)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">hudson.slaves.ComputerLauncher.afterDisconnect(SlaveComputer, StreamTaskListener)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.304
+  Use <A HREF="hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>ComputerLauncher.afterDisconnect(SlaveComputer, TaskListener)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">hudson.slaves.ComputerLauncher.beforeDisconnect(SlaveComputer, StreamTaskListener)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.304
+  Use <A HREF="hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>ComputerLauncher.beforeDisconnect(SlaveComputer, TaskListener)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List, java.lang.String)">hudson.model.AbstractProject.buildDescribable(StaplerRequest, List<? extends Descriptor<T>>, String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As of 1.261. Use <A HREF="hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List)"><CODE>AbstractProject.buildDescribable(StaplerRequest, List)</CODE></A> instead.</I>&nbsp;</TD>
@@ -532,6 +544,12 @@ function windowTitle()
 <TD><A HREF="hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, hudson.Proc)">hudson.slaves.Channels.forProcess(String, ExecutorService, InputStream, OutputStream, Proc)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.Proc)"><CODE>Channels.forProcess(String, ExecutorService, InputStream, OutputStream, OutputStream, Proc)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/ComputerSet.html#get_monitors()">hudson.model.ComputerSet.get_monitors()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.301
+      Use <A HREF="hudson/model/ComputerSet.html#getMonitors()"><CODE>ComputerSet.getMonitors()</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/StructuredForm.html#get(org.kohsuke.stapler.StaplerRequest)">hudson.StructuredForm.get(StaplerRequest)</A>
@@ -740,6 +758,12 @@ function windowTitle()
 <TD><A HREF="hudson/model/Computer.html#launch()">hudson.model.Computer.launch()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/Computer.html#connect(boolean)"><CODE>Computer.connect(boolean)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">hudson.slaves.ComputerLauncher.launch(SlaveComputer, StreamTaskListener)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.304
+  Use <A HREF="hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>ComputerLauncher.launch(SlaveComputer, TaskListener)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">hudson.model.Descriptor.newInstance(StaplerRequest)</A>

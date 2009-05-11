@@ -1,5 +1,8 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
 	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:u="/util">
+  <f:entry title="${%Scan console log}" description="${%description.canScanConsole}">
+    <f:checkbox name="canScanConsole" checked="${instance.canScanConsole}"/>
+  </f:entry>
   <f:entry title="${%File pattern}"
     description="${%description.pattern}">
     <f:textbox name="pattern" value="${instance.pattern}"
@@ -36,7 +39,7 @@
         checkUrl="'${rootURL}/publisher/WarningsPublisher/checkPattern?job=${it.fullName}&amp;value='+escape(this.value)" />
     </f:entry>
     <u:thresholds id="warnings"/>
-    <u:trendHeight/>
     <u:defaultEncoding id="warnings"/>
+    <u:trend id="warnings"/>
   </f:advanced>
 </j:jelly>

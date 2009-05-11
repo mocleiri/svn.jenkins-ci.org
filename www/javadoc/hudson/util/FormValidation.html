@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FormValidation (Hudson core 1.300 API)
+FormValidation (Hudson core 1.304 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-17">
+<META NAME="date" CONTENT="2009-05-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FormValidation (Hudson core 1.300 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FormValidation (Hudson core 1.300 API)";
+        parent.document.title="FormValidation (Hudson core 1.304 API)";
     }
 }
 </SCRIPT>
@@ -94,14 +94,17 @@ hudson.util</FONT>
 Class FormValidation</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.FormValidation</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by ">java.lang.Throwable
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by ">java.lang.Exception
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by ">java.io.IOException
+              <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.FormValidation</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD>org.kohsuke.stapler.HttpResponse</DD>
+<DT><B>All Implemented Interfaces:</B> <DD>java.io.Serializable, org.kohsuke.stapler.HttpResponse</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>FormValidation</B><DT>extends java.lang.Object<DT>implements org.kohsuke.stapler.HttpResponse</DL>
+<DT><PRE>public abstract class <B>FormValidation</B><DT>extends java.io.IOException<DT>implements org.kohsuke.stapler.HttpResponse</DL>
 </PRE>
 
 <P>
@@ -114,7 +117,42 @@ Represents the result of the form field validation.
  programmatically as well (by using <A HREF="../../hudson/util/FormValidation.html#kind"><CODE>kind</CODE></A>.
 
  <p>
- See <CODE>CVSSCM.DescriptorImpl#doCheckCvsRoot(String)</CODE> as an example.
+ For typical validation needs, this class offers a number of <code>validateXXX(...)</code> methods, such as
+ <A HREF="../../hudson/util/FormValidation.html#validateExecutable(java.lang.String)"><CODE>validateExecutable(String)</CODE></A>. <A HREF="../../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> also has a number of <code>validateXXX(...)</code> methods
+ that you may be able to reuse.
+
+ <p>
+ Also see <CODE>CVSSCM.DescriptorImpl#doCheckCvsRoot(String)</CODE> as an example.
+
+ <p>
+ This class extends <CODE>IOException</CODE> so that it can be thrown from a method. This allows one to reuse
+ the checking logic as a part of the real computation, such as:
+
+ <pre>
+ String getAntVersion(File antHome) throws FormValidation {
+    if(!antHome.isDirectory())
+        throw FormValidation.error(antHome+" doesn't look like a home directory");
+    ...
+    return IOUtils.toString(new File(antHome,"version"));
+ }
+
+ ...
+
+ public FormValidation doCheckAntVersion(@QueryParameter String f) {
+     try {
+         return ok(getAntVersion(new File(f)));
+     } catch (FormValidation f) {
+         return f;
+     }
+ }
+
+ ...
+
+ public void <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A>(...) {
+     String version = getAntVersin(antHome);
+     ...
+ }
+ </pre>
 <P>
 
 <P>
@@ -123,7 +161,7 @@ Represents the result of the form field validation.
   <DD>1.294</DD>
 <DT><B>Author:</B></DT>
   <DD>Kohsuke Kawaguchi</DD>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../../serialized-form.html#hudson.util.FormValidation">Serialized Form</A></DL>
 <HR>
 
 <P>
@@ -214,6 +252,16 @@ Represents the result of the form field validation.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FormValidation.html#generateResponse(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.Object)">generateResponse</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                 java.lang.Object&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/FormValidation.html#ok()">ok</A></B>()</CODE>
 
@@ -241,6 +289,14 @@ Represents the result of the form field validation.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/FormValidation.html#okWithMarkup(java.lang.String)">okWithMarkup</A></B>(java.lang.String&nbsp;message)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FormValidation.html#renderHtml()">renderHtml</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -314,22 +370,22 @@ Represents the result of the form field validation.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Throwable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Throwable</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>fillInStackTrace, getCause, getLocalizedMessage, getMessage, getStackTrace, initCause, printStackTrace, printStackTrace, printStackTrace, setStackTrace, toString</CODE></TD>
+</TR>
+</TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_org.kohsuke.stapler.HttpResponse"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from interface org.kohsuke.stapler.HttpResponse</B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>generateResponse</CODE></TD>
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -579,6 +635,41 @@ public static <A HREF="../../hudson/util/FormValidation.html" title="class in hu
 <DL>
 <DD>Makes sure that the given string is a non-negative integer.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="generateResponse(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.Object)"><!-- --></A><H3>
+generateResponse</H3>
+<PRE>
+public void <B>generateResponse</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                             org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                             java.lang.Object&nbsp;node)
+                      throws java.io.IOException,
+                             javax.servlet.ServletException</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>generateResponse</CODE> in interface <CODE>org.kohsuke.stapler.HttpResponse</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="renderHtml()"><!-- --></A><H3>
+renderHtml</H3>
+<PRE>
+public abstract java.lang.String <B>renderHtml</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

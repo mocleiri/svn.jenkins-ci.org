@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-NodeDescriptor (Hudson core 1.300 API)
+NodeDescriptor (Hudson core 1.304 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-17">
+<META NAME="date" CONTENT="2009-05-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ NodeDescriptor (Hudson core 1.300 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="NodeDescriptor (Hudson core 1.300 API)";
+        parent.document.title="NodeDescriptor (Hudson core 1.304 API)";
     }
 }
 </SCRIPT>
@@ -173,6 +173,15 @@ java.lang.Object
 <TD><CODE><A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
@@ -218,11 +227,29 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../../hudson/slaves/NodeDescriptor.html" title="class in hudson.slaves">NodeDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/NodeDescriptor.html#allInstanciable()">allInstanciable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/NodeDescriptor.html#getConfigPage()">getConfigPage</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/NodeDescriptor.html#isInstanciable()">isInstanciable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can the administrator create this type of nodes from UI?
+
+ Return false if it only makes sense for programs to create it, not through the "new node" UI.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -311,6 +338,21 @@ protected <B>NodeDescriptor</B>()</PRE>
 </TR>
 </TABLE>
 
+<A NAME="isInstanciable()"><!-- --></A><H3>
+isInstanciable</H3>
+<PRE>
+public boolean <B>isInstanciable</B>()</PRE>
+<DL>
+<DD>Can the administrator create this type of nodes from UI?
+
+ Return false if it only makes sense for programs to create it, not through the "new node" UI.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="newInstanceDetailPage()"><!-- --></A><H3>
 newInstanceDetailPage</H3>
 <PRE>
@@ -343,6 +385,17 @@ public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class i
 <DL>
 <DD>Returns all the registered <A HREF="../../hudson/slaves/NodeDescriptor.html" title="class in hudson.slaves"><CODE>NodeDescriptor</CODE></A> descriptors.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="allInstanciable()"><!-- --></A><H3>
+allInstanciable</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../../hudson/slaves/NodeDescriptor.html" title="class in hudson.slaves">NodeDescriptor</A>&gt; <B>allInstanciable</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

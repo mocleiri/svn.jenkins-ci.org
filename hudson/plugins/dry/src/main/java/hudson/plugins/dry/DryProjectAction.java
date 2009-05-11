@@ -19,22 +19,14 @@ public class DryProjectAction extends AbstractProjectAction<DryResultAction> {
      *
      * @param project
      *            the project that owns this action
-     * @param height
-     *            the height of the trend graph
      */
-    public DryProjectAction(final AbstractProject<?, ?> project, final int height) {
-        super(project, DryResultAction.class, DryPublisher.DRY_DESCRIPTOR, height);
+    public DryProjectAction(final AbstractProject<?, ?> project) {
+        super(project, DryResultAction.class, DryPublisher.DRY_DESCRIPTOR);
     }
 
     /** {@inheritDoc} */
     public String getDisplayName() {
         return Messages.DRY_ProjectAction_Name();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String getCookieName() {
-        return "DRY_displayMode";
     }
 
     /** {@inheritDoc} */

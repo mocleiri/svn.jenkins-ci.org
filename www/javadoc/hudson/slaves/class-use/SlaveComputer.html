@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.slaves.SlaveComputer (Hudson core 1.300 API)
+Uses of Class hudson.slaves.SlaveComputer (Hudson core 1.304 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-17">
+<META NAME="date" CONTENT="2009-05-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.slaves.SlaveComputer (Hudson core 1.300 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.slaves.SlaveComputer (Hudson core 1.300 API)";
+        parent.document.title="Uses of Class hudson.slaves.SlaveComputer (Hudson core 1.304 API)";
     }
 }
 </SCRIPT>
@@ -147,8 +147,8 @@ Uses of <A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in huds
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ManagedWindowsServiceLauncher.</B><B><A HREF="../../../hudson/os/windows/ManagedWindowsServiceLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">afterDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-                <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
+<TD><CODE><B>ManagedWindowsServiceLauncher.</B><B><A HREF="../../../hudson/os/windows/ManagedWindowsServiceLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">afterDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+                <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -156,8 +156,8 @@ Uses of <A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in huds
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ManagedWindowsServiceLauncher.</B><B><A HREF="../../../hudson/os/windows/ManagedWindowsServiceLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-       <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
+<TD><CODE><B>ManagedWindowsServiceLauncher.</B><B><A HREF="../../../hudson/os/windows/ManagedWindowsServiceLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -186,13 +186,23 @@ Uses of <A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in huds
                 <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.304
+  Use <A HREF="../../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>ComputerLauncher.afterDisconnect(SlaveComputer, TaskListener)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ComputerLauncher.</B><B><A HREF="../../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">afterDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+                <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows the <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> to tidy-up after a disconnect.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ComputerLauncherFilter.</B><B><A HREF="../../../hudson/slaves/ComputerLauncherFilter.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">afterDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-                <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
+<TD><CODE><B>ComputerLauncherFilter.</B><B><A HREF="../../../hudson/slaves/ComputerLauncherFilter.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">afterDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+                <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -204,13 +214,23 @@ Uses of <A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in huds
                  <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.304
+  Use <A HREF="../../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>ComputerLauncher.beforeDisconnect(SlaveComputer, TaskListener)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ComputerLauncher.</B><B><A HREF="../../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">beforeDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+                 <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows the <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> to prepare for a disconnect.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ComputerLauncherFilter.</B><B><A HREF="../../../hudson/slaves/ComputerLauncherFilter.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">beforeDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-                 <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
+<TD><CODE><B>ComputerLauncherFilter.</B><B><A HREF="../../../hudson/slaves/ComputerLauncherFilter.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">beforeDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+                 <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -250,17 +270,27 @@ Uses of <A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in huds
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>CommandLauncher.</B><B><A HREF="../../../hudson/slaves/CommandLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+<TD><CODE><B>ComputerLauncher.</B><B><A HREF="../../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
        <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.304
+  Use <A HREF="../../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>ComputerLauncher.launch(SlaveComputer, TaskListener)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>CommandLauncher.</B><B><A HREF="../../../hudson/slaves/CommandLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ComputerLauncher.</B><B><A HREF="../../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-       <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ComputerLauncher.</B><B><A HREF="../../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launches the slave agent for the given <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.</TD>
@@ -268,8 +298,8 @@ Uses of <A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in huds
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ComputerLauncherFilter.</B><B><A HREF="../../../hudson/slaves/ComputerLauncherFilter.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-       <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
+<TD><CODE><B>ComputerLauncherFilter.</B><B><A HREF="../../../hudson/slaves/ComputerLauncherFilter.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -277,8 +307,8 @@ Uses of <A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in huds
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>JNLPLauncher.</B><B><A HREF="../../../hudson/slaves/JNLPLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-       <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
+<TD><CODE><B>JNLPLauncher.</B><B><A HREF="../../../hudson/slaves/JNLPLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

@@ -18,7 +18,6 @@
 package hudson.plugins.selenium;
 
 import com.thoughtworks.selenium.grid.hub.HubRegistry;
-import com.thoughtworks.selenium.grid.hub.HubServer;
 import com.thoughtworks.selenium.grid.hub.remotecontrol.DynamicRemoteControlPool;
 import com.thoughtworks.selenium.grid.hub.remotecontrol.RemoteControlProxy;
 import hudson.FilePath;
@@ -36,6 +35,9 @@ import hudson.util.StreamTaskListener;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.framework.io.LargeText;
 
 import javax.servlet.ServletException;
 import java.io.File;
@@ -46,6 +48,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Starts Selenium Grid server in another JVM.
@@ -61,13 +65,25 @@ public class PluginImpl extends Plugin implements Action, Serializable {
      */
     private transient Channel channel;
 
+    private transient Future<?> hubLauncher;
+
     public void start() throws Exception {
-        StreamTaskListener listener = new StreamTaskListener(System.out);
+        StreamTaskListener listener = new StreamTaskListener(getLogFile());
         File root = Hudson.getInstance().getRootDir();
         channel = createSeleniumGridVM(root, listener);
-        channel.callAsync(new HubLauncher(port));
+        hubLauncher = channel.callAsync(new HubLauncher(port));
 
         Hudson.getInstance().getActions().add(this);
+    }
+
+    public File getLogFile() {
+        return new File(Hudson.getInstance().getRootDir(),"selenium.log");
+    }
+
+
+
+    public void waitForHubLaunch() throws ExecutionException, InterruptedException {
+        hubLauncher.get();
     }
 
     public String getIconFileName() {
@@ -128,7 +144,7 @@ public class PluginImpl extends Plugin implements Action, Serializable {
     static /*package*/ Channel createSeleniumGridVM(File rootDir, TaskListener listener) throws IOException, InterruptedException {
         FilePath distDir = install(rootDir, listener);
         return Channels.newJVM("Selenium Grid",listener,distDir,
-                new ClasspathBuilder().addAll(distDir,"lib/selenium-grid-hub-standalone-*.jar, lib/log4j.jar"),
+                new ClasspathBuilder().addAll(distDir,"lib/selenium-grid-hub-standalone-*.jar, lib/log4j-*.jar"),
                 null);
     }
 
@@ -142,7 +158,7 @@ public class PluginImpl extends Plugin implements Action, Serializable {
         FilePath distDir = install(rootDir, listener);
         return Channels.newJVM("Selenium RC",listener,distDir,
                 new ClasspathBuilder()
-                        .addAll(distDir,"vendor/selenium-server-*.jar, lib/selenium-grid-remote-control-standalone-*.jar"),
+                        .addAll(distDir,"vendor/selenium-server-*.jar, lib/selenium-grid-remote-control-*.jar, lib/commons-httpclient-*.jar"),
                 null);
     }
 
@@ -161,6 +177,13 @@ public class PluginImpl extends Plugin implements Action, Serializable {
             return null;
         URL url = new URL(rootUrl);
         return url.getHost();
+    }
+
+    /**
+     * Handles incremental log.
+     */
+    public void doProgressiveLog( StaplerRequest req, StaplerResponse rsp) throws IOException {
+        new LargeText(getLogFile(),false).doProgressText(req,rsp);
     }
 
     private static final long serialVersionUID = 1L;

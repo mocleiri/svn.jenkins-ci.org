@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-DescribableList (Hudson core 1.300 API)
+DescribableList (Hudson core 1.304 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-17">
+<META NAME="date" CONTENT="2009-05-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DescribableList (Hudson core 1.300 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DescribableList (Hudson core 1.300 API)";
+        parent.document.title="DescribableList (Hudson core 1.304 API)";
     }
 }
 </SCRIPT>
@@ -264,6 +264,23 @@ U</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;U extends <A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt; 
+<BR>
+java.util.List&lt;U&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/DescribableList.html#getAll(java.lang.Class)">getAll</A></B>(java.lang.Class&lt;U&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all instances that matches the given type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.Iterator&lt;<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/DescribableList.html#iterator()">iterator</A></B>()</CODE>
 
@@ -326,6 +343,22 @@ U</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/DescribableList.html#removeAll(java.lang.Class)">removeAll</A></B>(java.lang.Class&lt;? extends <A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/DescribableList.html#replace(T)">replace</A></B>(<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&nbsp;item)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes all instances of the same type, then add the new one.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -488,6 +521,25 @@ public void <B>add</B>(<A HREF="../../hudson/util/DescribableList.html" title="t
 </DL>
 <HR>
 
+<A NAME="replace(hudson.model.Describable)"><!-- --></A><A NAME="replace(T)"><!-- --></A><H3>
+replace</H3>
+<PRE>
+public void <B>replace</B>(<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&nbsp;item)
+             throws java.io.IOException</PRE>
+<DL>
+<DD>Removes all instances of the same type, then add the new one.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="replaceBy(java.util.Collection)"><!-- --></A><H3>
 replaceBy</H3>
 <PRE>
@@ -533,6 +585,22 @@ public &lt;U extends <A HREF="../../hudson/util/DescribableList.html" title="typ
 </DL>
 <HR>
 
+<A NAME="getAll(java.lang.Class)"><!-- --></A><H3>
+getAll</H3>
+<PRE>
+public &lt;U extends <A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt; java.util.List&lt;U&gt; <B>getAll</B>(java.lang.Class&lt;U&gt;&nbsp;type)</PRE>
+<DL>
+<DD>Gets all instances that matches the given type.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="contains(hudson.model.Descriptor)"><!-- --></A><A NAME="contains(D)"><!-- --></A><H3>
 contains</H3>
 <PRE>
@@ -569,6 +637,23 @@ public void <B>remove</B>(java.lang.Class&lt;? extends <A HREF="../../hudson/uti
 <DL>
 <DD>Removes an instance by its type.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeAll(java.lang.Class)"><!-- --></A><H3>
+removeAll</H3>
+<PRE>
+public void <B>removeAll</B>(java.lang.Class&lt;? extends <A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&nbsp;type)
+               throws java.io.IOException</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

@@ -44,6 +44,10 @@ import hudson.ExtensionList;
 import hudson.ExtensionPoint;
 import hudson.DescriptorExtensionList;
 import hudson.ExtensionListView;
+import hudson.Extension;
+import hudson.cli.CliEntryPoint;
+import hudson.cli.CLICommand;
+import hudson.cli.HelpCommand;
 import hudson.logging.LogRecorderManager;
 import hudson.lifecycle.Lifecycle;
 import hudson.model.Descriptor.FormException;
@@ -53,6 +57,7 @@ import hudson.model.listeners.JobListener.JobListenerAdapter;
 import hudson.model.listeners.SCMListener;
 import hudson.remoting.LocalChannel;
 import hudson.remoting.VirtualChannel;
+import hudson.remoting.Channel;
 import hudson.scm.CVSSCM;
 import hudson.scm.RepositoryBrowser;
 import hudson.scm.SCM;
@@ -146,6 +151,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.InputStream;
+import java.io.Serializable;
+import java.io.PrintStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.text.NumberFormat;
@@ -168,6 +176,8 @@ import java.util.StringTokenizer;
 import java.util.Timer;
 import java.util.TreeSet;
 import java.util.Properties;
+import java.util.UUID;
+import java.util.Locale;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -203,6 +213,20 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     private transient final Map<Node,Computer> computers = new CopyOnWriteMap.Hash<Node,Computer>();
 
     /**
+     * We update this field to the current version of Hudson whenever we save {@code config.xml}.
+     * This can be used to detect when an upgrade happens from one version to next.
+     *
+     * <p>
+     * Since this field is introduced starting 1.301, "1.0" is used to represent every version
+     * up to 1.300. This value may also include non-standard versions like "1.301-SNAPSHOT" or
+     * "?", etc., so parsing needs to be done with a care.
+     *
+     * @since 1.301
+     */
+    // this field needs to be at the very top so that other components can look at this value even during unmarshalling
+    private String version = "1.0";
+    
+    /**
      * Number of executors of the master node.
      */
     private int numExecutors = 2;
@@ -230,7 +254,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      *
      * Never null.
      */
-    private volatile AuthorizationStrategy authorizationStrategy;
+    private volatile AuthorizationStrategy authorizationStrategy = AuthorizationStrategy.UNSECURED;
 
     /**
      * Controls a part of the
@@ -247,25 +271,12 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      * @see #getSecurity()
      * @see #setSecurityRealm(SecurityRealm)
      */
-    private volatile SecurityRealm securityRealm;
+    private volatile SecurityRealm securityRealm = SecurityRealm.NO_AUTHENTICATION;
 
     /**
      * Message displayed in the top page.
      */
     private String systemMessage;
-
-    /**
-     * We update this field to the current version of Hudson whenever we save {@code config.xml}.
-     * This can be used to detect when an upgrade happens from one version to next.
-     *
-     * <p>
-     * Since this field is introduced starting 1.301, "1.0" is used to represent every version
-     * up to 1.300. This value may also include non-standard versions like "1.301-SNAPSHOT" or
-     * "?", etc., so parsing needs to be done with a care.
-     *
-     * @since 1.301
-     */
-    private String version = "1.0";
 
     /**
      * Root directory of the system.
@@ -1018,13 +1029,8 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     public List<TopLevelItem> getItems() {
         List<TopLevelItem> viewableItems = new ArrayList<TopLevelItem>();
         for (TopLevelItem item : items.values()) {
-            if (item instanceof AccessControlled) {
-            	if (((AccessControlled)item).hasPermission(Item.READ))
-            		viewableItems.add(item);
-            }
-            else {
-            	viewableItems.add(item);
-            }
+            if (item.hasPermission(Item.READ))
+                viewableItems.add(item);
         }
         
         return viewableItems;
@@ -1149,6 +1155,13 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      * <p>
      * This method continues to return true until the system configuration is saved, at which point
      * {@link #version} will be overwritten and Hudson forgets the upgrade history.
+     *
+     * <p>
+     * To handle SNAPSHOTS correctly, pass in "1.N.*" to test if it's upgrading from the version
+     * equal or younger than N. So say if you implement a feature in 1.301 and you want to check
+     * if the installation upgraded from pre-1.301, pass in "1.300.*"
+     *
+     * @since 1.301
      */
     public boolean isUpgradedFromBefore(VersionNumber v) {
         try {
@@ -1385,6 +1398,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     }
 
     public static final class DescriptorImpl extends NodeDescriptor {
+        @Extension
         public static final DescriptorImpl INSTANCE = new DescriptorImpl();
 
         public String getDisplayName() {
@@ -2155,13 +2169,13 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
                 }
             }
 
-            numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
+            numExecutors = Integer.parseInt(req.getParameter("_.numExecutors"));
             if(req.hasParameter("master.mode"))
                 mode = Mode.valueOf(req.getParameter("master.mode"));
             else
                 mode = Mode.NORMAL;
 
-            label = Util.fixNull(req.getParameter("label"));
+            label = Util.fixNull(req.getParameter("_.labelString"));
             labelSet=null;
 
             quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
@@ -2647,6 +2661,89 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     }
 
     /**
+     * {@link CliEntryPoint} implementation exposed to the remote CLI.
+     */
+    private final class CliManager implements CliEntryPoint, Serializable {
+        /**
+         * CLI should be executed under this credential.
+         */
+        private final Authentication auth;
+
+        private CliManager(Authentication auth) {
+            this.auth = auth;
+        }
+
+        public int main(List<String> args, Locale locale, InputStream stdin, OutputStream stdout, OutputStream stderr) {
+            // remoting sets the context classloader to the RemoteClassLoader,
+            // which slows down the classloading. we don't load anything from CLI,
+            // so couner that effect.
+            Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
+
+            PrintStream out = new PrintStream(stdout);
+            PrintStream err = new PrintStream(stderr);
+
+            String subCmd = args.get(0);
+            CLICommand cmd = CLICommand.clone(subCmd);
+            if(cmd!=null) {
+                Authentication old = SecurityContextHolder.getContext().getAuthentication();
+                SecurityContextHolder.getContext().setAuthentication(auth);
+                try {
+                    // execute the command, do so with the originator of the request as the principal
+                    return cmd.main(args.subList(1,args.size()),stdin, out, err);
+                } finally {
+                    SecurityContextHolder.getContext().setAuthentication(old);
+                }
+            }
+
+            err.println("No such command: "+subCmd);
+            new HelpCommand().main(Collections.<String>emptyList(), stdin, out, err);
+            return -1;
+        }
+
+        public int protocolVersion() {
+            return VERSION;
+        }
+
+        private Object writeReplace() {
+            return Channel.current().export(CliEntryPoint.class,this);
+        }
+    }
+
+    private transient final Map<UUID,FullDuplexHttpChannel> duplexChannels = new HashMap<UUID, FullDuplexHttpChannel>();
+
+    /**
+     * Handles HTTP requests for duplex channels for CLI.
+     */
+    public void doCli(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException, InterruptedException {
+        checkPermission(READ);
+        if(!"POST".equals(Stapler.getCurrentRequest().getMethod())) {
+            // for GET request, serve _cli.jelly, assuming this is a browser
+            req.getView(this,"_cli.jelly").forward(req,rsp);
+            return;
+        }
+
+        UUID uuid = UUID.fromString(req.getHeader("Session"));
+        rsp.setHeader("Hudson-Duplex",""); // set the header so that the client would know
+        final Authentication auth = getAuthentication();
+
+        FullDuplexHttpChannel server;
+        if(req.getHeader("Side").equals("download")) {
+            duplexChannels.put(uuid,server=new FullDuplexHttpChannel(uuid, !hasPermission(ADMINISTER)) {
+                protected void main(Channel channel) throws IOException, InterruptedException {
+                    channel.setProperty(CliEntryPoint.class.getName(),new CliManager(auth));
+                }
+            });
+            try {
+                server.download(req,rsp);
+            } finally {
+                duplexChannels.remove(uuid);
+            }
+        } else {
+            duplexChannels.get(uuid).upload(req,rsp);
+        }
+    }
+
+    /**
      * Binds /userContent/... to $HUDSON_HOME/userContent.
      */
     public DirectoryBrowserSupport doUserContent() {
@@ -2655,21 +2752,36 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
 
     /**
      * Perform a restart of Hudson, if we can.
+     *
+     * This first replaces "app" to {@link HudsonIsRestarting}
      */
     public void doRestart(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-        requirePOST();
         checkPermission(ADMINISTER);
-        try {
-            Lifecycle.get().restart();
-            servletContext.setAttribute("app",new HudsonIsRestarting());
-            rsp.sendRedirect2(".");
-        } catch (UnsupportedOperationException e) {
-            sendError("Restart is not supported in this running mode.",req,rsp);
-        } catch (IOException e) {
-            sendError(e,req,rsp);
-        } catch (InterruptedException e) {
-            sendError(e,req,rsp);
+        if(Stapler.getCurrentRequest().getMethod().equals("GET")) {
+            req.getView(this,"_restart.jelly").forward(req,rsp);
+            return;
         }
+
+        final Lifecycle lifecycle = Lifecycle.get();
+        if(!lifecycle.canRestart())
+            sendError("Restart is not supported in this running mode.",req,rsp);
+        servletContext.setAttribute("app",new HudsonIsRestarting());
+        rsp.sendRedirect2(".");
+
+        new Thread("restart thread") {
+            @Override
+            public void run() {
+                try {
+                    // give some time for the browser to load the "reloading" page
+                    Thread.sleep(5000);
+                    lifecycle.restart();
+                } catch (InterruptedException e) {
+                    LOGGER.log(Level.WARNING, "Failed to restart Hudson",e);
+                } catch (IOException e) {
+                    LOGGER.log(Level.WARNING, "Failed to restart Hudson",e);
+                }
+            }
+        }.start();
     }
 
     /**
@@ -3265,7 +3377,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     public static boolean PARALLEL_LOAD = !"false".equals(System.getProperty(Hudson.class.getName()+".parallelLoad"));
     public static boolean KILL_AFTER_LOAD = Boolean.getBoolean(Hudson.class.getName()+".killAfterLoad");
     public static boolean LOG_STARTUP_PERFORMANCE = Boolean.getBoolean(Hudson.class.getName()+".logStartupPerformance");
-    private static final boolean CONSISTENT_HASH = Boolean.getBoolean(Hudson.class.getName()+".consistentHash");
+    private static final boolean CONSISTENT_HASH = true; // Boolean.getBoolean(Hudson.class.getName()+".consistentHash");
 
     private static final Logger LOGGER = Logger.getLogger(Hudson.class.getName());
 

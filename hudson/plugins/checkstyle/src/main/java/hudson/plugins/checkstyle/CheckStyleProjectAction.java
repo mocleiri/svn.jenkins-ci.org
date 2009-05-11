@@ -19,22 +19,14 @@ public class CheckStyleProjectAction extends AbstractProjectAction<CheckStyleRes
      *
      * @param project
      *            the project that owns this action
-     * @param height
-     *            the height of the trend graph
      */
-    public CheckStyleProjectAction(final AbstractProject<?, ?> project, final int height) {
-        super(project, CheckStyleResultAction.class, CheckStylePublisher.CHECKSTYLE_DESCRIPTOR, height);
+    public CheckStyleProjectAction(final AbstractProject<?, ?> project) {
+        super(project, CheckStyleResultAction.class, CheckStylePublisher.CHECKSTYLE_DESCRIPTOR);
     }
 
     /** {@inheritDoc} */
     public String getDisplayName() {
         return Messages.Checkstyle_ProjectAction_Name();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String getCookieName() {
-        return "Checkstyle_displayMode";
     }
 
     /** {@inheritDoc} */

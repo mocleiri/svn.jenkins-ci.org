@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ListViewColumn (Hudson core 1.300 API)
+ListViewColumn (Hudson core 1.304 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-04-17">
+<META NAME="date" CONTENT="2009-05-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ListViewColumn (Hudson core 1.300 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ListViewColumn (Hudson core 1.300 API)";
+        parent.document.title="ListViewColumn (Hudson core 1.304 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/views/LastSuccessColumn.DescriptorImpl.html" title="class in hudson.views"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/views/StatusColumn.html" title="class in hudson.views"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/views/Messages.html" title="class in hudson.views"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/views/ListViewColumn.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ListViewColumn.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -100,7 +100,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/views/BuildButtonColumn.html" title="class in hudson.views">BuildButtonColumn</A>, <A HREF="../../hudson/views/JobColumn.html" title="class in hudson.views">JobColumn</A>, <A HREF="../../hudson/views/LastDurationColumn.html" title="class in hudson.views">LastDurationColumn</A>, <A HREF="../../hudson/views/LastFailureColumn.html" title="class in hudson.views">LastFailureColumn</A>, <A HREF="../../hudson/views/LastSuccessColumn.html" title="class in hudson.views">LastSuccessColumn</A>, <A HREF="../../hudson/views/StatusColumn.html" title="class in hudson.views">StatusColumn</A>, <A HREF="../../hudson/views/WeatherColumn.html" title="class in hudson.views">WeatherColumn</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/views/BuildButtonColumn.html" title="class in hudson.views">BuildButtonColumn</A>, <A HREF="../../hudson/views/JobColumn.html" title="class in hudson.views">JobColumn</A>, <A HREF="../../hudson/views/LastDurationColumn.html" title="class in hudson.views">LastDurationColumn</A>, <A HREF="../../hudson/views/LastFailureColumn.html" title="class in hudson.views">LastFailureColumn</A>, <A HREF="../../hudson/views/LastStableColumn.html" title="class in hudson.views">LastStableColumn</A>, <A HREF="../../hudson/views/LastSuccessColumn.html" title="class in hudson.views">LastSuccessColumn</A>, <A HREF="../../hudson/views/StatusColumn.html" title="class in hudson.views">StatusColumn</A>, <A HREF="../../hudson/views/WeatherColumn.html" title="class in hudson.views">WeatherColumn</A></DD>
 </DL>
 <HR>
 <DL>
@@ -118,11 +118,6 @@ Extension point for adding a column to <A HREF="../../hudson/model/ListView.html
  <p>
  This object may have an additional <tt>columHeader.jelly</tt>. The default ColmnHeader
  will render ColumnCaption.
- <p>
- For now, <A HREF="../../hudson/model/ListView.html" title="class in hudson.model"><CODE>ListView</CODE></A> doesn't allow <A HREF="../../hudson/views/ListViewColumn.html" title="class in hudson.views"><CODE>ListViewColumn</CODE></A>s to be configured
- (instead it just shows all the columns available in <A HREF="../../hudson/views/ListViewColumn.html#all()"><CODE>all()</CODE></A>),
- but the intention is eventually make each <A HREF="../../hudson/views/ListViewColumn.html" title="class in hudson.views"><CODE>ListViewColumn</CODE></A> fully configurable
- like <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A>.
 <P>
 
 <P>
@@ -212,6 +207,14 @@ Extension point for adding a column to <A HREF="../../hudson/model/ListView.html
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the name of the column that explains what this column means</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/views/ListViewColumn.html#shownByDefault()">shownByDefault</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether this column will be shown by default.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -316,6 +319,25 @@ public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class i
 </DL>
 </DD>
 </DL>
+<HR>
+
+<A NAME="shownByDefault()"><!-- --></A><H3>
+shownByDefault</H3>
+<PRE>
+public boolean <B>shownByDefault</B>()</PRE>
+<DL>
+<DD>Whether this column will be shown by default.
+ The default implementation is true.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.301</DD>
+</DL>
+</DD>
+</DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
 
@@ -348,7 +370,7 @@ public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class i
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/views/LastSuccessColumn.DescriptorImpl.html" title="class in hudson.views"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/views/StatusColumn.html" title="class in hudson.views"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/views/Messages.html" title="class in hudson.views"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/views/ListViewColumn.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ListViewColumn.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

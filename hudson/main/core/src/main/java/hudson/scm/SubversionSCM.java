@@ -1044,7 +1044,7 @@ public class SubversionSCM extends SCM implements Serializable {
              *      One of the constants defined in {@link ISVNAuthenticationManager},
              *      indicating what subype of {@link SVNAuthentication} is expected.
              */
-            abstract SVNAuthentication createSVNAuthentication(String kind) throws SVNException;
+            public abstract SVNAuthentication createSVNAuthentication(String kind) throws SVNException;
         }
 
         /**
@@ -1060,7 +1060,7 @@ public class SubversionSCM extends SCM implements Serializable {
             }
 
             @Override
-            SVNAuthentication createSVNAuthentication(String kind) {
+            public SVNAuthentication createSVNAuthentication(String kind) {
                 if(kind.equals(ISVNAuthenticationManager.SSH))
                     return new SVNSSHAuthentication(userName,Scrambler.descramble(password),-1,false);
                 else
@@ -1120,7 +1120,7 @@ public class SubversionSCM extends SCM implements Serializable {
             }
 
             @Override
-            SVNSSHAuthentication createSVNAuthentication(String kind) throws SVNException {
+            public SVNSSHAuthentication createSVNAuthentication(String kind) throws SVNException {
                 if(kind.equals(ISVNAuthenticationManager.SSH)) {
                     try {
                         Channel channel = Channel.current();
@@ -1157,7 +1157,7 @@ public class SubversionSCM extends SCM implements Serializable {
             }
 
             @Override
-            SVNAuthentication createSVNAuthentication(String kind) {
+            public SVNAuthentication createSVNAuthentication(String kind) {
                 if(kind.equals(ISVNAuthenticationManager.SSL))
                     return new SVNSSLAuthentication(null,Scrambler.descramble(password),false);
                 else
