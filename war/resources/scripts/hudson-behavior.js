@@ -94,6 +94,13 @@ var FormChecker = {
     }
 }
 
+function toValue(e) {
+    // compute the form validation value to be sent to the server
+    if(e.getAttribute("type").toLowerCase()=="checkbox")
+        return e.checked;
+    return encode(e.value);
+}
+
 // find the nearest ancestor node that has the given tag name
 function findAncestor(e, tagName) {
     do {
