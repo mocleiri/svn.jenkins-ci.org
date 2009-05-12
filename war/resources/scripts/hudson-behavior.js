@@ -527,23 +527,35 @@ var hudsonRules = {
         makeButton(e);
     },
 
-    "TR.optional-block-end": function(e) {
-        if(isInsideRemovable(e))    return;
+    "TR.optional-block-start": function(e) { // see optionalBlock.jelly
+        // set start.ref to checkbox in preparation of row-set-end processing
+        var checkbox = e.firstChild.firstChild;
+        e.setAttribute("ref", checkbox.id = "cb"+(iota++));
+    },
 
+    "TR.row-set-end": function(e) { // see rowSet.jelly and optionalBlock.jelly
         // figure out the corresponding start block
         var end = e;
 
         for( var depth=0; ; e=e.previousSibling) {
-            if(Element.hasClassName(e,"optional-block-end"))        depth++;
-            if(Element.hasClassName(e,"optional-block-start"))      depth--;
+            if(Element.hasClassName(e,"row-set-end"))        depth++;
+            if(Element.hasClassName(e,"row-set-start"))      depth--;
             if(depth==0)    break;
         }
         var start = e;
 
-        var checkbox = start.firstChild.firstChild;
-        checkbox.id = "cb"+(iota++);
+        var ref = start.getAttribute("ref");
+        if(ref==null)
+            start.id = ref = "rowSetStart"+(iota++);
 
-        applyNameRef(start,end,checkbox.id);
+        applyNameRef(start,end,ref);
+    },
+
+    "BODY TR.optional-block-start": function(e) { // see optionalBlock.jelly
+        // this is prefixed by a pointless BODY so that two processing for optional-block-start
+        // can sandwitch row-set-end
+        // this requires "TR.row-set-end" to mark rows
+        var checkbox = e.firstChild.firstChild;
         updateOptionalBlock(checkbox,false);
     },
 
