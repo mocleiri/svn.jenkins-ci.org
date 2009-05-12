@@ -98,7 +98,7 @@ THE SOFTWARE.
       <f:section title="${%JDKs}">
         <f:entry title="${%JDK installations}"
                  description="${%List of JDK installations on this system}">
-          <f:repeatable var="instance" items="${it.JDKs}" name="jdks">
+          <f:repeatable var="instance" items="${it.JDKs}" name="jdks" add="${%Add JDK}">
             <j:set var="descriptor" value="${h.getJDKDescriptor()}" />
             <st:include page="${descriptor.configPage}" from="${descriptor}" />
           </f:repeatable>
