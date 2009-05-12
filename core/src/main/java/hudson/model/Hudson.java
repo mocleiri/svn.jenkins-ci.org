@@ -3241,7 +3241,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         context.setAttribute("version",ver);
         VERSION_HASH = Util.getDigestOf(ver).substring(0, 8);
 
-        if(ver.equals("?"))
+        if(ver.equals("?") || Boolean.getBoolean("hudson.script.noCache"))
             RESOURCE_PATH = "";
         else
             RESOURCE_PATH = "/static/"+VERSION_HASH;
