@@ -206,6 +206,14 @@ function makeButton(e,onclick) {
     return btn;
 }
 
+/*
+    If we are inside 'to-be-removed' class, some HTML altering behaviors interact badly, because
+    the behavior re-executes when the removed master copy gets reinserted later.
+ */
+function isInsideRemovable(e) {
+    return Element.ancestors(e).find(function(f){return f.hasClassName("to-be-removed");});
+}
+
 var hudsonRules = {
     "BODY" : function() {
         tooltip = new YAHOO.widget.Tooltip("tt", {context:[], zindex:999});
@@ -215,13 +223,7 @@ var hudsonRules = {
 // other behavior rules change them (like YUI buttons.)
 
     "DIV.hetero-list-container" : function(e) {
-        /*
-            If we are inside 'to-be-removed' class, don't apply a behavior just yet. We'll be applied when
-            the removed master copy gets reinserted later (and since this function has a side effect of removing
-            prototypes, if we do it now, re-insertion will fail to find prototypes)
-         */
-        if(Element.ancestors(e).find(function(f){return f.hasClassName("to-be-removed");}))
-            return;
+        if(isInsideRemovable(e))    return;
 
         // components for the add button
         var menu = document.createElement("SELECT");
@@ -286,9 +288,7 @@ var hudsonRules = {
     },
 
     "DIV.repeated-container" : function(e) {
-        // see the comment of where we do the same above in "DIV.hetero-list-container"
-        if(Element.ancestors(e).find(function(f){return f.hasClassName("to-be-removed");}))
-            return;
+        if(isInsideRemovable(e))    return;
 
         // compute the insertion point
         var ip = e.lastChild;
@@ -527,6 +527,26 @@ var hudsonRules = {
         makeButton(e);
     },
 
+    "TR.optional-block-end": function(e) {
+        if(isInsideRemovable(e))    return;
+
+        // figure out the corresponding start block
+        var end = e;
+
+        for( var depth=0; ; e=e.previousSibling) {
+            if(Element.hasClassName(e,"optional-block-end"))        depth++;
+            if(Element.hasClassName(e,"optional-block-start"))      depth--;
+            if(depth==0)    break;
+        }
+        var start = e;
+
+        var checkbox = start.firstChild.firstChild;
+        checkbox.id = "cb"+(iota++);
+
+        applyNameRef(start,end,checkbox.id);
+        updateOptionalBlock(checkbox,false);
+    },
+
     // image that shows [+] or [-], with hover effect.
     // oncollapsed and onexpanded will be called when the button is triggered.
     "IMG.fold-control" : function(e) {
@@ -607,11 +627,6 @@ function applyNameRef(s,e,id) {
         if(x.getAttribute("nameRef")==null)
             x.setAttribute("nameRef",id);
     }
-}
-
-function initOptionalBlock(sid, eid, cid) {
-    applyNameRef($(sid),$(eid),cid);
-    updateOptionalBlock($(cid),false);
 }
 
 // used by optionalBlock.jelly to update the form status
