@@ -1,0 +1,891 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<!-- -->
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<TITLE>
+Uses of Class hudson.model.Node (Hudson core 1.304 API)
+</TITLE>
+
+<META NAME="date" CONTENT="2009-05-09">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="Uses of Class hudson.model.Node (Hudson core 1.304 API)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><FONT CLASS="NavBarFont1"><B>Class</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Use</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../index.html?hudson/model//class-useNode.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Node.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<CENTER>
+<H2>
+<B>Uses of Class<br>hudson.model.Node</B></H2>
+</CENTER>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Packages that use <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson"><B>hudson</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
+<TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.os.solaris"><B>hudson.os.solaris</B></A></TD>
+<TD>Solaris specific features of Hudson.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.scm"><B>hudson.scm</B></A></TD>
+<TD>Hudson's interface with source code management systems.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.security"><B>hudson.security</B></A></TD>
+<TD>Security-related code&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.slaves"><B>hudson.slaves</B></A></TD>
+<TD>Code related to slaves.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks"><B>hudson.tasks</B></A></TD>
+<TD>Built-in <a href="../../../hudson/tasks/Builder.html"><tt>Builder</tt></a>s and <a href="../../../hudson/tasks/Publisher.html"><tt>Publisher</tt></a>s
+that perform the actual heavy-lifting of a build.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tools"><B>hudson.tools</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.util"><B>hudson.util</B></A></TD>
+<TD>Other miscellaneous utility code&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A> in <A HREF="../../../hudson/package-summary.html">hudson</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/package-summary.html">hudson</A> with parameters of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
+<TD><CODE><B>LauncherDecorator.</B><B><A HREF="../../../hudson/LauncherDecorator.html#decorate(hudson.Launcher, hudson.model.Node)">decorate</A></B>(<A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+         <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called from <A HREF="../../../hudson/model/Node.html#createLauncher(hudson.model.TaskListener)"><CODE>createLauncher(TaskListener)</CODE></A> to decorate the launchers.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
+<TD><CODE><B>Launcher.</B><B><A HREF="../../../hudson/Launcher.html#decorateFor(hudson.model.Node)">decorateFor</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a decorated <A HREF="../../../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> for the given node.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Method parameters in <A HREF="../../../hudson/package-summary.html">hudson</A> with type arguments of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>Functions.</B><B><A HREF="../../../hudson/Functions.html#getNodePropertyDescriptors(java.lang.Class)">getNodePropertyDescriptors</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;clazz)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.model"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A> in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A> in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Root object of the system.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/Slave.html" title="class in hudson.model">Slave</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Information about a Hudson slave node.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> that return <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.</B><B><A HREF="../../../hudson/model/AbstractBuild.html#getBuiltOn()">getBuiltOn</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a <A HREF="../../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> on which this build was done.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#getCurrentNode()">getCurrentNode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the current <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> on which we are buildling.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></FONT></TD>
+<TD><CODE><B>Queue.Task.</B><B><A HREF="../../../hudson/model/Queue.Task.html#getLastBuiltOn()">getLastBuiltOn</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the previous execution of this task run on a certain node
+ and this task prefers to run on the same node, return that.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></FONT></TD>
+<TD><CODE><B>AbstractProject.</B><B><A HREF="../../../hudson/model/AbstractProject.html#getLastBuiltOn()">getLastBuiltOn</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> where this project was last built on.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></FONT></TD>
+<TD><CODE><B>Queue.JobOffer.</B><B><A HREF="../../../hudson/model/Queue.JobOffer.html#getNode()">getNode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></FONT></TD>
+<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#getNode()">getNode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> that this computer represents.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getNode(java.lang.String)">getNode</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the slave node of the give name, hooked under this Hudson.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> that return types with arguments of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Map&lt;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>,java.util.List&lt;<A HREF="../../../hudson/model/Queue.JobOffer.html" title="class in hudson.model">Queue.JobOffer</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>Queue.ApplicableJobOfferList.</B><B><A HREF="../../../hudson/model/Queue.ApplicableJobOfferList.html#byNodes()">byNodes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Set&lt;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>Label.</B><B><A HREF="../../../hudson/model/Label.html#getNodes()">getNodes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s that belong to this label.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getNodes()">getNodes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s in the system, excluding <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> instance itself which
+ represents the master.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Set&lt;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>Queue.ApplicableJobOfferList.</B><B><A HREF="../../../hudson/model/Queue.ApplicableJobOfferList.html#nodes()">nodes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List up all the <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s that have some available offers.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with parameters of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Queue.JobOffer.html" title="class in hudson.model">Queue.JobOffer</A></CODE></FONT></TD>
+<TD><CODE><B>Queue.ApplicableJobOfferList.</B><B><A HREF="../../../hudson/model/Queue.ApplicableJobOfferList.html#_for(hudson.model.Node)">_for</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a <A HREF="../../../hudson/model/Queue.JobOffer.html" title="class in hudson.model"><CODE>Queue.JobOffer</CODE></A> for an executor of the given node, if any.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#addNode(hudson.model.Node)">addNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds one more <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> to Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Label.</B><B><A HREF="../../../hudson/model/Label.html#contains(hudson.model.Node)">contains</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/JDK.html" title="class in hudson.model">JDK</A></CODE></FONT></TD>
+<TD><CODE><B>JDK.</B><B><A HREF="../../../hudson/model/JDK.html#forNode(hudson.model.Node)">forNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>JDK.</B><B><A HREF="../../../hudson/model/JDK.html#isDefaultJDKValid(hudson.model.Node)">isDefaultJDKValid</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if "java" is in PATH on the given node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#removeNode(hudson.model.Node)">removeNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes a <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> from Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#setNode(hudson.model.Node)">setNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called to notify <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> that its corresponding <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>
+ configuration is updated.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Method parameters in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with type arguments of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#setNodes(java.util.List)">setNodes</A></B>(java.util.List&lt;? extends <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;nodes)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with parameters of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/model/Computer.html#Computer(hudson.model.Node)">Computer</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.os.solaris"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A> in <A HREF="../../../hudson/os/solaris/package-summary.html">hudson.os.solaris</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/os/solaris/package-summary.html">hudson.os.solaris</A> with parameters of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/os/solaris/ZFSProvisioner.html#ZFSProvisioner(hudson.model.Node)">ZFSProvisioner</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.scm"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A> in <A HREF="../../../hudson/scm/package-summary.html">hudson.scm</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/scm/package-summary.html">hudson.scm</A> with parameters of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>SCM.</B><B><A HREF="../../../hudson/scm/SCM.html#processWorkspaceBeforeDeletion(hudson.model.AbstractProject, hudson.FilePath, hudson.model.Node)">processWorkspaceBeforeDeletion</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
+                               <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+                               <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called before a workspace is deleted on the given node, to provide SCM an opportunity to perform clean up.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.security"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A> in <A HREF="../../../hudson/security/package-summary.html">hudson.security</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/security/package-summary.html">hudson.security</A> with parameters of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/security/ACL.html" title="class in hudson.security">ACL</A></CODE></FONT></TD>
+<TD><CODE><B>AuthorizationStrategy.</B><B><A HREF="../../../hudson/security/AuthorizationStrategy.html#getACL(hudson.model.Node)">getACL</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.slaves"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A> in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A> with type parameters of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty&lt;N extends Node&gt;</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extensible property of <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A> in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/slaves/DumbSlave.html" title="class in hudson.slaves">DumbSlave</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default <A HREF="../../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> implementation for computers that do not belong to a higher level structure,
+ like grid or cloud.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A> declared as <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../hudson/slaves/NodeProperty.html" title="type parameter in NodeProperty">N</A></CODE></FONT></TD>
+<TD><CODE><B>NodeProperty.</B><B><A HREF="../../../hudson/slaves/NodeProperty.html#node">node</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A> with type parameters of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>NodeDescriptor.</B><B><A HREF="../../../hudson/slaves/NodeDescriptor.html#ALL">ALL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286
+      Use <A HREF="../../../hudson/slaves/NodeDescriptor.html#all()"><CODE>NodeDescriptor.all()</CODE></A> for read access, and <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.concurrent.Future&lt;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>NodeProvisioner.PlannedNode.</B><B><A HREF="../../../hudson/slaves/NodeProvisioner.PlannedNode.html#future">future</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A> that return <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></FONT></TD>
+<TD><CODE><B>EphemeralNode.</B><B><A HREF="../../../hudson/slaves/EphemeralNode.html#asNode()">asNode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type-safe cast.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A> that return types with arguments of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>,<A HREF="../../../hudson/slaves/NodeDescriptor.html" title="class in hudson.slaves">NodeDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>NodeDescriptor.</B><B><A HREF="../../../hudson/slaves/NodeDescriptor.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/slaves/NodeDescriptor.html" title="class in hudson.slaves"><CODE>NodeDescriptor</CODE></A> descriptors.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A> with parameters of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>NodeProperty.</B><B><A HREF="../../../hudson/slaves/NodeProperty.html#for_(hudson.model.Node)">for_</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List up all <A HREF="../../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves"><CODE>NodePropertyDescriptor</CODE></A>s that are applicable for the
+ given project.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/slaves/NodeSpecific.html" title="type parameter in NodeSpecific">T</A></CODE></FONT></TD>
+<TD><CODE><B>NodeSpecific.</B><B><A HREF="../../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)">forNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a specialized copy of T for functioning in the given node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></CODE></FONT></TD>
+<TD><CODE><B>SlaveComputer.</B><B><A HREF="../../../hudson/slaves/SlaveComputer.html#grabLauncher(hudson.model.Node)">grabLauncher</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grabs a <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> out of <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> to keep it in this <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>SlaveComputer.</B><B><A HREF="../../../hudson/slaves/SlaveComputer.html#setNode(hudson.model.Node)">setNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Method parameters in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A> with type arguments of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>NodePropertyDescriptor.</B><B><A HREF="../../../hudson/slaves/NodePropertyDescriptor.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;nodeType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this <A HREF="../../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A> type is applicable to the
+ given node type.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A> with parameters of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/slaves/NodeList.html#NodeList(hudson.model.Node[])">NodeList</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>[]&nbsp;toCopyIn)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructor parameters in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A> with type arguments of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/slaves/NodeDescriptor.html#NodeDescriptor(java.lang.Class)">NodeDescriptor</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;clazz)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/slaves/NodeList.html#NodeList(java.util.Collection)">NodeList</A></B>(java.util.Collection&lt;? extends <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;c)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/slaves/NodeProvisioner.PlannedNode.html#NodeProvisioner.PlannedNode(java.lang.String, java.util.concurrent.Future, int)">NodeProvisioner.PlannedNode</A></B>(java.lang.String&nbsp;displayName,
+                            java.util.concurrent.Future&lt;<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;future,
+                            int&nbsp;numExecutors)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A> in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A> with parameters of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A></CODE></FONT></TD>
+<TD><CODE><B>Ant.AntInstallation.</B><B><A HREF="../../../hudson/tasks/Ant.AntInstallation.html#forNode(hudson.model.Node)">forNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A></CODE></FONT></TD>
+<TD><CODE><B>Maven.MavenInstallation.</B><B><A HREF="../../../hudson/tasks/Maven.MavenInstallation.html#forNode(hudson.model.Node)">forNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tools"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A> in <A HREF="../../../hudson/tools/package-summary.html">hudson.tools</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/tools/package-summary.html">hudson.tools</A> with parameters of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>ToolLocationNodeProperty.</B><B><A HREF="../../../hudson/tools/ToolLocationNodeProperty.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation)">getToolHome</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+            <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node)"><CODE>ToolInstallation.translateFor(Node)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>ToolLocationTranslator.</B><B><A HREF="../../../hudson/tools/ToolLocationTranslator.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation)">getToolHome</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+            <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called for each <A HREF="../../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node)"><CODE>ToolInstallation.translateFor(Node)</CODE></A> invocations
+ (which normally means it's invoked for each <A HREF="../../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)"><CODE>NodeSpecific.forNode(Node)</CODE></A>)
+ to translate the tool location into the node specific location.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>ToolInstallation.</B><B><A HREF="../../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node)">translateFor</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the location of the tool is overridden for the given node, and if so,
+ return the node-specific home directory.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Method parameters in <A HREF="../../../hudson/tools/package-summary.html">hudson.tools</A> with type arguments of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>ToolLocationNodeProperty.DescriptorImpl.</B><B><A HREF="../../../hudson/tools/ToolLocationNodeProperty.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;nodeType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.util"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A> in <A HREF="../../../hudson/util/package-summary.html">hudson.util</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/util/package-summary.html">hudson.util</A> with parameters of type <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A></CODE></FONT></TD>
+<TD><CODE><B>RunList.</B><B><A HREF="../../../hudson/util/RunList.html#node(hudson.model.Node)">node</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filter the list to builds on a single node only</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>ClockDifference.</B><B><A HREF="../../../hudson/util/ClockDifference.html#toHtml(hudson.model.Node)">toHtml</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;d)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><FONT CLASS="NavBarFont1"><B>Class</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Use</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../index.html?hudson/model//class-useNode.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Node.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &#169; 2009. All Rights Reserved.
+</BODY>
+</HTML>
