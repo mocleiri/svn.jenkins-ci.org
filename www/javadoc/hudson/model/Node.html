@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Node (Hudson core 1.304 API)
+Node (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Node (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Node (Hudson core 1.304 API)";
+        parent.document.title="Node (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -264,6 +264,14 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Node.html#getLabelString()">getLabelString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The same as <A HREF="../../hudson/model/Node.html#getAssignedLabels()"><CODE>getAssignedLabels()</CODE></A> but returns labels as a single text.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -608,6 +616,23 @@ public abstract java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="
 <DL>
 <DD>Returns the possibly empty set of labels that are assigned to this node,
  including the automatic <A HREF="../../hudson/model/Node.html#getSelfLabel()"><CODE>self label</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLabelString()"><!-- --></A><H3>
+getLabelString</H3>
+<PRE>
+public abstract java.lang.String <B>getLabelString</B>()</PRE>
+<DL>
+<DD>The same as <A HREF="../../hudson/model/Node.html#getAssignedLabels()"><CODE>getAssignedLabels()</CODE></A> but returns labels as a single text.
+ Mainly for form binding.
 <P>
 <DD><DL>
 </DL>

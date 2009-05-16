@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Ant.AntInstallation.DescriptorImpl (Hudson core 1.304 API)
+Ant.AntInstallation.DescriptorImpl (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Ant.AntInstallation.DescriptorImpl (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Ant.AntInstallation.DescriptorImpl (Hudson core 1.304 API)";
+        parent.document.title="Ant.AntInstallation.DescriptorImpl (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -210,6 +210,15 @@ java.lang.Object
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overwrites <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>s.</TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.tools.ToolDescriptor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.tools.<A HREF="../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools">ToolDescriptor</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/tools/ToolDescriptor.html#getDefaultInstallers()">getDefaultInstallers</A>, <A HREF="../../hudson/tools/ToolDescriptor.html#getDefaultProperties()">getDefaultProperties</A>, <A HREF="../../hudson/tools/ToolDescriptor.html#getPropertyDescriptors()">getPropertyDescriptors</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
@@ -288,7 +297,8 @@ public <A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hud
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>can be empty but never null. Treat this as a read-only copy, do not mutate.</DL>
+<DT><B>Returns:</B><DD>read-only list of installations;
+      can be empty but never null.</DL>
 </DD>
 </DL>
 <HR>
@@ -298,14 +308,15 @@ setInstallations</H3>
 <PRE>
 public void <B>setInstallations</B>(<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>...&nbsp;installations)</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/tools/ToolDescriptor.html#setInstallations(T[])">ToolDescriptor</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/tools/ToolDescriptor.html#setInstallations(T...)">ToolDescriptor</A></CODE></B></DD>
 <DD>Overwrites <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>s.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/tools/ToolDescriptor.html#setInstallations(T[])">setInstallations</A></CODE> in class <CODE><A HREF="../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools">ToolDescriptor</A>&lt;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>&gt;</CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/tools/ToolDescriptor.html#setInstallations(T...)">setInstallations</A></CODE> in class <CODE><A HREF="../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools">ToolDescriptor</A>&lt;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>installations</CODE> - list of installations;
+      can be empty but never null.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

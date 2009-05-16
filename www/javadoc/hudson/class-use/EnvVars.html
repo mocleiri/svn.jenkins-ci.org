@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.EnvVars (Hudson core 1.304 API)
+Uses of Class hudson.EnvVars (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.EnvVars (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.EnvVars (Hudson core 1.304 API)";
+        parent.document.title="Uses of Class hudson.EnvVars (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -187,19 +187,10 @@ Uses of <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
-<TD><CODE><B>AbstractBuild.</B><B><A HREF="../../hudson/model/AbstractBuild.html#getEnvironment()">getEnvironment</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
 <TD><CODE><B>Run.</B><B><A HREF="../../hudson/model/Run.html#getEnvironment()">getEnvironment</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the map that contains environmental variables to be used for launching
- processes for this build.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of XXX use <A HREF="../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)"><CODE>Run.getEnvironment(TaskListener)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -208,6 +199,23 @@ Uses of <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the environment variables of the JVM on this computer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.</B><B><A HREF="../../hudson/model/AbstractBuild.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
+<TD><CODE><B>Run.</B><B><A HREF="../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the map that contains environmental variables to be used for launching
+ processes for this build.</TD>
 </TR>
 </TABLE>
 &nbsp;

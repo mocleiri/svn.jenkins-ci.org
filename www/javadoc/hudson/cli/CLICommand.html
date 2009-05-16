@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-CLICommand (Hudson core 1.304 API)
+CLICommand (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CLICommand (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CLICommand (Hudson core 1.304 API)";
+        parent.document.title="CLICommand (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;PREV CLASS&nbsp;
-&nbsp;<A HREF="../../hudson/cli/GroovyshCommand.html" title="class in hudson.cli"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/cli/GroovyCommand.html" title="class in hudson.cli"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/cli/CLICommand.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="CLICommand.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -100,7 +100,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, java.lang.Cloneable</DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/cli/GroovyshCommand.html" title="class in hudson.cli">GroovyshCommand</A>, <A HREF="../../hudson/cli/HelpCommand.html" title="class in hudson.cli">HelpCommand</A>, <A HREF="../../hudson/cli/VersionCommand.html" title="class in hudson.cli">VersionCommand</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/cli/GroovyCommand.html" title="class in hudson.cli">GroovyCommand</A>, <A HREF="../../hudson/cli/GroovyshCommand.html" title="class in hudson.cli">GroovyshCommand</A>, <A HREF="../../hudson/cli/HelpCommand.html" title="class in hudson.cli">HelpCommand</A>, <A HREF="../../hudson/cli/VersionCommand.html" title="class in hudson.cli">VersionCommand</A></DD>
 </DL>
 <HR>
 <DL>
@@ -322,7 +322,7 @@ Base class for Hudson CLI.
 <A NAME="stdout"><!-- --></A><H3>
 stdout</H3>
 <PRE>
-protected java.io.PrintStream <B>stdout</B></PRE>
+protected transient java.io.PrintStream <B>stdout</B></PRE>
 <DL>
 <DD>Connected to stdout and stderr of the CLI agent that initiated the session.
  IOW, if you write to these streams, the person who launched the CLI command
@@ -340,7 +340,7 @@ protected java.io.PrintStream <B>stdout</B></PRE>
 <A NAME="stderr"><!-- --></A><H3>
 stderr</H3>
 <PRE>
-protected java.io.PrintStream <B>stderr</B></PRE>
+protected transient java.io.PrintStream <B>stderr</B></PRE>
 <DL>
 <DD>Connected to stdout and stderr of the CLI agent that initiated the session.
  IOW, if you write to these streams, the person who launched the CLI command
@@ -358,7 +358,7 @@ protected java.io.PrintStream <B>stderr</B></PRE>
 <A NAME="stdin"><!-- --></A><H3>
 stdin</H3>
 <PRE>
-protected java.io.InputStream <B>stdin</B></PRE>
+protected transient java.io.InputStream <B>stdin</B></PRE>
 <DL>
 <DD>Connected to stdin of the CLI agent.
 
@@ -373,7 +373,7 @@ protected java.io.InputStream <B>stdin</B></PRE>
 <A NAME="channel"><!-- --></A><H3>
 channel</H3>
 <PRE>
-protected <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting">Channel</A> <B>channel</B></PRE>
+protected transient <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting">Channel</A> <B>channel</B></PRE>
 <DL>
 <DD><A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A> that represents the CLI JVM. You can use this to
  execute <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Callable</CODE></A> on the CLI JVM, among other things.
@@ -470,7 +470,8 @@ public int <B>main</B>(java.util.List&lt;java.lang.String&gt;&nbsp;args,
 <A NAME="run()"><!-- --></A><H3>
 run</H3>
 <PRE>
-protected abstract int <B>run</B>()</PRE>
+protected abstract int <B>run</B>()
+                    throws java.lang.Exception</PRE>
 <DL>
 <DD>Executes the command, and return the exit code.
 <P>
@@ -479,7 +480,12 @@ protected abstract int <B>run</B>()</PRE>
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>0 to indicate a success, otherwise an error code.</DL>
+<DT><B>Returns:</B><DD>0 to indicate a success, otherwise an error code.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../hudson/AbortException.html" title="class in hudson">AbortException</A></CODE> - If the processing should be aborted. Hudson will report the error message
+      without stack trace, and then exits this command.
+<DD><CODE>java.lang.Exception</CODE> - All the other exceptions cause the stack trace to be dumped, and then
+      the command exits with an error code.</DL>
 </DD>
 </DL>
 <HR>
@@ -561,7 +567,7 @@ public static <A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;PREV CLASS&nbsp;
-&nbsp;<A HREF="../../hudson/cli/GroovyshCommand.html" title="class in hudson.cli"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/cli/GroovyCommand.html" title="class in hudson.cli"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/cli/CLICommand.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="CLICommand.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

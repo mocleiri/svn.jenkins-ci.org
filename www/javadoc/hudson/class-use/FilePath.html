@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.FilePath (Hudson core 1.304 API)
+Uses of Class hudson.FilePath (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.FilePath (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.FilePath (Hudson core 1.304 API)";
+        parent.document.title="Uses of Class hudson.FilePath (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -124,6 +124,10 @@ Packages that use <A HREF="../../hudson/FilePath.html" title="class in hudson">F
 that perform the actual heavy-lifting of a build.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tools"><B>hudson.tools</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.util"><B>hudson.util</B></A></TD>
 <TD>Other miscellaneous utility code&nbsp;</TD>
 </TR>
@@ -147,10 +151,18 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>FilePath.</B><B><A HREF="../../hudson/FilePath.html#absolutize()">absolutize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Absolutizes this <A HREF="../../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> and returns the new one.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
 <TD><CODE><B>FilePath.</B><B><A HREF="../../hudson/FilePath.html#child(java.lang.String)">child</A></B>(java.lang.String&nbsp;rel)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The same as <code>new FilePath(this,rel)</code> but more OO.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The same as <A HREF="../../hudson/FilePath.html#FilePath(hudson.FilePath, java.lang.String)"><CODE>FilePath(FilePath,String)</CODE></A> but more OO.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -605,7 +617,7 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
          java.lang.String&nbsp;rel)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Construct a path starting with a base location.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1231,6 +1243,63 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;java.lang.String[]</CODE></FONT></TD>
 <TD><CODE><B>Shell.</B><B><A HREF="../../hudson/tasks/Shell.html#buildCommandLine(hudson.FilePath)">buildCommandLine</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;script)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tools"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> in <A HREF="../../hudson/tools/package-summary.html">hudson.tools</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../hudson/tools/package-summary.html">hudson.tools</A> that return <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>ToolInstaller.</B><B><A HREF="../../hudson/tools/ToolInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                    <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                    <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ensure that the configured tool is really installed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>JDKInstaller.</B><B><A HREF="../../hudson/tools/JDKInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                    <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                    <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>CommandInstaller.</B><B><A HREF="../../hudson/tools/CommandInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                    <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                    <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>ZipExtractionInstaller.</B><B><A HREF="../../hudson/tools/ZipExtractionInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                    <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                    <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

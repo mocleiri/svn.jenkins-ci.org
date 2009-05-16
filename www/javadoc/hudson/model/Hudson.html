@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.304 API)
+Hudson (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.304 API)";
+        parent.document.title="Hudson (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -715,14 +715,6 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doJavaHomeCheck(java.io.File)">doJavaHomeCheck</A></B>(java.io.File&nbsp;value)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the JAVA_HOME is a valid JAVA_HOME path.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doLoginEntry(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doLoginEntry</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
@@ -1353,7 +1345,7 @@ T</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getLabelString()">getLabelString</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The same as <A HREF="../../hudson/model/Node.html#getAssignedLabels()"><CODE>Node.getAssignedLabels()</CODE></A> but returns labels as a single text.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -4447,8 +4439,12 @@ getLabelString</H3>
 <PRE>
 public java.lang.String <B>getLabelString</B>()</PRE>
 <DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Node.html#getLabelString()">Node</A></CODE></B></DD>
+<DD>The same as <A HREF="../../hudson/model/Node.html#getAssignedLabels()"><CODE>Node.getAssignedLabels()</CODE></A> but returns labels as a single text.
+ Mainly for form binding.
+<P>
 <DD><DL>
-</DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Node.html#getLabelString()">getLabelString</A></CODE> in class <CODE><A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -5253,23 +5249,6 @@ public void <B>doWorkspaceCleanup</B>(org.kohsuke.stapler.StaplerResponse&nbsp;r
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="doJavaHomeCheck(java.io.File)"><!-- --></A><H3>
-doJavaHomeCheck</H3>
-<PRE>
-public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doJavaHomeCheck</B>(<FONT SIZE="-1">@QueryParameter</FONT>
-                                      java.io.File&nbsp;value)</PRE>
-<DL>
-<DD>Checks if the JAVA_HOME is a valid JAVA_HOME path.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Functions (Hudson core 1.304 API)
+Functions (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.304 API)";
+        parent.document.title="Functions (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -222,6 +222,14 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#capitalize(java.lang.String)">capitalize</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts "abc" to "Abc".</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -518,6 +526,14 @@ Utility functions used in views.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model">JDK.DescriptorImpl</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getJDKDescriptor()">getJDKDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model">JobPropertyDescriptor</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#getJobPropertyDescriptors(java.lang.Class)">getJobPropertyDescriptors</A></B>(java.lang.Class&lt;? extends <A HREF="../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt;&nbsp;clazz)</CODE>
 
@@ -676,6 +692,25 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;B&gt; java.lang.Class</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getTypeParameter(java.lang.Class, java.lang.Class, int)">getTypeParameter</A></B>(java.lang.Class&lt;? extends B&gt;&nbsp;c,
+                 java.lang.Class&lt;B&gt;&nbsp;base,
+                 int&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given <code>c=MyList (extends ArrayList&lt;Foo&gt;), base=List</code>, compute the parameterization of 'base'
+ that's assignable from 'c' (in this case <code>List&lt;Foo&gt;</code>), and return its n-th type parameter
+ (n=0 would return <code>Foo</code>).</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1064,6 +1099,39 @@ public static java.lang.String <B>xsDate</B>(java.util.Calendar&nbsp;cal)</PRE>
 rfc822Date</H3>
 <PRE>
 public static java.lang.String <B>rfc822Date</B>(java.util.Calendar&nbsp;cal)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTypeParameter(java.lang.Class, java.lang.Class, int)"><!-- --></A><H3>
+getTypeParameter</H3>
+<PRE>
+public static &lt;B&gt; java.lang.Class <B>getTypeParameter</B>(java.lang.Class&lt;? extends B&gt;&nbsp;c,
+                                                   java.lang.Class&lt;B&gt;&nbsp;base,
+                                                   int&nbsp;n)</PRE>
+<DL>
+<DD>Given <code>c=MyList (extends ArrayList&lt;Foo&gt;), base=List</code>, compute the parameterization of 'base'
+ that's assignable from 'c' (in this case <code>List&lt;Foo&gt;</code>), and return its n-th type parameter
+ (n=0 would return <code>Foo</code>).
+
+ <p>
+ This method is useful for doing type arithmetic.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.AssertionError</CODE> - if c' is not parameterized.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getJDKDescriptor()"><!-- --></A><H3>
+getJDKDescriptor</H3>
+<PRE>
+public <A HREF="../hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model">JDK.DescriptorImpl</A> <B>getJDKDescriptor</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -1805,6 +1873,19 @@ jsStringEscape</H3>
 <PRE>
 public static java.lang.String <B>jsStringEscape</B>(java.lang.String&nbsp;s)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="capitalize(java.lang.String)"><!-- --></A><H3>
+capitalize</H3>
+<PRE>
+public static java.lang.String <B>capitalize</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>Converts "abc" to "Abc".
+<P>
 <DD><DL>
 </DL>
 </DD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FilePath (Hudson core 1.304 API)
+FilePath (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson core 1.304 API)";
+        parent.document.title="FilePath (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -234,7 +234,7 @@ java.lang.Object
          java.lang.String&nbsp;rel)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Construct a path starting with a base location.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../hudson/FilePath.html#FilePath(hudson.remoting.VirtualChannel, java.lang.String)">FilePath</A></B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel,
@@ -252,6 +252,14 @@ java.lang.Object
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#absolutize()">absolutize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Absolutizes this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> and returns the new one.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -309,7 +317,15 @@ V</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#child(java.lang.String)">child</A></B>(java.lang.String&nbsp;rel)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The same as <code>new FilePath(this,rel)</code> but more OO.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The same as <A HREF="../hudson/FilePath.html#FilePath(hudson.FilePath, java.lang.String)"><CODE>FilePath(FilePath,String)</CODE></A> but more OO.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#chmod(int)">chmod</A></B>(int&nbsp;mask)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the file permission.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -806,6 +822,10 @@ FilePath</H3>
 public <B>FilePath</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;base,
                 java.lang.String&nbsp;rel)</PRE>
 <DL>
+<DD>Construct a path starting with a base location.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>base</CODE> - starting point for resolution, and defines channel<DD><CODE>rel</CODE> - a path which if relative will be resolved against base</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -948,6 +968,27 @@ public void <B>unzipFrom</B>(java.io.InputStream&nbsp;_in)
 </DL>
 <HR>
 
+<A NAME="absolutize()"><!-- --></A><H3>
+absolutize</H3>
+<PRE>
+public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>absolutize</B>()
+                    throws java.io.IOException,
+                           java.lang.InterruptedException</PRE>
+<DL>
+<DD>Absolutizes this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> and returns the new one.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="untarFrom(java.io.InputStream, hudson.FilePath.TarCompression)"><!-- --></A><H3>
 untarFrom</H3>
 <PRE>
@@ -988,10 +1029,11 @@ public boolean <B>installIfNecessaryFrom</B>(java.net.URL&nbsp;archive,
  that supports upgrade and downgrade. Specifically,
 
  <ul>
- <li>If the target directory doesn't exit <A HREF="../hudson/FilePath.html#mkdirs()">it'll be created</A>.
+ <li>If the target directory doesn't exist <A HREF="../hudson/FilePath.html#mkdirs()">it'll be created</A>.
  <li>The timestamp of the .tgz file is left in the installation directory upon extraction.
  <li>If the timestamp left in the directory doesn't match with the timestamp of the current archive file,
      the directory contents will be discarded and the archive file will be re-extracted.
+ <li>If the connection is refused but the target directory already exists, it is left alone.
  </ul>
 <P>
 <DD><DL>
@@ -1256,13 +1298,14 @@ child</H3>
 <PRE>
 public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>child</B>(java.lang.String&nbsp;rel)</PRE>
 <DL>
-<DD>The same as <code>new FilePath(this,rel)</code> but more OO.
+<DD>The same as <A HREF="../hudson/FilePath.html#FilePath(hudson.FilePath, java.lang.String)"><CODE>FilePath(FilePath,String)</CODE></A> but more OO.
 <P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>rel</CODE> - a relative or absolute path
+<DT><B>Returns:</B><DD>a file on the same channel</DL>
 </DD>
 </DL>
 <HR>
@@ -1481,6 +1524,31 @@ public long <B>length</B>()
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
   <DD>1.129</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="chmod(int)"><!-- --></A><H3>
+chmod</H3>
+<PRE>
+public void <B>chmod</B>(int&nbsp;mask)
+           throws java.io.IOException,
+                  java.lang.InterruptedException</PRE>
+<DL>
+<DD>Sets the file permission.
+
+ On Windows, no-op.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.303</DD>
 </DL>
 </DD>
 </DL>

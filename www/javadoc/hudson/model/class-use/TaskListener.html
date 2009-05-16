@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Interface hudson.model.TaskListener (Hudson core 1.304 API)
+Uses of Interface hudson.model.TaskListener (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.TaskListener (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.TaskListener (Hudson core 1.304 API)";
+        parent.document.title="Uses of Interface hudson.model.TaskListener (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -135,6 +135,10 @@ that perform the actual heavy-lifting of a build.&nbsp;</TD>
 <TD><A HREF="#hudson.tasks.test"><B>hudson.tasks.test</B></A></TD>
 <TD>Defines contracts that need to be implemented by a test reporting
 action (such as the built-in JUnit one).&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tools"><B>hudson.tools</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.util"><B>hudson.util</B></A></TD>
@@ -485,6 +489,32 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/JDK.html" title="class in hudson.model">JDK</A></CODE></FONT></TD>
+<TD><CODE><B>JDK.</B><B><A HREF="../../../hudson/model/JDK.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+        <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.</B><B><A HREF="../../../hudson/model/AbstractBuild.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
+<TD><CODE><B>Run.</B><B><A HREF="../../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the map that contains environmental variables to be used for launching
+ processes for this build.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -889,6 +919,15 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/slaves/NodeSpecific.html" title="type parameter in NodeSpecific">T</A></CODE></FONT></TD>
+<TD><CODE><B>NodeSpecific.</B><B><A HREF="../../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+        <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a specialized copy of T for functioning in the given node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>CommandLauncher.</B><B><A HREF="../../../hudson/slaves/CommandLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
        <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
@@ -986,6 +1025,24 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A></CODE></FONT></TD>
+<TD><CODE><B>Ant.AntInstallation.</B><B><A HREF="../../../hudson/tasks/Ant.AntInstallation.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+        <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A></CODE></FONT></TD>
+<TD><CODE><B>Maven.MavenInstallation.</B><B><A HREF="../../../hudson/tasks/Maven.MavenInstallation.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+        <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>CommandInterpreter.</B><B><A HREF="../../../hudson/tasks/CommandInterpreter.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
         <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
@@ -1023,6 +1080,104 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TABLE>
 &nbsp;
 <P>
+<A NAME="hudson.tools"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A> in <A HREF="../../../hudson/tools/package-summary.html">hudson.tools</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/tools/package-summary.html">hudson.tools</A> with parameters of type <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>ToolLocationNodeProperty.</B><B><A HREF="../../../hudson/tools/ToolLocationNodeProperty.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">getToolHome</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+            <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation,
+            <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <CODE>ToolInstallation#translateFor(Node)</CODE></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>InstallerTranslator.</B><B><A HREF="../../../hudson/tools/InstallerTranslator.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">getToolHome</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+            <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+            <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>ToolLocationTranslator.</B><B><A HREF="../../../hudson/tools/ToolLocationTranslator.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">getToolHome</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+            <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation,
+            <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called for each <CODE>ToolInstallation#translateFor(Node)</CODE> invocations
+ (which normally means it's invoked for each <CODE>NodeSpecific#forNode(Node)</CODE>)
+ to translate the tool location into the node specific location.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>ToolInstaller.</B><B><A HREF="../../../hudson/tools/ToolInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                    <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                    <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ensure that the configured tool is really installed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>JDKInstaller.</B><B><A HREF="../../../hudson/tools/JDKInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                    <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                    <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>CommandInstaller.</B><B><A HREF="../../../hudson/tools/CommandInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                    <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                    <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>ZipExtractionInstaller.</B><B><A HREF="../../../hudson/tools/ZipExtractionInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                    <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                    <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>ToolInstallation.</B><B><A HREF="../../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)">translateFor</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+             <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds a tool on a node.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="hudson.util"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -1036,6 +1191,14 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/util/package-summary.html">hudson.util</A> that implement <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/util/LogTaskListener.html" title="class in hudson.util">LogTaskListener</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> which sends messages to a <CODE>Logger</CODE>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

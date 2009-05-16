@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ToolLocationNodeProperty (Hudson core 1.304 API)
+ToolLocationNodeProperty (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ToolLocationNodeProperty (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ToolLocationNodeProperty (Hudson core 1.304 API)";
+        parent.document.title="ToolLocationNodeProperty (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/tools/ToolInstallerDescriptor.html" title="class in hudson.tools"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/tools/ToolLocationNodeProperty.DescriptorImpl.html" title="class in hudson.tools"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tools/ToolLocationNodeProperty.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -220,11 +220,12 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tools/ToolLocationNodeProperty.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation)">getToolHome</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
-            <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tools/ToolLocationNodeProperty.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">getToolHome</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+            <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation,
+            <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node)"><CODE>ToolInstallation.translateFor(Node)</CODE></A></I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <CODE>ToolInstallation#translateFor(Node)</CODE></I></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.slaves.NodeProperty"><!-- --></A>
@@ -306,23 +307,29 @@ public java.lang.String <B>getHome</B>(<A HREF="../../hudson/tools/ToolInstallat
 </DL>
 <HR>
 
-<A NAME="getToolHome(hudson.model.Node, hudson.tools.ToolInstallation)"><!-- --></A><H3>
+<A NAME="getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)"><!-- --></A><H3>
 getToolHome</H3>
 <PRE>
 public static java.lang.String <B>getToolHome</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
-                                           <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation)</PRE>
+                                           <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation,
+                                           <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)
+                                    throws java.io.IOException,
+                                           java.lang.InterruptedException</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node)"><CODE>ToolInstallation.translateFor(Node)</CODE></A></I>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <CODE>ToolInstallation#translateFor(Node)</CODE></I>
 <P>
 <DD>Checks if the location of the tool is overridden for the given node, and if so,
  return the node-specific home directory. Otherwise return <code>installation.getHome()</code>
 
  <p>
- This is the core logic behind <A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)"><CODE>NodeSpecific.forNode(Node)</CODE></A> for <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>.
+ This is the core logic behind <CODE>NodeSpecific#forNode(Node)</CODE> for <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>.
 <P>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>never null.</DL>
+<DT><B>Returns:</B><DD>never null.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
@@ -356,7 +363,7 @@ public static java.lang.String <B>getToolHome</B>(<A HREF="../../hudson/model/No
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/tools/ToolInstallerDescriptor.html" title="class in hudson.tools"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/tools/ToolLocationNodeProperty.DescriptorImpl.html" title="class in hudson.tools"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tools/ToolLocationNodeProperty.html" target="_top"><B>FRAMES</B></A>  &nbsp;

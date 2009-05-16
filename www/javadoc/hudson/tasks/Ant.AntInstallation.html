@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Ant.AntInstallation (Hudson core 1.304 API)
+Ant.AntInstallation (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Ant.AntInstallation (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Ant.AntInstallation (Hudson core 1.304 API)";
+        parent.document.title="Ant.AntInstallation (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -178,7 +178,8 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#forNode(hudson.model.Node)">forNode</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+        <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a specialized copy of T for functioning in the given node.</TD>
@@ -222,7 +223,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.tools.<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/tools/ToolInstallation.html#all()">all</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getName()">getName</A>, <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node)">translateFor</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/tools/ToolInstallation.html#all()">all</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getName()">getName</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getProperties()">getProperties</A>, <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)">translateFor</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -361,19 +362,25 @@ public <A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hud
 </DL>
 <HR>
 
-<A NAME="forNode(hudson.model.Node)"><!-- --></A><H3>
+<A NAME="forNode(hudson.model.Node, hudson.model.TaskListener)"><!-- --></A><H3>
 forNode</H3>
 <PRE>
-public <A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A> <B>forNode</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</PRE>
+public <A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A> <B>forNode</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                                   <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)
+                            throws java.io.IOException,
+                                   java.lang.InterruptedException</PRE>
 <DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)">NodeSpecific</A></CODE></B></DD>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node, hudson.model.TaskListener)">NodeSpecific</A></CODE></B></DD>
 <DD>Returns a specialized copy of T for functioning in the given node.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)">forNode</A></CODE> in interface <CODE><A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>&gt;</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></CODE> in interface <CODE><A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

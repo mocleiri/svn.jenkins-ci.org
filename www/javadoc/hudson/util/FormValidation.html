@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-FormValidation (Hudson core 1.304 API)
+FormValidation (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FormValidation (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FormValidation (Hudson core 1.304 API)";
+        parent.document.title="FormValidation (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -149,7 +149,7 @@ Represents the result of the form field validation.
  ...
 
  public void <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A>(...) {
-     String version = getAntVersin(antHome);
+     String version = getAntVersion(antHome);
      ...
  }
  </pre>
@@ -318,6 +318,17 @@ Represents the result of the form field validation.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sends out an arbitrary HTML fragment as the output.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FormValidation.html#validateBase64(java.lang.String, boolean, boolean, java.lang.String)">validateBase64</A></B>(java.lang.String&nbsp;value,
+               boolean&nbsp;allowWhitespace,
+               boolean&nbsp;allowEmpty,
+               java.lang.String&nbsp;errorMessage)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Makes sure that the given string is a base64 encoded text.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -639,6 +650,27 @@ public static <A HREF="../../hudson/util/FormValidation.html" title="class in hu
 </DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="validateBase64(java.lang.String, boolean, boolean, java.lang.String)"><!-- --></A><H3>
+validateBase64</H3>
+<PRE>
+public static <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateBase64</B>(java.lang.String&nbsp;value,
+                                            boolean&nbsp;allowWhitespace,
+                                            boolean&nbsp;allowEmpty,
+                                            java.lang.String&nbsp;errorMessage)</PRE>
+<DL>
+<DD>Makes sure that the given string is a base64 encoded text.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>allowWhitespace</CODE> - if you allow whitespace (CR,LF,etc) in base64 encoding<DD><CODE>allowEmpty</CODE> - Is empty string allowed?<DD><CODE>errorMessage</CODE> - Error message.<DT><B>Since:</B></DT>
+  <DD>1.305</DD>
 </DL>
 </DD>
 </DL>

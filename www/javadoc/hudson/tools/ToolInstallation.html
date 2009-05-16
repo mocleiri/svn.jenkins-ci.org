@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ToolInstallation (Hudson core 1.304 API)
+ToolInstallation (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ToolInstallation (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ToolInstallation (Hudson core 1.304 API)";
+        parent.document.title="ToolInstallation (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/tools/ToolLocationNodeProperty.html" title="class in hudson.tools"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/tools/ToolInstaller.html" title="class in hudson.tools"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tools/ToolInstallation.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ToolInstallation.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -126,7 +126,7 @@ Formalization of a tool installed in nodes used for builds
 
  <p>
  Implementations of this class are strongly encouraged to also implement <A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves"><CODE>NodeSpecific</CODE></A>
- (by using <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node)"><CODE>translateFor(Node)</CODE></A>) and
+ (by using <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)"><CODE>translateFor(Node, TaskListener)</CODE></A>) and
  <A HREF="../../hudson/model/EnvironmentSpecific.html" title="interface in hudson.model"><CODE>EnvironmentSpecific</CODE></A> (by using <A HREF="../../hudson/EnvVars.html#expand(java.lang.String)"><CODE>EnvVars.expand(String)</CODE></A>.)
 
  <p>
@@ -176,6 +176,14 @@ Formalization of a tool installed in nodes used for builds
                  java.lang.String&nbsp;home)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.302. Use <A HREF="../../hudson/tools/ToolInstallation.html#ToolInstallation(java.lang.String, java.lang.String, java.util.List)"><CODE>ToolInstallation(String, String, List)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/tools/ToolInstallation.html#ToolInstallation(java.lang.String, java.lang.String, java.util.List)">ToolInstallation</A></B>(java.lang.String&nbsp;name,
+                 java.lang.String&nbsp;home,
+                 java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
@@ -222,12 +230,20 @@ Formalization of a tool installed in nodes used for builds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node)">translateFor</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;,<A HREF="../../hudson/tools/ToolPropertyDescriptor.html" title="class in hudson.tools">ToolPropertyDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tools/ToolInstallation.html#getProperties()">getProperties</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the location of the tool is overridden for the given node, and if so,
- return the node-specific home directory.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)">translateFor</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+             <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds a tool on a node.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -257,6 +273,18 @@ ToolInstallation</H3>
 <PRE>
 public <B>ToolInstallation</B>(java.lang.String&nbsp;name,
                         java.lang.String&nbsp;home)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.302. Use <A HREF="../../hudson/tools/ToolInstallation.html#ToolInstallation(java.lang.String, java.lang.String, java.util.List)"><CODE>ToolInstallation(String, String, List)</CODE></A></I>
+<P>
+</DL>
+<HR>
+
+<A NAME="ToolInstallation(java.lang.String, java.lang.String, java.util.List)"><!-- --></A><H3>
+ToolInstallation</H3>
+<PRE>
+public <B>ToolInstallation</B>(java.lang.String&nbsp;name,
+                        java.lang.String&nbsp;home,
+                        java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</PRE>
 <DL>
 </DL>
 
@@ -305,6 +333,20 @@ public java.lang.String <B>getHome</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="getProperties()"><!-- --></A><H3>
+getProperties</H3>
+<PRE>
+public <A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;,<A HREF="../../hudson/tools/ToolPropertyDescriptor.html" title="class in hudson.tools">ToolPropertyDescriptor</A>&gt; <B>getProperties</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getDescriptor()"><!-- --></A><H3>
 getDescriptor</H3>
 <PRE>
@@ -327,16 +369,22 @@ public <A HREF="../../hudson/tools/ToolDescriptor.html" title="class in hudson.t
 </DL>
 <HR>
 
-<A NAME="translateFor(hudson.model.Node)"><!-- --></A><H3>
+<A NAME="translateFor(hudson.model.Node, hudson.model.TaskListener)"><!-- --></A><H3>
 translateFor</H3>
 <PRE>
-protected java.lang.String <B>translateFor</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</PRE>
+protected java.lang.String <B>translateFor</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                                        <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)
+                                 throws java.io.IOException,
+                                        java.lang.InterruptedException</PRE>
 <DL>
-<DD>Checks if the location of the tool is overridden for the given node, and if so,
- return the node-specific home directory. Otherwise return <code>installation.getHome()</code>
+<DD>Finds a tool on a node.
+ Checks if the location of the tool is overridden for the given node, and if so,
+ return the node-specific home directory.
+ Also checks available <A HREF="../../hudson/tools/ToolLocationTranslator.html" title="class in hudson.tools"><CODE>ToolLocationTranslator</CODE></A>s.
+ Otherwise returns <code>installation.getHome()</code>.
 
  <p>
- This is the core logic behind <A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)"><CODE>NodeSpecific.forNode(Node)</CODE></A> for <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>,
+ This is the core logic behind <A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node, hudson.model.TaskListener)"><CODE>NodeSpecific.forNode(Node, TaskListener)</CODE></A> for <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>,
  and meant to be used by the <code>forNode</code> implementations.
 <P>
 <DD><DL>
@@ -344,7 +392,10 @@ protected java.lang.String <B>translateFor</B>(<A HREF="../../hudson/model/Node.
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>never null.</DL>
+<DT><B>Returns:</B><DD>never null.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -395,7 +446,7 @@ public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class i
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/tools/ToolLocationNodeProperty.html" title="class in hudson.tools"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/tools/ToolInstaller.html" title="class in hudson.tools"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tools/ToolInstallation.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ToolInstallation.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

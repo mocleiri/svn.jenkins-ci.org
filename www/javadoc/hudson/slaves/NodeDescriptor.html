@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-NodeDescriptor (Hudson core 1.304 API)
+NodeDescriptor (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ NodeDescriptor (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="NodeDescriptor (Hudson core 1.304 API)";
+        parent.document.title="NodeDescriptor (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -228,7 +228,15 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.util.List&lt;<A HREF="../../hudson/slaves/NodeDescriptor.html" title="class in hudson.slaves">NodeDescriptor</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/slaves/NodeDescriptor.html#allInstanciable()">allInstanciable</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/slaves/NodeDescriptor.html#allInstantiable()">allInstantiable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/NodeDescriptor.html#doCheckName(java.lang.String)">doCheckName</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -244,7 +252,7 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/slaves/NodeDescriptor.html#isInstanciable()">isInstanciable</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/slaves/NodeDescriptor.html#isInstantiable()">isInstantiable</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can the administrator create this type of nodes from UI?
@@ -338,10 +346,10 @@ protected <B>NodeDescriptor</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="isInstanciable()"><!-- --></A><H3>
-isInstanciable</H3>
+<A NAME="isInstantiable()"><!-- --></A><H3>
+isInstantiable</H3>
 <PRE>
-public boolean <B>isInstanciable</B>()</PRE>
+public boolean <B>isInstantiable</B>()</PRE>
 <DL>
 <DD>Can the administrator create this type of nodes from UI?
 
@@ -378,6 +386,18 @@ public java.lang.String <B>getConfigPage</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="doCheckName(java.lang.String)"><!-- --></A><H3>
+doCheckName</H3>
+<PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckName</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                  java.lang.String&nbsp;value)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="all()"><!-- --></A><H3>
 all</H3>
 <PRE>
@@ -391,10 +411,10 @@ public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class i
 </DL>
 <HR>
 
-<A NAME="allInstanciable()"><!-- --></A><H3>
-allInstanciable</H3>
+<A NAME="allInstantiable()"><!-- --></A><H3>
+allInstantiable</H3>
 <PRE>
-public static java.util.List&lt;<A HREF="../../hudson/slaves/NodeDescriptor.html" title="class in hudson.slaves">NodeDescriptor</A>&gt; <B>allInstanciable</B>()</PRE>
+public static java.util.List&lt;<A HREF="../../hudson/slaves/NodeDescriptor.html" title="class in hudson.slaves">NodeDescriptor</A>&gt; <B>allInstantiable</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>

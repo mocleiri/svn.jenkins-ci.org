@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Run (Hudson core 1.304 API)
+Run (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson core 1.304 API)";
+        parent.document.title="Run (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -657,6 +657,14 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#getEnvironment()">getEnvironment</A></B>()</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of XXX use <A HREF="../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)"><CODE>getEnvironment(TaskListener)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the map that contains environmental variables to be used for launching
  processes for this build.</TD>
 </TR>
@@ -860,7 +868,7 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#getUrl()">getUrl</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the URL of this <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>, relative to the context root of Hudson.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1759,11 +1767,14 @@ getUrl</H3>
 <PRE>
 public java.lang.String <B>getUrl</B>()</PRE>
 <DL>
+<DD>Returns the URL of this <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>, relative to the context root of Hudson.
+<P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Returns:</B><DD>String like "job/foo/32/" with trailing slash but no leading slash.</DL>
 </DD>
 </DL>
 <HR>
@@ -2433,12 +2444,33 @@ public <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <
                        throws java.io.IOException,
                               java.lang.InterruptedException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of XXX use <A HREF="../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)"><CODE>getEnvironment(TaskListener)</CODE></A></I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEnvironment(hudson.model.TaskListener)"><!-- --></A><H3>
+getEnvironment</H3>
+<PRE>
+public <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <B>getEnvironment</B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)
+                       throws java.io.IOException,
+                              java.lang.InterruptedException</PRE>
+<DL>
 <DD>Returns the map that contains environmental variables to be used for launching
  processes for this build.
 
  <p>
- <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A>s that invoke external processes should use this.
- This allows <A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A>s and other project configurations (such as JDK selection)
+ <CODE>BuildStep</CODE>s that invoke external processes should use this.
+ This allows <CODE>BuildWrapper</CODE>s and other project configurations (such as JDK selection)
  to take effect.
 
  <p>
@@ -2463,7 +2495,7 @@ getCharacteristicEnvVars</H3>
 protected final <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <B>getCharacteristicEnvVars</B>()</PRE>
 <DL>
 <DD>Builds up the environment variable map that's sufficient to identify a process
- as ours. This is used to kill run-away processes via <A HREF="../../hudson/util/ProcessTreeKiller.html" title="class in hudson.util"><CODE>ProcessTreeKiller</CODE></A>.
+ as ours. This is used to kill run-away processes via <CODE>ProcessTreeKiller</CODE>.
 <P>
 <DD><DL>
 </DL>

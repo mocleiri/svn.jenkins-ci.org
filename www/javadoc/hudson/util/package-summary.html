@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-hudson.util (Hudson core 1.304 API)
+hudson.util (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.util (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.util (Hudson core 1.304 API)";
+        parent.document.title="hudson.util (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -298,7 +298,8 @@ Other miscellaneous utility code
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.Base64.html" title="class in hudson.util">FormFieldValidator.Base64</A></B></TD>
-<TD>Verifies that the 'value' parameter is correct base64 encoded text.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.305
+      Use <A HREF="../../hudson/util/FormValidation.html#validateBase64(java.lang.String, boolean, boolean, java.lang.String)"><CODE>FormValidation.validateBase64(String, boolean, boolean, String)</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.Executable.html" title="class in hudson.util">FormFieldValidator.Executable</A></B></TD>
@@ -417,6 +418,10 @@ Other miscellaneous utility code
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/ListBoxModel.Option.html" title="class in hudson.util">ListBoxModel.Option</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/LogTaskListener.html" title="class in hudson.util">LogTaskListener</A></B></TD>
+<TD><A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> which sends messages to a <CODE>Logger</CODE>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/Memoizer.html" title="class in hudson.util">Memoizer&lt;K,V&gt;</A></B></TD>

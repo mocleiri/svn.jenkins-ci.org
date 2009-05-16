@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-JDK.DescriptorImpl (Hudson core 1.304 API)
+JDK.DescriptorImpl (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JDK.DescriptorImpl (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JDK.DescriptorImpl (Hudson core 1.304 API)";
+        parent.document.title="JDK.DescriptorImpl (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -187,6 +187,22 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/JDK.DescriptorImpl.html#doCheckHome(java.io.File)">doCheckHome</A></B>(java.io.File&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the JAVA_HOME is a valid JAVA_HOME path.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/tools/JDKInstaller.html" title="class in hudson.tools">JDKInstaller</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/JDK.DescriptorImpl.html#getDefaultInstallers()">getDefaultInstallers</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional list of installers to be configured by default for new tools of this type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/JDK.DescriptorImpl.html#getDisplayName()">getDisplayName</A></B>()</CODE>
 
@@ -208,6 +224,15 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overwrites <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>s.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.tools.ToolDescriptor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.tools.<A HREF="../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools">ToolDescriptor</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/tools/ToolDescriptor.html#getDefaultProperties()">getDefaultProperties</A>, <A HREF="../../hudson/tools/ToolDescriptor.html#getPropertyDescriptors()">getPropertyDescriptors</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
@@ -288,7 +313,8 @@ public <A HREF="../../hudson/model/JDK.html" title="class in hudson.model">JDK</
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>can be empty but never null. Treat this as a read-only copy, do not mutate.</DL>
+<DT><B>Returns:</B><DD>read-only list of installations;
+      can be empty but never null.</DL>
 </DD>
 </DL>
 <HR>
@@ -298,12 +324,46 @@ setInstallations</H3>
 <PRE>
 public void <B>setInstallations</B>(<A HREF="../../hudson/model/JDK.html" title="class in hudson.model">JDK</A>...&nbsp;jdks)</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/tools/ToolDescriptor.html#setInstallations(T[])">ToolDescriptor</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/tools/ToolDescriptor.html#setInstallations(T...)">ToolDescriptor</A></CODE></B></DD>
 <DD>Overwrites <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>s.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/tools/ToolDescriptor.html#setInstallations(T[])">setInstallations</A></CODE> in class <CODE><A HREF="../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools">ToolDescriptor</A>&lt;<A HREF="../../hudson/model/JDK.html" title="class in hudson.model">JDK</A>&gt;</CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/tools/ToolDescriptor.html#setInstallations(T...)">setInstallations</A></CODE> in class <CODE><A HREF="../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools">ToolDescriptor</A>&lt;<A HREF="../../hudson/model/JDK.html" title="class in hudson.model">JDK</A>&gt;</CODE></DL>
 </DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>jdks</CODE> - list of installations;
+      can be empty but never null.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDefaultInstallers()"><!-- --></A><H3>
+getDefaultInstallers</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/tools/JDKInstaller.html" title="class in hudson.tools">JDKInstaller</A>&gt; <B>getDefaultInstallers</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/tools/ToolDescriptor.html#getDefaultInstallers()">ToolDescriptor</A></CODE></B></DD>
+<DD>Optional list of installers to be configured by default for new tools of this type.
+ If there are popular versions of the tool available using generic installation techniques,
+ they can be returned here for the user's convenience.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/tools/ToolDescriptor.html#getDefaultInstallers()">getDefaultInstallers</A></CODE> in class <CODE><A HREF="../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools">ToolDescriptor</A>&lt;<A HREF="../../hudson/model/JDK.html" title="class in hudson.model">JDK</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doCheckHome(java.io.File)"><!-- --></A><H3>
+doCheckHome</H3>
+<PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckHome</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                  java.io.File&nbsp;value)</PRE>
+<DL>
+<DD>Checks if the JAVA_HOME is a valid JAVA_HOME path.
+<P>
 <DD><DL>
 </DL>
 </DD>

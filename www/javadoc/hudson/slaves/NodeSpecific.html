@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-NodeSpecific (Hudson core 1.304 API)
+NodeSpecific (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ NodeSpecific (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="NodeSpecific (Hudson core 1.304 API)";
+        parent.document.title="NodeSpecific (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -130,7 +130,8 @@ Represents any concept that can be adapted for a node.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/slaves/NodeSpecific.html" title="type parameter in NodeSpecific">T</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)">forNode</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+<TD><CODE><B><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+        <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a specialized copy of T for functioning in the given node.</TD>
@@ -149,15 +150,21 @@ Represents any concept that can be adapted for a node.
 </TR>
 </TABLE>
 
-<A NAME="forNode(hudson.model.Node)"><!-- --></A><H3>
+<A NAME="forNode(hudson.model.Node, hudson.model.TaskListener)"><!-- --></A><H3>
 forNode</H3>
 <PRE>
-<A HREF="../../hudson/slaves/NodeSpecific.html" title="type parameter in NodeSpecific">T</A> <B>forNode</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</PRE>
+<A HREF="../../hudson/slaves/NodeSpecific.html" title="type parameter in NodeSpecific">T</A> <B>forNode</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+          <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)
+                                  throws java.io.IOException,
+                                         java.lang.InterruptedException</PRE>
 <DL>
 <DD>Returns a specialized copy of T for functioning in the given node.
 <P>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

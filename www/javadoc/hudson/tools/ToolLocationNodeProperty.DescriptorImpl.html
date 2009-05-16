@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ToolLocationNodeProperty.DescriptorImpl (Hudson core 1.304 API)
+ToolLocationNodeProperty.DescriptorImpl (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ToolLocationNodeProperty.DescriptorImpl (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ToolLocationNodeProperty.DescriptorImpl (Hudson core 1.304 API)";
+        parent.document.title="ToolLocationNodeProperty.DescriptorImpl (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -94,9 +94,10 @@ hudson.tools</FONT>
 Class ToolLocationNodeProperty.DescriptorImpl</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">hudson.model.Descriptor</A>&lt;<A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;&gt;
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">hudson.slaves.NodePropertyDescriptor</A>
-          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.tools.ToolLocationNodeProperty.DescriptorImpl</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">hudson.model.Descriptor</A>&lt;P&gt;
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/tools/PropertyDescriptor.html" title="class in hudson.tools">hudson.tools.PropertyDescriptor</A>&lt;<A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;,<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">hudson.slaves.NodePropertyDescriptor</A>
+              <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.tools.ToolLocationNodeProperty.DescriptorImpl</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DD>
@@ -215,8 +216,17 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/tools/ToolLocationNodeProperty.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;nodeType)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A> type is applicable to the
- given node type.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this property type is applicable to the
+ given target type.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.tools.PropertyDescriptor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.tools.<A HREF="../../hudson/tools/PropertyDescriptor.html" title="class in hudson.tools">PropertyDescriptor</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/tools/PropertyDescriptor.html#for_(java.util.List, java.lang.Class)">for_</A>, <A HREF="../../hudson/tools/PropertyDescriptor.html#for_(java.util.List, T)">for_</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
@@ -311,21 +321,21 @@ isApplicable</H3>
 <PRE>
 public boolean <B>isApplicable</B>(java.lang.Class&lt;? extends <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;nodeType)</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/slaves/NodePropertyDescriptor.html#isApplicable(java.lang.Class)">NodePropertyDescriptor</A></CODE></B></DD>
-<DD>Returns true if this <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A> type is applicable to the
- given node type.
- 
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/tools/PropertyDescriptor.html#isApplicable(java.lang.Class)">PropertyDescriptor</A></CODE></B></DD>
+<DD>Returns true if this property type is applicable to the
+ given target type.
+
  <p>
- The default implementation of this method checks if the given node type is assignable to 'N' of
- <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A><tt>&lt;N></tt>, but subtypes can extend this to change this behavior.
+ The default implementation of this method checks if the given node type is assignable
+ according to the parameterization, but subtypes can extend this to change this behavior.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/slaves/NodePropertyDescriptor.html#isApplicable(java.lang.Class)">isApplicable</A></CODE> in class <CODE><A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/tools/PropertyDescriptor.html#isApplicable(java.lang.Class)">isApplicable</A></CODE> in class <CODE><A HREF="../../hudson/tools/PropertyDescriptor.html" title="class in hudson.tools">PropertyDescriptor</A>&lt;<A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;,<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>true to indicate applicable, in which case the property will be
-      displayed in the configuration screen of this node.</DL>
+      displayed in the configuration screen of the target, for example.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

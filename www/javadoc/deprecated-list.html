@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Deprecated List (Hudson core 1.304 API)
+Deprecated List (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.304 API)";
+        parent.document.title="Deprecated List (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -147,6 +147,12 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294
       Use <A HREF="hudson/util/FormValidation.html" title="class in hudson.util"><CODE>FormValidation</CODE></A> as a return value in your check method.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.Base64.html" title="class in hudson.util">hudson.util.FormFieldValidator.Base64</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.305
+      Use <A HREF="hudson/util/FormValidation.html#validateBase64(java.lang.String, boolean, boolean, java.lang.String)"><CODE>FormValidation.validateBase64(String, boolean, boolean, String)</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/util/FormFieldValidator.Executable.html" title="class in hudson.util">hudson.util.FormFieldValidator.Executable</A>
@@ -505,6 +511,11 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As of 1.64. Use <A HREF="hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)"><CODE>Descriptor.configure(StaplerRequest)</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/Plugin.html#configure(net.sf.json.JSONObject)">hudson.Plugin.configure(JSONObject)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>override <A HREF="hudson/Plugin.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>Plugin.configure(StaplerRequest,JSONObject)</CODE></A> instead</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">hudson.model.Descriptor.configure(StaplerRequest)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As of 1.239, use <A HREF="hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>Descriptor.configure(StaplerRequest, JSONObject)</CODE></A>.</I>&nbsp;</TD>
@@ -616,6 +627,11 @@ function windowTitle()
     into <A HREF="hudson/model/ParameterValue.html" title="class in hudson.model"><CODE>ParameterValue</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Run.html#getEnvironment()">hudson.model.Run.getEnvironment()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of XXX use <A HREF="hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)"><CODE>Run.getEnvironment(TaskListener)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Run.html#getEnvVars()">hudson.model.Run.getEnvVars()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.292
@@ -626,6 +642,12 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.292
       Use <A HREF="hudson/model/Computer.html#getEnvironment()"><CODE>Computer.getEnvironment()</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/JDK.html#getJavaHome()">hudson.model.JDK.getJavaHome()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.304
+      Use <A HREF="hudson/model/JDK.html#getHome()"><CODE>JDK.getHome()</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/matrix/MatrixProject.html#getJDK()">hudson.matrix.MatrixProject.getJDK()</A>
@@ -698,9 +720,9 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/Hudson.html#getNodes()"><CODE>Hudson.getNodes()</CODE></A>. Since 1.252.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/tools/ToolLocationNodeProperty.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation)">hudson.tools.ToolLocationNodeProperty.getToolHome(Node, ToolInstallation)</A>
+<TD><A HREF="hudson/tools/ToolLocationNodeProperty.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">hudson.tools.ToolLocationNodeProperty.getToolHome(Node, ToolInstallation, TaskListener)</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node)"><CODE>ToolInstallation.translateFor(Node)</CODE></A></I>&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <CODE>ToolInstallation#translateFor(Node)</CODE></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#getUrl()">hudson.model.Hudson.getUrl()</A>
@@ -1004,6 +1026,11 @@ function windowTitle()
 <TD><A HREF="hudson/scm/SubversionSCM.html#SubversionSCM(java.lang.String[], java.lang.String[], boolean, hudson.scm.SubversionRepositoryBrowser)">hudson.scm.SubversionSCM(String[], String[], boolean, SubversionRepositoryBrowser)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tools/ToolInstallation.html#ToolInstallation(java.lang.String, java.lang.String)">hudson.tools.ToolInstallation(String, String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.302. Use <A HREF="hudson/tools/ToolInstallation.html#ToolInstallation(java.lang.String, java.lang.String, java.util.List)"><CODE>ToolInstallation.ToolInstallation(String, String, List)</CODE></A></I>&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;

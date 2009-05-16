@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ToolLocationTranslator (Hudson core 1.304 API)
+ToolLocationTranslator (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ToolLocationTranslator (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ToolLocationTranslator (Hudson core 1.304 API)";
+        parent.document.title="ToolLocationTranslator (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/tools/ToolLocationNodeProperty.ToolLocation.html" title="class in hudson.tools"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;NEXT CLASS</FONT></TD>
+&nbsp;<A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tools/ToolLocationTranslator.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ToolLocationTranslator.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -99,6 +99,9 @@ java.lang.Object
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DD>
 </DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/tools/InstallerTranslator.html" title="class in hudson.tools">InstallerTranslator</A></DD>
+</DL>
 <HR>
 <DL>
 <DT><PRE>public abstract class <B>ToolLocationTranslator</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DL>
@@ -124,7 +127,7 @@ This Hudson-wide extension points can participate in determining the actual node
   <DD>1.299</DD>
 <DT><B>Author:</B></DT>
   <DD>Kohsuke Kawaguchi</DD>
-<DT><B>See Also:</B><DD><A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node)"><CODE>ToolInstallation.translateFor(Node)</CODE></A></DL>
+<DT><B>See Also:</B><DD><CODE>ToolInstallation#translateFor(Node)</CODE></DL>
 <HR>
 
 <P>
@@ -183,12 +186,13 @@ This Hudson-wide extension points can participate in determining the actual node
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tools/ToolLocationTranslator.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation)">getToolHome</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
-            <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tools/ToolLocationTranslator.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">getToolHome</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+            <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation,
+            <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called for each <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node)"><CODE>ToolInstallation.translateFor(Node)</CODE></A> invocations
- (which normally means it's invoked for each <A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)"><CODE>NodeSpecific.forNode(Node)</CODE></A>)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called for each <CODE>ToolInstallation#translateFor(Node)</CODE> invocations
+ (which normally means it's invoked for each <CODE>NodeSpecific#forNode(Node)</CODE>)
  to translate the tool location into the node specific location.</TD>
 </TR>
 </TABLE>
@@ -231,14 +235,17 @@ public <B>ToolLocationTranslator</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="getToolHome(hudson.model.Node, hudson.tools.ToolInstallation)"><!-- --></A><H3>
+<A NAME="getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)"><!-- --></A><H3>
 getToolHome</H3>
 <PRE>
 public abstract java.lang.String <B>getToolHome</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
-                                             <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation)</PRE>
+                                             <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation,
+                                             <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)
+                                      throws java.io.IOException,
+                                             java.lang.InterruptedException</PRE>
 <DL>
-<DD>Called for each <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node)"><CODE>ToolInstallation.translateFor(Node)</CODE></A> invocations
- (which normally means it's invoked for each <A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)"><CODE>NodeSpecific.forNode(Node)</CODE></A>)
+<DD>Called for each <CODE>ToolInstallation#translateFor(Node)</CODE> invocations
+ (which normally means it's invoked for each <CODE>NodeSpecific#forNode(Node)</CODE>)
  to translate the tool location into the node specific location.
 
  <p>
@@ -253,7 +260,10 @@ public abstract java.lang.String <B>getToolHome</B>(<A HREF="../../hudson/model/
 </DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -304,7 +314,7 @@ public static <A HREF="../../hudson/ExtensionList.html" title="class in hudson">
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/tools/ToolLocationNodeProperty.ToolLocation.html" title="class in hudson.tools"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;NEXT CLASS</FONT></TD>
+&nbsp;<A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tools/ToolLocationTranslator.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ToolLocationTranslator.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Uses of Class hudson.util.FormValidation (Hudson core 1.304 API)
+Uses of Class hudson.util.FormValidation (Hudson core 1.305 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-09">
+<META NAME="date" CONTENT="2009-05-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.util.FormValidation (Hudson core 1.304 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.util.FormValidation (Hudson core 1.304 API)";
+        parent.document.title="Uses of Class hudson.util.FormValidation (Hudson core 1.305 API)";
     }
 }
 </SCRIPT>
@@ -129,6 +129,10 @@ that perform the actual heavy-lifting of a build.&nbsp;</TD>
 action (such as the built-in JUnit one).&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tools"><B>hudson.tools</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.triggers"><B>hudson.triggers</B></A></TD>
 <TD>Built-in <a href="../../../hudson/triggers/Trigger.html"><tt>Trigger</tt></a>s that run periodically to kick a new build.&nbsp;</TD>
 </TR>
@@ -226,6 +230,14 @@ Uses of <A HREF="../../../hudson/util/FormValidation.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B>JDK.DescriptorImpl.</B><B><A HREF="../../../hudson/model/JDK.DescriptorImpl.html#doCheckHome(java.io.File)">doCheckHome</A></B>(java.io.File&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the JAVA_HOME is a valid JAVA_HOME path.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
 <TD><CODE><B>ListView.DescriptorImpl.</B><B><A HREF="../../../hudson/model/ListView.DescriptorImpl.html#doCheckIncludeRegex(java.lang.String)">doCheckIncludeRegex</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
@@ -291,14 +303,6 @@ Uses of <A HREF="../../../hudson/util/FormValidation.html" title="class in hudso
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the top-level item with the given name exists.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#doJavaHomeCheck(java.io.File)">doJavaHomeCheck</A></B>(java.io.File&nbsp;value)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the JAVA_HOME is a valid JAVA_HOME path.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -434,6 +438,15 @@ Uses of <A HREF="../../../hudson/util/FormValidation.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B>Sventon2.DescriptorImpl.</B><B><A HREF="../../../hudson/scm/browsers/Sventon2.DescriptorImpl.html#doCheckUrl(hudson.model.AbstractProject, java.lang.String)">doCheckUrl</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
+           java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs on-the-fly validation of the URL.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
 <TD><CODE><B>Sventon.DescriptorImpl.</B><B><A HREF="../../../hudson/scm/browsers/Sventon.DescriptorImpl.html#doCheckUrl(hudson.model.AbstractProject, java.lang.String)">doCheckUrl</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
            java.lang.String&nbsp;value)</CODE>
 
@@ -513,6 +526,14 @@ Uses of <A HREF="../../../hudson/util/FormValidation.html" title="class in hudso
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
 <TD><CODE><B>CommandLauncher.DescriptorImpl.</B><B><A HREF="../../../hudson/slaves/CommandLauncher.DescriptorImpl.html#doCheckCommand(java.lang.String)">doCheckCommand</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B>NodeDescriptor.</B><B><A HREF="../../../hudson/slaves/NodeDescriptor.html#doCheckName(java.lang.String)">doCheckName</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -665,6 +686,55 @@ Uses of <A HREF="../../../hudson/util/FormValidation.html" title="class in hudso
 </TABLE>
 &nbsp;
 <P>
+<A NAME="hudson.tools"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> in <A HREF="../../../hudson/tools/package-summary.html">hudson.tools</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/tools/package-summary.html">hudson.tools</A> that return <A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B>JDKInstaller.DescriptorImpl.</B><B><A HREF="../../../hudson/tools/JDKInstaller.DescriptorImpl.html#doCheckAcceptLicense(boolean)">doCheckAcceptLicense</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B>CommandInstaller.DescriptorImpl.</B><B><A HREF="../../../hudson/tools/CommandInstaller.DescriptorImpl.html#doCheckCommand(java.lang.String)">doCheckCommand</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B>JDKInstaller.DescriptorImpl.</B><B><A HREF="../../../hudson/tools/JDKInstaller.DescriptorImpl.html#doCheckId(java.lang.String)">doCheckId</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B>ZipExtractionInstaller.DescriptorImpl.</B><B><A HREF="../../../hudson/tools/ZipExtractionInstaller.DescriptorImpl.html#doCheckUrl(java.lang.String)">doCheckUrl</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="hudson.triggers"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -796,6 +866,17 @@ Uses of <A HREF="../../../hudson/util/FormValidation.html" title="class in hudso
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B>FormValidation.</B><B><A HREF="../../../hudson/util/FormValidation.html#validateBase64(java.lang.String, boolean, boolean, java.lang.String)">validateBase64</A></B>(java.lang.String&nbsp;value,
+               boolean&nbsp;allowWhitespace,
+               boolean&nbsp;allowEmpty,
+               java.lang.String&nbsp;errorMessage)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Makes sure that the given string is a base64 encoded text.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
