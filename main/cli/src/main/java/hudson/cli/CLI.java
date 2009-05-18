@@ -24,14 +24,17 @@
 package hudson.cli;
 
 import hudson.remoting.Channel;
+import hudson.remoting.RemoteInputStream;
 import hudson.remoting.RemoteOutputStream;
+import hudson.remoting.PingThread;
 
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * CLI entry point to Hudson.
@@ -42,22 +45,60 @@ public class CLI {
     public static void main(final String[] _args) throws Exception {
         List<String> args = Arrays.asList(_args);
 
-        URL target = new URL("http://localhost:8080/cli");
-        FullDuplexHttpStream con = new FullDuplexHttpStream(target);
+        String url = System.getenv("HUDSON_URL");
+
+        while(!args.isEmpty()) {
+            String head = args.get(0);
+            if(head.equals("-s") && args.size()>=2) {
+                url = args.get(1);
+                args = args.subList(2,args.size());
+                continue;
+            }
+            break;
+        }
+        
+        if(url==null)
+            printUsageAndExit(Messages.CLI_NoURL());
+        if(!url.endsWith("/"))  url+='/';
+        url+="cli";
+
+        if(args.isEmpty())
+            args = Arrays.asList("help"); // default to help
+
+        FullDuplexHttpStream con = new FullDuplexHttpStream(new URL(url));
         ExecutorService pool = Executors.newCachedThreadPool();
-        Channel channel = new Channel("Chunked connection to "+target,
+        Channel channel = new Channel("Chunked connection to "+url,
                 pool,con.getInputStream(),con.getOutputStream());
+        new PingThread(channel,30*1000) {
+            protected void onDead() {
+                // noop. the point of ping is to keep the connection alive
+                // as most HTTP servers have a rather short read time out
+            }
+        }.start();
 
         // execute the command
         int r=-1;
         try {
-            CliEntryPoint cli = (CliEntryPoint)channel.getRemoteProperty(CliEntryPoint.class.getName());
-            r = cli.main(args, new RemoteOutputStream(System.out), new RemoteOutputStream(System.err));
+            CliEntryPoint cli = (CliEntryPoint)channel.waitForRemoteProperty(CliEntryPoint.class.getName());
+            if(cli.protocolVersion()!=CliEntryPoint.VERSION) {
+                System.err.println(Messages.CLI_VersionMismatch());
+            } else {
+                // Arrays.asList is not serializable --- see 6835580
+                args = new ArrayList<String>(args);
+                r = cli.main(args, Locale.getDefault(), new RemoteInputStream(System.in),
+                        new RemoteOutputStream(System.out), new RemoteOutputStream(System.err));
+            }
         } finally {
             channel.close();
             pool.shutdown();
         }
 
         System.exit(r);
+    }
+
+    private static void printUsageAndExit(String msg) {
+        if(msg!=null)   System.out.println(msg);
+        System.err.println(Messages.CLI_Usage());
+        System.exit(-1);
     }
 }
