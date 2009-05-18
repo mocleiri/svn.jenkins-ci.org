@@ -1,0 +1,2309 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<!-- -->
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<TITLE>
+Functions (Hudson core 1.306 API)
+</TITLE>
+
+<META NAME="date" CONTENT="2009-05-16">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="Functions (Hudson core 1.306 API)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Functions.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../hudson/FileSystemProvisionerDescriptor.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../hudson/Functions.RunUrl.html" title="class in hudson"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../index.html?hudson/Functions.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Functions.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+hudson</FONT>
+<BR>
+Class Functions</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../resources/inherit.gif" ALT="extended by "><B>hudson.Functions</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public class <B>Functions</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+Utility functions used in views.
+
+ <p>
+ An instance of this class is created for each request and made accessible
+ from view pages via the variable 'h' (h stands for Hudson.)
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Kohsuke Kawaguchi</DD>
+</DL>
+<HR>
+
+<P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.RunUrl.html" title="class in hudson">Functions.RunUrl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL decomposed for easier computation of relevant URLs.</TD>
+</TR>
+</TABLE>
+&nbsp;<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#DEBUG_YUI">DEBUG_YUI</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set to true if you need to use the debug version of YUI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#isUnitTest">isUnitTest</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set to true if we are running unit tests.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../hudson/Functions.html#Functions()">Functions</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#addSuffix(int, java.lang.String, java.lang.String)">addSuffix</A></B>(int&nbsp;n,
+          java.lang.String&nbsp;singular,
+          java.lang.String&nbsp;plural)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds the proper suffix.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#adminCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.Object, hudson.security.Permission)">adminCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+           org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+           java.lang.Object&nbsp;required,
+           <A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#appendIfNotNull(java.lang.String, java.lang.String, java.lang.String)">appendIfNotNull</A></B>(java.lang.String&nbsp;text,
+                java.lang.String&nbsp;suffix,
+                java.lang.String&nbsp;nullText)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#appendSpaceIfNotNull(java.lang.String)">appendSpaceIfNotNull</A></B>(java.lang.String&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#capitalize(java.lang.String)">capitalize</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts "abc" to "Abc".</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#checkPermission(hudson.security.AccessControlled, hudson.security.Permission)">checkPermission</A></B>(<A HREF="../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>&nbsp;object,
+                <A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#checkPermission(java.lang.Object, hudson.security.Permission)">checkPermission</A></B>(java.lang.Object&nbsp;object,
+                <A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This version is so that the 'checkPermission' on <tt>layout.jelly</tt>
+ degrades gracefully if "it" is not an <A HREF="../hudson/security/AccessControlled.html" title="interface in hudson.security"><CODE>AccessControlled</CODE></A> object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#configureAutoRefresh(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, boolean)">configureAutoRefresh</A></B>(javax.servlet.http.HttpServletRequest&nbsp;request,
+                     javax.servlet.http.HttpServletResponse&nbsp;response,
+                     boolean&nbsp;noAutoRefresh)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used by <tt>layout.jelly</tt> to control the auto refresh behavior.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../hudson/Functions.RunUrl.html" title="class in hudson">Functions.RunUrl</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#decompose(org.kohsuke.stapler.StaplerRequest)">decompose</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; T</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#defaulted(T, T)">defaulted</A></B>(T&nbsp;value,
+          T&nbsp;defaultValue)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the value exists, return that value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#defaultToTrue(java.lang.Boolean)">defaultToTrue</A></B>(java.lang.Boolean&nbsp;b)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can be used to check a checkbox by default.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#determineRows(java.lang.String)">determineRows</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Counts the number of rows needed for textarea to fit the content.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.Map&lt;java.lang.Thread,java.lang.StackTraceElement[]&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#dumpAllThreads()">dumpAllThreads</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#dumpThreadInfo(java.lang.management.ThreadInfo)">dumpThreadInfo</A></B>(java.lang.management.ThreadInfo&nbsp;ti)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.util.Collection&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#emptyList()">emptyList</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#encode(java.lang.String)">encode</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#escape(java.lang.String)">escape</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;V&gt; java.util.SortedMap&lt;java.lang.Integer,V&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#filter(java.util.SortedMap, java.lang.String, java.lang.String)">filter</A></B>(java.util.SortedMap&lt;java.lang.Integer,V&gt;&nbsp;map,
+       java.lang.String&nbsp;from,
+       java.lang.String&nbsp;to)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a sub map by using the given range (both ends inclusive).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.apache.commons.jelly.Tag</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#findAncestorTag(java.util.Map, java.lang.String, java.lang.String)">findAncestorTag</A></B>(java.util.Map&nbsp;attributes,
+                java.lang.String&nbsp;nsUri,
+                java.lang.String&nbsp;local)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to assist form databinding.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#generateId()">generateId</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generates an unique ID.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getActionUrl(java.lang.String, hudson.model.Action)">getActionUrl</A></B>(java.lang.String&nbsp;itUrl,
+             <A HREF="../hudson/model/Action.html" title="interface in hudson.model">Action</A>&nbsp;action)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computes the hyperlink to actions, to handle the situation when the <A HREF="../hudson/model/Action.html#getUrlName()"><CODE>Action.getUrlName()</CODE></A>
+ returns absolute URL.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getAuthorizationStrategyDescriptors()">getAuthorizationStrategyDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getBuilderDescriptors(hudson.model.AbstractProject)">getBuilderDescriptors</A></B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getBuildWrapperDescriptors(hudson.model.AbstractProject)">getBuildWrapperDescriptors</A></B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getCheckUrl(java.lang.String, java.lang.Object, java.lang.String)">getCheckUrl</A></B>(java.lang.String&nbsp;userDefined,
+            java.lang.Object&nbsp;descriptor,
+            java.lang.String&nbsp;field)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Determines the form validation check URL.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getCloudDescriptors()">getCloudDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getComputerLauncherDescriptors()">getComputerLauncherDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;javax.servlet.http.Cookie</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getCookie(javax.servlet.http.HttpServletRequest, java.lang.String)">getCookie</A></B>(javax.servlet.http.HttpServletRequest&nbsp;req,
+          java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getCookie(javax.servlet.http.HttpServletRequest, java.lang.String, java.lang.String)">getCookie</A></B>(javax.servlet.http.HttpServletRequest&nbsp;req,
+          java.lang.String&nbsp;name,
+          java.lang.String&nbsp;defaultValue)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.apache.commons.jelly.JellyContext</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getCurrentJellyContext()">getCurrentJellyContext</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When called from within JEXL expression evaluation,
+ this method returns the current <CODE>JellyContext</CODE> used
+ to evaluate the script.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getDiffString(int)">getDiffString</A></B>(int&nbsp;i)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prints the integer as a string that represents difference,
+ like "-5", "+/-0", "+3".</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getDiffString2(int)">getDiffString2</A></B>(int&nbsp;i)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/Functions.html#getDiffString(int)"><CODE>getDiffString(int)</CODE></A> that doesn't show anything for +/-0</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getDiffString2(java.lang.String, int, java.lang.String)">getDiffString2</A></B>(java.lang.String&nbsp;prefix,
+               int&nbsp;i,
+               java.lang.String&nbsp;suffix)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/Functions.html#getDiffString2(int)"><CODE>getDiffString2(int)</CODE></A> that puts the result into prefix and suffix
+ if there's something to print</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.Map</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getEnvVars()">getEnvVars</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getIconFilePath(hudson.model.Action)">getIconFilePath</A></B>(<A HREF="../hudson/model/Action.html" title="interface in hudson.model">Action</A>&nbsp;a)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computes the path to the icon of the given action
+ from the context path.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model">JDK.DescriptorImpl</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getJDKDescriptor()">getJDKDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model">JobPropertyDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getJobPropertyDescriptors(java.lang.Class)">getJobPropertyDescriptors</A></B>(java.lang.Class&lt;? extends <A HREF="../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt;&nbsp;clazz)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;java.util.logging.LogRecord&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getLogRecords()">getLogRecords</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getNearestAncestorUrl(org.kohsuke.stapler.StaplerRequest, java.lang.Object)">getNearestAncestorUrl</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                      java.lang.Object&nbsp;it)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds the given object in the ancestor list and returns its URL.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getNodeModes()">getNodeModes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getNodePropertyDescriptors(java.lang.Class)">getNodePropertyDescriptors</A></B>(java.lang.Class&lt;? extends <A HREF="../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;clazz)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/PageDecorator.html" title="class in hudson.model">PageDecorator</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getPageDecorators()">getPageDecorators</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the <A HREF="../hudson/model/PageDecorator.html" title="class in hudson.model"><CODE>PageDecorator</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/ParameterDefinition.ParameterDescriptor.html" title="class in hudson.model">ParameterDefinition.ParameterDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getParameterDescriptors()">getParameterDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getProjectListString(java.util.List)">getProjectListString</A></B>(java.util.List&lt;<A HREF="../hudson/model/Project.html" title="class in hudson.model">Project</A>&gt;&nbsp;projects)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getPublisherDescriptors(hudson.model.AbstractProject)">getPublisherDescriptors</A></B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getRelativeLinkTo(hudson.model.Item)">getRelativeLinkTo</A></B>(<A HREF="../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computes the relative path from the current page to the given item.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getResourcePath()">getResourcePath</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resoruce path prefix.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getRetentionStrategyDescriptors()">getRetentionStrategyDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A>&lt;?&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getSCMDescriptors(hudson.model.AbstractProject)">getSCMDescriptors</A></B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../hudson/util/Area.html" title="class in hudson.util">Area</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getScreenResolution()">getScreenResolution</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If we know the user's screen resolution, return it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getSearchURL()">getSearchURL</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds the inner-most <A HREF="../hudson/search/SearchableModelObject.html" title="interface in hudson.search"><CODE>SearchableModelObject</CODE></A> in scope.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getSecurityRealmDescriptors()">getSecurityRealmDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getServerName()">getServerName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the host name of the Hudson server that clients can use to talk back to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.Map</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getSystemProperties()">getSystemProperties</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getSystemProperty(java.lang.String)">getSystemProperty</A></B>(java.lang.String&nbsp;key)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.management.ThreadInfo[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getThreadInfos()">getThreadInfos</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;B&gt; java.lang.Class</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getTypeParameter(java.lang.Class, java.lang.Class, int)">getTypeParameter</A></B>(java.lang.Class&lt;? extends B&gt;&nbsp;c,
+                 java.lang.Class&lt;B&gt;&nbsp;base,
+                 int&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given <code>c=MyList (extends ArrayList&lt;Foo&gt;), base=List</code>, compute the parameterization of 'base'
+ that's assignable from 'c' (in this case <code>List&lt;Foo&gt;</code>), and return its n-th type parameter
+ (n=0 would return <code>Foo</code>).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getUpdateCenterUrl()">getUpdateCenterUrl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the URL for the update center server</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getVersion()">getVersion</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getViewResource(java.lang.Object, java.lang.String)">getViewResource</A></B>(java.lang.Object&nbsp;it,
+                java.lang.String&nbsp;path)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getWin32ErrorMessage(java.io.IOException)">getWin32ErrorMessage</A></B>(java.io.IOException&nbsp;e)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getYuiSuffix()">getYuiSuffix</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the suffix to use for YUI JavaScript.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#hasPermission(java.lang.Object, hudson.security.Permission)">hasPermission</A></B>(java.lang.Object&nbsp;object,
+              <A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This version is so that the 'hasPermission' can degrade gracefully
+ if "it" is not an <A HREF="../hudson/security/AccessControlled.html" title="interface in hudson.security"><CODE>AccessControlled</CODE></A> object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#hasPermission(hudson.security.Permission)">hasPermission</A></B>(<A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the current user has the given permission.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#hasView(java.lang.Object, java.lang.String)">hasView</A></B>(java.lang.Object&nbsp;it,
+        java.lang.String&nbsp;path)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#hyperlinkMatchesCurrentPage(java.lang.String)">hyperlinkMatchesCurrentPage</A></B>(java.lang.String&nbsp;href)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the given href link is matching the current page, return true.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.Object</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#ifThenElse(boolean, java.lang.Object, java.lang.Object)">ifThenElse</A></B>(boolean&nbsp;cond,
+           java.lang.Object&nbsp;thenValue,
+           java.lang.Object&nbsp;elseValue)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.294
+      JEXL now supports the real ternary operator "x?y:z", so this work around
+      is no longer necessary.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#inferHudsonURL(org.kohsuke.stapler.StaplerRequest)">inferHudsonURL</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Infers the hudson installation URL from the given request.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#isAnonymous()">isAnonymous</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the current user is anonymous.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#isAutoRefresh(javax.servlet.http.HttpServletRequest)">isAutoRefresh</A></B>(javax.servlet.http.HttpServletRequest&nbsp;request)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#isModel(java.lang.Object)">isModel</A></B>(java.lang.Object&nbsp;o)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#isMultiline(java.lang.String)">isMultiline</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#isMustangOrAbove()">isMustangOrAbove</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Are we running on JRE6 or above?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#isWindows()">isWindows</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#jsStringEscape(java.lang.String)">jsStringEscape</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#nbspIndent(java.lang.String)">nbspIndent</A></B>(java.lang.String&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;One nbsp per 10 pixels in given size, which may be a plain number or "NxN"
+ (like an iconSize).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#prepend(java.lang.String, java.lang.String)">prepend</A></B>(java.lang.String&nbsp;prefix,
+        java.lang.String&nbsp;body)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepend a prefix only when there's the specified body.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#printLogRecord(java.util.logging.LogRecord)">printLogRecord</A></B>(java.util.logging.LogRecord&nbsp;r)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#printThrowable(java.lang.Throwable)">printThrowable</A></B>(java.lang.Throwable&nbsp;t)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#rfc822Date(java.util.Calendar)">rfc822Date</A></B>(java.util.Calendar&nbsp;cal)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#runScript(org.apache.commons.jelly.Script)">runScript</A></B>(org.apache.commons.jelly.Script&nbsp;script)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evaluate a Jelly script and return output as a String.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.util.List&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#singletonList(T)">singletonList</A></B>(T&nbsp;t)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#size2(java.lang.Object)">size2</A></B>(java.lang.Object&nbsp;o)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works like JSTL build-in size(x) function,
+ but handle null gracefully.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.util.List&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#subList(java.util.List, int)">subList</A></B>(java.util.List&lt;T&gt;&nbsp;base,
+        int&nbsp;maxSize)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a sub-list if the given list is bigger than the specified 'maxSize'</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#toCCStatus(hudson.model.Item)">toCCStatus</A></B>(<A HREF="../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;i)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts the Hudson build status to CruiseControl build status,
+ which is either Success, Failure, Exception, or Unknown.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#toEmailSafeString(java.lang.String)">toEmailSafeString</A></B>(java.lang.String&nbsp;projectName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Escapes the character unsafe for e-mail address.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#xmlEscape(java.lang.String)">xmlEscape</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#xsDate(java.util.Calendar)">xsDate</A></B>(java.util.Calendar&nbsp;cal)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="DEBUG_YUI"><!-- --></A><H3>
+DEBUG_YUI</H3>
+<PRE>
+public static boolean <B>DEBUG_YUI</B></PRE>
+<DL>
+<DD>Set to true if you need to use the debug version of YUI.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="isUnitTest"><!-- --></A><H3>
+isUnitTest</H3>
+<PRE>
+public static boolean <B>isUnitTest</B></PRE>
+<DL>
+<DD>Set to true if we are running unit tests.
+<P>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="Functions()"><!-- --></A><H3>
+Functions</H3>
+<PRE>
+public <B>Functions</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="generateId()"><!-- --></A><H3>
+generateId</H3>
+<PRE>
+public java.lang.String <B>generateId</B>()</PRE>
+<DL>
+<DD>Generates an unique ID.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isModel(java.lang.Object)"><!-- --></A><H3>
+isModel</H3>
+<PRE>
+public static boolean <B>isModel</B>(java.lang.Object&nbsp;o)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="xsDate(java.util.Calendar)"><!-- --></A><H3>
+xsDate</H3>
+<PRE>
+public static java.lang.String <B>xsDate</B>(java.util.Calendar&nbsp;cal)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="rfc822Date(java.util.Calendar)"><!-- --></A><H3>
+rfc822Date</H3>
+<PRE>
+public static java.lang.String <B>rfc822Date</B>(java.util.Calendar&nbsp;cal)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTypeParameter(java.lang.Class, java.lang.Class, int)"><!-- --></A><H3>
+getTypeParameter</H3>
+<PRE>
+public static &lt;B&gt; java.lang.Class <B>getTypeParameter</B>(java.lang.Class&lt;? extends B&gt;&nbsp;c,
+                                                   java.lang.Class&lt;B&gt;&nbsp;base,
+                                                   int&nbsp;n)</PRE>
+<DL>
+<DD>Given <code>c=MyList (extends ArrayList&lt;Foo&gt;), base=List</code>, compute the parameterization of 'base'
+ that's assignable from 'c' (in this case <code>List&lt;Foo&gt;</code>), and return its n-th type parameter
+ (n=0 would return <code>Foo</code>).
+
+ <p>
+ This method is useful for doing type arithmetic.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.AssertionError</CODE> - if c' is not parameterized.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getJDKDescriptor()"><!-- --></A><H3>
+getJDKDescriptor</H3>
+<PRE>
+public <A HREF="../hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model">JDK.DescriptorImpl</A> <B>getJDKDescriptor</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDiffString(int)"><!-- --></A><H3>
+getDiffString</H3>
+<PRE>
+public static java.lang.String <B>getDiffString</B>(int&nbsp;i)</PRE>
+<DL>
+<DD>Prints the integer as a string that represents difference,
+ like "-5", "+/-0", "+3".
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDiffString2(int)"><!-- --></A><H3>
+getDiffString2</H3>
+<PRE>
+public static java.lang.String <B>getDiffString2</B>(int&nbsp;i)</PRE>
+<DL>
+<DD><A HREF="../hudson/Functions.html#getDiffString(int)"><CODE>getDiffString(int)</CODE></A> that doesn't show anything for +/-0
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDiffString2(java.lang.String, int, java.lang.String)"><!-- --></A><H3>
+getDiffString2</H3>
+<PRE>
+public static java.lang.String <B>getDiffString2</B>(java.lang.String&nbsp;prefix,
+                                              int&nbsp;i,
+                                              java.lang.String&nbsp;suffix)</PRE>
+<DL>
+<DD><A HREF="../hudson/Functions.html#getDiffString2(int)"><CODE>getDiffString2(int)</CODE></A> that puts the result into prefix and suffix
+ if there's something to print
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addSuffix(int, java.lang.String, java.lang.String)"><!-- --></A><H3>
+addSuffix</H3>
+<PRE>
+public static java.lang.String <B>addSuffix</B>(int&nbsp;n,
+                                         java.lang.String&nbsp;singular,
+                                         java.lang.String&nbsp;plural)</PRE>
+<DL>
+<DD>Adds the proper suffix.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="decompose(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
+decompose</H3>
+<PRE>
+public static <A HREF="../hudson/Functions.RunUrl.html" title="class in hudson">Functions.RunUrl</A> <B>decompose</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getScreenResolution()"><!-- --></A><H3>
+getScreenResolution</H3>
+<PRE>
+public static <A HREF="../hudson/util/Area.html" title="class in hudson.util">Area</A> <B>getScreenResolution</B>()</PRE>
+<DL>
+<DD>If we know the user's screen resolution, return it. Otherwise null.
+<P>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.213</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNodeModes()"><!-- --></A><H3>
+getNodeModes</H3>
+<PRE>
+public static <A HREF="../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>[] <B>getNodeModes</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getProjectListString(java.util.List)"><!-- --></A><H3>
+getProjectListString</H3>
+<PRE>
+public static java.lang.String <B>getProjectListString</B>(java.util.List&lt;<A HREF="../hudson/model/Project.html" title="class in hudson.model">Project</A>&gt;&nbsp;projects)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="ifThenElse(boolean, java.lang.Object, java.lang.Object)"><!-- --></A><H3>
+ifThenElse</H3>
+<PRE>
+public static java.lang.Object <B>ifThenElse</B>(boolean&nbsp;cond,
+                                          java.lang.Object&nbsp;thenValue,
+                                          java.lang.Object&nbsp;elseValue)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.294
+      JEXL now supports the real ternary operator "x?y:z", so this work around
+      is no longer necessary.</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="appendIfNotNull(java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
+appendIfNotNull</H3>
+<PRE>
+public static java.lang.String <B>appendIfNotNull</B>(java.lang.String&nbsp;text,
+                                               java.lang.String&nbsp;suffix,
+                                               java.lang.String&nbsp;nullText)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSystemProperties()"><!-- --></A><H3>
+getSystemProperties</H3>
+<PRE>
+public static java.util.Map <B>getSystemProperties</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEnvVars()"><!-- --></A><H3>
+getEnvVars</H3>
+<PRE>
+public static java.util.Map <B>getEnvVars</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isWindows()"><!-- --></A><H3>
+isWindows</H3>
+<PRE>
+public static boolean <B>isWindows</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLogRecords()"><!-- --></A><H3>
+getLogRecords</H3>
+<PRE>
+public static java.util.List&lt;java.util.logging.LogRecord&gt; <B>getLogRecords</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="printLogRecord(java.util.logging.LogRecord)"><!-- --></A><H3>
+printLogRecord</H3>
+<PRE>
+public static java.lang.String <B>printLogRecord</B>(java.util.logging.LogRecord&nbsp;r)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCookie(javax.servlet.http.HttpServletRequest, java.lang.String)"><!-- --></A><H3>
+getCookie</H3>
+<PRE>
+public static javax.servlet.http.Cookie <B>getCookie</B>(javax.servlet.http.HttpServletRequest&nbsp;req,
+                                                  java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCookie(javax.servlet.http.HttpServletRequest, java.lang.String, java.lang.String)"><!-- --></A><H3>
+getCookie</H3>
+<PRE>
+public static java.lang.String <B>getCookie</B>(javax.servlet.http.HttpServletRequest&nbsp;req,
+                                         java.lang.String&nbsp;name,
+                                         java.lang.String&nbsp;defaultValue)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getYuiSuffix()"><!-- --></A><H3>
+getYuiSuffix</H3>
+<PRE>
+public static java.lang.String <B>getYuiSuffix</B>()</PRE>
+<DL>
+<DD>Gets the suffix to use for YUI JavaScript.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="filter(java.util.SortedMap, java.lang.String, java.lang.String)"><!-- --></A><H3>
+filter</H3>
+<PRE>
+public static &lt;V&gt; java.util.SortedMap&lt;java.lang.Integer,V&gt; <B>filter</B>(java.util.SortedMap&lt;java.lang.Integer,V&gt;&nbsp;map,
+                                                                  java.lang.String&nbsp;from,
+                                                                  java.lang.String&nbsp;to)</PRE>
+<DL>
+<DD>Creates a sub map by using the given range (both ends inclusive).
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="configureAutoRefresh(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, boolean)"><!-- --></A><H3>
+configureAutoRefresh</H3>
+<PRE>
+public static void <B>configureAutoRefresh</B>(javax.servlet.http.HttpServletRequest&nbsp;request,
+                                        javax.servlet.http.HttpServletResponse&nbsp;response,
+                                        boolean&nbsp;noAutoRefresh)</PRE>
+<DL>
+<DD>Used by <tt>layout.jelly</tt> to control the auto refresh behavior.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>noAutoRefresh</CODE> - On certain pages, like a page with forms, will have annoying interference
+      with auto refresh. On those pages, disable auto-refresh.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isAutoRefresh(javax.servlet.http.HttpServletRequest)"><!-- --></A><H3>
+isAutoRefresh</H3>
+<PRE>
+public static boolean <B>isAutoRefresh</B>(javax.servlet.http.HttpServletRequest&nbsp;request)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNearestAncestorUrl(org.kohsuke.stapler.StaplerRequest, java.lang.Object)"><!-- --></A><H3>
+getNearestAncestorUrl</H3>
+<PRE>
+public static java.lang.String <B>getNearestAncestorUrl</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                                     java.lang.Object&nbsp;it)</PRE>
+<DL>
+<DD>Finds the given object in the ancestor list and returns its URL.
+ This is used to determine the "current" URL assigned to the given object,
+ so that one can compute relative URLs from it.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSearchURL()"><!-- --></A><H3>
+getSearchURL</H3>
+<PRE>
+public static java.lang.String <B>getSearchURL</B>()</PRE>
+<DL>
+<DD>Finds the inner-most <A HREF="../hudson/search/SearchableModelObject.html" title="interface in hudson.search"><CODE>SearchableModelObject</CODE></A> in scope.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="appendSpaceIfNotNull(java.lang.String)"><!-- --></A><H3>
+appendSpaceIfNotNull</H3>
+<PRE>
+public static java.lang.String <B>appendSpaceIfNotNull</B>(java.lang.String&nbsp;n)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="nbspIndent(java.lang.String)"><!-- --></A><H3>
+nbspIndent</H3>
+<PRE>
+public static java.lang.String <B>nbspIndent</B>(java.lang.String&nbsp;size)</PRE>
+<DL>
+<DD>One nbsp per 10 pixels in given size, which may be a plain number or "NxN"
+ (like an iconSize).  Useful in a sortable table heading.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getWin32ErrorMessage(java.io.IOException)"><!-- --></A><H3>
+getWin32ErrorMessage</H3>
+<PRE>
+public static java.lang.String <B>getWin32ErrorMessage</B>(java.io.IOException&nbsp;e)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isMultiline(java.lang.String)"><!-- --></A><H3>
+isMultiline</H3>
+<PRE>
+public static boolean <B>isMultiline</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="encode(java.lang.String)"><!-- --></A><H3>
+encode</H3>
+<PRE>
+public static java.lang.String <B>encode</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="escape(java.lang.String)"><!-- --></A><H3>
+escape</H3>
+<PRE>
+public static java.lang.String <B>escape</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="xmlEscape(java.lang.String)"><!-- --></A><H3>
+xmlEscape</H3>
+<PRE>
+public static java.lang.String <B>xmlEscape</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="checkPermission(hudson.security.Permission)"><!-- --></A><H3>
+checkPermission</H3>
+<PRE>
+public static void <B>checkPermission</B>(<A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)
+                            throws java.io.IOException,
+                                   javax.servlet.ServletException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="checkPermission(hudson.security.AccessControlled, hudson.security.Permission)"><!-- --></A><H3>
+checkPermission</H3>
+<PRE>
+public static void <B>checkPermission</B>(<A HREF="../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>&nbsp;object,
+                                   <A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)
+                            throws java.io.IOException,
+                                   javax.servlet.ServletException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="checkPermission(java.lang.Object, hudson.security.Permission)"><!-- --></A><H3>
+checkPermission</H3>
+<PRE>
+public static void <B>checkPermission</B>(java.lang.Object&nbsp;object,
+                                   <A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)
+                            throws java.io.IOException,
+                                   javax.servlet.ServletException</PRE>
+<DL>
+<DD>This version is so that the 'checkPermission' on <tt>layout.jelly</tt>
+ degrades gracefully if "it" is not an <A HREF="../hudson/security/AccessControlled.html" title="interface in hudson.security"><CODE>AccessControlled</CODE></A> object.
+ Otherwise it will perform no check and that problem is hard to notice.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasPermission(hudson.security.Permission)"><!-- --></A><H3>
+hasPermission</H3>
+<PRE>
+public static boolean <B>hasPermission</B>(<A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)
+                             throws java.io.IOException,
+                                    javax.servlet.ServletException</PRE>
+<DL>
+<DD>Returns true if the current user has the given permission.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>permission</CODE> - If null, returns true. This defaulting is convenient in making the use of this method terse.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasPermission(java.lang.Object, hudson.security.Permission)"><!-- --></A><H3>
+hasPermission</H3>
+<PRE>
+public static boolean <B>hasPermission</B>(java.lang.Object&nbsp;object,
+                                    <A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)
+                             throws java.io.IOException,
+                                    javax.servlet.ServletException</PRE>
+<DL>
+<DD>This version is so that the 'hasPermission' can degrade gracefully
+ if "it" is not an <A HREF="../hudson/security/AccessControlled.html" title="interface in hudson.security"><CODE>AccessControlled</CODE></A> object.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="adminCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.Object, hudson.security.Permission)"><!-- --></A><H3>
+adminCheck</H3>
+<PRE>
+public static void <B>adminCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                              org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                              java.lang.Object&nbsp;required,
+                              <A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)
+                       throws java.io.IOException,
+                              javax.servlet.ServletException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="inferHudsonURL(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
+inferHudsonURL</H3>
+<PRE>
+public static java.lang.String <B>inferHudsonURL</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
+<DL>
+<DD>Infers the hudson installation URL from the given request.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getJobPropertyDescriptors(java.lang.Class)"><!-- --></A><H3>
+getJobPropertyDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model">JobPropertyDescriptor</A>&gt; <B>getJobPropertyDescriptors</B>(java.lang.Class&lt;? extends <A HREF="../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt;&nbsp;clazz)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBuildWrapperDescriptors(hudson.model.AbstractProject)"><!-- --></A><H3>
+getBuildWrapperDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>&gt;&gt; <B>getBuildWrapperDescriptors</B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSecurityRealmDescriptors()"><!-- --></A><H3>
+getSecurityRealmDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;&gt; <B>getSecurityRealmDescriptors</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAuthorizationStrategyDescriptors()"><!-- --></A><H3>
+getAuthorizationStrategyDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;&gt; <B>getAuthorizationStrategyDescriptors</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBuilderDescriptors(hudson.model.AbstractProject)"><!-- --></A><H3>
+getBuilderDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;&gt; <B>getBuilderDescriptors</B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPublisherDescriptors(hudson.model.AbstractProject)"><!-- --></A><H3>
+getPublisherDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt; <B>getPublisherDescriptors</B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSCMDescriptors(hudson.model.AbstractProject)"><!-- --></A><H3>
+getSCMDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A>&lt;?&gt;&gt; <B>getSCMDescriptors</B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getComputerLauncherDescriptors()"><!-- --></A><H3>
+getComputerLauncherDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;&gt; <B>getComputerLauncherDescriptors</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRetentionStrategyDescriptors()"><!-- --></A><H3>
+getRetentionStrategyDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&lt;?&gt;&gt;&gt; <B>getRetentionStrategyDescriptors</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParameterDescriptors()"><!-- --></A><H3>
+getParameterDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/ParameterDefinition.ParameterDescriptor.html" title="class in hudson.model">ParameterDefinition.ParameterDescriptor</A>&gt; <B>getParameterDescriptors</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNodePropertyDescriptors(java.lang.Class)"><!-- --></A><H3>
+getNodePropertyDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt; <B>getNodePropertyDescriptors</B>(java.lang.Class&lt;? extends <A HREF="../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;clazz)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIconFilePath(hudson.model.Action)"><!-- --></A><H3>
+getIconFilePath</H3>
+<PRE>
+public static java.lang.String <B>getIconFilePath</B>(<A HREF="../hudson/model/Action.html" title="interface in hudson.model">Action</A>&nbsp;a)</PRE>
+<DL>
+<DD>Computes the path to the icon of the given action
+ from the context path.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="size2(java.lang.Object)"><!-- --></A><H3>
+size2</H3>
+<PRE>
+public static int <B>size2</B>(java.lang.Object&nbsp;o)
+                 throws java.lang.Exception</PRE>
+<DL>
+<DD>Works like JSTL build-in size(x) function,
+ but handle null gracefully.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRelativeLinkTo(hudson.model.Item)"><!-- --></A><H3>
+getRelativeLinkTo</H3>
+<PRE>
+public static java.lang.String <B>getRelativeLinkTo</B>(<A HREF="../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;p)</PRE>
+<DL>
+<DD>Computes the relative path from the current page to the given item.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="dumpAllThreads()"><!-- --></A><H3>
+dumpAllThreads</H3>
+<PRE>
+public static java.util.Map&lt;java.lang.Thread,java.lang.StackTraceElement[]&gt; <B>dumpAllThreads</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getThreadInfos()"><!-- --></A><H3>
+getThreadInfos</H3>
+<PRE>
+<FONT SIZE="-1">@IgnoreJRERequirement
+</FONT>public static java.lang.management.ThreadInfo[] <B>getThreadInfos</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isMustangOrAbove()"><!-- --></A><H3>
+isMustangOrAbove</H3>
+<PRE>
+<FONT SIZE="-1">@IgnoreJRERequirement
+</FONT>public static boolean <B>isMustangOrAbove</B>()</PRE>
+<DL>
+<DD>Are we running on JRE6 or above?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="dumpThreadInfo(java.lang.management.ThreadInfo)"><!-- --></A><H3>
+dumpThreadInfo</H3>
+<PRE>
+<FONT SIZE="-1">@IgnoreJRERequirement
+</FONT>public static java.lang.String <B>dumpThreadInfo</B>(java.lang.management.ThreadInfo&nbsp;ti)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="emptyList()"><!-- --></A><H3>
+emptyList</H3>
+<PRE>
+public static &lt;T&gt; java.util.Collection&lt;T&gt; <B>emptyList</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="jsStringEscape(java.lang.String)"><!-- --></A><H3>
+jsStringEscape</H3>
+<PRE>
+public static java.lang.String <B>jsStringEscape</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="capitalize(java.lang.String)"><!-- --></A><H3>
+capitalize</H3>
+<PRE>
+public static java.lang.String <B>capitalize</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>Converts "abc" to "Abc".
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getVersion()"><!-- --></A><H3>
+getVersion</H3>
+<PRE>
+public static java.lang.String <B>getVersion</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getResourcePath()"><!-- --></A><H3>
+getResourcePath</H3>
+<PRE>
+public static java.lang.String <B>getResourcePath</B>()</PRE>
+<DL>
+<DD>Resoruce path prefix.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getViewResource(java.lang.Object, java.lang.String)"><!-- --></A><H3>
+getViewResource</H3>
+<PRE>
+public static java.lang.String <B>getViewResource</B>(java.lang.Object&nbsp;it,
+                                               java.lang.String&nbsp;path)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasView(java.lang.Object, java.lang.String)"><!-- --></A><H3>
+hasView</H3>
+<PRE>
+public static boolean <B>hasView</B>(java.lang.Object&nbsp;it,
+                              java.lang.String&nbsp;path)
+                       throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="defaultToTrue(java.lang.Boolean)"><!-- --></A><H3>
+defaultToTrue</H3>
+<PRE>
+public static boolean <B>defaultToTrue</B>(java.lang.Boolean&nbsp;b)</PRE>
+<DL>
+<DD>Can be used to check a checkbox by default.
+ Used from views like <code>h.defaultToTrue(scm.useUpdate)</code>.
+ The expression will evaluate to true if scm is null.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="defaulted(java.lang.Object,java.lang.Object)"><!-- --></A><A NAME="defaulted(T, T)"><!-- --></A><H3>
+defaulted</H3>
+<PRE>
+public static &lt;T&gt; T <B>defaulted</B>(T&nbsp;value,
+                              T&nbsp;defaultValue)</PRE>
+<DL>
+<DD>If the value exists, return that value. Otherwise return the default value.
+ <p>
+ Starting 1.294, JEXL supports the elvis operator "x?:y" that supercedes this.
+<P>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.150</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="printThrowable(java.lang.Throwable)"><!-- --></A><H3>
+printThrowable</H3>
+<PRE>
+public static java.lang.String <B>printThrowable</B>(java.lang.Throwable&nbsp;t)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="determineRows(java.lang.String)"><!-- --></A><H3>
+determineRows</H3>
+<PRE>
+public static int <B>determineRows</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>Counts the number of rows needed for textarea to fit the content.
+ Minimum 5 rows.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toCCStatus(hudson.model.Item)"><!-- --></A><H3>
+toCCStatus</H3>
+<PRE>
+public static java.lang.String <B>toCCStatus</B>(<A HREF="../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;i)</PRE>
+<DL>
+<DD>Converts the Hudson build status to CruiseControl build status,
+ which is either Success, Failure, Exception, or Unknown.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isAnonymous()"><!-- --></A><H3>
+isAnonymous</H3>
+<PRE>
+public static boolean <B>isAnonymous</B>()</PRE>
+<DL>
+<DD>Checks if the current user is anonymous.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCurrentJellyContext()"><!-- --></A><H3>
+getCurrentJellyContext</H3>
+<PRE>
+public static org.apache.commons.jelly.JellyContext <B>getCurrentJellyContext</B>()</PRE>
+<DL>
+<DD>When called from within JEXL expression evaluation,
+ this method returns the current <CODE>JellyContext</CODE> used
+ to evaluate the script.
+<P>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.164</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="runScript(org.apache.commons.jelly.Script)"><!-- --></A><H3>
+runScript</H3>
+<PRE>
+public static java.lang.String <B>runScript</B>(org.apache.commons.jelly.Script&nbsp;script)
+                                  throws org.apache.commons.jelly.JellyTagException</PRE>
+<DL>
+<DD>Evaluate a Jelly script and return output as a String.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.apache.commons.jelly.JellyTagException</CODE><DT><B>Since:</B></DT>
+  <DD>1.267</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="subList(java.util.List, int)"><!-- --></A><H3>
+subList</H3>
+<PRE>
+public static &lt;T&gt; java.util.List&lt;T&gt; <B>subList</B>(java.util.List&lt;T&gt;&nbsp;base,
+                                            int&nbsp;maxSize)</PRE>
+<DL>
+<DD>Returns a sub-list if the given list is bigger than the specified 'maxSize'
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getActionUrl(java.lang.String, hudson.model.Action)"><!-- --></A><H3>
+getActionUrl</H3>
+<PRE>
+public static java.lang.String <B>getActionUrl</B>(java.lang.String&nbsp;itUrl,
+                                            <A HREF="../hudson/model/Action.html" title="interface in hudson.model">Action</A>&nbsp;action)</PRE>
+<DL>
+<DD>Computes the hyperlink to actions, to handle the situation when the <A HREF="../hudson/model/Action.html#getUrlName()"><CODE>Action.getUrlName()</CODE></A>
+ returns absolute URL.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toEmailSafeString(java.lang.String)"><!-- --></A><H3>
+toEmailSafeString</H3>
+<PRE>
+public static java.lang.String <B>toEmailSafeString</B>(java.lang.String&nbsp;projectName)</PRE>
+<DL>
+<DD>Escapes the character unsafe for e-mail address.
+ See http://en.wikipedia.org/wiki/E-mail_address for the details,
+ but here the vocabulary is even more restricted.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSystemProperty(java.lang.String)"><!-- --></A><H3>
+getSystemProperty</H3>
+<PRE>
+public java.lang.String <B>getSystemProperty</B>(java.lang.String&nbsp;key)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getServerName()"><!-- --></A><H3>
+getServerName</H3>
+<PRE>
+public java.lang.String <B>getServerName</B>()</PRE>
+<DL>
+<DD>Obtains the host name of the Hudson server that clients can use to talk back to.
+ <p>
+ This is primarily used in <tt>slave-agent.jnlp.jelly</tt> to specify the destination
+ that the slaves talk to.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCheckUrl(java.lang.String, java.lang.Object, java.lang.String)"><!-- --></A><H3>
+getCheckUrl</H3>
+<PRE>
+public java.lang.String <B>getCheckUrl</B>(java.lang.String&nbsp;userDefined,
+                                    java.lang.Object&nbsp;descriptor,
+                                    java.lang.String&nbsp;field)</PRE>
+<DL>
+<DD>Determines the form validation check URL. See textbox.jelly
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUpdateCenterUrl()"><!-- --></A><H3>
+getUpdateCenterUrl</H3>
+<PRE>
+public java.lang.String <B>getUpdateCenterUrl</B>()</PRE>
+<DL>
+<DD>Gets the URL for the update center server
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hyperlinkMatchesCurrentPage(java.lang.String)"><!-- --></A><H3>
+hyperlinkMatchesCurrentPage</H3>
+<PRE>
+public boolean <B>hyperlinkMatchesCurrentPage</B>(java.lang.String&nbsp;href)
+                                    throws java.io.UnsupportedEncodingException</PRE>
+<DL>
+<DD>If the given href link is matching the current page, return true.
+
+ Used in <tt>task.jelly</tt> to decide if the page should be highlighted.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.UnsupportedEncodingException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="singletonList(java.lang.Object)"><!-- --></A><A NAME="singletonList(T)"><!-- --></A><H3>
+singletonList</H3>
+<PRE>
+public &lt;T&gt; java.util.List&lt;T&gt; <B>singletonList</B>(T&nbsp;t)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPageDecorators()"><!-- --></A><H3>
+getPageDecorators</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/PageDecorator.html" title="class in hudson.model">PageDecorator</A>&gt; <B>getPageDecorators</B>()</PRE>
+<DL>
+<DD>Gets all the <A HREF="../hudson/model/PageDecorator.html" title="class in hudson.model"><CODE>PageDecorator</CODE></A>s.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCloudDescriptors()"><!-- --></A><H3>
+getCloudDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt;&gt; <B>getCloudDescriptors</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="findAncestorTag(java.util.Map, java.lang.String, java.lang.String)"><!-- --></A><H3>
+findAncestorTag</H3>
+<PRE>
+public org.apache.commons.jelly.Tag <B>findAncestorTag</B>(java.util.Map&nbsp;attributes,
+                                                    java.lang.String&nbsp;nsUri,
+                                                    java.lang.String&nbsp;local)</PRE>
+<DL>
+<DD>Used to assist form databinding. Given the "attrs" object,
+ find the ancestor tag file of the given name.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="prepend(java.lang.String, java.lang.String)"><!-- --></A><H3>
+prepend</H3>
+<PRE>
+public java.lang.String <B>prepend</B>(java.lang.String&nbsp;prefix,
+                                java.lang.String&nbsp;body)</PRE>
+<DL>
+<DD>Prepend a prefix only when there's the specified body.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Functions.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../hudson/FileSystemProvisionerDescriptor.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../hudson/Functions.RunUrl.html" title="class in hudson"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../index.html?hudson/Functions.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Functions.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &#169; 2009. All Rights Reserved.
+</BODY>
+</HTML>
