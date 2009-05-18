@@ -8,7 +8,6 @@ import hudson.model.HealthReport;
 import hudson.model.HealthReportingAction;
 import hudson.model.Result;
 import hudson.plugins.tasks.util.model.AbstractAnnotation;
-import hudson.util.ChartUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,10 +16,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jfree.chart.JFreeChart;
 import org.kohsuke.stapler.StaplerProxy;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
 
 import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 
@@ -152,63 +148,6 @@ public abstract class AbstractResultAction<T extends BuildResult> implements Sta
     }
 
     /**
-     * Generates a PNG image for the trend graph.
-     *
-     * @param request
-     *            Stapler request
-     * @param response
-     *            Stapler response
-     * @param height
-     *            the height of the trend graph
-     * @throws IOException
-     *             in case of an error
-     */
-    public final void doGraph(final StaplerRequest request, final StaplerResponse response, final int height) throws IOException {
-        if (ChartUtil.awtProblemCause != null) {
-            response.sendRedirect2(request.getContextPath() + "/images/headless.png");
-        }
-        else {
-            GraphConfiguration configuration = createGraphConfiguration(request);
-            if (configuration.isVisible()) {
-                JFreeChart graph = configuration.createGraph(getHealthDescriptor(), this, getDescriptor().getPluginResultUrlName());
-                ChartUtil.generateGraph(request, response, graph, configuration.getWidth(), configuration.getHeight());
-            }
-        }
-    }
-
-    /**
-     * Generates the clickable map for the trend graph.
-     *
-     * @param request
-     *            Stapler request
-     * @param response
-     *            Stapler response
-     * @param height
-     *            the height of the trend graph
-     * @throws IOException
-     *             in case of an error
-     */
-    public final void doGraphMap(final StaplerRequest request, final StaplerResponse response, final int height) throws IOException {
-        GraphConfiguration configuration = createGraphConfiguration(request);
-        if (configuration.isVisible()) {
-            JFreeChart graph = configuration.createGraph(getHealthDescriptor(), this, getDescriptor().getPluginResultUrlName());
-            ChartUtil.generateClickableMap(request, response, graph, configuration.getWidth(), configuration.getHeight());
-        }
-    }
-
-    /**
-     * Creates the graph configuration from the cookie.
-     *
-     * @param request
-     *            the request to get the cookie from
-     * @return the graph configuration
-     */
-    public GraphConfiguration createGraphConfiguration(final StaplerRequest request) {
-        String cookie = new CookieHandler(getDescriptor().getPluginName()).getValue(request.getCookies());
-        return new GraphConfiguration(cookie);
-    }
-
-    /**
      * Gets the result of a previous build if it's recorded, or <code>null</code> if not.
      *
      * @return the result of a previous build, or <code>null</code>
@@ -307,6 +246,32 @@ public abstract class AbstractResultAction<T extends BuildResult> implements Sta
             build.setResult(hudsonResult);
         }
     }
+
+    /** {@inheritDoc} */
+    public String getTooltip(final int numberOfItems) {
+        if (numberOfItems == 1) {
+            return getSingleItemTooltip();
+        }
+        else {
+            return getMultipleItemsTooltip(numberOfItems);
+        }
+    }
+
+    /**
+     * Returns the tooltip for several items.
+     *
+     * @param numberOfItems
+     *            the number of items to display the tooltip for
+     * @return the tooltip for several items
+     */
+    protected abstract String getMultipleItemsTooltip(int numberOfItems);
+
+    /**
+     * Returns the tooltip for exactly one item.
+     *
+     * @return the tooltip for exactly one item
+     */
+    protected abstract String getSingleItemTooltip();
 
     /** Backward compatibility. */
     @Deprecated

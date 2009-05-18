@@ -14,6 +14,7 @@ import hudson.util.FormValidation;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -50,19 +51,36 @@ public final class SCTMExecutorDescriptor extends BuildStepDescriptor<Builder> {
   @Override
   public Builder newInstance(StaplerRequest req, JSONObject formData) throws FormException {
     String execDefIds = formData.getString("execDefIds"); //$NON-NLS-1$
-    String str = formData.getString("projectId"); //$NON-NLS-1$
-    int projectId = Integer.parseInt(str);
-    return new SCTMExecutor(projectId, execDefIds);
+    int projectId = formData.getInt("projectId"); //$NON-NLS-1$
+    int delay = getOptionalIntValue(formData.getString("delay"), 0);
+//    JSONObject buildNumberUsageOption = (JSONObject)formData.get("buildNumberUsageOption");
+    int optValue = SCTMExecutor.OPT_NO_BUILD_NUMBER;// buildNumberUsageOption.getInt("value");
+    String upStreamJobName = "";
+//    if (optValue == SCTMExecutor.OPT_USE_UPSTREAMJOB_BUILDNUMBER) {
+//      upStreamJobName = buildNumberUsageOption.getString("upStreamJobName");
+//    }
+    boolean contOnErr = formData.getBoolean("continueOnError");
+    boolean collectResults = formData.getBoolean("collectResults");
+    
+    return new SCTMExecutor(projectId, execDefIds, delay, optValue, upStreamJobName, contOnErr, collectResults);
+  }
+  
+  private int getOptionalIntValue(String value, int defaultValue) {
+    try {
+      return Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+      return defaultValue;
+    }
   }
 
   @Override
-  public boolean configure(StaplerRequest req, JSONObject json) throws hudson.model.Descriptor.FormException {
-    serviceURL = json.getString("serviceURL"); //$NON-NLS-1$
-    user = json.getString("user"); //$NON-NLS-1$
-    password = PwdCrypt.encode(json.getString("password"), Hudson.getInstance().getSecretKey()); //$NON-NLS-1$
+  public boolean configure(StaplerRequest req, JSONObject formData) throws hudson.model.Descriptor.FormException {
+    serviceURL = formData.getString("serviceURL"); //$NON-NLS-1$
+    user = formData.getString("user"); //$NON-NLS-1$
+    password = PwdCrypt.encode(formData.getString("password"), Hudson.getInstance().getSecretKey()); //$NON-NLS-1$
 
     save();
-    return super.configure(req, json);
+    return super.configure(req, formData);
   }
 
   public void setServiceURL(String serviceURL) {
@@ -120,26 +138,27 @@ public final class SCTMExecutorDescriptor extends BuildStepDescriptor<Builder> {
   }
 
   public FormValidation doCheckUser(StaplerRequest req, StaplerResponse rsp, 
-      @QueryParameter("value") final String value)
-      throws IOException, ServletException {
+      @QueryParameter("value") final String value) {
     return new EmptySingleFieldValidator().check(value);
   }
 
   public FormValidation doCheckPassword(StaplerRequest req, StaplerResponse rsp, 
-      @QueryParameter("value") final String value)
-      throws IOException, ServletException {
+      @QueryParameter("value") final String value) {
     return new EmptySingleFieldValidator().check(value);
   }
 
   public FormValidation doCheckExecDefIds(StaplerRequest req, StaplerResponse rsp, 
-      @QueryParameter("value") final String value)
-      throws IOException, ServletException {
+      @QueryParameter("value") final String value) {
     return new NumberCSVSingleFieldValidator().check(value);
   }
 
   public FormValidation doCheckProjectId(StaplerRequest req, StaplerResponse rsp, 
-      @QueryParameter("value") final String value)
-      throws IOException, ServletException {
+      @QueryParameter("value") final String value) {
+    return FormValidation.validateNonNegativeInteger(value);
+  }
+  
+  public FormValidation doCheckDelay(StaplerRequest rep, StaplerResponse rsp, 
+      @QueryParameter("value") final String value) {
     return FormValidation.validateNonNegativeInteger(value);
   }
 

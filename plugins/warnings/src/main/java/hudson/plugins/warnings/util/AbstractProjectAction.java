@@ -3,11 +3,13 @@ package hudson.plugins.warnings.util;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
+import hudson.util.ChartUtil;
 
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.jfree.chart.JFreeChart;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -23,8 +25,6 @@ import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 public abstract class AbstractProjectAction<T extends ResultAction<?>> implements Action  {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = -8775531952208541253L;
-    /** One year (in seconds). */
-    private static final int ONE_YEAR = 60 * 60 * 24 * 365;
     /** Project that owns this action. */
     @SuppressWarnings("Se")
     private final AbstractProject<?, ?> project;
@@ -36,8 +36,6 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
     private final String url;
     /** Plug-in results URL. */
     private final String resultUrl;
-    /** Determines the height of the trend graph. */
-    private final int height;
 
     /**
      * Creates a new instance of <code>AbstractProjectAction</code>.
@@ -48,13 +46,10 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
      *            the type of the result action
      * @param plugin
      *            the plug-in that owns this action
-     * @param height
-     *            the height of the trend graph
      */
-    public AbstractProjectAction(final AbstractProject<?, ?> project, final Class<T> resultActionType, final PluginDescriptor plugin, final int height) {
+    public AbstractProjectAction(final AbstractProject<?, ?> project, final Class<T> resultActionType, final PluginDescriptor plugin) {
         this.project = project;
         this.resultActionType = resultActionType;
-        this.height = height;
         iconUrl = plugin.getIconUrl();
         url = plugin.getPluginName();
         resultUrl = plugin.getPluginResultUrlName();
@@ -88,11 +83,45 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
      * @return the dynamic result of the analysis (detail page).
      */
     public Object getDynamic(final String link, final StaplerRequest request, final StaplerResponse response) {
-        if (hasValidResults()) {
-            return new GraphConfigurationDetail(getProject(), request, getUrlName(), getLastAction());
+        if ("configureDefaults".equals(link)) {
+            return createDefaultConfiguration();
+        }
+        else if ("configure".equals(link)) {
+            return createUserConfiguration(request);
         }
         else {
-            return new GraphConfigurationDetail(getProject(), request, getUrlName());
+            return null;
+        }
+    }
+
+    /**
+     * Creates a view to configure the trend graph for the current user.
+     *
+     * @param request
+     *            Stapler request
+     * @return a view to configure the trend graph for the current user
+     */
+    private Object createUserConfiguration(final StaplerRequest request) {
+        if (hasValidResults()) {
+            return new UserGraphConfigurationDetail(getProject(), getUrlName(), request, getLastAction());
+        }
+        else {
+            return new UserGraphConfigurationDetail(getProject(), getUrlName(), request);
+        }
+    }
+
+
+    /**
+     * Creates a view to configure the trend graph defaults.
+     *
+     * @return a view to configure the trend graph defaults
+     */
+    private Object createDefaultConfiguration() {
+        if (hasValidResults()) {
+            return new DefaultGraphConfigurationDetail(getProject(), getUrlName(), getLastAction());
+        }
+        else {
+            return new DefaultGraphConfigurationDetail(getProject(), getUrlName());
         }
     }
 
@@ -159,18 +188,15 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
         return lastBuild;
     }
 
-
     /**
-     * Display the trend graph. Delegates to the the associated
-     * {@link ResultAction}.
+     * Display the trend graph.
      *
      * @param request
      *            Stapler request
      * @param response
      *            Stapler response
      * @throws IOException
-     *             in case of an error in
-     *             {@link ResultAction#doGraph(StaplerRequest, StaplerResponse, int)}
+     *             in case of an error
      */
     public void doTrend(final StaplerRequest request, final StaplerResponse response) throws IOException {
         ResultAction<?> action = getLastAction();
@@ -178,7 +204,7 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
         else {
-            action.doGraph(request, response, height);
+            doGraph(action, request, response);
         }
     }
 
@@ -199,7 +225,7 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
         else {
-            action.doGraphMap(request, response, height);
+            doGraphMap(action, request, response);
         }
     }
 
@@ -211,8 +237,65 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
      * @return the graph configuration
      */
     public boolean isTrendVisible(final StaplerRequest request) {
-        String cookie = new CookieHandler(url).getValue(request.getCookies());
-        return hasValidResults() && new GraphConfiguration(cookie).isVisible();
+        return hasValidResults() && new UserGraphConfigurationDetail(project, url, request).isVisible();
+    }
+
+    /**
+     * Generates a PNG image for the trend graph.
+     *
+     * @param action
+     *            the last result action
+     * @param request
+     *            Stapler request
+     * @param response
+     *            Stapler response
+     * @throws IOException
+     *             in case of an error
+     */
+    private void doGraph(final ResultAction<?> action, final StaplerRequest request, final StaplerResponse response) throws IOException {
+        if (ChartUtil.awtProblemCause != null) {
+            response.sendRedirect2(request.getContextPath() + "/images/headless.png");
+        }
+        else {
+            GraphConfiguration configuration = createGraphConfiguration(request, action);
+            if (configuration.isVisible()) {
+                JFreeChart graph = configuration.createGraph(action.getHealthDescriptor(), action, url);
+                ChartUtil.generateGraph(request, response, graph, configuration.getWidth(), configuration.getHeight());
+            }
+        }
+    }
+
+    /**
+     * Generates the clickable map for the trend graph.
+     *
+     * @param action
+     *            the last result action
+     * @param request
+     *            Stapler request
+     * @param response
+     *            Stapler response
+     * @throws IOException
+     *             in case of an error
+     */
+    private void doGraphMap(final ResultAction<?> action, final StaplerRequest request, final StaplerResponse response) throws IOException {
+        GraphConfiguration configuration = createGraphConfiguration(request, action);
+        if (configuration.isVisible()) {
+            JFreeChart graph = configuration.createGraph(action.getHealthDescriptor(), action, url);
+            ChartUtil.generateClickableMap(request, response, graph, configuration.getWidth(), configuration.getHeight());
+        }
+    }
+
+    /**
+     * Creates the graph configuration from the cookie.
+     *
+     * @param request
+     *            the request to get the cookie from
+     * @param action
+     *            the last result action
+     * @return the graph configuration
+     */
+    public GraphConfiguration createGraphConfiguration(final StaplerRequest request, final ResultAction<?> action) {
+        return new UserGraphConfigurationDetail(project, url, request, action);
     }
 
     /**

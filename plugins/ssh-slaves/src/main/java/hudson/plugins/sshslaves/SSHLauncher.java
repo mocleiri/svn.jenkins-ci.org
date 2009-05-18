@@ -26,6 +26,7 @@ import hudson.util.IOException2;
 import hudson.util.StreamCopyThread;
 import hudson.util.StreamTaskListener;
 import hudson.Extension;
+import hudson.AbortException;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
@@ -107,7 +108,7 @@ public class SSHLauncher extends ComputerLauncher {
      * @return
      */
     public String getJvmOptions() {
-        return jvmOptions;
+        return jvmOptions == null ? "" : jvmOptions;
     }
 
     /**
@@ -196,7 +197,9 @@ public class SSHLauncher extends ComputerLauncher {
     private void startSlave(SlaveComputer computer, final StreamTaskListener listener, String java,
                             String workingDirectory) throws IOException {
         final Session session = connection.openSession();
-        session.execCommand("cd '" + workingDirectory + "' && " + java + (jvmOptions == null ? "" : " " + jvmOptions) + " -jar slave.jar");
+        String cmd = "cd '" + workingDirectory + "' && " + java + (jvmOptions == null ? "" : " " + jvmOptions) + " -jar slave.jar";
+        listener.getLogger().println(Messages.SSHLauncher_StartingSlaveProcess(getTimestamp(), cmd));
+        session.execCommand(cmd);
         final StreamGobbler out = new StreamGobbler(session.getStdout());
         final StreamGobbler err = new StreamGobbler(session.getStderr());
 
@@ -311,6 +314,7 @@ public class SSHLauncher extends ComputerLauncher {
     }
 
     private void reportEnvironment(StreamTaskListener listener) throws IOException {
+        listener.getLogger().println(Messages._SSHLauncher_RemoteUserEnvironment(getTimestamp()));
         Session session = connection.openSession();
         try {
             session.execCommand("set");
@@ -332,6 +336,7 @@ public class SSHLauncher extends ComputerLauncher {
             } finally {
                 out.close();
                 err.close();
+                listener.getLogger().println();
             }
         } finally {
             session.close();
@@ -409,7 +414,7 @@ public class SSHLauncher extends ComputerLauncher {
             connection.close();
             connection = null;
             listener.getLogger().println(Messages.SSHLauncher_ConnectionClosed(getTimestamp()));
-            throw new IOException(Messages.SSHLauncher_AuthenticationFailedException());
+            throw new AbortException(Messages.SSHLauncher_AuthenticationFailedException());
         }
     }
 

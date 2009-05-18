@@ -3,30 +3,33 @@ package hudson.plugins.warnings.util;
 import hudson.model.AbstractProject;
 import hudson.model.ModelObject;
 import hudson.util.ChartUtil;
+import hudson.util.FormValidation;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 
+import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.jfree.chart.JFreeChart;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 /**
- * Configures the trend graph of this plug-in for the current user and job using a cookie.
+ * Configures the trend graph of this plug-in.
  */
-public class GraphConfigurationDetail extends GraphConfiguration implements ModelObject {
+public abstract class GraphConfigurationDetail extends GraphConfiguration implements ModelObject {
     /** The owning project to configure the graphs for. */
     private final AbstractProject<?, ?> project;
     /** Logger. */
     private static final Logger LOGGER = Logger.getLogger(GraphConfigurationDetail.class.getName());
-    /** Suffix of the cookie name that is used to persist the configuration per user. */
-    private final String cookieName;
+    /** The plug-in name. */
+    private final String pluginName;
     /** The last result action to start the trend report computation from. */
     private ResultAction<?> lastAction;
     /** The health descriptor. */
@@ -44,19 +47,16 @@ public class GraphConfigurationDetail extends GraphConfiguration implements Mode
      *
      * @param project
      *            the owning project to configure the graphs for
-     * @param request
-     *            the request with the optional cookie to initialize this
-     *            instance
-     * @param cookieName
-     *            the suffix of the cookie name that is used to persist the
-     *            configuration per user
+     * @param pluginName
+     *            the name of the plug-in
+     * @param value
+     *            the initial value of this configuration
      */
-    public GraphConfigurationDetail(final AbstractProject<?, ?> project, final StaplerRequest request,
-            final String cookieName) {
-        super(createCookieHandler(cookieName).getValue(request.getCookies()));
+    public GraphConfigurationDetail(final AbstractProject<?, ?> project, final String pluginName, final String value) {
+        super(value, createDefaultsFile(project, pluginName));
 
         this.project = project;
-        this.cookieName = cookieName;
+        this.pluginName = pluginName;
         healthDescriptor = new NullHealthDescriptor();
     }
 
@@ -65,31 +65,31 @@ public class GraphConfigurationDetail extends GraphConfiguration implements Mode
      *
      * @param project
      *            the owning project to configure the graphs for
-     * @param request
-     *            the request with the optional cookie to initialize this
-     *            instance
-     * @param cookieName
-     *            the suffix of the cookie name that is used to persist the
-     *            configuration per user
-     * @param lastAction the last valid action for this project
+     * @param pluginName
+     *            the name of the plug-in
+     * @param value
+     *            the initial value of this configuration
+     * @param lastAction
+     *            the last valid action for this project
      */
-    public GraphConfigurationDetail(final AbstractProject<?, ?> project, final StaplerRequest request,
-            final String cookieName, final ResultAction<?> lastAction) {
-        this(project, request, cookieName);
+    public GraphConfigurationDetail(final AbstractProject<?, ?> project, final String pluginName, final String value, final ResultAction<?> lastAction) {
+        this(project, pluginName, value);
+
         this.lastAction = lastAction;
         healthDescriptor = lastAction.getHealthDescriptor();
     }
 
     /**
-     * Creates a new cookie handler to convert the cookie to a string value.
+     * Creates a file with for the default values.
      *
-     * @param cookieName
-     *            the suffix of the cookie name that is used to persist the
-     *            configuration per user
-     * @return the new cookie handler
+     * @param project
+     *            the project used as directory for the file
+     * @param pluginName
+     *            the name of the plug-in
+     * @return the created file
      */
-    private static CookieHandler createCookieHandler(final String cookieName) {
-        return new CookieHandler(cookieName);
+    protected static File createDefaultsFile(final AbstractProject<?, ?> project, final String pluginName) {
+        return new File(project.getRootDir(), pluginName + ".txt");
     }
 
     /**
@@ -101,22 +101,33 @@ public class GraphConfigurationDetail extends GraphConfiguration implements Mode
         return project;
     }
 
-    /** {@inheritDoc} */
-    public String getDisplayName() {
-        return Messages.GraphConfiguration_Name();
-    }
-
     /**
-     * Returns the URL of this object.
+     * Returns the root URL of this object.
      *
-     * @return the URL of this object
+     * @return the root URL of this object
      */
-    public String getUrl() {
-        return project.getAbsoluteUrl() + cookieName + "/configure";
+    public String getRootUrl() {
+        return project.getAbsoluteUrl() + pluginName;
     }
 
     /**
-     * Saves the configured values to a cookie.
+     * Returns the plug-in name.
+     *
+     * @return the plug-in name
+     */
+    public String getPluginName() {
+        return pluginName;
+    }
+
+    /**
+     * Returns the description for this view.
+     *
+     * @return the description for this view
+     */
+    public abstract String getDescription();
+
+    /**
+     * Saves the configured values. Subclasses need to implement the actual persistence.
      *
      * @param request
      *            Stapler request
@@ -128,15 +139,28 @@ public class GraphConfigurationDetail extends GraphConfiguration implements Mode
             JSONObject formData = request.getSubmittedForm();
             int width = formData.getInt("width");
             int height = formData.getInt("height");
-            GraphType graphType = GraphType.valueOf(formData.getString("graphType"));
-
-            if (isValid(width, height, graphType)) {
-                String value = serializeToString(width, height, graphType);
-                Cookie cookie = createCookieHandler(cookieName).create(request.getAncestors(), value);
-                response.addCookie(cookie);
+            String buildCountString = formData.getString("buildCountString");
+            int buildCount = 0;
+            if (StringUtils.isNotBlank(buildCountString)) {
+                buildCount = formData.getInt("buildCountString");
             }
+            String dayCountString = formData.getString("dayCountString");
+            int dayCount = 0;
+            if (StringUtils.isNotBlank(dayCountString)) {
+                dayCount = formData.getInt("dayCountString");
+            }
+            GraphType graphType = GraphType.valueOf(StringUtils.upperCase(formData.getString("graphType")));
 
-            response.sendRedirect("../../");
+            if (isValid(width, height, buildCount, dayCount, graphType)) {
+                String value = serializeToString(width, height, buildCount, dayCount, graphType);
+                persistValue(value, request, response);
+            }
+        }
+        catch (IOException exception) {
+            LOGGER.log(Level.SEVERE, "Can't save the form data: " + request, exception);
+        }
+        catch (JSONException exception) {
+            LOGGER.log(Level.SEVERE, "Can't parse the form data: " + request, exception);
         }
         catch (IllegalArgumentException exception) {
             LOGGER.log(Level.SEVERE, "Can't parse the form data: " + request, exception);
@@ -144,8 +168,84 @@ public class GraphConfigurationDetail extends GraphConfiguration implements Mode
         catch (ServletException exception) {
             LOGGER.log(Level.SEVERE, "Can't process the form data: " + request, exception);
         }
-        catch (IOException exception) {
-            LOGGER.log(Level.SEVERE, "Can't redirect", exception);
+        finally {
+            try {
+                response.sendRedirect("../../");
+            }
+            catch (IOException exception) {
+                LOGGER.log(Level.SEVERE, "Can't redirect", exception);
+            }
+        }
+    }
+
+    /**
+     * Performs on-the-fly validation on the trend graph height.
+     *
+     * @param height
+     *            the height
+     * @return the form validation
+     */
+    public static FormValidation checkHeight(final String height) {
+        try {
+            if (isValidHeight(Integer.valueOf(height))) {
+                return FormValidation.ok();
+            }
+        }
+        catch (NumberFormatException f) {
+            // ignore
+        }
+        return FormValidation.error("Height hallo gaats no.");
+    }
+
+    /**
+     * Checks whether a meaningful graph is available.
+     *
+     * @return <code>true</code>, if there is such a graph
+     */
+    public boolean hasMeaningfulGraph() {
+        return lastAction != null;
+    }
+
+    /**
+     * Persists the configured values.
+     *
+     * @param value
+     *            the values configured by the user.
+     * @param request
+     *            Stapler request
+     * @param response
+     *            Stapler response
+     * @throws IOException if the values could not be persisted
+     */
+    protected abstract void persistValue(String value, StaplerRequest request, StaplerResponse response) throws IOException;
+
+    /**
+     * Returns the build count as a string. If no build count is defined, then an
+     * empty string is returned.
+     *
+     * @return the day count string
+     */
+    public String getBuildCountString() {
+        if (isBuildCountDefined()) {
+            return String.valueOf(getBuildCount());
+        }
+        else {
+            return StringUtils.EMPTY;
+        }
+    }
+
+    /**
+     * Returns the day count as a string. If no day count is defined, then an
+     * empty string is returned.
+     *
+     * @return the day count string
+     */
+    public String getDayCountString() {
+        if (isDayCountDefined()) {
+            return String.valueOf(getDayCount());
+        }
+        else {
+            return StringUtils.EMPTY;
         }
     }
 
@@ -157,8 +257,8 @@ public class GraphConfigurationDetail extends GraphConfiguration implements Mode
      * @param response
      *            the response
      */
-    public void doNewVersusFixed(final StaplerRequest request, final StaplerResponse response) {
-        drawNewVsFixed(request, response, Mode.PNG);
+    public void doFixed(final StaplerRequest request, final StaplerResponse response) {
+        drawFixed(request, response, Mode.PNG);
     }
 
     /**
@@ -169,8 +269,8 @@ public class GraphConfigurationDetail extends GraphConfiguration implements Mode
      * @param response
      *            the response
      */
-    public void doNewVersusFixedMap(final StaplerRequest request, final StaplerResponse response) {
-        drawNewVsFixed(request, response, Mode.MAP);
+    public void doFixedMap(final StaplerRequest request, final StaplerResponse response) {
+        drawFixed(request, response, Mode.MAP);
     }
 
     /**
@@ -183,11 +283,46 @@ public class GraphConfigurationDetail extends GraphConfiguration implements Mode
      * @param mode
      *            drawing mode
      */
-    private void drawNewVsFixed(final StaplerRequest request, final StaplerResponse response, final Mode mode) {
-        if (lastAction != null) {
-            JFreeChart graph = new NewVersusFixedGraph().create(lastAction, lastAction.getUrlName());
-            generateGraph(request, response, graph, mode);
-        }
+    private void drawFixed(final StaplerRequest request, final StaplerResponse response, final Mode mode) {
+        drawGraph(request, response, mode, new NewVersusFixedGraph());
+    }
+
+    /**
+     * Draws a PNG image with a graph with warning differences.
+     *
+     * @param request
+     *            the request
+     * @param response
+     *            the response
+     */
+    public void doDifference(final StaplerRequest request, final StaplerResponse response) {
+        drawDifference(request, response, Mode.PNG);
+    }
+
+    /**
+     * Draws a MAP with the warnings difference graph.
+     *
+     * @param request
+     *            the request
+     * @param response
+     *            the response
+     */
+    public void doDifferenceMap(final StaplerRequest request, final StaplerResponse response) {
+        drawDifference(request, response, Mode.MAP);
+    }
+
+    /**
+     * Draws a warnings difference graph.
+     *
+     * @param request
+     *            the request
+     * @param response
+     *            the response
+     * @param mode
+     *            drawing mode
+     */
+    private void drawDifference(final StaplerRequest request, final StaplerResponse response, final Mode mode) {
+        drawGraph(request, response, mode, new DifferenceGraph());
     }
 
     /**
@@ -225,10 +360,7 @@ public class GraphConfigurationDetail extends GraphConfiguration implements Mode
      *            drawing mode
      */
     private void drawPriority(final StaplerRequest request, final StaplerResponse response, final Mode mode) {
-        if (lastAction != null) {
-            JFreeChart graph = new PriorityGraph().create(lastAction, lastAction.getUrlName());
-            generateGraph(request, response, graph, mode);
-        }
+        drawGraph(request, response, mode, new PriorityGraph());
     }
 
     /**
@@ -274,13 +406,30 @@ public class GraphConfigurationDetail extends GraphConfiguration implements Mode
      * @param mode
      *            drawing mode
      */
-    public void drawHealth(final StaplerRequest request, final StaplerResponse response, final Mode mode) {
-        if (lastAction != null) {
-            JFreeChart graph = new HealthGraph(healthDescriptor).create(lastAction, lastAction.getUrlName());
+    private void drawHealth(final StaplerRequest request, final StaplerResponse response, final Mode mode) {
+        drawGraph(request, response, mode, new HealthGraph(healthDescriptor));
+    }
+
+    /**
+     * Draws the graph.
+     *
+     * @param request
+     *            the request
+     * @param response
+     *            the response
+     * @param mode
+     *            drawing mode
+     * @param buildResultGraph
+     *            the graph that actually renders the results
+     */
+    private void drawGraph(final StaplerRequest request, final StaplerResponse response,
+            final Mode mode, final BuildResultGraph buildResultGraph) {
+        buildResultGraph.setRootUrl("../../");
+        if (hasMeaningfulGraph()) {
+            JFreeChart graph = buildResultGraph.create(this, lastAction, pluginName);
             generateGraph(request, response, graph, mode);
         }
     }
-
 
     /**
      * Generates the graph in PNG format and sends that to the response.
@@ -297,10 +446,10 @@ public class GraphConfigurationDetail extends GraphConfiguration implements Mode
     private void generateGraph(final StaplerRequest request, final StaplerResponse response, final JFreeChart graph, final Mode mode) {
         try {
             if (mode == Mode.PNG) {
-                ChartUtil.generateGraph(request, response, graph, 800, 200);
+                ChartUtil.generateGraph(request, response, graph, DEFAULT_WIDTH, DEFAULT_HEIGHT);
             }
             else {
-                ChartUtil.generateClickableMap(request, response, graph, 800, 200);
+                ChartUtil.generateClickableMap(request, response, graph, DEFAULT_WIDTH, DEFAULT_HEIGHT);
             }
         }
         catch (IOException exception) {

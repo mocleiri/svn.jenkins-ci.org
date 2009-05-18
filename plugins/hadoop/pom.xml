@@ -4,12 +4,12 @@
   <parent>
     <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>1.301</version>
+    <version>1.306</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   
   <artifactId>hadoop</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.2-SNAPSHOT</version>
   <packaging>hpi</packaging>
   <name>Hudson Hadoop plugin</name>
   <url>http://wiki.hudson-ci.org/display/HUDSON/Hadoop+Plugin</url>
@@ -49,30 +49,9 @@
       <artifactId>hadoop-core</artifactId>
       <version>${hadoop.version}</version>
     </dependency>
-
-    <dependency>
-        <groupId>org.jvnet.hudson.main</groupId>
-        <artifactId>hudson-war</artifactId>
-        <type>war</type>
-        <version>${hudson.version}</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.jvnet.hudson.main</groupId>
-        <artifactId>hudson-core</artifactId>
-        <version>${hudson.version}</version>
-        <scope>provided</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.jvnet.hudson.main</groupId>
-        <artifactId>hudson-test-harness</artifactId>
-        <version>${hudson.version}</version>
-        <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <properties>
     <hadoop.version>0.19.1-hudson-2</hadoop.version>
-    <hudson.version>1.300-SNAPSHOT</hudson.version>
   </properties>
 </project>
