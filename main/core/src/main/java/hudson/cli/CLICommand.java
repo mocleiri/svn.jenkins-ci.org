@@ -26,6 +26,7 @@ package hudson.cli;
 import hudson.ExtensionPoint;
 import hudson.Extension;
 import hudson.ExtensionList;
+import hudson.AbortException;
 import hudson.remoting.Channel;
 import hudson.remoting.Callable;
 import hudson.model.Hudson;
@@ -33,22 +34,43 @@ import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.CmdLineException;
 
 import java.io.PrintStream;
+import java.io.InputStream;
+import java.io.BufferedInputStream;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Base class for Hudson CLI.
  *
- * <h2>How to implement a CLI command</h2>
+ * <h2>How does a CLI command work</h2>
  * <p>
- * CLI commands are defined on the server.
+ * The users starts {@linkplain CLI the "CLI agent"} on a remote system, by specifying arguments, like
+ * <tt>"java -jar hudson-cli.jar command arg1 arg2 arg3"</tt>. The CLI agent creates
+ * a remoting channel with the server, and it sends the entire arguments to the server, along with
+ * the remoted stdin/out/err.
  *
  * <p>
+ * The Hudson master then picks the right {@link CLICommand} to execute, clone it, and
+ * calls {@link #main(List, InputStream, PrintStream, PrintStream)} method.
+ *
+ * <h2>Note for CLI command implementor</h2>
+ * <ul>
+ * <li>
+ * Put {@link Extension} on your implementation to have it discovered by Hudson.
+ *
+ * <li>
  * Use <a href="http://args4j.dev.java.net/">args4j</a> annotation on your implementation to define
- * options and arguments (however, if you don't like that, you could override the {@link #main(List, PrintStream, PrintStream)} method
- * directly.
+ * options and arguments (however, if you don't like that, you could override
+ * the {@link #main(List, InputStream, PrintStream, PrintStream)} method directly.
  *
- * <p>
- * Put {@link Extension} on your implementation to have it auto-registered.
+ * <li>
+ * stdin, stdout, stderr are remoted, so proper buffering is necessary for good user experience.
+ *
+ * <li>
+ * Send {@link Callable} to a CLI agent by using {@link #channel} to get local interaction,
+ * such as uploading a file, asking for a password, etc.
+ *
+ * </ul>
  *
  * @author Kohsuke Kawaguchi
  * @since 1.302
@@ -59,16 +81,25 @@ public abstract class CLICommand implements ExtensionPoint, Cloneable {
      * IOW, if you write to these streams, the person who launched the CLI command
      * will see the messages in his terminal.
      *
+     * <p>
      * (In contrast, calling {@code System.out.println(...)} would print out
      * the message to the server log file, which is probably not what you want.
      */
-    protected PrintStream stdout,stderr;
+    protected transient PrintStream stdout,stderr;
+
+    /**
+     * Connected to stdin of the CLI agent.
+     *
+     * <p>
+     * This input stream is buffered to hide the latency in the remoting.
+     */
+    protected transient InputStream stdin;
 
     /**
      * {@link Channel} that represents the CLI JVM. You can use this to
      * execute {@link Callable} on the CLI JVM, among other things.
      */
-    protected Channel channel;
+    protected transient Channel channel;
 
 
     /**
@@ -89,10 +120,18 @@ public abstract class CLICommand implements ExtensionPoint, Cloneable {
             name = name.substring(0,name.length()-7); // trim off the command
 
         // convert "FooBarZot" into "foo-bar-zot"
-        return name.replaceAll("([a-z0-9])([A-Z])","$1-$2").toLowerCase();
+        // Locale is fixed so that "CreateInstance" always become "create-instance" no matter where this is run.
+        return name.replaceAll("([a-z0-9])([A-Z])","$1-$2").toLowerCase(Locale.ENGLISH);
     }
 
-    public int main(List<String> args, PrintStream stdout, PrintStream stderr) {
+    /**
+     * Gets the quick summary of what this command does.
+     * Used by the help command to generate the list of commands.
+     */
+    public abstract String getShortDescription();
+
+    public int main(List<String> args, InputStream stdin, PrintStream stdout, PrintStream stderr) {
+        this.stdin = new BufferedInputStream(stdin);
         this.stdout = stdout;
         this.stderr = stderr;
         this.channel = Channel.current();
@@ -104,6 +143,13 @@ public abstract class CLICommand implements ExtensionPoint, Cloneable {
             stderr.println(e.getMessage());
             printUsage(stderr, p);
             return -1;
+        } catch (AbortException e) {
+            // signals an error without stack trace
+            stderr.println(e.getMessage());
+            return -1;
+        } catch (Exception e) {
+            e.printStackTrace(stderr);
+            return -1;
         }
     }
 
@@ -112,8 +158,14 @@ public abstract class CLICommand implements ExtensionPoint, Cloneable {
      *
      * @return
      *      0 to indicate a success, otherwise an error code.
+     * @throws AbortException
+     *      If the processing should be aborted. Hudson will report the error message
+     *      without stack trace, and then exits this command.
+     * @throws Exception
+     *      All the other exceptions cause the stack trace to be dumped, and then
+     *      the command exits with an error code.
      */
-    protected abstract int run();
+    protected abstract int run() throws Exception;
 
     protected void printUsage(PrintStream stderr, CmdLineParser p) {
         stderr.println("java -jar hudson-cli.jar "+getName()+" args...");

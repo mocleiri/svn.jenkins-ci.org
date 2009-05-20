@@ -41,11 +41,13 @@ import hudson.model.Project;
 import hudson.model.Run;
 import hudson.model.TopLevelItem;
 import hudson.model.View;
+import hudson.model.JDK;
 import hudson.search.SearchableModelObject;
 import hudson.security.AccessControlled;
 import hudson.security.AuthorizationStrategy;
 import hudson.security.Permission;
 import hudson.security.SecurityRealm;
+import hudson.security.csrf.CrumbIssuer;
 import hudson.slaves.Cloud;
 import hudson.slaves.ComputerLauncher;
 import hudson.slaves.NodeProperty;
@@ -70,6 +72,7 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.jexl.parser.ASTSizeFunction;
 import org.apache.commons.jexl.util.Introspector;
 import org.jvnet.animal_sniffer.IgnoreJRERequirement;
+import org.jvnet.tiger_types.Types;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
@@ -90,6 +93,8 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.MonitorInfo;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
+import java.lang.reflect.Type;
+import java.lang.reflect.ParameterizedType;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -143,6 +148,31 @@ public class Functions {
 
     public static String rfc822Date(Calendar cal) {
         return Util.RFC822_DATETIME_FORMATTER.format(cal.getTime());
+    }
+
+    /**
+     * Given {@code c=MyList (extends ArrayList<Foo>), base=List}, compute the parameterization of 'base'
+     * that's assignable from 'c' (in this case {@code List<Foo>}), and return its n-th type parameter
+     * (n=0 would return {@code Foo}).
+     *
+     * <p>
+     * This method is useful for doing type arithmetic.
+     *
+     * @throws AssertionError
+     *      if c' is not parameterized.
+     */
+    public static <B> Class getTypeParameter(Class<? extends B> c, Class<B> base, int n) {
+        Type parameterization = Types.getBaseClass(c,base);
+        if (parameterization instanceof ParameterizedType) {
+            ParameterizedType pt = (ParameterizedType) parameterization;
+            return Types.erasure(Types.getTypeArgument(pt,n));
+        } else {
+            throw new AssertionError(c+" doesn't properly parameterize "+base);
+        }
+    }
+
+    public JDK.DescriptorImpl getJDKDescriptor() {
+        return Hudson.getInstance().getDescriptorByType(JDK.DescriptorImpl.class);
     }
 
     /**
@@ -366,7 +396,7 @@ public class Functions {
     /**
      * Set to true if you need to use the debug version of YUI.
      */
-    public static boolean DEBUG_YUI = System.getProperty("debug.YUI")!=null;
+    public static boolean DEBUG_YUI = Boolean.getBoolean("debug.YUI");
 
     /**
      * Creates a sub map by using the given range (both ends inclusive).
@@ -819,6 +849,14 @@ public class Functions {
         return buf.toString();
     }
 
+    /**
+     * Converts "abc" to "Abc".
+     */
+    public static String capitalize(String s) {
+        if(s==null || s.length()==0) return s;
+        return Character.toUpperCase(s.charAt(0))+s.substring(1);
+    }
+
     public static String getVersion() {
         return Hudson.VERSION;
     }
@@ -1057,6 +1095,8 @@ public class Functions {
      * Gets all the {@link PageDecorator}s.
      */
     public static List<PageDecorator> getPageDecorators() {
+        // this method may be called to render start up errors, at which point Hudson doesn't exist yet. see HUDSON-3608 
+        if(Hudson.getInstance()==null)  return Collections.emptyList();
         return PageDecorator.all();
     }
     
@@ -1091,6 +1131,56 @@ public class Functions {
         return body;
     }
 
+    public static List<Descriptor<CrumbIssuer>> getCrumbIssuerDescriptors() {
+        return CrumbIssuer.all();
+    }
+    
+    public static String getCrumb(StaplerRequest req) {
+        CrumbIssuer issuer = Hudson.getInstance().getCrumbIssuer();
+        if (issuer != null) {
+            return issuer.getCrumb(req);
+        }
+        
+        return "";
+    }
+    
+    public static String getCrumbRequestField() {
+        CrumbIssuer issuer = Hudson.getInstance().getCrumbIssuer();
+        if (issuer != null) {
+            return issuer.getDescriptor().getCrumbRequestField();
+        }
+        
+        return "";
+    }
+    
+    public static String getCrumbAsJSONParameterBlock(StaplerRequest req) {
+        StringBuilder builder = new StringBuilder();
+        if (Hudson.getInstance().isUseCrumbs()) {
+            builder.append("parameters:{\"");
+            builder.append(getCrumbRequestField());
+            builder.append("\":\"");
+            builder.append(getCrumb(req));
+            builder.append("\"}");
+        }
+        return builder.toString();
+    }
+    
+    public static String getReplaceDescriptionInvoker(StaplerRequest req) {
+    	StringBuilder builder = new StringBuilder();
+    	if (isAutoRefresh(req)) {
+    		builder.append("null");
+    	} else {
+    		builder.append("'return replaceDescription(");
+    		builder.append("\\'");
+    		builder.append(getCrumbRequestField());
+    		builder.append("\\',\\'");
+    		builder.append(getCrumb(req));
+    		builder.append("\\'");
+    		builder.append(");'");
+    	}
+    	return builder.toString();
+    }
+    
     private static final Pattern SCHEME = Pattern.compile("[a-z]+://.+");
 
     /**

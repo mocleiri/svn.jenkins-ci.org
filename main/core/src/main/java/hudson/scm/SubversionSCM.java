@@ -96,6 +96,7 @@ import org.tmatesoft.svn.core.wc.SVNWCUtil;
 import org.tmatesoft.svn.core.wc.SVNLogClient;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.transform.stream.StreamResult;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -530,6 +531,8 @@ public class SubversionSCM extends SCM implements Serializable {
                         }
                     }
                 } else {
+                    Util.deleteContentsRecursive(ws);
+
                     // buffer the output by a separate thread so that the update operation
                     // won't be blocked by the remoting of the data
                     PipedOutputStream pos = new PipedOutputStream();
@@ -541,7 +544,6 @@ public class SubversionSCM extends SCM implements Serializable {
                             listener.getLogger().println("Checking out "+l.remote);
 
                             File local = new File(ws, l.local);
-                            Util.deleteContentsRecursive(local);
                             svnuc.setEventHandler(new SubversionUpdateEventHandler(new PrintStream(pos), externals, local, l.local));
                             svnuc.doCheckout(l.getSVNURL(), local.getCanonicalFile(), SVNRevision.HEAD, l.getRevision(revision), true);
                         } catch (SVNException e) {
@@ -827,7 +829,7 @@ public class SubversionSCM extends SCM implements Serializable {
                 File module = new File(ws,moduleName).getCanonicalFile(); // canonicalize to remove ".." and ".". See #474
 
                 if(!module.exists()) {
-                    listener.getLogger().println("Doing a fresh checkout because "+module+" doesn't exist");
+                    listener.getLogger().println("Checking out a fresh workspace because "+module+" doesn't exist");
                     return false;
                 }
 
@@ -837,11 +839,11 @@ public class SubversionSCM extends SCM implements Serializable {
 
                     String url = l.getURL();
                     if(!svnInfo.url.equals(url)) {
-                        listener.getLogger().println("Doing a fresh checkout because the checkout location is not "+url);
+                        listener.getLogger().println("Checking out a fresh workspace because the workspace is not "+url);
                         return false;
                     }
                 } catch (SVNException e) {
-                    listener.getLogger().println("Doing a fresh checkout because Hudson failed to detect the current checkout location "+module);
+                    listener.getLogger().println("Checking out a fresh workspace because Hudson failed to detect the current workspace "+module);
                     e.printStackTrace(listener.error(e.getMessage()));
                     return false;
                 }
@@ -1043,7 +1045,7 @@ public class SubversionSCM extends SCM implements Serializable {
              *      One of the constants defined in {@link ISVNAuthenticationManager},
              *      indicating what subype of {@link SVNAuthentication} is expected.
              */
-            abstract SVNAuthentication createSVNAuthentication(String kind) throws SVNException;
+            public abstract SVNAuthentication createSVNAuthentication(String kind) throws SVNException;
         }
 
         /**
@@ -1059,7 +1061,7 @@ public class SubversionSCM extends SCM implements Serializable {
             }
 
             @Override
-            SVNAuthentication createSVNAuthentication(String kind) {
+            public SVNAuthentication createSVNAuthentication(String kind) {
                 if(kind.equals(ISVNAuthenticationManager.SSH))
                     return new SVNSSHAuthentication(userName,Scrambler.descramble(password),-1,false);
                 else
@@ -1119,7 +1121,7 @@ public class SubversionSCM extends SCM implements Serializable {
             }
 
             @Override
-            SVNSSHAuthentication createSVNAuthentication(String kind) throws SVNException {
+            public SVNSSHAuthentication createSVNAuthentication(String kind) throws SVNException {
                 if(kind.equals(ISVNAuthenticationManager.SSH)) {
                     try {
                         Channel channel = Channel.current();
@@ -1156,7 +1158,7 @@ public class SubversionSCM extends SCM implements Serializable {
             }
 
             @Override
-            SVNAuthentication createSVNAuthentication(String kind) {
+            public SVNAuthentication createSVNAuthentication(String kind) {
                 if(kind.equals(ISVNAuthenticationManager.SSL))
                     return new SVNSSLAuthentication(null,Scrambler.descramble(password),false);
                 else
@@ -1285,6 +1287,10 @@ public class SubversionSCM extends SCM implements Serializable {
 
             MultipartFormDataParser parser = new MultipartFormDataParser(req);
 
+            if(Hudson.getInstance().isUseCrumbs() && !Hudson.getInstance().getCrumbIssuer().validateCrumb(req, parser)) {
+                rsp.sendError(HttpServletResponse.SC_FORBIDDEN,"No crumb found");                
+            }
+            
             String url = parser.get("url");
 
             String kind = parser.get("kind");
