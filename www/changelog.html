@@ -16,6 +16,14 @@
 <!-- Record your changes in the trunk here. -->
 <div style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
+  <li class=>
+</ul>
+</div><!--=TRUNK-END=-->
+
+<!-- these changes are controlled by the release process. -->
+<div style="display:none;"><!--=BEGIN=-->
+<a name=v1.307><h3>What's new in 1.307</h3></a>
+<ul class=image>
   <li class=bug>
     AbstractProject.doWipeOutWorkspace() wasn't calling SCM.processWorkspaceBeforeDeletion.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3506">issue 3506</a>)
@@ -38,12 +46,6 @@
     Some failures in Windows batch files didn't cause Hudson to fail the build.
     (<a href="http://www.nabble.com/Propagating-failure-in-Windows-Batch-actions-td23603409.html">report</a>)
 </ul>
-</div><!--=TRUNK-END=-->
-
-<!-- these changes are controlled by the release process. -->
-<div style="display:none;"><!--=BEGIN=-->
-<a name=v1.307><h3>What's new in 1.307</h3></a>
-<!--=RC-CHANGES=-->
 </div><!--=END=-->
 <a name=v1.306><h3>What's new in 1.306</h3></a>
 <ul class=image>
@@ -51,7 +53,29 @@
     Maven 2.1 support was not working on slaves.
     (<a href="http://www.nabble.com/1.305-fully-break-native-maven-support-td23575755.html">report</a>)
 </ul>
-<!--=RC-CHANGES=-->
+<ul class=image>
+  <li class=bug>
+    AbstractProject.doWipeOutWorkspace() wasn't calling SCM.processWorkspaceBeforeDeletion.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3506">issue 3506</a>)
+  <li class=bug>
+    <tt>X-Hudson</tt> header was sent for all views, not just the top page.
+    (<a href="http://www.netbeans.org/issues/show_bug.cgi?id=165067">report</a>)
+  <li class=bug>
+    Remote API served incorrect absolute URLs when Hudson is run behind a reverse proxy.
+    (<a href="http://www.netbeans.org/issues/show_bug.cgi?id=165067">report</a>)
+  <li class=bug>
+    Further improved the JUnit report parsing.
+    (<a href="http://www.nabble.com/NPE-%28Fatal%3A-Null%29-in-recording-junit-test-results-td23562964.html">report</a>)
+  <li class=bug>
+    External job monitoring was ignoring the possible encoding difference between Hudson and the remote machine that executed the job.
+    (<a href="http://www.nabble.com/windows%E3%81%AEhudson%E3%81%8B%E3%82%89ssh%E3%82%B9%E3%83%AC%E3%83%BC%E3%83%96%E3%82%92%E4%BD%BF%E3%81%86%E3%81%A8%E3%81%8D%E3%81%AE%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89%E5%8F%96%E3%82%8A%E6%89%B1%E3%81%84%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6-td23583532.html">report</a>)
+  <li class=bug>
+    Slave launch log was doing extra buffering that can prevent error logs (and so on) from showing up instantly.
+    (<a href="http://www.nabble.com/Selenium-Grid-Plugin-tp23481283p23486010.html">report</a>)
+  <li class=bug>
+    Some failures in Windows batch files didn't cause Hudson to fail the build.
+    (<a href="http://www.nabble.com/Propagating-failure-in-Windows-Batch-actions-td23603409.html">report</a>)
+</ul>
 <a name=v1.305><h3>What's new in 1.305</h3></a>
 <ul class=image>
   <li class=bug>
