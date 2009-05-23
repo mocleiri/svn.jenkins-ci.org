@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-AbstractProject (Hudson core 1.306 API)
+AbstractProject (Hudson core 1.307 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-16">
+<META NAME="date" CONTENT="2009-05-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractProject (Hudson core 1.306 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractProject (Hudson core 1.306 API)";
+        parent.document.title="AbstractProject (Hudson core 1.307 API)";
     }
 }
 </SCRIPT>
@@ -435,7 +435,8 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#doDoWipeOutWorkspace(org.kohsuke.stapler.StaplerResponse)">doDoWipeOutWorkspace</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#doDoWipeOutWorkspace(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoWipeOutWorkspace</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                     org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wipes out the workspace.</TD>
@@ -2747,11 +2748,13 @@ public void <B>doWs</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doDoWipeOutWorkspace(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doDoWipeOutWorkspace(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doDoWipeOutWorkspace</H3>
 <PRE>
-public void <B>doDoWipeOutWorkspace</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+public void <B>doDoWipeOutWorkspace</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                           throws java.io.IOException,
+                                 javax.servlet.ServletException,
                                  java.lang.InterruptedException</PRE>
 <DL>
 <DD>Wipes out the workspace.
@@ -2763,6 +2766,7 @@ public void <B>doDoWipeOutWorkspace</B>(org.kohsuke.stapler.StaplerResponse&nbsp
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>

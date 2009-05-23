@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Plugin (Hudson core 1.306 API)
+Plugin (Hudson core 1.307 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-16">
+<META NAME="date" CONTENT="2009-05-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Plugin (Hudson core 1.306 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Plugin (Hudson core 1.306 API)";
+        parent.document.title="Plugin (Hudson core 1.307 API)";
     }
 }
 </SCRIPT>
@@ -199,7 +199,7 @@ Base class of Hudson plugin.
 <TD><CODE><B><A HREF="../hudson/Plugin.html#configure(net.sf.json.JSONObject)">configure</A></B>(net.sf.json.JSONObject&nbsp;formData)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>override <A HREF="../hudson/Plugin.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>configure(StaplerRequest,JSONObject)</CODE></A> instead</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.305 override <A HREF="../hudson/Plugin.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>configure(StaplerRequest,JSONObject)</CODE></A> instead</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -451,7 +451,7 @@ public void <B>configure</B>(net.sf.json.JSONObject&nbsp;formData)
                       javax.servlet.ServletException,
                       <A HREF="../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>override <A HREF="../hudson/Plugin.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>configure(StaplerRequest,JSONObject)</CODE></A> instead</I>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.305 override <A HREF="../hudson/Plugin.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>configure(StaplerRequest,JSONObject)</CODE></A> instead</I>
 <P>
 <DD><DL>
 </DL>
@@ -511,7 +511,7 @@ public void <B>configure</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE>
 <DD><CODE><A HREF="../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE><DT><B>Since:</B></DT>
-  <DD>XXX</DD>
+  <DD>1.305</DD>
 </DL>
 </DD>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-ToolInstaller (Hudson core 1.306 API)
+ToolInstaller (Hudson core 1.307 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-16">
+<META NAME="date" CONTENT="2009-05-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ToolInstaller (Hudson core 1.306 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ToolInstaller (Hudson core 1.306 API)";
+        parent.document.title="ToolInstaller (Hudson core 1.307 API)";
     }
 }
 </SCRIPT>
@@ -111,11 +111,13 @@ java.lang.Object
 An object which can ensure that a generic <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A> in fact exists on a node.
  The subclass should have a <A HREF="../../hudson/tools/ToolInstallerDescriptor.html" title="class in hudson.tools"><CODE>ToolInstallerDescriptor</CODE></A>.
  A <code>config.jelly</code> should be provided to customize specific fields;
- <code>&lt;st:include page="config-base.jelly"/&gt;</code> to customize <code>toolName</code> and <code>label</code>.
+ <code>&lt;t:label xmlns:t="/hudson/tools"/&gt;</code> to customize <code>label</code>.
 <P>
 
 <P>
 <DL>
+<DT><B>Since:</B></DT>
+  <DD>1.305</DD>
 <DT><B>See Also:</B><DD><a href="http://wiki.hudson-ci.org/display/HUDSON/Tool+Auto-Installation">Tool Auto-Installation</a></DL>
 <HR>
 

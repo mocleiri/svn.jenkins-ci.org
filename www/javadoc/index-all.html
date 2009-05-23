@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Hudson core 1.306 API)
+Index (Hudson core 1.307 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-16">
+<META NAME="date" CONTENT="2009-05-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson core 1.306 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson core 1.306 API)";
+        parent.document.title="Index (Hudson core 1.307 API)";
     }
 }
 </SCRIPT>
@@ -1479,6 +1479,9 @@ Method in class hudson.util.<A HREF="./hudson/util/Secret.ConverterImpl.html" ti
 <DT><A HREF="./hudson/util/StringConverter2.html#canConvert(java.lang.Class)"><B>canConvert(Class)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/StringConverter2.html" title="class in hudson.util">StringConverter2</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/security/SecurityRealm.html#canLogOut()"><B>canLogOut()</B></A> - 
+Method in class hudson.security.<A HREF="./hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>
+<DD>Returns true if this <A HREF="./hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> supports an logout operation.
 <DT><A HREF="./hudson/slaves/Cloud.html#canProvision(hudson.model.Label)"><B>canProvision(Label)</B></A> - 
 Method in class hudson.slaves.<A HREF="./hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>
 <DD>Returns true if this cloud is capable of provisioning new nodes for the given label.
@@ -1609,6 +1612,9 @@ Variable in class hudson.<A HREF="./hudson/Launcher.html" title="class in hudson
 <DT><A HREF="./hudson/slaves/Channels.html" title="class in hudson.slaves"><B>Channels</B></A> - Class in <A HREF="./hudson/slaves/package-summary.html">hudson.slaves</A><DD>Various convenient subtype of <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A>s.<DT><A HREF="./hudson/slaves/Channels.html#Channels()"><B>Channels()</B></A> - 
 Constructor for class hudson.slaves.<A HREF="./hudson/slaves/Channels.html" title="class in hudson.slaves">Channels</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Run.html#charset"><B>charset</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
+<DD>Charset in which the log file is written.
 <DT><A HREF="./hudson/util/CharSpool.html" title="class in hudson.util"><B>CharSpool</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD><B>Deprecated.</B>&nbsp;<I>moved to stapler</I><DT><A HREF="./hudson/util/CharSpool.html#CharSpool()"><B>CharSpool()</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/CharSpool.html" title="class in hudson.util">CharSpool</A>
 <DD><B>Deprecated.</B>&nbsp;&nbsp;
@@ -2019,7 +2025,7 @@ Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudso
 <DT><A HREF="./hudson/tasks/CommandInterpreter.html#command"><B>command</B></A> - 
 Variable in class hudson.tasks.<A HREF="./hudson/tasks/CommandInterpreter.html" title="class in hudson.tasks">CommandInterpreter</A>
 <DD>Command to execute.
-<DT><A HREF="./hudson/tools/CommandInstaller.html" title="class in hudson.tools"><B>CommandInstaller</B></A> - Class in <A HREF="./hudson/tools/package-summary.html">hudson.tools</A><DD>Installs a tool by running an arbitrary shell command.<DT><A HREF="./hudson/tools/CommandInstaller.html#CommandInstaller(java.lang.String, java.lang.String)"><B>CommandInstaller(String, String)</B></A> - 
+<DT><A HREF="./hudson/tools/CommandInstaller.html" title="class in hudson.tools"><B>CommandInstaller</B></A> - Class in <A HREF="./hudson/tools/package-summary.html">hudson.tools</A><DD>Installs a tool by running an arbitrary shell command.<DT><A HREF="./hudson/tools/CommandInstaller.html#CommandInstaller(java.lang.String, java.lang.String, java.lang.String)"><B>CommandInstaller(String, String, String)</B></A> - 
 Constructor for class hudson.tools.<A HREF="./hudson/tools/CommandInstaller.html" title="class in hudson.tools">CommandInstaller</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/tools/CommandInstaller.DescriptorImpl.html" title="class in hudson.tools"><B>CommandInstaller.DescriptorImpl</B></A> - Class in <A HREF="./hudson/tools/package-summary.html">hudson.tools</A><DD>&nbsp;<DT><A HREF="./hudson/tools/CommandInstaller.DescriptorImpl.html#CommandInstaller.DescriptorImpl()"><B>CommandInstaller.DescriptorImpl()</B></A> - 
@@ -2239,7 +2245,7 @@ Static variable in class hudson.model.<A HREF="./hudson/model/View.html" title="
 <DD>&nbsp;
 <DT><A HREF="./hudson/Plugin.html#configure(net.sf.json.JSONObject)"><B>configure(JSONObject)</B></A> - 
 Method in class hudson.<A HREF="./hudson/Plugin.html" title="class in hudson">Plugin</A>
-<DD><B>Deprecated.</B>&nbsp;<I>override <A HREF="./hudson/Plugin.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>Plugin.configure(StaplerRequest,JSONObject)</CODE></A> instead</I>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.305 override <A HREF="./hudson/Plugin.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>Plugin.configure(StaplerRequest,JSONObject)</CODE></A> instead</I>
 <DT><A HREF="./hudson/Plugin.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><B>configure(StaplerRequest, JSONObject)</B></A> - 
 Method in class hudson.<A HREF="./hudson/Plugin.html" title="class in hudson">Plugin</A>
 <DD>Handles the submission for the system configuration.
@@ -3447,7 +3453,7 @@ Static variable in interface hudson.scheduler.<A HREF="./hudson/scheduler/Cronta
 <DT><A HREF="./hudson/model/ComputerSet.html#do_launchAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>do_launchAll(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ComputerSet.html" title="class in hudson.model">ComputerSet</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/ExternalJob.html#doAcceptBuildResult(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doAcceptBuildResult(StaplerRequest, StaplerResponse)</B></A> - 
+<DT><A HREF="./hudson/model/ExternalJob.html#doAcceptBuildResult(org.kohsuke.stapler.StaplerResponse)"><B>doAcceptBuildResult(StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ExternalJob.html" title="class in hudson.model">ExternalJob</A>
 <DD>Used to check if this is an external job and ready to accept a build result.
 <DT><A HREF="./hudson/diagnosis/HudsonHomeDiskUsageMonitor.html#doAct(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doAct(StaplerRequest, StaplerResponse)</B></A> - 
@@ -3591,6 +3597,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Slave.SlaveDescriptor.html"
 <DT><A HREF="./hudson/scm/CVSSCM.TagAction.html#doCheckTag(java.lang.String)"><B>doCheckTag(String)</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.TagAction.html" title="class in hudson.scm">CVSSCM.TagAction</A>
 <DD>Checks if the value is a valid CVS tag name.
+<DT><A HREF="./hudson/tools/CommandInstaller.DescriptorImpl.html#doCheckToolHome(java.lang.String)"><B>doCheckToolHome(String)</B></A> - 
+Method in class hudson.tools.<A HREF="./hudson/tools/CommandInstaller.DescriptorImpl.html" title="class in hudson.tools">CommandInstaller.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, java.lang.String)"><B>doCheckURIEncoding(StaplerRequest, String)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Checks if container uses UTF-8 to decode URLs.
@@ -3735,7 +3744,7 @@ Method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsInstallerLin
 <DT><A HREF="./hudson/model/Job.html#doDoRename(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDoRename(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
 <DD>Renames this job.
-<DT><A HREF="./hudson/model/AbstractProject.html#doDoWipeOutWorkspace(org.kohsuke.stapler.StaplerResponse)"><B>doDoWipeOutWorkspace(StaplerResponse)</B></A> - 
+<DT><A HREF="./hudson/model/AbstractProject.html#doDoWipeOutWorkspace(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDoWipeOutWorkspace(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Wipes out the workspace.
 <DT><A HREF="./hudson/model/Computer.html#doDumpExportTable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDumpExportTable(StaplerRequest, StaplerResponse)</B></A> - 
@@ -4270,9 +4279,7 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
 <DD>&nbsp;
 <DT><A HREF="./hudson/Util.html#encode(java.lang.String)"><B>encode(String)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
-<DD><B>Deprecated.</B>&nbsp;<I>Only escapes non-ASCII but leaves other URL-unsafe characters.
- Util.rawEncode should generally be used instead, though be careful to pass only
- a single path component to that method (it will encode /, but this method does not).</I>
+<DD>Escapes non-ASCII characters in URL.
 <DT><A HREF="./hudson/Util.html#encodeRFC2396(java.lang.String)"><B>encodeRFC2396(String)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
 <DD><B>Deprecated.</B>&nbsp;<I>This method is broken (see ISSUE#1666). It should probably
@@ -7136,7 +7143,7 @@ Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class
 <DD>Gets the environment variables of the JVM on this computer.
 <DT><A HREF="./hudson/model/Run.html#getEnvironment()"><B>getEnvironment()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
-<DD><B>Deprecated.</B>&nbsp;<I>as of XXX use <A HREF="./hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)"><CODE>Run.getEnvironment(TaskListener)</CODE></A></I>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.305 use <A HREF="./hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)"><CODE>Run.getEnvironment(TaskListener)</CODE></A></I>
 <DT><A HREF="./hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)"><B>getEnvironment(TaskListener)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>Returns the map that contains environmental variables to be used for launching
@@ -9685,6 +9692,9 @@ Method in class hudson.model.<A HREF="./hudson/model/BuildAuthorizationToken.htm
 <DT><A HREF="./hudson/tools/ToolLocationNodeProperty.DescriptorImpl.html#getToolDescriptors()"><B>getToolDescriptors()</B></A> - 
 Method in class hudson.tools.<A HREF="./hudson/tools/ToolLocationNodeProperty.DescriptorImpl.html" title="class in hudson.tools">ToolLocationNodeProperty.DescriptorImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tools/CommandInstaller.html#getToolHome()"><B>getToolHome()</B></A> - 
+Method in class hudson.tools.<A HREF="./hudson/tools/CommandInstaller.html" title="class in hudson.tools">CommandInstaller</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tools/InstallerTranslator.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)"><B>getToolHome(Node, ToolInstallation, TaskListener)</B></A> - 
 Method in class hudson.tools.<A HREF="./hudson/tools/InstallerTranslator.html" title="class in hudson.tools">InstallerTranslator</A>
 <DD>&nbsp;
@@ -10805,6 +10815,9 @@ Constructor for class hudson.tools.<A HREF="./hudson/tools/InstallSourceProperty
 <DT><A HREF="./hudson/tools/InstallSourceProperty.DescriptorImpl.html" title="class in hudson.tools"><B>InstallSourceProperty.DescriptorImpl</B></A> - Class in <A HREF="./hudson/tools/package-summary.html">hudson.tools</A><DD>&nbsp;<DT><A HREF="./hudson/tools/InstallSourceProperty.DescriptorImpl.html#InstallSourceProperty.DescriptorImpl()"><B>InstallSourceProperty.DescriptorImpl()</B></A> - 
 Constructor for class hudson.tools.<A HREF="./hudson/tools/InstallSourceProperty.DescriptorImpl.html" title="class in hudson.tools">InstallSourceProperty.DescriptorImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tools/Messages.html#InstallSourceProperty_DescriptorImpl_displayName()"><B>InstallSourceProperty_DescriptorImpl_displayName()</B></A> - 
+Static method in class hudson.tools.<A HREF="./hudson/tools/Messages.html" title="class in hudson.tools">Messages</A>
+<DD>Install automatically
 <DT><A HREF="./hudson/model/Hudson.DescriptorImpl.html#INSTANCE"><B>INSTANCE</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Hudson.DescriptorImpl.html" title="class in hudson.model">Hudson.DescriptorImpl</A>
 <DD>&nbsp;
@@ -11263,6 +11276,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Descriptor.html" title="cla
 <DT><A HREF="./hudson/model/AllView.DescriptorImpl.html#isInstantiable()"><B>isInstantiable()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AllView.DescriptorImpl.html" title="class in hudson.model">AllView.DescriptorImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Hudson.DescriptorImpl.html#isInstantiable()"><B>isInstantiable()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.DescriptorImpl.html" title="class in hudson.model">Hudson.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/MyView.DescriptorImpl.html#isInstantiable()"><B>isInstantiable()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/MyView.DescriptorImpl.html" title="class in hudson.model">MyView.DescriptorImpl</A>
 <DD>If the security is not enabled, there's no point in having
@@ -11652,7 +11668,16 @@ Constructor for class hudson.tools.<A HREF="./hudson/tools/JDKInstaller.JDKFamil
 <DT><A HREF="./hudson/tools/JDKInstaller.JDKList.html" title="class in hudson.tools"><B>JDKInstaller.JDKList</B></A> - Class in <A HREF="./hudson/tools/package-summary.html">hudson.tools</A><DD>JDK list.<DT><A HREF="./hudson/tools/JDKInstaller.JDKList.html#JDKInstaller.JDKList()"><B>JDKInstaller.JDKList()</B></A> - 
 Constructor for class hudson.tools.<A HREF="./hudson/tools/JDKInstaller.JDKList.html" title="class in hudson.tools">JDKInstaller.JDKList</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/tools/JDKInstaller.Platform.html" title="enum in hudson.tools"><B>JDKInstaller.Platform</B></A> - Enum in <A HREF="./hudson/tools/package-summary.html">hudson.tools</A><DD>Supported platform.<DT><A HREF="./hudson/tools/JDKInstaller.Preference.html" title="enum in hudson.tools"><B>JDKInstaller.Preference</B></A> - Enum in <A HREF="./hudson/tools/package-summary.html">hudson.tools</A><DD>&nbsp;<DT><A HREF="./hudson/tools/JDKInstaller.JDKFamilyList.html#jdks"><B>jdks</B></A> - 
+<DT><A HREF="./hudson/tools/JDKInstaller.Platform.html" title="enum in hudson.tools"><B>JDKInstaller.Platform</B></A> - Enum in <A HREF="./hudson/tools/package-summary.html">hudson.tools</A><DD>Supported platform.<DT><A HREF="./hudson/tools/JDKInstaller.Preference.html" title="enum in hudson.tools"><B>JDKInstaller.Preference</B></A> - Enum in <A HREF="./hudson/tools/package-summary.html">hudson.tools</A><DD>&nbsp;<DT><A HREF="./hudson/tools/Messages.html#JDKInstaller_DescriptorImpl_displayName()"><B>JDKInstaller_DescriptorImpl_displayName()</B></A> - 
+Static method in class hudson.tools.<A HREF="./hudson/tools/Messages.html" title="class in hudson.tools">Messages</A>
+<DD>Install from java.sun.com
+<DT><A HREF="./hudson/tools/Messages.html#JDKInstaller_DescriptorImpl_doCheckAcceptLicense()"><B>JDKInstaller_DescriptorImpl_doCheckAcceptLicense()</B></A> - 
+Static method in class hudson.tools.<A HREF="./hudson/tools/Messages.html" title="class in hudson.tools">Messages</A>
+<DD>You must agree to the license to download the JDK.
+<DT><A HREF="./hudson/tools/Messages.html#JDKInstaller_DescriptorImpl_doCheckId()"><B>JDKInstaller_DescriptorImpl_doCheckId()</B></A> - 
+Static method in class hudson.tools.<A HREF="./hudson/tools/Messages.html" title="class in hudson.tools">Messages</A>
+<DD>Define JDK ID
+<DT><A HREF="./hudson/tools/JDKInstaller.JDKFamilyList.html#jdks"><B>jdks</B></A> - 
 Variable in class hudson.tools.<A HREF="./hudson/tools/JDKInstaller.JDKFamilyList.html" title="class in hudson.tools">JDKInstaller.JDKFamilyList</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/jna/JnaException.html" title="class in hudson.util.jna"><B>JnaException</B></A> - Exception in <A HREF="./hudson/util/jna/package-summary.html">hudson.util.jna</A><DD>Exception in the registry code.<DT><A HREF="./hudson/util/jna/JnaException.html#JnaException(int)"><B>JnaException(int)</B></A> - 
@@ -13381,6 +13406,9 @@ Static variable in class hudson.util.<A HREF="./hudson/util/FormValidation.FileV
 <DT><A HREF="./hudson/util/NoOverlapCategoryAxis.html" title="class in hudson.util"><B>NoOverlapCategoryAxis</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>This class implements X-axis label skipping algorithm to
  avoid drawing overlapping labels.<DT><A HREF="./hudson/util/NoOverlapCategoryAxis.html#NoOverlapCategoryAxis(java.lang.String)"><B>NoOverlapCategoryAxis(String)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/NoOverlapCategoryAxis.html" title="class in hudson.util">NoOverlapCategoryAxis</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/scm/CVSSCM.html#noQuiet"><B>noQuiet</B></A> - 
+Static variable in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.html" title="class in hudson.scm">CVSSCM</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/scm/RepositoryBrowser.html#normalizeToEndWithSlash(java.net.URL)"><B>normalizeToEndWithSlash(URL)</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>
@@ -16884,7 +16912,7 @@ Constructor for class hudson.tools.<A HREF="./hudson/tools/ToolLocationNodePrope
 <DT><A HREF="./hudson/tools/ToolLocationNodeProperty.ToolLocation.html#ToolLocationNodeProperty.ToolLocation(java.lang.String, java.lang.String)"><B>ToolLocationNodeProperty.ToolLocation(String, String)</B></A> - 
 Constructor for class hudson.tools.<A HREF="./hudson/tools/ToolLocationNodeProperty.ToolLocation.html" title="class in hudson.tools">ToolLocationNodeProperty.ToolLocation</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/tools/Messages.html#ToolLocationNodeProperty_DisplayName()"><B>ToolLocationNodeProperty_DisplayName()</B></A> - 
+<DT><A HREF="./hudson/tools/Messages.html#ToolLocationNodeProperty_displayName()"><B>ToolLocationNodeProperty_displayName()</B></A> - 
 Static method in class hudson.tools.<A HREF="./hudson/tools/Messages.html" title="class in hudson.tools">Messages</A>
 <DD>Tool Locations
 <DT><A HREF="./hudson/tools/ToolLocationTranslator.html" title="class in hudson.tools"><B>ToolLocationTranslator</B></A> - Class in <A HREF="./hudson/tools/package-summary.html">hudson.tools</A><DD>This Hudson-wide extension points can participate in determining the actual node-specific path
@@ -18614,6 +18642,9 @@ Static method in class hudson.security.<A HREF="./hudson/security/Messages.html"
 <DT><A HREF="./hudson/security/Messages.html#_HudsonPrivateSecurityRealm_ManageUserLinks_DisplayName()"><B>_HudsonPrivateSecurityRealm_ManageUserLinks_DisplayName()</B></A> - 
 Static method in class hudson.security.<A HREF="./hudson/security/Messages.html" title="class in hudson.security">Messages</A>
 <DD>Manage Users
+<DT><A HREF="./hudson/tools/Messages.html#_InstallSourceProperty_DescriptorImpl_displayName()"><B>_InstallSourceProperty_DescriptorImpl_displayName()</B></A> - 
+Static method in class hudson.tools.<A HREF="./hudson/tools/Messages.html" title="class in hudson.tools">Messages</A>
+<DD>Install automatically
 <DT><A HREF="./hudson/model/Messages.html#_Item_Permissions_Title()"><B>_Item_Permissions_Title()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Job
@@ -18635,6 +18666,15 @@ Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title
 <DT><A HREF="./hudson/tasks/Messages.html#_JavadocArchiver_UnableToCopy(java.lang.Object, java.lang.Object)"><B>_JavadocArchiver_UnableToCopy(Object, Object)</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>Unable to copy Javadoc from {0} to {1}
+<DT><A HREF="./hudson/tools/Messages.html#_JDKInstaller_DescriptorImpl_displayName()"><B>_JDKInstaller_DescriptorImpl_displayName()</B></A> - 
+Static method in class hudson.tools.<A HREF="./hudson/tools/Messages.html" title="class in hudson.tools">Messages</A>
+<DD>Install from java.sun.com
+<DT><A HREF="./hudson/tools/Messages.html#_JDKInstaller_DescriptorImpl_doCheckAcceptLicense()"><B>_JDKInstaller_DescriptorImpl_doCheckAcceptLicense()</B></A> - 
+Static method in class hudson.tools.<A HREF="./hudson/tools/Messages.html" title="class in hudson.tools">Messages</A>
+<DD>You must agree to the license to download the JDK.
+<DT><A HREF="./hudson/tools/Messages.html#_JDKInstaller_DescriptorImpl_doCheckId()"><B>_JDKInstaller_DescriptorImpl_doCheckId()</B></A> - 
+Static method in class hudson.tools.<A HREF="./hudson/tools/Messages.html" title="class in hudson.tools">Messages</A>
+<DD>Define JDK ID
 <DT><A HREF="./hudson/slaves/Messages.html#_JNLPLauncher_displayName()"><B>_JNLPLauncher_displayName()</B></A> - 
 Static method in class hudson.slaves.<A HREF="./hudson/slaves/Messages.html" title="class in hudson.slaves">Messages</A>
 <DD>Launch slave agents via JNLP
@@ -19004,7 +19044,7 @@ Static method in class hudson.triggers.<A HREF="./hudson/triggers/Messages.html"
 <DT><A HREF="./hudson/scheduler/CrontabParser.html#_tokenNames"><B>_tokenNames</B></A> - 
 Static variable in class hudson.scheduler.<A HREF="./hudson/scheduler/CrontabParser.html" title="class in hudson.scheduler">CrontabParser</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/tools/Messages.html#_ToolLocationNodeProperty_DisplayName()"><B>_ToolLocationNodeProperty_DisplayName()</B></A> - 
+<DT><A HREF="./hudson/tools/Messages.html#_ToolLocationNodeProperty_displayName()"><B>_ToolLocationNodeProperty_displayName()</B></A> - 
 Static method in class hudson.tools.<A HREF="./hudson/tools/Messages.html" title="class in hudson.tools">Messages</A>
 <DD>Tool Locations
 <DT><A HREF="./hudson/model/Messages.html#_UpdateCenter_Status_CheckingInternet()"><B>_UpdateCenter_Status_CheckingInternet()</B></A> - 

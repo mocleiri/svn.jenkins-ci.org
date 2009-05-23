@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson.DescriptorImpl (Hudson core 1.306 API)
+Hudson.DescriptorImpl (Hudson core 1.307 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-16">
+<META NAME="date" CONTENT="2009-05-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson.DescriptorImpl (Hudson core 1.306 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson.DescriptorImpl (Hudson core 1.306 API)";
+        parent.document.title="Hudson.DescriptorImpl (Hudson core 1.307 API)";
     }
 }
 </SCRIPT>
@@ -219,6 +219,16 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.DescriptorImpl.html#isInstantiable()">isInstantiable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can the administrator create this type of nodes from UI?
+
+ Return false if it only makes sense for programs to create it, not through the "new node" UI.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.slaves.NodeDescriptor"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -226,7 +236,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.slaves.<A HREF="../../hudson/slaves/NodeDescriptor.html" title="class in hudson.slaves">NodeDescriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/slaves/NodeDescriptor.html#all()">all</A>, <A HREF="../../hudson/slaves/NodeDescriptor.html#allInstantiable()">allInstantiable</A>, <A HREF="../../hudson/slaves/NodeDescriptor.html#doCheckName(java.lang.String)">doCheckName</A>, <A HREF="../../hudson/slaves/NodeDescriptor.html#getConfigPage()">getConfigPage</A>, <A HREF="../../hudson/slaves/NodeDescriptor.html#isInstantiable()">isInstantiable</A>, <A HREF="../../hudson/slaves/NodeDescriptor.html#newInstanceDetailPage()">newInstanceDetailPage</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/slaves/NodeDescriptor.html#all()">all</A>, <A HREF="../../hudson/slaves/NodeDescriptor.html#allInstantiable()">allInstantiable</A>, <A HREF="../../hudson/slaves/NodeDescriptor.html#doCheckName(java.lang.String)">doCheckName</A>, <A HREF="../../hudson/slaves/NodeDescriptor.html#getConfigPage()">getConfigPage</A>, <A HREF="../../hudson/slaves/NodeDescriptor.html#newInstanceDetailPage()">newInstanceDetailPage</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
@@ -307,6 +317,25 @@ public java.lang.String <B>getDisplayName</B>()</PRE>
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Descriptor.html#getDisplayName()">getDisplayName</A></CODE> in class <CODE><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isInstantiable()"><!-- --></A><H3>
+isInstantiable</H3>
+<PRE>
+public boolean <B>isInstantiable</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/slaves/NodeDescriptor.html#isInstantiable()">NodeDescriptor</A></CODE></B></DD>
+<DD>Can the administrator create this type of nodes from UI?
+
+ Return false if it only makes sense for programs to create it, not through the "new node" UI.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/slaves/NodeDescriptor.html#isInstantiable()">isInstantiable</A></CODE> in class <CODE><A HREF="../../hudson/slaves/NodeDescriptor.html" title="class in hudson.slaves">NodeDescriptor</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

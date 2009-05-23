@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Hudson (Hudson core 1.306 API)
+Hudson (Hudson core 1.307 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-16">
+<META NAME="date" CONTENT="2009-05-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson core 1.306 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson core 1.306 API)";
+        parent.document.title="Hudson (Hudson core 1.307 API)";
     }
 }
 </SCRIPT>
@@ -3799,14 +3799,10 @@ public java.lang.String <B>getRootUrl</B>()</PRE>
  such as "http://localhost/hudson/".
 
  <p>
- Also note that when serving user requests from HTTP, you should always use
- <CODE>HttpServletRequest</CODE> to determine the full URL, instead of using this
- (this is because one host may have multiple names, and <CODE>HttpServletRequest</CODE>
- accurately represents what the current user used.)
-
- <p>
- This information is rather only meant to be useful for sending out messages
- via non-HTTP channels, like SMTP or IRC, with a link back to Hudson website.
+ This method first tries to use the manually configured value, then
+ fall back to <CODE>StaplerRequest.getRootPath()</CODE>.
+ It is done in this order so that it can work correctly even in the face
+ of a reverse proxy.
 <P>
 <DD><DL>
 </DL>

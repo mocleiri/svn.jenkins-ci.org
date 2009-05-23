@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Run (Hudson core 1.306 API)
+Run (Hudson core 1.307 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-16">
+<META NAME="date" CONTENT="2009-05-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson core 1.306 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson core 1.306 API)";
+        parent.document.title="Run (Hudson core 1.307 API)";
     }
 }
 </SCRIPT>
@@ -211,6 +211,14 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#charset">charset</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Charset in which the log file is written.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -657,7 +665,7 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#getEnvironment()">getEnvironment</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of XXX use <A HREF="../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)"><CODE>getEnvironment(TaskListener)</CODE></A></I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.305 use <A HREF="../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)"><CODE>getEnvironment(TaskListener)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1149,6 +1157,22 @@ protected long <B>duration</B></PRE>
 <P>
 <DL>
 </DL>
+</DL>
+<HR>
+
+<A NAME="charset"><!-- --></A><H3>
+charset</H3>
+<PRE>
+protected java.lang.String <B>charset</B></PRE>
+<DL>
+<DD>Charset in which the log file is written.
+ For compatibility reason, this field may be null.
+ For persistence, this field is string and not <CODE>Charset</CODE>.
+<P>
+<DL>
+<DT><B>Since:</B></DT>
+  <DD>1.257</DD>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Run.html#getCharset()"><CODE>getCharset()</CODE></A></DL>
 </DL>
 <HR>
 
@@ -2444,7 +2468,7 @@ public <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <
                        throws java.io.IOException,
                               java.lang.InterruptedException</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>as of XXX use <A HREF="../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)"><CODE>getEnvironment(TaskListener)</CODE></A></I>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.305 use <A HREF="../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)"><CODE>getEnvironment(TaskListener)</CODE></A></I>
 <P>
 <DD><DL>
 </DL>
@@ -2484,7 +2508,9 @@ public <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.305</DD>
+</DL>
 </DD>
 </DL>
 <HR>

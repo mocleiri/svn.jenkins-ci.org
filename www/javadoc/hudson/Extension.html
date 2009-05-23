@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Extension (Hudson core 1.306 API)
+Extension (Hudson core 1.307 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-16">
+<META NAME="date" CONTENT="2009-05-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Extension (Hudson core 1.306 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Extension (Hudson core 1.306 API)";
+        parent.document.title="Extension (Hudson core 1.307 API)";
     }
 }
 </SCRIPT>
@@ -77,9 +77,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;REQUIRED&nbsp;|&nbsp;OPTIONAL</FONT></TD>
+  SUMMARY:&nbsp;REQUIRED&nbsp;|&nbsp;<A HREF="#annotation_type_optional_element_summary">OPTIONAL</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;ELEMENT</FONT></TD>
+DETAIL:&nbsp;<A HREF="#annotation_type_element_detail">ELEMENT</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -136,10 +136,49 @@ Marks a field, a method, or a class for automatic discovery, so that Hudson can 
 <DT><B>See Also:</B><DD><a href="https://sezpoz.dev.java.net/nonav/">SezPoz</a>, 
 <A HREF="../hudson/ExtensionFinder.html" title="class in hudson"><CODE>ExtensionFinder</CODE></A>, 
 <A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A></DL>
+<HR>
 
 <P>
+<!-- =========== ANNOTATION TYPE OPTIONAL MEMBER SUMMARY =========== -->
 
+<A NAME="annotation_type_optional_element_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Optional Element Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;double</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Extension.html#ordinal()">ordinal</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used for sorting extensions.</TD>
+</TR>
+</TABLE>
+&nbsp;
 <P>
+<A NAME="ordinal()"><!-- --></A><H3>
+ordinal</H3>
+<PRE>
+public abstract double <B>ordinal</B></PRE>
+<DL>
+<DD>Used for sorting extensions.
+
+ Extensions will be sorted in the descending order of the ordinal.
+ This is a rather poor approach to the problem, so its use is generally discouraged.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.306</DD>
+</DL>
+<DL>
+<DT><B>Default:</B><DD>0.0</DD>
+</DL>
+</DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
 
@@ -192,9 +231,9 @@ Marks a field, a method, or a class for automatic discovery, so that Hudson can 
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;REQUIRED&nbsp;|&nbsp;OPTIONAL</FONT></TD>
+  SUMMARY:&nbsp;REQUIRED&nbsp;|&nbsp;<A HREF="#annotation_type_optional_element_summary">OPTIONAL</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;ELEMENT</FONT></TD>
+DETAIL:&nbsp;<A HREF="#annotation_type_element_detail">ELEMENT</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>

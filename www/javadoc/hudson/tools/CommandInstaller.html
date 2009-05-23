@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-CommandInstaller (Hudson core 1.306 API)
+CommandInstaller (Hudson core 1.307 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-16">
+<META NAME="date" CONTENT="2009-05-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CommandInstaller (Hudson core 1.306 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CommandInstaller (Hudson core 1.306 API)";
+        parent.document.title="CommandInstaller (Hudson core 1.307 API)";
     }
 }
 </SCRIPT>
@@ -110,6 +110,10 @@ Installs a tool by running an arbitrary shell command.
 <P>
 
 <P>
+<DL>
+<DT><B>Since:</B></DT>
+  <DD>1.305</DD>
+</DL>
 <HR>
 
 <P>
@@ -168,8 +172,9 @@ Installs a tool by running an arbitrary shell command.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/tools/CommandInstaller.html#CommandInstaller(java.lang.String, java.lang.String)">CommandInstaller</A></B>(java.lang.String&nbsp;label,
-                 java.lang.String&nbsp;command)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tools/CommandInstaller.html#CommandInstaller(java.lang.String, java.lang.String, java.lang.String)">CommandInstaller</A></B>(java.lang.String&nbsp;label,
+                 java.lang.String&nbsp;command,
+                 java.lang.String&nbsp;toolHome)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -188,6 +193,14 @@ Installs a tool by running an arbitrary shell command.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tools/CommandInstaller.html#getCommand()">getCommand</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tools/CommandInstaller.html#getToolHome()">getToolHome</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -234,12 +247,13 @@ Installs a tool by running an arbitrary shell command.
 </TR>
 </TABLE>
 
-<A NAME="CommandInstaller(java.lang.String, java.lang.String)"><!-- --></A><H3>
+<A NAME="CommandInstaller(java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
 CommandInstaller</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>CommandInstaller</B>(java.lang.String&nbsp;label,
-                                             java.lang.String&nbsp;command)</PRE>
+                                             java.lang.String&nbsp;command,
+                                             java.lang.String&nbsp;toolHome)</PRE>
 <DL>
 </DL>
 
@@ -257,6 +271,17 @@ CommandInstaller</H3>
 getCommand</H3>
 <PRE>
 public java.lang.String <B>getCommand</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getToolHome()"><!-- --></A><H3>
+getToolHome</H3>
+<PRE>
+public java.lang.String <B>getToolHome</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>

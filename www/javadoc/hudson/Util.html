@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Util (Hudson core 1.306 API)
+Util (Hudson core 1.307 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-16">
+<META NAME="date" CONTENT="2009-05-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson core 1.306 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson core 1.306 API)";
+        parent.document.title="Util (Hudson core 1.307 API)";
     }
 }
 </SCRIPT>
@@ -293,9 +293,7 @@ Various utility methods that don't have more proper home.
 <TD><CODE><B><A HREF="../hudson/Util.html#encode(java.lang.String)">encode</A></B>(java.lang.String&nbsp;s)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Only escapes non-ASCII but leaves other URL-unsafe characters.
- Util.rawEncode should generally be used instead, though be careful to pass only
- a single path component to that method (it will encode /, but this method does not).</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Escapes non-ASCII characters in URL.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1173,14 +1171,15 @@ public static &lt;T&gt; java.util.List&lt;T&gt; <B>createSubList</B>(java.util.C
 <A NAME="encode(java.lang.String)"><!-- --></A><H3>
 encode</H3>
 <PRE>
-<FONT SIZE="-1">@Deprecated
-</FONT>public static java.lang.String <B>encode</B>(java.lang.String&nbsp;s)</PRE>
+public static java.lang.String <B>encode</B>(java.lang.String&nbsp;s)</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Only escapes non-ASCII but leaves other URL-unsafe characters.
- Util.rawEncode should generally be used instead, though be careful to pass only
- a single path component to that method (it will encode /, but this method does not).</I>
-<P>
 <DD>Escapes non-ASCII characters in URL.
+
+ <p>
+ Note that this methods only escapes non-ASCII but leaves other URL-unsafe characters,
+ such as '#'.
+ <A HREF="../hudson/Util.html#rawEncode(java.lang.String)"><CODE>rawEncode(String)</CODE></A> should generally be used instead, though be careful to pass only
+ a single path component to that method (it will encode /, but this method does not).
 <P>
 <DD><DL>
 </DL>
