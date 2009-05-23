@@ -24,6 +24,9 @@ public class Main {
     @Option(name="-o",usage="json file")
     public File output = new File("output.json");
 
+    @Option(name="-h",usage="htaccess file")
+    public File htaccess = new File(".htaccess.plugins");
+
     public static void main(String[] args) throws Exception {
         Main main = new Main();
         CmdLineParser p = new CmdLineParser(main);
@@ -57,6 +60,8 @@ public class Main {
 
         Cache cache = new Cache(cacheDir);
 
+        PrintWriter redirect = new PrintWriter(new FileWriter(htaccess),true);
+
         JSONObject plugins = new JSONObject();
         for( JNFileFolder dir : pluginsFolder.getSubFolders().values() ) {
             System.out.println(dir.getName());
@@ -76,8 +81,10 @@ public class Main {
             System.out.println("=> "+plugin.toJSON());
 
             plugins.put(plugin.artifactId,plugin.toJSON());
+            redirect.printf("Redirect 302 /latest/%s.hpi %s\n", plugin.artifactId, latest.file.getURL());
         }
 
+        redirect.close();
         cache.save();
 
         return plugins;
