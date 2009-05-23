@@ -16,8 +16,6 @@ import java.net.URL;
 import java.rmi.RemoteException;
 import java.text.MessageFormat;
 import java.util.Properties;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -120,7 +118,7 @@ public class Plugin {
         return HYPERLINK_PATTERN.matcher(excerpt).replaceAll("<a href='$2'>$1</a>");
     }
 
-    private static final Pattern EXCERPT_PATTERN = Pattern.compile("\\{excerpt\\}(.+)\\{excerpt\\}");
+    private static final Pattern EXCERPT_PATTERN = Pattern.compile("\\{excerpt(?::hidden)\\}(.+)\\{excerpt\\}");
     private static final Pattern HYPERLINK_PATTERN = Pattern.compile("\\[([^|\\]]+)\\|([^|\\]]+)(|([^]])+)?\\]");
 
     public JSONObject toJSON() throws IOException {
