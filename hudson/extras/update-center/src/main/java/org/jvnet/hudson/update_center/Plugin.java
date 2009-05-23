@@ -118,7 +118,7 @@ public class Plugin {
         return HYPERLINK_PATTERN.matcher(excerpt).replaceAll("<a href='$2'>$1</a>");
     }
 
-    private static final Pattern EXCERPT_PATTERN = Pattern.compile("\\{excerpt(?::hidden)\\}(.+)\\{excerpt\\}");
+    private static final Pattern EXCERPT_PATTERN = Pattern.compile("\\{excerpt(?::hidden)?\\}(.+)\\{excerpt\\}");
     private static final Pattern HYPERLINK_PATTERN = Pattern.compile("\\[([^|\\]]+)\\|([^|\\]]+)(|([^]])+)?\\]");
 
     public JSONObject toJSON() throws IOException {
