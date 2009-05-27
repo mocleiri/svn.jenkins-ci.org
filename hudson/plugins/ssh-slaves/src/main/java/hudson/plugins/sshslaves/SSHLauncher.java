@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import com.trilead.ssh2.Connection;
 import com.trilead.ssh2.SFTPException;
@@ -27,6 +28,8 @@ import hudson.util.StreamCopyThread;
 import hudson.util.StreamTaskListener;
 import hudson.Extension;
 import hudson.AbortException;
+import hudson.Util;
+import static hudson.Util.fixEmpty;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
@@ -391,10 +394,29 @@ public class SSHLauncher extends ComputerLauncher {
     private void openConnection(StreamTaskListener listener) throws IOException {
         listener.getLogger().println(Messages.SSHLauncher_OpeningSSHConnection(getTimestamp(), host + ":" + port));
         connection.connect();
+        
+        String username = this.username;
+        if(fixEmpty(username)==null) {
+            username = System.getProperty("user.name");
+            LOGGER.fine("Defaulting the user name to "+username);
+        }
 
-        // TODO if using a key file, use the key file instead of password
         boolean isAuthenticated = false;
-        if (privatekey != null && privatekey.length() > 0) {
+        if(fixEmpty(privatekey)==null && fixEmpty(password)==null) {
+            // check the default key locations if no authentication method is explicitly configured.
+            File home = new File(System.getProperty("user.home"));
+            for (String keyName : Arrays.asList("id_rsa","id_dsa","identity")) {
+                File key = new File(home,".ssh/"+keyName);
+                if (key.exists()) {
+                    listener.getLogger()
+                            .println(Messages.SSHLauncher_AuthenticatingPublicKey(getTimestamp(), username, key));
+                    isAuthenticated = connection.authenticateWithPublicKey(username, key, null);
+                }
+                if (isAuthenticated)
+                    break;
+            }
+        }
+        if (!isAuthenticated && fixEmpty(privatekey).length() > 0) {
             File key = new File(privatekey);
             if (key.exists()) {
                 listener.getLogger()
@@ -407,6 +429,7 @@ public class SSHLauncher extends ComputerLauncher {
                     .println(Messages.SSHLauncher_AuthenticatingUserPass(getTimestamp(), username, "******"));
             isAuthenticated = connection.authenticateWithPassword(username, password);
         }
+
         if (isAuthenticated && connection.isAuthenticationComplete()) {
             listener.getLogger().println(Messages.SSHLauncher_AuthenticationSuccessful(getTimestamp()));
         } else {
@@ -535,4 +558,6 @@ public class SSHLauncher extends ComputerLauncher {
                     "/usr/java/latest/bin/java");
         }
     }
+
+    private static final Logger LOGGER = Logger.getLogger(SSHLauncher.class.getName());
 }

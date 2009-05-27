@@ -24,7 +24,7 @@ ID_PATTERN = Pattern.compile("ProductRef=([^&]+)");
 wc = new WebClient()
 wc.setJavaScriptEnabled(false);
 wc.setCssEnabled(false);
-HtmlPage p = (HtmlPage)wc.getPage("http://java.sun.com/products/archive/");
+HtmlPage p = getPage("http://java.sun.com/products/archive/");
 
 JSONArray all = new JSONArray();
 
@@ -52,16 +52,17 @@ JSONArray listFamily(HtmlPage p, Family f) throws Exception {
 
     JSONArray jdks = new JSONArray();
 
+    /* in case latest release is not listed on the archive page:
     if(f.name=="JDK 6") {
-        // pick up the latest release from http://java.sun.com/javase/downloads/ since it's not listed in the archive page
         Pattern bareJDK = Pattern.compile("jdk-6u([0-9]+)-oth-JPR");
-        String pc = findProductCode(wc.getPage("http://java.sun.com/javase/downloads/").getAnchors().find { HtmlAnchor a ->
+        String pc = findProductCode(getPage("http://java.sun.com/javase/downloads/").getAnchors().find { HtmlAnchor a ->
             return bareJDK.matcher(a.getHrefAttribute()).find();
         });
         Matcher m = bareJDK.matcher(pc)
         m.find();
         jdks << makeJDK("6 Update "+m.group(1),pc);
     }
+    */
 
     select.getOptions().collect(jdks) { HtmlOption opt ->
         return makeJDK(buildName(opt.getTextContent()),findID(opt.getValueAttribute()));
@@ -85,7 +86,7 @@ def buildName(String label) {
 
 def findID(String href) throws Exception {
 
-    HtmlPage p = wc.getPage("http://java.sun.com${href}");
+    HtmlPage p = getPage("http://java.sun.com${href}");
     HtmlAnchor a = p.getAnchors().find { HtmlAnchor a ->
         def m = ID_PATTERN.matcher(a.getHrefAttribute());
         return m.find() && m.group(1).contains("dk") && !m.group(1).contains("re")
@@ -103,3 +104,11 @@ def findProductCode(HtmlAnchor a) {
     throw new IllegalStateException("Failed to find ID for "+href);
 }
 
+HtmlPage getPage(String url) {
+    print("Fetching ${url} ...")
+    long start = System.currentTimeMillis()
+    HtmlPage p = wc.getPage(url)
+    long end = System.currentTimeMillis()
+    println("done (took ${end - start} msec)")
+    p
+}
