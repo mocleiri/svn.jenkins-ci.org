@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Ant.AntInstallation.DescriptorImpl (Hudson core 1.307 API)
+Ant.AntInstallation.DescriptorImpl (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-23">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Ant.AntInstallation.DescriptorImpl (Hudson core 1.307 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Ant.AntInstallation.DescriptorImpl (Hudson core 1.307 API)";
+        parent.document.title="Ant.AntInstallation.DescriptorImpl (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/tasks/Ant.DescriptorImpl.html" title="class in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/tasks/Ant.AntInstaller.html" title="class in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tasks/Ant.AntInstallation.DescriptorImpl.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Ant.AntInstallation.DescriptorImpl.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -187,6 +187,31 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+          net.sf.json.JSONObject&nbsp;json)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invoked when the global configuration page is submitted.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.DescriptorImpl.html#doCheckHome(java.io.File)">doCheckHome</A></B>(java.io.File&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the ANT_HOME is valid.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolInstaller.html" title="class in hudson.tools">ToolInstaller</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.DescriptorImpl.html#getDefaultInstallers()">getDefaultInstallers</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional list of installers to be configured by default for new tools of this type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.DescriptorImpl.html#getDisplayName()">getDisplayName</A></B>()</CODE>
 
@@ -216,7 +241,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.tools.<A HREF="../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools">ToolDescriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/tools/ToolDescriptor.html#getDefaultInstallers()">getDefaultInstallers</A>, <A HREF="../../hudson/tools/ToolDescriptor.html#getDefaultProperties()">getDefaultProperties</A>, <A HREF="../../hudson/tools/ToolDescriptor.html#getPropertyDescriptors()">getPropertyDescriptors</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/tools/ToolDescriptor.html#getDefaultProperties()">getDefaultProperties</A>, <A HREF="../../hudson/tools/ToolDescriptor.html#getPropertyDescriptors()">getPropertyDescriptors</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
@@ -225,7 +250,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#convert(java.util.Map)">convert</A>, <A HREF="../../hudson/model/Descriptor.html#doHelp(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doHelp</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.util.Collection, java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)">getCheckUrl</A>, <A HREF="../../hudson/model/Descriptor.html#getConfigPage()">getConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getGlobalConfigPage()">getGlobalConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile()">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile(java.lang.String)">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getJsonSafeClassName()">getJsonSafeClassName</A>, <A HREF="../../hudson/model/Descriptor.html#getPropertyType(java.lang.String)">getPropertyType</A>, <A HREF="../../hudson/model/Descriptor.html#getViewPage(java.lang.Class, java.lang.String)">getViewPage</A>, <A HREF="../../hudson/model/Descriptor.html#isInstance(T)">isInstance</A>, <A HREF="../../hudson/model/Descriptor.html#load()">load</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A>, <A HREF="../../hudson/model/Descriptor.html#save()">save</A>, <A HREF="../../hudson/model/Descriptor.html#toArray(T...)">toArray</A>, <A HREF="../../hudson/model/Descriptor.html#toList(T...)">toList</A>, <A HREF="../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#convert(java.util.Map)">convert</A>, <A HREF="../../hudson/model/Descriptor.html#doHelp(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doHelp</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.util.Collection, java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)">getCheckUrl</A>, <A HREF="../../hudson/model/Descriptor.html#getConfigPage()">getConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getGlobalConfigPage()">getGlobalConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile()">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile(java.lang.String)">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getJsonSafeClassName()">getJsonSafeClassName</A>, <A HREF="../../hudson/model/Descriptor.html#getPropertyType(java.lang.String)">getPropertyType</A>, <A HREF="../../hudson/model/Descriptor.html#getViewPage(java.lang.Class, java.lang.String)">getViewPage</A>, <A HREF="../../hudson/model/Descriptor.html#isInstance(T)">isInstance</A>, <A HREF="../../hudson/model/Descriptor.html#load()">load</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A>, <A HREF="../../hudson/model/Descriptor.html#save()">save</A>, <A HREF="../../hudson/model/Descriptor.html#toArray(T...)">toArray</A>, <A HREF="../../hudson/model/Descriptor.html#toList(T...)">toList</A>, <A HREF="../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -319,6 +344,65 @@ public void <B>setInstallations</B>(<A HREF="../../hudson/tasks/Ant.AntInstallat
       can be empty but never null.</DL>
 </DD>
 </DL>
+<HR>
+
+<A NAME="getDefaultInstallers()"><!-- --></A><H3>
+getDefaultInstallers</H3>
+<PRE>
+public java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolInstaller.html" title="class in hudson.tools">ToolInstaller</A>&gt; <B>getDefaultInstallers</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/tools/ToolDescriptor.html#getDefaultInstallers()">ToolDescriptor</A></CODE></B></DD>
+<DD>Optional list of installers to be configured by default for new tools of this type.
+ If there are popular versions of the tool available using generic installation techniques,
+ they can be returned here for the user's convenience.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/tools/ToolDescriptor.html#getDefaultInstallers()">getDefaultInstallers</A></CODE> in class <CODE><A HREF="../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools">ToolDescriptor</A>&lt;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><!-- --></A><H3>
+configure</H3>
+<PRE>
+public boolean <B>configure</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                         net.sf.json.JSONObject&nbsp;json)
+                  throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">Descriptor</A></CODE></B></DD>
+<DD>Invoked when the global configuration page is submitted.
+
+ Can be overriden to store descriptor-specific information.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A></CODE> in class <CODE><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+<DD><CODE>json</CODE> - The JSON object that captures the configuration data for this <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.
+      See http://hudson.gotdns.com/wiki/display/HUDSON/Structured+Form+Submission
+<DT><B>Returns:</B><DD>false
+      to keep the client in the same config page.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doCheckHome(java.io.File)"><!-- --></A><H3>
+doCheckHome</H3>
+<PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckHome</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                  java.io.File&nbsp;value)</PRE>
+<DL>
+<DD>Checks if the ANT_HOME is valid.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
 
@@ -351,7 +435,7 @@ public void <B>setInstallations</B>(<A HREF="../../hudson/tasks/Ant.AntInstallat
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/tasks/Ant.DescriptorImpl.html" title="class in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/tasks/Ant.AntInstaller.html" title="class in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tasks/Ant.AntInstallation.DescriptorImpl.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Ant.AntInstallation.DescriptorImpl.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

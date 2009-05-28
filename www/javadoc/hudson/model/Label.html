@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Label (Hudson core 1.307 API)
+Label (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-23">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Label (Hudson core 1.307 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Label (Hudson core 1.307 API)";
+        parent.document.title="Label (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -308,6 +308,14 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Label.html#isAssignable()">isAssignable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can jobs be assigned to this label?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Label.html#isEmpty()">isEmpty</A></B>()</CODE>
 
 <BR>
@@ -329,6 +337,14 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this label is a "self label",
  which means the label is the name of a <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Label.html#parse(java.lang.String)">parse</A></B>(java.lang.String&nbsp;labels)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convers a whitespace-separate list of tokens into a set of <A HREF="../../hudson/model/Label.html" title="class in hudson.model"><CODE>Label</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -487,6 +503,27 @@ getClouds</H3>
 </DL>
 <HR>
 
+<A NAME="isAssignable()"><!-- --></A><H3>
+isAssignable</H3>
+<PRE>
+public boolean <B>isAssignable</B>()</PRE>
+<DL>
+<DD>Can jobs be assigned to this label?
+ <p>
+ The answer is yes if there is a reasonable basis to believe that Hudson can have
+ an executor under this label, given the current configuration. This includes
+ situations such as (1) there are offline slaves that have this label (2) clouds exist
+ that can provision slaves that have this label.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getTotalConfiguredExecutors()"><!-- --></A><H3>
 getTotalConfiguredExecutors</H3>
 <PRE>
@@ -494,7 +531,12 @@ public int <B>getTotalConfiguredExecutors</B>()</PRE>
 <DL>
 <DD>Number of total <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s that belong to this label.
  <p>
- This includes executors that belong to offline nodes.
+ This includes executors that belong to offline nodes, so the result
+ can be thought of as a potential capacity, whereas <A HREF="../../hudson/model/Label.html#getTotalExecutors()"><CODE>getTotalExecutors()</CODE></A>
+ is the currently functioning total number of executors.
+ <p>
+ This method doesn't take the dynamically allocatable nodes (via <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A>)
+ into account. If you just want to test if there's some executors, use <A HREF="../../hudson/model/Label.html#isAssignable()"><CODE>isAssignable()</CODE></A>.
 <P>
 <DD><DL>
 </DL>
@@ -707,6 +749,26 @@ public java.lang.String <B>toString</B>()</PRE>
 <DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="parse(java.lang.String)"><!-- --></A><H3>
+parse</H3>
+<PRE>
+public static java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt; <B>parse</B>(java.lang.String&nbsp;labels)</PRE>
+<DL>
+<DD>Convers a whitespace-separate list of tokens into a set of <A HREF="../../hudson/model/Label.html" title="class in hudson.model"><CODE>Label</CODE></A>s.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>labels</CODE> - Strings like "abc def ghi". Can be empty or null.
+<DT><B>Returns:</B><DD>Can be empty but never null. A new writable set is always returned,
+      so that the caller can add more to the set.<DT><B>Since:</B></DT>
+  <DD>1.308</DD>
 </DL>
 </DD>
 </DL>

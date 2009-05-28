@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DelegatingCallable (Hudson core 1.96 API)
+DelegatingCallable (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2007-04-03">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DelegatingCallable (Hudson core 1.96 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DelegatingCallable (Hudson core 1.96 API)";
+        parent.document.title="DelegatingCallable (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -56,8 +56,8 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/remoting/Channel.Listener.html" title="class in hudson.remoting"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/remoting/Future.html" title="interface in hudson.remoting"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/remoting/Channel.Mode.html" title="enum in hudson.remoting"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/remoting/Engine.html" title="class in hudson.remoting"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/remoting/DelegatingCallable.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="DelegatingCallable.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -104,11 +104,17 @@ Interface DelegatingCallable&lt;V,T extends java.lang.Throwable&gt;</H2>
 <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> that nominates another claassloader for serialization.
 
  <p>
- For various reasons, one <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> object is serialized by one classloader.
- Normally the classloader that loaded <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> implementation will be used,
- but when <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> further delegates to another classloader, that might
- not be suitable. Implementing this interface allows <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> to
- use designate classloader.
+ For various reasons, one <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> object (and all the objects reachable from it) is
+ serialized by one classloader.
+ By default, the classloader that loaded <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> object itself is used,
+ but when <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> object refers to other objects that are loaded by other classloaders,
+ this will fail to deserialize on the remote end.
+
+ <p>
+ In such a case, implement this interface, instead of plain <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> and
+ return a classloader that can see all the classes.
+
+ In case of Hudson, <code>PluginManager.uberClassLoader</code> is a good candidate.
 <P>
 
 <P>
@@ -202,8 +208,8 @@ java.lang.ClassLoader <B>getClassLoader</B>()</PRE>
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/remoting/Channel.Listener.html" title="class in hudson.remoting"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/remoting/Future.html" title="interface in hudson.remoting"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/remoting/Channel.Mode.html" title="enum in hudson.remoting"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/remoting/Engine.html" title="class in hudson.remoting"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/remoting/DelegatingCallable.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="DelegatingCallable.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -232,6 +238,6 @@ DETAIL:&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHO
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &copy; 2007 null. All Rights Reserved.
+Copyright &#169; 2009. All Rights Reserved.
 </BODY>
 </HTML>

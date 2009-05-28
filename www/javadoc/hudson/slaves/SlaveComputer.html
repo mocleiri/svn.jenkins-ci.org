@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SlaveComputer (Hudson core 1.307 API)
+SlaveComputer (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-23">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SlaveComputer (Hudson core 1.307 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SlaveComputer (Hudson core 1.307 API)";
+        parent.document.title="SlaveComputer (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -198,7 +198,7 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#getChannel()">getChannel</A></B>()</CODE>
 
 <BR>
@@ -340,10 +340,10 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#setChannel(java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.remoting.Channel.Listener)">setChannel</A></B>(java.io.InputStream&nbsp;in,
            java.io.OutputStream&nbsp;out,
            java.io.OutputStream&nbsp;launchLog,
-           <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.Listener.html?is-external=true" title="class or interface in hudson.remoting">Channel.Listener</A>&nbsp;listener)</CODE>
+           <A HREF="../../hudson/remoting/Channel.Listener.html" title="class in hudson.remoting">Channel.Listener</A>&nbsp;listener)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A> from the given stream and sets that to this slave.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> from the given stream and sets that to this slave.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -351,7 +351,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#setChannel(java.io.InputStream, java.io.OutputStream, hudson.model.TaskListener, hudson.remoting.Channel.Listener)">setChannel</A></B>(java.io.InputStream&nbsp;in,
            java.io.OutputStream&nbsp;out,
            <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;taskListener,
-           <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.Listener.html?is-external=true" title="class or interface in hudson.remoting">Channel.Listener</A>&nbsp;listener)</CODE>
+           <A HREF="../../hudson/remoting/Channel.Listener.html" title="class in hudson.remoting">Channel.Listener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -715,7 +715,7 @@ setChannel</H3>
 public void <B>setChannel</B>(java.io.InputStream&nbsp;in,
                        java.io.OutputStream&nbsp;out,
                        <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;taskListener,
-                       <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.Listener.html?is-external=true" title="class or interface in hudson.remoting">Channel.Listener</A>&nbsp;listener)
+                       <A HREF="../../hudson/remoting/Channel.Listener.html" title="class in hudson.remoting">Channel.Listener</A>&nbsp;listener)
                 throws java.io.IOException,
                        java.lang.InterruptedException</PRE>
 <DL>
@@ -734,11 +734,11 @@ setChannel</H3>
 public void <B>setChannel</B>(java.io.InputStream&nbsp;in,
                        java.io.OutputStream&nbsp;out,
                        java.io.OutputStream&nbsp;launchLog,
-                       <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.Listener.html?is-external=true" title="class or interface in hudson.remoting">Channel.Listener</A>&nbsp;listener)
+                       <A HREF="../../hudson/remoting/Channel.Listener.html" title="class in hudson.remoting">Channel.Listener</A>&nbsp;listener)
                 throws java.io.IOException,
                        java.lang.InterruptedException</PRE>
 <DL>
-<DD>Creates a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A> from the given stream and sets that to this slave.
+<DD>Creates a <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> from the given stream and sets that to this slave.
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>in</CODE> - Stream connected to the remote "slave.jar". It's the caller's responsibility to do
@@ -757,7 +757,7 @@ public void <B>setChannel</B>(java.io.InputStream&nbsp;in,
 <A NAME="getChannel()"><!-- --></A><H3>
 getChannel</H3>
 <PRE>
-public <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A> <B>getChannel</B>()</PRE>
+public <A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A> <B>getChannel</B>()</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Computer.html#getChannel()">Computer</A></CODE></B></DD>
 <DD>Gets the channel that can be used to run a program on this computer.

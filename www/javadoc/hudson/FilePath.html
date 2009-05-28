@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FilePath (Hudson core 1.307 API)
+FilePath (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-23">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson core 1.307 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson core 1.307 API)";
+        parent.document.title="FilePath (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -155,10 +155,10 @@ java.lang.Object
  <p>
  When <A HREF="../hudson/FilePath.FileCallable.html" title="interface in hudson"><CODE>FilePath.FileCallable</CODE></A> is transfered to a remote node, it will be done so
  by using the same Java serialization scheme that the remoting module uses.
- See <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A> for more about this. 
+ See <A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> for more about this. 
 
  <p>
- <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> itself can be sent over to a remote node as a part of <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Callable</CODE></A>
+ <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> itself can be sent over to a remote node as a part of <A HREF="../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A>
  serialization. For example, sending a <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> of a remote node to that
  node causes <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> to become "local". Similarly, sending a
  <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> that represents the local computer causes it to become "remote."
@@ -237,7 +237,7 @@ java.lang.Object
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Construct a path starting with a base location.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../hudson/FilePath.html#FilePath(hudson.remoting.VirtualChannel, java.lang.String)">FilePath</A></B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel,
+<TD><CODE><B><A HREF="../hudson/FilePath.html#FilePath(hudson.remoting.VirtualChannel, java.lang.String)">FilePath</A></B>(<A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel,
          java.lang.String&nbsp;remote)</CODE>
 
 <BR>
@@ -273,7 +273,7 @@ V</CODE></FONT></TD>
 </TR>
 </TABLE>
 </CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#act(hudson.remoting.Callable)">act</A></B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting">Callable</A>&lt;V,E&gt;&nbsp;callable)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#act(hudson.remoting.Callable)">act</A></B>(<A HREF="../hudson/remoting/Callable.html" title="interface in hudson.remoting">Callable</A>&lt;V,E&gt;&nbsp;callable)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes some program on the machine that this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> exists,
@@ -301,7 +301,7 @@ V</CODE></FONT></TD>
 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
 <TR ALIGN="right" VALIGN="">
 <TD NOWRAP><FONT SIZE="-1">
-<CODE>&lt;T&gt; <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Future.html?is-external=true" title="class or interface in hudson.remoting">Future</A>&lt;T&gt;</CODE></FONT></TD>
+<CODE>&lt;T&gt; <A HREF="../hudson/remoting/Future.html" title="interface in hudson.remoting">Future</A>&lt;T&gt;</CODE></FONT></TD>
 </TR>
 </TABLE>
 </CODE></FONT></TD>
@@ -487,7 +487,7 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#getChannel()">getChannel</A></B>()</CODE>
 
 <BR>
@@ -586,6 +586,14 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#listDirectories()">listDirectories</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List up subdirectories.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#mkdirs()">mkdirs</A></B>()</CODE>
 
@@ -594,11 +602,27 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#moveAllChildrenTo(hudson.FilePath)">moveAllChildrenTo</A></B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Moves all the contents of this directory into the specified directory, then delete this directory itself.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.io.InputStream</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#read()">read</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reads this file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#readToString()">readToString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reads this file into a string, by using the current system encoding.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -791,13 +815,13 @@ public static int <B>SIDE_BUFFER_SIZE</B></PRE>
 <A NAME="FilePath(hudson.remoting.VirtualChannel, java.lang.String)"><!-- --></A><H3>
 FilePath</H3>
 <PRE>
-public <B>FilePath</B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel,
+public <B>FilePath</B>(<A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel,
                 java.lang.String&nbsp;remote)</PRE>
 <DL>
 <DD>Creates a <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> that represents a path on the given node.
 <P>
 <DL>
-<DT><B>Parameters:</B><DD><CODE>channel</CODE> - To create a path that represents a remote path, pass in a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A>
+<DT><B>Parameters:</B><DD><CODE>channel</CODE> - To create a path that represents a remote path, pass in a <A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>
       that's connected to that machine. If null, that means the local file path.</DL>
 </DL>
 <HR>
@@ -1147,7 +1171,7 @@ public &lt;T&gt; T <B>act</B>(<A HREF="../hudson/FilePath.FileCallable.html" tit
 <A NAME="actAsync(hudson.FilePath.FileCallable)"><!-- --></A><H3>
 actAsync</H3>
 <PRE>
-public &lt;T&gt; <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Future.html?is-external=true" title="class or interface in hudson.remoting">Future</A>&lt;T&gt; <B>actAsync</B>(<A HREF="../hudson/FilePath.FileCallable.html" title="interface in hudson">FilePath.FileCallable</A>&lt;T&gt;&nbsp;callable)
+public &lt;T&gt; <A HREF="../hudson/remoting/Future.html" title="interface in hudson.remoting">Future</A>&lt;T&gt; <B>actAsync</B>(<A HREF="../hudson/FilePath.FileCallable.html" title="interface in hudson">FilePath.FileCallable</A>&lt;T&gt;&nbsp;callable)
                    throws java.io.IOException,
                           java.lang.InterruptedException</PRE>
 <DL>
@@ -1169,7 +1193,7 @@ public &lt;T&gt; <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudso
 <A NAME="act(hudson.remoting.Callable)"><!-- --></A><H3>
 act</H3>
 <PRE>
-public &lt;V,E extends java.lang.Throwable&gt; V <B>act</B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting">Callable</A>&lt;V,E&gt;&nbsp;callable)
+public &lt;V,E extends java.lang.Throwable&gt; V <B>act</B>(<A HREF="../hudson/remoting/Callable.html" title="interface in hudson.remoting">Callable</A>&lt;V,E&gt;&nbsp;callable)
       throws java.io.IOException,
              java.lang.InterruptedException,
              E extends java.lang.Throwable</PRE>
@@ -1578,6 +1602,28 @@ public java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudso
 </DL>
 <HR>
 
+<A NAME="listDirectories()"><!-- --></A><H3>
+listDirectories</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt; <B>listDirectories</B>()
+                                         throws java.io.IOException,
+                                                java.lang.InterruptedException</PRE>
+<DL>
+<DD>List up subdirectories.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>can be empty but never null. Doesn't contain "." and ".."
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="list(java.io.FileFilter)"><!-- --></A><H3>
 list</H3>
 <PRE>
@@ -1631,6 +1677,25 @@ public java.io.InputStream <B>read</B>()
                          throws java.io.IOException</PRE>
 <DL>
 <DD>Reads this file.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="readToString()"><!-- --></A><H3>
+readToString</H3>
+<PRE>
+public java.lang.String <B>readToString</B>()
+                              throws java.io.IOException</PRE>
+<DL>
+<DD>Reads this file into a string, by using the current system encoding.
 <P>
 <DD><DL>
 </DL>
@@ -1729,6 +1794,29 @@ public void <B>renameTo</B>(<A HREF="../hudson/FilePath.html" title="class in hu
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="moveAllChildrenTo(hudson.FilePath)"><!-- --></A><H3>
+moveAllChildrenTo</H3>
+<PRE>
+public void <B>moveAllChildrenTo</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)
+                       throws java.io.IOException,
+                              java.lang.InterruptedException</PRE>
+<DL>
+<DD>Moves all the contents of this directory into the specified directory, then delete this directory itself.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.308.</DD>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -2014,7 +2102,7 @@ toString</H3>
 <A NAME="getChannel()"><!-- --></A><H3>
 getChannel</H3>
 <PRE>
-public <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A> <B>getChannel</B>()</PRE>
+public <A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A> <B>getChannel</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>

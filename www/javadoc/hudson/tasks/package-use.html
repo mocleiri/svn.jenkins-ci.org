@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Package hudson.tasks (Hudson core 1.307 API)
+Uses of Package hudson.tasks (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-23">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.tasks (Hudson core 1.307 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.tasks (Hudson core 1.307 API)";
+        parent.document.title="Uses of Package hudson.tasks (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -124,6 +124,10 @@ that perform the actual heavy-lifting of a build.&nbsp;</TD>
 <TD>Defines contracts that need to be implemented by a test reporting
 action (such as the built-in JUnit one).&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.jvnet.hudson.test"><B>org.jvnet.hudson.test</B></A></TD>
+<TD>Test harness for Hudson and its plugins.&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -228,7 +232,7 @@ Classes in <A HREF="../../hudson/tasks/package-summary.html">hudson.tasks</A> us
 <TD><B><A HREF="../../hudson/tasks/class-use/Maven.MavenInstallation.html#hudson.model"><B>Maven.MavenInstallation</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a Maven installation in a system.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/tasks/class-use/Maven.ProjectWithMaven.html#hudson.model"><B>Maven.ProjectWithMaven</B></A></B>
@@ -281,6 +285,12 @@ Classes in <A HREF="../../hudson/tasks/package-summary.html">hudson.tasks</A> us
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/tasks/class-use/Ant.AntInstallation.html#hudson.tasks"><B>Ant.AntInstallation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the Ant installation on the system.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tasks/class-use/Ant.AntInstallation.DescriptorImpl.html#hudson.tasks"><B>Ant.AntInstallation.DescriptorImpl</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -410,7 +420,7 @@ Classes in <A HREF="../../hudson/tasks/package-summary.html">hudson.tasks</A> us
 <TD><B><A HREF="../../hudson/tasks/class-use/Maven.MavenInstallation.html#hudson.tasks"><B>Maven.MavenInstallation</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a Maven installation in a system.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/tasks/class-use/Notifier.html#hudson.tasks"><B>Notifier</B></A></B>
@@ -542,6 +552,46 @@ Classes in <A HREF="../../hudson/tasks/package-summary.html">hudson.tasks</A> us
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A>s that run after the build is completed.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.jvnet.hudson.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/tasks/package-summary.html">hudson.tasks</A> used by <A HREF="../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tasks/class-use/Ant.AntInstallation.html#org.jvnet.hudson.test"><B>Ant.AntInstallation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the Ant installation on the system.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tasks/class-use/Builder.html#org.jvnet.hudson.test"><B>Builder</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A>s that perform the actual build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tasks/class-use/BuildStep.html#org.jvnet.hudson.test"><B>BuildStep</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;One step of the whole build process.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tasks/class-use/BuildStepCompatibilityLayer.html#org.jvnet.hudson.test"><B>BuildStepCompatibilityLayer</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provides compatibility with <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> before 1.150
+ so that old plugin binaries can continue to function with new Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tasks/class-use/Maven.MavenInstallation.html#org.jvnet.hudson.test"><B>Maven.MavenInstallation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a Maven installation in a system.</TD>
 </TR>
 </TABLE>
 &nbsp;

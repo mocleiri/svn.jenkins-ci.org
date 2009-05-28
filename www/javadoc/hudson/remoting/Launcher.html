@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Launcher (Hudson core 1.96 API)
+Launcher (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2007-04-03">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Launcher (Hudson core 1.96 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Launcher (Hudson core 1.96 API)";
+        parent.document.title="Launcher (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/remoting/Future.html" title="interface in hudson.remoting"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/remoting/IReadResolve.html" title="interface in hudson.remoting"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/remoting/LocalChannel.html" title="class in hudson.remoting"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/remoting/Launcher.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -77,9 +77,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -102,11 +102,11 @@ java.lang.Object
 </PRE>
 
 <P>
-Entry point for running a <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> that uses stdin/stdout.
+Entry point for running a <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>. This is the main method of the slave JVM.
 
  <p>
- This can be used as the main class for launching a channel on
- a separate JVM.
+ This class also defines several methods for
+ starting a channel on a fresh JVM.
 <P>
 
 <P>
@@ -117,7 +117,56 @@ Entry point for running a <A HREF="../../hudson/remoting/Channel.html" title="cl
 <HR>
 
 <P>
+<!-- =========== FIELD SUMMARY =========== -->
 
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.net.InetSocketAddress</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#connectionTarget">connectionTarget</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/remoting/Channel.Mode.html" title="enum in hudson.remoting">Channel.Mode</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#mode">mode</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#ping">ping</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.net.URL</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#slaveJnlpURL">slaveJnlpURL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.io.File</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#tcpPortFile">tcpPortFile</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <A NAME="constructor_summary"><!-- --></A>
@@ -144,6 +193,14 @@ Entry point for running a <A HREF="../../hudson/remoting/Channel.html" title="cl
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#addClasspath(java.lang.String)">addClasspath</A></B>(java.lang.String&nbsp;pathList)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#main(java.io.InputStream, java.io.OutputStream)">main</A></B>(java.io.InputStream&nbsp;is,
      java.io.OutputStream&nbsp;os)</CODE>
@@ -154,7 +211,68 @@ Entry point for running a <A HREF="../../hudson/remoting/Channel.html" title="cl
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#main(java.lang.String[])">main</A></B>(java.lang.String[]&nbsp;args)</CODE>
+<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#main(java.io.InputStream, java.io.OutputStream, hudson.remoting.Channel.Mode)">main</A></B>(java.io.InputStream&nbsp;is,
+     java.io.OutputStream&nbsp;os,
+     <A HREF="../../hudson/remoting/Channel.Mode.html" title="enum in hudson.remoting">Channel.Mode</A>&nbsp;mode)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#main(java.io.InputStream, java.io.OutputStream, hudson.remoting.Channel.Mode, boolean)">main</A></B>(java.io.InputStream&nbsp;is,
+     java.io.OutputStream&nbsp;os,
+     <A HREF="../../hudson/remoting/Channel.Mode.html" title="enum in hudson.remoting">Channel.Mode</A>&nbsp;mode,
+     boolean&nbsp;performPing)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#main(java.lang.String...)">main</A></B>(java.lang.String...&nbsp;args)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#parseJnlpArguments()">parseJnlpArguments</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parses the connection arguments from JNLP file given in the URL.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#run()">run</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#setConnectTo(java.lang.String)">setConnectTo</A></B>(java.lang.String&nbsp;target)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#setNoCertificateCheck(boolean)">setNoCertificateCheck</A></B>(boolean&nbsp;_)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bypass HTTPS security check by using free-for-all trust manager.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Launcher.html#setTextMode(boolean)">setTextMode</A></B>(boolean&nbsp;b)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -171,6 +289,65 @@ Entry point for running a <A HREF="../../hudson/remoting/Channel.html" title="cl
 </TABLE>
 &nbsp;
 <P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="mode"><!-- --></A><H3>
+mode</H3>
+<PRE>
+public <A HREF="../../hudson/remoting/Channel.Mode.html" title="enum in hudson.remoting">Channel.Mode</A> <B>mode</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ping"><!-- --></A><H3>
+ping</H3>
+<PRE>
+public boolean <B>ping</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="slaveJnlpURL"><!-- --></A><H3>
+slaveJnlpURL</H3>
+<PRE>
+public java.net.URL <B>slaveJnlpURL</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="tcpPortFile"><!-- --></A><H3>
+tcpPortFile</H3>
+<PRE>
+public java.io.File <B>tcpPortFile</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="connectionTarget"><!-- --></A><H3>
+connectionTarget</H3>
+<PRE>
+public java.net.InetSocketAddress <B>connectionTarget</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -199,10 +376,64 @@ public <B>Launcher</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="main(java.lang.String[])"><!-- --></A><H3>
+<A NAME="setTextMode(boolean)"><!-- --></A><H3>
+setTextMode</H3>
+<PRE>
+public void <B>setTextMode</B>(boolean&nbsp;b)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addClasspath(java.lang.String)"><!-- --></A><H3>
+addClasspath</H3>
+<PRE>
+public void <B>addClasspath</B>(java.lang.String&nbsp;pathList)
+                  throws java.lang.Exception</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setConnectTo(java.lang.String)"><!-- --></A><H3>
+setConnectTo</H3>
+<PRE>
+public void <B>setConnectTo</B>(java.lang.String&nbsp;target)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNoCertificateCheck(boolean)"><!-- --></A><H3>
+setNoCertificateCheck</H3>
+<PRE>
+public void <B>setNoCertificateCheck</B>(boolean&nbsp;_)
+                           throws java.security.NoSuchAlgorithmException,
+                                  java.security.KeyManagementException</PRE>
+<DL>
+<DD>Bypass HTTPS security check by using free-for-all trust manager.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>_</CODE> - This is ignored.
+<DT><B>Throws:</B>
+<DD><CODE>java.security.NoSuchAlgorithmException</CODE>
+<DD><CODE>java.security.KeyManagementException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="main(java.lang.String...)"><!-- --></A><H3>
 main</H3>
 <PRE>
-public static void <B>main</B>(java.lang.String[]&nbsp;args)
+public static void <B>main</B>(java.lang.String...&nbsp;args)
                  throws java.lang.Exception</PRE>
 <DL>
 <DD><DL>
@@ -213,11 +444,84 @@ public static void <B>main</B>(java.lang.String[]&nbsp;args)
 </DL>
 <HR>
 
+<A NAME="run()"><!-- --></A><H3>
+run</H3>
+<PRE>
+public void <B>run</B>()
+         throws java.lang.Exception</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="parseJnlpArguments()"><!-- --></A><H3>
+parseJnlpArguments</H3>
+<PRE>
+public java.util.List&lt;java.lang.String&gt; <B>parseJnlpArguments</B>()
+                                                    throws javax.xml.parsers.ParserConfigurationException,
+                                                           org.xml.sax.SAXException,
+                                                           java.io.IOException,
+                                                           java.lang.InterruptedException</PRE>
+<DL>
+<DD>Parses the connection arguments from JNLP file given in the URL.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>javax.xml.parsers.ParserConfigurationException</CODE>
+<DD><CODE>org.xml.sax.SAXException</CODE>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="main(java.io.InputStream, java.io.OutputStream)"><!-- --></A><H3>
 main</H3>
 <PRE>
 public static void <B>main</B>(java.io.InputStream&nbsp;is,
                         java.io.OutputStream&nbsp;os)
+                 throws java.io.IOException,
+                        java.lang.InterruptedException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="main(java.io.InputStream, java.io.OutputStream, hudson.remoting.Channel.Mode)"><!-- --></A><H3>
+main</H3>
+<PRE>
+public static void <B>main</B>(java.io.InputStream&nbsp;is,
+                        java.io.OutputStream&nbsp;os,
+                        <A HREF="../../hudson/remoting/Channel.Mode.html" title="enum in hudson.remoting">Channel.Mode</A>&nbsp;mode)
+                 throws java.io.IOException,
+                        java.lang.InterruptedException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="main(java.io.InputStream, java.io.OutputStream, hudson.remoting.Channel.Mode, boolean)"><!-- --></A><H3>
+main</H3>
+<PRE>
+public static void <B>main</B>(java.io.InputStream&nbsp;is,
+                        java.io.OutputStream&nbsp;os,
+                        <A HREF="../../hudson/remoting/Channel.Mode.html" title="enum in hudson.remoting">Channel.Mode</A>&nbsp;mode,
+                        boolean&nbsp;performPing)
                  throws java.io.IOException,
                         java.lang.InterruptedException</PRE>
 <DL>
@@ -259,7 +563,7 @@ public static void <B>main</B>(java.io.InputStream&nbsp;is,
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/remoting/Future.html" title="interface in hudson.remoting"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/remoting/IReadResolve.html" title="interface in hudson.remoting"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/remoting/LocalChannel.html" title="class in hudson.remoting"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/remoting/Launcher.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -280,15 +584,15 @@ public static void <B>main</B>(java.io.InputStream&nbsp;is,
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &copy; 2007 null. All Rights Reserved.
+Copyright &#169; 2009. All Rights Reserved.
 </BODY>
 </HTML>

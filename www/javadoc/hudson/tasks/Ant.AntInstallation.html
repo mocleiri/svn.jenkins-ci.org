@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Ant.AntInstallation (Hudson core 1.307 API)
+Ant.AntInstallation (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-23">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Ant.AntInstallation (Hudson core 1.307 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Ant.AntInstallation (Hudson core 1.307 API)";
+        parent.document.title="Ant.AntInstallation (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -109,6 +109,10 @@ java.lang.Object
 </PRE>
 
 <P>
+Represents the Ant installation on the system.
+<P>
+
+<P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../serialized-form.html#hudson.tasks.Ant.AntInstallation">Serialized Form</A></DL>
 <HR>
@@ -155,6 +159,15 @@ java.lang.Object
                     java.lang.String&nbsp;home)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.308
+      Use <CODE>#AntInstallation(String, String, List)</CODE></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#Ant.AntInstallation(java.lang.String, java.lang.String, java.util.List)">Ant.AntInstallation</A></B>(java.lang.String&nbsp;name,
+                    java.lang.String&nbsp;home,
+                    java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
@@ -190,7 +203,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#getAntHome()">getAntHome</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;install directory.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.307. Use <A HREF="../../hudson/tasks/Ant.AntInstallation.html#getHome()"><CODE>getHome()</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -248,13 +261,26 @@ java.lang.Object
 </TR>
 </TABLE>
 
-<A NAME="Ant.AntInstallation(java.lang.String, java.lang.String)"><!-- --></A><H3>
+<A NAME="Ant.AntInstallation(java.lang.String, java.lang.String, java.util.List)"><!-- --></A><H3>
 Ant.AntInstallation</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>Ant.AntInstallation</B>(java.lang.String&nbsp;name,
-                                                java.lang.String&nbsp;home)</PRE>
+                                                java.lang.String&nbsp;home,
+                                                java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</PRE>
 <DL>
+</DL>
+<HR>
+
+<A NAME="Ant.AntInstallation(java.lang.String, java.lang.String)"><!-- --></A><H3>
+Ant.AntInstallation</H3>
+<PRE>
+public <B>Ant.AntInstallation</B>(java.lang.String&nbsp;name,
+                           java.lang.String&nbsp;home)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.308
+      Use <CODE>#AntInstallation(String, String, List)</CODE></I>
+<P>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -272,6 +298,8 @@ getAntHome</H3>
 <PRE>
 public java.lang.String <B>getAntHome</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.307. Use <A HREF="../../hudson/tasks/Ant.AntInstallation.html#getHome()"><CODE>getHome()</CODE></A>.</I>
+<P>
 <DD>install directory.
 <P>
 <DD><DL>

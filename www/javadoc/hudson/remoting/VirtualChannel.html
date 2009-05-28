@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-VirtualChannel (Hudson core 1.96 API)
+VirtualChannel (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2007-04-03">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ VirtualChannel (Hudson core 1.96 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="VirtualChannel (Hudson core 1.96 API)";
+        parent.document.title="VirtualChannel (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -180,6 +180,22 @@ V</CODE></FONT></TD>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exports an object for remoting to the other <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>
  by creating a remotable proxy.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/VirtualChannel.html#join()">join</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waits for this <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> to be closed down.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/VirtualChannel.html#join(long)">join</A></B>(long&nbsp;timeout)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waits for this <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> to be closed down, but only up the given milliseconds.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -250,6 +266,44 @@ void <B>close</B>()
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE> - if the orderly shut-down failed.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="join()"><!-- --></A><H3>
+join</H3>
+<PRE>
+void <B>join</B>()
+          throws java.lang.InterruptedException</PRE>
+<DL>
+<DD>Waits for this <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> to be closed down.
+
+ The close-down of a <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> might be initiated locally or remotely.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.InterruptedException</CODE> - If the current thread is interrupted while waiting for the completion.<DT><B>Since:</B></DT>
+  <DD>1.300</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="join(long)"><!-- --></A><H3>
+join</H3>
+<PRE>
+void <B>join</B>(long&nbsp;timeout)
+          throws java.lang.InterruptedException</PRE>
+<DL>
+<DD>Waits for this <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> to be closed down, but only up the given milliseconds.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.InterruptedException</CODE> - If the current thread is interrupted while waiting for the completion.<DT><B>Since:</B></DT>
+  <DD>1.300</DD>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -334,6 +388,6 @@ DETAIL:&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHO
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &copy; 2007 null. All Rights Reserved.
+Copyright &#169; 2009. All Rights Reserved.
 </BODY>
 </HTML>

@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Maven.MavenInstallation (Hudson core 1.307 API)
+Maven.MavenInstallation (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-23">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Maven.MavenInstallation (Hudson core 1.307 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Maven.MavenInstallation (Hudson core 1.307 API)";
+        parent.document.title="Maven.MavenInstallation (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -109,6 +109,10 @@ java.lang.Object
 </PRE>
 
 <P>
+Represents a Maven installation in a system.
+<P>
+
+<P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../serialized-form.html#hudson.tasks.Maven.MavenInstallation">Serialized Form</A></DL>
 <HR>
@@ -153,6 +157,15 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#Maven.MavenInstallation(java.lang.String, java.lang.String)">Maven.MavenInstallation</A></B>(java.lang.String&nbsp;name,
                         java.lang.String&nbsp;home)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.308.
+      Use <CODE>#MavenInstallation(String, String, List)</CODE></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#Maven.MavenInstallation(java.lang.String, java.lang.String, java.util.List)">Maven.MavenInstallation</A></B>(java.lang.String&nbsp;name,
+                        java.lang.String&nbsp;home,
+                        java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -222,7 +235,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#getMavenHome()">getMavenHome</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;install directory.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.308. Use <A HREF="../../hudson/tasks/Maven.MavenInstallation.html#getHome()"><CODE>getHome()</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -267,9 +280,22 @@ java.lang.Object
 <A NAME="Maven.MavenInstallation(java.lang.String, java.lang.String)"><!-- --></A><H3>
 Maven.MavenInstallation</H3>
 <PRE>
+public <B>Maven.MavenInstallation</B>(java.lang.String&nbsp;name,
+                               java.lang.String&nbsp;home)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.308.
+      Use <CODE>#MavenInstallation(String, String, List)</CODE></I>
+<P>
+</DL>
+<HR>
+
+<A NAME="Maven.MavenInstallation(java.lang.String, java.lang.String, java.util.List)"><!-- --></A><H3>
+Maven.MavenInstallation</H3>
+<PRE>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>Maven.MavenInstallation</B>(java.lang.String&nbsp;name,
-                                                    java.lang.String&nbsp;home)</PRE>
+                                                    java.lang.String&nbsp;home,
+                                                    java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</PRE>
 <DL>
 </DL>
 
@@ -288,6 +314,8 @@ getMavenHome</H3>
 <PRE>
 public java.lang.String <B>getMavenHome</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.308. Use <A HREF="../../hudson/tasks/Maven.MavenInstallation.html#getHome()"><CODE>getHome()</CODE></A>.</I>
+<P>
 <DD>install directory.
 <P>
 <DD><DL>

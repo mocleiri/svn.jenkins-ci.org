@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson core 1.307 API)
+Deprecated List (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-23">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.307 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.307 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -582,6 +582,11 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Override <A HREF="hudson/security/AuthorizationStrategy.html#getACL(hudson.model.Job)"><CODE>AuthorizationStrategy.getACL(Job)</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/Ant.AntInstallation.html#getAntHome()">hudson.tasks.Ant.AntInstallation.getAntHome()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.307. Use <A HREF="hudson/tasks/Ant.AntInstallation.html#getHome()"><CODE>Ant.AntInstallation.getHome()</CODE></A>.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/triggers/Triggers.html#getApplicableTriggers(hudson.model.Item)">hudson.triggers.Triggers.getApplicableTriggers(Item)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
@@ -677,6 +682,11 @@ function windowTitle()
  the whole log into memory unnecessarily.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/Maven.MavenInstallation.html#getMavenHome()">hudson.tasks.Maven.MavenInstallation.getMavenHome()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.308. Use <A HREF="hudson/tasks/Maven.MavenInstallation.html#getHome()"><CODE>Maven.MavenInstallation.getHome()</CODE></A>.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/scm/SubversionSCM.html#getModules()">hudson.scm.SubversionSCM.getModules()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.91. Use <A HREF="hudson/scm/SubversionSCM.html#getLocations()"><CODE>SubversionSCM.getLocations()</CODE></A> instead.</I>&nbsp;</TD>
@@ -685,6 +695,14 @@ function windowTitle()
 <TD><A HREF="hudson/model/Hudson.html#getNodeName()">hudson.model.Hudson.getNodeName()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I></I>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/jvnet/hudson/test/HudsonTestCase.WebClient.html#getPage(java.lang.String)">org.jvnet.hudson.test.HudsonTestCase.WebClient.getPage(String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>This method expects a full URL. This method is marked as deprecated to warn you
+      that you probably should be using <A HREF="org/jvnet/hudson/test/HudsonTestCase.WebClient.html#goTo(java.lang.String)"><CODE>HudsonTestCase.WebClient.goTo(String)</CODE></A> method, which accepts
+      a relative path within the Hudson being tested. (IOW, if you really need to hit
+      a website on the internet, there's nothing wrong with using this method.)</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/Publisher.html#getProjectAction(hudson.model.Project)">hudson.tasks.Publisher.getProjectAction(Project)</A>
@@ -945,6 +963,12 @@ function windowTitle()
 <B>Deprecated Constructors</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/Ant.AntInstallation.html#Ant.AntInstallation(java.lang.String, java.lang.String)">hudson.tasks.Ant.AntInstallation(String, String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.308
+      Use <CODE>#AntInstallation(String, String, List)</CODE></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/util/DescribableList.html#DescribableList(hudson.util.DescribableList.Owner)">hudson.util.DescribableList(DescribableList.Owner)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/util/DescribableList.html#DescribableList(hudson.model.Saveable)"><CODE>DescribableList.DescribableList(Saveable)</CODE></A></I>&nbsp;</TD>
@@ -992,6 +1016,12 @@ function windowTitle()
 <TD><A HREF="hudson/model/HealthReport.html#HealthReport(int, java.lang.String, java.lang.String)">hudson.model.HealthReport(int, String, String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>use <A HREF="hudson/model/HealthReport.html#HealthReport(int, java.lang.String, org.jvnet.localizer.Localizable)"><CODE>HealthReport.HealthReport(int, String, org.jvnet.localizer.Localizable)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/Maven.MavenInstallation.html#Maven.MavenInstallation(java.lang.String, java.lang.String)">hudson.tasks.Maven.MavenInstallation(String, String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.308.
+      Use <CODE>#MavenInstallation(String, String, List)</CODE></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/MultiStageTimeSeries.html#MultiStageTimeSeries(float, float)">hudson.model.MultiStageTimeSeries(float, float)</A>

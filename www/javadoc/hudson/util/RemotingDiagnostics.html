@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-RemotingDiagnostics (Hudson core 1.307 API)
+RemotingDiagnostics (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-23">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RemotingDiagnostics (Hudson core 1.307 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RemotingDiagnostics (Hudson core 1.307 API)";
+        parent.document.title="RemotingDiagnostics (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -105,7 +105,7 @@ java.lang.Object
 Various remoting operations related to diagnostics.
 
  <p>
- These code are useful whereever <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>VirtualChannel</CODE></A> is used, such as master, slaves, Maven JVMs, etc.
+ These code are useful whereever <A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting"><CODE>VirtualChannel</CODE></A> is used, such as master, slaves, Maven JVMs, etc.
 <P>
 
 <P>
@@ -147,7 +147,7 @@ Various remoting operations related to diagnostics.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/RemotingDiagnostics.html#executeGroovy(java.lang.String, hudson.remoting.VirtualChannel)">executeGroovy</A></B>(java.lang.String&nbsp;script,
-              <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
+              <A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes Groovy script remotely.</TD>
@@ -155,7 +155,7 @@ Various remoting operations related to diagnostics.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.util.Map&lt;java.lang.Object,java.lang.Object&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/util/RemotingDiagnostics.html#getSystemProperties(hudson.remoting.VirtualChannel)">getSystemProperties</A></B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
+<TD><CODE><B><A HREF="../../hudson/util/RemotingDiagnostics.html#getSystemProperties(hudson.remoting.VirtualChannel)">getSystemProperties</A></B>(<A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -163,7 +163,7 @@ Various remoting operations related to diagnostics.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.util.Map&lt;java.lang.String,java.lang.String&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/util/RemotingDiagnostics.html#getThreadDump(hudson.remoting.VirtualChannel)">getThreadDump</A></B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
+<TD><CODE><B><A HREF="../../hudson/util/RemotingDiagnostics.html#getThreadDump(hudson.remoting.VirtualChannel)">getThreadDump</A></B>(<A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -211,7 +211,7 @@ public <B>RemotingDiagnostics</B>()</PRE>
 <A NAME="getSystemProperties(hudson.remoting.VirtualChannel)"><!-- --></A><H3>
 getSystemProperties</H3>
 <PRE>
-public static java.util.Map&lt;java.lang.Object,java.lang.Object&gt; <B>getSystemProperties</B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)
+public static java.util.Map&lt;java.lang.Object,java.lang.Object&gt; <B>getSystemProperties</B>(<A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)
                                                                             throws java.io.IOException,
                                                                                    java.lang.InterruptedException</PRE>
 <DL>
@@ -227,7 +227,7 @@ public static java.util.Map&lt;java.lang.Object,java.lang.Object&gt; <B>getSyste
 <A NAME="getThreadDump(hudson.remoting.VirtualChannel)"><!-- --></A><H3>
 getThreadDump</H3>
 <PRE>
-public static java.util.Map&lt;java.lang.String,java.lang.String&gt; <B>getThreadDump</B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)
+public static java.util.Map&lt;java.lang.String,java.lang.String&gt; <B>getThreadDump</B>(<A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)
                                                                       throws java.io.IOException,
                                                                              java.lang.InterruptedException</PRE>
 <DL>
@@ -244,7 +244,7 @@ public static java.util.Map&lt;java.lang.String,java.lang.String&gt; <B>getThrea
 executeGroovy</H3>
 <PRE>
 public static java.lang.String <B>executeGroovy</B>(java.lang.String&nbsp;script,
-                                             <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)
+                                             <A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)
                                       throws java.io.IOException,
                                              java.lang.InterruptedException</PRE>
 <DL>

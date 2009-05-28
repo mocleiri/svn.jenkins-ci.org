@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DownloadService.Downloadable (Hudson core 1.307 API)
+DownloadService.Downloadable (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-23">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DownloadService.Downloadable (Hudson core 1.307 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DownloadService.Downloadable (Hudson core 1.307 API)";
+        parent.document.title="DownloadService.Downloadable (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -107,7 +107,7 @@ java.lang.Object
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract static class <B>DownloadService.Downloadable</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DL>
+<DT><PRE>public static class <B>DownloadService.Downloadable</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DL>
 </PRE>
 
 <P>
@@ -155,8 +155,25 @@ Represents a periodically updated JSON data file obtained from a remote URL.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/DownloadService.Downloadable.html#DownloadService.Downloadable(java.lang.Class)">DownloadService.Downloadable</A></B>(java.lang.Class&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uses the class name as an ID.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/DownloadService.Downloadable.html#DownloadService.Downloadable(java.lang.String)">DownloadService.Downloadable</A></B>(java.lang.String&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/DownloadService.Downloadable.html#DownloadService.Downloadable(java.lang.String, java.lang.String)">DownloadService.Downloadable</A></B>(java.lang.String&nbsp;id,
+                             java.lang.String&nbsp;url)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/model/DownloadService.Downloadable.html#DownloadService.Downloadable(java.lang.String, java.lang.String, long)">DownloadService.Downloadable</A></B>(java.lang.String&nbsp;id,
                              java.lang.String&nbsp;url,
                              long&nbsp;interval)</CODE>
@@ -189,6 +206,14 @@ Represents a periodically updated JSON data file obtained from a remote URL.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is where the browser sends us the data.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/model/DownloadService.Downloadable.html" title="class in hudson.model">DownloadService.Downloadable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/DownloadService.Downloadable.html#get(java.lang.String)">get</A></B>(java.lang.String&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the <A HREF="../../hudson/model/DownloadService.Downloadable.html" title="class in hudson.model"><CODE>DownloadService.Downloadable</CODE></A> that has the given ID.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -265,9 +290,9 @@ Represents a periodically updated JSON data file obtained from a remote URL.
 <A NAME="DownloadService.Downloadable(java.lang.String, java.lang.String, long)"><!-- --></A><H3>
 DownloadService.Downloadable</H3>
 <PRE>
-protected <B>DownloadService.Downloadable</B>(java.lang.String&nbsp;id,
-                                       java.lang.String&nbsp;url,
-                                       long&nbsp;interval)</PRE>
+public <B>DownloadService.Downloadable</B>(java.lang.String&nbsp;id,
+                                    java.lang.String&nbsp;url,
+                                    long&nbsp;interval)</PRE>
 <DL>
 <DL>
 <DT><B>Parameters:</B><DD><CODE>url</CODE> - URL relative to <A HREF="../../hudson/model/UpdateCenter.html#getUrl()"><CODE>UpdateCenter.getUrl()</CODE></A>.
@@ -276,6 +301,33 @@ protected <B>DownloadService.Downloadable</B>(java.lang.String&nbsp;id,
 
       For security and privacy reasons, we don't allow the retrieval
       from random locations.</DL>
+</DL>
+<HR>
+
+<A NAME="DownloadService.Downloadable(java.lang.Class)"><!-- --></A><H3>
+DownloadService.Downloadable</H3>
+<PRE>
+public <B>DownloadService.Downloadable</B>(java.lang.Class&nbsp;id)</PRE>
+<DL>
+<DD>Uses the class name as an ID.
+<P>
+</DL>
+<HR>
+
+<A NAME="DownloadService.Downloadable(java.lang.String)"><!-- --></A><H3>
+DownloadService.Downloadable</H3>
+<PRE>
+public <B>DownloadService.Downloadable</B>(java.lang.String&nbsp;id)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="DownloadService.Downloadable(java.lang.String, java.lang.String)"><!-- --></A><H3>
+DownloadService.Downloadable</H3>
+<PRE>
+public <B>DownloadService.Downloadable</B>(java.lang.String&nbsp;id,
+                                    java.lang.String&nbsp;url)</PRE>
+<DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -413,6 +465,22 @@ all</H3>
 public static <A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/model/DownloadService.Downloadable.html" title="class in hudson.model">DownloadService.Downloadable</A>&gt; <B>all</B>()</PRE>
 <DL>
 <DD>Returns all the registered <A HREF="../../hudson/model/DownloadService.Downloadable.html" title="class in hudson.model"><CODE>DownloadService.Downloadable</CODE></A>s.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="get(java.lang.String)"><!-- --></A><H3>
+get</H3>
+<PRE>
+public static <A HREF="../../hudson/model/DownloadService.Downloadable.html" title="class in hudson.model">DownloadService.Downloadable</A> <B>get</B>(java.lang.String&nbsp;id)</PRE>
+<DL>
+<DD>Returns the <A HREF="../../hudson/model/DownloadService.Downloadable.html" title="class in hudson.model"><CODE>DownloadService.Downloadable</CODE></A> that has the given ID.
 <P>
 <DD><DL>
 </DL>

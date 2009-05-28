@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SU (Hudson core 1.307 API)
+SU (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-23">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SU (Hudson core 1.307 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SU (Hudson core 1.307 API)";
+        parent.document.title="SU (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -102,7 +102,7 @@ java.lang.Object
 </PRE>
 
 <P>
-Executes <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Callable</CODE></A> as the super user, by forking a new process and executing the closure in there
+Executes <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> as the super user, by forking a new process and executing the closure in there
  if necessary.
 
  <p>
@@ -145,20 +145,20 @@ V</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/os/SU.html#execute(hudson.model.TaskListener, java.lang.String, java.lang.String, hudson.remoting.Callable)">execute</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
         java.lang.String&nbsp;rootUsername,
         java.lang.String&nbsp;rootPassword,
-        <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting">Callable</A>&lt;V,T&gt;&nbsp;closure)</CODE>
+        <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting">Callable</A>&lt;V,T&gt;&nbsp;closure)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts a new priviledge-escalated environment, execute a closure, and shut it down.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/os/SU.html#start(hudson.model.TaskListener, java.lang.String, java.lang.String)">start</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
       java.lang.String&nbsp;rootUsername,
       java.lang.String&nbsp;rootPassword)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>VirtualChannel</CODE></A> that's connected to the priviledge-escalated environment.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a <A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting"><CODE>VirtualChannel</CODE></A> that's connected to the priviledge-escalated environment.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -186,17 +186,17 @@ V</CODE></FONT></TD>
 <A NAME="start(hudson.model.TaskListener, java.lang.String, java.lang.String)"><!-- --></A><H3>
 start</H3>
 <PRE>
-public static <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A> <B>start</B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+public static <A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A> <B>start</B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
                                    java.lang.String&nbsp;rootUsername,
                                    java.lang.String&nbsp;rootPassword)
                             throws java.io.IOException,
                                    java.lang.InterruptedException</PRE>
 <DL>
-<DD>Returns a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>VirtualChannel</CODE></A> that's connected to the priviledge-escalated environment.
+<DD>Returns a <A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting"><CODE>VirtualChannel</CODE></A> that's connected to the priviledge-escalated environment.
 <P>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>Never null. This may represent a channel to a separate JVM, or just <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/LocalChannel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>LocalChannel</CODE></A>.
+<DT><B>Returns:</B><DD>Never null. This may represent a channel to a separate JVM, or just <A HREF="../../hudson/remoting/LocalChannel.html" title="class in hudson.remoting"><CODE>LocalChannel</CODE></A>.
       Close this channel and the SU environment will be shut down.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
@@ -211,7 +211,7 @@ execute</H3>
 public static &lt;V,T extends java.lang.Throwable&gt; V <B>execute</B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
                                                           java.lang.String&nbsp;rootUsername,
                                                           java.lang.String&nbsp;rootPassword,
-                                                          <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting">Callable</A>&lt;V,T&gt;&nbsp;closure)
+                                                          <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting">Callable</A>&lt;V,T&gt;&nbsp;closure)
                  throws T extends java.lang.Throwable,
                         java.io.IOException,
                         java.lang.InterruptedException</PRE>

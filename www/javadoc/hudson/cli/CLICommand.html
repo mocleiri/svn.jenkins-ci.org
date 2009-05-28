@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CLICommand (Hudson core 1.307 API)
+CLICommand (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-23">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CLICommand (Hudson core 1.307 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CLICommand (Hudson core 1.307 API)";
+        parent.document.title="CLICommand (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -56,8 +56,8 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;PREV CLASS&nbsp;
-&nbsp;<A HREF="../../hudson/cli/GroovyCommand.html" title="class in hudson.cli"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/cli/CLI.html" title="class in hudson.cli"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/cli/CliEntryPoint.html" title="interface in hudson.cli"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/cli/CLICommand.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="CLICommand.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -112,7 +112,7 @@ Base class for Hudson CLI.
 
  <h2>How does a CLI command work</h2>
  <p>
- The users starts <A HREF="https://hudson.dev.java.net/pom/cli/apidocs/hudson/cli/CLI.html?is-external=true" title="class or interface in hudson.cli">the "CLI agent"</A> on a remote system, by specifying arguments, like
+ The users starts <A HREF="../../hudson/cli/CLI.html" title="class in hudson.cli">the "CLI agent"</A> on a remote system, by specifying arguments, like
  <tt>"java -jar hudson-cli.jar command arg1 arg2 arg3"</tt>. The CLI agent creates
  a remoting channel with the server, and it sends the entire arguments to the server, along with
  the remoted stdin/out/err.
@@ -135,7 +135,7 @@ Base class for Hudson CLI.
  stdin, stdout, stderr are remoted, so proper buffering is necessary for good user experience.
 
  <li>
- Send <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Callable</CODE></A> to a CLI agent by using <A HREF="../../hudson/cli/CLICommand.html#channel"><CODE>channel</CODE></A> to get local interaction,
+ Send <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> to a CLI agent by using <A HREF="../../hudson/cli/CLICommand.html#channel"><CODE>channel</CODE></A> to get local interaction,
  such as uploading a file, asking for a password, etc.
 
  </ul>
@@ -180,11 +180,11 @@ Base class for Hudson CLI.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting">Channel</A></CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#channel">channel</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A> that represents the CLI JVM.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> that represents the CLI JVM.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -373,10 +373,10 @@ protected transient java.io.InputStream <B>stdin</B></PRE>
 <A NAME="channel"><!-- --></A><H3>
 channel</H3>
 <PRE>
-protected transient <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting">Channel</A> <B>channel</B></PRE>
+protected transient <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A> <B>channel</B></PRE>
 <DL>
-<DD><A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A> that represents the CLI JVM. You can use this to
- execute <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Callable</CODE></A> on the CLI JVM, among other things.
+<DD><A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> that represents the CLI JVM. You can use this to
+ execute <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> on the CLI JVM, among other things.
 <P>
 <DL>
 </DL>
@@ -566,8 +566,8 @@ public static <A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;PREV CLASS&nbsp;
-&nbsp;<A HREF="../../hudson/cli/GroovyCommand.html" title="class in hudson.cli"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/cli/CLI.html" title="class in hudson.cli"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/cli/CliEntryPoint.html" title="interface in hudson.cli"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/cli/CLICommand.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="CLICommand.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

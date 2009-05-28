@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ToolLocationTranslator (Hudson core 1.307 API)
+ToolLocationTranslator (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-23">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ToolLocationTranslator (Hudson core 1.307 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ToolLocationTranslator (Hudson core 1.307 API)";
+        parent.document.title="ToolLocationTranslator (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -127,7 +127,7 @@ This Hudson-wide extension points can participate in determining the actual node
   <DD>1.299</DD>
 <DT><B>Author:</B></DT>
   <DD>Kohsuke Kawaguchi</DD>
-<DT><B>See Also:</B><DD><CODE>ToolInstallation#translateFor(Node)</CODE></DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)"><CODE>ToolInstallation.translateFor(Node, TaskListener)</CODE></A></DL>
 <HR>
 
 <P>
@@ -191,8 +191,8 @@ This Hudson-wide extension points can participate in determining the actual node
             <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called for each <CODE>ToolInstallation#translateFor(Node)</CODE> invocations
- (which normally means it's invoked for each <CODE>NodeSpecific#forNode(Node)</CODE>)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called for each <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)"><CODE>ToolInstallation.translateFor(Node, TaskListener)</CODE></A> invocations
+ (which normally means it's invoked for each <A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node, hudson.model.TaskListener)"><CODE>NodeSpecific.forNode(Node, TaskListener)</CODE></A>)
  to translate the tool location into the node specific location.</TD>
 </TR>
 </TABLE>
@@ -244,8 +244,8 @@ public abstract java.lang.String <B>getToolHome</B>(<A HREF="../../hudson/model/
                                       throws java.io.IOException,
                                              java.lang.InterruptedException</PRE>
 <DL>
-<DD>Called for each <CODE>ToolInstallation#translateFor(Node)</CODE> invocations
- (which normally means it's invoked for each <CODE>NodeSpecific#forNode(Node)</CODE>)
+<DD>Called for each <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)"><CODE>ToolInstallation.translateFor(Node, TaskListener)</CODE></A> invocations
+ (which normally means it's invoked for each <A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node, hudson.model.TaskListener)"><CODE>NodeSpecific.forNode(Node, TaskListener)</CODE></A>)
  to translate the tool location into the node specific location.
 
  <p>

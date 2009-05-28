@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SecurityRealm (Hudson core 1.307 API)
+SecurityRealm (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-23">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SecurityRealm (Hudson core 1.307 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SecurityRealm (Hudson core 1.307 API)";
+        parent.document.title="SecurityRealm (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -282,7 +282,7 @@ Pluggable security realm that connects external user database to Hudson.
 <TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.html#canLogOut()">canLogOut</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> supports an logout operation.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> supports explicit logout operation.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -569,7 +569,15 @@ canLogOut</H3>
 <PRE>
 public boolean <B>canLogOut</B>()</PRE>
 <DL>
-<DD>Returns true if this <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> supports an logout operation.
+<DD>Returns true if this <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> supports explicit logout operation.
+
+ <p>
+ If the method returns false, "logout" link will not be displayed. This is useful
+ when authentication doesn't require an explicit login activity (such as NTLM authentication
+ or Kerberos authentication, where Hudson has no ability to log off the current user.)
+
+ <p>
+ By default, this method returns true.
 <P>
 <DD><DL>
 </DL>

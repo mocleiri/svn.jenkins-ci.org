@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-LocalChannel (Hudson core 1.96 API)
+LocalChannel (Hudson main module 1.308 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2007-04-03">
+<META NAME="date" CONTENT="2009-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LocalChannel (Hudson core 1.96 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LocalChannel (Hudson core 1.96 API)";
+        parent.document.title="LocalChannel (Hudson main module 1.308 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/remoting/Launcher.html" title="class in hudson.remoting"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/remoting/Pipe.html" title="class in hudson.remoting"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/remoting/PingThread.html" title="class in hudson.remoting"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/remoting/LocalChannel.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="LocalChannel.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -200,6 +200,22 @@ V</CODE></FONT></TD>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exports an object for remoting to the other <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>
  by creating a remotable proxy.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/LocalChannel.html#join()">join</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waits for this <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> to be closed down.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/LocalChannel.html#join(long)">join</A></B>(long&nbsp;timeout)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waits for this <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> to be closed down, but only up the given milliseconds.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -305,6 +321,48 @@ public void <B>close</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="join()"><!-- --></A><H3>
+join</H3>
+<PRE>
+public void <B>join</B>()
+          throws java.lang.InterruptedException</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/remoting/VirtualChannel.html#join()">VirtualChannel</A></CODE></B></DD>
+<DD>Waits for this <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> to be closed down.
+
+ The close-down of a <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> might be initiated locally or remotely.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/remoting/VirtualChannel.html#join()">join</A></CODE> in interface <CODE><A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.InterruptedException</CODE> - If the current thread is interrupted while waiting for the completion.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="join(long)"><!-- --></A><H3>
+join</H3>
+<PRE>
+public void <B>join</B>(long&nbsp;timeout)
+          throws java.lang.InterruptedException</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/remoting/VirtualChannel.html#join(long)">VirtualChannel</A></CODE></B></DD>
+<DD>Waits for this <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> to be closed down, but only up the given milliseconds.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/remoting/VirtualChannel.html#join(long)">join</A></CODE> in interface <CODE><A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.InterruptedException</CODE> - If the current thread is interrupted while waiting for the completion.</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="export(java.lang.Class,java.lang.Object)"><!-- --></A><A NAME="export(java.lang.Class, T)"><!-- --></A><H3>
 export</H3>
 <PRE>
@@ -360,7 +418,7 @@ public &lt;T&gt; T <B>export</B>(java.lang.Class&lt;T&gt;&nbsp;intf,
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/remoting/Launcher.html" title="class in hudson.remoting"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/remoting/Pipe.html" title="class in hudson.remoting"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/remoting/PingThread.html" title="class in hudson.remoting"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/remoting/LocalChannel.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="LocalChannel.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -389,6 +447,6 @@ DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&n
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &copy; 2007 null. All Rights Reserved.
+Copyright &#169; 2009. All Rights Reserved.
 </BODY>
 </HTML>
