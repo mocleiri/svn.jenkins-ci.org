@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import hudson.Extension;
+import hudson.model.Hudson;
 import hudson.model.ModelObject;
 
 import javax.servlet.ServletRequest;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONObject;
 
+import org.acegisecurity.Authentication;
 import org.kohsuke.stapler.StaplerRequest;
 
 /**
@@ -50,15 +52,16 @@ public class DefaultCrumbIssuer extends CrumbIssuer {
 			if (md != null) {
 			    HttpServletRequest req = (HttpServletRequest)request;
 			    StringBuilder buffer = new StringBuilder();
-			    Principal p = req.getUserPrincipal();
-			    if (p != null ) {
-				    buffer.append(p.getName());
+			    Authentication a = Hudson.getAuthentication();
+			    if ( a != null ) {
+			    	buffer.append( a.getName() );
 			    }
 			    buffer.append(';');
 			    buffer.append(req.getRemoteAddr());
 			
 				md.update(buffer.toString().getBytes());
-				byte[] crumbBytes = md.digest(salt.getBytes());
+				md.update(salt.getBytes());
+				byte[] crumbBytes = md.digest(Hudson.getInstance().getSecretKey().getBytes());
 	
 				StringBuilder hexString = new StringBuilder();
 	            for (int i = 0; i < crumbBytes.length; i++)

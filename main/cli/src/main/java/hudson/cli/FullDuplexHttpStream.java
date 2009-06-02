@@ -92,7 +92,7 @@ public class FullDuplexHttpStream {
     			crumbName = readData(base+"?xpath=/*/crumbRequestField/text()");
     			crumb = readData(base+"?xpath=/*/crumb/text()");
     			isValid = true;
-    			LOGGER.info("Crumb data: "+crumbName+"="+crumb);
+    			LOGGER.fine("Crumb data: "+crumbName+"="+crumb);
     		}
     		catch (IOException e) {
     			LOGGER.log(Level.WARNING,"Failed to get crumb data",e);
