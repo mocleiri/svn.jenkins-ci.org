@@ -3,12 +3,10 @@
  * All rights reserved. 
  * The copyrights to the contents of this file are licensed under the MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-
 package hudson.security.csrf;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.Principal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,85 +29,83 @@ import org.kohsuke.stapler.StaplerRequest;
  *
  */
 public class DefaultCrumbIssuer extends CrumbIssuer {
-	private MessageDigest md;
-	
-	DefaultCrumbIssuer() {
-		try {
-			this.md = MessageDigest.getInstance("MD5");
-		}
-		catch (NoSuchAlgorithmException e) {
+
+    private MessageDigest md;
+
+    DefaultCrumbIssuer() {
+        try {
+            this.md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
             this.md = null;
-			LOGGER.log(Level.SEVERE, "Can't find MD5", e);
-		}
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected String issueCrumb(ServletRequest request, String salt) {
-		if (request instanceof HttpServletRequest) {
-			if (md != null) {
-			    HttpServletRequest req = (HttpServletRequest)request;
-			    StringBuilder buffer = new StringBuilder();
-			    Authentication a = Hudson.getAuthentication();
-			    if ( a != null ) {
-			    	buffer.append( a.getName() );
-			    }
-			    buffer.append(';');
-			    buffer.append(req.getRemoteAddr());
-			
-				md.update(buffer.toString().getBytes());
-				md.update(salt.getBytes());
-				byte[] crumbBytes = md.digest(Hudson.getInstance().getSecretKey().getBytes());
-	
-				StringBuilder hexString = new StringBuilder();
-	            for (int i = 0; i < crumbBytes.length; i++)
-	            {
-	                String hex = Integer.toHexString(0xFF & crumbBytes[i]);
-	                if (hex.length() == 1)
-	                {
-	                    hexString.append('0');
-	                }
-	                hexString.append(hex);
-	            }
-	            return hexString.toString();
-			}
-		}
-		return null;
-	}
+            LOGGER.log(Level.SEVERE, "Can't find MD5", e);
+        }
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean validateCrumb(ServletRequest request, String salt, String crumb) {
-		if (request instanceof HttpServletRequest) {
-			String newCrumb = issueCrumb(request, salt);
-			if ((newCrumb != null) && (crumb != null)) {
-				return newCrumb.equals(crumb);
-			}
-		}
-		return false;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String issueCrumb(ServletRequest request, String salt) {
+        if (request instanceof HttpServletRequest) {
+            if (md != null) {
+                HttpServletRequest req = (HttpServletRequest) request;
+                StringBuilder buffer = new StringBuilder();
+                Authentication a = Hudson.getAuthentication();
+                if (a != null) {
+                    buffer.append(a.getName());
+                }
+                buffer.append(';');
+                buffer.append(req.getRemoteAddr());
 
-	@Extension
-	public static final class DescriptorImpl extends CrumbIssuerDescriptor<DefaultCrumbIssuer> implements ModelObject {
-		public DescriptorImpl()
-		{
-			super(null, null);
-			load();
-		}
+                md.update(buffer.toString().getBytes());
+                md.update(salt.getBytes());
+                byte[] crumbBytes = md.digest(Hudson.getInstance().getSecretKey().getBytes());
 
-		@Override
-		public String getDisplayName() {
-			return "Default Crumb Issuer";
-		}
-		
-		public DefaultCrumbIssuer newInstance(StaplerRequest req, JSONObject formData) throws FormException {
-			return new DefaultCrumbIssuer();
-		}
-	}
+                StringBuilder hexString = new StringBuilder();
+                for (int i = 0; i < crumbBytes.length; i++) {
+                    String hex = Integer.toHexString(0xFF & crumbBytes[i]);
+                    if (hex.length() == 1) {
+                        hexString.append('0');
+                    }
+                    hexString.append(hex);
+                }
+                return hexString.toString();
+            }
+        }
+        return null;
+    }
 
-	private static final Logger LOGGER = Logger.getLogger(DefaultCrumbIssuer.class.getName());
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean validateCrumb(ServletRequest request, String salt, String crumb) {
+        if (request instanceof HttpServletRequest) {
+            String newCrumb = issueCrumb(request, salt);
+            if ((newCrumb != null) && (crumb != null)) {
+                return newCrumb.equals(crumb);
+            }
+        }
+        return false;
+    }
+
+    @Extension
+    public static final class DescriptorImpl extends CrumbIssuerDescriptor<DefaultCrumbIssuer> implements ModelObject {
+
+        public DescriptorImpl() {
+            super(null, null);
+            load();
+        }
+
+        @Override
+        public String getDisplayName() {
+            return "Default Crumb Issuer";
+        }
+
+        public DefaultCrumbIssuer newInstance(StaplerRequest req, JSONObject formData) throws FormException {
+            return new DefaultCrumbIssuer();
+        }
+    }
+    
+    private static final Logger LOGGER = Logger.getLogger(DefaultCrumbIssuer.class.getName());
 }
