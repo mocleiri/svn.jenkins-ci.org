@@ -1,2 +1,2 @@
-See http://hudson.gotdns.com/wiki/display/HUDSON/Building+Hudson for
-the build instruction.
+See http://wiki.hudson-ci.org/display/HUDSON/Building+Hudson for
+the build instructions.
