@@ -26,6 +26,7 @@ public class ProxyDhcpService implements Runnable, Closeable {
     public final Inet4Address tftpServer;
     public final String bootFileName;
     private final DatagramSocket server;
+    private final DatagramSocket replySocket;
 
     public ProxyDhcpService(Inet4Address tftpServer, String bootFileName) throws SocketException {
         this(tftpServer,bootFileName,null);
@@ -37,6 +38,9 @@ public class ProxyDhcpService implements Runnable, Closeable {
 
         server = new DatagramSocket(DHCP_SERVER_PORT,interfaceToListen);
         server.setBroadcast(true);
+
+        replySocket = new DatagramSocket(0,tftpServer);
+        replySocket.setBroadcast(true);
 
         LOGGER.info("TFTP server: "+tftpServer.getHostAddress());
         LOGGER.info("Boot file: "+bootFileName);
@@ -99,7 +103,7 @@ public class ProxyDhcpService implements Runnable, Closeable {
         datagram = reply.pack();
         datagram.setAddress(InetAddress.getByName("255.255.255.255"));
         datagram.setPort(DHCP_CLIENT_PORT);
-        server.send(datagram);
+        replySocket.send(datagram);
         LOGGER.fine("responded");
     }
 
