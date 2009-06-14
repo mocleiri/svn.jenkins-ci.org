@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ExtensionList (Hudson core 1.291 API)
+ExtensionList (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ExtensionList (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ExtensionList (Hudson core 1.291 API)";
+        parent.document.title="ExtensionList (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -224,6 +224,14 @@ Retains the known extension instances for the given type 'T'.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Prefer automatic registration.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/ExtensionList.html#clearLegacyInstances()">clearLegacyInstances</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposed for the test harness to clear all legacy extension instances.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -601,6 +609,19 @@ create</H3>
 public static &lt;T&gt; <A HREF="../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;T&gt; <B>create</B>(<A HREF="../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson,
                                           java.lang.Class&lt;T&gt;&nbsp;type)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="clearLegacyInstances()"><!-- --></A><H3>
+clearLegacyInstances</H3>
+<PRE>
+public static void <B>clearLegacyInstances</B>()</PRE>
+<DL>
+<DD>Exposed for the test harness to clear all legacy extension instances.
+<P>
 <DD><DL>
 </DL>
 </DD>

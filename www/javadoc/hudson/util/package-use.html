@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Package hudson.util (Hudson core 1.291 API)
+Uses of Package hudson.util (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.util (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.util (Hudson core 1.291 API)";
+        parent.document.title="Uses of Package hudson.util (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -103,10 +103,6 @@ Packages that use <A HREF="../../hudson/util/package-summary.html">hudson.util</
 <TD>Matrix project&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven"><B>hudson.maven</B></A></TD>
-<TD>Maven support.&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
@@ -127,12 +123,38 @@ Packages that use <A HREF="../../hudson/util/package-summary.html">hudson.util</
 <TD>Hudson's interface with source code management systems.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.scm.browsers"><B>hudson.scm.browsers</B></A></TD>
+<TD>Code that computes links to external source code repository browsers.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.security"><B>hudson.security</B></A></TD>
 <TD>Security-related code&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.slaves"><B>hudson.slaves</B></A></TD>
 <TD>Code related to slaves.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks"><B>hudson.tasks</B></A></TD>
+<TD>Built-in <a href="../../hudson/tasks/Builder.html"><tt>Builder</tt></a>s and <a href="../../hudson/tasks/Publisher.html"><tt>Publisher</tt></a>s
+that perform the actual heavy-lifting of a build.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks.junit"><B>hudson.tasks.junit</B></A></TD>
+<TD>Model objects that represent JUnit test reports.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks.test"><B>hudson.tasks.test</B></A></TD>
+<TD>Defines contracts that need to be implemented by a test reporting
+action (such as the built-in JUnit one).&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tools"><B>hudson.tools</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.triggers"><B>hudson.triggers</B></A></TD>
+<TD>Built-in <a href="../../hudson/triggers/Trigger.html"><tt>Trigger</tt></a>s that run periodically to kick a new build.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.util"><B>hudson.util</B></A></TD>
@@ -168,6 +190,12 @@ Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works like <CODE>FilterOutputStream</CODE> except its performance problem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/FormValidation.html#hudson"><B>FormValidation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the result of the form field validation.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/util/class-use/VariableResolver.html#hudson"><B>VariableResolver</B></A></B>
@@ -216,28 +244,6 @@ Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used
 </TABLE>
 &nbsp;
 <P>
-<A NAME="hudson.maven"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used by <A HREF="../../hudson/maven/package-summary.html">hudson.maven</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/util/class-use/DescribableList.html#hudson.maven"><B>DescribableList</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Persisted list of <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>s with some operations specific
- to <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/util/class-use/InvocationInterceptor.html#hudson.maven"><B>InvocationInterceptor</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interceptor around <CODE>InvocationHandler</CODE>.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
 <A NAME="hudson.model"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -276,6 +282,12 @@ Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/FormValidation.html#hudson.model"><B>FormValidation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the result of the form field validation.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/util/class-use/Function1.html#hudson.model"><B>Function1</B></A></B>
 
 <BR>
@@ -294,11 +306,29 @@ Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<CODE>List</CODE> of <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/StreamTaskListener.html#hudson.model"><B>StreamTaskListener</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> that generates output into a single stream.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/TextFile.html#hudson.model"><B>TextFile</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a text file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/util/class-use/VariableResolver.html#hudson.model"><B>VariableResolver</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolves variables to its value, while encapsulating
  how that resolution happens.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/VersionNumber.html#hudson.model"><B>VersionNumber</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Immutable representation of a dot or '-'-separated digits (such as "1.0.1" or "1.0-52").</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -351,12 +381,6 @@ Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glorified <CODE>String</CODE> that uses encryption in the persisted form, to avoid accidental exposure of a secret.</TD>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/util/class-use/StreamTaskListener.html#hudson.os.windows"><B>StreamTaskListener</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> that generates output into a single stream.</TD>
-</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -378,6 +402,27 @@ Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<CODE>List</CODE>-like implementation that has copy-on-write semantics.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/FormValidation.html#hudson.scm"><B>FormValidation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the result of the form field validation.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.scm.browsers"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used by <A HREF="../../hudson/scm/browsers/package-summary.html">hudson.scm.browsers</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/FormValidation.html#hudson.scm.browsers"><B>FormValidation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the result of the form field validation.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -393,6 +438,12 @@ Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/FormValidation.html#hudson.security"><B>FormValidation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the result of the form field validation.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -403,10 +454,22 @@ Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used
 Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used by <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/ClasspathBuilder.html#hudson.slaves"><B>ClasspathBuilder</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to build up an argument in the classpath format.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/util/class-use/DescriptorList.html#hudson.slaves"><B>DescriptorList</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/FormValidation.html#hudson.slaves"><B>FormValidation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the result of the form field validation.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/util/class-use/RobustCollectionConverter.html#hudson.slaves"><B>RobustCollectionConverter</B></A></B>
@@ -419,6 +482,88 @@ Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> that generates output into a single stream.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used by <A HREF="../../hudson/tasks/package-summary.html">hudson.tasks</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/FormValidation.html#hudson.tasks"><B>FormValidation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the result of the form field validation.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks.junit"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used by <A HREF="../../hudson/tasks/junit/package-summary.html">hudson.tasks.junit</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/FormValidation.html#hudson.tasks.junit"><B>FormValidation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the result of the form field validation.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used by <A HREF="../../hudson/tasks/test/package-summary.html">hudson.tasks.test</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/FormValidation.html#hudson.tasks.test"><B>FormValidation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the result of the form field validation.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tools"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used by <A HREF="../../hudson/tools/package-summary.html">hudson.tools</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/DescribableList.html#hudson.tools"><B>DescribableList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Persisted list of <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>s with some operations specific
+ to <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/FormValidation.html#hudson.tools"><B>FormValidation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the result of the form field validation.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.triggers"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used by <A HREF="../../hudson/triggers/package-summary.html">hudson.triggers</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/FormValidation.html#hudson.triggers"><B>FormValidation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the result of the form field validation.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -448,10 +593,22 @@ Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can be used as a graph label.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/ClasspathBuilder.html#hudson.util"><B>ClasspathBuilder</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to build up an argument in the classpath format.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/util/class-use/ClockDifference.html#hudson.util"><B>ClockDifference</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a clock difference.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/ConsistentHash.Hash.html#hudson.util"><B>ConsistentHash.Hash</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hashes an object to some value.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/util/class-use/CopyOnWriteList.html#hudson.util"><B>CopyOnWriteList</B></A></B>
@@ -481,20 +638,45 @@ Classes in <A HREF="../../hudson/util/package-summary.html">hudson.util</A> used
 <TD><B><A HREF="../../hudson/util/class-use/FormFieldValidator.html#hudson.util"><B>FormFieldValidator</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base class that provides the framework for doing on-the-fly form field validation.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Use <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util"><CODE>FormValidation</CODE></A> as a return value in your check method.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/util/class-use/FormFieldValidator.URLCheck.html#hudson.util"><B>FormFieldValidator.URLCheck</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenient base class for checking the validity of URLs</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Use <A HREF="../../hudson/util/FormValidation.URLCheck.html" title="class in hudson.util"><CODE>FormValidation.URLCheck</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/util/class-use/FormFieldValidator.WorkspaceFilePath.html#hudson.util"><B>FormFieldValidator.WorkspaceFilePath</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks a valid file name or directory (specified in the 'value' query parameter) against
- the current workspace.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.294. Use <A HREF="../../hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)"><CODE>FilePath.validateRelativePath(String, boolean, boolean)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/FormValidation.html#hudson.util"><B>FormValidation</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the result of the form field validation.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/FormValidation.FileValidator.html#hudson.util"><B>FormValidation.FileValidator</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs an application-specific validation on the given file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/FormValidation.Kind.html#hudson.util"><B>FormValidation.Kind</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates the kind of result.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/util/class-use/Iterators.FilterIterator.html#hudson.util"><B>Iterators.FilterIterator</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a filtered view of another iterator.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/util/class-use/ListBoxModel.Option.html#hudson.util"><B>ListBoxModel.Option</B></A></B>

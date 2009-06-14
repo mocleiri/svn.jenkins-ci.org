@@ -97,10 +97,11 @@ import java.net.URL;
  *
  * @author Kohsuke Kawaguchi
  */
-public class Channel implements VirtualChannel {
+public class Channel implements VirtualChannel, IChannel {
     private final ObjectInputStream ois;
     private final ObjectOutputStream oos;
     private final String name;
+    /*package*/ final boolean isRestricted;
     /*package*/ final ExecutorService executor;
 
     /**
@@ -173,6 +174,16 @@ public class Channel implements VirtualChannel {
     public final AtomicInteger resourceLoadingCount = new AtomicInteger();
 
     /**
+     * Property bag that contains application-specific stuff.
+     */
+    private final Hashtable<Object,Object> properties = new Hashtable<Object,Object>();
+
+    /**
+     * Proxy to the remote {@link Channel} object.
+     */
+    private IChannel remoteChannel;
+
+    /**
      * Communication mode.
      * @since 1.161
      */
@@ -236,6 +247,10 @@ public class Channel implements VirtualChannel {
         this(name,exec,Mode.BINARY,is,os,header);
     }
 
+    public Channel(String name, ExecutorService exec, Mode mode, InputStream is, OutputStream os, OutputStream header) throws IOException {
+        this(name,exec,mode,is,os,header,false);
+    }
+
     /**
      * Creates a new channel.
      * 
@@ -256,11 +271,24 @@ public class Channel implements VirtualChannel {
      *      the data goes into the "binary mode". This is useful
      *      when the established communication channel might include some data that might
      *      be useful for debugging/trouble-shooting.
+     * @param restricted
+     *      If true, this channel won't accept {@link Command}s that allow the remote end to execute arbitrary closures
+     *      --- instead they can only call methods on objects that are exported by this channel.
+     *      This also prevents the remote end from loading classes into JVM.
+     *
+     *      Note that it still allows the remote end to deserialize arbitrary object graph
+     *      (provided that all the classes are already available in this JVM), so exactly how
+     *      safe the resulting behavior is is up to discussion.
      */
-    public Channel(String name, ExecutorService exec, Mode mode, InputStream is, OutputStream os, OutputStream header) throws IOException {
+    public Channel(String name, ExecutorService exec, Mode mode, InputStream is, OutputStream os, OutputStream header, boolean restricted) throws IOException {
         this.name = name;
         this.executor = exec;
+        this.isRestricted = restricted;
         ObjectOutputStream oos = null;
+
+        if(export(this,false)!=1)
+            throw new AssertionError(); // export number 1 is reserved for the channel itself
+        remoteChannel = RemoteInvocationHandler.wrap(this,1,IChannel.class,false);
 
         // write the magic preamble.
         // certain communication channel, such as forking JVM via ssh,
@@ -415,7 +443,7 @@ public class Channel implements VirtualChannel {
      *
      * <p>
      * This is a performance improvement method that can be safely
-     * ignored if your goal is to make things working.
+     * ignored if your goal is just to make things working.
      *
      * <p>
      * Normally, classes are transferred over the network one at a time,
@@ -569,6 +597,19 @@ public class Channel implements VirtualChannel {
     }
 
     /**
+     * Waits for this {@link Channel} to be closed down, but only up the given milliseconds.
+     *
+     * @throws InterruptedException
+     *      If the current thread is interrupted while waiting for the completion.
+     * @since 1.299
+     */
+    public synchronized void join(long timeout) throws InterruptedException {
+        long start = System.currentTimeMillis();
+        while(System.currentTimeMillis()-start<timeout && (!inClosed || !outClosed))
+            wait(timeout+start-System.currentTimeMillis());
+    }
+
+    /**
      * Notifies the remote peer that we are closing down.
      *
      * Execution of this command also triggers the {@link ReaderThread} to shut down
@@ -633,6 +674,48 @@ public class Channel implements VirtualChannel {
         }
 
         // termination is done by CloseCommand when we received it.
+    }
+
+    /**
+     * Gets the application specific property set by {@link #setProperty(Object, Object)}.
+     * These properties are also accessible from the remote channel via {@link #getRemoteProperty(Object)}.
+     *
+     * <p>
+     * This mechanism can be used for one side to discover contextual objects created by the other JVM
+     * (as opposed to executing {@link Callable}, which cannot have any reference to the context
+     * of the remote {@link Channel}.
+     */
+    public Object getProperty(Object key) {
+        return properties.get(key);
+    }
+
+    /**
+     * Works like {@link #getProperty(Object)} but wait until some value is set by someone.
+     */
+    public Object waitForProperty(Object key) throws InterruptedException {
+        synchronized (properties) {
+            while(true) {
+                Object v = properties.get(key);
+                if(v!=null) return v;
+                properties.wait();
+            }
+        }
+    }
+
+    public Object setProperty(Object key, Object value) {
+        synchronized (properties) {
+            Object old = properties.put(key, value);
+            properties.notifyAll();
+            return old;
+        }
+    }
+
+    public Object getRemoteProperty(Object key) {
+        return remoteChannel.getProperty(key);
+    }
+
+    public Object waitForRemoteProperty(Object key) throws InterruptedException {
+        return remoteChannel.waitForProperty(key);
     }
 
     public String toString() {
@@ -710,4 +793,44 @@ public class Channel implements VirtualChannel {
     private static final ThreadLocal<Channel> CURRENT = new ThreadLocal<Channel>();
 
     private static final Logger logger = Logger.getLogger(Channel.class.getName());
+
+//    static {
+//        ConsoleHandler h = new ConsoleHandler();
+//        h.setFormatter(new Formatter(){
+//            public synchronized String format(LogRecord record) {
+//                StringBuilder sb = new StringBuilder();
+//                sb.append((record.getMillis()%100000)+100000);
+//                sb.append(" ");
+//                if (record.getSourceClassName() != null) {
+//                    sb.append(record.getSourceClassName());
+//                } else {
+//                    sb.append(record.getLoggerName());
+//                }
+//                if (record.getSourceMethodName() != null) {
+//                    sb.append(" ");
+//                    sb.append(record.getSourceMethodName());
+//                }
+//                sb.append('\n');
+//                String message = formatMessage(record);
+//                sb.append(record.getLevel().getLocalizedName());
+//                sb.append(": ");
+//                sb.append(message);
+//                sb.append('\n');
+//                if (record.getThrown() != null) {
+//                    try {
+//                        StringWriter sw = new StringWriter();
+//                        PrintWriter pw = new PrintWriter(sw);
+//                        record.getThrown().printStackTrace(pw);
+//                        pw.close();
+//                        sb.append(sw.toString());
+//                    } catch (Exception ex) {
+//                    }
+//                }
+//                return sb.toString();
+//            }
+//        });
+//        h.setLevel(Level.FINE);
+//        logger.addHandler(h);
+//        logger.setLevel(Level.FINE);
+//    }
 }

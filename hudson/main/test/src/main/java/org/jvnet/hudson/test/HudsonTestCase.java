@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt
+ * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt, Yahoo! Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,10 @@ import hudson.FilePath;
 import hudson.Functions;
 import hudson.WebAppMain;
 import hudson.EnvVars;
+import hudson.ExtensionList;
+import hudson.DescriptorExtensionList;
+import hudson.tools.ToolProperty;
+import hudson.remoting.Which;
 import hudson.Launcher.LocalLauncher;
 import hudson.matrix.MatrixProject;
 import hudson.matrix.MatrixBuild;
@@ -47,7 +51,11 @@ import hudson.model.Saveable;
 import hudson.model.TaskListener;
 import hudson.model.UpdateCenter;
 import hudson.model.AbstractProject;
+import hudson.model.UpdateCenter.UpdateCenterConfiguration;
 import hudson.model.Node.Mode;
+import hudson.scm.SubversionSCM;
+import hudson.security.csrf.CrumbIssuer;
+import hudson.security.csrf.CrumbIssuerDescriptor;
 import hudson.slaves.CommandLauncher;
 import hudson.slaves.DumbSlave;
 import hudson.slaves.RetentionStrategy;
@@ -56,6 +64,7 @@ import hudson.tasks.Maven;
 import hudson.tasks.Ant;
 import hudson.tasks.Ant.AntInstallation;
 import hudson.tasks.Maven.MavenInstallation;
+import hudson.util.NullStream;
 import hudson.util.ProcessTreeKiller;
 import hudson.util.StreamTaskListener;
 import hudson.util.jna.GNUCLibrary;
@@ -65,32 +74,38 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.jar.Manifest;
 import java.util.logging.Filter;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
+import java.beans.PropertyDescriptor;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 
 import junit.framework.TestCase;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.resolver.AbstractArtifactResolutionException;
 import org.jvnet.hudson.test.HudsonHomeLoader.CopyExisting;
 import org.jvnet.hudson.test.recipes.Recipe;
 import org.jvnet.hudson.test.recipes.Recipe.Runner;
@@ -107,6 +122,7 @@ import org.mortbay.jetty.webapp.WebAppContext;
 import org.mortbay.jetty.webapp.WebXmlConfiguration;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextFactory;
+import org.tmatesoft.svn.core.SVNException;
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
@@ -115,11 +131,15 @@ import org.xml.sax.SAXException;
 import com.gargoylesoftware.htmlunit.AjaxController;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Stylesheet;
 import com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest;
@@ -180,14 +200,28 @@ public abstract class HudsonTestCase extends TestCase {
         env.pin();
         recipe();
         AbstractProject.WORKSPACE.toString();
+
+
         hudson = newHudson();
         hudson.setNoUsageStatistics(true); // collecting usage stats from tests are pointless.
+        
+        hudson.setUseCrumbs(true);
+        hudson.setCrumbIssuer(((CrumbIssuerDescriptor<CrumbIssuer>)Hudson.getInstance().getDescriptor(TestCrumbIssuer.class)).newInstance(null,null));
+
         hudson.servletContext.setAttribute("app",hudson);
         hudson.servletContext.setAttribute("version","?");
         WebAppMain.installExpressionFactory(new ServletContextEvent(hudson.servletContext));
 
         // set a default JDK to be the one that the harness is using.
         hudson.getJDKs().add(new JDK("default",System.getProperty("java.home")));
+
+        // load updates from local proxy to avoid network traffic.
+        final String updateCenterUrl = "http://localhost:"+JavaNetReverseProxy.getInstance().localPort+"/";
+        hudson.getUpdateCenter().configure(new UpdateCenterConfiguration() {
+            public String getUpdateCenterUrl() {
+                return updateCenterUrl;
+            }
+        });
 
         // cause all the descriptors to reload.
         // ideally we'd like to reset them to properly emulate the behavior, but that's not possible.
@@ -212,23 +246,14 @@ public abstract class HudsonTestCase extends TestCase {
 
         hudson.cleanUp();
         env.dispose();
-    }
+        ExtensionList.clearLegacyInstances();
+        DescriptorExtensionList.clearLegacyInstances();
 
-    private void cleanUpDescriptors(Iterable<? extends Descriptor> cont) {
-        ClassLoader base = getClass().getClassLoader();
-        for (Iterator<? extends Descriptor> itr = cont.iterator(); itr.hasNext();) {
-            Descriptor d =  itr.next();
-            ClassLoader cl = d.getClass().getClassLoader();
-            if(cl==base)    continue;
-
-            while(cl!=null) {
-                cl = cl.getParent();
-                if(cl==base) {
-                    itr.remove();
-                    break;
-                }
-            }
-        }
+        // Hudson creates ClassLoaders for plugins that hold on to file descriptors of its jar files,
+        // but because there's no explicit dispose method on ClassLoader, they won't get GC-ed until
+        // at some later point, leading to possible file descriptor overflow. So encourage GC now.
+        // see http://bugs.sun.com/view_bug.do?bug_id=4950148
+        System.gc();
     }
 
     protected void runTest() throws Throwable {
@@ -296,13 +321,21 @@ public abstract class HudsonTestCase extends TestCase {
     }
 
     /**
+     * Sets guest credentials to access java.net Subversion repo.
+     */
+    protected void setJavaNetCredential() throws SVNException, IOException {
+        // set the credential to access svn.dev.java.net
+        hudson.getDescriptorByType(SubversionSCM.DescriptorImpl.class).postCredential("https://svn.dev.java.net/svn/hudson/","guest","",null,new PrintWriter(new NullStream()));
+    }
+
+    /**
      * Locates Maven2 and configure that as the only Maven in the system.
      */
     protected MavenInstallation configureDefaultMaven() throws Exception {
         // first if we are running inside Maven, pick that Maven.
         String home = System.getProperty("maven.home");
         if(home!=null) {
-            MavenInstallation mavenInstallation = new MavenInstallation("default",home);
+            MavenInstallation mavenInstallation = new MavenInstallation("default",home, NO_PROPERTIES);
 			hudson.getDescriptorByType(Maven.DescriptorImpl.class).setInstallations(mavenInstallation);
             return mavenInstallation;
         }
@@ -325,7 +358,7 @@ public abstract class HudsonTestCase extends TestCase {
             GNUCLibrary.LIBC.chmod(new File(mvnHome,"maven-2.0.7/bin/mvn").getPath(),0755);
 
         MavenInstallation mavenInstallation = new MavenInstallation("default",
-                new File(mvnHome,"maven-2.0.7").getAbsolutePath());
+                new File(mvnHome,"maven-2.0.7").getAbsolutePath(), NO_PROPERTIES);
 		hudson.getDescriptorByType(Maven.DescriptorImpl.class).setInstallations(mavenInstallation);
 		return mavenInstallation;
     }
@@ -336,7 +369,7 @@ public abstract class HudsonTestCase extends TestCase {
     protected Ant.AntInstallation configureDefaultAnt() throws Exception {
         Ant.AntInstallation antInstallation;
         if (System.getenv("ANT_HOME") != null) {
-            antInstallation = new AntInstallation("default", System.getenv("ANT_HOME"));
+            antInstallation = new AntInstallation("default", System.getenv("ANT_HOME"), NO_PROPERTIES);
         } else {
             LOGGER.warning("Extracting a copy of Ant bundled in the test harness. " +
                     "To avoid a performance hit, set the environment variable ANT_HOME to point to an  Ant installation.");
@@ -353,7 +386,7 @@ public abstract class HudsonTestCase extends TestCase {
             if(!Hudson.isWindows())
                 GNUCLibrary.LIBC.chmod(new File(antHome,"apache-ant-1.7.1/bin/ant").getPath(),0755);
 
-            antInstallation = new AntInstallation("default", new File(antHome,"apache-ant-1.7.1").getAbsolutePath());
+            antInstallation = new AntInstallation("default", new File(antHome,"apache-ant-1.7.1").getAbsolutePath(),NO_PROPERTIES);
         }
 		hudson.getDescriptorByType(Ant.DescriptorImpl.class).setInstallations(antInstallation);
 		return antInstallation;
@@ -444,6 +477,15 @@ public abstract class HudsonTestCase extends TestCase {
     }
 
     /**
+     * Blocks until the ENTER key is hit.
+     * This is useful during debugging a test so that one can inspect the state of Hudson through the web browser.
+     */
+    public void interactiveBreak() throws Exception {
+        System.out.println("Hudson is running at http://localhost:"+localPort+"/");
+        new BufferedReader(new InputStreamReader(System.in)).readLine();
+    }
+
+    /**
      * Returns the last item in the list.
      */
     protected <T> T last(List<T> items) {
@@ -464,10 +506,7 @@ public abstract class HudsonTestCase extends TestCase {
      * Performs a search from the search box.
      */
     protected Page search(String q) throws Exception {
-        HtmlPage top = new WebClient().goTo("");
-        HtmlForm search = top.getFormByName("search");
-        search.getInputByName("q").setValueAttribute(q);
-        return search.submit(null);
+        return new WebClient().search(q);
     }
 
     /**
@@ -522,11 +561,94 @@ public abstract class HudsonTestCase extends TestCase {
     }
 
     /**
+     * Submits the form by clikcing the submit button of the given name.
+     *
+     * @param name
+     *      This corresponds to the @name of &lt;f:submit />
+     */
+    public HtmlPage submit(HtmlForm form, String name) throws Exception {
+        for( HtmlElement e : form.getHtmlElementsByTagName("button")) {
+            HtmlElement p = (HtmlElement)e.getParentNode().getParentNode();
+            if(p.getAttribute("name").equals(name))
+                return (HtmlPage)form.submit((HtmlButton)e);
+        }
+        throw new AssertionError("No such submit button with the name "+name);
+    }
+
+    protected HtmlInput findPreviousInputElement(HtmlElement current, String name) {
+        return (HtmlInput)current.selectSingleNode("(preceding::input[@name='_."+name+"'])[last()]");
+    }
+
+    protected HtmlButton getButtonByCaption(HtmlForm f, String s) {
+        for (HtmlElement b : f.getHtmlElementsByTagName("button")) {
+            if(b.getTextContent().trim().equals(s))
+                return (HtmlButton)b;
+        }
+        return null;
+    }
+
+    /**
      * Creates a {@link TaskListener} connected to stdout.
      */
     public TaskListener createTaskListener() {
         return new StreamTaskListener(new CloseProofOutputStream(System.out));
     }
+
+    /**
+     * Asserts that two JavaBeans are equal as far as the given list of properties are concerned.
+     *
+     * <p>
+     * This method takes two objects that have properties (getXyz, isXyz, or just the public xyz field),
+     * and makes sure that the property values for each given property are equals (by using {@link #assertEquals(Object, Object)})
+     *
+     * <p>
+     * Property values can be null on both objects, and that is OK, but passing in a property that doesn't
+     * exist will fail an assertion.
+     *
+     * <p>
+     * This method is very convenient for comparing a large number of properties on two objects,
+     * for example to verify that the configuration is identical after a config screen roundtrip.
+     *
+     * @param lhs
+     *      One of the two objects to be compared.
+     * @param rhs
+     *      The other object to be compared
+     * @param properties
+     *      ','-separated list of property names that are compared.
+     * @since 1.297
+     */
+    public void assertEqualBeans(Object lhs, Object rhs, String properties) throws Exception {
+        assertNotNull("lhs is null",lhs);
+        assertNotNull("rhs is null",rhs);
+        for (String p : properties.split(",")) {
+            PropertyDescriptor pd = PropertyUtils.getPropertyDescriptor(lhs, p);
+            Object lp,rp;
+            if(pd==null) {
+                // field?
+                try {
+                    Field f1 = lhs.getClass().getField(p);
+                    Field f2 = rhs.getClass().getField(p);
+                    lp = f1.get(lhs);
+                    rp = f2.get(rhs);
+                } catch (NoSuchFieldException e) {
+                    assertNotNull("No such property "+p+" on "+lhs.getClass(),pd);
+                    return;
+                }
+            } else {
+                lp = PropertyUtils.getProperty(lhs, p);
+                rp = PropertyUtils.getProperty(rhs, p);
+            }
+            assertEquals("Property "+p+" is different",lp,rp);
+        }
+    }
+
+    /**
+     * Gets the descriptor instance of the current Hudson by its type.
+     */
+    protected <T extends Descriptor<?>> T get(Class<T> d) {
+        return hudson.getDescriptorByType(d);
+    }
+
 
 
 //
@@ -593,6 +715,11 @@ public abstract class HudsonTestCase extends TestCase {
                 // make dependency plugins available
                 // TODO: probably better to read POM, but where to read from?
                 // TODO: this doesn't handle transitive dependencies
+
+                // Tom: plugins are now searched on the classpath first. They should be available on
+                // the compile or test classpath. As a backup, we do a best-effort lookup in the Maven repository
+                // For transitive dependencies, we could evaluate Plugin-Dependencies transitively. 
+
                 String dependencies = m.getMainAttributes().getValue("Plugin-Dependencies");
                 if(dependencies!=null) {
                     MavenEmbedder embedder = new MavenEmbedder(null);
@@ -600,11 +727,40 @@ public abstract class HudsonTestCase extends TestCase {
                     embedder.start();
                     for( String dep : dependencies.split(",")) {
                         String[] tokens = dep.split(":");
-                        Artifact a = embedder.createArtifact("org.jvnet.hudson.plugins", tokens[0], tokens[1], "compile"/*doesn't matter*/, "hpi");
-                        embedder.resolve(a, Arrays.asList(embedder.createRepository("http://maven.glassfish.org/content/groups/public/","repo")),embedder.getLocalRepository());
-                        File dst = new File(home, "plugins/" + tokens[0] + ".hpi");
-                        if(!dst.exists() || dst.lastModified()!=a.getFile().lastModified())
-                            FileUtils.copyFile(a.getFile(), dst);
+                        String artifactId = tokens[0];
+                        String version = tokens[1];
+                        File dependencyJar=null;
+                        // need to search multiple group IDs
+                        // TODO: extend manifest to include groupID:artifactID:version
+                        Exception resolutionError=null;
+                        for (String groupId : new String[]{"org.jvnet.hudson.plugins","org.jvnet.hudson.main"}) {
+
+                            // first try to find it on the classpath.
+                            // this takes advantage of Maven POM located in POM
+                            URL dependencyPomResource = getClass().getResource("/META-INF/maven/"+groupId+"/"+artifactId+"/pom.xml");
+                            if (dependencyPomResource != null) {
+                                // found it
+                                dependencyJar = Which.jarFile(dependencyPomResource);
+                                break;
+                            } else {
+                                Artifact a;
+                                a = embedder.createArtifact(groupId, artifactId, version, "compile"/*doesn't matter*/, "hpi");
+                                try {
+                                    embedder.resolve(a, Arrays.asList(embedder.createRepository("http://maven.glassfish.org/content/groups/public/","repo")),embedder.getLocalRepository());
+                                    dependencyJar = a.getFile();
+                                } catch (AbstractArtifactResolutionException x) {
+                                    // could be a wrong groupId
+                                    resolutionError = x;
+                                }
+                            }
+                        }
+                        if(dependencyJar==null)
+                            throw new Exception("Failed to resolve plugin: "+dep,resolutionError);
+
+                        File dst = new File(home, "plugins/" + artifactId + ".hpi");
+                        if(!dst.exists() || dst.lastModified()!=dependencyJar.lastModified()) {
+                            FileUtils.copyFile(dependencyJar, dst);
+                        }
                     }
                     embedder.stop();
                 }
@@ -693,6 +849,13 @@ public abstract class HudsonTestCase extends TestCase {
             return this;
         }
 
+        public HtmlPage search(String q) throws IOException, SAXException {
+            HtmlPage top = goTo("");
+            HtmlForm search = top.getFormByName("search");
+            search.getInputByName("q").setValueAttribute(q);
+            return (HtmlPage)search.submit(null);
+        }
+
         /**
          * Short for {@code getPage(r,"")}, to access the top page of a build.
          */
@@ -764,6 +927,30 @@ public abstract class HudsonTestCase extends TestCase {
         public String getContextPath() {
             return "http://localhost:"+localPort+contextPath;
         }
+        
+        /**
+         * Adds a security crumb to the quest
+         */
+        public WebRequestSettings addCrumb(WebRequestSettings req) {
+            NameValuePair crumb[] = { new NameValuePair() };
+            
+            crumb[0].setName(hudson.getCrumbIssuer().getDescriptor().getCrumbRequestField());
+            crumb[0].setValue(hudson.getCrumbIssuer().getCrumb( null ));
+            
+            req.setRequestParameters(Arrays.asList( crumb ));
+            return req;
+        }
+        
+        /**
+         * Creates a URL with crumb parameters relative to {{@link #getContextPath()}
+         */
+        public URL createCrumbedUrl(String relativePath) throws MalformedURLException {
+            CrumbIssuer issuer = hudson.getCrumbIssuer();
+            String crumbName = issuer.getDescriptor().getCrumbRequestField();
+            String crumb = issuer.getCrumb(null);
+            
+            return new URL(getContextPath()+relativePath+"?"+crumbName+"="+crumb);
+        }
     }
 
     // needs to keep reference, or it gets GC-ed.
@@ -830,4 +1017,6 @@ public abstract class HudsonTestCase extends TestCase {
     }
 
     private static final Logger LOGGER = Logger.getLogger(HudsonTestCase.class.getName());
+
+    protected static final List<ToolProperty<?>> NO_PROPERTIES = Collections.<ToolProperty<?>>emptyList();
 }

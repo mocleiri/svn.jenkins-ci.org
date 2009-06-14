@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Package hudson.scm (Hudson core 1.291 API)
+Uses of Package hudson.scm (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.scm (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.scm (Hudson core 1.291 API)";
+        parent.document.title="Uses of Package hudson.scm (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -91,16 +91,16 @@ function windowTitle()
 Packages that use <A HREF="../../hudson/scm/package-summary.html">hudson.scm</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson"><B>hudson</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.fsp"><B>hudson.fsp</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.matrix"><B>hudson.matrix</B></A></TD>
 <TD>Matrix project&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven"><B>hudson.maven</B></A></TD>
-<TD>Maven support.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
@@ -117,6 +117,25 @@ Packages that use <A HREF="../../hudson/scm/package-summary.html">hudson.scm</A>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.scm.browsers"><B>hudson.scm.browsers</B></A></TD>
 <TD>Code that computes links to external source code repository browsers.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.jvnet.hudson.test"><B>org.jvnet.hudson.test</B></A></TD>
+<TD>Test harness for Hudson and its plugins.&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/scm/package-summary.html">hudson.scm</A> used by <A HREF="../../hudson/package-summary.html">hudson</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/scm/class-use/SCMDescriptor.html#hudson"><B>SCMDescriptor</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A>.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -159,27 +178,6 @@ Classes in <A HREF="../../hudson/scm/package-summary.html">hudson.scm</A> used b
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Captures the configuration information in it.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson.maven"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Classes in <A HREF="../../hudson/scm/package-summary.html">hudson.scm</A> used by <A HREF="../../hudson/maven/package-summary.html">hudson.maven</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/scm/class-use/ChangeLogSet.html#hudson.maven"><B>ChangeLogSet</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents SCM change list.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/scm/class-use/ChangeLogSet.Entry.html#hudson.maven"><B>ChangeLogSet.Entry</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -367,6 +365,13 @@ Classes in <A HREF="../../hudson/scm/package-summary.html">hudson.scm</A> used b
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/scm/class-use/SubversionCredentialProvider.html#hudson.scm"><B>SubversionCredentialProvider</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point for programmatically providing a credential (such as username/password) for
+ Subversion access.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/scm/class-use/SubversionRepositoryBrowser.html#hudson.scm"><B>SubversionRepositoryBrowser</B></A></B>
 
 <BR>
@@ -383,6 +388,12 @@ Classes in <A HREF="../../hudson/scm/package-summary.html">hudson.scm</A> used b
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/scm/class-use/SubversionSCM.DescriptorImpl.Credential.html#hudson.scm"><B>SubversionSCM.DescriptorImpl.Credential</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stores <CODE>SVNAuthentication</CODE> for a single realm.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/scm/class-use/SubversionSCM.ModuleLocation.html#hudson.scm"><B>SubversionSCM.ModuleLocation</B></A></B>
@@ -448,6 +459,27 @@ Classes in <A HREF="../../hudson/scm/package-summary.html">hudson.scm</A> used b
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> for Subversion.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.jvnet.hudson.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/scm/package-summary.html">hudson.scm</A> used by <A HREF="../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/scm/class-use/NullSCM.html#org.jvnet.hudson.test"><B>NullSCM</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/scm/class-use/SCM.html#org.jvnet.hudson.test"><B>SCM</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Captures the configuration information in it.</TD>
 </TR>
 </TABLE>
 &nbsp;

@@ -30,6 +30,8 @@ import java.util.NoSuchElementException;
 import java.util.ListIterator;
 import java.util.AbstractList;
 import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * Varios {@link Iterator} implementations.
@@ -137,6 +139,25 @@ public class Iterators {
     }
 
     /**
+     * Remove duplicates from another iterator.
+     */
+    public static final class DuplicateFilterIterator<T> extends FilterIterator<T> {
+        private final Set<T> seen = new HashSet<T>();
+
+        public DuplicateFilterIterator(Iterator<? extends T> core) {
+            super(core);
+        }
+
+        public DuplicateFilterIterator(Iterable<? extends T> core) {
+            super(core);
+        }
+
+        protected boolean filter(T t) {
+            return seen.add(t);
+        }
+    }
+
+    /**
      * Returns the {@link Iterable} that lists items in the reverse order.
      *
      * @since 1.150
@@ -218,6 +239,18 @@ public class Iterators {
     @SuppressWarnings({"unchecked"})
     public static <T> Iterable<T> cast(Iterable<? extends T> itr) {
         return (Iterable)itr;
+    }
+
+    /**
+     * Returns an {@link Iterator} that only returns items of the given subtype.
+     */
+    @SuppressWarnings({"unchecked"})
+    public static <U,T extends U> Iterator<T> subType(Iterator<U> itr, final Class<T> type) {
+        return (Iterator)new FilterIterator<U>(itr) {
+            protected boolean filter(U u) {
+                return type.isInstance(u);
+            }
+        };
     }
 
     /**

@@ -1,44 +1,31 @@
 package hudson.plugins.cmake;
 
+import hudson.EnvVars;
+import hudson.Extension;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Proc;
-import hudson.util.FormFieldValidator;
-import hudson.model.Build;
+import hudson.model.AbstractBuild;
+import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.tasks.Builder;
+import hudson.util.FormValidation;
 import net.sf.json.JSONObject;
+import org.kohsuke.stapler.AncestorInPath;
 import org.kohsuke.stapler.DataBoundConstructor;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.QueryParameter;
+import org.kohsuke.stapler.StaplerRequest;
 
 import javax.servlet.ServletException;
-
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
- * Sample {@link Builder}.
+ * Executes <tt>cmake</tt> as the build process.
  *
- * <p>
- * When the user configures the project and enables this builder,
- * {@link DescriptorImpl#newInstance(StaplerRequest)} is invoked
- * and a new {@link CmakeBuilder} is created. The created
- * instance is persisted to the project configuration XML by using
- * XStream, so this allows you to use instance fields (like {@link #name})
- * to remember the configuration.
- *
- * <p>
- * When a build is performed, the {@link #perform(Build, Launcher, BuildListener)} method
- * will be invoked. 
  *
  * @author Kohsuke Kawaguchi
  */
@@ -65,18 +52,9 @@ public class CmakeBuilder extends Builder {
 		this.buildType = buildType;
 		this.cmakeArgs = cmakeArgs;
 		this.cleanBuild = false;
-		builderImpl = new CmakeBuilderImpl();
-		
-//		<f:entry title="Clean Build"
-//	         description="Clean Build?" 
-//	         help="${rootURL}/plugin/hello-world/help-projectConfig.html">
-//   <f:checkbox value="cmakeArgs" />
-//	</f:entry>
+		builderImpl = new CmakeBuilderImpl();		
     }
 
-    /**
-     * We'll use this from the <tt>config.jelly</tt>.
-     */
     public String getSourceDir() {
     	return this.sourceDir;
     }
@@ -101,54 +79,57 @@ public class CmakeBuilder extends Builder {
     	return this.cleanBuild;
     }
     
-    public boolean perform(Build build, Launcher launcher, BuildListener listener) {
+    public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
     	listener.getLogger().println("MODULE: " + build.getProject().getModuleRoot());
     	
     	if (builderImpl == null) {
     		builderImpl = new CmakeBuilderImpl();
     	}
-    	String theBuildDir = ""; 
-    	String theSourceDir = ""; 
-    	String theInstallDir = ""; 
+        EnvVars envs = build.getEnvironment(listener);
+
+        String theSourceDir;
+    	String theInstallDir;
     	try {
-    		if (this.cleanBuild) {
-    			build.getProject().getWorkspace().deleteRecursive();
-    		}
-    		theBuildDir  = builderImpl.preparePath(build.getEnvVars(), this.buildDir, 
+//    		if (this.cleanBuild) {
+//    			build.getProject().getWorkspace().deleteRecursive();
+//    		}
+            builderImpl.preparePath(envs, this.buildDir, 
     				CmakeBuilderImpl.PreparePathOptions.CREATE_NEW_IF_EXISTS);
-    		theSourceDir = builderImpl.preparePath(build.getEnvVars(), this.sourceDir,
+    		theSourceDir = builderImpl.preparePath(envs, this.sourceDir,
     				CmakeBuilderImpl.PreparePathOptions.CHECK_PATH_EXISTS);
-    		theInstallDir = builderImpl.preparePath(build.getEnvVars(), this.installDir,
+    		theInstallDir = builderImpl.preparePath(envs, this.installDir,
     				CmakeBuilderImpl.PreparePathOptions.CREATE_NEW_IF_EXISTS);
     	} catch (IOException ioe) {
     		listener.getLogger().println(ioe.getMessage());
     		return false;
-    	} catch (InterruptedException e) {
-    		listener.getLogger().println(e.getMessage());
-			return false;
-		}
+    	}
+//    	catch (InterruptedException e) {
+//    		listener.getLogger().println(e.getMessage());
+//			return false;
+//		}
     	
     	String cmakeBin = CMAKE;
-    	if (DESCRIPTOR.cmakePath() != null) {
-    		cmakeBin = DESCRIPTOR.cmakePath();
+        String cmakePath = getDescriptor().cmakePath();
+        if (cmakePath != null && cmakePath.length() > 0) {
+    		cmakeBin = cmakePath;
     	}
     	String cmakeCall = builderImpl.buildCMakeCall(cmakeBin, theSourceDir, theInstallDir, buildType, cmakeArgs);
     	FilePath workDir = new FilePath(build.getProject().getWorkspace(), this.buildDir); 
-    	listener.getLogger().println("CMMake call : " + cmakeCall);
+    	listener.getLogger().println("CMake call : " + cmakeCall);
 
     	try {
-    		Proc proc = launcher.launch(cmakeCall, build.getEnvVars(), listener.getLogger(), workDir);
+    		Proc proc = launcher.launch(cmakeCall, envs, listener.getLogger(), workDir);
     		int result = proc.join();
     		if (result != 0) {
     			return false;
     		}
     		
-    		proc = launcher.launch(MAKE, build.getEnvVars(), listener.getLogger(), workDir);
+    		proc = launcher.launch(MAKE, envs, listener.getLogger(), workDir);
     		result = proc.join();
     		if (result != 0) {
     			return false;
     		}
-    		proc = launcher.launch(MAKE_INSTALL, build.getEnvVars(), listener.getLogger(), workDir);
+    		proc = launcher.launch(MAKE_INSTALL, envs, listener.getLogger(), workDir);
     		result = proc.join();
     		return (result == 0);
 		} catch (IOException e) {
@@ -159,15 +140,9 @@ public class CmakeBuilder extends Builder {
 		return false;
     }
 
-    public Descriptor<Builder> getDescriptor() {
-        // see Descriptor javadoc for more about what a descriptor is.
-        return DESCRIPTOR;
+    public DescriptorImpl getDescriptor() {
+        return (DescriptorImpl)super.getDescriptor();
     }
-
-    /**
-     * Descriptor should be singleton.
-     */
-    public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
     /**
      * Descriptor for {@link CmakeBuilder}. Used as a singleton.
@@ -177,6 +152,7 @@ public class CmakeBuilder extends Builder {
      * See <tt>views/hudson/plugins/hello_world/CmakeBuilder/*.jelly</tt>
      * for the actual HTML fragment for the configuration screen.
      */
+    @Extension
     public static final class DescriptorImpl extends Descriptor<Builder> {
         /**
          * To persist global configuration information,
@@ -189,7 +165,7 @@ public class CmakeBuilder extends Builder {
         private transient List<String> allowedBuildTypes;
         private transient String errorMessage;
         
-        DescriptorImpl() {
+        public DescriptorImpl() {
             super(CmakeBuilder.class);
             load();
             this.allowedBuildTypes = new ArrayList<String>();            
@@ -199,67 +175,45 @@ public class CmakeBuilder extends Builder {
             this.allowedBuildTypes.add("MinSizeRel");
             this.errorMessage = "Must be one of Debug, Release, RelWithDebInfo, MinSizeRel";
         }
-
-        public void doCheckSourceDir(StaplerRequest req, StaplerResponse rsp, @QueryParameter final String value) throws IOException, ServletException {
-        	new FormFieldValidator.WorkspaceFilePath(req, rsp, true, false).process();
+        
+        public FormValidation doCheckSourceDir(@AncestorInPath AbstractProject project, @QueryParameter final String value) throws IOException, ServletException {
+            FilePath ws = project.getWorkspace();
+            if(ws==null) return FormValidation.ok();
+            return ws.validateRelativePath(value,true,false);
         }
         
         /**
          * Performs on-the-fly validation of the form field 'name'.
          *
          * @param value
-         *      This receives the current value of the field.
          */
-        public void doCheckBuildDir(StaplerRequest req, StaplerResponse rsp, @QueryParameter final String value) throws IOException, ServletException {
-            new FormFieldValidator(req,rsp,null) {
-                /**
-                 * The real check goes here. In the end, depending on which
-                 * method you call, the browser shows text differently.
-                 */
-                protected void check() throws IOException, ServletException {
-                    if(value.length()==0)
-                        error("Please set a build directory");
-                    else
-                    if(value.length() < 1)
-                        warning("Isn't the name too short?");
-                    else {
-                    	File file = new File(value);
-                    	if (file.isFile()) {
-                    		error("build dir is a file");
-                    	} else 
-                    		//TODO add more checks
-                    		ok();
-                    	
-                    }
+        public FormValidation doCheckBuildDir(@QueryParameter final String value) throws IOException, ServletException {
+            if(value.length()==0)
+                return FormValidation.error("Please set a build directory");
+            if(value.length() < 1)
+                return FormValidation.warning("Isn't the name too short?");
 
-                }
-            }.process();
+            File file = new File(value);
+            if (file.isFile())
+                return FormValidation.error("build dir is a file");
+
+            //TODO add more checks
+            return FormValidation.ok();
         }
 
         /**
          * Performs on-the-fly validation of the form field 'name'.
          *
          * @param value
-         *      This receives the current value of the field.
          */
-        public void doCheckBuildType(StaplerRequest req, StaplerResponse rsp, @QueryParameter final String value) throws IOException, ServletException {
-            new FormFieldValidator(req,rsp,null) {
-                /**
-                 * The real check goes here. In the end, depending on which
-                 * method you call, the browser shows text differently.
-                 */
-                protected void check() throws IOException, ServletException {
-                    for (String allowed : DescriptorImpl.this.allowedBuildTypes) {
-                    	if (value.equals(allowed)) {
-                    		ok();
-                    		return;
-                    	}
-                    }
-                    if (value.length() > 0) {
-                    	error(DescriptorImpl.this.errorMessage);
-                    }
-                }
-            }.process();
+        public FormValidation doCheckBuildType(@QueryParameter final String value) throws IOException, ServletException {
+            for (String allowed : DescriptorImpl.this.allowedBuildTypes)
+                if (value.equals(allowed))
+                    return FormValidation.ok();
+            if (value.length() > 0)
+                return FormValidation.error(DescriptorImpl.this.errorMessage);
+
+            return FormValidation.ok();
         }
         
         /**
@@ -272,7 +226,6 @@ public class CmakeBuilder extends Builder {
         public boolean configure(StaplerRequest req, JSONObject o) throws FormException {
             // to persist global configuration information,
             // set that to properties and call save().
-            //useFrench = o.getBoolean("useFrench");
             cmakePath = o.getString("cmakePath");
             save();
             return super.configure(req, o);

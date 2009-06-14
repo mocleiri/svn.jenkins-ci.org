@@ -43,8 +43,7 @@ import hudson.tasks.DynamicLabeler;
 import hudson.tasks.LabelFinder;
 import hudson.util.ClockDifference;
 import hudson.util.DescribableList;
-import hudson.util.FormFieldValidator;
-import hudson.util.FormFieldValidator.NonNegativeInteger;
+import hudson.util.FormValidation;
 
 import java.io.File;
 import java.io.IOException;
@@ -133,24 +132,24 @@ public abstract class Slave extends Node implements Serializable {
 
     @DataBoundConstructor
     public Slave(String name, String nodeDescription, String remoteFS, String numExecutors,
-                 Mode mode, String label, ComputerLauncher launcher, RetentionStrategy retentionStrategy, List<? extends NodeProperty<?>> nodeProperties) throws FormException, IOException {
-        this(name,nodeDescription,remoteFS,Util.tryParseNumber(numExecutors, 1).intValue(),mode,label,launcher,retentionStrategy, nodeProperties);
+                 Mode mode, String labelString, ComputerLauncher launcher, RetentionStrategy retentionStrategy, List<? extends NodeProperty<?>> nodeProperties) throws FormException, IOException {
+        this(name,nodeDescription,remoteFS,Util.tryParseNumber(numExecutors, 1).intValue(),mode,labelString,launcher,retentionStrategy, nodeProperties);
     }
 
     @Deprecated
     public Slave(String name, String nodeDescription, String remoteFS, int numExecutors,
-            Mode mode, String label, ComputerLauncher launcher, RetentionStrategy retentionStrategy) throws FormException, IOException {
-    	this(name, nodeDescription, remoteFS, numExecutors, mode, label, launcher, retentionStrategy, new ArrayList());
+            Mode mode, String labelString, ComputerLauncher launcher, RetentionStrategy retentionStrategy) throws FormException, IOException {
+    	this(name, nodeDescription, remoteFS, numExecutors, mode, labelString, launcher, retentionStrategy, new ArrayList());
     }
     
     public Slave(String name, String nodeDescription, String remoteFS, int numExecutors,
-                 Mode mode, String label, ComputerLauncher launcher, RetentionStrategy retentionStrategy, List<? extends NodeProperty<?>> nodeProperties) throws FormException, IOException {
+                 Mode mode, String labelString, ComputerLauncher launcher, RetentionStrategy retentionStrategy, List<? extends NodeProperty<?>> nodeProperties) throws FormException, IOException {
         this.name = name;
         this.description = nodeDescription;
         this.numExecutors = numExecutors;
         this.mode = mode;
         this.remoteFS = remoteFS;
-        this.label = Util.fixNull(label).trim();
+        this.label = Util.fixNull(labelString).trim();
         this.launcher = launcher;
         this.retentionStrategy = retentionStrategy;
         getAssignedLabels();    // compute labels now
@@ -228,13 +227,7 @@ public abstract class Slave extends Node implements Serializable {
     public Set<Label> getAssignedLabels() {
         // todo refactor to make dynamic labels a bit less hacky
         if(labels==null || isChangedDynamicLabels()) {
-            Set<Label> r = new HashSet<Label>();
-            String ls = getLabelString();
-            if(ls.length()>0) {
-                for( String l : ls.split(" +")) {
-                    r.add(Hudson.getInstance().getLabel(l));
-                }
-            }
+            Set<Label> r = Label.parse(getLabelString());
             r.add(getSelfLabel());
             r.addAll(getDynamicLabels());
             this.labels = Collections.unmodifiableSet(r);
@@ -346,6 +339,9 @@ public abstract class Slave extends Node implements Serializable {
 
         public void doIndex( StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
             URLConnection con = connect();
+            // since we end up redirecting users to jnlpJars/foo.jar/, set the content disposition
+            // so that browsers can download them in the right file name.
+            rsp.setHeader("Content-Disposition", "inline; filename=" + fileName);
             InputStream in = con.getInputStream();
             rsp.serveFile(req, in, con.getLastModified(), con.getContentLength(), "*.jar" );
             in.close();
@@ -378,7 +374,7 @@ public abstract class Slave extends Node implements Serializable {
 
     public Launcher createLauncher(TaskListener listener) {
         SlaveComputer c = getComputer();
-        return new RemoteLauncher(listener, c.getChannel(), c.isUnix());
+        return new RemoteLauncher(listener, c.getChannel(), c.isUnix()).decorateFor(this);
     }
 
     /**
@@ -421,34 +417,31 @@ public abstract class Slave extends Node implements Serializable {
     }
 
     public SlaveDescriptor getDescriptor() {
-        return (SlaveDescriptor)Hudson.getInstance().getDescriptor(getClass());
+        Descriptor d = Hudson.getInstance().getDescriptor(getClass());
+        if (d instanceof SlaveDescriptor)
+            return (SlaveDescriptor) d;
+        if (d==null)
+            throw new IllegalStateException(getClass()+" doesn't have a descriptor");
+        throw new IllegalStateException(d.getClass()+" needs to extend from SlaveDescriptor");
     }
 
     public static abstract class SlaveDescriptor extends NodeDescriptor {
-        public void doCheckNumExecutors() throws IOException, ServletException {
-            new NonNegativeInteger().process();
+        public FormValidation doCheckNumExecutors(@QueryParameter String value) {
+            return FormValidation.validatePositiveInteger(value);
         }
 
         /**
          * Performs syntactical check on the remote FS for slaves.
          */
-        public void doCheckRemoteFs(StaplerRequest req, StaplerResponse rsp, @QueryParameter final String value) throws IOException, ServletException {
-            new FormFieldValidator(req,rsp,false) {
-                protected void check() throws IOException, ServletException {
-                    if(Util.fixEmptyAndTrim(value)==null) {
-                        error("Remote directory is mandatory");
-                        return;
-                    }
+        public FormValidation doCheckRemoteFs(@QueryParameter String value) throws IOException, ServletException {
+            if(Util.fixEmptyAndTrim(value)==null)
+                return FormValidation.error("Remote directory is mandatory");
 
-                    if(value.startsWith("\\\\") || value.startsWith("/net/")) {
-                        warning("Are you sure you want to use network mounted file system for FS root? " +
-                                "Note that this directory needs not be visible to the master.");
-                        return;
-                    }
+            if(value.startsWith("\\\\") || value.startsWith("/net/"))
+                return FormValidation.warning("Are you sure you want to use network mounted file system for FS root? " +
+                        "Note that this directory needs not be visible to the master.");
 
-                    ok();
-                }
-            }.process();
+            return FormValidation.ok();
         }
     }
 

@@ -25,6 +25,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Copy;
+import org.apache.commons.io.FileUtils;
 import org.mortbay.jetty.plugin.util.Scanner;
 import org.mortbay.jetty.plugin.util.Scanner.Listener;
 import org.mortbay.jetty.plugin.util.SystemProperty;
@@ -110,6 +111,9 @@ public class RunMojo extends AbstractJetty6Mojo {
         // auto-enable stapler trace, unless otherwise configured already.
         if(System.getProperty("stapler.trace")==null)
             System.setProperty("stapler.trace","true");
+        // run YUI in the debug mode, unless otherwise configured
+        if(System.getProperty("debug.YUI")==null)
+            System.setProperty("debug.YUI","true");
 
         // look for hudson.war
         for( Artifact a : (Set<Artifact>)getProject().getArtifacts() ) {
@@ -126,7 +130,7 @@ public class RunMojo extends AbstractJetty6Mojo {
                 "  <groupId>org.jvnet.hudson.main</groupId>\n" +
                 "  <artifactId>hudson-war</artifactId>\n" +
                 "  <type>war</type>\n" +
-                "  <version>1.83<!-- replace this with the version you want--></version>\n" +
+                "  <version>1.293<!-- replace this with the version you want--></version>\n" +
                 "  <scope>test</scope>\n" +
                 "</dependency>"
             );
@@ -220,6 +224,11 @@ public class RunMojo extends AbstractJetty6Mojo {
     }
 
     public void configureWebApplication() throws Exception {
+        // Jetty tries to do this in WebAppContext.resolveWebApp but it failed to delete the directory.
+        File extractedWebAppDir= new File(getTmpDirectory(), "webapp");
+        if(extractedWebAppDir.lastModified() < webApp.lastModified())
+            FileUtils.deleteDirectory(extractedWebAppDir);
+        
         super.configureWebApplication();
         getWebApplication().setWebAppSrcDir(webApp);
     }

@@ -1,3 +1,27 @@
+/**
+ * The MIT License
+ *
+ * Copyright (c) 2007-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt,
+ *                          Henrik Lynggaard, Peter Liljenberg, Andrew Bayer
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package hudson.plugins.clearcase;
 
 import hudson.FilePath;
@@ -9,7 +33,9 @@ import hudson.model.BuildListener;
 import hudson.model.Hudson;
 import hudson.model.Item;
 import hudson.model.Run;
+import hudson.model.Node;
 import hudson.model.TaskListener;
+import hudson.model.Node;
 import hudson.model.listeners.ItemListener;
 import hudson.plugins.clearcase.action.CheckOutAction;
 import hudson.plugins.clearcase.action.SaveChangeLogAction;
@@ -32,8 +58,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 /**
  * Abstract class for ClearCase SCM. The class contains the logic around
@@ -65,13 +89,13 @@ public abstract class AbstractClearCaseScm extends SCM {
                                 final String mkviewOptionalParam,
                                 final boolean filterOutDestroySubBranchEvent,
                                 final boolean useUpdate, 
-                                final boolean removeViewOnRename,
+                                final boolean rmviewonrename,
                                 final String excludedRegions) {
         this.viewName = viewName;
         this.mkviewOptionalParam = mkviewOptionalParam;
         this.filteringOutDestroySubBranchEvent = filterOutDestroySubBranchEvent;
         this.useUpdate = useUpdate;
-        this.removeViewOnRename = removeViewOnRename;
+        this.removeViewOnRename = rmviewonrename;
         this.excludedRegions = excludedRegions;
         createAndRegisterListener();
     }
@@ -186,15 +210,13 @@ public abstract class AbstractClearCaseScm extends SCM {
 	 * trying to find an unique view name. It will also replace invalid chars
 	 * from a view name.
 	 * 
-	 * @param project
+	 * @param build
 	 *            the project to get the name from
 	 * @return a string containing no invalid chars.
 	 */
 	public String generateNormalizedViewName(AbstractBuild<?, ?> build,
 			Launcher launcher) {
-		String generatedNormalizedViewName = viewName;
-
-		generatedNormalizedViewName = Util.replaceMacro(viewName,
+		String generatedNormalizedViewName = Util.replaceMacro(viewName,
 				new BuildVariableResolver(build, launcher));
 
 		generatedNormalizedViewName = generatedNormalizedViewName.replaceAll(
@@ -341,9 +363,6 @@ public abstract class AbstractClearCaseScm extends SCM {
 	 * Register listeners for Hudson events. At the moment we listen to
 	 * onDeleted and try to remove the ClearCase view that was created for this
 	 * job.
-	 * 
-	 * @param viewName
-	 *            the name of the view
 	 */
 	protected void createAndRegisterListener() {
 		Hudson hudson = Hudson.getInstance();
@@ -377,9 +396,9 @@ public abstract class AbstractClearCaseScm extends SCM {
 										project.getWorkspace().getParent()
 												.getParent(), launcher));
 						try {
-							ct
-									.rmview(generateNormalizedViewName(null,
-											launcher));
+                                                    ct
+                                                        .rmviewtag(generateNormalizedViewName(null,
+                                                                                                  launcher));
 						} catch (Exception e) {
 							Logger.getLogger(
 									AbstractClearCaseScm.class.getName()).log(
@@ -392,36 +411,42 @@ public abstract class AbstractClearCaseScm extends SCM {
 		});
 	}
 
+    @Override
+    public boolean processWorkspaceBeforeDeletion(AbstractProject<?,?> project, FilePath workspace, Node node) throws IOException, InterruptedException {
+        StreamTaskListener listener = new StreamTaskListener(System.out);
+        Launcher launcher = Hudson.getInstance().createLauncher(listener);
+        ClearTool ct = createClearTool(null, createClearToolLauncher(listener,
+                                                                     project.getWorkspace().getParent()
+                                                                     .getParent(), launcher));
+        try {
+            ct.rmview(generateNormalizedViewName(null,
+                                                 launcher));
+        } catch (Exception e) {
+            Logger.getLogger(
+                             AbstractClearCaseScm.class.getName()).log(
+                                                                  Level.WARNING,
+                                                                  "Failed to remove ClearCase view", e);
+        }
+        return true;
+        
+    }
+
 	public boolean isUseUpdate() {
 		return useUpdate;
 	}
 
+    public boolean isRemoveViewOnRename() {
+        return removeViewOnRename;
+    }
 
 	 public String getExcludedRegions() {
 		  return excludedRegions;
 	 }
 
 	 public String[] getExcludedRegionsNormalized() {
-		  return excludedRegions == null ? null : excludedRegions.split("[\\r\\n]+");
+             return excludedRegions == null ? null : excludedRegions.split("[\\r\\n]+");
 	 }
 
-	 private Pattern[] getExcludedRegionsPatterns() {
-		 String[] excludedRegions = getExcludedRegionsNormalized();
-		 if (excludedRegions != null)
-		 {
-			 Pattern[] patterns = new Pattern[excludedRegions.length];
-
-			 int i = 0;
-			 for (String excludedRegion : excludedRegions)
-			 {
-				 patterns[i++] = Pattern.compile(excludedRegion);
-			 }
-
-			 return patterns;
-		 }
-
-		 return null;
-	 }
     
     protected List<Filter> configureFilters() {
         List<Filter> filters = new ArrayList<Filter>();
@@ -431,7 +456,9 @@ public abstract class AbstractClearCaseScm extends SCM {
         
         if (excludedStrings != null && excludedStrings.length > 0) {
             for (String s : excludedStrings) {
-                filters.add(new FileFilter(FileFilter.Type.DoesNotContainRegxp, s));
+                if (!s.equals("")) {
+                    filters.add(new FileFilter(FileFilter.Type.DoesNotContainRegxp, s));
+                }
             }
         }
                                            

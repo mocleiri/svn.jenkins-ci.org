@@ -16,6 +16,8 @@ import org.apache.commons.lang.time.FastDateFormat;
 import org.kohsuke.stapler.Stapler;
 import org.jvnet.animal_sniffer.IgnoreJRERequirement;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -30,6 +32,7 @@ import java.io.Writer;
 import java.io.PrintStream;
 import java.io.InputStreamReader;
 import java.io.FileInputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.net.URI;
@@ -268,14 +271,19 @@ public class Util {
      */
     //Taken from http://svn.apache.org/viewvc/maven/shared/trunk/file-management/src/main/java/org/apache/maven/shared/model/fileset/util/FileSetManager.java?view=markup
     public static boolean isSymlink(File file) throws IOException {
-        File parent = file.getParentFile();
-        File canonicalFile = file.getCanonicalFile();
+        String name = file.getName();
+        if (name.equals(".") || name.equals(".."))
+            return false;
 
-        return parent != null
-            && (!canonicalFile.getName().equals(file.getName()) || !canonicalFile.getPath().startsWith(
-            parent.getCanonicalPath()));
-    }
-
+        File fileInCanonicalParent = null;
+        File parentDir = file.getParentFile();
+        if ( parentDir == null ) {
+            fileInCanonicalParent = file;
+        } else {
+            fileInCanonicalParent = new File( parentDir.getCanonicalPath(), name );
+        }
+        return !fileInCanonicalParent.getCanonicalFile().equals( fileInCanonicalParent.getAbsoluteFile() );
+    }    
 
     /**
      * Creates a new temporary directory.
@@ -384,6 +392,9 @@ public class Util {
         return tokenize(s," \t\n\r\f");
     }
 
+    /**
+     * Converts the map format of the environment variables to the K=V format in the array.
+     */
     public static String[] mapToEnv(Map<String,String> m) {
         String[] r = new String[m.size()];
         int idx=0;
@@ -446,6 +457,26 @@ public class Util {
         try {
             return getDigestOf(new ByteArrayInputStream(text.getBytes("UTF-8")));
         } catch (IOException e) {
+            throw new Error(e);
+        }
+    }
+
+    /**
+     * Covnerts a string into 128-bit AES key.
+     * @since 1.308
+     */
+    public static SecretKey toAes128Key(String s) {
+        try {
+            // turn secretKey into 256 bit hash
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            digest.reset();
+            digest.update(s.getBytes("UTF-8"));
+
+            // Due to the stupid US export restriction JDK only ships 128bit version.
+            return new SecretKeySpec(digest.digest(),0,128/8, "AES");
+        } catch (NoSuchAlgorithmException e) {
+            throw new Error(e);
+        } catch (UnsupportedEncodingException e) {
             throw new Error(e);
         }
     }
@@ -568,11 +599,13 @@ public class Util {
 
     /**
      * Escapes non-ASCII characters in URL.
-     * @deprecated Only escapes non-ASCII but leaves other URL-unsafe characters.
-     * Util.rawEncode should generally be used instead, though be careful to pass only
+     *
+     * <p>
+     * Note that this methods only escapes non-ASCII but leaves other URL-unsafe characters,
+     * such as '#'.
+     * {@link #rawEncode(String)} should generally be used instead, though be careful to pass only
      * a single path component to that method (it will encode /, but this method does not).
      */
-    @Deprecated
     public static String encode(String s) {
         try {
             boolean escaped = false;
@@ -774,6 +807,19 @@ public class Util {
             buf.append(s);
         }
         return buf.toString();
+    }
+
+    /**
+     * Combines all the given collections into a single list.
+     */
+    public static <T> List<T> join(Collection<? extends T>... items) {
+        int size = 0;
+        for (Collection<? extends T> item : items)
+            size += item.size();
+        List<T> r = new ArrayList<T>(size);
+        for (Collection<? extends T> item : items)
+            r.addAll(item);
+        return r;
     }
 
     /**

@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Job (Hudson core 1.291 API)
+Job (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson core 1.291 API)";
+        parent.document.title="Job (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -100,7 +100,7 @@ java.lang.Object
               <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Job&lt;JobT,RunT&gt;</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, org.kohsuke.stapler.HttpDeletable</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model">DescriptorByNameOwner</A>, <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, org.kohsuke.stapler.HttpDeletable</DD>
 </DL>
 <DL>
 <DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>, <A HREF="../../hudson/model/ViewJob.html" title="class in hudson.model">ViewJob</A></DD>
@@ -195,7 +195,16 @@ A job is an runnable entity under the monitoring of Hudson.
 <TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Item.html#BUILD">BUILD</A>, <A HREF="../../hudson/model/Item.html#CONFIGURE">CONFIGURE</A>, <A HREF="../../hudson/model/Item.html#CREATE">CREATE</A>, <A HREF="../../hudson/model/Item.html#DELETE">DELETE</A>, <A HREF="../../hudson/model/Item.html#PERMISSIONS">PERMISSIONS</A>, <A HREF="../../hudson/model/Item.html#WORKSPACE">WORKSPACE</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Item.html#BUILD">BUILD</A>, <A HREF="../../hudson/model/Item.html#CONFIGURE">CONFIGURE</A>, <A HREF="../../hudson/model/Item.html#CREATE">CREATE</A>, <A HREF="../../hudson/model/Item.html#DELETE">DELETE</A>, <A HREF="../../hudson/model/Item.html#PERMISSIONS">PERMISSIONS</A>, <A HREF="../../hudson/model/Item.html#READ">READ</A>, <A HREF="../../hudson/model/Item.html#WORKSPACE">WORKSPACE</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;

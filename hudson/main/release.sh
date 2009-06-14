@@ -33,13 +33,18 @@ rm hudson.war || true
 
 tag=hudson-$(show-pom-version pom.xml | sed -e "s/-SNAPSHOT//g" -e "s/\\./_/g")
 export MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=256m"
-mvn -B -Dtag=$tag release:prepare || mvn -B -Dtag=$tag install release:prepare || true
-svn up -r head
-mvn -B -Dtag=$tag -Dresume release:prepare
+mvn -B -Dtag=$tag -DskipTests release:prepare || mvn -B -Dtag=$tag -DskipTests install release:prepare || true
+#svn up -r head
+#mvn -B -Dtag=$tag -Dresume release:prepare
 mvn release:perform
 
 id=$(show-pom-version target/checkout/pom.xml)
-#./publish-javadoc.sh
+case $id in
+*-SNAPSHOT)
+	echo Trying to release a SNAPSHOT
+	exit 1
+	;;
+esac
 javanettasks uploadFile hudson /releases/$id                "`date +"%Y/%m/%d"` release" Stable target/checkout/war/target/hudson.war | tee target/war-upload.log
 warUrl=$(cat target/war-upload.log | grep "^Posted" | sed -e "s/Posted //g")
 javanettasks uploadFile hudson /releases/source-bundles/$id "`date +"%Y/%m/%d"` release" Stable target/checkout/target/hudson-$id-src.zip
@@ -63,8 +68,9 @@ perl -p -i.bak -e "s|https://.+hudson\.jar|$jarUrl|" $WWW/hudson.jnlp
 cp $WWW/hudson.jnlp $WWW/$id.jnlp
 
 # push the permalink
-echo "Redirect 302 /latest/hudson.war $warUrl" > /tmp/latest.htaccess
-scp /tmp/latest.htaccess hudson.gotdns.com:/home/kohsuke/public_html_hudson/latest/.htaccess
+echo "Redirect 302 /latest/hudson.war $warUrl" > /tmp/latest.htaccess.war
+scp /tmp/latest.htaccess.war hudson.gotdns.com:/home/kohsuke/public_html_hudson/latest/.htaccess.war
+ssh hudson.gotdns.com "cd /home/kohsuke/public_html_hudson/latest; cat .htaccess.* > .htaccess"
 
 # update changelog.html
 ruby update.changelog.rb $id < $WWW/changelog.html > $WWW/changelog.new

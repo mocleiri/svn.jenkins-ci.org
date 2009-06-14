@@ -43,6 +43,7 @@ import hudson.util.AWTProblem;
 import org.jvnet.localizer.LocaleProvider;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.jelly.JellyFacet;
 import org.apache.tools.ant.types.FileSet;
 
 import javax.naming.Context;
@@ -192,8 +193,6 @@ public final class WebAppMain implements ServletContextListener {
                             throw new Error(e);
                         }
 
-                        Trigger.init(); // start running trigger
-
                         // trigger the loading of changelogs in the background,
                         // but give the system 10 seconds so that the first page
                         // can be served quickly
@@ -223,7 +222,7 @@ public final class WebAppMain implements ServletContextListener {
     }
 
     public static void installExpressionFactory(ServletContextEvent event) {
-        Stapler.setExpressionFactory(event, new ExpressionFactory2());
+        JellyFacet.setExpressionFactory(event, new ExpressionFactory2());
     }
 
 	/**

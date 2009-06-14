@@ -4,7 +4,7 @@ import hudson.model.AbstractBuild;
 import hudson.plugins.checkstyle.parser.Warning;
 import hudson.plugins.checkstyle.util.BuildResult;
 import hudson.plugins.checkstyle.util.ParserResult;
-import hudson.plugins.checkstyle.util.model.JavaProject;
+import hudson.plugins.checkstyle.util.ResultAction;
 
 /**
  * Represents the results of the Checkstyle analysis. One instance of this class
@@ -20,7 +20,7 @@ public class CheckStyleResult extends BuildResult {
     }
 
     /**
-     * Creates a new instance of <code>CheckStyleResult</code>.
+     * Creates a new instance of {@link CheckStyleResult}.
      *
      * @param build
      *            the current build as owner of this action
@@ -29,12 +29,13 @@ public class CheckStyleResult extends BuildResult {
      * @param result
      *            the parsed result with all annotations
      */
-    public CheckStyleResult(final AbstractBuild<?, ?> build, final String defaultEncoding, final ParserResult result) {
+    public CheckStyleResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
+            final ParserResult result) {
         super(build, defaultEncoding, result);
     }
 
     /**
-     * Creates a new instance of <code>CheckStyleResult</code>.
+     * Creates a new instance of {@link CheckStyleResult}.
      *
      * @param build
      *            the current build as owner of this action
@@ -45,7 +46,8 @@ public class CheckStyleResult extends BuildResult {
      * @param previous
      *            the result of the previous build
      */
-    public CheckStyleResult(final AbstractBuild<?, ?> build, final String defaultEncoding, final ParserResult result, final CheckStyleResult previous) {
+    public CheckStyleResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
+            final ParserResult result, final CheckStyleResult previous) {
         super(build, defaultEncoding, result, previous);
     }
 
@@ -111,30 +113,9 @@ public class CheckStyleResult extends BuildResult {
         return Messages.Checkstyle_ProjectAction_Name();
     }
 
-    /**
-     * Returns the results of the previous build.
-     *
-     * @return the result of the previous build, or <code>null</code> if no
-     *         such build exists
-     */
+    /** {@inheritDoc} */
     @Override
-    protected JavaProject getPreviousResult() {
-        CheckStyleResultAction action = getOwner().getAction(CheckStyleResultAction.class);
-        if (action.hasPreviousResultAction()) {
-            return action.getPreviousResultAction().getResult().getProject();
-        }
-        else {
-            return new JavaProject();
-        }
-    }
-
-    /**
-     * Returns whether a previous build result exists.
-     *
-     * @return <code>true</code> if a previous build result exists.
-     */
-    @Override
-    protected boolean hasPreviousResult() {
-        return getOwner().getAction(CheckStyleResultAction.class).hasPreviousResultAction();
+    protected Class<? extends ResultAction<? extends BuildResult>> getResultActionType() {
+        return CheckStyleResultAction.class;
     }
 }

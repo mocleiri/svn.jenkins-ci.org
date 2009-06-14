@@ -27,12 +27,14 @@ import hudson.tasks.BuildWrapper;
 import hudson.tasks.Builder;
 import hudson.util.VariableResolver;
 
+import java.io.Serializable;
 import java.util.Map;
+
+import net.sf.json.JSONObject;
 
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
-import net.sf.json.JSONObject;
 
 /**
  * A value for a parameter in a build.
@@ -61,11 +63,26 @@ import net.sf.json.JSONObject;
  * @see ParameterDefinition
  */
 @ExportedBean
-public abstract class ParameterValue {
+public abstract class ParameterValue implements Serializable {
 	protected final String name;
 
-    protected ParameterValue(String name) {
+    private String description;
+
+    protected ParameterValue(String name, String description) {
         this.name = name;
+        this.description = description;
+    }
+
+    protected ParameterValue(String name) {
+        this(name, null);
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**

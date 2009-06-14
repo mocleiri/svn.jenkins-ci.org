@@ -9,7 +9,6 @@ import hudson.maven.MavenModuleSetBuild;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
 import hudson.plugins.dry.util.HealthDescriptor;
-import hudson.plugins.dry.util.TrendReportHeightValidator;
 
 import java.util.List;
 import java.util.Map;
@@ -24,8 +23,6 @@ import java.util.Map;
 public class MavenDryResultAction extends DryResultAction implements AggregatableAction, MavenAggregatedReport {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = 1273798369273225973L;
-    /** Determines the height of the trend graph. */
-    private final String height;
     /** The default encoding to be used when reading and parsing files. */
     private final String defaultEncoding;
 
@@ -36,14 +33,12 @@ public class MavenDryResultAction extends DryResultAction implements Aggregatabl
      *            the associated build of this action
      * @param healthDescriptor
      *            health descriptor to use
-     * @param height
-     *            the height of the trend graph
      * @param defaultEncoding
      *            the default encoding to be used when reading and parsing files
      */
-    public MavenDryResultAction(final AbstractBuild<?, ?> owner, final HealthDescriptor healthDescriptor, final String height, final String defaultEncoding) {
+    public MavenDryResultAction(final AbstractBuild<?, ?> owner, final HealthDescriptor healthDescriptor,
+            final String defaultEncoding) {
         super(owner, healthDescriptor);
-        this.height = height;
         this.defaultEncoding = defaultEncoding;
     }
 
@@ -54,27 +49,25 @@ public class MavenDryResultAction extends DryResultAction implements Aggregatabl
      *            the associated build of this action
      * @param healthDescriptor
      *            health descriptor to use
-     * @param height
-     *            the height of the trend graph
      * @param defaultEncoding
      *            the default encoding to be used when reading and parsing files
      * @param result
      *            the result in this build
      */
-    public MavenDryResultAction(final AbstractBuild<?, ?> owner, final HealthDescriptor healthDescriptor, final String height, final String defaultEncoding, final DryResult result) {
+    public MavenDryResultAction(final AbstractBuild<?, ?> owner, final HealthDescriptor healthDescriptor,
+            final String defaultEncoding, final DryResult result) {
         super(owner, healthDescriptor, result);
-        this.height = height;
         this.defaultEncoding = defaultEncoding;
     }
 
     /** {@inheritDoc} */
     public MavenAggregatedReport createAggregatedAction(final MavenModuleSetBuild build, final Map<MavenModule, List<MavenBuild>> moduleBuilds) {
-        return new MavenDryResultAction(build, getHealthDescriptor(), height, defaultEncoding);
+        return new MavenDryResultAction(build, getHealthDescriptor(), defaultEncoding);
     }
 
     /** {@inheritDoc} */
     public Action getProjectAction(final MavenModuleSet moduleSet) {
-        return new DryProjectAction(moduleSet, TrendReportHeightValidator.defaultHeight(height));
+        return new DryProjectAction(moduleSet);
     }
 
     /** {@inheritDoc} */
@@ -83,18 +76,26 @@ public class MavenDryResultAction extends DryResultAction implements Aggregatabl
     }
 
     /**
-     * Called whenever a new module build is completed, to update the
-     * aggregated report. When multiple builds complete simultaneously,
-     * Hudson serializes the execution of this method, so this method
-     * needs not be concurrency-safe.
+     * Called whenever a new module build is completed, to update the aggregated
+     * report. When multiple builds complete simultaneously, Hudson serializes
+     * the execution of this method, so this method needs not be
+     * concurrency-safe.
      *
      * @param moduleBuilds
-     *      Same as <tt>MavenModuleSet.getModuleBuilds()</tt> but provided for convenience and efficiency.
+     *            Same as <tt>MavenModuleSet.getModuleBuilds()</tt> but provided
+     *            for convenience and efficiency.
      * @param newBuild
-     *      Newly completed build.
+     *            Newly completed build.
      */
     public void update(final Map<MavenModule, List<MavenBuild>> moduleBuilds, final MavenBuild newBuild) {
-        setResult(new DryResultBuilder().build(getOwner(), createAggregatedResult(moduleBuilds), defaultEncoding));
+        DryResult annotationsResult = new DryResultBuilder().buildMaven(getOwner(), createAggregatedResult(moduleBuilds), defaultEncoding);
+        setResult(annotationsResult);
+        updateBuildHealth(newBuild, annotationsResult);
     }
+
+    /** Backward compatibility. */
+    @SuppressWarnings("unused")
+    @Deprecated
+    private transient String height;
 }
 

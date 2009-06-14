@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.node_monitors.NodeMonitor (Hudson core 1.291 API)
+Uses of Class hudson.node_monitors.NodeMonitor (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.node_monitors.NodeMonitor (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.node_monitors.NodeMonitor (Hudson core 1.291 API)";
+        parent.document.title="Uses of Class hudson.node_monitors.NodeMonitor (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -121,7 +121,56 @@ Uses of <A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in
 <TD><CODE><B>ComputerSet.</B><B><A HREF="../../../hudson/model/ComputerSet.html#get_monitors()">get_monitors</A></B>()</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.301
+      Use <A HREF="../../../hudson/model/ComputerSet.html#getMonitors()"><CODE>ComputerSet.getMonitors()</CODE></A>.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>ComputerSet.</B><B><A HREF="../../../hudson/model/ComputerSet.html#getMonitors()">getMonitors</A></B>()</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>ComputerSet.</B><B><A HREF="../../../hudson/model/ComputerSet.html#getMonitors()">getMonitors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>ComputerSet.</B><B><A HREF="../../../hudson/model/ComputerSet.html#getNodeMonitorDescriptors()">getNodeMonitorDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposing <A HREF="../../../hudson/node_monitors/NodeMonitor.html#all()"><CODE>all()</CODE></A> for Jelly binding.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>ComputerSet.</B><B><A HREF="../../../hudson/model/ComputerSet.html#getNodeMonitorDescriptors()">getNodeMonitorDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposing <A HREF="../../../hudson/node_monitors/NodeMonitor.html#all()"><CODE>all()</CODE></A> for Jelly binding.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.Map&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;,<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>ComputerSet.</B><B><A HREF="../../../hudson/model/ComputerSet.html#getNonIgnoredMonitors()">getNonIgnoredMonitors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a subset pf <A HREF="../../../hudson/model/ComputerSet.html#getMonitors()"><CODE>ComputerSet.getMonitors()</CODE></A> that are <A HREF="../../../hudson/node_monitors/NodeMonitor.html#isIgnored()">not ignored</A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.Map&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;,<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>ComputerSet.</B><B><A HREF="../../../hudson/model/ComputerSet.html#getNonIgnoredMonitors()">getNonIgnoredMonitors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a subset pf <A HREF="../../../hudson/model/ComputerSet.html#getMonitors()"><CODE>ComputerSet.getMonitors()</CODE></A> that are <A HREF="../../../hudson/node_monitors/NodeMonitor.html#isIgnored()">not ignored</A>.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -163,7 +212,7 @@ Uses of <A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in
 <TD><CODE><B><A HREF="../../../hudson/node_monitors/DiskSpaceMonitor.html" title="class in hudson.node_monitors">DiskSpaceMonitor</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks available disk space of the node.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks available disk space of the remote FS root.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -180,6 +229,14 @@ Uses of <A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks the swap space availability.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/node_monitors/TemporarySpaceMonitor.html" title="class in hudson.node_monitors">TemporarySpaceMonitor</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Monitors the disk space of "/tmp".</TD>
 </TR>
 </TABLE>
 &nbsp;

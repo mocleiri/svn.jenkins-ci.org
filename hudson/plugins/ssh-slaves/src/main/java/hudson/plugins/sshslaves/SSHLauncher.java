@@ -6,9 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import com.trilead.ssh2.Connection;
 import com.trilead.ssh2.SFTPException;
@@ -25,6 +26,10 @@ import hudson.slaves.SlaveComputer;
 import hudson.util.IOException2;
 import hudson.util.StreamCopyThread;
 import hudson.util.StreamTaskListener;
+import hudson.Extension;
+import hudson.AbortException;
+import hudson.Util;
+import static hudson.Util.fixEmpty;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
@@ -60,6 +65,11 @@ public class SSHLauncher extends ComputerLauncher {
     private final String privatekey;
 
     /**
+     * Field jvmOptions.
+     */
+    private final String jvmOptions;
+
+    /**
      * Field connection
      */
     private transient Connection connection;
@@ -77,10 +87,12 @@ public class SSHLauncher extends ComputerLauncher {
      * @param username   The username to connect as.
      * @param password   The password to connect with.
      * @param privatekey The ssh privatekey to connect with.
+     * @param jvmOptions
      */
     @DataBoundConstructor
-    public SSHLauncher(String host, int port, String username, String password, String privatekey) {
+    public SSHLauncher(String host, int port, String username, String password, String privatekey, String jvmOptions) {
         this.host = host;
+        this.jvmOptions = jvmOptions;
         this.port = port == 0 ? 22 : port;
         this.username = username;
         this.password = password;
@@ -92,6 +104,14 @@ public class SSHLauncher extends ComputerLauncher {
      */
     public boolean isLaunchSupported() {
         return true;
+    }
+
+    /**
+     * Gets the JVM Options used to launch the slave JVM.
+     * @return
+     */
+    public String getJvmOptions() {
+        return jvmOptions == null ? "" : jvmOptions;
     }
 
     /**
@@ -129,10 +149,12 @@ public class SSHLauncher extends ComputerLauncher {
             reportEnvironment(listener);
 
             String java = null;
+            List<String> tried = new ArrayList<String>();
             outer:
-            for (JavaProvider provider : javaProviders) {
+            for (JavaProvider provider : JavaProvider.all()) {
                 for (String javaCommand : provider.getJavas(listener, connection)) {
                     try {
+                        tried.add(javaCommand);
                         java = checkJavaVersion(listener, javaCommand);
                         if (java != null) {
                             break outer;
@@ -143,7 +165,7 @@ public class SSHLauncher extends ComputerLauncher {
                 }
             }
             if (java == null) {
-                throw new IOException("Could not find any known supported java version");
+                throw new IOException("Could not find any known supported java version in "+tried);
             }
 
             String workingDirectory = getWorkingDirectory(computer);
@@ -178,8 +200,9 @@ public class SSHLauncher extends ComputerLauncher {
     private void startSlave(SlaveComputer computer, final StreamTaskListener listener, String java,
                             String workingDirectory) throws IOException {
         final Session session = connection.openSession();
-        // TODO handle escaping fancy characters in paths
-        session.execCommand("cd " + workingDirectory + " && " + java + " -jar slave.jar");
+        String cmd = "cd '" + workingDirectory + "' && " + java + (jvmOptions == null ? "" : " " + jvmOptions) + " -jar slave.jar";
+        listener.getLogger().println(Messages.SSHLauncher_StartingSlaveProcess(getTimestamp(), cmd));
+        session.execCommand(cmd);
         final StreamGobbler out = new StreamGobbler(session.getStdout());
         final StreamGobbler err = new StreamGobbler(session.getStderr());
 
@@ -294,6 +317,7 @@ public class SSHLauncher extends ComputerLauncher {
     }
 
     private void reportEnvironment(StreamTaskListener listener) throws IOException {
+        listener.getLogger().println(Messages._SSHLauncher_RemoteUserEnvironment(getTimestamp()));
         Session session = connection.openSession();
         try {
             session.execCommand("set");
@@ -315,6 +339,7 @@ public class SSHLauncher extends ComputerLauncher {
             } finally {
                 out.close();
                 err.close();
+                listener.getLogger().println();
             }
         } finally {
             session.close();
@@ -369,10 +394,29 @@ public class SSHLauncher extends ComputerLauncher {
     private void openConnection(StreamTaskListener listener) throws IOException {
         listener.getLogger().println(Messages.SSHLauncher_OpeningSSHConnection(getTimestamp(), host + ":" + port));
         connection.connect();
+        
+        String username = this.username;
+        if(fixEmpty(username)==null) {
+            username = System.getProperty("user.name");
+            LOGGER.fine("Defaulting the user name to "+username);
+        }
 
-        // TODO if using a key file, use the key file instead of password
         boolean isAuthenticated = false;
-        if (privatekey != null && privatekey.length() > 0) {
+        if(fixEmpty(privatekey)==null && fixEmpty(password)==null) {
+            // check the default key locations if no authentication method is explicitly configured.
+            File home = new File(System.getProperty("user.home"));
+            for (String keyName : Arrays.asList("id_rsa","id_dsa","identity")) {
+                File key = new File(home,".ssh/"+keyName);
+                if (key.exists()) {
+                    listener.getLogger()
+                            .println(Messages.SSHLauncher_AuthenticatingPublicKey(getTimestamp(), username, key));
+                    isAuthenticated = connection.authenticateWithPublicKey(username, key, null);
+                }
+                if (isAuthenticated)
+                    break;
+            }
+        }
+        if (!isAuthenticated && fixEmpty(privatekey).length() > 0) {
             File key = new File(privatekey);
             if (key.exists()) {
                 listener.getLogger()
@@ -385,6 +429,7 @@ public class SSHLauncher extends ComputerLauncher {
                     .println(Messages.SSHLauncher_AuthenticatingUserPass(getTimestamp(), username, "******"));
             isAuthenticated = connection.authenticateWithPassword(username, password);
         }
+
         if (isAuthenticated && connection.isAuthenticationComplete()) {
             listener.getLogger().println(Messages.SSHLauncher_AuthenticationSuccessful(getTimestamp()));
         } else {
@@ -392,7 +437,7 @@ public class SSHLauncher extends ComputerLauncher {
             connection.close();
             connection = null;
             listener.getLogger().println(Messages.SSHLauncher_ConnectionClosed(getTimestamp()));
-            throw new IOException(Messages.SSHLauncher_AuthenticationFailedException());
+            throw new AbortException(Messages.SSHLauncher_AuthenticationFailedException());
         }
     }
 
@@ -504,17 +549,8 @@ public class SSHLauncher extends ComputerLauncher {
 
     }
 
-    private static final List<JavaProvider> javaProviders = Arrays.<JavaProvider>asList(
-            new DefaultJavaProvider()
-    );
-
-    private static interface JavaProvider {
-
-        List<String> getJavas(StreamTaskListener listener, Connection connection);
-    }
-
-    private static class DefaultJavaProvider implements JavaProvider {
-
+    @Extension
+    public static class DefaultJavaProvider extends JavaProvider {
         public List<String> getJavas(StreamTaskListener listener, Connection connection) {
             return Arrays.asList("java",
                     "/usr/bin/java",
@@ -522,4 +558,6 @@ public class SSHLauncher extends ComputerLauncher {
                     "/usr/java/latest/bin/java");
         }
     }
+
+    private static final Logger LOGGER = Logger.getLogger(SSHLauncher.class.getName());
 }

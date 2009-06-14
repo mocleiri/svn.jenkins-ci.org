@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>1.291</version>
+    <version>1.309</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   
@@ -12,8 +12,8 @@
   <artifactId>SCTMExecutor</artifactId>
   <packaging>hpi</packaging>
   <name>SCTMExecutor</name>
-  <version>1.1-SNAPSHOT</version>
-  <url>http://hudson.gotdns.com/wiki/display/HUDSON/SCTMExecutor</url>
+  <version>1.2-SNAPSHOT</version>
+  <url>http://wiki.hudson-ci.org/display/HUDSON/SCTMExecutor</url>
   <description>This plug-in allows executions on a Borland SilkCentral Test Manager 2008 R2 or later.</description>
   
   <licenses>
@@ -29,30 +29,15 @@
     <dependency>
       <groupId>org.jvnet.hudson.main</groupId>
       <artifactId>hudson-core</artifactId>
-      <version>1.291</version>
+      <version>1.309</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.main</groupId>
       <artifactId>hudson-war</artifactId>
       <type>war</type>
-      <version>1.291</version>
+      <version>1.309</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-    	<groupId>axis</groupId>
-    	<artifactId>axis</artifactId>
-    	<version>1.4</version>
-    </dependency>
-    <dependency>
-    	<groupId>org.apache.axis</groupId>
-    	<artifactId>axis-jaxrpc</artifactId>
-    	<version>1.4</version>
-    </dependency>
-    <dependency>
-    	<groupId>tomcat</groupId>
-    	<artifactId>servlet-api</artifactId>
-    	<version>5.5.23</version>
     </dependency>
     <dependency>
     	<groupId>org.easymock</groupId>
@@ -60,6 +45,11 @@
     	<version>2.4</version>
     	<type>jar</type>
     	<scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>axis</groupId>
+    	<artifactId>axis</artifactId>
+    	<version>1.4</version>
     </dependency>
   </dependencies>
   <developers>

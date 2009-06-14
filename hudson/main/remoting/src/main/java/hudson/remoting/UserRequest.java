@@ -25,6 +25,7 @@ package hudson.remoting;
 
 import hudson.remoting.RemoteClassLoader.IClassLoader;
 import hudson.remoting.ExportTable.ExportList;
+import hudson.remoting.RemoteInvocationHandler.RPCRequest;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -81,9 +82,19 @@ final class UserRequest<RSP,EXC extends Throwable> extends Request<UserResponse<
             RSP r = null;
             Channel oldc = Channel.setCurrent(channel);
             try {
-                Object o = new ObjectInputStreamEx(new ByteArrayInputStream(request), cl).readObject();
+                Object o;
+                try {
+                    o = new ObjectInputStreamEx(new ByteArrayInputStream(request), cl).readObject();
+                } catch (ClassNotFoundException e) {
+                    throw new ClassNotFoundException("Failed to deserialize the Callable object. Perhaps you needed to implement DelegatingCallable?",e);
+                }
 
                 Callable<RSP,EXC> callable = (Callable<RSP,EXC>)o;
+                if(channel.isRestricted && !(callable instanceof RPCRequest))
+                    // if we allow restricted channel to execute arbitrary Callable, the remote JVM can pick up many existing
+                    // Callable implementations (such as ones in Hudson's FilePath) and do quite a lot. So restrict that.
+                    // OTOH, we need to allow RPCRequest so that method invocations on exported objects will go through.
+                    throw new SecurityException("Execution of "+callable.toString()+" is prohibited because the channel is restricted");
 
                 ClassLoader old = Thread.currentThread().getContextClassLoader();
                 Thread.currentThread().setContextClassLoader(cl);

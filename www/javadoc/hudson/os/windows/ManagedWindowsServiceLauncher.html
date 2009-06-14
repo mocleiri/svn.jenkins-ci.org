@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ManagedWindowsServiceLauncher (Hudson core 1.291 API)
+ManagedWindowsServiceLauncher (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ManagedWindowsServiceLauncher (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ManagedWindowsServiceLauncher (Hudson core 1.291 API)";
+        parent.document.title="ManagedWindowsServiceLauncher (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -207,8 +207,8 @@ Windows slave installed/managed as a service entirely remotely
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/os/windows/ManagedWindowsServiceLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">afterDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-                <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
+<TD><CODE><B><A HREF="../../../hudson/os/windows/ManagedWindowsServiceLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">afterDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+                <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows the <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> to tidy-up after a disconnect.</TD>
@@ -216,8 +216,8 @@ Windows slave installed/managed as a service entirely remotely
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/os/windows/ManagedWindowsServiceLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-       <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</CODE>
+<TD><CODE><B><A HREF="../../../hudson/os/windows/ManagedWindowsServiceLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launches the slave agent for the given <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.</TD>
@@ -229,7 +229,7 @@ Windows slave installed/managed as a service entirely remotely
 <TH ALIGN="left"><B>Methods inherited from class hudson.slaves.<A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">beforeDisconnect</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#getDescriptor()">getDescriptor</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#isLaunchSupported()">isLaunchSupported</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">afterDisconnect</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">beforeDisconnect</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">beforeDisconnect</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#getDescriptor()">getDescriptor</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#isLaunchSupported()">isLaunchSupported</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">launch</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -304,15 +304,15 @@ ManagedWindowsServiceLauncher</H3>
 </TR>
 </TABLE>
 
-<A NAME="launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)"><!-- --></A><H3>
+<A NAME="launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><!-- --></A><H3>
 launch</H3>
 <PRE>
 public void <B>launch</B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-                   <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)
+                   <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
             throws java.io.IOException,
                    java.lang.InterruptedException</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">ComputerLauncher</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">ComputerLauncher</A></CODE></B></DD>
 <DD>Launches the slave agent for the given <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.
 
  <p>
@@ -326,7 +326,7 @@ public void <B>launch</B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" ti
  its correct operation depends on this.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">launch</A></CODE> in class <CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">launch</A></CODE> in class <CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></CODE></DL>
 </DD>
 <DD><DL>
 <DD><CODE>listener</CODE> - The progress of the launch, as well as any error, should be sent to this listener.
@@ -339,17 +339,17 @@ public void <B>launch</B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" ti
 </DL>
 <HR>
 
-<A NAME="afterDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)"><!-- --></A><H3>
+<A NAME="afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><!-- --></A><H3>
 afterDisconnect</H3>
 <PRE>
 public void <B>afterDisconnect</B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-                            <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>&nbsp;listener)</PRE>
+                            <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">ComputerLauncher</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">ComputerLauncher</A></CODE></B></DD>
 <DD>Allows the <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> to tidy-up after a disconnect.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">afterDisconnect</A></CODE> in class <CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">afterDisconnect</A></CODE> in class <CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

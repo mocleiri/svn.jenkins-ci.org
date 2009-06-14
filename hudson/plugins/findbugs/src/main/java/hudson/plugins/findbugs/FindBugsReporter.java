@@ -63,8 +63,6 @@ public class FindBugsReporter extends HealthAwareMavenReporter {
      * @param unHealthy
      *            Report health as 0% when the number of warnings is greater
      *            than this value
-     * @param height
-     *            the height of the trend graph
      * @param thresholdLimit
      *            determines which warning priorities should be considered when
      *            evaluating the build stability and health
@@ -74,10 +72,9 @@ public class FindBugsReporter extends HealthAwareMavenReporter {
     @DataBoundConstructor
     public FindBugsReporter(final String threshold, final String newThreshold,
             final String failureThreshold, final String newFailureThreshold,
-            final String healthy, final String unHealthy,
-            final String height, final String thresholdLimit) {
+            final String healthy, final String unHealthy, final String thresholdLimit) {
         super(threshold, newThreshold, failureThreshold, newFailureThreshold,
-                healthy, unHealthy, height, thresholdLimit, "FINDBUGS");
+                healthy, unHealthy, thresholdLimit, "FINDBUGS");
     }
     // CHECKSTYLE:ON
 
@@ -133,7 +130,7 @@ public class FindBugsReporter extends HealthAwareMavenReporter {
     @Override
     protected BuildResult persistResult(final ParserResult project, final MavenBuild build) {
         FindBugsResult result = new FindBugsResultBuilder().build(build, project, getDefaultEncoding());
-        build.getActions().add(new MavenFindBugsResultAction(build, this, getHeight(), getDefaultEncoding(), result));
+        build.getActions().add(new MavenFindBugsResultAction(build, this, getDefaultEncoding(), result));
         build.registerAsProjectAction(FindBugsReporter.this);
 
         return result;
@@ -146,15 +143,15 @@ public class FindBugsReporter extends HealthAwareMavenReporter {
      * @return filename of the FindBugs results
      */
     private String determineFileName(final MojoInfo mojo) {
-        String fileName = MAVEN_FINDBUGS_XML_FILE;
+        String fileName = FINDBUGS_XML_FILE;
         try {
             Boolean isNativeFormat = mojo.getConfigurationValue("findbugsXmlOutput", Boolean.class);
-            if (Boolean.TRUE.equals(isNativeFormat)) {
-                fileName = FINDBUGS_XML_FILE;
+            if (Boolean.FALSE.equals(isNativeFormat)) {
+                fileName = MAVEN_FINDBUGS_XML_FILE;
             }
         }
         catch (ComponentConfigurationException exception) {
-            // ignore and use old format
+            // ignore and assume new format
         }
         return fileName;
     }
@@ -162,7 +159,7 @@ public class FindBugsReporter extends HealthAwareMavenReporter {
     /** {@inheritDoc} */
     @Override
     public Action getProjectAction(final MavenModule module) {
-        return new FindBugsProjectAction(module, getTrendHeight());
+        return new FindBugsProjectAction(module);
     }
 
     /** {@inheritDoc} */

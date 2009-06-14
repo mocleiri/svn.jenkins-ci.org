@@ -28,7 +28,6 @@ import hudson.FeedAdapter;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
-import hudson.maven.MavenModule;
 import hudson.model.Cause.LegacyCodeCause;
 import hudson.model.Cause.UserCause;
 import hudson.model.Cause.RemoteCause;
@@ -36,6 +35,7 @@ import hudson.model.Descriptor.FormException;
 import hudson.model.Fingerprint.RangeSet;
 import hudson.model.RunMap.Constructor;
 import hudson.model.listeners.RunListener;
+import hudson.model.Queue.WaitingItem;
 import hudson.remoting.AsyncFutureImpl;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.ChangeLogSet.Entry;
@@ -48,6 +48,8 @@ import hudson.tasks.BuildStep;
 import hudson.tasks.BuildTrigger;
 import hudson.tasks.Mailer;
 import hudson.tasks.Publisher;
+import hudson.tasks.BuildStepDescriptor;
+import hudson.tasks.BuildWrapperDescriptor;
 import hudson.triggers.SCMTrigger;
 import hudson.triggers.Trigger;
 import hudson.triggers.TriggerDescriptor;
@@ -84,7 +86,7 @@ import java.util.logging.Logger;
 /**
  * Base implementation of {@link Job}s that build software.
  *
- * For now this is primarily the common part of {@link Project} and {@link MavenModule}.
+ * For now this is primarily the common part of {@link Project} and MavenModule.
  *
  * @author Kohsuke Kawaguchi
  * @see AbstractBuild
@@ -193,6 +195,8 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
             triggers = new Vector<Trigger<?>>();
         for (Trigger t : triggers)
             t.start(this,false);
+        if(scm==null)
+            scm = new NullSCM(); // perhaps it was pointing to a plugin that no longer exists.
 
         if(transientActions==null)
             transientActions = new Vector<Action>();    // happens when loaded from disk
@@ -407,10 +411,32 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
                 if(newChildProjects.isEmpty()) {
                     pl.remove(BuildTrigger.class);
                 } else {
-                    BuildTrigger existing = pl.get(BuildTrigger.class);
+                    // here, we just need to replace the old one with the new one,
+                    // but there was a regression (we don't know when it started) that put multiple BuildTriggers
+                    // into the list.
+                    // for us not to lose the data, we need to merge them all.
+                    List<BuildTrigger> existingList = pl.getAll(BuildTrigger.class);
+                    BuildTrigger existing;
+                    switch (existingList.size()) {
+                    case 0:
+                        existing = null;
+                        break;
+                    case 1:
+                        existing = existingList.get(0);
+                        break;
+                    default:
+                        pl.removeAll(BuildTrigger.class);
+                        Set<AbstractProject> combinedChildren = new HashSet<AbstractProject>();
+                        for (BuildTrigger bt : existingList)
+                            combinedChildren.addAll(bt.getChildProjects());
+                        existing = new BuildTrigger(new ArrayList<AbstractProject>(combinedChildren),existingList.get(0).getThreshold());
+                        pl.add(existing);
+                        break;
+                    }
+
                     if(existing!=null && existing.hasSame(newChildProjects))
                         continue;   // no need to touch
-                    pl.add(new BuildTrigger(newChildProjects,
+                    pl.replace(new BuildTrigger(newChildProjects,
                         existing==null?Result.SUCCESS:existing.getThreshold()));
                 }
             }
@@ -468,8 +494,16 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      * @return whether the build was actually scheduled
      */
     public boolean scheduleBuild(int quietPeriod, Cause c, Action... actions) {
+        return scheduleBuild2(quietPeriod,c,actions)!=null;
+    }
+
+    /**
+     * Schedules a build of this project, and returns a {@link Future} object
+     * to wait for the completion of the build.
+     */
+    public Future<R> scheduleBuild2(int quietPeriod, Cause c, Action... actions) {
         if (isDisabled())
-            return false;
+            return null;
 
         List<Action> queueActions = new ArrayList(Arrays.asList(actions));
         if (isParameterized() && Util.filter(queueActions, ParametersAction.class).isEmpty()) {
@@ -480,10 +514,10 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
             queueActions.add(new CauseAction(c));
         }
 
-        return Hudson.getInstance().getQueue().add(
-                this,
-                quietPeriod,
-                queueActions.toArray(new Action[queueActions.size()]));
+        WaitingItem i = Hudson.getInstance().getQueue().schedule(this, quietPeriod, queueActions);
+        if(i!=null)
+            return (Future)i.getFuture();
+        return null;
     }
 
     private List<ParameterValue> getDefaultParametersValues() {
@@ -529,34 +563,6 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     }
 
     /**
-     * Schedules a build of this project, and returns a {@link Future} object
-     * to wait for the completion of the build.
-     */
-    public Future<R> scheduleBuild2(int quietPeriod, Cause c, Action... actions) {
-        R lastBuild = getLastBuild();
-        final int n;
-        if(lastBuild!=null) n = lastBuild.getNumber();
-        else                n = -1;
-
-        Future<R> f = new AsyncFutureImpl<R>() {
-            final RunListener r = new RunListener<AbstractBuild>(AbstractBuild.class) {
-                public void onFinalized(AbstractBuild r) {
-                    if(r.getProject()==AbstractProject.this && r.getNumber()>n) {
-                        set((R)r);
-                        unregister();
-                    }
-                }
-            };
-
-            { r.register(); }
-        };
-
-        scheduleBuild(quietPeriod, c, actions);
-
-        return f;
-    }
-
-    /**
      * Schedules a polling of this project.
      */
     public boolean schedulePolling() {
@@ -578,14 +584,6 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     @Override
     public Queue.Item getQueueItem() {
         return Hudson.getInstance().getQueue().getItem(this);
-    }
-
-    /**
-     * Returns true if a build of this project is in progress.
-     */
-    public boolean isBuilding() {
-        R b = getLastBuild();
-        return b!=null && b.isBuilding();
     }
 
     /**
@@ -1091,7 +1089,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
                     // TODO: more unit handling
                     if(delay.endsWith("sec"))   delay=delay.substring(0,delay.length()-3);
                     if(delay.endsWith("secs"))  delay=delay.substring(0,delay.length()-4);
-                    Hudson.getInstance().getQueue().add(this, Integer.parseInt(delay), 
+                    Hudson.getInstance().getQueue().schedule(this, Integer.parseInt(delay),
                     		new CauseAction(cause));
                 } catch (NumberFormatException e) {
                     throw new ServletException("Invalid delay parameter value: "+delay);
@@ -1166,7 +1164,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
 
         authToken = BuildAuthorizationToken.create(req);
 
-        setScm(SCMS.parseSCM(req));
+        setScm(SCMS.parseSCM(req,this));
 
         for (Trigger t : triggers)
             t.stop();
@@ -1221,10 +1219,16 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     /**
      * Wipes out the workspace.
      */
-    public void doDoWipeOutWorkspace(StaplerResponse rsp) throws IOException, InterruptedException {
+    public void doDoWipeOutWorkspace(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException, InterruptedException {
         checkPermission(BUILD);
-        getWorkspace().deleteRecursive();
-        rsp.sendRedirect2(".");
+        if (getScm().processWorkspaceBeforeDeletion(this, getWorkspace(), null)) {
+            getWorkspace().deleteRecursive();
+            rsp.sendRedirect2(".");
+        }
+        // If we get here, that means the SCM blocked the workspace deletion.
+        else {
+            req.getView(this, "wipeOutWorkspaceBlocked.jelly").forward(req, rsp);
+        }
     }
 
     public void doDisable(StaplerResponse rsp) throws IOException, ServletException {
@@ -1298,6 +1302,38 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
                 }
             },
             req, rsp );
+    }
+
+    /**
+     * {@link AbstractProject} subtypes should implement this base class as a descriptor.
+     *
+     * @since 1.294
+     */
+    public static abstract class AbstractProjectDescriptor extends TopLevelItemDescriptor {
+        /**
+         * {@link AbstractProject} subtypes can override this method to veto some {@link Descriptor}s
+         * from showing up on their configuration screen. This is often useful when you are building
+         * a workflow/company specific project type, where you want to limit the number of choices
+         * given to the users.
+         *
+         * <p>
+         * Some {@link Descriptor}s define their own schemes for controlling applicability
+         * (such as {@link BuildStepDescriptor#isApplicable(Class)}),
+         * This method works like AND in conjunction with them;
+         * Both this method and that method need to return true in order for a given {@link Descriptor}
+         * to show up for the given {@link Project}.
+         *
+         * <p>
+         * The default implementation returns true for everything.
+         *
+         * @see BuildStepDescriptor#isApplicable(Class) 
+         * @see BuildWrapperDescriptor#isApplicable(AbstractProject) 
+         * @see TriggerDescriptor#isApplicable(Item)
+         */
+        @Override
+        public boolean isApplicable(Descriptor descriptor) {
+            return true;
+        }
     }
 
     /**

@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ListView (Hudson core 1.291 API)
+ListView (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ListView (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ListView (Hudson core 1.291 API)";
+        parent.document.title="ListView (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -77,9 +77,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.View">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -163,14 +163,6 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Field Summary</B></FONT></TH>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;java.util.List&lt;<A HREF="../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ListView.html#columns">columns</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.model.View"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -233,7 +225,7 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.lang.Iterable&lt;<A HREF="../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ListView.html#getColumns()">getColumns</A></B>()</CODE>
 
 <BR>
@@ -320,25 +312,6 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 &nbsp;
 <P>
 
-<!-- ============ FIELD DETAIL =========== -->
-
-<A NAME="field_detail"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
-<B>Field Detail</B></FONT></TH>
-</TR>
-</TABLE>
-
-<A NAME="columns"><!-- --></A><H3>
-columns</H3>
-<PRE>
-protected transient java.util.List&lt;<A HREF="../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt; <B>columns</B></PRE>
-<DL>
-<DL>
-</DL>
-</DL>
-
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
 <A NAME="constructor_detail"><!-- --></A>
@@ -397,7 +370,7 @@ public java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interfa
 <A NAME="getColumns()"><!-- --></A><H3>
 getColumns</H3>
 <PRE>
-public java.util.List&lt;<A HREF="../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt; <B>getColumns</B>()</PRE>
+public java.lang.Iterable&lt;<A HREF="../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt; <B>getColumns</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -518,7 +491,9 @@ public void <B>onJobRenamed</B>(<A HREF="../../hudson/model/Item.html" title="in
 <A NAME="submit(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
 submit</H3>
 <PRE>
-protected void <B>submit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
+protected void <B>submit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)
+               throws javax.servlet.ServletException,
+                      <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
 <DL>
 <DD>Handles the configuration submission.
 
@@ -528,7 +503,10 @@ protected void <B>submit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/View.html#submit(org.kohsuke.stapler.StaplerRequest)">submit</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>javax.servlet.ServletException</CODE>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
@@ -583,9 +561,9 @@ protected void <B>submit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.View">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>

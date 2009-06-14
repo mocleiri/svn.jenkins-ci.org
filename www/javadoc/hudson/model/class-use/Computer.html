@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.Computer (Hudson core 1.291 API)
+Uses of Class hudson.model.Computer (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Computer (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Computer (Hudson core 1.291 API)";
+        parent.document.title="Uses of Class hudson.model.Computer (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -325,11 +325,27 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.Long</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../../hudson/node_monitors/DiskSpaceMonitorDescriptor.DiskSpace.html" title="class in hudson.node_monitors">DiskSpaceMonitorDescriptor.DiskSpace</A></CODE></FONT></TD>
 <TD><CODE><B>DiskSpaceMonitor.</B><B><A HREF="../../../hudson/node_monitors/DiskSpaceMonitor.html#getFreeSpace(hudson.model.Computer)">getFreeSpace</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/node_monitors/DiskSpaceMonitorDescriptor.DiskSpace.html" title="class in hudson.node_monitors">DiskSpaceMonitorDescriptor.DiskSpace</A></CODE></FONT></TD>
+<TD><CODE><B>TemporarySpaceMonitor.</B><B><A HREF="../../../hudson/node_monitors/TemporarySpaceMonitor.html#getFreeSpace(hudson.model.Computer)">getFreeSpace</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>AbstractNodeMonitorDescriptor.</B><B><A HREF="../../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html#markOffline(hudson.model.Computer)">markOffline</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Utility method to mark the computer offline for derived classes.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -451,7 +467,28 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 <TD><CODE><B>ComputerListener.</B><B><A HREF="../../../hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer)">onOnline</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.292
+      Use <A HREF="../../../hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer, hudson.model.TaskListener)"><CODE>ComputerListener.onOnline(Computer, TaskListener)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ComputerListener.</B><B><A HREF="../../../hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer, hudson.model.TaskListener)">onOnline</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c,
+         <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called right after a <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> comes online.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ComputerListener.</B><B><A HREF="../../../hudson/slaves/ComputerListener.html#preOnline(hudson.model.Computer, hudson.remoting.Channel, hudson.FilePath, hudson.model.TaskListener)">preOnline</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c,
+          <A HREF="../../../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A>&nbsp;channel,
+          <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;root,
+          <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called before a <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> is marked online.</TD>
 </TR>
 </TABLE>
 &nbsp;

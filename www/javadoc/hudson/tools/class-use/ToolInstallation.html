@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.tools.ToolInstallation (Hudson core 1.291 API)
+Uses of Class hudson.tools.ToolInstallation (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.tools.ToolInstallation (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.tools.ToolInstallation (Hudson core 1.291 API)";
+        parent.document.title="Uses of Class hudson.tools.ToolInstallation (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -151,12 +151,36 @@ Uses of <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hu
 <TD><CODE><B><A HREF="../../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the Ant installation on the system.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a Maven installation in a system.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Method parameters in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A> with type arguments of type <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Ant.AntInstaller.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/Ant.AntInstaller.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;&nbsp;toolType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Maven.MavenInstaller.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/Maven.MavenInstaller.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;&nbsp;toolType)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -185,6 +209,38 @@ Uses of <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hu
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty&lt;T extends ToolInstallation&gt;</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extensible property of <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/tools/package-summary.html">hudson.tools</A> declared as <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../hudson/tools/ToolProperty.html" title="type parameter in ToolProperty">T</A></CODE></FONT></TD>
+<TD><CODE><B>ToolProperty.</B><B><A HREF="../../../hudson/tools/ToolProperty.html#tool">tool</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A></CODE></FONT></TD>
+<TD><CODE><B>ToolInstaller.</B><B><A HREF="../../../hudson/tools/ToolInstaller.html#tool">tool</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -226,6 +282,14 @@ Uses of <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hu
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.Class&lt;<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>InstallSourceProperty.</B><B><A HREF="../../../hudson/tools/InstallSourceProperty.html#type()">type</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -253,20 +317,145 @@ Uses of <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B>ToolLocationNodeProperty.</B><B><A HREF="../../../hudson/tools/ToolLocationNodeProperty.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation)">getToolHome</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
-            <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation)</CODE>
+<TD><CODE><B>ToolLocationNodeProperty.</B><B><A HREF="../../../hudson/tools/ToolLocationNodeProperty.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">getToolHome</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+            <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation,
+            <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the location of the tool is overridden for the given node, and if so,
- return the node-specific home directory.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <CODE>ToolInstallation#translateFor(Node)</CODE></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>InstallerTranslator.</B><B><A HREF="../../../hudson/tools/InstallerTranslator.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">getToolHome</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+            <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+            <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>ToolLocationTranslator.</B><B><A HREF="../../../hudson/tools/ToolLocationTranslator.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">getToolHome</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+            <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation,
+            <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called for each <A HREF="../../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)"><CODE>translateFor(Node, TaskListener)</CODE></A> invocations
+ (which normally means it's invoked for each <A HREF="../../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node, hudson.model.TaskListener)"><CODE>NodeSpecific.forNode(Node, TaskListener)</CODE></A>)
+ to translate the tool location into the node specific location.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>DownloadFromUrlInstaller.</B><B><A HREF="../../../hudson/tools/DownloadFromUrlInstaller.html#isUpToDate(hudson.FilePath, hudson.tools.DownloadFromUrlInstaller.Installable, hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">isUpToDate</A></B>(<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;expectedLocation,
+           <A HREF="../../../hudson/tools/DownloadFromUrlInstaller.Installable.html" title="class in hudson.tools">DownloadFromUrlInstaller.Installable</A>&nbsp;i,
+           <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+           <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+           <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the specified expected location already contains the installed version of the tool.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>DownloadFromUrlInstaller.</B><B><A HREF="../../../hudson/tools/DownloadFromUrlInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                    <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                    <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>ToolInstaller.</B><B><A HREF="../../../hudson/tools/ToolInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                    <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                    <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ensure that the configured tool is really installed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>JDKInstaller.</B><B><A HREF="../../../hudson/tools/JDKInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                    <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                    <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>CommandInstaller.</B><B><A HREF="../../../hudson/tools/CommandInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                    <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                    <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>ZipExtractionInstaller.</B><B><A HREF="../../../hudson/tools/ZipExtractionInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                    <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                    <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ToolDescriptor.</B><B><A HREF="../../../hudson/tools/ToolDescriptor.html#setInstallations(T[])">setInstallations</A></B>(<A HREF="../../../hudson/tools/ToolDescriptor.html" title="type parameter in ToolDescriptor">T</A>[]&nbsp;installations)</CODE>
+<TD><CODE><B>ToolDescriptor.</B><B><A HREF="../../../hudson/tools/ToolDescriptor.html#setInstallations(T...)">setInstallations</A></B>(<A HREF="../../../hudson/tools/ToolDescriptor.html" title="type parameter in ToolDescriptor">T</A>...&nbsp;installations)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overwrites <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>InstallSourceProperty.</B><B><A HREF="../../../hudson/tools/InstallSourceProperty.html#setTool(hudson.tools.ToolInstallation)">setTool</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;t)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ToolInstaller.</B><B><A HREF="../../../hudson/tools/ToolInstaller.html#setTool(hudson.tools.ToolInstallation)">setTool</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;t)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called during the initialization to tell <A HREF="../../../hudson/tools/ToolInstaller.html" title="class in hudson.tools"><CODE>ToolInstaller</CODE></A> what <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>
+ it is configured against.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Method parameters in <A HREF="../../../hudson/tools/package-summary.html">hudson.tools</A> with type arguments of type <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../../../hudson/tools/ToolInstallerDescriptor.html" title="class in hudson.tools">ToolInstallerDescriptor</A>&lt;?&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>ToolInstallerDescriptor.</B><B><A HREF="../../../hudson/tools/ToolInstallerDescriptor.html#for_(java.lang.Class)">for_</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filters <A HREF="../../../hudson/tools/ToolInstallerDescriptor.html#all()"><CODE>ToolInstallerDescriptor.all()</CODE></A> by eliminating things that are not applicable to the given type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>ToolInstallerDescriptor.</B><B><A HREF="../../../hudson/tools/ToolInstallerDescriptor.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;&nbsp;toolType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Controls what kind of <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A> this installer can be applied to.</TD>
 </TR>
 </TABLE>
 &nbsp;

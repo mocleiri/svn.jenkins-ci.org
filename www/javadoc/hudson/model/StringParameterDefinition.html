@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-StringParameterDefinition (Hudson core 1.291 API)
+StringParameterDefinition (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ StringParameterDefinition (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StringParameterDefinition (Hudson core 1.291 API)";
+        parent.document.title="StringParameterDefinition (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -98,7 +98,7 @@ java.lang.Object
       <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.StringParameterDefinition</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>&gt;</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>&gt;, java.io.Serializable</DD>
 </DL>
 <HR>
 <DL>
@@ -110,6 +110,8 @@ Parameter whose value is a string value.
 <P>
 
 <P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../serialized-form.html#hudson.model.StringParameterDefinition">Serialized Form</A></DL>
 <HR>
 
 <P>
@@ -184,6 +186,14 @@ Parameter whose value is a string value.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/StringParameterDefinition.html#StringParameterDefinition(java.lang.String, java.lang.String, java.lang.String)">StringParameterDefinition</A></B>(java.lang.String&nbsp;name,
+                          java.lang.String&nbsp;defaultValue,
+                          java.lang.String&nbsp;description)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ========== METHOD SUMMARY =========== -->
@@ -242,7 +252,7 @@ Parameter whose value is a string value.
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/ParameterDefinition.html#all()">all</A>, <A HREF="../../hudson/model/ParameterDefinition.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/model/ParameterDefinition.html#getName()">getName</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/ParameterDefinition.html#all()">all</A>, <A HREF="../../hudson/model/ParameterDefinition.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/ParameterDefinition.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/model/ParameterDefinition.html#getName()">getName</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -267,12 +277,22 @@ Parameter whose value is a string value.
 </TR>
 </TABLE>
 
-<A NAME="StringParameterDefinition(java.lang.String, java.lang.String)"><!-- --></A><H3>
+<A NAME="StringParameterDefinition(java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
 StringParameterDefinition</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>StringParameterDefinition</B>(java.lang.String&nbsp;name,
-                                                      java.lang.String&nbsp;defaultValue)</PRE>
+                                                      java.lang.String&nbsp;defaultValue,
+                                                      java.lang.String&nbsp;description)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="StringParameterDefinition(java.lang.String, java.lang.String)"><!-- --></A><H3>
+StringParameterDefinition</H3>
+<PRE>
+public <B>StringParameterDefinition</B>(java.lang.String&nbsp;name,
+                                 java.lang.String&nbsp;defaultValue)</PRE>
 <DL>
 </DL>
 

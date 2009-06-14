@@ -2,10 +2,10 @@ package hudson.plugins.disk_usage;
 
 import hudson.model.AbstractProject;
 import hudson.model.Action;
-import hudson.model.Descriptor.FormException;
 import hudson.model.Job;
 import hudson.model.JobProperty;
 import hudson.model.JobPropertyDescriptor;
+import hudson.Extension;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -21,27 +21,22 @@ public class DiskUsageProperty extends JobProperty<Job<?, ?>> {
     public Action getJobAction(Job<?, ?> job) {
         return new ProjectDiskUsageAction((AbstractProject) job);//??
     }
-     
-    public JobPropertyDescriptor getDescriptor() {
-        return DESCRIPTOR;
-    }
-    
-    public static final DiskUsageDescriptor DESCRIPTOR = new DiskUsageDescriptor();
 
+    @Extension
     public static final class DiskUsageDescriptor extends JobPropertyDescriptor {
 
-        //Show graph on the project page?
-        private Boolean showGraph;
-        
         public DiskUsageDescriptor() {
-            super(DiskUsageProperty.class);
+            load();
         }
-        
+
+        //Show graph on the project page?
+        private boolean showGraph;
+
         @Override
         public String getDisplayName() {
             return "Disk usage";
         }
-        
+
 
         @Override
         public DiskUsageProperty newInstance(StaplerRequest req, JSONObject formData) throws FormException {
@@ -62,13 +57,13 @@ public class DiskUsageProperty extends JobProperty<Job<?, ?>> {
 
         public boolean isShowGraph() {
             //The graph is shown by default
-            return (showGraph != null) ? showGraph : true;
+            return showGraph;
         }
 
         public void setShowGraph(Boolean showGraph) {
             this.showGraph = showGraph;
         }
-    }         
+    }
 }
 
     

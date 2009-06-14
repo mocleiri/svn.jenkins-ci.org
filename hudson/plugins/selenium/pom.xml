@@ -3,30 +3,60 @@
   <parent>
     <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>1.291</version>
+    <version>1.309</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   
   <artifactId>selenium</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>hpi</packaging>
   <name>Hudson Selenium plugin</name>
+  <url>http://wiki.hudson-ci.org/display/HUDSON/Selenium+Plugin</url>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jvnet.maven-antrun-extended-plugin</groupId>
+        <artifactId>maven-antrun-extended-plugin</artifactId>
+        <version>1.38</version>
+        <executions>
+          <execution>
+            <!-- bundle the selenium grid distribution in the hpi file. -->
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <verifyArtifact>false</verifyArtifact>
+              <tasks>
+                <resolveArtifact groupId="org.jvnet.hudson" artifactId="selenium-grid" type="tgz" classifier="min" version="${selenium.version}" tofile="target/classes/hudson/plugins/selenium/selenium-grid.tgz" />
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
   <dependencies>
     <dependency>
+      <!-- selenium contains its own Jetty, and unless we declare this dependency first,
+      its Jetty will show up in front of the jetty in the test harness -->
+      <groupId>org.jvnet.hudson.main</groupId>
+      <artifactId>hudson-test-harness</artifactId>
+      <version>${parent.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
       <groupId>org.jvnet.hudson</groupId>
       <artifactId>selenium-grid-hub-standalone</artifactId>
-      <version>1.0.1</version>
+      <version>${selenium.version}</version>
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson</groupId>
-      <artifactId>selenium-grid-remote-control-standalone</artifactId>
-      <version>1.0.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jvnet.hudson</groupId>
-      <artifactId>selenium-grid-remote-control-standalone</artifactId>
-      <version>1.0.1</version>
+      <artifactId>selenium-grid-remote-control</artifactId>
+      <version>${selenium.version}</version>
     </dependency>
     <dependency>
       <groupId>org.openqa.selenium.server</groupId>
@@ -39,12 +69,26 @@
         </exclusion>
       </exclusions>
     </dependency>
+
+    <dependency>
+      <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+      <artifactId>selenium-java-client-driver</artifactId>
+      <version>1.0-beta-2</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>jetty</groupId>
+          <artifactId>org.mortbay.jetty</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
   </dependencies>
 
-  <repositories>
-    <repository>
-      <id>selenium</id>
-      <url>http://archiva.openqa.org/repository/releases/</url>
-    </repository>
-  </repositories>
+  <properties>
+    <selenium.version>1.0.3-hudson-1</selenium.version>
+  </properties>
 </project>

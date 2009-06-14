@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Mailer.DescriptorImpl (Hudson core 1.291 API)
+Mailer.DescriptorImpl (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Mailer.DescriptorImpl (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Mailer.DescriptorImpl (Hudson core 1.291 API)";
+        parent.document.title="Mailer.DescriptorImpl (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -151,6 +151,15 @@ java.lang.Object
 <TD><CODE><A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
@@ -203,20 +212,16 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html#doAddressCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doAddressCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-               org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-               java.lang.String&nbsp;value)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html#doAddressCheck(java.lang.String)">doAddressCheck</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html#doCheckUrl(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doCheckUrl</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-           org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-           java.lang.String&nbsp;value)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html#doCheckUrl(java.lang.String)">doCheckUrl</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks the URL in <tt>global.jelly</tt></TD>
@@ -224,8 +229,7 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html#doSendTestMail(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSendTestMail</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html#doSendTestMail(org.kohsuke.stapler.StaplerResponse)">doSendTestMail</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send an email to the admin address</TD>
@@ -701,51 +705,36 @@ public <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"
 </DL>
 <HR>
 
-<A NAME="doCheckUrl(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
+<A NAME="doCheckUrl(java.lang.String)"><!-- --></A><H3>
 doCheckUrl</H3>
 <PRE>
-public void <B>doCheckUrl</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                       org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                       <FONT SIZE="-1">@QueryParameter</FONT>
-                       java.lang.String&nbsp;value)
-                throws java.io.IOException,
-                       javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckUrl</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                 java.lang.String&nbsp;value)</PRE>
 <DL>
 <DD>Checks the URL in <tt>global.jelly</tt>
 <P>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="doAddressCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
+<A NAME="doAddressCheck(java.lang.String)"><!-- --></A><H3>
 doAddressCheck</H3>
 <PRE>
-public void <B>doAddressCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                           org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                           <FONT SIZE="-1">@QueryParameter</FONT>
-                           java.lang.String&nbsp;value)
-                    throws java.io.IOException,
-                           javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doAddressCheck</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                     java.lang.String&nbsp;value)</PRE>
 <DL>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="doSendTestMail(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doSendTestMail(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doSendTestMail</H3>
 <PRE>
-public void <B>doSendTestMail</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+public void <B>doSendTestMail</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                     throws java.io.IOException,
                            javax.servlet.ServletException,
                            java.lang.InterruptedException</PRE>
@@ -753,7 +742,7 @@ public void <B>doSendTestMail</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DD>Send an email to the admin address
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>req</CODE> - ignored request<DD><CODE>rsp</CODE> - used to write the result of the sending
+<DT><B>Parameters:</B><DD><CODE>rsp</CODE> - used to write the result of the sending
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE>
@@ -775,7 +764,7 @@ public boolean <B>isApplicable</B>(java.lang.Class&lt;? extends <A HREF="../../h
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>true to allow user to configure this post-promotion task for the given project.</DL>
+<DT><B>Returns:</B><DD>true to allow user to configure this post-promotion task for the given project.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/AbstractProject.AbstractProjectDescriptor.html#isApplicable(hudson.model.Descriptor)"><CODE>AbstractProject.AbstractProjectDescriptor.isApplicable(Descriptor)</CODE></A></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

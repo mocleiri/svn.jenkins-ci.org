@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Dean Yu, Stephen Connolly, Tom Huybrechts
+ * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Yahoo! Inc., Stephen Connolly, Tom Huybrechts
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,6 @@
  */
 package hudson;
 
-import hudson.maven.ExecutedMojo;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.Descriptor;
@@ -42,11 +41,13 @@ import hudson.model.Project;
 import hudson.model.Run;
 import hudson.model.TopLevelItem;
 import hudson.model.View;
+import hudson.model.JDK;
 import hudson.search.SearchableModelObject;
 import hudson.security.AccessControlled;
 import hudson.security.AuthorizationStrategy;
 import hudson.security.Permission;
 import hudson.security.SecurityRealm;
+import hudson.security.csrf.CrumbIssuer;
 import hudson.slaves.Cloud;
 import hudson.slaves.ComputerLauncher;
 import hudson.slaves.NodeProperty;
@@ -59,6 +60,8 @@ import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
 import hudson.util.Area;
 import hudson.util.Iterators;
+import hudson.scm.SCM;
+import hudson.scm.SCMDescriptor;
 import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
@@ -69,6 +72,7 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.jexl.parser.ASTSizeFunction;
 import org.apache.commons.jexl.util.Introspector;
 import org.jvnet.animal_sniffer.IgnoreJRERequirement;
+import org.jvnet.tiger_types.Types;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
@@ -89,6 +93,8 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.MonitorInfo;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
+import java.lang.reflect.Type;
+import java.lang.reflect.ParameterizedType;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -142,6 +148,31 @@ public class Functions {
 
     public static String rfc822Date(Calendar cal) {
         return Util.RFC822_DATETIME_FORMATTER.format(cal.getTime());
+    }
+
+    /**
+     * Given {@code c=MyList (extends ArrayList<Foo>), base=List}, compute the parameterization of 'base'
+     * that's assignable from 'c' (in this case {@code List<Foo>}), and return its n-th type parameter
+     * (n=0 would return {@code Foo}).
+     *
+     * <p>
+     * This method is useful for doing type arithmetic.
+     *
+     * @throws AssertionError
+     *      if c' is not parameterized.
+     */
+    public static <B> Class getTypeParameter(Class<? extends B> c, Class<B> base, int n) {
+        Type parameterization = Types.getBaseClass(c,base);
+        if (parameterization instanceof ParameterizedType) {
+            ParameterizedType pt = (ParameterizedType) parameterization;
+            return Types.erasure(Types.getTypeArgument(pt,n));
+        } else {
+            throw new AssertionError(c+" doesn't properly parameterize "+base);
+        }
+    }
+
+    public JDK.DescriptorImpl getJDKDescriptor() {
+        return Hudson.getInstance().getDescriptorByType(JDK.DescriptorImpl.class);
     }
 
     /**
@@ -304,6 +335,11 @@ public class Functions {
         return Items.toNameList(projects);
     }
 
+    /**
+     * @deprecated as of 1.294
+     *      JEXL now supports the real ternary operator "x?y:z", so this work around
+     *      is no longer necessary.
+     */
     public static Object ifThenElse(boolean cond, Object thenValue, Object elseValue) {
         return cond ? thenValue : elseValue;
     }
@@ -360,7 +396,7 @@ public class Functions {
     /**
      * Set to true if you need to use the debug version of YUI.
      */
-    public static boolean DEBUG_YUI = System.getProperty("debug.YUI")!=null;
+    public static boolean DEBUG_YUI = Boolean.getBoolean("debug.YUI");
 
     /**
      * Creates a sub map by using the given range (both ends inclusive).
@@ -610,6 +646,10 @@ public class Functions {
         return BuildStepDescriptor.filter(Publisher.all(), project.getClass());
     }
 
+    public static List<SCMDescriptor<?>> getSCMDescriptors(AbstractProject<?,?> project) {
+        return SCM._for(project);
+    }
+
     public static List<Descriptor<ComputerLauncher>> getComputerLauncherDescriptors() {
         return Hudson.getInstance().getDescriptorList(ComputerLauncher.class);
     }
@@ -652,10 +692,6 @@ public class Functions {
     public static int size2(Object o) throws Exception {
         if(o==null) return 0;
         return ASTSizeFunction.sizeOf(o,Introspector.getUberspect());
-    }
-
-    public static ExecutedMojo.Cache createExecutedMojoCache() {
-        return new ExecutedMojo.Cache();
     }
 
     /**
@@ -813,6 +849,14 @@ public class Functions {
         return buf.toString();
     }
 
+    /**
+     * Converts "abc" to "Abc".
+     */
+    public static String capitalize(String s) {
+        if(s==null || s.length()==0) return s;
+        return Character.toUpperCase(s.charAt(0))+s.substring(1);
+    }
+
     public static String getVersion() {
         return Hudson.VERSION;
     }
@@ -858,7 +902,7 @@ public class Functions {
     /**
      * If the value exists, return that value. Otherwise return the default value.
      * <p>
-     * This method is useful for supplying a default value to a form field.
+     * Starting 1.294, JEXL supports the elvis operator "x?:y" that supercedes this.
      *
      * @since 1.150
      */
@@ -956,6 +1000,8 @@ public class Functions {
 
         if(SCHEME.matcher(urlName).matches())
             return urlName; // absolute URL
+        if(urlName.startsWith("/"))
+            return Stapler.getCurrentRequest().getContextPath()+urlName+'/';
         else
             // relative URL name
             return Stapler.getCurrentRequest().getContextPath()+'/'+itUrl+urlName+'/';
@@ -1049,6 +1095,8 @@ public class Functions {
      * Gets all the {@link PageDecorator}s.
      */
     public static List<PageDecorator> getPageDecorators() {
+        // this method may be called to render start up errors, at which point Hudson doesn't exist yet. see HUDSON-3608 
+        if(Hudson.getInstance()==null)  return Collections.emptyList();
         return PageDecorator.all();
     }
     
@@ -1083,6 +1131,28 @@ public class Functions {
         return body;
     }
 
+    public static List<Descriptor<CrumbIssuer>> getCrumbIssuerDescriptors() {
+        return CrumbIssuer.all();
+    }
+    
+    public static String getCrumb(StaplerRequest req) {
+        CrumbIssuer issuer = Hudson.getInstance().getCrumbIssuer();
+        if (issuer != null) {
+            return issuer.getCrumb(req);
+        }
+        
+        return "";
+    }
+    
+    public static String getCrumbRequestField() {
+        CrumbIssuer issuer = Hudson.getInstance().getCrumbIssuer();
+        if (issuer != null) {
+            return issuer.getDescriptor().getCrumbRequestField();
+        }
+        
+        return "";
+    }
+    
     private static final Pattern SCHEME = Pattern.compile("[a-z]+://.+");
 
     /**

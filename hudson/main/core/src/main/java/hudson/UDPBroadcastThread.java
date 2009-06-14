@@ -28,6 +28,7 @@ import hudson.model.Hudson;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
+import java.net.BindException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ClosedByInterruptException;
 import java.nio.channels.DatagramChannel;
@@ -68,6 +69,10 @@ public class UDPBroadcastThread extends Thread {
                     tag(buf,"version",Hudson.VERSION);
                     tag(buf,"url",hudson.getRootUrl());
                     tag(buf,"slave-port",tal==null?null:tal.getPort());
+
+                    for (UDPBroadcastFragment f : UDPBroadcastFragment.all())
+                        f.buildFragment(buf,sender);
+
                     buf.append("</hudson>");
 
                     b.clear();
@@ -80,6 +85,10 @@ public class UDPBroadcastThread extends Thread {
             }
         } catch (ClosedByInterruptException e) {
             // shut down
+        } catch (BindException e) {
+            // if we failed to listen to UDP, just silently abandon it, as a stack trace
+            // makes people unnecessarily concerned, for a feature that currently does no good.
+            LOGGER.log(Level.FINE, "Failed to listen to UDP port "+PORT,e);
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "UDP handling problem",e);
         }

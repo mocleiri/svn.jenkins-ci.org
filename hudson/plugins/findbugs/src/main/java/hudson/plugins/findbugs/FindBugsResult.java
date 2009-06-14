@@ -4,7 +4,7 @@ import hudson.model.AbstractBuild;
 import hudson.plugins.findbugs.parser.Bug;
 import hudson.plugins.findbugs.util.BuildResult;
 import hudson.plugins.findbugs.util.ParserResult;
-import hudson.plugins.findbugs.util.model.JavaProject;
+import hudson.plugins.findbugs.util.ResultAction;
 
 /**
  * Represents the results of the FindBugs analysis. One instance of this class is persisted for
@@ -20,7 +20,7 @@ public class FindBugsResult extends BuildResult {
     }
 
     /**
-     * Creates a new instance of <code>FindBugsResult</code>.
+     * Creates a new instance of {@link FindBugsResult}.
      *
      * @param build
      *            the current build as owner of this action
@@ -29,12 +29,13 @@ public class FindBugsResult extends BuildResult {
      * @param result
      *            the parsed result with all annotations
      */
-    public FindBugsResult(final AbstractBuild<?, ?> build, final String defaultEncoding, final ParserResult result) {
+    public FindBugsResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
+            final ParserResult result) {
         super(build, defaultEncoding, result);
     }
 
     /**
-     * Creates a new instance of <code>FindBugsResult</code>.
+     * Creates a new instance of {@link FindBugsResult}.
      *
      * @param build
      *            the current build as owner of this action
@@ -45,7 +46,8 @@ public class FindBugsResult extends BuildResult {
      * @param previous
      *            the result of the previous build
      */
-    public FindBugsResult(final AbstractBuild<?, ?> build, final String defaultEncoding, final ParserResult result, final FindBugsResult previous) {
+    public FindBugsResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
+            final ParserResult result, final FindBugsResult previous) {
         super(build, defaultEncoding, result, previous);
     }
 
@@ -111,30 +113,9 @@ public class FindBugsResult extends BuildResult {
         return Messages.FindBugs_ProjectAction_Name();
     }
 
-    /**
-     * Returns the results of the previous build.
-     *
-     * @return the result of the previous build, or <code>null</code> if no
-     *         such build exists
-     */
+    /** {@inheritDoc} */
     @Override
-    public JavaProject getPreviousResult() {
-        FindBugsResultAction action = getOwner().getAction(FindBugsResultAction.class);
-        if (action.hasPreviousResultAction()) {
-            return action.getPreviousResultAction().getResult().getProject();
-        }
-        else {
-            return null;
-        }
-    }
-
-    /**
-     * Returns whether a previous build result exists.
-     *
-     * @return <code>true</code> if a previous build result exists.
-     */
-    @Override
-    public boolean hasPreviousResult() {
-        return getOwner().getAction(FindBugsResultAction.class).hasPreviousResultAction();
+    protected Class<? extends ResultAction<? extends BuildResult>> getResultActionType() {
+        return FindBugsResultAction.class;
     }
 }

@@ -1,11 +1,10 @@
 package hudson.plugins.cppunit;
 
-import hudson.Extension;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.FilePath.FileCallable;
-import hudson.maven.agent.AbortException;
+import hudson.AbortException;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
@@ -38,6 +37,7 @@ import org.kohsuke.stapler.StaplerResponse;
  * Class that records CppUnit test reports into Hudson.
  * 
  * @author Gregory Boissinot
+ * 20090323 Correction of the java.io.NotSerializableException with a slave  
  *   
  */
 public class CppUnitPublisher extends hudson.tasks.Publisher implements Serializable {
@@ -74,12 +74,7 @@ public class CppUnitPublisher extends hudson.tasks.Publisher implements Serializ
 
 	@Override
     public Action getProjectAction(hudson.model.Project project) {
-        TestResultProjectAction action = project.getAction(TestResultProjectAction.class);
-        if (action == null) {
-            return new TestResultProjectAction(project);
-        } else {
-            return null;
-        }
+         return new TestResultProjectAction(project);
     }
 
     @Override
@@ -113,7 +108,9 @@ public class CppUnitPublisher extends hudson.tasks.Publisher implements Serializ
             listener.getLogger().println("End recording CppUnit tests results.");
             
         } catch (TransformerException te) {
-            throw new AbortException("Could not read the XSL XML file.",te);
+        	listener.getLogger().println("Error publishing cppunit results" + te.toString());
+        	throw new AbortException("Could not read the XSL XML file.");
+            
         }
 
         return result;
@@ -148,8 +145,11 @@ public class CppUnitPublisher extends hudson.tasks.Publisher implements Serializ
                 action = existingAction;
                 action.setResult(result, listener);
             }
-            if(result.getPassCount()==0 && result.getFailCount()==0)
-                new AbortException("None of the test reports contained any result");
+            
+            if(result.getPassCount()==0 && result.getFailCount()==0){
+            	throw new AbortException("None of the test reports contained any result");
+            }
+                
         } catch (AbortException e) {
             if(build.getResult()==Result.FAILURE)
                 // most likely a build failed before it gets to the test phase.
@@ -218,12 +218,10 @@ public class CppUnitPublisher extends hudson.tasks.Publisher implements Serializ
     }
  
 
-    @Extension
     public static final class DescriptorImpl extends BuildStepDescriptor<Publisher> {
 
         public DescriptorImpl() {
-            //super(CppUnitPublisher.class);
-            load();
+            super(CppUnitPublisher.class);          
         }
 
         @Override
@@ -278,7 +276,7 @@ public class CppUnitPublisher extends hudson.tasks.Publisher implements Serializ
                 		}
                 	}
                 	else {
-                		error(" The specified stylesheet is mandatory.");
+                		error(" The stylesheet directory is mandatory.");
                 	}
                 	
                     ok();

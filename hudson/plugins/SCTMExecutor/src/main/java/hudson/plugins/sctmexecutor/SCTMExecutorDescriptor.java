@@ -1,12 +1,15 @@
 package hudson.plugins.sctmexecutor;
 
-import hudson.model.Descriptor;
+import hudson.Extension;
+import hudson.model.AbstractProject;
+import hudson.model.FreeStyleProject;
 import hudson.model.Hudson;
 import hudson.plugins.sctmexecutor.validators.EmptySingleFieldValidator;
 import hudson.plugins.sctmexecutor.validators.NumberCSVSingleFieldValidator;
 import hudson.plugins.sctmexecutor.validators.TestConnectionValidator;
+import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Builder;
-import hudson.util.FormFieldValidator;
+import hudson.util.FormValidation;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,13 +30,14 @@ import org.kohsuke.stapler.StaplerResponse;
  * @author Thomas Fuerer
  * 
  */
-public final class SCTMExecutorDescriptor extends Descriptor<Builder> {
+@Extension
+public final class SCTMExecutorDescriptor extends BuildStepDescriptor<Builder> {
   private String serviceURL;
   private String user;
   private String password;
   private ExecutorService threadPool;
 
-  SCTMExecutorDescriptor() {
+  public SCTMExecutorDescriptor() {
     super(SCTMExecutor.class);
     load();
   }
@@ -46,19 +50,36 @@ public final class SCTMExecutorDescriptor extends Descriptor<Builder> {
   @Override
   public Builder newInstance(StaplerRequest req, JSONObject formData) throws FormException {
     String execDefIds = formData.getString("execDefIds"); //$NON-NLS-1$
-    String str = formData.getString("projectId"); //$NON-NLS-1$
-    int projectId = Integer.parseInt(str);
-    return new SCTMExecutor(projectId, execDefIds);
+    int projectId = formData.getInt("projectId"); //$NON-NLS-1$
+    int delay = getOptionalIntValue(formData.getString("delay"), 0); //$NON-NLS-1$
+//    JSONObject buildNumberUsageOption = (JSONObject)formData.get("buildNumberUsageOption");
+    int optValue = SCTMExecutor.OPT_NO_BUILD_NUMBER;// buildNumberUsageOption.getInt("value");
+    String upStreamJobName = ""; //$NON-NLS-1$
+//    if (optValue == SCTMExecutor.OPT_USE_UPSTREAMJOB_BUILDNUMBER) {
+//      upStreamJobName = buildNumberUsageOption.getString("upStreamJobName");
+//    }
+    boolean contOnErr = formData.getBoolean("continueOnError"); //$NON-NLS-1$
+    boolean collectResults = formData.getBoolean("collectResults"); //$NON-NLS-1$
+    
+    return new SCTMExecutor(projectId, execDefIds, delay, optValue, upStreamJobName, contOnErr, collectResults);
+  }
+  
+  private int getOptionalIntValue(String value, int defaultValue) {
+    try {
+      return Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+      return defaultValue;
+    }
   }
 
   @Override
-  public boolean configure(StaplerRequest req, JSONObject json) throws hudson.model.Descriptor.FormException {
-    serviceURL = json.getString("serviceURL"); //$NON-NLS-1$
-    user = json.getString("user"); //$NON-NLS-1$
-    password = PwdCrypt.encode(json.getString("password"), Hudson.getInstance().getSecretKey()); //$NON-NLS-1$
+  public boolean configure(StaplerRequest req, JSONObject formData) throws hudson.model.Descriptor.FormException {
+    serviceURL = formData.getString("serviceURL"); //$NON-NLS-1$
+    user = formData.getString("user"); //$NON-NLS-1$
+    password = PwdCrypt.encode(formData.getString("password"), Hudson.getInstance().getSecretKey()); //$NON-NLS-1$
 
     save();
-    return super.configure(req, json);
+    return super.configure(req, formData);
   }
 
   public void setServiceURL(String serviceURL) {
@@ -74,10 +95,10 @@ public final class SCTMExecutorDescriptor extends Descriptor<Builder> {
   }
 
   public String getPassword() {
-    if (password != null && !password.equals(""))
+    if (password != null && !password.equals("")) //$NON-NLS-1$
       return PwdCrypt.decode(password, Hudson.getInstance().getSecretKey());
     else
-      return "";
+      return ""; //$NON-NLS-1$
   }
 
   public void setUser(String user) {
@@ -88,63 +109,63 @@ public final class SCTMExecutorDescriptor extends Descriptor<Builder> {
     this.password = password;
   }
 
-  public void doCheckServiceURL(StaplerRequest req, StaplerResponse rsp, 
+  public FormValidation doCheckServiceURL(StaplerRequest req, StaplerResponse rsp, 
       @QueryParameter("value") final String value)
       throws IOException, ServletException {
-    new FormFieldValidator.URLCheck(req, rsp) {
+    
+    return new FormValidation.URLCheck() {
       @Override
-      protected void check() throws IOException, ServletException {
+      protected FormValidation check() throws IOException, ServletException {
         if (value == null ||
             (value != null && !value.matches("http(s)?://(((\\d{1,3}.){3}\\d{1,3})?|([\\p{Alnum}-_.])*)(:\\d{0,5})?(/([\\p{Alnum}-_.])*)?/services"))) { //$NON-NLS-1$
-          error(Messages.getString("SCTMUrlValidator.msg.noValidURL")); //$NON-NLS-1$
-          return;
+          return FormValidation.error(Messages.getString("SCTMExecutorDescriptor.validate.msg.noValidURL")); //$NON-NLS-1$
         }
         try {
           URL url = new URL(value);
           BufferedReader reader = open(url);
-          if (findText(reader, "tmexecution"))
-            ok();
+          if (findText(reader, "tmexecution")) //$NON-NLS-1$
+            return FormValidation.ok();
           else
-            warning(Messages.getString("SCTMURL.Validator.msg.noServiceFound"));
+            return FormValidation.warning(Messages.getString("SCTMExecutorDescriptor.validate.msg.noServiceFound")); //$NON-NLS-1$
         } catch (IOException e) {
-          handleIOException(value, e);
+          return handleIOException(value, e);
         } catch (IllegalArgumentException e) {
-          error(Messages.getString("SCTMUrlValidator.msg.noValidURL")); //$NON-NLS-1$
-          
+          return FormValidation.error(Messages.getString("SCTMExecutorDescriptor.validate.msg.noValidURL")); //$NON-NLS-1$
         }
       }
-    }.process();
+    }.check();
   }
 
-  public void doCheckUser(StaplerRequest req, StaplerResponse rsp, 
-      @QueryParameter("value") final String value)
-      throws IOException, ServletException {
-    new EmptySingleFieldValidator(value).process();
+  public FormValidation doCheckUser(StaplerRequest req, StaplerResponse rsp, 
+      @QueryParameter("value") final String value) {
+    return new EmptySingleFieldValidator().check(value);
   }
 
-  public void doCheckPassword(StaplerRequest req, StaplerResponse rsp, 
-      @QueryParameter("value") final String value)
-      throws IOException, ServletException {
-    new EmptySingleFieldValidator(value).process();
+  public FormValidation doCheckPassword(StaplerRequest req, StaplerResponse rsp, 
+      @QueryParameter("value") final String value) {
+    return new EmptySingleFieldValidator().check(value);
   }
 
-  public void doCheckExecDefIds(StaplerRequest req, StaplerResponse rsp, 
-      @QueryParameter("value") final String value)
-      throws IOException, ServletException {
-    new NumberCSVSingleFieldValidator(value).process();
+  public FormValidation doCheckExecDefIds(StaplerRequest req, StaplerResponse rsp, 
+      @QueryParameter("value") final String value) {
+    return new NumberCSVSingleFieldValidator().check(value);
   }
 
-  public void doCheckProjectId(StaplerRequest req, StaplerResponse rsp, 
-      @QueryParameter("value") final String value)
-      throws IOException, ServletException {
-    new FormFieldValidator.NonNegativeInteger().process();
+  public FormValidation doCheckProjectId(StaplerRequest req, StaplerResponse rsp, 
+      @QueryParameter("value") final String value) {
+    return FormValidation.validateNonNegativeInteger(value);
+  }
+  
+  public FormValidation doCheckDelay(StaplerRequest rep, StaplerResponse rsp, 
+      @QueryParameter("value") final String value) {
+    return FormValidation.validateNonNegativeInteger(value);
   }
 
-  public void doTestConnection(StaplerRequest req, StaplerResponse rsp, 
+  public FormValidation doTestConnection(StaplerRequest req, StaplerResponse rsp, 
       @QueryParameter("serviceURL") final String serviceURL,
       @QueryParameter("user") final String user,
       @QueryParameter("password") final String password) throws IOException, ServletException {
-    new TestConnectionValidator(serviceURL, user, password).process();
+    return new TestConnectionValidator().check(serviceURL, user, password);
   }
 
   public ExecutorService getExecutorPool() {
@@ -156,5 +177,10 @@ public final class SCTMExecutorDescriptor extends Descriptor<Builder> {
   public void shutdown() {
     if (threadPool != null)
       threadPool.shutdown();
+  }
+
+  @Override
+  public boolean isApplicable(Class<? extends AbstractProject> jobType) {
+    return (FreeStyleProject.class.equals(jobType));
   }
 }

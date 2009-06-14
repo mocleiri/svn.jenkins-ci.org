@@ -5,7 +5,9 @@ package org.jvnet.hudson.plugins.backup.utils.compress;
  * List the different compression methods supported by backup plugin
  */
 public enum CompressionMethodEnum {
-    ZIP("ZIP", ZipArchiver.class, ZipUnArchiver.class);
+    ZIP("zip", ZipArchiver.class, ZipUnArchiver.class),
+    TARGZIP("tar.gz", TarGzipArchiver.class, TarGzipUnArchiver.class),
+    TARBZ2("tar.bz2", TarBz2Archiver.class, TarBz2UnArchiver.class);
 
     private final String code;
     private final Class<? extends Archiver> archiverClass;
@@ -47,6 +49,15 @@ public enum CompressionMethodEnum {
     
     public static UnArchiver getUnArchiver(CompressionMethodEnum method) {
     	return method.getUnArchiver();
+    }
+
+    public static CompressionMethodEnum getFromCode(String code) {
+        for (CompressionMethodEnum value : CompressionMethodEnum.values()) {
+            if (value.code.equals(code)) {
+                return value;
+            }
+        }
+        throw new IllegalArgumentException("Unknown code " + code);
     }
     
 }

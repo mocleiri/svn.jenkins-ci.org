@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractBuild (Hudson core 1.291 API)
+AbstractBuild (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractBuild (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractBuild (Hudson core 1.291 API)";
+        parent.document.title="AbstractBuild (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -100,10 +100,10 @@ java.lang.Object
               <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.AbstractBuild&lt;P,R&gt;</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model">Queue.Executable</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, java.lang.Comparable&lt;R&gt;, java.lang.Runnable</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model">DescriptorByNameOwner</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model">Queue.Executable</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, java.lang.Comparable&lt;R&gt;, java.lang.Runnable</DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>, <A HREF="../../hudson/matrix/MatrixBuild.html" title="class in hudson.matrix">MatrixBuild</A>, <A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>, <A HREF="../../hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven">MavenModuleSetBuild</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>, <A HREF="../../hudson/matrix/MatrixBuild.html" title="class in hudson.matrix">MatrixBuild</A></DD>
 </DL>
 <HR>
 <DL>
@@ -113,7 +113,7 @@ java.lang.Object
 <P>
 Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>s that build software.
 
- For now this is primarily the common part of <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A> and <A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven"><CODE>MavenBuild</CODE></A>.
+ For now this is primarily the common part of <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A> and MavenBuild.
 <P>
 
 <P>
@@ -193,7 +193,16 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 <TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Run.html#DELETE">DELETE</A>, <A HREF="../../hudson/model/Run.html#description">description</A>, <A HREF="../../hudson/model/Run.html#duration">duration</A>, <A HREF="../../hudson/model/Run.html#FEED_ADAPTER">FEED_ADAPTER</A>, <A HREF="../../hudson/model/Run.html#FEED_ADAPTER_LATEST">FEED_ADAPTER_LATEST</A>, <A HREF="../../hudson/model/Run.html#ID_FORMATTER">ID_FORMATTER</A>, <A HREF="../../hudson/model/Run.html#nextBuild">nextBuild</A>, <A HREF="../../hudson/model/Run.html#number">number</A>, <A HREF="../../hudson/model/Run.html#ORDER_BY_DATE">ORDER_BY_DATE</A>, <A HREF="../../hudson/model/Run.html#PERMISSIONS">PERMISSIONS</A>, <A HREF="../../hudson/model/Run.html#previousBuild">previousBuild</A>, <A HREF="../../hudson/model/Run.html#project">project</A>, <A HREF="../../hudson/model/Run.html#result">result</A>, <A HREF="../../hudson/model/Run.html#state">state</A>, <A HREF="../../hudson/model/Run.html#timestamp">timestamp</A>, <A HREF="../../hudson/model/Run.html#UPDATE">UPDATE</A>, <A HREF="../../hudson/model/Run.html#XSTREAM">XSTREAM</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Run.html#charset">charset</A>, <A HREF="../../hudson/model/Run.html#DELETE">DELETE</A>, <A HREF="../../hudson/model/Run.html#description">description</A>, <A HREF="../../hudson/model/Run.html#duration">duration</A>, <A HREF="../../hudson/model/Run.html#FEED_ADAPTER">FEED_ADAPTER</A>, <A HREF="../../hudson/model/Run.html#FEED_ADAPTER_LATEST">FEED_ADAPTER_LATEST</A>, <A HREF="../../hudson/model/Run.html#ID_FORMATTER">ID_FORMATTER</A>, <A HREF="../../hudson/model/Run.html#nextBuild">nextBuild</A>, <A HREF="../../hudson/model/Run.html#number">number</A>, <A HREF="../../hudson/model/Run.html#ORDER_BY_DATE">ORDER_BY_DATE</A>, <A HREF="../../hudson/model/Run.html#PERMISSIONS">PERMISSIONS</A>, <A HREF="../../hudson/model/Run.html#previousBuild">previousBuild</A>, <A HREF="../../hudson/model/Run.html#project">project</A>, <A HREF="../../hudson/model/Run.html#result">result</A>, <A HREF="../../hudson/model/Run.html#state">state</A>, <A HREF="../../hudson/model/Run.html#timestamp">timestamp</A>, <A HREF="../../hudson/model/Run.html#UPDATE">UPDATE</A>, <A HREF="../../hudson/model/Run.html#XSTREAM">XSTREAM</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -288,7 +297,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getBuiltOnStr()">getBuiltOnStr</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the name of the slave it was built on, or null if it was the master.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the name of the slave it was built on; null or "" if built by the master.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -343,11 +352,12 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.Map&lt;java.lang.String,java.lang.String&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getEnvVars()">getEnvVars</A></B>()</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the map that contains environmental variable overrides for this build.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the map that contains environmental variables to be used for launching
+ processes for this build.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -457,7 +467,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Run.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Run.html#compareTo(RunT)">compareTo</A>, <A HREF="../../hudson/model/Run.html#delete()">delete</A>, <A HREF="../../hudson/model/Run.html#doArtifact(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doArtifact</A>, <A HREF="../../hudson/model/Run.html#doBuildNumber(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildNumber</A>, <A HREF="../../hudson/model/Run.html#doBuildStatus(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildStatus</A>, <A HREF="../../hudson/model/Run.html#doBuildTimestamp(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doBuildTimestamp</A>, <A HREF="../../hudson/model/Run.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/Run.html#doProgressiveLog(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doProgressiveLog</A>, <A HREF="../../hudson/model/Run.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/Run.html#doToggleLogKeep(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doToggleLogKeep</A>, <A HREF="../../hudson/model/Run.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/Run.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Run.html#getApi()">getApi</A>, <A HREF="../../hudson/model/Run.html#getArtifacts()">getArtifacts</A>, <A HREF="../../hudson/model/Run.html#getArtifactsDir()">getArtifactsDir</A>, <A HREF="../../hudson/model/Run.html#getBadgeActions()">getBadgeActions</A>, <A HREF="../../hudson/model/Run.html#getBuildStatusSummary()">getBuildStatusSummary</A>, <A HREF="../../hudson/model/Run.html#getBuildStatusUrl()">getBuildStatusUrl</A>, <A HREF="../../hudson/model/Run.html#getCharacteristicEnvVars()">getCharacteristicEnvVars</A>, <A HREF="../../hudson/model/Run.html#getCharset()">getCharset</A>, <A HREF="../../hudson/model/Run.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/Run.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Run.html#getDuration()">getDuration</A>, <A HREF="../../hudson/model/Run.html#getDurationString()">getDurationString</A>, <A HREF="../../hudson/model/Run.html#getDynamic(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">getDynamic</A>, <A HREF="../../hudson/model/Run.html#getExecutor()">getExecutor</A>, <A HREF="../../hudson/model/Run.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/Run.html#getHasArtifacts()">getHasArtifacts</A>, <A HREF="../../hudson/model/Run.html#getIconColor()">getIconColor</A>, <A HREF="../../hudson/model/Run.html#getId()">getId</A>, <A HREF="../../hudson/model/Run.html#getLog()">getLog</A>, <A HREF="../../hudson/model/Run.html#getLog(int)">getLog</A>, <A HREF="../../hudson/model/Run.html#getLogFile()">getLogFile</A>, <A HREF="../../hudson/model/Run.html#getLogReader()">getLogReader</A>, <A HREF="../../hudson/model/Run.html#getNextBuild()">getNextBuild</A>, <A HREF="../../hudson/model/Run.html#getNumber()">getNumber</A>, <A HREF="../../hudson/model/Run.html#getParent()">getParent</A>, <A HREF="../../hudson/model/Run.html#getPreviousBuild()">getPreviousBuild</A>, <A HREF="../../hudson/model/Run.html#getPreviousFailedBuild()">getPreviousFailedBuild</A>, <A HREF="../../hudson/model/Run.html#getPreviousNotFailedBuild()">getPreviousNotFailedBuild</A>, <A HREF="../../hudson/model/Run.html#getResult()">getResult</A>, <A HREF="../../hudson/model/Run.html#getRootDir()">getRootDir</A>, <A HREF="../../hudson/model/Run.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Run.html#getTimestamp()">getTimestamp</A>, <A HREF="../../hudson/model/Run.html#getTimestampString()">getTimestampString</A>, <A HREF="../../hudson/model/Run.html#getTimestampString2()">getTimestampString2</A>, <A HREF="../../hudson/model/Run.html#getTruncatedDescription()">getTruncatedDescription</A>, <A HREF="../../hudson/model/Run.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Run.html#hasntStartedYet()">hasntStartedYet</A>, <A HREF="../../hudson/model/Run.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Run.html#isBuilding()">isBuilding</A>, <A HREF="../../hudson/model/Run.html#isKeepLog()">isKeepLog</A>, <A HREF="../../hudson/model/Run.html#isLogUpdated()">isLogUpdated</A>, <A HREF="../../hudson/model/Run.html#keepLog()">keepLog</A>, <A HREF="../../hudson/model/Run.html#keepLog(boolean)">keepLog</A>, <A HREF="../../hudson/model/Run.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/Run.html#onEndBuilding()">onEndBuilding</A>, <A HREF="../../hudson/model/Run.html#onStartBuilding()">onStartBuilding</A>, <A HREF="../../hudson/model/Run.html#run(hudson.model.Run.Runner)">run</A>, <A HREF="../../hudson/model/Run.html#save()">save</A>, <A HREF="../../hudson/model/Run.html#setDescription(java.lang.String)">setDescription</A>, <A HREF="../../hudson/model/Run.html#setResult(hudson.model.Result)">setResult</A>, <A HREF="../../hudson/model/Run.html#toString()">toString</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Run.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Run.html#compareTo(RunT)">compareTo</A>, <A HREF="../../hudson/model/Run.html#delete()">delete</A>, <A HREF="../../hudson/model/Run.html#doArtifact()">doArtifact</A>, <A HREF="../../hudson/model/Run.html#doBuildNumber(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildNumber</A>, <A HREF="../../hudson/model/Run.html#doBuildStatus(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildStatus</A>, <A HREF="../../hudson/model/Run.html#doBuildTimestamp(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doBuildTimestamp</A>, <A HREF="../../hudson/model/Run.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/Run.html#doProgressiveLog(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doProgressiveLog</A>, <A HREF="../../hudson/model/Run.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/Run.html#doToggleLogKeep(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doToggleLogKeep</A>, <A HREF="../../hudson/model/Run.html#fromExternalizableId(java.lang.String)">fromExternalizableId</A>, <A HREF="../../hudson/model/Run.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/Run.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Run.html#getApi()">getApi</A>, <A HREF="../../hudson/model/Run.html#getArtifacts()">getArtifacts</A>, <A HREF="../../hudson/model/Run.html#getArtifactsDir()">getArtifactsDir</A>, <A HREF="../../hudson/model/Run.html#getBadgeActions()">getBadgeActions</A>, <A HREF="../../hudson/model/Run.html#getBuildStatusSummary()">getBuildStatusSummary</A>, <A HREF="../../hudson/model/Run.html#getBuildStatusUrl()">getBuildStatusUrl</A>, <A HREF="../../hudson/model/Run.html#getCharacteristicEnvVars()">getCharacteristicEnvVars</A>, <A HREF="../../hudson/model/Run.html#getCharset()">getCharset</A>, <A HREF="../../hudson/model/Run.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/Run.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A>, <A HREF="../../hudson/model/Run.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Run.html#getDuration()">getDuration</A>, <A HREF="../../hudson/model/Run.html#getDurationString()">getDurationString</A>, <A HREF="../../hudson/model/Run.html#getDynamic(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">getDynamic</A>, <A HREF="../../hudson/model/Run.html#getEnvironment()">getEnvironment</A>, <A HREF="../../hudson/model/Run.html#getEnvVars()">getEnvVars</A>, <A HREF="../../hudson/model/Run.html#getExecutor()">getExecutor</A>, <A HREF="../../hudson/model/Run.html#getExternalizableId()">getExternalizableId</A>, <A HREF="../../hudson/model/Run.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/Run.html#getHasArtifacts()">getHasArtifacts</A>, <A HREF="../../hudson/model/Run.html#getIconColor()">getIconColor</A>, <A HREF="../../hudson/model/Run.html#getId()">getId</A>, <A HREF="../../hudson/model/Run.html#getLog()">getLog</A>, <A HREF="../../hudson/model/Run.html#getLog(int)">getLog</A>, <A HREF="../../hudson/model/Run.html#getLogFile()">getLogFile</A>, <A HREF="../../hudson/model/Run.html#getLogReader()">getLogReader</A>, <A HREF="../../hudson/model/Run.html#getNextBuild()">getNextBuild</A>, <A HREF="../../hudson/model/Run.html#getNumber()">getNumber</A>, <A HREF="../../hudson/model/Run.html#getParent()">getParent</A>, <A HREF="../../hudson/model/Run.html#getPreviousBuild()">getPreviousBuild</A>, <A HREF="../../hudson/model/Run.html#getPreviousFailedBuild()">getPreviousFailedBuild</A>, <A HREF="../../hudson/model/Run.html#getPreviousNotFailedBuild()">getPreviousNotFailedBuild</A>, <A HREF="../../hudson/model/Run.html#getResult()">getResult</A>, <A HREF="../../hudson/model/Run.html#getRootDir()">getRootDir</A>, <A HREF="../../hudson/model/Run.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Run.html#getTimestamp()">getTimestamp</A>, <A HREF="../../hudson/model/Run.html#getTimestampString()">getTimestampString</A>, <A HREF="../../hudson/model/Run.html#getTimestampString2()">getTimestampString2</A>, <A HREF="../../hudson/model/Run.html#getTruncatedDescription()">getTruncatedDescription</A>, <A HREF="../../hudson/model/Run.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Run.html#hasntStartedYet()">hasntStartedYet</A>, <A HREF="../../hudson/model/Run.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Run.html#isBuilding()">isBuilding</A>, <A HREF="../../hudson/model/Run.html#isKeepLog()">isKeepLog</A>, <A HREF="../../hudson/model/Run.html#isLogUpdated()">isLogUpdated</A>, <A HREF="../../hudson/model/Run.html#keepLog()">keepLog</A>, <A HREF="../../hudson/model/Run.html#keepLog(boolean)">keepLog</A>, <A HREF="../../hudson/model/Run.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/Run.html#onEndBuilding()">onEndBuilding</A>, <A HREF="../../hudson/model/Run.html#onStartBuilding()">onStartBuilding</A>, <A HREF="../../hudson/model/Run.html#run(hudson.model.Run.Runner)">run</A>, <A HREF="../../hudson/model/Run.html#save()">save</A>, <A HREF="../../hudson/model/Run.html#setDescription(java.lang.String)">setDescription</A>, <A HREF="../../hudson/model/Run.html#setResult(hudson.model.Result)">setResult</A>, <A HREF="../../hudson/model/Run.html#toString()">toString</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Actionable"><!-- --></A>
@@ -602,7 +612,7 @@ public <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>null, for example if the slave that this build run no logner exists.</DL>
+<DT><B>Returns:</B><DD>null, for example if the slave that this build run no longer exists.</DL>
 </DD>
 </DL>
 <HR>
@@ -613,7 +623,8 @@ getBuiltOnStr</H3>
 <FONT SIZE="-1">@Exported(name="builtOn")
 </FONT>public java.lang.String <B>getBuiltOnStr</B>()</PRE>
 <DL>
-<DD>Returns the name of the slave it was built on, or null if it was the master.
+<DD>Returns the name of the slave it was built on; null or "" if built by the master.
+ (null happens when we read old record that didn't have this information.)
 <P>
 <DD><DL>
 </DL>
@@ -741,30 +752,34 @@ public boolean <B>hasChangeSetComputed</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="getEnvVars()"><!-- --></A><H3>
-getEnvVars</H3>
+<A NAME="getEnvironment(hudson.model.TaskListener)"><!-- --></A><H3>
+getEnvironment</H3>
 <PRE>
-public java.util.Map&lt;java.lang.String,java.lang.String&gt; <B>getEnvVars</B>()</PRE>
+public <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <B>getEnvironment</B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)
+                       throws java.io.IOException,
+                              java.lang.InterruptedException</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Run.html#getEnvVars()">Run</A></CODE></B></DD>
-<DD>Returns the map that contains environmental variable overrides for this build.
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)">Run</A></CODE></B></DD>
+<DD>Returns the map that contains environmental variables to be used for launching
+ processes for this build.
 
  <p>
- <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A>s that invoke external processes should use this.
- This allows <A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A>s and other project configurations (such as JDK selection)
+ <CODE>BuildStep</CODE>s that invoke external processes should use this.
+ This allows <CODE>BuildWrapper</CODE>s and other project configurations (such as JDK selection)
  to take effect.
 
  <p>
- On Windows systems, environment variables are case-preserving but
- comparison/query is case insensitive (IOW, you can set 'Path' to something
- and you get the same value by doing '%PATH%'.)  So to implement this semantics
- the map returned from here is a <CODE>TreeMap</CODE> with a special comparator.
+ Unlike earlier <A HREF="../../hudson/model/Run.html#getEnvVars()"><CODE>Run.getEnvVars()</CODE></A>, this map contains the whole environment,
+ not just the overrides, so one can introspect values to change its behavior.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Run.html#getEnvVars()">getEnvVars</A></CODE> in class <CODE><A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A>&lt;<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">P</A> extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">P</A>,<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">R</A>&gt;,<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">R</A> extends <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">P</A>,<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">R</A>&gt;&gt;</CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></CODE> in class <CODE><A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A>&lt;<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">P</A> extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">P</A>,<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">R</A>&gt;,<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">R</A> extends <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">P</A>,<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">R</A>&gt;&gt;</CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>

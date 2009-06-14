@@ -57,12 +57,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Enumeration;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.logging.LogRecord;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.nio.charset.Charset;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.Inet4Address;
 
 /**
  * Represents the running state of a remote computer that holds {@link Executor}s.
@@ -89,7 +95,7 @@ import java.nio.charset.Charset;
  * @author Kohsuke Kawaguchi
  */
 @ExportedBean
-public abstract class Computer extends AbstractModelObject implements AccessControlled, ExecutorListener {
+public /*transient*/ abstract class Computer extends Actionable implements AccessControlled, ExecutorListener {
 
     private final CopyOnWriteArrayList<Executor> executors = new CopyOnWriteArrayList<Executor>();
 
@@ -528,10 +534,18 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     }
 
     /**
+     * @deprecated as of 1.292
+     *      Use {@link #getEnvironment()} instead.
+     */
+    public Map<String,String> getEnvVars() throws IOException, InterruptedException {
+        return getEnvironment();
+    }
+
+    /**
      * Gets the environment variables of the JVM on this computer.
      * If this is the master, it returns the system property of the master computer.
      */
-    public Map<String,String> getEnvVars() throws IOException, InterruptedException {
+    public EnvVars getEnvironment() throws IOException, InterruptedException {
         return EnvVars.getRemote(getChannel());
     }
 
@@ -542,6 +556,73 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
      */
     public Map<String,String> getThreadDump() throws IOException, InterruptedException {
         return RemotingDiagnostics.getThreadDump(getChannel());
+    }
+
+    /**
+     * This method tries to compute the name of the host that's reachable by all the other nodes.
+     *
+     * <p>
+     * Since it's possible that the slave is not reachable from the master (it may be behind a firewall,
+     * connecting to master via JNLP), in which case this method returns null.
+     *
+     * It's surprisingly tricky for a machine to know a name that other systems can get to,
+     * especially between things like DNS search suffix, the hosts file, and YP.
+     *
+     * <p>
+     * So the technique here is to compute possible interfaces and names on the slave,
+     * then try to ping them from the master, and pick the one that worked.
+     *
+     * @since 1.300
+     */
+    public String getHostName() throws IOException, InterruptedException {
+        for( String address : getChannel().call(new ListPossibleNames())) {
+            try {
+                InetAddress ia = InetAddress.getByName(address);
+                if(!(ia instanceof Inet4Address)) {
+                    LOGGER.fine(address+" is not an IPv4 address");
+                    continue;
+                }
+                if(!ia.isReachable(500)) {
+                    LOGGER.fine(address+" didn't respond to ping");
+                    continue;
+                }
+                return ia.getCanonicalHostName();
+            } catch (IOException e) {
+                // if a given name fails to parse on this host, we get this error
+                LOGGER.log(Level.FINE, "Failed to parse "+address,e);
+            }
+        }
+        return null;
+    }
+
+    private static class ListPossibleNames implements Callable<List<String>,IOException> {
+        public List<String> call() throws IOException {
+            List<String> names = new ArrayList<String>();
+
+            Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
+            while (nis.hasMoreElements()) {
+                NetworkInterface ni =  nis.nextElement();
+                LOGGER.fine("Listing up IP addresses for "+ni.getDisplayName());
+                Enumeration<InetAddress> e = ni.getInetAddresses();
+                while (e.hasMoreElements()) {
+                    InetAddress ia =  e.nextElement();
+                    if(ia.isLoopbackAddress()) {
+                        LOGGER.fine(ia+" is a loopback address");
+                        continue;
+                    }
+
+                    if(!(ia instanceof Inet4Address)) {
+                        LOGGER.fine(ia+" is not an IPv4 address");
+                        continue;
+                    }
+
+                    LOGGER.fine(ia+" is a viable candidate");
+                    names.add(ia.getHostAddress());
+                }
+            }
+            return names;
+        }
+        private static final long serialVersionUID = 1L;
     }
 
     public static final ExecutorService threadPoolForRemoting = Executors.newCachedThreadPool(new ExceptionCatchingThreadFactory(new DaemonThreadFactory()));
@@ -607,17 +688,17 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
      * Run arbitrary Groovy script.
      */
     public void doScript(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-        doScript(req, rsp, "_script.jelly");
+        _doScript(req, rsp, "_script.jelly");
     }
 
     /**
      * Run arbitrary Groovy script and return result as plain text.
      */
     public void doScriptText(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-        doScript(req, rsp, "_scriptText.jelly");
+        _doScript(req, rsp, "_scriptText.jelly");
     }
 
-    public void doScript( StaplerRequest req, StaplerResponse rsp, String view) throws IOException, ServletException {
+    protected void _doScript( StaplerRequest req, StaplerResponse rsp, String view) throws IOException, ServletException {
         // ability to run arbitrary script is dangerous,
         // so tie it to the admin access
         checkPermission(Hudson.ADMINISTER);
@@ -710,5 +791,5 @@ public abstract class Computer extends AbstractModelObject implements AccessCont
     public static final Permission CONFIGURE = new Permission(PERMISSIONS,"Configure", Messages._Computer_ConfigurePermission_Description(), Permission.CONFIGURE);
     public static final Permission DELETE = new Permission(PERMISSIONS,"Delete", Messages._Computer_DeletePermission_Description(), Permission.DELETE);
 
-
+    private static final Logger LOGGER = Logger.getLogger(Computer.class.getName());
 }

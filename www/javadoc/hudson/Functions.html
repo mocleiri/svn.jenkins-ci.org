@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Functions (Hudson core 1.291 API)
+Functions (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson core 1.291 API)";
+        parent.document.title="Functions (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -225,6 +225,14 @@ Utility functions used in views.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#capitalize(java.lang.String)">capitalize</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts "abc" to "Abc".</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#checkPermission(hudson.security.AccessControlled, hudson.security.Permission)">checkPermission</A></B>(<A HREF="../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>&nbsp;object,
                 <A HREF="../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
@@ -259,14 +267,6 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used by <tt>layout.jelly</tt> to control the auto refresh behavior.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../hudson/maven/ExecutedMojo.Cache.html" title="class in hudson.maven">ExecutedMojo.Cache</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Functions.html#createExecutedMojoCache()">createExecutedMojoCache</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -526,6 +526,14 @@ Utility functions used in views.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model">JDK.DescriptorImpl</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getJDKDescriptor()">getJDKDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/JobPropertyDescriptor.html" title="class in hudson.model">JobPropertyDescriptor</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#getJobPropertyDescriptors(java.lang.Class)">getJobPropertyDescriptors</A></B>(java.lang.Class&lt;? extends <A HREF="../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt;&nbsp;clazz)</CODE>
 
@@ -623,6 +631,14 @@ Utility functions used in views.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A>&lt;?&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getSCMDescriptors(hudson.model.AbstractProject)">getSCMDescriptors</A></B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../hudson/util/Area.html" title="class in hudson.util">Area</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Functions.html#getScreenResolution()">getScreenResolution</A></B>()</CODE>
 
@@ -676,6 +692,25 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;B&gt; java.lang.Class</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getTypeParameter(java.lang.Class, java.lang.Class, int)">getTypeParameter</A></B>(java.lang.Class&lt;? extends B&gt;&nbsp;c,
+                 java.lang.Class&lt;B&gt;&nbsp;base,
+                 int&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given <code>c=MyList (extends ArrayList&lt;Foo&gt;), base=List</code>, compute the parameterization of 'base'
+ that's assignable from 'c' (in this case <code>List&lt;Foo&gt;</code>), and return its n-th type parameter
+ (n=0 would return <code>Foo</code>).</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -761,7 +796,9 @@ Utility functions used in views.
            java.lang.Object&nbsp;elseValue)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.294
+      JEXL now supports the real ternary operator "x?y:z", so this work around
+      is no longer necessary.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1069,6 +1106,39 @@ public static java.lang.String <B>rfc822Date</B>(java.util.Calendar&nbsp;cal)</P
 </DL>
 <HR>
 
+<A NAME="getTypeParameter(java.lang.Class, java.lang.Class, int)"><!-- --></A><H3>
+getTypeParameter</H3>
+<PRE>
+public static &lt;B&gt; java.lang.Class <B>getTypeParameter</B>(java.lang.Class&lt;? extends B&gt;&nbsp;c,
+                                                   java.lang.Class&lt;B&gt;&nbsp;base,
+                                                   int&nbsp;n)</PRE>
+<DL>
+<DD>Given <code>c=MyList (extends ArrayList&lt;Foo&gt;), base=List</code>, compute the parameterization of 'base'
+ that's assignable from 'c' (in this case <code>List&lt;Foo&gt;</code>), and return its n-th type parameter
+ (n=0 would return <code>Foo</code>).
+
+ <p>
+ This method is useful for doing type arithmetic.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.AssertionError</CODE> - if c' is not parameterized.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getJDKDescriptor()"><!-- --></A><H3>
+getJDKDescriptor</H3>
+<PRE>
+public <A HREF="../hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model">JDK.DescriptorImpl</A> <B>getJDKDescriptor</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getDiffString(int)"><!-- --></A><H3>
 getDiffString</H3>
 <PRE>
@@ -1182,6 +1252,10 @@ public static java.lang.Object <B>ifThenElse</B>(boolean&nbsp;cond,
                                           java.lang.Object&nbsp;thenValue,
                                           java.lang.Object&nbsp;elseValue)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.294
+      JEXL now supports the real ternary operator "x?y:z", so this work around
+      is no longer necessary.</I>
+<P>
 <DD><DL>
 </DL>
 </DD>
@@ -1635,6 +1709,17 @@ public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title=
 </DL>
 <HR>
 
+<A NAME="getSCMDescriptors(hudson.model.AbstractProject)"><!-- --></A><H3>
+getSCMDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A>&lt;?&gt;&gt; <B>getSCMDescriptors</B>(<A HREF="../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getComputerLauncherDescriptors()"><!-- --></A><H3>
 getComputerLauncherDescriptors</H3>
 <PRE>
@@ -1706,17 +1791,6 @@ public static int <B>size2</B>(java.lang.Object&nbsp;o)
 
 <DT><B>Throws:</B>
 <DD><CODE>java.lang.Exception</CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="createExecutedMojoCache()"><!-- --></A><H3>
-createExecutedMojoCache</H3>
-<PRE>
-public static <A HREF="../hudson/maven/ExecutedMojo.Cache.html" title="class in hudson.maven">ExecutedMojo.Cache</A> <B>createExecutedMojoCache</B>()</PRE>
-<DL>
-<DD><DL>
-</DL>
 </DD>
 </DL>
 <HR>
@@ -1805,6 +1879,19 @@ public static java.lang.String <B>jsStringEscape</B>(java.lang.String&nbsp;s)</P
 </DL>
 <HR>
 
+<A NAME="capitalize(java.lang.String)"><!-- --></A><H3>
+capitalize</H3>
+<PRE>
+public static java.lang.String <B>capitalize</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>Converts "abc" to "Abc".
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getVersion()"><!-- --></A><H3>
 getVersion</H3>
 <PRE>
@@ -1879,7 +1966,7 @@ public static &lt;T&gt; T <B>defaulted</B>(T&nbsp;value,
 <DL>
 <DD>If the value exists, return that value. Otherwise return the default value.
  <p>
- This method is useful for supplying a default value to a form field.
+ Starting 1.294, JEXL supports the elvis operator "x?:y" that supercedes this.
 <P>
 <DD><DL>
 <DT><B>Since:</B></DT>

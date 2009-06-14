@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Util (Hudson core 1.291 API)
+Util (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson core 1.291 API)";
+        parent.document.title="Util (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -293,9 +293,7 @@ Various utility methods that don't have more proper home.
 <TD><CODE><B><A HREF="../hudson/Util.html#encode(java.lang.String)">encode</A></B>(java.lang.String&nbsp;s)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Only escapes non-ASCII but leaves other URL-unsafe characters.
- Util.rawEncode should generally be used instead, though be careful to pass only
- a single path component to that method (it will encode /, but this method does not).</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Escapes non-ASCII characters in URL.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -463,6 +461,21 @@ Various utility methods that don't have more proper home.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.util.List&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Util.html#join(java.util.Collection...)">join</A></B>(java.util.Collection&lt;? extends T&gt;...&nbsp;items)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Combines all the given collections into a single list.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Util.html#join(java.util.Collection, java.lang.String)">join</A></B>(java.util.Collection&lt;java.lang.String&gt;&nbsp;strings,
      java.lang.String&nbsp;seprator)</CODE>
@@ -493,7 +506,7 @@ Various utility methods that don't have more proper home.
 <TD><CODE><B><A HREF="../hudson/Util.html#mapToEnv(java.util.Map)">mapToEnv</A></B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts the map format of the environment variables to the K=V format in the array.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -553,6 +566,14 @@ Various utility methods that don't have more proper home.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surrounds by a single-quote.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;javax.crypto.SecretKey</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Util.html#toAes128Key(java.lang.String)">toAes128Key</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Covnerts a string into 128-bit AES key.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -994,6 +1015,8 @@ mapToEnv</H3>
 <PRE>
 public static java.lang.String[] <B>mapToEnv</B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;m)</PRE>
 <DL>
+<DD>Converts the map format of the environment variables to the K=V format in the array.
+<P>
 <DD><DL>
 </DL>
 </DD>
@@ -1057,6 +1080,21 @@ getDigestOf</H3>
 public static java.lang.String <B>getDigestOf</B>(java.lang.String&nbsp;text)</PRE>
 <DL>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toAes128Key(java.lang.String)"><!-- --></A><H3>
+toAes128Key</H3>
+<PRE>
+public static javax.crypto.SecretKey <B>toAes128Key</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>Covnerts a string into 128-bit AES key.
+<P>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.308</DD>
 </DL>
 </DD>
 </DL>
@@ -1156,14 +1194,15 @@ public static &lt;T&gt; java.util.List&lt;T&gt; <B>createSubList</B>(java.util.C
 <A NAME="encode(java.lang.String)"><!-- --></A><H3>
 encode</H3>
 <PRE>
-<FONT SIZE="-1">@Deprecated
-</FONT>public static java.lang.String <B>encode</B>(java.lang.String&nbsp;s)</PRE>
+public static java.lang.String <B>encode</B>(java.lang.String&nbsp;s)</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Only escapes non-ASCII but leaves other URL-unsafe characters.
- Util.rawEncode should generally be used instead, though be careful to pass only
- a single path component to that method (it will encode /, but this method does not).</I>
-<P>
 <DD>Escapes non-ASCII characters in URL.
+
+ <p>
+ Note that this methods only escapes non-ASCII but leaves other URL-unsafe characters,
+ such as '#'.
+ <A HREF="../hudson/Util.html#rawEncode(java.lang.String)"><CODE>rawEncode(String)</CODE></A> should generally be used instead, though be careful to pass only
+ a single path component to that method (it will encode /, but this method does not).
 <P>
 <DD><DL>
 </DL>
@@ -1321,6 +1360,19 @@ public static java.lang.String <B>join</B>(java.util.Collection&lt;java.lang.Str
                                     java.lang.String&nbsp;seprator)</PRE>
 <DL>
 <DD>Concatenate multiple strings by inserting a separator.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="join(java.util.Collection...)"><!-- --></A><H3>
+join</H3>
+<PRE>
+public static &lt;T&gt; java.util.List&lt;T&gt; <B>join</B>(java.util.Collection&lt;? extends T&gt;...&nbsp;items)</PRE>
+<DL>
+<DD>Combines all the given collections into a single list.
 <P>
 <DD><DL>
 </DL>

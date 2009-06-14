@@ -24,7 +24,7 @@
 package hudson.slaves;
 
 import hudson.model.Descriptor;
-import hudson.util.StreamTaskListener;
+import hudson.model.TaskListener;
 import hudson.Util;
 import hudson.Extension;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -49,13 +49,20 @@ public class JNLPLauncher extends ComputerLauncher {
      */
     public final String tunnel;
 
+    /**
+     * Additional JVM arguments. Can be null.
+     * @since 1.297
+     */
+    public final String vmargs;
+
     @DataBoundConstructor
-    public JNLPLauncher(String tunnel) {
+    public JNLPLauncher(String tunnel, String vmargs) {
         this.tunnel = Util.fixEmptyAndTrim(tunnel);
+        this.vmargs = Util.fixEmptyAndTrim(vmargs);
     }
 
     public JNLPLauncher() {
-        this(null);
+        this(null,null);
     }
 
     @Override
@@ -63,7 +70,7 @@ public class JNLPLauncher extends ComputerLauncher {
         return false;
     }
 
-    public void launch(SlaveComputer computer, StreamTaskListener listener) {
+    public void launch(SlaveComputer computer, TaskListener listener) {
         // do nothing as we cannot self start
     }
 

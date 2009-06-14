@@ -25,6 +25,7 @@ package hudson;
 
 import hudson.PluginWrapper.Dependency;
 import hudson.util.IOException2;
+import hudson.model.Hudson;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -156,8 +157,18 @@ public class ClassicPluginStrategy implements PluginStrategy {
 			}
 		}
 
+        // native m2 support moved to a plugin starting 1.296, so plugins built before that
+        // needs to have an implicit dependency to the maven-plugin, or NoClassDefError will ensue.
+        String hudsonVersion = manifest.getMainAttributes().getValue("Hudson-Version");
+        String shortName = manifest.getMainAttributes().getValue("Short-Name");
+        if (!"maven-plugin".equals(shortName) &&
+                // some earlier versions of maven-hpi-plugin apparently puts "null" as a literal here. Watch out for those.
+                (hudsonVersion == null || hudsonVersion.equals("null") || hudsonVersion.compareTo("1.296") <= 0)) {
+            optionalDependencies.add(new PluginWrapper.Dependency("maven-plugin:" + Hudson.VERSION));
+        }
+
 		ClassLoader dependencyLoader = new DependencyClassLoader(getClass()
-				.getClassLoader(), dependencies);
+				.getClassLoader(), Util.join(dependencies,optionalDependencies));
 		ClassLoader classLoader = new URLClassLoader(paths.toArray(new URL[paths.size()]),
 				dependencyLoader);
 
@@ -192,6 +203,8 @@ public class ClassicPluginStrategy implements PluginStrategy {
                         throw new IOException(className+" doesn't extend from hudson.Plugin");
                     }
                     wrapper.setPlugin((Plugin) o);
+                } catch (LinkageError e) {
+                    throw new IOException2("Unable to load " + className + " from " + wrapper.getShortName(),e);
                 } catch (ClassNotFoundException e) {
                     throw new IOException2("Unable to load " + className + " from " + wrapper.getShortName(),e);
                 } catch (IllegalAccessException e) {

@@ -1,30 +1,23 @@
-RC eventually launches SeleniumServer. So far I haven't spotted anything
-that requires one server per VM. Can I run it that way?
+TODO: reverse-proxy selenium from Hudson for easier configuration
 
-The following Jetty dependency causes sealing violation, because Jetty jars
-are all sealed. This probably means I can't launch Selenium inside a webapp.
+TODO: launch multiple RCs per node
+TODO: environment configurations
+  patch Selenium Grid to have multiple environments per node, and let the user configure them via labels,
+  or define NodeProperty.
+TODO: 
 
-    [INFO] +- org.openqa.selenium.server:selenium-server:jar:1.0-beta-1:compile
-    [INFO] |  +- org.openqa.selenium.server:selenium-server-coreless:jar:1.0-beta-1:compile
-    [INFO] |  |  +- ant:ant:jar:1.6.5:compile
-    [INFO] |  |  +- jetty:org.mortbay.jetty:jar:5.1.10:compile
-    [INFO] |  |  +- commons-logging:commons-logging:jar:1.1:compile
-    [INFO] |  |  \- bouncycastle:bcprov-jdk15:jar:135:compile
-    [INFO] |  \- org.openqa.selenium.core:selenium-core:jar:1.0-beta-1:compile
+-----------
 
-Just for an experiment, I excluded 5.1.10 and I got NoClassDefError of HttpHandler.
+A single selenium RC instance is capable of starting any browser --- it does so by using the browser string
+given per session. But this is bit problematic with Slenium Grid, which wants to pick the right node
+based on the browser (so say someone said "*safari" and you don't want a Windows node to pick that up.)
 
-    Exception in thread "Selenium Thread" java.lang.NoClassDefFoundError: org/mortbay/http/HttpHandler
-            at com.thoughtworks.selenium.grid.remotecontrol.SelfRegisteringRemoteControl.launch(Unknown Source)
-            at hudson.plugins.selenium.ComputerListenerImpl$SeleniumThread.run(ComputerListenerImpl.java:57)
-    Caused by: java.lang.ClassNotFoundException: org.mortbay.http.HttpHandler
-            at java.net.URLClassLoader$1.run(URLClassLoader.java:200)
-            at java.security.AccessController.doPrivileged(Native Method)
-            at java.net.URLClassLoader.findClass(URLClassLoader.java:188)
-            at java.lang.ClassLoader.loadClass(ClassLoader.java:307)
-            at java.lang.ClassLoader.loadClass(ClassLoader.java:252)
-            at java.lang.ClassLoader.loadClassInternal(ClassLoader.java:320)
-            ... 2 more
+So it does this by adding a translation layer.
 
-Interestingly this only happens when I launch Selenium RC.
-That means I have to launch RC on a separate JVM.
+Problems:
+
+ - one RC can only register one environment, but that's silly.
+
+----
+If we replace GlobalRemoteControlPool with our own implementation, we can use labels for environments,
+but doing so requires patching HubRegistry (or doing reflection access.)

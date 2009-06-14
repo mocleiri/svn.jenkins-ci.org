@@ -27,18 +27,20 @@ final class StdXMLResultWriter implements ITestResultWriter {
   private String sctmHost;
 
   private FilePath rootDir;
+  private String buildNumber;
 
-  public StdXMLResultWriter(FilePath rootDir, String serviceURL) {
+  public StdXMLResultWriter(FilePath rootDir, String serviceURL, String buildNumber) {
     this.rootDir = rootDir;
+    this.buildNumber = buildNumber;
     sctmHost = serviceURL.substring(0, serviceURL.indexOf("/", "http://".length())) + "/silk/DEF"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
   }
 
   public void write(ExecutionResult result) {
     int done = 3;
-    String resultFileName = "TEST-" + result.getExecDefName(); //$NON-NLS-1$
+    String resultFileName = MessageFormat.format("TEST-{0}-{1}.xml",result.getExecDefName(), buildNumber); //$NON-NLS-1$
     while (done > 0) {
       try {
-        FilePath resultFile = rootDir.child(resultFileName+".xml"); //$NON-NLS-1$
+        FilePath resultFile = rootDir.child(resultFileName); //$NON-NLS-1$
         OutputStream fos = resultFile.write();
         XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(fos);
         writer.writeStartDocument();
@@ -53,15 +55,12 @@ final class StdXMLResultWriter implements ITestResultWriter {
           LOGGER.log(Level.SEVERE, "Cannot write result file."); //$NON-NLS-1$
       } catch (InterruptedException e) {
         LOGGER.log(Level.SEVERE, e.getMessage());
-        e.printStackTrace();
         done = 0;
       } catch (XMLStreamException e) {
         LOGGER.log(Level.SEVERE, e.getMessage());
-        e.printStackTrace();
         done = 0;
       } catch (FactoryConfigurationError e) {
         LOGGER.log(Level.SEVERE, e.getMessage());
-        e.printStackTrace();
         done = 0;
       }
     }
@@ -147,7 +146,7 @@ final class StdXMLResultWriter implements ITestResultWriter {
 
   private void writeError(XMLStreamWriter writer, String resultURL) throws XMLStreamException {
     writer.writeStartElement("error"); //$NON-NLS-1$
-    writer.writeAttribute("message", MessageFormat.format("{0}{1}", sctmHost, resultURL)); //$NON-NLS-1$
+    writer.writeAttribute("message", MessageFormat.format("{0}{1}", sctmHost, resultURL)); //$NON-NLS-1$ //$NON-NLS-2$
     writer.writeAttribute("type", "SCTMError"); //$NON-NLS-1$ //$NON-NLS-2$
     writer.writeEndElement();
   }
@@ -158,4 +157,5 @@ final class StdXMLResultWriter implements ITestResultWriter {
     writer.writeAttribute("type", Messages.getString("StdXMLResultWriter.testresult.failure")); //$NON-NLS-1$ //$NON-NLS-2$
     writer.writeEndElement();
   }
+
 }

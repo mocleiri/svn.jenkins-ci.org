@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-EnvVars (Hudson core 1.291 API)
+EnvVars (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ EnvVars (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="EnvVars (Hudson core 1.291 API)";
+        parent.document.title="EnvVars (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -178,6 +178,12 @@ Environment variables.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../hudson/EnvVars.html#EnvVars(hudson.EnvVars)">EnvVars</A></B>(<A HREF="../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;m)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../hudson/EnvVars.html#EnvVars(java.util.Map)">EnvVars</A></B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;m)</CODE>
 
 <BR>
@@ -218,7 +224,7 @@ Environment variables.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/EnvVars.html#getRemote(hudson.remoting.VirtualChannel)">getRemote</A></B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
+<TD><CODE><B><A HREF="../hudson/EnvVars.html#getRemote(hudson.remoting.VirtualChannel)">getRemote</A></B>(<A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the environment variables of a remote peer.</TD>
@@ -238,7 +244,7 @@ Environment variables.
 <TD><CODE><B><A HREF="../hudson/EnvVars.html#overrideAll(java.util.Map)">overrideAll</A></B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;all)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overrides all values in the map.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overrides all values in the map by the given map.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -344,6 +350,14 @@ public <B>EnvVars</B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbs
 </DL>
 <HR>
 
+<A NAME="EnvVars(hudson.EnvVars)"><!-- --></A><H3>
+EnvVars</H3>
+<PRE>
+public <B>EnvVars</B>(<A HREF="../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;m)</PRE>
+<DL>
+</DL>
+<HR>
+
 <A NAME="EnvVars(java.lang.String...)"><!-- --></A><H3>
 EnvVars</H3>
 <PRE>
@@ -383,7 +397,8 @@ overrideAll</H3>
 <PRE>
 public <A HREF="../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <B>overrideAll</B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;all)</PRE>
 <DL>
-<DD>Overrides all values in the map. See #override
+<DD>Overrides all values in the map by the given map.
+ See <A HREF="../hudson/EnvVars.html#override(java.lang.String, java.lang.String)"><CODE>override(String, String)</CODE></A>.
 <P>
 <DD><DL>
 
@@ -434,7 +449,7 @@ public java.lang.String <B>expand</B>(java.lang.String&nbsp;s)</PRE>
 <A NAME="getRemote(hudson.remoting.VirtualChannel)"><!-- --></A><H3>
 getRemote</H3>
 <PRE>
-public static <A HREF="../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <B>getRemote</B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)
+public static <A HREF="../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <B>getRemote</B>(<A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)
                          throws java.io.IOException,
                                 java.lang.InterruptedException</PRE>
 <DL>
@@ -442,6 +457,7 @@ public static <A HREF="../hudson/EnvVars.html" title="class in hudson">EnvVars</
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>channel</CODE> - Can be null, in which case the map indicating "N/A" will be returned.
+<DT><B>Returns:</B><DD>A fresh copy that can be owned and modified by the caller.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>

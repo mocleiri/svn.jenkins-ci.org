@@ -105,16 +105,27 @@ public abstract class Plugin implements Saveable {
      *
      * <p>
      * If a plugin wants to run an initialization step after all plugins and extension points
-     * are registered, a good place to do that is {@link ItemListener#onLoaded()}
+     * are registered, a good place to do that is {@link #postInitialize()}.
+     * If a plugin wants to run an initialization step after all the jobs are loaded,
+     * {@link ItemListener#onLoaded()} is a good place.
      *
      * @throws Exception
      *      any exception thrown by the plugin during the initialization will disable plugin.
      *
      * @since 1.42
      * @see ExtensionPoint
+     * @see #postInitialize()
      */
     public void start() throws Exception {
     }
+
+    /**
+     * Called after {@link #start()} is called for all the plugins.
+     *
+     * @throws Exception
+     *      any exception thrown by the plugin during the initialization will disable plugin.
+     */
+    public void postInitialize() throws Exception {}
 
     /**
      * Called to orderly shut down Hudson.
@@ -132,6 +143,13 @@ public abstract class Plugin implements Saveable {
      * @since 1.42
      */
     public void stop() throws Exception {
+    }
+
+    /**
+     * @since 1.233
+     * @deprecated as of 1.305 override {@link #configure(StaplerRequest,JSONObject)} instead
+     */
+    public void configure(JSONObject formData) throws IOException, ServletException, FormException {
     }
 
     /**
@@ -159,10 +177,10 @@ public abstract class Plugin implements Saveable {
      * <p>
      * If you are using this method, you'll likely be interested in
      * using {@link #save()} and {@link #load()}.
-     *
-     * @since 1.233
+     * @since 1.305
      */
-    public void configure(JSONObject formData) throws IOException, ServletException, FormException {
+    public void configure(StaplerRequest req, JSONObject formData) throws IOException, ServletException, FormException {
+        configure(formData);
     }
 
     /**

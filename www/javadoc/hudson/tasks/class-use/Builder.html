@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.tasks.Builder (Hudson core 1.291 API)
+Uses of Class hudson.tasks.Builder (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.tasks.Builder (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.tasks.Builder (Hudson core 1.291 API)";
+        parent.document.title="Uses of Class hudson.tasks.Builder (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -106,6 +106,10 @@ Packages that use <A HREF="../../../hudson/tasks/Builder.html" title="class in h
 <TD><A HREF="#hudson.tasks"><B>hudson.tasks</B></A></TD>
 <TD>Built-in <a href="../../../hudson/tasks/Builder.html"><tt>Builder</tt></a>s and <a href="../../../hudson/tasks/Publisher.html"><tt>Publisher</tt></a>s
 that perform the actual heavy-lifting of a build.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.jvnet.hudson.test"><B>org.jvnet.hudson.test</B></A></TD>
+<TD>Test harness for Hudson and its plugins.&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -384,6 +388,106 @@ Uses of <A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.task
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>Builder.</B><B><A HREF="../../../hudson/tasks/Builder.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.jvnet.hudson.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A> in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A> in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/CaptureEnvironmentBuilder.html" title="class in org.jvnet.hudson.test">CaptureEnvironmentBuilder</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A> that captures the environment variables used during a build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/FailureBuilder.html" title="class in org.jvnet.hudson.test">FailureBuilder</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mock <A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A> that always cause a build to fail.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/SleepBuilder.html" title="class in org.jvnet.hudson.test">SleepBuilder</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A> that just sleeps for the specified amount of milli-seconds.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/TestBuilder.html" title="class in org.jvnet.hudson.test">TestBuilder</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Partial <A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A> implementation for writing a one-off throw-away builder used during tests.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A> that return <A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A></CODE></FONT></TD>
+<TD><CODE><B>FailureBuilder.DescriptorImpl.</B><B><A HREF="../../../org/jvnet/hudson/test/FailureBuilder.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+            net.sf.json.JSONObject&nbsp;data)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A></CODE></FONT></TD>
+<TD><CODE><B>SleepBuilder.DescriptorImpl.</B><B><A HREF="../../../org/jvnet/hudson/test/SleepBuilder.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+            net.sf.json.JSONObject&nbsp;data)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A></CODE></FONT></TD>
+<TD><CODE><B>CaptureEnvironmentBuilder.DescriptorImpl.</B><B><A HREF="../../../org/jvnet/hudson/test/CaptureEnvironmentBuilder.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+            net.sf.json.JSONObject&nbsp;data)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A> that return types with arguments of type <A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>TestBuilder.</B><B><A HREF="../../../org/jvnet/hudson/test/TestBuilder.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

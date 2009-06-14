@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.model.Saveable (Hudson core 1.291 API)
+Uses of Interface hudson.model.Saveable (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.Saveable (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.Saveable (Hudson core 1.291 API)";
+        parent.document.title="Uses of Interface hudson.model.Saveable (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -103,14 +103,6 @@ Packages that use <A HREF="../../../hudson/model/Saveable.html" title="interface
 <TD>Matrix project&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven"><B>hudson.maven</B></A></TD>
-<TD>Maven support.&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven.reporters"><B>hudson.maven.reporters</B></A></TD>
-<TD>&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
@@ -171,6 +163,10 @@ action (such as the built-in JUnit one).&nbsp;</TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.views"><B>hudson.views</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.jvnet.hudson.test"><B>org.jvnet.hudson.test</B></A></TD>
+<TD>Test harness for Hudson and its plugins.&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -338,176 +334,6 @@ Uses of <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson
 </TABLE>
 &nbsp;
 <P>
-<A NAME="hudson.maven"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Uses of <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A> in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A></FONT></TH>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A> that implement <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/AbstractMavenProject.html" title="class in hudson.maven">AbstractMavenProject&lt;P extends AbstractMavenProject&lt;P,R&gt;,R extends AbstractBuild&lt;P,R&gt;&gt;</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common part between <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A> and <A HREF="../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven"><CODE>MavenModuleSet</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A> for <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A> that builds projects based on Maven2.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group of <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A>s.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/MavenModuleSet.DescriptorImpl.html" title="class in hudson.maven">MavenModuleSet.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven">MavenModuleSetBuild</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A> for <A HREF="../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven"><CODE>MavenModuleSet</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/MavenRedeployer.DescriptorImpl.html" title="class in hudson.maven">MavenRedeployer.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/MavenReporterDescriptor.html" title="class in hudson.maven">MavenReporterDescriptor</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/RedeployPublisher.DescriptorImpl.html" title="class in hudson.maven">RedeployPublisher.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson.maven.reporters"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Uses of <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A> in <A HREF="../../../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A></FONT></TH>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A> that implement <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/BuildInfoRecorder.DescriptorImpl.html" title="class in hudson.maven.reporters">BuildInfoRecorder.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenArtifactArchiver.DescriptorImpl.html" title="class in hudson.maven.reporters">MavenArtifactArchiver.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenFingerprinter.DescriptorImpl.html" title="class in hudson.maven.reporters">MavenFingerprinter.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenJavadocArchiver.DescriptorImpl.html" title="class in hudson.maven.reporters">MavenJavadocArchiver.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenMailer.DescriptorImpl.html" title="class in hudson.maven.reporters">MavenMailer.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenSiteArchiver.DescriptorImpl.html" title="class in hudson.maven.reporters">MavenSiteArchiver.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/ReportCollector.DescriptorImpl.html" title="class in hudson.maven.reporters">ReportCollector.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/SurefireArchiver.DescriptorImpl.html" title="class in hudson.maven.reporters">SurefireArchiver.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
 <A NAME="hudson.model"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -615,7 +441,23 @@ Uses of <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/AbstractProject.AbstractProjectDescriptor.html" title="class in hudson.model">AbstractProject.AbstractProjectDescriptor</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A> subtypes should implement this base class as a descriptor.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/AllView.DescriptorImpl.html" title="class in hudson.model">AllView.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/BooleanParameterDefinition.DescriptorImpl.html" title="class in hudson.model">BooleanParameterDefinition.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -630,11 +472,28 @@ Uses of <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/ChoiceParameterDefinition.DescriptorImpl.html" title="class in hudson.model">ChoiceParameterDefinition.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor&lt;T extends Describable&lt;T&gt;&gt;</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Metadata about a configurable instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/DownloadService.html" title="class in hudson.model">DownloadService</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Service for plugins to periodically retrieve update data files
+ (like the one in the update center) through browsers.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -914,6 +773,22 @@ Uses of <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson
 </TABLE>
 &nbsp;
 <P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> declared as <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></CODE></FONT></TD>
+<TD><CODE><B>Saveable.</B><B><A HREF="../../../hudson/model/Saveable.html#NOOP">NOOP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Saveable.html" title="interface in hudson.model"><CODE>Saveable</CODE></A> that doesn't save anything.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="hudson.node_monitors"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -1090,6 +965,14 @@ Uses of <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/scm/browsers/Sventon.DescriptorImpl.html" title="class in hudson.scm.browsers">Sventon.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/scm/browsers/Sventon2.DescriptorImpl.html" title="class in hudson.scm.browsers">Sventon2.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1308,6 +1191,14 @@ Uses of <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/Ant.AntInstaller.DescriptorImpl.html" title="class in hudson.tasks">Ant.AntInstaller.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/Ant.DescriptorImpl.html" title="class in hudson.tasks">Ant.DescriptorImpl</A></B></CODE>
 
 <BR>
@@ -1412,6 +1303,14 @@ Uses of <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/Maven.MavenInstaller.DescriptorImpl.html" title="class in hudson.tasks">Maven.MavenInstaller.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/Shell.DescriptorImpl.html" title="class in hudson.tasks">Shell.DescriptorImpl</A></B></CODE>
 
 <BR>
@@ -1486,6 +1385,46 @@ Uses of <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/CommandInstaller.DescriptorImpl.html" title="class in hudson.tools">CommandInstaller.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/DownloadFromUrlInstaller.DescriptorImpl.html" title="class in hudson.tools">DownloadFromUrlInstaller.DescriptorImpl&lt;T extends DownloadFromUrlInstaller&gt;</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/InstallSourceProperty.DescriptorImpl.html" title="class in hudson.tools">InstallSourceProperty.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/JDKInstaller.DescriptorImpl.html" title="class in hudson.tools">JDKInstaller.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/PropertyDescriptor.html" title="class in hudson.tools">PropertyDescriptor&lt;P extends Describable&lt;P&gt;,T&gt;</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> type used for <code>XyzProperty</code> classes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools">ToolDescriptor&lt;T extends ToolInstallation&gt;</A></B></CODE>
 
@@ -1494,8 +1433,32 @@ Uses of <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/ToolInstallerDescriptor.html" title="class in hudson.tools">ToolInstallerDescriptor&lt;T extends ToolInstaller&gt;</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Descriptor for a <A HREF="../../../hudson/tools/ToolInstaller.html" title="class in hudson.tools"><CODE>ToolInstaller</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tools/ToolLocationNodeProperty.DescriptorImpl.html" title="class in hudson.tools">ToolLocationNodeProperty.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/ToolPropertyDescriptor.html" title="class in hudson.tools">ToolPropertyDescriptor</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Descriptor for <A HREF="../../../hudson/tools/ToolProperty.html" title="class in hudson.tools"><CODE>ToolProperty</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/ZipExtractionInstaller.DescriptorImpl.html" title="class in hudson.tools">ZipExtractionInstaller.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1648,6 +1611,14 @@ Uses of <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/views/LastStableColumn.DescriptorImpl.html" title="class in hudson.views">LastStableColumn.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/views/LastSuccessColumn.DescriptorImpl.html" title="class in hudson.views">LastSuccessColumn.DescriptorImpl</A></B></CODE>
 
 <BR>
@@ -1665,6 +1636,47 @@ Uses of <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/views/WeatherColumn.DescriptorImpl.html" title="class in hudson.views">WeatherColumn.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.jvnet.hudson.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A> in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A> that implement <A HREF="../../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/CaptureEnvironmentBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">CaptureEnvironmentBuilder.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/FailureBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">FailureBuilder.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/SleepBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">SleepBuilder.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

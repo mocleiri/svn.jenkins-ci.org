@@ -1,3 +1,27 @@
+/**
+ * The MIT License
+ *
+ * Copyright (c) 2007-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt,
+ *                          Henrik Lynggaard, Peter Liljenberg, Andrew Bayer
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package hudson.plugins.clearcase.base;
 
 import static org.junit.Assert.*;
@@ -14,6 +38,7 @@ import hudson.plugins.clearcase.ClearCaseChangeLogEntry;
 import hudson.plugins.clearcase.ClearTool;
 import hudson.plugins.clearcase.ClearCaseChangeLogEntry.FileElement;
 import hudson.plugins.clearcase.history.DefaultFilter;
+import hudson.plugins.clearcase.history.FileFilter;
 import hudson.plugins.clearcase.history.DestroySubBranchFilter;
 import hudson.plugins.clearcase.history.Filter;
 
@@ -207,6 +232,30 @@ public class BaseHistoryActionTest {
                 
         List<Filter> filters = new ArrayList<Filter>();
         filters.add(new DestroySubBranchFilter());
+
+        BaseHistoryAction action = new BaseHistoryAction(cleartool,filters, 10000);
+        List<ClearCaseChangeLogEntry> changes = (List<ClearCaseChangeLogEntry>) action.getChanges(new Date(), "IGNORED", new String[]{"Release_2_1_int"}, new String[]{"vobs/projects/Server"});
+        assertEquals("The event record should be ignored", 0, changes.size());        
+        context.assertIsSatisfied();        
+    }
+
+    @Test
+    public void assertExcludedRegionsAreIgnored() throws Exception {
+        context.checking(new Expectations() {
+            {
+                one(cleartool).lshistory(with(equal(VALID_HISTORY_FORMAT)),
+                        with(any(Date.class)), with(any(String.class)), with(any(String.class)), 
+                        with(any(String[].class)));
+                will(returnValue(new StringReader(
+                                                  "\"20071015.151822\" \"user\" \"Customer\\DataSet.xsd\" \"\\main\\sit_r6a\\1\" \"create version\"  \"mkelem\" ")));
+
+
+            }
+        });
+                
+        List<Filter> filters = new ArrayList<Filter>();
+        filters.add(new DefaultFilter());
+        filters.add(new FileFilter(FileFilter.Type.DoesNotContainRegxp, "Customer"));
 
         BaseHistoryAction action = new BaseHistoryAction(cleartool,filters, 10000);
         List<ClearCaseChangeLogEntry> changes = (List<ClearCaseChangeLogEntry>) action.getChanges(new Date(), "IGNORED", new String[]{"Release_2_1_int"}, new String[]{"vobs/projects/Server"});

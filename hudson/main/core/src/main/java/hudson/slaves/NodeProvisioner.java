@@ -28,10 +28,10 @@ import hudson.model.Node;
 import hudson.model.Hudson;
 import hudson.model.MultiStageTimeSeries;
 import hudson.model.Label;
+import hudson.model.PeriodicWork;
 import static hudson.model.LoadStatistics.DECAY;
 import hudson.model.MultiStageTimeSeries.TimeScale;
-import hudson.triggers.SafeTimerTask;
-import hudson.triggers.Trigger;
+import hudson.Extension;
 
 import java.util.concurrent.Future;
 import java.util.concurrent.ExecutionException;
@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.io.IOException;
 
 /**
  * Uses the {@link LoadStatistics} and determines when we need to allocate
@@ -105,13 +106,15 @@ public class NodeProvisioner {
         for (Iterator<PlannedNode> itr = pendingLaunches.iterator(); itr.hasNext();) {
             PlannedNode f = itr.next();
             if(f.future.isDone()) {
-                LOGGER.info(f.displayName+" provisioning completed. We have now "+hudson.getComputers().length+" computer(s)");
                 try {
-                    f.future.get();
+                    hudson.addNode(f.future.get());
+                    LOGGER.info(f.displayName+" provisioning successfully completed. We have now "+hudson.getComputers().length+" computer(s)");
                 } catch (InterruptedException e) {
                     throw new AssertionError(e); // since we confirmed that the future is already done
                 } catch (ExecutionException e) {
-                    LOGGER.log(Level.WARNING, "Provisioned slave failed to launch",e.getCause());
+                    LOGGER.log(Level.WARNING, "Provisioned slave "+f.displayName+" failed to launch",e.getCause());
+                } catch (IOException e) {
+                    LOGGER.log(Level.WARNING, "Provisioned slave "+f.displayName+" failed to launch",e);
                 }
                 itr.remove();
             } else
@@ -165,7 +168,7 @@ public class NodeProvisioner {
 
             float excessWorkload = qlen - plannedCapacity;
             if(excessWorkload>1-MARGIN) {// and there's more work to do...
-                LOGGER.info("Excess workload "+excessWorkload+" detected. (planned capacity="+plannedCapacity+",Qlen="+qlen+",idle="+idle+"&"+idleSnapshot+",total="+totalSnapshot+")");
+                LOGGER.fine("Excess workload "+excessWorkload+" detected. (planned capacity="+plannedCapacity+",Qlen="+qlen+",idle="+idle+"&"+idleSnapshot+",total="+totalSnapshot+")");
                 for( Cloud c : hudson.clouds ) {
                     if(excessWorkload<0)    break;  // enough slaves allocated
 
@@ -186,21 +189,31 @@ public class NodeProvisioner {
         }
     }
 
-    public static void launch() {
-        // periodically invoke NodeProvisioners
-        Trigger.timer.scheduleAtFixedRate(new SafeTimerTask() {
-                @Override
-                protected void doRun() {
-                    Hudson h = Hudson.getInstance();
-                    h.overallNodeProvisioner.update();
-                    for( Label l : h.getLabels() )
-                        l.nodeProvisioner.update();
-                }
-            },
-            // give some initial warm up time so that statically connected slaves
-            // can be brought online before we start allocating more.
-            LoadStatistics.CLOCK*10,
-            LoadStatistics.CLOCK);
+    /**
+     * Periodically invoke NodeProvisioners
+     */
+    @Extension
+    public static class NodeProvisionerInvoker extends PeriodicWork {
+        /**
+         * Give some initial warm up time so that statically connected slaves
+         * can be brought online before we start allocating more.
+         */
+        @Override
+        public long getInitialDelay() {
+            return LoadStatistics.CLOCK*10;
+        }
+
+        public long getRecurrencePeriod() {
+            return LoadStatistics.CLOCK;
+        }
+
+        @Override
+        protected void doRun() {
+            Hudson h = Hudson.getInstance();
+            h.overallNodeProvisioner.update();
+            for( Label l : h.getLabels() )
+                l.nodeProvisioner.update();
+        }
     }
 
     private static final float MARGIN = 0.1f;

@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.AdministrativeMonitor (Hudson core 1.291 API)
+Uses of Class hudson.model.AdministrativeMonitor (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.AdministrativeMonitor (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.AdministrativeMonitor (Hudson core 1.291 API)";
+        parent.document.title="Uses of Class hudson.model.AdministrativeMonitor (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -91,8 +91,16 @@ function windowTitle()
 Packages that use <A HREF="../../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model">AdministrativeMonitor</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.diagnosis"><B>hudson.diagnosis</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.node_monitors"><B>hudson.node_monitors</B></A></TD>
+<TD>Code that monitors the health of slaves&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.os.solaris"><B>hudson.os.solaris</B></A></TD>
@@ -101,6 +109,39 @@ Packages that use <A HREF="../../../hudson/model/AdministrativeMonitor.html" tit
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.triggers"><B>hudson.triggers</B></A></TD>
 <TD>Built-in <a href="../../../hudson/triggers/Trigger.html"><tt>Trigger</tt></a>s that run periodically to kick a new build.&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.diagnosis"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model">AdministrativeMonitor</A> in <A HREF="../../../hudson/diagnosis/package-summary.html">hudson.diagnosis</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model">AdministrativeMonitor</A> in <A HREF="../../../hudson/diagnosis/package-summary.html">hudson.diagnosis</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/diagnosis/HudsonHomeDiskUsageMonitor.html" title="class in hudson.diagnosis">HudsonHomeDiskUsageMonitor</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Monitors the disk usage of <tt>HUDSON_HOME</tt>, and if it's almost filled up, warn the user.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/diagnosis/TooManyJobsButNoView.html" title="class in hudson.diagnosis">TooManyJobsButNoView</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If Hudson is run with a lot of jobs but no views, suggest the user that they can create views.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -174,6 +215,31 @@ Uses of <A HREF="../../../hudson/model/AdministrativeMonitor.html" title="class 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model"><CODE>AdministrativeMonitor</CODE></A> instances.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.node_monitors"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model">AdministrativeMonitor</A> in <A HREF="../../../hudson/node_monitors/package-summary.html">hudson.node_monitors</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/model/AdministrativeMonitor.html" title="class in hudson.model">AdministrativeMonitor</A> in <A HREF="../../../hudson/node_monitors/package-summary.html">hudson.node_monitors</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/node_monitors/MonitorMarkedNodeOffline.html" title="class in hudson.node_monitors">MonitorMarkedNodeOffline</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If <A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A> marks the node as offline, we'll show this to the admin to get their attention.</TD>
 </TR>
 </TABLE>
 &nbsp;

@@ -33,7 +33,6 @@ import hudson.Util;
 import hudson.XmlFile;
 import hudson.Functions;
 import hudson.Extension;
-import static hudson.Util.fixEmptyAndTrim;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
@@ -44,20 +43,23 @@ import hudson.model.TaskListener;
 import hudson.remoting.Callable;
 import hudson.remoting.Channel;
 import hudson.remoting.VirtualChannel;
+import hudson.remoting.FastPipedInputStream;
+import hudson.remoting.FastPipedOutputStream;
 import hudson.triggers.SCMTrigger;
 import hudson.util.EditDistance;
-import hudson.util.FormFieldValidator;
 import hudson.util.IOException2;
 import hudson.util.MultipartFormDataParser;
 import hudson.util.Scrambler;
 import hudson.util.StreamCopyThread;
 import hudson.util.XStream2;
+import hudson.util.FormValidation;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.io.FileUtils;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Chmod;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.putty.PuTTYKey;
 import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNErrorCode;
@@ -96,6 +98,7 @@ import org.tmatesoft.svn.core.wc.SVNWCUtil;
 import org.tmatesoft.svn.core.wc.SVNLogClient;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.transform.stream.StreamResult;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -104,8 +107,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -315,6 +316,7 @@ public class SubversionSCM extends SCM implements Serializable {
             // to change this later (to something more sensible, such as
             // choosing the "root module" or whatever), so let's not set
             // anything for now.
+            // besides, one can always use 'svnversion' to obtain the revision more explicitly.
         } catch (IOException e) {
             // ignore this error
         }
@@ -533,8 +535,8 @@ public class SubversionSCM extends SCM implements Serializable {
 
                     // buffer the output by a separate thread so that the update operation
                     // won't be blocked by the remoting of the data
-                    PipedOutputStream pos = new PipedOutputStream();
-                    StreamCopyThread sct = new StreamCopyThread("svn log copier", new PipedInputStream(pos), listener.getLogger());
+                    FastPipedOutputStream pos = new FastPipedOutputStream();
+                    StreamCopyThread sct = new StreamCopyThread("svn log copier", new FastPipedInputStream(pos), listener.getLogger());
                     sct.start();
 
                     for (final ModuleLocation l : locations) {
@@ -1037,13 +1039,13 @@ public class SubversionSCM extends SCM implements Serializable {
          * and it's capable of creating {@link SVNAuthentication} object,
          * to be passed to SVNKit.
          */
-        private static abstract class Credential implements Serializable {
+        public static abstract class Credential implements Serializable {
             /**
              * @param kind
              *      One of the constants defined in {@link ISVNAuthenticationManager},
              *      indicating what subype of {@link SVNAuthentication} is expected.
              */
-            abstract SVNAuthentication createSVNAuthentication(String kind) throws SVNException;
+            public abstract SVNAuthentication createSVNAuthentication(String kind) throws SVNException;
         }
 
         /**
@@ -1059,7 +1061,7 @@ public class SubversionSCM extends SCM implements Serializable {
             }
 
             @Override
-            SVNAuthentication createSVNAuthentication(String kind) {
+            public SVNAuthentication createSVNAuthentication(String kind) {
                 if(kind.equals(ISVNAuthenticationManager.SSH))
                     return new SVNSSHAuthentication(userName,Scrambler.descramble(password),-1,false);
                 else
@@ -1119,7 +1121,7 @@ public class SubversionSCM extends SCM implements Serializable {
             }
 
             @Override
-            SVNSSHAuthentication createSVNAuthentication(String kind) throws SVNException {
+            public SVNSSHAuthentication createSVNAuthentication(String kind) throws SVNException {
                 if(kind.equals(ISVNAuthenticationManager.SSH)) {
                     try {
                         Channel channel = Channel.current();
@@ -1156,7 +1158,7 @@ public class SubversionSCM extends SCM implements Serializable {
             }
 
             @Override
-            SVNAuthentication createSVNAuthentication(String kind) {
+            public SVNAuthentication createSVNAuthentication(String kind) {
                 if(kind.equals(ISVNAuthenticationManager.SSL))
                     return new SVNSSLAuthentication(null,Scrambler.descramble(password),false);
                 else
@@ -1169,7 +1171,7 @@ public class SubversionSCM extends SCM implements Serializable {
          * to read from local {@link DescriptorImpl#credentials}.
          */
         private interface RemotableSVNAuthenticationProvider {
-            Credential getCredential(String realm);
+            Credential getCredential(SVNURL url, String realm);
         }
 
         /**
@@ -1179,7 +1181,14 @@ public class SubversionSCM extends SCM implements Serializable {
         private transient final RemotableSVNAuthenticationProviderImpl remotableProvider = new RemotableSVNAuthenticationProviderImpl();
 
         private final class RemotableSVNAuthenticationProviderImpl implements RemotableSVNAuthenticationProvider, Serializable {
-            public Credential getCredential(String realm) {
+            public Credential getCredential(SVNURL url, String realm) {
+                for (SubversionCredentialProvider p : SubversionCredentialProvider.all()) {
+                    Credential c = p.getCredential(url,realm);
+                    if(c!=null) {
+                        LOGGER.fine(String.format("getCredential(%s)=>%s by %s",realm,c,p));
+                        return c;
+                    }
+                }
                 LOGGER.fine(String.format("getCredential(%s)=>%s",realm,credentials.get(realm)));
                 return credentials.get(realm);
             }
@@ -1203,7 +1212,7 @@ public class SubversionSCM extends SCM implements Serializable {
             }
 
             public SVNAuthentication requestClientAuthentication(String kind, SVNURL url, String realm, SVNErrorMessage errorMessage, SVNAuthentication previousAuth, boolean authMayBeStored) {
-                Credential cred = source.getCredential(realm);
+                Credential cred = source.getCredential(url,realm);
                 LOGGER.fine(String.format("requestClientAuthentication(%s,%s,%s)=>%s",kind,url,realm,cred));
 
                 try {
@@ -1278,6 +1287,10 @@ public class SubversionSCM extends SCM implements Serializable {
 
             MultipartFormDataParser parser = new MultipartFormDataParser(req);
 
+            if(Hudson.getInstance().isUseCrumbs() && !Hudson.getInstance().getCrumbIssuer().validateCrumb(req, parser)) {
+                rsp.sendError(HttpServletResponse.SC_FORBIDDEN,"No crumb found");                
+            }
+            
             String url = parser.get("url");
 
             String kind = parser.get("kind");
@@ -1433,83 +1446,75 @@ public class SubversionSCM extends SCM implements Serializable {
         /**
          * validate the value for a remote (repository) location.
          */
-        public void doSvnRemoteLocationCheck(final StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-            // false==No permisison needed for basic check
-            new FormFieldValidator(req, rsp, false) {
-                protected void check() throws IOException, ServletException {
-                    // syntax check first
-                    String url = Util.nullify(request.getParameter("value"));
-                    if (url == null) {
-                        ok(); // not entered yet
-                        return;
+        public FormValidation doSvnRemoteLocationCheck(StaplerRequest req, @QueryParameter String value) {
+            // syntax check first
+            String url = Util.nullify(value);
+            if (url == null)
+                return FormValidation.ok();
+
+            // remove unneeded whitespaces
+            url = url.trim();
+            if(!URL_PATTERN.matcher(url).matches())
+                return FormValidation.errorWithMarkup("Invalid URL syntax. See "
+                    + "<a href=\"http://svnbook.red-bean.com/en/1.2/svn-book.html#svn.basic.in-action.wc.tbl-1\">this</a> "
+                    + "for information about valid URLs.");
+
+            // Test the connection only if we have admin permission
+            if (!Hudson.getInstance().hasPermission(Hudson.ADMINISTER))
+                return FormValidation.ok();
+
+            try {
+                SVNURL repoURL = SVNURL.parseURIDecoded(url);
+                if (checkRepositoryPath(repoURL)!=SVNNodeKind.NONE)
+                    // something exists
+                    return FormValidation.ok();
+
+                SVNRepository repository = null;
+                try {
+                    repository = getRepository(repoURL);
+                    long rev = repository.getLatestRevision();
+                    // now go back the tree and find if there's anything that exists
+                    String repoPath = getRelativePath(repoURL, repository);
+                    String p = repoPath;
+                    while(p.length()>0) {
+                        p = SVNPathUtil.removeTail(p);
+                        if(repository.checkPath(p,rev)==SVNNodeKind.DIR) {
+                            // found a matching path
+                            List<SVNDirEntry> entries = new ArrayList<SVNDirEntry>();
+                            repository.getDir(p,rev,false,entries);
+
+                            // build up the name list
+                            List<String> paths = new ArrayList<String>();
+                            for (SVNDirEntry e : entries)
+                                if(e.getKind()==SVNNodeKind.DIR)
+                                    paths.add(e.getName());
+
+                            String head = SVNPathUtil.head(repoPath.substring(p.length() + 1));
+                            String candidate = EditDistance.findNearest(head,paths);
+
+                            return FormValidation.error("'%1$s/%2$s' doesn't exist in the repository. Maybe you meant '%1$s/%3$s'?",
+                                    p, head, candidate);
+                        }
                     }
 
-                    // remove unneeded whitespaces
-                    url = url.trim();
-                    if(!URL_PATTERN.matcher(url).matches()) {
-                        errorWithMarkup("Invalid URL syntax. See "
-                            + "<a href=\"http://svnbook.red-bean.com/en/1.2/svn-book.html#svn.basic.in-action.wc.tbl-1\">this</a> "
-                            + "for information about valid URLs.");
-                        return;
-                    }
-
-                    // Test the connection only if we have admin permission
-                    if (!Hudson.getInstance().hasPermission(Hudson.ADMINISTER)) {
-                        ok();
-                    } else try {
-                        SVNURL repoURL = SVNURL.parseURIDecoded(url);
-                        if (checkRepositoryPath(repoURL)==SVNNodeKind.NONE) {
-                            SVNRepository repository = null;
-                            try {
-                                repository = getRepository(repoURL);
-                                long rev = repository.getLatestRevision();
-                                // now go back the tree and find if there's anything that exists
-                                String repoPath = getRelativePath(repoURL, repository);
-                                String p = repoPath;
-                                while(p.length()>0) {
-                                    p = SVNPathUtil.removeTail(p);
-                                    if(repository.checkPath(p,rev)==SVNNodeKind.DIR) {
-                                        // found a matching path
-                                        List<SVNDirEntry> entries = new ArrayList<SVNDirEntry>();
-                                        repository.getDir(p,rev,false,entries);
-
-                                        // build up the name list
-                                        List<String> paths = new ArrayList<String>();
-                                        for (SVNDirEntry e : entries)
-                                            if(e.getKind()==SVNNodeKind.DIR)
-                                                paths.add(e.getName());
-
-                                        String head = SVNPathUtil.head(repoPath.substring(p.length() + 1));
-                                        String candidate = EditDistance.findNearest(head,paths);
-
-                                        error("'%1$s/%2$s' doesn't exist in the repository. Maybe you meant '%1$s/%3$s'?",
-                                                p, head, candidate);
-                                        return;
-                                    }
-                                }
-
-                                error(repoPath+" doesn't exist in the repository");
-                            } finally {
-                                if (repository != null)
-                                    repository.closeSession();
-                            }
-                        } else
-                            ok();
-                    } catch (SVNException e) {
-                        String message="";
-                        message += "Unable to access "+Util.escape(url)+" : "+Util.escape( e.getErrorMessage().getFullMessage());
-                        message += " <a href='#' id=svnerrorlink onclick='javascript:" +
-                            "document.getElementById(\"svnerror\").style.display=\"block\";" +
-                            "document.getElementById(\"svnerrorlink\").style.display=\"none\";" +
-                            "return false;'>(show details)</a>";
-                        message += "<pre id=svnerror style='display:none'>"+Functions.printThrowable(e)+"</pre>";
-                        message += " (Maybe you need to <a target='_new' href='"+req.getContextPath()+"/scm/SubversionSCM/enterCredential?"+url+"'>enter credential</a>?)";
-                        message += "<br>";
-                        LOGGER.log(Level.INFO, "Failed to access subversion repository "+url,e);
-                        errorWithMarkup(message);
-                    }
+                    return FormValidation.error(repoPath+" doesn't exist in the repository");
+                } finally {
+                    if (repository != null)
+                        repository.closeSession();
                 }
-            }.process();
+            } catch (SVNException e) {
+                String message="";
+                message += "Unable to access "+Util.escape(url)+" : "+Util.escape( e.getErrorMessage().getFullMessage());
+                message += " <a href='#' id=svnerrorlink onclick='javascript:" +
+                    "document.getElementById(\"svnerror\").style.display=\"block\";" +
+                    "document.getElementById(\"svnerrorlink\").style.display=\"none\";" +
+                    "return false;'>(show details)</a>";
+                message += "<pre id=svnerror style='display:none'>"+Functions.printThrowable(e)+"</pre>";
+                message += " (Maybe you need to <a target='_new' href='"+req.getContextPath()+"/scm/SubversionSCM/enterCredential?"+url+"'>enter credential</a>?)";
+                message += "<br>";
+                LOGGER.log(Level.INFO, "Failed to access subversion repository "+url,e);
+                return FormValidation.errorWithMarkup(message);
+            }
         }
 
         public SVNNodeKind checkRepositoryPath(SVNURL repoURL) throws SVNException {
@@ -1558,53 +1563,34 @@ public class SubversionSCM extends SCM implements Serializable {
         /**
          * validate the value for a local location (local checkout directory).
          */
-        public void doSvnLocalLocationCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-            // false==No permission needed for this syntax check
-            new FormFieldValidator(req, rsp, false) {
-                protected void check() throws IOException, ServletException {
-                    String v = Util.nullify(request.getParameter("value"));
-                    if (v == null) {
-                        // local directory is optional so this is ok
-                        ok();
-                        return;
-                    }
+        public FormValidation doSvnLocalLocationCheck(@QueryParameter String value) throws IOException, ServletException {
+            String v = Util.nullify(value);
+            if (v == null)
+                // local directory is optional so this is ok
+                return FormValidation.ok();
 
-                    v = v.trim();
+            v = v.trim();
 
-                    // check if a absolute path has been supplied
-                    // (the last check with the regex will match windows drives)
-                    if (v.startsWith("/") || v.startsWith("\\") || v.startsWith("..") || v.matches("^[A-Za-z]:")) {
-                        error("absolute path is not allowed");
-                    }
+            // check if a absolute path has been supplied
+            // (the last check with the regex will match windows drives)
+            if (v.startsWith("/") || v.startsWith("\\") || v.startsWith("..") || v.matches("^[A-Za-z]:"))
+                return FormValidation.error("absolute path is not allowed");
 
-                    // all tests passed so far
-                    ok();
-                }
-            }.process();
+            // all tests passed so far
+            return FormValidation.ok();
         }
 
         /**
          * Validates the excludeRegions Regex
          */
-        public void doExcludeRegionsCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-            new FormFieldValidator(req,rsp,false) {
-                protected void check() throws IOException, ServletException {
-                    String v = fixEmptyAndTrim(request.getParameter("value"));
-
-                    if(v != null) {
-	                    String[] regions = v.split("[\\r\\n]+");
-	                    for (String region : regions) {
-		                    try {
-			                    Pattern.compile(region);
-		                    }
-		                    catch (PatternSyntaxException e) {
-			                    error("Invalid regular expression. " + e.getMessage());
-		                    }
-	                    }
-                    }
-                    ok();
+        public FormValidation doExcludeRegionsCheck(@QueryParameter String value) throws IOException, ServletException {
+            for (String region : Util.fixNull(value).trim().split("[\\r\\n]+"))
+                try {
+                    Pattern.compile(region);
+                } catch (PatternSyntaxException e) {
+                    return FormValidation.error("Invalid regular expression. " + e.getMessage());
                 }
-            }.process();
+            return FormValidation.ok();
         }
 
         static {

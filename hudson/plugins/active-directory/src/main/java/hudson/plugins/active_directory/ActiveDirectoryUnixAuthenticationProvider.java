@@ -2,6 +2,9 @@ package hudson.plugins.active_directory;
 
 import com.sun.jndi.ldap.LdapCtxFactory;
 import hudson.plugins.active_directory.ActiveDirectorySecurityRealm.DesciprotrImpl;
+import hudson.security.GroupDetails;
+import hudson.security.UserMayOrMayNotExistException;
+
 import org.acegisecurity.AuthenticationException;
 import org.acegisecurity.BadCredentialsException;
 import org.acegisecurity.GrantedAuthority;
@@ -35,7 +38,7 @@ import java.util.logging.Logger;
  * @author Kohsuke Kawaguchi
  */
 public class ActiveDirectoryUnixAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider
-    implements UserDetailsService {
+    implements UserDetailsService, GroupDetailsService {
 
     private final String domainName;
 
@@ -97,7 +100,7 @@ public class ActiveDirectoryUnixAuthenticationProvider extends AbstractUserDetai
             Attribute memberOf = result.getAttributes().get("memberOf");
             if(memberOf!=null) {// null if this user belongs to no group at all
                 for(int i=0; i<memberOf.size(); i++) {
-                    Attributes atts = context.getAttributes(memberOf.get(i).toString(), new String[]{"CN"});
+                    Attributes atts = context.getAttributes("\"" + memberOf.get(i) + '"', new String[]{"CN"});
                     Attribute att = atts.get("CN");
                     groups.add(new GrantedAuthorityImpl(att.get().toString()));
                 }
@@ -127,4 +130,8 @@ public class ActiveDirectoryUnixAuthenticationProvider extends AbstractUserDetai
     }
 
     private static final Logger LOGGER = Logger.getLogger(ActiveDirectoryUnixAuthenticationProvider.class.getName());
+
+	public GroupDetails loadGroupByGroupname(String groupname) {
+		throw new UserMayOrMayNotExistException(groupname);
+	}
 }

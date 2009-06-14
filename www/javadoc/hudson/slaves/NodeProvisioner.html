@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-NodeProvisioner (Hudson core 1.291 API)
+NodeProvisioner (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ NodeProvisioner (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="NodeProvisioner (Hudson core 1.291 API)";
+        parent.document.title="NodeProvisioner (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/slaves/NodeProvisioner.PlannedNode.html" title="class in hudson.slaves"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/slaves/NodeProvisioner.NodeProvisionerInvoker.html" title="class in hudson.slaves"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/slaves/NodeProvisioner.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="NodeProvisioner.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,9 +77,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#methods_inherited_from_class_java.lang.Object">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;METHOD</FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -125,6 +125,14 @@ Uses the <A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/NodeProvisioner.NodeProvisionerInvoker.html" title="class in hudson.slaves">NodeProvisioner.NodeProvisionerInvoker</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Periodically invoke NodeProvisioners</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/NodeProvisioner.PlannedNode.html" title="class in hudson.slaves">NodeProvisioner.PlannedNode</A></B></CODE>
 
 <BR>
@@ -157,14 +165,6 @@ Uses the <A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/slaves/NodeProvisioner.html#launch()">launch</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -194,26 +194,6 @@ NodeProvisioner</H3>
 public <B>NodeProvisioner</B>(<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&nbsp;label,
                        <A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model">LoadStatistics</A>&nbsp;loadStatistics)</PRE>
 <DL>
-</DL>
-
-<!-- ============ METHOD DETAIL ========== -->
-
-<A NAME="method_detail"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
-<B>Method Detail</B></FONT></TH>
-</TR>
-</TABLE>
-
-<A NAME="launch()"><!-- --></A><H3>
-launch</H3>
-<PRE>
-public static void <B>launch</B>()</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
@@ -247,7 +227,7 @@ public static void <B>launch</B>()</PRE>
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/slaves/NodeProvisioner.PlannedNode.html" title="class in hudson.slaves"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/slaves/NodeProvisioner.NodeProvisionerInvoker.html" title="class in hudson.slaves"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/slaves/NodeProvisioner.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="NodeProvisioner.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -267,9 +247,9 @@ public static void <B>launch</B>()</PRE>
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#methods_inherited_from_class_java.lang.Object">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;METHOD</FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>

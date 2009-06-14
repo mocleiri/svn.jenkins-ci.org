@@ -4,15 +4,15 @@
   <parent>
     <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>1.291</version>
+    <version>1.309</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>violations</artifactId>
   <packaging>hpi</packaging>
-  <version>0.7.4-SNAPSHOT</version>
+  <version>0.7.5-SNAPSHOT</version>
   <name>Hudson Violations plugin</name>
-  <url>http://hudson.gotdns.com/wiki/display/HUDSON/Violations</url>
+  <url>http://wiki.hudson-ci.org/display/HUDSON/Violations</url>
  
   <build>
      <plugins>
@@ -50,6 +50,10 @@
   </reporting>
 
   <dependencies>
+    <dependency>
+      <groupId>org.jvnet.hudson.main</groupId>
+      <artifactId>maven-plugin</artifactId>
+    </dependency>
     <dependency>
       <groupId>xpp3</groupId>
       <artifactId>xpp3</artifactId>

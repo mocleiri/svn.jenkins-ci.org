@@ -1,7 +1,7 @@
 <!--
 The MIT License
 
-Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Seiji Sogabe
+Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Seiji Sogabe, Yahoo! Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -45,15 +45,15 @@ THE SOFTWARE.
             <j:forEach var="p" items="${app.pluginManager.plugins}">
               <tr>
                 <td class="center pane">
-                  <j:set var="state" value="${h.ifThenElse(p.enabled,'true',null)}"/>
+                  <j:set var="state" value="${p.enabled?'true':null}"/>
                   <input type="checkbox" checked="${state}" onclick="flip(event)"
                          url="plugin/${p.shortName}"
-                         original="${h.ifThenElse(p.active,'true','false')}"/>
+                         original="${p.active?'true':'false'}"/>
                 </td>
                 <td class="pane">
                   <div>
                     <a href="${p.url}">
-                      ${h.ifThenElse(p.updateInfo!=null, p.updateInfo.title, p.longName)}
+                      ${p.updateInfo.title?:p.longName}
                     </a>
                   </div>
                   <div class="excerpt">
@@ -63,7 +63,7 @@ THE SOFTWARE.
                     </j:if>
                   </div>
                 </td>
-                <td class="center pane" style="white-space:no-wrap">
+                <td class="center pane" style="white-space:nowrap">
                   ${p.version}
                 </td>
               </tr>
@@ -92,8 +92,13 @@ THE SOFTWARE.
           </div>
         </div>
       </j:if>
-      <div class="error" id="needRestart" style="display:none; margin: 1em; height: 1em">
-        ${%Changes will take effect when you restart Hudson}
+      <div class="warning" id="needRestart" style="display:none; margin: 1em; height: 1em">
+        <form method="post" action="${rootURL}/restart">
+          ${%Changes will take effect when you restart Hudson}
+          <j:if test="${app.lifecycle.canRestart()}">
+            <s:submit value="${%Restart Now}" />
+          </j:if>
+        </form>
       </div>
 
 

@@ -1,13 +1,11 @@
 package configurationslicing;
 
-import hudson.ExtensionPoint;
-import hudson.maven.MavenReporterDescriptor;
-import hudson.model.Describable;
-import hudson.model.Descriptor;
-import hudson.model.Hudson;
+import hudson.model.Descriptor.FormException;
+import net.sf.json.JSONObject;
 
-public abstract class Slice implements Describable<Slice> {
-    public Descriptor<Slice> getDescriptor() {
-        return (Descriptor<Slice>)Hudson.getInstance().getDescriptor(getClass());
-    }
+import org.kohsuke.stapler.StaplerRequest;
+
+public abstract class Slice{
+    public abstract Slice newInstance(StaplerRequest req, JSONObject formData)
+            throws FormException ;
 }

@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson Class Hierarchy (Hudson core 1.291 API)
+hudson Class Hierarchy (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson Class Hierarchy (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson Class Hierarchy (Hudson core 1.291 API)";
+        parent.document.title="hudson Class Hierarchy (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;PREV&nbsp;
-&nbsp;<A HREF="../hudson/fsp/package-tree.html"><B>NEXT</B></A></FONT></TD>
+&nbsp;<A HREF="../hudson/cli/package-tree.html"><B>NEXT</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/package-tree.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="package-tree.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -132,6 +132,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.<A HREF="../hudson/FileSystemProvisioner.Default.html" title="class in hudson"><B>FileSystemProvisioner.Default</B></A></UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/Functions.html" title="class in hudson"><B>Functions</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/Functions.RunUrl.html" title="class in hudson"><B>Functions.RunUrl</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/Indenter.html" title="class in hudson"><B>Indenter</B></A>&lt;J&gt;<LI TYPE="circle">hudson.<A HREF="../hudson/Launcher.html" title="class in hudson"><B>Launcher</B></A><UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><B>Launcher.LocalLauncher</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/Launcher.RemoteLauncher.html" title="class in hudson"><B>Launcher.RemoteLauncher</B></A></UL>
+<LI TYPE="circle">hudson.<A HREF="../hudson/LauncherDecorator.html" title="class in hudson"><B>LauncherDecorator</B></A> (implements hudson.<A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <LI TYPE="circle">hudson.<A HREF="../hudson/Main.html" title="class in hudson"><B>Main</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/Messages.html" title="class in hudson"><B>Messages</B></A><LI TYPE="circle">java.io.OutputStream (implements java.io.Closeable, java.io.Flushable)
 <UL>
 <LI TYPE="circle">hudson.util.<A HREF="../hudson/util/DelegatingOutputStream.html" title="class in hudson.util"><B>DelegatingOutputStream</B></A><UL>
@@ -152,6 +153,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.<A HREF="../hudson/AbortException.html" title="class in hudson"><B>AbortException</B></A></UL>
 </UL>
 </UL>
+<LI TYPE="circle">hudson.<A HREF="../hudson/UDPBroadcastFragment.html" title="class in hudson"><B>UDPBroadcastFragment</B></A> (implements hudson.<A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <LI TYPE="circle">hudson.<A HREF="../hudson/Util.html" title="class in hudson"><B>Util</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/WebAppMain.html" title="class in hudson"><B>WebAppMain</B></A> (implements javax.servlet.ServletContextListener)
 <LI TYPE="circle">hudson.<A HREF="../hudson/WorkspaceSnapshot.html" title="class in hudson"><B>WorkspaceSnapshot</B></A> (implements hudson.model.<A HREF="../hudson/model/Action.html" title="interface in hudson.model">Action</A>)
 <UL>
@@ -174,6 +176,16 @@ Annotation Type Hierarchy
 <LI TYPE="circle">hudson.<A HREF="../hudson/CopyOnWrite.html" title="annotation in hudson"><B>CopyOnWrite</B></A> (implements java.lang.annotation.Annotation)
 <LI TYPE="circle">hudson.<A HREF="../hudson/Extension.html" title="annotation in hudson"><B>Extension</B></A> (implements java.lang.annotation.Annotation)
 <LI TYPE="circle">hudson.<A HREF="../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson"><B>ExtensionPoint.LegacyInstancesAreScopedToHudson</B></A> (implements java.lang.annotation.Annotation)
+</UL>
+<H2>
+Enum Hierarchy
+</H2>
+<UL>
+<LI TYPE="circle">java.lang.Object<UL>
+<LI TYPE="circle">java.lang.Enum&lt;E&gt; (implements java.lang.Comparable&lt;T&gt;, java.io.Serializable)
+<UL>
+<LI TYPE="circle">hudson.<A HREF="../hudson/Platform.html" title="enum in hudson"><B>Platform</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/FilePath.TarCompression.html" title="enum in hudson"><B>FilePath.TarCompression</B></A></UL>
+</UL>
 </UL>
 <HR>
 
@@ -206,7 +218,7 @@ Annotation Type Hierarchy
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;PREV&nbsp;
-&nbsp;<A HREF="../hudson/fsp/package-tree.html"><B>NEXT</B></A></FONT></TD>
+&nbsp;<A HREF="../hudson/cli/package-tree.html"><B>NEXT</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/package-tree.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="package-tree.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

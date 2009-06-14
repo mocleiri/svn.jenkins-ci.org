@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ComputerListener (Hudson core 1.291 API)
+ComputerListener (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ComputerListener (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ComputerListener (Hudson core 1.291 API)";
+        parent.document.title="ComputerListener (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -184,7 +184,28 @@ Receives notifications about status changes of <A HREF="../../hudson/model/Compu
 <TD><CODE><B><A HREF="../../hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer)">onOnline</A></B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.292
+      Use <A HREF="../../hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer, hudson.model.TaskListener)"><CODE>onOnline(Computer, TaskListener)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer, hudson.model.TaskListener)">onOnline</A></B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c,
+         <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called right after a <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> comes online.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/ComputerListener.html#preOnline(hudson.model.Computer, hudson.remoting.Channel, hudson.FilePath, hudson.model.TaskListener)">preOnline</A></B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c,
+          <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A>&nbsp;channel,
+          <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;root,
+          <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called before a <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> is marked online.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -243,11 +264,56 @@ public <B>ComputerListener</B>()</PRE>
 </TR>
 </TABLE>
 
+<A NAME="preOnline(hudson.model.Computer, hudson.remoting.Channel, hudson.FilePath, hudson.model.TaskListener)"><!-- --></A><H3>
+preOnline</H3>
+<PRE>
+public void <B>preOnline</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c,
+                      <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A>&nbsp;channel,
+                      <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;root,
+                      <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
+               throws java.io.IOException,
+                      java.lang.InterruptedException</PRE>
+<DL>
+<DD>Called before a <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> is marked online.
+
+ <p>
+ This enables you to do some work on all the slaves
+ as they get connected. Unlike <A HREF="../../hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer, hudson.model.TaskListener)"><CODE>onOnline(Computer, TaskListener)</CODE></A>,
+ a failure to carry out this function normally will prevent
+ a computer from marked as online.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>channel</CODE> - This is the channel object to talk to the slave.
+      (This is the same object returned by <A HREF="../../hudson/model/Computer.html#getChannel()"><CODE>Computer.getChannel()</CODE></A> once
+      it's connected.<DD><CODE>root</CODE> - The directory where this slave stores files.
+      The same as <A HREF="../../hudson/model/Node.html#getRootPath()"><CODE>Node.getRootPath()</CODE></A>, except that method returns
+      null until the slave is connected. So this parameter is passed explicitly instead.<DD><CODE>listener</CODE> - This is connected to the launch log of the computer.
+      Since this method is called synchronously from the thread
+      that launches a computer, if this method performs a time-consuming
+      operation, this listener should be notified of the progress.
+      This is also a good listener for reporting problems.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - Exceptions will be recorded to the listener, and
+      the computer will not become online.
+<DD><CODE>java.lang.InterruptedException</CODE> - Exceptions will be recorded to the listener, and
+      the computer will not become online.<DT><B>Since:</B></DT>
+  <DD>1.295</DD>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer, hudson.model.TaskListener)"><CODE>onOnline(Computer, TaskListener)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="onOnline(hudson.model.Computer)"><!-- --></A><H3>
 onOnline</H3>
 <PRE>
 public void <B>onOnline</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.292
+      Use <A HREF="../../hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer, hudson.model.TaskListener)"><CODE>onOnline(Computer, TaskListener)</CODE></A></I>
+<P>
 <DD>Called right after a <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> comes online.
 <P>
 <DD><DL>
@@ -255,6 +321,38 @@ public void <B>onOnline</B>(<A HREF="../../hudson/model/Computer.html" title="cl
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onOnline(hudson.model.Computer, hudson.model.TaskListener)"><!-- --></A><H3>
+onOnline</H3>
+<PRE>
+public void <B>onOnline</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c,
+                     <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
+              throws java.io.IOException,
+                     java.lang.InterruptedException</PRE>
+<DL>
+<DD>Called right after a <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> comes online.
+
+ <p>
+ This enables you to do some work on all the slaves
+ as they get connected.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>listener</CODE> - This is connected to the launch log of the computer.
+      Since this method is called synchronously from the thread
+      that launches a computer, if this method performs a time-consuming
+      operation, this listener should be notified of the progress.
+      This is also a good listener for reporting problems.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - Exceptions will be recorded to the listener. Note that
+      throwing an exception doesn't put the computer offline.
+<DD><CODE>java.lang.InterruptedException</CODE> - Exceptions will be recorded to the listener. Note that
+      throwing an exception doesn't put the computer offline.<DT><B>See Also:</B><DD><CODE>#preOnline(Computer, TaskListener)</CODE></DL>
 </DD>
 </DL>
 <HR>

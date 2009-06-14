@@ -155,7 +155,7 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
                 throw new IOException2(f + " doesn't contain a number", e);
             }
         } else {
-            // this must be the old Hudson. create this file now.
+            // From the old Hudson, or doCreateItem. Create this file now.
             saveNextBuildNumber();
             save(); // and delete it from the config.xml
         }
@@ -191,6 +191,9 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
     }
 
     protected void saveNextBuildNumber() throws IOException {
+        if (nextBuildNumber == 0) { // #3361
+            nextBuildNumber = 1;
+        }
         getNextBuildNumberFile().write(String.valueOf(nextBuildNumber) + '\n');
     }
 
@@ -205,6 +208,14 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
     @Exported
     public Queue.Item getQueueItem() {
         return null;
+    }
+
+    /**
+     * Returns true if a build of this project is in progress.
+     */
+    public boolean isBuilding() {
+        RunT b = getLastBuild();
+        return b!=null && b.isBuilding();
     }
 
     /**
@@ -909,7 +920,8 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
             for (JobPropertyDescriptor d : JobPropertyDescriptor
                     .getPropertyDescriptors(Job.this.getClass())) {
                 String name = "jobProperty" + (i++);
-                JobProperty prop = d.newInstance(req, json.getJSONObject(name));
+                JSONObject config = json.getJSONObject(name);
+                JobProperty prop = d.newInstance(req, config);
                 if (prop != null) {
                     prop.setOwner(this);
                     properties.add(prop);
@@ -939,8 +951,7 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
         } catch (JSONException e) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
-            pw
-                    .println("Failed to parse form data. Please report this probelm as a bug");
+            pw.println("Failed to parse form data. Please report this problem as a bug");
             pw.println("JSON=" + req.getSubmittedForm());
             pw.println();
             e.printStackTrace(pw);
@@ -1189,6 +1200,12 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
             Hudson.checkGoodName(newName);
         } catch (ParseException e) {
             sendError(e, req, rsp);
+            return;
+        }
+
+        if (isBuilding()) {
+            // redirect to page explaining that we can't rename now
+            rsp.sendRedirect("rename?newName=" + newName);
             return;
         }
 

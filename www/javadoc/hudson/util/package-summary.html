@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.util (Hudson core 1.291 API)
+hudson.util (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.util (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.util (Hudson core 1.291 API)";
+        parent.document.title="hudson.util (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -96,6 +96,10 @@ Other miscellaneous utility code
 <B>Interface Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/ConsistentHash.Hash.html" title="interface in hudson.util">ConsistentHash.Hash&lt;T&gt;</A></B></TD>
+<TD>Hashes an object to some value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/DescribableList.Owner.html" title="interface in hudson.util">DescribableList.Owner</A></B></TD>
 <TD><B>Deprecated.</B>&nbsp;<I>Just implement <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model"><CODE>Saveable</CODE></A>.</I></TD>
 </TR>
@@ -163,6 +167,19 @@ Other miscellaneous utility code
 <TD>Can be used as a graph label.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/ChunkedInputStream.html" title="class in hudson.util">ChunkedInputStream</A></B></TD>
+<TD>Transparently coalesces chunks of a HTTP stream that uses
+ Transfer-Encoding chunked.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/ChunkedOutputStream.html" title="class in hudson.util">ChunkedOutputStream</A></B></TD>
+<TD>Implements HTTP chunking support.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/ClasspathBuilder.html" title="class in hudson.util">ClasspathBuilder</A></B></TD>
+<TD>Used to build up an argument in the classpath format.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/ClockDifference.html" title="class in hudson.util">ClockDifference</A></B></TD>
 <TD>Represents a clock difference.</TD>
 </TR>
@@ -174,6 +191,10 @@ Other miscellaneous utility code
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/CompressedFile.html" title="class in hudson.util">CompressedFile</A></B></TD>
 <TD>Represents write-once read-many file that can be optiionally compressed
  to save disk space.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/ConsistentHash.html" title="class in hudson.util">ConsistentHash&lt;T&gt;</A></B></TD>
+<TD>Consistent hash.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList&lt;E&gt;</A></B></TD>
@@ -272,15 +293,17 @@ Other miscellaneous utility code
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A></B></TD>
-<TD>Base class that provides the framework for doing on-the-fly form field validation.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Use <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util"><CODE>FormValidation</CODE></A> as a return value in your check method.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.Base64.html" title="class in hudson.util">FormFieldValidator.Base64</A></B></TD>
-<TD>Verifies that the 'value' parameter is correct base64 encoded text.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.305
+      Use <A HREF="../../hudson/util/FormValidation.html#validateBase64(java.lang.String, boolean, boolean, java.lang.String)"><CODE>FormValidation.validateBase64(String, boolean, boolean, String)</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.Executable.html" title="class in hudson.util">FormFieldValidator.Executable</A></B></TD>
-<TD>Checks a valid executable binary (specified in the 'value' query parameter).</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.294.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.HudsonURL.html" title="class in hudson.util">FormFieldValidator.HudsonURL</A></B></TD>
@@ -288,30 +311,37 @@ Other miscellaneous utility code
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.NonNegativeInteger.html" title="class in hudson.util">FormFieldValidator.NonNegativeInteger</A></B></TD>
-<TD>Verifies that the 'value' parameter is an integer >= 0.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Use <A HREF="../../hudson/util/FormValidation.html#validateNonNegativeInteger(java.lang.String)"><CODE>FormValidation.validateNonNegativeInteger(String)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.URLCheck.html" title="class in hudson.util">FormFieldValidator.URLCheck</A></B></TD>
-<TD>Convenient base class for checking the validity of URLs</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Use <A HREF="../../hudson/util/FormValidation.URLCheck.html" title="class in hudson.util"><CODE>FormValidation.URLCheck</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceDirectory.html" title="class in hudson.util">FormFieldValidator.WorkspaceDirectory</A></B></TD>
-<TD>Checks a valid directory name (specified in the 'value' query parameter) against
- the current workspace.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.294.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceFileMask.html" title="class in hudson.util">FormFieldValidator.WorkspaceFileMask</A></B></TD>
-<TD>Checks the file mask (specified in the 'value' query parameter) against
- the current workspace.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.294.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceFilePath.html" title="class in hudson.util">FormFieldValidator.WorkspaceFilePath</A></B></TD>
-<TD>Checks a valid file name or directory (specified in the 'value' query parameter) against
- the current workspace.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>as of 1.294.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/FormValidation.FileValidator.html" title="class in hudson.util">FormValidation.FileValidator</A></B></TD>
+<TD>Performs an application-specific validation on the given file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/FormValidation.URLCheck.html" title="class in hudson.util">FormValidation.URLCheck</A></B></TD>
+<TD>Convenient base class for checking the validity of URLs.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/Futures.html" title="class in hudson.util">Futures</A></B></TD>
-<TD>Various <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Future.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Future</CODE></A> implementations.</TD>
+<TD>Various <A HREF="../../hudson/remoting/Future.html" title="interface in hudson.remoting"><CODE>Future</CODE></A> implementations.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/HeadBufferingStream.html" title="class in hudson.util">HeadBufferingStream</A></B></TD>
@@ -362,6 +392,10 @@ Other miscellaneous utility code
 <TD>Varios <A HREF="../../hudson/util/Iterators.FlattenIterator.html" title="class in hudson.util"><CODE>Iterators.FlattenIterator</CODE></A> implementations.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/Iterators.DuplicateFilterIterator.html" title="class in hudson.util">Iterators.DuplicateFilterIterator&lt;T&gt;</A></B></TD>
+<TD>Remove duplicates from another iterator.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/Iterators.FilterIterator.html" title="class in hudson.util">Iterators.FilterIterator&lt;T&gt;</A></B></TD>
 <TD>Creates a filtered view of another iterator.</TD>
 </TR>
@@ -384,6 +418,10 @@ Other miscellaneous utility code
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/ListBoxModel.Option.html" title="class in hudson.util">ListBoxModel.Option</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/LogTaskListener.html" title="class in hudson.util">LogTaskListener</A></B></TD>
+<TD><A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> which sends messages to a <CODE>Logger</CODE>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/Memoizer.html" title="class in hudson.util">Memoizer&lt;K,V&gt;</A></B></TD>
@@ -540,6 +578,10 @@ Other miscellaneous utility code
 <B>Enum Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/FormValidation.Kind.html" title="enum in hudson.util">FormValidation.Kind</A></B></TD>
+<TD>Indicates the kind of result.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/TimeUnit2.html" title="enum in hudson.util">TimeUnit2</A></B></TD>
 <TD>A <tt>TimeUnit</tt> represents time durations at a given unit of
  granularity and provides utility methods to convert across units,
@@ -554,6 +596,10 @@ Other miscellaneous utility code
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Exception Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></B></TD>
+<TD>Represents the result of the form field validation.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/IOException2.html" title="class in hudson.util">IOException2</A></B></TD>

@@ -1,6 +1,7 @@
 package hudson.tasks;
 
 import hudson.EnvVars;
+import hudson.tools.ToolProperty;
 import hudson.maven.MavenModuleSet;
 import hudson.maven.MavenModuleSetBuild;
 import hudson.model.FreeStyleBuild;
@@ -13,6 +14,7 @@ import hudson.tasks.Ant.AntInstallation;
 import hudson.tasks.Maven.MavenInstallation;
 
 import java.io.File;
+import java.util.Collections;
 
 import org.apache.tools.ant.taskdefs.condition.Os;
 import org.jvnet.hudson.test.ExtractResourceSCM;
@@ -28,20 +30,20 @@ public class EnvVarsInConfigTasksTest extends HudsonTestCase {
 		super.setUp();
 
 		JDK defaultJDK = hudson.getJDK(null);
-		JDK varJDK = new JDK("varJDK", withVariable(defaultJDK.getJavaHome()));
+		JDK varJDK = new JDK("varJDK", withVariable(defaultJDK.getHome()));
 		hudson.getJDKs().add(varJDK);
 
 		// Maven with a variable in its path
 		configureDefaultMaven();
 		MavenInstallation defaultMaven = hudson.getDescriptorByType(Maven.DescriptorImpl.class).getInstallations()[0];
 		MavenInstallation varMaven = new MavenInstallation("varMaven",
-				withVariable(defaultMaven.getMavenHome()));
+				withVariable(defaultMaven.getHome()), NO_PROPERTIES);
 		hudson.getDescriptorByType(Maven.DescriptorImpl.class).setInstallations(varMaven);
 
 		// Ant with a variable in its path
         AntInstallation ant = configureDefaultAnt();
         AntInstallation antInstallation = new AntInstallation("varAnt",
-                withVariable(ant.getHome()));
+                withVariable(ant.getHome()),NO_PROPERTIES);
         hudson.getDescriptorByType(Ant.DescriptorImpl.class).setInstallations(antInstallation);
 
 		// create slaves

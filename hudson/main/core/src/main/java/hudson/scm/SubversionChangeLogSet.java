@@ -26,6 +26,8 @@ package hudson.scm;
 import hudson.model.AbstractBuild;
 import hudson.model.User;
 import hudson.scm.SubversionChangeLogSet.LogEntry;
+import hudson.scm.SubversionSCM.ModuleLocation;
+
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
 
@@ -154,12 +156,47 @@ public final class SubversionChangeLogSet extends ChangeLogSet<LogEntry> {
         public Collection<String> getAffectedPaths() {
             return new AbstractList<String>() {
                 public String get(int index) {
-                    return paths.get(index).value;
+                    return preparePath(paths.get(index).value);
                 }
                 public int size() {
                     return paths.size();
                 }
             };
+        }
+        
+        private String preparePath(String path) {
+            SubversionSCM scm = (SubversionSCM) getParent().build.getProject().getScm();
+            ModuleLocation[] locations = scm.getLocations();
+            for (int i = 0; i < locations.length; i++) {
+                String commonPart = findCommonPart(locations[i].remote, path);
+                if (commonPart != null) {
+                    if (path.startsWith("/")) {
+                        path = path.substring(1);
+                    }
+                    String newPath = path.substring(commonPart.length());
+                    if (newPath.startsWith("/")) {
+                        newPath = newPath.substring(1);
+                    }
+                    return newPath;
+                }
+            }
+            return path;
+        }
+        
+        private String findCommonPart(String folder, String filePath) {
+            if (folder == null || filePath == null) {
+                return null;
+            }
+            if (filePath.startsWith("/")) {
+                filePath = filePath.substring(1);
+            }
+            for (int i = 0; i < folder.length(); i++) {
+                String part = folder.substring(i);
+                if (filePath.startsWith(part)) {
+                    return part;
+                }
+            }
+            return null;
         }
 
         public void setUser(String author) {
@@ -203,6 +240,11 @@ public final class SubversionChangeLogSet extends ChangeLogSet<LogEntry> {
         public List<Path> getPaths() {
             return paths;
         }
+        
+        @Override
+        public Collection<Path> getAffectedFiles() {
+	        return paths;
+        }
     }
 
     /**
@@ -212,7 +254,7 @@ public final class SubversionChangeLogSet extends ChangeLogSet<LogEntry> {
      * So please consider this object read-only.
      */
     @ExportedBean(defaultVisibility=999)
-    public static class Path {
+    public static class Path implements AffectedFile {
         private LogEntry entry;
         private char action;
         private String value;
@@ -243,6 +285,13 @@ public final class SubversionChangeLogSet extends ChangeLogSet<LogEntry> {
             return value;
         }
 
+        /**
+         * Inherited from AffectedFile
+         */
+        public String getPath() {
+	        return getValue();
+        }
+        
         public void setValue(String value) {
             this.value = value;
         }

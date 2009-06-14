@@ -84,6 +84,8 @@ public class Engine extends Thread {
      */
     private String tunnel;
 
+    private boolean noReconnect;
+
     public Engine(EngineListener listener, List<URL> hudsonUrls, String secretKey, String slaveName) {
         this.listener = listener;
         this.candidateUrls = hudsonUrls;
@@ -101,11 +103,24 @@ public class Engine extends Thread {
         this.tunnel = tunnel;
     }
 
+    public void setNoReconnect(boolean noReconnect) {
+        this.noReconnect = noReconnect;
+    }
+
+    @Override
     public void run() {
         try {
+            boolean first = true;
             while(true) {
-                listener.status("Locating Server");
-                Exception firstError=null;
+                if(first) {
+                    first = false;
+                } else {
+                    if(noReconnect)
+                        return; // exit
+                }
+
+                listener.status("Locating server among " + candidateUrls);
+                Throwable firstError=null;
                 String port=null;
 
                 for (URL url : candidateUrls) {
@@ -115,7 +130,14 @@ public class Engine extends Thread {
 
                     // find out the TCP port
                     HttpURLConnection con = (HttpURLConnection)salURL.openConnection();
-                    con.connect();
+                    try {
+                        con.connect();
+                    } catch (IOException x) {
+                        if (firstError == null) {
+                            firstError = new IOException("Failed to connect to " + salURL + ": " + x.getMessage()).initCause(x);
+                        }
+                        continue;
+                    }
                     port = con.getHeaderField("X-Hudson-JNLP-Port");
                     if(con.getResponseCode()!=200) {
                         if(firstError==null)
@@ -130,6 +152,7 @@ public class Engine extends Thread {
 
                     // this URL works. From now on, only try this URL
                     hudsonUrl = url;
+                    firstError = null;
                     candidateUrls = Collections.singletonList(hudsonUrl);
                     break;
                 }
@@ -155,6 +178,8 @@ public class Engine extends Thread {
                 listener.status("Terminated");
                 listener.onDisconnect();
 
+                if(noReconnect)
+                    return; // exit
                 // try to connect back to the server every 10 secs.
                 waitForServerToBack();
             }

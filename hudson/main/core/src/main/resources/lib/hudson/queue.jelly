@@ -1,7 +1,7 @@
 <!--
 The MIT License
 
-Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Tom Huybrechts
+Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Tom Huybrechts, Yahoo! Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -56,12 +56,19 @@ THE SOFTWARE.
       <j:otherwise>
         <j:forEach var="item" items="${items}">
           <tr>
-            <td class="pane" width="100%" tooltip="${item.why}">
-              <j:set var="stuck" value="${item.isStuck()}" />
-              <a href="${rootURL}/${item.task.url}" style="${h.ifThenElse(stuck,'color:#ef2929',null)}">
-                ${item.task.fullDisplayName}
-                <j:if test="${stuck}"> (${%appears to be stuck})</j:if>
-              </a>
+            <td class="pane" width="100%" tooltip="${item.why}" style="white-space: normal;">
+              <j:set var="stuck" value="${item.isStuck()}"/>
+              <j:choose>
+                <j:when test="${h.hasPermission(item.task,item.task.READ)}">
+                  <a href="${rootURL}/${item.task.url}" style="${stuck?'color:#ef2929':null}">
+                    ${item.task.fullDisplayName}
+                    <j:if test="${stuck}">(${%appears to be stuck})</j:if>
+                  </a>
+                </j:when>
+                <j:otherwise>
+                  <span>${%Unknown Task}</span>
+                </j:otherwise>
+              </j:choose>
             </td>
             <td class="pane" width="16" align="center" valign="middle">
               <j:if test="${item.hasCancelPermission()}">
@@ -75,7 +82,7 @@ THE SOFTWARE.
     <!-- schedule updates only for the full page reload -->
     <j:if test="${ajax==null and !h.isAutoRefresh(request) and h.hasPermission(app.READ)}">
       <script defer="defer">
-        refreshPart('buildQueue',"${h.ifThenElse(h.hasView(it,'ajaxBuildQueue'),'.',rootURL)}/ajaxBuildQueue");
+        refreshPart('buildQueue',"${h.hasView(it,'ajaxBuildQueue')?'.':rootURL}/ajaxBuildQueue");
       </script>
     </j:if>
   </l:pane>

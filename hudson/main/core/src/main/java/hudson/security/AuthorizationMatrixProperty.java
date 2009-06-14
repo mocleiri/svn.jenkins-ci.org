@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Dean Yu, Peter Hayes, Tom Huybrechts
+ * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Yahoo! Inc., Peter Hayes, Tom Huybrechts
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,7 @@ import hudson.model.JobPropertyDescriptor;
 import hudson.model.Hudson;
 import hudson.model.Run;
 import hudson.Extension;
+import hudson.util.FormValidation;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -45,8 +46,8 @@ import net.sf.json.JSONObject;
 
 import org.acegisecurity.acls.sid.Sid;
 import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.QueryParameter;
+import org.kohsuke.stapler.AncestorInPath;
 
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
@@ -161,8 +162,8 @@ public class AuthorizationMatrixProperty extends JobProperty<Job<?, ?>> {
             return p!=Item.CREATE;
         }
 
-        public void doCheckName(StaplerRequest req, StaplerResponse res, @QueryParameter String value) throws IOException, ServletException {
-            GlobalMatrixAuthorizationStrategy.DESCRIPTOR.doCheckName(value, req.findAncestorObject(AbstractProject.class), AbstractProject.CONFIGURE);
+        public FormValidation doCheckName(@AncestorInPath Job project, @QueryParameter String value) throws IOException, ServletException {
+            return GlobalMatrixAuthorizationStrategy.DESCRIPTOR.doCheckName(value, project, AbstractProject.CONFIGURE);
         }
     }
 
@@ -175,6 +176,7 @@ public class AuthorizationMatrixProperty extends JobProperty<Job<?, ?>> {
 	}
 
 	private Object readResolve() {
+        GlobalMatrixAuthorizationStrategy.migrateHudson2324(grantedPermissions);
 		acl = new AclImpl();
 		return this;
 	}
@@ -259,6 +261,8 @@ public class AuthorizationMatrixProperty extends JobProperty<Job<?, ?>> {
 				as.add(id);
 				reader.moveUp();
 			}
+
+            GlobalMatrixAuthorizationStrategy.migrateHudson2324(as.grantedPermissions);
 
 			return as;
 		}

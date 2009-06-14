@@ -3,6 +3,7 @@ package hudson.plugins.git.util;
 import hudson.FilePath;
 import hudson.FilePath.FileCallable;
 import hudson.model.Action;
+import hudson.model.Result;
 import hudson.plugins.git.Branch;
 import hudson.plugins.git.BranchSpec;
 import hudson.plugins.git.GitException;
@@ -12,17 +13,17 @@ import hudson.plugins.git.Revision;
 import hudson.remoting.VirtualChannel;
 import hudson.util.XStream2;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+
 import org.spearce.jgit.lib.ObjectId;
+
 
 public class BuildChooser implements IBuildChooser {  
     
@@ -56,8 +57,10 @@ public class BuildChooser implements IBuildChooser {
      *  NB: Alternate IBuildChooser implementations are possible - this
      *  may be beneficial if "only 1" branch is to be built, as much of
      *  this work is irrelevant in that usecase.
+     * @throws IOException 
+     * @throws GitException 
      */
-    public Collection<Revision> getCandidateRevisions()
+    public Collection<Revision> getCandidateRevisions() throws GitException, IOException
     {
         // 1. Get all the (branch) revisions that exist 
         Collection<Revision> revs = utils.getAllBranchRevisions();
@@ -98,35 +101,23 @@ public class BuildChooser implements IBuildChooser {
         {
             Revision r = (Revision) i.next();
 
-            if (hasBeenBuilt(r.getSha1())) i.remove();
+            if (data.hasBeenBuilt(r.getSha1())) 
+            {
+            	i.remove();	
+            }
         }
 
         return revs;
     }
 
-    private boolean hasBeenBuilt(ObjectId sha1)
-    {
-        return data.lastBuiltIds.containsValue(sha1);
+    public Build revisionBuilt(Revision revision, int buildNumber, Result result )
+    {    	
+    	Build build = new Build(revision, buildNumber, result);
+    	data.saveBuild(build);
+    	return build;
     }
 
-    public void revisionBuilt(Revision revision, boolean success)
-    {
-        data.lastBuiltRevision = revision;
-        for (Branch b : revision.getBranches())
-        {
-            data.lastBuiltIds.put(b.getName(), b.getSHA1());
-        }
-    }
-
-    public ObjectId getLastBuiltRevisionOfBranch(String branch)
-    {
-        return data.lastBuiltIds.get(branch);
-    }
-
-    public Revision getLastBuiltRevision()
-    {
-        return data.lastBuiltRevision;
-    }
+    
     public Action getData()
     {
         return data;

@@ -27,6 +27,8 @@ import hudson.Launcher.LocalLauncher;
 import hudson.Launcher.RemoteLauncher;
 import hudson.model.Hudson;
 import hudson.model.TaskListener;
+import hudson.model.AbstractProject;
+import hudson.model.Item;
 import hudson.remoting.Callable;
 import hudson.remoting.Channel;
 import hudson.remoting.DelegatingCallable;
@@ -35,17 +37,16 @@ import hudson.remoting.Pipe;
 import hudson.remoting.RemoteOutputStream;
 import hudson.remoting.VirtualChannel;
 import hudson.remoting.RemoteInputStream;
-import hudson.util.FormFieldValidator;
 import hudson.util.IOException2;
-import hudson.util.StreamResource;
 import hudson.util.HeadBufferingStream;
-import hudson.util.jna.GNUCLibrary;
+import hudson.util.FormValidation;
+import static hudson.util.jna.GNUCLibrary.LIBC;
+import static hudson.Util.fixEmpty;
+import static hudson.FilePath.TarCompression.GZIP;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Project;
-import org.apache.tools.ant.util.FileUtils;
 import org.apache.tools.ant.taskdefs.Copy;
-import org.apache.tools.ant.taskdefs.Untar;
 import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.tar.TarEntry;
 import org.apache.tools.tar.TarOutputStream;
@@ -54,6 +55,7 @@ import org.apache.tools.zip.ZipOutputStream;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.fileupload.FileItem;
+import org.kohsuke.stapler.Stapler;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -71,6 +73,8 @@ import java.io.Serializable;
 import java.io.Writer;
 import java.io.OutputStreamWriter;
 import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -83,6 +87,8 @@ import java.util.concurrent.TimeoutException;
 import java.util.zip.GZIPOutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipInputStream;
+
+import com.sun.jna.Native;
 
 /**
  * {@link File} like object with remoting support.
@@ -188,6 +194,11 @@ public final class FilePath implements Serializable {
         this.remote = localPath.getPath();
     }
 
+    /**
+     * Construct a path starting with a base location.
+     * @param base starting point for resolution, and defines channel
+     * @param rel a path which if relative will be resolved against base
+     */
     public FilePath(FilePath base, String rel) {
         this.channel = base.channel;
         if(isAbsolute(rel)) {
@@ -248,9 +259,15 @@ public final class FilePath implements Serializable {
             }
 
             private void scan(File f, ZipOutputStream zip, String path) throws IOException {
+                // Bitmask indicating directories in 'external attributes' of a ZIP archive entry.
+                final long BITMASK_IS_DIRECTORY = 1<<4;
+              
                 if (f.canRead()) {
                     if(f.isDirectory()) {
-                        zip.putNextEntry(new ZipEntry(path+f.getName()+'/'));
+                        ZipEntry dirZipEntry = new ZipEntry(path+f.getName()+'/');
+                        // Setting this bit explicitly is needed by some unzipping applications (see HUDSON-3294).
+                        dirZipEntry.setExternalAttributes(BITMASK_IS_DIRECTORY);
+                        zip.putNextEntry(dirZipEntry);
                         zip.closeEntry();
                         for( File child : f.listFiles() )
                             scan(child,zip,path+f.getName()+'/');
@@ -372,7 +389,7 @@ public final class FilePath implements Serializable {
 
     private void unzip(File dir, InputStream in) throws IOException {
         dir = dir.getAbsoluteFile();    // without absolutization, getParentFile below seems to fail
-        ZipInputStream zip = new ZipInputStream(in);
+        ZipInputStream zip = new ZipInputStream(new BufferedInputStream(in));
         java.util.zip.ZipEntry e;
 
         try {
@@ -399,6 +416,17 @@ public final class FilePath implements Serializable {
     }
 
     /**
+     * Absolutizes this {@link FilePath} and returns the new one.
+     */
+    public FilePath absolutize() throws IOException, InterruptedException {
+        return new FilePath(channel,act(new FileCallable<String>() {
+            public String invoke(File f, VirtualChannel channel) throws IOException {
+                return f.getAbsolutePath();
+            }
+        }));
+    }
+
+    /**
      * Supported tar file compression methods.
      */
     public enum TarCompression {
@@ -414,7 +442,7 @@ public final class FilePath implements Serializable {
             public InputStream extract(InputStream _in) throws IOException {
                 HeadBufferingStream in = new HeadBufferingStream(_in,SIDE_BUFFER_SIZE);
                 try {
-                    return new GZIPInputStream(in);
+                    return new GZIPInputStream(in,8192);
                 } catch (IOException e) {
                     // various people reported "java.io.IOException: Not in GZIP format" here, so diagnose this problem better
                     in.fillSide();
@@ -422,7 +450,7 @@ public final class FilePath implements Serializable {
                 }
             }
             public OutputStream compress(OutputStream out) throws IOException {
-                return new GZIPOutputStream(out);
+                return new GZIPOutputStream(new BufferedOutputStream(out));
             }
         };
 
@@ -444,13 +472,103 @@ public final class FilePath implements Serializable {
             final InputStream in = new RemoteInputStream(_in);
             act(new FileCallable<Void>() {
                 public Void invoke(File dir, VirtualChannel channel) throws IOException {
-                    readFromTar("input stream",dir, compression.extract(new BufferedInputStream(in)));
+                    readFromTar("input stream",dir, compression.extract(in));
                     return null;
                 }
                 private static final long serialVersionUID = 1L;
             });
         } finally {
             IOUtils.closeQuietly(_in);
+        }
+    }
+
+    /**
+     * Given a tgz/zip file, extracts it to the given target directory, if necessary.
+     *
+     * <p>
+     * This method is a convenience method designed for installing a binary package to a location
+     * that supports upgrade and downgrade. Specifically,
+     *
+     * <ul>
+     * <li>If the target directory doesn't exist {@linkplain #mkdirs() it'll be created}.
+     * <li>The timestamp of the .tgz file is left in the installation directory upon extraction.
+     * <li>If the timestamp left in the directory doesn't match with the timestamp of the current archive file,
+     *     the directory contents will be discarded and the archive file will be re-extracted.
+     * <li>If the connection is refused but the target directory already exists, it is left alone.
+     * </ul>
+     *
+     * @param archive
+     *      The resource that represents the tgz/zip file. This URL must support the "Last-Modified" header.
+     *      (Most common usage is to get this from {@link ClassLoader#getResource(String)})
+     * @param listener
+     *      If non-null, a message will be printed to this listener once this method decides to
+     *      extract an archive.
+     * @return
+     *      true if the archive was extracted. false if the extraction was skipped because the target directory
+     *      was considered up to date.
+     * @since 1.299
+     */
+    public boolean installIfNecessaryFrom(URL archive, TaskListener listener, String message) throws IOException, InterruptedException {
+        URLConnection con;
+        try {
+            con = archive.openConnection();
+            con.connect();
+        } catch (IOException x) {
+            if (this.exists()) {
+                // Cannot connect now, so assume whatever was last unpacked is still OK.
+                if (listener != null) {
+                    listener.getLogger().println("Skipping installation of " + archive + " to " + remote + ": " + x);
+                }
+                return false;
+            } else {
+                throw x;
+            }
+        }
+        long sourceTimestamp = con.getLastModified();
+        FilePath timestamp = this.child(".timestamp");
+
+        if(this.exists()) {
+            if(timestamp.exists() && sourceTimestamp ==timestamp.lastModified())
+                return false;   // already up to date
+            this.deleteContents();
+        }
+
+        if(listener!=null)
+            listener.getLogger().println(message);
+        if(archive.toExternalForm().endsWith(".zip"))
+            unzipFrom(con.getInputStream());
+        else
+            untarFrom(con.getInputStream(),GZIP);
+        timestamp.touch(sourceTimestamp);
+        return true;
+    }
+
+    /**
+     * Reads the URL on the current VM, and writes all the data to this {@link FilePath}
+     * (this is different from resolving URL remotely.)
+     *
+     * @since 1.293
+     */
+    public void copyFrom(URL url) throws IOException, InterruptedException {
+        InputStream in = url.openStream();
+        try {
+            copyFrom(in);
+        } finally {
+            in.close();
+        }
+    }
+
+    /**
+     * Replaces the content of this file by the data from the given {@link InputStream}.
+     *
+     * @since 1.293
+     */
+    public void copyFrom(InputStream in) throws IOException, InterruptedException {
+        OutputStream os = write();
+        try {
+            IOUtils.copy(in, os);
+        } finally {
+            os.close();
         }
     }
 
@@ -502,10 +620,16 @@ public final class FilePath implements Serializable {
      * so that one can perform local file operations.
      */
     public <T> T act(final FileCallable<T> callable) throws IOException, InterruptedException {
+        return act(callable,callable.getClass().getClassLoader());
+    }
+
+    private <T> T act(final FileCallable<T> callable, ClassLoader cl) throws IOException, InterruptedException {
         if(channel!=null) {
             // run this on a remote system
             try {
-                return channel.call(new FileCallableWrapper<T>(callable));
+                return channel.call(new FileCallableWrapper<T>(callable,cl));
+            } catch (AbortException e) {
+                throw e;    // pass through so that the caller can catch it as AbortException
             } catch (IOException e) {
                 // wrap it into a new IOException so that we get the caller's stack trace as well.
                 throw new IOException2("remote file operation failed",e);
@@ -624,7 +748,9 @@ public final class FilePath implements Serializable {
     }
 
     /**
-     * The same as {@code new FilePath(this,rel)} but more OO.
+     * The same as {@link FilePath#FilePath(FilePath,String)} but more OO.
+     * @param rel a relative or absolute path
+     * @return a file on the same channel
      */
     public FilePath child(String rel) {
         return new FilePath(this,rel);
@@ -702,6 +828,25 @@ public final class FilePath implements Serializable {
     }
 
     /**
+     * Creates a temporary directory inside the directory represented by 'this'
+     * @since 1.311
+     */
+    public FilePath createTempDir(final String prefix, final String suffix) throws IOException, InterruptedException {
+        try {
+            return new FilePath(this,act(new FileCallable<String>() {
+                public String invoke(File dir, VirtualChannel channel) throws IOException {
+                    File f = File.createTempFile(prefix, suffix, dir);
+                    f.delete();
+                    f.mkdir();
+                    return f.getName();
+                }
+            }));
+        } catch (IOException e) {
+            throw new IOException2("Failed to create a temp directory on "+remote,e);
+        }
+    }
+
+    /**
      * Deletes this file.
      */
     public boolean delete() throws IOException, InterruptedException {
@@ -728,11 +873,29 @@ public final class FilePath implements Serializable {
      * of the machine where this file actually resides.
      *
      * @see File#lastModified()
+     * @see #touch(long)
      */
     public long lastModified() throws IOException, InterruptedException {
         return act(new FileCallable<Long>() {
             public Long invoke(File f, VirtualChannel channel) throws IOException {
                 return f.lastModified();
+            }
+        });
+    }
+
+    /**
+     * Creates a file (if not already exist) and sets the timestamp.
+     *
+     * @since 1.299
+     */
+    public void touch(final long timestamp) throws IOException, InterruptedException {
+        act(new FileCallable<Void>() {
+            public Void invoke(File f, VirtualChannel channel) throws IOException {
+                if(!f.exists())
+                    new FileOutputStream(f).close();
+                if(!f.setLastModified(timestamp))
+                    throw new IOException("Failed to set the timestamp of "+f+" to "+timestamp);
+                return null;
             }
         });
     }
@@ -762,6 +925,24 @@ public final class FilePath implements Serializable {
     }
 
     /**
+     * Sets the file permission.
+     *
+     * On Windows, no-op.
+     *
+     * @since 1.303
+     */
+    public void chmod(final int mask) throws IOException, InterruptedException {
+        if(!isUnix())   return;
+        act(new FileCallable<Void>() {
+            public Void invoke(File f, VirtualChannel channel) throws IOException {
+                if(LIBC.chmod(f.getAbsolutePath(),mask)!=0)
+                    throw new IOException("Failed to chmod "+f+" : "+LIBC.strerror(Native.getLastError()));
+                return null;
+            }
+        });
+    }
+
+    /**
      * List up files and directories in this directory.
      *
      * <p>
@@ -769,6 +950,22 @@ public final class FilePath implements Serializable {
      */
     public List<FilePath> list() throws IOException, InterruptedException {
         return list((FileFilter)null);
+    }
+
+    /**
+     * List up subdirectories.
+     *
+     * @return can be empty but never null. Doesn't contain "." and ".."
+     */
+    public List<FilePath> listDirectories() throws IOException, InterruptedException {
+        return list(new DirectoryFilter());
+    }
+
+    private static final class DirectoryFilter implements FileFilter, Serializable {
+        public boolean accept(File f) {
+            return f.isDirectory();
+        }
+        private static final long serialVersionUID = 1L;
     }
 
     /**
@@ -781,6 +978,9 @@ public final class FilePath implements Serializable {
      *      the filter object will be executed on the remote machine.
      */
     public List<FilePath> list(final FileFilter filter) throws IOException, InterruptedException {
+        if (filter != null && !(filter instanceof Serializable)) {
+            throw new IllegalArgumentException("Non-serializable filter of " + filter.getClass());
+        }
         return act(new FileCallable<List<FilePath>>() {
             public List<FilePath> invoke(File f, VirtualChannel channel) throws IOException {
                 File[] children = f.listFiles(filter);
@@ -792,14 +992,14 @@ public final class FilePath implements Serializable {
 
                 return r;
             }
-        });
+        }, (filter!=null?filter:this).getClass().getClassLoader());
     }
 
     /**
      * List up files in this directory that matches the given Ant-style filter.
      *
      * @param includes
-     *      See {@link FileSet} for the syntax. String like "foo/*.zip".
+     *      See {@link FileSet} for the syntax. String like "foo/*.zip" or "foo/*&#42;/*.xml"
      * @return
      *      can be empty but always non-null.
      */
@@ -855,6 +1055,18 @@ public final class FilePath implements Serializable {
         });
 
         return p.getIn();
+    }
+
+    /**
+     * Reads this file into a string, by using the current system encoding.
+     */
+    public String readToString() throws IOException {
+        InputStream in = read();
+        try {
+            return IOUtils.toString(in);
+        } finally {
+            in.close();
+        }
     }
 
     /**
@@ -924,6 +1136,30 @@ public final class FilePath implements Serializable {
         act(new FileCallable<Void>() {
             public Void invoke(File f, VirtualChannel channel) throws IOException {
             	f.renameTo(new File(target.remote));
+                return null;
+            }
+        });
+    }
+
+    /**
+     * Moves all the contents of this directory into the specified directory, then delete this directory itself.
+     *
+     * @since 1.308.
+     */
+    public void moveAllChildrenTo(final FilePath target) throws IOException, InterruptedException {
+        if(this.channel != target.channel) {
+            throw new IOException("pullUpTo target must be on the same host");
+        }
+        act(new FileCallable<Void>() {
+            public Void invoke(File f, VirtualChannel channel) throws IOException {
+                File t = new File(target.getRemote());
+                
+                for(File child : f.listFiles()) {
+                    File target = new File(t, child.getName());
+                    if(!child.renameTo(target))
+                        throw new IOException("Failed to rename "+child+" to "+target);
+                }
+                f.delete();
                 return null;
             }
         });
@@ -1040,14 +1276,14 @@ public final class FilePath implements Serializable {
             Future<Void> future = target.actAsync(new FileCallable<Void>() {
                 public Void invoke(File f, VirtualChannel channel) throws IOException {
                     try {
-                        readFromTar(remote+'/'+fileMask, f,new GZIPInputStream(pipe.getIn()));
+                        readFromTar(remote+'/'+fileMask, f,TarCompression.GZIP.extract(pipe.getIn()));
                         return null;
                     } finally {
                         pipe.getIn().close();
                     }
                 }
             });
-            int r = writeToTar(new File(remote),fileMask,excludes,new GZIPOutputStream(pipe.getOut()));
+            int r = writeToTar(new File(remote),fileMask,excludes,TarCompression.GZIP.compress(pipe.getOut()));
             try {
                 future.get();
             } catch (ExecutionException e) {
@@ -1061,14 +1297,14 @@ public final class FilePath implements Serializable {
             Future<Integer> future = actAsync(new FileCallable<Integer>() {
                 public Integer invoke(File f, VirtualChannel channel) throws IOException {
                     try {
-                        return writeToTar(f,fileMask,excludes,new GZIPOutputStream(pipe.getOut()));
+                        return writeToTar(f,fileMask,excludes,TarCompression.GZIP.compress(pipe.getOut()));
                     } finally {
                         pipe.getOut().close();
                     }
                 }
             });
             try {
-                readFromTar(remote+'/'+fileMask,new File(target.remote),new GZIPInputStream(pipe.getIn()));
+                readFromTar(remote+'/'+fileMask,new File(target.remote),TarCompression.GZIP.extract(pipe.getIn()));
             } catch (IOException e) {// BuildException or IOException
                 try {
                     future.get(3,TimeUnit.SECONDS);
@@ -1100,7 +1336,14 @@ public final class FilePath implements Serializable {
 
         byte[] buf = new byte[8192];
 
-        TarOutputStream tar = new TarOutputStream(new BufferedOutputStream(out));
+        TarOutputStream tar = new TarOutputStream(new BufferedOutputStream(out) {
+            // TarOutputStream uses TarBuffer internally,
+            // which flushes the stream for each block. this creates unnecessary
+            // data stream fragmentation, and flush request to a remote, which slows things down.
+            public void flush() throws IOException {
+                // so don't do anything in flush
+            }
+        });
         tar.setLongFileMode(TarOutputStream.LONGFILE_GNU);
         String[] files;
         if(baseDir.exists()) {
@@ -1162,7 +1405,11 @@ public final class FilePath implements Serializable {
                     f.setLastModified(te.getModTime().getTime());
                     int mode = te.getMode()&0777;
                     if(mode!=0 && !Hudson.isWindows()) // be defensive
-                        GNUCLibrary.LIBC.chmod(f.getPath(),mode);
+                        try {
+                            LIBC.chmod(f.getPath(),mode);
+                        } catch (NoClassDefFoundError e) {
+                            // be defensive. see http://www.nabble.com/-3.0.6--Site-copy-problem%3A-hudson.util.IOException2%3A--java.lang.NoClassDefFoundError%3A-Could-not-initialize-class--hudson.util.jna.GNUCLibrary-td23588879.html
+                        }
                 }
             }
         } catch(IOException e) {
@@ -1177,11 +1424,18 @@ public final class FilePath implements Serializable {
      * that has this file.
      * @since 1.89
      */
-    public Launcher createLauncher(TaskListener listener) {
+    public Launcher createLauncher(TaskListener listener) throws IOException, InterruptedException {
         if(channel==null)
             return new LocalLauncher(listener);
         else
-            return new RemoteLauncher(listener,channel,isUnix());
+            return new RemoteLauncher(listener,channel,channel.call(new IsUnix()));
+    }
+
+    private static final class IsUnix implements Callable<Boolean,IOException> {
+        public Boolean call() throws IOException {
+            return File.pathSeparatorChar==':';
+        }
+        private static final long serialVersionUID = 1L;
     }
 
     /**
@@ -1189,12 +1443,12 @@ public final class FilePath implements Serializable {
      * against this directory, and try to point out the problem.
      *
      * <p>
-     * This is useful in conjunction with {@link FormFieldValidator}.
+     * This is useful in conjunction with {@link FormValidation}.
      *
      * @return
-     *      null if no error was found.
+     *      null if no error was found. Otherwise returns a human readable error message.
      * @since 1.90
-     * @see FormFieldValidator.WorkspaceFileMask
+     * @see #validateFileMask(FilePath, String)
      */
     public String validateAntFileMask(final String fileMasks) throws IOException, InterruptedException {
         return act(new FileCallable<String>() {
@@ -1318,6 +1572,103 @@ public final class FilePath implements Serializable {
         });
     }
 
+    /**
+     * Shortcut for {@link #validateFileMask(String)} in case the left-hand side can be null.
+     */
+    public static FormValidation validateFileMask(FilePath pathOrNull, String value) throws IOException {
+        if(pathOrNull==null) return FormValidation.ok();
+        return pathOrNull.validateFileMask(value);
+    }
+
+    /**
+     * Short for {@code validateFileMask(value,true)} 
+     */
+    public FormValidation validateFileMask(String value) throws IOException {
+        return validateFileMask(value,true);
+    }
+
+    /**
+     * Checks the GLOB-style file mask. See {@link #validateAntFileMask(String)} 
+     * @since 1.294
+     */
+    public FormValidation validateFileMask(String value, boolean errorIfNotExist) throws IOException {
+        value = fixEmpty(value);
+        if(value==null)
+            return FormValidation.ok();
+
+        try {
+            if(!exists()) // no workspace. can't check
+                return FormValidation.ok();
+
+            String msg = validateAntFileMask(value);
+            if(errorIfNotExist)     return FormValidation.error(msg);
+            else                    return FormValidation.warning(msg);
+        } catch (InterruptedException e) {
+            return FormValidation.ok();
+        }
+    }
+
+    /**
+     * Validates a relative file path from this {@link FilePath}.
+     *
+     * @param value
+     *      The relative path being validated.
+     * @param errorIfNotExist
+     *      If true, report an error if the given relative path doesn't exist. Otherwise it's a warning.
+     * @param expectingFile
+     *      If true, we expect the relative path to point to a file.
+     *      Otherwise, the relative path is expected to be pointing to a directory.
+     */
+    public FormValidation validateRelativePath(String value, boolean errorIfNotExist, boolean expectingFile) throws IOException {
+        AbstractProject subject = Stapler.getCurrentRequest().findAncestorObject(AbstractProject.class);
+        subject.checkPermission(Item.CONFIGURE);
+
+        value = fixEmpty(value);
+
+        // none entered yet, or something is seriously wrong
+        if(value==null || (AbstractProject<?,?>)subject ==null) return FormValidation.ok();
+
+        // a common mistake is to use wildcard
+        if(value.contains("*")) return FormValidation.error("Wildcard is not allowed here");
+
+        try {
+            if(!exists())    // no base directory. can't check
+                return FormValidation.ok();
+
+            FilePath path = child(value);
+            if(path.exists()) {
+                if (expectingFile) {
+                    if(!path.isDirectory())
+                        return FormValidation.ok();
+                    else
+                        return FormValidation.error(value+" is not a file");
+                } else {
+                    if(path.isDirectory())
+                        return FormValidation.ok();
+                    else
+                        return FormValidation.error(value+" is not a directory");
+                }
+            }
+
+            String msg = "No such "+(expectingFile?"file":"directory")+": " + value;
+            if(errorIfNotExist)     return FormValidation.error(msg);
+            else                    return FormValidation.warning(msg);
+        } catch (InterruptedException e) {
+            return FormValidation.ok();
+        }
+    }
+
+    /**
+     * A convenience method over {@link #validateRelativePath(String, boolean, boolean)}.
+     */
+    public FormValidation validateRelativeDirectory(String value, boolean errorIfNotExist) throws IOException {
+        return validateRelativePath(value,errorIfNotExist,false);
+    }
+
+    public FormValidation validateRelativeDirectory(String value) throws IOException {
+        return validateRelativeDirectory(value,true);
+    }
+
     @Deprecated
     public String toString() {
         // to make writing JSPs easily, return local
@@ -1367,9 +1718,16 @@ public final class FilePath implements Serializable {
      */
     private class FileCallableWrapper<T> implements DelegatingCallable<T,IOException> {
         private final FileCallable<T> callable;
+        private transient ClassLoader classLoader;
 
         public FileCallableWrapper(FileCallable<T> callable) {
             this.callable = callable;
+            this.classLoader = callable.getClass().getClassLoader();
+        }
+
+        private FileCallableWrapper(FileCallable<T> callable, ClassLoader classLoader) {
+            this.callable = callable;
+            this.classLoader = classLoader;
         }
 
         public T call() throws IOException {
@@ -1377,7 +1735,7 @@ public final class FilePath implements Serializable {
         }
 
         public ClassLoader getClassLoader() {
-            return callable.getClass().getClassLoader();
+            return classLoader;
         }
 
         private static final long serialVersionUID = 1L;

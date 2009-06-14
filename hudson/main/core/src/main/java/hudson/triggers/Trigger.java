@@ -28,17 +28,18 @@ import hudson.DependencyRunner;
 import hudson.DependencyRunner.ProjectRunnable;
 import hudson.ExtensionPoint;
 import hudson.DescriptorExtensionList;
-import hudson.slaves.ComputerRetentionWork;
+import hudson.Extension;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.ComputerSet;
 import hudson.model.Describable;
-import hudson.model.FingerprintCleanupThread;
 import hudson.model.Hudson;
 import hudson.model.Item;
 import hudson.model.Project;
-import hudson.model.WorkspaceCleanupThread;
+import hudson.model.PeriodicWork;
+import hudson.model.TopLevelItem;
+import hudson.model.TopLevelItemDescriptor;
 import hudson.scheduler.CronTab;
 import hudson.scheduler.CronTabList;
 import hudson.util.DoubleLaunchChecker;
@@ -160,8 +161,13 @@ public abstract class Trigger<J extends Item> implements Describable<Trigger<?>>
     /**
      * Runs every minute to check {@link TimerTrigger} and schedules build.
      */
-    private static class Cron extends SafeTimerTask {
+    @Extension
+    public static class Cron extends PeriodicWork {
         private final Calendar cal = new GregorianCalendar();
+
+        public long getRecurrencePeriod() {
+            return MIN;
+        }
 
         public void doRun() {
             while(new Date().getTime()-cal.getTimeInMillis()>1000) {
@@ -219,7 +225,13 @@ public abstract class Trigger<J extends Item> implements Describable<Trigger<?>>
 
                     if (t.tabs.check(cal)) {
                         LOGGER.config("cron triggered "+p.getName());
-                        t.run();
+                        try {
+                            t.run();
+                        } catch (Throwable e) {
+                            // t.run() is a plugin, and some of them throw RuntimeException and other things.
+                            // don't let that cancel the polling activity. report and move on.
+                            LOGGER.log(Level.WARNING, t.getClass().getName()+".run() failed for "+p.getName(),e);
+                        }
                     }
                 }
             }
@@ -233,22 +245,17 @@ public abstract class Trigger<J extends Item> implements Describable<Trigger<?>>
      * some work.
      *
      * Initialized and cleaned up by {@link Hudson}, but value kept here for compatibility.
+     *
+     * If plugins want to run periodic jobs, they should implement {@link PeriodicWork}.
      */
     public static Timer timer;
 
     public static void init() {
-        long MIN = 1000*60;
-        long HOUR =60*MIN;
-        long DAY = 24*HOUR;
-
-        timer.scheduleAtFixedRate(new Cron(), MIN, MIN);
-
         new DoubleLaunchChecker().schedule();
 
-        // clean up fingerprint once a day
-        timer.scheduleAtFixedRate(new FingerprintCleanupThread(),DAY,DAY);
-        timer.scheduleAtFixedRate(new WorkspaceCleanupThread(),DAY+4*HOUR,DAY);
-        timer.scheduleAtFixedRate(new ComputerRetentionWork(), MIN, MIN);
+        // start all PeridocWorks
+        for(PeriodicWork p : PeriodicWork.all())
+            timer.scheduleAtFixedRate(p,p.getInitialDelay(),p.getRecurrencePeriod());
 
         // start monitoring nodes, although there's no hurry.
         timer.schedule(new SafeTimerTask() {
@@ -271,8 +278,16 @@ public abstract class Trigger<J extends Item> implements Describable<Trigger<?>>
     public static List<TriggerDescriptor> for_(Item i) {
         List<TriggerDescriptor> r = new ArrayList<TriggerDescriptor>();
         for (TriggerDescriptor t : all()) {
-            if(t.isApplicable(i))
-                r.add(t);
+            if(!t.isApplicable(i))  continue;
+
+            if (i instanceof TopLevelItem) {// ugly
+                TopLevelItemDescriptor tld = ((TopLevelItem) i).getDescriptor();
+                // tld shouldn't be really null in contract, but we often write test Describables that
+                // doesn't have a Descriptor.
+                if(tld!=null && !tld.isApplicable(t))    continue;
+            }
+
+            r.add(t);
         }
         return r;
     }

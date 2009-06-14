@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.matrix Class Hierarchy (Hudson core 1.291 API)
+hudson.matrix Class Hierarchy (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.matrix Class Hierarchy (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.matrix Class Hierarchy (Hudson core 1.291 API)";
+        parent.document.title="hudson.matrix Class Hierarchy (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/logging/package-tree.html"><B>PREV</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/maven/package-tree.html"><B>NEXT</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/maven/agent/package-tree.html"><B>NEXT</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/matrix/package-tree.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="package-tree.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -119,7 +119,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model"><B>AbstractModelObject</B></A> (implements hudson.search.<A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>)
 <UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><B>Actionable</B></A><UL>
-<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/AbstractItem.html" title="class in hudson.model"><B>AbstractItem</B></A> (implements hudson.security.<A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, org.kohsuke.stapler.HttpDeletable, hudson.model.<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>)
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/AbstractItem.html" title="class in hudson.model"><B>AbstractItem</B></A> (implements hudson.security.<A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, hudson.model.<A HREF="../../hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model">DescriptorByNameOwner</A>, org.kohsuke.stapler.HttpDeletable, hudson.model.<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>)
 <UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Job.html" title="class in hudson.model"><B>Job</B></A>&lt;JobT,RunT&gt; (implements hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
@@ -133,7 +133,7 @@ Class Hierarchy
 </UL>
 </UL>
 </UL>
-<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Run.html" title="class in hudson.model"><B>Run</B></A>&lt;JobT,RunT&gt; (implements hudson.security.<A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, java.lang.Comparable&lt;T&gt;, hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, hudson.model.<A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>)
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Run.html" title="class in hudson.model"><B>Run</B></A>&lt;JobT,RunT&gt; (implements hudson.security.<A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, java.lang.Comparable&lt;T&gt;, hudson.model.<A HREF="../../hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model">DescriptorByNameOwner</A>, hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, hudson.model.<A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>)
 <UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model"><B>AbstractBuild</B></A>&lt;P,R&gt; (implements hudson.model.<A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model">Queue.Executable</A>)
 <UL>
@@ -147,7 +147,9 @@ Class Hierarchy
 <LI TYPE="circle">hudson.matrix.<A HREF="../../hudson/matrix/Combination.BooleanCategory.html" title="class in hudson.matrix"><B>Combination.BooleanCategory</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><B>Descriptor</B></A>&lt;T&gt; (implements hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
 <UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model"><B>TopLevelItemDescriptor</B></A><UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/AbstractProject.AbstractProjectDescriptor.html" title="class in hudson.model"><B>AbstractProject.AbstractProjectDescriptor</B></A><UL>
 <LI TYPE="circle">hudson.matrix.<A HREF="../../hudson/matrix/MatrixProject.DescriptorImpl.html" title="class in hudson.matrix"><B>MatrixProject.DescriptorImpl</B></A></UL>
+</UL>
 </UL>
 <LI TYPE="circle">hudson.matrix.<A HREF="../../hudson/matrix/Layouter.html" title="class in hudson.matrix"><B>Layouter</B></A>&lt;T&gt;<LI TYPE="circle">hudson.matrix.<A HREF="../../hudson/matrix/MatrixAggregator.html" title="class in hudson.matrix"><B>MatrixAggregator</B></A> (implements hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <LI TYPE="circle">hudson.matrix.<A HREF="../../hudson/matrix/MatrixBuild.RunPtr.html" title="class in hudson.matrix"><B>MatrixBuild.RunPtr</B></A><LI TYPE="circle">hudson.matrix.<A HREF="../../hudson/matrix/Messages.html" title="class in hudson.matrix"><B>Messages</B></A></UL>
@@ -190,7 +192,7 @@ Interface Hierarchy
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/logging/package-tree.html"><B>PREV</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/maven/package-tree.html"><B>NEXT</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/maven/agent/package-tree.html"><B>NEXT</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/matrix/package-tree.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="package-tree.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

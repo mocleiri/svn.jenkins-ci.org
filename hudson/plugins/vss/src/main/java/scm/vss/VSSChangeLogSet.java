@@ -3,6 +3,7 @@ package scm.vss;
 import hudson.model.AbstractBuild;
 import hudson.model.User;
 import hudson.scm.ChangeLogSet;
+import hudson.util.IOException2;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,8 +58,14 @@ public class VSSChangeLogSet extends ChangeLogSet<VSSChangeLogSet.VSSChangeLog>
         }
 
         digester.addSetNext("*/entry","add");
-        digester.parse(changeLogFile);
-	}
+        try {
+            digester.parse(changeLogFile);
+        } catch (IOException e) {
+            throw new IOException2("Failed to parse "+changeLogFile,e);
+        } catch (SAXException e) {
+            throw new IOException2("Failed to parse "+changeLogFile,e);
+        }
+    }
 
 	/**
 	 * 

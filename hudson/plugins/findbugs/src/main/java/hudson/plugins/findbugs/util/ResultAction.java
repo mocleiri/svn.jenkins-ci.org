@@ -1,12 +1,9 @@
 package hudson.plugins.findbugs.util;
 
+import hudson.model.AbstractBuild;
 import hudson.model.Action;
 
-import java.io.IOException;
 import java.util.NoSuchElementException;
-
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
 
 /**
  * Defines an action that is responsible for handling results of the given type
@@ -16,7 +13,7 @@ import org.kohsuke.stapler.StaplerResponse;
  *            type of the result
  * @author Ulli Hafner
  */
-public interface ResultAction<T> extends Action {
+public interface ResultAction<T extends BuildResult> extends Action {
     /**
      * Returns the current result of this action.
      *
@@ -49,37 +46,23 @@ public interface ResultAction<T> extends Action {
     ResultAction<T> getPreviousResultAction();
 
     /**
-     * Generates a PNG image showing the trend graph for this result action.
+     * Returns the associated build of this action.
      *
-     * @param request
-     *            Stapler request
-     * @param response
-     *            Stapler response
-     * @param height
-     *            the height of the trend graph
-     * @throws IOException
-     *             in case of an error
+     * @return the associated build of this action
      */
-    void doGraph(StaplerRequest request, StaplerResponse response, int height) throws IOException;
+    AbstractBuild<?, ?> getBuild();
 
     /**
-     * Generates a clickable map for the trend graph of this result action.
+     * Returns the associated tool tip provider.
      *
-     * @param request
-     *            Stapler request
-     * @param response
-     *            Stapler response
-     * @param height
-     *            the height of the trend graph
-     * @throws IOException
-     *             in case of an error
+     * @return the tool tip provider
      */
-    void doGraphMap(StaplerRequest request, StaplerResponse response, int height) throws IOException;
+    ToolTipProvider getToolTipProvider();
 
     /**
-     * Returns the associated health report builder.
+     * Gets the associated health descriptor.
      *
-     * @return the associated health report builder
+     * @return the health descriptor
      */
-    HealthReportBuilder getHealthReportBuilder();
+    AbstractHealthDescriptor getHealthDescriptor();
 }

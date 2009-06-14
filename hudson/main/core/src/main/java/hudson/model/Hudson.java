@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt, Koichi Fujikawa, Red Hat, Inc., Seiji Sogabe, Stephen Connolly, Tom Huybrechts
+ * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt, Koichi Fujikawa, Red Hat, Inc., Seiji Sogabe, Stephen Connolly, Tom Huybrechts, Yahoo! Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,6 +37,7 @@ import hudson.StructuredForm;
 import hudson.TcpSlaveAgentListener;
 import hudson.Util;
 import static hudson.Util.fixEmpty;
+import static hudson.Util.fixNull;
 import hudson.WebAppMain;
 import hudson.XmlFile;
 import hudson.UDPBroadcastThread;
@@ -44,6 +45,12 @@ import hudson.ExtensionList;
 import hudson.ExtensionPoint;
 import hudson.DescriptorExtensionList;
 import hudson.ExtensionListView;
+import hudson.Extension;
+import hudson.tools.ToolInstallation;
+import hudson.tools.ToolDescriptor;
+import hudson.cli.CliEntryPoint;
+import hudson.cli.CLICommand;
+import hudson.cli.HelpCommand;
 import hudson.logging.LogRecorderManager;
 import hudson.lifecycle.Lifecycle;
 import hudson.model.Descriptor.FormException;
@@ -53,6 +60,7 @@ import hudson.model.listeners.JobListener.JobListenerAdapter;
 import hudson.model.listeners.SCMListener;
 import hudson.remoting.LocalChannel;
 import hudson.remoting.VirtualChannel;
+import hudson.remoting.Channel;
 import hudson.scm.CVSSCM;
 import hudson.scm.RepositoryBrowser;
 import hudson.scm.SCM;
@@ -71,6 +79,9 @@ import hudson.security.Permission;
 import hudson.security.PermissionGroup;
 import hudson.security.SecurityMode;
 import hudson.security.SecurityRealm;
+import hudson.security.csrf.CrumbFilter;
+import hudson.security.csrf.CrumbIssuer;
+import hudson.security.csrf.CrumbIssuerDescriptor;
 import hudson.slaves.ComputerListener;
 import hudson.slaves.NodeProperty;
 import hudson.slaves.NodePropertyDescriptor;
@@ -93,7 +104,6 @@ import hudson.util.ClockDifference;
 import hudson.util.CopyOnWriteList;
 import hudson.util.CopyOnWriteMap;
 import hudson.util.DaemonThreadFactory;
-import hudson.util.FormFieldValidator;
 import hudson.util.HudsonIsLoading;
 import hudson.util.MultipartFormDataParser;
 import hudson.util.RemotingDiagnostics;
@@ -104,6 +114,8 @@ import hudson.util.DescribableList;
 import hudson.util.Futures;
 import hudson.util.Memoizer;
 import hudson.util.Iterators;
+import hudson.util.FormValidation;
+import hudson.util.VersionNumber;
 import hudson.widgets.Widget;
 import net.sf.json.JSONObject;
 import org.acegisecurity.*;
@@ -114,6 +126,7 @@ import static org.acegisecurity.ui.rememberme.TokenBasedRememberMeServices.ACEGI
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.JellyException;
+import org.apache.commons.io.FileUtils;
 import org.kohsuke.stapler.MetaClass;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerProxy;
@@ -121,6 +134,7 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.StaplerFallback;
 import org.kohsuke.stapler.WebApp;
+import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.jelly.JellyClassLoaderTearOff;
 import org.kohsuke.stapler.jelly.JellyRequestDispatcher;
 import org.kohsuke.stapler.framework.adjunct.AdjunctManager;
@@ -131,7 +145,6 @@ import org.xml.sax.InputSource;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
@@ -143,8 +156,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.InputStream;
+import java.io.Serializable;
+import java.io.PrintStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.security.SecureRandom;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.Collator;
@@ -165,6 +184,8 @@ import java.util.StringTokenizer;
 import java.util.Timer;
 import java.util.TreeSet;
 import java.util.Properties;
+import java.util.UUID;
+import java.util.Locale;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -182,6 +203,8 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.nio.charset.Charset;
 import javax.servlet.RequestDispatcher;
+import javax.crypto.spec.SecretKeySpec;
+import javax.crypto.SecretKey;
 
 import groovy.lang.GroovyShell;
 
@@ -191,7 +214,7 @@ import groovy.lang.GroovyShell;
  * @author Kohsuke Kawaguchi
  */
 @ExportedBean
-public final class Hudson extends Node implements ItemGroup<TopLevelItem>, StaplerProxy, StaplerFallback, ViewGroup, AccessControlled {
+public final class Hudson extends Node implements ItemGroup<TopLevelItem>, StaplerProxy, StaplerFallback, ViewGroup, AccessControlled, DescriptorByNameOwner {
     private transient final Queue queue;
 
     /**
@@ -199,6 +222,20 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      */
     private transient final Map<Node,Computer> computers = new CopyOnWriteMap.Hash<Node,Computer>();
 
+    /**
+     * We update this field to the current version of Hudson whenever we save {@code config.xml}.
+     * This can be used to detect when an upgrade happens from one version to next.
+     *
+     * <p>
+     * Since this field is introduced starting 1.301, "1.0" is used to represent every version
+     * up to 1.300. This value may also include non-standard versions like "1.301-SNAPSHOT" or
+     * "?", etc., so parsing needs to be done with a care.
+     *
+     * @since 1.301
+     */
+    // this field needs to be at the very top so that other components can look at this value even during unmarshalling
+    private String version = "1.0";
+    
     /**
      * Number of executors of the master node.
      */
@@ -227,7 +264,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      *
      * Never null.
      */
-    private volatile AuthorizationStrategy authorizationStrategy;
+    private volatile AuthorizationStrategy authorizationStrategy = AuthorizationStrategy.UNSECURED;
 
     /**
      * Controls a part of the
@@ -244,7 +281,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      * @see #getSecurity()
      * @see #setSecurityRealm(SecurityRealm)
      */
-    private volatile SecurityRealm securityRealm;
+    private volatile SecurityRealm securityRealm = SecurityRealm.NO_AUTHENTICATION;
 
     /**
      * Message displayed in the top page.
@@ -382,6 +419,13 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      */
     private String label="";
 
+    private Boolean useCrumbs;
+    
+    /**
+     * {@link hudson.security.csrf.CrumbIssuer}
+     */
+    private volatile CrumbIssuer crumbIssuer;
+    
     /**
      * All labels known to Hudson. This allows us to reuse the same label instances
      * as much as possible, even though that's not a strict requirement.
@@ -466,99 +510,111 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     private transient final LogRecorderManager log = new LogRecorderManager();
 
     public Hudson(File root, ServletContext context) throws IOException {
-        this.root = root;
-        this.servletContext = context;
-        computeVersion(context);
-        if(theInstance!=null)
-            throw new IllegalStateException("second instance");
-        theInstance = this;
-
-        log.load();
-
-        Trigger.timer = new Timer("Hudson cron thread");
-        queue = new Queue();
-
+    	// As hudson is starting, grant this process full controll
+    	SecurityContextHolder.getContext().setAuthentication(ACL.SYSTEM);
         try {
-            dependencyGraph = DependencyGraph.EMPTY;
-        } catch (InternalError e) {
-            if(e.getMessage().contains("window server")) {
-                throw new Error("Looks like the server runs without X. Please specify -Djava.awt.headless=true as JVM option",e);
-            }
-            throw e;
-        }
+            this.root = root;
+            this.servletContext = context;
+            computeVersion(context);
+            if(theInstance!=null)
+                throw new IllegalStateException("second instance");
+            theInstance = this;
 
-        // get or create the secret
-        TextFile secretFile = new TextFile(new File(Hudson.getInstance().getRootDir(),"secret.key"));
-        if(secretFile.exists()) {
-            secretKey = secretFile.readTrim();
-        } else {
-            SecureRandom sr = new SecureRandom();
-            byte[] random = new byte[32];
-            sr.nextBytes(random);
-            secretKey = Util.toHexString(random);
-            secretFile.write(secretKey);
-        }
+            log.load();
 
-        try {
-            proxy = ProxyConfiguration.load();
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Failed to load proxy configuration", e);
-        }
+            Trigger.timer = new Timer("Hudson cron thread");
+            queue = new Queue(CONSISTENT_HASH?LoadBalancer.CONSISTENT_HASH:LoadBalancer.DEFAULT);
 
-        // run the init code of SubversionSCM before we load plugins so that plugins can change SubversionWorkspaceSelector.
-        SubversionSCM.init();
-
-        // load plugins.
-        pluginManager = new PluginManager(context);
-
-        // if we are loading old data that doesn't have this field
-        if(slaves==null)    slaves = new NodeList();
-
-        adjuncts = new AdjunctManager(servletContext, pluginManager.uberClassLoader,"adjuncts/"+VERSION_HASH);
-
-        load();
-
-//        try {
-//            // fill up the cache
-//            load();
-//
-//            Controller c = new Controller();
-//            c.startCPUProfiling(ProfilingModes.CPU_TRACING,""); // "java.*");
-//            load();
-//            c.stopCPUProfiling();
-//            c.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
-//        } catch (Exception e) {
-//            throw new Error(e);
-//        }
-
-        if(slaveAgentPort!=-1)
-            tcpSlaveAgentListener = new TcpSlaveAgentListener(slaveAgentPort);
-        else
-            tcpSlaveAgentListener = null;
-
-        udpBroadcastThread = new UDPBroadcastThread(this);
-        udpBroadcastThread.start();
-
-        updateComputerList();
-
-        getQueue().load();
-
-        for (ItemListener l : ItemListener.all())
-            l.onLoaded();
-
-        LoadStatistics.register();
-        NodeProvisioner.launch();
-
-        // run the initialization script, if it exists.
-        File initScript = new File(getRootDir(),"init.groovy");
-        if(initScript.exists()) {
-            LOGGER.info("Executing "+initScript);
-            GroovyShell shell = new GroovyShell();
             try {
-                shell.evaluate(initScript);
-            } catch (Throwable t) {
-                t.printStackTrace();
+                dependencyGraph = DependencyGraph.EMPTY;
+            } catch (InternalError e) {
+                if(e.getMessage().contains("window server")) {
+                    throw new Error("Looks like the server runs without X. Please specify -Djava.awt.headless=true as JVM option",e);
+                }
+                throw e;
             }
+
+            // get or create the secret
+            TextFile secretFile = new TextFile(new File(Hudson.getInstance().getRootDir(),"secret.key"));
+            if(secretFile.exists()) {
+                secretKey = secretFile.readTrim();
+            } else {
+                SecureRandom sr = new SecureRandom();
+                byte[] random = new byte[32];
+                sr.nextBytes(random);
+                secretKey = Util.toHexString(random);
+                secretFile.write(secretKey);
+            }
+
+            try {
+                proxy = ProxyConfiguration.load();
+            } catch (IOException e) {
+                LOGGER.log(Level.SEVERE, "Failed to load proxy configuration", e);
+            }
+
+            // run the init code of SubversionSCM before we load plugins so that plugins can change SubversionWorkspaceSelector.
+            SubversionSCM.init();
+
+            // load plugins.
+            pluginManager = new PluginManager(context);
+            pluginManager.initialize();
+
+            // if we are loading old data that doesn't have this field
+            if(slaves==null)    slaves = new NodeList();
+
+            adjuncts = new AdjunctManager(servletContext, pluginManager.uberClassLoader,"adjuncts/"+VERSION_HASH);
+
+            load();
+
+    //        try {
+    //            // fill up the cache
+    //            load();
+    //
+    //            Controller c = new Controller();
+    //            c.startCPUProfiling(ProfilingModes.CPU_TRACING,""); // "java.*");
+    //            load();
+    //            c.stopCPUProfiling();
+    //            c.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
+    //        } catch (Exception e) {
+    //            throw new Error(e);
+    //        }
+
+            if(slaveAgentPort!=-1)
+                tcpSlaveAgentListener = new TcpSlaveAgentListener(slaveAgentPort);
+            else
+                tcpSlaveAgentListener = null;
+
+            udpBroadcastThread = new UDPBroadcastThread(this);
+            udpBroadcastThread.start();
+
+            updateComputerList();
+
+            getQueue().load();
+
+            for (ItemListener l : ItemListener.all())
+                l.onLoaded();
+
+            // run the initialization script, if it exists.
+            File initScript = new File(getRootDir(),"init.groovy");
+            if(initScript.exists()) {
+                LOGGER.info("Executing "+initScript);
+                GroovyShell shell = new GroovyShell(pluginManager.uberClassLoader);
+                try {
+                    shell.evaluate(initScript);
+                } catch (Throwable t) {
+                    t.printStackTrace();
+                }
+            }
+
+            File userContentDir = new File(getRootDir(), "userContent");
+            if(!userContentDir.exists()) {
+                userContentDir.mkdirs();
+                FileUtils.writeStringToFile(new File(userContentDir,"readme.txt"),Messages.Hudson_USER_CONTENT_README());
+            }
+
+            Trigger.init(); // start running trigger
+        } finally {
+            SecurityContextHolder.clearContext();
         }
     }
 
@@ -645,6 +701,14 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     }
 
     /**
+     * Gets {@linkplain #getSecretKey() the secret key} as a key for AES-128.
+     * @since 1.308
+     */
+    public SecretKey getSecretKeyAsAES128() {
+        return Util.toAes128Key(secretKey);
+    }
+
+    /**
      * Gets the SCM descriptor by name. Primarily used for making them web-visible.
      */
     public Descriptor<SCM> getScm(String shortClassName) {
@@ -707,13 +771,27 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      *
      * After doing all the {@code getXXX(shortClassName)} methods, I finally realized that
      * this just doesn't scale.
+     *
+     * @param className
+     *      Either fully qualified class name (recommended) or the short name.
      */
-    public Descriptor getDescriptor(String fullyQualifiedClassName) {
+    public Descriptor getDescriptor(String className) {
         // legacy descriptors that are reigstered manually doesn't show up in getExtensionList, so check them explicitly.
-        for( Descriptor d : Iterators.sequence(getExtensionList(Descriptor.class),DescriptorExtensionList.listLegacyInstances()) )
-            if(d.clazz.getName().equals(fullyQualifiedClassName))
+        for( Descriptor d : Iterators.sequence(getExtensionList(Descriptor.class),DescriptorExtensionList.listLegacyInstances()) ) {
+            String name = d.clazz.getName();
+            if(name.equals(className))
                 return d;
+            if(name.substring(name.lastIndexOf('.')+1).equals(className))
+                return d;
+        }
         return null;
+    }
+
+    /**
+     * Alias for {@link #getDescriptor(String)}.
+     */
+    public Descriptor getDescriptorByName(String className) {
+        return getDescriptor(className);
     }
 
     /**
@@ -869,7 +947,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     }
 
     public Launcher createLauncher(TaskListener listener) {
-        return new LocalLauncher(listener);
+        return new LocalLauncher(listener).decorateFor(this);
     }
 
     private final transient Object updateComputerLock = new Object();
@@ -974,7 +1052,24 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      */
     @Exported(name="jobs")
     public List<TopLevelItem> getItems() {
-        return new ArrayList<TopLevelItem>(items.values());
+        List<TopLevelItem> viewableItems = new ArrayList<TopLevelItem>();
+        for (TopLevelItem item : items.values()) {
+            if (item.hasPermission(Item.READ))
+                viewableItems.add(item);
+        }
+        
+        return viewableItems;
+    }
+
+    /**
+     * Returns the read-only view of all the {@link TopLevelItem}s keyed by their names.
+     * <p>
+     * This method is efficient, as it doesn't involve any copying.
+     * 
+     * @since 1.296
+     */
+    public Map<String,TopLevelItem> getItemMap() {
+        return Collections.unmodifiableMap(items);
     }
 
     /**
@@ -982,7 +1077,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      */
     public <T> List<T> getItems(Class<T> type) {
         List<T> r = new ArrayList<T>();
-        for (TopLevelItem i : items.values())
+        for (TopLevelItem i : getItems())
             if (type.isInstance(i))
                  r.add(type.cast(i));
         return r;
@@ -1001,8 +1096,10 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         while(!q.isEmpty()) {
             ItemGroup<?> parent = q.pop();
             for (Item i : parent.getItems()) {
-                if(type.isInstance(i))
-                    r.add(type.cast(i));
+                if(type.isInstance(i)) {
+                    if (i.hasPermission(Item.READ))
+                        r.add(type.cast(i));
+                }
                 if(i instanceof ItemGroup)
                     q.push((ItemGroup)i);
             }
@@ -1060,11 +1157,39 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         return copy;
     }
 
+    public void addView(View v) throws IOException {
+        views.add(v);
+        save();
+    }
+
     public synchronized void deleteView(View view) throws IOException {
         if(views.size()<=1)
             throw new IllegalStateException();
         views.remove(view);
         save();
+    }
+
+    /**
+     * Returns true if the current running Hudson is upgraded from a version earlier than the specified version.
+     *
+     * <p>
+     * This method continues to return true until the system configuration is saved, at which point
+     * {@link #version} will be overwritten and Hudson forgets the upgrade history.
+     *
+     * <p>
+     * To handle SNAPSHOTS correctly, pass in "1.N.*" to test if it's upgrading from the version
+     * equal or younger than N. So say if you implement a feature in 1.301 and you want to check
+     * if the installation upgraded from pre-1.301, pass in "1.300.*"
+     *
+     * @since 1.301
+     */
+    public boolean isUpgradedFromBefore(VersionNumber v) {
+        try {
+            return new VersionNumber(version).isOlderThan(v);
+        } catch (IllegalArgumentException e) {
+            // fail to parse this version number
+            return false;
+        }
     }
 
     /**
@@ -1110,6 +1235,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      * Gets the label that exists on this system by the name.
      *
      * @return null if no such label exists.
+     * @see Label#parse(String)
      */
     public Label getLabel(String name) {
         if(name==null)  return null;
@@ -1183,7 +1309,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      * Gets the slave node of the give name, hooked under this Hudson.
      */
     public Node getNode(String name) {
-        for (Node s : getSlaves()) {
+        for (Node s : getNodes()) {
             if(s.getNodeName().equals(name))
                 return s;
         }
@@ -1230,8 +1356,10 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      * Adds one more {@link Node} to Hudson.
      */
     public synchronized void addNode(Node n) throws IOException {
+        if(n==null)     throw new IllegalArgumentException();
         ArrayList<Node> nl = new ArrayList<Node>(this.slaves);
-        nl.add(n);
+        if(!nl.contains(n)) // defensive check
+            nl.add(n);
         setNodes(nl);
     }
 
@@ -1293,14 +1421,24 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     }
 
     public static final class DescriptorImpl extends NodeDescriptor {
+        @Extension
         public static final DescriptorImpl INSTANCE = new DescriptorImpl();
 
         public String getDisplayName() {
             throw new UnsupportedOperationException();
         }
 
+        @Override
+        public boolean isInstantiable() {
+            return false;
+        }
+
+        public FormValidation doCheckNumExecutors(@QueryParameter String value) {
+            return FormValidation.validateNonNegativeInteger(value);
+        }
+
         // to route /descriptor/FQCN/xxx to getDescriptor(FQCN).xxx
-        public Object getDynamic(String token, StaplerRequest req, StaplerResponse rsp) {
+        public Object getDynamic(String token) {
             return Hudson.getInstance().getDescriptor(token);
         }
     }
@@ -1370,14 +1508,10 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      * such as "http://localhost/hudson/".
      *
      * <p>
-     * Also note that when serving user requests from HTTP, you should always use
-     * {@link HttpServletRequest} to determine the full URL, instead of using this
-     * (this is because one host may have multiple names, and {@link HttpServletRequest}
-     * accurately represents what the current user used.)
-     *
-     * <p>
-     * This information is rather only meant to be useful for sending out messages
-     * via non-HTTP channels, like SMTP or IRC, with a link back to Hudson website.
+     * This method first tries to use the manually configured value, then
+     * fall back to {@link StaplerRequest#getRootPath()}.
+     * It is done in this order so that it can work correctly even in the face
+     * of a reverse proxy.
      *
      * @return
      *      This method returns null if this parameter is not configured by the user.
@@ -1458,6 +1592,10 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         return securityRealm!=SecurityRealm.NO_AUTHENTICATION || authorizationStrategy!=AuthorizationStrategy.UNSECURED;
     }
 
+    public boolean isUseCrumbs() {
+        return (useCrumbs != null) && useCrumbs;
+    }
+    
     /**
      * Returns the constant that captures the three basic security modes
      * in Hudson.
@@ -1606,7 +1744,10 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      * Note that the look up is case-insensitive.
      */
     public TopLevelItem getItem(String name) {
-        return items.get(name);
+    	TopLevelItem item = items.get(name);
+        if (item==null || !item.hasPermission(Item.READ))
+            return null;
+        return item;
     }
 
     public File getRootDirFor(TopLevelItem child) {
@@ -1756,17 +1897,13 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     }
 
     public String getLabelString() {
-        return Util.fixNull(label).trim();
+        return fixNull(label).trim();
     }
 
     public Set<Label> getAssignedLabels() {
         Set<Label> lset = labelSet; // labelSet may be set by another thread while we are in this method, so capture it.
         if (lset == null) {
-            Set<Label> r = new HashSet<Label>();
-            String ls = getLabelString();
-            if(ls.length()>0)
-                for( String l : ls.split(" +"))
-                    r.add(Hudson.getInstance().getLabel(l));
+            Set<Label> r = Label.parse(getLabelString());
             r.addAll(getDynamicLabels());
             r.add(getSelfLabel());
             this.labelSet = lset = Collections.unmodifiableSet(r);
@@ -1840,11 +1977,18 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             for (final File subdir : subdirs) {
                 loaders.add(threadPoolForLoad.submit(new Callable<TopLevelItem>() {
                     public TopLevelItem call() throws Exception {
-                        long start = System.currentTimeMillis();
-                        TopLevelItem item = (TopLevelItem) Items.load(Hudson.this, subdir);
-                        if(LOG_STARTUP_PERFORMANCE)
-                            LOGGER.info("Loaded "+item.getName()+" in "+(System.currentTimeMillis()-start)+"ms by "+Thread.currentThread().getName());
-                        return item;
+                        Thread t = Thread.currentThread();
+                        String name = t.getName();
+                        t.setName("Loading "+subdir);
+                        try {
+                            long start = System.currentTimeMillis();
+                            TopLevelItem item = (TopLevelItem) Items.load(Hudson.this, subdir);
+                            if(LOG_STARTUP_PERFORMANCE)
+                                LOGGER.info("Loaded "+item.getName()+" in "+(System.currentTimeMillis()-start)+"ms by "+name);
+                            return item;
+                        } finally {
+                            t.setName(name);
+                        }
                     }
                 }));
             }
@@ -1878,10 +2022,10 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         }
         rebuildDependencyGraph();
 
-        // recompute label objects
-        if (null != slaves) { // only if we have slaves
+        {// recompute label objects
             for (Node slave : slaves)
                 slave.getAssignedLabels();
+            getAssignedLabels();
         }
 
         // initialize views by inserting the default view if necessary
@@ -1917,6 +2061,9 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             setSecurityRealm(SecurityRealm.NO_AUTHENTICATION);
         }
 
+        // Initialize the filter with the crumb issuer
+        setCrumbIssuer(crumbIssuer);
+        
         LOGGER.info(String.format("Took %s ms to load",System.currentTimeMillis()-startTime));
         if(KILL_AFTER_LOAD)
             System.exit(0);
@@ -1977,9 +2124,9 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         theInstance = null;
     }
 
-    public Object getDynamic(String token, StaplerRequest req, StaplerResponse rsp) {
+    public Object getDynamic(String token) {
         for (Action a : getActions())
-            if(a.getUrlName().equals(token))
+            if(a.getUrlName().equals(token) || a.getUrlName().equals('/'+token))
                 return a;
         for (Action a : getManagementLinks())
             if(a.getUrlName().equals(token))
@@ -2019,6 +2166,15 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
                 authorizationStrategy = AuthorizationStrategy.UNSECURED;
             }
 
+            if (json.has("csrf")) {
+            	useCrumbs = true;
+            	JSONObject csrf = json.getJSONObject("csrf");
+            	setCrumbIssuer(CrumbIssuer.all().newInstanceFromRadioList(csrf, "issuer"));
+            } else {
+            	useCrumbs = null;
+            	setCrumbIssuer(null);
+            }
+            
             noUsageStatistics = json.has("usageStatisticsCollected") ? null : true;
 
             {
@@ -2050,30 +2206,21 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
                 }
             }
 
-            numExecutors = Integer.parseInt(req.getParameter("numExecutors"));
+            numExecutors = Integer.parseInt(req.getParameter("_.numExecutors"));
             if(req.hasParameter("master.mode"))
                 mode = Mode.valueOf(req.getParameter("master.mode"));
             else
                 mode = Mode.NORMAL;
 
-            label = Util.fixNull(req.getParameter("label"));
+            label = fixNull(req.getParameter("_.labelString"));
             labelSet=null;
 
             quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
 
             systemMessage = Util.nullify(req.getParameter("system_message"));
 
-            {// update JDK installations
-                jdks.clear();
-                String[] names = req.getParameterValues("jdk_name");
-                String[] homes = req.getParameterValues("jdk_home");
-                if(names!=null && homes!=null) {
-                    int len = Math.min(names.length,homes.length);
-                    for(int i=0;i<len;i++) {
-                        jdks.add(new JDK(names[i],homes[i]));
-                    }
-                }
-            }
+            jdks.clear();
+            jdks.addAll(req.bindJSONToList(JDK.class,json.get("jdks")));
 
             boolean result = true;
 
@@ -2098,8 +2245,14 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             for( PageDecorator d : PageDecorator.all() )
                 result &= configureDescriptor(req,json,d);
 
+            for( Descriptor<CrumbIssuer> d : CrumbIssuer.all() )
+                result &= configureDescriptor(req,json, d);
+            
+            for( ToolDescriptor d : ToolInstallation.all() )
+                result &= configureDescriptor(req,json,d);
+
             for( JSONObject o : StructuredForm.toList(json,"plugin"))
-                pluginManager.getPlugin(o.getString("name")).getPlugin().configure(o);
+                pluginManager.getPlugin(o.getString("name")).getPlugin().configure(req, o);
 
             clouds.rebuildHetero(req,json, Cloud.all(), "cloud");
 
@@ -2108,7 +2261,10 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
                 globalNodeProperties.rebuild(req, np, NodeProperty.for_(this));
             }
 
+            version = VERSION;
+
             save();
+            updateComputerList();
             if(result)
                 rsp.sendRedirect(req.getContextPath()+'/');  // go to the top page
             else
@@ -2120,6 +2276,19 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         }
     }
 
+    public CrumbIssuer getCrumbIssuer() {
+        return crumbIssuer;
+    }
+    
+    public void setCrumbIssuer(CrumbIssuer issuer) {
+        crumbIssuer = issuer;
+        CrumbFilter.get(servletContext).setCrumbIssuer(issuer);
+    }
+
+    public void setUseCrumbs(Boolean use) {
+        useCrumbs = use;
+    }
+    
     public synchronized void doTestPost( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         JSONObject form = req.getSubmittedForm();
         rsp.sendRedirect("foo");
@@ -2149,7 +2318,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             else
                 mode = Mode.NORMAL;
 
-            setSlaves(req.bindJSONToList(Slave.class,json.get("slaves")));
+            setNodes(req.bindJSONToList(Slave.class,json.get("slaves")));
         } finally {
             bc.commit();
         }
@@ -2327,8 +2496,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     public synchronized void doCreateView( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         try {
             checkPermission(View.CREATE);
-            views.add(View.create(req,rsp, this));
-            save();
+            addView(View.create(req,rsp, this));
         } catch (ParseException e) {
             sendError(e,req,rsp);
         } catch (FormException e) {
@@ -2360,7 +2528,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     }
 
     private static String toPrintableName(String name) {
-        StringBuffer printableName = new StringBuffer();
+        StringBuilder printableName = new StringBuilder();
         for( int i=0; i<name.length(); i++ ) {
             char ch = name.charAt(i);
             if(Character.isISOControl(ch))
@@ -2482,6 +2650,9 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     public void doDoFingerprintCheck( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
         // Parse the request
         MultipartFormDataParser p = new MultipartFormDataParser(req);
+        if(Hudson.getInstance().isUseCrumbs() && !Hudson.getInstance().getCrumbIssuer().validateCrumb(req, p)) {
+            rsp.sendError(HttpServletResponse.SC_FORBIDDEN,"No crumb found");                
+        }
         try {
             rsp.sendRedirect2(req.getContextPath()+"/fingerprint/"+
                 Util.getDigestOf(p.getFileItem("name").getInputStream())+'/');
@@ -2541,22 +2712,127 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     }
 
     /**
+     * {@link CliEntryPoint} implementation exposed to the remote CLI.
+     */
+    private final class CliManager implements CliEntryPoint, Serializable {
+        /**
+         * CLI should be executed under this credential.
+         */
+        private final Authentication auth;
+
+        private CliManager(Authentication auth) {
+            this.auth = auth;
+        }
+
+        public int main(List<String> args, Locale locale, InputStream stdin, OutputStream stdout, OutputStream stderr) {
+            // remoting sets the context classloader to the RemoteClassLoader,
+            // which slows down the classloading. we don't load anything from CLI,
+            // so couner that effect.
+            Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
+
+            PrintStream out = new PrintStream(stdout);
+            PrintStream err = new PrintStream(stderr);
+
+            String subCmd = args.get(0);
+            CLICommand cmd = CLICommand.clone(subCmd);
+            if(cmd!=null) {
+                Authentication old = SecurityContextHolder.getContext().getAuthentication();
+                SecurityContextHolder.getContext().setAuthentication(auth);
+                try {
+                    // execute the command, do so with the originator of the request as the principal
+                    return cmd.main(args.subList(1,args.size()),stdin, out, err);
+                } finally {
+                    SecurityContextHolder.getContext().setAuthentication(old);
+                }
+            }
+
+            err.println("No such command: "+subCmd);
+            new HelpCommand().main(Collections.<String>emptyList(), stdin, out, err);
+            return -1;
+        }
+
+        public int protocolVersion() {
+            return VERSION;
+        }
+
+        private Object writeReplace() {
+            return Channel.current().export(CliEntryPoint.class,this);
+        }
+    }
+
+    private transient final Map<UUID,FullDuplexHttpChannel> duplexChannels = new HashMap<UUID, FullDuplexHttpChannel>();
+
+    /**
+     * Handles HTTP requests for duplex channels for CLI.
+     */
+    public void doCli(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException, InterruptedException {
+        checkPermission(READ);
+        if(!"POST".equals(Stapler.getCurrentRequest().getMethod())) {
+            // for GET request, serve _cli.jelly, assuming this is a browser
+            req.getView(this,"_cli.jelly").forward(req,rsp);
+            return;
+        }
+
+        UUID uuid = UUID.fromString(req.getHeader("Session"));
+        rsp.setHeader("Hudson-Duplex",""); // set the header so that the client would know
+        final Authentication auth = getAuthentication();
+
+        FullDuplexHttpChannel server;
+        if(req.getHeader("Side").equals("download")) {
+            duplexChannels.put(uuid,server=new FullDuplexHttpChannel(uuid, !hasPermission(ADMINISTER)) {
+                protected void main(Channel channel) throws IOException, InterruptedException {
+                    channel.setProperty(CliEntryPoint.class.getName(),new CliManager(auth));
+                }
+            });
+            try {
+                server.download(req,rsp);
+            } finally {
+                duplexChannels.remove(uuid);
+            }
+        } else {
+            duplexChannels.get(uuid).upload(req,rsp);
+        }
+    }
+
+    /**
+     * Binds /userContent/... to $HUDSON_HOME/userContent.
+     */
+    public DirectoryBrowserSupport doUserContent() {
+        return new DirectoryBrowserSupport(this,getRootPath().child("userContent"),"User content","folder.gif",true);
+    }
+
+    /**
      * Perform a restart of Hudson, if we can.
+     *
+     * This first replaces "app" to {@link HudsonIsRestarting}
      */
     public void doRestart(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-        requirePOST();
         checkPermission(ADMINISTER);
-        try {
-            Lifecycle.get().restart();
-            servletContext.setAttribute("app",new HudsonIsRestarting());
-            rsp.sendRedirect2(".");
-        } catch (UnsupportedOperationException e) {
-            sendError("Restart is not supported in this running mode.",req,rsp);
-        } catch (IOException e) {
-            sendError(e,req,rsp);
-        } catch (InterruptedException e) {
-            sendError(e,req,rsp);
+        if(Stapler.getCurrentRequest().getMethod().equals("GET")) {
+            req.getView(this,"_restart.jelly").forward(req,rsp);
+            return;
         }
+
+        final Lifecycle lifecycle = Lifecycle.get();
+        if(!lifecycle.canRestart())
+            sendError("Restart is not supported in this running mode.",req,rsp);
+        servletContext.setAttribute("app",new HudsonIsRestarting());
+        rsp.sendRedirect2(".");
+
+        new Thread("restart thread") {
+            @Override
+            public void run() {
+                try {
+                    // give some time for the browser to load the "reloading" page
+                    Thread.sleep(5000);
+                    lifecycle.restart();
+                } catch (InterruptedException e) {
+                    LOGGER.log(Level.WARNING, "Failed to restart Hudson",e);
+                } catch (IOException e) {
+                    LOGGER.log(Level.WARNING, "Failed to restart Hudson",e);
+                }
+            }
+        }.start();
     }
 
     /**
@@ -2678,180 +2954,104 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     }
 
     /**
-     * Checks if the path is a valid path.
-     */
-    public void doCheckLocalFSRoot( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        // this can be used to check the existence of a file on the server, so needs to be protected
-        new FormFieldValidator.WorkspaceDirectory(req,rsp,true).process();
-    }
-
-    /**
-     * Checks if the JAVA_HOME is a valid JAVA_HOME path.
-     */
-    public void doJavaHomeCheck( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        // this can be used to check the existence of a file on the server, so needs to be protected
-        new FormFieldValidator(req,rsp,true) {
-            public void check() throws IOException, ServletException {
-                File f = getFileParameter("value");
-                if(!f.isDirectory()) {
-                    error(Messages.Hudson_NotADirectory(f));
-                    return;
-                }
-
-                File toolsJar = new File(f,"lib/tools.jar");
-                File mac = new File(f,"lib/dt.jar");
-                if(!toolsJar.exists() && !mac.exists()) {
-                    error(Messages.Hudson_NotJDKDir(f));
-                    return;
-                }
-
-                ok();
-            }
-        }.process();
-    }
-
-    /**
      * If the user chose the default JDK, make sure we got 'java' in PATH.
      */
-    public void doDefaultJDKCheck( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        new FormFieldValidator(req,rsp,false) {
-            public void check() throws IOException, ServletException {
-                String v = request.getParameter("value");
-                if(!v.equals("(Default)"))
-                    // assume the user configured named ones properly in system config ---
-                    // or else system config should have reported form field validation errors.
-                    ok();
-                else {
-                    // default JDK selected. Does such java really exist?
-                    if(JDK.isDefaultJDKValid(Hudson.this))
-                        ok();
-                    else
-                        errorWithMarkup(Messages.Hudson_NoJavaInPath(request.getContextPath()));
-                }
-            }
-        }.process();
+    public FormValidation doDefaultJDKCheck(StaplerRequest request, @QueryParameter String value) {
+        if(!value.equals("(Default)"))
+            // assume the user configured named ones properly in system config ---
+            // or else system config should have reported form field validation errors.
+            return FormValidation.ok();
+
+        // default JDK selected. Does such java really exist?
+        if(JDK.isDefaultJDKValid(Hudson.this))
+            return FormValidation.ok();
+        else
+            return FormValidation.errorWithMarkup(Messages.Hudson_NoJavaInPath(request.getContextPath()));
     }
 
     /**
      * Checks if the top-level item with the given name exists.
      */
-    public void doItemExistsCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+    public FormValidation doItemExistsCheck(@QueryParameter String value) {
         // this method can be used to check if a file exists anywhere in the file system,
         // so it should be protected.
-        new FormFieldValidator(req,rsp,Item.CREATE) {
-            protected void check() throws IOException, ServletException {
-                String job = fixEmpty(request.getParameter("value"));
-                if(job==null) {
-                    ok(); // nothing is entered yet
-                    return;
-                }
+        checkPermission(Item.CREATE);
+        
+        String job = fixEmpty(value);
+        if(job==null)
+            return FormValidation.ok();
 
-                if(getItem(job)==null)
-                    ok();
-                else
-                    error(Messages.Hudson_JobAlreadyExists(job));
-            }
-        }.process();
+        if(getItem(job)==null)
+            return FormValidation.ok();
+        else
+            return FormValidation.error(Messages.Hudson_JobAlreadyExists(job));
     }
 
     /**
      * Checks if a top-level view with the given name exists.
      */
-    public void doViewExistsCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-        new FormFieldValidator(req,rsp,View.CREATE) {
-            protected void check() throws IOException, ServletException {
-                String view = fixEmpty(request.getParameter("value"));
-                if(view==null) {
-                    ok(); // nothing is entered yet
-                    return;
-                }
+    public FormValidation doViewExistsCheck(@QueryParameter String value) {
+        checkPermission(View.CREATE);
 
-                if(getView(view)==null)
-                    ok();
-                else
-                    error(Messages.Hudson_ViewAlreadyExists(view));
-            }
-        }.process();
+        String view = fixEmpty(value);
+        if(view==null) return FormValidation.ok();
+
+        if(getView(view)==null)
+            return FormValidation.ok();
+        else
+            return FormValidation.error(Messages.Hudson_ViewAlreadyExists(view));
     }
 
+    /**
+     * @deprecated as of 1.294
+     *      Define your own check method, instead of relying on this generic one.
+     */
+    public void doFieldCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+        doFieldCheck(
+                fixEmpty(req.getParameter("value")),
+                fixEmpty(req.getParameter("type")),
+                fixEmpty(req.getParameter("errorText")),
+                fixEmpty(req.getParameter("warningText"))).generateResponse(req,rsp,this);
+    }
 
     /**
      * Checks if the value for a field is set; if not an error or warning text is displayed.
      * If the parameter "value" is not set then the parameter "errorText" is displayed
      * as an error text. If the parameter "errorText" is not set, then the parameter "warningText" is
      * displayed as a warning text.
-     * <p/>
+     * <p>
      * If the text is set and the parameter "type" is set, it will validate that the value is of the
      * correct type. Supported types are "number, "number-positive" and "number-negative".
-     * @param req containing the parameter value and the errorText to display if the value isnt set
-     * @param rsp used by FormFieldValidator
-     * @throws IOException thrown by FormFieldValidator.check()
-     * @throws ServletException thrown by FormFieldValidator.check()
      */
-    public void doFieldCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-        new FormFieldValidator(req, rsp, false) {
+    public FormValidation doFieldCheck(@QueryParameter(fixEmpty=true) String value,
+                                       @QueryParameter(fixEmpty=true) String type,
+                                       @QueryParameter(fixEmpty=true) String errorText,
+                                       @QueryParameter(fixEmpty=true) String warningText) {
+        if (value == null) {
+            if (errorText != null)
+                return FormValidation.error(errorText);
+            if (warningText != null)
+                return FormValidation.warning(warningText);
+            return FormValidation.error("No error or warning text was set for fieldCheck().");
+        }
 
-            /**
-             * Display the error text or warning text.
-             */
-            private void fieldCheckFailed() throws IOException, ServletException {
-                String v = fixEmpty(request.getParameter("errorText"));
-                if (v != null) {
-                    error(v);
-                    return;
+        if (type != null) {
+            try {
+                if (type.equalsIgnoreCase("number")) {
+                    NumberFormat.getInstance().parse(value);
+                } else if (type.equalsIgnoreCase("number-positive")) {
+                    if (NumberFormat.getInstance().parse(value).floatValue() <= 0)
+                        return FormValidation.error(Messages.Hudson_NotAPositiveNumber());
+                } else if (type.equalsIgnoreCase("number-negative")) {
+                    if (NumberFormat.getInstance().parse(value).floatValue() >= 0)
+                        return FormValidation.error(Messages.Hudson_NotANegativeNumber());
                 }
-                v = fixEmpty(request.getParameter("warningText"));
-                if (v != null) {
-                    warning(v);
-                    return;
-                }
-                error("No error or warning text was set for fieldCheck().");
+            } catch (ParseException e) {
+                return FormValidation.error(Messages.Hudson_NotANumber());
             }
+        }
 
-            /**
-             * Checks if the value is of the correct type.
-             * @param type the type of string
-             * @param value the actual value to check
-             * @return true, if the type was valid; false otherwise
-             */
-            private boolean checkType(String type, String value) throws IOException, ServletException {
-                try {
-                    if (type.equalsIgnoreCase("number")) {
-                        NumberFormat.getInstance().parse(value);
-                    } else if (type.equalsIgnoreCase("number-positive")) {
-                        if (NumberFormat.getInstance().parse(value).floatValue() <= 0) {
-                            error(Messages.Hudson_NotAPositiveNumber());
-                            return false;
-                        }
-                    } else if (type.equalsIgnoreCase("number-negative")) {
-                        if (NumberFormat.getInstance().parse(value).floatValue() >= 0) {
-                            error(Messages.Hudson_NotANegativeNumber());
-                            return false;
-                        }
-                    }
-                } catch (ParseException e) {
-                    error(Messages.Hudson_NotANumber());
-                    return false;
-                }
-                return true;
-            }
-
-            @Override
-            protected void check() throws IOException, ServletException {
-                String value = fixEmpty(request.getParameter("value"));
-                if (value == null) {
-                    fieldCheckFailed();
-                    return;
-                }
-                String type = fixEmpty(request.getParameter("type"));
-                if (type != null) {
-                    if (!checkType(type, value)) {
-                        return;
-                    }
-                }
-                ok();
-            }
-        }.process();
+        return FormValidation.ok();
     }
 
     /**
@@ -2894,27 +3094,15 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     /**
      * Checks if container uses UTF-8 to decode URLs. See
      * http://hudson.gotdns.com/wiki/display/HUDSON/Tomcat#Tomcat-i18n
-     *
-     * @param req containing the parameter value
-     * @param rsp used by FormFieldValidator
-     * @throws IOException thrown by FormFieldValidator.check()
-     * @throws ServletException thrown by FormFieldValidator.check()
      */
-    public void doCheckURIEncoding(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-        new FormFieldValidator(req, rsp, true) {
-            @Override
-            protected void check() throws IOException, ServletException {
-                request.setCharacterEncoding("UTF-8");
-                // expected is non-ASCII String
-                final String expected = "\u57f7\u4e8b";
-                final String value = fixEmpty(request.getParameter("value"));
-                if (!expected.equals(value)) {
-                    warningWithMarkup(Messages.Hudson_NotUsesUTF8ToDecodeURL());
-                    return;
-                }
-                ok();
-            }
-        }.process();
+    public FormValidation doCheckURIEncoding(StaplerRequest request, @QueryParameter String value) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        // expected is non-ASCII String
+        final String expected = "\u57f7\u4e8b";
+        value = fixEmpty(value);
+        if (!expected.equals(value))
+            return FormValidation.warningWithMarkup(Messages.Hudson_NotUsesUTF8ToDecodeURL());
+        return FormValidation.ok();
     }
 
     /**
@@ -3183,7 +3371,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         context.setAttribute("version",ver);
         VERSION_HASH = Util.getDigestOf(ver).substring(0, 8);
 
-        if(ver.equals("?"))
+        if(ver.equals("?") || Boolean.getBoolean("hudson.script.noCache"))
             RESOURCE_PATH = "";
         else
             RESOURCE_PATH = "/static/"+VERSION_HASH;
@@ -3219,9 +3407,10 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      */
     public static String VIEW_RESOURCE_PATH = "/resources/TBD";
 
-    public static boolean PARALLEL_LOAD = Boolean.getBoolean(Hudson.class.getName()+".parallelLoad");
+    public static boolean PARALLEL_LOAD = !"false".equals(System.getProperty(Hudson.class.getName()+".parallelLoad"));
     public static boolean KILL_AFTER_LOAD = Boolean.getBoolean(Hudson.class.getName()+".killAfterLoad");
     public static boolean LOG_STARTUP_PERFORMANCE = Boolean.getBoolean(Hudson.class.getName()+".logStartupPerformance");
+    private static final boolean CONSISTENT_HASH = true; // Boolean.getBoolean(Hudson.class.getName()+".consistentHash");
 
     private static final Logger LOGGER = Logger.getLogger(Hudson.class.getName());
 

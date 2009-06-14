@@ -61,7 +61,7 @@ public class ExternalRun extends Run<ExternalJob,ExternalRun> {
     public void run(final String[] cmd) {
         run(new Runner() {
             public Result run(BuildListener listener) throws Exception {
-                Proc proc = new Proc.LocalProc(cmd,getEnvVars(),System.in,new DualOutputStream(System.out,listener.getLogger()));
+                Proc proc = new Proc.LocalProc(cmd,getEnvironment(listener),System.in,new DualOutputStream(System.out,listener.getLogger()));
                 return proc.join()==0?Result.SUCCESS:Result.FAILURE;
             }
 
@@ -99,6 +99,7 @@ public class ExternalRun extends Run<ExternalJob,ExternalRun> {
                 xpp.setInput(in);
                 xpp.nextTag();  // get to the <run>
                 xpp.nextTag();  // get to the <log>
+                charset=xpp.getAttributeValue(null,"content-encoding");
                 while(xpp.nextToken()!=XmlPullParser.END_TAG) {
                     int type = xpp.getEventType();
                     if(type==XmlPullParser.TEXT

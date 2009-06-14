@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SCMDescriptor (Hudson core 1.291 API)
+SCMDescriptor (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCMDescriptor (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCMDescriptor (Hudson core 1.291 API)";
+        parent.document.title="SCMDescriptor (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -177,6 +177,15 @@ java.lang.Object
 <TD><CODE><A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
@@ -221,6 +230,14 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the list of <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>
  that can be used with this SCM.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SCMDescriptor.html#isApplicable(hudson.model.AbstractProject)">isApplicable</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows <A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm"><CODE>SCMDescriptor</CODE></A>s to choose which projects it wants to be configurable against.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -350,6 +367,25 @@ public boolean <B>isBrowserReusable</B>(<A HREF="../../hudson/scm/SCMDescriptor.
 
 <DT><B>Returns:</B><DD>true if the two given SCM configurations are similar enough
       that they can reuse <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> between them.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isApplicable(hudson.model.AbstractProject)"><!-- --></A><H3>
+isApplicable</H3>
+<PRE>
+public boolean <B>isApplicable</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project)</PRE>
+<DL>
+<DD>Allows <A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm"><CODE>SCMDescriptor</CODE></A>s to choose which projects it wants to be configurable against.
+
+ <p>
+ When this method returns false, this <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A> will not appear in the configuration screen
+ for the given project. The default method always return true.
+<P>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.294</DD>
+</DL>
 </DD>
 </DL>
 <HR>

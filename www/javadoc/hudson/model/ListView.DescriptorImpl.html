@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ListView.DescriptorImpl (Hudson core 1.291 API)
+ListView.DescriptorImpl (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ListView.DescriptorImpl (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ListView.DescriptorImpl (Hudson core 1.291 API)";
+        parent.document.title="ListView.DescriptorImpl (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/ListView.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/LoadBalancer.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/ListView.DescriptorImpl.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ListView.DescriptorImpl.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -151,6 +151,15 @@ java.lang.Object
 <TD><CODE><A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
@@ -178,9 +187,8 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ListView.DescriptorImpl.html#doCheckIncludeRegex(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCheckIncludeRegex</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                    org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ListView.DescriptorImpl.html#doCheckIncludeRegex(java.lang.String)">doCheckIncludeRegex</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the include regular expression is valid.</TD>
@@ -270,14 +278,14 @@ public java.lang.String <B>getDisplayName</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="doCheckIncludeRegex(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doCheckIncludeRegex(java.lang.String)"><!-- --></A><H3>
 doCheckIncludeRegex</H3>
 <PRE>
-public void <B>doCheckIncludeRegex</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                                org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                         throws java.io.IOException,
-                                javax.servlet.ServletException,
-                                java.lang.InterruptedException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckIncludeRegex</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                          java.lang.String&nbsp;value)
+                                   throws java.io.IOException,
+                                          javax.servlet.ServletException,
+                                          java.lang.InterruptedException</PRE>
 <DL>
 <DD>Checks if the include regular expression is valid.
 <P>
@@ -321,7 +329,7 @@ public void <B>doCheckIncludeRegex</B>(org.kohsuke.stapler.StaplerRequest&nbsp;r
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/ListView.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/LoadBalancer.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/ListView.DescriptorImpl.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ListView.DescriptorImpl.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

@@ -3,15 +3,15 @@
 	<parent>
 		<groupId>org.jvnet.hudson.plugins</groupId>
 		<artifactId>plugin</artifactId>
-		<version>1.291</version>
+		<version>1.309</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>perforce</artifactId>
 	<name>Hudson Perforce Plugin</name>
 	<packaging>hpi</packaging>
-	<version>1.0.12</version>
-	<url>http://hudson.gotdns.com/wiki/display/HUDSON/Perforce+Plugin</url>
+	<version>1.0.14-SNAPSHOT</version>
+	<url>http://wiki.hudson-ci.org/display/HUDSON/Perforce+Plugin</url>
 	
 	<licenses>
 		<license>
@@ -24,11 +24,24 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.tek42.perforce</groupId>
-			<artifactId>p4java</artifactId>
-			<version>0.7.5</version>
-			<scope>compile</scope>
+		     <groupId>org.slf4j</groupId>
+		     <artifactId>slf4j-log4j12</artifactId>
+                     <version>1.0</version>
 		</dependency>
+		<dependency>
+                     <groupId>org.slf4j</groupId>
+                     <artifactId>slf4j-api</artifactId>
+                     <version>1.5.6</version>
+                </dependency>
+		<dependency>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                    <version>1.2.14</version>
+               </dependency>
+
+
+      <scope>test</scope>
+
 	</dependencies>
 
 	<repositories>

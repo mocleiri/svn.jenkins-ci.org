@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.views.ListViewColumn (Hudson core 1.291 API)
+Uses of Class hudson.views.ListViewColumn (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.views.ListViewColumn (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.views.ListViewColumn (Hudson core 1.291 API)";
+        parent.document.title="Uses of Class hudson.views.ListViewColumn (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -113,27 +113,11 @@ Uses of <A HREF="../../../hudson/views/ListViewColumn.html" title="class in huds
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with type parameters of type <A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;java.util.List&lt;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>ListView.</B><B><A HREF="../../../hudson/model/ListView.html#columns">columns</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> that return types with arguments of type <A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.lang.Iterable&lt;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>ListView.</B><B><A HREF="../../../hudson/model/ListView.html#getColumns()">getColumns</A></B>()</CODE>
 
 <BR>
@@ -192,6 +176,14 @@ Uses of <A HREF="../../../hudson/views/ListViewColumn.html" title="class in huds
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/views/LastFailureColumn.html" title="class in hudson.views">LastFailureColumn</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/views/LastStableColumn.html" title="class in hudson.views">LastStableColumn</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -279,6 +271,14 @@ Uses of <A HREF="../../../hudson/views/ListViewColumn.html" title="class in huds
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>LastStableColumn.</B><B><A HREF="../../../hudson/views/LastStableColumn.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>JobColumn.</B><B><A HREF="../../../hudson/views/JobColumn.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
 
 <BR>
@@ -350,6 +350,15 @@ Uses of <A HREF="../../../hudson/views/ListViewColumn.html" title="class in huds
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A></CODE></FONT></TD>
 <TD><CODE><B>LastDurationColumn.DescriptorImpl.</B><B><A HREF="../../../hudson/views/LastDurationColumn.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+            net.sf.json.JSONObject&nbsp;formData)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A></CODE></FONT></TD>
+<TD><CODE><B>LastStableColumn.DescriptorImpl.</B><B><A HREF="../../../hudson/views/LastStableColumn.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
             net.sf.json.JSONObject&nbsp;formData)</CODE>
 
 <BR>
@@ -432,6 +441,14 @@ Uses of <A HREF="../../../hudson/views/ListViewColumn.html" title="class in huds
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>LastDurationColumn.</B><B><A HREF="../../../hudson/views/LastDurationColumn.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>LastStableColumn.</B><B><A HREF="../../../hudson/views/LastStableColumn.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

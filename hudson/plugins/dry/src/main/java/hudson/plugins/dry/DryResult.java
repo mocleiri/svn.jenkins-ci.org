@@ -4,7 +4,7 @@ import hudson.model.AbstractBuild;
 import hudson.plugins.dry.parser.DuplicateCode;
 import hudson.plugins.dry.util.BuildResult;
 import hudson.plugins.dry.util.ParserResult;
-import hudson.plugins.dry.util.model.JavaProject;
+import hudson.plugins.dry.util.ResultAction;
 
 /**
  * Represents the results of the DRY analysis. One instance of this class is persisted for
@@ -20,7 +20,7 @@ public class DryResult extends BuildResult {
     }
 
     /**
-     * Creates a new instance of <code>PmdResult</code>.
+     * Creates a new instance of {@link DryResult}.
      *
      * @param build
      *            the current build as owner of this action
@@ -29,12 +29,13 @@ public class DryResult extends BuildResult {
      * @param result
      *            the parsed result with all annotations
      */
-    public DryResult(final AbstractBuild<?, ?> build, final String defaultEncoding, final ParserResult result) {
+    public DryResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
+            final ParserResult result) {
         super(build, defaultEncoding, result);
     }
 
     /**
-     * Creates a new instance of <code>PmdResult</code>.
+     * Creates a new instance of {@link DryResult}.
      *
      * @param build
      *            the current build as owner of this action
@@ -45,7 +46,8 @@ public class DryResult extends BuildResult {
      * @param previous
      *            the result of the previous build
      */
-    public DryResult(final AbstractBuild<?, ?> build, final String defaultEncoding, final ParserResult result, final DryResult previous) {
+    public DryResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
+            final ParserResult result, final DryResult previous) {
         super(build, defaultEncoding, result, previous);
     }
 
@@ -106,30 +108,9 @@ public class DryResult extends BuildResult {
         return Messages.DRY_ProjectAction_Name();
     }
 
-    /**
-     * Returns the results of the previous build.
-     *
-     * @return the result of the previous build, or <code>null</code> if no
-     *         such build exists
-     */
+    /** {@inheritDoc} */
     @Override
-    public JavaProject getPreviousResult() {
-        DryResultAction action = getOwner().getAction(DryResultAction.class);
-        if (action.hasPreviousResultAction()) {
-            return action.getPreviousResultAction().getResult().getProject();
-        }
-        else {
-            return null;
-        }
-    }
-
-    /**
-     * Returns whether a previous build result exists.
-     *
-     * @return <code>true</code> if a previous build result exists.
-     */
-    @Override
-    public boolean hasPreviousResult() {
-        return getOwner().getAction(DryResultAction.class).hasPreviousResultAction();
+    protected Class<? extends ResultAction<? extends BuildResult>> getResultActionType() {
+        return DryResultAction.class;
     }
 }

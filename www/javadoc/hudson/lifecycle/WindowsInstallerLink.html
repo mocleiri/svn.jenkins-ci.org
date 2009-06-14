@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-WindowsInstallerLink (Hudson core 1.291 API)
+WindowsInstallerLink (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ WindowsInstallerLink (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="WindowsInstallerLink (Hudson core 1.291 API)";
+        parent.document.title="WindowsInstallerLink (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/lifecycle/SolarisSMFLifecycle.html" title="class in hudson.lifecycle"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/lifecycle/UnixEmbeddedContainerLifecycle.html" title="class in hudson.lifecycle"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/lifecycle/WindowsServiceLifecycle.html" title="class in hudson.lifecycle"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/lifecycle/WindowsInstallerLink.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -326,6 +326,10 @@ public java.lang.String <B>getUrlName</B>()</PRE>
  which is useful for directly connecting to external systems.
 
  <p>
+ If the returned string starts with '/', like '/foo', then it's assumed to be
+ relative to the context path of the Hudson webapp.
+
+ <p>
  In case of <A HREF="../../hudson/model/ManagementLink.html" title="class in hudson.model"><CODE>ManagementLink</CODE></A>, this value is put straight into the href attribute,
  so relative paths are interpreted against the root <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> object.
 <P>
@@ -510,7 +514,7 @@ registerIfApplicable</H3>
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/lifecycle/SolarisSMFLifecycle.html" title="class in hudson.lifecycle"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/lifecycle/UnixEmbeddedContainerLifecycle.html" title="class in hudson.lifecycle"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/lifecycle/WindowsServiceLifecycle.html" title="class in hudson.lifecycle"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/lifecycle/WindowsInstallerLink.html" target="_top"><B>FRAMES</B></A>  &nbsp;

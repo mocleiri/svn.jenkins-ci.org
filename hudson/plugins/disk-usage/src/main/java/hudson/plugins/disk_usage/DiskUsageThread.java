@@ -3,10 +3,13 @@ package hudson.plugins.disk_usage;
 import hudson.model.PeriodicWork;
 import hudson.FilePath;
 import hudson.Util;
+import hudson.Extension;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
+import hudson.model.AsyncPeriodicWork;
 import hudson.model.Hudson;
 import hudson.model.ItemGroup;
+import hudson.model.TaskListener;
 import hudson.model.TopLevelItem;
 import hudson.remoting.Callable;
 import java.io.File;
@@ -20,18 +23,24 @@ import java.util.logging.Level;
  * 
  * @author dvrzalik
  */
-public class DiskUsageThread extends PeriodicWork {
+@Extension
+public class DiskUsageThread extends AsyncPeriodicWork {
+    //trigger disk usage thread each 60 minutes
+    public static final int COUNT_INTERVAL_MINUTES = 60;
+
 
     public DiskUsageThread() {
-        super("Disk usage");
+        super("Project disk usage");
+    }
+
+    public long getRecurrencePeriod() {
+        return 1000*60*COUNT_INTERVAL_MINUTES;
     }
 
     @Override
-    protected void execute() {
-        logger.log(Level.INFO, "Starting disk usage thread");
-
+    protected void execute(TaskListener listener) throws IOException, InterruptedException {
         List items = Hudson.getInstance().getItems();
-        
+
         //Include nested projects as well
         //TODO fix MatrixProject and use getAllJobs()
         for (TopLevelItem item : Hudson.getInstance().getItems()) {
@@ -39,7 +48,7 @@ public class DiskUsageThread extends PeriodicWork {
                 items.addAll(((ItemGroup)item).getItems());
             }
         }
-        
+
         for (Object item : items) {
             if (item instanceof AbstractProject) {
                 AbstractProject project = (AbstractProject) item;
@@ -60,11 +69,11 @@ public class DiskUsageThread extends PeriodicWork {
                     List<AbstractBuild> builds = project.getBuilds();
                     Iterator<AbstractBuild> buildIterator = builds.iterator();
                     try {
-                        
+
                         while (buildIterator.hasNext()) {
                             calculateDiskUsageForBuild(buildIterator.next());
                         }
-                        
+
                         //Assign workspace size to the last build
                         calculateWorkspaceDiskUsage(project);
 

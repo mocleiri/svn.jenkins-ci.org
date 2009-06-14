@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.Descriptor.FormException (Hudson core 1.291 API)
+Uses of Class hudson.model.Descriptor.FormException (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Descriptor.FormException (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Descriptor.FormException (Hudson core 1.291 API)";
+        parent.document.title="Uses of Class hudson.model.Descriptor.FormException (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -99,14 +99,6 @@ Packages that use <A HREF="../../../hudson/model/Descriptor.FormException.html" 
 <TD>Matrix project&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven"><B>hudson.maven</B></A></TD>
-<TD>Maven support.&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven.reporters"><B>hudson.maven.reporters</B></A></TD>
-<TD>&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
@@ -175,6 +167,15 @@ Uses of <A HREF="../../../hudson/model/Descriptor.FormException.html" title="cla
 <TD><CODE><B>Plugin.</B><B><A HREF="../../../hudson/Plugin.html#configure(net.sf.json.JSONObject)">configure</A></B>(net.sf.json.JSONObject&nbsp;formData)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.305 override <A HREF="../../../hudson/Plugin.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>Plugin.configure(StaplerRequest,JSONObject)</CODE></A> instead</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Plugin.</B><B><A HREF="../../../hudson/Plugin.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+          net.sf.json.JSONObject&nbsp;formData)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handles the submission for the system configuration.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -218,84 +219,6 @@ Uses of <A HREF="../../../hudson/model/Descriptor.FormException.html" title="cla
 <CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>MatrixProject.</B><B><A HREF="../../../hudson/matrix/MatrixProject.html#submit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">submit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
        org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson.maven"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Uses of <A HREF="../../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A> in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A></FONT></TH>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A> that throw <A HREF="../../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A></CODE></FONT></TD>
-<TD><CODE><B>MavenReporterDescriptor.</B><B><A HREF="../../../hudson/maven/MavenReporterDescriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/maven/RedeployPublisher.html" title="class in hudson.maven">RedeployPublisher</A></CODE></FONT></TD>
-<TD><CODE><B>RedeployPublisher.DescriptorImpl.</B><B><A HREF="../../../hudson/maven/RedeployPublisher.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-            net.sf.json.JSONObject&nbsp;formData)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>MavenModule.</B><B><A HREF="../../../hudson/maven/MavenModule.html#submit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">submit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-       org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>MavenModuleSet.</B><B><A HREF="../../../hudson/maven/MavenModuleSet.html#submit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">submit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-       org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson.maven.reporters"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Uses of <A HREF="../../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A> in <A HREF="../../../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A></FONT></TH>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A> that throw <A HREF="../../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A></CODE></FONT></TD>
-<TD><CODE><B>MavenMailer.DescriptorImpl.</B><B><A HREF="../../../hudson/maven/reporters/MavenMailer.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-            net.sf.json.JSONObject&nbsp;formData)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -474,6 +397,14 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ListView.</B><B><A HREF="../../../hudson/model/ListView.html#submit(org.kohsuke.stapler.StaplerRequest)">submit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handles the configuration submission.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>MyView.</B><B><A HREF="../../../hudson/model/MyView.html#submit(org.kohsuke.stapler.StaplerRequest)">submit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
 
 <BR>
@@ -563,7 +494,7 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
       java.lang.String&nbsp;remoteFS,
       int&nbsp;numExecutors,
       <A HREF="../../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
-      java.lang.String&nbsp;label,
+      java.lang.String&nbsp;labelString,
       <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
       <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy)</CODE>
 
@@ -576,7 +507,7 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
       java.lang.String&nbsp;remoteFS,
       int&nbsp;numExecutors,
       <A HREF="../../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
-      java.lang.String&nbsp;label,
+      java.lang.String&nbsp;labelString,
       <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
       <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy,
       java.util.List&lt;? extends <A HREF="../../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;&gt;&nbsp;nodeProperties)</CODE>
@@ -590,7 +521,7 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
       java.lang.String&nbsp;remoteFS,
       java.lang.String&nbsp;numExecutors,
       <A HREF="../../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
-      java.lang.String&nbsp;label,
+      java.lang.String&nbsp;labelString,
       <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
       <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy,
       java.util.List&lt;? extends <A HREF="../../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;&gt;&nbsp;nodeProperties)</CODE>
@@ -713,6 +644,16 @@ T</CODE></FONT></TD>
 <TD><CODE><B>SCMS.</B><B><A HREF="../../../hudson/scm/SCMS.html#parseSCM(org.kohsuke.stapler.StaplerRequest)">parseSCM</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.294
+      Use <A HREF="../../../hudson/scm/SCMS.html#parseSCM(org.kohsuke.stapler.StaplerRequest, hudson.model.AbstractProject)"><CODE>SCMS.parseSCM(StaplerRequest, AbstractProject)</CODE></A> and pass in the caller's project type.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A></CODE></FONT></TD>
+<TD><CODE><B>SCMS.</B><B><A HREF="../../../hudson/scm/SCMS.html#parseSCM(org.kohsuke.stapler.StaplerRequest, hudson.model.AbstractProject)">parseSCM</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+         <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;target)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parses <A HREF="../../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A> configuration from the submitted form.</TD>
 </TR>
 </TABLE>
@@ -826,7 +767,7 @@ Uses of <A HREF="../../../hudson/model/Descriptor.FormException.html" title="cla
           java.lang.String&nbsp;remoteFS,
           java.lang.String&nbsp;numExecutors,
           <A HREF="../../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
-          java.lang.String&nbsp;label,
+          java.lang.String&nbsp;labelString,
           <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
           <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy)</CODE>
 
@@ -840,7 +781,7 @@ Uses of <A HREF="../../../hudson/model/Descriptor.FormException.html" title="cla
           java.lang.String&nbsp;remoteFS,
           java.lang.String&nbsp;numExecutors,
           <A HREF="../../../hudson/model/Node.Mode.html" title="enum in hudson.model">Node.Mode</A>&nbsp;mode,
-          java.lang.String&nbsp;label,
+          java.lang.String&nbsp;labelString,
           <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&nbsp;launcher,
           <A HREF="../../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>&nbsp;retentionStrategy,
           java.util.List&lt;? extends <A HREF="../../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;?&gt;&gt;&nbsp;nodeProperties)</CODE>
@@ -868,7 +809,7 @@ Uses of <A HREF="../../../hudson/model/Descriptor.FormException.html" title="cla
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>Ant.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/Ant.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+<TD><CODE><B>Ant.AntInstallation.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/Ant.AntInstallation.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
           net.sf.json.JSONObject&nbsp;json)</CODE>
 
 <BR>
@@ -877,7 +818,7 @@ Uses of <A HREF="../../../hudson/model/Descriptor.FormException.html" title="cla
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>Maven.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/Maven.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+<TD><CODE><B>Maven.MavenInstallation.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/Maven.MavenInstallation.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
           net.sf.json.JSONObject&nbsp;json)</CODE>
 
 <BR>
@@ -1050,7 +991,7 @@ Uses of <A HREF="../../../hudson/model/Descriptor.FormException.html" title="cla
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>DescribableList.</B><B><A HREF="../../../hudson/util/DescribableList.html#rebuildHetero(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.Collection, java.lang.String)">rebuildHetero</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
               net.sf.json.JSONObject&nbsp;formData,
-              java.util.Collection&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&gt;&nbsp;descriptors,
+              java.util.Collection&lt;? extends <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&gt;&nbsp;descriptors,
               java.lang.String&nbsp;key)</CODE>
 
 <BR>
@@ -1122,6 +1063,15 @@ Uses of <A HREF="../../../hudson/model/Descriptor.FormException.html" title="cla
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A></CODE></FONT></TD>
 <TD><CODE><B>LastDurationColumn.DescriptorImpl.</B><B><A HREF="../../../hudson/views/LastDurationColumn.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+            net.sf.json.JSONObject&nbsp;formData)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A></CODE></FONT></TD>
+<TD><CODE><B>LastStableColumn.DescriptorImpl.</B><B><A HREF="../../../hudson/views/LastStableColumn.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
             net.sf.json.JSONObject&nbsp;formData)</CODE>
 
 <BR>

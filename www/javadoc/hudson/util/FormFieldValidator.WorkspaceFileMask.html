@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FormFieldValidator.WorkspaceFileMask (Hudson core 1.291 API)
+FormFieldValidator.WorkspaceFileMask (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FormFieldValidator.WorkspaceFileMask (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FormFieldValidator.WorkspaceFileMask (Hudson core 1.291 API)";
+        parent.document.title="FormFieldValidator.WorkspaceFileMask (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -101,6 +101,8 @@ java.lang.Object
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A></DD>
 </DL>
 <HR>
+<B>Deprecated.</B>&nbsp;<I>as of 1.294. Use <A HREF="../../hudson/FilePath.html#validateFileMask(java.lang.String, boolean)"><CODE>FilePath.validateFileMask(String, boolean)</CODE></A></I>
+<P>
 <DL>
 <DT><PRE>public static class <B>FormFieldValidator.WorkspaceFileMask</B><DT>extends <A HREF="../../hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A></DL>
 </PRE>
@@ -169,7 +171,7 @@ Checks the file mask (specified in the 'value' query parameter) against
                                      org.kohsuke.stapler.StaplerResponse&nbsp;response)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceFileMask.html#FormFieldValidator.WorkspaceFileMask(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, boolean)">FormFieldValidator.WorkspaceFileMask</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
@@ -177,7 +179,7 @@ Checks the file mask (specified in the 'value' query parameter) against
                                      boolean&nbsp;errorIfNotExist)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -195,7 +197,7 @@ Checks the file mask (specified in the 'value' query parameter) against
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceFileMask.html#check()">check</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -203,7 +205,7 @@ Checks the file mask (specified in the 'value' query parameter) against
 <TD><CODE><B><A HREF="../../hudson/util/FormFieldValidator.WorkspaceFileMask.html#getBaseDirectory(hudson.model.AbstractProject)">getBaseDirectory</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;p)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The base directory from which the path name is resolved.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;The base directory from which the path name is resolved.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.util.FormFieldValidator"><!-- --></A>
@@ -243,7 +245,7 @@ FormFieldValidator.WorkspaceFileMask</H3>
 public <B>FormFieldValidator.WorkspaceFileMask</B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
                                             org.kohsuke.stapler.StaplerResponse&nbsp;response)</PRE>
 <DL>
-</DL>
+<DD><B>Deprecated.</B>&nbsp;</DL>
 <HR>
 
 <A NAME="FormFieldValidator.WorkspaceFileMask(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, boolean)"><!-- --></A><H3>
@@ -253,7 +255,7 @@ public <B>FormFieldValidator.WorkspaceFileMask</B>(org.kohsuke.stapler.StaplerRe
                                             org.kohsuke.stapler.StaplerResponse&nbsp;response,
                                             boolean&nbsp;errorIfNotExist)</PRE>
 <DL>
-</DL>
+<DD><B>Deprecated.</B>&nbsp;</DL>
 
 <!-- ============ METHOD DETAIL ========== -->
 
@@ -272,7 +274,7 @@ protected void <B>check</B>()
               throws java.io.IOException,
                      javax.servlet.ServletException</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/FormFieldValidator.html#check()">check</A></CODE> in class <CODE><A HREF="../../hudson/util/FormFieldValidator.html" title="class in hudson.util">FormFieldValidator</A></CODE></DL>
 </DD>
 <DD><DL>
@@ -289,7 +291,7 @@ getBaseDirectory</H3>
 <PRE>
 protected <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>getBaseDirectory</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;p)</PRE>
 <DL>
-<DD>The base directory from which the path name is resolved.
+<DD><B>Deprecated.</B>&nbsp;<DD>The base directory from which the path name is resolved.
 <P>
 <DD><DL>
 </DL>

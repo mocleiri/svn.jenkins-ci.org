@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson (Hudson core 1.291 API)
+hudson (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson (Hudson core 1.291 API)";
+        parent.document.title="hudson (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;PREV PACKAGE&nbsp;
-&nbsp;<A HREF="../hudson/fsp/package-summary.html"><B>NEXT PACKAGE</B></A></FONT></TD>
+&nbsp;<A HREF="../hudson/cli/package-summary.html"><B>NEXT PACKAGE</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/package-summary.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="package-summary.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -216,6 +216,11 @@ Package hudson
 <TD>Launches processes remotely by using the given channel.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/LauncherDecorator.html" title="class in hudson">LauncherDecorator</A></B></TD>
+<TD>Decorates <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> so that one can intercept executions of commands
+ and alters the command being executed, such as doing this in fakeroot, sudo, pfexec, etc.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/Main.html" title="class in hudson">Main</A></B></TD>
 <TD>Entry point to Hudson from command line.</TD>
 </TR>
@@ -258,7 +263,7 @@ Package hudson
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/Proc.RemoteProc.html" title="class in hudson">Proc.RemoteProc</A></B></TD>
-<TD>Retemoly launched process via <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A>.</TD>
+<TD>Retemoly launched process via <A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/ProxyConfiguration.html" title="class in hudson">ProxyConfiguration</A></B></TD>
@@ -276,6 +281,10 @@ Package hudson
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/TcpSlaveAgentListener.html" title="class in hudson">TcpSlaveAgentListener</A></B></TD>
 <TD>Listens to incoming TCP connections from JNLP slave agents.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/UDPBroadcastFragment.html" title="class in hudson">UDPBroadcastFragment</A></B></TD>
+<TD>Extension point that contributes an XML fragment to the UDP broadcast.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/UDPBroadcastThread.html" title="class in hudson">UDPBroadcastThread</A></B></TD>
@@ -305,11 +314,29 @@ Package hudson
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Enum Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/FilePath.TarCompression.html" title="enum in hudson">FilePath.TarCompression</A></B></TD>
+<TD>Supported tar file compression methods.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../hudson/Platform.html" title="enum in hudson">Platform</A></B></TD>
+<TD>Strategy object that absorbs the platform differences.</TD>
+</TR>
+</TABLE>
+&nbsp;
+
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Exception Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../hudson/AbortException.html" title="class in hudson">AbortException</A></B></TD>
-<TD>Signals a failure where the error message was reported.</TD>
+<TD>Signals a failure where the error was anticipated and diagnosed.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -372,7 +399,7 @@ Package hudson
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;PREV PACKAGE&nbsp;
-&nbsp;<A HREF="../hudson/fsp/package-summary.html"><B>NEXT PACKAGE</B></A></FONT></TD>
+&nbsp;<A HREF="../hudson/cli/package-summary.html"><B>NEXT PACKAGE</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/package-summary.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="package-summary.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

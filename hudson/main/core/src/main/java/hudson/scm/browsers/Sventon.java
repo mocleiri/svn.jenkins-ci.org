@@ -23,18 +23,20 @@
  */
 package hudson.scm.browsers;
 
-import static hudson.Util.fixEmpty;
+import hudson.Extension;
+import hudson.model.AbstractProject;
 import hudson.model.Descriptor;
+import hudson.model.Item;
+import hudson.scm.EditType;
 import hudson.scm.RepositoryBrowser;
 import hudson.scm.SubversionChangeLogSet.LogEntry;
 import hudson.scm.SubversionChangeLogSet.Path;
 import hudson.scm.SubversionRepositoryBrowser;
-import hudson.scm.EditType;
-import hudson.util.FormFieldValidator;
-import hudson.Extension;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
+import hudson.util.FormValidation;
+import hudson.util.FormValidation.URLCheck;
+import org.kohsuke.stapler.AncestorInPath;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.QueryParameter;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -43,13 +45,13 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 /**
- * {@link RepositoryBrowser} for Sventon.
+ * {@link RepositoryBrowser} for Sventon 1.x.
  *
  * @author Stephen Connolly
  */
 public class Sventon extends SubversionRepositoryBrowser {
     /**
-     * The URL of the Sventon repository.
+     * The URL of the Sventon 1.x repository.
      *
      * This is normally like <tt>http://somehost.com/svn/</tt>
      * Normalized to have '/' at the tail.
@@ -61,6 +63,11 @@ public class Sventon extends SubversionRepositoryBrowser {
      */
     private final String repositoryInstance;
 
+    /**
+     * The charset to use when encoding paths in an URI (specified in RFC 3986).
+     */
+    private static final String URL_CHARSET = "UTF-8";
+
     @DataBoundConstructor
     public Sventon(URL url, String repositoryInstance) throws MalformedURLException {
         this.url = normalizeToEndWithSlash(url);
@@ -68,12 +75,10 @@ public class Sventon extends SubversionRepositoryBrowser {
         // normalize
         repositoryInstance = repositoryInstance.trim();
 
-        this.repositoryInstance = repositoryInstance;
+        this.repositoryInstance = repositoryInstance == null ? "" : repositoryInstance;
     }
 
     public String getRepositoryInstance() {
-        if(repositoryInstance==null)
-            return "";  // compatibility
         return repositoryInstance;
     }
 
@@ -83,7 +88,7 @@ public class Sventon extends SubversionRepositoryBrowser {
             return null;    // no diff if this is not an edit change
         int r = path.getLogEntry().getRevision();
         return new URL(url, String.format("diffprev.svn?name=%s&commitrev=%d&committedRevision=%d&revision=%d&path=%s",
-                repositoryInstance,r,r,r,URLEncoder.encode(getPath(path))));
+                repositoryInstance,r,r,r,URLEncoder.encode(getPath(path), URL_CHARSET)));
     }
 
     @Override
@@ -92,7 +97,7 @@ public class Sventon extends SubversionRepositoryBrowser {
            return null; // no file if it's gone
         int r = path.getLogEntry().getRevision();
         return new URL(url, String.format("goto.svn?name=%s&revision=%d&path=%s",
-                repositoryInstance,r,URLEncoder.encode(getPath(path))));
+                repositoryInstance,r,URLEncoder.encode(getPath(path), URL_CHARSET)));
     }
 
     /**
@@ -105,17 +110,6 @@ public class Sventon extends SubversionRepositoryBrowser {
         return s;
     }
 
-    /**
-     * Pick up "FOOBAR" from "http://site/browse/FOOBAR/"
-     */
-    private String getProjectName() {
-        String p = url.getPath();
-        if(p.endsWith("/")) p = p.substring(0,p.length()-1);
-
-        int idx = p.lastIndexOf('/');
-        return p.substring(idx+1);
-    }
-
     @Override
     public URL getChangeSetLink(LogEntry changeSet) throws IOException {
         return new URL(url, String.format("revinfo.svn?name=%s&revision=%d",
@@ -125,35 +119,37 @@ public class Sventon extends SubversionRepositoryBrowser {
     @Extension
     public static class DescriptorImpl extends Descriptor<RepositoryBrowser<?>> {
         public String getDisplayName() {
-            return "Sventon";
+            return "Sventon 1.x";
         }
 
         /**
          * Performs on-the-fly validation of the URL.
          */
-        public void doCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-            // URLCheck requires Admin permission
-            new FormFieldValidator.URLCheck(req,rsp) {
-                protected void check() throws IOException, ServletException {
-                    String value = fixEmpty(request.getParameter("value"));
-                    if(value==null) {// nothing entered yet
-                        ok();
-                        return;
-                    }
+        public FormValidation doCheckUrl(@AncestorInPath AbstractProject project,
+                                         @QueryParameter(fixEmpty=true) final String value)
+                throws IOException, ServletException {
+            if(!project.hasPermission(Item.CONFIGURE))  return FormValidation.ok(); // can't check
+            if(value==null) // nothing entered yet
+                return FormValidation.ok();
 
-                    if(!value.endsWith("/")) value+='/';
+            return new URLCheck() {
+                protected FormValidation check() throws IOException, ServletException {
+                    String v = value;
+                    if(!v.endsWith("/")) v+='/';
 
                     try {
-                        if(findText(open(new URL(value)),"sventon")) {
-                            ok();
-                        } else {
-                            error("This is a valid URL but it doesn't look like Sventon");
+                        if (findText(open(new URL(v)),"sventon 1")) {
+                            return FormValidation.ok();
+                        } else if (findText(open(new URL(v)),"sventon")) {
+                            return FormValidation.error("This is a valid Sventon URL but it doesn't look like Sventon 1.x");
+                        } else{
+                            return FormValidation.error("This is a valid URL but it doesn't look like Sventon");
                         }
                     } catch (IOException e) {
-                        handleIOException(value,e);
+                        return handleIOException(v,e);
                     }
                 }
-            }.process();
+            }.check();
         }
     }
 

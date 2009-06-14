@@ -4,7 +4,7 @@ import hudson.model.AbstractBuild;
 import hudson.plugins.warnings.parser.Warning;
 import hudson.plugins.warnings.util.BuildResult;
 import hudson.plugins.warnings.util.ParserResult;
-import hudson.plugins.warnings.util.model.JavaProject;
+import hudson.plugins.warnings.util.ResultAction;
 
 /**
  * Represents the results of the warning analysis. One instance of this class is persisted for
@@ -21,7 +21,7 @@ public class WarningsResult extends BuildResult {
     }
 
     /**
-     * Creates a new instance of <code>WarningsResult</code>.
+     * Creates a new instance of {@link WarningsResult}.
      *
      * @param build
      *            the current build as owner of this action
@@ -30,12 +30,13 @@ public class WarningsResult extends BuildResult {
      * @param result
      *            the parsed result with all annotations
      */
-    public WarningsResult(final AbstractBuild<?, ?> build, final String defaultEncoding, final ParserResult result) {
+    public WarningsResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
+            final ParserResult result) {
         super(build, defaultEncoding, result);
     }
 
     /**
-     * Creates a new instance of <code>WarningsResult</code>.
+     * Creates a new instance of {@link WarningsResult}.
      *
      * @param build
      *            the current build as owner of this action
@@ -46,7 +47,8 @@ public class WarningsResult extends BuildResult {
      * @param previous
      *            the result of the previous build
      */
-    public WarningsResult(final AbstractBuild<?, ?> build, final String defaultEncoding, final ParserResult result, final WarningsResult previous) {
+    public WarningsResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
+            final ParserResult result, final WarningsResult previous) {
         super(build, defaultEncoding, result, previous);
     }
 
@@ -108,30 +110,9 @@ public class WarningsResult extends BuildResult {
         return Messages.Warnings_ProjectAction_Name();
     }
 
-    /**
-     * Returns the results of the previous build.
-     *
-     * @return the result of the previous build, or <code>null</code> if no
-     *         such build exists
-     */
+    /** {@inheritDoc} */
     @Override
-    public JavaProject getPreviousResult() {
-        WarningsResultAction action = getOwner().getAction(WarningsResultAction.class);
-        if (action.hasPreviousResultAction()) {
-            return action.getPreviousResultAction().getResult().getProject();
-        }
-        else {
-            return null;
-        }
-    }
-
-    /**
-     * Returns whether a previous build result exists.
-     *
-     * @return <code>true</code> if a previous build result exists.
-     */
-    @Override
-    public boolean hasPreviousResult() {
-        return getOwner().getAction(WarningsResultAction.class).hasPreviousResultAction();
+    protected Class<? extends ResultAction<? extends BuildResult>> getResultActionType() {
+        return WarningsResultAction.class;
     }
 }

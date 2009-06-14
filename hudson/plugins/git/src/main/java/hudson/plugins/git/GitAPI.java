@@ -22,6 +22,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.spearce.jgit.lib.AnyObjectId;
+import org.spearce.jgit.lib.Constants;
 import org.spearce.jgit.lib.ObjectId;
 import org.spearce.jgit.lib.Ref;
 import org.spearce.jgit.lib.Repository;
@@ -139,8 +140,9 @@ public class GitAPI implements IGitAPI {
 						VirtualChannel channel) throws IOException {
 					final ArgumentListBuilder args = new ArgumentListBuilder();
 					args.add(getGitExe(), "clone");
+					args.add("-o", remoteConfig.getName());
 					args.add(source);
-					args.add(workspace.toString());
+					args.add(workspace.getAbsolutePath());
 					return launchCommandIn(args.toCommandArray(), null);
 				}
 			});
@@ -288,7 +290,9 @@ public class GitAPI implements IGitAPI {
 					createEnvVarMap(), fos, workDir).join();
 	
 			String result = fos.toString();
-
+			
+			System.out.println(result);
+			
 			if (status != 0) {
 				throw new GitException("Command returned status code " + status + ": " + result);
 			}
@@ -299,9 +303,9 @@ public class GitAPI implements IGitAPI {
 		}
 	}
 
-	public void push(String refspec) throws GitException {
+	public void push(RemoteConfig repository, String refspec) throws GitException {
 		ArgumentListBuilder args = new ArgumentListBuilder();
-		args.add(getGitExe(), "push", "--tags", "origin");
+		args.add(getGitExe(), "push", repository.getURIs().get(0).toString());
 
 		if (refspec != null)
 			args.add(refspec);
@@ -339,6 +343,26 @@ public class GitAPI implements IGitAPI {
 		ArgumentListBuilder args = new ArgumentListBuilder();
 		args.add(getGitExe(), "branch", "-a");
 		return parseBranches(launchCommand(args.toCommandArray()));
+	}
+	
+	public List<Branch> getRemoteBranches() throws GitException, IOException {
+		
+		
+		Repository db = getRepository();
+		Map<String, Ref> refs = db.getAllRefs();
+		List<Branch> branches = new ArrayList<Branch>();
+		
+		for(Ref candidate : refs.values())
+		{
+			if( candidate.getName().startsWith(Constants.R_REMOTES) )
+			{
+				Branch buildBranch = new Branch(candidate);
+				listener.getLogger().println("Seen branch in repository " + buildBranch.getName() );
+				branches.add( buildBranch );
+			}
+		}
+		
+		return branches;
 	}
 
 	public List<Branch> getBranchesContaining(String revspec)
@@ -494,9 +518,14 @@ public class GitAPI implements IGitAPI {
         return null;
     }
 
+    private Repository getRepository() throws IOException
+    {
+    	return new Repository(new File(workspace.getRemote(), ".git"));
+    }
+    
     public List<Tag> getTagsOnCommit(String revName) throws GitException, IOException
     {
-        Repository db = new Repository(new File(workspace.getRemote()));
+        Repository db = getRepository();
         ObjectId commit = db.resolve(revName);
         List<Tag> ret = new ArrayList<Tag>();
         

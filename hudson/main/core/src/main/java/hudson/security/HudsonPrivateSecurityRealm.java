@@ -61,6 +61,7 @@ import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 import groovy.lang.Binding;
 
@@ -165,7 +166,7 @@ public class HudsonPrivateSecurityRealm extends SecurityRealm implements ModelOb
         if(!(si.password1 != null && si.password1.length() != 0))
             si.errorMessage = "Password is required";
 
-        if(si.username.length()==0)
+        if(si.username==null || si.username.length()==0)
             si.errorMessage = "User name is required";
         else {
             User user = User.get(si.username);
@@ -173,12 +174,11 @@ public class HudsonPrivateSecurityRealm extends SecurityRealm implements ModelOb
                 si.errorMessage = "User name is already taken. Did you forget the password?";
         }
 
-        if(si.fullname.length()==0)
+        if(si.fullname==null || si.fullname.length()==0)
             si.fullname = si.username;
 
-        if(!si.email.contains("@"))
+        if(si.email==null || !si.email.contains("@"))
             si.errorMessage = "Invalid e-mail address";
-
 
         if(si.errorMessage!=null) {
             // failed. ask the user to try again.
@@ -233,6 +233,7 @@ public class HudsonPrivateSecurityRealm extends SecurityRealm implements ModelOb
             if(u.getProperty(Details.class)!=null)
                 r.add(u);
         }
+        Collections.sort(r);
         return r;
     }
 

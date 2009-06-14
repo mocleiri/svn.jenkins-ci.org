@@ -1,22 +1,19 @@
 package org.jvnet.hudson.plugins.backup.utils;
 
-import java.io.BufferedOutputStream;
+import hudson.model.Hudson;
+import hudson.util.HudsonIsLoading;
+import org.apache.commons.io.FileUtils;
+import org.jvnet.hudson.plugins.backup.BackupConfig;
+import org.jvnet.hudson.plugins.backup.utils.compress.UnArchiver;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+
+import javax.servlet.ServletContext;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.logging.Logger;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.input.AutoCloseInputStream;
-import org.jvnet.hudson.plugins.backup.utils.compress.ArchiverException;
-import org.jvnet.hudson.plugins.backup.utils.compress.CompressionMethodEnum;
-import org.jvnet.hudson.plugins.backup.utils.compress.UnArchiver;
 
 /**
  * This is the restore task, run in background and log to a file
@@ -26,47 +23,91 @@ import org.jvnet.hudson.plugins.backup.utils.compress.UnArchiver;
 public class RestoreTask extends BackupPluginTask {
     private final static Logger LOGGER = Logger.getLogger(RestoreTask.class
             .getName());
-    private static final int BUFFER_LENGTH = 1024;
+
+    /**
+     * This context will be passed to the StaplerRequest mock
+     * at the end of the restore. It is used be {@link Hudson} to put
+     * the {@link HudsonIsLoading} object.
+     */
+    private ServletContext servletContext;
+
+    public RestoreTask(BackupConfig configuration, String hudsonWorkDir, String backupFileName,
+                       String logFilePath, ServletContext servletContext) {
+        super(configuration, hudsonWorkDir, backupFileName, logFilePath);
+        this.servletContext = servletContext;
+    }
 
     public void run() {
-        assert (logFileName != null);
-        assert (fileName != null);
+        assert (logFilePath != null);
+        assert (backupFileName != null);
 
         startDate = new Date();
         try {
-            logger = new BackupLogger(logFileName, verbose);
+            logger = new BackupLogger(logFilePath, configuration.isVerbose());
         } catch (IOException e) {
             LOGGER.severe("Unable to open log file for writing : "
-                    + logFileName);
+                    + logFilePath);
             return;
         }
 
         logger.info("Restore started at " + getTimestamp(startDate));
 
-        logger.info("Removing old configuration files");
-        File directory = new File(configurationDirectory);
+        File directory = new File(hudsonWorkDir);
 
-        // Not using tools like FileUtils.deleteDirectory
-        // because they failed with non existing symbolic links
-        delete(directory);
+        String tempDirectoryPath = hudsonWorkDir + "_restore";
+        logger.info("Working into " + tempDirectoryPath + " directory");
 
-        if (!directory.mkdir()) {
-            logger.error("Unable to create " + configurationDirectory + " directory.");
+        File temporary_directory = new File(tempDirectoryPath);
+
+        if (temporary_directory.exists()) {
+            logger.info("A old restore working dir exists, cleaning ...");
+            try {
+                FileUtils.deleteDirectory(temporary_directory);
+            } catch (IOException e) {
+                logger.error("Unable to delete " + tempDirectoryPath);
+                e.printStackTrace(logger.getWriter());
+                finished = true;
+                return;
+            }
+        }
+        temporary_directory.mkdir();
+
+        File archive = new File(backupFileName);
+
+        logger.info("Uncompressing archive file...");
+        UnArchiver unAchiver = configuration.getArchiveType().getUnArchiver();
+
+        try {
+            unAchiver.unArchive(archive, tempDirectoryPath);
+        } catch (Exception e) {
+            e.printStackTrace(logger.getWriter());
+            logger.error("Error uncompressiong archive : " + e.getMessage());
+            finished = true;
             return;
         }
 
-        File archive = new File(fileName);
+        // Not using tools like FileUtils.deleteDirectory
+        // because it is failing with non existing symbolic links
+        logger.info("Removing old configuration files...");
+        delete(directory);
 
-        logger.info("Uncompressing archive file...");
-        UnArchiver unAchiver = CompressionMethodEnum.ZIP.getUnArchiver();
+        logger.info("Making temporary directory the hudson home...");
+        temporary_directory.renameTo(directory);
+
+        logger.info("*****************************************");
+        logger.info("Reloading hudson configuration from disk.");
+        logger.info("*****************************************");
+
+        StaplerRequest request = FakeObject.getStaplerRequestFake(servletContext);
+        StaplerResponse response = FakeObject.getStaplerResponseFake();
 
         try {
-			unAchiver.unArchive(archive, configurationDirectory);
-		} catch (Exception e) {
-			logger.error("Error uncompressiong archive.");
-			logger.error("Look to hudson global logs for more informations.");
-		}
-        
+            Hudson.getInstance().doReload(request, response);
+        } catch (IOException e) {
+            logger.error("Error reloading config files from disk.");
+            logger.error("Call this method manually");
+            e.printStackTrace(logger.getWriter());
+        }
 
         endDate = new Date();
         logger.info("Backup end at " + getTimestamp(endDate));
@@ -87,7 +128,7 @@ public class RestoreTask extends BackupPluginTask {
                 delete(files[i]);
             }
         }
-        if (verbose) {
+        if (configuration.isVerbose()) {
             logger.debug("Deleting " + file.getAbsolutePath());
         }
         file.delete();

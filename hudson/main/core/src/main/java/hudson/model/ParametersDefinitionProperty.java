@@ -99,10 +99,11 @@ public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?,
             ParameterDefinition d = getParameterDefinition(name);
             if(d==null)
                 throw new IllegalArgumentException("No such parameter definition: " + name);
-            values.add(d.createValue(req, jo));
+            ParameterValue parameterValue = d.createValue(req, jo);
+            values.add(parameterValue);
         }
 
-    	Hudson.getInstance().getQueue().add(
+    	Hudson.getInstance().getQueue().schedule(
     			owner, 0, new ParametersAction(values), new CauseAction(new Cause.UserCause()));
 
         // send the user back to the job top page.
@@ -120,7 +121,7 @@ public class ParametersDefinitionProperty extends JobProperty<AbstractProject<?,
         	}
         }
 
-    	Hudson.getInstance().getQueue().add(
+    	Hudson.getInstance().getQueue().schedule(
     			owner, 0, new ParametersAction(values), new CauseAction(new Cause.UserCause()));
 
         // send the user back to the job top page.

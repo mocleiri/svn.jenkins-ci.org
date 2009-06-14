@@ -28,7 +28,6 @@ import hudson.Functions;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.matrix.MatrixConfiguration;
-import hudson.maven.MavenBuild;
 import hudson.model.Fingerprint.BuildPtr;
 import hudson.model.Fingerprint.RangeSet;
 import hudson.model.listeners.SCMListener;
@@ -71,7 +70,7 @@ import java.util.Set;
 /**
  * Base implementation of {@link Run}s that build software.
  *
- * For now this is primarily the common part of {@link Build} and {@link MavenBuild}.
+ * For now this is primarily the common part of {@link Build} and MavenBuild.
  *
  * @author Kohsuke Kawaguchi
  * @see AbstractProject
@@ -141,17 +140,18 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
      * Returns a {@link Slave} on which this build was done.
      *
      * @return
-     *      null, for example if the slave that this build run no logner exists.
+     *      null, for example if the slave that this build run no longer exists.
      */
     public Node getBuiltOn() {
         if(builtOn==null || builtOn.equals(""))
             return Hudson.getInstance();
         else
-            return Hudson.getInstance().getSlave(builtOn);
+            return Hudson.getInstance().getNode(builtOn);
     }
 
     /**
-     * Returns the name of the slave it was built on, or null if it was the master.
+     * Returns the name of the slave it was built on; null or "" if built by the master.
+     * (null happens when we read old record that didn't have this information.)
      */
     @Exported(name="builtOn")
     public String getBuiltOnStr() {
@@ -258,8 +258,8 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
             hudsonVersion = Hudson.VERSION;
 
             launcher = createLauncher(listener);
-            if(node instanceof Slave)
-                listener.getLogger().println(Messages.AbstractBuild_BuildingRemotely(node.getNodeName()));
+            if(!Hudson.getInstance().getNodes().isEmpty())
+                listener.getLogger().println(node instanceof Hudson ? Messages.AbstractBuild_BuildingOnMaster() : Messages.AbstractBuild_BuildingRemotely(builtOn));
 
             node.getFileSystemProvisioner().prepareWorkspace(AbstractBuild.this,project.getWorkspace(),listener);
 
@@ -400,7 +400,15 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
             scm = new CVSChangeLogParser();
 
         if(changeSet==null) // cached value
-            changeSet = calcChangeSet();
+            try {
+                changeSet = calcChangeSet();
+            } finally {
+                // defensive check. if the calculation fails (such as through an exception),
+                // set a dummy value so that it'll work the next time. the exception will
+                // be still reported, giving the plugin developer an opportunity to fix it.
+                if(changeSet==null)
+                    changeSet=ChangeLogSet.createEmpty(this);
+            }
         return changeSet;
     }
 
@@ -428,8 +436,8 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
     }
 
     @Override
-    public Map<String,String> getEnvVars() {
-        Map<String,String> env = super.getEnvVars();
+    public EnvVars getEnvironment(TaskListener log) throws IOException, InterruptedException {
+        EnvVars env = super.getEnvironment(log);
         env.put("WORKSPACE", getProject().getWorkspace().getRemote());
         // servlet container may have set CLASSPATH in its launch script,
         // so don't let that inherit to the new child process.
@@ -440,7 +448,7 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
         if(jdk != null) {
             Computer computer = Computer.currentComputer();
             if (computer != null) { // just in case were not in a build
-                jdk = jdk.forNode(computer.getNode());            
+                jdk = jdk.forNode(computer.getNode(), log);
             }
             jdk.buildEnvVars(env);
         }

@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson core 1.291 API)
+Deprecated List (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson core 1.291 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -143,6 +143,51 @@ function windowTitle()
       the initialization order issue that this code was trying to address no longer exists.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.html" title="class in hudson.util">hudson.util.FormFieldValidator</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294
+      Use <A HREF="hudson/util/FormValidation.html" title="class in hudson.util"><CODE>FormValidation</CODE></A> as a return value in your check method.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.Base64.html" title="class in hudson.util">hudson.util.FormFieldValidator.Base64</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.305
+      Use <A HREF="hudson/util/FormValidation.html#validateBase64(java.lang.String, boolean, boolean, java.lang.String)"><CODE>FormValidation.validateBase64(String, boolean, boolean, String)</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.Executable.html" title="class in hudson.util">hudson.util.FormFieldValidator.Executable</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294. Use <A HREF="hudson/util/FormValidation.html#validateExecutable(java.lang.String)"><CODE>FormValidation.validateExecutable(String)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.NonNegativeInteger.html" title="class in hudson.util">hudson.util.FormFieldValidator.NonNegativeInteger</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294
+      Use <A HREF="hudson/util/FormValidation.html#validateNonNegativeInteger(java.lang.String)"><CODE>FormValidation.validateNonNegativeInteger(String)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.URLCheck.html" title="class in hudson.util">hudson.util.FormFieldValidator.URLCheck</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294
+      Use <A HREF="hudson/util/FormValidation.URLCheck.html" title="class in hudson.util"><CODE>FormValidation.URLCheck</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.WorkspaceDirectory.html" title="class in hudson.util">hudson.util.FormFieldValidator.WorkspaceDirectory</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294. Use <A HREF="hudson/FilePath.html#validateRelativeDirectory(java.lang.String, boolean)"><CODE>FilePath.validateRelativeDirectory(String, boolean)</CODE></A>
+      (see <CODE>JavadocArchiver.DescriptorImpl#doCheck(AbstractProject, String)</CODE></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.WorkspaceFileMask.html" title="class in hudson.util">hudson.util.FormFieldValidator.WorkspaceFileMask</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294. Use <A HREF="hudson/FilePath.html#validateFileMask(java.lang.String, boolean)"><CODE>FilePath.validateFileMask(String, boolean)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/FormFieldValidator.WorkspaceFilePath.html" title="class in hudson.util">hudson.util.FormFieldValidator.WorkspaceFilePath</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294. Use <A HREF="hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)"><CODE>FilePath.validateRelativePath(String, boolean, boolean)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">hudson.model.listeners.JobListener</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I><A HREF="hudson/model/listeners/ItemListener.html" title="class in hudson.model.listeners"><CODE>ItemListener</CODE></A> is the generalized form of this.</I>&nbsp;</TD>
@@ -266,12 +311,6 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286.
       Use <A HREF="hudson/scm/RepositoryBrowser.html#all()"><CODE>RepositoryBrowser.all()</CODE></A> for read access and <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/maven/MavenReporters.html#LIST">hudson.maven.MavenReporters.LIST</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286. Use <code>MavenReporterDescriptor#all()</code> for listing reporters, and
- use <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for automatic registration.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/UserProperties.html#LIST">hudson.model.UserProperties.LIST</A>
@@ -450,6 +489,18 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/Node.html#checkPermission(hudson.security.Permission)"><CODE>Node.checkPermission(Permission)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">hudson.slaves.ComputerLauncher.afterDisconnect(SlaveComputer, StreamTaskListener)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.304
+  Use <A HREF="hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>ComputerLauncher.afterDisconnect(SlaveComputer, TaskListener)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">hudson.slaves.ComputerLauncher.beforeDisconnect(SlaveComputer, StreamTaskListener)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.304
+  Use <A HREF="hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>ComputerLauncher.beforeDisconnect(SlaveComputer, TaskListener)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List, java.lang.String)">hudson.model.AbstractProject.buildDescribable(StaplerRequest, List<? extends Descriptor<T>>, String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As of 1.261. Use <A HREF="hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List)"><CODE>AbstractProject.buildDescribable(StaplerRequest, List)</CODE></A> instead.</I>&nbsp;</TD>
@@ -460,15 +511,14 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As of 1.64. Use <A HREF="hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)"><CODE>Descriptor.configure(StaplerRequest)</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/Plugin.html#configure(net.sf.json.JSONObject)">hudson.Plugin.configure(JSONObject)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.305 override <A HREF="hudson/Plugin.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>Plugin.configure(StaplerRequest,JSONObject)</CODE></A> instead</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">hudson.model.Descriptor.configure(StaplerRequest)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As of 1.239, use <A HREF="hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>Descriptor.configure(StaplerRequest, JSONObject)</CODE></A>.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.lang.String)">hudson.maven.MavenUtil.createEmbedder(TaskListener, String)</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <CODE>MavenInstallation#createEmbedder(BuildListener, String)</CODE>
-      or other overloaded versions that infers maven home.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/scm/RepositoryBrowsers.html#createInstance(java.lang.Class, org.kohsuke.stapler.StaplerRequest, java.lang.String)">hudson.scm.RepositoryBrowsers.createInstance(Class<T>, StaplerRequest, String)</A>
@@ -476,16 +526,15 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/scm/RepositoryBrowsers.html#createInstance(java.lang.Class, org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String)"><CODE>RepositoryBrowsers.createInstance(Class, StaplerRequest, JSONObject, String)</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Hudson.html#doFieldCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">hudson.model.Hudson.doFieldCheck(StaplerRequest, StaplerResponse)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294
+      Define your own check method, instead of relying on this generic one.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#doLogRss(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">hudson.model.Hudson.doLogRss(StaplerRequest, StaplerResponse)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As on 1.267, moved to "/log/rss..."</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/Util.html#encode(java.lang.String)">hudson.Util.encode(String)</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Only escapes non-ASCII but leaves other URL-unsafe characters.
- Util.rawEncode should generally be used instead, though be careful to pass only
- a single path component to that method (it will encode /, but this method does not).</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/Util.html#encodeRFC2396(java.lang.String)">hudson.Util.encodeRFC2396(String)</A>
@@ -494,6 +543,17 @@ function windowTitle()
  be removed but I'm not sure if it is considered part of the public API
  that needs to be maintained for backwards compatibility.
  Use <A HREF="hudson/Util.html#encode(java.lang.String)"><CODE>Util.encode(String)</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, hudson.Proc)">hudson.slaves.Channels.forProcess(String, ExecutorService, InputStream, OutputStream, Proc)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.Proc)"><CODE>Channels.forProcess(String, ExecutorService, InputStream, OutputStream, OutputStream, Proc)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/ComputerSet.html#get_monitors()">hudson.model.ComputerSet.get_monitors()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.301
+      Use <A HREF="hudson/model/ComputerSet.html#getMonitors()"><CODE>ComputerSet.getMonitors()</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/StructuredForm.html#get(org.kohsuke.stapler.StaplerRequest)">hudson.StructuredForm.get(StaplerRequest)</A>
@@ -520,6 +580,11 @@ function windowTitle()
 <TD><A HREF="hudson/security/AuthorizationStrategy.html#getACL(hudson.model.AbstractProject)">hudson.security.AuthorizationStrategy.getACL(AbstractProject<?, ?>)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Override <A HREF="hudson/security/AuthorizationStrategy.html#getACL(hudson.model.Job)"><CODE>AuthorizationStrategy.getACL(Job)</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/Ant.AntInstallation.html#getAntHome()">hudson.tasks.Ant.AntInstallation.getAntHome()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.307. Use <A HREF="hudson/tasks/Ant.AntInstallation.html#getHome()"><CODE>Ant.AntInstallation.getHome()</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/triggers/Triggers.html#getApplicableTriggers(hudson.model.Item)">hudson.triggers.Triggers.getApplicableTriggers(Item)</A>
@@ -560,6 +625,29 @@ function windowTitle()
     into <A HREF="hudson/model/ParameterValue.html" title="class in hudson.model"><CODE>ParameterValue</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Run.html#getEnvironment()">hudson.model.Run.getEnvironment()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.305 use <A HREF="hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)"><CODE>Run.getEnvironment(TaskListener)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Run.html#getEnvVars()">hudson.model.Run.getEnvVars()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.292
+      Use <A HREF="hudson/model/Run.html#getEnvironment()"><CODE>Run.getEnvironment()</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Computer.html#getEnvVars()">hudson.model.Computer.getEnvVars()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.292
+      Use <A HREF="hudson/model/Computer.html#getEnvironment()"><CODE>Computer.getEnvironment()</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/JDK.html#getJavaHome()">hudson.model.JDK.getJavaHome()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.304
+      Use <A HREF="hudson/model/JDK.html#getHome()"><CODE>JDK.getHome()</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/matrix/MatrixProject.html#getJDK()">hudson.matrix.MatrixProject.getJDK()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -594,6 +682,11 @@ function windowTitle()
  the whole log into memory unnecessarily.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/Maven.MavenInstallation.html#getMavenHome()">hudson.tasks.Maven.MavenInstallation.getMavenHome()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.308. Use <A HREF="hudson/tasks/Maven.MavenInstallation.html#getHome()"><CODE>Maven.MavenInstallation.getHome()</CODE></A>.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/scm/SubversionSCM.html#getModules()">hudson.scm.SubversionSCM.getModules()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.91. Use <A HREF="hudson/scm/SubversionSCM.html#getLocations()"><CODE>SubversionSCM.getLocations()</CODE></A> instead.</I>&nbsp;</TD>
@@ -602,6 +695,14 @@ function windowTitle()
 <TD><A HREF="hudson/model/Hudson.html#getNodeName()">hudson.model.Hudson.getNodeName()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I></I>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="org/jvnet/hudson/test/HudsonTestCase.WebClient.html#getPage(java.lang.String)">org.jvnet.hudson.test.HudsonTestCase.WebClient.getPage(String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>This method expects a full URL. This method is marked as deprecated to warn you
+      that you probably should be using <A HREF="org/jvnet/hudson/test/HudsonTestCase.WebClient.html#goTo(java.lang.String)"><CODE>HudsonTestCase.WebClient.goTo(String)</CODE></A> method, which accepts
+      a relative path within the Hudson being tested. (IOW, if you really need to hit
+      a website on the internet, there's nothing wrong with using this method.)</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/Publisher.html#getProjectAction(hudson.model.Project)">hudson.tasks.Publisher.getProjectAction(Project)</A>
@@ -630,10 +731,22 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/Hudson.html#getNodes()"><CODE>Hudson.getNodes()</CODE></A>. Since 1.252.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tools/ToolLocationNodeProperty.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">hudson.tools.ToolLocationNodeProperty.getToolHome(Node, ToolInstallation, TaskListener)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <CODE>ToolInstallation#translateFor(Node)</CODE></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#getUrl()">hudson.model.Hudson.getUrl()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Why are you calling a method that always returns ""?
       Perhaps you meant <A HREF="hudson/model/Hudson.html#getRootUrl()"><CODE>Hudson.getRootUrl()</CODE></A>.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/Functions.html#ifThenElse(boolean, java.lang.Object, java.lang.Object)">hudson.Functions.ifThenElse(boolean, Object, Object)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294
+      JEXL now supports the real ternary operator "x?y:z", so this work around
+      is no longer necessary.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#isAdmin()">hudson.model.Hudson.isAdmin()</A>
@@ -680,9 +793,10 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/Computer.html#connect(boolean)"><CODE>Computer.connect(boolean)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/maven/MavenReporterDescriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">hudson.maven.MavenReporterDescriptor.newInstance(StaplerRequest)</A>
+<TD><A HREF="hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">hudson.slaves.ComputerLauncher.launch(SlaveComputer, StreamTaskListener)</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.304
+  Use <A HREF="hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><CODE>ComputerLauncher.launch(SlaveComputer, TaskListener)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">hudson.model.Descriptor.newInstance(StaplerRequest)</A>
@@ -694,6 +808,18 @@ function windowTitle()
 <TD><A HREF="hudson/model/TopLevelItemDescriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">hudson.model.TopLevelItemDescriptor.newInstance(StaplerRequest)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>This is not a valid operation for <A HREF="hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer)">hudson.slaves.ComputerListener.onOnline(Computer)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.292
+      Use <A HREF="hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer, hudson.model.TaskListener)"><CODE>ComputerListener.onOnline(Computer, TaskListener)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/scm/SCMS.html#parseSCM(org.kohsuke.stapler.StaplerRequest)">hudson.scm.SCMS.parseSCM(StaplerRequest)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294
+      Use <A HREF="hudson/scm/SCMS.html#parseSCM(org.kohsuke.stapler.StaplerRequest, hudson.model.AbstractProject)"><CODE>SCMS.parseSCM(StaplerRequest, AbstractProject)</CODE></A> and pass in the caller's project type.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.Build, hudson.Launcher, hudson.model.BuildListener)">hudson.tasks.BuildStepCompatibilityLayer.perform(Build<?, ?>, Launcher, BuildListener)</A>
@@ -776,14 +902,16 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/matrix/MatrixConfiguration.html#scheduleBuild(hudson.model.ParametersAction, hudson.model.Cause)"><CODE>MatrixConfiguration.scheduleBuild(ParametersAction, Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/DirectoryBrowserSupport.html#serveFile(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.FilePath, java.lang.String, boolean)">hudson.model.DirectoryBrowserSupport.serveFile(StaplerRequest, StaplerResponse, FilePath, String, boolean)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.297
+      Instead of calling this method explicitly, just return the <A HREF="hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model"><CODE>DirectoryBrowserSupport</CODE></A> object
+      from the <code>doXYZ</code> method and let Stapler generate a response for you.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/matrix/MatrixConfiguration.html#setJDK(hudson.model.JDK)">hudson.matrix.MatrixConfiguration.setJDK(JDK)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Not supported.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/maven/MavenModule.html#setLogRotator(hudson.tasks.LogRotator)">hudson.maven.MavenModule.setLogRotator(LogRotator)</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Not allowed to configure log rotation per module.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/matrix/MatrixConfiguration.html#setLogRotator(hudson.tasks.LogRotator)">hudson.matrix.MatrixConfiguration.setLogRotator(LogRotator)</A>
@@ -835,6 +963,12 @@ function windowTitle()
 <B>Deprecated Constructors</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/Ant.AntInstallation.html#Ant.AntInstallation(java.lang.String, java.lang.String)">hudson.tasks.Ant.AntInstallation(String, String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.308
+      Use <CODE>#AntInstallation(String, String, List)</CODE></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/util/DescribableList.html#DescribableList(hudson.util.DescribableList.Owner)">hudson.util.DescribableList(DescribableList.Owner)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/util/DescribableList.html#DescribableList(hudson.model.Saveable)"><CODE>DescribableList.DescribableList(Saveable)</CODE></A></I>&nbsp;</TD>
@@ -848,6 +982,12 @@ function windowTitle()
 <TD><A HREF="hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject)">hudson.model.DirectoryBrowserSupport(ModelObject)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, java.lang.String)"><CODE>DirectoryBrowserSupport.DirectoryBrowserSupport(ModelObject, String)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, java.lang.String)">hudson.model.DirectoryBrowserSupport(ModelObject, String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.297
+      Use <A HREF="hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, hudson.FilePath, java.lang.String, java.lang.String, boolean)"><CODE>DirectoryBrowserSupport.DirectoryBrowserSupport(ModelObject, FilePath, String, String, boolean)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/slaves/DumbSlave.html#DumbSlave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)">hudson.slaves.DumbSlave(String, String, String, String, Node.Mode, String, ComputerLauncher, RetentionStrategy)</A>
@@ -878,6 +1018,17 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>use <A HREF="hudson/model/HealthReport.html#HealthReport(int, java.lang.String, org.jvnet.localizer.Localizable)"><CODE>HealthReport.HealthReport(int, String, org.jvnet.localizer.Localizable)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/Maven.MavenInstallation.html#Maven.MavenInstallation(java.lang.String, java.lang.String)">hudson.tasks.Maven.MavenInstallation(String, String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.308.
+      Use <CODE>#MavenInstallation(String, String, List)</CODE></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/MultiStageTimeSeries.html#MultiStageTimeSeries(float, float)">hudson.model.MultiStageTimeSeries(float, float)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/MultiStageTimeSeries.html#MultiStageTimeSeries(org.jvnet.localizer.Localizable, java.awt.Color, float, float)"><CODE>MultiStageTimeSeries.MultiStageTimeSeries(Localizable, Color, float, float)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/security/Permission.html#Permission(hudson.security.PermissionGroup, java.lang.String, hudson.security.Permission)">hudson.security.Permission(PermissionGroup, String, Permission)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 1.257.
@@ -890,12 +1041,6 @@ function windowTitle()
       as your base class.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/maven/RedeployPublisher.DescriptorImpl.html#RedeployPublisher.DescriptorImpl(java.lang.Class)">hudson.maven.RedeployPublisher.DescriptorImpl(Class<? extends Publisher>)</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.290
-      Use the default constructor.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, int, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)">hudson.model.Slave(String, String, String, int, Node.Mode, String, ComputerLauncher, RetentionStrategy)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -904,6 +1049,11 @@ function windowTitle()
 <TD><A HREF="hudson/scm/SubversionSCM.html#SubversionSCM(java.lang.String[], java.lang.String[], boolean, hudson.scm.SubversionRepositoryBrowser)">hudson.scm.SubversionSCM(String[], String[], boolean, SubversionRepositoryBrowser)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tools/ToolInstallation.html#ToolInstallation(java.lang.String, java.lang.String)">hudson.tools.ToolInstallation(String, String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.302. Use <A HREF="hudson/tools/ToolInstallation.html#ToolInstallation(java.lang.String, java.lang.String, java.util.List)"><CODE>ToolInstallation.ToolInstallation(String, String, List)</CODE></A></I>&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;

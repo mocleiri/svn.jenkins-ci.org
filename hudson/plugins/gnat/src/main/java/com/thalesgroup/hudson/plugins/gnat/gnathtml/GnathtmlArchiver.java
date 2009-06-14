@@ -28,7 +28,7 @@ package com.thalesgroup.hudson.plugins.gnat.gnathtml;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
-import hudson.maven.AbstractMavenProject;
+import hudson.matrix.MatrixProject;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractItem;
 import hudson.model.AbstractProject;
@@ -37,6 +37,7 @@ import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.model.DirectoryBrowserSupport;
+import hudson.model.FreeStyleProject;
 import hudson.model.Project;
 import hudson.model.ProminentProjectAction;
 import hudson.model.Result;
@@ -46,6 +47,7 @@ import hudson.util.ArgumentListBuilder;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
@@ -66,10 +68,10 @@ import com.thalesgroup.hudson.plugins.gnat.util.GnatUtil;
  * @author Gregory Boissinot
  * @version 1.0 Initial Version
  */
-public class GnathtmlArchiver extends Publisher {
-
+public class GnathtmlArchiver extends Publisher implements Serializable {
 	
-
+	private static final long serialVersionUID = 1L;
+	
     private static final String GNATHTML_DEFAULT_GENERATED_DIRECTORY = "html";
     
     private static final String GNATHTML_GENERATED_DIRECTORY_OTION= "-o";
@@ -148,7 +150,7 @@ public class GnathtmlArchiver extends Publisher {
         
         
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
-            return !AbstractMavenProject.class.isAssignableFrom(jobType);
+			return FreeStyleProject.class.isAssignableFrom(jobType) || MatrixProject.class.isAssignableFrom(jobType);
         }      
         
     	public GnatInstallation[] getInstallations() {

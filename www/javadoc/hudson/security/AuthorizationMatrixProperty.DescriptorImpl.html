@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AuthorizationMatrixProperty.DescriptorImpl (Hudson core 1.291 API)
+AuthorizationMatrixProperty.DescriptorImpl (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AuthorizationMatrixProperty.DescriptorImpl (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AuthorizationMatrixProperty.DescriptorImpl (Hudson core 1.291 API)";
+        parent.document.title="AuthorizationMatrixProperty.DescriptorImpl (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -151,6 +151,15 @@ java.lang.Object
 <TD><CODE><A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
@@ -178,9 +187,8 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/security/AuthorizationMatrixProperty.DescriptorImpl.html#doCheckName(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doCheckName</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-            org.kohsuke.stapler.StaplerResponse&nbsp;res,
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/AuthorizationMatrixProperty.DescriptorImpl.html#doCheckName(hudson.model.Job, java.lang.String)">doCheckName</A></B>(<A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&nbsp;project,
             java.lang.String&nbsp;value)</CODE>
 
 <BR>
@@ -384,15 +392,15 @@ public boolean <B>showPermission</B>(<A HREF="../../hudson/security/Permission.h
 </DL>
 <HR>
 
-<A NAME="doCheckName(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
+<A NAME="doCheckName(hudson.model.Job, java.lang.String)"><!-- --></A><H3>
 doCheckName</H3>
 <PRE>
-public void <B>doCheckName</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                        org.kohsuke.stapler.StaplerResponse&nbsp;res,
-                        <FONT SIZE="-1">@QueryParameter</FONT>
-                        java.lang.String&nbsp;value)
-                 throws java.io.IOException,
-                        javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckName</B>(<FONT SIZE="-1">@AncestorInPath</FONT>
+                                  <A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&nbsp;project,
+                                  <FONT SIZE="-1">@QueryParameter</FONT>
+                                  java.lang.String&nbsp;value)
+                           throws java.io.IOException,
+                                  javax.servlet.ServletException</PRE>
 <DL>
 <DD><DL>
 

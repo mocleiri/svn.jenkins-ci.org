@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.security.Permission (Hudson core 1.291 API)
+Uses of Class hudson.security.Permission (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.security.Permission (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.security.Permission (Hudson core 1.291 API)";
+        parent.document.title="Uses of Class hudson.security.Permission (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -92,10 +92,6 @@ Packages that use <A HREF="../../../hudson/security/Permission.html" title="clas
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson"><B>hudson</B></A></TD>
-<TD>&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven.reporters"><B>hudson.maven.reporters</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -190,47 +186,6 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the current user has the given permission.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson.maven.reporters"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A> in <A HREF="../../../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A></FONT></TH>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A> declared as <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
-<TD><CODE><B>MavenAbstractArtifactRecord.</B><B><A HREF="../../../hudson/maven/reporters/MavenAbstractArtifactRecord.html#REDEPLOY">REDEPLOY</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission for redeploying artifacts.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A> that return <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
-<TD><CODE><B>MavenAbstractArtifactRecord.</B><B><A HREF="../../../hudson/maven/reporters/MavenAbstractArtifactRecord.html#getPermission()">getPermission</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -341,6 +296,14 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
 <TD><CODE><B>View.</B><B><A HREF="../../../hudson/model/View.html#DELETE">DELETE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
+<TD><CODE><B>Item.</B><B><A HREF="../../../hudson/model/Item.html#READ">READ</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -630,6 +593,14 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
+<TD><CODE><B>AccessDeniedException2.</B><B><A HREF="../../../hudson/security/AccessDeniedException2.html#permission">permission</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This object represents the permission that the user needed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
 <TD><CODE><B>SparseACL.Entry.</B><B><A HREF="../../../hudson/security/SparseACL.Entry.html#permission">permission</A></B></CODE>
 
 <BR>
@@ -914,6 +885,21 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/security/package-summary.html">hudson.security</A> with parameters of type <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/security/AccessDeniedException2.html#AccessDeniedException2(org.acegisecurity.Authentication, hudson.security.Permission)">AccessDeniedException2</A></B>(org.acegisecurity.Authentication&nbsp;authentication,
+                       <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/security/AccessDeniedException2.html#AccessDeniedException2(java.lang.Throwable, org.acegisecurity.Authentication, hudson.security.Permission)">AccessDeniedException2</A></B>(java.lang.Throwable&nbsp;t,
+                       org.acegisecurity.Authentication&nbsp;authentication,
+                       <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../hudson/security/Permission.html#Permission(hudson.security.PermissionGroup, java.lang.String, org.jvnet.localizer.Localizable, hudson.security.Permission)">Permission</A></B>(<A HREF="../../../hudson/security/PermissionGroup.html" title="class in hudson.security">PermissionGroup</A>&nbsp;group,
            java.lang.String&nbsp;name,
            org.jvnet.localizer.Localizable&nbsp;description,
@@ -1011,7 +997,7 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TD><CODE><B>FormFieldValidator.</B><B><A HREF="../../../hudson/util/FormFieldValidator.html#CHECK">CHECK</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1019,7 +1005,7 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TD><CODE><B>FormFieldValidator.</B><B><A HREF="../../../hudson/util/FormFieldValidator.html#permission">permission</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission to check, or null if this check doesn't require any permission.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Permission to check, or null if this check doesn't require any permission.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1034,13 +1020,13 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
                    <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../hudson/util/FormFieldValidator.html#FormFieldValidator(hudson.security.Permission)">FormFieldValidator</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../hudson/util/FormFieldValidator.html#FormFieldValidator(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.security.AccessControlled, hudson.security.Permission)">FormFieldValidator</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,

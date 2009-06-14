@@ -2,39 +2,61 @@ package org.jvnet.hudson.plugins.backup.utils.compress;
 
 import java.io.File;
 
+import org.apache.commons.io.FileUtils;
+import org.codehaus.plexus.archiver.zip.ZipUnArchiver;
+import org.codehaus.plexus.logging.console.ConsoleLogger;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ZipArchiverTest {
-	File destFile;
+	private final static String OUTPUT_DIRECTORY = "target";
+	private final static String UNCOMPRESS_DIRECTORY = OUTPUT_DIRECTORY
+			+ "/uncompress";
+
+	/**
+	 * The archive result of the test, deleted at the end if every thing is ok
+	 */
+	File archiveFile;
+	/**
+	 * Place to unarchive the test, deleted at the end if every thing is ok
+	 */
+	File targetDirectory;
 
 	@Before
 	public void tearUp() throws Exception {
-		String tmpDir = System.getProperty("java.io.tmpdir");
-		destFile = new File(tmpDir, "testzip.zip");
+		archiveFile = new File(OUTPUT_DIRECTORY, "testzip.zip");
+
+		targetDirectory = new File(UNCOMPRESS_DIRECTORY);
+		targetDirectory.mkdir();
 	}
 
 	@Test
 	public void testArchiver() throws Exception {
 		ZipArchiver archiver = new ZipArchiver();
-		archiver.init(destFile);
+		archiver.init(archiveFile);
 
-		archiver.addFile("file1", new File(Thread.currentThread()
-				.getContextClassLoader().getResource("data/file1").getFile()));
-		archiver.addFile("dir1/file1", new File(Thread.currentThread()
-				.getContextClassLoader().getResource("data/dir1/file1").getFile()));
-		archiver.addFile("dir1/file2", new File(Thread.currentThread()
-				.getContextClassLoader().getResource("data/dir1/file2").getFile()));
+		ArchiverTestUtil.addTestFiles(archiver);
 		
-		archiver.close();
-		
-		// TODO add content of the archive tests 
+		ZipUnArchiver unarchiver = new ZipUnArchiver();
+		unarchiver.setSourceFile(archiveFile);
+
+		unarchiver.setDestDirectory(targetDirectory);
+		unarchiver.enableLogging(new ConsoleLogger(ConsoleLogger.LEVEL_DEBUG,
+				"Logger"));
+		unarchiver.extract();
+
+		Assert.assertTrue(ArchiverTestUtil.compareDirectoryContent(new File(Thread
+				.currentThread().getContextClassLoader().getResource("data")
+				.getFile()), targetDirectory));
+
 	}
 
 	@After
 	public void tearDown() throws Exception {
-//		destFile.delete();
+		archiveFile.delete();
+		FileUtils.deleteDirectory(targetDirectory);
 	}
 
 }

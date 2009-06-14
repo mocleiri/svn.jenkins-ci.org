@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Package hudson.security (Hudson core 1.291 API)
+Uses of Package hudson.security (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.security (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.security (Hudson core 1.291 API)";
+        parent.document.title="Uses of Package hudson.security (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -99,14 +99,6 @@ Packages that use <A HREF="../../hudson/security/package-summary.html">hudson.se
 <TD>Matrix project&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven"><B>hudson.maven</B></A></TD>
-<TD>Maven support.&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven.reporters"><B>hudson.maven.reporters</B></A></TD>
-<TD>&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
@@ -121,6 +113,11 @@ Packages that use <A HREF="../../hudson/security/package-summary.html">hudson.se
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.slaves"><B>hudson.slaves</B></A></TD>
 <TD>Code related to slaves.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks"><B>hudson.tasks</B></A></TD>
+<TD>Built-in <a href="../../hudson/tasks/Builder.html"><tt>Builder</tt></a>s and <a href="../../hudson/tasks/Publisher.html"><tt>Publisher</tt></a>s
+that perform the actual heavy-lifting of a build.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.util"><B>hudson.util</B></A></TD>
@@ -173,42 +170,6 @@ Classes in <A HREF="../../hudson/security/package-summary.html">hudson.security<
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that has an <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A></TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson.maven"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Classes in <A HREF="../../hudson/security/package-summary.html">hudson.security</A> used by <A HREF="../../hudson/maven/package-summary.html">hudson.maven</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/security/class-use/AccessControlled.html#hudson.maven"><B>AccessControlled</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that has an <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A></TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson.maven.reporters"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Classes in <A HREF="../../hudson/security/package-summary.html">hudson.security</A> used by <A HREF="../../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/security/class-use/ACL.html#hudson.maven.reporters"><B>ACL</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gate-keeper that controls access to Hudson's model objects.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/security/class-use/Permission.html#hudson.maven.reporters"><B>Permission</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission, which represents activity that requires a security privilege.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -459,6 +420,21 @@ Classes in <A HREF="../../hudson/security/package-summary.html">hudson.security<
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission, which represents activity that requires a security privilege.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/security/package-summary.html">hudson.security</A> used by <A HREF="../../hudson/tasks/package-summary.html">hudson.tasks</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/security/class-use/AccessControlled.html#hudson.tasks"><B>AccessControlled</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that has an <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A></TD>
 </TR>
 </TABLE>
 &nbsp;

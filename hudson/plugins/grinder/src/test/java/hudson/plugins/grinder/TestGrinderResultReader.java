@@ -67,6 +67,40 @@ public class TestGrinderResultReader extends TestCase {
       assertTest(rr.getTotals(), "Totals", 500, 0, 710.64, 646.79, 26662.6, 0.0, 0, 0.28, 13.93, 568.56, "");
    }
 
+   public void testSeleniumLogFile() throws Exception {
+      InputStream is = getClass().getResourceAsStream("/out_Selenium1-0.log");
+
+      ResultReader rr = new ResultReader(is, System.out);
+      
+      assertTest(rr.getTotals(), "Totals", 1, 0, 125.00, 0.00, 7604.00, 20277.33, 0, 0.00, 31.00, 109.00, "");
+   }
+
+   public void testJavaLogFile() throws Exception {
+      InputStream is = getClass().getResourceAsStream("/out_java-0.log");
+
+      ResultReader rr = new ResultReader(is, System.out);
+
+      Test totals = rr.getTotals();
+
+      assertEquals(100, totals.getTestCount());
+      assertEquals(0, totals.getErrorCount());
+      assertEquals(0.54, totals.getMeanTime());
+      assertEquals(1.96, totals.getStdDev());
+   }
+
+   public void testOutLogFile() throws Exception {
+      InputStream is = getClass().getResourceAsStream("/out.log");
+
+      ResultReader rr = new ResultReader(is, System.out);
+
+      Test totals = rr.getTotals();
+
+      assertEquals(1, totals.getTestCount());
+      assertEquals(0, totals.getErrorCount());
+      assertEquals(0.88, totals.getMeanTime());
+      assertEquals(1.65, totals.getStdDev());
+   }
+
    public void testNullInput() throws Exception {
       try {
          new ResultReader(null, System.out);

@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-JUnitResultArchiver (Hudson core 1.291 API)
+JUnitResultArchiver (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JUnitResultArchiver (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JUnitResultArchiver (Hudson core 1.291 API)";
+        parent.document.title="JUnitResultArchiver (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -222,10 +222,11 @@ Generates HTML report from JUnit test result XML files.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#getProjectAction(hudson.model.Project)">getProjectAction</A></B>(<A HREF="../../../hudson/model/Project.html" title="class in hudson.model">Project</A>&nbsp;project)</CODE>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default implementation that does nothing.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an action object if this <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has an action
+ to contribute to a <A HREF="../../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -261,7 +262,7 @@ Generates HTML report from JUnit test result XML files.
 <TH ALIGN="left"><B>Methods inherited from class hudson.tasks.<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/tasks/Publisher.html#all()">all</A>, <A HREF="../../../hudson/tasks/Publisher.html#needsToRunAfterFinalized()">needsToRunAfterFinalized</A>, <A HREF="../../../hudson/tasks/Publisher.html#prebuild(hudson.model.Build, hudson.model.BuildListener)">prebuild</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/tasks/Publisher.html#all()">all</A>, <A HREF="../../../hudson/tasks/Publisher.html#getProjectAction(hudson.model.Project)">getProjectAction</A>, <A HREF="../../../hudson/tasks/Publisher.html#needsToRunAfterFinalized()">needsToRunAfterFinalized</A>, <A HREF="../../../hudson/tasks/Publisher.html#prebuild(hudson.model.Build, hudson.model.BuildListener)">prebuild</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.tasks.BuildStepCompatibilityLayer"><!-- --></A>
@@ -270,7 +271,7 @@ Generates HTML report from JUnit test result XML files.
 <TH ALIGN="left"><B>Methods inherited from class hudson.tasks.<A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html" title="class in hudson.tasks">BuildStepCompatibilityLayer</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A>, <A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.Build, hudson.Launcher, hudson.model.BuildListener)">perform</A>, <A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.Build, hudson.Launcher, hudson.model.BuildListener)">perform</A>, <A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -288,7 +289,7 @@ Generates HTML report from JUnit test result XML files.
 <TH ALIGN="left"><B>Methods inherited from interface hudson.tasks.<A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A>, <A HREF="../../../hudson/tasks/BuildStep.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/tasks/BuildStep.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -374,19 +375,32 @@ public java.lang.String <B>getTestResults</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="getProjectAction(hudson.model.Project)"><!-- --></A><H3>
+<A NAME="getProjectAction(hudson.model.AbstractProject)"><!-- --></A><H3>
 getProjectAction</H3>
 <PRE>
-public <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A> <B>getProjectAction</B>(<A HREF="../../../hudson/model/Project.html" title="class in hudson.model">Project</A>&nbsp;project)</PRE>
+public <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A> <B>getProjectAction</B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/Publisher.html#getProjectAction(hudson.model.Project)">Publisher</A></CODE></B></DD>
-<DD>Default implementation that does nothing.
+<DD><B>Description copied from interface: <CODE><A HREF="../../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">BuildStep</A></CODE></B></DD>
+<DD>Returns an action object if this <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has an action
+ to contribute to a <A HREF="../../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.
+
+ <p>
+ <A HREF="../../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> calls this method for every <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> that
+ it owns when the rendering is requested.
+
+ <p>
+ This action can have optional <tt>jobMain.jelly</tt> view, which will be
+ aggregated into the main panel of the job top page. The jelly file
+ should have an &lt;h2> tag that shows the section title, followed by some
+ block elements to render the details of the section.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/Publisher.html#getProjectAction(hudson.model.Project)">getProjectAction</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></CODE> in interface <CODE><A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html" title="class in hudson.tasks">BuildStepCompatibilityLayer</A></CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>project</CODE> - <A HREF="../../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> that owns this build step,
+      since <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> object doesn't usually have this "parent" pointer.
+<DT><B>Returns:</B><DD>null if there's no action to be contributed.</DL>
 </DD>
 </DL>
 <HR>

@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SubversionSCM.DescriptorImpl (Hudson core 1.291 API)
+SubversionSCM.DescriptorImpl (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SubversionSCM.DescriptorImpl (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionSCM.DescriptorImpl (Hudson core 1.291 API)";
+        parent.document.title="SubversionSCM.DescriptorImpl (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/scm/SubversionSCM.html" title="class in hudson.scm"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/scm/SubversionSCM.ModuleLocation.html" title="class in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.Credential.html" title="class in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/scm/SubversionSCM.DescriptorImpl.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="SubversionSCM.DescriptorImpl.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.Descriptor">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.scm.SCMDescriptor">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.scm.SCMDescriptor">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -122,6 +122,14 @@ java.lang.Object
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Nested Class Summary</B></FONT></TH>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.Credential.html" title="class in hudson.scm">SubversionSCM.DescriptorImpl.Credential</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stores <CODE>SVNAuthentication</CODE> for a single realm.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="nested_classes_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -158,6 +166,15 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -214,9 +231,8 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#doExcludeRegionsCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doExcludeRegionsCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                      org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#doExcludeRegionsCheck(java.lang.String)">doExcludeRegionsCheck</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates the excludeRegions Regex</TD>
@@ -232,18 +248,17 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#doSvnLocalLocationCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSvnLocalLocationCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                        org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#doSvnLocalLocationCheck(java.lang.String)">doSvnLocalLocationCheck</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;validate the value for a local location (local checkout directory).</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#doSvnRemoteLocationCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSvnRemoteLocationCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                         org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.html#doSvnRemoteLocationCheck(org.kohsuke.stapler.StaplerRequest, java.lang.String)">doSvnRemoteLocationCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                         java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;validate the value for a remote (repository) location.</TD>
@@ -301,7 +316,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.scm.<A HREF="../../hudson/scm/SCMDescriptor.html" title="class in hudson.scm">SCMDescriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/scm/SCMDescriptor.html#getBrowserDescriptors()">getBrowserDescriptors</A>, <A HREF="../../hudson/scm/SCMDescriptor.html#isBrowserReusable(T, T)">isBrowserReusable</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/scm/SCMDescriptor.html#getBrowserDescriptors()">getBrowserDescriptors</A>, <A HREF="../../hudson/scm/SCMDescriptor.html#isApplicable(hudson.model.AbstractProject)">isApplicable</A>, <A HREF="../../hudson/scm/SCMDescriptor.html#isBrowserReusable(T, T)">isBrowserReusable</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
@@ -474,21 +489,17 @@ public void <B>postCredential</B>(java.lang.String&nbsp;url,
 </DL>
 <HR>
 
-<A NAME="doSvnRemoteLocationCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doSvnRemoteLocationCheck(org.kohsuke.stapler.StaplerRequest, java.lang.String)"><!-- --></A><H3>
 doSvnRemoteLocationCheck</H3>
 <PRE>
-public void <B>doSvnRemoteLocationCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                                     org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                              throws java.io.IOException,
-                                     javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doSvnRemoteLocationCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                               <FONT SIZE="-1">@QueryParameter</FONT>
+                                               java.lang.String&nbsp;value)</PRE>
 <DL>
 <DD>validate the value for a remote (repository) location.
 <P>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -536,13 +547,13 @@ public static java.lang.String <B>getRelativePath</B>(org.tmatesoft.svn.core.SVN
 </DL>
 <HR>
 
-<A NAME="doSvnLocalLocationCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doSvnLocalLocationCheck(java.lang.String)"><!-- --></A><H3>
 doSvnLocalLocationCheck</H3>
 <PRE>
-public void <B>doSvnLocalLocationCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                                    org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                             throws java.io.IOException,
-                                    javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doSvnLocalLocationCheck</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                              java.lang.String&nbsp;value)
+                                       throws java.io.IOException,
+                                              javax.servlet.ServletException</PRE>
 <DL>
 <DD>validate the value for a local location (local checkout directory).
 <P>
@@ -555,13 +566,13 @@ public void <B>doSvnLocalLocationCheck</B>(org.kohsuke.stapler.StaplerRequest&nb
 </DL>
 <HR>
 
-<A NAME="doExcludeRegionsCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doExcludeRegionsCheck(java.lang.String)"><!-- --></A><H3>
 doExcludeRegionsCheck</H3>
 <PRE>
-public void <B>doExcludeRegionsCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                           throws java.io.IOException,
-                                  javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doExcludeRegionsCheck</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                            java.lang.String&nbsp;value)
+                                     throws java.io.IOException,
+                                            javax.servlet.ServletException</PRE>
 <DL>
 <DD>Validates the excludeRegions Regex
 <P>
@@ -604,7 +615,7 @@ public void <B>doExcludeRegionsCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/scm/SubversionSCM.html" title="class in hudson.scm"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/scm/SubversionSCM.ModuleLocation.html" title="class in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/scm/SubversionSCM.DescriptorImpl.Credential.html" title="class in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/scm/SubversionSCM.DescriptorImpl.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="SubversionSCM.DescriptorImpl.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -624,7 +635,7 @@ public void <B>doExcludeRegionsCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.Descriptor">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.scm.SCMDescriptor">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.scm.SCMDescriptor">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>

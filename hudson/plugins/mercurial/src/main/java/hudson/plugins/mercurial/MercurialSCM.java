@@ -9,13 +9,14 @@ import hudson.scm.ChangeLogParser;
 import hudson.scm.RepositoryBrowsers;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
-import hudson.util.*;
+import hudson.util.ArgumentListBuilder;
+import hudson.util.ForkOutputStream;
+import hudson.util.FormValidation;
+import hudson.util.VersionNumber;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.framework.io.WriterOutputStream;
 
-import javax.servlet.ServletException;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.util.HashSet;
@@ -27,7 +28,10 @@ import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+import javax.servlet.ServletException;
 import net.sf.json.JSONObject;
+import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.framework.io.ByteBuffer;
 
 /**
  * Mercurial SCM.
@@ -237,13 +241,13 @@ public class MercurialSCM extends SCM implements Serializable {
         if(clean) {
             if (launcher.launch(
                     new String[] {getDescriptor().getHgExe(), "update", "-C", "."},
-                    build.getEnvVars(), listener.getLogger(), workspace).join() != 0) {
+                    build.getEnvironment(listener), listener.getLogger(), workspace).join() != 0) {
                 listener.error("Failed to clobber local modifications");
                 return false;
             }
             if (launcher.launch(
                     new String[] {getDescriptor().getHgExe(), "--config", "extensions.purge=", "clean", "--all"},
-                    build.getEnvVars(), listener.getLogger(), workspace).join() != 0) {
+                    build.getEnvironment(listener), listener.getLogger(), workspace).join() != 0) {
                 listener.error("Failed to clean unversioned files");
                 return false;
             }
@@ -283,7 +287,7 @@ public class MercurialSCM extends SCM implements Serializable {
             // convert it back to UTF-8
             WriterOutputStream o = new WriterOutputStream(new OutputStreamWriter(os, "UTF-8"));
             try {
-                r = launcher.launch(args.toCommandArray(),build.getEnvVars(), new ForkOutputStream(o,errorLog), workspace).join();
+                r = launcher.launch(args.toCommandArray(), build.getEnvironment(listener), new ForkOutputStream(o,errorLog), workspace).join();
             } finally {
                 o.flush(); // make sure to commit all output
             }
@@ -307,7 +311,7 @@ public class MercurialSCM extends SCM implements Serializable {
             try {
                 if(launcher.launch(
                     new String[]{getDescriptor().getHgExe(),"pull","-u","hg.bundle"},
-                    build.getEnvVars(),listener.getLogger(),workspace).join()!=0) {
+                    build.getEnvironment(listener),listener.getLogger(),workspace).join()!=0) {
                     listener.error("Failed to pull");
                     return false;
                 }
@@ -360,7 +364,7 @@ public class MercurialSCM extends SCM implements Serializable {
         if(branch!=null)    args.add("-r",branch);
         args.add(source,workspace.getRemote());
         try {
-            if(launcher.launch(args.toCommandArray(),build.getEnvVars(),listener.getLogger(),null).join()!=0) {
+            if(launcher.launch(args.toCommandArray(),build.getEnvironment(listener),listener.getLogger(),null).join()!=0) {
                 listener.error("Failed to clone "+source);
                 return false;
             }
@@ -383,20 +387,20 @@ public class MercurialSCM extends SCM implements Serializable {
 
     @Override
     public DescriptorImpl getDescriptor() {
-        return DescriptorImpl.DESCRIPTOR;
+        return (DescriptorImpl) super.getDescriptor();
     }
 
     public String getModules() {
         return modules;
     }
 
+    @Extension
     public static final class DescriptorImpl extends SCMDescriptor<MercurialSCM> {
-        public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
         private String hgExe;
         private transient String version;
 
-        private  DescriptorImpl() {
+        public DescriptorImpl() {
             super(MercurialSCM.class, HgWeb.class);
             load();
         }
@@ -421,44 +425,41 @@ public class MercurialSCM extends SCM implements Serializable {
         }
 
         @Override
-        public boolean configure(StaplerRequest req) throws FormException {
+        public boolean configure(StaplerRequest req, JSONObject json) throws FormException {
             hgExe = req.getParameter("mercurial.hgExe");
             version = null;
             save();
             return true;
         }
 
-        public void doHgExeCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-            new FormFieldValidator.Executable(req,rsp) {
-                @Override
-                protected void checkExecutable(File exe) throws IOException, ServletException {
+        public FormValidation doHgExeCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+            return FormValidation.validateExecutable(req.getParameter("value"), new FormValidation.FileValidator() {
+                public FormValidation validate(File f) {
                     try {
                         String v = findHgVersion();
                         if(v != null) {
                             try {
                                 if(new VersionNumber(v).compareTo(V0_9_4)>=0) {
-                                    ok(); // right version
+                                    return FormValidation.ok(); // right version
                                 } else {
-                                    error("This hg is ver."+v+" but we need 0.9.4+");
+                                    return FormValidation.error("This hg is ver."+v+" but we need 0.9.4+");
                                 }
                             } catch (IllegalArgumentException e) {
-                                warning("Hudson can't tell if this hg is 0.9.4 or later (detected version is %s)",v);
+                                return FormValidation.warning("Hudson can't tell if this hg is 0.9.4 or later (detected version is %s)",v);
                             }
-                            return;
                         }
                         v = findHgVersion(UUID_VERSION_STRING);
                         if(v!=null) {
-                            warning("Hudson can't tell if this hg is 0.9.4 or later (detected version is %s)",v);
-                            return;
+                            return FormValidation.warning("Hudson can't tell if this hg is 0.9.4 or later (detected version is %s)",v);
                         }
                     } catch (IOException e) {
                         // failed
                     } catch (InterruptedException e) {
                         // failed
                     }
-                    error("Unable to check hg version");
+                    return FormValidation.error("Unable to check hg version");
                 }
-            }.process();
+            });
         }
 
         private String findHgVersion() throws IOException, InterruptedException {

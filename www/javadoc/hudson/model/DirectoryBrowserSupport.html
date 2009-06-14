@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DirectoryBrowserSupport (Hudson core 1.291 API)
+DirectoryBrowserSupport (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DirectoryBrowserSupport (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DirectoryBrowserSupport (Hudson core 1.291 API)";
+        parent.document.title="DirectoryBrowserSupport (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/Descriptor.PropertyType.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/model/DirectoryBrowserSupport.Path.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/DirectoryBrowserSupport.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -96,9 +96,12 @@ Class DirectoryBrowserSupport</H2>
 java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.DirectoryBrowserSupport</B>
 </PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>org.kohsuke.stapler.HttpResponse</DD>
+</DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>DirectoryBrowserSupport</B><DT>extends java.lang.Object</DL>
+<DT><PRE>public final class <B>DirectoryBrowserSupport</B><DT>extends java.lang.Object<DT>implements org.kohsuke.stapler.HttpResponse</DL>
 </PRE>
 
 <P>
@@ -175,11 +178,22 @@ Has convenience methods to serve file system.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, java.lang.String)"><CODE>DirectoryBrowserSupport(ModelObject, String)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, hudson.FilePath, java.lang.String, java.lang.String, boolean)">DirectoryBrowserSupport</A></B>(<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>&nbsp;owner,
+                        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;base,
+                        java.lang.String&nbsp;title,
+                        java.lang.String&nbsp;icon,
+                        boolean&nbsp;serveDirIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, java.lang.String)">DirectoryBrowserSupport</A></B>(<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>&nbsp;owner,
                         java.lang.String&nbsp;title)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.297
+      Use <A HREF="../../hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, hudson.FilePath, java.lang.String, java.lang.String, boolean)"><CODE>DirectoryBrowserSupport(ModelObject, FilePath, String, String, boolean)</CODE></A></I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -194,6 +208,16 @@ Has convenience methods to serve file system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/DirectoryBrowserSupport.html#generateResponse(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.Object)">generateResponse</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                 java.lang.Object&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/DirectoryBrowserSupport.html#serveFile(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.FilePath, java.lang.String, boolean)">serveFile</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
           org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
           <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;root,
@@ -201,7 +225,9 @@ Has convenience methods to serve file system.
           boolean&nbsp;serveDirIndex)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serves a file from the file system (Maps the URL to a directory in a file system.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.297
+      Instead of calling this method explicitly, just return the <A HREF="../../hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model"><CODE>DirectoryBrowserSupport</CODE></A> object
+      from the <code>doXYZ</code> method and let Stapler generate a response for you.</I></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -271,8 +297,24 @@ DirectoryBrowserSupport</H3>
 public <B>DirectoryBrowserSupport</B>(<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>&nbsp;owner,
                                java.lang.String&nbsp;title)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.297
+      Use <A HREF="../../hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, hudson.FilePath, java.lang.String, java.lang.String, boolean)"><CODE>DirectoryBrowserSupport(ModelObject, FilePath, String, String, boolean)</CODE></A></I>
+<P>
+</DL>
+<HR>
+
+<A NAME="DirectoryBrowserSupport(hudson.model.ModelObject, hudson.FilePath, java.lang.String, java.lang.String, boolean)"><!-- --></A><H3>
+DirectoryBrowserSupport</H3>
+<PRE>
+public <B>DirectoryBrowserSupport</B>(<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>&nbsp;owner,
+                               <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;base,
+                               java.lang.String&nbsp;title,
+                               java.lang.String&nbsp;icon,
+                               boolean&nbsp;serveDirIndex)</PRE>
 <DL>
-<DT><B>Parameters:</B><DD><CODE>owner</CODE> - The parent model object under which the directory browsing is added.<DD><CODE>title</CODE> - Used in the HTML caption.</DL>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>owner</CODE> - The parent model object under which the directory browsing is added.<DD><CODE>base</CODE> - The root of the directory that's bound to URL.<DD><CODE>title</CODE> - Used in the HTML caption.<DD><CODE>icon</CODE> - The icon file name, like "folder.gif"<DD><CODE>serveDirIndex</CODE> - True to generate the directory index.
+      False to serve "index.html"</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -284,6 +326,27 @@ public <B>DirectoryBrowserSupport</B>(<A HREF="../../hudson/model/ModelObject.ht
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="generateResponse(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.Object)"><!-- --></A><H3>
+generateResponse</H3>
+<PRE>
+public void <B>generateResponse</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                             org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                             java.lang.Object&nbsp;node)
+                      throws java.io.IOException,
+                             javax.servlet.ServletException</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>generateResponse</CODE> in interface <CODE>org.kohsuke.stapler.HttpResponse</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="serveFile(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.FilePath, java.lang.String, boolean)"><!-- --></A><H3>
 serveFile</H3>
@@ -297,8 +360,15 @@ public final void <B>serveFile</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                             javax.servlet.ServletException,
                             java.lang.InterruptedException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.297
+      Instead of calling this method explicitly, just return the <A HREF="../../hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model"><CODE>DirectoryBrowserSupport</CODE></A> object
+      from the <code>doXYZ</code> method and let Stapler generate a response for you.</I>
+<P>
 <DD>Serves a file from the file system (Maps the URL to a directory in a file system.)
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>icon</CODE> - The icon file name, like "folder-open.gif"<DD><CODE>serveDirIndex</CODE> - True to generate the directory index.
       False to serve "index.html"
@@ -339,7 +409,7 @@ public final void <B>serveFile</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/Descriptor.PropertyType.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/model/DirectoryBrowserSupport.Path.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/DirectoryBrowserSupport.html" target="_top"><B>FRAMES</B></A>  &nbsp;

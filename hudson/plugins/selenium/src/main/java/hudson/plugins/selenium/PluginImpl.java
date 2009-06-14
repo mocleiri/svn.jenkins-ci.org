@@ -17,77 +17,73 @@
  */
 package hudson.plugins.selenium;
 
-import com.thoughtworks.selenium.grid.configuration.HubConfiguration;
-import com.thoughtworks.selenium.grid.hub.ApplicationRegistry;
-import com.thoughtworks.selenium.grid.hub.HubServer;
-import com.thoughtworks.selenium.grid.hub.HubServlet;
+import com.thoughtworks.selenium.grid.hub.HubRegistry;
 import com.thoughtworks.selenium.grid.hub.remotecontrol.DynamicRemoteControlPool;
 import com.thoughtworks.selenium.grid.hub.remotecontrol.RemoteControlProxy;
-import com.thoughtworks.selenium.grid.hub.management.RegistrationServlet;
-import com.thoughtworks.selenium.grid.hub.management.UnregistrationServlet;
-import com.thoughtworks.selenium.grid.hub.management.console.ConsoleServlet;
+import hudson.FilePath;
 import hudson.Plugin;
-import hudson.model.Descriptor.FormException;
-import hudson.model.Api;
-import hudson.model.Hudson;
 import hudson.model.Action;
+import hudson.model.Api;
+import hudson.model.Descriptor.FormException;
+import hudson.model.Hudson;
+import hudson.model.TaskListener;
+import hudson.remoting.Callable;
+import hudson.remoting.Channel;
+import hudson.slaves.Channels;
+import hudson.util.ClasspathBuilder;
+import hudson.util.StreamTaskListener;
 import net.sf.json.JSONObject;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.ContextHandlerCollection;
-import org.mortbay.jetty.servlet.Context;
-import org.mortbay.jetty.servlet.ServletHolder;
-import org.kohsuke.stapler.export.ExportedBean;
 import org.kohsuke.stapler.export.Exported;
+import org.kohsuke.stapler.export.ExportedBean;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.framework.io.LargeText;
 
 import javax.servlet.ServletException;
+import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.ExecutionException;
 
 /**
- * Starts Selenium Grid server in the same JVM.
- *
- * <p>
- * This means we are loading Jetty in another servlet container, which
- * is probably not a very robust thing to do.
- *
- * OTOH, Selenium requires to be deployed in the root context, so
- * we this seemed like the only practical way of doing this.
- *
- * <p>
- * The initialization code is taken from {@link HubServer} and hence licensed under ASL.
- *
- * TODO: wait until 1.245 to introduce persistence.
+ * Starts Selenium Grid server in another JVM.
  *
  * @author Kohsuke Kawaguchi
  */
 @ExportedBean
-public class PluginImpl extends Plugin implements Action {
-    private transient Server server;
-
+public class PluginImpl extends Plugin implements Action, Serializable {
     private int port = 4444;
 
+    /**
+     * Channel to Selenium Grid JVM.
+     */
+    private transient Channel channel;
+
+    private transient Future<?> hubLauncher;
+
     public void start() throws Exception {
-        HubConfiguration configuration = ApplicationRegistry.registry().gridConfiguration().getHub();
-        configuration.setPort(port);
-        server = new Server(configuration.getPort());
-
-        ContextHandlerCollection contexts = new ContextHandlerCollection();
-        server.setHandler(contexts);
-
-        Context root = new Context(contexts, "/", Context.SESSIONS);
-//        root.setResourceBase("./");
-//        root.addHandler(new ResourceHandler());
-        root.addServlet(new ServletHolder(new HubServlet()), "/selenium-server/driver/*");
-        root.addServlet(new ServletHolder(new ConsoleServlet()), "/console");
-        root.addServlet(new ServletHolder(new RegistrationServlet()), "/registration-manager/register");
-        root.addServlet(new ServletHolder(new UnregistrationServlet()), "/registration-manager/unregister");
-
-        server.start();
+        StreamTaskListener listener = new StreamTaskListener(getLogFile());
+        File root = Hudson.getInstance().getRootDir();
+        channel = createSeleniumGridVM(root, listener);
+        hubLauncher = channel.callAsync(new HubLauncher(port));
 
         Hudson.getInstance().getActions().add(this);
-        
-        new ComputerListenerImpl().register();
+    }
+
+    public File getLogFile() {
+        return new File(Hudson.getInstance().getRootDir(),"selenium.log");
+    }
+
+
+
+    public void waitForHubLaunch() throws ExecutionException, InterruptedException {
+        hubLauncher.get();
     }
 
     public String getIconFileName() {
@@ -99,7 +95,7 @@ public class PluginImpl extends Plugin implements Action {
     }
 
     public String getUrlName() {
-        return "selenium";
+        return "/selenium";
     }
 
     public Api getApi() {
@@ -112,28 +108,83 @@ public class PluginImpl extends Plugin implements Action {
     }
 
     public void stop() throws Exception {
-        server.stop();
-        server.join();
+        channel.close();
     }
 
     public void configure(JSONObject formData) throws IOException, ServletException, FormException {
         formData.getString("port");
     }
 
-    public ApplicationRegistry getRegistry() {
-        return ApplicationRegistry.registry();
-    }
-
     @Exported(inline=true)
-    public List<SeleniumRemoteControl> getRemoteControls() {
-        DynamicRemoteControlPool pool = getRegistry().remoteControlPool();
+    public List<SeleniumRemoteControl> getRemoteControls() throws IOException, InterruptedException {
+        if(channel==null)   return Collections.emptyList();
 
-        List<SeleniumRemoteControl> r = new ArrayList<SeleniumRemoteControl>();
-        for (RemoteControlProxy rc : pool.availableRemoteControls())
-            r.add(new SeleniumRemoteControl(rc,false));
-        for (RemoteControlProxy rc : pool.reservedRemoteControls())
-            r.add(new SeleniumRemoteControl(rc,true));
-        
-        return r;
+        return channel.call(new Callable<List<SeleniumRemoteControl>,RuntimeException>() {
+            public List<SeleniumRemoteControl> call() throws RuntimeException {
+                HubRegistry registry = HubRegistry.registry();
+                DynamicRemoteControlPool pool = registry.remoteControlPool();
+
+                List<SeleniumRemoteControl> r = new ArrayList<SeleniumRemoteControl>();
+                for (RemoteControlProxy rc : pool.availableRemoteControls())
+                    r.add(new SeleniumRemoteControl(rc,false));
+                for (RemoteControlProxy rc : pool.reservedRemoteControls())
+                    r.add(new SeleniumRemoteControl(rc,true));
+
+                return r;
+            }
+        });
     }
+
+    /**
+     * Launches Hub in a separate JVM.
+     *
+     * @param rootDir
+     *      The slave/master root.
+     */
+    static /*package*/ Channel createSeleniumGridVM(File rootDir, TaskListener listener) throws IOException, InterruptedException {
+        FilePath distDir = install(rootDir, listener);
+        return Channels.newJVM("Selenium Grid",listener,distDir,
+                new ClasspathBuilder().addAll(distDir,"lib/selenium-grid-hub-standalone-*.jar, lib/log4j-*.jar"),
+                null);
+    }
+
+    /**
+     * Launches RC in a separate JVM.
+     *
+     * @param rootDir
+     *      The slave/master root.
+     */
+    static /*package*/ Channel createSeleniumRCVM(File rootDir, TaskListener listener) throws IOException, InterruptedException {
+        FilePath distDir = install(rootDir, listener);
+        return Channels.newJVM("Selenium RC",listener,distDir,
+                new ClasspathBuilder()
+                        .addAll(distDir,"vendor/selenium-server-*.jar, lib/selenium-grid-remote-control-*.jar, lib/commons-httpclient-*.jar"),
+                null);
+    }
+
+    private static FilePath install(File rootDir, TaskListener listener) throws IOException, InterruptedException {
+        FilePath distDir = new FilePath(new File(rootDir,"selenium-grid"));
+        distDir.installIfNecessaryFrom(PluginImpl.class.getResource("selenium-grid.tgz"),listener,"Installing Selenium Grid binaries");
+        return distDir;
+    }
+
+    /**
+     * Determines the host name of the Hudson master.
+     */
+    static /*package*/ String getMasterHostName() throws MalformedURLException {
+        String rootUrl = Hudson.getInstance().getRootUrl();
+        if(rootUrl==null)
+            return null;
+        URL url = new URL(rootUrl);
+        return url.getHost();
+    }
+
+    /**
+     * Handles incremental log.
+     */
+    public void doProgressiveLog( StaplerRequest req, StaplerResponse rsp) throws IOException {
+        new LargeText(getLogFile(),false).doProgressText(req,rsp);
+    }
+
+    private static final long serialVersionUID = 1L;
 }

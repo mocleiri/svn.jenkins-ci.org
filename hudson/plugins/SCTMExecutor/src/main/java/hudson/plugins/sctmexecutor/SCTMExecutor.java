@@ -3,33 +3,30 @@ package hudson.plugins.sctmexecutor;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.model.AbstractBuild;
+import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
-import hudson.model.Descriptor;
-import hudson.plugins.sctmexecutor.exceptions.EncryptionException;
+import hudson.model.Hudson;
+import hudson.plugins.sctmexecutor.exceptions.SCTMException;
+import hudson.plugins.sctmexecutor.service.ISCTMService;
+import hudson.plugins.sctmexecutor.service.SCTMReRunProxy;
+import hudson.plugins.sctmexecutor.service.SCTMService;
 import hudson.tasks.Builder;
 
+import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
-import java.net.URL;
-import java.rmi.RemoteException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.xml.rpc.ServiceException;
-
 import org.kohsuke.stapler.DataBoundConstructor;
-
-import com.borland.scc.sccsystem.SystemService;
-import com.borland.scc.sccsystem.SystemServiceServiceLocator;
-import com.borland.tm.webservices.tmexecution.ExecutionHandle;
-import com.borland.tm.webservices.tmexecution.ExecutionWebService;
-import com.borland.tm.webservices.tmexecution.ExecutionWebServiceServiceLocator;
 
 /**
  * Executes a specified execution definition on Borland's SilkCentral Test Manager.
@@ -37,24 +34,36 @@ import com.borland.tm.webservices.tmexecution.ExecutionWebServiceServiceLocator;
  * @author Thomas Fuerer
  * 
  */
-public class SCTMExecutor extends Builder {
-  public static final SCTMExecutorDescriptor DESCRIPTOR = new SCTMExecutorDescriptor();
-  private static final Logger LOGGER = Logger.getLogger("hudson.plumgins.sctmexecutor");  //$NON-NLS-1$
-
-  private static int resultNoForLastBuild = 0;
+public final class SCTMExecutor extends Builder {
+  static final int OPT_NO_BUILD_NUMBER = 1;
+  static final int OPT_USE_THIS_BUILD_NUMBER = 2;
+  static final int OPT_USE_UPSTREAMJOB_BUILDNUMBER = 3;
+  private static final Logger LOGGER = Logger.getLogger("hudson.plugins.sctmexecutor"); //$NON-NLS-1$
 
   private final int projectId;
   private final String execDefIds;
+  private final int delay;
+  private final int buildNumberUsageOption;
+  private final String upStreamJobName;
+  private final boolean continueOnError;
+  private final boolean collectResults;
+  
+  private boolean succeed;
 
   @DataBoundConstructor
-  public SCTMExecutor(int projectId, String execDefIds) {
+  public SCTMExecutor(final int projectId, final String execDefIds, final int delay, final int buildNumberUsageOption, final String upStreamJobName, final boolean contOnErr, final boolean collectResults) {
     this.projectId = projectId;
     this.execDefIds = execDefIds;
-    
+    this.delay = delay;
+    this.buildNumberUsageOption = buildNumberUsageOption;
+    this.upStreamJobName = upStreamJobName;
+    this.continueOnError = contOnErr;
+    this.collectResults = collectResults;
   }
 
-  public Descriptor<Builder> getDescriptor() {
-    return DESCRIPTOR;
+  @Override
+  public SCTMExecutorDescriptor getDescriptor() {
+    return (SCTMExecutorDescriptor)Hudson.getInstance().getDescriptor(getClass());
   }
 
   public String getExecDefIds() {
@@ -64,101 +73,110 @@ public class SCTMExecutor extends Builder {
   public int getProjectId() {
     return projectId;
   }
-
-  @Override
-  public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener)
-      throws InterruptedException, IOException {
-    String serviceURL = DESCRIPTOR.getServiceURL();
-    SystemService systemService;
-    ExecutionWebService execService;
-    try {
-      systemService = new SystemServiceServiceLocator().getsccsystem(new URL(serviceURL + "/sccsystem?wsdl")); //$NON-NLS-1$
-      execService = new ExecutionWebServiceServiceLocator().gettmexecution(new URL(serviceURL + "/tmexecution?wsdl")); //$NON-NLS-1$
-
-      ISessionHandler sessionHandler = new SessionHandler(systemService, SCTMExecutor.DESCRIPTOR.getUser(), SCTMExecutor.DESCRIPTOR.getPassword());
-      
-      long sessionId = sessionHandler.getSessionId(-1);
-      listener.getLogger().println(Messages.getString("SCTMExecutor.log.successfulLogin")); //$NON-NLS-1$
-      execService.setCurrentProject(sessionId, projectId);
-      List<ExecutionHandle> execHandles;
-      try {
-        execHandles = startExecutions(listener, execService, sessionId);
-      } catch (IllegalArgumentException e) {
-        return false;
-      }
-
-      collectResults(build, listener, execService, sessionHandler, execHandles);
-      
-      return true;
-    } catch (ServiceException e) {
-      LOGGER.log(Level.WARNING, e.getMessage(), e);
-      listener.error(MessageFormat.format(Messages.getString("SCTMExecutor.err.urlOrServiceBroken"), serviceURL)); //$NON-NLS-1$
-      return false;
-    } catch (RemoteException e) {
-      LOGGER.log(Level.WARNING, e.getMessage(), e);
-      if (e.getMessage().contains("Not logged in."))
-        listener.error(Messages.getString("SCTMExecutor.err.accessDenied")); //$NON-NLS-1$
-      else
-        listener.error(e.getMessage());
-      return false;
-    } catch (EncryptionException e){
-      LOGGER.log(Level.WARNING, e.getMessage(), e);
-      return false;
-    } catch (Exception e) {
-      LOGGER.log(Level.SEVERE, e.getMessage(), e);
-      listener.error(MessageFormat.format("{0} {1}", Messages.getString("SCTMExecutor.log.unknownError"), e.getLocalizedMessage()));
-      return false;
-    }
+  
+  public int getDelay() {
+    return delay;
+  }
+  
+  public int getBuildNumberUsageOption() {
+    return this.buildNumberUsageOption;
+  }
+  
+  public String getUpStreamJobName() {
+    return this.upStreamJobName;
+  }
+  
+  public boolean isContinueOnError() {
+    return this.continueOnError;
+  }
+  
+  public String[] getUpStreamProjects() {
+    Collection<String> jobNames = Hudson.getInstance().getJobNames(); // TODO filter real upstream projects
+    
+    return jobNames.toArray(new String[jobNames.size()]);
   }
 
-  private void collectResults(AbstractBuild<?, ?> build, BuildListener listener, ExecutionWebService execService,
-      ISessionHandler sessionHandler, List<ExecutionHandle> execHandles) throws IOException, InterruptedException, ExecutionException {
+  public boolean isCollectResults() {
+    return this.collectResults;
+  }
+  
+  @Override
+  public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
+    SCTMExecutorDescriptor descriptor = (SCTMExecutorDescriptor)Hudson.getInstance().getDescriptor(getClass());
+    String serviceURL = descriptor.getServiceURL();
+    try {
+      ISCTMService service = new SCTMReRunProxy(new SCTMService(serviceURL, descriptor.getUser(), descriptor.getPassword()));
+      listener.getLogger().println(Messages.getString("SCTMExecutor.log.successfulLogin")); //$NON-NLS-1$
+      FilePath rootDir = createResultDir(build.number, build, listener);
+      Collection<Integer> ids = csvToIntList(execDefIds);
+
+      Collection<Future<?>> results = new ArrayList<Future<?>>(ids.size());
+      for (Integer execDefId : ids) {        
+        StdXMLResultWriter resultWriter = null;
+        if (collectResults)
+          resultWriter = new StdXMLResultWriter(rootDir, descriptor.getServiceURL(), String.valueOf(build.number));
+        Runnable resultCollector = new ExecutionRunnable(service, execDefId, getBuildNumber(build, listener),
+            resultWriter, listener.getLogger());
+        results.add(descriptor.getExecutorPool().submit(resultCollector));
+        if (delay > 0 && ids.size() > 1)
+          Thread.sleep(delay*1000);
+      }
+      
+      for (Future<?> res : results) {
+        res.get();
+      }
+      succeed = true;
+    } catch (SCTMException e) {
+      LOGGER.log(Level.SEVERE, MessageFormat.format("Creating a remote connection to SCTM host ({0}) failed.", serviceURL), e); //$NON-NLS-1$
+      listener.fatalError(e.getMessage());
+      succeed = false;
+    } catch (ExecutionException e) {
+      LOGGER.log(Level.SEVERE, "Starting or collecting for a SCTM execution failed.", e); //$NON-NLS-1$
+      listener.fatalError(MessageFormat.format(Messages.getString("SCTMExecutor.err.noResponseFromSCTM"), e.getMessage())); //$NON-NLS-1$
+      succeed = false;
+    } 
+    return continueOnError || succeed;
+  }
+
+  private int getBuildNumber(AbstractBuild<?, ?> build, BuildListener listener) {
+    if (OPT_USE_UPSTREAMJOB_BUILDNUMBER == buildNumberUsageOption)
+      return getBuildNumberFromUpStreamProject(upStreamJobName, build.getUpstreamBuilds(), listener);
+    else if (OPT_USE_THIS_BUILD_NUMBER == buildNumberUsageOption)
+      return build.number;
+    else
+      return -1;
+  }
+
+  private int getBuildNumberFromUpStreamProject(String projectName, Map<AbstractProject, Integer> upstreamBuilds, BuildListener listener) {
+    for (AbstractProject<?,?> project : upstreamBuilds.keySet()) {
+      if (project.getName().equals(projectName))
+        return upstreamBuilds.get(project);
+    }
+    listener.error(MessageFormat.format(Messages.getString("SCTMExecutor.err.notAUpstreamJob"), projectName)); //$NON-NLS-1$
+    return -1;
+  }
+
+  private static FilePath createResultDir(int currentBuildNo, AbstractBuild<?,?> build, BuildListener listener) throws IOException, InterruptedException {
     FilePath rootDir = build.getProject().getWorkspace();
     if (rootDir == null) {
-      LOGGER.log(Level.SEVERE, "Cannot write the result file because slave is not connected.");
+      LOGGER.severe("Cannot write the result file because slave is not connected."); //$NON-NLS-1$
       listener.error(Messages.getString("SCTMExecutor.log.slaveNotConnected")); //$NON-NLS-1$
+      throw new RuntimeException();
     }
     
-    rootDir = createResultDir(rootDir, build.number);
-    ExecutorService tp = DESCRIPTOR.getExecutorPool();
-    List<Future<?>> results = new ArrayList<Future<?>>(execHandles.size());
-    for (ExecutionHandle executionHandle : execHandles) {
-      ResultCollectorThread resultCollector = new ResultCollectorThread(listener.getLogger(), execService, sessionHandler, executionHandle, new StdXMLResultWriter(rootDir, DESCRIPTOR.getServiceURL()));
-      results.add(tp.submit(resultCollector));
-    }
-    
-    for (Future<?> res : results) {
-      res.get();
-    }
-  }
-
-  private List<ExecutionHandle> startExecutions(BuildListener listener, ExecutionWebService execService, long sessionId)
-      throws RemoteException {
-    List<ExecutionHandle> execHandles = new ArrayList<ExecutionHandle>();
-    for (Integer execDefId : csvToIntList(execDefIds)) {
-      ExecutionHandle[] execHandleArr = execService.startExecution(sessionId, execDefId);
-      if (execHandleArr.length <= 0 || execHandleArr[0] == null
-          || (execHandleArr[0] != null && execHandleArr[0].getTimeStamp() <= 0)) {
-        listener.error(Messages.getString(Messages.getString("SCTMExecutor.err.execDefNotFound"), execDefId)); //$NON-NLS-1$
-        throw new IllegalArgumentException();
-      } else {
-        listener.getLogger().println(MessageFormat.format(Messages.getString("SCTMExecutor.log.successfulStartExecution"), execDefId));
-        for (ExecutionHandle executionHandle : execHandleArr) {
-          execHandles.add(executionHandle);
-        }
-      }
-    }
-    return execHandles;
-  }
-
-  private static FilePath createResultDir(FilePath rootDir, int currentBuildNo) throws IOException, InterruptedException {
     rootDir = new FilePath(rootDir, "SCTMResults"); //$NON-NLS-1$
-    if (resultNoForLastBuild  != currentBuildNo) {
-      if (rootDir.exists())
-        rootDir.deleteRecursive();
+    if (rootDir.exists()) {
+      final String buildNo = String.valueOf(currentBuildNo);
+      List<FilePath> list = rootDir.list();//new TestFileFilter(buildNo));
+      if (list.size() > 0) {
+        for (FilePath filePath : list) {
+          if (filePath.getName().matches("TEST-(\\p{Print}*)-"+buildNo+".xml"))
+            return rootDir; //test results of the current run available, do not clean the results directory
+        }
+        rootDir.deleteContents(); // clean old results
+      }
+    } else
       rootDir.mkdirs();
-      resultNoForLastBuild = currentBuildNo;
-    }
     return rootDir;
   }
 

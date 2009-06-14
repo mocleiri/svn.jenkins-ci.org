@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SubversionEventHandlerImpl (Hudson core 1.291 API)
+SubversionEventHandlerImpl (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SubversionEventHandlerImpl (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionEventHandlerImpl (Hudson core 1.291 API)";
+        parent.document.title="SubversionEventHandlerImpl (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/scm/SubversionChangeLogSet.RevisionInfo.html" title="class in hudson.scm"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/scm/SubversionCredentialProvider.html" title="class in hudson.scm"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/scm/SubversionRepositoryBrowser.html" title="class in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/scm/SubversionEventHandlerImpl.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -294,13 +294,16 @@ public <B>SubversionEventHandlerImpl</B>(java.io.PrintStream&nbsp;out,
 handleEvent</H3>
 <PRE>
 public void <B>handleEvent</B>(org.tmatesoft.svn.core.wc.SVNEvent&nbsp;event,
-                        double&nbsp;progress)</PRE>
+                        double&nbsp;progress)
+                 throws org.tmatesoft.svn.core.SVNException</PRE>
 <DL>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE>handleEvent</CODE> in interface <CODE>org.tmatesoft.svn.core.wc.ISVNEventHandler</CODE><DT><B>Overrides:</B><DD><CODE>handleEvent</CODE> in class <CODE>org.tmatesoft.svn.core.wc.SVNEventAdapter</CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.tmatesoft.svn.core.SVNException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -308,10 +311,13 @@ public void <B>handleEvent</B>(org.tmatesoft.svn.core.wc.SVNEvent&nbsp;event,
 <A NAME="getRelativePath(java.io.File)"><!-- --></A><H3>
 getRelativePath</H3>
 <PRE>
-public java.lang.String <B>getRelativePath</B>(java.io.File&nbsp;file)</PRE>
+public java.lang.String <B>getRelativePath</B>(java.io.File&nbsp;file)
+                                 throws java.io.IOException</PRE>
 <DL>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -356,7 +362,7 @@ public static java.lang.String <B>getLocalPath</B>(java.lang.String&nbsp;path)</
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/scm/SubversionChangeLogSet.RevisionInfo.html" title="class in hudson.scm"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/scm/SubversionCredentialProvider.html" title="class in hudson.scm"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/scm/SubversionRepositoryBrowser.html" title="class in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/scm/SubversionEventHandlerImpl.html" target="_top"><B>FRAMES</B></A>  &nbsp;

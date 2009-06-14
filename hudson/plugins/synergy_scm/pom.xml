@@ -4,8 +4,8 @@
   <groupId>org.jvnet.hudson.plugins</groupId>
   <artifactId>synergy</artifactId>
   <packaging>hpi</packaging>
-  <version>1.5-SNAPSHOT</version>
-  <url>http://hudson.gotdns.com/wiki/display/HUDSON/Synergy+Plugin</url>
+  <version>1.6-SNAPSHOT</version>
+  <url>http://wiki.hudson-ci.org/display/HUDSON/Synergy+Plugin</url>
   <description>This plug-in provides integration with CM/Synergy Version Manager SCM</description>
   <name>Hudson Synergy Plugin</name>
   <inceptionYear>2008</inceptionYear>
@@ -149,6 +149,15 @@
       </snapshots>
     </pluginRepository>
   </pluginRepositories>
+  
+  <distributionManagement>
+    <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>java.net-maven2-repository</id>
+      <url>java-net:/maven2-repository/trunk/repository/</url>
+    </repository>
+  </distributionManagement>
+  
   
   <scm>
   	<connection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/synergy_scm</connection>

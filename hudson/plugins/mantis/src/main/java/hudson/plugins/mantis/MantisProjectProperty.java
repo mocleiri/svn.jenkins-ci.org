@@ -39,22 +39,26 @@ public final class MantisProjectProperty extends JobProperty<AbstractProject<?, 
 
     private final String pattern;
 
-    private final Pattern regExp;
+    private final String regex;
+
+    private Pattern regexpPattern;
 
     private final boolean linkEnabled;
 
+    @Deprecated
+    private String regExp;
+
     @DataBoundConstructor
-    public MantisProjectProperty(final String siteName, final String pattern, final boolean linkEnabled) {
-        String name = siteName;
-        if (siteName == null) {
-            final MantisSite[] sites = DESCRIPTOR.getSites();
-            if (sites.length > 0) {
-                name = sites[0].getName();
-            }
-        }
+    public MantisProjectProperty(final String siteName, final String pattern, final String regex, final boolean linkEnabled) {
+        final String name = (siteName != null) ? siteName : defaultSiteName();
         this.siteName = Util.fixEmptyAndTrim(name);
         this.pattern = Util.fixEmptyAndTrim(pattern);
-        this.regExp = createRegExp(this.pattern);
+        this.regex = Util.fixEmptyAndTrim(regex);
+        if (this.regex == null) {
+            this.regexpPattern = createRegexp(this.pattern);
+        } else {
+            this.regexpPattern = Pattern.compile(this.regex);
+        }
         this.linkEnabled = linkEnabled;
     }
 
@@ -66,10 +70,14 @@ public final class MantisProjectProperty extends JobProperty<AbstractProject<?, 
         return pattern;
     }
 
-    public Pattern getRegExp() {
-        // If project configuration has not saved after upgrading to 0.5.X,
+    public String getRegex() {
+        return regex;
+    }
+
+    public Pattern getRegexpPattern() {
+        // If project configuration has not saved after upgrading to 0.8.0,
         // return default issue id pattern.
-        return (regExp != null) ? regExp : createRegExp(pattern);
+        return (regexpPattern != null) ? regexpPattern : createRegexp(pattern);
     }
 
     public boolean isLinkEnabled() {
@@ -94,23 +102,30 @@ public final class MantisProjectProperty extends JobProperty<AbstractProject<?, 
         return DESCRIPTOR;
     }
 
-    private Pattern createRegExp(final String p) {
-        final StringBuffer buf =new StringBuffer();
+    private String defaultSiteName() {
+        final MantisSite[] sites = DESCRIPTOR.getSites();
+        if (sites.length > 0) {
+            return sites[0].getName();
+        }
+        return null;
+    }
+
+    private Pattern createRegexp(final String p) {
+        final StringBuffer buf = new StringBuffer();
         buf.append("(?<=");
         if (p != null) {
-            buf.append(Utility.escapeRegExp(p));
+            buf.append(Utility.escapeRegexp(p));
         } else {
             buf.append(DEFAULT_PATTERN);
         }
         buf.append(")");
-        final String regexp = buf.toString().replace(ISSUE_ID_STRING, ")(\\d+)(?=");
-        return Pattern.compile(regexp);
+        final String pt = buf.toString().replace(ISSUE_ID_STRING, ")(\\d+)(?=");
+        return Pattern.compile(pt);
     }
 
     public static final class DescriptorImpl extends JobPropertyDescriptor {
 
-        private final CopyOnWriteList<MantisSite> sites =
-                new CopyOnWriteList<MantisSite>();
+        private final CopyOnWriteList<MantisSite> sites = new CopyOnWriteList<MantisSite>();
 
         public DescriptorImpl() {
             super(MantisProjectProperty.class);
@@ -138,8 +153,9 @@ public final class MantisProjectProperty extends JobProperty<AbstractProject<?, 
 
         @Override
         public JobProperty<?> newInstance(final StaplerRequest req, final JSONObject formData) throws FormException {
-            MantisProjectProperty mpp =
-                    req.bindParameters(MantisProjectProperty.class, "mantis.");
+            // only administrator allowed
+            Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
+            MantisProjectProperty mpp = req.bindParameters(MantisProjectProperty.class, "mantis.");
             if (mpp.siteName == null) {
                 mpp = null;
             }
@@ -148,13 +164,14 @@ public final class MantisProjectProperty extends JobProperty<AbstractProject<?, 
 
         @Override
         public boolean configure(final StaplerRequest req) {
+            // only administrator allowed
+            Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
             sites.replaceBy(req.bindParametersToList(MantisSite.class, "mantis."));
             save();
             return true;
         }
 
-        public void doLoginCheck(final StaplerRequest req, final StaplerResponse res)
-                throws IOException, ServletException {
+        public void doLoginCheck(final StaplerRequest req, final StaplerResponse res) throws IOException, ServletException {
             // only administrator allowed
             Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
             
@@ -173,11 +190,9 @@ public final class MantisProjectProperty extends JobProperty<AbstractProject<?, 
                     final String bPass = Util.fixEmptyAndTrim(req.getParameter("bpass"));
                     final String ver = Util.fixEmptyAndTrim(req.getParameter("version"));
                     
-                    MantisVersion version = MantisVersion.getVersionSafely(
-                            ver, MantisVersion.V110);
+                    MantisVersion version = MantisVersion.getVersionSafely(ver, MantisVersion.V110);
                     
-                    final MantisSite site =
-                            new MantisSite(new URL(url), version.name(), user, pass, bUser, bPass);
+                    final MantisSite site = new MantisSite(new URL(url), version.name(), user, pass, bUser, bPass);
                     if (!site.isConnect()) {
                         error(Messages.MantisProjectProperty_UnableToLogin());
                         return;
@@ -187,8 +202,7 @@ public final class MantisProjectProperty extends JobProperty<AbstractProject<?, 
             }.process();
         }
 
-        public void doPatternCheck(final StaplerRequest req, final StaplerResponse res)
-                throws IOException, ServletException {
+        public void doPatternCheck(final StaplerRequest req, final StaplerResponse res) throws IOException, ServletException {
             // only administrator allowed
             Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
 

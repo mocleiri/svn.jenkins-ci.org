@@ -23,6 +23,7 @@
  */
 package org.jvnet.hudson.plugins.m2release;
 
+import hudson.Extension;
 import hudson.Launcher;
 import hudson.maven.AbstractMavenProject;
 import hudson.maven.MavenBuild;
@@ -33,28 +34,30 @@ import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.BuildListener;
-import hudson.model.Descriptor;
+import hudson.model.Item;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildWrapperDescriptor;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
- * Wraps a {@link MavenBuild} to be able to run the <a
- * href="http://maven.apache.org/plugins/maven-release-plugin/">maven release plugin</a> on demand.
+ * Wraps a {@link MavenBuild} to be able to run the 
+ * <a href="http://maven.apache.org/plugins/maven-release-plugin/">maven release plugin</a> on demand.
  * 
  * @author James Nord
- * @version 0.1
+ * @version 0.2
  * @since 0.1
  */
 public class M2ReleaseBuildWrapper extends BuildWrapper {
 
-	private transient boolean	doRelease	   = false;
+	private transient boolean doRelease = false;
+	private transient Map<String,String> versions;
+	private transient boolean appendHudsonBuildNumber;
 
-	public String	          releaseGoals	= "release:prepare release:perform";
-
+	public String releaseGoals = DescriptorImpl.DEFAULT_RELEASE_GOALS;
 
 	@DataBoundConstructor
 	public M2ReleaseBuildWrapper(String releaseGoals) {
@@ -64,11 +67,14 @@ public class M2ReleaseBuildWrapper extends BuildWrapper {
 
 
 	@Override
-	public Environment setUp(AbstractBuild build, Launcher launcher, BuildListener listener) throws IOException,
+	public Environment setUp(AbstractBuild build, Launcher launcher, BuildListener listener)
+	                                                                                        throws IOException,
 	                                                                                        InterruptedException {
 		if (!doRelease) {
 			// we are not performing a release so don't need a custom tearDown.
-			return new Environment() {};
+			return new Environment() {
+				/** intentionally blank */
+			};
 		}
 		// reset for the next build.
 		doRelease = false;
@@ -81,12 +87,23 @@ public class M2ReleaseBuildWrapper extends BuildWrapper {
 			MavenModuleSet mmSet = mm.getParent();
 			originalGoals = mmSet.getGoals();
 			mmSet.setGoals(releaseGoals);
+			if (versions != null) {				
+				mmSet.setGoals(generateVersionString(build.getNumber()) + releaseGoals);
+			}
+			else {
+				mmSet.setGoals(releaseGoals);
+			}
 		}
 		else if (build instanceof MavenModuleSetBuild) {
 			MavenModuleSetBuild m2moduleSetBuild = (MavenModuleSetBuild) build;
 			MavenModuleSet mmSet = m2moduleSetBuild.getProject();
 			originalGoals = mmSet.getGoals();
-			mmSet.setGoals(releaseGoals);
+			if (versions != null) {
+				mmSet.setGoals(generateVersionString(build.getNumber()) + releaseGoals);
+			}
+			else {
+				mmSet.setGoals(releaseGoals);
+			}
 		}
 		else {
 			originalGoals = null;
@@ -95,18 +112,21 @@ public class M2ReleaseBuildWrapper extends BuildWrapper {
 		return new Environment() {
 
 			@Override
-			public boolean tearDown(AbstractBuild build, BuildListener listener) throws IOException, InterruptedException {
-				if (build instanceof MavenBuild) {
-					MavenBuild m2Build = (MavenBuild) build;
+			public boolean tearDown(AbstractBuild bld, BuildListener lstnr) throws IOException,
+			                                                                    InterruptedException {
+				// TODO only re-set the build goals if they are still releaseGoals to avoid mid-air collisions.
+				if (bld instanceof MavenBuild) {
+					MavenBuild m2Build = (MavenBuild) bld;
 					MavenModule mm = m2Build.getProject();
 					MavenModuleSet mmSet = mm.getParent();
 					mmSet.setGoals(originalGoals);
 				}
-				else if (build instanceof MavenModuleSetBuild) {
-					MavenModuleSetBuild m2moduleSetBuild = (MavenModuleSetBuild) build;
+				else if (bld instanceof MavenModuleSetBuild) {
+					MavenModuleSetBuild m2moduleSetBuild = (MavenModuleSetBuild) bld;
 					MavenModuleSet mmSet = m2moduleSetBuild.getProject();
 					mmSet.setGoals(originalGoals);
 				}
+				versions = null;
 				return true;
 			}
 		};
@@ -117,18 +137,55 @@ public class M2ReleaseBuildWrapper extends BuildWrapper {
 		doRelease = true;
 	}
 
-	@Override
-	public Action getProjectAction(AbstractProject job) {
-		return new M2ReleaseAction((MavenModuleSet)job);
+	void setVersions(Map<String,String> versions) {
+		// expects a map of key="-Dproject.rel.${m.moduleName}" value="version"
+		this.versions = versions;
 	}
 
+	public void setAppendHudsonBuildNumber(boolean appendHudsonBuildNumber) {
+		this.appendHudsonBuildNumber = appendHudsonBuildNumber;
+	}
+
+	private String generateVersionString(int buildNumber) {
+		// -Dproject.rel.org.mycompany.group.project=version ....
+		StringBuilder sb = new StringBuilder();
+		for (String key : versions.keySet()) {
+			sb.append(key);
+			sb.append('=');
+			sb.append(versions.get(key));
+			if (appendHudsonBuildNumber && key.startsWith("-Dproject.rel")) {
+				sb.append('-');
+				sb.append(buildNumber);
+			}
+			sb.append(' ');
+		}
+		return sb.toString();
+	}
+
+	@Override
+	public Action getProjectAction(AbstractProject job) {
+		return new M2ReleaseAction((MavenModuleSet) job);
+	}
+
+	public static boolean hasReleasePermission(AbstractProject job) {
+		return job.hasPermission(Item.BUILD);
+	}
+
+	public static void checkReleasePermission(AbstractProject job) {
+		job.checkPermission(Item.BUILD);
+	}
+
+	@Extension
 	public static class DescriptorImpl extends BuildWrapperDescriptor {
+		
+		public static final String DEFAULT_RELEASE_GOALS = "-Dresume=false release:prepare release:perform"; //$NON-NLS-1$
 
 		public DescriptorImpl() {
 			super(M2ReleaseBuildWrapper.class);
-			//load();
+			// load();
 		}
-		
+
+
 		@Override
 		public boolean isApplicable(AbstractProject<?, ?> item) {
 			return (item instanceof AbstractMavenProject);
@@ -137,18 +194,9 @@ public class M2ReleaseBuildWrapper extends BuildWrapper {
 
 		@Override
 		public String getDisplayName() {
-			return "Maven release build";
+			return "Maven release build"; // TODO il8n
 		}
 
 	}
-
-	// XXX only here to make it compile for now...
-	public static final DescriptorImpl INSTANCE = new DescriptorImpl();
-	
-	public Descriptor<BuildWrapper> getDescriptor() {
-		return INSTANCE;
-	}
-
-
 
 }

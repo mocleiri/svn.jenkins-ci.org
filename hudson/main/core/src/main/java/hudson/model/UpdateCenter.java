@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Dean Yu, Seiji Sogabe
+ * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Yahoo! Inc., Seiji Sogabe
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -620,6 +620,9 @@ public class UpdateCenter extends AbstractModelObject {
         /**
          * Returns the URL of the server that hosts the update-center.json
          * file.
+         *
+         * @return
+         *      Absolute URL that ends with '/'.
          */
         public String getUpdateCenterUrl() {
             return "https://hudson.dev.java.net/";
@@ -647,6 +650,7 @@ public class UpdateCenter extends AbstractModelObject {
      */
     public abstract class UpdateCenterJob implements Runnable {
         public void schedule() {
+            LOGGER.fine("Scheduling "+this+" to installerService");
             jobs.add(this);
             installerService.submit(this);
         }
@@ -659,6 +663,7 @@ public class UpdateCenter extends AbstractModelObject {
         private final Vector<String> statuses= new Vector<String>();
 
         public void run() {
+            LOGGER.fine("Doing a connectivity check");
             try {
                 String connectionCheckUrl = config.getConnectionCheckUrl();
                 
@@ -858,6 +863,11 @@ public class UpdateCenter extends AbstractModelObject {
 
         protected void onSuccess() {
             pm.pluginUploaded = true;
+        }
+
+        @Override
+        public String toString() {
+            return super.toString()+"[plugin="+plugin.title+"]";
         }
     }
 

@@ -26,14 +26,13 @@ package hudson.tasks;
 import hudson.Launcher;
 import hudson.Functions;
 import hudson.Extension;
-import hudson.maven.AbstractMavenProject;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.model.User;
 import hudson.model.UserPropertyDescriptor;
 import hudson.model.Hudson;
-import hudson.util.FormFieldValidator;
+import hudson.util.FormValidation;
 import org.apache.tools.ant.types.selectors.SelectorUtils;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
@@ -350,41 +349,29 @@ public class Mailer extends Notifier {
         /**
          * Checks the URL in <tt>global.jelly</tt>
          */
-        public void doCheckUrl(StaplerRequest req, StaplerResponse rsp,
-                                   @QueryParameter final String value) throws IOException, ServletException {
-            new FormFieldValidator(req,rsp,false) {
-                protected void check() throws IOException, ServletException {
-                    if(value.startsWith("http://localhost"))
-                        warning("Please set a valid host name, instead of localhost");
-                    else
-                        ok();
-                }
-            }.process();
+        public FormValidation doCheckUrl(@QueryParameter String value) {
+            if(value.startsWith("http://localhost"))
+                return FormValidation.warning("Please set a valid host name, instead of localhost");
+            return FormValidation.ok();
         }
 
-        public void doAddressCheck(StaplerRequest req, StaplerResponse rsp,
-                                   @QueryParameter final String value) throws IOException, ServletException {
-            new FormFieldValidator(req,rsp,false) {
-                protected void check() throws IOException, ServletException {
-                    try {
-                        new InternetAddress(value);
-                        ok();
-                    } catch (AddressException e) {
-                        error(e.getMessage());
-                    }
-                }
-            }.process();
+        public FormValidation doAddressCheck(@QueryParameter String value) {
+            try {
+                new InternetAddress(value);
+                return FormValidation.ok();
+            } catch (AddressException e) {
+                return FormValidation.error(e.getMessage());
+            }
         }
         
         /**
          * Send an email to the admin address
-         * @param req ignored request
          * @param rsp used to write the result of the sending
          * @throws IOException
          * @throws ServletException
          * @throws InterruptedException
          */
-        public void doSendTestMail(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException, InterruptedException {
+        public void doSendTestMail(StaplerResponse rsp) throws IOException, ServletException, InterruptedException {
             rsp.setContentType("text/plain");
             PrintStream writer = new PrintStream(rsp.getOutputStream());            
             try {
@@ -415,8 +402,7 @@ public class Mailer extends Notifier {
         }
 
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
-            // for historical reasons, Maven uses MavenMailer
-            return !AbstractMavenProject.class.isAssignableFrom(jobType);
+            return true;
         }
     }
 

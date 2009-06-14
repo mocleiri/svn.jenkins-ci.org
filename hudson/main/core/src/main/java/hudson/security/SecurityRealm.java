@@ -168,6 +168,23 @@ public abstract class SecurityRealm implements Describable<SecurityRealm>, Exten
     }
 
     /**
+     * Returns true if this {@link SecurityRealm} supports explicit logout operation.
+     *
+     * <p>
+     * If the method returns false, "logout" link will not be displayed. This is useful
+     * when authentication doesn't require an explicit login activity (such as NTLM authentication
+     * or Kerberos authentication, where Hudson has no ability to log off the current user.)
+     *
+     * <p>
+     * By default, this method returns true.
+     *
+     * @since 1.307
+     */
+    public boolean canLogOut() {
+        return true;
+    }
+
+    /**
      * Returns true if this {@link SecurityRealm} allows online sign-up.
      * This creates a hyperlink that redirects users to <tt>CONTEXT_ROOT/signUp</tt>,
      * which will be served by the <tt>signup.jelly</tt> view of this class.

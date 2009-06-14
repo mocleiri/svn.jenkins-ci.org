@@ -4,7 +4,7 @@ import hudson.model.AbstractBuild;
 import hudson.plugins.tasks.parser.Task;
 import hudson.plugins.tasks.parser.TasksParserResult;
 import hudson.plugins.tasks.util.BuildResult;
-import hudson.plugins.tasks.util.model.JavaProject;
+import hudson.plugins.tasks.util.ResultAction;
 import hudson.plugins.tasks.util.model.Priority;
 
 import java.util.ArrayList;
@@ -27,17 +27,17 @@ public class TasksResult extends BuildResult {
     }
 
     /** Tag identifiers indicating high priority. */
-    private String highTags;
+    private final String highTags;
     /** Tag identifiers indicating normal priority. */
-    private String normalTags;
+    private final String normalTags;
     /** Tag identifiers indicating low priority. */
-    private String lowTags;
+    private final String lowTags;
 
     /** The number of scanned files in the project. */
     private final int numberOfFiles;
 
     /**
-     * Creates a new instance of <code>TasksResult</code>.
+     * Creates a new instance of {@link TasksResult}.
      *
      * @param build
      *            the current build as owner of this action
@@ -52,7 +52,8 @@ public class TasksResult extends BuildResult {
      * @param lowTags
      *            tag identifiers indicating low priority
      */
-    public TasksResult(final AbstractBuild<?, ?> build, final String defaultEncoding, final TasksParserResult result, final String highTags, final String normalTags, final String lowTags) {
+    public TasksResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
+            final TasksParserResult result, final String highTags, final String normalTags, final String lowTags) {
         super(build, defaultEncoding, result);
 
         this.highTags = highTags;
@@ -62,32 +63,8 @@ public class TasksResult extends BuildResult {
         numberOfFiles = result.getNumberOfScannedFiles();
     }
 
-    /** {@inheritDoc} */
-    @Override
-    protected Object readResolve() {
-        super.readResolve();
-
-        if (numberOfTasks != 0) {
-            setHighWarnings(highPriorityTasks);
-            setNormalWarnings(normalPriorityTasks);
-            setLowWarnings(lowPriorityTasks);
-            setWarnings(numberOfTasks);
-            if (high != null) {
-                highTags = high;
-            }
-            if (normal != null) {
-                normalTags = normal;
-            }
-            if (low != null) {
-                lowTags = low;
-            }
-        }
-
-        return this;
-    }
-
     /**
-     * Creates a new instance of <code>TasksResult</code>.
+     * Creates a new instance of {@link TasksResult}.
      *
      * @param build
      *            the current build as owner of this action
@@ -104,7 +81,9 @@ public class TasksResult extends BuildResult {
      * @param lowTags
      *            tag identifiers indicating low priority
      */
-    public TasksResult(final AbstractBuild<?, ?> build, final String defaultEncoding, final TasksParserResult result, final BuildResult previous, final String highTags, final String normalTags, final String lowTags) {
+    public TasksResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
+            final TasksParserResult result, final BuildResult previous,
+            final String highTags, final String normalTags, final String lowTags) {
         super(build, defaultEncoding, result, previous);
 
         this.highTags = highTags;
@@ -113,7 +92,6 @@ public class TasksResult extends BuildResult {
 
         numberOfFiles = result.getNumberOfScannedFiles();
     }
-
 
     /**
      * Returns a summary message for the summary.jelly file.
@@ -230,32 +208,10 @@ public class TasksResult extends BuildResult {
         return hudson.plugins.tasks.util.Messages.PackageDetail_header();
     }
 
-    // FIXME: Generalize and pull up?
-    /**
-     * Returns the results of the previous build.
-     *
-     * @return the result of the previous build, or <code>null</code> if no
-     *         such build exists
-     */
+    /** {@inheritDoc} */
     @Override
-    protected JavaProject getPreviousResult() {
-        TasksResultAction action = getOwner().getAction(TasksResultAction.class);
-        if (action.hasPreviousResultAction()) {
-            return action.getPreviousResultAction().getResult().getProject();
-        }
-        else {
-            return new JavaProject();
-        }
-    }
-
-    /**
-     * Returns whether a previous build result exists.
-     *
-     * @return <code>true</code> if a previous build result exists.
-     */
-    @Override
-    protected boolean hasPreviousResult() {
-        return getOwner().getAction(TasksResultAction.class).hasPreviousResultAction();
+    protected Class<? extends ResultAction<? extends BuildResult>> getResultActionType() {
+        return TasksResultAction.class;
     }
 
     /** {@inheritDoc} */
@@ -266,12 +222,16 @@ public class TasksResult extends BuildResult {
 
     // Backward compatibility. Do not remove.
     // CHECKSTYLE:OFF
+    @SuppressWarnings("unused")
     @Deprecated
     private transient int numberOfTasks;
+    @SuppressWarnings("unused")
     @Deprecated
     private transient int highPriorityTasks;
+    @SuppressWarnings("unused")
     @Deprecated
     private transient int lowPriorityTasks;
+    @SuppressWarnings("unused")
     @Deprecated
     private transient int normalPriorityTasks;
 }

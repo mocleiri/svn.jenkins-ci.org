@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FishEyeCVS.DescriptorImpl (Hudson core 1.291 API)
+FishEyeCVS.DescriptorImpl (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FishEyeCVS.DescriptorImpl (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FishEyeCVS.DescriptorImpl (Hudson core 1.291 API)";
+        parent.document.title="FishEyeCVS.DescriptorImpl (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -150,6 +150,15 @@ java.lang.Object
 <TD><CODE><A HREF="../../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
@@ -177,9 +186,8 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/scm/browsers/FishEyeCVS.DescriptorImpl.html#doCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCheck</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-        org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/scm/browsers/FishEyeCVS.DescriptorImpl.html#doCheck(java.lang.String)">doCheck</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -258,13 +266,13 @@ public java.lang.String <B>getDisplayName</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="doCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doCheck(java.lang.String)"><!-- --></A><H3>
 doCheck</H3>
 <PRE>
-public void <B>doCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                    org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-             throws java.io.IOException,
-                    javax.servlet.ServletException</PRE>
+public <A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheck</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                              java.lang.String&nbsp;value)
+                       throws java.io.IOException,
+                              javax.servlet.ServletException</PRE>
 <DL>
 <DD><DL>
 

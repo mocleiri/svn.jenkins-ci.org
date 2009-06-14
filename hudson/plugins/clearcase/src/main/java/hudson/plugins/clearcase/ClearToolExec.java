@@ -1,3 +1,27 @@
+/**
+ * The MIT License
+ *
+ * Copyright (c) 2007-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt,
+ *                          Henrik Lynggaard, Peter Liljenberg, Andrew Bayer
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package hudson.plugins.clearcase;
 
 import hudson.AbortException;
@@ -49,6 +73,7 @@ public abstract class ClearToolExec implements ClearTool {
 		cmd.add("-r");
 		cmd.add("-since", formatter.format(lastBuildDate).toLowerCase());
 		cmd.add("-fmt", format);
+                //		cmd.addQuoted(format);
 		if ((branch != null) && (branch.length() > 0)) {
 			cmd.add("-branch", "brtype:" + branch);
 		}
@@ -148,36 +173,38 @@ public abstract class ClearToolExec implements ClearTool {
 		baos.close();
 		return retString;
 	}
+    
+ 
 
-	private List<String> parseListOutput(Reader consoleReader,
-			boolean onlyStarMarked) throws IOException {
-		List<String> views = new ArrayList<String>();
-		BufferedReader reader = new BufferedReader(consoleReader);
-		String line = reader.readLine();
-		while (line != null) {
-			Matcher matcher = viewListPattern.matcher(line);
-			if (matcher.find() && matcher.groupCount() == 3) {
-				if ((!onlyStarMarked)
-						|| (onlyStarMarked && matcher.group(1).equals("*"))) {
-					String vob = matcher.group(2);
-					int pos = Math.max(vob.lastIndexOf('\\'), vob
-							.lastIndexOf('/'));
-					if (pos != -1) {
-						vob = vob.substring(pos + 1);
-					}
-					views.add(vob);
-				}
-			}
-			line = reader.readLine();
-		}
-		reader.close();
-		return views;
-	}
-
-	private Pattern getListPattern() {
-		if (viewListPattern == null) {
-			viewListPattern = Pattern.compile("(.)\\s*(\\S*)\\s*(\\S*)");
-		}
-		return viewListPattern;
-	}
+    private List<String> parseListOutput(Reader consoleReader,
+                                         boolean onlyStarMarked) throws IOException {
+        List<String> views = new ArrayList<String>();
+        BufferedReader reader = new BufferedReader(consoleReader);
+        String line = reader.readLine();
+        while (line != null) {
+            Matcher matcher = viewListPattern.matcher(line);
+            if (matcher.find() && matcher.groupCount() == 3) {
+                if ((!onlyStarMarked)
+                    || (onlyStarMarked && matcher.group(1).equals("*"))) {
+                    String vob = matcher.group(2);
+                    int pos = Math.max(vob.lastIndexOf('\\'), vob
+                                       .lastIndexOf('/'));
+                    if (pos != -1) {
+                        vob = vob.substring(pos + 1);
+                    }
+                    views.add(vob);
+                }
+            }
+            line = reader.readLine();
+        }
+        reader.close();
+        return views;
+    }
+    
+    private Pattern getListPattern() {
+        if (viewListPattern == null) {
+            viewListPattern = Pattern.compile("(.)\\s*(\\S*)\\s*(\\S*)");
+        }
+        return viewListPattern;
+    }
 }

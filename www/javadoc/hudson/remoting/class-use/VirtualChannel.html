@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.remoting.VirtualChannel (Hudson core 1.96 API)
+Uses of Interface hudson.remoting.VirtualChannel (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2007-04-03">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.remoting.VirtualChannel (Hudson core 1.96 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.remoting.VirtualChannel (Hudson core 1.96 API)";
+        parent.document.title="Uses of Interface hudson.remoting.VirtualChannel (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -42,7 +42,7 @@ function windowTitle()
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting"><FONT CLASS="NavBarFont1"><B>Class</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Use</B></FONT>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../overview-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
@@ -59,7 +59,7 @@ function windowTitle()
 &nbsp;PREV&nbsp;
 &nbsp;NEXT</FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-  <A HREF="../../../index.html?hudson/remoting/\class-useVirtualChannel.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+  <A HREF="../../../index.html?hudson/remoting//class-useVirtualChannel.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="VirtualChannel.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
 &nbsp;<SCRIPT type="text/javascript">
   <!--
@@ -99,8 +99,33 @@ Packages that use <A HREF="../../../hudson/remoting/VirtualChannel.html" title="
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.node_monitors"><B>hudson.node_monitors</B></A></TD>
+<TD>Code that monitors the health of slaves&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.os"><B>hudson.os</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.remoting"><B>hudson.remoting</B></A></TD>
 <TD>Remoting infrastructure for Hudson.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.slaves"><B>hudson.slaves</B></A></TD>
+<TD>Code related to slaves.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks"><B>hudson.tasks</B></A></TD>
+<TD>Built-in <a href="../../../hudson/tasks/Builder.html"><tt>Builder</tt></a>s and <a href="../../../hudson/tasks/Publisher.html"><tt>Publisher</tt></a>s
+that perform the actual heavy-lifting of a build.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks.labelers"><B>hudson.tasks.labelers</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.util"><B>hudson.util</B></A></TD>
+<TD>Other miscellaneous utility code&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -138,18 +163,18 @@ Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
-<TD><CODE><B>FilePath.</B><B><A HREF="../../../hudson/FilePath.html#getChannel()">getChannel</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
 <TD><CODE><B>Launcher.</B><B><A HREF="../../../hudson/Launcher.html#getChannel()">getChannel</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the channel that can be used to run a program remotely.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<TD><CODE><B>FilePath.</B><B><A HREF="../../../hudson/FilePath.html#getChannel()">getChannel</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -158,6 +183,14 @@ Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/package-summary.html">hudson</A> with parameters of type <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
+<TD><CODE><B>EnvVars.</B><B><A HREF="../../../hudson/EnvVars.html#getRemote(hudson.remoting.VirtualChannel)">getRemote</A></B>(<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the environment variables of a remote peer.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -181,7 +214,7 @@ Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface 
          java.lang.String&nbsp;remote)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a <A HREF="../../../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> that represents a path on the given node.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../hudson/Launcher.LocalLauncher.html#Launcher.LocalLauncher(hudson.model.TaskListener, hudson.remoting.VirtualChannel)">Launcher.LocalLauncher</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
@@ -224,14 +257,6 @@ Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
-<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#getChannel()">getChannel</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the channel that can be used to run a program on this computer.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
 <TD><CODE><B>Hudson.MasterComputer.</B><B><A HREF="../../../hudson/model/Hudson.MasterComputer.html#getChannel()">getChannel</A></B>()</CODE>
 
@@ -240,11 +265,64 @@ Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
-<TD><CODE><B>Slave.ComputerImpl.</B><B><A HREF="../../../hudson/model/Slave.ComputerImpl.html#getChannel()">getChannel</A></B>()</CODE>
+<CODE>abstract &nbsp;<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#getChannel()">getChannel</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the channel that can be used to run a program on this computer.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.node_monitors"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A> in <A HREF="../../../hudson/node_monitors/package-summary.html">hudson.node_monitors</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/node_monitors/package-summary.html">hudson.node_monitors</A> with parameters of type <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/node_monitors/DiskSpaceMonitorDescriptor.DiskSpace.html" title="class in hudson.node_monitors">DiskSpaceMonitorDescriptor.DiskSpace</A></CODE></FONT></TD>
+<TD><CODE><B>TemporarySpaceMonitor.GetTempSpace.</B><B><A HREF="../../../hudson/node_monitors/TemporarySpaceMonitor.GetTempSpace.html#invoke(java.io.File, hudson.remoting.VirtualChannel)">invoke</A></B>(java.io.File&nbsp;f,
+       <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.os"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A> in <A HREF="../../../hudson/os/package-summary.html">hudson.os</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/os/package-summary.html">hudson.os</A> that return <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<TD><CODE><B>SU.</B><B><A HREF="../../../hudson/os/SU.html#start(hudson.model.TaskListener, java.lang.String, java.lang.String)">start</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+      java.lang.String&nbsp;rootUsername,
+      java.lang.String&nbsp;rootPassword)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting"><CODE>VirtualChannel</CODE></A> that's connected to the priviledge-escalated environment.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -282,6 +360,131 @@ Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface 
 </TABLE>
 &nbsp;
 <P>
+<A NAME="hudson.slaves"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A> in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A> that return <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<TD><CODE><B>SlaveComputer.</B><B><A HREF="../../../hudson/slaves/SlaveComputer.html#getChannel()">getChannel</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A> in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A> with parameters of type <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Set&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B>LabelFinder.</B><B><A HREF="../../../hudson/tasks/LabelFinder.html#findLabels(hudson.remoting.VirtualChannel)">findLabels</A></B>(<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find the labels that the node supports.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Set&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B>DynamicLabeler.</B><B><A HREF="../../../hudson/tasks/DynamicLabeler.html#findLabels(hudson.remoting.VirtualChannel)">findLabels</A></B>(<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find the labels that the node supports.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks.labelers"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A> in <A HREF="../../../hudson/tasks/labelers/package-summary.html">hudson.tasks.labelers</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/tasks/labelers/package-summary.html">hudson.tasks.labelers</A> with parameters of type <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Set&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B>OSLabeler.</B><B><A HREF="../../../hudson/tasks/labelers/OSLabeler.html#findLabels(hudson.remoting.VirtualChannel)">findLabels</A></B>(<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.util"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A> in <A HREF="../../../hudson/util/package-summary.html">hudson.util</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/util/package-summary.html">hudson.util</A> with parameters of type <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>RemotingDiagnostics.</B><B><A HREF="../../../hudson/util/RemotingDiagnostics.html#executeGroovy(java.lang.String, hudson.remoting.VirtualChannel)">executeGroovy</A></B>(java.lang.String&nbsp;script,
+              <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes Groovy script remotely.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.Map&lt;java.lang.Object,java.lang.Object&gt;</CODE></FONT></TD>
+<TD><CODE><B>RemotingDiagnostics.</B><B><A HREF="../../../hudson/util/RemotingDiagnostics.html#getSystemProperties(hudson.remoting.VirtualChannel)">getSystemProperties</A></B>(<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.Map&lt;java.lang.String,java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B>RemotingDiagnostics.</B><B><A HREF="../../../hudson/util/RemotingDiagnostics.html#getThreadDump(hudson.remoting.VirtualChannel)">getThreadDump</A></B>(<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <HR>
 
 
@@ -298,7 +501,7 @@ Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface 
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting"><FONT CLASS="NavBarFont1"><B>Class</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Use</B></FONT>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../overview-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
@@ -315,7 +518,7 @@ Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface 
 &nbsp;PREV&nbsp;
 &nbsp;NEXT</FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-  <A HREF="../../../index.html?hudson/remoting/\class-useVirtualChannel.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+  <A HREF="../../../index.html?hudson/remoting//class-useVirtualChannel.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="VirtualChannel.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
 &nbsp;<SCRIPT type="text/javascript">
   <!--
@@ -336,6 +539,6 @@ Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface 
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &copy; 2007 null. All Rights Reserved.
+Copyright &#169; 2009. All Rights Reserved.
 </BODY>
 </HTML>

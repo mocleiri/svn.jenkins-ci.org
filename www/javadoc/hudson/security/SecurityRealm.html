@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SecurityRealm (Hudson core 1.291 API)
+SecurityRealm (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SecurityRealm (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SecurityRealm (Hudson core 1.291 API)";
+        parent.document.title="SecurityRealm (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -275,6 +275,14 @@ Pluggable security realm that connects external user database to Hudson.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> allows online sign-up.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/SecurityRealm.html#canLogOut()">canLogOut</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> supports explicit logout operation.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -551,6 +559,32 @@ public java.lang.String <B>getLoginUrl</B>()</PRE>
 </DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="canLogOut()"><!-- --></A><H3>
+canLogOut</H3>
+<PRE>
+public boolean <B>canLogOut</B>()</PRE>
+<DL>
+<DD>Returns true if this <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> supports explicit logout operation.
+
+ <p>
+ If the method returns false, "logout" link will not be displayed. This is useful
+ when authentication doesn't require an explicit login activity (such as NTLM authentication
+ or Kerberos authentication, where Hudson has no ability to log off the current user.)
+
+ <p>
+ By default, this method returns true.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.307</DD>
 </DL>
 </DD>
 </DL>

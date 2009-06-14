@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbortException (Hudson core 1.291 API)
+AbortException (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbortException (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbortException (Hudson core 1.291 API)";
+        parent.document.title="AbortException (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -108,7 +108,7 @@ java.lang.Object
 </PRE>
 
 <P>
-Signals a failure where the error message was reported.
+Signals a failure where the error was anticipated and diagnosed.
  When this exception is caughted,
  the stack trace will not be printed, and the build will be marked as a failure.
 <P>
@@ -135,6 +135,12 @@ Signals a failure where the error message was reported.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../hudson/AbortException.html#AbortException(java.lang.String)">AbortException</A></B>(java.lang.String&nbsp;message)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When this exception is caught, the specified message will be reported.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -183,6 +189,20 @@ AbortException</H3>
 <PRE>
 public <B>AbortException</B>()</PRE>
 <DL>
+</DL>
+<HR>
+
+<A NAME="AbortException(java.lang.String)"><!-- --></A><H3>
+AbortException</H3>
+<PRE>
+public <B>AbortException</B>(java.lang.String&nbsp;message)</PRE>
+<DL>
+<DD>When this exception is caught, the specified message will be reported.
+<P>
+<DL>
+<DT><B>Since:</B></DT>
+  <DD>1.298</DD>
+</DL>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>

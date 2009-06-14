@@ -25,26 +25,21 @@
 package hudson.plugins.hadoop;
 
 import hudson.FilePath;
-import static hudson.FilePath.TarCompression.GZIP;
-import hudson.Launcher.LocalLauncher;
 import hudson.Plugin;
-import hudson.Proc;
-import hudson.model.Computer;
 import hudson.model.Hudson;
 import hudson.model.TaskListener;
 import hudson.remoting.Channel;
-import hudson.remoting.Which;
 import hudson.slaves.Channels;
-import hudson.util.ArgumentListBuilder;
+import hudson.util.ClasspathBuilder;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hdfs.DFSClient;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.URL;
+import java.util.Collections;
 
 /**
  * Hadoop plugin.
@@ -63,12 +58,28 @@ public class PluginImpl extends Plugin {
      * Determines the HDFS URL.
      */
     public String getHdfsUrl() throws MalformedURLException {
+        InetSocketAddress a = getHdfsAddress();
+        if(a==null)     return null;
+        return "hdfs://"+a.getHostName()+":"+a.getPort()+"/";
+    }
+
+    /**
+     * Determines the HDFS connection endpoint.
+     */
+    public InetSocketAddress getHdfsAddress() throws MalformedURLException {
         // TODO: port should be configurable
         String rootUrl = Hudson.getInstance().getRootUrl();
         if(rootUrl==null)
             return null;
         URL url = new URL(rootUrl);
-        return "hdfs://"+url.getHost()+":9000/";
+        return new InetSocketAddress(url.getHost(),9000);
+    }
+
+    /**
+     * Connects to this HDFS.
+     */
+    public DFSClient createDFSClient() throws IOException {
+        return new DFSClient(getHdfsAddress(),new Configuration(false));
     }
 
     /**
@@ -92,46 +103,15 @@ public class PluginImpl extends Plugin {
     static /*package*/ Channel createHadoopVM(File rootDir, TaskListener listener) throws IOException, InterruptedException {
         // install Hadoop if it's not there
         rootDir = new File(rootDir,"hadoop");
-        File distDir = new File(rootDir,"dist");
+        FilePath distDir = new FilePath(new File(rootDir,"dist"));
+        distDir.installIfNecessaryFrom(PluginImpl.class.getResource("hadoop.tar.gz"),listener,"Hadoop");
+
         File logDir = new File(rootDir,"logs");
-        // TODO: do the up-to-date check based on MD5 checksum of the tgz file or something
-        if(!distDir.exists()) {
-            listener.getLogger().println("Installing Hadoop binaries");
-            new FilePath(distDir).untarFrom(PluginImpl.class.getResourceAsStream("hadoop.tar.gz"),GZIP);
-        }
         logDir.mkdirs();
 
-        // launch Hadoop in a new JVM and have them connect back to us
-        ServerSocket serverSocket = new ServerSocket();
-        serverSocket.bind(null);
-        serverSocket.setSoTimeout(10*1000);
-
-        ArgumentListBuilder args = new ArgumentListBuilder();
-        args.add(new File(System.getProperty("java.home"),"bin/java"));
-        args.add("-Dhadoop.log.dir="+logDir); // without this job tracker dies with NPE
-        args.add("-jar");
-        args.add(Which.jarFile(Channel.class));
-
-        // build up a classpath
-        StringBuilder classpath = new StringBuilder();
-        for( String mask : new String[]{"hadoop-*-core.jar","lib/**/*.jar"}) {
-            for(FilePath jar : new FilePath(distDir).list(mask)) {
-                if(classpath.length()>0)    classpath.append(File.pathSeparatorChar);
-                classpath.append(jar.getRemote());
-            }
-        }
-        args.add("-cp").add(classpath);
-
-        args.add("-connectTo","localhost:"+serverSocket.getLocalPort());
-
-        listener.getLogger().println("Starting Hadoop");
-        Proc p = new LocalLauncher(listener).launch(args.toCommandArray(), new String[0], listener.getLogger(), null);
-
-        Socket s = serverSocket.accept();
-        serverSocket.close();
-
-        return Channels.forProcess("Channel to Hadoop", Computer.threadPoolForRemoting,
-                new BufferedInputStream(s.getInputStream()), new BufferedOutputStream(s.getOutputStream()), p);
+        return Channels.newJVM("Hadoop",listener,null,
+                new ClasspathBuilder().addAll(distDir,"hadoop-*-core.jar").addAll(distDir,"lib/**/*.jar").add(distDir.child("conf")),
+                Collections.singletonMap("hadoop.log.dir",logDir.getAbsolutePath()));
     }
 
     @Override

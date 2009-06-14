@@ -1,7 +1,7 @@
 <!--
 The MIT License
 
-Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Stephen Connolly, id:cactusman
+Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Stephen Connolly, id:cactusman, Yahoo! Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ THE SOFTWARE.
       <j:if test="${!c.acceptingTasks}"> (${%suspended})</j:if>
     </d:tag>
   </d:taglib>
-  <j:set var="computers" value="${h.ifThenElse(attrs.computers!=null, attrs.computers, app.computers)}" />
+  <j:set var="computers" value="${attrs.computers?:app.computers}" />
 	<l:pane title="&lt;a href='${rootURL}/computer/'>${%Build Executor Status}&lt;/a>" width="3" id="executors">
 	  <j:forEach var="c" items="${computers}" varStatus="cloop">
 	    <j:choose>
@@ -95,9 +95,18 @@ THE SOFTWARE.
 	          </j:when>
 	          <j:otherwise>
 	            <td class="pane">
-	              <div nowrap="true">${%Building} <a href="${rootURL}/${e.currentExecutable.url}">${e.currentExecutable}</a></div>
-                <t:buildProgressBar build="${e.currentExecutable}"/>
-	            </td>
+                <div nowrap="true">${%Building}
+                  <j:choose>
+                    <j:when test="${h.hasPermission(e.currentExecutable.parent,e.currentExecutable.parent.READ)}">
+                      <a href="${rootURL}/${e.currentExecutable.url}">${e.currentExecutable}</a>
+                      <t:buildProgressBar build="${e.currentExecutable}" executor="${e}"/>
+                    </j:when>
+                    <j:otherwise>
+                      <span>${%Unknown Task}</span>
+                    </j:otherwise>
+                  </j:choose>
+                </div>
+              </td>
 	            <td class="pane" align="center" valign="middle">
                 <j:if test="${e.hasStopPermission()}">
                   <a href="${rootURL}/computers/${cloop.index}/executors/${eloop.index}/stop"><img src="${imagesURL}/16x16/stop.gif" alt="${%terminate this build}" /></a>
@@ -111,7 +120,7 @@ THE SOFTWARE.
     <!-- schedule updates only for the full page reload -->
     <j:if test="${ajax==null and !h.isAutoRefresh(request) and h.hasPermission(app.READ)}">
       <script defer="defer">
-        refreshPart('executors',"${h.ifThenElse(h.hasView(it,'ajaxExecutors'),'.',rootURL)}/ajaxExecutors");
+        refreshPart('executors',"${h.hasView(it,'ajaxExecutors')?'.':rootURL}/ajaxExecutors");
       </script>
     </j:if>
 	</l:pane>

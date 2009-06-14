@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE>
-Index (Test harness for Hudson and plugins 1.291 API)
+Index (Test harness for Hudson and plugins 1.307 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Test harness for Hudson and plugins 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Test harness for Hudson and plugins 1.291 API)";
+        parent.document.title="Index (Test harness for Hudson and plugins 1.307 API)";
     }
 }
 </SCRIPT>
@@ -101,6 +101,9 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTes
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatusSuccess(R)"><B>assertBuildStatusSuccess(R)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertEqualBeans(java.lang.Object, java.lang.Object, java.lang.String)"><B>assertEqualBeans(Object, Object, String)</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>Asserts that two JavaBeans are equal as far as the given list of properties are concerned.
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertLogContains(java.lang.String, hudson.model.Run)"><B>assertLogContains(String, Run)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Asserts that the console output of the build contains the given substring.
@@ -268,6 +271,9 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/CaptureEn
 <DT><A HREF="./org/jvnet/hudson/test/rhino/JavaScriptDebugger.html#getFrame(org.mozilla.javascript.Context, org.mozilla.javascript.debug.DebuggableScript)"><B>getFrame(Context, DebuggableScript)</B></A> - 
 Method in class org.jvnet.hudson.test.rhino.<A HREF="./org/jvnet/hudson/test/rhino/JavaScriptDebugger.html" title="class in org.jvnet.hudson.test.rhino">JavaScriptDebugger</A>
 <DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/JavaNetReverseProxy.html#getInstance()"><B>getInstance()</B></A> - 
+Static method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/JavaNetReverseProxy.html" title="class in org.jvnet.hudson.test">JavaNetReverseProxy</A>
+<DD>Gets the default instance.
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.WebClient.html#getPage(hudson.model.Run)"><B>getPage(Run)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.WebClient.html" title="class in org.jvnet.hudson.test">HudsonTestCase.WebClient</A>
 <DD>Short for <code>getPage(r,"")</code>, to access the top page of a build.
@@ -345,11 +351,18 @@ Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/Hud
 <DT><A HREF="./org/jvnet/hudson/test/HudsonPageCreator.html#INSTANCE"><B>INSTANCE</B></A> - 
 Static variable in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonPageCreator.html" title="class in org.jvnet.hudson.test">HudsonPageCreator</A>
 <DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#interactiveBreak()"><B>interactiveBreak()</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>Blocks until the ENTER key is hit.
 </DL>
 <HR>
 <A NAME="_J_"><!-- --></A><H2>
 <B>J</B></H2>
 <DL>
+<DT><A HREF="./org/jvnet/hudson/test/JavaNetReverseProxy.html" title="class in org.jvnet.hudson.test"><B>JavaNetReverseProxy</B></A> - Class in <A HREF="./org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A><DD>Acts as a reverse proxy to https://hudson.dev.java.net/ , so that during a test
+ we can avoid hitting java.net.<DT><A HREF="./org/jvnet/hudson/test/JavaNetReverseProxy.html#JavaNetReverseProxy(java.io.File)"><B>JavaNetReverseProxy(File)</B></A> - 
+Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/JavaNetReverseProxy.html" title="class in org.jvnet.hudson.test">JavaNetReverseProxy</A>
+<DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/rhino/JavaScriptDebugger.html" title="class in org.jvnet.hudson.test.rhino"><B>JavaScriptDebugger</B></A> - Class in <A HREF="./org/jvnet/hudson/test/rhino/package-summary.html">org.jvnet.hudson.test.rhino</A><DD>Monitors the execution of the JavaScript inside HtmlUnit, and provides debug information
  such as call stacks, variables, arguments, etc.<DT><A HREF="./org/jvnet/hudson/test/rhino/JavaScriptDebugger.html#JavaScriptDebugger()"><B>JavaScriptDebugger()</B></A> - 
 Constructor for class org.jvnet.hudson.test.rhino.<A HREF="./org/jvnet/hudson/test/rhino/JavaScriptDebugger.html" title="class in org.jvnet.hudson.test.rhino">JavaScriptDebugger</A>
@@ -372,6 +385,9 @@ Constructor for class org.jvnet.hudson.test.recipes.<A HREF="./org/jvnet/hudson/
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#localPort"><B>localPort</B></A> - 
 Variable in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>TCP/IP port that the server is listening on.
+<DT><A HREF="./org/jvnet/hudson/test/JavaNetReverseProxy.html#localPort"><B>localPort</B></A> - 
+Variable in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/JavaNetReverseProxy.html" title="class in org.jvnet.hudson.test">JavaNetReverseProxy</A>
+<DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.WebClient.html#login(java.lang.String, java.lang.String)"><B>login(String, String)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.WebClient.html" title="class in org.jvnet.hudson.test">HudsonTestCase.WebClient</A>
 <DD>Logs in to Hudson.
@@ -482,9 +498,18 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTes
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#search(java.lang.String)"><B>search(String)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Performs a search from the search box.
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.WebClient.html#search(java.lang.String)"><B>search(String)</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.WebClient.html" title="class in org.jvnet.hudson.test">HudsonTestCase.WebClient</A>
+<DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#server"><B>server</B></A> - 
 Variable in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/JavaNetReverseProxy.html#service(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)"><B>service(HttpServletRequest, HttpServletResponse)</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/JavaNetReverseProxy.html" title="class in org.jvnet.hudson.test">JavaNetReverseProxy</A>
+<DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#setJavaNetCredential()"><B>setJavaNetCredential()</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>Sets guest credentials to access java.net Subversion repo.
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#setUp()"><B>setUp()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>&nbsp;
@@ -515,9 +540,15 @@ Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/Sle
 <DT><A HREF="./org/jvnet/hudson/test/SleepBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test"><B>SleepBuilder.DescriptorImpl</B></A> - Class in <A HREF="./org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A><DD>&nbsp;<DT><A HREF="./org/jvnet/hudson/test/SleepBuilder.DescriptorImpl.html#SleepBuilder.DescriptorImpl()"><B>SleepBuilder.DescriptorImpl()</B></A> - 
 Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/SleepBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">SleepBuilder.DescriptorImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/JavaNetReverseProxy.html#stop()"><B>stop()</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/JavaNetReverseProxy.html" title="class in org.jvnet.hudson.test">JavaNetReverseProxy</A>
+<DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#submit(com.gargoylesoftware.htmlunit.html.HtmlForm)"><B>submit(HtmlForm)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Submits the form.
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#submit(com.gargoylesoftware.htmlunit.html.HtmlForm, java.lang.String)"><B>submit(HtmlForm, String)</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>Submits the form by clikcing the submit button of the given name.
 </DL>
 <HR>
 <A NAME="_T_"><!-- --></A><H2>

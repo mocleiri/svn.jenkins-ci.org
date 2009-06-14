@@ -4,7 +4,7 @@ import hudson.model.AbstractBuild;
 import hudson.plugins.pmd.parser.Bug;
 import hudson.plugins.pmd.util.BuildResult;
 import hudson.plugins.pmd.util.ParserResult;
-import hudson.plugins.pmd.util.model.JavaProject;
+import hudson.plugins.pmd.util.ResultAction;
 
 /**
  * Represents the results of the PMD analysis. One instance of this class is persisted for
@@ -20,7 +20,7 @@ public class PmdResult extends BuildResult {
     }
 
     /**
-     * Creates a new instance of <code>PmdResult</code>.
+     * Creates a new instance of {@link PmdResult}.
      *
      * @param build
      *            the current build as owner of this action
@@ -29,12 +29,13 @@ public class PmdResult extends BuildResult {
      * @param result
      *            the parsed result with all annotations
      */
-    public PmdResult(final AbstractBuild<?, ?> build, final String defaultEncoding, final ParserResult result) {
+    public PmdResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
+            final ParserResult result) {
         super(build, defaultEncoding, result);
     }
 
     /**
-     * Creates a new instance of <code>PmdResult</code>.
+     * Creates a new instance of {@link PmdResult}.
      *
      * @param build
      *            the current build as owner of this action
@@ -45,7 +46,8 @@ public class PmdResult extends BuildResult {
      * @param previous
      *            the result of the previous build
      */
-    public PmdResult(final AbstractBuild<?, ?> build, final String defaultEncoding, final ParserResult result, final PmdResult previous) {
+    public PmdResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
+            final ParserResult result, final PmdResult previous) {
         super(build, defaultEncoding, result, previous);
     }
 
@@ -107,29 +109,12 @@ public class PmdResult extends BuildResult {
     }
 
     /**
-     * Returns the results of the previous build.
+     * Returns the actual type of the associated result action.
      *
-     * @return the result of the previous build, or <code>null</code> if no
-     *         such build exists
+     * @return the actual type of the associated result action
      */
     @Override
-    public JavaProject getPreviousResult() {
-        PmdResultAction action = getOwner().getAction(PmdResultAction.class);
-        if (action.hasPreviousResultAction()) {
-            return action.getPreviousResultAction().getResult().getProject();
-        }
-        else {
-            return null;
-        }
-    }
-
-    /**
-     * Returns whether a previous build result exists.
-     *
-     * @return <code>true</code> if a previous build result exists.
-     */
-    @Override
-    public boolean hasPreviousResult() {
-        return getOwner().getAction(PmdResultAction.class).hasPreviousResultAction();
+    protected Class<? extends ResultAction<? extends BuildResult>> getResultActionType() {
+        return PmdResultAction.class;
     }
 }

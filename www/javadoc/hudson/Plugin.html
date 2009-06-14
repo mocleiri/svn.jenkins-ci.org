@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Plugin (Hudson core 1.291 API)
+Plugin (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Plugin (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Plugin (Hudson core 1.291 API)";
+        parent.document.title="Plugin (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../hudson/PermalinkList.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../hudson/Platform.html" title="enum in hudson"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../hudson/PluginManager.html" title="class in hudson"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/Plugin.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -159,6 +159,15 @@ Base class of Hudson plugin.
  supply one on its own.</TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
@@ -190,6 +199,15 @@ Base class of Hudson plugin.
 <TD><CODE><B><A HREF="../hudson/Plugin.html#configure(net.sf.json.JSONObject)">configure</A></B>(net.sf.json.JSONObject&nbsp;formData)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.305 override <A HREF="../hudson/Plugin.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>configure(StaplerRequest,JSONObject)</CODE></A> instead</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Plugin.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+          net.sf.json.JSONObject&nbsp;formData)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handles the submission for the system configuration.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -217,6 +235,14 @@ Base class of Hudson plugin.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads serializable fields of this instance from the persisted storage.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Plugin.html#postInitialize()">postInitialize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called after <A HREF="../hudson/Plugin.html#start()"><CODE>start()</CODE></A> is called for all the plugins.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -351,9 +377,10 @@ public void <B>start</B>()
  stage and not all the data are loaded in Hudson.
 
  <p>
- Plugins should override this method and register custom
- <A HREF="../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A>, <A HREF="../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A>, <A HREF="../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A>, and <A HREF="../hudson/triggers/Trigger.html" title="class in hudson.triggers"><CODE>Trigger</CODE></A>s to the corresponding list.
- See <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A> for the complete list of extension points in Hudson.
+ If a plugin wants to run an initialization step after all plugins and extension points
+ are registered, a good place to do that is <A HREF="../hudson/Plugin.html#postInitialize()"><CODE>postInitialize()</CODE></A>.
+ If a plugin wants to run an initialization step after all the jobs are loaded,
+ <A HREF="../hudson/model/listeners/ItemListener.html#onLoaded()"><CODE>ItemListener.onLoaded()</CODE></A> is a good place.
 <P>
 <DD><DL>
 </DL>
@@ -363,7 +390,27 @@ public void <B>start</B>()
 <DT><B>Throws:</B>
 <DD><CODE>java.lang.Exception</CODE> - any exception thrown by the plugin during the initialization will disable plugin.<DT><B>Since:</B></DT>
   <DD>1.42</DD>
-<DT><B>See Also:</B><DD><A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A></DL>
+<DT><B>See Also:</B><DD><A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>, 
+<A HREF="../hudson/Plugin.html#postInitialize()"><CODE>postInitialize()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="postInitialize()"><!-- --></A><H3>
+postInitialize</H3>
+<PRE>
+public void <B>postInitialize</B>()
+                    throws java.lang.Exception</PRE>
+<DL>
+<DD>Called after <A HREF="../hudson/Plugin.html#start()"><CODE>start()</CODE></A> is called for all the plugins.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE> - any exception thrown by the plugin during the initialization will disable plugin.</DL>
 </DD>
 </DL>
 <HR>
@@ -404,6 +451,32 @@ public void <B>configure</B>(net.sf.json.JSONObject&nbsp;formData)
                       javax.servlet.ServletException,
                       <A HREF="../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.305 override <A HREF="../hudson/Plugin.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>configure(StaplerRequest,JSONObject)</CODE></A> instead</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE>
+<DD><CODE><A HREF="../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE><DT><B>Since:</B></DT>
+  <DD>1.233</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><!-- --></A><H3>
+configure</H3>
+<PRE>
+public void <B>configure</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                      net.sf.json.JSONObject&nbsp;formData)
+               throws java.io.IOException,
+                      javax.servlet.ServletException,
+                      <A HREF="../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+<DL>
 <DD>Handles the submission for the system configuration.
 
  <p>
@@ -438,7 +511,7 @@ public void <B>configure</B>(net.sf.json.JSONObject&nbsp;formData)
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE>
 <DD><CODE><A HREF="../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE><DT><B>Since:</B></DT>
-  <DD>1.233</DD>
+  <DD>1.305</DD>
 </DL>
 </DD>
 </DL>
@@ -562,7 +635,7 @@ protected <A HREF="../hudson/XmlFile.html" title="class in hudson">XmlFile</A> <
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../hudson/PermalinkList.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../hudson/Platform.html" title="enum in hudson"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../hudson/PluginManager.html" title="class in hudson"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/Plugin.html" target="_top"><B>FRAMES</B></A>  &nbsp;

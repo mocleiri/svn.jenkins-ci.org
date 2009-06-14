@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ComputerSet (Hudson core 1.291 API)
+ComputerSet (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ComputerSet (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ComputerSet (Hudson core 1.291 API)";
+        parent.document.title="ComputerSet (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -156,13 +156,20 @@ Serves as the top of <A HREF="../../hudson/model/Computer.html" title="class in 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ComputerSet.html#doCheckName(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doCheckName</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-            org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-            java.lang.String&nbsp;value)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ComputerSet.html#doCheckName(java.lang.String)">doCheckName</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Makes sure that the given name is good as a slave name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ComputerSet.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accepts submission from the configuration page.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -210,7 +217,8 @@ Serves as the top of <A HREF="../../hudson/model/Computer.html" title="class in 
 <TD><CODE><B><A HREF="../../hudson/model/ComputerSet.html#get_monitors()">get_monitors</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.301
+      Use <A HREF="../../hudson/model/ComputerSet.html#getMonitors()"><CODE>getMonitors()</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -261,6 +269,30 @@ Serves as the top of <A HREF="../../hudson/model/Computer.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>getTotalExecutors()-getBusyExecutors()</code>, plus executors that are being brought online.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ComputerSet.html#getMonitors()">getMonitors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ComputerSet.html#getNodeMonitorDescriptors()">getNodeMonitorDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposing <A HREF="../../hudson/node_monitors/NodeMonitor.html#all()"><CODE>NodeMonitor.all()</CODE></A> for Jelly binding.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.Map&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;,<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ComputerSet.html#getNonIgnoredMonitors()">getNonIgnoredMonitors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a subset pf <A HREF="../../hudson/model/ComputerSet.html#getMonitors()"><CODE>getMonitors()</CODE></A> that are <A HREF="../../hudson/node_monitors/NodeMonitor.html#isIgnored()">not ignored</A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -352,6 +384,9 @@ get_monitors</H3>
 <PRE>
 public static java.util.List&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt; <B>get_monitors</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.301
+      Use <A HREF="../../hudson/model/ComputerSet.html#getMonitors()"><CODE>getMonitors()</CODE></A>.</I>
+<P>
 <DD><DL>
 </DL>
 </DD>
@@ -365,6 +400,43 @@ get_all</H3>
           inline=true)
 </FONT>public <A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>[] <B>get_all</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNodeMonitorDescriptors()"><!-- --></A><H3>
+getNodeMonitorDescriptors</H3>
+<PRE>
+public <A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;&gt; <B>getNodeMonitorDescriptors</B>()</PRE>
+<DL>
+<DD>Exposing <A HREF="../../hudson/node_monitors/NodeMonitor.html#all()"><CODE>NodeMonitor.all()</CODE></A> for Jelly binding.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getMonitors()"><!-- --></A><H3>
+getMonitors</H3>
+<PRE>
+public static <A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;&gt; <B>getMonitors</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNonIgnoredMonitors()"><!-- --></A><H3>
+getNonIgnoredMonitors</H3>
+<PRE>
+public static java.util.Map&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;,<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt; <B>getNonIgnoredMonitors</B>()</PRE>
+<DL>
+<DD>Returns a subset pf <A HREF="../../hudson/model/ComputerSet.html#getMonitors()"><CODE>getMonitors()</CODE></A> that are <A HREF="../../hudson/node_monitors/NodeMonitor.html#isIgnored()">not ignored</A>.
+<P>
 <DD><DL>
 </DL>
 </DD>
@@ -541,17 +613,34 @@ public void <B>doDoCreateItem</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doCheckName(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
+<A NAME="doCheckName(java.lang.String)"><!-- --></A><H3>
 doCheckName</H3>
 <PRE>
-public void <B>doCheckName</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                        org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                        <FONT SIZE="-1">@QueryParameter</FONT>
-                        java.lang.String&nbsp;value)
-                 throws java.io.IOException,
-                        javax.servlet.ServletException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckName</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                  java.lang.String&nbsp;value)
+                           throws java.io.IOException,
+                                  javax.servlet.ServletException</PRE>
 <DL>
 <DD>Makes sure that the given name is good as a slave name.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doConfigSubmit</H3>
+<PRE>
+public final void <B>doConfigSubmit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                          throws java.io.IOException,
+                                 javax.servlet.ServletException</PRE>
+<DL>
+<DD>Accepts submission from the configuration page.
 <P>
 <DD><DL>
 

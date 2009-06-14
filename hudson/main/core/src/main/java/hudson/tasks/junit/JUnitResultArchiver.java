@@ -23,29 +23,33 @@
  */
 package hudson.tasks.junit;
 
+import hudson.Extension;
+import hudson.FilePath;
 import hudson.FilePath.FileCallable;
 import hudson.Launcher;
 import hudson.Util;
-import hudson.Extension;
-import hudson.maven.AbstractMavenProject;
+import hudson.AbortException;
 import hudson.matrix.MatrixAggregatable;
 import hudson.matrix.MatrixAggregator;
 import hudson.matrix.MatrixBuild;
-import hudson.model.*;
+import hudson.model.AbstractBuild;
+import hudson.model.AbstractProject;
+import hudson.model.Action;
+import hudson.model.BuildListener;
+import hudson.model.Result;
 import hudson.remoting.VirtualChannel;
-import hudson.tasks.Publisher;
 import hudson.tasks.BuildStepDescriptor;
+import hudson.tasks.Publisher;
 import hudson.tasks.Recorder;
 import hudson.tasks.test.TestResultAggregator;
 import hudson.tasks.test.TestResultProjectAction;
-import hudson.util.FormFieldValidator;
+import hudson.util.FormValidation;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.types.FileSet;
+import org.kohsuke.stapler.AncestorInPath;
 import org.kohsuke.stapler.DataBoundConstructor;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.QueryParameter;
 
-import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -95,10 +99,6 @@ public class JUnitResultArchiver extends Recorder implements Serializable, Matri
             action = new TestResultAction(build, result, listener);
             if(result.getPassCount()==0 && result.getFailCount()==0)
                 throw new AbortException(Messages.JUnitResultArchiver_ResultIsEmpty());
-        } catch (IOException e) {
-            e.printStackTrace(listener.error("Failed to archive JUnit reports"));
-            build.setResult(Result.FAILURE);
-            return true;
         } catch (AbortException e) {
             if(build.getResult()==Result.FAILURE)
                 // most likely a build failed before it gets to the test phase.
@@ -106,6 +106,10 @@ public class JUnitResultArchiver extends Recorder implements Serializable, Matri
                 return true;
 
             listener.getLogger().println(e.getMessage());
+            build.setResult(Result.FAILURE);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace(listener.error("Failed to archive JUnit reports"));
             build.setResult(Result.FAILURE);
             return true;
         }
@@ -123,7 +127,8 @@ public class JUnitResultArchiver extends Recorder implements Serializable, Matri
         return testResults;
     }
 
-    public Action getProjectAction(hudson.model.Project project) {
+    @Override
+    public Action getProjectAction(AbstractProject<?, ?> project) {
         return new TestResultProjectAction(project);
     }
 
@@ -147,13 +152,12 @@ public class JUnitResultArchiver extends Recorder implements Serializable, Matri
         /**
          * Performs on-the-fly validation on the file mask wildcard.
          */
-        public void doCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-            new FormFieldValidator.WorkspaceFileMask(req,rsp).process();
+        public FormValidation doCheck(@AncestorInPath AbstractProject project, @QueryParameter String value) throws IOException {
+            return FilePath.validateFileMask(project.getWorkspace(),value);
         }
 
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
-            // for Maven we have SurefireArchiver that automatically kicks in.
-            return !AbstractMavenProject.class.isAssignableFrom(jobType);
+            return true;
         }
     }
 }

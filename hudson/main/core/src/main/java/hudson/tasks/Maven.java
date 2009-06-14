@@ -31,40 +31,39 @@ import hudson.Util;
 import hudson.CopyOnWrite;
 import hudson.Launcher.LocalLauncher;
 import hudson.FilePath.FileCallable;
-import hudson.maven.MavenEmbedder;
-import hudson.maven.MavenUtil;
-import hudson.maven.RedeployPublisher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.model.Computer;
-import hudson.model.Descriptor;
 import hudson.model.EnvironmentSpecific;
 import hudson.model.Node;
 import hudson.model.Hudson;
+import hudson.model.TaskListener;
 import hudson.remoting.Callable;
 import hudson.remoting.VirtualChannel;
 import hudson.slaves.NodeSpecific;
 import hudson.tools.ToolDescriptor;
 import hudson.tools.ToolInstallation;
-import hudson.tools.ToolLocationNodeProperty;
+import hudson.tools.DownloadFromUrlInstaller;
+import hudson.tools.ToolInstaller;
+import hudson.tools.ToolProperty;
 import hudson.util.ArgumentListBuilder;
-import hudson.util.FormFieldValidator;
 import hudson.util.NullStream;
 import hudson.util.StreamTaskListener;
 import hudson.util.VariableResolver;
+import hudson.util.FormValidation;
 import net.sf.json.JSONObject;
-import org.apache.maven.embedder.MavenEmbedderException;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.QueryParameter;
 
-import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 import java.util.StringTokenizer;
+import java.util.List;
+import java.util.Collections;
 
 /**
  * Build by using Maven.
@@ -184,9 +183,7 @@ public class Maven extends Builder {
 
         VariableResolver<String> vr = build.getBuildVariableResolver();
 
-        Map<String,String> slaveEnv = EnvVars.getRemote(launcher.getChannel());
-        EnvVars env = new EnvVars(slaveEnv);
-        env.overrideAll(build.getEnvVars());
+        EnvVars env = build.getEnvironment(listener);
 
         String targets = Util.replaceMacro(this.targets,vr);
         targets = env.expand(targets);
@@ -213,11 +210,11 @@ public class Maven extends Builder {
                 String execName = proj.getWorkspace().act(new DecideDefaultMavenCommand(normalizedTarget));
                 args.add(execName);
             } else {
-                mi = mi.forNode(Computer.currentComputer().getNode());
+                mi = mi.forNode(Computer.currentComputer().getNode(), listener);
             	mi = mi.forEnvironment(env);
                 String exec = mi.getExecutable(launcher);
                 if(exec==null) {
-                    listener.fatalError(Messages.Maven_NoExecutable(mi.getMavenHome()));
+                    listener.fatalError(Messages.Maven_NoExecutable(mi.getHome()));
                     return false;
                 }
                 args.add(exec);
@@ -236,8 +233,8 @@ public class Maven extends Builder {
                 // The other solution would be to set M2_HOME if we are calling Maven2 
                 // and MAVEN_HOME for Maven1 (only of use for strange people that
                 // are calling Maven2 from Maven1)
-                env.put("M2_HOME",mi.getMavenHome());
-                env.put("MAVEN_HOME",mi.getMavenHome());
+                env.put("M2_HOME",mi.getHome());
+                env.put("MAVEN_HOME",mi.getHome());
             }
             // just as a precaution
             // see http://maven.apache.org/continuum/faqs.html#how-does-continuum-detect-a-successful-build
@@ -274,13 +271,17 @@ public class Maven extends Builder {
     public static DescriptorImpl DESCRIPTOR;
 
     @Extension
-    public static final class DescriptorImpl extends Descriptor<Builder> {
+    public static final class DescriptorImpl extends BuildStepDescriptor<Builder> {
         @CopyOnWrite
         private volatile MavenInstallation[] installations = new MavenInstallation[0];
 
         public DescriptorImpl() {
             DESCRIPTOR = this;
             load();
+        }
+
+        public boolean isApplicable(Class<? extends AbstractProject> jobType) {
+            return true;
         }
 
         protected void convert(Map<String, Object> oldPropertyBag) {
@@ -302,66 +303,39 @@ public class Maven extends Builder {
 
         public void setInstallations(MavenInstallation... installations) {
             this.installations = installations;
-        }
-
-        @Override
-        public boolean configure(StaplerRequest req, JSONObject json) throws FormException {
-            this.installations = req.bindJSONToList(MavenInstallation.class, json.get("maven")).toArray(new MavenInstallation[0]);
             save();
-            return true;
         }
 
         public Builder newInstance(StaplerRequest req, JSONObject formData) throws FormException {
             return req.bindJSON(Maven.class,formData);
         }
-
-
-    //
-    // web methods
-    //
-        /**
-         * Checks if the MAVEN_HOME is valid.
-         */
-        public void doCheckMavenHome( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-            // this can be used to check the existence of a file on the server, so needs to be protected
-            new FormFieldValidator(req,rsp,true) {
-                public void check() throws IOException, ServletException {
-                    File f = getFileParameter("value");
-                    if(f.getPath().equals("")) {
-                        error(Messages.Maven_MavenHomeRequired());
-                        return;
-                    }
-                    if(!f.isDirectory()) {
-                        error(Messages.Maven_NotADirectory(f));
-                        return;
-                    }
-
-                    File maven1File = new File(f,MAVEN_1_INSTALLATION_COMMON_FILE);
-                    File maven2File = new File(f,MAVEN_2_INSTALLATION_COMMON_FILE);
-
-                    if(!maven1File.exists() && !maven2File.exists()) {
-                        error(Messages.Maven_NotMavenDirectory(f));
-                        return;
-                    }
-
-                    ok();
-                }
-            }.process();
-        }
     }
 
+    /**
+     * Represents a Maven installation in a system.
+     */
     public static final class MavenInstallation extends ToolInstallation implements EnvironmentSpecific<MavenInstallation>, NodeSpecific<MavenInstallation> {
 
         @Deprecated // kept for backward compatiblity - use getHome()
         private String mavenHome;
 
-        @DataBoundConstructor
+        /**
+         * @deprecated as of 1.308.
+         *      Use {@link #MavenInstallation(String, String, List)}
+         */
         public MavenInstallation(String name, String home) {
             super(name, home);
         }
 
+        @DataBoundConstructor
+        public MavenInstallation(String name, String home, List<? extends ToolProperty<?>> properties) {
+            super(name, home, properties);
+        }
+
         /**
          * install directory.
+         *
+         * @deprecated as of 1.308. Use {@link #getHome()}.
          */
         public String getMavenHome() {
             return getHome();
@@ -374,6 +348,25 @@ public class Maven extends Builder {
         public String getHome() {
             if (mavenHome != null) return mavenHome;
             return super.getHome();
+        }
+
+        /**
+         * Is this Maven 2.1.x?
+         *
+         * @param launcher
+         *      Represents the node on which we evaluate the path.
+         */
+        public boolean isMaven2_1(Launcher launcher) throws IOException, InterruptedException {
+            return launcher.getChannel().call(new Callable<Boolean,IOException>() {
+                public Boolean call() throws IOException {
+                    File[] jars = new File(getHomeDir(),"lib").listFiles();
+                    if(jars!=null) // be defensive
+                        for (File jar : jars)
+                            if(jar.getName().startsWith("maven-2.1.") && jar.getName().endsWith("-uber.jar"))
+                                return true;
+                    return false;
+                }
+            });
         }
 
         /**
@@ -397,7 +390,7 @@ public class Maven extends Builder {
             if(File.separatorChar=='\\')
                 execName += ".bat";
 
-            String m2Home = Util.replaceMacro(getMavenHome(),EnvVars.masterEnvVars);
+            String m2Home = Util.replaceMacro(getHome(),EnvVars.masterEnvVars);
 
             return new File(m2Home, "bin/" + execName);
         }
@@ -415,27 +408,26 @@ public class Maven extends Builder {
             }
         }
 
-        public MavenEmbedder createEmbedder(BuildListener listener, String profiles, Properties systemProperties)
-                throws MavenEmbedderException, IOException {
-            return MavenUtil.createEmbedder(listener,getHomeDir(),profiles,systemProperties);
-        }
-
         private static final long serialVersionUID = 1L;
 
 		public MavenInstallation forEnvironment(EnvVars environment) {
-			return new MavenInstallation(getName(), environment.expand(getHome()));
+			return new MavenInstallation(getName(), environment.expand(getHome()), getProperties().toList());
 		}
 
-        public MavenInstallation forNode(Node node) {
-            return new MavenInstallation(getName(),ToolLocationNodeProperty.getToolHome(node,this));
+        public MavenInstallation forNode(Node node, TaskListener log) throws IOException, InterruptedException {
+            return new MavenInstallation(getName(), translateFor(node, log), getProperties().toList());
         }
 
         @Extension
         public static class DescriptorImpl extends ToolDescriptor<MavenInstallation> {
-
             @Override
             public String getDisplayName() {
                 return "Maven";
+            }
+
+            @Override
+            public List<? extends ToolInstaller> getDefaultInstallers() {
+                return Collections.singletonList(new MavenInstaller(null));
             }
 
             @Override
@@ -447,6 +439,57 @@ public class Maven extends Builder {
             public void setInstallations(MavenInstallation... installations) {
                 Hudson.getInstance().getDescriptorByType(Maven.DescriptorImpl.class).setInstallations(installations);
             }
+
+            @Override
+            public boolean configure(StaplerRequest req, JSONObject json) throws FormException {
+                setInstallations(req.bindJSONToList(MavenInstallation.class, json.get("maven")).toArray(new MavenInstallation[0]));
+                return true;
+            }
+
+            /**
+             * Checks if the MAVEN_HOME is valid.
+             */
+            public FormValidation doCheckMavenHome(@QueryParameter File value) {
+                // this can be used to check the existence of a file on the server, so needs to be protected
+                if(!Hudson.getInstance().hasPermission(Hudson.ADMINISTER))
+                    return FormValidation.ok();
+
+                if(value.getPath().equals(""))
+                    return FormValidation.ok();
+
+                if(!value.isDirectory())
+                    return FormValidation.error(Messages.Maven_NotADirectory(value));
+
+                File maven1File = new File(value,MAVEN_1_INSTALLATION_COMMON_FILE);
+                File maven2File = new File(value,MAVEN_2_INSTALLATION_COMMON_FILE);
+
+                if(!maven1File.exists() && !maven2File.exists())
+                    return FormValidation.error(Messages.Maven_NotMavenDirectory(value));
+
+                return FormValidation.ok();
+            }
+        }
+    }
+
+    /**
+     * Automatic Maven installer from apache.org.
+     */
+    public static class MavenInstaller extends DownloadFromUrlInstaller {
+        @DataBoundConstructor
+        public MavenInstaller(String id) {
+            super(id);
+        }
+
+        @Extension
+        public static final class DescriptorImpl extends DownloadFromUrlInstaller.DescriptorImpl<MavenInstaller> {
+            public String getDisplayName() {
+                return Messages.InstallFromApache();
+            }
+
+            @Override
+            public boolean isApplicable(Class<? extends ToolInstallation> toolType) {
+                return toolType==MavenInstallation.class;
+            }
         }
     }
 
@@ -455,7 +498,7 @@ public class Maven extends Builder {
      * that has "contextual" {@link MavenInstallation} associated with it.
      *
      * <p>
-     * Code like {@link RedeployPublisher} uses this interface in an attempt
+     * Code like RedeployPublisher uses this interface in an attempt
      * to use the consistent Maven installation attached to the project.
      *
      * @since 1.235

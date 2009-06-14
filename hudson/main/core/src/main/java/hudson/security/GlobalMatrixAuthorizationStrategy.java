@@ -30,7 +30,10 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
-import hudson.util.FormFieldValidator;
+import hudson.model.Item;
+import hudson.util.FormValidation;
+import hudson.util.VersionNumber;
+import hudson.util.FormValidation.Kind;
 import hudson.Functions;
 import hudson.Extension;
 import net.sf.json.JSONObject;
@@ -51,6 +54,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Role-based authorization via a matrix.
@@ -102,9 +106,31 @@ public class GlobalMatrixAuthorizationStrategy extends AuthorizationStrategy {
         return sids;
     }
 
+    /**
+     * In earlier version of Hudson we used to use reflection converter, which calls this method.
+     * This is now unmarshaller via {@link ConverterImpl}
+     */
     private Object readResolve() {
+        migrateHudson2324(grantedPermissions);
         acl = new AclImpl();
         return this;
+    }
+
+    /**
+     * Due to HUDSON-2324, we want to inject Item.READ permission to everyone who has Hudson.READ,
+     * to remain backward compatible
+     * @param grantedPermissions
+     */
+    /*package*/ static void migrateHudson2324(Map<Permission,Set<String>> grantedPermissions) {
+        if(Hudson.getInstance().isUpgradedFromBefore(new VersionNumber("1.300.*"))) {
+            Set<String> f = grantedPermissions.get(Hudson.READ);
+            if(f!=null) {
+                Set<String> t = grantedPermissions.get(Item.READ);
+                if(t!=null) t.addAll(f);
+                else        t=new HashSet<String>(f);
+                grantedPermissions.put(Item.READ,t);
+            }
+        }
     }
 
     /**
@@ -188,6 +214,8 @@ public class GlobalMatrixAuthorizationStrategy extends AuthorizationStrategy {
                 reader.moveUp();
             }
 
+            migrateHudson2324(as.grantedPermissions);
+
             return as;
         }
 
@@ -240,55 +268,47 @@ public class GlobalMatrixAuthorizationStrategy extends AuthorizationStrategy {
             return true;
         }
 
-        public void doCheckName(@QueryParameter String value ) throws IOException, ServletException {
-            doCheckName(value, Hudson.getInstance(), Hudson.ADMINISTER);
+        public FormValidation doCheckName(@QueryParameter String value ) throws IOException, ServletException {
+            return doCheckName(value, Hudson.getInstance(), Hudson.ADMINISTER);
         }
 
-        void doCheckName(String value, AccessControlled subject, Permission permission) throws IOException, ServletException {
+        FormValidation doCheckName(String value, AccessControlled subject, Permission permission) throws IOException, ServletException {
+            if(!subject.hasPermission(permission))  return FormValidation.ok(); // can't check
+
             final String v = value.substring(1,value.length()-1);
-            new FormFieldValidator(subject, permission) {
-                protected void check() throws IOException, ServletException {
-                    SecurityRealm sr = Hudson.getInstance().getSecurityRealm();
-                    String ev = Functions.escape(v);
+            SecurityRealm sr = Hudson.getInstance().getSecurityRealm();
+            String ev = Functions.escape(v);
 
-                    if(v.equals("authenticated")) {
-                        // systerm reserved group
-                        respond("<span>"+ makeImg("user.gif") +ev+"</span>");
-                        return;
-                    }
+            if(v.equals("authenticated"))
+                // systerm reserved group
+                return FormValidation.respond(Kind.OK, makeImg("user.gif") +ev);
 
-                    try {
-                        sr.loadUserByUsername(v);
-                        respond("<span>"+ makeImg("person.gif") +ev+"</span>");
-                        return;
-                    } catch (UserMayOrMayNotExistException e) {
-                        // undecidable, meaning the user may exist
-                        respond("<span>"+ev+"</span>");
-                        return;
-                    } catch (UsernameNotFoundException e) {
-                        // fall through next
-                    } catch (DataAccessException e) {
-                        // fall through next
-                    }
+            try {
+                sr.loadUserByUsername(v);
+                return FormValidation.respond(Kind.OK, makeImg("person.gif")+ev);
+            } catch (UserMayOrMayNotExistException e) {
+                // undecidable, meaning the user may exist
+                return FormValidation.respond(Kind.OK, ev);
+            } catch (UsernameNotFoundException e) {
+                // fall through next
+            } catch (DataAccessException e) {
+                // fall through next
+            }
 
-                    try {
-                        sr.loadGroupByGroupname(v);
-                        respond("<span>"+ makeImg("user.gif") +ev+"</span>");
-                        return;
-                    } catch (UserMayOrMayNotExistException e) {
-                        // undecidable, meaning the group may exist
-                        respond("<span>"+ev+"</span>");
-                        return;
-                    } catch (UsernameNotFoundException e) {
-                        // fall through next
-                    } catch (DataAccessException e) {
-                        // fall through next
-                    }
+            try {
+                sr.loadGroupByGroupname(v);
+                return FormValidation.respond(Kind.OK, makeImg("user.gif") +ev);
+            } catch (UserMayOrMayNotExistException e) {
+                // undecidable, meaning the group may exist
+                return FormValidation.respond(Kind.OK, ev);
+            } catch (UsernameNotFoundException e) {
+                // fall through next
+            } catch (DataAccessException e) {
+                // fall through next
+            }
 
-                    // couldn't find it. it doesn't exit
-                    respond("<span>"+ makeImg("error.gif") +ev+"</span>");
-                }
-            }.process();
+            // couldn't find it. it doesn't exit
+            return FormValidation.respond(Kind.ERROR, makeImg("error.gif") +ev);
         }
 
         private String makeImg(String gif) {

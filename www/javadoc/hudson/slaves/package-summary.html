@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.slaves (Hudson core 1.291 API)
+hudson.slaves (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.slaves (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.slaves (Hudson core 1.291 API)";
+        parent.document.title="hudson.slaves (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -97,7 +97,7 @@ Code related to slaves.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/EphemeralNode.html" title="interface in hudson.slaves">EphemeralNode</A></B></TD>
-<TD><A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s that are created by <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A> and hence not persisted as configuration by itself.</TD>
+<TD><A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s that are not persisted as configuration by itself.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific&lt;T extends NodeSpecific&lt;T&gt;&gt;</A></B></TD>
@@ -115,7 +115,7 @@ Code related to slaves.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/Channels.html" title="class in hudson.slaves">Channels</A></B></TD>
-<TD>Various convenient subtype of <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A>s.</TD>
+<TD>Various convenient subtype of <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A></B></TD>
@@ -200,6 +200,10 @@ Code related to slaves.
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/NodeProvisioner.html" title="class in hudson.slaves">NodeProvisioner</A></B></TD>
 <TD>Uses the <A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model"><CODE>LoadStatistics</CODE></A> and determines when we need to allocate
  new <A HREF="../../hudson/slaves/NodeProvisioner.PlannedNode.html" title="class in hudson.slaves"><CODE>NodeProvisioner.PlannedNode</CODE></A>s through <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/NodeProvisioner.NodeProvisionerInvoker.html" title="class in hudson.slaves">NodeProvisioner.NodeProvisionerInvoker</A></B></TD>
+<TD>Periodically invoke NodeProvisioners</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/NodeProvisioner.PlannedNode.html" title="class in hudson.slaves">NodeProvisioner.PlannedNode</A></B></TD>

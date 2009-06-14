@@ -1,3 +1,27 @@
+/**
+ * The MIT License
+ *
+ * Copyright (c) 2007-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt,
+ *                          Henrik Lynggaard, Peter Liljenberg, Andrew Bayer
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package hudson.plugins.clearcase.action;
 
 import hudson.Launcher;
@@ -48,7 +72,7 @@ public class SnapshotCheckoutActionTest extends AbstractWorkspaceTest {
         });
         classContext.checking(new Expectations() {
             {
-                atLeast(2).of(launcher).isUnix(); will(returnValue(false));
+                atLeast(1).of(launcher).isUnix(); will(returnValue(false));
             }
         });
 
@@ -69,7 +93,7 @@ public class SnapshotCheckoutActionTest extends AbstractWorkspaceTest {
         });
         classContext.checking(new Expectations() {
             {
-            	atLeast(2).of(launcher).isUnix(); will(returnValue(true));
+            	atLeast(1).of(launcher).isUnix(); will(returnValue(true));
             }
         });
 
@@ -90,7 +114,7 @@ public class SnapshotCheckoutActionTest extends AbstractWorkspaceTest {
         });
         classContext.checking(new Expectations() {
             {
-            	atLeast(2).of(launcher).isUnix(); will(returnValue(true));
+            	atLeast(1).of(launcher).isUnix(); will(returnValue(true));
             }
         });
 
@@ -109,6 +133,11 @@ public class SnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             {
                 one(clearTool).catcs("viewname"); will(returnValue("configspec"));
                 one(clearTool).update("viewname", null);
+            }
+        });
+        classContext.checking(new Expectations() {
+            {
+            	atLeast(1).of(launcher).isUnix(); will(returnValue(true));
             }
         });
 
@@ -132,7 +161,7 @@ public class SnapshotCheckoutActionTest extends AbstractWorkspaceTest {
         });
         classContext.checking(new Expectations() {
             {
-            	atLeast(2).of(launcher).isUnix(); will(returnValue(true));
+            	atLeast(1).of(launcher).isUnix(); will(returnValue(true));
             }
         });
 
@@ -150,14 +179,12 @@ public class SnapshotCheckoutActionTest extends AbstractWorkspaceTest {
         context.checking(new Expectations() {
             {
                 one(clearTool).catcs("viewname"); will(returnValue("other configspec"));
-                one(clearTool).rmview("viewname");
-                one(clearTool).mkview("viewname", null);
                 one(clearTool).setcs("viewname", "configspec");
             }
         });
         classContext.checking(new Expectations() {
             {
-            	atLeast(2).of(launcher).isUnix(); will(returnValue(true));
+            	atLeast(1).of(launcher).isUnix(); will(returnValue(true));
             }
         });
 

@@ -41,19 +41,17 @@ import hudson.security.ACL;
 import hudson.security.AccessControlled;
 import hudson.security.Permission;
 import hudson.security.PermissionGroup;
-import hudson.tasks.BuildStep;
-import hudson.tasks.BuildWrapper;
 import hudson.tasks.LogRotator;
 import hudson.tasks.Mailer;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.util.IOException2;
-import hudson.util.ProcessTreeKiller;
+import hudson.util.LogTaskListener;
 import hudson.util.XStream2;
+import hudson.util.ProcessTreeKiller;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -77,7 +75,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
@@ -107,7 +104,7 @@ import com.thoughtworks.xstream.XStream;
  */
 @ExportedBean
 public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,RunT>>
-        extends Actionable implements ExtensionPoint, Comparable<RunT>, AccessControlled, PersistenceRoot {
+        extends Actionable implements ExtensionPoint, Comparable<RunT>, AccessControlled, PersistenceRoot, DescriptorByNameOwner {
 
     protected transient final JobT project;
 
@@ -184,7 +181,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      * @see #getCharset()
      * @since 1.257
      */
-    private String charset;
+    protected String charset;
 
     /**
      * Keeps this log entries.
@@ -391,6 +388,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         return description;
     }
 
+
     /**
      * Returns the length-limited description.
      * @return The length-limited description.
@@ -403,21 +401,44 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
 
         final String ending = "...";
 
-        // limit the description
-        String truncDescr = description.substring(
-                0, maxDescrLength - ending.length());
+        int sz = description.length();
 
-        // truncate the description on the space
-        int lastSpace = truncDescr.lastIndexOf(" ");
-        if (lastSpace != -1) {
-            truncDescr = truncDescr.substring(0, lastSpace);
+        boolean inTag = false;
+        int displayChars = 0;
+        int lastTruncatablePoint = -1;
+
+        for (int i=0; i<sz; i++) {
+            char ch = description.charAt(i);
+            if(ch == '<') {
+                inTag = true;
+            } else if (ch == '>') {
+                inTag = false;
+                if (displayChars <= (maxDescrLength - ending.length())) {
+                    lastTruncatablePoint = i + 1;
+                }
+            }
+            if (!inTag) {
+                displayChars++;
+                if (displayChars <= (maxDescrLength - ending.length())) {
+                    if (ch == ' ') {
+                        lastTruncatablePoint = i;
+                    }
+                }
+            }
         }
 
-        return truncDescr + ending;
+        String truncDesc = description;
+        
+        if (displayChars >= maxDescrLength) {
+            truncDesc = truncDesc.substring(0, lastTruncatablePoint) + ending;
+        }
+        
+        return truncDesc;
+        
     }
 
     /**
-     * Gets the string that says how long since this build has scheduled.
+     * Gets the string that says how long since this build has started.
      *
      * @return
      *      string like "3 minutes" "1 day" etc.
@@ -523,6 +544,12 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         return nextBuild;
     }
 
+    /**
+     * Returns the URL of this {@link Run}, relative to the context root of Hudson.
+     *
+     * @return
+     *      String like "job/foo/32/" with trailing slash but no leading slash. 
+     */
     // I really messed this up. I'm hoping to fix this some time
     // it shouldn't have trailing '/', and instead it should have leading '/'
     public String getUrl() {
@@ -552,6 +579,10 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      */
     public String getId() {
         return ID_FORMATTER.get().format(new Date(timestamp));
+    }
+
+    public Descriptor getDescriptorByName(String className) {
+        return Hudson.getInstance().getDescriptorByName(className);
     }
 
     /**
@@ -672,7 +703,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
          * Combines last N token into the "a/b/c" form.
          */
         private String combineLast(String[] token, int n) {
-            StringBuffer buf = new StringBuffer();
+            StringBuilder buf = new StringBuilder();
             for( int i=Math.max(0,token.length-n); i<token.length; i++ ) {
                 if(buf.length()>0)  buf.append('/');
                 buf.append(token[i]);
@@ -1141,9 +1172,8 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     /**
      * Serves the artifacts.
      */
-    public void doArtifact( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException, InterruptedException {
-        new DirectoryBrowserSupport(this,project.getDisplayName()+' '+getDisplayName())
-            .serveFile(req, rsp, new FilePath(getArtifactsDir()), "package.gif", true);
+    public DirectoryBrowserSupport doArtifact() {
+        return new DirectoryBrowserSupport(this,new FilePath(getArtifactsDir()), project.getDisplayName()+' '+getDisplayName(), "package.gif", true);
     }
 
     /**
@@ -1230,7 +1260,29 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     }
 
     /**
-     * Returns the map that contains environmental variable overrides for this build.
+     * @deprecated as of 1.292
+     *      Use {@link #getEnvironment()} instead.
+     */
+    public Map<String,String> getEnvVars() {
+        try {
+            return getEnvironment();
+        } catch (IOException e) {
+            return new EnvVars();
+        } catch (InterruptedException e) {
+            return new EnvVars();
+        }
+    }
+
+    /**
+     * @deprecated as of 1.305 use {@link #getEnvironment(TaskListener)}
+     */
+    public EnvVars getEnvironment() throws IOException, InterruptedException {
+        return getEnvironment(new LogTaskListener(LOGGER, Level.INFO));
+    }
+
+    /**
+     * Returns the map that contains environmental variables to be used for launching
+     * processes for this build.
      *
      * <p>
      * {@link BuildStep}s that invoke external processes should use this.
@@ -1238,22 +1290,23 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      * to take effect.
      *
      * <p>
-     * On Windows systems, environment variables are case-preserving but
-     * comparison/query is case insensitive (IOW, you can set 'Path' to something
-     * and you get the same value by doing '%PATH%'.)  So to implement this semantics
-     * the map returned from here is a {@link TreeMap} with a special comparator.
-     *
+     * Unlike earlier {@link #getEnvVars()}, this map contains the whole environment,
+     * not just the overrides, so one can introspect values to change its behavior.
+     * @since 1.305
      */
-    public Map<String,String> getEnvVars() {
-        EnvVars env = getCharacteristicEnvVars();
+    public EnvVars getEnvironment(TaskListener log) throws IOException, InterruptedException {
+        EnvVars env = Computer.currentComputer().getEnvironment().overrideAll(getCharacteristicEnvVars());
         String rootUrl = Hudson.getInstance().getRootUrl();
         if(rootUrl!=null)
             env.put("HUDSON_URL", rootUrl);
+        if(!env.containsKey("HUDSON_HOME"))
+            env.put("HUDSON_HOME", Hudson.getInstance().getRootDir().getPath() );
 
         Thread t = Thread.currentThread();
         if (t instanceof Executor) {
             Executor e = (Executor) t;
             env.put("EXECUTOR_NUMBER",String.valueOf(e.getNumber()));
+            env.put("NODE_NAME",e.getOwner().getName());
         }
 
         return env;
@@ -1271,6 +1324,23 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         env.put("JOB_NAME",getParent().getFullName());
         return env;
     }
+
+    public String getExternalizableId() {
+        return project.getName() + "#" + getNumber();
+    }
+
+    public static Run<?,?> fromExternalizableId(String id) {
+        int hash = id.lastIndexOf('#');
+        if (hash <= 0) {
+            throw new IllegalArgumentException("Invalid id");
+        }
+        String jobName = id.substring(0, hash);
+        int number = Integer.parseInt(id.substring(hash + 1));
+
+        Job<?,?> job = (Job<?,?>) Hudson.getInstance().getItem(jobName);
+        return job.getBuildByNumber(number);
+    }
+
 
     public static final XStream XSTREAM = new XStream2();
     static {

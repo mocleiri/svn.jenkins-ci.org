@@ -9,6 +9,8 @@ import hudson.util.StreamTaskListener;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import org.jets3t.service.S3ServiceException;
+
 /**
  * {@link ComputerLauncher} for EC2 that waits for the instance to really come up before proceeding to
  * the real user-specified {@link ComputerLauncher}.
@@ -21,24 +23,13 @@ public abstract class EC2ComputerLauncher extends ComputerLauncher {
             EC2Computer computer = (EC2Computer)_computer;
             PrintStream logger = listener.getLogger();
 
-            Instance inst = computer.describeInstance();
-
-            // wait until EC2 instance comes up and post console output
-            boolean reportedWaiting = false;
             OUTER:
             while(true) {
                 switch (computer.getState()) {
                     case PENDING:
+                        Thread.sleep(5000); // check every 5 secs
+                        continue OUTER;
                     case RUNNING:
-                        String console = computer.getConsoleOutput();
-                        if(console==null || console.length()==0) {
-                            if(!reportedWaiting) {
-                                reportedWaiting = true;
-                                logger.println("Waiting for the EC2 instance to boot up");
-                            }
-                            Thread.sleep(5000); // check every 5 secs
-                            continue OUTER;
-                        }
                         break OUTER;
                     case SHUTTING_DOWN:
                     case TERMINATED:
@@ -48,13 +39,15 @@ public abstract class EC2ComputerLauncher extends ComputerLauncher {
                 }
             }
 
-            launch(computer, logger, inst);
+            launch(computer, logger, computer.describeInstance());
         } catch (EC2Exception e) {
             e.printStackTrace(listener.error(e.getMessage()));
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(listener.error(e.getMessage()));
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            e.printStackTrace(listener.error(e.getMessage()));
+        } catch (S3ServiceException e) {
+            e.printStackTrace(listener.error(e.getMessage()));
         }
 
     }
@@ -63,5 +56,5 @@ public abstract class EC2ComputerLauncher extends ComputerLauncher {
      * Stage 2 of the launch. Called after the EC2 instance comes up.
      */
     protected abstract void launch(EC2Computer computer, PrintStream logger, Instance inst)
-            throws EC2Exception, IOException, InterruptedException;
+            throws EC2Exception, IOException, InterruptedException, S3ServiceException;
 }

@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Package hudson.tools (Hudson core 1.291 API)
+Uses of Package hudson.tools (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.tools (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.tools (Hudson core 1.291 API)";
+        parent.document.title="Uses of Package hudson.tools (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -95,6 +95,10 @@ Packages that use <A HREF="../../hudson/tools/package-summary.html">hudson.tools
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.slaves"><B>hudson.slaves</B></A></TD>
+<TD>Code related to slaves.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.tasks"><B>hudson.tasks</B></A></TD>
 <TD>Built-in <a href="../../hudson/tasks/Builder.html"><tt>Builder</tt></a>s and <a href="../../hudson/tasks/Publisher.html"><tt>Publisher</tt></a>s
 that perform the actual heavy-lifting of a build.&nbsp;</TD>
@@ -102,6 +106,10 @@ that perform the actual heavy-lifting of a build.&nbsp;</TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.tools"><B>hudson.tools</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.jvnet.hudson.test"><B>org.jvnet.hudson.test</B></A></TD>
+<TD>Test harness for Hudson and its plugins.&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -111,6 +119,12 @@ that perform the actual heavy-lifting of a build.&nbsp;</TD>
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 Classes in <A HREF="../../hudson/tools/package-summary.html">hudson.tools</A> used by <A HREF="../../hudson/model/package-summary.html">hudson.model</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/JDKInstaller.html#hudson.model"><B>JDKInstaller</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Install JDKs from java.sun.com.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/tools/class-use/ToolDescriptor.html#hudson.model"><B>ToolDescriptor</B></A></B>
@@ -125,6 +139,27 @@ Classes in <A HREF="../../hudson/tools/package-summary.html">hudson.tools</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formalization of a tool installed in nodes used for builds
  (examples include things like JDKs, Ants, Mavens, and Groovys)</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/ToolProperty.html#hudson.model"><B>ToolProperty</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extensible property of <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.slaves"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/tools/package-summary.html">hudson.tools</A> used by <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/PropertyDescriptor.html#hudson.slaves"><B>PropertyDescriptor</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> type used for <code>XyzProperty</code> classes.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -133,6 +168,19 @@ Classes in <A HREF="../../hudson/tools/package-summary.html">hudson.tools</A> us
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 Classes in <A HREF="../../hudson/tools/package-summary.html">hudson.tools</A> used by <A HREF="../../hudson/tasks/package-summary.html">hudson.tasks</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/DownloadFromUrlInstaller.html#hudson.tasks"><B>DownloadFromUrlInstaller</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Partial convenience implementation of <A HREF="../../hudson/tools/ToolInstaller.html" title="class in hudson.tools"><CODE>ToolInstaller</CODE></A> that just downloads
+ an archive from the URL and extracts it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/DownloadFromUrlInstaller.DescriptorImpl.html#hudson.tasks"><B>DownloadFromUrlInstaller.DescriptorImpl</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/tools/class-use/ToolDescriptor.html#hudson.tasks"><B>ToolDescriptor</B></A></B>
@@ -147,6 +195,24 @@ Classes in <A HREF="../../hudson/tools/package-summary.html">hudson.tools</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formalization of a tool installed in nodes used for builds
  (examples include things like JDKs, Ants, Mavens, and Groovys)</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/ToolInstaller.html#hudson.tasks"><B>ToolInstaller</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An object which can ensure that a generic <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A> in fact exists on a node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/ToolInstallerDescriptor.html#hudson.tasks"><B>ToolInstallerDescriptor</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Descriptor for a <A HREF="../../hudson/tools/ToolInstaller.html" title="class in hudson.tools"><CODE>ToolInstaller</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/ToolProperty.html#hudson.tasks"><B>ToolProperty</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extensible property of <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -155,6 +221,61 @@ Classes in <A HREF="../../hudson/tools/package-summary.html">hudson.tools</A> us
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 Classes in <A HREF="../../hudson/tools/package-summary.html">hudson.tools</A> used by <A HREF="../../hudson/tools/package-summary.html">hudson.tools</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/DownloadFromUrlInstaller.html#hudson.tools"><B>DownloadFromUrlInstaller</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Partial convenience implementation of <A HREF="../../hudson/tools/ToolInstaller.html" title="class in hudson.tools"><CODE>ToolInstaller</CODE></A> that just downloads
+ an archive from the URL and extracts it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/DownloadFromUrlInstaller.Installable.html#hudson.tools"><B>DownloadFromUrlInstaller.Installable</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Downloadable and installable tool.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/JDKInstaller.CPU.html#hudson.tools"><B>JDKInstaller.CPU</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPU type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/JDKInstaller.InstallableJDK.html#hudson.tools"><B>JDKInstaller.InstallableJDK</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/JDKInstaller.JDKFamily.html#hudson.tools"><B>JDKInstaller.JDKFamily</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/JDKInstaller.JDKFamilyList.html#hudson.tools"><B>JDKInstaller.JDKFamilyList</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/JDKInstaller.Platform.html#hudson.tools"><B>JDKInstaller.Platform</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Supported platform.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/JDKInstaller.Preference.html#hudson.tools"><B>JDKInstaller.Preference</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/PropertyDescriptor.html#hudson.tools"><B>PropertyDescriptor</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> type used for <code>XyzProperty</code> classes.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/tools/class-use/ToolDescriptor.html#hudson.tools"><B>ToolDescriptor</B></A></B>
@@ -170,10 +291,56 @@ Classes in <A HREF="../../hudson/tools/package-summary.html">hudson.tools</A> us
  (examples include things like JDKs, Ants, Mavens, and Groovys)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/ToolInstaller.html#hudson.tools"><B>ToolInstaller</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An object which can ensure that a generic <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A> in fact exists on a node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/ToolInstallerDescriptor.html#hudson.tools"><B>ToolInstallerDescriptor</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Descriptor for a <A HREF="../../hudson/tools/ToolInstaller.html" title="class in hudson.tools"><CODE>ToolInstaller</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/tools/class-use/ToolLocationNodeProperty.ToolLocation.html#hudson.tools"><B>ToolLocationNodeProperty.ToolLocation</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/ToolLocationTranslator.html#hudson.tools"><B>ToolLocationTranslator</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This Hudson-wide extension points can participate in determining the actual node-specific path
+ of the <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A> for the given <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/ToolProperty.html#hudson.tools"><B>ToolProperty</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extensible property of <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/ToolPropertyDescriptor.html#hudson.tools"><B>ToolPropertyDescriptor</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Descriptor for <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools"><CODE>ToolProperty</CODE></A>.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.jvnet.hudson.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/tools/package-summary.html">hudson.tools</A> used by <A HREF="../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/tools/class-use/ToolProperty.html#org.jvnet.hudson.test"><B>ToolProperty</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extensible property of <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>.</TD>
 </TR>
 </TABLE>
 &nbsp;

@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DescriptorExtensionList (Hudson core 1.291 API)
+DescriptorExtensionList (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DescriptorExtensionList (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DescriptorExtensionList (Hudson core 1.291 API)";
+        parent.document.title="DescriptorExtensionList (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -186,6 +186,14 @@ java.lang.Object
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/DescriptorExtensionList.html#clearLegacyInstances()">clearLegacyInstances</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposed just for the test harness.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -430,6 +438,19 @@ listLegacyInstances</H3>
 public static java.lang.Iterable&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&gt; <B>listLegacyInstances</B>()</PRE>
 <DL>
 <DD>List up all the legacy instances currently in use.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="clearLegacyInstances()"><!-- --></A><H3>
+clearLegacyInstances</H3>
+<PRE>
+public static void <B>clearLegacyInstances</B>()</PRE>
+<DL>
+<DD>Exposed just for the test harness. Clear legacy instances.
 <P>
 <DD><DL>
 </DL>

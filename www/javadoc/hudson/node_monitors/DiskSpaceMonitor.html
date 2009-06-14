@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DiskSpaceMonitor (Hudson core 1.291 API)
+DiskSpaceMonitor (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DiskSpaceMonitor (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DiskSpaceMonitor (Hudson core 1.291 API)";
+        parent.document.title="DiskSpaceMonitor (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -106,8 +106,8 @@ java.lang.Object
 </PRE>
 
 <P>
-Checks available disk space of the node.
- Requres Mustang.
+Checks available disk space of the remote FS root.
+ Requires Mustang.
 <P>
 
 <P>
@@ -149,7 +149,7 @@ Checks available disk space of the node.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors">AbstractNodeMonitorDescriptor</A>&lt;java.lang.Long&gt;</CODE></FONT></TD>
+<CODE>static&nbsp;hudson.node_monitors.DiskSpaceMonitorDescriptor</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/node_monitors/DiskSpaceMonitor.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
 
 <BR>
@@ -200,7 +200,7 @@ Checks available disk space of the node.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.Long</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/node_monitors/DiskSpaceMonitorDescriptor.DiskSpace.html" title="class in hudson.node_monitors">DiskSpaceMonitorDescriptor.DiskSpace</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/node_monitors/DiskSpaceMonitor.html#getFreeSpace(hudson.model.Computer)">getFreeSpace</A></B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
@@ -208,19 +208,11 @@ Checks available disk space of the node.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors">AbstractNodeMonitorDescriptor</A>&lt;java.lang.Long&gt;</CODE></FONT></TD>
+<CODE>static&nbsp;hudson.node_monitors.DiskSpaceMonitorDescriptor</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/node_monitors/DiskSpaceMonitor.html#install()">install</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/node_monitors/DiskSpaceMonitor.html#toHtml(long)">toHtml</A></B>(long&nbsp;space)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the HTML representation of the space.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.node_monitors.NodeMonitor"><!-- --></A>
@@ -229,7 +221,7 @@ Checks available disk space of the node.
 <TH ALIGN="left"><B>Methods inherited from class hudson.node_monitors.<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/node_monitors/NodeMonitor.html#all()">all</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#data(hudson.model.Computer)">data</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#getAll()">getAll</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#triggerUpdate()">triggerUpdate</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/node_monitors/NodeMonitor.html#all()">all</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#data(hudson.model.Computer)">data</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#getAll()">getAll</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#isIgnored()">isIgnored</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#setIgnored(boolean)">setIgnored</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#triggerUpdate()">triggerUpdate</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -257,7 +249,7 @@ Checks available disk space of the node.
 <A NAME="DESCRIPTOR"><!-- --></A><H3>
 DESCRIPTOR</H3>
 <PRE>
-public static final <A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors">AbstractNodeMonitorDescriptor</A>&lt;java.lang.Long&gt; <B>DESCRIPTOR</B></PRE>
+public static final hudson.node_monitors.DiskSpaceMonitorDescriptor <B>DESCRIPTOR</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -293,21 +285,8 @@ public <B>DiskSpaceMonitor</B>()</PRE>
 <A NAME="getFreeSpace(hudson.model.Computer)"><!-- --></A><H3>
 getFreeSpace</H3>
 <PRE>
-public java.lang.Long <B>getFreeSpace</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</PRE>
+public <A HREF="../../hudson/node_monitors/DiskSpaceMonitorDescriptor.DiskSpace.html" title="class in hudson.node_monitors">DiskSpaceMonitorDescriptor.DiskSpace</A> <B>getFreeSpace</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</PRE>
 <DL>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="toHtml(long)"><!-- --></A><H3>
-toHtml</H3>
-<PRE>
-public java.lang.String <B>toHtml</B>(long&nbsp;space)</PRE>
-<DL>
-<DD>Returns the HTML representation of the space.
-<P>
 <DD><DL>
 </DL>
 </DD>
@@ -336,7 +315,7 @@ public java.lang.String <B>getColumnCaption</B>()</PRE>
 install</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="../../hudson/Extension.html" title="annotation in hudson">@Extension</A>
-</FONT>public static <A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors">AbstractNodeMonitorDescriptor</A>&lt;java.lang.Long&gt; <B>install</B>()</PRE>
+</FONT>public static hudson.node_monitors.DiskSpaceMonitorDescriptor <B>install</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>

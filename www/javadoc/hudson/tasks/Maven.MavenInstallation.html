@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Maven.MavenInstallation (Hudson core 1.291 API)
+Maven.MavenInstallation (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Maven.MavenInstallation (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Maven.MavenInstallation (Hudson core 1.291 API)";
+        parent.document.title="Maven.MavenInstallation (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -109,6 +109,10 @@ java.lang.Object
 </PRE>
 
 <P>
+Represents a Maven installation in a system.
+<P>
+
+<P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../serialized-form.html#hudson.tasks.Maven.MavenInstallation">Serialized Form</A></DL>
 <HR>
@@ -155,6 +159,15 @@ java.lang.Object
                         java.lang.String&nbsp;home)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.308.
+      Use <CODE>#MavenInstallation(String, String, List)</CODE></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#Maven.MavenInstallation(java.lang.String, java.lang.String, java.util.List)">Maven.MavenInstallation</A></B>(java.lang.String&nbsp;name,
+                        java.lang.String&nbsp;home,
+                        java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
@@ -169,16 +182,6 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#createEmbedder(hudson.model.BuildListener, java.lang.String, java.util.Properties)">createEmbedder</A></B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-               java.lang.String&nbsp;profiles,
-               java.util.Properties&nbsp;systemProperties)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#forEnvironment(hudson.EnvVars)">forEnvironment</A></B>(<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;environment)</CODE>
 
@@ -188,7 +191,8 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#forNode(hudson.model.Node)">forNode</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+        <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a specialized copy of T for functioning in the given node.</TD>
@@ -231,7 +235,15 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#getMavenHome()">getMavenHome</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;install directory.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.308. Use <A HREF="../../hudson/tasks/Maven.MavenInstallation.html#getHome()"><CODE>getHome()</CODE></A>.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#isMaven2_1(hudson.Launcher)">isMaven2_1</A></B>(<A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is this Maven 2.1.x?</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.tools.ToolInstallation"><!-- --></A>
@@ -240,7 +252,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.tools.<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/tools/ToolInstallation.html#all()">all</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getName()">getName</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/tools/ToolInstallation.html#all()">all</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getName()">getName</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getProperties()">getProperties</A>, <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)">translateFor</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -268,9 +280,22 @@ java.lang.Object
 <A NAME="Maven.MavenInstallation(java.lang.String, java.lang.String)"><!-- --></A><H3>
 Maven.MavenInstallation</H3>
 <PRE>
+public <B>Maven.MavenInstallation</B>(java.lang.String&nbsp;name,
+                               java.lang.String&nbsp;home)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.308.
+      Use <CODE>#MavenInstallation(String, String, List)</CODE></I>
+<P>
+</DL>
+<HR>
+
+<A NAME="Maven.MavenInstallation(java.lang.String, java.lang.String, java.util.List)"><!-- --></A><H3>
+Maven.MavenInstallation</H3>
+<PRE>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>Maven.MavenInstallation</B>(java.lang.String&nbsp;name,
-                                                    java.lang.String&nbsp;home)</PRE>
+                                                    java.lang.String&nbsp;home,
+                                                    java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</PRE>
 <DL>
 </DL>
 
@@ -289,6 +314,8 @@ getMavenHome</H3>
 <PRE>
 public java.lang.String <B>getMavenHome</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.308. Use <A HREF="../../hudson/tasks/Maven.MavenInstallation.html#getHome()"><CODE>getHome()</CODE></A>.</I>
+<P>
 <DD>install directory.
 <P>
 <DD><DL>
@@ -334,6 +361,27 @@ public java.lang.String <B>getHome</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="isMaven2_1(hudson.Launcher)"><!-- --></A><H3>
+isMaven2_1</H3>
+<PRE>
+public boolean <B>isMaven2_1</B>(<A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher)
+                   throws java.io.IOException,
+                          java.lang.InterruptedException</PRE>
+<DL>
+<DD>Is this Maven 2.1.x?
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>launcher</CODE> - Represents the node on which we evaluate the path.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getExecutable(hudson.Launcher)"><!-- --></A><H3>
 getExecutable</H3>
 <PRE>
@@ -371,27 +419,6 @@ public boolean <B>getExists</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="createEmbedder(hudson.model.BuildListener, java.lang.String, java.util.Properties)"><!-- --></A><H3>
-createEmbedder</H3>
-<PRE>
-public <A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A> <B>createEmbedder</B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-                                    java.lang.String&nbsp;profiles,
-                                    java.util.Properties&nbsp;systemProperties)
-                             throws org.apache.maven.embedder.MavenEmbedderException,
-                                    java.io.IOException</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>org.apache.maven.embedder.MavenEmbedderException</CODE>
-<DD><CODE>java.io.IOException</CODE></DL>
-</DD>
-</DL>
-<HR>
-
 <A NAME="forEnvironment(hudson.EnvVars)"><!-- --></A><H3>
 forEnvironment</H3>
 <PRE>
@@ -409,19 +436,25 @@ public <A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in
 </DL>
 <HR>
 
-<A NAME="forNode(hudson.model.Node)"><!-- --></A><H3>
+<A NAME="forNode(hudson.model.Node, hudson.model.TaskListener)"><!-- --></A><H3>
 forNode</H3>
 <PRE>
-public <A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A> <B>forNode</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</PRE>
+public <A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A> <B>forNode</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                                       <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)
+                                throws java.io.IOException,
+                                       java.lang.InterruptedException</PRE>
 <DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)">NodeSpecific</A></CODE></B></DD>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node, hudson.model.TaskListener)">NodeSpecific</A></CODE></B></DD>
 <DD>Returns a specialized copy of T for functioning in the given node.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)">forNode</A></CODE> in interface <CODE><A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;<A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A>&gt;</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></CODE> in interface <CODE><A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;<A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

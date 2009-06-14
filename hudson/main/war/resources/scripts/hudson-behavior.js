@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Daniel Dyer, Dean Yu
+ * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Daniel Dyer, Yahoo! Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 //
-initOptionalBlock//
+//
 // JavaScript for Hudson
 //     See http://www.ibm.com/developerworks/web/library/wa-memleak/?ca=dgr-lnxw97JavascriptLeaks
 //     for memory leak patterns and how to prevent them.
@@ -38,13 +38,48 @@ function object(o) {
 // id generator
 var iota = 0;
 
+// crumb information
+var crumb = {
+    fieldName: null,
+    value: null,
+
+    init: function(crumbField, crumbValue) {
+        this.fieldName = crumbField;
+        this.value = crumbValue;
+    },
+
+    /**
+     * Adds the crumb value into the given hash and returns the hash.
+     */
+    wrap: function(hash) {
+        if(this.fieldName!=null)
+            hash[this.fieldName]=this.value;
+        return hash;
+    },
+
+    /**
+     * Puts a hidden input field to the form so that the form submission will have the crumb value
+     */
+    appendToForm : function(form) {
+        if(this.fieldName==null)    return; // noop
+        var div = document.createElement("div");
+        div.innerHTML = "<input type=hidden name='"+this.fieldName+"' value='"+this.value+"'>";
+        form.appendChild(div);
+    }
+}
+
 // Form check code
 //========================================================
 var FormChecker = {
     // pending requests
     queue : [],
 
-    inProgress : false,
+    // conceptually boolean, but doing so create concurrency problem.
+    // that is, during unit tests, the AJAX.send works synchronously, so
+    // the onComplete happens before the send method returns. On a real environment,
+    // more likely it's the other way around. So setting a boolean flag to true or false
+    // won't work.
+    inProgress : 0,
 
     /**
      * Schedules a form field check. Executions are serialized to reduce the bandwidth impact.
@@ -73,7 +108,7 @@ var FormChecker = {
     },
 
     schedule : function() {
-        if (this.inProgress)  return;
+        if (this.inProgress>0)  return;
         if (this.queue.length == 0) return;
 
         var next = this.queue.shift();
@@ -81,19 +116,27 @@ var FormChecker = {
             method : next.method,
             onComplete : function(x) {
                 next.target.innerHTML = x.responseText;
-                FormChecker.inProgress = false;
+                FormChecker.inProgress--;
                 FormChecker.schedule();
             }
         });
-        this.inProgress = true;
+        this.inProgress++;
     }
+}
+
+function toValue(e) {
+    // compute the form validation value to be sent to the server
+    var type = e.getAttribute("type");
+    if(type!=null && type.toLowerCase()=="checkbox")
+        return e.checked;
+    return encode(e.value);
 }
 
 // find the nearest ancestor node that has the given tag name
 function findAncestor(e, tagName) {
     do {
         e = e.parentNode;
-    } while(e.tagName!=tagName);
+    } while (e != null && e.tagName != tagName);
     return e;
 }
 
@@ -126,6 +169,7 @@ function findPrevious(src,filter) {
 
     while(src!=null) {
         src = prev(src);
+        if(src==null)   break;
         if(filter(src))
             return src;
     }
@@ -136,7 +180,7 @@ function findPrevious(src,filter) {
  */
 function findPreviousFormItem(src,name) {
     var name2 = "_."+name; // handles <textbox field="..." /> notation silently
-    return findPrevious(src,function(e){ return e.tagName=="INPUT" && (e.name==name || e.name==name2); });
+    return findPrevious(src,function(e){ return (e.tagName=="INPUT" || e.tagName=="TEXTAREA") && (e.name==name || e.name==name2); });
 }
 
 
@@ -188,13 +232,25 @@ function registerValidator(e) {
 function makeButton(e,onclick) {
     var h = e.onclick;
     var clsName = e.className;
+    var n = e.name;
     var btn = new YAHOO.widget.Button(e,{});
     if(onclick!=null)
         btn.addListener("click",onclick);
     if(h!=null)
         btn.addListener("click",h);
-    Element.addClassName(btn.get("element"),clsName);
+    var be = btn.get("element");
+    Element.addClassName(be,clsName);
+    if(n!=null) // copy the name
+        be.setAttribute("name",n);
     return btn;
+}
+
+/*
+    If we are inside 'to-be-removed' class, some HTML altering behaviors interact badly, because
+    the behavior re-executes when the removed master copy gets reinserted later.
+ */
+function isInsideRemovable(e) {
+    return Element.ancestors(e).find(function(f){return f.hasClassName("to-be-removed");});
 }
 
 var hudsonRules = {
@@ -206,6 +262,8 @@ var hudsonRules = {
 // other behavior rules change them (like YUI buttons.)
 
     "DIV.hetero-list-container" : function(e) {
+        if(isInsideRemovable(e))    return;
+
         // components for the add button
         var menu = document.createElement("SELECT");
         var btn = findElementsBySelector(e,"INPUT.hetero-list-add")[0];
@@ -269,6 +327,8 @@ var hudsonRules = {
     },
 
     "DIV.repeated-container" : function(e) {
+        if(isInsideRemovable(e))    return;
+
         // compute the insertion point
         var ip = e.lastChild;
         while (!Element.hasClassName(ip, "repeatable-insertion-point"))
@@ -481,6 +541,7 @@ var hudsonRules = {
 
     // structured form submission
     "FORM" : function(form) {
+        crumb.appendToForm(form);
         if(Element.hasClassName("no-json"))
             return;
         // add the hidden 'json' input field, which receives the form structure in JSON
@@ -488,7 +549,7 @@ var hudsonRules = {
         div.innerHTML = "<input type=hidden name=json value=init>";
         form.appendChild(div);
         
-        form.onsubmit = function() { buildFormTree(this) };
+        form.onsubmit = function() { buildFormTree(this); };
         form = null; // memory leak prevention
     },
 
@@ -504,6 +565,38 @@ var hudsonRules = {
 
     "INPUT.yui-button" : function(e) {
         makeButton(e);
+    },
+
+    "TR.optional-block-start": function(e) { // see optionalBlock.jelly
+        // set start.ref to checkbox in preparation of row-set-end processing
+        var checkbox = e.firstChild.firstChild;
+        e.setAttribute("ref", checkbox.id = "cb"+(iota++));
+    },
+
+    "TR.row-set-end": function(e) { // see rowSet.jelly and optionalBlock.jelly
+        // figure out the corresponding start block
+        var end = e;
+
+        for( var depth=0; ; e=e.previousSibling) {
+            if(Element.hasClassName(e,"row-set-end"))        depth++;
+            if(Element.hasClassName(e,"row-set-start"))      depth--;
+            if(depth==0)    break;
+        }
+        var start = e;
+
+        var ref = start.getAttribute("ref");
+        if(ref==null)
+            start.id = ref = "rowSetStart"+(iota++);
+
+        applyNameRef(start,end,ref);
+    },
+
+    "BODY TR.optional-block-start": function(e) { // see optionalBlock.jelly
+        // this is prefixed by a pointless BODY so that two processing for optional-block-start
+        // can sandwitch row-set-end
+        // this requires "TR.row-set-end" to mark rows
+        var checkbox = e.firstChild.firstChild;
+        updateOptionalBlock(checkbox,false);
     },
 
     // image that shows [+] or [-], with hover effect.
@@ -567,7 +660,6 @@ function replaceDescription() {
     new Ajax.Request(
         "./descriptionForm",
         {
-          method : 'post',
           onComplete : function(x) {
             d.innerHTML = x.responseText;
             Behaviour.applySubtree(d);
@@ -586,11 +678,6 @@ function applyNameRef(s,e,id) {
         if(x.getAttribute("nameRef")==null)
             x.setAttribute("nameRef",id);
     }
-}
-
-function initOptionalBlock(sid, eid, cid) {
-    applyNameRef($(sid),$(eid),cid);
-    updateOptionalBlock($(cid),false);
 }
 
 // used by optionalBlock.jelly to update the form status
@@ -634,6 +721,17 @@ function updateOptionalBlock(c,scroll) {
         var r = D.getRegion(s);
         if(lastRow!=null)   r = r.union(D.getRegion(lastRow));
         scrollIntoView(r);
+    }
+
+    if (c.name == 'hudson-tools-InstallSourceProperty') {
+        // Hack to hide tool home when "Install automatically" is checked.
+        var homeField = findPreviousFormItem(c, 'home');
+        if (homeField != null && homeField.value == '') {
+            var tr = findAncestor(homeField, 'TR');
+            if (tr != null) {
+                tr.style.display = c.checked ? 'none' : '';
+            }
+        }
     }
 }
 
@@ -738,7 +836,6 @@ function expandTextArea(button,id) {
 function refreshPart(id,url) {
     var f = function() {
         new Ajax.Request(url, {
-            method: "post",
             onSuccess: function(rsp) {
                 var hist = $(id);
                 var p = hist.parentNode;
@@ -922,6 +1019,14 @@ var repeatableSupport = {
         while(n.tag==null)
             n = n.parentNode;
         n.tag.expand();
+        // Hack to hide tool home when a new tool has some installers.
+        var inputs = n.getElementsByTagName('INPUT');
+        for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            if (input.name == 'hudson-tools-InstallSourceProperty') {
+                updateOptionalBlock(input, false);
+            }
+        }
     }
 };
 
@@ -1037,7 +1142,6 @@ function updateBuildHistory(ajaxUrl,nBuild) {
 // then use the result to fill the list box.
 function updateListBox(listBox,url) {
     new Ajax.Request(url, {
-        method: "post",
         onSuccess: function(rsp) {
             var l = $(listBox);
             while(l.length>0)   l.options[0] = null;
@@ -1422,6 +1526,28 @@ function loadScript(href) {
     document.getElementsByTagName("HEAD")[0].appendChild(s);
 }
 
+var downloadService = {
+    continuations: {},
+
+    download : function(id,url,info, postBack,completionHandler) {
+        this.continuations[id] = {postBack:postBack,completionHandler:completionHandler};
+        loadScript(url+"?"+Hash.toQueryString(info));
+    },
+
+    post : function(id,data) {
+        var o = this.continuations[id];
+        new Ajax.Request(o.postBack, {
+            parameters:{json:Object.toJSON(data)},
+            onSuccess: function() {
+                if(o.completionHandler!=null)
+                    o.completionHandler();
+            }
+        });
+    }
+};
+
+// update center service. for historical reasons,
+// this is separate from downloadSerivce
 var updateCenter = {
     postBackURL : null,
     info: {},
@@ -1434,7 +1560,6 @@ var updateCenter = {
 
     post : function(data) {
         new Ajax.Request(updateCenter.postBackURL, {
-            method:"post",
             parameters:{json:Object.toJSON(data)},
             onSuccess: function() {
                 if(updateCenter.completionHandler!=null)
@@ -1473,7 +1598,12 @@ function applySafeRedirector(url) {
                 }
             },
             onSuccess: function(rsp) {
-                window.location.replace(url);
+                if(rsp.status!=200) {
+                    // if connection fails, somehow Prototype thinks it's a success
+                    window.setTimeout(statusChecker,5000);
+                } else {
+                    window.location.replace(url);
+                }
             }
         });
     }, 5000);
@@ -1496,11 +1626,17 @@ function validateButton(checkUrl,paramList,button) {
   spinner.style.display="block";
 
   new Ajax.Request(checkUrl, {
-      method: "post",
       parameters: parameters,
       onComplete: function(rsp) {
           spinner.style.display="none";
           target.innerHTML = rsp.responseText;
+          var s = rsp.getResponseHeader("script");
+          if(s!=null)
+            try {
+              eval(s);
+            } catch(e) {
+              window.alert("failed to evaluate "+s+"\n"+e.message);
+            }
       }
   });
 }
@@ -1529,6 +1665,8 @@ function createComboBox(id,valueFunction) {
           return items; // equiv to: comboBox.setItems(items);
         };
 
-        new ComboBox(id,callback);
+        if (document.getElementById(id) != null) {
+          new ComboBox(id,callback);
+        }
     });
 }

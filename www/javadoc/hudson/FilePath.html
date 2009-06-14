@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FilePath (Hudson core 1.291 API)
+FilePath (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson core 1.291 API)";
+        parent.document.title="FilePath (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -155,10 +155,10 @@ java.lang.Object
  <p>
  When <A HREF="../hudson/FilePath.FileCallable.html" title="interface in hudson"><CODE>FilePath.FileCallable</CODE></A> is transfered to a remote node, it will be done so
  by using the same Java serialization scheme that the remoting module uses.
- See <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A> for more about this. 
+ See <A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> for more about this. 
 
  <p>
- <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> itself can be sent over to a remote node as a part of <A HREF="../hudson/FilePath.FileCallable.html" title="interface in hudson"><CODE>FilePath.FileCallable</CODE></A>
+ <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> itself can be sent over to a remote node as a part of <A HREF="../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A>
  serialization. For example, sending a <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> of a remote node to that
  node causes <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> to become "local". Similarly, sending a
  <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> that represents the local computer causes it to become "remote."
@@ -187,6 +187,14 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Code that gets executed on the machine where the <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> is local.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.TarCompression.html" title="enum in hudson">FilePath.TarCompression</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Supported tar file compression methods.</TD>
 </TR>
 </TABLE>
 &nbsp;<!-- =========== FIELD SUMMARY =========== -->
@@ -226,10 +234,10 @@ java.lang.Object
          java.lang.String&nbsp;rel)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Construct a path starting with a base location.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../hudson/FilePath.html#FilePath(hudson.remoting.VirtualChannel, java.lang.String)">FilePath</A></B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel,
+<TD><CODE><B><A HREF="../hudson/FilePath.html#FilePath(hudson.remoting.VirtualChannel, java.lang.String)">FilePath</A></B>(<A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel,
          java.lang.String&nbsp;remote)</CODE>
 
 <BR>
@@ -247,6 +255,14 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#absolutize()">absolutize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Absolutizes this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> and returns the new one.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>
 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
 <TR ALIGN="right" VALIGN="">
@@ -257,7 +273,7 @@ V</CODE></FONT></TD>
 </TR>
 </TABLE>
 </CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#act(hudson.remoting.Callable)">act</A></B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting">Callable</A>&lt;V,E&gt;&nbsp;callable)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#act(hudson.remoting.Callable)">act</A></B>(<A HREF="../hudson/remoting/Callable.html" title="interface in hudson.remoting">Callable</A>&lt;V,E&gt;&nbsp;callable)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes some program on the machine that this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> exists,
@@ -285,7 +301,7 @@ V</CODE></FONT></TD>
 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
 <TR ALIGN="right" VALIGN="">
 <TD NOWRAP><FONT SIZE="-1">
-<CODE>&lt;T&gt; <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Future.html?is-external=true" title="class or interface in hudson.remoting">Future</A>&lt;T&gt;</CODE></FONT></TD>
+<CODE>&lt;T&gt; <A HREF="../hudson/remoting/Future.html" title="interface in hudson.remoting">Future</A>&lt;T&gt;</CODE></FONT></TD>
 </TR>
 </TABLE>
 </CODE></FONT></TD>
@@ -301,7 +317,15 @@ V</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#child(java.lang.String)">child</A></B>(java.lang.String&nbsp;rel)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The same as <code>new FilePath(this,rel)</code> but more OO.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The same as <A HREF="../hudson/FilePath.html#FilePath(hudson.FilePath, java.lang.String)"><CODE>FilePath(FilePath,String)</CODE></A> but more OO.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#chmod(int)">chmod</A></B>(int&nbsp;mask)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the file permission.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -310,6 +334,23 @@ V</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Place the data from <CODE>FileItem</CODE> into the file location specified by this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#copyFrom(java.io.InputStream)">copyFrom</A></B>(java.io.InputStream&nbsp;in)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replaces the content of this file by the data from the given <CODE>InputStream</CODE>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#copyFrom(java.net.URL)">copyFrom</A></B>(java.net.URL&nbsp;url)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reads the URL on the current VM, and writes all the data to this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A>
+ (this is different from resolving URL remotely.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -446,7 +487,7 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#getChannel()">getChannel</A></B>()</CODE>
 
 <BR>
@@ -475,6 +516,16 @@ V</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#installIfNecessaryFrom(java.net.URL, hudson.model.TaskListener, java.lang.String)">installIfNecessaryFrom</A></B>(java.net.URL&nbsp;archive,
+                       <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                       java.lang.String&nbsp;message)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given a tgz/zip file, extracts it to the given target directory, if necessary.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -535,6 +586,14 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#listDirectories()">listDirectories</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List up subdirectories.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#mkdirs()">mkdirs</A></B>()</CODE>
 
@@ -543,11 +602,27 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#moveAllChildrenTo(hudson.FilePath)">moveAllChildrenTo</A></B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Moves all the contents of this directory into the specified directory, then delete this directory itself.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.io.InputStream</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#read()">read</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reads this file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#readToString()">readToString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reads this file into a string, by using the current system encoding.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -567,12 +642,38 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#touch(long)">touch</A></B>(long&nbsp;timestamp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a file (if not already exist) and sets the timestamp.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.net.URI</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#toURI()">toURI</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts this file to the URI, relative to the machine
  on which this file is available.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#untar(hudson.FilePath, hudson.FilePath.TarCompression)">untar</A></B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target,
+      <A HREF="../hudson/FilePath.TarCompression.html" title="enum in hudson">FilePath.TarCompression</A>&nbsp;compression)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> represents a tar file, extracts that tar file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#untarFrom(java.io.InputStream, hudson.FilePath.TarCompression)">untarFrom</A></B>(java.io.InputStream&nbsp;_in,
+          <A HREF="../hudson/FilePath.TarCompression.html" title="enum in hudson">FilePath.TarCompression</A>&nbsp;compression)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reads the given InputStream as a tar file and extracts it into this directory.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -598,6 +699,59 @@ V</CODE></FONT></TD>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates the ant file mask (like "foo/bar/*.txt, zot/*.jar")
  against this directory, and try to point out the problem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateFileMask(hudson.FilePath, java.lang.String)">validateFileMask</A></B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;pathOrNull,
+                 java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shortcut for <A HREF="../hudson/FilePath.html#validateFileMask(java.lang.String)"><CODE>validateFileMask(String)</CODE></A> in case the left-hand side can be null.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateFileMask(java.lang.String)">validateFileMask</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short for <code>validateFileMask(value,true)</code></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateFileMask(java.lang.String, boolean)">validateFileMask</A></B>(java.lang.String&nbsp;value,
+                 boolean&nbsp;errorIfNotExist)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks the GLOB-style file mask.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateRelativeDirectory(java.lang.String)">validateRelativeDirectory</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateRelativeDirectory(java.lang.String, boolean)">validateRelativeDirectory</A></B>(java.lang.String&nbsp;value,
+                          boolean&nbsp;errorIfNotExist)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A convenience method over <A HREF="../hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)"><CODE>validateRelativePath(String, boolean, boolean)</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)">validateRelativePath</A></B>(java.lang.String&nbsp;value,
+                     boolean&nbsp;errorIfNotExist,
+                     boolean&nbsp;expectingFile)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates a relative file path from this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -661,13 +815,13 @@ public static int <B>SIDE_BUFFER_SIZE</B></PRE>
 <A NAME="FilePath(hudson.remoting.VirtualChannel, java.lang.String)"><!-- --></A><H3>
 FilePath</H3>
 <PRE>
-public <B>FilePath</B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel,
+public <B>FilePath</B>(<A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel,
                 java.lang.String&nbsp;remote)</PRE>
 <DL>
 <DD>Creates a <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> that represents a path on the given node.
 <P>
 <DL>
-<DT><B>Parameters:</B><DD><CODE>channel</CODE> - To create a path that represents a remote path, pass in a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A>
+<DT><B>Parameters:</B><DD><CODE>channel</CODE> - To create a path that represents a remote path, pass in a <A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>
       that's connected to that machine. If null, that means the local file path.</DL>
 </DL>
 <HR>
@@ -692,6 +846,10 @@ FilePath</H3>
 public <B>FilePath</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;base,
                 java.lang.String&nbsp;rel)</PRE>
 <DL>
+<DD>Construct a path starting with a base location.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>base</CODE> - starting point for resolution, and defines channel<DD><CODE>rel</CODE> - a path which if relative will be resolved against base</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -782,7 +940,31 @@ public void <B>unzip</B>(<A HREF="../hudson/FilePath.html" title="class in hudso
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
   <DD>1.248</DD>
+<DT><B>See Also:</B><DD><A HREF="../hudson/FilePath.html#unzipFrom(java.io.InputStream)"><CODE>unzipFrom(InputStream)</CODE></A></DL>
+</DD>
 </DL>
+<HR>
+
+<A NAME="untar(hudson.FilePath, hudson.FilePath.TarCompression)"><!-- --></A><H3>
+untar</H3>
+<PRE>
+public void <B>untar</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target,
+                  <A HREF="../hudson/FilePath.TarCompression.html" title="enum in hudson">FilePath.TarCompression</A>&nbsp;compression)
+           throws java.io.IOException,
+                  java.lang.InterruptedException</PRE>
+<DL>
+<DD>When this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> represents a tar file, extracts that tar file.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>target</CODE> - Target directory to expand files to. All the necessary directories will be created.<DD><CODE>compression</CODE> - Compression mode of this tar file.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.292</DD>
+<DT><B>See Also:</B><DD><A HREF="../hudson/FilePath.html#untarFrom(java.io.InputStream, hudson.FilePath.TarCompression)"><CODE>untarFrom(InputStream, TarCompression)</CODE></A></DL>
 </DD>
 </DL>
 <HR>
@@ -805,6 +987,139 @@ public void <B>unzipFrom</B>(java.io.InputStream&nbsp;_in)
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
   <DD>1.283</DD>
+<DT><B>See Also:</B><DD><A HREF="../hudson/FilePath.html#unzip(hudson.FilePath)"><CODE>unzip(FilePath)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="absolutize()"><!-- --></A><H3>
+absolutize</H3>
+<PRE>
+public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>absolutize</B>()
+                    throws java.io.IOException,
+                           java.lang.InterruptedException</PRE>
+<DL>
+<DD>Absolutizes this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> and returns the new one.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="untarFrom(java.io.InputStream, hudson.FilePath.TarCompression)"><!-- --></A><H3>
+untarFrom</H3>
+<PRE>
+public void <B>untarFrom</B>(java.io.InputStream&nbsp;_in,
+                      <A HREF="../hudson/FilePath.TarCompression.html" title="enum in hudson">FilePath.TarCompression</A>&nbsp;compression)
+               throws java.io.IOException,
+                      java.lang.InterruptedException</PRE>
+<DL>
+<DD>Reads the given InputStream as a tar file and extracts it into this directory.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>_in</CODE> - The stream will be closed by this method after it's fully read.<DD><CODE>compression</CODE> - The compression method in use.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.292</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="installIfNecessaryFrom(java.net.URL, hudson.model.TaskListener, java.lang.String)"><!-- --></A><H3>
+installIfNecessaryFrom</H3>
+<PRE>
+public boolean <B>installIfNecessaryFrom</B>(java.net.URL&nbsp;archive,
+                                      <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                                      java.lang.String&nbsp;message)
+                               throws java.io.IOException,
+                                      java.lang.InterruptedException</PRE>
+<DL>
+<DD>Given a tgz/zip file, extracts it to the given target directory, if necessary.
+
+ <p>
+ This method is a convenience method designed for installing a binary package to a location
+ that supports upgrade and downgrade. Specifically,
+
+ <ul>
+ <li>If the target directory doesn't exist <A HREF="../hudson/FilePath.html#mkdirs()">it'll be created</A>.
+ <li>The timestamp of the .tgz file is left in the installation directory upon extraction.
+ <li>If the timestamp left in the directory doesn't match with the timestamp of the current archive file,
+     the directory contents will be discarded and the archive file will be re-extracted.
+ <li>If the connection is refused but the target directory already exists, it is left alone.
+ </ul>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>archive</CODE> - The resource that represents the tgz/zip file. This URL must support the "Last-Modified" header.
+      (Most common usage is to get this from <CODE>ClassLoader.getResource(String)</CODE>)<DD><CODE>listener</CODE> - If non-null, a message will be printed to this listener once this method decides to
+      extract an archive.
+<DT><B>Returns:</B><DD>true if the archive was extracted. false if the extraction was skipped because the target directory
+      was considered up to date.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.299</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="copyFrom(java.net.URL)"><!-- --></A><H3>
+copyFrom</H3>
+<PRE>
+public void <B>copyFrom</B>(java.net.URL&nbsp;url)
+              throws java.io.IOException,
+                     java.lang.InterruptedException</PRE>
+<DL>
+<DD>Reads the URL on the current VM, and writes all the data to this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A>
+ (this is different from resolving URL remotely.)
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.293</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="copyFrom(java.io.InputStream)"><!-- --></A><H3>
+copyFrom</H3>
+<PRE>
+public void <B>copyFrom</B>(java.io.InputStream&nbsp;in)
+              throws java.io.IOException,
+                     java.lang.InterruptedException</PRE>
+<DL>
+<DD>Replaces the content of this file by the data from the given <CODE>InputStream</CODE>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.293</DD>
 </DL>
 </DD>
 </DL>
@@ -856,7 +1171,7 @@ public &lt;T&gt; T <B>act</B>(<A HREF="../hudson/FilePath.FileCallable.html" tit
 <A NAME="actAsync(hudson.FilePath.FileCallable)"><!-- --></A><H3>
 actAsync</H3>
 <PRE>
-public &lt;T&gt; <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Future.html?is-external=true" title="class or interface in hudson.remoting">Future</A>&lt;T&gt; <B>actAsync</B>(<A HREF="../hudson/FilePath.FileCallable.html" title="interface in hudson">FilePath.FileCallable</A>&lt;T&gt;&nbsp;callable)
+public &lt;T&gt; <A HREF="../hudson/remoting/Future.html" title="interface in hudson.remoting">Future</A>&lt;T&gt; <B>actAsync</B>(<A HREF="../hudson/FilePath.FileCallable.html" title="interface in hudson">FilePath.FileCallable</A>&lt;T&gt;&nbsp;callable)
                    throws java.io.IOException,
                           java.lang.InterruptedException</PRE>
 <DL>
@@ -878,7 +1193,7 @@ public &lt;T&gt; <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudso
 <A NAME="act(hudson.remoting.Callable)"><!-- --></A><H3>
 act</H3>
 <PRE>
-public &lt;V,E extends java.lang.Throwable&gt; V <B>act</B>(<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting">Callable</A>&lt;V,E&gt;&nbsp;callable)
+public &lt;V,E extends java.lang.Throwable&gt; V <B>act</B>(<A HREF="../hudson/remoting/Callable.html" title="interface in hudson.remoting">Callable</A>&lt;V,E&gt;&nbsp;callable)
       throws java.io.IOException,
              java.lang.InterruptedException,
              E extends java.lang.Throwable</PRE>
@@ -1007,13 +1322,14 @@ child</H3>
 <PRE>
 public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>child</B>(java.lang.String&nbsp;rel)</PRE>
 <DL>
-<DD>The same as <code>new FilePath(this,rel)</code> but more OO.
+<DD>The same as <A HREF="../hudson/FilePath.html#FilePath(hudson.FilePath, java.lang.String)"><CODE>FilePath(FilePath,String)</CODE></A> but more OO.
 <P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>rel</CODE> - a relative or absolute path
+<DT><B>Returns:</B><DD>a file on the same channel</DL>
 </DD>
 </DL>
 <HR>
@@ -1164,7 +1480,31 @@ public long <B>lastModified</B>()
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>See Also:</B><DD><CODE>File.lastModified()</CODE></DL>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>See Also:</B><DD><CODE>File.lastModified()</CODE>, 
+<A HREF="../hudson/FilePath.html#touch(long)"><CODE>touch(long)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="touch(long)"><!-- --></A><H3>
+touch</H3>
+<PRE>
+public void <B>touch</B>(long&nbsp;timestamp)
+           throws java.io.IOException,
+                  java.lang.InterruptedException</PRE>
+<DL>
+<DD>Creates a file (if not already exist) and sets the timestamp.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.299</DD>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -1213,6 +1553,31 @@ public long <B>length</B>()
 </DL>
 <HR>
 
+<A NAME="chmod(int)"><!-- --></A><H3>
+chmod</H3>
+<PRE>
+public void <B>chmod</B>(int&nbsp;mask)
+           throws java.io.IOException,
+                  java.lang.InterruptedException</PRE>
+<DL>
+<DD>Sets the file permission.
+
+ On Windows, no-op.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.303</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="list()"><!-- --></A><H3>
 list</H3>
 <PRE>
@@ -1230,6 +1595,28 @@ public java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudso
 </DD>
 <DD><DL>
 
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="listDirectories()"><!-- --></A><H3>
+listDirectories</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt; <B>listDirectories</B>()
+                                         throws java.io.IOException,
+                                                java.lang.InterruptedException</PRE>
+<DL>
+<DD>List up subdirectories.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>can be empty but never null. Doesn't contain "." and ".."
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>
@@ -1274,7 +1661,7 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>[] 
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>includes</CODE> - See <CODE>FileSet</CODE> for the syntax. String like "foo/*.zip".
+<DT><B>Parameters:</B><DD><CODE>includes</CODE> - See <CODE>FileSet</CODE> for the syntax. String like "foo/*.zip" or "foo/*&#42;/*.xml"
 <DT><B>Returns:</B><DD>can be empty but always non-null.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
@@ -1290,6 +1677,25 @@ public java.io.InputStream <B>read</B>()
                          throws java.io.IOException</PRE>
 <DL>
 <DD>Reads this file.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="readToString()"><!-- --></A><H3>
+readToString</H3>
+<PRE>
+public java.lang.String <B>readToString</B>()
+                              throws java.io.IOException</PRE>
+<DL>
+<DD>Reads this file into a string, by using the current system encoding.
 <P>
 <DD><DL>
 </DL>
@@ -1392,6 +1798,29 @@ public void <B>renameTo</B>(<A HREF="../hudson/FilePath.html" title="class in hu
 </DL>
 <HR>
 
+<A NAME="moveAllChildrenTo(hudson.FilePath)"><!-- --></A><H3>
+moveAllChildrenTo</H3>
+<PRE>
+public void <B>moveAllChildrenTo</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)
+                       throws java.io.IOException,
+                              java.lang.InterruptedException</PRE>
+<DL>
+<DD>Moves all the contents of this directory into the specified directory, then delete this directory itself.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.308.</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="copyTo(hudson.FilePath)"><!-- --></A><H3>
 copyTo</H3>
 <PRE>
@@ -1484,7 +1913,9 @@ public int <B>copyRecursiveTo</B>(java.lang.String&nbsp;fileMask,
 <A NAME="createLauncher(hudson.model.TaskListener)"><!-- --></A><H3>
 createLauncher</H3>
 <PRE>
-public <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>createLauncher</B>(<A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</PRE>
+public <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>createLauncher</B>(<A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
+                        throws java.io.IOException,
+                               java.lang.InterruptedException</PRE>
 <DL>
 <DD>Creates a <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> for starting processes on the node
  that has this file.
@@ -1493,7 +1924,10 @@ public <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Since:</B></DT>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
   <DD>1.89</DD>
 </DL>
 </DD>
@@ -1511,19 +1945,139 @@ public java.lang.String <B>validateAntFileMask</B>(java.lang.String&nbsp;fileMas
  against this directory, and try to point out the problem.
 
  <p>
- This is useful in conjunction with <A HREF="../hudson/util/FormFieldValidator.html" title="class in hudson.util"><CODE>FormFieldValidator</CODE></A>.
+ This is useful in conjunction with <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util"><CODE>FormValidation</CODE></A>.
 <P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>null if no error was found.
+<DT><B>Returns:</B><DD>null if no error was found. Otherwise returns a human readable error message.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
   <DD>1.90</DD>
-<DT><B>See Also:</B><DD><CODE>FormFieldValidator.WorkspaceFileMask</CODE></DL>
+<DT><B>See Also:</B><DD><A HREF="../hudson/FilePath.html#validateFileMask(hudson.FilePath, java.lang.String)"><CODE>validateFileMask(FilePath, String)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="validateFileMask(hudson.FilePath, java.lang.String)"><!-- --></A><H3>
+validateFileMask</H3>
+<PRE>
+public static <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateFileMask</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;pathOrNull,
+                                              java.lang.String&nbsp;value)
+                                       throws java.io.IOException</PRE>
+<DL>
+<DD>Shortcut for <A HREF="../hudson/FilePath.html#validateFileMask(java.lang.String)"><CODE>validateFileMask(String)</CODE></A> in case the left-hand side can be null.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="validateFileMask(java.lang.String)"><!-- --></A><H3>
+validateFileMask</H3>
+<PRE>
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateFileMask</B>(java.lang.String&nbsp;value)
+                                throws java.io.IOException</PRE>
+<DL>
+<DD>Short for <code>validateFileMask(value,true)</code>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="validateFileMask(java.lang.String, boolean)"><!-- --></A><H3>
+validateFileMask</H3>
+<PRE>
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateFileMask</B>(java.lang.String&nbsp;value,
+                                       boolean&nbsp;errorIfNotExist)
+                                throws java.io.IOException</PRE>
+<DL>
+<DD>Checks the GLOB-style file mask. See <A HREF="../hudson/FilePath.html#validateAntFileMask(java.lang.String)"><CODE>validateAntFileMask(String)</CODE></A>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE><DT><B>Since:</B></DT>
+  <DD>1.294</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="validateRelativePath(java.lang.String, boolean, boolean)"><!-- --></A><H3>
+validateRelativePath</H3>
+<PRE>
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateRelativePath</B>(java.lang.String&nbsp;value,
+                                           boolean&nbsp;errorIfNotExist,
+                                           boolean&nbsp;expectingFile)
+                                    throws java.io.IOException</PRE>
+<DL>
+<DD>Validates a relative file path from this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>value</CODE> - The relative path being validated.<DD><CODE>errorIfNotExist</CODE> - If true, report an error if the given relative path doesn't exist. Otherwise it's a warning.<DD><CODE>expectingFile</CODE> - If true, we expect the relative path to point to a file.
+      Otherwise, the relative path is expected to be pointing to a directory.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="validateRelativeDirectory(java.lang.String, boolean)"><!-- --></A><H3>
+validateRelativeDirectory</H3>
+<PRE>
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateRelativeDirectory</B>(java.lang.String&nbsp;value,
+                                                boolean&nbsp;errorIfNotExist)
+                                         throws java.io.IOException</PRE>
+<DL>
+<DD>A convenience method over <A HREF="../hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)"><CODE>validateRelativePath(String, boolean, boolean)</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="validateRelativeDirectory(java.lang.String)"><!-- --></A><H3>
+validateRelativeDirectory</H3>
+<PRE>
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateRelativeDirectory</B>(java.lang.String&nbsp;value)
+                                         throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1548,7 +2102,7 @@ toString</H3>
 <A NAME="getChannel()"><!-- --></A><H3>
 getChannel</H3>
 <PRE>
-public <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A> <B>getChannel</B>()</PRE>
+public <A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A> <B>getChannel</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>

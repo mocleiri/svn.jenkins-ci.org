@@ -27,7 +27,7 @@ THE SOFTWARE.
   <parent>
     <groupId>org.jvnet.hudson.main</groupId>
     <artifactId>pom</artifactId>
-    <version>1.292-SNAPSHOT</version>
+    <version>1.310-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   
@@ -70,7 +70,6 @@ THE SOFTWARE.
       <plugin>
         <groupId>org.jvnet.maven-antrun-extended-plugin</groupId>
         <artifactId>maven-antrun-extended-plugin</artifactId>
-        <version>1.36</version>
         <executions>
           <execution>
             <id>package</id>
@@ -92,11 +91,12 @@ THE SOFTWARE.
               <goal>run</goal>
             </goals>
             <configuration>
+              <verifyArtifact>false</verifyArtifact>
               <tasks>
                 <mkdir dir="target/generated-resources" />
 
                 <!-- put executable war header -->
-                <resolveArtifact artifactId="executable-war" property="executable-war.jar" />
+                <resolveArtifact groupId="org.jvnet.hudson" artifactId="executable-war" version="1.10" type="jar" property="executable-war.jar" />
                 <unjar src="${executable-war.jar}" dest="target/generated-resources">
                   <patternset>
                     <include name="**/*.class" />
@@ -106,7 +106,12 @@ THE SOFTWARE.
                 <!-- dependencies that goes to unusual locations -->
                 <resolveArtifact artifactId="remoting" tofile="${basedir}/target/generated-resources/WEB-INF/remoting.jar" />
                 <resolveArtifact artifactId="remoting" tofile="${basedir}/target/generated-resources/WEB-INF/slave.jar" />
-                <resolveArtifact artifactId="winstone" tofile="${basedir}/target/generated-resources/winstone.jar" />
+                <resolveArtifact groupId="${project.groupId}" artifactId="cli" classifier="jar-with-dependencies" version="${project.version}" type="jar" tofile="${basedir}/target/generated-resources/WEB-INF/hudson-cli.jar" />
+                <resolveArtifact groupId="org.jvnet.hudson.winstone" artifactId="winstone" version="0.9.10-hudson-9" type="jar" tofile="${basedir}/target/generated-resources/winstone.jar" />
+
+                <!-- bundled plugins -->
+                <resolveArtifact groupId="${project.groupId}" artifactId="maven-plugin" version="${project.version}" type="hpi" tofile="${basedir}/target/generated-resources/WEB-INF/plugins/maven-plugin.hpi" />
+                <resolveArtifact groupId="org.jvnet.hudson.plugins" artifactId="ssh-slaves" version="0.5.2" type="hpi" tofile="${basedir}/target/generated-resources/WEB-INF/plugins/ssh-slaves.hpi" />
               </tasks>
             </configuration>
           </execution>
@@ -149,9 +154,29 @@ THE SOFTWARE.
               <value>true</value>
             </systemProperty>
             <systemProperty>
+              <!-- show the stapler evaluation during execution -->
+              <name>stapler.trace</name>
+              <value>true</value>
+            </systemProperty>
+            <systemProperty>
+              <!-- always reload scripts during debugging -->
+              <name>hudson.script.noCache</name>
+              <value>true</value>
+            </systemProperty>
+            <systemProperty>
               <!-- load view resources from the source directly, again for real time change -->
               <name>stapler.resourcePath</name>
               <value>../core/src/main/resources</value>
+            </systemProperty>
+            <systemProperty>
+              <!-- enable the maven plugin by default -->
+              <name>hudson.bundled.plugins</name>
+              <value>${basedir}/../maven-plugin/target/test-classes/the.hpl</value>
+            </systemProperty>
+            <systemProperty>
+              <!-- stat collection pointless -->
+              <name>hudson.model.UsageStatistics.disabled</name>
+              <value>true</value>
             </systemProperty>
           </systemProperties>
         </configuration>
@@ -177,26 +202,6 @@ THE SOFTWARE.
           <artifactId>jsp-api</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>
-    <dependency>
-      <!--
-        classes in this jar will be rebundled into the war.
-        marking it provided so that this won't show up in WEB-INF/lib
-      -->
-      <groupId>org.jvnet.hudson</groupId>
-      <artifactId>executable-war</artifactId>
-      <version>1.8</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <!--
-        this dependency is just so that we can put winstone.jar in the war.
-        marking it provided so that this won't show up in WEB-INF/lib
-      -->
-      <groupId>org.jvnet.hudson.winstone</groupId>
-      <artifactId>winstone</artifactId>
-      <version>0.9.10-hudson-9</version>
-      <scope>provided</scope>
     </dependency>
     <!-- offline profiler API when we need it -->
     <!--dependency>

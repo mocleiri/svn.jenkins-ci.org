@@ -1,3 +1,27 @@
+/**
+ * The MIT License
+ *
+ * Copyright (c) 2007-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt,
+ *                          Henrik Lynggaard, Peter Liljenberg, Andrew Bayer
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package hudson.plugins.clearcase;
 
 import hudson.FilePath;
@@ -48,10 +72,10 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 	public ClearCaseUcmSCM(String stream, String loadrules, String viewname,
 			boolean usedynamicview, String viewdrive,
 			String mkviewoptionalparam, boolean filterOutDestroySubBranchEvent,
-                               boolean useUpdate, boolean removeViewOnRename,
+                               boolean useUpdate, boolean rmviewonrename,
                                String excludedRegions) {
 		super(viewname, mkviewoptionalparam, filterOutDestroySubBranchEvent,
-                      useUpdate, removeViewOnRename, excludedRegions);
+                      useUpdate, rmviewonrename, excludedRegions);
 		this.stream = shortenStreamName(stream);
 		this.loadRules = loadrules;
 		this.useDynamicView = usedynamicview;
@@ -62,9 +86,9 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 	public ClearCaseUcmSCM(String stream, String loadrules, String viewname,
 			boolean usedynamicview, String viewdrive,
 			String mkviewoptionalparam, boolean filterOutDestroySubBranchEvent,
-                               boolean useUpdate, boolean removeViewOnRename) {
+                               boolean useUpdate, boolean rmviewonrename) {
             this(stream, loadrules, viewname, usedynamicview, viewdrive, mkviewoptionalparam,
-                 filterOutDestroySubBranchEvent, useUpdate, removeViewOnRename, "");
+                 filterOutDestroySubBranchEvent, useUpdate, rmviewonrename, "");
         }
 
 	/**
@@ -115,7 +139,7 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 	@Override
 	public String[] getViewPaths(FilePath viewPath) throws IOException,
 			InterruptedException {
-		String[] rules = loadRules.split("\n");
+		String[] rules = loadRules.split("[\\r\\n]+");
 		for (int i = 0; i < rules.length; i++) {
 			String rule = rules[i];
 			// Remove "\\", "\" or "/" from the load rule. (bug#1706) Only if
@@ -254,7 +278,7 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 					req.getParameter("ucm.mkviewoptionalparam"),
 					req.getParameter("ucm.filterOutDestroySubBranchEvent") != null,
 					req.getParameter("ucm.useupdate") != null,
-					req.getParameter("ucm.removeViewOnRename") != null,
+					req.getParameter("ucm.rmviewonrename") != null,
                                         req.getParameter("ucm.excludedRegions")
                                                                   );
 			return scm;

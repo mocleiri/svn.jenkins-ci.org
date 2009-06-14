@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Recorder (Hudson core 1.291 API)
+Recorder (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Recorder (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Recorder (Hudson core 1.291 API)";
+        parent.document.title="Recorder (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -102,7 +102,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;, <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/tasks/test/AggregatedTestResultPublisher.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher</A>, <A HREF="../../hudson/tasks/ArtifactArchiver.html" title="class in hudson.tasks">ArtifactArchiver</A>, <A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks">BuildTrigger</A>, <A HREF="../../hudson/tasks/Fingerprinter.html" title="class in hudson.tasks">Fingerprinter</A>, <A HREF="../../hudson/tasks/JavadocArchiver.html" title="class in hudson.tasks">JavadocArchiver</A>, <A HREF="../../hudson/tasks/junit/JUnitResultArchiver.html" title="class in hudson.tasks.junit">JUnitResultArchiver</A>, <A HREF="../../hudson/maven/RedeployPublisher.html" title="class in hudson.maven">RedeployPublisher</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/tasks/test/AggregatedTestResultPublisher.html" title="class in hudson.tasks.test">AggregatedTestResultPublisher</A>, <A HREF="../../hudson/tasks/ArtifactArchiver.html" title="class in hudson.tasks">ArtifactArchiver</A>, <A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks">BuildTrigger</A>, <A HREF="../../hudson/tasks/Fingerprinter.html" title="class in hudson.tasks">Fingerprinter</A>, <A HREF="../../hudson/tasks/JavadocArchiver.html" title="class in hudson.tasks">JavadocArchiver</A>, <A HREF="../../hudson/tasks/junit/JUnitResultArchiver.html" title="class in hudson.tasks.junit">JUnitResultArchiver</A></DD>
 </DL>
 <HR>
 <DL>
@@ -114,7 +114,7 @@ java.lang.Object
 
  <p>
  <A HREF="../../hudson/tasks/Recorder.html" title="class in hudson.tasks"><CODE>Recorder</CODE></A> is a kind of <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A> that collects statistics from the build,
- and can mark builds as untable/failure. This marking ensures that builds are marked accordingly
+ and can mark builds as unstable/failure. This marking ensures that builds are marked accordingly
  before notifications are sent via <A HREF="../../hudson/tasks/Notifier.html" title="class in hudson.tasks"><CODE>Notifier</CODE></A>s. Otherwise, if the build is marked failed
  after some notifications are sent, inconsistency ensues.
 

@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.Label (Hudson core 1.291 API)
+Uses of Class hudson.model.Label (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Label (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Label (Hudson core 1.291 API)";
+        parent.document.title="Uses of Class hudson.model.Label (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -95,16 +95,16 @@ Packages that use <A HREF="../../../hudson/model/Label.html" title="class in hud
 <TD>Matrix project&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven"><B>hudson.maven</B></A></TD>
-<TD>Maven support.&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.slaves"><B>hudson.slaves</B></A></TD>
 <TD>Code related to slaves.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.jvnet.hudson.test"><B>org.jvnet.hudson.test</B></A></TD>
+<TD>Test harness for Hudson and its plugins.&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -146,32 +146,6 @@ Uses of <A HREF="../../../hudson/model/Label.html" title="class in hudson.model"
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../../hudson/model/Label.html" title="class in hudson.model"><CODE>Label</CODE></A>s where the builds will be run.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson.maven"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Uses of <A HREF="../../../hudson/model/Label.html" title="class in hudson.model">Label</A> in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A></FONT></TH>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A> that return <A HREF="../../../hudson/model/Label.html" title="class in hudson.model">Label</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Label.html" title="class in hudson.model">Label</A></CODE></FONT></TD>
-<TD><CODE><B>MavenModule.</B><B><A HREF="../../../hudson/maven/MavenModule.html#getAssignedLabel()">getAssignedLabel</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A> uses the workspace of the <A HREF="../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven"><CODE>MavenModuleSet</CODE></A>,
- so it always needs to be built on the same slave as the parent.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -297,6 +271,14 @@ Uses of <A HREF="../../../hudson/model/Label.html" title="class in hudson.model"
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the active labels in the current system.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.Set&lt;<A HREF="../../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>Label.</B><B><A HREF="../../../hudson/model/Label.html#parse(java.lang.String)">parse</A></B>(java.lang.String&nbsp;labels)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convers a whitespace-separate list of tokens into a set of <A HREF="../../../hudson/model/Label.html" title="class in hudson.model"><CODE>Label</CODE></A>s.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -377,6 +359,40 @@ Uses of <A HREF="../../../hudson/model/Label.html" title="class in hudson.model"
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.jvnet.hudson.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Label.html" title="class in hudson.model">Label</A> in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A> with parameters of type <A HREF="../../../hudson/model/Label.html" title="class in hudson.model">Label</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/slaves/DumbSlave.html" title="class in hudson.slaves">DumbSlave</A></CODE></FONT></TD>
+<TD><CODE><B>HudsonTestCase.</B><B><A HREF="../../../org/jvnet/hudson/test/HudsonTestCase.html#createSlave(hudson.model.Label)">createSlave</A></B>(<A HREF="../../../hudson/model/Label.html" title="class in hudson.model">Label</A>&nbsp;l)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates and launches a new slave on the local host.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/slaves/DumbSlave.html" title="class in hudson.slaves">DumbSlave</A></CODE></FONT></TD>
+<TD><CODE><B>HudsonTestCase.</B><B><A HREF="../../../org/jvnet/hudson/test/HudsonTestCase.html#createSlave(hudson.model.Label, hudson.EnvVars)">createSlave</A></B>(<A HREF="../../../hudson/model/Label.html" title="class in hudson.model">Label</A>&nbsp;l,
+            <A HREF="../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a slave with certain additional environment variables</TD>
 </TR>
 </TABLE>
 &nbsp;

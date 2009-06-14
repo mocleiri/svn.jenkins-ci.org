@@ -1,3 +1,27 @@
+/**
+ * The MIT License
+ *
+ * Copyright (c) 2007-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt,
+ *                          Henrik Lynggaard, Peter Liljenberg, Andrew Bayer
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package hudson.plugins.clearcase;
 
 import hudson.FilePath;
@@ -113,6 +137,34 @@ public class ClearToolSnapshot extends ClearToolExec {
         launcher.run(cmd.toCommandArray(), null, null, null);
     }
 
+
+    public void rmviewtag(String viewName) throws IOException, InterruptedException {
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
+        cmd.add("rmtag");
+        cmd.add("-view");
+        cmd.add(viewName);
+        
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+        launcher.run(cmd.toCommandArray(), null, baos, null);
+        BufferedReader reader = new BufferedReader( new InputStreamReader(new ByteArrayInputStream(baos.toByteArray())));
+        baos.close();
+        String line = reader.readLine();
+        StringBuilder builder = new StringBuilder();
+        while (line != null) {
+            if (builder.length() > 0) {
+                builder.append("\n");
+            }
+            builder.append(line);
+            line = reader.readLine();
+        }
+        reader.close();
+        
+        if (builder.toString().contains("cleartool: Error")) {
+        	throw new IOException("Failed to remove view tag: " + builder.toString());
+        }
+       
+    }
+ 
     @Override
     protected FilePath getRootViewPath(ClearToolLauncher launcher) {
         return launcher.getWorkspace();

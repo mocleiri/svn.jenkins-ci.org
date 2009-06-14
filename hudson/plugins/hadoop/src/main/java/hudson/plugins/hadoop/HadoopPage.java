@@ -27,8 +27,8 @@ import hudson.model.AbstractModelObject;
 import hudson.model.Action;
 import hudson.model.Hudson;
 
-import java.net.URL;
 import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Top-level Hadoop page that gets added to Hudson.
@@ -45,11 +45,11 @@ public class HadoopPage extends AbstractModelObject implements Action {
     }
 
     public String getIconFileName() {
-        return "star-gold.gif";
+        return "/plugin/hadoop/24x24/hadoop.png";
     }
 
     public String getUrlName() {
-        return "hadoop";
+        return "/hadoop";
     }
 
     /**

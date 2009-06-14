@@ -5,11 +5,14 @@ import com4j.Holder;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
+import hudson.Extension;
+import hudson.util.IOException2;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Build;
 import hudson.model.BuildListener;
 import hudson.model.TaskListener;
+import hudson.model.Hudson;
 import hudson.scm.ChangeLogParser;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
@@ -27,6 +30,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,13 +51,6 @@ import java.util.Set;
  */
 public class VSSSCM extends SCM
 {
-	/**
-	 * 
-	 * VSS descriptor.
-	 * 
-	 */
-	public static final SCMDescriptor DESCRIPTOR = new VSSDescriptor();
-
 	/**
 	 * 
 	 * Maximum history entries to be maintained.
@@ -221,6 +220,12 @@ public class VSSSCM extends SCM
 			BuildListener listener, File changelogFile)
 			throws IOException, InterruptedException
 	{
+        // better be on Windows, or else it won't work
+        if(launcher.isUnix()) {
+            listener.getLogger().println("Visual SourceSafe support only runs on Windows");
+            return false;
+        }
+
 		//Are there any builds made before this?
 		List<Object[]> historyEntries;
 		List<String> deletions = null;
@@ -424,7 +429,7 @@ public class VSSSCM extends SCM
 		catch(RuntimeException error)
 		{
 			//Some COM error.
-			throw new IOException(error.getMessage());
+			throw new IOException2(error);
 		}
 	}
 
@@ -439,7 +444,7 @@ public class VSSSCM extends SCM
 	 */
 	private void save(File file, List<Object[]> history) throws IOException
 	{
-		PrintStream stream = new PrintStream(new FileOutputStream(file));
+		PrintWriter stream = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8"));
 		Object[] entry;
 		int size = history.size();
 		int tagcount = TAGS.length;
@@ -516,7 +521,7 @@ public class VSSSCM extends SCM
 		catch(RuntimeException error)
 		{
 			//Some COM error.
-			throw new IOException(error.getMessage());
+			throw new IOException2(error);
 		}
 	}
 
@@ -618,16 +623,6 @@ public class VSSSCM extends SCM
 		return new VSSChangeLogParser();
 	}
 
-	/**
-	 * 
-	 * Returns the descriptor.
-	 * 
-	 */
-	public SCMDescriptor getDescriptor()
-	{
-		return DESCRIPTOR;
-	}
-
 	//Attributes.
 	/**
 	 * 
@@ -724,7 +719,8 @@ public class VSSSCM extends SCM
 	 * VSS descriptor that describes about the VSS SCM.
 	 * 
 	 */
-	private static class VSSDescriptor extends SCMDescriptor<VSSSCM>
+    @Extension
+	public static class VSSDescriptor extends SCMDescriptor<VSSSCM>
 	{
 		/**
 		 * 

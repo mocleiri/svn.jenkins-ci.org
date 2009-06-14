@@ -34,22 +34,26 @@ import hudson.views.LastSuccessColumn;
 import hudson.views.ListViewColumn;
 import hudson.views.StatusColumn;
 import hudson.views.WeatherColumn;
-import hudson.views.StatusColumn.DescriptorImpl;
 import hudson.model.Descriptor.FormException;
 import hudson.util.CaseInsensitiveComparator;
-import hudson.util.FormFieldValidator;
+import hudson.util.DescribableList;
+import hudson.util.FormValidation;
 
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.QueryParameter;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 import java.util.TreeSet;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.SortedSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -59,12 +63,13 @@ import java.util.regex.PatternSyntaxException;
  * @author Kohsuke Kawaguchi
  */
 public class ListView extends View {
+
     /**
      * List of job names. This is what gets serialized.
      */
-    /*package*/ final Set<String> jobNames = new TreeSet<String>(CaseInsensitiveComparator.INSTANCE);
+    /*package*/ final SortedSet<String> jobNames = new TreeSet<String>(CaseInsensitiveComparator.INSTANCE);
 
-    protected transient List<ListViewColumn> columns = new ArrayList<ListViewColumn>();
+    private DescribableList<ListViewColumn, Descriptor<ListViewColumn>> columns;
 
     // First add all the known instances in the correct order:
     private static final Descriptor [] defaultColumnDescriptors  =  {
@@ -101,10 +106,15 @@ public class ListView extends View {
     }
 
     protected void initColumns() {
+        if (columns != null) {
+            // already persisted
+            return;
+        }
+        // OK, set up default list of columns:
         // create all instances
         ArrayList<ListViewColumn> r = new ArrayList<ListViewColumn>();
         DescriptorExtensionList<ListViewColumn, Descriptor<ListViewColumn>> all = ListViewColumn.all();
-        ArrayList <Descriptor<ListViewColumn>>left = new ArrayList();
+        ArrayList<Descriptor<ListViewColumn>> left = new ArrayList<Descriptor<ListViewColumn>>();
         left.addAll(all);
         for (Descriptor d: defaultColumnDescriptors) {
             Descriptor<ListViewColumn> des = all.find(d.getClass().getName());
@@ -124,7 +134,18 @@ public class ListView extends View {
             } catch (FormException e) {
                 // so far impossible. TODO: report
             }
-        columns = Collections.unmodifiableList(r);
+        Iterator<ListViewColumn> filter = r.iterator();
+        while (filter.hasNext()) {
+            if (!filter.next().shownByDefault()) {
+                filter.remove();
+            }
+        }
+        columns = new DescribableList<ListViewColumn, Descriptor<ListViewColumn>>(Saveable.NOOP);
+        try {
+            columns.replaceBy(r);
+        } catch (IOException ex) {
+            Logger.getLogger(ListView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -132,11 +153,12 @@ public class ListView extends View {
      *
      * @see Hudson#getActions()
      */
+    @Override
     public List<Action> getActions() {
         return Hudson.getInstance().getActions();
     }
 
-    public List<ListViewColumn> getColumns() {
+    public Iterable<ListViewColumn> getColumns() {
         return columns;
     }
     
@@ -165,7 +187,7 @@ public class ListView extends View {
      * concurrent modification issue.
      */
     public synchronized List<TopLevelItem> getItems() {
-        Set<String> names = (Set<String>) ((TreeSet<String>) jobNames).clone();
+        SortedSet<String> names = new TreeSet<String>(jobNames);
 
         if (includePattern != null) {
             for (TopLevelItem item : Hudson.getInstance().getItems()) {
@@ -177,8 +199,8 @@ public class ListView extends View {
         }
 
         List<TopLevelItem> items = new ArrayList<TopLevelItem>(names.size());
-        for (String name : names) {
-            TopLevelItem item = Hudson.getInstance().getItem(name);
+        for (String n : names) {
+            TopLevelItem item = Hudson.getInstance().getItem(n);
             if(item!=null)
                 items.add(item);
         }
@@ -214,7 +236,7 @@ public class ListView extends View {
      * Load view-specific properties here.
      */
     @Override
-    protected void submit(StaplerRequest req) {
+    protected void submit(StaplerRequest req) throws ServletException, FormException {
         jobNames.clear();
         for (TopLevelItem item : Hudson.getInstance().getItems()) {
             if(req.getParameter(item.getName())!=null)
@@ -228,6 +250,11 @@ public class ListView extends View {
             includeRegex = null;
             includePattern = null;
         }
+
+        if (columns == null) {
+            columns = new DescribableList<ListViewColumn,Descriptor<ListViewColumn>>(Saveable.NOOP);
+        }
+        columns.rebuildHetero(req, req.getSubmittedForm(), Hudson.getInstance().getDescriptorList(ListViewColumn.class), "columns");
     }
 
     @Extension
@@ -239,21 +266,16 @@ public class ListView extends View {
         /**
          * Checks if the include regular expression is valid.
          */
-        public void doCheckIncludeRegex( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException, InterruptedException  {
-            new FormFieldValidator(req, rsp, false) {
-                @Override
-                protected void check() throws IOException, ServletException {
-                    String v = Util.fixEmpty(request.getParameter("value"));
-                    if (v != null) {
-                        try {
-                            Pattern.compile(v);
-                        } catch (PatternSyntaxException pse) {
-                            error(pse.getMessage());
-                        }
-                    }
-                    ok();
+        public FormValidation doCheckIncludeRegex( @QueryParameter String value ) throws IOException, ServletException, InterruptedException  {
+            String v = Util.fixEmpty(value);
+            if (v != null) {
+                try {
+                    Pattern.compile(v);
+                } catch (PatternSyntaxException pse) {
+                    return FormValidation.error(pse.getMessage());
                 }
-            }.process();
+            }
+            return FormValidation.ok();
         }
     }
 }

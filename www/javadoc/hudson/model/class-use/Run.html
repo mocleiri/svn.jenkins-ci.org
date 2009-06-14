@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.Run (Hudson core 1.291 API)
+Uses of Class hudson.model.Run (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Run (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Run (Hudson core 1.291 API)";
+        parent.document.title="Uses of Class hudson.model.Run (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -99,10 +99,6 @@ Packages that use <A HREF="../../../hudson/model/Run.html" title="class in hudso
 <TD>Matrix project&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven"><B>hudson.maven</B></A></TD>
-<TD>Maven support.&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
@@ -118,6 +114,10 @@ action (such as the built-in JUnit one).&nbsp;</TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.util"><B>hudson.util</B></A></TD>
 <TD>Other miscellaneous utility code&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.jvnet.hudson.test"><B>org.jvnet.hudson.test</B></A></TD>
+<TD>Test harness for Hudson and its plugins.&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -177,39 +177,6 @@ Uses of <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">R
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Execution of <A HREF="../../../hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix"><CODE>MatrixConfiguration</CODE></A>.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson.maven"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Uses of <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A> in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A></FONT></TH>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A> in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A> for <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven">MavenModuleSetBuild</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A> for <A HREF="../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven"><CODE>MavenModuleSet</CODE></A>.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -333,14 +300,6 @@ Uses of <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">R
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Previous build.</TD>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A></CODE></FONT></TD>
-<TD><CODE><B>RunParameterValue.</B><B><A HREF="../../../hudson/model/RunParameterValue.html#run">run</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -399,12 +358,28 @@ Uses of <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">R
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&lt;?,?&gt;</CODE></FONT></TD>
+<TD><CODE><B>Run.</B><B><A HREF="../../../hudson/model/Run.html#fromExternalizableId(java.lang.String)">fromExternalizableId</A></B>(java.lang.String&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A></CODE></FONT></TD>
 <TD><CODE><B>Fingerprint.BuildPtr.</B><B><A HREF="../../../hudson/model/Fingerprint.BuildPtr.html#getRun()">getRun</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A> that this pointer points to,
  or null if such a job no longer exists.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A></CODE></FONT></TD>
+<TD><CODE><B>RunParameterValue.</B><B><A HREF="../../../hudson/model/RunParameterValue.html#getRun()">getRun</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -439,6 +414,12 @@ Uses of <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">R
 <TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with parameters of type <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/model/Cause.UpstreamCause.html#Cause.UpstreamCause(hudson.model.Run)">Cause.UpstreamCause</A></B>(<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&lt;?,?&gt;&nbsp;up)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../hudson/model/Fingerprint.BuildPtr.html#Fingerprint.BuildPtr(hudson.model.Run)">Fingerprint.BuildPtr</A></B>(<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;run)</CODE>
 
 <BR>
@@ -448,13 +429,6 @@ Uses of <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">R
 <TD><CODE><B><A HREF="../../../hudson/model/Fingerprint.html#Fingerprint(hudson.model.Run, java.lang.String, byte[])">Fingerprint</A></B>(<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;build,
             java.lang.String&nbsp;fileName,
             byte[]&nbsp;md5sum)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../hudson/model/RunParameterValue.html#RunParameterValue(java.lang.String, hudson.model.Run)">RunParameterValue</A></B>(java.lang.String&nbsp;name,
-                  <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;run)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -576,6 +550,92 @@ Uses of <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">R
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.jvnet.hudson.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A> in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A> with type parameters of type <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;R extends <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&gt; 
+<BR>
+R</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B>HudsonTestCase.</B><B><A HREF="../../../org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatus(hudson.model.Result, R)">assertBuildStatus</A></B>(<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A>&nbsp;status,
+                  R&nbsp;r)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asserts that the outcome of the build is a specific outcome.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;R extends <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&gt; 
+<BR>
+R</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B>HudsonTestCase.</B><B><A HREF="../../../org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatusSuccess(R)">assertBuildStatusSuccess</A></B>(R&nbsp;r)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A> with parameters of type <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>HudsonTestCase.</B><B><A HREF="../../../org/jvnet/hudson/test/HudsonTestCase.html#assertLogContains(java.lang.String, hudson.model.Run)">assertLogContains</A></B>(java.lang.String&nbsp;substring,
+                  <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;run)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asserts that the console output of the build contains the given substring.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;com.gargoylesoftware.htmlunit.html.HtmlPage</CODE></FONT></TD>
+<TD><CODE><B>HudsonTestCase.WebClient.</B><B><A HREF="../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#getPage(hudson.model.Run)">getPage</A></B>(<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;r)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short for <code>getPage(r,"")</code>, to access the top page of a build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;com.gargoylesoftware.htmlunit.html.HtmlPage</CODE></FONT></TD>
+<TD><CODE><B>HudsonTestCase.WebClient.</B><B><A HREF="../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#getPage(hudson.model.Run, java.lang.String)">getPage</A></B>(<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;r,
+        java.lang.String&nbsp;relative)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accesses a page inside <A HREF="../../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>.</TD>
 </TR>
 </TABLE>
 &nbsp;

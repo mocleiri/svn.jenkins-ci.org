@@ -23,12 +23,11 @@
  */
 package hudson.tasks;
 
+import hudson.Extension;
 import hudson.FilePath;
 import hudson.FilePath.FileCallable;
 import hudson.Launcher;
 import hudson.Util;
-import hudson.Extension;
-import hudson.maven.AbstractMavenProject;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
@@ -40,14 +39,14 @@ import hudson.model.FingerprintMap;
 import hudson.model.Hudson;
 import hudson.model.Result;
 import hudson.remoting.VirtualChannel;
-import hudson.util.FormFieldValidator;
+import hudson.util.FormValidation;
 import hudson.util.IOException2;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.types.FileSet;
+import org.kohsuke.stapler.AncestorInPath;
+import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
 
-import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -208,8 +207,8 @@ public class Fingerprinter extends Recorder implements Serializable {
         /**
          * Performs on-the-fly validation on the file mask wildcard.
          */
-        public void doCheck(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-            new FormFieldValidator.WorkspaceFileMask(req,rsp).process();
+        public FormValidation doCheck(@AncestorInPath AbstractProject project, @QueryParameter String value) throws IOException {
+            return FilePath.validateFileMask(project.getWorkspace(),value);
         }
 
         public Publisher newInstance(StaplerRequest req) {
@@ -219,8 +218,7 @@ public class Fingerprinter extends Recorder implements Serializable {
         }
 
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
-            // for Maven, fingerprinting kicks in automatically.
-            return !AbstractMavenProject.class.isAssignableFrom(jobType);
+            return true;
         }
     }
 

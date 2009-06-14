@@ -1,3 +1,27 @@
+/**
+ * The MIT License
+ *
+ * Copyright (c) 2007-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt,
+ *                          Henrik Lynggaard, Peter Liljenberg, Andrew Bayer
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package hudson.plugins.clearcase.ucm;
 
 import static org.junit.Assert.*;
@@ -9,6 +33,7 @@ import java.util.List;
 
 import hudson.plugins.clearcase.ClearTool;
 import hudson.plugins.clearcase.history.DefaultFilter;
+import hudson.plugins.clearcase.history.FileFilter;
 import hudson.plugins.clearcase.history.DestroySubBranchFilter;
 import hudson.plugins.clearcase.history.Filter;
 
@@ -211,6 +236,53 @@ public class UcmHistoryActionTest {
         @SuppressWarnings("unchecked")
         List<UcmActivity> activities = (List<UcmActivity>) action.getChanges(null, "IGNORED", new String[]{"Release_2_1_int"}, new String[]{"vobs/projects/Server"});
         assertEquals("There should be 0 activity", 0, activities.size());
+    }
+
+    @Test
+    public void assertExcludedRegionsAreIgnored() throws Exception {
+        context.checking(new Expectations() {
+            {
+                one(cleartool).lshistory(with(any(String.class)), with(aNull(Date.class)), 
+                        with(equal("IGNORED")), with(equal("Release_2_1_int")), with(equal(new String[]{"vobs/projects/Server"})));                
+                will(returnValue(new StringReader(
+                        "\"20080509.140451\" " +
+                        "\"user\"" +
+                        "\"vobs/projects/Server//config-admin-client\" " +
+                        "\"/main/Product/Release_3_3_int/activityA/2\" " +
+                        "\"create version\" " +
+                        "\"checkin\" \"activityA\" " +
+                        "\"20080509.140451\" " +
+                        "\"user\"" +
+                        "\"vobs/projects/Client//config-admin-client\" " +
+                        "\"/main/Product/Release_3_3_int/activityB/2\" " +
+                        "\"create version\" " +
+                        "\"checkin\" \"activityB\" ")));
+                one(cleartool).lsactivity(
+                        with(equal("activityA")), 
+                        with(aNonNull(String.class)),with(aNonNull(String.class)));
+                will(returnValue(new StringReader("\"Activity A info \" " +
+                                "\"activityA\" " +
+                                "\"bob\" " +
+                                "\"maven2_Release_3_3.20080421.154619\" ")));
+                one(cleartool).lsactivity(
+                        with(equal("activityB")), 
+                        with(aNonNull(String.class)),with(aNonNull(String.class)));
+                will(returnValue(new StringReader("\"Activity B info \" " +
+                                "\"activityB\" " +
+                                "\"bob\" " +
+                                "\"maven2_Release_3_3.20080421.154619\" ")));
+
+            }
+        });
+        
+        List<Filter> filters = new ArrayList<Filter>();
+
+        filters.add(new DefaultFilter());
+        filters.add(new FileFilter(FileFilter.Type.DoesNotContainRegxp, "Server"));
+        UcmHistoryAction action = new UcmHistoryAction(cleartool,filters);
+        @SuppressWarnings("unchecked")
+        List<UcmActivity> activities = (List<UcmActivity>) action.getChanges(null, "IGNORED", new String[]{"Release_2_1_int"}, new String[]{"vobs/projects/Server"});
+        assertEquals("There should be 1 activity", 1, activities.size());
     }
 
     

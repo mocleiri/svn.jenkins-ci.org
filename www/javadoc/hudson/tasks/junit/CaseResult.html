@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CaseResult (Hudson core 1.291 API)
+CaseResult (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CaseResult (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CaseResult (Hudson core 1.291 API)";
+        parent.document.title="CaseResult (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -299,6 +299,22 @@ One test result.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#getStderr()">getStderr</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The stderr of this test.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#getStdout()">getStdout</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The stdout of this test.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#isPassed()">isPassed</A></B>()</CODE>
 
@@ -320,7 +336,7 @@ One test result.
 <TH ALIGN="left"><B>Methods inherited from class hudson.tasks.junit.<A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getApi()">getApi</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getDurationString()">getDurationString</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#safe(java.lang.String)">safe</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getApi()">getApi</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getDurationString()">getDurationString</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#safe(java.lang.String)">safe</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#uniquifyName(java.util.Collection, java.lang.String)">uniquifyName</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -371,7 +387,7 @@ getName</H3>
  Note that this may contain any URL-unfriendly character.
 <P>
 <DD><DL>
-</DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getName()">getName</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -404,7 +420,7 @@ public java.lang.String <B>getSafeName</B>()</PRE>
 <DD>Gets the version of <A HREF="../../../hudson/tasks/junit/CaseResult.html#getName()"><CODE>getName()</CODE></A> that's URL-safe.
 <P>
 <DD><DL>
-</DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getSafeName()">getSafeName</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -507,6 +523,53 @@ getAge</H3>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStdout()"><!-- --></A><H3>
+getStdout</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public java.lang.String <B>getStdout</B>()</PRE>
+<DL>
+<DD>The stdout of this test.
+
+ <p>
+ Depending on the tool that produced the XML report, this method works somewhat inconsistently.
+ With some tools (such as Maven surefire plugin), you get the accurate information, that is
+ the stdout from this test case. With some other tools (such as the JUnit task in Ant), this
+ method returns the stdout produced by the entire test suite.
+
+ <p>
+ If you need to know which is the case, compare this output from <A HREF="../../../hudson/tasks/junit/SuiteResult.html#getStdout()"><CODE>SuiteResult.getStdout()</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.294</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStderr()"><!-- --></A><H3>
+getStderr</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public java.lang.String <B>getStderr</B>()</PRE>
+<DL>
+<DD>The stderr of this test.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.294</DD>
+<DT><B>See Also:</B><DD><A HREF="../../../hudson/tasks/junit/CaseResult.html#getStdout()"><CODE>getStdout()</CODE></A></DL>
 </DD>
 </DL>
 <HR>

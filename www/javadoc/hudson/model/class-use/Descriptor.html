@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.Descriptor (Hudson core 1.291 API)
+Uses of Class hudson.model.Descriptor (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Descriptor (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Descriptor (Hudson core 1.291 API)";
+        parent.document.title="Uses of Class hudson.model.Descriptor (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -99,14 +99,6 @@ Packages that use <A HREF="../../../hudson/model/Descriptor.html" title="class i
 <TD>Matrix project&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven"><B>hudson.maven</B></A></TD>
-<TD>Maven support.&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven.reporters"><B>hudson.maven.reporters</B></A></TD>
-<TD>&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
@@ -167,6 +159,10 @@ action (such as the built-in JUnit one).&nbsp;</TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.views"><B>hudson.views</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.jvnet.hudson.test"><B>org.jvnet.hudson.test</B></A></TD>
+<TD>Test harness for Hudson and its plugins.&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -464,192 +460,6 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 </TABLE>
 &nbsp;
 <P>
-<A NAME="hudson.maven"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A></FONT></TH>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/MavenModuleSet.DescriptorImpl.html" title="class in hudson.maven">MavenModuleSet.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/MavenRedeployer.DescriptorImpl.html" title="class in hudson.maven">MavenRedeployer.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/MavenReporterDescriptor.html" title="class in hudson.maven">MavenReporterDescriptor</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> for <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/RedeployPublisher.DescriptorImpl.html" title="class in hudson.maven">RedeployPublisher.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A> that return types with arguments of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>MavenModuleSet.</B><B><A HREF="../../../hudson/maven/MavenModuleSet.html#getBuildWrappers()">getBuildWrappers</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of active <A HREF="../../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A>s.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>MavenModuleSet.</B><B><A HREF="../../../hudson/maven/MavenModuleSet.html#getPublishers()">getPublishers</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of active <A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A>s.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>MavenModule.</B><B><A HREF="../../../hudson/maven/MavenModule.html#getPublishersList()">getPublishersList</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>MavenModuleSet.</B><B><A HREF="../../../hudson/maven/MavenModuleSet.html#getPublishersList()">getPublishersList</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>MavenModule.</B><B><A HREF="../../../hudson/maven/MavenModule.html#getReporters()">getReporters</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of active <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>s configured for this module.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>&gt;&gt;</CODE></FONT></TD>
-<TD><CODE><B>MavenModuleSet.</B><B><A HREF="../../../hudson/maven/MavenModuleSet.html#getReporters()">getReporters</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of active <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>s that should be applied to all module builds.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson.maven.reporters"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A></FONT></TH>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/BuildInfoRecorder.DescriptorImpl.html" title="class in hudson.maven.reporters">BuildInfoRecorder.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenArtifactArchiver.DescriptorImpl.html" title="class in hudson.maven.reporters">MavenArtifactArchiver.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenFingerprinter.DescriptorImpl.html" title="class in hudson.maven.reporters">MavenFingerprinter.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenJavadocArchiver.DescriptorImpl.html" title="class in hudson.maven.reporters">MavenJavadocArchiver.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenMailer.DescriptorImpl.html" title="class in hudson.maven.reporters">MavenMailer.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenSiteArchiver.DescriptorImpl.html" title="class in hudson.maven.reporters">MavenSiteArchiver.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/ReportCollector.DescriptorImpl.html" title="class in hudson.maven.reporters">ReportCollector.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/SurefireArchiver.DescriptorImpl.html" title="class in hudson.maven.reporters">SurefireArchiver.DescriptorImpl</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
 <A NAME="hudson.model"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -667,10 +477,43 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/AbstractProject.AbstractProjectDescriptor.html" title="class in hudson.model">AbstractProject.AbstractProjectDescriptor</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A> subtypes should implement this base class as a descriptor.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/AllView.DescriptorImpl.html" title="class in hudson.model">AllView.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/BooleanParameterDefinition.DescriptorImpl.html" title="class in hudson.model">BooleanParameterDefinition.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/ChoiceParameterDefinition.DescriptorImpl.html" title="class in hudson.model">ChoiceParameterDefinition.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/DownloadService.html" title="class in hudson.model">DownloadService</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Service for plugins to periodically retrieve update data files
+ (like the one in the update center) through browsers.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -960,7 +803,7 @@ T</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
-<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getDescriptor(java.lang.String)">getDescriptor</A></B>(java.lang.String&nbsp;fullyQualifiedClassName)</CODE>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getDescriptor(java.lang.String)">getDescriptor</A></B>(java.lang.String&nbsp;className)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> by its name to URL.</TD>
@@ -968,10 +811,34 @@ T</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
+<TD><CODE><B>DescriptorByNameOwner.</B><B><A HREF="../../../hudson/model/DescriptorByNameOwner.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A></B>(java.lang.String&nbsp;className)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes all <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s by its name to URL.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
 <TD><CODE><B>AbstractItem.</B><B><A HREF="../../../hudson/model/AbstractItem.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A></B>(java.lang.String&nbsp;className)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> by its name to URL.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
+<TD><CODE><B>Run.</B><B><A HREF="../../../hudson/model/Run.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A></B>(java.lang.String&nbsp;className)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A></B>(java.lang.String&nbsp;className)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alias for <A HREF="../../../hudson/model/Hudson.html#getDescriptor(java.lang.String)"><CODE>Hudson.getDescriptor(String)</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1047,6 +914,30 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>ComputerSet.</B><B><A HREF="../../../hudson/model/ComputerSet.html#getMonitors()">getMonitors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>ComputerSet.</B><B><A HREF="../../../hudson/model/ComputerSet.html#getNodeMonitorDescriptors()">getNodeMonitorDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposing <A HREF="../../../hudson/node_monitors/NodeMonitor.html#all()"><CODE>NodeMonitor.all()</CODE></A> for Jelly binding.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.Map&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;,<A HREF="../../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>ComputerSet.</B><B><A HREF="../../../hudson/model/ComputerSet.html#getNonIgnoredMonitors()">getNonIgnoredMonitors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a subset pf <A HREF="../../../hudson/model/ComputerSet.html#getMonitors()"><CODE>ComputerSet.getMonitors()</CODE></A> that are <A HREF="../../../hudson/node_monitors/NodeMonitor.html#isIgnored()">not ignored</A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.Map&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/model/UserProperty.html" title="class in hudson.model">UserProperty</A>&gt;,<A HREF="../../../hudson/model/UserProperty.html" title="class in hudson.model">UserProperty</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>User.</B><B><A HREF="../../../hudson/model/User.html#getProperties()">getProperties</A></B>()</CODE>
 
@@ -1109,6 +1000,23 @@ java.util.Map&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>AbstractProject.AbstractProjectDescriptor.</B><B><A HREF="../../../hudson/model/AbstractProject.AbstractProjectDescriptor.html#isApplicable(hudson.model.Descriptor)">isApplicable</A></B>(<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&nbsp;descriptor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A> subtypes can override this method to veto some <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s
+ from showing up on their configuration screen.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>TopLevelItemDescriptor.</B><B><A HREF="../../../hudson/model/TopLevelItemDescriptor.html#isApplicable(hudson.model.Descriptor)">isApplicable</A></B>(<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&nbsp;descriptor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model"><CODE>TopLevelItemDescriptor</CODE></A>s often uses other descriptors to decorate itself.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1463,6 +1371,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/scm/browsers/Sventon.DescriptorImpl.html" title="class in hudson.scm.browsers">Sventon.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/scm/browsers/Sventon2.DescriptorImpl.html" title="class in hudson.scm.browsers">Sventon2.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1841,6 +1757,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/Ant.AntInstaller.DescriptorImpl.html" title="class in hudson.tasks">Ant.AntInstaller.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/Ant.DescriptorImpl.html" title="class in hudson.tasks">Ant.DescriptorImpl</A></B></CODE>
 
 <BR>
@@ -1938,6 +1862,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/Maven.MavenInstallation.DescriptorImpl.html" title="class in hudson.tasks">Maven.MavenInstallation.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/Maven.MavenInstaller.DescriptorImpl.html" title="class in hudson.tasks">Maven.MavenInstaller.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -2256,6 +2188,46 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/CommandInstaller.DescriptorImpl.html" title="class in hudson.tools">CommandInstaller.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/DownloadFromUrlInstaller.DescriptorImpl.html" title="class in hudson.tools">DownloadFromUrlInstaller.DescriptorImpl&lt;T extends DownloadFromUrlInstaller&gt;</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/InstallSourceProperty.DescriptorImpl.html" title="class in hudson.tools">InstallSourceProperty.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/JDKInstaller.DescriptorImpl.html" title="class in hudson.tools">JDKInstaller.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/PropertyDescriptor.html" title="class in hudson.tools">PropertyDescriptor&lt;P extends Describable&lt;P&gt;,T&gt;</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> type used for <code>XyzProperty</code> classes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tools/ToolDescriptor.html" title="class in hudson.tools">ToolDescriptor&lt;T extends ToolInstallation&gt;</A></B></CODE>
 
@@ -2264,8 +2236,48 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/ToolInstallerDescriptor.html" title="class in hudson.tools">ToolInstallerDescriptor&lt;T extends ToolInstaller&gt;</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Descriptor for a <A HREF="../../../hudson/tools/ToolInstaller.html" title="class in hudson.tools"><CODE>ToolInstaller</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tools/ToolLocationNodeProperty.DescriptorImpl.html" title="class in hudson.tools">ToolLocationNodeProperty.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/ToolPropertyDescriptor.html" title="class in hudson.tools">ToolPropertyDescriptor</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Descriptor for <A HREF="../../../hudson/tools/ToolProperty.html" title="class in hudson.tools"><CODE>ToolProperty</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tools/ZipExtractionInstaller.DescriptorImpl.html" title="class in hudson.tools">ZipExtractionInstaller.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/tools/package-summary.html">hudson.tools</A> with type parameters of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/tools/ToolInstaller.html" title="class in hudson.tools">ToolInstaller</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tools/ToolInstaller.html" title="class in hudson.tools">ToolInstaller</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>InstallSourceProperty.</B><B><A HREF="../../../hudson/tools/InstallSourceProperty.html#installers">installers</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -2447,7 +2459,7 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>DescribableList.</B><B><A HREF="../../../hudson/util/DescribableList.html#rebuildHetero(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.Collection, java.lang.String)">rebuildHetero</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
               net.sf.json.JSONObject&nbsp;formData,
-              java.util.Collection&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&gt;&nbsp;descriptors,
+              java.util.Collection&lt;? extends <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&gt;&nbsp;descriptors,
               java.lang.String&nbsp;key)</CODE>
 
 <BR>
@@ -2512,6 +2524,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/views/LastFailureColumn.DescriptorImpl.html" title="class in hudson.views">LastFailureColumn.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/views/LastStableColumn.DescriptorImpl.html" title="class in hudson.views">LastStableColumn.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -2599,6 +2619,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>LastStableColumn.</B><B><A HREF="../../../hudson/views/LastStableColumn.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>JobColumn.</B><B><A HREF="../../../hudson/views/JobColumn.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
 
 <BR>
@@ -2663,6 +2691,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>LastStableColumn.</B><B><A HREF="../../../hudson/views/LastStableColumn.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>JobColumn.</B><B><A HREF="../../../hudson/views/JobColumn.html#getDescriptor()">getDescriptor</A></B>()</CODE>
 
 <BR>
@@ -2683,6 +2719,88 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views"><CODE>ListViewColumn</CODE></A> descriptors.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.jvnet.hudson.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/CaptureEnvironmentBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">CaptureEnvironmentBuilder.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/FailureBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">FailureBuilder.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/SleepBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">SleepBuilder.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A> with type parameters of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected 
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T extends <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;?&gt;&gt; 
+<BR>
+T</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B>HudsonTestCase.</B><B><A HREF="../../../org/jvnet/hudson/test/HudsonTestCase.html#get(java.lang.Class)">get</A></B>(java.lang.Class&lt;T&gt;&nbsp;d)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor instance of the current Hudson by its type.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A> that return <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>TestBuilder.</B><B><A HREF="../../../org/jvnet/hudson/test/TestBuilder.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;

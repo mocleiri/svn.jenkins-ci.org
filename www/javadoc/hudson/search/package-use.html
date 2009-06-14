@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Package hudson.search (Hudson core 1.291 API)
+Uses of Package hudson.search (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.search (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.search (Hudson core 1.291 API)";
+        parent.document.title="Uses of Package hudson.search (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -95,6 +95,10 @@ Packages that use <A HREF="../../hudson/search/package-summary.html">hudson.sear
 <TD>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.diagnosis"><B>hudson.diagnosis</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.logging"><B>hudson.logging</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
 </TR>
@@ -103,16 +107,12 @@ Packages that use <A HREF="../../hudson/search/package-summary.html">hudson.sear
 <TD>Matrix project&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven"><B>hudson.maven</B></A></TD>
-<TD>Maven support.&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.maven.reporters"><B>hudson.maven.reporters</B></A></TD>
-<TD>&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.node_monitors"><B>hudson.node_monitors</B></A></TD>
+<TD>Code that monitors the health of slaves&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.os.solaris"><B>hudson.os.solaris</B></A></TD>
@@ -152,6 +152,27 @@ Classes in <A HREF="../../hudson/search/package-summary.html">hudson.search</A> 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/search/class-use/SearchItem.html#hudson"><B>SearchItem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents an item reachable from <A HREF="../../hudson/search/SearchIndex.html" title="interface in hudson.search"><CODE>SearchIndex</CODE></A>.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.diagnosis"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/search/package-summary.html">hudson.search</A> used by <A HREF="../../hudson/diagnosis/package-summary.html">hudson.diagnosis</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/search/class-use/SearchableModelObject.html#hudson.diagnosis"><B>SearchableModelObject</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A> that can be searched.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/search/class-use/SearchItem.html#hudson.diagnosis"><B>SearchItem</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents an item reachable from <A HREF="../../hudson/search/SearchIndex.html" title="interface in hudson.search"><CODE>SearchIndex</CODE></A>.</TD>
@@ -201,54 +222,6 @@ Classes in <A HREF="../../hudson/search/package-summary.html">hudson.search</A> 
 </TABLE>
 &nbsp;
 <P>
-<A NAME="hudson.maven"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Classes in <A HREF="../../hudson/search/package-summary.html">hudson.search</A> used by <A HREF="../../hudson/maven/package-summary.html">hudson.maven</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/search/class-use/SearchableModelObject.html#hudson.maven"><B>SearchableModelObject</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A> that can be searched.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/search/class-use/SearchIndexBuilder.html#hudson.maven"><B>SearchIndexBuilder</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/search/class-use/SearchItem.html#hudson.maven"><B>SearchItem</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents an item reachable from <A HREF="../../hudson/search/SearchIndex.html" title="interface in hudson.search"><CODE>SearchIndex</CODE></A>.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson.maven.reporters"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Classes in <A HREF="../../hudson/search/package-summary.html">hudson.search</A> used by <A HREF="../../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/search/class-use/SearchableModelObject.html#hudson.maven.reporters"><B>SearchableModelObject</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A> that can be searched.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/search/class-use/SearchItem.html#hudson.maven.reporters"><B>SearchItem</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents an item reachable from <A HREF="../../hudson/search/SearchIndex.html" title="interface in hudson.search"><CODE>SearchIndex</CODE></A>.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
 <A NAME="hudson.model"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -287,6 +260,27 @@ Classes in <A HREF="../../hudson/search/package-summary.html">hudson.search</A> 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/search/class-use/SearchItem.html#hudson.model"><B>SearchItem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents an item reachable from <A HREF="../../hudson/search/SearchIndex.html" title="interface in hudson.search"><CODE>SearchIndex</CODE></A>.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.node_monitors"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/search/package-summary.html">hudson.search</A> used by <A HREF="../../hudson/node_monitors/package-summary.html">hudson.node_monitors</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/search/class-use/SearchableModelObject.html#hudson.node_monitors"><B>SearchableModelObject</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A> that can be searched.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/search/class-use/SearchItem.html#hudson.node_monitors"><B>SearchItem</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents an item reachable from <A HREF="../../hudson/search/SearchIndex.html" title="interface in hudson.search"><CODE>SearchIndex</CODE></A>.</TD>

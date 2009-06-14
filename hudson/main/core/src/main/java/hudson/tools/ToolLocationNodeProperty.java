@@ -29,9 +29,11 @@ import hudson.Extension;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
 import hudson.model.Node;
+import hudson.model.TaskListener;
 import hudson.slaves.NodeProperty;
 import hudson.slaves.NodePropertyDescriptor;
 import hudson.slaves.NodeSpecific;
+import java.io.IOException;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.util.Arrays;
@@ -81,25 +83,32 @@ public class ToolLocationNodeProperty extends NodeProperty<Node> {
      *
      * @return
      *      never null.
+     * @deprecated
+     *      Use {@link ToolInstallation#translateFor(Node)} 
      */
-    public static String getToolHome(Node node, ToolInstallation installation) {
+    public static String getToolHome(Node node, ToolInstallation installation, TaskListener log) throws IOException, InterruptedException {
         String result = null;
+
+        // node-specific configuration takes precedence
         ToolLocationNodeProperty property = node.getNodeProperties().get(ToolLocationNodeProperty.class);
-        if (property != null) {
-            result = property.getHome(installation);
+        if (property != null)   result = property.getHome(installation);
+        if (result != null)     return result;
+
+        // consult translators
+        for( ToolLocationTranslator t : ToolLocationTranslator.all() ) {
+            result = t.getToolHome(node, installation, log);
+            if(result!=null)    return result;
         }
-        if (result != null) {
-            return result;
-        } else {
-            return installation.getHome();
-        }
+
+        // fall back is no-op
+        return installation.getHome();
     }
 
     @Extension
     public static class DescriptorImpl extends NodePropertyDescriptor {
 
         public String getDisplayName() {
-            return Messages.ToolLocationNodeProperty_DisplayName();
+            return Messages.ToolLocationNodeProperty_displayName();
         }
 
         public DescriptorExtensionList<ToolInstallation,ToolDescriptor<?>> getToolDescriptors() {
@@ -150,7 +159,7 @@ public class ToolLocationNodeProperty extends NodeProperty<Node> {
         }
 
         public String getKey() {
-            return type.getClass().getName() + "@" + name;
+            return type + "@" + name;
         }
 
     }

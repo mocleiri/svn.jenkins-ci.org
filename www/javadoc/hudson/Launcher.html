@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Launcher (Hudson core 1.291 API)
+Launcher (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Launcher (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Launcher (Hudson core 1.291 API)";
+        parent.document.title="Launcher (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -164,7 +164,7 @@ Starts a process.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Launcher.html#channel">channel</A></B></CODE>
 
 <BR>
@@ -197,8 +197,18 @@ Starts a process.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#Launcher(hudson.Launcher)">Launcher</A></B>(<A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructor for a decorator.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Launcher.html#Launcher(hudson.model.TaskListener, hudson.remoting.VirtualChannel)">Launcher</A></B>(<A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-         <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
+         <A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -215,7 +225,24 @@ Starts a process.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#decorateByPrefix(java.lang.String...)">decorateByPrefix</A></B>(java.lang.String...&nbsp;prefix)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a decorated <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> that puts the given set of arguments as a prefix to any commands
+ that it invokes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#decorateFor(hudson.model.Node)">decorateFor</A></B>(<A HREF="../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a decorated <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> for the given node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Launcher.html#getChannel()">getChannel</A></B>()</CODE>
 
 <BR>
@@ -402,14 +429,14 @@ Starts a process.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting">Channel</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Launcher.html#launchChannel(java.lang.String[], java.io.OutputStream, hudson.FilePath, java.util.Map)">launchChannel</A></B>(java.lang.String[]&nbsp;cmd,
               java.io.OutputStream&nbsp;out,
               <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir,
               java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;envVars)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launches a specified process and connects its input/output to a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A>, then
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launches a specified process and connects its input/output to a <A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>, then
  return it.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -468,7 +495,7 @@ protected final <A HREF="../hudson/model/TaskListener.html" title="interface in 
 <A NAME="channel"><!-- --></A><H3>
 channel</H3>
 <PRE>
-protected final <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A> <B>channel</B></PRE>
+protected final <A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A> <B>channel</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -500,8 +527,18 @@ public static boolean <B>showFullPath</B></PRE>
 Launcher</H3>
 <PRE>
 public <B>Launcher</B>(<A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-                <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</PRE>
+                <A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</PRE>
 <DL>
+</DL>
+<HR>
+
+<A NAME="Launcher(hudson.Launcher)"><!-- --></A><H3>
+Launcher</H3>
+<PRE>
+protected <B>Launcher</B>(<A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher)</PRE>
+<DL>
+<DD>Constructor for a decorator.
+<P>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -517,7 +554,7 @@ public <B>Launcher</B>(<A HREF="../hudson/model/TaskListener.html" title="interf
 <A NAME="getChannel()"><!-- --></A><H3>
 getChannel</H3>
 <PRE>
-public <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting">VirtualChannel</A> <B>getChannel</B>()</PRE>
+public <A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A> <B>getChannel</B>()</PRE>
 <DL>
 <DD>Gets the channel that can be used to run a program remotely.
 <P>
@@ -558,7 +595,7 @@ public <A HREF="../hudson/model/Computer.html" title="class in hudson.model">Com
 
  <p>
  Because of the way internal Hudson abstractions are set up (that is, <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> only
- needs a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/VirtualChannel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>VirtualChannel</CODE></A> to do its job and isn't really required that the channel
+ needs a <A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting"><CODE>VirtualChannel</CODE></A> to do its job and isn't really required that the channel
  comes from an existing <A HREF="../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>), this method may not always the right <A HREF="../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> instance.
 <P>
 <DD><DL>
@@ -813,14 +850,14 @@ public abstract <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <
 <A NAME="launchChannel(java.lang.String[], java.io.OutputStream, hudson.FilePath, java.util.Map)"><!-- --></A><H3>
 launchChannel</H3>
 <PRE>
-public abstract <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting">Channel</A> <B>launchChannel</B>(java.lang.String[]&nbsp;cmd,
+public abstract <A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A> <B>launchChannel</B>(java.lang.String[]&nbsp;cmd,
                                       java.io.OutputStream&nbsp;out,
                                       <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir,
                                       java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;envVars)
                                throws java.io.IOException,
                                       java.lang.InterruptedException</PRE>
 <DL>
-<DD>Launches a specified process and connects its input/output to a <A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Channel.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Channel</CODE></A>, then
+<DD>Launches a specified process and connects its input/output to a <A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>, then
  return it.
 
  <p>
@@ -896,6 +933,35 @@ protected final void <B>maskedPrintCommandLine</B>(java.lang.String[]&nbsp;cmd,
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>cmd</CODE> - The commands<DD><CODE>mask</CODE> - An array of booleans which control whether a cmd element should be masked (<code>true</code>) or
                 remain unmasked (<code>false</code>).<DD><CODE>workDir</CODE> - The work dir.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="decorateFor(hudson.model.Node)"><!-- --></A><H3>
+decorateFor</H3>
+<PRE>
+public final <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>decorateFor</B>(<A HREF="../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</PRE>
+<DL>
+<DD>Returns a decorated <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> for the given node.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="decorateByPrefix(java.lang.String...)"><!-- --></A><H3>
+decorateByPrefix</H3>
+<PRE>
+public final <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>decorateByPrefix</B>(java.lang.String...&nbsp;prefix)</PRE>
+<DL>
+<DD>Returns a decorated <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> that puts the given set of arguments as a prefix to any commands
+ that it invokes.
+<P>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.299</DD>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

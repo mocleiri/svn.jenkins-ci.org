@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-RunParameterValue (Hudson core 1.291 API)
+RunParameterValue (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RunParameterValue (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RunParameterValue (Hudson core 1.291 API)";
+        parent.document.title="RunParameterValue (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -77,9 +77,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.ParameterValue">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -97,12 +97,17 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">hudson.model.ParameterValue</A>
       <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.RunParameterValue</B>
 </PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.io.Serializable</DD>
+</DL>
 <HR>
 <DL>
 <DT><PRE>public class <B>RunParameterValue</B><DT>extends <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></DL>
 </PRE>
 
 <P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../serialized-form.html#hudson.model.RunParameterValue">Serialized Form</A></DL>
 <HR>
 
 <P>
@@ -113,14 +118,6 @@ java.lang.Object
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Field Summary</B></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/RunParameterValue.html#run">run</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.model.ParameterValue"><!-- --></A>
@@ -142,8 +139,16 @@ java.lang.Object
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/RunParameterValue.html#RunParameterValue(java.lang.String, hudson.model.Run)">RunParameterValue</A></B>(java.lang.String&nbsp;name,
-                  <A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;run)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/RunParameterValue.html#RunParameterValue(java.lang.String, java.lang.String)">RunParameterValue</A></B>(java.lang.String&nbsp;name,
+                  java.lang.String&nbsp;runId)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/RunParameterValue.html#RunParameterValue(java.lang.String, java.lang.String, java.lang.String)">RunParameterValue</A></B>(java.lang.String&nbsp;name,
+                  java.lang.String&nbsp;runId,
+                  java.lang.String&nbsp;description)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -167,6 +172,22 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes the name/value as an environment variable.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/RunParameterValue.html#getRun()">getRun</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/RunParameterValue.html#getRunId()">getRunId</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.ParameterValue"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -174,7 +195,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/ParameterValue.html#createBuildWrapper(hudson.model.AbstractBuild)">createBuildWrapper</A>, <A HREF="../../hudson/model/ParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)">createVariableResolver</A>, <A HREF="../../hudson/model/ParameterValue.html#equals(java.lang.Object)">equals</A>, <A HREF="../../hudson/model/ParameterValue.html#getDefinition()">getDefinition</A>, <A HREF="../../hudson/model/ParameterValue.html#getName()">getName</A>, <A HREF="../../hudson/model/ParameterValue.html#hashCode()">hashCode</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/ParameterValue.html#createBuildWrapper(hudson.model.AbstractBuild)">createBuildWrapper</A>, <A HREF="../../hudson/model/ParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)">createVariableResolver</A>, <A HREF="../../hudson/model/ParameterValue.html#equals(java.lang.Object)">equals</A>, <A HREF="../../hudson/model/ParameterValue.html#getDefinition()">getDefinition</A>, <A HREF="../../hudson/model/ParameterValue.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/ParameterValue.html#getName()">getName</A>, <A HREF="../../hudson/model/ParameterValue.html#hashCode()">hashCode</A>, <A HREF="../../hudson/model/ParameterValue.html#setDescription(java.lang.String)">setDescription</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -189,25 +210,6 @@ java.lang.Object
 &nbsp;
 <P>
 
-<!-- ============ FIELD DETAIL =========== -->
-
-<A NAME="field_detail"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
-<B>Field Detail</B></FONT></TH>
-</TR>
-</TABLE>
-
-<A NAME="run"><!-- --></A><H3>
-run</H3>
-<PRE>
-public final <A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A> <B>run</B></PRE>
-<DL>
-<DL>
-</DL>
-</DL>
-
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
 <A NAME="constructor_detail"><!-- --></A>
@@ -218,12 +220,22 @@ public final <A HREF="../../hudson/model/Run.html" title="class in hudson.model"
 </TR>
 </TABLE>
 
-<A NAME="RunParameterValue(java.lang.String, hudson.model.Run)"><!-- --></A><H3>
+<A NAME="RunParameterValue(java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
 RunParameterValue</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>RunParameterValue</B>(java.lang.String&nbsp;name,
-                                              <A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;run)</PRE>
+                                              java.lang.String&nbsp;runId,
+                                              java.lang.String&nbsp;description)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="RunParameterValue(java.lang.String, java.lang.String)"><!-- --></A><H3>
+RunParameterValue</H3>
+<PRE>
+public <B>RunParameterValue</B>(java.lang.String&nbsp;name,
+                         java.lang.String&nbsp;runId)</PRE>
 <DL>
 </DL>
 
@@ -236,6 +248,28 @@ RunParameterValue</H3>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="getRun()"><!-- --></A><H3>
+getRun</H3>
+<PRE>
+public <A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A> <B>getRun</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRunId()"><!-- --></A><H3>
+getRunId</H3>
+<PRE>
+public java.lang.String <B>getRunId</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="buildEnvVars(hudson.model.AbstractBuild, java.util.Map)"><!-- --></A><H3>
 buildEnvVars</H3>
@@ -304,9 +338,9 @@ public void <B>buildEnvVars</B>(<A HREF="../../hudson/model/AbstractBuild.html" 
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.model.ParameterValue">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>

@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ParameterValue (Hudson core 1.291 API)
+ParameterValue (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParameterValue (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParameterValue (Hudson core 1.291 API)";
+        parent.document.title="ParameterValue (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -97,12 +97,15 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.ParameterValue</B>
 </PRE>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/FileParameterValue.html" title="class in hudson.model">FileParameterValue</A>, <A HREF="../../hudson/model/JobParameterValue.html" title="class in hudson.model">JobParameterValue</A>, <A HREF="../../hudson/model/RunParameterValue.html" title="class in hudson.model">RunParameterValue</A>, <A HREF="../../hudson/model/StringParameterValue.html" title="class in hudson.model">StringParameterValue</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD>java.io.Serializable</DD>
+</DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/BooleanParameterValue.html" title="class in hudson.model">BooleanParameterValue</A>, <A HREF="../../hudson/model/FileParameterValue.html" title="class in hudson.model">FileParameterValue</A>, <A HREF="../../hudson/model/JobParameterValue.html" title="class in hudson.model">JobParameterValue</A>, <A HREF="../../hudson/model/RunParameterValue.html" title="class in hudson.model">RunParameterValue</A>, <A HREF="../../hudson/model/StringParameterValue.html" title="class in hudson.model">StringParameterValue</A></DD>
 </DL>
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1">@ExportedBean
-</FONT>public abstract class <B>ParameterValue</B><DT>extends java.lang.Object</DL>
+</FONT>public abstract class <B>ParameterValue</B><DT>extends java.lang.Object<DT>implements java.io.Serializable</DL>
 </PRE>
 
 <P>
@@ -133,7 +136,8 @@ A value for a parameter in a build.
 
 <P>
 <DL>
-<DT><B>See Also:</B><DD><A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A></DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A>, 
+<A HREF="../../serialized-form.html#hudson.model.ParameterValue">Serialized Form</A></DL>
 <HR>
 
 <P>
@@ -167,6 +171,15 @@ A value for a parameter in a build.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected </CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#ParameterValue(java.lang.String)">ParameterValue</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#ParameterValue(java.lang.String, java.lang.String)">ParameterValue</A></B>(java.lang.String&nbsp;name,
+               java.lang.String&nbsp;description)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -230,6 +243,14 @@ A value for a parameter in a build.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#getDescription()">getDescription</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#getName()">getName</A></B>()</CODE>
 
 <BR>
@@ -239,6 +260,14 @@ A value for a parameter in a build.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#hashCode()">hashCode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#setDescription(java.lang.String)">setDescription</A></B>(java.lang.String&nbsp;description)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -285,6 +314,15 @@ protected final java.lang.String <B>name</B></PRE>
 </TR>
 </TABLE>
 
+<A NAME="ParameterValue(java.lang.String, java.lang.String)"><!-- --></A><H3>
+ParameterValue</H3>
+<PRE>
+protected <B>ParameterValue</B>(java.lang.String&nbsp;name,
+                         java.lang.String&nbsp;description)</PRE>
+<DL>
+</DL>
+<HR>
+
 <A NAME="ParameterValue(java.lang.String)"><!-- --></A><H3>
 ParameterValue</H3>
 <PRE>
@@ -302,6 +340,34 @@ protected <B>ParameterValue</B>(java.lang.String&nbsp;name)</PRE>
 </TR>
 </TABLE>
 
+<A NAME="getDescription()"><!-- --></A><H3>
+getDescription</H3>
+<PRE>
+public java.lang.String <B>getDescription</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDescription(java.lang.String)"><!-- --></A><H3>
+setDescription</H3>
+<PRE>
+public void <B>setDescription</B>(java.lang.String&nbsp;description)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getName()"><!-- --></A><H3>
 getName</H3>
 <PRE>
@@ -313,6 +379,9 @@ getName</H3>
  This uniquely distinguishes <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model"><CODE>ParameterValue</CODE></A> among other parameters
  for the same build. This must be the same as <A HREF="../../hudson/model/ParameterDefinition.html#getName()"><CODE>ParameterDefinition.getName()</CODE></A>.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -343,6 +412,9 @@ public void <B>buildEnvVars</B>(<A HREF="../../hudson/model/AbstractBuild.html" 
  execute.)
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 <DT><B>Parameters:</B><DD><CODE>env</CODE> - never null.<DD><CODE>build</CODE> - The build for which this parameter is being used. Never null.</DL>
 </DD>
 </DL>
@@ -360,6 +432,9 @@ public <A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tas
  This provides a means for a parameter to perform more extensive
  set up / tear down during a build.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>build</CODE> - The build for which this parameter is being used. Never null.
 <DT><B>Returns:</B><DD>null if the parameter has no <A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A> to contribute to.</DL>
@@ -380,6 +455,9 @@ public <A HREF="../../hudson/util/VariableResolver.html" title="interface in hud
  a build.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 <DT><B>Parameters:</B><DD><CODE>build</CODE> - The build for which this parameter is being used. Never null.
 <DT><B>Returns:</B><DD>if the parameter value is not interested in participating to the
       variable replacement process, return <A HREF="../../hudson/util/VariableResolver.html#NONE"><CODE>VariableResolver.NONE</CODE></A>.</DL>
@@ -399,6 +477,9 @@ public <A HREF="../../hudson/model/ParameterDefinition.html" title="class in hud
 <P>
 <DD>Accessing <A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A> is not a good idea.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>

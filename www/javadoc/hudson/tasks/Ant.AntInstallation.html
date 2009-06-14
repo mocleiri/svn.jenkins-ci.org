@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Ant.AntInstallation (Hudson core 1.291 API)
+Ant.AntInstallation (Hudson main module 1.309 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-11">
+<META NAME="date" CONTENT="2009-05-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Ant.AntInstallation (Hudson core 1.291 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Ant.AntInstallation (Hudson core 1.291 API)";
+        parent.document.title="Ant.AntInstallation (Hudson main module 1.309 API)";
     }
 }
 </SCRIPT>
@@ -109,6 +109,10 @@ java.lang.Object
 </PRE>
 
 <P>
+Represents the Ant installation on the system.
+<P>
+
+<P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../serialized-form.html#hudson.tasks.Ant.AntInstallation">Serialized Form</A></DL>
 <HR>
@@ -155,6 +159,15 @@ java.lang.Object
                     java.lang.String&nbsp;home)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.308
+      Use <CODE>#AntInstallation(String, String, List)</CODE></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#Ant.AntInstallation(java.lang.String, java.lang.String, java.util.List)">Ant.AntInstallation</A></B>(java.lang.String&nbsp;name,
+                    java.lang.String&nbsp;home,
+                    java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
@@ -178,7 +191,8 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#forNode(hudson.model.Node)">forNode</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+        <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a specialized copy of T for functioning in the given node.</TD>
@@ -189,7 +203,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#getAntHome()">getAntHome</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;install directory.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.307. Use <A HREF="../../hudson/tasks/Ant.AntInstallation.html#getHome()"><CODE>getHome()</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -222,7 +236,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.tools.<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/tools/ToolInstallation.html#all()">all</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getName()">getName</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/tools/ToolInstallation.html#all()">all</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getName()">getName</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getProperties()">getProperties</A>, <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)">translateFor</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -247,13 +261,26 @@ java.lang.Object
 </TR>
 </TABLE>
 
-<A NAME="Ant.AntInstallation(java.lang.String, java.lang.String)"><!-- --></A><H3>
+<A NAME="Ant.AntInstallation(java.lang.String, java.lang.String, java.util.List)"><!-- --></A><H3>
 Ant.AntInstallation</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>Ant.AntInstallation</B>(java.lang.String&nbsp;name,
-                                                java.lang.String&nbsp;home)</PRE>
+                                                java.lang.String&nbsp;home,
+                                                java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</PRE>
 <DL>
+</DL>
+<HR>
+
+<A NAME="Ant.AntInstallation(java.lang.String, java.lang.String)"><!-- --></A><H3>
+Ant.AntInstallation</H3>
+<PRE>
+public <B>Ant.AntInstallation</B>(java.lang.String&nbsp;name,
+                           java.lang.String&nbsp;home)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.308
+      Use <CODE>#AntInstallation(String, String, List)</CODE></I>
+<P>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -271,6 +298,8 @@ getAntHome</H3>
 <PRE>
 public java.lang.String <B>getAntHome</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.307. Use <A HREF="../../hudson/tasks/Ant.AntInstallation.html#getHome()"><CODE>getHome()</CODE></A>.</I>
+<P>
 <DD>install directory.
 <P>
 <DD><DL>
@@ -361,19 +390,25 @@ public <A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hud
 </DL>
 <HR>
 
-<A NAME="forNode(hudson.model.Node)"><!-- --></A><H3>
+<A NAME="forNode(hudson.model.Node, hudson.model.TaskListener)"><!-- --></A><H3>
 forNode</H3>
 <PRE>
-public <A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A> <B>forNode</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</PRE>
+public <A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A> <B>forNode</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                                   <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)
+                            throws java.io.IOException,
+                                   java.lang.InterruptedException</PRE>
 <DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)">NodeSpecific</A></CODE></B></DD>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node, hudson.model.TaskListener)">NodeSpecific</A></CODE></B></DD>
 <DD>Returns a specialized copy of T for functioning in the given node.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node)">forNode</A></CODE> in interface <CODE><A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>&gt;</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></CODE> in interface <CODE><A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
