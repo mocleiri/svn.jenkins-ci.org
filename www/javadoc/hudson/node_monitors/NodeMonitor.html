@@ -1,0 +1,542 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<!-- -->
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>
+NodeMonitor (Hudson main module 1.310 API)
+</TITLE>
+
+<META NAME="date" CONTENT="2009-06-14">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="NodeMonitor (Hudson main module 1.310 API)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/NodeMonitor.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../hudson/node_monitors/MonitorMarkedNodeOffline.html" title="class in hudson.node_monitors"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/node_monitors/ResponseTimeMonitor.html" title="class in hudson.node_monitors"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../index.html?hudson/node_monitors/NodeMonitor.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="NodeMonitor.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+hudson.node_monitors</FONT>
+<BR>
+Class NodeMonitor</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.node_monitors.NodeMonitor</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;</DD>
+</DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/node_monitors/ArchitectureMonitor.html" title="class in hudson.node_monitors">ArchitectureMonitor</A>, <A HREF="../../hudson/node_monitors/ClockMonitor.html" title="class in hudson.node_monitors">ClockMonitor</A>, <A HREF="../../hudson/node_monitors/DiskSpaceMonitor.html" title="class in hudson.node_monitors">DiskSpaceMonitor</A>, <A HREF="../../hudson/node_monitors/ResponseTimeMonitor.html" title="class in hudson.node_monitors">ResponseTimeMonitor</A>, <A HREF="../../hudson/node_monitors/SwapSpaceMonitor.html" title="class in hudson.node_monitors">SwapSpaceMonitor</A>, <A HREF="../../hudson/node_monitors/TemporarySpaceMonitor.html" title="class in hudson.node_monitors">TemporarySpaceMonitor</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1">@ExportedBean
+</FONT>public abstract class <B>NodeMonitor</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;</DL>
+</PRE>
+
+<P>
+Extension point for managing and monitoring <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s.
+
+ <h2>Views</h2>
+ <dl>
+ <dt>column.jelly</dt>
+ <dd>
+ Invoked from <A HREF="../../hudson/model/ComputerSet.html" title="class in hudson.model"><CODE>ComputerSet</CODE></A> <tt>index.jelly</tt> to render a column.
+ The <A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A> instance is accessible through the "from" variable.
+ Also see <A HREF="../../hudson/node_monitors/NodeMonitor.html#getColumnCaption()"><CODE>getColumnCaption()</CODE></A>.
+
+ <dt>config.jelly (optional)</dt>
+ <dd>
+ Configuration fragment to be displayed in <code>http://server/hudson/computer/configure</code>.
+ Used for configuring the threshold for taking nodes offline. 
+ </dl>
+
+ <h2>Persistence</h2>
+ <p>
+ <A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A>s are persisted via XStream.
+<P>
+
+<P>
+<DL>
+<DT><B>Since:</B></DT>
+  <DD>1.123</DD>
+<DT><B>Author:</B></DT>
+  <DD>Kohsuke Kawaguchi</DD>
+</DL>
+<HR>
+
+<P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson">ExtensionPoint.LegacyInstancesAreScopedToHudson</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/NodeMonitor.html#LIST">LIST</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <A HREF="../../hudson/node_monitors/NodeMonitor.html#all()"><CODE>all()</CODE></A> for read access and <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/node_monitors/NodeMonitor.html#NodeMonitor()">NodeMonitor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/NodeMonitor.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.Object</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/NodeMonitor.html#data(hudson.model.Computer)">data</A></B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/NodeMonitor.html#getAll()">getAll</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains all the instances of <A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A>s that are alive.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/NodeMonitor.html#getColumnCaption()">getColumnCaption</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the name of the column to be added to <A HREF="../../hudson/model/ComputerSet.html" title="class in hudson.model"><CODE>ComputerSet</CODE></A> index.jelly.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors">AbstractNodeMonitorDescriptor</A>&lt;?&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/NodeMonitor.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/NodeMonitor.html#isIgnored()">isIgnored</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True if this monitoring shouldn't mark the slaves offline.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/NodeMonitor.html#setIgnored(boolean)">setIgnored</A></B>(boolean&nbsp;ignored)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.Thread</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/NodeMonitor.html#triggerUpdate()">triggerUpdate</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts updating the data asynchronously.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="LIST"><!-- --></A><H3>
+LIST</H3>
+<PRE>
+public static final <A HREF="../../hudson/util/DescriptorList.html" title="class in hudson.util">DescriptorList</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt; <B>LIST</B></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.286.
+      Use <A HREF="../../hudson/node_monitors/NodeMonitor.html#all()"><CODE>all()</CODE></A> for read access and <A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I><DD>All registered <A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A>s.
+<P>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="NodeMonitor()"><!-- --></A><H3>
+NodeMonitor</H3>
+<PRE>
+public <B>NodeMonitor</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getColumnCaption()"><!-- --></A><H3>
+getColumnCaption</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public java.lang.String <B>getColumnCaption</B>()</PRE>
+<DL>
+<DD>Returns the name of the column to be added to <A HREF="../../hudson/model/ComputerSet.html" title="class in hudson.model"><CODE>ComputerSet</CODE></A> index.jelly.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>null to not render a column. The convention is to use capitalization like "Foo Bar Zot".</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDescriptor()"><!-- --></A><H3>
+getDescriptor</H3>
+<PRE>
+public <A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors">AbstractNodeMonitorDescriptor</A>&lt;?&gt; <B>getDescriptor</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
+<DD>Gets the descriptor for this instance.
+
+ <p>
+ <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> is a singleton for every concrete <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
+ implementation, so if <tt>a.getClass()==b.getClass()</tt> then
+ <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="data(hudson.model.Computer)"><!-- --></A><H3>
+data</H3>
+<PRE>
+public java.lang.Object <B>data</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="triggerUpdate()"><!-- --></A><H3>
+triggerUpdate</H3>
+<PRE>
+public java.lang.Thread <B>triggerUpdate</B>()</PRE>
+<DL>
+<DD>Starts updating the data asynchronously.
+ If there's any previous updating activity going on, it'll be interrupted and aborted.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><CODE>Thread</CODE> object that carries out the update operation.
+      You can use this to interrupt the execution or waits for the completion.
+      Always non-null<DT><B>Since:</B></DT>
+  <DD>1.232</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAll()"><!-- --></A><H3>
+getAll</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt; <B>getAll</B>()</PRE>
+<DL>
+<DD>Obtains all the instances of <A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A>s that are alive.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.187</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isIgnored()"><!-- --></A><H3>
+isIgnored</H3>
+<PRE>
+public boolean <B>isIgnored</B>()</PRE>
+<DL>
+<DD>True if this monitoring shouldn't mark the slaves offline.
+
+ <p>
+ Many <A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A>s implement a logic that if the value goes above/below
+ a threshold, the slave will be marked offline as a preventive measure.
+ This flag controls that.
+
+ <p>
+ Unlike <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A>, where the absence of an instance indicates that it's disengaged,
+ in <A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A> this boolean flag is used to indicate the disengagement, so that
+ monitors work in opt-out basis.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIgnored(boolean)"><!-- --></A><H3>
+setIgnored</H3>
+<PRE>
+public void <B>setIgnored</B>(boolean&nbsp;ignored)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;&gt; <B>all</B>()</PRE>
+<DL>
+<DD>Returns all the registered <A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors"><CODE>NodeMonitor</CODE></A> descriptors.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/NodeMonitor.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../hudson/node_monitors/MonitorMarkedNodeOffline.html" title="class in hudson.node_monitors"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/node_monitors/ResponseTimeMonitor.html" title="class in hudson.node_monitors"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../index.html?hudson/node_monitors/NodeMonitor.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="NodeMonitor.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &#169; 2009. All Rights Reserved.
+</BODY>
+</HTML>

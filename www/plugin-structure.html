@@ -1,0 +1,156 @@
+<html>
+<head>
+  <style>
+    dt {
+      font-weight: bold;
+      margin-left: 1em;
+    }
+  </style>
+</head>
+<body><div class=app>
+<h1>Structure of Plugin</h1>
+<p>
+A plugin is really just a jar file that follows a certain set of
+conventions, as described below:
+
+<pre>
+foo.hpi
+ +- META-INF
+ |   +- MANIFEST.MF
+ +- WEB-INF
+ |   +- classes
+ |   +- lib
+ +- (static resources)
+</pre>
+
+<ul>
+  <li>
+    A plugin needs to have <tt>.hpi</tt> extension. The file name body
+    ("foo" portion) of the file name is used as the "short name" of a
+    plugin, and it uniquely distingusihes a plugin.
+
+  <li>
+    As you can see, the structure is similar to a WAR file, but
+    there's no <tt>web.xml</tt>.
+
+  <li>
+    <tt>MANIFEST.MF</tt> needs to contain a few additional
+    entries. More on this later.
+
+  <li>
+    <tt>WEB-INF/classes</tt> can have class files that constitute
+    plugins, Jelly view files, and Jelly tag libraries based on tag
+    files. Alternatively, some or all of them can be packaged into a
+    jar and placed into <tt>WEB-INF/lib</tt>.
+
+  <li>
+    <tt>WEB-INF/lib</tt> can have *.jar files, and those are loaded
+    and made available to a plugin <tt>ClassLoader</tt>, along with
+    the contents of <tt>WEB-INF/classes</tt>.
+
+  <li>
+    Static resources, such as images, HTML files, CSS stylesheets,
+    JavaScript fiels, etc, can be placed at the top of an
+    <tt>.hpi</tt> file (just like a WAR file, again.)
+</ul>
+
+<h3>Manifest</h3>
+<p>
+  <tt>META-INF/MANIFEST.MF</tt> can have all the normal entries, but
+  it needs to contain two more entries for Hudson in its main section.
+
+<dl>
+  <dt>Plugin-Class</dt>
+  <dd>
+    This attribute must have the fully qualified class name of the
+    class that derives from <a
+    href="/nonav/javadoc/?hudson/Plugin.html"><tt>Plugin</tt></a>. Hudson
+    instantiates this instance to activate a plugin, and everything
+    starts from there. Consequently, a plugin must have one
+    <tt>Plugin</tt>-derived class. This is the Hudson plugin version
+    of the <tt>Main-Class</tt> attribute.
+
+  <dt>Long-Name</dt>
+  <dd>
+    This optional attribute can have a human-readable one line
+    description of the plugin. This is used as "the name" for users
+    (whereas the short name is used as the name internally in Hudson.)
+    When this attribute is not present, the short name is used as the
+    long name.
+
+  <dt>Required-Plugins</tt>
+  <dd>
+    This optional attribute can have a list of whitespace-separated
+    plugin short names, that are required for this plugin to
+    run. The classes and libraries of those plugins are made visible
+    to this plugin's classloader, so that your plugin can rely on
+    them.<br/>
+    
+    This mechanism allows a plugin to define its own extensibility
+    point, and have other plugins provide implemenations.
+</dl>
+
+<h3>Static Resources</h3>
+<p>
+  Static resources inside an <tt>.hpi</tt> file will be made
+  accessible at <tt>${HUDSON_CONTEXT_PATH}/plugin/SHORTNAME/</tt>. For
+  example, if you have <tt>abc/def.png</tt> in <tt>foo.hpi</tt>, and
+  if Hudson is deployed on <tt>http://localhost/hudson/</tt>, then
+  the URL <tt>http://localhost/hudson/plugin/foo/abc/def.png</tt>
+  would display the PNG file.
+
+<h3>Index.jelly for Your <tt>Plugin</tt>-derived Class</h3>
+<p>
+  Your <tt>Plugin</tt> class (that you named in <tt>Plugin-Class</tt>
+  manifest entry) should have <tt>index.jelly</tt> view file, which
+  should render 1-2 paragraph worth of the detailed description of
+  your plugin, perhaps with version numbers, link to the homepage,
+  etc. This jelly script will be used in the plugin configuration page
+  so that the user can learn more about a plugin.
+
+
+<h3>Debug Plugin Layout: .hpl</h3>
+<p>
+  The <tt>.hpi</tt> format is primarily meant to be a distribution
+  format. Just like no one debugs the web application by creating a
+  war and deploying it, Hudson provides another plugin layout called
+  <tt>.hpl</tt> (for "Hudson plugin link"), which is targeted for
+  plugin developers to improve productivity.
+
+<p>
+  The hpl file can be placed in <tt>$HUDSON_HOME/plugins</tt> just like
+  hpi files. But hpl file just contains a single line of text that points
+  to a manifest file, like this:
+
+<pre>../path/to/your/plugin/workspace/manifest-debug.mf</pre>
+
+<p>
+  The file pointed by this is a manifest file. It has the same
+  custom attributes as defined above for
+  <tt>META-INF/MANIFEST.MF</tt>, but it defines a few more custom
+  attributes that allow a plugin developer to specify various pieces
+  of a plugin in different locations in a file system.
+
+<pre>
+Plugin-Class: hudson.plugins.jwsdp_sqe.PluginImpl
+Class-Path: ./build/classes ./views ./lib/reporter.jar
+Long-Name: JWSDP SQE Test Result Plugin
+Resource-Path" ./resources
+</pre>
+
+<p>
+  For example, the above sample <tt>manifest-debug.mf</tt> states that the
+  static resources of a plugin shall be loaded from the
+  <tt>./resources</tt>, and class files from
+  <tt>./build/classes</tt>, Jelly view files in <tt>./views</tt>,
+  and a library jar file <tt>reporter.jar</tt> shall be made available
+  to the plugin classloader. Absolute path names can be also used.
+
+<p>
+  This mechanism allows a plugin developer to avoid assembly
+  steps. Also, changes to static resources and Jelly views will be
+  reflected instanteneously (provided that you set the system property
+  <tt>stapler.jelly.noCache</tt> to true when you start the web container.
+
+</div></body>
+</html>
