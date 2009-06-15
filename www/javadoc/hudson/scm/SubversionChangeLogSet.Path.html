@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SubversionChangeLogSet.Path (Hudson main module 1.309 API)
+SubversionChangeLogSet.Path (Hudson main module 1.310 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SubversionChangeLogSet.Path (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionChangeLogSet.Path (Hudson main module 1.309 API)";
+        parent.document.title="SubversionChangeLogSet.Path (Hudson main module 1.310 API)";
     }
 }
 </SCRIPT>
@@ -97,12 +97,15 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.scm.SubversionChangeLogSet.Path</B>
 </PRE>
 <DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/scm/ChangeLogSet.AffectedFile.html" title="interface in hudson.scm">ChangeLogSet.AffectedFile</A></DD>
+</DL>
+<DL>
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/scm/SubversionChangeLogSet.html" title="class in hudson.scm">SubversionChangeLogSet</A></DD>
 </DL>
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1">@ExportedBean(defaultVisibility=999)
-</FONT>public static class <B>SubversionChangeLogSet.Path</B><DT>extends java.lang.Object</DL>
+</FONT>public static class <B>SubversionChangeLogSet.Path</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/scm/ChangeLogSet.AffectedFile.html" title="interface in hudson.scm">ChangeLogSet.AffectedFile</A></DL>
 </PRE>
 
 <P>
@@ -147,7 +150,7 @@ A file in a commit.
 <TD><CODE><B><A HREF="../../hudson/scm/SubversionChangeLogSet.Path.html#getEditType()">getEditType</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return whether the file is new/modified/deleted</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -156,6 +159,14 @@ A file in a commit.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/scm/SubversionChangeLogSet.LogEntry.html" title="class in hudson.scm"><CODE>SubversionChangeLogSet.LogEntry</CODE></A> of which this path is a member.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionChangeLogSet.Path.html#getPath()">getPath</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inherited from AffectedFile</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -239,6 +250,9 @@ public <A HREF="../../hudson/scm/SubversionChangeLogSet.LogEntry.html" title="cl
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -252,6 +266,9 @@ public void <B>setLogEntry</B>(<A HREF="../../hudson/scm/SubversionChangeLogSet.
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -260,6 +277,9 @@ setAction</H3>
 <PRE>
 public void <B>setAction</B>(java.lang.String&nbsp;action)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -277,6 +297,26 @@ getValue</H3>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPath()"><!-- --></A><H3>
+getPath</H3>
+<PRE>
+public java.lang.String <B>getPath</B>()</PRE>
+<DL>
+<DD>Inherited from AffectedFile
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/scm/ChangeLogSet.AffectedFile.html#getPath()">getPath</A></CODE> in interface <CODE><A HREF="../../hudson/scm/ChangeLogSet.AffectedFile.html" title="interface in hudson.scm">ChangeLogSet.AffectedFile</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>never null.</DL>
+</DD>
 </DL>
 <HR>
 
@@ -285,6 +325,9 @@ setValue</H3>
 <PRE>
 public void <B>setValue</B>(java.lang.String&nbsp;value)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -297,8 +340,15 @@ getEditType</H3>
 <FONT SIZE="-1">@Exported
 </FONT>public <A HREF="../../hudson/scm/EditType.html" title="class in hudson.scm">EditType</A> <B>getEditType</B>()</PRE>
 <DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/scm/ChangeLogSet.AffectedFile.html#getEditType()">ChangeLogSet.AffectedFile</A></CODE></B></DD>
+<DD>Return whether the file is new/modified/deleted
+<P>
 <DD><DL>
-</DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/scm/ChangeLogSet.AffectedFile.html#getEditType()">getEditType</A></CODE> in interface <CODE><A HREF="../../hudson/scm/ChangeLogSet.AffectedFile.html" title="interface in hudson.scm">ChangeLogSet.AffectedFile</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>EditType<DT><B>See Also:</B><DD><A HREF="../../hudson/scm/EditType.html" title="class in hudson.scm"><CODE>EditType</CODE></A></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ChangeLogSet.Entry (Hudson main module 1.309 API)
+ChangeLogSet.Entry (Hudson main module 1.310 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ChangeLogSet.Entry (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ChangeLogSet.Entry (Hudson main module 1.309 API)";
+        parent.document.title="ChangeLogSet.Entry (Hudson main module 1.310 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/scm/ChangeLogSet.html" title="class in hudson.scm"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/scm/ChangeLogSet.AffectedFile.html" title="interface in hudson.scm"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/scm/CVSChangeLogParser.html" title="class in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/scm/ChangeLogSet.Entry.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -136,6 +136,15 @@ java.lang.Object
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Collection&lt;? extends <A HREF="../../hudson/scm/ChangeLogSet.AffectedFile.html" title="interface in hudson.scm">ChangeLogSet.AffectedFile</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/ChangeLogSet.Entry.html#getAffectedFiles()">getAffectedFiles</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a set of paths in the workspace that was
+ affected by this change.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -308,6 +317,30 @@ public abstract java.util.Collection&lt;java.lang.String&gt; <B>getAffectedPaths
 </DL>
 <HR>
 
+<A NAME="getAffectedFiles()"><!-- --></A><H3>
+getAffectedFiles</H3>
+<PRE>
+public java.util.Collection&lt;? extends <A HREF="../../hudson/scm/ChangeLogSet.AffectedFile.html" title="interface in hudson.scm">ChangeLogSet.AffectedFile</A>&gt; <B>getAffectedFiles</B>()</PRE>
+<DL>
+<DD>Returns a set of paths in the workspace that was
+ affected by this change.
+ <p>
+ Noted: since this is a new interface, some of the SCMs may not have 
+ implemented this interface. The default implementation for this 
+ interface is throw UnsupportedOperationException
+ <p>
+ It doesn't throw NoSuchMethodException because I rather to throw a 
+ runtime exception
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>AffectedFile never null.<DT><B>Since:</B></DT>
+  <DD>1.309</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getMsgAnnotated()"><!-- --></A><H3>
 getMsgAnnotated</H3>
 <PRE>
@@ -363,7 +396,7 @@ public java.lang.String <B>getMsgEscaped</B>()</PRE>
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/scm/ChangeLogSet.html" title="class in hudson.scm"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/scm/ChangeLogSet.AffectedFile.html" title="interface in hudson.scm"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/scm/CVSChangeLogParser.html" title="class in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/scm/ChangeLogSet.Entry.html" target="_top"><B>FRAMES</B></A>  &nbsp;

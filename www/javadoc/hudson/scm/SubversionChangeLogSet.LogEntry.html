@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SubversionChangeLogSet.LogEntry (Hudson main module 1.309 API)
+SubversionChangeLogSet.LogEntry (Hudson main module 1.310 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SubversionChangeLogSet.LogEntry (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubversionChangeLogSet.LogEntry (Hudson main module 1.309 API)";
+        parent.document.title="SubversionChangeLogSet.LogEntry (Hudson main module 1.310 API)";
     }
 }
 </SCRIPT>
@@ -148,6 +148,15 @@ One commit.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Collection&lt;<A HREF="../../hudson/scm/SubversionChangeLogSet.Path.html" title="class in hudson.scm">SubversionChangeLogSet.Path</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SubversionChangeLogSet.LogEntry.html#getAffectedFiles()">getAffectedFiles</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a set of paths in the workspace that was
+ affected by this change.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -482,6 +491,32 @@ getPaths</H3>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>can be empty but never null.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAffectedFiles()"><!-- --></A><H3>
+getAffectedFiles</H3>
+<PRE>
+public java.util.Collection&lt;<A HREF="../../hudson/scm/SubversionChangeLogSet.Path.html" title="class in hudson.scm">SubversionChangeLogSet.Path</A>&gt; <B>getAffectedFiles</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/scm/ChangeLogSet.Entry.html#getAffectedFiles()">ChangeLogSet.Entry</A></CODE></B></DD>
+<DD>Returns a set of paths in the workspace that was
+ affected by this change.
+ <p>
+ Noted: since this is a new interface, some of the SCMs may not have 
+ implemented this interface. The default implementation for this 
+ interface is throw UnsupportedOperationException
+ <p>
+ It doesn't throw NoSuchMethodException because I rather to throw a 
+ runtime exception
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/scm/ChangeLogSet.Entry.html#getAffectedFiles()">getAffectedFiles</A></CODE> in class <CODE><A HREF="../../hudson/scm/ChangeLogSet.Entry.html" title="class in hudson.scm">ChangeLogSet.Entry</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>AffectedFile never null.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

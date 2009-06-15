@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.Descriptor (Hudson main module 1.309 API)
+Uses of Class hudson.model.Descriptor (Hudson main module 1.310 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Descriptor (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Descriptor (Hudson main module 1.309 API)";
+        parent.document.title="Uses of Class hudson.model.Descriptor (Hudson main module 1.310 API)";
     }
 }
 </SCRIPT>
@@ -125,6 +125,10 @@ Packages that use <A HREF="../../../hudson/model/Descriptor.html" title="class i
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.security"><B>hudson.security</B></A></TD>
 <TD>Security-related code&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.security.csrf"><B>hudson.security.csrf</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.slaves"><B>hudson.slaves</B></A></TD>
@@ -300,6 +304,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;&gt;</CODE></FONT></TD>
 <TD><CODE><B>Functions.</B><B><A HREF="../../../hudson/Functions.html#getComputerLauncherDescriptors()">getComputerLauncherDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>Functions.</B><B><A HREF="../../../hudson/Functions.html#getCrumbIssuerDescriptors()">getCrumbIssuerDescriptors</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1571,6 +1583,55 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 </TABLE>
 &nbsp;
 <P>
+<A NAME="hudson.security.csrf"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../hudson/security/csrf/package-summary.html">hudson.security.csrf</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> in <A HREF="../../../hudson/security/csrf/package-summary.html">hudson.security.csrf</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/security/csrf/CrumbIssuerDescriptor.html" title="class in hudson.security.csrf">CrumbIssuerDescriptor&lt;T extends CrumbIssuer&gt;</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Describes global configuration for crumb issuers.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/security/csrf/DefaultCrumbIssuer.DescriptorImpl.html" title="class in hudson.security.csrf">DefaultCrumbIssuer.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/security/csrf/package-summary.html">hudson.security.csrf</A> that return types with arguments of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>CrumbIssuer.</B><B><A HREF="../../../hudson/security/csrf/CrumbIssuer.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf"><CODE>CrumbIssuer</CODE></A> descriptors.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="hudson.slaves"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -2756,7 +2817,23 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/MockBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">MockBuilder.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/SleepBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">SleepBuilder.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/TestCrumbIssuer.DescriptorImpl.html" title="class in org.jvnet.hudson.test">TestCrumbIssuer.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

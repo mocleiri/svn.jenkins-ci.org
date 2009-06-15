@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ToolInstaller (Hudson main module 1.309 API)
+ToolInstaller (Hudson main module 1.310 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ToolInstaller (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ToolInstaller (Hudson main module 1.309 API)";
+        parent.document.title="ToolInstaller (Hudson main module 1.310 API)";
     }
 }
 </SCRIPT>
@@ -221,6 +221,15 @@ An object which can ensure that a generic <A HREF="../../hudson/tools/ToolInstal
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tools/ToolInstaller.html#preferredLocation(hudson.tools.ToolInstallation, hudson.model.Node)">preferredLocation</A></B>(<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                  <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience method to find a location to install a tool.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tools/ToolInstaller.html#setTool(hudson.tools.ToolInstallation)">setTool</A></B>(<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;t)</CODE>
 
@@ -358,12 +367,32 @@ public abstract <A HREF="../../hudson/FilePath.html" title="class in hudson">Fil
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>tool</CODE> - the tool being installed<DD><CODE>node</CODE> - the computer on which to install the tool<DD><CODE>log</CODE> - any status messages produced by the installation go here
-<DT><B>Returns:</B><DD>The (directory) path at which the tool can be found (like <A HREF="../../hudson/tools/ToolInstallation.html#getHome()"><CODE>ToolInstallation.getHome()</CODE></A>)
-      As a tip, you can return <code>node.createPath(tool.getHome())</code>
-      if your implementation wants to skip the installation and behaves as if it was a no-op.
+<DT><B>Returns:</B><DD>the (directory) path at which the tool can be found,
+         typically coming from <A HREF="../../hudson/tools/ToolInstaller.html#preferredLocation(hudson.tools.ToolInstallation, hudson.model.Node)"><CODE>preferredLocation(hudson.tools.ToolInstallation, hudson.model.Node)</CODE></A>
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE> - if installation fails
 <DD><CODE>java.lang.InterruptedException</CODE> - if communication with a slave is interrupted</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="preferredLocation(hudson.tools.ToolInstallation, hudson.model.Node)"><!-- --></A><H3>
+preferredLocation</H3>
+<PRE>
+protected final <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>preferredLocation</B>(<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                                           <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</PRE>
+<DL>
+<DD>Convenience method to find a location to install a tool.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>tool</CODE> - the tool being installed<DD><CODE>node</CODE> - the computer on which to install the tool
+<DT><B>Returns:</B><DD><A HREF="../../hudson/tools/ToolInstallation.html#getHome()"><CODE>ToolInstallation.getHome()</CODE></A> if specified, else a path within the local
+         Hudson work area named according to <A HREF="../../hudson/tools/ToolInstallation.html#getName()"><CODE>ToolInstallation.getName()</CODE></A><DT><B>Since:</B></DT>
+  <DD>1.310</DD>
+</DL>
 </DD>
 </DL>
 <HR>

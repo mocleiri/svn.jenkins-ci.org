@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.309 API)
+Hudson (Hudson main module 1.310 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.309 API)";
+        parent.document.title="Hudson (Hudson main module 1.310 API)";
     }
 }
 </SCRIPT>
@@ -1022,6 +1022,14 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getCrumbIssuer()">getCrumbIssuer</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/DependencyGraph.html" title="class in hudson.model">DependencyGraph</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getDependencyGraph()">getDependencyGraph</A></B>()</CODE>
 
@@ -1873,6 +1881,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#isUseCrumbs()">isUseCrumbs</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#isUseSecurity()">isUseSecurity</A></B>()</CODE>
 
 <BR>
@@ -1948,6 +1964,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#setCrumbIssuer(hudson.security.csrf.CrumbIssuer)">setCrumbIssuer</A></B>(<A HREF="../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A>&nbsp;issuer)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#setNodeName(java.lang.String)">setNodeName</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
@@ -2001,6 +2025,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the system message.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#setUseCrumbs(java.lang.Boolean)">setUseCrumbs</A></B>(java.lang.Boolean&nbsp;use)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Node"><!-- --></A>
@@ -4004,6 +4036,20 @@ public boolean <B>isUseSecurity</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="isUseCrumbs()"><!-- --></A><H3>
+isUseCrumbs</H3>
+<PRE>
+public boolean <B>isUseCrumbs</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getSecurity()"><!-- --></A><H3>
 getSecurity</H3>
 <PRE>
@@ -4608,6 +4654,48 @@ public void <B>doConfigSubmit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCrumbIssuer()"><!-- --></A><H3>
+getCrumbIssuer</H3>
+<PRE>
+public <A HREF="../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A> <B>getCrumbIssuer</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCrumbIssuer(hudson.security.csrf.CrumbIssuer)"><!-- --></A><H3>
+setCrumbIssuer</H3>
+<PRE>
+public void <B>setCrumbIssuer</B>(<A HREF="../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A>&nbsp;issuer)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setUseCrumbs(java.lang.Boolean)"><!-- --></A><H3>
+setUseCrumbs</H3>
+<PRE>
+public void <B>setUseCrumbs</B>(java.lang.Boolean&nbsp;use)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
