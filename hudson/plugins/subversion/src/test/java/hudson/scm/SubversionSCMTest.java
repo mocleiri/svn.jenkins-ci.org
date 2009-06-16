@@ -263,12 +263,14 @@ public class SubversionSCMTest extends HudsonTestCase {
     public void testConfigRoundtrip() throws Exception {
         FreeStyleProject p = createFreeStyleProject();
 
-        SubversionSCM scm = new SubversionSCM(new String[]{"a","b"},new String[]{"c","d"},true,new Sventon(new URL("http://www.sun.com/"),"test"),"exclude");
+        SubversionSCM scm = new SubversionSCM(
+                Arrays.asList(new ModuleLocation("a","c"),new ModuleLocation("b","d")),
+                true,new Sventon(new URL("http://www.sun.com/"),"test"),"exclude");
         p.setScm(scm);
         submit(new WebClient().getPage(p,"configure").getFormByName("config"));
         verify(scm,(SubversionSCM)p.getScm());
 
-        scm = new SubversionSCM(new String[]{"a"},new String[]{"c"},false,null,"");
+        scm = new SubversionSCM(Arrays.asList(new ModuleLocation("a","c")),false,null,"");
         p.setScm(scm);
         submit(new WebClient().getPage(p,"configure").getFormByName("config"));
         verify(scm,(SubversionSCM)p.getScm());
