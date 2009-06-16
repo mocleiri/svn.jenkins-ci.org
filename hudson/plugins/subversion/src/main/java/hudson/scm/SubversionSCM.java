@@ -122,6 +122,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.StringTokenizer;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -502,8 +503,8 @@ public class SubversionSCM extends SCM implements Serializable {
                         try {
                             listener.getLogger().println("Updating "+ l.remote);
 
-                            File local = new File(ws, l.local);
-                            svnuc.setEventHandler(new SubversionUpdateEventHandler(listener.getLogger(), externals,local,l.local));
+                            File local = new File(ws, l.getLocalDir());
+                            svnuc.setEventHandler(new SubversionUpdateEventHandler(listener.getLogger(), externals,local,l.getLocalDir()));
                             svnuc.doUpdate(local.getCanonicalFile(), l.getRevision(revision), true);
 
                         } catch (final SVNException e) {
@@ -543,8 +544,8 @@ public class SubversionSCM extends SCM implements Serializable {
                         try {
                             listener.getLogger().println("Checking out "+l.remote);
 
-                            File local = new File(ws, l.local);
-                            svnuc.setEventHandler(new SubversionUpdateEventHandler(new PrintStream(pos), externals, local, l.local));
+                            File local = new File(ws, l.getLocalDir());
+                            svnuc.setEventHandler(new SubversionUpdateEventHandler(new PrintStream(pos), externals, local, l.getLocalDir()));
                             svnuc.doCheckout(l.getSVNURL(), local.getCanonicalFile(), SVNRevision.HEAD, l.getRevision(revision), true);
                         } catch (SVNException e) {
                             e.printStackTrace(listener.error("Failed to check out "+l.remote));
@@ -771,7 +772,7 @@ public class SubversionSCM extends SCM implements Serializable {
                 // invoke the "svn info"
                 for( ModuleLocation module : locations ) {
                     try {
-                        SvnInfo info = new SvnInfo(svnWc.doInfo(new File(ws,module.local), SVNRevision.WORKING));
+                        SvnInfo info = new SvnInfo(svnWc.doInfo(new File(ws,module.getLocalDir()), SVNRevision.WORKING));
                         revisions.put(info.url,info);
                     } catch (SVNException e) {
                         e.printStackTrace(listener.error("Failed to parse svn info for "+module.remote));
@@ -825,7 +826,7 @@ public class SubversionSCM extends SCM implements Serializable {
 
         public Boolean invoke(File ws, VirtualChannel channel) throws IOException {
             for (ModuleLocation l : locations) {
-                String moduleName = l.local;
+                String moduleName = l.getLocalDir();
                 File module = new File(ws,moduleName).getCanonicalFile(); // canonicalize to remove ".." and ".". See #474
 
                 if(!module.exists()) {
@@ -1003,7 +1004,7 @@ public class SubversionSCM extends SCM implements Serializable {
 
     public FilePath getModuleRoot(FilePath workspace) {
         if (getLocations().length > 0)
-            return workspace.child(getLocations()[0].local);
+            return workspace.child(getLocations()[0].getLocalDir());
         return workspace;
     }
 
@@ -1012,7 +1013,7 @@ public class SubversionSCM extends SCM implements Serializable {
         if (moduleLocations.length > 0) {
             FilePath[] moduleRoots = new FilePath[moduleLocations.length];
             for (int i = 0; i < moduleLocations.length; i++) {
-                moduleRoots[i] = workspace.child(moduleLocations[i].local);
+                moduleRoots[i] = workspace.child(moduleLocations[i].getLocalDir());
             }
             return moduleRoots;
         }
@@ -1669,17 +1670,33 @@ public class SubversionSCM extends SCM implements Serializable {
          */
         public final String remote;
         /**
-         * Local directory to place the file to.
-         * Relative to the workspace root.
+         * Remembers the user-given value.
+         * Can be null.
+         *
+         * @deprecated
+         *      Code should use {@link #getLocalDir()}. This field is only intended for form binding.
          */
         public final String local;
 
-        public ModuleLocation(String remote, String local) {
-            if(local==null)
-                local = getLastPathComponent(remote);
+        /**
+         * Cache of the repository UUID.
+         */
+        private transient volatile UUID repositoryUUID;
+        private transient volatile SVNURL repositoryRoot;
 
+        public ModuleLocation(String remote, String local) {
             this.remote = remote.trim();
-            this.local = local.trim();
+            this.local = Util.fixEmptyAndTrim(local);
+        }
+
+        /**
+         * Local directory to place the file to.
+         * Relative to the workspace root.
+         */
+        public String getLocalDir() {
+            if(local==null)
+                return getLastPathComponent(remote);
+            return local;
         }
 
         /**
@@ -1705,6 +1722,30 @@ public class SubversionSCM extends SCM implements Serializable {
          */
         public SVNURL getSVNURL() throws SVNException {
             return SVNURL.parseURIEncoded(getURL());
+        }
+
+        /**
+         * Repository UUID. Lazy computed and cached.
+         */
+        public UUID getUUID() throws SVNException {
+            if(repositoryUUID==null || repositoryRoot==null) {
+                synchronized (this) {
+                    SVNRepository r = openRepository();
+                    r.testConnection(); // make sure values are fetched
+                    repositoryUUID = UUID.fromString(r.getRepositoryUUID(false));
+                    repositoryRoot = r.getRepositoryRoot(false);
+                }
+            }
+            return repositoryUUID;
+        }
+
+        public SVNRepository openRepository() throws SVNException {
+            return Hudson.getInstance().getDescriptorByType(DescriptorImpl.class).getRepository(getSVNURL());
+        }
+
+        public SVNURL getRepositoryRoot() throws SVNException {
+            getUUID();
+            return repositoryRoot;
         }
 
         /**
@@ -1750,7 +1791,7 @@ public class SubversionSCM extends SCM implements Serializable {
          *         values.
          */
         public ModuleLocation getExpandedLocation(AbstractBuild<?, ?> build) {
-            return new ModuleLocation(getExpandedRemote(build), local);
+            return new ModuleLocation(getExpandedRemote(build), getLocalDir());
         }
         
         public String toString() {
