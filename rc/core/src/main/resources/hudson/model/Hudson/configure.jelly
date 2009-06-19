@@ -1,0 +1,165 @@
+<!--
+The MIT License
+
+Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt, Jean-Baptiste Quenot, Stephen Connolly, Tom Huybrechts, Yahoo! Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+
+<!--
+  Config page
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+<l:layout norefresh="true" permission="${it.ADMINISTER}">
+  <st:include page="sidepanel.jelly" />
+  <l:main-panel xmlns:local="local">
+    <f:form method="post" name="config" action="configSubmit">
+      <j:set var="instance" value="${it}" />
+      <j:set var="descriptor" value="${instance.descriptor}" />
+
+      <f:entry title="${%Home directory}" help="/help/system-config/homeDirectory.html">
+        ${it.rootDir}
+      </f:entry>
+      <f:entry title="${%System Message}" help="/help/system-config/systemMessage.html">
+        <f:textarea name="system_message" value="${it.systemMessage}" />
+      </f:entry>
+      <f:entry title="${%# of executors}" field="numExecutors">
+        <f:textbox />
+      </f:entry>
+      <j:if test="${!empty(it.slaves)}">
+        <f:entry title="${%Labels}" field="labelString">
+          <f:textbox />
+        </f:entry>
+        <f:slave-mode name="master.mode" node="${it}" />
+      </j:if>
+      <f:entry title="${%Quiet period}" help="/help/project-config/quietPeriod.html">
+        <input class="setting-input number" name="quiet_period"
+          type="text" value="${it.quietPeriod}"/>
+      </f:entry>
+      <f:optionalBlock name="use_security" title="${%Enable security}"
+                       checked="${it.useSecurity}" help="/help/system-config/enableSecurity.html">
+        <f:entry title="${%TCP port for JNLP slave agents}"
+            help="/help/system-config/master-slave/slave-agent-port.html">
+          <f:radio name="slaveAgentPortType" value="fixed" id="sat.fixed"
+                   checked="${it.slaveAgentPort &gt; 0}" onclick="$('sat.port').disabled=false"/>
+          <label for="sat.fixed">${%Fixed}</label> :
+          <input type="text" class="number" name="slaveAgentPort" id="sat.port"
+             value   ="${it.slaveAgentPort gt 0 ? it.slaveAgentPort : null}"
+             disabled="${it.slaveAgentPort gt 0 ? null : 'true'}"/>
+
+          <st:nbsp />
+
+          <f:radio name="slaveAgentPortType" value="random" id="sat.random"
+                   checked="${it.slaveAgentPort==0}" onclick="$('sat.port').disabled=true" />
+          <label for="sat.random">${%Random}</label>
+
+          <st:nbsp />
+
+          <f:radio name="slaveAgentPortType" value="disable" id="sat.disabled"
+                   checked="${it.slaveAgentPort==-1}" onclick="$('sat.port').disabled=true" />
+          <label for="sat.disabled">${%Disable}</label>
+        </f:entry>
+
+        <f:entry title="${%Access Control}">
+          <table style="width:100%">
+            <f:descriptorRadioList title="${%Security Realm}" varName="realm"
+                                   instance="${it.securityRealm}"
+                                   descriptors="${h.securityRealmDescriptors}"/>
+            <f:descriptorRadioList title="${%Authorization}" varName="authorization"
+                                   instance="${it.authorizationStrategy}"
+                                   descriptors="${h.authorizationStrategyDescriptors}"/>
+          </table>
+        </f:entry>
+      </f:optionalBlock>
+
+      <j:if test="${!empty(h.crumbIssuerDescriptors)}">
+	    <f:optionalBlock name="csrf" title="${%Prevent Cross Site Request Forgery exploits}"
+	                     checked="${it.useCrumbs}" help="/help/system-config/csrf.html">
+	      <f:entry title="${%Crumbs}">
+	        <table style="width:100%">
+	          <f:descriptorRadioList title="${%Crumb Algorithm}" varName="issuer"
+	                                 instance="${it.crumbIssuer}"
+	                                 descriptors="${h.crumbIssuerDescriptors}"/>
+	        </table>
+	      </f:entry>
+	    </f:optionalBlock>
+      </j:if>
+      
+      <f:optionalBlock name="usageStatisticsCollected" checked="${it.usageStatisticsCollected}"
+                       title="${%statsBlurb}"
+                       help="/help/system-config/usage-statistics.html" />
+
+        <f:descriptorList title="${%Global properties}"
+                          name="globalNodeProperties"
+                          descriptors="${h.getNodePropertyDescriptors(it.class)}"
+                          instances="${it.globalNodeProperties}" />
+
+      <!-- list config pages from plugins, if any -->
+      <j:forEach var="p" items="${it.pluginManager.plugins}">
+        <j:if test="${h.hasView(p.plugin,'config.jelly')}">
+          <f:rowSet name="plugin">
+            <tr><td>
+              <input type="hidden" name="name" value="${p.shortName}"/>
+            </td></tr>
+            <st:include page="config.jelly" it="${p.plugin}" optional="true"/>
+          </f:rowSet>
+        </j:if>
+      </j:forEach>
+
+      <d:taglib uri="local">
+        <!-- display global config pages for the given descriptors -->
+        <d:tag name="globalConfig">
+          <j:invokeStatic var="descriptors" className="${className}" method="all" />
+          <j:forEach var="idx" begin="0" end="${size(descriptors)-1}">
+            <j:set var="descriptor" value="${descriptors[idx]}" />
+            <j:set var="instance" value="${descriptor}" /><!-- this makes the <f:textbox field=.../> work -->
+            <f:rowSet name="${descriptor.jsonSafeClassName}">
+              <st:include page="${descriptor.globalConfigPage}" from="${descriptor}" optional="true"/>
+            </f:rowSet>
+          </j:forEach>
+        </d:tag>
+      </d:taglib>
+
+      <local:globalConfig className="hudson.tools.ToolInstallation" />
+      <local:globalConfig className="hudson.triggers.Trigger" />
+      <local:globalConfig className="hudson.tasks.BuildWrapper" />
+      <local:globalConfig className="hudson.tasks.Builder"  />
+      <local:globalConfig className="hudson.scm.SCM" />
+      <local:globalConfig className="hudson.tasks.Publisher" />
+      <local:globalConfig className="hudson.model.JobPropertyDescriptor" />
+      <local:globalConfig className="hudson.model.PageDecorator" />
+
+      <j:if test="${!empty(h.getCloudDescriptors())}">
+        <f:section title="${%Cloud}">
+          <f:block>
+            <f:hetero-list name="cloud" hasHeader="true"
+                           descriptors="${h.getCloudDescriptors()}"
+                           items="${it.clouds}"
+                           addCaption="${%Add a new cloud}"/>
+          </f:block>
+        </f:section>
+      </j:if>
+
+      <f:block>
+        <f:submit value="${%Save}" />
+      </f:block>
+    </f:form>
+  </l:main-panel>
+</l:layout>
+</j:jelly>
