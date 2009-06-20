@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase.WebClient (Hudson main module 1.309 API)
+HudsonTestCase.WebClient (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase.WebClient (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase.WebClient (Hudson main module 1.309 API)";
+        parent.document.title="HudsonTestCase.WebClient (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -161,6 +161,22 @@ Extends <CODE>WebClient</CODE> and provide convenience methods
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;com.gargoylesoftware.htmlunit.WebRequestSettings</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#addCrumb(com.gargoylesoftware.htmlunit.WebRequestSettings)">addCrumb</A></B>(com.gargoylesoftware.htmlunit.WebRequestSettings&nbsp;req)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a security crumb to the quest</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.net.URL</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#createCrumbedUrl(java.lang.String)">createCrumbedUrl</A></B>(java.lang.String&nbsp;relativePath)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a URL with crumb parameters relative to {<A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#getContextPath()"><CODE>getContextPath()</CODE></A></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -549,6 +565,35 @@ public java.lang.String <B>getContextPath</B>()</PRE>
 <P>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addCrumb(com.gargoylesoftware.htmlunit.WebRequestSettings)"><!-- --></A><H3>
+addCrumb</H3>
+<PRE>
+public com.gargoylesoftware.htmlunit.WebRequestSettings <B>addCrumb</B>(com.gargoylesoftware.htmlunit.WebRequestSettings&nbsp;req)</PRE>
+<DL>
+<DD>Adds a security crumb to the quest
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createCrumbedUrl(java.lang.String)"><!-- --></A><H3>
+createCrumbedUrl</H3>
+<PRE>
+public java.net.URL <B>createCrumbedUrl</B>(java.lang.String&nbsp;relativePath)
+                              throws java.net.MalformedURLException</PRE>
+<DL>
+<DD>Creates a URL with crumb parameters relative to {<A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#getContextPath()"><CODE>getContextPath()</CODE></A>
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.net.MalformedURLException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

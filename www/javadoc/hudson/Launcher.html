@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Launcher (Hudson main module 1.309 API)
+Launcher (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Launcher (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Launcher (Hudson main module 1.309 API)";
+        parent.document.title="Launcher (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -118,7 +118,7 @@ Starts a process.
  (which often contains machine-specific information, like PATH, TIMEZONE, etc.)
 
  <p>
- <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> is responsible for inheriting environment variables.
+ <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> is responsible for inheriting environment variables.
 <P>
 
 <P>
@@ -144,6 +144,14 @@ Starts a process.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> that launches process locally.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builder pattern for configuring a process to launch.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -229,7 +237,7 @@ Starts a process.
 <TD><CODE><B><A HREF="../hudson/Launcher.html#decorateByPrefix(java.lang.String...)">decorateByPrefix</A></B>(java.lang.String...&nbsp;prefix)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a decorated <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> that puts the given set of arguments as a prefix to any commands
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a decorated <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> that puts the given set of arguments as a prefix to any commands
  that it invokes.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -238,7 +246,7 @@ Starts a process.
 <TD><CODE><B><A HREF="../hudson/Launcher.html#decorateFor(hudson.model.Node)">decorateFor</A></B>(<A HREF="../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a decorated <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> for the given node.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a decorated <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> for the given node.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -273,7 +281,7 @@ Starts a process.
 <TD><CODE><B><A HREF="../hudson/Launcher.html#isUnix()">isUnix</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> is going to launch on Unix.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> is going to launch on Unix.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -285,6 +293,23 @@ Starts a process.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launch()">launch</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launches a process by using a <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">builder-pattern</A> to configure
+ the parameters.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(hudson.Launcher.ProcStarter)">launch</A></B>(<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A>&nbsp;starter)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invoked from <A HREF="../hudson/Launcher.ProcStarter.html#start()"><CODE>Launcher.ProcStarter.start()</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.util.Map, java.io.InputStream, java.io.OutputStream)">launch</A></B>(java.lang.String[]&nbsp;cmd,
        boolean[]&nbsp;mask,
@@ -293,8 +318,8 @@ Starts a process.
        java.io.OutputStream&nbsp;out)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
- remain visible through /proc, pargs, process explorer, etc.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -306,8 +331,8 @@ Starts a process.
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
- remain visible through /proc, pargs, process explorer, etc.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -319,12 +344,12 @@ Starts a process.
        java.io.OutputStream&nbsp;out)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
- remain visible through /proc, pargs, process explorer, etc.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
        boolean[]&nbsp;mask,
        java.lang.String[]&nbsp;env,
@@ -333,8 +358,8 @@ Starts a process.
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
- remain visible through /proc, pargs, process explorer, etc.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -346,8 +371,8 @@ Starts a process.
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
- remain visible through /proc, pargs, process explorer, etc.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -358,7 +383,8 @@ Starts a process.
        java.io.OutputStream&nbsp;out)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -369,7 +395,8 @@ Starts a process.
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -380,11 +407,12 @@ Starts a process.
        java.io.OutputStream&nbsp;out)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
        java.lang.String[]&nbsp;env,
        java.io.InputStream&nbsp;in,
@@ -392,7 +420,8 @@ Starts a process.
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -403,7 +432,8 @@ Starts a process.
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -414,7 +444,8 @@ Starts a process.
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -425,7 +456,8 @@ Starts a process.
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -442,13 +474,23 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#maskedPrintCommandLine(java.lang.String[], boolean[], hudson.FilePath)">maskedPrintCommandLine</A></B>(java.lang.String[]&nbsp;cmd,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#maskedPrintCommandLine(java.util.List, boolean[], hudson.FilePath)">maskedPrintCommandLine</A></B>(java.util.List&lt;java.lang.String&gt;&nbsp;cmd,
                        boolean[]&nbsp;mask,
                        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prints out the command line to the listener with some portions masked to prevent sensitive information from being
  recorded on the listener.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#maskedPrintCommandLine(java.lang.String[], boolean[], hudson.FilePath)">maskedPrintCommandLine</A></B>(java.lang.String[]&nbsp;cmd,
+                       boolean[]&nbsp;mask,
+                       <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -590,17 +632,31 @@ public <A HREF="../hudson/model/Computer.html" title="class in hudson.model">Com
       figure out the current <A HREF="../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> from within a build, use
       <A HREF="../hudson/model/Computer.html#currentComputer()"><CODE>Computer.currentComputer()</CODE></A></I>
 <P>
-<DD>If this <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> is encapsulating an execution on a specific <A HREF="../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>,
+<DD>If this <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> is encapsulating an execution on a specific <A HREF="../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>,
  return it.
 
  <p>
- Because of the way internal Hudson abstractions are set up (that is, <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> only
+ Because of the way internal Hudson abstractions are set up (that is, <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> only
  needs a <A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting"><CODE>VirtualChannel</CODE></A> to do its job and isn't really required that the channel
  comes from an existing <A HREF="../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>), this method may not always the right <A HREF="../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> instance.
 <P>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>null if this launcher is not created from a <A HREF="../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> object.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="launch()"><!-- --></A><H3>
+launch</H3>
+<PRE>
+public final <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A> <B>launch</B>()</PRE>
+<DL>
+<DD>Launches a process by using a <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">builder-pattern</A> to configure
+ the parameters.
+<P>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -614,6 +670,9 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
                          <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
                   throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
+<P>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -631,6 +690,9 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
                          <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
                   throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
+<P>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -648,6 +710,9 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
                          java.io.OutputStream&nbsp;out)
                   throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
+<P>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -666,6 +731,9 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
                          <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
                   throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
+<P>
 <DD>Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
  remain visible through /proc, pargs, process explorer, etc. i.e. people logged in on the same machine</strong>
  This version of the launch command just ensures that it is not visible from a build log which is exposed via the
@@ -690,6 +758,9 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
                          java.io.OutputStream&nbsp;out)
                   throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
+<P>
 <DD>Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
  remain visible through /proc, pargs, process explorer, etc. i.e. people logged in on the same machine</strong>
  This version of the launch command just ensures that it is not visible from a build log which is exposed via the
@@ -713,6 +784,9 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
                          <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
                   throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
+<P>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -730,6 +804,9 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
                          <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
                   throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
+<P>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -747,6 +824,9 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
                          java.io.OutputStream&nbsp;out)
                   throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
+<P>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -765,6 +845,9 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
                          <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
                   throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
+<P>
 <DD>Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
  remain visible through /proc, pargs, process explorer, etc. i.e. people logged in on the same machine</strong>
  This version of the launch command just ensures that it is not visible from a build log which is exposed via the
@@ -789,6 +872,9 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
                          java.io.OutputStream&nbsp;out)
                   throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
+<P>
 <DD>Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
  remain visible through /proc, pargs, process explorer, etc. i.e. people logged in on the same machine</strong>
  This version of the launch command just ensures that it is not visible from a build log which is exposed via the
@@ -806,13 +892,16 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <A NAME="launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public abstract <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
-                            java.lang.String[]&nbsp;env,
-                            java.io.InputStream&nbsp;in,
-                            java.io.OutputStream&nbsp;out,
-                            <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
-                     throws java.io.IOException</PRE>
+public <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
+                   java.lang.String[]&nbsp;env,
+                   java.io.InputStream&nbsp;in,
+                   java.io.OutputStream&nbsp;out,
+                   <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
+            throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
+<P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>env</CODE> - Environment variable overrides.<DD><CODE>in</CODE> - null if there's no input.<DD><CODE>workDir</CODE> - null if the working directory could be anything.<DD><CODE>out</CODE> - stdout and stderr of the process will be sent to this stream.
       the stream won't be closed.
@@ -825,14 +914,17 @@ public abstract <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <
 <A NAME="launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public abstract <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
-                            boolean[]&nbsp;mask,
-                            java.lang.String[]&nbsp;env,
-                            java.io.InputStream&nbsp;in,
-                            java.io.OutputStream&nbsp;out,
-                            <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
-                     throws java.io.IOException</PRE>
+public <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
+                   boolean[]&nbsp;mask,
+                   java.lang.String[]&nbsp;env,
+                   java.io.InputStream&nbsp;in,
+                   java.io.OutputStream&nbsp;out,
+                   <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
+            throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
+<P>
 <DD>Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
  remain visible through /proc, pargs, process explorer, etc. i.e. people logged in on the same machine</strong>
  This version of the launch command just ensures that it is not visible from a build log which is exposed via the
@@ -843,6 +935,22 @@ public abstract <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <
 <DT><B>Returns:</B><DD>The process of the command.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE> - When there are IO problems.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="launch(hudson.Launcher.ProcStarter)"><!-- --></A><H3>
+launch</H3>
+<PRE>
+protected abstract <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A>&nbsp;starter)
+                        throws java.io.IOException</PRE>
+<DL>
+<DD>Invoked from <A HREF="../hudson/Launcher.ProcStarter.html#start()"><CODE>Launcher.ProcStarter.start()</CODE></A>
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -880,7 +988,7 @@ isUnix</H3>
 <PRE>
 public boolean <B>isUnix</B>()</PRE>
 <DL>
-<DD>Returns true if this <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> is going to launch on Unix.
+<DD>Returns true if this <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> is going to launch on Unix.
 <P>
 <DD><DL>
 </DL>
@@ -920,10 +1028,10 @@ protected final void <B>printCommandLine</B>(java.lang.String[]&nbsp;cmd,
 </DL>
 <HR>
 
-<A NAME="maskedPrintCommandLine(java.lang.String[], boolean[], hudson.FilePath)"><!-- --></A><H3>
+<A NAME="maskedPrintCommandLine(java.util.List, boolean[], hudson.FilePath)"><!-- --></A><H3>
 maskedPrintCommandLine</H3>
 <PRE>
-protected final void <B>maskedPrintCommandLine</B>(java.lang.String[]&nbsp;cmd,
+protected final void <B>maskedPrintCommandLine</B>(java.util.List&lt;java.lang.String&gt;&nbsp;cmd,
                                             boolean[]&nbsp;mask,
                                             <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</PRE>
 <DL>
@@ -937,12 +1045,25 @@ protected final void <B>maskedPrintCommandLine</B>(java.lang.String[]&nbsp;cmd,
 </DL>
 <HR>
 
+<A NAME="maskedPrintCommandLine(java.lang.String[], boolean[], hudson.FilePath)"><!-- --></A><H3>
+maskedPrintCommandLine</H3>
+<PRE>
+protected final void <B>maskedPrintCommandLine</B>(java.lang.String[]&nbsp;cmd,
+                                            boolean[]&nbsp;mask,
+                                            <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="decorateFor(hudson.model.Node)"><!-- --></A><H3>
 decorateFor</H3>
 <PRE>
 public final <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>decorateFor</B>(<A HREF="../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</PRE>
 <DL>
-<DD>Returns a decorated <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> for the given node.
+<DD>Returns a decorated <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> for the given node.
 <P>
 <DD><DL>
 </DL>
@@ -955,7 +1076,7 @@ decorateByPrefix</H3>
 <PRE>
 public final <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>decorateByPrefix</B>(java.lang.String...&nbsp;prefix)</PRE>
 <DL>
-<DD>Returns a decorated <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> that puts the given set of arguments as a prefix to any commands
+<DD>Returns a decorated <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> that puts the given set of arguments as a prefix to any commands
  that it invokes.
 <P>
 <DD><DL>

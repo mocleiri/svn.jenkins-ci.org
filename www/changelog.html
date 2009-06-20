@@ -16,16 +16,53 @@
 <!-- Record your changes in the trunk here. -->
 <div style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
+  <li class=bug>
+    Fixed a bug in the non-ASCII character handling in remote bulk file copy.
+    (<a href="http://www.nabble.com/WG%3A-Error-when-saving-Artifacts-td24106649.html">report</a>)
   <li class=rfe>
-    Added a CLI command to copy a job.
-  <li class=rfe>
-    Fixed a performance problem in master/slave file copy.
-    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3799">issue 3799</a>)
+    Supported self restart on all containers in Unix
+    (<a href="http://www.nabble.com/What-are-your-experiences-with-Hudson-and-different-containers--td24075611.html">report</a>)
 </ul>
 </div><!--=TRUNK-END=-->
 
 <!-- these changes are controlled by the release process. -->
 <div style="display:none;"><!--=BEGIN=-->
+<a name=v1.312><h3>What's new in 1.312</h3></a>
+<!--=RC-CHANGES=-->
+</div><!--=END=-->
+<a name=v1.311><h3>What's new in 1.311</h3></a>
+<ul class=image>
+  <li class=bug>
+    Gracefully handle IBM JVMs on PowerPC.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3875">issue 3875</a>)
+  <li class=bug>
+    Fixed NPE with GlassFish v3 when CSRF protection is on.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3878">issue 3878</a>)
+  <li class=bug>
+    Fixed a bug in CLI where the state of command executions may interfere with each other.
+  <li class=bug>
+    CLI should handle the situation gracefully if the server doesn't use crumb.
+  <li class=bug>
+    Fixed a performance problem in CLI execution.
+  <li class=bug>
+    Don't populate the default value of the Subversion local directory name.
+    (<a href="http://www.nabble.com/Is-%22%22Local-module-directory%22-really-optional--td24035475.html">report</a>)
+  <li class=rfe>
+    Added a CLI command to copy a job.
+  <li class=rfe>
+    Integrated SVNKit 1.3.0
+  <li class=rfe>
+    Implemented more intelligent polling assisted by <tt>commit-hook</tt> from SVN repository. 
+    (<a href="http://wiki.hudson-ci.org/display/HUDSON/Subversion+post-commit+hook">details</a>)
+  <li class=rfe>
+    Subversion support is moved into a plugin to isolate SVNKit that has GPL-like license.
+  <li class=rfe>
+    Fixed a performance problem in master/slave file copy.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3799">issue 3799</a>)
+  <li class=rfe>
+    Set time out to avoid infinite hang when SMTP servers don't respond in time.
+    (<a href="http://www.nabble.com/Lockup-during-e-mail-notification.-td23718820.html">report</a>)
+</ul>
 <a name=v1.310><h3>What's new in 1.310</h3></a>
 <ul class=image>
   <li class=bug>
@@ -52,7 +89,6 @@
   <li class='major rfe'>
     Generate nonce values to prevent cross site request forgeries. Extension point to customize the nonce generation algorithm.
 </ul>
-</div><!--=END=-->
 <a name=v1.309><h3>What's new in 1.309</h3></a>
 <ul class=image>
   <li class=bug>

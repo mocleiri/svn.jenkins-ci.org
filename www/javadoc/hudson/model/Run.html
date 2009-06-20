@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Run (Hudson main module 1.309 API)
+Run (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson main module 1.309 API)";
+        parent.document.title="Run (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -852,7 +852,7 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#getTimestampString()">getTimestampString</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the string that says how long since this build has scheduled.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the string that says how long since this build has started.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1575,7 +1575,7 @@ getTimestampString</H3>
 <PRE>
 public java.lang.String <B>getTimestampString</B>()</PRE>
 <DL>
-<DD>Gets the string that says how long since this build has scheduled.
+<DD>Gets the string that says how long since this build has started.
 <P>
 <DD><DL>
 </DL>
@@ -2521,7 +2521,7 @@ getCharacteristicEnvVars</H3>
 protected final <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <B>getCharacteristicEnvVars</B>()</PRE>
 <DL>
 <DD>Builds up the environment variable map that's sufficient to identify a process
- as ours. This is used to kill run-away processes via <CODE>ProcessTreeKiller</CODE>.
+ as ours. This is used to kill run-away processes via <A HREF="../../hudson/util/ProcessTreeKiller.html" title="class in hudson.util"><CODE>ProcessTreeKiller</CODE></A>.
 <P>
 <DD><DL>
 </DL>

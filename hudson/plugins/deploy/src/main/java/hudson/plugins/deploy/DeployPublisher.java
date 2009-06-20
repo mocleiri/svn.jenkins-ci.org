@@ -3,10 +3,12 @@ package hudson.plugins.deploy;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Extension;
+import hudson.DescriptorExtensionList;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.model.Result;
+import hudson.model.Descriptor;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Publisher;
 import hudson.util.DescriptorList;
@@ -15,6 +17,10 @@ import hudson.util.FormValidation;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.servlet.ServletException;
 
@@ -61,24 +67,18 @@ public class DeployPublisher extends Publisher implements Serializable {
             return Messages.DeployPublisher_DisplayName();
         }
 
-        public DescriptorList<ContainerAdapter> getContainerAdapters() {
-            return ContainerAdapter.LIST;
-        }
-
-        public FormValidation doCheckUrl(final StaplerRequest req, StaplerResponse rsp, @QueryParameter String value) throws IOException, ServletException {
-            String url = value;
-
-            if (url != null && url.length() > 0) {
-                try {
-                    URL u = new URL(url);
-                } catch (Exception e) {
-                    return FormValidation.error(Messages.DeployPublisher_BadFormedUrl());
+        /**
+         * Sort the descriptors so that the order they are displayed is more predictable
+         */
+        public List<ContainerAdapterDescriptor> getContainerAdapters() {
+            List<ContainerAdapterDescriptor> r = new ArrayList<ContainerAdapterDescriptor>(ContainerAdapter.all());
+            Collections.sort(r,new Comparator<ContainerAdapterDescriptor>() {
+                public int compare(ContainerAdapterDescriptor o1, ContainerAdapterDescriptor o2) {
+                    return o1.getDisplayName().compareTo(o2.getDisplayName());
                 }
-            }
-
-            return FormValidation.ok();
-	    }
-
+            });
+            return r;
+        }
     }
 
     private static final long serialVersionUID = 1L;

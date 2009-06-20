@@ -65,7 +65,6 @@ import hudson.scm.CVSSCM;
 import hudson.scm.RepositoryBrowser;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
-import hudson.scm.SubversionSCM;
 import hudson.search.CollectionSearchIndex;
 import hudson.search.SearchIndexBuilder;
 import hudson.security.ACL;
@@ -116,6 +115,7 @@ import hudson.util.Memoizer;
 import hudson.util.Iterators;
 import hudson.util.FormValidation;
 import hudson.util.VersionNumber;
+import hudson.util.StreamTaskListener;
 import hudson.widgets.Widget;
 import net.sf.json.JSONObject;
 import org.acegisecurity.*;
@@ -366,6 +366,13 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      * This is {@link Integer} so that we can initialize it to '5' for upgrading users.
      */
     /*package*/ Integer quietPeriod;
+    
+    /**
+     * Retry Count.
+     *
+     * This is {@link Integer} so that we can initialize it to '5' for upgrading users.
+     */
+    /*package*/ Integer retryCount;
 
     /**
      * {@link View}s.
@@ -509,7 +516,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      */
     private transient final LogRecorderManager log = new LogRecorderManager();
 
-    public Hudson(File root, ServletContext context) throws IOException {
+    public Hudson(File root, ServletContext context) throws IOException, InterruptedException {
     	// As hudson is starting, grant this process full controll
     	SecurityContextHolder.getContext().setAuthentication(ACL.SYSTEM);
         try {
@@ -552,9 +559,6 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
                 LOGGER.log(Level.SEVERE, "Failed to load proxy configuration", e);
             }
 
-            // run the init code of SubversionSCM before we load plugins so that plugins can change SubversionWorkspaceSelector.
-            SubversionSCM.init();
-
             // load plugins.
             pluginManager = new PluginManager(context);
             pluginManager.initialize();
@@ -588,6 +592,10 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             udpBroadcastThread.start();
 
             updateComputerList();
+
+            // master is online now
+            for (ComputerListener cl : ComputerListener.all())
+                cl.onOnline(toComputer(),new StreamTaskListener(System.out));
 
             getQueue().load();
 
@@ -1449,6 +1457,15 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     public int getQuietPeriod() {
         return quietPeriod!=null ? quietPeriod : 5;
     }
+    
+    /**
+     * Gets the system default Retry Count period.
+     */
+    public int getRetryCount() {
+        return retryCount !=null ? retryCount : 5;
+    }
+    
+    
 
     /**
      * @deprecated
@@ -2063,6 +2080,9 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
 
         // Initialize the filter with the crumb issuer
         setCrumbIssuer(crumbIssuer);
+
+        // auto register root actions
+        actions.addAll(getExtensionList(RootAction.class));
         
         LOGGER.info(String.format("Took %s ms to load",System.currentTimeMillis()-startTime));
         if(KILL_AFTER_LOAD)
@@ -2216,6 +2236,8 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             labelSet=null;
 
             quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
+            
+            retryCount = Integer.parseInt(req.getParameter("retry_count"));
 
             systemMessage = Util.nullify(req.getParameter("system_message"));
 
@@ -2282,7 +2304,6 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     
     public void setCrumbIssuer(CrumbIssuer issuer) {
         crumbIssuer = issuer;
-        CrumbFilter.get(servletContext).setCrumbIssuer(issuer);
     }
 
     public void setUseCrumbs(Boolean use) {
@@ -2727,7 +2748,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         public int main(List<String> args, Locale locale, InputStream stdin, OutputStream stdout, OutputStream stderr) {
             // remoting sets the context classloader to the RemoteClassLoader,
             // which slows down the classloading. we don't load anything from CLI,
-            // so couner that effect.
+            // so counter that effect.
             Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
 
             PrintStream out = new PrintStream(stdout);

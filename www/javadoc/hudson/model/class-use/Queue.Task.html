@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.model.Queue.Task (Hudson main module 1.309 API)
+Uses of Interface hudson.model.Queue.Task (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.Queue.Task (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.Queue.Task (Hudson main module 1.309 API)";
+        parent.document.title="Uses of Interface hudson.model.Queue.Task (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -168,6 +168,14 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;interface</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model">Queue.TransientTask</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks <A HREF="../../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s that are not persisted.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;interface</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A></B></CODE>
 
@@ -253,7 +261,8 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
     int&nbsp;quietPeriod)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int)"><CODE>Queue.schedule(Task, int)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -263,7 +272,8 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
     <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>...&nbsp;actions)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int, hudson.model.Action...)"><CODE>Queue.schedule(Task, int, Action[])</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -334,12 +344,32 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ExecutorListener.</B><B><A HREF="../../../hudson/model/ExecutorListener.html#taskAccepted(hudson.model.Executor, hudson.model.Queue.Task)">taskAccepted</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
-             <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</CODE>
+<CODE>&nbsp;<A HREF="../../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A></CODE></FONT></TD>
+<TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int)">schedule</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
+         int&nbsp;quietPeriod)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is accepted by an executor.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A></CODE></FONT></TD>
+<TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int, hudson.model.Action...)">schedule</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
+         int&nbsp;quietPeriod,
+         <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>...&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A></CODE></FONT></TD>
+<TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int, java.util.List)">schedule</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
+         int&nbsp;quietPeriod,
+         java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules an execution of a task.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -353,12 +383,11 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ExecutorListener.</B><B><A HREF="../../../hudson/model/ExecutorListener.html#taskCompleted(hudson.model.Executor, hudson.model.Queue.Task, long)">taskCompleted</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
-              <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
-              long&nbsp;durationMS)</CODE>
+<TD><CODE><B>ExecutorListener.</B><B><A HREF="../../../hudson/model/ExecutorListener.html#taskAccepted(hudson.model.Executor, hudson.model.Queue.Task)">taskAccepted</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
+             <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is completed without any problems by an executor.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is accepted by an executor.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -373,7 +402,17 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ExecutorListener.</B><B><A HREF="../../../hudson/model/ExecutorListener.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)">taskCompletedWithProblems</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
+<TD><CODE><B>ExecutorListener.</B><B><A HREF="../../../hudson/model/ExecutorListener.html#taskCompleted(hudson.model.Executor, hudson.model.Queue.Task, long)">taskCompleted</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
+              <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
+              long&nbsp;durationMS)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is completed without any problems by an executor.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)">taskCompletedWithProblems</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
                           <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
                           long&nbsp;durationMS,
                           java.lang.Throwable&nbsp;problems)</CODE>
@@ -384,7 +423,7 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)">taskCompletedWithProblems</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
+<TD><CODE><B>ExecutorListener.</B><B><A HREF="../../../hudson/model/ExecutorListener.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)">taskCompletedWithProblems</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
                           <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
                           long&nbsp;durationMS,
                           java.lang.Throwable&nbsp;problems)</CODE>
@@ -401,9 +440,10 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with parameters of type <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../hudson/model/Queue.Item.html#Queue.Item(hudson.model.Queue.Task, java.util.List, int)">Queue.Item</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
+<TD><CODE><B><A HREF="../../../hudson/model/Queue.Item.html#Queue.Item(hudson.model.Queue.Task, java.util.List, int, hudson.model.Queue.FutureImpl)">Queue.Item</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
            java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions,
-           int&nbsp;id)</CODE>
+           int&nbsp;id,
+           hudson.model.Queue.FutureImpl&nbsp;future)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

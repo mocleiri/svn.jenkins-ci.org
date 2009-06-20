@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-JDKInstaller.DescriptorImpl (Hudson main module 1.309 API)
+JDKInstaller.DescriptorImpl (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JDKInstaller.DescriptorImpl (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JDKInstaller.DescriptorImpl (Hudson main module 1.309 API)";
+        parent.document.title="JDKInstaller.DescriptorImpl (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -217,6 +217,14 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of installable JDKs.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tools/JDKInstaller.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;&nbsp;toolType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Controls what kind of <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A> this installer can be applied to.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.tools.ToolInstallerDescriptor"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -224,7 +232,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.tools.<A HREF="../../hudson/tools/ToolInstallerDescriptor.html" title="class in hudson.tools">ToolInstallerDescriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/tools/ToolInstallerDescriptor.html#all()">all</A>, <A HREF="../../hudson/tools/ToolInstallerDescriptor.html#for_(java.lang.Class)">for_</A>, <A HREF="../../hudson/tools/ToolInstallerDescriptor.html#isApplicable(java.lang.Class)">isApplicable</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/tools/ToolInstallerDescriptor.html#all()">all</A>, <A HREF="../../hudson/tools/ToolInstallerDescriptor.html#for_(java.lang.Class)">for_</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
@@ -285,6 +293,26 @@ public java.lang.String <B>getDisplayName</B>()</PRE>
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Descriptor.html#getDisplayName()">getDisplayName</A></CODE> in class <CODE><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tools/ToolInstaller.html" title="class in hudson.tools">ToolInstaller</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isApplicable(java.lang.Class)"><!-- --></A><H3>
+isApplicable</H3>
+<PRE>
+public boolean <B>isApplicable</B>(java.lang.Class&lt;? extends <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;&nbsp;toolType)</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/tools/ToolInstallerDescriptor.html#isApplicable(java.lang.Class)">ToolInstallerDescriptor</A></CODE></B></DD>
+<DD>Controls what kind of <A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A> this installer can be applied to.
+
+ <p>
+ By default, this method just returns true to everything, claiming it's applicable to any tool installations.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/tools/ToolInstallerDescriptor.html#isApplicable(java.lang.Class)">isApplicable</A></CODE> in class <CODE><A HREF="../../hudson/tools/ToolInstallerDescriptor.html" title="class in hudson.tools">ToolInstallerDescriptor</A>&lt;<A HREF="../../hudson/tools/JDKInstaller.html" title="class in hudson.tools">JDKInstaller</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
 </DL>

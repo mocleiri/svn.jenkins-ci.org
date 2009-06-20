@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ChangeLogSet (Hudson main module 1.309 API)
+ChangeLogSet (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ChangeLogSet (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ChangeLogSet (Hudson main module 1.309 API)";
+        parent.document.title="ChangeLogSet (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/scm/ChangeLogParser.html" title="class in hudson.scm"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/scm/ChangeLogSet.Entry.html" title="class in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/scm/ChangeLogSet.AffectedFile.html" title="interface in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/scm/ChangeLogSet.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ChangeLogSet.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -100,7 +100,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD>java.lang.Iterable&lt;T&gt;</DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/scm/CVSChangeLogSet.html" title="class in hudson.scm">CVSChangeLogSet</A>, <A HREF="../../hudson/scm/SubversionChangeLogSet.html" title="class in hudson.scm">SubversionChangeLogSet</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/scm/CVSChangeLogSet.html" title="class in hudson.scm">CVSChangeLogSet</A></DD>
 </DL>
 <HR>
 <DL>
@@ -135,6 +135,14 @@ Represents SCM change list.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;interface</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/ChangeLogSet.AffectedFile.html" title="interface in hudson.scm">ChangeLogSet.AffectedFile</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a file change.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -203,7 +211,7 @@ Represents SCM change list.
 <TD><CODE><B><A HREF="../../hudson/scm/ChangeLogSet.html#getItems()">getItems</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All changes in the change set.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All changes in this change set.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -313,7 +321,7 @@ getItems</H3>
 <FONT SIZE="-1">@Exported
 </FONT>public final java.lang.Object[] <B>getItems</B>()</PRE>
 <DL>
-<DD>All changes in the change set.
+<DD>All changes in this change set.
 <P>
 <DD><DL>
 </DL>
@@ -390,7 +398,7 @@ public static <A HREF="../../hudson/scm/ChangeLogSet.html" title="class in hudso
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/scm/ChangeLogParser.html" title="class in hudson.scm"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/scm/ChangeLogSet.Entry.html" title="class in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/scm/ChangeLogSet.AffectedFile.html" title="interface in hudson.scm"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/scm/ChangeLogSet.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="ChangeLogSet.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

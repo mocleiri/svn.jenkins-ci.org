@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Functions (Hudson main module 1.309 API)
+Functions (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson main module 1.309 API)";
+        parent.document.title="Functions (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -465,6 +465,30 @@ Utility functions used in views.
 <TD><CODE><B><A HREF="../hudson/Functions.html#getCookie(javax.servlet.http.HttpServletRequest, java.lang.String, java.lang.String)">getCookie</A></B>(javax.servlet.http.HttpServletRequest&nbsp;req,
           java.lang.String&nbsp;name,
           java.lang.String&nbsp;defaultValue)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getCrumb(org.kohsuke.stapler.StaplerRequest)">getCrumb</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getCrumbIssuerDescriptors()">getCrumbIssuerDescriptors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getCrumbRequestField()">getCrumbRequestField</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -2239,6 +2263,39 @@ public java.lang.String <B>prepend</B>(java.lang.String&nbsp;prefix,
 <DL>
 <DD>Prepend a prefix only when there's the specified body.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCrumbIssuerDescriptors()"><!-- --></A><H3>
+getCrumbIssuerDescriptors</H3>
+<PRE>
+public static java.util.List&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A>&gt;&gt; <B>getCrumbIssuerDescriptors</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCrumb(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
+getCrumb</H3>
+<PRE>
+public static java.lang.String <B>getCrumb</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCrumbRequestField()"><!-- --></A><H3>
+getCrumbRequestField</H3>
+<PRE>
+public static java.lang.String <B>getCrumbRequestField</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

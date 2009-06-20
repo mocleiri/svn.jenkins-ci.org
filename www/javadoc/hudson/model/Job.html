@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Job (Hudson main module 1.309 API)
+Job (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson main module 1.309 API)";
+        parent.document.title="Job (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -596,6 +596,14 @@ T</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#isBuilding()">isBuilding</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if a build of this project is in progress.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Job.html#isInQueue()">isInQueue</A></B>()</CODE>
 
 <BR>
@@ -983,6 +991,22 @@ getQueueItem</H3>
 </FONT>public <A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A> <B>getQueueItem</B>()</PRE>
 <DL>
 <DD>If this job is in the build queue, return its item.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isBuilding()"><!-- --></A><H3>
+isBuilding</H3>
+<PRE>
+public boolean <B>isBuilding</B>()</PRE>
+<DL>
+<DD>Returns true if a build of this project is in progress.
 <P>
 <DD><DL>
 </DL>

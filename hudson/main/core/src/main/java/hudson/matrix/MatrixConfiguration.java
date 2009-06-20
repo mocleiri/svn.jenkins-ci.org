@@ -161,6 +161,10 @@ public class MatrixConfiguration extends Project<MatrixConfiguration,MatrixRun> 
     public int getQuietPeriod() {
         return 0;
     }
+    @Override
+    public int getRetryCount() {
+        return 5;
+    }
 
     @Override
     public boolean isConfigurable() {
@@ -303,7 +307,7 @@ public class MatrixConfiguration extends Project<MatrixConfiguration,MatrixRun> 
     }
     
 	public boolean scheduleBuild(ParametersAction parameters, Cause c) {
-        return Hudson.getInstance().getQueue().add(this, getQuietPeriod(), parameters, new CauseAction(c));
+        return Hudson.getInstance().getQueue().schedule(this, getQuietPeriod(), parameters, new CauseAction(c))!=null;
 	}
 	
 }

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.model (Hudson main module 1.309 API)
+hudson.model (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson main module 1.309 API)";
+        parent.document.title="hudson.model (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -185,8 +185,16 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD>Task whose execution is controlled by the queue.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model">Queue.TransientTask</A></B></TD>
+<TD>Marks <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s that are not persisted.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A></B></TD>
 <TD>Activity that requires certain resources for its execution.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/RootAction.html" title="interface in hudson.model">RootAction</A></B></TD>
+<TD>Marker interface for actions that are added to <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Run.Runner.html" title="interface in hudson.model">Run.Runner</A></B></TD>

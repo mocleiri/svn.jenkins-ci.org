@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Proc.LocalProc (Hudson main module 1.309 API)
+Proc.LocalProc (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Proc.LocalProc (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Proc.LocalProc (Hudson main module 1.309 API)";
+        parent.document.title="Proc.LocalProc (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -164,6 +164,17 @@ Locally launched process.
                java.lang.String[]&nbsp;env,
                java.io.InputStream&nbsp;in,
                java.io.OutputStream&nbsp;out,
+               java.io.File&nbsp;workDir)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../hudson/Proc.LocalProc.html#Proc.LocalProc(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, java.io.OutputStream, java.io.File)">Proc.LocalProc</A></B>(java.lang.String[]&nbsp;cmd,
+               java.lang.String[]&nbsp;env,
+               java.io.InputStream&nbsp;in,
+               java.io.OutputStream&nbsp;out,
+               java.io.OutputStream&nbsp;err,
                java.io.File&nbsp;workDir)</CODE>
 
 <BR>
@@ -345,6 +356,24 @@ public <B>Proc.LocalProc</B>(java.lang.String[]&nbsp;cmd,
 <DL>
 <DL>
 
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DL>
+<HR>
+
+<A NAME="Proc.LocalProc(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, java.io.OutputStream, java.io.File)"><!-- --></A><H3>
+Proc.LocalProc</H3>
+<PRE>
+public <B>Proc.LocalProc</B>(java.lang.String[]&nbsp;cmd,
+                      java.lang.String[]&nbsp;env,
+                      java.io.InputStream&nbsp;in,
+                      java.io.OutputStream&nbsp;out,
+                      java.io.OutputStream&nbsp;err,
+                      java.io.File&nbsp;workDir)
+               throws java.io.IOException</PRE>
+<DL>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>err</CODE> - null to redirect stderr to stdout.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
 </DL>

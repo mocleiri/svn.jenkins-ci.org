@@ -35,6 +35,7 @@ import hudson.model.Descriptor.FormException;
 import hudson.model.Fingerprint.RangeSet;
 import hudson.model.RunMap.Constructor;
 import hudson.model.listeners.RunListener;
+import hudson.model.Queue.WaitingItem;
 import hudson.remoting.AsyncFutureImpl;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.ChangeLogSet.Entry;
@@ -54,12 +55,15 @@ import hudson.triggers.Trigger;
 import hudson.triggers.TriggerDescriptor;
 import hudson.util.DescribableList;
 import hudson.util.EditDistance;
+import hudson.util.FormValidation;
 import hudson.widgets.BuildHistoryWidget;
 import hudson.widgets.HistoryWidget;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.export.Exported;
+import org.kohsuke.stapler.QueryParameter;
+
 
 import javax.servlet.ServletException;
 import java.io.File;
@@ -108,6 +112,11 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      * The quiet period. Null to delegate to the system default.
      */
     private volatile Integer quietPeriod = null;
+    
+    /**
+     * The Retry Count. Null to delegate to the system default.
+     */
+    private volatile Integer retryCount = null;
 
     /**
      * If this project is configured to be only built on a certain label,
@@ -299,10 +308,18 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     public int getQuietPeriod() {
         return quietPeriod!=null ? quietPeriod : Hudson.getInstance().getQuietPeriod();
     }
+    
+    public int getRetryCount() {
+        return retryCount!=null ? retryCount : Hudson.getInstance().getRetryCount();
+    }
 
     // ugly name because of EL
     public boolean getHasCustomQuietPeriod() {
         return quietPeriod!=null;
+    }
+    
+    public boolean getHasCustomRetryCount(){
+    	return  retryCount != null;
     }
 
     public final boolean isBuildable() {
@@ -319,6 +336,19 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
 
     public boolean isDisabled() {
         return disabled;
+    }
+    
+    /**
+     * Validates the retry count Regex
+     */
+    public FormValidation doCheckRetryCount(@QueryParameter String value)throws IOException,ServletException{
+    	// retry count is optional so this is ok
+    	if(value == null || value.trim().equals(""))
+        	return FormValidation.ok();
+    	if (!value.matches("[0-9]*")) {
+    		return FormValidation.error("Invalid retry count");
+    	} 
+    	return FormValidation.ok();
     }
 
     /**
@@ -493,8 +523,16 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      * @return whether the build was actually scheduled
      */
     public boolean scheduleBuild(int quietPeriod, Cause c, Action... actions) {
+        return scheduleBuild2(quietPeriod,c,actions)!=null;
+    }
+
+    /**
+     * Schedules a build of this project, and returns a {@link Future} object
+     * to wait for the completion of the build.
+     */
+    public Future<R> scheduleBuild2(int quietPeriod, Cause c, Action... actions) {
         if (isDisabled())
-            return false;
+            return null;
 
         List<Action> queueActions = new ArrayList(Arrays.asList(actions));
         if (isParameterized() && Util.filter(queueActions, ParametersAction.class).isEmpty()) {
@@ -505,10 +543,10 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
             queueActions.add(new CauseAction(c));
         }
 
-        return Hudson.getInstance().getQueue().add(
-                this,
-                quietPeriod,
-                queueActions.toArray(new Action[queueActions.size()]));
+        WaitingItem i = Hudson.getInstance().getQueue().schedule(this, quietPeriod, queueActions);
+        if(i!=null)
+            return (Future)i.getFuture();
+        return null;
     }
 
     private List<ParameterValue> getDefaultParametersValues() {
@@ -551,34 +589,6 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      */
     public Future<R> scheduleBuild2(int quietPeriod, Cause c) {
         return scheduleBuild2(quietPeriod, c, new Action[0]);
-    }
-
-    /**
-     * Schedules a build of this project, and returns a {@link Future} object
-     * to wait for the completion of the build.
-     */
-    public Future<R> scheduleBuild2(int quietPeriod, Cause c, Action... actions) {
-        R lastBuild = getLastBuild();
-        final int n;
-        if(lastBuild!=null) n = lastBuild.getNumber();
-        else                n = -1;
-
-        Future<R> f = new AsyncFutureImpl<R>() {
-            final RunListener r = new RunListener<AbstractBuild>(AbstractBuild.class) {
-                public void onFinalized(AbstractBuild r) {
-                    if(r.getProject()==AbstractProject.this && r.getNumber()>n) {
-                        set((R)r);
-                        unregister();
-                    }
-                }
-            };
-
-            { r.register(); }
-        };
-
-        scheduleBuild(quietPeriod, c, actions);
-
-        return f;
     }
 
     /**
@@ -1108,7 +1118,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
                     // TODO: more unit handling
                     if(delay.endsWith("sec"))   delay=delay.substring(0,delay.length()-3);
                     if(delay.endsWith("secs"))  delay=delay.substring(0,delay.length()-4);
-                    Hudson.getInstance().getQueue().add(this, Integer.parseInt(delay), 
+                    Hudson.getInstance().getQueue().schedule(this, Integer.parseInt(delay),
                     		new CauseAction(cause));
                 } catch (NumberFormatException e) {
                     throw new ServletException("Invalid delay parameter value: "+delay);
@@ -1167,6 +1177,11 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
             quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
         } else {
             quietPeriod = null;
+        }
+        if(req.getParameter("hasCustomRetryCount")!=null) {
+            retryCount = Integer.parseInt(req.getParameter("retry_count"));
+        } else {
+        	retryCount = null;
         }
 
         if(req.getParameter("hasSlaveAffinity")!=null) {

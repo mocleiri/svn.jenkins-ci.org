@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.search.SearchItem (Hudson main module 1.309 API)
+Uses of Interface hudson.search.SearchItem (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.search.SearchItem (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.search.SearchItem (Hudson main module 1.309 API)";
+        parent.document.title="Uses of Interface hudson.search.SearchItem (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -726,7 +726,7 @@ Uses of <A HREF="../../../hudson/search/SearchItem.html" title="interface in hud
 <TD><CODE><B><A HREF="../../../hudson/scm/AbstractScmTagAction.html" title="class in hudson.scm">AbstractScmTagAction</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common part of <A HREF="../../../hudson/scm/CVSSCM.TagAction.html" title="class in hudson.scm"><CODE>CVSSCM.TagAction</CODE></A> and <A HREF="../../../hudson/scm/SubversionTagAction.html" title="class in hudson.scm"><CODE>SubversionTagAction</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common part of <A HREF="../../../hudson/scm/CVSSCM.TagAction.html" title="class in hudson.scm"><CODE>CVSSCM.TagAction</CODE></A> and <CODE>SubversionTagAction</CODE>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -735,14 +735,6 @@ Uses of <A HREF="../../../hudson/search/SearchItem.html" title="interface in hud
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action for a build that performs the tagging.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/scm/SubversionTagAction.html" title="class in hudson.scm">SubversionTagAction</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> that lets people create tag for the given build.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -857,7 +849,7 @@ Uses of <A HREF="../../../hudson/search/SearchItem.html" title="interface in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>UnionSearchIndex.</B><B><A HREF="../../../hudson/search/UnionSearchIndex.html#find(java.lang.String, java.util.List)">find</A></B>(java.lang.String&nbsp;token,
+<TD><CODE><B>SearchIndex.</B><B><A HREF="../../../hudson/search/SearchIndex.html#find(java.lang.String, java.util.List)">find</A></B>(java.lang.String&nbsp;token,
      java.util.List&lt;<A HREF="../../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>&gt;&nbsp;result)</CODE>
 
 <BR>
@@ -875,7 +867,7 @@ Uses of <A HREF="../../../hudson/search/SearchItem.html" title="interface in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>SearchIndex.</B><B><A HREF="../../../hudson/search/SearchIndex.html#find(java.lang.String, java.util.List)">find</A></B>(java.lang.String&nbsp;token,
+<TD><CODE><B>UnionSearchIndex.</B><B><A HREF="../../../hudson/search/UnionSearchIndex.html#find(java.lang.String, java.util.List)">find</A></B>(java.lang.String&nbsp;token,
      java.util.List&lt;<A HREF="../../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>&gt;&nbsp;result)</CODE>
 
 <BR>
@@ -893,11 +885,11 @@ Uses of <A HREF="../../../hudson/search/SearchItem.html" title="interface in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>UnionSearchIndex.</B><B><A HREF="../../../hudson/search/UnionSearchIndex.html#suggest(java.lang.String, java.util.List)">suggest</A></B>(java.lang.String&nbsp;token,
+<TD><CODE><B>SearchIndex.</B><B><A HREF="../../../hudson/search/SearchIndex.html#suggest(java.lang.String, java.util.List)">suggest</A></B>(java.lang.String&nbsp;token,
         java.util.List&lt;<A HREF="../../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>&gt;&nbsp;result)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method returns the superset of <A HREF="../../../hudson/search/SearchIndex.html#find(java.lang.String, java.util.List)"><CODE>SearchIndex.find(String, List)</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -911,11 +903,11 @@ Uses of <A HREF="../../../hudson/search/SearchItem.html" title="interface in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>SearchIndex.</B><B><A HREF="../../../hudson/search/SearchIndex.html#suggest(java.lang.String, java.util.List)">suggest</A></B>(java.lang.String&nbsp;token,
+<TD><CODE><B>UnionSearchIndex.</B><B><A HREF="../../../hudson/search/UnionSearchIndex.html#suggest(java.lang.String, java.util.List)">suggest</A></B>(java.lang.String&nbsp;token,
         java.util.List&lt;<A HREF="../../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>&gt;&nbsp;result)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method returns the superset of <A HREF="../../../hudson/search/SearchIndex.html#find(java.lang.String, java.util.List)"><CODE>SearchIndex.find(String, List)</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

@@ -1,20 +1,30 @@
 package hudson.plugins.distfork;
 
+import hudson.Extension;
+import hudson.FilePath;
+import hudson.FilePath.TarCompression;
 import hudson.Launcher;
 import hudson.Util;
-import hudson.Extension;
 import hudson.cli.CLICommand;
 import hudson.model.Computer;
 import hudson.model.Hudson;
 import hudson.model.Label;
+import hudson.model.Node;
 import hudson.model.Queue;
+import hudson.model.Queue.Executable;
 import hudson.util.StreamTaskListener;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.Option;
 
+import java.io.BufferedInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.Future;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -33,6 +43,12 @@ public class DistForkCommand extends CLICommand {
 
     @Argument(handler=RestOfArgumentsHandler.class)
     public List<String> commands = new ArrayList<String>();
+
+    @Option(name="-z",usage="Zip/tgz file to be extracted into the target remote machine before execution of the command")
+    public String zip;
+
+    @Option(name="-f",usage="Local files to be copied to remote locations",metaVar="REMOTE=LOCAL")
+    public Map<String,String> files = new HashMap<String,String>();
 
 
     public String getShortDescription() {
@@ -56,10 +72,19 @@ public class DistForkCommand extends CLICommand {
 
         // defaults to the command names
         if (name==null) {
-            if(commands.size()>2)
-                name = Util.join(commands.subList(0,2)," ")+" ...";
-            else
-                name = Util.join(commands," ");
+            boolean dots=false;
+            if(commands.size()>3) {
+                name = Util.join(commands.subList(0,3)," ");
+                dots=true;
+            }
+
+            name = Util.join(commands," ");
+            if(name.length()>80) {
+                name=name.substring(0,80);
+                dots=true;
+            }
+            
+            if(dots)    name+=" ...";
         }
 
         final int[] exitCode = new int[]{-1};
@@ -67,12 +92,36 @@ public class DistForkCommand extends CLICommand {
         DistForkTask t = new DistForkTask(l, name, duration, new Runnable() {
             public void run() {
                 // TODO: need a way to set environment variables
-                // need to be able to control current directory?
                 StreamTaskListener listener = new StreamTaskListener(stdout);
+                FilePath workDir = null;
                 try {
-                    Launcher launcher = Computer.currentComputer().getNode().createLauncher(listener);
-                    exitCode[0] = launcher.launch(commands.toArray(new String[commands.size()]),
-                            new String[0], stdout, null).join();
+                    Node n = Computer.currentComputer().getNode();
+
+                    if(zip!=null || !files.isEmpty())
+                        workDir = n.getRootPath().createTempDir("distfork",null);
+
+                    if(zip!=null) {
+                        BufferedInputStream in = new BufferedInputStream(new FilePath(channel, zip).read());
+                        if(zip.endsWith(".zip"))
+                            workDir.unzipFrom(in);
+                        else
+                            workDir.untarFrom(in, TarCompression.GZIP);
+                    }
+
+                    for (Entry<String, String> e : files.entrySet())
+                        new FilePath(channel,e.getValue()).copyToWithPermission(workDir.child(e.getKey()));
+
+                    try {
+                        Launcher launcher = n.createLauncher(listener);
+                        exitCode[0] = launcher.launch().cmds(commands)
+                                .stdin(stdin).stdout(stdout).stderr(stderr).pwd(workDir).join();
+                    } finally {
+                        if(workDir!=null)
+                            workDir.deleteRecursive();
+                    }
+                } catch (InterruptedException e) {
+                    listener.error("Aborted");
+                    exitCode[0] = -1;
                 } catch (Exception e) {
                     e.printStackTrace(listener.error("Failed to execute a process"));
                     exitCode[0] = -1;
@@ -80,12 +129,18 @@ public class DistForkCommand extends CLICommand {
             }
         });
 
+        // run and wait for the completion
         Queue q = h.getQueue();
-        q.add(t,0);
-
-        // TODO: this is stupid
-        while(q.contains(t)) {
-            Thread.sleep(1000);
+        Future<Executable> f = q.schedule(t, 0).getFuture();
+        try {
+            f.get();
+        } catch (CancellationException e) {
+            stderr.println("Task cancelled");
+            return -1;
+        } catch (InterruptedException e) {
+            // if the command itself is aborted, cancel the execution
+            f.cancel(true);
+            throw e;
         }
 
         return exitCode[0];

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CLI (Hudson main module 1.309 API)
+CLI (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-05-31">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CLI (Hudson main module 1.309 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CLI (Hudson main module 1.309 API)";
+        parent.document.title="CLI (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../hudson/cli/ClearQueueCommand.html" title="class in hudson.cli"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/cli/CLI.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -123,7 +123,14 @@ CLI entry point to Hudson.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/cli/CLI.html#CLI()">CLI</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/cli/CLI.html#CLI(java.net.URL)">CLI</A></B>(java.net.URL&nbsp;hudson)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/cli/CLI.html#CLI(java.net.URL, java.util.concurrent.ExecutorService)">CLI</A></B>(java.net.URL&nbsp;hudson,
+    java.util.concurrent.ExecutorService&nbsp;exec)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -137,6 +144,25 @@ CLI entry point to Hudson.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/CLI.html#close()">close</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/CLI.html#execute(java.util.List, java.io.InputStream, java.io.OutputStream, java.io.OutputStream)">execute</A></B>(java.util.List&lt;java.lang.String&gt;&nbsp;args,
+        java.io.InputStream&nbsp;stdin,
+        java.io.OutputStream&nbsp;stdout,
+        java.io.OutputStream&nbsp;stderr)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -169,11 +195,34 @@ CLI entry point to Hudson.
 </TR>
 </TABLE>
 
-<A NAME="CLI()"><!-- --></A><H3>
+<A NAME="CLI(java.net.URL)"><!-- --></A><H3>
 CLI</H3>
 <PRE>
-public <B>CLI</B>()</PRE>
+public <B>CLI</B>(java.net.URL&nbsp;hudson)
+    throws java.io.IOException,
+           java.lang.InterruptedException</PRE>
 <DL>
+<DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DL>
+<HR>
+
+<A NAME="CLI(java.net.URL, java.util.concurrent.ExecutorService)"><!-- --></A><H3>
+CLI</H3>
+<PRE>
+public <B>CLI</B>(java.net.URL&nbsp;hudson,
+           java.util.concurrent.ExecutorService&nbsp;exec)
+    throws java.io.IOException,
+           java.lang.InterruptedException</PRE>
+<DL>
+<DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -185,6 +234,36 @@ public <B>CLI</B>()</PRE>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="close()"><!-- --></A><H3>
+close</H3>
+<PRE>
+public void <B>close</B>()
+           throws java.io.IOException,
+                  java.lang.InterruptedException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="execute(java.util.List, java.io.InputStream, java.io.OutputStream, java.io.OutputStream)"><!-- --></A><H3>
+execute</H3>
+<PRE>
+public int <B>execute</B>(java.util.List&lt;java.lang.String&gt;&nbsp;args,
+                   java.io.InputStream&nbsp;stdin,
+                   java.io.OutputStream&nbsp;stdout,
+                   java.io.OutputStream&nbsp;stderr)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="main(java.lang.String[])"><!-- --></A><H3>
 main</H3>
@@ -229,7 +308,7 @@ public static void <B>main</B>(java.lang.String[]&nbsp;_args)
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../hudson/cli/ClearQueueCommand.html" title="class in hudson.cli"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/cli/CLI.html" target="_top"><B>FRAMES</B></A>  &nbsp;

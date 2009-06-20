@@ -121,7 +121,7 @@ public class EC2Cloud extends Cloud {
     }
 
     /**
-     * Gets the {@lin KeyPairInfo} used for the launch.
+     * Gets the {@link KeyPairInfo} used for the launch.
      */
     public synchronized KeyPairInfo getKeyPair() throws EC2Exception, IOException {
         if(usableKeyPair==null)
@@ -336,8 +336,9 @@ public class EC2Cloud extends Cloud {
 
                 if(privateKey.trim().length()>0) {
                     // check if this key exists
-                    if(new EC2PrivateKey(privateKey).find(jec2)==null)
-                        return FormValidation.error("The private key entered below isn't registred to EC2");
+                    EC2PrivateKey pk = new EC2PrivateKey(privateKey);
+                    if(pk.find(jec2)==null)
+                        return FormValidation.error("The private key entered below isn't registred to EC2 (fingerprint is "+pk.getFingerprint()+")");
                 }
 
                 return FormValidation.ok(Messages.EC2Cloud_Success());

@@ -43,14 +43,15 @@ import hudson.util.FormValidation;
 import static hudson.util.jna.GNUCLibrary.LIBC;
 import static hudson.Util.fixEmpty;
 import static hudson.FilePath.TarCompression.GZIP;
+import hudson.os.PosixAPI;
+import hudson.org.apache.tools.tar.TarOutputStream;
+import hudson.org.apache.tools.tar.TarInputStream;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.tar.TarEntry;
-import org.apache.tools.tar.TarOutputStream;
-import org.apache.tools.tar.TarInputStream;
 import org.apache.tools.zip.ZipOutputStream;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.commons.io.IOUtils;
@@ -573,6 +574,15 @@ public final class FilePath implements Serializable {
     }
 
     /**
+     * Conveniene method to call {@link FilePath#copyTo(FilePath)}.
+     * 
+     * @since 1.311
+     */
+    public void copyFrom(FilePath src) throws IOException, InterruptedException {
+        src.copyTo(this);
+    }
+
+    /**
      * Place the data from {@link FileItem} into the file location specified by this {@link FilePath} object.
      */
     public void copyFrom(FileItem file) throws IOException, InterruptedException {
@@ -828,6 +838,25 @@ public final class FilePath implements Serializable {
     }
 
     /**
+     * Creates a temporary directory inside the directory represented by 'this'
+     * @since 1.311
+     */
+    public FilePath createTempDir(final String prefix, final String suffix) throws IOException, InterruptedException {
+        try {
+            return new FilePath(this,act(new FileCallable<String>() {
+                public String invoke(File dir, VirtualChannel channel) throws IOException {
+                    File f = File.createTempFile(prefix, suffix, dir);
+                    f.delete();
+                    f.mkdir();
+                    return f.getName();
+                }
+            }));
+        } catch (IOException e) {
+            throw new IOException2("Failed to create a temp directory on "+remote,e);
+        }
+    }
+
+    /**
      * Deletes this file.
      */
     public boolean delete() throws IOException, InterruptedException {
@@ -910,15 +939,36 @@ public final class FilePath implements Serializable {
      *
      * On Windows, no-op.
      *
+     * @param mask
+     *      File permission mask. To simplify the permission copying,
+     *      if the parameter is -1, this method becomes no-op.
      * @since 1.303
+     * @see #mode()
      */
     public void chmod(final int mask) throws IOException, InterruptedException {
-        if(!isUnix())   return;
+        if(!isUnix() || mask==-1)   return;
         act(new FileCallable<Void>() {
             public Void invoke(File f, VirtualChannel channel) throws IOException {
                 if(LIBC.chmod(f.getAbsolutePath(),mask)!=0)
                     throw new IOException("Failed to chmod "+f+" : "+LIBC.strerror(Native.getLastError()));
                 return null;
+            }
+        });
+    }
+
+    /**
+     * Gets the file permission bit mask.
+     *
+     * @return
+     *      -1 on Windows, since such a concept doesn't make sense.
+     * @since 1.311
+     * @see #chmod(int)
+     */
+    public int mode() throws IOException, InterruptedException {
+        if(!isUnix())   return -1;
+        return act(new FileCallable<Integer>() {
+            public Integer invoke(File f, VirtualChannel channel) throws IOException {
+                return PosixAPI.get().stat(f.getPath()).mode();
             }
         });
     }
@@ -1159,6 +1209,16 @@ public final class FilePath implements Serializable {
     }
 
     /**
+     * Copies this file to the specified target, with file permissions intact.
+     * @since 1.311
+     */
+    public void copyToWithPermission(FilePath target) throws IOException, InterruptedException {
+        copyTo(target);
+        // copy file permission
+        target.chmod(mode());
+    }
+
+    /**
      * Sends the contents of this file into the given {@link OutputStream}.
      */
     public void copyTo(OutputStream os) throws IOException, InterruptedException {
@@ -1192,6 +1252,14 @@ public final class FilePath implements Serializable {
         void open(String fileName) throws IOException;
         void write(byte[] buf, int len) throws IOException;
         void close() throws IOException;
+    }
+
+    /**
+     * Copies the contents of this directory recursively into the specified target directory.
+     * @since 1.312 
+     */
+    public int copyRecursiveTo(FilePath target) throws IOException, InterruptedException {
+        return copyRecursiveTo("**/*",target);
     }
 
     public int copyRecursiveTo(String fileMask, FilePath target) throws IOException, InterruptedException {
