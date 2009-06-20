@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Launcher.RemoteLauncher (Hudson main module 1.310 API)
+Launcher.RemoteLauncher (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-14">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Launcher.RemoteLauncher (Hudson main module 1.310 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Launcher.RemoteLauncher (Hudson main module 1.310 API)";
+        parent.document.title="Launcher.RemoteLauncher (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../hudson/LauncherDecorator.html" title="class in hudson"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/Launcher.RemoteLauncher.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -128,7 +128,7 @@ Launches processes remotely by using the given channel.
 <TH ALIGN="left"><B>Nested classes/interfaces inherited from class hudson.<A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson">Launcher.LocalLauncher</A>, <A HREF="../hudson/Launcher.RemoteLauncher.html" title="class in hudson">Launcher.RemoteLauncher</A></CODE></TD>
+<TD><CODE><A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson">Launcher.LocalLauncher</A>, <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A>, <A HREF="../hudson/Launcher.RemoteLauncher.html" title="class in hudson">Launcher.RemoteLauncher</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -183,7 +183,7 @@ Launches processes remotely by using the given channel.
 <TD><CODE><B><A HREF="../hudson/Launcher.RemoteLauncher.html#isUnix()">isUnix</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> is going to launch on Unix.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> is going to launch on Unix.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -195,29 +195,11 @@ Launches processes remotely by using the given channel.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.RemoteLauncher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
-       boolean[]&nbsp;mask,
-       java.lang.String[]&nbsp;env,
-       java.io.InputStream&nbsp;in,
-       java.io.OutputStream&nbsp;out,
-       <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
+<CODE>protected &nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.RemoteLauncher.html#launch(hudson.Launcher.ProcStarter)">launch</A></B>(<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A>&nbsp;ps)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
- remain visible through /proc, pargs, process explorer, etc.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.RemoteLauncher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
-       java.lang.String[]&nbsp;env,
-       java.io.InputStream&nbsp;in,
-       java.io.OutputStream&nbsp;out,
-       <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invoked from <A HREF="../hudson/Launcher.ProcStarter.html#start()"><CODE>Launcher.ProcStarter.start()</CODE></A></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -238,7 +220,7 @@ Launches processes remotely by using the given channel.
 <TH ALIGN="left"><B>Methods inherited from class hudson.<A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../hudson/Launcher.html#decorateByPrefix(java.lang.String...)">decorateByPrefix</A>, <A HREF="../hudson/Launcher.html#decorateFor(hudson.model.Node)">decorateFor</A>, <A HREF="../hudson/Launcher.html#getChannel()">getChannel</A>, <A HREF="../hudson/Launcher.html#getComputer()">getComputer</A>, <A HREF="../hudson/Launcher.html#getListener()">getListener</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.util.Map, java.io.InputStream, java.io.OutputStream)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.util.Map, java.io.InputStream, java.io.OutputStream)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String, java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String, java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A>, <A HREF="../hudson/Launcher.html#maskedPrintCommandLine(java.lang.String[], boolean[], hudson.FilePath)">maskedPrintCommandLine</A>, <A HREF="../hudson/Launcher.html#printCommandLine(java.lang.String[], hudson.FilePath)">printCommandLine</A></CODE></TD>
+<TD><CODE><A HREF="../hudson/Launcher.html#decorateByPrefix(java.lang.String...)">decorateByPrefix</A>, <A HREF="../hudson/Launcher.html#decorateFor(hudson.model.Node)">decorateFor</A>, <A HREF="../hudson/Launcher.html#getChannel()">getChannel</A>, <A HREF="../hudson/Launcher.html#getComputer()">getComputer</A>, <A HREF="../hudson/Launcher.html#getListener()">getListener</A>, <A HREF="../hudson/Launcher.html#launch()">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.util.Map, java.io.InputStream, java.io.OutputStream)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.util.Map, java.io.InputStream, java.io.OutputStream)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String, java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A>, <A HREF="../hudson/Launcher.html#launch(java.lang.String, java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A>, <A HREF="../hudson/Launcher.html#maskedPrintCommandLine(java.util.List, boolean[], hudson.FilePath)">maskedPrintCommandLine</A>, <A HREF="../hudson/Launcher.html#maskedPrintCommandLine(java.lang.String[], boolean[], hudson.FilePath)">maskedPrintCommandLine</A>, <A HREF="../hudson/Launcher.html#printCommandLine(java.lang.String[], hudson.FilePath)">printCommandLine</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -282,53 +264,22 @@ public <B>Launcher.RemoteLauncher</B>(<A HREF="../hudson/model/TaskListener.html
 </TR>
 </TABLE>
 
-<A NAME="launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)"><!-- --></A><H3>
+<A NAME="launch(hudson.Launcher.ProcStarter)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
-                   java.lang.String[]&nbsp;env,
-                   java.io.InputStream&nbsp;in,
-                   java.io.OutputStream&nbsp;out,
-                   <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
-            throws java.io.IOException</PRE>
+protected <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A>&nbsp;ps)
+               throws java.io.IOException</PRE>
 <DL>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></CODE> in class <CODE><A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></DL>
-</DD>
-<DD><DL>
-<DD><CODE>env</CODE> - Environment variable overrides.<DD><CODE>in</CODE> - null if there's no input.<DD><CODE>out</CODE> - stdout and stderr of the process will be sent to this stream.
-      the stream won't be closed.<DD><CODE>workDir</CODE> - null if the working directory could be anything.
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)"><!-- --></A><H3>
-launch</H3>
-<PRE>
-public <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
-                   boolean[]&nbsp;mask,
-                   java.lang.String[]&nbsp;env,
-                   java.io.InputStream&nbsp;in,
-                   java.io.OutputStream&nbsp;out,
-                   <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
-            throws java.io.IOException</PRE>
-<DL>
-<DD><B>Description copied from class: <CODE><A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">Launcher</A></CODE></B></DD>
-<DD>Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
- remain visible through /proc, pargs, process explorer, etc. i.e. people logged in on the same machine</strong>
- This version of the launch command just ensures that it is not visible from a build log which is exposed via the
- web)
+<DD><B>Description copied from class: <CODE><A HREF="../hudson/Launcher.html#launch(hudson.Launcher.ProcStarter)">Launcher</A></CODE></B></DD>
+<DD>Invoked from <A HREF="../hudson/Launcher.ProcStarter.html#start()"><CODE>Launcher.ProcStarter.start()</CODE></A>
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></CODE> in class <CODE><A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/Launcher.html#launch(hudson.Launcher.ProcStarter)">launch</A></CODE> in class <CODE><A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>cmd</CODE> - The command and all it's arguments.<DD><CODE>mask</CODE> - Which of the command and arguments should be masked from the listener<DD><CODE>env</CODE> - Environment variable overrides.<DD><CODE>in</CODE> - null if there's no input.<DD><CODE>out</CODE> - stdout and stderr of the process will be sent to this stream. the stream won't be closed.<DD><CODE>workDir</CODE> - null if the working directory could be anything.
-<DT><B>Returns:</B><DD>The process of the command.
+
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE> - When there are IO problems.</DL>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -371,7 +322,7 @@ isUnix</H3>
 public boolean <B>isUnix</B>()</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../hudson/Launcher.html#isUnix()">Launcher</A></CODE></B></DD>
-<DD>Returns true if this <A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><CODE>Launcher.LocalLauncher</CODE></A> is going to launch on Unix.
+<DD>Returns true if this <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> is going to launch on Unix.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../hudson/Launcher.html#isUnix()">isUnix</A></CODE> in class <CODE><A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></DL>
@@ -433,7 +384,7 @@ public void <B>kill</B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&n
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../hudson/LauncherDecorator.html" title="class in hudson"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/Launcher.RemoteLauncher.html" target="_top"><B>FRAMES</B></A>  &nbsp;

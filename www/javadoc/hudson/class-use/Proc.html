@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.Proc (Hudson main module 1.310 API)
+Uses of Class hudson.Proc (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-14">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.Proc (Hudson main module 1.310 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.Proc (Hudson main module 1.310 API)";
+        parent.document.title="Uses of Class hudson.Proc (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -141,6 +141,30 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
+<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(hudson.Launcher.ProcStarter)">launch</A></B>(<A HREF="../../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A>&nbsp;starter)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invoked from <A HREF="../../hudson/Launcher.ProcStarter.html#start()"><CODE>Launcher.ProcStarter.start()</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
+<TD><CODE><B>Launcher.LocalLauncher.</B><B><A HREF="../../hudson/Launcher.LocalLauncher.html#launch(hudson.Launcher.ProcStarter)">launch</A></B>(<A HREF="../../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A>&nbsp;ps)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
+<TD><CODE><B>Launcher.RemoteLauncher.</B><B><A HREF="../../hudson/Launcher.RemoteLauncher.html#launch(hudson.Launcher.ProcStarter)">launch</A></B>(<A HREF="../../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A>&nbsp;ps)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
 <TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.util.Map, java.io.InputStream, java.io.OutputStream)">launch</A></B>(java.lang.String[]&nbsp;cmd,
        boolean[]&nbsp;mask,
@@ -149,8 +173,8 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
        java.io.OutputStream&nbsp;out)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
- remain visible through /proc, pargs, process explorer, etc.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/Launcher.html#launch()"><CODE>Launcher.launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -162,8 +186,8 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
- remain visible through /proc, pargs, process explorer, etc.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/Launcher.html#launch()"><CODE>Launcher.launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -175,12 +199,12 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
        java.io.OutputStream&nbsp;out)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
- remain visible through /proc, pargs, process explorer, etc.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/Launcher.html#launch()"><CODE>Launcher.launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
 <TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
        boolean[]&nbsp;mask,
        java.lang.String[]&nbsp;env,
@@ -189,34 +213,8 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
- remain visible through /proc, pargs, process explorer, etc.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.LocalLauncher.</B><B><A HREF="../../hudson/Launcher.LocalLauncher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
-       boolean[]&nbsp;mask,
-       java.lang.String[]&nbsp;env,
-       java.io.InputStream&nbsp;in,
-       java.io.OutputStream&nbsp;out,
-       <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.RemoteLauncher.</B><B><A HREF="../../hudson/Launcher.RemoteLauncher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
-       boolean[]&nbsp;mask,
-       java.lang.String[]&nbsp;env,
-       java.io.InputStream&nbsp;in,
-       java.io.OutputStream&nbsp;out,
-       <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/Launcher.html#launch()"><CODE>Launcher.launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -228,8 +226,8 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launch a command with optional censoring of arguments from the listener (Note: <strong>The censored portions will
- remain visible through /proc, pargs, process explorer, etc.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/Launcher.html#launch()"><CODE>Launcher.launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -240,7 +238,8 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
        java.io.OutputStream&nbsp;out)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/Launcher.html#launch()"><CODE>Launcher.launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -251,7 +250,8 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/Launcher.html#launch()"><CODE>Launcher.launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -262,11 +262,12 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
        java.io.OutputStream&nbsp;out)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/Launcher.html#launch()"><CODE>Launcher.launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
 <TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
        java.lang.String[]&nbsp;env,
        java.io.InputStream&nbsp;in,
@@ -274,31 +275,8 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.LocalLauncher.</B><B><A HREF="../../hudson/Launcher.LocalLauncher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
-       java.lang.String[]&nbsp;env,
-       java.io.InputStream&nbsp;in,
-       java.io.OutputStream&nbsp;out,
-       <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.RemoteLauncher.</B><B><A HREF="../../hudson/Launcher.RemoteLauncher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
-       java.lang.String[]&nbsp;env,
-       java.io.InputStream&nbsp;in,
-       java.io.OutputStream&nbsp;out,
-       <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/Launcher.html#launch()"><CODE>Launcher.launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -309,7 +287,8 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/Launcher.html#launch()"><CODE>Launcher.launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -320,7 +299,8 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/Launcher.html#launch()"><CODE>Launcher.launch()</CODE></A> and its associated builder pattern</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -331,7 +311,16 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/Launcher.html#launch()"><CODE>Launcher.launch()</CODE></A> and its associated builder pattern</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
+<TD><CODE><B>Launcher.ProcStarter.</B><B><A HREF="../../hudson/Launcher.ProcStarter.html#start()">start</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts the new process as configured.</TD>
 </TR>
 </TABLE>
 &nbsp;

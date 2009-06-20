@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue.Item (Hudson main module 1.310 API)
+Queue.Item (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-14">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.Item (Hudson main module 1.310 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.Item (Hudson main module 1.310 API)";
+        parent.document.title="Queue.Item (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -135,7 +135,8 @@ Item in a queue.
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Item.html#id">id</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VM-wide unique ID that tracks the <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A> as it moves through different stages
+ in the queue (each represented by different subtypes of <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -166,9 +167,10 @@ Item in a queue.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected </CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Queue.Item.html#Queue.Item(hudson.model.Queue.Task, java.util.List, int)">Queue.Item</A></B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
+<TD><CODE><B><A HREF="../../hudson/model/Queue.Item.html#Queue.Item(hudson.model.Queue.Task, java.util.List, int, hudson.model.Queue.FutureImpl)">Queue.Item</A></B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
            java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions,
-           int&nbsp;id)</CODE>
+           int&nbsp;id,
+           hudson.model.Queue.FutureImpl&nbsp;future)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -199,6 +201,14 @@ Item in a queue.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.concurrent.Future&lt;<A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model">Queue.Executable</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.Item.html#getFuture()">getFuture</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can be used to wait for the completion (either normal, abnormal, or cancellation) of the <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -296,6 +306,9 @@ id</H3>
 <PRE>
 public final int <B>id</B></PRE>
 <DL>
+<DD>VM-wide unique ID that tracks the <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A> as it moves through different stages
+ in the queue (each represented by different subtypes of <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>.
+<P>
 <DL>
 </DL>
 </DL>
@@ -323,12 +336,13 @@ task</H3>
 </TR>
 </TABLE>
 
-<A NAME="Queue.Item(hudson.model.Queue.Task, java.util.List, int)"><!-- --></A><H3>
+<A NAME="Queue.Item(hudson.model.Queue.Task, java.util.List, int, hudson.model.Queue.FutureImpl)"><!-- --></A><H3>
 Queue.Item</H3>
 <PRE>
 protected <B>Queue.Item</B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
                      java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions,
-                     int&nbsp;id)</PRE>
+                     int&nbsp;id,
+                     hudson.model.Queue.FutureImpl&nbsp;future)</PRE>
 <DL>
 </DL>
 <HR>
@@ -389,6 +403,21 @@ isStuck</H3>
 </FONT>public boolean <B>isStuck</B>()</PRE>
 <DL>
 <DD>True if the item is starving for an executor for too long.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFuture()"><!-- --></A><H3>
+getFuture</H3>
+<PRE>
+public java.util.concurrent.Future&lt;<A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model">Queue.Executable</A>&gt; <B>getFuture</B>()</PRE>
+<DL>
+<DD>Can be used to wait for the completion (either normal, abnormal, or cancellation) of the <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>.
+ <p>
+ Just like <A HREF="../../hudson/model/Queue.Item.html#id"><CODE>id</CODE></A>, the same object tracks various stages of the queue.
 <P>
 <DD><DL>
 </DL>

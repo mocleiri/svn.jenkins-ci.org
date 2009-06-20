@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.security.Permission (Hudson main module 1.310 API)
+Uses of Class hudson.security.Permission (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-14">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.security.Permission (Hudson main module 1.310 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.security.Permission (Hudson main module 1.310 API)";
+        parent.document.title="Uses of Class hudson.security.Permission (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -231,18 +231,18 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
-<TD><CODE><B>Item.</B><B><A HREF="../../../hudson/model/Item.html#CONFIGURE">CONFIGURE</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
 <TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#CONFIGURE">CONFIGURE</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission to configure slaves.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
+<TD><CODE><B>Item.</B><B><A HREF="../../../hudson/model/Item.html#CONFIGURE">CONFIGURE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -271,7 +271,7 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
-<TD><CODE><B>Item.</B><B><A HREF="../../../hudson/model/Item.html#DELETE">DELETE</A></B></CODE>
+<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#DELETE">DELETE</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -287,7 +287,7 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
-<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#DELETE">DELETE</A></B></CODE>
+<TD><CODE><B>Item.</B><B><A HREF="../../../hudson/model/Item.html#DELETE">DELETE</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -375,10 +375,10 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>AbstractItem.</B><B><A HREF="../../../hudson/model/AbstractItem.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short for <code>getACL().checkPermission(p)</code></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -391,23 +391,23 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>Node.</B><B><A HREF="../../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+<TD><CODE><B>AbstractItem.</B><B><A HREF="../../../hudson/model/AbstractItem.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short for <code>getACL().checkPermission(p)</code></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>View.</B><B><A HREF="../../../hudson/model/View.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Node.</B><B><A HREF="../../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -423,10 +423,10 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>AbstractItem.</B><B><A HREF="../../../hudson/model/AbstractItem.html#hasPermission(hudson.security.Permission)">hasPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#hasPermission(hudson.security.Permission)">hasPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short for <code>getACL().hasPermission(p)</code></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -447,23 +447,23 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>Node.</B><B><A HREF="../../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+<TD><CODE><B>AbstractItem.</B><B><A HREF="../../../hudson/model/AbstractItem.html#hasPermission(hudson.security.Permission)">hasPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#hasPermission(hudson.security.Permission)">hasPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short for <code>getACL().hasPermission(p)</code></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>View.</B><B><A HREF="../../../hudson/model/View.html#hasPermission(hudson.security.Permission)">hasPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Node.</B><B><A HREF="../../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -513,14 +513,6 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
 <TD><CODE><B>CVSSCM.TagAction.</B><B><A HREF="../../../hudson/scm/CVSSCM.TagAction.html#getPermission()">getPermission</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
-<TD><CODE><B>SubversionTagAction.</B><B><A HREF="../../../hudson/scm/SubversionTagAction.html#getPermission()">getPermission</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -593,18 +585,18 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
-<TD><CODE><B>AccessDeniedException2.</B><B><A HREF="../../../hudson/security/AccessDeniedException2.html#permission">permission</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This object represents the permission that the user needed.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
 <TD><CODE><B>SparseACL.Entry.</B><B><A HREF="../../../hudson/security/SparseACL.Entry.html#permission">permission</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
+<TD><CODE><B>AccessDeniedException2.</B><B><A HREF="../../../hudson/security/AccessDeniedException2.html#permission">permission</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This object represents the permission that the user needed.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -705,15 +697,6 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>GlobalMatrixAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/GlobalMatrixAuthorizationStrategy.html#add(hudson.security.Permission, java.lang.String)">add</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p,
-    java.lang.String&nbsp;sid)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds to <A HREF="../../../hudson/security/GlobalMatrixAuthorizationStrategy.html#grantedPermissions"><CODE>GlobalMatrixAuthorizationStrategy.grantedPermissions</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>AuthorizationMatrixProperty.</B><B><A HREF="../../../hudson/security/AuthorizationMatrixProperty.html#add(hudson.security.Permission, java.lang.String)">add</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p,
     java.lang.String&nbsp;sid)</CODE>
@@ -724,20 +707,21 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>GlobalMatrixAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/GlobalMatrixAuthorizationStrategy.html#add(hudson.security.Permission, java.lang.String)">add</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p,
+    java.lang.String&nbsp;sid)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds to <A HREF="../../../hudson/security/GlobalMatrixAuthorizationStrategy.html#grantedPermissions"><CODE>GlobalMatrixAuthorizationStrategy.grantedPermissions</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>SparseACL.</B><B><A HREF="../../../hudson/security/SparseACL.html#add(org.acegisecurity.acls.sid.Sid, hudson.security.Permission, boolean)">add</A></B>(org.acegisecurity.acls.sid.Sid&nbsp;sid,
     <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission,
     boolean&nbsp;allowed)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ACL.</B><B><A HREF="../../../hudson/security/ACL.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the current security principal has this permission.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -757,12 +741,11 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>GlobalMatrixAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/GlobalMatrixAuthorizationStrategy.html#hasExplicitPermission(java.lang.String, hudson.security.Permission)">hasExplicitPermission</A></B>(java.lang.String&nbsp;sid,
-                      <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ACL.</B><B><A HREF="../../../hudson/security/ACL.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the permission is explicitly given, instead of implied through <A HREF="../../../hudson/security/Permission.html#impliedBy"><CODE>impliedBy</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the current security principal has this permission.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -775,21 +758,12 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>ACL.</B><B><A HREF="../../../hudson/security/ACL.html#hasPermission(org.acegisecurity.Authentication, hudson.security.Permission)">hasPermission</A></B>(org.acegisecurity.Authentication&nbsp;a,
-              <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the given principle has the given permission.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>SparseACL.</B><B><A HREF="../../../hudson/security/SparseACL.html#hasPermission(org.acegisecurity.Authentication, hudson.security.Permission)">hasPermission</A></B>(org.acegisecurity.Authentication&nbsp;a,
-              <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+<TD><CODE><B>GlobalMatrixAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/GlobalMatrixAuthorizationStrategy.html#hasExplicitPermission(java.lang.String, hudson.security.Permission)">hasExplicitPermission</A></B>(java.lang.String&nbsp;sid,
+                      <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the permission is explicitly given, instead of implied through <A HREF="../../../hudson/security/Permission.html#impliedBy"><CODE>impliedBy</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -803,10 +777,20 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>ACL.</B><B><A HREF="../../../hudson/security/ACL.html#hasPermission(hudson.security.Permission)">hasPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+<TD><CODE><B>SparseACL.</B><B><A HREF="../../../hudson/security/SparseACL.html#hasPermission(org.acegisecurity.Authentication, hudson.security.Permission)">hasPermission</A></B>(org.acegisecurity.Authentication&nbsp;a,
+              <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the current security principal has this permission.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>ACL.</B><B><A HREF="../../../hudson/security/ACL.html#hasPermission(org.acegisecurity.Authentication, hudson.security.Permission)">hasPermission</A></B>(org.acegisecurity.Authentication&nbsp;a,
+              <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the given principle has the given permission.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -826,12 +810,11 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;java.lang.Boolean</CODE></FONT></TD>
-<TD><CODE><B>SparseACL.</B><B><A HREF="../../../hudson/security/SparseACL.html#hasPermission(org.acegisecurity.acls.sid.Sid, hudson.security.Permission)">hasPermission</A></B>(org.acegisecurity.acls.sid.Sid&nbsp;p,
-              <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>ACL.</B><B><A HREF="../../../hudson/security/ACL.html#hasPermission(hudson.security.Permission)">hasPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the current security principal has this permission.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -844,12 +827,12 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>GlobalMatrixAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/GlobalMatrixAuthorizationStrategy.html#hasPermission(java.lang.String, hudson.security.Permission)">hasPermission</A></B>(java.lang.String&nbsp;sid,
-              <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+<CODE>protected &nbsp;java.lang.Boolean</CODE></FONT></TD>
+<TD><CODE><B>SparseACL.</B><B><A HREF="../../../hudson/security/SparseACL.html#hasPermission(org.acegisecurity.acls.sid.Sid, hudson.security.Permission)">hasPermission</A></B>(org.acegisecurity.acls.sid.Sid&nbsp;p,
+              <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the given SID has the given permission.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -863,7 +846,16 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>GlobalMatrixAuthorizationStrategy.DescriptorImpl.</B><B><A HREF="../../../hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html#showPermission(hudson.security.Permission)">showPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+<TD><CODE><B>GlobalMatrixAuthorizationStrategy.</B><B><A HREF="../../../hudson/security/GlobalMatrixAuthorizationStrategy.html#hasPermission(java.lang.String, hudson.security.Permission)">hasPermission</A></B>(java.lang.String&nbsp;sid,
+              <A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the given SID has the given permission.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>AuthorizationMatrixProperty.DescriptorImpl.</B><B><A HREF="../../../hudson/security/AuthorizationMatrixProperty.DescriptorImpl.html#showPermission(hudson.security.Permission)">showPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -871,7 +863,7 @@ Uses of <A HREF="../../../hudson/security/Permission.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>AuthorizationMatrixProperty.DescriptorImpl.</B><B><A HREF="../../../hudson/security/AuthorizationMatrixProperty.DescriptorImpl.html#showPermission(hudson.security.Permission)">showPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
+<TD><CODE><B>GlobalMatrixAuthorizationStrategy.DescriptorImpl.</B><B><A HREF="../../../hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html#showPermission(hudson.security.Permission)">showPermission</A></B>(<A HREF="../../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;p)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

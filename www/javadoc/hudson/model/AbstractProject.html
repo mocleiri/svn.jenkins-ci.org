@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractProject (Hudson main module 1.310 API)
+AbstractProject (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-14">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractProject (Hudson main module 1.310 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractProject (Hudson main module 1.310 API)";
+        parent.document.title="AbstractProject (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -1711,6 +1711,25 @@ public boolean <B>scheduleBuild</B>(int&nbsp;quietPeriod,
 </DL>
 <HR>
 
+<A NAME="scheduleBuild2(int, hudson.model.Cause, hudson.model.Action...)"><!-- --></A><H3>
+scheduleBuild2</H3>
+<PRE>
+public java.util.concurrent.Future&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt; <B>scheduleBuild2</B>(int&nbsp;quietPeriod,
+                                                     <A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&nbsp;c,
+                                                     <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>...&nbsp;actions)</PRE>
+<DL>
+<DD>Schedules a build of this project, and returns a <CODE>Future</CODE> object
+ to wait for the completion of the build.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="scheduleBuild2(int)"><!-- --></A><H3>
 scheduleBuild2</H3>
 <PRE>
@@ -1737,25 +1756,6 @@ scheduleBuild2</H3>
 <PRE>
 public java.util.concurrent.Future&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt; <B>scheduleBuild2</B>(int&nbsp;quietPeriod,
                                                      <A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&nbsp;c)</PRE>
-<DL>
-<DD>Schedules a build of this project, and returns a <CODE>Future</CODE> object
- to wait for the completion of the build.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="scheduleBuild2(int, hudson.model.Cause, hudson.model.Action...)"><!-- --></A><H3>
-scheduleBuild2</H3>
-<PRE>
-public java.util.concurrent.Future&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt; <B>scheduleBuild2</B>(int&nbsp;quietPeriod,
-                                                     <A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&nbsp;c,
-                                                     <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>...&nbsp;actions)</PRE>
 <DL>
 <DD>Schedules a build of this project, and returns a <CODE>Future</CODE> object
  to wait for the completion of the build.
@@ -2151,7 +2151,8 @@ public <A HREF="../../hudson/model/ResourceList.html" title="class in hudson.mod
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ResourceActivity.html#getResourceList()">getResourceList</A></CODE> in interface <CODE><A HREF="../../hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A></CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Returns:</B><DD>never null</DL>
 </DD>
 </DL>
 <HR>

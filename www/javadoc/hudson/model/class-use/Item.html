@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.model.Item (Hudson main module 1.310 API)
+Uses of Interface hudson.model.Item (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-14">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.Item (Hudson main module 1.310 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.Item (Hudson main module 1.310 API)";
+        parent.document.title="Uses of Interface hudson.model.Item (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -198,7 +198,7 @@ Uses of <A HREF="../../../hudson/model/Item.html" title="interface in hudson.mod
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>MatrixConfiguration.</B><B><A HREF="../../../hudson/matrix/MatrixConfiguration.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></B>(<A HREF="../../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
+<TD><CODE><B>MatrixProject.</B><B><A HREF="../../../hudson/matrix/MatrixProject.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></B>(<A HREF="../../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
        java.lang.String&nbsp;name)</CODE>
 
 <BR>
@@ -207,7 +207,7 @@ Uses of <A HREF="../../../hudson/model/Item.html" title="interface in hudson.mod
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>MatrixProject.</B><B><A HREF="../../../hudson/matrix/MatrixProject.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></B>(<A HREF="../../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
+<TD><CODE><B>MatrixConfiguration.</B><B><A HREF="../../../hudson/matrix/MatrixConfiguration.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></B>(<A HREF="../../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
        java.lang.String&nbsp;name)</CODE>
 
 <BR>
@@ -455,15 +455,6 @@ java.util.Map&lt;K,V&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A></CODE></FONT></TD>
-<TD><CODE><B>MyView.</B><B><A HREF="../../../hudson/model/MyView.html#doCreateItem(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCreateItem</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-             org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A></CODE></FONT></TD>
 <TD><CODE><B>TreeView.</B><B><A HREF="../../../hudson/model/TreeView.html#doCreateItem(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCreateItem</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
@@ -474,6 +465,15 @@ java.util.Map&lt;K,V&gt;</CODE></FONT></TD>
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A></CODE></FONT></TD>
 <TD><CODE><B>AllView.</B><B><A HREF="../../../hudson/model/AllView.html#doCreateItem(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCreateItem</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+             org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A></CODE></FONT></TD>
+<TD><CODE><B>MyView.</B><B><A HREF="../../../hudson/model/MyView.html#doCreateItem(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCreateItem</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
@@ -549,6 +549,14 @@ java.util.Map&lt;K,V&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Job.</B><B><A HREF="../../../hudson/model/Job.html#onCopiedFrom(hudson.model.Item)">onCopiedFrom</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;src)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>Item.</B><B><A HREF="../../../hudson/model/Item.html#onCopiedFrom(hudson.model.Item)">onCopiedFrom</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;src)</CODE>
 
 <BR>
@@ -571,25 +579,7 @@ java.util.Map&lt;K,V&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>Job.</B><B><A HREF="../../../hudson/model/Job.html#onCopiedFrom(hudson.model.Item)">onCopiedFrom</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;src)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>ListView.</B><B><A HREF="../../../hudson/model/ListView.html#onJobRenamed(hudson.model.Item, java.lang.String, java.lang.String)">onJobRenamed</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item,
-             java.lang.String&nbsp;oldName,
-             java.lang.String&nbsp;newName)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>MyView.</B><B><A HREF="../../../hudson/model/MyView.html#onJobRenamed(hudson.model.Item, java.lang.String, java.lang.String)">onJobRenamed</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item,
              java.lang.String&nbsp;oldName,
              java.lang.String&nbsp;newName)</CODE>
 
@@ -610,6 +600,16 @@ java.util.Map&lt;K,V&gt;</CODE></FONT></TD>
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>AllView.</B><B><A HREF="../../../hudson/model/AllView.html#onJobRenamed(hudson.model.Item, java.lang.String, java.lang.String)">onJobRenamed</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item,
+             java.lang.String&nbsp;oldName,
+             java.lang.String&nbsp;newName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>MyView.</B><B><A HREF="../../../hudson/model/MyView.html#onJobRenamed(hudson.model.Item, java.lang.String, java.lang.String)">onJobRenamed</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item,
              java.lang.String&nbsp;oldName,
              java.lang.String&nbsp;newName)</CODE>
 
@@ -645,6 +645,24 @@ java.util.Map&lt;K,V&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Job.</B><B><A HREF="../../../hudson/model/Job.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></B>(<A HREF="../../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
+       java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Item.</B><B><A HREF="../../../hudson/model/Item.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></B>(<A HREF="../../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
+       java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called right after when a <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> is loaded from disk.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>Project.</B><B><A HREF="../../../hudson/model/Project.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></B>(<A HREF="../../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
        java.lang.String&nbsp;name)</CODE>
 
@@ -663,15 +681,6 @@ java.util.Map&lt;K,V&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>Item.</B><B><A HREF="../../../hudson/model/Item.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></B>(<A HREF="../../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
-       java.lang.String&nbsp;name)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called right after when a <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> is loaded from disk.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>AbstractItem.</B><B><A HREF="../../../hudson/model/AbstractItem.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></B>(<A HREF="../../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
        java.lang.String&nbsp;name)</CODE>
 
@@ -682,15 +691,6 @@ java.util.Map&lt;K,V&gt;</CODE></FONT></TD>
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>AbstractProject.</B><B><A HREF="../../../hudson/model/AbstractProject.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></B>(<A HREF="../../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
-       java.lang.String&nbsp;name)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>Job.</B><B><A HREF="../../../hudson/model/Job.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></B>(<A HREF="../../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
        java.lang.String&nbsp;name)</CODE>
 
 <BR>
@@ -724,14 +724,6 @@ Uses of <A HREF="../../../hudson/model/Item.html" title="interface in hudson.mod
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>JobListener.JobListenerAdapter.</B><B><A HREF="../../../hudson/model/listeners/JobListener.JobListenerAdapter.html#onCreated(hudson.model.Item)">onCreated</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>ItemListener.</B><B><A HREF="../../../hudson/model/listeners/ItemListener.html#onCreated(hudson.model.Item)">onCreated</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item)</CODE>
 
 <BR>
@@ -740,7 +732,7 @@ Uses of <A HREF="../../../hudson/model/Item.html" title="interface in hudson.mod
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>JobListener.JobListenerAdapter.</B><B><A HREF="../../../hudson/model/listeners/JobListener.JobListenerAdapter.html#onDeleted(hudson.model.Item)">onDeleted</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item)</CODE>
+<TD><CODE><B>JobListener.JobListenerAdapter.</B><B><A HREF="../../../hudson/model/listeners/JobListener.JobListenerAdapter.html#onCreated(hudson.model.Item)">onCreated</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -752,6 +744,14 @@ Uses of <A HREF="../../../hudson/model/Item.html" title="interface in hudson.mod
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called right before a job is going to be deleted.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>JobListener.JobListenerAdapter.</B><B><A HREF="../../../hudson/model/listeners/JobListener.JobListenerAdapter.html#onDeleted(hudson.model.Item)">onDeleted</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -866,20 +866,20 @@ Uses of <A HREF="../../../hudson/model/Item.html" title="interface in hudson.mod
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>SCMTrigger.DescriptorImpl.</B><B><A HREF="../../../hudson/triggers/SCMTrigger.DescriptorImpl.html#isApplicable(hudson.model.Item)">isApplicable</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>TriggerDescriptor.</B><B><A HREF="../../../hudson/triggers/TriggerDescriptor.html#isApplicable(hudson.model.Item)">isApplicable</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this trigger is applicable to the
  given <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>SCMTrigger.DescriptorImpl.</B><B><A HREF="../../../hudson/triggers/SCMTrigger.DescriptorImpl.html#isApplicable(hudson.model.Item)">isApplicable</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
