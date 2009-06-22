@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue.Task (Hudson main module 1.310 API)
+Queue.Task (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-14">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.Task (Hudson main module 1.310 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.Task (Hudson main module 1.310 API)";
+        parent.document.title="Queue.Task (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/Queue.QueueAction.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Queue.Task.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Queue.Task.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -96,7 +96,7 @@ Interface Queue.Task</H2>
 <DT><B>All Superinterfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A></DD>
 </DL>
 <DL>
-<DT><B>All Known Subinterfaces:</B> <DD><A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model">BuildableItem</A>, <A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A></DD>
+<DT><B>All Known Subinterfaces:</B> <DD><A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model">BuildableItem</A>, <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model">Queue.TransientTask</A>, <A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A></DD>
 </DL>
 <DL>
 <DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>, <A HREF="../../hudson/model/FreeStyleProject.html" title="class in hudson.model">FreeStyleProject</A>, <A HREF="../../hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A>, <A HREF="../../hudson/matrix/MatrixProject.html" title="class in hudson.matrix">MatrixProject</A>, <A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project</A></DD>
@@ -113,13 +113,14 @@ Interface Queue.Task</H2>
 Task whose execution is controlled by the queue.
 
  <p>
- <CODE>Value equality</CODE> of <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A>s is used
+ <CODE>Value equality</CODE> of <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s is used
  to collapse two tasks into one. This is used to avoid infinite
  queue backlog.
 
  <p>
- Pending <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A>s are persisted when Hudson shuts down, so
- it needs to be persistable.
+ Pending <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s are persisted when Hudson shuts down, so
+ it needs to be persistable via XStream. To create a non-persisted
+ transient Task, extend <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A> marker interface.
 <P>
 
 <P>
@@ -492,7 +493,7 @@ java.lang.String <B>getUrl</B>()</PRE>
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/Queue.QueueAction.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Queue.Task.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Queue.Task.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

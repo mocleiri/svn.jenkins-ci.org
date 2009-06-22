@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.AbstractProject (Hudson main module 1.310 API)
+Uses of Class hudson.model.AbstractProject (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-14">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.AbstractProject (Hudson main module 1.310 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.AbstractProject (Hudson main module 1.310 API)";
+        parent.document.title="Uses of Class hudson.model.AbstractProject (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -113,10 +113,6 @@ Packages that use <A HREF="../../../hudson/model/AbstractProject.html" title="cl
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.scm"><B>hudson.scm</B></A></TD>
 <TD>Hudson's interface with source code management systems.&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.scm.browsers"><B>hudson.scm.browsers</B></A></TD>
-<TD>Code that computes links to external source code repository browsers.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.security"><B>hudson.security</B></A></TD>
@@ -408,19 +404,19 @@ T</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;</CODE></FONT></TD>
-<TD><CODE><B>Project.</B><B><A HREF="../../../hudson/model/Project.html#asProject()">asProject</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;</CODE></FONT></TD>
 <TD><CODE><B>SCMedItem.</B><B><A HREF="../../../hudson/model/SCMedItem.html#asProject()">asProject</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/SCMedItem.html" title="interface in hudson.model"><CODE>SCMedItem</CODE></A> needs to be an instance of
  <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;</CODE></FONT></TD>
+<TD><CODE><B>Project.</B><B><A HREF="../../../hudson/model/Project.html#asProject()">asProject</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -532,7 +528,7 @@ T</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>Label.</B><B><A HREF="../../../hudson/model/Label.html#getTiedJobs()">getTiedJobs</A></B>()</CODE>
+<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#getTiedJobs()">getTiedJobs</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns projects that are tied on this node.</TD>
@@ -540,7 +536,7 @@ T</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#getTiedJobs()">getTiedJobs</A></B>()</CODE>
+<TD><CODE><B>Label.</B><B><A HREF="../../../hudson/model/Label.html#getTiedJobs()">getTiedJobs</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns projects that are tied on this node.</TD>
@@ -625,7 +621,8 @@ T</CODE></FONT></TD>
 <TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#add(hudson.model.AbstractProject)">add</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;p)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedule a new build for this project.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../../hudson/model/Queue.html#schedule(hudson.model.AbstractProject)"><CODE>Queue.schedule(AbstractProject)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -634,7 +631,8 @@ T</CODE></FONT></TD>
     int&nbsp;quietPeriod)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules a new build with a custom quiet period.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int)"><CODE>Queue.schedule(Task, int)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -830,6 +828,14 @@ T</CODE></FONT></TD>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if a project has a non-direct dependency to another project.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A></CODE></FONT></TD>
+<TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#schedule(hudson.model.AbstractProject)">schedule</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedule a new build for this project.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -942,14 +948,14 @@ Uses of <A HREF="../../../hudson/model/AbstractProject.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>SubversionSCM.</B><B><A HREF="../../../hudson/scm/SubversionSCM.html#pollChanges(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener)">pollChanges</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
+<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>SCM.</B><B><A HREF="../../../hudson/scm/SCM.html#pollChanges(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener)">pollChanges</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
             <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
             <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
             <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if there has been any changes to this module in the repository.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -975,17 +981,6 @@ Uses of <A HREF="../../../hudson/model/AbstractProject.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>SCM.</B><B><A HREF="../../../hudson/scm/SCM.html#pollChanges(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener)">pollChanges</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
-            <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
-            <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
-            <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if there has been any changes to this module in the repository.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>SCM.</B><B><A HREF="../../../hudson/scm/SCM.html#processWorkspaceBeforeDeletion(hudson.model.AbstractProject, hudson.FilePath, hudson.model.Node)">processWorkspaceBeforeDeletion</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
                                <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
@@ -993,41 +988,6 @@ Uses of <A HREF="../../../hudson/model/AbstractProject.html" title="class in hud
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called before a workspace is deleted on the given node, to provide SCM an opportunity to perform clean up.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-<A NAME="hudson.scm.browsers"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Uses of <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A> in <A HREF="../../../hudson/scm/browsers/package-summary.html">hudson.scm.browsers</A></FONT></TH>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/scm/browsers/package-summary.html">hudson.scm.browsers</A> with parameters of type <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B>Sventon2.DescriptorImpl.</B><B><A HREF="../../../hudson/scm/browsers/Sventon2.DescriptorImpl.html#doCheckUrl(hudson.model.AbstractProject, java.lang.String)">doCheckUrl</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
-           java.lang.String&nbsp;value)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs on-the-fly validation of the URL.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B>Sventon.DescriptorImpl.</B><B><A HREF="../../../hudson/scm/browsers/Sventon.DescriptorImpl.html#doCheckUrl(hudson.model.AbstractProject, java.lang.String)">doCheckUrl</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
-           java.lang.String&nbsp;value)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs on-the-fly validation of the URL.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1217,22 +1177,6 @@ java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class i
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>BatchFile.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/BatchFile.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>Fingerprinter.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/Fingerprinter.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>BuildTrigger.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/BuildTrigger.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
 
 <BR>
@@ -1241,39 +1185,15 @@ java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class i
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>BatchFile.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/BatchFile.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>Shell.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/Shell.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>BuildStepDescriptor.</B><B><A HREF="../../../hudson/tasks/BuildStepDescriptor.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this task is applicable to the given project.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>JavadocArchiver.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/JavadocArchiver.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>Ant.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/Ant.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>Maven.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/Maven.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1289,7 +1209,47 @@ java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class i
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Ant.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/Ant.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Fingerprinter.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/Fingerprinter.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>JavadocArchiver.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/JavadocArchiver.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>BuildStepDescriptor.</B><B><A HREF="../../../hudson/tasks/BuildStepDescriptor.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this task is applicable to the given project.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>ArtifactArchiver.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/ArtifactArchiver.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Maven.DescriptorImpl.</B><B><A HREF="../../../hudson/tasks/Maven.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

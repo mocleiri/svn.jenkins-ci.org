@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue (Hudson main module 1.310 API)
+Queue (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-14">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue (Hudson main module 1.310 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue (Hudson main module 1.310 API)";
+        parent.document.title="Queue (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -110,7 +110,7 @@ java.lang.Object
 Build queue.
 
  <p>
- This class implements the core scheduling logic. <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A> represents the executable
+ This class implements the core scheduling logic. <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A> represents the executable
  task that are placed in the queue. While in the queue, it's wrapped into <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>
  so that we can keep track of additional data used for deciding what to exeucte when.
 
@@ -220,6 +220,14 @@ Build queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;interface</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model">Queue.TransientTask</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s that are not persisted.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A></B></CODE>
 
@@ -241,7 +249,7 @@ Build queue.
 <TD><CODE><B><A HREF="../../hudson/model/Queue.html#XSTREAM">XSTREAM</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This <CODE>XStream</CODE> instance is used to persist <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A>s.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This <CODE>XStream</CODE> instance is used to persist <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
@@ -284,7 +292,8 @@ Build queue.
 <TD><CODE><B><A HREF="../../hudson/model/Queue.html#add(hudson.model.AbstractProject)">add</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;p)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedule a new build for this project.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/model/Queue.html#schedule(hudson.model.AbstractProject)"><CODE>schedule(AbstractProject)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -293,7 +302,8 @@ Build queue.
     int&nbsp;quietPeriod)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules a new build with a custom quiet period.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int)"><CODE>schedule(Task, int)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -302,7 +312,8 @@ Build queue.
     int&nbsp;quietPeriod)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int)"><CODE>schedule(Task, int)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -312,7 +323,8 @@ Build queue.
     <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>...&nbsp;actions)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int, hudson.model.Action...)"><CODE>schedule(Task, int, Action[])</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -460,6 +472,43 @@ Build queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#schedule(hudson.model.AbstractProject)">schedule</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedule a new build for this project.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int)">schedule</A></B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
+         int&nbsp;quietPeriod)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int, hudson.model.Action...)">schedule</A></B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
+         int&nbsp;quietPeriod,
+         <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>...&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int, java.util.List)">schedule</A></B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
+         int&nbsp;quietPeriod,
+         java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules an execution of a task.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.html#scheduleMaintenance()">scheduleMaintenance</A></B>()</CODE>
 
@@ -511,7 +560,7 @@ XSTREAM</H3>
 <PRE>
 public static final com.thoughtworks.xstream.XStream <B>XSTREAM</B></PRE>
 <DL>
-<DD>This <CODE>XStream</CODE> instance is used to persist <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A>s.
+<DD>This <CODE>XStream</CODE> instance is used to persist <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s.
 <P>
 <DL>
 </DL>
@@ -625,6 +674,23 @@ add</H3>
 <PRE>
 public boolean <B>add</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;p)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/model/Queue.html#schedule(hudson.model.AbstractProject)"><CODE>schedule(AbstractProject)</CODE></A></I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="schedule(hudson.model.AbstractProject)"><!-- --></A><H3>
+schedule</H3>
+<PRE>
+public <A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A> <B>schedule</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;p)</PRE>
+<DL>
 <DD>Schedule a new build for this project.
 <P>
 <DD><DL>
@@ -645,6 +711,9 @@ add</H3>
 public boolean <B>add</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;p,
                    int&nbsp;quietPeriod)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int)"><CODE>schedule(Task, int)</CODE></A></I>
+<P>
 <DD>Schedules a new build with a custom quiet period.
 
  <p>
@@ -661,11 +730,55 @@ public boolean <B>add</B>(<A HREF="../../hudson/model/AbstractProject.html" titl
 </DL>
 <HR>
 
+<A NAME="schedule(hudson.model.Queue.Task, int, java.util.List)"><!-- --></A><H3>
+schedule</H3>
+<PRE>
+public <A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A> <B>schedule</B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
+                                  int&nbsp;quietPeriod,
+                                  java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</PRE>
+<DL>
+<DD>Schedules an execution of a task.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>null if this task is already in the queue and therefore the add operation was no-op.
+      Otherwise indicates the <A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model"><CODE>Queue.WaitingItem</CODE></A> object added, although the nature of the queue
+      is that such <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> only captures the state of the item at a particular moment,
+      and by the time you inspect the object, some of its information can be already stale.
+
+      That said, one can still look at <A HREF="../../hudson/model/Queue.Item.html#future"><CODE>Queue.Item.future</CODE></A>, <A HREF="../../hudson/model/Queue.Item.html#id"><CODE>Queue.Item.id</CODE></A>, etc.<DT><B>Since:</B></DT>
+  <DD>1.311</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="add(hudson.model.Queue.Task, int)"><!-- --></A><H3>
 add</H3>
 <PRE>
 public boolean <B>add</B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
                    int&nbsp;quietPeriod)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int)"><CODE>schedule(Task, int)</CODE></A></I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="schedule(hudson.model.Queue.Task, int)"><!-- --></A><H3>
+schedule</H3>
+<PRE>
+public <A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A> <B>schedule</B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
+                                  int&nbsp;quietPeriod)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -682,6 +795,25 @@ add</H3>
 public boolean <B>add</B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
                    int&nbsp;quietPeriod,
                    <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>...&nbsp;actions)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
+      Use <A HREF="../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int, hudson.model.Action...)"><CODE>schedule(Task, int, Action[])</CODE></A></I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="schedule(hudson.model.Queue.Task, int, hudson.model.Action...)"><!-- --></A><H3>
+schedule</H3>
+<PRE>
+public <A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A> <B>schedule</B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
+                                  int&nbsp;quietPeriod,
+                                  <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>...&nbsp;actions)</PRE>
 <DL>
 <DD><DL>
 </DL>

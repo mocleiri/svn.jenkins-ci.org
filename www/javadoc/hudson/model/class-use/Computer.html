@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.Computer (Hudson main module 1.310 API)
+Uses of Class hudson.model.Computer (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-14">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Computer (Hudson main module 1.310 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Computer (Hudson main module 1.310 API)";
+        parent.document.title="Uses of Class hudson.model.Computer (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -173,7 +173,7 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></FONT></TD>
-<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#createComputer()">createComputer</A></B>()</CODE>
+<TD><CODE><B>Slave.</B><B><A HREF="../../../hudson/model/Slave.html#createComputer()">createComputer</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -181,7 +181,7 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></FONT></TD>
-<TD><CODE><B>Slave.</B><B><A HREF="../../../hudson/model/Slave.html#createComputer()">createComputer</A></B>()</CODE>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#createComputer()">createComputer</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -326,7 +326,7 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/node_monitors/DiskSpaceMonitorDescriptor.DiskSpace.html" title="class in hudson.node_monitors">DiskSpaceMonitorDescriptor.DiskSpace</A></CODE></FONT></TD>
-<TD><CODE><B>DiskSpaceMonitor.</B><B><A HREF="../../../hudson/node_monitors/DiskSpaceMonitor.html#getFreeSpace(hudson.model.Computer)">getFreeSpace</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
+<TD><CODE><B>TemporarySpaceMonitor.</B><B><A HREF="../../../hudson/node_monitors/TemporarySpaceMonitor.html#getFreeSpace(hudson.model.Computer)">getFreeSpace</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -334,7 +334,7 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/node_monitors/DiskSpaceMonitorDescriptor.DiskSpace.html" title="class in hudson.node_monitors">DiskSpaceMonitorDescriptor.DiskSpace</A></CODE></FONT></TD>
-<TD><CODE><B>TemporarySpaceMonitor.</B><B><A HREF="../../../hudson/node_monitors/TemporarySpaceMonitor.html#getFreeSpace(hudson.model.Computer)">getFreeSpace</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
+<TD><CODE><B>DiskSpaceMonitor.</B><B><A HREF="../../../hudson/node_monitors/DiskSpaceMonitor.html#getFreeSpace(hudson.model.Computer)">getFreeSpace</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -349,19 +349,19 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B>ArchitectureMonitor.DescriptorImpl.</B><B><A HREF="../../../hudson/node_monitors/ArchitectureMonitor.DescriptorImpl.html#monitor(hudson.model.Computer)">monitor</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected abstract &nbsp;<A HREF="../../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="type parameter in AbstractNodeMonitorDescriptor">T</A></CODE></FONT></TD>
 <TD><CODE><B>AbstractNodeMonitorDescriptor.</B><B><A HREF="../../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html#monitor(hudson.model.Computer)">monitor</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs monitoring of the given computer object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>ArchitectureMonitor.DescriptorImpl.</B><B><A HREF="../../../hudson/node_monitors/ArchitectureMonitor.DescriptorImpl.html#monitor(hudson.model.Computer)">monitor</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;

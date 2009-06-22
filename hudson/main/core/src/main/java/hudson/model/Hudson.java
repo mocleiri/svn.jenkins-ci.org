@@ -115,6 +115,7 @@ import hudson.util.Memoizer;
 import hudson.util.Iterators;
 import hudson.util.FormValidation;
 import hudson.util.VersionNumber;
+import hudson.util.StreamTaskListener;
 import hudson.widgets.Widget;
 import net.sf.json.JSONObject;
 import org.acegisecurity.*;
@@ -365,6 +366,13 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      * This is {@link Integer} so that we can initialize it to '5' for upgrading users.
      */
     /*package*/ Integer quietPeriod;
+    
+    /**
+     * Retry Count.
+     *
+     * This is {@link Integer} so that we can initialize it to '5' for upgrading users.
+     */
+    /*package*/ Integer retryCount;
 
     /**
      * {@link View}s.
@@ -508,7 +516,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      */
     private transient final LogRecorderManager log = new LogRecorderManager();
 
-    public Hudson(File root, ServletContext context) throws IOException {
+    public Hudson(File root, ServletContext context) throws IOException, InterruptedException {
     	// As hudson is starting, grant this process full controll
     	SecurityContextHolder.getContext().setAuthentication(ACL.SYSTEM);
         try {
@@ -584,6 +592,10 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             udpBroadcastThread.start();
 
             updateComputerList();
+
+            // master is online now
+            for (ComputerListener cl : ComputerListener.all())
+                cl.onOnline(toComputer(),new StreamTaskListener(System.out));
 
             getQueue().load();
 
@@ -1445,6 +1457,15 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     public int getQuietPeriod() {
         return quietPeriod!=null ? quietPeriod : 5;
     }
+    
+    /**
+     * Gets the system default Retry Count period.
+     */
+    public int getRetryCount() {
+        return retryCount !=null ? retryCount : 5;
+    }
+    
+    
 
     /**
      * @deprecated
@@ -2215,6 +2236,8 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             labelSet=null;
 
             quietPeriod = Integer.parseInt(req.getParameter("quiet_period"));
+            
+            retryCount = Integer.parseInt(req.getParameter("retry_count"));
 
             systemMessage = Util.nullify(req.getParameter("system_message"));
 

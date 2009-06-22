@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FilePath (Hudson main module 1.310 API)
+FilePath (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-14">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson main module 1.310 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson main module 1.310 API)";
+        parent.document.title="FilePath (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -338,6 +338,14 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#copyFrom(hudson.FilePath)">copyFrom</A></B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;src)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conveniene method to call <A HREF="../hudson/FilePath.html#copyTo(hudson.FilePath)"><CODE>copyTo(FilePath)</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#copyFrom(java.io.InputStream)">copyFrom</A></B>(java.io.InputStream&nbsp;in)</CODE>
 
 <BR>
@@ -389,12 +397,29 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#copyToWithPermission(hudson.FilePath)">copyToWithPermission</A></B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copies this file to the specified target, with file permissions intact.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#createLauncher(hudson.model.TaskListener)">createLauncher</A></B>(<A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> for starting processes on the node
  that has this file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#createTempDir(java.lang.String, java.lang.String)">createTempDir</A></B>(java.lang.String&nbsp;prefix,
+              java.lang.String&nbsp;suffix)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a temporary directory inside the directory represented by 'this'</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -599,6 +624,14 @@ V</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates this directory.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#mode()">mode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the file permission bit mask.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1125,6 +1158,29 @@ public void <B>copyFrom</B>(java.io.InputStream&nbsp;in)
 </DL>
 <HR>
 
+<A NAME="copyFrom(hudson.FilePath)"><!-- --></A><H3>
+copyFrom</H3>
+<PRE>
+public void <B>copyFrom</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;src)
+              throws java.io.IOException,
+                     java.lang.InterruptedException</PRE>
+<DL>
+<DD>Conveniene method to call <A HREF="../hudson/FilePath.html#copyTo(hudson.FilePath)"><CODE>copyTo(FilePath)</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.311</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="copyFrom(org.apache.commons.fileupload.FileItem)"><!-- --></A><H3>
 copyFrom</H3>
 <PRE>
@@ -1421,6 +1477,30 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B
 </DL>
 <HR>
 
+<A NAME="createTempDir(java.lang.String, java.lang.String)"><!-- --></A><H3>
+createTempDir</H3>
+<PRE>
+public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>createTempDir</B>(java.lang.String&nbsp;prefix,
+                              java.lang.String&nbsp;suffix)
+                       throws java.io.IOException,
+                              java.lang.InterruptedException</PRE>
+<DL>
+<DD>Creates a temporary directory inside the directory represented by 'this'
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.311</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="delete()"><!-- --></A><H3>
 delete</H3>
 <PRE>
@@ -1568,12 +1648,37 @@ public void <B>chmod</B>(int&nbsp;mask)
 </DL>
 </DD>
 <DD><DL>
-
+<DT><B>Parameters:</B><DD><CODE>mask</CODE> - File permission mask. To simplify the permission copying,
+      if the parameter is -1, this method becomes no-op.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
   <DD>1.303</DD>
+<DT><B>See Also:</B><DD><A HREF="../hudson/FilePath.html#mode()"><CODE>mode()</CODE></A></DL>
+</DD>
 </DL>
+<HR>
+
+<A NAME="mode()"><!-- --></A><H3>
+mode</H3>
+<PRE>
+public int <B>mode</B>()
+         throws java.io.IOException,
+                java.lang.InterruptedException</PRE>
+<DL>
+<DD>Gets the file permission bit mask.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>-1 on Windows, since such a concept doesn't make sense.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.311</DD>
+<DT><B>See Also:</B><DD><A HREF="../hudson/FilePath.html#chmod(int)"><CODE>chmod(int)</CODE></A></DL>
 </DD>
 </DL>
 <HR>
@@ -1838,6 +1943,29 @@ public void <B>copyTo</B>(<A HREF="../hudson/FilePath.html" title="class in huds
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="copyToWithPermission(hudson.FilePath)"><!-- --></A><H3>
+copyToWithPermission</H3>
+<PRE>
+public void <B>copyToWithPermission</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)
+                          throws java.io.IOException,
+                                 java.lang.InterruptedException</PRE>
+<DL>
+<DD>Copies this file to the specified target, with file permissions intact.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+  <DD>1.311</DD>
+</DL>
 </DD>
 </DL>
 <HR>

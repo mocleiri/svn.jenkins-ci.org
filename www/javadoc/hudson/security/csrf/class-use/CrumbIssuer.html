@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.security.csrf.CrumbIssuer (Hudson main module 1.310 API)
+Uses of Class hudson.security.csrf.CrumbIssuer (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-14">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.security.csrf.CrumbIssuer (Hudson main module 1.310 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.security.csrf.CrumbIssuer (Hudson main module 1.310 API)";
+        parent.document.title="Uses of Class hudson.security.csrf.CrumbIssuer (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -227,7 +227,9 @@ Uses of <A HREF="../../../../hudson/security/csrf/CrumbIssuer.html" title="class
 <TD><CODE><B>CrumbFilter.</B><B><A HREF="../../../../hudson/security/csrf/CrumbFilter.html#getCrumbIssuer()">getCrumbIssuer</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Because servlet containers generally don't specify the ordering of the initialization
+ (and different implementations indeed do this differently --- See HUDSON-3878),
+ we cannot use Hudson to the CrumbIssuer into CrumbFilter eagerly.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -260,22 +262,6 @@ Uses of <A HREF="../../../../hudson/security/csrf/CrumbIssuer.html" title="class
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Access global configuration for the crumb issuer.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../../hudson/security/csrf/package-summary.html">hudson.security.csrf</A> with parameters of type <A HREF="../../../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>CrumbFilter.</B><B><A HREF="../../../../hudson/security/csrf/CrumbFilter.html#setCrumbIssuer(hudson.security.csrf.CrumbIssuer)">setCrumbIssuer</A></B>(<A HREF="../../../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A>&nbsp;issuer)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;

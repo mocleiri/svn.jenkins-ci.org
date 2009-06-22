@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CrumbFilter (Hudson main module 1.310 API)
+CrumbFilter (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-14">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CrumbFilter (Hudson main module 1.310 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CrumbFilter (Hudson main module 1.310 API)";
+        parent.document.title="CrumbFilter (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -162,19 +162,13 @@ Checks for and validates crumbs on requests that cause state changes, to
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/security/csrf/CrumbFilter.html" title="class in hudson.security.csrf">CrumbFilter</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/security/csrf/CrumbFilter.html#get(javax.servlet.ServletContext)">get</A></B>(javax.servlet.ServletContext&nbsp;context)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../../hudson/security/csrf/CrumbFilter.html" title="class in hudson.security.csrf"><CODE>CrumbFilter</CODE></A> created for the given <CODE>ServletContext</CODE>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/security/csrf/CrumbFilter.html#getCrumbIssuer()">getCrumbIssuer</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Because servlet containers generally don't specify the ordering of the initialization
+ (and different implementations indeed do this differently --- See HUDSON-3878),
+ we cannot use Hudson to the CrumbIssuer into CrumbFilter eagerly.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -182,20 +176,12 @@ Checks for and validates crumbs on requests that cause state changes, to
 <TD><CODE><B><A HREF="../../../hudson/security/csrf/CrumbFilter.html#init(javax.servlet.FilterConfig)">init</A></B>(javax.servlet.FilterConfig&nbsp;filterConfig)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected static&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/security/csrf/CrumbFilter.html#isMultipart(javax.servlet.http.HttpServletRequest)">isMultipart</A></B>(javax.servlet.http.HttpServletRequest&nbsp;request)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/security/csrf/CrumbFilter.html#setCrumbIssuer(hudson.security.csrf.CrumbIssuer)">setCrumbIssuer</A></B>(<A HREF="../../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A>&nbsp;issuer)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -245,35 +231,9 @@ getCrumbIssuer</H3>
 <PRE>
 public <A HREF="../../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A> <B>getCrumbIssuer</B>()</PRE>
 <DL>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="setCrumbIssuer(hudson.security.csrf.CrumbIssuer)"><!-- --></A><H3>
-setCrumbIssuer</H3>
-<PRE>
-public void <B>setCrumbIssuer</B>(<A HREF="../../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A>&nbsp;issuer)</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="get(javax.servlet.ServletContext)"><!-- --></A><H3>
-get</H3>
-<PRE>
-public static <A HREF="../../../hudson/security/csrf/CrumbFilter.html" title="class in hudson.security.csrf">CrumbFilter</A> <B>get</B>(javax.servlet.ServletContext&nbsp;context)</PRE>
-<DL>
-<DD>Gets the <A HREF="../../../hudson/security/csrf/CrumbFilter.html" title="class in hudson.security.csrf"><CODE>CrumbFilter</CODE></A> created for the given <CODE>ServletContext</CODE>.
+<DD>Because servlet containers generally don't specify the ordering of the initialization
+ (and different implementations indeed do this differently --- See HUDSON-3878),
+ we cannot use Hudson to the CrumbIssuer into CrumbFilter eagerly.
 <P>
 <DD><DL>
 </DL>
@@ -290,8 +250,6 @@ init</H3>
 public void <B>init</B>(javax.servlet.FilterConfig&nbsp;filterConfig)
           throws javax.servlet.ServletException</PRE>
 <DL>
-<DD>
-<P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE>init</CODE> in interface <CODE>javax.servlet.Filter</CODE></DL>
 </DD>

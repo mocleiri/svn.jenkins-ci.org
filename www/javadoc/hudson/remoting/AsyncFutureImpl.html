@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AsyncFutureImpl (Hudson main module 1.310 API)
+AsyncFutureImpl (Hudson main module 1.311 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-14">
+<META NAME="date" CONTENT="2009-06-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AsyncFutureImpl (Hudson main module 1.310 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AsyncFutureImpl (Hudson main module 1.310 API)";
+        parent.document.title="AsyncFutureImpl (Hudson main module 1.311 API)";
     }
 }
 </SCRIPT>
@@ -149,7 +149,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/remoting/AsyncFutureImpl.html#cancel(boolean)">cancel</A></B>(boolean&nbsp;mayInterruptIfRunning)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not cancellable.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -200,6 +200,14 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/AsyncFutureImpl.html#setAsCancelled()">setAsCancelled</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks this task as cancelled.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -245,8 +253,6 @@ cancel</H3>
 <PRE>
 public boolean <B>cancel</B>(boolean&nbsp;mayInterruptIfRunning)</PRE>
 <DL>
-<DD>Not cancellable.
-<P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE>cancel</CODE> in interface <CODE>java.util.concurrent.Future&lt;<A HREF="../../hudson/remoting/AsyncFutureImpl.html" title="type parameter in AsyncFutureImpl">V</A>&gt;</CODE></DL>
 </DD>
@@ -344,6 +350,22 @@ set</H3>
 <PRE>
 public void <B>set</B>(java.lang.Throwable&nbsp;problem)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAsCancelled()"><!-- --></A><H3>
+setAsCancelled</H3>
+<PRE>
+public void <B>setAsCancelled</B>()</PRE>
+<DL>
+<DD>Marks this task as cancelled.
+<P>
 <DD><DL>
 </DL>
 </DD>
