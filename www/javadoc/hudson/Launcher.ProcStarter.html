@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Launcher.ProcStarter (Hudson main module 1.311 API)
+Launcher.ProcStarter (Hudson main module 1.312 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-19">
+<META NAME="date" CONTENT="2009-06-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Launcher.ProcStarter (Hudson main module 1.311 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Launcher.ProcStarter (Hudson main module 1.311 API)";
+        parent.document.title="Launcher.ProcStarter (Hudson main module 1.312 API)";
     }
 }
 </SCRIPT>
@@ -208,6 +208,14 @@ Builder pattern for configuring a process to launch.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.ProcStarter.html#cmds()">cmds</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Launcher.ProcStarter.html#cmds(hudson.util.ArgumentListBuilder)">cmds</A></B>(<A HREF="../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A>&nbsp;args)</CODE>
 
@@ -242,6 +250,22 @@ Builder pattern for configuring a process to launch.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.ProcStarter.html#copy()">copy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copies a <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson"><CODE>Launcher.ProcStarter</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.ProcStarter.html#envs()">envs</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Launcher.ProcStarter.html#envs(java.util.Map)">envs</A></B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;overrides)</CODE>
 
 <BR>
@@ -265,8 +289,24 @@ Builder pattern for configuring a process to launch.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.ProcStarter.html#masks()">masks</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Launcher.ProcStarter.html#masks(boolean...)">masks</A></B>(boolean...&nbsp;masks)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.ProcStarter.html#pwd()">pwd</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -305,6 +345,14 @@ Builder pattern for configuring a process to launch.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.io.OutputStream</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.ProcStarter.html#stderr()">stderr</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Launcher.ProcStarter.html#stderr(java.io.OutputStream)">stderr</A></B>(java.io.OutputStream&nbsp;err)</CODE>
 
@@ -313,11 +361,27 @@ Builder pattern for configuring a process to launch.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.io.InputStream</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.ProcStarter.html#stdin()">stdin</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Launcher.ProcStarter.html#stdin(java.io.InputStream)">stdin</A></B>(java.io.InputStream&nbsp;in)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Controls where the stdin of the process comes from.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.io.OutputStream</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Launcher.ProcStarter.html#stdout()">stdout</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -499,10 +563,32 @@ public <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Lau
 </DL>
 <HR>
 
+<A NAME="cmds()"><!-- --></A><H3>
+cmds</H3>
+<PRE>
+public java.util.List&lt;java.lang.String&gt; <B>cmds</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="masks(boolean...)"><!-- --></A><H3>
 masks</H3>
 <PRE>
 public <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A> <B>masks</B>(boolean...&nbsp;masks)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="masks()"><!-- --></A><H3>
+masks</H3>
+<PRE>
+public boolean[] <B>masks</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -543,6 +629,17 @@ public <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Lau
 </DL>
 <HR>
 
+<A NAME="pwd()"><!-- --></A><H3>
+pwd</H3>
+<PRE>
+public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>pwd</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="stdout(java.io.OutputStream)"><!-- --></A><H3>
 stdout</H3>
 <PRE>
@@ -567,6 +664,17 @@ public <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Lau
 </DL>
 <HR>
 
+<A NAME="stdout()"><!-- --></A><H3>
+stdout</H3>
+<PRE>
+public java.io.OutputStream <B>stdout</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="stderr(java.io.OutputStream)"><!-- --></A><H3>
 stderr</H3>
 <PRE>
@@ -581,6 +689,17 @@ public <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Lau
 </DL>
 <HR>
 
+<A NAME="stderr()"><!-- --></A><H3>
+stderr</H3>
+<PRE>
+public java.io.OutputStream <B>stderr</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="stdin(java.io.InputStream)"><!-- --></A><H3>
 stdin</H3>
 <PRE>
@@ -589,6 +708,17 @@ public <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Lau
 <DD>Controls where the stdin of the process comes from.
  By default, <tt>/dev/null</tt>.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="stdin()"><!-- --></A><H3>
+stdin</H3>
+<PRE>
+public java.io.InputStream <B>stdin</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>
@@ -624,6 +754,17 @@ public <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Lau
 </DL>
 <HR>
 
+<A NAME="envs()"><!-- --></A><H3>
+envs</H3>
+<PRE>
+public java.lang.String[] <B>envs</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="start()"><!-- --></A><H3>
 start</H3>
 <PRE>
@@ -654,6 +795,19 @@ public int <B>join</B>()
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="copy()"><!-- --></A><H3>
+copy</H3>
+<PRE>
+public <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A> <B>copy</B>()</PRE>
+<DL>
+<DD>Copies a <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson"><CODE>Launcher.ProcStarter</CODE></A>.
+<P>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

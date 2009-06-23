@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Launcher.LocalLauncher (Hudson main module 1.311 API)
+Launcher.LocalLauncher (Hudson main module 1.312 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-19">
+<META NAME="date" CONTENT="2009-06-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Launcher.LocalLauncher (Hudson main module 1.311 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Launcher.LocalLauncher (Hudson main module 1.311 API)";
+        parent.document.title="Launcher.LocalLauncher (Hudson main module 1.312 API)";
     }
 }
 </SCRIPT>
@@ -192,11 +192,11 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Launcher.LocalLauncher.html#launch(hudson.Launcher.ProcStarter)">launch</A></B>(<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A>&nbsp;ps)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invoked from <A HREF="../hudson/Launcher.ProcStarter.html#start()"><CODE>Launcher.ProcStarter.start()</CODE></A></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primarily invoked from <A HREF="../hudson/Launcher.ProcStarter.html#start()"><CODE>Launcher.ProcStarter.start()</CODE></A> to start a process with a specific launcher.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -280,11 +280,11 @@ public <B>Launcher.LocalLauncher</B>(<A HREF="../hudson/model/TaskListener.html"
 <A NAME="launch(hudson.Launcher.ProcStarter)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-protected <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A>&nbsp;ps)
-               throws java.io.IOException</PRE>
+public <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A>&nbsp;ps)
+            throws java.io.IOException</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../hudson/Launcher.html#launch(hudson.Launcher.ProcStarter)">Launcher</A></CODE></B></DD>
-<DD>Invoked from <A HREF="../hudson/Launcher.ProcStarter.html#start()"><CODE>Launcher.ProcStarter.start()</CODE></A>
+<DD>Primarily invoked from <A HREF="../hudson/Launcher.ProcStarter.html#start()"><CODE>Launcher.ProcStarter.start()</CODE></A> to start a process with a specific launcher.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/Launcher.html#launch(hudson.Launcher.ProcStarter)">launch</A></CODE> in class <CODE><A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></DL>

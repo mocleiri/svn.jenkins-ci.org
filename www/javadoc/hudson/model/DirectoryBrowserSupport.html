@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DirectoryBrowserSupport (Hudson main module 1.311 API)
+DirectoryBrowserSupport (Hudson main module 1.312 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-19">
+<META NAME="date" CONTENT="2009-06-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DirectoryBrowserSupport (Hudson main module 1.311 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DirectoryBrowserSupport (Hudson main module 1.311 API)";
+        parent.document.title="DirectoryBrowserSupport (Hudson main module 1.312 API)";
     }
 }
 </SCRIPT>
@@ -229,6 +229,15 @@ Has convenience methods to serve file system.
       Instead of calling this method explicitly, just return the <A HREF="../../hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model"><CODE>DirectoryBrowserSupport</CODE></A> object
       from the <code>doXYZ</code> method and let Stapler generate a response for you.</I></TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/DirectoryBrowserSupport.html#setIndexFileName(java.lang.String)">setIndexFileName</A></B>(java.lang.String&nbsp;fileName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the directory is requested but the directory listing is disabled, a file of this name
+ is served.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -344,6 +353,25 @@ public void <B>generateResponse</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIndexFileName(java.lang.String)"><!-- --></A><H3>
+setIndexFileName</H3>
+<PRE>
+public void <B>setIndexFileName</B>(java.lang.String&nbsp;fileName)</PRE>
+<DL>
+<DD>If the directory is requested but the directory listing is disabled, a file of this name
+ is served. By default it's "index.html".
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.312</DD>
+</DL>
 </DD>
 </DL>
 <HR>
