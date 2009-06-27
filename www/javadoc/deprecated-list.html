@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.312 API)
+Deprecated List (Hudson main module 1.313 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-23">
+<META NAME="date" CONTENT="2009-06-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.312 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.312 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.313 API)";
     }
 }
 </SCRIPT>
@@ -528,6 +528,13 @@ function windowTitle()
 <TD><A HREF="hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List, java.lang.String)">hudson.model.AbstractProject.buildDescribable(StaplerRequest, List<? extends Descriptor<T>>, String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As of 1.261. Use <A HREF="hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List)"><CODE>AbstractProject.buildDescribable(StaplerRequest, List)</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/Util.html#combine(long, java.lang.String)">hudson.Util.combine(long, String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use individual localization methods instead. 
+   See <CODE>#Messages.Util_year(long)</CODE> for an example.
+   Deprecated since 2009-06-24, remove method after 2009-12-24.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">hudson.model.Descriptor.configure(HttpServletRequest)</A>

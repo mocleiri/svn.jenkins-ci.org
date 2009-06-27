@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Run (Hudson main module 1.312 API)
+Run (Hudson main module 1.313 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-23">
+<META NAME="date" CONTENT="2009-06-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson main module 1.312 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson main module 1.312 API)";
+        parent.document.title="Run (Hudson main module 1.313 API)";
     }
 }
 </SCRIPT>
@@ -732,6 +732,16 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unique ID of this build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.text.DateFormat</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getIDFormatter()">getIDFormatter</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the date formatter used to convert the directory name in to a timestamp
+ This is nasty exposure of private data, but needed all the time the directory
+ containing the build is used as it's timestamp.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1862,6 +1872,24 @@ public java.lang.String <B>getId</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="getIDFormatter()"><!-- --></A><H3>
+getIDFormatter</H3>
+<PRE>
+public static java.text.DateFormat <B>getIDFormatter</B>()</PRE>
+<DL>
+<DD>Get the date formatter used to convert the directory name in to a timestamp
+ This is nasty exposure of private data, but needed all the time the directory
+ containing the build is used as it's timestamp.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getDescriptorByName(java.lang.String)"><!-- --></A><H3>
 getDescriptorByName</H3>
 <PRE>
@@ -2493,8 +2521,8 @@ public <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <
  processes for this build.
 
  <p>
- <CODE>BuildStep</CODE>s that invoke external processes should use this.
- This allows <CODE>BuildWrapper</CODE>s and other project configurations (such as JDK selection)
+ <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A>s that invoke external processes should use this.
+ This allows <A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A>s and other project configurations (such as JDK selection)
  to take effect.
 
  <p>

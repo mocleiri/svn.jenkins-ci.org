@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ComputerListener (Hudson main module 1.312 API)
+ComputerListener (Hudson main module 1.313 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-23">
+<META NAME="date" CONTENT="2009-06-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ComputerListener (Hudson main module 1.312 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ComputerListener (Hudson main module 1.312 API)";
+        parent.document.title="ComputerListener (Hudson main module 1.313 API)";
     }
 }
 </SCRIPT>
@@ -338,6 +338,9 @@ public void <B>onOnline</B>(<A HREF="../../hudson/model/Computer.html" title="cl
  <p>
  This enables you to do some work on all the slaves
  as they get connected.
+
+ <p>
+ Starting Hudson 1.312, this method is also invoked for the master, not just for slaves.
 <P>
 <DD><DL>
 </DL>
@@ -352,7 +355,7 @@ public void <B>onOnline</B>(<A HREF="../../hudson/model/Computer.html" title="cl
 <DD><CODE>java.io.IOException</CODE> - Exceptions will be recorded to the listener. Note that
       throwing an exception doesn't put the computer offline.
 <DD><CODE>java.lang.InterruptedException</CODE> - Exceptions will be recorded to the listener. Note that
-      throwing an exception doesn't put the computer offline.<DT><B>See Also:</B><DD><CODE>#preOnline(Computer, TaskListener)</CODE></DL>
+      throwing an exception doesn't put the computer offline.<DT><B>See Also:</B><DD><A HREF="../../hudson/slaves/ComputerListener.html#preOnline(hudson.model.Computer, hudson.remoting.Channel, hudson.FilePath, hudson.model.TaskListener)"><CODE>preOnline(Computer, Channel, FilePath, TaskListener)</CODE></A></DL>
 </DD>
 </DL>
 <HR>

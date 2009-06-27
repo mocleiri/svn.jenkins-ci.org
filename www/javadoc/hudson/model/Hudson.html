@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.312 API)
+Hudson (Hudson main module 1.313 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-23">
+<META NAME="date" CONTENT="2009-06-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.312 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.312 API)";
+        parent.document.title="Hudson (Hudson main module 1.313 API)";
     }
 }
 </SCRIPT>
@@ -1602,6 +1602,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getScmCheckoutRetryCount()">getScmCheckoutRetryCount</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the global SCM check out retry count.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>&lt;<A HREF="../../hudson/model/listeners/SCMListener.html" title="class in hudson.model.listeners">SCMListener</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getSCMListeners()">getSCMListeners</A></B>()</CODE>
 
@@ -2355,12 +2363,14 @@ Hudson</H3>
 <PRE>
 public <B>Hudson</B>(java.io.File&nbsp;root,
               javax.servlet.ServletContext&nbsp;context)
-       throws java.io.IOException</PRE>
+       throws java.io.IOException,
+              java.lang.InterruptedException</PRE>
 <DL>
 <DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -3718,6 +3728,22 @@ getQuietPeriod</H3>
 public int <B>getQuietPeriod</B>()</PRE>
 <DL>
 <DD>Gets the system default quiet period.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getScmCheckoutRetryCount()"><!-- --></A><H3>
+getScmCheckoutRetryCount</H3>
+<PRE>
+public int <B>getScmCheckoutRetryCount</B>()</PRE>
+<DL>
+<DD>Gets the global SCM check out retry count.
 <P>
 <DD><DL>
 </DL>
