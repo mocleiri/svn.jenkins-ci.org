@@ -2,8 +2,11 @@ package test;
 
 import groovy.lang.Closure;
 import hudson.remoting.DelegatingCallable;
+import hudson.remoting.Callable;
 
 /**
+ * Takes a {@link Closure} and wraps it as a {@link Callable}.
+ *
  * @author Kohsuke Kawaguchi
  */
 public class ClosureAdapter implements DelegatingCallable {
@@ -13,12 +16,10 @@ public class ClosureAdapter implements DelegatingCallable {
         this.closure = closure;
     }
 
-    @Override
     public Object call() throws Throwable {
         return closure.call();
     }
 
-    @Override
     public ClassLoader getClassLoader() {
         return closure.getClass().getClassLoader();
     }
