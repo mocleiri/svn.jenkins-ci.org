@@ -22,6 +22,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
+/**
+ * Entry point to the distributed Groovy support.
+ */
 public class Droovy extends GroovyObjectSupport implements Serializable {
 
     public final URL hudson;
@@ -34,6 +37,12 @@ public class Droovy extends GroovyObjectSupport implements Serializable {
 
     private transient final Set<Server> servers = new HashSet<Server>();
 
+    /**
+     * Creates a distributed Groovy environment.
+     *
+     * @param hudson
+     *      URL of Hudson that provides the clustering environment.
+     */
     public Droovy(URL hudson) throws IOException, InterruptedException {
         this.hudson = hudson;
         exec = Executors.newCachedThreadPool(new ThreadFactory() {
@@ -68,6 +77,9 @@ public class Droovy extends GroovyObjectSupport implements Serializable {
         s.run();
     }
 
+    /**
+     * Shuts down all the remote {@link Server}s and terminate the distributed environment.
+     */
     public void close() throws IOException, InterruptedException {
         for (Server s : servers)
             s.close();
@@ -77,6 +89,10 @@ public class Droovy extends GroovyObjectSupport implements Serializable {
 
     /**
      * Provisions a new node.
+     *
+     * @param name
+     *      Human-readable name that represents this server. Used for error messages
+     *      and status screen on Hudson.
      */
     public Server connect(String name) throws IOException {
         FastPipedOutputStream p1 = new FastPipedOutputStream();
@@ -87,8 +103,8 @@ public class Droovy extends GroovyObjectSupport implements Serializable {
 
         exec.submit(new Callable() {
             public Object call() throws Exception {
-
                 try {
+                    // this never comes back, so we need a new thread.
                     return cli.execute(Arrays.asList(
                             "dist-fork",
                             "-f",
