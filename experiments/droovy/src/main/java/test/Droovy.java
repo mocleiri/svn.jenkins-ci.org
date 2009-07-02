@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -53,6 +54,24 @@ public class Droovy extends GroovyObjectSupport implements Serializable {
             }
         });
         cli = new CLI(hudson,exec);    
+    }
+
+    /**
+     * Creates a distributed Groovy environment.
+     *
+     * <p>
+     * URL of Hudson is taken from the <tt>HUDSON_URL</tt> system property or the <tt>HUDSON_URL</tt> environment variable
+     * (in that order of preference.)
+     */
+    public Droovy() throws IOException, InterruptedException {
+        this(getDefaultHudsonUrl());
+    }
+
+    private static URL getDefaultHudsonUrl() throws MalformedURLException {
+        String env = System.getProperty("HUDSON_URL");
+        if(env==null)   env = System.getenv("HUDSON_URL");
+        if(env==null)   throw new IllegalArgumentException("Neither system property HUDSON_URL nor environment variable HUDSON_URL is not set");
+        return new URL(env);
     }
 
     public static void main(String[] args) throws Exception {
