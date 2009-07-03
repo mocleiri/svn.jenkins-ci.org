@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.313 API)
+Index (Hudson main module 1.314 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-06-26">
+<META NAME="date" CONTENT="2009-07-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.313 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.313 API)";
+        parent.document.title="Index (Hudson main module 1.314 API)";
     }
 }
 </SCRIPT>
@@ -2061,7 +2061,10 @@ Static method in class hudson.cli.<A HREF="./hudson/cli/Messages.html" title="cl
 <DT><A HREF="./hudson/cli/CLICommand.html" title="class in hudson.cli"><B>CLICommand</B></A> - Class in <A HREF="./hudson/cli/package-summary.html">hudson.cli</A><DD>Base class for Hudson CLI.<DT><A HREF="./hudson/cli/CLICommand.html#CLICommand()"><B>CLICommand()</B></A> - 
 Constructor for class hudson.cli.<A HREF="./hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/cli/CliEntryPoint.html" title="interface in hudson.cli"><B>CliEntryPoint</B></A> - Interface in <A HREF="./hudson/cli/package-summary.html">hudson.cli</A><DD>Remotable interface for CLI entry point on the server side.<DT><A HREF="./hudson/model/LoadStatistics.html#CLOCK"><B>CLOCK</B></A> - 
+<DT><A HREF="./hudson/cli/CliEntryPoint.html" title="interface in hudson.cli"><B>CliEntryPoint</B></A> - Interface in <A HREF="./hudson/cli/package-summary.html">hudson.cli</A><DD>Remotable interface for CLI entry point on the server side.<DT><A HREF="./hudson/cli/CliManagerImpl.html" title="class in hudson.cli"><B>CliManagerImpl</B></A> - Class in <A HREF="./hudson/cli/package-summary.html">hudson.cli</A><DD><A HREF="./hudson/cli/CliEntryPoint.html" title="interface in hudson.cli"><CODE>CliEntryPoint</CODE></A> implementation exposed to the remote CLI.<DT><A HREF="./hudson/cli/CliManagerImpl.html#CliManagerImpl(org.acegisecurity.Authentication)"><B>CliManagerImpl(Authentication)</B></A> - 
+Constructor for class hudson.cli.<A HREF="./hudson/cli/CliManagerImpl.html" title="class in hudson.cli">CliManagerImpl</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/LoadStatistics.html#CLOCK"><B>CLOCK</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/LoadStatistics.html" title="class in hudson.model">LoadStatistics</A>
 <DD>Load statistics clock cycle in milliseconds.
 <DT><A HREF="./hudson/util/ClockDifference.html" title="class in hudson.util"><B>ClockDifference</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Represents a clock difference.<DT><A HREF="./hudson/util/ClockDifference.html#ClockDifference(long)"><B>ClockDifference(long)</B></A> - 
@@ -4270,7 +4273,10 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DD>Called once the user logs in.
 <DT><A HREF="./hudson/model/Hudson.html#doLogout(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doLogout(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
-<DD>Called once the user logs in.
+<DD>Logs out the user.
+<DT><A HREF="./hudson/security/SecurityRealm.html#doLogout(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doLogout(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.security.<A HREF="./hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>
+<DD>Handles the logout processing.
 <DT><A HREF="./hudson/model/Hudson.html#doLogRss(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doLogRss(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD><B>Deprecated.</B>&nbsp;<I>As on 1.267, moved to "/log/rss..."</I>
@@ -5788,10 +5794,10 @@ Method in class hudson.model.<A HREF="./hudson/model/FingerprintMap.html" title=
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/User.html#get(java.lang.String, boolean)"><B>get(String, boolean)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/User.html" title="class in hudson.model">User</A>
-<DD>Gets the <A HREF="./hudson/model/User.html" title="class in hudson.model"><CODE>User</CODE></A> object by its id.
+<DD>Gets the <A HREF="./hudson/model/User.html" title="class in hudson.model"><CODE>User</CODE></A> object by its id or full name.
 <DT><A HREF="./hudson/model/User.html#get(java.lang.String)"><B>get(String)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/User.html" title="class in hudson.model">User</A>
-<DD>Gets the <A HREF="./hudson/model/User.html" title="class in hudson.model"><CODE>User</CODE></A> object by its id.
+<DD>Gets the <A HREF="./hudson/model/User.html" title="class in hudson.model"><CODE>User</CODE></A> object by its id or full name.
 <DT><A HREF="./hudson/node_monitors/AbstractNodeMonitorDescriptor.html#get(hudson.model.Computer)"><B>get(Computer)</B></A> - 
 Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors">AbstractNodeMonitorDescriptor</A>
 <DD>Obtains the monitoring result currently available, or null if no data is available.
@@ -9277,6 +9283,9 @@ Method in class hudson.model.<A HREF="./hudson/model/MyView.html" title="class i
 <DT><A HREF="./hudson/model/View.html#getPostConstructLandingPage()"><B>getPostConstructLandingPage()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
 <DD>Returns the page to redirect the user to, after the view is created.
+<DT><A HREF="./hudson/security/SecurityRealm.html#getPostLogOutUrl(org.kohsuke.stapler.StaplerRequest, org.acegisecurity.Authentication)"><B>getPostLogOutUrl(StaplerRequest, Authentication)</B></A> - 
+Method in class hudson.security.<A HREF="./hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>
+<DD>Controls where the user is sent to after a logout.
 <DT><A HREF="./hudson/util/jna/GNUCLibrary.html#getppid()"><B>getppid()</B></A> - 
 Method in interface hudson.util.jna.<A HREF="./hudson/util/jna/GNUCLibrary.html" title="interface in hudson.util.jna">GNUCLibrary</A>
 <DD>&nbsp;
@@ -12141,7 +12150,8 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#isUseCrumbs()"><B>isUseCrumbs()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
-<DD>&nbsp;
+<DD>If true, all the POST requests to Hudson would have to have crumb in it to protect
+ Hudson from CSRF vulnerabilities.
 <DT><A HREF="./hudson/security/AuthorizationMatrixProperty.html#isUseProjectSecurity()"><B>isUseProjectSecurity()</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/AuthorizationMatrixProperty.html" title="class in hudson.security">AuthorizationMatrixProperty</A>
 <DD>&nbsp;
@@ -13288,6 +13298,9 @@ Method in class hudson.cli.<A HREF="./hudson/cli/CLICommand.html" title="class i
 <DT><A HREF="./hudson/cli/CliEntryPoint.html#main(java.util.List, java.util.Locale, java.io.InputStream, java.io.OutputStream, java.io.OutputStream)"><B>main(List&lt;String&gt;, Locale, InputStream, OutputStream, OutputStream)</B></A> - 
 Method in interface hudson.cli.<A HREF="./hudson/cli/CliEntryPoint.html" title="interface in hudson.cli">CliEntryPoint</A>
 <DD>Just like the static main method.
+<DT><A HREF="./hudson/cli/CliManagerImpl.html#main(java.util.List, java.util.Locale, java.io.InputStream, java.io.OutputStream, java.io.OutputStream)"><B>main(List&lt;String&gt;, Locale, InputStream, OutputStream, OutputStream)</B></A> - 
+Method in class hudson.cli.<A HREF="./hudson/cli/CliManagerImpl.html" title="class in hudson.cli">CliManagerImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/cli/GroovyshCommand.html#main(java.util.List, java.io.InputStream, java.io.PrintStream, java.io.PrintStream)"><B>main(List&lt;String&gt;, InputStream, PrintStream, PrintStream)</B></A> - 
 Method in class hudson.cli.<A HREF="./hudson/cli/GroovyshCommand.html" title="class in hudson.cli">GroovyshCommand</A>
 <DD>&nbsp;
@@ -13367,6 +13380,9 @@ Constructor for class hudson.os.windows.<A HREF="./hudson/os/windows/ManagedWind
 <DT><A HREF="./hudson/os/windows/ManagedWindowsServiceLauncher.DescriptorImpl.html" title="class in hudson.os.windows"><B>ManagedWindowsServiceLauncher.DescriptorImpl</B></A> - Class in <A HREF="./hudson/os/windows/package-summary.html">hudson.os.windows</A><DD>&nbsp;<DT><A HREF="./hudson/os/windows/ManagedWindowsServiceLauncher.DescriptorImpl.html#ManagedWindowsServiceLauncher.DescriptorImpl()"><B>ManagedWindowsServiceLauncher.DescriptorImpl()</B></A> - 
 Constructor for class hudson.os.windows.<A HREF="./hudson/os/windows/ManagedWindowsServiceLauncher.DescriptorImpl.html" title="class in hudson.os.windows">ManagedWindowsServiceLauncher.DescriptorImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/os/windows/Messages.html#ManagedWindowsServiceLauncher_AccessDenied()"><B>ManagedWindowsServiceLauncher_AccessDenied()</B></A> - 
+Static method in class hudson.os.windows.<A HREF="./hudson/os/windows/Messages.html" title="class in hudson.os.windows">Messages</A>
+<DD>Access is denied.
 <DT><A HREF="./hudson/os/windows/Messages.html#ManagedWindowsServiceLauncher_ConnectingTo(java.lang.Object)"><B>ManagedWindowsServiceLauncher_ConnectingTo(Object)</B></A> - 
 Static method in class hudson.os.windows.<A HREF="./hudson/os/windows/Messages.html" title="class in hudson.os.windows">Messages</A>
 <DD>Connecting to {0}
@@ -15247,6 +15263,9 @@ Constructor for class hudson.util.<A HREF="./hudson/util/Protector.html" title="
 Method in interface hudson.cli.<A HREF="./hudson/cli/CliEntryPoint.html" title="interface in hudson.cli">CliEntryPoint</A>
 <DD>Returns <A HREF="./hudson/cli/CliEntryPoint.html#VERSION"><CODE>CliEntryPoint.VERSION</CODE></A>, so that the client and the server can detect version incompatibility
  gracefully.
+<DT><A HREF="./hudson/cli/CliManagerImpl.html#protocolVersion()"><B>protocolVersion()</B></A> - 
+Method in class hudson.cli.<A HREF="./hudson/cli/CliManagerImpl.html" title="class in hudson.cli">CliManagerImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/slaves/Cloud.html#PROVISION"><B>PROVISION</B></A> - 
 Static variable in class hudson.slaves.<A HREF="./hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>
 <DD>Permission constant to control mutation operations on <A HREF="./hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A>.
@@ -20210,6 +20229,9 @@ Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title
 <DT><A HREF="./hudson/tasks/Messages.html#_MailSender_NoAddress(java.lang.Object)"><B>_MailSender_NoAddress(Object)</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>Failed to send e-mail to {0} because no e-mail address is known, and no default e-mail domain is configured
+<DT><A HREF="./hudson/os/windows/Messages.html#_ManagedWindowsServiceLauncher_AccessDenied()"><B>_ManagedWindowsServiceLauncher_AccessDenied()</B></A> - 
+Static method in class hudson.os.windows.<A HREF="./hudson/os/windows/Messages.html" title="class in hudson.os.windows">Messages</A>
+<DD>Access is denied.
 <DT><A HREF="./hudson/os/windows/Messages.html#_ManagedWindowsServiceLauncher_ConnectingTo(java.lang.Object)"><B>_ManagedWindowsServiceLauncher_ConnectingTo(Object)</B></A> - 
 Static method in class hudson.os.windows.<A HREF="./hudson/os/windows/Messages.html" title="class in hudson.os.windows">Messages</A>
 <DD>Connecting to {0}
