@@ -1,15 +1,12 @@
 package test;
 
-import groovy.lang.GroovyObjectSupport;
 import groovy.lang.Closure;
+import hudson.remoting.Channel;
 
-import java.io.Serializable;
-import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.Closeable;
-
-import hudson.remoting.Channel;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * Represents a connection to a remote server.
@@ -23,6 +20,10 @@ public class Server extends Closure implements Serializable {
     public Server(Object owner, Channel channel) {
         super(owner);
         this.channel = channel;
+    }
+
+    public Channel getChannel() {
+        return channel;
     }
 
     /**
