@@ -130,14 +130,18 @@ public class Droovy extends GroovyObjectSupport implements Serializable {
                             "remoting.jar=" + Which.jarFile(Channel.class),
                             "java",
     //                        "-Xrunjdwp:transport=dt_socket,server=y,address=8000", // debug opt
-                            "-jar",
-                            "remoting.jar"),
+                            "-classpath",
+                            "remoting.jar",
+                            "hudson.remoting.Launcher"),
                             p1i,
                             p2, System.err);
 //                        new TeeOutputStream(p2,new FileOutputStream("/tmp/incoming")), System.err);
                 } catch (IOException e) {
                     System.err.println(e);
                     return null;
+                } finally {
+                    p1i.close();
+                    p2.close();
                 }
             }
         });

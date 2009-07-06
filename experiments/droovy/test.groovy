@@ -12,5 +12,6 @@ i=0
   remote {
     println "1st from ${pid()} (${i})"
   }
+  Thread.sleep(5000);
   println "3rd from ${pid()} (${i})"
 }
