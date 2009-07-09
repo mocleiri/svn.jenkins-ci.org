@@ -17,6 +17,31 @@
 <div style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
   <li class=bug>
+    Fixed a possible NPE in installing Windows service.
+    (<a href="http://d.hatena.ne.jp/ushiday/20090708">report</a>)
+  <li class=bug>
+    Fixed a possible NPE in <tt>CrumbFilter.getCrumbIssuer</tt>.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3986">issue 3986</a>)
+  <li class=bug>
+    Login may result in 403 if the user realm is delegated to container.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1235">issue 1235</a>)
+  <li class=bug>
+    The <tt>--logfile</tt> option stopped working on Windows.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3272">issue 3272</a>)
+  <li class=bug>
+    On-demand retention policy almost immediately turns off slaves.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3972">issue 3972</a>)
+  <li class=rfe>
+    Added <tt>ibm-web-bnd.xmi</tt> to simplify the automated deployment with WebSphere.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3270">issue 3270</a>)
+</ul>
+</div><!--=TRUNK-END=-->
+
+<!-- these changes are controlled by the release process. -->
+<div style="display:none;"><!--=BEGIN=-->
+<a name=v1.315><h3>What's new in 1.315</h3></a>
+<ul class=image>
+  <li class=bug>
     Hudson failed to notice a build result status change if aborted builds
     were in the middle.
     (<a href="http://www.nabble.com/Losing-build-state-after-aborts--td24335949.html">report</a>)
@@ -40,12 +65,6 @@
     CLI slave agents show details of how it failed to connect.
     (<a href="http://www.nabble.com/Can%27t-start-a-slave-via-JNLP-td24363116.html">report</a>)
 </ul>
-</div><!--=TRUNK-END=-->
-
-<!-- these changes are controlled by the release process. -->
-<div style="display:none;"><!--=BEGIN=-->
-<a name=v1.315><h3>What's new in 1.315</h3></a>
-<!--=RC-CHANGES=-->
 </div><!--=END=-->
 <a name=v1.314><h3>What's new in 1.314</h3></a>
 <ul class=image>
