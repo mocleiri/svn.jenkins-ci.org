@@ -4,3 +4,9 @@ TODO:
 - fix build history view partial update JavaScript to handle multiple concurrent builds
 
 - serialize the changelog calculation. How do we handle backward compatibility?
+
+- figure out what to do with AbstractProject.getWorkspaceResource(). I just removed it from
+  AbstractProject.getResourceList() but this will break the lock mechanism with SCM polling, tagging, and
+  other related activities that require a workspace.
+
+- replace various "1.XXX" reference to the right revision when we merge this back to trunk.

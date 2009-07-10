@@ -3371,6 +3371,13 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     public static boolean LOG_STARTUP_PERFORMANCE = Boolean.getBoolean(Hudson.class.getName()+".logStartupPerformance");
     private static final boolean CONSISTENT_HASH = true; // Boolean.getBoolean(Hudson.class.getName()+".consistentHash");
 
+    /**
+     * Tentative switch to activate the concurrent build behavior.
+     * When we merge this back to the trunk, this allows us to keep
+     * this feature hidden for a while until we iron out the kinks.
+     */
+    public static boolean CONCURRENT_BUILD = true;
+
     private static final Logger LOGGER = Logger.getLogger(Hudson.class.getName());
 
     private static final Pattern ICON_SIZE = Pattern.compile("\\d+x\\d+");

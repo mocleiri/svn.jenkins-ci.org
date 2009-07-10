@@ -776,7 +776,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      * but derived classes can also check other conditions.
      */
     public boolean isBuildBlocked() {
-        return isBuilding();
+        return !Hudson.CONCURRENT_BUILD && isBuilding();
     }
 
     public String getWhyBlocked() {
@@ -832,7 +832,8 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
                 resourceLists.add(activity.getResourceList());
             }
         }
-        resourceLists.add(new ResourceList().w(getWorkspaceResource()));
+        // TODO: see concurrent-build-branch-note.txt.
+//        resourceLists.add(new ResourceList().w(getWorkspaceResource()));
         return ResourceList.union(resourceLists);
     }
 
