@@ -241,11 +241,6 @@ public final class MavenModule extends AbstractMavenProject<MavenModule,MavenBui
         return goals;
     }
 
-    @Override
-    public FilePath getWorkspace() {
-        return getParent().getModuleRoot().child(relativePath);
-    }
-
     public DescribableList<Publisher,Descriptor<Publisher>> getPublishersList() {
         // TODO
         return new DescribableList<Publisher,Descriptor<Publisher>>(this);

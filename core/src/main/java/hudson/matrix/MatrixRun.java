@@ -23,18 +23,18 @@
  */
 package hudson.matrix;
 
+import hudson.FilePath;
+import static hudson.matrix.MatrixConfiguration.useShortWorkspaceName;
 import hudson.model.Build;
+import org.kohsuke.stapler.Ancestor;
+import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.StaplerRequest;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Calendar;
-
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.Stapler;
-import org.kohsuke.stapler.Ancestor;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Execution of {@link MatrixConfiguration}.
@@ -118,5 +118,22 @@ public class MatrixRun extends Build<MatrixConfiguration,MatrixRun> {
     @Override
     public MatrixConfiguration getParent() {// don't know why, but javac wants this
         return super.getParent();
+    }
+
+    @Override
+    public void run() {
+        run(new RunnerImpl());
+    }
+
+    protected class RunnerImpl extends Build.RunnerImpl {
+        @Override
+        protected FilePath decideWorkspace() {
+            FilePath ws = getParentBuild().getWorkspace();
+            if(ws==null)    return null;
+            if(useShortWorkspaceName)
+                return ws.child(getParent().getDigestName());
+            else
+                return ws.child(getParent().getCombination().toString('/','/'));
+        }
     }
 }

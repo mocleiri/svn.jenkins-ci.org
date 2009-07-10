@@ -27,6 +27,7 @@ import hudson.EnvVars;
 import hudson.Functions;
 import hudson.Launcher;
 import hudson.Util;
+import hudson.FilePath;
 import hudson.matrix.MatrixConfiguration;
 import hudson.model.Fingerprint.BuildPtr;
 import hudson.model.Fingerprint.RangeSet;
@@ -82,6 +83,11 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
      * Null or "" if built by the master. (null happens when we read old record that didn't have this information.)
      */
     private String builtOn;
+
+    /**
+     * The file path on the node that performed a build. Kept as a string since {@link FilePath} is not serializable into XML.
+     */
+    private String workspace;
 
     /**
      * Version of Hudson that built this.
@@ -175,6 +181,38 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
     }
 
     /**
+     * Gets the directory where this build is being built.
+     *
+     * <p>
+     * Note to implementors: to control where the workspace is created, override
+     * {@link AbstractRunner#decideWorkspace()}.
+     *
+     * @return
+     *      null if the workspace is on a slave that's not connected. Note that once the build is completed,
+     *      the workspace may be used to build something else, so the value returned from this method may
+     *      no longer show a workspace as it was used for this build.
+     * @since 1.XXX
+     */
+    public final FilePath getWorkspace() {
+        if(workspace==null) return null;
+        Node n = getBuiltOn();
+        if(n==null) return null;
+        return n.createPath(workspace);
+    }
+
+    /**
+     * Returns the root directory of the checked-out module.
+     * <p>
+     * This is usually where <tt>pom.xml</tt>, <tt>build.xml</tt>
+     * and so on exists.
+     */
+    public final FilePath getModuleRoot() {
+        FilePath ws = getWorkspace();
+        if(ws==null)    return null;
+        return getParent().getScm().getModuleRoot(ws);
+    }
+
+    /**
      * List of users who committed a change since the last non-broken build till now.
      *
      * <p>
@@ -237,6 +275,12 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
         return hudsonVersion;
     }
 
+    /**
+     * Makes sure two threads don't try to decide the workspace concurrently to end up in a wrong conclusion.
+     * Global lock is more coarse-grained than necessary, but it simplifies the code, and the contended code is small.
+     */
+    private static final Object lockForDecidingWorkspace = new Object();
+
     protected abstract class AbstractRunner implements Runner {
         /**
          * Since configuration can be changed while a build is in progress,
@@ -251,6 +295,29 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
             return Executor.currentExecutor().getOwner().getNode();
         }
 
+        /**
+         * Decide the workspace to use, in consideration of other concurret builds that may be happening
+         * in this node.
+         */
+        protected FilePath decideWorkspace() {
+            Computer c = Computer.currentComputer();
+
+            // TODO: this cast is indicative of abstraction problem
+            FilePath base = c.getNode().getWorkspaceFor((TopLevelItem)getProject());
+
+            synchronized (lockForDecidingWorkspace) {
+                OUTER:
+                for (int i=1; ; i++) {
+                    FilePath candidate = i==1 ? base : base.withSuffix("@"+i);
+                    for (Executor e : c.getExecutors()) {
+                        if(candidate.equals(e.getCurrentWorkspace()))
+                            continue OUTER; // collision
+                    }
+                    return candidate;
+                }
+            }
+        }
+
         public Result run(BuildListener listener) throws Exception {
             Node node = getCurrentNode();
             assert builtOn==null;
@@ -261,7 +328,9 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
             if(!Hudson.getInstance().getNodes().isEmpty())
                 listener.getLogger().println(node instanceof Hudson ? Messages.AbstractBuild_BuildingOnMaster() : Messages.AbstractBuild_BuildingRemotely(builtOn));
 
-            node.getFileSystemProvisioner().prepareWorkspace(AbstractBuild.this,project.getWorkspace(),listener);
+            FilePath ws = decideWorkspace();
+            workspace = ws.getRemote();
+            node.getFileSystemProvisioner().prepareWorkspace(AbstractBuild.this,ws,listener);
             
             if (project.isCleanWorkspaceRequired()) {
                 listener.getLogger().println("Cleaning workspace because project is configured to use a clean workspace for each build.");

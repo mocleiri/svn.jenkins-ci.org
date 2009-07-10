@@ -23,6 +23,8 @@
  */
 package hudson.model;
 
+import hudson.FilePath;
+
 import java.io.IOException;
 import java.io.File;
 
@@ -36,5 +38,20 @@ public class FreeStyleBuild extends Build<FreeStyleProject,FreeStyleBuild> {
 
     public FreeStyleBuild(FreeStyleProject project, File buildDir) throws IOException {
         super(project, buildDir);
+    }
+
+    @Override
+    public void run() {
+        run(new RunnerImpl());
+    }
+
+    protected class RunnerImpl extends Build.RunnerImpl {
+        @Override
+        protected FilePath decideWorkspace() {
+            String customWorkspace = getProject().getCustomWorkspace();
+            if (customWorkspace != null)
+                return Computer.currentComputer().getNode().createPath(customWorkspace);
+            return super.decideWorkspace();
+        }
     }
 }

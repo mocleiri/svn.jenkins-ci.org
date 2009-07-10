@@ -24,6 +24,8 @@
 package hudson.model;
 
 import hudson.Util;
+import hudson.FilePath;
+import hudson.model.Queue.Executable;
 import hudson.util.TimeUnit2;
 import hudson.security.ACL;
 import org.kohsuke.stapler.StaplerRequest;
@@ -153,6 +155,21 @@ public class Executor extends Thread implements ModelObject {
     @Exported
     public Queue.Executable getCurrentExecutable() {
         return executable;
+    }
+
+    /**
+     * If {@linkplain #getCurrentExecutable() current executable} is {@link AbstractBuild},
+     * return the workspace that this executor is using, or null if the build hasn't gotten
+     * to that point yet.
+     */
+    public FilePath getCurrentWorkspace() {
+        Executable e = executable;
+        if(e==null) return null;
+        if (e instanceof AbstractBuild) {
+            AbstractBuild ab = (AbstractBuild) e;
+            return ab.getWorkspace();
+        }
+        return null;
     }
 
     /**

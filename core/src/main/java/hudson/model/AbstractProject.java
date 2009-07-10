@@ -35,6 +35,7 @@ import hudson.model.Descriptor.FormException;
 import hudson.model.Fingerprint.RangeSet;
 import hudson.model.RunMap.Constructor;
 import hudson.model.Queue.WaitingItem;
+import hudson.model.Queue.Executable;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.ChangeLogSet.Entry;
 import hudson.scm.NullSCM;
@@ -282,14 +283,36 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      *
      * @return
      *      null if the workspace is on a slave that's not connected.
+     * @deprecated as of 1.XXX
+     *      To support concurrent builds of the same project, this method is moved to {@link AbstractBuild}.
+     *      For backward compatibility, this method returns the right {@link AbstractBuild#getWorkspace()} if called
+     *      from {@link Executor}, and otherwise the workspace of the last build.
      */
-    public abstract FilePath getWorkspace();
+    public final FilePath getWorkspace() {
+        Executor e = Executor.currentExecutor();
+        if(e!=null) {
+            Executable exe = e.getCurrentExecutable();
+            if (exe instanceof AbstractBuild) {
+                AbstractBuild b = (AbstractBuild) exe;
+                if(b.getProject()==this)
+                    return b.getWorkspace();
+            }
+        }
+        R lb = getLastBuild();
+        if(lb!=null)    return lb.getWorkspace();
+        return null;
+    }
 
     /**
      * Returns the root directory of the checked-out module.
      * <p>
      * This is usually where <tt>pom.xml</tt>, <tt>build.xml</tt>
      * and so on exists.
+     *
+     * @deprecated as of 1.XXX
+     *      To support concurrent builds of the same project, this method is moved to {@link AbstractBuild}.
+     *      For backward compatibility, this method returns the right {@link AbstractBuild#getModuleRoot()} if called
+     *      from {@link Executor}, and otherwise the workspace of the last build.
      */
     public FilePath getModuleRoot() {
         FilePath ws = getWorkspace();

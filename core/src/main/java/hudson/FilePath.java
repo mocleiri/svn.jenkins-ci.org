@@ -429,6 +429,23 @@ public final class FilePath implements Serializable {
         }));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FilePath that = (FilePath) o;
+
+        if (channel != null ? !channel.equals(that.channel) : that.channel != null) return false;
+        return remote.equals(that.remote);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * (channel != null ? channel.hashCode() : 0) + remote.hashCode();
+    }
+
     /**
      * Supported tar file compression methods.
      */
@@ -757,6 +774,20 @@ public final class FilePath implements Serializable {
         }
 
         return r.substring(len+1);
+    }
+
+    /**
+     * Short for {@code getParent().child(rel)}. Useful for getting other files in the same directory. 
+     */
+    public FilePath sibling(String rel) {
+        return getParent().child(rel);
+    }
+
+    /**
+     * Returns a {@link FilePath} by adding the given suffix to this path name.
+     */
+    public FilePath withSuffix(String suffix) {
+        return new FilePath(channel,remote+suffix);
     }
 
     /**

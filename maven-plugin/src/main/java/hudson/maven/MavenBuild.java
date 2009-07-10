@@ -473,6 +473,11 @@ public class MavenBuild extends AbstractBuild<MavenModule,MavenBuild> {
     private class RunnerImpl extends AbstractRunner {
         private List<MavenReporter> reporters;
 
+        @Override
+        protected FilePath decideWorkspace() {
+            return getParentBuild().getModuleRoot().child(getProject().getRelativePath());
+        }
+
         protected Result doRun(BuildListener listener) throws Exception {
             // pick up a list of reporters to run
             reporters = getProject().createReporters();
