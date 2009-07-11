@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-View (Hudson main module 1.314 API)
+View (Hudson main module 1.315 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-02">
+<META NAME="date" CONTENT="2009-07-10">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ View (Hudson main module 1.314 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="View (Hudson main module 1.314 API)";
+        parent.document.title="View (Hudson main module 1.315 API)";
     }
 }
 </SCRIPT>
@@ -833,7 +833,8 @@ getViewName</H3>
 rename</H3>
 <PRE>
 public void <B>rename</B>(java.lang.String&nbsp;newName)
-            throws java.text.ParseException</PRE>
+            throws java.text.ParseException,
+                   <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
 <DL>
 <DD>Renames this view.
 <P>
@@ -843,7 +844,8 @@ public void <B>rename</B>(java.lang.String&nbsp;newName)
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.text.ParseException</CODE></DL>
+<DD><CODE>java.text.ParseException</CODE>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
 </DD>
 </DL>
 <HR>

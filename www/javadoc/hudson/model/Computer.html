@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Computer (Hudson main module 1.314 API)
+Computer (Hudson main module 1.315 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-02">
+<META NAME="date" CONTENT="2009-07-10">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson main module 1.314 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson main module 1.314 API)";
+        parent.document.title="Computer (Hudson main module 1.315 API)";
     }
 }
 </SCRIPT>
@@ -1797,7 +1797,7 @@ public java.lang.String <B>getHostName</B>()
 
  <p>
  Since it's possible that the slave is not reachable from the master (it may be behind a firewall,
- connecting to master via JNLP), in which case this method returns null.
+ connecting to master via JNLP), this method may return null.
 
  It's surprisingly tricky for a machine to know a name that other systems can get to,
  especially between things like DNS search suffix, the hosts file, and YP.
@@ -1805,6 +1805,9 @@ public java.lang.String <B>getHostName</B>()
  <p>
  So the technique here is to compute possible interfaces and names on the slave,
  then try to ping them from the master, and pick the one that worked.
+
+ <p>
+ The computation may take some time, so it employs caching to make the successive lookups faster.
 <P>
 <DD><DL>
 </DL>

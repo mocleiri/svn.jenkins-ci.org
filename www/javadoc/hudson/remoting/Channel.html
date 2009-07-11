@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Channel (Hudson main module 1.314 API)
+Channel (Hudson main module 1.315 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-02">
+<META NAME="date" CONTENT="2009-07-10">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Channel (Hudson main module 1.314 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Channel (Hudson main module 1.314 API)";
+        parent.document.title="Channel (Hudson main module 1.315 API)";
     }
 }
 </SCRIPT>
@@ -348,6 +348,26 @@ V</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs an orderly shut down of this channel (and the remote peer.)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/remoting/forward/ListeningPort.html" title="interface in hudson.remoting.forward">ListeningPort</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Channel.html#createLocalToRemotePortForwarding(int, java.lang.String, int)">createLocalToRemotePortForwarding</A></B>(int&nbsp;recvPort,
+                                  java.lang.String&nbsp;forwardHost,
+                                  int&nbsp;forwardPort)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts a local to remote port forwarding (the equivalent of "ssh -L").</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/remoting/forward/ListeningPort.html" title="interface in hudson.remoting.forward">ListeningPort</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/remoting/Channel.html#createRemoteToLocalPortForwarding(int, java.lang.String, int)">createRemoteToLocalPortForwarding</A></B>(int&nbsp;recvPort,
+                                  java.lang.String&nbsp;forwardHost,
+                                  int&nbsp;forwardPort)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts a remote to local port forwarding (the equivalent of "ssh -R").</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1062,6 +1082,62 @@ public java.lang.Object <B>waitForRemoteProperty</B>(java.lang.Object&nbsp;key)
 <DD><DL>
 
 <DT><B>Throws:</B>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createLocalToRemotePortForwarding(int, java.lang.String, int)"><!-- --></A><H3>
+createLocalToRemotePortForwarding</H3>
+<PRE>
+public <A HREF="../../hudson/remoting/forward/ListeningPort.html" title="interface in hudson.remoting.forward">ListeningPort</A> <B>createLocalToRemotePortForwarding</B>(int&nbsp;recvPort,
+                                                       java.lang.String&nbsp;forwardHost,
+                                                       int&nbsp;forwardPort)
+                                                throws java.io.IOException,
+                                                       java.lang.InterruptedException</PRE>
+<DL>
+<DD>Starts a local to remote port forwarding (the equivalent of "ssh -L").
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>recvPort</CODE> - The port on this local machine that we'll listen to. 0 to let
+      OS pick a random available port. If you specify 0, use
+      <A HREF="../../hudson/remoting/forward/ListeningPort.html#getPort()"><CODE>ListeningPort.getPort()</CODE></A> to figure out the actual assigned port.<DD><CODE>forwardHost</CODE> - The remote host that the connection will be forwarded to.
+      Connection to this host will be made from the other JVM that
+      this <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> represents.<DD><CODE>forwardPort</CODE> - The remote port that the connection will be forwarded to.
+<DT><B>Returns:</B><DD>
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createRemoteToLocalPortForwarding(int, java.lang.String, int)"><!-- --></A><H3>
+createRemoteToLocalPortForwarding</H3>
+<PRE>
+public <A HREF="../../hudson/remoting/forward/ListeningPort.html" title="interface in hudson.remoting.forward">ListeningPort</A> <B>createRemoteToLocalPortForwarding</B>(int&nbsp;recvPort,
+                                                       java.lang.String&nbsp;forwardHost,
+                                                       int&nbsp;forwardPort)
+                                                throws java.io.IOException,
+                                                       java.lang.InterruptedException</PRE>
+<DL>
+<DD>Starts a remote to local port forwarding (the equivalent of "ssh -R").
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>recvPort</CODE> - The port on the remote JVM (represented by this <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>)
+      that we'll listen to. 0 to let
+      OS pick a random available port. If you specify 0, use
+      <A HREF="../../hudson/remoting/forward/ListeningPort.html#getPort()"><CODE>ListeningPort.getPort()</CODE></A> to figure out the actual assigned port.<DD><CODE>forwardHost</CODE> - The remote host that the connection will be forwarded to.
+      Connection to this host will be made from this JVM.<DD><CODE>forwardPort</CODE> - The remote port that the connection will be forwarded to.
+<DT><B>Returns:</B><DD>
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
