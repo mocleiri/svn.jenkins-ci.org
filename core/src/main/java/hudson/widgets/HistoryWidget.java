@@ -48,7 +48,7 @@ import java.util.List;
  */
 public class HistoryWidget<O extends ModelObject,T> extends Widget {
     /**
-     * The given data model of records.
+     * The given data model of records. Newer ones first.
      */
     public Iterable<T> baseList;
 
@@ -137,22 +137,31 @@ public class HistoryWidget<O extends ModelObject,T> extends Widget {
         // pick up builds to send back
         List<T> items = new ArrayList<T>();
 
+        String nn=null; // we'll compute next n here
+
+        // list up all builds >=n.
         for (T t : baseList) {
-            if(adapter.compare(t,n)>=0)
+            if(adapter.compare(t,n)>=0) {
                 items.add(t);
-            else
+                if(adapter.isBuilding(t))
+                    nn = adapter.getKey(t); // the next fetch should start from youngest build in progress
+            } else
                 break;
         }
 
-        baseList = items;
-        if(!items.isEmpty()) {
-            T b = items.get(0);
-            n = adapter.getKey(b);
-            if(!adapter.isBuilding(b))
-                n = adapter.getNextKey(n);
+        if (nn==null) {
+            if (items.isEmpty()) {
+                // nothing to report back. next fetch should retry the same 'n'
+                nn=n;
+            } else {
+                // every record fetched this time is frozen. next fetch should start from the next build
+                nn=adapter.getNextKey(adapter.getKey(items.get(0)));
+            }
         }
 
-        rsp.setHeader("n",n);
+        baseList = items;
+
+        rsp.setHeader("n",nn);
 
         req.getView(this,"ajaxBuildHistory.jelly").forward(req,rsp);
     }
