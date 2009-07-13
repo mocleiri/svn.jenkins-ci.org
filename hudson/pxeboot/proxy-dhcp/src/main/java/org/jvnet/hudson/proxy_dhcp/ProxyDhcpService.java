@@ -39,8 +39,12 @@ public class ProxyDhcpService implements Runnable, Closeable {
         server = new DatagramSocket(DHCP_SERVER_PORT,interfaceToListen);
         server.setBroadcast(true);
 
-        replySocket = new DatagramSocket(0,tftpServer);
-        replySocket.setBroadcast(true);
+        if(interfaceToListen==null) {
+            replySocket = server;
+        } else {
+            replySocket = new DatagramSocket(0,tftpServer);
+            replySocket.setBroadcast(true);
+        }
 
         LOGGER.info("TFTP server: "+tftpServer.getHostAddress());
         LOGGER.info("Boot file: "+bootFileName);
