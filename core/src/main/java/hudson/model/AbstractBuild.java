@@ -126,6 +126,19 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
      */
     protected transient List<Environment> buildEnvironments;
 
+    /**
+     * If the build is in progress, remember {@link AbstractRunner} that's running it.
+     * This is not persisted.
+     */
+    private volatile transient AbstractRunner runner;
+
+    /**
+     * Pointer to the next younger build in progress. This data structure is lazily updated,
+     * so it may point to the build that's already completed. This pointer is set to 'this'
+     * if the computation determines that everything earlier than this build is already completed.
+     */
+    private volatile transient R previousBuildInProgress;
+
     protected AbstractBuild(P job) throws IOException {
         super(job);
     }
@@ -136,10 +149,55 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
 
     protected AbstractBuild(P project, File buildDir) throws IOException {
         super(project, buildDir);
+        previousBuildInProgress = _this();
     }
 
     public final P getProject() {
         return getParent();
+    }
+
+    /**
+     * Obtains 'this' in a more type safe signature.
+     */
+    @SuppressWarnings({"unchecked"})
+    private R _this() {
+        return (R)this;
+    }
+
+    /**
+     * Obtains the next younger build in progress. It uses a skip-pointer so that we can
+     */
+    public final R getPreviousBuildInProgress() {
+        if(previousBuildInProgress==this)   return null;    // the most common case
+
+        List<R> fixUp = new ArrayList<R>();
+        R r = _this();
+        while(true) {
+            R n = r.previousBuildInProgress;
+            if (n==null) {// no field computed yet.
+                n=r.getPreviousBuild();
+                fixUp.add(r);
+            }
+
+            if (r==n) {
+                // everything is completed
+                r = null;
+                break;
+            }
+            if (n.isBuilding()) {
+                // we found the answer
+                r = n;
+                break;
+            }
+
+            fixUp.add(r);   // r contains the stale 'previousBuildInProgress' back pointer
+            r = n;
+        }
+
+        // fix up so that the next look up will run faster
+        for (R f : fixUp)
+            f.previousBuildInProgress = r==null ? f : r;
+        return r;
     }
 
     /**
@@ -227,12 +285,15 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
         if(culprits==null) {
             Set<User> r = new HashSet<User>();
             R p = getPreviousBuild();
-            if(p !=null && isBuilding() && p.getResult().isWorseThan(Result.UNSTABLE)) {
-                // we are still building, so this is just the current latest information,
-                // but we seems to be failing so far, so inherit culprits from the previous build.
-                // isBuilding() check is to avoid recursion when loading data from old Hudson, which doesn't record
-                // this information
-                r.addAll(p.getCulprits());
+            if(p !=null && isBuilding()) {
+                Result pr = p.getResult();
+                if(pr!=null && pr.isWorseThan(Result.UNSTABLE)) {
+                    // we are still building, so this is just the current latest information,
+                    // but we seems to be failing so far, so inherit culprits from the previous build.
+                    // isBuilding() check is to avoid recursion when loading data from old Hudson, which doesn't record
+                    // this information
+                    r.addAll(p.getCulprits());
+                }
             }
             for( Entry e : getChangeSet() )
                 r.add(e.getAuthor());
@@ -281,6 +342,35 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
      */
     private static final Object lockForDecidingWorkspace = new Object();
 
+    private static final ThreadLocal<AbstractBuild.AbstractRunner> RUNNERS = new ThreadLocal<AbstractBuild.AbstractRunner>();
+
+    /**
+     * @see CheckPoint#reportCheckpoint(Object)
+     */
+    /*package*/ static void reportCheckpoint(Object id) {
+        RUNNERS.get().checkpoints.report(id);
+    }
+
+    /**
+     * @see CheckPoint#waitForCheckpoint(Object)  
+     */
+    /*package*/ synchronized static void waitForCheckpoint(Object id) throws InterruptedException {
+        while(true) {
+            AbstractBuild b = RUNNERS.get().getBuild().getPreviousBuildInProgress();
+            if(b==null)     return; // no pending earlier build
+            AbstractBuild.AbstractRunner runner = b.runner;
+            if(runner==null) {
+                // polled at the wrong moment. try again.
+                Thread.sleep(0);
+                continue;
+            }
+            if(runner.checkpoints.waitForCheckPoint(id))
+                return; // confirmed that the previous build reached the check point
+
+            // the previous build finished without ever reaching the check point. try again. 
+        }
+    }
+
     protected abstract class AbstractRunner implements Runner {
         /**
          * Since configuration can be changed while a build is in progress,
@@ -288,11 +378,36 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
          */
         protected Launcher launcher;
 
+        private final class CheckpointSet {
+            /**
+             * Stages of the builds that this runner has completed. This is used for concurrent {@link Runner}s to
+             * coordinate and serialize their executions where necessary.
+             */
+            private final Set<Object> checkpoints = new HashSet<Object>();
+
+            protected synchronized void report(Object identifier) {
+                checkpoints.add(identifier);
+                notifyAll();
+            }
+
+            protected synchronized boolean waitForCheckPoint(Object identifier) throws InterruptedException {
+                while(isBuilding() && !checkpoints.contains(identifier))
+                    wait();
+                return checkpoints.contains(identifier);
+            }
+        }
+
+        private final CheckpointSet checkpoints = new CheckpointSet();
+        
         /**
          * Returns the current {@link Node} on which we are buildling.
          */
         protected final Node getCurrentNode() {
             return Executor.currentExecutor().getOwner().getNode();
+        }
+
+        protected R getBuild() {
+            return _this();
         }
 
         /**
@@ -319,6 +434,21 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
         }
 
         public Result run(BuildListener listener) throws Exception {
+            runner = this;
+            RUNNERS.set(this);
+            try {
+                return _run(listener);
+            } finally {
+                RUNNERS.set(null);
+                runner = null;
+                // signal that we've finished building.
+                synchronized (checkpoints) {
+                    checkpoints.notifyAll();
+                }
+            }
+        }
+
+        protected Result _run(BuildListener listener) throws Exception {
             Node node = getCurrentNode();
             assert builtOn==null;
             builtOn = node.getNodeName();

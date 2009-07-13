@@ -37,6 +37,8 @@ import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.BuildListener;
 import hudson.model.Result;
+import static hudson.model.CheckPoint.reportCheckpoint;
+import static hudson.model.CheckPoint.waitForCheckpoint;
 import hudson.remoting.VirtualChannel;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Publisher;
@@ -79,7 +81,7 @@ public class JUnitResultArchiver extends Recorder implements Serializable, Matri
             final long buildTime = build.getTimestamp().getTimeInMillis();
             final long nowMaster = System.currentTimeMillis();
 
-            TestResult result = build.getProject().getWorkspace().act(new FileCallable<TestResult>() {
+            TestResult result = build.getWorkspace().act(new FileCallable<TestResult>() {
                 public TestResult invoke(File ws, VirtualChannel channel) throws IOException {
                     final long nowSlave = System.currentTimeMillis();
 
@@ -96,6 +98,7 @@ public class JUnitResultArchiver extends Recorder implements Serializable, Matri
                 }
             });
 
+            waitForCheckpoint(getClass());
             action = new TestResultAction(build, result, listener);
             if(result.getPassCount()==0 && result.getFailCount()==0)
                 throw new AbortException(Messages.JUnitResultArchiver_ResultIsEmpty());
@@ -114,8 +117,8 @@ public class JUnitResultArchiver extends Recorder implements Serializable, Matri
             return true;
         }
 
-
         build.getActions().add(action);
+        reportCheckpoint(getClass());
 
         if(action.getResult().getFailCount()>0)
             build.setResult(Result.UNSTABLE);
