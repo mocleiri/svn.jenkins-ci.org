@@ -74,7 +74,7 @@ public abstract class FieldFilter implements Filter{
     }
     
     public boolean accept(String value) {
-
+        
         switch (type) {
         case Equals:
             return value.equals(patternText);

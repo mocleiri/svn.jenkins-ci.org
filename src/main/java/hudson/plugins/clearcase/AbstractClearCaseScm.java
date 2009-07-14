@@ -53,6 +53,7 @@ import hudson.util.VariableResolver;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Pattern;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -185,7 +186,7 @@ public abstract class AbstractClearCaseScm extends SCM {
 	 */
     public String[] getViewPaths(FilePath viewPath)
         throws IOException, InterruptedException {
-        String[] rules = loadRules.split("[\\r\\n]+");
+        String[] rules = getLoadRules().split("[\\r\\n]+");
         for (int i = 0; i < rules.length; i++) {
             String rule = rules[i];
             // Remove "\\", "\" or "/" from the load rule. (bug#1706) Only if
@@ -501,9 +502,11 @@ public abstract class AbstractClearCaseScm extends SCM {
                 }
             }
         }
-        
+
+        // Note - the logic here to do ORing to match against *any* of the load rules is, quite frankly,
+        // hackishly ugly. I'm embarassed by it. But it's what I've got for right now.
         String loadRules = getLoadRules();
-        
+        String tempFilterRules = "";
         if (loadRules != null) {
             for (String loadRule : loadRules.split("[\\r\\n]+")) {
                 if (!loadRule.equals("")) {
@@ -511,10 +514,11 @@ public abstract class AbstractClearCaseScm extends SCM {
                     if (!(loadRule.startsWith("\\")) && !(loadRule.startsWith("/"))) {
                         loadRule = PathUtil.fileSepForOS(ctLauncher.getLauncher().isUnix()) + loadRule;
                     }
-                    
-                    filters.add(new FileFilter(FileFilter.Type.StartsWith, loadRule));
+                    tempFilterRules += Pattern.quote(loadRule) + "\n";
                 }
             }
+            filters.add(new FileFilter(FileFilter.Type.ContainsRegxp, "^(" + tempFilterRules.trim().replaceAll("\\n", "|") + ")"));
+            
         }
         
 	if (isFilteringOutDestroySubBranchEvent()) {
