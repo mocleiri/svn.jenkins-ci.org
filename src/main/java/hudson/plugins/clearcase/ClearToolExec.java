@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -65,34 +66,34 @@ public abstract class ClearToolExec implements ClearTool {
 	public Reader lshistory(String format, Date lastBuildDate, String viewName,
 			String branch, String[] viewPaths) throws IOException,
 			InterruptedException {
-            SimpleDateFormat formatter = new SimpleDateFormat("d-MMM-yy.HH:mm:ss'UTC'Z");
+            SimpleDateFormat formatter = new SimpleDateFormat("d-MMM-yy.HH:mm:ss'UTC'Z", Locale.US);
             formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
             
-		ArgumentListBuilder cmd = new ArgumentListBuilder();
-		cmd.add("lshistory");
-		cmd.add("-r");
-		cmd.add("-since", formatter.format(lastBuildDate).toLowerCase());
-		cmd.add("-fmt");
-		cmd.addQuoted(format);
-		if ((branch != null) && (branch.length() > 0)) {
-			cmd.add("-branch", "brtype:" + branch);
-		}
-		cmd.add("-nco");
-
-		FilePath viewPath = getRootViewPath(launcher).child(viewName);
-
-		for (String path : viewPaths) { 
-			cmd.add(path.replace("\n","").replace("\r", ""));
-		}
-		Reader returnReader = null;
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		if (launcher.run(cmd.toCommandArray(), null, baos, viewPath)) {
-			returnReader = new InputStreamReader(new ByteArrayInputStream(baos
-					.toByteArray()));
-		}
-		baos.close();
-
-		return returnReader;
+            ArgumentListBuilder cmd = new ArgumentListBuilder();
+            cmd.add("lshistory");
+            cmd.add("-all");
+            cmd.add("-since", formatter.format(lastBuildDate).toLowerCase());
+            cmd.add("-fmt", format);
+            //		cmd.addQuoted(format);
+            if ((branch != null) && (branch.length() > 0)) {
+                cmd.add("-branch", "brtype:" + branch);
+            }
+            cmd.add("-nco");
+            
+            FilePath viewPath = getRootViewPath(launcher).child(viewName);
+            
+            for (String path : viewPaths) { 
+                cmd.add(path.replace("\n","").replace("\r", ""));
+            }
+            Reader returnReader = null;
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            if (launcher.run(cmd.toCommandArray(), null, baos, viewPath)) {
+                returnReader = new InputStreamReader(new ByteArrayInputStream(baos
+                                                                              .toByteArray()));
+            }
+            baos.close();
+            
+            return returnReader;
 	}
 
 	public Reader lsactivity(String activity, String commandFormat,
@@ -146,7 +147,32 @@ public abstract class ClearToolExec implements ClearTool {
 		}
 		return new ArrayList<String>();
 	}
+    
+    public String pwv(String viewName) throws IOException, InterruptedException {
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
+        cmd.add("pwv");
+        cmd.add("-root");
 
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        String retString = "";
+
+        // changed the path from workspace to getRootViewPath to make Dynamic UCM work
+        FilePath viewPath = getRootViewPath(launcher).child(viewName);
+        
+        if (launcher.run(cmd.toCommandArray(), null, baos, viewPath)) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                                                                             new ByteArrayInputStream(baos.toByteArray())));
+            retString = reader.readLine();
+            
+            reader.close();
+        }
+        
+        baos.close();
+
+        return retString;
+    }
+
+        
 	public String catcs(String viewName) throws IOException,
 			InterruptedException {
 		ArgumentListBuilder cmd = new ArgumentListBuilder();
@@ -173,36 +199,38 @@ public abstract class ClearToolExec implements ClearTool {
 		baos.close();
 		return retString;
 	}
+    
+ 
 
-	private List<String> parseListOutput(Reader consoleReader,
-			boolean onlyStarMarked) throws IOException {
-		List<String> views = new ArrayList<String>();
-		BufferedReader reader = new BufferedReader(consoleReader);
-		String line = reader.readLine();
-		while (line != null) {
-			Matcher matcher = viewListPattern.matcher(line);
-			if (matcher.find() && matcher.groupCount() == 3) {
-				if ((!onlyStarMarked)
-						|| (onlyStarMarked && matcher.group(1).equals("*"))) {
-					String vob = matcher.group(2);
-					int pos = Math.max(vob.lastIndexOf('\\'), vob
-							.lastIndexOf('/'));
-					if (pos != -1) {
-						vob = vob.substring(pos + 1);
-					}
-					views.add(vob);
-				}
-			}
-			line = reader.readLine();
-		}
-		reader.close();
-		return views;
-	}
-
-	private Pattern getListPattern() {
-		if (viewListPattern == null) {
-			viewListPattern = Pattern.compile("(.)\\s*(\\S*)\\s*(\\S*)");
-		}
-		return viewListPattern;
-	}
+    private List<String> parseListOutput(Reader consoleReader,
+                                         boolean onlyStarMarked) throws IOException {
+        List<String> views = new ArrayList<String>();
+        BufferedReader reader = new BufferedReader(consoleReader);
+        String line = reader.readLine();
+        while (line != null) {
+            Matcher matcher = viewListPattern.matcher(line);
+            if (matcher.find() && matcher.groupCount() == 3) {
+                if ((!onlyStarMarked)
+                    || (onlyStarMarked && matcher.group(1).equals("*"))) {
+                    String vob = matcher.group(2);
+                    int pos = Math.max(vob.lastIndexOf('\\'), vob
+                                       .lastIndexOf('/'));
+                    if (pos != -1) {
+                        vob = vob.substring(pos + 1);
+                    }
+                    views.add(vob);
+                }
+            }
+            line = reader.readLine();
+        }
+        reader.close();
+        return views;
+    }
+    
+    private Pattern getListPattern() {
+        if (viewListPattern == null) {
+            viewListPattern = Pattern.compile("(.)\\s*(\\S*)\\s*(\\S*)");
+        }
+        return viewListPattern;
+    }
 }

@@ -54,6 +54,14 @@ public interface ClearTool {
     void rmview(String viewName) throws IOException, InterruptedException;
 
     /**
+     * Removes the view tag from the ClearCase registry - used when the view storage in 
+     *   the workspace has already been deleted.
+     * 
+     * @param viewName the name of the view
+     */
+    void rmviewtag(String viewName) throws IOException, InterruptedException;
+
+    /**
      * Creates and registers a view
      * 
      * @param launcher launcher for launching the command
@@ -118,6 +126,14 @@ public interface ClearTool {
      */
     List<String> lsvob(boolean onlyMOunted) throws IOException, InterruptedException;
 
+    /**
+     * Retrieves the canonical working directory for a given view.
+     *
+     * @param viewName the view to use
+     * @return the return from "cleartool pwv"
+     */
+    String pwv(String viewName) throws IOException, InterruptedException;
+     
     /**
      * Retrives the config spec for the specified viewname
      * @param viewName the name of the view

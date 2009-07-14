@@ -116,8 +116,9 @@ public abstract class AbstractHistoryAction implements HistoryAction {
                 currentEntry = parseEventLine(matcher,line);
 
                 String fileName = currentEntry.getElement();
+                // Trim the extended view path
                 if (extendedViewPath != null) {
-                    if (fileName.toLowerCase().startsWith(extendedViewPath)) {
+                    if (fileName.startsWith(extendedViewPath)) {
                         fileName = fileName.substring(extendedViewPath.length());
                         currentEntry.setElement(fileName);
                     }

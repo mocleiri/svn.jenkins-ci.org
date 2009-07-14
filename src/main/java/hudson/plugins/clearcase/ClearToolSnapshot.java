@@ -59,7 +59,7 @@ public class ClearToolSnapshot extends ClearToolExec {
         FilePath workspace = launcher.getWorkspace();
         FilePath configSpecFile = workspace.createTextTempFile("configspec", ".txt", configSpec);
         String csLocation = ".." + File.separatorChar + configSpecFile.getName();
-        csLocation = PathUtil.convertPathsBetweenUnixAndWindows(csLocation, launcher.getLauncher());
+        csLocation = PathUtil.convertPathForOS(csLocation, launcher.getLauncher());
 	
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("setcs");
@@ -132,11 +132,39 @@ public class ClearToolSnapshot extends ClearToolExec {
         } else {
             cmd.add("-add_loadrules");
             String loadRulesLocation = viewName + File.separator + loadRules;
-			cmd.add(PathUtil.convertPathsBetweenUnixAndWindows(loadRulesLocation, getLauncher().getLauncher()));
+			cmd.add(PathUtil.convertPathForOS(loadRulesLocation, getLauncher().getLauncher()));
         }
         launcher.run(cmd.toCommandArray(), null, null, null);
     }
 
+
+    public void rmviewtag(String viewName) throws IOException, InterruptedException {
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
+        cmd.add("rmtag");
+        cmd.add("-view");
+        cmd.add(viewName);
+        
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+        launcher.run(cmd.toCommandArray(), null, baos, null);
+        BufferedReader reader = new BufferedReader( new InputStreamReader(new ByteArrayInputStream(baos.toByteArray())));
+        baos.close();
+        String line = reader.readLine();
+        StringBuilder builder = new StringBuilder();
+        while (line != null) {
+            if (builder.length() > 0) {
+                builder.append("\n");
+            }
+            builder.append(line);
+            line = reader.readLine();
+        }
+        reader.close();
+        
+        if (builder.toString().contains("cleartool: Error")) {
+        	throw new IOException("Failed to remove view tag: " + builder.toString());
+        }
+       
+    }
+ 
     @Override
     protected FilePath getRootViewPath(ClearToolLauncher launcher) {
         return launcher.getWorkspace();

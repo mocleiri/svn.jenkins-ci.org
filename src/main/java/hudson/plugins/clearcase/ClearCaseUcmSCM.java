@@ -50,6 +50,9 @@ import hudson.scm.SCMDescriptor;
 import hudson.util.VariableResolver;
 
 import java.io.IOException;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import java.util.List;
 import net.sf.json.JSONObject;
@@ -64,41 +67,27 @@ import org.kohsuke.stapler.StaplerRequest;
 public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 
 	private final String stream;
-	private final String loadRules;
-	private boolean useDynamicView;
-	private String viewDrive;
 
 	@DataBoundConstructor
 	public ClearCaseUcmSCM(String stream, String loadrules, String viewname,
 			boolean usedynamicview, String viewdrive,
 			String mkviewoptionalparam, boolean filterOutDestroySubBranchEvent,
-                               boolean useUpdate, boolean removeViewOnRename,
+                               boolean useUpdate, boolean rmviewonrename,
                                String excludedRegions) {
 		super(viewname, mkviewoptionalparam, filterOutDestroySubBranchEvent,
-                      useUpdate, removeViewOnRename, excludedRegions);
+                      useUpdate, rmviewonrename, excludedRegions, usedynamicview, 
+                      viewdrive, loadrules);
 		this.stream = shortenStreamName(stream);
-		this.loadRules = loadrules;
-		this.useDynamicView = usedynamicview;
-		this.viewDrive = viewdrive;
 
 	}
 
 	public ClearCaseUcmSCM(String stream, String loadrules, String viewname,
 			boolean usedynamicview, String viewdrive,
 			String mkviewoptionalparam, boolean filterOutDestroySubBranchEvent,
-                               boolean useUpdate, boolean removeViewOnRename) {
+                               boolean useUpdate, boolean rmviewonrename) {
             this(stream, loadrules, viewname, usedynamicview, viewdrive, mkviewoptionalparam,
-                 filterOutDestroySubBranchEvent, useUpdate, removeViewOnRename, "");
+                 filterOutDestroySubBranchEvent, useUpdate, rmviewonrename, "");
         }
-
-	/**
-	 * Return the load rules for the UCM view.
-	 * 
-	 * @return string containing the load rules.
-	 */
-	public String getLoadRules() {
-		return loadRules;
-	}
 
 	/**
 	 * Return the stream that is used to create the UCM view.
@@ -107,14 +96,6 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 	 */
 	public String getStream() {
 		return stream;
-	}
-
-	public boolean isUseDynamicView() {
-		return useDynamicView;
-	}
-
-	public String getViewDrive() {
-		return viewDrive;
 	}
 
 	@Override
@@ -136,29 +117,12 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 		return new String[] { branch };
 	}
 
-	@Override
-	public String[] getViewPaths(FilePath viewPath) throws IOException,
-			InterruptedException {
-		String[] rules = loadRules.split("\n");
-		for (int i = 0; i < rules.length; i++) {
-			String rule = rules[i];
-			// Remove "\\", "\" or "/" from the load rule. (bug#1706) Only if
-			// the view is not dynamic
-			// the user normally enters a load rule beginning with those chars
-			while (!useDynamicView
-					&& (rule.startsWith("\\") || rule.startsWith("/"))) {
-				rule = rule.substring(1);
-			}
-			rules[i] = rule;
-		}
-		return rules;
-	}
 
 	@Override
 	protected CheckOutAction createCheckOutAction(
 			VariableResolver variableResolver, ClearToolLauncher launcher) {
 		CheckOutAction action;
-		if (useDynamicView) {
+		if (isUseDynamicView()) {
 			action = new UcmDynamicCheckoutAction(createClearTool(
 					variableResolver, launcher), getStream());
 		} else {
@@ -178,22 +142,21 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 
     @Override
     protected HistoryAction createHistoryAction(VariableResolver variableResolver, ClearToolLauncher launcher) {
-		UcmHistoryAction action = new UcmHistoryAction(createClearTool(variableResolver, launcher),configureFilters());
-
-        if (useDynamicView) {
-			String extendedViewPath = viewDrive;
-			if (!(viewDrive.endsWith("\\") && viewDrive.endsWith("/"))) {
-				// Need to deteremine what kind of char to add in between
-				if (viewDrive.contains("/")) {
-					extendedViewPath += "/";
-				} else {
-					extendedViewPath += "\\";
-				}
-			}
-			extendedViewPath += getViewName();
-			action.setExtendedViewPath(extendedViewPath);
-		}
-		return action;
+        ClearTool ct = createClearTool(variableResolver, launcher);
+        UcmHistoryAction action = new UcmHistoryAction(ct,configureFilters(launcher));
+        
+        try {
+            String pwv = ct.pwv(getViewName());
+            if (pwv != null) {
+                action.setExtendedViewPath(pwv);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(ClearCaseUcmSCM.class.getName()).log(Level.WARNING,
+                                                                  "Exception when running 'cleartool pwv'",
+                                                                  e);
+        } 
+        
+        return action;
     }
     
 //	@Override
@@ -229,12 +192,12 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 
 	protected ClearTool createClearTool(VariableResolver variableResolver,
 			ClearToolLauncher launcher) {
-		if (useDynamicView) {
-			return new ClearToolDynamicUCM(variableResolver, launcher,
-					viewDrive);
-		} else {
-			return super.createClearTool(variableResolver, launcher);
-		}
+            if (isUseDynamicView()) {
+                return new ClearToolDynamicUCM(variableResolver, launcher,
+                                               getViewDrive());
+            } else {
+                return super.createClearTool(variableResolver, launcher);
+            }
 	}
 
 	private String shortenStreamName(String longStream) {
@@ -278,7 +241,7 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 					req.getParameter("ucm.mkviewoptionalparam"),
 					req.getParameter("ucm.filterOutDestroySubBranchEvent") != null,
 					req.getParameter("ucm.useupdate") != null,
-					req.getParameter("ucm.removeViewOnRename") != null,
+					req.getParameter("ucm.rmviewonrename") != null,
                                         req.getParameter("ucm.excludedRegions")
                                                                   );
 			return scm;

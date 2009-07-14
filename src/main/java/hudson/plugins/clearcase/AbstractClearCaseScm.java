@@ -33,7 +33,9 @@ import hudson.model.BuildListener;
 import hudson.model.Hudson;
 import hudson.model.Item;
 import hudson.model.Run;
+import hudson.model.Node;
 import hudson.model.TaskListener;
+import hudson.model.Node;
 import hudson.model.listeners.ItemListener;
 import hudson.plugins.clearcase.action.CheckOutAction;
 import hudson.plugins.clearcase.action.SaveChangeLogAction;
@@ -43,6 +45,7 @@ import hudson.plugins.clearcase.history.Filter;
 import hudson.plugins.clearcase.history.FileFilter;
 import hudson.plugins.clearcase.history.HistoryAction;
 import hudson.plugins.clearcase.util.BuildVariableResolver;
+import hudson.plugins.clearcase.util.PathUtil;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.SCM;
 import hudson.util.StreamTaskListener;
@@ -56,8 +59,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 /**
  * Abstract class for ClearCase SCM. The class contains the logic around
@@ -76,7 +77,10 @@ public abstract class AbstractClearCaseScm extends SCM {
     private final boolean useUpdate;
     private final boolean removeViewOnRename;
     private String excludedRegions;
-    
+    private final String loadRules;
+    private final boolean useDynamicView;
+    private final String viewDrive;
+
     protected void setNormalizedViewName(String normalizedViewName) {
         this.normalizedViewName = normalizedViewName;
     }
@@ -89,14 +93,20 @@ public abstract class AbstractClearCaseScm extends SCM {
                                 final String mkviewOptionalParam,
                                 final boolean filterOutDestroySubBranchEvent,
                                 final boolean useUpdate, 
-                                final boolean removeViewOnRename,
-                                final String excludedRegions) {
+                                final boolean rmviewonrename,
+                                final String excludedRegions,
+                                final boolean useDynamicView,
+                                final String viewDrive,
+                                final String loadRules) {
         this.viewName = viewName;
         this.mkviewOptionalParam = mkviewOptionalParam;
         this.filteringOutDestroySubBranchEvent = filterOutDestroySubBranchEvent;
         this.useUpdate = useUpdate;
-        this.removeViewOnRename = removeViewOnRename;
+        this.removeViewOnRename = rmviewonrename;
         this.excludedRegions = excludedRegions;
+        this.useDynamicView = useDynamicView;
+        this.viewDrive = viewDrive;
+        this.loadRules = loadRules;
         createAndRegisterListener();
     }
     
@@ -173,8 +183,33 @@ public abstract class AbstractClearCaseScm extends SCM {
 	 *            the file path for the view
 	 * @return string array that will be used by the lshistory command
 	 */
-	public abstract String[] getViewPaths(FilePath viewPath)
-			throws IOException, InterruptedException;
+    public String[] getViewPaths(FilePath viewPath)
+        throws IOException, InterruptedException {
+        String[] rules = loadRules.split("[\\r\\n]+");
+        for (int i = 0; i < rules.length; i++) {
+            String rule = rules[i];
+            // Remove "\\", "\" or "/" from the load rule. (bug#1706) Only if
+            // the view is not dynamic
+            // the user normally enters a load rule beginning with those chars
+            while (rule.startsWith("\\") || rule.startsWith("/")) {
+                rule = rule.substring(1);
+            }
+            rules[i] = rule;
+        }
+        return rules;
+    }
+
+	public boolean isUseDynamicView() {
+		return useDynamicView;
+	}
+
+	public String getViewDrive() {
+		return viewDrive;
+	}
+
+    public String getLoadRules() {
+        return loadRules;
+    }
 
 	@Override
 	public boolean supportsPolling() {
@@ -188,12 +223,17 @@ public abstract class AbstractClearCaseScm extends SCM {
 
 	@Override
 	public FilePath getModuleRoot(FilePath workspace) {
-		if (getNormalizedViewName() == null) {
-			return super.getModuleRoot(workspace);
+            if (useDynamicView) {
+                return new FilePath(workspace.getChannel(), viewDrive + File.separator + getNormalizedViewName());
+            }
+            else {
+                if (getNormalizedViewName() == null) {
+                    return super.getModuleRoot(workspace);
 		} else {
-			return workspace.child(getNormalizedViewName());
+                    return workspace.child(getNormalizedViewName());
 		}
-	}
+            }
+        }
 
 	public String getViewName() {
 		if (viewName == null) {
@@ -210,15 +250,13 @@ public abstract class AbstractClearCaseScm extends SCM {
 	 * trying to find an unique view name. It will also replace invalid chars
 	 * from a view name.
 	 * 
-	 * @param project
+	 * @param build
 	 *            the project to get the name from
 	 * @return a string containing no invalid chars.
 	 */
 	public String generateNormalizedViewName(AbstractBuild<?, ?> build,
 			Launcher launcher) {
-		String generatedNormalizedViewName = viewName;
-
-		generatedNormalizedViewName = Util.replaceMacro(viewName,
+		String generatedNormalizedViewName = Util.replaceMacro(viewName,
 				new BuildVariableResolver(build, launcher));
 
 		generatedNormalizedViewName = generatedNormalizedViewName.replaceAll(
@@ -365,9 +403,6 @@ public abstract class AbstractClearCaseScm extends SCM {
 	 * Register listeners for Hudson events. At the moment we listen to
 	 * onDeleted and try to remove the ClearCase view that was created for this
 	 * job.
-	 * 
-	 * @param viewName
-	 *            the name of the view
 	 */
 	protected void createAndRegisterListener() {
 		Hudson hudson = Hudson.getInstance();
@@ -401,9 +436,9 @@ public abstract class AbstractClearCaseScm extends SCM {
 										project.getWorkspace().getParent()
 												.getParent(), launcher));
 						try {
-							ct
-									.rmview(generateNormalizedViewName(null,
-											launcher));
+                                                    ct
+                                                        .rmviewtag(generateNormalizedViewName(null,
+                                                                                                  launcher));
 						} catch (Exception e) {
 							Logger.getLogger(
 									AbstractClearCaseScm.class.getName()).log(
@@ -416,10 +451,33 @@ public abstract class AbstractClearCaseScm extends SCM {
 		});
 	}
 
+    @Override
+    public boolean processWorkspaceBeforeDeletion(AbstractProject<?,?> project, FilePath workspace, Node node) throws IOException, InterruptedException {
+        StreamTaskListener listener = new StreamTaskListener(System.out);
+        Launcher launcher = Hudson.getInstance().createLauncher(listener);
+        ClearTool ct = createClearTool(null, createClearToolLauncher(listener,
+                                                                     project.getWorkspace().getParent()
+                                                                     .getParent(), launcher));
+        try {
+            ct.rmview(generateNormalizedViewName(null,
+                                                 launcher));
+        } catch (Exception e) {
+            Logger.getLogger(
+                             AbstractClearCaseScm.class.getName()).log(
+                                                                  Level.WARNING,
+                                                                  "Failed to remove ClearCase view", e);
+        }
+        return true;
+        
+    }
+
 	public boolean isUseUpdate() {
 		return useUpdate;
 	}
 
+    public boolean isRemoveViewOnRename() {
+        return removeViewOnRename;
+    }
 
 	 public String getExcludedRegions() {
 		  return excludedRegions;
@@ -430,7 +488,7 @@ public abstract class AbstractClearCaseScm extends SCM {
 	 }
 
     
-    protected List<Filter> configureFilters() {
+    protected List<Filter> configureFilters(ClearToolLauncher ctLauncher) {
         List<Filter> filters = new ArrayList<Filter>();
         filters.add(new DefaultFilter());
         
@@ -438,10 +496,27 @@ public abstract class AbstractClearCaseScm extends SCM {
         
         if (excludedStrings != null && excludedStrings.length > 0) {
             for (String s : excludedStrings) {
-                filters.add(new FileFilter(FileFilter.Type.DoesNotContainRegxp, s));
+                if (!s.equals("")) {
+                    filters.add(new FileFilter(FileFilter.Type.DoesNotContainRegxp, s));
+                }
             }
         }
-                                           
+        
+        String loadRules = getLoadRules();
+        
+        if (loadRules != null) {
+            for (String loadRule : loadRules.split("[\\r\\n]+")) {
+                if (!loadRule.equals("")) {
+                    // Make sure the load rule starts with \ or /, as appropriate
+                    if (!(loadRule.startsWith("\\")) && !(loadRule.startsWith("/"))) {
+                        loadRule = PathUtil.fileSepForOS(ctLauncher.getLauncher().isUnix()) + loadRule;
+                    }
+                    
+                    filters.add(new FileFilter(FileFilter.Type.StartsWith, loadRule));
+                }
+            }
+        }
+        
 	if (isFilteringOutDestroySubBranchEvent()) {
             filters.add(new DestroySubBranchFilter());
         }

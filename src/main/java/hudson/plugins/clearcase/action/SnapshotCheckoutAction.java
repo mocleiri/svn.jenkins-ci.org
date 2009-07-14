@@ -34,32 +34,34 @@ import hudson.plugins.clearcase.util.PathUtil;
 /**
  * Check out action that will check out files into a snapshot view.
  */
-public class SnapshotCheckoutAction implements CheckOutAction {
+public class SnapshotCheckoutAction extends AbstractCheckoutAction {
 
     private final String configSpec;
     private final boolean useUpdate;
     private final ClearTool cleartool;
+    private final String loadRules;
 
-    public SnapshotCheckoutAction(ClearTool clearTool, String configSpec, boolean useUpdate) {
+    public SnapshotCheckoutAction(ClearTool clearTool, String configSpec, String loadRules, boolean useUpdate) {
         this.cleartool = clearTool;
         this.configSpec = configSpec;
+        this.loadRules = loadRules;
         this.useUpdate = useUpdate;        
     }
 
-    public boolean checkout(Launcher launcher, FilePath workspace, String viewName) throws IOException, InterruptedException {
+   public boolean checkout(Launcher launcher, FilePath workspace, String viewName) throws IOException, InterruptedException {
 
         boolean updateView = useUpdate;        
         boolean localViewPathExists = new FilePath(workspace, viewName).exists();
-        String tempConfigSpec = PathUtil.convertPathsBetweenUnixAndWindows(configSpec, launcher);
+        String jobConfigSpec = PathUtil.convertPathForOS(configSpec, launcher);
             
         if (localViewPathExists) {
             if (updateView) {
-                String currentConfigSpec = cleartool.catcs(viewName).trim();
-                if (!tempConfigSpec.trim().replaceAll("\r\n", "\n").equals(currentConfigSpec)) {
+                String currentConfigSpec = getLoadRuleFreeConfigSpec(cleartool.catcs(viewName).trim());
+                if (!jobConfigSpec.trim().replaceAll("\r\n", "\n").equals(currentConfigSpec)) {
                     updateView = false;
                 }
             }
-            if (!updateView) {
+            else {
                 cleartool.rmview(viewName);
                 localViewPathExists = false;
             }                
@@ -67,13 +69,26 @@ public class SnapshotCheckoutAction implements CheckOutAction {
 
         if (!localViewPathExists) {
             cleartool.mkview(viewName, null);
-            cleartool.setcs(viewName, tempConfigSpec);
             updateView = false;
         }
-
+        
         if (updateView) {
             cleartool.update(viewName, null);
         }
+        else {
+            String newConfigSpec = jobConfigSpec + "\n";
+            for (String loadRule : loadRules.split("[\\r\\n]+")) {
+                // Make sure the load rule starts with \ or /, as appropriate
+                if (!(loadRule.startsWith("\\")) && !(loadRule.startsWith("/"))) {
+                    loadRule = PathUtil.fileSepForOS(launcher.isUnix()) + loadRule;
+                }
+                
+                newConfigSpec += "load " + loadRule.trim() + "\n";
+            }
+            newConfigSpec = PathUtil.convertPathForOS(newConfigSpec, launcher);
+            cleartool.setcs(viewName, PathUtil.convertPathForOS(newConfigSpec, launcher));
+        }
+
         return true;
     }
 
