@@ -52,7 +52,7 @@ public final class CheckPoint {
      *      Identifies are compared by their equality.
      */
     public static void reportCheckpoint(Object id) {
-        AbstractBuild.reportCheckpoint(id);
+        Run.reportCheckpoint(id);
     }
 
     /**
@@ -85,6 +85,6 @@ public final class CheckPoint {
      *      If the build (represented by the calling executor thread) is aborted while it's waiting.  
      */
     public static void waitForCheckpoint(Object id) throws InterruptedException {
-        AbstractBuild.waitForCheckpoint(id);
+        Run.waitForCheckpoint(id);
     }
 }

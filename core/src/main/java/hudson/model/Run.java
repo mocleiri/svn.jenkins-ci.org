@@ -76,6 +76,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
@@ -123,10 +125,18 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      * These two fields are maintained and updated by {@link RunMap}.
      */
     protected volatile transient RunT previousBuild;
+
     /**
      * Next build. Can be null.
      */
     protected volatile transient RunT nextBuild;
+
+    /**
+     * Pointer to the next younger build in progress. This data structure is lazily updated,
+     * so it may point to the build that's already completed. This pointer is set to 'this'
+     * if the computation determines that everything earlier than this build is already completed.
+     */
+    private volatile transient RunT previousBuildInProgress;
 
     /**
      * When the build is scheduled.
@@ -189,6 +199,12 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      */
     private boolean keepLog;
 
+    /**
+     * If the build is in progress, remember {@link Runner} that's running it.
+     * This field is not persisted.
+     */
+    private volatile transient Runner runner;
+
     protected static final ThreadLocal<SimpleDateFormat> ID_FORMATTER =
             new ThreadLocal<SimpleDateFormat>() {
                 @Override
@@ -224,6 +240,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      */
     protected Run(JobT project, File buildDir) throws IOException {
         this(project, parseTimestampFromBuildDir(buildDir));
+        this.previousBuildInProgress = _this(); // loaded builds are always completed
         this.state = State.COMPLETED;
         this.result = Result.FAILURE;  // defensive measure. value should be overwritten by unmarshal, but just in case the saved data is inconsistent
         getDataFile().unmarshal(this); // load the rest of the data
@@ -237,6 +254,14 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         } catch (NumberFormatException e) {
             throw new IOException2("Invalid directory name "+buildDir,e);
         }
+    }
+
+    /**
+     * Obtains 'this' in a more type safe signature.
+     */
+    @SuppressWarnings({"unchecked"})
+    private RunT _this() {
+        return (RunT)this;
     }
 
     /**
@@ -519,6 +544,42 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
 
     public RunT getPreviousBuild() {
         return previousBuild;
+    }
+
+    /**
+     * Obtains the next younger build in progress. It uses a skip-pointer so that we can
+     */
+    public final RunT getPreviousBuildInProgress() {
+        if(previousBuildInProgress==this)   return null;    // the most common case
+
+        List<RunT> fixUp = new ArrayList<RunT>();
+        RunT r = _this();
+        while(true) {
+            RunT n = r.previousBuildInProgress;
+            if (n==null) {// no field computed yet.
+                n=r.getPreviousBuild();
+                fixUp.add(r);
+            }
+
+            if (r==n) {
+                // everything is completed
+                r = null;
+                break;
+            }
+            if (n.isBuilding()) {
+                // we found the answer
+                r = n;
+                break;
+            }
+
+            fixUp.add(r);   // r contains the stale 'previousBuildInProgress' back pointer
+            r = n;
+        }
+
+        // fix up so that the next look up will run faster
+        for (RunT f : fixUp)
+            f.previousBuildInProgress = r==null ? f : r;
+        return r;
     }
 
     /**
@@ -865,14 +926,64 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         getParent().removeRun((RunT)this);
     }
 
-    protected static interface Runner {
+    private static final ThreadLocal<Run.Runner> RUNNERS = new ThreadLocal<Run.Runner>();
+
+    /**
+     * @see CheckPoint#reportCheckpoint(Object)
+     */
+    /*package*/ static void reportCheckpoint(Object id) {
+        RUNNERS.get().checkpoints.report(id);
+    }
+
+    /**
+     * @see CheckPoint#waitForCheckpoint(Object)
+     */
+    /*package*/ synchronized static void waitForCheckpoint(Object id) throws InterruptedException {
+        while(true) {
+            Run b = RUNNERS.get().getBuild().getPreviousBuildInProgress();
+            if(b==null)     return; // no pending earlier build
+            Run.Runner runner = b.runner;
+            if(runner==null) {
+                // polled at the wrong moment. try again.
+                Thread.sleep(0);
+                continue;
+            }
+            if(runner.checkpoints.waitForCheckPoint(id))
+                return; // confirmed that the previous build reached the check point
+
+            // the previous build finished without ever reaching the check point. try again.
+        }
+    }
+
+    protected abstract class Runner {
+        private final class CheckpointSet {
+            /**
+             * Stages of the builds that this runner has completed. This is used for concurrent {@link Runner}s to
+             * coordinate and serialize their executions where necessary.
+             */
+            private final Set<Object> checkpoints = new HashSet<Object>();
+
+            protected synchronized void report(Object identifier) {
+                checkpoints.add(identifier);
+                notifyAll();
+            }
+
+            protected synchronized boolean waitForCheckPoint(Object identifier) throws InterruptedException {
+                while(isBuilding() && !checkpoints.contains(identifier))
+                    wait();
+                return checkpoints.contains(identifier);
+            }
+        }
+
+        private final CheckpointSet checkpoints = new CheckpointSet();
+
         /**
          * Performs the main build and returns the status code.
          *
          * @throws Exception
          *      exception will be recorded and the build will be considered a failure.
          */
-        Result run( BuildListener listener ) throws Exception, RunnerAbortedException;
+        public abstract Result run( BuildListener listener ) throws Exception, RunnerAbortedException;
 
         /**
          * Performs the post-build action.
@@ -884,7 +995,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
          * even if the build is successful, this build still won't be picked up
          * by {@link Job#getLastSuccessfulBuild()}.
          */
-        void post( BuildListener listener ) throws Exception;
+        public abstract void post( BuildListener listener ) throws Exception;
 
         /**
          * Performs final clean up action.
@@ -896,7 +1007,11 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
          * Among other things, this is often a necessary pre-condition
          * before invoking other builds that depend on this build.
          */
-        void cleanUp(BuildListener listener) throws Exception;
+        public abstract void cleanUp(BuildListener listener) throws Exception;
+
+        protected final RunT getBuild() {
+            return _this();
+        }
     }
 
     /**
@@ -913,6 +1028,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         BuildListener listener=null;
         PrintStream log = null;
 
+        runner = job;
         onStartBuilding();
         try {
             // to set the state to COMPLETE in the end, even if the thread dies abnormally.
@@ -1031,13 +1147,20 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      */
     protected void onStartBuilding() {
         state = State.BUILDING;
+        RUNNERS.set(runner);
     }
 
     /**
      * Called when a job finished building normally or abnormally.
      */
     protected void onEndBuilding() {
-        state = State.COMPLETED;
+        // signal that we've finished building.
+        synchronized (runner.checkpoints) {
+            state = State.COMPLETED;
+            runner.checkpoints.notifyAll();
+        }
+        runner = null;
+        RUNNERS.set(null);
         if(result==null) {
             // shouldn't happen, but be defensive until we figure out why
             result = Result.FAILURE;
