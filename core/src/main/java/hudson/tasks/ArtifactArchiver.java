@@ -85,8 +85,6 @@ public class ArtifactArchiver extends Recorder {
     }
 
     public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener) throws InterruptedException {
-        AbstractProject<?,?> p = build.getProject();
-
         if(artifacts.length()==0) {
             listener.error(Messages.ArtifactArchiver_NoIncludes());
             build.setResult(Result.FAILURE);
@@ -98,7 +96,7 @@ public class ArtifactArchiver extends Recorder {
 
         listener.getLogger().println(Messages.ArtifactArchiver_ARCHIVING_ARTIFACTS());
         try {
-            FilePath ws = p.getWorkspace();
+            FilePath ws = build.getWorkspace();
             if (ws==null) { // #3330: slave down?
                 return true;
             }

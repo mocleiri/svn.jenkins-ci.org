@@ -370,8 +370,8 @@ public final class MavenModuleSetBuild extends AbstractBuild<MavenModuleSet,Mave
                         // when multiple CVS/SVN modules are checked out, so also check
                         // the path against the workspace root if that seems like what the user meant (see issue #1293)
                         String rootPOM = project.getRootPOM();
-                        FilePath pom = project.getModuleRoot().child(rootPOM);
-                        FilePath parentLoc = project.getWorkspace().child(rootPOM);
+                        FilePath pom = getModuleRoot().child(rootPOM);
+                        FilePath parentLoc = getWorkspace().child(rootPOM);
                         if(!pom.exists() && parentLoc.exists())
                             pom = parentLoc;
 
@@ -380,7 +380,7 @@ public final class MavenModuleSetBuild extends AbstractBuild<MavenModuleSet,Mave
 
                         ArgumentListBuilder margs = new ArgumentListBuilder().add("-B").add("-f", pom.getRemote());
                         if(project.usesPrivateRepository())
-                            margs.add("-Dmaven.repo.local="+project.getWorkspace().child(".repository"));
+                            margs.add("-Dmaven.repo.local="+getWorkspace().child(".repository"));
                         margs.addTokenized(envVars.expand(project.getGoals()));
 
                         Builder builder = new Builder(slistener, proxies, project.sortedActiveModules, margs.toList(), envVars);
@@ -445,7 +445,7 @@ public final class MavenModuleSetBuild extends AbstractBuild<MavenModuleSet,Mave
 
             List<PomInfo> poms;
             try {
-                poms = project.getModuleRoot().act(new PomParser(listener, mvn, project));
+                poms = getModuleRoot().act(new PomParser(listener, mvn, project));
             } catch (IOException e) {
                 if (e.getCause() instanceof AbortException)
                     throw (AbortException) e.getCause();

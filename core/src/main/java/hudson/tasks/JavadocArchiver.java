@@ -86,7 +86,7 @@ public class JavadocArchiver extends Recorder {
     public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener) throws InterruptedException {
         listener.getLogger().println(Messages.JavadocArchiver_Publishing());
 
-        FilePath javadoc = build.getParent().getWorkspace().child(javadocDir);
+        FilePath javadoc = build.getWorkspace().child(javadocDir);
         FilePath target = new FilePath(keepAll ? getJavadocDir(build) : getJavadocDir(build.getProject()));
 
         try {

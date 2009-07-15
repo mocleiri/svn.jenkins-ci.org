@@ -859,7 +859,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
                 locked = true;
             }
 
-            FilePath workspace = getWorkspace();
+            FilePath workspace = build.getWorkspace();
             workspace.mkdirs();
 
             return scm.checkout(build, launcher, workspace, listener, changelogFile);

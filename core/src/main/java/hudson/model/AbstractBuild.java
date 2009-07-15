@@ -337,7 +337,7 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
             
             if (project.isCleanWorkspaceRequired()) {
                 listener.getLogger().println("Cleaning workspace because project is configured to use a clean workspace for each build.");
-                project.getWorkspace().deleteContents();
+                getWorkspace().deleteContents();
             }
             
             checkout(listener);
@@ -522,7 +522,7 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
     @Override
     public EnvVars getEnvironment(TaskListener log) throws IOException, InterruptedException {
         EnvVars env = super.getEnvironment(log);
-        env.put("WORKSPACE", getProject().getWorkspace().getRemote());
+        env.put("WORKSPACE", getWorkspace().getRemote());
         // servlet container may have set CLASSPATH in its launch script,
         // so don't let that inherit to the new child process.
         // see http://www.nabble.com/Run-Job-with-JDK-1.4.2-tf4468601.html

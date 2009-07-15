@@ -145,10 +145,9 @@ public class Fingerprinter extends Recorder implements Serializable {
             private static final long serialVersionUID = 1L;
         }
 
-        AbstractProject p = build.getProject();
         final long buildTimestamp = build.getTimestamp().getTimeInMillis();
 
-        FilePath ws = p.getWorkspace();
+        FilePath ws = build.getWorkspace();
         if(ws==null) {
             listener.error(Messages.Fingerprinter_NoWorkspace());
             build.setResult(Result.FAILURE);

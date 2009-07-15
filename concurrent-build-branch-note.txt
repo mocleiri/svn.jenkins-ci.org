@@ -1,8 +1,4 @@
 TODO:
-- serialize post build steps, like computing test results, since they depend on the previous result.
-  we need some way to mark the build steps that need this service, in a way that preserves compatibility.
-    -> added check pointing
-
 - figure out what to do with AbstractProject.getWorkspaceResource(). I just removed it from
   AbstractProject.getResourceList() but this will break the lock mechanism with SCM polling, tagging, and
   other related activities that require a workspace.
@@ -25,6 +21,10 @@ Release Plan
 
 Notes
 =====
+- serialize post build steps, like computing test results, since they depend on the previous result.
+  we need some way to mark the build steps that need this service, in a way that preserves compatibility.
+    -> added check pointing
+
 - serialize the changelog calculation. How do we handle backward compatibility?
     -> it turns out that CVSSCM doesn't need checkpointing for this, because it uses a timestamp.
 
