@@ -213,6 +213,19 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
     }
 
     /**
+     * Returns the root directories of all checked-out modules.
+     * <p>
+     * Some SCMs support checking out multiple modules into the same workspace.
+     * In these cases, the returned array will have a length greater than one.
+     * @return The roots of all modules checked out from the SCM.
+     */
+    public FilePath[] getModuleRoots() {
+        FilePath ws = getWorkspace();
+        if(ws==null)    return null;
+        return getParent().getScm().getModuleRoots(ws);
+    }
+
+    /**
      * List of users who committed a change since the last non-broken build till now.
      *
      * <p>

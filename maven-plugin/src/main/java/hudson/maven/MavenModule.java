@@ -200,7 +200,7 @@ public final class MavenModule extends AbstractMavenProject<MavenModule,MavenBui
 
     /**
      * Relative path to this module's root directory
-     * from {@link MavenModuleSet#getWorkspace()}.
+     * from the workspace of a {@link MavenModuleSet}.
      *
      * The path separator is normalized to '/'.
      */
