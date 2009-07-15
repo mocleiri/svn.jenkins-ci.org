@@ -37,8 +37,6 @@ import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.BuildListener;
 import hudson.model.Result;
-import static hudson.model.CheckPoint.reportCheckpoint;
-import static hudson.model.CheckPoint.waitForCheckpoint;
 import hudson.remoting.VirtualChannel;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Publisher;
