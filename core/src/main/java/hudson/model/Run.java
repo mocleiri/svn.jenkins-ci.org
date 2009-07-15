@@ -929,14 +929,14 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     private static final ThreadLocal<Run.Runner> RUNNERS = new ThreadLocal<Run.Runner>();
 
     /**
-     * @see CheckPoint#reportCheckpoint(Object)
+     * @see CheckPoint#report()
      */
     /*package*/ static void reportCheckpoint(Object id) {
         RUNNERS.get().checkpoints.report(id);
     }
 
     /**
-     * @see CheckPoint#waitForCheckpoint(Object)
+     * @see CheckPoint#block()
      */
     /*package*/ synchronized static void waitForCheckpoint(Object id) throws InterruptedException {
         while(true) {
