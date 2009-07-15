@@ -3,15 +3,14 @@ def pid() {
 }
 
 println "connecting"
-remote = connect("server1"); 
+remote = connect(); 
 
 i=0
 (0..<4).each {
   i++;
-  println "trying ${i}"
+  println "Looping ${i}/4"
   remote {
-    println "1st from ${pid()} (${i})"
+    println "hello from ${pid()} (${i})"
   }
-  Thread.sleep(5000);
-  println "3rd from ${pid()} (${i})"
+  println "hello from ${pid()} (${i})"
 }

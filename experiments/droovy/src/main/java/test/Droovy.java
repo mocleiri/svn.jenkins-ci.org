@@ -108,6 +108,15 @@ public class Droovy extends GroovyObjectSupport implements Serializable {
 
     /**
      * Provisions a new node.
+     * <p>
+     * Connects by using a random unique name.
+     */
+    public Server connect() throws IOException {
+        return connect("server"+servers.size());
+    }
+
+    /**
+     * Provisions a new node.
      *
      * @param name
      *      Human-readable name that represents this server. Used for error messages
