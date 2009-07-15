@@ -287,6 +287,11 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      *      To support concurrent builds of the same project, this method is moved to {@link AbstractBuild}.
      *      For backward compatibility, this method returns the right {@link AbstractBuild#getWorkspace()} if called
      *      from {@link Executor}, and otherwise the workspace of the last build.
+     *
+     *      <p>
+     *      If your are calling this method during a build from an executor, swtich it to {@link AbstractBuild#getWorkspace()}.
+     *      If you are calling this method to serve a file from the workspace, doing a form validation, etc., then
+     *      use {@link #getSomeWorkspace()}
      */
     public final FilePath getWorkspace() {
         Executor e = Executor.currentExecutor();
@@ -304,15 +309,34 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     }
 
     /**
+     * Gets a workspace for some build of this project.
+     *
+     * <p>
+     * This is useful for obtaining a workspace for the purpose of form field validation, where exactly
+     * which build the workspace belonged is less important. The implementation makes a cursory effort
+     * to find some workspace.
+     *
+     * @return
+     *      null if there's no available workspace.
+     * @since 1.XXX
+     */
+    public final FilePath getSomeWorkspace() {
+        int cnt=0;
+        for (R b = getLastBuild(); cnt<5 && b!=null; b=b.getPreviousBuild()) {
+            FilePath ws = b.getWorkspace();
+            if (ws!=null)   return ws;
+        }
+        return null;
+    }
+
+    /**
      * Returns the root directory of the checked-out module.
      * <p>
      * This is usually where <tt>pom.xml</tt>, <tt>build.xml</tt>
      * and so on exists.
      *
      * @deprecated as of 1.XXX
-     *      To support concurrent builds of the same project, this method is moved to {@link AbstractBuild}.
-     *      For backward compatibility, this method returns the right {@link AbstractBuild#getModuleRoot()} if called
-     *      from {@link Executor}, and otherwise the workspace of the last build.
+     *      See {@link #getWorkspace()} for a migration strategy.
      */
     public FilePath getModuleRoot() {
         FilePath ws = getWorkspace();
@@ -328,9 +352,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      * @return The roots of all modules checked out from the SCM.
      *
      * @deprecated as of 1.XXX
-     *      To support concurrent builds of the same project, this method is moved to {@link AbstractBuild}.
-     *      For backward compatibility, this method returns the right {@link AbstractBuild#getModuleRoots()} if called
-     *      from {@link Executor}, and otherwise the workspace of the last build.
+     *      See {@link #getWorkspace()} for a migration strategy.
      */
     public FilePath[] getModuleRoots() {
         return getScm().getModuleRoots(getWorkspace());
@@ -897,7 +919,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
         }
 
         try {
-            FilePath workspace = getWorkspace();
+            FilePath workspace = getSomeWorkspace();
             if (scm.requiresWorkspaceForPolling() && (workspace == null || !workspace.exists())) {
                 // workspace offline. build now, or nothing will ever be built
                 Label label = getAssignedLabel();
@@ -1281,7 +1303,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      */
     public void doWs( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException, InterruptedException {
         checkPermission(AbstractProject.WORKSPACE);
-        FilePath ws = getWorkspace();
+        FilePath ws = getSomeWorkspace();
         if ((ws == null) || (!ws.exists())) {
             // if there's no workspace, report a nice error message
             // Would be good if when asked for *plain*, do something else!

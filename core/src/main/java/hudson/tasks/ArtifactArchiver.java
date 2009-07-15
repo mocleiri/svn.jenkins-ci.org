@@ -169,7 +169,7 @@ public class ArtifactArchiver extends Recorder {
          * Performs on-the-fly validation on the file mask wildcard.
          */
         public FormValidation doCheckArtifacts(@AncestorInPath AbstractProject project, @QueryParameter String value) throws IOException {
-            return FilePath.validateFileMask(project.getWorkspace(),value);
+            return FilePath.validateFileMask(project.getSomeWorkspace(),value);
         }
 
         public ArtifactArchiver newInstance(StaplerRequest req, JSONObject formData) throws FormException {

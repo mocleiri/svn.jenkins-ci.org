@@ -159,7 +159,7 @@ public class JUnitResultArchiver extends Recorder implements Serializable, Matri
          * Performs on-the-fly validation on the file mask wildcard.
          */
         public FormValidation doCheck(@AncestorInPath AbstractProject project, @QueryParameter String value) throws IOException {
-            return FilePath.validateFileMask(project.getWorkspace(),value);
+            return FilePath.validateFileMask(project.getSomeWorkspace(),value);
         }
 
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
