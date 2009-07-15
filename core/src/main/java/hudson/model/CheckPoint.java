@@ -19,7 +19,10 @@ import hudson.scm.SCM;
  * Check pointing is a primitive mechanism to provide this sort of synchronization.
  * These methods can be only invoked from {@link Executor} threads.
  *
- *
+ * <p>
+ * Each {@link CheckPoint} instance represents unique check points. {@link CheckPoint}
+ * instances are normally created as a static instance, because two builds of the same project
+ * needs to refer to the same check point for synchronization to happen properly.
  *
  * <h2>Example</h2>
  * <p>
@@ -30,29 +33,19 @@ import hudson.scm.SCM;
  * @since 1.XXX
  */
 public final class CheckPoint {
-    private CheckPoint() {} // no instantiation allowed
-
     /**
      * Records that the execution of the build has reached to a check point, idenified
      * by the given identifier.
      *
      * <p>
-     * If the successive builds are {@linkplain #waitForCheckpoint(Object) waiting for this check point},
+     * If the successive builds are {@linkplain #block() waiting for this check point},
      * they'll be released.
      *
      * <p>
      * This method can be only called from an {@link Executor} thread.
-     *
-     * @param id
-     *      An object that identifies a check point. The only purpose of this object is so
-     *      that different IDs represent different check points, so you can pass in anything.
-     *      {@link Class} object of your {@link Recorder} etc. can be used if you only use
-     *      one checkpoint per your class, or this could be some unique string, like FQCN+suffix.
-     *      <p>
-     *      Identifies are compared by their equality.
      */
-    public static void reportCheckpoint(Object id) {
-        Run.reportCheckpoint(id);
+    public void report() {
+        Run.reportCheckpoint(this);
     }
 
     /**
@@ -73,18 +66,16 @@ public final class CheckPoint {
      *
      * <p>
      * Using this method, build #3 correctly waits until the step 4. Because of this behavior,
-     * the {@link #reportCheckpoint(Object)}/{@link #waitForCheckpoint(Object)} pair can normally
+     * the {@link #report()}/{@link #block()} pair can normally
      * be used without a try/finally block.
      *
      * <p>
      * This method can be only called from an {@link Executor} thread.
      *
-     * @param id
-     *      This must be equal to the identifier passed to the {@link #reportCheckpoint(Object)} method.
      * @throws InterruptedException
      *      If the build (represented by the calling executor thread) is aborted while it's waiting.  
      */
-    public static void waitForCheckpoint(Object id) throws InterruptedException {
-        Run.waitForCheckpoint(id);
+    public void block() throws InterruptedException {
+        Run.waitForCheckpoint(this);
     }
 }

@@ -40,7 +40,6 @@ import hudson.model.Node;
 import hudson.model.WorkspaceCleanupThread;
 import hudson.model.Hudson;
 import hudson.model.Descriptor;
-import hudson.model.CheckPoint;
 import hudson.model.AbstractProject.AbstractProjectDescriptor;
 
 import java.io.File;
@@ -349,20 +348,6 @@ public abstract class SCM implements Describable<SCM>, ExtensionPoint {
             e.printStackTrace(listener.error(e.getMessage()));
             return false;
         }
-    }
-
-    /**
-     * @see CheckPoint#reportCheckpoint(Object)
-     */
-    protected final void reportCheckpoint(Object id) {
-        CheckPoint.reportCheckpoint(id);
-    }
-
-    /**
-     * @see CheckPoint#waitForCheckpoint(Object)
-     */
-    protected final void waitForCheckpoint(Object id) throws InterruptedException {
-        CheckPoint.waitForCheckpoint(id);
     }
 
     protected final String nullify(String s) {

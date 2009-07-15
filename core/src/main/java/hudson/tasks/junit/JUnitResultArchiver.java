@@ -37,6 +37,7 @@ import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.BuildListener;
 import hudson.model.Result;
+import hudson.model.CheckPoint;
 import hudson.remoting.VirtualChannel;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Publisher;
@@ -96,7 +97,7 @@ public class JUnitResultArchiver extends Recorder implements Serializable, Matri
                 }
             });
 
-            waitForCheckpoint(getClass());
+            CHECKPOINT.block();
             action = new TestResultAction(build, result, listener);
             if(result.getPassCount()==0 && result.getFailCount()==0)
                 throw new AbortException(Messages.JUnitResultArchiver_ResultIsEmpty());
@@ -116,7 +117,7 @@ public class JUnitResultArchiver extends Recorder implements Serializable, Matri
         }
 
         build.getActions().add(action);
-        reportCheckpoint(getClass());
+        CHECKPOINT.report();
 
         if(action.getResult().getFailCount()>0)
             build.setResult(Result.UNSTABLE);
@@ -137,6 +138,10 @@ public class JUnitResultArchiver extends Recorder implements Serializable, Matri
     public MatrixAggregator createAggregator(MatrixBuild build, Launcher launcher, BuildListener listener) {
         return new TestResultAggregator(build,launcher,listener);
     }
+    /**
+     * Test result tracks the diff from the previous run, hence the checkpoint.
+     */
+    private static final CheckPoint CHECKPOINT = new CheckPoint();
 
     private static final long serialVersionUID = 1L;
 

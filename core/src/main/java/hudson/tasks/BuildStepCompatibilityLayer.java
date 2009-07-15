@@ -44,25 +44,6 @@ import java.io.IOException;
  */
 public abstract class BuildStepCompatibilityLayer implements BuildStep {
 //
-// convenience methods
-//
-
-    /**
-     * @see CheckPoint#reportCheckpoint(Object)
-     */
-    protected final void reportCheckpoint(Object id) {
-        CheckPoint.reportCheckpoint(id);
-    }
-
-    /**
-     * @see CheckPoint#waitForCheckpoint(Object)  
-     */
-    protected final void waitForCheckpoint(Object id) throws InterruptedException {
-        CheckPoint.waitForCheckpoint(id);
-    }
-
-
-//
 // new definitions >= 1.150
 //
     public boolean prebuild(AbstractBuild<?,?> build, BuildListener listener) {
