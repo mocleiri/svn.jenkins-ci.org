@@ -8,6 +8,30 @@
   <name>droovy</name>
   <description>Groovy + Hudson remoting + distfork</description>
 
+  <scm>
+    <connection>scm:svn:https://www.dev.java.net/svn/hudson/trunk/experiments/droovy</connection>
+    <developerConnection>scm:svn:https://www.dev.java.net/svn/hudson/trunk/experiments/droovy</developerConnection>
+  </scm>
+
+  <repositories>
+    <repository>
+      <id>java.net2</id>
+      <url>http://download.java.net/maven/2/</url>
+    </repository>
+  </repositories>
+
+  <distributionManagement>
+    <repository>
+      <id>java.net-maven2-repository</id>
+      <uniqueVersion>false</uniqueVersion>
+      <url>java-net:/maven2-repository/trunk/repository/</url>
+    </repository>
+    <site>
+      <id>droovy-www</id>
+      <url>java-net:/hudson/trunk/www/droovy/</url>
+    </site>
+  </distributionManagement>
+
   <build>
     <plugins>
       <plugin>
@@ -37,6 +61,13 @@
         </executions>
       </plugin>
     </plugins>
+    <extensions>
+      <extension>
+        <groupId>org.jvnet.wagon-svn</groupId>
+        <artifactId>wagon-svn</artifactId>
+        <version>1.9</version>
+      </extension>
+    </extensions>
   </build>
 
   <dependencies>
