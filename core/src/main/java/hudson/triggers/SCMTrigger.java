@@ -36,6 +36,7 @@ import hudson.model.SCMedItem;
 import hudson.model.AdministrativeMonitor;
 import hudson.util.StreamTaskListener;
 import hudson.util.TimeUnit2;
+import hudson.util.SequentialExecutionQueue;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.DataBoundConstructor;
 
@@ -43,16 +44,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.ObjectStreamException;
 import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,17 +63,6 @@ import net.sf.json.JSONObject;
  */
 public class SCMTrigger extends Trigger<SCMedItem> {
     /**
-     * If we'd like to run another polling run, this is set to true.
-     *
-     * <p>
-     * To avoid submitting more than one polling jobs (which could flood the queue),
-     * we first use the boolean flag.
-     *
-     * @guardedBy this
-     */
-    private transient volatile boolean pollingScheduled;
-
-    /**
      * This lock is used to control the mutual exclusion of the SCM activity,
      * so that the build and polling don't happen at the same time.
      */
@@ -90,7 +75,11 @@ public class SCMTrigger extends Trigger<SCMedItem> {
     }
 
     public ReentrantLock getLock() {
-        return lock;
+        if(job.getScm().requiresWorkspaceForPolling())
+            return lock;
+        else
+            // if the polling can be done without workspace, synchronization between build and polling is unnecessary.
+            return new ReentrantLock();
     }
 
     protected Object readResolve() throws ObjectStreamException {
@@ -99,13 +88,12 @@ public class SCMTrigger extends Trigger<SCMedItem> {
     }
 
     public void run() {
-        if(pollingScheduled || Hudson.getInstance().isQuietingDown())
+        if(Hudson.getInstance().isQuietingDown())
             return; // noop
-        pollingScheduled = true;
-        LOGGER.fine("Scheduling a polling for "+job);
 
         DescriptorImpl d = getDescriptor();
 
+        LOGGER.fine("Scheduling a polling for "+job);
         if (d.synchronousPolling) {
         	LOGGER.fine("Running the trigger directly without threading, " +
         			"as it's already taken care of by Trigger.Cron");
@@ -115,7 +103,7 @@ public class SCMTrigger extends Trigger<SCMedItem> {
             // even if we end up submitting this too many times, that's OK.
             // the real exclusion control happens inside Runner.
         	LOGGER.fine("scheduling the trigger to (asynchronously) run");
-            d.getExecutor().submit(new Runner());
+            d.queue.execute(new Runner());
             d.clogCheck();
         }
     }
@@ -139,19 +127,19 @@ public class SCMTrigger extends Trigger<SCMedItem> {
     public static class DescriptorImpl extends TriggerDescriptor {
         /**
          * Used to control the execution of the polling tasks.
+         * <p>
+         * This executor implementation has a semantics suitable for polling. Namely, no two threads will try to poll the same project
+         * at once, and multiple polling requests to the same job will be combined into one. Note that because executor isn't aware
+         * of a potential workspace lock between a build and a polling, we may end up using executor threads unwisely --- they
+         * may block.
          */
-        transient volatile ThreadPoolExecutor executor;
+        private transient final SequentialExecutionQueue queue = new SequentialExecutionQueue(Executors.newSingleThreadExecutor());
 
         /**
          * Whether the projects should be polled all in one go in the order of dependencies. The default behavior is
          * that each project polls for changes independently.
          */
         public boolean synchronousPolling = false;
-
-        /**
-         * Jobs that are being polled. The value is useful for trouble-shooting.
-         */
-        final transient Set<Runner> items = Collections.synchronizedSet(new HashSet<Runner>());
 
         /**
          * Max number of threads for SCM polling.
@@ -161,10 +149,6 @@ public class SCMTrigger extends Trigger<SCMedItem> {
 
         public DescriptorImpl() {
             load();
-            /*
-             * Need to resize the thread pool here in case there is no existing configuration file for SCMTrigger as
-             * setPollingThreadCount() is not called in this case
-             */
             resizeThreadPool();
         }
 
@@ -173,7 +157,7 @@ public class SCMTrigger extends Trigger<SCMedItem> {
         }
 
         public ExecutorService getExecutor() {
-            return executor;
+            return queue.getExecutors();
         }
 
         /**
@@ -181,14 +165,7 @@ public class SCMTrigger extends Trigger<SCMedItem> {
          * than it can handle.
          */
         public boolean isClogged() {
-            for( Runnable r : executor.getQueue() ) {
-                if (r instanceof Runner) {// this should be always true, but let's be defensive.
-                    Runner rr = (Runner) r;
-                    if(rr.isStarving())
-                        return true;
-                }
-            }
-            return false;
+            return queue.isStarving(STARVATION_THRESHOLD);
         }
 
         /**
@@ -203,21 +180,17 @@ public class SCMTrigger extends Trigger<SCMedItem> {
          * Gets the snapshot of {@link Runner}s that are performing polling.
          */
         public List<Runner> getRunners() {
-            synchronized (items) {
-                return Arrays.asList(items.toArray(new Runner[items.size()]));
-            }
+            return Util.filter(queue.getInProgress(),Runner.class);
         }
 
         /**
          * Gets the snapshot of {@link SCMedItem}s that are being polled at this very moment.
          */
         public List<SCMedItem> getItemsBeingPolled() {
-            synchronized (items) {
-                List<SCMedItem> r = new ArrayList<SCMedItem>();
-                for (Runner i : items)
-                    r.add(i.getTarget());
-                return r;
-            }
+            List<SCMedItem> r = new ArrayList<SCMedItem>();
+            for (Runner i : getRunners())
+                r.add(i.getTarget());
+            return r;
         }
 
         public String getDisplayName() {
@@ -256,13 +229,8 @@ public class SCMTrigger extends Trigger<SCMedItem> {
          * Update the {@link ExecutorService} instance.
          */
         /*package*/ synchronized void resizeThreadPool() {
-            // swap to a new one, and shut down the old one gradually
-            ThreadPoolExecutor newExec = (ThreadPoolExecutor)
-                    (maximumThreads==0 ? Executors.newCachedThreadPool() : Executors.newFixedThreadPool(maximumThreads));
-            ExecutorService old = executor;
-            executor = newExec;
-            if(old!=null)
-                old.shutdown();
+            queue.setExecutors(
+                    (maximumThreads==0 ? Executors.newCachedThreadPool() : Executors.newFixedThreadPool(maximumThreads)));
         }
 
         public boolean configure(StaplerRequest req, JSONObject json) throws FormException {
@@ -326,14 +294,6 @@ public class SCMTrigger extends Trigger<SCMedItem> {
         private volatile long startTime;
 
         /**
-         * When was this object submitted to {@link DescriptorImpl#getExecutor()}?
-         *
-         * <p>
-         * This field is used to check if the queue is clogged.
-         */
-        public final long submissionTime = System.currentTimeMillis();
-
-        /**
          * Where the log file is written.
          */
         public File getLogFile() {
@@ -359,17 +319,6 @@ public class SCMTrigger extends Trigger<SCMedItem> {
          */
         public String getDuration() {
             return Util.getTimeSpanString(System.currentTimeMillis()-startTime);
-        }
-
-        /**
-         * Returns true if too much time is spent since this item is put into the queue.
-         *
-         * <p>
-         * This property makes sense only when called before the task actually starts,
-         * as the {@link #run()} method may take a long time to execute.
-         */
-        public boolean isStarving() {
-            return System.currentTimeMillis()-submissionTime > STARVATION_THRESHOLD;
         }
 
         private boolean runPolling() {
@@ -408,31 +357,21 @@ public class SCMTrigger extends Trigger<SCMedItem> {
             String threadName = Thread.currentThread().getName();
             Thread.currentThread().setName("SCM polling for "+job);
             try {
-                while(pollingScheduled) {
-                    getLock().lockInterruptibly();
-                    boolean foundChanges=false;
-                    try {
-                        if(pollingScheduled) {
-                            pollingScheduled = false;
-                            startTime = System.currentTimeMillis();
-                            getDescriptor().items.add(this);
-                            try {
-                                foundChanges = runPolling();
-                            } finally {
-                                getDescriptor().items.remove(this);
-                            }
-                        }
-                    } finally {
-                        getLock().unlock();
-                    }
-                    
-                    if(foundChanges) {
-                        String name = " #"+job.asProject().getNextBuildNumber();
-                        if(job.scheduleBuild(new SCMTriggerCause())) {
-                            LOGGER.info("SCM changes detected in "+ job.getName()+". Triggering "+name);
-                        } else {
-                            LOGGER.info("SCM changes detected in "+ job.getName()+". Job is already in the queue");
-                        }
+                getLock().lockInterruptibly();
+                boolean foundChanges=false;
+                try {
+                    startTime = System.currentTimeMillis();
+                    foundChanges = runPolling();
+                } finally {
+                    getLock().unlock();
+                }
+
+                if(foundChanges) {
+                    String name = " #"+job.asProject().getNextBuildNumber();
+                    if(job.scheduleBuild(new SCMTriggerCause())) {
+                        LOGGER.info("SCM changes detected in "+ job.getName()+". Triggering "+name);
+                    } else {
+                        LOGGER.info("SCM changes detected in "+ job.getName()+". Job is already in the queue");
                     }
                 }
             } catch (InterruptedException e) {
@@ -440,6 +379,16 @@ public class SCMTrigger extends Trigger<SCMedItem> {
             } finally {
                 Thread.currentThread().setName(threadName);
             }
+        }
+
+        // as per the requirement of SequentialExecutionQueue, value equality is necessary
+        public boolean equals(Object that) {
+            return job==((SCMTrigger)that).job;
+        }
+
+        @Override
+        public int hashCode() {
+            return job.hashCode();
         }
     }
 

@@ -127,6 +127,12 @@ public abstract class SCM implements Describable<SCM>, ExtensionPoint {
      * polling is configured, then that would immediately trigger a new build.
      *
      * <p>
+     * This flag also affects the mutual exclusion control between builds and polling.
+     * If this methods returns false, polling will continu asynchronously even
+     * when a build is in progress, but otherwise the polling activity is blocked
+     * if a build is currently using a workspace.
+     *
+     * <p>
      * The default implementation returns true.
      *
      * <p>

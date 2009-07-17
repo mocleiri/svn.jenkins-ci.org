@@ -74,23 +74,21 @@ public abstract class Build <P extends Project<P,B>,B extends Build<P,B>>
     @Override
     protected void onStartBuilding() {
         super.onStartBuilding();
-        SCMTrigger t = (SCMTrigger)project.getTriggers().get(Hudson.getInstance().getDescriptorByType(SCMTrigger.DescriptorImpl.class));
+        SCMTrigger t = project.getTrigger(SCMTrigger.class);
         if(t!=null) {
             // acquire the lock
             buildLock = t.getLock();
-            synchronized(buildLock) {
-                try {
-                    if(buildLock.isLocked()) {
-                        long time = System.currentTimeMillis();
-                        LOGGER.info("Waiting for the polling of "+getParent()+" to complete");
-                        buildLock.lockInterruptibly();
-                        LOGGER.info("Polling completed. Waited "+(System.currentTimeMillis()-time)+"ms");
-                    } else
-                        buildLock.lockInterruptibly();
-                } catch (InterruptedException e) {
-                    // handle the interrupt later
-                    Thread.currentThread().interrupt();
-                }
+            try {
+                if(buildLock.isLocked()) {
+                    long time = System.currentTimeMillis();
+                    LOGGER.info("Waiting for the polling of "+getParent()+" to complete");
+                    buildLock.lockInterruptibly();
+                    LOGGER.info("Polling completed. Waited "+(System.currentTimeMillis()-time)+"ms");
+                } else
+                    buildLock.lockInterruptibly();
+            } catch (InterruptedException e) {
+                // handle the interrupt later
+                Thread.currentThread().interrupt();
             }
         }
     }
