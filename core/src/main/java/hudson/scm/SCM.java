@@ -197,9 +197,11 @@ public abstract class SCM implements Describable<SCM>, ExtensionPoint {
      * @param project
      *      The project to check for updates
      * @param launcher
-     *      Abstraction of the machine where the polling will take place.
+     *      Abstraction of the machine where the polling will take place. If SCM declares
+     *      that {@linkplain #requiresWorkspaceForPolling() the polling doesn't require a workspace}, this parameter is null.
      * @param workspace
-     *      The workspace directory that contains baseline files.
+     *      The workspace directory that contains baseline files. If SCM declares
+     *      that {@linkplain #requiresWorkspaceForPolling() the polling doesn't require a workspace}, this parameter is null.
      * @param listener
      *      Logs during the polling should be sent here.
      *

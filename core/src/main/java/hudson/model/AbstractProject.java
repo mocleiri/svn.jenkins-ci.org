@@ -28,6 +28,7 @@ import hudson.FeedAdapter;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
+import hudson.slaves.WorkspaceList;
 import hudson.model.Cause.LegacyCodeCause;
 import hudson.model.Cause.UserCause;
 import hudson.model.Cause.RemoteCause;
@@ -877,26 +878,14 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
         if(scm==null)
             return true;    // no SCM
 
-        // Acquire lock for SCMTrigger so poll won't run while we checkout/update
-        SCMTrigger scmt = getTrigger(SCMTrigger.class);
-        boolean locked = false;
         try {
-            if (scmt!=null) {
-                scmt.getLock().lockInterruptibly();
-                locked = true;
-            }
-
             FilePath workspace = build.getWorkspace();
             workspace.mkdirs();
-
             return scm.checkout(build, launcher, workspace, listener, changelogFile);
         } catch (InterruptedException e) {
             listener.getLogger().println(Messages.AbstractProject_ScmAborted());
             LOGGER.log(Level.INFO,build.toString()+" aborted",e);
             return false;
-        } finally {
-            if (locked)
-                scmt.getLock().unlock();
         }
     }
 
@@ -919,27 +908,42 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
         }
 
         try {
-            FilePath workspace = getSomeWorkspace();
-            if (scm.requiresWorkspaceForPolling() && (workspace == null || !workspace.exists())) {
-                // workspace offline. build now, or nothing will ever be built
-                Label label = getAssignedLabel();
-                if (label != null && label.isSelfLabel()) {
-                    // if the build is fixed on a node, then attempting a build will do us
-                    // no good. We should just wait for the slave to come back.
-                    listener.getLogger().println(Messages.AbstractProject_NoWorkspace());
-                    return false;
-                }
-                if (workspace == null)
-                    listener.getLogger().println(Messages.AbstractProject_WorkspaceOffline());
-                else
-                    listener.getLogger().println(Messages.AbstractProject_NoWorkspace());
-                listener.getLogger().println(Messages.AbstractProject_NewBuildForWorkspace());
-                return true;
-            }
+            if(scm.requiresWorkspaceForPolling()) {
+                // lock the workspace of the last build
+                FilePath ws=null;
+                R lb = getLastBuild();
+                if (lb!=null)   ws = lb.getWorkspace();
 
-            Launcher launcher = workspace != null ? workspace.createLauncher(listener) : null;
-            LOGGER.fine("Polling SCM changes of " + getName());
-            return scm.pollChanges(this, launcher, workspace, listener);
+                if (ws==null || !ws.exists()) {
+                    // workspace offline. build now, or nothing will ever be built
+                    Label label = getAssignedLabel();
+                    if (label != null && label.isSelfLabel()) {
+                        // if the build is fixed on a node, then attempting a build will do us
+                        // no good. We should just wait for the slave to come back.
+                        listener.getLogger().println(Messages.AbstractProject_NoWorkspace());
+                        return false;
+                    }
+                    if (ws == null)
+                        listener.getLogger().println(Messages.AbstractProject_WorkspaceOffline());
+                    else
+                        listener.getLogger().println(Messages.AbstractProject_NoWorkspace());
+                    listener.getLogger().println(Messages.AbstractProject_NewBuildForWorkspace());
+                    return true;
+                } else {
+                    WorkspaceList l = lb.getBuiltOn().toComputer().getWorkspaceList();
+                    l.acquire(ws);
+                    try {
+                        LOGGER.fine("Polling SCM changes of " + getName());
+                        return scm.pollChanges(this, ws.createLauncher(listener), ws, listener);
+                    } finally {
+                        l.release(ws);
+                    }
+                }
+            } else {
+                // polling without workspace
+                LOGGER.fine("Polling SCM changes of " + getName());
+                return scm.pollChanges(this, null, null, listener);
+            }
         } catch (AbortException e) {
             listener.fatalError(Messages.AbstractProject_Aborted());
             return false;

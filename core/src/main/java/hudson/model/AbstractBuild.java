@@ -28,6 +28,7 @@ import hudson.Functions;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.FilePath;
+import hudson.slaves.WorkspaceList;
 import hudson.matrix.MatrixConfiguration;
 import hudson.model.Fingerprint.BuildPtr;
 import hudson.model.Fingerprint.RangeSet;
@@ -291,12 +292,6 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
         return hudsonVersion;
     }
 
-    /**
-     * Makes sure two threads don't try to decide the workspace concurrently to end up in a wrong conclusion.
-     * Global lock is more coarse-grained than necessary, but it simplifies the code, and the contended code is small.
-     */
-    private static final Object lockForDecidingWorkspace = new Object();
-
     protected abstract class AbstractRunner extends Runner {
         /**
          * Since configuration can be changed while a build is in progress,
@@ -312,26 +307,13 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
         }
 
         /**
-         * Decide the workspace to use, in consideration of other concurret builds that may be happening
-         * in this node.
+         * Allocates the workspace from {@link WorkspaceList}.
          */
         protected FilePath decideWorkspace() {
             Computer c = Computer.currentComputer();
-
             // TODO: this cast is indicative of abstraction problem
             FilePath base = c.getNode().getWorkspaceFor((TopLevelItem)getProject());
-
-            synchronized (lockForDecidingWorkspace) {
-                OUTER:
-                for (int i=1; ; i++) {
-                    FilePath candidate = i==1 ? base : base.withSuffix("@"+i);
-                    for (Executor e : c.getExecutors()) {
-                        if(candidate.equals(e.getCurrentWorkspace()))
-                            continue OUTER; // collision
-                    }
-                    return candidate;
-                }
-            }
+            return c.getWorkspaceList().alocate(base);
         }
 
         public Result run(BuildListener listener) throws Exception {
@@ -344,39 +326,43 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
             if(!Hudson.getInstance().getNodes().isEmpty())
                 listener.getLogger().println(node instanceof Hudson ? Messages.AbstractBuild_BuildingOnMaster() : Messages.AbstractBuild_BuildingRemotely(builtOn));
 
-            FilePath ws = decideWorkspace();
-            workspace = ws.getRemote();
-            node.getFileSystemProvisioner().prepareWorkspace(AbstractBuild.this,ws,listener);
-            
-            if (project.isCleanWorkspaceRequired()) {
-                listener.getLogger().println("Cleaning workspace because project is configured to use a clean workspace for each build.");
-                getWorkspace().deleteContents();
+            final FilePath ws = decideWorkspace();
+            try {
+                workspace = ws.getRemote();
+                node.getFileSystemProvisioner().prepareWorkspace(AbstractBuild.this,ws,listener);
+
+                if (project.isCleanWorkspaceRequired()) {
+                    listener.getLogger().println("Cleaning workspace because project is configured to use a clean workspace for each build.");
+                    getWorkspace().deleteContents();
+                }
+
+                checkout(listener);
+
+                if(!preBuild(listener,project.getProperties()))
+                    return Result.FAILURE;
+
+                Result result = doRun(listener);
+
+                // kill run-away processes that are left
+                // use multiple environment variables so that people can escape this massacre by overriding an environment
+                // variable for some processes
+                launcher.kill(getCharacteristicEnvVars());
+
+                // this is ugly, but for historical reason, if non-null value is returned
+                // it should become the final result.
+                if(result==null)    result = getResult();
+                if(result==null)    result = Result.SUCCESS;
+
+                if(result.isBetterOrEqualTo(Result.UNSTABLE))
+                    createSymLink(listener,"lastSuccessful");
+
+                if(result.isBetterOrEqualTo(Result.SUCCESS))
+                    createSymLink(listener,"lastStable");
+
+                return result;
+            } finally {
+                Computer.currentComputer().getWorkspaceList().release(ws);
             }
-            
-            checkout(listener);
-
-            if(!preBuild(listener,project.getProperties()))
-                return Result.FAILURE;
-
-            Result result = doRun(listener);
-
-            // kill run-away processes that are left
-            // use multiple environment variables so that people can escape this massacre by overriding an environment
-            // variable for some processes
-            launcher.kill(getCharacteristicEnvVars());
-
-            // this is ugly, but for historical reason, if non-null value is returned
-            // it should become the final result.
-            if(result==null)    result = getResult();
-            if(result==null)    result = Result.SUCCESS;
-
-            if(result.isBetterOrEqualTo(Result.UNSTABLE))
-                createSymLink(listener,"lastSuccessful");
-
-            if(result.isBetterOrEqualTo(Result.SUCCESS))
-                createSymLink(listener,"lastStable");
-
-            return result;
         }
 
         /**

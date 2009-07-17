@@ -42,14 +42,12 @@ import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectStreamException;
 import java.io.PrintStream;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.text.DateFormat;
@@ -62,29 +60,9 @@ import net.sf.json.JSONObject;
  * @author Kohsuke Kawaguchi
  */
 public class SCMTrigger extends Trigger<SCMedItem> {
-    /**
-     * This lock is used to control the mutual exclusion of the SCM activity,
-     * so that the build and polling don't happen at the same time.
-     */
-    private transient ReentrantLock lock;
-
     @DataBoundConstructor
     public SCMTrigger(String scmpoll_spec) throws ANTLRException {
         super(scmpoll_spec);
-        lock = new ReentrantLock();
-    }
-
-    public ReentrantLock getLock() {
-        if(job.getScm().requiresWorkspaceForPolling())
-            return lock;
-        else
-            // if the polling can be done without workspace, synchronization between build and polling is unnecessary.
-            return new ReentrantLock();
-    }
-
-    protected Object readResolve() throws ObjectStreamException {
-        lock = new ReentrantLock();
-        return super.readResolve();
     }
 
     public void run() {
@@ -357,16 +335,8 @@ public class SCMTrigger extends Trigger<SCMedItem> {
             String threadName = Thread.currentThread().getName();
             Thread.currentThread().setName("SCM polling for "+job);
             try {
-                getLock().lockInterruptibly();
-                boolean foundChanges=false;
-                try {
-                    startTime = System.currentTimeMillis();
-                    foundChanges = runPolling();
-                } finally {
-                    getLock().unlock();
-                }
-
-                if(foundChanges) {
+                startTime = System.currentTimeMillis();
+                if(runPolling()) {
                     String name = " #"+job.asProject().getNextBuildNumber();
                     if(job.scheduleBuild(new SCMTriggerCause())) {
                         LOGGER.info("SCM changes detected in "+ job.getName()+". Triggering "+name);
@@ -374,8 +344,6 @@ public class SCMTrigger extends Trigger<SCMedItem> {
                         LOGGER.info("SCM changes detected in "+ job.getName()+". Job is already in the queue");
                     }
                 }
-            } catch (InterruptedException e) {
-                LOGGER.info("Aborted");
             } finally {
                 Thread.currentThread().setName(threadName);
             }

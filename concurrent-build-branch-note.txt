@@ -1,7 +1,5 @@
 TODO:
-- think about the implications of this change to polling
-
-- think about the implications of this change to workspace deletion 
+- think about the implications of this change to workspace deletion
 
 - figure out what to do with AbstractProject.getWorkspaceResource(). I just removed it from
   AbstractProject.getResourceList() but this will break the lock mechanism with SCM polling, tagging, and
@@ -30,3 +28,5 @@ Notes
 - serialize the changelog calculation. How do we handle backward compatibility?
     -> it turns out that CVSSCM doesn't need checkpointing for this, because it uses a timestamp.
 
+- think about the implications of this change to polling
+    -> introduced WorkspaceList to control the lock.
