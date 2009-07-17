@@ -843,6 +843,15 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     /**
      * Gets the {@link Resource} that represents the workspace of this project.
      * Useful for locking and mutual exclusion control.
+     *
+     * @deprecated as of 1.XXX
+     *      Projects no longer have a fixed workspace, ands builds will find an available workspace via
+     *      {@link WorkspaceList} for each build (furthermore, that happens after a build is started.)
+     *      So a {@link Resource} representation for a workspace at the project level no longer makes sense.
+     *
+     *      <p>
+     *      If you need to lock a workspace while you do some computation, see the source code of
+     *      {@link #pollSCMChanges(TaskListener)} for how to obtain a lock of a workspace through {@link WorkspaceList}.
      */
     public Resource getWorkspaceResource() {
         return new Resource(getFullDisplayName()+" workspace");
@@ -860,8 +869,6 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
                 resourceLists.add(activity.getResourceList());
             }
         }
-        // TODO: see concurrent-build-branch-note.txt.
-//        resourceLists.add(new ResourceList().w(getWorkspaceResource()));
         return ResourceList.union(resourceLists);
     }
 
