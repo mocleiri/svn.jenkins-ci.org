@@ -186,7 +186,7 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
      *
      * <p>
      * Note to implementors: to control where the workspace is created, override
-     * {@link AbstractRunner#decideWorkspace()}.
+     * {@link AbstractRunner#decideWorkspace(Node,WorkspaceList)}.
      *
      * @return
      *      null if the workspace is on a slave that's not connected. Note that once the build is completed,
