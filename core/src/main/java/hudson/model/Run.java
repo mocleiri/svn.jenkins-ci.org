@@ -1155,9 +1155,14 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      */
     protected void onEndBuilding() {
         // signal that we've finished building.
-        synchronized (runner.checkpoints) {
+        if (runner!=null) {
+            // MavenBuilds may be created without their corresponding runners.
+            synchronized (runner.checkpoints) {
+                state = State.COMPLETED;
+                runner.checkpoints.notifyAll();
+            }
+        } else {
             state = State.COMPLETED;
-            runner.checkpoints.notifyAll();
         }
         runner = null;
         RUNNERS.set(null);
