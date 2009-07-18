@@ -36,6 +36,14 @@ public final class WorkspaceList {
     }
 
     /**
+     * Just record that this workspace is being used, without paying any attention to the sycnhronization support.
+     */
+    public synchronized FilePath record(FilePath p) {
+        inUse.add(p);
+        return p;
+    }
+
+    /**
      * Releases an allocated or acquired workspace.
      */
     public synchronized void release(FilePath p) {

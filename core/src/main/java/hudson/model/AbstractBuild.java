@@ -308,12 +308,15 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
 
         /**
          * Allocates the workspace from {@link WorkspaceList}.
+         *
+         * @param n
+         *      Passed in for the convenience. The node where the build is running.
+         * @param wsl
+         *      Passed in for the convenience. The returned path must be registered to this object.
          */
-        protected FilePath decideWorkspace() {
-            Computer c = Computer.currentComputer();
+        protected FilePath decideWorkspace(Node n, WorkspaceList wsl) {
             // TODO: this cast is indicative of abstraction problem
-            FilePath base = c.getNode().getWorkspaceFor((TopLevelItem)getProject());
-            return c.getWorkspaceList().allocate(base);
+            return wsl.allocate(n.getWorkspaceFor((TopLevelItem)getProject()));
         }
 
         public Result run(BuildListener listener) throws Exception {
@@ -326,7 +329,8 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
             if(!Hudson.getInstance().getNodes().isEmpty())
                 listener.getLogger().println(node instanceof Hudson ? Messages.AbstractBuild_BuildingOnMaster() : Messages.AbstractBuild_BuildingRemotely(builtOn));
 
-            final FilePath ws = decideWorkspace();
+            final FilePath ws = decideWorkspace(node,Computer.currentComputer().getWorkspaceList());
+
             try {
                 workspace = ws.getRemote();
                 node.getFileSystemProvisioner().prepareWorkspace(AbstractBuild.this,ws,listener);

@@ -39,6 +39,7 @@ import hudson.model.Cause.UpstreamCause;
 import hudson.model.Environment;
 import hudson.model.TaskListener;
 import hudson.model.Computer;
+import hudson.model.Node;
 import hudson.remoting.Channel;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.ChangeLogSet.Entry;
@@ -476,8 +477,7 @@ public class MavenBuild extends AbstractBuild<MavenModule,MavenBuild> {
         private List<MavenReporter> reporters;
 
         @Override
-        protected FilePath decideWorkspace() {
-            WorkspaceList wsl = Computer.currentComputer().getWorkspaceList();
+        protected FilePath decideWorkspace(Node n, WorkspaceList wsl) {
             return wsl.allocate(getParentBuild().getModuleRoot().child(getProject().getRelativePath()));
         }
 

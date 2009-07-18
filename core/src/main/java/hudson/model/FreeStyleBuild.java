@@ -24,6 +24,7 @@
 package hudson.model;
 
 import hudson.FilePath;
+import hudson.slaves.WorkspaceList;
 
 import java.io.IOException;
 import java.io.File;
@@ -47,11 +48,11 @@ public class FreeStyleBuild extends Build<FreeStyleProject,FreeStyleBuild> {
 
     protected class RunnerImpl extends Build.RunnerImpl {
         @Override
-        protected FilePath decideWorkspace() {
+        protected FilePath decideWorkspace(Node n, WorkspaceList wsl) {
             String customWorkspace = getProject().getCustomWorkspace();
             if (customWorkspace != null)
-                return Computer.currentComputer().getNode().createPath(customWorkspace);
-            return super.decideWorkspace();
+                return n.createPath(customWorkspace);
+            return super.decideWorkspace(n,wsl);
         }
     }
 }
