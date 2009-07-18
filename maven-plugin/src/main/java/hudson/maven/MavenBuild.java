@@ -26,6 +26,7 @@ package hudson.maven;
 import hudson.FilePath;
 import hudson.Util;
 import hudson.EnvVars;
+import hudson.slaves.WorkspaceList;
 import hudson.maven.agent.AbortException;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
@@ -37,6 +38,7 @@ import hudson.model.Run;
 import hudson.model.Cause.UpstreamCause;
 import hudson.model.Environment;
 import hudson.model.TaskListener;
+import hudson.model.Computer;
 import hudson.remoting.Channel;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.ChangeLogSet.Entry;
@@ -475,7 +477,8 @@ public class MavenBuild extends AbstractBuild<MavenModule,MavenBuild> {
 
         @Override
         protected FilePath decideWorkspace() {
-            return getParentBuild().getModuleRoot().child(getProject().getRelativePath());
+            WorkspaceList wsl = Computer.currentComputer().getWorkspaceList();
+            return wsl.alocate(getParentBuild().getModuleRoot().child(getProject().getRelativePath()));
         }
 
         protected Result doRun(BuildListener listener) throws Exception {
