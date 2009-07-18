@@ -583,7 +583,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
 
         // fix up so that the next look up will run faster
         for (RunT f : fixUp)
-            f.previousBuildInProgress = r==null ? f : answer;
+            f.previousBuildInProgress = answer==null ? f : answer;
         return answer;
     }
 
