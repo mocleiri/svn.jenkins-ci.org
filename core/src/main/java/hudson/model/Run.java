@@ -547,28 +547,33 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     }
 
     /**
-     * Obtains the next younger build in progress. It uses a skip-pointer so that we can
+     * Obtains the next younger build in progress. It uses a skip-pointer so that we can compute this without
+     * O(n) computation time. This method also fixes up the skip list as we go, in a way that's concurrency safe.
+     *
+     * <p>
+     * We basically follow the existing skip list, and wherever we find a non-optimal pointer, we remember them
+     * in 'fixUp' and update them later.
      */
     public final RunT getPreviousBuildInProgress() {
         if(previousBuildInProgress==this)   return null;    // the most common case
 
         List<RunT> fixUp = new ArrayList<RunT>();
-        RunT r = _this();
-        while(true) {
+        RunT r = _this(); // 'r' is the source of the pointer (so that we can add it to fix up if we find that the target of the pointer is inefficient.)
+        RunT answer;
+        while (true) {
             RunT n = r.previousBuildInProgress;
             if (n==null) {// no field computed yet.
                 n=r.getPreviousBuild();
                 fixUp.add(r);
             }
-
-            if (r==n) {
-                // everything is completed
-                r = null;
+            if (r==n || n==null) {
+                // this indicates that we know there's no build in progress beyond this point
+                answer = null;
                 break;
             }
             if (n.isBuilding()) {
-                // we found the answer
-                r = n;
+                // we now know 'n' is the target we wanted
+                answer = n;
                 break;
             }
 
@@ -578,7 +583,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
 
         // fix up so that the next look up will run faster
         for (RunT f : fixUp)
-            f.previousBuildInProgress = r==null ? f : r;
+            f.previousBuildInProgress = r==null ? f : answer;
         return r;
     }
 
