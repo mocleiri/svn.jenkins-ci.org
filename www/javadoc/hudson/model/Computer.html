@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Computer (Hudson main module 1.315 API)
+Computer (Hudson main module 1.316 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-10">
+<META NAME="date" CONTENT="2009-07-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson main module 1.315 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson main module 1.315 API)";
+        parent.document.title="Computer (Hudson main module 1.316 API)";
     }
 }
 </SCRIPT>
@@ -218,6 +218,14 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;java.util.concurrent.Future&lt;?&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#_connect(boolean)">_connect</A></B>(boolean&nbsp;forceReconnect)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows implementing-classes to provide an implementation for the connect method.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#_doScript(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">_doScript</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
           org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
@@ -236,7 +244,7 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;java.util.concurrent.Future&lt;?&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.concurrent.Future&lt;?&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#connect(boolean)">connect</A></B>(boolean&nbsp;forceReconnect)</CODE>
 
 <BR>
@@ -411,6 +419,14 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the channel that can be used to run a program on this computer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#getConnectTime()">getConnectTime</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the time (since epoch) when this computer connected.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1063,7 +1079,7 @@ public final void <B>launch</B>()</PRE>
 <A NAME="connect(boolean)"><!-- --></A><H3>
 connect</H3>
 <PRE>
-public abstract java.util.concurrent.Future&lt;?&gt; <B>connect</B>(boolean&nbsp;forceReconnect)</PRE>
+public final java.util.concurrent.Future&lt;?&gt; <B>connect</B>(boolean&nbsp;forceReconnect)</PRE>
 <DL>
 <DD>Do the same as <A HREF="../../hudson/model/Computer.html#doLaunchSlaveAgent(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><CODE>doLaunchSlaveAgent(StaplerRequest, StaplerResponse)</CODE></A>
  but outside the context of serving a request.
@@ -1083,6 +1099,49 @@ public abstract java.util.concurrent.Future&lt;?&gt; <B>connect</B>(boolean&nbsp
 <DT><B>Returns:</B><DD>A <CODE>Future</CODE> representing pending completion of the task. The 'completion' includes
       both a successful completion and a non-successful completion (such distinction typically doesn't
       make much sense because as soon as <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> is connected it can be disconnected by some other threads.)<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Computer.html#disconnect()"><CODE>disconnect()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_connect(boolean)"><!-- --></A><H3>
+_connect</H3>
+<PRE>
+protected abstract java.util.concurrent.Future&lt;?&gt; <B>_connect</B>(boolean&nbsp;forceReconnect)</PRE>
+<DL>
+<DD>Allows implementing-classes to provide an implementation for the connect method.
+
+ <p>
+ If already connected or if this computer doesn't support proactive launching, no-op.
+ This method may return immediately
+ while the launch operation happens asynchronously.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>forceReconnect</CODE> - If true and a connect activity is already in progress, it will be cancelled and
+      the new one will be started. If false, and a connect activity is already in progress, this method
+      will do nothing and just return the pending connection operation.
+<DT><B>Returns:</B><DD>A <CODE>Future</CODE> representing pending completion of the task. The 'completion' includes
+      both a successful completion and a non-successful completion (such distinction typically doesn't
+      make much sense because as soon as <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> is connected it can be disconnected by some other threads.)<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Computer.html#disconnect()"><CODE>disconnect()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getConnectTime()"><!-- --></A><H3>
+getConnectTime</H3>
+<PRE>
+public final long <B>getConnectTime</B>()</PRE>
+<DL>
+<DD>Gets the time (since epoch) when this computer connected.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The time in ms since epoch when this computer last connected.</DL>
 </DD>
 </DL>
 <HR>
@@ -1814,6 +1873,8 @@ public java.lang.String <B>getHostName</B>()
 </DD>
 <DD><DL>
 
+<DT><B>Returns:</B><DD>null if the host name cannot be computed (for example because this computer is offline,
+      because the slave is behind the firewall, etc.)
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>

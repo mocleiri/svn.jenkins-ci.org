@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AllView (Hudson main module 1.315 API)
+AllView (Hudson main module 1.316 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-10">
+<META NAME="date" CONTENT="2009-07-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AllView (Hudson main module 1.315 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AllView (Hudson main module 1.315 API)";
+        parent.document.title="AllView (Hudson main module 1.316 API)";
     }
 }
 </SCRIPT>
@@ -243,6 +243,14 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AllView.html#isEditable()">isEditable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By default, return true to render the "Edit view" link on the page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AllView.html#onJobRenamed(hudson.model.Item, java.lang.String, java.lang.String)">onJobRenamed</A></B>(<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item,
              java.lang.String&nbsp;oldName,
@@ -328,6 +336,25 @@ public java.lang.String <B>getDescription</B>()</PRE>
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/View.html#getDescription()">getDescription</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isEditable()"><!-- --></A><H3>
+isEditable</H3>
+<PRE>
+public boolean <B>isEditable</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/View.html#isEditable()">View</A></CODE></B></DD>
+<DD>By default, return true to render the "Edit view" link on the page.
+ This method is really just for the default "All" view to hide the edit link
+ so that the default Hudson top page remains the same as before 1.316.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/View.html#isEditable()">isEditable</A></CODE> in class <CODE><A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

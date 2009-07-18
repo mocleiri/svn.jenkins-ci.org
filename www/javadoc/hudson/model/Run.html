@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Run (Hudson main module 1.315 API)
+Run (Hudson main module 1.316 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-10">
+<META NAME="date" CONTENT="2009-07-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson main module 1.315 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson main module 1.315 API)";
+        parent.document.title="Run (Hudson main module 1.316 API)";
     }
 }
 </SCRIPT>
@@ -807,6 +807,14 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Run.html" title="type parameter in Run">RunT</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getPreviousCompletedBuild()">getPreviousCompletedBuild</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the most recent <A HREF="../../hudson/model/Run.html#isBuilding()">completed</A> build excluding 'this' Run itself.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1741,6 +1749,22 @@ getPreviousBuild</H3>
 <PRE>
 public <A HREF="../../hudson/model/Run.html" title="type parameter in Run">RunT</A> <B>getPreviousBuild</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPreviousCompletedBuild()"><!-- --></A><H3>
+getPreviousCompletedBuild</H3>
+<PRE>
+public final <A HREF="../../hudson/model/Run.html" title="type parameter in Run">RunT</A> <B>getPreviousCompletedBuild</B>()</PRE>
+<DL>
+<DD>Gets the most recent <A HREF="../../hudson/model/Run.html#isBuilding()">completed</A> build excluding 'this' Run itself.
+<P>
 <DD><DL>
 </DL>
 </DD>

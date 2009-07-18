@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.315 API)
+Index (Hudson main module 1.316 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-10">
+<META NAME="date" CONTENT="2009-07-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.315 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.315 API)";
+        parent.document.title="Index (Hudson main module 1.316 API)";
     }
 }
 </SCRIPT>
@@ -709,6 +709,12 @@ Static method in class hudson.model.<A HREF="./hudson/model/PeriodicWork.html" t
 <DT><A HREF="./hudson/model/Queue.ApplicableJobOfferList.html#all()"><B>all()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Queue.ApplicableJobOfferList.html" title="class in hudson.model">Queue.ApplicableJobOfferList</A>
 <DD>Returns all the <A HREF="./hudson/model/Queue.JobOffer.html#isAvailable()">available</A> <A HREF="./hudson/model/Queue.JobOffer.html" title="class in hudson.model"><CODE>Queue.JobOffer</CODE></A>s.
+<DT><A HREF="./hudson/model/Queue.QueueDecisionHandler.html#all()"><B>all()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Queue.QueueDecisionHandler.html" title="class in hudson.model">Queue.QueueDecisionHandler</A>
+<DD>All registered <A HREF="./hudson/model/Queue.QueueDecisionHandler.html" title="class in hudson.model"><CODE>Queue.QueueDecisionHandler</CODE></A>s
+<DT><A HREF="./hudson/model/Queue.QueueSortingHandler.html#all()"><B>all()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model">Queue.QueueSortingHandler</A>
+<DD>All registered <A HREF="./hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model"><CODE>Queue.QueueSortingHandler</CODE></A>s
 <DT><A HREF="./hudson/model/UserProperty.html#all()"><B>all()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/UserProperty.html" title="class in hudson.model">UserProperty</A>
 <DD>Returns all the registered <A HREF="./hudson/model/UserPropertyDescriptor.html" title="class in hudson.model"><CODE>UserPropertyDescriptor</CODE></A>s.
@@ -2544,9 +2550,6 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTes
 Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
 <DD>Do the same as <A HREF="./hudson/model/Computer.html#doLaunchSlaveAgent(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><CODE>Computer.doLaunchSlaveAgent(StaplerRequest, StaplerResponse)</CODE></A>
  but outside the context of serving a request.
-<DT><A HREF="./hudson/model/Hudson.MasterComputer.html#connect(boolean)"><B>connect(boolean)</B></A> - 
-Method in class hudson.model.<A HREF="./hudson/model/Hudson.MasterComputer.html" title="class in hudson.model">Hudson.MasterComputer</A>
-<DD>&nbsp;
 <DT><A HREF="./hudson/remoting/FastPipedInputStream.html#connect(hudson.remoting.FastPipedOutputStream)"><B>connect(FastPipedOutputStream)</B></A> - 
 Method in class hudson.remoting.<A HREF="./hudson/remoting/FastPipedInputStream.html" title="class in hudson.remoting">FastPipedInputStream</A>
 <DD>&nbsp;
@@ -2557,9 +2560,6 @@ Method in class hudson.remoting.<A HREF="./hudson/remoting/FastPipedOutputStream
 Method in interface hudson.remoting.forward.<A HREF="./hudson/remoting/forward/Forwarder.html" title="interface in hudson.remoting.forward">Forwarder</A>
 <DD>Establishes a port forwarding connection and returns
  the writer end.
-<DT><A HREF="./hudson/slaves/SlaveComputer.html#connect(boolean)"><B>connect(boolean)</B></A> - 
-Method in class hudson.slaves.<A HREF="./hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>
-<DD>&nbsp;
 <DT><A HREF="./hudson/remoting/Launcher.html#connectionTarget"><B>connectionTarget</B></A> - 
 Variable in class hudson.remoting.<A HREF="./hudson/remoting/Launcher.html" title="class in hudson.remoting">Launcher</A>
 <DD>&nbsp;
@@ -3955,9 +3955,6 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/Fingerprinter.DescriptorImp
 <DT><A HREF="./hudson/tasks/JavadocArchiver.DescriptorImpl.html#doCheck(hudson.model.AbstractProject, java.lang.String)"><B>doCheck(AbstractProject, String)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/JavadocArchiver.DescriptorImpl.html" title="class in hudson.tasks">JavadocArchiver.DescriptorImpl</A>
 <DD>Performs on-the-fly validation on the file mask wildcard.
-<DT><A HREF="./hudson/tasks/junit/JUnitResultArchiver.DescriptorImpl.html#doCheck(hudson.model.AbstractProject, java.lang.String)"><B>doCheck(AbstractProject, String)</B></A> - 
-Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/JUnitResultArchiver.DescriptorImpl.html" title="class in hudson.tasks.junit">JUnitResultArchiver.DescriptorImpl</A>
-<DD>Performs on-the-fly validation on the file mask wildcard.
 <DT><A HREF="./hudson/tasks/Shell.DescriptorImpl.html#doCheck(java.lang.String)"><B>doCheck(String)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Shell.DescriptorImpl.html" title="class in hudson.tasks">Shell.DescriptorImpl</A>
 <DD>Check the existence of sh in the given location.
@@ -4030,6 +4027,9 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title
 <DT><A HREF="./hudson/scm/CVSSCM.TagAction.html#doCheckTag(java.lang.String)"><B>doCheckTag(String)</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.TagAction.html" title="class in hudson.scm">CVSSCM.TagAction</A>
 <DD>Checks if the value is a valid CVS tag name.
+<DT><A HREF="./hudson/tasks/junit/JUnitResultArchiver.DescriptorImpl.html#doCheckTestResults(hudson.model.AbstractProject, java.lang.String)"><B>doCheckTestResults(AbstractProject, String)</B></A> - 
+Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/JUnitResultArchiver.DescriptorImpl.html" title="class in hudson.tasks.junit">JUnitResultArchiver.DescriptorImpl</A>
+<DD>Performs on-the-fly validation on the file mask wildcard.
 <DT><A HREF="./hudson/tools/CommandInstaller.DescriptorImpl.html#doCheckToolHome(java.lang.String)"><B>doCheckToolHome(String)</B></A> - 
 Method in class hudson.tools.<A HREF="./hudson/tools/CommandInstaller.DescriptorImpl.html" title="class in hudson.tools">CommandInstaller.DescriptorImpl</A>
 <DD>&nbsp;
@@ -4132,7 +4132,7 @@ Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html" tit
 <DT><A HREF="./hudson/model/Hudson.html#doDefaultJDKCheck(org.kohsuke.stapler.StaplerRequest, java.lang.String)"><B>doDefaultJDKCheck(StaplerRequest, String)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>If the user chose the default JDK, make sure we got 'java' in PATH.
-<DT><A HREF="./hudson/model/AbstractProject.html#doDisable(org.kohsuke.stapler.StaplerResponse)"><B>doDisable(StaplerResponse)</B></A> - 
+<DT><A HREF="./hudson/model/AbstractProject.html#doDisable()"><B>doDisable()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/AdministrativeMonitor.html#doDisable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDisable(StaplerRequest, StaplerResponse)</B></A> - 
@@ -4171,7 +4171,10 @@ Method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsInstallerLin
 <DT><A HREF="./hudson/model/Job.html#doDoRename(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDoRename(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
 <DD>Renames this job.
-<DT><A HREF="./hudson/model/AbstractProject.html#doDoWipeOutWorkspace(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDoWipeOutWorkspace(StaplerRequest, StaplerResponse)</B></A> - 
+<DT><A HREF="./hudson/matrix/MatrixProject.html#doDoWipeOutWorkspace()"><B>doDoWipeOutWorkspace()</B></A> - 
+Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixProject.html" title="class in hudson.matrix">MatrixProject</A>
+<DD>Also delete all the workspaces of the configuration, too.
+<DT><A HREF="./hudson/model/AbstractProject.html#doDoWipeOutWorkspace()"><B>doDoWipeOutWorkspace()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Wipes out the workspace.
 <DT><A HREF="./hudson/model/Computer.html#doDumpExportTable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDumpExportTable(StaplerRequest, StaplerResponse)</B></A> - 
@@ -4198,7 +4201,7 @@ Method in class hudson.util.<A HREF="./hudson/util/HudsonIsLoading.html" title="
 <DT><A HREF="./hudson/util/HudsonIsRestarting.html#doDynamic(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDynamic(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/HudsonIsRestarting.html" title="class in hudson.util">HudsonIsRestarting</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/AbstractProject.html#doEnable(org.kohsuke.stapler.StaplerResponse)"><B>doEnable(StaplerResponse)</B></A> - 
+<DT><A HREF="./hudson/model/AbstractProject.html#doEnable()"><B>doEnable()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#doEval(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doEval(StaplerRequest, StaplerResponse)</B></A> - 
@@ -4828,7 +4831,10 @@ Constructor for class hudson.<A HREF="./hudson/EnvVars.html" title="class in hud
 <DT><A HREF="./hudson/scheduler/CrontabParserTokenTypes.html#EOF"><B>EOF</B></A> - 
 Static variable in interface hudson.scheduler.<A HREF="./hudson/scheduler/CrontabParserTokenTypes.html" title="interface in hudson.scheduler">CrontabParserTokenTypes</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/slaves/EphemeralNode.html" title="interface in hudson.slaves"><B>EphemeralNode</B></A> - Interface in <A HREF="./hudson/slaves/package-summary.html">hudson.slaves</A><DD><A HREF="./hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s that are not persisted as configuration by itself.<DT><A HREF="./hudson/model/BooleanParameterValue.html#equals(java.lang.Object)"><B>equals(Object)</B></A> - 
+<DT><A HREF="./hudson/slaves/EphemeralNode.html" title="interface in hudson.slaves"><B>EphemeralNode</B></A> - Interface in <A HREF="./hudson/slaves/package-summary.html">hudson.slaves</A><DD><A HREF="./hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s that are not persisted as configuration by itself.<DT><A HREF="./hudson/FilePath.html#equals(java.lang.Object)"><B>equals(Object)</B></A> - 
+Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/BooleanParameterValue.html#equals(java.lang.Object)"><B>equals(Object)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/BooleanParameterValue.html" title="class in hudson.model">BooleanParameterValue</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/FileParameterValue.html#equals(java.lang.Object)"><B>equals(Object)</B></A> - 
@@ -5216,9 +5222,36 @@ Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in h
 <DT><A HREF="./hudson/Messages.html#FilePath_validateAntFileMask_doesntMatchAndSuggest(java.lang.Object, java.lang.Object)"><B>FilePath_validateAntFileMask_doesntMatchAndSuggest(Object, Object)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
 <DD>''{0}'' doesn''t match anything, but ''{1}'' does.
+<DT><A HREF="./hudson/Messages.html#FilePath_validateAntFileMask_doesntMatchAnything(java.lang.Object)"><B>FilePath_validateAntFileMask_doesntMatchAnything(Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>''{0}'' doesn''t match anything
+<DT><A HREF="./hudson/Messages.html#FilePath_validateAntFileMask_doesntMatchAnythingAndSuggest(java.lang.Object, java.lang.Object)"><B>FilePath_validateAntFileMask_doesntMatchAnythingAndSuggest(Object, Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>''{0}'' doesn''t match anything: even ''{1}'' doesn''t exist
+<DT><A HREF="./hudson/Messages.html#FilePath_validateAntFileMask_portionMatchAndSuggest(java.lang.Object, java.lang.Object)"><B>FilePath_validateAntFileMask_portionMatchAndSuggest(Object, Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>''{0}'' doesn''t match anything, although ''{1}'' exists
+<DT><A HREF="./hudson/Messages.html#FilePath_validateAntFileMask_portionMatchButPreviousNotMatchAndSuggest(java.lang.Object, java.lang.Object, java.lang.Object)"><B>FilePath_validateAntFileMask_portionMatchButPreviousNotMatchAndSuggest(Object, Object, Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>''{0}'' doesn''t match anything: ''{1}'' exists but not ''{2}''
 <DT><A HREF="./hudson/Messages.html#FilePath_validateAntFileMask_whitespaceSeprator()"><B>FilePath_validateAntFileMask_whitespaceSeprator()</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
 <DD>Whitespace can no longer be used as the separator.
+<DT><A HREF="./hudson/Messages.html#FilePath_validateRelativePath_noSuchDirectory(java.lang.Object)"><B>FilePath_validateRelativePath_noSuchDirectory(Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>No such directory: ''{0}''
+<DT><A HREF="./hudson/Messages.html#FilePath_validateRelativePath_noSuchFile(java.lang.Object)"><B>FilePath_validateRelativePath_noSuchFile(Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>No such file: ''{0}''
+<DT><A HREF="./hudson/Messages.html#FilePath_validateRelativePath_notDirectory(java.lang.Object)"><B>FilePath_validateRelativePath_notDirectory(Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>''{0}'' is not a directory
+<DT><A HREF="./hudson/Messages.html#FilePath_validateRelativePath_notFile(java.lang.Object)"><B>FilePath_validateRelativePath_notFile(Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>''{0}'' is not a file
+<DT><A HREF="./hudson/Messages.html#FilePath_validateRelativePath_wildcardNotAllowed()"><B>FilePath_validateRelativePath_wildcardNotAllowed()</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>Wildcard is not allowed here
 <DT><A HREF="./hudson/FileSystemProvisioner.html" title="class in hudson"><B>FileSystemProvisioner</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD>Prepares and provisions workspaces for <A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>s.<DT><A HREF="./hudson/FileSystemProvisioner.html#FileSystemProvisioner()"><B>FileSystemProvisioner()</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A>
 <DD>&nbsp;
@@ -6721,6 +6754,9 @@ Method in class hudson.model.<A HREF="./hudson/model/ResourceList.html" title="c
 <DT><A HREF="./hudson/model/UpdateCenter.UpdateCenterConfiguration.html#getConnectionCheckUrl()"><B>getConnectionCheckUrl()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.UpdateCenterConfiguration.html" title="class in hudson.model">UpdateCenter.UpdateCenterConfiguration</A>
 <DD>Returns an "always up" server for Internet connectivity testing
+<DT><A HREF="./hudson/model/Computer.html#getConnectTime()"><B>getConnectTime()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
+<DD>Gets the time (since epoch) when this computer connected.
 <DT><A HREF="./hudson/tasks/BatchFile.html#getContents()"><B>getContents()</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/BatchFile.html" title="class in hudson.tasks">BatchFile</A>
 <DD>&nbsp;
@@ -9374,6 +9410,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in h
 <DT><A HREF="./hudson/Functions.RunUrl.html#getPreviousBuildUrl()"><B>getPreviousBuildUrl()</B></A> - 
 Method in class hudson.<A HREF="./hudson/Functions.RunUrl.html" title="class in hudson">Functions.RunUrl</A>
 <DD>Returns the same page in the previous build.
+<DT><A HREF="./hudson/model/Run.html#getPreviousCompletedBuild()"><B>getPreviousCompletedBuild()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
+<DD>Gets the most recent <A HREF="./hudson/model/Run.html#isBuilding()">completed</A> build excluding 'this' Run itself.
 <DT><A HREF="./hudson/model/Run.html#getPreviousFailedBuild()"><B>getPreviousFailedBuild()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>Returns the last failed build before this build.
@@ -10912,6 +10951,9 @@ Method in class hudson.security.<A HREF="./hudson/security/GlobalMatrixAuthoriza
 <DT><A HREF="./hudson/util/ConsistentHash.Hash.html#hash(T)"><B>hash(T)</B></A> - 
 Method in interface hudson.util.<A HREF="./hudson/util/ConsistentHash.Hash.html" title="interface in hudson.util">ConsistentHash.Hash</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/FilePath.html#hashCode()"><B>hashCode()</B></A> - 
+Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/BooleanParameterValue.html#hashCode()"><B>hashCode()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/BooleanParameterValue.html" title="class in hudson.model">BooleanParameterValue</A>
 <DD>&nbsp;
@@ -11883,6 +11925,12 @@ Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="c
 <DT><A HREF="./hudson/model/UsageStatistics.html#isDue()"><B>isDue()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UsageStatistics.html" title="class in hudson.model">UsageStatistics</A>
 <DD>Returns true if it's time for us to check for new version.
+<DT><A HREF="./hudson/model/AllView.html#isEditable()"><B>isEditable()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AllView.html" title="class in hudson.model">AllView</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/View.html#isEditable()"><B>isEditable()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
+<DD>By default, return true to render the "Edit view" link on the page.
 <DT><A HREF="./hudson/model/Fingerprint.RangeSet.html#isEmpty()"><B>isEmpty()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A>
 <DD>&nbsp;
@@ -12057,7 +12105,7 @@ Method in class hudson.slaves.<A HREF="./hudson/slaves/SimpleScheduledRetentionS
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/Maven.MavenInstallation.html#isMaven2_1(hudson.Launcher)"><B>isMaven2_1(Launcher)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A>
-<DD>Is this Maven 2.1.x?
+<DD>Is this Maven 2.1.x or later?
 <DT><A HREF="./hudson/Functions.html#isModel(java.lang.Object)"><B>isModel(Object)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
 <DD>&nbsp;
@@ -13173,6 +13221,9 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title
 <DT><A HREF="./hudson/model/ItemGroupMixIn.html#loadChildren(hudson.model.ItemGroup, java.io.File, hudson.util.Function1)"><B>loadChildren(ItemGroup, File, Function1&lt;? extends K, ? super V&gt;)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/ItemGroupMixIn.html" title="class in hudson.model">ItemGroupMixIn</A>
 <DD>Loads all the child <A HREF="./hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>s.
+<DT><A HREF="./hudson/util/MaskingClassLoader.html#loadClass(java.lang.String, boolean)"><B>loadClass(String, boolean)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/MaskingClassLoader.html" title="class in hudson.util">MaskingClassLoader</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/KeyedDataStorage.html#loadFailure"><B>loadFailure</B></A> - 
 Variable in class hudson.util.<A HREF="./hudson/util/KeyedDataStorage.html" title="class in hudson.util">KeyedDataStorage</A>
 <DD>Number of failures in loading data.
@@ -13602,6 +13653,13 @@ Method in class hudson.<A HREF="./hudson/Launcher.html" title="class in hudson">
  recorded on the listener.
 <DT><A HREF="./hudson/Launcher.html#maskedPrintCommandLine(java.lang.String[], boolean[], hudson.FilePath)"><B>maskedPrintCommandLine(String[], boolean[], FilePath)</B></A> - 
 Method in class hudson.<A HREF="./hudson/Launcher.html" title="class in hudson">Launcher</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/util/MaskingClassLoader.html" title="class in hudson.util"><B>MaskingClassLoader</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD><CODE>ClassLoader</CODE> that masks a specified set of classes
+ from its parent class loader.<DT><A HREF="./hudson/util/MaskingClassLoader.html#MaskingClassLoader(java.lang.ClassLoader, java.lang.String...)"><B>MaskingClassLoader(ClassLoader, String...)</B></A> - 
+Constructor for class hudson.util.<A HREF="./hudson/util/MaskingClassLoader.html" title="class in hudson.util">MaskingClassLoader</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/util/MaskingClassLoader.html#MaskingClassLoader(java.lang.ClassLoader, java.util.Collection)"><B>MaskingClassLoader(ClassLoader, Collection&lt;String&gt;)</B></A> - 
+Constructor for class hudson.util.<A HREF="./hudson/util/MaskingClassLoader.html" title="class in hudson.util">MaskingClassLoader</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/Launcher.ProcStarter.html#masks"><B>masks</B></A> - 
 Variable in class hudson.<A HREF="./hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A>
@@ -14867,6 +14925,9 @@ Method in class hudson.remoting.<A HREF="./hudson/remoting/Launcher.html" title=
 Static method in class hudson.matrix.<A HREF="./hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A>
 <DD>Parses the submitted form (where possible values are
  presented as a list of checkboxes) and creates an axis
+<DT><A HREF="./hudson/tasks/junit/JUnitResultArchiver.html#parseResult(org.apache.tools.ant.DirectoryScanner, long)"><B>parseResult(DirectoryScanner, long)</B></A> - 
+Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/JUnitResultArchiver.html" title="class in hudson.tasks.junit">JUnitResultArchiver</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/scm/SCMS.html#parseSCM(org.kohsuke.stapler.StaplerRequest, hudson.model.AbstractProject)"><B>parseSCM(StaplerRequest, AbstractProject)</B></A> - 
 Static method in class hudson.scm.<A HREF="./hudson/scm/SCMS.html" title="class in hudson.scm">SCMS</A>
 <DD>Parses <A HREF="./hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A> configuration from the submitted form.
@@ -15478,7 +15539,13 @@ Constructor for class hudson.model.<A HREF="./hudson/model/Queue.NotWaitingItem.
 <DT><A HREF="./hudson/model/Queue.NotWaitingItem.html#Queue.NotWaitingItem(hudson.model.Queue.NotWaitingItem)"><B>Queue.NotWaitingItem(Queue.NotWaitingItem)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Queue.NotWaitingItem.html" title="class in hudson.model">Queue.NotWaitingItem</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/Queue.QueueAction.html" title="interface in hudson.model"><B>Queue.QueueAction</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>An optional interface for actions on Queue.Item.<DT><A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model"><B>Queue.Task</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Task whose execution is controlled by the queue.<DT><A HREF="./hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><B>Queue.TransientTask</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Marks <A HREF="./hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s that are not persisted.<DT><A HREF="./hudson/model/Queue.WaitingItem.html" title="class in hudson.model"><B>Queue.WaitingItem</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD><A HREF="./hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> in the <A HREF="./hudson/model/Queue.html#waitingList"><CODE>Queue.waitingList</CODE></A> stage.<DT><A HREF="./hudson/model/Messages.html#Queue_AllNodesOffline(java.lang.Object)"><B>Queue_AllNodesOffline(Object)</B></A> - 
+<DT><A HREF="./hudson/model/Queue.QueueAction.html" title="interface in hudson.model"><B>Queue.QueueAction</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>An optional interface for actions on Queue.Item.<DT><A HREF="./hudson/model/Queue.QueueDecisionHandler.html" title="class in hudson.model"><B>Queue.QueueDecisionHandler</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Extension point for deciding if particular job should be scheduled or not<DT><A HREF="./hudson/model/Queue.QueueDecisionHandler.html#Queue.QueueDecisionHandler()"><B>Queue.QueueDecisionHandler()</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/Queue.QueueDecisionHandler.html" title="class in hudson.model">Queue.QueueDecisionHandler</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model"><B>Queue.QueueSortingHandler</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Extension point for sorting buildable items<DT><A HREF="./hudson/model/Queue.QueueSortingHandler.html#Queue.QueueSortingHandler()"><B>Queue.QueueSortingHandler()</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model">Queue.QueueSortingHandler</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model"><B>Queue.Task</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Task whose execution is controlled by the queue.<DT><A HREF="./hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><B>Queue.TransientTask</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Marks <A HREF="./hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s that are not persisted.<DT><A HREF="./hudson/model/Queue.WaitingItem.html" title="class in hudson.model"><B>Queue.WaitingItem</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD><A HREF="./hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> in the <A HREF="./hudson/model/Queue.html#waitingList"><CODE>Queue.waitingList</CODE></A> stage.<DT><A HREF="./hudson/model/Messages.html#Queue_AllNodesOffline(java.lang.Object)"><B>Queue_AllNodesOffline(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>All nodes of label ''{0}'' are offline
 <DT><A HREF="./hudson/model/Messages.html#Queue_BlockedBy(java.lang.Object)"><B>Queue_BlockedBy(Object)</B></A> - 
@@ -17289,9 +17356,6 @@ Method in class org.jvnet.hudson.test.recipes.<A HREF="./org/jvnet/hudson/test/r
 <DT><A HREF="./org/jvnet/hudson/test/recipes/WithPlugin.RunnerImpl.html#setup(org.jvnet.hudson.test.HudsonTestCase, org.jvnet.hudson.test.recipes.WithPlugin)"><B>setup(HudsonTestCase, WithPlugin)</B></A> - 
 Method in class org.jvnet.hudson.test.recipes.<A HREF="./org/jvnet/hudson/test/recipes/WithPlugin.RunnerImpl.html" title="class in org.jvnet.hudson.test.recipes">WithPlugin.RunnerImpl</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/Hudson.html#setUseCrumbs(java.lang.Boolean)"><B>setUseCrumbs(Boolean)</B></A> - 
-Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
-<DD>&nbsp;
 <DT><A HREF="./hudson/security/AuthorizationMatrixProperty.html#setUseProjectSecurity(boolean)"><B>setUseProjectSecurity(boolean)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/AuthorizationMatrixProperty.html" title="class in hudson.security">AuthorizationMatrixProperty</A>
 <DD>&nbsp;
@@ -17334,6 +17398,9 @@ Method in class hudson.model.<A HREF="./hudson/model/ParametersAction.html" titl
 <DD>Allow an other build of the same project to be scheduled, if it has other parameters.
 <DT><A HREF="./hudson/model/Queue.QueueAction.html#shouldSchedule(java.util.List)"><B>shouldSchedule(List&lt;Action&gt;)</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.QueueAction.html" title="interface in hudson.model">Queue.QueueAction</A>
+<DD>Returns whether the new item should be scheduled.
+<DT><A HREF="./hudson/model/Queue.QueueDecisionHandler.html#shouldSchedule(hudson.model.Queue.Task, java.util.List)"><B>shouldSchedule(Queue.Task, List&lt;Action&gt;)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Queue.QueueDecisionHandler.html" title="class in hudson.model">Queue.QueueDecisionHandler</A>
 <DD>Returns whether the new item should be scheduled.
 <DT><A HREF="./hudson/tasks/BuildTrigger.DescriptorImpl.html#showEvenIfUnstableOption(java.lang.Class)"><B>showEvenIfUnstableOption(Class&lt;? extends AbstractProject&gt;)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/BuildTrigger.DescriptorImpl.html" title="class in hudson.tasks">BuildTrigger.DescriptorImpl</A>
@@ -17524,8 +17591,14 @@ Method in class hudson.<A HREF="./hudson/ExtensionList.html" title="class in hud
 <DT><A HREF="./hudson/tasks/Publisher.DescriptorExtensionListImpl.html#sort(java.util.List)"><B>sort(List&lt;Descriptor&lt;Publisher&gt;&gt;)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Publisher.DescriptorExtensionListImpl.html" title="class in hudson.tasks">Publisher.DescriptorExtensionListImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Queue.QueueSortingHandler.html#sortBuildableItems(hudson.model.Queue.ItemList)"><B>sortBuildableItems(Queue.ItemList&lt;Queue.BuildableItem&gt;)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model">Queue.QueueSortingHandler</A>
+<DD>Sorts the buildable items list.
 <DT><A HREF="./hudson/model/View.html#SORTER"><B>SORTER</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Queue.html#sortingHandler"><B>sortingHandler</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in hudson.model">Queue</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/security/SparseACL.html" title="class in hudson.security"><B>SparseACL</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD>Accses control list.<DT><A HREF="./hudson/security/SparseACL.html#SparseACL(hudson.security.ACL)"><B>SparseACL(ACL)</B></A> - 
 Constructor for class hudson.security.<A HREF="./hudson/security/SparseACL.html" title="class in hudson.security">SparseACL</A>
@@ -18833,6 +18906,9 @@ Constructor for class hudson.model.<A HREF="./hudson/model/UsageStatistics.Combi
 <DT><A HREF="./hudson/model/UsageStatistics.CombinedCipherOutputStream.html" title="class in hudson.model"><B>UsageStatistics.CombinedCipherOutputStream</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Assymetric cipher is slow and in case of Sun RSA implementation it can only encyrypt the first block.<DT><A HREF="./hudson/model/UsageStatistics.CombinedCipherOutputStream.html#UsageStatistics.CombinedCipherOutputStream(java.io.OutputStream, javax.crypto.Cipher, java.lang.String)"><B>UsageStatistics.CombinedCipherOutputStream(OutputStream, Cipher, String)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/UsageStatistics.CombinedCipherOutputStream.html" title="class in hudson.model">UsageStatistics.CombinedCipherOutputStream</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/ClassicPluginStrategy.html#useAntClassLoader"><B>useAntClassLoader</B></A> - 
+Static variable in class hudson.<A HREF="./hudson/ClassicPluginStrategy.html" title="class in hudson">ClassicPluginStrategy</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/diagnosis/MemoryUsageMonitor.MemoryGroup.html#used"><B>used</B></A> - 
 Variable in class hudson.diagnosis.<A HREF="./hudson/diagnosis/MemoryUsageMonitor.MemoryGroup.html" title="class in hudson.diagnosis">MemoryUsageMonitor.MemoryGroup</A>
 <DD>Trend of the memory usage, after GCs.
@@ -19962,6 +20038,15 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#_ComputerSet_SpecifySlaveToCopy()"><B>_ComputerSet_SpecifySlaveToCopy()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Specify which slave to copy
+<DT><A HREF="./hudson/model/Computer.html#_connect(boolean)"><B>_connect(boolean)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
+<DD>Allows implementing-classes to provide an implementation for the connect method.
+<DT><A HREF="./hudson/model/Hudson.MasterComputer.html#_connect(boolean)"><B>_connect(boolean)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.MasterComputer.html" title="class in hudson.model">Hudson.MasterComputer</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/slaves/SlaveComputer.html#_connect(boolean)"><B>_connect(boolean)</B></A> - 
+Method in class hudson.slaves.<A HREF="./hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/scheduler/Messages.html#_CronTabList_InvalidInput(java.lang.Object, java.lang.Object)"><B>_CronTabList_InvalidInput(Object, Object)</B></A> - 
 Static method in class hudson.scheduler.<A HREF="./hudson/scheduler/Messages.html" title="class in hudson.scheduler">Messages</A>
 <DD>Invalid input: "{0}": {1}
@@ -20058,9 +20143,36 @@ Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in h
 <DT><A HREF="./hudson/Messages.html#_FilePath_validateAntFileMask_doesntMatchAndSuggest(java.lang.Object, java.lang.Object)"><B>_FilePath_validateAntFileMask_doesntMatchAndSuggest(Object, Object)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
 <DD>''{0}'' doesn''t match anything, but ''{1}'' does.
+<DT><A HREF="./hudson/Messages.html#_FilePath_validateAntFileMask_doesntMatchAnything(java.lang.Object)"><B>_FilePath_validateAntFileMask_doesntMatchAnything(Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>''{0}'' doesn''t match anything
+<DT><A HREF="./hudson/Messages.html#_FilePath_validateAntFileMask_doesntMatchAnythingAndSuggest(java.lang.Object, java.lang.Object)"><B>_FilePath_validateAntFileMask_doesntMatchAnythingAndSuggest(Object, Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>''{0}'' doesn''t match anything: even ''{1}'' doesn''t exist
+<DT><A HREF="./hudson/Messages.html#_FilePath_validateAntFileMask_portionMatchAndSuggest(java.lang.Object, java.lang.Object)"><B>_FilePath_validateAntFileMask_portionMatchAndSuggest(Object, Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>''{0}'' doesn''t match anything, although ''{1}'' exists
+<DT><A HREF="./hudson/Messages.html#_FilePath_validateAntFileMask_portionMatchButPreviousNotMatchAndSuggest(java.lang.Object, java.lang.Object, java.lang.Object)"><B>_FilePath_validateAntFileMask_portionMatchButPreviousNotMatchAndSuggest(Object, Object, Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>''{0}'' doesn''t match anything: ''{1}'' exists but not ''{2}''
 <DT><A HREF="./hudson/Messages.html#_FilePath_validateAntFileMask_whitespaceSeprator()"><B>_FilePath_validateAntFileMask_whitespaceSeprator()</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
 <DD>Whitespace can no longer be used as the separator.
+<DT><A HREF="./hudson/Messages.html#_FilePath_validateRelativePath_noSuchDirectory(java.lang.Object)"><B>_FilePath_validateRelativePath_noSuchDirectory(Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>No such directory: ''{0}''
+<DT><A HREF="./hudson/Messages.html#_FilePath_validateRelativePath_noSuchFile(java.lang.Object)"><B>_FilePath_validateRelativePath_noSuchFile(Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>No such file: ''{0}''
+<DT><A HREF="./hudson/Messages.html#_FilePath_validateRelativePath_notDirectory(java.lang.Object)"><B>_FilePath_validateRelativePath_notDirectory(Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>''{0}'' is not a directory
+<DT><A HREF="./hudson/Messages.html#_FilePath_validateRelativePath_notFile(java.lang.Object)"><B>_FilePath_validateRelativePath_notFile(Object)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>''{0}'' is not a file
+<DT><A HREF="./hudson/Messages.html#_FilePath_validateRelativePath_wildcardNotAllowed()"><B>_FilePath_validateRelativePath_wildcardNotAllowed()</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Messages.html" title="class in hudson">Messages</A>
+<DD>Wildcard is not allowed here
 <DT><A HREF="./hudson/tasks/Messages.html#_Fingerprinter_Aborted()"><B>_Fingerprinter_Aborted()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>Aborted

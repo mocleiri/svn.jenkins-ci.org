@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-View (Hudson main module 1.315 API)
+View (Hudson main module 1.316 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-10">
+<META NAME="date" CONTENT="2009-07-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ View (Hudson main module 1.315 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="View (Hudson main module 1.315 API)";
+        parent.document.title="View (Hudson main module 1.316 API)";
     }
 }
 </SCRIPT>
@@ -554,6 +554,14 @@ Encapsulates the rendering of the list of <A HREF="../../hudson/model/TopLevelIt
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/View.html#isEditable()">isEditable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By default, return true to render the "Edit view" link on the page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/search/SearchIndexBuilder.html" title="class in hudson.search">SearchIndexBuilder</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/View.html#makeSearchIndex()">makeSearchIndex</A></B>()</CODE>
 
@@ -914,6 +922,26 @@ public java.lang.String <B>getDisplayName</B>()</PRE>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ModelObject.html#getDisplayName()">getDisplayName</A></CODE> in interface <CODE><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></CODE></DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isEditable()"><!-- --></A><H3>
+isEditable</H3>
+<PRE>
+public boolean <B>isEditable</B>()</PRE>
+<DL>
+<DD>By default, return true to render the "Edit view" link on the page.
+ This method is really just for the default "All" view to hide the edit link
+ so that the default Hudson top page remains the same as before 1.316.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.316</DD>
 </DL>
 </DD>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue (Hudson main module 1.315 API)
+Queue (Hudson main module 1.316 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-10">
+<META NAME="date" CONTENT="2009-07-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue (Hudson main module 1.315 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue (Hudson main module 1.315 API)";
+        parent.document.title="Queue (Hudson main module 1.316 API)";
     }
 }
 </SCRIPT>
@@ -212,6 +212,22 @@ Build queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.QueueDecisionHandler.html" title="class in hudson.model">Queue.QueueDecisionHandler</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point for deciding if particular job should be scheduled or not</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model">Queue.QueueSortingHandler</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point for sorting buildable items</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;interface</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></B></CODE>
 
@@ -242,6 +258,14 @@ Build queue.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model">Queue.QueueSortingHandler</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#sortingHandler">sortingHandler</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -554,6 +578,16 @@ Build queue.
 <B>Field Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="sortingHandler"><!-- --></A><H3>
+sortingHandler</H3>
+<PRE>
+public volatile <A HREF="../../hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model">Queue.QueueSortingHandler</A> <B>sortingHandler</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
 
 <A NAME="XSTREAM"><!-- --></A><H3>
 XSTREAM</H3>
