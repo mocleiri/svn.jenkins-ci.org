@@ -478,7 +478,7 @@ public class MavenBuild extends AbstractBuild<MavenModule,MavenBuild> {
         @Override
         protected FilePath decideWorkspace() {
             WorkspaceList wsl = Computer.currentComputer().getWorkspaceList();
-            return wsl.alocate(getParentBuild().getModuleRoot().child(getProject().getRelativePath()));
+            return wsl.allocate(getParentBuild().getModuleRoot().child(getProject().getRelativePath()));
         }
 
         protected Result doRun(BuildListener listener) throws Exception {

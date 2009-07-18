@@ -28,7 +28,6 @@ import hudson.slaves.WorkspaceList;
 import static hudson.matrix.MatrixConfiguration.useShortWorkspaceName;
 import hudson.model.Build;
 import hudson.model.Computer;
-import hudson.model.TopLevelItem;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
@@ -136,9 +135,9 @@ public class MatrixRun extends Build<MatrixConfiguration,MatrixRun> {
             FilePath ws = getParentBuild().getWorkspace();
             if(ws==null)    return null;
             if(useShortWorkspaceName)
-                return wsl.alocate(ws.child(getParent().getDigestName()));
+                return wsl.allocate(ws.child(getParent().getDigestName()));
             else
-                return wsl.alocate(ws.child(getParent().getCombination().toString('/','/')));
+                return wsl.allocate(ws.child(getParent().getCombination().toString('/','/')));
         }
     }
 }

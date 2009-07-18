@@ -25,7 +25,7 @@ public final class WorkspaceList {
     /**
      * Allocates some workspace by adding some variation to the given base if necessary.
      */
-    public synchronized FilePath alocate(FilePath base) {
+    public synchronized FilePath allocate(FilePath base) {
         for (int i=1; ; i++) {
             FilePath candidate = i==1 ? base : base.withSuffix("@"+i);
             if(inUse.contains(candidate))

@@ -313,7 +313,7 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
             Computer c = Computer.currentComputer();
             // TODO: this cast is indicative of abstraction problem
             FilePath base = c.getNode().getWorkspaceFor((TopLevelItem)getProject());
-            return c.getWorkspaceList().alocate(base);
+            return c.getWorkspaceList().allocate(base);
         }
 
         public Result run(BuildListener listener) throws Exception {
