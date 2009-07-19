@@ -102,6 +102,14 @@ public abstract class AbstractHpiMojo extends AbstractMojo {
     private File webappDirectory;
 
     /**
+     * Optional - the oldest version of this plugin which the current version is
+     * configuration-compatible with.
+     *
+     * @parameter 
+     */
+    private String compatibleSinceVersion;
+
+    /**
      * Single directory for extra files to include in the WAR.
      *
      * @parameter expression="${basedir}/src/main/webapp"
@@ -837,6 +845,9 @@ public abstract class AbstractHpiMojo extends AbstractMojo {
         String url = project.getUrl();
         if(url!=null)
             mainSection.addAttributeAndCheck(new Attribute("Url", url));
+
+        if (compatibleSinceVersion!=null) 
+            mainSection.addAttributeAndCheck(new Attribute("Compatible-Since-Version", compatibleSinceVersion));
 
         String v = project.getVersion();
         if(v.endsWith("-SNAPSHOT")) {

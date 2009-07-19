@@ -35,6 +35,28 @@ THE SOFTWARE.
       </tr>
       <tr>
         <td>
+          <h1>${%Alternate Update Center Location}</h1>
+          <f:form method="post" action="modifyUpdateCenterLocation">
+            <f:block>
+              <f:entry title="${%Update Center Base URL}">
+                <f:textbox name="updateCenter.url"
+                           value="${app.updateCenter.url}" />
+              </f:entry>
+              <f:entry title="${%Update Repository Base URL}">
+                <f:textbox name="updateCenter.repoUrl"
+                           value="${app.updateCenter.repoBaseUrl}" />
+              </f:entry>
+              <f:entry title="${%Connection Check URL}">
+                <f:textbox name="updateCenter.connectionCheckUrl"
+                           value="${app.updateCenter.connectionCheckUrl}"
+                           />
+              </f:entry>
+            </f:block>
+            <f:block>
+              <f:submit value="${%Submit}" />
+            </f:block>
+          </f:form>
+          
           <h1>${%HTTP Proxy Configuration}</h1>
           <f:form method="post" action="proxyConfigure">
             <f:block>

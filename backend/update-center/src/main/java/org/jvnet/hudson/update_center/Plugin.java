@@ -133,6 +133,11 @@ public class Plugin {
 
         HpiFile hpi = new HpiFile(cache.obtain(this));
         json.put("requiredCore",hpi.getRequiredHudsonVersion());
+        
+        if (hpi.getCompatibleSinceVersion() != null) {
+            json.put("compatibleSinceVersion",hpi.getCompatibleSinceVersion());
+        }
+
         JSONArray deps = new JSONArray();
         for (HpiFile.Dependency d : hpi.getDependencies())
             deps.add(d.toJSON());

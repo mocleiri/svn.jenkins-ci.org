@@ -30,10 +30,13 @@ import hudson.PluginWrapper;
 import hudson.Util;
 import hudson.ProxyConfiguration;
 import hudson.Extension;
+import hudson.BulkChange;
+import hudson.XmlFile;
 import hudson.lifecycle.Lifecycle;
 import hudson.util.DaemonThreadFactory;
 import hudson.util.TextFile;
 import hudson.util.VersionNumber;
+import hudson.util.XStream2;
 import hudson.util.IOException2;
 import static hudson.util.TimeUnit2.DAYS;
 import net.sf.json.JSONObject;
@@ -43,6 +46,7 @@ import org.apache.commons.io.IOUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import com.thoughtworks.xstream.XStream;
 
 import javax.servlet.ServletException;
 import java.io.File;
@@ -142,6 +146,7 @@ public class UpdateCenter extends AbstractModelObject {
             this.config = config;
         }
     }
+
     
     /**
      * Returns true if it's time for us to check for new version.
@@ -323,6 +328,15 @@ public class UpdateCenter extends AbstractModelObject {
         return config.getUpdateCenterUrl();
     }
 
+    public String getRepoBaseUrl() {
+        return config.getPluginRepositoryBaseUrl();
+    }
+
+    public String getConnectionCheckUrl() {
+        return config.getConnectionCheckUrl();
+    }
+
+
     /**
      * {@link AdministrativeMonitor} that checks if there's Hudson update.
      */
@@ -403,13 +417,29 @@ public class UpdateCenter extends AbstractModelObject {
          *      false otherwise, including the situation where the strings couldn't be parsed as version numbers.
          */
         public boolean isNewerThan(String currentVersion) {
+            return isNewerThan(currentVersion, version);
+        }
+        
+        /**
+         * 
+         * Compares two versions - returns true if the first version is newer than the second version.
+         *
+         * @param firstVersion
+         *      The first version to test against.
+         * @param secondVersion
+         *      The second version to test against.
+         * @return
+         *      True if the first version is newer than the second version. False in all other cases.
+         */
+        public boolean isNewerThan(String firstVersion, String secondVersion) {
             try {
-                return new VersionNumber(currentVersion).compareTo(new VersionNumber(version)) < 0;
+                return new VersionNumber(firstVersion).compareTo(new VersionNumber(secondVersion)) < 0;
             } catch (IllegalArgumentException e) {
                 // couldn't parse as the version number.
                 return false;
             }
         }
+
     }
 
     public final class Plugin extends Entry {
@@ -430,12 +460,18 @@ public class UpdateCenter extends AbstractModelObject {
          */
         public final String excerpt;
 
+        /** 
+         * Optional version # from which this plugin release is compatible.
+         */
+        public final String compatibleSinceVersion;
+
         @DataBoundConstructor
         public Plugin(JSONObject o) {
             super(o);
             this.wiki = get(o,"wiki");
             this.title = get(o,"title");
             this.excerpt = get(o,"excerpt");
+            this.compatibleSinceVersion = get(o,"compatibleSinceVersion");
         }
 
         private String get(JSONObject o, String prop) {
@@ -457,6 +493,26 @@ public class UpdateCenter extends AbstractModelObject {
         public PluginWrapper getInstalled() {
             PluginManager pm = Hudson.getInstance().getPluginManager();
             return pm.getPlugin(name);
+        }
+
+        /**
+         * If the plugin is already installed, and the new version of the plugin has a "compatibleSinceVersion"
+         * value (i.e., it's only directly compatible with that version or later), this will check to
+         * see if the installed version is older than the compatible-since version. If it is older, it'll return false.
+         * If it's not older, or it's not installed, or it's installed but there's no compatibleSinceVersion 
+         * specified, it'll return true.
+         */
+        public boolean isCompatibleWithInstalledVersion() {
+            PluginWrapper installedVersion = getInstalled();
+            if (installedVersion != null) {
+                if (compatibleSinceVersion != null) {
+                    if (new VersionNumber(installedVersion.getVersion())
+                        .isOlderThan(new VersionNumber(compatibleSinceVersion))) {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         /**
@@ -489,7 +545,28 @@ public class UpdateCenter extends AbstractModelObject {
      * 
      * @since 1.266
      */
-    public static class UpdateCenterConfiguration implements ExtensionPoint {
+    public static class UpdateCenterConfiguration implements ExtensionPoint, Saveable {
+        private String configUpdateCenterUrl = "https://hudson.dev.java.net/";
+        private String configUpdateRepoUrl = "https://hudson.dev.java.net/";
+        private String configConnectionCheckUrl = "http://www.google.com";
+
+        public void save() throws IOException {
+            if(BulkChange.contains(this))   return;
+            getXmlFile().write(this);
+        }
+        
+        public static XmlFile getXmlFile() {
+            return new XmlFile(XSTREAM, new File(Hudson.getInstance().getRootDir(), "updateCenterConfig.xml"));
+        }
+
+        public static UpdateCenterConfiguration load() throws IOException {
+            XmlFile f = getXmlFile();
+            if(f.exists())
+                return (UpdateCenterConfiguration) f.read();
+            else
+                return new UpdateCenterConfiguration();
+        }
+
         /**
          * Check network connectivity by trying to establish a connection to
          * the host in connectionCheckUrl.
@@ -614,7 +691,11 @@ public class UpdateCenter extends AbstractModelObject {
          * Returns an "always up" server for Internet connectivity testing
          */
         public String getConnectionCheckUrl() {
-            return "http://www.google.com";
+            return configConnectionCheckUrl;
+        }
+        
+        public void setConnectionCheckUrl(String connectionCheckUrl) {
+            this.configConnectionCheckUrl = connectionCheckUrl;
         }
         
         /**
@@ -625,14 +706,22 @@ public class UpdateCenter extends AbstractModelObject {
          *      Absolute URL that ends with '/'.
          */
         public String getUpdateCenterUrl() {
-            return "https://hudson.dev.java.net/";
+            return configUpdateCenterUrl;
+        }
+
+        public void setUpdateCenterUrl(String updateCenterUrl) {
+            this.configUpdateCenterUrl = updateCenterUrl;
         }
         
         /**
          * Returns the URL of the server that hosts plugins and core updates.
          */
         public String getPluginRepositoryBaseUrl() {
-            return "https://hudson.dev.java.net/";
+            return configUpdateRepoUrl;
+        }
+
+        public void setPluginRepositoryBaseUrl(String updateRepoUrl) {
+            this.configUpdateRepoUrl = updateRepoUrl;
         }
         
         
@@ -641,6 +730,13 @@ public class UpdateCenter extends AbstractModelObject {
             IOUtils.copy(in,new ByteArrayOutputStream());
             in.close();
         }                    
+
+        private static final XStream XSTREAM = new XStream2();
+        
+        static {
+            XSTREAM.alias("updateCenterConfig", UpdateCenterConfiguration.class);
+        }
+
     }
     
     /**

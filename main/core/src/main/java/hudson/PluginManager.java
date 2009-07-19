@@ -354,6 +354,35 @@ public final class PluginManager extends AbstractModelObject {
         rsp.sendRedirect("../updateCenter/");
     }
 
+    public void doModifyUpdateCenterLocation(
+                                             @QueryParameter("updateCenter.url") String url,
+                                             @QueryParameter("updateCenter.repoUrl") String repoUrl,
+                                             @QueryParameter("updateCenter.connectionCheckUrl") String connectionCheckUrl,
+                                             StaplerResponse rsp) throws IOException {
+        Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
+        
+        url = Util.fixEmptyAndTrim(url);
+        repoUrl = Util.fixEmptyAndTrim(repoUrl);
+        connectionCheckUrl = Util.fixEmptyAndTrim(connectionCheckUrl);
+        
+        UpdateCenter.UpdateCenterConfiguration updateConfig = UpdateCenter.UpdateCenterConfiguration.load();
+        
+        if (url != null) 
+            updateConfig.setUpdateCenterUrl(url);
+        
+        if (repoUrl != null)
+            updateConfig.setPluginRepositoryBaseUrl(repoUrl);
+
+        if (connectionCheckUrl != null) 
+            updateConfig.setConnectionCheckUrl(connectionCheckUrl);
+
+        updateConfig.save();
+
+        Hudson.getInstance().getUpdateCenter().configure(updateConfig);
+        
+        rsp.sendRedirect("./advanced");
+    }
+    
     public void doProxyConfigure(
             @QueryParameter("proxy.server") String server,
             @QueryParameter("proxy.port") String port,
