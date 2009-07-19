@@ -110,6 +110,14 @@ public abstract class AbstractHpiMojo extends AbstractMojo {
     private String compatibleSinceVersion;
 
     /**
+     * Optional - the oldest version of Hudson core with which the current version is
+     * compatible.
+     *
+     * @parameter 
+     */
+    private String requiredCoreVersion;
+
+    /**
      * Single directory for extra files to include in the WAR.
      *
      * @parameter expression="${basedir}/src/main/webapp"
@@ -856,7 +864,10 @@ public abstract class AbstractHpiMojo extends AbstractMojo {
         }
         mainSection.addAttributeAndCheck(new Attribute("Plugin-Version",v));
         mainSection.addAttributeAndCheck(new Attribute("Hudson-Version",findHudsonVersion()));
-
+        
+        if (requiredCoreVersion != null) 
+            mainSection.addAttributeAndCheck(new Attribute("Required-Hudson-Version", requiredCoreVersion));
+        
         if(maskClasses!=null)
             mainSection.addAttributeAndCheck(new Attribute("Mask-Classes",maskClasses));
 

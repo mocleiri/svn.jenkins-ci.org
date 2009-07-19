@@ -45,7 +45,12 @@ THE SOFTWARE.
               <j:when test="${!empty(list)}">
                 <j:forEach var="p" items="${list}">
                   <tr>
-                    <td class="pane" align="center"><input type="checkbox" name="plugin.${p.name}"/></td>
+                    <j:when test="${p.isCompatibleWithCurrentCore()}">
+                      <td class="pane" align="center"><input type="checkbox" name="plugin.${p.name}"/></td>
+                    </j:when>
+                    <j:otherwise>
+                      <td class="pane" align="center"><input type="checkbox" disabled="true" name="plugin.${p.name}"/></td>
+                    </j:otherwise>
                     <td class="pane">
                       <div>
                         <a href="${p.wiki}"><st:out value="${p.displayName}"/></a>
@@ -58,6 +63,15 @@ THE SOFTWARE.
                         version not compatible with installed
                         version. Jobs may need to be
                         reconfigured.}</div>
+                      </j:if>
+                      <j:if
+                          test="${!p.isCompatibleWithCurrentCore()}">
+                        <div class="compatWarning">${%Error: This
+                        version of this plugin requires a newer
+                        version of Hudson than you have installed. You
+                        will need to upgrade before installing this
+                        plugin. Required Hudson version:}
+                        ${p.requiredCore}</div>
                       </j:if>
                     </td>
                     <td class="pane"><st:out value="${p.version}" /></td>

@@ -30,8 +30,12 @@ public final class HpiFile {
         attributes = manifest.getMainAttributes();
     }
 
-    public String getRequiredHudsonVersion() {
+    public String getBuiltWithHudsonVersion() {
         return attributes.getValue("Hudson-Version");
+    }
+
+    public String getRequiredHudsonVersion() {
+        return attributes.getValue("Required-Hudson-Version");
     }
 
     public String getCompatibleSinceVersion() {

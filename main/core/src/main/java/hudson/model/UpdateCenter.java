@@ -465,6 +465,12 @@ public class UpdateCenter extends AbstractModelObject {
          */
         public final String compatibleSinceVersion;
 
+        /** 
+         * Optional version # of Hudson core. If specified, this plugin release is only
+         * compatible with that version of Hudson core or more recent.
+         */
+        public final String requiredCore;
+
         @DataBoundConstructor
         public Plugin(JSONObject o) {
             super(o);
@@ -472,6 +478,7 @@ public class UpdateCenter extends AbstractModelObject {
             this.title = get(o,"title");
             this.excerpt = get(o,"excerpt");
             this.compatibleSinceVersion = get(o,"compatibleSinceVersion");
+            this.requiredCore = get(o,"requiredCore");
         }
 
         private String get(JSONObject o, String prop) {
@@ -510,6 +517,19 @@ public class UpdateCenter extends AbstractModelObject {
                         .isOlderThan(new VersionNumber(compatibleSinceVersion))) {
                         return false;
                     }
+                }
+            }
+            return true;
+        }
+
+        /** 
+         * Determines if this plugin release is compatible with the currently installed Hudson core, if the 
+         * "requiredCore" attribute is set for this plugin.
+         */
+        public boolean isCompatibleWithCurrentCore() {
+            if (requiredCore != null) {
+                if (new VersionNumber(Hudson.VERSION).isOlderThan(new VersionNumber(requiredCore))) {
+                    return false;
                 }
             }
             return true;
