@@ -46,7 +46,7 @@ public class Main {
 
         PrintWriter pw = new PrintWriter(new FileWriter(output));
         pw.println("updateCenter.post(");
-        root.write(pw);
+        pw.println(root.toString(2));
         pw.println(");");
         pw.close();
     }
