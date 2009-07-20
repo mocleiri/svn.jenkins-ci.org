@@ -349,9 +349,13 @@ public class SCMTrigger extends Trigger<SCMedItem> {
             }
         }
 
+        private SCMedItem job() {
+            return job;
+        }
+
         // as per the requirement of SequentialExecutionQueue, value equality is necessary
         public boolean equals(Object that) {
-            return job==((SCMTrigger)that).job;
+            return job()==((Runner)that).job();
         }
 
         @Override
