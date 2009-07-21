@@ -883,7 +883,7 @@ public class Queue extends ResourceController implements Saveable {
     }
 
     private void makeBuildable(BuildableItem p) {
-        if(p.task instanceof FlyweightTask) {
+        if(Hudson.FLYWEIGHT_SUPPORT && p.task instanceof FlyweightTask) {
             ConsistentHash<Node> hash = new ConsistentHash<Node>(new Hash<Node>() {
                 public String hash(Node node) {
                     return node.getNodeName();
