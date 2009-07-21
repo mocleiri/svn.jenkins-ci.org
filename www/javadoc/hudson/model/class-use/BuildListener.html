@@ -1,0 +1,1097 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<!-- -->
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>
+Uses of Interface hudson.model.BuildListener (Hudson main module 1.316 API)
+</TITLE>
+
+<META NAME="date" CONTENT="2009-07-17">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="Uses of Interface hudson.model.BuildListener (Hudson main module 1.316 API)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model"><FONT CLASS="NavBarFont1"><B>Class</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Use</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../index.html?hudson/model//class-useBuildListener.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="BuildListener.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<CENTER>
+<H2>
+<B>Uses of Interface<br>hudson.model.BuildListener</B></H2>
+</CENTER>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Packages that use <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.fsp"><B>hudson.fsp</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.matrix"><B>hudson.matrix</B></A></TD>
+<TD>Matrix project&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
+<TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.model.listeners"><B>hudson.model.listeners</B></A></TD>
+<TD>Listener interfaces for various events that occur inside the server.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.scm"><B>hudson.scm</B></A></TD>
+<TD>Hudson's interface with source code management systems.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.slaves"><B>hudson.slaves</B></A></TD>
+<TD>Code related to slaves.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks"><B>hudson.tasks</B></A></TD>
+<TD>Built-in <a href="../../../hudson/tasks/Builder.html"><tt>Builder</tt></a>s and <a href="../../../hudson/tasks/Publisher.html"><tt>Publisher</tt></a>s
+that perform the actual heavy-lifting of a build.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks.junit"><B>hudson.tasks.junit</B></A></TD>
+<TD>Model objects that represent JUnit test reports.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks.test"><B>hudson.tasks.test</B></A></TD>
+<TD>Defines contracts that need to be implemented by a test reporting
+action (such as the built-in JUnit one).&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.jvnet.hudson.test"><B>org.jvnet.hudson.test</B></A></TD>
+<TD>Test harness for Hudson and its plugins.&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.fsp"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A> in <A HREF="../../../hudson/fsp/package-summary.html">hudson.fsp</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/fsp/package-summary.html">hudson.fsp</A> with parameters of type <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>WorkspaceSnapshotSCM.</B><B><A HREF="../../../hudson/fsp/WorkspaceSnapshotSCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)">checkout</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+         <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+         <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+         java.io.File&nbsp;changelogFile)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.matrix"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A> in <A HREF="../../../hudson/matrix/package-summary.html">hudson.matrix</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/matrix/package-summary.html">hudson.matrix</A> declared as <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></CODE></FONT></TD>
+<TD><CODE><B>MatrixAggregator.</B><B><A HREF="../../../hudson/matrix/MatrixAggregator.html#listener">listener</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The listener to send the output to.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/matrix/package-summary.html">hudson.matrix</A> with parameters of type <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/matrix/MatrixAggregator.html" title="class in hudson.matrix">MatrixAggregator</A></CODE></FONT></TD>
+<TD><CODE><B>MatrixAggregatable.</B><B><A HREF="../../../hudson/matrix/MatrixAggregatable.html#createAggregator(hudson.matrix.MatrixBuild, hudson.Launcher, hudson.model.BuildListener)">createAggregator</A></B>(<A HREF="../../../hudson/matrix/MatrixBuild.html" title="class in hudson.matrix">MatrixBuild</A>&nbsp;build,
+                 <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                 <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new instance of the aggregator.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/matrix/package-summary.html">hudson.matrix</A> with parameters of type <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/matrix/MatrixAggregator.html#MatrixAggregator(hudson.matrix.MatrixBuild, hudson.Launcher, hudson.model.BuildListener)">MatrixAggregator</A></B>(<A HREF="../../../hudson/matrix/MatrixBuild.html" title="class in hudson.matrix">MatrixBuild</A>&nbsp;build,
+                 <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                 <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.model"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A> in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> that implement <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/StreamBuildListener.html" title="class in hudson.model">StreamBuildListener</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model"><CODE>BuildListener</CODE></A> that writes to an <CODE>OutputStream</CODE>.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with parameters of type <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>AbstractProject.</B><B><A HREF="../../../hudson/model/AbstractProject.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener, java.io.File)">checkout</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+         <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+         java.io.File&nbsp;changelogFile)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#cleanUp(hudson.model.BuildListener)">cleanUp</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Run.Runner.</B><B><A HREF="../../../hudson/model/Run.Runner.html#cleanUp(hudson.model.BuildListener)">cleanUp</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs final clean up action.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Build.RunnerImpl.</B><B><A HREF="../../../hudson/model/Build.RunnerImpl.html#cleanUp(hudson.model.BuildListener)">cleanUp</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#createLauncher(hudson.model.BuildListener)">createLauncher</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a <A HREF="../../../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> that this build will use.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
+<TD><CODE><B>Build.RunnerImpl.</B><B><A HREF="../../../hudson/model/Build.RunnerImpl.html#createLauncher(hudson.model.BuildListener)">createLauncher</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decorates the <A HREF="../../../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A></CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#doRun(hudson.model.BuildListener)">doRun</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The portion of a build that is specific to a subclass of <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A>
+ goes here.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A></CODE></FONT></TD>
+<TD><CODE><B>Build.RunnerImpl.</B><B><A HREF="../../../hudson/model/Build.RunnerImpl.html#doRun(hudson.model.BuildListener)">doRun</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>JobProperty.</B><B><A HREF="../../../hudson/model/JobProperty.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs the step over the given build and reports the progress to the listener.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildStep(hudson.model.BuildListener, java.lang.Iterable, boolean)">performAllBuildStep</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+                    java.lang.Iterable&lt;? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
+                    boolean&nbsp;phase)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs all the given build steps, even if one of them fail.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildStep(hudson.model.BuildListener, java.util.Map, boolean)">performAllBuildStep</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+                    java.util.Map&lt;?,? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
+                    boolean&nbsp;phase)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#post(hudson.model.BuildListener)">post</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Run.Runner.</B><B><A HREF="../../../hudson/model/Run.Runner.html#post(hudson.model.BuildListener)">post</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs the post-build action.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#post2(hudson.model.BuildListener)">post2</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Build.RunnerImpl.</B><B><A HREF="../../../hudson/model/Build.RunnerImpl.html#post2(hudson.model.BuildListener)">post2</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>JobProperty.</B><B><A HREF="../../../hudson/model/JobProperty.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#preBuild(hudson.model.BuildListener, java.util.Collection)">preBuild</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+         java.util.Collection&lt;? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;steps)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#preBuild(hudson.model.BuildListener, java.lang.Iterable)">preBuild</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+         java.lang.Iterable&lt;? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;steps)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#preBuild(hudson.model.BuildListener, java.util.Map)">preBuild</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+         java.util.Map&lt;?,? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;steps)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A></CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#run(hudson.model.BuildListener)">run</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A></CODE></FONT></TD>
+<TD><CODE><B>Run.Runner.</B><B><A HREF="../../../hudson/model/Run.Runner.html#run(hudson.model.BuildListener)">run</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs the main build and returns the status code.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Environment.</B><B><A HREF="../../../hudson/model/Environment.html#tearDown(hudson.model.AbstractBuild, hudson.model.BuildListener)">tearDown</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs after the <A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A> completes, and performs a tear down.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.model.listeners"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A> in <A HREF="../../../hudson/model/listeners/package-summary.html">hudson.model.listeners</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/model/listeners/package-summary.html">hudson.model.listeners</A> with parameters of type <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>SCMListener.</B><B><A HREF="../../../hudson/model/listeners/SCMListener.html#onChangeLogParsed(hudson.model.AbstractBuild, hudson.model.BuildListener, hudson.scm.ChangeLogSet)">onChangeLogParsed</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+                  <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+                  <A HREF="../../../hudson/scm/ChangeLogSet.html" title="class in hudson.scm">ChangeLogSet</A>&lt;?&gt;&nbsp;changelog)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called once the changelog is determined.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.scm"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A> in <A HREF="../../../hudson/scm/package-summary.html">hudson.scm</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/scm/package-summary.html">hudson.scm</A> with parameters of type <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>SCM.</B><B><A HREF="../../../hudson/scm/SCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)">checkout</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+         <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+         <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+         java.io.File&nbsp;changelogFile)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains a fresh workspace of the module(s) into the specified directory
+ of the specified machine.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>NullSCM.</B><B><A HREF="../../../hudson/scm/NullSCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)">checkout</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+         <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+         <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;remoteDir,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+         java.io.File&nbsp;changeLogFile)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>CVSSCM.</B><B><A HREF="../../../hudson/scm/CVSSCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)">checkout</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+         <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+         <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+         java.io.File&nbsp;changelogFile)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>SCM.</B><B><A HREF="../../../hudson/scm/SCM.html#createEmptyChangeLog(java.io.File, hudson.model.BuildListener, java.lang.String)">createEmptyChangeLog</A></B>(java.io.File&nbsp;changelogFile,
+                     <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+                     java.lang.String&nbsp;rootTag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.slaves"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A> in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A> with parameters of type <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Environment.html" title="class in hudson.model">Environment</A></CODE></FONT></TD>
+<TD><CODE><B>NodeProperty.</B><B><A HREF="../../../hudson/slaves/NodeProperty.html#setUp(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">setUp</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+      <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+      <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs before the <A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A> runs, and performs a set up.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Environment.html" title="class in hudson.model">Environment</A></CODE></FONT></TD>
+<TD><CODE><B>EnvironmentVariablesNodeProperty.</B><B><A HREF="../../../hudson/slaves/EnvironmentVariablesNodeProperty.html#setUp(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">setUp</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+      <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+      <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A> in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A> with parameters of type <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/matrix/MatrixAggregator.html" title="class in hudson.matrix">MatrixAggregator</A></CODE></FONT></TD>
+<TD><CODE><B>BuildTrigger.</B><B><A HREF="../../../hudson/tasks/BuildTrigger.html#createAggregator(hudson.matrix.MatrixBuild, hudson.Launcher, hudson.model.BuildListener)">createAggregator</A></B>(<A HREF="../../../hudson/matrix/MatrixBuild.html" title="class in hudson.matrix">MatrixBuild</A>&nbsp;build,
+                 <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                 <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
+<TD><CODE><B>BuildWrapper.</B><B><A HREF="../../../hudson/tasks/BuildWrapper.html#decorateLauncher(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">decorateLauncher</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+                 <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                 <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provides an opportunity for a <A HREF="../../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A> to decorate a <A HREF="../../../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> to be used in the build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>MailSender.</B><B><A HREF="../../../hudson/tasks/MailSender.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener)">execute</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>BuildTrigger.</B><B><A HREF="../../../hudson/tasks/BuildTrigger.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener, hudson.tasks.BuildTrigger)">execute</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+        <A HREF="../../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks">BuildTrigger</A>&nbsp;trigger)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience method to trigger downstream builds.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;javax.mail.internet.MimeMessage</CODE></FONT></TD>
+<TD><CODE><B>MailSender.</B><B><A HREF="../../../hudson/tasks/MailSender.html#getMail(hudson.model.AbstractBuild, hudson.model.BuildListener)">getMail</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Mailer.</B><B><A HREF="../../../hudson/tasks/Mailer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>BuildStep.</B><B><A HREF="../../../hudson/tasks/BuildStep.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs the step over the given build and reports the progress to the listener.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Ant.</B><B><A HREF="../../../hudson/tasks/Ant.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>BuildStepCompatibilityLayer.</B><B><A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Fingerprinter.</B><B><A HREF="../../../hudson/tasks/Fingerprinter.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>JavadocArchiver.</B><B><A HREF="../../../hudson/tasks/JavadocArchiver.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>ArtifactArchiver.</B><B><A HREF="../../../hudson/tasks/ArtifactArchiver.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>CommandInterpreter.</B><B><A HREF="../../../hudson/tasks/CommandInterpreter.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Maven.</B><B><A HREF="../../../hudson/tasks/Maven.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>BuildTrigger.</B><B><A HREF="../../../hudson/tasks/BuildTrigger.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>BuildStepCompatibilityLayer.</B><B><A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.Build, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/Build.html" title="class in hudson.model">Build</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>BuildStepCompatibilityLayer.perform(AbstractBuild, Launcher, BuildListener)</CODE></A> instead.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>BuildStep.</B><B><A HREF="../../../hudson/tasks/BuildStep.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs before the build begins.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>BuildStepCompatibilityLayer.</B><B><A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>ArtifactArchiver.</B><B><A HREF="../../../hudson/tasks/ArtifactArchiver.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>BuildStepCompatibilityLayer.</B><B><A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#prebuild(hudson.model.Build, hudson.model.BuildListener)">prebuild</A></B>(<A HREF="../../../hudson/model/Build.html" title="class in hudson.model">Build</A>&lt;?,?&gt;&nbsp;build,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>BuildStepCompatibilityLayer.prebuild(AbstractBuild, BuildListener)</CODE></A> instead.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Publisher.</B><B><A HREF="../../../hudson/tasks/Publisher.html#prebuild(hudson.model.Build, hudson.model.BuildListener)">prebuild</A></B>(<A HREF="../../../hudson/model/Build.html" title="class in hudson.model">Build</A>&nbsp;build,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Builder.</B><B><A HREF="../../../hudson/tasks/Builder.html#prebuild(hudson.model.Build, hudson.model.BuildListener)">prebuild</A></B>(<A HREF="../../../hudson/model/Build.html" title="class in hudson.model">Build</A>&nbsp;build,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default implementation that does nothing.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/BuildWrapper.Environment.html" title="class in hudson.tasks">BuildWrapper.Environment</A></CODE></FONT></TD>
+<TD><CODE><B>BuildWrapper.</B><B><A HREF="../../../hudson/tasks/BuildWrapper.html#setUp(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">setUp</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+      <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+      <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs before the <A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A> runs, and performs a set up.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/BuildWrapper.Environment.html" title="class in hudson.tasks">BuildWrapper.Environment</A></CODE></FONT></TD>
+<TD><CODE><B>BuildWrapper.</B><B><A HREF="../../../hudson/tasks/BuildWrapper.html#setUp(hudson.model.Build, hudson.Launcher, hudson.model.BuildListener)">setUp</A></B>(<A HREF="../../../hudson/model/Build.html" title="class in hudson.model">Build</A>&nbsp;build,
+      <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+      <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../hudson/tasks/BuildWrapper.html#setUp(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>BuildWrapper.setUp(AbstractBuild, Launcher, BuildListener)</CODE></A> instead.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>BuildWrapper.Environment.</B><B><A HREF="../../../hudson/tasks/BuildWrapper.Environment.html#tearDown(hudson.model.AbstractBuild, hudson.model.BuildListener)">tearDown</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs after the <A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A> completes, and performs a tear down.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>BuildWrapper.Environment.</B><B><A HREF="../../../hudson/tasks/BuildWrapper.Environment.html#tearDown(hudson.model.Build, hudson.model.BuildListener)">tearDown</A></B>(<A HREF="../../../hudson/model/Build.html" title="class in hudson.model">Build</A>&nbsp;build,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../hudson/tasks/BuildWrapper.Environment.html#tearDown(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>BuildWrapper.Environment.tearDown(AbstractBuild, BuildListener)</CODE></A> instead.</I></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks.junit"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A> in <A HREF="../../../hudson/tasks/junit/package-summary.html">hudson.tasks.junit</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/tasks/junit/package-summary.html">hudson.tasks.junit</A> with parameters of type <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/matrix/MatrixAggregator.html" title="class in hudson.matrix">MatrixAggregator</A></CODE></FONT></TD>
+<TD><CODE><B>JUnitResultArchiver.</B><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#createAggregator(hudson.matrix.MatrixBuild, hudson.Launcher, hudson.model.BuildListener)">createAggregator</A></B>(<A HREF="../../../hudson/matrix/MatrixBuild.html" title="class in hudson.matrix">MatrixBuild</A>&nbsp;build,
+                 <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                 <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>JUnitResultArchiver.</B><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>TestResultAction.</B><B><A HREF="../../../hudson/tasks/junit/TestResultAction.html#setResult(hudson.tasks.junit.TestResult, hudson.model.BuildListener)">setResult</A></B>(<A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A>&nbsp;result,
+          <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overwrites the <A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit"><CODE>TestResult</CODE></A> by a new data set.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/tasks/junit/package-summary.html">hudson.tasks.junit</A> with parameters of type <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestResultAction.html#TestResultAction(hudson.model.AbstractBuild, hudson.tasks.junit.TestResult, hudson.model.BuildListener)">TestResultAction</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;owner,
+                 <A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A>&nbsp;result,
+                 <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A> in <A HREF="../../../hudson/tasks/test/package-summary.html">hudson.tasks.test</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/tasks/test/package-summary.html">hudson.tasks.test</A> with parameters of type <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>AggregatedTestResultPublisher.</B><B><A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/tasks/test/package-summary.html">hudson.tasks.test</A> with parameters of type <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/tasks/test/TestResultAggregator.html#TestResultAggregator(hudson.matrix.MatrixBuild, hudson.Launcher, hudson.model.BuildListener)">TestResultAggregator</A></B>(<A HREF="../../../hudson/matrix/MatrixBuild.html" title="class in hudson.matrix">MatrixBuild</A>&nbsp;build,
+                     <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                     <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.jvnet.hudson.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A> in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A> with parameters of type <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>SingleFileSCM.</B><B><A HREF="../../../org/jvnet/hudson/test/SingleFileSCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)">checkout</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+         <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+         <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+         java.io.File&nbsp;changeLogFile)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>ExtractResourceSCM.</B><B><A HREF="../../../org/jvnet/hudson/test/ExtractResourceSCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)">checkout</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+         <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+         <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+         java.io.File&nbsp;changeLogFile)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>FailureBuilder.</B><B><A HREF="../../../org/jvnet/hudson/test/FailureBuilder.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>SleepBuilder.</B><B><A HREF="../../../org/jvnet/hudson/test/SleepBuilder.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>CaptureEnvironmentBuilder.</B><B><A HREF="../../../org/jvnet/hudson/test/CaptureEnvironmentBuilder.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>MockBuilder.</B><B><A HREF="../../../org/jvnet/hudson/test/MockBuilder.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>TestBuilder.</B><B><A HREF="../../../org/jvnet/hudson/test/TestBuilder.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model"><FONT CLASS="NavBarFont1"><B>Class</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Use</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../index.html?hudson/model//class-useBuildListener.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="BuildListener.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &#169; 2009. All Rights Reserved.
+</BODY>
+</HTML>

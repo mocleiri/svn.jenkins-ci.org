@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.jvnet.hudson.plugins</groupId>
+    <artifactId>plugin</artifactId>
+    <version>1.316</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  
+  <groupId>hudson.plugins.jdepend</groupId>
+  <artifactId>jdepend</artifactId>
+  <packaging>hpi</packaging>
+  <version>1.2-SNAPSHOT</version>
+  
+  <name>JDepend Hudson Plugin</name>
+  <description>A Hudson plugin that uses JDepend to generate metrics.</description>
+  <inceptionYear>2009</inceptionYear>
+  <url>http://wiki.hudson-ci.org/display/HUDSON/JDepend+Plugin</url>
+  
+  <licenses>
+      <license>
+          <name>BSD</name>
+          <url>http://www.clarkware.com/software/license.txt</url>
+          <comments>License from Clarkware for JDepend.</comments>
+      </license>
+      <license>
+          <name>Apache License 2.0</name>
+          <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+          <comments>License for editing and use of JDepend Maven Plugin from Codehaus.</comments>
+      </license>
+      <license>
+          <name>BSD</name>
+          <url>http://creativecommons.org/licenses/BSD/</url>
+          <distribution>repo</distribution>
+          <comments>License from University of California, Santa Cruz for Hudson plugin.</comments>
+      </license>
+  </licenses>
+  <developers>
+      <developer>
+          <id>cflewis</id>
+          <name>Chris Lewis</name>
+          <email>chris@cflewis.com</email>
+          <url>http://cflewis.com</url>
+          <organization>University of California, Santa Cruz</organization>
+          <organizationUrl>http://eis.ucsc.edu</organizationUrl>
+          <roles>
+              <role>Developer</role>
+          </roles>
+          <timezone>-8</timezone>
+      </developer>
+  </developers>
+  <issueManagement>
+      <system>GitHub</system>
+      <url>http://github.com/Lewisham/JDepend-Hudson-Plugin/issues</url>
+  </issueManagement>
+  <dependencies>
+      <dependency>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>jdepend-maven-plugin</artifactId>
+          <version>2.0-beta-2</version>
+      </dependency>
+      <dependency>
+          <groupId>jdepend</groupId>
+          <artifactId>jdepend</artifactId>
+          <version>2.9.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.doxia</groupId>
+        <artifactId>doxia-core</artifactId>
+        <version>1.1.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.doxia</groupId>
+        <artifactId>doxia-module-xhtml</artifactId>
+        <version>1.1.1</version>
+      </dependency>
+  </dependencies>
+  
+  <scm>
+    <connection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/jdepend</connection>
+    <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/jdepend</developerConnection>
+    <url>https://hudson.dev.java.net/source/browse/hudson/hudson/plugins/jdepend/trunk/hudson/plugins/jdepend</url>
+  </scm>
+  
+</project>
+  

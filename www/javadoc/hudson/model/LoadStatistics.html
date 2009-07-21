@@ -1,0 +1,562 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<!-- -->
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>
+LoadStatistics (Hudson main module 1.316 API)
+</TITLE>
+
+<META NAME="date" CONTENT="2009-07-17">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="LoadStatistics (Hudson main module 1.316 API)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/LoadStatistics.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../hudson/model/LoadBalancer.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/LoadStatistics.LoadStatisticsUpdater.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../index.html?hudson/model/LoadStatistics.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="LoadStatistics.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+hudson.model</FONT>
+<BR>
+Class LoadStatistics</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.LoadStatistics</B>
+</PRE>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/OverallLoadStatistics.html" title="class in hudson.model">OverallLoadStatistics</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public abstract class <B>LoadStatistics</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+Utilization statistics for a node or a set of nodes.
+
+ <h2>Implementation Note</h2>
+ <p>
+ Instances of this class is not capable of updating the statistics itself
+ &mdash; instead, it's done by the <A HREF="../../hudson/model/LoadStatistics.LoadStatisticsUpdater.html" title="class in hudson.model"><CODE>LoadStatistics.LoadStatisticsUpdater</CODE></A> timer.
+ This is more efficient (as it allows us a single pass to update all stats),
+ but it's not clear to me if the loss of autonomy is worth it.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Kohsuke Kawaguchi</DD>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Label.html#loadStatistics"><CODE>Label.loadStatistics</CODE></A>, 
+<A HREF="../../hudson/model/Hudson.html#overallLoad"><CODE>Hudson.overallLoad</CODE></A></DL>
+<HR>
+
+<P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.LoadStatisticsUpdater.html" title="class in hudson.model">LoadStatistics.LoadStatisticsUpdater</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Periodically update the load statistics average.</TD>
+</TR>
+</TABLE>
+&nbsp;<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#busyExecutors">busyExecutors</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of busy executors and how it changes over time.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#CLOCK">CLOCK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Load statistics clock cycle in milliseconds.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;float</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#DECAY">DECAY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;With 0.90 decay ratio for every 10sec, half reduction is about 1 min.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#queueLength">queueLength</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of <A HREF="../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model"><CODE>Queue.BuildableItem</CODE></A>s that can run on any node in this node set but blocked.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#totalExecutors">totalExecutors</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of total executors and how it changes over time.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#LoadStatistics(int, int)">LoadStatistics</A></B>(int&nbsp;initialTotalExecutors,
+               int&nbsp;initialBusyExecutors)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#computeIdleExecutors()">computeIdleExecutors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computes the # of idle executors right now and obtains the snapshot value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#computeQueueLength()">computeQueueLength</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computes the # of queue length right now and obtains the snapshot value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#computeTotalExecutors()">computeTotalExecutors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computes the # of total executors right now and obtains the snapshot value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#configureRenderer(org.jfree.chart.renderer.category.LineAndShapeRenderer)">configureRenderer</A></B>(org.jfree.chart.renderer.category.LineAndShapeRenderer&nbsp;renderer)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.jfree.chart.JFreeChart</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#createChart(org.jfree.data.category.CategoryDataset)">createChart</A></B>(org.jfree.data.category.CategoryDataset&nbsp;ds)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a trend chart.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/MultiStageTimeSeries.TrendChart.html" title="class in hudson.model">MultiStageTimeSeries.TrendChart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#createTrendChart(hudson.model.MultiStageTimeSeries.TimeScale)">createTrendChart</A></B>(<A HREF="../../hudson/model/MultiStageTimeSeries.TimeScale.html" title="enum in hudson.model">MultiStageTimeSeries.TimeScale</A>&nbsp;timeScale)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates <CODE>CategoryDataset</CODE> which then becomes the basis
+ of the load statistics graph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/MultiStageTimeSeries.TrendChart.html" title="class in hudson.model">MultiStageTimeSeries.TrendChart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#doGraph(java.lang.String)">doGraph</A></B>(java.lang.String&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generates the load statistics graph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;float</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#getLatestIdleExecutors(hudson.model.MultiStageTimeSeries.TimeScale)">getLatestIdleExecutors</A></B>(<A HREF="../../hudson/model/MultiStageTimeSeries.TimeScale.html" title="enum in hudson.model">MultiStageTimeSeries.TimeScale</A>&nbsp;timeScale)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="busyExecutors"><!-- --></A><H3>
+busyExecutors</H3>
+<PRE>
+public final <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A> <B>busyExecutors</B></PRE>
+<DL>
+<DD>Number of busy executors and how it changes over time.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="totalExecutors"><!-- --></A><H3>
+totalExecutors</H3>
+<PRE>
+public final <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A> <B>totalExecutors</B></PRE>
+<DL>
+<DD>Number of total executors and how it changes over time.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="queueLength"><!-- --></A><H3>
+queueLength</H3>
+<PRE>
+public final <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A> <B>queueLength</B></PRE>
+<DL>
+<DD>Number of <A HREF="../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model"><CODE>Queue.BuildableItem</CODE></A>s that can run on any node in this node set but blocked.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DECAY"><!-- --></A><H3>
+DECAY</H3>
+<PRE>
+public static final float <B>DECAY</B></PRE>
+<DL>
+<DD>With 0.90 decay ratio for every 10sec, half reduction is about 1 min.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CLOCK"><!-- --></A><H3>
+CLOCK</H3>
+<PRE>
+public static int <B>CLOCK</B></PRE>
+<DL>
+<DD>Load statistics clock cycle in milliseconds. Specify a small value for quickly debugging this feature and node provisioning through cloud.
+<P>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="LoadStatistics(int, int)"><!-- --></A><H3>
+LoadStatistics</H3>
+<PRE>
+protected <B>LoadStatistics</B>(int&nbsp;initialTotalExecutors,
+                         int&nbsp;initialBusyExecutors)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getLatestIdleExecutors(hudson.model.MultiStageTimeSeries.TimeScale)"><!-- --></A><H3>
+getLatestIdleExecutors</H3>
+<PRE>
+public float <B>getLatestIdleExecutors</B>(<A HREF="../../hudson/model/MultiStageTimeSeries.TimeScale.html" title="enum in hudson.model">MultiStageTimeSeries.TimeScale</A>&nbsp;timeScale)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="computeIdleExecutors()"><!-- --></A><H3>
+computeIdleExecutors</H3>
+<PRE>
+public abstract int <B>computeIdleExecutors</B>()</PRE>
+<DL>
+<DD>Computes the # of idle executors right now and obtains the snapshot value.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="computeTotalExecutors()"><!-- --></A><H3>
+computeTotalExecutors</H3>
+<PRE>
+public abstract int <B>computeTotalExecutors</B>()</PRE>
+<DL>
+<DD>Computes the # of total executors right now and obtains the snapshot value.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="computeQueueLength()"><!-- --></A><H3>
+computeQueueLength</H3>
+<PRE>
+public abstract int <B>computeQueueLength</B>()</PRE>
+<DL>
+<DD>Computes the # of queue length right now and obtains the snapshot value.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createChart(org.jfree.data.category.CategoryDataset)"><!-- --></A><H3>
+createChart</H3>
+<PRE>
+public org.jfree.chart.JFreeChart <B>createChart</B>(org.jfree.data.category.CategoryDataset&nbsp;ds)</PRE>
+<DL>
+<DD>Creates a trend chart.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="configureRenderer(org.jfree.chart.renderer.category.LineAndShapeRenderer)"><!-- --></A><H3>
+configureRenderer</H3>
+<PRE>
+protected void <B>configureRenderer</B>(org.jfree.chart.renderer.category.LineAndShapeRenderer&nbsp;renderer)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createTrendChart(hudson.model.MultiStageTimeSeries.TimeScale)"><!-- --></A><H3>
+createTrendChart</H3>
+<PRE>
+public <A HREF="../../hudson/model/MultiStageTimeSeries.TrendChart.html" title="class in hudson.model">MultiStageTimeSeries.TrendChart</A> <B>createTrendChart</B>(<A HREF="../../hudson/model/MultiStageTimeSeries.TimeScale.html" title="enum in hudson.model">MultiStageTimeSeries.TimeScale</A>&nbsp;timeScale)</PRE>
+<DL>
+<DD>Creates <CODE>CategoryDataset</CODE> which then becomes the basis
+ of the load statistics graph.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doGraph(java.lang.String)"><!-- --></A><H3>
+doGraph</H3>
+<PRE>
+public <A HREF="../../hudson/model/MultiStageTimeSeries.TrendChart.html" title="class in hudson.model">MultiStageTimeSeries.TrendChart</A> <B>doGraph</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                               java.lang.String&nbsp;type)
+                                        throws java.io.IOException</PRE>
+<DL>
+<DD>Generates the load statistics graph.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/LoadStatistics.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../hudson/model/LoadBalancer.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/LoadStatistics.LoadStatisticsUpdater.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../index.html?hudson/model/LoadStatistics.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="LoadStatistics.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &#169; 2009. All Rights Reserved.
+</BODY>
+</HTML>
