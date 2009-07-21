@@ -23,17 +23,20 @@
  */
 package hudson.model;
 
+import hudson.model.Queue.FlyweightTask;
+
 /**
  * {@link Executor} that's temporarily added to carry out tasks that doesn't consume
  * regular executors, like a matrix project parent build.
  *
  * @author Kohsuke Kawaguchi
+ * @see FlyweightTask
  */
 public class OneOffExecutor extends Executor {
     private Queue.Item item;
 
     public OneOffExecutor(Computer owner, Queue.Item item) {
-        super(owner);
+        super(owner,-1);
         this.item = item;
     }
 
@@ -51,5 +54,12 @@ public class OneOffExecutor extends Executor {
         return r;
     }
 
-    
+    @Override
+    public void run() {
+        try {
+            super.run();
+        } finally {
+            owner.remove(this);
+        }
+    }
 }

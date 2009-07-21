@@ -46,7 +46,7 @@ import java.util.logging.Level;
  */
 @ExportedBean
 public class Executor extends Thread implements ModelObject {
-    private final Computer owner;
+    protected final Computer owner;
     private final Queue queue;
 
     private long startTime;
@@ -66,11 +66,11 @@ public class Executor extends Thread implements ModelObject {
 
     private Throwable causeOfDeath;
 
-    public Executor(Computer owner) {
-        super("Executor #"+owner.getExecutors().size()+" for "+owner.getDisplayName());
+    public Executor(Computer owner, int n) {
+        super("Executor #"+n+" for "+owner.getDisplayName());
         this.owner = owner;
         this.queue = Hudson.getInstance().getQueue();
-        this.number = owner.getExecutors().size();
+        this.number = n;
         start();
     }
 
