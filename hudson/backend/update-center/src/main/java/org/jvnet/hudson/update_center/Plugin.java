@@ -119,7 +119,7 @@ public class Plugin {
     }
 
     // Tweaking to ignore leading whitespace after the initial {excerpt}
-    private static final Pattern EXCERPT_PATTERN = Pattern.compile("\\{excerpt(?::hidden)?\\}\s*(.+)\\{excerpt\\}");
+    private static final Pattern EXCERPT_PATTERN = Pattern.compile("\\{excerpt(?::hidden)?\\}\\s*(.+)\\{excerpt\\}");
     private static final Pattern HYPERLINK_PATTERN = Pattern.compile("\\[([^|\\]]+)\\|([^|\\]]+)(|([^]])+)?\\]");
 
     public JSONObject toJSON() throws IOException {
