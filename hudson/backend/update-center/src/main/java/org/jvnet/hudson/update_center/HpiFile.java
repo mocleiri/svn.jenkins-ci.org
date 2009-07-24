@@ -34,6 +34,10 @@ public final class HpiFile {
         return attributes.getValue("Hudson-Version");
     }
 
+    public String getCompatibleSinceVersion() {
+        return attributes.getValue("Compatible-Since-Version");
+    }
+
     public String getDisplayName() {
         return attributes.getValue("Long-Name");
     }

@@ -118,7 +118,8 @@ public class Plugin {
         return HYPERLINK_PATTERN.matcher(excerpt).replaceAll("<a href='$2'>$1</a>");
     }
 
-    private static final Pattern EXCERPT_PATTERN = Pattern.compile("\\{excerpt(?::hidden)?\\}(.+)\\{excerpt\\}");
+    // Tweaking to ignore leading whitespace after the initial {excerpt}
+    private static final Pattern EXCERPT_PATTERN = Pattern.compile("\\{excerpt(?::hidden)?\\}\s*(.+)\\{excerpt\\}");
     private static final Pattern HYPERLINK_PATTERN = Pattern.compile("\\[([^|\\]]+)\\|([^|\\]]+)(|([^]])+)?\\]");
 
     public JSONObject toJSON() throws IOException {
@@ -133,6 +134,11 @@ public class Plugin {
 
         HpiFile hpi = new HpiFile(cache.obtain(this));
         json.put("requiredCore",hpi.getRequiredHudsonVersion());
+        
+        if (hpi.getCompatibleSinceVersion() != null) {
+            json.put("compatibleSinceVersion",hpi.getCompatibleSinceVersion());
+        }
+
         JSONArray deps = new JSONArray();
         for (HpiFile.Dependency d : hpi.getDependencies())
             deps.add(d.toJSON());
