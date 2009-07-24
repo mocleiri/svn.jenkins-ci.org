@@ -25,6 +25,7 @@ package hudson.model;
 
 import hudson.tasks.BuildStep;
 import hudson.tasks.Recorder;
+import hudson.tasks.Builder;
 import hudson.tasks.junit.JUnitResultArchiver;
 import hudson.scm.SCM;
 
@@ -45,7 +46,11 @@ import hudson.scm.SCM;
  * <p>
  * Each {@link CheckPoint} instance represents unique check points. {@link CheckPoint}
  * instances are normally created as a static instance, because two builds of the same project
- * needs to refer to the same check point for synchronization to happen properly.
+ * needs to refer to the same check point instance for synchronization to happen properly.
+ *
+ * <p>
+ * This class defines a few well-known check point instances. plugins can define
+ * their additional check points for their own use.
  *
  * <h2>Example</h2>
  * <p>
@@ -54,7 +59,6 @@ import hudson.scm.SCM;
  *
  * @author Kohsuke Kawaguchi
  * @since 1.XXX
- * @see CheckPointAware
  */
 public final class CheckPoint {
     /**
@@ -102,4 +106,20 @@ public final class CheckPoint {
     public void block() throws InterruptedException {
         Run.waitForCheckpoint(this);
     }
+
+    /**
+     * {@link CheckPoint} that indicates that {@link AbstractBuild#getCulprits()} is computed.
+     */
+    public static final CheckPoint CULPRITS_DETERMINED = new CheckPoint();
+    /**
+     * {@link CheckPoint} that indicates that the build is completed.
+     * ({@link AbstractBuild#isBuilding()}==false)
+     */
+    public static final CheckPoint COMPLETED = new CheckPoint();
+    /**
+     * {@link CheckPoint} that indicates that the build has finished executing the "main" portion
+     * ({@link Builder}s in case of {@link FreeStyleProject}) and now moving on to the post-build
+     * steps.
+     */
+    public static final CheckPoint MAIN_COMPLETED = new CheckPoint();
 }

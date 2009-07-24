@@ -961,6 +961,10 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     }
 
     protected abstract class Runner {
+        /**
+         * Keeps track of the check points attained by a build, and abstracts away the synchronization needed to 
+         * maintain this data structure.
+         */
         private final class CheckpointSet {
             /**
              * Stages of the builds that this runner has completed. This is used for concurrent {@link Runner}s to
@@ -1059,6 +1063,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
                     setResult(job.run(listener));
 
                     LOGGER.info(toString()+" main build action completed: "+result);
+                    CheckPoint.MAIN_COMPLETED.report();
                 } catch (ThreadDeath t) {
                     throw t;
                 } catch( AbortException e ) {// orderly abortion.
@@ -1580,7 +1585,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     }
 
     public static class RedirectUp {
-        public void doDynamic(StaplerRequest req, StaplerResponse rsp) throws IOException {
+        public void doDynamic(StaplerResponse rsp) throws IOException {
             // Compromise to handle both browsers (auto-redirect) and programmatic access
             // (want accurate 404 response).. send 404 with javscript to redirect browsers.
             rsp.setStatus(HttpServletResponse.SC_NOT_FOUND);

@@ -436,6 +436,7 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
                 for (User u : getCulprits())
                     r.add(u.getId());
                 culprits = r;
+                CheckPoint.CULPRITS_DETERMINED.report();
             }
         }
 
