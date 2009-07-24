@@ -154,7 +154,7 @@ public abstract class Build <P extends Project<P,B>,B extends Build<P,B>>
 
         private boolean build(BuildListener listener, Collection<Builder> steps) throws IOException, InterruptedException {
             for( BuildStep bs : steps )
-                if(!bs.perform(Build.this, launcher, listener))
+                if(!perform(bs,listener))
                     return false;
             return true;
         }

@@ -101,8 +101,8 @@ public class Fingerprinter extends Recorder implements Serializable {
             if(targets.length()!=0)
                 record(build, listener, record, targets);
 
-            if(recordBuildArtifacts && build instanceof Build) {
-                ArtifactArchiver aa = ((Build<?,?>)build).getProject().getPublishersList().get(ArtifactArchiver.class);
+            if(recordBuildArtifacts) {
+                ArtifactArchiver aa = build.getProject().getPublishersList().get(ArtifactArchiver.class);
                 if(aa==null) {
                     // configuration error
                     listener.error(Messages.Fingerprinter_NoArchiving());
@@ -121,6 +121,10 @@ public class Fingerprinter extends Recorder implements Serializable {
 
         // failing to record fingerprints is an error but not fatal
         return true;
+    }
+
+    public BuildStepMonitor getRequiredMonitorService() {
+        return BuildStepMonitor.NONE;
     }
 
     private void record(AbstractBuild<?,?> build, BuildListener listener, Map<String,String> record, final String targets) throws IOException, InterruptedException {

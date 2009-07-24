@@ -58,9 +58,34 @@ import hudson.scm.SCM;
  * depend on its earlier result.
  *
  * @author Kohsuke Kawaguchi
+ * @see BuildStep#getRequiredMonitorService() 
  * @since 1.XXX
  */
 public final class CheckPoint {
+    private final Object identity;
+
+    /**
+     * For advanced uses. Creates a check point that uses the given object as its identity.
+     */
+    public CheckPoint(Object identity) {
+        this.identity = identity;
+    }
+
+    public CheckPoint() {
+        this(new Object());
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        if (that == null || getClass() != that.getClass()) return false;
+        return identity== ((CheckPoint) that).identity;
+    }
+
+    @Override
+    public int hashCode() {
+        return identity.hashCode();
+    }
+
     /**
      * Records that the execution of the build has reached to a check point, idenified
      * by the given identifier.

@@ -122,7 +122,6 @@ public class ArtifactArchiver extends Recorder {
         return true;
     }
 
-
     public @Override boolean prebuild(AbstractBuild<?, ?> build, BuildListener listener) {
         if(latestOnly) {
             AbstractBuild<?,?> b = build.getProject().getLastCompletedBuild();
@@ -148,6 +147,10 @@ public class ArtifactArchiver extends Recorder {
         return true;
     }
 
+    public BuildStepMonitor getRequiredMonitorService() {
+        return BuildStepMonitor.NONE;
+    }
+    
     /**
      * @deprecated as of 1.286
      *      Some plugin depends on this, so this field is left here and points to the last created instance.

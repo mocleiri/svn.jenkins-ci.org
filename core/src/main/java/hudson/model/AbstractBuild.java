@@ -44,6 +44,7 @@ import hudson.tasks.BuildWrapper;
 import hudson.tasks.Builder;
 import hudson.tasks.Fingerprinter.FingerprintAction;
 import hudson.tasks.Publisher;
+import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.util.AdaptedIterator;
 import hudson.util.Iterators;
@@ -457,8 +458,21 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
         protected final void performAllBuildStep(BuildListener listener, Iterable<? extends BuildStep> buildSteps, boolean phase) throws InterruptedException, IOException {
             for( BuildStep bs : buildSteps ) {
                 if( (bs instanceof Publisher && ((Publisher)bs).needsToRunAfterFinalized()) ^ phase)
-                    bs.perform(AbstractBuild.this, launcher, listener);
+                    perform(bs,listener);
             }
+        }
+
+        /**
+         * Calls a build step.
+         */
+        protected final boolean perform(BuildStep bs, BuildListener listener) throws InterruptedException, IOException {
+            BuildStepMonitor mon;
+            try {
+                mon = bs.getRequiredMonitorService();
+            } catch (AbstractMethodError e) {
+                mon = BuildStepMonitor.BUILD;
+            }
+            return mon.perform(bs, AbstractBuild.this, launcher, listener);
         }
 
         protected final boolean preBuild(BuildListener listener,Map<?,? extends BuildStep> steps) {

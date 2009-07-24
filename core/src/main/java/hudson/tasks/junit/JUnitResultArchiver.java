@@ -42,6 +42,7 @@ import hudson.remoting.VirtualChannel;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Publisher;
 import hudson.tasks.Recorder;
+import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.test.TestResultAggregator;
 import hudson.tasks.test.TestResultProjectAction;
 import hudson.util.FormValidation;
@@ -123,6 +124,13 @@ public class JUnitResultArchiver extends Recorder implements Serializable, Matri
             build.setResult(Result.UNSTABLE);
 
         return true;
+    }
+
+    /**
+     * This class does explicit checkpointing.
+     */
+    public BuildStepMonitor getRequiredMonitorService() {
+        return BuildStepMonitor.NONE;
     }
 
     public String getTestResults() {

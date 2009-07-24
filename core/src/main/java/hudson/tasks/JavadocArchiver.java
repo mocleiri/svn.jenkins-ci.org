@@ -117,6 +117,10 @@ public class JavadocArchiver extends Recorder {
         return new JavadocAction(project);
     }
 
+    public BuildStepMonitor getRequiredMonitorService() {
+        return BuildStepMonitor.NONE;
+    }
+    
     protected static abstract class BaseJavadocAction implements Action {
         public String getUrlName() {
             return "javadoc";
