@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.model (Hudson main module 1.316 API)
+hudson.model (Hudson main module 1.317 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-17">
+<META NAME="date" CONTENT="2009-07-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson main module 1.316 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson main module 1.316 API)";
+        parent.document.title="hudson.model (Hudson main module 1.317 API)";
     }
 }
 </SCRIPT>
@@ -175,6 +175,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model">Queue.Executable</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/Queue.FlyweightTask.html" title="interface in hudson.model">Queue.FlyweightTask</A></B></TD>
+<TD>Marks <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s that do not consume <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Queue.QueueAction.html" title="interface in hudson.model">Queue.QueueAction</A></B></TD>
@@ -588,6 +592,11 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/NoFingerprintMatch.html" title="class in hudson.model">NoFingerprintMatch</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/OneOffExecutor.html" title="class in hudson.model">OneOffExecutor</A></B></TD>
+<TD><A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A> that's temporarily added to carry out tasks that doesn't consume
+ regular executors, like a matrix project parent build.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/OverallLoadStatistics.html" title="class in hudson.model">OverallLoadStatistics</A></B></TD>

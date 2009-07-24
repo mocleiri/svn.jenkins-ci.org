@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonPrivateSecurityRealm (Hudson main module 1.316 API)
+HudsonPrivateSecurityRealm (Hudson main module 1.317 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-17">
+<META NAME="date" CONTENT="2009-07-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonPrivateSecurityRealm (Hudson main module 1.316 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonPrivateSecurityRealm (Hudson main module 1.316 API)";
+        parent.document.title="HudsonPrivateSecurityRealm (Hudson main module 1.317 API)";
     }
 }
 </SCRIPT>
@@ -296,6 +296,15 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/HudsonPrivateSecurityRealm.html#doCreateFirstAccount(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCreateFirstAccount</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                     org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a first admin user account.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/security/ACL.html" title="class in hudson.security">ACL</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/HudsonPrivateSecurityRealm.html#getACL()">getACL</A></B>()</CODE>
 
@@ -533,6 +542,31 @@ public void <B>doCreateAccountByAdmin</B>(org.kohsuke.stapler.StaplerRequest&nbs
 
  This version behaves differently from <A HREF="../../hudson/security/HudsonPrivateSecurityRealm.html#doCreateAccount(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><CODE>doCreateAccount(StaplerRequest, StaplerResponse)</CODE></A> in that
  this is someone creating another user.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doCreateFirstAccount(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doCreateFirstAccount</H3>
+<PRE>
+public void <B>doCreateFirstAccount</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                          throws java.io.IOException,
+                                 javax.servlet.ServletException</PRE>
+<DL>
+<DD>Creates a first admin user account.
+
+ <p>
+ This can be run by anyone, but only to create the very first user account.
 <P>
 <DD><DL>
 </DL>

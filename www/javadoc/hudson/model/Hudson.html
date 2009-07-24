@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.316 API)
+Hudson (Hudson main module 1.317 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-17">
+<META NAME="date" CONTENT="2009-07-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.316 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.316 API)";
+        parent.document.title="Hudson (Hudson main module 1.317 API)";
     }
 }
 </SCRIPT>
@@ -211,6 +211,14 @@ Root object of the system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Active <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#FLYWEIGHT_SUPPORT">FLYWEIGHT_SUPPORT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -555,8 +563,8 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCancelQuietDown(org.kohsuke.stapler.StaplerResponse)">doCancelQuietDown</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;org.kohsuke.stapler.HttpRedirect</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCancelQuietDown()">doCancelQuietDown</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -752,8 +760,8 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doQuietDown(org.kohsuke.stapler.StaplerResponse)">doQuietDown</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;org.kohsuke.stapler.HttpRedirect</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doQuietDown()">doQuietDown</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -2312,6 +2320,16 @@ public static boolean <B>LOG_STARTUP_PERFORMANCE</B></PRE>
 </DL>
 <HR>
 
+<A NAME="FLYWEIGHT_SUPPORT"><!-- --></A><H3>
+FLYWEIGHT_SUPPORT</H3>
+<PRE>
+public static boolean <B>FLYWEIGHT_SUPPORT</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
 <A NAME="PERMISSIONS"><!-- --></A><H3>
 PERMISSIONS</H3>
 <PRE>
@@ -3112,8 +3130,8 @@ public java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interfa
  implementation for it affects the GUI.
 
  <p>
- To register an <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>, write code like
- <code>Hudson.getInstance().getActions().add(...)</code>
+ To register an <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>, implement <A HREF="../../hudson/model/RootAction.html" title="interface in hudson.model"><CODE>RootAction</CODE></A> extension point, or write code like
+ <code>Hudson.getInstance().getActions().add(...)</code>.
 <P>
 <DD><DL>
 </DL>
@@ -4774,12 +4792,12 @@ public void <B>doSubmitDescription</B>(org.kohsuke.stapler.StaplerRequest&nbsp;r
 </DL>
 <HR>
 
-<A NAME="doQuietDown(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doQuietDown()"><!-- --></A><H3>
 doQuietDown</H3>
 <PRE>
-public void <B>doQuietDown</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                 throws java.io.IOException,
-                        javax.servlet.ServletException</PRE>
+public org.kohsuke.stapler.HttpRedirect <B>doQuietDown</B>()
+                                             throws java.io.IOException,
+                                                    javax.servlet.ServletException</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -4793,12 +4811,12 @@ public void <B>doQuietDown</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
 </DL>
 <HR>
 
-<A NAME="doCancelQuietDown(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doCancelQuietDown()"><!-- --></A><H3>
 doCancelQuietDown</H3>
 <PRE>
-public void <B>doCancelQuietDown</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                       throws java.io.IOException,
-                              javax.servlet.ServletException</PRE>
+public org.kohsuke.stapler.HttpRedirect <B>doCancelQuietDown</B>()
+                                                   throws java.io.IOException,
+                                                          javax.servlet.ServletException</PRE>
 <DL>
 <DD><DL>
 </DL>
