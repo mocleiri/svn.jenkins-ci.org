@@ -78,6 +78,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
@@ -931,13 +932,32 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         getParent().removeRun((RunT)this);
     }
 
-    private static final ThreadLocal<Run.Runner> RUNNERS = new ThreadLocal<Run.Runner>();
+    private static final class RunnerStack {
+        private final ThreadLocal<Stack<Run.Runner>> stack = new ThreadLocal<Stack<Run.Runner>>() {
+            @Override
+            protected Stack<Run.Runner> initialValue() {
+                return new Stack<Run.Runner>();
+            }
+        };
+
+        void push(Run.Runner r) {
+            stack.get().push(r);
+        }
+        void pop() {
+            stack.get().pop();
+        }
+        Run.Runner peek() {
+            return stack.get().peek();
+        }
+    }
+
+    private static final RunnerStack RUNNERS = new RunnerStack();
 
     /**
      * @see CheckPoint#report()
      */
     /*package*/ static void reportCheckpoint(CheckPoint id) {
-        RUNNERS.get().checkpoints.report(id);
+        RUNNERS.peek().checkpoints.report(id);
     }
 
     /**
@@ -945,7 +965,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      */
     /*package*/ synchronized static void waitForCheckpoint(CheckPoint id) throws InterruptedException {
         while(true) {
-            Run b = RUNNERS.get().getBuild().getPreviousBuildInProgress();
+            Run b = RUNNERS.peek().getBuild().getPreviousBuildInProgress();
             if(b==null)     return; // no pending earlier build
             Run.Runner runner = b.runner;
             if(runner==null) {
@@ -1174,7 +1194,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      */
     protected void onStartBuilding() {
         state = State.BUILDING;
-        RUNNERS.set(runner);
+        RUNNERS.push(runner);
     }
 
     /**
@@ -1190,7 +1210,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
             state = State.COMPLETED;
         }
         runner = null;
-        RUNNERS.set(null);
+        RUNNERS.pop();
         if(result==null) {
             // shouldn't happen, but be defensive until we figure out why
             result = Result.FAILURE;
