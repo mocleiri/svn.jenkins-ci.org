@@ -374,5 +374,5 @@ public class MailSender {
     /**
      * Sometimes the outcome of the previous build affects the e-mail we send, hence this checkpoint.
      */
-    private static final CheckPoint CHECKPOINT = new CheckPoint();
+    private static final CheckPoint CHECKPOINT = new CheckPoint("mail sent");
 }
