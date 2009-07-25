@@ -972,15 +972,32 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
              */
             private final Set<CheckPoint> checkpoints = new HashSet<CheckPoint>();
 
+            private boolean allDone;
+
             protected synchronized void report(CheckPoint identifier) {
                 checkpoints.add(identifier);
                 notifyAll();
             }
 
             protected synchronized boolean waitForCheckPoint(CheckPoint identifier) throws InterruptedException {
-                while(isBuilding() && !checkpoints.contains(identifier))
-                    wait();
-                return checkpoints.contains(identifier);
+                final Thread t = Thread.currentThread();
+                final String oldName = t.getName();
+                t.setName(oldName+" : waiting for "+identifier+" on "+getFullDisplayName());
+                try {
+                    while(!allDone && !checkpoints.contains(identifier))
+                        wait();
+                    return checkpoints.contains(identifier);
+                } finally {
+                    t.setName(oldName);
+                }
+            }
+
+            /**
+             * Notifies that the build is fully completed and all the checkpoint locks be released.
+             */
+            private synchronized void allDone() {
+                allDone = true;
+                notifyAll();
             }
         }
 
@@ -1167,10 +1184,8 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         // signal that we've finished building.
         if (runner!=null) {
             // MavenBuilds may be created without their corresponding runners.
-            synchronized (runner.checkpoints) {
-                state = State.COMPLETED;
-                runner.checkpoints.notifyAll();
-            }
+            state = State.COMPLETED;
+            runner.checkpoints.allDone();
         } else {
             state = State.COMPLETED;
         }

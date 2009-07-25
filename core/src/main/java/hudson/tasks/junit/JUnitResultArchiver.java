@@ -149,7 +149,7 @@ public class JUnitResultArchiver extends Recorder implements Serializable, Matri
     /**
      * Test result tracks the diff from the previous run, hence the checkpoint.
      */
-    private static final CheckPoint CHECKPOINT = new CheckPoint();
+    private static final CheckPoint CHECKPOINT = new CheckPoint("JUnit result archiving");
 
     private static final long serialVersionUID = 1L;
 

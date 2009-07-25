@@ -108,6 +108,9 @@ public class Executor extends Thread implements ModelObject {
                 Queue.Task task = queueItem.task;
                 Throwable problems = null;
                 owner.taskAccepted(this, task);
+
+                final String threadName = getName();
+                setName(threadName+" : executing "+task.getFullDisplayName());
                 try {
                     try {
                         startTime = System.currentTimeMillis();
@@ -126,6 +129,7 @@ public class Executor extends Thread implements ModelObject {
                         problems = e;
                     }
                 } finally {
+                    setName(threadName);
                     finishTime = System.currentTimeMillis();
                     if (problems == null) {
                         queueItem.future.set(executable);

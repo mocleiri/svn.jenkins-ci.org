@@ -63,16 +63,23 @@ import hudson.scm.SCM;
  */
 public final class CheckPoint {
     private final Object identity;
+    private final String internalName;
 
     /**
      * For advanced uses. Creates a check point that uses the given object as its identity.
      */
-    public CheckPoint(Object identity) {
+    public CheckPoint(String internalName, Object identity) {
+        this.internalName = internalName;
         this.identity = identity;
     }
 
-    public CheckPoint() {
-        this(new Object());
+    /**
+     * @param internalName
+     *      Name of this check point that's used in the logging, stack traces, debug messages, and so on.
+     *      This is not displayed to users. No need for i18n.
+     */
+    public CheckPoint(String internalName) {
+        this(internalName, new Object());
     }
 
     @Override
@@ -84,6 +91,11 @@ public final class CheckPoint {
     @Override
     public int hashCode() {
         return identity.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Check point "+internalName;
     }
 
     /**
@@ -135,16 +147,16 @@ public final class CheckPoint {
     /**
      * {@link CheckPoint} that indicates that {@link AbstractBuild#getCulprits()} is computed.
      */
-    public static final CheckPoint CULPRITS_DETERMINED = new CheckPoint();
+    public static final CheckPoint CULPRITS_DETERMINED = new CheckPoint("CULPRITS_DETERMINED");
     /**
      * {@link CheckPoint} that indicates that the build is completed.
      * ({@link AbstractBuild#isBuilding()}==false)
      */
-    public static final CheckPoint COMPLETED = new CheckPoint();
+    public static final CheckPoint COMPLETED = new CheckPoint("COMPLETED");
     /**
      * {@link CheckPoint} that indicates that the build has finished executing the "main" portion
      * ({@link Builder}s in case of {@link FreeStyleProject}) and now moving on to the post-build
      * steps.
      */
-    public static final CheckPoint MAIN_COMPLETED = new CheckPoint();
+    public static final CheckPoint MAIN_COMPLETED = new CheckPoint("MAIN_COMPLETED");
 }

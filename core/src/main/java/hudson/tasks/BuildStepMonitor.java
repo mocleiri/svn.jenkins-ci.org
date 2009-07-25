@@ -21,7 +21,7 @@ public enum BuildStepMonitor {
     },
     STEP {
         public boolean perform(BuildStep bs, AbstractBuild build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
-            CheckPoint cp = new CheckPoint(bs.getClass());
+            CheckPoint cp = new CheckPoint(bs.getClass().getName(),bs.getClass());
             cp.block();
             try {
                 return bs.perform(build,launcher,listener);
