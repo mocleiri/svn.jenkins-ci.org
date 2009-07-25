@@ -936,14 +936,14 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     /**
      * @see CheckPoint#report()
      */
-    /*package*/ static void reportCheckpoint(Object id) {
+    /*package*/ static void reportCheckpoint(CheckPoint id) {
         RUNNERS.get().checkpoints.report(id);
     }
 
     /**
      * @see CheckPoint#block()
      */
-    /*package*/ synchronized static void waitForCheckpoint(Object id) throws InterruptedException {
+    /*package*/ synchronized static void waitForCheckpoint(CheckPoint id) throws InterruptedException {
         while(true) {
             Run b = RUNNERS.get().getBuild().getPreviousBuildInProgress();
             if(b==null)     return; // no pending earlier build
@@ -970,14 +970,14 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
              * Stages of the builds that this runner has completed. This is used for concurrent {@link Runner}s to
              * coordinate and serialize their executions where necessary.
              */
-            private final Set<Object> checkpoints = new HashSet<Object>();
+            private final Set<CheckPoint> checkpoints = new HashSet<CheckPoint>();
 
-            protected synchronized void report(Object identifier) {
+            protected synchronized void report(CheckPoint identifier) {
                 checkpoints.add(identifier);
                 notifyAll();
             }
 
-            protected synchronized boolean waitForCheckPoint(Object identifier) throws InterruptedException {
+            protected synchronized boolean waitForCheckPoint(CheckPoint identifier) throws InterruptedException {
                 while(isBuilding() && !checkpoints.contains(identifier))
                     wait();
                 return checkpoints.contains(identifier);
