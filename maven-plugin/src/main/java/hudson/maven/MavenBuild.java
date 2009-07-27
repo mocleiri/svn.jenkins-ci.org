@@ -38,8 +38,8 @@ import hudson.model.Run;
 import hudson.model.Cause.UpstreamCause;
 import hudson.model.Environment;
 import hudson.model.TaskListener;
-import hudson.model.Computer;
 import hudson.model.Node;
+import hudson.model.Executor;
 import hudson.remoting.Channel;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.ChangeLogSet.Entry;
@@ -467,10 +467,10 @@ public class MavenBuild extends AbstractBuild<MavenModule,MavenBuild> {
         }
 
         private Object writeReplace() {
-            return Channel.current().export(MavenBuildProxy2.class,this);
+            // when called from remote, methods need to be executed in the proper Executor's context.
+            return Channel.current().export(MavenBuildProxy2.class,
+                Executor.currentExecutor().newImpersonatingProxy(MavenBuildProxy2.class,this));
         }
-
-
     }
 
     private class RunnerImpl extends AbstractRunner {
@@ -518,7 +518,7 @@ public class MavenBuild extends AbstractBuild<MavenModule,MavenBuild> {
             try {
                 Result r = process.channel.call(new Builder(
                     listener,new ProxyImpl(),
-                    reporters.toArray(new MavenReporter[0]), margs.toList(), systemProps));
+                    reporters.toArray(new MavenReporter[reporters.size()]), margs.toList(), systemProps));
                 normalExit = true;
                 return r;
             } finally {

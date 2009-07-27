@@ -27,6 +27,7 @@ import hudson.Util;
 import hudson.FilePath;
 import hudson.model.Queue.Executable;
 import hudson.util.TimeUnit2;
+import hudson.util.InterceptingProxy;
 import hudson.security.ACL;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -38,6 +39,7 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.lang.reflect.Method;
 
 
 /**
@@ -353,12 +355,37 @@ public class Executor extends Thread implements ModelObject {
     }
 
     /**
+     * Creates a proxy object that executes the callee in the context that impersonates
+     * this executor. Useful to export an object to a remote channel. 
+     */
+    public <T> T newImpersonatingProxy(Class<T> type, T core) {
+        return new InterceptingProxy() {
+            protected Object call(Object o, Method m, Object[] args) throws Throwable {
+                final Executor old = IMPERSONATION.get();
+                IMPERSONATION.set(Executor.this);
+                try {
+                    return m.invoke(o,args);
+                } finally {
+                    IMPERSONATION.set(old);
+                }
+            }
+        }.wrap(type,core);
+    }
+
+    /**
      * Returns the executor of the current thread or null if current thread is not an executor.
      */
     public static Executor currentExecutor() {
         Thread t = Thread.currentThread();
-        return t instanceof Executor ? (Executor)t : null;
+        if (t instanceof Executor) return (Executor) t;
+        return IMPERSONATION.get();
     }
+
+    /**
+     * Mechanism to allow threads (in particular the channel request handling threads) to
+     * run on behalf of {@link Executor}.
+     */
+    private static final ThreadLocal<Executor> IMPERSONATION = new ThreadLocal<Executor>();
 
     private static final Logger LOGGER = Logger.getLogger(Executor.class.getName());
 
