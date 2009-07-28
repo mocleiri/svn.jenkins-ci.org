@@ -105,4 +105,16 @@ public class AbstractProjectTest extends HudsonTestCase {
             // OK
         }
     }
+
+    /**
+     * Tests the &lt;optionalBlock @field> round trip behavior by using {@link AbstractProject#concurrentBuild}
+     */
+    public void testOptionalBlockDataBindingRoundtrip() throws Exception {
+        FreeStyleProject p = createFreeStyleProject();
+        for( boolean b : new boolean[]{true,false}) {
+            p.setConcurrentBuild(b);
+            submit(new WebClient().getPage(p,"configure").getFormByName("config"));
+            assertEquals(b,p.isConcurrentBuild());
+        }
+    }
 }

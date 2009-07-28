@@ -182,6 +182,8 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      */
     protected transient /*final*/ List<Action> transientActions = new Vector<Action>();
 
+    private boolean concurrentBuild;
+
     protected AbstractProject(ItemGroup parent, String name) {
         super(parent,name);
 
@@ -227,6 +229,19 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
                 on.getFileSystemProvisioner().discardWorkspace(this,ws);
         }
         super.performDelete();
+    }
+
+    /**
+     * Does this project perform concurrent builds?
+     * @since 1.XXX
+     */
+    public boolean isConcurrentBuild() {
+        return Hudson.CONCURRENT_BUILD && concurrentBuild;
+    }
+
+    public void setConcurrentBuild(boolean b) throws IOException {
+        concurrentBuild = b;
+        save();
     }
 
     /**
@@ -804,7 +819,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      * but derived classes can also check other conditions.
      */
     public boolean isBuildBlocked() {
-        return !Hudson.CONCURRENT_BUILD && isBuilding();
+        return isBuilding() && !isConcurrentBuild();
     }
 
     public String getWhyBlocked() {
@@ -1272,6 +1287,8 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
         } else {
             cleanWorkspaceRequired = false;
         }
+
+        setConcurrentBuild(req.getSubmittedForm().has("concurrentBuild"));
 
         authToken = BuildAuthorizationToken.create(req);
 

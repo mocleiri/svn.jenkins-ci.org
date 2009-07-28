@@ -3375,6 +3375,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      * Tentative switch to activate the concurrent build behavior.
      * When we merge this back to the trunk, this allows us to keep
      * this feature hidden for a while until we iron out the kinks.
+     * @see AbstractProject#isConcurrentBuild()
      */
     public static boolean CONCURRENT_BUILD = true;
 
