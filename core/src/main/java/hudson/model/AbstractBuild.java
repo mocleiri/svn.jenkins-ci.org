@@ -88,6 +88,7 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
 
     /**
      * The file path on the node that performed a build. Kept as a string since {@link FilePath} is not serializable into XML.
+     * @since 1.XXX
      */
     private String workspace;
 

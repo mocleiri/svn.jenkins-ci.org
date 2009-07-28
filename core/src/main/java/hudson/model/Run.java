@@ -942,7 +942,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
     /**
      * @see CheckPoint#block()
      */
-    /*package*/ synchronized static void waitForCheckpoint(CheckPoint id) throws InterruptedException {
+    /*package*/ static void waitForCheckpoint(CheckPoint id) throws InterruptedException {
         while(true) {
             Run b = RunnerStack.INSTANCE.peek().getBuild().getPreviousBuildInProgress();
             if(b==null)     return; // no pending earlier build
