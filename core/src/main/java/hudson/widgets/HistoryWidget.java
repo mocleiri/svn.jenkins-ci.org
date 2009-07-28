@@ -162,6 +162,8 @@ public class HistoryWidget<O extends ModelObject,T> extends Widget {
         baseList = items;
 
         rsp.setHeader("n",nn);
+        req.setAttribute("adapter",adapter);
+        req.setAttribute("nn",nn); // all builds >= nn should be marked transient
 
         req.getView(this,"ajaxBuildHistory.jelly").forward(req,rsp);
     }
