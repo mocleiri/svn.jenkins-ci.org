@@ -112,7 +112,6 @@ public class Executor extends Thread implements ModelObject {
                 owner.taskAccepted(this, task);
 
                 final String threadName = getName();
-                setName(threadName+" : executing "+task.getFullDisplayName());
                 try {
                     try {
                         startTime = System.currentTimeMillis();
@@ -122,6 +121,7 @@ public class Executor extends Thread implements ModelObject {
                         		((Actionable) executable).addAction(action);
                         	}
                         }
+                        setName(threadName+" : executing "+executable.toString());
                         queue.execute(executable, task);
                     } catch (Throwable e) {
                         // for some reason the executor died. this is really
