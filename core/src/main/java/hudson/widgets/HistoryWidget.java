@@ -69,6 +69,11 @@ public class HistoryWidget<O extends ModelObject,T> extends Widget {
     public final Adapter<? super T> adapter;
 
     /**
+     * First transient build record. Everything >= this will be discarded when AJAX call is made.
+     */
+    private String firstTransientBuildKey;
+
+    /**
      * @param owner
      *      The parent model object that owns this widget.
      */
@@ -90,6 +95,18 @@ public class HistoryWidget<O extends ModelObject,T> extends Widget {
         return "buildHistory";
     }
 
+    public String getFirstTransientBuildKey() {
+        return firstTransientBuildKey;
+    }
+
+    private void updateFirstTransientBuildKey(Iterable<T> source) {
+        String key=null;
+        for (T t : source)
+            if(adapter.isBuilding(t))
+                key = adapter.getKey(t);
+        firstTransientBuildKey = key;
+    }
+
     /**
      * The records to be rendered this time.
      */
@@ -101,17 +118,21 @@ public class HistoryWidget<O extends ModelObject,T> extends Widget {
                 if(lst.size()>THRESHOLD)
                     return lst.subList(0,THRESHOLD);
                 trimmed=false;
+                updateFirstTransientBuildKey(lst);
                 return lst;
             } else {
                 lst = new ArrayList<T>(THRESHOLD);
                 Iterator<T> itr = baseList.iterator();
                 while(lst.size()<=THRESHOLD && itr.hasNext())
                     lst.add(itr.next());
-                trimmed = itr.hasNext();
+                trimmed = itr.hasNext(); // if we don't have enough items in the base list, setting this to false will optimize the next getRenderList() invocation.
+                updateFirstTransientBuildKey(lst);
                 return lst;
             }
-        } else
+        } else {
+            updateFirstTransientBuildKey(baseList);
             return baseList;
+        }
     }
 
     public boolean isTrimmed() {
@@ -162,8 +183,7 @@ public class HistoryWidget<O extends ModelObject,T> extends Widget {
         baseList = items;
 
         rsp.setHeader("n",nn);
-        req.setAttribute("adapter",adapter);
-        req.setAttribute("nn",nn); // all builds >= nn should be marked transient
+        firstTransientBuildKey = nn; // all builds >= nn should be marked transient
 
         req.getView(this,"ajaxBuildHistory.jelly").forward(req,rsp);
     }
