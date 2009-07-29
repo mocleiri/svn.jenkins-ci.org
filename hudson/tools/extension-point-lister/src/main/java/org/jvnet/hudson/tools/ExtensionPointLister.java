@@ -73,7 +73,7 @@ public class ExtensionPointLister implements AnnotationProcessor {
                     pw);
 
             for (TypeDeclaration ep : extensionPoints) {
-                pw.printf("h4.[%s|%s@javadoc]\n",ep.getSimpleName(),ep.getQualifiedName().replace('.','/'));
+                pw.printf("h4.[%s|%s@javadoc]\n",ep.getSimpleName(),ep.getQualifiedName());
                 String javadoc = ep.getDocComment();
                 if(javadoc==null)   javadoc=""; 
                 for( String line : javadoc.split("\n")) {
