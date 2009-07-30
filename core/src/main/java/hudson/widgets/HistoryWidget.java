@@ -99,12 +99,13 @@ public class HistoryWidget<O extends ModelObject,T> extends Widget {
         return firstTransientBuildKey;
     }
 
-    private void updateFirstTransientBuildKey(Iterable<T> source) {
+    private Iterable<T> updateFirstTransientBuildKey(Iterable<T> source) {
         String key=null;
         for (T t : source)
             if(adapter.isBuilding(t))
                 key = adapter.getKey(t);
         firstTransientBuildKey = key;
+        return source;
     }
 
     /**
@@ -118,21 +119,17 @@ public class HistoryWidget<O extends ModelObject,T> extends Widget {
                 if(lst.size()>THRESHOLD)
                     return lst.subList(0,THRESHOLD);
                 trimmed=false;
-                updateFirstTransientBuildKey(lst);
-                return lst;
+                return updateFirstTransientBuildKey(lst);
             } else {
                 lst = new ArrayList<T>(THRESHOLD);
                 Iterator<T> itr = baseList.iterator();
                 while(lst.size()<=THRESHOLD && itr.hasNext())
                     lst.add(itr.next());
                 trimmed = itr.hasNext(); // if we don't have enough items in the base list, setting this to false will optimize the next getRenderList() invocation.
-                updateFirstTransientBuildKey(lst);
-                return lst;
+                return updateFirstTransientBuildKey(lst);
             }
-        } else {
-            updateFirstTransientBuildKey(baseList);
-            return baseList;
-        }
+        } else
+            return updateFirstTransientBuildKey(baseList);
     }
 
     public boolean isTrimmed() {
