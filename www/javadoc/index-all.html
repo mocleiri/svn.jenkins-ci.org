@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.317 API)
+Index (Hudson main module 1.318 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-24">
+<META NAME="date" CONTENT="2009-07-31">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.317 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.317 API)";
+        parent.document.title="Index (Hudson main module 1.318 API)";
     }
 }
 </SCRIPT>
@@ -1058,6 +1058,9 @@ Static variable in interface hudson.scheduler.<A HREF="./hudson/scheduler/Cronta
 <DT><A HREF="./hudson/util/AtomicFileWriter.html" title="class in hudson.util"><B>AtomicFileWriter</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Buffered <CODE>FileWriter</CODE> that uses UTF-8.<DT><A HREF="./hudson/util/AtomicFileWriter.html#AtomicFileWriter(java.io.File)"><B>AtomicFileWriter(File)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/AtomicFileWriter.html" title="class in hudson.util">AtomicFileWriter</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/remoting/Launcher.html#auth"><B>auth</B></A> - 
+Variable in class hudson.remoting.<A HREF="./hudson/remoting/Launcher.html" title="class in hudson.remoting">Launcher</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/security/AbstractPasswordBasedSecurityRealm.html#authenticate(java.lang.String, java.lang.String)"><B>authenticate(String, String)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/AbstractPasswordBasedSecurityRealm.html" title="class in hudson.security">AbstractPasswordBasedSecurityRealm</A>
 <DD>Authenticate a login attempt.
@@ -1389,13 +1392,16 @@ Method in class hudson.model.<A HREF="./hudson/model/BooleanParameterValue.html"
 <DT><A HREF="./hudson/model/Environment.html#buildEnvVars(java.util.Map)"><B>buildEnvVars(Map&lt;String, String&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Environment.html" title="class in hudson.model">Environment</A>
 <DD>Adds environmental variables for the builds to the given map.
+<DT><A HREF="./hudson/model/EnvironmentContributingAction.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)"><B>buildEnvVars(AbstractBuild&lt;?, ?&gt;, EnvVars)</B></A> - 
+Method in interface hudson.model.<A HREF="./hudson/model/EnvironmentContributingAction.html" title="interface in hudson.model">EnvironmentContributingAction</A>
+<DD>Called by <A HREF="./hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A> to allow plugins to contribute environment variables.
 <DT><A HREF="./hudson/model/JDK.html#buildEnvVars(java.util.Map)"><B>buildEnvVars(Map&lt;String, String&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/JDK.html" title="class in hudson.model">JDK</A>
 <DD>Sets PATH and JAVA_HOME from this JDK.
 <DT><A HREF="./hudson/model/JobParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)"><B>buildEnvVars(AbstractBuild&lt;?, ?&gt;, Map&lt;String, String&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/JobParameterValue.html" title="class in hudson.model">JobParameterValue</A>
 <DD>Exposes the name/value as an environment variable.
-<DT><A HREF="./hudson/model/ParametersAction.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)"><B>buildEnvVars(AbstractBuild&lt;?, ?&gt;, Map&lt;String, String&gt;)</B></A> - 
+<DT><A HREF="./hudson/model/ParametersAction.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)"><B>buildEnvVars(AbstractBuild&lt;?, ?&gt;, EnvVars)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParametersAction.html" title="class in hudson.model">ParametersAction</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/ParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)"><B>buildEnvVars(AbstractBuild&lt;?, ?&gt;, Map&lt;String, String&gt;)</B></A> - 
@@ -2517,9 +2523,6 @@ Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html" tit
 <DT><A HREF="./hudson/security/Permission.html#CONFIGURE"><B>CONFIGURE</B></A> - 
 Static variable in class hudson.security.<A HREF="./hudson/security/Permission.html" title="class in hudson.security">Permission</A>
 <DD>Generic configuration access.
-<DT><A HREF="./hudson/tasks/Ant.AntInstallation.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><B>configure(StaplerRequest, JSONObject)</B></A> - 
-Method in class hudson.tasks.<A HREF="./hudson/tasks/Ant.AntInstallation.DescriptorImpl.html" title="class in hudson.tasks">Ant.AntInstallation.DescriptorImpl</A>
-<DD>&nbsp;
 <DT><A HREF="./hudson/tasks/Mailer.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><B>configure(StaplerRequest, JSONObject)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Mailer.DescriptorImpl.html" title="class in hudson.tasks">Mailer.DescriptorImpl</A>
 <DD>&nbsp;
@@ -4387,6 +4390,10 @@ Method in class hudson.<A HREF="./hudson/PluginManager.html" title="class in hud
 <DT><A HREF="./hudson/model/Api.html#doPython(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doPython(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Api.html" title="class in hudson.model">Api</A>
 <DD>Exposes the bean as Python literal.
+<DT><A HREF="./hudson/model/Hudson.html#doQuietDown(org.kohsuke.stapler.StaplerResponse)"><B>doQuietDown(StaplerResponse)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.317
+      Use <A HREF="./hudson/model/Hudson.html#doQuietDown()"><CODE>Hudson.doQuietDown()</CODE></A> instead.</I>
 <DT><A HREF="./hudson/model/Hudson.html#doQuietDown()"><B>doQuietDown()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
@@ -4515,6 +4522,9 @@ Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.TagAction.html" title="c
 <DT><A HREF="./hudson/model/AbstractItem.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doSubmitDescription(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A>
 <DD>Accepts the new description.
+<DT><A HREF="./hudson/model/AllView.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doSubmitDescription(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AllView.html" title="class in hudson.model">AllView</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doSubmitDescription(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Accepts the new description.
@@ -4808,7 +4818,7 @@ Constructor for class hudson.model.<A HREF="./hudson/model/Environment.html" tit
 <DT><A HREF="./org/jvnet/hudson/test/TestEnvironment.html#ENVIRONMENT"><B>ENVIRONMENT</B></A> - 
 Static variable in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/TestEnvironment.html" title="class in org.jvnet.hudson.test">TestEnvironment</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/EnvironmentSpecific.html" title="interface in hudson.model"><B>EnvironmentSpecific</B></A>&lt;<A HREF="./hudson/model/EnvironmentSpecific.html" title="type parameter in EnvironmentSpecific">T</A> extends <A HREF="./hudson/model/EnvironmentSpecific.html" title="interface in hudson.model">EnvironmentSpecific</A>&lt;<A HREF="./hudson/model/EnvironmentSpecific.html" title="type parameter in EnvironmentSpecific">T</A>&gt;&gt; - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Represents any concept that can be adapted for a certain environment.<DT><A HREF="./hudson/slaves/EnvironmentVariablesNodeProperty.html" title="class in hudson.slaves"><B>EnvironmentVariablesNodeProperty</B></A> - Class in <A HREF="./hudson/slaves/package-summary.html">hudson.slaves</A><DD><A HREF="./hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A> that sets additional environment variables.<DT><A HREF="./hudson/slaves/EnvironmentVariablesNodeProperty.html#EnvironmentVariablesNodeProperty(java.util.List)"><B>EnvironmentVariablesNodeProperty(List&lt;EnvironmentVariablesNodeProperty.Entry&gt;)</B></A> - 
+<DT><A HREF="./hudson/model/EnvironmentContributingAction.html" title="interface in hudson.model"><B>EnvironmentContributingAction</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD><A HREF="./hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> that contributes environment variables during a build.<DT><A HREF="./hudson/model/EnvironmentSpecific.html" title="interface in hudson.model"><B>EnvironmentSpecific</B></A>&lt;<A HREF="./hudson/model/EnvironmentSpecific.html" title="type parameter in EnvironmentSpecific">T</A> extends <A HREF="./hudson/model/EnvironmentSpecific.html" title="interface in hudson.model">EnvironmentSpecific</A>&lt;<A HREF="./hudson/model/EnvironmentSpecific.html" title="type parameter in EnvironmentSpecific">T</A>&gt;&gt; - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Represents any concept that can be adapted for a certain environment.<DT><A HREF="./hudson/slaves/EnvironmentVariablesNodeProperty.html" title="class in hudson.slaves"><B>EnvironmentVariablesNodeProperty</B></A> - Class in <A HREF="./hudson/slaves/package-summary.html">hudson.slaves</A><DD><A HREF="./hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A> that sets additional environment variables.<DT><A HREF="./hudson/slaves/EnvironmentVariablesNodeProperty.html#EnvironmentVariablesNodeProperty(java.util.List)"><B>EnvironmentVariablesNodeProperty(List&lt;EnvironmentVariablesNodeProperty.Entry&gt;)</B></A> - 
 Constructor for class hudson.slaves.<A HREF="./hudson/slaves/EnvironmentVariablesNodeProperty.html" title="class in hudson.slaves">EnvironmentVariablesNodeProperty</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/slaves/EnvironmentVariablesNodeProperty.html#EnvironmentVariablesNodeProperty(hudson.slaves.EnvironmentVariablesNodeProperty.Entry...)"><B>EnvironmentVariablesNodeProperty(EnvironmentVariablesNodeProperty.Entry...)</B></A> - 
@@ -11932,6 +11942,9 @@ Method in class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecurity
 <DT><A HREF="./hudson/util/ClockDifference.html#isDangerous()"><B>isDangerous()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ClockDifference.html" title="class in hudson.util">ClockDifference</A>
 <DD>Returns true if the difference is big enough to be considered dangerous.
+<DT><A HREF="./hudson/model/Hudson.html#isDarwin()"><B>isDarwin()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/scm/CVSChangeLogSet.File.html#isDead()"><B>isDead()</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/CVSChangeLogSet.File.html" title="class in hudson.scm">CVSChangeLogSet.File</A>
 <DD>&nbsp;
@@ -13331,6 +13344,9 @@ Variable in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonT
 <DT><A HREF="./org/jvnet/hudson/test/JavaNetReverseProxy.html#localPort"><B>localPort</B></A> - 
 Variable in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/JavaNetReverseProxy.html" title="class in org.jvnet.hudson.test">JavaNetReverseProxy</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tools/JDKInstaller.html#locate(hudson.model.TaskListener, hudson.tools.JDKInstaller.Platform, hudson.tools.JDKInstaller.CPU)"><B>locate(TaskListener, JDKInstaller.Platform, JDKInstaller.CPU)</B></A> - 
+Method in class hudson.tools.<A HREF="./hudson/tools/JDKInstaller.html" title="class in hudson.tools">JDKInstaller</A>
+<DD>Performs a license click through and obtains the one-time URL for downloading bits.
 <DT><A HREF="./hudson/model/TaskAction.html#log"><B>log</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/TaskAction.html" title="class in hudson.model">TaskAction</A>
 <DD>Hold the log of the tagging operation.
