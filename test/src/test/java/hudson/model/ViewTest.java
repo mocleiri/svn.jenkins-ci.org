@@ -24,9 +24,13 @@
 package hudson.model;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import org.jvnet.hudson.test.Email;
 import org.jvnet.hudson.test.HudsonTestCase;
+import org.w3c.dom.Text;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -52,5 +56,38 @@ public class ViewTest extends HudsonTestCase {
         } catch (FailingHttpStatusCodeException e) {
             assertEquals(400,e.getStatusCode());
         }
+    }
+
+    public void testPrivateView() throws Exception {
+        createFreeStyleProject("project1");
+        User user = User.get("me", true); // create user
+
+        WebClient wc = new WebClient();
+        HtmlPage userPage = wc.goTo("/user/me");
+        HtmlAnchor privateViewsLink = userPage.getFirstAnchorByText("Private Views");
+        assertNotNull("Private Views link not available", privateViewsLink);
+
+        HtmlPage privateViewsPage = (HtmlPage) privateViewsLink.click();
+
+        Text viewLabel = (Text) privateViewsPage.getFirstByXPath("//table[@id='viewList']//td[@class='active']/text()");
+        assertTrue("'My Jobs' page should be selected", viewLabel.getTextContent().contains("My Jobs"));
+
+        View listView = new ListView("listView", hudson);
+        hudson.addView(listView);
+
+        HtmlPage newViewPage = wc.goTo("/user/me/private-views/newView");
+        HtmlForm form = newViewPage.getFormByName("createView");
+        form.getInputByName("name").setValueAttribute("proxy-view");
+        ((HtmlRadioButtonInput) form.getInputByValue("hudson.model.ProxyView")).setChecked(true);
+        HtmlPage proxyViewConfigurePage = submit(form);
+        View proxyView = user.getProperty(PrivateViewsProperty.class).getView("proxy-view");
+        assertNotNull(proxyView);
+        form = proxyViewConfigurePage.getFormByName("viewConfig");
+        form.getInputByName("_.proxiedViewName").setValueAttribute("listView");
+        submit(form);
+
+        assertTrue(proxyView instanceof ProxyView);
+        assertEquals(((ProxyView) proxyView).getProxiedViewName(), "listView");
+        assertEquals(((ProxyView) proxyView).getProxiedView(), listView);
     }
 }

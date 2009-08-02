@@ -60,8 +60,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.kohsuke.stapler.StaplerFallback;
 
 /**
  * Represents a user.
@@ -513,5 +515,16 @@ public class User extends AbstractModelObject implements AccessControlled, Savea
 
     public boolean hasPermission(Permission permission) {
         return getACL().hasPermission(permission);
+    }
+
+    public Object getDynamic(String token) {
+        for (UserProperty property: getProperties().values()) {
+            if (property instanceof Action) {
+                Action a= (Action) property;
+            if(a.getUrlName().equals(token) || a.getUrlName().equals('/'+token))
+                return a;
+            }
+        }
+        return null;
     }
 }
