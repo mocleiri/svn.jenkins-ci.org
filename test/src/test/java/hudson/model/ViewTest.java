@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi
+ * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Tom Huybrechts
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import org.jvnet.hudson.test.Email;
 import org.jvnet.hudson.test.HudsonTestCase;
 import org.w3c.dom.Text;
+
+import static hudson.model.Messages.Hudson_ViewName;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -64,23 +66,23 @@ public class ViewTest extends HudsonTestCase {
 
         WebClient wc = new WebClient();
         HtmlPage userPage = wc.goTo("/user/me");
-        HtmlAnchor privateViewsLink = userPage.getFirstAnchorByText("Private Views");
-        assertNotNull("Private Views link not available", privateViewsLink);
+        HtmlAnchor privateViewsLink = userPage.getFirstAnchorByText("My Views");
+        assertNotNull("My Views link not available", privateViewsLink);
 
         HtmlPage privateViewsPage = (HtmlPage) privateViewsLink.click();
 
         Text viewLabel = (Text) privateViewsPage.getFirstByXPath("//table[@id='viewList']//td[@class='active']/text()");
-        assertTrue("'My Jobs' page should be selected", viewLabel.getTextContent().contains("My Jobs"));
+        assertTrue("'All' view should be selected", viewLabel.getTextContent().contains(Hudson_ViewName()));
 
         View listView = new ListView("listView", hudson);
         hudson.addView(listView);
 
-        HtmlPage newViewPage = wc.goTo("/user/me/private-views/newView");
+        HtmlPage newViewPage = wc.goTo("/user/me/my-views/newView");
         HtmlForm form = newViewPage.getFormByName("createView");
         form.getInputByName("name").setValueAttribute("proxy-view");
         ((HtmlRadioButtonInput) form.getInputByValue("hudson.model.ProxyView")).setChecked(true);
         HtmlPage proxyViewConfigurePage = submit(form);
-        View proxyView = user.getProperty(PrivateViewsProperty.class).getView("proxy-view");
+        View proxyView = user.getProperty(MyViewsProperty.class).getView("proxy-view");
         assertNotNull(proxyView);
         form = proxyViewConfigurePage.getFormByName("viewConfig");
         form.getInputByName("_.proxiedViewName").setValueAttribute("listView");

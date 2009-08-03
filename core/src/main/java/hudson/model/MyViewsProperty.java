@@ -1,12 +1,35 @@
+/*
+ * The MIT License
+ * 
+ * Copyright (c) 2004-2009, Sun Microsystems, Inc., Tom Huybrechts
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package hudson.model;
 
 import hudson.Extension;
 import hudson.Util;
 import hudson.model.Descriptor.FormException;
 import hudson.security.ACL;
-import hudson.security.AccessControlled;
 import hudson.security.Permission;
 import hudson.util.FormValidation;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -16,7 +39,9 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
+
 import org.acegisecurity.AccessDeniedException;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.HttpRedirect;
@@ -30,20 +55,20 @@ import org.kohsuke.stapler.StaplerResponse;
  *
  * @author Tom Huybrechts
  */
-public class PrivateViewsProperty extends UserProperty implements ViewGroup, Action, AccessControlled {
+public class MyViewsProperty extends UserProperty implements ViewGroup, Action {
 
-    private static final Logger log = Logger.getLogger(PrivateViewsProperty.class.getName());
+    private static final Logger log = Logger.getLogger(MyViewsProperty.class.getName());
 
     private String primaryViewName;
     private CopyOnWriteArrayList<View> views = new CopyOnWriteArrayList<View>();
 
     @DataBoundConstructor
-    public PrivateViewsProperty(String primaryViewName) {
+    public MyViewsProperty(String primaryViewName) {
         this.primaryViewName = primaryViewName;
     }
 
-    private PrivateViewsProperty() {
-        views.add(new MyView("My Jobs", this));
+    private MyViewsProperty() {
+		views.add(new AllView(hudson.model.Messages.Hudson_ViewName(), this));
         primaryViewName = views.get(0).getViewName();
     }
 
@@ -61,7 +86,7 @@ public class PrivateViewsProperty extends UserProperty implements ViewGroup, Act
 
     ///// ViewGroup methods /////
     public String getUrl() {
-        return user.getUrl() + "/private-views/";
+        return user.getUrl() + "/my-views/";
     }
 
     public void save() throws IOException {
@@ -130,17 +155,23 @@ public class PrivateViewsProperty extends UserProperty implements ViewGroup, Act
 
     /**
      * Checks if a private view with the given name exists.
-     */
-    public FormValidation doViewExistsCheck(@QueryParameter String value) {
+     * An error is returned if exists==true but the view does not exist.
+     * An error is also returned if exists==false but the view does exist.
+     **/
+    public FormValidation doViewExistsCheck(@QueryParameter String value, @QueryParameter boolean exists) {
         checkPermission(View.CREATE);
 
         String view = Util.fixEmpty(value);
-        if(view==null) return FormValidation.ok();
-
-        if(getView(view)==null)
-            return FormValidation.ok();
-        else
-            return FormValidation.error(Messages.Hudson_ViewAlreadyExists(view));
+        if (view == null) return FormValidation.ok();
+        if (exists) {
+        	return (getView(view)!=null) ?
+            		FormValidation.ok() :
+            		FormValidation.error(String.format("A view with name \"%s\" does not exist", view));
+        } else {
+        	return (getView(view)==null) ?
+        			FormValidation.ok() :
+        				FormValidation.error(String.format("A view with name \"%s\" already exists", view));
+        }
     }
 
     public ACL getACL() {
@@ -157,7 +188,7 @@ public class PrivateViewsProperty extends UserProperty implements ViewGroup, Act
 
     ///// Action methods /////
     public String getDisplayName() {
-        return "Private Views";
+        return "My Views";
     }
 
     public String getIconFileName() {
@@ -165,7 +196,7 @@ public class PrivateViewsProperty extends UserProperty implements ViewGroup, Act
     }
 
     public String getUrlName() {
-        return "private-views";
+        return "my-views";
     }
 
     @Extension
@@ -173,13 +204,39 @@ public class PrivateViewsProperty extends UserProperty implements ViewGroup, Act
 
         @Override
         public String getDisplayName() {
-            return "Private Views";
+            return "My Views";
         }
 
         @Override
         public UserProperty newInstance(User user) {
-            return new PrivateViewsProperty();
+            return new MyViewsProperty();
         }
+    }
+    
+    @Extension
+    public static class GlobalAction implements RootAction {
+
+		public String getDisplayName() {
+			return "My Views";
+		}
+
+		public String getIconFileName() {
+			// do not show when not logged in
+			if (User.current() == null ) {
+				return null;
+			} 
+			
+			return "user.gif";
+		}
+
+		public String getUrlName() {
+			return "/me/my-views";
+		}
+		
+		public HttpResponse doIndex() {
+			return new HttpRedirect("/me/my-views");
+		}
+    	
     }
 
 }
