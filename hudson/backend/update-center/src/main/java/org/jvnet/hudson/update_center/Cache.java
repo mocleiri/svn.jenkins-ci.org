@@ -36,7 +36,7 @@ public class Cache {
                 return f;   // cache hit
         }
 
-        System.out.println("Downloading "+p.file.file.getURL());
+        System.out.println("Downloading "+p.file.url);
         p.file.downloadTo(f);
         metadata.put(p.artifactId,p.file.version.toString());
         return f;
