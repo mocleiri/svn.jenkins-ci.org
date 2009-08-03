@@ -10,54 +10,32 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 /**
  * Represents {@link JNFile} that has the version number as the file name.
  *
  * @author Kohsuke Kawaguchi
  */
-public final class VersionedFile implements Comparable<VersionedFile> {
-    final JNFile file;
+public class VersionedFile implements Comparable<VersionedFile> {
     final VersionNumber version;
+    final URL url;
 
-    public static VersionedFile findLatestFrom(JNFileFolder dir) throws ProcessingException {
-        VersionedFile latest=null;
-
-        for( JNFile file : dir.getFiles().values() ) {
-            try {
-                VersionedFile vf = new VersionedFile(file);
-                if(latest==null || vf.compareTo(latest)>0) {
-                    latest = vf;
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println("   Ignoring "+file.getName());
-            }
-        }
-
-        return latest;
-    }
-
-    public VersionedFile(JNFile file) {
-        this.file = file;
-        this.version = parseVersion(file);
-    }
-
-    private static VersionNumber parseVersion(JNFile file) {
-        String n = file.getName();
-        if(n.contains(" "))  n = n.substring(n.lastIndexOf(' ')+1);
-        return new VersionNumber(n);
+    public VersionedFile(URL url, VersionNumber version) {
+        this.url = url;
+        this.version = version;
     }
 
     public JSONObject toJSON(String name) {
         JSONObject o = new JSONObject();
         o.put("name",name);
         o.put("version",version.toString());
-        o.put("url",file.getURL().toExternalForm());
+        o.put("url",url.toExternalForm());
         return o;
     }
 
     public String toString() {
-        return file.getName()+" ("+version+")";
+        return url+" ("+version+")";
     }
 
     public int compareTo(VersionedFile that) {
@@ -65,7 +43,7 @@ public final class VersionedFile implements Comparable<VersionedFile> {
     }
 
     public void downloadTo(File f) throws IOException {
-        InputStream in = file.getURL().openStream();
+        InputStream in = url.openStream();
         FileOutputStream out = new FileOutputStream(f);
         try {
             IOUtils.copyLarge(in, out);

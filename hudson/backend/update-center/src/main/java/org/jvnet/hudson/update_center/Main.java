@@ -54,7 +54,7 @@ public class Main {
     /**
      * Build JSON for the plugin list.
      */
-    private JSONObject buildPlugins(JNProject p) throws ProcessingException, IOException, ServiceException {
+    protected JSONObject buildPlugins(JNProject p) throws ProcessingException, IOException, ServiceException {
         JNFileFolder pluginsFolder = p.getFolder("/plugins");
         ConfluencePluginList cpl = new ConfluencePluginList();
 
@@ -70,7 +70,7 @@ public class Main {
             if(dir.getName().equals("ivy2"))
                 continue;       // subsumed into the ivy plugin. Hiding from the update center
 
-            VersionedFile latest = VersionedFile.findLatestFrom(dir);
+            VersionedFile latest = findLatestPlugin(dir);
             if(latest==null)
                 continue;       // couldn't find it
 
@@ -81,7 +81,7 @@ public class Main {
             System.out.println("=> "+plugin.toJSON());
 
             plugins.put(plugin.artifactId,plugin.toJSON());
-            redirect.printf("Redirect 302 /latest/%s.hpi %s\n", plugin.artifactId, latest.file.getURL());
+            redirect.printf("Redirect 302 /latest/%s.hpi %s\n", plugin.artifactId, latest.url);
         }
 
         redirect.close();
@@ -90,14 +90,22 @@ public class Main {
         return plugins;
     }
 
+    protected VersionedFile findLatestPlugin(JNFileFolder dir) throws ProcessingException {
+        return JavaNetVersionedFile.findLatestFrom(dir);
+    }
+
     /**
      * Build JSON for the core Hudson.
      */
-    private JSONObject buildCore(JNProject p) throws ProcessingException {
-        JNFileFolder release = p.getFolder("/releases");
-        VersionedFile latest = VersionedFile.findLatestFrom(release);
+    protected JSONObject buildCore(JNProject p) throws ProcessingException {
+        VersionedFile latest = findLatestCore(p);
         JSONObject core = latest.toJSON("core");
         System.out.println("core\n=> "+ core);
         return core;
+    }
+
+    protected VersionedFile findLatestCore(JNProject p) throws ProcessingException {
+        JNFileFolder release = p.getFolder("/releases");
+        return JavaNetVersionedFile.findLatestFrom(release);
     }
 }
